@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Sample Table of Contents">
+	<topic label="How to use"  href="html/howto_use.html"> 
+		<topic label="Editor" href="html/howto_use/editor.html"/> 
+	</topic>
+	<topic label="Main Topic 2"/>
+</toc>
