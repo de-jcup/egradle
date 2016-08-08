@@ -15,9 +15,13 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.progress.IProgressService;
 
 import de.jcup.egradle.core.GradleExecutor;
@@ -68,19 +72,32 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		return 1;
 	}
 
+	protected enum ExecutionMode {
+		BLOCK_UI__CANCEABLE, RUN_IN_BACKGROUND__CANCEABLE
+	}
+
+	protected ExecutionMode getExecutionMode() {
+		return ExecutionMode.BLOCK_UI__CANCEABLE;
+	}
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ProcessExecutor processExecutor = new SimpleProcessExecutor(processOutputHandler);
-		GradleExecutor executor = new GradleExecutor(processExecutor);
+
 		String path = null;
-		/* TODO  ATR, use preferences correctly!InstanceScope.INSTANCE is the new way. maybe preference page must be refactored to use the instance scope too  */
-		
-//		IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-//		path = prefs.get(PreferenceConstants.P_ROOTPROJECT_PATH, "V:/5100_Workspace");
+		/*
+		 * TODO ATR, use preferences correctly!InstanceScope.INSTANCE is the new
+		 * way. maybe preference page must be refactored to use the instance
+		 * scope too
+		 */
+
+		// IEclipsePreferences prefs =
+		// InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
+		// path = prefs.get(PreferenceConstants.P_ROOTPROJECT_PATH,
+		// "V:/5100_Workspace");
 		IPreferenceStore prefs = Activator.getDefault().getPreferenceStore();
 		path = prefs.getString(PreferenceConstants.P_ROOTPROJECT_PATH);
 		String javaHome = prefs.getString(PreferenceConstants.P_JAVA_HOME_PATH);
-		
+
 		GradleRootProject rootProject = new GradleRootProject(new File(path));
 
 		GradleConfiguration config = new AlwaysBashWithGradleWrapperConfiguration();
@@ -88,37 +105,77 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		GradleContext context = new GradleContext(rootProject, config);
 		context.setEnvironment("JAVA_HOME", javaHome);
 		prepareContext(context);
-		GradleCommand[] commands = createCommands();
-		notEmpty(commands, "'commands' may not be empty");
 
 		IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
+		ExecutionRunnableWithProgress runnable = new ExecutionRunnableWithProgress(context);
 		try {
-//			progressService.busyCursorWhile(new IRunnableWithProgress() {
-			progressService.run(false, true, new IRunnableWithProgress() {
+			ExecutionMode mode = getExecutionMode();
+			switch (mode) {
+			case BLOCK_UI__CANCEABLE:
+				progressService.busyCursorWhile(runnable);
+				break;
+			case RUN_IN_BACKGROUND__CANCEABLE:
+				progressService.run(true, true, runnable);
+				break;
 
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					// do non-UI work
-					List<GradleCommand> commandList = Arrays.asList(commands);
-					monitor.beginTask("Executing gradle commands:" + commandList, getTasksToDo());
-					processOutputHandler.output("In root project:"+rootProject.getFolder().getName()+":"+commandList);
-					
-					Result result = executor.execute(context, commands);
-					if (!result.isOkay()) {
-						return;
-					}
-					try {
-						afterExecutionOutsideUI(monitor);
-					} catch (Exception e) {
-						throw new InvocationTargetException(e);
-					}
+			default:
+				throw new IllegalArgumentException("Not implemented for mode:" + mode);
+			}
 
-					monitor.done();
-				}
-			});
 		} catch (InvocationTargetException | InterruptedException e) {
 			throw new ExecutionException("Cannot refresh all projects ...", e);
 		}
+		if (!runnable.result.isOkay()) {
+			IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+			MessageDialog.openWarning(window.getShell(), "Egradle",
+					"Result was not okay:" + runnable.result.getResultCode());
+		}
 		return null;
+	}
+
+	private class ExecutionRunnableWithProgress implements IRunnableWithProgress {
+
+		private GradleContext context;
+		private Result result;
+
+		ExecutionRunnableWithProgress(GradleContext context) {
+			this.context = context;
+		}
+
+		@Override
+		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+
+			GradleCommand[] commands = createCommands();
+			notEmpty(commands, "'commands' may not be empty");
+
+			ProcessExecutor processExecutor = new SimpleProcessExecutor(processOutputHandler);
+			GradleExecutor executor = new GradleExecutor(processExecutor);
+
+			// do non-UI work
+			List<GradleCommand> commandList = Arrays.asList(commands);
+			monitor.beginTask("Executing gradle commands:" + commandList, getTasksToDo());
+			processOutputHandler.output(
+					"Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandList);
+
+			result = executor.execute(context, commands);
+			if (!result.isOkay()) {
+				/*
+				 * TODO ATR, this is a debug output- maybe should be shown only
+				 * when something like a preference 'show debug info' set ?
+				 */
+				processOutputHandler.output("Process result not okay:" + result.getResultCode());
+				return;
+			}
+			try {
+				afterExecutionOutsideUI(monitor);
+			} catch (Exception e) {
+				throw new InvocationTargetException(e);
+			}
+
+			monitor.done();
+
+		}
+
 	}
 
 }

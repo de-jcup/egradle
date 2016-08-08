@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.Validate.*;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -19,7 +20,13 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 	@Override
 	public int execute(File workingDirectory, Map<String, String> env, String... commands) throws IOException {
+		if (workingDirectory!=null){
+			if (! workingDirectory.exists()){
+				throw new FileNotFoundException("Workign directory does not exist:"+workingDirectory);
+			}
+		}
 		ProcessBuilder pb = new ProcessBuilder(commands);
+		
 		/* init environment */
 		if (env != null) {
 			Map<String, String> pbEnv = pb.environment();
@@ -42,7 +49,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				throw new IOException(e);
 			}
 		}
 		return p.exitValue();

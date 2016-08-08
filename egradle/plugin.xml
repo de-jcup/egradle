@@ -194,19 +194,20 @@
 	   </consoleFactory>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          LAUNCHER                                    -->
+   <!--                          LAUNCHING                                   -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!-- http://scg.unibe.ch/archive/projects/Bals10b-EclipsePlugins.pdf -->
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
-		<launchConfigurationType 
-			delegate="de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate"
-			legateDescription="Launches the gradle project by given arguments"
-			id="de.jcup.egradle.launchConfigurationType"
-			modes="run"
-			name="EGradle Launcher"
-			public="true"
-			sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
-			sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+		<launchConfigurationType
+        category="de.jcup.egradle.category"
+        delegate="de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate"
+        delegateDescription="Launches the gradle project by given arguments"
+        id="de.jcup.egradle.launchConfigurationType"
+        modes="run"
+        name="EGradle Launcher"
+        public="true"
+        sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+        sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
 		</launchConfigurationType>
 	</extension>
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -224,4 +225,47 @@
 	     icon="icons/gradle-og.gif">
 	  </launchConfigurationTypeImage>
  	</extension>
+ 	<!--
+ 	<extension point="org.eclipse.debug.ui.launchShortcuts">
+    	<shortcut
+        id="de.jcup.egradle.eGradleLaunchShortcut"
+        class="de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut"
+        label="EGradle"
+        icon="icons/gradle-og.giff"
+        modes="run">
+            <perspective id="org.eclipse.jdt.ui.JavaPerspective"/>
+            <perspective id="org.eclipse.jdt.ui.JavaHierarchyPerspective"/>
+            <perspective id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+            <perspective id="org.eclipse.debug.ui.DebugPerspective"/>
+    	</shortcut>
+	</extension>
+	-->
+	<extension point = "org.eclipse.debug.ui.launchGroups">
+		<launchGroup
+			id = "de.jcup.egradle.launchGroup"
+			mode = "run"
+			category = "de.jcup.egradle.category"
+			label = "EGradle"
+			image = "icons/gradle-og.gif"
+			bannerImage = "icons/gradle-og.gif">
+		</launchGroup>
+	</extension> 
+	<extension point="org.eclipse.ui.actionSets">
+        <actionSet
+              label="EGradle Action Set"
+              visible="true"
+  	            id="de.jcup.egradle.launch.actionSet">
+  	         <action
+  	               label="Relaunch last EGradle commands"
+  	               icon="icons/gradle-og.gif"
+  	               class="de.jcup.egradle.eclipse.launch.EGradleLaunchToolbarAction"
+  	               tooltip="Debug last launch with egradle"
+  	               menubarPath="org.eclipse.ui.run/relaunchGroup"
+  	               toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
+  	               id="de.jcup.egradle.eclipse.launch.action"
+  	               style="pulldown">
+  	               
+  	         </action>
+  	      </actionSet>
+  	   </extension>
 </plugin>

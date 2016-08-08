@@ -96,6 +96,14 @@ public class GradleExecutor {
 		public String toString() {
 			return "Result [processResult=" + processResult + ", exception=" + exception + "]";
 		}
+
+
+		public int getResultCode() {
+			if (processResult==null){
+				return -1;
+			}
+			return processResult;
+		}
 		
 	}
 }
