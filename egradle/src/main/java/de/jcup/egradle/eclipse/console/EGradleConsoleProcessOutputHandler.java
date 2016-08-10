@@ -10,6 +10,8 @@ public class EGradleConsoleProcessOutputHandler implements ProcessOutputHandler{
 
 	public EGradleConsoleProcessOutputHandler(){
 		this.messageStream = EGradleConsoleFactory.INSTANCE.getConsole().newMessageStream();
+		/* always UTF-8 encoding*/
+		messageStream.setEncoding("UTF-8");
 	}
 	
 	@Override
