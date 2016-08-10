@@ -11,6 +11,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
+import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.eclipse.execution.GradleExecution;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -20,35 +22,43 @@ import de.jcup.egradle.core.domain.GradleContext;
  */
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
-	protected void prepareContext(GradleContext context) {
-		/* do nothing more, can be overriden */
-	}
-	
 	@Override
-	protected int getTasksToDo() {
-		return 2;
+	protected void additionalPrepareContext(GradleContext context) {
+		context.setAmountOfWorkToDo(2);
 	}
 
-	protected void afterExecutionOutsideUI(IProgressMonitor monitor) throws Exception {
-		monitor.worked(1);
-		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-		for (IProject project : projects) {
-			try {
-				if (monitor.isCanceled()){
-					break;
-				}
-				monitor.subTask("refreshing project "+project.getName());
-				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-			} catch (CoreException e) {
-				throw new InvocationTargetException(e);
-			}
-		}
-		monitor.worked(2);
+	@Override
+	protected GradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+		return new RefreshAllEclipseProjectsGradleExecution(processOutputHandler, context);
 	}
 
 	@Override
 	protected GradleCommand[] createCommands() {
-		return GradleCommand.build("cleanEclipse","eclipse");
+		return GradleCommand.build("cleanEclipse", "eclipse");
+	}
+
+	private final class RefreshAllEclipseProjectsGradleExecution extends GradleExecution {
+		private RefreshAllEclipseProjectsGradleExecution(ProcessOutputHandler processOutputHandler,
+				GradleContext context) {
+			super(processOutputHandler, context);
+		}
+
+		protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
+			monitor.worked(1);
+			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+			for (IProject project : projects) {
+				try {
+					if (monitor.isCanceled()) {
+						break;
+					}
+					monitor.subTask("refreshing project " + project.getName());
+					project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+				} catch (CoreException e) {
+					throw new InvocationTargetException(e);
+				}
+			}
+			monitor.worked(2);
+		}
 	}
 
 }

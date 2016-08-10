@@ -23,7 +23,7 @@ public class GradleExecutorTest {
 	// mockito mocks getVariables on mocked object with a empty map!
 	private static final Map<String, String> EMPTY_ENV = Collections.emptyMap();
 	private GradleExecutor executorToTest;
-	private GradleContext mockedEnvironment;
+	private GradleContext mockedContext;
 	private GradleCommand mockedCommand1;
 	private ProcessExecutor mockedProcessExecutor;
 	private GradleRootProject mockedRootProject;
@@ -36,11 +36,11 @@ public class GradleExecutorTest {
 
 		executorToTest = new GradleExecutor(mockedProcessExecutor);
 		mockedRootProject = mock(GradleRootProject.class);
-		mockedEnvironment = mock(GradleContext.class);
+		mockedContext = mock(GradleContext.class);
 		mockedConfiguration= mock(GradleConfiguration.class);
 		
-		when(mockedEnvironment.getRootProject()).thenReturn(mockedRootProject);
-		when(mockedEnvironment.getConfiguration()).thenReturn(mockedConfiguration);
+		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
+		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedConfiguration.isUsingGradleWrapper()).thenReturn(true);
 		when(mockedConfiguration.getShellForGradleWrapper()).thenReturn("usedShell");
 		
@@ -51,15 +51,17 @@ public class GradleExecutorTest {
 
 	@Test
 	public void executing_returns_result_not_null() {
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
 
-		Result result = executorToTest.execute(mockedEnvironment, mockedCommand1);
+		Result result = executorToTest.execute(mockedContext);
 		assertNotNull(result);
 	}
 
 	@Test
 	public void executing_returns_result_being_ok() {
-
-		Result result = executorToTest.execute(mockedEnvironment, mockedCommand1);
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
+		
+		Result result = executorToTest.execute(mockedContext);
 		assertNotNull(result);
 		assertTrue(result.isOkay());
 	}
@@ -68,8 +70,9 @@ public class GradleExecutorTest {
 	public void executing_gives_command_string_to_process_executor_but_gradle_call_is_before() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
 		/* execute */
-		executorToTest.execute(mockedEnvironment, mockedCommand1);
+		executorToTest.execute(mockedContext);
 		/* test */
 		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew","eclipse");
 	}
@@ -79,8 +82,10 @@ public class GradleExecutorTest {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedCommand2.getCommand()).thenReturn("cleanEclipse");
+		
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1,mockedCommand2});
 		/* execute */
-		executorToTest.execute(mockedEnvironment, mockedCommand1,mockedCommand2);
+		executorToTest.execute(mockedContext);
 		/* test */
 		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell","gradlew","eclipse","cleanEclipse");
 	}
@@ -92,9 +97,10 @@ public class GradleExecutorTest {
 		File mcokedWorkingFolder = mock(File.class);
 		when(mcokedWorkingFolder.isDirectory()).thenReturn(true);
 		when(mockedRootProject.getFolder()).thenReturn(mcokedWorkingFolder);
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
 		
 		/* execute */
-		executorToTest.execute(mockedEnvironment, mockedCommand1);
+		executorToTest.execute(mockedContext);
 		/* test */
 		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, EMPTY_ENV, "usedShell","gradlew","eclipse");
 	}

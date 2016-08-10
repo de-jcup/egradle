@@ -33,8 +33,7 @@ public class GradleExecutor {
 	 * @param commands - if no command is set an {@link IllegalArgumentException} is thrown
 	 * @return result
 	 */
-	public Result execute(GradleContext context, GradleCommand ...commands){
-		notEmpty(commands, "'commands' may not be empty");
+	public Result execute(GradleContext context){
 		Result result = new Result();
 
 		GradleConfiguration config = context.getConfiguration();
@@ -43,6 +42,7 @@ public class GradleExecutor {
 		
 		/* build command string*/
 		int pos=0;
+		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length+1;
 		if (config.isUsingGradleWrapper()){
 			arraySize+=1;// we must call wrapper executor too
