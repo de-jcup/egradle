@@ -28,7 +28,7 @@ public interface ProcessExecutor {
 	 * @param workingDirectory
 	 * @param env
 	 * @param commands
-	 * @return
+	 * @return result code
 	 * @throws IOException
 	 */
 	public int execute(File workingDirectory, Map<String, String> env, String ...commands) throws IOException;

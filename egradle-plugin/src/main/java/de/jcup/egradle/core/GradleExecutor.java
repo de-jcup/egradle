@@ -44,7 +44,6 @@ public class GradleExecutor {
 	/**
 	 * Executes gradle
 	 * @param context
-	 * @param commands - if no command is set an {@link IllegalArgumentException} is thrown
 	 * @return result
 	 */
 	public Result execute(GradleContext context){

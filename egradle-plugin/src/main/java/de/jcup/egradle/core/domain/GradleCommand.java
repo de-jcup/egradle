@@ -43,7 +43,8 @@ public class GradleCommand {
 	
 	/**
 	 * Combines subproject with command
-	 * @param command
+	 * @param subProject - the project where the command/task is executed
+	 * @param command - the task to execute
 	 */
 	public GradleCommand(GradleSubproject subProject, String command){
 		this.command=(subProject==null ? "" : (":"+subProject.getName()+":"))+command;
