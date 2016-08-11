@@ -18,6 +18,8 @@
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.DateFormat;
+import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -53,8 +55,8 @@ public class GradleExecution{
 		// do non-UI work
 		String commandString = context.getCommandString();
 		monitor.beginTask("Executing gradle commands:" + commandString, context.getAmountOfWorkToDo());
-		processOutputHandler.output(
-				"Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandString);
+		processOutputHandler.output("\n"+DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+		processOutputHandler.output("Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandString);
 
 		result = executor.execute(context);
 		if (!result.isOkay()) {

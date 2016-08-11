@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.EGradleMessageHelper;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleJob extends Job{
 	private GradleExecution execution;
@@ -36,7 +36,7 @@ public class GradleJob extends Job{
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageHelper.INSTANCE.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageDialog.INSTANCE.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute "+getName(), e);

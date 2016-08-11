@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
-import de.jcup.egradle.eclipse.EGradleMessageHelper;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
 	private GradleExecution execution;
@@ -38,7 +38,7 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageHelper.INSTANCE.showWarning("Result was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageDialog.INSTANCE.showWarning("Result was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.handlers;
+package de.jcup.egradle.eclipse.handlers;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.EGradleMessageHelper;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.console.EGradleConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecution;
 import de.jcup.egradle.eclipse.execution.GradleJob;
@@ -59,19 +59,20 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 
 	private void prepareContext(GradleContext context) {
 		String javaHome = getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
-		if (StringUtils.isEmpty(javaHome)){
-			EGradleMessageHelper.INSTANCE.showError("No java home path set. Please setup in preferences!");
+		if (StringUtils.isEmpty(javaHome)) {
+			EGradleMessageDialog.INSTANCE.showError("No java home path set. Please setup in preferences!");
 			throw new IllegalStateException("Java home not set");
 		}
 		context.setEnvironment("JAVA_HOME", javaHome);
 		context.setCommands(createCommands());
 		context.setAmountOfWorkToDo(1);
-		
+
 		additionalPrepareContext(context);
-		
+
 	}
+
 	protected void additionalPrepareContext(GradleContext context) {
-		/* can be overriden*/
+		/* can be overriden */
 	}
 
 	protected enum ExecutionMode {
@@ -86,15 +87,15 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		String path = getStringPreference(PreferenceConstants.P_ROOTPROJECT_PATH);
-		if (StringUtils.isEmpty(path)){
-			EGradleMessageHelper.INSTANCE.showError("No root project path set. Please setup in preferences!");
+		if (StringUtils.isEmpty(path)) {
+			EGradleMessageDialog.INSTANCE.showError("No root project path set. Please setup in preferences!");
 			return null;
 		}
 		GradleRootProject rootProject;
 		try {
 			rootProject = new GradleRootProject(new File(path));
 		} catch (IOException e1) {
-			EGradleMessageHelper.INSTANCE.showError(e1.getMessage());
+			EGradleMessageDialog.INSTANCE.showError(e1.getMessage());
 			return null;
 		}
 
@@ -102,30 +103,30 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 
 		GradleContext context = new GradleContext(rootProject, config);
 		prepareContext(context);
-		
+
 		GradleExecution execution = createGradleExecution(processOutputHandler, context);
-		
+
 		ExecutionMode mode = getExecutionMode();
-		
-			switch (mode) {
-			case BLOCK_UI__CANCEABLE:
-				try {
-					GradleRunnableWithProgress runnable = new GradleRunnableWithProgress(execution);
+
+		switch (mode) {
+		case BLOCK_UI__CANCEABLE:
+			try {
+				GradleRunnableWithProgress runnable = new GradleRunnableWithProgress(execution);
 				IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
 				progressService.busyCursorWhile(runnable);
-				
-				} catch (InvocationTargetException | InterruptedException e) {
-					throw new ExecutionException("Cannot refresh all projects ...", e);
-				}
-				break;
-			case RUN_IN_BACKGROUND__CANCEABLE:
-				GradleJob job = new GradleJob("gradle execution",execution);
-				job.schedule();
-				break;
 
-			default:
-				throw new IllegalArgumentException("Not implemented for mode:" + mode);
+			} catch (InvocationTargetException | InterruptedException e) {
+				throw new ExecutionException("Cannot refresh all projects ...", e);
 			}
+			break;
+		case RUN_IN_BACKGROUND__CANCEABLE:
+			GradleJob job = new GradleJob("gradle execution", execution);
+			job.schedule();
+			break;
+
+		default:
+			throw new IllegalArgumentException("Not implemented for mode:" + mode);
+		}
 
 		return null;
 	}
@@ -133,22 +134,16 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 	protected GradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
 		return new GradleExecution(processOutputHandler, context);
 	}
-	
-	private String getStringPreference(String id){
+
+	private String getStringPreference(String id) {
 		/*
 		 * TODO ATR, use preferences correctly!InstanceScope.INSTANCE is the new
 		 * way. maybe preference page must be refactored to use the instance
 		 * scope too
 		 */
-		IPreferenceStore prefs = Activator.getDefault().getPreferenceStore();	
+		IPreferenceStore prefs = Activator.getDefault().getPreferenceStore();
 		String result = prefs.getString(id);
 		return result;
 	}
-	
-	
-	
-	
-
-	
 
 }

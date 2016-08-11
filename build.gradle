@@ -19,9 +19,15 @@ allprojects{
 		
 }
 
+def doNotAutomateEclipseSetup = ['egradle-plugin','egradle-feature','egradle-updatesite'];
+
 subprojects {
     apply plugin: 'java'
-	apply plugin: 'eclipse'
+	
+	if (! doNotAutomateEclipseSetup.contains(project.name)){
+		apply plugin: 'eclipse'
+	}
+	
 	apply plugin: "maven"
 		
 	group = "de.jcup.egradle" 

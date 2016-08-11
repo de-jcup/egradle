@@ -5,9 +5,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-public class EGradleMessageHelper {
+public class EGradleMessageDialog {
 	
-	public static final EGradleMessageHelper INSTANCE = new EGradleMessageHelper();
+	public static final EGradleMessageDialog INSTANCE = new EGradleMessageDialog();
 
 	public void showWarning(String message) {
 		Shell shell = getShell();
