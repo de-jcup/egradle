@@ -54,12 +54,8 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		pb.redirectErrorStream(true);
 		
 		Process p = pb.start();
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			handler.output(line);
-		}
+		handleProcessStarted(p);
+		handleOutputStreams(p);
 		while (p.isAlive()){
 			try {
 				Thread.sleep(200);
@@ -67,7 +63,24 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 				throw new IOException(e);
 			}
 		}
+		handleProcessEnd(p);
 		return p.exitValue();
+	}
+
+	protected void handleOutputStreams(Process p) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			handler.output(line);
+		}
+	}
+
+	protected void handleProcessEnd(Process p) {
+		
+	}
+
+	protected void handleProcessStarted(Process p) {
+		
 	}
 
 }

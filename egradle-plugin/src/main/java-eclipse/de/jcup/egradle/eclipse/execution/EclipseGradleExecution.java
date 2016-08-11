@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.execution;
+package de.jcup.egradle.eclipse.execution;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -30,33 +30,40 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 
-public class GradleExecution{
-	
+public class EclipseGradleExecution {
+
 	private GradleContext context;
 	private ProcessOutputHandler processOutputHandler;
 	private Result result;
-	
+	private ProcessExecutor processExecutor;
+
 	public Result getResult() {
 		return result;
 	}
-	
-	public GradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context){
-			notNull(context, "'context' may not be null");
-			notNull(processOutputHandler, "'processOutputHandler' may not be null");
-			
-			this.context = context;
-			this.processOutputHandler=processOutputHandler;
+
+	public EclipseGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+		this(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler));
 	}
-	
-	public void execute(IProgressMonitor monitor) throws Exception{
-		ProcessExecutor processExecutor = new SimpleProcessExecutor(processOutputHandler);
+
+	public EclipseGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context,
+			ProcessExecutor processExecutor) {
+		notNull(context, "'context' may not be null");
+		notNull(processOutputHandler, "'processOutputHandler' may not be null");
+		notNull(processExecutor, "'processExecutor' may not be null");
+		this.context = context;
+		this.processOutputHandler = processOutputHandler;
+		this.processExecutor=processExecutor;
+	}
+
+	public void execute(IProgressMonitor monitor) throws Exception {
 		GradleExecutor executor = new GradleExecutor(processExecutor);
 
 		// do non-UI work
 		String commandString = context.getCommandString();
 		monitor.beginTask("Executing gradle commands:" + commandString, context.getAmountOfWorkToDo());
-		processOutputHandler.output("\n"+DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
-		processOutputHandler.output("Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandString);
+		processOutputHandler.output("\n" + DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+		processOutputHandler.output(
+				"Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandString);
 
 		result = executor.execute(context);
 		if (!result.isOkay()) {
@@ -71,7 +78,7 @@ public class GradleExecution{
 		monitor.done();
 	}
 
-	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception{
-		/* per default do nothing*/
+	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
+		/* per default do nothing */
 	}
 }

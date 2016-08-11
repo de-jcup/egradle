@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.eclipse.execution.GradleExecution;
+import de.jcup.egradle.eclipse.execution.EclipseGradleExecution;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -43,7 +43,7 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	}
 
 	@Override
-	protected GradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+	protected EclipseGradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
 		return new RefreshAllEclipseProjectsGradleExecution(processOutputHandler, context);
 	}
 
@@ -52,7 +52,7 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 		return GradleCommand.build("cleanEclipse", "eclipse");
 	}
 
-	private final class RefreshAllEclipseProjectsGradleExecution extends GradleExecution {
+	private final class RefreshAllEclipseProjectsGradleExecution extends EclipseGradleExecution {
 		private RefreshAllEclipseProjectsGradleExecution(ProcessOutputHandler processOutputHandler,
 				GradleContext context) {
 			super(processOutputHandler, context);

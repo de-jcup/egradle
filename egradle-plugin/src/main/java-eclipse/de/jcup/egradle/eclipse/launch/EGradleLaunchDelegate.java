@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.launch;
+package de.jcup.egradle.eclipse.launch;
 
 import java.util.Map;
 
@@ -44,6 +44,8 @@ import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
 
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
+	public static final String LAUNCH_ARGUMENT = "createRuntimeProcess";
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
@@ -51,13 +53,18 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 		String projectName = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, "");
 		String arguments = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, "");
 
+		executeByHandler(launch, projectName, arguments);
+
+	}
+
+	private void executeByHandler(ILaunch launch, String projectName, String arguments) throws CoreException {
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
 		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
 		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
 
 		Command command = commandService.getCommand(LaunchGradleCommandHandler.COMMAND_ID);
 
-		try{
+		try {
 			Display.getDefault().syncExec(new Runnable() {
 
 				@Override
@@ -68,6 +75,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						Map<Object, Object> map = values.getParameterValues();
 						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
 						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, arguments);
+						map.put(LAUNCH_ARGUMENT, launch);
 
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
 						ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
@@ -87,11 +95,9 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 				}
 
 			});
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new CoreException(new Status(Status.ERROR, Activator.PLUGIN_ID, "Not handled!", e));
 		}
-		
-
 	}
 
 }
