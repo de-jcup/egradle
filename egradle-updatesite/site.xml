@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="EGradle update site">
+      Official update site for egradle
+   </description>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.2.1.alpha.jar" id="de.jcup.egradle.eclipse.feature" version="0.2.1.alpha"/>
+</site>
