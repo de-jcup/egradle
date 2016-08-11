@@ -5,9 +5,7 @@ allprojects{
 	
 	repositories {
 		mavenLocal()
-		maven { 
-			url "${repositoryUrl}" 
-		}
+		mavenCentral()
     }
 	
 	/* Custimization part - e.g. when you got special repositories
