@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle-freature"
-      version="0.2.1.alpha">
+      version="0.2.2.alpha">
 
    <description>
       EGradle - an easy, minimalistic gradle integration for eclipse
@@ -84,7 +84,7 @@ END OF TERMS AND CONDITIONS
          id="de.jcup.egradle.eclipse.plugin"
          download-size="0"
          install-size="0"
-         version="0.2.1.alpha"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

@@ -19,11 +19,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.EGradleMessageHelper;
 
 public class GradleJob extends Job{
 	private GradleExecution execution;
@@ -38,9 +36,7 @@ public class GradleJob extends Job{
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-				MessageDialog.openWarning(window.getShell(), "Egradle",
-						"Result of job was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageHelper.INSTANCE.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute "+getName(), e);

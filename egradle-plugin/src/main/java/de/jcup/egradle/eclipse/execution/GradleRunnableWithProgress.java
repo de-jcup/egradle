@@ -20,10 +20,9 @@ import static org.apache.commons.lang3.Validate.notNull;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
+
+import de.jcup.egradle.eclipse.EGradleMessageHelper;
 
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
 	private GradleExecution execution;
@@ -39,9 +38,7 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-				MessageDialog.openWarning(window.getShell(), "Egradle",
-						"Result was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageHelper.INSTANCE.showWarning("Result was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);
