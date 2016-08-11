@@ -15,13 +15,7 @@
  */
  package de.jcup.egradle.eclipse.preferences;
 
-import org.eclipse.jface.preference.DirectoryFieldEditor;
-import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPreferencePage;
-
-import de.jcup.egradle.eclipse.Activator;
-
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
 /**
  * This class represents a preference page that
  * is contributed to the Preferences dialog. By 
@@ -35,15 +29,20 @@ import de.jcup.egradle.eclipse.Activator;
  * the main plug-in class. That way, preferences can
  * be accessed directly via the preference store.
  */
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_JAVA_HOME_PATH;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_ROOTPROJECT_PATH;
 
+import org.eclipse.jface.preference.DirectoryFieldEditor;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 public class EGradlePreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
 	public EGradlePreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-//		setPreferenceStore(InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID));
+		setPreferenceStore(PREFERENCES.getPreferenceStore());
 		setDescription("EGradle setup");
 	}
 	
@@ -54,30 +53,12 @@ public class EGradlePreferencePage
 	 * restore itself.
 	 */
 	public void createFieldEditors() {
-		addField(new DirectoryFieldEditor(PreferenceConstants.P_ROOTPROJECT_PATH, 
+		addField(new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), 
 				"&Gradle root project path:", getFieldEditorParent()));
-		addField(new DirectoryFieldEditor(PreferenceConstants.P_JAVA_HOME_PATH, 
+		addField(new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), 
 				"&JAVA HOME set for gradle:", getFieldEditorParent()));
-//		addField(
-//			new BooleanFieldEditor(
-//				PreferenceConstants.P_BOOLEAN,
-//				"&An example of a boolean preference",
-//				getFieldEditorParent()));
-//
-//		addField(new RadioGroupFieldEditor(
-//				PreferenceConstants.P_CHOICE,
-//			"An example of a multiple-choice preference",
-//			1,
-//			new String[][] { { "&Choice 1", "choice1" }, {
-//				"C&hoice 2", "choice2" }
-//		}, getFieldEditorParent()));
-//		addField(
-//			new StringFieldEditor(PreferenceConstants.P_STRING, "A &text preference:", getFieldEditorParent()));
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
-	 */
 	public void init(IWorkbench workbench) {
 	}
 	

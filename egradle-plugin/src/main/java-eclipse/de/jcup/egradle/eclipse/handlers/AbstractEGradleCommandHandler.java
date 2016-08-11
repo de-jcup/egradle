@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
@@ -33,13 +34,12 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.console.EGradleConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecution;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
-import de.jcup.egradle.eclipse.preferences.PreferenceConstants;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
 
 /**
  * Abstract base handler for egradle command executions
@@ -58,7 +58,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 	protected abstract GradleCommand[] createCommands();
 
 	private void prepareContext(GradleContext context) {
-		String javaHome = getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
+		String javaHome = PREFERENCES.getStringPreference(P_JAVA_HOME_PATH);
 		if (StringUtils.isEmpty(javaHome)) {
 			EGradleMessageDialog.INSTANCE.showError("No java home path set. Please setup in preferences!");
 			throw new IllegalStateException("Java home not set");
@@ -86,7 +86,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		String path = getStringPreference(PreferenceConstants.P_ROOTPROJECT_PATH);
+		String path = PREFERENCES.getStringPreference(P_ROOTPROJECT_PATH);
 		if (StringUtils.isEmpty(path)) {
 			EGradleMessageDialog.INSTANCE.showError("No root project path set. Please setup in preferences!");
 			return null;
@@ -135,15 +135,6 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		return new GradleExecution(processOutputHandler, context);
 	}
 
-	private String getStringPreference(String id) {
-		/*
-		 * TODO ATR, use preferences correctly!InstanceScope.INSTANCE is the new
-		 * way. maybe preference page must be refactored to use the instance
-		 * scope too
-		 */
-		IPreferenceStore prefs = Activator.getDefault().getPreferenceStore();
-		String result = prefs.getString(id);
-		return result;
-	}
+	
 
 }
