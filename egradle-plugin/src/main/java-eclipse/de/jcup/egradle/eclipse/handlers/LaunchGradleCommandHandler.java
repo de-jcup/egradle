@@ -40,7 +40,7 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.execution.EclipseGradleExecution;
+import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
@@ -84,8 +84,8 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		return super.execute(event);
 	}
 
-	protected EclipseGradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		return new EclipseGradleExecution(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler) {
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+		return new GradleExecutionDelegate(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler) {
 			@Override
 			protected void handleProcessStarted(Process process, Date started, File workingDirectory, Map<String, String> env,
 					String[] commands) {

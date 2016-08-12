@@ -36,7 +36,7 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.console.EGradleConsoleProcessOutputHandler;
-import de.jcup.egradle.eclipse.execution.EclipseGradleExecution;
+import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
@@ -108,7 +108,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		GradleContext context = new GradleContext(rootProject, config);
 		prepareContext(context);
 
-		EclipseGradleExecution execution = createGradleExecution(processOutputHandler, context);
+		GradleExecutionDelegate execution = createGradleExecution(processOutputHandler, context);
 
 		ExecutionMode mode = getExecutionMode();
 
@@ -135,8 +135,8 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected EclipseGradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		return new EclipseGradleExecution(processOutputHandler, context);
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+		return new GradleExecutionDelegate(processOutputHandler, context);
 	}
 
 	

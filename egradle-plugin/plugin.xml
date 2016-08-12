@@ -33,7 +33,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            name="Gradle Editor"
+            name="EGradle Editor"
             extensions="gradle"
             icon="icons/gradle-og.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
@@ -55,7 +55,7 @@
       </command>
       <command
             id="egradle.commands.launch"
-            name="Launch command">
+            name="EGradle Launch">
          <commandParameter
                id="egradle.command.launch.config"
                name="launchConfig"
@@ -210,20 +210,21 @@
         delegateDescription="Launches the gradle project by given arguments"
         id="de.jcup.egradle.launchConfigurationType"
         modes="run"
-        name="EGradle Launcher"
+        name="EGradle"
         public="true"
-        sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
-        sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+        
+        >
 		</launchConfigurationType>
 	</extension>
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup 
 			class="de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup"
-			description="This is the configuration tab group of the EGralde launcher"
+			description="Define your launch configurations for EGradle"
 			id="de.jcup.egradle.launchConfigurationTabGroup"
 			type="de.jcup.egradle.launchConfigurationType">
 		</launchConfigurationTabGroup>
 	</extension>
+	<!-- launch image -->
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 	  <launchConfigurationTypeImage
 	     id="com.example.FirstLaunchConfigurationTypeImage"
@@ -231,21 +232,33 @@
 	     icon="icons/gradle-og.gif">
 	  </launchConfigurationTypeImage>
  	</extension>
- 	<!--
+ 	<!-- launch shortcuts for Run...as ... -->
  	<extension point="org.eclipse.debug.ui.launchShortcuts">
     	<shortcut
         id="de.jcup.egradle.eGradleLaunchShortcut"
         class="de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut"
         label="EGradle"
-        icon="icons/gradle-og.giff"
+        icon="icons/gradle-og.gif"
         modes="run">
+            <!--
             <perspective id="org.eclipse.jdt.ui.JavaPerspective"/>
             <perspective id="org.eclipse.jdt.ui.JavaHierarchyPerspective"/>
             <perspective id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
             <perspective id="org.eclipse.debug.ui.DebugPerspective"/>
+            -->
+            <contextualLaunch>
+            <enablement>
+                <with
+                    variable="selection">
+                    <count
+                        value="+">
+                    </count>
+                </with>
+            </enablement>
+        </contextualLaunch>
+            
     	</shortcut>
 	</extension>
-	-->
 	<!-- Launch group-->
 	<extension point = "org.eclipse.debug.ui.launchGroups">
 		<launchGroup
@@ -254,7 +267,7 @@
 			category = "de.jcup.egradle.category"
 			label = "EGradle"
 			image = "icons/gradle-og.gif"
-			bannerImage = "icons/gradle-og.gif">
+			bannerImage = "icons/gradle-banner-image.png">
 		</launchGroup>
 	</extension> 
 	<!-- Launch toolbar-->

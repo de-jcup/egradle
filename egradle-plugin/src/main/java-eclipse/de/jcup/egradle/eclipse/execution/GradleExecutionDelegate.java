@@ -33,12 +33,12 @@ import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 
 /**
- * Main part of all gradle executions inside eclipse
+ * Execution delegate, used by {@link GradleJob} and {@link GradleRunnableWithProgress}
  * 
  * @author Albert Tregnaghi
  *
  */
-public class EclipseGradleExecution {
+public class GradleExecutionDelegate {
 
 	private GradleContext context;
 	private ProcessOutputHandler processOutputHandler;
@@ -49,11 +49,11 @@ public class EclipseGradleExecution {
 		return result;
 	}
 
-	public EclipseGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context) {
 		this(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler));
 	}
 
-	public EclipseGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context,
+	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context,
 			ProcessExecutor processExecutor) {
 		notNull(context, "'context' may not be null");
 		notNull(processOutputHandler, "'processOutputHandler' may not be null");

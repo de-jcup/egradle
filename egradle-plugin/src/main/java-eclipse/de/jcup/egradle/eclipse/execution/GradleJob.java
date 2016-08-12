@@ -24,9 +24,9 @@ import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleJob extends Job{
-	private EclipseGradleExecution execution;
+	private GradleExecutionDelegate execution;
 	
-	public GradleJob(String name, EclipseGradleExecution execution) {
+	public GradleJob(String name, GradleExecutionDelegate execution) {
 		super(name);
 		this.execution=execution;
 	}

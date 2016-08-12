@@ -25,9 +25,9 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
-	private EclipseGradleExecution execution;
+	private GradleExecutionDelegate execution;
 
-	public GradleRunnableWithProgress(EclipseGradleExecution execution) {
+	public GradleRunnableWithProgress(GradleExecutionDelegate execution) {
 		notNull(execution, "'execution' may not be null");
 		this.execution=execution;
 	}
