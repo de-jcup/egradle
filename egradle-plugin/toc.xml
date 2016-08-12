@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="Sample Table of Contents">
-	<topic label="How to use"  href="html/howto_use.html"> 
-		<topic label="Editor" href="html/howto_use/editor.html"/> 
+<toc label="EGradle table of content" topic="html/overview.html">
+	<topic href="html/overview.html" label="Overview">
+ </topic>
+	<topic label="EGradle User Guide"  href="html/user_guide.html">
+  <topic href="html/user_guide/setup.html" label="Setup">
+  </topic>
+  <topic href="html/user_guide/launch_gradle.html" label="Launch gradle">
+  </topic>
+  <topic label="Refresh complete eclipse workspace">
+  </topic> 
+		<topic href="html/howto_use/editor.html" label="Editor">
+  </topic> 
 	</topic>
-	<topic label="Main Topic 2"/>
 </toc>
