@@ -51,7 +51,7 @@
       <command
             name="Refresh all eclipse dependencies command"
             categoryId="egradle.commands.category"
-            id="egradle.commands.sampleCommand">
+            id="egradle.commands.refreshEclipse">
       </command>
       <command
             id="egradle.commands.launch"
@@ -69,7 +69,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="egradle.commands.sampleCommand"
+            commandId="egradle.commands.refreshEclipse"
             class="de.jcup.egradle.eclipse.handlers.RefreshAllEclipseDependenciesHandler">
       </handler>
       <handler
@@ -80,7 +80,7 @@
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="egradle.commands.sampleCommand"
+            commandId="egradle.commands.refreshEclipse"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+6"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
@@ -88,6 +88,7 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
+   <!-- egradle menu:
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
@@ -96,20 +97,21 @@
                label="EGradle"
                mnemonic="M">
             <command
-                  commandId="egradle.commands.sampleCommand"
+                  commandId="egradle.commands.refreshEclipse"
                   id="egradle.menus.sampleCommand"
                   label="Refresh all eclipse dependencies"
                   mnemonic="S">
             </command>
          </menu>
       </menuContribution>
+      -->
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
                id="egradle.toolbars.sampleToolbar"
                label="EGradle Toolbar">
             <command
-                  commandId="egradle.commands.sampleCommand"
+                  commandId="egradle.commands.refreshEclipse"
                   icon="icons/refreshAllEclipseDependencies.gif"
                   id="egradle.toolbars.sampleCommand"
                   label="Refresh"
@@ -128,6 +130,7 @@
             primary="true">
       </toc>
    </extension>
+   <!--
    <extension
          point="org.eclipse.ui.importWizards">
       <category
@@ -145,6 +148,8 @@
          </description>
       </wizard>
    </extension>
+   -->
+    <!--
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
@@ -168,6 +173,7 @@
          </action>
       </objectContribution>
    </extension>
+    -->
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
@@ -240,6 +246,7 @@
     	</shortcut>
 	</extension>
 	-->
+	<!-- Launch group-->
 	<extension point = "org.eclipse.debug.ui.launchGroups">
 		<launchGroup
 			id = "de.jcup.egradle.launchGroup"
@@ -250,6 +257,7 @@
 			bannerImage = "icons/gradle-og.gif">
 		</launchGroup>
 	</extension> 
+	<!-- Launch toolbar-->
 	<extension point="org.eclipse.ui.actionSets">
         <actionSet
               label="EGradle Action Set"

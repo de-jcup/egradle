@@ -17,6 +17,7 @@ package de.jcup.egradle.eclipse.execution;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -26,16 +27,23 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.domain.GradleContext;
+import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 
+/**
+ * Main part of all gradle executions inside eclipse
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
 public class EclipseGradleExecution {
 
 	private GradleContext context;
 	private ProcessOutputHandler processOutputHandler;
 	private Result result;
-	private ProcessExecutor processExecutor;
+	protected GradleExecutor executor;
 
 	public Result getResult() {
 		return result;
@@ -52,18 +60,30 @@ public class EclipseGradleExecution {
 		notNull(processExecutor, "'processExecutor' may not be null");
 		this.context = context;
 		this.processOutputHandler = processOutputHandler;
-		this.processExecutor=processExecutor;
+		executor = new GradleExecutor(processExecutor);
 	}
 
+	/**
+	 * Execute and give output by given progress monitor
+	 * 
+	 * @param monitor
+	 *            - progress monitor
+	 * @throws Exception
+	 */
 	public void execute(IProgressMonitor monitor) throws Exception {
-		GradleExecutor executor = new GradleExecutor(processExecutor);
 
-		// do non-UI work
+		GradleRootProject rootProject = context.getRootProject();
 		String commandString = context.getCommandString();
-		monitor.beginTask("Executing gradle commands:" + commandString, context.getAmountOfWorkToDo());
-		processOutputHandler.output("\n" + DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
-		processOutputHandler.output(
-				"Root project '" + context.getRootProject().getFolder().getName() + "' executing " + commandString);
+		String progressDescription = "Executing gradle commands:" + commandString;
+		
+		
+		File folder = rootProject.getFolder();
+		String rootProjectFolderName = folder.getName();
+		String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date());
+
+		monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
+		processOutputHandler.output("\n" + executionStartTime + " " + progressDescription);
+		processOutputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
 		result = executor.execute(context);
 		if (!result.isOkay()) {

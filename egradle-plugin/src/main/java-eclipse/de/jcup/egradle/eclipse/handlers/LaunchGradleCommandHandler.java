@@ -15,7 +15,12 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +30,9 @@ import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.core.commands.common.NotDefinedException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.RuntimeProcess;
 
 import de.jcup.egradle.core.domain.GradleCommand;
@@ -39,7 +46,9 @@ import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
- * normal handlers
+ * normal handlers but it supports (and needs) a launch object as parameter as well!
+ * <br></br>
+ * The handler does produce a RuntimeProcess object which consumes console output to handler 
  * 
  * @author Albert Tregnaghi
  *
@@ -51,11 +60,6 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	private GradleCommand[] commands;
 	private ILaunch launch;
-
-	@Override
-	protected void init() {
-		super.init();
-	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -83,19 +87,40 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	protected EclipseGradleExecution createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
 		return new EclipseGradleExecution(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler) {
 			@Override
-			protected void handleProcessStarted(Process process) {
+			protected void handleProcessStarted(Process process, Date started, File workingDirectory, Map<String, String> env,
+					String[] commands) {
+				String label = context.getCommandString();
+				String path = "inside root project";
+				
+				Map<String, String> attributes = new HashMap<>();
+				String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(started);
+				/* Will be shown in process information dialog - see org.eclipse.debug.internal.ui.preferences.ProcessPropertyPage*/ 
+				attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
+				attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
+				attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
+				attributes.put(DebugPlugin.ATTR_PATH, path);
+				
+				/* using an unbreakable space 00A0 to avoid unnecessary breaks in view*/
+				String cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
+				
+				attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
 				/*
 				 * bind process to runtime process, so visible and correct
 				 * handled in debug UI
 				 */
-				RuntimeProcess rp = new RuntimeProcess(launch, process, context.getCommandString(),
-						context.getEnvironment());
+				RuntimeProcess rp = new RuntimeProcess(launch, process, label,
+						attributes);
+				processOutputHandler.output("Launch started - for details see output of "+label);
+				if (!rp.canTerminate()){
+					processOutputHandler.output("Started process cannot be terminated!");
+				}
 			}
 			
 			@Override
 			protected void handleOutputStreams(Process p) throws IOException {
 				/* do nothing - is printed to console output on current launcher*/
 			}
+			
 		});
 	}
 

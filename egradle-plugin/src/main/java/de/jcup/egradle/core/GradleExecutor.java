@@ -49,14 +49,31 @@ public class GradleExecutor {
 	public Result execute(GradleContext context){
 		Result result = new Result();
 
-		GradleConfiguration config = context.getConfiguration();
 		GradleRootProject rootProject = context.getRootProject();
 		Map<String, String> env = context.getEnvironment();
 		
+		String[] commandStrings = createExecutionCommand(context);
+
+		/* execute process*/
+		int processResult;
+		try {
+			processResult = processExecutor.execute(rootProject.getFolder(), env,commandStrings);
+			
+			result.setProcessResult(processResult);
+		} catch (IOException e) {
+			result.setException(e);
+		} 
+		
+		return result;
+	}
+
+
+	String[] createExecutionCommand(GradleContext context) {
 		/* build command string*/
 		int pos=0;
 		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length+1;
+		GradleConfiguration config = context.getConfiguration();
 		if (config.isUsingGradleWrapper()){
 			arraySize+=1;// we must call wrapper executor too
 		}
@@ -71,18 +88,7 @@ public class GradleExecutor {
 		for (int i=0;i<commands.length;i++){
 			commandStrings[pos++]=commands[i].getCommand();
 		}
-
-		/* execute process*/
-		int processResult;
-		try {
-			processResult = processExecutor.execute(rootProject.getFolder(), env,commandStrings);
-			
-			result.setProcessResult(processResult);
-		} catch (IOException e) {
-			result.setException(e);
-		} 
-		
-		return result;
+		return commandStrings;
 	}
 	
 	public class Result{

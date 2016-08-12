@@ -46,7 +46,6 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
 	public static final String LAUNCH_ARGUMENT = "createRuntimeProcess";
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
@@ -72,6 +71,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 					try {
 						IParameter parameter = command.getParameter(LaunchGradleCommandHandler.PARAMETER_LAUNCHCONFIG);
 						IParameterValues values = parameter.getValues();
+						@SuppressWarnings("unchecked")
 						Map<Object, Object> map = values.getParameterValues();
 						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
 						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, arguments);
@@ -80,6 +80,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
 						ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
+						/* execute launch command with parameters - will show progress etc. as well*/
 						handlerService.executeCommand(parametrizedCommand, null);
 
 					} catch (NotDefinedException | ParameterValuesException e) {

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.Map;
 
 public class SimpleProcessExecutor implements ProcessExecutor {
@@ -53,8 +54,9 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		pb.directory(workingDirectory);
 		pb.redirectErrorStream(true);
 		
+		Date started = new Date();
 		Process p = pb.start();
-		handleProcessStarted(p);
+		handleProcessStarted(p,started,workingDirectory, env,commands);
 		handleOutputStreams(p);
 		while (p.isAlive()){
 			try {
@@ -79,7 +81,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		
 	}
 
-	protected void handleProcessStarted(Process p) {
+	protected void handleProcessStarted(Process p, Date started, File workingDirectory, Map<String, String> env, String[] commands) {
 		
 	}
 
