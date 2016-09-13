@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle-freature"
-      version="0.2.2.alpha">
+      version="0.3.0.beta">
 
    <description>
       EGradle - an easy, minimalistic gradle integration for eclipse
