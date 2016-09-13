@@ -206,7 +206,6 @@
    
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
-        category="de.jcup.egradle.category"
         delegate="de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate"
         delegateDescription="Launches the gradle project by given arguments"
         id="de.jcup.egradle.launchConfigurationType"
@@ -217,11 +216,6 @@
         >
        </launchConfigurationType>
 	</extension>
-	<!--
-		FIXME ATR: possibility 1 : remove the category for egradle so its usable via run as ... as all others. but remove gradle run launcher as well!
-		possiblity 2: keep the special launcher button but have no possiblity for run normal - e.g on context menu 
-		
-	-->
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup 
 			class="de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup"
@@ -246,12 +240,6 @@
         label="EGradle"
         icon="icons/gradle-og.gif"
         modes="run">
-            <!--
-            <perspective id="org.eclipse.jdt.ui.JavaPerspective"/>
-            <perspective id="org.eclipse.jdt.ui.JavaHierarchyPerspective"/>
-            <perspective id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
-            <perspective id="org.eclipse.debug.ui.DebugPerspective"/>
-            -->
             <contextualLaunch>
             <enablement>
                 <with
@@ -270,30 +258,11 @@
 		<launchGroup
 			id = "de.jcup.egradle.launchGroup"
 			mode = "run"
-			category = "de.jcup.egradle.category"
 			label = "EGradle"
 			image = "icons/gradle-og.gif"
 			bannerImage = "icons/gradle-banner-image.png">
 		</launchGroup>
 		
 	</extension> 
-	<!-- Launch toolbar-->
-	<extension point="org.eclipse.ui.actionSets">
-        <actionSet
-              label="EGradle Action Set"
-              visible="true"
-  	            id="de.jcup.egradle.launch.actionSet">
-  	         <action
-  	               label="Relaunch last EGradle commands"
-  	               icon="icons/gradle-og.gif"
-  	               class="de.jcup.egradle.eclipse.launch.EGradleLaunchToolbarAction"
-  	               tooltip="Debug last launch with egradle"
-  	               menubarPath="org.eclipse.ui.run/relaunchGroup"
-  	               toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
-  	               id="de.jcup.egradle.eclipse.launch.action"
-  	               style="pulldown">
-  	               
-  	         </action>
-  	      </actionSet>
-  	   </extension>
+	
 </plugin>
