@@ -9,6 +9,8 @@
   <topic href="html/user_guide/setup.html" label="Setup">
      <anchor id="anchor_setup"/>
   </topic>
+  <topic href="html/user_guide/import.html" label="Import gradle projects to eclipse">
+  </topic>
   <topic href="html/user_guide/launch_gradle.html" label="Launch gradle">
      <anchor id="anchor_launch_gradle"/>
   </topic>
