@@ -39,9 +39,9 @@ import de.jcup.egradle.eclipse.Activator;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
-	public static final String PROPERTY_ARGUMENTS = "arguments";
+	public static final String PROPERTY_TASKS = "tasks";
 	public static final String PROPERTY_PROJECTNAME = "projectName";
-	private Text argumentsField;
+	private Text tasksField;
 	private Text projectNameField;
 
 	@Override
@@ -89,13 +89,13 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		projectNameField.setToolTipText("Enter gradle project name here - or keep empty for root project.");
 
 		Label label = new Label(composite, SWT.NULL);
-		label.setText("Program arguments: ");
+		label.setText("Tasks: ");
 		label.setLayoutData(labelGridData);
 
 
-		argumentsField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
-		argumentsField.setLayoutData(gridData2);
-		argumentsField.addModifyListener(new ModifyListener() {
+		tasksField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
+		tasksField.setLayoutData(gridData2);
+		tasksField.addModifyListener(new ModifyListener() {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -103,7 +103,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 				updateLaunchConfigurationDialog();
 			}
 		});
-		argumentsField.setToolTipText("Enter gradle commands here.");
+		tasksField.setToolTipText("Enter gradle tasks here.");
 		composite.pack();
 
 	}
@@ -111,7 +111,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			argumentsField.setText(configuration.getAttribute(PROPERTY_ARGUMENTS, ""));
+			tasksField.setText(configuration.getAttribute(PROPERTY_TASKS, ""));
 			projectNameField.setText(configuration.getAttribute(PROPERTY_PROJECTNAME, ""));
 		} catch (CoreException e) {
 			throw new IllegalStateException("cannot init", e);
@@ -161,7 +161,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(PROPERTY_ARGUMENTS, argumentsField.getText());
+		configuration.setAttribute(PROPERTY_TASKS, tasksField.getText());
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
 	}
 

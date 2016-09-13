@@ -50,7 +50,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String projectName = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, "");
-		String arguments = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, "");
+		String arguments = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "");
 
 		executeByHandler(launch, projectName, arguments);
 
@@ -74,7 +74,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						@SuppressWarnings("unchecked")
 						Map<Object, Object> map = values.getParameterValues();
 						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
-						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, arguments);
+						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, arguments);
 						map.put(LAUNCH_ARGUMENT, launch);
 
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };

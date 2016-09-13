@@ -37,7 +37,7 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 public class EGradlePreferencePage
-	extends FieldEditorPreferencePage
+		extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
 	public EGradlePreferencePage() {

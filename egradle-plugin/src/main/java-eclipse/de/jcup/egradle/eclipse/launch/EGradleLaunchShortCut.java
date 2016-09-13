@@ -144,7 +144,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			String projectName = createProjectName(resource);
 			ILaunchConfigurationType configType = getConfigurationType();
 			wc = configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(projectName));
-			wc.setAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS, "assemble");
+			wc.setAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "assemble");
 			wc.setAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
 			wc.setMappedResources(new IResource[] { resource });
 			config = wc.doSave();

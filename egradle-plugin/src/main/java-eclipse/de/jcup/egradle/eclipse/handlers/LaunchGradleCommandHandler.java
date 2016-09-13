@@ -68,7 +68,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			IParameterValues configParamValues = configparameter.getValues();
 			Map<?, ?> values = configParamValues.getParameterValues();
 			String projectName = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME);
-			String commandString = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_ARGUMENTS);
+			String commandString = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS);
 			launch = (ILaunch) values.get(EGradleLaunchDelegate.LAUNCH_ARGUMENT);
 
 			String[] commandStrings = commandString.split(" ");

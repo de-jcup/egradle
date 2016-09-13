@@ -203,6 +203,7 @@
    <!--                          LAUNCHING                                   -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!-- http://scg.unibe.ch/archive/projects/Bals10b-EclipsePlugins.pdf -->
+   
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
         category="de.jcup.egradle.category"
@@ -214,8 +215,13 @@
         public="true"
         
         >
-		</launchConfigurationType>
+       </launchConfigurationType>
 	</extension>
+	<!--
+		FIXME ATR: possibility 1 : remove the category for egradle so its usable via run as ... as all others. but remove gradle run launcher as well!
+		possiblity 2: keep the special launcher button but have no possiblity for run normal - e.g on context menu 
+		
+	-->
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup 
 			class="de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup"
@@ -269,6 +275,7 @@
 			image = "icons/gradle-og.gif"
 			bannerImage = "icons/gradle-banner-image.png">
 		</launchGroup>
+		
 	</extension> 
 	<!-- Launch toolbar-->
 	<extension point="org.eclipse.ui.actionSets">

@@ -3,15 +3,18 @@
 
 <toc label="EGradle table of content" topic="html/overview.html">
 	<topic href="html/overview.html" label="Overview">
+    <anchor id="anchor_overview"/>
  </topic>
 	<topic label="EGradle User Guide"  href="html/user_guide.html">
   <topic href="html/user_guide/setup.html" label="Setup">
+     <anchor id="anchor_setup"/>
   </topic>
   <topic href="html/user_guide/launch_gradle.html" label="Launch gradle">
+     <anchor id="anchor_launch_gradle"/>
   </topic>
-  <topic label="Refresh complete eclipse workspace">
+  <topic href="html/user_guide/refresh_complete_workspace.html" label="Refresh complete eclipse workspace">
   </topic> 
-		<topic href="html/howto_use/editor.html" label="Editor">
+		<topic href="html/user_guide/editor.html" label="Editor">
   </topic> 
 	</topic>
 </toc>
