@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;

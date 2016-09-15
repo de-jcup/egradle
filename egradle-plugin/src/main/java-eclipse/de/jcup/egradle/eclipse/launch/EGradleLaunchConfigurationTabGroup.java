@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.launch;
+package de.jcup.egradle.eclipse.launch;
 
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -26,11 +26,13 @@ public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationT
 	private ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[1];
 
 	public EGradleLaunchConfigurationTabGroup() {
-		int index=0;
-//		tabs[0] = new org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab();
+		int index = 0;
+		// tabs[0] = new
+		// org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab();
 		tabs[index++] = new EGradleLaunchConfigurationMainTab();
-//		tabs[index++] = new org.eclipse.jdt.debug.ui.launchConfigurations.JavaJRETab();
-//		tabs[index++] = new org.eclipse.debug.ui.CommonTab();
+		// tabs[index++] = new
+		// org.eclipse.jdt.debug.ui.launchConfigurations.JavaJRETab();
+		// tabs[index++] = new org.eclipse.debug.ui.CommonTab();
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationT
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		for (int i=0;i<tabs.length;i++){
+		for (int i = 0; i < tabs.length; i++) {
 			tabs[i].initializeFrom(configuration);
 		}
 	}
@@ -60,14 +62,14 @@ public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationT
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		for (int i=0;i<tabs.length;i++){
+		for (int i = 0; i < tabs.length; i++) {
 			tabs[i].performApply(configuration);
 		}
 	}
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		for (int i=0;i<tabs.length;i++){
+		for (int i = 0; i < tabs.length; i++) {
 			tabs[i].setDefaults(configuration);
 		}
 	}

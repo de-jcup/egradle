@@ -30,7 +30,6 @@ import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
@@ -58,7 +57,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	}
 
 	private void executeByHandler(ILaunch launch, String projectName, String arguments) throws CoreException {
-		
+
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
 		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
 		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
@@ -82,7 +81,10 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
 						ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
-						/* execute launch command with parameters - will show progress etc. as well*/
+						/*
+						 * execute launch command with parameters - will show
+						 * progress etc. as well
+						 */
 						handlerService.executeCommand(parametrizedCommand, null);
 
 					} catch (NotDefinedException | ParameterValuesException e) {

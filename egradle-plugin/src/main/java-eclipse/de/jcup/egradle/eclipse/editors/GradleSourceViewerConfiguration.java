@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
@@ -63,8 +63,8 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	protected XMLTagScanner getXMLTagScanner() {
 		if (tagScanner == null) {
 			tagScanner = new XMLTagScanner(colorManager);
-			tagScanner
-					.setDefaultReturnToken(new Token(new TextAttribute(colorManager.getColor(IGradleColorConstants.TAG))));
+			tagScanner.setDefaultReturnToken(
+					new Token(new TextAttribute(colorManager.getColor(IGradleColorConstants.TAG))));
 		}
 		return tagScanner;
 	}
@@ -90,13 +90,11 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 				new TextAttribute(colorManager.getColor(IGradleColorConstants.OTHER_KEYWORDS)));
 		reconciler.setDamager(ndr, XMLPartitionScanner.GRADLE_KEYWORD);
 		reconciler.setRepairer(ndr, XMLPartitionScanner.GRADLE_KEYWORD);
-		ndr = new NonRuleBasedDamagerRepairer(
-				new TextAttribute(colorManager.getColor(IGradleColorConstants.APPLY)));
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(IGradleColorConstants.APPLY)));
 		reconciler.setDamager(ndr, XMLPartitionScanner.GRADLE_APPLY);
 		reconciler.setRepairer(ndr, XMLPartitionScanner.GRADLE_APPLY);
-		
-		ndr = new NonRuleBasedDamagerRepairer(
-				new TextAttribute(colorManager.getColor(IGradleColorConstants.STRING)));
+
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(IGradleColorConstants.STRING)));
 		reconciler.setDamager(ndr, XMLPartitionScanner.GRADLE_STRING);
 		reconciler.setRepairer(ndr, XMLPartitionScanner.GRADLE_STRING);
 

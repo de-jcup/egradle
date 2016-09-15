@@ -13,13 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.config;
+package de.jcup.egradle.core.config;
 
 public interface GradleConfiguration {
 
 	public String getShellForGradleWrapper();
-	
+
 	public boolean isUsingGradleWrapper();
-	
-	
+
 }

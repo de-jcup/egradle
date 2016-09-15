@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.execution;
+package de.jcup.egradle.eclipse.execution;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -23,12 +23,12 @@ import org.eclipse.core.runtime.jobs.Job;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
-public class GradleJob extends Job{
+public class GradleJob extends Job {
 	private GradleExecutionDelegate execution;
-	
+
 	public GradleJob(String name, GradleExecutionDelegate execution) {
 		super(name);
-		this.execution=execution;
+		this.execution = execution;
 	}
 
 	@Override
@@ -36,12 +36,13 @@ public class GradleJob extends Job{
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageDialog.INSTANCE.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageDialog.INSTANCE
+						.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
-			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute "+getName(), e);
+			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute " + getName(), e);
 		}
 		return Status.OK_STATUS;
 	}
-	
+
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.config;
+package de.jcup.egradle.core.config;
 
 public class AlwaysBashWithGradleWrapperConfiguration implements GradleConfiguration {
 

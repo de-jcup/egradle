@@ -299,16 +299,16 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 *            error message when no types are resolved for launching
 	 */
 	private void searchAndLaunch(Object[] resources, String mode, String selectTitle, String emptyMessage) {
-		IResource resource =null;
+		IResource resource = null;
 		Object object = resources[0];
 		// FIXME ATR, 12.08.2016 - ugly implemented. first shot.
-		if (object instanceof IResource){
-			resource=(IResource) object;
-		}else if(object instanceof IAdaptable){
+		if (object instanceof IResource) {
+			resource = (IResource) object;
+		} else if (object instanceof IAdaptable) {
 			IAdaptable adaptable = (IAdaptable) object;
 			resource = getLaunchableResource(adaptable);
-		}else{
-			throw new IllegalArgumentException("Cannot handle object:"+object);
+		} else {
+			throw new IllegalArgumentException("Cannot handle object:" + object);
 		}
 		if (resource != null) {
 			launch(resource, mode);

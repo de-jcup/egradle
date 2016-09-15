@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.execution;
+package de.jcup.egradle.eclipse.execution;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -29,7 +29,7 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 
 	public GradleRunnableWithProgress(GradleExecutionDelegate execution) {
 		notNull(execution, "'execution' may not be null");
-		this.execution=execution;
+		this.execution = execution;
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageDialog.INSTANCE.showWarning("Result was not okay:" + execution.getResult().getResultCode());
+				EGradleMessageDialog.INSTANCE
+						.showWarning("Result was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);

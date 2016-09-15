@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.preferences;
 
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
 /**
@@ -36,30 +36,28 @@ import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-public class EGradlePreferencePage
-		extends FieldEditorPreferencePage
-	implements IWorkbenchPreferencePage {
+
+public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public EGradlePreferencePage() {
 		super(GRID);
 		setPreferenceStore(PREFERENCES.getPreferenceStore());
 		setDescription("EGradle setup");
 	}
-	
+
 	/**
-	 * Creates the field editors. Field editors are abstractions of
-	 * the common GUI blocks needed to manipulate various types
-	 * of preferences. Each field editor knows how to save and
-	 * restore itself.
+	 * Creates the field editors. Field editors are abstractions of the common
+	 * GUI blocks needed to manipulate various types of preferences. Each field
+	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		addField(new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), 
-				"&Gradle root project path:", getFieldEditorParent()));
-		addField(new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), 
-				"&JAVA HOME set for gradle:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path:",
+				getFieldEditorParent()));
+		addField(new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME set for gradle:",
+				getFieldEditorParent()));
 	}
 
 	public void init(IWorkbench workbench) {
 	}
-	
+
 }

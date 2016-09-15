@@ -103,14 +103,14 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 			return null;
 		}
 
-		/* build configuration for gradle run*/
+		/* build configuration for gradle run */
 		GradleConfiguration config = new AlwaysBashWithGradleWrapperConfiguration();
 
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
 		prepareContext(context);
 
-		/* create execution and fetch mode*/
+		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = createGradleExecution(processOutputHandler, context);
 		ExecutionMode mode = getExecutionMode();
 
@@ -138,10 +138,9 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
+			GradleContext context) {
 		return new GradleExecutionDelegate(processOutputHandler, context);
 	}
-
-	
 
 }

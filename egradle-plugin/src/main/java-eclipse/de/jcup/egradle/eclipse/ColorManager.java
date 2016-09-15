@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse;
+package de.jcup.egradle.eclipse;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,18 +25,19 @@ import org.eclipse.swt.widgets.Display;
 
 public class ColorManager {
 
-	protected Map<RGB,Color> fColorTable = new HashMap<>(10);
+	protected Map<RGB, Color> fColorTable = new HashMap<>(10);
 
-	private ColorManager(){
-		
+	private ColorManager() {
+
 	}
-	
+
 	public void dispose() {
 		Iterator<Color> e = fColorTable.values().iterator();
-		while (e.hasNext()){
+		while (e.hasNext()) {
 			e.next().dispose();
 		}
 	}
+
 	public Color getColor(RGB rgb) {
 		Color color = fColorTable.get(rgb);
 		if (color == null) {
@@ -45,8 +46,11 @@ public class ColorManager {
 		}
 		return color;
 	}
+
 	/**
-	 * Creates a new color manager or returns a shared one - depends on implementation
+	 * Creates a new color manager or returns a shared one - depends on
+	 * implementation
+	 * 
 	 * @return color manager
 	 */
 	public static ColorManager instance() {

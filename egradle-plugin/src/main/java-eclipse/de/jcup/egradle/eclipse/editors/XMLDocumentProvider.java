@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
@@ -28,7 +28,8 @@ public class XMLDocumentProvider extends FileDocumentProvider {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
 			IDocumentPartitioner partitioner = new FastPartitioner(new XMLPartitionScanner(),
-					new String[] { XMLPartitionScanner.GRADLE_KEYWORD, XMLPartitionScanner.GRADLE_APPLY,XMLPartitionScanner.GRADLE_COMMENT, XMLPartitionScanner.GRADLE_STRING,});
+					new String[] { XMLPartitionScanner.GRADLE_KEYWORD, XMLPartitionScanner.GRADLE_APPLY,
+							XMLPartitionScanner.GRADLE_COMMENT, XMLPartitionScanner.GRADLE_STRING, });
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
 		}

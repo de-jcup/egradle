@@ -13,13 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.Collections;
@@ -54,21 +51,21 @@ public class GradleExecutorTest {
 		executorToTest = new GradleExecutor(mockedProcessExecutor);
 		mockedRootProject = mock(GradleRootProject.class);
 		mockedContext = mock(GradleContext.class);
-		mockedConfiguration= mock(GradleConfiguration.class);
-		
+		mockedConfiguration = mock(GradleConfiguration.class);
+
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedConfiguration.isUsingGradleWrapper()).thenReturn(true);
 		when(mockedConfiguration.getShellForGradleWrapper()).thenReturn("usedShell");
-		
+
 		mockedCommand1 = mock(GradleCommand.class);
 		mockedCommand2 = mock(GradleCommand.class);
 
 	}
-
+	
 	@Test
 	public void executing_returns_result_not_null() {
-		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Result result = executorToTest.execute(mockedContext);
 		assertNotNull(result);
@@ -76,8 +73,8 @@ public class GradleExecutorTest {
 
 	@Test
 	public void executing_returns_result_being_ok() {
-		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
-		
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
 		Result result = executorToTest.execute(mockedContext);
 		assertNotNull(result);
 		assertTrue(result.isOkay());
@@ -87,26 +84,26 @@ public class GradleExecutorTest {
 	public void executing_gives_command_string_to_process_executor_but_gradle_call_is_before() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
-		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew","eclipse");
+		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
 	}
-	
+
 	@Test
 	public void executing_gives_commands_string_to_process_executor_but_gradle_call_is_before() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedCommand2.getCommand()).thenReturn("cleanEclipse");
-		
-		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1,mockedCommand2});
+
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1, mockedCommand2 });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell","gradlew","eclipse","cleanEclipse");
+		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse", "cleanEclipse");
 	}
-	
+
 	@Test
 	public void executing_uses_given_working_folder() throws Exception {
 		/* prepare */
@@ -114,11 +111,11 @@ public class GradleExecutorTest {
 		File mcokedWorkingFolder = mock(File.class);
 		when(mcokedWorkingFolder.isDirectory()).thenReturn(true);
 		when(mockedRootProject.getFolder()).thenReturn(mcokedWorkingFolder);
-		when(mockedContext.getCommands()).thenReturn(new GradleCommand[]{mockedCommand1});
-		
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, EMPTY_ENV, "usedShell","gradlew","eclipse");
+		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
 	}
 }

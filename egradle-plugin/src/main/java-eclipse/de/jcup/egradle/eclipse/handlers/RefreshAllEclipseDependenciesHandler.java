@@ -13,16 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.handlers;
-
-import java.lang.reflect.InvocationTargetException;
-
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
+package de.jcup.egradle.eclipse.handlers;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -43,37 +34,14 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	}
 
 	@Override
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		return new RefreshAllEclipseProjectsGradleExecution(processOutputHandler, context);
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
+			GradleContext context) {
+		return new UIGradleExecutionDelegate(processOutputHandler, context);
 	}
 
 	@Override
 	protected GradleCommand[] createCommands() {
 		return GradleCommand.build("cleanEclipse", "eclipse");
-	}
-
-	private final class RefreshAllEclipseProjectsGradleExecution extends GradleExecutionDelegate {
-		private RefreshAllEclipseProjectsGradleExecution(ProcessOutputHandler processOutputHandler,
-				GradleContext context) {
-			super(processOutputHandler, context);
-		}
-
-		protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
-			monitor.worked(1);
-			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-			for (IProject project : projects) {
-				try {
-					if (monitor.isCanceled()) {
-						break;
-					}
-					monitor.subTask("refreshing project " + project.getName());
-					project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-				} catch (CoreException e) {
-					throw new InvocationTargetException(e);
-				}
-			}
-			monitor.worked(2);
-		}
 	}
 
 }

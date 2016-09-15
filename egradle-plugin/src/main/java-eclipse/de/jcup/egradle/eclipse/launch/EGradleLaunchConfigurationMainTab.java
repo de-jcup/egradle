@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.launch;
+package de.jcup.egradle.eclipse.launch;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -52,14 +52,13 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		setControl(composite);
 		GridLayout gridLayout = new GridLayout(2, false);
 		composite.setLayout(gridLayout);
-		
-		
+
 		GridData labelGridData = new GridData();
 		labelGridData.horizontalAlignment = GridData.FILL;
 		labelGridData.verticalAlignment = GridData.BEGINNING;
 		labelGridData.grabExcessHorizontalSpace = false;
 		labelGridData.grabExcessVerticalSpace = false;
-		
+
 		GridData projectFieldGridData = new GridData();
 		projectFieldGridData.horizontalAlignment = GridData.FILL;
 		projectFieldGridData.verticalAlignment = GridData.BEGINNING;
@@ -71,7 +70,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		gridData2.verticalAlignment = GridData.FILL;
 		gridData2.grabExcessHorizontalSpace = true;
 		gridData2.grabExcessVerticalSpace = true;
-		
+
 		Label label1 = new Label(composite, SWT.NULL);
 		label1.setText("Project: ");
 		label1.setLayoutData(labelGridData);
@@ -91,7 +90,6 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		Label label = new Label(composite, SWT.NULL);
 		label.setText("Tasks: ");
 		label.setLayoutData(labelGridData);
-
 
 		tasksField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
 		tasksField.setLayoutData(gridData2);
@@ -122,13 +120,14 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		IProject project = getProject();
-		if (project!=null){
+		if (project != null) {
 			configuration.setAttribute(PROPERTY_PROJECTNAME, project.getName());
 		}
 	}
 
 	/**
 	 * Try to resolve the project
+	 * 
 	 * @return project or <code>null</code>
 	 */
 	private IProject getProject() {

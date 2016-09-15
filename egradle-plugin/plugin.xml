@@ -200,7 +200,7 @@
 	   </consoleFactory>
    </extension>
   <extension point="org.eclipse.ui.console.consolePageParticipants">
-	<consolePageParticipant class="de.jcup.egradle.eclipse.console.EGradleProcessConsolePageParticipant" id="de.jcup.egradle.eclipse.console.AnsiConsolePageParticipant">
+	<consolePageParticipant class="de.jcup.egradle.eclipse.console.EGradleConsolePageParticipant" id="de.jcup.egradle.eclipse.console.AnsiConsolePageParticipant">
 		<enablement>
 			<instanceof value="org.eclipse.ui.console.IConsole" />
 		</enablement>

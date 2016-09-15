@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;
@@ -28,13 +28,10 @@ import de.jcup.egradle.eclipse.ColorManager;
 public class XMLScanner extends RuleBasedScanner {
 
 	public XMLScanner(ColorManager manager) {
-		IToken procInstr =
-			new Token(
-				new TextAttribute(
-					manager.getColor(IGradleColorConstants.PROC_INSTR)));
+		IToken procInstr = new Token(new TextAttribute(manager.getColor(IGradleColorConstants.PROC_INSTR)));
 
 		IRule[] rules = new IRule[2];
-		//Add rule for processing instructions
+		// Add rule for processing instructions
 		rules[0] = new SingleLineRule("<?", "?>", procInstr);
 		// Add generic whitespace rule.
 		rules[1] = new WhitespaceRule(new XMLWhitespaceDetector());

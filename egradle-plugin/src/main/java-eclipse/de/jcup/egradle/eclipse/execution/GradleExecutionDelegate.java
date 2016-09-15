@@ -33,7 +33,8 @@ import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 
 /**
- * Execution delegate, used by {@link GradleJob} and {@link GradleRunnableWithProgress}
+ * Execution delegate, used by {@link GradleJob} and
+ * {@link GradleRunnableWithProgress}
  * 
  * @author Albert Tregnaghi
  *
@@ -74,14 +75,17 @@ public class GradleExecutionDelegate {
 
 		GradleRootProject rootProject = context.getRootProject();
 		String commandString = context.getCommandString();
-		String progressDescription = "Executing gradle commands:" + commandString+" in "+context.getRootProject().getFolder().getAbsolutePath();
-		
-		
+		String progressDescription = "Executing gradle commands:" + commandString + " in "
+				+ context.getRootProject().getFolder().getAbsolutePath();
+
 		File folder = rootProject.getFolder();
 		String rootProjectFolderName = folder.getName();
-		String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date());
+		String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
+				.format(new Date());
 
 		monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
+		beforeExecutionDone(monitor);
+
 		processOutputHandler.output("\n" + executionStartTime + " " + progressDescription);
 		processOutputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
@@ -89,7 +93,7 @@ public class GradleExecutionDelegate {
 		if (!result.isOkay()) {
 			processOutputHandler.output("[OK]");
 			return;
-		}else{
+		} else {
 			processOutputHandler.output("[FAILED]");
 		}
 		try {
@@ -101,7 +105,12 @@ public class GradleExecutionDelegate {
 		monitor.done();
 	}
 
+	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
+		/* per default do nothing */
+	}
+
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
 		/* per default do nothing */
 	}
+
 }

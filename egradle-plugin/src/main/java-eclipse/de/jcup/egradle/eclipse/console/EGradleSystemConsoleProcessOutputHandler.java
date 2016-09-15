@@ -13,23 +13,22 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.console;
+package de.jcup.egradle.eclipse.console;
 
 import org.eclipse.ui.console.MessageConsoleStream;
 
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 
-public class EGradleSystemConsoleProcessOutputHandler implements ProcessOutputHandler{
+public class EGradleSystemConsoleProcessOutputHandler implements ProcessOutputHandler {
 
-	
 	private MessageConsoleStream messageStream;
 
-	public EGradleSystemConsoleProcessOutputHandler(){
+	public EGradleSystemConsoleProcessOutputHandler() {
 		this.messageStream = EGradleSystemConsoleFactory.INSTANCE.getConsole().newMessageStream();
-		/* always UTF-8 encoding*/
+		/* always UTF-8 encoding */
 		messageStream.setEncoding("UTF-8");
 	}
-	
+
 	@Override
 	public void output(String line) {
 		messageStream.println(line);

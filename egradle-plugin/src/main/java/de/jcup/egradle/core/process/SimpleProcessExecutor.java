@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -36,13 +36,13 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 	@Override
 	public int execute(File workingDirectory, Map<String, String> env, String... commands) throws IOException {
-		if (workingDirectory!=null){
-			if (! workingDirectory.exists()){
-				throw new FileNotFoundException("Workign directory does not exist:"+workingDirectory);
+		if (workingDirectory != null) {
+			if (!workingDirectory.exists()) {
+				throw new FileNotFoundException("Workign directory does not exist:" + workingDirectory);
 			}
 		}
 		ProcessBuilder pb = new ProcessBuilder(commands);
-		
+
 		/* init environment */
 		if (env != null) {
 			Map<String, String> pbEnv = pb.environment();
@@ -53,12 +53,12 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		/* init working directory */
 		pb.directory(workingDirectory);
 		pb.redirectErrorStream(true);
-		
+
 		Date started = new Date();
 		Process p = pb.start();
-		handleProcessStarted(p,started,workingDirectory, env,commands);
+		handleProcessStarted(p, started, workingDirectory, env, commands);
 		handleOutputStreams(p);
-		while (p.isAlive()){
+		while (p.isAlive()) {
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
@@ -78,11 +78,12 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	}
 
 	protected void handleProcessEnd(Process p) {
-		
+
 	}
 
-	protected void handleProcessStarted(Process p, Date started, File workingDirectory, Map<String, String> env, String[] commands) {
-		
+	protected void handleProcessStarted(Process p, Date started, File workingDirectory, Map<String, String> env,
+			String[] commands) {
+
 	}
 
 }

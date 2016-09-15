@@ -13,9 +13,8 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.domain;
+package de.jcup.egradle.core.domain;
 
-public abstract class AbstractGradleProject implements GradleProject{
-
+public abstract class AbstractGradleProject implements GradleProject {
 
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 
@@ -25,7 +25,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
+	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#
+	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
 		/* currently we got no defaults */

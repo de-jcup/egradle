@@ -13,30 +13,32 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.domain;
+package de.jcup.egradle.core.domain;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.File;
 import java.io.IOException;
 
-public class GradleRootProject extends AbstractGradleProject{
+public class GradleRootProject extends AbstractGradleProject {
 
 	private File file;
 
 	/**
 	 * Creates a gradle root project
+	 * 
 	 * @param file
-	 * @throws IOException when given fils is not a directory or does not exists
+	 * @throws IOException
+	 *             when given fils is not a directory or does not exists
 	 */
-	public GradleRootProject(File file) throws IOException{
+	public GradleRootProject(File file) throws IOException {
 		notNull(file);
-		if (!file.isDirectory()){
-			throw new IOException("Gradle root project not creatable, beacuse not a directory:"+file);
+		if (!file.isDirectory()) {
+			throw new IOException("Gradle root project not creatable, beacuse not a directory:" + file);
 		}
-		this.file=file;
+		this.file = file;
 	}
-	
+
 	public File getFolder() {
 		return file;
 	}

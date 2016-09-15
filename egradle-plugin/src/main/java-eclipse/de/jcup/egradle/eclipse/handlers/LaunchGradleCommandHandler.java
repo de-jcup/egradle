@@ -49,9 +49,11 @@ import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
- * normal handlers but it supports (and needs) a launch object as parameter as well!
- * <br></br>
- * The handler does produce a RuntimeProcess object which consumes console output to handler 
+ * normal handlers but it supports (and needs) a launch object as parameter as
+ * well! <br>
+ * </br>
+ * The handler does produce a RuntimeProcess object which consumes console
+ * output to handler
  * 
  * @author Albert Tregnaghi
  *
@@ -87,65 +89,76 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		return super.execute(event);
 	}
 
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		return new GradleExecutionDelegate(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler) {
-			@Override
-			protected void handleProcessStarted(Process process, Date started, File workingDirectory, Map<String, String> env,
-					String[] commands) {
-				String label = context.getCommandString();
-				String path = "inside root project";
-				
-				Map<String, String> attributes = new HashMap<>();
-				String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(started);
-				/* Will be shown in process information dialog - see org.eclipse.debug.internal.ui.preferences.ProcessPropertyPage*/ 
-				attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
-				attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING,"UTF-8");
-				attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
-				attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
-				attributes.put(DebugPlugin.ATTR_PATH, path);
-				
-				/* using an unbreakable space 00A0 to avoid unnecessary breaks in view*/
-				String cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
-				
-				attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
-				/*
-				 * bind process to runtime process, so visible and correct
-				 * handled in debug UI
-				 */
-				EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label,
-						attributes);
-//				rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
-				
-				processOutputHandler.output("Launch started - for details see output of "+label);
-				if (!rp.canTerminate()){
-					processOutputHandler.output("Started process cannot terminate");
-				}
-			}
-			
-			@Override
-			protected void handleOutputStreams(Process p) throws IOException {
-				/* do nothing - is printed to console output on current launcher*/
-			}
-			
-		});
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
+			GradleContext context) {
+		return new GradleExecutionDelegate(processOutputHandler, context,
+				new SimpleProcessExecutor(processOutputHandler) {
+					@Override
+					protected void handleProcessStarted(Process process, Date started, File workingDirectory,
+							Map<String, String> env, String[] commands) {
+						String label = context.getCommandString();
+						String path = "inside root project";
+
+						Map<String, String> attributes = new HashMap<>();
+						String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
+								.format(started);
+						/*
+						 * Will be shown in process information dialog - see
+						 * org.eclipse.debug.internal.ui.preferences.
+						 * ProcessPropertyPage
+						 */
+						attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
+						attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
+						attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
+						attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
+						attributes.put(DebugPlugin.ATTR_PATH, path);
+
+						/*
+						 * using an unbreakable space 00A0 to avoid unnecessary
+						 * breaks in view
+						 */
+						String cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
+
+						attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
+						/*
+						 * bind process to runtime process, so visible and
+						 * correct handled in debug UI
+						 */
+						EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label, attributes);
+						// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
+
+						processOutputHandler.output("Launch started - for details see output of " + label);
+						if (!rp.canTerminate()) {
+							processOutputHandler.output("Started process cannot terminate");
+						}
+					}
+
+					@Override
+					protected void handleOutputStreams(Process p) throws IOException {
+						/*
+						 * do nothing - is printed to console output on current
+						 * launcher
+						 */
+					}
+
+				});
 	}
-	
-	private class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener{
+
+	private class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener {
 
 		public EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
 			super(launch, process, name, attributes);
 		}
-		
+
 		@Override
 		protected IStreamsProxy createStreamsProxy() {
 			return super.createStreamsProxy();
 		}
-		
 
 		@Override
 		public void streamAppended(String text, IStreamMonitor monitor) {
 		}
-		
+
 	}
 
 	@Override

@@ -13,25 +13,21 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.console;
+package de.jcup.egradle.eclipse.console;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 
-public class EGradleSystemConsole extends MessageConsole{
-	
+public class EGradleSystemConsole extends MessageConsole {
 
 	public EGradleSystemConsole(String name, ImageDescriptor imageDescriptor) {
 		super(name, imageDescriptor);
 	}
-	
+
 	@Override
 	public MessageConsoleStream newMessageStream() {
 		return super.newMessageStream();
 	}
-	
-	
-	 
 
 }

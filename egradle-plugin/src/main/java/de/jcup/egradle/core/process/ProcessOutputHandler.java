@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 public interface ProcessOutputHandler {
 

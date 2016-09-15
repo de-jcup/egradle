@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse;
+package de.jcup.egradle.eclipse;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -46,7 +46,9 @@ public class Activator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.
+	 * BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -55,7 +57,9 @@ public class Activator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.
+	 * BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
@@ -72,30 +76,30 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
 	 *
-	 * @param path the path
+	 * @param path
+	 *            the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
 
-    public void addViewer(StyledText viewer, IConsolePageParticipant participant) {
-        viewers.put(viewer, participant);
-    }
+	public void addViewer(StyledText viewer, IConsolePageParticipant participant) {
+		viewers.put(viewer, participant);
+	}
 
-    public void removeViewerWithPageParticipant(IConsolePageParticipant participant) {
-        Set<StyledText> toRemove = new HashSet<StyledText>();
+	public void removeViewerWithPageParticipant(IConsolePageParticipant participant) {
+		Set<StyledText> toRemove = new HashSet<StyledText>();
 
-        for (StyledText viewer : viewers.keySet()) {
-            if (viewers.get(viewer) == participant)
-                toRemove.add(viewer);
-        }
+		for (StyledText viewer : viewers.keySet()) {
+			if (viewers.get(viewer) == participant)
+				toRemove.add(viewer);
+		}
 
-        for (StyledText viewer : toRemove)
-            viewers.remove(viewer);
-    }
+		for (StyledText viewer : toRemove)
+			viewers.remove(viewer);
+	}
 }

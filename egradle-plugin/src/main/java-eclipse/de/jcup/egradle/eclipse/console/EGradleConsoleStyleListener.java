@@ -30,14 +30,15 @@ import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.eclipse.ColorManager;
 
-public class EGradleProcesssConsoleStyleListener implements LineStyleListener {
+public class EGradleConsoleStyleListener implements LineStyleListener {
 	private final static Collection<ParseData> SHARED_PARSE_DATA = new ArrayList<>();
 	static {
 		addParseDataByIndex("BUILD SUCCESSFUL", GREEN);
 		addParseDataByIndex("BUILD FAILED", RED);
 		addParseDataByIndex("UP-TO-DATE", ORANGE);
 		addParseDataByIndex("FAILURE:", BRIGHT_RED);
-
+		addParseDataByIndex("test FAILED", RED);
+		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
 	}
 
 	static final void addParseDataByIndex(String substring, RGB color) {

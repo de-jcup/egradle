@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.console;
+package de.jcup.egradle.eclipse.console;
 
 import org.eclipse.swt.graphics.RGB;
 
@@ -31,7 +31,7 @@ public class EGradleConsoleColorsConstants {
 	public static final RGB BRIGHT_RED = new RGB(255, 85, 85);
 	public static final RGB BRIGHT_GREEN = new RGB(85, 255, 85);
 	public static final RGB YELLOW = new RGB(255, 255, 85);
-	public static final RGB ORANGE = new RGB(255, 165, 0); //http://www.rapidtables.com/web/color/orange-color.htm
+	public static final RGB ORANGE = new RGB(255, 165, 0); // http://www.rapidtables.com/web/color/orange-color.htm
 	public static final RGB BRIGHT_BLUE = new RGB(85, 85, 255);
 	public static final RGB BRIGHT_MAGENTA = new RGB(255, 85, 255);
 

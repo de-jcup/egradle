@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -36,6 +36,7 @@ public class XMLDoubleClickStrategy implements ITextDoubleClickStrategy {
 			selectWord(pos);
 		}
 	}
+
 	protected boolean selectComment(int caretPos) {
 		IDocument doc = fText.getDocument();
 		int startPos, endPos;
@@ -84,6 +85,7 @@ public class XMLDoubleClickStrategy implements ITextDoubleClickStrategy {
 
 		return false;
 	}
+
 	protected boolean selectWord(int caretPos) {
 
 		IDocument doc = fText.getDocument();

@@ -13,25 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class SimpleProcessExecutorTestUI {
 
-
 	public static void main(String[] args) throws IOException {
-		SimpleProcessExecutor executorToTest=new SimpleProcessExecutor(new SystemOutOutputHandler());
-		
+		SimpleProcessExecutor executorToTest = new SimpleProcessExecutor(new SystemOutOutputHandler());
+
 		File folder = new File("./../");
-		System.out.println("folder:"+folder.getCanonicalPath());
+		System.out.println("folder:" + folder.getCanonicalPath());
 		Map<String, String> env = new HashMap<>();
-		env.put("JAVA_HOME","C:/dev_custom/java/jdk/jdk8u_25/jre");
-		
-		executorToTest.execute(folder, env, "bash", "gradlew","cleanEclipse","eclipse");
+		env.put("JAVA_HOME", "C:/dev_custom/java/jdk/jdk8u_25/jre");
+
+		executorToTest.execute(folder, env, "bash", "gradlew", "cleanEclipse", "eclipse");
 	}
 }

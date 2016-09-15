@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.popup.actions;
+package de.jcup.egradle.eclipse.popup.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -26,7 +26,7 @@ import org.eclipse.ui.IWorkbenchPart;
 public class EGradleAction implements IObjectActionDelegate {
 
 	private Shell shell;
-	
+
 	/**
 	 * Constructor for Action1.
 	 */
@@ -45,10 +45,7 @@ public class EGradleAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(
-			shell,
-			"Egradle",
-			"My gradle action(TBD) was executed.");
+		MessageDialog.openInformation(shell, "Egradle", "My gradle action(TBD) was executed.");
 	}
 
 	/**

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.editors;
 
 import org.eclipse.ui.editors.text.TextEditor;
 
@@ -29,6 +29,7 @@ public class GradleEditor extends TextEditor {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
 		setDocumentProvider(new XMLDocumentProvider());
 	}
+
 	@Override
 	public void dispose() {
 		colorManager.dispose();
