@@ -17,13 +17,15 @@
 
 import org.eclipse.ui.editors.text.TextEditor;
 
+import de.jcup.egradle.eclipse.ColorManager;
+
 public class GradleEditor extends TextEditor {
 
 	private ColorManager colorManager;
 
 	public GradleEditor() {
 		super();
-		colorManager = new ColorManager();
+		colorManager = ColorManager.instance();
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
 		setDocumentProvider(new XMLDocumentProvider());
 	}

@@ -35,7 +35,7 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
-import de.jcup.egradle.eclipse.console.EGradleConsoleProcessOutputHandler;
+import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
@@ -56,7 +56,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 	}
 
 	protected void init() {
-		this.processOutputHandler = new EGradleConsoleProcessOutputHandler();
+		this.processOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
 	}
 
 	protected abstract GradleCommand[] createCommands();
@@ -103,15 +103,18 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 			return null;
 		}
 
+		/* build configuration for gradle run*/
 		GradleConfiguration config = new AlwaysBashWithGradleWrapperConfiguration();
 
+		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
 		prepareContext(context);
 
+		/* create execution and fetch mode*/
 		GradleExecutionDelegate execution = createGradleExecution(processOutputHandler, context);
-
 		ExecutionMode mode = getExecutionMode();
 
+		/* execute */
 		switch (mode) {
 		case BLOCK_UI__CANCEABLE:
 			try {
@@ -120,7 +123,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler {
 				progressService.busyCursorWhile(runnable);
 
 			} catch (InvocationTargetException | InterruptedException e) {
-				throw new ExecutionException("Cannot refresh all projects ...", e);
+				throw new ExecutionException("Cannot execute action...", e);
 			}
 			break;
 		case RUN_IN_BACKGROUND__CANCEABLE:

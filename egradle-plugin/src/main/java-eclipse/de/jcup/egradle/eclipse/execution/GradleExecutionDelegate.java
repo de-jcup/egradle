@@ -74,7 +74,7 @@ public class GradleExecutionDelegate {
 
 		GradleRootProject rootProject = context.getRootProject();
 		String commandString = context.getCommandString();
-		String progressDescription = "Executing gradle commands:" + commandString;
+		String progressDescription = "Executing gradle commands:" + commandString+" in "+context.getRootProject().getFolder().getAbsolutePath();
 		
 		
 		File folder = rootProject.getFolder();
@@ -87,7 +87,10 @@ public class GradleExecutionDelegate {
 
 		result = executor.execute(context);
 		if (!result.isOkay()) {
+			processOutputHandler.output("[OK]");
 			return;
+		}else{
+			processOutputHandler.output("[FAILED]");
 		}
 		try {
 			afterExecutionDone(monitor);

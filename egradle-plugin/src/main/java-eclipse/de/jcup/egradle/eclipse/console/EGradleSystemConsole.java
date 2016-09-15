@@ -17,11 +17,21 @@
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 
-public class EGradleConsole extends MessageConsole{
+public class EGradleSystemConsole extends MessageConsole{
+	
 
-	public EGradleConsole(String name, ImageDescriptor imageDescriptor) {
+	public EGradleSystemConsole(String name, ImageDescriptor imageDescriptor) {
 		super(name, imageDescriptor);
 	}
+	
+	@Override
+	public MessageConsoleStream newMessageStream() {
+		return super.newMessageStream();
+	}
+	
+	
+	 
 
 }

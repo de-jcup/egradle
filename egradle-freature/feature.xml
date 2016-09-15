@@ -2,7 +2,8 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle-freature"
-      version="0.3.0.beta">
+      version="0.3.0.beta"
+      provider-name="Albert Tregnaghi">
 
    <description>
       EGradle - an easy, minimalistic gradle integration for eclipse
@@ -79,6 +80,10 @@ You may add Your own copyright statement to Your modifications and may provide a
 
 END OF TERMS AND CONDITIONS
    </license>
+
+   <url>
+      <update label="EGradle update site" url="https://raw.githubusercontent.com/de-jcup/egradle/master/egradle-updatesite/"/>
+   </url>
 
    <plugin
          id="de.jcup.egradle.eclipse.plugin"

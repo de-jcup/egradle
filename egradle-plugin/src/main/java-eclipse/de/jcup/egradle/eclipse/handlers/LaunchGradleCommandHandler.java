@@ -32,7 +32,10 @@ import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStreamMonitor;
+import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.debug.core.model.RuntimeProcess;
 
 import de.jcup.egradle.core.domain.GradleCommand;
@@ -96,6 +99,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(started);
 				/* Will be shown in process information dialog - see org.eclipse.debug.internal.ui.preferences.ProcessPropertyPage*/ 
 				attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
+				attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING,"UTF-8");
 				attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
 				attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
 				attributes.put(DebugPlugin.ATTR_PATH, path);
@@ -108,11 +112,13 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				 * bind process to runtime process, so visible and correct
 				 * handled in debug UI
 				 */
-				RuntimeProcess rp = new RuntimeProcess(launch, process, label,
+				EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label,
 						attributes);
+//				rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
+				
 				processOutputHandler.output("Launch started - for details see output of "+label);
 				if (!rp.canTerminate()){
-					processOutputHandler.output("Started process cannot be terminated!");
+					processOutputHandler.output("Started process cannot terminate");
 				}
 			}
 			
@@ -122,6 +128,24 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			}
 			
 		});
+	}
+	
+	private class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener{
+
+		public EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
+			super(launch, process, name, attributes);
+		}
+		
+		@Override
+		protected IStreamsProxy createStreamsProxy() {
+			return super.createStreamsProxy();
+		}
+		
+
+		@Override
+		public void streamAppended(String text, IStreamMonitor monitor) {
+		}
+		
 	}
 
 	@Override

@@ -23,6 +23,8 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
+import de.jcup.egradle.eclipse.ColorManager;
+
 public class XMLScanner extends RuleBasedScanner {
 
 	public XMLScanner(ColorManager manager) {

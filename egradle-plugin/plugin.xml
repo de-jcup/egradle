@@ -194,11 +194,18 @@
    <!-- http://stackoverflow.com/questions/29783017/add-custom-console-to-eclipse-console-list -->
    <extension point="org.eclipse.ui.console.consoleFactories">
 	   <consoleFactory
-	         class="de.jcup.egradle.eclipse.console.EGradleConsoleFactory"
+	         class="de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory"
 	         icon="icons/gradle-og.gif"
-	         label="EGradle Console">
+	         label="EGradle system console">
 	   </consoleFactory>
    </extension>
+  <extension point="org.eclipse.ui.console.consolePageParticipants">
+	<consolePageParticipant class="de.jcup.egradle.eclipse.console.EGradleProcessConsolePageParticipant" id="de.jcup.egradle.eclipse.console.AnsiConsolePageParticipant">
+		<enablement>
+			<instanceof value="org.eclipse.ui.console.IConsole" />
+		</enablement>
+	</consolePageParticipant>
+  </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          LAUNCHING                                   -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

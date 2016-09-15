@@ -19,12 +19,13 @@ import org.eclipse.ui.console.MessageConsoleStream;
 
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 
-public class EGradleConsoleProcessOutputHandler implements ProcessOutputHandler{
+public class EGradleSystemConsoleProcessOutputHandler implements ProcessOutputHandler{
 
+	
 	private MessageConsoleStream messageStream;
 
-	public EGradleConsoleProcessOutputHandler(){
-		this.messageStream = EGradleConsoleFactory.INSTANCE.getConsole().newMessageStream();
+	public EGradleSystemConsoleProcessOutputHandler(){
+		this.messageStream = EGradleSystemConsoleFactory.INSTANCE.getConsole().newMessageStream();
 		/* always UTF-8 encoding*/
 		messageStream.setEncoding("UTF-8");
 	}
