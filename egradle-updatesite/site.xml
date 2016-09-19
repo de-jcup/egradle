@@ -4,4 +4,5 @@
       Official update site for egradle
    </description>
    <feature url="features/de.jcup.egradle.eclipse.feature_0.3.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.3.0.beta"/>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.4.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.4.0.beta"/>
 </site>
