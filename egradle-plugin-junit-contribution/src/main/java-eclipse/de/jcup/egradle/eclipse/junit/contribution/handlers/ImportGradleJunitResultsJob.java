@@ -23,12 +23,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.swt.widgets.Display;
@@ -106,6 +103,8 @@ public class ImportGradleJunitResultsJob extends Job {
 			});
 		} catch (Exception e) {
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot import junit results", e);
+		} finally{
+			monitor.done();
 		}
 		return Status.OK_STATUS;
 	}
