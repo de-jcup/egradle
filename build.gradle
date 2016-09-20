@@ -54,7 +54,7 @@ subprojects {
 	
 	 /* per default GRADLE stops the build if one single test fails ...*/
     test { 
-        ignoreFailures = true 
+        ignoreFailures = false 
     }
 	
 	task sourcesJar(type: Jar, dependsOn:classes) {

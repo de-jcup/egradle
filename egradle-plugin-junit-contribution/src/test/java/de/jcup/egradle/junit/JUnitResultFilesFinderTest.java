@@ -59,7 +59,7 @@ public class JUnitResultFilesFinderTest {
 		Collection<File> result = collectorToTest.findTestFilesInRootProjectFolder(ROOTFOLDER_1);
 		assertNotNull(result);
 		
-		assertEquals(3, result.size());
+		assertEquals("Expected 3 results but got:"+result.size(), 3, result.size());
 		
 	}
 
