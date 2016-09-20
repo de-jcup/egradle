@@ -7,6 +7,9 @@
 ## In a nutshell
 EGradle is a lightweight gradle integration for eclipse
 
+More information can be found inside [Wiki](https://github.com/de-jcup/egradle/wiki).
+
+
 ## License
 EGradle is under Apache 2.0 license (http://www.apache.org/licenses/LICENSE-2.0)
 
