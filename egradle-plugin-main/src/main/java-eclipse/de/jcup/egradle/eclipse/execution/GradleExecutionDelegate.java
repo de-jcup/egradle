@@ -42,7 +42,7 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 public class GradleExecutionDelegate {
 
 	private GradleContext context;
-	private ProcessOutputHandler processOutputHandler;
+	private ProcessOutputHandler systemConsoleOutputHandler;
 	private Result result;
 	protected GradleExecutor executor;
 
@@ -57,10 +57,10 @@ public class GradleExecutionDelegate {
 	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context,
 			ProcessExecutor processExecutor) {
 		notNull(context, "'context' may not be null");
-		notNull(processOutputHandler, "'processOutputHandler' may not be null");
+		notNull(processOutputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
 		this.context = context;
-		this.processOutputHandler = processOutputHandler;
+		this.systemConsoleOutputHandler = processOutputHandler;
 		executor = new GradleExecutor(processExecutor);
 	}
 
@@ -86,15 +86,15 @@ public class GradleExecutionDelegate {
 		monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
 		beforeExecutionDone(monitor);
 
-		processOutputHandler.output("\n" + executionStartTime + " " + progressDescription);
-		processOutputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
+		systemConsoleOutputHandler.output("\n" + executionStartTime + " " + progressDescription);
+		systemConsoleOutputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
 		result = executor.execute(context);
-		if (!result.isOkay()) {
-			processOutputHandler.output("[OK]");
+		if (result.isOkay()) {
+			systemConsoleOutputHandler.output("[OK]");
 			return;
 		} else {
-			processOutputHandler.output("[FAILED]");
+			systemConsoleOutputHandler.output("[FAILED]");
 		}
 		try {
 			afterExecutionDone(monitor);
