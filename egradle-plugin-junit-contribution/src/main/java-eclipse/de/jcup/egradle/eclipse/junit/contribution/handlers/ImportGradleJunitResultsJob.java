@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.junit.JUnitCore;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.w3c.dom.Document;
 
@@ -39,7 +40,7 @@ import de.jcup.egradle.junit.JUnitResultFilesFinder;
 import de.jcup.egradle.junit.JUnitResultsCompressor;
 
 public class ImportGradleJunitResultsJob extends Job {
-	
+
 	XMLWriter writer = new XMLWriter();
 	JUnitResultsCompressor compressor = new JUnitResultsCompressor();
 	JUnitResultFilesFinder finder = new JUnitResultFilesFinder();
@@ -65,6 +66,21 @@ public class ImportGradleJunitResultsJob extends Job {
 			File rootFolder = EGradleUtil.getRootProjectFolder();
 
 			Collection<File> files = finder.findTestFilesInRootProjectFolder(rootFolder);
+			if (files.isEmpty()){
+				monitor.worked(100);
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						monitor.worked(100);
+						MessageDialog.openInformation(EGradleUtil.getActiveWorkbenchShell(), 
+								"No test results found",
+								"There are no test results to import from root project:\n'"+rootFolder.getAbsolutePath()+"'\n\nMaybe you have cleaned your project or did you forget to execute your tests?");
+					}
+				});
+				return Status.OK_STATUS;
+			
+			}
 			List<InputStream> streams = new ArrayList<>();
 			for (File file : files) {
 				streams.add(new FileInputStream(file));
