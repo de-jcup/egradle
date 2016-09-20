@@ -15,12 +15,12 @@
  */
 package de.jcup.egradle.core.domain;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
 
@@ -35,12 +35,16 @@ public class GradleContext {
 
 	private GradleRootProject rootProject;
 
-	private Map<String, String> properties = new HashMap<>();
-	private Map<String, String> environment = new HashMap<>();
+	/* we use tree map to have keys always automatically sorted - easier to debug and read */
+	private Map<String, String> environment = new TreeMap<>();
+	private Map<String, String> systemProperties = new TreeMap<>();
+	private Map<String, String> gradleProperties = new TreeMap<>();
+
 	private GradleCommand[] commands;
 	private GradleConfiguration configuration;
 
 	public int amountOfWorkToDo = 1;
+
 
 	public GradleContext(GradleRootProject rootProject, GradleConfiguration configuration) {
 		notNull(rootProject, "root project may not be null!");
@@ -80,10 +84,6 @@ public class GradleContext {
 		return Collections.unmodifiableMap(environment);
 	}
 
-	public String getProperty(String key) {
-		return properties.get(key);
-	}
-
 	public GradleRootProject getRootProject() {
 		return rootProject;
 	}
@@ -100,7 +100,21 @@ public class GradleContext {
 		environment.put(key, value);
 	}
 
-	public void setProperty(String key, String value) {
-		properties.put(key, value);
+	/**
+	 * Returns gradle parameters - will be used with -P option
+	 * 
+	 * @return gradle parameter map
+	 */
+	public Map<String, String> getGradleProperties() {
+		return gradleProperties;
+	}
+
+	/**
+	 * Returns system parameters - will be used with -D option
+	 * 
+	 * @return system parameter map
+	 */
+	public Map<String, String> getSystemProperties() {
+		return systemProperties;
 	}
 }

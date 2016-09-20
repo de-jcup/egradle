@@ -20,6 +20,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
@@ -62,7 +63,7 @@ public class GradleExecutorTest {
 		mockedCommand2 = mock(GradleCommand.class);
 
 	}
-	
+
 	@Test
 	public void executing_returns_result_not_null() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -89,6 +90,57 @@ public class GradleExecutorTest {
 		executorToTest.execute(mockedContext);
 		/* test */
 		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
+	}
+
+	@Test
+	public void gradle_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> gradleProperties = new HashMap<>();
+		gradleProperties.put("gradle.test.property", "test");
+		when(mockedContext.getGradleProperties()).thenReturn(gradleProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
+				"-Pgradle.test.property=test");
+	}
+
+	@Test
+	public void system_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> systemProperties = new HashMap<>();
+		systemProperties.put("system.test.property", "test");
+		when(mockedContext.getSystemProperties()).thenReturn(systemProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
+				"-Dsystem.test.property=test");
+	}
+
+	@Test
+	public void gradle_properties_and_then_system_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> systemProperties = new HashMap<>();
+		Map<String, String> gradleProperties = new HashMap<>();
+		gradleProperties.put("gradle.test.property", "test");
+		systemProperties.put("system.test.property", "test");
+		when(mockedContext.getSystemProperties()).thenReturn(systemProperties);
+		when(mockedContext.getGradleProperties()).thenReturn(gradleProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test");
 	}
 
 	@Test

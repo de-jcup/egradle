@@ -22,17 +22,20 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.ILaunchConfigurationTabGroup;
 
+import de.jcup.egradle.eclipse.Activator;
+
 public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationTabGroup {
-	private ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[1];
+	public static final String GRADLE_PROPERTIES = Activator.PLUGIN_ID+".gradleProperties";
+	public static final String SYSTEM_PROPERTIES = Activator.PLUGIN_ID+".systemProperties";
+	
+	private ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[4];
 
 	public EGradleLaunchConfigurationTabGroup() {
 		int index = 0;
-		// tabs[0] = new
-		// org.eclipse.jdt.debug.ui.launchConfigurations.JavaMainTab();
 		tabs[index++] = new EGradleLaunchConfigurationMainTab();
-		// tabs[index++] = new
-		// org.eclipse.jdt.debug.ui.launchConfigurations.JavaJRETab();
-		// tabs[index++] = new org.eclipse.debug.ui.CommonTab();
+		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Gradle properties","icons/launch-gradleproperties.gif", GRADLE_PROPERTIES);
+		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("System properties","icons/launch-systemproperties.gif", SYSTEM_PROPERTIES);
+		tabs[index++] = new org.eclipse.debug.ui.EnvironmentTab();
 	}
 
 	@Override

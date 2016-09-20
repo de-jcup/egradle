@@ -20,20 +20,29 @@ import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceC
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.eclipse.Activator;
@@ -41,6 +50,30 @@ import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class EGradleUtil {
 
+	
+	/**
+	 * Get image by path from image registry. If not already registered a new image will be created and registered. If not createable a fallback image is used instead
+	 * @param path
+	 * @return image
+	 */
+	public static Image getImage(String path){
+		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
+		Image image = imageRegistry.get(path);
+		if (image==null){
+			Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
+			
+			URL url = FileLocator.find(bundle, new Path(path), null);
+			
+			ImageDescriptor imageDesc = ImageDescriptor.createFromURL(url);
+			image = imageDesc.createImage();
+			if (image==null){
+				image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
+			}
+			imageRegistry.put(path, image);
+		}
+		return image;
+	}
+	
 	public static Shell getActiveWorkbenchShell() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		Shell shell = null;
@@ -73,7 +106,7 @@ public class EGradleUtil {
 
 	}
 
-	public static void log(Status status) {
+	public static void log(IStatus status) {
 		Activator.getDefault().getLog().log(status);
 	}
 

@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +31,12 @@ import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.core.commands.common.NotDefinedException;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.variables.IStringVariableManager;
+import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamMonitor;
@@ -43,8 +48,10 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
+import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
 /**
@@ -87,6 +94,37 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
 		}
 		return super.execute(event);
+	}
+
+	@Override
+	protected void additionalPrepareContext(GradleContext context) {
+		if (launch != null) {
+			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
+			try {
+				Map<String, String> gradleProperties = configuration.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
+				Map<String, String> systemProperties = configuration.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
+				
+				
+				context.getGradleProperties().putAll(gradleProperties);
+				context.getSystemProperties().putAll(systemProperties);
+
+				/* replace variables with content*/
+				extractVariables(context.getGradleProperties());
+				extractVariables(context.getSystemProperties());
+				
+			} catch (CoreException e) {
+				EGradleUtil.log(e);
+			}
+		}
+	}
+
+	private void extractVariables(Map<String, String> map) throws CoreException {
+		IStringVariableManager svManager = VariablesPlugin.getDefault().getStringVariableManager();
+		for (String key: map.keySet()){
+			String value = map.get(key);
+			String newValue = svManager.performStringSubstitution(value);
+			map.put(key, newValue);
+		}
 	}
 
 	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
