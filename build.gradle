@@ -22,12 +22,12 @@ allprojects{
 		
 }
 
-def doNotAutomateEclipseSetup = ['egradle-plugin-main','egradle-plugin-junit-contribution', 'egradle-feature','egradle-updatesite'];
+def doAutomateEclipseSetup = ['egradle-other'];
 
 subprojects {
     apply plugin: 'java'
 	
-	if (! doNotAutomateEclipseSetup.contains(project.name)){
+	if (doAutomateEclipseSetup.contains(project.name)){
 		apply plugin: 'eclipse'
 	}
 	
