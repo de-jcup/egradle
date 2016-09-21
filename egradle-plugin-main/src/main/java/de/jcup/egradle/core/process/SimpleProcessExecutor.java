@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core.process;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.BufferedReader;
 import java.io.File;

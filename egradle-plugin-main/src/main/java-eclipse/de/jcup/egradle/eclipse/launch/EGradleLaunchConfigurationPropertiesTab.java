@@ -67,22 +67,24 @@ import de.jcup.egradle.eclipse.ui.SWTFactory;
 public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfigurationTab {
 
 	protected TableViewer propertiesTable;
-	protected String[] envTableColumnHeaders = { "Key", "Value", };
+	protected String[] propertyTableColumnHeaders = { "Key", "Value", };
 	private static final String NAME_LABEL = "Name";
 	private static final String VALUE_LABEL = "Value";
 	protected static final String P_VARIABLE = "variable"; 
 	protected static final String P_VALUE = "value"; 
-	protected Button envAddButton;
-	protected Button envEditButton;
-	protected Button envRemoveButton;
+	protected Button propertyAddButton;
+	protected Button propertyEditButton;
+	protected Button propertyRemoveButton;
 	private String title;
 	private String launchConfigurationPropertyMapAttributeName;
 	private String imagePath;
+	private String tabId;
 
-	public EGradleLaunchConfigurationPropertiesTab(String title, String imagePath,String launchConfigurationPropertyMapAttributeName) {
+	public EGradleLaunchConfigurationPropertiesTab(String title, String tabId, String imagePath,String launchConfigurationPropertyMapAttributeName) {
 		this.title = title;
 		this.imagePath=imagePath;
 		this.launchConfigurationPropertyMapAttributeName = launchConfigurationPropertyMapAttributeName;
+		this.tabId=tabId;
 	}
 
 	/**
@@ -161,7 +163,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 
 		public Image getColumnImage(Object element, int columnIndex) {
 			if (columnIndex == 0) {
-				return EGradleUtil.getImage("/icons/properties_column.png");
+				return EGradleUtil.getImage("/icons/launch-propertytable-column0.gif");
 			}
 			return null;
 		}
@@ -188,7 +190,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	 */
 	protected void createEnvironmentTable(Composite parent) {
 		Font font = parent.getFont();
-		SWTFactory.createLabel(parent, "Property variables to &set:", 2);
+		SWTFactory.createLabel(parent, "Variables to &set:", 2);
 		// Create table composite
 		Composite tableComposite = SWTFactory.createComposite(parent, font, 1, 1, GridData.FILL_BOTH, 0, 0);
 		// Create table
@@ -217,9 +219,9 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 		});
 		// Create columns
 		final TableColumn tc1 = new TableColumn(table, SWT.NONE, 0);
-		tc1.setText(envTableColumnHeaders[0]);
+		tc1.setText(propertyTableColumnHeaders[0]);
 		final TableColumn tc2 = new TableColumn(table, SWT.NONE, 1);
-		tc2.setText(envTableColumnHeaders[1]);
+		tc2.setText(propertyTableColumnHeaders[1]);
 		final Table tref = table;
 		final Composite comp = tableComposite;
 		tableComposite.addControlListener(new ControlAdapter() {
@@ -254,8 +256,8 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	 */
 	protected void handleTableSelectionChanged(SelectionChangedEvent event) {
 		int size = ((IStructuredSelection) event.getSelection()).size();
-		envEditButton.setEnabled(size == 1);
-		envRemoveButton.setEnabled(size > 0);
+		propertyEditButton.setEnabled(size == 1);
+		propertyRemoveButton.setEnabled(size > 0);
 	}
 
 	/**
@@ -270,33 +272,33 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 				GridData.VERTICAL_ALIGN_BEGINNING | GridData.HORIZONTAL_ALIGN_END, 0, 0);
 
 		// Create buttons
-		envAddButton = createPushButton(buttonComposite, "N&ew...", null);
-		envAddButton.addSelectionListener(new SelectionAdapter() {
+		propertyAddButton = createPushButton(buttonComposite, "N&ew...", null);
+		propertyAddButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				handlePropertiesAddButtonSelected();
 			}
 		});
-		envEditButton = createPushButton(buttonComposite, "E&dit...", null);
-		envEditButton.addSelectionListener(new SelectionAdapter() {
+		propertyEditButton = createPushButton(buttonComposite, "E&dit...", null);
+		propertyEditButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				handlePropertiesEditButtonSelected();
 			}
 		});
-		envEditButton.setEnabled(false);
-		envRemoveButton = createPushButton(buttonComposite, "Rem&ove", null);
-		envRemoveButton.addSelectionListener(new SelectionAdapter() {
+		propertyEditButton.setEnabled(false);
+		propertyRemoveButton = createPushButton(buttonComposite, "Rem&ove", null);
+		propertyRemoveButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				handlePropertiesRemoveButtonSelected();
 			}
 		});
-		envRemoveButton.setEnabled(false);
+		propertyRemoveButton.setEnabled(false);
 	}
 
 	/**
 	 * Adds a new variable to the table.
 	 */
 	protected void handlePropertiesAddButtonSelected() {
-		MultipleInputDialog dialog = new MultipleInputDialog(getShell(), "New Property Variable");
+		MultipleInputDialog dialog = new MultipleInputDialog(getShell(), "New Variable");
 		dialog.addTextField(NAME_LABEL, null, false);
 		dialog.addVariablesField(VALUE_LABEL, null, true);
 
@@ -421,7 +423,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	}
 
 	public String getId() {
-		return "org.eclipse.debug.ui.environmentTab"; 
+		return "de.jcup.egradle.eclipse.launchtab.properties."+tabId; 
 	}
 
 	public Image getImage() {

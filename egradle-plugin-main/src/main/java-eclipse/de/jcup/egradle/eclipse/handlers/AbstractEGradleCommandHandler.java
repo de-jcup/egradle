@@ -25,9 +25,7 @@ import org.eclipse.ui.progress.IProgressService;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.domain.GradleCommand;
-import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;

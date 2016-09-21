@@ -36,7 +36,6 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants;
 
@@ -77,12 +76,10 @@ public class GradleExecutionDelegate {
 	}
 
 	private void prepareContext(GradleContext context, GradleContextPreparator additionalContextPreparator, GradleCommand... commands) {
-		String javaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
-		if (StringUtils.isEmpty(javaHome)) {
-			EGradleMessageDialog.INSTANCE.showError("No java home path set. Please setup in preferences!");
-			throw new IllegalStateException("Java home not set");
+		String globalJavaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
+		if (!StringUtils.isEmpty(globalJavaHome)) {
+			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME still can be overriden by context preparator see below
 		}
-		context.setEnvironment("JAVA_HOME", javaHome);
 		context.setCommands(commands);
 		context.setAmountOfWorkToDo(1);
 		if (additionalContextPreparator!=null){

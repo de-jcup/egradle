@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 /**
  * This class represents a preference page that
  * is contributed to the Preferences dialog. By 
@@ -29,11 +29,13 @@ import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES
  * the main plug-in class. That way, preferences can
  * be accessed directly via the preference store.
  */
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_JAVA_HOME_PATH;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_ROOTPROJECT_PATH;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
 
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -42,7 +44,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	public EGradlePreferencePage() {
 		super(GRID);
 		setPreferenceStore(PREFERENCES.getPreferenceStore());
-		setDescription("EGradle setup");
+		setDescription("Preferences for EGradle");
 	}
 
 	/**
@@ -51,10 +53,22 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		addField(new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path:",
-				getFieldEditorParent()));
-		addField(new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME set for gradle:",
-				getFieldEditorParent()));
+		DirectoryFieldEditor rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path:",
+				getFieldEditorParent());
+		addField(rootPathDirectoryEditor);
+		rootPathDirectoryEditor.getLabelControl(getFieldEditorParent()).setToolTipText("Default root path. Can be overriden in launch configurations");
+		rootPathDirectoryEditor.setEmptyStringAllowed(false);
+		/* separator:*/
+		Label label = new Label(getFieldEditorParent(), SWT.SEPARATOR | SWT.HORIZONTAL);
+		label.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
+		
+		/* java home default */
+		DirectoryFieldEditor defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "Default &JAVA HOME set for gradle (optional):",
+				getFieldEditorParent());
+		defaultJavaHomeDirectoryEditor.setEmptyStringAllowed(true);
+		defaultJavaHomeDirectoryEditor.getLabelControl(getFieldEditorParent()).setToolTipText("A default global JAVA_HOME path. Can be overriden in launch configurations");
+		
+		addField(defaultJavaHomeDirectoryEditor);
 	}
 
 	public void init(IWorkbench workbench) {

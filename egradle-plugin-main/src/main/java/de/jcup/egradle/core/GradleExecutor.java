@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.IOException;
 import java.util.Map;

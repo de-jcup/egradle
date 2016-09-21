@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.lang.reflect.InvocationTargetException;
 

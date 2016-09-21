@@ -15,13 +15,7 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,23 +28,20 @@ import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.ILaunchManager;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
-import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
@@ -103,13 +94,17 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 						.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
 				Map<String, String> systemProperties = configuration
 						.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
-
+				Map<String, String> environment = configuration
+						.getAttribute(EGradleLaunchConfigurationTabGroup.ENVIRONMENT_PROPERTIES, Collections.emptyMap());
+				
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);
+				context.getEnvironment().putAll(environment);
 
 				/* replace variables with content */
 				extractVariables(context.getGradleProperties());
 				extractVariables(context.getSystemProperties());
+				extractVariables(context.getEnvironment());				
 
 			} catch (CoreException e) {
 				EGradleUtil.log(e);

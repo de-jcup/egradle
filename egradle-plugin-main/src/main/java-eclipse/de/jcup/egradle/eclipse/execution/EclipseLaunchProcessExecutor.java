@@ -38,7 +38,16 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		 * Will be shown in process information dialog - see
 		 * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage
 		 */
-		attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
+		StringBuilder sb = new StringBuilder();
+		for (String key: context.getEnvironment().keySet()){
+			String value = context.getEnvironment().get(key);
+			sb.append(key);
+			sb.append('=');
+			sb.append(value);
+			sb.append(System.getProperty("line.separator"));
+		}
+		
+		attributes.put(DebugPlugin.ATTR_ENVIRONMENT, sb.toString());
 		attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
 		attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
 		attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);

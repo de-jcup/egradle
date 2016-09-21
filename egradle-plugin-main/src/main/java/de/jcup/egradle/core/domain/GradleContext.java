@@ -18,7 +18,6 @@ package de.jcup.egradle.core.domain;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -78,10 +77,7 @@ public class GradleContext {
 	 * @return environment environment or <code>null</code> if not set
 	 */
 	public Map<String, String> getEnvironment() {
-		if (environment == null) {
-			return null;
-		}
-		return Collections.unmodifiableMap(environment);
+		return environment;
 	}
 
 	public GradleRootProject getRootProject() {

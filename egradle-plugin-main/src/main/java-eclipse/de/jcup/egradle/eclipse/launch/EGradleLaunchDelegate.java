@@ -18,18 +18,14 @@ package de.jcup.egradle.eclipse.launch;
 import java.util.Map;
 
 import org.eclipse.core.commands.Command;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
-import org.eclipse.core.commands.NotEnabledException;
-import org.eclipse.core.commands.NotHandledException;
-import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.core.commands.Parameterization;
 import org.eclipse.core.commands.ParameterizedCommand;
-import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
@@ -40,6 +36,7 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.services.IServiceLocator;
 
 import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
 
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
@@ -87,14 +84,16 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						 */
 						handlerService.executeCommand(parametrizedCommand, null);
 
-					} catch (NotDefinedException | ParameterValuesException e) {
-						throw new IllegalStateException("Parameter failed!", e);
-					} catch (ExecutionException e) {
-						throw new IllegalStateException("Execution failed!", e);
-					} catch (NotEnabledException e) {
-						throw new IllegalStateException("Not enabled!", e);
-					} catch (NotHandledException e) {
-						throw new IllegalStateException("Not handled!", e);
+					} catch (Exception e) {
+						throw new IllegalStateException("EGradle launch command execution failed", e);
+					}finally{
+						if (!launch.isTerminated()){
+							try {
+								launch.terminate();
+							} catch (DebugException e) {
+								EGradleUtil.log(e);
+							}
+						}
 					}
 
 				}

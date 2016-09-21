@@ -15,21 +15,12 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
-import java.net.URL;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.internal.ui.DebugPluginImages;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.debug.ui.IDebugUIConstants;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -44,7 +35,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
