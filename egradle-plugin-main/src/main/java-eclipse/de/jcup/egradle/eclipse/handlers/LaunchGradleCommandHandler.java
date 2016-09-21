@@ -30,7 +30,6 @@ import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchManager;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -65,11 +64,13 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
+			/* FIXME ATR, 21.09.2016 - we got the launch object, do we really need to fetch the data from the event?!?!?! see options, which is working!*/
 			IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
 			IParameterValues configParamValues = configparameter.getValues();
 			Map<?, ?> values = configParamValues.getParameterValues();
 			String projectName = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME);
 			String commandString = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS);
+			
 			launch = (ILaunch) values.get(EGradleLaunchDelegate.LAUNCH_ARGUMENT);
 
 			String[] commandStrings = commandString.split(" ");
@@ -96,6 +97,10 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 						.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
 				Map<String, String> environment = configuration
 						.getAttribute(EGradleLaunchConfigurationTabGroup.ENVIRONMENT_PROPERTIES, Collections.emptyMap());
+				
+				String options = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS,"");
+				String[] splittedOptions = options.split(" ");
+				context.setOptions(splittedOptions);
 				
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);

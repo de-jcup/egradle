@@ -54,6 +54,7 @@ public class GradleExecutorTest {
 		mockedContext = mock(GradleContext.class);
 		mockedConfiguration = mock(GradleConfiguration.class);
 
+		when(mockedContext.getOptions()).thenReturn(new String[] {});
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
@@ -94,7 +95,21 @@ public class GradleExecutorTest {
 	}
 
 	@Test
-	public void gradle_properties_are_appended_to_command() throws Exception {
+	public void two_gradle_options_are_prefixed_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		when(mockedContext.getOptions()).thenReturn(new String[] { "-test1", "-test2" });
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "-test1", "-test2",
+				"eclipse");
+	}
+
+	@Test
+	public void gradle_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -105,12 +120,12 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "eclipse",
-				"-Pgradle.test.property=test");
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew",
+				"-Pgradle.test.property=test", "eclipse");
 	}
 
 	@Test
-	public void system_properties_are_appended_to_command() throws Exception {
+	public void system_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -121,12 +136,12 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "eclipse",
-				"-Dsystem.test.property=test");
+		verify(mockedProcessExecutor).execute(null, mockedContext, "-Dsystem.test.property=test", "usedShell",
+				"gradlew", "eclipse");
 	}
 
 	@Test
-	public void gradle_properties_and_then_system_properties_are_appended_to_command() throws Exception {
+	public void gradle_properties_and_then_system_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -140,8 +155,28 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "eclipse",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test");
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
+	}
+
+	@Test
+	public void options_then_gradle_properties_and_then_system_properties_are_prefixed_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> systemProperties = new HashMap<>();
+		Map<String, String> gradleProperties = new HashMap<>();
+		gradleProperties.put("gradle.test.property", "test");
+		systemProperties.put("system.test.property", "test");
+		when(mockedContext.getOptions()).thenReturn(new String[] { "-option" });
+		when(mockedContext.getSystemProperties()).thenReturn(systemProperties);
+		when(mockedContext.getGradleProperties()).thenReturn(gradleProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "-option",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
 	}
 
 	@Test

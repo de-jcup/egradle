@@ -34,7 +34,10 @@ public class GradleContext {
 
 	private GradleRootProject rootProject;
 
-	/* we use tree map to have keys always automatically sorted - easier to debug and read */
+	/*
+	 * we use tree map to have keys always automatically sorted - easier to
+	 * debug and read
+	 */
 	private Map<String, String> environment = new TreeMap<>();
 	private Map<String, String> systemProperties = new TreeMap<>();
 	private Map<String, String> gradleProperties = new TreeMap<>();
@@ -44,6 +47,7 @@ public class GradleContext {
 
 	public int amountOfWorkToDo = 1;
 
+	private String[] options;
 
 	public GradleContext(GradleRootProject rootProject, GradleConfiguration configuration) {
 		notNull(rootProject, "root project may not be null!");
@@ -112,5 +116,24 @@ public class GradleContext {
 	 */
 	public Map<String, String> getSystemProperties() {
 		return systemProperties;
+	}
+
+	public void setOptions(String... options) {
+		if (options == null) {
+			options = new String[] {};
+		}
+		this.options = options;
+	}
+
+	/**
+	 * Returns options string - never <code>null</code>
+	 * 
+	 * @return options
+	 */
+	public String[] getOptions() {
+		if (options==null){
+			options=new String[]{};
+		}
+		return options;
 	}
 }

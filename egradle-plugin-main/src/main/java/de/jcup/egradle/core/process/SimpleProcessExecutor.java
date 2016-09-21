@@ -40,7 +40,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException {
 		if (workingDirectory != null) {
 			if (!workingDirectory.exists()) {
-				throw new FileNotFoundException("Workign directory does not exist:" + workingDirectory);
+				throw new FileNotFoundException("Working directory does not exist:" + workingDirectory);
 			}
 		}
 		ProcessBuilder pb = new ProcessBuilder(commands);

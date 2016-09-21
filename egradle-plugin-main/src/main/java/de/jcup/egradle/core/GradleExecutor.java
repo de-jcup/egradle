@@ -51,7 +51,6 @@ public class GradleExecutor {
 		Result result = new Result();
 
 		GradleRootProject rootProject = context.getRootProject();
-		Map<String, String> env = context.getEnvironment();
 
 		String[] commandStrings = createExecutionCommand(context);
 
@@ -77,6 +76,9 @@ public class GradleExecutor {
 		if (config.isUsingGradleWrapper()) {
 			arraySize += 1;// we must call wrapper executor too
 		}
+		String[] options = context.getOptions();
+		arraySize += options.length;
+		
 		Map<String, String> gradleProperties = context.getGradleProperties();
 		Map<String, String> systemProperties = context.getSystemProperties();
 
@@ -90,18 +92,21 @@ public class GradleExecutor {
 		} else {
 			throw new UnsupportedOperationException("Currently only gradle wrapper usage is supported!");
 		}
-
-		/* commands */
-		for (int i = 0; i < commands.length; i++) {
-			commandStrings[pos++] = commands[i].getCommand();
+		/* raw options */
+		for (int i = 0; i < options.length; i++) {
+			commandStrings[pos++] = options[i];
 		}
 		/* gradle properties*/
 		for (String key: gradleProperties.keySet()) {
 			commandStrings[pos++] = "-P"+key+"="+gradleProperties.get(key);
 		}
-		/* gradle properties*/
+		/* system properties*/
 		for (String key: systemProperties.keySet()) {
 			commandStrings[pos++] = "-D"+key+"="+systemProperties.get(key);
+		}
+		/* commands */
+		for (int i = 0; i < commands.length; i++) {
+			commandStrings[pos++] = commands[i].getCommand();
 		}
 		return commandStrings;
 	}

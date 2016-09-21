@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import java.net.URL;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -26,15 +28,19 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -43,13 +49,14 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 
 	public static final String PROPERTY_TASKS = "tasks";
 	public static final String PROPERTY_PROJECTNAME = "projectName";
+	public static final String PROPERTY_OPTIONS = "options";
 	private Text tasksField;
 	private Text projectNameField;
-	private Text argumentsField;
+	private Text optionsField;
 
 	@Override
 	public void createControl(Composite parent) {
-		
+
 		parent.setLayout(new FillLayout());
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -68,29 +75,29 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		gridDataSingleLine.verticalAlignment = GridData.BEGINNING;
 		gridDataSingleLine.grabExcessHorizontalSpace = true;
 		gridDataSingleLine.grabExcessVerticalSpace = false;
-		gridDataSingleLine.verticalSpan=2;
-		gridDataSingleLine.horizontalSpan=2;
-		
+		gridDataSingleLine.verticalSpan = 2;
+		gridDataSingleLine.horizontalSpan = 2;
+
 		GridData gridDataTwoLines = new GridData();
 		gridDataTwoLines.horizontalAlignment = GridData.FILL;
 		gridDataTwoLines.verticalAlignment = GridData.BEGINNING;
 		gridDataTwoLines.grabExcessHorizontalSpace = true;
 		gridDataTwoLines.grabExcessVerticalSpace = false;
-		gridDataTwoLines.verticalSpan=2;
-		gridDataTwoLines.horizontalSpan=2;
+		gridDataTwoLines.verticalSpan = 2;
+		gridDataTwoLines.horizontalSpan = 2;
 
 		GridData gridDataLastColumn = new GridData();
 		gridDataLastColumn.horizontalAlignment = GridData.FILL;
 		gridDataLastColumn.verticalAlignment = GridData.FILL;
 		gridDataLastColumn.grabExcessHorizontalSpace = true;
 		gridDataLastColumn.grabExcessVerticalSpace = false;
-		gridDataLastColumn.verticalSpan=2;
-		gridDataLastColumn.horizontalSpan=2;
-		gridDataLastColumn.minimumHeight=50;
-		gridDataLastColumn.heightHint=100;
+		gridDataLastColumn.verticalSpan = 2;
+		gridDataLastColumn.horizontalSpan = 2;
+		gridDataLastColumn.minimumHeight = 50;
+		gridDataLastColumn.heightHint = 100;
 
 		/* ------------------------------------ */
-		/* -           Project                - */
+		/* - Project - */
 		/* ------------------------------------ */
 		Label projectLabel = new Label(composite, SWT.NULL);
 		projectLabel.setText("Project:");
@@ -106,9 +113,10 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 				updateLaunchConfigurationDialog();
 			}
 		});
-		projectNameField.setToolTipText("Keep empty for root project or enter gradle subproject name here if you want to execute the tasks in a sub project.");
+		projectNameField.setToolTipText(
+				"Keep empty for root project or enter gradle subproject name here if you want to execute the tasks in a sub project.");
 		/* ------------------------------------ */
-		/* -           Tasks                  - */
+		/* - Tasks - */
 		/* ------------------------------------ */
 		Label taskLabel = new Label(composite, SWT.NULL);
 		taskLabel.setText("Tasks:");
@@ -125,17 +133,24 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 			}
 		});
 		tasksField.setToolTipText("Enter gradle tasks here. Separate multiple tasks with a single space character");
-		
 		/* ------------------------------------ */
-		/* -           Arguments              - */
+		/* - Separator                        - */
 		/* ------------------------------------ */
-		Label argumentsLabel = new Label(composite, SWT.NULL);
-		argumentsLabel.setText("Arguments:");
-		argumentsLabel.setLayoutData(labelGridData);
+		Label label = new Label(composite, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
+		/* ------------------------------------ */
+		/* - Options - */
+		/* ------------------------------------ */
+		Label optionsLabel = new Label(composite, SWT.NULL);
+		optionsLabel.setText("Raw options:");
+		optionsLabel.setToolTipText(
+				"Here you can define options.\nBut system properties and gradle propject properties can be defined more comfortable at the dedicated tab sheets!");
+		optionsLabel.setLayoutData(labelGridData);
 
-		argumentsField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
-		argumentsField.setLayoutData(gridDataLastColumn);
-		argumentsField.addModifyListener(new ModifyListener() {
+		optionsField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
+		optionsField.setLayoutData(gridDataLastColumn);
+		optionsField.setToolTipText(optionsLabel.getToolTipText());
+		optionsField.addModifyListener(new ModifyListener() {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -143,7 +158,24 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 				updateLaunchConfigurationDialog();
 			}
 		});
-		argumentsField.setToolTipText("Enter gradle arguments here.\nexample: -PcommandLineProjectProp=commandLineProjectPropValue -Dorg.gradle.project.systemProjectProp=systemPropertyValue");
+
+		Link link = new Link(composite, SWT.NONE);
+		String message = "(Valid options for gradle can be found at <a href=\"https://docs.gradle.org/current/userguide/gradle_command_line.html\">Gradle command line userguide</a>)";
+		link.setText(message);
+		link.setSize(400, 100);
+		link.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					// Open default external browser
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
+				} catch (Exception ex) {
+					EGradleUtil.log(ex);
+				}
+			}
+		});
+		link.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
+		
 		
 		composite.pack();
 
@@ -154,6 +186,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		try {
 			tasksField.setText(configuration.getAttribute(PROPERTY_TASKS, ""));
 			projectNameField.setText(configuration.getAttribute(PROPERTY_PROJECTNAME, ""));
+			optionsField.setText(configuration.getAttribute(PROPERTY_OPTIONS, ""));
 		} catch (CoreException e) {
 			throw new IllegalStateException("cannot init", e);
 		}
@@ -205,13 +238,14 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(PROPERTY_TASKS, tasksField.getText());
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
+		configuration.setAttribute(PROPERTY_OPTIONS, optionsField.getText());
 	}
 
 	@Override
 	public Image getImage() {
 		return EGradleUtil.getImage("icons/gradle-og.gif");
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Gradle";

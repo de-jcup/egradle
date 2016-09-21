@@ -34,7 +34,7 @@ public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationT
 	public EGradleLaunchConfigurationTabGroup() {
 		int index = 0;
 		tabs[index++] = new EGradleLaunchConfigurationMainTab();
-		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Gradle properties","1_gradle","icons/launch-gradleproperties.gif", GRADLE_PROPERTIES);
+		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Gradle project properties","1_gradle","icons/launch-gradleproperties.gif", GRADLE_PROPERTIES);
 		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("System properties","2_system","icons/launch-systemproperties.gif", SYSTEM_PROPERTIES);
 		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Environment","3_env","icons/launch-environmentproperties.gif", ENVIRONMENT_PROPERTIES);
 	}
