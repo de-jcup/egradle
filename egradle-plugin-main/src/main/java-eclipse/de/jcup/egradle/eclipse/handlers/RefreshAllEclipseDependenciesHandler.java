@@ -18,7 +18,9 @@ package de.jcup.egradle.eclipse.handlers;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
+import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -29,14 +31,13 @@ import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
 	@Override
-	protected void additionalPrepareContext(GradleContext context) {
+	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);
 	}
 
 	@Override
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
-			GradleContext context) {
-		return new UIGradleExecutionDelegate(processOutputHandler, context);
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
+		return new UIGradleExecutionDelegate(processOutputHandler,new SimpleProcessExecutor(processOutputHandler),this,createCommands());
 	}
 
 	@Override

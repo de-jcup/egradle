@@ -17,7 +17,8 @@ package de.jcup.egradle.core.process;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+
+import de.jcup.egradle.core.domain.GradleContext;
 
 public interface ProcessExecutor {
 
@@ -27,10 +28,10 @@ public interface ProcessExecutor {
 	 * Execute commands in given working directory
 	 * 
 	 * @param workingDirectory
-	 * @param env
+	 * @param context TODO
 	 * @param commands
 	 * @return result code
 	 * @throws IOException
 	 */
-	public int execute(File workingDirectory, Map<String, String> env, String... commands) throws IOException;
+	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException;
 }

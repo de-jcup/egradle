@@ -13,9 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.handlers;
-
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+ package de.jcup.egradle.eclipse.execution;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -25,28 +23,27 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 
-import de.jcup.egradle.core.domain.GradleContext;
+import de.jcup.egradle.core.api.GradleContextPreparator;
+import de.jcup.egradle.core.domain.GradleCommand;
+import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
-import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 
-class UIGradleExecutionDelegate extends GradleExecutionDelegate {
+public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
 	boolean refreshAllProjects = true;
 	boolean showEGradleSystemConsole = true;
 
-	UIGradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		super(processOutputHandler, context);
+	public UIGradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator, GradleCommand ...commands) {
+		super(processOutputHandler,processExecutor,additionalContextPreparator,commands);
 	}
 
 	@Override

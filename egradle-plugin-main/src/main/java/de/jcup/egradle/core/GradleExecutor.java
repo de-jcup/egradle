@@ -58,7 +58,7 @@ public class GradleExecutor {
 		/* execute process */
 		int processResult;
 		try {
-			processResult = processExecutor.execute(rootProject.getFolder(), env, commandStrings);
+			processResult = processExecutor.execute(rootProject.getFolder(), context, commandStrings);
 
 			result.setProcessResult(processResult);
 		} catch (IOException e) {
