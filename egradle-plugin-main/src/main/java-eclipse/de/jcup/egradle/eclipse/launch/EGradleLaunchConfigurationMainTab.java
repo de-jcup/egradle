@@ -15,17 +15,27 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import java.net.URL;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.ui.DebugPluginImages;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.debug.ui.IDebugUIConstants;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -34,8 +44,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
@@ -43,9 +55,11 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	public static final String PROPERTY_PROJECTNAME = "projectName";
 	private Text tasksField;
 	private Text projectNameField;
+	private Text argumentsField;
 
 	@Override
 	public void createControl(Composite parent) {
+		
 		parent.setLayout(new FillLayout());
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -59,24 +73,41 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		labelGridData.grabExcessHorizontalSpace = false;
 		labelGridData.grabExcessVerticalSpace = false;
 
-		GridData projectFieldGridData = new GridData();
-		projectFieldGridData.horizontalAlignment = GridData.FILL;
-		projectFieldGridData.verticalAlignment = GridData.BEGINNING;
-		projectFieldGridData.grabExcessHorizontalSpace = true;
-		projectFieldGridData.grabExcessVerticalSpace = false;
+		GridData gridDataSingleLine = new GridData();
+		gridDataSingleLine.horizontalAlignment = GridData.FILL;
+		gridDataSingleLine.verticalAlignment = GridData.BEGINNING;
+		gridDataSingleLine.grabExcessHorizontalSpace = true;
+		gridDataSingleLine.grabExcessVerticalSpace = false;
+		gridDataSingleLine.verticalSpan=2;
+		gridDataSingleLine.horizontalSpan=2;
+		
+		GridData gridDataTwoLines = new GridData();
+		gridDataTwoLines.horizontalAlignment = GridData.FILL;
+		gridDataTwoLines.verticalAlignment = GridData.BEGINNING;
+		gridDataTwoLines.grabExcessHorizontalSpace = true;
+		gridDataTwoLines.grabExcessVerticalSpace = false;
+		gridDataTwoLines.verticalSpan=2;
+		gridDataTwoLines.horizontalSpan=2;
 
-		GridData gridData2 = new GridData();
-		gridData2.horizontalAlignment = GridData.FILL;
-		gridData2.verticalAlignment = GridData.FILL;
-		gridData2.grabExcessHorizontalSpace = true;
-		gridData2.grabExcessVerticalSpace = true;
+		GridData gridDataLastColumn = new GridData();
+		gridDataLastColumn.horizontalAlignment = GridData.FILL;
+		gridDataLastColumn.verticalAlignment = GridData.FILL;
+		gridDataLastColumn.grabExcessHorizontalSpace = true;
+		gridDataLastColumn.grabExcessVerticalSpace = false;
+		gridDataLastColumn.verticalSpan=2;
+		gridDataLastColumn.horizontalSpan=2;
+		gridDataLastColumn.minimumHeight=50;
+		gridDataLastColumn.heightHint=100;
 
-		Label label1 = new Label(composite, SWT.NULL);
-		label1.setText("Project: ");
-		label1.setLayoutData(labelGridData);
+		/* ------------------------------------ */
+		/* -           Project                - */
+		/* ------------------------------------ */
+		Label projectLabel = new Label(composite, SWT.NULL);
+		projectLabel.setText("Project:");
+		projectLabel.setLayoutData(labelGridData);
 
 		projectNameField = new Text(composite, SWT.BORDER);
-		projectNameField.setLayoutData(projectFieldGridData);
+		projectNameField.setLayoutData(gridDataSingleLine);
 		projectNameField.addModifyListener(new ModifyListener() {
 
 			@Override
@@ -85,14 +116,16 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 				updateLaunchConfigurationDialog();
 			}
 		});
-		projectNameField.setToolTipText("Enter gradle project name here - or keep empty for root project.");
+		projectNameField.setToolTipText("Keep empty for root project or enter gradle subproject name here if you want to execute the tasks in a sub project.");
+		/* ------------------------------------ */
+		/* -           Tasks                  - */
+		/* ------------------------------------ */
+		Label taskLabel = new Label(composite, SWT.NULL);
+		taskLabel.setText("Tasks:");
+		taskLabel.setLayoutData(labelGridData);
 
-		Label label = new Label(composite, SWT.NULL);
-		label.setText("Tasks: ");
-		label.setLayoutData(labelGridData);
-
-		tasksField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
-		tasksField.setLayoutData(gridData2);
+		tasksField = new Text(composite, SWT.BORDER);
+		tasksField.setLayoutData(gridDataTwoLines);
 		tasksField.addModifyListener(new ModifyListener() {
 
 			@Override
@@ -101,7 +134,27 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 				updateLaunchConfigurationDialog();
 			}
 		});
-		tasksField.setToolTipText("Enter gradle tasks here.");
+		tasksField.setToolTipText("Enter gradle tasks here. Separate multiple tasks with a single space character");
+		
+		/* ------------------------------------ */
+		/* -           Arguments              - */
+		/* ------------------------------------ */
+		Label argumentsLabel = new Label(composite, SWT.NULL);
+		argumentsLabel.setText("Arguments:");
+		argumentsLabel.setLayoutData(labelGridData);
+
+		argumentsField = new Text(composite, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL);
+		argumentsField.setLayoutData(gridDataLastColumn);
+		argumentsField.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
+		argumentsField.setToolTipText("Enter gradle arguments here.\nexample: -PcommandLineProjectProp=commandLineProjectPropValue -Dorg.gradle.project.systemProjectProp=systemPropertyValue");
+		
 		composite.pack();
 
 	}
@@ -164,6 +217,11 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
 	}
 
+	@Override
+	public Image getImage() {
+		return EGradleUtil.getImage("icons/gradle-og.gif");
+	}
+	
 	@Override
 	public String getName() {
 		return "Gradle";

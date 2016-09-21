@@ -58,7 +58,7 @@ public class GradleExecutor {
 		/* execute process */
 		int processResult;
 		try {
-			processResult = processExecutor.execute(rootProject.getFolder(), env, commandStrings);
+			processResult = processExecutor.execute(rootProject.getFolder(), context, commandStrings);
 
 			result.setProcessResult(processResult);
 		} catch (IOException e) {
@@ -77,6 +77,12 @@ public class GradleExecutor {
 		if (config.isUsingGradleWrapper()) {
 			arraySize += 1;// we must call wrapper executor too
 		}
+		Map<String, String> gradleProperties = context.getGradleProperties();
+		Map<String, String> systemProperties = context.getSystemProperties();
+
+		arraySize += gradleProperties.size();
+		arraySize += systemProperties.size();
+		
 		String[] commandStrings = new String[arraySize];
 		if (config.isUsingGradleWrapper()) {
 			commandStrings[pos++] = config.getShellForGradleWrapper();
@@ -85,8 +91,17 @@ public class GradleExecutor {
 			throw new UnsupportedOperationException("Currently only gradle wrapper usage is supported!");
 		}
 
+		/* commands */
 		for (int i = 0; i < commands.length; i++) {
 			commandStrings[pos++] = commands[i].getCommand();
+		}
+		/* gradle properties*/
+		for (String key: gradleProperties.keySet()) {
+			commandStrings[pos++] = "-P"+key+"="+gradleProperties.get(key);
+		}
+		/* gradle properties*/
+		for (String key: systemProperties.keySet()) {
+			commandStrings[pos++] = "-D"+key+"="+systemProperties.get(key);
 		}
 		return commandStrings;
 	}

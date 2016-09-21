@@ -20,6 +20,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
@@ -55,6 +56,7 @@ public class GradleExecutorTest {
 
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
+		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
 		when(mockedConfiguration.isUsingGradleWrapper()).thenReturn(true);
 		when(mockedConfiguration.getShellForGradleWrapper()).thenReturn("usedShell");
 
@@ -62,7 +64,7 @@ public class GradleExecutorTest {
 		mockedCommand2 = mock(GradleCommand.class);
 
 	}
-	
+
 	@Test
 	public void executing_returns_result_not_null() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -88,7 +90,58 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew", "eclipse");
+	}
+
+	@Test
+	public void gradle_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> gradleProperties = new HashMap<>();
+		gradleProperties.put("gradle.test.property", "test");
+		when(mockedContext.getGradleProperties()).thenReturn(gradleProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Pgradle.test.property=test");
+	}
+
+	@Test
+	public void system_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> systemProperties = new HashMap<>();
+		systemProperties.put("system.test.property", "test");
+		when(mockedContext.getSystemProperties()).thenReturn(systemProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Dsystem.test.property=test");
+	}
+
+	@Test
+	public void gradle_properties_and_then_system_properties_are_appended_to_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+
+		Map<String, String> systemProperties = new HashMap<>();
+		Map<String, String> gradleProperties = new HashMap<>();
+		gradleProperties.put("gradle.test.property", "test");
+		systemProperties.put("system.test.property", "test");
+		when(mockedContext.getSystemProperties()).thenReturn(systemProperties);
+		when(mockedContext.getGradleProperties()).thenReturn(gradleProperties);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Pgradle.test.property=test", "-Dsystem.test.property=test");
 	}
 
 	@Test
@@ -101,7 +154,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse", "cleanEclipse");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew", "eclipse", "cleanEclipse");
 	}
 
 	@Test
@@ -116,6 +169,6 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mcokedWorkingFolder,  mockedContext, "usedShell", "gradlew", "eclipse");
 	}
 }

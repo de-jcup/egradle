@@ -16,7 +16,9 @@ Require-Bundle: org.eclipse.ui,
  org.junit,
  org.eclipse.jdt.launching;bundle-version="3.8.100",
  org.eclipse.debug.ui;bundle-version="3.11.200",
- org.eclipse.jdt.debug.ui;bundle-version="3.7.200"
+ org.eclipse.jdt.debug.ui;bundle-version="3.7.200",
+ org.eclipse.ui.forms,
+ org.eclipse.core.variables;bundle-version="3.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
