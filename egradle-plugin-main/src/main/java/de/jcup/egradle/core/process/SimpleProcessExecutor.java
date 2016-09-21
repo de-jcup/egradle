@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SimpleProcessExecutor implements ProcessExecutor {
 
-	private ProcessOutputHandler handler;
+	protected ProcessOutputHandler handler;
 
 	public SimpleProcessExecutor(ProcessOutputHandler streamHandler) {
 		notNull(streamHandler, "'streamHandler' may not be null");
@@ -80,6 +80,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	protected void handleProcessEnd(Process p) {
 
 	}
+
 
 	protected void handleProcessStarted(Process p, Date started, File workingDirectory, Map<String, String> env,
 			String[] commands) {

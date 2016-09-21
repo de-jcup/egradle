@@ -15,10 +15,9 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +39,6 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
 
 /**
  * Abstract base handler for egradle command executions

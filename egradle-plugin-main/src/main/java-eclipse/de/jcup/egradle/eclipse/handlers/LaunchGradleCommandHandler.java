@@ -37,11 +37,7 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IStreamMonitor;
-import org.eclipse.debug.core.model.IStreamsProxy;
-import org.eclipse.debug.core.model.RuntimeProcess;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -49,10 +45,12 @@ import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
+import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
@@ -101,17 +99,18 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		if (launch != null) {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
-				Map<String, String> gradleProperties = configuration.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
-				Map<String, String> systemProperties = configuration.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
-				
-				
+				Map<String, String> gradleProperties = configuration
+						.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
+				Map<String, String> systemProperties = configuration
+						.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
+
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);
 
-				/* replace variables with content*/
+				/* replace variables with content */
 				extractVariables(context.getGradleProperties());
 				extractVariables(context.getSystemProperties());
-				
+
 			} catch (CoreException e) {
 				EGradleUtil.log(e);
 			}
@@ -120,7 +119,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	private void extractVariables(Map<String, String> map) throws CoreException {
 		IStringVariableManager svManager = VariablesPlugin.getDefault().getStringVariableManager();
-		for (String key: map.keySet()){
+		for (String key : map.keySet()) {
 			String value = map.get(key);
 			String newValue = svManager.performStringSubstitution(value);
 			map.put(key, newValue);
@@ -130,73 +129,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
 			GradleContext context) {
 		return new GradleExecutionDelegate(processOutputHandler, context,
-				new SimpleProcessExecutor(processOutputHandler) {
-					@Override
-					protected void handleProcessStarted(Process process, Date started, File workingDirectory,
-							Map<String, String> env, String[] commands) {
-						String label = context.getCommandString();
-						String path = "inside root project";
-
-						Map<String, String> attributes = new HashMap<>();
-						String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
-								.format(started);
-						/*
-						 * Will be shown in process information dialog - see
-						 * org.eclipse.debug.internal.ui.preferences.
-						 * ProcessPropertyPage
-						 */
-						attributes.put(DebugPlugin.ATTR_ENVIRONMENT, context.getEnvironment().toString());
-						attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
-						attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
-						attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
-						attributes.put(DebugPlugin.ATTR_PATH, path);
-
-						/*
-						 * using an unbreakable space 00A0 to avoid unnecessary
-						 * breaks in view
-						 */
-						String cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
-
-						attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
-						/*
-						 * bind process to runtime process, so visible and
-						 * correct handled in debug UI
-						 */
-						EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label, attributes);
-						// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
-
-						processOutputHandler.output("Launch started - for details see output of " + label);
-						if (!rp.canTerminate()) {
-							processOutputHandler.output("Started process cannot terminate");
-						}
-					}
-
-					@Override
-					protected void handleOutputStreams(Process p) throws IOException {
-						/*
-						 * do nothing - is printed to console output on current
-						 * launcher
-						 */
-					}
-
-				});
-	}
-
-	private class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener {
-
-		public EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
-			super(launch, process, name, attributes);
-		}
-
-		@Override
-		protected IStreamsProxy createStreamsProxy() {
-			return super.createStreamsProxy();
-		}
-
-		@Override
-		public void streamAppended(String text, IStreamMonitor monitor) {
-		}
-
+				new EclipseLaunchProcessExecutor(processOutputHandler, context, launch));
 	}
 
 	@Override
