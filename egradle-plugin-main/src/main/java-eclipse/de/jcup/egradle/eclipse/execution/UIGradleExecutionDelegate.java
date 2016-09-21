@@ -42,8 +42,8 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	boolean refreshAllProjects = true;
 	boolean showEGradleSystemConsole = true;
 
-	public UIGradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator, GradleCommand ...commands) {
-		super(processOutputHandler,processExecutor,additionalContextPreparator,commands);
+	public UIGradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator) {
+		super(processOutputHandler,processExecutor,additionalContextPreparator);
 	}
 
 	@Override

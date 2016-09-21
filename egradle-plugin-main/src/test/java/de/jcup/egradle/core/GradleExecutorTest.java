@@ -136,8 +136,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "-Dsystem.test.property=test", "usedShell",
-				"gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell",
+				"gradlew", "-Dsystem.test.property=test", "eclipse");
 	}
 
 	@Test

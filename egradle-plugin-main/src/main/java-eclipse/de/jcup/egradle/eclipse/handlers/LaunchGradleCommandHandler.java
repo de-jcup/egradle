@@ -58,27 +58,16 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	public static final String COMMAND_ID = "egradle.commands.launch";
 	public static final String PARAMETER_LAUNCHCONFIG = "egradle.command.launch.config";
 
-	private GradleCommand[] commands;
 	private ILaunch launch;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			/* FIXME ATR, 21.09.2016 - we got the launch object, do we really need to fetch the data from the event?!?!?! see options, which is working!*/
 			IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
 			IParameterValues configParamValues = configparameter.getValues();
 			Map<?, ?> values = configParamValues.getParameterValues();
-			String projectName = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME);
-			String commandString = (String) values.get(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS);
-			
-			launch = (ILaunch) values.get(EGradleLaunchDelegate.LAUNCH_ARGUMENT);
 
-			String[] commandStrings = commandString.split(" ");
-			if (StringUtils.isEmpty(projectName)) {
-				this.commands = GradleCommand.build(commandStrings);
-			} else {
-				this.commands = GradleCommand.build(new GradleSubproject(projectName), commandStrings);
-			}
+			launch = (ILaunch) values.get(EGradleLaunchDelegate.LAUNCH_ARGUMENT);
 
 		} catch (NotDefinedException | ParameterValuesException e) {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
@@ -91,17 +80,35 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		if (launch != null) {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
+				/* commands */
+				String projectName = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME,
+						"");
+				String commandString = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "");
+
+				String[] commandStrings = commandString.split(" ");
+				GradleCommand[] commands = null;
+				if (StringUtils.isEmpty(projectName)) {
+					commands = GradleCommand.build(commandStrings);
+				} else {
+					commands = GradleCommand.build(new GradleSubproject(projectName), commandStrings);
+				}
+				context.setCommands(commands);
+
+				/* raw options */
+				String options = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS, "");
+				String[] splittedOptions = options.split(" ");
+				context.setOptions(splittedOptions);
+
+				/*
+				 * system properties, gradle project properties and enviroment
+				 */
 				Map<String, String> gradleProperties = configuration
 						.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
 				Map<String, String> systemProperties = configuration
 						.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
-				Map<String, String> environment = configuration
-						.getAttribute(EGradleLaunchConfigurationTabGroup.ENVIRONMENT_PROPERTIES, Collections.emptyMap());
-				
-				String options = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS,"");
-				String[] splittedOptions = options.split(" ");
-				context.setOptions(splittedOptions);
-				
+				Map<String, String> environment = configuration.getAttribute(
+						EGradleLaunchConfigurationTabGroup.ENVIRONMENT_PROPERTIES, Collections.emptyMap());
+
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);
 				context.getEnvironment().putAll(environment);
@@ -109,7 +116,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				/* replace variables with content */
 				extractVariables(context.getGradleProperties());
 				extractVariables(context.getSystemProperties());
-				extractVariables(context.getEnvironment());				
+				extractVariables(context.getEnvironment());
 
 			} catch (CoreException e) {
 				EGradleUtil.log(e);
@@ -128,12 +135,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
 		return new GradleExecutionDelegate(processOutputHandler,
-				new EclipseLaunchProcessExecutor(processOutputHandler, launch), this, createCommands());
-	}
-
-	@Override
-	protected GradleCommand[] createCommands() {
-		return commands;
+				new EclipseLaunchProcessExecutor(processOutputHandler, launch), this);
 	}
 
 }

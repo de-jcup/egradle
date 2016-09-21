@@ -33,16 +33,12 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	@Override
 	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);
+		context.setCommands(GradleCommand.build("cleanEclipse", "eclipse"));
 	}
 
 	@Override
 	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
-		return new UIGradleExecutionDelegate(processOutputHandler,new SimpleProcessExecutor(processOutputHandler),this,createCommands());
-	}
-
-	@Override
-	protected GradleCommand[] createCommands() {
-		return GradleCommand.build("cleanEclipse", "eclipse");
+		return new UIGradleExecutionDelegate(processOutputHandler,new SimpleProcessExecutor(processOutputHandler),this);
 	}
 
 }

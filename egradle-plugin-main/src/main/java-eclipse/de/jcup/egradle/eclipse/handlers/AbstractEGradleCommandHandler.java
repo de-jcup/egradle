@@ -49,8 +49,6 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		this.processOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
 	}
 
-	protected abstract GradleCommand[] createCommands();
-
 	
 	protected enum ExecutionMode {
 		BLOCK_UI__CANCEABLE, RUN_IN_BACKGROUND__CANCEABLE

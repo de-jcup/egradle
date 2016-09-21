@@ -73,9 +73,6 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						IParameterValues values = parameter.getValues();
 						@SuppressWarnings("unchecked")
 						Map<Object, Object> map = values.getParameterValues();
-						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
-						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, tasks);
-						map.put(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS, options);
 						map.put(LAUNCH_ARGUMENT, launch);
 
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };

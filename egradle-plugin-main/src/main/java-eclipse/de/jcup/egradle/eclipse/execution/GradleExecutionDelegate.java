@@ -31,7 +31,6 @@ import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.AlwaysBashWithGradleWrapperConfiguration;
 import de.jcup.egradle.core.config.GradleConfiguration;
-import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
@@ -58,10 +57,9 @@ public class GradleExecutionDelegate {
 	}
 
 	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator, GradleCommand... commands) {
+			GradleContextPreparator additionalContextPreparator) {
 		notNull(processOutputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
-		notNull(commands, "'commands' may not be null");
 		this.systemConsoleOutputHandler = processOutputHandler;
 
 		GradleRootProject rootProject = EGradleUtil.getRootProject();
@@ -71,16 +69,15 @@ public class GradleExecutionDelegate {
 
 		/* build context */
 		context = new GradleContext(rootProject, config);
-		prepareContext(context,additionalContextPreparator,commands);
+		prepareContext(context,additionalContextPreparator);
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private void prepareContext(GradleContext context, GradleContextPreparator additionalContextPreparator, GradleCommand... commands) {
+	private void prepareContext(GradleContext context, GradleContextPreparator additionalContextPreparator) {
 		String globalJavaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
 		if (!StringUtils.isEmpty(globalJavaHome)) {
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME still can be overriden by context preparator see below
 		}
-		context.setCommands(commands);
 		context.setAmountOfWorkToDo(1);
 		if (additionalContextPreparator!=null){
 			additionalContextPreparator.prepare(context);
