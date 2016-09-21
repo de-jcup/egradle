@@ -19,17 +19,15 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
-	private GradleContext context;
 	private ILaunch launch;
 
-	public EclipseLaunchProcessExecutor(ProcessOutputHandler streamHandler, GradleContext context, ILaunch launch) {
+	public EclipseLaunchProcessExecutor(ProcessOutputHandler streamHandler, ILaunch launch) {
 		super(streamHandler);
-		this.context = context;
 		this.launch=launch;
 	}
 
 	@Override
-	protected void handleProcessStarted(Process process, Date started, File workingDirectory, Map<String, String> env,
+	protected void handleProcessStarted(GradleContext context, Process process, Date started, File workingDirectory,
 			String[] commands) {
 		String label = context.getCommandString();
 		String path = "inside root project";
@@ -64,7 +62,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 			handler.output("Started process cannot terminate");
 		}
 	}
-
+	
 	@Override
 	protected void handleOutputStreams(Process p) throws IOException {
 		/*

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java-eclipse"/>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="src" path="src/test/res"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/egradle-plugin-main"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry path="src/main/java" kind="src"/>
+	<classpathentry path="src/test/java" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/" kind="con"/>
+	<classpathentry path="/egradle-plugin-main" kind="src"/>
+	<classpathentry path="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar" kind="lib" sourcepath="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/b49dafc9cfef24c356827f322e773e7c26725dd2/commons-lang3-3.4-sources.jar"/>
+	<classpathentry path="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/junit/junit/4.9/1013627e3993319870863a020034004717505815/junit-4.9.jar" kind="lib" sourcepath="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/junit/junit/4.9/84b903feddab2bd58f5ab2fc0c5c636df42df74d/junit-4.9-sources.jar"/>
+	<classpathentry path="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-all/1.8.5/a927d8ae3b8d22eb745a74f94e59ce3882f2b524/mockito-all-1.8.5.jar" kind="lib" sourcepath="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-all/1.8.5/d48cdc7660c8bb9b201b0b7ef21fd3421df90ae6/mockito-all-1.8.5-sources.jar"/>
+	<classpathentry path="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.1/860340562250678d1a344907ac75754e259cdb14/hamcrest-core-1.1.jar" kind="lib" sourcepath="C:/Users/ATRIGNA/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.1/2ccf1154d1a8936042a8a742dc3e611d02ac7213/hamcrest-core-1.1-sources.jar"/>
 </classpath>

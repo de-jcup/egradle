@@ -15,22 +15,30 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.GradleExecutor.Result;
+import de.jcup.egradle.core.api.GradleContextPreparator;
+import de.jcup.egradle.core.config.AlwaysBashWithGradleWrapperConfiguration;
+import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
-import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants;
 
 /**
  * Execution delegate, used by {@link GradleJob} and
@@ -50,18 +58,37 @@ public class GradleExecutionDelegate {
 		return result;
 	}
 
-	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context) {
-		this(processOutputHandler, context, new SimpleProcessExecutor(processOutputHandler));
-	}
-
-	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, GradleContext context,
-			ProcessExecutor processExecutor) {
-		notNull(context, "'context' may not be null");
+	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor,
+			GradleContextPreparator additionalContextPreparator, GradleCommand... commands) {
 		notNull(processOutputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
-		this.context = context;
+		notNull(commands, "'commands' may not be null");
 		this.systemConsoleOutputHandler = processOutputHandler;
+
+		GradleRootProject rootProject = EGradleUtil.getRootProject();
+
+		/* build configuration for gradle run */
+		GradleConfiguration config = new AlwaysBashWithGradleWrapperConfiguration();
+
+		/* build context */
+		context = new GradleContext(rootProject, config);
+		prepareContext(context,additionalContextPreparator,commands);
 		executor = new GradleExecutor(processExecutor);
+	}
+
+	private void prepareContext(GradleContext context, GradleContextPreparator additionalContextPreparator, GradleCommand... commands) {
+		String javaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
+		if (StringUtils.isEmpty(javaHome)) {
+			EGradleMessageDialog.INSTANCE.showError("No java home path set. Please setup in preferences!");
+			throw new IllegalStateException("Java home not set");
+		}
+		context.setEnvironment("JAVA_HOME", javaHome);
+		context.setCommands(commands);
+		context.setAmountOfWorkToDo(1);
+		if (additionalContextPreparator!=null){
+			additionalContextPreparator.prepare(context);
+		}
+
 	}
 
 	/**

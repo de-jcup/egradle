@@ -95,7 +95,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	}
 
 	@Override
-	protected void additionalPrepareContext(GradleContext context) {
+	public void prepare(GradleContext context) {
 		if (launch != null) {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
@@ -126,10 +126,9 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		}
 	}
 
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler,
-			GradleContext context) {
-		return new GradleExecutionDelegate(processOutputHandler, context,
-				new EclipseLaunchProcessExecutor(processOutputHandler, context, launch));
+	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
+		return new GradleExecutionDelegate(processOutputHandler,
+				new EclipseLaunchProcessExecutor(processOutputHandler, launch), this, createCommands());
 	}
 
 	@Override

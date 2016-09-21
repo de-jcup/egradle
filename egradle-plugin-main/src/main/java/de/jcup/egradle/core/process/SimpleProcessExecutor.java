@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Map;
 
+import de.jcup.egradle.core.domain.GradleContext;
+
 public class SimpleProcessExecutor implements ProcessExecutor {
 
 	protected ProcessOutputHandler handler;
@@ -35,14 +37,14 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	}
 
 	@Override
-	public int execute(File workingDirectory, Map<String, String> env, String... commands) throws IOException {
+	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException {
 		if (workingDirectory != null) {
 			if (!workingDirectory.exists()) {
 				throw new FileNotFoundException("Workign directory does not exist:" + workingDirectory);
 			}
 		}
 		ProcessBuilder pb = new ProcessBuilder(commands);
-
+		Map<String, String> env = context.getEnvironment();
 		/* init environment */
 		if (env != null) {
 			Map<String, String> pbEnv = pb.environment();
@@ -56,7 +58,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 		Date started = new Date();
 		Process p = pb.start();
-		handleProcessStarted(p, started, workingDirectory, env, commands);
+		handleProcessStarted(context, p, started, workingDirectory, commands);
 		handleOutputStreams(p);
 		while (p.isAlive()) {
 			try {
@@ -82,7 +84,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	}
 
 
-	protected void handleProcessStarted(Process p, Date started, File workingDirectory, Map<String, String> env,
+	protected void handleProcessStarted(GradleContext context, Process p, Date started, File workingDirectory,
 			String[] commands) {
 
 	}

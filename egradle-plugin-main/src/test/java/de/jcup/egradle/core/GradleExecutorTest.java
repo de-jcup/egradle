@@ -56,6 +56,7 @@ public class GradleExecutorTest {
 
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
+		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
 		when(mockedConfiguration.isUsingGradleWrapper()).thenReturn(true);
 		when(mockedConfiguration.getShellForGradleWrapper()).thenReturn("usedShell");
 
@@ -89,7 +90,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew", "eclipse");
 	}
 
 	@Test
@@ -104,8 +105,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
-				"-Pgradle.test.property=test");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Pgradle.test.property=test");
 	}
 
 	@Test
@@ -120,8 +121,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
-				"-Dsystem.test.property=test");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Dsystem.test.property=test");
 	}
 
 	@Test
@@ -139,8 +140,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew",
+				"eclipse", "-Pgradle.test.property=test", "-Dsystem.test.property=test");
 	}
 
 	@Test
@@ -153,7 +154,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, EMPTY_ENV, "usedShell", "gradlew", "eclipse", "cleanEclipse");
+		verify(mockedProcessExecutor).execute(null,  mockedContext, "usedShell", "gradlew", "eclipse", "cleanEclipse");
 	}
 
 	@Test
@@ -168,6 +169,6 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, EMPTY_ENV, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mcokedWorkingFolder,  mockedContext, "usedShell", "gradlew", "eclipse");
 	}
 }
