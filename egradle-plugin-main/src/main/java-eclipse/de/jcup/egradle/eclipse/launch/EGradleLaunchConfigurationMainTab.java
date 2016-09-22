@@ -45,12 +45,11 @@ import org.eclipse.ui.PlatformUI;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
-	public static final String PROPERTY_TASKS = "tasks";
-	public static final String PROPERTY_PROJECTNAME = "projectName";
-	public static final String PROPERTY_OPTIONS = "options";
-	private Text tasksField;
+	protected Text tasksField;
 	private Text projectNameField;
 	private Text optionsField;
 
@@ -206,7 +205,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	 * 
 	 * @return project or <code>null</code>
 	 */
-	private IProject getProject() {
+	protected IProject getProject() {
 		IWorkbenchWindow window = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage page = window.getActivePage();
 		if (page != null) {

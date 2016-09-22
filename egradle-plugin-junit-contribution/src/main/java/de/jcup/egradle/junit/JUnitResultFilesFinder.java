@@ -27,18 +27,27 @@ public class JUnitResultFilesFinder {
 	
 	private JUnitFileFilter filter = new JUnitFileFilter();
 
-	public Collection<File> findTestFilesInRootProjectFolder(File rootFolder) throws IOException {
+	public Collection<File> findTestFilesInFolder(File rootFolder, String subProject) throws IOException {
 		Set<File> set = new TreeSet<>();
 		
+		assertDirectoryExists(rootFolder);
+		File directoryToScan = rootFolder;
+		if (subProject!=null){
+			directoryToScan=new File(rootFolder,subProject);
+			assertDirectoryExists(directoryToScan);
+		}
+		scanJunitResultsInFolder(set, directoryToScan);
+		
+		return set;
+	}
+
+	private void assertDirectoryExists(File rootFolder) throws FileNotFoundException {
 		if (! rootFolder.exists()){
 			throw new FileNotFoundException("Directory file not exists:"+rootFolder.getAbsolutePath());
 		}
 		if (! rootFolder.isDirectory()){
 			throw new FileNotFoundException("Not a directory file :"+rootFolder.getAbsolutePath());
 		}
-		scanJunitResultsInFolder(set, rootFolder);
-		
-		return set;
 	}
 
 	private void scanJunitResultsInFolder(Set<File> set, File folder)  throws IOException {

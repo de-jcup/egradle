@@ -38,17 +38,17 @@ import org.eclipse.ui.services.IServiceLocator;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
-
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
-	public static final String LAUNCH_ARGUMENT = "createRuntimeProcess";
+	
 
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
-		String projectName = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, "");
-		String tasks = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "");
-		String options = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS, "");
+		String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
+		String tasks = configuration.getAttribute(PROPERTY_TASKS, "");
+		String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
 
 		executeByHandler(launch, projectName, tasks, options);
 
@@ -74,7 +74,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						@SuppressWarnings("unchecked")
 						Map<Object, Object> map = values.getParameterValues();
 						map.put(LAUNCH_ARGUMENT, launch);
-
+						appendAdditionalLaunchParameters(map);
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
 						ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
@@ -102,6 +102,14 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 		} catch (Exception e) {
 			throw new CoreException(new Status(Status.ERROR, Activator.PLUGIN_ID, "Not handled!", e));
 		}
+	}
+
+	/**
+	 * Append additional launch parameters for gradle command handler. This is done inside UI Thread
+	 * @param map
+	 */
+	protected void appendAdditionalLaunchParameters(Map<Object, Object> map) {
+		
 	}
 
 }

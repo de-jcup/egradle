@@ -14,7 +14,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
-            class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportGradleJunitResultsHandler">
+            class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportAllGradleJunitResultsHandler">
       </handler>
    </extension>
    <extension
@@ -39,5 +39,57 @@
          </command>
       </menuContribution>
    </extension>
+   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          LAUNCHING                                   -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType
+        delegate="de.jcup.egradle.eclipse.junit.contribution.launch.EGradleJunitLaunchDelegate"
+        delegateDescription="Launches all tess of gradle project by given arguments"
+        id="de.jcup.egradle.junit.contribution.launchConfigurationType"
+        modes="run"
+        name="EGradle JUnit Test"
+        public="true"
+        >
+       </launchConfigurationType>
+	</extension>
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup 
+			class="de.jcup.egradle.eclipse.junit.contribution.launch.EGradleJunitLaunchConfigurationTabGroup"
+			description="Define your launch configurations for EGradle Junit Test"
+			id="de.jcup.egradle.junit.contribution.launchConfigurationTabGroup"
+			type="de.jcup.egradle.junit.contribution.launchConfigurationType">
+		</launchConfigurationTabGroup>
+	</extension>
+	<!-- launch image -->
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+	  <launchConfigurationTypeImage
+	     id="com.example.FirstLaunchConfigurationTypeImage"
+	     configTypeID="de.jcup.egradle.junit.contribution.launchConfigurationType"
+	     icon="icons/gradle-og-junit.gif">
+	  </launchConfigurationTypeImage>
+ 	</extension>
+ 	<!-- launch shortcuts for Run...as ... -->
+ 	<extension point="org.eclipse.debug.ui.launchShortcuts">
+    	<shortcut
+        id="de.jcup.egradle.junit.contribution.eGradleLaunchShortcut"
+        class="de.jcup.egradle.eclipse.junit.contribution.launch.EGradleJUnitLaunchShortCut"
+        label="EGradle JUnit Test"
+        icon="icons/gradle-og-junit.gif"
+        modes="run">
+            <contextualLaunch>
+            <enablement>
+                <with
+                    variable="selection">
+                    <count
+                        value="+">
+                    </count>
+                </with>
+            </enablement>
+        </contextualLaunch>
+            
+    	</shortcut>
+	</extension>
 
 </plugin>

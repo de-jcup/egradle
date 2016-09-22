@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -26,6 +28,7 @@ import org.eclipse.core.commands.IParameterValues;
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -38,9 +41,6 @@ import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
@@ -58,7 +58,9 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	public static final String COMMAND_ID = "egradle.commands.launch";
 	public static final String PARAMETER_LAUNCHCONFIG = "egradle.command.launch.config";
 
+	
 	private ILaunch launch;
+	private Job postJob;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -67,7 +69,8 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			IParameterValues configParamValues = configparameter.getValues();
 			Map<?, ?> values = configParamValues.getParameterValues();
 
-			launch = (ILaunch) values.get(EGradleLaunchDelegate.LAUNCH_ARGUMENT);
+			launch = (ILaunch) values.get(LAUNCH_ARGUMENT);
+			postJob = (Job) values.get(LAUNCH_POST_JOB);
 
 		} catch (NotDefinedException | ParameterValuesException e) {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
@@ -81,9 +84,9 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
 				/* commands */
-				String projectName = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME,
+				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME,
 						"");
-				String commandString = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "");
+				String commandString = configuration.getAttribute(PROPERTY_TASKS, "");
 
 				String[] commandStrings = commandString.split(" ");
 				GradleCommand[] commands = null;
@@ -95,7 +98,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				context.setCommands(commands);
 
 				/* raw options */
-				String options = configuration.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_OPTIONS, "");
+				String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
 				String[] splittedOptions = options.split(" ");
 				context.setOptions(splittedOptions);
 
@@ -103,11 +106,11 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				 * system properties, gradle project properties and enviroment
 				 */
 				Map<String, String> gradleProperties = configuration
-						.getAttribute(EGradleLaunchConfigurationTabGroup.GRADLE_PROPERTIES, Collections.emptyMap());
+						.getAttribute(GRADLE_PROPERTIES, Collections.emptyMap());
 				Map<String, String> systemProperties = configuration
-						.getAttribute(EGradleLaunchConfigurationTabGroup.SYSTEM_PROPERTIES, Collections.emptyMap());
+						.getAttribute(SYSTEM_PROPERTIES, Collections.emptyMap());
 				Map<String, String> environment = configuration.getAttribute(
-						EGradleLaunchConfigurationTabGroup.ENVIRONMENT_PROPERTIES, Collections.emptyMap());
+						ENVIRONMENT_PROPERTIES, Collections.emptyMap());
 
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);
@@ -135,7 +138,14 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
 		return new GradleExecutionDelegate(processOutputHandler,
-				new EclipseLaunchProcessExecutor(processOutputHandler, launch), this);
+				new EclipseLaunchProcessExecutor(processOutputHandler, launch){
+			@Override
+			protected void handleProcessEnd(Process p) {
+				if (postJob!=null){
+					postJob.schedule();
+				}
+			}
+		}, this);
 	}
 
 }

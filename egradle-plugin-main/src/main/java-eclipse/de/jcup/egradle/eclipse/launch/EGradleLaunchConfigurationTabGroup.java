@@ -15,6 +15,9 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -22,21 +25,37 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.ILaunchConfigurationTabGroup;
 
-import de.jcup.egradle.eclipse.Activator;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationTabGroup {
-	public static final String GRADLE_PROPERTIES = Activator.PLUGIN_ID+".gradleProperties";
-	public static final String SYSTEM_PROPERTIES = Activator.PLUGIN_ID+".systemProperties";
-	public static final String ENVIRONMENT_PROPERTIES = Activator.PLUGIN_ID+".environmentProperties";
 	
-	private ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[4];
+	private ILaunchConfigurationTab[] tabs;
 
 	public EGradleLaunchConfigurationTabGroup() {
+		Collection<ILaunchConfigurationTab> tempTabs = new ArrayList<>();
+		appendTabs(tempTabs);
+		tabs = new ILaunchConfigurationTab[tempTabs.size()];
 		int index = 0;
-		tabs[index++] = new EGradleLaunchConfigurationMainTab();
-		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Gradle project properties","1_gradle","icons/launch-gradleproperties.gif", GRADLE_PROPERTIES);
-		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("System properties","2_system","icons/launch-systemproperties.gif", SYSTEM_PROPERTIES);
-		tabs[index++] = new EGradleLaunchConfigurationPropertiesTab("Environment","3_env","icons/launch-environmentproperties.gif", ENVIRONMENT_PROPERTIES);
+		for (ILaunchConfigurationTab tab: tempTabs){
+			tabs[index++]=tab;
+		}
+		tempTabs.clear();
+		
+	}
+	
+	protected void appendTabs(Collection<ILaunchConfigurationTab> tabs){
+		appendMainTab(tabs);
+		appendPropertyTabs(tabs);
+	}
+
+	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
+		tabs.add(new EGradleLaunchConfigurationMainTab());
+	}
+
+	protected void appendPropertyTabs(Collection<ILaunchConfigurationTab> tabs) {
+		tabs.add(new EGradleLaunchConfigurationPropertiesTab("Gradle project properties","1_gradle","icons/launch-gradleproperties.gif", GRADLE_PROPERTIES));
+		tabs.add(new EGradleLaunchConfigurationPropertiesTab("System properties","2_system","icons/launch-systemproperties.gif", SYSTEM_PROPERTIES));
+		tabs.add(new EGradleLaunchConfigurationPropertiesTab("Environment","3_env","icons/launch-environmentproperties.gif", ENVIRONMENT_PROPERTIES));
 	}
 
 	@Override

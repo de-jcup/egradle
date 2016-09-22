@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -44,9 +45,11 @@ public class ImportGradleJunitResultsJob extends Job {
 	XMLWriter writer = new XMLWriter();
 	JUnitResultsCompressor compressor = new JUnitResultsCompressor();
 	JUnitResultFilesFinder finder = new JUnitResultFilesFinder();
+	private String projectname;
 
-	public ImportGradleJunitResultsJob(String name) {
+	public ImportGradleJunitResultsJob(String name, String projectname) {
 		super(name);
+		this.projectname=projectname;
 	}
 
 	@Override
@@ -61,11 +64,13 @@ public class ImportGradleJunitResultsJob extends Job {
 				}
 			}
 			
+			String projectNameToShow=buildProjectNameToUse();
 			/* fetch files*/
-			monitor.setTaskName("Fetching gradle junit result files");
+			String taskName = "Fetching gradle junit result files from" +projectNameToShow;
+			monitor.setTaskName(taskName);
 			File rootFolder = EGradleUtil.getRootProjectFolder();
 
-			Collection<File> files = finder.findTestFilesInRootProjectFolder(rootFolder);
+			Collection<File> files = finder.findTestFilesInFolder(rootFolder,projectname);
 			if (files.isEmpty()){
 				monitor.worked(100);
 				Display.getDefault().asyncExec(new Runnable() {
@@ -75,7 +80,7 @@ public class ImportGradleJunitResultsJob extends Job {
 						monitor.worked(100);
 						MessageDialog.openInformation(EGradleUtil.getActiveWorkbenchShell(), 
 								"No test results found",
-								"There are no test results to import from root project:\n'"+rootFolder.getAbsolutePath()+"'\n\nMaybe you have cleaned your project or did you forget to execute your tests?");
+								"There are no test results to import from "+projectNameToShow+" at:\n'"+rootFolder.getAbsolutePath()+"'\n\nEither there are no tests or tests are not executed");
 					}
 				});
 				return Status.OK_STATUS;
@@ -123,6 +128,14 @@ public class ImportGradleJunitResultsJob extends Job {
 			monitor.done();
 		}
 		return Status.OK_STATUS;
+	}
+
+	private String buildProjectNameToUse() {
+		if (projectname==null){
+			return "rootproject";
+		}else{
+			return "project '"+projectname+"'";
+		}
 	}
 
 }

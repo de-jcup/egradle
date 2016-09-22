@@ -44,22 +44,31 @@ public class JUnitResultFilesFinderTest {
 	
 	@Test(expected=IOException.class)
 	public void test_throws_filenotfound_exception_when_directory_not_exists() throws IOException  {
-		assertNotNull(collectorToTest.findTestFilesInRootProjectFolder(new File("./nirvana/never"+System.currentTimeMillis())));
+		assertNotNull(collectorToTest.findTestFilesInFolder(new File("./nirvana/never"+System.currentTimeMillis()),null));
 	}
 	
 	@Test
 	public void test_empty_collection_when_directory_empty_but_exists()  throws IOException {
-		Collection<File> collectTestFilesFromRootProjectFolder = collectorToTest.findTestFilesInRootProjectFolder(ROOTFOLDER_EMPTY);
+		Collection<File> collectTestFilesFromRootProjectFolder = collectorToTest.findTestFilesInFolder(ROOTFOLDER_EMPTY,null);
 		assertNotNull(collectTestFilesFromRootProjectFolder);
 		assertTrue(collectTestFilesFromRootProjectFolder.isEmpty());
 	}
 	
 	@Test
 	public void test_all_three_testfiles_are_collected()  throws IOException {
-		Collection<File> result = collectorToTest.findTestFilesInRootProjectFolder(ROOTFOLDER_1);
+		Collection<File> result = collectorToTest.findTestFilesInFolder(ROOTFOLDER_1,null);
 		assertNotNull(result);
 		
 		assertEquals("Expected 3 results but got:"+result.size(), 3, result.size());
+		
+	}
+	
+	@Test
+	public void test_two_testfiles_are_collected_when_subproject1_given_as_projectname()  throws IOException {
+		Collection<File> result = collectorToTest.findTestFilesInFolder(ROOTFOLDER_1,"subproject1");
+		assertNotNull(result);
+		
+		assertEquals("Expected 2 results but got:"+result.size(), 2, result.size());
 		
 	}
 

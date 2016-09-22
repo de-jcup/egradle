@@ -13,11 +13,19 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.api;
+ package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import de.jcup.egradle.core.domain.GradleContext;
+import java.util.Collection;
 
-public interface GradleContextPreparator {
+import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
-	public void prepare(GradleContext context);
+import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup;
+
+public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
+
+	
+	@Override
+	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
+		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
+	}
 }

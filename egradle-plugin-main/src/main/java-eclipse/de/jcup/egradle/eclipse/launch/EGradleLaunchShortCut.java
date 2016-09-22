@@ -41,6 +41,8 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+
 /**
  * Short cut launcher for Egradle
  * 
@@ -141,8 +143,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			String projectName = createProjectName(resource);
 			ILaunchConfigurationType configType = getConfigurationType();
 			wc = configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(projectName));
-			wc.setAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_TASKS, "assemble");
-			wc.setAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, projectName);
+			createCustomConfiguration(wc, projectName);
 			wc.setMappedResources(new IResource[] { resource });
 			config = wc.doSave();
 		} catch (CoreException exception) {
@@ -150,6 +151,19 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 					exception.getStatus().getMessage());
 		}
 		return config;
+	}
+
+	protected void createCustomConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
+		createProjectNameConfiguration(wc, projectName);
+		createTaskConfiguration(wc);
+	}
+
+	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
+		wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
+	}
+
+	protected void createTaskConfiguration(ILaunchConfigurationWorkingCopy wc) {
+		wc.setAttribute(PROPERTY_TASKS, "assemble");
 	}
 
 	private String createProjectName(IResource resource) {
@@ -192,7 +206,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			candidateConfigs = new ArrayList<ILaunchConfiguration>(configs.length);
 			for (int i = 0; i < configs.length; i++) {
 				ILaunchConfiguration config = configs[i];
-				if (config.getAttribute(EGradleLaunchConfigurationMainTab.PROPERTY_PROJECTNAME, "")
+				if (config.getAttribute(PROPERTY_PROJECTNAME, "")
 						.equals(projectName)) {
 					candidateConfigs.add(config);
 				}
@@ -227,7 +241,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 * 
 	 * @return launch manager
 	 */
-	private ILaunchManager getLaunchManager() {
+	protected ILaunchManager getLaunchManager() {
 		return DebugPlugin.getDefault().getLaunchManager();
 	}
 
