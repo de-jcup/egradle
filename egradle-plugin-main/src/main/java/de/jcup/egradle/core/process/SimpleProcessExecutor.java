@@ -86,8 +86,11 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 			}
 		}
 		/* done */
-		handleProcessEndWithoutErrors(p);
-		return p.exitValue();
+		int exitValue = p.exitValue();
+		if (exitValue== ProcessExecutor.PROCESS_RESULT_OK){
+			handleProcessEndWithoutErrors(p);
+		}
+		return exitValue;
 	}
 
 	protected void handleOutputStreams(Process p) throws IOException {
