@@ -25,26 +25,42 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Map;
 
-import de.jcup.egradle.core.domain.GradleContext;
+import org.apache.commons.lang3.StringUtils;
 
 public class SimpleProcessExecutor implements ProcessExecutor {
 
-	protected ProcessOutputHandler handler;
-
-	public SimpleProcessExecutor(ProcessOutputHandler streamHandler) {
-		notNull(streamHandler, "'streamHandler' may not be null");
-		this.handler = streamHandler;
+	protected OutputHandler handler;
+	private boolean handleProcessOutputStream;
+	
+	/**
+	 * Simple process executor implementation
+	 * @param outputHandler handle process information output
+	 * @param handleProcessOutputStream when true process output stream will be fetched and handled by given {@link OutputHandler} too
+	 */
+	public SimpleProcessExecutor(OutputHandler outputHandler, boolean handleProcessOutputStream) {
+		notNull(outputHandler, "'streamHandler' may not be null");
+		this.handler = outputHandler;
+		this.handleProcessOutputStream=handleProcessOutputStream;
 	}
 
 	@Override
-	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException {
+	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envProvider, String... commands) throws IOException {
+		notNull(wdProvider, "'wdProvider' may not be null");
+		notNull(envProvider, "'envProvider' may not be null");
+		String wd = wdProvider.getWorkingDirectory();
+		/* Working directory*/
+		File workingDirectory = null;
+		if (StringUtils.isNotBlank(wd)){
+			workingDirectory=new File(wd);
+		}
 		if (workingDirectory != null) {
 			if (!workingDirectory.exists()) {
 				throw new FileNotFoundException("Working directory does not exist:" + workingDirectory);
 			}
 		}
+		/* Create process with dedicated environment*/
 		ProcessBuilder pb = new ProcessBuilder(commands);
-		Map<String, String> env = context.getEnvironment();
+		Map<String, String> env = envProvider.getEnvironment();
 		/* init environment */
 		if (env != null) {
 			Map<String, String> pbEnv = pb.environment();
@@ -58,8 +74,10 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 		Date started = new Date();
 		Process p = pb.start();
-		handleProcessStarted(context, p, started, workingDirectory, commands);
+		handleProcessStarted(envProvider, p, started, workingDirectory, commands);
 		handleOutputStreams(p);
+		
+		/* wait for execution */
 		while (p.isAlive()) {
 			try {
 				Thread.sleep(200);
@@ -67,11 +85,15 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 				throw new IOException(e);
 			}
 		}
-		handleProcessEnd(p);
+		/* done */
+		handleProcessEndWithoutErrors(p);
 		return p.exitValue();
 	}
 
 	protected void handleOutputStreams(Process p) throws IOException {
+		if (!handleProcessOutputStream){
+			return;
+		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String line = null;
 		while ((line = reader.readLine()) != null) {
@@ -79,12 +101,12 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		}
 	}
 
-	protected void handleProcessEnd(Process p) {
+	protected void handleProcessEndWithoutErrors(Process p) {
 
 	}
 
 
-	protected void handleProcessStarted(GradleContext context, Process p, Date started, File workingDirectory,
+	protected void handleProcessStarted(EnvironmentProvider context, Process p, Date started, File workingDirectory,
 			String[] commands) {
 
 	}

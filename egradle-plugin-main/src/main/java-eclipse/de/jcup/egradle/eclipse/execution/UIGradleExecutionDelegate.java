@@ -32,7 +32,7 @@ import org.eclipse.ui.console.IConsoleView;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.ProcessExecutor;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 
@@ -41,8 +41,8 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	boolean refreshAllProjects = true;
 	boolean showEGradleSystemConsole = true;
 
-	public UIGradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator) {
-		super(processOutputHandler,processExecutor,additionalContextPreparator);
+	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator) {
+		super(outputHandler,processExecutor,additionalContextPreparator);
 	}
 
 	@Override

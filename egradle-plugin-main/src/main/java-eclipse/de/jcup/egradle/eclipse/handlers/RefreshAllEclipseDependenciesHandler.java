@@ -17,7 +17,7 @@ package de.jcup.egradle.eclipse.handlers;
 
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
@@ -37,8 +37,8 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	}
 
 	@Override
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
-		return new UIGradleExecutionDelegate(processOutputHandler,new SimpleProcessExecutor(processOutputHandler),this);
+	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) {
+		return new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true),this);
 	}
 
 }

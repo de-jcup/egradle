@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.core.process;
 
-public interface ProcessOutputHandler {
-
+public interface OutputHandler {
+	
 	void output(String line);
 
 }

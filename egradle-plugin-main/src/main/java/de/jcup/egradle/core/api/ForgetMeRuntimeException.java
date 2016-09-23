@@ -1,4 +1,4 @@
-package de.jcup.egradle.core;
+package de.jcup.egradle.core.api;
 
 /**
  * Special exception. Can be used to throw so caller is informed about problem but the caller. But the problem is already logged or shown to user in UI. So caller has nothing more to do -just to forget

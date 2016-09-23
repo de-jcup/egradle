@@ -30,23 +30,25 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 
 import de.jcup.egradle.core.domain.GradleContext;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.EnvironmentProvider;
+import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.core.process.WorkingDirectoryProvider;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	private ILaunch launch;
 
-	public EclipseLaunchProcessExecutor(ProcessOutputHandler streamHandler, ILaunch launch) {
-		super(streamHandler);
+	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch) {
+		super(streamHandler,false); // not output handled - done by launch mechanism in console!
 		this.launch = launch;
 	}
 
 	@Override
-	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException {
+	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envprovider, String... commands) throws IOException {
 		try{
-			return super.execute(workingDirectory, context, commands);
+			return super.execute(wdProvider, envprovider, commands);
 		}catch(IOException | RuntimeException e){
 				EGradleUtil.log(e);
 				/* problem occured - we have to cleanup launch otherwise launches will be kept in UI and not removeable!*/
@@ -64,9 +66,12 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	}
 
 	@Override
-	protected void handleProcessStarted(GradleContext context, Process process, Date started, File workingDirectory,
+	protected void handleProcessStarted(EnvironmentProvider provider, Process process, Date started, File workingDirectory,
 			String[] commands) {
-		String label = context.getCommandString();
+		String label = "<none>";
+		if (provider instanceof GradleContext){
+			label = ((GradleContext)provider).getCommandString();
+		}
 		String path = "inside root project";
 
 		Map<String, String> attributes = new HashMap<>();
@@ -76,8 +81,8 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		 * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage
 		 */
 		StringBuilder sb = new StringBuilder();
-		for (String key : context.getEnvironment().keySet()) {
-			String value = context.getEnvironment().get(key);
+		for (String key : provider.getEnvironment().keySet()) {
+			String value = provider.getEnvironment().get(key);
 			sb.append(key);
 			sb.append('=');
 			sb.append(value);
@@ -107,13 +112,6 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		if (!rp.canTerminate()) {
 			handler.output("Started process cannot terminate");
 		}
-	}
-
-	@Override
-	protected void handleOutputStreams(Process p) throws IOException {
-		/*
-		 * do nothing - is printed to console output on current launcher
-		 */
 	}
 
 }

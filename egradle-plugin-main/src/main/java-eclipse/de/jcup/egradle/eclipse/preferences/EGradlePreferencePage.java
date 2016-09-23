@@ -15,11 +15,7 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.CALL_TYPE_CUSTOM;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.CALL_TYPE_LINUX;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.CALL_TYPE_STANDARD;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.CALL_TYPE_WINDOWS;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 /**
  * This class represents a preference page that
  * is contributed to the Preferences dialog. By 
@@ -33,24 +29,38 @@ import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES
  * the main plug-in class. That way, preferences can
  * be accessed directly via the preference store.
  */
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_COMMAND;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_TYPE;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_GRADLE_INSTALL_PATH;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_GRADLE_SHELL;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_JAVA_HOME_PATH;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.P_ROOTPROJECT_PATH;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants.*;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.progress.UIJob;
 
+import de.jcup.egradle.core.api.GradleConfigurationValidator;
+import de.jcup.egradle.core.api.ValidationException;
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
+import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -60,6 +70,10 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	private StringFieldEditor gradleCommandFieldEditor;
 	private DirectoryFieldEditor gradleHomeDirectoryFieldEditor;
 	private Group gradleCallGroup;
+	private Text validationOutputField;
+	private DirectoryFieldEditor rootPathDirectoryEditor;
+	private DirectoryFieldEditor defaultJavaHomeDirectoryEditor;
+	private Button validationButton;
 
 	public EGradlePreferencePage() {
 		super(GRID);
@@ -79,13 +93,13 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		groupLayoutData.grabExcessHorizontalSpace = true;
 		groupLayoutData.grabExcessVerticalSpace = false;
 		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 2;
+		groupLayoutData.horizontalSpan = 3;
 
 		Group defaultGroup = SWTFactory.createGroup(getFieldEditorParent(), "Defaults", 1, 10, SWT.FILL);
 		defaultGroup.setLayoutData(groupLayoutData);
 
-		DirectoryFieldEditor rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(),
-				"&Gradle root project path:", defaultGroup);
+		rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path:",
+				defaultGroup);
 		addField(rootPathDirectoryEditor);
 		String rootPathTooltipText = "Default root path. Can be overriden in launch configurations";
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
@@ -93,7 +107,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
 		/* java home default */
-		DirectoryFieldEditor defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(),
+		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(),
 				"Default &JAVA HOME set for gradle (optional):", defaultGroup);
 		defaultJavaHomeDirectoryEditor.setEmptyStringAllowed(true);
 		String defaultJavaHomeDirectoryTooltipText = "A default global JAVA_HOME path. Can be overriden in launch configurations";
@@ -107,46 +121,167 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		groupLayoutData.horizontalAlignment = GridData.FILL;
 		groupLayoutData.verticalAlignment = GridData.BEGINNING;
 		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = true;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 2;
+		groupLayoutData.grabExcessVerticalSpace = false;
+		groupLayoutData.verticalSpan = 3;
+		groupLayoutData.horizontalSpan = 3;
 		gradleCallGroup = SWTFactory.createGroup(getFieldEditorParent(), "Gradle call", 1, 10, SWT.FILL);
 		gradleCallGroup.setLayoutData(groupLayoutData);
 		String[][] entryNamesAndValues = new String[][] { new String[] { "Standard", CALL_TYPE_STANDARD },
 				new String[] { "Windows", CALL_TYPE_WINDOWS }, new String[] { "Linux", CALL_TYPE_LINUX },
 				new String[] { "Custom", CALL_TYPE_CUSTOM } };
 		gradleCallTypeRadioButton = new ComboFieldEditor(P_GRADLE_CALL_TYPE.getId(), "Call type", entryNamesAndValues,
-				gradleCallGroup) {
-			// setPropertyChangeListener does not work on combo field editor
-			@Override
-			protected void fireValueChanged(String property, Object oldValue, Object newValue) {
-
-				super.fireValueChanged(property, oldValue, newValue);
-				// updateCallTypeFields(newValue);
-			}
-		};
+				gradleCallGroup);
 
 		addField(gradleCallTypeRadioButton);
 		shellFieldEditor = new StringFieldEditor(P_GRADLE_SHELL.getId(), "Shell", gradleCallGroup);
 		addField(shellFieldEditor);
 		gradleCommandFieldEditor = new StringFieldEditor(P_GRADLE_CALL_COMMAND.getId(), "Gradle call", gradleCallGroup);
 		addField(gradleCommandFieldEditor);
-		gradleHomeDirectoryFieldEditor = new DirectoryFieldEditor(P_GRADLE_INSTALL_PATH.getId(), "Gradle home path:",
+		gradleHomeDirectoryFieldEditor = new DirectoryFieldEditor(P_GRADLE_INSTALL_PATH.getId(), "Gradle bin folder:",
 				gradleCallGroup);
 		addField(gradleHomeDirectoryFieldEditor);
+
+		/* ------------------------------------ */
+		/* - Check output - */
+		/* ------------------------------------ */
+		groupLayoutData = new GridData();
+		groupLayoutData.horizontalAlignment = GridData.FILL;
+		groupLayoutData.verticalAlignment = GridData.BEGINNING;
+		groupLayoutData.grabExcessHorizontalSpace = true;
+		groupLayoutData.grabExcessVerticalSpace = true;
+		groupLayoutData.verticalSpan = 2;
+		groupLayoutData.horizontalSpan = 3;
+
+		Group validationGroup = SWTFactory.createGroup(getFieldEditorParent(),
+				"Manual validation if gradle is executable", 1, 10, SWT.FILL);
+		validationGroup.setLayoutData(groupLayoutData);
+
+		GridData labelGridData = new GridData();
+		labelGridData.horizontalAlignment = GridData.FILL;
+		labelGridData.verticalAlignment = GridData.BEGINNING;
+		labelGridData.grabExcessHorizontalSpace = false;
+		labelGridData.grabExcessVerticalSpace = false;
+
+		GridData gridDataLastColumn = new GridData();
+		gridDataLastColumn.horizontalAlignment = GridData.FILL;
+		gridDataLastColumn.verticalAlignment = GridData.FILL;
+		gridDataLastColumn.grabExcessHorizontalSpace = true;
+		gridDataLastColumn.grabExcessVerticalSpace = false;
+		gridDataLastColumn.verticalSpan = 2;
+		gridDataLastColumn.horizontalSpan = 2;
+		gridDataLastColumn.minimumHeight = 50;
+		gridDataLastColumn.heightHint = 100;
+
+		// Label validationLabel = new Label(validationGroup, SWT.NULL);
+		// validationLabel.setText("Gradle execution validation output:");
+		// validationLabel.setLayoutData(labelGridData);
+
+		validationOutputField = new Text(validationGroup, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.READ_ONLY);
+		validationOutputField.setLayoutData(gridDataLastColumn);
+
+		validationButton = new Button(validationGroup, SWT.NONE);
+		validationButton.setText("Validate gradle execution");
+		validationButton.setImage(EGradleUtil.getImage("icons/gradle-og.gif"));
+
+		validationButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (validationRunning == true) {
+					return;
+				}
+				setValid(false);
+				validationRunning = true;
+				validationOutputField.setText("Start validation...\n");
+				new ValidationJob().schedule(500);
+			}
+		});
+	}
+
+	@Override
+	protected void updateApplyButton() {
+		super.updateApplyButton();
+	}
+
+
+	private boolean validationRunning = false;
+
+	private class ValidationJob extends UIJob {
+		private GradleConfigurationValidator validator;
+		private MutableGradleConfiguration configuration;
+		private OutputHandler outputHandler;
+
+		public ValidationJob() {
+			super("Preferene validation");
+
+			outputHandler = new OutputHandler() {
+
+				@Override
+				public void output(String line) {
+					Display.getCurrent().asyncExec(new Runnable() {
+
+						@Override
+						public void run() {
+							validationOutputField.append(line + "\n");
+						}
+					});
+				}
+
+			};
+
+			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true));
+			validator.setOutputHandler(outputHandler);
+			configuration = new MutableGradleConfiguration();
+			configuration.setGradleCommand(gradleCommandFieldEditor.getStringValue());
+			configuration.setGradleBinDirectory(gradleHomeDirectoryFieldEditor.getStringValue());
+			configuration.setShellCommand(shellFieldEditor.getStringValue());
+			configuration.setWorkingDirectory(rootPathDirectoryEditor.getStringValue());
+			configuration.setJavaHome(defaultJavaHomeDirectoryEditor.getStringValue());
+		}
+
+		@Override
+		public IStatus runInUIThread(IProgressMonitor monitor) {
+			/* check more... */
+			try {
+				validator.validate(configuration);
+				checkState(); // we say its valid - but the others...
+				outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
+				return Status.OK_STATUS;
+			} catch (ValidationException e) {
+				setValid(false);
+				StringBuilder sb = new StringBuilder();
+				sb.append(e.getMessage());
+				String details = e.getDetails();
+				if (details != null) {
+					sb.append("\n");
+					sb.append(details);
+				}
+				outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
+				return Status.CANCEL_STATUS;
+			} finally {
+				Display.getCurrent().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						validationRunning = false;
+						updateApplyButton();
+					}
+				});
+			}
+		}
 
 	}
 
 	@Override
 	protected void initialize() {
 		super.initialize();
-		updateCallGroupPartsEnabledState(gradleCallTypeRadioButton.getPreferenceStore().getString(P_GRADLE_CALL_TYPE.getId()));
+		updateCallGroupPartsEnabledState(
+				gradleCallTypeRadioButton.getPreferenceStore().getString(P_GRADLE_CALL_TYPE.getId()));
 	}
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		super.propertyChange(event);
-		if (gradleCallTypeRadioButton==event.getSource()){
+		if (gradleCallTypeRadioButton == event.getSource()) {
 			updateCallTypeFields(event.getNewValue());
 		}
 	}
@@ -165,12 +300,12 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		case CALL_TYPE_LINUX:
 			shellFieldEditor.setStringValue("");
 			gradleHomeDirectoryFieldEditor.setStringValue(EGradlePreferences.DEFAULT_GRADLE_HOME_PATH);
-			gradleCommandFieldEditor.setStringValue(EGradlePreferences.DEFAULT_GRADLE_CALL_COMMAND);
+			gradleCommandFieldEditor.setStringValue("gradle");
 			break;
 		case CALL_TYPE_WINDOWS:
 			shellFieldEditor.setStringValue("");
 			gradleHomeDirectoryFieldEditor.setStringValue(EGradlePreferences.DEFAULT_GRADLE_HOME_PATH);
-			gradleCommandFieldEditor.setStringValue(EGradlePreferences.DEFAULT_GRADLE_CALL_COMMAND + ".bat");
+			gradleCommandFieldEditor.setStringValue("gradle.bat");
 			break;
 		}
 	}

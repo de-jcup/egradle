@@ -17,14 +17,17 @@ package de.jcup.egradle.eclipse.handlers;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
+import de.jcup.egradle.core.api.ForgetMeRuntimeException;
 import de.jcup.egradle.core.api.GradleContextPreparator;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;
@@ -38,14 +41,14 @@ import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
  */
 public abstract class AbstractEGradleCommandHandler extends AbstractHandler implements GradleContextPreparator {
 
-	protected ProcessOutputHandler processOutputHandler;
+	protected OutputHandler outputHandler;
 
 	public AbstractEGradleCommandHandler() {
 		init();
 	}
 
 	protected void init() {
-		this.processOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
+		this.outputHandler = new EGradleSystemConsoleProcessOutputHandler();
 	}
 
 	
@@ -59,9 +62,9 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
+		
 		/* create execution and fetch mode */
-		GradleExecutionDelegate execution = createGradleExecution(processOutputHandler);
+		GradleExecutionDelegate execution = createGradleExecution(outputHandler);
 		ExecutionMode mode = getExecutionMode();
 
 		/* execute */
@@ -90,6 +93,6 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 
 	
 
-	protected abstract GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler);
+	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler);
 
 }

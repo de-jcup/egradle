@@ -26,17 +26,18 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import de.jcup.egradle.core.ForgetMeRuntimeException;
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.GradleExecutor.Result;
+import de.jcup.egradle.core.api.ForgetMeRuntimeException;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants;
 
 /**
@@ -49,7 +50,7 @@ import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstant
 public class GradleExecutionDelegate {
 
 	private GradleContext context;
-	private ProcessOutputHandler systemConsoleOutputHandler;
+	private OutputHandler systemConsoleOutputHandler;
 	private Result result;
 	protected GradleExecutor executor;
 
@@ -57,11 +58,11 @@ public class GradleExecutionDelegate {
 		return result;
 	}
 
-	public GradleExecutionDelegate(ProcessOutputHandler processOutputHandler, ProcessExecutor processExecutor,
+	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
 			GradleContextPreparator additionalContextPreparator) {
-		notNull(processOutputHandler, "'systemConsoleOutputHandler' may not be null");
+		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
-		this.systemConsoleOutputHandler = processOutputHandler;
+		this.systemConsoleOutputHandler = outputHandler;
 
 		context = createContext();
 		if (additionalContextPreparator!=null){
@@ -76,18 +77,20 @@ public class GradleExecutionDelegate {
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
-		
+		EGradlePreferences preferences = PREFERENCES;
 		/* Default JAVA_HOME */
-		String globalJavaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
+		String globalJavaHome = preferences.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
 		if (!StringUtils.isEmpty(globalJavaHome)) {
+			config.setGradleCommand(globalJavaHome); // its an config value so we set it to config too. 
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME still can be overriden by context preparator see below
 		}
 		context.setAmountOfWorkToDo(1);
 		
 		/* Call gradle settings */
-		String gradleCommand = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_CALL_COMMAND);
-		String gradleInstallPath = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_PATH);
-		String shell = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
+		String gradleCommand = preferences.getStringPreference(PreferenceConstants.P_GRADLE_CALL_COMMAND);
+		String gradleInstallPath = preferences.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_PATH);
+		
+		String shell = preferences.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
 		
 		if (StringUtils.isEmpty(gradleCommand)){
 			EGradleMessageDialog.INSTANCE.showError("Preferences have no gradle command set, cannot execute!");
@@ -95,9 +98,9 @@ public class GradleExecutionDelegate {
 		}
 		
 		config.setShellCommand(shell);
-		config.setGradleInstallDirectory(gradleInstallPath);
+		config.setGradleBinDirectory(gradleInstallPath);
 		config.setGradleCommand(gradleCommand);
-		
+		config.setWorkingDirectory(rootProject.getFolder().getAbsolutePath());
 		return context;
 	}
 

@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core.process;
 
-public class SystemOutOutputHandler implements ProcessOutputHandler {
+public class SystemOutOutputHandler implements OutputHandler {
 
 	@Override
 	public void output(String line) {

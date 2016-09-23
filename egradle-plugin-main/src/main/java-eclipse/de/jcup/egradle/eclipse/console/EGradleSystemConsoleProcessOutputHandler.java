@@ -17,9 +17,9 @@ package de.jcup.egradle.eclipse.console;
 
 import org.eclipse.ui.console.MessageConsoleStream;
 
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
 
-public class EGradleSystemConsoleProcessOutputHandler implements ProcessOutputHandler {
+public class EGradleSystemConsoleProcessOutputHandler implements OutputHandler {
 
 	private MessageConsoleStream messageStream;
 

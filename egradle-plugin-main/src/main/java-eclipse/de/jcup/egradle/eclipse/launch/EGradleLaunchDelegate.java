@@ -15,10 +15,7 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.LAUNCH_ARGUMENT;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_OPTIONS;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_PROJECTNAME;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import java.util.Map;
 
@@ -34,7 +31,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -42,7 +38,7 @@ import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.services.IServiceLocator;
 
-import de.jcup.egradle.core.ForgetMe;
+import de.jcup.egradle.core.api.ForgetMe;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;

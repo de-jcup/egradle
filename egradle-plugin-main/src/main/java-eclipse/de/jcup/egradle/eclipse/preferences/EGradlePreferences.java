@@ -63,9 +63,11 @@ public class EGradlePreferences {
 	}
 
 	public String getStringPreference(PreferenceConstants id) {
-		IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-		String result = prefs.get(id.getId(), "");
-		return result;
+		String data = getPreferenceStore().getString(id.getId());
+		if (data==null){
+			data="";
+		}
+		return data;
 	}
 
 	public IPreferenceStore getPreferenceStore() {

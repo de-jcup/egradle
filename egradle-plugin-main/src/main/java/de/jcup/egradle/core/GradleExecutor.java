@@ -22,10 +22,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import de.jcup.egradle.core.api.FileUtil;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
-import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
 
 /**
@@ -37,7 +37,7 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 public class GradleExecutor {
 
 	private ProcessExecutor processExecutor;
-
+	
 	public GradleExecutor(ProcessExecutor processExecutor) {
 		notNull(processExecutor, "Process executor may not be null!");
 		this.processExecutor = processExecutor;
@@ -52,14 +52,12 @@ public class GradleExecutor {
 	public Result execute(GradleContext context) {
 		Result result = new Result();
 
-		GradleRootProject rootProject = context.getRootProject();
-
 		String[] commandStrings = createExecutionCommand(context);
 
 		/* execute process */
 		int processResult;
 		try {
-			processResult = processExecutor.execute(rootProject.getFolder(), context, commandStrings);
+			processResult = processExecutor.execute(context.getConfiguration(), context, commandStrings);
 
 			result.setProcessResult(processResult);
 		} catch (IOException e) {
@@ -92,7 +90,7 @@ public class GradleExecutor {
 		if (!StringUtils.isEmpty(shell)) {
 			commandStrings[pos++] = shell;
 		}
-		commandStrings[pos++] = config.getGradleInstallDirectory()+config.getGradleCommand();
+		commandStrings[pos++] = FileUtil.createGradleCommandFullPath(config);
 		/* raw options */
 		for (int i = 0; i < options.length; i++) {
 			commandStrings[pos++] = options[i];

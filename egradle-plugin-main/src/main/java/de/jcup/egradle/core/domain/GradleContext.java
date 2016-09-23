@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.process.EnvironmentProvider;
 
 /**
  * Contains information about gradle parts. E.g. root project, system properties
@@ -30,7 +31,7 @@ import de.jcup.egradle.core.config.GradleConfiguration;
  * @author Albert Tregnaghi
  *
  */
-public class GradleContext {
+public class GradleContext implements EnvironmentProvider{
 
 	private GradleRootProject rootProject;
 

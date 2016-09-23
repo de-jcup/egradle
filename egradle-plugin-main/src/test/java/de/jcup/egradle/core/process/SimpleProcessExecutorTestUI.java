@@ -18,18 +18,21 @@ package de.jcup.egradle.core.process;
 import java.io.File;
 import java.io.IOException;
 
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 
 public class SimpleProcessExecutorTestUI {
 
 	public static void main(String[] args) throws IOException {
-		SimpleProcessExecutor executorToTest = new SimpleProcessExecutor(new SystemOutOutputHandler());
+		SimpleProcessExecutor executorToTest = new SimpleProcessExecutor(new SystemOutOutputHandler(),true);
 
+		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		File folder = new File("./../");
+		config.setWorkingDirectory(folder.getAbsolutePath());
 		System.out.println("folder:" + folder.getCanonicalPath());
 		GradleContext context = new GradleContext(null, null);
 		context.getEnvironment().put("JAVA_HOME", "C:/dev_custom/java/jdk/jdk8u_25/jre");
 
-		executorToTest.execute(folder, context, "bash", "gradlew", "cleanEclipse", "eclipse");
+		executorToTest.execute(config, context, "bash", "gradlew", "cleanEclipse", "eclipse");
 	}
 }

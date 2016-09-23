@@ -27,6 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.core.GradleExecutor.Result;
+import de.jcup.egradle.core.api.FileUtil;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -59,7 +60,7 @@ public class GradleExecutorTest {
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
 		when(mockedConfiguration.getGradleCommand()).thenReturn("gradlew");
-		when(mockedConfiguration.getGradleInstallDirectory()).thenReturn("");
+		when(mockedConfiguration.getGradleBinDirectory()).thenReturn("");
 		when(mockedConfiguration.getShellCommand()).thenReturn("usedShell");
 
 		mockedCommand1 = mock(GradleCommand.class);
@@ -89,11 +90,13 @@ public class GradleExecutorTest {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("eclipse");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedConfiguration.getGradleInstallDirectory()).thenReturn("/c/dev/test/");
+		File userHome = new  File(System.getProperty("user.home"));
+		when(mockedConfiguration.getGradleBinDirectory()).thenReturn(userHome.getAbsolutePath());
+		when(mockedConfiguration.getGradleCommand()).thenReturn("testGradleCall");
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "/c/dev/test/gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "eclipse");
 	}
 	
 	@Test
@@ -105,7 +108,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradlew", "eclipse");
 	}
 
 	@Test
@@ -116,7 +119,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse");
 	}
 
 	@Test
@@ -129,7 +132,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "-test1", "-test2",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "-test1", "-test2",
 				"eclipse");
 	}
 
@@ -145,7 +148,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew",
 				"-Pgradle.test.property=test", "eclipse");
 	}
 
@@ -161,7 +164,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell",
 				"gradlew", "-Dsystem.test.property=test", "eclipse");
 	}
 
@@ -180,7 +183,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew",
 				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
 	}
 
@@ -200,7 +203,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "-option",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "-option",
 				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
 	}
 
@@ -214,7 +217,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "gradlew", "eclipse", "cleanEclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse", "cleanEclipse");
 	}
 
 	@Test
@@ -229,6 +232,6 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mcokedWorkingFolder, mockedContext, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse");
 	}
 }

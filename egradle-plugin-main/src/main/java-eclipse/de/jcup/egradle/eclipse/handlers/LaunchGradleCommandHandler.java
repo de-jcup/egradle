@@ -37,7 +37,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
-import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
@@ -136,11 +136,11 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		}
 	}
 
-	protected GradleExecutionDelegate createGradleExecution(ProcessOutputHandler processOutputHandler) {
-		return new GradleExecutionDelegate(processOutputHandler,
-				new EclipseLaunchProcessExecutor(processOutputHandler, launch){
+	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) {
+		return new GradleExecutionDelegate(outputHandler,
+				new EclipseLaunchProcessExecutor(outputHandler, launch){
 			@Override
-			protected void handleProcessEnd(Process p) {
+			protected void handleProcessEndWithoutErrors(Process p) {
 				if (postJob!=null){
 					postJob.schedule();
 				}
