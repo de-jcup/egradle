@@ -15,8 +15,14 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.LAUNCH_ARGUMENT;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_OPTIONS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_PROJECTNAME;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
+
 import java.util.Map;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
@@ -28,6 +34,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -35,10 +42,10 @@ import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.services.IServiceLocator;
 
+import de.jcup.egradle.core.ForgetMe;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
 	
@@ -85,8 +92,14 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						handlerService.executeCommand(parametrizedCommand, null);
 
 					} catch (Exception e) {
-						throw new IllegalStateException("EGradle launch command execution failed", e);
+						if (ExceptionUtils.getRootCause(e) instanceof ForgetMe){
+							/* do nothing, already handled*/
+						}else{
+							throw new IllegalStateException("EGradle launch command execution failed", e);
+						}
 					} finally {
+						/* FIXME ATR, 23.09.2016: when exceptions are occuring while launching the old launches are still existing in debug view*/
+						/* the following workaround does really work, but it is the correct place*/
 						if (!launch.isTerminated()) {
 							try {
 								launch.terminate();

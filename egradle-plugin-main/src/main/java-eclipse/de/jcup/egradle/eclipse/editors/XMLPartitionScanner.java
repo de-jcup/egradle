@@ -37,7 +37,7 @@ public class XMLPartitionScanner extends RuleBasedPartitionScanner {
 		IToken gradleString = new Token(GRADLE_STRING);
 		IToken gradleApplyPlugin = new Token(GRADLE_APPLY);
 
-		IToken tag = new Token(XML_TAG);
+//		IToken tag = new Token(XML_TAG);
 
 		IPredicateRule[] rules = new IPredicateRule[7];
 		int index = 0;

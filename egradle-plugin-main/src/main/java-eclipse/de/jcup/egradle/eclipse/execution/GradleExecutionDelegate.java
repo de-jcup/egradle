@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static org.apache.commons.lang3.Validate.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -26,15 +26,16 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import de.jcup.egradle.core.ForgetMeRuntimeException;
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.api.GradleContextPreparator;
-import de.jcup.egradle.core.config.AlwaysBashWithGradleWrapperConfiguration;
-import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants;
 
@@ -62,27 +63,42 @@ public class GradleExecutionDelegate {
 		notNull(processExecutor, "'processExecutor' may not be null");
 		this.systemConsoleOutputHandler = processOutputHandler;
 
-		GradleRootProject rootProject = EGradleUtil.getRootProject();
-
-		/* build configuration for gradle run */
-		GradleConfiguration config = new AlwaysBashWithGradleWrapperConfiguration();
-
-		/* build context */
-		context = new GradleContext(rootProject, config);
-		prepareContext(context,additionalContextPreparator);
+		context = createContext();
+		if (additionalContextPreparator!=null){
+			additionalContextPreparator.prepare(context);
+		}
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private void prepareContext(GradleContext context, GradleContextPreparator additionalContextPreparator) {
+	private GradleContext createContext() {
+		GradleRootProject rootProject = EGradleUtil.getRootProject();
+		/* build configuration for gradle run */
+		MutableGradleConfiguration config = new MutableGradleConfiguration();
+		/* build context */
+		GradleContext context = new GradleContext(rootProject, config);
+		
+		/* Default JAVA_HOME */
 		String globalJavaHome = PREFERENCES.getStringPreference(PreferenceConstants.P_JAVA_HOME_PATH);
 		if (!StringUtils.isEmpty(globalJavaHome)) {
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME still can be overriden by context preparator see below
 		}
 		context.setAmountOfWorkToDo(1);
-		if (additionalContextPreparator!=null){
-			additionalContextPreparator.prepare(context);
+		
+		/* Call gradle settings */
+		String gradleCommand = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_CALL_COMMAND);
+		String gradleInstallPath = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_PATH);
+		String shell = PREFERENCES.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
+		
+		if (StringUtils.isEmpty(gradleCommand)){
+			EGradleMessageDialog.INSTANCE.showError("Preferences have no gradle command set, cannot execute!");
+			throw new ForgetMeRuntimeException("Illegal preference store, already shown to user");
 		}
-
+		
+		config.setShellCommand(shell);
+		config.setGradleInstallDirectory(gradleInstallPath);
+		config.setGradleCommand(gradleCommand);
+		
+		return context;
 	}
 
 	/**
@@ -121,9 +137,10 @@ public class GradleExecutionDelegate {
 			afterExecutionDone(monitor);
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);
+		}finally{
+			monitor.done();
 		}
 
-		monitor.done();
 	}
 
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {

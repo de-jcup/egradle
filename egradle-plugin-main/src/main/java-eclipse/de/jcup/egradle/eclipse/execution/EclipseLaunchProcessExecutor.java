@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.execution;
+package de.jcup.egradle.eclipse.execution;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
@@ -31,6 +32,7 @@ import org.eclipse.debug.core.model.IProcess;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
@@ -38,7 +40,27 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 
 	public EclipseLaunchProcessExecutor(ProcessOutputHandler streamHandler, ILaunch launch) {
 		super(streamHandler);
-		this.launch=launch;
+		this.launch = launch;
+	}
+
+	@Override
+	public int execute(File workingDirectory, GradleContext context, String... commands) throws IOException {
+		try{
+			return super.execute(workingDirectory, context, commands);
+		}catch(IOException | RuntimeException e){
+				EGradleUtil.log(e);
+				/* problem occured - we have to cleanup launch otherwise launches will be kept in UI and not removeable!*/
+				if (!launch.isTerminated()){
+					try {
+						if (launch.canTerminate()){
+							launch.terminate();
+						}
+					} catch (DebugException de) {
+						EGradleUtil.log(de);
+					}
+				}
+				throw e;
+		}
 	}
 
 	@Override
@@ -54,14 +76,14 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		 * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage
 		 */
 		StringBuilder sb = new StringBuilder();
-		for (String key: context.getEnvironment().keySet()){
+		for (String key : context.getEnvironment().keySet()) {
 			String value = context.getEnvironment().get(key);
 			sb.append(key);
 			sb.append('=');
 			sb.append(value);
 			sb.append(System.getProperty("line.separator"));
 		}
-		
+
 		attributes.put(DebugPlugin.ATTR_ENVIRONMENT, sb.toString());
 		attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
 		attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
@@ -86,7 +108,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 			handler.output("Started process cannot terminate");
 		}
 	}
-	
+
 	@Override
 	protected void handleOutputStreams(Process p) throws IOException {
 		/*

@@ -58,8 +58,9 @@ public class GradleExecutorTest {
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
-		when(mockedConfiguration.isUsingGradleWrapper()).thenReturn(true);
-		when(mockedConfiguration.getShellForGradleWrapper()).thenReturn("usedShell");
+		when(mockedConfiguration.getGradleCommand()).thenReturn("gradlew");
+		when(mockedConfiguration.getGradleInstallDirectory()).thenReturn("");
+		when(mockedConfiguration.getShellCommand()).thenReturn("usedShell");
 
 		mockedCommand1 = mock(GradleCommand.class);
 		mockedCommand2 = mock(GradleCommand.class);
@@ -81,6 +82,30 @@ public class GradleExecutorTest {
 		Result result = executorToTest.execute(mockedContext);
 		assertNotNull(result);
 		assertTrue(result.isOkay());
+	}
+	
+	@Test
+	public void gradleInstallationDirectory_is_appended_before_gradle_command() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedConfiguration.getGradleInstallDirectory()).thenReturn("/c/dev/test/");
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, mockedContext, "usedShell", "/c/dev/test/gradlew", "eclipse");
+	}
+	
+	@Test
+	public void when_shell_is_empty_the_shell_part_is_removed() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedConfiguration.getShellCommand()).thenReturn("");
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(null, mockedContext, "gradlew", "eclipse");
 	}
 
 	@Test

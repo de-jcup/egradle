@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.junit.contribution.launch;
 
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -29,10 +28,7 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		IProject project = getProject();
-		if (project != null) {
-			configuration.setAttribute(PROPERTY_PROJECTNAME, project.getName());
-		}
+		super.setDefaults(configuration);
 		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitLaunchShortCut.DEFAULT_TASKS);
 	}
 	

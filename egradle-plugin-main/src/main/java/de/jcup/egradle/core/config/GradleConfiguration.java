@@ -17,8 +17,10 @@ package de.jcup.egradle.core.config;
 
 public interface GradleConfiguration {
 
-	public String getShellForGradleWrapper();
+	public String getShellCommand();
 
-	public boolean isUsingGradleWrapper();
+	public String getGradleCommand();
+	
+	public String getGradleInstallDirectory();
 
 }

@@ -16,6 +16,7 @@
 package de.jcup.egradle.eclipse.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Class used to initialize default preference values.
@@ -30,6 +31,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		/* currently we got no defaults */
+		IPreferenceStore store = EGradlePreferences.PREFERENCES.getPreferenceStore();
+		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_TYPE.getId(), EGradlePreferences.CALL_TYPE_STANDARD);
+		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_SHELL.getId(), EGradlePreferences.DEFAULT_GRADLE_SHELL);
+		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_INSTALL_PATH.getId(), EGradlePreferences.DEFAULT_GRADLE_HOME_PATH);
+		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_COMMAND.getId(), EGradlePreferences.DEFAULT_GRADLE_CALL_COMMAND);
 	}
 
 }

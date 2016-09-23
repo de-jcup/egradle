@@ -20,6 +20,8 @@ import static org.apache.commons.lang3.Validate.*;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -73,8 +75,9 @@ public class GradleExecutor {
 		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length + 1;
 		GradleConfiguration config = context.getConfiguration();
-		if (config.isUsingGradleWrapper()) {
-			arraySize += 1;// we must call wrapper executor too
+		String shell = config.getShellCommand();
+		if (!StringUtils.isEmpty(shell)) {
+			arraySize += 1;// we must call shell executor too
 		}
 		String[] options = context.getOptions();
 		arraySize += options.length;
@@ -86,12 +89,10 @@ public class GradleExecutor {
 		arraySize += systemProperties.size();
 		
 		String[] commandStrings = new String[arraySize];
-		if (config.isUsingGradleWrapper()) {
-			commandStrings[pos++] = config.getShellForGradleWrapper();
-			commandStrings[pos++] = "gradlew";
-		} else {
-			throw new UnsupportedOperationException("Currently only gradle wrapper usage is supported!");
+		if (!StringUtils.isEmpty(shell)) {
+			commandStrings[pos++] = shell;
 		}
+		commandStrings[pos++] = config.getGradleInstallDirectory()+config.getGradleCommand();
 		/* raw options */
 		for (int i = 0; i < options.length; i++) {
 			commandStrings[pos++] = options[i];

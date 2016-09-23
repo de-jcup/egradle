@@ -31,7 +31,6 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
-import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.ProcessOutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
