@@ -15,27 +15,29 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
 /**
  * Class used to initialize default preference values.
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#
-	 * initializeDefaultPreferences()
-	 */
 	public void initializeDefaultPreferences() {
-		/* currently we got no defaults */
-		IPreferenceStore store = EGradlePreferences.PREFERENCES.getPreferenceStore();
-		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_TYPE.getId(), EGradlePreferences.CALL_TYPE_STANDARD);
-		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_SHELL.getId(), EGradlePreferences.DEFAULT_GRADLE_SHELL);
-		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_INSTALL_PATH.getId(), EGradlePreferences.DEFAULT_GRADLE_HOME_PATH);
-		store.setDefault(EGradlePreferences.PreferenceConstants.P_GRADLE_CALL_COMMAND.getId(), EGradlePreferences.DEFAULT_GRADLE_CALL_COMMAND);
+		IPreferenceStore store = PREFERENCES.getPreferenceStore();
+		EGradleCallType defaultCallType = null; 
+		if (SystemUtils.IS_OS_WINDOWS){
+			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
+		}else{
+			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
+		}
+		store.setDefault(P_GRADLE_CALL_TYPE.getId(),defaultCallType.getId());
+		store.setDefault(P_GRADLE_SHELL.getId(), defaultCallType.getDefaultGradleShell());
+		store.setDefault(P_GRADLE_INSTALL_BIN_FOLDER.getId(), defaultCallType.getDefaultGradleBinFolder());
+		store.setDefault(P_GRADLE_CALL_COMMAND.getId(), defaultCallType.getDefaultGradleCommand());
 	}
 
 }

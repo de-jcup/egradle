@@ -59,9 +59,8 @@ public class GradleExecutorTest {
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
-		when(mockedConfiguration.getGradleCommand()).thenReturn("gradlew");
+		when(mockedConfiguration.getGradleCommand()).thenReturn("gradleCommand");
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn("");
-		when(mockedConfiguration.getShellCommand()).thenReturn("usedShell");
 
 		mockedCommand1 = mock(GradleCommand.class);
 		mockedCommand2 = mock(GradleCommand.class);
@@ -88,7 +87,7 @@ public class GradleExecutorTest {
 	@Test
 	public void gradleInstallationDirectory_is_appended_before_gradle_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		File userHome = new  File(System.getProperty("user.home"));
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn(userHome.getAbsolutePath());
@@ -96,50 +95,136 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "mockedCommand1");
 	}
 	
 	@Test
-	public void when_shell_is_empty_the_shell_part_is_removed() throws Exception {
+	public void when_gradle_context_gets_empty_string_array_for_options_the_no_option_is_added() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedConfiguration.getShellCommand()).thenReturn("");
+		when(mockedContext.getOptions()).thenReturn(new String[]{});
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
 	}
+	
+	@Test
+	public void when_gradle_context_gets_filled_string_array_with_2_options_for_options_the_options_are_added() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedContext.getOptions()).thenReturn(new String[]{"opt1","opt2"});
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","opt1","opt2", "mockedCommand1");
+	}
+	
+	@Test
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_empty_string_the_options_are_NOT_added() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedContext.getOptions()).thenReturn(new String[]{""});
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","mockedCommand1");
+	}
+	
+	@Test
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_blank_string_the_options_are_NOT_added() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedContext.getOptions()).thenReturn(new String[]{""});
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","mockedCommand1");
+	}
+	
+	@Test
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_a_filled_option_and_a_blank_string_the_blank_option_is_NOT_added() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedContext.getOptions()).thenReturn(new String[]{" ","opt1"});
+		when(mockedConfiguration.getShellCommand()).thenReturn(" ");
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","opt1", "mockedCommand1");
+	}
+	
+	@Test
+	public void when_shell_is_blank_the_shell_part_is_removed() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedConfiguration.getShellCommand()).thenReturn(" ");
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
+	}
+	
+	@Test
+	public void when_shell_is_null_the_shell_part_is_removed() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedConfiguration.getShellCommand()).thenReturn(null);
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
+	}
+	
+	@Test
+	public void when_shell_is_set_the_shell_part_is_added() throws Exception {
+		/* prepare */
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
+		when(mockedConfiguration.getShellCommand()).thenReturn("shellName");
+		/* execute */
+		executorToTest.execute(mockedContext);
+		/* test */
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "shellName", "gradleCommand", "mockedCommand1");
+	}
+	
 
 	@Test
 	public void executing_gives_command_string_to_process_executor_but_gradle_call_is_before() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1");
 	}
 
 	@Test
 	public void two_gradle_options_are_prefixed_to_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		when(mockedContext.getOptions()).thenReturn(new String[] { "-test1", "-test2" });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "-test1", "-test2",
-				"eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "-test1", "-test2",
+				"mockedCommand1");
 	}
 
 	@Test
 	public void gradle_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Map<String, String> gradleProperties = new HashMap<>();
@@ -148,14 +233,14 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew",
-				"-Pgradle.test.property=test", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand",
+				"-Pgradle.test.property=test", "mockedCommand1");
 	}
 
 	@Test
 	public void system_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Map<String, String> systemProperties = new HashMap<>();
@@ -164,14 +249,14 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell",
-				"gradlew", "-Dsystem.test.property=test", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, 
+				"gradleCommand", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
 	public void gradle_properties_and_then_system_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Map<String, String> systemProperties = new HashMap<>();
@@ -183,14 +268,14 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
 	public void options_then_gradle_properties_and_then_system_properties_are_prefixed_to_command() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Map<String, String> systemProperties = new HashMap<>();
@@ -203,35 +288,35 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "-option",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "-option",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
 	public void executing_gives_commands_string_to_process_executor_but_gradle_call_is_before() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
-		when(mockedCommand2.getCommand()).thenReturn("cleanEclipse");
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		when(mockedCommand2.getCommand()).thenReturn("mockedCommand2");
 
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1, mockedCommand2 });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse", "cleanEclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1", "mockedCommand2");
 	}
 
 	@Test
 	public void executing_uses_given_working_folder() throws Exception {
 		/* prepare */
-		when(mockedCommand1.getCommand()).thenReturn("eclipse");
-		File mcokedWorkingFolder = mock(File.class);
-		when(mcokedWorkingFolder.isDirectory()).thenReturn(true);
-		when(mockedRootProject.getFolder()).thenReturn(mcokedWorkingFolder);
+		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
+		File mockedWorkingFolder = mock(File.class);
+		when(mockedWorkingFolder.isDirectory()).thenReturn(true);
+		when(mockedRootProject.getFolder()).thenReturn(mockedWorkingFolder);
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "usedShell", "gradlew", "eclipse");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1");
 	}
 }

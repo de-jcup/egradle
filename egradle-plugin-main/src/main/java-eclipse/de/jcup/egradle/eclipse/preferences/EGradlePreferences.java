@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -23,37 +22,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import de.jcup.egradle.eclipse.Activator;
 
 public class EGradlePreferences {
-
-	public static final String CALL_TYPE_STANDARD = "standard";
-	public static final String CALL_TYPE_LINUX = "linux";
-	public static final String CALL_TYPE_WINDOWS = "windows";
-	public static final String CALL_TYPE_CUSTOM = "custom";
 	
-	public static final String DEFAULT_GRADLE_SHELL = "bash"; // bash does work on windows/linux and mac... (git bash..)
-	public static final String DEFAULT_GRADLE_HOME_PATH = "";
-	public static final String DEFAULT_GRADLE_CALL_COMMAND = "gradlew"; // wrapper usage is the default
-	
-	public static enum PreferenceConstants {
-		P_ROOTPROJECT_PATH("pathGradleRootProject"), 
-		
-		P_JAVA_HOME_PATH("pathJavaHome"),
-		
-		P_GRADLE_CALL_TYPE("gradleCallType"),
-		P_GRADLE_SHELL("commandShell"),
-		P_GRADLE_INSTALL_PATH("pathGradleInstallation"),
-		P_GRADLE_CALL_COMMAND("commandGradle");
-
-		private String id;
-
-		private PreferenceConstants(String id) {
-			this.id = id;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-	}
 
 	public static EGradlePreferences PREFERENCES = new EGradlePreferences();
 	private IPreferenceStore store;

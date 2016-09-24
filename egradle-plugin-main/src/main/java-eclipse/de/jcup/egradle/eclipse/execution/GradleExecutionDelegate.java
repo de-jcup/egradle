@@ -38,7 +38,7 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences.PreferenceConstants;
+import de.jcup.egradle.eclipse.preferences.PreferenceConstants;
 
 /**
  * Execution delegate, used by {@link GradleJob} and
@@ -88,7 +88,7 @@ public class GradleExecutionDelegate {
 		
 		/* Call gradle settings */
 		String gradleCommand = preferences.getStringPreference(PreferenceConstants.P_GRADLE_CALL_COMMAND);
-		String gradleInstallPath = preferences.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_PATH);
+		String gradleInstallPath = preferences.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER);
 		
 		String shell = preferences.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
 		

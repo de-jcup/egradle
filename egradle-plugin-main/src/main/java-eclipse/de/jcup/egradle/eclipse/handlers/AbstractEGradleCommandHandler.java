@@ -17,17 +17,14 @@ package de.jcup.egradle.eclipse.handlers;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
-import de.jcup.egradle.core.api.ForgetMeRuntimeException;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleJob;

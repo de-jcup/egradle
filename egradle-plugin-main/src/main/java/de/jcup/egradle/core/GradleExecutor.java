@@ -18,6 +18,8 @@ package de.jcup.egradle.core;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -74,11 +76,22 @@ public class GradleExecutor {
 		int arraySize = commands.length + 1;
 		GradleConfiguration config = context.getConfiguration();
 		String shell = config.getShellCommand();
-		if (!StringUtils.isEmpty(shell)) {
+		if (StringUtils.isNotBlank(shell)) {
 			arraySize += 1;// we must call shell executor too
 		}
 		String[] options = context.getOptions();
-		arraySize += options.length;
+		if (options==null){
+			options = new String[]{};
+		}
+		/* be aware of empty content*/
+		List<String> safeOptions = new ArrayList<>();
+		for (String opt: options){
+			if (StringUtils.isNotBlank(opt)){
+				safeOptions.add(opt);
+			}
+		}
+		
+		arraySize += safeOptions.size();
 		
 		Map<String, String> gradleProperties = context.getGradleProperties();
 		Map<String, String> systemProperties = context.getSystemProperties();
@@ -87,13 +100,13 @@ public class GradleExecutor {
 		arraySize += systemProperties.size();
 		
 		String[] commandStrings = new String[arraySize];
-		if (!StringUtils.isEmpty(shell)) {
+		if (StringUtils.isNotBlank(shell)) {
 			commandStrings[pos++] = shell;
 		}
 		commandStrings[pos++] = FileUtil.createGradleCommandFullPath(config);
 		/* raw options */
-		for (int i = 0; i < options.length; i++) {
-			commandStrings[pos++] = options[i];
+		for (String rawOption: safeOptions) {
+			commandStrings[pos++] = rawOption;
 		}
 		/* gradle properties*/
 		for (String key: gradleProperties.keySet()) {

@@ -33,8 +33,11 @@ public class GradleRootProject extends AbstractGradleProject {
 	 */
 	public GradleRootProject(File file) throws IOException {
 		notNull(file);
+		if (!file.exists()) {
+			throw new IOException("Given root project folder does not exist:" + file);
+		}
 		if (!file.isDirectory()) {
-			throw new IOException("Gradle root project not creatable, beacuse not a directory:" + file);
+			throw new IOException("Given root project folder is not a directory:" + file);
 		}
 		this.file = file;
 	}
