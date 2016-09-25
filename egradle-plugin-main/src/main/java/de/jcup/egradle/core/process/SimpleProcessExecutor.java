@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Date;
 import java.util.Map;
 
@@ -29,18 +30,22 @@ import org.apache.commons.lang3.StringUtils;
 
 public class SimpleProcessExecutor implements ProcessExecutor {
 
+	
+	public static final int ENDLESS_RUNNING=0;
 	protected OutputHandler handler;
 	private boolean handleProcessOutputStream;
-	
+	private long timeOutInSeconds=ENDLESS_RUNNING;
 	/**
 	 * Simple process executor implementation
 	 * @param outputHandler handle process information output
 	 * @param handleProcessOutputStream when true process output stream will be fetched and handled by given {@link OutputHandler} too
+	 * @param timeOutInSeconds - time out in seconds
 	 */
-	public SimpleProcessExecutor(OutputHandler outputHandler, boolean handleProcessOutputStream) {
+	public SimpleProcessExecutor(OutputHandler outputHandler, boolean handleProcessOutputStream, int timeOutInSeconds) {
 		notNull(outputHandler, "'streamHandler' may not be null");
 		this.handler = outputHandler;
 		this.handleProcessOutputStream=handleProcessOutputStream;
+		this.timeOutInSeconds = timeOutInSeconds;
 	}
 
 	@Override
@@ -74,23 +79,57 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 		Date started = new Date();
 		Process p = pb.start();
+		if (timeOutInSeconds!=ENDLESS_RUNNING){
+			new Thread(new ProcessTimeoutTerminator(p), "process-timeout-terminator").start();
+		}
 		handleProcessStarted(envProvider, p, started, workingDirectory, commands);
 		handleOutputStreams(p);
 		
 		/* wait for execution */
-		while (p.isAlive()) {
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				throw new IOException(e);
-			}
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			/* ignore */
 		}
 		/* done */
 		int exitValue = p.exitValue();
 		handleProcessEnd(p);
 		return exitValue;
 	}
+	
+	private class ProcessTimeoutTerminator implements Runnable{
+		private Process process;
 
+		public ProcessTimeoutTerminator(Process p){
+			this.process=p;
+		}
+
+		@Override
+		public void run() {
+			long timeStarted = System.currentTimeMillis();
+			while (process.isAlive()) {
+				long timeOutInMillis= timeOutInSeconds*1000;
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					/* ignore */
+				}
+				if (timeOutInSeconds!=ENDLESS_RUNNING){
+					long timeAlive = System.currentTimeMillis()-timeStarted;
+					if (timeAlive>timeOutInMillis){
+						if (handler!=null){
+							handler.output("Timeout reached ("+timeOutInSeconds+" seconds) - destroy process");
+						}
+						process.destroy();
+						break;
+					}
+				}
+			}
+			
+		}
+		
+	}
+	
 	protected void handleOutputStreams(Process p) throws IOException {
 		if (!handleProcessOutputStream){
 			return;
@@ -100,6 +139,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		while ((line = reader.readLine()) != null) {
 			handler.output(line);
 		}
+		
 	}
 
 	/**

@@ -47,7 +47,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		/* validate gradle installation dir*/
 		String gradleInstallDir = configuration.getGradleBinDirectory();
 		if (! StringUtils.isEmpty(gradleInstallDir)){
-			output("* Test gradle installation directory...");
+			output("+ Test gradle bin folder");
 			/* validate directory exists*/
 			File file = new File(gradleInstallDir);
 			if (! file.exists()){
@@ -77,27 +77,27 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		/* validate shell call*/
 		String shell = configuration.getShellCommand();
 		if (!StringUtils.isBlank(shell)){
-			output("* Test shell usable");
+			output("+ Test shell usable");
 			String shellCloseCommand="";
 			if ("bash".equals(shell) || "sh".equals(shell)){
 				shellCloseCommand="--version"; // simple command - so shell is not in user mode
+			}else if ("cmd.exe".equals(shell)){
+				shellCloseCommand="/C"; // simple command - so shell is not in user mode
 			}
-			// cmd currently not working
-//				else if ("cmd".equals(shell)){
-//				shellCloseCommand="/c";//closes cmd after opening
-//			}
 			else{
-				throw new ValidationException(SHELL_NOT_EXECUTABLE_STANDALONE,"Currently only supported:'bash','sh'");
+				throw new ValidationException(SHELL_NOT_EXECUTABLE_STANDALONE,"Currently only supported:'bash','sh','cmd.exe");
 			}
-			
+			output("  Starting shell standalone with "+shell+" "+shellCloseCommand);
 			/* try to execute shell standalone */
 			try {
 				executor.execute(configuration, environmentProvider , shell,shellCloseCommand);
+				output("  [OK]");
 			} catch (IOException e) {
+				output("  [FAILED]");
 				throw new ValidationException(SHELL_NOT_EXECUTABLE_STANDALONE);
 			}
 		}
-		output("* Test gradle is working");
+		output("+ Test gradle is working");
 		/* validate gradle call  with --version ( does not validate projects but returns 0)*/
 		List<String> commands = new ArrayList<>();
 		String gradleCommandWithPathIfNecessary = FileUtil.createGradleCommandFullPath(configuration);
@@ -106,13 +106,16 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		}
 		commands.add(gradleCommandWithPathIfNecessary);
 		commands.add("--version");
-		output(" ** executing:"+commands);
+		output("  Executing:"+commands);
 		try {
 			int result = executor.execute(configuration, environmentProvider, commands.toArray(new String[commands.size()]));
 			if (result!=ProcessExecutor.PROCESS_RESULT_OK){
+				output("  [FAILED]");
 				throw new ValidationException(GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE, "Result was:"+result);
 			}
+			output("  [OK]");
 		} catch (IOException e) {
+			output("  [FAILED]");
 			throw new ValidationException(GRADLE_VERSON_NOT_CALLABLE);
 		}
 	}

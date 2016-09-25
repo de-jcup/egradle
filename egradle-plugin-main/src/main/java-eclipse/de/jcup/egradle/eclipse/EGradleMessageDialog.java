@@ -19,7 +19,6 @@ import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -30,7 +29,7 @@ public class EGradleMessageDialog {
 	public static final EGradleMessageDialog INSTANCE = new EGradleMessageDialog();
 
 	public void showWarning(String message) {
-		Display.getDefault().asyncExec(new Runnable() {
+		EGradleUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -43,7 +42,7 @@ public class EGradleMessageDialog {
 	}
 
 	public void showError(String message) {
-		Display.getDefault().asyncExec(new Runnable() {
+		EGradleUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -56,19 +55,16 @@ public class EGradleMessageDialog {
 	}
 
 	public void showBuildFailed(String detail) {
-		Display.getDefault().asyncExec(new Runnable() {
+		EGradleUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
+				Image backgroundImage = EGradleUtil.getImage("icons/gradle-build-failed.png");
+				Image titleImage = EGradleUtil.getImage("icons/gradle-og.gif");
+				
 				Shell shell = getActiveWorkbenchShell();
-				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, detail);
+				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, detail);
 				bfdialog.open();
-				if(true)return;
-				Image image = EGradleUtil.getImage("icons/gradle-banner-image.png");
-				MessageDialog dialog = new MessageDialog(shell, "EGradle build failed", image,
-					    detail, MessageDialog.NONE, new String[] { " Ok" }, 0);
-					int result = dialog.open();
-					System.out.println(result);
 			}
 
 		});

@@ -7,7 +7,7 @@ public enum EGradleCallType{
 	LINUX_GRADLE_WRAPPER("linux.gradlewrapper", "./gradlew"),
 	LINUX_GRADLE_INSTALLED("linux.installed","gradle"),
 	/* Windows*/
-	WINDOWS_GRADLE_WRAPPER("windows.gradlewrapper", "gradlew.bat"),
+	WINDOWS_GRADLE_WRAPPER("windows.gradlewrapper", "gradlew.bat","cmd.exe",""),
 	WINDOWS_GRADLE_INSTALLED("windows.installed","gradle.bat"),
 	/* Custom */
 	CUSTOM("custom","");

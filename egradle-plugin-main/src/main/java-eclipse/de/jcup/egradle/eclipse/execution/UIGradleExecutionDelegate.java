@@ -48,7 +48,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	@Override
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
 		if (showEGradleSystemConsole) {
-			Display.getDefault().asyncExec(new Runnable() {
+			EGradleUtil.safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {

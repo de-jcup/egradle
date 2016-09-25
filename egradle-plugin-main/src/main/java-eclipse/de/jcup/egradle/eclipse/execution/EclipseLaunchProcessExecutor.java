@@ -45,7 +45,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	private String cmdLine;
 
 	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch, EGradlePostBuildJob postJob) {
-		super(streamHandler,false); // not output handled - done by launch mechanism in console!
+		super(streamHandler,false,SimpleProcessExecutor.ENDLESS_RUNNING); // not output handled - done by launch mechanism in console!
 		this.launch = launch;
 		this.postJob=postJob;
 	}

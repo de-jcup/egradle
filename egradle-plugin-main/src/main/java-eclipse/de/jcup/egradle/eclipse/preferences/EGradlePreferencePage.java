@@ -23,9 +23,13 @@ import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_S
 import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_JAVA_HOME_PATH;
 import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_ROOTPROJECT_PATH;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -41,6 +45,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.progress.UIJob;
 
 import de.jcup.egradle.core.api.GradleConfigurationValidator;
@@ -181,7 +187,13 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 				setValid(false);
 				validationRunning = true;
 				validationOutputField.setText("Start validation...\n");
-				new ValidationJob().schedule(500);
+				
+				IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
+				try {
+					progressService.busyCursorWhile(new ValidationProgressRunnable());
+				} catch (InvocationTargetException | InterruptedException e1) {
+					EGradleUtil.log(e1);
+				}
 			}
 		});
 	}
@@ -200,19 +212,18 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	private boolean validationRunning = false;
 
-	private class ValidationJob extends UIJob {
+	
+	private class ValidationProgressRunnable /*extends Job*/ implements IRunnableWithProgress{
 		private GradleConfigurationValidator validator;
 		private MutableGradleConfiguration configuration;
 		private OutputHandler outputHandler;
 
-		public ValidationJob() {
-			super("Preferene validation");
-
+		public ValidationProgressRunnable() {
 			outputHandler = new OutputHandler() {
 
 				@Override
 				public void output(String line) {
-					Display.getCurrent().asyncExec(new Runnable() {
+					EGradleUtil.safeAsyncExec(new Runnable() {
 
 						@Override
 						public void run() {
@@ -223,7 +234,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 			};
 
-			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true));
+			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true,10));
 			validator.setOutputHandler(outputHandler);
 			configuration = new MutableGradleConfiguration();
 			configuration.setGradleCommand(gradleCommandFieldEditor.getStringValue());
@@ -232,16 +243,13 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 			configuration.setWorkingDirectory(rootPathDirectoryEditor.getStringValue());
 			configuration.setJavaHome(defaultJavaHomeDirectoryEditor.getStringValue());
 		}
-
-		
 		@Override
-		public IStatus runInUIThread(IProgressMonitor monitor) {
+		public void run(IProgressMonitor monitor) {
 			/* check more... */
 			try {
 				validator.validate(configuration);
 				checkState(); // we say its valid - but the others...
 				outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
-				return Status.OK_STATUS;
 			} catch (ValidationException e) {
 				setValid(false);
 				StringBuilder sb = new StringBuilder();
@@ -252,9 +260,8 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 					sb.append(details);
 				}
 				outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
-				return Status.CANCEL_STATUS;
 			} finally {
-				Display.getCurrent().asyncExec(new Runnable() {
+				EGradleUtil.safeAsyncExec(new Runnable() {
 
 					@Override
 					public void run() {
@@ -267,6 +274,8 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	}
 
+	
+	
 	@Override
 	protected void initialize() {
 		super.initialize();

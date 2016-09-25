@@ -144,4 +144,16 @@ public class EGradleUtil {
 		}
 		return rootProject;
 	}
+
+	public static void safeAsyncExec(Runnable runnable) {
+		getSafeDisplay().asyncExec(runnable);
+	}
+	
+	public static Display getSafeDisplay(){
+		Display display = Display.getCurrent();
+		if (display==null){
+			display = Display.getDefault();
+		}
+		return display;
+	}
 }

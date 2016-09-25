@@ -81,7 +81,7 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 						return Status.CANCEL_STATUS;
 					}
 				}
-				Display.getDefault().asyncExec(new Runnable() {
+				EGradleUtil.safeAsyncExec(new Runnable() {
 
 					@Override
 					public void run() {
@@ -122,7 +122,7 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			monitor.worked(90);
 			
 			monitor.setTaskName("Open test results in view");
-			Display.getDefault().asyncExec(new Runnable() {
+			EGradleUtil.safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {

@@ -38,7 +38,7 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 
 	@Override
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) {
-		return new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true),this);
+		return new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true,SimpleProcessExecutor.ENDLESS_RUNNING),this);
 	}
 
 }
