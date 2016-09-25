@@ -71,7 +71,6 @@ public class GradleExecutorTest {
 
 	@Test
 	public void executing_returns_result_not_null() {
-		assertFalse(true);
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Result result = executorToTest.execute(mockedContext);
