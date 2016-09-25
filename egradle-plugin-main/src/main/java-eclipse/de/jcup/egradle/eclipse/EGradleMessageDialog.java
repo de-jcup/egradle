@@ -18,8 +18,12 @@ package de.jcup.egradle.eclipse;
 import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.ui.BuildFailedDialog;
 
 public class EGradleMessageDialog {
 
@@ -49,6 +53,26 @@ public class EGradleMessageDialog {
 
 		});
 
+	}
+
+	public void showBuildFailed(String detail) {
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				Shell shell = getActiveWorkbenchShell();
+				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, detail);
+				bfdialog.open();
+				if(true)return;
+				Image image = EGradleUtil.getImage("icons/gradle-banner-image.png");
+				MessageDialog dialog = new MessageDialog(shell, "EGradle build failed", image,
+					    detail, MessageDialog.NONE, new String[] { " Ok" }, 0);
+					int result = dialog.open();
+					System.out.println(result);
+			}
+
+		});
+	
 	}
 
 }

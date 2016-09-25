@@ -37,7 +37,7 @@ public class GradleJob extends Job {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
 				EGradleMessageDialog.INSTANCE
-						.showWarning("Result of job was not okay:" + execution.getResult().getResultCode());
+						.showBuildFailed("Result of job was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute " + getName(), e);
