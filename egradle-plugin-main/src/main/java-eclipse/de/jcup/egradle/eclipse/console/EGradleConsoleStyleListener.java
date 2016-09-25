@@ -38,6 +38,8 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		addParseDataByIndex("UP-TO-DATE", ORANGE);
 		addParseDataByIndex("FAILURE:", BRIGHT_RED);
 		addParseDataByIndex("test FAILED", RED);
+		addParseDataByIndex("* What went wrong:",GRAY);
+		addParseDataByIndex("* Try:",GRAY);
 		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
 	}
 

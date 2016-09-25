@@ -1,7 +1,15 @@
 package de.jcup.egradle.core.config;
 
-public class MutableGradleConfiguration implements GradleConfiguration{
+import de.jcup.egradle.core.api.FileUtil;
+import de.jcup.egradle.core.process.EGradleShellType;
 
+public class MutableGradleConfiguration implements GradleConfiguration{
+	
+	@Override
+	public String getGradleCommandFullPath() {
+		return FileUtil.createCorrectFilePath(gradleBinDirectory, gradleCommand);
+	}
+	
 	@Override
 	public String toString() {
 		return "MutableGradleConfiguration [shellCommand=" + shellCommand + ", gradleCommand=" + gradleCommand
@@ -58,32 +66,21 @@ public class MutableGradleConfiguration implements GradleConfiguration{
 		return true;
 	}
 
-	private String shellCommand;
+	private EGradleShellType shellCommand;
 	private String gradleCommand;
 	private String gradleBinDirectory;
 	private String workingDirectory;
 	private String javaHome;
 
 	@Override
-	public String getShellCommand() {
-		if (shellCommand==null){
-			shellCommand="";
-		}
+	public EGradleShellType getShellType() {
 		return shellCommand;
 	}
 	
-	public void setShellCommand(String shellCommand) {
-		this.shellCommand = shellCommand;
+	public void setShellCommand(EGradleShellType shell) {
+		this.shellCommand = shell;
 	}
 
-	@Override
-	public String getGradleCommand() {
-		if (gradleCommand==null) {
-			gradleCommand="";
-		}
-		return gradleCommand;
-	}
-	
 	public void setGradleCommand(String gradleCommand) {
 		this.gradleCommand = gradleCommand;
 	}

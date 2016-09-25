@@ -34,6 +34,7 @@ import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.ProcessExecutor;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -90,14 +91,14 @@ public class GradleExecutionDelegate {
 		String gradleCommand = preferences.getStringPreference(PreferenceConstants.P_GRADLE_CALL_COMMAND);
 		String gradleInstallPath = preferences.getStringPreference(PreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER);
 		
-		String shell = preferences.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
+		String shellId = preferences.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
 		
 		if (StringUtils.isEmpty(gradleCommand)){
 			EGradleMessageDialog.INSTANCE.showError("Preferences have no gradle command set, cannot execute!");
 			throw new ForgetMeRuntimeException("Illegal preference store, already shown to user");
 		}
 		
-		config.setShellCommand(shell);
+		config.setShellCommand(EGradleShellType.findById(shellId));
 		config.setGradleBinDirectory(gradleInstallPath);
 		config.setGradleCommand(gradleCommand);
 		config.setWorkingDirectory(rootProject.getFolder().getAbsolutePath());
@@ -153,5 +154,6 @@ public class GradleExecutionDelegate {
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
 		/* per default do nothing */
 	}
+
 
 }

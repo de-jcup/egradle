@@ -15,20 +15,12 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_COMMAND;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_TYPE;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_SHELL;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_JAVA_HOME_PATH;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_ROOTPROJECT_PATH;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
@@ -40,18 +32,17 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
-import org.eclipse.ui.progress.UIJob;
 
 import de.jcup.egradle.core.api.GradleConfigurationValidator;
 import de.jcup.egradle.core.api.ValidationException;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -60,7 +51,7 @@ import de.jcup.egradle.eclipse.ui.SWTFactory;
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	private ComboFieldEditor gradleCallTypeRadioButton;
-	private StringFieldEditor shellFieldEditor;
+	private ChangeableComboFieldEditor shellFieldEditor;
 	private StringFieldEditor gradleCommandFieldEditor;
 	private DirectoryFieldEditor gradleInstallBinDirectoryFieldEditor;
 	private Group gradleCallGroup;
@@ -92,7 +83,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		Group defaultGroup = SWTFactory.createGroup(getFieldEditorParent(), "Defaults", 1, 10, SWT.FILL);
 		defaultGroup.setLayoutData(groupLayoutData);
 
-		rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path:",
+		rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path",
 				defaultGroup);
 		addField(rootPathDirectoryEditor);
 		String rootPathTooltipText = "Default root path. Can be overriden in launch configurations";
@@ -102,7 +93,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(),
-				"Default &JAVA HOME set for gradle (optional):", defaultGroup);
+				"&JAVA HOME (optional)", defaultGroup);
 		defaultJavaHomeDirectoryEditor.setEmptyStringAllowed(true);
 		String defaultJavaHomeDirectoryTooltipText = "A default global JAVA_HOME path. Can be overriden in launch configurations";
 		defaultJavaHomeDirectoryEditor.getLabelControl(defaultGroup)
@@ -120,19 +111,27 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		groupLayoutData.horizontalSpan = 3;
 		gradleCallGroup = SWTFactory.createGroup(getFieldEditorParent(), "Gradle call", 1, 10, SWT.FILL);
 		gradleCallGroup.setLayoutData(groupLayoutData);
-		/* @formatter:off*/
-		String[][] entryNamesAndValues = new String[][] { 
-				new String[] { "Windows - Gradle wrapper in root project", EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId() }, 
-				new String[] { "Windows - Use gradle installation", EGradleCallType.WINDOWS_GRADLE_INSTALLED.getId()}, 
-				new String[] { "Linux/Mac - Gradle wrapper in root project", EGradleCallType.LINUX_GRADLE_WRAPPER.getId() },
+		/* @formatter:off */
+		String[][] entryNamesAndValues = new String[][] {
+				new String[] { "Windows - Gradle wrapper in root project",
+						EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId() },
+				new String[] { "Windows - Use gradle installation", EGradleCallType.WINDOWS_GRADLE_INSTALLED.getId() },
+				new String[] { "Linux/Mac - Gradle wrapper in root project",
+						EGradleCallType.LINUX_GRADLE_WRAPPER.getId() },
 				new String[] { "Linux/Mac - Use gradle installation", EGradleCallType.LINUX_GRADLE_INSTALLED.getId() },
 				new String[] { "Custom", EGradleCallType.CUSTOM.getId() } };
-		/* @formatter:on*/
+		/* @formatter:on */
 		gradleCallTypeRadioButton = new ComboFieldEditor(P_GRADLE_CALL_TYPE.getId(), "Call type", entryNamesAndValues,
 				gradleCallGroup);
 
 		addField(gradleCallTypeRadioButton);
-		shellFieldEditor = new StringFieldEditor(P_GRADLE_SHELL.getId(), "Shell", gradleCallGroup);
+		/* @formatter:off */
+		String[][] shellTypeComboValues = new String[][] { new String[] { "bash", EGradleShellType.BASH.getId() },
+				new String[] { "sh", EGradleShellType.SH.getId() },
+				new String[] { "cmd", EGradleShellType.CMD.getId() } };
+		/* @formatter:on */
+		shellFieldEditor = new ChangeableComboFieldEditor(P_GRADLE_SHELL.getId(), "Shell", shellTypeComboValues,
+				gradleCallGroup);
 		addField(shellFieldEditor);
 		gradleCommandFieldEditor = new StringFieldEditor(P_GRADLE_CALL_COMMAND.getId(), "Gradle call", gradleCallGroup);
 		addField(gradleCommandFieldEditor);
@@ -187,7 +186,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 				setValid(false);
 				validationRunning = true;
 				validationOutputField.setText("Start validation...\n");
-				
+
 				IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
 				try {
 					progressService.busyCursorWhile(new ValidationProgressRunnable());
@@ -202,18 +201,18 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	protected void updateApplyButton() {
 		super.updateApplyButton();
 	}
-	
+
 	@Override
 	protected void performDefaults() {
-		super.performDefaults(); // set defaults and store them, so can now be loaded:
+		super.performDefaults(); // set defaults and store them, so can now be
+									// loaded:
 		String storedCallTypeId = getPreferenceStore().getDefaultString(PreferenceConstants.P_GRADLE_CALL_TYPE.getId());
 		updateCallTypeFields(storedCallTypeId);
 	}
 
 	private boolean validationRunning = false;
 
-	
-	private class ValidationProgressRunnable /*extends Job*/ implements IRunnableWithProgress{
+	private class ValidationProgressRunnable /* extends Job */ implements IRunnableWithProgress {
 		private GradleConfigurationValidator validator;
 		private MutableGradleConfiguration configuration;
 		private OutputHandler outputHandler;
@@ -234,32 +233,48 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 			};
 
-			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true,10));
+			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true, 10));
 			validator.setOutputHandler(outputHandler);
 			configuration = new MutableGradleConfiguration();
 			configuration.setGradleCommand(gradleCommandFieldEditor.getStringValue());
 			configuration.setGradleBinDirectory(gradleInstallBinDirectoryFieldEditor.getStringValue());
-			configuration.setShellCommand(shellFieldEditor.getStringValue());
+			configuration.setShellCommand(EGradleShellType.findById(shellFieldEditor.getStringValue()));
 			configuration.setWorkingDirectory(rootPathDirectoryEditor.getStringValue());
 			configuration.setJavaHome(defaultJavaHomeDirectoryEditor.getStringValue());
 		}
+
 		@Override
 		public void run(IProgressMonitor monitor) {
 			/* check more... */
 			try {
 				validator.validate(configuration);
-				checkState(); // we say its valid - but the others...
-				outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
+				EGradleUtil.safeAsyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						checkState(); // we say its valid - but the others...
+						outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
+
+					}
+				});
 			} catch (ValidationException e) {
-				setValid(false);
-				StringBuilder sb = new StringBuilder();
-				sb.append(e.getMessage());
-				String details = e.getDetails();
-				if (details != null) {
-					sb.append("\n");
-					sb.append(details);
-				}
-				outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
+				EGradleUtil.safeAsyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						setValid(false);
+						StringBuilder sb = new StringBuilder();
+						sb.append(e.getMessage());
+						String details = e.getDetails();
+						if (details != null) {
+							sb.append("\n");
+							sb.append(details);
+						}
+						outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
+
+					}
+				});
+				
 			} finally {
 				EGradleUtil.safeAsyncExec(new Runnable() {
 
@@ -274,8 +289,6 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	}
 
-	
-	
 	@Override
 	protected void initialize() {
 		super.initialize();
@@ -284,6 +297,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	/**
 	 * Updates group enabled state and returns stored call type id
+	 * 
 	 * @return stored call type id
 	 */
 	private String updateCallGroupEnabledStateByStoredCallTypeId() {
@@ -312,11 +326,14 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 			throw new IllegalStateException("Wrong implemented - not a call type ID:" + callTypeId);
 		}
 		if (EGradleCallType.CUSTOM.equals(callType)) {
-			/* do nothing, just keep the editor fields from former default settings - user can change...*/
+			/*
+			 * do nothing, just keep the editor fields from former default
+			 * settings - user can change...
+			 */
 		} else {
 			setCallGroupPartsEnabled(false);
 			/* set defaults */
-			shellFieldEditor.setStringValue(callType.getDefaultGradleShell());
+			shellFieldEditor.setStringValue(callType.getDefaultShell().getId());
 			gradleInstallBinDirectoryFieldEditor.setStringValue(callType.getDefaultGradleBinFolder());
 			gradleCommandFieldEditor.setStringValue(callType.getDefaultGradleCommand());
 		}

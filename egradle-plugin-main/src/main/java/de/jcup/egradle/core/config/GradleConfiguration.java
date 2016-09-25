@@ -15,22 +15,17 @@
  */
 package de.jcup.egradle.core.config;
 
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.WorkingDirectoryProvider;
 
 public interface GradleConfiguration extends WorkingDirectoryProvider {
 
 	/**
-	 * Returns the shell command to use - if wanted
-	 * @return shell command or <code>null</code>
+	 * Returns the shell to use - if wanted
+	 * @return shell or <code>null</code>
 	 */
-	public String getShellCommand();
+	public EGradleShellType getShellType();
 
-	/**
-	 * Return gradle command to use (gradlew or gradle)
-	 * @return gradle command
-	 */
-	public String getGradleCommand();
-	
 	/**
 	 * Returns gradle installation bin directory - if available
 	 * @return gradle installation bin directory or <code>null</code>
@@ -43,6 +38,12 @@ public interface GradleConfiguration extends WorkingDirectoryProvider {
 	 * @return special jave home to set into enviro
 	 */
 	public String getJavaHome();
+	
+	/**
+	 * Returns the gradle command - with full path if necesary
+	 * @return full path featured gradle command
+	 */
+	public String getGradleCommandFullPath();
 	
 
 }

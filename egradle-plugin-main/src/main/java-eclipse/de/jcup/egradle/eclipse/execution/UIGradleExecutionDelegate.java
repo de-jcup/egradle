@@ -23,7 +23,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.console.IConsole;
@@ -31,8 +30,8 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
-import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 

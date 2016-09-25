@@ -34,8 +34,8 @@ public class GradleConfigurationValidatorTest {
 		validatorToTest = new GradleConfigurationValidator(mockedProcessExecutor);
 
 		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn("");
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn(GRADLE_COMMAND);
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn("");
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(GRADLE_COMMAND);
+		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 
 	}
 
@@ -120,7 +120,7 @@ public class GradleConfigurationValidatorTest {
 		assertTrue("Test execution corrupt?!?!", gradleFake.createNewFile());
 		gradleFake.deleteOnExit();
 
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn("gradlewdeluxe.bat");
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlewdeluxe.bat");
 		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(subFolder.getAbsolutePath());
 
 		/* test + execute */
@@ -128,9 +128,9 @@ public class GradleConfigurationValidatorTest {
 	}
 
 	@Test
-	public void when_shell_command_is_empty_no_validation_exception_is_thrown() throws Exception {
+	public void when_shell_is_NONE_no_validation_exception_is_thrown() throws Exception {
 		/* prepare */
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn("");
+		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
@@ -140,7 +140,7 @@ public class GradleConfigurationValidatorTest {
 	@Test
 	public void when_shell_command_is_null_no_validation_exception_is_thrown() throws Exception {
 		/* prepare */
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn(null);
+		when(mockedGradleConfiguration.getShellType()).thenReturn(null);
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
@@ -153,7 +153,7 @@ public class GradleConfigurationValidatorTest {
 		/* prepare */
 		thrown.expect(
 				new IsEqual<>(new ValidationException(GradleConfigurationValidator.SHELL_NOT_EXECUTABLE_STANDALONE)));
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn("bash");
+		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
 		when(mockedProcessExecutor.execute(any(), any(), eq("bash"),eq("--version")))
 				.thenThrow(new IOException("bash call standalone does always fail inside this test"));
 
@@ -167,7 +167,7 @@ public class GradleConfigurationValidatorTest {
 	@Test
 	public void when_gradle_command_is_null_a_validation_exception_is_thrown() throws Exception {
 		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn(null);
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(null);
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
@@ -176,7 +176,7 @@ public class GradleConfigurationValidatorTest {
 	@Test
 	public void when_gradle_command_is_empty_a_validation_exception_is_thrown() throws Exception {
 		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn("");
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("");
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
@@ -185,7 +185,7 @@ public class GradleConfigurationValidatorTest {
 	@Test
 	public void when_gradle_command_contains_only_whitespace_a_validation_exception_is_thrown() throws Exception {
 		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn("   ");
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("   ");
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
@@ -197,22 +197,25 @@ public class GradleConfigurationValidatorTest {
 		/* prepare */
 		thrown.expect(
 				new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_VERSON_NOT_CALLABLE)));
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn("bash");
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn("gradlew");
+		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
 		when(mockedProcessExecutor.execute(any(), any(), eq("bash"), eq("gradlew"), eq("--version")))
 				.thenThrow(new IOException("the simple --version call must fail inside this test"));
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
+		
+		/* normally dead code, but when no validation exception occured this is googd for debuging:*/
+		verify(mockedProcessExecutor).execute(any(), any(), eq("bash"), eq("gradlew"), eq("--version"));
 	}
 
 	@Test
 	public void when_a_gradle_call_with_version_throws_NO_ioexception_NO_validation_exception_is_thrown()
 			throws Exception {
 		/* prepare */
-		when(mockedGradleConfiguration.getShellCommand()).thenReturn("bash");
-		when(mockedGradleConfiguration.getGradleCommand()).thenReturn("gradlew");
+		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
+		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
 		when(mockedProcessExecutor.execute(any(), any(), eq("bash"), eq("gradlew"), eq("--version"))).thenReturn(0);
 

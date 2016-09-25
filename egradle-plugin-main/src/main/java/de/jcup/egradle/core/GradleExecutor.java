@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.core.api.FileUtil;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.ProcessExecutor;
 
 /**
@@ -60,7 +61,7 @@ public class GradleExecutor {
 		int processResult;
 		try {
 			processResult = processExecutor.execute(context.getConfiguration(), context, commandStrings);
-
+			result.setCommands(context.getCommandString());
 			result.setProcessResult(processResult);
 		} catch (IOException e) {
 			result.setException(e);
@@ -75,10 +76,12 @@ public class GradleExecutor {
 		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length + 1;
 		GradleConfiguration config = context.getConfiguration();
-		String shell = config.getShellCommand();
-		if (StringUtils.isNotBlank(shell)) {
-			arraySize += 1;// we must call shell executor too
+		EGradleShellType shell = config.getShellType();
+		if (shell==null){
+			shell = EGradleShellType.NONE;
 		}
+		List<String> shellCommands = shell.createCommands();
+		arraySize += shellCommands.size();// we must call shell executor too
 		String[] options = context.getOptions();
 		if (options==null){
 			options = new String[]{};
@@ -90,7 +93,6 @@ public class GradleExecutor {
 				safeOptions.add(opt);
 			}
 		}
-		
 		arraySize += safeOptions.size();
 		
 		Map<String, String> gradleProperties = context.getGradleProperties();
@@ -100,10 +102,10 @@ public class GradleExecutor {
 		arraySize += systemProperties.size();
 		
 		String[] commandStrings = new String[arraySize];
-		if (StringUtils.isNotBlank(shell)) {
-			commandStrings[pos++] = shell;
+		for (String shellCommand: shellCommands) {
+			commandStrings[pos++] = shellCommand;
 		}
-		commandStrings[pos++] = FileUtil.createGradleCommandFullPath(config);
+		commandStrings[pos++] = config.getGradleCommandFullPath();
 		/* raw options */
 		for (String rawOption: safeOptions) {
 			commandStrings[pos++] = rawOption;
@@ -127,9 +129,14 @@ public class GradleExecutor {
 
 		private Integer processResult;
 		private Exception exception;
+		private String[] commands;
 
 		public boolean isOkay() {
 			return ProcessExecutor.PROCESS_RESULT_OK.equals(processResult);
+		}
+
+		public void setCommands(String ... commands) {
+			this.commands=commands;
 		}
 
 		public void setException(Exception e) {
@@ -151,6 +158,26 @@ public class GradleExecutor {
 				return -1;
 			}
 			return processResult;
+		}
+
+		public String createDescription() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Executed: ");
+			if (ArrayUtils.isNotEmpty(commands)){
+				for (String command: commands){
+					sb.append(command);
+					sb.append(" ");
+				}
+			}
+			sb.append("\n\n");
+			if (! isOkay()){
+				if (processResult==null){
+					sb.append("Process was terminated by unknown reason, no exit code available");
+				}else{
+					sb.append("Build failed with exit code "+getResultCode());
+				}
+			}
+			return sb.toString();
 		}
 
 	}

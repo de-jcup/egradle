@@ -17,7 +17,6 @@ package de.jcup.egradle.core.domain;
 
 import static org.apache.commons.lang3.Validate.*;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -69,7 +68,16 @@ public class GradleContext implements EnvironmentProvider{
 	}
 
 	public String getCommandString() {
-		return Arrays.asList(getCommands()).toString();
+		StringBuilder sb = new StringBuilder();
+		GradleCommand[] x = getCommands();
+		for (GradleCommand c: x){
+			if (c==null){
+				continue;
+			}
+			sb.append(c.toString());
+			sb.append(" ");
+		}
+		return sb.toString();
 	}
 
 	public GradleConfiguration getConfiguration() {

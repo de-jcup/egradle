@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
@@ -40,7 +41,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 	@Override
 	public void validate(GradleConfiguration configuration) throws ValidationException {
 		/* validate gradle call not empty*/
-		String gradleCommand = configuration.getGradleCommand();
+		String gradleCommand = configuration.getGradleCommandFullPath();
 		if (StringUtils.isBlank(gradleCommand)){
 			throw new ValidationException(GRADLE_COMMAND_MISSING);
 		}
@@ -75,22 +76,16 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		};
 		
 		/* validate shell call*/
-		String shell = configuration.getShellCommand();
-		if (!StringUtils.isBlank(shell)){
-			output("+ Test shell usable");
-			String shellCloseCommand="";
-			if ("bash".equals(shell) || "sh".equals(shell)){
-				shellCloseCommand="--version"; // simple command - so shell is not in user mode
-			}else if ("cmd.exe".equals(shell)){
-				shellCloseCommand="/C"; // simple command - so shell is not in user mode
-			}
-			else{
-				throw new ValidationException(SHELL_NOT_EXECUTABLE_STANDALONE,"Currently only supported:'bash','sh','cmd.exe");
-			}
-			output("  Starting shell standalone with "+shell+" "+shellCloseCommand);
+		EGradleShellType shell = configuration.getShellType();
+		if (shell==null){
+			shell = EGradleShellType.NONE;
+		}
+		List<String> shellStandaloneCommands = shell.createCheckStandaloneCommands();
+		if (! shellStandaloneCommands.isEmpty()){
+			output("  Starting shell standalone with "+ shellStandaloneCommands);
 			/* try to execute shell standalone */
 			try {
-				executor.execute(configuration, environmentProvider , shell,shellCloseCommand);
+				executor.execute(configuration, environmentProvider , shellStandaloneCommands.toArray(new String[shellStandaloneCommands.size()]));
 				output("  [OK]");
 			} catch (IOException e) {
 				output("  [FAILED]");
@@ -100,10 +95,8 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		output("+ Test gradle is working");
 		/* validate gradle call  with --version ( does not validate projects but returns 0)*/
 		List<String> commands = new ArrayList<>();
-		String gradleCommandWithPathIfNecessary = FileUtil.createGradleCommandFullPath(configuration);
-		if (!StringUtils.isBlank(shell)){
-			commands.add(shell);
-		}
+		commands.addAll(shell.createCommands());
+		String gradleCommandWithPathIfNecessary = configuration.getGradleCommandFullPath();
 		commands.add(gradleCommandWithPathIfNecessary);
 		commands.add("--version");
 		output("  Executing:"+commands);

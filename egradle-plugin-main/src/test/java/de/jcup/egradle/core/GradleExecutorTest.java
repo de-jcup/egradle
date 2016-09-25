@@ -34,6 +34,7 @@ import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.ProcessExecutor;
 
 public class GradleExecutorTest {
@@ -61,7 +62,7 @@ public class GradleExecutorTest {
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
-		when(mockedConfiguration.getGradleCommand()).thenReturn("gradleCommand");
+		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn("gradleCommand");
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn("");
 
 		mockedCommand1 = mock(GradleCommand.class);
@@ -93,7 +94,7 @@ public class GradleExecutorTest {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		File userHome = new  File(System.getProperty("user.home"));
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn(userHome.getAbsolutePath());
-		when(mockedConfiguration.getGradleCommand()).thenReturn("testGradleCall");
+		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn(FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"));
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
@@ -154,7 +155,7 @@ public class GradleExecutorTest {
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		when(mockedContext.getOptions()).thenReturn(new String[]{" ","opt1"});
-		when(mockedConfiguration.getShellCommand()).thenReturn(" ");
+		when(mockedConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
@@ -166,7 +167,7 @@ public class GradleExecutorTest {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedConfiguration.getShellCommand()).thenReturn(" ");
+		when(mockedConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
@@ -178,7 +179,7 @@ public class GradleExecutorTest {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedConfiguration.getShellCommand()).thenReturn(null);
+		when(mockedConfiguration.getShellType()).thenReturn(null);
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
@@ -190,11 +191,11 @@ public class GradleExecutorTest {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedConfiguration.getShellCommand()).thenReturn("shellName");
+		when(mockedConfiguration.getShellType()).thenReturn(EGradleShellType.CMD);
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "shellName", "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "cmd.exe","/C", "gradleCommand", "mockedCommand1");
 	}
 	
 
