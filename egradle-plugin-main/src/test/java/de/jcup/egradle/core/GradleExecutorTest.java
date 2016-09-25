@@ -16,7 +16,9 @@
 package de.jcup.egradle.core;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.util.Collections;
@@ -69,6 +71,7 @@ public class GradleExecutorTest {
 
 	@Test
 	public void executing_returns_result_not_null() {
+		assertFalse(true);
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		Result result = executorToTest.execute(mockedContext);

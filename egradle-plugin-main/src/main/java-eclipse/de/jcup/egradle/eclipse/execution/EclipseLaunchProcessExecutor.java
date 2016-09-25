@@ -29,20 +29,25 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 
+import de.jcup.egradle.core.api.BuildInfo;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.process.WorkingDirectoryProvider;
+import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	private ILaunch launch;
+	private EGradlePostBuildJob postJob;
+	private String cmdLine;
 
-	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch) {
+	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch, EGradlePostBuildJob postJob) {
 		super(streamHandler,false); // not output handled - done by launch mechanism in console!
 		this.launch = launch;
+		this.postJob=postJob;
 	}
 
 	@Override
@@ -98,7 +103,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		/*
 		 * using an unbreakable space 00A0 to avoid unnecessary breaks in view
 		 */
-		String cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
+		cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
 
 		attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
 		/*
@@ -111,6 +116,14 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		handler.output("Launch started - for details see output of " + label);
 		if (!rp.canTerminate()) {
 			handler.output("Started process cannot terminate");
+		}
+	}
+	
+	@Override
+	protected void handleProcessEnd(Process p) {
+		if (postJob!=null){
+			postJob.setBuildInfo(new BuildInfo(cmdLine, p.exitValue()));
+			postJob.schedule();
 		}
 	}
 

@@ -87,9 +87,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		}
 		/* done */
 		int exitValue = p.exitValue();
-		if (exitValue== ProcessExecutor.PROCESS_RESULT_OK){
-			handleProcessEndWithoutErrors(p);
-		}
+		handleProcessEnd(p);
 		return exitValue;
 	}
 
@@ -104,8 +102,12 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		}
 	}
 
-	protected void handleProcessEndWithoutErrors(Process p) {
-
+	/**
+	 * Handle process end - process can have failed (result != 0...)
+	 * @param p process
+	 */
+	protected void handleProcessEnd(Process p) {
+		/* per default nothing special to do*/
 	}
 
 

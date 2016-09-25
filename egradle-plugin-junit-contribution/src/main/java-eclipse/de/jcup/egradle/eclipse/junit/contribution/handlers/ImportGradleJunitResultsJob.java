@@ -26,20 +26,20 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.w3c.dom.Document;
 
 import de.jcup.egradle.core.api.XMLWriter;
+import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.junit.contribution.Activator;
 import de.jcup.egradle.eclipse.junit.contribution.JunitContributionUtil;
 import de.jcup.egradle.junit.JUnitResultFilesFinder;
 import de.jcup.egradle.junit.JUnitResultsCompressor;
 
-public class ImportGradleJunitResultsJob extends Job {
+public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 
 	XMLWriter writer = new XMLWriter();
 	JUnitResultsCompressor compressor = new JUnitResultsCompressor();
@@ -72,6 +72,15 @@ public class ImportGradleJunitResultsJob extends Job {
 			Collection<File> files = finder.findTestFilesInFolder(rootFolder,projectname);
 			if (files.isEmpty()){
 				monitor.worked(100);
+				
+				/* we have not test files found - if former build failed and was a "clean test" all fromer results 
+				 * were cleaned before. if there is not at least one test, this means the compile task was not successful
+				 */
+				if (hasBuildInfo()){
+					if (getBuildInfo().hasBuildFailed()){
+						return Status.CANCEL_STATUS;
+					}
+				}
 				Display.getDefault().asyncExec(new Runnable() {
 
 					@Override
@@ -82,7 +91,7 @@ public class ImportGradleJunitResultsJob extends Job {
 								"There are no test results to import from "+projectNameToShow+" at:\n'"+rootFolder.getAbsolutePath()+"'\n\nEither there are no tests or tests are not executed");
 					}
 				});
-				return Status.OK_STATUS;
+				return Status.CANCEL_STATUS;
 			
 			}
 			List<InputStream> streams = new ArrayList<>();

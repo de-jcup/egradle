@@ -38,6 +38,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
@@ -60,7 +61,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	
 	private ILaunch launch;
-	private Job postJob;
+	private EGradlePostBuildJob postJob;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -70,7 +71,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			Map<?, ?> values = configParamValues.getParameterValues();
 
 			launch = (ILaunch) values.get(LAUNCH_ARGUMENT);
-			postJob = (Job) values.get(LAUNCH_POST_JOB);
+			postJob = (EGradlePostBuildJob) values.get(LAUNCH_POST_JOB);
 
 		} catch (NotDefinedException | ParameterValuesException e) {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
@@ -138,14 +139,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) {
 		return new GradleExecutionDelegate(outputHandler,
-				new EclipseLaunchProcessExecutor(outputHandler, launch){
-			@Override
-			protected void handleProcessEndWithoutErrors(Process p) {
-				if (postJob!=null){
-					postJob.schedule();
-				}
-			}
-		}, this);
+				new EclipseLaunchProcessExecutor(outputHandler, launch,postJob), this);
 	}
 
 }
