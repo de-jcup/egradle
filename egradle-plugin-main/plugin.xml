@@ -253,6 +253,6 @@
 			bannerImage = "icons/gradle-banner-image.png">
 		</launchGroup>
 		
-	</extension> 
+	</extension>
 	
 </plugin>

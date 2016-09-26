@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.jcup.egradle.eclipse.feature"
-      label="EGradle-freature"
-      version="0.5.0.beta"
-      provider-name="Albert Tregnaghi">
+      label="EGradle"
+      version="0.5.1.beta"
+      provider-name="Albert Tregnaghi"
+      plugin="de.jcup.egradle.eclipse.plugin.branding">
 
-   <description>
-      EGradle - an easy, minimalistic gradle integration for eclipse
+   <description url="https://github.com/de-jcup/egradle/wiki">
+      EGradle is a lightweight gradle integration for eclipse
    </description>
 
    <copyright>
@@ -98,5 +99,11 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="de.jcup.egradle.eclipse.plugin.branding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
