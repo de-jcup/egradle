@@ -67,7 +67,7 @@ public class BuildFailedDialog extends Dialog {
 		dataLastName.horizontalAlignment = GridData.FILL;
 		detailsText = new Text(container, SWT.NO_BACKGROUND | SWT.READ_ONLY | SWT.MULTI | SWT.NO_FOCUS);
 		detailsText.setLayoutData(dataLastName);
-
+		detailsText.setEnabled(false);
 		detailsText.setText(description);
 	}
 
