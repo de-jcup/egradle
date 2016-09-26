@@ -113,11 +113,9 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		gradleCallGroup.setLayoutData(groupLayoutData);
 		/* @formatter:off */
 		String[][] entryNamesAndValues = new String[][] {
-				new String[] { "Windows - Gradle wrapper in root project",
-						EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId() },
+				new String[] { "Windows - Gradle wrapper in root project",EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId() },
 				new String[] { "Windows - Use gradle installation", EGradleCallType.WINDOWS_GRADLE_INSTALLED.getId() },
-				new String[] { "Linux/Mac - Gradle wrapper in root project",
-						EGradleCallType.LINUX_GRADLE_WRAPPER.getId() },
+				new String[] { "Linux/Mac - Gradle wrapper in root project", EGradleCallType.LINUX_GRADLE_WRAPPER.getId() },
 				new String[] { "Linux/Mac - Use gradle installation", EGradleCallType.LINUX_GRADLE_INSTALLED.getId() },
 				new String[] { "Custom", EGradleCallType.CUSTOM.getId() } };
 		/* @formatter:on */
@@ -126,9 +124,12 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 		addField(gradleCallTypeRadioButton);
 		/* @formatter:off */
-		String[][] shellTypeComboValues = new String[][] { new String[] { "bash", EGradleShellType.BASH.getId() },
-				new String[] { "sh", EGradleShellType.SH.getId() },
-				new String[] { "cmd", EGradleShellType.CMD.getId() } };
+		String[][] shellTypeComboValues = 
+				new String[][] { 
+					new String[] { "(no shell used)", EGradleShellType.NONE.getId() },
+					new String[] { "bash", EGradleShellType.BASH.getId() },
+					new String[] { "sh", EGradleShellType.SH.getId() },
+					new String[] { "cmd", EGradleShellType.CMD.getId() } };
 		/* @formatter:on */
 		shellFieldEditor = new ChangeableComboFieldEditor(P_GRADLE_SHELL.getId(), "Shell", shellTypeComboValues,
 				gradleCallGroup);

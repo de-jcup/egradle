@@ -2,21 +2,51 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>EGradle setup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EGradle setup</title>
 </head>
 
 <body>
-<img src="./../images/egradle-banner-image.png"/><a href="../user_guide.html">User guide</a>
-<h1>Setup</h1>
-
-<h2>Prerequisites</h2>
-EGradle uses the "bash" command. To get it on windows working, simply install <a href="https://git-scm.com/download/win" target="_blank"/>git for windows with gitbash (default)</a>.
-Currently its not possible to change the command it's fix.
-
-<h2>Preferences</h2>
-Go to preferences, search for EGradle settings, setup your root project path and (optional) the default JAVA_HOME to set for gradle wrapper.<br>
-<img src="images/egradle-preferences.png"/>
-<br>
+	<img src="./../images/egradle-banner-image.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>Setup</h1>
+	<ul>
+		<li><a href="#defaults">Defaults</a></li>
+		<li><a href="#calltypes">Call types</a></li>
+		<li><a href="#validation">Validation</a></li>
+	</ul>
+	<h2>Preferences</h2>
+	Go to preferences, search for EGradle settings, setup your root project
+	path and (optional) the default JAVA_HOME to set for gradle wrapper.
+	<br>
+	<img src="images/egradle-preferences.png" />
+	<h3 id="defaults">Defaults</h3>
+	Insie this area you can define
+	<ul>
+		<li>Gradle root project path</li>
+		<li>JAVA_HOME - an optional setup which is available for all your
+			launch configurations</li>
+	</ul>
+	<h3 id="calltypes">Call types</h3>
+	<h4>Default</h4>
+	Per default egradle will setup your call type initial with os dependent
+	gradle wrapper call type - in the picture before for windows.
+	<br />
+	<h4>Predefined types</h4>
+	<img src="images/egradle-preferences-calltypes.png" />
+	<br /> You got multiple options for pre defined call types which you
+	can select.
+	<br />
+	<h4>Custom type</h4>
+	Also a custom variant is possible where you can customize your gradle
+	call.
+	<h5>
+		Shell selection
+		</h4>
+		It is possible to select one of the supported shell commands<br /> <img
+			src="images/egradle-preferences-shelltypes.png" /><br /> <br>
+		<h3 id="validation">Validation</h3>
+		Press the "Start validation" button to check if your current gradle
+		settings are working fine.
 </body>
 </html>

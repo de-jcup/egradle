@@ -2,32 +2,70 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>EGradle launching</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EGradle launching</title>
 </head>
 
 <body>
-<img src="./../images/egradle-banner-image.png"/><a href="../user_guide.html">User guide</a>
-<h1>Launch gradle</h1>
-<h2>Launch a project per right click</h2>
-Inside navigator and package explorer it's possible to launch a project by gradle. 
-If no launch configuration is configured the default gradle target will be "assemble" and a new launch configuration is created. 
-Otherwise the last execution configuration.
-<br>
-<br>
-If there are more than one existing launch configuration for the project, the configuration can be choosen.
-<img src="images/egradle-launch-from-navigator.png"/>
-<br/>
-<h2>Launch an existing or create a new launch configuration from menu</h2>
-<img src="images/egradle-launch-configuration-menu.png"/>
-<br/>
-<img src="images/egradle-launch-configuration.png"/>
-<h2>Inspect execution</h2>
-<br>
-<img src="images/egradle-launch-processinfo.png"/>
-<h2>Watch output in console</h2>
-The console output is shown as usual but special keywords are syntax highlighted:
-<br><br>
-<img src="images/egradle-console-highlighting.png"/>
+	<img src="./../images/egradle-banner-image.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>Launch gradle</h1>
+	<ul>
+		<li><a href="#launch_per_right_click">Launch per right click</a></li>
+		<li><a href="#launch_existing">Launch existing configuration</a></li>
+		<li><a href="#configure">Configuration</a></li>
+		<li><a href="#inspect">Inspect execution</a></li>
+		<li><a href="#console_output">Console output</a></li>
+	</ul>
+
+
+
+	<h2 id="launch_per_right_click">Launch a project per right click</h2>
+	Inside navigator and package explorer it's possible to launch a project
+	by gradle. If no launch configuration is configured the default gradle
+	target will be "assemble" and a new launch configuration is created.
+	Otherwise the last execution configuration.
+	<o> If there are more than one existing launch configuration for
+	the project, the configuration can be choosen.
+	</p>
+	<img src="images/egradle-launch-from-navigator.png" /> <br />
+
+
+	<h2 id="launch_existing">Launch existing configuration</h2>
+	<!-- <img src="images/egradle-launch-configuration-menu.png" /> <br /> -->
+	<img src="images/egradle-launch-existing-by-project.png" />
+	<p>When you have already a configuration created you can simple do
+		a right click to the project and use "Run as ... EGradle" and the
+		launch starts. If you have multiple launch configurations done for
+		this project, a selection dialog will apear:</p>
+	<img src="images/egradle-launch-existing-by-project-multi.png" />
+	
+	
+	<h2 id="configure">Configuration</h2>
+	<img src="images/egradle-launch-configuration.png" />
+	<p></p>
+	<ul>
+		<li>Project - if empty the tasks are executed in root project</li>
+		<li>Tasks - a space separated list of gradle tasks to execute</li>
+		<li>Raw options - here you can add <a href="https://docs.gradle.org/current/userguide/gradle_command_line.html" target="#blank">Gradle command line options</a></li>
+	</ul>
+	<p>Your are able to configure
+	<ul>
+		<li>Gradle project properties</li>
+		<li>System properties</li>
+		<li>Environment</li>
+	</ul>
+	<p>You could this do also with raw settings, but it's more comfortable and you are able to use eclipse variables:</p>
+	<img src="images/egradle-launch-configuration-gradleproperties.png"/>
+	
+
+	<h2 id="inspect">Inspect execution</h2>
+	<br>
+	<img src="images/egradle-launch-processinfo.png" />
+	<h2 id="console_output">Watch output in console</h2>
+	The console output is shown as usual but special keywords are syntax
+	highlighted: <br>
+	<br>
+	<img src="images/egradle-console-highlighting.png" />
 </body>
 </html>
