@@ -50,30 +50,42 @@ import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class EGradleUtil {
 
-	
 	/**
 	 * Get image by path from image registry. If not already registered a new image will be created and registered. If not createable a fallback image is used instead
 	 * @param path
 	 * @return image
 	 */
 	public static Image getImage(String path){
+		return getImage(path, Activator.PLUGIN_ID);
+	}
+
+	/**
+	 * Get image by path from image registry. If not already registered a new
+	 * image will be created and registered. If not createable a fallback image
+	 * is used instead
+	 * 
+	 * @param path
+	 * @param pluginId - plugin id to identify which plugin image should be loaded
+	 * @return image
+	 */
+	public static Image getImage(String path, String pluginId) {
 		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
 		Image image = imageRegistry.get(path);
-		if (image==null){
-			Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
-			
+		if (image == null) {
+			Bundle bundle = Platform.getBundle(pluginId);
+
 			URL url = FileLocator.find(bundle, new Path(path), null);
-			
+
 			ImageDescriptor imageDesc = ImageDescriptor.createFromURL(url);
 			image = imageDesc.createImage();
-			if (image==null){
+			if (image == null) {
 				image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
 			}
 			imageRegistry.put(path, image);
 		}
 		return image;
 	}
-	
+
 	public static Shell getActiveWorkbenchShell() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		Shell shell = null;
@@ -90,7 +102,7 @@ public class EGradleUtil {
 
 	public static IWorkbenchPage getActivePage() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		if (window==null){
+		if (window == null) {
 			return null;
 		}
 		return window.getActivePage();
@@ -148,10 +160,10 @@ public class EGradleUtil {
 	public static void safeAsyncExec(Runnable runnable) {
 		getSafeDisplay().asyncExec(runnable);
 	}
-	
-	public static Display getSafeDisplay(){
+
+	public static Display getSafeDisplay() {
 		Display display = Display.getCurrent();
-		if (display==null){
+		if (display == null) {
 			display = Display.getDefault();
 		}
 		return display;
