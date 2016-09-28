@@ -71,18 +71,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
 		monitor.worked(1);
 		if (refreshAllProjects) {
-			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-			for (IProject project : projects) {
-				try {
-					if (monitor.isCanceled()) {
-						break;
-					}
-					monitor.subTask("refreshing project " + project.getName());
-					project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-				} catch (CoreException e) {
-					throw new InvocationTargetException(e);
-				}
-			}
+			EGradleUtil.refreshAllProjects(monitor);
 		}
 		monitor.worked(2);
 	}

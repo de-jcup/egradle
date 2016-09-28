@@ -20,6 +20,7 @@ import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.ComboFieldEditor;
@@ -27,6 +28,8 @@ import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ILightweightLabelDecorator;
+import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -34,6 +37,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IDecoratorManager;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
@@ -59,6 +63,8 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	private DirectoryFieldEditor rootPathDirectoryEditor;
 	private DirectoryFieldEditor defaultJavaHomeDirectoryEditor;
 	private Button validationButton;
+	
+	private String originRootProject;
 
 	public EGradlePreferencePage() {
 		super(GRID);
@@ -90,6 +96,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
+		originRootProject=rootPathDirectoryEditor.getStringValue();
 
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(),
@@ -203,6 +210,20 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		super.updateApplyButton();
 	}
 
+	@Override
+	public boolean performOk() {
+		boolean done =  super.performOk();
+		if (done){
+			String newRootProject=rootPathDirectoryEditor.getStringValue();
+			if (! StringUtils.equals(newRootProject, originRootProject)){
+				/* root project has changed - refresh decoration of all projects */ 
+				EGradleUtil.refreshAllProjectDecorations();
+			}
+		}
+		return done;
+	}
+	
+	
 	@Override
 	protected void performDefaults() {
 		super.performDefaults(); // set defaults and store them, so can now be
