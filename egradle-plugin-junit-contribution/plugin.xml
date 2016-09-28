@@ -17,6 +17,7 @@
             class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportAllGradleJunitResultsHandler">
       </handler>
    </extension>
+   <!--
    <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -26,6 +27,7 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
+   -->
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution

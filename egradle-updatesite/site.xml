@@ -3,8 +3,23 @@
    <description name="EGradle update site">
       Official update site for egradle
    </description>
-   <feature url="features/de.jcup.egradle.eclipse.feature_0.3.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.3.0.beta"/>
-   <feature url="features/de.jcup.egradle.eclipse.feature_0.4.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.4.0.beta"/>
-   <feature url="features/de.jcup.egradle.eclipse.feature_0.5.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.5.0.beta"/>
-   <feature url="features/de.jcup.egradle.eclipse.feature_0.5.1.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.5.1.beta"/>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.3.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.3.0.beta">
+      <category name="site.egradle.category.beta"/>
+   </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.4.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.4.0.beta">
+      <category name="site.egradle.category.beta"/>
+   </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.5.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.5.0.beta">
+      <category name="site.egradle.category.beta"/>
+   </feature>
+   <category-def name="site.egradle.category.beta" label="Beta-Versions">
+      <description>
+         Beta versions of egradle
+      </description>
+   </category-def>
+   <category-def name="site.egradle.category.stable" label="Stable Versions">
+      <description>
+         Stable Versions
+      </description>
+   </category-def>
 </site>

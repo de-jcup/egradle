@@ -2,9 +2,8 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle"
-      version="0.5.1.beta"
-      provider-name="Albert Tregnaghi"
-      plugin="de.jcup.egradle.eclipse.plugin.branding">
+      version="0.6.0.beta"
+      provider-name="Albert Tregnaghi">
 
    <description url="https://github.com/de-jcup/egradle/wiki">
       EGradle is a lightweight gradle integration for eclipse
@@ -99,11 +98,5 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="de.jcup.egradle.eclipse.plugin.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
+   
 </feature>
