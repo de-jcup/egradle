@@ -52,10 +52,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osgi.framework.Bundle;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
+import de.jcup.egradle.core.virtualroot.VirtualProjectSupport;
+import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
+import de.jcup.egradle.eclipse.virtualroot.RootProjectEclipseVisitor;
 
 public class EGradleUtil {
 
@@ -238,8 +242,22 @@ public class EGradleUtil {
 				IDecoratorManager manager = workbench.getDecoratorManager();
 				
 				EGradleProjectDecorator decorator = (EGradleProjectDecorator) manager.getBaseLabelProvider("de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator");
+				IProject[] projects = getAllProjects();
+				/* test if virtual root project is visible */
+				for (IProject project: projects){
+					String name = project.getName();
+					if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)){
+						/* ok found - so recreate ...*/
+						try {
+							createOrUpdateVirtualRootProject();
+						} catch (VirtualRootProjectException e) {
+							log(e);
+						}
+						break;
+					}
+				}
 				if(decorator != null){ // decorator is enabled
-					IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();;
+					
 				    LabelProviderChangedEvent event = new LabelProviderChangedEvent(decorator,projects);
 				    decorator.fireLabelProviderChanged(event);
 				}
@@ -257,19 +275,34 @@ public class EGradleUtil {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
-		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		IProject[] projects = getAllProjects();
 		for (IProject project : projects) {
 			try {
 				if (monitor.isCanceled()) {
 					break;
 				}
 				monitor.subTask("refreshing project " + project.getName());
-				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			} catch (CoreException e) {
 				log(e);
 			}
 		}
 
 	}
+
+	public static IProject[] getAllProjects() {
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		return projects;
+	}
+	
+	private static VirtualProjectSupport helper = new VirtualProjectSupport();
+
+	public static void createOrUpdateVirtualRootProject() throws VirtualRootProjectException {
+		GradleRootProject rootProject = EGradleUtil.getRootProject();
+		RootProjectEclipseVisitor visitor = new RootProjectEclipseVisitor(rootProject);
+		helper.createOrUpdateVirtualRootProject(rootProject, visitor);
+		
+	}
+	
 
 }

@@ -29,7 +29,7 @@ public class JUnitResultFilesFinderTest {
 	private static File PARENT_OF_TEST = new File("egradle-plugin-junit-contribution/src/test/res/");
 	static{
 		if (! PARENT_OF_TEST.exists()){
-			/* fall back - to be testable von eclipse in sub projects and also from root project.*/
+			/* fall back - to be testable by eclipse in sub projects and also via gradle from root project.*/
 			PARENT_OF_TEST = new File("src/test/res/");
 		}
 	}

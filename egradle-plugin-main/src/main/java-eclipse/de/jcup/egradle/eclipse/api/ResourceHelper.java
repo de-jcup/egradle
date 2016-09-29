@@ -105,6 +105,10 @@ public class ResourceHelper {
 		return fileHelper;
 	}
 
+	public IFolder createFolder(IPath path) throws CoreException {
+		return createFolder(path,null);
+	}
+	
 	public IFolder createFolder(String portableFolderPath) throws CoreException {
 		return createFolder(portableFolderPath,null);
 	}
@@ -186,4 +190,6 @@ public class ResourceHelper {
 
 		return project;
 	}
+	
+	
 }

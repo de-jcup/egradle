@@ -14,7 +14,7 @@ public class BuildFilesFilter implements FileFilter {
 
 	/**
 	 * Creates new build files filter. 
-	 * @param allowSubFolders- when <code>true</code> sub folders of current directory are all accepted, otherwise not
+	 * @param allowSubFolders - when <code>true</code> sub folders of current directory are all accepted, otherwise not
 	 */
 	public BuildFilesFilter(boolean allowSubFolders){
 		this.allowSubFolders=allowSubFolders;
