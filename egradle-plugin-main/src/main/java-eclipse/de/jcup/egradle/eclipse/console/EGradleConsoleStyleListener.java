@@ -35,11 +35,12 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 	static {
 		addParseDataByIndex("BUILD SUCCESSFUL", GREEN);
 		addParseDataByIndex("BUILD FAILED", RED);
+		addParseDataByIndex("SKIPPED", GRAY);
 		addParseDataByIndex("UP-TO-DATE", ORANGE);
 		addParseDataByIndex("FAILURE:", BRIGHT_RED);
 		addParseDataByIndex("test FAILED", RED);
-		addParseDataByIndex("* What went wrong:",GRAY);
-		addParseDataByIndex("* Try:",GRAY);
+		addParseDataByIndex("* What went wrong:",DARK_GRAY);
+		addParseDataByIndex("* Try:",DARK_GRAY);
 		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
 	}
 
