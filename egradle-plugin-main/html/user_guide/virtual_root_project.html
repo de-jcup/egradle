@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Virtual root project</title>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner-image.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>Virtual root project</h1>
+	<ul>
+		<li><a href="concept">About the concept</a></li>
+		<li><a href="#example">An example</a></li>
+		<li><a href="#refresh">How to update/refresh</a></li>
+		<li><a href="#remove">How to remove</a></li>
+		<li><a href="#change_root_project">Changing the root project
+				in preferences</a></li>
+	</ul>
+	<h2 id="concept">About the concept</h2>
+	<p>Inside a gradle root project you have got at least
+	<ul>
+		<li>build.gradle</li>
+		<li>gradle.properties</li>
+		<li>settings.gradle</li>
+		<li>subprojects</li>
+		<li><i>maybe additional folders</i></li>
+		<li><i>maybe additional files</i></li>
+	</ul>
+
+	So how can we work with root project content? We have got following
+	possibilities:
+	<ol>
+		<li><b>Import the root project as an eclipse project</b> and have
+			all resource duplicated in "Search", "Open Type", have wrong links to
+			parts not natured/parsed etc.<i>(inconvenient + slow + problems)</i>
+		</li>
+		<li>Do not import the root project as an eclipse project but <b>open
+				content in external editors</b> instead <i>(inconvenient)</i>
+		</li>
+		<li>Last but not least you can <b>create a temporary project,
+				create linked files and linked folders</b> to the parts you want to have
+			<i>(very much of work)</i>
+		</li>
+	</ol>
+
+	<p>I preferred the temporary project approach but I didn't like the
+		manual work to create links etc... So what about having this been done
+		automatically?</p>
+
+	<p>This is exact what the so called "Virtual root project" does: By
+		clicking a button inside the EGradle toolbar you are able to
+		(re-)create a "Virtual root project" of your current set gradle
+		rootproject. The virtual root project will contain all folders and
+		files of gradle root project folder being not already imported as an
+		eclipse project into current workspace.</p>
+	<h2 id="example">An example</h2>
+	There is a root project folder given called "test-rootproject". It's
+	content looks like shown in next image:
+	<p>
+		<img src="images/egradle-virtualrootproject-example-explorer.png" />
+	</p>
+	The both projects were already imported into eclipse workspace:
+	<p>
+		<img src="images/egradle-virtualrootproject-example-before-click.png" />
+	</p>
+	After clicking the red marked toolbar button the virtual root project
+	shows up. It contains NOT the both already imported projects but only
+	the missing stuff:
+	<p>
+		<img src="images/egradle-virtualrootproject-example-after-click.png" />
+	</p>
+	If you delete e.g. "testproject1" (without content delete!) and press
+	the toolbar button again, the "testproject1" subfolder will be shown
+	again inside the virtual root project.
+
+	<h2 id="update">How to update/refresh project</h2>
+	Of course you can use F5 to refresh the project. But a simple click to
+	the button does recreate it again from scratch - and with already
+	opened/imported gradle project recognition.
+
+	<h2 id="remove">How to remove the virtual root project</h2>
+	Select the project and press DEL as you would do on any other project
+
+	<h2 id="change_root_project">Changing the root project in
+		preferences</h2>
+	If the virtual root project is inside workspace it will be
+	automatically refreshed
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>
