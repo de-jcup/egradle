@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle"
-      version="0.6.0.beta"
+      version="0.6.1.beta"
       provider-name="Albert Tregnaghi">
 
    <description url="https://github.com/de-jcup/egradle/wiki">
@@ -98,5 +98,5 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   
+
 </feature>
