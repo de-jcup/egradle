@@ -36,6 +36,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -54,15 +55,17 @@ import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
-import de.jcup.egradle.core.virtualroot.VirtualProjectSupport;
+import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
-import de.jcup.egradle.eclipse.virtualroot.RootProjectEclipseVisitor;
+import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 
 public class EGradleUtil {
 
+	private static VirtualProjectCreator virtualProjectCreator = new VirtualProjectCreator();
+	
 	/**
 	 * Get image by path from image registry. If not already registered a new
 	 * image will be created and registered. If not createable a fallback image
@@ -249,7 +252,7 @@ public class EGradleUtil {
 					if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)){
 						/* ok found - so recreate ...*/
 						try {
-							createOrUpdateVirtualRootProject();
+							createOrRecreateVirtualRootProject();
 						} catch (VirtualRootProjectException e) {
 							log(e);
 						}
@@ -295,12 +298,27 @@ public class EGradleUtil {
 		return projects;
 	}
 	
-	private static VirtualProjectSupport helper = new VirtualProjectSupport();
-
-	public static void createOrUpdateVirtualRootProject() throws VirtualRootProjectException {
+	/**
+	 * Creates or recreates virtual project 
+	 * @throws VirtualRootProjectException
+	 */
+	public static void createOrRecreateVirtualRootProject() throws VirtualRootProjectException {
 		GradleRootProject rootProject = EGradleUtil.getRootProject();
-		RootProjectEclipseVisitor visitor = new RootProjectEclipseVisitor(rootProject);
-		helper.createOrUpdateVirtualRootProject(rootProject, visitor);
+		Job job = new Job("Virtual root project") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				EclipseVirtualProjectPartCreator partCreator = new EclipseVirtualProjectPartCreator(rootProject,monitor);
+				try {
+					virtualProjectCreator.createOrUpdate(rootProject, partCreator);
+					return Status.OK_STATUS;
+				} catch (VirtualRootProjectException e) {
+					EGradleUtil.log(e);
+					return Status.CANCEL_STATUS;
+				}
+			}
+		};
+		job.schedule();
 		
 	}
 	

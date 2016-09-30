@@ -15,6 +15,7 @@
  */
  package de.jcup.egradle.core.virtualroot;
 
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
@@ -25,7 +26,7 @@ import org.junit.Test;
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 
-public class VirtualProjectSupportTest {
+public class VirtualProjectCreatorTest {
 
 	private static File PARENT_OF_TEST = new File("egradle-plugin-main/src/test/res/");
 	static {
@@ -46,23 +47,15 @@ public class VirtualProjectSupportTest {
 	
 	private static final File SUBFOLDER2_1 = new File(SUBFOLDER2,"subfolder2-1");
 	
-	private static final File TEST1_1_TXT_FILE = new File(SUBFOLDER1,"test1-1.txt");
-	private static final File TEST1_2_TXT_FILE = new File(SUBFOLDER1,"test1-2.txt");
-	
-	private static final File TEST2_1_TXT_FILE = new File(SUBFOLDER1,"test2-1.txt");
-	private static final File TEST2_2_TXT_FILE = new File(SUBFOLDER1,"test2-2.txt");
-	
-	private static final File TEST2_1_1_TXT_FILE = new File(SUBFOLDER2_1,"test2-1-1.txt");
-	
-	private VirtualProjectSupport supportToTest;
-	private RootProjectVisitor mockedVisitor;
+	private VirtualProjectCreator creatorToTest;
+	private VirtualProjectPartCreator mockedPartCreator;
 	private GradleRootProject mockedRootProject;
 
 	@Before
 	public void before() {
-		supportToTest = new VirtualProjectSupport();
-		mockedVisitor = mock(RootProjectVisitor.class);
+		creatorToTest = new VirtualProjectCreator();
 
+		mockedPartCreator = mock(VirtualProjectPartCreator.class);
 		mockedRootProject = mock(GradleRootProject.class);
 
 	}
@@ -73,10 +66,10 @@ public class VirtualProjectSupportTest {
 		when(mockedRootProject.getFolder()).thenReturn(null);
 
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+		verify(mockedPartCreator,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
 	}
 
 	@Test
@@ -88,10 +81,10 @@ public class VirtualProjectSupportTest {
 		when(mockedRootProject.getFolder()).thenReturn(mockRootFolder);
 
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+		verify(mockedPartCreator,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
 
 	}
 	
@@ -104,62 +97,63 @@ public class VirtualProjectSupportTest {
 		when(mockedRootProject.getFolder()).thenReturn(mockRootFolder);
 
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+		verify(mockedPartCreator).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
 
 	}
 
 	@Test
-	public void visitor_visits_all_files_of_rootfolder() throws Exception {
+	public void creator_creates_all_files_of_rootfolder() throws Exception {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
+		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
 
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor).createLink(any(), eq(TEST1_TXT_FILE));
-		verify(mockedVisitor).createLink(any(), eq(TEST2_TXT_FILE));
+		verify(mockedPartCreator).createLink(any(), eq(TEST1_TXT_FILE));
+		verify(mockedPartCreator).createLink(any(), eq(TEST2_TXT_FILE));
 	}
 
 	@Test
-	public void visitor_visits_all_direct_subfolders_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_all() throws Exception {
+	public void creator_creates_all_direct_subfolders_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_all() throws Exception {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
-		when(mockedVisitor.needsFolderToBeCreated(any(), any())).thenReturn(true);
+		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor).createLink(any(), eq(SUBFOLDER1));
-		verify(mockedVisitor).createLink(any(), eq(SUBFOLDER2));
-	}
-	
-	@Test
-	public void visitor_visits_not_subsubfolders_when_visitor_accepts_all() throws Exception {
-		/* prepare */
-		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
-		when(mockedVisitor.needsFolderToBeCreated(any(), any())).thenReturn(true);
-		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
-
-		/* test */
-		verify(mockedVisitor,never()).createLink(any(), eq(SUBFOLDER2_1));
+		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER1));
+		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER2));
 	}
 	
 	@Test
-	public void visitor_visits_only_subfolder1_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_subfolder1_only() throws Exception {
+	public void creator_creates_not_subsubfolders_when_visitor_accepts_all() throws Exception {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
-		when(mockedVisitor.needsFolderToBeCreated(any(), eq(SUBFOLDER1))).thenReturn(true);
-		when(mockedVisitor.needsFolderToBeCreated(any(), eq(SUBFOLDER2))).thenReturn(false);
+		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
 		/* execute */
-		supportToTest.createOrUpdateVirtualRootProject(mockedRootProject, mockedVisitor);
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedVisitor).createLink(any(), eq(SUBFOLDER1));
-		verify(mockedVisitor,never()).createLink(any(), eq(SUBFOLDER2));
+		verify(mockedPartCreator,never()).createLink(any(), eq(SUBFOLDER2_1));
+	}
+	
+	@Test
+	public void creator_creates_only_subfolder1_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_subfolder1_only() throws Exception {
+		/* prepare */
+		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
+		when(mockedPartCreator.isLinkCreationNeeded(any(), eq(SUBFOLDER1))).thenReturn(true);
+		when(mockedPartCreator.isLinkCreationNeeded(any(), eq(SUBFOLDER2))).thenReturn(false);
+		/* execute */
+		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
+
+		/* test */
+		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER1));
+		verify(mockedPartCreator,never()).createLink(any(), eq(SUBFOLDER2));
 	}
 }

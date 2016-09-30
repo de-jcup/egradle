@@ -27,7 +27,7 @@ public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent arg0) throws ExecutionException {
 		try {
-			EGradleUtil.createOrUpdateVirtualRootProject();
+			EGradleUtil.createOrRecreateVirtualRootProject();
 		} catch (VirtualRootProjectException e) {
 			throw new ExecutionException("Virtual root project not (re)createable", e);
 		}
