@@ -149,17 +149,18 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		if (!(targetParentFolder instanceof IContainer)) {
 			throw new VirtualRootProjectException("Target folder clazz not supported:" + targetParentFolder);
 		}
-		getCreationMonitor().subTask("Create link:"+file.getName());
-		getCreationMonitor().worked(++createdLinks);
+		
 		IContainer container = (IContainer) targetParentFolder;
 		IPath path = Path.fromPortableString(file.getName());
 		try {
 			if (file.isDirectory()) {
+				getCreationMonitor().subTask("Create link to file '"+file.getName()+"'");
 				r.createLinkedFolder(container, path, file);
 			} else {
+				getCreationMonitor().subTask("Create link to folder '"+file.getName()+"'");
 				r.createLinkedFile(container, path, file);
-
 			}
+			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
 			throw new VirtualRootProjectException("Was not able to create link to file:" + file, e);
 		}

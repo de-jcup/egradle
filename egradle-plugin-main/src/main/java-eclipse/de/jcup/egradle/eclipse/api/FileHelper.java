@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.eclipse.api;
 
+import static org.apache.commons.lang3.Validate.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,6 +41,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 
 public class FileHelper {
@@ -273,5 +276,11 @@ public class FileHelper {
 				EGradleUtil.throwCoreException("cannot delete file:"+file);
 			}
 		}
+	}
+
+	public IPath toPath(File tempFolder) {
+		notNull(tempFolder, "'tempFolder' may not be null");
+		IPath path = Path.fromOSString(tempFolder.getAbsolutePath());
+		return path;
 	}
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.api;
+package de.jcup.egradle.eclipse.api;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -38,50 +38,56 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.ui.internal.ide.undo.ProjectDescription;
+
+import de.jcup.egradle.core.Constants;
 
 public class ResourceHelper {
-	public static ResourceHelper SHARED= new ResourceHelper(FileHelper.SHARED);
-	
+	public static ResourceHelper SHARED = new ResourceHelper(FileHelper.SHARED);
+
 	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
 	private final int MAX_RETRY = 5;
 	private FileHelper fileHelper;
-	
-	public ResourceHelper(FileHelper fileHelper){
+
+	public ResourceHelper(FileHelper fileHelper) {
 		notNull(fileHelper, "'fileHelper' may not be null");
-		this.fileHelper=fileHelper;
+		this.fileHelper = fileHelper;
 	}
+
 	/**
-	 * Creates or refreshes project. If project exists but isn't opened it will be automatically opened
+	 * Creates or refreshes project. If project exists but isn't opened it will
+	 * be automatically opened
+	 * 
 	 * @param projectName
 	 * @return project
 	 * @throws CoreException
 	 */
 	public IProject createOrRefreshProject(String projectName) throws CoreException {
-		return createOrRefreshProject(projectName,null);
+		return createOrRefreshProject(projectName, null);
 	}
 
-		
 	/**
-	 * Creates or refreshes project. If project exists but isn't opened it will be automatically opened
+	 * Creates or refreshes project. If project exists but isn't opened it will
+	 * be automatically opened
+	 * 
 	 * @param projectName
 	 * @param monitor
 	 * @return project
 	 * @throws CoreException
 	 */
 	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor) throws CoreException {
-		if (monitor==null){
+		if (monitor == null) {
 			monitor = NULL_MONITOR;
 		}
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
-		if (!project.exists()){
+		if (!project.exists()) {
 			project.create(monitor);
-		}
-		else{
+		} else {
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 		}
 
-		if (!project.isOpen()){
+		if (!project.isOpen()) {
 			project.open(monitor);
 		}
 		return project;
@@ -90,7 +96,7 @@ public class ResourceHelper {
 	public void deleteProject(String projectName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
-		if (project.exists()){
+		if (project.exists()) {
 			delete(project);
 		}
 	}
@@ -115,29 +121,31 @@ public class ResourceHelper {
 			}
 		}
 	}
-	
+
 	public FileHelper getFileHelper() {
 		return fileHelper;
 	}
 
 	public IFolder createFolder(IPath path) throws CoreException {
-		return createFolder(path,null);
+		return createFolder(path, null);
 	}
-	
+
 	public IFolder createFolder(String portableFolderPath) throws CoreException {
-		return createFolder(portableFolderPath,null);
+		return createFolder(portableFolderPath, null);
 	}
+
 	public IFolder createFolder(String portableFolderPath, IProgressMonitor monitor) throws CoreException {
 		Path fullPath = new Path(portableFolderPath);
 		return createFolder(fullPath, monitor);
 	}
+
 	public IFolder createFolder(IPath path, IProgressMonitor monitor) throws CoreException {
-		if (monitor==null){
+		if (monitor == null) {
 			monitor = NULL_MONITOR;
 		}
 		ContainerCreator creator = new ContainerCreator(ResourcesPlugin.getWorkspace(), path);
 		IContainer container = creator.createContainer(monitor);
-		if (container instanceof IFolder){
+		if (container instanceof IFolder) {
 			return (IFolder) container;
 		}
 		return null;
@@ -205,6 +213,5 @@ public class ResourceHelper {
 
 		return project;
 	}
-	
-	
+
 }

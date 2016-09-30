@@ -53,7 +53,7 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		monitor.beginTask("Import junit results from gradle", 100);
-		File tempFile = new File(System.getProperty("user.home")+"/.egradle/TEST-egradle-all-testresults.tmp.xml");
+		File tempFile=new File(EGradleUtil.getTempFolder(),"TEST-egradle-all-testresults.tmp.xml");
 		try {
 			/* remove old temp file if existing */
 			if (tempFile.exists()) {

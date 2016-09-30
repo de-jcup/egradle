@@ -321,6 +321,42 @@ public class EGradleUtil {
 		job.schedule();
 		
 	}
+
+	/**
+	 * Gets the egradle temp folder (user.home/.egradle). If not existing the folder will be created
+	 * @return temp folder never <code>null</code> and always existing
+	 */
+	public static File getTempFolder() {
+		return getTempFolder(null);
+	}
+	
+	/**
+	 * Gets the egradle temp folder (user.home/.egradle/$subfolder). If not existing the folder will be created
+	 * @param subFolder subfoler inside egradle tempfolder. If <code>null</code> the egradle temp folder will be returned
+	 * @return temp folder never <code>null</code> and always existing
+	 */
+	public static File getTempFolder(String subFolder) {
+		String userHome = System.getProperty("user.home");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(userHome);
+		sb.append("/.egradle");
+		if (StringUtils.isNotBlank(subFolder)){
+			sb.append("/");
+			sb.append(subFolder);
+		}
+		
+		String path = sb.toString();
+		
+		File egradleTempFolder = new File(path);
+		if (!egradleTempFolder.exists()){
+			egradleTempFolder.mkdirs();
+			if(!egradleTempFolder.exists()){
+				throw new IllegalStateException("Was not able to create egradle temp folder:"+path);
+			}
+		}
+		return egradleTempFolder;
+	}
 	
 
 }
