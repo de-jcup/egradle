@@ -15,12 +15,12 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
 /**
  * Class used to initialize default preference values.
  */

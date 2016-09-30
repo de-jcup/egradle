@@ -38,9 +38,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.ui.internal.ide.undo.ProjectDescription;
-
-import de.jcup.egradle.core.Constants;
 
 public class ResourceHelper {
 	public static ResourceHelper SHARED = new ResourceHelper(FileHelper.SHARED);

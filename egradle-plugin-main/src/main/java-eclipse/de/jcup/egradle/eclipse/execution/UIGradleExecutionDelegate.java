@@ -15,25 +15,12 @@
  */
  package de.jcup.egradle.eclipse.execution;
 
-import java.lang.reflect.InvocationTargetException;
-
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleConstants;
-import org.eclipse.ui.console.IConsoleView;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
@@ -47,24 +34,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	@Override
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
 		if (showEGradleSystemConsole) {
-			EGradleUtil.safeAsyncExec(new Runnable() {
-
-				@Override
-				public void run() {
-					IConsole eGradleSystemConsole = EGradleSystemConsoleFactory.INSTANCE.getConsole();
-					IWorkbenchPage page = EGradleUtil.getActivePage();
-					String id = IConsoleConstants.ID_CONSOLE_VIEW;
-					IConsoleView view;
-					try {
-						view = (IConsoleView) page.showView(id);
-						view.display(eGradleSystemConsole);
-					} catch (PartInitException e) {
-						EGradleUtil.log(e);
-					}
-				}
-
-			});
-
+			EGradleUtil.openSystemConsole();
 		}
 	}
 

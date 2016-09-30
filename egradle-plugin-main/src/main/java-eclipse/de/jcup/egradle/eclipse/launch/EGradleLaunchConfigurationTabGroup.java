@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,8 +26,6 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.ILaunchConfigurationTabGroup;
-
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 public class EGradleLaunchConfigurationTabGroup implements ILaunchConfigurationTabGroup {
 	

@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
-import static org.apache.commons.lang3.Validate.notNull;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -33,9 +33,9 @@ import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
-import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
@@ -133,7 +133,6 @@ public class GradleExecutionDelegate {
 		result = executor.execute(context);
 		if (result.isOkay()) {
 			systemConsoleOutputHandler.output("[OK]");
-			return;
 		} else {
 			systemConsoleOutputHandler.output("[FAILED]");
 		}

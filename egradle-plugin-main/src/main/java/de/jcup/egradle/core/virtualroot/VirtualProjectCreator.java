@@ -18,9 +18,7 @@
 import static de.jcup.egradle.core.Constants.*;
 
 import java.io.File;
-import java.io.FileFilter;
 
-import de.jcup.egradle.core.AcceptAllFilesFilter;
 import de.jcup.egradle.core.domain.GradleRootProject;
 
 public class VirtualProjectCreator {

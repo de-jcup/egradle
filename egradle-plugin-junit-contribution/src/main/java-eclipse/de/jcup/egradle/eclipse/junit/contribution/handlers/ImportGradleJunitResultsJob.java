@@ -26,10 +26,12 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.w3c.dom.Document;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.api.XMLWriter;
 import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -51,7 +53,8 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 	}
 
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	protected IStatus run(IProgressMonitor _monitor) {
+		SubMonitor monitor = SubMonitor.convert(_monitor);
 		monitor.beginTask("Import junit results from gradle", 100);
 		File tempFile=new File(EGradleUtil.getTempFolder(),"TEST-egradle-all-testresults.tmp.xml");
 		try {
@@ -64,7 +67,8 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			
 			String projectNameToShow=buildProjectNameToUse();
 			/* fetch files*/
-			String taskName = "Fetching gradle junit result files from" +projectNameToShow;
+			String taskName = "Fetching gradle junit result files from '" +projectNameToShow+"'";
+			EGradleUtil.outputToSystemConsole(taskName);
 			monitor.setTaskName(taskName);
 			File rootFolder = EGradleUtil.getRootProjectFolder();
 
@@ -130,10 +134,12 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 				}
 			});
 		} catch (Exception e) {
+			EGradleUtil.outputToSystemConsole(Constants.CONSOLE_FAILED);
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot import junit results", e);
 		} finally{
 			monitor.done();
 		}
+		EGradleUtil.outputToSystemConsole(Constants.CONSOLE_OK);
 		return Status.OK_STATUS;
 	}
 

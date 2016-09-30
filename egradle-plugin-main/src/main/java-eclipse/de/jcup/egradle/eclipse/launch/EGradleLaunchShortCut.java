@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,8 +42,6 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 /**
  * Short cut launcher for Egradle
