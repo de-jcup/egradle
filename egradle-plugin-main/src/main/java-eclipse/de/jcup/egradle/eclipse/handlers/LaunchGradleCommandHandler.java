@@ -15,7 +15,14 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.ENVIRONMENT_PROPERTIES;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.GRADLE_PROPERTIES;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.LAUNCH_ARGUMENT;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.LAUNCH_POST_JOB;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_OPTIONS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_PROJECTNAME;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.SYSTEM_PROPERTIES;
 
 import java.util.Collections;
 import java.util.Map;

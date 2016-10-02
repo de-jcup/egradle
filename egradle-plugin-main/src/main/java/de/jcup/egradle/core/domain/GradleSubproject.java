@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core.domain;
 
-import static org.apache.commons.lang3.Validate.*;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class GradleSubproject extends AbstractGradleProject {
 

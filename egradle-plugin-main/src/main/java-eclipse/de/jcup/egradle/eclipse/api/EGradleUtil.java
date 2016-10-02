@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_ROOTPROJECT_PATH;
 
 import java.io.File;
 import java.io.IOException;

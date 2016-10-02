@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.preferences;
 
-import static org.apache.commons.lang3.Validate.*;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import de.jcup.egradle.core.process.EGradleShellType;
 

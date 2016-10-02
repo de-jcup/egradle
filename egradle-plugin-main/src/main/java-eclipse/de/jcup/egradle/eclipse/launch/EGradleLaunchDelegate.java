@@ -15,7 +15,10 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.LAUNCH_ARGUMENT;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_OPTIONS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_PROJECTNAME;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
 
 import java.util.Map;
 

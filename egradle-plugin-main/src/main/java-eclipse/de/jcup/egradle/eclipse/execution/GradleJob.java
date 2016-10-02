@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -22,7 +24,6 @@ import org.eclipse.core.runtime.jobs.Job;
 
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
-import static org.apache.commons.lang3.Validate.*;
 
 public class GradleJob extends Job {
 	private GradleExecutionDelegate execution;

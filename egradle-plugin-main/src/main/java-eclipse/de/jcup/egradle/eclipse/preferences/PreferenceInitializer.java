@@ -15,8 +15,11 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_COMMAND;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_TYPE;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_SHELL;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;

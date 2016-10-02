@@ -30,7 +30,6 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
 
@@ -46,8 +45,6 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 	private static ImageDescriptor egradleProjectDescriptor = new LazyImageDescriptor(
 			EGradleUtil.createImageDescriptor("icons/gradle-project-decorator.gif"));
 
-	private static final ColorManager cm = ColorManager.instance();
-	
 	@Override
 	public void decorate(Object element, IDecoration decoration) {
 		/* no decoration when plugin is not running */

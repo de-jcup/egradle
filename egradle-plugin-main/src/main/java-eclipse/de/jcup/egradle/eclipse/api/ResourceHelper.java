@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static org.apache.commons.lang3.Validate.*;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
