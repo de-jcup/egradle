@@ -25,7 +25,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.junit.contribution.handlers.ImportGradleJunitResultsJob;
+import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 
 public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{

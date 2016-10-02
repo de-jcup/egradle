@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.junit.contribution.handlers;
+package de.jcup.egradle.eclipse.junit.contribution;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +35,6 @@ import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.api.XMLWriter;
 import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.junit.contribution.JunitContributionUtil;
 import de.jcup.egradle.junit.JUnitResultFilesFinder;
 import de.jcup.egradle.junit.JUnitResultsCompressor;
 
