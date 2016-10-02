@@ -85,12 +85,11 @@ END OF TERMS AND CONDITIONS
       <update label="EGradle update site" url="https://raw.githubusercontent.com/de-jcup/egradle/master/egradle-updatesite/"/>
    </url>
 
-   <plugin
-         id="de.jcup.egradle.eclipse.plugin.junit.contribution"
-         download-size="0"
-         install-size="0"
+   <includes
+         id="de.jcup.egradle.feature.junit"
          version="0.0.0"
-         unpack="false"/>
+         name="EGradle JUnit Integration (optional)"
+         optional="true"/>
 
    <plugin
          id="de.jcup.egradle.eclipse.plugin.main"
