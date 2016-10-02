@@ -92,7 +92,6 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	public void launch(IEditorPart editor, String mode) {
 		IEditorInput input = editor.getEditorInput();
-		// TODO ATR, 12.08.2016: maybe this should be used for test executions?
 		IResource resource = (IResource) input.getAdapter(IResource.class);
 		if (resource != null) {
 			searchAndLaunch(new Object[] { resource }, mode, getTypeSelectionTitle(), getEditorEmptyMessage());
@@ -147,12 +146,13 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		ILaunchConfiguration config = null;
 		ILaunchConfigurationWorkingCopy wc = null;
 		try {
-
-			String projectName = createProjectName(resource);
+			String projectName = createGradleProjectName(resource);
+			String proposal= createLaunchConfigurationNameProposal(projectName, resource);
+			
 			ILaunchConfigurationType configType = getConfigurationType();
-			wc = configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(projectName));
-			createCustomConfiguration(wc, projectName);
-			wc.setMappedResources(new IResource[] { resource });
+			wc = configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(proposal));
+			createCustomConfiguration(resource ,wc, projectName);
+			
 			config = wc.doSave();
 		} catch (CoreException exception) {
 			MessageDialog.openError(EGradleUtil.getActiveWorkbenchShell(), "EGradle create configuration failed",
@@ -160,12 +160,18 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		}
 		return config;
 	}
-
-	protected void createCustomConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
-		createProjectNameConfiguration(wc, projectName);
-		createTaskConfiguration(wc);
+	
+	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource) {
+		return projectName;
 	}
 
+	protected void createCustomConfiguration(IResource resource ,ILaunchConfigurationWorkingCopy wc, String projectName) {
+		createProjectNameConfiguration(wc, projectName);
+		createTaskConfiguration(wc);
+		
+		wc.setMappedResources(new IResource[] { resource });
+	}
+	
 	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
 		wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
 	}
@@ -174,9 +180,9 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		wc.setAttribute(PROPERTY_TASKS, "assemble");
 	}
 
-	private String createProjectName(IResource resource) {
+	private String createGradleProjectName(IResource resource) {
 		IProject project = resource.getProject();
-		if (EGradleUtil.isVirtualRootProject(project)){
+		if (EGradleUtil.isVirtualRootProject(project)) {
 			return "";
 		}
 		try {
@@ -203,24 +209,23 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 * Collect the listing of {@link ILaunchConfiguration}s that apply to the
 	 * given {@link IType} and {@link ILaunchConfigurationType}
 	 * 
-	 * @param type
+	 * @param resource
 	 *            the type
-	 * @param ctype
+	 * @param configType
 	 *            the {@link ILaunchConfigurationType}
 	 * @return the list of {@link ILaunchConfiguration}s or an empty list, never
 	 *         <code>null</code>
 	 * @since 3.8
 	 */
-	List<ILaunchConfiguration> getCandidates(IResource type, ILaunchConfigurationType ctype) {
+	List<ILaunchConfiguration> getCandidates(IResource resource, ILaunchConfigurationType configType) {
 		List<ILaunchConfiguration> candidateConfigs = Collections.emptyList();
 		try {
-			String projectName = createProjectName(type);
-			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations(ctype);
+			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager()
+					.getLaunchConfigurations(configType);
 			candidateConfigs = new ArrayList<ILaunchConfiguration>(configs.length);
 			for (int i = 0; i < configs.length; i++) {
 				ILaunchConfiguration config = configs[i];
-				if (config.getAttribute(PROPERTY_PROJECTNAME, "")
-						.equals(projectName)) {
+				if (isConfigACandidate(resource, config)) {
 					candidateConfigs.add(config);
 				}
 			}
@@ -228,6 +233,11 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			EGradleUtil.log(e);
 		}
 		return candidateConfigs;
+	}
+
+	protected boolean isConfigACandidate(IResource resource, ILaunchConfiguration config) throws CoreException {
+		String projectName = createGradleProjectName(resource);
+		return config.getAttribute(PROPERTY_PROJECTNAME, "").equals(projectName);
 	}
 
 	/**
@@ -284,7 +294,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 * @return type selection dialog title
 	 */
 	protected String getTypeSelectionTitle() {
-		return "There is more than one type being launchable:";
+		return "More than one can be launched:";
 	}
 
 	protected void launch(IResource type, String mode) {
@@ -332,7 +342,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			IAdaptable adaptable = (IAdaptable) object;
 			resource = getLaunchableResource(adaptable);
 		} else {
-			throw new IllegalArgumentException("Cannot handle object:" + object);
+			throw new IllegalArgumentException("EGradle launch shortcut cannot handle object type:" + object);
 		}
 		if (resource != null) {
 			launch(resource, mode);

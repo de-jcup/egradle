@@ -17,33 +17,46 @@ package de.jcup.egradle.core.domain;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 public class GradleCommand {
 
-	public static GradleCommand[] build(String... commands) {
-		return build((GradleSubproject) null, commands);
+	public static GradleCommand[] build(String commandString) {
+		return build((GradleSubproject) null, commandString);
 	}
 
-	public static GradleCommand[] build(GradleSubproject gradleSubproject, String... commands) {
-		notNull(commands);
-		GradleCommand[] ca = new GradleCommand[commands.length];
+	public static GradleCommand[] build(GradleSubproject gradleSubproject, String commandString) {
+		notNull(commandString);
+		String[] commands = commandString.split(" ");
+		if (ArrayUtils.isEmpty(commands)){
+			return new GradleCommand[]{};
+		}
+		List<GradleCommand> list = new ArrayList<>();
 		for (int i = 0; i < commands.length; i++) {
 			String command = commands[i];
-			ca[i] = new GradleCommand(gradleSubproject, command);
+			List<String> param = null;
+			/* check if following is an argument (e.g. test --tests de.jcup.MyTestClass*/
+			if (i+2<commands.length){
+				String potentialArg = commands[i+1];
+				if (potentialArg.startsWith("--")) {
+					/* argument detected */
+					param=new ArrayList<>();
+					param.add(potentialArg);
+					param.add(commands[i+2]);
+					i=i+2;
+				}
+			}
+			list.add(new GradleCommand(gradleSubproject, command, param));
 		}
-		return ca;
+		return list.toArray(new GradleCommand[list.size()]);
 	}
 
 	private String command;
-
-	/**
-	 * Simple variant - as a single string... Additional constructors could use
-	 * dedicated objects
-	 * 
-	 * @param command
-	 */
-	public GradleCommand(String command) {
-		this(null, command);
-	}
+	private List<String> commandArguments;
 
 	/**
 	 * Combines subproject with command
@@ -53,8 +66,21 @@ public class GradleCommand {
 	 * @param command
 	 *            - the task to execute
 	 */
-	public GradleCommand(GradleSubproject subProject, String command) {
-		this.command = (subProject == null ? "" : (":" + subProject.getName() + ":")) + command;
+	private GradleCommand(GradleSubproject subProject, String command, List<String> commandArguments) {
+		StringBuilder sb = new StringBuilder();
+		if (subProject != null) {
+			sb.append(':');
+			sb.append(subProject.getName());
+			sb.append(':');
+		}
+		sb.append(command);
+		this.command = sb.toString();
+		
+		if (commandArguments==null){
+			this.commandArguments=Collections.emptyList();
+		}else{
+			this.commandArguments=Collections.unmodifiableList(commandArguments);
+		}
 	}
 
 	@Override
@@ -69,6 +95,14 @@ public class GradleCommand {
 	 */
 	public String getCommand() {
 		return command;
+	}
+	
+	/**
+	 * Returns an unmodifiable list of command arguments
+	 * @return command arguments
+	 */
+	public List<String> getCommandArguments() {
+		return commandArguments;
 	}
 
 }

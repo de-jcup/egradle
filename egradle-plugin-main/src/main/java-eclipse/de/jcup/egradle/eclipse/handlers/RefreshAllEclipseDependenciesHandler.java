@@ -34,7 +34,7 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	@Override
 	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);
-		context.setCommands(GradleCommand.build("cleanEclipse", "eclipse"));
+		context.setCommands(GradleCommand.build("cleanEclipse eclipse"));
 	}
 
 	@Override

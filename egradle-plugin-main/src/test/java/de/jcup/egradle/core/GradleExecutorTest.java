@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.core;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -22,8 +23,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -70,7 +73,30 @@ public class GradleExecutorTest {
 		mockedCommand2 = mock(GradleCommand.class);
 
 	}
+	@Test
+	public void create_execution_command__test_with_arguments_is_correct_created() {
+		List<String> data = new ArrayList<>();
+		data.add("--tests");
+		data.add("MyTestClass");
+		
+		when(mockedCommand1.getCommand()).thenReturn("test"); 
+		when(mockedCommand1.getCommandArguments()).thenReturn(data);
+		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
+		String[] result = executorToTest.createExecutionCommand(mockedContext);
+		assertNotNull(result);
+		
+		assertEquals(4, result.length);
+		
+		int i=0;
+		assertEquals("gradleCommand",result[i++]);
+		assertEquals("test",result[i++]);
+		assertEquals("--tests",result[i++]);
+		assertEquals("MyTestClass",result[i++]);
+		
+	}
+	
+	
 	@Test
 	public void executing_returns_result_not_null() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });

@@ -96,12 +96,11 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 						"");
 				String commandString = configuration.getAttribute(PROPERTY_TASKS, "");
 
-				String[] commandStrings = commandString.split(" ");
 				GradleCommand[] commands = null;
 				if (StringUtils.isEmpty(projectName)) {
-					commands = GradleCommand.build(commandStrings);
+					commands = GradleCommand.build(commandString);
 				} else {
-					commands = GradleCommand.build(new GradleSubproject(projectName), commandStrings);
+					commands = GradleCommand.build(new GradleSubproject(projectName), commandString);
 				}
 				context.setCommands(commands);
 

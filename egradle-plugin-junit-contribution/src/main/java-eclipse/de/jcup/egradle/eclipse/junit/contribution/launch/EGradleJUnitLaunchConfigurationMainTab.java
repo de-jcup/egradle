@@ -18,6 +18,8 @@ package de.jcup.egradle.eclipse.junit.contribution.launch;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
 
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
@@ -36,8 +38,9 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
-		/* make tasks not editable */
-		tasksField.setEnabled(false);
+		/* make tasks not editable, but focusable. So we do NOT use tasksField.setEnabled(false)! */
+		tasksField.setEditable(false);
+		tasksField.setBackground(parent.getShell().getBackground());
 		
 	}
 

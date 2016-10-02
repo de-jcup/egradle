@@ -40,7 +40,7 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 public class GradleExecutor {
 
 	private ProcessExecutor processExecutor;
-	
+
 	public GradleExecutor(ProcessExecutor processExecutor) {
 		notNull(processExecutor, "Process executor may not be null!");
 		this.processExecutor = processExecutor;
@@ -75,52 +75,63 @@ public class GradleExecutor {
 		int pos = 0;
 		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length + 1;
+		/* expand arraysize for command arguments too*/
+		for (GradleCommand c : commands) {
+			arraySize += c.getCommandArguments().size();
+		}
 		GradleConfiguration config = context.getConfiguration();
 		EGradleShellType shell = config.getShellType();
-		if (shell==null){
+		if (shell == null) {
 			shell = EGradleShellType.NONE;
 		}
 		List<String> shellCommands = shell.createCommands();
 		arraySize += shellCommands.size();// we must call shell executor too
 		String[] options = context.getOptions();
-		if (options==null){
-			options = new String[]{};
+		if (options == null) {
+			options = new String[] {};
 		}
-		/* be aware of empty content*/
+		/* be aware of empty content */
 		List<String> safeOptions = new ArrayList<>();
-		for (String opt: options){
-			if (StringUtils.isNotBlank(opt)){
+		for (String opt : options) {
+			if (StringUtils.isNotBlank(opt)) {
 				safeOptions.add(opt);
 			}
 		}
 		arraySize += safeOptions.size();
-		
+
 		Map<String, String> gradleProperties = context.getGradleProperties();
 		Map<String, String> systemProperties = context.getSystemProperties();
 
 		arraySize += gradleProperties.size();
 		arraySize += systemProperties.size();
-		
+
 		String[] commandStrings = new String[arraySize];
-		for (String shellCommand: shellCommands) {
+		for (String shellCommand : shellCommands) {
 			commandStrings[pos++] = shellCommand;
 		}
 		commandStrings[pos++] = config.getGradleCommandFullPath();
 		/* raw options */
-		for (String rawOption: safeOptions) {
+		for (String rawOption : safeOptions) {
 			commandStrings[pos++] = rawOption;
 		}
-		/* gradle properties*/
-		for (String key: gradleProperties.keySet()) {
-			commandStrings[pos++] = "-P"+key+"="+gradleProperties.get(key);
+		/* gradle properties */
+		for (String key : gradleProperties.keySet()) {
+			commandStrings[pos++] = "-P" + key + "=" + gradleProperties.get(key);
 		}
-		/* system properties*/
-		for (String key: systemProperties.keySet()) {
-			commandStrings[pos++] = "-D"+key+"="+systemProperties.get(key);
+		/* system properties */
+		for (String key : systemProperties.keySet()) {
+			commandStrings[pos++] = "-D" + key + "=" + systemProperties.get(key);
 		}
 		/* commands */
 		for (int i = 0; i < commands.length; i++) {
-			commandStrings[pos++] = commands[i].getCommand();
+			GradleCommand gradleCommand = commands[i];
+			commandStrings[pos++] = gradleCommand.getCommand();
+			List<String> commandArguments = gradleCommand.getCommandArguments();
+			if (commandArguments.size()>1){
+				commandStrings[pos++] = commandArguments.get(0);
+				commandStrings[pos++] = commandArguments.get(1);
+			}
+			
 		}
 		return commandStrings;
 	}
@@ -135,8 +146,8 @@ public class GradleExecutor {
 			return ProcessExecutor.PROCESS_RESULT_OK.equals(processResult);
 		}
 
-		public void setCommands(String ... commands) {
-			this.commands=commands;
+		public void setCommands(String... commands) {
+			this.commands = commands;
 		}
 
 		public void setException(Exception e) {
@@ -163,18 +174,18 @@ public class GradleExecutor {
 		public String createDescription() {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Executed: ");
-			if (ArrayUtils.isNotEmpty(commands)){
-				for (String command: commands){
+			if (ArrayUtils.isNotEmpty(commands)) {
+				for (String command : commands) {
 					sb.append(command);
 					sb.append(" ");
 				}
 			}
 			sb.append("\n\n");
-			if (! isOkay()){
-				if (processResult==null){
+			if (!isOkay()) {
+				if (processResult == null) {
 					sb.append("Process was terminated by unknown reason, no exit code available");
-				}else{
-					sb.append("Build failed with exit code "+getResultCode());
+				} else {
+					sb.append("Build failed with exit code " + getResultCode());
 				}
 			}
 			return sb.toString();

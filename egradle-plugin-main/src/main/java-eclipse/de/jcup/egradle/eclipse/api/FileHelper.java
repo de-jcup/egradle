@@ -32,9 +32,11 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -282,5 +284,25 @@ public class FileHelper {
 		notNull(tempFolder, "'tempFolder' may not be null");
 		IPath path = Path.fromOSString(tempFolder.getAbsolutePath());
 		return path;
+	}
+
+	/**
+	 * Gets simple file name without extension
+	 * @param resource
+	 * @return file name, no extension
+	 */
+	public String getFileName(IResource resource) {
+		String extension = resource.getFileExtension();
+		String name = resource.getName();
+		if (StringUtils.isBlank(name)){
+			return "";
+		}
+		if (StringUtils.isNotEmpty(extension)){
+			int length = extension.length()+1;/* +1 because of dot*/
+			String result= name.substring(0,name.length()-length);
+			return result;
+		}else{
+			return name;
+		}
 	}
 }
