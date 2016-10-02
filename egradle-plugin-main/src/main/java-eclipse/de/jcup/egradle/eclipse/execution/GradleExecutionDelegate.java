@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static org.apache.commons.lang3.Validate.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.GradleExecutor.Result;
-import de.jcup.egradle.core.api.ForgetMeRuntimeException;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -36,7 +35,6 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.preferences.PreferenceConstants;
@@ -60,9 +58,10 @@ public class GradleExecutionDelegate {
 	}
 
 	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator) {
+			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
 		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
+
 		this.systemConsoleOutputHandler = outputHandler;
 
 		context = createContext();
@@ -72,8 +71,12 @@ public class GradleExecutionDelegate {
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private GradleContext createContext() {
-		GradleRootProject rootProject = EGradleUtil.getRootProject();
+	private GradleContext createContext() throws GradleExecutionException {
+		/* we handle the error on creation time by own exception thrown - without EGradleUtil error dialog*/
+		GradleRootProject rootProject = EGradleUtil.getRootProject(false);
+		if (rootProject==null){
+			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
+		}
 		/* build configuration for gradle run */
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
@@ -94,8 +97,7 @@ public class GradleExecutionDelegate {
 		String shellId = preferences.getStringPreference(PreferenceConstants.P_GRADLE_SHELL);
 		
 		if (StringUtils.isEmpty(gradleCommand)){
-			EGradleMessageDialog.INSTANCE.showError("Preferences have no gradle command set, cannot execute!");
-			throw new ForgetMeRuntimeException("Illegal preference store, already shown to user");
+			throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");
 		}
 		
 		config.setShellCommand(EGradleShellType.findById(shellId));

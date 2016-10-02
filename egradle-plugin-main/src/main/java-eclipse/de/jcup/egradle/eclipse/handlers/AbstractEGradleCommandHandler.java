@@ -25,8 +25,10 @@ import org.eclipse.ui.progress.IProgressService;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
+import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
 
@@ -59,7 +61,13 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		/* create execution and fetch mode */
-		GradleExecutionDelegate execution = createGradleExecution(EGradleUtil.getSystemConsoleOutputHandler());
+		GradleExecutionDelegate execution = null;
+		try{
+			createGradleExecution(EGradleUtil.getSystemConsoleOutputHandler());
+		}catch(GradleExecutionException e){
+			EGradleMessageDialog.INSTANCE.showError(e.getMessage());
+			return null;
+		}
 		ExecutionMode mode = getExecutionMode();
 
 		/* execute */
@@ -86,6 +94,6 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		return null;
 	}
 
-	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler);
+	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException;
 
 }

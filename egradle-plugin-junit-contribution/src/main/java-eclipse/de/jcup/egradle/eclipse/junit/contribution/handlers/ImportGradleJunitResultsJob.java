@@ -135,7 +135,8 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			});
 		} catch (Exception e) {
 			EGradleUtil.outputToSystemConsole(Constants.CONSOLE_FAILED);
-			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot import junit results", e);
+//			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot import junit results", e);
+			return Status.CANCEL_STATUS;
 		} finally{
 			monitor.done();
 		}

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -72,9 +73,11 @@ import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 
 public class EGradleUtil {
 
-	private static OutputHandler outputHandler;
+	public static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
+
+	private static OutputHandler outputHandler;
 
 	private static VirtualProjectCreator virtualProjectCreator = new VirtualProjectCreator();
 
@@ -98,6 +101,9 @@ public class EGradleUtil {
 	 */
 	public static void createOrRecreateVirtualRootProject() throws VirtualRootProjectException {
 		GradleRootProject rootProject = EGradleUtil.getRootProject();
+		if (rootProject == null) {
+			return;
+		}
 		Job job = new Job("Virtual root project") {
 
 			@Override
@@ -176,13 +182,42 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Returns gradle root project. if nothing defined an error dialog appears
+	 * Returns gradle root project. if no root project can be resolved an error dialog appears
 	 * and shows information
 	 * 
 	 * @return root project or <code>null</code>
 	 */
 	public static GradleRootProject getRootProject() {
 		return getRootProject(true);
+	}
+
+	/**
+	 * Returns gradle root project or null
+	 * 
+	 * @param showErrorDialog
+	 *            - if <code>true</code> an error dialog is shown when root
+	 *            project is {@link Null}. if <code>false</code> no error dialog
+	 *            is shown
+	 * @return root project or <code>null</code>
+	 */
+	public static GradleRootProject getRootProject(boolean showErrorDialog) {
+		String path = PREFERENCES.getStringPreference(P_ROOTPROJECT_PATH);
+		if (StringUtils.isEmpty(path)) {
+			if (showErrorDialog) {
+				EGradleMessageDialog.INSTANCE.showError(MESSAGE_MISSING_ROOTPROJECT);
+			}
+			return null;
+		}
+		GradleRootProject rootProject;
+		try {
+			rootProject = new GradleRootProject(new File(path));
+		} catch (IOException e1) {
+			if (showErrorDialog) {
+				EGradleMessageDialog.INSTANCE.showError(e1.getMessage());
+			}
+			return null;
+		}
+		return rootProject;
 	}
 
 	public static File getRootProjectFolder() throws IOException {
@@ -264,9 +299,20 @@ public class EGradleUtil {
 		return egradleTempFolder;
 	}
 
+	private static String getUniqueIdentifier() {
+		return "EGradle";
+	}
+
 	public static IWorkbenchWindow getWorkbenchWindowChecked(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		return window;
+	}
+
+	static boolean isUIThread() {
+		if (Display.getCurrent() == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public static void log(IStatus status) {
@@ -305,7 +351,9 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Does output on {@link EGradleSystemConsole} instance - asynchronous inside SWT thread
+	 * Does output on {@link EGradleSystemConsole} instance - asynchronous
+	 * inside SWT thread
+	 * 
 	 * @param message
 	 */
 	public static void outputToSystemConsole(String message) {
@@ -314,9 +362,9 @@ public class EGradleUtil {
 			@Override
 			public void run() {
 				getSystemConsoleOutputHandler().output(message);
-				
+
 			}
-			
+
 		});
 	}
 
@@ -378,7 +426,7 @@ public class EGradleUtil {
 				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			} catch (CoreException e) {
 				log(e);
-				outputToSystemConsole(Constants.CONSOLE_FAILED+ " to refresh project "+project.getName());
+				outputToSystemConsole(Constants.CONSOLE_FAILED + " to refresh project " + project.getName());
 			}
 		}
 		outputToSystemConsole(Constants.CONSOLE_OK);
@@ -392,37 +440,6 @@ public class EGradleUtil {
 	public static void throwCoreException(String message) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message));
 
-	}
-
-	static boolean isUIThread() {
-		if (Display.getCurrent() == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private static GradleRootProject getRootProject(boolean showErrorDialog) {
-		String path = PREFERENCES.getStringPreference(P_ROOTPROJECT_PATH);
-		if (StringUtils.isEmpty(path)) {
-			if (showErrorDialog) {
-				EGradleMessageDialog.INSTANCE.showError("No root project path set. Please setup in preferences!");
-			}
-			return null;
-		}
-		GradleRootProject rootProject;
-		try {
-			rootProject = new GradleRootProject(new File(path));
-		} catch (IOException e1) {
-			if (showErrorDialog) {
-				EGradleMessageDialog.INSTANCE.showError(e1.getMessage());
-			}
-			return null;
-		}
-		return rootProject;
-	}
-
-	private static String getUniqueIdentifier() {
-		return "EGradle";
 	}
 
 }

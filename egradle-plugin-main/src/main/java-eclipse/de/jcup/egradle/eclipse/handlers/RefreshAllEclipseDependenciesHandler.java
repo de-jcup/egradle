@@ -20,6 +20,7 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
+import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 
 /**
@@ -37,7 +38,7 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	}
 
 	@Override
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) {
+	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
 		return new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true,SimpleProcessExecutor.ENDLESS_RUNNING),this);
 	}
 
