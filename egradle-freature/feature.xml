@@ -3,7 +3,8 @@
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle"
       version="0.7.0.beta"
-      provider-name="Albert Tregnaghi">
+      provider-name="Albert Tregnaghi"
+      plugin="de.jcup.egradle.eclipse.plugin.branding">
 
    <description url="https://github.com/de-jcup/egradle/wiki">
       EGradle is a lightweight gradle integration for eclipse
