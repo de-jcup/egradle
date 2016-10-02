@@ -42,4 +42,5 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 			EGradleUtil.log(e);
 		}
 	}
+	
 }

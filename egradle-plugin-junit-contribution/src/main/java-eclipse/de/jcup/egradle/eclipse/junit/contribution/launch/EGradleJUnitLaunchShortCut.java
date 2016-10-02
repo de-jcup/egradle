@@ -38,4 +38,8 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut{
 	protected void createTaskConfiguration(ILaunchConfigurationWorkingCopy wc) {
 		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS);
 	}
+	
+	protected String getChooseConfigurationTitle() {
+		return "Choose EGradle Junit Test config";
+	}
 }

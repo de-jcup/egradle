@@ -63,7 +63,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = null;
 		try{
-			createGradleExecution(EGradleUtil.getSystemConsoleOutputHandler());
+			execution = createGradleExecution(EGradleUtil.getSystemConsoleOutputHandler());
 		}catch(GradleExecutionException e){
 			EGradleMessageDialog.INSTANCE.showError(e.getMessage());
 			return null;

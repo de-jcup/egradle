@@ -442,4 +442,16 @@ public class EGradleUtil {
 
 	}
 
+	public static boolean isVirtualRootProject(IProject project) {
+		if (project==null){
+			return false;
+		}
+		/* very simple approach by checking name. A nature would be better...*/
+		String name = project.getName();
+		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)){
+			return true;
+		}
+		return false;
+	}
+
 }

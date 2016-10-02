@@ -22,12 +22,14 @@ import org.eclipse.core.runtime.jobs.Job;
 
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
+import static org.apache.commons.lang3.Validate.*;
 
 public class GradleJob extends Job {
 	private GradleExecutionDelegate execution;
 
 	public GradleJob(String name, GradleExecutionDelegate execution) {
 		super(name);
+		notNull(execution,"Execution delegate may not be null!");
 		this.execution = execution;
 	}
 

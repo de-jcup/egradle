@@ -17,10 +17,12 @@ package de.jcup.egradle.eclipse.launch;
 
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -42,6 +44,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.FileHelper;
 
 /**
  * Short cut launcher for Egradle
@@ -118,7 +121,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		ElementListSelectionDialog dialog = new ElementListSelectionDialog(getShell(), labelProvider);
 		dialog.setElements(configList.toArray());
 		dialog.setTitle(getTypeSelectionTitle());
-		dialog.setMessage("Choose EGradle config");
+		dialog.setMessage(getChooseConfigurationTitle());
 		dialog.setMultipleSelection(false);
 		int result = dialog.open();
 		labelProvider.dispose();
@@ -126,6 +129,10 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			return (ILaunchConfiguration) dialog.getFirstResult();
 		}
 		return null;
+	}
+
+	protected String getChooseConfigurationTitle() {
+		return "Choose EGradle config";
 	}
 
 	/**
@@ -167,11 +174,16 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	}
 
 	private String createProjectName(IResource resource) {
-		// TODO ATR, 12.08.2016: project.getName() could be different from
-		// gralde sub project name!
-		// TODO ATR, 12.08.2016: also root project could be a project as
-		// well and should be handled different!
-		return resource.getProject().getName();
+		IProject project = resource.getProject();
+		if (EGradleUtil.isVirtualRootProject(project)){
+			return "";
+		}
+		try {
+			File projectRealFolderName = FileHelper.SHARED.toFile(project.getLocation());
+			return projectRealFolderName.getName();
+		} catch (CoreException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 	protected ILaunchConfiguration findLaunchConfiguration(IResource resource, ILaunchConfigurationType configType) {
