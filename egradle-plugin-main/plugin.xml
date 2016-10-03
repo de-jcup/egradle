@@ -263,13 +263,20 @@
         icon="icons/gradle-og.gif"
         modes="run">
             <contextualLaunch>
+            
             <enablement>
-                <with
-                    variable="selection">
-                    <count
-                        value="+">
-                    </count>
-                </with>
+	            <with variable="selection">
+			        <count value="1"/>
+			        <iterate ifEmpty="false">
+			        <or>
+				        	<adapt type="org.eclipse.core.resources.IFile">
+				                	<test property="org.eclipse.core.resources.name"
+				                         value="build.gradle"/>
+				            </adapt>
+				            <adapt type="org.eclipse.core.resources.IProject"/>
+				     </or>
+			        </iterate>
+			    </with>
             </enablement>
         </contextualLaunch>
             
