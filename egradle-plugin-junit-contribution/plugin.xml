@@ -85,11 +85,16 @@
                <with variable="selection">
                   <count value="1"/>
                	  <iterate>
+               	  <or>
+		             <!-- we allow all projects to be executed as gradle junit tests -->
+		             <adapt type="org.eclipse.core.resources.IProject"/>
+		             <!-- we only allow java elements (files) to be executed directly, when java test -->
                      <adapt type="org.eclipse.jdt.core.IJavaElement">
 		                <test property="org.eclipse.jdt.core.isInJavaProject"/>
 		                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
 		                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
 		             </adapt>
+		           </or>
 		          </iterate>
                </with>
             </enablement>

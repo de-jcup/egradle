@@ -269,11 +269,13 @@
 			        <count value="1"/>
 			        <iterate ifEmpty="false">
 			        <or>
+			        		<!-- we allow all projects to be executed as gradle -->
+				            <adapt type="org.eclipse.core.resources.IProject"/>
+				            <!-- we only allow files with name build.gradle to be executed as gradle -->
 				        	<adapt type="org.eclipse.core.resources.IFile">
 				                	<test property="org.eclipse.core.resources.name"
 				                         value="build.gradle"/>
 				            </adapt>
-				            <adapt type="org.eclipse.core.resources.IProject"/>
 				     </or>
 			        </iterate>
 			    </with>
