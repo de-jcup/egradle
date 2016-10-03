@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -144,7 +146,9 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	/**
 	 * Creates and returns a new configuration based on the specified type.
-	 * @param additionalScope TODO
+	 * 
+	 * @param additionalScope
+	 *            TODO
 	 * @param type
 	 *            type to create a launch configuration for
 	 * 
@@ -169,7 +173,8 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		return config;
 	}
 
-	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource, Object additionalScope) {
+	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
+			Object additionalScope) {
 		return projectName;
 	}
 
@@ -178,7 +183,54 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		createProjectNameConfiguration(wc, projectName);
 		createTaskConfiguration(wc);
 
-		wc.setMappedResources(new IResource[] { resource });
+		wc.setMappedResources(new IResource[] { getResourceToMap(resource) });
+	}
+
+	protected IResource getResourceToMap(IResource resource) {
+		if (resource instanceof IProject) {
+			/* project itself is always correct */
+			return resource;
+		}
+		if (resource instanceof IFile) {
+			if (isResourceToMapFilesAllowed()) {
+				return resource;
+			}
+			return findProject(resource);
+		}
+		if (resource instanceof IFolder) {
+			if (isResourceToMapFoldersAllowed()) {
+				return resource;
+			}
+			return findProject(resource);
+		}
+		return resource;
+	}
+
+	private IResource findProject(IResource resource) {
+		IProject project = resource.getProject();
+		return project;
+	}
+
+	/**
+	 * Returns true, when the launch configuration resource mapping is allowed
+	 * to directly map to an IFile.
+	 * 
+	 * @return <code>true</code> when allowed, <code>false</code> when not (so
+	 *         the project of the file will be used instead)
+	 */
+	protected boolean isResourceToMapFilesAllowed() {
+		return false;
+	}
+
+	/**
+	 * Returns true, when the launch configuration resource mapping is allowed
+	 * to directly map to an IFolder.
+	 * 
+	 * @return <code>true</code> when allowed, <code>false</code> when not (so
+	 *         the project of the folder will be used instead)
+	 */
+	protected boolean isResourceToMapFoldersAllowed() {
+		return false;
 	}
 
 	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
@@ -229,8 +281,17 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 *         <code>null</code>
 	 * @since 3.8
 	 */
-	List<ILaunchConfiguration> getCandidates(IResource resource, Object additionalScope,
+	List<ILaunchConfiguration> getCandidates(IResource selectedResource, Object additionalScope,
 			ILaunchConfigurationType configType) {
+		/*
+		 * Convert selected resource to resource to search for... Implementation
+		 * decides. E.g. standard way is that only project is the marked
+		 * identifier, so files and folders selected will result in their
+		 * project. A junit integration could support selected test files also,
+		 * Reason for this beahviour: We would get too much launch
+		 * configuration for selections doing exact same stuff
+		 */
+		IResource resource = getResourceToMap(selectedResource);
 		List<ILaunchConfiguration> candidateConfigs = Collections.emptyList();
 		try {
 			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager()
@@ -248,7 +309,8 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		return candidateConfigs;
 	}
 
-	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config) throws CoreException {
+	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
+			throws CoreException {
 		String projectName = createGradleProjectName(resource);
 		return config.getAttribute(PROPERTY_PROJECTNAME, "").equals(projectName);
 	}

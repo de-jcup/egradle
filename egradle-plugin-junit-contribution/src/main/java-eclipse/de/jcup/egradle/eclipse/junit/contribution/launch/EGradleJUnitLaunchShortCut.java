@@ -101,26 +101,27 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		}
 		// for information about the gradle call
 		// see https://docs.gradle.org/1.10/release-notes
-		if (additionalScope instanceof IMethod){
+		if (additionalScope instanceof IMethod) {
 			IMethod method = (IMethod) additionalScope;
 			String methodName = method.getElementName();
-			fullClassName+="."+methodName;
+			fullClassName += "." + methodName;
 			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
 		}
 		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS + " --tests " + fullClassName);
-		
+
 	}
 
 	@Override
-	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource, Object additionalScope) {
+	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
+			Object additionalScope) {
 		String name = super.createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
 		if (resource instanceof IFile) {
 			String fileName = FileHelper.SHARED.getFileName(resource);
 			name = name + "#" + fileName;
 		}
-		if (additionalScope instanceof IMethod){
+		if (additionalScope instanceof IMethod) {
 			IMethod method = (IMethod) additionalScope;
-			name=name+"."+method.getElementName();
+			name = name + "." + method.getElementName();
 		}
 		return name;
 	}
@@ -144,8 +145,18 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 	}
 
 	@Override
+	protected boolean isResourceToMapFilesAllowed() {
+		/*
+		 * when launch configuration is used for a specific file this is okay
+		 * and the test will use the selected class file
+		 */
+		return true;
+	}
+
+	@Override
 	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
 			throws CoreException {
+		
 		boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
 		if (candidate) {
 
@@ -163,20 +174,23 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 					String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
 							(String) null);
 					if (launchMethodName == null) {
-						/* method is wished... so not a candidate*/
+						/* method is wished... so not a candidate */
 						return false;
 					}
 					String selectedMethodName = method.getElementName();
-					if (launchMethodName.equals(selectedMethodName)){
+					if (launchMethodName.equals(selectedMethodName)) {
 						return true;
 					}
 					return false;
 				}
-				/* without method selection - means all tests of class. So filter launch configs with set method name...*/
+				/*
+				 * without method selection - means all tests of class. So
+				 * filter launch configs with set method name...
+				 */
 				String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
 						(String) null);
 				if (launchMethodName == null) {
-					/* method is Not wished... so its a candidate*/
+					/* method is Not wished... so its a candidate */
 					return true;
 				}
 				return false;
