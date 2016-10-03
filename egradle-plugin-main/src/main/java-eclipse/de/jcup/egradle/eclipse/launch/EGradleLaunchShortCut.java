@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -175,6 +176,9 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
 			Object additionalScope) {
+		if (StringUtils.isBlank(projectName)){
+			return "RootProject";
+		}
 		return projectName;
 	}
 
