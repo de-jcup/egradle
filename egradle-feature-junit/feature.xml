@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.jcup.egradle.feature.junit"
+      id="de.jcup.egradle.eclipse.feature.junit"
       label="EGradle JUnit Integration"
       version="0.7.0.beta"
       provider-name="Albert Tregnaghi">
