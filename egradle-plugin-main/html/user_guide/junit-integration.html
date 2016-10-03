@@ -13,6 +13,13 @@
 	<ul>
 		<li><a href="#import_all">Import all existing test results</a></li>
 		<li><a href="#launch">Launch as EGradle Junit Test</a></li>
+		<li><a href="#runas">Run as ...EGradle Junit Test</a>
+			<ul>
+				<li><a href="#runOnProject">On a project</a></li>
+				<li><a href="#runOnTestFile">On a Junit Test File</a></li>
+				<li><a href="#runOnTestMethod">On a Junit Test Method</a></li>
+			</ul></li>
+
 	</ul>
 
 	<h2 id="import_all">Import all existing test results from gradle</h2>
@@ -49,6 +56,33 @@
 	<br>
 	<br>Here you can see an output example
 	<img src="images/egradle-junit-launchresult.png" />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+
+	<h2 id="runas">"Run as ... EGradle Junit Test"</h2>
+	<img src="images/egradle-junit-runas.png" />
+	<br> The junit results are shown after build.
+
+	<h3 id="runOnProject">On a project</h3>
+	When no launch configuration is already created for the project, a new
+	one will be created All tests inside the project are executed.
+	<h3 id="runOnTestFile">On a Junit Test File</h3>
+	When a single Junit Test is selected in Navigator, Package Explorer or
+	inside a Java-Editor, only this testcase will be executed. If no
+	configuration exists, it will be created. This is done via the
+	"--tests" argument which your used gralde installation has to support
+	(for more information look at
+	<a
+		href="https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_test"
+		target="#blank">Gradle documentation</a>)
+
+	<h3 id="runOnTestMethod">On a Junit Test Method</h3>
+	When you open a Junit Test with an Java Editor set cursor to the test
+	method (or inside code of test method), open the context menue and
+	select "Run as ... EGradle Junit Test". This will execute only the
+	selected test method. If the configuration does not already exist for
+	the file and the method, it will be created.
 	<p>
 		<a href="#top">Top</a>
 	</p>
