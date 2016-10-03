@@ -46,6 +46,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IDecoratorManager;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -123,6 +124,12 @@ public class EGradleUtil {
 
 	}
 
+	public static IEditorPart getActiveEditor(){
+		IWorkbenchPage page = getActivePage();
+		IEditorPart activeEditor = page.getActiveEditor();
+		return activeEditor;
+	}
+	
 	public static IWorkbenchPage getActivePage() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window == null) {

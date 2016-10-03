@@ -25,13 +25,18 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.texteditor.ITextEditor;
 
+import de.jcup.egradle.eclipse.JavaHelper;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
+import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
 
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
@@ -49,9 +54,9 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 	}
 
 	@Override
-	protected void createCustomConfiguration(IResource resource, ILaunchConfigurationWorkingCopy wc,
-			String projectName) {
-		super.createCustomConfiguration(resource, wc, projectName);
+	protected void createCustomConfiguration(IResource resource, Object additionalScope,
+			ILaunchConfigurationWorkingCopy wc, String projectName) {
+		super.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
 		if (!(resource instanceof IFile)) {
 			wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS);
@@ -63,16 +68,16 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		IJavaElement javaElement = JavaCore.create(file);
 		if (javaElement instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) javaElement;
-			javaElement=cu.getJavaElement();
-		} 
+			javaElement = cu.getJavaElement();
+		}
 		if (javaElement instanceof ICompilationUnit) {
 			ICompilationUnit cu = (ICompilationUnit) javaElement;
 			try {
 				IType[] types = cu.getTypes();
-				if (types!=null){
-					for (IType type: types){
-						fullClassName=type.getFullyQualifiedName();
-						if (fullClassName!=null){
+				if (types != null) {
+					for (IType type : types) {
+						fullClassName = type.getFullyQualifiedName();
+						if (fullClassName != null) {
 							break;
 						}
 					}
@@ -86,25 +91,36 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName = type.getFullyQualifiedName();
 		}
 		/*
-		 * Fallback when having not a java element with correct full classname set. Can happen
-		 * when calls are done from a virtual root project path
+		 * Fallback when having not a java element with correct full classname
+		 * set. Can happen when calls are done from a virtual root project path
 		 */
-		if (fullClassName.indexOf('.')==-1){
-			/* not a real classpath...*/
-			fullClassName="*"+fullClassName+"*";
-					
+		if (fullClassName.indexOf('.') == -1) {
+			/* not a real classpath... */
+			fullClassName = "*" + fullClassName + "*";
+
 		}
 		// for information about the gradle call
 		// see https://docs.gradle.org/1.10/release-notes
-		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS+" --tests " + fullClassName);
+		if (additionalScope instanceof IMethod){
+			IMethod method = (IMethod) additionalScope;
+			String methodName = method.getElementName();
+			fullClassName+="."+methodName;
+			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
+		}
+		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS + " --tests " + fullClassName);
+		
 	}
 
 	@Override
-	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource) {
-		String name = super.createLaunchConfigurationNameProposal(projectName, resource);
+	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource, Object additionalScope) {
+		String name = super.createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
 		if (resource instanceof IFile) {
 			String fileName = FileHelper.SHARED.getFileName(resource);
 			name = name + "#" + fileName;
+		}
+		if (additionalScope instanceof IMethod){
+			IMethod method = (IMethod) additionalScope;
+			name=name+"."+method.getElementName();
 		}
 		return name;
 	}
@@ -118,24 +134,53 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 	}
 
 	@Override
-	protected boolean isConfigACandidate(IResource resource, ILaunchConfiguration config) throws CoreException {
-		boolean candidate = super.isConfigACandidate(resource, config);
+	protected Object resolveEditorAdditonalScope(IEditorPart editor) {
+		if (editor instanceof ITextEditor) {
+			ITextEditor textEditor = (ITextEditor) editor;
+			IMethod method = JavaHelper.SHARED.getCurrentSelectedJavaMethod(textEditor);
+			return method;
+		}
+		return null;
+	}
+
+	@Override
+	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
+			throws CoreException {
+		boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
 		if (candidate) {
-//			if (resource instanceof IFile) {
-				IResource[] resources = config.getMappedResources();
-				if (resources == null || resources.length == 0) {
+
+			IResource[] resources = config.getMappedResources();
+			if (resources == null || resources.length == 0) {
+				return false;
+			}
+			IResource resourceToCheck = resources[0];
+			if (!resourceToCheck.exists()) {
+				return false;
+			}
+			if (resourceToCheck.getLocation().equals(resource.getLocation())) {
+				if (additionalScope instanceof IMethod) {
+					IMethod method = (IMethod) additionalScope;
+					String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
+							(String) null);
+					if (launchMethodName == null) {
+						/* method is wished... so not a candidate*/
+						return false;
+					}
+					String selectedMethodName = method.getElementName();
+					if (launchMethodName.equals(selectedMethodName)){
+						return true;
+					}
 					return false;
 				}
-				IResource resourceToCheck = resources[0];
-				if (!resourceToCheck.exists()) {
-					return false;
-				}
-				if (resourceToCheck.getLocation().equals(resource.getLocation())) {
+				/* without method selection - means all tests of class. So filter launch configs with set method name...*/
+				String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
+						(String) null);
+				if (launchMethodName == null) {
+					/* method is Not wished... so its a candidate*/
 					return true;
 				}
-//			}else if (resource instanceof IFolder){
-//				
-//			}
+				return false;
+			}
 		}
 		return false;
 	}

@@ -92,15 +92,22 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	public void launch(IEditorPart editor, String mode) {
 		IEditorInput input = editor.getEditorInput();
+		Object additionalScope = resolveEditorAdditonalScope(editor);
 		IResource resource = (IResource) input.getAdapter(IResource.class);
 		if (resource != null) {
-			searchAndLaunch(new Object[] { resource }, mode, getTypeSelectionTitle(), getEditorEmptyMessage());
+			searchAndLaunch(new Object[] { resource }, additionalScope, mode, getTypeSelectionTitle(),
+					getEditorEmptyMessage());
 		}
+	}
+
+	protected Object resolveEditorAdditonalScope(IEditorPart editor) {
+		/* per default we do nothing here */
+		return null;
 	}
 
 	public void launch(ISelection selection, String mode) {
 		if (selection instanceof IStructuredSelection) {
-			searchAndLaunch(((IStructuredSelection) selection).toArray(), mode, getTypeSelectionTitle(),
+			searchAndLaunch(((IStructuredSelection) selection).toArray(), null, mode, getTypeSelectionTitle(),
 					getSelectionEmptyMessage());
 		}
 	}
@@ -137,22 +144,23 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	/**
 	 * Creates and returns a new configuration based on the specified type.
-	 * 
+	 * @param additionalScope TODO
 	 * @param type
 	 *            type to create a launch configuration for
+	 * 
 	 * @return launch configuration configured to launch the specified type
 	 */
-	protected ILaunchConfiguration createConfiguration(IResource resource) {
+	protected ILaunchConfiguration createConfiguration(IResource resource, Object additionalScope) {
 		ILaunchConfiguration config = null;
 		ILaunchConfigurationWorkingCopy wc = null;
 		try {
 			String projectName = createGradleProjectName(resource);
-			String proposal= createLaunchConfigurationNameProposal(projectName, resource);
-			
+			String proposal = createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
+
 			ILaunchConfigurationType configType = getConfigurationType();
 			wc = configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(proposal));
-			createCustomConfiguration(resource ,wc, projectName);
-			
+			createCustomConfiguration(resource, additionalScope, wc, projectName);
+
 			config = wc.doSave();
 		} catch (CoreException exception) {
 			MessageDialog.openError(EGradleUtil.getActiveWorkbenchShell(), "EGradle create configuration failed",
@@ -160,18 +168,19 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		}
 		return config;
 	}
-	
-	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource) {
+
+	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource, Object additionalScope) {
 		return projectName;
 	}
 
-	protected void createCustomConfiguration(IResource resource ,ILaunchConfigurationWorkingCopy wc, String projectName) {
+	protected void createCustomConfiguration(IResource resource, Object additionalScope,
+			ILaunchConfigurationWorkingCopy wc, String projectName) {
 		createProjectNameConfiguration(wc, projectName);
 		createTaskConfiguration(wc);
-		
+
 		wc.setMappedResources(new IResource[] { resource });
 	}
-	
+
 	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
 		wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
 	}
@@ -193,8 +202,9 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		}
 	}
 
-	protected ILaunchConfiguration findLaunchConfiguration(IResource resource, ILaunchConfigurationType configType) {
-		List<ILaunchConfiguration> configs = getCandidates(resource, configType);
+	protected ILaunchConfiguration findLaunchConfiguration(IResource resource, Object additionalScope,
+			ILaunchConfigurationType configType) {
+		List<ILaunchConfiguration> configs = getCandidates(resource, additionalScope, configType);
 		int count = configs.size();
 		if (count == 1) {
 			return configs.get(0);
@@ -213,11 +223,14 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 *            the type
 	 * @param configType
 	 *            the {@link ILaunchConfigurationType}
+	 * @param additonalScope
+	 *            additional scope can be <code>null</code>
 	 * @return the list of {@link ILaunchConfiguration}s or an empty list, never
 	 *         <code>null</code>
 	 * @since 3.8
 	 */
-	List<ILaunchConfiguration> getCandidates(IResource resource, ILaunchConfigurationType configType) {
+	List<ILaunchConfiguration> getCandidates(IResource resource, Object additionalScope,
+			ILaunchConfigurationType configType) {
 		List<ILaunchConfiguration> candidateConfigs = Collections.emptyList();
 		try {
 			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager()
@@ -225,7 +238,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			candidateConfigs = new ArrayList<ILaunchConfiguration>(configs.length);
 			for (int i = 0; i < configs.length; i++) {
 				ILaunchConfiguration config = configs[i];
-				if (isConfigACandidate(resource, config)) {
+				if (isConfigACandidate(resource, additionalScope, config)) {
 					candidateConfigs.add(config);
 				}
 			}
@@ -235,7 +248,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		return candidateConfigs;
 	}
 
-	protected boolean isConfigACandidate(IResource resource, ILaunchConfiguration config) throws CoreException {
+	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config) throws CoreException {
 		String projectName = createGradleProjectName(resource);
 		return config.getAttribute(PROPERTY_PROJECTNAME, "").equals(projectName);
 	}
@@ -297,8 +310,8 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		return "More than one can be launched:";
 	}
 
-	protected void launch(IResource type, String mode) {
-		List<ILaunchConfiguration> configs = getCandidates(type, getConfigurationType());
+	protected void launch(IResource type, Object additionalScope, String mode) {
+		List<ILaunchConfiguration> configs = getCandidates(type, additionalScope, getConfigurationType());
 		if (configs != null) {
 			ILaunchConfiguration config = null;
 			int count = configs.size();
@@ -311,7 +324,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 				}
 			}
 			if (config == null) {
-				config = createConfiguration(type);
+				config = createConfiguration(type, additionalScope);
 			}
 			if (config != null) {
 				DebugUITools.launch(config, mode);
@@ -329,13 +342,15 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 *            launch mode
 	 * @param selectTitle
 	 *            prompting title for choosing a type to launch
+	 * @param additionalScope
+	 *            additional scope for launch
 	 * @param emptyMessage
 	 *            error message when no types are resolved for launching
 	 */
-	private void searchAndLaunch(Object[] resources, String mode, String selectTitle, String emptyMessage) {
+	private void searchAndLaunch(Object[] resources, Object additionalScope, String mode, String selectTitle,
+			String emptyMessage) {
 		IResource resource = null;
 		Object object = resources[0];
-		// FIXME ATR, 12.08.2016 - ugly implemented. first shot.
 		if (object instanceof IResource) {
 			resource = (IResource) object;
 		} else if (object instanceof IAdaptable) {
@@ -345,7 +360,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			throw new IllegalArgumentException("EGradle launch shortcut cannot handle object type:" + object);
 		}
 		if (resource != null) {
-			launch(resource, mode);
+			launch(resource, additionalScope, mode);
 		}
 	}
 }
