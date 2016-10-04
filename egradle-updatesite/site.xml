@@ -15,6 +15,9 @@
    <feature url="features/de.jcup.egradle.eclipse.feature_0.6.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.6.0.beta">
       <category name="site.egradle.category.beta"/>
    </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.7.0.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.7.0.beta">
+      <category name="site.egradle.category.beta"/>
+   </feature>
    <feature url="features/de.jcup.egradle.eclipse.feature_0.7.1.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.7.1.beta">
       <category name="site.egradle.category.beta"/>
    </feature>
