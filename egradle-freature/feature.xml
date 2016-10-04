@@ -88,7 +88,9 @@ END OF TERMS AND CONDITIONS
 
    <includes
          id="de.jcup.egradle.eclipse.feature.junit"
-         version="0.0.0"/>
+         version="0.0.0"
+         name="EGradle JUnit Integration (optional)"
+         optional="true"/>
 
    <plugin
          id="de.jcup.egradle.eclipse.plugin.main"
