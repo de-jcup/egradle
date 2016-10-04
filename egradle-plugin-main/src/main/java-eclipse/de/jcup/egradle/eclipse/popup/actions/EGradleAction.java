@@ -45,7 +45,7 @@ public class EGradleAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(shell, "Egradle", "My gradle action(TBD) was executed.");
+		MessageDialog.openInformation(shell, "EGradle", "My gradle action(TBD) was executed.");
 	}
 
 	/**

@@ -10,7 +10,7 @@
      <decorator
             lightweight="true"
             adaptable="true"
-            label="Egradle project decorator"
+            label="EGradle project decorator"
             class="de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator"
             state="true"
             location="BOTTOM_LEFT"

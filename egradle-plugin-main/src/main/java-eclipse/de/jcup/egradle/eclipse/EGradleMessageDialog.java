@@ -34,7 +34,7 @@ public class EGradleMessageDialog {
 			@Override
 			public void run() {
 				Shell shell = getActiveWorkbenchShell();
-				MessageDialog.openWarning(shell, "Egradle", message);
+				MessageDialog.openWarning(shell, "EGradle", message);
 			}
 
 		});
@@ -47,7 +47,7 @@ public class EGradleMessageDialog {
 			@Override
 			public void run() {
 				Shell shell = getActiveWorkbenchShell();
-				MessageDialog.openError(shell, "Egradle", message);
+				MessageDialog.openError(shell, "EGradle", message);
 			}
 
 		});
