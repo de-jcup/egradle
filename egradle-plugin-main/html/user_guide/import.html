@@ -10,10 +10,25 @@
 	<img src="./../images/egradle-banner-image.png" />
 	<a href="../user_guide.html">User guide</a>
 	<h1>Import gradle projects</h1>
-	Currently you have to open a console (e.g. git bash) call inside root
-	project "gradlew eclipse". After this is done, simply import "existing
-	projects" inside eclipse - use folder of root project.
-
+	<p>
+		After <a href="setup.html">Setup</a> is done for your root project,
+		you can use <a href="refresh_complete_workspace.html">EGradles
+			refresh eclipse dependencies</a> button or simply call inside root
+		project "gradlew eclipse".
+	</p>
+	<p>After this is done, use "File - import ... existing projects"
+		inside eclipse and import all projects from root folder.</p>
+	<p>
+		<table border='0'>
+			<tr>
+				<td><img src="images/info.png"/></td>
+				<td>You should not try to import the gradle root project 
+					itself as a normal eclipse project. 
+					Instead use the <a href="virtual_root_project.html">Virtual root project</a> feature!
+				</td>
+			</tr>
+		</table>
+	</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>

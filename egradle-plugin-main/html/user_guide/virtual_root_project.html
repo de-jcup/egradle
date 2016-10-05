@@ -17,6 +17,7 @@
 		<li><a href="#remove">How to remove</a></li>
 		<li><a href="#change_root_project">Changing the root project
 				in preferences</a></li>
+		<li><a href="#share_project">Version control (SCM)</a></li>
 	</ul>
 	<h2 id="concept">About the concept</h2>
 	<p>Inside a gradle root project you have got at least
@@ -51,10 +52,11 @@
 
 	<p>This is exact what the so called "Virtual root project" does: By
 		clicking a button inside the EGradle toolbar you are able to
-		(re-)create a "Virtual root project" of your current set gradle
-		root project. The virtual root project will contain all folders and
-		files of gradle root project folder being not already imported as an
-		eclipse project into current workspace.</p>
+		(re-)create a "Virtual root project" of your current set gradle root
+		project. The virtual root project will contain all folders and files
+		of gradle root project folder being not already imported as an eclipse
+		project into current workspace.</p>
+
 	<h2 id="example">An example</h2>
 	There is a root project folder given called "test-rootproject". It's
 	content looks like shown in next image:
@@ -74,7 +76,9 @@
 	If you delete e.g. "testproject1" (without content delete!) and press
 	the toolbar button again, the "testproject1" sub folder will be shown
 	again inside the virtual root project.
-
+	<p>
+		<a href="#top">Top</a>
+	</p>
 	<h2 id="update">How to update/refresh project</h2>
 	Of course you can use F5 to refresh the project. But a simple click to
 	the button does recreate it again from scratch - and with already
@@ -87,6 +91,14 @@
 		preferences</h2>
 	If the virtual root project is inside workspace it will be
 	automatically refreshed
+	<h2 id="share_project">Version control (SCM)</h2>
+	<h3>GIT</h3>
+	When you call "Team - share Project..." on the virtual root project you
+	are able to connect it like any other eclipse project inside a GIT
+	repository.
+	<br> The GIT team provider decorations and the GIT staging is done
+	as usual.
+
 	<p>
 		<a href="#top">Top</a>
 	</p>
