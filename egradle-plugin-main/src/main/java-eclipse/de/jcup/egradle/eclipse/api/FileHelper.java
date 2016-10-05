@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URL;
@@ -46,6 +47,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 
+import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
+
 public class FileHelper {
 
 	public static FileHelper SHARED= new FileHelper();
@@ -53,6 +56,17 @@ public class FileHelper {
 	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
 
 	private byte[] buffer = new byte[8192];
+	
+	public void createTextFile(File parentFolder, String fileName, String content) throws VirtualRootProjectException {
+		File gitIgnore = new File(parentFolder, fileName);
+		try (FileOutputStream fileOutputStram = new FileOutputStream(gitIgnore);
+				OutputStreamWriter w = new OutputStreamWriter(fileOutputStram, "UTF-8")) {
+			gitIgnore.createNewFile();
+			w.write(content);
+		} catch (Exception e) {
+			throw new VirtualRootProjectException("Cannot create virtual root content", e);
+		}
+	}
 
 	/**
 	 * Unzips the given zip file to the given destination directory extracting

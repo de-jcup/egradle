@@ -20,8 +20,10 @@ import static org.apache.commons.lang3.Validate.notNull;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.net.URI;
 
 import org.eclipse.core.filebuffers.manipulation.ContainerCreator;
+import org.eclipse.core.internal.resources.ProjectDescription;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -56,11 +58,12 @@ public class ResourceHelper {
 	 * be automatically opened
 	 * 
 	 * @param projectName
+	 * @param creationPath 
 	 * @return project
 	 * @throws CoreException
 	 */
-	public IProject createOrRefreshProject(String projectName) throws CoreException {
-		return createOrRefreshProject(projectName, null);
+	public IProject createOrRefreshProject(String projectName, URI creationPath) throws CoreException {
+		return createOrRefreshProject(projectName, null,creationPath);
 	}
 
 	/**
@@ -69,17 +72,26 @@ public class ResourceHelper {
 	 * 
 	 * @param projectName
 	 * @param monitor
+	 * @param creationPath 
 	 * @return project
 	 * @throws CoreException
 	 */
-	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor) throws CoreException {
+	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, URI creationPath) throws CoreException {
 		if (monitor == null) {
 			monitor = NULL_MONITOR;
 		}
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot root = workspace.getRoot();
 		IProject project = root.getProject(projectName);
 		if (!project.exists()) {
-			project.create(monitor);
+			if (creationPath!=null){
+				IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
+				initialDescription.setLocationURI(creationPath);
+				project.create(initialDescription,monitor);
+			}else{
+				project.create(monitor);
+			}
+			
 		} else {
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 		}

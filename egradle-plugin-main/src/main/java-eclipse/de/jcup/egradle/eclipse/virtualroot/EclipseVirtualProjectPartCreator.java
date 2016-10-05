@@ -17,7 +17,12 @@ package de.jcup.egradle.eclipse.virtualroot;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,22 +51,28 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	private SubMonitor monitor;
 	private IProgressMonitor creationMonitor;
 	private int createdLinks;
-	private static final List<String> FILENAMES_NOT_TO_LINK = Arrays.asList(".classpath", ".project");
-	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList(".settings");
+	private File newProjectFile;
+	private static final List<String> FILENAMES_NOT_TO_LINK = Arrays.asList(); // no restrictions any more TODO ATR: maybe this can be full removed
+	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList();// no restrictions any more TODO ATR: maybe this can be full removed
 
 	public EclipseVirtualProjectPartCreator(GradleRootProject rootProject, IProgressMonitor monitor) {
 		notNull(rootProject, "'rootProject' may not be null");
-		if (monitor ==null){
+		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
-		this.monitor=SubMonitor.convert(monitor);
+		this.monitor = SubMonitor.convert(monitor);
 		this.rootFolder = rootProject.getFolder();
 	}
 
 	@Override
 	public Object createOrRecreateProject(String projectName) throws VirtualRootProjectException {
 		notNull(projectName, "'projectName' may not be null");
-		monitor.beginTask("virtual root project (re)creation",3);
+		monitor.beginTask("virtual root project (re)creation", 3);
+		File rootprojectFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
+		if (rootprojectFolder == null) {
+			throw new VirtualRootProjectException(
+					"Cannot create virtual root project, because root folder is not configured");
+		}
 		try {
 			/* setup folder creation */
 			foldersToIgnore = new ArrayList<>();
@@ -82,7 +93,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			monitor.worked(1);
 
 			monitor.subTask("delete project");
-			try{
+			try {
 				r.deleteProject(projectName);
 			} catch (CoreException e) {
 				throw new VirtualRootProjectException("Cannot delete newProject:" + projectName, e);
@@ -90,7 +101,14 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			monitor.worked(2);
 			monitor.subTask("create project");
 			try {
-				newProject = r.createOrRefreshProject(projectName, monitor);
+				File newProjectFolder = new File(rootprojectFolder,".egradle");
+				newProject = r.createOrRefreshProject(projectName, monitor,  newProjectFolder.toURI());
+				newProjectFile = newProject.getLocation().toFile();
+
+				/* create .gitignore file*/
+				File parentFolder = new File(newProject.getLocationURI());
+				r.getFileHelper().createTextFile(parentFolder, ".gitignore", "*"); // ignore .egradle completely
+
 			} catch (CoreException e) {
 				new VirtualRootProjectException("Cannot (re)create newProject:" + projectName, e);
 			}
@@ -100,18 +118,19 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 
 		} catch (VirtualRootProjectException e) {
 			throw e;
-		}finally{
+		} finally {
 			monitor.done();
 		}
 	}
+
 
 	@Override
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
 		notNull(targetFolder, "'targetFolder' may not be null");
 		notNull(file, "'file' may not be null");
-		boolean creationNeeded=internalCheckIfLinkMustBeCreated(targetFolder, file);
-		if (!creationNeeded){
-			/* increase the counter for progress*/
+		boolean creationNeeded = internalCheckIfLinkMustBeCreated(targetFolder, file);
+		if (!creationNeeded) {
+			/* increase the counter for progress */
 			getCreationMonitor().worked(++createdLinks);
 		}
 		return creationNeeded;
@@ -119,6 +138,14 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	}
 
 	private boolean internalCheckIfLinkMustBeCreated(Object targetFolder, File file) {
+		if (newProjectFile.equals(file)){
+			/* root project cannot link to itself - infinite loop...*/
+			return false;
+		}
+		if (file.getParentFile().equals(newProjectFile)){
+			/* we also do not link content of virtual root project*/
+			return false;
+		}
 		String fileName = file.getName();
 		if (file.isDirectory()) {
 			if (FOLDERNAMES_NOT_TO_LINK.contains(fileName)) {
@@ -149,15 +176,15 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		if (!(targetParentFolder instanceof IContainer)) {
 			throw new VirtualRootProjectException("Target folder clazz not supported:" + targetParentFolder);
 		}
-		
+
 		IContainer container = (IContainer) targetParentFolder;
 		IPath path = Path.fromPortableString(file.getName());
 		try {
 			if (file.isDirectory()) {
-				getCreationMonitor().subTask("Create link to file '"+file.getName()+"'");
+				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
 				r.createLinkedFolder(container, path, file);
 			} else {
-				getCreationMonitor().subTask("Create link to folder '"+file.getName()+"'");
+				getCreationMonitor().subTask("Create link to folder '" + file.getName() + "'");
 				r.createLinkedFile(container, path, file);
 			}
 			getCreationMonitor().worked(++createdLinks);
@@ -171,10 +198,10 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	public void setMaximumLinksToCreate(int max) {
 		creationMonitor = monitor.newChild(max);
 	}
-	
+
 	public IProgressMonitor getCreationMonitor() {
-		if (creationMonitor==null){
-			creationMonitor=new NullProgressMonitor();
+		if (creationMonitor == null) {
+			creationMonitor = new NullProgressMonitor();
 		}
 		return creationMonitor;
 	}

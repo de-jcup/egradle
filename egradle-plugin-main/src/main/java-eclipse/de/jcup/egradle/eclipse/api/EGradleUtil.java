@@ -115,6 +115,7 @@ public class EGradleUtil {
 					virtualProjectCreator.createOrUpdate(rootProject, partCreator);
 					return Status.OK_STATUS;
 				} catch (VirtualRootProjectException e) {
+					EGradleMessageDialog.INSTANCE.showError(e.getMessage());
 					EGradleUtil.log(e);
 					return Status.CANCEL_STATUS;
 				}
@@ -227,6 +228,11 @@ public class EGradleUtil {
 		return rootProject;
 	}
 
+	/**
+	 * Get the root project folder. If not resolvable an error dialog is shown to user and a {@link IOException} is thrown
+	 * @return root project folder never <code>null</code>
+	 * @throws IOException - if root folder would be <code>null</code>
+	 */
 	public static File getRootProjectFolder() throws IOException {
 		GradleRootProject rootProject = EGradleUtil.getRootProject();
 		if (rootProject == null) {
