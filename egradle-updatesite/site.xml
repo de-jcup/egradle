@@ -24,6 +24,9 @@
    <feature url="features/de.jcup.egradle.eclipse.feature_0.7.2.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.7.2.beta">
       <category name="site.egradle.category.beta"/>
    </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_0.7.3.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.7.3.beta">
+      <category name="site.egradle.category.beta"/>
+   </feature>
    <category-def name="site.egradle.category.beta" label="Beta-Versions">
       <description>
          Beta versions of egradle

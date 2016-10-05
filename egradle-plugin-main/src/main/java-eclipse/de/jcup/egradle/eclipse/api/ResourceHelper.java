@@ -87,6 +87,7 @@ public class ResourceHelper {
 			if (creationPath!=null){
 				IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
 				initialDescription.setLocationURI(creationPath);
+				initialDescription.setComment("EGradle virtual root project - only a temporary");
 				project.create(initialDescription,monitor);
 			}else{
 				project.create(monitor);

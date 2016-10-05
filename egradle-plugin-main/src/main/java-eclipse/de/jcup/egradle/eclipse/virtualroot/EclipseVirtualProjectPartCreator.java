@@ -15,14 +15,9 @@
  */
 package de.jcup.egradle.eclipse.virtualroot;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,8 +47,8 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	private IProgressMonitor creationMonitor;
 	private int createdLinks;
 	private File newProjectFile;
-	private static final List<String> FILENAMES_NOT_TO_LINK = Arrays.asList(); // no restrictions any more TODO ATR: maybe this can be full removed
-	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList();// no restrictions any more TODO ATR: maybe this can be full removed
+	private static final List<String> FILENAMES_NOT_TO_LINK = Arrays.asList(".project",".gitignore"); // These two files are already inside the project and cannot be shown
+	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList(".gradle"); // gradle subfolder is always ignored
 
 	public EclipseVirtualProjectPartCreator(GradleRootProject rootProject, IProgressMonitor monitor) {
 		notNull(rootProject, "'rootProject' may not be null");

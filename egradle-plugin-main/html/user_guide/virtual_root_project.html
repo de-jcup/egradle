@@ -18,6 +18,7 @@
 		<li><a href="#change_root_project">Changing the root project
 				in preferences</a></li>
 		<li><a href="#share_project">Version control (SCM)</a></li>
+		<li><a href="#share_project">Restrictions</a></li>
 	</ul>
 	<h2 id="concept">About the concept</h2>
 	<p>Inside a gradle root project you have got at least
@@ -56,7 +57,7 @@
 		project. The virtual root project will contain all folders and files
 		of gradle root project folder being not already imported as an eclipse
 		project into current workspace.</p>
-
+	<br/><br/>
 	<h2 id="example">An example</h2>
 	There is a root project folder given called "test-rootproject". It's
 	content looks like shown in next image:
@@ -79,26 +80,48 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h2 id="update">How to update/refresh project</h2>
-	Of course you can use F5 to refresh the project. But a simple click to
-	the button does recreate it again from scratch - and with already
-	opened/imported gradle project recognition.
-
+	<br/><br/>
+	<h2 id="refresh">How to update/refresh project</h2>
+	<h3>Normal refresh</h3>
+	Like a normal project, you can use F5 to refresh the project.
+	<h3 id="recreated">Full recreate</h3>
+	<p>
+		<table border='0'>
+		<tr>
+			<td><img src="images/egradle-virtualrootproject-recreate.png" /></td>
+			<td>A simple click to the button does recreate it again from
+		scratch. At doing this current already opened/imported gradle projects
+		are recognized again.</td>
+		</tr>
+			<tr>
+				<td><img src="images/info.png"/></td>
+				<td>If your team provider does not automatically connect the project to
+		your SCM you have to <a href="#share_project">connect it</a> again.
+				</td>
+			</tr>
+		</table>
+	</p>
+	
+	<br/><br/>
 	<h2 id="remove">How to remove the virtual root project</h2>
-	Select the project and press DEL as you would do on any other project
-
+	Select the project and press DEL as you would do on any other project.
+	You can also check the 'delete content' check box.
+	<br/><br/>
 	<h2 id="change_root_project">Changing the root project in
 		preferences</h2>
 	If the virtual root project is inside workspace it will be
-	automatically refreshed
+	automatically <a href="#recreated">re-created</a>
+	<br/><br/>
 	<h2 id="share_project">Version control (SCM)</h2>
 	<h3>GIT</h3>
 	When you call "Team - share Project..." on the virtual root project you
-	are able to connect it like any other eclipse project inside a GIT
-	repository.
+	are able to <b>connect it with your GIT repository</b> like any other eclipse project
 	<br> The GIT team provider decorations and the GIT staging is done
 	as usual.
-
+	<br/><br/>
+	<h2 id="restrictions">Restrictions</h2>
+	The files <i>.gitignore</i> and <i>.project</i> are NOT from root folder but from virtual root project itself!
+	If you want to change /commit these two root folder files you must do the changes outside eclipse.   
 	<p>
 		<a href="#top">Top</a>
 	</p>
