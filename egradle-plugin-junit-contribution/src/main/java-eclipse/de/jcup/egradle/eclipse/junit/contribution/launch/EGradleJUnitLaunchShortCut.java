@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -29,7 +29,6 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 
@@ -66,10 +65,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		/* create package name for resource */
 		IFile file = (IFile) resource;
 		IJavaElement javaElement = JavaCore.create(file);
-		if (javaElement instanceof CompilationUnit) {
-			CompilationUnit cu = (CompilationUnit) javaElement;
-			javaElement = cu.getJavaElement();
-		}
+		
 		if (javaElement instanceof ICompilationUnit) {
 			ICompilationUnit cu = (ICompilationUnit) javaElement;
 			try {

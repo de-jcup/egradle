@@ -16,7 +16,7 @@
  package de.jcup.egradle.core.api;
 
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
 import java.io.IOException;

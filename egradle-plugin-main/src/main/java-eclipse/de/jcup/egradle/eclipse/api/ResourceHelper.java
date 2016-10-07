@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.net.URI;
 
 import org.eclipse.core.filebuffers.manipulation.ContainerCreator;
-import org.eclipse.core.internal.resources.ProjectDescription;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;

@@ -15,13 +15,8 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_COMMAND;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_CALL_TYPE;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_GRADLE_SHELL;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_JAVA_HOME_PATH;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.P_ROOTPROJECT_PATH;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 

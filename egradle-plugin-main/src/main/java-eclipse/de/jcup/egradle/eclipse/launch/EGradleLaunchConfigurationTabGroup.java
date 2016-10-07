@@ -15,9 +15,7 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.ENVIRONMENT_PROPERTIES;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.GRADLE_PROPERTIES;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.SYSTEM_PROPERTIES;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import java.util.ArrayList;
 import java.util.Collection;

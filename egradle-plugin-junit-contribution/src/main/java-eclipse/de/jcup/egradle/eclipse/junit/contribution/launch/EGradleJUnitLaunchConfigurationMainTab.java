@@ -15,11 +15,9 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.PROPERTY_TASKS;
+import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 

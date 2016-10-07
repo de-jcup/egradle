@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.core.virtualroot;
 
-import static de.jcup.egradle.core.Constants.VIRTUAL_ROOTPROJECT_NAME;
+import static de.jcup.egradle.core.Constants.*;
 
 import java.io.File;
 

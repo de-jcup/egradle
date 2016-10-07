@@ -15,14 +15,7 @@
  */
 package de.jcup.egradle.eclipse.console;
 
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.BLACK;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.BRIGHT_RED;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.DARK_GRAY;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.GRAY;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.GREEN;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.ORANGE;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.RED;
-import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.WHITE;
+import static de.jcup.egradle.eclipse.console.EGradleConsoleColorsConstants.*;
 
 import java.util.ArrayList;
 import java.util.Collection;

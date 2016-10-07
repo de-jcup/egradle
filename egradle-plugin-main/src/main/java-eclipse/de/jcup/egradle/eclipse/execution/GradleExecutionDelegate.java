@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
-import static org.apache.commons.lang3.Validate.notNull;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
+import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;

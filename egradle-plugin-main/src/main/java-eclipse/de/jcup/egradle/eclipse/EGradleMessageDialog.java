@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.getActiveWorkbenchShell;
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
