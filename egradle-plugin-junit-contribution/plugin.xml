@@ -35,7 +35,7 @@
             locationURI="toolbar:egradle.toolbars.mainToolbar?after=egradle.toolbars.refreshEclipseCommand">
          <command
                commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
-               icon="icons/importGradleTestsToEclipseView.gif"
+               icon="icons/importGradleTestsToEclipseView.png"
                id="egradle.toolbars.importTestResultCommand"
                tooltip="Import gradle test results to junit view">
          </command>

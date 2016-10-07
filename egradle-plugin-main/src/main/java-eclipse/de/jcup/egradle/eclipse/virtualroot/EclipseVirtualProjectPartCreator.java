@@ -48,7 +48,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	private int createdLinks;
 	private File newProjectFile;
 	private static final List<String> FILENAMES_NOT_TO_LINK = Arrays.asList(".project",".gitignore"); // These two files are already inside the project and cannot be shown
-	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList(".gradle"); // gradle subfolder is always ignored
+	private static final List<String> FOLDERNAMES_NOT_TO_LINK = Arrays.asList(".gradle",".git"); // gradle, git subfolders are always ignored
 
 	public EclipseVirtualProjectPartCreator(GradleRootProject rootProject, IProgressMonitor monitor) {
 		notNull(rootProject, "'rootProject' may not be null");
@@ -97,7 +97,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			monitor.subTask("create project");
 			try {
 				File newProjectFolder = new File(rootprojectFolder,".egradle");
-				newProject = r.createOrRefreshProject(projectName, monitor,  newProjectFolder.toURI());
+				newProject = r.createOrRefreshProject(projectName, monitor,  newProjectFolder.toURI(), VirtualRootProjectNature.NATURE_ID);
 				newProjectFile = newProject.getLocation().toFile();
 
 				/* create .gitignore file*/

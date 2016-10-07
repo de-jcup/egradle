@@ -57,25 +57,15 @@ public class ResourceHelper {
 	 * be automatically opened
 	 * 
 	 * @param projectName
-	 * @param creationPath 
-	 * @return project
-	 * @throws CoreException
-	 */
-	public IProject createOrRefreshProject(String projectName, URI creationPath) throws CoreException {
-		return createOrRefreshProject(projectName, null,creationPath);
-	}
-
-	/**
-	 * Creates or refreshes project. If project exists but isn't opened it will
-	 * be automatically opened
-	 * 
-	 * @param projectName
 	 * @param monitor
-	 * @param creationPath 
+	 * @param creationPath - may not be <code>null</code>
+	 * @param natureIds
 	 * @return project
 	 * @throws CoreException
 	 */
-	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, URI creationPath) throws CoreException {
+	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, URI creationPath,
+			String... natureIds) throws CoreException {
+		notNull(creationPath, "'creationPath' may not be null");
 		if (monitor == null) {
 			monitor = NULL_MONITOR;
 		}
@@ -83,15 +73,13 @@ public class ResourceHelper {
 		IWorkspaceRoot root = workspace.getRoot();
 		IProject project = root.getProject(projectName);
 		if (!project.exists()) {
-			if (creationPath!=null){
-				IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
-				initialDescription.setLocationURI(creationPath);
-				initialDescription.setComment("EGradle virtual root project - only a temporary");
-				project.create(initialDescription,monitor);
-			}else{
-				project.create(monitor);
-			}
-			
+			IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
+			initialDescription.setLocationURI(creationPath);
+			initialDescription.setNatureIds(natureIds);
+			initialDescription.setComment("EGradle virtual root project - only a temporary");
+
+			project.create(initialDescription, monitor);
+
 		} else {
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 		}

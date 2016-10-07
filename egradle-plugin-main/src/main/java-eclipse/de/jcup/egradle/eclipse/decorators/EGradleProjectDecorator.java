@@ -67,11 +67,10 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		if (rootFolder == null) {
 			return;
 		}
-		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(p.getName())){
+		if (EGradleUtil.isVirtualRootProject(p)){
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
 			decoration.addOverlay(egradleProjectDescriptor, IDecoration.BOTTOM_LEFT);
-			
 			return;
 		}
 		IPath path = p.getLocation();

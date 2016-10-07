@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+    
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          NATURE										 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<extension
+         id="de.jcup.egradle.eclipse.virtualRootProjectNature"
+         name="Virtual root project nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature">
+         </run>
+      </runtime>
+   </extension>
+
+	<extension point="org.eclipse.ui.ide.projectNatureImages">
+	  <image
+	    id="de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNatureImage"
+	    natureId="de.jcup.egradle.eclipse.virtualRootProjectNature"
+	    icon="icons/virtualRootProjectNature.png">
+	  </image>
+	 </extension>
 
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          DECORATION                                  -->
@@ -114,14 +136,14 @@
                label="EGradle Toolbar">
             <command
                   commandId="egradle.commands.refreshEclipse"
-                  icon="icons/refreshAllEclipseDependencies.gif"
+                  icon="icons/refreshAllEclipseDependencies.png"
                   id="egradle.toolbars.refreshEclipseCommand"
                   label="Refresh"
                   tooltip="Refresh all eclipse dependencies of current root project">
             </command>
             <command
                   commandId="egradle.commands.updateOrCreateVirtualRootProject"
-                  icon="icons/updateOrCreateVirtualRootProject.gif"
+                  icon="icons/updateOrCreateVirtualRootProject.png"
                   id="egradle.toolbars.updateOrCreateVirtualRootProject"
                   label="Update or create virtual root project"
                   tooltip="Update or create virtual root project">

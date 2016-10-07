@@ -71,6 +71,7 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
+import de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature;
 
 public class EGradleUtil {
 
@@ -459,12 +460,14 @@ public class EGradleUtil {
 		if (project==null){
 			return false;
 		}
-		/* very simple approach by checking name. A nature would be better...*/
-		String name = project.getName();
-		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)){
-			return true;
+		boolean virtualProjectNatureFound;
+		try {
+			virtualProjectNatureFound = project.hasNature(VirtualRootProjectNature.NATURE_ID);
+			return virtualProjectNatureFound;
+		} catch (CoreException e) {
+			/* ignore ... project not found anymore*/
+			return false;
 		}
-		return false;
 	}
 
 }
