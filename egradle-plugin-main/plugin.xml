@@ -183,8 +183,8 @@
             	  commandId="egradle.commands.quickTaskExecution"
                   icon="icons/quickTaskExecution.png"
                   id="egradle.toolbars.quickTaskExecution"
-                  label="Quick gradle task execution"
-                  tooltip="Executions gradle task by a simple dialog inside current root project.">
+                  label="EGradle quick launch"
+                  tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
             </command>
          </toolbar>
       </menuContribution>
