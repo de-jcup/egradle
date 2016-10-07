@@ -16,9 +16,8 @@
 		<li><a href="#configure">Configuration</a></li>
 		<li><a href="#inspect">Inspect execution</a></li>
 		<li><a href="#console_output">Console output</a></li>
+		<li><a href="#quick_launch">Quick launch dialog</a></li>
 	</ul>
-
-
 
 	<h2 id="launch_per_right_click">Launch a project per right click</h2>
 	Inside navigator and package explorer it's possible to launch a project
@@ -28,8 +27,10 @@
 	<p>If there are more than one existing launch configuration for the
 		project, the configuration can be chosen.</p>
 	<img src="images/egradle-launch-from-navigator.png" />
-	<br />
-
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br><br>
 
 	<h2 id="launch_existing">Launch existing configuration</h2>
 	<!-- <img src="images/egradle-launch-configuration-menu.png" /> <br /> -->
@@ -39,8 +40,10 @@
 		launch starts. If you have multiple launch configurations done for
 		this project, a selection dialog will appear:</p>
 	<img src="images/egradle-launch-existing-by-project-multi.png" />
-
-
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br><br>
 	<h2 id="configure">Configuration</h2>
 	<img src="images/egradle-launch-configuration.png" />
 	<p></p>
@@ -60,20 +63,36 @@
 	<p>You could this do also with raw settings, but it's more
 		comfortable and you are able to use eclipse variables:</p>
 	<img src="images/egradle-launch-configuration-gradleproperties.png" />
-
-
-	<h2 id="inspect">Inspect execution</h2>
-	<br>
-	<img src="images/egradle-launch-processinfo.png" />
-	<h2 id="console_output">Watch output in console</h2>
-	The console output is shown as usual but special keywords are syntax
-	highlighted:
-	<br>
-	<br>
-	<img src="images/egradle-console-highlighting.png" />
-
 	<p>
 		<a href="#top">Top</a>
 	</p>
+	<br><br>
+	
+	<h2 id="inspect">Inspect execution</h2>
+	<br>
+	<img src="images/egradle-launch-processinfo.png" />
+	<br><br>
+	<h2 id="console_output">Watch output in console</h2>
+	<p>
+	The console output is shown as usual but special keywords are syntax
+	highlighted:
+	</p>
+	<img src="images/egradle-console-highlighting.png" />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br>
+	<br>
+	<h2 id="quick_launch">Quick launch dialog</h2>
+	<img src="images/egradle-launch-quick.png" />
+	<p>When you just want to execute some simple tasks which need no special configurations you can press 
+	<code><b>CTRL+SHIFT+#</b></code> and a small dialog appears where you can type your wanted tasks and press <code>ENTER</code> to execute. You got no possibility to setup
+	parameters, system properties or environment entries, but your able to execute some standard
+	calls - e.g. "tasks" or "--version".
+	</p>
+	<p>You can also press the corresponding toolbar button to open the dialog:</p>
+	<img src="images/egradle-launch-quick-screenshot.png" />
+	<p>The output is done in EGradle system console</p>
+	<br><br>
 </body>
 </html>
