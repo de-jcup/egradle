@@ -46,6 +46,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
 
@@ -237,7 +238,15 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	}
 
 	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
-		wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
+		setProjectNameIgnoreVirtualRootProjectNames(wc, projectName);
+	}
+
+	public static void setProjectNameIgnoreVirtualRootProjectNames(ILaunchConfigurationWorkingCopy wc, String projectName) {
+		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(projectName)){
+			wc.setAttribute(PROPERTY_PROJECTNAME,"");
+		}else{
+			wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
+		}
 	}
 
 	protected void createTaskConfiguration(ILaunchConfigurationWorkingCopy wc) {

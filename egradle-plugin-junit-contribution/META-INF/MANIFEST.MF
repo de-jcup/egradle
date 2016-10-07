@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle Junit contribution
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.junit.contribution;singleton:=true
-Bundle-Version: 0.7.3.beta
+Bundle-Version: 0.7.4.beta
 Bundle-Activator: de.jcup.egradle.eclipse.junit.contribution.Activator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.jdt.junit;bundle-version="3.6.0",
- de.jcup.egradle.eclipse.plugin.main;bundle-version="0.7.3",
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="0.7.4",
  org.eclipse.core.resources,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,

@@ -196,7 +196,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		IProject project = getProject();
 		if (project != null) {
-			configuration.setAttribute(PROPERTY_PROJECTNAME, project.getName());
+			EGradleLaunchShortCut.setProjectNameIgnoreVirtualRootProjectNames(configuration,project.getName());
 		}
 	}
 

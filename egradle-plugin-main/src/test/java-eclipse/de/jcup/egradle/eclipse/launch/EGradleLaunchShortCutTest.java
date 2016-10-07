@@ -19,6 +19,7 @@ public class EGradleLaunchShortCutTest {
 	}
 	
 	@Test
+	/* does not work currently, because the mockito dependency is not working. shall be fixed with #84 (enable egradle code to be build by gradle) */
 	public void when_virtual_rootproject_name_is_given_the_configuration_contains_not_a_project_name() {
 		/* prepare*/
 		String projectName = Constants.VIRTUAL_ROOTPROJECT_NAME;
