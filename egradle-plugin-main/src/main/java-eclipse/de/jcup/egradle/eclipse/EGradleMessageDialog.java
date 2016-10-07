@@ -65,6 +65,7 @@ public class EGradleMessageDialog {
 				Shell shell = getActiveWorkbenchShell();
 				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, detail);
 				bfdialog.open();
+				
 			}
 
 		});

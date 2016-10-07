@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -21,7 +21,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -49,6 +48,7 @@ public class BuildFailedDialog extends Dialog {
 		// turn off close icon at window - so user must use OK
 		setShellStyle(getShellStyle() & ~SWT.CLOSE);
 	}
+	
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
@@ -74,7 +74,7 @@ public class BuildFailedDialog extends Dialog {
 	}
 
 	private void createDetails(Composite container) {
-		if (description==null){
+		if (description == null) {
 			return;
 		}
 		GridData dataLastName = new GridData();
@@ -98,11 +98,9 @@ public class BuildFailedDialog extends Dialog {
 		return false;
 	}
 
-	protected Button createButton(Composite parent, int id, String label, boolean defaultButton) {
-		if (id == IDialogConstants.CANCEL_ID) {
-			return null;
-		}
-		return super.createButton(parent, id, label, defaultButton);
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 	}
 
 	protected boolean canHandleShellCloseEvent() {

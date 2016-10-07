@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.execution;
+package de.jcup.egradle.eclipse.execution;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -24,11 +24,20 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
-	boolean refreshAllProjects = true;
-	boolean showEGradleSystemConsole = true;
+	private boolean refreshAllProjects = true;
+	private boolean showEGradleSystemConsole = true;
 
-	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
-		super(outputHandler,processExecutor,additionalContextPreparator);
+	public void setRefreshAllProjects(boolean refreshAllProjects) {
+		this.refreshAllProjects = refreshAllProjects;
+	}
+
+	public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
+		this.showEGradleSystemConsole = showEGradleSystemConsole;
+	}
+
+	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
+			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
+		super(outputHandler, processExecutor, additionalContextPreparator);
 	}
 
 	@Override

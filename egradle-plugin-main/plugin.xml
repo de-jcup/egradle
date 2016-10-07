@@ -104,6 +104,11 @@
             categoryId="egradle.commands.category"
             id="egradle.commands.updateOrCreateVirtualRootProject">
       </command>
+       <command
+            name="Quick gradle task execution"
+            categoryId="egradle.commands.category"
+            id="egradle.commands.quickTaskExecution">
+      </command>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          HANDLER                                     -->
@@ -122,10 +127,23 @@
             class="de.jcup.egradle.eclipse.handlers.UpdateOrCreateVirtualRootProjectHandler"
             commandId="egradle.commands.updateOrCreateVirtualRootProject">
       </handler>
+       <handler
+            class="de.jcup.egradle.eclipse.handlers.QuickTaskExecutionHandler"
+            commandId="egradle.commands.quickTaskExecution">
+      </handler>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          KEY BINDINGS                                -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="egradle.commands.quickTaskExecution"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+g"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
    <!--
    <extension
          point="org.eclipse.ui.bindings">
@@ -160,6 +178,13 @@
                   id="egradle.toolbars.updateOrCreateVirtualRootProject"
                   label="Update or create virtual root project"
                   tooltip="Update or create virtual root project">
+            </command>
+            <command
+            	  commandId="egradle.commands.quickTaskExecution"
+                  icon="icons/quickTaskExecution.png"
+                  id="egradle.toolbars.quickTaskExecution"
+                  label="Quick gradle task execution"
+                  tooltip="Executions gradle task by a simple dialog inside current root project.">
             </command>
          </toolbar>
       </menuContribution>

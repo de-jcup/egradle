@@ -39,7 +39,10 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 
 	@Override
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
-		return new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true,SimpleProcessExecutor.ENDLESS_RUNNING),this);
+		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true,SimpleProcessExecutor.ENDLESS_RUNNING),this);
+		ui.setRefreshAllProjects(true);
+		ui.setShowEGradleSystemConsole(true);
+		return ui;
 	}
 
 }
