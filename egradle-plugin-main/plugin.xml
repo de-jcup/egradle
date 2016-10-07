@@ -140,7 +140,7 @@
       <key
             commandId="egradle.commands.quickTaskExecution"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+g"
+            sequence="M1+M2+#"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>

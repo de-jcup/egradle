@@ -3,8 +3,6 @@ package de.jcup.egradle.eclipse.handlers;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -15,6 +13,7 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
+import de.jcup.egradle.eclipse.ui.QuickLaunchDialog;
 
 public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 
@@ -24,14 +23,10 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		lastInput = null;
 		Shell shell = HandlerUtil.getActiveShellChecked(event);
-
-		InputDialog dlg = new InputDialog(shell, "Quick gradle task execution", "Enter text", "Initial value", null);
-		if (dlg.open() == Window.OK) {
-			lastInput = dlg.getValue();
-			if (StringUtils.isBlank(lastInput)){
-				return null;
-			}
-		}else{
+		QuickLaunchDialog dialog = new QuickLaunchDialog(shell);
+		dialog.open();
+		lastInput=dialog.getValue();
+		if (StringUtils.isBlank(lastInput)){
 			return null;
 		}
 		return super.execute(event);
