@@ -37,6 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -256,7 +257,7 @@ public class FileHelper {
 			}
 		}
 	}
-
+	
 	public void delete(IPath path) throws CoreException {
 		IFileStore fileStore = FileBuffers.getFileStoreAtLocation(path);
 
@@ -266,6 +267,9 @@ public class FileHelper {
 	}
 
 	public File toFile(IPath path) throws CoreException {
+		if (path==null){
+			return null;
+		}
 		IFileStore fileStore = FileBuffers.getFileStoreAtLocation(path);
 
 		File file = null;
@@ -318,5 +322,12 @@ public class FileHelper {
 		}else{
 			return name;
 		}
+	}
+
+	public File toFile(IResource resource) throws CoreException {
+		if (resource==null){
+			return toFile((IPath)null);
+		}
+		return toFile(resource.getLocation());
 	}
 }

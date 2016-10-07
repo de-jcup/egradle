@@ -250,7 +250,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			return "";
 		}
 		try {
-			File projectRealFolderName = FileHelper.SHARED.toFile(project.getLocation());
+			File projectRealFolderName = FileHelper.SHARED.toFile(project);
 			return projectRealFolderName.getName();
 		} catch (CoreException e) {
 			throw new IllegalStateException(e);

@@ -89,6 +89,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 
 			monitor.subTask("delete project");
 			try {
+				
 				r.deleteProject(projectName);
 			} catch (CoreException e) {
 				throw new VirtualRootProjectException("Cannot delete newProject:" + projectName, e);
@@ -133,6 +134,29 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	}
 
 	private boolean internalCheckIfLinkMustBeCreated(Object targetFolder, File file) {
+		return isLinkCandidate(newProject, newProjectFile, foldersToIgnore, targetFolder, file);
+	}
+
+	
+	/**
+	 * Check if given file should be linked inside the projects root
+	 * @param projectItSelf
+	 * @param file
+	 * @return <code>true</code> when a link candidate
+	 */
+	public static boolean isLinkCandidate(IProject projectItSelf, File file) {
+		return isLinkCandidate(projectItSelf, projectItSelf.getLocation().toFile(), new ArrayList<>(), projectItSelf, file);
+	}
+	/**
+	 * Check if given file should be linked inside project
+	 * @param projectItSelf
+	 * @param newProjectFile 
+	 * @param foldersToIgnore - a list of folders to ignore for inspection
+	 * @param targetFolder - where to create the link
+	 * @param file
+	 * @return <code>true</code> when a link candidate
+	 */
+	protected static boolean isLinkCandidate(IProject projectItSelf, File newProjectFile, List<File> foldersToIgnore, Object targetFolder, File file) {
 		if (newProjectFile.equals(file)){
 			/* root project cannot link to itself - infinite loop...*/
 			return false;
@@ -142,11 +166,18 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			return false;
 		}
 		String fileName = file.getName();
-		if (file.isDirectory()) {
+		boolean directory = file.isDirectory();
+		boolean isFile = file.isFile();
+		boolean isHidden= file.isHidden();
+		boolean isx = file.exists();
+		if (!isx){
+			return false;
+		}
+		if (directory) {
 			if (FOLDERNAMES_NOT_TO_LINK.contains(fileName)) {
 				return false;
 			}
-			if (targetFolder == newProject) {
+			if (targetFolder == projectItSelf) {
 				if (foldersToIgnore.contains(file)) {
 					return false;
 				}

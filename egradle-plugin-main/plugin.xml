@@ -3,9 +3,19 @@
 <plugin>
     
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          NATURE										 -->
+   <!--                          NATURE	(Virtual root projects only)		 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<extension
+   <extension
+         id="virtualRootProjectBuilder"
+         name="Virtual Root Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder hasNature="true">
+         <run
+               class="de.jcup.egradle.eclipse.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
          id="de.jcup.egradle.eclipse.virtualRootProjectNature"
          name="Virtual root project nature"
          point="org.eclipse.core.resources.natures">
@@ -14,6 +24,9 @@
                class="de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature">
          </run>
       </runtime>
+      <builder
+            id="de.jcup.egradle.eclipse.plugin.main.virtualRootProjectBuilder">
+      </builder>
    </extension>
 
 	<extension point="org.eclipse.ui.ide.projectNatureImages">

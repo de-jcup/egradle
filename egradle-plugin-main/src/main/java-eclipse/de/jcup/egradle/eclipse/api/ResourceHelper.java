@@ -39,6 +39,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
+import org.junit.FixMethodOrder;
 
 public class ResourceHelper {
 	public static ResourceHelper SHARED = new ResourceHelper(FileHelper.SHARED);
@@ -58,7 +59,8 @@ public class ResourceHelper {
 	 * 
 	 * @param projectName
 	 * @param monitor
-	 * @param creationPath - may not be <code>null</code>
+	 * @param creationPath
+	 *            - may not be <code>null</code>
 	 * @param natureIds
 	 * @return project
 	 * @throws CoreException
@@ -75,7 +77,6 @@ public class ResourceHelper {
 		if (!project.exists()) {
 			IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
 			initialDescription.setLocationURI(creationPath);
-			initialDescription.setNatureIds(natureIds);
 			initialDescription.setComment("EGradle virtual root project - only a temporary");
 
 			project.create(initialDescription, monitor);
@@ -87,14 +88,39 @@ public class ResourceHelper {
 		if (!project.isOpen()) {
 			project.open(monitor);
 		}
+		/* the next lines are important: only when we do set description on project again
+		 * the nature will be created AND configured as wished - necessary to get builder running
+		 * 
+		 */
+		IProjectDescription descriptionCopy = project.getDescription();
+		descriptionCopy.setNatureIds(natureIds);
+		project.setDescription(descriptionCopy, monitor);
 		return project;
 	}
 
 	public void deleteProject(String projectName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
+		IPath location = project.getLocation();
 		if (project.exists()) {
 			delete(project);
+		}
+		if (location!=null){
+			/* we do a hard cleanup here no matter if the project has existed in workspace before or not.
+			 * 
+			 */
+			deleteRecursive(location.toFile());
+		}
+	}
+
+	private void deleteRecursive(File file) {
+		if (file.isDirectory()) {
+			for (File child : file.listFiles()) {
+				deleteRecursive(child);
+			}
+			file.delete();
+		} else {
+			file.delete();
 		}
 	}
 
@@ -103,6 +129,7 @@ public class ResourceHelper {
 	}
 
 	public void delete(final IProject project, boolean deleteContent) throws CoreException {
+
 		for (int i = 0; i < MAX_RETRY; i++) {
 			try {
 				project.delete(deleteContent, true, NULL_MONITOR);

@@ -455,6 +455,11 @@ public class EGradleUtil {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message));
 
 	}
+	
+	public static void throwCoreException(String message, Exception e) throws CoreException {
+		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message,e));
+
+	}
 
 	public static boolean isVirtualRootProject(IProject project) {
 		if (project==null){
