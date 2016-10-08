@@ -198,14 +198,18 @@ public class FileHelper {
 	 */
 	public void copy(File src, File dst) throws IOException {
 		if (src.isDirectory()) {
+			if (!dst.exists()){
+				dst.mkdirs();
+			}
 			String[] srcChildren = src.list();
 			for (int i = 0; i < srcChildren.length; ++i) {
 				File srcChild = new File(src, srcChildren[i]);
 				File dstChild = new File(dst, srcChildren[i]);
 				copy(srcChild, dstChild);
 			}
-		} else
+		} else{
 			transferData(src, dst);
+		}
 	}
 
 	public File getFileInPlugin(Plugin plugin, IPath path) throws CoreException {
@@ -279,6 +283,12 @@ public class FileHelper {
 
 	public void delete(File file) throws CoreException{
 		if (file.exists()) {
+			if (file.isDirectory()){
+				File[] children = file.listFiles();
+				for (File child: children){
+					delete(child);
+				}
+			}
 			boolean deleted = false;
 			for (int i = 0; i < MAX_RETRY; i++) {
 				if (file.delete()){

@@ -70,7 +70,12 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 		 * create new linked file - infinite loop may not happen because a link.
 		 * Links are filtered in pre event handling
 		 */
-		getResourceHelper().createLinkedFile(project, targetPathInProject, targetFile);
+		if (targetFile.isDirectory()){
+			getResourceHelper().createLinkedFolder(project, targetPathInProject, targetFile);
+			project.refreshLocal(2, null);
+		}else{
+			getResourceHelper().createLinkedFile(project, targetPathInProject, targetFile);
+		}
 	}
 
 	/**
