@@ -1,4 +1,5 @@
-# EGradle
+![EGradle](https://github.com/de-jcup/egradle/blob/master/egradle-plugin-main/html/images/egradle-banner_128x128.png?raw=true)
+
 [![Build status:](https://travis-ci.org/de-jcup/egradle.svg?branch=master)](https://travis-ci.org/de-jcup/egradle)
 
 <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=3071167" class="drag" title="Drag to your running Eclipse workspace to install EGradle"><img class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png" alt="Drag to your running Eclipse workspace to install EGradle" /></a>
