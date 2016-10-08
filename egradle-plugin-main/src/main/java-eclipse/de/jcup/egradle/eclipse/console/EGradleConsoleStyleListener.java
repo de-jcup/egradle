@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
@@ -39,8 +40,10 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		addParseDataByIndex("UP-TO-DATE", ORANGE);
 		addParseDataByIndex("FAILURE:", BRIGHT_RED);
 		addParseDataByIndex("test FAILED", RED);
-		addParseDataByIndex("* What went wrong:",DARK_GRAY);
-		addParseDataByIndex("* Try:",DARK_GRAY);
+		addParseDataByIndex("* What went wrong:", DARK_GRAY);
+		addParseDataByIndex("* Try:", DARK_GRAY);
+		addParseDataByIndex("WARNING", BRIGHT_RED);
+		addParseDataByIndex("warning", BRIGHT_RED);
 		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
 	}
 
@@ -59,10 +62,8 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		if (event == null) {
 			return;
 		}
-		if (event.lineText == null) {
-			return;
-		}
-		if (event.lineText.length() == 0) {
+		String lineText = event.lineText;
+		if (StringUtils.isBlank(lineText)){
 			return;
 		}
 		/* styling */
@@ -80,12 +81,29 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 
 		lastRangeEnd = 0;
 
-		/* start parsing */
-		String line = event.lineText;
+		
 		List<StyleRange> ranges = new ArrayList<StyleRange>();
-
-		for (ParseData data : SHARED_PARSE_DATA) {
-			parse(event, defStyle, line, ranges, data);
+		boolean handled = false;
+		/* line text */
+		if (!handled) {
+			if (StringUtils.containsOnly(lineText, "-")) {
+				/* only a marker line from gradle */
+				addRange(ranges, event.lineOffset, lineText.length(),
+						getColor(EGradleConsoleColorsConstants.BRIGHT_BLUE), true);
+				handled=true;
+			}
+		}
+		
+		handled = markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED,false);
+		handled = markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
+		handled = markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);
+		handled = markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED,false);
+		handled = markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE,false);
+		/* index parts and other*/
+		if (!handled) {
+			for (ParseData data : SHARED_PARSE_DATA) {
+				parse(event, defStyle, lineText, ranges, data);
+			}
 		}
 
 		if (!ranges.isEmpty()) {
@@ -93,9 +111,24 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		}
 	}
 
+	private boolean markLine(LineStyleEvent event, String lineText, List<StyleRange> ranges, boolean handled,
+			String searchText, RGB color1, boolean bold1, RGB color2, boolean bold2) {
+		if (!handled) {
+			
+			if (lineText.startsWith(searchText)) {
+				/* download itself is rendered by parsedata, here we only markup the remianing links*/
+				addRange(ranges, event.lineOffset, searchText.length(),
+						getColor(color1), bold1);
+				addRange(ranges, event.lineOffset+searchText.length(), lineText.length(),
+						getColor(color2), bold2);
+				handled=true;
+			}
+		}
+		return handled;
+	}
+
 	private void parse(LineStyleEvent event, StyleRange defStyle, String currentText, List<StyleRange> ranges,
 			ParseData data) {
-
 		if (data.isSearchingSimpleSubstring()) {
 			parseByIndex(event, defStyle, currentText, ranges, data);
 		} else {
@@ -134,9 +167,14 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 			return subString != null;
 		}
 	}
-
-	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, boolean isCode) {
-		StyleRange range = new StyleRange(start, length, foreground, null);
+	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, boolean bold) {
+		addRange(ranges, start, length, foreground, null, bold);
+	}
+	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, Color background, boolean bold) {
+		StyleRange range = new StyleRange(start, length, foreground, background);
+		if (bold){
+			range.fontStyle=SWT.BOLD;
+		}
 		ranges.add(range);
 		lastRangeEnd = lastRangeEnd + range.length;
 	}
