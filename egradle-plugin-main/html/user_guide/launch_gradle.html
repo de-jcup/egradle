@@ -10,16 +10,27 @@
 	<img src="./../images/egradle-banner_128x128.png" />
 	<a href="../user_guide.html">User guide</a>
 	<h1>Launch gradle</h1>
-	<ul>
-		<li><a href="#launch_per_right_click">Launch per right click</a></li>
-		<li><a href="#launch_existing">Launch existing configuration</a></li>
-		<li><a href="#configure">Configuration</a></li>
-		<li><a href="#inspect">Inspect execution</a></li>
-		<li><a href="#console_output">Console output</a></li>
+	You can execute gradle tasks in two different ways:
+	<ol>
+		<li><a href="#launch_per_right_click">Launch configurations</a>
+			<ul>
+				<li><a href="#launch_per_right_click">Launch project</a></li>
+				<li><a href="#launch_existing">Launch existing
+						configuration</a></li>
+				<li><a href="#configure">Configuration</a></li>
+				<li><a href="#inspect">Inspect execution</a></li>
+				<li><a href="#console_output">Console output</a></li>
+			</ul></li>
 		<li><a href="#quick_launch">Quick launch dialog</a></li>
-	</ul>
+	</ol>
 
-	<h2 id="launch_per_right_click">Launch a project per right click</h2>
+	<h2>Build failed</h2>
+	<p>When your gradle execution failed (e.g. you executed "unknown-task" ) the build
+		failed dialog will apear:</p>
+	<img src="images/egradle-build-failed-dialog.png" />
+
+
+	<h2 id="launch_per_right_click">Launch a project by right click</h2>
 	Inside navigator and package explorer it's possible to launch a project
 	by gradle. If no launch configuration is configured the default gradle
 	target will be "assemble" and a new launch configuration is created.
@@ -30,7 +41,8 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<br><br>
+	<br>
+	<br>
 
 	<h2 id="launch_existing">Launch existing configuration</h2>
 	<!-- <img src="images/egradle-launch-configuration-menu.png" /> <br /> -->
@@ -43,7 +55,8 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<br><br>
+	<br>
+	<br>
 	<h2 id="configure">Configuration</h2>
 	<img src="images/egradle-launch-configuration.png" />
 	<p></p>
@@ -66,17 +79,17 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<br><br>
-	
+	<br>
+	<br>
+
 	<h2 id="inspect">Inspect execution</h2>
 	<br>
 	<img src="images/egradle-launch-processinfo.png" />
-	<br><br>
+	<br>
+	<br>
 	<h2 id="console_output">Watch output in console</h2>
-	<p>
-	The console output is shown as usual but special keywords are syntax
-	highlighted:
-	</p>
+	<p>The console output is shown as usual but special keywords are
+		syntax highlighted:</p>
 	<img src="images/egradle-console-highlighting.png" />
 	<p>
 		<a href="#top">Top</a>
@@ -85,14 +98,32 @@
 	<br>
 	<h2 id="quick_launch">Quick launch dialog</h2>
 	<img src="images/egradle-launch-quick.png" />
-	<p>When you just want to execute some simple tasks which need no special configurations you can press 
-	<code><b>CTRL+SHIFT+#</b></code> and a small dialog appears where you can type your wanted tasks and press <code>ENTER</code> to execute. You got no possibility to setup
-	parameters, system properties or environment entries, but your able to execute some standard
-	calls - e.g. "tasks" or "--version".
+	<p>
+		When you just want to execute some simple tasks which need no special
+		configurations you can press
+		<code>
+			<b>CTRL+SHIFT+#</b>
+		</code>
+		and a small dialog appears where you can type your wanted tasks and
+		press
+		<code>ENTER</code>
+		to execute. You got no possibility to setup parameters, system
+		properties or environment entries, but your able to execute some
+		standard calls - e.g. "tasks" or "--version".
 	</p>
-	<p>You can also press the corresponding toolbar button to open the dialog:</p>
+	<p>Instead of using the keyboard shortcut you can also press the
+		corresponding toolbar button to open the dialog:</p>
 	<img src="images/egradle-launch-quick-screenshot.png" />
-	<p>The output is done in EGradle system console</p>
-	<br><br>
+	<p>
+		The output is done in EGradle system console, which will automatically
+		show up when
+		<code>ENTER</code>
+		key was pressed and execution starts
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br>
+	<br>
 </body>
 </html>

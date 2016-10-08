@@ -11,14 +11,16 @@
 	<a href="../user_guide.html">User guide</a>
 	<h1>Virtual root project</h1>
 	<ul>
-		<li><a href="concept">About the concept</a></li>
+		<li><a href="#concept">About the concept</a></li>
 		<li><a href="#example">An example</a></li>
+		<li><a href="#added_files">Adding new files or folders</a></li>
+		<li><a href="#removing_files">Removing files or folders</a></li>
 		<li><a href="#refresh">How to update/refresh</a></li>
 		<li><a href="#remove">How to remove</a></li>
 		<li><a href="#change_root_project">Changing the root project
 				in preferences</a></li>
-		<li><a href="#share_project">Version control (SCM)</a></li>
-		<li><a href="#share_project">Restrictions</a></li>
+		<li><a href="#share_project">Version control (GIT)</a></li>
+		<li><a href="#restrictions">Restrictions</a></li>
 	</ul>
 	<h2 id="concept">About the concept</h2>
 	<p>Inside a gradle root project you have got at least
@@ -57,7 +59,12 @@
 		project. The virtual root project will contain all folders and files
 		of gradle root project folder being not already imported as an eclipse
 		project into current workspace.</p>
-	<br/><br/>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
+
 	<h2 id="example">An example</h2>
 	There is a root project folder given called "test-rootproject". It's
 	content looks like shown in next image:
@@ -80,48 +87,114 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<br/><br/>
+	<br />
+	<br />
+
+
+	<h2 id="added_files">Adding new files or folders</h2>
+	<p>When you add a new file or folder to the base folder of the
+		virtual root project - as shown in next image - the folder/file will
+		NOT be created to the virtual project but inside the original gradle
+		root project folder (this ensures you do not accidently add/commit something from virtual root project)</p>
+	<img src="images/egradle-virual-rootproject-create_new_folder.png" />
+	<p>The virtual root project contains only a link to origin
+		file/folder. Inside the linked folders new created files/folders will be
+		simply created in link target and shown as normal files.e</p>
+	<p>
+		<img src="images/egradle-virtual-rootproject_new_file_as_link.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
+	<h2 id="removing_files">Removing files or folders</h2>
+	When you delete one of the linked files/folders in virtual root project, eclipse will warn
+	you that only the link will be deleted but origin still exists:
+	<p>
+		<img src="images/egradle-virtual-rootproject_delete_linked_folder.png" />
+	</p>
+	<p>
+		EGradle is aware of your delete attempt and will support you to delete the file in real root folder too. 
+		A dialog ask you about the deletion:
+	</p>
+	<p>
+		<img src="images/egradle-virtual-rootproject_delete_origin_file_not_only_link.png"/>
+	</p>
+	<p>Just press <code>Yes</code> button and the file is deleted</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
+
+
 	<h2 id="refresh">How to update/refresh project</h2>
 	<h3>Normal refresh</h3>
 	Like a normal project, you can use F5 to refresh the project.
 	<h3 id="recreated">Full recreate</h3>
 	<p>
-		<table border='0'>
+	<table border='0'>
 		<tr>
 			<td><img src="images/egradle-virtualrootproject-recreate.png" /></td>
-			<td>A simple click to the button does recreate it again from
-		scratch. At doing this current already opened/imported gradle projects
-		are recognized again.</td>
+			<td><p>
+			A simple click to the button does recreate it again from
+				scratch. At doing this current already opened/imported gradle
+				projects are recognized again.</p><p><i>(If there occurs an errror on virtual root project creation - e.g. "cannot create link to ..." please simply press the button again. The problem is well known but currently not fixed)</i></p></td>
 		</tr>
-			<tr>
-				<td><img src="images/info.png"/></td>
-				<td>If your team provider does not automatically connect the project to
-		your SCM you have to <a href="#share_project">connect it</a> again.
-				</td>
-			</tr>
-		</table>
+		<tr>
+			<td><img src="images/info.png" /></td>
+			<td>If your team provider does not automatically connect the
+				project to your SCM you have to <a href="#share_project">connect
+					it</a> again.
+			</td>
+		</tr>
+	</table>
 	</p>
-	
-	<br/><br/>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
 	<h2 id="remove">How to remove the virtual root project</h2>
 	Select the project and press DEL as you would do on any other project.
 	You can also check the 'delete content' check box.
-	<br/><br/>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
 	<h2 id="change_root_project">Changing the root project in
 		preferences</h2>
 	If the virtual root project is inside workspace it will be
-	automatically <a href="#recreated">re-created</a>
-	<br/><br/>
-	<h2 id="share_project">Version control (SCM)</h2>
+	automatically
+	<a href="#recreated">re-created</a>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
+	<h2 id="share_project">Version control (GIT)</h2>
+	Currently only GIT is supported.
 	<h3>GIT</h3>
 	When you call "Team - share Project..." on the virtual root project you
-	are able to <b>connect it with your GIT repository</b> like any other eclipse project
+	are able to
+	<b>connect it with your GIT repository</b> like any other eclipse
+	project
 	<br> The GIT team provider decorations and the GIT staging is done
-	as usual.
-	<br/><br/>
+	as usual. Normally the virtual root project should be automatically connected to your GIT repository when 
+	it is created.
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
 	<h2 id="restrictions">Restrictions</h2>
-	The files <i>.gitignore</i> and <i>.project</i> are NOT from root folder but from virtual root project itself!
-	If you want to change /commit these two root folder files you must do the changes outside eclipse.   
+	The files
+	<i>.gitignore</i> and
+	<i>.project</i> are NOT from root folder but from virtual root project
+	itself! If you want to change /commit these two root folder files you
+	must do the changes outside eclipse.
 	<p>
 		<a href="#top">Top</a>
 	</p>
