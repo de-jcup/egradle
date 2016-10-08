@@ -2,11 +2,13 @@ package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.Util;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -23,7 +25,7 @@ public class QuickLaunchDialog extends PopupDialog {
 	private static final boolean SHOW_DIALOG_MENU = false;
 	private static final boolean SHOW_PERSIST_ACTIONS = false;
 	private static final String TITLE = "EGradle quick launch";
-	private static final String INFOTEXT = "Enter your tasks (press enter to execute)";
+	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
 
 	public QuickLaunchDialog(Shell parent) {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
@@ -71,8 +73,20 @@ public class QuickLaunchDialog extends PopupDialog {
 		GridLayoutFactory.fillDefaults().extendedMargins(isWin32 ? 0 : 3, 3, 2, 2).applyTo(composite);
 
 		Text text = new Text(composite, SWT.NONE);
+		Font terminalFont = JFaceResources.getTextFont();
+		text.setFont(terminalFont);
+		
+		GridData textLayoutData = new GridData();
+		textLayoutData.horizontalAlignment = GridData.FILL;
+		textLayoutData.verticalAlignment = GridData.FILL;
+		textLayoutData.grabExcessHorizontalSpace = true;
+		textLayoutData.grabExcessVerticalSpace = false;
+		textLayoutData.horizontalSpan = 2;
+		
+		text.setLayoutData(textLayoutData);
+		
 		text.addKeyListener(new KeyAdapter() {
-
+			
 			@Override
 			public void keyReleased(KeyEvent event) {
 				if (event.character == '\r' ){
@@ -96,8 +110,6 @@ public class QuickLaunchDialog extends PopupDialog {
 	 */
 	public static void main(String[] args) {
 		Display display = new Display();
-		Image backgroundImage = new Image(display, "./icons/gradle-build-failed.png");
-		Image titleImage = new Image(display, "./icons/gradle-og.gif");
 		Shell shell = new Shell(display);
 		shell.setText("Shell");
 		shell.setSize(200, 200);
