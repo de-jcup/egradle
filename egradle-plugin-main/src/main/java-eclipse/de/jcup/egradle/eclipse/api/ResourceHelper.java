@@ -77,7 +77,12 @@ public class ResourceHelper {
 		if (!project.exists()) {
 			IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
 			initialDescription.setLocationURI(creationPath);
-			initialDescription.setComment("EGradle virtual root project - only a temporary");
+			initialDescription.setComment(
+					"EGradle virtual root project - only a temporary project.\n"
+					+ "There are  only two files: .gitignore and .project which will be created,\n"
+					+ "all other files are just links.\n"
+					+ "\n"
+					+ "Please do NOT change these two generated files!!");
 
 			project.create(initialDescription, monitor);
 
@@ -88,8 +93,10 @@ public class ResourceHelper {
 		if (!project.isOpen()) {
 			project.open(monitor);
 		}
-		/* the next lines are important: only when we do set description on project again
-		 * the nature will be created AND configured as wished - necessary to get builder running
+		/*
+		 * the next lines are important: only when we do set description on
+		 * project again the nature will be created AND configured as wished -
+		 * necessary to get builder running
 		 * 
 		 */
 		IProjectDescription descriptionCopy = project.getDescription();
@@ -105,8 +112,10 @@ public class ResourceHelper {
 		if (project.exists()) {
 			delete(project);
 		}
-		if (location!=null){
-			/* we do a hard cleanup here no matter if the project has existed in workspace before or not.
+		if (location != null) {
+			/*
+			 * we do a hard cleanup here no matter if the project has existed in
+			 * workspace before or not.
 			 * 
 			 */
 			deleteRecursive(location.toFile());

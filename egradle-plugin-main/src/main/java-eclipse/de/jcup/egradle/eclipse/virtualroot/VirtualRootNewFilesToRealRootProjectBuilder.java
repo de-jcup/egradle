@@ -36,9 +36,20 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 	public static final String BUILDER_ID = "de.jcup.egradle.eclipse.plugin.main.virtualRootProjectBuilder";
 
 	protected void handleAddedInRootFolder(File rootFolder, IResource resource) throws CoreException {
-		System.out.println("handle added in root folder:" + resource.getLocation());
-
+		
+		/* check we got no .gitignore or the .project here! This are the only two files, to complete ignore!*/
 		File sourceFile = getFileHelper().toFile(resource);
+		String name = sourceFile.getName();
+		if (".gitignore".equals(name)){
+			return;
+		}
+		
+		if (".project".equals(name)){
+			return;
+		}
+		
+//		System.out.println("handle added in root folder:" + resource.getLocation());
+
 		File targetFile = new File(rootFolder, sourceFile.getName());
 		IPath targetPathInProject = Path.fromPortableString(sourceFile.getName());
 
