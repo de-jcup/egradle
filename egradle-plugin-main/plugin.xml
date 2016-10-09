@@ -202,25 +202,26 @@
             primary="true">
       </toc>
    </extension>
-   <!--
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          IMPORT                                      -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.importWizards">
       <category
-            name="Gradle File Import"
-            id="egradle.importWizards.sampleCategory">
+            name="EGradle Import"
+            id="egradle.importWizards.rootProjectImport">
       </category>
       <wizard
-            name="Import Gradle Multiproject"
-            icon="icons/sample.gif"
-            category="egradle.importWizards.sampleCategory"
-            class="de.jcup.egradle.eclipse.importWizards.ImportWizard"
-            id="egradle.importWizards.ImportWizard">
+            name="Import EGradle"
+            icon="icons/gradle-og.gif"
+            category="egradle.importWizards.rootProjectImport"
+            class="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard"
+            id="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
          <description>
-            Import a file from the local file system into the workspace.
+            Import gradle root project with all sub projects
          </description>
       </wizard>
    </extension>
-   -->
     <!--
    <extension
          point="org.eclipse.ui.popupMenus">
