@@ -27,13 +27,16 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
+import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.ResourceHelper;
 
@@ -122,7 +125,11 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 
 	@Override
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
-		notNull(targetFolder, "'targetFolder' may not be null");
+		if (targetFolder==null){
+			String message = "Cannot create link for file"+file+", because target folder is null!";
+			EGradleUtil.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
+			return false;
+		}
 		notNull(file, "'file' may not be null");
 		boolean creationNeeded = internalCheckIfLinkMustBeCreated(targetFolder, file);
 		if (!creationNeeded) {
@@ -167,10 +174,8 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		}
 		String fileName = file.getName();
 		boolean directory = file.isDirectory();
-		boolean isFile = file.isFile();
-		boolean isHidden= file.isHidden();
-		boolean isx = file.exists();
-		if (!isx){
+		boolean fileExists = file.exists();
+		if (!fileExists){
 			return false;
 		}
 		if (directory) {
@@ -207,15 +212,15 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		IPath path = Path.fromPortableString(file.getName());
 		try {
 			if (file.isDirectory()) {
-				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
-				r.createLinkedFolder(container, path, file);
-			} else {
 				getCreationMonitor().subTask("Create link to folder '" + file.getName() + "'");
+				r.createLinkedFolder(container, path, file);
+			} else if (file.isFile()){
+				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
 				r.createLinkedFile(container, path, file);
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
-			throw new VirtualRootProjectException("Was not able to create link to file:" + file, e);
+			EGradleUtil.log(new Status(IStatus.ERROR,Activator.PLUGIN_ID,"Was not able to create link to file:" + file, e));
 		}
 
 	}
