@@ -351,7 +351,7 @@
 			mode = "run"
 			label = "EGradle"
 			image = "icons/gradle-og.gif"
-			bannerImage = "icons/gradle-banner-image.png">
+			bannerImage = "icons/egradle-banner_128x128.png">
 		</launchGroup>
 		
 	</extension>
