@@ -62,6 +62,30 @@ subprojects {
 	testCompile library.mockito_all
   }
   
+  sourceSets {
+	  main {
+	   java {
+	    srcDir 'src/main/java'
+	    srcDir 'src/main/java-eclipse'
+	   }
+	   resources {
+	    srcDir 'src/main/res'
+	    srcDir 'srctest'
+	  // WANT TO HAVE THIS FOR project TRI for THE buildTestDoc task only
+	   }
+	  }
+	  
+      test {
+		   java {
+		    srcDir 'src/test/java'
+		    srcDir 'src/test/java-eclipse'
+		   }
+		   resources {
+		    srcDir 'src/test/res'
+		    }
+  		}
+  	}
+  
 	/* turn off doclint java 8 */
 	if (JavaVersion.current().isJava8Compatible()) {
 	        tasks.withType(Javadoc) {
