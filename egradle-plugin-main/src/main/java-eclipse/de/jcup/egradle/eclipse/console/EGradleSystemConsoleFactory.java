@@ -31,7 +31,7 @@ public class EGradleSystemConsoleFactory implements IConsoleFactory {
 	}
 
 	public EGradleSystemConsole getConsole() {
-		return findConsole("EGradle Console");
+		return findConsole("EGradle System Console");
 	}
 
 	private EGradleSystemConsole findConsole(String name) {
