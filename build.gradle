@@ -1,40 +1,30 @@
-
 buildscript {
+
   repositories {
     mavenLocal()
     jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
   }
 
   dependencies {
-    classpath 'org.akhikhl.wuff:wuff-plugin:0.0.20'
+    classpath "org.akhikhl.wuff:wuff-plugin:0.0.20"
   }
 }
 
-
 subprojects {
-  apply from: "${rootProject.projectDir}/libraries.gradle"
-  apply plugin: 'java'
-  
-  dependencies{
-  	testCompile library.junit
-	testCompile library.mockito_all
+  repositories {
+    mavenLocal()
+    jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
   }
-  
-  if(name == 'MyRcpApp')
-    apply plugin: 'org.akhikhl.wuff.eclipse-rcp-app'
-  else
-    apply plugin: 'org.akhikhl.wuff.eclipse-bundle'
+}
 
-	/* turn off doclint java 8 */
-	if (JavaVersion.current().isJava8Compatible()) {
-	        tasks.withType(Javadoc) {
-	            options.addStringOption('Xdoclint:none', '-quiet')
-	        }
-	}
-	
-	
-	wuff{
-		eclipseVersion('4.6.1') {
+apply plugin: 'org.akhikhl.wuff.eclipse-config'
+
+wuff {
+  languagePack 'de'
+  
+  eclipseVersion('4.6.1') {
 		    
 		    //extendsFrom '4.5'
 		    
@@ -59,9 +49,23 @@ subprojects {
 		
 		      languagePackTemplate '${eclipseMirror}/eclipse//technology/babel/babel_language_packs/R0.14.0/neon/BabelLanguagePack-eclipse-${language}_4.6.0.v20160813060001.zip'
 		    }
-	
-		selectedEclipseVersion = '4.6.1'
-	} 
-	
+	}
+	selectedEclipseVersion = '4.6.1'
 }
+
+subprojects {
+ apply from: "${rootProject.projectDir}/libraries.gradle"
+ apply plugin: 'java'
+  
+  dependencies{
+  	testCompile library.junit
+	testCompile library.mockito_all
+  }
+  
+	/* turn off doclint java 8 */
+	if (JavaVersion.current().isJava8Compatible()) {
+	        tasks.withType(Javadoc) {
+	            options.addStringOption('Xdoclint:none', '-quiet')
+	        }
+	}
 }
