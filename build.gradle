@@ -1,9 +1,9 @@
 buildscript {
 
   repositories {
-    mavenLocal()
+    //mavenCentral()
     jcenter()
-    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
+    mavenLocal()
   }
 
   dependencies {
@@ -13,13 +13,14 @@ buildscript {
 
 subprojects {
   repositories {
-    mavenLocal()
-    jcenter()
-    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
+  	//mavenCentral()
+  	  jcenter()
+   	mavenLocal()
   }
 }
 
-apply plugin: 'org.akhikhl.wuff.eclipse-config'
+//apply plugin: 'org.akhikhl.wuff.eclipse-config'
+apply plugin: 'org.akhikhl.wuff.eclipse-bundle'
 
 wuff {
   languagePack 'de'
@@ -51,11 +52,13 @@ wuff {
 		    }
 	}
 	selectedEclipseVersion = '4.6.1'
+	//selectedEclipseVersion = '4.5'
 }
 
 subprojects {
  apply from: "${rootProject.projectDir}/libraries.gradle"
  apply plugin: 'java'
+ apply plugin: 'org.akhikhl.wuff.eclipse-bundle'
   
   dependencies{
   	testCompile library.junit
