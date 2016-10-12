@@ -15,12 +15,15 @@
  */
 package de.jcup.egradle.eclipse.editors;
 
-import org.eclipse.jface.text.rules.IWhitespaceDetector;
+import org.eclipse.swt.graphics.RGB;
 
-public class XMLWhitespaceDetector implements IWhitespaceDetector {
+public interface GradleEditorColorConstants {
+	RGB COMMENT = new RGB(128, 128, 128);
+	RGB OTHER_KEYWORDS = new RGB(0, 128, 0);
+	RGB APPLY = new RGB(128, 128, 0);
+	RGB DEFAULT = new RGB(0, 0, 0);
 
-	@Override
-	public boolean isWhitespace(char c) {
-		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
-	}
+	RGB PROC_INSTR = new RGB(128, 128, 128);
+	RGB STRING = new RGB(0, 0, 128);
+	RGB TAG = new RGB(0, 0, 128);
 }

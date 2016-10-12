@@ -27,7 +27,7 @@ public class GradleEditor extends TextEditor {
 		super();
 		colorManager = ColorManager.instance();
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
-		setDocumentProvider(new XMLDocumentProvider());
+		setDocumentProvider(new GradleDocumentProvider());
 	}
 
 	@Override

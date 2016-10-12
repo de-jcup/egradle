@@ -19,9 +19,9 @@ import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.MultiLineRule;
 
-public class MultiCommentRule extends MultiLineRule {
+public class GradleMultiCommentRule extends MultiLineRule {
 
-	public MultiCommentRule(IToken token) {
+	public GradleMultiCommentRule(IToken token) {
 		super("/*", "*/", token);
 	}
 

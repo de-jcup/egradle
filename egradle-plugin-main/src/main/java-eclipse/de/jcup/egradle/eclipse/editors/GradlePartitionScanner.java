@@ -23,14 +23,14 @@ import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 
-public class XMLPartitionScanner extends RuleBasedPartitionScanner {
+public class GradlePartitionScanner extends RuleBasedPartitionScanner {
 	public final static String GRADLE_COMMENT = "__gradle_comment";
 	public final static String GRADLE_KEYWORD = "__gradle_keyword";
 	public static final String GRADLE_STRING = "__gradle_string";;
 	public static final String GRADLE_APPLY = "__gradle_apply";
 	public final static String XML_TAG = "__xml_tag";
 
-	public XMLPartitionScanner() {
+	public GradlePartitionScanner() {
 
 		IToken gradleComment = new Token(GRADLE_COMMENT);
 		IToken gradleKeyWord = new Token(GRADLE_KEYWORD);

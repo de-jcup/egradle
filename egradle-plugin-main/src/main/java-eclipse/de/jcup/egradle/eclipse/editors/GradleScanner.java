@@ -25,19 +25,16 @@ import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import de.jcup.egradle.eclipse.ColorManager;
 
-public class XMLTagScanner extends RuleBasedScanner {
+public class GradleScanner extends RuleBasedScanner {
 
-	public XMLTagScanner(ColorManager manager) {
-		IToken string = new Token(new TextAttribute(manager.getColor(IGradleColorConstants.STRING)));
+	public GradleScanner(ColorManager manager) {
+		IToken procInstr = new Token(new TextAttribute(manager.getColor(GradleEditorColorConstants.PROC_INSTR)));
 
-		IRule[] rules = new IRule[3];
-
-		// Add rule for double quotes
-		rules[0] = new SingleLineRule("\"", "\"", string, '\\');
-		// Add a rule for single quotes
-		rules[1] = new SingleLineRule("'", "'", string, '\\');
+		IRule[] rules = new IRule[2];
+		// Add rule for processing instructions
+		rules[0] = new SingleLineRule("<?", "?>", procInstr);
 		// Add generic whitespace rule.
-		rules[2] = new WhitespaceRule(new XMLWhitespaceDetector());
+		rules[1] = new WhitespaceRule(new GradleWhitespaceDetector());
 
 		setRules(rules);
 	}

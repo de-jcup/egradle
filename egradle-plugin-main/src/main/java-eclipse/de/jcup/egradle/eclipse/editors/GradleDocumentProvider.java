@@ -21,15 +21,15 @@ import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 
-public class XMLDocumentProvider extends FileDocumentProvider {
+public class GradleDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
-			IDocumentPartitioner partitioner = new FastPartitioner(new XMLPartitionScanner(),
-					new String[] { XMLPartitionScanner.GRADLE_KEYWORD, XMLPartitionScanner.GRADLE_APPLY,
-							XMLPartitionScanner.GRADLE_COMMENT, XMLPartitionScanner.GRADLE_STRING, });
+			IDocumentPartitioner partitioner = new FastPartitioner(new GradlePartitionScanner(),
+					new String[] { GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY,
+							GradlePartitionScanner.GRADLE_COMMENT, GradlePartitionScanner.GRADLE_STRING, });
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
 		}
