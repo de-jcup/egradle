@@ -27,7 +27,8 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
-			IDocumentPartitioner partitioner = new FastPartitioner(new GradlePartitionScanner(),
+			GradlePartitionScanner scanner = new GradlePartitionScanner();
+			IDocumentPartitioner partitioner = new FastPartitioner(scanner,
 					new String[] { GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY,
 							GradlePartitionScanner.GRADLE_COMMENT, GradlePartitionScanner.GRADLE_STRING, });
 			partitioner.connect(document);

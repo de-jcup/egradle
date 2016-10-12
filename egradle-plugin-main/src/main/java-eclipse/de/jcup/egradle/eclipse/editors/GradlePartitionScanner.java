@@ -45,7 +45,7 @@ public class GradlePartitionScanner extends RuleBasedPartitionScanner {
 		rules[index++] = new SingleLineRule("//", "", gradleComment);
 		rules[index++] = new PatternRule("dependencies", " ", gradleKeyWord, ' ', true);
 		rules[index++] = new PatternRule("task", " ", gradleKeyWord, ' ', true);
-		rules[index++] = new PatternRule("apply", " ", gradleApplyPlugin, ' ', true);
+		rules[index++] = new PatternRule("xapply", null, gradleApplyPlugin, ' ', true);
 		rules[index++] = new MultiLineRule("\"", "\"", gradleString);
 		rules[index++] = new MultiLineRule("\'", "\'", gradleString);
 
