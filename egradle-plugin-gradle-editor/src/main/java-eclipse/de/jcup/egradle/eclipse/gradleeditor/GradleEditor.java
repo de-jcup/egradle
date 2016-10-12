@@ -13,14 +13,27 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.jface.text.rules.IWhitespaceDetector;
+import org.eclipse.ui.editors.text.TextEditor;
 
-public class GradleWhitespaceDetector implements IWhitespaceDetector {
+import de.jcup.egradle.eclipse.api.ColorManager;
+
+public class GradleEditor extends TextEditor {
+
+	private ColorManager colorManager;
+
+	public GradleEditor() {
+		super();
+		colorManager = ColorManager.instance();
+		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
+		setDocumentProvider(new GradleDocumentProvider());
+	}
 
 	@Override
-	public boolean isWhitespace(char c) {
-		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+	public void dispose() {
+		colorManager.dispose();
+		super.dispose();
 	}
+
 }

@@ -13,14 +13,14 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextViewer;
 
-public class GradleDoubleClickStrategy implements ITextDoubleClickStrategy {
+public class GradleEditorDoubleClickStrategy implements ITextDoubleClickStrategy {
 	protected ITextViewer fText;
 
 	@Override

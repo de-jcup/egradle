@@ -61,17 +61,6 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          EDITOR                                      -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            name="EGradle Editor"
-            extensions="gradle"
-            icon="icons/gradle-og.gif"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
-            class="de.jcup.egradle.eclipse.editors.GradleEditor"
-            id="egradle.editors.GradleEditor">
-      </editor>
-   </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

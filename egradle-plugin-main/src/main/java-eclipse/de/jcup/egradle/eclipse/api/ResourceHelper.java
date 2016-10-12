@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static org.apache.commons.lang3.Validate.*;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -39,7 +39,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
-import org.junit.FixMethodOrder;
 
 public class ResourceHelper {
 	public static ResourceHelper SHARED = new ResourceHelper(FileHelper.SHARED);

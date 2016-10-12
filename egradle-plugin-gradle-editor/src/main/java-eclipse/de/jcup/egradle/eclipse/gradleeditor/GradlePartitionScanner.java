@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
@@ -28,7 +28,6 @@ public class GradlePartitionScanner extends RuleBasedPartitionScanner {
 	public final static String GRADLE_KEYWORD = "__gradle_keyword";
 	public static final String GRADLE_STRING = "__gradle_string";;
 	public static final String GRADLE_APPLY = "__gradle_apply";
-	public final static String XML_TAG = "__xml_tag";
 
 	public GradlePartitionScanner() {
 

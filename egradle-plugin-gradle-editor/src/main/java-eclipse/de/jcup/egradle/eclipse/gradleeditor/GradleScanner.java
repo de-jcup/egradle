@@ -13,28 +13,20 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;
-import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
-import org.eclipse.jface.text.rules.SingleLineRule;
-import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
-import de.jcup.egradle.eclipse.ColorManager;
+import de.jcup.egradle.eclipse.api.ColorManager;
+
 
 public class GradleScanner extends RuleBasedScanner {
 
 	public GradleScanner(ColorManager manager) {
-		IToken procInstr = new Token(new TextAttribute(manager.getColor(GradleEditorColorConstants.PROC_INSTR)));
-
-		IRule[] rules = new IRule[2];
-		// Add rule for processing instructions
-		rules[0] = new SingleLineRule("<?", "?>", procInstr);
-		// Add generic whitespace rule.
-		rules[1] = new WhitespaceRule(new GradleWhitespaceDetector());
+		IRule[] rules = new IRule[1];
+		rules[0] = new WhitespaceRule(new GradleWhitespaceDetector());
 
 		setRules(rules);
 	}

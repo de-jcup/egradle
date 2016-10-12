@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
@@ -25,10 +25,10 @@ import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
-import de.jcup.egradle.eclipse.ColorManager;
+import de.jcup.egradle.eclipse.api.ColorManager;
 
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
-	private GradleDoubleClickStrategy doubleClickStrategy;
+	private GradleEditorDoubleClickStrategy doubleClickStrategy;
 	private GradleStringScanner tagScanner;
 	private GradleScanner scanner;
 	private ColorManager colorManager;
@@ -40,22 +40,21 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		return new String[] { IDocument.DEFAULT_CONTENT_TYPE, GradlePartitionScanner.GRADLE_COMMENT,
-				GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY, GradlePartitionScanner.GRADLE_STRING,
-				GradlePartitionScanner.XML_TAG };
+				GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY,
+				GradlePartitionScanner.GRADLE_STRING };
 	}
 
 	@Override
 	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
 		if (doubleClickStrategy == null)
-			doubleClickStrategy = new GradleDoubleClickStrategy();
+			doubleClickStrategy = new GradleEditorDoubleClickStrategy();
 		return doubleClickStrategy;
 	}
 
 	protected GradleScanner getXMLScanner() {
 		if (scanner == null) {
 			scanner = new GradleScanner(colorManager);
-			scanner.setDefaultReturnToken(
-					new Token(new TextAttribute(colorManager.getColor(GradleEditorColorConstants.DEFAULT))));
+			scanner.setDefaultReturnToken(new Token(new TextAttribute(colorManager.getColor(ColorConstants.DEFAULT))));
 		}
 		return scanner;
 	}
@@ -63,8 +62,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	protected GradleStringScanner getXMLTagScanner() {
 		if (tagScanner == null) {
 			tagScanner = new GradleStringScanner(colorManager);
-			tagScanner.setDefaultReturnToken(
-					new Token(new TextAttribute(colorManager.getColor(GradleEditorColorConstants.TAG))));
+			tagScanner.setDefaultReturnToken(new Token(new TextAttribute(colorManager.getColor(ColorConstants.TAG))));
 		}
 		return tagScanner;
 	}
@@ -73,28 +71,26 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 
-		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getXMLTagScanner());
-		reconciler.setDamager(dr, GradlePartitionScanner.XML_TAG);
-		reconciler.setRepairer(dr, GradlePartitionScanner.XML_TAG);
+		DefaultDamagerRepairer dr = null;
+		NonRuleBasedDamagerRepairer ndr = null;
 
 		dr = new DefaultDamagerRepairer(getXMLScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 
-		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(
-				new TextAttribute(colorManager.getColor(GradleEditorColorConstants.COMMENT)));
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.COMMENT)));
 		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_COMMENT);
 		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_COMMENT);
 
-		ndr = new NonRuleBasedDamagerRepairer(
-				new TextAttribute(colorManager.getColor(GradleEditorColorConstants.OTHER_KEYWORDS)));
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.OTHER_KEYWORDS)));
 		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_KEYWORD);
 		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_KEYWORD);
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(GradleEditorColorConstants.APPLY)));
+
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.APPLY)));
 		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_APPLY);
 		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_APPLY);
 
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(GradleEditorColorConstants.STRING)));
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.STRING)));
 		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_STRING);
 		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_STRING);
 

@@ -13,27 +13,17 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.swt.graphics.RGB;
 
-import de.jcup.egradle.eclipse.ColorManager;
+public interface ColorConstants {
+	RGB COMMENT = new RGB(128, 128, 128);
+	RGB OTHER_KEYWORDS = new RGB(0, 128, 0);
+	RGB APPLY = new RGB(128, 128, 0);
+	RGB DEFAULT = new RGB(0, 0, 0);
 
-public class GradleEditor extends TextEditor {
-
-	private ColorManager colorManager;
-
-	public GradleEditor() {
-		super();
-		colorManager = ColorManager.instance();
-		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
-		setDocumentProvider(new GradleDocumentProvider());
-	}
-
-	@Override
-	public void dispose() {
-		colorManager.dispose();
-		super.dispose();
-	}
-
+	RGB PROC_INSTR = new RGB(128, 128, 128);
+	RGB STRING = new RGB(0, 0, 128);
+	RGB TAG = new RGB(0, 0, 128);
 }

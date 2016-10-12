@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          EDITOR                                      -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="EGradle Editor"
+            extensions="gradle"
+            icon="icons/gradle-og.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"
+            id="egradle.editors.GradleEditor">
+      </editor>
+   </extension>
+    <extension
+      point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+      <target
+        id="de.jcup.egradle.eclipse.gradleeditor.applyfromhyperlinktarget"
+        name="Gradle Editor">
+        <context type="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"/>
+      </target>
+    </extension>
+   
+   <extension point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector            
+            class="de.jcup.egradle.eclipse.gradleeditor.ApplyFromlHyperlinkDetector"
+            id="de.jcup.egradle.eclipse.editors.EGradleEditorApplyFromlHyperlinkDetector"
+            name="Gradle editor Apply from hyperlink detector"
+            targetId="de.jcup.egradle.eclipse.gradleeditor.applyfromhyperlinktarget">
+      </hyperlinkDetector>
+    </extension>
+	
+</plugin>

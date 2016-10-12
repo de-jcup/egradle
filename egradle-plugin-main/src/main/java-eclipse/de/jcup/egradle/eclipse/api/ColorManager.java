@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse;
+package de.jcup.egradle.eclipse.api;
 
 import java.util.HashMap;
 import java.util.Iterator;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.editors;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;
@@ -23,12 +23,13 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
-import de.jcup.egradle.eclipse.ColorManager;
+import de.jcup.egradle.eclipse.api.ColorManager;
+
 
 public class GradleStringScanner extends RuleBasedScanner {
 
 	public GradleStringScanner(ColorManager manager) {
-		IToken string = new Token(new TextAttribute(manager.getColor(GradleEditorColorConstants.STRING)));
+		IToken string = new Token(new TextAttribute(manager.getColor(ColorConstants.STRING)));
 
 		IRule[] rules = new IRule[3];
 

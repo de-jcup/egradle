@@ -29,7 +29,7 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 
-import de.jcup.egradle.eclipse.ColorManager;
+import de.jcup.egradle.eclipse.api.ColorManager;
 
 public class EGradleConsoleStyleListener implements LineStyleListener {
 	private final static Collection<ParseData> SHARED_PARSE_DATA = new ArrayList<>();
