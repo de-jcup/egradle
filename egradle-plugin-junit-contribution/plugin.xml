@@ -17,6 +17,24 @@
             class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportAllGradleJunitResultsHandler">
       </handler>
    </extension>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          POPUP MENUE                                 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            id="egradle.contribution1">
+         <action
+         	   icon="icons/importGradleTestsToEclipseView.png"
+   			   label="Import all Junit test results"
+               class="de.jcup.egradle.eclipse.junit.contribution.popup.actions.ImportAllGradleJunitResultsAction"
+               menubarPath="egradle.menu1/group1"
+               enablesFor="1"
+               id="egradle.popup.refresh">
+         </action>
+      </objectContribution>
+   </extension>
    <!--
    <extension
          point="org.eclipse.ui.bindings">

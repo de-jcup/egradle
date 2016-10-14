@@ -221,31 +221,44 @@
       </wizard>
    </extension>
    -->
-    <!--
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--        POPUP - FIXME 2016-10-14: old ontribution way, use new one    -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
+            objectClass="org.eclipse.core.resources.IProject"
             id="egradle.contribution1">
          <menu
                icon="icons/gradle-og.gif"
                id="egradle.menu1"
-               label="Gradle"
+               label="EGradle"
                path="additions">
+               
             <separator
                   name="group1">
             </separator>
          </menu>
          <action
-               label="My gradle action(TBD)"
-               class="de.jcup.egradle.eclipse.popup.actions.EGradleAction"
+   			   label="Refresh all eclipse parts"
+   			   icon="icons/refreshAllEclipseDependencies.png"
+               class="de.jcup.egradle.eclipse.popup.actions.EGradleRefreshEclipseAction"
                menubarPath="egradle.menu1/group1"
                enablesFor="1"
-               id="egradle.newAction">
+               id="egradle.popup.refresh">
+         </action>
+         <action
+   			   label="Recreate Virtual Root Project"
+   			   icon="icons/updateOrCreateVirtualRootProject.png"
+               class="UpdateOrCreateVirtualRootProjectAction"
+               menubarPath="egradle.menu1/group1"
+               enablesFor="1"
+               id="egradle.popup.refresh">
          </action>
       </objectContribution>
    </extension>
-    -->
+   
+    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

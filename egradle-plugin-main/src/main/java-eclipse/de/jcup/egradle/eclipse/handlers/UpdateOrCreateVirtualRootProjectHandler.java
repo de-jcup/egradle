@@ -24,7 +24,8 @@ import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
-
+	public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
+	
 	private boolean running=false;
 	
 	@Override

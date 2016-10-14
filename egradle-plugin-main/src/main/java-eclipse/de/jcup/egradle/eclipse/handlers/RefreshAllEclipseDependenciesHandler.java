@@ -31,6 +31,8 @@ import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
  */
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
+	public static final String COMMAND_ID = "egradle.commands.refreshEclipse";
+	
 	@Override
 	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);

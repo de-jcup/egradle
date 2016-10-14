@@ -16,41 +16,39 @@
 package de.jcup.egradle.eclipse.popup.actions;
 
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.ui.services.IServiceLocator;
 
-public class EGradleAction implements IObjectActionDelegate {
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 
-	private Shell shell;
+/**
+ * Workaround to get a action running a command - a little bit ugly, but currently I didn't find another way for popup adding.
+ * @author Albert Tregnaghi
+ *
+ */
+public abstract class CommandActionDelegate implements IObjectActionDelegate {
 
-	/**
-	 * Constructor for Action1.
-	 */
-	public EGradleAction() {
-		super();
-	}
-
-	/**
-	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
-	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-		shell = targetPart.getSite().getShell();
 	}
 
-	/**
-	 * @see IActionDelegate#run(IAction)
-	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(shell, "EGradle", "My gradle action(TBD) was executed.");
+
+		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
+		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
+
+		try {
+			handlerService.executeCommand(getCommandId(), null);
+		} catch (Exception e) {
+			EGradleUtil.log(e);
+		}
 	}
 
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
-	 */
+	protected abstract String getCommandId();
+	
 	public void selectionChanged(IAction action, ISelection selection) {
 	}
 
