@@ -22,7 +22,7 @@ public interface ProcessExecutor {
 	public static final Integer PROCESS_RESULT_OK = Integer.valueOf(0);
 
 	/**
-	 * Execute commands in given working directory
+	 * Execute commands in given working directory. Is done in same thread. Will wait until execution result is available (process terminates...)
 	 * 
 	 * @param wdProvider
 	 * @param envProvider 

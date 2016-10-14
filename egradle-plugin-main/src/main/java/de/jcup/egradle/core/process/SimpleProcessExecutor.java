@@ -97,8 +97,8 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		
 		/* wait for execution */
 		try {
-			while (p.isAlive()){
-				p.waitFor(3,TimeUnit.SECONDS);
+			while (isAlive(p)){
+				waitFor(p);
 			}
 		} catch (InterruptedException e) {
 			/* ignore */
@@ -107,6 +107,14 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		int exitValue = p.exitValue();
 		handleProcessEnd(p);
 		return exitValue;
+	}
+
+	void waitFor(Process p) throws InterruptedException {
+		p.waitFor(3,TimeUnit.SECONDS);
+	}
+
+	boolean isAlive(Process p) {
+		return p.isAlive();
 	}
 
 	Process startProcess(ProcessBuilder pb) throws IOException {
@@ -125,7 +133,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 		@Override
 		public void run() {
-			while (process.isAlive()) {
+			while (isAlive(process)) {
 				if (cancelStateProvider.isCanceled()){
 					handler.output(MESSAGE__EXECUTION_CANCELED_BY_USER);
 					process.destroy();
@@ -137,7 +145,6 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 					/* ignore */
 				}
 			}
-			
 		}
 	}
 	
