@@ -49,6 +49,10 @@ public class GradleContext implements EnvironmentProvider{
 
 	private String[] options;
 
+	private Object cancelStateProvier;
+
+	private CancelStateProvider cancelStateProvider;
+
 	public GradleContext(GradleRootProject rootProject, GradleConfiguration configuration) {
 		notNull(rootProject, "root project may not be null!");
 		notNull(configuration, "'configuration' may not be null");
@@ -144,5 +148,24 @@ public class GradleContext implements EnvironmentProvider{
 			options=new String[]{};
 		}
 		return options;
+	}
+
+	public boolean isCanceled() {
+		return getCancelStateProvider().isCanceled();
+	}
+
+	/**
+	 * Registers new  cancel state provider - old one will be replaced
+	 * @param provider
+	 */
+	public void register(CancelStateProvider provider) {
+		this.cancelStateProvider = provider;
+	}
+	
+	protected CancelStateProvider getCancelStateProvider() {
+		if (cancelStateProvider==null){
+			cancelStateProvider=CancelStateProvider.NEVER_CANCELED;
+		}
+		return cancelStateProvider;
 	}
 }

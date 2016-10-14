@@ -31,24 +31,66 @@ public class GradleContextTest {
 
 	@Before
 	public void before() {
-		rootProject=mock(GradleRootProject.class);
-		configuration=mock(GradleConfiguration.class);
+		rootProject = mock(GradleRootProject.class);
+		configuration = mock(GradleConfiguration.class);
 		contextToTest = new GradleContext(rootProject, configuration);
 	}
-	
+
 	@Test
 	public void environment_is_not_null() {
 		assertNotNull(contextToTest.getEnvironment());
 	}
-	
+
 	@Test
 	public void gradleProperties_are_not_null() {
 		assertNotNull(contextToTest.getGradleProperties());
 	}
-	
+
 	@Test
 	public void systemProperties_are_not_null() {
 		assertNotNull(contextToTest.getSystemProperties());
+	}
+
+	@Test
+	public void when_cancelStateProvider_not_set_the_context_returns_false_for_is_canceled() {
+		assertFalse(contextToTest.isCanceled());
+	}
+
+	@Test
+	public void when_cancelStateProvider_returns_true_the_context_returns_also_true_for_is_canceled() {
+
+		/* prepare */
+		CancelStateProvider provider = new CancelStateProvider() {
+
+			@Override
+			public boolean isCanceled() {
+				return true;
+			}
+
+		};
+		contextToTest.register(provider);
+
+		/* test */
+		assertTrue(contextToTest.isCanceled());
+
+	}
+
+	@Test
+	public void when_cancelStateProvider_returns_false_the_context_returns_also_false_for_is_canceled() {
+
+		/* prepare */
+		CancelStateProvider provider = new CancelStateProvider() {
+
+			@Override
+			public boolean isCanceled() {
+				return false;
+			}
+
+		};
+		contextToTest.register(provider);
+
+		/* test */
+		assertFalse(contextToTest.isCanceled());
 	}
 
 }
