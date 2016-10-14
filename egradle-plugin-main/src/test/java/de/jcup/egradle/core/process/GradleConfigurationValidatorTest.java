@@ -129,9 +129,14 @@ public class GradleConfigurationValidatorTest {
 		/* prepare */
 		File userHome = new File(System.getProperty("user.home"));
 		File subFolder = new File(userHome, ".egradle-test-fakegradle-exists");
+		if (!subFolder.exists()){
+			assertTrue("Test execution corrupt?!?!", subFolder.mkdirs());
+		}
 		subFolder.deleteOnExit();
-		assertTrue("Test execution corrupt?!?!", subFolder.mkdirs());
 		File gradleFake = new File(subFolder, "gradlewdeluxe.bat");
+		if (gradleFake.exists()){
+			assertTrue("Gradle fake file exists and cannot be created", gradleFake.delete());
+		}
 		assertTrue("Test execution corrupt?!?!", gradleFake.createNewFile());
 		gradleFake.deleteOnExit();
 
