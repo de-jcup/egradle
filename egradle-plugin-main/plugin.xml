@@ -271,7 +271,7 @@
 	   <consoleFactory
 	         class="de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory"
 	         icon="icons/gradle-og.gif"
-	         label="EGradle system console">
+	         label="EGradle System Console">
 	   </consoleFactory>
    </extension>
   <extension point="org.eclipse.ui.console.consolePageParticipants">

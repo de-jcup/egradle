@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EGradle
+Bundle-Name: EGradle branding
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.branding;singleton:=true
 Bundle-Version: 0.8.1.beta
 Bundle-Vendor: Albert Tregnaghi
