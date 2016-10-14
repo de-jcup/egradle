@@ -22,6 +22,7 @@ import java.util.TreeMap;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.process.EnvironmentProvider;
+import de.jcup.egradle.core.process.ProcessContext;
 
 /**
  * Contains information about gradle parts. E.g. root project, system properties
@@ -30,7 +31,7 @@ import de.jcup.egradle.core.process.EnvironmentProvider;
  * @author Albert Tregnaghi
  *
  */
-public class GradleContext implements EnvironmentProvider{
+public class GradleContext implements EnvironmentProvider, ProcessContext{
 
 	private GradleRootProject rootProject;
 
@@ -48,8 +49,6 @@ public class GradleContext implements EnvironmentProvider{
 	public int amountOfWorkToDo = 1;
 
 	private String[] options;
-
-	private Object cancelStateProvier;
 
 	private CancelStateProvider cancelStateProvider;
 
@@ -150,10 +149,6 @@ public class GradleContext implements EnvironmentProvider{
 		return options;
 	}
 
-	public boolean isCanceled() {
-		return getCancelStateProvider().isCanceled();
-	}
-
 	/**
 	 * Registers new  cancel state provider - old one will be replaced
 	 * @param provider
@@ -162,7 +157,7 @@ public class GradleContext implements EnvironmentProvider{
 		this.cancelStateProvider = provider;
 	}
 	
-	protected CancelStateProvider getCancelStateProvider() {
+	public CancelStateProvider getCancelStateProvider() {
 		if (cancelStateProvider==null){
 			cancelStateProvider=CancelStateProvider.NEVER_CANCELED;
 		}

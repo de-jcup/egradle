@@ -26,9 +26,10 @@ public interface ProcessExecutor {
 	 * 
 	 * @param wdProvider
 	 * @param envProvider 
+	 * @param processContext TODO
 	 * @param commands
 	 * @return result code
 	 * @throws IOException
 	 */
-	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envProvider, String... commands) throws IOException;
+	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envProvider, ProcessContext processContext, String... commands) throws IOException;
 }

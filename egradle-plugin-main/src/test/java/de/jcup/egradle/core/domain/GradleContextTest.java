@@ -20,20 +20,24 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.domain.CancelStateProvider.NeverCanceled;
 
 public class GradleContextTest {
 
 	private GradleConfiguration configuration;
 	private GradleRootProject rootProject;
 	private GradleContext contextToTest;
+	private CancelStateProvider mockedCancelStateProvider;
 
 	@Before
 	public void before() {
 		rootProject = mock(GradleRootProject.class);
 		configuration = mock(GradleConfiguration.class);
 		contextToTest = new GradleContext(rootProject, configuration);
+		mockedCancelStateProvider = mock(CancelStateProvider.class);
 	}
 
 	@Test
@@ -52,45 +56,22 @@ public class GradleContextTest {
 	}
 
 	@Test
-	public void when_cancelStateProvider_not_set_the_context_returns_false_for_is_canceled() {
-		assertFalse(contextToTest.isCanceled());
-	}
+	public void registered_cancelstate_provicer_is_returned() {
 
-	@Test
-	public void when_cancelStateProvider_returns_true_the_context_returns_also_true_for_is_canceled() {
-
-		/* prepare */
-		CancelStateProvider provider = new CancelStateProvider() {
-
-			@Override
-			public boolean isCanceled() {
-				return true;
-			}
-
-		};
-		contextToTest.register(provider);
+		contextToTest.register(mockedCancelStateProvider);
 
 		/* test */
-		assertTrue(contextToTest.isCanceled());
-
+		assertEquals(mockedCancelStateProvider, contextToTest.getCancelStateProvider());
 	}
-
+	
 	@Test
-	public void when_cancelStateProvider_returns_false_the_context_returns_also_false_for_is_canceled() {
-
-		/* prepare */
-		CancelStateProvider provider = new CancelStateProvider() {
-
-			@Override
-			public boolean isCanceled() {
-				return false;
-			}
-
-		};
-		contextToTest.register(provider);
-
-		/* test */
-		assertFalse(contextToTest.isCanceled());
+	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_not_null(){
+		assertNotNull(contextToTest.getCancelStateProvider());
+	}
+	
+	@Test
+	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_returns_a_never_canceld_instance(){
+		assertTrue(contextToTest.getCancelStateProvider() instanceof NeverCanceled);
 	}
 
 }

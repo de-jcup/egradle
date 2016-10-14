@@ -38,6 +38,7 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.preferences.PreferenceConstants;
+import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
 
 /**
  * Execution delegate, used by {@link GradleJob} and
@@ -154,6 +155,8 @@ public class GradleExecutionDelegate {
 			if (monitor.isCanceled()) {
 				return;
 			}
+			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
+			context.register(cancelStateProvider);
 			result = executor.execute(context);
 			if (result.isOkay()) {
 				systemConsoleOutputHandler.output("[OK]");

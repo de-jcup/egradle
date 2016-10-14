@@ -38,13 +38,13 @@ public class SimpleProcessExecutorTestUI {
 		System.out.println("test1");
 //		executorToTest.execute(config, context, "bash", "gradlew", "cleanEclipse", "eclipse");
 		System.out.println("test2");
-		executorToTest.execute(config, context, "cmd.exe", "/C", "gradlew.bat", "cleanEclipse", "eclipse");
+		executorToTest.execute(config, context, context, "cmd.exe", "/C", "gradlew.bat", "cleanEclipse", "eclipse");
 	
 		System.out.println("test3");
-		executorToTest.execute(config, context, "cmd.exe", "/C");
+		executorToTest.execute(config, context, context, "cmd.exe", "/C");
 		
 		System.out.println("test4");
-		int result = executorToTest.execute(config, context, "cmd.exe");
+		int result = executorToTest.execute(config, context, context, "cmd.exe");
 		System.out.println(result);
 	}
 }

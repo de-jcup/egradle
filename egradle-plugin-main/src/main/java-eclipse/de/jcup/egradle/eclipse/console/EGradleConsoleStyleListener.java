@@ -29,6 +29,7 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 
+import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.ColorManager;
 
 public class EGradleConsoleStyleListener implements LineStyleListener {
@@ -93,7 +94,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 				handled=true;
 			}
 		}
-		
+		handled = markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER,  BRIGHT_BLUE, true, BLUE,false);
 		handled = markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED,false);
 		handled = markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
 		handled = markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);

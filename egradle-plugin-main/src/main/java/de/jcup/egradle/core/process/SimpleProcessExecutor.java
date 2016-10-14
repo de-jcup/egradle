@@ -24,12 +24,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+
+import de.jcup.egradle.core.domain.CancelStateProvider;
 
 public class SimpleProcessExecutor implements ProcessExecutor {
 
 	
+	public static final String MESSAGE__EXECUTION_CANCELED_BY_USER = "[Execution CANCELED by user]";
 	public static final int ENDLESS_RUNNING=0;
 	protected OutputHandler handler;
 	private boolean handleProcessOutputStream;
@@ -38,17 +42,19 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	 * Simple process executor implementation
 	 * @param outputHandler handle process information output
 	 * @param handleProcessOutputStream when true process output stream will be fetched and handled by given {@link OutputHandler} too
-	 * @param timeOutInSeconds - time out in seconds
+	 * @param timeOutInSeconds - time out in seconds,  0 = endless running
 	 */
 	public SimpleProcessExecutor(OutputHandler outputHandler, boolean handleProcessOutputStream, int timeOutInSeconds) {
-		notNull(outputHandler, "'streamHandler' may not be null");
+		if (outputHandler==null){
+			outputHandler= OutputHandler.NO_OUTPUT;
+		}
 		this.handler = outputHandler;
 		this.handleProcessOutputStream=handleProcessOutputStream;
 		this.timeOutInSeconds = timeOutInSeconds;
 	}
 
 	@Override
-	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envProvider, String... commands) throws IOException {
+	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envProvider, ProcessContext processContext, String... commands) throws IOException {
 		notNull(wdProvider, "'wdProvider' may not be null");
 		notNull(envProvider, "'envProvider' may not be null");
 		String wd = wdProvider.getWorkingDirectory();
@@ -77,16 +83,23 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		pb.redirectErrorStream(true);
 
 		Date started = new Date();
-		Process p = pb.start();
+		Process p = startProcess(pb);
 		if (timeOutInSeconds!=ENDLESS_RUNNING){
-			new Thread(new ProcessTimeoutTerminator(p), "process-timeout-terminator").start();
+			Thread timeoutCheckThread = new Thread(new ProcessTimeoutTerminator(p), "process-timeout-terminator");
+			timeoutCheckThread.start();
 		}
+		ProcessCancelTerminator cancelTerminator = new ProcessCancelTerminator(p, processContext.getCancelStateProvider());
+		Thread cancelCheckThread = new Thread(cancelTerminator,"process-cancel-terminator");
+		cancelCheckThread.start();
+		
 		handleProcessStarted(envProvider, p, started, workingDirectory, commands);
-		handleOutputStreams(p);
+		handleOutputStreams(p, processContext.getCancelStateProvider());
 		
 		/* wait for execution */
 		try {
-			p.waitFor();
+			while (p.isAlive()){
+				p.waitFor(3,TimeUnit.SECONDS);
+			}
 		} catch (InterruptedException e) {
 			/* ignore */
 		}
@@ -94,6 +107,38 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		int exitValue = p.exitValue();
 		handleProcessEnd(p);
 		return exitValue;
+	}
+
+	Process startProcess(ProcessBuilder pb) throws IOException {
+		return pb.start();
+	}
+
+	class ProcessCancelTerminator implements Runnable{
+		static final int TIME_TO_WAIT_FOR_NEXT_CANCEL_CHECK = 200;
+		private Process process;
+		private CancelStateProvider cancelStateProvider;
+
+		public ProcessCancelTerminator(Process p, CancelStateProvider provider){
+			this.process=p;
+			this.cancelStateProvider= provider;
+		}
+
+		@Override
+		public void run() {
+			while (process.isAlive()) {
+				if (cancelStateProvider.isCanceled()){
+					handler.output(MESSAGE__EXECUTION_CANCELED_BY_USER);
+					process.destroy();
+					break;
+				}
+				try {
+					Thread.sleep(TIME_TO_WAIT_FOR_NEXT_CANCEL_CHECK);
+				} catch (InterruptedException e) {
+					/* ignore */
+				}
+			}
+			
+		}
 	}
 	
 	private class ProcessTimeoutTerminator implements Runnable{
@@ -116,9 +161,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 				if (timeOutInSeconds!=ENDLESS_RUNNING){
 					long timeAlive = System.currentTimeMillis()-timeStarted;
 					if (timeAlive>timeOutInMillis){
-						if (handler!=null){
-							handler.output("Timeout reached ("+timeOutInSeconds+" seconds) - destroy process");
-						}
+						handler.output("Timeout reached ("+timeOutInSeconds+" seconds) - destroy process");
 						process.destroy();
 						break;
 					}
@@ -129,13 +172,16 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		
 	}
 	
-	protected void handleOutputStreams(Process p) throws IOException {
+	protected void handleOutputStreams(Process p, CancelStateProvider cancelStateProvider) throws IOException {
 		if (!handleProcessOutputStream){
+			return;
+		}
+		if (cancelStateProvider.isCanceled()){
 			return;
 		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String line = null;
-		while ((line = reader.readLine()) != null) {
+		while ((!cancelStateProvider.isCanceled()) && (line = reader.readLine()) != null) {
 			handler.output(line);
 		}
 		
