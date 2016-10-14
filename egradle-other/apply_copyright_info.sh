@@ -1,15 +1,20 @@
 #!/bin/bash
-cd ..
+RED='\033[0;31m'
+LIGHT_RED='\033[1;31m'
+LIGHT_GREEN='\033[1;32m'
+BROWN='\033[0;33m'
+NC='\033[0m' # No Color
+
+cd .. -> /dev/null
+echo 
+echo "Start applying missing copyright information"
+echo 
 find -iname \*.java | while read file ; do
-printf "$file "
 if ! grep -q Copyright $file
   then
-    printf " - appending copyright.\n"
+    echo -e "${BROWN}$file${NC} - ${LIGHT_GREEN}appending copyright.${NC}"
 	cat egradle-other/copyright-java.txt $file >$file.new && mv $file.new $file
-	#rm $file.new -f
-	else
-	printf ".\n"
-  fi
+fi
 
 done
 cd egradle-other
