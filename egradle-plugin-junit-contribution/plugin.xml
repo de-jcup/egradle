@@ -20,20 +20,27 @@
     <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          POPUP MENUE                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IProject"
-            id="egradle.contribution1">
-         <action
-         	   icon="icons/importGradleTestsToEclipseView.png"
-   			   label="Import all Junit test results"
-               class="de.jcup.egradle.eclipse.junit.contribution.popup.actions.ImportAllGradleJunitResultsAction"
-               menubarPath="egradle.menu1/group1"
-               enablesFor="1"
-               id="egradle.popup.refresh">
-         </action>
-      </objectContribution>
+    <extension point="org.eclipse.ui.menus">
+        <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
+        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+                <command commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
+                        label="Import all Junit Test results" 
+                        icon="icons/importGradleTestsToEclipseView.png"
+                        tooltip="Import all existing gradle test results into junit view"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+        </menuContribution>
    </extension>
    <!--
    <extension

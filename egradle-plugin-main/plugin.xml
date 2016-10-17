@@ -83,7 +83,7 @@
             name="EGradle">
       </category>
       <command
-            name="Refresh all eclipse dependencies command"
+            name="Refresh all eclipse dependencies"
             categoryId="egradle.commands.category"
             id="egradle.commands.refreshEclipse">
       </command>
@@ -222,43 +222,48 @@
    </extension>
    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--        POPUP - FIXME 2016-10-14: old ontribution way, use new one    -->
+   <!--        POPUP                                                         -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IProject"
-            id="egradle.contribution1">
-         <menu
-               icon="icons/gradle-og.gif"
-               id="egradle.menu1"
-               label="EGradle"
-               path="additions">
-               
-            <separator
-                  name="group1">
-            </separator>
-         </menu>
-         <action
-   			   label="Refresh all eclipse parts"
-   			   icon="icons/refreshAllEclipseDependencies.png"
-               class="de.jcup.egradle.eclipse.popup.actions.EGradleRefreshEclipseAction"
-               menubarPath="egradle.menu1/group1"
-               enablesFor="1"
-               id="egradle.popup.refresh">
-         </action>
-         <action
-   			   label="Recreate Virtual Root Project"
-   			   icon="icons/updateOrCreateVirtualRootProject.png"
-               class="UpdateOrCreateVirtualRootProjectAction"
-               menubarPath="egradle.menu1/group1"
-               enablesFor="1"
-               id="egradle.popup.refresh">
-         </action>
-      </objectContribution>
-   </extension>
    
-    
+    <extension point="org.eclipse.ui.menus">
+        <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
+        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+                <command commandId="egradle.commands.updateOrCreateVirtualRootProject"
+                        label="Recreate Virtual Root Project" 
+                        tooltip="Recreates the complete virtual root project"
+                        icon="icons/updateOrCreateVirtualRootProject.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+                <command commandId="egradle.commands.refreshEclipse"
+                        label="Refresh eclipse dependencies" 
+                        tooltip="Refreshes all eclipse dependencies"
+                        icon="icons/refreshAllEclipseDependencies.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+        </menuContribution>
+   </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
