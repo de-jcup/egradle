@@ -13,26 +13,36 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+ package de.jcup.egradle.junit;
 
-public enum PreferenceConstants {
-	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
+public enum EGradleJUnitTestTasksType{
+	CLEAN_ALL("egradle.junit.clean.all","clean test"),
+	CLEAN_ONLY_TESTS("egradle.junit.clean.onlytests","cleanTest test"),
+	CLEAN_NOTHING("egradle.junit.clean.nothing","test");
 	
-	P_JAVA_HOME_PATH("pathJavaHome"),
-	
-	P_GRADLE_CALL_TYPE("gradleCallType"),
-	P_GRADLE_SHELL("commandShell"),
-	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
-	P_GRADLE_CALL_COMMAND("commandGradle");
-
 	private String id;
-
-	private PreferenceConstants(String id) {
-		this.id = id;
+	private String testTasks;
+	
+	EGradleJUnitTestTasksType(String id, String testTasks){
+		this.id=id;
+		this.testTasks=testTasks;
 	}
-
+	
 	public String getId() {
 		return id;
 	}
+	
+	public String getTestTasks() {
+		return testTasks;
+	}
 
+	
+	public static EGradleJUnitTestTasksType findById(String id){
+		for (EGradleJUnitTestTasksType c: values()){
+			if (c.getId().equals(id)){
+				return c;
+			}
+		}
+		return null;
+	}
 }

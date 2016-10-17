@@ -49,9 +49,17 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
-	protected Text tasksField;
 	private Text projectNameField;
 	private Text optionsField;
+	private TaskUIPartsDelegate taskUIPartsDelegate;
+	
+	public EGradleLaunchConfigurationMainTab(){
+		this.taskUIPartsDelegate = createTaskUIPartsDelegate();
+	}
+	
+	protected TaskUIPartsDelegate createTaskUIPartsDelegate(){
+		return new DefaultTaskUIPartsDelegate();
+	}
 
 	@Override
 	public void createControl(Composite parent) {
@@ -117,21 +125,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		/* ------------------------------------ */
 		/* - Tasks - */
 		/* ------------------------------------ */
-		Label taskLabel = new Label(composite, SWT.NULL);
-		taskLabel.setText("Tasks:");
-		taskLabel.setLayoutData(labelGridData);
-
-		tasksField = new Text(composite, SWT.BORDER);
-		tasksField.setLayoutData(gridDataTwoLines);
-		tasksField.addModifyListener(new ModifyListener() {
-
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setDirty(true);
-				updateLaunchConfigurationDialog();
-			}
-		});
-		tasksField.setToolTipText("Enter gradle tasks here. Separate multiple tasks with a single space character");
+		taskUIPartsDelegate.addTaskComponents(composite, labelGridData, gridDataTwoLines);
 		/* ------------------------------------ */
 		/* - Separator                        - */
 		/* ------------------------------------ */
@@ -180,10 +174,11 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 
 	}
 
+
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			tasksField.setText(configuration.getAttribute(PROPERTY_TASKS, ""));
+			taskUIPartsDelegate.setTaskFieldText(configuration);
 			projectNameField.setText(configuration.getAttribute(PROPERTY_PROJECTNAME, ""));
 			optionsField.setText(configuration.getAttribute(PROPERTY_OPTIONS, ""));
 		} catch (CoreException e) {
@@ -224,21 +219,57 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 					}
 				}
 			}
-			// IEditorPart part = page.getActiveEditor();
-			// if (part != null) {
-			// IEditorInput input = part.getEditorInput();
-			// return (IJavaElement) input.getAdapter(IJavaElement.class);
-			// }
 		}
 		return null;
 	}
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(PROPERTY_TASKS, tasksField.getText());
+		taskUIPartsDelegate.applyTasks(configuration);
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
 		configuration.setAttribute(PROPERTY_OPTIONS, optionsField.getText());
 	}
+	
+	protected abstract class TaskUIPartsDelegate{
+		protected abstract void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException;
+		protected abstract void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) ;
+		protected abstract void applyTasks(ILaunchConfigurationWorkingCopy configuration);
+	}
+	
+	protected class DefaultTaskUIPartsDelegate extends TaskUIPartsDelegate{
+		
+		protected Text tasksField;
+		
+		@Override
+		protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
+			tasksField.setText(configuration.getAttribute(PROPERTY_TASKS, ""));
+		}
+
+		@Override
+		protected void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) {
+			Label taskLabel = new Label(composite, SWT.NULL);
+			taskLabel.setText("Tasks:");
+			taskLabel.setLayoutData(labelGridData);
+
+			tasksField = new Text(composite, SWT.BORDER);
+			tasksField.setLayoutData(gridDataTwoLines);
+			tasksField.addModifyListener(new ModifyListener() {
+
+				@Override
+				public void modifyText(ModifyEvent e) {
+					setDirty(true);
+					updateLaunchConfigurationDialog();
+				}
+			});
+			tasksField.setToolTipText("Enter gradle tasks here. Separate multiple tasks with a single space character");
+		}
+		@Override
+		protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
+			configuration.setAttribute(PROPERTY_TASKS, tasksField.getText());
+		}
+		
+	}
+	
 
 	@Override
 	public Image getImage() {

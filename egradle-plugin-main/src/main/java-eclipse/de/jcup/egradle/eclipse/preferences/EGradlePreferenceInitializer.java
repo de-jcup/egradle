@@ -16,7 +16,7 @@
 package de.jcup.egradle.eclipse.preferences;
 
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
@@ -24,7 +24,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 /**
  * Class used to initialize default preference values.
  */
-public class PreferenceInitializer extends AbstractPreferenceInitializer {
+public class EGradlePreferenceInitializer extends AbstractPreferenceInitializer {
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = PREFERENCES.getPreferenceStore();

@@ -17,29 +17,33 @@ package de.jcup.egradle.eclipse.junit.contribution.launch;
 
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.junit.contribution.Activator;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
-
+import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		super.setDefaults(configuration);
-		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitLaunchShortCut.DEFAULT_TASKS);
+		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
+	}
+	
+	@Override
+	protected TaskUIPartsDelegate createTaskUIPartsDelegate() {
+		return new IgnoreTaskUIPartsDelegate();
 	}
 	
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
-		/* make tasks not editable, but focusable. So we do NOT use tasksField.setEnabled(false)! */
-		tasksField.setEditable(false);
-		tasksField.setBackground(parent.getShell().getBackground());
-		
 	}
 
 	@Override
@@ -50,6 +54,25 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 	@Override
 	public String getName() {
 		return "Gradle JUnit";
+	}
+	
+	protected class IgnoreTaskUIPartsDelegate extends TaskUIPartsDelegate{
+
+		@Override
+		protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
+			
+		}
+
+		@Override
+		protected void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) {
+			
+		}
+
+		@Override
+		protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
+			
+		}
+		
 	}
 
 }

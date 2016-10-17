@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
+import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.resources.IFile;
@@ -37,10 +38,8 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
-
+import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
-
-	public static final String DEFAULT_TASKS = "clean test";
 
 	/**
 	 * Returns the type of configuration this shortcut is applicable to.
@@ -58,14 +57,14 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		super.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
 		if (!(resource instanceof IFile)) {
-			wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS);
+			wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
 			return;
 		}
 		String fullClassName = null;
 		/* create package name for resource */
 		IFile file = (IFile) resource;
 		IJavaElement javaElement = JavaCore.create(file);
-		
+
 		if (javaElement instanceof ICompilationUnit) {
 			ICompilationUnit cu = (ICompilationUnit) javaElement;
 			try {
@@ -103,9 +102,10 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName += "." + methodName;
 			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
 		}
-		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS + " --tests " + fullClassName);
+		wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
 
 	}
+
 
 	@Override
 	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
@@ -152,7 +152,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 	@Override
 	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
 			throws CoreException {
-		
+
 		boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
 		if (candidate) {
 

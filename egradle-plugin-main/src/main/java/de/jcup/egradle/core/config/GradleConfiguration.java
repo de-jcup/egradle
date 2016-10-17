@@ -16,9 +16,9 @@
 package de.jcup.egradle.core.config;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.core.process.WorkingDirectoryProvider;
+import de.jcup.egradle.core.process.ProcessConfiguration;
 
-public interface GradleConfiguration extends WorkingDirectoryProvider {
+public interface GradleConfiguration extends ProcessConfiguration {
 
 	/**
 	 * Returns the shell to use - if wanted
