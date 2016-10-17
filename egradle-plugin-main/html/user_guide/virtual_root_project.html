@@ -20,6 +20,7 @@
 		<li><a href="#change_root_project">Changing the root project
 				in preferences</a></li>
 		<li><a href="#share_project">Version control (GIT)</a></li>
+		<li><a href="#popup-actions">Popup actions</a></li>
 		<li><a href="#restrictions">Restrictions</a></li>
 	</ul>
 	<h2 id="concept">About the concept</h2>
@@ -174,8 +175,8 @@
 	</p>
 	<br />
 	<br />
-	<h2 id="share_project">Version control (GIT)</h2>
-	Currently only GIT is supported.
+	<h2 id="share_project">Version control</h2>
+	Currently only GIT is supported out of the box.
 	<h3>GIT</h3>
 	When you call "Team - share Project..." on the virtual root project you
 	are able to
@@ -184,6 +185,16 @@
 	<br> The GIT team provider decorations and the GIT staging is done
 	as usual. Normally the virtual root project should be automatically connected to your GIT repository when 
 	it is created.
+	<h3>Other</h3>
+	<p>Simply exclude folder ".egradle" from your source versioning</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br />
+	<br />
+	<h2 id="popup-actions">Popup actions</h2>
+	<p>On virtual root project you got popup actions (same as on toolbar)</p>
+	<img src="images/egradle-virual-rootproject-popup-menu.png" />
 	<p>
 		<a href="#top">Top</a>
 	</p>
@@ -193,8 +204,11 @@
 	The files
 	<i>.gitignore</i> and
 	<i>.project</i> are NOT from root folder but from virtual root project
-	itself! If you want to change /commit these two root folder files you
+	itself! If you want to change /commit the original two root folder files you
 	must do the changes outside eclipse.
+	<p>
+	Note: <i>.gitignore</i> is not visible at all in virtual root project
+	</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>

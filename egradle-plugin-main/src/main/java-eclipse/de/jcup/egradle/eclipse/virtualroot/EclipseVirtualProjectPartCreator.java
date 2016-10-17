@@ -18,19 +18,14 @@ package de.jcup.egradle.eclipse.virtualroot;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.core.resources.FileInfoMatcherDescription;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceFilterDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -41,7 +36,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.ui.ide.ResourceSaveableFilter;
 
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
@@ -195,14 +189,14 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	}
 	/**
 	 * Check if given file should be linked inside project
-	 * @param projectItSelf
+	 * @param virtualRootProject
 	 * @param newProjectFile 
-	 * @param foldersToIgnore - a list of folders to ignore for inspection
-	 * @param targetFolder - where to create the link
-	 * @param file
+	 * @param foldersToIgnore a list of folders to ignore for inspection
+	 * @param targetFolder where to create the link
+	 * @param file - origin file/folder
 	 * @return <code>true</code> when a link candidate
 	 */
-	protected static boolean isLinkCandidate(IProject projectItSelf, File newProjectFile, List<File> foldersToIgnore, Object targetFolder, File file) {
+	protected static boolean isLinkCandidate(IProject virtualRootProject, File newProjectFile, List<File> foldersToIgnore, Object targetFolder, File file) {
 		if (newProjectFile.equals(file)){
 			/* root project cannot link to itself - infinite loop...*/
 			return false;
@@ -212,22 +206,24 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			return false;
 		}
 		String fileName = file.getName();
-		boolean directory = file.isDirectory();
+		boolean fileIsDirectory = file.isDirectory();
 		boolean fileExists = file.exists();
 		if (!fileExists){
 			return false;
 		}
-		if (directory) {
+		if (fileIsDirectory) {
 			if (FOLDERNAMES_NOT_TO_LINK.contains(fileName)) {
 				return false;
 			}
-			if (targetFolder == projectItSelf) {
+			if (targetFolder == virtualRootProject) { // inside root
 				if (foldersToIgnore.contains(file)) {
+					/* ignored - normally because eclipse project inside*/
 					return false;
 				}
+				/* okay, directory link has to be created*/
 				return true;
 			}
-			/* we do not dive into */
+			/* we do not dive into folders deeper than root folder - because links to folders does all the job*/
 			return false;
 		} else {
 			/* not a directory but a normal file */

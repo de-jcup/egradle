@@ -2,11 +2,13 @@ package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 
-	LOGGER("logger"),
+	LOGGER("logger"), 
 	
 	TASKS("tasks"),
 	
-	PROJECT("project"),
+	PROJECT("project"), // method AND variable
+	
+	PRINTLN("println"), // method
 	
 	OPTIONS("options"),
 	

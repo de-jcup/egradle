@@ -32,7 +32,7 @@ public class EGradleJUnitPreferencePage extends FieldEditorPreferencePage implem
 				getFieldEditorParent());
 
 		addField(gradleCallTypeRadioButton);
-		SWTFactory.createLabel(getFieldEditorParent(), "(This is only the new default for new created test launch configurations!)", 2);
+		SWTFactory.createLabel(getFieldEditorParent(), "(This will be used by all test launch configurations)", 2);
 	}
 
 	@Override
