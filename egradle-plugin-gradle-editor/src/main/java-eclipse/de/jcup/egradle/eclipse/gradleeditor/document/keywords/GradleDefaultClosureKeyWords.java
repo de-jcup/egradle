@@ -2,6 +2,10 @@ package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 
+	COMPILE("compile"),
+	
+	TEST_COMPILE("testCompile"),
+	
 	FROM("from"),
 	
 	INTO("into"),
@@ -20,6 +24,17 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 	
 	ARTIFACTS("artifacts"),
 	
+	TEST("test"),
+	
+	CLEAN("clean"),
+	
+	BUILDSCRIPT("buildscript"),
+	
+	FILES("files"),
+	
+	FILETREE("fileTree"),
+	
+	CONFIGURATIONS("configurations")
 	;
 
 	private String text;
