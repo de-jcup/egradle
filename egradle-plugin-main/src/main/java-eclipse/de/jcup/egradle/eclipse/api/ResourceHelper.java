@@ -23,12 +23,14 @@ import java.io.InputStream;
 import java.net.URI;
 
 import org.eclipse.core.filebuffers.manipulation.ContainerCreator;
+import org.eclipse.core.resources.FileInfoMatcherDescription;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceFilterDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -43,6 +45,7 @@ import org.junit.FixMethodOrder;
 
 public class ResourceHelper {
 	public static ResourceHelper SHARED = new ResourceHelper(FileHelper.SHARED);
+	private static String FILE_FILTER_ID = "org.eclipse.ui.ide.patternFilterMatcher"; 
 
 	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
 	private final int MAX_RETRY = 5;
@@ -54,20 +57,18 @@ public class ResourceHelper {
 	}
 
 	/**
-	 * Creates or refreshes project. If project exists but isn't opened it will
+	 * Creates or refreshes virtual root project. If project exists but isn't opened it will
 	 * be automatically opened
 	 * 
 	 * @param projectName
 	 * @param monitor
-	 * @param creationPath
-	 *            - may not be <code>null</code>
+	 * @param projectDescriptionCreator 
 	 * @param natureIds
 	 * @return project
 	 * @throws CoreException
 	 */
-	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, URI creationPath,
+	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, ProjectDescriptionCreator projectDescriptionCreator,
 			String... natureIds) throws CoreException {
-		notNull(creationPath, "'creationPath' may not be null");
 		if (monitor == null) {
 			monitor = NULL_MONITOR;
 		}
@@ -75,15 +76,7 @@ public class ResourceHelper {
 		IWorkspaceRoot root = workspace.getRoot();
 		IProject project = root.getProject(projectName);
 		if (!project.exists()) {
-			IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
-			initialDescription.setLocationURI(creationPath);
-			initialDescription.setComment(
-					"EGradle virtual root project - only a temporary project.\n"
-					+ "There are  only two files: .gitignore and .project which will be created,\n"
-					+ "all other files are just links.\n"
-					+ "\n"
-					+ "Please do NOT change these two generated files!!");
-
+			IProjectDescription initialDescription = projectDescriptionCreator.createNewProjectDescription(projectName);
 			project.create(initialDescription, monitor);
 
 		} else {
@@ -245,6 +238,12 @@ public class ResourceHelper {
 			project.open(NULL_MONITOR);
 
 		return project;
+	}
+
+	public void addFileFilter(IProject newProject, String pattern, IProgressMonitor monitor) throws CoreException {
+		FileInfoMatcherDescription matcherDescription = new FileInfoMatcherDescription(FILE_FILTER_ID, pattern);
+		/* ignore the generated files - .project and .gitignore at navigator etc. */
+		newProject.createFilter(IResourceFilterDescription.EXCLUDE_ALL | IResourceFilterDescription.FILES, matcherDescription, IResource.BACKGROUND_REFRESH, monitor);
 	}
 
 }

@@ -483,6 +483,9 @@ public class EGradleUtil {
 	 * @return <code>true</code> when project location is same as root project
 	 */
 	public static boolean isRootProject(IProject project) {
+		if (project==null){
+			return false;
+		}
 		File rootFolder = getRootProjectFolderWithoutErrorHandling();
 		if (rootFolder==null){
 			return false;
