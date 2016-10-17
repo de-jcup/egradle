@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Egradle plugin gradle editor
+Bundle-Name: Egradle editor
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.editor.gradle;singleton:=true
-Bundle-Version: 0.8.1.beta
+Bundle-Version: 0.8.3.beta
 Bundle-Activator: de.jcup.egradle.eclipse.gradleeditor.Activator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.editors,
- de.jcup.egradle.eclipse.plugin.main;bundle-version="0.8.1",
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="0.8.3",
  org.eclipse.text,
  org.eclipse.jface.text
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
