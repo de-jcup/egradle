@@ -57,9 +57,11 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.ide.ResourceUtil;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
+import de.jcup.egradle.core.api.FileUtil;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
@@ -469,6 +471,25 @@ public class EGradleUtil {
 		try {
 			virtualProjectNatureFound = project.hasNature(VirtualRootProjectNature.NATURE_ID);
 			return virtualProjectNatureFound;
+		} catch (CoreException e) {
+			/* ignore ... project not found anymore*/
+			return false;
+		}
+	}
+
+	/**
+	 * Returns true when given project is configured as root project 
+	 * @param project
+	 * @return <code>true</code> when project location is same as root project
+	 */
+	public static boolean isRootProject(IProject project) {
+		File rootFolder = getRootProjectFolderWithoutErrorHandling();
+		if (rootFolder==null){
+			return false;
+		}
+		try {
+			File projectLocation = FileHelper.SHARED.toFile(project.getLocation());
+			return rootFolder.equals(projectLocation);
 		} catch (CoreException e) {
 			/* ignore ... project not found anymore*/
 			return false;
