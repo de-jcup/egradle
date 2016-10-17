@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          PREFERENCES                                 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+      point = "org.eclipse.ui.preferencePages">
+      <page
+         id="egradle.junit.contribution.preferences.EGradleJUnitPreferencePage"
+         class="de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferencePage"
+         name="EGradle JUnit"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
+   </extension>
+    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJunitPreferenceInitializer">
+      </initializer>
+   </extension>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          COMMANDS                                    -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -17,7 +37,7 @@
             class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportAllGradleJunitResultsHandler">
       </handler>
    </extension>
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          POPUP MENUE                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <extension point="org.eclipse.ui.menus">

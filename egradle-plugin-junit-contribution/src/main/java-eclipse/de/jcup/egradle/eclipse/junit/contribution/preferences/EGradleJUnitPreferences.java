@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.junit.contribution.preferences;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -21,17 +21,17 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.eclipse.Activator;
 
-public class EGradlePreferences {
+public class EGradleJUnitPreferences {
 	
 
-	public static EGradlePreferences PREFERENCES = new EGradlePreferences();
+	public static EGradleJUnitPreferences JUNIT_PREFERENCES = new EGradleJUnitPreferences();
 	private IPreferenceStore store;
 
-	EGradlePreferences() {
+	EGradleJUnitPreferences() {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
 	}
 
-	public String getStringPreference(EGradlePreferenceConstants id) {
+	public String getStringPreference(EGradleJunitPreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
 		if (data==null){
 			data="";

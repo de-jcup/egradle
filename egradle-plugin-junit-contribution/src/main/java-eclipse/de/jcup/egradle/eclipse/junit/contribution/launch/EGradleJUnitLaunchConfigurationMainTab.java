@@ -30,7 +30,7 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		super.setDefaults(configuration);
-		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitLaunchShortCut.DEFAULT_TASKS);
+		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitLaunchShortCut.getTestTasks());
 	}
 	
 	@Override

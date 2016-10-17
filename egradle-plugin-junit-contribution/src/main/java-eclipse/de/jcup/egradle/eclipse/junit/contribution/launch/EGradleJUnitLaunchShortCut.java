@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
+import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.resources.IFile;
@@ -36,11 +37,11 @@ import de.jcup.egradle.eclipse.JavaHelper;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
+import de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitTestTasksType;
+import de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJunitPreferenceConstants;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
 
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
-
-	public static final String DEFAULT_TASKS = "clean test";
 
 	/**
 	 * Returns the type of configuration this shortcut is applicable to.
@@ -58,14 +59,14 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		super.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
 		if (!(resource instanceof IFile)) {
-			wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS);
+			wc.setAttribute(PROPERTY_TASKS, getTestTasks());
 			return;
 		}
 		String fullClassName = null;
 		/* create package name for resource */
 		IFile file = (IFile) resource;
 		IJavaElement javaElement = JavaCore.create(file);
-		
+
 		if (javaElement instanceof ICompilationUnit) {
 			ICompilationUnit cu = (ICompilationUnit) javaElement;
 			try {
@@ -103,8 +104,25 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName += "." + methodName;
 			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
 		}
-		wc.setAttribute(PROPERTY_TASKS, DEFAULT_TASKS + " --tests " + fullClassName);
+		wc.setAttribute(PROPERTY_TASKS, getTestTasks() + " --tests " + fullClassName);
 
+	}
+
+	/**
+	 * Returns test tasks configured in preferences
+	 * 
+	 * @return test tasks
+	 */
+	public static String getTestTasks() {
+		String configuredTestTaskTypeId = JUNIT_PREFERENCES
+				.getStringPreference(EGradleJunitPreferenceConstants.P_TEST_TASKS);
+		EGradleJUnitTestTasksType testTasksType = EGradleJUnitTestTasksType.findById(configuredTestTaskTypeId);
+		/* fall back */
+		if (testTasksType == null) {
+			testTasksType = EGradleJUnitTestTasksType.CLEAN_ALL;
+		}
+		String testTasks = testTasksType.getTestTasks();
+		return testTasks;
 	}
 
 	@Override
@@ -152,7 +170,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 	@Override
 	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
 			throws CoreException {
-		
+
 		boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
 		if (candidate) {
 
