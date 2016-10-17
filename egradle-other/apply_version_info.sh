@@ -112,6 +112,17 @@ done
 
 echo
 echo "###############################"
+echo "# reading about.ini files"
+echo "###############################"
+find -iname about.ini | while read file ; do 
+	echo -e "${BROWN}$file${NC}"
+	cat "$file" | \
+		sed -i 's|Version '$OLD_VERSION'|Version '$NEW_VERSION'|' "$file"
+	
+done
+
+echo
+echo "###############################"
 echo "# new feature to update site"
 echo "###############################"
 cd $EGRADLE_MAINFOLDER/egradle-updatesite
