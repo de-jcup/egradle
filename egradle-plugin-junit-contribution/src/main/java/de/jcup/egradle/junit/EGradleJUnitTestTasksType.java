@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.preferences;
+ package de.jcup.egradle.junit;
 
 public enum EGradleJUnitTestTasksType{
 	CLEAN_ALL("egradle.junit.clean.all","clean test"),

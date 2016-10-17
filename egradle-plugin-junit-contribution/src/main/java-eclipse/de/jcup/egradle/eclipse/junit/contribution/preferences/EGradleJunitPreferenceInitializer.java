@@ -3,6 +3,8 @@ package de.jcup.egradle.eclipse.junit.contribution.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
+import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
+
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 /**
  * Class used to initialize default preference values.

@@ -37,10 +37,8 @@ import de.jcup.egradle.eclipse.JavaHelper;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
-import de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitTestTasksType;
-import de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJunitPreferenceConstants;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
-
+import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 
 	/**
@@ -59,7 +57,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 		super.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
 		if (!(resource instanceof IFile)) {
-			wc.setAttribute(PROPERTY_TASKS, getTestTasks());
+			wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
 			return;
 		}
 		String fullClassName = null;
@@ -104,26 +102,10 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName += "." + methodName;
 			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
 		}
-		wc.setAttribute(PROPERTY_TASKS, getTestTasks() + " --tests " + fullClassName);
+		wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
 
 	}
 
-	/**
-	 * Returns test tasks configured in preferences
-	 * 
-	 * @return test tasks
-	 */
-	public static String getTestTasks() {
-		String configuredTestTaskTypeId = JUNIT_PREFERENCES
-				.getStringPreference(EGradleJunitPreferenceConstants.P_TEST_TASKS);
-		EGradleJUnitTestTasksType testTasksType = EGradleJUnitTestTasksType.findById(configuredTestTaskTypeId);
-		/* fall back */
-		if (testTasksType == null) {
-			testTasksType = EGradleJUnitTestTasksType.CLEAN_ALL;
-		}
-		String testTasks = testTasksType.getTestTasks();
-		return testTasks;
-	}
 
 	@Override
 	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,

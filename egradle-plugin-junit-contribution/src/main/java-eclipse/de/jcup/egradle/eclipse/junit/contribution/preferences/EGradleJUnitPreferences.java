@@ -20,6 +20,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
 
 public class EGradleJUnitPreferences {
 	
@@ -37,6 +38,21 @@ public class EGradleJUnitPreferences {
 			data="";
 		}
 		return data;
+	}
+	
+	/**
+	 * Returns default test task type configured in preferences
+	 * 
+	 * @return default test task type
+	 */
+	public EGradleJUnitTestTasksType getDefaultTestTaskType() {
+		String configuredTestTaskTypeId = getStringPreference(EGradleJunitPreferenceConstants.P_TEST_TASKS);
+		EGradleJUnitTestTasksType testTasksType = EGradleJUnitTestTasksType.findById(configuredTestTaskTypeId);
+		if (testTasksType == null) {
+			/* fall back */
+			testTasksType = EGradleJUnitTestTasksType.CLEAN_ALL;
+		}
+		return testTasksType;
 	}
 
 	public IPreferenceStore getPreferenceStore() {

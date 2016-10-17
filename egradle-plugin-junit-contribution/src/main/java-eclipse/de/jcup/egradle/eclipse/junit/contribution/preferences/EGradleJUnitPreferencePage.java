@@ -9,6 +9,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.ui.SWTFactory;
+import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
 
 public class EGradleJUnitPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 

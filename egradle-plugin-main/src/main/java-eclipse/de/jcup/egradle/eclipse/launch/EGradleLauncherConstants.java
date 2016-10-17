@@ -22,10 +22,15 @@ public interface EGradleLauncherConstants {
 	public static final String LAUNCH_ARGUMENT = "createRuntimeProcess";
 	
 	public static final String LAUNCH_POST_JOB = "launch_post_job";
+	/**
+	 * When a attribute for the key is set it overrides the normal attribute 
+	 */
+	public static final String LAUNCH_TASKS_ATTRBUTE_OVERRIDE ="launch_tasks_attribute_override";
 	
 	public static final String PROPERTY_TASKS = "tasks";
 	public static final String PROPERTY_PROJECTNAME = "projectName";
 	public static final String PROPERTY_OPTIONS = "options";
+	
 	
 	public static final String GRADLE_PROPERTIES = Activator.PLUGIN_ID+".gradleProperties";
 	public static final String SYSTEM_PROPERTIES = Activator.PLUGIN_ID+".systemProperties";
