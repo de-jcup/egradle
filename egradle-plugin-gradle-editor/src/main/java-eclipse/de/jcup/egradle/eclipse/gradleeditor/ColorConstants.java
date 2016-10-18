@@ -24,4 +24,6 @@ public interface ColorConstants {
 	RGB BLACK = new RGB(0, 0, 0);
 
 	RGB BLUE = new RGB(0, 0, 128);
+	RGB DARK_GREEN = new RGB(0,64,0);
+	RGB RED = new RGB(128,0,0);
 }

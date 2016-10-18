@@ -29,12 +29,7 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 		if (document != null) {
 			/* @formatter:off */
 			
-			String[] legalContentTypes = new String[] { 
-				GradleDocumentPartitionScanner.GRADLE_KEYWORD, 
-				GradleDocumentPartitionScanner.GRADLE_APPLY,
-				GradleDocumentPartitionScanner.GRADLE_COMMENT, 
-				GradleDocumentPartitionScanner.GRADLE_STRING, 
-				};
+			String[] legalContentTypes = GradleDocumentIdentifiers.allIdsToStringArray();
 			/* @formatter:on */
 
 			GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
