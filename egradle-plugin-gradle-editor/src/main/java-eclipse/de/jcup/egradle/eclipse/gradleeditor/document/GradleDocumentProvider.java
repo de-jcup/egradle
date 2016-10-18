@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor.document;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
@@ -27,9 +27,19 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
-			IDocumentPartitioner partitioner = new FastPartitioner(new GradlePartitionScanner(),
-					new String[] { GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY,
-							GradlePartitionScanner.GRADLE_COMMENT, GradlePartitionScanner.GRADLE_STRING, });
+			/* @formatter:off */
+			
+			String[] legalContentTypes = new String[] { 
+				GradleDocumentPartitionScanner.GRADLE_KEYWORD, 
+				GradleDocumentPartitionScanner.GRADLE_APPLY,
+				GradleDocumentPartitionScanner.GRADLE_COMMENT, 
+				GradleDocumentPartitionScanner.GRADLE_STRING, 
+				};
+			/* @formatter:on */
+
+			GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
+			IDocumentPartitioner partitioner = new FastPartitioner(scanner, legalContentTypes);
+
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
 		}

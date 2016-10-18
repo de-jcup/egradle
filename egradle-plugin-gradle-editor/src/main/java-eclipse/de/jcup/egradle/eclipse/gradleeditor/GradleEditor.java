@@ -18,6 +18,7 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import org.eclipse.ui.editors.text.TextEditor;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 
 public class GradleEditor extends TextEditor {
 

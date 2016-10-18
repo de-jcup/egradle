@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor.presentation;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.BadLocationException;
@@ -28,7 +28,7 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.swt.custom.StyleRange;
 
-public class NonRuleBasedDamagerRepairer implements IPresentationDamager, IPresentationRepairer {
+public class PresentationSupport implements IPresentationDamager, IPresentationRepairer {
 
 	/** The document this object works on */
 	protected IDocument fDocument;
@@ -38,7 +38,7 @@ public class NonRuleBasedDamagerRepairer implements IPresentationDamager, IPrese
 	 */
 	protected TextAttribute fDefaultTextAttribute;
 
-	public NonRuleBasedDamagerRepairer(TextAttribute defaultTextAttribute) {
+	public PresentationSupport(TextAttribute defaultTextAttribute) {
 		Assert.isNotNull(defaultTextAttribute);
 
 		fDefaultTextAttribute = defaultTextAttribute;
@@ -63,8 +63,9 @@ public class NonRuleBasedDamagerRepairer implements IPresentationDamager, IPrese
 	protected int endOfLineOf(int offset) throws BadLocationException {
 
 		IRegion info = fDocument.getLineInformationOfOffset(offset);
-		if (offset <= info.getOffset() + info.getLength())
+		if (offset <= info.getOffset() + info.getLength()){
 			return info.getOffset() + info.getLength();
+		}
 
 		int line = fDocument.getLineOfOffset(offset);
 		try {
@@ -88,8 +89,9 @@ public class NonRuleBasedDamagerRepairer implements IPresentationDamager, IPrese
 				if (info.getOffset() <= end && end <= info.getOffset() + info.getLength()) {
 					// optimize the case of the same line
 					end = info.getOffset() + info.getLength();
-				} else
+				} else{
 					end = endOfLineOf(end);
+				}
 
 				end = Math.min(partition.getOffset() + partition.getLength(), end);
 				return new Region(start, end - start);

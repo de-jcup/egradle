@@ -13,21 +13,14 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor.presentation;
 
-import org.eclipse.jface.text.rules.IRule;
-import org.eclipse.jface.text.rules.RuleBasedScanner;
-import org.eclipse.jface.text.rules.WhitespaceRule;
+import org.eclipse.jface.text.rules.IWhitespaceDetector;
 
-import de.jcup.egradle.eclipse.api.ColorManager;
+public class GradleWhitespaceDetector implements IWhitespaceDetector {
 
-
-public class GradleScanner extends RuleBasedScanner {
-
-	public GradleScanner(ColorManager manager) {
-		IRule[] rules = new IRule[1];
-		rules[0] = new WhitespaceRule(new GradleWhitespaceDetector());
-
-		setRules(rules);
+	@Override
+	public boolean isWhitespace(char c) {
+		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
 	}
 }

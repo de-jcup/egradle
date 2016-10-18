@@ -21,16 +21,20 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
+import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentPartitionScanner;
+import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private GradleEditorDoubleClickStrategy doubleClickStrategy;
-	private GradleStringScanner tagScanner;
-	private GradleScanner scanner;
+	private GradleDefaultTextScanner gradleScanner;
 	private ColorManager colorManager;
 
 	public GradleSourceViewerConfiguration(ColorManager colorManager) {
@@ -39,62 +43,62 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
-		return new String[] { IDocument.DEFAULT_CONTENT_TYPE, GradlePartitionScanner.GRADLE_COMMENT,
-				GradlePartitionScanner.GRADLE_KEYWORD, GradlePartitionScanner.GRADLE_APPLY,
-				GradlePartitionScanner.GRADLE_STRING };
+		/* @formatter:off */
+		return new String[] { 
+				IDocument.DEFAULT_CONTENT_TYPE, 
+				GradleDocumentPartitionScanner.GRADLE_COMMENT,
+				GradleDocumentPartitionScanner.GRADLE_KEYWORD, 
+				GradleDocumentPartitionScanner.GRADLE_APPLY,
+				GradleDocumentPartitionScanner.GRADLE_STRING };
+		/* @formatter:on */
 	}
 
 	@Override
 	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
-		if (doubleClickStrategy == null)
+		if (doubleClickStrategy == null){
 			doubleClickStrategy = new GradleEditorDoubleClickStrategy();
+		}
 		return doubleClickStrategy;
 	}
 
-	protected GradleScanner getXMLScanner() {
-		if (scanner == null) {
-			scanner = new GradleScanner(colorManager);
-			scanner.setDefaultReturnToken(new Token(new TextAttribute(colorManager.getColor(ColorConstants.DEFAULT))));
-		}
-		return scanner;
-	}
-
-	protected GradleStringScanner getXMLTagScanner() {
-		if (tagScanner == null) {
-			tagScanner = new GradleStringScanner(colorManager);
-			tagScanner.setDefaultReturnToken(new Token(new TextAttribute(colorManager.getColor(ColorConstants.TAG))));
-		}
-		return tagScanner;
-	}
 
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 
-		DefaultDamagerRepairer dr = null;
-		NonRuleBasedDamagerRepairer ndr = null;
+		addDefaultPresentation(reconciler);
 
-		dr = new DefaultDamagerRepairer(getXMLScanner());
-		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
-
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.COMMENT)));
-		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_COMMENT);
-		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_COMMENT);
-
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.OTHER_KEYWORDS)));
-		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_KEYWORD);
-		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_KEYWORD);
-
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.APPLY)));
-		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_APPLY);
-		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_APPLY);
-
-		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(colorManager.getColor(ColorConstants.STRING)));
-		reconciler.setDamager(ndr, GradlePartitionScanner.GRADLE_STRING);
-		reconciler.setRepairer(ndr, GradlePartitionScanner.GRADLE_STRING);
+		addPresentation(reconciler, GradleDocumentPartitionScanner.GRADLE_APPLY,ColorConstants.ORANGE);
+		addPresentation(reconciler, GradleDocumentPartitionScanner.GRADLE_KEYWORD,ColorConstants.GREEN);
+		addPresentation(reconciler, GradleDocumentPartitionScanner.GRADLE_COMMENT,ColorConstants.GRAY);
+		addPresentation(reconciler, GradleDocumentPartitionScanner.GRADLE_STRING,ColorConstants.BLUE);
 
 		return reconciler;
+	}
+
+	private void addDefaultPresentation(PresentationReconciler reconciler) {
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getGradleDefaultTextScanner());
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+	}
+
+	private IToken createColorToken(RGB rgb) {
+		Token token = new Token(new TextAttribute(colorManager.getColor(rgb)));
+		return token;
+	}
+	
+	private void addPresentation(PresentationReconciler reconciler, String id, RGB rgb) {
+		PresentationSupport presentation = new PresentationSupport(new TextAttribute(colorManager.getColor(rgb)));
+		reconciler.setDamager(presentation, id);
+		reconciler.setRepairer(presentation, id);
+	}
+
+	private GradleDefaultTextScanner getGradleDefaultTextScanner() {
+		if (gradleScanner == null) {
+			gradleScanner = new GradleDefaultTextScanner(colorManager);
+			gradleScanner.setDefaultReturnToken(createColorToken(ColorConstants.BLACK));
+		}
+		return gradleScanner;
 	}
 
 }
