@@ -25,6 +25,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
@@ -33,12 +34,15 @@ import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanne
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
-	private GradleEditorDoubleClickStrategy doubleClickStrategy;
+//	private GradleEditorDoubleClickStrategy doubleClickStrategy;
 	private GradleDefaultTextScanner gradleScanner;
 	private ColorManager colorManager;
 
+	private TextAttribute defaultTextAttribute;
+	
 	public GradleSourceViewerConfiguration(ColorManager colorManager) {
 		this.colorManager = colorManager;
+		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(ColorConstants.BLACK));
 	}
 
 	@Override
@@ -64,13 +68,16 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		addDefaultPresentation(reconciler);
 
-		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), ColorConstants.GREEN);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_STRING.getId(), ColorConstants.BLUE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_COMMENT.getId(), ColorConstants.GRAY);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_LINK_KEYWORD.getId(), ColorConstants.ORANGE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), ColorConstants.DARK_GREEN);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), ColorConstants.RED);
-
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(), ColorConstants.STRING_DEFAULT_BLUE,SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), ColorConstants.COMMENT_DEFAULT_GREEN,SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_LINK_KEYWORD.getId(), ColorConstants.LINK_DEFAULT_BLUE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), ColorConstants.TASK_DEFAULT_RED,SWT.BOLD|SWT.ITALIC);
+		
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), ColorConstants.GRAY,SWT.ITALIC);
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
 		return reconciler;
 	}
 
@@ -85,8 +92,9 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		return token;
 	}
 
-	private void addPresentation(PresentationReconciler reconciler, String id, RGB rgb) {
-		PresentationSupport presentation = new PresentationSupport(new TextAttribute(colorManager.getColor(rgb)));
+	private void addPresentation(PresentationReconciler reconciler, String id, RGB rgb, int style) {
+		TextAttribute textAttribute = new TextAttribute(colorManager.getColor(rgb),defaultTextAttribute.getBackground(), style);
+		PresentationSupport presentation = new PresentationSupport(textAttribute);
 		reconciler.setDamager(presentation, id);
 		reconciler.setRepairer(presentation, id);
 	}

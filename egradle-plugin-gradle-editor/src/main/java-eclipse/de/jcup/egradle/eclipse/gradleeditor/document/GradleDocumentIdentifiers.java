@@ -2,12 +2,23 @@ package de.jcup.egradle.eclipse.gradleeditor.document;
 
 public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	
+	JAVA_KEYWORD,
+	
+	JAVA_LITERAL,
+	
 	GROOVY_KEYWORD ,
-	GROOVY_COMMENT,
-	GROOVY_STRING,
+	
+	COMMENT,
+	
+	STRING,
+	
 	GRADLE_KEYWORD,
+	
 	GRADLE_LINK_KEYWORD,
+	
 	GRADLE_TASK_KEYWORD,
+	
+	GRADLE_VARIABLE,
 	;
 
 

@@ -1,4 +1,4 @@
-package de.jcup.egradle.eclipse.gradleeditor.document;
+package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 public enum GradleLinkKeyWords implements DocumentKeyWord {
 
@@ -12,17 +12,6 @@ public enum GradleLinkKeyWords implements DocumentKeyWord {
 
 	private GradleLinkKeyWords(String text) {
 		this.text = text;
-	}
-
-
-	@Override
-	public boolean isWordStart(char c) {
-		return text.charAt(0) == c;
-	}
-
-	@Override
-	public boolean isWordPart(char c) {
-		return text.indexOf(c) != -1;
 	}
 
 	@Override
