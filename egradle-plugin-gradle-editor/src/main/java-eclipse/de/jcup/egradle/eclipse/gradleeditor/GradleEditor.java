@@ -25,10 +25,15 @@ public class GradleEditor extends TextEditor {
 	private ColorManager colorManager;
 
 	public GradleEditor() {
-		super();
 		colorManager = ColorManager.instance();
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
 		setDocumentProvider(new GradleDocumentProvider());
+	}
+	
+	@Override
+	public boolean validateEditorInputState() {
+		// TODO Auto-generated method stub
+		return super.validateEditorInputState();
 	}
 
 	@Override
