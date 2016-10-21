@@ -61,17 +61,6 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          EDITOR                                      -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            name="EGradle Editor"
-            extensions="gradle"
-            icon="icons/gradle-og.gif"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
-            class="de.jcup.egradle.eclipse.editors.GradleEditor"
-            id="egradle.editors.GradleEditor">
-      </editor>
-   </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -83,7 +72,7 @@
             name="EGradle">
       </category>
       <command
-            name="Refresh all eclipse dependencies command"
+            name="Refresh all eclipse dependencies"
             categoryId="egradle.commands.category"
             id="egradle.commands.refreshEclipse">
       </command>
@@ -221,31 +210,49 @@
       </wizard>
    </extension>
    -->
-    <!--
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
-            id="egradle.contribution1">
-         <menu
-               icon="icons/gradle-og.gif"
-               id="egradle.menu1"
-               label="Gradle"
-               path="additions">
-            <separator
-                  name="group1">
-            </separator>
-         </menu>
-         <action
-               label="My gradle action(TBD)"
-               class="de.jcup.egradle.eclipse.popup.actions.EGradleAction"
-               menubarPath="egradle.menu1/group1"
-               enablesFor="1"
-               id="egradle.newAction">
-         </action>
-      </objectContribution>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--        POPUP                                                         -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   
+    <extension point="org.eclipse.ui.menus">
+        <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
+        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+                <command commandId="egradle.commands.updateOrCreateVirtualRootProject"
+                        label="Recreate Virtual Root Project" 
+                        tooltip="Recreates the complete virtual root project"
+                        icon="icons/updateOrCreateVirtualRootProject.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+                <command commandId="egradle.commands.refreshEclipse"
+                        label="Refresh eclipse dependencies" 
+                        tooltip="Refreshes all eclipse dependencies"
+                        icon="icons/refreshAllEclipseDependencies.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+        </menuContribution>
    </extension>
-    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -260,7 +267,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="de.jcup.egradle.eclipse.preferences.PreferenceInitializer">
+            class="de.jcup.egradle.eclipse.preferences.EGradlePreferenceInitializer">
       </initializer>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

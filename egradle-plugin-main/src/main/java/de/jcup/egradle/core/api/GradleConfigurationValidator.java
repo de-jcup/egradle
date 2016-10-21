@@ -29,9 +29,11 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.ProcessContext;
 import de.jcup.egradle.core.process.ProcessExecutor;
 
 public class GradleConfigurationValidator implements Validator<GradleConfiguration>{
@@ -88,6 +90,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 				}
 				return map;
 			}
+
 		};
 		
 		/* validate shell call*/
@@ -96,11 +99,18 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 			shell = EGradleShellType.NONE;
 		}
 		List<String> shellStandaloneCommands = shell.createCheckStandaloneCommands();
+		ProcessContext context = new ProcessContext() {
+			
+			@Override
+			public CancelStateProvider getCancelStateProvider() {
+				return CancelStateProvider.NEVER_CANCELED;
+			}
+		};
 		if (! shellStandaloneCommands.isEmpty()){
 			output("  Starting shell standalone with "+ shellStandaloneCommands);
 			/* try to execute shell standalone */
 			try {
-				executor.execute(configuration, environmentProvider , shellStandaloneCommands.toArray(new String[shellStandaloneCommands.size()]));
+				executor.execute(configuration, environmentProvider , context, shellStandaloneCommands.toArray(new String[shellStandaloneCommands.size()]));
 				output("  [OK]");
 			} catch (IOException e) {
 				output("  [FAILED]");
@@ -116,7 +126,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		commands.add("--version");
 		output("  Executing:"+commands);
 		try {
-			int result = executor.execute(configuration, environmentProvider, commands.toArray(new String[commands.size()]));
+			int result = executor.execute(configuration, environmentProvider, context, commands.toArray(new String[commands.size()]));
 			if (result!=ProcessExecutor.PROCESS_RESULT_OK){
 				output("  [FAILED]");
 				throw new ValidationException(GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE, "Result was:"+result);

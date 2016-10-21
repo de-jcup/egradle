@@ -49,14 +49,13 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
-		String tasks = configuration.getAttribute(PROPERTY_TASKS, "");
 		String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
 
-		executeByHandler(launch, projectName, tasks, options);
+		executeByHandler(launch, projectName, options);
 
 	}
 
-	private void executeByHandler(ILaunch launch, String projectName, String tasks, String options)
+	private void executeByHandler(ILaunch launch, String projectName, String options)
 			throws CoreException {
 
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();

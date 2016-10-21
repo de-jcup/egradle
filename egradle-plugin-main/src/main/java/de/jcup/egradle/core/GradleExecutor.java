@@ -60,7 +60,7 @@ public class GradleExecutor {
 		/* execute process */
 		int processResult;
 		try {
-			processResult = processExecutor.execute(context.getConfiguration(), context, commandStrings);
+			processResult = processExecutor.execute(context.getConfiguration(), context, context, commandStrings);
 			result.setCommands(context.getCommandString());
 			result.setProcessResult(processResult);
 		} catch (IOException e) {

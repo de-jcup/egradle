@@ -43,4 +43,7 @@
          Stable Versions
       </description>
    </category-def>
+<feature url="features/de.jcup.egradle.eclipse.feature_0.8.2.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.8.2.beta"><category name="site.egradle.category.beta"/></feature>
+<feature url="features/de.jcup.egradle.eclipse.feature_0.8.3.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.8.3.beta"><category name="site.egradle.category.beta"/></feature>
+<feature url="features/de.jcup.egradle.eclipse.feature_0.8.4.beta.jar" id="de.jcup.egradle.eclipse.feature" version="0.8.4.beta"><category name="site.egradle.category.beta"/></feature>
 </site>

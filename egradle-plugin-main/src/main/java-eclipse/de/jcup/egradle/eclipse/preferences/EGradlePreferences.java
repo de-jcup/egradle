@@ -31,7 +31,7 @@ public class EGradlePreferences {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
 	}
 
-	public String getStringPreference(PreferenceConstants id) {
+	public String getStringPreference(EGradlePreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
 		if (data==null){
 			data="";

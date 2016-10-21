@@ -16,7 +16,7 @@
 package de.jcup.egradle.eclipse.preferences;
 
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -225,7 +225,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	protected void performDefaults() {
 		super.performDefaults(); // set defaults and store them, so can now be
 									// loaded:
-		String storedCallTypeId = getPreferenceStore().getDefaultString(PreferenceConstants.P_GRADLE_CALL_TYPE.getId());
+		String storedCallTypeId = getPreferenceStore().getDefaultString(EGradlePreferenceConstants.P_GRADLE_CALL_TYPE.getId());
 		updateCallTypeFields(storedCallTypeId);
 	}
 

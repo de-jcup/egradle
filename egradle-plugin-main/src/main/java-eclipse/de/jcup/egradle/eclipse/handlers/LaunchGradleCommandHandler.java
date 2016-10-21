@@ -62,6 +62,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	
 	private ILaunch launch;
 	private EGradlePostBuildJob postJob;
+	private String taskAttributeOverride;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -72,6 +73,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 			launch = (ILaunch) values.get(LAUNCH_ARGUMENT);
 			postJob = (EGradlePostBuildJob) values.get(LAUNCH_POST_JOB);
+			taskAttributeOverride = (String) values.get(LAUNCH_TASKS_ATTRBUTE_OVERRIDE);
 
 		} catch (NotDefinedException | ParameterValuesException e) {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
@@ -87,7 +89,12 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				/* commands */
 				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME,
 						"");
-				String commandString = configuration.getAttribute(PROPERTY_TASKS, "");
+				String commandString = null;
+				if (taskAttributeOverride==null){
+					commandString= configuration.getAttribute(PROPERTY_TASKS, "");
+				}else{
+					commandString=taskAttributeOverride;
+				}
 
 				GradleCommand[] commands = null;
 				if (StringUtils.isEmpty(projectName)) {
