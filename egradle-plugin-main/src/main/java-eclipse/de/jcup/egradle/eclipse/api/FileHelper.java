@@ -37,7 +37,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -109,6 +112,9 @@ public class FileHelper {
 						try {
 							src.close();
 						} catch (IOException e) {
+							EGradleUtil.log(e);
+							return;
+							
 						}
 					}
 				}
@@ -338,5 +344,19 @@ public class FileHelper {
 			return toFile((IPath)null);
 		}
 		return toFile(resource.getLocation());
+	}
+
+	/**
+	 * Returns the IFile representation for given file or <code>null</code> if file not in workspace
+	 * @param file
+	 * @return file or null
+	 */
+	public IFile toIFile(File file) {
+//		IFileStore x = EFS.getLocalFileSystem().getStore(file.toURI());
+		IPath path = Path.fromOSString(file.getAbsolutePath()); 
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		/* FIXME change next line - just for first try!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+		IFile fileResult = workspace.getRoot().getFile(path);
+		return fileResult;
 	}
 }

@@ -5,9 +5,6 @@ import de.jcup.egradle.core.process.OutputHandler;
 
 public class ValidationOutputHandler implements OutputHandler {
 	private static final String LINE2 = "line:";
-	private static final int LINE2_LENGTH = LINE2.length();
-	private static final String SCRIPT = "Script '";
-	private static final int SCRIPT_LENGTH = SCRIPT.length();
 	private ValidationResult problem = new ValidationResult();
 	private FormatConverter converter = new FormatConverter();
 
@@ -16,7 +13,7 @@ public class ValidationOutputHandler implements OutputHandler {
 		private boolean whatWentWrongFound;
 		private ProblemType problemType;
 		private String problemMessage;
-		private int problemLine;
+		private int problemLine=-1;
 		private String problemScriptPath;
 
 		public boolean hasScriptEvaluationProblem() {
@@ -41,7 +38,7 @@ public class ValidationOutputHandler implements OutputHandler {
 	}
 
 	private enum ProblemType {
-		A_PROBLEM_OCCURRED_WHILE_EVALUATING("A problem occurred evaluating script");
+		A_PROBLEM_OCCURRED_WHILE_EVALUATING("A problem occurred evaluating");
 
 		private String text;
 
@@ -56,8 +53,12 @@ public class ValidationOutputHandler implements OutputHandler {
 	// A problem occurred evaluating script.
 	// > Could not get unknown property 'x' for root project 'xyz' of type
 	// org.gradle.api.Project.
+	//
+	// example 2
+	//	Build file '/home/albert/dev/src/git/gradle-project-template/build.gradle' line: 1"
 	@Override
 	public void output(String line) {
+		System.out.println("output:"+line);
 		if (!problem.whereFound) {
 			if (line.indexOf("* Where:") != -1) {
 				problem.whereFound = true;
@@ -96,14 +97,21 @@ public class ValidationOutputHandler implements OutputHandler {
 	}
 
 	private void handleScriptText(String line) {
+		if (problem.problemLine!=-1){
+			return;
+		}
 		if (problem.problemMessage != null) {
 			return;
 		}
-		int scriptTextStart = line.indexOf(SCRIPT);
+		/* try to fetch line data*/
+		if (line.indexOf("line:")==-1){
+			return;
+		}
+		int scriptTextStart = line.indexOf('\'');
 		if (scriptTextStart == -1) {
 			return;
 		}
-		String remaining = line.substring(scriptTextStart+SCRIPT_LENGTH);
+		String remaining = line.substring(scriptTextStart+1);
 		int scriptTextEnd = remaining.indexOf("'");
 		if (scriptTextEnd == -1) {
 			return;
@@ -113,7 +121,7 @@ public class ValidationOutputHandler implements OutputHandler {
 		if (lineIndex == -1) {
 			return;
 		}
-		String lineNr = remaining.substring(lineIndex + LINE2_LENGTH);
+		String lineNr = remaining.substring(lineIndex+LINE2.length());
 		problem.problemLine = converter.convertToInt(lineNr.trim());
 	}
 }

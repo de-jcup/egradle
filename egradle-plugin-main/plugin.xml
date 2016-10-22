@@ -2,6 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
     
+   <extension 
+   		id="de.jcup.egradle.problem"
+    	point="org.eclipse.core.resources.markers"
+    	name="EGradle build script problem marker">
+        <super type="org.eclipse.core.resources.problemmarker"/>
+        <super type="org.eclipse.core.resources.textmarker"/>
+        <persistent value="true"/>
+    </extension>
+    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          NATURE	(Virtual root projects only)		 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -93,10 +102,15 @@
             categoryId="egradle.commands.category"
             id="egradle.commands.updateOrCreateVirtualRootProject">
       </command>
-       <command
+      <command
             name="Quick gradle task execution"
             categoryId="egradle.commands.category"
             id="egradle.commands.quickTaskExecution">
+      </command>
+      <command
+            name="Validate build script"
+            categoryId="egradle.commands.category"
+            id="egradle.commands.validateBuildScript">
       </command>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -120,6 +134,10 @@
             class="de.jcup.egradle.eclipse.handlers.QuickTaskExecutionHandler"
             commandId="egradle.commands.quickTaskExecution">
       </handler>
+  		<handler
+            class="de.jcup.egradle.eclipse.handlers.ValidateGradleScriptHandler"
+            commandId="egradle.commands.validateBuildScript">
+      </handler>      	
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          KEY BINDINGS                                -->
@@ -174,6 +192,13 @@
                   id="egradle.toolbars.quickTaskExecution"
                   label="EGradle quick launch"
                   tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
+            </command>
+            <command
+            	  commandId="egradle.commands.validateBuildScript"
+                  icon="icons/quickTaskExecution2.png"
+                  id="egradle.toolbars.validateBuildScript"
+                  label="EGradle validate build script"
+                  tooltip="Validate build script.">
             </command>
          </toolbar>
       </menuContribution>

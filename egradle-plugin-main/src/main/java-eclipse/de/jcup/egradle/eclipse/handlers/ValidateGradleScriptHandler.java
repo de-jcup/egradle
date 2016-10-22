@@ -15,17 +15,30 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
+import java.io.File;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.process.scraping.ValidationOutputHandler;
+import de.jcup.egradle.core.process.scraping.ValidationOutputHandler.ValidationResult;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
+import de.jcup.egradle.eclipse.ui.MarkerHelper;
 
 public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  {
 
 
+	private MarkerHelper markerHelper = new MarkerHelper();
+	
 	@Override
 	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);
@@ -39,9 +52,32 @@ public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  
 		GradleExecutionDelegate ui = new GradleExecutionDelegate(outputHandler,
 				new SimpleProcessExecutor(problemOutputHandler, true, 10), this) {
 			protected void afterExecutionDone(org.eclipse.core.runtime.IProgressMonitor monitor) throws Exception {
-				System.out.println("missing!!!!!!!!!!!!!!! error marker set!!!");
-				/* FIXME ATR, 22.10.2016: implement*/
-				throw new RuntimeException("not implemented");
+				ValidationResult result = problemOutputHandler.getResult();
+				if (result.hasScriptEvaluationProblem()){
+//					File folder = EGradleUtil.getRootProjectFolder();
+					/* FIXME ATR, 22.10.2016 - implemenent file calculation etc. better, this is not fail safe..*/
+					String scriptPath = result.getScriptPath();
+					String rootFolderPath = EGradleUtil.getRootProjectFolder().getAbsolutePath();
+					if (scriptPath.startsWith(rootFolderPath)){
+//						scriptPath=scriptPath.substring(rootFolderPath.length());
+					}
+					File file = new File(scriptPath);
+					if (!file.exists()){
+						return;
+					}
+					IResource resource = null;
+					
+					if (true){
+						/* FIXME ATR, just a workaround , because links currently not working*/
+					 resource=ResourcesPlugin.getWorkspace().getRoot();
+					}else{
+						resource = FileHelper.SHARED.toIFile(file);
+					}
+					if (resource==null){
+						return;
+					}
+					markerHelper.createErrorMarker(resource,result.getErrorMessage(), result.getLine());
+				}
 			};
 		};
 		return ui;
