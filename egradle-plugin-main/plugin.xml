@@ -3,12 +3,12 @@
 <plugin>
     
    <extension 
-   		id="de.jcup.egradle.problem"
+   		id="de.jcup.egradle.script.problem"
     	point="org.eclipse.core.resources.markers"
-    	name="EGradle build script problem marker">
+    	name="Gradle build script problem">
         <super type="org.eclipse.core.resources.problemmarker"/>
         <super type="org.eclipse.core.resources.textmarker"/>
-        <persistent value="true"/>
+        <persistent value="false"/>
     </extension>
     
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

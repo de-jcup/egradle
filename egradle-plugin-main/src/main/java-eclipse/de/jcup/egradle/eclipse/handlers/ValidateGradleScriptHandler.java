@@ -17,11 +17,13 @@ package de.jcup.egradle.eclipse.handlers;
 
 import java.io.File;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
@@ -29,15 +31,14 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.process.scraping.ValidationOutputHandler;
 import de.jcup.egradle.core.process.scraping.ValidationOutputHandler.ValidationResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
-import de.jcup.egradle.eclipse.ui.MarkerHelper;
+import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 
 public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  {
 
 
-	private MarkerHelper markerHelper = new MarkerHelper();
+	private static UnpersistedMarkerHelper buildProblemMarkerHelper = new UnpersistedMarkerHelper("de.jcup.egradle.script.problem");
 	
 	@Override
 	public void prepare(GradleContext context) {
@@ -49,34 +50,42 @@ public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
 			throws GradleExecutionException {
 		ValidationOutputHandler problemOutputHandler = new ValidationOutputHandler();
+		/* no errors, so erase if there were former ...*/
 		GradleExecutionDelegate ui = new GradleExecutionDelegate(outputHandler,
 				new SimpleProcessExecutor(problemOutputHandler, true, 10), this) {
 			protected void afterExecutionDone(org.eclipse.core.runtime.IProgressMonitor monitor) throws Exception {
+				/* we do always remove all buildscript problem markers - so we got only new ones remaining!*/
+				buildProblemMarkerHelper.removeAllErrorMarkers();
+				
 				ValidationResult result = problemOutputHandler.getResult();
 				if (result.hasScriptEvaluationProblem()){
-//					File folder = EGradleUtil.getRootProjectFolder();
-					/* FIXME ATR, 22.10.2016 - implemenent file calculation etc. better, this is not fail safe..*/
-					String scriptPath = result.getScriptPath();
-					String rootFolderPath = EGradleUtil.getRootProjectFolder().getAbsolutePath();
-					if (scriptPath.startsWith(rootFolderPath)){
-//						scriptPath=scriptPath.substring(rootFolderPath.length());
-					}
-					File file = new File(scriptPath);
-					if (!file.exists()){
-						return;
-					}
 					IResource resource = null;
 					
-					if (true){
-						/* FIXME ATR, just a workaround , because links currently not working*/
-					 resource=ResourcesPlugin.getWorkspace().getRoot();
-					}else{
-						resource = FileHelper.SHARED.toIFile(file);
-					}
-					if (resource==null){
+					String scriptPath = result.getScriptPath();
+					String rootFolderPath = EGradleUtil.getRootProjectFolder().getAbsolutePath();
+					File file = new File(scriptPath);
+					if (!file.exists()){
+						resource=ResourcesPlugin.getWorkspace().getRoot();
+						buildProblemMarkerHelper.createErrorMarker(resource,"Build file which prodocues error does not exist:"+file.getAbsolutePath(), 0);
 						return;
 					}
-					markerHelper.createErrorMarker(resource,result.getErrorMessage(), result.getLine());
+					IWorkspace workspace = ResourcesPlugin.getWorkspace();
+					resource = workspace.getRoot().getFileForLocation(Path.fromOSString(scriptPath));
+					if (resource==null){
+						if (scriptPath.startsWith(rootFolderPath)){
+							scriptPath=scriptPath.substring(rootFolderPath.length());
+						}
+						IProject virtualRootProject = workspace.getRoot().getProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+						if (virtualRootProject.exists()){
+							resource=virtualRootProject.getFile(scriptPath);
+						}
+					}
+					
+					if (resource==null){
+						// fall back to workspace root - so at least we can create an error marker...
+						resource=ResourcesPlugin.getWorkspace().getRoot();
+					}
+					buildProblemMarkerHelper.createErrorMarker(resource,result.getErrorMessage(), result.getLine());
 				}
 			};
 		};

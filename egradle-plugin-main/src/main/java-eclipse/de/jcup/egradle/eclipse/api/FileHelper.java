@@ -352,11 +352,20 @@ public class FileHelper {
 	 * @return file or null
 	 */
 	public IFile toIFile(File file) {
+		/* FIXME ATR, 23.11.2016: check if this handling is correct */
 //		IFileStore x = EFS.getLocalFileSystem().getStore(file.toURI());
 		IPath path = Path.fromOSString(file.getAbsolutePath()); 
+		return toIFile(path);
+	}
+
+	public IFile toIFile(IPath path) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		/* FIXME change next line - just for first try!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 		IFile fileResult = workspace.getRoot().getFile(path);
 		return fileResult;
+	}
+
+	public IFile toIFile(String pathString) {
+		IPath path = Path.fromOSString(pathString);
+		return toIFile(path);
 	}
 }

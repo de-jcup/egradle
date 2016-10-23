@@ -23,10 +23,14 @@ import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.DefaultAnnotationHover;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
@@ -39,8 +43,10 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private ColorManager colorManager;
 
 	private TextAttribute defaultTextAttribute;
+	private IAnnotationHover annotationHoover;
 	
 	public GradleSourceViewerConfiguration(ColorManager colorManager) {
+		this.annotationHoover=new GradleEditorAnnotationHoover();
 		this.colorManager = colorManager;
 		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(ColorConstants.BLACK));
 	}
@@ -60,6 +66,22 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		// }
 		// return doubleClickStrategy;
 		return super.getDoubleClickStrategy(sourceViewer, contentType);
+	}
+	
+	@Override
+	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+	    return annotationHoover;
+	}
+	
+	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover{
+		@Override
+		protected boolean isIncluded(Annotation annotation) {
+			if (annotation instanceof MarkerAnnotation){
+				return true;
+			}
+			/* we do not support other annotations*/
+			return false;
+		}
 	}
 
 	@Override

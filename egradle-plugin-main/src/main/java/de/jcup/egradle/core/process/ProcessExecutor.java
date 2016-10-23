@@ -26,7 +26,7 @@ public interface ProcessExecutor {
 	 * 
 	 * @param wdProvider
 	 * @param envProvider 
-	 * @param processContext TODO
+	 * @param processContext context for process operations and states
 	 * @param commands
 	 * @return result code
 	 * @throws IOException
