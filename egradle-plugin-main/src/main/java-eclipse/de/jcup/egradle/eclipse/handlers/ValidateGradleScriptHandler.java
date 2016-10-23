@@ -16,20 +16,23 @@
 package de.jcup.egradle.eclipse.handlers;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.core.process.scraping.ValidationOutputHandler;
-import de.jcup.egradle.core.process.scraping.ValidationOutputHandler.ValidationResult;
+import de.jcup.egradle.core.validation.GradleOutputValidator;
+import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
@@ -38,6 +41,7 @@ import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  {
 
 
+	private static final int LINES_NEEDED_FOR_VALIDATION = 20;
 	private static UnpersistedMarkerHelper buildProblemMarkerHelper = new UnpersistedMarkerHelper("de.jcup.egradle.script.problem");
 	
 	@Override
@@ -49,16 +53,25 @@ public class ValidateGradleScriptHandler extends AbstractEGradleCommandHandler  
 	@Override
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
 			throws GradleExecutionException {
-		ValidationOutputHandler problemOutputHandler = new ValidationOutputHandler();
+		try {
+			buildProblemMarkerHelper.removeAllErrorMarkers();
+		} catch (CoreException e) {
+			EGradleUtil.log(e);
+		}
+		RememberLastLinesOutputHandler validationOutputHandler = new RememberLastLinesOutputHandler(LINES_NEEDED_FOR_VALIDATION);
+		validationOutputHandler.setChainedOutputHandler(outputHandler);
 		/* no errors, so erase if there were former ...*/
 		GradleExecutionDelegate ui = new GradleExecutionDelegate(outputHandler,
-				new SimpleProcessExecutor(problemOutputHandler, true, 10), this) {
+				new SimpleProcessExecutor(validationOutputHandler, true, 10), this) {
 			protected void afterExecutionDone(org.eclipse.core.runtime.IProgressMonitor monitor) throws Exception {
 				/* we do always remove all buildscript problem markers - so we got only new ones remaining!*/
-				buildProblemMarkerHelper.removeAllErrorMarkers();
 				
-				ValidationResult result = problemOutputHandler.getResult();
-				if (result.hasScriptEvaluationProblem()){
+				List<String> list = validationOutputHandler.createOutputToValidate();
+				GradleOutputValidator validator = new GradleOutputValidator();
+				
+				ValidationResult result = validator.validate(list);
+				
+				if (result.hasProblem()){
 					IResource resource = null;
 					
 					String scriptPath = result.getScriptPath();
