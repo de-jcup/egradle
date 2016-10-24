@@ -42,6 +42,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
 	@Override
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
+		super.beforeExecutionDone(monitor);
 		if (showEGradleSystemConsole) {
 			EGradleUtil.openSystemConsole();
 		}
@@ -52,6 +53,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		if (refreshAllProjects) {
 			EGradleUtil.refreshAllProjects(monitor);
 		}
+		super.afterExecutionDone(monitor);
 		monitor.worked(2);
 	}
 }

@@ -22,6 +22,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -35,6 +36,7 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
+import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
@@ -50,7 +52,7 @@ import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
 public class GradleExecutionDelegate {
 
 	private GradleContext context;
-	private OutputHandler systemConsoleOutputHandler;
+	private OutputHandler outputHandler;
 	private Result result;
 	protected GradleExecutor executor;
 
@@ -63,7 +65,7 @@ public class GradleExecutionDelegate {
 		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
 
-		this.systemConsoleOutputHandler = outputHandler;
+		this.outputHandler = outputHandler;
 
 		context = createContext();
 		if (additionalContextPreparator != null) {
@@ -148,8 +150,8 @@ public class GradleExecutionDelegate {
 			if (monitor.isCanceled()) {
 				return;
 			}
-			systemConsoleOutputHandler.output("\n" + executionStartTime + " " + progressDescription);
-			systemConsoleOutputHandler
+			outputHandler.output("\n" + executionStartTime + " " + progressDescription);
+			outputHandler
 					.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
 			if (monitor.isCanceled()) {
@@ -159,9 +161,9 @@ public class GradleExecutionDelegate {
 			context.register(cancelStateProvider);
 			result = executor.execute(context);
 			if (result.isOkay()) {
-				systemConsoleOutputHandler.output("[OK]");
+				outputHandler.output("[OK]");
 			} else {
-				systemConsoleOutputHandler.output("[FAILED]");
+				outputHandler.output("[FAILED]");
 			}
 			afterExecutionDone(monitor);
 		} catch (Exception e) {
@@ -173,11 +175,17 @@ public class GradleExecutionDelegate {
 	}
 
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
-		/* per default do nothing */
+		if (outputHandler instanceof RememberLastLinesOutputHandler){
+			EGradleUtil.removeAllValidationErrorsOfConsoleOutput();
+		}
 	}
 
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
-		/* per default do nothing */
+		if (outputHandler instanceof RememberLastLinesOutputHandler){
+			RememberLastLinesOutputHandler validationOutputHandler = (RememberLastLinesOutputHandler) outputHandler;
+			List<String> list = validationOutputHandler.createOutputToValidate();
+			EGradleUtil.showValidationErrorsOfConsoleOutput(list);
+		}
 	}
 
 }

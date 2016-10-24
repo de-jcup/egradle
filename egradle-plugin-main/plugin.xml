@@ -11,6 +11,14 @@
         <persistent value="false"/>
     </extension>
     
+	 <extension point="org.eclipse.debug.ui.consoleLineTrackers">
+	   <consoleLineTracker 
+	      id="de.jcup.egradle.EGradleConnsoleLineTracker"
+	      class="de.jcup.egradle.eclipse.console.EGradleConsoleLineTracker"
+	      processType="EGradleRuntimeProcess">
+	   </consoleLineTracker>
+	 </extension>
+    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          NATURE	(Virtual root projects only)		 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

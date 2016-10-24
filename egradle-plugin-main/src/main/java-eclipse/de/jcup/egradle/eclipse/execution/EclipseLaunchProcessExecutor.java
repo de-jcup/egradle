@@ -107,11 +107,12 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
 
 		attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
+		
 		/*
 		 * bind process to runtime process, so visible and correct handled in
 		 * debug UI
 		 */
-		EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label, attributes);
+		EGradleRuntimeProcess rp = EGradleRuntimeProcess.create(launch, process, label, attributes);
 		// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
 
 		handler.output("Launch started - for details see output of " + label);

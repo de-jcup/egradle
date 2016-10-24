@@ -25,6 +25,7 @@ import org.eclipse.ui.progress.IProgressService;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
@@ -63,7 +64,9 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = null;
 		try{
-			execution = createGradleExecution(EGradleUtil.getSystemConsoleOutputHandler());
+			RememberLastLinesOutputHandler validationOutputHandler = EGradleUtil.createOutputHandlerForValidationErrorsOnConsole();
+			validationOutputHandler.setChainedOutputHandler(EGradleUtil.getSystemConsoleOutputHandler());
+			execution = createGradleExecution(validationOutputHandler);
 		}catch(GradleExecutionException e){
 			EGradleMessageDialog.INSTANCE.showError(e.getMessage());
 			return null;

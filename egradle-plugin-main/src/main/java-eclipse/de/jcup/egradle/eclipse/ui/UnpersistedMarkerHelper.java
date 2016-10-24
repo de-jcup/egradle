@@ -161,4 +161,8 @@ public class UnpersistedMarkerHelper {
 		createMarker(resource, message, lineNumber, IMarker.TASK, IMarker.SEVERITY_INFO, -1, -1);
 	}
 
+	public boolean hasErrors() {
+		return ! createdMarkers.isEmpty();
+	}
+
 }

@@ -59,7 +59,11 @@ public class EGradleMessageDialog {
 
 			@Override
 			public void run() {
-				Image backgroundImage = EGradleUtil.getImage("icons/gradle-build-failed.png");
+				String path = "icons/gradle-build-failed.png";
+				if (EGradleUtil.existsValidationErrors()){
+					path="icons/gradle-script-failure.png";
+				}
+				Image backgroundImage = EGradleUtil.getImage(path);
 				Image titleImage = EGradleUtil.getImage("icons/gradle-og.gif");
 				
 				Shell shell = getActiveWorkbenchShell();

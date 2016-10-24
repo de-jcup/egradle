@@ -15,7 +15,14 @@
  */
 package de.jcup.egradle.eclipse.console;
 
+import org.eclipse.swt.custom.ExtendedModifyEvent;
+import org.eclipse.swt.custom.ExtendedModifyListener;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.part.IPageBookViewPage;
@@ -43,7 +50,8 @@ public class EGradleConsolePageParticipant implements IConsolePageParticipant {
 
 	@Override
 	public void init(IPageBookViewPage page, IConsole console) {
-		if (page.getControl() instanceof StyledText) {
+		Control control = page.getControl();
+		if (control instanceof StyledText) {
 			/* connect only to EGRADLE consoles */
 
 			/*
@@ -62,10 +70,10 @@ public class EGradleConsolePageParticipant implements IConsolePageParticipant {
 				return;
 			}
 			/* Add EGradle process style listener to viewer */
-			StyledText viewer = (StyledText) page.getControl();
+			StyledText viewer = (StyledText) control;
 			EGradleConsoleStyleListener myListener = new EGradleConsoleStyleListener();
 			viewer.addLineStyleListener(myListener);
-
+			
 			Activator.getDefault().addViewer(viewer, this);
 		}
 	}
