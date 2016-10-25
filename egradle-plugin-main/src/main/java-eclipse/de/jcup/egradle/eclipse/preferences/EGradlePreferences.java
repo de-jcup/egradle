@@ -38,8 +38,34 @@ public class EGradlePreferences {
 		}
 		return data;
 	}
-
+	
 	public IPreferenceStore getPreferenceStore() {
 		return store;
 	}
+
+	public boolean isValidationEnabled() {
+		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId());
+		return validationEnabled;
+	}
+
+	public String getGlobalJavaHomePath() {
+		return getStringPreference(EGradlePreferenceConstants.P_JAVA_HOME_PATH);
+	}
+
+	public String getGradleCallCommand() {
+		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_CALL_COMMAND);
+	}
+
+	public String getGradleBinInstallFolder() {
+		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER);
+	}
+
+	public String getGradleShellId() {
+		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_SHELL);
+	}
+
+	public String getRootProjectPath() {
+		return getStringPreference(EGradlePreferenceConstants.P_ROOTPROJECT_PATH);
+	}
+	
 }

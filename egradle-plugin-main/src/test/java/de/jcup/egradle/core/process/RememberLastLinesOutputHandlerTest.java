@@ -1,14 +1,13 @@
 package de.jcup.egradle.core.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 public class RememberLastLinesOutputHandlerTest {
 
@@ -18,10 +17,35 @@ public class RememberLastLinesOutputHandlerTest {
 	public void before() {
 		outputHandlerToTest = new RememberLastLinesOutputHandler(10);
 	}
+	@Test
+	public void a_remembering_with_max_zero__does_not_use_queue_at_all_but_triggers_delegate() {
+		/* prepare + execute*/
+		outputHandlerToTest = new RememberLastLinesOutputHandler(0);
+		
+		/* test */
+		assertNull(outputHandlerToTest.queue);
+		
+		List<String> output = outputHandlerToTest.createOutputToValidate();
+		assertNotNull(output);
+		assertTrue(output.isEmpty());
+	}
 	
 	@Test
 	public void chained_outputhandler_called_on_output(){
 		/* prepare*/
+		OutputHandler chainedOutputHandler = mock(OutputHandler.class);
+		outputHandlerToTest.setChainedOutputHandler(chainedOutputHandler);
+
+		/* execute*/
+		outputHandlerToTest.output("line1");
+		
+		/* test */
+		verify(chainedOutputHandler).output("line1");
+	}
+	@Test
+	public void chained_outputhandler_called_on_output_even_when_max_is_zero(){
+		/* prepare*/
+		outputHandlerToTest = new RememberLastLinesOutputHandler(0);
 		OutputHandler chainedOutputHandler = mock(OutputHandler.class);
 		outputHandlerToTest.setChainedOutputHandler(chainedOutputHandler);
 

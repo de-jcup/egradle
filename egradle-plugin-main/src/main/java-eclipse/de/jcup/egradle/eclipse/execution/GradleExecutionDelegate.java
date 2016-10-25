@@ -39,7 +39,6 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
 import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
 
 /**
@@ -89,7 +88,7 @@ public class GradleExecutionDelegate {
 		GradleContext context = new GradleContext(rootProject, config);
 		EGradlePreferences preferences = PREFERENCES;
 		/* Default JAVA_HOME */
-		String globalJavaHome = preferences.getStringPreference(EGradlePreferenceConstants.P_JAVA_HOME_PATH);
+		String globalJavaHome = preferences.getGlobalJavaHomePath();
 		if (!StringUtils.isEmpty(globalJavaHome)) {
 			config.setGradleCommand(globalJavaHome); // its an config value so
 														// we set it to config
@@ -106,10 +105,10 @@ public class GradleExecutionDelegate {
 		context.setAmountOfWorkToDo(1);
 
 		/* Call gradle settings */
-		String gradleCommand = preferences.getStringPreference(EGradlePreferenceConstants.P_GRADLE_CALL_COMMAND);
-		String gradleInstallPath = preferences.getStringPreference(EGradlePreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER);
+		String gradleCommand = preferences.getGradleCallCommand();
+		String gradleInstallPath = preferences.getGradleBinInstallFolder();
 
-		String shellId = preferences.getStringPreference(EGradlePreferenceConstants.P_GRADLE_SHELL);
+		String shellId = preferences.getGradleShellId();
 
 		if (StringUtils.isEmpty(gradleCommand)) {
 			throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");

@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.preferences;
 
-public enum EGradlePreferenceConstants {
+enum EGradlePreferenceConstants {
 	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
 	
 	P_JAVA_HOME_PATH("pathJavaHome"),
@@ -23,7 +23,9 @@ public enum EGradlePreferenceConstants {
 	P_GRADLE_CALL_TYPE("gradleCallType"),
 	P_GRADLE_SHELL("commandShell"),
 	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
-	P_GRADLE_CALL_COMMAND("commandGradle");
+	P_GRADLE_CALL_COMMAND("commandGradle"),
+	
+	P_VALIDATION_ENABLED("validatEnabled");
 
 	private String id;
 

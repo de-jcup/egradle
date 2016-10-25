@@ -9,7 +9,7 @@
       <page
          id="egradle.junit.contribution.preferences.EGradleJUnitPreferencePage"
          class="de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferencePage"
-         name="EGradle JUnit"
+         name="JUnit"
          category="egradle.preferences.EGradlePreferencePage">
       </page>
    </extension>

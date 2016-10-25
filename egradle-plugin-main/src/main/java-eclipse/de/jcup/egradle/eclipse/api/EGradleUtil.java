@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.P_ROOTPROJECT_PATH;
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
 
 import java.io.File;
@@ -75,6 +74,7 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature;
@@ -138,7 +138,13 @@ public class EGradleUtil {
 	}
 
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
-		return new RememberLastLinesOutputHandler(LINES_NEEDED_FOR_VALIDATION);
+		int max;
+		if (EGradlePreferences.PREFERENCES.isValidationEnabled()){
+			max=LINES_NEEDED_FOR_VALIDATION;
+		}else{
+			max=0;
+		}
+		return new RememberLastLinesOutputHandler(max);
 	}
 	public static boolean existsValidationErrors() {
 		/* Not very smart integrated, because static but it works...*/
@@ -233,7 +239,7 @@ public class EGradleUtil {
 	 * @return root project or <code>null</code>
 	 */
 	public static GradleRootProject getRootProject(boolean showErrorDialog) {
-		String path = PREFERENCES.getStringPreference(P_ROOTPROJECT_PATH);
+		String path = PREFERENCES.getRootProjectPath();
 		if (StringUtils.isEmpty(path)) {
 			if (showErrorDialog) {
 				EGradleMessageDialog.INSTANCE.showError(MESSAGE_MISSING_ROOTPROJECT);
@@ -526,9 +532,12 @@ public class EGradleUtil {
 	/**
 	 * If given list of console output contains error messages error markers for files will be created
 	 * @param consoleOutput
-	 * @return validation result, never <code>null</code>
 	 */
-	public static ValidationResult showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
+	public static void showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
+		boolean validationEnabled = EGradlePreferences.PREFERENCES.isValidationEnabled();
+		if(!validationEnabled){
+			return;
+		}
 		GradleOutputValidator validator = new GradleOutputValidator();
 		ValidationResult result = validator.validate(consoleOutput);
 		if (result.hasProblem()) {
@@ -544,7 +553,7 @@ public class EGradleUtil {
 					 * nothing
 					 */
 					EGradleUtil.logInfo("Was not able to validate, because no root folder set!");
-					return result;
+					return;
 				}
 				String rootFolderPath = rootFolder.getAbsolutePath();
 				File file = new File(scriptPath);
@@ -552,7 +561,7 @@ public class EGradleUtil {
 					resource = ResourcesPlugin.getWorkspace().getRoot();
 					buildScriptProblemMarkerHelper.createErrorMarker(resource,
 							"Build file which prodocues error does not exist:" + file.getAbsolutePath(), 0);
-					return result;
+					return;
 				}
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				resource = workspace.getRoot().getFileForLocation(Path.fromOSString(scriptPath));
@@ -577,7 +586,7 @@ public class EGradleUtil {
 				log(e);
 			}
 		}
-		return result;
+		return;
 	}
 	
 	public static void throwCoreException(String message) throws CoreException {

@@ -280,6 +280,12 @@
             class="de.jcup.egradle.eclipse.preferences.EGradlePreferencePage"
             id="egradle.preferences.EGradlePreferencePage">
       </page>
+      <page
+         id="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
+         class="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
+         name="Validation"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">

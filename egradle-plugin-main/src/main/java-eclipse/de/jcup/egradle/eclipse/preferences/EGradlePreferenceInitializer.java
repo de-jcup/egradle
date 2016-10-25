@@ -34,6 +34,8 @@ public class EGradlePreferenceInitializer extends AbstractPreferenceInitializer 
 		}else{
 			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
 		}
+		store.setDefault(P_VALIDATION_ENABLED.getId(), true);
+
 		store.setDefault(P_GRADLE_CALL_TYPE.getId(),defaultCallType.getId());
 		store.setDefault(P_GRADLE_SHELL.getId(), defaultCallType.getDefaultShell().getId());
 		store.setDefault(P_GRADLE_INSTALL_BIN_FOLDER.getId(), defaultCallType.getDefaultGradleBinFolder());

@@ -37,7 +37,6 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 		}
 		try {
 			String lineStr = document.get(line.getOffset(), line.getLength());
-			System.out.println("line appended:" + lineStr);
 			if (lineStr.startsWith("Total time")) {
 				/* ok . time to validate */
 				List<String> list = rememberOutputHandler.createOutputToValidate();
