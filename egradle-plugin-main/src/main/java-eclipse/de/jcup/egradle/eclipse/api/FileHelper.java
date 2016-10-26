@@ -275,6 +275,12 @@ public class FileHelper {
 		delete(file);
 	}
 
+	/**
+	 * Returns the file or <code>null</code>
+	 * @param path
+	 * @return
+	 * @throws CoreException
+	 */
 	public File toFile(IPath path) throws CoreException {
 		if (path==null){
 			return null;

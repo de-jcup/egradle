@@ -20,6 +20,7 @@ import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
@@ -32,6 +33,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -61,6 +63,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
+import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
@@ -380,7 +383,12 @@ public class EGradleUtil {
 		return true;
 	}
 
-	public static boolean isVirtualRootProject(IProject project) {
+	/**
+	 * Returns true when given project has virtual root project nature
+	 * @param project
+	 * @return
+	 */
+	public static boolean hasVirtualRootProjectNature(IProject project) {
 		if (project==null){
 			return false;
 		}
@@ -597,6 +605,20 @@ public class EGradleUtil {
 	public static void throwCoreException(String message, Exception e) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message,e));
 
+	}
+
+	/**
+	 * If a virtual root project exists, it will be returned, otherwise <code>null</code>
+	 * @return vr project or <code>null</code>
+	 */
+	public static IProject getVirtualRootProject() {
+		IProject[] projects = getAllProjects();
+		for (IProject project : projects){
+			if (hasVirtualRootProjectNature(project)){
+				return project;
+			}
+		}
+		return null;
 	}
 
 }

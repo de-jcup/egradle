@@ -30,4 +30,17 @@ public class FileUtil {
 		File asFile = new File(folderTrim,fileTrim);
 		return asFile.getAbsolutePath();
 	}
+
+	public static boolean isDirectSubFolder(File folder, File expectedParentFolder) {
+		if (folder==null){
+			return false;
+		}
+		if (expectedParentFolder==null){
+			return false;
+		}
+		if (expectedParentFolder.equals(folder.getParentFile())){
+			return true;
+		}
+		return false;
+	}
 }

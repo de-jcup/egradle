@@ -255,7 +255,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	private String createGradleProjectName(IResource resource) {
 		IProject project = resource.getProject();
-		if (EGradleUtil.isVirtualRootProject(project)) {
+		if (EGradleUtil.hasVirtualRootProjectNature(project)) {
 			return "";
 		}
 		/* when the project itself is the root - leave project name empty!*/

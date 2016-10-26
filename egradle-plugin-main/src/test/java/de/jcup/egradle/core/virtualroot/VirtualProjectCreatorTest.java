@@ -26,19 +26,11 @@ import org.junit.Test;
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 
+import static de.jcup.egradle.core.TestUtil.*;
+
 public class VirtualProjectCreatorTest {
 
-	private static File PARENT_OF_TEST = new File("egradle-plugin-main/src/test/res/");
-	static {
-		if (!PARENT_OF_TEST.exists()) {
-			/*
-			 * fall back - to be testable by eclipse in sub projects and also
-			 * via gradle from root project.
-			 */
-			PARENT_OF_TEST = new File("src/test/res/");
-		}
-	}
-	private static final File ROOTFOLDER_1 = new File(PARENT_OF_TEST, "rootproject1");
+	
 	private static final File TEST2_TXT_FILE = new File(ROOTFOLDER_1,"test2.txt");
 	private static final File TEST1_TXT_FILE = new File(ROOTFOLDER_1,"test1.txt");
 	

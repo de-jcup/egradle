@@ -67,7 +67,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		if (rootFolder == null) {
 			return;
 		}
-		if (EGradleUtil.isVirtualRootProject(p)){
+		if (EGradleUtil.hasVirtualRootProjectNature(p)){
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
 			decorateImage(decoration);

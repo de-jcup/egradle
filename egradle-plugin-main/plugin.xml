@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-    
+   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          MARKER                          			 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --> 
    <extension 
    		id="de.jcup.egradle.script.problem"
     	point="org.eclipse.core.resources.markers"
@@ -11,17 +14,9 @@
         <persistent value="false"/>
     </extension>
     
-	 <extension point="org.eclipse.debug.ui.consoleLineTrackers">
-	   <consoleLineTracker 
-	      id="de.jcup.egradle.EGradleConnsoleLineTracker"
-	      class="de.jcup.egradle.eclipse.console.EGradleConsoleLineTracker"
-	      processType="EGradleRuntimeProcess">
-	   </consoleLineTracker>
-	 </extension>
-    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          NATURE	(Virtual root projects only)		 -->
-   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          BUILDER                          			 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    
    <extension
          id="virtualRootProjectBuilder"
          name="Virtual Root Project Builder"
@@ -32,6 +27,9 @@
          </run>
       </builder>
    </extension>
+   <!-- ++++++++++++++++++++egradle.importWizards.category++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          NATURE                          			 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          id="de.jcup.egradle.eclipse.virtualRootProjectNature"
          name="Virtual root project nature"
@@ -75,9 +73,6 @@
          </description>
       </decorator>
    </extension>
-   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          EDITOR                                      -->
-   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -150,17 +145,6 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
-   <!--
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="egradle.commands.refreshEclipse"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+6"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-   </extension>
-   -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          TOOLBAR                                     -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -214,13 +198,13 @@
    <extension
          point="org.eclipse.ui.importWizards">
       <category
-            name="EGradle Import"
-            id="egradle.importWizards.rootProjectImport">
+            name="EGradle"
+            id="egradle.importWizards.category">
       </category>
       <wizard
-            name="Import EGradle"
+            name="Import gradle root project with all subprojects"
             icon="icons/gradle-og.gif"
-            category="egradle.importWizards.rootProjectImport"
+            category="egradle.importWizards.category"
             class="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard"
             id="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
          <description>
@@ -318,6 +302,13 @@
 		</enablement>
 	</consolePageParticipant>
   </extension>
+  <extension point="org.eclipse.debug.ui.consoleLineTrackers">
+	   <consoleLineTracker 
+	      id="de.jcup.egradle.EGradleConnsoleLineTracker"
+	      class="de.jcup.egradle.eclipse.console.EGradleConsoleLineTracker"
+	      processType="EGradleRuntimeProcess">
+	   </consoleLineTracker>
+   </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          LAUNCHING                                   -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -343,14 +334,15 @@
 			type="de.jcup.egradle.launchConfigurationType">
 		</launchConfigurationTabGroup>
 	</extension>
-	<!-- launch image -->
+	<!-- launch image 
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 	  <launchConfigurationTypeImage
-	     id="com.example.FirstLaunchConfigurationTypeImage"
+	     id="de.jcup.egradle.launchConfigurationTypeImage"
 	     configTypeID="de.jcup.egradle.launchConfigurationType"
 	     icon="icons/gradle-og.gif">
 	  </launchConfigurationTypeImage>
  	</extension>
+ 	-->
  	<!-- launch shortcuts for Run...as ... -->
  	<extension point="org.eclipse.debug.ui.launchShortcuts">
     	<shortcut

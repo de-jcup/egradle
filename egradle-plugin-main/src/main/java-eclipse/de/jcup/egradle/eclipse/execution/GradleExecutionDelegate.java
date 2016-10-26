@@ -59,29 +59,40 @@ public class GradleExecutionDelegate {
 		return result;
 	}
 
+	/**
+	 * Creates a new gradle execution delegate
+	 * @param outputHandler
+	 * @param processExecutor
+	 * @param additionalContextPreparator
+	 * @param rootProject if null rootProject will be resolved by preferences
+	 * @throws GradleExecutionException
+	 */
 	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
+			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject) throws GradleExecutionException {
 		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
 
+		if (rootProject==null){
+			rootProject = EGradleUtil.getRootProject(false);
+		}
+		if (rootProject == null) {
+			/*
+			 * we handle the error on creation time by own exception thrown -
+			 * without EGradleUtil error dialog
+			 */
+			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
+		}
 		this.outputHandler = outputHandler;
 
-		context = createContext();
+		context = createContext(rootProject);
 		if (additionalContextPreparator != null) {
 			additionalContextPreparator.prepare(context);
 		}
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private GradleContext createContext() throws GradleExecutionException {
-		/*
-		 * we handle the error on creation time by own exception thrown -
-		 * without EGradleUtil error dialog
-		 */
-		GradleRootProject rootProject = EGradleUtil.getRootProject(false);
-		if (rootProject == null) {
-			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
-		}
+	private GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+		
 		/* build configuration for gradle run */
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
