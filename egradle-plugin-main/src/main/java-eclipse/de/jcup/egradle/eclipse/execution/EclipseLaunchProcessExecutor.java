@@ -34,7 +34,8 @@ import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.core.process.WorkingDirectoryProvider;
+import de.jcup.egradle.core.process.ProcessConfiguration;
+import de.jcup.egradle.core.process.ProcessContext;
 import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
@@ -51,9 +52,9 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	}
 
 	@Override
-	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envprovider, String... commands) throws IOException {
+	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envprovider, ProcessContext processContext, String... commands) throws IOException {
 		try{
-			return super.execute(wdProvider, envprovider, commands);
+			return super.execute(wdProvider, envprovider, processContext, commands);
 		}catch(IOException | RuntimeException e){
 				EGradleUtil.log(e);
 				/* problem occured - we have to cleanup launch otherwise launches will be kept in UI and not removeable!*/
@@ -106,11 +107,12 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
 
 		attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
+		
 		/*
 		 * bind process to runtime process, so visible and correct handled in
 		 * debug UI
 		 */
-		EGradleRuntimeProcess rp = new EGradleRuntimeProcess(launch, process, label, attributes);
+		EGradleRuntimeProcess rp = EGradleRuntimeProcess.create(launch, process, label, attributes);
 		// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
 
 		handler.output("Launch started - for details see output of " + label);

@@ -42,22 +42,20 @@ import de.jcup.egradle.core.api.ForgetMe;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
-public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
-	
+public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
-		String tasks = configuration.getAttribute(PROPERTY_TASKS, "");
 		String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
 
-		executeByHandler(launch, projectName, tasks, options);
+		executeByHandler(launch, projectName, options);
 
 	}
 
-	private void executeByHandler(ILaunch launch, String projectName, String tasks, String options)
+	private void executeByHandler(ILaunch launch, String projectName, String options)
 			throws CoreException {
 
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
@@ -76,6 +74,11 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						IParameterValues values = parameter.getValues();
 						@SuppressWarnings("unchecked")
 						Map<Object, Object> map = values.getParameterValues();
+						map.clear();// Bugfix #79: We always clear the map. It
+									// seems it is reused between every command
+									// call - the junit import job was added by
+									// other plugin, but the map was reused, so
+									// the job was always there!!!!!
 						map.put(LAUNCH_ARGUMENT, launch);
 						appendAdditionalLaunchParameters(map);
 						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
@@ -88,14 +91,21 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						handlerService.executeCommand(parametrizedCommand, null);
 
 					} catch (Exception e) {
-						if (ExceptionUtils.getRootCause(e) instanceof ForgetMe){
-							/* do nothing, already handled*/
-						}else{
+						if (ExceptionUtils.getRootCause(e) instanceof ForgetMe) {
+							/* do nothing, already handled */
+						} else {
 							throw new IllegalStateException("EGradle launch command execution failed", e);
 						}
 					} finally {
-						/* FIXME ATR, 23.09.2016: when exceptions are occuring while launching the old launches are still existing in debug view*/
-						/* the following workaround does really work, but it is the correct place*/
+						/*
+						 * FIXME ATR, 23.09.2016: when exceptions are occuring
+						 * while launching the old launches are still existing
+						 * in debug view
+						 */
+						/*
+						 * the following workaround does really work, but it is
+						 * the correct place
+						 */
 						if (!launch.isTerminated()) {
 							try {
 								launch.terminate();
@@ -114,11 +124,13 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	}
 
 	/**
-	 * Append additional launch parameters for gradle command handler. This is done inside UI Thread
+	 * Append additional launch parameters for gradle command handler. This is
+	 * done inside UI Thread
+	 * 
 	 * @param map
 	 */
 	protected void appendAdditionalLaunchParameters(Map<Object, Object> map) {
-		
+
 	}
 
 }

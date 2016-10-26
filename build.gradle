@@ -1,6 +1,4 @@
 allprojects{
-	/* gradle.properties werden sowieso immer geladen*/
-	/* libraries.gradle - manuell nachladen*/
 	apply from: "${rootProject.projectDir}/libraries.gradle"
 	/* turn off doclint java 8 */
 	if (JavaVersion.current().isJava8Compatible()) {

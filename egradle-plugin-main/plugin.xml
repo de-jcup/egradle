@@ -2,6 +2,23 @@
 <?eclipse version="3.4"?>
 <plugin>
     
+   <extension 
+   		id="de.jcup.egradle.script.problem"
+    	point="org.eclipse.core.resources.markers"
+    	name="Gradle build script problem">
+        <super type="org.eclipse.core.resources.problemmarker"/>
+        <super type="org.eclipse.core.resources.textmarker"/>
+        <persistent value="false"/>
+    </extension>
+    
+	 <extension point="org.eclipse.debug.ui.consoleLineTrackers">
+	   <consoleLineTracker 
+	      id="de.jcup.egradle.EGradleConnsoleLineTracker"
+	      class="de.jcup.egradle.eclipse.console.EGradleConsoleLineTracker"
+	      processType="EGradleRuntimeProcess">
+	   </consoleLineTracker>
+	 </extension>
+    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          NATURE	(Virtual root projects only)		 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -61,17 +78,6 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          EDITOR                                      -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            name="EGradle Editor"
-            extensions="gradle"
-            icon="icons/gradle-og.gif"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
-            class="de.jcup.egradle.eclipse.editors.GradleEditor"
-            id="egradle.editors.GradleEditor">
-      </editor>
-   </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -83,7 +89,7 @@
             name="EGradle">
       </category>
       <command
-            name="Refresh all eclipse dependencies command"
+            name="Refresh all eclipse dependencies"
             categoryId="egradle.commands.category"
             id="egradle.commands.refreshEclipse">
       </command>
@@ -104,7 +110,7 @@
             categoryId="egradle.commands.category"
             id="egradle.commands.updateOrCreateVirtualRootProject">
       </command>
-       <command
+      <command
             name="Quick gradle task execution"
             categoryId="egradle.commands.category"
             id="egradle.commands.quickTaskExecution">
@@ -222,31 +228,49 @@
          </description>
       </wizard>
    </extension>
-    <!--
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
-            id="egradle.contribution1">
-         <menu
-               icon="icons/gradle-og.gif"
-               id="egradle.menu1"
-               label="Gradle"
-               path="additions">
-            <separator
-                  name="group1">
-            </separator>
-         </menu>
-         <action
-               label="My gradle action(TBD)"
-               class="de.jcup.egradle.eclipse.popup.actions.EGradleAction"
-               menubarPath="egradle.menu1/group1"
-               enablesFor="1"
-               id="egradle.newAction">
-         </action>
-      </objectContribution>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--        POPUP                                                         -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   
+    <extension point="org.eclipse.ui.menus">
+        <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
+        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+                <command commandId="egradle.commands.updateOrCreateVirtualRootProject"
+                        label="Recreate Virtual Root Project" 
+                        tooltip="Recreates the complete virtual root project"
+                        icon="icons/updateOrCreateVirtualRootProject.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+                <command commandId="egradle.commands.refreshEclipse"
+                        label="Refresh eclipse dependencies" 
+                        tooltip="Refreshes all eclipse dependencies"
+                        icon="icons/refreshAllEclipseDependencies.png"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+        </menuContribution>
    </extension>
-    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -257,11 +281,23 @@
             class="de.jcup.egradle.eclipse.preferences.EGradlePreferencePage"
             id="egradle.preferences.EGradlePreferencePage">
       </page>
+      <page
+         id="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
+         class="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
+         name="Validation"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
+      <page
+         id="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
+         class="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
+         name="Decoration"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="de.jcup.egradle.eclipse.preferences.PreferenceInitializer">
+            class="de.jcup.egradle.eclipse.preferences.EGradlePreferenceInitializer">
       </initializer>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -272,7 +308,7 @@
 	   <consoleFactory
 	         class="de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory"
 	         icon="icons/gradle-og.gif"
-	         label="EGradle system console">
+	         label="EGradle System Console">
 	   </consoleFactory>
    </extension>
   <extension point="org.eclipse.ui.console.consolePageParticipants">
@@ -352,7 +388,7 @@
 			mode = "run"
 			label = "EGradle"
 			image = "icons/gradle-og.gif"
-			bannerImage = "icons/gradle-banner-image.png">
+			bannerImage = "icons/egradle-banner_128x128.png">
 		</launchGroup>
 		
 	</extension>

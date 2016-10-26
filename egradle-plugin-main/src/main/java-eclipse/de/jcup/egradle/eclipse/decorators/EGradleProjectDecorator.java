@@ -28,10 +28,10 @@ import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.FileHelper;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 
 /**
  * Dedicated decorator for projects only. Will only decorate subprojects inside
@@ -70,7 +70,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		if (EGradleUtil.isVirtualRootProject(p)){
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
-			decoration.addOverlay(egradleProjectDescriptor, IDecoration.BOTTOM_LEFT);
+			decorateImage(decoration);
 			return;
 		}
 		IPath path = p.getLocation();
@@ -90,12 +90,18 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			if (!rootFolder.equals(parentFolder)) {
 				return;
 			}
-
-			decoration.addOverlay(egradleProjectDescriptor, IDecoration.BOTTOM_LEFT);
+			if (EGradlePreferences.PREFERENCES.isSubProjectIconDecorationEnabled()){
+				decorateImage(decoration);
+			}
 		} catch (CoreException e) {
 			EGradleUtil.log(e);
 		}
 
+	}
+
+	private void decorateImage(IDecoration decoration) {
+		// TOP_LEFT
+		decoration.addOverlay(egradleProjectDescriptor, IDecoration.TOP_LEFT);
 	}
 
 	@Override

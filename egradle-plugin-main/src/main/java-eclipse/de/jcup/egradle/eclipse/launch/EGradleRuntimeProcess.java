@@ -19,13 +19,15 @@ import java.util.Map;
 
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.IStreamListener;
+import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamMonitor;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.debug.core.model.RuntimeProcess;
 
 public class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener {
 
-	public EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
+	
+	private EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
 		super(launch, process, name, attributes);
 	}
 
@@ -36,6 +38,14 @@ public class EGradleRuntimeProcess extends RuntimeProcess implements IStreamList
 
 	@Override
 	public void streamAppended(String text, IStreamMonitor monitor) {
+	}
+
+	public static EGradleRuntimeProcess create(ILaunch launch, Process process, String name,
+			Map<String, String> attributes) {
+		// workaround, because attribute must be set before constructor call
+		// DEFINE EGRADLE AS PROCESS TYPE - so console line tracker is able to track
+				attributes.put(IProcess.ATTR_PROCESS_TYPE, "EGradleRuntimeProcess");
+		return new EGradleRuntimeProcess(launch, process, name, attributes);
 	}
 
 }

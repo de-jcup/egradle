@@ -22,13 +22,14 @@ public interface ProcessExecutor {
 	public static final Integer PROCESS_RESULT_OK = Integer.valueOf(0);
 
 	/**
-	 * Execute commands in given working directory
+	 * Execute commands in given working directory. Is done in same thread. Will wait until execution result is available (process terminates...)
 	 * 
 	 * @param wdProvider
 	 * @param envProvider 
+	 * @param processContext context for process operations and states
 	 * @param commands
 	 * @return result code
 	 * @throws IOException
 	 */
-	public int execute(WorkingDirectoryProvider wdProvider, EnvironmentProvider envProvider, String... commands) throws IOException;
+	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envProvider, ProcessContext processContext, String... commands) throws IOException;
 }

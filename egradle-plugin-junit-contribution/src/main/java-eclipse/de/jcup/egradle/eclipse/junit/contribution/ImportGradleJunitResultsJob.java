@@ -44,14 +44,21 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 	JUnitResultsCompressor compressor = new JUnitResultsCompressor();
 	JUnitResultFilesFinder finder = new JUnitResultFilesFinder();
 	private String projectname;
+	private boolean ignoreOnValdationErrors;
 
-	public ImportGradleJunitResultsJob(String name, String projectname) {
+	public ImportGradleJunitResultsJob(String name, String projectname, boolean ignoreOnValidationErrors) {
 		super(name);
 		this.projectname=projectname;
+		this.ignoreOnValdationErrors= ignoreOnValidationErrors;
 	}
 
 	@Override
 	protected IStatus run(IProgressMonitor _monitor) {
+		if (ignoreOnValdationErrors){
+			if (EGradleUtil.existsValidationErrors()){
+				return Status.CANCEL_STATUS;
+			}
+		}
 		SubMonitor monitor = SubMonitor.convert(_monitor);
 		monitor.beginTask("Import junit results from gradle", 100);
 		File tempFile=new File(EGradleUtil.getTempFolder(),"TEST-egradle-all-testresults.tmp.xml");

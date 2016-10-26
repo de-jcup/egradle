@@ -119,7 +119,32 @@ public class JUnitResultsCompressorTest {
 	}
 	
 	@Test
-	public void two_testsuites_with_two_testcases_inside_are_in_result_document_as_well() throws Exception{
+	public void two_testsuites_with_two_testcases_inside_are_in_result_document_as_well__without_pseudo_testsuite() throws Exception{
+		/* prepare */
+		Collection<InputStream> streams = new ArrayList<>();
+		String text1="<testsuite name='suite1'><testcase name='name1'/></testsuite>";
+		String text2="<testsuite name='suite2'><testcase name='name2'/><testcase name='name3'/></testsuite>";
+		
+		streams.add(new ByteArrayInputStream(text1.getBytes()));
+		streams.add(new ByteArrayInputStream(text2.getBytes()));
+		compressorToTest.setAddEGradlePseudoTestSuite(false);
+		
+		/* execute */
+		Document result = compressorToTest.compress(streams);
+		
+		/* test */
+		assertNotNull(result);
+		NodeList testSuiteElements = result.getElementsByTagName("testsuite");
+		assertEquals(2, testSuiteElements.getLength());
+		
+		NodeList testCaseElements = result.getElementsByTagName("testcase");
+		assertEquals(3, testCaseElements.getLength());
+		
+		
+	}
+	
+	@Test
+	public void two_testsuites_with_two_testcases_inside_are_in_result_document_as_well_with_gradle_pseudo_testsuite() throws Exception{
 		/* prepare */
 		Collection<InputStream> streams = new ArrayList<>();
 		String text1="<testsuite name='suite1'><testcase name='name1'/></testsuite>";
@@ -134,7 +159,7 @@ public class JUnitResultsCompressorTest {
 		/* test */
 		assertNotNull(result);
 		NodeList testSuiteElements = result.getElementsByTagName("testsuite");
-		assertEquals(2, testSuiteElements.getLength());
+		assertEquals(3, testSuiteElements.getLength());
 		
 		NodeList testCaseElements = result.getElementsByTagName("testcase");
 		assertEquals(3, testCaseElements.getLength());

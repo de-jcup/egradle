@@ -59,11 +59,17 @@ public class EGradleMessageDialog {
 
 			@Override
 			public void run() {
-				Image backgroundImage = EGradleUtil.getImage("icons/gradle-build-failed.png");
+				String text = detail;
+				String path = "icons/gradle-build-failed.png";
+				if (EGradleUtil.existsValidationErrors()){
+					text = text+"\n(Please look into problems view for details about compile/evaluation failures)";
+					path="icons/gradle-script-failure.png";
+				}
+				Image backgroundImage = EGradleUtil.getImage(path);
 				Image titleImage = EGradleUtil.getImage("icons/gradle-og.gif");
 				
 				Shell shell = getActiveWorkbenchShell();
-				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, detail);
+				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);
 				bfdialog.open();
 				
 			}

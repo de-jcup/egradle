@@ -23,15 +23,30 @@ public class FormatConverter {
 	 * @return converted string or 0 if not parseable
 	 */
 	public int convertToInt(String string) {
-		int result = 0;
+		return convertToInt(string,0);
+	}
+	/**
+	 * Converts given string to integer. If not parseable the result will be given defaultValue
+	 * @param string
+	 * @param defaultValue
+	 * @return converted string or defaultvalue if not parseable
+	 */
+	public int convertToInt(String string, int defaultValue) {
+		int result = defaultValue;
 		if (string==null){
 			return result;
 		}
+		string = string.trim();
 		try{
 			result = Integer.parseInt(string);
 		}catch(NumberFormatException e){
+			handleException(e);
 		}
 		return result;
+	}
+	
+	void handleException(NumberFormatException e) {
+		/* do nothing per default */
 	}
 	/**
 	 * Converts given string to double. If not parseable the result will be 0
@@ -43,9 +58,11 @@ public class FormatConverter {
 		if (string==null){
 			return result;
 		}
+		string = string.trim();
 		try{
 			result = Double.parseDouble(string);
 		}catch(NumberFormatException e){
+			handleException(e);
 		}
 		return result;
 	}

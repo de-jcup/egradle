@@ -258,6 +258,10 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		if (EGradleUtil.isVirtualRootProject(project)) {
 			return "";
 		}
+		/* when the project itself is the root - leave project name empty!*/
+		if (EGradleUtil.isRootProject(project)){
+			return "";
+		}
 		try {
 			File projectRealFolderName = FileHelper.SHARED.toFile(project);
 			return projectRealFolderName.getName();

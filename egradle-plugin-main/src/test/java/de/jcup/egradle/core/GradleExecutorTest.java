@@ -121,7 +121,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "mockedCommand1");
 	}
 	
 	@Test
@@ -133,7 +133,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand", "mockedCommand1");
 	}
 	
 	@Test
@@ -145,7 +145,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","opt1","opt2", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand","opt1", "opt2", "mockedCommand1");
 	}
 	
 	@Test
@@ -157,7 +157,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
 	}
 	
 	@Test
@@ -169,7 +169,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
 	}
 	
 	@Test
@@ -182,7 +182,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand","opt1", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "opt1", "mockedCommand1");
 	}
 	
 	@Test
@@ -194,7 +194,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,mockedContext,"gradleCommand", "mockedCommand1");
 	}
 	
 	@Test
@@ -206,7 +206,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,mockedContext,"gradleCommand", "mockedCommand1");
 	}
 	
 	@Test
@@ -218,7 +218,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, "cmd.exe","/C", "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"cmd.exe", "/C", "gradleCommand", "mockedCommand1");
 	}
 	
 
@@ -230,7 +230,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
 	}
 
 	@Test
@@ -243,8 +243,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "-test1", "-test2",
-				"mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "-test1",
+				"-test2", "mockedCommand1");
 	}
 
 	@Test
@@ -259,8 +259,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand",
-				"-Pgradle.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  mockedContext,
+				"gradleCommand", "-Pgradle.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -276,7 +276,7 @@ public class GradleExecutorTest {
 		executorToTest.execute(mockedContext);
 		/* test */
 		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, 
-				"gradleCommand", "-Dsystem.test.property=test", "mockedCommand1");
+				mockedContext, "gradleCommand", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -294,8 +294,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  mockedContext,
+				"gradleCommand", "-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -314,8 +314,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "-option",
-				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand",
+				"-option", "-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -328,7 +328,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1", "mockedCommand2");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1", "mockedCommand2");
 	}
 
 	@Test
@@ -343,6 +343,6 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
 	}
 }

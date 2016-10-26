@@ -18,29 +18,37 @@ package de.jcup.egradle.eclipse.virtualroot;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
+import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.ProjectDescriptionCreator;
 import de.jcup.egradle.eclipse.api.ResourceHelper;
 
 public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreator {
 	private ResourceHelper r = ResourceHelper.SHARED;
 	private IProject newProject;
-
+	
 	private List<File> foldersToIgnore;
 	private File rootFolder;
 	private SubMonitor monitor;
@@ -98,18 +106,46 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			monitor.subTask("create project");
 			try {
 				File newProjectFolder = new File(rootprojectFolder,".egradle");
-				newProject = r.createOrRefreshProject(projectName, monitor,  newProjectFolder.toURI(), VirtualRootProjectNature.NATURE_ID);
+				URI creationPath = newProjectFolder.toURI();
+				ProjectDescriptionCreator projectDescriptionCreator = new ProjectDescriptionCreator(){
+
+					@Override
+					public IProjectDescription createNewProjectDescription(String projectName) {
+						IWorkspace workspace = ResourcesPlugin.getWorkspace();
+						IProjectDescription initialDescription = workspace.newProjectDescription(projectName);
+						initialDescription.setLocationURI(creationPath);
+						initialDescription.setComment(
+								"EGradle virtual root project - only a temporary project.\n"
+								+ "There are  only two files: .gitignore and .project which will be created,\n"
+								+ "all other files are just links.\n"
+								+ "\n"
+								+ "Please do NOT change these two generated files!!");
+						return initialDescription;
+					}
+					
+				};
+				newProject = r.createOrRefreshProject(projectName, monitor,  projectDescriptionCreator, VirtualRootProjectNature.NATURE_ID);
+				
+				
+				
 				newProjectFile = newProject.getLocation().toFile();
 
 				/* create .gitignore file*/
 				File parentFolder = new File(newProject.getLocationURI());
 				r.getFileHelper().createTextFile(parentFolder, ".gitignore", "*"); // ignore .egradle completely
 
+				r.addFileFilter(newProject, ".gitignore",creationMonitor);	// ok. git ignore is no more seen on navigator
+				//r.addFileFilter(newProject, ".project",creationMonitor);	//.project seems to be not filterable...
+				/* I had the idea to make .project readonly but this does not work, because .project is necessary to contain new created links etc.*/
 			} catch (CoreException e) {
 				new VirtualRootProjectException("Cannot (re)create newProject:" + projectName, e);
 			}
+
+			
+			
 			monitor.worked(3);
 			monitor.done();
+			
 			return newProject;
 
 		} catch (VirtualRootProjectException e) {
@@ -122,7 +158,11 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 
 	@Override
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
-		notNull(targetFolder, "'targetFolder' may not be null");
+		if (targetFolder==null){
+			String message = "Cannot create link for file"+file+", because target folder is null!";
+			EGradleUtil.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
+			return false;
+		}
 		notNull(file, "'file' may not be null");
 		boolean creationNeeded = internalCheckIfLinkMustBeCreated(targetFolder, file);
 		if (!creationNeeded) {
@@ -149,14 +189,14 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	}
 	/**
 	 * Check if given file should be linked inside project
-	 * @param projectItSelf
+	 * @param virtualRootProject
 	 * @param newProjectFile 
-	 * @param foldersToIgnore - a list of folders to ignore for inspection
-	 * @param targetFolder - where to create the link
-	 * @param file
+	 * @param foldersToIgnore a list of folders to ignore for inspection
+	 * @param targetFolder where to create the link
+	 * @param file - origin file/folder
 	 * @return <code>true</code> when a link candidate
 	 */
-	protected static boolean isLinkCandidate(IProject projectItSelf, File newProjectFile, List<File> foldersToIgnore, Object targetFolder, File file) {
+	protected static boolean isLinkCandidate(IProject virtualRootProject, File newProjectFile, List<File> foldersToIgnore, Object targetFolder, File file) {
 		if (newProjectFile.equals(file)){
 			/* root project cannot link to itself - infinite loop...*/
 			return false;
@@ -166,24 +206,24 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			return false;
 		}
 		String fileName = file.getName();
-		boolean directory = file.isDirectory();
-		boolean isFile = file.isFile();
-		boolean isHidden= file.isHidden();
-		boolean isx = file.exists();
-		if (!isx){
+		boolean fileIsDirectory = file.isDirectory();
+		boolean fileExists = file.exists();
+		if (!fileExists){
 			return false;
 		}
-		if (directory) {
+		if (fileIsDirectory) {
 			if (FOLDERNAMES_NOT_TO_LINK.contains(fileName)) {
 				return false;
 			}
-			if (targetFolder == projectItSelf) {
+			if (targetFolder == virtualRootProject) { // inside root
 				if (foldersToIgnore.contains(file)) {
+					/* ignored - normally because eclipse project inside*/
 					return false;
 				}
+				/* okay, directory link has to be created*/
 				return true;
 			}
-			/* we do not dive into */
+			/* we do not dive into folders deeper than root folder - because links to folders does all the job*/
 			return false;
 		} else {
 			/* not a directory but a normal file */
@@ -207,15 +247,15 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		IPath path = Path.fromPortableString(file.getName());
 		try {
 			if (file.isDirectory()) {
-				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
-				r.createLinkedFolder(container, path, file);
-			} else {
 				getCreationMonitor().subTask("Create link to folder '" + file.getName() + "'");
+				r.createLinkedFolder(container, path, file);
+			} else if (file.isFile()){
+				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
 				r.createLinkedFile(container, path, file);
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
-			throw new VirtualRootProjectException("Was not able to create link to file:" + file, e);
+			EGradleUtil.log(new Status(IStatus.ERROR,Activator.PLUGIN_ID,"Was not able to create link to file:" + file, e));
 		}
 
 	}

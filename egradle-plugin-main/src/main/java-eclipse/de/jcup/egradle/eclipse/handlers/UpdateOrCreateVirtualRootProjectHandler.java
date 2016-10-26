@@ -20,17 +20,41 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
+import de.jcup.egradle.eclipse.EGradleMessageDialog;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
-
+	public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
+	
+	private boolean running=false;
+	
 	@Override
-	public Object execute(ExecutionEvent arg0) throws ExecutionException {
-		try {
-			EGradleUtil.createOrRecreateVirtualRootProject();
-		} catch (VirtualRootProjectException e) {
-			throw new ExecutionException("Virtual root project not (re)createable", e);
+	public boolean isEnabled() {
+		return super.isEnabled();
+	}
+	
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		if (running){
+			EGradleMessageDialog.INSTANCE.showWarning("Virtual root project (re-)creation already running. Please wait");
+			return null;
 		}
+		running=true;
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					EGradleUtil.createOrRecreateVirtualRootProject();
+				} catch (VirtualRootProjectException e) {
+					EGradleUtil.log(e);
+					EGradleMessageDialog.INSTANCE.showError("Virtual root project not (re)createable. Please try again");
+				}finally{
+					running=false;
+				}
+			}
+		},"Update virtual root project").start();;
+		
 		return null;
 	}
 

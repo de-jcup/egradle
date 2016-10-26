@@ -19,7 +19,7 @@
 				<li><a href="#runOnTestFile">On a Junit Test File</a></li>
 				<li><a href="#runOnTestMethod">On a Junit Test Method</a></li>
 			</ul></li>
-
+		<li><a href="#configuration">Configure gradle test execution</a></li>
 	</ul>
 
 	<h2 id="import_all">Import all existing test results from gradle</h2>
@@ -54,7 +54,7 @@
 		given project are executed and shown.</p>
 	<img src="images/egradle-junit-launchconfiguration.png" />
 	<br>
-	<br>Here you can see an output example
+	<br><p>Here you can see an output example:</p>
 	<img src="images/egradle-junit-launchresult.png" />
 	<p>
 		<a href="#top">Top</a>
@@ -83,6 +83,22 @@
 	select "Run as ... EGradle Junit Test". This will execute only the
 	selected test method. If the configuration does not already exist for
 	the file and the method, it will be created.
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h2 id="configuration">Configure gradle test execution</h2>
+	<p>
+		Your are able to change what has to be done before tests are executed: 
+	</p>
+	<img src="images/egradle-junit-preferences.png" />
+	<br/><br/>
+	<p>
+		<ul>
+			<li>clean all - executes with "clean". <br/>Will clean classes, resources, tests etc.</li><br/>
+			<li>clean tests only - executes with "cleanTest".<br/>Will clean only tests, so it's normally much faster in execution.</li><br/>
+			<li>clean nothing - executes with no clean operation at all. <br/>Fastest, but be aware: Maybe you got old tests results of no more existing tests in your junit imports...</li><br/>
+		</ul>
+	</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>

@@ -15,12 +15,12 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-import static de.jcup.egradle.eclipse.preferences.PreferenceConstants.*;
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +28,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -62,6 +63,9 @@ import org.osgi.framework.Bundle;
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
+import de.jcup.egradle.core.validation.GradleOutputValidator;
+import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.Activator;
@@ -70,19 +74,26 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
+import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature;
 
 public class EGradleUtil {
 
-	public static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
+	private static UnpersistedMarkerHelper buildScriptProblemMarkerHelper = new UnpersistedMarkerHelper(
+			"de.jcup.egradle.script.problem");
+
+	private static final int LINES_NEEDED_FOR_VALIDATION = 20;
+
+	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
 
-	private static OutputHandler outputHandler;
+	private static OutputHandler systemConsoleOutputHandler;
 
 	private static VirtualProjectCreator virtualProjectCreator = new VirtualProjectCreator();
-
+	
 	public static ImageDescriptor createImageDescriptor(String path) {
 		return createImageDescriptor(path, Activator.PLUGIN_ID);
 	}
@@ -126,12 +137,30 @@ public class EGradleUtil {
 
 	}
 
+	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
+		int max;
+		if (EGradlePreferences.PREFERENCES.isValidationEnabled()){
+			max=LINES_NEEDED_FOR_VALIDATION;
+		}else{
+			max=0;
+		}
+		return new RememberLastLinesOutputHandler(max);
+	}
+	public static boolean existsValidationErrors() {
+		/* Not very smart integrated, because static but it works...*/
+		return buildScriptProblemMarkerHelper.hasErrors();
+	}
+
 	public static IEditorPart getActiveEditor(){
 		IWorkbenchPage page = getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
 		return activeEditor;
 	}
-	
+
+	/**
+	 * Returns active page or <code>null</code>
+	 * @return active page or <code>null</code>
+	 */
 	public static IWorkbenchPage getActivePage() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window == null) {
@@ -210,7 +239,7 @@ public class EGradleUtil {
 	 * @return root project or <code>null</code>
 	 */
 	public static GradleRootProject getRootProject(boolean showErrorDialog) {
-		String path = PREFERENCES.getStringPreference(P_ROOTPROJECT_PATH);
+		String path = PREFERENCES.getRootProjectPath();
 		if (StringUtils.isEmpty(path)) {
 			if (showErrorDialog) {
 				EGradleMessageDialog.INSTANCE.showError(MESSAGE_MISSING_ROOTPROJECT);
@@ -265,10 +294,10 @@ public class EGradleUtil {
 	}
 
 	public static OutputHandler getSystemConsoleOutputHandler() {
-		if (outputHandler == null) {
-			outputHandler = new EGradleSystemConsoleProcessOutputHandler();
+		if (systemConsoleOutputHandler == null) {
+			systemConsoleOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
 		}
-		return outputHandler;
+		return systemConsoleOutputHandler;
 	}
 
 	/**
@@ -321,12 +350,48 @@ public class EGradleUtil {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		return window;
 	}
+	
+	/**
+	 * Returns true when given project is configured as root project 
+	 * @param project
+	 * @return <code>true</code> when project location is same as root project
+	 */
+	public static boolean isRootProject(IProject project) {
+		if (project==null){
+			return false;
+		}
+		File rootFolder = getRootProjectFolderWithoutErrorHandling();
+		if (rootFolder==null){
+			return false;
+		}
+		try {
+			File projectLocation = FileHelper.SHARED.toFile(project.getLocation());
+			return rootFolder.equals(projectLocation);
+		} catch (CoreException e) {
+			/* ignore ... project not found anymore*/
+			return false;
+		}
+	}
 
 	static boolean isUIThread() {
 		if (Display.getCurrent() == null) {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean isVirtualRootProject(IProject project) {
+		if (project==null){
+			return false;
+		}
+		boolean virtualProjectNatureFound;
+		try {
+			virtualProjectNatureFound = project.hasNature(VirtualRootProjectNature.NATURE_ID);
+			return virtualProjectNatureFound;
+		} catch (CoreException e) {
+			/* ignore ... project not found anymore*/
+			return false;
+		}
 	}
 
 	public static void log(IStatus status) {
@@ -341,6 +406,10 @@ public class EGradleUtil {
 					t));
 		}
 
+	}
+
+	public static void logInfo(String message){
+		log(new Status(IStatus.INFO,Activator.PLUGIN_ID,message));
 	}
 
 	public static void openSystemConsole() {
@@ -419,7 +488,7 @@ public class EGradleUtil {
 		});
 
 	}
-
+	
 	public static void refreshAllProjects() {
 		refreshAllProjects(null);
 	}
@@ -447,32 +516,87 @@ public class EGradleUtil {
 
 	}
 
+	public static void removeAllValidationErrorsOfConsoleOutput() {
+		try {
+			buildScriptProblemMarkerHelper.removeAllErrorMarkers();
+		} catch (CoreException e) {
+			log(e);
+		}
+	}
+
 	public static void safeAsyncExec(Runnable runnable) {
 		getSafeDisplay().asyncExec(runnable);
 	}
 
+	
+	/**
+	 * If given list of console output contains error messages error markers for files will be created
+	 * @param consoleOutput
+	 */
+	public static void showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
+		boolean validationEnabled = EGradlePreferences.PREFERENCES.isValidationEnabled();
+		if(!validationEnabled){
+			return;
+		}
+		GradleOutputValidator validator = new GradleOutputValidator();
+		ValidationResult result = validator.validate(consoleOutput);
+		if (result.hasProblem()) {
+			try{
+				IResource resource = null;
+				
+				String scriptPath = result.getScriptPath();
+				File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
+				if (rootFolder == null) {
+					/*
+					 * this problem should not occure, because other gradle actions
+					 * does check this normally before. as a fallback simply do
+					 * nothing
+					 */
+					EGradleUtil.logInfo("Was not able to validate, because no root folder set!");
+					return;
+				}
+				String rootFolderPath = rootFolder.getAbsolutePath();
+				File file = new File(scriptPath);
+				if (!file.exists()) {
+					resource = ResourcesPlugin.getWorkspace().getRoot();
+					buildScriptProblemMarkerHelper.createErrorMarker(resource,
+							"Build file which prodocues error does not exist:" + file.getAbsolutePath(), 0);
+					return;
+				}
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				resource = workspace.getRoot().getFileForLocation(Path.fromOSString(scriptPath));
+				if (resource == null) {
+					if (scriptPath.startsWith(rootFolderPath)) {
+						scriptPath = scriptPath.substring(rootFolderPath.length());
+					}
+					IProject virtualRootProject = workspace.getRoot().getProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+					if (virtualRootProject.exists()) {
+						resource = virtualRootProject.getFile(scriptPath);
+					}
+				}
+				
+				if (resource == null) {
+					// fall back to workspace root - so at least we can create an
+					// error marker...
+					resource = ResourcesPlugin.getWorkspace().getRoot();
+				}
+				buildScriptProblemMarkerHelper.createErrorMarker(resource, result.getErrorMessage(), result.getLine());
+				
+			}catch(Exception e){
+				log(e);
+			}
+		}
+		return;
+	}
+	
 	public static void throwCoreException(String message) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message));
 
 	}
-	
+
 	public static void throwCoreException(String message, Exception e) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message,e));
 
-	}
-
-	public static boolean isVirtualRootProject(IProject project) {
-		if (project==null){
-			return false;
-		}
-		boolean virtualProjectNatureFound;
-		try {
-			virtualProjectNatureFound = project.hasNature(VirtualRootProjectNature.NATURE_ID);
-			return virtualProjectNatureFound;
-		} catch (CoreException e) {
-			/* ignore ... project not found anymore*/
-			return false;
-		}
 	}
 
 }
