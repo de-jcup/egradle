@@ -48,7 +48,7 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 			String configuredTasksValue= configuration.getAttribute(PROPERTY_TASKS, "");
 			String tasksToExecute = variableReplacement.replace(configuredTasksValue, JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks());
 			
-			map.put(LAUNCH_POST_JOB, new ImportGradleJunitResultsJob("Import gradle junit results",projectName));
+			map.put(LAUNCH_POST_JOB, new ImportGradleJunitResultsJob("Import gradle junit results",projectName,true));
 			map.put(LAUNCH_TASKS_ATTRBUTE_OVERRIDE, tasksToExecute);
 		} catch (CoreException e) {
 			EGradleUtil.log(e);

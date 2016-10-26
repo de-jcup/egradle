@@ -27,7 +27,7 @@ public class ImportAllGradleJunitResultsHandler extends AbstractHandler {
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results",null);
+		ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results",null,false);
 		job.schedule();
 		return null;
 	}

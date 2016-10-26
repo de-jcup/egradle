@@ -47,6 +47,11 @@ public class EGradlePreferences {
 		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId());
 		return validationEnabled;
 	}
+	
+	public boolean isSubProjectIconDecorationEnabled() {
+		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
+		return validationEnabled;
+	}
 
 	public String getGlobalJavaHomePath() {
 		return getStringPreference(EGradlePreferenceConstants.P_JAVA_HOME_PATH);

@@ -25,12 +25,12 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
-public class EGradleValidationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor validationEnabled;
+	private BooleanFieldEditor subProjectWithIconDecorationEnabled;
 
 
-	public EGradleValidationPreferencePage() {
+	public EGradleDecorationPreferencePage() {
 		super(GRID);
 		setPreferenceStore(PREFERENCES.getPreferenceStore());
 	}
@@ -49,20 +49,16 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
 
-		validationEnabled=		new BooleanFieldEditor(
-					EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId(),
-					"EGradle validation enabled",
+		subProjectWithIconDecorationEnabled=		new BooleanFieldEditor(
+					EGradlePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(),
+					"Subproject are decorated with gradle icon",
 					getFieldEditorParent());
-		addField(validationEnabled);
+		addField(subProjectWithIconDecorationEnabled);
 	}
 
 	public boolean performOk() {
 		boolean done =  super.performOk();
-		if (done){
-			if (!validationEnabled.getBooleanValue()){
-				EGradleUtil.removeAllValidationErrorsOfConsoleOutput();
-			}
-		}
+		EGradleUtil.refreshAllProjectDecorations();
 		return done;
 	}
 	
