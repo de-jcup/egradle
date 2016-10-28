@@ -15,84 +15,69 @@
  */
 package de.jcup.egradle.eclipse.importWizards;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegateAdapter;
+import de.jcup.egradle.eclipse.ui.ExecutionConfigComposite;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
-	protected DirectoryFieldEditor editor;
+	private ExecutionConfigComposite configComposite;
 
 	public EGradleRootProjectImportWizardPage(String pageName) {
 		super(pageName);
 		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
-	}
-
-	private IPath selectedPath;
-
-	private void setSelectedPath(String selectedPath) {
-		boolean empty = StringUtils.isEmpty(selectedPath);
-		setPageComplete(!empty);
-		if (empty){
-			this.selectedPath=null;
-		}else{
-			this.selectedPath = new Path(selectedPath);
-		}
-	}
-
-	IPath getSelectedPath() {
-		return selectedPath;
-	}
-
-	@Override
-	public void createControl(Composite parent) {
-		initializeDialogUnits(parent);
+		configComposite = new ExecutionConfigComposite(new InternalExecutionDelegte());
 		
-		Composite folderSelectionArea = new Composite(parent, SWT.NONE);
-		GridData fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL);
-		folderSelectionArea.setLayoutData(fileSelectionData);
-
-		GridLayout fileSelectionLayout = new GridLayout();
-		fileSelectionLayout.numColumns = 3;
-		fileSelectionLayout.makeColumnsEqualWidth = false;
-		fileSelectionLayout.marginWidth = 0;
-		fileSelectionLayout.marginHeight = 0;
-		folderSelectionArea.setLayout(fileSelectionLayout);
-
-		editor = new DirectoryFieldEditor("Gradle root folder", "Select Folder: ", folderSelectionArea); // NON-NLS-1
-		String path = EGradleUtil.getPreferences().getRootProjectPath();
-		editor.setStringValue(path);
-		setSelectedPath(path);
-		/* we use current root project path for select - so a simple full re-import is always possible*/
-		// //NON-NLS-2
-		editor.getTextControl(folderSelectionArea).addModifyListener(new ModifyListener() {
-
-			public void modifyText(ModifyEvent e) {
-				Object source = e.getSource();
-				if (source instanceof Text){
-					Text text = (Text) source;
-					setSelectedPath(text.getText());
-				}
-			}
-		});
-
-		setControl(folderSelectionArea);
 	}
 	
 	@Override
-	public boolean isPageComplete() {
-		return super.isPageComplete();
+	public void createControl(Composite parent) {
+		initializeDialogUnits(parent);
+			
+		Composite folderSelectionArea = new Composite(parent, SWT.NONE);
+		GridLayout folderSelectionLayout = new GridLayout();
+		folderSelectionLayout.numColumns = 3;
+		folderSelectionLayout.makeColumnsEqualWidth = false;
+		folderSelectionLayout.marginWidth = 0;
+		folderSelectionLayout.marginHeight = 0;
+		folderSelectionArea.setLayout(folderSelectionLayout);
+
+		configComposite.createFieldEditors(folderSelectionArea);
+		
+		/* adopt import setting from current existing preferences value*/
+		String gradleCallTypeID = getPreferences().getGradleCallTypeID();
+		String globalJavaHomePath = getPreferences().getGlobalJavaHomePath();
+		String rootProjectPath = getPreferences().getRootProjectPath();
+
+		configComposite.setGlobalJavaHomePath(globalJavaHomePath);
+		configComposite.setRootProjectPath(rootProjectPath);
+		configComposite.setGradleCallTypeId(gradleCallTypeID);
+
+		setControl(folderSelectionArea);
+	}
+
+	IPath getSelectedPath() {
+		String text = configComposite.getGradleRootPathText();
+		boolean empty = StringUtils.isEmpty(text);
+		setPageComplete(!empty);
+		if (empty){
+			return null;
+		}else{
+			return new Path(text);
+		}
+	}
+
+	private class InternalExecutionDelegte extends ExecutionConfigDelegateAdapter{
+		
 	}
 }

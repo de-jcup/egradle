@@ -71,6 +71,10 @@ public class EGradlePreferences {
 		return getStringPreference(P_GRADLE_SHELL);
 	}
 
+	public String getGradleCallTypeID(){
+		return getStringPreference(P_GRADLE_CALL_TYPE);
+	}
+	
 	public String getRootProjectPath() {
 		return getStringPreference(P_ROOTPROJECT_PATH);
 	}

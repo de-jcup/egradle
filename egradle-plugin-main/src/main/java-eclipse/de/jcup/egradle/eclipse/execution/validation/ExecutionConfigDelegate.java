@@ -13,28 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.execution.validation;
 
-public enum EGradlePreferenceConstants {
-	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
+import org.eclipse.jface.preference.FieldEditor;
+
+public interface ExecutionConfigDelegate extends ValidationObserver {
+
+	void handleValidationStateChanges(boolean valid);
+
+	void handleFieldEditorAdded(FieldEditor field);
+
+	void handleCheckState();
+
+	void handleOriginRootProject(String stringValue);
 	
-	P_JAVA_HOME_PATH("pathJavaHome"),
-	
-	P_GRADLE_CALL_TYPE("gradleCallType"),
-	P_GRADLE_SHELL("commandShell"),
-	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
-	P_GRADLE_CALL_COMMAND("commandGradle"),
-	P_VALIDATION_ENABLED("validatEnabled"),
-	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
+	void handleValidationRunning(boolean running);
 
-	private String id;
+	boolean isHandlingPropertyChanges();
 
-	private EGradlePreferenceConstants(String id) {
-		this.id = id;
-	}
-
-	public String getId() {
-		return id;
-	}
 
 }
