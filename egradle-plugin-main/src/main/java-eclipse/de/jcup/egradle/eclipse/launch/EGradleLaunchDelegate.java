@@ -98,7 +98,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 						}
 					} finally {
 						/*
-						 * FIXME ATR, 23.09.2016: when exceptions are occuring
+						 * TODO ATR, 23.09.2016: when exceptions are occurring
 						 * while launching the old launches are still existing
 						 * in debug view
 						 */

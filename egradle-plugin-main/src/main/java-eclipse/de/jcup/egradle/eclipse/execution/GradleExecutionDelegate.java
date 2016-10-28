@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
@@ -97,7 +96,7 @@ public class GradleExecutionDelegate {
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
-		EGradlePreferences preferences = PREFERENCES;
+		EGradlePreferences preferences = EGradleUtil.getPreferences();
 		/* Default JAVA_HOME */
 		String globalJavaHome = preferences.getGlobalJavaHomePath();
 		if (!StringUtils.isEmpty(globalJavaHome)) {

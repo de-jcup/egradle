@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.resources.IFile;
@@ -35,10 +35,10 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 import de.jcup.egradle.eclipse.JavaHelper;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.FileHelper;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
+
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 
 	/**
@@ -112,7 +112,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			Object additionalScope) {
 		String name = super.createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
 		if (resource instanceof IFile) {
-			String fileName = FileHelper.SHARED.getFileName(resource);
+			String fileName = getResourceHelper().getFileName(resource);
 			name = name + "#" + fileName;
 		}
 		if (additionalScope instanceof IMethod) {

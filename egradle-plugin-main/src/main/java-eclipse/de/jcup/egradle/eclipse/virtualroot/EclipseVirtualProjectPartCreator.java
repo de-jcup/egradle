@@ -15,9 +15,11 @@
  */
 package de.jcup.egradle.eclipse.virtualroot;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,16 +39,14 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.ProjectDescriptionCreator;
-import de.jcup.egradle.eclipse.api.ResourceHelper;
-
 public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreator {
-	private ResourceHelper r = ResourceHelper.SHARED;
 	private IProject newProject;
 	
 	private List<File> foldersToIgnore;
@@ -83,7 +83,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			IProject[] projects = EGradleUtil.getAllProjects();
 			for (IProject p : projects) {
 				try {
-					File projectPath = r.getFileHelper().toFile(p.getLocation());
+					File projectPath = getResourceHelper().toFile(p.getLocation());
 					if (projectPath.getParentFile().equals(rootFolder)) {
 						/* already an eclipse project! */
 						foldersToIgnore.add(projectPath);
@@ -98,14 +98,14 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			monitor.subTask("delete project");
 			try {
 				
-				r.deleteProject(projectName);
+				getResourceHelper().deleteProject(projectName);
 			} catch (CoreException e) {
 				throw new VirtualRootProjectException("Cannot delete newProject:" + projectName, e);
 			}
 			monitor.worked(2);
 			monitor.subTask("create project");
 			try {
-				File newProjectFolder = new File(rootprojectFolder,".egradle");
+				File newProjectFolder = new File(rootprojectFolder,Constants.VIRTUAL_ROOTPROJECT_FOLDERNAME);
 				URI creationPath = newProjectFolder.toURI();
 				ProjectDescriptionCreator projectDescriptionCreator = new ProjectDescriptionCreator(){
 
@@ -124,7 +124,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 					}
 					
 				};
-				newProject = r.createOrRefreshProject(projectName, monitor,  projectDescriptionCreator, VirtualRootProjectNature.NATURE_ID);
+				newProject = getResourceHelper().createOrRefreshProject(projectName, monitor,  projectDescriptionCreator, VirtualRootProjectNature.NATURE_ID);
 				
 				
 				
@@ -132,9 +132,13 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 
 				/* create .gitignore file*/
 				File parentFolder = new File(newProject.getLocationURI());
-				r.getFileHelper().createTextFile(parentFolder, ".gitignore", "*"); // ignore .egradle completely
+				try {
+					getFileHelper().createTextFile(parentFolder, ".gitignore", "*");
+				} catch (IOException e) {
+					throw new VirtualRootProjectException("cannot create gitignore for virtual root");
+				} 
 
-				r.addFileFilter(newProject, ".gitignore",creationMonitor);	// ok. git ignore is no more seen on navigator
+				getResourceHelper().addFileFilter(newProject, ".gitignore",creationMonitor);	// ok. git ignore is no more seen on navigator
 				//r.addFileFilter(newProject, ".project",creationMonitor);	//.project seems to be not filterable...
 				/* I had the idea to make .project readonly but this does not work, because .project is necessary to contain new created links etc.*/
 			} catch (CoreException e) {
@@ -248,10 +252,10 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 		try {
 			if (file.isDirectory()) {
 				getCreationMonitor().subTask("Create link to folder '" + file.getName() + "'");
-				r.createLinkedFolder(container, path, file);
+				getResourceHelper().createLinkedFolder(container, path, file);
 			} else if (file.isFile()){
 				getCreationMonitor().subTask("Create link to file '" + file.getName() + "'");
-				r.createLinkedFile(container, path, file);
+				getResourceHelper().createLinkedFile(container, path, file);
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {

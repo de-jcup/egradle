@@ -29,7 +29,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.core.GradleExecutor.Result;
-import de.jcup.egradle.core.api.FileUtil;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -117,11 +116,11 @@ public class GradleExecutorTest {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 		File userHome = new  File(System.getProperty("user.home"));
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn(userHome.getAbsolutePath());
-		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn(FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"));
+		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn("fullpath");
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,FileUtil.createCorrectFilePath(userHome.getAbsolutePath(),"testGradleCall"), "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"fullpath", "mockedCommand1");
 	}
 	
 	@Test

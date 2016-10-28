@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -65,7 +64,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	public EGradlePreferencePage() {
 		super(GRID);
-		setPreferenceStore(PREFERENCES.getPreferenceStore());
+		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
 		setDescription("Preferences for EGradle");
 	}
 

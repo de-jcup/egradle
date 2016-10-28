@@ -31,12 +31,6 @@ public class GradleEditor extends TextEditor {
 	}
 	
 	@Override
-	public boolean validateEditorInputState() {
-		// TODO Auto-generated method stub
-		return super.validateEditorInputState();
-	}
-
-	@Override
 	public void dispose() {
 		colorManager.dispose();
 		super.dispose();

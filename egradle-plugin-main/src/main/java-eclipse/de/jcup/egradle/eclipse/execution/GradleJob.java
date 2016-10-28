@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -23,14 +24,13 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleJob extends Job {
 	private GradleExecutionDelegate execution;
 
 	public GradleJob(String name, GradleExecutionDelegate execution) {
 		super(name);
-		notNull(execution,"Execution delegate may not be null!");
+		notNull(execution, "Execution delegate may not be null!");
 		this.execution = execution;
 	}
 
@@ -39,8 +39,7 @@ public class GradleJob extends Job {
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageDialog.INSTANCE
-						.showBuildFailed(execution.getResult().createDescription());
+				getDialogSupport().showBuildFailed(execution.getResult().createDescription());
 			}
 		} catch (Exception e) {
 			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot execute " + getName(), e);

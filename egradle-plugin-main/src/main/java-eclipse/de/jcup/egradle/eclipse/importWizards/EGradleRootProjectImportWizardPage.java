@@ -15,18 +15,10 @@
  */
 package de.jcup.egradle.eclipse.importWizards;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
-import org.eclipse.jface.preference.FileFieldEditor;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -34,7 +26,9 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
+import org.eclipse.swt.widgets.Text;
+
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
@@ -42,14 +36,20 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 	public EGradleRootProjectImportWizardPage(String pageName) {
 		super(pageName);
-		setTitle(pageName); // NON-NLS-1
+		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
 	}
 
 	private IPath selectedPath;
 
-	private void setSelectedPath(IPath selectedPath) {
-		this.selectedPath = selectedPath;
+	private void setSelectedPath(String selectedPath) {
+		boolean empty = StringUtils.isEmpty(selectedPath);
+		setPageComplete(!empty);
+		if (empty){
+			this.selectedPath=null;
+		}else{
+			this.selectedPath = new Path(selectedPath);
+		}
 	}
 
 	IPath getSelectedPath() {
@@ -58,28 +58,41 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		Composite fileSelectionArea = new Composite(parent, SWT.NONE);
+		initializeDialogUnits(parent);
+		
+		Composite folderSelectionArea = new Composite(parent, SWT.NONE);
 		GridData fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL);
-		fileSelectionArea.setLayoutData(fileSelectionData);
+		folderSelectionArea.setLayoutData(fileSelectionData);
 
 		GridLayout fileSelectionLayout = new GridLayout();
 		fileSelectionLayout.numColumns = 3;
 		fileSelectionLayout.makeColumnsEqualWidth = false;
 		fileSelectionLayout.marginWidth = 0;
 		fileSelectionLayout.marginHeight = 0;
-		fileSelectionArea.setLayout(fileSelectionLayout);
+		folderSelectionArea.setLayout(fileSelectionLayout);
 
-		editor = new DirectoryFieldEditor("Gradle root folder", "Select Folder: ", fileSelectionArea); // NON-NLS-1
+		editor = new DirectoryFieldEditor("Gradle root folder", "Select Folder: ", folderSelectionArea); // NON-NLS-1
+		String path = EGradleUtil.getPreferences().getRootProjectPath();
+		editor.setStringValue(path);
+		setSelectedPath(path);
+		/* we use current root project path for select - so a simple full re-import is always possible*/
 		// //NON-NLS-2
-		editor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
+		editor.getTextControl(folderSelectionArea).addModifyListener(new ModifyListener() {
 
 			public void modifyText(ModifyEvent e) {
-				IPath path = new Path(EGradleRootProjectImportWizardPage.this.editor.getStringValue());
-				setSelectedPath(path);
+				Object source = e.getSource();
+				if (source instanceof Text){
+					Text text = (Text) source;
+					setSelectedPath(text.getText());
+				}
 			}
 		});
-		// String[] extensions = new String[] { "*.*" }; // NON-NLS-1
-		// editor.setf(extensions);
-		fileSelectionArea.moveAbove(null);
+
+		setControl(folderSelectionArea);
+	}
+	
+	@Override
+	public boolean isPageComplete() {
+		return super.isPageComplete();
 	}
 }

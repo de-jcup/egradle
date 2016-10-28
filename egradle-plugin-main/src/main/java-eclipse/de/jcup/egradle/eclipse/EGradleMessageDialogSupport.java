@@ -24,9 +24,9 @@ import org.eclipse.swt.widgets.Shell;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.ui.BuildFailedDialog;
 
-public class EGradleMessageDialog {
+public class EGradleMessageDialogSupport {
 
-	public static final EGradleMessageDialog INSTANCE = new EGradleMessageDialog();
+	public static final EGradleMessageDialogSupport INSTANCE = new EGradleMessageDialogSupport();
 
 	public void showWarning(String message) {
 		EGradleUtil.safeAsyncExec(new Runnable() {

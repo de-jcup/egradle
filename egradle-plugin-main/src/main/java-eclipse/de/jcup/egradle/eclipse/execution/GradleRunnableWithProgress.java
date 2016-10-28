@@ -15,14 +15,13 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
 
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
 	private GradleExecutionDelegate execution;
@@ -38,8 +37,7 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 		try {
 			execution.execute(monitor);
 			if (!execution.getResult().isOkay()) {
-				EGradleMessageDialog.INSTANCE
-						.showWarning("Result was not okay:" + execution.getResult().getResultCode());
+				getDialogSupport().showWarning("Result was not okay:" + execution.getResult().getResultCode());
 			}
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);

@@ -15,12 +15,9 @@
  */
 package de.jcup.egradle.eclipse.api;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.PREFERENCES;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
@@ -33,7 +30,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -63,7 +59,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.core.GradleImportScanner;
+import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
@@ -72,7 +68,7 @@ import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.EGradleMessageDialog;
+import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
@@ -111,6 +107,18 @@ public class EGradleUtil {
 	}
 
 	/**
+	 * Returns egradle preferences, never <code>null</code>
+	 * @return  egradle preferences, never <code>null</code>
+	 */
+	public static EGradlePreferences getPreferences(){
+		return EGradlePreferences.INSTANCE;
+	}
+	
+	public static EGradleMessageDialogSupport getDialogSupport(){
+		return EGradleMessageDialogSupport.INSTANCE;
+	}
+	
+	/**
 	 * Creates or recreates virtual project
 	 * 
 	 * @throws VirtualRootProjectException
@@ -130,7 +138,7 @@ public class EGradleUtil {
 					virtualProjectCreator.createOrUpdate(rootProject, partCreator);
 					return Status.OK_STATUS;
 				} catch (VirtualRootProjectException e) {
-					EGradleMessageDialog.INSTANCE.showError(e.getMessage());
+					getDialogSupport().showError(e.getMessage());
 					EGradleUtil.log(e);
 					return Status.CANCEL_STATUS;
 				}
@@ -142,7 +150,7 @@ public class EGradleUtil {
 
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
-		if (EGradlePreferences.PREFERENCES.isValidationEnabled()){
+		if (getPreferences().isValidationEnabled()){
 			max=LINES_NEEDED_FOR_VALIDATION;
 		}else{
 			max=0;
@@ -242,10 +250,10 @@ public class EGradleUtil {
 	 * @return root project or <code>null</code>
 	 */
 	public static GradleRootProject getRootProject(boolean showErrorDialog) {
-		String path = PREFERENCES.getRootProjectPath();
+		String path = getPreferences().getRootProjectPath();
 		if (StringUtils.isEmpty(path)) {
 			if (showErrorDialog) {
-				EGradleMessageDialog.INSTANCE.showError(MESSAGE_MISSING_ROOTPROJECT);
+				getDialogSupport().showError(MESSAGE_MISSING_ROOTPROJECT);
 			}
 			return null;
 		}
@@ -254,7 +262,7 @@ public class EGradleUtil {
 			rootProject = new GradleRootProject(new File(path));
 		} catch (IOException e1) {
 			if (showErrorDialog) {
-				EGradleMessageDialog.INSTANCE.showError(e1.getMessage());
+				getDialogSupport().showError(e1.getMessage());
 			}
 			return null;
 		}
@@ -368,7 +376,7 @@ public class EGradleUtil {
 			return false;
 		}
 		try {
-			File projectLocation = FileHelper.SHARED.toFile(project.getLocation());
+			File projectLocation = getResourceHelper().toFile(project.getLocation());
 			return rootFolder.equals(projectLocation);
 		} catch (CoreException e) {
 			/* ignore ... project not found anymore*/
@@ -386,7 +394,7 @@ public class EGradleUtil {
 	/**
 	 * Returns true when given project has virtual root project nature
 	 * @param project
-	 * @return
+	 * @return <code>true</code> when given project has the virtual root project nature
 	 */
 	public static boolean hasVirtualRootProjectNature(IProject project) {
 		if (project==null){
@@ -542,7 +550,7 @@ public class EGradleUtil {
 	 * @param consoleOutput
 	 */
 	public static void showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
-		boolean validationEnabled = EGradlePreferences.PREFERENCES.isValidationEnabled();
+		boolean validationEnabled = getPreferences().isValidationEnabled();
 		if(!validationEnabled){
 			return;
 		}
@@ -619,6 +627,14 @@ public class EGradleUtil {
 			}
 		}
 		return null;
+	}
+
+	public static EclipseResourceHelper getResourceHelper() {
+		return EclipseResourceHelper.DEFAULT;
+	}
+	
+	public static FileHelper getFileHelper(){
+		return FileHelper.DEFAULT;
 	}
 
 }

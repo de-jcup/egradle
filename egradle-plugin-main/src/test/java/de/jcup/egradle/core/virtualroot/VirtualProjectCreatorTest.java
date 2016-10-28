@@ -15,6 +15,7 @@
  */
  package de.jcup.egradle.core.virtualroot;
 
+import static de.jcup.egradle.core.TestUtil.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
@@ -25,8 +26,6 @@ import org.junit.Test;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
-
-import static de.jcup.egradle.core.TestUtil.*;
 
 public class VirtualProjectCreatorTest {
 

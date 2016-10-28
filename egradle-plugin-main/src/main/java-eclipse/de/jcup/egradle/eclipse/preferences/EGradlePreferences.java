@@ -19,12 +19,14 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
+
 import de.jcup.egradle.eclipse.Activator;
 
 public class EGradlePreferences {
 	
-
-	public static EGradlePreferences PREFERENCES = new EGradlePreferences();
+	public static EGradlePreferences INSTANCE = new EGradlePreferences();
+	
 	private IPreferenceStore store;
 
 	EGradlePreferences() {
@@ -44,33 +46,37 @@ public class EGradlePreferences {
 	}
 
 	public boolean isValidationEnabled() {
-		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId());
+		boolean validationEnabled = getPreferenceStore().getBoolean(P_VALIDATION_ENABLED.getId());
 		return validationEnabled;
 	}
 	
 	public boolean isSubProjectIconDecorationEnabled() {
-		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
+		boolean validationEnabled = getPreferenceStore().getBoolean(P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
 		return validationEnabled;
 	}
 
 	public String getGlobalJavaHomePath() {
-		return getStringPreference(EGradlePreferenceConstants.P_JAVA_HOME_PATH);
+		return getStringPreference(P_JAVA_HOME_PATH);
 	}
 
 	public String getGradleCallCommand() {
-		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_CALL_COMMAND);
+		return getStringPreference(P_GRADLE_CALL_COMMAND);
 	}
 
 	public String getGradleBinInstallFolder() {
-		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_INSTALL_BIN_FOLDER);
+		return getStringPreference(P_GRADLE_INSTALL_BIN_FOLDER);
 	}
 
 	public String getGradleShellId() {
-		return getStringPreference(EGradlePreferenceConstants.P_GRADLE_SHELL);
+		return getStringPreference(P_GRADLE_SHELL);
 	}
 
 	public String getRootProjectPath() {
-		return getStringPreference(EGradlePreferenceConstants.P_ROOTPROJECT_PATH);
+		return getStringPreference(P_ROOTPROJECT_PATH);
+	}
+
+	public void setRootProjectPath(String rootPath) {
+		getPreferenceStore().setValue(P_ROOTPROJECT_PATH.getId(), rootPath);
 	}
 	
 }
