@@ -57,6 +57,8 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 
 	@Override
 	public void validate(GradleConfiguration configuration) throws ValidationException {
+		/* TODO ATR, 28.10.2016: hmm.. special way only for validation . normal way, validation way and import way should have same base! */
+		
 		/* validate gradle call not empty*/
 		String gradleCommand = configuration.getGradleCommandFullPath();
 		if (StringUtils.isBlank(gradleCommand)){

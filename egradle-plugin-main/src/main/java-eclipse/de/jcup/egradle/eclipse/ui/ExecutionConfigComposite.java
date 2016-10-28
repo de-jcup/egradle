@@ -150,11 +150,11 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 				};
 
 				MutableGradleConfiguration configuration = new MutableGradleConfiguration();
-				configuration.setGradleCommand(gradleCommandFieldEditor.getStringValue());
-				configuration.setGradleBinDirectory(gradleInstallBinDirectoryFieldEditor.getStringValue());
-				configuration.setShellCommand(EGradleShellType.findById(shellFieldEditor.getStringValue()));
-				configuration.setWorkingDirectory(rootPathDirectoryEditor.getStringValue());
-				configuration.setJavaHome(defaultJavaHomeDirectoryEditor.getStringValue());
+				configuration.setGradleCommand(getGradleCommand());
+				configuration.setGradleBinDirectory(getGradleBinDirectory());
+				configuration.setShellCommand(getShellCommand());
+				configuration.setWorkingDirectory(getWorkingDirectory());
+				configuration.setJavaHome(getGlobalJavaHomePath());
 
 				try {
 					ExecutionConfigComposite observer = ExecutionConfigComposite.this;
@@ -401,6 +401,49 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	public void setRootProjectPath(String rootPath) {
 		this.rootPathDirectoryEditor.setStringValue(rootPath);
 	}
+
+	public String getGlobalJavaHomePath() {
+		return defaultJavaHomeDirectoryEditor.getStringValue();
+	}
+
+	private String getShellId() {
+		return shellFieldEditor.getStringValue();
+	}
+	
+	public EGradleShellType getShellCommand() {
+		String shellTypeAsString = getShellId();
+		EGradleShellType type = EGradleShellType.findById(shellTypeAsString);
+		return type;
+	}
+	
+	public String getWorkingDirectory() {
+		return rootPathDirectoryEditor.getStringValue();
+	}
+	public String getGradleBinDirectory() {
+		return gradleInstallBinDirectoryFieldEditor.getStringValue();
+	}
+
+	public String getGradleCommand() {
+		return gradleCommandFieldEditor.getStringValue();
+	}
+
+	public String getCallTypeId() {
+		return gradleCallTypeRadioButton.getStringValue();
+	}
+
+	public void setGradleBinInstallFolder(String gradleBinInstallFolder) {
+		gradleInstallBinDirectoryFieldEditor.setStringValue(gradleBinInstallFolder);
+	}
+
+	public void setGradleCallCommand(String gradleCallCommand) {
+		this.gradleCommandFieldEditor.setStringValue(gradleCallCommand);
+	}
+
+	public void setShellId(String shellId) {
+		this.shellFieldEditor.setStringValue(shellId);
+	}
+
+	
 
 
 }

@@ -90,19 +90,27 @@ public class GradleExecutionDelegate {
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+	protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+		EGradlePreferences preferences = EGradleUtil.getPreferences();
+		/* Default JAVA_HOME */
+		String globalJavaHome = preferences.getGlobalJavaHomePath();
+		/* Call gradle settings */
+		String gradleCommand = preferences.getGradleCallCommand();
+		String gradleInstallPath = preferences.getGradleBinInstallFolder();
 		
+		String shellId = preferences.getGradleShellId();
+		
+		return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
+	}
+
+	protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome, String gradleCommand,
+			String gradleInstallPath, String shellId) throws GradleExecutionException {
 		/* build configuration for gradle run */
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
-		EGradlePreferences preferences = EGradleUtil.getPreferences();
-		/* Default JAVA_HOME */
-		String globalJavaHome = preferences.getGlobalJavaHomePath();
+		
 		if (!StringUtils.isEmpty(globalJavaHome)) {
-			config.setGradleCommand(globalJavaHome); // its an config value so
-														// we set it to config
-														// too.
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME
 																	// still can
 																	// be
@@ -113,12 +121,6 @@ public class GradleExecutionDelegate {
 																	// see below
 		}
 		context.setAmountOfWorkToDo(1);
-
-		/* Call gradle settings */
-		String gradleCommand = preferences.getGradleCallCommand();
-		String gradleInstallPath = preferences.getGradleBinInstallFolder();
-
-		String shellId = preferences.getGradleShellId();
 
 		if (StringUtils.isEmpty(gradleCommand)) {
 			throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");

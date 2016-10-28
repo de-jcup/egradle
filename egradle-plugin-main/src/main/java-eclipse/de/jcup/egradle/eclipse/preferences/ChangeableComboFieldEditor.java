@@ -205,11 +205,19 @@ public class ChangeableComboFieldEditor extends FieldEditor {
 	}
 
 	/**
-	 * Returns the value (not the label) of the current selected entry 
+	 * Returns the value of the current selected entry (not the label) 
 	 * @return value
 	 */
 	public String getStringValue() {
 		return fValue;
+	}
+	
+	/**
+	 * Returns label of current selected entry
+	 * @return value
+	 */
+	public String getLabel(){
+		return getValueForName(fValue);
 	}
 
 	/**

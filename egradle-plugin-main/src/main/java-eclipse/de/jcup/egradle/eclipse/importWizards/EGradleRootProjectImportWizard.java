@@ -37,7 +37,9 @@ import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.domain.GradleCommand;
+import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
@@ -50,9 +52,14 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	private static ImageDescriptor desc = EGradleUtil
 			.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png");//$NON-NLS-1$
 	EGradleRootProjectImportWizardPage mainPage;
+	private String globalJavaHome;
+	private String gradleCommand;
+	private String gradleInstallPath;
+	private EGradleShellType shell;
+	private String callTypeId;
 
 	public EGradleRootProjectImportWizard() {
-
+		
 	}
 
 	/**
@@ -80,6 +87,13 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 			return false;
 		}
+		/* fetch data inside SWT thread */
+		globalJavaHome=mainPage.getGlobalJavaHomePath();
+		
+		gradleInstallPath=mainPage.getGradleBinDirectory();
+		shell=mainPage.getShellCommand();
+		gradleCommand=mainPage.getGradleCommand();
+		callTypeId=mainPage.getCallTypeId();
 		try {
 			getContainer().run(true, false, new IRunnableWithProgress() {
 
@@ -160,8 +174,14 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 				}
 				return;
 			}
-			/* setup new root path */
+			/* result is okay, so use this setup in preferences now */
 			getPreferences().setRootProjectPath(newRootFolder.getAbsolutePath());
+			getPreferences().setGlobalJavaHomePath(globalJavaHome);
+			getPreferences().setGradleBinInstallFolder(gradleInstallPath);
+			getPreferences().setGradleCallCommand(gradleCommand);
+			getPreferences().setGradleShellType(shell);
+			getPreferences().setGradleCallTypeID(callTypeId);
+			
 			/* delete the projects */
 			for (IProject projectToClose : projectsToClose) {
 				importProgressMessage(monitor, "delete already existing project:" + projectToClose.getName());
@@ -234,8 +254,17 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
 		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, 30);
 
-		GradleExecutionDelegate delegate = new GradleExecutionDelegate(outputHandler, processExecutor,
-				context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject);
+		GradleExecutionDelegate delegate = new GradleExecutionDelegate(outputHandler, processExecutor, context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject){
+			@Override
+			protected GradleContext createContext(GradleRootProject rootProject)
+					throws GradleExecutionException {
+				String shellId=null;
+				if(shell!=null){
+					shellId=shell.getId();
+				}
+				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
+			}
+		};
 		delegate.execute(progressMonitor);
 
 		Result result = delegate.getResult();

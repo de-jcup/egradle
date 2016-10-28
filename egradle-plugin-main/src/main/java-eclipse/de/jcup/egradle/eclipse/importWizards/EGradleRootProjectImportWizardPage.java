@@ -25,6 +25,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegateAdapter;
 import de.jcup.egradle.eclipse.ui.ExecutionConfigComposite;
 
@@ -55,21 +56,39 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		configComposite.createFieldEditors(folderSelectionArea);
 		
 		/* adopt import setting from current existing preferences value*/
-		String gradleCallTypeID = getPreferences().getGradleCallTypeID();
 		String globalJavaHomePath = getPreferences().getGlobalJavaHomePath();
+		String gradleBinInstallFolder = getPreferences().getGradleBinInstallFolder();
+		String gradleCallCommand = getPreferences().getGradleCallCommand();
+		String gradleCallTypeID = getPreferences().getGradleCallTypeID();
+		String shellId = getPreferences().getGradleShellId();
 		String rootProjectPath = getPreferences().getRootProjectPath();
-
+		
+		configComposite.setGradleBinInstallFolder(gradleBinInstallFolder);
+		configComposite.setGradleCallTypeId(gradleCallTypeID);
 		configComposite.setGlobalJavaHomePath(globalJavaHomePath);
 		configComposite.setRootProjectPath(rootProjectPath);
-		configComposite.setGradleCallTypeId(gradleCallTypeID);
+		configComposite.setGradleCallCommand(gradleCallCommand);
+		configComposite.setShellId(shellId);
 
 		setControl(folderSelectionArea);
 	}
+	
+	public String getGlobalJavaHomePath(){
+		return configComposite.getGlobalJavaHomePath();
+	}
+	
+	public String getGradleRootProjectPath(){
+		return  configComposite.getGradleRootPathText();
+	}
+	
+	public EGradleShellType getShellCommand(){
+		return configComposite.getShellCommand();
+	}
 
 	IPath getSelectedPath() {
-		String text = configComposite.getGradleRootPathText();
+		String text = getGradleRootProjectPath();
 		boolean empty = StringUtils.isEmpty(text);
-		setPageComplete(!empty);
+		setPageComplete(!empty);// FIXME ATR, 28.10.2016 - needs to be integrated in listener to enable finish button correct...
 		if (empty){
 			return null;
 		}else{
@@ -79,5 +98,17 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 	private class InternalExecutionDelegte extends ExecutionConfigDelegateAdapter{
 		
+	}
+
+	public String getGradleBinDirectory() {
+		return configComposite.getGradleBinDirectory();
+	}
+
+	public String getGradleCommand() {
+		return configComposite.getGradleCommand();
+	}
+
+	public String getCallTypeId() {
+		return configComposite.getCallTypeId();
 	}
 }

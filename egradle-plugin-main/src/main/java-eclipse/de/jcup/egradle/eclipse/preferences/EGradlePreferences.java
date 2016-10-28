@@ -21,6 +21,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
 
+import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.Activator;
 
 public class EGradlePreferences {
@@ -81,6 +82,29 @@ public class EGradlePreferences {
 
 	public void setRootProjectPath(String rootPath) {
 		getPreferenceStore().setValue(P_ROOTPROJECT_PATH.getId(), rootPath);
+	}
+
+	public void setGlobalJavaHomePath(String globalJavaHome) {
+		getPreferenceStore().setValue(P_JAVA_HOME_PATH.getId(), globalJavaHome);
+	}
+
+	public void setGradleBinInstallFolder(String gradleInstallPath) {
+		getPreferenceStore().setValue(P_GRADLE_INSTALL_BIN_FOLDER.getId(), gradleInstallPath);
+	}
+
+	public void setGradleCallCommand(String gradleCommand) {
+		getPreferenceStore().setValue(P_GRADLE_CALL_COMMAND.getId(), gradleCommand);
+	}
+
+	public void setGradleShellType(EGradleShellType shell) {
+		if (shell==null){
+			shell=EGradleShellType.NONE;
+		}
+		getPreferenceStore().setValue(P_GRADLE_SHELL.getId(), shell.getId());
+	}
+
+	public void setGradleCallTypeID(String callTypeId) {
+		getPreferenceStore().setValue(P_GRADLE_CALL_TYPE.getId(), callTypeId);
 	}
 	
 }
