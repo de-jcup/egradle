@@ -28,7 +28,7 @@ public class EGradleJunitPreferenceInitializer extends AbstractPreferenceInitial
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = JUNIT_PREFERENCES.getPreferenceStore();
-		store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(), EGradleJUnitTestTasksType.CLEAN_ALL.getId());
+		store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(), EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId());
 	}
 
 }

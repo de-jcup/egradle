@@ -24,7 +24,7 @@ enum EGradlePreferenceConstants {
 	P_GRADLE_SHELL("commandShell"),
 	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
 	P_GRADLE_CALL_COMMAND("commandGradle"),
-	P_VALIDATION_ENABLED("validatEnabled"),
+	P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
 	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
 
 	private String id;

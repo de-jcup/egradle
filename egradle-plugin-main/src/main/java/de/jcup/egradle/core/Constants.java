@@ -20,4 +20,8 @@ public class Constants {
 	public static final String VIRTUAL_ROOTPROJECT_NAME = "- virtual root project";
 	public static final String CONSOLE_FAILED = "[FAILED]";
 	public static final String CONSOLE_OK = "[OK]";
+	/**
+	 * Valiation output is shrinked to optimize validation performance. The value marks what is the limit of lines necessary to validate
+	 */
+	public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 25;
 }

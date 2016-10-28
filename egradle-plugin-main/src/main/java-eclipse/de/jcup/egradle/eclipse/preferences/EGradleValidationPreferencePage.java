@@ -27,7 +27,7 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class EGradleValidationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor validationEnabled;
+	private BooleanFieldEditor outputValidationEnabled;
 
 
 	public EGradleValidationPreferencePage() {
@@ -49,17 +49,17 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
 
-		validationEnabled=		new BooleanFieldEditor(
-					EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId(),
-					"EGradle validation enabled",
+		outputValidationEnabled=		new BooleanFieldEditor(
+					EGradlePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(),
+					"Output validation enabled",
 					getFieldEditorParent());
-		addField(validationEnabled);
+		addField(outputValidationEnabled);
 	}
 
 	public boolean performOk() {
 		boolean done =  super.performOk();
 		if (done){
-			if (!validationEnabled.getBooleanValue()){
+			if (!outputValidationEnabled.getBooleanValue()){
 				EGradleUtil.removeAllValidationErrorsOfConsoleOutput();
 			}
 		}

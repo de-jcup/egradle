@@ -43,8 +43,8 @@ public class EGradlePreferences {
 		return store;
 	}
 
-	public boolean isValidationEnabled() {
-		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_VALIDATION_ENABLED.getId());
+	public boolean isOutputValidationEnabled() {
+		boolean validationEnabled = getPreferenceStore().getBoolean(EGradlePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
 	}
 	

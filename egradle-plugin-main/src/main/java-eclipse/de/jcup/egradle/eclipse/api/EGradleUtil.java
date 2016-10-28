@@ -84,8 +84,6 @@ public class EGradleUtil {
 	private static UnpersistedMarkerHelper buildScriptProblemMarkerHelper = new UnpersistedMarkerHelper(
 			"de.jcup.egradle.script.problem");
 
-	private static final int LINES_NEEDED_FOR_VALIDATION = 20;
-
 	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
@@ -139,8 +137,8 @@ public class EGradleUtil {
 
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
-		if (EGradlePreferences.PREFERENCES.isValidationEnabled()){
-			max=LINES_NEEDED_FOR_VALIDATION;
+		if (EGradlePreferences.PREFERENCES.isOutputValidationEnabled()){
+			max=Constants.VALIDATION_OUTPUT_SHRINK_LIMIT;
 		}else{
 			max=0;
 		}
@@ -534,7 +532,7 @@ public class EGradleUtil {
 	 * @param consoleOutput
 	 */
 	public static void showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
-		boolean validationEnabled = EGradlePreferences.PREFERENCES.isValidationEnabled();
+		boolean validationEnabled = EGradlePreferences.PREFERENCES.isOutputValidationEnabled();
 		if(!validationEnabled){
 			return;
 		}

@@ -45,6 +45,8 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 	private static ImageDescriptor egradleProjectDescriptor = new LazyImageDescriptor(
 			EGradleUtil.createImageDescriptor("icons/gradle-project-decorator.gif"));
 
+	private static ImageDescriptor emptyDecoratorDescriptor = new LazyImageDescriptor(EGradleUtil.createImageDescriptor("icons/empty-4x4-decorator.gif"));
+	
 	@Override
 	public void decorate(Object element, IDecoration decoration) {
 		/* no decoration when plugin is not running */
@@ -71,6 +73,12 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
 			decorateImage(decoration);
+			/* Because the virtual root project is not hosted in SCM - at least with EGit, there is always an
+			 * ugly question icon at IDecoration.BOTTOM_RIGHT . To avoid this
+			 * we simply render an empty deocorator here. This is okay, because diff 
+			 * changes in project are rendered as usual
+			 */
+			decoration.addOverlay(emptyDecoratorDescriptor, IDecoration.BOTTOM_RIGHT);
 			return;
 		}
 		IPath path = p.getLocation();
