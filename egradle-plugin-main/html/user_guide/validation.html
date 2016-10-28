@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Validation</title>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner_128x128.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>Validation</h1>
+	<ul>
+		<li><a href="#output_validation">Output validation</a>
+			<ul>
+				<li><a href="#dialog">Validation dialog</a></li>
+				<li><a href="#markers">Validation markers</a></li>
+				<li><a href="#turn_on_off">Turn on/off</a></li>
+			</ul></li>
+	</ul>
+	<h2 id="output_validation">Output validation</h2>
+	EGradle analyzes output of last executed gradle build.
+	<p>
+	<h3 id="dialog">Validation dialog</h3>
+	If the build output contains information about compile or evaluation problems instead of normal "build failed" dialog another dialog appears:
+	</p>
+	<img src="images/egradle-validation-error.png" />
+	<p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br><br>
+	<h3 id="markers">Validation markers</h3>
+	Inside eclipse project and in the problems view the problem is marked and can be viewed (a double click on the problems view entry will open the problem file).
+	<br>
+	Every gradle call from UI will remove old markers. The markers are not persisted, so when you restart your eclipse IDE the old markers will not be shown.
+	</p>
+	<img src="images/egradle-validation-error-editor-marker.png" />
+	<p>
+	Hoovering over the error icon shows details of the problem - the description comes from gradle build
+	</p>
+	<img src="images/egradle-validation-error-editor-marker-detail.png" />
+	<p>
+	Antoher example with a conversion error:
+	</p>
+	<img src="images/egradle-validation-error-editor-marker-detail2.png" />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<br><br>
+	<h3 id="turn_on_off">Turn off/on output validation</h3>
+	<p>
+		You can enable or disable output validation feature in preferences:
+	</p>
+	<img src="images/egradle-preferences-validation.png" />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>
