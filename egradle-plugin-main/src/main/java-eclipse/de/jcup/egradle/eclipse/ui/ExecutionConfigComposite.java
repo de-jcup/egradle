@@ -27,8 +27,10 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -44,6 +46,7 @@ import org.eclipse.ui.progress.IProgressService;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegate;
 import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegateAdapter;
@@ -169,16 +172,39 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	}
 
 	private void createGradleCallTypeGroup(Composite parent) {
-		GridData groupLayoutData;
-		/* gradle call group */
-		groupLayoutData = new GridData();
+		GridData groupLayoutData = new GridData();
 		groupLayoutData.horizontalAlignment = GridData.FILL;
 		groupLayoutData.verticalAlignment = GridData.BEGINNING;
 		groupLayoutData.grabExcessHorizontalSpace = true;
 		groupLayoutData.grabExcessVerticalSpace = false;
 		groupLayoutData.verticalSpan = 3;
 		groupLayoutData.horizontalSpan = 3;
+
+		
+		GridData labelGridData = new GridData();
+		labelGridData.horizontalAlignment = GridData.FILL;
+		labelGridData.verticalAlignment = GridData.BEGINNING;
+		labelGridData.grabExcessHorizontalSpace = false;
+		labelGridData.grabExcessVerticalSpace = false;
+		
+		GridData gridDataLastColumn = new GridData();
+		gridDataLastColumn.horizontalAlignment = GridData.FILL;
+		gridDataLastColumn.verticalAlignment = GridData.FILL;
+		gridDataLastColumn.grabExcessHorizontalSpace = true;
+		gridDataLastColumn.grabExcessVerticalSpace = false;
+		gridDataLastColumn.horizontalSpan = 2;
+		
+		GridData labelGridData2 = new GridData();
+		labelGridData2.horizontalAlignment = GridData.FILL;
+		labelGridData2.verticalAlignment = GridData.BEGINNING;
+		labelGridData2.grabExcessHorizontalSpace = false;
+		labelGridData2.grabExcessVerticalSpace = false;
+		labelGridData2.grabExcessHorizontalSpace=true;
+		
 		gradleCallGroup = SWTFactory.createGroup(parent, "Gradle call", 1, 10, SWT.FILL);
+		if (debug) {
+			gradleCallGroup.setBackground(ColorManager.instance().getColor(new RGB(0, 255, 0)));
+		}
 		gradleCallGroup.setLayoutData(groupLayoutData);
 		/* @formatter:off */
 		String[][] entryNamesAndValues = new String[][] {
@@ -188,11 +214,18 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 				new String[] { "Linux/Mac - Use gradle installation", EGradleCallType.LINUX_GRADLE_INSTALLED.getId() },
 				new String[] { "Custom", EGradleCallType.CUSTOM.getId() } };
 		/* @formatter:on */
-		gradleCallTypeRadioButton = new ChangeableComboFieldEditor(P_GRADLE_CALL_TYPE.getId(), "Call type", entryNamesAndValues,
-				gradleCallGroup);
-
+		gradleCallTypeRadioButton = new ChangeableComboFieldEditor(P_GRADLE_CALL_TYPE.getId(), "Call type",
+				entryNamesAndValues, gradleCallGroup);
+		gradleCallTypeRadioButton.getLabelControl(gradleCallGroup).setLayoutData(labelGridData);
+		gradleCallTypeRadioButton.getComboBoxControl(gradleCallGroup).setLayoutData(gridDataLastColumn);
 		addField(gradleCallTypeRadioButton);
+
+		if (debug) {
+			gradleCallTypeRadioButton.getComboBoxControl(gradleCallGroup)
+					.setBackground(ColorManager.instance().getColor(new RGB(0, 0, 255)));
+		}
 		gradleCallTypeRadioButton.setPropertyChangeListener(this);
+
 		/* @formatter:off */
 		String[][] shellTypeComboValues = 
 				new String[][] { 
@@ -203,11 +236,20 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		/* @formatter:on */
 		shellFieldEditor = new ChangeableComboFieldEditor(P_GRADLE_SHELL.getId(), "Shell", shellTypeComboValues,
 				gradleCallGroup);
+		shellFieldEditor.getLabelControl(gradleCallGroup).setLayoutData(labelGridData);
+		shellFieldEditor.getComboBoxControl(gradleCallGroup).setLayoutData(gridDataLastColumn);
 		addField(shellFieldEditor);
+
 		gradleCommandFieldEditor = new StringFieldEditor(P_GRADLE_CALL_COMMAND.getId(), "Gradle call", gradleCallGroup);
+		gradleCommandFieldEditor.getLabelControl(gradleCallGroup).setLayoutData(labelGridData);
+		gradleCommandFieldEditor.getTextControl(gradleCallGroup).setLayoutData(gridDataLastColumn);
 		addField(gradleCommandFieldEditor);
+
 		gradleInstallBinDirectoryFieldEditor = new DirectoryFieldEditor(P_GRADLE_INSTALL_BIN_FOLDER.getId(),
 				"Gradle bin folder:", gradleCallGroup);
+		gradleInstallBinDirectoryFieldEditor.getLabelControl(gradleCallGroup).setLayoutData(labelGridData);
+		gradleInstallBinDirectoryFieldEditor.getTextControl(gradleCallGroup).setLayoutData(labelGridData2);
+
 		addField(gradleInstallBinDirectoryFieldEditor);
 	}
 
@@ -219,7 +261,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		groupLayoutData.grabExcessVerticalSpace = false;
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
-		
+
 		Group defaultGroup = SWTFactory.createGroup(parent, "", 1, 10, SWT.FILL);
 		defaultGroup.setLayoutData(groupLayoutData);
 
@@ -257,6 +299,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	}
 
 	private boolean validationRunning = false;
+	private boolean debug;
 
 	@Override
 	public void handleValidationResult(boolean valid) {
@@ -264,7 +307,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if (delegate.isHandlingPropertyChanges()){
+		if (delegate.isHandlingPropertyChanges()) {
 			return;
 		}
 		if (isGradleCallTypeButton(event)) {
@@ -275,9 +318,11 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	public boolean isGradleCallTypeButton(PropertyChangeEvent event) {
 		return gradleCallTypeRadioButton == event.getSource();
 	}
-	
+
 	/**
-	 * Update call type has changed before - this method updates only dependent parts!
+	 * Update call type has changed before - this method updates only dependent
+	 * parts!
+	 * 
 	 * @param value
 	 */
 	public void updateCallTypeFields(Object value) {
@@ -308,6 +353,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 
 	/**
 	 * Set call type by given id
+	 * 
 	 * @param callTypeId
 	 */
 	public void updateCallTypeGroupEnabledState(String callTypeId) {
@@ -352,42 +398,47 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		shell.setSize(200, 200);
 		shell.open();
 
-		ExecutionConfigComposite configComposite = new ExecutionConfigComposite(new ExecutionConfigDelegateAdapter(){}){
+		ExecutionConfigComposite configComposite = new ExecutionConfigComposite(new ExecutionConfigDelegateAdapter() {
+			@Override
+			public void handleFieldEditorAdded(FieldEditor field) {
+			}
+		}) {
 			@Override
 			protected Image getValidationButtonImage() {
 				return null;
 			}
 		};
-		
-		
-		
+		configComposite.debug = true;
+
 		GridLayout layout = new GridLayout(1, false);
-		layout.horizontalSpacing=5;
-		layout.verticalSpacing=5;
+		layout.horizontalSpacing = 5;
+		layout.verticalSpacing = 5;
 		shell.setLayout(layout);
-		
-		shell.setSize(new Point(800,800));
+
+		shell.setSize(new Point(800, 800));
 		configComposite.createFieldEditors(shell);
+		if (configComposite.debug) {
+			shell.setBackground(new Color(display, new RGB(255, 0, 0)));
+		}
 
 		configComposite.setGlobalJavaHomePath("java home path");
 		configComposite.setRootProjectPath("root project path");
 		String gradleCallTypeID = EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId();
 		configComposite.setGradleCallTypeId(gradleCallTypeID);
-		
-		
+
 		shell.layout();
 		shell.open();
-	    while (!shell.isDisposed()) {
-	      if (!display.readAndDispatch()) {
-	        display.sleep();
-	      }
-	    }
-	    display.dispose();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+		display.dispose();
 	}
 
 	public void setGradleCallTypeId(String gradleCallTypeID) {
-		 gradleCallTypeRadioButton.setStringValue(gradleCallTypeID);
-		 updateCallTypeFields(gradleCallTypeID);
+		gradleCallTypeRadioButton.setStringValue(gradleCallTypeID);
+		updateCallTypeFields(gradleCallTypeID);
 	}
 
 	public String getGradleRootPathText() {
@@ -397,7 +448,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	public void setGlobalJavaHomePath(String globalJavaHomePath) {
 		this.defaultJavaHomeDirectoryEditor.setStringValue(globalJavaHomePath);
 	}
-	
+
 	public void setRootProjectPath(String rootPath) {
 		this.rootPathDirectoryEditor.setStringValue(rootPath);
 	}
@@ -409,16 +460,17 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	private String getShellId() {
 		return shellFieldEditor.getStringValue();
 	}
-	
+
 	public EGradleShellType getShellCommand() {
 		String shellTypeAsString = getShellId();
 		EGradleShellType type = EGradleShellType.findById(shellTypeAsString);
 		return type;
 	}
-	
+
 	public String getWorkingDirectory() {
 		return rootPathDirectoryEditor.getStringValue();
 	}
+
 	public String getGradleBinDirectory() {
 		return gradleInstallBinDirectoryFieldEditor.getStringValue();
 	}
@@ -442,8 +494,5 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	public void setShellId(String shellId) {
 		this.shellFieldEditor.setStringValue(shellId);
 	}
-
-	
-
 
 }
