@@ -186,21 +186,16 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			for (IProject projectToClose : projectsToClose) {
 				importProgressMessage(monitor, "delete already existing project:" + projectToClose.getName());
 				if (hasVirtualRootProjectNature(projectToClose)) {
-					/*
-					 * to check delete with content happens only on virtual root
-					 * projects we do check on another way too - this is only to
-					 * prevent coding failures and should never happen!
-					 */
-					String name = projectToClose.getName();
-					if (!Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)) {
-						throw new IllegalArgumentException(
-								"Trying to delete full, with content, but this seems not to be a virtual root project?!?!?");
-					}
-					projectToClose.delete(true, true, monitor);
+					deleteVirtualRootProjectFull(monitor, projectToClose);
 				} else {
 					projectToClose.delete(false, true, monitor);
 				}
 				monitor.worked(++worked);
+			}
+			/* remove the current virtual root project - if not already fetched before */
+			IProject virtualRootProject = EGradleUtil.getVirtualRootProject();
+			if (virtualRootProject != null) {
+				deleteVirtualRootProjectFull(monitor, virtualRootProject);
 			}
 
 			/* start import of all eclipse projects inside multiproject */
@@ -219,6 +214,20 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			monitor.done();
 		}
 
+	}
+
+	private void deleteVirtualRootProjectFull(IProgressMonitor monitor, IProject projectToDelete) throws CoreException {
+		/*
+		 * to check delete with content happens only on virtual root
+		 * projects we do check on another way too - this is only to
+		 * prevent coding failures and should never happen!
+		 */
+		String name = projectToDelete.getName();
+		if (!Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)) {
+			throw new IllegalArgumentException(
+					"Trying to delete full, with content, but this seems not to be a virtual root project?!?!?");
+		}
+		projectToDelete.delete(true, true, monitor);
 	}
 
 	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder) throws CoreException {
