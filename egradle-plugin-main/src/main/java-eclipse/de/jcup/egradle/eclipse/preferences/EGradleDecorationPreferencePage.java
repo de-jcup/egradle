@@ -15,8 +15,6 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
-
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.layout.GridData;
@@ -32,7 +30,7 @@ public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage i
 
 	public EGradleDecorationPreferencePage() {
 		super(GRID);
-		setPreferenceStore(PREFERENCES.getPreferenceStore());
+		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
 	}
 
 	/**

@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import java.io.File;
@@ -48,8 +49,6 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.FileHelper;
-
 /**
  * Short cut launcher for EGradle
  * 
@@ -57,6 +56,7 @@ import de.jcup.egradle.eclipse.api.FileHelper;
  *
  */
 public class EGradleLaunchShortCut implements ILaunchShortcut2 {
+	
 
 	public IResource getLaunchableResource(IEditorPart editorpart) {
 		return getLaunchableResource(editorpart.getEditorInput());
@@ -148,8 +148,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	/**
 	 * Creates and returns a new configuration based on the specified type.
 	 * 
-	 * @param additionalScope
-	 *            TODO
+	 * @param additionalScope additional scope which can be given
 	 * @param type
 	 *            type to create a launch configuration for
 	 * 
@@ -255,7 +254,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	private String createGradleProjectName(IResource resource) {
 		IProject project = resource.getProject();
-		if (EGradleUtil.isVirtualRootProject(project)) {
+		if (EGradleUtil.hasVirtualRootProjectNature(project)) {
 			return "";
 		}
 		/* when the project itself is the root - leave project name empty!*/
@@ -263,7 +262,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 			return "";
 		}
 		try {
-			File projectRealFolderName = FileHelper.SHARED.toFile(project);
+			File projectRealFolderName = getResourceHelper().toFile(project);
 			return projectRealFolderName.getName();
 		} catch (CoreException e) {
 			throw new IllegalStateException(e);

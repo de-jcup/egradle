@@ -37,7 +37,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
 	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
 			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
-		super(outputHandler, processExecutor, additionalContextPreparator);
+		super(outputHandler, processExecutor, additionalContextPreparator,null);
 	}
 
 	@Override

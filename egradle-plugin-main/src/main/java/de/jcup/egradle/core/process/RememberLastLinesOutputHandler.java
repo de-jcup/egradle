@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import de.jcup.egradle.core.process.OutputHandler;
-
 public class RememberLastLinesOutputHandler implements OutputHandler {
 
 	ArrayBlockingQueue<String> queue;

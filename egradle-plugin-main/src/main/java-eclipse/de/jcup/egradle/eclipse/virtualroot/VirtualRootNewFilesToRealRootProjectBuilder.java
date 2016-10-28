@@ -34,9 +34,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.FileHelper;
-import de.jcup.egradle.eclipse.api.ResourceHelper;
 
 /**
  * Special project builder to support new files added on virtual root inside
@@ -53,7 +52,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 	protected void handleAddedInRootFolder(File rootFolder, IResource resource) throws CoreException {
 		
 		/* check we got no .gitignore or the .project here! This are the only two files, to complete ignore!*/
-		File sourceFile = getFileHelper().toFile(resource);
+		File sourceFile = getResourceHelper().toFile(resource);
 		String name = sourceFile.getName();
 		if (".gitignore".equals(name)){
 			return;
@@ -108,7 +107,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 		/* we have to ask the user if he really wants to delete instead... */
 		String message = "Do you like to delete " + resource.getName()
 				+ " from root project as you have done with the link?\n" + linkTargetFile.getAbsolutePath();
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -117,9 +116,8 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 				if (deleteTheFile) {
 					try {
 						getFileHelper().delete(linkTargetFile);
-					} catch (CoreException e) {
-						EGradleUtil.log(e);
-						;
+					} catch (IOException e) {
+						log(e);
 					}
 				}
 			}
@@ -168,14 +166,6 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 		delta.accept(new VirtualRootFolderDeltaVisitor(rootProjectFolder));
 	}
 
-	private ResourceHelper getResourceHelper() {
-		return ResourceHelper.SHARED;
-	}
-
-	private FileHelper getFileHelper() {
-		return ResourceHelper.SHARED.getFileHelper();
-	}
-
 	class VirtualRootFolderDeltaVisitor implements IResourceDeltaVisitor {
 		private File rootProjectFolder;
 
@@ -204,7 +194,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 				// if (!resource.isLinked(IResource.NONE/ANCESTOR...)){
 				File file = resource.getLocation().toFile();
 				File parentFile = file.getParentFile();
-				if (!".egradle".equals(parentFile.getName())) {
+				if (!Constants.VIRTUAL_ROOTPROJECT_FOLDERNAME.equals(parentFile.getName())) {
 					/*
 					 * removed something outside the .egradle folder - so done
 					 * in file system correctly

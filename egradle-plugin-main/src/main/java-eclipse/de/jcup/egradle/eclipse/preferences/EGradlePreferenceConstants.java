@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.preferences;
 
-enum EGradlePreferenceConstants {
+public enum EGradlePreferenceConstants {
 	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
 	
 	P_JAVA_HOME_PATH("pathJavaHome"),

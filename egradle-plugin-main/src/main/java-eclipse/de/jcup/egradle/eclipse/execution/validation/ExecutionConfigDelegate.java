@@ -13,21 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.api;
+package de.jcup.egradle.eclipse.execution.validation;
 
-import java.io.File;
+import org.eclipse.jface.preference.FieldEditor;
 
-import org.apache.commons.lang3.StringUtils;
+public interface ExecutionConfigDelegate extends ValidationObserver {
 
-public class FileUtil {
+	void handleValidationStateChanges(boolean valid);
 
-	public static final String createCorrectFilePath(String folderName, String filename){
-		String fileTrim = filename.trim();
-		if (StringUtils.isEmpty(folderName)){
-			return fileTrim;
-		}
-		String folderTrim = folderName.trim();
-		File asFile = new File(folderTrim,fileTrim);
-		return asFile.getAbsolutePath();
-	}
+	void handleFieldEditorAdded(FieldEditor field);
+
+	void handleCheckState();
+
+	void handleOriginRootProject(String stringValue);
+	
+	void handleValidationRunning(boolean running);
+
+	boolean isHandlingPropertyChanges();
+
+
 }

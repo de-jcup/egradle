@@ -145,7 +145,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
 	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
 		return new GradleExecutionDelegate(outputHandler,
-				new EclipseLaunchProcessExecutor(outputHandler, launch,postJob), this);
+				new EclipseLaunchProcessExecutor(outputHandler, launch,postJob), this, null);
 	}
 
 }

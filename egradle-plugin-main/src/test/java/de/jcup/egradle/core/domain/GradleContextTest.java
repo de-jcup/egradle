@@ -20,7 +20,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.CancelStateProvider.NeverCanceled;

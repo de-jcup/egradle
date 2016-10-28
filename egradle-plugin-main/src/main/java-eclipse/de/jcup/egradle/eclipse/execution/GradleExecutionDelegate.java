@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.execution;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
@@ -59,40 +58,59 @@ public class GradleExecutionDelegate {
 		return result;
 	}
 
+	/**
+	 * Creates a new gradle execution delegate
+	 * @param outputHandler
+	 * @param processExecutor
+	 * @param additionalContextPreparator
+	 * @param rootProject if null rootProject will be resolved by preferences
+	 * @throws GradleExecutionException
+	 */
 	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
+			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject) throws GradleExecutionException {
 		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
 
+		if (rootProject==null){
+			rootProject = EGradleUtil.getRootProject(false);
+		}
+		if (rootProject == null) {
+			/*
+			 * we handle the error on creation time by own exception thrown -
+			 * without EGradleUtil error dialog
+			 */
+			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
+		}
 		this.outputHandler = outputHandler;
 
-		context = createContext();
+		context = createContext(rootProject);
 		if (additionalContextPreparator != null) {
 			additionalContextPreparator.prepare(context);
 		}
 		executor = new GradleExecutor(processExecutor);
 	}
 
-	private GradleContext createContext() throws GradleExecutionException {
-		/*
-		 * we handle the error on creation time by own exception thrown -
-		 * without EGradleUtil error dialog
-		 */
-		GradleRootProject rootProject = EGradleUtil.getRootProject(false);
-		if (rootProject == null) {
-			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
-		}
+	protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+		EGradlePreferences preferences = EGradleUtil.getPreferences();
+		/* Default JAVA_HOME */
+		String globalJavaHome = preferences.getGlobalJavaHomePath();
+		/* Call gradle settings */
+		String gradleCommand = preferences.getGradleCallCommand();
+		String gradleInstallPath = preferences.getGradleBinInstallFolder();
+		
+		String shellId = preferences.getGradleShellId();
+		
+		return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
+	}
+
+	protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome, String gradleCommand,
+			String gradleInstallPath, String shellId) throws GradleExecutionException {
 		/* build configuration for gradle run */
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
-		EGradlePreferences preferences = PREFERENCES;
-		/* Default JAVA_HOME */
-		String globalJavaHome = preferences.getGlobalJavaHomePath();
+		
 		if (!StringUtils.isEmpty(globalJavaHome)) {
-			config.setGradleCommand(globalJavaHome); // its an config value so
-														// we set it to config
-														// too.
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME
 																	// still can
 																	// be
@@ -103,12 +121,6 @@ public class GradleExecutionDelegate {
 																	// see below
 		}
 		context.setAmountOfWorkToDo(1);
-
-		/* Call gradle settings */
-		String gradleCommand = preferences.getGradleCallCommand();
-		String gradleInstallPath = preferences.getGradleBinInstallFolder();
-
-		String shellId = preferences.getGradleShellId();
 
 		if (StringUtils.isEmpty(gradleCommand)) {
 			throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");

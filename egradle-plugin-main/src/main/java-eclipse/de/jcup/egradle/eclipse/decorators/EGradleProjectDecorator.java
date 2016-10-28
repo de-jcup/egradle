@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.eclipse.decorators;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+
 import java.io.File;
 
 import org.eclipse.core.resources.IProject;
@@ -30,8 +32,6 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.FileHelper;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 
 /**
  * Dedicated decorator for projects only. Will only decorate subprojects inside
@@ -69,7 +69,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		if (rootFolder == null) {
 			return;
 		}
-		if (EGradleUtil.isVirtualRootProject(p)){
+		if (EGradleUtil.hasVirtualRootProjectNature(p)){
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
 			decorateImage(decoration);
@@ -85,7 +85,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 
 		/* we simply check if the project is inside root project */
 		try {
-			File parentFolder = FileHelper.SHARED.toFile(path);
+			File parentFolder = getResourceHelper().toFile(path);
 			if (parentFolder == null) {
 				return;
 			}
@@ -98,7 +98,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			if (!rootFolder.equals(parentFolder)) {
 				return;
 			}
-			if (EGradlePreferences.PREFERENCES.isSubProjectIconDecorationEnabled()){
+			if (EGradleUtil.getPreferences().isSubProjectIconDecorationEnabled()){
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {

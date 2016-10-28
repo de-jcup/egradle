@@ -13,9 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.api;
-
-import static org.apache.commons.lang3.Validate.notNull;
+package de.jcup.egradle.core.api;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,46 +26,68 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.net.URL;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.filebuffers.FileBuffers;
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Plugin;
-
-import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 
 public class FileHelper {
 
-	public static FileHelper SHARED= new FileHelper();
-	private final int MAX_RETRY = 5;
-	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
+	private static final int TIME_TO_SLEEP__BEFORE_RETRY = 1000;
+
+	public static final FileHelper DEFAULT= new FileHelper();
+
+	private static final int MAX_RETRY = 5;
 
 	private byte[] buffer = new byte[8192];
-	
-	public void createTextFile(File parentFolder, String fileName, String content) throws VirtualRootProjectException {
-		File gitIgnore = new File(parentFolder, fileName);
-		try (FileOutputStream fileOutputStram = new FileOutputStream(gitIgnore);
-				OutputStreamWriter w = new OutputStreamWriter(fileOutputStram, "UTF-8")) {
-			gitIgnore.createNewFile();
-			w.write(content);
-		} catch (Exception e) {
-			throw new VirtualRootProjectException("Cannot create virtual root content", e);
+
+	public String createCorrectFilePath(String folderName, String filename) {
+		String fileTrim = filename.trim();
+		if (StringUtils.isEmpty(folderName)) {
+			return fileTrim;
+		}
+		String folderTrim = folderName.trim();
+		File asFile = new File(folderTrim, fileTrim);
+		return asFile.getAbsolutePath();
+	}
+
+	public boolean isDirectSubFolder(File folder, File expectedParentFolder) {
+		if (folder == null) {
+			return false;
+		}
+		if (expectedParentFolder == null) {
+			return false;
+		}
+		if (expectedParentFolder.equals(folder.getParentFile())) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Copies the given source file to the given destination file.
+	 *
+	 * @param src
+	 *            the given source file
+	 * @param dst
+	 *            the given destination file
+	 * @throws IOException
+	 *             in case of error
+	 */
+	public void copy(File src, File dst) throws IOException {
+		if (src.isDirectory()) {
+			if (!dst.exists()) {
+				dst.mkdirs();
+			}
+			String[] srcChildren = src.list();
+			for (int i = 0; i < srcChildren.length; ++i) {
+				File srcChild = new File(src, srcChildren[i]);
+				File dstChild = new File(dst, srcChildren[i]);
+				copy(srcChild, dstChild);
+			}
+		} else {
+			transferData(src, dst);
 		}
 	}
 
@@ -109,13 +129,7 @@ public class FileHelper {
 						}
 					}
 					if (src != null) {
-						try {
 							src.close();
-						} catch (IOException e) {
-							EGradleUtil.log(e);
-							return;
-							
-						}
 					}
 				}
 			}
@@ -144,6 +158,17 @@ public class FileHelper {
 		return path.replace(oldSeparator, newSeparator);
 	}
 
+	
+	public void createTextFile(File parentFolder, String fileName, String content) throws IOException {
+		File gitIgnore = new File(parentFolder, fileName);
+		try (FileOutputStream fileOutputStram = new FileOutputStream(gitIgnore);
+				OutputStreamWriter w = new OutputStreamWriter(fileOutputStram, "UTF-8")) {
+			gitIgnore.createNewFile();
+			w.write(content);
+		} catch (Exception e) {
+			throw new IOException("Cannot create "+fileName, e);
+		}
+	}
 	/**
 	 * Copies all bytes in the given source file to the given destination file.
 	 *
@@ -191,48 +216,6 @@ public class FileHelper {
 		}
 	}
 
-	/**
-	 * Copies the given source file to the given destination file.
-	 *
-	 * @param src
-	 *            the given source file
-	 * @param dst
-	 *            the given destination file
-	 * @throws IOException
-	 *             in case of error
-	 */
-	public void copy(File src, File dst) throws IOException {
-		if (src.isDirectory()) {
-			if (!dst.exists()){
-				dst.mkdirs();
-			}
-			String[] srcChildren = src.list();
-			for (int i = 0; i < srcChildren.length; ++i) {
-				File srcChild = new File(src, srcChildren[i]);
-				File dstChild = new File(dst, srcChildren[i]);
-				copy(srcChild, dstChild);
-			}
-		} else{
-			transferData(src, dst);
-		}
-	}
-
-	public File getFileInPlugin(Plugin plugin, IPath path) throws CoreException {
-		try {
-			URL installURL = plugin.getBundle().getEntry(path.toString());
-			URL localURL = FileLocator.toFileURL(installURL);
-			return new File(localURL.getFile());
-		} catch (IOException e) {
-			throw new PathException(IStatus.ERROR, path, "cannot get file in plugin", e);
-		}
-	}
-
-	public File createTempFileInPlugin(Plugin plugin, IPath path) {
-		IPath stateLocation = plugin.getStateLocation();
-		stateLocation = stateLocation.append(path);
-		return stateLocation.toFile();
-	}
-
 	public StringBuffer read(String fileName) throws IOException {
 		return read(new FileReader(fileName));
 	}
@@ -266,106 +249,30 @@ public class FileHelper {
 			}
 		}
 	}
-	
-	public void delete(IPath path) throws CoreException {
-		IFileStore fileStore = FileBuffers.getFileStoreAtLocation(path);
 
-		File file = null;
-		file = fileStore.toLocalFile(EFS.NONE, NULL_MONITOR);
-		delete(file);
-	}
-
-	public File toFile(IPath path) throws CoreException {
-		if (path==null){
-			return null;
-		}
-		IFileStore fileStore = FileBuffers.getFileStoreAtLocation(path);
-
-		File file = null;
-		file = fileStore.toLocalFile(EFS.NONE, NULL_MONITOR);
-		return file;
-	}
-
-	public void delete(File file) throws CoreException{
+	public void delete(File file) throws IOException {
 		if (file.exists()) {
-			if (file.isDirectory()){
+			if (file.isDirectory()) {
 				File[] children = file.listFiles();
-				for (File child: children){
+				for (File child : children) {
 					delete(child);
 				}
 			}
 			boolean deleted = false;
 			for (int i = 0; i < MAX_RETRY; i++) {
-				if (file.delete()){
-					deleted=true;
+				if (file.delete()) {
+					deleted = true;
 					break;
-				}
-				else {
+				} else {
 					try {
-						Thread.sleep(1000); // sleep a second
+						Thread.sleep(TIME_TO_SLEEP__BEFORE_RETRY); 
 					} catch (InterruptedException e) {
 					}
 				}
 			}
-			if (!deleted){
-				EGradleUtil.throwCoreException("cannot delete file:"+file);
+			if (!deleted) {
+				throw new IOException("cannot delete file:" + file);
 			}
 		}
-	}
-
-	public IPath toPath(File tempFolder) {
-		notNull(tempFolder, "'tempFolder' may not be null");
-		IPath path = Path.fromOSString(tempFolder.getAbsolutePath());
-		return path;
-	}
-
-	/**
-	 * Gets simple file name without extension
-	 * @param resource
-	 * @return file name, no extension
-	 */
-	public String getFileName(IResource resource) {
-		String extension = resource.getFileExtension();
-		String name = resource.getName();
-		if (StringUtils.isBlank(name)){
-			return "";
-		}
-		if (StringUtils.isNotEmpty(extension)){
-			int length = extension.length()+1;/* +1 because of dot*/
-			String result= name.substring(0,name.length()-length);
-			return result;
-		}else{
-			return name;
-		}
-	}
-
-	public File toFile(IResource resource) throws CoreException {
-		if (resource==null){
-			return toFile((IPath)null);
-		}
-		return toFile(resource.getLocation());
-	}
-
-	/**
-	 * Returns the IFile representation for given file or <code>null</code> if file not in workspace
-	 * @param file
-	 * @return file or null
-	 */
-	public IFile toIFile(File file) {
-		/* FIXME ATR, 23.11.2016: check if this handling is correct */
-//		IFileStore x = EFS.getLocalFileSystem().getStore(file.toURI());
-		IPath path = Path.fromOSString(file.getAbsolutePath()); 
-		return toIFile(path);
-	}
-
-	public IFile toIFile(IPath path) {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IFile fileResult = workspace.getRoot().getFile(path);
-		return fileResult;
-	}
-
-	public IFile toIFile(String pathString) {
-		IPath path = Path.fromOSString(pathString);
-		return toIFile(path);
 	}
 }
