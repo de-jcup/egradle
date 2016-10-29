@@ -10,25 +10,93 @@
 	<img src="./../images/egradle-banner_128x128.png" />
 	<a href="../user_guide.html">User guide</a>
 	<h1>Import gradle projects</h1>
+	<ul>
+		<li><a href="#import_preconditions">Preconditions</a></li>
+		<li><a href="#import_by_importer">Import gradle root and all subprojects by EGradle importer</a>
+		<ul>
+			<li><a href="#import_by_importer_what_happens">What happens?</a></li>	
+			<li><a href="#import_by_importer_reimport">Reimporting current root project</a></li>	
+		</ul>
+		</li>
+		<li><a href="#import_by_default">Import by standard way</a></li>
+	</ul>
+	<h2 id="import_preconditions">Preconditions</h2>
+	 EGradle does no magic to your build files. You have to apply the 'eclipse' plugin inside your build.gradle file.
+	 <p>
+		<img src="images/egradle-import-preconditions.png" />
+	</p>
+	<h2 id="import_by_importer">Import gradle root and all subprojects by EGradle importer</h2>
+	<p>EGradle contains an importer - simply call ""File->Import..." and enter "gradle"</p>
+	<p>
+		<img src="images/egradle-import-rootproject.png" />
+	</p>
+	<p>
+		<img src="images/egradle-import-rootproject-wizard.png" />
+	</p>
+	<p>The settings for gradle root project path, global java home
+		settings and gradle call type are initially copied from current
+		preferences - if there exists a setup.</p>
+	<h3 id="import_by_importer_what_happens">What happens?</h3>
+	What happens when you call finish button?
+	<ol>
+		<li>All eclipse projects which are representatives of the new gradle root project location are closed</li>
+		<li>A gradle call "cleanEclipse elcipse" is executed</li>
+		<li>If the gradle call is sucessful:
+			<ol>
+				<li>Old subprojects are deleted (without content)</li>
+				<li>Old <a href="virtual_root_project.html">Virtual root project</a> is removed</li>
+				<li>The new generated eclipse sub projects are imported into workspace</li>
+				<li>
+				If the root project is a multi project, 
+				a new <a href="virtual_root_project.html">Virtual root project</a> will be created, if it's just a single gradle project 
+				no virtual root project is created (because unnecessary - all stuff is inside single project itself)
+				</li>
+			</ol>
+		</li>
+		<li>If the gradle call was NOT sucessful the former operations are undo'ed:
+			<ol>
+				<li>The former closed projects will be reopened</li>
+			</ol>
+		</li>
+	</ol>
+	<h3 id="import_by_importer_reimport">Reimporting current root project</h3>
+	What happens when you keep the settings of current preferences?<br><br>	
+	The same as described above. But when do you need this? When you switch between branches
+	it can happen that you renamed projects, added or deleted projects etc. The branch switch will
+	leave "zombie" projects or new projects (which maybe are referenced) are not in workspace. The 
+	import process with same settings will all do this automatically...
+	<p>
+		<a href="#top">Top</a>
+	</p>	
+	<br>
+	<br>	
+	<h2 id="import_by_default">Import by standard eclipse way</h2>
 	<p>
 		After <a href="setup.html">Setup</a> is done for your root project,
-		you can use EGradles<a href="refresh_complete_workspace.html">
-			refresh eclipse</a> dependencies button or use a console of your choice and call inside root
-		project "gradlew eclipse".
+		you can use either
 	</p>
-	<p>After this is done, use "File - import ... existing projects"
+	
+	<ul>
+		<li>EGradles<a href="refresh_complete_workspace.html">
+				refresh eclipse</a> dependencies button or
+		</li>
+		<li>use a console of your choice and call inside root project the
+			gradle task "eclipse".</li>
+	</ul>
+
+	<p>
+		After this is done, use "File - import ... existing projects"
 		inside eclipse and import all projects from root folder.</p>
 	<p>
-		<table border='0'>
-			<tr>
-				<td><img src="images/info.png"/></td>
-				<td>You should not try to import the gradle root project 
-					itself as a normal eclipse project. 
-					Instead use the <a href="virtual_root_project.html">Virtual root project</a> feature!
-				</td>
-			</tr>
-		</table>
-	</p>
+	
+	<table border='0'>
+		<tr>
+			<td><img src="images/info.png" /></td>
+			<td>You should not try to import the gradle root project itself
+				as a normal eclipse project. Instead use the <a href="virtual_root_project.html">Virtual root project</a> feature!
+			</td>
+		</tr>
+	</table>
 	<p>
 		<a href="#top">Top</a>
 	</p>
