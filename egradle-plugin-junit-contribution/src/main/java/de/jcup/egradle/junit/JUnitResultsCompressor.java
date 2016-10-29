@@ -110,7 +110,7 @@ import de.jcup.egradle.core.api.FormatConverter;
  */
 public class JUnitResultsCompressor {
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd at HH:mm:ss");
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
 	private static final String TESTSUITE = "testsuite";
 	static final String ATTRIBUTE_TIME = "time";
 	static final String ATTRIBUTE_ERRORS = "errors";

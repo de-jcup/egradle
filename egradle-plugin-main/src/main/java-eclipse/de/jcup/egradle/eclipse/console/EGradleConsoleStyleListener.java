@@ -94,12 +94,12 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 				handled=true;
 			}
 		}
-		handled = markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER,  BRIGHT_BLUE, true, BLUE,false);
-		handled = markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED,false);
-		handled = markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
-		handled = markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);
-		handled = markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED,false);
-		handled = markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE,false);
+		handled = handled || markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER,  BRIGHT_BLUE, true, BLUE,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE,false);
 		/* index parts and other*/
 		if (!handled) {
 			for (ParseData data : SHARED_PARSE_DATA) {
