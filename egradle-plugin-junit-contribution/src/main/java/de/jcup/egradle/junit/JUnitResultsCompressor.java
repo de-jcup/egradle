@@ -17,7 +17,9 @@ package de.jcup.egradle.junit;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -108,6 +110,7 @@ import de.jcup.egradle.core.api.FormatConverter;
  */
 public class JUnitResultsCompressor {
 
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd at HH:mm:ss");
 	private static final String TESTSUITE = "testsuite";
 	static final String ATTRIBUTE_TIME = "time";
 	static final String ATTRIBUTE_ERRORS = "errors";
@@ -186,8 +189,10 @@ public class JUnitResultsCompressor {
 	}
 
 	private void appendEGradleInformation(Document doc, Element testSuites) {
+		Date date = new Date();
+		String dateStr = DATE_FORMAT.format(date);
 		Element egradlePseudoTestSuite = doc.createElement(TESTSUITE);
-		egradlePseudoTestSuite.setAttribute("name", "EGradle imported following Junit Test results:");
+		egradlePseudoTestSuite.setAttribute("name", "EGradle imported following JUnit test results on "+dateStr+" :");
 		egradlePseudoTestSuite.setAttribute("disabled", "true");
 		testSuites.appendChild(egradlePseudoTestSuite);
 	}
