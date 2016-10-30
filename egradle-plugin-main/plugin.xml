@@ -321,9 +321,7 @@
         id="de.jcup.egradle.launchConfigurationType"
         modes="run"
         name="EGradle"
-        public="true"
-        
-        >
+        public="true" >
        </launchConfigurationType>
 	</extension>
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -334,7 +332,6 @@
 			type="de.jcup.egradle.launchConfigurationType">
 		</launchConfigurationTabGroup>
 	</extension>
-	<!-- launch image 
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 	  <launchConfigurationTypeImage
 	     id="de.jcup.egradle.launchConfigurationTypeImage"
@@ -342,7 +339,6 @@
 	     icon="icons/gradle-og.gif">
 	  </launchConfigurationTypeImage>
  	</extension>
- 	-->
  	<!-- launch shortcuts for Run...as ... -->
  	<extension point="org.eclipse.debug.ui.launchShortcuts">
     	<shortcut
