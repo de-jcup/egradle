@@ -10,6 +10,7 @@
 	<img src="./../images/egradle-banner_128x128.png" />
 	<a href="../user_guide.html">User guide</a>
 	<h1>Import gradle projects</h1>
+	<p>You can import projects in different ways, all are working:</p>
 	<ul>
 		<li><a href="#import_preconditions">Preconditions</a></li>
 		<li><a href="#import_by_importer">Import gradle root and all subprojects by EGradle importer</a>
@@ -26,7 +27,7 @@
 		<img src="images/egradle-import-preconditions.png" />
 	</p>
 	<h2 id="import_by_importer">Import gradle root and all subprojects by EGradle importer</h2>
-	<p>EGradle contains an importer - simply call ""File->Import..." and enter "gradle"</p>
+	<p>EGradle contains an importer - simply call "File->Import..." and enter "gradle"</p>
 	<p>
 		<img src="images/egradle-import-rootproject.png" />
 	</p>
@@ -51,6 +52,7 @@
 				a new <a href="virtual_root_project.html">Virtual root project</a> will be created, if it's just a single gradle project 
 				no virtual root project is created (because unnecessary - all stuff is inside single project itself)
 				</li>
+				<li>Your entered values are used as new preferences for EGradle</li>
 			</ol>
 		</li>
 		<li>If the gradle call was NOT sucessful the former operations are undo'ed:
@@ -71,6 +73,9 @@
 	<br>
 	<br>	
 	<h2 id="import_by_default">Import by standard eclipse way</h2>
+	<p>
+		This is the classic way if you do not want to use the EGradle importer mechanism.
+	</p>
 	<p>
 		After <a href="setup.html">Setup</a> is done for your root project,
 		you can use either
