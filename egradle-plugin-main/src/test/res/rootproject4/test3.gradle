@@ -1,0 +1,10 @@
+allprojects{
+	
+	/* a comment */
+	
+	repositories {
+		mavenLocal()
+		mavenCentral()
+    }
+		
+}

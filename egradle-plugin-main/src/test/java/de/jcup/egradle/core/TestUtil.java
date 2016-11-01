@@ -45,4 +45,13 @@ public class TestUtil {
 	public static final File ROOTFOLDER_2_ECLIPSE_PROJECT2 = new File(ROOTFOLDER_2, "eclipse-project2");
 	public static final File ROOTFOLDER_2_NO_ECLIPSE_PROJECT1 = new File(ROOTFOLDER_2, "no-eclipse-project1");
 	public static final File ROOTFOLDER_2_NO_ECLIPSE_PROJECT2 = new File(ROOTFOLDER_2, "no-eclipse-project1");
+	
+	/**
+	 * Rootfolder 4 - contains only gradle test files used by parser tests
+	 */
+	public static final File ROOTFOLDER_4 = new File(PARENT_OF_TEST, "rootproject4");
+	
+	public static final File ROOTFOLDER_4_TEST1_GRADLE = new File(ROOTFOLDER_4, "test1.gradle");
+	public static final File ROOTFOLDER_4_TEST2_GRADLE = new File(ROOTFOLDER_4, "test2.gradle");
+	public static final File ROOTFOLDER_4_TEST3_GRADLE = new File(ROOTFOLDER_4, "test3.gradle");
 }

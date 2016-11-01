@@ -59,6 +59,10 @@ public class GradleEditor extends TextEditor {
 		super.dispose();
 	}
 	
+	public void setSelectedRange(int offset, int length){
+		getSourceViewer().setSelectedRange(offset, length);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {

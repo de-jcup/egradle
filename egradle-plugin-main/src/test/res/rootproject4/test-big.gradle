@@ -1,0 +1,137 @@
+allprojects {
+	/* gradle.properties werden sowieso immer geladen*/
+	/* libraries.gradle - manuell nachladen*/
+	apply from: "${rootProject.projectDir}/libraries.gradle"
+	
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven{
+			/* code repository for docbook4j - 
+			   currently not available and no more available at google code. 
+			   So for temporary workaround until available in maven central we use temp-m2-repo*/
+			//url "http://docbook4j.googlecode.com/svn/m2-repo/releases/" 
+			url "https://raw.githubusercontent.com/de-jcup/temp-m2-repo/master/"
+		}
+    }
+	
+	/* Custimization part - e.g. when you got special repositories
+	 * or an enterprise repo like artifactory or nexus */	 
+	File f = new File(rootProject.projectDir,'custom_allprojects.gradle');
+	if (f.exists()){
+		apply from: "${rootProject.projectDir}/custom_allprojects.gradle"
+	}
+		
+}
+
+subprojects {
+    apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'maven'
+	apply plugin: 'jacoco'
+		
+	group = "de.jcup.code2doc" 
+	version = "0.9.0.beta"	
+		
+	/* Setup UTF-8 for compile AND test compilation*/
+	[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+
+	sourceCompatibility = JavaVersion.VERSION_1_6
+		
+	dependencies{
+			
+		testCompile library.junit
+		testCompile library.mockito_all
+	}
+	
+	 /* per default GRADLE stops the build if one single test fails ...*/
+    test { 
+        ignoreFailures = true 
+    }
+	
+	/* copy license information into every jar */
+	compileJava{
+		def clTask = task copyLicenseData(type:Copy){
+			def copyLicenseFrom = rootProject.projectDir
+			logger.info('config phase of license data copy - '+project.name)
+			
+			from copyLicenseFrom
+			into 'build/classes/main'
+			include 'LICENSE'
+			include 'NOTICE'
+			
+			doLast{
+				logger.info('License data copied to '+copyLicenseFrom + ' for project:' +project.name)
+			}
+		}
+		
+		doLast{
+			clTask.execute()
+		}
+				
+	}
+	
+	
+	
+	
+	/* maven deployment tasks */
+	task writeNewPom << {
+		pom {
+			project {
+				inceptionYear '2008'
+				licenses {
+					license {
+						name 'Apache License, Version 2.0'
+						url 'http://www.apache.org/licenses/LICENSE-2.0'
+						distribution 'repo'
+					}
+				}
+			}
+		}.writeTo("$buildDir/newpom.xml")
+	}
+	
+	
+	task sourcesJar(type: Jar, dependsOn:classes) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+	task javadocJar(type: Jar, dependsOn:javadoc) {
+		classifier = 'javadoc'
+		from javadoc.destinationDir
+	}
+
+	artifacts {
+		archives sourcesJar
+		archives javadocJar
+	}
+
+	gradle.taskGraph.whenReady { taskGraph ->
+		if (!taskGraph.hasTask(':release')) {
+			version = version + '-SNAPSHOT'
+		}
+	}
+
+
+}
+
+def code2doc_GROUP='code2doc'
+
+/* own task for complete project with sub projects...*/
+task testReportAll(type: TestReport) {
+	description 'Starts all tests for all sub projects and cumulate the results into build folder of root project.'
+	group code2doc_GROUP
+    subprojects {
+        test {
+            /* stops single reports for each project */
+            reports.html.enabled = false
+        }
+    }
+    destinationDir = file("$buildDir/reports/allUnitTests")
+
+    /* report on the results of the subprojects' test task*/
+    reportOn subprojects*.test
+}
+
+
+

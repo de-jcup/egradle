@@ -1,0 +1,11 @@
+allprojects{
+	
+	/* a comment */
+	// another comment , but complete line
+	repositories {
+		mavenLocal()
+		mavenCentral()
+    }
+    
+		
+}
