@@ -203,7 +203,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		
 		gradleCallGroup = SWTFactory.createGroup(parent, "Gradle call", 1, 10, SWT.FILL);
 		if (debug) {
-			gradleCallGroup.setBackground(ColorManager.instance().getColor(new RGB(0, 255, 0)));
+			gradleCallGroup.setBackground(ColorManager.create().getColor(new RGB(0, 255, 0)));
 		}
 		gradleCallGroup.setLayoutData(groupLayoutData);
 		/* @formatter:off */
@@ -222,7 +222,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 
 		if (debug) {
 			gradleCallTypeRadioButton.getComboBoxControl(gradleCallGroup)
-					.setBackground(ColorManager.instance().getColor(new RGB(0, 0, 255)));
+					.setBackground(ColorManager.create().getColor(new RGB(0, 0, 255)));
 		}
 		gradleCallTypeRadioButton.setPropertyChangeListener(this);
 

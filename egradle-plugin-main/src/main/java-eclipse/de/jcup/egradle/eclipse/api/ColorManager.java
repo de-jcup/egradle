@@ -53,7 +53,7 @@ public class ColorManager {
 	 * 
 	 * @return color manager
 	 */
-	public static ColorManager instance() {
+	public static ColorManager create() {
 		return new ColorManager();
 	}
 }

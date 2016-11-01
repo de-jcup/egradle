@@ -55,7 +55,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		SHARED_PARSE_DATA.add(data);
 	}
 
-	private ColorManager colorManger = ColorManager.instance();
+	private ColorManager colorManger = ColorManager.create();
 	int lastRangeEnd = 0;
 
 	@Override

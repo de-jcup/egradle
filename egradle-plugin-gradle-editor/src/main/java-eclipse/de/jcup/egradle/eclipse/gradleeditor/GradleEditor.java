@@ -19,13 +19,36 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
+import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
+import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
+
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IStatusLineManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ITreeSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+
 
 public class GradleEditor extends TextEditor {
 
 	private ColorManager colorManager;
+	private GradleEditorContentOutlinePage outlinePage;
 
 	public GradleEditor() {
-		colorManager = ColorManager.instance();
+		colorManager = ColorManager.create();
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
 		setDocumentProvider(new GradleDocumentProvider());
 	}
@@ -35,5 +58,17 @@ public class GradleEditor extends TextEditor {
 		colorManager.dispose();
 		super.dispose();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getAdapter(Class<T> adapter) {
+		  if (IContentOutlinePage.class.equals(adapter)) {
+			  if (outlinePage == null) {
+		        	 outlinePage = new GradleEditorContentOutlinePage(this);
+		      }
+			  return (T) outlinePage;
+		  }
+		return super.getAdapter(adapter);
+	}
+	
 }
