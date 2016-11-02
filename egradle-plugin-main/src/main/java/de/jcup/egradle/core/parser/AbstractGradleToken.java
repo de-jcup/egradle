@@ -23,8 +23,8 @@ public abstract class AbstractGradleToken {
 
 
 	/**
-	 * Returns undmodifiable list of elements, never <code>null</code>
-	 * @return
+	 * Returns unmodifiable list of elements, never <code>null</code>
+	 * @return unmodifiable list of elements, never <code>null</code>
 	 */
 	public List<AbstractGradleToken> getElements() {
 		return Collections.unmodifiableList(elements);
@@ -44,7 +44,7 @@ public abstract class AbstractGradleToken {
 
 	/**
 	 * Returns offset inside complete source
-	 * @return
+	 * @return offset inside complete source
 	 */
 	public int getOffset() {
 		return offset;
@@ -56,5 +56,11 @@ public abstract class AbstractGradleToken {
 		}
 		return name.length();
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+"[name=" + name + ", lineNumber=" + lineNumber + ", offset=" + offset + "]";
+	}
+	
 	
 }

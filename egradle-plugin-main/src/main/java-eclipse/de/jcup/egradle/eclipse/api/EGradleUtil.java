@@ -411,15 +411,44 @@ public class EGradleUtil {
 	public static void log(IStatus status) {
 		Activator.getDefault().getLog().log(status);
 	}
-
 	public static void log(Throwable t) {
+		log(null,t);
+	}
+	
+	public static void log(String message, Throwable t) {
+
 		if (t instanceof CoreException) {
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), t.getCause()));
+			Throwable cause = getRootCause(t);
+			message = resolveMessageIfNotSet(message, cause);
+			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), cause));
 		} else {
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, "Internal Error",
+			message = resolveMessageIfNotSet(message, t);
+			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message,
 					t));
 		}
 
+	}
+
+	private static String resolveMessageIfNotSet(String message, Throwable cause) {
+		if (message==null){
+			if (cause==null){
+				message="Unknown";
+			}else{
+				message=cause.getMessage();
+			}
+		}
+		return message;
+	}
+
+	public static Throwable getRootCause(Throwable t) {
+		if (t==null){
+			return null;
+		}
+		Throwable rootCause = t;
+		while (t.getCause()!=null){
+			rootCause = t.getCause();
+		}
+		return rootCause;
 	}
 
 	public static void logInfo(String message){

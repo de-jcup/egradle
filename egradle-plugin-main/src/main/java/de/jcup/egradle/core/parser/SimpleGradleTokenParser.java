@@ -11,6 +11,8 @@ import static de.jcup.egradle.core.parser.TraceUtil.*;
 
 public class SimpleGradleTokenParser {
 
+	private static boolean GLOBAL_DEBUGENABLED = Boolean.TRUE.equals(System.getProperty("egradle.global.debug"));
+	
 	private class ParseContext {
 		private GradleAST ast;
 		private int lineNumber;
@@ -23,7 +25,15 @@ public class SimpleGradleTokenParser {
 
 	private AbstractGradleToken element;
 
-	private boolean traceEnabled;
+	/**
+	 * When trace enabled, the complete parsing mechanism does output to console
+	 */
+	boolean traceEnabled;
+	/**
+	 * When enabled for parser instance, created tokens contain content string information. Interesting for debugging, but not for normal usage.
+	 * When global enabled {@link SimpleGradleTokenParser#GLOBAL_DEBUGENABLED}, every token parser collects debug information.
+	 */
+	boolean debugEnabled=GLOBAL_DEBUGENABLED;
 
 	private GradleAST createASTWithLinesFilled(InputStream is) throws IOException {
 		GradleAST ast = new GradleAST();
@@ -47,13 +57,6 @@ public class SimpleGradleTokenParser {
 
 		}
 		return ast;
-	}
-
-	/**
-	 * Only for testing and debugging
-	 */
-	void enableTracing() {
-		traceEnabled = true;
 	}
 
 	private String getCurrentTextString() {
@@ -146,7 +149,10 @@ public class SimpleGradleTokenParser {
 				return;
 			}
 			if (element!=null){
-				element.content=getCurrentTextString();
+				if (debugEnabled){
+					/* in debug mode set current text string as content of element - so it is easier to debug */
+					element.content=getCurrentTextString();
+				}
 				this.element=element.getParent(); // switch back to parent / or null
 			}
 			resetCurrentText();
@@ -246,6 +252,7 @@ public class SimpleGradleTokenParser {
 				}else{
 					switchState(State.SINGLE_QUOTE_START);
 				}
+				append=true;
 				break;
 			case '\"':
 				if (currentState==State.DOUBLE_QUOTE_START){
@@ -253,6 +260,7 @@ public class SimpleGradleTokenParser {
 				}else{
 					switchState(State.DOUBLE_QUOTE_START);
 				}
+				append=true;
 				break;
 			default:
 			}

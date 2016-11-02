@@ -59,7 +59,7 @@ public class SimpleGradleTokenParserTest {
 	@Test
 	public void parsing_stream_without_content_returns_an_ast_without_children() throws IOException {
 		/* prepare */
-		ByteArrayInputStream is = new ByteArrayInputStream("".getBytes());
+		InputStream is = createStringInputStream("");
 		
 		/* execute */
 		GradleAST result = parserToTest.parse(is);
@@ -70,6 +70,44 @@ public class SimpleGradleTokenParserTest {
 		List<AbstractGradleToken> content = result.getRootElements();
 		assertNotNull(content);
 		assertEquals(0,content.size());
+	}
+	
+	
+	@Test
+	public void parsing_child1b_in_child1_in_parent1_tokens_have_correct_offsets() throws IOException {
+		/* prepare */
+		StringBuilder sb = new StringBuilder();
+		
+		/* @formatter:off*/
+		int offset0 = sb.length();
+		sb.append("parent1 {\n");
+		sb.append("    ");
+		int offset1 = sb.length();
+		sb.append(      "child1 {\n");
+		sb.append("              ");
+		int offset2 = sb.length();
+		sb.append(               "child1b {\n");
+		sb.append("               }");
+		sb.append("      }");
+		sb.append("}");
+		/* @formatter:on*/
+		
+		InputStream is = createStringInputStream(sb);
+		
+		/* execute */
+		parserToTest.traceEnabled=true;
+		parserToTest.debugEnabled=true;
+		GradleAST ast = parserToTest.parse(is);
+		
+		/* test */
+		List<AbstractGradleToken> content = ast.getRootElements();
+		AbstractGradleToken parent1 = content.iterator().next();
+		AbstractGradleToken child1 = parent1.getElements().iterator().next();
+		AbstractGradleToken child1b = child1.getElements().iterator().next();
+
+		assertEquals(offset0, parent1.getOffset());
+		assertEquals(offset1, child1.getOffset());
+		assertEquals(offset2, child1b.getOffset());
 	}
 	
 	@Test
@@ -220,7 +258,13 @@ public class SimpleGradleTokenParserTest {
 	
 
 	private InputStream createStringInputStream(StringBuilder sb) {
-		ByteArrayInputStream is = new ByteArrayInputStream(sb.toString().getBytes());
+		String string = sb.toString();
+		return createStringInputStream(string);
+	}
+
+
+	private InputStream createStringInputStream(String string) {
+		ByteArrayInputStream is = new ByteArrayInputStream(string.getBytes());
 		return is;
 	}
 

@@ -40,4 +40,5 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 		}
 		return document;
 	}
+	
 }
