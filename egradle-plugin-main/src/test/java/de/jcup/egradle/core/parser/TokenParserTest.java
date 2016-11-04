@@ -1,10 +1,8 @@
 package de.jcup.egradle.core.parser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -21,16 +19,16 @@ import org.mockito.Matchers;
 import org.mockito.internal.matchers.Equals;
 
 import de.jcup.egradle.core.TestUtil;
-public class SimpleGradleTokenParserTest {
+public class TokenParserTest {
 
-	private SimpleGradleTokenParser parserToTest;
+	private TokenParser parserToTest;
 	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before
 	public void before(){
-		parserToTest = new SimpleGradleTokenParser();
+		parserToTest = new TokenParser();
 	}
 	
 
@@ -57,17 +55,17 @@ public class SimpleGradleTokenParserTest {
 	}
 	
 	@Test
-	public void parsing_stream_without_content_returns_an_ast_without_children() throws IOException {
+	public void parsing_stream_without_content_returns_an_result_without_children() throws IOException {
 		/* prepare */
 		InputStream is = createStringInputStream("");
 		
 		/* execute */
-		GradleAST result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is);
 		
 		/* test */
 		assertNotNull(result);
 		
-		List<AbstractGradleToken> content = result.getRootElements();
+		List<Token> content = result.getTokens();
 		assertNotNull(content);
 		assertEquals(0,content.size());
 	}
@@ -95,15 +93,13 @@ public class SimpleGradleTokenParserTest {
 		InputStream is = createStringInputStream(sb);
 		
 		/* execute */
-		parserToTest.traceEnabled=true;
-		parserToTest.debugEnabled=true;
-		GradleAST ast = parserToTest.parse(is);
+		TokenParserResult ast = parserToTest.parse(is);
 		
 		/* test */
-		List<AbstractGradleToken> content = ast.getRootElements();
-		AbstractGradleToken parent1 = content.iterator().next();
-		AbstractGradleToken child1 = parent1.getElements().iterator().next();
-		AbstractGradleToken child1b = child1.getElements().iterator().next();
+		List<Token> content = ast.getTokens();
+		Token parent1 = content.iterator().next();
+		Token child1 = parent1.getChildren().iterator().next();
+		Token child1b = child1.getChildren().iterator().next();
 
 		assertEquals(offset0, parent1.getOffset());
 		assertEquals(offset1, child1.getOffset());
@@ -111,7 +107,7 @@ public class SimpleGradleTokenParserTest {
 	}
 	
 	@Test
-	public void parsing_test1234_without_content_returns_ast_with_test1234_as_element_with_linenumber_0__offset_0() throws IOException {
+	public void parsing_test1234_without_content_returns_result_with_test1234_as_element_with_linenumber_0__offset_0() throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
 		
@@ -121,14 +117,14 @@ public class SimpleGradleTokenParserTest {
 		InputStream is = createStringInputStream(sb);
 		
 		/* execute */
-		GradleAST ast = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is);
 		
 		/* test */
-		assertNotNull(ast);
-		List<AbstractGradleToken> content = ast.getRootElements();
+		assertNotNull(result);
+		List<Token> content = result.getTokens();
 		assertNotNull(content);
 		assertEquals(1,content.size());
-		AbstractGradleToken element = content.iterator().next();
+		Token element = content.iterator().next();
 		
 		assertEquals("test1234", element.getName());
 		assertEquals(0, element.getLineNumber());
@@ -136,7 +132,7 @@ public class SimpleGradleTokenParserTest {
 	}
 	
 	@Test
-	public void parsing_test1234_with_child1_as_content_element_returns_ast_with_test1234_as_element_with_linenumber_0_offset_0_containing_child1_at_line_number3_offset_as_expected() throws IOException {
+	public void parsing_test1234_with_child1_as_content_element_returns_result_with_test1234_as_element_with_linenumber_0_offset_0_containing_child1_at_line_number3_offset_as_expected() throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
 		
@@ -150,29 +146,30 @@ public class SimpleGradleTokenParserTest {
 		InputStream is = createStringInputStream(sb);
 		
 		/* execute */
-		GradleAST ast = parserToTest.parse(is);
+		parserToTest.enableDebugMode();
+		TokenParserResult result = parserToTest.parse(is);
 		
 		/* test */
-		assertNotNull(ast);
-		List<AbstractGradleToken> content = ast.getRootElements();
+		assertNotNull(result);
+		List<Token> content = result.getTokens();
 		assertNotNull(content);
 		assertEquals(1,content.size());
-		Iterator<AbstractGradleToken> iterator = content.iterator();
-		AbstractGradleToken element1 = iterator.next();
+		Iterator<Token> iterator = content.iterator();
+		Token element1 = iterator.next();
 		
 		assertEquals("test1234", element1.getName());
 		assertEquals(0, element1.getLineNumber());
-		List<AbstractGradleToken> childElements = element1.getElements();
+		List<Token> childElements = element1.getChildren();
 		assertNotNull(childElements);
 		assertEquals(1, childElements.size());
-		AbstractGradleToken childElement = childElements.iterator().next();
+		Token childElement = childElements.iterator().next();
 		assertEquals("child1", childElement.getName());
 		assertEquals(3, childElement.getLineNumber());
 		assertEquals(13, childElement.getOffset());
 	}
 	
 	@Test
-	public void parsing_test1234_and_test12345_without_content_returns_ast_with_test1234_and_test12345_as_elements_with_linenumber_0_and_3() throws IOException {
+	public void parsing_test1234_and_test12345_without_content_returns_result_with_test1234_and_test12345_as_elements_with_linenumber_0_and_3() throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
 		
@@ -185,16 +182,16 @@ public class SimpleGradleTokenParserTest {
 		InputStream is = createStringInputStream(sb);
 		
 		/* execute */
-		GradleAST ast = parserToTest.parse(is);
+		TokenParserResult ast = parserToTest.parse(is);
 		
 		/* test */
 		assertNotNull(ast);
-		List<AbstractGradleToken> content = ast.getRootElements();
+		List<Token> content = ast.getTokens();
 		assertNotNull(content);
 		assertEquals(2,content.size());
-		Iterator<AbstractGradleToken> iterator = content.iterator();
-		AbstractGradleToken element1 = iterator.next();
-		AbstractGradleToken element2 = iterator.next();
+		Iterator<Token> iterator = content.iterator();
+		Token element1 = iterator.next();
+		Token element2 = iterator.next();
 		
 		assertEquals("test1234", element1.getName());
 		assertEquals(0, element1.getLineNumber());
@@ -206,15 +203,17 @@ public class SimpleGradleTokenParserTest {
 	@Test
 	public void rootproject4_test1_file() throws IOException{
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST1_GRADLE);
+
+		parserToTest.enableDebugMode();
+		TokenParserResult result = parserToTest.parse(fis);
 		
-		GradleAST ast = parserToTest.parse(fis);
-		List<AbstractGradleToken> elements = ast.getRootElements();
+		List<Token> elements = result.getTokens();
 		assertEquals(1, elements.size());
-		AbstractGradleToken element = elements.iterator().next();
+		Token element = elements.iterator().next();
 		assertEquals("allprojects", element.getName());
-		List<AbstractGradleToken> childElements = element.getElements();
+		List<Token> childElements = element.getChildren();
 		assertEquals(1, childElements.size());
-		AbstractGradleToken childElement = childElements.iterator().next(); 
+		Token childElement = childElements.iterator().next(); 
 		assertEquals("repositories" ,childElement.getName());
 	}
 	
@@ -224,16 +223,16 @@ public class SimpleGradleTokenParserTest {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST2_GRADLE);
 		
 		/* execute*/
-		GradleAST ast = parserToTest.parse(fis);
+		TokenParserResult ast = parserToTest.parse(fis);
 		
 		/* test */
-		List<AbstractGradleToken> elements = ast.getRootElements();
+		List<Token> elements = ast.getTokens();
 		assertEquals(1, elements.size());
-		AbstractGradleToken element = elements.iterator().next();
+		Token element = elements.iterator().next();
 		assertEquals("allprojects", element.getName());
-		List<AbstractGradleToken> childElements = element.getElements();
+		List<Token> childElements = element.getChildren();
 		assertEquals(1, childElements.size());
-		AbstractGradleToken childElement = childElements.iterator().next(); 
+		Token childElement = childElements.iterator().next(); 
 		assertEquals("repositories" ,childElement.getName());
 	}
 	
@@ -243,16 +242,16 @@ public class SimpleGradleTokenParserTest {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST3_GRADLE);
 		
 		/* execute*/
-		GradleAST ast = parserToTest.parse(fis);
+		TokenParserResult ast = parserToTest.parse(fis);
 		
 		/* test */
-		List<AbstractGradleToken> elements = ast.getRootElements();
+		List<Token> elements = ast.getTokens();
 		assertEquals(1, elements.size());
-		AbstractGradleToken element = elements.iterator().next();
+		Token element = elements.iterator().next();
 		assertEquals("allprojects", element.getName());
-		List<AbstractGradleToken> childElements = element.getElements();
+		List<Token> childElements = element.getChildren();
 		assertEquals(1, childElements.size());
-		AbstractGradleToken childElement = childElements.iterator().next(); 
+		Token childElement = childElements.iterator().next(); 
 		assertEquals("repositories" ,childElement.getName());
 	}
 	

@@ -414,7 +414,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 * the specified mode.
 	 * 
 	 * @param resources
-	 *            the java elements to consider for a type that can be launched
+	 *            the java children to consider for a type that can be launched
 	 * @param mode
 	 *            launch mode
 	 * @param selectTitle

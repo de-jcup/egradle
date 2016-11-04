@@ -4,9 +4,7 @@ import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import de.jcup.egradle.core.parser.AbstractGradleToken;
-import de.jcup.egradle.core.parser.Closure;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.core.parser.Token;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
@@ -17,12 +15,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 
 	@Override
 	public Image getImage(Object element) {
-		if (element instanceof Closure){
-			Closure c = (Closure) element;
-			if (c.getName().indexOf("task ")!=-1){
-				return EGradleUtil.getImage("icons/gradle-og.gif");
-			}
-		}
+//		if (element instanceof Closure){
+//			Closure c = (Closure) element;
+//			if (c.getName().indexOf("task ")!=-1){
+//				return EGradleUtil.getImage("icons/gradle-og.gif");
+//			}
+//		}
 		return null;
 	}
 
@@ -31,8 +29,8 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 		if (element==null){
 			return "null";
 		}
-		if (element instanceof AbstractGradleToken){
-			AbstractGradleToken gelement= (AbstractGradleToken) element;
+		if (element instanceof Token){
+			Token gelement= (Token) element;
 			return gelement.getName();
 		}
 		return element.toString();

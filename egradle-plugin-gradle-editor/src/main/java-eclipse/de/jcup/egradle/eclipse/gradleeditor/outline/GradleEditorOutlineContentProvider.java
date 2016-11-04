@@ -12,9 +12,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IFileEditorInput;
 
-import de.jcup.egradle.core.parser.AbstractGradleToken;
-import de.jcup.egradle.core.parser.GradleAST;
-import de.jcup.egradle.core.parser.SimpleGradleTokenParser;
+import de.jcup.egradle.core.parser.Token;
+import de.jcup.egradle.core.parser.TokenParser;
+import de.jcup.egradle.core.parser.TokenParserResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 
@@ -22,7 +22,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	private static Object[] EMPTY = new Object[] {};
 
-	private SimpleGradleTokenParser parser = new SimpleGradleTokenParser();
+	private TokenParser parser = new TokenParser();
 
 
 	@Override
@@ -35,8 +35,8 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			try {
 				File normalFile = resourceHelper.toFile(file);
 				try (InputStream is = new FileInputStream(normalFile)) {
-					GradleAST ast = parser.parse(is);
-					return ast.getRootElements().toArray();
+					TokenParserResult ast = parser.parse(is);
+					return ast.getTokens().toArray();
 				} catch (IOException e) {
 					EGradleUtil.log("Was not able to load file:" + normalFile, e);
 				}
@@ -48,8 +48,8 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			IDocument document = (IDocument) inputElement;
 			String dataAsString = document.get();
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
-				GradleAST ast = parser.parse(is);
-				return ast.getRootElements().toArray();
+				TokenParserResult ast = parser.parse(is);
+				return ast.getTokens().toArray();
 			} catch (IOException e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
 			}
@@ -59,17 +59,17 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof AbstractGradleToken) {
-			AbstractGradleToken parent = (AbstractGradleToken) parentElement;
-			return parent.getElements().toArray();
+		if (parentElement instanceof Token) {
+			Token parent = (Token) parentElement;
+			return parent.getChildren().toArray();
 		}
 		return EMPTY;
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if (element instanceof AbstractGradleToken) {
-			AbstractGradleToken gradleElement = (AbstractGradleToken) element;
+		if (element instanceof Token) {
+			Token gradleElement = (Token) element;
 			return gradleElement.getParent();
 		}
 		return null;
@@ -77,8 +77,8 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof AbstractGradleToken) {
-			AbstractGradleToken gradleElement = (AbstractGradleToken) element;
+		if (element instanceof Token) {
+			Token gradleElement = (Token) element;
 			return gradleElement.hasChildren();
 		}
 		return false;

@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
-import de.jcup.egradle.core.parser.AbstractGradleToken;
-import de.jcup.egradle.core.parser.TraceUtil;
+import de.jcup.egradle.core.parser.Token;
+import de.jcup.egradle.core.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
@@ -48,7 +48,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 	}
 
 	private IDocument setTreeViewerDocument(){
-		TraceUtil.traceLine("set tree document");
+		DebugUtil.trace("set tree document");
 		IDocumentProvider documentProvider = gradleEditor.getDocumentProvider();
 		IDocument document = documentProvider.getDocument(gradleEditor.getEditorInput());
 		getTreeViewer().setInput(document);
@@ -62,8 +62,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		if (selection instanceof IStructuredSelection){
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof AbstractGradleToken){
-				AbstractGradleToken gElement = (AbstractGradleToken) firstElement;
+			if (firstElement instanceof Token){
+				Token gElement = (Token) firstElement;
 				int offset = gElement.getOffset();
 				int length = gElement.getLength();
 
