@@ -14,6 +14,8 @@ public enum TokenType {
 	
 	STRING,
 	
-	BRACES /* {...} */
+	BRACE_OPENING, 
+	
+	BRACE_CLOSING
 	
 }

@@ -54,7 +54,7 @@ public class TokenParser {
 		parseLines();
 
 		TokenParserResult result = context.getResult();
-		if (debugEnabled){
+		if (debugEnabled) {
 			result.print();
 		}
 		context.dispose();
@@ -76,8 +76,8 @@ public class TokenParser {
 		for (Iterator<String> it = context.getLines().iterator(); it.hasNext();) {
 			String line = it.next();
 			context.setLineNumber(lineNumber);
-			if (debugEnabled){
-				debug("LINE:"+context.getLineNumber()+":"+line);
+			if (debugEnabled) {
+				debug("LINE:" + context.getLineNumber() + ":" + line);
 			}
 			visit(line);
 			context.incOffset();
@@ -91,11 +91,6 @@ public class TokenParser {
 	}
 
 	protected void visit(String line) {
-		if (traceEnabled) {
-			traceShowRuler();
-			trace("visit line:" + context.getLineNumber() + ", line=" + line);
-			traceShowRuler();
-		}
 		if (line == null) {
 			return;
 		}
@@ -103,7 +98,6 @@ public class TokenParser {
 			return;
 		}
 		context.setLineChars(line.toCharArray());
-
 		for (context.resetPos(); context.getPos() < context.getLineChars().length; context.incPos()) {
 			char c = context.getLineCharAtPos();
 			context.incOffset();
@@ -133,7 +127,7 @@ public class TokenParser {
 					continue;
 				}
 				switchState(TokenState.CURLY_BRACKET_END_FOUND);
-				closeToken();
+				closeActiveToken();
 				break;
 			case '/':
 				if (currentState == TokenState.SINGLE_QUOTE_START) {
@@ -187,10 +181,13 @@ public class TokenParser {
 			default:
 				switchState(TokenState.NORMAL_CHARACTER_READING);
 			}
-
-			context.appendCurrentText(c);
+			append(c);
 
 		}
+	}
+
+	private void append(char c) {
+		context.appendCurrentText(c);
 	}
 
 	void switchState(TokenState newState) {
@@ -207,13 +204,13 @@ public class TokenParser {
 			newActiveToken(null);
 			break;
 		case EOF_FOUND:
-			closeToken();
+			closeActiveToken();
 			break;
 		case WHITESPACE_FOUND:
-			closeToken();
+			closeActiveToken();
 			break;
 		case NEW_LINE_START:
-			closeToken();
+			closeActiveToken();
 			break;
 		case DOUBLE_QUOTE_START:
 			newActiveToken(GSTRING);
@@ -225,7 +222,7 @@ public class TokenParser {
 			newActiveToken(COMMENT__MULTI_LINE);
 			break;
 		case MULTILINE_COMMENT_END_FOUND:
-			closeToken();
+			closeActiveToken();
 			break;
 		case SINGLE_LINE_COMMENT_START_FOUND:
 			newActiveToken(COMMENT__SINGLE_LINE);
@@ -235,16 +232,9 @@ public class TokenParser {
 				/* ignore it'S inside a comment */
 				return;
 			}
-			closeToken();
+			newActiveToken(TokenType.BRACE_OPENING);
 			switchParentToLastToken();
-			newActiveToken(TokenType.BRACES);
 
-			// String currentText = getCurrentTextString();
-			// activeToken.offset=context.offset-currentText.length()-1;
-			// activeToken.lineNumber=context.lineNumber;
-			// if (traceEnabled) {
-			// traceLine("Created activeToken:" + activeToken.getName());
-			// }
 			break;
 		case CURLY_BRACKET_END_FOUND:
 			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
@@ -255,11 +245,13 @@ public class TokenParser {
 				handleProblem("Curly bracket closing, but wrong position!");
 				return;
 			}
+			newActiveToken(BRACE_CLOSING);
+			// closeActiveToken();
 			/* switch back to parent token! */
 			switchParentToActiveParentsParent();
 			setActiveTokenToLastToken();
 			if (traceEnabled) {
-				trace("switched back to parent:" + activeToken);
+				trace("switched back to parent:" + createTokenString(activeToken));
 			}
 			break;
 		case NORMAL_CHARACTER_READING:
@@ -271,13 +263,12 @@ public class TokenParser {
 			}
 
 		}
-
 		this.currentState = newState;
 	}
 
 	private void switchParentToLastToken() {
 		if (traceEnabled) {
-			trace("SWITCH PARENT (A) from " + activeParent + " to last token:" + lastToken);
+			trace("SWITCH PARENT (A) from " + activeParent + " to last token:" + createTokenString(lastToken));
 		}
 		activeParent = lastToken;
 	}
@@ -285,7 +276,8 @@ public class TokenParser {
 	private void switchParentToActiveParentsParent() {
 		if (activeParent != null) {
 			if (traceEnabled) {
-				trace("SWITCH PARENT (B) from " + activeParent + " to last token:" + activeParent.getParent());
+				trace("SWITCH PARENT (B) from " + createTokenString(activeParent) + " to last token:"
+						+ createTokenString(activeParent.getParent()));
 			}
 			activeParent = activeParent.getParent();
 		} else {
@@ -308,13 +300,19 @@ public class TokenParser {
 	 *         when no active token was available or active token contains only
 	 *         whitespaces
 	 */
-	private boolean closeToken() {
+	private boolean closeActiveToken() {
+		if (traceEnabled) {
+			trace("CLOSE active " + createTokenString(activeToken) + " requested");
+		}
 		if (activeToken == null) {
+			if (traceEnabled) {
+				trace("NULL active token - close not necessary");
+			}
 			return true;
 		}
 
 		if (traceEnabled) {
-			traceHeadline("BEFORE-CLOSE-TOKEN");
+			// traceHeadline("BEFORE-CLOSE-TOKEN");
 			trace(context.toString());
 		}
 		String name = getCurrentTextStringTrimmed();
@@ -323,6 +321,9 @@ public class TokenParser {
 			 * closing not necessary, token did contain only whitespaces, so
 			 * reuse it to avoid such tokens
 			 */
+			if (traceEnabled) {
+				trace("CLOSING canceled, because whitespace only");
+			}
 			return false;
 		}
 		activeToken.setName(name);
@@ -338,41 +339,61 @@ public class TokenParser {
 		}
 
 		if (traceEnabled) {
-			trace("TOKEN closed:" + activeToken);
+			trace("CLOSING " + createTokenString(activeToken));
 		}
-		setActiveTokenToLastToken();
 
 		if (activeParent == null) {
 			context.getResult().add(activeToken);
 			if (traceEnabled) {
-				trace("added new token to root");
+				trace("ADDED " + createTokenString(activeToken) + " to root");
 			}
 		} else {
 			activeParent.addChild(activeToken);
 			if (traceEnabled) {
-				trace("added new token to parent:" + activeToken.getParent());
+				trace("ADDED " + createTokenString(activeToken) + " to parent:"
+						+ createTokenString(activeToken.getParent()));
 			}
 		}
 		setActiveTokenToLastToken();
-		destroyActiveToken();
+		resetActiveToken();
 
 		context.resetCurrentText();
+		if (traceEnabled) {
+			trace("CLOSE DONE");
+		}
 		return true;
+	}
+
+	private String createTokenString(Token token) {
+		if (token == null) {
+			return "No Token";
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("Token(");
+		sb.append(token.getId());
+		sb.append(")");
+		String name = token.getName();
+		if (StringUtils.isNotEmpty(name)) {
+			sb.append("[");
+			sb.append(name);
+			sb.append("]");
+		}
+		return sb.toString();
 	}
 
 	private void setActiveTokenToLastToken() {
 		if (traceEnabled) {
-			trace("set (active token) to LAST token:" + activeToken);
+			trace("LAST token now:" + createTokenString(activeToken));
 		}
 		lastToken = activeToken;
 
 	}
 
-	private void destroyActiveToken() {
-		if (traceEnabled) {
-			trace("DESTROY active token");
-		}
+	private void resetActiveToken() {
 		activeToken = null;
+		if (traceEnabled) {
+			trace("RESET active token to " + createTokenString(activeToken));
+		}
 	}
 
 	private void fillContextWithLineData(InputStream is) throws IOException {
@@ -404,23 +425,31 @@ public class TokenParser {
 
 	}
 
-	private void newActiveToken(TokenType type) {
-		boolean newTokenNecessary = closeToken();
+	private boolean newActiveToken(TokenType type) {
+		boolean newTokenNecessary = closeActiveToken();
 		if (!newTokenNecessary) {
-			return;
+			if (traceEnabled) {
+				trace("KEEP " + createTokenString(activeToken) + " because close not necessary");
+			}
 		}
 		if (traceEnabled) {
-			traceHeadline("BEFORE-NEW-TOKEN");
 			trace(context.toString());
 		}
-		Token token = new Token(context.createNewTokenId());
+		Token token = null;
+		if (newTokenNecessary) {
+			token = new Token(context.createNewTokenId());
+		} else {
+			token = activeToken;
+		}
 		token.setType(type);
 		token.setOffset(context.getOffset());
 		token.setLineNumber(context.getLineNumber());
 		if (traceEnabled) {
-			trace("NEW TOKEN created:" + token);
+			trace(createTokenString(token) + (newTokenNecessary ? " created" : " reused"));
 		}
 		activeToken = token;
+
+		return newTokenNecessary;
 	}
 
 }

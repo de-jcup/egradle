@@ -105,4 +105,8 @@ public class Token {
 		this.lineNumber=lineNumber;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 }
