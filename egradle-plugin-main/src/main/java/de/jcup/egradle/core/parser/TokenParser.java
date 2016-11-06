@@ -30,12 +30,8 @@ public class TokenParser {
 	private ParseContext context;
 	private TokenState currentState = null;
 
-	private Token activeToken;
-	private Token lastToken;
-
 	private MultiTokenTypeAnalyzer tokenTypeAnalyzer = new MultiTokenTypeAnalyzer();
-
-	private Token activeParent;
+	TokenChainer tokenChainer=new TokenChainer();
 
 	public TokenParserResult parse(InputStream is) throws IOException {
 		return parse(is, null);
@@ -58,6 +54,8 @@ public class TokenParser {
 			result.print();
 		}
 		context.dispose();
+		/* chain tokens*/
+		tokenChainer.chain(result.getRoot());
 		return result;
 	}
 
@@ -72,7 +70,6 @@ public class TokenParser {
 
 	protected void parseLines() {
 		int lineNumber = 0;
-		switchState(TokenState.INITIALIZING);
 		for (Iterator<String> it = context.getLines().iterator(); it.hasNext();) {
 			String line = it.next();
 			context.setLineNumber(lineNumber);
@@ -98,67 +95,64 @@ public class TokenParser {
 			return;
 		}
 		context.setLineChars(line.toCharArray());
+		context.setInMultiLineComment(false);
+		context.setInString(false);
+
+		if (context.isInitializationDone()){
+			switchState(TokenState.INITIALIZING);
+			context.markInitializationDone();
+		}
+		
 		for (context.resetPos(); context.getPos() < context.getLineChars().length; context.incPos()) {
 			char c = context.getLineCharAtPos();
 			context.incOffset();
 			switch (c) {
 			case '{':
-				if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+				if (context.isInComment()){
 					/* ignore inside comments */
 					continue;
 				}
-				if (currentState == TokenState.SINGLE_QUOTE_START) {
-					continue;
-				}
-				if (currentState == TokenState.DOUBLE_QUOTE_START) {
+				if (context.isInString()){
+					/* ignore inside strings */
 					continue;
 				}
 				switchState(TokenState.CURLY_BRACKET_START_FOUND);
 				break;
 			case '}':
-				if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+				if (context.isInComment()){
 					/* ignore inside comments */
 					continue;
 				}
-				if (currentState == TokenState.SINGLE_QUOTE_START) {
-					continue;
-				}
-				if (currentState == TokenState.DOUBLE_QUOTE_START) {
+				if (context.isInString()){
+					/* ignore inside strings */
 					continue;
 				}
 				switchState(TokenState.CURLY_BRACKET_END_FOUND);
-				closeActiveToken();
 				break;
 			case '/':
-				if (currentState == TokenState.SINGLE_QUOTE_START) {
-					continue;
-				}
-				if (currentState == TokenState.DOUBLE_QUOTE_START) {
+				if (context.isInString()) {
 					continue;
 				}
 				if (context.hasNextChar()) {
 					char nc = context.getNextChar();
 					if (nc == '*') {
-						context.goNextChar();
+//						context.goNextChar();
 						switchState(TokenState.MULTILINE_COMMENT_START_FOUND);
 					} else if (nc == '/') {
-						context.goNextChar();
+//						context.goNextChar();
 						switchState(TokenState.SINGLE_LINE_COMMENT_START_FOUND);
 					}
 				}
 				break;
 			case '*':
-				if (currentState == TokenState.SINGLE_QUOTE_START) {
-					continue;
-				}
-				if (currentState == TokenState.DOUBLE_QUOTE_START) {
+				if (context.isInString()) {
 					continue;
 				}
 				if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
 					if (context.hasNextChar()) {
 						char nc = context.getNextChar();
 						if (nc == '/') {
-							context.goNextChar();
+//							context.goNextChar();
 							switchState(TokenState.MULTILINE_COMMENT_END_FOUND);
 						}
 					}
@@ -179,21 +173,30 @@ public class TokenParser {
 				}
 				break;
 			default:
-				switchState(TokenState.NORMAL_CHARACTER_READING);
+				if (context.isInComment()){
+					/* ignore inside comments */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInString()){
+					/* ignore inside strings */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (Character.isWhitespace(c)){
+					switchState(TokenState.WHITESPACE_FOUND);
+				}else{
+					switchState(TokenState.NORMAL_CHARACTER_READING);
+				}
 			}
-			append(c);
-
 		}
-	}
-
-	private void append(char c) {
-		context.appendCurrentText(c);
 	}
 
 	void switchState(TokenState newState) {
 		if (traceEnabled) {
 			trace("switch state from " + currentState + " to " + newState);
 		}
+		boolean appendNeeded =true;
 		/*
 		 * Currently many tokens are ignored - e.g. comments are not created, or
 		 * strings etc.)
@@ -201,7 +204,7 @@ public class TokenParser {
 
 		switch (newState) {
 		case INITIALIZING:
-			newActiveToken(null);
+			closeActiveTokenAndCreateNewOne(null);
 			break;
 		case EOF_FOUND:
 			closeActiveToken();
@@ -213,27 +216,60 @@ public class TokenParser {
 			closeActiveToken();
 			break;
 		case DOUBLE_QUOTE_START:
-			newActiveToken(GSTRING);
+			closeActiveTokenAndCreateNewOne(GSTRING);
+			context.setInString(true);
 			break;
 		case SINGLE_QUOTE_START:
-			newActiveToken(STRING);
+			closeActiveTokenAndCreateNewOne(STRING);
+			context.setInString(true);
+			break;
+		case SINGLE_QUOTE_END:
+			closeActiveToken();
+			context.setInString(false);
+			break;
+		case DOUBLE_QUOTE_END:
+			closeActiveToken();
+			context.setInString(false);
 			break;
 		case MULTILINE_COMMENT_START_FOUND:
-			newActiveToken(COMMENT__MULTI_LINE);
+			closeActiveTokenAndCreateNewOne(COMMENT__MULTI_LINE);
+			context.setInMultiLineComment(true);
 			break;
 		case MULTILINE_COMMENT_END_FOUND:
+			/* handle close characters of multiline comment:*/
+			appendPosCharacterForNextClosing();
+			context.incPos();
+			appendPosCharacterForNextClosing(); 
+			context.incPos();
+			
+			closeActiveToken();
+			context.setInMultiLineComment(false);
 			closeActiveToken();
 			break;
 		case SINGLE_LINE_COMMENT_START_FOUND:
-			newActiveToken(COMMENT__SINGLE_LINE);
+			closeActiveTokenAndCreateNewOne(COMMENT__SINGLE_LINE);
+			context.appendAllRemainingTextOfLineAndIncPos();
+			appendNeeded=false;
+			closeActiveToken();
 			break;
 		case CURLY_BRACKET_START_FOUND:
 			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
 				/* ignore it'S inside a comment */
 				return;
 			}
-			newActiveToken(TokenType.BRACE_OPENING);
-			switchParentToLastToken();
+			Token formerActiveParent = context.getActiveParent();
+			closeActiveTokenAndCreateNewOne(TokenType.BRACE_OPENING);
+			
+			if (traceEnabled){
+				trace("add "+context.getActiveToken().toIdString()+" to parent:"+formerActiveParent.toIdString());
+			}
+			formerActiveParent.addChild(context.getActiveToken());
+			appendPosCharacterForNextClosing();
+			appendNeeded=false;
+			closeActiveTokenButDoNotSetParent(); // next character will create
+													// new token so {a is
+			changeActiveParent(context.getLastToken());
+			// correct done
 
 			break;
 		case CURLY_BRACKET_END_FOUND:
@@ -241,18 +277,16 @@ public class TokenParser {
 				/* ignore it'S inside a comment */
 				return;
 			}
-			if (lastToken == null) {
-				handleProblem("Curly bracket closing, but wrong position!");
+			if (context.getLastToken() == null) {
+				handleProblem("Curly bracket closing, but no last token available - seems a syntax failure!");
 				return;
 			}
-			newActiveToken(BRACE_CLOSING);
-			// closeActiveToken();
-			/* switch back to parent token! */
-			switchParentToActiveParentsParent();
-			setActiveTokenToLastToken();
-			if (traceEnabled) {
-				trace("switched back to parent:" + createTokenString(activeToken));
-			}
+			closeActiveToken();
+			changeActiveParent(context.getActiveParent().getParent());
+			closeActiveTokenAndCreateNewOne(BRACE_CLOSING);
+			appendPosCharacterForNextClosing();
+			appendNeeded=false;
+			closeActiveToken();
 			break;
 		case NORMAL_CHARACTER_READING:
 			ensureActiveToken();
@@ -264,51 +298,50 @@ public class TokenParser {
 
 		}
 		this.currentState = newState;
+		if (appendNeeded){
+			appendPosCharacterForNextClosing();
+		}
 	}
 
-	private void switchParentToLastToken() {
+	private void appendPosCharacterForNextClosing() {
+		if (context.canFetchNextLineCharAtPos()){
+			context.appendNextClosingText(context.getLineCharAtPos());
+		}
+	}
+
+	private void changeActiveParent(Token token) {
 		if (traceEnabled) {
-			trace("SWITCH PARENT (A) from " + activeParent + " to last token:" + createTokenString(lastToken));
+			trace("CHANGE PARENT from " + context.getActiveParent() + " to last token:" + createTokenString(token));
 		}
-		activeParent = lastToken;
+		context.setActiveParent(token);
 	}
 
-	private void switchParentToActiveParentsParent() {
-		if (activeParent != null) {
-			if (traceEnabled) {
-				trace("SWITCH PARENT (B) from " + createTokenString(activeParent) + " to last token:"
-						+ createTokenString(activeParent.getParent()));
-			}
-			activeParent = activeParent.getParent();
-		} else {
-			if (traceEnabled) {
-				trace("SWITCH PARENT (C) to active parents parent not possible - no active parent set!");
-			}
-		}
+	private String createTokenString(Token token) {
+		return context.createTokenString(token);
 	}
 
 	private void ensureActiveToken() {
-		if (activeToken == null) {
-			newActiveToken(null);
+		if (context.getActiveToken() == null) {
+			closeActiveTokenAndCreateNewOne(null);
 		}
 	}
 
-	/**
-	 * Closes current token, will set name, type etc.
-	 * 
-	 * @return <code>true</code>when active token is closed, <code>false</code>
-	 *         when no active token was available or active token contains only
-	 *         whitespaces
-	 */
-	private boolean closeActiveToken() {
-		if (traceEnabled) {
-			trace("CLOSE active " + createTokenString(activeToken) + " requested");
-		}
-		if (activeToken == null) {
-			if (traceEnabled) {
-				trace("NULL active token - close not necessary");
-			}
+	protected boolean closeActiveToken() {
+		return _closeActiveToken(true);
+	}
+
+	protected boolean closeActiveTokenButDoNotSetParent() {
+		return _closeActiveToken(false);
+	}
+
+	private boolean _closeActiveToken(boolean autoSetParent) {
+		Token closingToken = context.getActiveToken();
+		if (closingToken == null) {
 			return true;
+		}
+
+		if (traceEnabled) {
+			trace("CLOSE " + createTokenString(closingToken) + " requested");
 		}
 
 		if (traceEnabled) {
@@ -326,73 +359,48 @@ public class TokenParser {
 			}
 			return false;
 		}
-		activeToken.setName(name);
+		closingToken.setName(name);
 
-		TokenType type = activeToken.getType();
+		TokenType type = closingToken.getType();
 		/*
 		 * some stages are able to set token type already - so only if not use
 		 * analyzer
 		 */
 		if (type == TokenType.UNKNOWN) {
-			TokenType tokenType = tokenTypeAnalyzer.analyze(activeToken);
-			activeToken.setType(tokenType);
+			TokenType tokenType = tokenTypeAnalyzer.analyze(closingToken);
+			closingToken.setType(tokenType);
 		}
 
 		if (traceEnabled) {
-			trace("CLOSING " + createTokenString(activeToken));
+			trace("CLOSING " + createTokenString(closingToken));
 		}
 
-		if (activeParent == null) {
-			context.getResult().add(activeToken);
+		if (autoSetParent){
+			context.getActiveParent().addChild(closingToken);
 			if (traceEnabled) {
-				trace("ADDED " + createTokenString(activeToken) + " to root");
-			}
-		} else {
-			activeParent.addChild(activeToken);
-			if (traceEnabled) {
-				trace("ADDED " + createTokenString(activeToken) + " to parent:"
-						+ createTokenString(activeToken.getParent()));
+				trace("ADDED " + createTokenString(closingToken) + " to parent:"
+						+ createTokenString(closingToken.getParent()));
 			}
 		}
-		setActiveTokenToLastToken();
+		context.setLastToken(closingToken);
+		if (traceEnabled) {
+			trace("LAST token now:" + createTokenString(context.getLastToken()));
+		}
+
 		resetActiveToken();
 
-		context.resetCurrentText();
+		context.resetNextClosingTokenText();
 		if (traceEnabled) {
 			trace("CLOSE DONE");
 		}
 		return true;
 	}
 
-	private String createTokenString(Token token) {
-		if (token == null) {
-			return "No Token";
-		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("Token(");
-		sb.append(token.getId());
-		sb.append(")");
-		String name = token.getName();
-		if (StringUtils.isNotEmpty(name)) {
-			sb.append("[");
-			sb.append(name);
-			sb.append("]");
-		}
-		return sb.toString();
-	}
-
-	private void setActiveTokenToLastToken() {
-		if (traceEnabled) {
-			trace("LAST token now:" + createTokenString(activeToken));
-		}
-		lastToken = activeToken;
-
-	}
 
 	private void resetActiveToken() {
-		activeToken = null;
+		context.setActiveToken(null);
 		if (traceEnabled) {
-			trace("RESET active token to " + createTokenString(activeToken));
+			trace("RESET active token");
 		}
 	}
 
@@ -425,29 +433,35 @@ public class TokenParser {
 
 	}
 
-	private boolean newActiveToken(TokenType type) {
+	/**
+	 * Creates a new token (if necessary) and set it too active one. If a former
+	 * active token is detected, it will be closed - so name , parent etc. will
+	 * be setup
+	 * 
+	 * @param type
+	 * @return true when new active token was necessary
+	 */
+	private boolean closeActiveTokenAndCreateNewOne(TokenType type) {
 		boolean newTokenNecessary = closeActiveToken();
-		if (!newTokenNecessary) {
-			if (traceEnabled) {
-				trace("KEEP " + createTokenString(activeToken) + " because close not necessary");
-			}
-		}
 		if (traceEnabled) {
 			trace(context.toString());
 		}
 		Token token = null;
 		if (newTokenNecessary) {
 			token = new Token(context.createNewTokenId());
+			if (traceEnabled) {
+				trace("CREATED " + createTokenString(context.getActiveToken()));
+			}
+			context.setActiveToken(token);
 		} else {
-			token = activeToken;
+			token = context.getActiveToken();
+			if (traceEnabled) {
+				trace("REUSE " + createTokenString(context.getActiveToken()));
+			}
 		}
 		token.setType(type);
-		token.setOffset(context.getOffset());
+		token.setOffset(context.getOffset()-1);
 		token.setLineNumber(context.getLineNumber());
-		if (traceEnabled) {
-			trace(createTokenString(token) + (newTokenNecessary ? " created" : " reused"));
-		}
-		activeToken = token;
 
 		return newTokenNecessary;
 	}

@@ -36,7 +36,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				File normalFile = resourceHelper.toFile(file);
 				try (InputStream is = new FileInputStream(normalFile)) {
 					TokenParserResult ast = parser.parse(is);
-					return ast.getTokens().toArray();
+					return ast.getRoot().getChildren().toArray();
 				} catch (IOException e) {
 					EGradleUtil.log("Was not able to load file:" + normalFile, e);
 				}
@@ -49,7 +49,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			String dataAsString = document.get();
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
 				TokenParserResult ast = parser.parse(is);
-				return ast.getTokens().toArray();
+				return ast.getRoot().getChildren().toArray();
 			} catch (IOException e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
 			}

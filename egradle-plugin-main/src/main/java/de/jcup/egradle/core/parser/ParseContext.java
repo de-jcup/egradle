@@ -8,11 +8,72 @@ class ParseContext {
 	private int pos;
 	private int offset;
 	private int lineNumber;
-	private StringBuilder currentText = new StringBuilder();
+	private StringBuilder nextClosingTokenText = new StringBuilder();
 
 	private List<String> lines = new ArrayList<>();
-	private TokenParserResult result = new TokenParserResult();
+	private TokenParserResult result;
 	private int tokencounter;
+	private boolean inSingleComment;
+	private boolean inMultiLineComment;
+	private boolean inString;
+	private Token rootToken;
+	private Token activeParent;
+	private Token activeToken;
+	private Token lastToken;
+	private boolean initializationDone;
+
+	public Token getActiveParent() {
+		return activeParent;
+	}
+
+	public void setActiveParent(Token activeParent) {
+		this.activeParent = activeParent;
+	}
+
+	public void setActiveToken(Token activeToken) {
+		this.activeToken = activeToken;
+	}
+
+	public Token getActiveToken() {
+		return activeToken;
+	}
+
+	public void setLastToken(Token lastToken) {
+		this.lastToken = lastToken;
+	}
+
+	public Token getLastToken() {
+		return lastToken;
+	}
+
+	public ParseContext() {
+		this.rootToken = new Token(createNewTokenId());
+		rootToken.setType(TokenType.ROOT);
+
+		activeParent = rootToken;
+
+		result = new TokenParserResult(rootToken);
+	}
+
+	public void setInSingleComment(boolean inSingleComment) {
+		this.inSingleComment = inSingleComment;
+	}
+
+	public boolean isInComment(){
+		return isInSingleComment() || isInMultiLineComment();
+	}
+	
+	public boolean isInSingleComment() {
+		return inSingleComment;
+	}
+
+	public void setInMultiLineComment(boolean inMultiLineComment) {
+		this.inMultiLineComment = inMultiLineComment;
+	}
+
+	public boolean isInMultiLineComment() {
+		return inMultiLineComment;
+	}
 
 	/**
 	 * Create a unique ID in current parse context
@@ -82,9 +143,20 @@ class ParseContext {
 		offset++;
 	}
 
+	public boolean canFetchNextLineCharAtPos() {
+		if (lineChars==null){
+			return false;
+		}
+		if (lineChars.length <= pos) {
+			return false;
+		}
+		return true;
+	}
+
 	public char getLineCharAtPos() {
 		return lineChars[pos];
 	}
+
 
 	public List<String> getLines() {
 		return lines;
@@ -94,29 +166,33 @@ class ParseContext {
 		lines = null;
 		lineChars = null;
 		result = null;
+		rootToken = null;
 	}
 
 	public String getCurrentTextString() {
-		if (currentText == null) {
+		if (nextClosingTokenText == null) {
 			return null;
 		}
-		return currentText.toString();
+		return nextClosingTokenText.toString();
 	}
 
-	public void resetCurrentText() {
-		currentText = new StringBuilder();
+	public void resetNextClosingTokenText() {
+		nextClosingTokenText = new StringBuilder();
 	}
 
-	public void appendCurrentText(char c) {
-		currentText.append(c);
+	public void appendNextClosingText(char c) {
+		nextClosingTokenText.append(c);
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("ParseContext:");
 		sb.append("\nline :" + getLines().get(getLineNumber()));
-		sb.append("\n  pos:" + buildPointerString());
-		sb.append("\ncText:" + getCurrentTextString());
+		sb.append("\n  pos:" + buildPointerString()+"("+pos+")");
+		sb.append("\ncurrentText:" + getCurrentTextString());
+		sb.append("\nactiveParent:" + createTokenString(activeParent));
+		sb.append("\nlastToken:" + createTokenString(lastToken));
+		sb.append("\nactiveToken:" + createTokenString(activeToken));
 		sb.append("\n");
 		return sb.toString();
 	}
@@ -132,7 +208,43 @@ class ParseContext {
 		return pointer;
 	}
 
+	public String createTokenString(Token token) {
+		if (token == null) {
+			return "No Token";
+		}
+		return token.toIdString();
+	}
+
 	public void addProblem(String problem) {
 		result.addProblem(problem, getOffset());
 	}
+
+	public void setInString(boolean inString) {
+		this.inString = inString;
+	}
+
+	public boolean isInString() {
+		return inString;
+	}
+
+	public Token getRootToken() {
+		return rootToken;
+	}
+
+	public void markInitializationDone() {
+		initializationDone = true;
+	}
+
+	public boolean isInitializationDone() {
+		return initializationDone;
+	}
+
+	public void appendAllRemainingTextOfLineAndIncPos() {
+		for (int i=getPos();i<lineChars.length;i++){
+			appendNextClosingText(getLineCharAtPos());
+			incPos();
+		}
+		
+	}
+
 }

@@ -2,6 +2,8 @@ package de.jcup.egradle.core.parser;
 
 public enum TokenType {
 
+	ROOT,
+	
 	UNKNOWN,
 	
 	COMMENT__SINGLE_LINE,
@@ -16,6 +18,6 @@ public enum TokenType {
 	
 	BRACE_OPENING, 
 	
-	BRACE_CLOSING
+	BRACE_CLOSING, 
 	
 }
