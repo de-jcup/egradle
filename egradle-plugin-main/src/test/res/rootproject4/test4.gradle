@@ -1,0 +1,5 @@
+maven{
+	/* xxxx
+	   So for temporary workaround until available in maven central we use temp-m2-repo
+	   */
+}

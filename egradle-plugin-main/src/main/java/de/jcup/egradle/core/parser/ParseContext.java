@@ -15,14 +15,18 @@ class ParseContext {
 	private int tokencounter;
 	private boolean inSingleComment;
 	private boolean inMultiLineComment;
-	private boolean inString;
 	private Token rootToken;
 	private Token activeParent;
 	private Token activeToken;
 	private Token lastToken;
 	private boolean initializationDone;
+	private boolean inNormalString;
+	private boolean inGString;
 
 	public Token getActiveParent() {
+		if (activeParent==null){
+			activeParent=rootToken;
+		}
 		return activeParent;
 	}
 
@@ -59,10 +63,10 @@ class ParseContext {
 		this.inSingleComment = inSingleComment;
 	}
 
-	public boolean isInComment(){
+	public boolean isInComment() {
 		return isInSingleComment() || isInMultiLineComment();
 	}
-	
+
 	public boolean isInSingleComment() {
 		return inSingleComment;
 	}
@@ -83,7 +87,7 @@ class ParseContext {
 	public int createNewTokenId() {
 		return tokencounter++;
 	}
-
+	
 	void addLine(String line) {
 		lines.add(line);
 	}
@@ -135,16 +139,16 @@ class ParseContext {
 		pos = 0;
 	}
 
-	public void incPos() {
+	/**
+	 * Increments pos and offset
+	 */
+	public void incPosAndOffset() {
 		pos++;
-	}
-
-	public void incOffset() {
 		offset++;
 	}
 
 	public boolean canFetchNextLineCharAtPos() {
-		if (lineChars==null){
+		if (lineChars == null) {
 			return false;
 		}
 		if (lineChars.length <= pos) {
@@ -153,10 +157,14 @@ class ParseContext {
 		return true;
 	}
 
+	/**
+	 * Get line char at current pos - will throw {@link ArrayIndexOutOfBoundsException} when wrong used.
+	 * Use {@link #canFetchNextLineCharAtPos()} before!
+	 * @return
+	 */
 	public char getLineCharAtPos() {
 		return lineChars[pos];
 	}
-
 
 	public List<String> getLines() {
 		return lines;
@@ -176,6 +184,9 @@ class ParseContext {
 		return nextClosingTokenText.toString();
 	}
 
+	/**
+	 * Resets next closing token text
+	 */
 	public void resetNextClosingTokenText() {
 		nextClosingTokenText = new StringBuilder();
 	}
@@ -185,11 +196,23 @@ class ParseContext {
 	}
 
 	public String toString() {
+		
+		StringBuilder content = new StringBuilder();
+		for (String line: lines){
+			content.append(line);
+			content.append("\n");
+		}
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("ParseContext:");
 		sb.append("\nline :" + getLines().get(getLineNumber()));
-		sb.append("\n  pos:" + buildPointerString()+"("+pos+")");
-		sb.append("\ncurrentText:" + getCurrentTextString());
+		sb.append("\n  pos:" + buildPointerString() + "(" + pos + ", char='"+getSafeLineCharAtPosString()+"')");
+		String charOffsetString =  null;
+		if (content.length()<offset){
+			charOffsetString= ""+content.charAt(offset);
+		}
+		sb.append("\n offs:" + offset+", char='"+charOffsetString+"'");
+		sb.append("\ncurrentText:'" + getCurrentTextString()+"'");
 		sb.append("\nactiveParent:" + createTokenString(activeParent));
 		sb.append("\nlastToken:" + createTokenString(lastToken));
 		sb.append("\nactiveToken:" + createTokenString(activeToken));
@@ -197,10 +220,17 @@ class ParseContext {
 		return sb.toString();
 	}
 
+	String getSafeLineCharAtPosString() {
+		String charAtPos = null;
+		if (canFetchNextLineCharAtPos()){
+			charAtPos=""+getLineCharAtPos();
+		}
+		return charAtPos;
+	}
+
 	private String buildPointerString() {
 		StringBuilder sb = new StringBuilder();
-		int pointerPos = getPos() - 1;
-		for (int i = 0; i < pointerPos; i++) {
+		for (int i = 0; i < getPos(); i++) {
 			sb.append('-');
 		}
 		sb.append('^');
@@ -219,12 +249,24 @@ class ParseContext {
 		result.addProblem(problem, getOffset());
 	}
 
-	public void setInString(boolean inString) {
-		this.inString = inString;
+	public void setInNormalString(boolean inString) {
+		this.inNormalString = inString;
+	}
+
+	public void setInGString(boolean inString) {
+		this.inGString = inString;
+	}
+
+	public boolean isInGString() {
+		return inGString;
+	}
+
+	public boolean isInNormalString() {
+		return inNormalString;
 	}
 
 	public boolean isInString() {
-		return inString;
+		return inGString || inNormalString;
 	}
 
 	public Token getRootToken() {
@@ -240,11 +282,17 @@ class ParseContext {
 	}
 
 	public void appendAllRemainingTextOfLineAndIncPos() {
-		for (int i=getPos();i<lineChars.length;i++){
-			appendNextClosingText(getLineCharAtPos());
-			incPos();
+		for (int i = getPos(); i < lineChars.length; i++) {
+			char lineCharAtPos = getLineCharAtPos();
+			appendNextClosingText(lineCharAtPos);
+			incPosAndOffset();
 		}
-		
+
+	}
+
+	public void decPosAndOffset() {
+		pos--;
+		offset--;
 	}
 
 }

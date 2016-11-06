@@ -31,13 +31,15 @@ public class TokenParser {
 	private TokenState currentState = null;
 
 	private MultiTokenTypeAnalyzer tokenTypeAnalyzer = new MultiTokenTypeAnalyzer();
-	TokenChainer tokenChainer=new TokenChainer();
+	TokenChainer tokenChainer = new TokenChainer();
 
+	/**
+	 * Parse given input stream and return result
+	 * @param is input stream to use
+	 * @return result, never <code>null</code>
+	 * @throws IOException
+	 */
 	public TokenParserResult parse(InputStream is) throws IOException {
-		return parse(is, null);
-	}
-
-	public TokenParserResult parse(InputStream is, TokenFilter filter) throws IOException {
 
 		if (is == null) {
 			throw new IllegalArgumentException("input stream may not be null!");
@@ -54,7 +56,7 @@ public class TokenParser {
 			result.print();
 		}
 		context.dispose();
-		/* chain tokens*/
+		/* chain tokens */
 		tokenChainer.chain(result.getRoot());
 		return result;
 	}
@@ -77,7 +79,8 @@ public class TokenParser {
 				debug("LINE:" + context.getLineNumber() + ":" + line);
 			}
 			visit(line);
-			context.incOffset();
+			context.incPosAndOffset();
+//			context.incOffset();
 			; // new line...
 			lineNumber++;
 			if (it.hasNext()) {
@@ -95,97 +98,122 @@ public class TokenParser {
 			return;
 		}
 		context.setLineChars(line.toCharArray());
-		context.setInMultiLineComment(false);
-		context.setInString(false);
+		context.setInSingleComment(false);
+		context.setInGString(false);
+		context.setInNormalString(false);
 
-		if (context.isInitializationDone()){
+		if (context.isInitializationDone()) {
 			switchState(TokenState.INITIALIZING);
 			context.markInitializationDone();
 		}
-		
-		for (context.resetPos(); context.getPos() < context.getLineChars().length; context.incPos()) {
+
+		for (context.resetPos(); context.getPos() < context.getLineChars().length; context.incPosAndOffset()) {
 			char c = context.getLineCharAtPos();
-			context.incOffset();
+			
 			switch (c) {
+			/* ------------ BRACES ---------------- */
 			case '{':
-				if (context.isInComment()){
+				if (context.isInComment()) {
 					/* ignore inside comments */
+					appendPosCharacterForNextClosing();
 					continue;
 				}
-				if (context.isInString()){
+				if (context.isInString()) {
 					/* ignore inside strings */
+					appendPosCharacterForNextClosing();
 					continue;
 				}
 				switchState(TokenState.CURLY_BRACKET_START_FOUND);
 				break;
 			case '}':
-				if (context.isInComment()){
+				if (context.isInComment()) {
 					/* ignore inside comments */
+					appendPosCharacterForNextClosing();
 					continue;
 				}
-				if (context.isInString()){
+				if (context.isInString()) {
 					/* ignore inside strings */
+					appendPosCharacterForNextClosing();
 					continue;
 				}
 				switchState(TokenState.CURLY_BRACKET_END_FOUND);
 				break;
+			/* ------------ COMMENTS ---------------- */
 			case '/':
 				if (context.isInString()) {
+					appendPosCharacterForNextClosing();
 					continue;
 				}
 				if (context.hasNextChar()) {
 					char nc = context.getNextChar();
 					if (nc == '*') {
-//						context.goNextChar();
+						// context.goNextChar();
 						switchState(TokenState.MULTILINE_COMMENT_START_FOUND);
 					} else if (nc == '/') {
-//						context.goNextChar();
+						// context.goNextChar();
 						switchState(TokenState.SINGLE_LINE_COMMENT_START_FOUND);
 					}
 				}
 				break;
 			case '*':
 				if (context.isInString()) {
-					continue;
+					break;
 				}
-				if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+				if (context.isInMultiLineComment()) {
 					if (context.hasNextChar()) {
 						char nc = context.getNextChar();
 						if (nc == '/') {
-//							context.goNextChar();
+							// context.goNextChar();
 							switchState(TokenState.MULTILINE_COMMENT_END_FOUND);
 						}
 					}
 				}
 				break;
+			/* ------------ STRINGS ---------------- */
 			case '\'':
-				if (currentState == TokenState.SINGLE_QUOTE_START) {
+				if (context.isInComment()){
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInGString()) {
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInNormalString()) {
 					switchState(TokenState.SINGLE_QUOTE_END);
 				} else {
 					switchState(TokenState.SINGLE_QUOTE_START);
 				}
 				break;
 			case '\"':
-				if (currentState == TokenState.DOUBLE_QUOTE_START) {
+				/*
+				 * FIXME ATR, 6.11.2016: handle escape sequences... a \" is not
+				 * a string start...
+				 */
+				if (context.isInComment()){
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInGString()) {
 					switchState(TokenState.DOUBLE_QUOTE_END);
 				} else {
 					switchState(TokenState.DOUBLE_QUOTE_START);
 				}
 				break;
 			default:
-				if (context.isInComment()){
+				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
 					continue;
 				}
-				if (context.isInString()){
+				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
 					continue;
 				}
-				if (Character.isWhitespace(c)){
+				if (Character.isWhitespace(c)) {
 					switchState(TokenState.WHITESPACE_FOUND);
-				}else{
+				} else {
 					switchState(TokenState.NORMAL_CHARACTER_READING);
 				}
 			}
@@ -196,12 +224,29 @@ public class TokenParser {
 		if (traceEnabled) {
 			trace("switch state from " + currentState + " to " + newState);
 		}
-		boolean appendNeeded =true;
+		boolean appendNeeded = true;
 		/*
 		 * Currently many tokens are ignored - e.g. comments are not created, or
 		 * strings etc.)
 		 */
+		if (context.isInMultiLineComment()){
+			if (newState==TokenState.MULTILINE_COMMENT_END_FOUND){
+				appendNeeded = handleNewState(newState, appendNeeded);
+			}else{
+				if (traceEnabled){
+					trace("IGNORE handling of new state '"+newState+"' because inside multi line comment");
+				}
+			}
+		}else{
+			appendNeeded = handleNewState(newState, appendNeeded);
+		}
+		this.currentState = newState;
+		if (appendNeeded) {
+			appendPosCharacterForNextClosing();
+		}
+	}
 
+	private boolean handleNewState(TokenState newState, boolean appendNeeded) {
 		switch (newState) {
 		case INITIALIZING:
 			closeActiveTokenAndCreateNewOne(null);
@@ -217,75 +262,95 @@ public class TokenParser {
 			break;
 		case DOUBLE_QUOTE_START:
 			closeActiveTokenAndCreateNewOne(GSTRING);
-			context.setInString(true);
-			break;
-		case SINGLE_QUOTE_START:
-			closeActiveTokenAndCreateNewOne(STRING);
-			context.setInString(true);
-			break;
-		case SINGLE_QUOTE_END:
-			closeActiveToken();
-			context.setInString(false);
+			appendNeeded=false;
+			context.setInGString(true);
 			break;
 		case DOUBLE_QUOTE_END:
 			closeActiveToken();
-			context.setInString(false);
+			appendNeeded=false;
+			context.setInGString(false);
+			// we removed leading and trailing ' but length needs this in UI, so add 2
+			context.getLastToken().setLength(context.getLastToken().getLength()+2);
 			break;
-		case MULTILINE_COMMENT_START_FOUND:
-			closeActiveTokenAndCreateNewOne(COMMENT__MULTI_LINE);
-			context.setInMultiLineComment(true);
+		case SINGLE_QUOTE_START:
+			closeActiveTokenAndCreateNewOne(STRING);
+			appendNeeded=false;
+			context.setInNormalString(true);
 			break;
-		case MULTILINE_COMMENT_END_FOUND:
-			/* handle close characters of multiline comment:*/
-			appendPosCharacterForNextClosing();
-			context.incPos();
-			appendPosCharacterForNextClosing(); 
-			context.incPos();
-			
+		case SINGLE_QUOTE_END:
 			closeActiveToken();
-			context.setInMultiLineComment(false);
-			closeActiveToken();
+			appendNeeded=false;
+			context.setInNormalString(false);
+			// we removed leading and trailing ' but length needs this in UI, so add 2
+			context.getLastToken().setLength(context.getLastToken().getLength()+2);
 			break;
 		case SINGLE_LINE_COMMENT_START_FOUND:
 			closeActiveTokenAndCreateNewOne(COMMENT__SINGLE_LINE);
 			context.appendAllRemainingTextOfLineAndIncPos();
+			appendNeeded = false;
+			closeActiveToken();
+			/* decrease pos and offset - I have no idea why the offset is odd here
+			 * the only possibility would be the double inc at the // detection .
+			 * But its necessary here:
+			 */
+			context.decPosAndOffset();
+			break;
+		case MULTILINE_COMMENT_START_FOUND:
+			closeActiveTokenAndCreateNewOne(COMMENT__MULTI_LINE);
+			context.setInMultiLineComment(true);
+			appendPosCharacterForNextClosing();
+			context.incPosAndOffset();
+			appendPosCharacterForNextClosing();
+			appendNeeded=false;
+			
+			break;
+		case MULTILINE_COMMENT_END_FOUND:
+			/* add close characters of multi line comment: */
+			appendPosCharacterForNextClosing();
+			context.incPosAndOffset();// */
+			appendPosCharacterForNextClosing();
 			appendNeeded=false;
 			closeActiveToken();
+			context.setInMultiLineComment(false);
+			Token lastToken = context.getLastToken();
+			/* special handling for length to provide multi line length...*/
+			lastToken.setLength(context.getOffset()-lastToken.getOffset()+1);
+			
 			break;
 		case CURLY_BRACKET_START_FOUND:
 			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
 				/* ignore it'S inside a comment */
-				return;
+				return appendNeeded;
 			}
 			Token formerActiveParent = context.getActiveParent();
 			closeActiveTokenAndCreateNewOne(TokenType.BRACE_OPENING);
-			
-			if (traceEnabled){
-				trace("add "+context.getActiveToken().toIdString()+" to parent:"+formerActiveParent.toIdString());
+
+			if (traceEnabled) {
+				trace("add " + context.getActiveToken().toIdString() + " to parent:" + formerActiveParent.toIdString());
 			}
 			formerActiveParent.addChild(context.getActiveToken());
 			appendPosCharacterForNextClosing();
-			appendNeeded=false;
+			appendNeeded = false;
 			closeActiveTokenButDoNotSetParent(); // next character will create
 													// new token so {a is
-			changeActiveParent(context.getLastToken());
 			// correct done
+			changeActiveParent(context.getLastToken());
 
 			break;
 		case CURLY_BRACKET_END_FOUND:
 			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
 				/* ignore it'S inside a comment */
-				return;
+				return appendNeeded;
 			}
 			if (context.getLastToken() == null) {
 				handleProblem("Curly bracket closing, but no last token available - seems a syntax failure!");
-				return;
+				return appendNeeded;
 			}
 			closeActiveToken();
 			changeActiveParent(context.getActiveParent().getParent());
 			closeActiveTokenAndCreateNewOne(BRACE_CLOSING);
 			appendPosCharacterForNextClosing();
-			appendNeeded=false;
+			appendNeeded = false;
 			closeActiveToken();
 			break;
 		case NORMAL_CHARACTER_READING:
@@ -297,16 +362,15 @@ public class TokenParser {
 			}
 
 		}
-		this.currentState = newState;
-		if (appendNeeded){
-			appendPosCharacterForNextClosing();
-		}
+		return appendNeeded;
 	}
 
 	private void appendPosCharacterForNextClosing() {
-		if (context.canFetchNextLineCharAtPos()){
-			context.appendNextClosingText(context.getLineCharAtPos());
+		if (context.canFetchNextLineCharAtPos()) {
+			char lineCharAtPos = context.getLineCharAtPos();
+			context.appendNextClosingText(lineCharAtPos);
 		}
+		
 	}
 
 	private void changeActiveParent(Token token) {
@@ -359,6 +423,7 @@ public class TokenParser {
 			}
 			return false;
 		}
+		
 		closingToken.setName(name);
 
 		TokenType type = closingToken.getType();
@@ -375,7 +440,7 @@ public class TokenParser {
 			trace("CLOSING " + createTokenString(closingToken));
 		}
 
-		if (autoSetParent){
+		if (autoSetParent) {
 			context.getActiveParent().addChild(closingToken);
 			if (traceEnabled) {
 				trace("ADDED " + createTokenString(closingToken) + " to parent:"
@@ -386,7 +451,6 @@ public class TokenParser {
 		if (traceEnabled) {
 			trace("LAST token now:" + createTokenString(context.getLastToken()));
 		}
-
 		resetActiveToken();
 
 		context.resetNextClosingTokenText();
@@ -395,7 +459,6 @@ public class TokenParser {
 		}
 		return true;
 	}
-
 
 	private void resetActiveToken() {
 		context.setActiveToken(null);
@@ -460,7 +523,7 @@ public class TokenParser {
 			}
 		}
 		token.setType(type);
-		token.setOffset(context.getOffset()-1);
+		token.setOffset(context.getOffset());
 		token.setLineNumber(context.getLineNumber());
 
 		return newTokenNecessary;

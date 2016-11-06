@@ -20,6 +20,7 @@ public class Token {
 	private TokenType type;
 	private Token forward;
 	private Token backward;
+	private int length=-1;
 
 	Token(int id) {
 		this.id = id;
@@ -68,11 +69,19 @@ public class Token {
 		return offset;
 	}
 
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
 	public int getLength() {
-		if (name == null) {
-			return 0;
+		if (length<0){
+			if (name==null){
+				length=0;
+			}else{
+				length=name.length();
+			}
 		}
-		return name.length();
+		return length;
 	}
 
 	@Override

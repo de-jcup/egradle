@@ -54,4 +54,6 @@ public class TestUtil {
 	public static final File ROOTFOLDER_4_TEST1_GRADLE = new File(ROOTFOLDER_4, "test1.gradle");
 	public static final File ROOTFOLDER_4_TEST2_GRADLE = new File(ROOTFOLDER_4, "test2.gradle");
 	public static final File ROOTFOLDER_4_TEST3_GRADLE = new File(ROOTFOLDER_4, "test3.gradle");
+	public static final File ROOTFOLDER_4_TEST4_GRADLE = new File(ROOTFOLDER_4, "test4.gradle");
+	public static final File ROOTFOLDER_4_TEST5_GRADLE = new File(ROOTFOLDER_4, "test5.gradle");
 }

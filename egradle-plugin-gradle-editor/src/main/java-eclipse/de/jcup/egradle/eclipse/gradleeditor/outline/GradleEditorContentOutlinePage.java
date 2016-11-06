@@ -66,7 +66,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 				Token gElement = (Token) firstElement;
 				int offset = gElement.getOffset();
 				int length = gElement.getLength();
-
+				/* FIXME ATR, 6.11.2016: remove the print when works...*/
+				gElement.print();
 				gradleEditor.selectAndReveal(offset, length);
 			}
 		}

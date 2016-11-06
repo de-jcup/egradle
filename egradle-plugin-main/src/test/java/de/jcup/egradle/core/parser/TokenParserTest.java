@@ -1,14 +1,15 @@
 package de.jcup.egradle.core.parser;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
@@ -19,17 +20,288 @@ import org.mockito.Matchers;
 import org.mockito.internal.matchers.Equals;
 
 import de.jcup.egradle.core.TestUtil;
+
 public class TokenParserTest {
 
 	private TokenParser parserToTest;
-	
+
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before
-	public void before(){
+	public void before() {
 		parserToTest = new TokenParser();
 		parserToTest.enableTraceMode();
+	}
+	
+	/**
+	 * Real world problem - single line comment did manipulate next token pos
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public void integration_single_line_comment_has_no_wrong_position_effect_to_following_token() throws IOException {
+		/* prepare */
+		
+		/* @formatter:off*/
+		String text =
+		"maven{\n"+
+		"	";
+		int expectedBlaOffset=text.length();
+		text+="//bla\n"+
+		"	";
+		int expectedTestOffset=text.length();
+		
+		text+="test other\n"+
+		"}\n";
+		/* @formatter:on*/
+
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token maven = result.getRoot().getFirstChild();
+		Token openBrace = maven.goForward();
+		assertEquals(TokenType.BRACE_OPENING, openBrace.getType());
+		
+		Token bla_comment = openBrace.getFirstChild();
+		assertEquals("//bla",bla_comment.getName());
+		Token test =  bla_comment.goForward();
+		assertEquals(expectedBlaOffset, bla_comment.getOffset());
+		assertEquals("//bla".length(), bla_comment.getLength());
+		int diff = test.getOffset()-bla_comment.getOffset();
+		assertEquals("Hmm.. problem - diff between test off set and comment lenth="+diff, expectedTestOffset, test.getOffset());
+		
+	}
+
+	/**
+	 * Real world problem - wrong next token name creation after multi line comment
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public void integration_test_muli_line_comment_has_no_wrong_additional_child() throws IOException {
+		/* prepare */
+		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST4_GRADLE);
+
+		/* execute */
+		TokenParserResult result = parserToTest.parse(fis);
+		
+		/* test */
+		/* @formatter:off*/
+//		maven{
+//			/* xxxx
+//			   So for temporary workaround until available in maven central we use temp-m2-repo
+//			   */
+//		}
+		/* @formatter:on*/
+
+		Token maven = result.getRoot().getFirstChild();
+		Token openBrace = maven.goForward();
+		assertEquals(TokenType.BRACE_OPENING, openBrace.getType());
+		
+		Token comment = openBrace.getFirstChild();
+		assertFalse(comment.canGoForward());
+		
+		Token closeBrace = openBrace.goForward();
+		
+		assertEquals(TokenType.BRACE_CLOSING, closeBrace.getType());
+		assertEquals("}",closeBrace.getName());
+		
+	}
+
+	/**
+	 * Tried to Real world example
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public void test_muli_line_comment_has_no_wrong_additional_child() throws IOException {
+		/* prepare */
+		/* @formatter:off*/
+		String text = 
+				"parent {\n"
+				+ "    /* a multi line - \n"
+				+ "      commment...\n"
+				+ "      with\n"
+				+ "      many\n"
+				+ "      lines!\n"
+				+ "     */\n"
+				+ "    //url \"http://docbook4j.googlecode.com/svn/m2-repo/releases/\"\n"
+				+ "    url \"http://docbook4j.googlecode.com/svn/m2-repo/releases/\n"
+				+ "}";
+		/* @formatter:off*/
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token parent = result.getRoot().getFirstChild();
+		Token bracet = parent.goForward();
+		Token multiLineComment = bracet.getFirstChild();
+		Token singleLineComment = multiLineComment.goForward();
+		Token url = singleLineComment.goForward();
+		Token urlString = url.goForward();
+		
+		assertEquals(TokenType.COMMENT__MULTI_LINE, multiLineComment.getType());
+		assertEquals(TokenType.COMMENT__SINGLE_LINE, singleLineComment.getType());
+		assertFalse(urlString.canGoForward());
+	}
+	@Test
+	public void test_muli_line_comment_length() throws IOException{
+		/* prepare */
+		String text = "/* a multi line\n * commment...\nwith\nmany\nlines!\n */";
+		int expectedLength= text.length();
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token comment = result.getRoot().getFirstChild();
+		assertEquals(expectedLength, comment.getLength());
+	}
+	
+	@Test
+	public void a_single_line_comment_followed_by_new_line_and_token_has_correct_length() throws IOException{
+		/* prepare */
+		String text = "//123456";
+		int expectedLength = text.length();
+		text=text+"\notherToken";
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token comment = result.getRoot().getFirstChild();
+		assertEquals(expectedLength, comment.getLength());
+	}
+	
+	@Test
+	public void an_apply_from_with_variables__and_otherToken__the_other_token_has_correct_posis_correct_parsed() throws IOException{
+		/* prepare */
+		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\"";
+		int expectedPos = text.length();
+		text=text+"otherToken";
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token apply = result.getRoot().getFirstChild();
+		Token from = apply.goForward();
+		Token string = from.goForward();
+		Token other= string.goForward();
+		
+		assertEquals(expectedPos, other.getOffset());
+	}
+	
+	@Test
+	public void a_string_with_braces_inside_has_excpected_length() throws IOException{
+		/* prepare */
+		String text = "\"${rootProject.projectDir}/libraries.gradle\"";
+		int length = text.length();
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+
+		/* test */
+		Token string = result.getRoot().getFirstChild();
+		
+		assertEquals(length, string.getLength());
+	}
+	
+	@Test
+	public void an_apply_from_with_variables__with_space_and_otherToken__the_other_token_has_correct_posittion_and_name() throws IOException{
+		/* prepare */
+		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\""+" ";
+		int expectedPos = text.length();
+		text=text+"otherToken";
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+
+		/* test */
+		Token apply = result.getRoot().getFirstChild();
+		Token from = apply.goForward();
+		Token string = from.goForward();
+		Token other= string.goForward();
+		
+		assertEquals(expectedPos, other.getOffset());
+		assertEquals("otherToken",other.getName());
+	}
+	
+	@Test
+	public void an_apply_from_with_variables__is_correct_parsed() throws IOException{
+		/* prepare */
+		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\"";
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token apply = result.getRoot().getFirstChild();
+		Token from = apply.goForward();
+		Token string = from.goForward();
+		
+		assertEquals("apply", apply.getName());
+		assertEquals("from:", from.getName());
+		assertEquals("${rootProject.projectDir}/libraries.gradle", string.getName());
+		
+	}
+	
+	@Test
+	public void after_a_multiline_comment_a_new_multiline_follows__the_new_token_offset_is_at_start_of_new_comment() throws IOException{
+		/* prepare */
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("                      /* comment1...*/\n");
+		sb.append("                      ");
+		int expectedPos=sb.length();
+		sb.append("/* comment2...*/\n");
+	
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(sb));
+	
+		/* test */
+		Token comment1 = result.getRoot().getFirstChild();
+		Token comment2 = comment1.goForward();
+		
+		assertEquals(expectedPos, comment2.getOffset());
+	}
+	
+	@Test
+	public void aDoubleQuoteString_Containing_text_with_SingleQuotes_is_one_token_only() throws IOException{
+		/* execute*/
+		TokenParserResult result = parserToTest.parse(createStringInputStream("\"'test'\""));
+	
+		
+		/* test */
+		Token first = result.getRoot().getFirstChild();
+		assertEquals("'test'", first.getName());
+		assertEquals(TokenType.GSTRING, first.getType());
+	}
+	
+	@Test
+	public void a_multiline_comment_with_aDoubleQuoteString_and_SingleQuotes_is_one_token_only() throws IOException{
+		/* execute*/
+		String comment = "/*\"'test'\" */";
+		TokenParserResult result = parserToTest.parse(createStringInputStream(comment));
+		
+		/* test */
+		Token first = result.getRoot().getFirstChild();
+		assertEquals(comment, first.getName());
+		assertEquals(TokenType.COMMENT__MULTI_LINE, first.getType());
+	}
+	
+	@Test
+	public void a_single_line_comment_with_aDoubleQuoteString_and_SingleQuotes_is_one_token_only() throws IOException{
+		/* execute*/
+		String comment = "//\"'test'\" */";
+		TokenParserResult result = parserToTest.parse(createStringInputStream(comment));
+		
+		/* test */
+		Token first = result.getRoot().getFirstChild();
+		assertEquals(comment, first.getName());
+		assertEquals(TokenType.COMMENT__SINGLE_LINE, first.getType());
 	}
 	
 	@Test
@@ -155,11 +427,11 @@ public class TokenParserTest {
 		sb.append("      }");
 		sb.append("}");
 		/* @formatter:on*/
-		
+
 		InputStream is = createStringInputStream(sb);
 		/* execute */
 		TokenParserResult result = parserToTest.parse(is);
-		
+
 		/* test */
 		/* @formatter:off */
         // DEBUG:LINE:0:parent1 {
@@ -168,102 +440,105 @@ public class TokenParserTest {
         // DEBUG:LINE:3:               }      }}
 
 		/* @formatter:on */
-		Token parent1 = result.getRoot().getFirstChild(); /* parent1 -> braces token */
-		Token child1 = parent1.goForward().getFirstChild(); /* child1 -> braces token */
+		Token parent1 = result.getRoot()
+				.getFirstChild(); /* parent1 -> braces token */
+		Token child1 = parent1.goForward()
+				.getFirstChild(); /* child1 -> braces token */
 		Token child1b = child1.goForward().getFirstChild();
 
 		assertEquals(offset0, parent1.getOffset());
 		assertEquals(offset1, child1.getOffset());
 		assertEquals(offset2, child1b.getOffset());
 	}
-	
+
 	@Test
-	public void parsing_test1234_without_content_returns_result_with_test1234_as_element_with_linenumber_0__offset_0() throws IOException {
+	public void parsing_test1234_without_content_returns_result_with_test1234_as_element_with_linenumber_0__offset_0()
+			throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("test1234 {\n");
 		sb.append("}");
-		
+
 		InputStream is = createStringInputStream(sb);
-		
+
 		/* execute */
 		TokenParserResult result = parserToTest.parse(is);
-		
+
 		/* test */
 		assertNotNull(result);
 		Token test1234 = result.getRoot().getFirstChild();
-		
+
 		assertEquals("test1234", test1234.getName());
 		assertEquals(0, test1234.getLineNumber());
 		assertEquals(0, test1234.getOffset());
 	}
-	
+
 	@Test
-	public void parsing_test1234_with_child1_as_content_element_returns_result_with_test1234_as_element_with_linenumber_0_offset_0_containing_child1_at_line_number3_offset_as_expected() throws IOException {
+	public void parsing_test1234_with_child1_as_content_element_returns_result_with_test1234_as_element_with_linenumber_0_offset_0_containing_child1_at_line_number3_offset_as_expected()
+			throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
-		
-		sb.append("test1234 {\n"); //lnr:0
-		sb.append("\n");           //lnr:1
-		sb.append("\n");           //lnr:2
-		sb.append("child1 {\n");   //lnr:3
-		sb.append("}");            //lnr:4;
-		sb.append("}");            //lnr:5;
+
+		sb.append("test1234 {\n"); // lnr:0
+		sb.append("\n"); // lnr:1
+		sb.append("\n"); // lnr:2
+		sb.append("child1 {\n"); // lnr:3
+		sb.append("}"); // lnr:4;
+		sb.append("}"); // lnr:5;
 
 		InputStream is = createStringInputStream(sb);
-		
+
 		/* execute */
-		
+
 		TokenParserResult result = parserToTest.parse(is);
-		
+
 		/* test */
-		
+
 		Token test1234 = result.getRoot().getFirstChild();
 		Token child1 = test1234.goForward().getFirstChild();
-		
+
 		assertEquals("test1234", test1234.getName());
 		assertEquals(0, test1234.getLineNumber());
-		
+
 		assertEquals("child1", child1.getName());
 		assertEquals(3, child1.getLineNumber());
 		assertEquals(13, child1.getOffset());
 	}
-	
+
 	@Test
-	public void parsing_test1234_and_test12345_without_content_returns_result_with_test1234_and_test12345_as_elements_with_linenumber_0_and_3() throws IOException {
+	public void parsing_test1234_and_test12345_without_content_returns_result_with_test1234_and_test12345_as_elements_with_linenumber_0_and_3()
+			throws IOException {
 		/* prepare */
 		StringBuilder sb = new StringBuilder();
-		sb.append("test1234 {\n"); //lnr:0
-		sb.append("}\n");            //lnr:1
-		sb.append("\n");           //lnr:2
-		sb.append("test12345 {\n");//lnr:3
-		sb.append("}");            //lnr:4;
-		
+		sb.append("test1234 {\n"); // lnr:0
+		sb.append("}\n"); // lnr:1
+		sb.append("\n"); // lnr:2
+		sb.append("test12345 {\n");// lnr:3
+		sb.append("}"); // lnr:4;
+
 		InputStream is = createStringInputStream(sb);
-		
+
 		/* execute */
 		TokenParserResult result = parserToTest.parse(is);
-		
+
 		/* test */
 		assertNotNull(result);
 		Token test1234 = result.getRoot().getFirstChild();
-		Token test12345= test1234.goForward().goForward().goForward();
-		
+		Token test12345 = test1234.goForward().goForward().goForward();
+
 		assertEquals("test1234", test1234.getName());
 		assertEquals(0, test1234.getLineNumber());
 		assertEquals("test12345", test12345.getName());
 		assertEquals(3, test12345.getLineNumber());
 	}
-	
 
 	@Test
-	public void rootproject4_test1_file() throws IOException{
+	public void rootproject4_test1_file() throws IOException {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST1_GRADLE);
 
-		
 		TokenParserResult result = parserToTest.parse(fis);
-		
+
 		/* test */
 		/* @formatter:off*/
 //		TRACE:0:allprojects{
@@ -275,28 +550,28 @@ public class TokenParserTest {
 //	    TRACE:6:		
 //	    TRACE:7:}
 		/* @formatter:on*/
-		
+
 		Token allProjects = result.getRoot().getFirstChild();
 		Token repositories = allProjects.goForward().getFirstChild();
 		Token mavenlocal = repositories.goForward().getFirstChild();
 		Token mavenCentral = mavenlocal.goForward();
-		
+
 		assertEquals("allprojects", allProjects.getName());
-		assertEquals("repositories" ,repositories.getName());
-		assertEquals("mavenLocal()" ,mavenlocal.getName());
-		assertEquals("mavenCentral()" ,mavenCentral.getName());
+		assertEquals("repositories", repositories.getName());
+		assertEquals("mavenLocal()", mavenlocal.getName());
+		assertEquals("mavenCentral()", mavenCentral.getName());
 	}
-	
+
 	@Test
-	public void rootproject4_test2_file() throws IOException{
+	public void rootproject4_test2_file() throws IOException {
 		/* prepare */
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST2_GRADLE);
-		
-		/* execute*/
+
+		/* execute */
 		TokenParserResult result = parserToTest.parse(fis);
-		
+
 		/* test */
-		
+
 		/* @formatter:off*/
 //		DEBUG:LINE:0:allprojects{
 //		DEBUG:LINE:1:	
@@ -314,24 +589,24 @@ public class TokenParserTest {
 		Token aComment = allProjects.goForward().getFirstChild();
 		Token anotherComment = aComment.goForward();
 		Token repositories = anotherComment.goForward();
-		
+
 		Token mavenlocal = repositories.goForward().getFirstChild();
 		Token mavenCentral = mavenlocal.goForward();
-		
+
 		assertEquals("allprojects", allProjects.getName());
-		assertEquals("repositories" ,repositories.getName());
-		assertEquals("mavenLocal()" ,mavenlocal.getName());
-		assertEquals("mavenCentral()" ,mavenCentral.getName());
+		assertEquals("repositories", repositories.getName());
+		assertEquals("mavenLocal()", mavenlocal.getName());
+		assertEquals("mavenCentral()", mavenCentral.getName());
 	}
-	
+
 	@Test
-	public void rootproject4_test3_file() throws IOException{
+	public void rootproject4_test3_file() throws IOException {
 		/* prepare */
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST3_GRADLE);
-		
-		/* execute*/
+
+		/* execute */
 		TokenParserResult result = parserToTest.parse(fis);
-		
+
 		/* test */
 		/* @formatter:off*/
 //		DEBUG:LINE:0:ALLPROJECTS{
@@ -354,17 +629,15 @@ public class TokenParserTest {
 		assertEquals("repositories", repositories.getName());
 		Token mavenlocal = repositories.goForward().getFirstChild();
 		Token mavencentral = mavenlocal.goForward();
-		
-		assertEquals("mavenLocal()",mavenlocal.getName());
-		assertEquals("mavenCentral()",mavencentral.getName());
+
+		assertEquals("mavenLocal()", mavenlocal.getName());
+		assertEquals("mavenCentral()", mavencentral.getName());
 	}
-	
 
 	private InputStream createStringInputStream(StringBuilder sb) {
 		String string = sb.toString();
 		return createStringInputStream(string);
 	}
-
 
 	private InputStream createStringInputStream(String string) {
 		ByteArrayInputStream is = new ByteArrayInputStream(string.getBytes());
