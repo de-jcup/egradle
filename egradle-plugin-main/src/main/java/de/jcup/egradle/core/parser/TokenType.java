@@ -20,4 +20,8 @@ public enum TokenType {
 	
 	BRACE_CLOSING, 
 	
+	BRACKET_OPENING, 
+	
+	BRACKET_CLOSING, 
+	
 }

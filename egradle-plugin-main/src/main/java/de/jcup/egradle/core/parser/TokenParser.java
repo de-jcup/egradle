@@ -138,6 +138,32 @@ public class TokenParser {
 				}
 				switchState(TokenState.CURLY_BRACKET_END_FOUND);
 				break;
+			case '(':
+				if (context.isInComment()) {
+					/* ignore inside comments */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInString()) {
+					/* ignore inside strings */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				switchState(TokenState.NORMAL_BRACKET_START_FOUND);
+				break;
+			case ')':
+				if (context.isInComment()) {
+					/* ignore inside comments */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				if (context.isInString()) {
+					/* ignore inside strings */
+					appendPosCharacterForNextClosing();
+					continue;
+				}
+				switchState(TokenState.NORMAL_BRACKET_END_FOUND);
+				break;
 			/* ------------ COMMENTS ---------------- */
 			case '/':
 				if (context.isInString()) {
@@ -318,40 +344,16 @@ public class TokenParser {
 			
 			break;
 		case CURLY_BRACKET_START_FOUND:
-			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
-				/* ignore it'S inside a comment */
-				return appendNeeded;
-			}
-			Token formerActiveParent = context.getActiveParent();
-			closeActiveTokenAndCreateNewOne(TokenType.BRACE_OPENING);
-
-			if (traceEnabled) {
-				trace("add " + context.getActiveToken().toIdString() + " to parent:" + formerActiveParent.toIdString());
-			}
-			formerActiveParent.addChild(context.getActiveToken());
-			appendPosCharacterForNextClosing();
-			appendNeeded = false;
-			closeActiveTokenButDoNotSetParent(); // next character will create
-													// new token so {a is
-			// correct done
-			changeActiveParent(context.getLastToken());
-
+			appendNeeded = handleBracketStartFound(appendNeeded, TokenType.BRACE_OPENING);
 			break;
 		case CURLY_BRACKET_END_FOUND:
-			if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
-				/* ignore it'S inside a comment */
-				return appendNeeded;
-			}
-			if (context.getLastToken() == null) {
-				handleProblem("Curly bracket closing, but no last token available - seems a syntax failure!");
-				return appendNeeded;
-			}
-			closeActiveToken();
-			changeActiveParent(context.getActiveParent().getParent());
-			closeActiveTokenAndCreateNewOne(BRACE_CLOSING);
-			appendPosCharacterForNextClosing();
-			appendNeeded = false;
-			closeActiveToken();
+			appendNeeded = handleBracketEndFound(appendNeeded, BRACE_CLOSING);
+			break;
+		case NORMAL_BRACKET_START_FOUND:
+			appendNeeded = handleBracketStartFound(appendNeeded, TokenType.BRACKET_OPENING);
+			break;
+		case NORMAL_BRACKET_END_FOUND:
+			appendNeeded = handleBracketEndFound(appendNeeded, BRACKET_CLOSING);
 			break;
 		case NORMAL_CHARACTER_READING:
 			ensureActiveToken();
@@ -362,6 +364,45 @@ public class TokenParser {
 			}
 
 		}
+		return appendNeeded;
+	}
+
+	private boolean handleBracketEndFound(boolean appendNeeded, TokenType type) {
+		if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+			/* ignore it'S inside a comment */
+			return appendNeeded;
+		}
+		if (context.getLastToken() == null) {
+			handleProblem("Curly bracket closing, but no last token available - seems a syntax failure!");
+			return appendNeeded;
+		}
+		closeActiveToken();
+		changeActiveParent(context.getActiveParent().getParent());
+		closeActiveTokenAndCreateNewOne(type);
+		appendPosCharacterForNextClosing();
+		appendNeeded = false;
+		closeActiveToken();
+		return appendNeeded;
+	}
+
+	private boolean handleBracketStartFound(boolean appendNeeded, TokenType bracketType) {
+		if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+			/* ignore it'S inside a comment */
+			return appendNeeded;
+		}
+		Token formerActiveParent = context.getActiveParent();
+		closeActiveTokenAndCreateNewOne(bracketType);
+
+		if (traceEnabled) {
+			trace("add " + context.getActiveToken().toIdString() + " to parent:" + formerActiveParent.toIdString());
+		}
+		formerActiveParent.addChild(context.getActiveToken());
+		appendPosCharacterForNextClosing();
+		appendNeeded = false;
+		closeActiveTokenButDoNotSetParent(); // next character will create
+												// new token so {a is
+		// correct done
+		changeActiveParent(context.getLastToken());
 		return appendNeeded;
 	}
 

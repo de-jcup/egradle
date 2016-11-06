@@ -34,6 +34,31 @@ public class TokenParserTest {
 		parserToTest.enableTraceMode();
 	}
 	
+	@Test
+	public void test_with_parameter_paramToken___test_token_contains_parameter_token() throws IOException{
+		/* prepare */
+		String text = "test (paramToken)";
+		
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		
+		/* test */
+		Token test = result.getRoot().getFirstChild();
+		assertFalse(test.hasChildren());
+		assertTrue(test.canGoForward());
+		
+		Token bracket1 = test.goForward();
+		assertEquals(TokenType.BRACKET_OPENING, bracket1.getType());
+		assertTrue(bracket1.hasChildren());
+		
+		Token paramToken = bracket1.getFirstChild();
+		assertEquals("paramToken", paramToken.getName());
+		
+		Token bracket2 = bracket1.goForward();
+		assertEquals(TokenType.BRACKET_CLOSING, bracket2.getType());
+		
+	}
+	
 	/**
 	 * Real world problem - single line comment did manipulate next token pos
 	 * 
@@ -554,12 +579,15 @@ public class TokenParserTest {
 		Token allProjects = result.getRoot().getFirstChild();
 		Token repositories = allProjects.goForward().getFirstChild();
 		Token mavenlocal = repositories.goForward().getFirstChild();
-		Token mavenCentral = mavenlocal.goForward();
+		Token bracket1= mavenlocal.goForward();
+		Token bracket2= bracket1.goForward();
+		
+		Token mavenCentral = bracket2.goForward();
 
 		assertEquals("allprojects", allProjects.getName());
 		assertEquals("repositories", repositories.getName());
-		assertEquals("mavenLocal()", mavenlocal.getName());
-		assertEquals("mavenCentral()", mavenCentral.getName());
+		assertEquals("mavenLocal", mavenlocal.getName());
+		assertEquals("mavenCentral", mavenCentral.getName());
 	}
 
 	@Test
@@ -591,12 +619,12 @@ public class TokenParserTest {
 		Token repositories = anotherComment.goForward();
 
 		Token mavenlocal = repositories.goForward().getFirstChild();
-		Token mavenCentral = mavenlocal.goForward();
+		Token mavenCentral = mavenlocal.goForward().goForward().goForward(); // ()...
 
 		assertEquals("allprojects", allProjects.getName());
 		assertEquals("repositories", repositories.getName());
-		assertEquals("mavenLocal()", mavenlocal.getName());
-		assertEquals("mavenCentral()", mavenCentral.getName());
+		assertEquals("mavenLocal", mavenlocal.getName());
+		assertEquals("mavenCentral", mavenCentral.getName());
 	}
 
 	@Test
@@ -628,10 +656,10 @@ public class TokenParserTest {
 		Token repositories = comment.goForward();
 		assertEquals("repositories", repositories.getName());
 		Token mavenlocal = repositories.goForward().getFirstChild();
-		Token mavencentral = mavenlocal.goForward();
+		Token mavencentral = mavenlocal.goForward().goForward().goForward();
 
-		assertEquals("mavenLocal()", mavenlocal.getName());
-		assertEquals("mavenCentral()", mavencentral.getName());
+		assertEquals("mavenLocal", mavenlocal.getName());
+		assertEquals("mavenCentral", mavencentral.getName());
 	}
 
 	private InputStream createStringInputStream(StringBuilder sb) {
