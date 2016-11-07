@@ -15,12 +15,9 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.editors.text.TextEditor;
@@ -85,9 +82,17 @@ public class GradleEditor extends TextEditor {
 	
 	private class GradleEditorCaretListener implements CaretListener{
 
+
 		@Override
 		public void caretMoved(CaretEvent event) {
+			if (event==null){
+				return;
+			}
 			setStatusLineMessage("caret moved:"+event.caretOffset);
+			if (outlinePage==null){
+				return;
+			}
+			outlinePage.onEditorCaretMoved(event.caretOffset);
 		}
 		
 	}

@@ -43,7 +43,7 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 	}
 
 	@Override
-	public void lineAppended(IRegion line) {
+	public void lineAppended(IRegion lineRegion) {
 		if (rememberOutputHandler==null){
 			return;
 		}
@@ -51,7 +51,7 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 			return;
 		}
 		try {
-			String lineStr = document.get(line.getOffset(), line.getLength());
+			String lineStr = document.get(lineRegion.getOffset(), lineRegion.getLength());
 			if (lineStr.startsWith("Total time")) {
 				/* ok . time to validate */
 				List<String> list = rememberOutputHandler.createOutputToValidate();

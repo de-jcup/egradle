@@ -25,7 +25,10 @@ Bundle-ClassPath: .,
  lib/commons-lang3-3.4.jar
 Export-Package: de.jcup.egradle.core.api,
  de.jcup.egradle.core.domain,
- de.jcup.egradle.core.parser,
+ de.jcup.egradle.core.model,
+ de.jcup.egradle.core.token,
+ de.jcup.egradle.core.token.filter,
+ de.jcup.egradle.core.token.parser,
  de.jcup.egradle.eclipse.api,
  de.jcup.egradle.eclipse.launch,
  de.jcup.egradle.eclipse.ui
