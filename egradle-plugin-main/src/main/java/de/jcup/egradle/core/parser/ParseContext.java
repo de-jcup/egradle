@@ -121,6 +121,9 @@ class ParseContext {
 		return nextElement < lineChars.length;
 	}
 
+	/**
+	 * @return next char without incrementing pos or offset
+	 */
 	public char getNextChar() {
 		int nextElement = pos + 1;
 		return lineChars[nextElement];
@@ -160,7 +163,7 @@ class ParseContext {
 	/**
 	 * Get line char at current pos - will throw {@link ArrayIndexOutOfBoundsException} when wrong used.
 	 * Use {@link #canFetchNextLineCharAtPos()} before!
-	 * @return
+	 * @return char at current pos
 	 */
 	public char getLineCharAtPos() {
 		return lineChars[pos];

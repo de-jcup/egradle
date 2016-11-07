@@ -35,30 +35,166 @@ public class TokenParserTest {
 	}
 	
 	@Test
-	public void test_with_parameter_paramToken___test_token_contains_parameter_token() throws IOException{
+	public void two_tokens_test1_and_test2_are_returned_when_lines_are_separated_by_backlash_n() throws IOException{
+		String text = "test1\ntest2";
+		/* prepare */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+		Token test1 = result.getRoot().getFirstChild();
+		Token test2 = test1.goForward();
+		
+		assertEquals("test1",test1.getName());
+		assertEquals("test2",test2.getName());
+	}
+	
+	@Test
+	public void two_tokens_test1_and_test2_are_returned_when_lines_are_separated_by_backlash_r_and_n() throws IOException{
+		String text = "test1\r\ntest2";
+		/* prepare */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+		Token test1 = result.getRoot().getFirstChild();
+		Token test2 = test1.goForward();
+		
+		assertEquals("test1",test1.getName());
+		assertEquals("test2",test2.getName());
+	}
+	
+	@Test
+	public void visit_lines__test_backslash_r_backslash_n_delimiters_are_still_in_lines() throws IOException{
+		String text = "package de.jcup.egradle.examples\r\n";
+		/* prepare */
+		parserToTest = new TokenParser(){
+			@Override
+			protected void visit(String line) {
+				/* test */
+				super.visit(line);
+				assertEquals("package de.jcup.egradle.examples\r\n",context.getLines().get(0));
+			}
+		};
+		parserToTest.parse(createStringInputStream(text), "UTF-8");
+	}
+	
+	@Test
+	public void visit_lines__test_backslash_n_delimiters_are_still_in_lines() throws IOException{
+		String text = "package de.jcup.egradle.examples\n";
+		/* prepare */
+		parserToTest = new TokenParser(){
+			@Override
+			protected void visit(String line) {
+				/* test */
+				super.visit(line);
+				assertEquals("package de.jcup.egradle.examples\n",context.getLines().get(0));
+			}
+		};
+		parserToTest.parse(createStringInputStream(text), "UTF-8");
+	}
+
+	@Test
+	/**
+	 * \r = CR (Carriage Return) // Used as a new line character in Mac OS
+	 * before X
+	 * 
+	 * @throws IOException
+	 */
+	public void with_backslash_r__package_and_next_import_has_two_tokens__import_has_correct_pos() throws IOException {
+		/* prepare */
+		String text = "package de.jcup.egradle.examples\r\n\r\n";
+		int expectedImportOffset = text.length();
+		text += "import org.gradle.api.DefaultTask";
+
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+
+		/* test */
+		Token packageToken = result.getRoot().getFirstChild();
+		Token packageNameToken = packageToken.goForward();
+		Token importToken = packageNameToken.goForward();
+		Token importNameToken = importToken.goForward();
+
+		assertEquals("import", importToken.getName());
+		assertEquals("org.gradle.api.DefaultTask", importNameToken.getName());
+
+		assertEquals(expectedImportOffset, importToken.getOffset());
+	}
+
+	@Test
+	/**
+	 * \r\n = CR + LF // Used as a new line character in Windows
+	 * 
+	 * @throws IOException
+	 */
+	public void with_backslash_r_backslash_n__package_and_next_import_has_two_tokens__import_has_correct_pos()
+			throws IOException {
+		/* prepare */
+		String text = "package de.jcup.egradle.examples\r\n\r\n";
+		int expectedImportOffset = text.length();
+		text += "import org.gradle.api.DefaultTask";
+
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+
+		/* test */
+		Token packageToken = result.getRoot().getFirstChild();
+		Token packageNameToken = packageToken.goForward();
+		Token importToken = packageNameToken.goForward();
+		Token importNameToken = importToken.goForward();
+
+		assertEquals("import", importToken.getName());
+		assertEquals("org.gradle.api.DefaultTask", importNameToken.getName());
+
+		assertEquals(expectedImportOffset, importToken.getOffset());
+	}
+
+	@Test
+	/**
+     * \n = LF (Line Feed) // Used as a new line character in Unix/Mac OS X
+	 * @throws IOException
+	 */
+	public void with_backslash_n__package_and_next_import_has_two_tokens__import_has_correct_pos() throws IOException {
+		/* prepare */
+		String text = "package de.jcup.egradle.examples\n\n";
+		int expectedImportOffset = text.length();
+		text += "import org.gradle.api.DefaultTask";
+
+		/* execute */
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+
+		/* test */
+		Token packageToken = result.getRoot().getFirstChild();
+		Token packageNameToken = packageToken.goForward();
+		Token importToken = packageNameToken.goForward();
+		Token importNameToken = importToken.goForward();
+
+		assertEquals("import", importToken.getName());
+		assertEquals("org.gradle.api.DefaultTask", importNameToken.getName());
+
+		assertEquals(expectedImportOffset, importToken.getOffset());
+	}
+
+	@Test
+	public void test_with_parameter_paramToken___test_token_contains_parameter_token() throws IOException {
 		/* prepare */
 		String text = "test (paramToken)";
-		
+
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
-		
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+
 		/* test */
 		Token test = result.getRoot().getFirstChild();
 		assertFalse(test.hasChildren());
 		assertTrue(test.canGoForward());
-		
+
 		Token bracket1 = test.goForward();
 		assertEquals(TokenType.BRACKET_OPENING, bracket1.getType());
 		assertTrue(bracket1.hasChildren());
-		
+
 		Token paramToken = bracket1.getFirstChild();
 		assertEquals("paramToken", paramToken.getName());
-		
+
 		Token bracket2 = bracket1.goForward();
 		assertEquals(TokenType.BRACKET_CLOSING, bracket2.getType());
-		
+
 	}
-	
+
 	/**
 	 * Real world problem - single line comment did manipulate next token pos
 	 * 
@@ -67,7 +203,7 @@ public class TokenParserTest {
 	@Test
 	public void integration_single_line_comment_has_no_wrong_position_effect_to_following_token() throws IOException {
 		/* prepare */
-		
+
 		/* @formatter:off*/
 		String text =
 		"maven{\n"+
@@ -82,25 +218,27 @@ public class TokenParserTest {
 		/* @formatter:on*/
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
-		
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
+
 		/* test */
 		Token maven = result.getRoot().getFirstChild();
 		Token openBrace = maven.goForward();
 		assertEquals(TokenType.BRACE_OPENING, openBrace.getType());
-		
+
 		Token bla_comment = openBrace.getFirstChild();
-		assertEquals("//bla",bla_comment.getName());
-		Token test =  bla_comment.goForward();
+		assertEquals("//bla", bla_comment.getName());
+		Token test = bla_comment.goForward();
 		assertEquals(expectedBlaOffset, bla_comment.getOffset());
 		assertEquals("//bla".length(), bla_comment.getLength());
-		int diff = test.getOffset()-bla_comment.getOffset();
-		assertEquals("Hmm.. problem - diff between test off set and comment lenth="+diff, expectedTestOffset, test.getOffset());
-		
+		int diff = test.getOffset() - bla_comment.getOffset();
+		assertEquals("Hmm.. problem - diff between test off set and comment lenth=" + diff, expectedTestOffset,
+				test.getOffset());
+
 	}
 
 	/**
-	 * Real world problem - wrong next token name creation after multi line comment
+	 * Real world problem - wrong next token name creation after multi line
+	 * comment
 	 * 
 	 * @throws IOException
 	 */
@@ -110,8 +248,8 @@ public class TokenParserTest {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST4_GRADLE);
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(fis);
-		
+		TokenParserResult result = parserToTest.parse(fis, "UTF-8");
+
 		/* test */
 		/* @formatter:off*/
 //		maven{
@@ -124,15 +262,15 @@ public class TokenParserTest {
 		Token maven = result.getRoot().getFirstChild();
 		Token openBrace = maven.goForward();
 		assertEquals(TokenType.BRACE_OPENING, openBrace.getType());
-		
+
 		Token comment = openBrace.getFirstChild();
 		assertFalse(comment.canGoForward());
-		
+
 		Token closeBrace = openBrace.goForward();
-		
+
 		assertEquals(TokenType.BRACE_CLOSING, closeBrace.getType());
-		assertEquals("}",closeBrace.getName());
-		
+		assertEquals("}", closeBrace.getName());
+
 	}
 
 	/**
@@ -157,7 +295,7 @@ public class TokenParserTest {
 				+ "}";
 		/* @formatter:off*/
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 		
 		/* test */
 		Token parent = result.getRoot().getFirstChild();
@@ -178,7 +316,7 @@ public class TokenParserTest {
 		int expectedLength= text.length();
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 		
 		/* test */
 		Token comment = result.getRoot().getFirstChild();
@@ -193,7 +331,7 @@ public class TokenParserTest {
 		text=text+"\notherToken";
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 		
 		/* test */
 		Token comment = result.getRoot().getFirstChild();
@@ -208,7 +346,7 @@ public class TokenParserTest {
 		text=text+"otherToken";
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 		
 		/* test */
 		Token apply = result.getRoot().getFirstChild();
@@ -226,7 +364,7 @@ public class TokenParserTest {
 		int length = text.length();
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 
 		/* test */
 		Token string = result.getRoot().getFirstChild();
@@ -242,7 +380,7 @@ public class TokenParserTest {
 		text=text+"otherToken";
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 
 		/* test */
 		Token apply = result.getRoot().getFirstChild();
@@ -260,7 +398,7 @@ public class TokenParserTest {
 		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\"";
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
 		
 		/* test */
 		Token apply = result.getRoot().getFirstChild();
@@ -284,7 +422,7 @@ public class TokenParserTest {
 		sb.append("/* comment2...*/\n");
 	
 		/* execute */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(sb));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(sb), "UTF-8");
 	
 		/* test */
 		Token comment1 = result.getRoot().getFirstChild();
@@ -296,7 +434,7 @@ public class TokenParserTest {
 	@Test
 	public void aDoubleQuoteString_Containing_text_with_SingleQuotes_is_one_token_only() throws IOException{
 		/* execute*/
-		TokenParserResult result = parserToTest.parse(createStringInputStream("\"'test'\""));
+		TokenParserResult result = parserToTest.parse(createStringInputStream("\"'test'\""), "UTF-8");
 	
 		
 		/* test */
@@ -309,7 +447,7 @@ public class TokenParserTest {
 	public void a_multiline_comment_with_aDoubleQuoteString_and_SingleQuotes_is_one_token_only() throws IOException{
 		/* execute*/
 		String comment = "/*\"'test'\" */";
-		TokenParserResult result = parserToTest.parse(createStringInputStream(comment));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(comment), "UTF-8");
 		
 		/* test */
 		Token first = result.getRoot().getFirstChild();
@@ -321,7 +459,7 @@ public class TokenParserTest {
 	public void a_single_line_comment_with_aDoubleQuoteString_and_SingleQuotes_is_one_token_only() throws IOException{
 		/* execute*/
 		String comment = "//\"'test'\" */";
-		TokenParserResult result = parserToTest.parse(createStringInputStream(comment));
+		TokenParserResult result = parserToTest.parse(createStringInputStream(comment), "UTF-8");
 		
 		/* test */
 		Token first = result.getRoot().getFirstChild();
@@ -336,7 +474,7 @@ public class TokenParserTest {
 		parserToTest.tokenChainer=mockedChainer;
 		
 		/* execute*/
-		TokenParserResult result = parserToTest.parse(createStringInputStream("parent"));
+		TokenParserResult result = parserToTest.parse(createStringInputStream("parent"), "UTF-8");
 		
 		/* test */
 		verify(mockedChainer).chain(result.getRoot());
@@ -345,7 +483,7 @@ public class TokenParserTest {
 	@Test
 	public void parsing_null_throws_illegal_argument_exception() throws IOException {
 		expectedException.expect(IllegalArgumentException.class);
-		parserToTest.parse(null);
+		parserToTest.parse(null, "UTF-8");
 	}
 	
 	@Test
@@ -353,7 +491,7 @@ public class TokenParserTest {
 		String text ="{}";
 		InputStream is = createStringInputStream(text);
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 		
 		/* test */
 		assertEquals(2,result.getRoot().getChildren().size());
@@ -364,7 +502,7 @@ public class TokenParserTest {
 		String text ="parent {}";
 		InputStream is = createStringInputStream(text);
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 		
 		/* test */
 		assertEquals(3,result.getRoot().getChildren().size());
@@ -377,7 +515,7 @@ public class TokenParserTest {
 		String text ="parent{}";
 		InputStream is = createStringInputStream(text);
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 		
 		/* test */
 		assertEquals(3,result.getRoot().getChildren().size());
@@ -390,7 +528,7 @@ public class TokenParserTest {
 		String text ="parent {child}";
 		InputStream is = createStringInputStream(text);
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 		
 		/* test */
 		assertEquals(3,result.getRoot().getChildren().size());
@@ -414,7 +552,7 @@ public class TokenParserTest {
 		
 		
 		/* execute */
-		parserToTest.parse(is);
+		parserToTest.parse(is, "UTF-8");
 	}
 	
 	@Test
@@ -423,7 +561,7 @@ public class TokenParserTest {
 		InputStream is = createStringInputStream("");
 		
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 		
 		/* test */
 		assertNotNull(result);
@@ -455,7 +593,7 @@ public class TokenParserTest {
 
 		InputStream is = createStringInputStream(sb);
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 
 		/* test */
 		/* @formatter:off */
@@ -488,7 +626,7 @@ public class TokenParserTest {
 		InputStream is = createStringInputStream(sb);
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 
 		/* test */
 		assertNotNull(result);
@@ -516,7 +654,7 @@ public class TokenParserTest {
 
 		/* execute */
 
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 
 		/* test */
 
@@ -545,7 +683,7 @@ public class TokenParserTest {
 		InputStream is = createStringInputStream(sb);
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(is);
+		TokenParserResult result = parserToTest.parse(is, "UTF-8");
 
 		/* test */
 		assertNotNull(result);
@@ -562,7 +700,7 @@ public class TokenParserTest {
 	public void rootproject4_test1_file() throws IOException {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST1_GRADLE);
 
-		TokenParserResult result = parserToTest.parse(fis);
+		TokenParserResult result = parserToTest.parse(fis, "UTF-8");
 
 		/* test */
 		/* @formatter:off*/
@@ -579,9 +717,9 @@ public class TokenParserTest {
 		Token allProjects = result.getRoot().getFirstChild();
 		Token repositories = allProjects.goForward().getFirstChild();
 		Token mavenlocal = repositories.goForward().getFirstChild();
-		Token bracket1= mavenlocal.goForward();
-		Token bracket2= bracket1.goForward();
-		
+		Token bracket1 = mavenlocal.goForward();
+		Token bracket2 = bracket1.goForward();
+
 		Token mavenCentral = bracket2.goForward();
 
 		assertEquals("allprojects", allProjects.getName());
@@ -596,7 +734,7 @@ public class TokenParserTest {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST2_GRADLE);
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(fis);
+		TokenParserResult result = parserToTest.parse(fis, "UTF-8");
 
 		/* test */
 
@@ -633,7 +771,7 @@ public class TokenParserTest {
 		FileInputStream fis = new FileInputStream(TestUtil.ROOTFOLDER_4_TEST3_GRADLE);
 
 		/* execute */
-		TokenParserResult result = parserToTest.parse(fis);
+		TokenParserResult result = parserToTest.parse(fis, "UTF-8");
 
 		/* test */
 		/* @formatter:off*/

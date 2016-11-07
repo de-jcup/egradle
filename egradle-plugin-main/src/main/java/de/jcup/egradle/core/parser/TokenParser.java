@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +28,7 @@ public class TokenParser {
 	 * When trace enabled, the complete parsing mechanism does output to console
 	 */
 	private boolean traceEnabled;
-	private ParseContext context;
+	ParseContext context;
 	private TokenState currentState = null;
 
 	private MultiTokenTypeAnalyzer tokenTypeAnalyzer = new MultiTokenTypeAnalyzer();
@@ -36,10 +37,11 @@ public class TokenParser {
 	/**
 	 * Parse given input stream and return result
 	 * @param is input stream to use
+	 * @param charSetName name of charset to use - e.g. "UTF-8"
 	 * @return result, never <code>null</code>
 	 * @throws IOException
 	 */
-	public TokenParserResult parse(InputStream is) throws IOException {
+	public TokenParserResult parse(InputStream is, String charSetName) throws IOException {
 
 		if (is == null) {
 			throw new IllegalArgumentException("input stream may not be null!");
@@ -47,7 +49,7 @@ public class TokenParser {
 
 		context = new ParseContext();
 
-		fillContextWithLineData(is);
+		fillContextWithLineData(is,charSetName);
 
 		parseLines();
 
@@ -72,32 +74,27 @@ public class TokenParser {
 
 	protected void parseLines() {
 		int lineNumber = 0;
-		for (Iterator<String> it = context.getLines().iterator(); it.hasNext();) {
-			String line = it.next();
+		List<String> lines = context.getLines();
+		for (Iterator<String> it = lines.iterator(); it.hasNext();) {
+			String lineWithDelimiter = it.next();
 			context.setLineNumber(lineNumber);
 			if (debugEnabled) {
-				debug("LINE:" + context.getLineNumber() + ":" + line);
+				debug("LINE:" + context.getLineNumber() + ":" + lineWithDelimiter);
 			}
-			visit(line);
-			context.incPosAndOffset();
-//			context.incOffset();
-			; // new line...
+			visit(lineWithDelimiter);
 			lineNumber++;
-			if (it.hasNext()) {
-				switchState(TokenState.NEW_LINE_START);
-			}
 		}
 		switchState(TokenState.EOF_FOUND);
 	}
 
-	protected void visit(String line) {
-		if (line == null) {
+	protected void visit(String lineWithDelimiters) {
+		if (lineWithDelimiters == null) {
 			return;
 		}
-		if (StringUtils.isEmpty(line)) {
+		if (StringUtils.isEmpty(lineWithDelimiters)) {
 			return;
 		}
-		context.setLineChars(line.toCharArray());
+		context.setLineChars(lineWithDelimiters.toCharArray());
 		context.setInSingleComment(false);
 		context.setInGString(false);
 		context.setInNormalString(false);
@@ -107,21 +104,34 @@ public class TokenParser {
 			context.markInitializationDone();
 		}
 
-		for (context.resetPos(); context.getPos() < context.getLineChars().length; context.incPosAndOffset()) {
+		for (context.resetPos(); context.getPos() < context.getLineChars().length; ) {
+
 			char c = context.getLineCharAtPos();
 			
 			switch (c) {
+			case '\n':
+				switchState(TokenState.NEW_LINE_START);
+				break;
+			case '\r':
+				if (context.hasNextChar()) {
+					char nc = context.getNextChar();
+					if (nc == '\n') {
+						context.incPosAndOffset(); // two chars 
+					} 
+				}
+				switchState(TokenState.NEW_LINE_START);
+				break;
 			/* ------------ BRACES ---------------- */
 			case '{':
 				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				switchState(TokenState.CURLY_BRACKET_START_FOUND);
 				break;
@@ -129,12 +139,12 @@ public class TokenParser {
 				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				switchState(TokenState.CURLY_BRACKET_END_FOUND);
 				break;
@@ -142,12 +152,12 @@ public class TokenParser {
 				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				switchState(TokenState.NORMAL_BRACKET_START_FOUND);
 				break;
@@ -155,12 +165,12 @@ public class TokenParser {
 				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				switchState(TokenState.NORMAL_BRACKET_END_FOUND);
 				break;
@@ -168,7 +178,7 @@ public class TokenParser {
 			case '/':
 				if (context.isInString()) {
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.hasNextChar()) {
 					char nc = context.getNextChar();
@@ -199,11 +209,11 @@ public class TokenParser {
 			case '\'':
 				if (context.isInComment()){
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInGString()) {
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInNormalString()) {
 					switchState(TokenState.SINGLE_QUOTE_END);
@@ -218,7 +228,7 @@ public class TokenParser {
 				 */
 				if (context.isInComment()){
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInGString()) {
 					switchState(TokenState.DOUBLE_QUOTE_END);
@@ -230,12 +240,12 @@ public class TokenParser {
 				if (context.isInComment()) {
 					/* ignore inside comments */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (context.isInString()) {
 					/* ignore inside strings */
 					appendPosCharacterForNextClosing();
-					continue;
+					break;
 				}
 				if (Character.isWhitespace(c)) {
 					switchState(TokenState.WHITESPACE_FOUND);
@@ -243,6 +253,9 @@ public class TokenParser {
 					switchState(TokenState.NORMAL_CHARACTER_READING);
 				}
 			}
+			
+			/* goto next position */
+			context.incPosAndOffset();
 		}
 	}
 
@@ -507,18 +520,62 @@ public class TokenParser {
 			trace("RESET active token");
 		}
 	}
-
-	private void fillContextWithLineData(InputStream is) throws IOException {
-		/* TODO ATR, 01.11.2016: define charset */
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		String line = null;
+	
+	private void fillContextWithLineData(InputStream is, String charSetName) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, charSetName));
+		int d=0;
 		int i = 0;
-		while ((line = br.readLine()) != null) {
-			if (traceEnabled) {
-				trace((i++) + ":" + line);
+		StringBuilder sb =null;
+		
+		while (true) {
+			/* why not using br.readline() - because the lines shall have all keep their line endings (\r, \r\n or \n) */
+			d = br.read();
+			if (d==-1){
+				if (sb!=null){
+					addLine(i, sb);
+				}
+				break;
 			}
-			context.addLine(line);
+			if (sb==null){
+				sb = new StringBuilder();
+			}
+			char c = (char) d;
+			sb.append(c);
+			
+			if (c == '\n'){
+				i=addLine(i, sb);
+				sb=null;
+			}else if (c=='\r'){
+				/* check if this is a \r\n*/
+				d = br.read();
+				if (d==-1){
+					sb.append(c);
+					i=addLine(i, sb);
+					break;
+				}
+				c = (char) d;
+				if (c=='\n'){
+					sb.append(c);
+					i=addLine(i, sb);
+					sb=null;
+				}else{
+					i=addLine(i, sb);
+					sb=null;
+					sb=new StringBuilder();
+					sb.append(c);
+				}
+			}
+
 		}
+	}
+
+	private int addLine(int lineNr , StringBuilder sb) {
+		String line = sb.toString();
+		context.addLine(line);
+		if (traceEnabled) {
+			trace(lineNr + ":" + line);
+		}
+		return lineNr++;
 	}
 
 	private String getCurrentTextString() {

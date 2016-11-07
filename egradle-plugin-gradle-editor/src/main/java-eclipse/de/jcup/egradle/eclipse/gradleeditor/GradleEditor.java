@@ -15,6 +15,14 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -35,13 +43,32 @@ public class GradleEditor extends TextEditor {
 	}
 	
 	@Override
+	public void createPartControl(Composite parent) {
+		super.createPartControl(parent);
+		
+		Control adapter = getAdapter(Control.class);
+		if (adapter instanceof StyledText){
+			StyledText text = (StyledText) adapter;
+			text.addCaretListener(new GradleEditorCaretListener());
+		}
+		
+	}
+	
+	@Override
+	protected void initializeEditor() {
+		super.initializeEditor();
+	}
+	
+	@Override
+	public void selectAndReveal(int start, int length) {
+		super.selectAndReveal(start, length);
+		setStatusLineMessage("selected range: start="+start+", length="+length);
+	}
+	
+	@Override
 	public void dispose() {
 		colorManager.dispose();
 		super.dispose();
-	}
-	
-	public void setSelectedRange(int offset, int length){
-		getSourceViewer().setSelectedRange(offset, length);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -54,6 +81,15 @@ public class GradleEditor extends TextEditor {
 			  return (T) outlinePage;
 		  }
 		return super.getAdapter(adapter);
+	}
+	
+	private class GradleEditorCaretListener implements CaretListener{
+
+		@Override
+		public void caretMoved(CaretEvent event) {
+			setStatusLineMessage("caret moved:"+event.caretOffset);
+		}
+		
 	}
 	
 }

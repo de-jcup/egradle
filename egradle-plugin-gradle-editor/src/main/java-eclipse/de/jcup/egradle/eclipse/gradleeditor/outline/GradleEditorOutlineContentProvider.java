@@ -28,27 +28,29 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	@Override
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof IFileEditorInput) {
-			IFileEditorInput fileEditorInput = (IFileEditorInput) inputElement;
-
-			IFile file = fileEditorInput.getFile();
-			EclipseResourceHelper resourceHelper = EGradleUtil.getResourceHelper();
-			try {
-				File normalFile = resourceHelper.toFile(file);
-				try (InputStream is = new FileInputStream(normalFile)) {
-					TokenParserResult ast = parser.parse(is);
-					return ast.getRoot().getChildren().toArray();
-				} catch (IOException e) {
-					EGradleUtil.log("Was not able to load file:" + normalFile, e);
-				}
-			} catch (CoreException e) {
-				EGradleUtil.log(e);
-				return new Object[] { "Cannot convert to normal file:" + fileEditorInput.getFile() };
-			}
+//			IFileEditorInput fileEditorInput = (IFileEditorInput) inputElement;
+//
+//			IFile file = fileEditorInput.getFile();
+//			EclipseResourceHelper resourceHelper = EGradleUtil.getResourceHelper();
+//			try {
+//				File normalFile = resourceHelper.toFile(file);
+//				try (InputStream is = new FileInputStream(normalFile)) {
+//					TokenParserResult ast = parser.parse(is, file.getCharset());
+//					return ast.getRoot().getChildren().toArray();
+//				} catch (IOException e) {
+//					EGradleUtil.log("Was not able to load file:" + normalFile, e);
+//				}
+//			} catch (CoreException e) {
+//				EGradleUtil.log(e);
+//				return new Object[] { "Cannot convert to normal file:" + fileEditorInput.getFile() };
+//			}
 		} else if (inputElement instanceof IDocument) {
 			IDocument document = (IDocument) inputElement;
+			String[] lineDelimiters = document.getLegalLineDelimiters();
 			String dataAsString = document.get();
+			
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
-				TokenParserResult ast = parser.parse(is);
+				TokenParserResult ast = parser.parse(is, "UTF-8");
 				return ast.getRoot().getChildren().toArray();
 			} catch (IOException e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);

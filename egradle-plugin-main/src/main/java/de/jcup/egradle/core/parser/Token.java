@@ -87,7 +87,7 @@ public class Token {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "(" + id + ") ['" + name + "', LNr:" + lineNumber + ", offset:" + offset
-				+ ", type:" + getType() + ", parent:" + (parent != null ? parent.id : "null") + "]";
+				+ ", length:"+getLength()+", type:" + getType() + ", parent:" + (parent != null ? parent.toIdString() : "null") + "]";
 	}
 
 	Token setType(TokenType tokenType) {
