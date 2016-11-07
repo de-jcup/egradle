@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
 public class DebugUtil {
 	

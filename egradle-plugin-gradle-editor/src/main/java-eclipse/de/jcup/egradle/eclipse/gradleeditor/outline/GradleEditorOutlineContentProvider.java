@@ -1,8 +1,6 @@
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,13 +8,21 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
-import de.jcup.egradle.core.parser.Token;
-import de.jcup.egradle.core.parser.TokenParser;
-import de.jcup.egradle.core.parser.TokenParserResult;
+import de.jcup.egradle.core.model.DefaultTokenOutlineModelBuilder;
+import de.jcup.egradle.core.model.OutlineModel;
+import de.jcup.egradle.core.model.OutlineModel.Item;
+import de.jcup.egradle.core.token.filter.ClosingBracesFilter;
+import de.jcup.egradle.core.token.filter.CommentFilter;
+import de.jcup.egradle.core.token.filter.MultiTokenFilter;
+import de.jcup.egradle.core.token.filter.ParameterFilter;
+import de.jcup.egradle.core.token.filter.UnknownTokenFilter;
+import de.jcup.egradle.core.token.parser.TokenParser;
+import de.jcup.egradle.core.token.parser.TokenParserResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
+import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
 public class GradleEditorOutlineContentProvider implements ITreeContentProvider {
 
@@ -24,34 +30,51 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	private TokenParser parser = new TokenParser();
 
+	private GradleEditor editor;
+
+	private MultiTokenFilter filter;
+
+	private OutlineModel model;
+	
+	private Object monitor = new Object();
+
+	GradleEditorOutlineContentProvider(GradleEditor editor){
+		this.editor=editor;
+		
+		filter = new MultiTokenFilter();
+		filter.add(new ParameterFilter());
+		filter.add(new CommentFilter());
+		filter.add(new UnknownTokenFilter());
+		filter.add(new ClosingBracesFilter());
+	}
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof IFileEditorInput) {
-//			IFileEditorInput fileEditorInput = (IFileEditorInput) inputElement;
-//
-//			IFile file = fileEditorInput.getFile();
-//			EclipseResourceHelper resourceHelper = EGradleUtil.getResourceHelper();
-//			try {
-//				File normalFile = resourceHelper.toFile(file);
-//				try (InputStream is = new FileInputStream(normalFile)) {
-//					TokenParserResult ast = parser.parse(is, file.getCharset());
-//					return ast.getRoot().getChildren().toArray();
-//				} catch (IOException e) {
-//					EGradleUtil.log("Was not able to load file:" + normalFile, e);
-//				}
-//			} catch (CoreException e) {
-//				EGradleUtil.log(e);
-//				return new Object[] { "Cannot convert to normal file:" + fileEditorInput.getFile() };
-//			}
-		} else if (inputElement instanceof IDocument) {
+		 if (inputElement instanceof IDocument) {
 			IDocument document = (IDocument) inputElement;
-			String[] lineDelimiters = document.getLegalLineDelimiters();
 			String dataAsString = document.get();
 			
+			/* resolve charset to use - currently only workaround via editor instance */
+			String charset = null;
+			IEditorInput input = editor.getEditorInput();
+			if (input instanceof IFileEditorInput){
+				IFileEditorInput fie= (IFileEditorInput)input;
+				IFile file = fie.getFile();
+				try {
+					charset= file.getCharset();
+				} catch (CoreException e) {
+					EGradleUtil.log(e);
+				}
+			}
+			
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
-				TokenParserResult ast = parser.parse(is, "UTF-8");
-				return ast.getRoot().getChildren().toArray();
+				TokenParserResult ast = parser.parse(is, charset);
+				
+				DefaultTokenOutlineModelBuilder builder = new DefaultTokenOutlineModelBuilder(ast.getRoot(), filter);
+				synchronized(monitor){
+					model = builder.build();
+				}
+				return model.getRoot().getChildren();
 			} catch (IOException e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
 			}
@@ -61,29 +84,35 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof Token) {
-			Token parent = (Token) parentElement;
-			return parent.getChildren().toArray();
+		if (parentElement instanceof Item) {
+			Item item = (Item) parentElement;
+			return item.getChildren();
 		}
 		return EMPTY;
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if (element instanceof Token) {
-			Token gradleElement = (Token) element;
-			return gradleElement.getParent();
+		if (element instanceof Item) {
+			Item item = (Item) element;
+			return item.getParent();
 		}
 		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Token) {
-			Token gradleElement = (Token) element;
-			return gradleElement.hasChildren();
+		if (element instanceof Item) {
+			Item item = (Item) element;
+			return item.hasChildren();
 		}
 		return false;
+	}
+	
+	public Item tryToFindByOffset(int offset){
+		synchronized (monitor) {
+			return model.getItemAt(offset);
+		}
 	}
 
 }

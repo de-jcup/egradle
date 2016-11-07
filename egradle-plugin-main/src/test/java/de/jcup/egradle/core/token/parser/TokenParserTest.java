@@ -1,10 +1,8 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -20,6 +18,10 @@ import org.mockito.Matchers;
 import org.mockito.internal.matchers.Equals;
 
 import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.core.token.Token;
+import de.jcup.egradle.core.token.TokenChainer;
+import de.jcup.egradle.core.token.TokenImpl;
+import de.jcup.egradle.core.token.TokenType;
 
 public class TokenParserTest {
 
@@ -566,7 +568,7 @@ public class TokenParserTest {
 		/* test */
 		assertNotNull(result);
 		
-		List<Token> content = result.getRoot().getChildren();
+		List<TokenImpl> content = result.getRoot().getChildren();
 		assertNotNull(content);
 		assertEquals(0,content.size());
 	}

@@ -1,6 +1,6 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
-enum TokenState {
+enum TokenParserState {
 	INITIALIZING,
 
 	/* parenthesis, curly brackets/braces */

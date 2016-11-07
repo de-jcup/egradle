@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -23,7 +23,7 @@ public class MultiTokenTypeAnalyzerImplTest {
 
 	@Test
 	public void empty_multi_token_anylzer_returns_null_for_empty_token() {
-		assertNull(analyzerToTest.analyze(new Token(1)));
+		assertNull(analyzerToTest.analyze(new TokenImpl(1)));
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class MultiTokenTypeAnalyzerImplTest {
 			analyzerToTest.add(otherAnalyzer);
 		}
 		/* execute */
-		TokenType resultType = analyzerToTest.analyze(new Token(1));
+		TokenType resultType = analyzerToTest.analyze(new TokenImpl(1));
 		
 		/* test */
 		assertNotNull(resultType);

@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -9,20 +9,24 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Token {
+public class TokenImpl implements Token {
 	private static Map<Integer, String> INDENT_CACHE = new HashMap<>();
 	private int id;
 	private String name;
 	private int lineNumber = -1;
-	private Token parent;
-	private List<Token> children = new ArrayList<>();
+	private TokenImpl parent;
+	private List<TokenImpl> children = new ArrayList<>();
 	private int offset;
 	private TokenType type;
 	private Token forward;
 	private Token backward;
 	private int length=-1;
 
-	Token(int id) {
+	/**
+	 * Creates token with given id. The id should be unique inside tokens context!!!
+	 * @param id identifier, should be unique in tokens context!
+	 */
+	public TokenImpl(int id) {
 		this.id = id;
 	}
 
@@ -30,41 +34,50 @@ public class Token {
 		this.offset = offset;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getName()
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getLineNumber()
+	 */
+	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
 
-	/**
-	 * Returns unmodifiable list of children, never <code>null</code>
-	 * 
-	 * @return unmodifiable list of children, never <code>null</code>
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getChildren()
 	 */
-	public List<Token> getChildren() {
+	@Override
+	public List<TokenImpl> getChildren() {
 		return Collections.unmodifiableList(children);
 	}
 
-	/**
-	 * Returns parent element or <code>null</code>
-	 * 
-	 * @return parent element or <code>null</code>
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getParent()
 	 */
-	public Token getParent() {
+	@Override
+	public TokenImpl getParent() {
 		return parent;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#hasChildren()
+	 */
+	@Override
 	public boolean hasChildren() {
 		return children.size() > 0;
 	}
 
-	/**
-	 * Returns offset inside complete source
-	 * 
-	 * @return offset inside complete source
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getOffset()
 	 */
+	@Override
 	public int getOffset() {
 		return offset;
 	}
@@ -73,6 +86,10 @@ public class Token {
 		this.length = length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getLength()
+	 */
+	@Override
 	public int getLength() {
 		if (length<0){
 			if (name==null){
@@ -90,17 +107,15 @@ public class Token {
 				+ ", length:"+getLength()+", type:" + getType() + ", parent:" + (parent != null ? parent.toIdString() : "null") + "]";
 	}
 
-	Token setType(TokenType tokenType) {
+	public Token setType(TokenType tokenType) {
 		this.type = tokenType;
 		return this;
 	}
 
-	/**
-	 * Returns token type. If no token type is set {@link TokenType#UNKNOWN}
-	 * will be returned
-	 * 
-	 * @return token type , never <code>null</code>
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getType()
 	 */
+	@Override
 	public TokenType getType() {
 		if (type == null) {
 			type = TokenType.UNKNOWN;
@@ -112,7 +127,7 @@ public class Token {
 		this.name = name;
 	}
 
-	public void addChild(Token child) {
+	public void addChild(TokenImpl child) {
 		if (child == this) {
 			throw new IllegalStateException("Tried to add token to itself:" + toIdString());
 		}
@@ -130,7 +145,7 @@ public class Token {
 
 	public String toIdString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Token(");
+		sb.append("TokenImpl(");
 		sb.append(getId());
 		sb.append(")");
 		String name = getName();
@@ -155,7 +170,7 @@ public class Token {
 		printToken(0, this, stream);
 	}
 
-	private void printToken(int indent, Token token, PrintStream stream) {
+	private void printToken(int indent, Token tokenImpl, PrintStream stream) {
 		String indentStr = INDENT_CACHE.get(indent);
 		if (indentStr == null) {
 			StringBuilder sb = new StringBuilder();
@@ -166,9 +181,9 @@ public class Token {
 			INDENT_CACHE.put(indent, indentStr);
 		}
 		stream.print(indentStr);
-		stream.println(token);
-		if (token.hasChildren()) {
-			for (Token child : token.getChildren()) {
+		stream.println(tokenImpl);
+		if (tokenImpl.hasChildren()) {
+			for (Token child : tokenImpl.getChildren()) {
 				printToken(indent + 3, child, stream);
 			}
 		}
@@ -178,17 +193,16 @@ public class Token {
 	/**
 	 * Define next following token to this one
 	 * 
-	 * @param token
+	 * @param tokenImpl
 	 */
-	void defineForward(Token token) {
-		this.forward = token;
+	void defineForward(Token tokenImpl) {
+		this.forward = tokenImpl;
 	}
 
-	/**
-	 * Go to next token
-	 * 
-	 * @return next token - throws {@link IllegalStateException} when not possible
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#goForward()
 	 */
+	@Override
 	public Token goForward() {
 		if (forward==null){
 			throw new IllegalStateException("Cannot go forward from :"+toIdString());
@@ -196,23 +210,22 @@ public class Token {
 		return forward;
 	}
 
-	/**
-	 * @return <code>true</code> when a next token is available otherwise
-	 *         <code>false</code>
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#canGoForward()
 	 */
+	@Override
 	public boolean canGoForward() {
 		return forward != null;
 	}
 
-	void defineBackward(Token token) {
-		backward = token;
+	void defineBackward(Token tokenImpl) {
+		backward = tokenImpl;
 	}
 
-	/**
-	 * Go to token before
-	 * 
-	 * @return token before - throws {@link IllegalStateException} when not possible
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#goBackward()
 	 */
+	@Override
 	public Token goBackward() {
 		if (backward==null){
 			throw new IllegalStateException("Cannot go backward from :"+toIdString());
@@ -220,17 +233,18 @@ public class Token {
 		return backward;
 	}
 
-	/**
-	 * @return <code>true</code> when token before is available otherwise
-	 *         <code>false</code>
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#canGoBackward()
 	 */
+	@Override
 	public boolean canGoBackward() {
 		return backward != null;
 	}
 
-	/**
-	 * @return first child - or throws {@link IllegalStateException} when no child available
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.core.token.Token#getFirstChild()
 	 */
+	@Override
 	public Token getFirstChild() {
 		if (!hasChildren()){
 			throw new IllegalStateException("There exists no first child for :"+toIdString());

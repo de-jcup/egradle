@@ -1,7 +1,11 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.jcup.egradle.core.token.Token;
+import de.jcup.egradle.core.token.TokenImpl;
+import de.jcup.egradle.core.token.TokenType;
 
 class ParseContext {
 	private char[] lineChars;
@@ -15,43 +19,43 @@ class ParseContext {
 	private int tokencounter;
 	private boolean inSingleComment;
 	private boolean inMultiLineComment;
-	private Token rootToken;
-	private Token activeParent;
-	private Token activeToken;
-	private Token lastToken;
+	private TokenImpl rootToken;
+	private TokenImpl activeParent;
+	private TokenImpl activeToken;
+	private TokenImpl lastToken;
 	private boolean initializationDone;
 	private boolean inNormalString;
 	private boolean inGString;
 
-	public Token getActiveParent() {
+	public TokenImpl getActiveParent() {
 		if (activeParent==null){
 			activeParent=rootToken;
 		}
 		return activeParent;
 	}
 
-	public void setActiveParent(Token activeParent) {
+	public void setActiveParent(TokenImpl activeParent) {
 		this.activeParent = activeParent;
 	}
 
-	public void setActiveToken(Token activeToken) {
+	public void setActiveToken(TokenImpl activeToken) {
 		this.activeToken = activeToken;
 	}
 
-	public Token getActiveToken() {
+	public TokenImpl getActiveToken() {
 		return activeToken;
 	}
 
-	public void setLastToken(Token lastToken) {
+	public void setLastToken(TokenImpl lastToken) {
 		this.lastToken = lastToken;
 	}
 
-	public Token getLastToken() {
+	public TokenImpl getLastToken() {
 		return lastToken;
 	}
 
 	public ParseContext() {
-		this.rootToken = new Token(createNewTokenId());
+		this.rootToken = new TokenImpl(createNewTokenId());
 		rootToken.setType(TokenType.ROOT);
 
 		activeParent = rootToken;
@@ -241,11 +245,11 @@ class ParseContext {
 		return pointer;
 	}
 
-	public String createTokenString(Token token) {
-		if (token == null) {
-			return "No Token";
+	public String createTokenString(TokenImpl tokenImpl) {
+		if (tokenImpl == null) {
+			return "No TokenImpl";
 		}
-		return token.toIdString();
+		return tokenImpl.toIdString();
 	}
 
 	public void addProblem(String problem) {

@@ -1,15 +1,18 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.jcup.egradle.core.token.Token;
+import de.jcup.egradle.core.token.TokenImpl;
+
 public class TokenParserResult {
 	
 	private String description = "NONE";
-	private Token root;
+	private TokenImpl root;
 	
-	TokenParserResult(Token root){
+	TokenParserResult(TokenImpl root){
 		this.root=root;
 	}
 	

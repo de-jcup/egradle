@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token;
 
 import static org.junit.Assert.*;
 
@@ -10,16 +10,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class TokenTest {
+public class TokenImplTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
-	private Token tokenToTest;
+	private TokenImpl tokenToTest;
 
 	@Before
 	public void before() {
-		tokenToTest = new Token(0);
+		tokenToTest = new TokenImpl(0);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class TokenTest {
 	@Test
 	public void list_returned_by_get_tokens_is_not_changeable() {
 		expectedException.expect(UnsupportedOperationException.class);
-		tokenToTest.getChildren().add(new Token(1));
+		tokenToTest.getChildren().add(new TokenImpl(1));
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class TokenTest {
 
 	@Test
 	public void element_with_one_child_returns_true_for_has_children() {
-		tokenToTest.addChild(new Token(1));
+		tokenToTest.addChild(new TokenImpl(1));
 		assertTrue(tokenToTest.hasChildren());
 	}
 
@@ -105,7 +105,7 @@ public class TokenTest {
 
 	@Test
 	public void element_with_parent_set_returns_parent() {
-		Token parentElement = new Token(666);
+		TokenImpl parentElement = new TokenImpl(666);
 		parentElement.addChild(tokenToTest);
 		assertEquals(parentElement, tokenToTest.getParent());
 	}
@@ -118,9 +118,9 @@ public class TokenTest {
 
 	@Test
 	public void element_with_child_token_returns_list_with_childelement_inside() {
-		Token child = new Token(1);
+		TokenImpl child = new TokenImpl(1);
 		tokenToTest.addChild(child);
-		List<Token> elements = tokenToTest.getChildren();
+		List<TokenImpl> elements = tokenToTest.getChildren();
 		assertNotNull(elements);
 		assertEquals(1, elements.size());
 		assertTrue(elements.contains(child));
@@ -136,7 +136,7 @@ public class TokenTest {
 
 	@Test
 	public void token0_defines_token1_as_forward__so_token0_goForward_returns_token1() {
-		Token token1 = new Token(1);
+		Token token1 = new TokenImpl(1);
 		tokenToTest.defineForward(token1);
 
 		assertSame(token1, tokenToTest.goForward());
@@ -145,7 +145,7 @@ public class TokenTest {
 
 	@Test
 	public void token0_defines_token1_as_forward__so_token0_canGoForward_returns_true() {
-		Token token1 = new Token(1);
+		Token token1 = new TokenImpl(1);
 		tokenToTest.defineForward(token1);
 
 		assertTrue(tokenToTest.canGoForward());
@@ -165,7 +165,7 @@ public class TokenTest {
 
 	@Test
 	public void token0_defines_token1_as_backward__so_token0_goBackward_returns_token1() {
-		Token token1 = new Token(1);
+		Token token1 = new TokenImpl(1);
 		tokenToTest.defineBackward(token1);
 
 		assertSame(token1, tokenToTest.goBackward());
@@ -174,7 +174,7 @@ public class TokenTest {
 
 	@Test
 	public void token0_defines_token1_as_backward__so_token0_hasbackward_returns_true() {
-		Token token1 = new Token(1);
+		Token token1 = new TokenImpl(1);
 		tokenToTest.defineBackward(token1);
 
 		assertTrue(tokenToTest.canGoBackward());
@@ -200,7 +200,7 @@ public class TokenTest {
 
 	@Test
 	public void token0_having_child1_as_child_returns_child1_for_getFirstChild() {
-		Token token1 = new Token(1);
+		TokenImpl token1 = new TokenImpl(1);
 		tokenToTest.addChild(token1);
 
 		assertSame(token1, tokenToTest.getFirstChild());
@@ -208,8 +208,8 @@ public class TokenTest {
 
 	@Test
 	public void token0_having_child1_and_child2_as_children_returns_child1_for_getFirstChild() {
-		Token token1 = new Token(1);
-		Token token2 = new Token(2);
+		TokenImpl token1 = new TokenImpl(1);
+		TokenImpl token2 = new TokenImpl(2);
 		tokenToTest.addChild(token1);
 		tokenToTest.addChild(token2);
 

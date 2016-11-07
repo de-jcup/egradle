@@ -1,8 +1,6 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +17,10 @@ public class TokenChainerTest {
 	@Test
 	public void root_contains_token1_and_token2__after_chain__token_chain_is_fullfilled() {
 		/* prepare */
-		Token token1 = new Token(1);
-		Token token2 = new Token(2);
+		TokenImpl token1 = new TokenImpl(1);
+		TokenImpl token2 = new TokenImpl(2);
 		
-		Token tokenRoot = new Token(0);
+		TokenImpl tokenRoot = new TokenImpl(0);
 		tokenRoot.addChild(token1);
 		tokenRoot.addChild(token2);
 		
@@ -45,18 +43,18 @@ public class TokenChainerTest {
 	@Test
 	public void root_contains_token1_and_token2__token_1_has_token3_and_token4_and_token5_as_children__after_chain__token_chain_is_fullfilled() {
 		/* prepare */
-		Token token1 = new Token(1);
-		Token token2 = new Token(2);
+		TokenImpl token1 = new TokenImpl(1);
+		TokenImpl token2 = new TokenImpl(2);
 		
-		Token token3 = new Token(3);
-		Token token4 = new Token(4);
-		Token token5 = new Token(5);
+		TokenImpl token3 = new TokenImpl(3);
+		TokenImpl token4 = new TokenImpl(4);
+		TokenImpl token5 = new TokenImpl(5);
 		
 		token1.addChild(token3);
 		token1.addChild(token4);
 		token1.addChild(token5);
 		
-		Token tokenRoot = new Token(0);
+		TokenImpl tokenRoot = new TokenImpl(0);
 		tokenRoot.addChild(token1);
 		tokenRoot.addChild(token2);
 		

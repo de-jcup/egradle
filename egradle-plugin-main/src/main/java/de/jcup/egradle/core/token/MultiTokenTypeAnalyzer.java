@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ public class MultiTokenTypeAnalyzer implements TokenTypeAnalyzer{
 	}
 	
 	@Override
-	public TokenType analyze(Token token) {
+	public TokenType analyze(Token tokenImpl) {
 		for (TokenTypeAnalyzer analyzer: list){
-			TokenType type = analyzer.analyze(token);
+			TokenType type = analyzer.analyze(tokenImpl);
 			if (type!=null){
 				return type;
 			}

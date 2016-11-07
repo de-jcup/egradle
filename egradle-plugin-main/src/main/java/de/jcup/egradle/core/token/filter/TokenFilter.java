@@ -1,4 +1,6 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.filter;
+
+import de.jcup.egradle.core.token.Token;
 
 public interface TokenFilter {
 

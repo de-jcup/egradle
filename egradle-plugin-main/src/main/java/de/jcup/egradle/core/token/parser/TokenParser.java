@@ -1,7 +1,7 @@
-package de.jcup.egradle.core.parser;
+package de.jcup.egradle.core.token.parser;
 
-import static de.jcup.egradle.core.parser.TokenType.*;
-import static de.jcup.egradle.core.parser.DebugUtil.*;
+import static de.jcup.egradle.core.token.TokenType.*;
+import static de.jcup.egradle.core.token.parser.DebugUtil.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
+import de.jcup.egradle.core.token.MultiTokenTypeAnalyzer;
+import de.jcup.egradle.core.token.TokenChainer;
+import de.jcup.egradle.core.token.TokenImpl;
+import de.jcup.egradle.core.token.TokenType;
 
 public class TokenParser {
 
@@ -29,7 +34,7 @@ public class TokenParser {
 	 */
 	private boolean traceEnabled;
 	ParseContext context;
-	private TokenState currentState = null;
+	private TokenParserState currentState = null;
 
 	private MultiTokenTypeAnalyzer tokenTypeAnalyzer = new MultiTokenTypeAnalyzer();
 	TokenChainer tokenChainer = new TokenChainer();
@@ -84,7 +89,7 @@ public class TokenParser {
 			visit(lineWithDelimiter);
 			lineNumber++;
 		}
-		switchState(TokenState.EOF_FOUND);
+		switchState(TokenParserState.EOF_FOUND);
 	}
 
 	protected void visit(String lineWithDelimiters) {
@@ -100,7 +105,7 @@ public class TokenParser {
 		context.setInNormalString(false);
 
 		if (context.isInitializationDone()) {
-			switchState(TokenState.INITIALIZING);
+			switchState(TokenParserState.INITIALIZING);
 			context.markInitializationDone();
 		}
 
@@ -110,7 +115,7 @@ public class TokenParser {
 			
 			switch (c) {
 			case '\n':
-				switchState(TokenState.NEW_LINE_START);
+				switchState(TokenParserState.NEW_LINE_START);
 				break;
 			case '\r':
 				if (context.hasNextChar()) {
@@ -119,7 +124,7 @@ public class TokenParser {
 						context.incPosAndOffset(); // two chars 
 					} 
 				}
-				switchState(TokenState.NEW_LINE_START);
+				switchState(TokenParserState.NEW_LINE_START);
 				break;
 			/* ------------ BRACES ---------------- */
 			case '{':
@@ -133,7 +138,7 @@ public class TokenParser {
 					appendPosCharacterForNextClosing();
 					break;
 				}
-				switchState(TokenState.CURLY_BRACKET_START_FOUND);
+				switchState(TokenParserState.CURLY_BRACKET_START_FOUND);
 				break;
 			case '}':
 				if (context.isInComment()) {
@@ -146,7 +151,7 @@ public class TokenParser {
 					appendPosCharacterForNextClosing();
 					break;
 				}
-				switchState(TokenState.CURLY_BRACKET_END_FOUND);
+				switchState(TokenParserState.CURLY_BRACKET_END_FOUND);
 				break;
 			case '(':
 				if (context.isInComment()) {
@@ -159,7 +164,7 @@ public class TokenParser {
 					appendPosCharacterForNextClosing();
 					break;
 				}
-				switchState(TokenState.NORMAL_BRACKET_START_FOUND);
+				switchState(TokenParserState.NORMAL_BRACKET_START_FOUND);
 				break;
 			case ')':
 				if (context.isInComment()) {
@@ -172,7 +177,7 @@ public class TokenParser {
 					appendPosCharacterForNextClosing();
 					break;
 				}
-				switchState(TokenState.NORMAL_BRACKET_END_FOUND);
+				switchState(TokenParserState.NORMAL_BRACKET_END_FOUND);
 				break;
 			/* ------------ COMMENTS ---------------- */
 			case '/':
@@ -184,10 +189,10 @@ public class TokenParser {
 					char nc = context.getNextChar();
 					if (nc == '*') {
 						// context.goNextChar();
-						switchState(TokenState.MULTILINE_COMMENT_START_FOUND);
+						switchState(TokenParserState.MULTILINE_COMMENT_START_FOUND);
 					} else if (nc == '/') {
 						// context.goNextChar();
-						switchState(TokenState.SINGLE_LINE_COMMENT_START_FOUND);
+						switchState(TokenParserState.SINGLE_LINE_COMMENT_START_FOUND);
 					}
 				}
 				break;
@@ -200,7 +205,7 @@ public class TokenParser {
 						char nc = context.getNextChar();
 						if (nc == '/') {
 							// context.goNextChar();
-							switchState(TokenState.MULTILINE_COMMENT_END_FOUND);
+							switchState(TokenParserState.MULTILINE_COMMENT_END_FOUND);
 						}
 					}
 				}
@@ -216,9 +221,9 @@ public class TokenParser {
 					break;
 				}
 				if (context.isInNormalString()) {
-					switchState(TokenState.SINGLE_QUOTE_END);
+					switchState(TokenParserState.SINGLE_QUOTE_END);
 				} else {
-					switchState(TokenState.SINGLE_QUOTE_START);
+					switchState(TokenParserState.SINGLE_QUOTE_START);
 				}
 				break;
 			case '\"':
@@ -231,9 +236,9 @@ public class TokenParser {
 					break;
 				}
 				if (context.isInGString()) {
-					switchState(TokenState.DOUBLE_QUOTE_END);
+					switchState(TokenParserState.DOUBLE_QUOTE_END);
 				} else {
-					switchState(TokenState.DOUBLE_QUOTE_START);
+					switchState(TokenParserState.DOUBLE_QUOTE_START);
 				}
 				break;
 			default:
@@ -248,9 +253,9 @@ public class TokenParser {
 					break;
 				}
 				if (Character.isWhitespace(c)) {
-					switchState(TokenState.WHITESPACE_FOUND);
+					switchState(TokenParserState.WHITESPACE_FOUND);
 				} else {
-					switchState(TokenState.NORMAL_CHARACTER_READING);
+					switchState(TokenParserState.NORMAL_CHARACTER_READING);
 				}
 			}
 			
@@ -259,7 +264,7 @@ public class TokenParser {
 		}
 	}
 
-	void switchState(TokenState newState) {
+	void switchState(TokenParserState newState) {
 		if (traceEnabled) {
 			trace("switch state from " + currentState + " to " + newState);
 		}
@@ -269,7 +274,7 @@ public class TokenParser {
 		 * strings etc.)
 		 */
 		if (context.isInMultiLineComment()){
-			if (newState==TokenState.MULTILINE_COMMENT_END_FOUND){
+			if (newState==TokenParserState.MULTILINE_COMMENT_END_FOUND){
 				appendNeeded = handleNewState(newState, appendNeeded);
 			}else{
 				if (traceEnabled){
@@ -285,7 +290,7 @@ public class TokenParser {
 		}
 	}
 
-	private boolean handleNewState(TokenState newState, boolean appendNeeded) {
+	private boolean handleNewState(TokenParserState newState, boolean appendNeeded) {
 		switch (newState) {
 		case INITIALIZING:
 			closeActiveTokenAndCreateNewOne(null);
@@ -351,7 +356,7 @@ public class TokenParser {
 			appendNeeded=false;
 			closeActiveToken();
 			context.setInMultiLineComment(false);
-			Token lastToken = context.getLastToken();
+			TokenImpl lastToken = context.getLastToken();
 			/* special handling for length to provide multi line length...*/
 			lastToken.setLength(context.getOffset()-lastToken.getOffset()+1);
 			
@@ -381,7 +386,7 @@ public class TokenParser {
 	}
 
 	private boolean handleBracketEndFound(boolean appendNeeded, TokenType type) {
-		if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+		if (currentState == TokenParserState.MULTILINE_COMMENT_START_FOUND) {
 			/* ignore it'S inside a comment */
 			return appendNeeded;
 		}
@@ -399,11 +404,11 @@ public class TokenParser {
 	}
 
 	private boolean handleBracketStartFound(boolean appendNeeded, TokenType bracketType) {
-		if (currentState == TokenState.MULTILINE_COMMENT_START_FOUND) {
+		if (currentState == TokenParserState.MULTILINE_COMMENT_START_FOUND) {
 			/* ignore it'S inside a comment */
 			return appendNeeded;
 		}
-		Token formerActiveParent = context.getActiveParent();
+		TokenImpl formerActiveParent = context.getActiveParent();
 		closeActiveTokenAndCreateNewOne(bracketType);
 
 		if (traceEnabled) {
@@ -427,15 +432,15 @@ public class TokenParser {
 		
 	}
 
-	private void changeActiveParent(Token token) {
+	private void changeActiveParent(TokenImpl tokenImpl) {
 		if (traceEnabled) {
-			trace("CHANGE PARENT from " + context.getActiveParent() + " to last token:" + createTokenString(token));
+			trace("CHANGE PARENT from " + context.getActiveParent() + " to last token:" + createTokenString(tokenImpl));
 		}
-		context.setActiveParent(token);
+		context.setActiveParent(tokenImpl);
 	}
 
-	private String createTokenString(Token token) {
-		return context.createTokenString(token);
+	private String createTokenString(TokenImpl tokenImpl) {
+		return context.createTokenString(tokenImpl);
 	}
 
 	private void ensureActiveToken() {
@@ -453,7 +458,7 @@ public class TokenParser {
 	}
 
 	private boolean _closeActiveToken(boolean autoSetParent) {
-		Token closingToken = context.getActiveToken();
+		TokenImpl closingToken = context.getActiveToken();
 		if (closingToken == null) {
 			return true;
 		}
@@ -607,22 +612,22 @@ public class TokenParser {
 		if (traceEnabled) {
 			trace(context.toString());
 		}
-		Token token = null;
+		TokenImpl tokenImpl = null;
 		if (newTokenNecessary) {
-			token = new Token(context.createNewTokenId());
+			tokenImpl = new TokenImpl(context.createNewTokenId());
 			if (traceEnabled) {
 				trace("CREATED " + createTokenString(context.getActiveToken()));
 			}
-			context.setActiveToken(token);
+			context.setActiveToken(tokenImpl);
 		} else {
-			token = context.getActiveToken();
+			tokenImpl = context.getActiveToken();
 			if (traceEnabled) {
 				trace("REUSE " + createTokenString(context.getActiveToken()));
 			}
 		}
-		token.setType(type);
-		token.setOffset(context.getOffset());
-		token.setLineNumber(context.getLineNumber());
+		tokenImpl.setType(type);
+		tokenImpl.setOffset(context.getOffset());
+		tokenImpl.setLineNumber(context.getLineNumber());
 
 		return newTokenNecessary;
 	}
