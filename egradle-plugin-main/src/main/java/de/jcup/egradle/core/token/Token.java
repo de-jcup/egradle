@@ -74,5 +74,6 @@ public interface Token {
 	 * @return first child - or throws {@link IllegalStateException} when no child available
 	 */
 	Token getFirstChild();
+	
 
 }

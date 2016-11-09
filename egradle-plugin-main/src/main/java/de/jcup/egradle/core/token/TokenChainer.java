@@ -23,6 +23,7 @@ public class TokenChainer {
 			inspectAll(token.getChildren());
 		}
 	}
+	
 
 	private void inspectAll(List<Token> children) {
 		TokenImpl tokenImplBefore=null;

@@ -8,6 +8,7 @@ import de.jcup.egradle.core.token.filter.TokenFilter;
 
 public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 
+
 	private Token rootToken;
 	private TokenFilter filter;
 

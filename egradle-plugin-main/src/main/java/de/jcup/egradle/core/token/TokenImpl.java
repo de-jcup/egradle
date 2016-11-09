@@ -22,6 +22,7 @@ public class TokenImpl implements Token {
 	private Token backward;
 	private int length=-1;
 
+
 	/**
 	 * Creates token with given id. The id should be unique inside tokens context!!!
 	 * @param id identifier, should be unique in tokens context!

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -36,6 +38,7 @@ public class TokenParserTest {
 	}
 	
 	@Test
+	@Ignore // - test AST of groovy.jar before continue implementing
 	public void test__def_variable_equal_1__is_divided_in_4_tokens() throws IOException{
 		String text = "def variable=1";
 		/* prepare */

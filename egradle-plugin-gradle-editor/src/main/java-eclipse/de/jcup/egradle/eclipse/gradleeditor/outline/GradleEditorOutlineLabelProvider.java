@@ -43,6 +43,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 		}
 	}
 
+
 	private String getItemText(Item item) {
 		StringBuilder sb = new StringBuilder();
 		Token token = item.getToken();
