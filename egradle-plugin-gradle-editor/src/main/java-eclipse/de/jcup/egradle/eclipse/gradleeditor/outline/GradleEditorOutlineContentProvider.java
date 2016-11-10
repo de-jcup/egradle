@@ -1,7 +1,6 @@
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
@@ -11,10 +10,10 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
-import de.jcup.egradle.core.model.DefaultTokenOutlineModelBuilder;
-import de.jcup.egradle.core.model.GroovyASTOutlineModelBuilder;
-import de.jcup.egradle.core.model.OutlineModel;
-import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.outline.OutlineItem;
+import de.jcup.egradle.core.outline.OutlineModel;
+import de.jcup.egradle.core.outline.groovyantlr.GroovyASTOutlineModelBuilder;
+import de.jcup.egradle.core.outline.token.DefaultTokenOutlineModelBuilder;
 import de.jcup.egradle.core.token.filter.ClosingBracesFilter;
 import de.jcup.egradle.core.token.filter.CommentFilter;
 import de.jcup.egradle.core.token.filter.MultiTokenFilter;
@@ -76,19 +75,19 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 					elements = buildGroovyASTModel(charset,is);
 				}
 				return elements;
-			} catch (IOException e) {
+			} catch (Exception e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
 			}
 		}
 		return new Object[] { "no content" };
 	}
 
-	private Object[] buildGroovyASTModel(String charset, InputStream is) throws IOException {
+	private Object[] buildGroovyASTModel(String charset, InputStream is) throws Exception {
 		GroovyASTOutlineModelBuilder builder = new GroovyASTOutlineModelBuilder(is);
 		return builder.build().getRoot().getChildren();
 	}
 	
-	private Object[] buildTokenModel(String charset, InputStream is) throws IOException {
+	private Object[] buildTokenModel(String charset, InputStream is) throws Exception {
 		TokenParserResult ast = parser.parse(is, charset);
 		
 		DefaultTokenOutlineModelBuilder builder = new DefaultTokenOutlineModelBuilder(ast.getRoot(), filter);
@@ -100,32 +99,32 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof Item) {
-			Item item = (Item) parentElement;
-			return item.getChildren();
+		if (parentElement instanceof OutlineItem) {
+			OutlineItem outlineItem = (OutlineItem) parentElement;
+			return outlineItem.getChildren();
 		}
 		return EMPTY;
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if (element instanceof Item) {
-			Item item = (Item) element;
-			return item.getParent();
+		if (element instanceof OutlineItem) {
+			OutlineItem outlineItem = (OutlineItem) element;
+			return outlineItem.getParent();
 		}
 		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof Item) {
-			Item item = (Item) element;
-			return item.hasChildren();
+		if (element instanceof OutlineItem) {
+			OutlineItem outlineItem = (OutlineItem) element;
+			return outlineItem.hasChildren();
 		}
 		return false;
 	}
 	
-	public Item tryToFindByOffset(int offset){
+	public OutlineItem tryToFindByOffset(int offset){
 		synchronized (monitor) {
 			return model.getItemAt(offset);
 		}

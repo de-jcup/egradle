@@ -1,7 +1,11 @@
-package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.outline.token;
 
 import java.util.List;
 
+import de.jcup.egradle.core.outline.OutlineItem;
+import de.jcup.egradle.core.outline.OutlineModel;
+import de.jcup.egradle.core.outline.OutlineModelBuilder;
+import de.jcup.egradle.core.outline.OutlineModelImpl;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.filter.TokenFilter;
 
@@ -29,27 +33,38 @@ public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 	
 	
 	@Override
-	public OutlineModel build() {
-		TokenOutlineModel model = new TokenOutlineModel();
+	public OutlineModel build() throws OutlineModelBuilderException{
+		OutlineModelImpl model = new OutlineModelImpl();
 		
-		Item parentItem = model.getRoot();
+		OutlineItem parentItem = model.getRoot();
 		List<Token> children = rootToken.getChildren();
 		for (Token childToken: children){
 			build(model, parentItem, childToken);
 		}
 		return model;
 	}
+	
+	public OutlineItem createItem(Token tokenForOffset){
+		if (tokenForOffset==null){
+			throw new IllegalArgumentException("tokenImpl may not be null!");
+		}
+		OutlineItem outlineItem = new OutlineItem();
+		outlineItem.setOffset(tokenForOffset.getOffset());
+		outlineItem.setLength(tokenForOffset.getLength());
+		outlineItem.setName(tokenForOffset.getValue());
+		return outlineItem;
+	}
 
 
-	private void build(TokenOutlineModel model, Item parentItem, Token tokenImpl) {
+	private void build(OutlineModelImpl model, OutlineItem parentItem, Token tokenImpl) {
 		if (filter.isFiltered(tokenImpl)){
 			return;
 		}
-		Item item = model.createItem(tokenImpl);
-		parentItem.add(item);
+		OutlineItem outlineItem = createItem(tokenImpl);
+		parentItem.add(outlineItem);
 		if (tokenImpl.hasChildren()){
 			for (Token childToken: tokenImpl.getChildren()){
-				build(model, item, childToken);
+				build(model, outlineItem, childToken);
 			}
 		}
 	}

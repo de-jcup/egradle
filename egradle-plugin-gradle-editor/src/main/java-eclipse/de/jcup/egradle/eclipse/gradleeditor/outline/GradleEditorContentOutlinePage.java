@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -21,12 +20,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.CollapseAllHandler;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
-import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.token.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -107,6 +104,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		public void run() {
 			linkingWithEditorEnabled=!linkingWithEditorEnabled;
 			// FIXME ATR, 10.11.2016: change preference...
+			/* TODO ATR, 10.11.2016: what about updating - when now linked the outline view selection should be updated...*/
 			initText();
 			initImage();
 		}
@@ -132,10 +130,10 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof Item) {
-				Item item = (Item) firstElement;
-				int offset = item.getOffset();
-				int length = item.getLength();
+			if (firstElement instanceof OutlineItem) {
+				OutlineItem outlineItem = (OutlineItem) firstElement;
+				int offset = outlineItem.getOffset();
+				int length = outlineItem.getLength();
 				// /* FIXME ATR, 6.11.2016: remove the print when works...*/
 				// gElement.print();
 				gradleEditor.selectAndReveal(offset, length);
@@ -147,11 +145,11 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		if (! linkingWithEditorEnabled){
 			return;
 		}
-		Item item = contentProvider.tryToFindByOffset(caretOffset);
-		if (item != null) {
+		OutlineItem outlineItem = contentProvider.tryToFindByOffset(caretOffset);
+		if (outlineItem != null) {
 			ignoreNextSelectionEvents=true;
-			getTreeViewer().expandToLevel(item, AbstractTreeViewer.ALL_LEVELS);
-			getTreeViewer().setSelection(new StructuredSelection(item));
+			getTreeViewer().expandToLevel(outlineItem, AbstractTreeViewer.ALL_LEVELS);
+			getTreeViewer().setSelection(new StructuredSelection(outlineItem));
 			ignoreNextSelectionEvents=false;
 		}
 	}

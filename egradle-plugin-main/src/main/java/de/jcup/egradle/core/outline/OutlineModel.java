@@ -1,5 +1,10 @@
-package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.outline;
 
+/**
+ * A model for outline views.
+ * @author Albert Tregnaghi
+ *
+ */
 public interface OutlineModel {
 
 	/**
@@ -10,13 +15,13 @@ public interface OutlineModel {
 	 * @param offset
 	 * @return item or <code>null</code>
 	 */
-	Item getItemAt(int offset);
+	OutlineItem getItemAt(int offset);
 
 	/**
 	 * Returns the root item
 	 * 
 	 * @return root item, never <code>null</code>
 	 */
-	Item getRoot();
+	OutlineItem getRoot();
 
 }

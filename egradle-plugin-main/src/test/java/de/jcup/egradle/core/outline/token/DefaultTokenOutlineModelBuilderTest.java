@@ -1,4 +1,4 @@
-package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.outline.token;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -11,6 +11,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.jcup.egradle.core.outline.OutlineItem;
+import de.jcup.egradle.core.outline.OutlineModel;
+import de.jcup.egradle.core.outline.token.DefaultTokenOutlineModelBuilder;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.TokenImpl;
 import de.jcup.egradle.core.token.filter.TokenFilter;
@@ -48,7 +51,7 @@ public class DefaultTokenOutlineModelBuilderTest {
 	}
 	
 	@Test
-	public void builder_called_with_token_1_item_having_no_children_returns_not_null_as_model() {
+	public void builder_called_with_token_1_item_having_no_children_returns_not_null_as_model() throws Exception {
 		assertNotNull(builderToTest.build());
 	}
 	
@@ -61,9 +64,10 @@ public class DefaultTokenOutlineModelBuilderTest {
 	 * 			  |__token4
 	 * 
 	 * </pre>
+	 * @throws Exception 
 	 */
 	@Test
-	public void builder_token_1_has_offsets_of_token2_and_token3__token3_with_child_token4_as_child_filter_ignores_token3_so_only_token1_and_token4_are_added() {
+	public void builder_token_1_has_offsets_of_token2_and_token3__token3_with_child_token4_as_child_filter_ignores_token3_so_only_token1_and_token4_are_added() throws Exception{
 		/* prepare */
 		TokenImpl mockedToken1 = mock(TokenImpl.class);
 		when(mockedToken1.getOffset()).thenReturn(11);
@@ -93,18 +97,18 @@ public class DefaultTokenOutlineModelBuilderTest {
 		OutlineModel model = builderToTest.build();
 		
 		/* test */
-		Item root = model.getRoot();
-		Item[] childrenUnmodifable = root.getChildren();
+		OutlineItem root = model.getRoot();
+		OutlineItem[] childrenUnmodifable = root.getChildren();
 		assertEquals(2, childrenUnmodifable.length);
 		
-		Item x1 = childrenUnmodifable[0];
-		Item x2 = childrenUnmodifable[1];
+		OutlineItem x1 = childrenUnmodifable[0];
+		OutlineItem x2 = childrenUnmodifable[1];
 		
 		assertEquals(mockedToken1.getOffset(),x1.getOffset());
 		assertEquals(mockedToken3.getOffset(),x2.getOffset());
 		assertTrue(x2.hasChildren());
 		
-		Item[] x2Children = x2.getChildren();
+		OutlineItem[] x2Children = x2.getChildren();
 		assertEquals(1,x2Children.length);
 		assertEquals(mockedToken4.getOffset(),x2Children[0].getOffset());
 	}

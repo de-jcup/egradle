@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.token.Token;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implements ILabelProvider {
@@ -30,9 +30,19 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 		if (element == null) {
 			return "null";
 		}
-		if (element instanceof Item) {
-			Item item = (Item) element;
-			return item.getText();
+		if (element instanceof OutlineItem) {
+			OutlineItem outlineItem = (OutlineItem) element;
+			String text = outlineItem.getName();
+			String info = outlineItem.getInfo();
+			if (info==null){
+				return text;
+			}
+			StringBuilder sb= new StringBuilder();
+			sb.append(text);
+			sb.append('[');
+			sb.append(info);
+			sb.append(']');
+			return sb.toString();
 		} else {
 			if (element instanceof Token) {
 				Token gelement = (Token) element;
