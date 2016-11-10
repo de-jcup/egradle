@@ -4,6 +4,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
@@ -14,11 +18,15 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchCommandConstants;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.CollapseAllHandler;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
-import de.jcup.egradle.core.model.OutlineModel.Item;
-import de.jcup.egradle.core.token.TokenImpl;
+import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.token.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -30,6 +38,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 	private GradleEditorOutlineLabelProvider labelProvider;
 	private DelayedDocumentListener documentListener;
 	private boolean ignoreNextSelectionEvents;
+	private ToggleLinkingAction toggleLinkingAction;
 
 	public GradleEditorContentOutlinePage(GradleEditor gradleEditor) {
 		this.gradleEditor = gradleEditor;
@@ -49,6 +58,25 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 		IDocument document = setTreeViewerDocument();
 		document.addDocumentListener(documentListener);
+		
+		
+		IActionBars actionBars= getSite().getActionBars();
+		registerActionBars(actionBars);
+		
+//		IToolBarManager toolBarManager= actionBars.getToolBarManager();
+
+		IMenuManager viewMenuManager= actionBars.getMenuManager();
+		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
+
+		toggleLinkingAction= new ToggleLinkingAction();
+		toggleLinkingAction.setActionDefinitionId(IWorkbenchCommandConstants.NAVIGATE_TOGGLE_LINK_WITH_EDITOR);
+		viewMenuManager.add(toggleLinkingAction);
+
+	}
+
+	private void registerActionBars(IActionBars actionBars) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private IDocument setTreeViewerDocument() {
@@ -58,10 +86,44 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		getTreeViewer().setInput(document);
 		return document;
 	}
+	private boolean linkingWithEditorEnabled;
 
+	public class ToggleLinkingAction extends Action {
+
+		
+		public ToggleLinkingAction() {
+			linkingWithEditorEnabled = false;// FIXME ATR, 10.11.2016: use preference...
+			setDescription("link with editor");
+			initImage();
+			initText();
+		}
+
+		private void initImage() {
+			setImageDescriptor(EGradleUtil.createSharedImageDescriptor(linkingWithEditorEnabled ? ISharedImages.IMG_ELCL_SYNCED : ISharedImages.IMG_ELCL_SYNCED_DISABLED));
+			
+		}
+
+		@Override
+		public void run() {
+			linkingWithEditorEnabled=!linkingWithEditorEnabled;
+			// FIXME ATR, 10.11.2016: change preference...
+			initText();
+			initImage();
+		}
+		
+		private void initText(){
+			setText(linkingWithEditorEnabled ? "Unlink" : "Link");
+		}
+
+	}
+
+	
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		super.selectionChanged(event);
+		if (!linkingWithEditorEnabled){
+			return;
+		}
 		
 		if (ignoreNextSelectionEvents){
 			return;
@@ -72,9 +134,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 			Object firstElement = ss.getFirstElement();
 			if (firstElement instanceof Item) {
 				Item item = (Item) firstElement;
-				TokenImpl gElement = (TokenImpl) item.getToken();
-				int offset = gElement.getOffset();
-				int length = gElement.getLength();
+				int offset = item.getOffset();
+				int length = item.getLength();
 				// /* FIXME ATR, 6.11.2016: remove the print when works...*/
 				// gElement.print();
 				gradleEditor.selectAndReveal(offset, length);
@@ -83,6 +144,9 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 	}
 
 	public void onEditorCaretMoved(int caretOffset) {
+		if (! linkingWithEditorEnabled){
+			return;
+		}
 		Item item = contentProvider.tryToFindByOffset(caretOffset);
 		if (item != null) {
 			ignoreNextSelectionEvents=true;

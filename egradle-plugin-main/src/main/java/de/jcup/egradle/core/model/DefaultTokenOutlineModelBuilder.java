@@ -2,7 +2,6 @@ package de.jcup.egradle.core.model;
 
 import java.util.List;
 
-import de.jcup.egradle.core.model.OutlineModel.Item;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.filter.TokenFilter;
 
@@ -31,7 +30,7 @@ public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 	
 	@Override
 	public OutlineModel build() {
-		OutlineModel model = new OutlineModel();
+		TokenOutlineModel model = new TokenOutlineModel();
 		
 		Item parentItem = model.getRoot();
 		List<Token> children = rootToken.getChildren();
@@ -42,7 +41,7 @@ public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 
-	private void build(OutlineModel model, Item parentItem, Token tokenImpl) {
+	private void build(TokenOutlineModel model, Item parentItem, Token tokenImpl) {
 		if (filter.isFiltered(tokenImpl)){
 			return;
 		}

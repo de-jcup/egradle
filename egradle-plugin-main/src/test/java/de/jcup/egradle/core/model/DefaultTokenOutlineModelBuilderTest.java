@@ -11,7 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.model.OutlineModel.Item;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.TokenImpl;
 import de.jcup.egradle.core.token.filter.TokenFilter;
@@ -64,7 +63,7 @@ public class DefaultTokenOutlineModelBuilderTest {
 	 * </pre>
 	 */
 	@Test
-	public void builder_token_1_has_token2_and_token3__token3_with_child_token4_as_child_filter_ignores_token3_so_only_token1_and_token4_are_added() {
+	public void builder_token_1_has_offsets_of_token2_and_token3__token3_with_child_token4_as_child_filter_ignores_token3_so_only_token1_and_token4_are_added() {
 		/* prepare */
 		TokenImpl mockedToken1 = mock(TokenImpl.class);
 		when(mockedToken1.getOffset()).thenReturn(11);
@@ -101,13 +100,13 @@ public class DefaultTokenOutlineModelBuilderTest {
 		Item x1 = childrenUnmodifable[0];
 		Item x2 = childrenUnmodifable[1];
 		
-		assertEquals(mockedToken1,x1.getToken());
-		assertEquals(mockedToken3,x2.getToken());
+		assertEquals(mockedToken1.getOffset(),x1.getOffset());
+		assertEquals(mockedToken3.getOffset(),x2.getOffset());
 		assertTrue(x2.hasChildren());
 		
 		Item[] x2Children = x2.getChildren();
 		assertEquals(1,x2Children.length);
-		assertEquals(mockedToken4,x2Children[0].getToken());
+		assertEquals(mockedToken4.getOffset(),x2Children[0].getOffset());
 	}
 	
 	

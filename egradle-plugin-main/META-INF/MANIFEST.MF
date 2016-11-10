@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
- lib/commons-lang3-3.4.jar
+ lib/commons-lang3-3.4.jar,
+ lib/groovy-all-2.4.7.jar
 Export-Package: de.jcup.egradle.core.api,
  de.jcup.egradle.core.domain,
  de.jcup.egradle.core.model,

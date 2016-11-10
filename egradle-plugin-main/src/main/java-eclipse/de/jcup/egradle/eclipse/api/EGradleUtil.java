@@ -664,4 +664,8 @@ public class EGradleUtil {
 		return FileHelper.DEFAULT;
 	}
 
+	public static ImageDescriptor createSharedImageDescriptor(String id) {
+		return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(id);
+	}
+
 }

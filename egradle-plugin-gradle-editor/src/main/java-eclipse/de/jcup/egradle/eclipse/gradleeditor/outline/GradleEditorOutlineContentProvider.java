@@ -12,8 +12,9 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
 import de.jcup.egradle.core.model.DefaultTokenOutlineModelBuilder;
+import de.jcup.egradle.core.model.GroovyASTOutlineModelBuilder;
 import de.jcup.egradle.core.model.OutlineModel;
-import de.jcup.egradle.core.model.OutlineModel.Item;
+import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.token.filter.ClosingBracesFilter;
 import de.jcup.egradle.core.token.filter.CommentFilter;
 import de.jcup.egradle.core.token.filter.MultiTokenFilter;
@@ -68,18 +69,33 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			}
 			
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
-				TokenParserResult ast = parser.parse(is, charset);
-				
-				DefaultTokenOutlineModelBuilder builder = new DefaultTokenOutlineModelBuilder(ast.getRoot(), filter);
-				synchronized(monitor){
-					model = builder.build();
+				Object[] elements = null;
+				if (System.getProperty("egradle.use.tokenmodel")!=null){
+					elements = buildTokenModel(charset, is);
+				}else{
+					elements = buildGroovyASTModel(charset,is);
 				}
-				return model.getRoot().getChildren();
+				return elements;
 			} catch (IOException e) {
 				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
 			}
 		}
 		return new Object[] { "no content" };
+	}
+
+	private Object[] buildGroovyASTModel(String charset, InputStream is) throws IOException {
+		GroovyASTOutlineModelBuilder builder = new GroovyASTOutlineModelBuilder(is);
+		return builder.build().getRoot().getChildren();
+	}
+	
+	private Object[] buildTokenModel(String charset, InputStream is) throws IOException {
+		TokenParserResult ast = parser.parse(is, charset);
+		
+		DefaultTokenOutlineModelBuilder builder = new DefaultTokenOutlineModelBuilder(ast.getRoot(), filter);
+		synchronized(monitor){
+			model = builder.build();
+		}
+		return model.getRoot().getChildren();
 	}
 
 	@Override

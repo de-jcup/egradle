@@ -8,20 +8,19 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.model.OutlineModel.Item;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.TokenImpl;
 
 public class OutlineModelTest {
 
-	private OutlineModel modelToTest;
+	private TokenOutlineModel modelToTest;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before
 	public void before() {
-		modelToTest = new OutlineModel();
+		modelToTest = new TokenOutlineModel();
 	}
 
 	@Test
@@ -127,7 +126,8 @@ public class OutlineModelTest {
 
 	}
 	
-	public void token_added_to_item_is_returned_from_item(){
+	@Test
+	public void tokens_offset_and_length__used_for_create_item_is_inside_item(){
 		Token mockedToken = mock(TokenImpl.class);
 		when(mockedToken.getOffset()).thenReturn(10);
 		when(mockedToken.getLength()).thenReturn(2);
@@ -136,8 +136,8 @@ public class OutlineModelTest {
 		Item item = modelToTest.createItem(mockedToken);
 		
 		/* execute */
-		Token tokenImpl = item.getToken();
-		assertEquals(mockedToken,tokenImpl);
+		assertEquals(mockedToken.getOffset(),item.getOffset());
+		assertEquals(mockedToken.getLength(),item.getLength());
 	}
 
 	@Test
