@@ -4,11 +4,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.codehaus.groovy.antlr.GroovySourceAST;
-import org.codehaus.groovy.antlr.SourceBuffer;
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
-import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineModel;
@@ -25,6 +23,10 @@ import groovyjarjarantlr.collections.AST;
  *
  */
 public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
+	
+	private static final GroovyTokenTypeDebugInfoInspector INSPECTOR = new GroovyTokenTypeDebugInfoInspector();
+
+	
 	private InputStream is;
 
 	public GroovyASTOutlineModelBuilder(InputStream is) {
@@ -89,8 +91,10 @@ public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
 		outlineItem.setOffset( sourceBuffer.getOffset(ast.getLine(), ast.getColumn()));
 		outlineItem.setName(ast.toString());
 		int type = ast.getType();
-		outlineItem.setInfo("type:" + type +", line:"+ast.getLine()+", column:"+ast.getColumn()+", offset="+outlineItem.getOffset());
+		String typeStr = INSPECTOR.getGroovyTokenTypeName(type);
+		outlineItem.setInfo("type:" + type +"="+typeStr+", line:"+ast.getLine()+", column:"+ast.getColumn()+", offset="+outlineItem.getOffset());
 		return outlineItem;
 	}
+	
 
 }
