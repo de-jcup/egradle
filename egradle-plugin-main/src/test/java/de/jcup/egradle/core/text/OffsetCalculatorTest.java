@@ -34,7 +34,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(0,offset);
+		assertEquals(-1,offset);
 		
 	}
 
@@ -92,7 +92,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(6,offset); // 6 because \n is a character and has offset...
+		assertEquals(5,offset); // 6 because \n is a character and has offset... but offset starts at 0 and not on 1 like column
 		
 	}
 	
@@ -114,7 +114,7 @@ public class OffsetCalculatorTest {
 	 * Unix new line variant with \n - line feed
 	 */
 	@Test
-	public void newline_unix__for_text_12345_lf_6__line_2_column_1_returns_7() {
+	public void newline_unix__for_text_12345_lf_6__line_2_column_1_returns_6() {
 		/* prepare */
 		String[] lines = new String[]{"12345\n","6"};
 
@@ -123,14 +123,14 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(7,offset);
+		assertEquals(6,offset);
 		
 	}
 	/**
 	 * Mac OS new line variant with \r - carriage return
 	 */
 	@Test
-	public void newline_mac__for_text_12345_cr_6__line_2_column_1_returns_7() {
+	public void newline_mac__for_text_12345_cr_6__line_2_column_1_returns_6() {
 		/* prepare */
 		String[] lines = new String[]{"12345\r","6"};
 
@@ -139,7 +139,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(7,offset);
+		assertEquals(6,offset);
 		
 	}
 	
@@ -147,7 +147,7 @@ public class OffsetCalculatorTest {
 	 * Windows new line variant with \r\n - carraige return + line feed
 	 */
 	@Test
-	public void newline_windows__for_text_12345_cr_lf_6_line_2_column_1_returns_8() {
+	public void newline_windows__for_text_12345_cr_lf_6_line_2_column_1_returns_7() {
 		/* prepare */
 		String[] lines = new String[]{"12345\r\n","6"};
 
@@ -156,7 +156,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(8,offset);
+		assertEquals(7,offset);
 		
 	}
 
@@ -164,7 +164,7 @@ public class OffsetCalculatorTest {
 	 * Windows and Mac variant mixed
 	 */
 	@Test
-	public void newline_windows_and_mac_mixed__for_text_12345_cr_lf_6__lf_7_line_3_column_1_returns_10() {
+	public void newline_windows_and_mac_mixed__for_text_12345_cr_lf_6__lf_7_line_3_column_1_returns_9() {
 		/* prepare */
 		String[] lines = new String[]{"12345\r\n","6\r","7"};
 
@@ -173,7 +173,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		
-		assertEquals(10,offset);
+		assertEquals(9,offset);
 		
 	}
 	
@@ -188,7 +188,7 @@ public class OffsetCalculatorTest {
 		for (String line: lines){
 			sb.append(line);
 		}
-		int expectedOffset=sb.length();
+		int expectedOffset=sb.length()-1; // offset is not length, because 0..
 		
 		
 		/* execute */
@@ -215,7 +215,7 @@ public class OffsetCalculatorTest {
 		
 		/* test */
 		String text = "def variable1='Hello world... from groovy'\n\n\n";
-		int expectedOffsetOfVariable2 = text.length();
+		int expectedOffsetOfVariable2 = text.length()-1;
 		assertEquals(expectedOffsetOfVariable2,offset);
 		
 	}
