@@ -46,6 +46,7 @@ import org.eclipse.ui.progress.IProgressService;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegate;
@@ -203,7 +204,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		
 		gradleCallGroup = SWTFactory.createGroup(parent, "Gradle call", 1, 10, SWT.FILL);
 		if (debug) {
-			gradleCallGroup.setBackground(ColorManager.create().getColor(new RGB(0, 255, 0)));
+			gradleCallGroup.setBackground(getColorManager().getColor(new RGB(0, 255, 0)));
 		}
 		gradleCallGroup.setLayoutData(groupLayoutData);
 		/* @formatter:off */
@@ -222,7 +223,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 
 		if (debug) {
 			gradleCallTypeRadioButton.getComboBoxControl(gradleCallGroup)
-					.setBackground(ColorManager.create().getColor(new RGB(0, 0, 255)));
+					.setBackground(getColorManager().getColor(new RGB(0, 0, 255)));
 		}
 		gradleCallTypeRadioButton.setPropertyChangeListener(this);
 
@@ -251,6 +252,10 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		gradleInstallBinDirectoryFieldEditor.getTextControl(gradleCallGroup).setLayoutData(labelGridData2);
 
 		addField(gradleInstallBinDirectoryFieldEditor);
+	}
+
+	private ColorManager getColorManager() {
+		return Activator.getDefault().getColorManager();
 	}
 
 	private void createDefaults(Composite parent) {

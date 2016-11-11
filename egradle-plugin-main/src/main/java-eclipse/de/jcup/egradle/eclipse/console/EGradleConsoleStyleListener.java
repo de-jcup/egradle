@@ -30,6 +30,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.ColorManager;
 
 public class EGradleConsoleStyleListener implements LineStyleListener {
@@ -55,7 +56,6 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		SHARED_PARSE_DATA.add(data);
 	}
 
-	private ColorManager colorManger = ColorManager.create();
 	int lastRangeEnd = 0;
 
 	@Override
@@ -157,7 +157,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 	}
 
 	private Color getColor(RGB rgb) {
-		return colorManger.getColor(rgb);
+		return Activator.getDefault().getColorManager().getColor(rgb);
 	}
 
 	private static class ParseData {

@@ -24,19 +24,22 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 
 
 public class GradleEditor extends TextEditor {
 
-	private ColorManager colorManager;
 	private GradleEditorContentOutlinePage outlinePage;
 
 	public GradleEditor() {
-		colorManager = ColorManager.create();
-		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(colorManager));
+		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(getColorManager()));
 		setDocumentProvider(new GradleDocumentProvider());
+	}
+	
+	private ColorManager getColorManager() {
+		return Activator.getDefault().getColorManager();
 	}
 	
 	@Override
@@ -64,7 +67,6 @@ public class GradleEditor extends TextEditor {
 	
 	@Override
 	public void dispose() {
-		colorManager.dispose();
 		super.dispose();
 	}
 	

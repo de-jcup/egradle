@@ -80,4 +80,33 @@ public class WantedOutlineModelBuilderTest {
 		assertEquals(0, variable1Item.getOffset());
 	}
 
+	@Test
+	public void test_closure_named_test1234_contains_variable1_is_inside_tree() throws Exception {
+		/* prepare */
+		String text = "test1234{\n\ndef variable1='Hello world'\n}";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem closureItem = items[0];
+		assertEquals(OutlineItemType.CLOSURE, closureItem.getItemType());
+		assertEquals("test1234", closureItem.getName());
+		
+		
+		items = closureItem.getChildren();
+
+		assertEquals(1, items.length);
+		OutlineItem variable1Item = items[0];
+		assertEquals(OutlineItemType.VARIABLE, variable1Item.getItemType());
+		assertEquals("variable1", variable1Item.getName());
+		assertEquals(text.length(), variable1Item.getLength());
+
+	}
 }

@@ -26,43 +26,40 @@ import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.jcup.egradle.eclipse.api.ColorManager;
+
 /**
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
 	private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
 
+	private ColorManager colorManager;
+
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.main"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
-
 	/**
 	 * The constructor
 	 */
 	public Activator() {
+		colorManager=new ColorManager();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.
-	 * BundleContext)
-	 */
+	public ColorManager getColorManager() {
+		return colorManager;
+	}
+
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.
-	 * BundleContext)
-	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		colorManager.dispose();
 		super.stop(context);
 	}
 

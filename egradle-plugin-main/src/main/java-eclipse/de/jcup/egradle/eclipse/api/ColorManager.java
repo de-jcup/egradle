@@ -27,7 +27,7 @@ public class ColorManager {
 
 	protected Map<RGB, Color> fColorTable = new HashMap<>(10);
 
-	private ColorManager() {
+	public ColorManager() {
 
 	}
 
@@ -47,13 +47,4 @@ public class ColorManager {
 		return color;
 	}
 
-	/**
-	 * Creates a new color manager or returns a shared one - depends on
-	 * implementation
-	 * 
-	 * @return color manager
-	 */
-	public static ColorManager create() {
-		return new ColorManager();
-	}
 }

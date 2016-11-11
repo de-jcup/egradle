@@ -124,8 +124,8 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		}
 		switch (ast.getType()) {
 		case EXPR: // expression
-			AST next = ast.getNextSibling();
-			if (next.getType()== CLOSABLE_BLOCK){
+			AST next = ast.getFirstChild();
+			if (next.getType()== METHOD_CALL){
 				item.setItemType(OutlineItemType.CLOSURE);
 			}
 			item.setClosed(true);
@@ -192,9 +192,18 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		}
 		GroovySourceAST gast = (GroovySourceAST) current;
 		switch (current.getType()) {
+		case EXPR:
+			AST next = current.getFirstChild();
+			if (next==null){
+				return null;
+			}
+			int nextType = next.getType();
+			if (GroovyTokenTypes.METHOD_CALL==nextType){
+				return commonCreateItem(context, gast);
+			}
+			return null;
 		case VARIABLE_DEF:
-			OutlineItem item = commonCreateItem(context, gast);
-			return item;
+			return commonCreateItem(context, gast);
 		default:
 			return null;
 		}
