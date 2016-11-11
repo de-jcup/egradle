@@ -4,20 +4,20 @@ import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Set;
-import java.util.TreeSet;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.antlr.GroovySourceAST;
-import org.codehaus.groovy.antlr.SourceBuffer;
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
+import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineItemType;
 import de.jcup.egradle.core.outline.OutlineModel;
 import de.jcup.egradle.core.outline.OutlineModelBuilder;
 import de.jcup.egradle.core.outline.OutlineModelImpl;
+import de.jcup.egradle.core.outline.OutlineModifier;
 import groovyjarjarantlr.RecognitionException;
 import groovyjarjarantlr.TokenStreamException;
 import groovyjarjarantlr.collections.AST;
@@ -42,7 +42,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			return model;
 		}
 		InputStreamReader reader = new InputStreamReader(is);
-		SourceBuffer sourceBuffer = new SourceBuffer();
+		ExtendedSourceBuffer sourceBuffer = new ExtendedSourceBuffer();
 		UnicodeEscapingReader r2 = new UnicodeEscapingReader(reader, sourceBuffer);
 		GroovyLexer lexer = new GroovyLexer(r2);
 		r2.setLexer(lexer);
@@ -54,18 +54,21 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			AST first = parser.getAST();
 
 			Context context = new Context();
+			context.buffer=sourceBuffer;
+			
 			OutlineItem rootItem = model.getRoot();
 			walkThrough(context, rootItem, null, first);
 
 		} catch (RecognitionException | TokenStreamException e) {
-			throw new OutlineModelBuilderException("Cannot build outline model because AST parsing problems", e);
+			throw new OutlineModelBuilderException("Cannot build outline model because of AST parsing problems", e);
 		}
 
 		return model;
 	}
 
 	private class Context {
-		private int offset;
+		private ExtendedSourceBuffer buffer;
+		public AST astbefore;
 	}
 
 	private void walkThrough(Context context, OutlineItem parentItem, OutlineItem currentItem, AST current) {
@@ -84,10 +87,12 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		/* dive into children */
 		AST element = current.getFirstChild();
 		if (element != null) {
+			context.astbefore = current;
 			walkThrough(context, parentItem, currentItem, element);
 		}
 		AST next = current.getNextSibling();
 		if (next != null) {
+			context.astbefore = current;
 			walkThrough(context, parentItem, currentItem, next);
 		} else {
 			addToParent(context, parentItem, currentItem);
@@ -114,22 +119,61 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private void updateItem(Context context, OutlineItem item, AST ast) {
-		if (ast instanceof GroovySourceAST) {
-			GroovySourceAST gast = (GroovySourceAST) ast;
+		if (item.isClosed()){
+			return;
 		}
 		switch (ast.getType()) {
+		case EXPR: // expression
+			AST next = ast.getNextSibling();
+			if (next.getType()== CLOSABLE_BLOCK){
+				item.setItemType(OutlineItemType.CLOSURE);
+			}
+			item.setClosed(true);
+			break;
 		case VARIABLE_DEF:// variable...
+			AST modifiers=null;
+			AST type = null;
+			AST name = null;
+			
+			/* item type */
 			item.setItemType(OutlineItemType.VARIABLE);
+			/* modifiers*/
+			String modifierString =null;
+			modifiers = ast.getFirstChild();
+			if (modifiers!=null){
+				AST modifierAst = modifiers.getFirstChild();
+				if (modifierAst!=null){
+					modifierString = modifierAst.getText();
+				}
+				type = modifiers.getNextSibling();
+			}
+			OutlineModifier oModifier = OutlineModifier.DEFAULT;
+			if (StringUtils.isNotBlank(modifierString)){
+				if ("private".equals(modifierString)){
+					oModifier = OutlineModifier.PRIVATE;
+				}else if ("protected".equals(modifierString)){
+					oModifier = OutlineModifier.PROTECTED;
+				}else if ("public".equals(modifierString)){
+					oModifier = OutlineModifier.PUBLIC;
+				} 
+			}
+			item.setModifier(oModifier);
+			/* type */
+			if (type!=null){
+				AST typeDef = type.getFirstChild();
+				if (typeDef!=null){
+					String typeDefText = typeDef.getText();
+					item.setType(typeDefText);
+				}
+				name = type.getNextSibling();
+			}
+			if (name!=null){
+				item.setName(name.getText());
+			}
+			item.setClosed(true);
 			break;
-		case IDENT:// identifier
-			item.setName(ast.getText());
-			break;
-		case TYPE:
-			break;
-		case MODIFIERS:
-			return;
 		default:
-			return;
+			break;
 		}
 	}
 
@@ -147,19 +191,33 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			return null;
 		}
 		GroovySourceAST gast = (GroovySourceAST) current;
-		switch (gast.getType()) {
+		switch (current.getType()) {
 		case VARIABLE_DEF:
-			OutlineItem item = new OutlineItem();
-			int length = gast.getColumnLast()-gast.getColumn();
-			item.setOffset(context.offset);
-			context.offset+=length;
-			item.setLength(length);
+			OutlineItem item = commonCreateItem(context, gast);
 			return item;
 		default:
-			int length2 = gast.getColumnLast()-gast.getColumn();
-			System.out.println("ignoring on create:"+gast+", length="+length2);
 			return null;
 		}
+	}
+
+	private OutlineItem commonCreateItem(Context context, AST ast) {
+		OutlineItem item = new OutlineItem();
+		int column = ast.getColumn();
+		int line = ast.getLine();
+		item.setColumn(column);
+		item.setLine(line);
+		item.setOffset(context.buffer.getOffset(line,column));
+		/* FIXME ATR, 11.11: length calculation does not work this way - after offset is correct calculated in context
+		 * the length must be calculated by by line,column , last line last column!
+		 */
+		if (ast instanceof GroovySourceAST){
+			GroovySourceAST gast = (GroovySourceAST) ast;
+			int length = gast.getColumnLast()-column;
+			item.setLength(length);
+		}else{
+			item.setLength(1);
+		}
+		return item;
 	}
 
 }

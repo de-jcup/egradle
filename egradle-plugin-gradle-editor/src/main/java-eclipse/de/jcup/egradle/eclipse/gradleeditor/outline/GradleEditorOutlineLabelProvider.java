@@ -5,7 +5,11 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 import de.jcup.egradle.core.outline.OutlineItem;
+import de.jcup.egradle.core.outline.OutlineItemType;
+import de.jcup.egradle.core.outline.OutlineModifier;
 import de.jcup.egradle.core.token.Token;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
@@ -16,12 +20,36 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 
 	@Override
 	public Image getImage(Object element) {
-		// if (element instanceof Closure){
-		// Closure c = (Closure) element;
-		// if (c.getName().indexOf("task ")!=-1){
-		// return EGradleUtil.getImage("icons/gradle-og.gif");
-		// }
-		// }
+		if (element instanceof OutlineItem) {
+			OutlineItem item = (OutlineItem) element;
+			OutlineItemType type = item.getItemType();
+			switch (type) {
+			case VARIABLE:
+				OutlineModifier modifier = item.getModifier();
+				String path = null;
+				switch(modifier){
+				case PRIVATE:
+					path = "/icons/outline/private_co.png";
+					break;
+				case PROTECTED:
+					path = "/icons/outline/protected_co.png";
+					break;
+				case PUBLIC:
+					path = "/icons/outline/public_co.png";
+					break;
+				case DEFAULT:
+					path = "/icons/outline/default_co.png";
+					break;
+					default:
+						return null;
+				}
+				return EGradleUtil.getImage(path, Activator.PLUGIN_ID);
+			case CLOSURE:
+				
+			default:
+				return null;
+			}
+		}
 		return null;
 	}
 
@@ -31,14 +59,20 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 			return "null";
 		}
 		if (element instanceof OutlineItem) {
+			StringBuilder sb = new StringBuilder();
 			OutlineItem outlineItem = (OutlineItem) element;
-			String text = outlineItem.getName();
-			String info = outlineItem.getInfo();
-			if (info==null){
-				return text;
+			sb.append(outlineItem.getName());
+			
+			String type = outlineItem.getType();
+			if (type!=null){
+				sb.append(":");
+				sb.append(type);
 			}
-			StringBuilder sb= new StringBuilder();
-			sb.append(text);
+			
+			String info = outlineItem.getInfo();
+			if (info == null) {
+				return sb.toString();
+			}
 			sb.append('[');
 			sb.append(info);
 			sb.append(']');
@@ -51,6 +85,5 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider implemen
 			return element.toString();
 		}
 	}
-
 
 }

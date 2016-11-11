@@ -58,10 +58,15 @@ public class WantedOutlineModelBuilderTest {
 
 		assertEquals(OutlineItemType.VARIABLE, variable1Item.getItemType());
 		assertEquals("variable1", variable1Item.getName());
-		assertEquals(0, variable1Item.getOffset());
+		assertEquals(1,variable1Item.getColumn());
+		assertEquals(1,variable1Item.getLine());
 
 		assertEquals(OutlineItemType.VARIABLE, variable2Item.getItemType());
 		assertEquals("variable2", variable2Item.getName());
+		assertEquals(1,variable2Item.getColumn());
+		assertEquals(4,variable2Item.getLine());
+		
+		/* ----- test offset calculation --- */
 		/*
 		 * FIXME ATR, 10.11.2016: the offset calculation does not work - groovy
 		 * antlr ast does NOT count white spaces. also i am not sure about the
@@ -72,6 +77,7 @@ public class WantedOutlineModelBuilderTest {
 		 * offset by mapping with column and line...
 		 */
 		assertEquals(expectedOffsetOfVariable2, variable2Item.getOffset());
+		assertEquals(0, variable1Item.getOffset());
 	}
 
 }

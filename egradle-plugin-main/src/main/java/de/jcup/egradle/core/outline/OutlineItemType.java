@@ -5,6 +5,6 @@ public enum OutlineItemType {
 
 	VARIABLE, 
 	
-	
+	CLOSURE,
 	
 }

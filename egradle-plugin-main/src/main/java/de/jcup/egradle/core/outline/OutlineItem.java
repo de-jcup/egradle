@@ -16,7 +16,7 @@ import java.util.Map;
  *
  */
 public class OutlineItem {
-	
+
 	@Override
 	public String toString() {
 		return "OutlineItem ['" + name + "', itemType=" + itemType + " offset=" + offset + ", length=" + length + "]";
@@ -32,15 +32,39 @@ public class OutlineItem {
 
 	private String name;
 	private OutlineItemType itemType;
+	private OutlineModifier modifier;
 
 	private String info;
+
+	private int column;
+
+	private int line;
+
+	private String type;
 
 	public void setItemType(OutlineItemType type) {
 		this.itemType = type;
 	}
 
+	/**
+	 * @return modifier never <code>null</code>
+	 */
+	public OutlineModifier getModifier() {
+		if (modifier == null) {
+			modifier = OutlineModifier.DEFAULT;
+		}
+		return modifier;
+	}
+
+	public void setModifier(OutlineModifier modifier) {
+		this.modifier = modifier;
+	}
+
+	/**
+	 * @return type never <code>null</code>
+	 */
 	public OutlineItemType getItemType() {
-		if (itemType==null){
+		if (itemType == null) {
 			itemType = OutlineItemType.UNKNOWN;
 		}
 		return itemType;
@@ -110,6 +134,15 @@ public class OutlineItem {
 			print(child, out, indent + 3);
 		}
 	}
+	
+	private boolean closed;
+	
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
+	public boolean isClosed() {
+		return closed;
+	}
 
 	private static String getIndent(int indent) {
 		String indentStr = INDENT_CACHE.get(indent);
@@ -136,15 +169,42 @@ public class OutlineItem {
 	}
 
 	public boolean hasChild(OutlineItem item) {
-		if (item==null){
+		if (item == null) {
 			return false;
 		}
-		if (children==null){
+		if (children == null) {
 			return false;
 		}
 		boolean childFound = children.contains(item);
 		return childFound;
 	}
 
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	public void setLine(int line) {
+		this.line = line;
+	}
+
+	public int getLine() {
+		return line;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public boolean hasAlreadyItemTypeDefined() {
+		return ! OutlineItemType.UNKNOWN.equals(getItemType());
+	}
 
 }

@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineModel;
-import de.jcup.egradle.core.outline.groovyantlr.GroovyASTOutlineModelBuilder;
 
 public class GroovyASTOutlineModelBuilderTest {
 

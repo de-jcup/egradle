@@ -1,17 +1,11 @@
 package de.jcup.egradle.core.outline;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import de.jcup.egradle.core.outline.OutlineItem;
-import de.jcup.egradle.core.outline.OutlineModelImpl;
-import de.jcup.egradle.core.token.Token;
-import de.jcup.egradle.core.token.TokenImpl;
 
 public class OutlineModelImplTest {
 

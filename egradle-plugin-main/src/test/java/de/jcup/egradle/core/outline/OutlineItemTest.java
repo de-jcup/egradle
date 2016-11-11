@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.jcup.egradle.core.outline.OutlineItem;
-
 public class OutlineItemTest {
 
 	@Test

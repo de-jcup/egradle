@@ -227,6 +227,19 @@ public class EGradleUtil {
 		}
 		return image;
 	}
+	
+
+	/**
+	 * Get image by path from shared images, see {@link ISharedImages}
+	 * 
+	 * @param path
+	 * @return image or <code>null</code>
+	 */
+	public static Image getSharedImage(String path) {
+		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
+		Image image = sharedImages.getImage(path);
+		return image;
+	}
 
 	/**
 	 * Returns gradle root project. if no root project can be resolved an error dialog appears

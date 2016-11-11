@@ -13,7 +13,6 @@ import org.junit.rules.ExpectedException;
 
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineModel;
-import de.jcup.egradle.core.outline.token.DefaultTokenOutlineModelBuilder;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.core.token.TokenImpl;
 import de.jcup.egradle.core.token.filter.TokenFilter;

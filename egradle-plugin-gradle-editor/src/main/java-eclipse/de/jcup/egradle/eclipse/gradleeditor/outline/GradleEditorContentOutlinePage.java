@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -26,7 +27,9 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.token.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
+import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 
 public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
@@ -57,24 +60,33 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		document.addDocumentListener(documentListener);
 		
 		
-		IActionBars actionBars= getSite().getActionBars();
-		registerActionBars(actionBars);
-		
-//		IToolBarManager toolBarManager= actionBars.getToolBarManager();
-
-		IMenuManager viewMenuManager= actionBars.getMenuManager();
-		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-
+	 	TokenModelChangeAction tokenModelChangeAction = new TokenModelChangeAction();
+	 	WantedModelChangeAction wantedModelChangeAction = new WantedModelChangeAction();
+	 	GroovyFullAntlrModelChangeAction groovyFullAntlrModelChangeAction = new GroovyFullAntlrModelChangeAction();
+	 	CollapseAllAction collapseAllAction = new CollapseAllAction();
+	 	ExpandAllAction expandAllAction = new ExpandAllAction();
+	 	
 		toggleLinkingAction= new ToggleLinkingAction();
 		toggleLinkingAction.setActionDefinitionId(IWorkbenchCommandConstants.NAVIGATE_TOGGLE_LINK_WITH_EDITOR);
-		viewMenuManager.add(toggleLinkingAction);
-
-	}
-
-	private void registerActionBars(IActionBars actionBars) {
-		// TODO Auto-generated method stub
+		IActionBars actionBars= getSite().getActionBars();
 		
+		IToolBarManager toolBarManager= actionBars.getToolBarManager();
+		toolBarManager.add(expandAllAction);
+		toolBarManager.add(collapseAllAction);
+		toolBarManager.add(toggleLinkingAction);
+		
+		IMenuManager viewMenuManager= actionBars.getMenuManager();
+		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
+		viewMenuManager.add(tokenModelChangeAction);
+		viewMenuManager.add(wantedModelChangeAction);
+		viewMenuManager.add(groovyFullAntlrModelChangeAction);
+		viewMenuManager.add(groovyFullAntlrModelChangeAction);
+		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
+		viewMenuManager.add(expandAllAction);
+		viewMenuManager.add(collapseAllAction);
+		viewMenuManager.add(toggleLinkingAction);
 	}
+
 
 	private IDocument setTreeViewerDocument() {
 		DebugUtil.trace("set tree document");
@@ -84,11 +96,76 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		return document;
 	}
 	private boolean linkingWithEditorEnabled;
+	
+	private abstract class ChangeModelTypeAction extends Action {
+		
+		protected abstract ModelType changeTo();
+		
+		protected ChangeModelTypeAction(){
+			setText("Reload as:"+changeTo());
+		}
+		
+		@Override
+		public void run() {
+			contentProvider.setModelType(changeTo());
+			getTreeViewer().refresh();
+		}
+	}
+	
+	private class TokenModelChangeAction extends ChangeModelTypeAction {
 
-	public class ToggleLinkingAction extends Action {
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.TOKEN;
+		}
+		
+	}
+	
+	private class WantedModelChangeAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.WANTED;
+		}
+		
+	}
+	
+	private class GroovyFullAntlrModelChangeAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.GROOVY_FULL_ANTLR;
+		}
+		
+	}
+	private class ExpandAllAction extends Action {
+		
+		private ExpandAllAction(){
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/expandall.png", Activator.PLUGIN_ID));
+			setText("Expand all");
+		}
+		@Override
+		public void run() {
+			getTreeViewer().expandAll();
+		}
+	}
+	
+	private class CollapseAllAction extends Action {
+		
+		private CollapseAllAction(){
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/collapseall.png", Activator.PLUGIN_ID));
+			setText("Collapse all");
+		}
+		@Override
+		public void run() {
+			getTreeViewer().collapseAll();
+		}
+	}
+		
+	private class ToggleLinkingAction extends Action {
 
 		
-		public ToggleLinkingAction() {
+		private ToggleLinkingAction() {
 			linkingWithEditorEnabled = false;// FIXME ATR, 10.11.2016: use preference...
 			setDescription("link with editor");
 			initImage();
@@ -114,7 +191,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		}
 
 	}
-
 	
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -145,13 +221,13 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		if (! linkingWithEditorEnabled){
 			return;
 		}
+		ignoreNextSelectionEvents=true;
 		OutlineItem outlineItem = contentProvider.tryToFindByOffset(caretOffset);
 		if (outlineItem != null) {
-			ignoreNextSelectionEvents=true;
 			getTreeViewer().expandToLevel(outlineItem, AbstractTreeViewer.ALL_LEVELS);
 			getTreeViewer().setSelection(new StructuredSelection(outlineItem));
-			ignoreNextSelectionEvents=false;
 		}
+		ignoreNextSelectionEvents=false;
 	}
 
 	private Object monitor = new Object();

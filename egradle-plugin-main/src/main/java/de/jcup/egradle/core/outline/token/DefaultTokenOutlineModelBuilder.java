@@ -7,7 +7,12 @@ import de.jcup.egradle.core.outline.OutlineModel;
 import de.jcup.egradle.core.outline.OutlineModelBuilder;
 import de.jcup.egradle.core.outline.OutlineModelImpl;
 import de.jcup.egradle.core.token.Token;
+import de.jcup.egradle.core.token.filter.ClosingBracesFilter;
+import de.jcup.egradle.core.token.filter.CommentFilter;
+import de.jcup.egradle.core.token.filter.MultiTokenFilter;
+import de.jcup.egradle.core.token.filter.ParameterFilter;
 import de.jcup.egradle.core.token.filter.TokenFilter;
+import de.jcup.egradle.core.token.filter.UnknownTokenFilter;
 
 public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 
@@ -15,6 +20,16 @@ public class DefaultTokenOutlineModelBuilder implements OutlineModelBuilder {
 	private Token rootToken;
 	private TokenFilter filter;
 
+	public DefaultTokenOutlineModelBuilder(Token rootToken){
+		this(rootToken, new MultiTokenFilter());
+//		MultiTokenFilter multi = (MultiTokenFilter) filter;
+//		multi.add(new ParameterFilter());
+//		multi.add(new CommentFilter());
+//		multi.add(new UnknownTokenFilter());
+//		multi.add(new ClosingBracesFilter());
+		
+		
+	}
 	/**
 	 * Creates a new builder
 	 * @param rootToken - token to start from, only its children will be inside the outline model! May not be <code>null</code>

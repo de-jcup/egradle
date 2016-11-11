@@ -38,7 +38,7 @@ public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
 			return model;
 		}
 		InputStreamReader reader = new InputStreamReader(is);
-		SourceBuffer sourceBuffer = new SourceBuffer();
+		ExtendedSourceBuffer sourceBuffer = new ExtendedSourceBuffer();
 		UnicodeEscapingReader r2 = new UnicodeEscapingReader(reader, sourceBuffer);
 		GroovyLexer lexer = new GroovyLexer(r2);
 		r2.setLexer(lexer);
@@ -50,7 +50,7 @@ public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
 			AST first = parser.getAST();
 
 			OutlineItem rootItem = model.getRoot();
-			addGivenElementAndItsSiblingsToItem(model, rootItem, first);
+			addGivenElementAndItsSiblingsToItem(sourceBuffer, model, rootItem, first);
 
 		} catch (RecognitionException | TokenStreamException e) {
 			throw new OutlineModelBuilderException("Cannot build outline model because AST parsing problems", e);
@@ -59,26 +59,21 @@ public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
 		return model;
 	}
 
-	private void addGivenElementAndItsSiblingsToItem(OutlineModelImpl model, OutlineItem parentItem, AST current) {
-		OutlineItem outlineItem = null;
-		// if (current instanceof GroovySourceAST){
-		outlineItem = createItem(current);
+	private void addGivenElementAndItsSiblingsToItem(ExtendedSourceBuffer sourceBuffer, OutlineModelImpl model, OutlineItem parentItem, AST current) {
+		OutlineItem outlineItem = createItem(sourceBuffer, current);
 		parentItem.add(outlineItem);
-		// }else{
-		// item = parentItem; // keep at same line...
-		// }
 
 		AST element = current.getFirstChild();
 		if (element != null) {
-			addGivenElementAndItsSiblingsToItem(model, outlineItem, element);
+			addGivenElementAndItsSiblingsToItem(sourceBuffer, model, outlineItem, element);
 		}
 		AST next = current.getNextSibling();
 		if (next != null) {
-			addGivenElementAndItsSiblingsToItem(model, parentItem, next);
+			addGivenElementAndItsSiblingsToItem(sourceBuffer, model, parentItem, next);
 		}
 	}
 
-	private OutlineItem createItem(AST ast) {
+	private OutlineItem createItem(ExtendedSourceBuffer sourceBuffer, AST ast) {
 		if (ast == null) {
 			throw new IllegalArgumentException("ast may not be null!");
 		}
@@ -91,23 +86,10 @@ public class GroovyASTOutlineModelBuilder implements OutlineModelBuilder {
 			outlineItem.setLength(0);
 		}
 
-		outlineItem.setOffset(0); /*
-									 * FIXME ATR, 09.11.2016 : this is only to
-									 * test and still a problem !
-									 */
-		outlineItem.setName(ast.toString());// +" -
-		// children:"+ast.getNumberOfChildren());
+		outlineItem.setOffset( sourceBuffer.getOffset(ast.getLine(), ast.getColumn()));
+		outlineItem.setName(ast.toString());
 		int type = ast.getType();
-		outlineItem.setInfo("type:" + type);
-		switch (type) {
-		case GroovyTokenTypes.CLOSABLE_BLOCK:
-			break;
-		case GroovyTokenTypes.EXPR:
-		case GroovyTokenTypes.METHOD_CALL:
-			break;
-		default:
-			break;
-		}
+		outlineItem.setInfo("type:" + type +", line:"+ast.getLine()+", column:"+ast.getColumn()+", offset="+outlineItem.getOffset());
 		return outlineItem;
 	}
 
