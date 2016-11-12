@@ -18,6 +18,7 @@ import de.jcup.egradle.core.outline.OutlineModel;
 import de.jcup.egradle.core.outline.OutlineModelBuilder;
 import de.jcup.egradle.core.outline.OutlineModelImpl;
 import de.jcup.egradle.core.outline.OutlineModifier;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import groovyjarjarantlr.RecognitionException;
 import groovyjarjarantlr.TokenStreamException;
 import groovyjarjarantlr.collections.AST;
@@ -123,11 +124,35 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			return;
 		}
 		switch (ast.getType()) {
-		case EXPR: // expression
-			AST next = ast.getFirstChild();
-			if (next.getType()== METHOD_CALL){
-				item.setItemType(OutlineItemType.CLOSURE);
+		case CLASS_DEF:
+			AST classDefModifiers = ast.getFirstChild();
+			if (classDefModifiers==null){
+				break;
 			}
+			AST classDefName = classDefModifiers.getNextSibling();
+			if (classDefName==null){
+				break;
+			}
+			walkThroughModifiers(item, classDefModifiers);
+			item.setClosed(true);
+			break;
+		case EXPR: // expression: children: method call, name{
+			OutlineItemType outlineType = null;
+			AST methodCall = ast.getFirstChild();
+			if (methodCall==null){
+				break;
+			}
+			if (methodCall.getType()== METHOD_CALL){
+				outlineType = OutlineItemType.CLOSURE;
+			}else{
+				break;
+			}
+			AST ename = methodCall.getFirstChild();
+			if (ename==null){
+				break;
+			}
+			item.setItemType(outlineType);
+			item.setName(ename.getText());
 			item.setClosed(true);
 			break;
 		case VARIABLE_DEF:// variable...
@@ -140,24 +165,10 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			/* modifiers*/
 			String modifierString =null;
 			modifiers = ast.getFirstChild();
+			walkThroughModifiers(item, modifiers);
 			if (modifiers!=null){
-				AST modifierAst = modifiers.getFirstChild();
-				if (modifierAst!=null){
-					modifierString = modifierAst.getText();
-				}
 				type = modifiers.getNextSibling();
 			}
-			OutlineModifier oModifier = OutlineModifier.DEFAULT;
-			if (StringUtils.isNotBlank(modifierString)){
-				if ("private".equals(modifierString)){
-					oModifier = OutlineModifier.PRIVATE;
-				}else if ("protected".equals(modifierString)){
-					oModifier = OutlineModifier.PROTECTED;
-				}else if ("public".equals(modifierString)){
-					oModifier = OutlineModifier.PUBLIC;
-				} 
-			}
-			item.setModifier(oModifier);
 			/* type */
 			if (type!=null){
 				AST typeDef = type.getFirstChild();
@@ -175,6 +186,32 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		default:
 			break;
 		}
+	}
+
+	private void walkThroughModifiers(OutlineItem item, AST modifiers) {
+		if (modifiers==null){
+			return;
+		}
+		if (modifiers.getType()!=GroovyTokenTypes.MODIFIERS){
+			EGradleUtil.logWarning("Not a modifiers element but:"+modifiers.getType());
+			return;
+		}
+		AST modifierAst = modifiers.getFirstChild();
+		if (modifierAst==null){
+			return;
+		}
+		String modifierString = modifierAst.getText();
+		OutlineModifier oModifier = OutlineModifier.DEFAULT;
+		if (StringUtils.isNotBlank(modifierString)){
+			if ("private".equals(modifierString)){
+				oModifier = OutlineModifier.PRIVATE;
+			}else if ("protected".equals(modifierString)){
+				oModifier = OutlineModifier.PROTECTED;
+			}else if ("public".equals(modifierString)){
+				oModifier = OutlineModifier.PUBLIC;
+			} 
+		}
+		item.setModifier(oModifier);
 	}
 
 	/**

@@ -90,7 +90,7 @@ public class EGradleUtil {
 	private static OutputHandler systemConsoleOutputHandler;
 
 	private static VirtualProjectCreator virtualProjectCreator = new VirtualProjectCreator();
-	
+
 	public static ImageDescriptor createImageDescriptor(String path) {
 		return createImageDescriptor(path, Activator.PLUGIN_ID);
 	}
@@ -106,16 +106,17 @@ public class EGradleUtil {
 
 	/**
 	 * Returns egradle preferences, never <code>null</code>
-	 * @return  egradle preferences, never <code>null</code>
+	 * 
+	 * @return egradle preferences, never <code>null</code>
 	 */
-	public static EGradlePreferences getPreferences(){
+	public static EGradlePreferences getPreferences() {
 		return EGradlePreferences.INSTANCE;
 	}
-	
-	public static EGradleMessageDialogSupport getDialogSupport(){
+
+	public static EGradleMessageDialogSupport getDialogSupport() {
 		return EGradleMessageDialogSupport.INSTANCE;
 	}
-	
+
 	/**
 	 * Creates or recreates virtual project
 	 * 
@@ -148,19 +149,20 @@ public class EGradleUtil {
 
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
-		if (getPreferences().isOutputValidationEnabled()){
-			max=Constants.VALIDATION_OUTPUT_SHRINK_LIMIT;
-		}else{
-			max=0;
+		if (getPreferences().isOutputValidationEnabled()) {
+			max = Constants.VALIDATION_OUTPUT_SHRINK_LIMIT;
+		} else {
+			max = 0;
 		}
 		return new RememberLastLinesOutputHandler(max);
 	}
+
 	public static boolean existsValidationErrors() {
-		/* Not very smart integrated, because static but it works...*/
+		/* Not very smart integrated, because static but it works... */
 		return buildScriptProblemMarkerHelper.hasErrors();
 	}
 
-	public static IEditorPart getActiveEditor(){
+	public static IEditorPart getActiveEditor() {
 		IWorkbenchPage page = getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
 		return activeEditor;
@@ -168,6 +170,7 @@ public class EGradleUtil {
 
 	/**
 	 * Returns active page or <code>null</code>
+	 * 
 	 * @return active page or <code>null</code>
 	 */
 	public static IWorkbenchPage getActivePage() {
@@ -227,7 +230,6 @@ public class EGradleUtil {
 		}
 		return image;
 	}
-	
 
 	/**
 	 * Get image by path from shared images, see {@link ISharedImages}
@@ -242,8 +244,8 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Returns gradle root project. if no root project can be resolved an error dialog appears
-	 * and shows information
+	 * Returns gradle root project. if no root project can be resolved an error
+	 * dialog appears and shows information
 	 * 
 	 * @return root project or <code>null</code>
 	 */
@@ -281,9 +283,12 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Get the root project folder. If not resolvable an error dialog is shown to user and a {@link IOException} is thrown
+	 * Get the root project folder. If not resolvable an error dialog is shown
+	 * to user and a {@link IOException} is thrown
+	 * 
 	 * @return root project folder never <code>null</code>
-	 * @throws IOException - if root folder would be <code>null</code>
+	 * @throws IOException
+	 *             - if root folder would be <code>null</code>
 	 */
 	public static File getRootProjectFolder() throws IOException {
 		GradleRootProject rootProject = EGradleUtil.getRootProject();
@@ -372,25 +377,26 @@ public class EGradleUtil {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		return window;
 	}
-	
+
 	/**
-	 * Returns true when given project is configured as root project 
+	 * Returns true when given project is configured as root project
+	 * 
 	 * @param project
 	 * @return <code>true</code> when project location is same as root project
 	 */
 	public static boolean isRootProject(IProject project) {
-		if (project==null){
+		if (project == null) {
 			return false;
 		}
 		File rootFolder = getRootProjectFolderWithoutErrorHandling();
-		if (rootFolder==null){
+		if (rootFolder == null) {
 			return false;
 		}
 		try {
 			File projectLocation = getResourceHelper().toFile(project.getLocation());
 			return rootFolder.equals(projectLocation);
 		} catch (CoreException e) {
-			/* ignore ... project not found anymore*/
+			/* ignore ... project not found anymore */
 			return false;
 		}
 	}
@@ -404,11 +410,13 @@ public class EGradleUtil {
 
 	/**
 	 * Returns true when given project has virtual root project nature
+	 * 
 	 * @param project
-	 * @return <code>true</code> when given project has the virtual root project nature
+	 * @return <code>true</code> when given project has the virtual root project
+	 *         nature
 	 */
 	public static boolean hasVirtualRootProjectNature(IProject project) {
-		if (project==null){
+		if (project == null) {
 			return false;
 		}
 		boolean virtualProjectNatureFound;
@@ -416,7 +424,7 @@ public class EGradleUtil {
 			virtualProjectNatureFound = project.hasNature(VirtualRootProjectNature.NATURE_ID);
 			return virtualProjectNatureFound;
 		} catch (CoreException e) {
-			/* ignore ... project not found anymore*/
+			/* ignore ... project not found anymore */
 			return false;
 		}
 	}
@@ -424,10 +432,11 @@ public class EGradleUtil {
 	public static void log(IStatus status) {
 		Activator.getDefault().getLog().log(status);
 	}
+
 	public static void log(Throwable t) {
-		log(null,t);
+		log(null, t);
 	}
-	
+
 	public static void log(String message, Throwable t) {
 
 		if (t instanceof CoreException) {
@@ -436,36 +445,39 @@ public class EGradleUtil {
 			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), cause));
 		} else {
 			message = resolveMessageIfNotSet(message, t);
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message,
-					t));
+			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message, t));
 		}
 
 	}
 
 	private static String resolveMessageIfNotSet(String message, Throwable cause) {
-		if (message==null){
-			if (cause==null){
-				message="Unknown";
-			}else{
-				message=cause.getMessage();
+		if (message == null) {
+			if (cause == null) {
+				message = "Unknown";
+			} else {
+				message = cause.getMessage();
 			}
 		}
 		return message;
 	}
 
 	public static Throwable getRootCause(Throwable t) {
-		if (t==null){
+		if (t == null) {
 			return null;
 		}
 		Throwable rootCause = t;
-		while (t.getCause()!=null){
+		while (t.getCause() != null) {
 			rootCause = t.getCause();
 		}
 		return rootCause;
 	}
 
-	public static void logInfo(String message){
-		log(new Status(IStatus.INFO,Activator.PLUGIN_ID,message));
+	public static void logInfo(String message) {
+		log(new Status(IStatus.INFO, Activator.PLUGIN_ID, message));
+	}
+
+	public static void logWarning(String message) {
+		log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
 	}
 
 	public static void openSystemConsole() {
@@ -544,7 +556,7 @@ public class EGradleUtil {
 		});
 
 	}
-	
+
 	public static void refreshAllProjects() {
 		refreshAllProjects(null);
 	}
@@ -584,29 +596,30 @@ public class EGradleUtil {
 		getSafeDisplay().asyncExec(runnable);
 	}
 
-	
 	/**
-	 * If given list of console output contains error messages error markers for files will be created
+	 * If given list of console output contains error messages error markers for
+	 * files will be created
+	 * 
 	 * @param consoleOutput
 	 */
 	public static void showValidationErrorsOfConsoleOutput(List<String> consoleOutput) {
 		boolean validationEnabled = getPreferences().isOutputValidationEnabled();
-		if(!validationEnabled){
+		if (!validationEnabled) {
 			return;
 		}
 		GradleOutputValidator validator = new GradleOutputValidator();
 		ValidationResult result = validator.validate(consoleOutput);
 		if (result.hasProblem()) {
-			try{
+			try {
 				IResource resource = null;
-				
+
 				String scriptPath = result.getScriptPath();
 				File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
 				if (rootFolder == null) {
 					/*
-					 * this problem should not occure, because other gradle actions
-					 * does check this normally before. as a fallback simply do
-					 * nothing
+					 * this problem should not occure, because other gradle
+					 * actions does check this normally before. as a fallback
+					 * simply do nothing
 					 */
 					EGradleUtil.logInfo("Was not able to validate, because no root folder set!");
 					return;
@@ -630,39 +643,42 @@ public class EGradleUtil {
 						resource = virtualRootProject.getFile(scriptPath);
 					}
 				}
-				
+
 				if (resource == null) {
-					// fall back to workspace root - so at least we can create an
+					// fall back to workspace root - so at least we can create
+					// an
 					// error marker...
 					resource = ResourcesPlugin.getWorkspace().getRoot();
 				}
 				buildScriptProblemMarkerHelper.createErrorMarker(resource, result.getErrorMessage(), result.getLine());
-				
-			}catch(Exception e){
+
+			} catch (Exception e) {
 				log(e);
 			}
 		}
 		return;
 	}
-	
+
 	public static void throwCoreException(String message) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message));
 
 	}
 
 	public static void throwCoreException(String message, Exception e) throws CoreException {
-		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message,e));
+		throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, e));
 
 	}
 
 	/**
-	 * If a virtual root project exists, it will be returned, otherwise <code>null</code>
+	 * If a virtual root project exists, it will be returned, otherwise
+	 * <code>null</code>
+	 * 
 	 * @return vr project or <code>null</code>
 	 */
 	public static IProject getVirtualRootProject() {
 		IProject[] projects = getAllProjects();
-		for (IProject project : projects){
-			if (hasVirtualRootProjectNature(project)){
+		for (IProject project : projects) {
+			if (hasVirtualRootProjectNature(project)) {
 				return project;
 			}
 		}
@@ -672,14 +688,13 @@ public class EGradleUtil {
 	public static EclipseResourceHelper getResourceHelper() {
 		return EclipseResourceHelper.DEFAULT;
 	}
-	
-	public static FileHelper getFileHelper(){
+
+	public static FileHelper getFileHelper() {
 		return FileHelper.DEFAULT;
 	}
 
 	public static ImageDescriptor createSharedImageDescriptor(String id) {
 		return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(id);
 	}
-	
 
 }
