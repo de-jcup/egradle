@@ -66,16 +66,6 @@ public class WantedOutlineModelBuilderTest {
 		assertEquals(1,variable2Item.getColumn());
 		assertEquals(4,variable2Item.getLine());
 		
-		/* ----- test offset calculation --- */
-		/*
-		 * FIXME ATR, 10.11.2016: the offset calculation does not work - groovy
-		 * antlr ast does NOT count white spaces. also i am not sure about the
-		 * support of different line endings - see SourceBuffer which only
-		 * supports \n at least at first glance. Maybe it makes sense to combine
-		 * own token parser algorithm with this one - use token parser
-		 * calculation and fetch info about column and line too. use calculated
-		 * offset by mapping with column and line...
-		 */
 		assertEquals(expectedOffsetOfVariable2, variable2Item.getOffset());
 		assertEquals(0, variable1Item.getOffset());
 	}

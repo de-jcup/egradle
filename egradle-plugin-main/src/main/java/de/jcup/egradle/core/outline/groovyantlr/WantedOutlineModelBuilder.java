@@ -55,8 +55,8 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			AST first = parser.getAST();
 
 			Context context = new Context();
-			context.buffer=sourceBuffer;
-			
+			context.buffer = sourceBuffer;
+
 			OutlineItem rootItem = model.getRoot();
 			walkThrough(context, rootItem, null, first);
 
@@ -100,7 +100,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		}
 	}
 
-	private void addToParent(Context context ,OutlineItem parentItem, OutlineItem currentItem) {
+	private void addToParent(Context context, OutlineItem parentItem, OutlineItem currentItem) {
 		if (currentItem == null) {
 			return;
 		}
@@ -120,17 +120,17 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private void updateItem(Context context, OutlineItem item, AST ast) {
-		if (item.isClosed()){
+		if (item.isClosed()) {
 			return;
 		}
 		switch (ast.getType()) {
 		case CLASS_DEF:
 			AST classDefModifiers = ast.getFirstChild();
-			if (classDefModifiers==null){
+			if (classDefModifiers == null) {
 				break;
 			}
 			AST classDefName = classDefModifiers.getNextSibling();
-			if (classDefName==null){
+			if (classDefName == null) {
 				break;
 			}
 			walkThroughModifiers(item, classDefModifiers);
@@ -139,16 +139,16 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		case EXPR: // expression: children: method call, name{
 			OutlineItemType outlineType = null;
 			AST methodCall = ast.getFirstChild();
-			if (methodCall==null){
+			if (methodCall == null) {
 				break;
 			}
-			if (methodCall.getType()== METHOD_CALL){
+			if (methodCall.getType() == METHOD_CALL) {
 				outlineType = OutlineItemType.CLOSURE;
-			}else{
+			} else {
 				break;
 			}
 			AST ename = methodCall.getFirstChild();
-			if (ename==null){
+			if (ename == null) {
 				break;
 			}
 			item.setItemType(outlineType);
@@ -156,29 +156,29 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			item.setClosed(true);
 			break;
 		case VARIABLE_DEF:// variable...
-			AST modifiers=null;
+			AST modifiers = null;
 			AST type = null;
 			AST name = null;
-			
+
 			/* item type */
 			item.setItemType(OutlineItemType.VARIABLE);
-			/* modifiers*/
-			String modifierString =null;
+			/* modifiers */
+			String modifierString = null;
 			modifiers = ast.getFirstChild();
 			walkThroughModifiers(item, modifiers);
-			if (modifiers!=null){
+			if (modifiers != null) {
 				type = modifiers.getNextSibling();
 			}
 			/* type */
-			if (type!=null){
+			if (type != null) {
 				AST typeDef = type.getFirstChild();
-				if (typeDef!=null){
+				if (typeDef != null) {
 					String typeDefText = typeDef.getText();
 					item.setType(typeDefText);
 				}
 				name = type.getNextSibling();
 			}
-			if (name!=null){
+			if (name != null) {
 				item.setName(name.getText());
 			}
 			item.setClosed(true);
@@ -189,27 +189,38 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private void walkThroughModifiers(OutlineItem item, AST modifiers) {
-		if (modifiers==null){
+		if (modifiers == null) {
 			return;
 		}
-		if (modifiers.getType()!=GroovyTokenTypes.MODIFIERS){
-			EGradleUtil.logWarning("Not a modifiers element but:"+modifiers.getType());
+		if (modifiers.getType() != GroovyTokenTypes.MODIFIERS) {
+			EGradleUtil.logWarning("Not a modifiers element but:" + modifiers.getType());
 			return;
 		}
 		AST modifierAst = modifiers.getFirstChild();
-		if (modifierAst==null){
+		if (modifierAst == null) {
+			return;
+		}
+		/* currently just skip annotations at all*/
+		while (modifierAst!=null) {
+			if( modifierAst.getType() != GroovyTokenTypes.ANNOTATION){
+				break;
+			}
+			// AST annotations = modifierAst;
+			modifierAst = modifierAst.getNextSibling();
+		}
+		if (modifierAst == null) {
 			return;
 		}
 		String modifierString = modifierAst.getText();
 		OutlineModifier oModifier = OutlineModifier.DEFAULT;
-		if (StringUtils.isNotBlank(modifierString)){
-			if ("private".equals(modifierString)){
+		if (StringUtils.isNotBlank(modifierString)) {
+			if ("private".equals(modifierString)) {
 				oModifier = OutlineModifier.PRIVATE;
-			}else if ("protected".equals(modifierString)){
+			} else if ("protected".equals(modifierString)) {
 				oModifier = OutlineModifier.PROTECTED;
-			}else if ("public".equals(modifierString)){
+			} else if ("public".equals(modifierString)) {
 				oModifier = OutlineModifier.PUBLIC;
-			} 
+			}
 		}
 		item.setModifier(oModifier);
 	}
@@ -224,18 +235,18 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	 */
 	private OutlineItem createNewItem(Context context, AST current) {
 		if (!(current instanceof GroovySourceAST)) {
-			System.out.println("--ignoring on create:"+current);
+			System.out.println("--ignoring on create:" + current);
 			return null;
 		}
 		GroovySourceAST gast = (GroovySourceAST) current;
 		switch (current.getType()) {
 		case EXPR:
 			AST next = current.getFirstChild();
-			if (next==null){
+			if (next == null) {
 				return null;
 			}
 			int nextType = next.getType();
-			if (GroovyTokenTypes.METHOD_CALL==nextType){
+			if (GroovyTokenTypes.METHOD_CALL == nextType) {
 				return commonCreateItem(context, gast);
 			}
 			return null;
@@ -252,15 +263,20 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		int line = ast.getLine();
 		item.setColumn(column);
 		item.setLine(line);
-		item.setOffset(context.buffer.getOffset(line,column));
-		/* FIXME ATR, 11.11: length calculation does not work this way - after offset is correct calculated in context
-		 * the length must be calculated by by line,column , last line last column!
-		 */
-		if (ast instanceof GroovySourceAST){
+		item.setOffset(context.buffer.getOffset(line, column));
+
+		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
-			int length = gast.getColumnLast()-column;
+			int offset1=item.getOffset();
+			int offset2=context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
+			
+			int length = offset2-offset1;
+			if (length<0){
+				/* fallback*/
+				length = gast.getColumnLast() - column;
+			}
 			item.setLength(length);
-		}else{
+		} else {
 			item.setLength(1);
 		}
 		return item;
