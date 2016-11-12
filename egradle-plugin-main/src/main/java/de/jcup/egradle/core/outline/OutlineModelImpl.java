@@ -22,14 +22,19 @@ public class OutlineModelImpl implements OutlineModel {
 		synchronized(map){
 			OutlineItem outlineItem = map.get(offset);
 			if (outlineItem == null) {
-				/* scan inside next parts of sorted tree map... */
+				/* scan inside parts before of sorted tree map... */
 				Set<Integer> sortedKeys = map.keySet();
+				int keyBefore=-1;
 				for (int key : sortedKeys) {
 					if (key < offset) {
+						keyBefore=key;
 						/* ignore because we start at offset! */
 						continue;
 					}
-					outlineItem = map.get(key);
+					if (keyBefore==-1){
+						break;
+					}
+					outlineItem = map.get(keyBefore);
 					break;
 				}
 			}

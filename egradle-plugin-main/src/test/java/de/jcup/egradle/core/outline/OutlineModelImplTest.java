@@ -29,4 +29,28 @@ public class OutlineModelImplTest {
 		assertNotNull(modelToTest.getRoot().getChildren());
 	}
 
+	@Test
+	public void getItemAt_works_for_exact_positions() {
+		OutlineItem child1 = new OutlineItem();
+		child1.setOffset(10);
+		OutlineItem child2 = new OutlineItem();
+		child2.setOffset(20);
+		modelToTest.getRoot().add(child1);
+		modelToTest.getRoot().add(child2);
+		
+		assertEquals(child1, modelToTest.getItemAt(10));
+		assertEquals(child2, modelToTest.getItemAt(20));
+	}
+	
+	@Test
+	public void getItemAt_pos_between_child1_and_child2__returns_child1() {
+		OutlineItem child1 = new OutlineItem();
+		child1.setOffset(10);
+		OutlineItem child2 = new OutlineItem();
+		child2.setOffset(20);
+		modelToTest.getRoot().add(child1);
+		modelToTest.getRoot().add(child2);
+		
+		assertEquals(child1, modelToTest.getItemAt(15));
+	}
 }
