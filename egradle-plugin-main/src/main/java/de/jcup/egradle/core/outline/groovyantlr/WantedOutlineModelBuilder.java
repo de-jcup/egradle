@@ -18,7 +18,6 @@ import de.jcup.egradle.core.outline.OutlineModel;
 import de.jcup.egradle.core.outline.OutlineModelBuilder;
 import de.jcup.egradle.core.outline.OutlineModelImpl;
 import de.jcup.egradle.core.outline.OutlineModifier;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
 import groovyjarjarantlr.RecognitionException;
 import groovyjarjarantlr.TokenStreamException;
 import groovyjarjarantlr.collections.AST;
@@ -31,9 +30,19 @@ import groovyjarjarantlr.collections.AST;
  */
 public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	private InputStream is;
+	private ASTFilterStrategy filterStrategy;
 
-	public WantedOutlineModelBuilder(InputStream is) {
+	
+	public WantedOutlineModelBuilder(InputStream is){
+		this(is,null);
+	}
+	
+	public WantedOutlineModelBuilder(InputStream is, ASTFilterStrategy filterStrategy) {
 		this.is = is;
+		if (filterStrategy==null){
+			filterStrategy=new ASTFilterStrategy(){};
+		}
+		this.filterStrategy=filterStrategy;
 	}
 
 	@Override
@@ -72,8 +81,12 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		public AST astbefore;
 	}
 
-	private void walkThrough(Context context, OutlineItem parentItem, OutlineItem currentItem, AST current) {
+	private void walkThrough(Context context, OutlineItem parentItem, OutlineItem currentItem, AST current) throws OutlineModelBuilderException{
 		parentItem = checkForNewParentItem(parentItem, currentItem, current);
+		
+		/* FIXME ATR, 12.11.2016: maybe this should be done much more simple: only walkthrough siblings. and on ech create of item the create method
+		 * dives dedicated into and so all parent structure is build etc. KISS...
+		 */
 
 		OutlineItem newItem = createNewItem(context, current);
 		/* switch current item and add closed parts */
@@ -100,7 +113,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		}
 	}
 
-	private void addToParent(Context context, OutlineItem parentItem, OutlineItem currentItem) {
+	private void addToParent(Context context, OutlineItem parentItem, OutlineItem currentItem) throws OutlineModelBuilderException{
 		if (currentItem == null) {
 			return;
 		}
@@ -116,10 +129,30 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private OutlineItem checkForNewParentItem(OutlineItem parentItem, OutlineItem currentItem, AST current) {
+//		if (currentItem==null){
+//			return parentItem;
+//		}
+//		if (parentItem==null){
+//			return parentItem;
+//		}
+//		if (parentItem.getItemType()==OutlineItemType.CLOSURE){
+//			if (current.getType()==GroovyTokenTypes.CLOSABLE_BLOCK){
+//				OutlineItem newParent = currentItem.getParent();
+//				if (newParent==null){
+//					/* fall back*/
+//					return parentItem;
+//				}
+//				return newParent;
+//			}
+//			
+//		}
+//		if (currentItem.getItemType()==OutlineItemType.CLOSURE){
+//			return currentItem;
+//		}
 		return parentItem;
 	}
 
-	private void updateItem(Context context, OutlineItem item, AST ast) {
+	private void updateItem(Context context, OutlineItem item, AST ast) throws OutlineModelBuilderException {
 		if (item.isClosed()) {
 			return;
 		}
@@ -151,8 +184,12 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			if (ename == null) {
 				break;
 			}
+			String enameString = ename.getText();
+			if (filterStrategy.isExpressionIgnored(enameString)){
+				break;
+			}
 			item.setItemType(outlineType);
-			item.setName(ename.getText());
+			item.setName(enameString);
 			item.setClosed(true);
 			break;
 		case VARIABLE_DEF:// variable...
@@ -188,12 +225,11 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		}
 	}
 
-	private void walkThroughModifiers(OutlineItem item, AST modifiers) {
+	private void walkThroughModifiers(OutlineItem item, AST modifiers) throws OutlineModelBuilderException{
 		if (modifiers == null) {
 			return;
 		}
 		if (modifiers.getType() != GroovyTokenTypes.MODIFIERS) {
-			EGradleUtil.logWarning("Not a modifiers element but:" + modifiers.getType());
 			return;
 		}
 		AST modifierAst = modifiers.getFirstChild();

@@ -14,6 +14,7 @@ import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineModel;
 import de.jcup.egradle.core.outline.OutlineModelBuilder;
 import de.jcup.egradle.core.outline.OutlineModelBuilder.OutlineModelBuilderException;
+import de.jcup.egradle.core.outline.groovyantlr.DefaultGradleASTFilterStrategy;
 import de.jcup.egradle.core.outline.groovyantlr.GroovyASTOutlineModelBuilder;
 import de.jcup.egradle.core.outline.groovyantlr.WantedOutlineModelBuilder;
 import de.jcup.egradle.core.outline.token.DefaultTokenOutlineModelBuilder;
@@ -113,7 +114,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	}
 
 	private Object[] buildWantedModel(String charset, InputStream is) throws Exception {
-		WantedOutlineModelBuilder builder = new WantedOutlineModelBuilder(is);
+		WantedOutlineModelBuilder builder = new WantedOutlineModelBuilder(is, new DefaultGradleASTFilterStrategy());
 		return createModelAndGetRootElements(builder);
 	}
 
