@@ -1,12 +1,10 @@
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jface.viewers.BaseLabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.IColorProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
@@ -27,7 +25,10 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICONS_OUTLINE_PUBLIC_CO_PNG = "/icons/outline/public_co.png";
 	private static final String ICONS_OUTLINE_PROTECTED_CO_PNG = "/icons/outline/protected_co.png";
 	private static final String ICONS_OUTLINE_PRIVATE_CO_PNG = "/icons/outline/private_co.png";
-
+	private static final String ICONS_OUTLINE_TASK_PNG = "/icons/outline/typevariable_obj.png";
+	private static final String ICONS_OUTLINE_APPLY_FROM_PNG = "/icons/outline/templateprop_co.png";
+	private static final String ICONS_OUTLINE_APPLY_PLUGIN_PNG = "/icons/outline/plugins.png";
+	
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof OutlineItem) {
@@ -54,7 +55,14 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 					return null;
 				}
 				return EGradleUtil.getImage(path, Activator.PLUGIN_ID);
-			case CLOSURE:
+			case TASK_CLOSURE:
+				return EGradleUtil.getImage(ICONS_OUTLINE_TASK_PNG, Activator.PLUGIN_ID);
+			case TASK_SETUP:
+				return EGradleUtil.getImage(ICONS_OUTLINE_TASK_PNG, Activator.PLUGIN_ID);
+			case APPLY_FROM:
+				return EGradleUtil.getImage(ICONS_OUTLINE_APPLY_FROM_PNG, Activator.PLUGIN_ID);
+			case APPLY_PLUGIN:
+				return EGradleUtil.getImage(ICONS_OUTLINE_APPLY_PLUGIN_PNG, Activator.PLUGIN_ID);
 
 			default:
 				return null;
@@ -77,6 +85,15 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 			textStyle.foreground = getColorManager().getColor(ColorConstants.BRIGHT_BLUE);
 		}
 	};
+	
+	private Styler outlineItemTargetStyler = new Styler() {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.foreground = getColorManager().getColor(ColorConstants.GRAY);
+		}
+	};
+
 
 	@Override
 	public StyledString getStyledText(Object element) {
@@ -98,6 +115,11 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				sb.append(type);
 				StyledString typeString = new StyledString(sb.toString(), outlineItemTypeStyler);
 				styled.append(typeString);
+			}
+			String target = outlineItem.getTarget();
+			if (target!=null){
+				StyledString targetString = new StyledString(":"+target,outlineItemTargetStyler);
+				styled.append(targetString);
 			}
 
 			String info = outlineItem.getInfo();
@@ -127,7 +149,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 	@Override
 	public Color getForeground(Object element) {
-		return getColorManager().getColor(ColorConstants.BLACK);
+		return null;//getColorManager().getColor(ColorConstants.BLACK);
 	}
 
 	@Override

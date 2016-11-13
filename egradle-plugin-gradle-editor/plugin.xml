@@ -32,5 +32,22 @@
             targetId="de.jcup.egradle.eclipse.gradleeditor.applyfromhyperlinktarget">
       </hyperlinkDetector>
     </extension>
-   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          PREFERENCES                                 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+      point = "org.eclipse.ui.preferencePages">
+      <page
+         id="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage"
+         class="de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage"
+         name="Editor"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
+   </extension>
+    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>

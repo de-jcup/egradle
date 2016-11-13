@@ -92,11 +92,154 @@ public class WantedOutlineModelBuilderTest {
 		
 		items = closureItem.getChildren();
 
-		assertEquals(1, items.length);
+		assertEquals("closure children amount not as expected. ", 1, items.length);
 		OutlineItem variable1Item = items[0];
 		assertEquals(OutlineItemType.VARIABLE, variable1Item.getItemType());
 		assertEquals("variable1", variable1Item.getName());
-		assertEquals(text.length(), variable1Item.getLength());
 
+	}
+	
+	@Test
+	public void test_task_doit_contains_variable1_is_inside_tree() throws Exception {
+		/* prepare */
+		String text = "task doit{\n\ndef variable1='Hello world'\n}";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskDef = items[0];
+		assertEquals(OutlineItemType.TASK_CLOSURE, taskDef.getItemType());
+		assertEquals("task doit", taskDef.getName());
+		
+		
+		items = taskDef.getChildren();
+
+		assertEquals("closure children amount not as expected. ", 1, items.length);
+		OutlineItem variable1Item = items[0];
+		assertEquals(OutlineItemType.VARIABLE, variable1Item.getItemType());
+		assertEquals("variable1", variable1Item.getName());
+
+	}
+	
+	@Test
+	public void test_task_doit_type_compile_contains_variable1_is_inside_tree() throws Exception {
+		/* prepare */
+		String text = "task doit(type: compile){\n\ndef variable1='Hello world'\n}";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskDef = items[0];
+		assertEquals(OutlineItemType.TASK_CLOSURE, taskDef.getItemType());
+		assertEquals("task doit", taskDef.getName());
+		assertEquals("compile", taskDef.getType());
+		
+		items = taskDef.getChildren();
+
+		assertEquals("closure children amount not as expected. ", 1, items.length);
+		OutlineItem variable1Item = items[0];
+		assertEquals(OutlineItemType.VARIABLE, variable1Item.getItemType());
+		assertEquals("variable1", variable1Item.getName());
+
+	}
+	
+	@Test
+	public void xyz_sonarrunner_depens_on_results_in_item_methd_call_of_xyz_sonarrunner_depends_on() throws Exception {
+		/* prepare */
+		String text = "xyz.sonarrunner.dependson check";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskSetupItem = items[0];
+		assertEquals(OutlineItemType.METHOD_CALL, taskSetupItem.getItemType());
+		assertEquals("xyz.sonarrunner.dependson", taskSetupItem.getName());
+		
+	}
+	
+	@Test
+	public void tasks_sonarrunner_depens_on_results_in_item_setup_of_task_sonarrunner_depends_on() throws Exception {
+		/* prepare */
+		String text = "tasks.sonarrunner.dependson check";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskSetupItem = items[0];
+		assertEquals(OutlineItemType.TASK_SETUP, taskSetupItem.getItemType());
+		assertEquals("tasks.sonarrunner.dependson", taskSetupItem.getName());
+		
+	}
+	
+	@Test
+	public void apply_plugin_java() throws Exception {
+		/* prepare */
+		String text = "apply plugin 'java'";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskSetupItem = items[0];
+		assertEquals(OutlineItemType.APPLY_PLUGIN, taskSetupItem.getItemType());
+		assertEquals("java", taskSetupItem.getTarget());
+		assertEquals("apply plugin", taskSetupItem.getName());
+		
+	}
+	
+	@Test
+	public void apply_from_bla() throws Exception {
+		/* prepare */
+		String text = "apply from 'bla'";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskSetupItem = items[0];
+		assertEquals(OutlineItemType.APPLY_FROM, taskSetupItem.getItemType());
+		assertEquals("apply from", taskSetupItem.getName());
+		assertEquals("bla", taskSetupItem.getTarget());
+		
 	}
 }

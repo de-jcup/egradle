@@ -32,17 +32,17 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	private InputStream is;
 	private ASTFilterStrategy filterStrategy;
 
-	
-	public WantedOutlineModelBuilder(InputStream is){
-		this(is,null);
+	public WantedOutlineModelBuilder(InputStream is) {
+		this(is, null);
 	}
-	
+
 	public WantedOutlineModelBuilder(InputStream is, ASTFilterStrategy filterStrategy) {
 		this.is = is;
-		if (filterStrategy==null){
-			filterStrategy=new ASTFilterStrategy(){};
+		if (filterStrategy == null) {
+			filterStrategy = new ASTFilterStrategy() {
+			};
 		}
-		this.filterStrategy=filterStrategy;
+		this.filterStrategy = filterStrategy;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			context.buffer = sourceBuffer;
 
 			OutlineItem rootItem = model.getRoot();
-			walkThrough(context, rootItem, null, first);
+			startParsing(context, rootItem, first);
 
 		} catch (RecognitionException | TokenStreamException e) {
 			throw new OutlineModelBuilderException("Cannot build outline model because of AST parsing problems", e);
@@ -76,156 +76,57 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		return model;
 	}
 
-	private class Context {
-		private ExtendedSourceBuffer buffer;
-		public AST astbefore;
+	protected void startParsing(Context context, OutlineItem root, AST current) throws OutlineModelBuilderException {
+		/* walk through all siblings */
+		walkThroughASTandSiblings(context, root, current);
+
 	}
 
-	private void walkThrough(Context context, OutlineItem parentItem, OutlineItem currentItem, AST current) throws OutlineModelBuilderException{
-		parentItem = checkForNewParentItem(parentItem, currentItem, current);
-		
-		/* FIXME ATR, 12.11.2016: maybe this should be done much more simple: only walkthrough siblings. and on ech create of item the create method
-		 * dives dedicated into and so all parent structure is build etc. KISS...
-		 */
-
-		OutlineItem newItem = createNewItem(context, current);
-		/* switch current item and add closed parts */
-		if (newItem != null) {
-			addToParent(context, parentItem, currentItem);
-			currentItem = newItem;
-		}
-		if (currentItem != null) {
-			updateItem(context, currentItem, current);
-		}
-
-		/* dive into children */
-		AST element = current.getFirstChild();
-		if (element != null) {
-			context.astbefore = current;
-			walkThrough(context, parentItem, currentItem, element);
-		}
-		AST next = current.getNextSibling();
-		if (next != null) {
-			context.astbefore = current;
-			walkThrough(context, parentItem, currentItem, next);
-		} else {
-			addToParent(context, parentItem, currentItem);
+	private void walkThroughASTandSiblings(Context context, OutlineItem parent, AST current)
+			throws OutlineModelBuilderException {
+		while (current != null) {
+			OutlineItem item = buildItem(context, current);
+			if (item != null) {
+				parent.add(item);
+			}
+			current = current.getNextSibling();
 		}
 	}
 
-	private void addToParent(Context context, OutlineItem parentItem, OutlineItem currentItem) throws OutlineModelBuilderException{
-		if (currentItem == null) {
-			return;
-		}
-		if (parentItem == null) {
-			return;
-		}
-		/* close last part */
-		if (parentItem.hasChild(currentItem)) {
-			/* already added, just a loop */
-			return;
-		}
-		parentItem.add(currentItem);
-	}
-
-	private OutlineItem checkForNewParentItem(OutlineItem parentItem, OutlineItem currentItem, AST current) {
-//		if (currentItem==null){
-//			return parentItem;
-//		}
-//		if (parentItem==null){
-//			return parentItem;
-//		}
-//		if (parentItem.getItemType()==OutlineItemType.CLOSURE){
-//			if (current.getType()==GroovyTokenTypes.CLOSABLE_BLOCK){
-//				OutlineItem newParent = currentItem.getParent();
-//				if (newParent==null){
-//					/* fall back*/
-//					return parentItem;
-//				}
-//				return newParent;
-//			}
-//			
-//		}
-//		if (currentItem.getItemType()==OutlineItemType.CLOSURE){
-//			return currentItem;
-//		}
-		return parentItem;
-	}
-
-	private void updateItem(Context context, OutlineItem item, AST ast) throws OutlineModelBuilderException {
-		if (item.isClosed()) {
-			return;
-		}
-		switch (ast.getType()) {
+	/**
+	 * Builds new item or <code>null</code>
+	 * 
+	 * @param context
+	 * 
+	 * @param current
+	 * @return
+	 * @throws OutlineModelBuilderException
+	 */
+	protected OutlineItem buildItem(Context context, AST current) throws OutlineModelBuilderException {
+		OutlineItem item;
+		switch (current.getType()) {
 		case CLASS_DEF:
-			AST classDefModifiers = ast.getFirstChild();
-			if (classDefModifiers == null) {
-				break;
-			}
-			AST classDefName = classDefModifiers.getNextSibling();
-			if (classDefName == null) {
-				break;
-			}
-			walkThroughModifiers(item, classDefModifiers);
-			item.setClosed(true);
+			item = createClass(context, current);
+			walkThroughASTandSiblings(context, item, current.getFirstChild());
 			break;
-		case EXPR: // expression: children: method call, name{
-			OutlineItemType outlineType = null;
-			AST methodCall = ast.getFirstChild();
-			if (methodCall == null) {
-				break;
-			}
-			if (methodCall.getType() == METHOD_CALL) {
-				outlineType = OutlineItemType.CLOSURE;
-			} else {
-				break;
-			}
-			AST ename = methodCall.getFirstChild();
-			if (ename == null) {
-				break;
-			}
-			String enameString = ename.getText();
-			if (filterStrategy.isExpressionIgnored(enameString)){
-				break;
-			}
-			item.setItemType(outlineType);
-			item.setName(enameString);
-			item.setClosed(true);
+		case EXPR:
+			item = createExpression(context, current);
 			break;
-		case VARIABLE_DEF:// variable...
-			AST modifiers = null;
-			AST type = null;
-			AST name = null;
-
-			/* item type */
-			item.setItemType(OutlineItemType.VARIABLE);
-			/* modifiers */
-			String modifierString = null;
-			modifiers = ast.getFirstChild();
-			walkThroughModifiers(item, modifiers);
-			if (modifiers != null) {
-				type = modifiers.getNextSibling();
-			}
-			/* type */
-			if (type != null) {
-				AST typeDef = type.getFirstChild();
-				if (typeDef != null) {
-					String typeDefText = typeDef.getText();
-					item.setType(typeDefText);
-				}
-				name = type.getNextSibling();
-			}
-			if (name != null) {
-				item.setName(name.getText());
-			}
-			item.setClosed(true);
+		case VARIABLE_DEF:
+			item = createVariableDef(context, current);
 			break;
 		default:
-			break;
+			item = null;
 		}
+		if (item != null) {
+			item.setClosed(true);
+		}
+
+		return item;
+
 	}
 
-	private void walkThroughModifiers(OutlineItem item, AST modifiers) throws OutlineModelBuilderException{
+	private void appendModifiers(OutlineItem item, AST modifiers) throws OutlineModelBuilderException {
 		if (modifiers == null) {
 			return;
 		}
@@ -236,9 +137,9 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		if (modifierAst == null) {
 			return;
 		}
-		/* currently just skip annotations at all*/
-		while (modifierAst!=null) {
-			if( modifierAst.getType() != GroovyTokenTypes.ANNOTATION){
+		/* currently just skip annotations at all */
+		while (modifierAst != null) {
+			if (modifierAst.getType() != GroovyTokenTypes.ANNOTATION) {
 				break;
 			}
 			// AST annotations = modifierAst;
@@ -261,39 +162,268 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		item.setModifier(oModifier);
 	}
 
-	/**
-	 * creates new item or <code>null</code>
-	 * 
-	 * @param context
-	 * 
-	 * @param current
-	 * @return
-	 */
-	private OutlineItem createNewItem(Context context, AST current) {
-		if (!(current instanceof GroovySourceAST)) {
-			System.out.println("--ignoring on create:" + current);
+	private OutlineItem createVariableDef(Context context, AST current) throws OutlineModelBuilderException {
+		OutlineItem item;
+
+		AST modifiers = current.getFirstChild();
+		if (modifiers == null) {
 			return null;
 		}
-		GroovySourceAST gast = (GroovySourceAST) current;
-		switch (current.getType()) {
-		case EXPR:
-			AST next = current.getFirstChild();
+		AST type = modifiers.getNextSibling();
+		/* type */
+		if (type == null) {
+			return null;
+		}
+		String typeDefText = null;
+		AST typeDef = type.getFirstChild();
+		if (typeDef != null) {
+			typeDefText = typeDef.getText();
+		}
+		AST name = type.getNextSibling();
+		String nameString;
+		if (name != null) {
+			nameString = name.getText();
+		} else {
+			nameString = "<unknown>";
+		}
+		item = createItem(context, current);
+		item.setName(nameString);
+		appendModifiers(item, modifiers);
+		item.setType(typeDefText);
+		item.setItemType(OutlineItemType.VARIABLE);
+		return item;
+	}
+
+	private OutlineItem createClass(Context context, AST current) throws OutlineModelBuilderException {
+		OutlineItem item;
+		AST classDefModifiers = current.getFirstChild();
+		if (classDefModifiers == null) {
+			return null;
+		}
+		AST classDefName = classDefModifiers.getNextSibling();
+		if (classDefName == null) {
+			return null;
+		}
+		item = createItem(context, current);
+		appendModifiers(item, classDefModifiers);
+		return item;
+	}
+
+	private OutlineItem createExpression(Context context, AST current) throws OutlineModelBuilderException {
+		AST next = current.getFirstChild();
+		if (next == null) {
+			return null;
+		}
+		if (GroovyTokenTypes.DOT == next.getType()) {
+			next = next.getFirstChild();
 			if (next == null) {
 				return null;
 			}
-			int nextType = next.getType();
-			if (GroovyTokenTypes.METHOD_CALL == nextType) {
-				return commonCreateItem(context, gast);
-			}
-			return null;
-		case VARIABLE_DEF:
-			return commonCreateItem(context, gast);
-		default:
+		}
+		if (GroovyTokenTypes.METHOD_CALL != next.getType()) {
 			return null;
 		}
+		AST methodCall = current.getFirstChild();
+		if (methodCall == null) {
+			return null;
+		}
+		if (GroovyTokenTypes.DOT == methodCall.getType()) {
+			methodCall = methodCall.getFirstChild();
+			if (methodCall == null) {
+				return null;
+			}
+		}
+		AST ename = methodCall.getFirstChild();
+		if (ename == null) {
+			return null;
+		}
+		String enameString = resolveName(ename);
+		if (enameString == null) {
+			return null;
+		}
+		if (filterStrategy.isExpressionIgnored(enameString)) {
+			return null;
+		}
+
+		OutlineItemType outlineType = null;
+		if (methodCall.getType() == METHOD_CALL) {
+			outlineType = OutlineItemType.METHOD_CALL;
+		} else {
+			return null;
+		}
+		OutlineItem item = createItem(context, current);
+		item.setItemType(outlineType);
+		item.setName(enameString);
+		item.setClosed(true);
+
+		AST lastAst = ename.getNextSibling();
+		if ("task".equals(enameString)) {
+			item.setItemType(OutlineItemType.TASK_SETUP);
+			lastAst = handleTaskClosure(enameString, item, lastAst);
+		} else if (enameString.startsWith("tasks")) {
+			item.setItemType(OutlineItemType.TASK_SETUP);
+		} else if (enameString.equals("apply")) {
+			item.setItemType(OutlineItemType.APPLY_SETUP);
+			handleApplyType(item, lastAst);
+			if (! OutlineItemType.APPLY_SETUP.equals(item.getItemType())){
+				AST target = methodCall.getNextSibling();
+				if (target!=null){
+					item.setTarget(target.getText());
+				}
+			}
+		}
+		if (lastAst != null) {
+			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
+				if (item.getItemType() == OutlineItemType.TASK_SETUP) {
+					item.setItemType(OutlineItemType.TASK_CLOSURE);
+				} else {
+					item.setItemType(OutlineItemType.CLOSURE);
+				}
+				/* inspect children... */
+				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
+			}
+		}
+
+		return item;
 	}
 
-	private OutlineItem commonCreateItem(Context context, AST ast) {
+	private void handleApplyType(OutlineItem item, AST lastAst) {
+		if (lastAst == null) {
+			return;
+		}
+		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
+			return;
+		}
+		/* parameter -e.g. apply from/plugin 'bla' */
+		AST elist = lastAst;
+
+		AST applyKind = elist.getFirstChild();
+
+		if (applyKind == null) {
+			return;
+		}
+		if (GroovyTokenTypes.IDENT != applyKind.getType()) {
+			return;
+		}
+		String typeStr = applyKind.getText();
+		if ("plugin".equals(typeStr)) {
+			item.setItemType(OutlineItemType.APPLY_PLUGIN);
+			item.setName("apply plugin");
+		} else if ("from".equals(typeStr)) {
+			item.setItemType(OutlineItemType.APPLY_FROM);
+			item.setName("apply from");
+		}
+
+	}
+
+	private AST handleTaskClosure(String enameString, OutlineItem item, AST lastAst) {
+		if (lastAst == null) {
+			return null;
+		}
+		lastAst = hadleTaskNameResolving(enameString, item, lastAst);
+		lastAst = handleTaskTypeResolving(item, lastAst);
+		return lastAst;
+	}
+
+	private AST handleTaskTypeResolving(OutlineItem item, AST lastAst) {
+		if (lastAst == null) {
+			return null;
+		}
+		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
+			return lastAst;
+		}
+		/* parameter -e.g. task mytask (type: xyz) */
+		AST elist = lastAst;
+		AST nextSibling = elist.getNextSibling();
+
+		AST labeledArg = elist.getFirstChild();
+
+		if (labeledArg == null) {
+			return nextSibling;
+		}
+		if (GroovyTokenTypes.LABELED_ARG != labeledArg.getType()) {
+			return nextSibling;
+		}
+		AST type = labeledArg.getFirstChild();
+		if (type == null) {
+			return nextSibling;
+		}
+		if (GroovyTokenTypes.STRING_LITERAL == type.getType()) {
+			if (!"type".equals(type.getText())) {
+				return nextSibling;
+			}
+			AST expr = type.getNextSibling();
+			if (expr == null || GroovyTokenTypes.EXPR != expr.getType()) {
+				return nextSibling;
+			}
+			AST ident = expr.getFirstChild();
+			if (ident == null || GroovyTokenTypes.IDENT != ident.getType()) {
+				return nextSibling;
+			}
+			item.setType(ident.getText());
+		}
+		return nextSibling;
+
+	}
+
+	private AST hadleTaskNameResolving(String enameString, OutlineItem item, AST lastAst) {
+		if (lastAst == null) {
+			return null;
+		}
+		if (lastAst.getType() == ELIST) {
+			AST elist = lastAst;
+			AST methodCall2 = elist.getFirstChild();
+			if (methodCall2 != null) {
+				AST name2 = methodCall2.getFirstChild();
+				if (name2 != null) {
+					enameString = enameString + " " + name2.getText();
+					item.setName(enameString);
+				}
+				lastAst = name2.getNextSibling();
+			}
+		}
+		return lastAst;
+	}
+
+	/**
+	 * naming with dot: xyz.abc.bla.tests =>
+	 * 
+	 * . ->. ->. ->xyz abc bla tests
+	 */
+	private String resolveName(AST ast) {
+		StringBuilder sb = new StringBuilder();
+		resolveName(sb, ast);
+		return sb.toString();
+	}
+
+	private void resolveName(StringBuilder sb, AST ast) {
+		if (ast.getType() == GroovyTokenTypes.DOT) {
+			/* is dot */
+			AST content = ast.getFirstChild();
+			resolveName(sb, content);
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				if (next.getType() == GroovyTokenTypes.IDENT) {
+					sb.append('.');
+					sb.append(next.getText());
+				}
+			}
+		} else {
+			/* no dot, so content separated with DOT */
+			sb.append(ast.getText());
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				if (next.getType() == GroovyTokenTypes.IDENT) {
+					sb.append('.');
+					sb.append(next.getText());
+				}
+			}
+
+		}
+
+	}
+
+	private OutlineItem createItem(Context context, AST ast) {
 		OutlineItem item = new OutlineItem();
 		int column = ast.getColumn();
 		int line = ast.getLine();
@@ -303,12 +433,12 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 
 		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
-			int offset1=item.getOffset();
-			int offset2=context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
-			
-			int length = offset2-offset1;
-			if (length<0){
-				/* fallback*/
+			int offset1 = item.getOffset();
+			int offset2 = context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
+
+			int length = offset2 - offset1;
+			if (length < 0) {
+				/* fallback */
 				length = gast.getColumnLast() - column;
 			}
 			item.setLength(length);
@@ -316,6 +446,11 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			item.setLength(1);
 		}
 		return item;
+	}
+
+	private class Context {
+		private ExtendedSourceBuffer buffer;
+		public AST astbefore;
 	}
 
 }

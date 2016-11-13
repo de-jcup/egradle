@@ -35,7 +35,8 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
-
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 	private GradleEditor gradleEditor;
@@ -172,8 +173,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 	private class ToggleLinkingAction extends Action {
 
 		private ToggleLinkingAction() {
-			linkingWithEditorEnabled = false;// FIXME ATR, 10.11.2016: use
-												// preference...
+			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
 			setDescription("link with editor");
 			initImage();
 			initText();
@@ -188,7 +188,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 		@Override
 		public void run() {
 			linkingWithEditorEnabled = !linkingWithEditorEnabled;
-			// FIXME ATR, 10.11.2016: change preference...
+			
 			/*
 			 * TODO ATR, 10.11.2016: what about updating - when now linked the
 			 * outline view selection should be updated...
@@ -221,8 +221,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 				OutlineItem outlineItem = (OutlineItem) firstElement;
 				int offset = outlineItem.getOffset();
 				int length = outlineItem.getLength();
-				// /* FIXME ATR, 6.11.2016: remove the print when works...*/
-				// gElement.print();
 				gradleEditor.selectAndReveal(offset, length);
 			}
 		}
@@ -265,6 +263,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 			 * otherwise every char entered at keyboard will reload complete AST
 			 * ...
 			 */
+			/* TODO ATR, 12.11.2016: parser errors should not destroy former model - or at least show "parser errors" or something inside outline */
+			/* TODO ATR, 12.11.2016: while caret changes the update may not proceed, only when caret position no longer moves the update of the document has to be done */
 			Job job = new Job("update gradle editor outline") {
 
 				@Override

@@ -134,12 +134,15 @@ public class OutlineItem {
 			print(child, out, indent + 3);
 		}
 	}
-	
+
 	private boolean closed;
-	
+
+	private String target;
+
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
+
 	public boolean isClosed() {
 		return closed;
 	}
@@ -204,7 +207,15 @@ public class OutlineItem {
 	}
 
 	public boolean hasAlreadyItemTypeDefined() {
-		return ! OutlineItemType.UNKNOWN.equals(getItemType());
+		return !OutlineItemType.UNKNOWN.equals(getItemType());
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 }

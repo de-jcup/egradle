@@ -16,6 +16,7 @@ public class DefaultGradleASTFilterStrategy extends ASTFilterStrategy{
 	
 	@Override
 	public boolean isExpressionIgnored(String name) {
+		if (true)return false;
 		return ! acceptedExpressionNames.contains(name);
 	}
 
