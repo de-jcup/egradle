@@ -6,6 +6,13 @@ import java.util.TreeMap;
 
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 
+
+/**
+ * A simple reflection util which does create a map of names for all fields defined in {@link GroovyTokenTypes}. 
+ * So it's easier to show debug information - e.g. instead of type 7, a "SLIST" can be printed
+ * @author Albert Tregnaghi
+ *
+ */
 class GroovyTokenTypeDebugInfoInspector implements GroovyTokenTypes{
 	
 	private Map<Integer,String> map = new TreeMap<>();

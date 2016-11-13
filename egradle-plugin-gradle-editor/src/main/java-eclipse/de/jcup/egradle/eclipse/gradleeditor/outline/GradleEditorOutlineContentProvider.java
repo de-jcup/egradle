@@ -44,7 +44,8 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	public ModelType getModelType() {
 		if (modelType == null) {
-			modelType = ModelType.GROOVY_FULL_ANTLR;
+			modelType = ModelType.WANTED;//GROOVY_FULL_ANTLR;
+			
 		}
 		return modelType;
 	}

@@ -265,19 +265,24 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		} else if (enameString.equals("apply")) {
 			item.setItemType(OutlineItemType.APPLY_SETUP);
 			handleApplyType(item, lastAst);
-			if (! OutlineItemType.APPLY_SETUP.equals(item.getItemType())){
-				AST target = methodCall.getNextSibling();
-				if (target!=null){
-					item.setTarget(target.getText());
-				}
-			}
 		}
 		if (lastAst != null) {
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
 				if (item.getItemType() == OutlineItemType.TASK_SETUP) {
 					item.setItemType(OutlineItemType.TASK_CLOSURE);
 				} else {
-					item.setItemType(OutlineItemType.CLOSURE);
+					String name = item.getName();
+					if ("repositories".equals(name)){
+						item.setItemType(OutlineItemType.REPOSITORIES);
+					}else if ("allprojects".equals(name)){
+						item.setItemType(OutlineItemType.ALL_PROJECTS);
+					}else if ("subprojects".equals(name)){
+						item.setItemType(OutlineItemType.SUB_PROJECTS);
+					}else if ("dependencies".equals(name)){
+						item.setItemType(OutlineItemType.DEPENDENCIES);
+					}else{
+						item.setItemType(OutlineItemType.CLOSURE);
+					}
 				}
 				/* inspect children... */
 				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
@@ -302,10 +307,14 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		if (applyKind == null) {
 			return;
 		}
-		if (GroovyTokenTypes.IDENT != applyKind.getType()) {
+		if (GroovyTokenTypes.LABELED_ARG != applyKind.getType()) {
 			return;
 		}
-		String typeStr = applyKind.getText();
+		AST applyLabel = applyKind.getFirstChild();
+		if (applyLabel== null){
+			return;
+		}
+		String typeStr = applyLabel.getText();
 		if ("plugin".equals(typeStr)) {
 			item.setItemType(OutlineItemType.APPLY_PLUGIN);
 			item.setName("apply plugin");
@@ -313,7 +322,38 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			item.setItemType(OutlineItemType.APPLY_FROM);
 			item.setName("apply from");
 		}
+		AST applyTarget = applyLabel.getNextSibling();
+		if (applyTarget==null){
+			return;
+		}
+		String target= resolveAsSimpleString(applyTarget);
+		item.setTarget(target);
+	}
 
+	private String resolveAsSimpleString(AST ast) {
+		if (ast==null){
+			return "";
+		}
+		if (GroovyTokenTypes.STRING_LITERAL==ast.getType()){
+			return ast.getText();
+		}else if (GroovyTokenTypes.STRING_CONSTRUCTOR==ast.getType()){
+			return resolveStringOfFirstChildAndSiblings(ast);
+		}else if (GroovyTokenTypes.EXPR==ast.getType()){
+			return resolveName(ast.getFirstChild());
+		}else if (GroovyTokenTypes.SLIST==ast.getType()){
+			return resolveStringOfFirstChildAndSiblings(ast);
+		}
+		return ast.toString();
+	}
+
+	private String resolveStringOfFirstChildAndSiblings(AST ast) {
+		StringBuilder sb = new StringBuilder();
+		AST part = ast.getFirstChild();
+		while (part!=null){
+			sb.append(resolveAsSimpleString(part));
+			part = part.getNextSibling();
+		}
+		return sb.toString();
 	}
 
 	private AST handleTaskClosure(String enameString, OutlineItem item, AST lastAst) {
@@ -397,6 +437,9 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private void resolveName(StringBuilder sb, AST ast) {
+		if (ast==null){
+			return;
+		}
 		if (ast.getType() == GroovyTokenTypes.DOT) {
 			/* is dot */
 			AST content = ast.getFirstChild();
@@ -438,7 +481,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 
 			int length = offset2 - offset1;
 			if (length < 0) {
-				/* fallback */
+				/* fall back */
 				length = gast.getColumnLast() - column;
 			}
 			item.setLength(length);
@@ -450,7 +493,6 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 
 	private class Context {
 		private ExtendedSourceBuffer buffer;
-		public AST astbefore;
 	}
 
 }

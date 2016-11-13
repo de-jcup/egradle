@@ -202,7 +202,7 @@ public class WantedOutlineModelBuilderTest {
 	@Test
 	public void apply_plugin_java() throws Exception {
 		/* prepare */
-		String text = "apply plugin 'java'";
+		String text = "apply plugin: 'java'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
 
@@ -224,7 +224,7 @@ public class WantedOutlineModelBuilderTest {
 	@Test
 	public void apply_from_bla() throws Exception {
 		/* prepare */
-		String text = "apply from 'bla'";
+		String text = "apply from: 'bla'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
 
@@ -242,4 +242,27 @@ public class WantedOutlineModelBuilderTest {
 		assertEquals("bla", taskSetupItem.getTarget());
 		
 	}
+	
+	@Test
+	public void apply_from_with_gstring_containing_variables() throws Exception {
+		/* prepare */
+		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\"";
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		WantedOutlineModelBuilder b = new WantedOutlineModelBuilder(is);
+
+		/* execute */
+		OutlineModel model = b.build();
+
+		/* test */
+		OutlineItem[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		
+		OutlineItem taskSetupItem = items[0];
+		assertEquals(OutlineItemType.APPLY_FROM, taskSetupItem.getItemType());
+		assertEquals("apply from", taskSetupItem.getName());
+		assertEquals("rootProject.projectDir/libraries.gradle", taskSetupItem.getTarget());
+		
+	}
+	
 }

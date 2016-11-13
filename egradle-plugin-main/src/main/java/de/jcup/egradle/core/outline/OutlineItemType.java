@@ -20,5 +20,13 @@ public enum OutlineItemType {
 	
 	APPLY_PLUGIN, 
 	
+	REPOSITORIES, 
+	
+	ALL_PROJECTS, 
+	
+	SUB_PROJECTS, 
+	
+	DEPENDENCIES, 
+	
 	
 }

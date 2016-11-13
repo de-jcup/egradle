@@ -1,5 +1,8 @@
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.P_LINK_OUTLINE_WITH_EDITOR;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.EDITOR_PREFERENCES;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -8,14 +11,11 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.fieldassist.DecoratedField;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
-import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
-import org.eclipse.jface.viewers.ILabelDecorator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -25,7 +25,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
@@ -35,8 +34,6 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 	private GradleEditor gradleEditor;
@@ -81,10 +78,9 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-		viewMenuManager.add(tokenModelChangeAction);
+		viewMenuManager.add(groovyFullAntlrModelChangeAction);
 		viewMenuManager.add(wantedModelChangeAction);
-		viewMenuManager.add(groovyFullAntlrModelChangeAction);
-		viewMenuManager.add(groovyFullAntlrModelChangeAction);
+		viewMenuManager.add(tokenModelChangeAction);
 		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
 		viewMenuManager.add(expandAllAction);
 		viewMenuManager.add(collapseAllAction);

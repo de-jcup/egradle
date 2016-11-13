@@ -8,6 +8,7 @@ import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.ui.ISharedImages;
 
 import de.jcup.egradle.core.outline.OutlineItem;
 import de.jcup.egradle.core.outline.OutlineItemType;
@@ -26,8 +27,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICONS_OUTLINE_PROTECTED_CO_PNG = "/icons/outline/protected_co.png";
 	private static final String ICONS_OUTLINE_PRIVATE_CO_PNG = "/icons/outline/private_co.png";
 	private static final String ICONS_OUTLINE_TASK_PNG = "/icons/outline/typevariable_obj.png";
-	private static final String ICONS_OUTLINE_APPLY_FROM_PNG = "/icons/outline/templateprop_co.png";
+	private static final String ICONS_OUTLINE_APPLY_FROM_PNG = "/icons/outline/apply_from.png";
 	private static final String ICONS_OUTLINE_APPLY_PLUGIN_PNG = "/icons/outline/plugins.png";
+	private static final String ICONS_OUTLINE_REPOSITORIES = "/icons/outline/memory_view.png";
+	private static final String ICONS_OUTLINE_DEPENDENCIES = "/icons/outline/module_view.png";
+	private static final String ICONS_OUTLINE_ALL_PROJECTS = "/icons/outline/prj_mode.png";
+	private static final String ICONS_OUTLINE_SUB_PROJECTS = "/icons/outline/prj_mode.png";
 	
 	@Override
 	public Image getImage(Object element) {
@@ -63,7 +68,14 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return EGradleUtil.getImage(ICONS_OUTLINE_APPLY_FROM_PNG, Activator.PLUGIN_ID);
 			case APPLY_PLUGIN:
 				return EGradleUtil.getImage(ICONS_OUTLINE_APPLY_PLUGIN_PNG, Activator.PLUGIN_ID);
-
+			case REPOSITORIES:
+				return EGradleUtil.getImage(ICONS_OUTLINE_REPOSITORIES, Activator.PLUGIN_ID);
+			case ALL_PROJECTS:
+				return EGradleUtil.getImage(ICONS_OUTLINE_ALL_PROJECTS, Activator.PLUGIN_ID);
+			case SUB_PROJECTS:
+				return EGradleUtil.getImage(ICONS_OUTLINE_SUB_PROJECTS, Activator.PLUGIN_ID);
+			case DEPENDENCIES:
+				return EGradleUtil.getImage(ICONS_OUTLINE_DEPENDENCIES, Activator.PLUGIN_ID);
 			default:
 				return null;
 			}
@@ -90,7 +102,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.GRAY);
+			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GREEN);
 		}
 	};
 
