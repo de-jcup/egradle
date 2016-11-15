@@ -85,7 +85,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	private void walkThroughASTandSiblings(Context context, OutlineItem parent, AST current)
 			throws OutlineModelBuilderException {
 		while (current != null) {
-			OutlineItem item = buildItem(context, current);
+			OutlineItem item = buildItem(context, parent, current);
 			if (item != null) {
 				parent.add(item);
 			}
@@ -97,12 +97,14 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	 * Builds new item or <code>null</code>
 	 * 
 	 * @param context
+	 * @param parent
 	 * 
 	 * @param current
 	 * @return
 	 * @throws OutlineModelBuilderException
 	 */
-	protected OutlineItem buildItem(Context context, AST current) throws OutlineModelBuilderException {
+	protected OutlineItem buildItem(Context context, OutlineItem parent, AST current)
+			throws OutlineModelBuilderException {
 		OutlineItem item;
 		switch (current.getType()) {
 		case CLASS_DEF:
@@ -110,7 +112,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			walkThroughASTandSiblings(context, item, current.getFirstChild());
 			break;
 		case EXPR:
-			item = createExpression(context, current);
+			item = createExpression(context, parent, current);
 			break;
 		case VARIABLE_DEF:
 			item = createVariableDef(context, current);
@@ -209,7 +211,8 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 		return item;
 	}
 
-	private OutlineItem createExpression(Context context, AST current) throws OutlineModelBuilderException {
+	private OutlineItem createExpression(Context context, OutlineItem parent, AST current)
+			throws OutlineModelBuilderException {
 		AST next = current.getFirstChild();
 		if (next == null) {
 			return null;
@@ -233,21 +236,40 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 				return null;
 			}
 		}
+		AST methodChild = methodCall.getFirstChild();
+		if (methodChild == null) {
+			return null;
+		}
+		/* TODO ATR: expression can have << inside -e.g. task myTask(type:xxx){ blubb }<< xxx so
+		 * the first element is not the name of the task but an elist!
+		 */
 		AST ename = methodCall.getFirstChild();
 		if (ename == null) {
 			return null;
 		}
-		String enameString = resolveName(ename);
+		AST astForName = methodChild;
+		String enameString = resolveName(astForName);
 		if (enameString == null) {
 			return null;
 		}
+		
 		if (filterStrategy.isExpressionIgnored(enameString)) {
 			return null;
 		}
 
 		OutlineItemType outlineType = null;
 		if (methodCall.getType() == METHOD_CALL) {
-			outlineType = OutlineItemType.METHOD_CALL;
+
+			if (parent != null) {
+				if (OutlineItemType.DEPENDENCIES == parent.getItemType()) {
+					outlineType = OutlineItemType.DEPENDENCY;
+				}else if (OutlineItemType.REPOSITORIES == parent.getItemType()) {
+					outlineType = OutlineItemType.REPOSITORY;
+				}
+			}
+			if (outlineType == null) {
+				outlineType = OutlineItemType.METHOD_CALL;
+			}
 		} else {
 			return null;
 		}
@@ -266,21 +288,33 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			item.setItemType(OutlineItemType.APPLY_SETUP);
 			handleApplyType(item, lastAst);
 		}
+		if (outlineType == OutlineItemType.DEPENDENCY) {
+			return handleDependencyAndReturnItem(methodCall, item);
+		}
+		if (outlineType==OutlineItemType.REPOSITORY){
+			return item;
+		}
 		if (lastAst != null) {
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
 				if (item.getItemType() == OutlineItemType.TASK_SETUP) {
 					item.setItemType(OutlineItemType.TASK_CLOSURE);
 				} else {
 					String name = item.getName();
-					if ("repositories".equals(name)){
+					if ("repositories".equals(name)) {
 						item.setItemType(OutlineItemType.REPOSITORIES);
-					}else if ("allprojects".equals(name)){
+					} else if ("allprojects".equals(name)) {
 						item.setItemType(OutlineItemType.ALL_PROJECTS);
-					}else if ("subprojects".equals(name)){
+					} else if ("subprojects".equals(name)) {
 						item.setItemType(OutlineItemType.SUB_PROJECTS);
-					}else if ("dependencies".equals(name)){
+					} else if ("dependencies".equals(name)) {
 						item.setItemType(OutlineItemType.DEPENDENCIES);
-					}else{
+					} else if ("test".equals(name)) {
+						item.setItemType(OutlineItemType.TEST);
+					} else if ("clean".equals(name)) {
+						item.setItemType(OutlineItemType.CLEAN);
+					} else if ("buildscript".equals(name)) {
+						item.setItemType(OutlineItemType.BUILDSCRIPT);
+					} else {
 						item.setItemType(OutlineItemType.CLOSURE);
 					}
 				}
@@ -289,6 +323,22 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			}
 		}
 
+		return item;
+	}
+
+	private OutlineItem handleDependencyAndReturnItem(AST methodCall, OutlineItem item) {
+		AST configuration = methodCall.getFirstChild();
+		AST configurationParameter = null;
+
+		if (configuration != null) {
+			configurationParameter = configuration.getNextSibling();
+		}
+		if (configurationParameter == null) {
+			return item;
+		}
+		String depencyName = resolveAsSimpleString(configurationParameter);
+		item.setConfiguration(configuration.getText());
+		item.setName(depencyName);
 		return item;
 	}
 
@@ -311,7 +361,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			return;
 		}
 		AST applyLabel = applyKind.getFirstChild();
-		if (applyLabel== null){
+		if (applyLabel == null) {
 			return;
 		}
 		String typeStr = applyLabel.getText();
@@ -323,35 +373,68 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 			item.setName("apply from");
 		}
 		AST applyTarget = applyLabel.getNextSibling();
-		if (applyTarget==null){
+		if (applyTarget == null) {
 			return;
 		}
-		String target= resolveAsSimpleString(applyTarget);
+		String target = resolveAsSimpleString(applyTarget);
 		item.setTarget(target);
 	}
 
 	private String resolveAsSimpleString(AST ast) {
-		if (ast==null){
+		if (ast == null) {
 			return "";
 		}
-		if (GroovyTokenTypes.STRING_LITERAL==ast.getType()){
+		int type = ast.getType();
+		if (GroovyTokenTypes.STRING_LITERAL == type) {
 			return ast.getText();
-		}else if (GroovyTokenTypes.STRING_CONSTRUCTOR==ast.getType()){
+		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
 			return resolveStringOfFirstChildAndSiblings(ast);
-		}else if (GroovyTokenTypes.EXPR==ast.getType()){
-			return resolveName(ast.getFirstChild());
-		}else if (GroovyTokenTypes.SLIST==ast.getType()){
-			return resolveStringOfFirstChildAndSiblings(ast);
+		} else {
+			AST firstChild = ast.getFirstChild();
+			if (GroovyTokenTypes.EXPR == type) {
+				return resolveName(firstChild);
+			} else if (GroovyTokenTypes.SLIST == type) {
+				return resolveStringOfFirstChildAndSiblings(ast);
+			} else if (GroovyTokenTypes.ELIST == type) {
+				return resolveStringOfFirstChildAndSiblings(ast, ", ");
+			} else if (GroovyTokenTypes.DOT == type) {
+				if (firstChild == null) {
+					return "";
+				}
+				StringBuilder sb = new StringBuilder();
+				sb.append(resolveAsSimpleString(firstChild));
+				sb.append('.');
+				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
+				return sb.toString();
+			} else if (GroovyTokenTypes.LABELED_ARG == type) {
+				if (firstChild == null) {
+					return "";
+				}
+				StringBuilder sb = new StringBuilder();
+				sb.append(resolveAsSimpleString(firstChild));
+				sb.append(':');
+				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
+				return sb.toString();
+			}
 		}
 		return ast.toString();
 	}
 
 	private String resolveStringOfFirstChildAndSiblings(AST ast) {
+		return resolveStringOfFirstChildAndSiblings(ast, null);
+	}
+
+	private String resolveStringOfFirstChildAndSiblings(AST ast, String separator) {
 		StringBuilder sb = new StringBuilder();
 		AST part = ast.getFirstChild();
-		while (part!=null){
+		while (part != null) {
 			sb.append(resolveAsSimpleString(part));
 			part = part.getNextSibling();
+			if (part != null) {
+				if (separator != null) {
+					sb.append(separator);
+				}
+			}
 		}
 		return sb.toString();
 	}
@@ -437,7 +520,7 @@ public class WantedOutlineModelBuilder implements OutlineModelBuilder {
 	}
 
 	private void resolveName(StringBuilder sb, AST ast) {
-		if (ast==null){
+		if (ast == null) {
 			return;
 		}
 		if (ast.getType() == GroovyTokenTypes.DOT) {

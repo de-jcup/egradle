@@ -28,5 +28,17 @@ public enum OutlineItemType {
 	
 	DEPENDENCIES, 
 	
+	DEPENDENCY, 
+	
+	TEST, 
+	
+	CLEAN, 
+	
+	BUILDSCRIPT, 
+	
+	CONFIGURATIONS, 
+	
+	REPOSITORY, 
+	
 	
 }

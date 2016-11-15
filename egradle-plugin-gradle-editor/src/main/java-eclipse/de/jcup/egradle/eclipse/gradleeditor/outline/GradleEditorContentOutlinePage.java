@@ -16,6 +16,8 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -34,7 +36,7 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
-public class GradleEditorContentOutlinePage extends ContentOutlinePage {
+public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 
 	private GradleEditor gradleEditor;
 	private GradleEditorOutlineContentProvider contentProvider;
@@ -56,6 +58,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 		TreeViewer viewer = getTreeViewer();
 		viewer.setContentProvider(contentProvider);
+		viewer.addDoubleClickListener(this);
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		viewer.addSelectionChangedListener(this);
 
@@ -210,6 +213,10 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 			return;
 		}
 		ISelection selection = event.getSelection();
+		openSelectedTreeItemInEditor(selection);
+	}
+
+	private void openSelectedTreeItemInEditor(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object firstElement = ss.getFirstElement();
@@ -287,6 +294,14 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage {
 
 	public void ignoreNextSelectionEvents(boolean ignore) {
 
+	}
+
+	@Override
+	public void doubleClick(DoubleClickEvent event) {
+		if (linkingWithEditorEnabled){
+			return; // already handled by single click
+		}
+		openSelectedTreeItemInEditor(event.getSelection());
 	}
 
 }

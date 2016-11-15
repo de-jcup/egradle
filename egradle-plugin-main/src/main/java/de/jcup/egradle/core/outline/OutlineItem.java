@@ -139,6 +139,8 @@ public class OutlineItem {
 
 	private String target;
 
+	private String configuration;
+
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
@@ -216,6 +218,14 @@ public class OutlineItem {
 
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public String getConfiguration() {
+		return configuration;
+	}
+	
+	public void setConfiguration(String configuration) {
+		this.configuration = configuration;
 	}
 
 }
