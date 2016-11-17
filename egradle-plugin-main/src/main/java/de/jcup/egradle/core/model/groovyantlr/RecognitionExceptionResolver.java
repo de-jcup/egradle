@@ -1,7 +1,7 @@
 package de.jcup.egradle.core.model.groovyantlr;
 
-import groovyjarjarantlr.RecognitionException;
-import groovyjarjarantlr.TokenStreamRecognitionException;
+import antlr.RecognitionException;
+import antlr.TokenStreamRecognitionException;
 
 public class RecognitionExceptionResolver {
 	

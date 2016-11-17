@@ -28,11 +28,18 @@ subprojects {
 	if (doAutomateEclipseSetup.contains(project.name)){
 		apply plugin: 'eclipse'
 	}
-	
+	sourceSets {
+			  	main {
+			   		java {
+			    		srcDir 'src/main/java'
+			    		srcDir 'src/main/java-groovy'
+			    		}
+			   }	
+	}
 	apply plugin: "maven"
 		
 	group = "de.jcup.egradle" 
-	version = "0.1"
+	version = "0.10.0"
 	def buildNr = System.getenv('bamboo.buildNumber')
 	// use build number in version
 	if (buildNr != null && ! buildNr.isEmpty()){

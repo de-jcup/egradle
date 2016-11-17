@@ -1,15 +1,14 @@
 package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.model.groovyantlr.RecognitionExceptionResolver;
-import groovyjarjarantlr.RecognitionException;
-import groovyjarjarantlr.TokenStreamRecognitionException;
+import antlr.RecognitionException;
+import antlr.TokenStreamRecognitionException;
 
-import static org.mockito.Mockito.*;
 
 public class RecognitionExceptionResolverTest {
 	RecognitionExceptionResolver resolverToTest;

@@ -8,14 +8,14 @@ import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
 
+import antlr.RecognitionException;
+import antlr.TokenStreamException;
+import antlr.collections.AST;
 import de.jcup.egradle.core.model.BuildContext;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder;
 import de.jcup.egradle.core.model.ModelImpl;
-import groovyjarjarantlr.RecognitionException;
-import groovyjarjarantlr.TokenStreamException;
-import groovyjarjarantlr.collections.AST;
 
 /**
  * Builds a outline model containing simply all AST parts from groovy antlr
