@@ -31,7 +31,6 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.core.token.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -68,9 +67,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		IDocument document = setTreeViewerDocument();
 		document.addDocumentListener(documentListener);
 
-		TokenModelChangeAction tokenModelChangeAction = new TokenModelChangeAction();
-		WantedModelChangeAction wantedModelChangeAction = new WantedModelChangeAction();
-		GroovyFullAntlrModelChangeAction groovyFullAntlrModelChangeAction = new GroovyFullAntlrModelChangeAction();
+		ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
+		ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
 		CollapseAllAction collapseAllAction = new CollapseAllAction();
 		ExpandAllAction expandAllAction = new ExpandAllAction();
 		toggleLinkingAction = new ToggleLinkingAction();
@@ -84,9 +82,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-		viewMenuManager.add(groovyFullAntlrModelChangeAction);
-		viewMenuManager.add(wantedModelChangeAction);
-		viewMenuManager.add(tokenModelChangeAction);
+		viewMenuManager.add(showGroovyFullAntlrModelAction);
+		viewMenuManager.add(showGradleOutlineModelAction);
 		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
 		viewMenuManager.add(expandAllAction);
 		viewMenuManager.add(collapseAllAction);
@@ -146,7 +143,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	}
 
 	private IDocument setTreeViewerDocument() {
-		DebugUtil.trace("set tree document");
 		IDocumentProvider documentProvider = gradleEditor.getDocumentProvider();
 		IDocument document = documentProvider.getDocument(gradleEditor.getEditorInput());
 		getTreeViewer().setInput(document);
@@ -241,7 +237,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 	}
 
-	private class GroovyFullAntlrModelChangeAction extends ChangeModelTypeAction {
+	private class ShowGroovyFullAntlrModelAction extends ChangeModelTypeAction {
 
 		@Override
 		protected ModelType changeTo() {
@@ -282,16 +278,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 
 	}
-	private class TokenModelChangeAction extends ChangeModelTypeAction {
 
-		@Override
-		protected ModelType changeTo() {
-			return ModelType.TOKEN;
-		}
-
-	}
-
-	private class WantedModelChangeAction extends ChangeModelTypeAction {
+	private class ShowGradleOutlineModelAction extends ChangeModelTypeAction {
 
 		@Override
 		protected ModelType changeTo() {

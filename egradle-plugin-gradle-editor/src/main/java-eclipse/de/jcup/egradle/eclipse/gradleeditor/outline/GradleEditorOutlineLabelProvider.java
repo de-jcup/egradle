@@ -12,7 +12,6 @@ import org.eclipse.swt.graphics.TextStyle;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Modifier;
-import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
@@ -198,10 +197,6 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				styled.append(debugString);
 			}
 		} else {
-			if (element instanceof Token) {
-				Token gelement = (Token) element;
-				return styled.append(gelement.getValue());
-			}
 			return styled.append(element.toString());
 		}
 		

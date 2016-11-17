@@ -20,9 +20,6 @@ import de.jcup.egradle.core.model.ModelBuilder;
 import de.jcup.egradle.core.model.ModelBuilder.OutlineModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
-import de.jcup.egradle.core.model.token.DefaultTokenModelBuilder;
-import de.jcup.egradle.core.token.parser.TokenParser;
-import de.jcup.egradle.core.token.parser.TokenParserResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
@@ -35,8 +32,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	private static Object[] EMPTY = new Object[] {};
 
 	private ModelType modelType;
-
-	private TokenParser parser = new TokenParser();
 
 	private GradleEditor editor;
 
@@ -88,9 +83,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				ModelType modelType = getModelType();
 
 				switch (modelType) {
-				case TOKEN:
-					elements = buildTokenModel(charset, is);
-					break;
 				case GROOVY_FULL_ANTLR:
 					elements = buildGroovyASTModel(charset, is);
 					break;
@@ -211,11 +203,11 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		return file;
 	}
 
-	private Object[] buildTokenModel(String charset, InputStream is) throws Exception {
-		TokenParserResult ast = parser.parse(is, charset);
-		ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
-		return createModelAndGetRootElements(null, builder);
-	}
+//	private Object[] buildTokenModel(String charset, InputStream is) throws Exception {
+//		TokenParserResult ast = parser.parse(is, charset);
+//		ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
+//		return createModelAndGetRootElements(null, builder);
+//	}
 
 	private Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
 			throws OutlineModelBuilderException {
@@ -245,8 +237,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		
 		GROOVY_FULL_ANTLR,
 
-		TOKEN,
-	
 	
 	}
 
