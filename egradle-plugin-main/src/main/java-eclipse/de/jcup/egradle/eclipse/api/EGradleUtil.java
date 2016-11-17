@@ -159,7 +159,7 @@ public class EGradleUtil {
 
 	public static boolean existsValidationErrors() {
 		/* Not very smart integrated, because static but it works... */
-		return buildScriptProblemMarkerHelper.hasErrors();
+		return buildScriptProblemMarkerHelper.hasRegisteredMarkers();
 	}
 
 	public static IEditorPart getActiveEditor() {
@@ -586,7 +586,7 @@ public class EGradleUtil {
 
 	public static void removeAllValidationErrorsOfConsoleOutput() {
 		try {
-			buildScriptProblemMarkerHelper.removeAllErrorMarkers();
+			buildScriptProblemMarkerHelper.removeAllRegisteredMarkers();
 		} catch (CoreException e) {
 			log(e);
 		}

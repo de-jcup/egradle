@@ -9,9 +9,9 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
 
-import de.jcup.egradle.core.outline.OutlineItem;
-import de.jcup.egradle.core.outline.OutlineItemType;
-import de.jcup.egradle.core.outline.OutlineModifier;
+import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemType;
+import de.jcup.egradle.core.model.Modifier;
 import de.jcup.egradle.core.token.Token;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -20,9 +20,11 @@ import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		implements IStyledLabelProvider, IColorProvider {
+	
+	private static final boolean DEBUG = Boolean.parseBoolean(System.getProperty("egradle.labelprovider.debug"));
 
 	private static final String ICON_REPOSITORY = "imp_obj.png";
-	private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
+	//private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
 	private static final String ICON_PUBLIC_CO_PNG = "public_co.png";
 	private static final String ICON_PROTECTED_CO_PNG = "protected_co.png";
 	private static final String ICON_PRIVATE_CO_PNG = "private_co.png";
@@ -43,12 +45,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 	@Override
 	public Image getImage(Object element) {
-		if (element instanceof OutlineItem) {
-			OutlineItem item = (OutlineItem) element;
-			OutlineItemType type = item.getItemType();
+		if (element instanceof Item) {
+			Item item = (Item) element;
+			ItemType type = item.getItemType();
 			switch (type) {
 			case VARIABLE:
-				OutlineModifier modifier = item.getModifier();
+				Modifier modifier = item.getModifier();
 				String path = null;
 				switch (modifier) {
 				case PRIVATE:
@@ -146,10 +148,10 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		if (element == null) {
 			styled.append("null");
 		}
-		if (element instanceof OutlineItem) {
-			OutlineItem outlineItem = (OutlineItem) element;
+		if (element instanceof Item) {
+			Item item = (Item) element;
 			
-			String configuration = outlineItem.getConfiguration();
+			String configuration = item.getConfiguration();
 			if (configuration!=null){
 				StringBuilder sb = new StringBuilder();
 				sb.append("[");
@@ -158,12 +160,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				styled.append(new StyledString(sb.toString(),outlineItemConfigurationStyler));
 			}
 			
-			String name = outlineItem.getName();
+			String name = item.getName();
 			if (name != null) {
 				styled.append(name);
 			}
 
-			String type = outlineItem.getType();
+			String type = item.getType();
 			if (type != null) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(" :");
@@ -171,13 +173,13 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				StyledString typeString = new StyledString(sb.toString(), outlineItemTypeStyler);
 				styled.append(typeString);
 			}
-			String target = outlineItem.getTarget();
+			String target = item.getTarget();
 			if (target != null) {
 				StyledString targetString = new StyledString(":" + target, outlineItemTargetStyler);
 				styled.append(targetString);
 			}
 
-			String info = outlineItem.getInfo();
+			String info = item.getInfo();
 			if (info != null) {
 				StringBuilder sb = new StringBuilder();
 				sb.append("  [");
@@ -187,6 +189,14 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				StyledString infoString = new StyledString(sb.toString(), outlineItemInfoStyler);
 				styled.append(infoString);
 			}
+			if (DEBUG){
+				StringBuilder sb = new StringBuilder();
+				sb.append(" --[");
+				sb.append(item.getItemType());
+				sb.append(']');
+				StyledString debugString = new StyledString(sb.toString(), outlineItemConfigurationStyler); 
+				styled.append(debugString);
+			}
 		} else {
 			if (element instanceof Token) {
 				Token gelement = (Token) element;
@@ -194,6 +204,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 			}
 			return styled.append(element.toString());
 		}
+		
+		
+		
 		return styled;
 	}
 

@@ -18,6 +18,7 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
@@ -28,7 +29,7 @@ public class EGradleEditorPreferenceInitializer extends AbstractPreferenceInitia
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = EDITOR_PREFERENCES.getPreferenceStore();
-		store.setDefault(P_LINK_OUTLINE_WITH_EDITOR.getId(), true);
+		store.setDefault(P_LINK_OUTLINE_WITH_EDITOR.getId(), false);
 	}
 
 }

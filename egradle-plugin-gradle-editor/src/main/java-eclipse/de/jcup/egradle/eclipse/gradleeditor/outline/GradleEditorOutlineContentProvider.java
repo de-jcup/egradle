@@ -10,20 +10,27 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
-import de.jcup.egradle.core.outline.OutlineItem;
-import de.jcup.egradle.core.outline.OutlineModel;
-import de.jcup.egradle.core.outline.OutlineModelBuilder;
-import de.jcup.egradle.core.outline.OutlineModelBuilder.OutlineModelBuilderException;
-import de.jcup.egradle.core.outline.groovyantlr.DefaultGradleASTFilterStrategy;
-import de.jcup.egradle.core.outline.groovyantlr.GroovyASTOutlineModelBuilder;
-import de.jcup.egradle.core.outline.groovyantlr.WantedOutlineModelBuilder;
-import de.jcup.egradle.core.outline.token.DefaultTokenOutlineModelBuilder;
+import de.jcup.egradle.core.model.BuildContext;
+import de.jcup.egradle.core.model.Error;
+import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemFilter;
+import de.jcup.egradle.core.model.ItemType;
+import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.core.model.ModelBuilder;
+import de.jcup.egradle.core.model.ModelBuilder.OutlineModelBuilderException;
+import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
+import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
+import de.jcup.egradle.core.model.token.DefaultTokenModelBuilder;
 import de.jcup.egradle.core.token.parser.TokenParser;
 import de.jcup.egradle.core.token.parser.TokenParserResult;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
+import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
 
 public class GradleEditorOutlineContentProvider implements ITreeContentProvider {
+	private static final GradleOutlineItemFilter GRADLE_FILTER = new GradleOutlineItemFilter();
+
+	private PersistedMarkerHelper outlineErrorMarker = new PersistedMarkerHelper("de.jcup.egradle.parse.error");
 
 	private static Object[] EMPTY = new Object[] {};
 
@@ -33,8 +40,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	private GradleEditor editor;
 
-
-	private OutlineModel model;
+	private Model model;
 
 	private Object monitor = new Object();
 
@@ -44,20 +50,12 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	public ModelType getModelType() {
 		if (modelType == null) {
-			modelType = ModelType.WANTED;//GROOVY_FULL_ANTLR;
-			
+			modelType = ModelType.GRADLE;// GROOVY_FULL_ANTLR;
+
 		}
 		return modelType;
 	}
 
-	public enum ModelType {
-		TOKEN,
-
-		GROOVY_FULL_ANTLR,
-
-		WANTED
-	}
-	
 	public void setModelType(ModelType modelType) {
 		this.modelType = modelType;
 	}
@@ -84,85 +82,184 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				}
 			}
 
+			/* try to load */
 			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
 				Object[] elements = null;
-				ModelType type = getModelType();
+				ModelType modelType = getModelType();
 
-				switch (type) {
+				switch (modelType) {
 				case TOKEN:
 					elements = buildTokenModel(charset, is);
 					break;
 				case GROOVY_FULL_ANTLR:
 					elements = buildGroovyASTModel(charset, is);
 					break;
-				case WANTED:
-					elements = buildWantedModel(charset, is);
+				case GRADLE:
+					elements = buildGradleModel(charset, is);
 					break;
 				default:
-					elements = new Object[] { type + " not supported as modeltype!" };
+					elements = new Object[] { modelType + " not supported as modeltype!" };
 				}
 				return elements;
 			} catch (Exception e) {
-				EGradleUtil.log("Was not able to parse string:" + dataAsString, e);
+				EGradleUtil.log("Problems on outline building", e);
+			}
+		}
+		synchronized (monitor) {
+			if (model != null) {
+				/* old model fall back */
+				return getRootChildren();
 			}
 		}
 		return new Object[] { "no content" };
 	}
 
-	private Object[] buildGroovyASTModel(String charset, InputStream is) throws Exception {
-		GroovyASTOutlineModelBuilder builder = new GroovyASTOutlineModelBuilder(is);
-		return createModelAndGetRootElements(builder);
-	}
-
-	private Object[] buildWantedModel(String charset, InputStream is) throws Exception {
-		WantedOutlineModelBuilder builder = new WantedOutlineModelBuilder(is, new DefaultGradleASTFilterStrategy());
-		return createModelAndGetRootElements(builder);
-	}
-
-	private Object[] buildTokenModel(String  charset, InputStream is) throws Exception {
-		TokenParserResult ast = parser.parse(is, charset);
-		OutlineModelBuilder builder = new DefaultTokenOutlineModelBuilder(ast.getRoot());
-		return createModelAndGetRootElements(builder);
-	}
-
-	private Object[] createModelAndGetRootElements(OutlineModelBuilder builder) throws OutlineModelBuilderException {
-		synchronized (monitor) {
-			model = builder.build();
-		}
-		return model.getRoot().getChildren();
-	}
-
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof OutlineItem) {
-			OutlineItem outlineItem = (OutlineItem) parentElement;
-			return outlineItem.getChildren();
+		if (parentElement instanceof Item) {
+			Item item = (Item) parentElement;
+			return item.getChildren();
 		}
 		return EMPTY;
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if (element instanceof OutlineItem) {
-			OutlineItem outlineItem = (OutlineItem) element;
-			return outlineItem.getParent();
+		if (element instanceof Item) {
+			Item item = (Item) element;
+			return item.getParent();
 		}
 		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof OutlineItem) {
-			OutlineItem outlineItem = (OutlineItem) element;
-			return outlineItem.hasChildren();
+		if (element instanceof Item) {
+			Item item = (Item) element;
+			return item.hasChildren();
 		}
 		return false;
 	}
 
-	public OutlineItem tryToFindByOffset(int offset) {
+	public Item tryToFindByOffset(int offset) {
 		synchronized (monitor) {
+			if (model == null) {
+				return null;
+			}
 			return model.getItemAt(offset);
 		}
 	}
 
+	private Object[] buildGroovyASTModel(String charset, InputStream is) throws Exception {
+		GroovyASTModelBuilder builder = new GroovyASTModelBuilder(is);
+		BuildContext context = new BuildContext();
+		Object[] elements = createModelAndGetRootElements(context, builder);
+		appendError(context);
+		return elements;
+	}
+
+	private Object[] buildGradleModel(String charset, InputStream is) throws Exception {
+		GradleModelBuilder builder = new GradleModelBuilder(is);
+		builder.setFilter(GRADLE_FILTER);
+		BuildContext context = new BuildContext();
+		Object[] elements = createModelAndGetRootElements(context, builder);
+		appendError(context);
+		return elements;
+	}
+
+	private void clearErrorMarkers() {
+		IFile file = resolveEditorFile();
+		outlineErrorMarker.removeAllMarkers(file);
+
+		EGradleUtil.removeAllValidationErrorsOfConsoleOutput();
+	}
+
+	private void appendError(BuildContext context) {
+
+		if (!context.hasErrors()) {
+			return;
+		}
+
+		IFile file = resolveEditorFile();
+		if (file == null) {
+			return;
+		}
+
+		try {
+			for (Error error : context.getErrors()) {
+				outlineErrorMarker.createErrorMarker(file, error.getMessage(), error.getLineNumber(),
+						error.getCharStart(), error.getCharEnd());
+			}
+		} catch (CoreException e) {
+			EGradleUtil.log(e);
+		}
+	}
+
+	private IFile resolveEditorFile() {
+		if (editor == null) {
+			return null;
+		}
+		IEditorInput input = editor.getEditorInput();
+		if (input == null) {
+			return null;
+		}
+		IFile file = null;
+		if (input instanceof IFileEditorInput) {
+			IFileEditorInput fei = (IFileEditorInput) input;
+			file = fei.getFile();
+		}
+		return file;
+	}
+
+	private Object[] buildTokenModel(String charset, InputStream is) throws Exception {
+		TokenParserResult ast = parser.parse(is, charset);
+		ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
+		return createModelAndGetRootElements(null, builder);
+	}
+
+	private Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
+			throws OutlineModelBuilderException {
+		synchronized (monitor) {
+			Model newModel = builder.build(context);
+			if (context==null || !context.hasErrors()) {
+				switchToNewModel(newModel);
+			}
+		}
+		return getRootChildren();
+	}
+
+	private void switchToNewModel(Model newModel) {
+		clearErrorMarkers();
+		model = newModel;
+	}
+
+	private Item[] getRootChildren() {
+		if (model == null) {
+			return new Item[] {};
+		}
+		return model.getRoot().getChildren();
+	}
+
+	public enum ModelType {
+		GRADLE,
+		
+		GROOVY_FULL_ANTLR,
+
+		TOKEN,
+	
+	
+	}
+
+	private static class GradleOutlineItemFilter implements ItemFilter {
+
+		@Override
+		public boolean isFiltered(Item item) {
+			/* we do not show item which are remaining as METHOD_CALL will not be shown in outline */
+			if (ItemType.METHOD_CALL == item.getItemType()) {
+				return true;
+			}
+			return false;
+		}
+
+	}
 }

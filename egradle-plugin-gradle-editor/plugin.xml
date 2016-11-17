@@ -50,4 +50,15 @@
             class="de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceInitializer">
       </initializer>
    </extension>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          MARKER                          			 -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --> 
+   <extension 
+   		id="de.jcup.egradle.parse.error"
+    	point="org.eclipse.core.resources.markers"
+    	name="EGradle parse error">
+        <super type="org.eclipse.core.resources.problemmarker"/>
+        <super type="org.eclipse.core.resources.textmarker"/>
+        <persistent value="true"/>
+    </extension>
 </plugin>

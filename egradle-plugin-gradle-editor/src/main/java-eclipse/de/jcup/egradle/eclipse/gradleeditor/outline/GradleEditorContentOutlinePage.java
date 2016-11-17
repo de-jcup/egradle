@@ -1,7 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.P_LINK_OUTLINE_WITH_EDITOR;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.EDITOR_PREFERENCES;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -30,7 +30,7 @@ import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
-import de.jcup.egradle.core.outline.OutlineItem;
+import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.token.parser.DebugUtil;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
@@ -38,11 +38,14 @@ import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 
-	private GradleEditor gradleEditor;
 	private GradleEditorOutlineContentProvider contentProvider;
-	private GradleEditorOutlineLabelProvider labelProvider;
+	private boolean dirty;
 	private DelayedDocumentListener documentListener;
+	private GradleEditor gradleEditor;
 	private boolean ignoreNextSelectionEvents;
+	private GradleEditorOutlineLabelProvider labelProvider;
+	private boolean linkingWithEditorEnabled;
+	private Object monitor = new Object();
 	private ToggleLinkingAction toggleLinkingAction;
 
 	public GradleEditorContentOutlinePage(GradleEditor gradleEditor) {
@@ -90,6 +93,58 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		viewMenuManager.add(toggleLinkingAction);
 	}
 
+	@Override
+	public void doubleClick(DoubleClickEvent event) {
+		if (linkingWithEditorEnabled){
+			return; // already handled by single click
+		}
+		openSelectedTreeItemInEditor(event.getSelection());
+	}
+
+	public void ignoreNextSelectionEvents(boolean ignore) {
+	
+	}
+
+	public void onEditorCaretMoved(int caretOffset) {
+		if (!linkingWithEditorEnabled) {
+			return;
+		}
+		ignoreNextSelectionEvents = true;
+		Item item = contentProvider.tryToFindByOffset(caretOffset);
+		if (item != null) {
+			getTreeViewer().expandToLevel(item, AbstractTreeViewer.ALL_LEVELS);
+			getTreeViewer().setSelection(new StructuredSelection(item));
+		}
+		ignoreNextSelectionEvents = false;
+	}
+
+	@Override
+	public void selectionChanged(SelectionChangedEvent event) {
+		super.selectionChanged(event);
+		if (!linkingWithEditorEnabled) {
+			return;
+		}
+	
+		if (ignoreNextSelectionEvents) {
+			return;
+		}
+		ISelection selection = event.getSelection();
+		openSelectedTreeItemInEditor(selection);
+	}
+
+	private void openSelectedTreeItemInEditor(ISelection selection) {
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection ss = (IStructuredSelection) selection;
+			Object firstElement = ss.getFirstElement();
+			if (firstElement instanceof Item) {
+				Item item = (Item) firstElement;
+				int offset = item.getOffset();
+				int length = item.getLength();
+				gradleEditor.selectAndReveal(offset, length);
+			}
+		}
+	}
+
 	private IDocument setTreeViewerDocument() {
 		DebugUtil.trace("set tree document");
 		IDocumentProvider documentProvider = gradleEditor.getDocumentProvider();
@@ -98,11 +153,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		return document;
 	}
 
-	private boolean linkingWithEditorEnabled;
-
 	private abstract class ChangeModelTypeAction extends Action {
-
-		protected abstract ModelType changeTo();
 
 		protected ChangeModelTypeAction() {
 			setText("Reload as:" + changeTo());
@@ -113,46 +164,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			contentProvider.setModelType(changeTo());
 			getTreeViewer().refresh();
 		}
-	}
 
-	private class TokenModelChangeAction extends ChangeModelTypeAction {
-
-		@Override
-		protected ModelType changeTo() {
-			return ModelType.TOKEN;
-		}
-
-	}
-
-	private class WantedModelChangeAction extends ChangeModelTypeAction {
-
-		@Override
-		protected ModelType changeTo() {
-			return ModelType.WANTED;
-		}
-
-	}
-
-	private class GroovyFullAntlrModelChangeAction extends ChangeModelTypeAction {
-
-		@Override
-		protected ModelType changeTo() {
-			return ModelType.GROOVY_FULL_ANTLR;
-		}
-
-	}
-
-	private class ExpandAllAction extends Action {
-
-		private ExpandAllAction() {
-			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/expandall.png", Activator.PLUGIN_ID));
-			setText("Expand all");
-		}
-
-		@Override
-		public void run() {
-			getTreeViewer().expandAll();
-		}
+		protected abstract ModelType changeTo();
 	}
 
 	private class CollapseAllAction extends Action {
@@ -169,88 +182,12 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 	}
 
-	private class ToggleLinkingAction extends Action {
-
-		private ToggleLinkingAction() {
-			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
-			setDescription("link with editor");
-			initImage();
-			initText();
-		}
-
-		private void initImage() {
-			setImageDescriptor(EGradleUtil.createSharedImageDescriptor(
-					linkingWithEditorEnabled ? ISharedImages.IMG_ELCL_SYNCED : ISharedImages.IMG_ELCL_SYNCED_DISABLED));
-
-		}
-
-		@Override
-		public void run() {
-			linkingWithEditorEnabled = !linkingWithEditorEnabled;
-			
-			/*
-			 * TODO ATR, 10.11.2016: what about updating - when now linked the
-			 * outline view selection should be updated...
-			 */
-			initText();
-			initImage();
-		}
-
-		private void initText() {
-			setText(linkingWithEditorEnabled ? "Unlink" : "Link");
-		}
-
-	}
-
-	@Override
-	public void selectionChanged(SelectionChangedEvent event) {
-		super.selectionChanged(event);
-		if (!linkingWithEditorEnabled) {
-			return;
-		}
-
-		if (ignoreNextSelectionEvents) {
-			return;
-		}
-		ISelection selection = event.getSelection();
-		openSelectedTreeItemInEditor(selection);
-	}
-
-	private void openSelectedTreeItemInEditor(ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof OutlineItem) {
-				OutlineItem outlineItem = (OutlineItem) firstElement;
-				int offset = outlineItem.getOffset();
-				int length = outlineItem.getLength();
-				gradleEditor.selectAndReveal(offset, length);
-			}
-		}
-	}
-
-	public void onEditorCaretMoved(int caretOffset) {
-		if (!linkingWithEditorEnabled) {
-			return;
-		}
-		ignoreNextSelectionEvents = true;
-		OutlineItem outlineItem = contentProvider.tryToFindByOffset(caretOffset);
-		if (outlineItem != null) {
-			getTreeViewer().expandToLevel(outlineItem, AbstractTreeViewer.ALL_LEVELS);
-			getTreeViewer().setSelection(new StructuredSelection(outlineItem));
-		}
-		ignoreNextSelectionEvents = false;
-	}
-
-	private Object monitor = new Object();
-	private boolean dirty;
-
 	private class DelayedDocumentListener implements IDocumentListener {
-
+	
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
-
+	
 		@Override
 		public void documentChanged(DocumentEvent event) {
 			synchronized (monitor) {
@@ -266,10 +203,9 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			 * otherwise every char entered at keyboard will reload complete AST
 			 * ...
 			 */
-			/* TODO ATR, 12.11.2016: parser errors should not destroy former model - or at least show "parser errors" or something inside outline */
 			/* TODO ATR, 12.11.2016: while caret changes the update may not proceed, only when caret position no longer moves the update of the document has to be done */
 			Job job = new Job("update gradle editor outline") {
-
+	
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					synchronized (monitor) {
@@ -289,19 +225,79 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			};
 			job.schedule(1000);
 		}
-
+	
 	}
 
-	public void ignoreNextSelectionEvents(boolean ignore) {
+	private class ExpandAllAction extends Action {
 
-	}
-
-	@Override
-	public void doubleClick(DoubleClickEvent event) {
-		if (linkingWithEditorEnabled){
-			return; // already handled by single click
+		private ExpandAllAction() {
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/expandall.png", Activator.PLUGIN_ID));
+			setText("Expand all");
 		}
-		openSelectedTreeItemInEditor(event.getSelection());
+
+		@Override
+		public void run() {
+			getTreeViewer().expandAll();
+		}
+	}
+
+	private class GroovyFullAntlrModelChangeAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.GROOVY_FULL_ANTLR;
+		}
+
+	}
+
+	private class ToggleLinkingAction extends Action {
+
+		private ToggleLinkingAction() {
+			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
+			setDescription("link with editor");
+			initImage();
+			initText();
+		}
+
+		@Override
+		public void run() {
+			linkingWithEditorEnabled = !linkingWithEditorEnabled;
+			
+			/*
+			 * TODO ATR, 10.11.2016: what about updating - when now linked the
+			 * outline view selection should be updated...
+			 */
+			initText();
+			initImage();
+		}
+
+		private void initImage() {
+			setImageDescriptor(EGradleUtil.createSharedImageDescriptor(
+					linkingWithEditorEnabled ? ISharedImages.IMG_ELCL_SYNCED : ISharedImages.IMG_ELCL_SYNCED_DISABLED));
+
+		}
+
+		private void initText() {
+			setText(linkingWithEditorEnabled ? "Unlink" : "Link");
+		}
+
+	}
+	private class TokenModelChangeAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.TOKEN;
+		}
+
+	}
+
+	private class WantedModelChangeAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.GRADLE;
+		}
+
 	}
 
 }

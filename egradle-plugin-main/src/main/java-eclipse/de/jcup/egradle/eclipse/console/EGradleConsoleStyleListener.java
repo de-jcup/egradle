@@ -31,7 +31,6 @@ import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.Activator;
-import de.jcup.egradle.eclipse.api.ColorManager;
 
 public class EGradleConsoleStyleListener implements LineStyleListener {
 	private final static Collection<ParseData> SHARED_PARSE_DATA = new ArrayList<>();

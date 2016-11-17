@@ -37,18 +37,6 @@ public class TokenParserTest {
 	}
 	
 	@Test
-	@Ignore // - test AST of groovy.jar before continue implementing
-	public void test__def_variable_equal_1__is_divided_in_4_tokens() throws IOException{
-		String text = "def variable=1";
-		/* prepare */
-		TokenParserResult result = parserToTest.parse(createStringInputStream(text), "UTF-8");
-		
-		List<Token> children = result.getRoot().getChildren();
-		assertEquals(4,children.size());
-		
-	}
-	
-	@Test
 	public void two_tokens_test1_and_test2_are_returned_when_lines_are_separated_by_backlash_n() throws IOException{
 		String text = "test1\ntest2";
 		/* prepare */
