@@ -554,8 +554,8 @@ public class GradleModelBuilder implements ModelBuilder {
 				if (name2 != null) {
 					enameString = enameString + " " + name2.getText();
 					item.setName(enameString);
+					lastAst = name2.getNextSibling();
 				}
-				lastAst = name2.getNextSibling();
 			}
 		}
 		return lastAst;
