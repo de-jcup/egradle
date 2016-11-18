@@ -344,10 +344,10 @@ public class GradleModelBuilder implements ModelBuilder {
 
 		AST lastAst = ename.getNextSibling();
 		if ("task".equals(enameString) || enameString.startsWith("task ")) {
-			item.setItemType(ItemType.TASK_SETUP);
+			item.setItemType(ItemType.TASK);
 			lastAst = handleTaskClosure(enameString, item, lastAst);
-		} else if (enameString.startsWith("tasks")) {
-			item.setItemType(ItemType.TASK_SETUP);
+		} else if (enameString.startsWith("tasks.")) {
+			item.setItemType(ItemType.TASKS);
 		} else if (enameString.equals("apply") || enameString.startsWith("apply ")) {
 			item.setItemType(ItemType.APPLY_SETUP);
 			handleApplyType(item, lastAst);
@@ -360,7 +360,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		}
 		if (lastAst != null) {
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
-				if (item.getItemType() == ItemType.TASK_SETUP) {
+				if (item.getItemType() == ItemType.TASK) {
 					item.setItemType(ItemType.TASK_CLOSURE);
 				} else {
 					String name = item.getName();
@@ -372,6 +372,12 @@ public class GradleModelBuilder implements ModelBuilder {
 						item.setItemType(ItemType.SUB_PROJECTS);
 					} else if ("dependencies".equals(name)) {
 						item.setItemType(ItemType.DEPENDENCIES);
+					} else if ("sourceSets".equals(name)) {
+						item.setItemType(ItemType.SOURCESETS);
+					} else if ("main".equals(name)) {
+						item.setItemType(ItemType.MAIN);
+					} else if ("jar".equals(name)) {
+						item.setItemType(ItemType.JAR);
 					} else if ("test".equals(name)) {
 						item.setItemType(ItemType.TEST);
 					} else if ("clean".equals(name)) {

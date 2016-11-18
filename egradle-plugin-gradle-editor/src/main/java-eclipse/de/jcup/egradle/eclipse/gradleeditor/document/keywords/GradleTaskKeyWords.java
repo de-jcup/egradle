@@ -24,6 +24,10 @@ public enum GradleTaskKeyWords implements DocumentKeyWord{
 	DO_FIRST("doFirst"),
 	
 	DO_LAST("doLast"),
+	
+	TYPE("type:"),
+	
+	DEPENDS_ON("dependsOn:"),
 	;
 
 	private String text;

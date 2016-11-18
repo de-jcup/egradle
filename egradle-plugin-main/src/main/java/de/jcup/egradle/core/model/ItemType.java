@@ -10,7 +10,9 @@ public enum ItemType {
 	METHOD_CALL, 
 
 	/* gradle special for parts created */
-	TASK_SETUP, 
+	TASKS, 
+
+	TASK, 
 	
 	TASK_CLOSURE, 
 	
@@ -29,18 +31,24 @@ public enum ItemType {
 	DEPENDENCIES, 
 	
 	DEPENDENCY, 
+
+	MAIN, 
 	
 	TEST, 
 	
 	CLEAN, 
 	
 	BUILDSCRIPT, 
+
+	SOURCESETS, 
 	
 	CONFIGURATIONS, 
 	
 	REPOSITORY, 
 	
 	CLASS, 
+
+	JAR, 
 	
 	PACKAGE, 
 	
@@ -49,6 +57,10 @@ public enum ItemType {
 	DO_FIRST, 
 	
 	DO_LAST, 
+	
+	
+	
+	
 	
 	
 }

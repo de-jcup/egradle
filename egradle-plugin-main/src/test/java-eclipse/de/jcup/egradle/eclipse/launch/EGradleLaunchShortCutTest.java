@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.launch;
+package de.jcup.egradle.eclipse.launch;
 
 import static org.mockito.Mockito.*;
 
@@ -29,23 +29,25 @@ public class EGradleLaunchShortCutTest {
 	private EGradleLaunchShortCut shortCutToTest;
 
 	@Before
-	public void before(){
+	public void before() {
 		shortCutToTest = new EGradleLaunchShortCut();
 	}
-	
+
+	/**
+	 * Cannot be executed by gradle, only inside eclipse. Shall be fixed with #84 (enable egradle code to be build by gradle)
+	 */
 	@Test
-	/* does not work currently, because the mockito dependency is not working. shall be fixed with #84 (enable egradle code to be build by gradle) */
 	public void when_virtual_rootproject_name_is_given_the_configuration_contains_not_a_project_name() {
-		/* prepare*/
+		/* prepare */
 		String projectName = Constants.VIRTUAL_ROOTPROJECT_NAME;
 		ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
 		Object additionalScope = null;
 		IResource resource = mock(IResource.class);
-		
+
 		/* execute */
 		shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, projectName);
-		
-		/* test*/
+
+		/* test */
 		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "");
 	}
 

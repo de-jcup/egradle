@@ -27,7 +27,9 @@ public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 	
 	OPTIONS("options"),
 	
-	SOURCESETS("sourceSets"),
+	SOURCE_SETS("sourceSets"),
+	
+	SOURCE_DIR("srcDir"),
 
 	ROOTPROJECT("rootProject"),
 	
@@ -35,7 +37,8 @@ public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 	
 	JAVAVERSION("JavaVersion"),
 	
-	TYPE("type:"),
+	SYSTEM("System"),
+	
 	;
 
 	private String text;

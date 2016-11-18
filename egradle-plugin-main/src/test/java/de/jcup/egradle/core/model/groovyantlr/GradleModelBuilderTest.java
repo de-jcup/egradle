@@ -34,7 +34,7 @@ public class GradleModelBuilderTest {
 		Item classDef = items[0];
 
 		assertEquals("task clean <<", classDef.getName());
-		assertEquals(ItemType.TASK_SETUP, classDef.getItemType());
+		assertEquals(ItemType.TASK, classDef.getItemType());
 		
 	}
 	
@@ -509,7 +509,7 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 
 		Item taskSetupItem = items[0];
-		assertEquals(ItemType.TASK_SETUP, taskSetupItem.getItemType());
+		assertEquals(ItemType.TASKS, taskSetupItem.getItemType());
 		assertEquals("tasks.sonarrunner.dependson", taskSetupItem.getName());
 
 	}
