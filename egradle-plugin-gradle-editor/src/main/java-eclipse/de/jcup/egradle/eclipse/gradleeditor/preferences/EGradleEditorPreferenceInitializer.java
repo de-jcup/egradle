@@ -29,7 +29,7 @@ public class EGradleEditorPreferenceInitializer extends AbstractPreferenceInitia
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = EDITOR_PREFERENCES.getPreferenceStore();
-		store.setDefault(P_LINK_OUTLINE_WITH_EDITOR.getId(), false);
+		store.setDefault(P_LINK_OUTLINE_WITH_EDITOR.getId(), true);
 	}
 
 }

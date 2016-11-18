@@ -11,6 +11,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
@@ -31,12 +32,16 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
-
+	
+	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",Activator.PLUGIN_ID);
+	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/sync_broken.png",Activator.PLUGIN_ID);
+	
 	private GradleEditorOutlineContentProvider contentProvider;
 	private boolean dirty;
 	private DelayedDocumentListener documentListener;
@@ -82,8 +87,10 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-		viewMenuManager.add(showGroovyFullAntlrModelAction);
-		viewMenuManager.add(showGradleOutlineModelAction);
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS){
+			viewMenuManager.add(showGroovyFullAntlrModelAction);
+			viewMenuManager.add(showGradleOutlineModelAction);
+		}
 		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
 		viewMenuManager.add(expandAllAction);
 		viewMenuManager.add(collapseAllAction);
@@ -219,7 +226,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 					return Status.OK_STATUS;
 				}
 			};
-			job.schedule(1000);
+			job.schedule(1500);
 		}
 	
 	}
@@ -245,8 +252,10 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 
 	}
+	
 
 	private class ToggleLinkingAction extends Action {
+		
 
 		private ToggleLinkingAction() {
 			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
@@ -268,13 +277,11 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 
 		private void initImage() {
-			setImageDescriptor(EGradleUtil.createSharedImageDescriptor(
-					linkingWithEditorEnabled ? ISharedImages.IMG_ELCL_SYNCED : ISharedImages.IMG_ELCL_SYNCED_DISABLED));
-
+			setImageDescriptor(linkingWithEditorEnabled ? IMG_DESC_LINKED : IMG_DESC_NOT_LINKED);
 		}
 
 		private void initText() {
-			setText(linkingWithEditorEnabled ? "Unlink" : "Link");
+			setText(linkingWithEditorEnabled ? "Click to unlink from editor" : "Click to link with editor");
 		}
 
 	}

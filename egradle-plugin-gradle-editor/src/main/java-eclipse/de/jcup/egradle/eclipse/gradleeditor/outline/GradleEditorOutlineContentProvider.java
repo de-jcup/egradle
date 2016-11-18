@@ -10,6 +10,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
+import de.jcup.egradle.core.api.Filter;
+import de.jcup.egradle.core.api.MultiFilter;
 import de.jcup.egradle.core.model.BuildContext;
 import de.jcup.egradle.core.model.Error;
 import de.jcup.egradle.core.model.Item;
@@ -17,8 +19,9 @@ import de.jcup.egradle.core.model.ItemFilter;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder;
-import de.jcup.egradle.core.model.ModelBuilder.OutlineModelBuilderException;
+import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
+import de.jcup.egradle.core.model.groovyantlr.GradleModelFilters;
 import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -38,6 +41,8 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	private Model model;
 
 	private Object monitor = new Object();
+
+	private Filter filter;
 
 	GradleEditorOutlineContentProvider(GradleEditor editor) {
 		this.editor = editor;
@@ -152,11 +157,24 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	private Object[] buildGradleModel(String charset, InputStream is) throws Exception {
 		GradleModelBuilder builder = new GradleModelBuilder(is);
-		builder.setFilter(GRADLE_FILTER);
+		builder.setPreCreationFilter(getFilter());
+		builder.setPostCreationFilter(GRADLE_FILTER);
+		
 		BuildContext context = new BuildContext();
 		Object[] elements = createModelAndGetRootElements(context, builder);
 		appendError(context);
 		return elements;
+	}
+
+	private Filter getFilter() {
+		if (filter==null){
+			MultiFilter mfilter = new MultiFilter();
+			/* TODO ATR, 18.11.2016 - make this settings configurable for user - as done in java outline*/
+			mfilter.add(GradleModelFilters.FILTER_IMPORTS);
+			filter=mfilter;
+			
+		}
+		return filter;
 	}
 
 	private void clearErrorMarkers() {
@@ -210,7 +228,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 //	}
 
 	private Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
-			throws OutlineModelBuilderException {
+			throws ModelBuilderException {
 		synchronized (monitor) {
 			Model newModel = builder.build(context);
 			if (context==null || !context.hasErrors()) {
@@ -252,4 +270,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		}
 
 	}
+	
+	
 }

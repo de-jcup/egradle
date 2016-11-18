@@ -37,6 +37,7 @@ public class EGradleEditorPreferencePage extends FieldEditorPreferencePage imple
 
 		linkEditorWithOutline = new BooleanFieldEditor(P_LINK_OUTLINE_WITH_EDITOR.getId(), "Link editor with outline (default)",
 				getFieldEditorParent());
+		linkEditorWithOutline.getDescriptionControl(getFieldEditorParent()).setToolTipText("Via this setting the default behaviour for new opened outlines is set");
 
 		addField(linkEditorWithOutline);
 	}

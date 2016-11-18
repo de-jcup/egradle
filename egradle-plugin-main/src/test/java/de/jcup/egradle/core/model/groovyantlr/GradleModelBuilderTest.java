@@ -12,13 +12,97 @@ import de.jcup.egradle.core.model.Error;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.core.model.ModelBuilder.OutlineModelBuilderException;
+import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 
 public class GradleModelBuilderTest {
 	
 	@Test
-	public void test_dependencies_with_classpath_gradle_api__contains_classpath_gradleapi() throws OutlineModelBuilderException {
+	public void task_clean_with_dofirst_short__returns_name_clean() throws ModelBuilderException{
+		String text = "task clean << {}";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals("task clean <<", classDef.getName());
+		assertEquals(ItemType.TASK_SETUP, classDef.getItemType());
+		
+	}
+	
+	@Test
+	public void class_definition_returns_class_item() throws ModelBuilderException{
+		String text = "class MyAdminTask extends DefaultTask {}";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.CLASS, classDef.getItemType());
+		assertEquals("MyAdminTask", classDef.getName());
+		
+	}
+	
+	@Test
+	public void package_definition_returns_package_item() throws ModelBuilderException{
+		String text = "package de.jcup.egradle.examples";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item packageDef = items[0];
+
+		assertEquals(ItemType.PACKAGE, packageDef.getItemType());
+		assertEquals("de.jcup.egradle.examples", packageDef.getName());
+		
+	}
+	
+	@Test
+	public void import_definition_returns_import_item() throws ModelBuilderException{
+		String text = "import org.gradle.api.DefaultTask";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item importDef = items[0];
+
+		assertEquals(ItemType.IMPORT, importDef.getItemType());
+		assertEquals("org.gradle.api.DefaultTask", importDef.getName());
+		
+	}
+	
+	@Test
+	public void dependencies_with_classpath_gradle_api__contains_classpath_gradleapi() throws ModelBuilderException {
 		/* @formatter:off*/
 		String text = 
 		"		dependencies{\n"+
@@ -46,8 +130,8 @@ public class GradleModelBuilderTest {
 
 	}
 	@Test
-	public void test_three_variable_definitions_second_defintion_has_failure_on_line2__context_must_have_error_for_line2()
-			throws OutlineModelBuilderException {
+	public void three_variable_definitions_second_defintion_has_failure_on_line2__context_must_have_error_for_line2()
+			throws ModelBuilderException {
 		/* prepare */
 		// @formatter:off
 		String text = 
@@ -75,7 +159,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test_task_without_type__and__execution_parts() throws OutlineModelBuilderException {
+	public void task_without_type__and__execution_parts() throws ModelBuilderException {
 		/* @formatter:off*/
 		String text = 
 		"		task jacocoRemoteDump() {\n"+
@@ -101,13 +185,13 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 		Item taskClosure = items[0];
 
+		assertEquals("task jacocoRemoteDump() <<jacocoRemoteDump", taskClosure.getName());
 		assertEquals(ItemType.TASK_CLOSURE, taskClosure.getItemType());
-		assertEquals("task jacocoRemoteDump", taskClosure.getName());
 
 	}
 
 	@Test
-	public void test_task_without_type() throws OutlineModelBuilderException {
+	public void task_without_type() throws ModelBuilderException {
 		String text = "task jacocoRemoteDump() {}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -122,13 +206,13 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 		Item taskClosure = items[0];
 
-		assertEquals(ItemType.TASK_CLOSURE, taskClosure.getItemType());
 		assertEquals("task jacocoRemoteDump", taskClosure.getName());
+		assertEquals(ItemType.TASK_CLOSURE, taskClosure.getItemType());
 
 	}
 
 	@Test
-	public void test_dependencies__contains_compile_with_parameter_all() throws OutlineModelBuilderException {
+	public void dependencies__contains_compile_with_parameter_all() throws ModelBuilderException {
 		String text = "dependencies {\n"
 				+ "compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.7'\n" + "}";
 
@@ -158,7 +242,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test_dependencies__contains_testCompile_with_name() throws OutlineModelBuilderException {
+	public void dependencies__contains_testCompile_with_name() throws ModelBuilderException {
 		String text = "dependencies {\ntestCompile library.junit}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -185,9 +269,69 @@ public class GradleModelBuilderTest {
 		assertEquals("testCompile", junitDependency.getConfiguration());
 
 	}
+	
+	@Test 
+	public void simple_string() throws Exception{
+		String text = "String cp = ''";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+	
+		/* execute */
+		Model model = b.build(null);
+	
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+	
+		assertEquals(1, items.length);
+		Item varaibleDef = items[0];
+	
+		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
+		assertEquals("cp", varaibleDef.getName());
+	}
+
+	@Test 
+	public void groovy_string() throws Exception{
+		String text = "String cp = \"\"";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+	
+		/* execute */
+		Model model = b.build(null);
+	
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+	
+		assertEquals(1, items.length);
+		Item varaibleDef = items[0];
+	
+		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
+		assertEquals("cp", varaibleDef.getName());
+	}
+	
+	@Test 
+	public void def_groovy_string() throws Exception{
+		String text = "def String cp = \"\"";
+		
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+	
+		/* execute */
+		Model model = b.build(null);
+	
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+	
+		assertEquals(1, items.length);
+		Item varaibleDef = items[0];
+	
+		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
+		assertEquals("cp", varaibleDef.getName());
+	}
 
 	@Test
-	public void test1_variable_definitions_in_one_line__item_created_has_correct_type() throws Exception {
+	public void variable_definition_in_one_line__item_created_has_correct_type() throws Exception {
 		/* prepare */
 		String text = "def variable1='Hello world'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -210,7 +354,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test2_variable_definitions_in_two_lines__types_and_offset_are_correct() throws Exception {
+	public void two_variable_definitions_in_two_lines__types_and_offset_are_correct() throws Exception {
 		/* prepare */
 		String text = "def variable1='Hello world... from groovy'\n\n\n";
 		int expectedOffsetOfVariable2 = text.length();
@@ -244,7 +388,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test_closure_named_test1234_contains_variable1_is_inside_tree() throws Exception {
+	public void closure_named_test1234_contains_variable1_is_inside_tree() throws Exception {
 		/* prepare */
 		String text = "test1234{\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -272,7 +416,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test_task_doit_contains_variable1_is_inside_tree() throws Exception {
+	public void task_doit_contains_variable1_is_inside_tree() throws Exception {
 		/* prepare */
 		String text = "task doit{\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -287,8 +431,8 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 
 		Item taskDef = items[0];
-		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
 		assertEquals("task doit", taskDef.getName());
+		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
 
 		items = taskDef.getChildren();
 
@@ -300,7 +444,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void test_task_doit_type_compile_contains_variable1_is_inside_tree() throws Exception {
+	public void task_doit_type_compile_contains_variable1_is_inside_tree() throws Exception {
 		/* prepare */
 		String text = "task doit(type: compile){\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -315,9 +459,9 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 
 		Item taskDef = items[0];
-		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
 		assertEquals("task doit", taskDef.getName());
 		assertEquals("compile", taskDef.getType());
+		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
 
 		items = taskDef.getChildren();
 
@@ -430,9 +574,9 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 
 		Item taskSetupItem = items[0];
-		assertEquals(ItemType.APPLY_FROM, taskSetupItem.getItemType());
 		assertEquals("apply from", taskSetupItem.getName());
 		assertEquals("rootProject.projectDir/libraries.gradle", taskSetupItem.getTarget());
+		assertEquals(ItemType.APPLY_FROM, taskSetupItem.getItemType());
 
 	}
 

@@ -35,7 +35,7 @@ public class GroovyASTModelBuilder implements ModelBuilder {
 	}
 
 	@Override
-	public Model build(BuildContext context) throws OutlineModelBuilderException {
+	public Model build(BuildContext context) throws ModelBuilderException {
 		ModelImpl model = new ModelImpl();
 		if (is == null) {
 			return model;
@@ -56,7 +56,7 @@ public class GroovyASTModelBuilder implements ModelBuilder {
 			addGivenElementAndItsSiblingsToItem(sourceBuffer, model, rootItem, first);
 
 		} catch (RecognitionException | TokenStreamException e) {
-			throw new OutlineModelBuilderException("Cannot build outline model because AST parsing problems", e);
+			throw new ModelBuilderException("Cannot build outline model because AST parsing problems", e);
 		}
 
 		return model;

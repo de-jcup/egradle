@@ -13,6 +13,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Modifier;
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
@@ -20,14 +21,13 @@ import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		implements IStyledLabelProvider, IColorProvider {
 	
-	private static final boolean DEBUG = Boolean.parseBoolean(System.getProperty("egradle.labelprovider.debug"));
-
+	private static final String ICON_CLASS = "class_obj.png";
 	private static final String ICON_REPOSITORY = "imp_obj.png";
 	//private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
 	private static final String ICON_PUBLIC_CO_PNG = "public_co.png";
 	private static final String ICON_PROTECTED_CO_PNG = "protected_co.png";
 	private static final String ICON_PRIVATE_CO_PNG = "private_co.png";
-	private static final String ICON_TASK_PNG = "typevariable_obj.png";
+	private static final String ICON_TASK_PNG = "gradle-task.png";
 	private static final String ICON_APPLY_FROM_PNG = "apply_from.png";
 	private static final String ICON_APPLY_PLUGIN_PNG = "plugins.png";
 	private static final String ICON_REPOSITORIES = "memory_view.png";
@@ -37,9 +37,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_DEPENDENCY = "friend_co.png";
 	private static final String ICON_TEST = "test.png";
 	private static final String ICON_CLEAN = "removea_exc.png";
-	private static final String ICON_CLOSURE = "all_sc_obj.png";
+	private static final String ICON_CLOSURE = "closure-parts.png";//"all_sc_obj.png";
 	private static final String ICON_BUILDSCRIPT = "cheatsheet_item_obj.png";
 	private static final String ICON_CONFIGURATIONS = "th_single.png";
+	private static final String ICON_PACKAGE = "package_obj.png";
+	private static final String ICON_DO_FIRST = "doFirst.png";
+	private static final String ICON_DO_LAST = "doLast.png";
 	
 
 	@Override
@@ -69,9 +72,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				}
 				return getOutlineImage(path);
 			case TASK_CLOSURE:
-				return getOutlineImage(ICON_TASK_PNG);
 			case TASK_SETUP:
 				return getOutlineImage(ICON_TASK_PNG);
+				//return EGradleUtil.getImage("/icons/gradle-og.gif", Activator.PLUGIN_ID);
 			case APPLY_FROM:
 				return getOutlineImage(ICON_APPLY_FROM_PNG);
 			case APPLY_PLUGIN:
@@ -98,6 +101,14 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return getOutlineImage(ICON_CONFIGURATIONS);
 			case REPOSITORY:
 				return getOutlineImage(ICON_REPOSITORY);
+			case CLASS:
+				return getOutlineImage(ICON_CLASS);
+			case PACKAGE:
+				return getOutlineImage(ICON_PACKAGE);
+			case DO_FIRST:
+				return getOutlineImage(ICON_DO_FIRST);
+			case DO_LAST:
+				return getOutlineImage(ICON_DO_LAST);
 			default:
 				return null;
 			}
@@ -129,7 +140,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GREEN);
+			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GRAY);
 		}
 	};
 	
@@ -137,7 +148,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.BROWN);
+			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GRAY);
 		}
 	};
 
@@ -153,9 +164,8 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 			String configuration = item.getConfiguration();
 			if (configuration!=null){
 				StringBuilder sb = new StringBuilder();
-				sb.append("[");
 				sb.append(configuration);
-				sb.append("] ");
+				sb.append(" ");
 				styled.append(new StyledString(sb.toString(),outlineItemConfigurationStyler));
 			}
 			
@@ -188,7 +198,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				StyledString infoString = new StyledString(sb.toString(), outlineItemInfoStyler);
 				styled.append(infoString);
 			}
-			if (DEBUG){
+			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS){
 				StringBuilder sb = new StringBuilder();
 				sb.append(" --[");
 				sb.append(item.getItemType());

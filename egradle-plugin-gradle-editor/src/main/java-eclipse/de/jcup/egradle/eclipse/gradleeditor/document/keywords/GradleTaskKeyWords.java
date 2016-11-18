@@ -19,7 +19,9 @@ public enum GradleTaskKeyWords implements DocumentKeyWord{
 
 	TASKDEFINITION("task"),
 	
-	DO_FIRST("<<"),
+	DO_FIRST_SHORT("<<"),
+	
+	DO_FIRST("doFirst"),
 	
 	DO_LAST("doLast"),
 	;

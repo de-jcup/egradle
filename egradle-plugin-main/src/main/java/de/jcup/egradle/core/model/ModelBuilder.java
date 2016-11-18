@@ -7,16 +7,16 @@ public interface ModelBuilder {
 	 * Build outline model
 	 * @param context - can be <code>null</code>
 	 * @return outline model, never <code>null</code>
-	 * @throws OutlineModelBuilderException
+	 * @throws ModelBuilderException
 	 */
-	Model build(BuildContext context) throws OutlineModelBuilderException;
+	Model build(BuildContext context) throws ModelBuilderException;
 	
 	
-	public class OutlineModelBuilderException extends Exception{
+	public class ModelBuilderException extends Exception{
 
 		private static final long serialVersionUID = 1L;
 
-		public OutlineModelBuilderException(String message, Throwable cause) {
+		public ModelBuilderException(String message, Throwable cause) {
 			super(message, cause);
 		}
 

@@ -40,5 +40,15 @@ public enum ItemType {
 	
 	REPOSITORY, 
 	
+	CLASS, 
+	
+	PACKAGE, 
+	
+	IMPORT, 
+	
+	DO_FIRST, 
+	
+	DO_LAST, 
+	
 	
 }

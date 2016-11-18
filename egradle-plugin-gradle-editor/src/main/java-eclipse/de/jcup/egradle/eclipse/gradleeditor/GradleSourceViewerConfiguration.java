@@ -98,7 +98,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), ColorConstants.TASK_DEFAULT_RED,SWT.BOLD|SWT.ITALIC);
 		
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), ColorConstants.GRAY,SWT.ITALIC);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), ColorConstants.DARK_GRAY,SWT.ITALIC);
 		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
 		return reconciler;
 	}
