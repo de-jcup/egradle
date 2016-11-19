@@ -11,8 +11,10 @@
 	<a href="../user_guide.html">User guide</a>
 	<h1>Editor</h1>
 	<p>
-	EGradle has an integrated small editor with following features: 
+	EGradle has an integrated editor with following features: 
 	<ul>
+		<li><a href="#outline">Outline View</a></li>	
+		<li><a href="#parse_failures">Show parse failures</a></li>	
 		<li>Syntax highlighting.
 			<ul>
 				<li>All JAVA keywords</li>
@@ -26,12 +28,57 @@
 		<li>URL linking - press CTRL + mouse click</li> 
 		<li>...new features are planned (e.g. link to included files)</li>
 	</ul>
-	<br>
+	<p>
+		<img src="images/egradle-editor.png" />
+	</p>
 	<br />
-	<img src="images/egradle-editor.png" />
-
-<p>
-	<a href="#top">Top</a>
-</p>
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h2 id="outline">Outline view</h2>
+	<h3>Open outline view</h3>
+	<p>
+		Open a gradle build file with the EGradle editor. If the outline view is already active it will appear automatically, otherwise activate the view:
+	</p>
+	<img src="images/eclipse-show-outline-view.png" />
+	<br />
+	<br />
+	<h3>Content</h3>
+	<p>
+		The outline view will give you a reduced view of your current gradle build file.
+	</p>
+	<img src="images/egradle-editor-outline.png" />
+	<h4>Link with Editor</h4>
+	<p>
+		The outline view can be linked with Editor. In the left picture you see a linked outline. When you
+		click on the red circled button it will change to the purple circled version and the editor is no more linked with 
+		the outline. 
+	</p>
+	<p>
+		A linked outline will correspond on editor caret changes and also set caret and selection if user selects a 
+		position inside outline view by one single click.
+	</p>
+	<p>
+		An unlinked outline has stil the ability to select parts of editor, by doubleclicking to outline item
+	</p>
+	<table border='0'>
+		<tr>
+			<td><img src="images/egradle-editor-outline-linked.png" /></td>
+			<td><img src="images/egradle-editor-outline-unlinked.png" /></td>
+		</tr>
+	</table>
+	
+	
+	<h5 id="outline">Link preferences</h5>
+	<p>
+		Inside editor preferences you are able to setup the default link behavior of new opened outlines
+	</p>
+	<img src="images/egradle-editor-preferences.png" />
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
 </body>
 </html>
