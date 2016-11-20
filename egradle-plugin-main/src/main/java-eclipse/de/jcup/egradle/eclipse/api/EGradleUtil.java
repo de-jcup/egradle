@@ -117,8 +117,12 @@ public class EGradleUtil {
 		return EGradleMessageDialogSupport.INSTANCE;
 	}
 
+	
+
 	/**
-	 * Creates or recreates virtual project
+	 * Creates or recreates virtual project - this is done asynchronous. If
+	 * there exists already a virtual root project it will be deleted full
+	 * before the asynchronous creation process starts!
 	 * 
 	 * @throws VirtualRootProjectException
 	 */
@@ -127,6 +131,13 @@ public class EGradleUtil {
 		if (rootProject == null) {
 			return;
 		}
+
+		try {
+			EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
+		} catch (CoreException e1) {
+			throw new VirtualRootProjectException("Was not able to delete former virtual root project", e1);
+		}
+
 		Job job = new Job("Virtual root project") {
 
 			@Override

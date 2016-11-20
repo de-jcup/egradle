@@ -26,10 +26,10 @@ public class VirtualProjectCreator {
 	/**
 	 * Creates or update a virtual root project. If a former root project exists, it will be removed!
 	 * @param rootProject
-	 * @param visitor
+	 * @param partCreator
 	 * @throws VirtualRootProjectException
 	 */
-	public void createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator visitor)
+	public void createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator partCreator)
 			throws VirtualRootProjectException {
 		if (rootProject == null) {
 			return;
@@ -41,8 +41,12 @@ public class VirtualProjectCreator {
 		if (!rootFolder.exists()){
 			return;
 		}
-		Object project = visitor.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
-		addLinksAndMissingFolders(project, visitor, rootFolder, rootProject);
+		
+		Object project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
+		if (project==null){
+			throw new VirtualRootProjectException("Was not able create or recreate "+VIRTUAL_ROOTPROJECT_NAME);
+		}
+		addLinksAndMissingFolders(project, partCreator, rootFolder, rootProject);
 
 	}
 

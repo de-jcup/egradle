@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature.junit"
       label="EGradle JUnit Integration"
-      version="1.0.0"
+      version="1.0.2"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 

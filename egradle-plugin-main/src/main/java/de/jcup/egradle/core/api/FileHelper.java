@@ -250,6 +250,11 @@ public class FileHelper {
 		}
 	}
 
+	/**
+	 * Delete given file. If it is a folder delete is done recursive
+	 * @param file
+	 * @throws IOException
+	 */
 	public void delete(File file) throws IOException {
 		if (file.exists()) {
 			if (file.isDirectory()) {

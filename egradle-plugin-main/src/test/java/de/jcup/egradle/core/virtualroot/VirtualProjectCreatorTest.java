@@ -86,6 +86,8 @@ public class VirtualProjectCreatorTest {
 		when(mockRootFolder.exists()).thenReturn(true);
 		
 		when(mockedRootProject.getFolder()).thenReturn(mockRootFolder);
+		when(mockRootFolder.exists()).thenReturn(true);
+		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
 
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
@@ -100,6 +102,7 @@ public class VirtualProjectCreatorTest {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
+		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
 
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
@@ -114,6 +117,8 @@ public class VirtualProjectCreatorTest {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
+		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
+
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
@@ -127,6 +132,8 @@ public class VirtualProjectCreatorTest {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
+		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
+
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
@@ -140,6 +147,8 @@ public class VirtualProjectCreatorTest {
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), eq(SUBFOLDER1))).thenReturn(true);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), eq(SUBFOLDER2))).thenReturn(false);
+		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
+
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 

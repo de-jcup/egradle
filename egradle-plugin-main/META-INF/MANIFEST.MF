@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.main;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.2
 Bundle-Activator: de.jcup.egradle.eclipse.Activator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
@@ -30,4 +30,8 @@ Export-Package: de.jcup.egradle.core.api,
  de.jcup.egradle.core.model.groovyantlr,
  de.jcup.egradle.eclipse.api,
  de.jcup.egradle.eclipse.launch,
- de.jcup.egradle.eclipse.ui
+ de.jcup.egradle.eclipse.ui,
+ org.codehaus.groovy,
+ org.codehaus.groovy.antlr,
+ org.codehaus.groovy.antlr.java,
+ org.codehaus.groovy.antlr.parser

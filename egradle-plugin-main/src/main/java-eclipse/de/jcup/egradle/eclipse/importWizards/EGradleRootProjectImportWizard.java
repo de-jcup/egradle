@@ -33,7 +33,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.domain.GradleCommand;
@@ -46,6 +45,8 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
+import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 
@@ -122,6 +123,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			if (newRootFolder == null) {
 				return;
 			}
+			boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(monitor);
+			
 			List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
 
 			GradleRootProject rootProject = new GradleRootProject(newRootFolder);
@@ -152,12 +155,19 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			/* close the projects which will be deleted/reimported */
 			for (IProject projectToClose : projectsToClose) {
 				importProgressMessage(monitor, "close already existing project:" + projectToClose.getName());
-				projectToClose.close(monitor);
+				if (EGradleUtil.isRootProject(projectToClose)){
+					/* ignore on close*/
+				}else{
+					projectToClose.close(monitor);
+				}
 				monitor.worked(++worked);
 			}
 
 			Result result = executeGradleEclipse(rootProject, monitor);
 			if (!result.isOkay()) {
+				/*
+				 * UNDO !
+				 */
 				getDialogSupport()
 						.showError("Was not able to execute 'gradle eclipse' - will now undo former actions!\n\n"
 								+ "Please check your settings are correct in egradle preferences.\n"
@@ -172,32 +182,26 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 					projectToClose.open(monitor);
 					monitor.worked(++worked); // also count to show progress
 				}
+				if (virtualRootExistedBefore){
+					createOrRecreateVirtualRootProject();
+				}
 				return;
 			}
 			/* result is okay, so use this setup in preferences now */
-			getPreferences().setRootProjectPath(newRootFolder.getAbsolutePath());
-			getPreferences().setGlobalJavaHomePath(globalJavaHome);
-			getPreferences().setGradleBinInstallFolder(gradleInstallPath);
-			getPreferences().setGradleCallCommand(gradleCommand);
-			getPreferences().setGradleShellType(shell);
-			getPreferences().setGradleCallTypeID(callTypeId);
+			EGradlePreferences preferences = getPreferences();
+			preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
+			preferences.setGlobalJavaHomePath(globalJavaHome);
+			preferences.setGradleBinInstallFolder(gradleInstallPath);
+			preferences.setGradleCallCommand(gradleCommand);
+			preferences.setGradleShellType(shell);
+			preferences.setGradleCallTypeID(callTypeId);
 			
 			/* delete the projects */
 			for (IProject projectToClose : projectsToClose) {
 				importProgressMessage(monitor, "delete already existing project:" + projectToClose.getName());
-				if (hasVirtualRootProjectNature(projectToClose)) {
-					deleteVirtualRootProjectFull(monitor, projectToClose);
-				} else {
-					projectToClose.delete(false, true, monitor);
-				}
+				projectToClose.delete(false, true, monitor);
 				monitor.worked(++worked);
 			}
-			/* remove the current virtual root project - if not already fetched before */
-			IProject virtualRootProject = EGradleUtil.getVirtualRootProject();
-			if (virtualRootProject != null) {
-				deleteVirtualRootProjectFull(monitor, virtualRootProject);
-			}
-
 			/* start import of all eclipse projects inside multiproject */
 			for (File folder : foldersToImport) {
 				importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
@@ -214,20 +218,6 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			monitor.done();
 		}
 
-	}
-
-	private void deleteVirtualRootProjectFull(IProgressMonitor monitor, IProject projectToDelete) throws CoreException {
-		/*
-		 * to check delete with content happens only on virtual root
-		 * projects we do check on another way too - this is only to
-		 * prevent coding failures and should never happen!
-		 */
-		String name = projectToDelete.getName();
-		if (!Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)) {
-			throw new IllegalArgumentException(
-					"Trying to delete full, with content, but this seems not to be a virtual root project?!?!?");
-		}
-		projectToDelete.delete(true, true, monitor);
 	}
 
 	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder) throws CoreException {
