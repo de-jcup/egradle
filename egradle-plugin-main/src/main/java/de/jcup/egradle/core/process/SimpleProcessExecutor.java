@@ -84,8 +84,10 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 		Date started = new Date();
 		Process p = startProcess(pb);
+		ProcessTimeoutTerminator timeoutTerminator = null;
 		if (timeOutInSeconds!=ENDLESS_RUNNING){
-			Thread timeoutCheckThread = new Thread(new ProcessTimeoutTerminator(p), "process-timeout-terminator");
+			timeoutTerminator = new ProcessTimeoutTerminator(p);
+			Thread timeoutCheckThread = new Thread(timeoutTerminator, "process-timeout-terminator");
 			timeoutCheckThread.start();
 		}
 		ProcessCancelTerminator cancelTerminator = new ProcessCancelTerminator(p, processContext.getCancelStateProvider());
@@ -93,7 +95,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		cancelCheckThread.start();
 		
 		handleProcessStarted(envProvider, p, started, workingDirectory, commands);
-		handleOutputStreams(p, processContext.getCancelStateProvider());
+		handleOutputStreams(p, timeoutTerminator, processContext.getCancelStateProvider());
 		
 		/* wait for execution */
 		try {
@@ -150,14 +152,24 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	
 	private class ProcessTimeoutTerminator implements Runnable{
 		private Process process;
+		private long timeStarted;
 
 		public ProcessTimeoutTerminator(Process p){
 			this.process=p;
 		}
+		
+		/**
+		 * Does a restart of terminator timeout
+		 */
+		public void restart(){
+			resetTimeStarted();
+		}
+		
+		
 
 		@Override
 		public void run() {
-			long timeStarted = System.currentTimeMillis();
+			resetTimeStarted();
 			while (process.isAlive()) {
 				long timeOutInMillis= timeOutInSeconds*1000;
 				try {
@@ -177,9 +189,20 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 			
 		}
 		
+		private void resetTimeStarted(){
+			timeStarted = System.currentTimeMillis();
+		}
+		
 	}
 	
-	protected void handleOutputStreams(Process p, CancelStateProvider cancelStateProvider) throws IOException {
+	/**
+	 * @return <code>true</code> when ongoing output restarts timeout
+	 */
+	protected boolean isOutputRestartingTimeout(){
+		return true;
+	}
+	
+	protected void handleOutputStreams(Process p, ProcessTimeoutTerminator timeoutTerminator, CancelStateProvider cancelStateProvider) throws IOException {
 		if (!handleProcessOutputStream){
 			return;
 		}
@@ -190,6 +213,11 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		String line = null;
 		while ((!cancelStateProvider.isCanceled()) && (line = reader.readLine()) != null) {
 			handler.output(line);
+			if (timeoutTerminator!=null){
+				if (isOutputRestartingTimeout()){
+					timeoutTerminator.restart();
+				}
+			}
 		}
 		
 	}
