@@ -55,4 +55,5 @@
          Stable Versions
       </description>
    </category-def>
+<feature url="features/de.jcup.egradle.eclipse.feature_1.0.0.jar" id="de.jcup.egradle.eclipse.feature" version="1.0.0"><category name="site.egradle.category.stable"/></feature>
 </site>
