@@ -15,17 +15,27 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
+import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 
 
 public class GradleEditor extends TextEditor {
@@ -52,6 +62,31 @@ public class GradleEditor extends TextEditor {
 		}
 		
 	}
+	
+	protected void editorContextMenuAboutToShow(IMenuManager menu) {
+		super.editorContextMenuAboutToShow(menu);
+//		addAction(menu, ITextEditorActionConstants.GROUP_EDIT,  ITextEditorActionConstants.SHIFT_RIGHT);
+		menu.add(new ShowQuickOutlineAction());
+	
+	}
+	
+	private class ShowQuickOutlineAction extends Action{
+		
+		ShowQuickOutlineAction(){
+			setAccelerator(SWT.CTRL|'O');// FIXME ATR, change as described in javadoc for setAccelerator..
+			setText("Quick outline");
+		}
+		
+		@Override
+		public void run() {
+			Shell shell = getEditorSite().getShell();
+			QuickOutlineDialog dialog = new QuickOutlineDialog(GradleEditor.this, shell);
+			IDocument document = getDocumentProvider().getDocument(getEditorInput());
+			dialog.setInput(document);
+			dialog.open();
+		}
+	}
+
 	
 	@Override
 	protected void initializeEditor() {
@@ -97,5 +132,18 @@ public class GradleEditor extends TextEditor {
 		}
 		
 	}
-	
+
+
+	public void openSelectedTreeItemInEditor(ISelection selection) {
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection ss = (IStructuredSelection) selection;
+			Object firstElement = ss.getFirstElement();
+			if (firstElement instanceof Item) {
+				Item item = (Item) firstElement;
+				int offset = item.getOffset();
+				int length = item.getLength();
+				selectAndReveal(offset, length);
+			}
+		}
+	}
 }

@@ -117,7 +117,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		if (linkingWithEditorEnabled){
 			return; // already handled by single click
 		}
-		openSelectedTreeItemInEditor(event.getSelection());
+		gradleEditor.openSelectedTreeItemInEditor(event.getSelection());
 	}
 
 	public void ignoreNextSelectionEvents(boolean ignore) {
@@ -148,21 +148,10 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			return;
 		}
 		ISelection selection = event.getSelection();
-		openSelectedTreeItemInEditor(selection);
+		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
-	private void openSelectedTreeItemInEditor(ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof Item) {
-				Item item = (Item) firstElement;
-				int offset = item.getOffset();
-				int length = item.getLength();
-				gradleEditor.selectAndReveal(offset, length);
-			}
-		}
-	}
+	
 
 	private IDocument setTreeViewerDocument() {
 		IDocumentProvider documentProvider = gradleEditor.getDocumentProvider();

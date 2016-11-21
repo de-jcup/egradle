@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -77,15 +77,13 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	@Override
 	public Object[] getElements(Object inputElement) {
+		String dataAsString = null;
+		String charset = null;
+		
 		if (inputElement instanceof IDocument) {
 			IDocument document = (IDocument) inputElement;
-			String dataAsString = document.get();
+			dataAsString = document.get();
 
-			/*
-			 * resolve charset to use - currently only workaround via editor
-			 * instance
-			 */
-			String charset = null;
 			IEditorInput input = editor.getEditorInput();
 			if (input instanceof IFileEditorInput) {
 				IFileEditorInput fie = (IFileEditorInput) input;
@@ -96,34 +94,49 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 					EGradleUtil.log(e);
 				}
 			}
-
-			/* try to load */
-			try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
-				Object[] elements = null;
-				ModelType modelType = getModelType();
-
-				switch (modelType) {
-				case GROOVY_FULL_ANTLR:
-					elements = buildGroovyASTModel(charset, is);
-					break;
-				case GRADLE:
-					elements = buildGradleModel(charset, is);
-					break;
-				default:
-					elements = new Object[] { modelType + " not supported as modeltype!" };
-				}
-				return elements;
-			} catch (Exception e) {
-				EGradleUtil.log("Problems on outline building", e);
-			}
+		}else if (inputElement instanceof String){
+			dataAsString=(String) inputElement;
+		}else{
+			/* do not set dataAsString - so FALL BACK must do the job */
 		}
+		
 		synchronized (monitor) {
+			if (dataAsString!=null){
+				Object[] elements = tryTolLoad(dataAsString, charset);
+				if (elements != null) {
+					return elements;
+				}
+			}
+			/* FALL BACK */
 			if (model != null) {
 				/* old model fall back */
 				return getRootChildren();
 			}
+			return new Object[] { "no content" };
 		}
-		return new Object[] { "no content" };
+	}
+
+	private Object[] tryTolLoad(String dataAsString, String charset) {
+		/* try to load */
+		try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
+			Object[] elements = null;
+			ModelType modelType = getModelType();
+
+			switch (modelType) {
+			case GROOVY_FULL_ANTLR:
+				elements = buildGroovyASTModel(charset, is);
+				break;
+			case GRADLE:
+				elements = buildGradleModel(charset, is);
+				break;
+			default:
+				elements = new Object[] { modelType + " not supported as modeltype!" };
+			}
+			return elements;
+		} catch (Exception e) {
+			EGradleUtil.log("Problems on outline building", e);
+			return null;
+		}
 	}
 
 	@Override
@@ -174,7 +187,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		GradleModelBuilder builder = new GradleModelBuilder(is);
 		builder.setPreCreationFilter(getFilter());
 		builder.setPostCreationFilter(GRADLE_FILTER);
-		
+
 		BuildContext context = new BuildContext();
 		Object[] elements = createModelAndGetRootElements(context, builder);
 		appendError(context);
@@ -182,12 +195,15 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	}
 
 	private Filter getFilter() {
-		if (filter==null){
+		if (filter == null) {
 			MultiFilter mfilter = new MultiFilter();
-			/* TODO ATR, 18.11.2016 - make this settings configurable for user - as done in java outline*/
+			/*
+			 * TODO ATR, 18.11.2016 - make this settings configurable for user -
+			 * as done in java outline
+			 */
 			mfilter.add(GradleModelFilters.FILTER_IMPORTS);
-			filter=mfilter;
-			
+			filter = mfilter;
+
 		}
 		return filter;
 	}
@@ -236,17 +252,18 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		return file;
 	}
 
-//	private Object[] buildTokenModel(String charset, InputStream is) throws Exception {
-//		TokenParserResult ast = parser.parse(is, charset);
-//		ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
-//		return createModelAndGetRootElements(null, builder);
-//	}
+	// private Object[] buildTokenModel(String charset, InputStream is) throws
+	// Exception {
+	// TokenParserResult ast = parser.parse(is, charset);
+	// ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
+	// return createModelAndGetRootElements(null, builder);
+	// }
 
 	private Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
 			throws ModelBuilderException {
 		synchronized (monitor) {
 			Model newModel = builder.build(context);
-			if (context==null || !context.hasErrors()) {
+			if (context == null || !context.hasErrors()) {
 				switchToNewModel(newModel);
 			}
 		}
@@ -267,17 +284,19 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	public enum ModelType {
 		GRADLE,
-		
+
 		GROOVY_FULL_ANTLR,
 
-	
 	}
 
 	private static class GradleOutlineItemFilter implements ItemFilter {
 
 		@Override
 		public boolean isFiltered(Item item) {
-			/* we do not show item which are remaining as METHOD_CALL will not be shown in outline */
+			/*
+			 * we do not show item which are remaining as METHOD_CALL will not
+			 * be shown in outline
+			 */
 			if (ItemType.METHOD_CALL == item.getItemType()) {
 				return true;
 			}
@@ -285,6 +304,5 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		}
 
 	}
-	
-	
+
 }

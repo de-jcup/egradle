@@ -243,13 +243,16 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 			return styled.append(element.toString());
 		}
 		
-		
-		
 		return styled;
 	}
-
-	private ColorManager getColorManager() {
-		return Activator.getDefault().getColorManager();
+	private static final ColorManager FALLBACK_COLORMANAGER = new ColorManager();
+	
+	public ColorManager getColorManager() {
+		Activator activator = Activator.getDefault();
+		if (activator==null){
+			return FALLBACK_COLORMANAGER;
+		}
+		return activator.getColorManager();
 	}
 
 	private Image getOutlineImage(String name) {
