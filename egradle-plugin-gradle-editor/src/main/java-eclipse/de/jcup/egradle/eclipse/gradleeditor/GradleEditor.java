@@ -27,8 +27,9 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
@@ -37,102 +38,103 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 
-
 public class GradleEditor extends TextEditor {
 
 	private GradleEditorContentOutlinePage outlinePage;
+
+	/** The COMMAND_ID of this editor as defined in plugin.xml */
+	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
+
+	/** The COMMAND_ID of the editor context menu */
+	public static final String EDITOR_CONTEXT_MENU_ID = EDITOR_ID + ".context";
+
+	/** The COMMAND_ID of the editor ruler context menu */
+	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(getColorManager()));
 		setDocumentProvider(new GradleDocumentProvider());
 	}
-	
+
 	private ColorManager getColorManager() {
 		return Activator.getDefault().getColorManager();
 	}
-	
+
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		
+
 		Control adapter = getAdapter(Control.class);
-		if (adapter instanceof StyledText){
+		if (adapter instanceof StyledText) {
 			StyledText text = (StyledText) adapter;
 			text.addCaretListener(new GradleEditorCaretListener());
 		}
 		
+		activateGradleEditorContext();
+
 	}
-	
-	protected void editorContextMenuAboutToShow(IMenuManager menu) {
-		super.editorContextMenuAboutToShow(menu);
-//		addAction(menu, ITextEditorActionConstants.GROUP_EDIT,  ITextEditorActionConstants.SHIFT_RIGHT);
-		menu.add(new ShowQuickOutlineAction());
-	
-	}
-	
-	private class ShowQuickOutlineAction extends Action{
-		
-		ShowQuickOutlineAction(){
-			setAccelerator(SWT.CTRL|'O');// FIXME ATR, change as described in javadoc for setAccelerator..
-			setText("Quick outline");
-		}
-		
-		@Override
-		public void run() {
-			Shell shell = getEditorSite().getShell();
-			QuickOutlineDialog dialog = new QuickOutlineDialog(GradleEditor.this, shell);
-			IDocument document = getDocumentProvider().getDocument(getEditorInput());
-			dialog.setInput(document);
-			dialog.open();
+
+	private void activateGradleEditorContext() {
+		IContextService contextService = (IContextService)PlatformUI.getWorkbench()
+				.getService(IContextService.class);
+		if (contextService!=null){
+			contextService.activateContext("org.egradle.editors.GradleEditor.context");
 		}
 	}
 
-	
+	public void openQuickOutline() {
+		Shell shell = getEditorSite().getShell();
+		QuickOutlineDialog dialog = new QuickOutlineDialog(GradleEditor.this, shell);
+		IDocument document = getDocumentProvider().getDocument(getEditorInput());
+		dialog.setInput(document);
+		dialog.open();
+	}
+
 	@Override
 	protected void initializeEditor() {
 		super.initializeEditor();
+		setEditorContextMenuId(EDITOR_CONTEXT_MENU_ID);
+		setRulerContextMenuId(EDITOR_RULER_CONTEXT_MENU_ID);
 	}
-	
+
 	@Override
 	public void selectAndReveal(int start, int length) {
 		super.selectAndReveal(start, length);
-		setStatusLineMessage("selected range: start="+start+", length="+length);
+		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
-		  if (IContentOutlinePage.class.equals(adapter)) {
-			  if (outlinePage == null) {
-		        	 outlinePage = new GradleEditorContentOutlinePage(this);
-		      }
-			  return (T) outlinePage;
-		  }
+		if (IContentOutlinePage.class.equals(adapter)) {
+			if (outlinePage == null) {
+				outlinePage = new GradleEditorContentOutlinePage(this);
+			}
+			return (T) outlinePage;
+		}
 		return super.getAdapter(adapter);
 	}
-	
-	private class GradleEditorCaretListener implements CaretListener{
 
+	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
 		public void caretMoved(CaretEvent event) {
-			if (event==null){
+			if (event == null) {
 				return;
 			}
-			setStatusLineMessage("caret moved:"+event.caretOffset);
-			if (outlinePage==null){
+			setStatusLineMessage("caret moved:" + event.caretOffset);
+			if (outlinePage == null) {
 				return;
 			}
 			outlinePage.onEditorCaretMoved(event.caretOffset);
 		}
-		
-	}
 
+	}
 
 	public void openSelectedTreeItemInEditor(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {

@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.junit.FixMethodOrder;
 
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractQuickDialog;
@@ -53,6 +54,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		// dialogSettings= new DialogSettings("egradle.quickoutline");
 		// dialogSettings.put(IDialogSettings.I, value);
 		// }
+		/* FIXME ATR: support dialog settings correctly*/
 		return dialogSettings;
 	}
 
@@ -63,7 +65,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	@Override
 	protected Point getInitialSize() {
 		if (true){
-			return new Point (800,800);
+			return new Point (600,600);
 		}
 		return super.getInitialSize();
 	}
