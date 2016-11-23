@@ -16,9 +16,15 @@ public abstract class AbstractQuickDialog extends PopupDialog {
 	protected static final boolean GRAB_FOCUS = true;
 	protected static final boolean PERSIST_NO_SIZE = false;
 	protected static final boolean PERSIST_SIZE = true;
+	
 	protected static final boolean PERSIST_NO_BOUNDS = false;
+	protected static final boolean PERSIST_BOUNDS = true;
+	
+	protected static final boolean SHOW_DIALOG_MENU = true;
 	protected static final boolean SHOW_NO_DIALOG_MENU = false;
+
 	protected static final boolean SHOW_NO_PERSIST_ACTIONS = false;
+	protected static final boolean SHOW_PERSIST_ACTIONS = true;
 
 	public AbstractQuickDialog(Shell parent, int shellStyle, boolean takeFocusOnOpen, boolean persistSize,
 			boolean persistLocation, boolean showDialogMenu, boolean showPersistActions, String titleText,

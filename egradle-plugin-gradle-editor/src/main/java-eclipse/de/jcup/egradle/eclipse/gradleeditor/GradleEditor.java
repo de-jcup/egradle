@@ -15,12 +15,9 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
@@ -82,12 +79,27 @@ public class GradleEditor extends TextEditor {
 		}
 	}
 
+	private Object monitor = new Object();
+	private boolean quickOutlineOpened;
+	/**
+	 * Opens quick outline
+	 */
 	public void openQuickOutline() {
+		synchronized(monitor){
+			if (quickOutlineOpened){
+				/* already opend - this is in future the anker point for ctrl+o+o...*/
+				return;
+			}
+			quickOutlineOpened=true;
+		}
 		Shell shell = getEditorSite().getShell();
 		QuickOutlineDialog dialog = new QuickOutlineDialog(GradleEditor.this, shell);
 		IDocument document = getDocumentProvider().getDocument(getEditorInput());
 		dialog.setInput(document);
 		dialog.open();
+		synchronized(monitor){
+			quickOutlineOpened=false;
+		}
 	}
 
 	@Override
@@ -100,6 +112,7 @@ public class GradleEditor extends TextEditor {
 	@Override
 	public void selectAndReveal(int start, int length) {
 		super.selectAndReveal(start, length);
+		/* TODO ATR: remove the status line information ?!?!?*/
 		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
 	}
 
@@ -127,6 +140,7 @@ public class GradleEditor extends TextEditor {
 			if (event == null) {
 				return;
 			}
+			/* TODO ATR: remove the status line information ?!?!?*/
 			setStatusLineMessage("caret moved:" + event.caretOffset);
 			if (outlinePage == null) {
 				return;
