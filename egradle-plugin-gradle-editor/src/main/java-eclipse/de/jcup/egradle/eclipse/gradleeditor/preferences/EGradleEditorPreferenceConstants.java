@@ -24,7 +24,12 @@ public enum EGradleEditorPreferenceConstants {
 	/**
 	 * Tasks which are executed on test
 	 */
-	P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor");
+	P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor"),
+	
+	P_EDITOR_MATCHING_BRACKETS("matchingBrackets"),
+	P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION("highlightBracketAtCaretLocation"),
+	P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
+	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor");
 
 	private String id;
 

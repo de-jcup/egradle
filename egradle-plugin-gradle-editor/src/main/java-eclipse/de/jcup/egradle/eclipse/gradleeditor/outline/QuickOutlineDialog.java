@@ -38,11 +38,20 @@ import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractQuickDialog;
 
+/**
+ * This dialog is inspired by: <a href=
+ * "https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/AbstractInformationControl.java">org.eclipse.jdt.internal.ui.text.AbstractInformationControl</a>
+ * and <a href=
+ * "https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/JavaOutlineInformationControl.java">org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControl</a>
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
 public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleClickListener {
 
 	private static final int MIN_WIDTH = 400;
 	private static final int MIN_HEIGHT = 300;
-	
+
 	private static final String TITLE = "EGradle quick outline";
 	private static final boolean DO_SHOW_DIALOG = SHOW_DIALOG_MENU;
 
@@ -59,13 +68,13 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		shell.open();
 
 		GradleEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
-		
+
 		IAdaptable adapter = new IAdaptable() {
-			
+
 			@SuppressWarnings("unchecked")
 			@Override
 			public <T> T getAdapter(Class<T> adapter) {
-				if (ITreeContentProvider.class.equals(adapter)){
+				if (ITreeContentProvider.class.equals(adapter)) {
 					return (T) provider;
 				}
 				return null;
@@ -74,7 +83,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell);
 		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
 		dialog.open();
-		
+
 		display.dispose();
 
 	}
@@ -95,22 +104,24 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 	/**
 	 * Creates a quick outline dialog
-	 * @param adaptable an adapter which should be able to provide a tree content provider and gradle editor. If gradle editor is not 
-	 * set a selected item will only close the dialog but do not select editor parts..
-	 * @param parent shell to use
-	 * is null the outline will have no content! If the gradle editor is null location setting etc. will not work.
-	 * <br><br>
-	 * This dialog is inspired by: 
-	 * <a href="https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/AbstractInformationControl.java">org.eclipse.jdt.internal.ui.text.AbstractInformationControl</a>
-	 * and <a href="https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/JavaOutlineInformationControl.java">org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControl</a>
 	 * 
+	 * @param adaptable
+	 *            an adapter which should be able to provide a tree content
+	 *            provider and gradle editor. If gradle editor is not set a
+	 *            selected item will only close the dialog but do not select
+	 *            editor parts..
+	 * @param parent
+	 *            shell to use is null the outline will have no content! If the
+	 *            gradle editor is null location setting etc. will not work.
+	 *            <br>
+	 * 			<br>
 	 */
 	public QuickOutlineDialog(IAdaptable adaptable, Shell parent) {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS, DO_SHOW_DIALOG,
 				SHOW_PERSIST_ACTIONS, TITLE, null);
 		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
-		this.contentProvider=adaptable.getAdapter(ITreeContentProvider.class);
-		if (contentProvider==null){
+		this.contentProvider = adaptable.getAdapter(ITreeContentProvider.class);
+		if (contentProvider == null) {
 			contentProvider = new FallbackOutlineContentProvider();
 		}
 	}
@@ -127,7 +138,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	}
 
 	private void openSelection(ISelection selection) {
-		if (selection==null){
+		if (selection == null) {
 			return;
 		}
 		if (gradleEditor == null) {
@@ -137,31 +148,30 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
-	
 	/**
 	 * Set input to show
+	 * 
 	 * @param input
 	 */
 	public void setInput(Object input) {
 		this.input = input;
 	}
 
-
 	@Override
 	protected void beforeRunEventLoop() {
 		treeViewer.setInput(input);
 
 		text.setFocus();
-		
-		if (gradleEditor==null){
+
+		if (gradleEditor == null) {
 			return;
 		}
 		Item item = gradleEditor.getItemAtCarretPosition();
-		if (item==null){
+		if (item == null) {
 			return;
 		}
 		StructuredSelection startSelection = new StructuredSelection(item);
-		treeViewer.setSelection(startSelection,true);
+		treeViewer.setSelection(startSelection, true);
 	}
 
 	@Override
@@ -244,15 +254,15 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	protected Point getInitialSize() {
 		IDialogSettings dialogSettings = getDialogSettings();
 		if (dialogSettings == null) {
-			/* no dialog settings available, so fall back to min settings*/
+			/* no dialog settings available, so fall back to min settings */
 			return new Point(MIN_WIDTH, MIN_HEIGHT);
 		}
 		Point point = super.getInitialSize();
-		if (point.x<MIN_WIDTH){
-			point.x=MIN_WIDTH;
+		if (point.x < MIN_WIDTH) {
+			point.x = MIN_WIDTH;
 		}
-		if (point.y<MIN_HEIGHT){
-			point.y=MIN_HEIGHT;
+		if (point.y < MIN_HEIGHT) {
+			point.y = MIN_HEIGHT;
 		}
 		return point;
 	}
@@ -305,12 +315,12 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 		@Override
 		public void keyPressed(KeyEvent event) {
-			if (event.keyCode==SWT.ARROW_DOWN){
+			if (event.keyCode == SWT.ARROW_DOWN) {
 				Tree tree = treeViewer.getTree();
-				if (tree.isDisposed()){
+				if (tree.isDisposed()) {
 					return;
 				}
-				if (tree.isFocusControl()){
+				if (tree.isFocusControl()) {
 					return;
 				}
 				tree.setFocus();
@@ -387,29 +397,30 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		}
 
 		protected void selectFirstMaching() {
-//			/* select the first part where the matcher matches - so return will use this*/
+			// /* select the first part where the matcher matches - so return
+			// will use this*/
 			selectfirstMatching(getTreeContentProvider().getElements(null));
 		}
 
 		private boolean selectfirstMatching(Object[] elements) {
-			if (elements==null){
+			if (elements == null) {
 				return false;
 			}
-			for (int i=0;i<elements.length;i++){
+			for (int i = 0; i < elements.length; i++) {
 				Object element = elements[i];
-				if (Boolean.TRUE.equals(textFilter.isMatching(element))){
+				if (Boolean.TRUE.equals(textFilter.isMatching(element))) {
 					StructuredSelection selection = new StructuredSelection(element);
-					treeViewer.setSelection(selection,true);
-					System.out.println("selection done:"+element);
+					treeViewer.setSelection(selection, true);
+					System.out.println("selection done:" + element);
 					return true;
 				}
 				ITreeContentProvider contentProvider = getTreeContentProvider();
 				Object[] children = contentProvider.getChildren(element);
 				boolean selectionDone = selectfirstMatching(children);
-				if (selectionDone){
+				if (selectionDone) {
 					return true;
 				}
-				
+
 			}
 			return false;
 		}

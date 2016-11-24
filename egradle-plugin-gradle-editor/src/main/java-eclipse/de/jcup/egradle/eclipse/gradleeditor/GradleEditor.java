@@ -15,20 +15,31 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -36,6 +47,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
@@ -45,6 +57,7 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants;
 
 public class GradleEditor extends TextEditor {
 
@@ -67,9 +80,9 @@ public class GradleEditor extends TextEditor {
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
-		
+
 	}
-	
+
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		super.doSetInput(input);
@@ -78,7 +91,6 @@ public class GradleEditor extends TextEditor {
 		outlinePage.inputChanged(document);
 	}
 
-	
 	private ColorManager getColorManager() {
 		return Activator.getDefault().getColorManager();
 	}
@@ -92,40 +104,42 @@ public class GradleEditor extends TextEditor {
 			StyledText text = (StyledText) adapter;
 			text.addCaretListener(new GradleEditorCaretListener());
 		}
-		
+
 		activateGradleEditorContext();
 
 	}
 
 	private void activateGradleEditorContext() {
-		IContextService contextService = (IContextService)PlatformUI.getWorkbench()
-				.getService(IContextService.class);
-		if (contextService!=null){
+		IContextService contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
+		if (contextService != null) {
 			contextService.activateContext("org.egradle.editors.GradleEditor.context");
 		}
 	}
 
 	private Object monitor = new Object();
 	private boolean quickOutlineOpened;
-	
+
 	/**
 	 * Opens quick outline
 	 */
 	public void openQuickOutline() {
-		synchronized(monitor){
-			if (quickOutlineOpened){
-				/* already opened - this is in future the anker point for ctrl+o+o...*/
+		synchronized (monitor) {
+			if (quickOutlineOpened) {
+				/*
+				 * already opened - this is in future the anker point for
+				 * ctrl+o+o...
+				 */
 				return;
 			}
-			quickOutlineOpened=true;
+			quickOutlineOpened = true;
 		}
 		Shell shell = getEditorSite().getShell();
 		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell);
 		IDocument document = getDocumentProvider().getDocument(getEditorInput());
 		dialog.setInput(document);
 		dialog.open();
-		synchronized(monitor){
-			quickOutlineOpened=false;
+		synchronized (monitor) {
+			quickOutlineOpened = false;
 		}
 	}
 
@@ -143,25 +157,45 @@ public class GradleEditor extends TextEditor {
 	@Override
 	public void selectAndReveal(int start, int length) {
 		super.selectAndReveal(start, length);
-		/* TODO ATR: remove the status line information ?!?!?*/
+		/* TODO ATR: remove the status line information ?!?!? */
 		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
+		if (bracketMatcher != null) {
+			bracketMatcher.dispose();
+			bracketMatcher= null;
+		}
+	}
+	
+	private static boolean isOpeningBracket(char character) {
+		for (int i= 0; i < BRACKETS.length; i+= 2) {
+			if (character == BRACKETS[i])
+				return true;
+		}
+		return false;
+	}
+
+	private static boolean isClosingBracket(char character) {
+		for (int i= 1; i < BRACKETS.length; i+= 2) {
+			if (character == BRACKETS[i])
+				return true;
+		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
-		if (GradleEditor.class.equals(adapter)){
+		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
 		}
 		if (IContentOutlinePage.class.equals(adapter)) {
 			return (T) outlinePage;
 		}
-		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)){
+		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
 		}
 		return super.getAdapter(adapter);
@@ -169,12 +203,13 @@ public class GradleEditor extends TextEditor {
 
 	private int lastCaretPosition;
 	private boolean dirty;
+
 	private class DelayedDocumentListener implements IDocumentListener {
-		
+
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
-	
+
 		@Override
 		public void documentChanged(DocumentEvent event) {
 			synchronized (monitor) {
@@ -190,9 +225,13 @@ public class GradleEditor extends TextEditor {
 			 * otherwise every char entered at keyboard will reload complete AST
 			 * ...
 			 */
-			/* TODO ATR, 12.11.2016: while caret changes the update may not proceed, only when caret position no longer moves the update of the document has to be done */
+			/*
+			 * TODO ATR, 12.11.2016: while caret changes the update may not
+			 * proceed, only when caret position no longer moves the update of
+			 * the document has to be done
+			 */
 			Job job = new Job("update gradle editor outline") {
-	
+
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					synchronized (monitor) {
@@ -213,9 +252,9 @@ public class GradleEditor extends TextEditor {
 			};
 			job.schedule(1500);
 		}
-	
+
 	}
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
@@ -223,8 +262,8 @@ public class GradleEditor extends TextEditor {
 			if (event == null) {
 				return;
 			}
-			lastCaretPosition=event.caretOffset;
-			/* TODO ATR: remove the status line information ?!?!?*/
+			lastCaretPosition = event.caretOffset;
+			/* TODO ATR: remove the status line information ?!?!? */
 			setStatusLineMessage("caret moved:" + event.caretOffset);
 			if (outlinePage == null) {
 				return;
@@ -233,9 +272,168 @@ public class GradleEditor extends TextEditor {
 		}
 
 	}
+	protected final static char[] BRACKETS= { '{', '}', '(', ')', '[', ']', '<', '>' };
+	private GradlePairMatcher bracketMatcher = new GradlePairMatcher(BRACKETS);
+	private List<IRegion> previousSelections;
+	/** Preference key for matching brackets. */
+	protected final static String MATCHING_BRACKETS=  EGradleEditorPreferenceConstants.P_EDITOR_MATCHING_BRACKETS.getId();
+
+	/**
+	 * Preference key for highlighting bracket at caret location.
+	 * 
+	 * @since 3.8
+	 */
+	protected final static String HIGHLIGHT_BRACKET_AT_CARET_LOCATION= EGradleEditorPreferenceConstants.P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId();
 	
-	public Item getItemAtCarretPosition(){
-		if (contentProvider==null){
+	/**
+	 * Preference key for enclosing brackets.
+	 * 
+	 * @since 3.8
+	 */
+	protected final static String HIGHLIGHT_ENCLOSING_BRACKETS= EGradleEditorPreferenceConstants.P_EDITOR_ENCLOSING_BRACKETS.getId();
+
+	/** Preference key for matching brackets color. */
+	protected final static String MATCHING_BRACKETS_COLOR=  EGradleEditorPreferenceConstants.P_EDITOR_MATCHING_BRACKETS_COLOR.getId();
+	
+	/**
+	 * Jumps to the matching bracket.
+	 */
+	public void gotoMatchingBracket() {
+
+		ISourceViewer sourceViewer= getSourceViewer();
+		IDocument document= sourceViewer.getDocument();
+		if (document == null)
+			return;
+
+		IRegion selection= getSignedSelection(sourceViewer);
+		if (previousSelections == null)
+			initializePreviousSelectionList();
+
+		IRegion region= bracketMatcher.match(document, selection.getOffset(), selection.getLength());
+		if (region == null) {
+			region= bracketMatcher.findEnclosingPeerCharacters(document, selection.getOffset(), selection.getLength());
+			initializePreviousSelectionList();
+			previousSelections.add(selection);
+		} else {
+			if (previousSelections.size() == 2) {
+				if (!selection.equals(previousSelections.get(1))) {
+					initializePreviousSelectionList();
+				}
+			} else if (previousSelections.size() == 3) {
+				if (selection.equals(previousSelections.get(2)) && !selection.equals(previousSelections.get(0))) {
+					IRegion originalSelection= previousSelections.get(0);
+					sourceViewer.setSelectedRange(originalSelection.getOffset(), originalSelection.getLength());
+					sourceViewer.revealRange(originalSelection.getOffset(), originalSelection.getLength());
+					initializePreviousSelectionList();
+					return;
+				}
+				initializePreviousSelectionList();
+			}
+		}
+
+		if (region == null) {
+			setStatusLineErrorMessage("Can't go to matching bracket");
+			sourceViewer.getTextWidget().getDisplay().beep();
+			return;
+		}
+
+		int offset= region.getOffset();
+		int length= region.getLength();
+
+		if (length < 1)
+			return;
+
+		int anchor= bracketMatcher.getAnchor();
+		int targetOffset= (ICharacterPairMatcher.RIGHT == anchor) ? offset + 1 : offset + length - 1;
+
+		boolean visible= false;
+		if (sourceViewer instanceof ITextViewerExtension5) {
+			ITextViewerExtension5 extension= (ITextViewerExtension5) sourceViewer;
+			visible= (extension.modelOffset2WidgetOffset(targetOffset) > -1);
+		} else {
+			IRegion visibleRegion= sourceViewer.getVisibleRegion();
+			// http://dev.eclipse.org/bugs/show_bug.cgi?id=34195
+			visible= (targetOffset >= visibleRegion.getOffset() && targetOffset <= visibleRegion.getOffset() + visibleRegion.getLength());
+		}
+
+		if (!visible) {
+			setStatusLineErrorMessage("Matching bracket outside selected element");
+			sourceViewer.getTextWidget().getDisplay().beep();
+			return;
+		}
+
+		int adjustment= getOffsetAdjustment(document, selection.getOffset() + selection.getLength(), selection.getLength());
+		targetOffset+= adjustment;
+		int direction= (selection.getLength() == 0) ? 0 : ((selection.getLength() > 0) ? 1 : -1);
+		if (previousSelections.size() == 1 && direction < 0) {
+			targetOffset++;
+		}
+
+		if (previousSelections.size() > 0) {
+			previousSelections.add(new Region(targetOffset, direction));
+		}
+		sourceViewer.setSelectedRange(targetOffset, direction);
+		sourceViewer.revealRange(targetOffset, direction);
+	}
+	
+	/*
+	 * Copy of org.eclipse.jface.text.source.DefaultCharacterPairMatcher.getOffsetAdjustment(IDocument, int, int)
+	 */
+	private static int getOffsetAdjustment(IDocument document, int offset, int length) {
+		if (length == 0 || Math.abs(length) > 1)
+			return 0;
+		try {
+			if (length < 0) {
+				if (isOpeningBracket(document.getChar(offset))) {
+					return 1;
+				}
+			} else {
+				if (isClosingBracket(document.getChar(offset - 1))) {
+					return -1;
+				}
+			}
+		} catch (BadLocationException e) {
+			//do nothing
+		}
+		return 0;
+	}
+
+	/*
+	 * Copy of org.eclipse.jface.text.source.MatchingCharacterPainter.getSignedSelection(ISourceViewer)
+	 */
+	private static final IRegion getSignedSelection(ISourceViewer sourceViewer) {
+		Point viewerSelection= sourceViewer.getSelectedRange();
+
+		StyledText text= sourceViewer.getTextWidget();
+		Point selection= text.getSelectionRange();
+		if (text.getCaretOffset() == selection.x) {
+			viewerSelection.x= viewerSelection.x + viewerSelection.y;
+			viewerSelection.y= -viewerSelection.y;
+		}
+
+		return new Region(viewerSelection.x, viewerSelection.y);
+	}
+	
+	private void initializePreviousSelectionList() {
+		previousSelections= new ArrayList<>(3);
+	}
+	
+	@Override
+	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
+
+		support.setCharacterPairMatcher(bracketMatcher);
+		support.setMatchingCharacterPainterPreferenceKeys(
+				MATCHING_BRACKETS, 
+				MATCHING_BRACKETS_COLOR, 
+				HIGHLIGHT_BRACKET_AT_CARET_LOCATION, 
+				HIGHLIGHT_ENCLOSING_BRACKETS);
+
+		super.configureSourceViewerDecorationSupport(support);
+
+	}
+
+	public Item getItemAtCarretPosition() {
+		if (contentProvider == null) {
 			return null;
 		}
 		Item item = contentProvider.tryToFindByOffset(lastCaretPosition);
@@ -254,5 +452,5 @@ public class GradleEditor extends TextEditor {
 			}
 		}
 	}
-	
+
 }
