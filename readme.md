@@ -8,7 +8,8 @@
 ## In a nutshell
 EGradle is a lightweight gradle integration for eclipse
 
-More information can be found inside [Wiki](https://github.com/de-jcup/egradle/wiki).
+More information can be found inside [Wiki](https://github.com/de-jcup/egradle/wiki)
+and integrated Eclipse help (preview at https://rawgit.com/de-jcup/egradle/master/egradle-plugin-main/html/user_guide.html).
 
 
 ## License
