@@ -69,17 +69,29 @@ class ItemTextViewerFilter extends ViewerFilter {
 			return true;
 		}
 		TreeViewer treeViewer = (TreeViewer) viewer;
+		Boolean matchingResult = isMatching(element);
+		if (matchingResult!=null){
+			return matchingResult;
+		}
+		return hasUnfilteredChild(treeViewer, parentPath, element);
+	}
+	/**
+	 * 
+	 * @param element
+	 * @return {@link Boolean#TRUE} when matching, {@link Boolean#FALSE} when not an item or not matching, <code>null</code> when not matching - but maybe a child 
+	 */
+	public Boolean isMatching(Object element){
 		if (!( element instanceof Item)){
-			return false;
+			return Boolean.FALSE;
 		}
 		Item item = (Item) element;
 		String matchName = item.getName();
 		matchName = TextProcessor.deprocess(matchName);
 		if (matchName != null && matcher.matches(matchName)){
-			return true;
+			return Boolean.TRUE;
 		}
-
-		return hasUnfilteredChild(treeViewer, parentPath, element);
+		/* maybe children are matching*/
+		return null;
 	}
 
 	private boolean hasUnfilteredChild(TreeViewer viewer, TreePath parentPath, Object element) {

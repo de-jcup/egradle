@@ -3,6 +3,7 @@ package de.jcup.egradle.eclipse.gradleeditor.outline;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -15,6 +16,9 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
@@ -30,16 +34,18 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.progress.UIJob;
 
 import de.jcup.egradle.core.api.Matcher;
+import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractQuickDialog;
 
 public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleClickListener {
 
-	private static final String INFOTEXT = null;// "Enter your gradle tasks
+	private static final int MIN_WIDTH = 400;
+	private static final int MIN_HEIGHT = 300;
+	
 	private static final String TITLE = "EGradle quick outline";
 	private static final boolean DO_SHOW_DIALOG = SHOW_DIALOG_MENU;
-	
 
 	/**
 	 * Just for direct simple UI testing
@@ -53,25 +59,31 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		shell.setSize(200, 200);
 		shell.open();
 
-		QuickOutlineDialog dialog = new QuickOutlineDialog(null, shell);
+		GradleEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
+		
+		IAdaptable adapter = new IAdaptable() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public <T> T getAdapter(Class<T> adapter) {
+				if (ITreeContentProvider.class.equals(adapter)){
+					return (T) provider;
+				}
+				return null;
+			}
+		};
+		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell);
 		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
 		dialog.open();
-		String input = dialog.getValue();
-		System.out.println("input was:" + input);
+		
 		display.dispose();
 
 	}
 
-	// (press enter to execute)";
-	private IDialogSettings dialogSettings;
-
 	private Pattern filterPattern;
 
 	private GradleEditor gradleEditor;
-
 	private Object input;
-
-	private String inputText;
 
 	private Object monitor = new Object();
 	private Pattern PATTERN_DEREGEX_ASTERISK = Pattern.compile("\\*");
@@ -79,44 +91,78 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	private Text text;
 	private TreeViewer treeViewer;
 	private String currentUsedFilterText;
+	private ITreeContentProvider contentProvider;
+	private ItemTextViewerFilter textFilter;
 
 	/**
-	 * inspired by: org.eclipse.jdt.internal.ui.text.AbstractInformationControl
-	 * (https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/AbstractInformationControl.java)
-	 * and org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControl
-	 * (https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/JavaOutlineInformationControl.java)
+	 * Creates a quick outline dialog
+	 * @param adaptable an adapter which should be able to provide a tree content provider and gradle editor. If gradle editor is not 
+	 * set a selected item will only close the dialog but do not select editor parts..
+	 * @param parent shell to use
+	 * is null the outline will have no content! If the gradle editor is null location setting etc. will not work.
+	 * <br><br>
+	 * This dialog is inspired by: 
+	 * <a href="https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/AbstractInformationControl.java">org.eclipse.jdt.internal.ui.text.AbstractInformationControl</a>
+	 * and <a href="https://github.com/eclipse/eclipse.jdt.ui/blob/master/org.eclipse.jdt.ui/ui/org/eclipse/jdt/internal/ui/text/JavaOutlineInformationControl.java">org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControl</a>
 	 * 
-	 * @param editor
-	 * @param parent
 	 */
-	public QuickOutlineDialog(GradleEditor editor, Shell parent) {
-		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
-				DO_SHOW_DIALOG, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
-		this.gradleEditor = editor;
+	public QuickOutlineDialog(IAdaptable adaptable, Shell parent) {
+		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS, DO_SHOW_DIALOG,
+				SHOW_PERSIST_ACTIONS, TITLE, null);
+		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
+		this.contentProvider=adaptable.getAdapter(ITreeContentProvider.class);
+		if (contentProvider==null){
+			contentProvider = new FallbackOutlineContentProvider();
+		}
 	}
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
-		if (gradleEditor != null) {
-			gradleEditor.openSelectedTreeItemInEditor(event.getSelection());
-		} else {
-			System.out.println("selected:" + event.getSelection());
-		}
+		ISelection selection = event.getSelection();
+		openSelectionAndCloseDialog(selection);
+	}
+
+	private void openSelectionAndCloseDialog(ISelection selection) {
+		openSelection(selection);
 		close();
 	}
 
-	public String getValue() {
-		return inputText;
+	private void openSelection(ISelection selection) {
+		if (selection==null){
+			return;
+		}
+		if (gradleEditor == null) {
+			System.out.println("selected:" + selection);
+			return;
+		}
+		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
+	
+	/**
+	 * Set input to show
+	 * @param input
+	 */
 	public void setInput(Object input) {
 		this.input = input;
 	}
 
+
 	@Override
 	protected void beforeRunEventLoop() {
 		treeViewer.setInput(input);
+
 		text.setFocus();
+		
+		if (gradleEditor==null){
+			return;
+		}
+		Item item = gradleEditor.getItemAtCarretPosition();
+		if (item==null){
+			return;
+		}
+		StructuredSelection startSelection = new StructuredSelection(item);
+		treeViewer.setSelection(startSelection,true);
 	}
 
 	@Override
@@ -144,15 +190,15 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		tree.setLayoutData(gridData);
 
 		treeViewer = new TreeViewer(tree);
+		treeViewer.setContentProvider(contentProvider);
 
 		/* filter */
-		ItemTextViewerFilter textFilter = new ItemTextViewerFilter();
+		textFilter = new ItemTextViewerFilter();
 		textFilter.setMatcher(new OutlineTextMatcher());
 		treeViewer.setFilters(textFilter);
 
 		tree.setLayoutData(gridData);
 
-		IContentProvider contentProvider = new GradleEditorOutlineContentProvider(gradleEditor);
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.addDoubleClickListener(this);
 		treeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
@@ -179,31 +225,37 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		text.setLayoutData(textLayoutData);
 
 		text.addKeyListener(new FilterKeyListener());
-		
-		
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true,
-				false).span(DO_SHOW_DIALOG ? 1 : 2, 1).applyTo(text);
 
-		
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).span(DO_SHOW_DIALOG ? 1 : 2, 1)
+				.applyTo(text);
+
 		return text;
 	}
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		Activator activator = Activator.getDefault();
-		if (activator!=null){
-			return activator.getDialogSettings();
+		if (activator == null) {
+			return null;
 		}
-		return dialogSettings;
+		return activator.getDialogSettings();
 	}
 
 	@Override
 	protected Point getInitialSize() {
-		Activator activator = Activator.getDefault();
-		if (activator==null){
-			return new Point(600,600);
+		IDialogSettings dialogSettings = getDialogSettings();
+		if (dialogSettings == null) {
+			/* no dialog settings available, so fall back to min settings*/
+			return new Point(MIN_WIDTH, MIN_HEIGHT);
 		}
-		return super.getInitialSize();
+		Point point = super.getInitialSize();
+		if (point.x<MIN_WIDTH){
+			point.x=MIN_WIDTH;
+		}
+		if (point.y<MIN_HEIGHT){
+			point.y=MIN_HEIGHT;
+		}
+		return point;
 	}
 
 	@Override
@@ -254,9 +306,20 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 		@Override
 		public void keyPressed(KeyEvent event) {
+			if (event.keyCode==SWT.ARROW_DOWN){
+				Tree tree = treeViewer.getTree();
+				if (tree.isDisposed()){
+					return;
+				}
+				if (tree.isFocusControl()){
+					return;
+				}
+				tree.setFocus();
+				return;
+			}
 			if (event.character == '\r') {
-				inputText = text.getText();
-				close();
+				ISelection selection = treeViewer.getSelection();
+				openSelectionAndCloseDialog(selection);
 				return;
 			}
 			boolean allowedChar = false;
@@ -275,7 +338,10 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			String filterText = text.getText();
 			if (filterText != null) {
 				if (filterText.equals(currentUsedFilterText)) {
-					/* same text, occurs when only cursor keys used etc. avoid flickering*/
+					/*
+					 * same text, occurs when only cursor keys used etc. avoid
+					 * flickering
+					 */
 					return;
 				}
 			}
@@ -297,8 +363,19 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 						}
 						treeViewer.refresh();
 						if (filterPattern != null) {
-							/* something was entered into filter - so results must be expanded:*/	
+							/*
+							 * something was entered into filter - so results
+							 * must be expanded:
+							 */
 							treeViewer.expandAll();
+							UIJob job2 = new UIJob("Rebuild egradle quick outline") {
+								@Override
+								public IStatus runInUIThread(IProgressMonitor monitor) {
+									selectFirstMaching();
+									return Status.OK_STATUS;
+								}
+							};
+							job2.schedule();
 						}
 					} catch (RuntimeException e) {
 						/* ignore */
@@ -308,6 +385,38 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 				}
 			};
 			job.schedule(400);
+		}
+
+		protected void selectFirstMaching() {
+//			/* select the first part where the matcher matches - so return will use this*/
+			selectfirstMatching(getTreeContentProvider().getElements(null));
+		}
+
+		private boolean selectfirstMatching(Object[] elements) {
+			if (elements==null){
+				return false;
+			}
+			for (int i=0;i<elements.length;i++){
+				Object element = elements[i];
+				if (Boolean.TRUE.equals(textFilter.isMatching(element))){
+					StructuredSelection selection = new StructuredSelection(element);
+					treeViewer.setSelection(selection,true);
+					System.out.println("selection done:"+element);
+					return true;
+				}
+				ITreeContentProvider contentProvider = getTreeContentProvider();
+				Object[] children = contentProvider.getChildren(element);
+				boolean selectionDone = selectfirstMatching(children);
+				if (selectionDone){
+					return true;
+				}
+				
+			}
+			return false;
+		}
+
+		private ITreeContentProvider getTreeContentProvider() {
+			return contentProvider;
 		}
 	}
 

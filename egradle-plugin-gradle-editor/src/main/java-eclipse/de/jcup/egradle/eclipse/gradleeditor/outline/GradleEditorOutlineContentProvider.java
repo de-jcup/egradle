@@ -20,6 +20,7 @@ import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IEditorInput;
@@ -43,15 +44,17 @@ import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
 
 public class GradleEditorOutlineContentProvider implements ITreeContentProvider {
+	private static final Object[] NO_OBJECTS = new Object[]{};
+
 	private static final GradleOutlineItemFilter GRADLE_FILTER = new GradleOutlineItemFilter();
 
 	private PersistedMarkerHelper outlineErrorMarker = new PersistedMarkerHelper("de.jcup.egradle.parse.error");
 
-	private static Object[] EMPTY = new Object[] {};
+	private static Object[] EMPTY = NO_OBJECTS;
 
 	private ModelType modelType;
 
-	private GradleEditor editor;
+	private GradleEditor gradleEditor;
 
 	private Model model;
 
@@ -59,10 +62,13 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	private Filter filter;
 
-	GradleEditorOutlineContentProvider(GradleEditor editor) {
-		this.editor = editor;
+	public GradleEditorOutlineContentProvider(IAdaptable adaptable) {
+		if (adaptable==null){
+			return;
+		}
+		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
 	}
-
+	
 	public ModelType getModelType() {
 		if (modelType == null) {
 			modelType = ModelType.GRADLE;// GROOVY_FULL_ANTLR;
@@ -81,10 +87,13 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		String charset = null;
 		
 		if (inputElement instanceof IDocument) {
+			if (gradleEditor==null){
+				return NO_OBJECTS;
+			}
 			IDocument document = (IDocument) inputElement;
 			dataAsString = document.get();
 
-			IEditorInput input = editor.getEditorInput();
+			IEditorInput input = gradleEditor.getEditorInput();
 			if (input instanceof IFileEditorInput) {
 				IFileEditorInput fie = (IFileEditorInput) input;
 				IFile file = fie.getFile();
@@ -102,14 +111,9 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		
 		synchronized (monitor) {
 			if (dataAsString!=null){
-				Object[] elements = tryTolLoad(dataAsString, charset);
-				if (elements != null) {
-					return elements;
-				}
+				tryTolLoad(dataAsString, charset);
 			}
-			/* FALL BACK */
 			if (model != null) {
-				/* old model fall back */
 				return getRootChildren();
 			}
 			return new Object[] { "no content" };
@@ -237,10 +241,10 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	}
 
 	private IFile resolveEditorFile() {
-		if (editor == null) {
+		if (gradleEditor == null) {
 			return null;
 		}
-		IEditorInput input = editor.getEditorInput();
+		IEditorInput input = gradleEditor.getEditorInput();
 		if (input == null) {
 			return null;
 		}
@@ -251,13 +255,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		}
 		return file;
 	}
-
-	// private Object[] buildTokenModel(String charset, InputStream is) throws
-	// Exception {
-	// TokenParserResult ast = parser.parse(is, charset);
-	// ModelBuilder builder = new DefaultTokenModelBuilder(ast.getRoot());
-	// return createModelAndGetRootElements(null, builder);
-	// }
 
 	private Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
 			throws ModelBuilderException {
