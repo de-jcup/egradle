@@ -168,6 +168,61 @@ public class Item {
 		return indentStr;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + column;
+		result = prime * result + ((itemType == null) ? 0 : itemType.hashCode());
+		result = prime * result + length;
+		result = prime * result + line;
+		result = prime * result + ((modifier == null) ? 0 : modifier.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + offset;
+		result = prime * result + ((target == null) ? 0 : target.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (column != other.column)
+			return false;
+		if (itemType != other.itemType)
+			return false;
+		if (length != other.length)
+			return false;
+		if (line != other.line)
+			return false;
+		if (modifier != other.modifier)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (offset != other.offset)
+			return false;
+		if (target == null) {
+			if (other.target != null)
+				return false;
+		} else if (!target.equals(other.target))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
+	}
+
 	public void setInfo(String string) {
 		this.info = string;
 	}

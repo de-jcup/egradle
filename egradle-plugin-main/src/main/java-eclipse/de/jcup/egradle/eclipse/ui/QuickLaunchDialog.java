@@ -30,56 +30,17 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+public class QuickLaunchDialog extends AbstractQuickDialog {
 
-public class QuickLaunchDialog extends PopupDialog {
-
-	private static final boolean GRAB_FOCUS = true;
-	private static final boolean PERSIST_SIZE = false;
-	private static final boolean PERSIST_BOUNDS = false;
-	private static final boolean SHOW_DIALOG_MENU = false;
-	private static final boolean SHOW_PERSIST_ACTIONS = false;
 	private static final String TITLE = "EGradle quick launch";
 	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
 
 	public QuickLaunchDialog(Shell parent) {
-		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
-				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
+		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_NO_SIZE, PERSIST_NO_BOUNDS,
+				SHOW_NO_DIALOG_MENU, SHOW_NO_PERSIST_ACTIONS, TITLE, INFOTEXT);
 	}
 
-	@Override
-	public int open() {
-		int value = super.open();
-		runEventLoop(getShell());
-		return value;
-	}
-	
-	public String getValue(){
-		return inputText;
-	}
-	
-	private void runEventLoop(Shell loopShell) {
-		Display display;
-		if (getShell() == null) {
-			display = Display.getCurrent();
-		} else {
-			display = loopShell.getDisplay();
-		}
-
-		while (loopShell != null && !loopShell.isDisposed()) {
-			try {
-				if (!display.readAndDispatch()) {
-					display.sleep();
-				}
-			} catch (Throwable e) {
-				EGradleUtil.log(e);
-			}
-		}
-		if (!display.isDisposed()) {
-			display.update();
-		}
-	}
-	private String inputText;
+	String inputText;
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
@@ -112,12 +73,10 @@ public class QuickLaunchDialog extends PopupDialog {
 		});
 		return composite;
 	}
-
-	@Override
-	protected boolean canHandleShellCloseEvent() {
-		return true;
+	
+	public String getValue() {
+		return inputText;
 	}
-
 	/**
 	 * Just for direct simple UI testing
 	 * 

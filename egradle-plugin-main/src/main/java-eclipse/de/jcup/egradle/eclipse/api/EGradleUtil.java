@@ -229,7 +229,10 @@ public class EGradleUtil {
 	 * @return image
 	 */
 	public static Image getImage(String path, String pluginId) {
-		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
+		ImageRegistry imageRegistry = getImageRegistry();
+		if (imageRegistry==null){
+			return null;
+		}
 		Image image = imageRegistry.get(path);
 		if (image == null) {
 			ImageDescriptor imageDesc = createImageDescriptor(path, pluginId);
@@ -240,6 +243,14 @@ public class EGradleUtil {
 			imageRegistry.put(path, image);
 		}
 		return image;
+	}
+
+	private static ImageRegistry getImageRegistry() {
+		Activator activator = Activator.getDefault();
+		if (activator==null){
+			return null;
+		}
+		return activator.getImageRegistry();
 	}
 
 	/**

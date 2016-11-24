@@ -25,7 +25,7 @@ import de.jcup.egradle.eclipse.api.ColorManager;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	// The plug-in COMMAND_ID
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.editor.gradle"; //$NON-NLS-1$
 
 	// The shared instance

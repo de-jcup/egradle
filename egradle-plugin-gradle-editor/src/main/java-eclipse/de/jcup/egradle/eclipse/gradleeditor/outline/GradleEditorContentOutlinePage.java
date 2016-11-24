@@ -18,37 +18,28 @@
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.DocumentEvent;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentListener;
-import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
@@ -57,35 +48,42 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",Activator.PLUGIN_ID);
 	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/sync_broken.png",Activator.PLUGIN_ID);
 	
-	private GradleEditorOutlineContentProvider contentProvider;
-	private boolean dirty;
-	private DelayedDocumentListener documentListener;
+	private ITreeContentProvider contentProvider;
+	
 	private GradleEditor gradleEditor;
 	private boolean ignoreNextSelectionEvents;
 	private GradleEditorOutlineLabelProvider labelProvider;
 	private boolean linkingWithEditorEnabled;
-	private Object monitor = new Object();
 	private ToggleLinkingAction toggleLinkingAction;
+	private Object input;
 
-	public GradleEditorContentOutlinePage(GradleEditor gradleEditor) {
-		this.gradleEditor = gradleEditor;
+	public GradleEditorContentOutlinePage(IAdaptable adaptable) {
+		if (adaptable==null){
+			contentProvider = new FallbackOutlineContentProvider();
+			return;
+		}
+		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
+		this.contentProvider = adaptable.getAdapter(ITreeContentProvider.class);
+		if (contentProvider==null){
+			contentProvider = new FallbackOutlineContentProvider();
+		}
 	}
-
+	
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 
-		contentProvider = new GradleEditorOutlineContentProvider(gradleEditor);
 		labelProvider = new GradleEditorOutlineLabelProvider();
-		documentListener = new DelayedDocumentListener();
 
 		TreeViewer viewer = getTreeViewer();
 		viewer.setContentProvider(contentProvider);
 		viewer.addDoubleClickListener(this);
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		viewer.addSelectionChangedListener(this);
-
-		IDocument document = setTreeViewerDocument();
-		document.addDocumentListener(documentListener);
+		
+		/* it can happen that input is already updated before control created*/
+		if (input!=null){
+			viewer.setInput(input);
+		}
 
 		ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
 		ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
@@ -117,7 +115,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		if (linkingWithEditorEnabled){
 			return; // already handled by single click
 		}
-		openSelectedTreeItemInEditor(event.getSelection());
+		ISelection selection = event.getSelection();
+		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
 	public void ignoreNextSelectionEvents(boolean ignore) {
@@ -129,10 +128,13 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			return;
 		}
 		ignoreNextSelectionEvents = true;
-		Item item = contentProvider.tryToFindByOffset(caretOffset);
-		if (item != null) {
-			getTreeViewer().expandToLevel(item, AbstractTreeViewer.ALL_LEVELS);
-			getTreeViewer().setSelection(new StructuredSelection(item));
+		if (contentProvider instanceof GradleEditorOutlineContentProvider){
+			GradleEditorOutlineContentProvider gcp = (GradleEditorOutlineContentProvider) contentProvider;
+			Item item = gcp.tryToFindByOffset(caretOffset);
+			if (item != null) {
+				StructuredSelection selection = new StructuredSelection(item);
+				getTreeViewer().setSelection(selection,true);
+			}
 		}
 		ignoreNextSelectionEvents = false;
 	}
@@ -148,28 +150,18 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			return;
 		}
 		ISelection selection = event.getSelection();
-		openSelectedTreeItemInEditor(selection);
+		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
-	private void openSelectedTreeItemInEditor(ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof Item) {
-				Item item = (Item) firstElement;
-				int offset = item.getOffset();
-				int length = item.getLength();
-				gradleEditor.selectAndReveal(offset, length);
-			}
+	public void inputChanged(Object input){
+		this.input=input;
+		TreeViewer treeViewer = getTreeViewer();
+		if (treeViewer==null){
+			return;
 		}
+		treeViewer.setInput(input);
 	}
-
-	private IDocument setTreeViewerDocument() {
-		IDocumentProvider documentProvider = gradleEditor.getDocumentProvider();
-		IDocument document = documentProvider.getDocument(gradleEditor.getEditorInput());
-		getTreeViewer().setInput(document);
-		return document;
-	}
+	
 
 	private abstract class ChangeModelTypeAction extends Action {
 
@@ -179,8 +171,11 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		@Override
 		public void run() {
-			contentProvider.setModelType(changeTo());
-			getTreeViewer().refresh();
+			if (contentProvider instanceof GradleEditorOutlineContentProvider){
+				GradleEditorOutlineContentProvider gcp = (GradleEditorOutlineContentProvider) contentProvider;
+				gcp.setModelType(changeTo());
+				getTreeViewer().refresh();
+			}
 		}
 
 		protected abstract ModelType changeTo();
@@ -200,51 +195,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 	}
 
-	private class DelayedDocumentListener implements IDocumentListener {
 	
-		@Override
-		public void documentAboutToBeChanged(DocumentEvent event) {
-		}
-	
-		@Override
-		public void documentChanged(DocumentEvent event) {
-			synchronized (monitor) {
-				if (dirty) {
-					/* already marked as dirty, nothing to do */
-					return;
-				}
-				dirty = true;
-			}
-			/*
-			 * we use a job to refresh the outline delayed and only when still
-			 * dirty. This is to avoid too many updates inside the outline -
-			 * otherwise every char entered at keyboard will reload complete AST
-			 * ...
-			 */
-			/* TODO ATR, 12.11.2016: while caret changes the update may not proceed, only when caret position no longer moves the update of the document has to be done */
-			Job job = new Job("update gradle editor outline") {
-	
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					synchronized (monitor) {
-						if (!dirty) {
-							/* already cleaned up by another job */
-							return Status.CANCEL_STATUS;
-						}
-						dirty = false;
-					}
-					EGradleUtil.safeAsyncExec(new Runnable() {
-						public void run() {
-							GradleEditorContentOutlinePage.this.setTreeViewerDocument();
-						}
-					});
-					return Status.OK_STATUS;
-				}
-			};
-			job.schedule(1500);
-		}
-	
-	}
 
 	private class ExpandAllAction extends Action {
 
