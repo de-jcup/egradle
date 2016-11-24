@@ -367,14 +367,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 							 * must be expanded:
 							 */
 							treeViewer.expandAll();
-							UIJob job2 = new UIJob("Rebuild egradle quick outline") {
-								@Override
-								public IStatus runInUIThread(IProgressMonitor monitor) {
-									selectFirstMaching();
-									return Status.OK_STATUS;
-								}
-							};
-							job2.schedule();
+							selectFirstMaching();
 						}
 					} catch (RuntimeException e) {
 						/* ignore */
