@@ -21,6 +21,7 @@ import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextViewer;
 
 public class GradleEditorDoubleClickStrategy implements ITextDoubleClickStrategy {
+	/* TODO ATR, 24.11.2016 - decide: remove the strategy or doe something meaningful with strategy*/
 	protected ITextViewer fText;
 
 	@Override

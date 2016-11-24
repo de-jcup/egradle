@@ -28,8 +28,8 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Modifier;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
 

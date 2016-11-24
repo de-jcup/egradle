@@ -27,10 +27,8 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
-			/* @formatter:off */
 			
 			String[] legalContentTypes = GradleDocumentIdentifiers.allIdsToStringArray();
-			/* @formatter:on */
 
 			GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
 			IDocumentPartitioner partitioner = new FastPartitioner(scanner, legalContentTypes);

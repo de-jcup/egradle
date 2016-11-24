@@ -28,6 +28,7 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.URLHyperlink;
 
+/* FIXME ATR: implement correct!*/
 public class ApplyFromlHyperlinkDetector extends AbstractHyperlinkDetector {
 
 	public ApplyFromlHyperlinkDetector() {

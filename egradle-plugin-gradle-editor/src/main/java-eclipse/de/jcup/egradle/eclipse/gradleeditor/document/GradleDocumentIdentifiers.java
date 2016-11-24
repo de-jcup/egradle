@@ -27,6 +27,8 @@ public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	
 	STRING,
 	
+	GSTRING,
+	
 	GRADLE_KEYWORD,
 	
 	GRADLE_LINK_KEYWORD,

@@ -92,7 +92,10 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		// Groovy provides different strings: simple and GStrings, so we use separate colors:
 		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(), ColorConstants.STRING_DEFAULT_BLUE,SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GSTRING.getId(), ColorConstants.ROYALBLUE,SWT.NONE);
+		
 		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), ColorConstants.COMMENT_DEFAULT_GREEN,SWT.NONE);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_LINK_KEYWORD.getId(), ColorConstants.LINK_DEFAULT_BLUE,SWT.BOLD);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), ColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);

@@ -44,7 +44,8 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 	public GradleDocumentPartitionScanner() {
 
 		IToken groovyComment = createToken(COMMENT);
-		IToken groovyString = createToken(STRING);
+		IToken groovySimpleString = createToken(STRING);
+		IToken groovyGString = createToken(GSTRING);
 		IToken groovyKeyWord = createToken(GROOVY_KEYWORD);
 		IToken javaKeyWord = createToken(JAVA_KEYWORD);
 		IToken javaLiteral = createToken(JAVA_LITERAL);
@@ -57,8 +58,8 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 		List<IPredicateRule> rules = new ArrayList<>();
 		rules.add(new MultiLineRule("/*", "*/", groovyComment));
 		rules.add(new SingleLineRule("//", "", groovyComment));
-		rules.add(new MultiLineRule("\"", "\"", groovyString));
-		rules.add(new MultiLineRule("\'", "\'", groovyString));
+		rules.add(new MultiLineRule("\"", "\"", groovyGString));
+		rules.add(new MultiLineRule("\'", "\'", groovySimpleString));
 		
 		buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, gradleLinkKeyWord, GradleLinkKeyWords.values(),onlyLettersWordDetector);
