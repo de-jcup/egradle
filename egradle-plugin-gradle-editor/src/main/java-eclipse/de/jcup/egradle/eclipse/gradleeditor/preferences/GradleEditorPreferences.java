@@ -20,22 +20,19 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
-import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
-public class EGradleEditorPreferences {
+public class GradleEditorPreferences {
 	
 
-	public static EGradleEditorPreferences EDITOR_PREFERENCES = new EGradleEditorPreferences();
+	public static GradleEditorPreferences EDITOR_PREFERENCES = new GradleEditorPreferences();
 	private IPreferenceStore store;
 
-	EGradleEditorPreferences() {
-		/* TODO ATR, 12.11.2016: Activator.PLUGIN_ID comes fom main plugin. junit and editor reuse this
-		 * identifier  so all preferences are stored inside same file. This has to be reconsidered in future
-		 */
+	GradleEditorPreferences() {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
 	}
 
-	public String getStringPreference(EGradleEditorPreferenceConstants id) {
+	public String getStringPreference(GradleEditorPreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
 		if (data==null){
 			data="";
@@ -43,16 +40,21 @@ public class EGradleEditorPreferences {
 		return data;
 	}
 	
-	public boolean getBooleanPreference(EGradleEditorPreferenceConstants id) {
+	public boolean getBooleanPreference(GradleEditorPreferenceConstants id) {
 		boolean data = getPreferenceStore().getBoolean(id.getId());
 		return data;
 	}
 	
-	public void setBooleanPreference(EGradleEditorPreferenceConstants id, boolean value){
+	public void setBooleanPreference(GradleEditorPreferenceConstants id, boolean value){
 		getPreferenceStore().setValue(id.getId(),value);
 	}
 	
 	public IPreferenceStore getPreferenceStore() {
 		return store;
+	}
+
+	public boolean getDefaultBooleanPreference(GradleEditorPreferenceConstants id) {
+		boolean data = getPreferenceStore().getDefaultBoolean(id.getId());
+		return data;
 	}
 }

@@ -109,7 +109,7 @@
       point = "org.eclipse.ui.preferencePages">
       <page
          id="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage"
-         class="de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage"
+         class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferencePage"
          name="Editor"
          category="egradle.preferences.EGradlePreferencePage">
       </page>
@@ -117,7 +117,7 @@
     <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceInitializer">
+            class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceInitializer">
       </initializer>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

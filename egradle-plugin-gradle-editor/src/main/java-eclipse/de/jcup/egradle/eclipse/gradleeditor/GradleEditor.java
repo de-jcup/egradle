@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -57,8 +58,7 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants;
-
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 public class GradleEditor extends TextEditor {
 
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
@@ -69,30 +69,6 @@ public class GradleEditor extends TextEditor {
 	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
 
 	protected final static char[] BRACKETS = { '{', '}', '(', ')', '[', ']', '<', '>' };
-
-	/** Preference key for matching brackets. */
-	protected final static String MATCHING_BRACKETS = EGradleEditorPreferenceConstants.P_EDITOR_MATCHING_BRACKETS
-			.getId();
-
-	/**
-	 * Preference key for highlighting bracket at caret location.
-	 * 
-	 * @since 3.8
-	 */
-	protected final static String HIGHLIGHT_BRACKET_AT_CARET_LOCATION = EGradleEditorPreferenceConstants.P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION
-			.getId();
-
-	/**
-	 * Preference key for enclosing brackets.
-	 * 
-	 * @since 3.8
-	 */
-	protected final static String HIGHLIGHT_ENCLOSING_BRACKETS = EGradleEditorPreferenceConstants.P_EDITOR_ENCLOSING_BRACKETS
-			.getId();
-
-	/** Preference key for matching brackets color. */
-	protected final static String MATCHING_BRACKETS_COLOR = EGradleEditorPreferenceConstants.P_EDITOR_MATCHING_BRACKETS_COLOR
-			.getId();
 
 	/*
 	 * Copy of org.eclipse.jface.text.source.DefaultCharacterPairMatcher.
@@ -170,12 +146,24 @@ public class GradleEditor extends TextEditor {
 	private List<IRegion> previousSelections;
 
 	public GradleEditor() {
+		setPreferenceStore(GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore());
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(getColorManager()));
 		setDocumentProvider(new GradleDocumentProvider());
+
+		/*
+		 * TODO ATR, 25.11.2016 - even when same content provider, the model
+		 * itself will always be new created by outlines. Is this really
+		 * necessary are should we have reuse of model and a dedicated trigger
+		 * to rebuild model ?!
+		 */
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
 
+	}
+
+	public GradlePairMatcher getBracketMatcher() {
+		return bracketMatcher;
 	}
 
 	@Override
@@ -353,13 +341,16 @@ public class GradleEditor extends TextEditor {
 
 	@Override
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
-
+		// @formatter:off
 		support.setCharacterPairMatcher(bracketMatcher);
-		support.setMatchingCharacterPainterPreferenceKeys(MATCHING_BRACKETS, MATCHING_BRACKETS_COLOR,
-				HIGHLIGHT_BRACKET_AT_CARET_LOCATION, HIGHLIGHT_ENCLOSING_BRACKETS);
-
+		support.setMatchingCharacterPainterPreferenceKeys(
+				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), 
+				P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
+				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), 
+				P_EDITOR_ENCLOSING_BRACKETS.getId());
+		
 		super.configureSourceViewerDecorationSupport(support);
-
+		// @formatter:on
 	}
 
 	@Override

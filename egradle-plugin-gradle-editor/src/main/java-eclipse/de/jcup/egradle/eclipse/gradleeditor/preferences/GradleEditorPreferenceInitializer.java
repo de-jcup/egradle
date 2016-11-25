@@ -16,28 +16,30 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  */
  
 
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferences.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 
-import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
+import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
 
 /**
  * Class used to initialize default preference values.
  */
-public class EGradleEditorPreferenceInitializer extends AbstractPreferenceInitializer {
+public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitializer {
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = EDITOR_PREFERENCES.getPreferenceStore();
 		store.setDefault(P_LINK_OUTLINE_WITH_EDITOR.getId(), true);
 		
-		PreferenceConverter.setDefault(store, P_EDITOR_MATCHING_BRACKETS_COLOR.getId(), ColorConstants.BLACK);
-		store.setDefault(P_EDITOR_MATCHING_BRACKETS.getId(), true);
-		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), true);
-		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), true);
+		/* bracket rendering configuration */
+		store.setDefault(P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), true); // per default matching is enabled, but without the two other special parts
+		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), false);
+		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), false);
+		/* bracket color */
+		PreferenceConverter.setDefault(store, P_EDITOR_MATCHING_BRACKETS_COLOR.getId(), GradleEditorColorConstants.DEFAULT_CARET_HIGHLIGHTING);
 		
 	}
 

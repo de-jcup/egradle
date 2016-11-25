@@ -61,6 +61,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	private Object monitor = new Object();
 
 	private Filter filter;
+	
 
 	public GradleEditorOutlineContentProvider(IAdaptable adaptable) {
 		if (adaptable==null){

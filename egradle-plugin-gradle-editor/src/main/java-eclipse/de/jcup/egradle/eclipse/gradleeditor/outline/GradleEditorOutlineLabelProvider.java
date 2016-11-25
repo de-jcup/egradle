@@ -31,7 +31,7 @@ import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
-import de.jcup.egradle.eclipse.gradleeditor.ColorConstants;
+import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		implements IStyledLabelProvider, IColorProvider {
@@ -69,7 +69,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GRAY);
+			textStyle.foreground = getColorManager().getColor(GradleEditorColorConstants.DARK_GRAY);
 		}
 	};
 
@@ -77,7 +77,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.BRIGHT_BLUE);
+			textStyle.foreground = getColorManager().getColor(GradleEditorColorConstants.BRIGHT_BLUE);
 		}
 	};
 
@@ -85,7 +85,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.DARK_GRAY);
+			textStyle.foreground = getColorManager().getColor(GradleEditorColorConstants.DARK_GRAY);
 		}
 	};
 
@@ -93,7 +93,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = getColorManager().getColor(ColorConstants.OUTLINE_ITEM__TYPE);
+			textStyle.foreground = getColorManager().getColor(GradleEditorColorConstants.OUTLINE_ITEM__TYPE);
 		}
 	};
 
@@ -104,7 +104,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	
 	@Override
 	public Color getForeground(Object element) {
-		return null;// getColorManager().getColor(ColorConstants.BLACK);
+		return null;// getColorManager().getColor(GradleEditorColorConstants.BLACK);
 	}
 
 	@Override
