@@ -21,7 +21,7 @@ public class GradleEditorHover implements ITextHover {
 		
 		
 		IDocument document = textViewer.getDocument();
-		GradlePairMatcher bracketMatcher = gradleEditor.getBracketMatcher();
+		GradleBracketsSupport bracketMatcher = gradleEditor.getBracketMatcher();
 		IRegion regionMatching = bracketMatcher.match(document, offset, length);
 		if (regionMatching==null){
 			return null;

@@ -59,7 +59,7 @@ import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePa
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
-public class GradleEditor extends TextEditor {
+public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
 	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
@@ -68,64 +68,8 @@ public class GradleEditor extends TextEditor {
 	/** The COMMAND_ID of the editor ruler context menu */
 	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
 
-	protected final static char[] BRACKETS = { '{', '}', '(', ')', '[', ']', '<', '>' };
+	
 
-	/*
-	 * Copy of org.eclipse.jface.text.source.DefaultCharacterPairMatcher.
-	 * getOffsetAdjustment(IDocument, int, int)
-	 */
-	private static int getOffsetAdjustment(IDocument document, int offset, int length) {
-		if (length == 0 || Math.abs(length) > 1)
-			return 0;
-		try {
-			if (length < 0) {
-				if (isOpeningBracket(document.getChar(offset))) {
-					return 1;
-				}
-			} else {
-				if (isClosingBracket(document.getChar(offset - 1))) {
-					return -1;
-				}
-			}
-		} catch (BadLocationException e) {
-			// do nothing
-		}
-		return 0;
-	}
-
-	/*
-	 * Copy of
-	 * org.eclipse.jface.text.source.MatchingCharacterPainter.getSignedSelection
-	 * (ISourceViewer)
-	 */
-	private static final IRegion getSignedSelection(ISourceViewer sourceViewer) {
-		Point viewerSelection = sourceViewer.getSelectedRange();
-
-		StyledText text = sourceViewer.getTextWidget();
-		Point selection = text.getSelectionRange();
-		if (text.getCaretOffset() == selection.x) {
-			viewerSelection.x = viewerSelection.x + viewerSelection.y;
-			viewerSelection.y = -viewerSelection.y;
-		}
-
-		return new Region(viewerSelection.x, viewerSelection.y);
-	}
-
-	private static boolean isClosingBracket(char character) {
-		for (int i = 1; i < BRACKETS.length; i += 2) {
-			if (character == BRACKETS[i])
-				return true;
-		}
-		return false;
-	}
-
-	private static boolean isOpeningBracket(char character) {
-		for (int i = 0; i < BRACKETS.length; i += 2) {
-			if (character == BRACKETS[i])
-				return true;
-		}
-		return false;
-	}
 
 	private GradleEditorContentOutlinePage outlinePage;
 
@@ -141,9 +85,7 @@ public class GradleEditor extends TextEditor {
 
 	private boolean dirty;
 
-	private GradlePairMatcher bracketMatcher = new GradlePairMatcher(BRACKETS);
-
-	private List<IRegion> previousSelections;
+	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
 	public GradleEditor() {
 		setPreferenceStore(GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore());
@@ -162,7 +104,11 @@ public class GradleEditor extends TextEditor {
 
 	}
 
-	public GradlePairMatcher getBracketMatcher() {
+	public void setErrorMessage(String message){
+		super.setStatusLineErrorMessage(message);
+	}
+	
+	public GradleBracketsSupport getBracketMatcher() {
 		return bracketMatcher;
 	}
 
@@ -201,6 +147,12 @@ public class GradleEditor extends TextEditor {
 		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
 		}
+		if (ISourceViewer.class.equals(adapter)){
+			return (T) getSourceViewer();
+		}
+		if (StatusMessageSupport.class.equals(adapter)){
+			return (T) this;
+		}
 		return super.getAdapter(adapter);
 	}
 
@@ -217,82 +169,7 @@ public class GradleEditor extends TextEditor {
 	 */
 	public void gotoMatchingBracket() {
 
-		ISourceViewer sourceViewer = getSourceViewer();
-		IDocument document = sourceViewer.getDocument();
-		if (document == null)
-			return;
-
-		IRegion selection = getSignedSelection(sourceViewer);
-		if (previousSelections == null)
-			initializePreviousSelectionList();
-
-		IRegion region = bracketMatcher.match(document, selection.getOffset(), selection.getLength());
-		if (region == null) {
-			region = bracketMatcher.findEnclosingPeerCharacters(document, selection.getOffset(), selection.getLength());
-			initializePreviousSelectionList();
-			previousSelections.add(selection);
-		} else {
-			if (previousSelections.size() == 2) {
-				if (!selection.equals(previousSelections.get(1))) {
-					initializePreviousSelectionList();
-				}
-			} else if (previousSelections.size() == 3) {
-				if (selection.equals(previousSelections.get(2)) && !selection.equals(previousSelections.get(0))) {
-					IRegion originalSelection = previousSelections.get(0);
-					sourceViewer.setSelectedRange(originalSelection.getOffset(), originalSelection.getLength());
-					sourceViewer.revealRange(originalSelection.getOffset(), originalSelection.getLength());
-					initializePreviousSelectionList();
-					return;
-				}
-				initializePreviousSelectionList();
-			}
-		}
-
-		if (region == null) {
-			setStatusLineErrorMessage("Can't go to matching bracket");
-			sourceViewer.getTextWidget().getDisplay().beep();
-			return;
-		}
-
-		int offset = region.getOffset();
-		int length = region.getLength();
-
-		if (length < 1)
-			return;
-
-		int anchor = bracketMatcher.getAnchor();
-		int targetOffset = (ICharacterPairMatcher.RIGHT == anchor) ? offset + 1 : offset + length - 1;
-
-		boolean visible = false;
-		if (sourceViewer instanceof ITextViewerExtension5) {
-			ITextViewerExtension5 extension = (ITextViewerExtension5) sourceViewer;
-			visible = (extension.modelOffset2WidgetOffset(targetOffset) > -1);
-		} else {
-			IRegion visibleRegion = sourceViewer.getVisibleRegion();
-			// http://dev.eclipse.org/bugs/show_bug.cgi?id=34195
-			visible = (targetOffset >= visibleRegion.getOffset()
-					&& targetOffset <= visibleRegion.getOffset() + visibleRegion.getLength());
-		}
-
-		if (!visible) {
-			setStatusLineErrorMessage("Matching bracket outside selected element");
-			sourceViewer.getTextWidget().getDisplay().beep();
-			return;
-		}
-
-		int adjustment = getOffsetAdjustment(document, selection.getOffset() + selection.getLength(),
-				selection.getLength());
-		targetOffset += adjustment;
-		int direction = (selection.getLength() == 0) ? 0 : ((selection.getLength() > 0) ? 1 : -1);
-		if (previousSelections.size() == 1 && direction < 0) {
-			targetOffset++;
-		}
-
-		if (previousSelections.size() > 0) {
-			previousSelections.add(new Region(targetOffset, direction));
-		}
-		sourceViewer.setSelectedRange(targetOffset, direction);
-		sourceViewer.revealRange(targetOffset, direction);
+		bracketMatcher.gotoMatchingBracket(this);
 	}
 
 	/**
@@ -383,9 +260,7 @@ public class GradleEditor extends TextEditor {
 		return Activator.getDefault().getColorManager();
 	}
 
-	private void initializePreviousSelectionList() {
-		previousSelections = new ArrayList<>(3);
-	}
+	
 
 	private class DelayedDocumentListener implements IDocumentListener {
 
