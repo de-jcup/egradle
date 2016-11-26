@@ -19,16 +19,21 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 /**
  * Constant definitions for plug-in preferences
  */
-public enum EGradleEditorPreferenceConstants {
+public enum GradleEditorPreferenceConstants {
 	
 	/**
 	 * Tasks which are executed on test
 	 */
-	P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor");
+	P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor"),
+	
+	P_EDITOR_MATCHING_BRACKETS_ENABLED("matchingBrackets"),
+	P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION("highlightBracketAtCaretLocation"),
+	P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
+	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor");
 
 	private String id;
 
-	private EGradleEditorPreferenceConstants(String id) {
+	private GradleEditorPreferenceConstants(String id) {
 		this.id = id;
 	}
 

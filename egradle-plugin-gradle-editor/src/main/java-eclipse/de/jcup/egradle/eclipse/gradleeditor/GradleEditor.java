@@ -15,20 +15,32 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -36,6 +48,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
@@ -45,42 +58,58 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
-
-public class GradleEditor extends TextEditor {
-
-	private GradleEditorContentOutlinePage outlinePage;
-	private DelayedDocumentListener documentListener;
-	private GradleEditorOutlineContentProvider contentProvider;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
 	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
-
 	/** The COMMAND_ID of the editor context menu */
 	public static final String EDITOR_CONTEXT_MENU_ID = EDITOR_ID + ".context";
-
 	/** The COMMAND_ID of the editor ruler context menu */
 	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
 
+	
+
+
+	private GradleEditorContentOutlinePage outlinePage;
+
+	private DelayedDocumentListener documentListener;
+
+	private GradleEditorOutlineContentProvider contentProvider;
+
+	private Object monitor = new Object();
+
+	private boolean quickOutlineOpened;
+
+	private int lastCaretPosition;
+
+	private boolean dirty;
+
+	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
+
 	public GradleEditor() {
+		setPreferenceStore(GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore());
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(getColorManager()));
 		setDocumentProvider(new GradleDocumentProvider());
+
+		/*
+		 * TODO ATR, 25.11.2016 - even when same content provider, the model
+		 * itself will always be new created by outlines. Is this really
+		 * necessary are should we have reuse of model and a dedicated trigger
+		 * to rebuild model ?!
+		 */
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
-		
-	}
-	
-	@Override
-	protected void doSetInput(IEditorInput input) throws CoreException {
-		super.doSetInput(input);
-		IDocument document = getDocument();
-		document.addDocumentListener(documentListener);
-		outlinePage.inputChanged(document);
+
 	}
 
+	public void setErrorMessage(String message){
+		super.setStatusLineErrorMessage(message);
+	}
 	
-	private ColorManager getColorManager() {
-		return Activator.getDefault().getColorManager();
+	public GradleBracketsSupport getBracketMatcher() {
+		return bracketMatcher;
 	}
 
 	@Override
@@ -92,41 +121,121 @@ public class GradleEditor extends TextEditor {
 			StyledText text = (StyledText) adapter;
 			text.addCaretListener(new GradleEditorCaretListener());
 		}
-		
+
 		activateGradleEditorContext();
 
 	}
 
-	private void activateGradleEditorContext() {
-		IContextService contextService = (IContextService)PlatformUI.getWorkbench()
-				.getService(IContextService.class);
-		if (contextService!=null){
-			contextService.activateContext("org.egradle.editors.GradleEditor.context");
+	@Override
+	public void dispose() {
+		super.dispose();
+		if (bracketMatcher != null) {
+			bracketMatcher.dispose();
+			bracketMatcher = null;
 		}
 	}
 
-	private Object monitor = new Object();
-	private boolean quickOutlineOpened;
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getAdapter(Class<T> adapter) {
+		if (GradleEditor.class.equals(adapter)) {
+			return (T) this;
+		}
+		if (IContentOutlinePage.class.equals(adapter)) {
+			return (T) outlinePage;
+		}
+		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
+			return (T) contentProvider;
+		}
+		if (ISourceViewer.class.equals(adapter)){
+			return (T) getSourceViewer();
+		}
+		if (StatusMessageSupport.class.equals(adapter)){
+			return (T) this;
+		}
+		return super.getAdapter(adapter);
+	}
+
+	public Item getItemAtCarretPosition() {
+		if (contentProvider == null) {
+			return null;
+		}
+		Item item = contentProvider.tryToFindByOffset(lastCaretPosition);
+		return item;
+	}
+
+	/**
+	 * Jumps to the matching bracket.
+	 */
+	public void gotoMatchingBracket() {
+
+		bracketMatcher.gotoMatchingBracket(this);
+	}
+
 	/**
 	 * Opens quick outline
 	 */
 	public void openQuickOutline() {
-		synchronized(monitor){
-			if (quickOutlineOpened){
-				/* already opened - this is in future the anker point for ctrl+o+o...*/
+		synchronized (monitor) {
+			if (quickOutlineOpened) {
+				/*
+				 * already opened - this is in future the anker point for
+				 * ctrl+o+o...
+				 */
 				return;
 			}
-			quickOutlineOpened=true;
+			quickOutlineOpened = true;
 		}
 		Shell shell = getEditorSite().getShell();
 		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell);
 		IDocument document = getDocumentProvider().getDocument(getEditorInput());
 		dialog.setInput(document);
 		dialog.open();
-		synchronized(monitor){
-			quickOutlineOpened=false;
+		synchronized (monitor) {
+			quickOutlineOpened = false;
 		}
+	}
+
+	public void openSelectedTreeItemInEditor(ISelection selection) {
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection ss = (IStructuredSelection) selection;
+			Object firstElement = ss.getFirstElement();
+			if (firstElement instanceof Item) {
+				Item item = (Item) firstElement;
+				int offset = item.getOffset();
+				int length = item.getLength();
+				selectAndReveal(offset, length);
+			}
+		}
+	}
+
+	@Override
+	public void selectAndReveal(int start, int length) {
+		super.selectAndReveal(start, length);
+		/* TODO ATR: remove the status line information ?!?!? */
+		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
+	}
+
+	@Override
+	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
+		// @formatter:off
+		support.setCharacterPairMatcher(bracketMatcher);
+		support.setMatchingCharacterPainterPreferenceKeys(
+				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), 
+				P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
+				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), 
+				P_EDITOR_ENCLOSING_BRACKETS.getId());
+		
+		super.configureSourceViewerDecorationSupport(support);
+		// @formatter:on
+	}
+
+	@Override
+	protected void doSetInput(IEditorInput input) throws CoreException {
+		super.doSetInput(input);
+		IDocument document = getDocument();
+		document.addDocumentListener(documentListener);
+		outlinePage.inputChanged(document);
 	}
 
 	protected IDocument getDocument() {
@@ -140,41 +249,25 @@ public class GradleEditor extends TextEditor {
 		setRulerContextMenuId(EDITOR_RULER_CONTEXT_MENU_ID);
 	}
 
-	@Override
-	public void selectAndReveal(int start, int length) {
-		super.selectAndReveal(start, length);
-		/* TODO ATR: remove the status line information ?!?!?*/
-		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
+	private void activateGradleEditorContext() {
+		IContextService contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
+		if (contextService != null) {
+			contextService.activateContext("org.egradle.editors.GradleEditor.context");
+		}
 	}
+
+	private ColorManager getColorManager() {
+		return Activator.getDefault().getColorManager();
+	}
+
 	
-	@Override
-	public void dispose() {
-		super.dispose();
-	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getAdapter(Class<T> adapter) {
-		if (GradleEditor.class.equals(adapter)){
-			return (T) this;
-		}
-		if (IContentOutlinePage.class.equals(adapter)) {
-			return (T) outlinePage;
-		}
-		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)){
-			return (T) contentProvider;
-		}
-		return super.getAdapter(adapter);
-	}
-
-	private int lastCaretPosition;
-	private boolean dirty;
 	private class DelayedDocumentListener implements IDocumentListener {
-		
+
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
-	
+
 		@Override
 		public void documentChanged(DocumentEvent event) {
 			synchronized (monitor) {
@@ -190,9 +283,13 @@ public class GradleEditor extends TextEditor {
 			 * otherwise every char entered at keyboard will reload complete AST
 			 * ...
 			 */
-			/* TODO ATR, 12.11.2016: while caret changes the update may not proceed, only when caret position no longer moves the update of the document has to be done */
+			/*
+			 * TODO ATR, 12.11.2016: while caret changes the update may not
+			 * proceed, only when caret position no longer moves the update of
+			 * the document has to be done
+			 */
 			Job job = new Job("update gradle editor outline") {
-	
+
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					synchronized (monitor) {
@@ -213,9 +310,9 @@ public class GradleEditor extends TextEditor {
 			};
 			job.schedule(1500);
 		}
-	
+
 	}
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
@@ -223,8 +320,8 @@ public class GradleEditor extends TextEditor {
 			if (event == null) {
 				return;
 			}
-			lastCaretPosition=event.caretOffset;
-			/* TODO ATR: remove the status line information ?!?!?*/
+			lastCaretPosition = event.caretOffset;
+			/* TODO ATR: remove the status line information ?!?!? */
 			setStatusLineMessage("caret moved:" + event.caretOffset);
 			if (outlinePage == null) {
 				return;
@@ -233,26 +330,5 @@ public class GradleEditor extends TextEditor {
 		}
 
 	}
-	
-	public Item getItemAtCarretPosition(){
-		if (contentProvider==null){
-			return null;
-		}
-		Item item = contentProvider.tryToFindByOffset(lastCaretPosition);
-		return item;
-	}
 
-	public void openSelectedTreeItemInEditor(ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object firstElement = ss.getFirstElement();
-			if (firstElement instanceof Item) {
-				Item item = (Item) firstElement;
-				int offset = item.getOffset();
-				int length = item.getLength();
-				selectAndReveal(offset, length);
-			}
-		}
-	}
-	
 }

@@ -17,7 +17,10 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.swt.graphics.RGB;
 
-public interface ColorConstants {
+public interface GradleEditorColorConstants {
+	
+	public static final RGB DEFAULT_CARET_HIGHLIGHTING = rgb(192,192,192);//grey as in java
+	
 	public static final RGB COMMENT_DEFAULT_GREEN = rgb(63, 127, 95); // green
 																		// as
 																		// java
