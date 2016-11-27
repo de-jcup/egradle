@@ -17,22 +17,15 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITextViewerExtension5;
-import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -40,11 +33,11 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
@@ -89,7 +82,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	public GradleEditor() {
 		setPreferenceStore(GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore());
-		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(getColorManager()));
+		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
 		setDocumentProvider(new GradleDocumentProvider());
 
 		/*
@@ -140,6 +133,17 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	public <T> T getAdapter(Class<T> adapter) {
 		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
+		}
+		if (ColorManager.class.equals(adapter)){
+			return (T) getColorManager();
+		}
+		if (IFile.class.equals(adapter)){
+			IEditorInput input = getEditorInput();
+			if (input instanceof IFileEditorInput){
+				IFileEditorInput feditorInput = (IFileEditorInput) input;
+				return (T) feditorInput.getFile();
+			}
+			return null; 
 		}
 		if (IContentOutlinePage.class.equals(adapter)) {
 			return (T) outlinePage;

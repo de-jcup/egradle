@@ -15,9 +15,15 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.hyperlink.IHyperlinkPresenter;
+import org.eclipse.jface.text.hyperlink.URLHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
@@ -44,13 +50,34 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 	private TextAttribute defaultTextAttribute;
 	private IAnnotationHover annotationHoover;
+	private IAdaptable adaptable;
 	
-	public GradleSourceViewerConfiguration(ColorManager colorManager) {
+	/**
+	 * Creates configuration by given adaptable
+	 * @param adaptable must provide {@link ColorManager} and {@link IFile}
+	 */
+	public GradleSourceViewerConfiguration(IAdaptable adaptable) {
+		Assert.isNotNull(adaptable,"adaptable may not be null!"); 
+		this.adaptable=adaptable;
 		this.annotationHoover=new GradleEditorAnnotationHoover();
-		this.colorManager = colorManager;
+		this.colorManager = adaptable.getAdapter(ColorManager.class);
+		Assert.isNotNull(colorManager," adaptable must support color manager");
 		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(GradleEditorColorConstants.BLACK));
 	}
 
+	@Override
+	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
+		if (sourceViewer == null)
+			return null;
+
+		return new IHyperlinkDetector[] { new URLHyperlinkDetector(), new GradleFileHyperlinkDetector(adaptable) };
+	}
+
+	@Override
+	public IHyperlinkPresenter getHyperlinkPresenter(ISourceViewer sourceViewer) {
+		return super.getHyperlinkPresenter(sourceViewer);
+	}
+	
 	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		/* @formatter:off */
