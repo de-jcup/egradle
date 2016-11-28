@@ -3,14 +3,16 @@ package de.jcup.egradle.core.api;
 public class GradleFileLinkCalculator {
 
 	private static final String IDENTIFIER = ".gradle";
-	private static final int IDENTIFIER_LENGTH= IDENTIFIER.length();
+	private static final int IDENTIFIER_LENGTH = IDENTIFIER.length();
+	private GradleStringTransformer transformer;
+
 
 	public GradleFileLinkResult createFileLinkString(String line, int offsetInLine) {
 		if (line == null) {
 			return null;
 		}
-		int lineLength=line.length();
-		if (offsetInLine>=lineLength){
+		int lineLength = line.length();
+		if (offsetInLine >= lineLength) {
 			return null;
 		}
 		int gradleSeparatorOffset = line.indexOf(IDENTIFIER);
@@ -18,15 +20,15 @@ public class GradleFileLinkCalculator {
 			// contains no .gradle inside so not interesting
 			return null;
 		}
-		int offsetAfterGradleSeparator= gradleSeparatorOffset+IDENTIFIER_LENGTH;
-		if (offsetAfterGradleSeparator>=lineLength){
+		int offsetAfterGradleSeparator = gradleSeparatorOffset + IDENTIFIER_LENGTH;
+		if (offsetAfterGradleSeparator >= lineLength) {
 			return null;
 		}
 		char c = line.charAt(offsetAfterGradleSeparator);
 		boolean foundQuote = false;
-		foundQuote= foundQuote || c=='\'';
-		foundQuote= foundQuote || c=='\"';
-		if (!foundQuote){
+		foundQuote = foundQuote || c == '\'';
+		foundQuote = foundQuote || c == '\"';
+		if (!foundQuote) {
 			return null;
 		}
 		int isUrlSeparatorOffset = line.indexOf("://");
@@ -54,11 +56,10 @@ public class GradleFileLinkCalculator {
 			if (urlOffsetInLine < 0) {
 				return null;
 			}
-		} while (quote==0);
+		} while (quote == 0);
 		urlOffsetInLine++;
 
-
-		/* calculate end offset by resolving quote*/
+		/* calculate end offset by resolving quote */
 		if (quote != 0) {
 			int endOffset = -1;
 			int nextQuote = line.indexOf(quote, urlOffsetInLine);
@@ -76,6 +77,14 @@ public class GradleFileLinkCalculator {
 		}
 
 		String linkContent = line.substring(urlOffsetInLine, urlOffsetInLine + urlLength);
+		 if (transformer!=null){
+			 String transformed = transformer.transform(linkContent);
+			 
+			 if (transformed!=null){
+				 linkContent=transformed;
+			 }
+			 
+		 }
 
 		GradleFileLinkResult result = new GradleFileLinkResult();
 		result.linkOffsetInLine = urlOffsetInLine;
@@ -90,9 +99,20 @@ public class GradleFileLinkCalculator {
 			return "GradleFileLinkResult [linkContent=" + linkContent + ", linkOffsetInLine=" + linkOffsetInLine
 					+ ", linkLength=" + linkLength + "]";
 		}
+
 		public String linkContent;
 		public int linkOffsetInLine;
 		public int linkLength;
 
+	}
+
+	/**
+	 * Set gradle string transformer which is used to transform link texts. If
+	 * the transformer returns null for a link text the result will not be used!
+	 * 
+	 * @param transformer
+	 */
+	public void setTransformer(GradleStringTransformer transformer) {
+		this.transformer = transformer;
 	}
 }

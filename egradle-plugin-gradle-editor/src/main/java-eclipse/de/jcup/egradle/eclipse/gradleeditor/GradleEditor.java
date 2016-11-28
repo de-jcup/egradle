@@ -17,6 +17,10 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -44,6 +48,8 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.jcup.egradle.core.api.GradleStringTransformer;
+import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -134,6 +140,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
 		}
+		if (GradleStringTransformer.class.equals(adapter)){
+			return (T) getGradleStringTransformer();
+		}
 		if (ColorManager.class.equals(adapter)){
 			return (T) getColorManager();
 		}
@@ -158,6 +167,24 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			return (T) this;
 		}
 		return super.getAdapter(adapter);
+	}
+
+	private GradleStringTransformer transformer;
+	private GradleStringTransformer getGradleStringTransformer() {
+		/* TODO ATR, 28.11.2016: with EGradle 1.2 this must be done via extension points, so other
+		 * plugins are able to implement and register own implementations:*/
+		if (transformer==null){
+			Map<String, String> map = new HashMap<>();
+			/* TODO ATR, 28.11.2016: what about check if current file is inside current root project? Otherwise
+			 * the link makes not really sense !?!? */
+			File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
+			if (rootFolder!=null){
+				String rootProjectDir = rootFolder.getAbsolutePath().replace('\\','/');
+				map.put("rootProject.projectDir", rootProjectDir);
+			}
+			transformer = new SimpleMapStringTransformer(map);
+		}
+		return transformer;
 	}
 
 	public Item getItemAtCarretPosition() {

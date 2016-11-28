@@ -33,13 +33,14 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
 import de.jcup.egradle.core.api.GradleFileLinkCalculator;
+import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.GradleFileLinkCalculator.GradleFileLinkResult;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 
 /* FIXME ATR: implement correct!*/
 /* FIXME ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
 public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
-
+	private GradleStringTransformer transformer;
 	private File editorFile;
 	public GradleFileHyperlinkDetector(IAdaptable adaptable) {
 		Assert.isNotNull(adaptable, "Adaptable may not be null!");
@@ -51,6 +52,7 @@ public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
 			 * if not working - ignore, so hyper link detection will return null
 			 */
 		}
+		transformer= adaptable.getAdapter(GradleStringTransformer.class);
 
 	}
 
@@ -87,17 +89,24 @@ public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
 
 		int offsetInLine = offset - lineInfo.getOffset();
 
-		GradleFileLinkCalculator linkHelper= new GradleFileLinkCalculator();
-		GradleFileLinkResult result = linkHelper.createFileLinkString(line, offsetInLine);
+		GradleFileLinkCalculator linkCalculator= new GradleFileLinkCalculator();
+		linkCalculator.setTransformer(transformer);
+		GradleFileLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
 		if (result==null){
 			return null;
 		}
 		try {
 			File folder = editorFile.getParentFile();
-			File target = new File(folder, result.linkContent);
+			String fileName = result.linkContent;
+			
+			File target = new File(folder, fileName); 
+			if (!target.exists()) {
+				target = new File(fileName);
+			}
 			if (!target.exists()) {
 				return null;
 			}
+			
 			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
 
 			IFileStore fileStore = EFS.getLocalFileSystem().getStore(target.toURI());
