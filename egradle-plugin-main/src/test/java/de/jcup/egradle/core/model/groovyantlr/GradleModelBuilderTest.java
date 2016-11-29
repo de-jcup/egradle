@@ -28,7 +28,6 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
-import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 
 public class GradleModelBuilderTest {
 	@Test

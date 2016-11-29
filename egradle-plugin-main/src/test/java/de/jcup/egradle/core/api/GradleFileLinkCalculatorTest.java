@@ -1,10 +1,12 @@
 package de.jcup.egradle.core.api;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+
 import de.jcup.egradle.core.api.GradleFileLinkCalculator.GradleFileLinkResult;
 
 public class GradleFileLinkCalculatorTest {

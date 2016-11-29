@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 import org.junit.Test;
 
-import de.jcup.egradle.core.model.groovyantlr.GroovyTokenTypeDebugInfoInspector;
-
 public class GroovyTokenTypeDebugInfoInspectorTest {
 
 	@Test

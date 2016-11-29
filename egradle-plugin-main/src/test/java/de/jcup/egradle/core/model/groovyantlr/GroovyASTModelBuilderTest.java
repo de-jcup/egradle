@@ -24,7 +24,6 @@ import org.junit.Test;
 
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
 
 public class GroovyASTModelBuilderTest {
 

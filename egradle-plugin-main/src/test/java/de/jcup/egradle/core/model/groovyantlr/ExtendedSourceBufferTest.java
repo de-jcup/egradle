@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.model.groovyantlr.ExtendedSourceBuffer;
 import de.jcup.egradle.core.text.OffsetCalculator;
 
 public class ExtendedSourceBufferTest {

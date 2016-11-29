@@ -33,12 +33,12 @@
  */
 package org.codehaus.groovy.antlr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import antlr.CommonAST;
 import antlr.Token;
 import antlr.collections.AST;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * We have an AST subclass so we can track source information.

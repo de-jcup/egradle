@@ -16,7 +16,6 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
 import java.io.File;
-import java.util.StringTokenizer;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
@@ -33,8 +32,8 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
 import de.jcup.egradle.core.api.GradleFileLinkCalculator;
-import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.GradleFileLinkCalculator.GradleFileLinkResult;
+import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 
 /* FIXME ATR: implement correct!*/

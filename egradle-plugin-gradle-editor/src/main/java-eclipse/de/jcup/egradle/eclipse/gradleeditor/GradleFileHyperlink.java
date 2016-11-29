@@ -3,7 +3,6 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import static org.eclipse.core.runtime.Assert.*;
 
 import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.filesystem.provider.FileStore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.hyperlink.IHyperlink;

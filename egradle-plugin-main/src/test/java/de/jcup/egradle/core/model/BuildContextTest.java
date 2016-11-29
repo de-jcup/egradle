@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.model.BuildContext;
-import de.jcup.egradle.core.model.Error;
-
 public class BuildContextTest {
 
 	private BuildContext contextToTest;

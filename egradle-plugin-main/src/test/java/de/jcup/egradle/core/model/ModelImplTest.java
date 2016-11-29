@@ -22,9 +22,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.core.model.ModelImpl;
-
 public class ModelImplTest {
 
 	private ModelImpl modelToTest;

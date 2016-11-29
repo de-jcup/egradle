@@ -16,34 +16,34 @@
  // $ANTLR 2.7.7 (20060906): "groovy.g" -> "GroovyRecognizer.java"$
 
 package org.codehaus.groovy.antlr.parser;
-import org.codehaus.groovy.antlr.*;
-import java.util.*;
 import java.io.InputStream;
 import java.io.Reader;
-import antlr.InputBuffer;
-import antlr.LexerSharedInputState;
-import antlr.CommonToken;
-import org.codehaus.groovy.GroovyBugError;
-import antlr.TokenStreamRecognitionException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import antlr.TokenBuffer;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
-import antlr.TokenStream;
-import antlr.RecognitionException;
-import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
-import antlr.ParserSharedInputState;
-import antlr.collections.impl.BitSet;
-import antlr.collections.AST;
-import java.util.Hashtable;
+import org.codehaus.groovy.antlr.GroovySourceAST;
+import org.codehaus.groovy.antlr.SourceBuffer;
+import org.codehaus.groovy.antlr.SourceInfo;
+
 import antlr.ASTFactory;
 import antlr.ASTPair;
+import antlr.CommonToken;
+import antlr.InputBuffer;
+import antlr.LexerSharedInputState;
+import antlr.NoViableAltException;
+import antlr.ParserSharedInputState;
+import antlr.RecognitionException;
+import antlr.SemanticException;
+import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
+import antlr.TokenStreamException;
+import antlr.TokenStreamRecognitionException;
+import antlr.collections.AST;
 import antlr.collections.impl.ASTArray;
+import antlr.collections.impl.BitSet;
 
 /** JSR-241 Groovy Recognizer.
  *

@@ -16,13 +16,6 @@
  // $ANTLR 2.7.7 (20060906): "java.g" -> "JavaLexer.java"$
 
 package org.codehaus.groovy.antlr.java;
-import org.codehaus.groovy.antlr.*;
-import org.codehaus.groovy.antlr.parser.*;
-import java.util.*;
-import java.io.InputStream;
-import java.io.Reader;
-import antlr.InputBuffer;
-import antlr.LexerSharedInputState;
 
 public interface JavaTokenTypes {
 	int EOF = 1;

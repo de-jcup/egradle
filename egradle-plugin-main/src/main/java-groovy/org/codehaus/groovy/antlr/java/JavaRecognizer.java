@@ -16,32 +16,27 @@
  // $ANTLR 2.7.7 (20060906): "java.g" -> "JavaRecognizer.java"$
 
 package org.codehaus.groovy.antlr.java;
-import org.codehaus.groovy.antlr.*;
-import org.codehaus.groovy.antlr.parser.*;
-import java.util.*;
 import java.io.InputStream;
 import java.io.Reader;
-import antlr.InputBuffer;
-import antlr.LexerSharedInputState;
 
-import antlr.TokenBuffer;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
-import antlr.TokenStream;
-import antlr.RecognitionException;
-import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
-import antlr.ParserSharedInputState;
-import antlr.collections.impl.BitSet;
-import antlr.collections.AST;
-import java.util.Hashtable;
+import org.codehaus.groovy.antlr.GroovySourceAST;
+import org.codehaus.groovy.antlr.SourceBuffer;
+
 import antlr.ASTFactory;
 import antlr.ASTPair;
+import antlr.InputBuffer;
+import antlr.LexerSharedInputState;
+import antlr.NoViableAltException;
+import antlr.ParserSharedInputState;
+import antlr.RecognitionException;
+import antlr.SemanticException;
+import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
+import antlr.TokenStreamException;
+import antlr.collections.AST;
 import antlr.collections.impl.ASTArray;
+import antlr.collections.impl.BitSet;
 
 /** Java 1.5 Recognizer
  *
