@@ -39,13 +39,6 @@ public interface RootProjectValidation extends RootProjectValidationObserver {
 	void addFieldEditor(FieldEditor field);
 
 	/**
-	 * Initialize with origin root project path
-	 * 
-	 * @param rootProjectPath
-	 */
-	void initRootProjectPath(String rootProjectPath);
-
-	/**
 	 * @return <code>true</code> property changes are handled by this component
 	 *         standalone, <code>false</code> when handling is done by caller side
 	 */

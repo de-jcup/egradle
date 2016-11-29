@@ -29,11 +29,6 @@ public abstract class RootProjectValidationAdapter implements RootProjectValidat
 		}
 
 		@Override
-		public void initRootProjectPath(String stringValue) {
-			
-		}
-
-		@Override
 		public void handleValidationResult(boolean b) {
 			
 		}

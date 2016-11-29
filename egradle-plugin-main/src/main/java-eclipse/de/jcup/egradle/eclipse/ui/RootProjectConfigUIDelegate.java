@@ -27,17 +27,12 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -50,7 +45,6 @@ import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidation;
-import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationAdapter;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationObserver;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationProgressRunnable;
 import de.jcup.egradle.eclipse.preferences.ChangeableComboFieldEditor;
@@ -281,7 +275,6 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
-		validation.initRootProjectPath(rootPathDirectoryEditor.getStringValue());
 
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME (optional)",

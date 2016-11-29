@@ -40,6 +40,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage
 		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
 		setDescription("Preferences for EGradle");
 		uiDelegate = new RootProjectConfigUIDelegate(this);
+		originRootProject=getPreferenceStore().getString(EGradlePreferenceConstants.P_ROOTPROJECT_PATH.getId());
 	}
 
 	/**
@@ -132,12 +133,6 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage
 	@Override
 	public void addFieldEditor(FieldEditor editor) {
 		addField(editor);
-	}
-
-	@Override
-	public void initRootProjectPath(String originRootProject) {
-		this.originRootProject=originRootProject;
-		
 	}
 
 	@Override
