@@ -17,19 +17,38 @@ package de.jcup.egradle.eclipse.execution.validation;
 
 import org.eclipse.jface.preference.FieldEditor;
 
-public interface ExecutionConfigDelegate extends ValidationObserver {
+/**
+ * Interface for root project validation
+ * @author Albert Tregnaghi
+ *
+ */
+public interface RootProjectValidation extends RootProjectValidationObserver {
 
-	void handleValidationStateChanges(boolean valid);
+	/**
+	 * When validation state changes this method is called
+	 * 
+	 * @param valid
+	 */
+	void onValidationStateChanged(boolean valid);
 
-	void handleFieldEditorAdded(FieldEditor field);
+	/**
+	 * Add field editor
+	 * 
+	 * @param field
+	 */
+	void addFieldEditor(FieldEditor field);
 
-	void handleCheckState();
+	/**
+	 * Initialize with origin root project path
+	 * 
+	 * @param rootProjectPath
+	 */
+	void initRootProjectPath(String rootProjectPath);
 
-	void handleOriginRootProject(String stringValue);
-	
-	void handleValidationRunning(boolean running);
-
+	/**
+	 * @return <code>true</code> property changes are handled by this component
+	 *         standalone, <code>false</code> when handling is done by caller side
+	 */
 	boolean isHandlingPropertyChanges();
-
 
 }

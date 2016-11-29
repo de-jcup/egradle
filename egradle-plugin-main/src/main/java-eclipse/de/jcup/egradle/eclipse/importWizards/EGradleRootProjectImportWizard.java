@@ -169,10 +169,11 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 				 * UNDO !
 				 */
 				getDialogSupport()
-						.showError("Was not able to execute 'gradle eclipse' - will now undo former actions!\n\n"
+						.showError("Was not able to execute 'gradle eclipse'. Look into gradle system console for more details.\n\n"
+								+ "Will now UNDO former actions!\n\n"
 								+ "Please check your settings are correct in egradle preferences.\n"
 								+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"
-								+ "Also your projects have to apply eclipse plugin inside build.gradle...");
+								+ "Also your projects have to apply eclipse plugin inside build.gradle.");
 				importProgressMessage(monitor, "import failed - undo former project closing");
 				/*
 				 * reopen former project parts because import was not successful

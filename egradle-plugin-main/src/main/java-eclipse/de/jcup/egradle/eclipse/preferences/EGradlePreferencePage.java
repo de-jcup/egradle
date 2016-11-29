@@ -26,19 +26,20 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegate;
-import de.jcup.egradle.eclipse.ui.ExecutionConfigComposite;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidation;
+import de.jcup.egradle.eclipse.ui.RootProjectConfigUIDelegate;
 
-public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage, ExecutionConfigDelegate {
+public class EGradlePreferencePage extends FieldEditorPreferencePage 
+	implements IWorkbenchPreferencePage, RootProjectValidation {
 
 	private String originRootProject;
-	private ExecutionConfigComposite configComposite;
+	private RootProjectConfigUIDelegate uiDelegate;
 
 	public EGradlePreferencePage() {
 		super(GRID);
 		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
 		setDescription("Preferences for EGradle");
-		configComposite = new ExecutionConfigComposite(this);
+		uiDelegate = new RootProjectConfigUIDelegate(this);
 	}
 
 	/**
@@ -48,14 +49,14 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	 */
 	public void createFieldEditors() {
 		Composite fieldEditorParent = getFieldEditorParent();
-		configComposite.createFieldEditors(fieldEditorParent);
+		uiDelegate.createConfigUI(fieldEditorParent);
 	}
 
 	@Override
 	public boolean performOk() {
 		boolean done =  super.performOk();
 		if (done){
-			String newRootProject=configComposite.getRootPathDirectory();
+			String newRootProject=uiDelegate.getRootPathDirectory();
 			if (! StringUtils.equals(newRootProject, originRootProject)){
 				/* root project has changed - refresh decoration of all projects */ 
 				EGradleUtil.refreshAllProjectDecorations();
@@ -70,7 +71,7 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		super.performDefaults(); // set defaults and store them, so can now be
 									// loaded:
 		String storedCallTypeId = getPreferenceStore().getDefaultString(EGradlePreferenceConstants.P_GRADLE_CALL_TYPE.getId());
-		configComposite.updateCallTypeFields(storedCallTypeId);
+		uiDelegate.updateCallTypeFields(storedCallTypeId);
 	}
 
 	@Override
@@ -97,15 +98,15 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	 */
 	private String updateCallGroupEnabledStateByStoredCallTypeId() {
 		String callTypeId = EGradleUtil.getPreferences().getStringPreference(P_GRADLE_CALL_TYPE);
-		configComposite.updateCallTypeGroupEnabledState(callTypeId);
+		uiDelegate.updateCallTypeGroupEnabledState(callTypeId);
 		return callTypeId;
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		super.propertyChange(event);
-		if (configComposite.isGradleCallTypeButton(event)) {
-			configComposite.updateCallTypeFields(event.getNewValue());
+		if (uiDelegate.isGradleCallTypeButton(event)) {
+			uiDelegate.updateCallTypeFields(event.getNewValue());
 		}
 	}
 
@@ -124,25 +125,17 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	}
 
 	@Override
-	public void handleValidationStateChanges(boolean valid) {
+	public void onValidationStateChanged(boolean valid) {
 		setValid(valid);
 	}
 
 	@Override
-	public void handleFieldEditorAdded(FieldEditor editor) {
+	public void addFieldEditor(FieldEditor editor) {
 		addField(editor);
-		
 	}
 
 	@Override
-	public void handleCheckState() {
-		checkState();
-		
-	}
-
-
-	@Override
-	public void handleOriginRootProject(String originRootProject) {
+	public void initRootProjectPath(String originRootProject) {
 		this.originRootProject=originRootProject;
 		
 	}

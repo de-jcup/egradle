@@ -55,39 +55,6 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	private static final String TITLE = "EGradle quick outline";
 	private static final boolean DO_SHOW_DIALOG = SHOW_DIALOG_MENU;
 
-	/**
-	 * Just for direct simple UI testing
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Display display = new Display();
-		Shell shell = new Shell(display);
-		shell.setText("Shell");
-		shell.setSize(200, 200);
-		shell.open();
-
-		GradleEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
-
-		IAdaptable adapter = new IAdaptable() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public <T> T getAdapter(Class<T> adapter) {
-				if (ITreeContentProvider.class.equals(adapter)) {
-					return (T) provider;
-				}
-				return null;
-			}
-		};
-		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell);
-		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
-		dialog.open();
-
-		display.dispose();
-
-	}
-
 	private Pattern filterPattern;
 
 	private GradleEditor gradleEditor;

@@ -25,13 +25,13 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 
-public class ValidationProgressRunnable /* extends Job */ implements IRunnableWithProgress {
+public class RootProjectValidationProgressRunnable implements IRunnableWithProgress {
 		private GradleConfigurationValidator validator;
 		private GradleConfiguration configuration;
 		private OutputHandler outputHandler;
-		private ValidationObserver observer;
+		private RootProjectValidationObserver observer;
 
-		public ValidationProgressRunnable(GradleConfiguration configuration, ValidationObserver observer, OutputHandler outputHandler) {
+		public RootProjectValidationProgressRunnable(GradleConfiguration configuration, RootProjectValidationObserver observer, OutputHandler outputHandler) {
 			this.observer=observer;
 			this.outputHandler=outputHandler;
 			validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true, 10));

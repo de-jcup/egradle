@@ -307,12 +307,10 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		styled.append(")");
 	}
 
-	private static final ColorManager FALLBACK_COLORMANAGER = new ColorManager();
-
 	public ColorManager getColorManager() {
 		Activator activator = Activator.getDefault();
 		if (activator == null) {
-			return FALLBACK_COLORMANAGER;
+			return ColorManager.getStandalone();
 		}
 		return activator.getColorManager();
 	}

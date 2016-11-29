@@ -24,11 +24,30 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 public class ColorManager {
-
+	private static ColorManager standalone;
 	protected Map<RGB, Color> fColorTable = new HashMap<>(10);
 
 	public ColorManager() {
 
+	}
+
+	/**
+	 * @return color manager for standalone SWT programs, never <code>null</code>. 
+	 * @throws IllegalStateException when no standalone color manager set but used
+	 */
+	public static ColorManager getStandalone() {
+		if (standalone==null){
+			throw new IllegalStateException("no standalone color manager set.");
+		}
+		return standalone;
+	}
+
+	/**
+	 * Set color manager for standalone SWT programs
+	 * @param standalone
+	 */
+	public static void setStandalone(ColorManager standalone) {
+		ColorManager.standalone = standalone;
 	}
 
 	public void dispose() {

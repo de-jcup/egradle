@@ -49,14 +49,14 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegate;
-import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegateAdapter;
-import de.jcup.egradle.eclipse.execution.validation.ValidationObserver;
-import de.jcup.egradle.eclipse.execution.validation.ValidationProgressRunnable;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidation;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationAdapter;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationObserver;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationProgressRunnable;
 import de.jcup.egradle.eclipse.preferences.ChangeableComboFieldEditor;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 
-public class ExecutionConfigComposite implements ValidationObserver, IPropertyChangeListener {
+public class RootProjectConfigUIDelegate implements RootProjectValidationObserver, IPropertyChangeListener {
 
 	private ChangeableComboFieldEditor gradleCallTypeRadioButton;
 	private ChangeableComboFieldEditor shellFieldEditor;
@@ -68,21 +68,21 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	private DirectoryFieldEditor defaultJavaHomeDirectoryEditor;
 	private Button validationButton;
 
-	private ExecutionConfigDelegate delegate;
+	private RootProjectValidation validation;
 
-	public ExecutionConfigComposite(ExecutionConfigDelegate delegate) {
-		this.delegate = delegate;
+	public RootProjectConfigUIDelegate(RootProjectValidation validation) {
+		this.validation = validation;
 	}
 
 	/**
-	 * Creates the field editors. Field editors are abstractions of the common
+	 * Creates the configuration UI containing field editors. Field editors are abstractions of the common
 	 * GUI blocks needed to manipulate various types of preferences. Each field
 	 * editor knows how to save and restore itself.
 	 * 
 	 * @param parent
 	 *            parent composite to add to
 	 */
-	public void createFieldEditors(Composite parent) {
+	public void createConfigUI(Composite parent) {
 		createDefaults(parent);
 		createGradleCallTypeGroup(parent);
 		createValidationGroup(parent);
@@ -161,8 +161,8 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 				configuration.setJavaHome(getGlobalJavaHomePath());
 
 				try {
-					ExecutionConfigComposite observer = ExecutionConfigComposite.this;
-					ValidationProgressRunnable runnable = new ValidationProgressRunnable(configuration, observer,
+					RootProjectConfigUIDelegate observer = RootProjectConfigUIDelegate.this;
+					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(configuration, observer,
 							validationOutputHandler);
 					progressService.busyCursorWhile(runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
@@ -255,7 +255,11 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	}
 
 	private ColorManager getColorManager() {
-		return Activator.getDefault().getColorManager();
+		Activator activator = Activator.getDefault();
+		if (activator==null){
+			return ColorManager.getStandalone();
+		}
+		return activator.getColorManager();
 	}
 
 	private void createDefaults(Composite parent) {
@@ -277,7 +281,7 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
-		delegate.handleOriginRootProject(rootPathDirectoryEditor.getStringValue());
+		validation.initRootProjectPath(rootPathDirectoryEditor.getStringValue());
 
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME (optional)",
@@ -290,29 +294,29 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 		addField(defaultJavaHomeDirectoryEditor);
 	}
 
-	protected Image getValidationButtonImage() {
+	Image getValidationButtonImage() {
 		return EGradleUtil.getImage("icons/gradle-og.gif");
 	}
 
-	protected void setValid(boolean valid) {
-		delegate.handleValidationStateChanges(valid);
+	private void setValid(boolean valid) {
+		validation.onValidationStateChanged(valid);
 
 	}
 
 	private void addField(FieldEditor field) {
-		delegate.handleFieldEditorAdded(field);
+		validation.addFieldEditor(field);
 	}
 
 	private boolean validationRunning = false;
-	private boolean debug;
+	boolean debug;
 
 	@Override
 	public void handleValidationResult(boolean valid) {
-		delegate.handleValidationResult(valid);
+		validation.handleValidationResult(valid);
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if (delegate.isHandlingPropertyChanges()) {
+		if (validation.isHandlingPropertyChanges()) {
 			return;
 		}
 		if (isGradleCallTypeButton(event)) {
@@ -384,62 +388,13 @@ public class ExecutionConfigComposite implements ValidationObserver, IPropertyCh
 	@Override
 	public void handleValidationRunning(boolean running) {
 		validationRunning = running;
-		delegate.handleValidationRunning(running);
+		validation.handleValidationRunning(running);
 	}
 
 	public String getRootPathDirectory() {
 		return rootPathDirectoryEditor.getStringValue();
 	}
 
-	/**
-	 * Just for direct simple UI testing
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Display display = new Display();
-		Shell shell = new Shell(display);
-		shell.setText("Shell");
-		shell.setSize(200, 200);
-		shell.open();
-
-		ExecutionConfigComposite configComposite = new ExecutionConfigComposite(new ExecutionConfigDelegateAdapter() {
-			@Override
-			public void handleFieldEditorAdded(FieldEditor field) {
-			}
-		}) {
-			@Override
-			protected Image getValidationButtonImage() {
-				return null;
-			}
-		};
-		configComposite.debug = true;
-
-		GridLayout layout = new GridLayout(1, false);
-		layout.horizontalSpacing = 5;
-		layout.verticalSpacing = 5;
-		shell.setLayout(layout);
-
-		shell.setSize(new Point(800, 800));
-		configComposite.createFieldEditors(shell);
-		if (configComposite.debug) {
-			shell.setBackground(new Color(display, new RGB(255, 0, 0)));
-		}
-
-		configComposite.setGlobalJavaHomePath("java home path");
-		configComposite.setRootProjectPath("root project path");
-		String gradleCallTypeID = EGradleCallType.WINDOWS_GRADLE_WRAPPER.getId();
-		configComposite.setGradleCallTypeId(gradleCallTypeID);
-
-		shell.layout();
-		shell.open();
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
-		display.dispose();
-	}
 
 	public void setGradleCallTypeId(String gradleCallTypeID) {
 		gradleCallTypeRadioButton.setStringValue(gradleCallTypeID);

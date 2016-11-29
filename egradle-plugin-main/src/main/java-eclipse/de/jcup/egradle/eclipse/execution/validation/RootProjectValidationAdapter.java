@@ -21,20 +21,15 @@ import org.eclipse.jface.preference.FieldEditor;
  * @author Albert Tregnaghi
  *
  */
-public abstract class ExecutionConfigDelegateAdapter implements ExecutionConfigDelegate{
+public abstract class RootProjectValidationAdapter implements RootProjectValidation{
 
 		@Override
-		public void handleCheckState() {
+		public void addFieldEditor(FieldEditor field) {
 			
 		}
 
 		@Override
-		public void handleFieldEditorAdded(FieldEditor field) {
-			
-		}
-
-		@Override
-		public void handleOriginRootProject(String stringValue) {
+		public void initRootProjectPath(String stringValue) {
 			
 		}
 
@@ -49,7 +44,7 @@ public abstract class ExecutionConfigDelegateAdapter implements ExecutionConfigD
 		}
 
 		@Override
-		public void handleValidationStateChanges(boolean valid) {
+		public void onValidationStateChanged(boolean valid) {
 			
 		}
 

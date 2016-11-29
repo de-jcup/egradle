@@ -15,7 +15,13 @@
  */
  package de.jcup.egradle.eclipse.execution.validation;
 
-public interface ValidationObserver{
+ /**
+  * Observes validation running on EGradle root project validation
+  * @author Albert Tregnaghi
+  *
+  */
+public interface RootProjectValidationObserver{
+	
 	public void handleValidationRunning(boolean running);
 
 	public void handleValidationResult(boolean b);

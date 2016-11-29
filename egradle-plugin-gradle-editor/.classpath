@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java-eclipse"/>
+	<classpathentry kind="src" path="src/test/java-eclipse"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/egradle-plugin-main"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>

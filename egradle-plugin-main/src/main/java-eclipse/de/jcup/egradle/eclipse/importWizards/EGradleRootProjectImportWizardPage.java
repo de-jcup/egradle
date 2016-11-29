@@ -26,18 +26,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.eclipse.execution.validation.ExecutionConfigDelegateAdapter;
-import de.jcup.egradle.eclipse.ui.ExecutionConfigComposite;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationAdapter;
+import de.jcup.egradle.eclipse.ui.RootProjectConfigUIDelegate;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
-	private ExecutionConfigComposite configComposite;
+	private RootProjectConfigUIDelegate configComposite;
 
 	public EGradleRootProjectImportWizardPage(String pageName) {
 		super(pageName);
 		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
-		configComposite = new ExecutionConfigComposite(new InternalExecutionDelegte());
+		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter());
 		
 	}
 	
@@ -53,7 +53,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		folderSelectionLayout.marginHeight = 0;
 		folderSelectionArea.setLayout(folderSelectionLayout);
 
-		configComposite.createFieldEditors(folderSelectionArea);
+		configComposite.createConfigUI(folderSelectionArea);
 		
 		/* adopt import setting from current existing preferences value*/
 		String globalJavaHomePath = getPreferences().getGlobalJavaHomePath();
@@ -96,7 +96,12 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		}
 	}
 
-	private class InternalExecutionDelegte extends ExecutionConfigDelegateAdapter{
+	/**
+	 * Does nothing special
+	 * @author Albert Tregnaghi
+	 *
+	 */
+	private class RootProjectImportValidationAdapter extends RootProjectValidationAdapter{
 		
 	}
 
