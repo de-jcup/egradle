@@ -31,6 +31,66 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 
 public class GradleModelBuilderTest {
+	@Test
+	public void test_define_method__contains_child() throws Exception{
+		// @formatter:off
+		String code=
+		"def jacocoRemoteAction(doDump, doReset, doAppend) {\n"+
+		"	def  serverString = 'localhost:6300'\n"+
+		"}";
+		// @formatter:on
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+		
+		/* execute */
+		Model model = b.build(null);
+		
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item methodDef = items[0];
+
+		assertEquals("jacocoRemoteAction", methodDef.getName());
+		
+		Item[] children = methodDef.getChildren();
+		assertEquals(1, children.length);
+		Item variableDef = children[0];
+		assertNotNull(variableDef);
+		assertEquals("serverString", variableDef.getName());
+	}
+	
+	@Test
+	public void test_define_method__found_with_parameters() throws Exception{
+		// @formatter:off
+		String code=
+		"def jacocoRemoteAction(doDump, doReset, doAppend) {\n"+
+		"	def  serverString = 'localhost:6300'\n"+
+		"}";
+		// @formatter:on
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+		
+		/* execute */
+		Model model = b.build(null);
+		
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item methodDef = items[0];
+
+		assertEquals("jacocoRemoteAction", methodDef.getName());
+		assertEquals(ItemType.METHOD, methodDef.getItemType());
+
+		String[] parameters = methodDef.getParameters();
+		assertNotNull(parameters);
+		assertEquals(3, parameters.length);
+		
+		assertEquals("doDump", parameters[0]);
+		assertEquals("doReset", parameters[1]);
+		assertEquals("doAppend", parameters[2]);
+	}
 	
 	@Test
 	public void task_clean_with_dofirst_short__returns_name_clean() throws ModelBuilderException{

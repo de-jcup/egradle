@@ -2479,7 +2479,7 @@ inputState.guessing--;
 				variableDefinitions_AST = (AST)currentAST.root;
 				if (qid_AST != null)  id_AST = qid_AST;
 				variableDefinitions_AST =
-				(AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(t))).add(id_AST).add(param_AST).add(tc_AST).add(mb_AST));
+				(AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(t))).add(id_AST).add(param_AST).add(tc_AST).add(mb_AST));
 				
 				currentAST.root = variableDefinitions_AST;
 				currentAST.child = variableDefinitions_AST!=null &&variableDefinitions_AST.getFirstChild()!=null ?
@@ -7481,7 +7481,7 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				enumConstantFieldInternal_AST = (AST)currentAST.root;
 				
-				enumConstantFieldInternal_AST = (AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(t))).add(tmp178_AST).add(param_AST).add(tc_AST).add(s2_AST));
+				enumConstantFieldInternal_AST = (AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(t))).add(tmp178_AST).add(param_AST).add(tc_AST).add(s2_AST));
 				if (tp != null) {
 				AST old = enumConstantFieldInternal_AST.getFirstChild();
 				enumConstantFieldInternal_AST.setFirstChild(tp);
@@ -14431,7 +14431,7 @@ inputState.guessing--;
 		"MODIFIERS",
 		"OBJBLOCK",
 		"SLIST",
-		"METHOD_DEF",
+		"METHOD",
 		"VARIABLE_DEF",
 		"INSTANCE_INIT",
 		"STATIC_INIT",

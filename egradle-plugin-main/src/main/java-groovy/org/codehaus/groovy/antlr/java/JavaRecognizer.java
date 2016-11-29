@@ -3033,7 +3033,7 @@ inputState.guessing--;
 					s_AST = (AST)returnAST;
 					if ( inputState.guessing==0 ) {
 						classField_AST = (AST)currentAST.root;
-						classField_AST = (AST)astFactory.make( (new ASTArray(5)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods_AST).add(tp_AST).add(h_AST).add(s_AST));
+						classField_AST = (AST)astFactory.make( (new ASTArray(5)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods_AST).add(tp_AST).add(h_AST).add(s_AST));
 						currentAST.root = classField_AST;
 						currentAST.child = classField_AST!=null &&classField_AST.getFirstChild()!=null ?
 							classField_AST.getFirstChild() : classField_AST;
@@ -3096,7 +3096,7 @@ inputState.guessing--;
 						}
 						if ( inputState.guessing==0 ) {
 							classField_AST = (AST)currentAST.root;
-							classField_AST = (AST)astFactory.make( (new ASTArray(8)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp92_AST).add(param_AST).add(tc_AST).add(s2_AST));
+							classField_AST = (AST)astFactory.make( (new ASTArray(8)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp92_AST).add(param_AST).add(tc_AST).add(s2_AST));
 							currentAST.root = classField_AST;
 							currentAST.child = classField_AST!=null &&classField_AST.getFirstChild()!=null ?
 								classField_AST.getFirstChild() : classField_AST;
@@ -3281,7 +3281,7 @@ inputState.guessing--;
 				match(SEMI);
 				if ( inputState.guessing==0 ) {
 					interfaceField_AST = (AST)currentAST.root;
-					interfaceField_AST = (AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp98_AST).add(param_AST).add(tc_AST));
+					interfaceField_AST = (AST)astFactory.make( (new ASTArray(7)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp98_AST).add(param_AST).add(tc_AST));
 					currentAST.root = interfaceField_AST;
 					currentAST.child = interfaceField_AST!=null &&interfaceField_AST.getFirstChild()!=null ?
 						interfaceField_AST.getFirstChild() : interfaceField_AST;
@@ -3847,7 +3847,7 @@ inputState.guessing--;
 					}
 					if ( inputState.guessing==0 ) {
 						enumConstantField_AST = (AST)currentAST.root;
-						enumConstantField_AST = (AST)astFactory.make( (new ASTArray(8)).add(create(METHOD_DEF,"METHOD_DEF",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp114_AST).add(param_AST).add(tc_AST).add(s2_AST));
+						enumConstantField_AST = (AST)astFactory.make( (new ASTArray(8)).add(create(METHOD_DEF,"METHOD",first,LT(1))).add(mods_AST).add(tp_AST).add((AST)astFactory.make( (new ASTArray(2)).add(create(TYPE,"TYPE",first,LT(1))).add(rt_AST))).add(tmp114_AST).add(param_AST).add(tc_AST).add(s2_AST));
 						currentAST.root = enumConstantField_AST;
 						currentAST.child = enumConstantField_AST!=null &&enumConstantField_AST.getFirstChild()!=null ?
 							enumConstantField_AST.getFirstChild() : enumConstantField_AST;
@@ -7570,7 +7570,7 @@ inputState.guessing--;
 		"MODIFIERS",
 		"OBJBLOCK",
 		"SLIST",
-		"METHOD_DEF",
+		"METHOD",
 		"VARIABLE_DEF",
 		"INSTANCE_INIT",
 		"STATIC_INIT",

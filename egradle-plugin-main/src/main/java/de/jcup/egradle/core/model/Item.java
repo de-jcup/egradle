@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -146,6 +146,8 @@ public class Item {
 	private String target;
 
 	private String configuration;
+
+	private String[] parameters;
 
 	public void setClosed(boolean closed) {
 		this.closed = closed;
@@ -284,9 +286,20 @@ public class Item {
 	public String getConfiguration() {
 		return configuration;
 	}
-	
+
 	public void setConfiguration(String configuration) {
 		this.configuration = configuration;
+	}
+
+	/**
+	 * @return parameters or <code>null</code>
+	 */
+	public String[] getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(String... parameters) {
+		this.parameters = parameters;
 	}
 
 }

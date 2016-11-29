@@ -20,8 +20,6 @@ import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.groovy.antlr.GroovySourceAST;
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
@@ -39,7 +37,6 @@ import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder;
 import de.jcup.egradle.core.model.ModelImpl;
-import de.jcup.egradle.core.model.Modifier;
 
 /**
  * Builds a outline model containing gradle specific outline items
@@ -52,6 +49,7 @@ public class GradleModelBuilder implements ModelBuilder {
 
 	private ItemFilter postCreationFilter;
 	private Filter preCreationFilter;
+	private GradleModelBuilderSupport support = new GradleModelBuilderSupport();
 	
 	public GradleModelBuilder(InputStream is) {
 		this.is = is;
@@ -147,13 +145,6 @@ public class GradleModelBuilder implements ModelBuilder {
 		}
 	}
 
-	public Filter getPreCreationFilter() {
-		if (preCreationFilter==null){
-			preCreationFilter=Filter.NOTHING_FILTERED;
-		}
-		return preCreationFilter;
-	}
-	
 	/**
 	 * Builds new item or <code>null</code>
 	 * 
@@ -179,6 +170,9 @@ public class GradleModelBuilder implements ModelBuilder {
 		case VARIABLE_DEF:
 			item = buildVariableDef(context, current);
 			break;
+		case METHOD_DEF:
+			item = buildMethodDef(context, current);
+			break;
 		case PACKAGE_DEF:
 			item = buildPackageDef(context, current);
 			break;
@@ -196,7 +190,7 @@ public class GradleModelBuilder implements ModelBuilder {
 
 	}
 
-	protected Item buildImport(Context context, AST current) {
+	Item buildImport(Context context, AST current) {
 		Item item = null;
 
 		AST modifiers = current.getFirstChild();
@@ -207,14 +201,14 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (packageName == null) {
 			return null;
 		}
-		item = createItem(context, current);
-		String name = resolveAsSimpleString(packageName);
+		item = support.createItem(context, current);
+		String name = support.resolveAsSimpleString(packageName);
 		item.setName(name);
 		item.setItemType(ItemType.IMPORT);
 		return item;
 	}
 
-	protected Item buildPackageDef(Context context, AST current) {
+	Item buildPackageDef(Context context, AST current) {
 		Item item = null;
 
 		AST modifiers = current.getFirstChild();
@@ -225,14 +219,14 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (packageName == null) {
 			return null;
 		}
-		item = createItem(context, current);
-		String name = resolveAsSimpleString(packageName);
+		item = support.createItem(context, current);
+		String name = support.resolveAsSimpleString(packageName);
 		item.setName(name);
 		item.setItemType(ItemType.PACKAGE);
 		return item;
 	}
 
-	protected Item buildVariableDef(Context context, AST current) throws ModelBuilderException {
+	Item buildVariableDef(Context context, AST current) throws ModelBuilderException {
 		/* def variable = "" */
 		/* variable = "" */
 		/* def String variable = "" */
@@ -273,15 +267,76 @@ public class GradleModelBuilder implements ModelBuilder {
 		} else {
 			nameString = "<unknown>";
 		}
-		item = createItem(context, current);
+		item = support.createItem(context, current);
 		item.setName(nameString);
-		appendModifiers(item, modifiers);
+		support.appendModifiers(item, modifiers);
 		item.setType(typeDefText);
 		item.setItemType(ItemType.VARIABLE);
 		return item;
 	}
+	
+	Item buildMethodDef(Context context, AST current) throws ModelBuilderException {
+		/* def method(params) */
+		Item item = null;
 
-	protected Item buildClass(Context context, AST current) throws ModelBuilderException {
+		AST modifiers = null;
+		AST type = null;
+		AST first = current.getFirstChild();
+		if (first== null) {
+			return null;
+		}
+		int firstType = first.getType();
+		if (GroovyTokenTypes.TYPE==firstType){
+			type=first;
+		}else if (GroovyTokenTypes.MODIFIERS==firstType){
+			modifiers=first;
+		}else{
+			return null;
+		}
+		if (type==null){
+			type = modifiers.getNextSibling();
+			if (type == null) {
+				return null;
+			}
+			
+		}
+		/* type */
+		String typeDefText = null;
+		AST typeDef = type.getFirstChild();
+		if (typeDef != null) {
+			typeDefText = typeDef.getText();
+		}
+		AST name = type.getNextSibling();
+		String nameString;
+		if (name != null) {
+			nameString = name.getText();
+		} else {
+			nameString = "<unknown>";
+		}
+		item = support.createItem(context, current);
+		item.setName(nameString);
+		support.appendModifiers(item, modifiers);
+		item.setType(typeDefText);
+		item.setItemType(ItemType.METHOD);
+		
+		AST parameters = name.getNextSibling();
+		if (parameters!=null){
+			if (parameters.getType()==GroovyTokenTypes.PARAMETERS){
+				support.appendParameters(item,parameters);
+			}
+			
+			AST slist = parameters.getNextSibling();
+			if (slist.getType()==GroovyTokenTypes.SLIST){
+				walkThroughASTandSiblings(context, item, slist.getFirstChild());
+			}
+		}
+		
+		
+		return item;
+	}
+
+	
+	Item buildClass(Context context, AST current) throws ModelBuilderException {
 		Item item = null;
 		AST classDefModifiers = current.getFirstChild();
 		if (classDefModifiers == null) {
@@ -291,14 +346,14 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (classDefName == null) {
 			return null;
 		}
-		item = createItem(context, current);
+		item = support.createItem(context, current);
 		item.setItemType(ItemType.CLASS);
 		item.setName(classDefName.getText());
-		appendModifiers(item, classDefModifiers);
+		support.appendModifiers(item, classDefModifiers);
 		return item;
 	}
 
-	protected Item buildExpression(Context context, Item parent, AST current) throws ModelBuilderException {
+	Item buildExpression(Context context, Item parent, AST current) throws ModelBuilderException {
 		AST next = current.getFirstChild();
 		if (next == null) {
 			return null;
@@ -331,7 +386,7 @@ public class GradleModelBuilder implements ModelBuilder {
 			return null;
 		}
 		AST astForName = methodChild;
-		String enameString = resolveName(astForName);
+		String enameString = support.resolveName(astForName);
 		if (enameString == null) {
 			return null;
 		}
@@ -352,7 +407,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		} else {
 			return null;
 		}
-		Item item = createItem(context, current);
+		Item item = support.createItem(context, current);
 		item.setItemType(outlineType);
 		item.setName(enameString);
 		item.setClosed(true);
@@ -360,15 +415,15 @@ public class GradleModelBuilder implements ModelBuilder {
 		AST lastAst = ename.getNextSibling();
 		if ("task".equals(enameString) || enameString.startsWith("task ")) {
 			item.setItemType(ItemType.TASK);
-			lastAst = handleTaskClosure(enameString, item, lastAst);
+			lastAst = support.handleTaskClosure(enameString, item, lastAst);
 		} else if (enameString.startsWith("tasks.")) {
 			item.setItemType(ItemType.TASKS);
 		} else if (enameString.equals("apply") || enameString.startsWith("apply ")) {
 			item.setItemType(ItemType.APPLY_SETUP);
-			handleApplyType(item, lastAst);
+			support.handleApplyType(item, lastAst);
 		}
 		if (outlineType == ItemType.DEPENDENCY) {
-			return handleDependencyAndReturnItem(methodCall, item);
+			return support.handleDependencyAndReturnItem(methodCall, item);
 		}
 		if (outlineType == ItemType.REPOSITORY) {
 			return item;
@@ -416,333 +471,15 @@ public class GradleModelBuilder implements ModelBuilder {
 
 		return item;
 	}
-
-	private void appendModifiers(Item item, AST modifiers) throws ModelBuilderException {
-		if (modifiers == null) {
-			return;
+	private Filter getPreCreationFilter() {
+		if (preCreationFilter==null){
+			preCreationFilter=Filter.NOTHING_FILTERED;
 		}
-		if (modifiers.getType() != GroovyTokenTypes.MODIFIERS) {
-			return;
-		}
-		AST modifierAst = modifiers.getFirstChild();
-		if (modifierAst == null) {
-			return;
-		}
-		/* currently just skip annotations at all */
-		while (modifierAst != null) {
-			if (modifierAst.getType() != GroovyTokenTypes.ANNOTATION) {
-				break;
-			}
-			// AST annotations = modifierAst;
-			modifierAst = modifierAst.getNextSibling();
-		}
-		if (modifierAst == null) {
-			return;
-		}
-		String modifierString = modifierAst.getText();
-		Modifier oModifier = Modifier.DEFAULT;
-		if (StringUtils.isNotBlank(modifierString)) {
-			if ("private".equals(modifierString)) {
-				oModifier = Modifier.PRIVATE;
-			} else if ("protected".equals(modifierString)) {
-				oModifier = Modifier.PROTECTED;
-			} else if ("public".equals(modifierString)) {
-				oModifier = Modifier.PUBLIC;
-			}
-		}
-		item.setModifier(oModifier);
+		return preCreationFilter;
 	}
-
-	private Item handleDependencyAndReturnItem(AST methodCall, Item item) {
-		AST configuration = methodCall.getFirstChild();
-		AST configurationParameter = null;
-
-		if (configuration != null) {
-			configurationParameter = configuration.getNextSibling();
-		}
-		if (configurationParameter == null) {
-			return item;
-		}
-		String depencyName = resolveAsSimpleString(configurationParameter);
-		item.setConfiguration(configuration.getText());
-		item.setName(depencyName);
-		return item;
-	}
-
-	private void handleApplyType(Item item, AST lastAst) {
-		if (lastAst == null) {
-			return;
-		}
-		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
-			return;
-		}
-		/* parameter -e.g. apply from/plugin 'bla' */
-		AST elist = lastAst;
-
-		AST applyKind = elist.getFirstChild();
-
-		if (applyKind == null) {
-			return;
-		}
-		if (GroovyTokenTypes.LABELED_ARG != applyKind.getType()) {
-			return;
-		}
-		AST applyLabel = applyKind.getFirstChild();
-		if (applyLabel == null) {
-			return;
-		}
-		String typeStr = applyLabel.getText();
-		if ("plugin".equals(typeStr)) {
-			item.setItemType(ItemType.APPLY_PLUGIN);
-			item.setName("apply plugin");
-		} else if ("from".equals(typeStr)) {
-			item.setItemType(ItemType.APPLY_FROM);
-			item.setName("apply from");
-		}
-		AST applyTarget = applyLabel.getNextSibling();
-		if (applyTarget == null) {
-			return;
-		}
-		String target = resolveAsSimpleString(applyTarget);
-		item.setTarget(target);
-	}
-
-	private String resolveAsSimpleString(AST ast) {
-		if (ast == null) {
-			return "";
-		}
-		int type = ast.getType();
-		if (GroovyTokenTypes.STRING_LITERAL == type) {
-			return ast.getText();
-		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
-			return resolveStringOfFirstChildAndSiblings(ast);
-		} else if (GroovyTokenTypes.METHOD_CALL == type) {
-			return "";
-		} else {
-
-			AST firstChild = ast.getFirstChild();
-			if (GroovyTokenTypes.EXPR == type) {
-				return resolveName(firstChild);
-			} else if (GroovyTokenTypes.SL == type) {
-				return resolveStringOfFirstChildAndSiblings(ast) + " <<";
-			} else if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
-				return "";
-			} else if (GroovyTokenTypes.SLIST == type) {
-				return resolveStringOfFirstChildAndSiblings(ast);
-			} else if (GroovyTokenTypes.ELIST == type) {
-				return resolveStringOfFirstChildAndSiblings(ast, ", ");
-			} else if (GroovyTokenTypes.DOT == type) {
-				if (firstChild == null) {
-					return "";
-				}
-				StringBuilder sb = new StringBuilder();
-				sb.append(resolveAsSimpleString(firstChild));
-				sb.append('.');
-				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
-				return sb.toString();
-			} else if (GroovyTokenTypes.LABELED_ARG == type) {
-				if (firstChild == null) {
-					return "";
-				}
-				StringBuilder sb = new StringBuilder();
-				sb.append(resolveAsSimpleString(firstChild));
-				sb.append(':');
-				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
-				return sb.toString();
-			}
-		}
-		return ast.toString();
-	}
-
-	private String resolveStringOfFirstChildAndSiblings(AST ast) {
-		return resolveStringOfFirstChildAndSiblings(ast, null);
-	}
-
-	private String resolveStringOfFirstChildAndSiblings(AST ast, String separator) {
-		StringBuilder sb = new StringBuilder();
-		AST part = ast.getFirstChild();
-		if (part == null) {
-			return "";
-		}
-		boolean wasMethod = false;
-		if (GroovyTokenTypes.METHOD_CALL == part.getType()) {
-			wasMethod = true;
-			part = part.getFirstChild();
-		}
-		if (part == null) {
-			if (wasMethod) {
-				return "()";
-			}
-			return "";
-		}
-		while (part != null) {
-			sb.append(resolveAsSimpleString(part));
-			if (wasMethod) {
-				sb.append("()"); // as first shot we completely ignore
-									// parameters here - maybe later improved
-				return sb.toString();
-			}
-			part = part.getNextSibling();
-			if (part != null) {
-				if (separator != null) {
-					sb.append(separator);
-				}
-			}
-		}
-		return sb.toString();
-	}
-
-	private AST handleTaskClosure(String enameString, Item item, AST lastAst) {
-		if (lastAst == null) {
-			return null;
-		}
-		lastAst = handleTaskNameResolving(enameString, item, lastAst);
-		lastAst = handleTaskTypeResolving(item, lastAst);
-		return lastAst;
-	}
-
-	private AST handleTaskTypeResolving(Item item, AST lastAst) {
-		if (lastAst == null) {
-			return null;
-		}
-		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
-			return lastAst;
-		}
-		/* parameter -e.g. task mytask (type: xyz) */
-		AST elist = lastAst;
-		AST nextSibling = elist.getNextSibling();
-
-		AST labeledArg = elist.getFirstChild();
-
-		if (labeledArg == null) {
-			return nextSibling;
-		}
-		if (GroovyTokenTypes.LABELED_ARG != labeledArg.getType()) {
-			return nextSibling;
-		}
-		AST type = labeledArg.getFirstChild();
-		if (type == null) {
-			return nextSibling;
-		}
-		if (GroovyTokenTypes.STRING_LITERAL == type.getType()) {
-			if (!"type".equals(type.getText())) {
-				return nextSibling;
-			}
-			AST expr = type.getNextSibling();
-			if (expr == null || GroovyTokenTypes.EXPR != expr.getType()) {
-				return nextSibling;
-			}
-			AST ident = expr.getFirstChild();
-			if (ident == null || GroovyTokenTypes.IDENT != ident.getType()) {
-				return nextSibling;
-			}
-			item.setType(ident.getText());
-		}
-		return nextSibling;
-
-	}
-
-	private AST handleTaskNameResolving(String enameString, Item item, AST lastAst) {
-		if (lastAst == null) {
-			return null;
-		}
-		if (lastAst.getType() == ELIST) {
-			AST elist = lastAst;
-			AST methodCall2 = elist.getFirstChild();
-			if (methodCall2 != null) {
-				if (GroovyTokenTypes.SL == methodCall2.getType()) {
-					/* << */
-					methodCall2 = methodCall2.getFirstChild();
-				}
-				AST name2 = methodCall2.getFirstChild();
-				if (name2 != null) {
-					enameString = enameString + name2.getText();
-					item.setName(enameString);
-					lastAst = name2.getNextSibling();
-				}
-			}
-		}
-		return lastAst;
-	}
-
-	/**
-	 * naming with dot: xyz.abc.bla.tests =>
-	 * 
-	 * . ->. ->. ->xyz abc bla tests
-	 */
-	private String resolveName(AST ast) {
-		StringBuilder sb = new StringBuilder();
-		resolveName(sb, ast);
-		return sb.toString();
-	}
-
-	private void resolveName(StringBuilder sb, AST ast) {
-		if (ast == null) {
-			return;
-		}
-		if (ast.getType() == GroovyTokenTypes.SL) {
-
-		} else if (ast.getType() == GroovyTokenTypes.DOT) {
-			/* is dot */
-			AST content = ast.getFirstChild();
-			resolveName(sb, content);
-			AST next = ast.getNextSibling();
-			if (next != null) {
-				if (next.getType() == GroovyTokenTypes.IDENT) {
-					sb.append('.');
-					sb.append(next.getText());
-				}
-			}
-		} else {
-			/* no dot, so content separated with DOT */
-			sb.append(ast.getText());
-			AST next = ast.getNextSibling();
-			if (next != null) {
-				if (next.getType() == GroovyTokenTypes.IDENT) {
-					sb.append('.');
-					sb.append(next.getText());
-				}else{
-					if (next.getType()==GroovyTokenTypes.CLOSABLE_BLOCK){
-						return;
-					}
-					if (next.getType()==GroovyTokenTypes.ELIST){
-						sb.append(" ");
-						sb.append(resolveAsSimpleString(next.getFirstChild()));
-					}
-				}
-			}
-
-		}
-
-	}
-
-	private Item createItem(Context context, AST ast) {
-		Item item = new Item();
-		int column = ast.getColumn();
-		int line = ast.getLine();
-		item.setColumn(column);
-		item.setLine(line);
-		item.setOffset(context.buffer.getOffset(line, column));
-
-		if (ast instanceof GroovySourceAST) {
-			GroovySourceAST gast = (GroovySourceAST) ast;
-			int offset1 = item.getOffset();
-			int offset2 = context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
-
-			int length = offset2 - offset1;
-			if (length < 0) {
-				/* fall back */
-				length = gast.getColumnLast() - column;
-			}
-			item.setLength(length);
-		} else {
-			item.setLength(1);
-		}
-		return item;
-	}
-
-	private class Context {
-		private ExtendedSourceBuffer buffer;
+	
+	class Context {
+		ExtendedSourceBuffer buffer;
 	}
 
 }

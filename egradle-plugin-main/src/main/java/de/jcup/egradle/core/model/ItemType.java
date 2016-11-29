@@ -73,9 +73,9 @@ public enum ItemType {
 	
 	DO_LAST, 
 	
-	
-	
-	
-	
+	/**
+	 * A method (defintion)
+	 */
+	METHOD, 
 	
 }
