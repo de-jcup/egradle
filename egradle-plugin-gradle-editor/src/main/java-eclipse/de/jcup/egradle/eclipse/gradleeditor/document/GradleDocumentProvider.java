@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor.document;
 
+import java.io.ByteArrayInputStream;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
@@ -27,7 +29,7 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
-			
+
 			String[] legalContentTypes = GradleDocumentIdentifiers.allIdsToStringArray();
 
 			GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
@@ -38,5 +40,9 @@ public class GradleDocumentProvider extends FileDocumentProvider {
 		}
 		return document;
 	}
-	
+
+	public void setText(IDocument document, String text, String encoding) throws CoreException {
+		setDocumentContent(document, new ByteArrayInputStream(text.getBytes()), encoding);
+	}
+
 }

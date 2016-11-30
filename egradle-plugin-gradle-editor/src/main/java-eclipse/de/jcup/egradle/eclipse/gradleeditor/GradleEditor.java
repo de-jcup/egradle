@@ -51,6 +51,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.text.SimpleGradleSourceFormatter;
+import de.jcup.egradle.core.text.SourceFormatException;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
@@ -58,6 +60,7 @@ import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePa
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+
 public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
@@ -66,9 +69,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	public static final String EDITOR_CONTEXT_MENU_ID = EDITOR_ID + ".context";
 	/** The COMMAND_ID of the editor ruler context menu */
 	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
-
-	
-
 
 	private GradleEditorContentOutlinePage outlinePage;
 
@@ -103,10 +103,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	}
 
-	public void setErrorMessage(String message){
+	public void setErrorMessage(String message) {
 		super.setStatusLineErrorMessage(message);
 	}
-	
+
 	public GradleBracketsSupport getBracketMatcher() {
 		return bracketMatcher;
 	}
@@ -140,19 +140,19 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
 		}
-		if (GradleStringTransformer.class.equals(adapter)){
+		if (GradleStringTransformer.class.equals(adapter)) {
 			return (T) getGradleStringTransformer();
 		}
-		if (ColorManager.class.equals(adapter)){
+		if (ColorManager.class.equals(adapter)) {
 			return (T) getColorManager();
 		}
-		if (IFile.class.equals(adapter)){
+		if (IFile.class.equals(adapter)) {
 			IEditorInput input = getEditorInput();
-			if (input instanceof IFileEditorInput){
+			if (input instanceof IFileEditorInput) {
 				IFileEditorInput feditorInput = (IFileEditorInput) input;
 				return (T) feditorInput.getFile();
 			}
-			return null; 
+			return null;
 		}
 		if (IContentOutlinePage.class.equals(adapter)) {
 			return (T) outlinePage;
@@ -160,26 +160,33 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
 		}
-		if (ISourceViewer.class.equals(adapter)){
+		if (ISourceViewer.class.equals(adapter)) {
 			return (T) getSourceViewer();
 		}
-		if (StatusMessageSupport.class.equals(adapter)){
+		if (StatusMessageSupport.class.equals(adapter)) {
 			return (T) this;
 		}
 		return super.getAdapter(adapter);
 	}
 
 	private GradleStringTransformer transformer;
+
 	private GradleStringTransformer getGradleStringTransformer() {
-		/* TODO ATR, 28.11.2016: with EGradle 1.2 this must be done via extension points, so other
-		 * plugins are able to implement and register own implementations:*/
-		if (transformer==null){
+		/*
+		 * TODO ATR, 28.11.2016: with EGradle 1.2 this must be done via
+		 * extension points, so other plugins are able to implement and register
+		 * own implementations:
+		 */
+		if (transformer == null) {
 			Map<String, String> map = new HashMap<>();
-			/* TODO ATR, 28.11.2016: what about check if current file is inside current root project? Otherwise
-			 * the link makes not really sense !?!? */
+			/*
+			 * TODO ATR, 28.11.2016: what about check if current file is inside
+			 * current root project? Otherwise the link makes not really sense
+			 * !?!?
+			 */
 			File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
-			if (rootFolder!=null){
-				String rootProjectDir = rootFolder.getAbsolutePath().replace('\\','/');
+			if (rootFolder != null) {
+				String rootProjectDir = rootFolder.getAbsolutePath().replace('\\', '/');
 				map.put("rootProject.projectDir", rootProjectDir);
 			}
 			transformer = new SimpleMapStringTransformer(map);
@@ -291,8 +298,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		return Activator.getDefault().getColorManager();
 	}
 
-	
-
 	private class DelayedDocumentListener implements IDocumentListener {
 
 		@Override
@@ -360,6 +365,37 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			outlinePage.onEditorCaretMoved(event.caretOffset);
 		}
 
+	}
+
+	private SimpleGradleSourceFormatter sourceFormatter = new SimpleGradleSourceFormatter();
+
+	private String getCharset() {
+		IEditorInput input = getEditorInput();
+		if (input instanceof IFileEditorInput) {
+			IFileEditorInput fie = (IFileEditorInput) input;
+			IFile file = fie.getFile();
+			try {
+				return file.getCharset();
+			} catch (CoreException e) {
+				EGradleUtil.log(e);
+			}
+		}
+		/* fallback*/
+		return "UTF-8";
+	}
+
+	public void formatSource() {
+		String code = getDocument().get();
+		try {
+			String encoding = getCharset();
+			String newSource = sourceFormatter.format(code, encoding);
+			GradleDocumentProvider gdp = (GradleDocumentProvider) getDocumentProvider();
+			gdp.setText(getDocument(), newSource, encoding);
+		} catch (SourceFormatException e) {
+			EGradleUtil.log(e);
+		} catch (CoreException e) {
+			EGradleUtil.log(e);
+		}
 	}
 
 }

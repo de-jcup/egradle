@@ -48,7 +48,7 @@
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension point="org.eclipse.ui.commands">
-		<command
+	  <command
             name="Quick outline"
             description="Show quick outline dialog"
             categoryId="egradle.commands.category"
@@ -60,6 +60,12 @@
             categoryId="egradle.commands.category"
             id="egradle.editor.commands.gotomatchingbracket">
       </command>
+       <command
+            name="Format source"
+            description="Format source code"
+            categoryId="egradle.commands.category"
+            id="egradle.editor.commands.sourceformat">
+      </command>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
       <handler
@@ -69,6 +75,10 @@
        <handler
             commandId="egradle.editor.commands.gotomatchingbracket"
             class="de.jcup.egradle.eclipse.gradleeditor.handlers.GotoMatchingBracketHandler">
+      </handler>
+       <handler
+            commandId="egradle.editor.commands.sourceformat"
+            class="de.jcup.egradle.eclipse.gradleeditor.handlers.SourceFormatHandler">
       </handler>
     </extension> 
     
@@ -86,6 +96,12 @@
             sequence="M1+M2+P"
             contextId="org.egradle.editors.GradleEditor.context"
             commandId="egradle.editor.commands.gotomatchingbracket"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">	  
+		</key>
+		<key
+            sequence="M1+M2+F"
+            contextId="org.egradle.editors.GradleEditor.context"
+            commandId="egradle.editor.commands.sourceformat"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">	  
 		</key>
     </extension> 
