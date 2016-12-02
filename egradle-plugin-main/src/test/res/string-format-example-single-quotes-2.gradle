@@ -1,0 +1,4 @@
+// Single quotes:
+def m1 = '''With three quotes{
+we can write multi-line strings, without all{
+the hassle of concatenation.'''

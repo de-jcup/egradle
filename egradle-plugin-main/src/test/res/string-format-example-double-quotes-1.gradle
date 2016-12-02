@@ -1,0 +1,2 @@
+// Double quotes:
+def s2 = "Also a string, and of course we can use 'single quotes' {without escaping them."

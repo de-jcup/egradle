@@ -108,7 +108,17 @@ public class SimpleGradleSourceFormatter {
 		return indentLines;
 	}
 
-	private void visitLineWithContext(String line, FormattedLineContext context) {
+	protected String transformToTextWithWantedLineBreaks(String line) {
+		FormattedLineContext context = new FormattedLineContext();
+	
+		visitLineWithContext(line, context);
+	
+		String newLine = context.getFormattedText();
+		
+		return newLine;
+	}
+
+	void visitLineWithContext(String line, FormattedLineContext context) {
 		char[] charArray = line.toCharArray();
 		for (char c : charArray) {
 			context.visit(c);
@@ -125,24 +135,6 @@ public class SimpleGradleSourceFormatter {
 		}
 	}
 	
-	private String removeLineBreaksFromCurlyBraces(String linePart) {
-		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
-		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");
-		linePart = REMOVE_TRAILING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
-		linePart = REMOVE_TRAILING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");
-		return linePart;
-	}
-
-	protected String transformToTextWithWantedLineBreaks(String line) {
-		FormattedLineContext context = new FormattedLineContext();
-
-		visitLineWithContext(line, context);
-
-		String newLine = context.getFormattedText();
-		
-		return newLine;
-	}
-
 	boolean handleGString(FormattedLineContext context, char c) {
 		if (context.hasState( FormattedLineState.IN_NORMAL_STRING)) {
 			return false;
@@ -188,6 +180,14 @@ public class SimpleGradleSourceFormatter {
 		return true;
 	}
 	
+	private String removeLineBreaksFromCurlyBraces(String linePart) {
+		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
+		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");
+		linePart = REMOVE_TRAILING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
+		linePart = REMOVE_TRAILING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");
+		return linePart;
+	}
+
 	private String removeToMuchSpacesAndAddWantedLineBreaksR(String linePart) {
 		linePart = REMOVE_TOO_MANY_SPACES.matcher(linePart).replaceAll(" ");
 		linePart = removeLineBreaksFromCurlyBraces(linePart);
@@ -224,23 +224,6 @@ public class SimpleGradleSourceFormatter {
 			throw new SourceFormatException("Cannot transform to lines", e);
 		}
 
-	}
-
-	public static void main(String[] args) throws SourceFormatException {
-		// @formatter:off
-		String code=
-		"def jacocoRemoteAction(doDump, doReset, doAppend)\n\n\n {\n\n\n\n\n\n"+
-		"	def  server1String = 'localhost:6300'\n"+
-		"	def  server2String = 'localhost:6300'\n"+
-		"}";
-		// @formatter:on
-		System.out.println(code);
-		System.out.println("----------");
-		System.out.println("result:");
-		System.out.println("----------");
-		String result = new SimpleGradleSourceFormatter().format(code, "UTF-8");
-		System.out.println(result);
-		System.out.println("done");
 	}
 
 }

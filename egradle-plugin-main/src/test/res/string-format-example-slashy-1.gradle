@@ -1,0 +1,2 @@
+// Slashy (also multi-line possible):
+def s3 = /Well almost everything goes in a "slashy" 'string' without {escaping. Good for readable regular expressions!/

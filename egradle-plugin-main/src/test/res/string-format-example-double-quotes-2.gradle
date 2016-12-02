@@ -1,0 +1,5 @@
+// Double quotes:
+def m2 = """\
+With three double quotes we can have a multi-line string,{
+and we don't need to add extra + signs. Very easy for
+copy-paste."""
