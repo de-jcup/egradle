@@ -38,10 +38,6 @@ public class SimpleGradleSourceFormatter {
 		this.config = config;
 	}
 
-	/*
-	 * FIXME ATR, 30.11.2016: normal strings etc. with having { inside will be
-	 * wrong formatted
-	 */
 	public GradleSourceFormatterConfig getConfig() {
 		if (config == null) {
 			config = new GradleSourceFormatterConfig();
@@ -54,65 +50,22 @@ public class SimpleGradleSourceFormatter {
 			return null;
 		}
 
-		/* remove all line breaks */
-		List<String> originLines = transformToLines(text, charset);
+		String textWithWantedLineBreaks =  transformToTextWithWantedLineBreaks(text);
 
-		/* in each line add wanted line breaks */
-		StringBuilder withWantedLineBreaks = new StringBuilder();
-		for (String line : originLines) {
-			withWantedLineBreaks.append(handleLine(line));
-		}
-		List<String> lines = transformToLines(withWantedLineBreaks.toString(), charset);
-
+		List<String> linesArray = null;
+		linesArray= transformToLines(textWithWantedLineBreaks, charset);
 		/* remove old indent */
-		List<String> indentLines = buildLinesWithNoWhitespacesBeforeText(lines);
+		linesArray = buildLinesWithNoWhitespacesBeforeText(linesArray);
 		/* make indent */
-		indentLines = buildLinesWithIndent(indentLines);
+		linesArray = buildLinesWithIndentButIgnoreStrings(linesArray);
 		StringBuilder sb = new StringBuilder();
-		for (String string : indentLines) {
+		for (String string : linesArray) {
 			sb.append(string);
 		}
 		return sb.toString();
 	}
 
-	private List<String> buildLinesWithIndent(List<String> lines) {
-		List<String> indentLines = new ArrayList<>();
-		int indent = 0;
-
-		for (String line : lines) {
-			ParseState state = ParseState.NOT_IN_STRING;
-
-			char before = '0';
-			StringBuilder lineWithoutGstrings = new StringBuilder();
-			for (char c : line.toCharArray()) {
-				before = c;
-				if (c == '\"' && before != '\\') {
-					if (state == ParseState.IN_GSTRING) {
-						state = ParseState.NOT_IN_STRING;
-					} else {
-						/* WAS NOT IN GSTRING */
-						state = ParseState.IN_GSTRING;
-					}
-				}
-				before = c;
-				if (state == ParseState.NOT_IN_STRING) {
-					lineWithoutGstrings.append(c);
-				}
-			}
-			if (lineWithoutGstrings.indexOf("{") != -1) {
-				indentLines.add(indentStr(indent) + line);
-				indent++;
-			} else if (lineWithoutGstrings.indexOf("}") != -1) {
-				indent--;
-				indentLines.add(indentStr(indent) + line);
-			} else {
-				indentLines.add(indentStr(indent) + line);
-			}
-		}
-		return indentLines;
-	}
-
-	private List<String> buildLinesWithNoWhitespacesBeforeText(List<String> lines) {
+	protected List<String> buildLinesWithNoWhitespacesBeforeText(List<String> lines) {
 		List<String> indentLines = new ArrayList<>();
 		for (String line : lines) {
 			StringBuilder leftTrimmed = new StringBuilder();
@@ -132,6 +85,46 @@ public class SimpleGradleSourceFormatter {
 		return indentLines;
 	}
 
+	protected List<String> buildLinesWithIndentButIgnoreStrings(List<String> lines) {
+		List<String> indentLines = new ArrayList<>();
+		int indent = 0;
+
+		for (String line : lines) {
+			FormattedLineContext context = new FormattedLineContext();
+			context.turnOffFormatting();
+			context.turnOnNotInStringliteralDetection();
+
+			visitLineWithContext(line, context);
+			if (context.hasTextOutsideOfStringLiterals("{")) {
+				indentLines.add(indentStr(indent) + line);
+				indent++;
+			} else if (context.hasTextOutsideOfStringLiterals("}"))  {
+				indent--;
+				indentLines.add(indentStr(indent) + line);
+			} else {
+				indentLines.add(indentStr(indent) + line);
+			}
+		}
+		return indentLines;
+	}
+
+	private void visitLineWithContext(String line, FormattedLineContext context) {
+		char[] charArray = line.toCharArray();
+		for (char c : charArray) {
+			context.visit(c);
+			boolean handled = false;
+			handled = handled || handleGString(context, c);
+			handled = handled || handleString(context, c);
+		}
+		String currentText = context.getCurrentText();
+		if (context.hasState( FormattedLineState.NOT_IN_STRING)) {
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(currentText));
+			context.appendNotInString(currentText);
+		} else {
+			context.appendFormatted(currentText);
+		}
+	}
+	
 	private String removeLineBreaksFromCurlyBraces(String linePart) {
 		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
 		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");
@@ -140,86 +133,61 @@ public class SimpleGradleSourceFormatter {
 		return linePart;
 	}
 
-	private enum ParseState {
-		IN_GSTRING,
+	protected String transformToTextWithWantedLineBreaks(String line) {
+		FormattedLineContext context = new FormattedLineContext();
 
-		IN_NORMAL_STRING,
+		visitLineWithContext(line, context);
 
-		IN_SLASHY_STRING,
-
-		NOT_IN_STRING,
-
+		String newLine = context.getFormattedText();
+		
+		return newLine;
 	}
 
-	private class FormatterContext {
-		private ParseState state = ParseState.NOT_IN_STRING;
-		private char before = '0';
-		private StringBuilder sb = new StringBuilder();
-	}
-
-	private String handleLine(String line) {
-		StringBuilder result = new StringBuilder();
-
-		FormatterContext context = new FormatterContext();
-
-		char[] charArray = line.toCharArray();
-		for (char c : charArray) {
-			context.sb.append(c);
-			handleGString(result, context, c);
-			handleString(result, context, c);
-			context.before = c;
-		}
-		if (context.state == ParseState.NOT_IN_STRING) {
-			result.append(removeToMuchSpacesAndAddWantedLineBreaksR(context.sb.toString()));
-		} else {
-			result.append(context.sb.toString());
-		}
-
-		return result.toString();
-	}
-
-	private void handleGString(StringBuilder result, FormatterContext context, char c) {
-		if (context.state == ParseState.IN_NORMAL_STRING) {
-			return;
+	boolean handleGString(FormattedLineContext context, char c) {
+		if (context.hasState( FormattedLineState.IN_NORMAL_STRING)) {
+			return false;
 		}
 		if (c != '\"') {
-			return;
+			return false;
 		}
-		if (context.before == '\\') {
-			return;
+		if (context.wasBackslashBefore()) {
+			return false;
 		}
-		if (context.state == ParseState.IN_GSTRING) {
-			result.append(context.sb.toString());
-			context.state = ParseState.NOT_IN_STRING;
+		if (context.hasState( FormattedLineState.IN_GSTRING)) {
+			context.appendFormatted(context.getCurrentText());
+			context.changeState(FormattedLineState.NOT_IN_STRING);
 		} else {
 			/* WAS NOT IN GSTRING */
-			result.append(removeToMuchSpacesAndAddWantedLineBreaksR(context.sb.toString()));
-			context.state = ParseState.IN_GSTRING;
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
+			context.changeState(FormattedLineState.IN_GSTRING);
 		}
-		context.sb = new StringBuilder();
+		context.resetCurrentText();
+		return true;
 	}
 
-	private void handleString(StringBuilder result, FormatterContext context, char c) {
-		if (context.state == ParseState.IN_GSTRING) {
-			return;
+	boolean handleString(FormattedLineContext context, char c) {
+		if (context.hasState( FormattedLineState.IN_GSTRING)) {
+			return false;
 		}
 		if (c != '\'') {
-			return;
+			return false;
 		}
-		if (context.before == '\\') {
-			return;
+		if (context.wasBackslashBefore()) {
+			return false;
 		}
-		if (context.state == ParseState.IN_NORMAL_STRING) {
-			result.append(context.sb.toString());
-			context.state = ParseState.NOT_IN_STRING;
+		if (context.hasState( FormattedLineState.IN_NORMAL_STRING)) {
+			context.appendFormatted(context.getCurrentText());
+			context.changeState( FormattedLineState.NOT_IN_STRING);
 		} else {
 			/* WAS NOT IN GSTRING */
-			result.append(removeToMuchSpacesAndAddWantedLineBreaksR(context.sb.toString()));
-			context.state = ParseState.IN_NORMAL_STRING;
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
+			context.changeState( FormattedLineState.IN_NORMAL_STRING);
 		}
-		context.sb = new StringBuilder();
+		context.resetCurrentText();
+	
+		return true;
 	}
-
+	
 	private String removeToMuchSpacesAndAddWantedLineBreaksR(String linePart) {
 		linePart = REMOVE_TOO_MANY_SPACES.matcher(linePart).replaceAll(" ");
 		linePart = removeLineBreaksFromCurlyBraces(linePart);
