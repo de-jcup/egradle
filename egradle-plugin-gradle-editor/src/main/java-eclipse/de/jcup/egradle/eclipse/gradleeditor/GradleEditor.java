@@ -389,6 +389,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		try {
 			String encoding = getCharset();
 			String newSource = sourceFormatter.format(code, encoding);
+			if (code.equals(newSource)){
+				return;
+			}
 			GradleDocumentProvider gdp = (GradleDocumentProvider) getDocumentProvider();
 			gdp.setText(getDocument(), newSource, encoding);
 		} catch (SourceFormatException e) {

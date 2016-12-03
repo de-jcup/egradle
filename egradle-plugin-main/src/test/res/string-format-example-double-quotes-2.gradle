@@ -1,3 +1,4 @@
+// http://docs.groovy-lang.org/latest/html/documentation/index.html#groovy-operators
 // Double quotes:
 def m2 = """\
 With three double quotes we can have a multi-line string,{

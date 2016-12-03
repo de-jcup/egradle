@@ -15,6 +15,12 @@ import java.util.regex.Pattern;
  */
 public class SimpleGradleSourceFormatter {
 
+	/*
+	 * FIXME ATR, 03.12.2016: Improve and test. Currently the formatter does not work completely
+	 * in big sources. As long it is not high secure this feature will not be
+	 * merged to master!
+	 */
+
 	private static final String ALL_LINE_SEP_GROUP = "\\s*[\\r\\n|\\n\\r]?\\s*";
 
 	private static final Pattern REMOVE_TOO_MANY_SPACES = Pattern.compile("[ ]{2,}");
@@ -50,10 +56,10 @@ public class SimpleGradleSourceFormatter {
 			return null;
 		}
 
-		String textWithWantedLineBreaks =  transformToTextWithWantedLineBreaks(text);
+		String textWithWantedLineBreaks = transformToTextWithWantedLineBreaks(text);
 
 		List<String> linesArray = null;
-		linesArray= transformToLines(textWithWantedLineBreaks, charset);
+		linesArray = transformToLines(textWithWantedLineBreaks, charset);
 		linesArray = removeOldIndents(linesArray);
 		linesArray = addIndents(linesArray);
 		StringBuilder sb = new StringBuilder();
@@ -84,15 +90,17 @@ public class SimpleGradleSourceFormatter {
 	}
 
 	/**
-	 * Adds indents to lines - indents are calculated by checking curly bracket start and endings (except when inside strings)
+	 * Adds indents to lines - indents are calculated by checking curly bracket
+	 * start and endings (except when inside strings)
+	 * 
 	 * @param lines
 	 */
 	protected List<String> addIndents(List<String> lines) {
 		List<String> indentLines = new ArrayList<>();
 		int indent = 0;
-
+		FormattedLineContext context = null;
 		for (String line : lines) {
-			FormattedLineContext context = new FormattedLineContext();
+			context = new FormattedLineContext(context);
 			context.turnOffFormatting();
 			context.turnOnNotInStringliteralDetection();
 
@@ -100,7 +108,7 @@ public class SimpleGradleSourceFormatter {
 			if (context.hasTextOutsideOfStringLiterals("{")) {
 				indentLines.add(indentStr(indent) + line);
 				indent++;
-			} else if (context.hasTextOutsideOfStringLiterals("}"))  {
+			} else if (context.hasTextOutsideOfStringLiterals("}")) {
 				indent--;
 				indentLines.add(indentStr(indent) + line);
 			} else {
@@ -111,35 +119,140 @@ public class SimpleGradleSourceFormatter {
 	}
 
 	protected String transformToTextWithWantedLineBreaks(String line) {
-		FormattedLineContext context = new FormattedLineContext();
-	
+		FormattedLineContext context = new FormattedLineContext(null);
+
 		visitLineWithContext(line, context);
-	
+
 		String newLine = context.getFormattedText();
-		
+
 		return newLine;
 	}
 
 	void visitLineWithContext(String line, FormattedLineContext context) {
 		char[] charArray = line.toCharArray();
-		for (char c : charArray) {
+
+		for (int i = 0; i < charArray.length; i++) {
+			char c = charArray[i];
+			char next = '\n';
+			if (i < charArray.length - 1) {
+				next = charArray[i + 1];
+			}
 			context.visit(c);
 			boolean handled = false;
+			handled = handled || handleSingleComment(context, c, next);
+			handled = handled || handleMultiLineComment(context, c, next);
+			handled = handled || handleSlashString(context, c, next);
 			handled = handled || handleGString(context, c);
 			handled = handled || handleString(context, c);
+
 		}
 		String currentText = context.getCurrentText();
-		if (context.hasStringState( FormattedLineStringState.NOT_IN_STRING)) {
+		if (context.hasState(FormattedLineState.NORMAL)) {
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(currentText));
 			context.appendNotInString(currentText);
 		} else {
 			context.appendFormatted(currentText);
 		}
 	}
-	
-	
+
+	private void handleComment(String line, FormattedLineContext context, int i) {
+		if (context.hasState(FormattedLineState.IN_MULTI_LINE_COMMENT)) {
+			/* we keep the state for reusage */
+		} else if (context.hasState(FormattedLineState.IN_SINGLE_LINE_COMMENT)) {
+			/* single line comment are terminated by line! */
+			context.changeState(FormattedLineState.NORMAL);
+		}
+		String substring = line.substring(i + 1, line.length() - 1);
+		context.appendFormatted(substring);
+		context.resetCurrentText();
+	}
+
+	boolean handleSlashString(FormattedLineContext context, char c, char next) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineState.IN_SLASHY_STRING)) {
+			return false;
+		}
+		if (c != '/') {
+			return false;
+		}
+		if (context.wasBackslashBefore()) {
+			return false;
+		}
+
+		if (context.hasState(FormattedLineState.IN_SLASHY_STRING)) {
+			context.appendFormatted(context.getCurrentText());
+			context.changeState(FormattedLineState.NORMAL);
+		} else {
+			/* WAS NOT IN slashy STRING */
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
+			context.changeState(FormattedLineState.IN_SLASHY_STRING);
+		}
+		context.resetCurrentText();
+		return true;
+	}
+
+	boolean handleSingleComment(FormattedLineContext context, char c, char next) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineState.IN_SINGLE_LINE_COMMENT)) {
+			return false;
+		}
+
+		if (context.hasState(FormattedLineState.IN_SINGLE_LINE_COMMENT)) {
+			if (c != '\n') {
+				return true;
+			}
+			context.appendFormatted(context.getCurrentText());
+			context.changeState(FormattedLineState.NORMAL);
+
+		} else {
+			/* WAS NOT IN single comment */
+			/* check if this is really a single comment: */
+			if (c != '/') {
+				return false;
+			}
+
+			if (next != '/') {
+				return false;
+			}
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
+			context.changeState(FormattedLineState.IN_SINGLE_LINE_COMMENT);
+		}
+		context.resetCurrentText();
+		return true;
+	}
+
+	boolean handleMultiLineComment(FormattedLineContext context, char c, char next) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineState.IN_MULTI_LINE_COMMENT)) {
+			return false;
+		}
+
+		if (context.hasState(FormattedLineState.IN_MULTI_LINE_COMMENT)) {
+			if (c != '/') {
+				return true;
+			}
+			if (context.getBefore() != '*') {
+				return true;
+			}
+			context.appendFormatted(context.getCurrentText());
+			context.changeState(FormattedLineState.NORMAL);
+
+		} else {
+			/* WAS NOT IN single comment */
+			/* check if this is really a single comment: */
+			if (c != '/') {
+				return false;
+			}
+
+			if (next != '*') {
+				return false;
+			}
+			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
+			context.changeState(FormattedLineState.IN_MULTI_LINE_COMMENT);
+		}
+		context.resetCurrentText();
+		return true;
+	}
+
 	boolean handleGString(FormattedLineContext context, char c) {
-		if (context.isAlreadyInAnotherStringState(FormattedLineStringState.IN_GSTRING)) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineState.IN_GSTRING)) {
 			return false;
 		}
 		if (c != '\"') {
@@ -148,20 +261,20 @@ public class SimpleGradleSourceFormatter {
 		if (context.wasBackslashBefore()) {
 			return false;
 		}
-		if (context.hasStringState( FormattedLineStringState.IN_GSTRING)) {
+		if (context.hasState(FormattedLineState.IN_GSTRING)) {
 			context.appendFormatted(context.getCurrentText());
-			context.changeState(FormattedLineStringState.NOT_IN_STRING);
+			context.changeState(FormattedLineState.NORMAL);
 		} else {
 			/* WAS NOT IN GSTRING */
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
-			context.changeState(FormattedLineStringState.IN_GSTRING);
+			context.changeState(FormattedLineState.IN_GSTRING);
 		}
 		context.resetCurrentText();
 		return true;
 	}
 
 	boolean handleString(FormattedLineContext context, char c) {
-		if (context.isAlreadyInAnotherStringState(FormattedLineStringState.IN_NORMAL_STRING)) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineState.IN_NORMAL_STRING)) {
 			return false;
 		}
 		if (c != '\'') {
@@ -170,19 +283,19 @@ public class SimpleGradleSourceFormatter {
 		if (context.wasBackslashBefore()) {
 			return false;
 		}
-		if (context.hasStringState( FormattedLineStringState.IN_NORMAL_STRING)) {
+		if (context.hasState(FormattedLineState.IN_NORMAL_STRING)) {
 			context.appendFormatted(context.getCurrentText());
-			context.changeState( FormattedLineStringState.NOT_IN_STRING);
+			context.changeState(FormattedLineState.NORMAL);
 		} else {
 			/* WAS NOT IN GSTRING */
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
-			context.changeState( FormattedLineStringState.IN_NORMAL_STRING);
+			context.changeState(FormattedLineState.IN_NORMAL_STRING);
 		}
 		context.resetCurrentText();
-	
+
 		return true;
 	}
-	
+
 	private String removeLineBreaksFromCurlyBraces(String linePart) {
 		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_OPEN.matcher(linePart).replaceAll("{");
 		linePart = REMOVE_LEADING_LINE_BREAKS_CURLYBRACKET_CLOSE.matcher(linePart).replaceAll("}");

@@ -1,3 +1,4 @@
+// http://docs.groovy-lang.org/latest/html/documentation/index.html#groovy-operators
 // Dollar slashy:
 def s4 = $/
 Like a 'slashy' string, but with different escaping rules{

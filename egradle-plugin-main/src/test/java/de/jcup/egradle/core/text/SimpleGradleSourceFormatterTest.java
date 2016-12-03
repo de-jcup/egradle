@@ -83,6 +83,7 @@ public class SimpleGradleSourceFormatterTest {
 		 */
 		assertEquals(example1, result);
 	}
+	
 
 	@Test
 	public void method_containing_if_statement_is_formatted_correct() throws Exception {
@@ -135,7 +136,144 @@ public class SimpleGradleSourceFormatterTest {
 
 		/* @formatter:on*/
 	}
+	@Test
+	public void method_containing_slashystring_with_curlybraces_having_line_breaks__string_is_not_touched()
+			throws Exception {
+		/* @formatter:off*/
+		String code = 
+				"def    method(boolean variable1) {\n"+
+				"   if(variable1) {"+
+				"      println(/hello {/\n"+
+				"               /world}/\n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		SimpleGradleSourceFormatter f = new SimpleGradleSourceFormatter();
+		String result = f.format(code, "UTF-8");
 
+		String expected = 
+				"def method(boolean variable1) {\n"+
+				"   if(variable1) {\n"+
+				"      println(/hello {/\n"+
+				"      /world}/\n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		assertEquals(expected,result);
+
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void method_containing_normal_comment_with_curlybraces_having_line_breaks__comment_is_not_touched_but_nextline()
+			throws Exception {
+		/* @formatter:off*/
+		String code = 
+				"def    method(boolean variable1) {\n"+
+				"   if(variable1) {"+
+				"   // a comment - like a slasyh string, but {not ended,so could fail...\n"+   	
+				"if (true){\n"+
+				"              println(variable1)\n"+
+				"}\n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		SimpleGradleSourceFormatter f = new SimpleGradleSourceFormatter();
+		String result = f.format(code, "UTF-8");
+
+		String expected = 
+				"def method(boolean variable1) {\n"+
+				"   if(variable1) {\n"+
+				"      // a comment - like a slasyh string, but {not ended,so could fail...\n"+   	
+				"      if (true) {\n"+
+				"         println(variable1)\n"+
+				"      }\n" +
+				"      \n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		assertEquals(expected,result);
+
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void method_containing_multi_line_comment_with_curlybraces_having_line_breaks__comment_is_not_touched_but_nextline()
+			throws Exception {
+		/* @formatter:off*/
+		String code = 
+				"def    method(boolean variable1) {\n"+
+				"   if(variable1) {"+
+				"   /* a comment - like a slasyh string, but {not ended,so could fail...*/\n"+   	
+				"if (true){\n"+
+				"              println(variable1)\n"+
+				"}\n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		SimpleGradleSourceFormatter f = new SimpleGradleSourceFormatter();
+		String result = f.format(code, "UTF-8");
+
+		String expected = 
+				"def method(boolean variable1) {\n"+
+				"   if(variable1) {\n"+
+				"      /* a comment - like a slasyh string, but {not ended,so could fail...*/\n"+   	
+				"      if (true) {\n"+
+				"         println(variable1)\n"+
+				"      }\n" +
+				"      \n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		assertEquals(expected,result);
+
+		/* @formatter:on*/
+	}
+
+	@Test
+	public void method_containing_multi_line_comment2_with_curlybraces_having_line_breaks__comment_is_not_touched_but_nextline()
+			throws Exception {
+		/* @formatter:off*/
+		String code = 
+				"def    method(boolean variable1) {\n"+
+				"   if(variable1) {"+
+				"   /* a comment - like a slasyh string, but {not ended,so could fail...\n"+  
+				"      a next line ...{*/\n"+  
+				"if (true){\n"+
+				"              println(variable1)\n"+
+				"}\n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		SimpleGradleSourceFormatter f = new SimpleGradleSourceFormatter();
+		String result = f.format(code, "UTF-8");
+
+		String expected = 
+				"def method(boolean variable1) {\n"+
+				"   if(variable1) {\n"+
+				"      /* a comment - like a slasyh string, but {not ended,so could fail...\n"+  
+				"      a next line ...{*/\n"+  
+				"      if (true) {\n"+
+				"         println(variable1)\n"+
+				"      }\n" +
+				"      \n"+
+				"   }\n"+
+				"   \n"+
+				"}\n";
+		
+		assertEquals(expected,result);
+
+		/* @formatter:on*/
+	}
+
+	
 	@Test
 	public void method_containing_if_statement_is_formatted_correct_def__three_spaces_method__is_reduced_to_def_one_space_method()
 			throws Exception {

@@ -1,20 +1,31 @@
 package de.jcup.egradle.core.text;
 
 public class FormattedLineContext {
-	
-	private FormattedLineStringState state = FormattedLineStringState.NOT_IN_STRING;
+
+	private FormattedLineState state = FormattedLineState.NORMAL;
 	private char before = '0';
 	private StringBuilder currentText = new StringBuilder();
 	private StringBuilder textNotInString = new StringBuilder();
 	private StringBuilder formattedLine = new StringBuilder();
 	private char current;
-	private boolean formattingEnabled=true;
-	private boolean notInStringLiteralDetectionEnabled=false;
+	private boolean formattingEnabled = true;
+	private boolean notInStringLiteralDetectionEnabled = false;
+
+	public FormattedLineContext(FormattedLineContext contextBefore) {
+		if (contextBefore==null){
+			return;
+		}
+		state=contextBefore.state;
+	}
 
 	public void visit(char c) {
 		before = current;
 		currentText.append(c);
 		current = c;
+	}
+	
+	public char getBefore() {
+		return before;
 	}
 
 	public String getCurrentText() {
@@ -22,46 +33,46 @@ public class FormattedLineContext {
 	}
 
 	public void appendFormatted(String text) {
-		if (!formattingEnabled){
+		if (!formattingEnabled) {
 			return;
 		}
 		formattedLine.append(text);
 	}
 
 	public String getFormattedText() {
-		if (!formattingEnabled){
+		if (!formattingEnabled) {
 			throw new IllegalStateException("Formatting was disabled!");
 		}
 		return formattedLine.toString();
 	}
 
 	public void appendNotInString(String text) {
-		if (! notInStringLiteralDetectionEnabled){
+		if (!notInStringLiteralDetectionEnabled) {
 			return;
 		}
 		textNotInString.append(text);
 	}
 
-	public boolean hasStringState(FormattedLineStringState state) {
-		return this.state==state;
+	public boolean hasState(FormattedLineState state) {
+		return this.state == state;
 	}
-	
-	public boolean isAlreadyInAnotherStringState(FormattedLineStringState expected){
-		if (expected==state) {
+
+	public boolean isAlreadyInAnotherStringState(FormattedLineState expected) {
+		if (expected == state) {
 			return false;
 		}
-		if (state==FormattedLineStringState.NOT_IN_STRING){
+		if (state == FormattedLineState.NORMAL) {
 			return false;
 		}
 		return true;
 	}
 
-	public void changeState(FormattedLineStringState state) {
-		 this.state=state;
+	public void changeState(FormattedLineState state) {
+		this.state = state;
 	}
 
 	public void resetCurrentText() {
-		currentText=new StringBuilder();
+		currentText = new StringBuilder();
 	}
 
 	public boolean wasBackslashBefore() {
@@ -69,16 +80,22 @@ public class FormattedLineContext {
 	}
 
 	public boolean hasTextOutsideOfStringLiterals(String string) {
-		if (! notInStringLiteralDetectionEnabled){
+		if (!notInStringLiteralDetectionEnabled) {
 			throw new IllegalStateException("not in String literal detection is not enabled");
 		}
-		return textNotInString.indexOf(string)!=-1;
+		return textNotInString.indexOf(string) != -1;
 	}
 
 	public void turnOffFormatting() {
-		formattingEnabled=false;
+		formattingEnabled = false;
 	}
-	public void turnOnNotInStringliteralDetection(){
-		notInStringLiteralDetectionEnabled=true;
+
+	public void turnOnNotInStringliteralDetection() {
+		notInStringLiteralDetectionEnabled = true;
 	}
+
+	public boolean isComment() {
+		return state==FormattedLineState.IN_SINGLE_LINE_COMMENT || state == FormattedLineState.IN_MULTI_LINE_COMMENT;
+	}
+
 }
