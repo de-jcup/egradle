@@ -209,22 +209,27 @@ class GradleModelBuilderSupport {
 		if (part == null) {
 			return "";
 		}
-		boolean wasMethod = false;
+		AST formerPart = part;
+		boolean wasMethodCall = false;
 		if (GroovyTokenTypes.METHOD_CALL == part.getType()) {
-			wasMethod = true;
+			wasMethodCall = true;
 			part = part.getFirstChild();
 		}
 		if (part == null) {
-			if (wasMethod) {
+			if (wasMethodCall) {
 				return "()";
 			}
 			return "";
 		}
 		while (part != null) {
 			sb.append(resolveAsSimpleString(part));
-			if (wasMethod) {
-				sb.append("()"); // as first shot we completely ignore
-									// parameters here - maybe later improved
+			if (wasMethodCall) {
+				sb.append("(");
+				AST next = part.getNextSibling();
+				if (next!=null){
+					sb.append(resolveAsSimpleString(part.getNextSibling()));
+				}
+				sb.append(")");
 				return sb.toString();
 			}
 			part = part.getNextSibling();

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.junit.Assert.*;
 
@@ -30,8 +30,39 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 
 public class GradleModelBuilderTest {
+
 	@Test
-	public void test_define_method__contains_child() throws Exception{
+	public void test_compile_my_project_contains_my_project_in_model_item_text() throws Exception {
+		// @formatter:off
+		/* @formatter:off*/
+		String text = 
+		"		dependencies{\n"+
+		"			compile project(':myproject')\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item dependencies = items[0];
+
+		assertEquals(ItemType.DEPENDENCIES, dependencies.getItemType());
+		Item[] dependenciesChildren = dependencies.getChildren();
+		assertEquals(1, dependenciesChildren.length);
+
+		Item compileDependency = dependenciesChildren[0];
+		assertEquals("project(:myproject)", compileDependency.getName());
+		
+	}
+
+	@Test
+	public void test_define_method__contains_child() throws Exception {
 		// @formatter:off
 		String code=
 		"def jacocoRemoteAction(doDump, doReset, doAppend) {\n"+
@@ -40,10 +71,10 @@ public class GradleModelBuilderTest {
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
-		
+
 		/* execute */
 		Model model = b.build(null);
-		
+
 		/* test */
 		Item[] items = model.getRoot().getChildren();
 
@@ -51,16 +82,16 @@ public class GradleModelBuilderTest {
 		Item methodDef = items[0];
 
 		assertEquals("jacocoRemoteAction", methodDef.getName());
-		
+
 		Item[] children = methodDef.getChildren();
 		assertEquals(1, children.length);
 		Item variableDef = children[0];
 		assertNotNull(variableDef);
 		assertEquals("serverString", variableDef.getName());
 	}
-	
+
 	@Test
-	public void test_define_method__found_with_parameters() throws Exception{
+	public void test_define_method__found_with_parameters() throws Exception {
 		// @formatter:off
 		String code=
 		"def jacocoRemoteAction(doDump, doReset, doAppend) {\n"+
@@ -69,10 +100,10 @@ public class GradleModelBuilderTest {
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
-		
+
 		/* execute */
 		Model model = b.build(null);
-		
+
 		/* test */
 		Item[] items = model.getRoot().getChildren();
 
@@ -85,16 +116,16 @@ public class GradleModelBuilderTest {
 		String[] parameters = methodDef.getParameters();
 		assertNotNull(parameters);
 		assertEquals(3, parameters.length);
-		
+
 		assertEquals("doDump", parameters[0]);
 		assertEquals("doReset", parameters[1]);
 		assertEquals("doAppend", parameters[2]);
 	}
-	
+
 	@Test
-	public void task_clean_with_dofirst_short__returns_name_clean() throws ModelBuilderException{
+	public void task_clean_with_dofirst_short__returns_name_clean() throws ModelBuilderException {
 		String text = "task clean << {}";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
 
@@ -109,13 +140,13 @@ public class GradleModelBuilderTest {
 
 		assertEquals("task clean <<", classDef.getName());
 		assertEquals(ItemType.TASK, classDef.getItemType());
-		
+
 	}
-	
+
 	@Test
-	public void class_definition_returns_class_item() throws ModelBuilderException{
+	public void class_definition_returns_class_item() throws ModelBuilderException {
 		String text = "class MyAdminTask extends DefaultTask {}";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
 
@@ -130,13 +161,13 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.CLASS, classDef.getItemType());
 		assertEquals("MyAdminTask", classDef.getName());
-		
+
 	}
-	
+
 	@Test
-	public void package_definition_returns_package_item() throws ModelBuilderException{
+	public void package_definition_returns_package_item() throws ModelBuilderException {
 		String text = "package de.jcup.egradle.examples";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
 
@@ -151,13 +182,13 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.PACKAGE, packageDef.getItemType());
 		assertEquals("de.jcup.egradle.examples", packageDef.getName());
-		
+
 	}
-	
+
 	@Test
-	public void import_definition_returns_import_item() throws ModelBuilderException{
+	public void import_definition_returns_import_item() throws ModelBuilderException {
 		String text = "import org.gradle.api.DefaultTask";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
 
@@ -172,9 +203,9 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.IMPORT, importDef.getItemType());
 		assertEquals("org.gradle.api.DefaultTask", importDef.getName());
-		
+
 	}
-	
+
 	@Test
 	public void dependencies_with_classpath_gradle_api__contains_classpath_gradleapi() throws ModelBuilderException {
 		/* @formatter:off*/
@@ -198,11 +229,12 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.DEPENDENCIES, dependencies.getItemType());
 		Item[] dependenciesChildren = dependencies.getChildren();
 		assertEquals(1, dependenciesChildren.length);
-		
+
 		Item classPathDependency = dependenciesChildren[0];
-		assertEquals("gradleApi()",classPathDependency.getName());
+		assertEquals("gradleApi()", classPathDependency.getName());
 
 	}
+
 	@Test
 	public void three_variable_definitions_second_defintion_has_failure_on_line2__context_must_have_error_for_line2()
 			throws ModelBuilderException {
@@ -343,63 +375,63 @@ public class GradleModelBuilderTest {
 		assertEquals("testCompile", junitDependency.getConfiguration());
 
 	}
-	
-	@Test 
-	public void simple_string() throws Exception{
+
+	@Test
+	public void simple_string() throws Exception {
 		String text = "String cp = ''";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
-	
+
 		/* execute */
 		Model model = b.build(null);
-	
+
 		/* test */
 		Item[] items = model.getRoot().getChildren();
-	
+
 		assertEquals(1, items.length);
 		Item varaibleDef = items[0];
-	
+
 		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
 		assertEquals("cp", varaibleDef.getName());
 	}
 
-	@Test 
-	public void groovy_string() throws Exception{
+	@Test
+	public void groovy_string() throws Exception {
 		String text = "String cp = \"\"";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
-	
+
 		/* execute */
 		Model model = b.build(null);
-	
+
 		/* test */
 		Item[] items = model.getRoot().getChildren();
-	
+
 		assertEquals(1, items.length);
 		Item varaibleDef = items[0];
-	
+
 		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
 		assertEquals("cp", varaibleDef.getName());
 	}
-	
-	@Test 
-	public void def_groovy_string() throws Exception{
+
+	@Test
+	public void def_groovy_string() throws Exception {
 		String text = "def String cp = \"\"";
-		
+
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		GradleModelBuilder b = new GradleModelBuilder(is);
-	
+
 		/* execute */
 		Model model = b.build(null);
-	
+
 		/* test */
 		Item[] items = model.getRoot().getChildren();
-	
+
 		assertEquals(1, items.length);
 		Item varaibleDef = items[0];
-	
+
 		assertEquals(ItemType.VARIABLE, varaibleDef.getItemType());
 		assertEquals("cp", varaibleDef.getName());
 	}
