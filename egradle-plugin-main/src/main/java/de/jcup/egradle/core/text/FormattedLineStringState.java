@@ -1,6 +1,6 @@
 package de.jcup.egradle.core.text;
 
-public enum FormattedLineState {
+public enum FormattedLineStringState {
 	IN_GSTRING,
 
 	IN_NORMAL_STRING,

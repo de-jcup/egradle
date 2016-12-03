@@ -2,7 +2,7 @@ package de.jcup.egradle.core.text;
 
 public class FormattedLineContext {
 	
-	private FormattedLineState state = FormattedLineState.NOT_IN_STRING;
+	private FormattedLineStringState state = FormattedLineStringState.NOT_IN_STRING;
 	private char before = '0';
 	private StringBuilder currentText = new StringBuilder();
 	private StringBuilder textNotInString = new StringBuilder();
@@ -42,11 +42,21 @@ public class FormattedLineContext {
 		textNotInString.append(text);
 	}
 
-	public boolean hasState(FormattedLineState state) {
+	public boolean hasStringState(FormattedLineStringState state) {
 		return this.state==state;
 	}
+	
+	public boolean isAlreadyInAnotherStringState(FormattedLineStringState expected){
+		if (expected==state) {
+			return false;
+		}
+		if (state==FormattedLineStringState.NOT_IN_STRING){
+			return false;
+		}
+		return true;
+	}
 
-	public void changeState(FormattedLineState state) {
+	public void changeState(FormattedLineStringState state) {
 		 this.state=state;
 	}
 

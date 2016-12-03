@@ -54,10 +54,8 @@ public class SimpleGradleSourceFormatter {
 
 		List<String> linesArray = null;
 		linesArray= transformToLines(textWithWantedLineBreaks, charset);
-		/* remove old indent */
-		linesArray = buildLinesWithNoWhitespacesBeforeText(linesArray);
-		/* make indent */
-		linesArray = buildLinesWithIndentButIgnoreStrings(linesArray);
+		linesArray = removeOldIndents(linesArray);
+		linesArray = addIndents(linesArray);
 		StringBuilder sb = new StringBuilder();
 		for (String string : linesArray) {
 			sb.append(string);
@@ -65,7 +63,7 @@ public class SimpleGradleSourceFormatter {
 		return sb.toString();
 	}
 
-	protected List<String> buildLinesWithNoWhitespacesBeforeText(List<String> lines) {
+	protected List<String> removeOldIndents(List<String> lines) {
 		List<String> indentLines = new ArrayList<>();
 		for (String line : lines) {
 			StringBuilder leftTrimmed = new StringBuilder();
@@ -85,7 +83,11 @@ public class SimpleGradleSourceFormatter {
 		return indentLines;
 	}
 
-	protected List<String> buildLinesWithIndentButIgnoreStrings(List<String> lines) {
+	/**
+	 * Adds indents to lines - indents are calculated by checking curly bracket start and endings (except when inside strings)
+	 * @param lines
+	 */
+	protected List<String> addIndents(List<String> lines) {
 		List<String> indentLines = new ArrayList<>();
 		int indent = 0;
 
@@ -127,7 +129,7 @@ public class SimpleGradleSourceFormatter {
 			handled = handled || handleString(context, c);
 		}
 		String currentText = context.getCurrentText();
-		if (context.hasState( FormattedLineState.NOT_IN_STRING)) {
+		if (context.hasStringState( FormattedLineStringState.NOT_IN_STRING)) {
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(currentText));
 			context.appendNotInString(currentText);
 		} else {
@@ -135,8 +137,9 @@ public class SimpleGradleSourceFormatter {
 		}
 	}
 	
+	
 	boolean handleGString(FormattedLineContext context, char c) {
-		if (context.hasState( FormattedLineState.IN_NORMAL_STRING)) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineStringState.IN_GSTRING)) {
 			return false;
 		}
 		if (c != '\"') {
@@ -145,20 +148,20 @@ public class SimpleGradleSourceFormatter {
 		if (context.wasBackslashBefore()) {
 			return false;
 		}
-		if (context.hasState( FormattedLineState.IN_GSTRING)) {
+		if (context.hasStringState( FormattedLineStringState.IN_GSTRING)) {
 			context.appendFormatted(context.getCurrentText());
-			context.changeState(FormattedLineState.NOT_IN_STRING);
+			context.changeState(FormattedLineStringState.NOT_IN_STRING);
 		} else {
 			/* WAS NOT IN GSTRING */
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
-			context.changeState(FormattedLineState.IN_GSTRING);
+			context.changeState(FormattedLineStringState.IN_GSTRING);
 		}
 		context.resetCurrentText();
 		return true;
 	}
 
 	boolean handleString(FormattedLineContext context, char c) {
-		if (context.hasState( FormattedLineState.IN_GSTRING)) {
+		if (context.isAlreadyInAnotherStringState(FormattedLineStringState.IN_NORMAL_STRING)) {
 			return false;
 		}
 		if (c != '\'') {
@@ -167,13 +170,13 @@ public class SimpleGradleSourceFormatter {
 		if (context.wasBackslashBefore()) {
 			return false;
 		}
-		if (context.hasState( FormattedLineState.IN_NORMAL_STRING)) {
+		if (context.hasStringState( FormattedLineStringState.IN_NORMAL_STRING)) {
 			context.appendFormatted(context.getCurrentText());
-			context.changeState( FormattedLineState.NOT_IN_STRING);
+			context.changeState( FormattedLineStringState.NOT_IN_STRING);
 		} else {
 			/* WAS NOT IN GSTRING */
 			context.appendFormatted(removeToMuchSpacesAndAddWantedLineBreaksR(context.getCurrentText()));
-			context.changeState( FormattedLineState.IN_NORMAL_STRING);
+			context.changeState( FormattedLineStringState.IN_NORMAL_STRING);
 		}
 		context.resetCurrentText();
 	
