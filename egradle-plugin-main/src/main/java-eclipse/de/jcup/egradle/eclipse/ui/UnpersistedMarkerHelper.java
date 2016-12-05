@@ -31,23 +31,22 @@ import org.eclipse.core.runtime.CoreException;
  *
  */
 public class UnpersistedMarkerHelper extends AbstractMarkerHelper {
-	
+
 	private List<IMarker> markerRegistry;
 
 	public UnpersistedMarkerHelper(String markerType) {
 		this.markerType = markerType;
 		markerRegistry = new ArrayList<>();
 	}
-	
+
 	@Override
 	protected void handleMarkerAdded(IMarker marker) {
-		if (marker==null){
+		if (marker == null) {
 			return;
 		}
 		markerRegistry.add(marker);
 	}
-	
-	
+
 	/**
 	 * Removes all created error markers
 	 * 
@@ -56,18 +55,36 @@ public class UnpersistedMarkerHelper extends AbstractMarkerHelper {
 	public void removeAllRegisteredMarkers() throws CoreException {
 		List<IMarker> workingCopy = new ArrayList<>(markerRegistry);
 		for (IMarker marker : workingCopy) {
-			if (IMarker.TASK.equals(marker.getType())) {
-				/* tasks are not deleted */
+			String type = null;
+			boolean markerExists = marker.exists();
+					
+			if (markerExists){
+				try {
+					type = marker.getType();
+				} catch (CoreException e) {
+					markerExists=false;
+				}
+				
+				if (IMarker.TASK.equals(type)) {
+					/* tasks are not deleted */
+					continue;
+				}
+			}
+			markerRegistry.remove(marker);
+			if (!markerExists) {
+				/*
+				 * means marker.getType() failed, because marker does not exist
+				 * any more. This can happen when a marker is removed manually on ui.
+				 */
 				continue;
 			}
 			marker.delete();
-			markerRegistry.remove(marker);
+
 		}
 	}
-	
+
 	public boolean hasRegisteredMarkers() {
 		return !markerRegistry.isEmpty();
 	}
-
 
 }
