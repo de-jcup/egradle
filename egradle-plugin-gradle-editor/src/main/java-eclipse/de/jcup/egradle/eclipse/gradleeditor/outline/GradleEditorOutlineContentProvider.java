@@ -81,7 +81,19 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 	public void setModelType(ModelType modelType) {
 		this.modelType = modelType;
 	}
+	
+	/**
+	 * Clears model cache, so a model rebuild is tried
+	 */
+	public void clearModelCache(){
+		useCachedModel=false;
+		if (gradleEditor!=null){
+			getElements(gradleEditor.getDocument());
+		}
+	}
 
+	private boolean useCachedModel;
+	
 	@Override
 	public Object[] getElements(Object inputElement) {
 		String dataAsString = null;
@@ -91,6 +103,10 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			if (gradleEditor==null){
 				return NO_OBJECTS;
 			}
+			if (useCachedModel && model!=null){
+				return getRootChildren();
+			}
+			useCachedModel=true;
 			IDocument document = (IDocument) inputElement;
 			dataAsString = document.get();
 

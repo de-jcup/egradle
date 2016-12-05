@@ -31,7 +31,6 @@ public class GradleEditorHover implements ITextHover {
 
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

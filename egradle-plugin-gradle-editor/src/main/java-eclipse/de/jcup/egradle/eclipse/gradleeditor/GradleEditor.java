@@ -91,12 +91,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
 		setDocumentProvider(new GradleDocumentProvider());
 
-		/*
-		 * TODO ATR, 25.11.2016 - even when same content provider, the model
-		 * itself will always be new created by outlines. Is this really
-		 * necessary are should we have reuse of model and a dedicated trigger
-		 * to rebuild model ?!
-		 */
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
@@ -122,8 +116,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 
 		activateGradleEditorContext();
-
+		
+		contentProvider.clearModelCache();
 	}
+	
 
 	@Override
 	public void dispose() {
@@ -269,7 +265,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		outlinePage.inputChanged(document);
 	}
 
-	protected IDocument getDocument() {
+	public IDocument getDocument() {
 		return getDocumentProvider().getDocument(getEditorInput());
 	}
 

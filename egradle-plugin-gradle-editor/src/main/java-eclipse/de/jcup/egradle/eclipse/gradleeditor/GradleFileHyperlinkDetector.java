@@ -36,8 +36,7 @@ import de.jcup.egradle.core.api.GradleFileLinkCalculator.GradleFileLinkResult;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 
-/* FIXME ATR: implement correct!*/
-/* FIXME ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
+/* TODO ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
 public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
 	private GradleStringTransformer transformer;
 	private File editorFile;

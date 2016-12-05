@@ -70,7 +70,6 @@ public class JUnitResultFilesFinder {
 				return false;
 			}
 			if (file.isDirectory()){
-				/* TODO Albert, 20.09.2016 - Directory performance filtering could be improved - the ... name.equals looks ugly */
 				/* optimize performance*/
 				if (name.equals("src")){ // we ignore all content in src
 					return false;

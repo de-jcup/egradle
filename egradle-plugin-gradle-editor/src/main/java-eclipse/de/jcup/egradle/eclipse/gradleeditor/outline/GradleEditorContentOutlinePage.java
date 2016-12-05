@@ -155,6 +155,9 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 	public void inputChanged(Object input){
 		this.input=input;
+		if (contentProvider instanceof GradleEditorOutlineContentProvider){
+			((GradleEditorOutlineContentProvider)contentProvider).clearModelCache();
+		}
 		TreeViewer treeViewer = getTreeViewer();
 		if (treeViewer==null){
 			return;
@@ -174,6 +177,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			if (contentProvider instanceof GradleEditorOutlineContentProvider){
 				GradleEditorOutlineContentProvider gcp = (GradleEditorOutlineContentProvider) contentProvider;
 				gcp.setModelType(changeTo());
+				gcp.clearModelCache();
 				getTreeViewer().refresh();
 			}
 		}
@@ -234,10 +238,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		public void run() {
 			linkingWithEditorEnabled = !linkingWithEditorEnabled;
 			
-			/*
-			 * TODO ATR, 10.11.2016: what about updating - when now linked the
-			 * outline view selection should be updated...
-			 */
 			initText();
 			initImage();
 		}

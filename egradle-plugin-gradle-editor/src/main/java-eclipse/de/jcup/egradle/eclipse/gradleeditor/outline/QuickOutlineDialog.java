@@ -322,6 +322,11 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			if (treeViewer == null) {
 				return;
 			}
+			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
 			String filterText = text.getText();
 			if (filterText != null) {
 				if (filterText.equals(currentUsedFilterText)) {
@@ -368,8 +373,6 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		}
 
 		protected void selectFirstMaching() {
-			// /* select the first part where the matcher matches - so return
-			// will use this*/
 			selectfirstMatching(getTreeContentProvider().getElements(null));
 		}
 
@@ -382,7 +385,6 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 				if (Boolean.TRUE.equals(textFilter.isMatching(element))) {
 					StructuredSelection selection = new StructuredSelection(element);
 					treeViewer.setSelection(selection, true);
-					System.out.println("selection done:" + element);
 					return true;
 				}
 				ITreeContentProvider contentProvider = getTreeContentProvider();
@@ -410,7 +412,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			}
 
 			if (filterPattern == null) {
-				/* simple fall back ... */
+				/* fall back ... */
 				String filterText = text.getText();
 				if (filterText == null) {
 					return true;
