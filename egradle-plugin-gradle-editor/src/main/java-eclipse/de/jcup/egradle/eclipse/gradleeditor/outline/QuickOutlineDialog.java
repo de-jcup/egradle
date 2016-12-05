@@ -53,6 +53,8 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 	private static final String TITLE = "EGradle quick outline";
 	private static final boolean DO_SHOW_DIALOG = SHOW_DIALOG_MENU;
+	private static final int DEFAULT_X = 600;
+	private static final int DEFAULT_Y = 400;
 
 	private Pattern filterPattern;
 
@@ -216,6 +218,16 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		return activator.getDialogSettings();
 	}
 
+	@Override
+	protected Point getInitialLocation(Point initialSize) {
+		IDialogSettings dialogSettings = getDialogSettings();
+		if (dialogSettings == null) {
+			/* no dialog settings available, so fall back to min settings */
+			return new Point(DEFAULT_X, DEFAULT_Y);
+		}
+		return super.getInitialLocation(initialSize);
+	}
+	
 	@Override
 	protected Point getInitialSize() {
 		IDialogSettings dialogSettings = getDialogSettings();
