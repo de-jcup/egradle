@@ -13,7 +13,8 @@
 	<p>
 	EGradle has an integrated editor with following features: 
 	<ul>
-		<li><a href="#outline">Outline View</a></li>	
+		<li><a href="#outline">Outline View</a></li>
+		<li><a href="#quick_outline">Quick Outline View</a></li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
 		<li>Syntax highlighting.
 			<ul>
@@ -69,7 +70,6 @@
 		</tr>
 	</table>
 	
-	
 	<h5>Link preferences</h5>
 	<p>
 		Inside editor preferences you are able to setup the default link behavior of new opened outlines
@@ -81,6 +81,42 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
+	
+	
+	<h2 id="quick_outline">Quick Outline</h2>
+	<h3>Open quick outline view</h3>
+	<p>
+		Press CTRL + O when you are inside EGradle editor and the quick outline dialog appears. Selected is
+		tree item next to your cursor position inside editor:
+	</p>
+	<img src="images/egradle-quick-outline-1.png" />
+	<br />
+	<br />
+	<h3>Keyboard usage</h3>
+	<p>When you press CURSOR DOWN inside the input field, you will switch to current selected outline tree item. 
+	Now you can move around with cursor keys inside outline tree. When you press ENTER the dialog closes and 
+	your former selection is selected in editor. When you press ESC the dialog will close without any further 
+	action. 
+	</p>
+	<h3>Content</h3>
+	<p>
+	Content is same as described in <a href="#outline">Outline View</a>. But the quick outline does not 
+	need a view to be visible, you can also filter for interesting parts. <br><br>
+	An example: you want to show all parts starting with "lib", so you simply type "lib" and the tree shows only leaves starting with lib.
+	</p>
+	<img src="images/egradle-quick-outline-2.png" />
+	<p>
+	You can also use wildcards for filtering. The location of the quick outline dialog can be moved, resized and 
+	remembered. To change the behaviour open the menu as described in next picture.
+	</p>
+	<img src="images/egradle-quick-outline-3.png" />
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	
+	
 	<h2 id="parse_failures">Show parse failures</h2>
 	<p>
 		EGradle editor will automatically parse the opened gradle file and mark all parse errors. 
