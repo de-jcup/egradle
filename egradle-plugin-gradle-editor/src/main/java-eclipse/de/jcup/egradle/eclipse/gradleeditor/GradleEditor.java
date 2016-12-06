@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
@@ -45,6 +46,7 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -87,7 +89,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
 	public GradleEditor() {
-		setPreferenceStore(GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore());
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
 		setDocumentProvider(new GradleDocumentProvider());
 
@@ -118,6 +119,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		activateGradleEditorContext();
 		
 		contentProvider.clearModelCache();
+		
+		/* we must install the EGradle editor preference store here instead of setting for complete editor - prevents bug #149!*/
+		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES.getPreferenceStore();
+		getSourceViewerDecorationSupport(getSourceViewer()).install(preferenceStoreForDecorationSupport);
 	}
 	
 

@@ -16,6 +16,8 @@
 		<li><a href="#outline">Outline View</a></li>
 		<li><a href="#quick_outline">Quick Outline View</a></li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
+		<li><a href="#bracket_switching">Bracket switching</a></li>	
+		<li><a href="#link_to_gradle_files">Open other gradle files by text links</a></li>	
 		<li>Syntax highlighting.
 			<ul>
 				<li>All Java keywords</li>
@@ -125,6 +127,49 @@
 	<img src="images/egradle-editor-parser-error.png" />
 	<p>
 		The errors will be persisted and remain until parse errors are resolved.
+	</p>
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	
+	<h2 id="bracket_switching">Bracket switching</h2>
+	<p>
+		EGradle editor supports curly bracket switching and rendering. In next picture the cursor is behind curly bracket in line 7
+		so its corresponding part in line 11 is rendered.
+	</p>
+	<img src="images/egradle-bracket-switching-1.png" />
+	<p>
+		When pressing CTRL + SHIFT + P the cursor moves to corresponding curly bracket in
+		line 11 and line 7 is rendered as corresponding part: 
+	</p>
+	<img src="images/egradle-bracket-switching-2.png" />
+	<p>
+		When pressing CTRL + SHIFT + P again the cursor moves back to line 7.
+		
+	</p>
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	
+	<h2 id="link_to_gradle_files">Open other gradle files by text links</h2>
+	<p>
+		EGradle editor is able to open other egradle files by supporting hyperlink mechanism:
+		Simply press CTRL and hoover over a editor area where a gradle file is mentioned: 
+	</p>
+	<img src="images/egradle-link-to-gradle-files-1.png" />
+	<p>
+		On clicking to given hyperlink the other gradle file is opened - the example file contains a 
+		comment which links to "build.gradle" back so it can also be used as an hyperlink:
+	</p>
+	<img src="images/egradle-link-to-gradle-files-2.png" />
+	<p>
+		As seen in first picture above the variable ${rootProject.projectDir} is automatically resolved. Currently
+		the EGradle IDE only supports this variable. If the file is not available given inside the "link"
+		there is no hyperlinking.
 	</p>
 	<br />
 	<br />
