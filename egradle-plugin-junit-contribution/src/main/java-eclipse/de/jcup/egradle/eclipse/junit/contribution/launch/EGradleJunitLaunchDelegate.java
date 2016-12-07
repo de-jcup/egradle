@@ -27,6 +27,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
+import de.jcup.egradle.eclipse.launch.LaunchParameterValues;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
@@ -34,8 +35,8 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 	private EGradleJUnitTaskVariableReplacement variableReplacement = new EGradleJUnitTaskVariableReplacement();
 	
 	@Override
-	protected void appendAdditionalLaunchParameters(Map<Object, Object> map) {
-		ILaunch launch = (ILaunch) map.get(LAUNCH_ARGUMENT);
+	protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
+		ILaunch launch = launchParameterValues.getLaunch();
 		if (launch==null){
 			throw new IllegalStateException("launch missing");
 		}
@@ -48,8 +49,8 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 			String configuredTasksValue= configuration.getAttribute(PROPERTY_TASKS, "");
 			String tasksToExecute = variableReplacement.replace(configuredTasksValue, JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks());
 			
-			map.put(LAUNCH_POST_JOB, new ImportGradleJunitResultsJob("Import gradle junit results",projectName,true));
-			map.put(LAUNCH_TASKS_ATTRBUTE_OVERRIDE, tasksToExecute);
+			launchParameterValues.setPostJob(new ImportGradleJunitResultsJob("Import gradle junit results",projectName,true));
+			launchParameterValues.setOverriddenTasks(tasksToExecute);
 		} catch (CoreException e) {
 			EGradleUtil.log(e);
 		}

@@ -72,23 +72,28 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 					try {
 						IParameter parameter = command.getParameter(LaunchGradleCommandHandler.PARAMETER_LAUNCHCONFIG);
 						IParameterValues values = parameter.getValues();
-						@SuppressWarnings("unchecked")
-						Map<Object, Object> map = values.getParameterValues();
-						map.clear();// Bugfix #79: We always clear the map. It
-									// seems it is reused between every command
-									// call - the junit import job was added by
-									// other plugin, but the map was reused, so
-									// the job was always there!!!!!
-						map.put(LAUNCH_ARGUMENT, launch);
-						appendAdditionalLaunchParameters(map);
-						Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
-						ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
+						
+						if (values instanceof LaunchParameterValues){
+							LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
+							/* Bugfix #79 - reset always launch data */
+							launchParameterValues.resetLaunchData();
+							launchParameterValues.setLaunch(launch);
+							
+							appendAdditionalLaunchParameters(launchParameterValues);
+							Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
+							ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
-						/*
-						 * execute launch command with parameters - will show
-						 * progress etc. as well
-						 */
-						handlerService.executeCommand(parametrizedCommand, null);
+							/*
+							 * execute launch command with parameters - will show
+							 * progress etc. as well
+							 */
+							handlerService.executeCommand(parametrizedCommand, null);
+							
+						}else{
+							EGradleUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
+						}
+						
+						
 
 					} catch (Exception e) {
 						if (ExceptionUtils.getRootCause(e) instanceof ForgetMe) {
@@ -127,9 +132,9 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	 * Append additional launch parameters for gradle command handler. This is
 	 * done inside UI Thread
 	 * 
-	 * @param map
+	 * @param launchParameterValues
 	 */
-	protected void appendAdditionalLaunchParameters(Map<Object, Object> map) {
+	protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
 
 	}
 

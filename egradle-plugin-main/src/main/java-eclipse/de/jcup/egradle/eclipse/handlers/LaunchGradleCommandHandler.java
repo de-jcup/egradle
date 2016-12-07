@@ -42,6 +42,7 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
+import de.jcup.egradle.eclipse.launch.LaunchParameterValues;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on
@@ -68,12 +69,16 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
-			IParameterValues configParamValues = configparameter.getValues();
-			Map<?, ?> values = configParamValues.getParameterValues();
-
-			launch = (ILaunch) values.get(LAUNCH_ARGUMENT);
-			postJob = (EGradlePostBuildJob) values.get(LAUNCH_POST_JOB);
-			taskAttributeOverride = (String) values.get(LAUNCH_TASKS_ATTRBUTE_OVERRIDE);
+			IParameterValues values = configparameter.getValues();
+			if (values instanceof LaunchParameterValues){
+				LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
+				taskAttributeOverride = launchParameterValues.getOverriddenTasks();
+				launch = launchParameterValues.getLaunch();
+				postJob = launchParameterValues.getPostJob();
+				
+			}else{
+				EGradleUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
+			}
 
 		} catch (NotDefinedException | ParameterValuesException e) {
 			throw new IllegalStateException("Cannot fetch command parameter!", e);
