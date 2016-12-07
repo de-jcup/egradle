@@ -14,9 +14,10 @@
 	EGradle has an integrated editor with following features: 
 	<ul>
 		<li><a href="#outline">Outline View</a></li>
-		<li><a href="#quick_outline">Quick Outline View</a></li>		
+		<li><a href="#quick_outline">Quick Outline</a></li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
 		<li><a href="#bracket_switching">Bracket switching</a></li>	
+		<li><a href="#link_to_urls">Open URL by text links</a></li>	
 		<li><a href="#link_to_gradle_files">Open other gradle files by text links</a></li>	
 		<li>Syntax highlighting.
 			<ul>
@@ -28,8 +29,6 @@
 				<li>Some Gradle predefined variables</li>
 			</ul>
 		</li>
-		<li>URL linking - press CTRL + mouse click</li> 
-		<li>...new features are planned (e.g. link to included files)</li>
 	</ul>
 	<p>
 		<img src="images/egradle-editor.png" />
@@ -74,9 +73,10 @@
 	
 	<h5>Link preferences</h5>
 	<p>
-		Inside editor preferences you are able to setup the default link behavior of new opened outlines
+		Inside editor preferences you are able to setup the default link behavior of new opened outlines.<br/>
+		Enable or disable the checkbox labeled with "New opened editors are linked with outline"
 	</p>
-	<img src="images/egradle-editor-preferences.png" />
+	<img src="images/egradle-editor-preferences-outline-link-default.png" />
 	<p/>
 	<br />
 	<br />
@@ -86,7 +86,7 @@
 	
 	
 	<h2 id="quick_outline">Quick Outline</h2>
-	<h3>Open quick outline view</h3>
+	<h3>Open quick outline</h3>
 	<p>
 		Press CTRL + O when you are inside EGradle editor and the quick outline dialog appears. Selected is
 		tree item next to your cursor position inside editor:
@@ -103,7 +103,7 @@
 	<h3>Content</h3>
 	<p>
 	Content is same as described in <a href="#outline">Outline View</a>. But the quick outline does not 
-	need a view to be visible, you can also filter for interesting parts. <br><br>
+	need a view to be visible, you can also filter for wanted parts. <br><br>
 	An example: you want to show all parts starting with "lib", so you simply type "lib" and the tree shows only leaves starting with lib.
 	</p>
 	<img src="images/egradle-quick-outline-2.png" />
@@ -149,12 +149,28 @@
 		When pressing CTRL + SHIFT + P again the cursor moves back to line 7.
 		
 	</p>
+	<h3>Bracket switching preferences</h3>
+	<p>
+		Inside editor preferences you are able to setup the bracket switching behaviour:
+	</p>
+	<img src="images/egradle-editor-preferences-bracket-highlighting.png" />
+	
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
+	<h2 id="link_to_urls">Open other gradle files by text links</h2>
+	<p>
+		URLs can be opened by system browser by pressing CTRL and hoover over a editor area where a URL is available. Works
+		same way as described for <a href="#link_to_gradle_files">linking gradle files</a>.
+	</p>
 	
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
 	<h2 id="link_to_gradle_files">Open other gradle files by text links</h2>
 	<p>
 		EGradle editor is able to open other egradle files by supporting hyperlink mechanism:

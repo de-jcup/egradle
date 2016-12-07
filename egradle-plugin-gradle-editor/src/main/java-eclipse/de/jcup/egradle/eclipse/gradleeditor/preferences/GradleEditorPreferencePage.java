@@ -174,7 +174,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 				});
 		createDependency(bracketHighlightingCheckbox, matchingBracketAndCaretLocationRadioButton);
 
-		label = "highlight enclosing Brackets";
+		label = "highlight enclosing brackets";
 		enclosingBracketsRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
 
 			@Override
