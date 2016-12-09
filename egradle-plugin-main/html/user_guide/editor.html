@@ -95,7 +95,7 @@
 	<br />
 	<br />
 	<h3>Keyboard usage</h3>
-	<p>When you press CURSOR DOWN inside the input field, you will switch to current selected outline tree item. 
+	<p>When you press CURSOR DOWN inside input field, you will switch to current selected outline tree item. 
 	Now you can move around with cursor keys inside outline tree. When you press ENTER the dialog closes and 
 	your former selection is selected in editor. When you press ESC the dialog will close without any further 
 	action. 
@@ -162,8 +162,8 @@
 	</p>
 	<h2 id="link_to_urls">Open other gradle files by text links</h2>
 	<p>
-		URLs can be opened by system browser by pressing CTRL and hoover over a editor area where a URL is available. Works
-		same way as described for <a href="#link_to_gradle_files">linking gradle files</a>.
+		URLs can be opened by pressing CTRL and hoover over a text part inside gradle editor where a URL is available. Works
+		same way as described for <a href="#link_to_gradle_files">linking gradle files</a> but will open the URL with system browser.
 	</p>
 	
 	<br />
@@ -173,8 +173,8 @@
 	</p>
 	<h2 id="link_to_gradle_files">Open other gradle files by text links</h2>
 	<p>
-		EGradle editor is able to open other egradle files by supporting hyperlink mechanism:
-		Simply press CTRL and hoover over a editor area where a gradle file is mentioned: 
+		EGradle editor is able to open other gradle files by supporting hyperlink mechanism:
+		Simply press CTRL and hoover over a text where a gradle file is mentioned: 
 	</p>
 	<img src="images/egradle-link-to-gradle-files-1.png" />
 	<p>
@@ -182,10 +182,11 @@
 		comment which links to "build.gradle" back so it can also be used as an hyperlink:
 	</p>
 	<img src="images/egradle-link-to-gradle-files-2.png" />
+	<h3 >Variable resolving</h3>
 	<p>
-		As seen in first picture above the variable ${rootProject.projectDir} is automatically resolved. Currently
-		the EGradle IDE only supports this variable. If the file is not available given inside the "link"
-		there is no hyperlinking.
+		As seen in first picture above the variable <code>${rootProject.projectDir}</code> is automatically resolved. Currently
+		the EGradle IDE only supports this variable. <br>
+		If the file is not available given inside "link" there is no hyperlinking.
 	</p>
 	<br />
 	<br />
