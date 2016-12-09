@@ -30,6 +30,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -154,7 +155,7 @@ public class EGradleUtil {
 				}
 			}
 		};
-		job.schedule();
+		job.schedule(1000L); // 1 second delay to give IDE the chance to delete old parts
 
 	}
 
@@ -364,8 +365,8 @@ public class EGradleUtil {
 	 * existing the folder will be created
 	 * 
 	 * @param subFolder
-	 *            subfoler inside egradle tempfolder. If <code>null</code> the
-	 *            egradle temp folder will be returned
+	 *            subfolder inside egradle temporary folder. If <code>null</code> the
+	 *            egradle temporary folder will be returned
 	 * @return temp folder never <code>null</code> and always existing
 	 */
 	public static File getTempFolder(String subFolder) {
@@ -421,6 +422,41 @@ public class EGradleUtil {
 			/* ignore ... project not found anymore */
 			return false;
 		}
+	}
+	
+	/**
+	 * Calculates if given project is a sub project for current root. If no root project is setup, this method will always return false.
+	 * @param p
+	 * @return <code>true</code> when project is sub project of current root project
+	 * @throws CoreException
+	 */
+	public static boolean isSubprojectOfCurrentRootProject(IProject p) throws CoreException {
+		if (p==null){
+			return false;
+		}
+		if (! p.exists()){
+			return false;
+		}
+		File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
+		if (rootFolder==null){
+			return false;
+		}
+		
+		IPath path = p.getLocation();
+		File parentFolder = getResourceHelper().toFile(path);
+		if (parentFolder == null) {
+			return false;
+		}
+		if (!parentFolder.exists()) {
+			return false;
+		}
+		if (!rootFolder.equals(parentFolder)) {
+			parentFolder = parentFolder.getParentFile();
+		}
+		if (!rootFolder.equals(parentFolder)) {
+			return false;
+		}
+		return true;
 	}
 
 	static boolean isUIThread() {
@@ -541,6 +577,31 @@ public class EGradleUtil {
 		});
 	}
 
+	/**
+	 * Set new root project folder by given file
+	 * @param folder
+	 * @throws CoreException 
+	 * @throws IllegalArgumentException when folder is not a directory or is <code>null</code>
+	 */
+	public static void setNewRootProjectFolder(File folder) throws CoreException{
+		if (folder==null){
+			throwCoreException("new root folder may not be null!");
+		}
+		if (! folder.isDirectory()){
+			throwCoreException("new root folder must be a directory, but is not :\n"+folder.getAbsolutePath());
+		}
+		EGradlePreferences.INSTANCE.setRootProjectPath(folder.getAbsolutePath());
+		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
+		refreshAllProjectDecorations();
+		try {
+			if (virtualRootExistedBefore){
+				createOrRecreateVirtualRootProject();
+			}
+		} catch (VirtualRootProjectException e) {
+			throwCoreException("Cannot create virtual root project!",e);
+		}
+	}
+	
 	public static void refreshAllProjectDecorations() {
 		getSafeDisplay().asyncExec(new Runnable() {
 

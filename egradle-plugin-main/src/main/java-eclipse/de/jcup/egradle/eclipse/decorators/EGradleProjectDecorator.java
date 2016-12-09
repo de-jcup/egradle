@@ -21,7 +21,6 @@ import java.io.File;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
@@ -73,7 +72,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			decoration.addPrefix("EGradle ");
 			decoration.addSuffix(" ("+rootFolder.getName()+")");
 			decorateImage(decoration);
-			/* Because the virtual root project is not hosted in SCM - at least with EGit, there is always an
+			/* Because the virtual root project is not hosted in SCM - at least with GIT, there is always an
 			 * ugly question icon at IDecoration.BOTTOM_RIGHT . To avoid this
 			 * we simply render an empty deocorator here. This is okay, because diff 
 			 * changes in project are rendered as usual
@@ -81,21 +80,10 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			decoration.addOverlay(emptyDecoratorDescriptor, IDecoration.BOTTOM_RIGHT);
 			return;
 		}
-		IPath path = p.getLocation();
 
 		/* we simply check if the project is inside root project */
 		try {
-			File parentFolder = getResourceHelper().toFile(path);
-			if (parentFolder == null) {
-				return;
-			}
-			if (!parentFolder.exists()) {
-				return;
-			}
-			if (!rootFolder.equals(parentFolder)) {
-				parentFolder = parentFolder.getParentFile();
-			}
-			if (!rootFolder.equals(parentFolder)) {
+			if (!isSubprojectOfCurrentRootProject(p)){
 				return;
 			}
 			if (EGradleUtil.getPreferences().isSubProjectIconDecorationEnabled()){
@@ -106,6 +94,8 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		}
 
 	}
+
+	
 
 	private void decorateImage(IDecoration decoration) {
 		// TOP_LEFT

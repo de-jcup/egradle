@@ -51,6 +51,21 @@
 	    icon="icons/virtualRootProjectNature.png">
 	  </image>
 	 </extension>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          PROPERTY TESTERS                            -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+  	  <!-- see https://wiki.eclipse.org/Platform_Expression_Framework -->
+  	  <!-- see http://help.eclipse.org/neon/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_cmd_expressions.htm -->
+  	  <!-- see http://www.robertwloch.net/2011/01/eclipse-tips-tricks-property-testers-with-command-core-expressions/ -->
+      <propertyTester
+          class="de.jcup.egradle.eclipse.EGradlePropertyTester"
+          id="de.jcup.egradle.eclipse.EGradlePropertyTester"
+          namespace="de.jcup.egradle"
+          properties="isProjectPartOfRootProject"
+          type="org.eclipse.core.resources.IResource">
+      </propertyTester>
+   </extension>
 
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          DECORATION                                  -->
@@ -110,6 +125,12 @@
             categoryId="egradle.commands.category"
             id="egradle.commands.quickTaskExecution">
       </command>
+      <command
+      		 name="Detect new root project"
+            categoryId="egradle.commands.category"
+      		id="egradle.commands.detectNewRootProject"
+      >
+      </command>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          HANDLER                                     -->
@@ -131,6 +152,10 @@
        <handler
             class="de.jcup.egradle.eclipse.handlers.QuickTaskExecutionHandler"
             commandId="egradle.commands.quickTaskExecution">
+      </handler>
+      <handler
+            commandId="egradle.commands.detectNewRootProject"
+            class="de.jcup.egradle.eclipse.handlers.DetectNewRootProjectHandler">
       </handler>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -250,6 +275,27 @@
 			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
 			         					</adapt>
 			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
+                <!-- Detect new root project -->
+                <command commandId="egradle.commands.detectNewRootProject"
+                        label="Change EGradle root project" 
+                        tooltip="Tries to detect new EGradle root project folder by this resource. Will change preferences to new root project and automatically rebuild virtual root project if formerly active"
+                        icon="icons/detectNewRootProject.png"
+                        style="push">
+                        <visibleWhen 
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <and>
+				         				<count value="1"/>
+	                                    <iterate ifEmpty="false">
+	                                    	 <adapt type="org.eclipse.core.resources.IResource">
+			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="false"/>
+				         					</adapt>
+				         				</iterate>
+                                    </and>
                               </with>
                         </visibleWhen>
                 </command>
