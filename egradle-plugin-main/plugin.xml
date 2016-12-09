@@ -228,7 +228,7 @@
       </category>
       <wizard
             name="Import gradle root project with all subprojects"
-            icon="icons/gradle-og.gif"
+            icon="icons/import_egradle.png"
             category="egradle.importWizards.category"
             class="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard"
             id="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
@@ -278,6 +278,22 @@
                               </with>
                         </visibleWhen>
                 </command>
+                 <command commandId="org.eclipse.ui.file.import" >
+		            		<parameter name="importWizardId" value="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard" />
+		            		 <visibleWhen 
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <and>
+	                                    <iterate ifEmpty="false">
+	                                    	 <adapt type="org.eclipse.core.resources.IResource">
+			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="true"/>
+				         					</adapt>
+				         				</iterate>
+                                    </and>
+                              </with>
+                        </visibleWhen>
+         		</command>
                 <!-- Detect new root project -->
                 <command commandId="egradle.commands.detectNewRootProject"
                         label="Change EGradle root project" 
