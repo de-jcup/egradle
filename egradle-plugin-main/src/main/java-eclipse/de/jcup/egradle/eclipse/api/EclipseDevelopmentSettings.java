@@ -22,7 +22,7 @@
  */
 public interface EclipseDevelopmentSettings {
 	/**
-	 * Feature toggle - shows more informatino on some points
+	 * Feature toggle - shows more information on some points
 	 */
 	public static final boolean DEBUG_ADD_SPECIAL_TEXTS = Boolean.parseBoolean(System.getProperty("egradle.debug.texts"));
 	/**
@@ -30,5 +30,4 @@ public interface EclipseDevelopmentSettings {
 	 */
 	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean.parseBoolean(System.getProperty("egradle.debug.menus"));
 	
-
 }

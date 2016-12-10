@@ -46,7 +46,6 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -55,6 +54,7 @@ import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
@@ -244,8 +244,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	@Override
 	public void selectAndReveal(int start, int length) {
 		super.selectAndReveal(start, length);
-		/* TODO ATR: remove the status line information ?!?!? */
-		setStatusLineMessage("selected range: start=" + start + ", length=" + length);
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS){
+			setStatusLineMessage("selected range: start=" + start + ", length=" + length);
+		}
 	}
 
 	@Override
@@ -353,8 +354,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				return;
 			}
 			lastCaretPosition = event.caretOffset;
-			/* TODO ATR: remove the status line information ?!?!? */
-			setStatusLineMessage("caret moved:" + event.caretOffset);
+			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS){
+				setStatusLineMessage("caret moved:" + event.caretOffset);
+			}
 			if (outlinePage == null) {
 				return;
 			}
