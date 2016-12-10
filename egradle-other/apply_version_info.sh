@@ -87,7 +87,8 @@ find -iname MANIFEST.MF | while read file ; do
 		sed -i 's|Bundle-Version: '$OLD_VERSION'|Bundle-Version: '$NEW_VERSION'|' "$file"
 		# if having dependency to main plugin change this too
 		sed -i 's|de.jcup.egradle.eclipse.plugin.main;bundle-version="'$OLD_VERSION'"|de.jcup.egradle.eclipse.plugin.main;bundle-version="'$NEW_VERSION'"|' $file
-	
+	# Bugfix mingw - sed does not work correctly and files are remaining read only
+	chmod 0755 $file
 done
 echo
 echo "###############################"
@@ -97,6 +98,9 @@ find -iname about.html | while read file ; do
 	echo -e "${BROWN}$file${NC}"
 	cat "$file" | \
 		sed -i 's|<p>Version: '$OLD_VERSION'</p>|<p>Version: '$NEW_VERSION'</p>|' "$file"
+		
+	# Bugfix mingw - sed does not work correctly and files are remaining read only
+	chmod 0755 $file
 done
 echo
 echo "###############################"
@@ -108,6 +112,8 @@ find -iname feature.xml | while read file ; do
 	cat "$file" | \
 		sed -i 's|version="'$OLD_VERSION'"|version="'$NEW_VERSION'"|' "$file"
 	
+	# Bugfix mingw - sed does not work correctly and files are remaining read only
+	chmod 0755 $file
 done
 
 echo
@@ -119,6 +125,8 @@ find -iname about.ini | while read file ; do
 	cat "$file" | \
 		sed -i 's|Version '$OLD_VERSION'|Version '$NEW_VERSION'|' "$file"
 	
+	# Bugfix mingw - sed does not work correctly and files are remaining read only
+	chmod 0755 $file
 done
 
 echo
@@ -140,6 +148,9 @@ find -iname site.xml | while read file ; do
 	# <?xml version="1.0" will not be influcenced because we have always minor.major.patch version numbers...
 	UPC=$(echo $CONTENT | sed 's/\//\\\//g')
 	sed -i "/<\/site>/ s/.*/${UPC}\n&/" $file
+	
+	# Bugfix mingw - sed does not work correctly and files are remaining read only
+	chmod 0755 $file
 	
 done
 
