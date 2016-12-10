@@ -15,5 +15,7 @@ and integrated Eclipse help (preview at https://rawgit.com/de-jcup/egradle/maste
 ## License
 EGradle is under Apache 2.0 license (http://www.apache.org/licenses/LICENSE-2.0)
 
-
+<a href="http://with-eclipse.github.io/" target="_blank">
+<img alt="with-Eclipse logo" src="http://with-eclipse.github.io/with-eclipse-0.jpg" />
+</a>
 
