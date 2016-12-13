@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Icon;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -283,7 +285,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	private void activateGradleEditorContext() {
-		IContextService contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
+		IContextService contextService = getSite().getService(IContextService.class);
 		if (contextService != null) {
 			contextService.activateContext("org.egradle.editors.GradleEditor.context");
 		}
