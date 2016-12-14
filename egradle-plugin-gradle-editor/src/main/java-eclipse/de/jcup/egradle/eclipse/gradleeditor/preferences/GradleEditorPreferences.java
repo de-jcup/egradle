@@ -24,7 +24,6 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;

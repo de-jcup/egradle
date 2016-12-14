@@ -18,8 +18,6 @@
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
-import java.util.Map;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;

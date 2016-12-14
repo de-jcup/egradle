@@ -42,9 +42,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 

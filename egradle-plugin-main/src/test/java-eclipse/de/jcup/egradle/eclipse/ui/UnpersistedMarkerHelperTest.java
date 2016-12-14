@@ -15,15 +15,14 @@
  */
  package de.jcup.egradle.eclipse.ui;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Status;
+import org.junit.Before;
+import org.junit.Test;
 
 public class UnpersistedMarkerHelperTest {
 

@@ -17,8 +17,6 @@ package de.jcup.egradle.eclipse.launch;
 
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
-import java.util.Map;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IParameter;

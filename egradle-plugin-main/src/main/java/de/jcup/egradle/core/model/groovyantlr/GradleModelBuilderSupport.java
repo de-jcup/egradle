@@ -224,7 +224,6 @@ class GradleModelBuilderSupport {
 		if (part == null) {
 			return "";
 		}
-		AST formerPart = part;
 		boolean wasMethodCall = false;
 		if (GroovyTokenTypes.METHOD_CALL == part.getType()) {
 			wasMethodCall = true;

@@ -29,8 +29,8 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.DocumentKeyWord;
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
+import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleSpecialVariableKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleTaskKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GroovyKeyWords;
