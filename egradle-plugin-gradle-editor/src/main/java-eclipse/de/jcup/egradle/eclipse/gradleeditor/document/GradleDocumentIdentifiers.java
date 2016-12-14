@@ -31,7 +31,7 @@ public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	
 	GRADLE_KEYWORD,
 	
-	GRADLE_LINK_KEYWORD,
+	GRADLE_APPLY_KEYWORD,
 	
 	GRADLE_TASK_KEYWORD,
 	

@@ -30,7 +30,7 @@ import org.eclipse.jface.text.rules.Token;
 
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.DocumentKeyWord;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleLinkKeyWords;
+import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleSpecialVariableKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleTaskKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GroovyKeyWords;
@@ -52,7 +52,7 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 
 		IToken gradleClosureKeywords = createToken(GRADLE_KEYWORD);
 		IToken gradleVariable = createToken(GRADLE_VARIABLE);
-		IToken gradleLinkKeyWord = createToken(GRADLE_LINK_KEYWORD);
+		IToken gradleApplyKeyWord = createToken(GRADLE_APPLY_KEYWORD);
 		IToken gradleTaskKeyWord = createToken(GRADLE_TASK_KEYWORD);
 
 		List<IPredicateRule> rules = new ArrayList<>();
@@ -62,7 +62,7 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 		rules.add(new MultiLineRule("\'", "\'", groovySimpleString));
 		
 		buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(),onlyLettersWordDetector);
-		buildWordRules(rules, gradleLinkKeyWord, GradleLinkKeyWords.values(),onlyLettersWordDetector);
+		buildWordRules(rules, gradleApplyKeyWord, GradleApplyKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, gradleTaskKeyWord, GradleTaskKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(),javaWordDetector);
 		buildWordRules(rules, javaKeyWord, JavaKeyWords.values(),javaWordDetector);

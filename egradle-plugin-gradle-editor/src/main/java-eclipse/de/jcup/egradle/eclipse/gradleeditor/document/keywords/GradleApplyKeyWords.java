@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
-public enum GradleLinkKeyWords implements DocumentKeyWord {
+public enum GradleApplyKeyWords implements DocumentKeyWord {
 
 	APPLY_FROM("apply from"),
 	
@@ -25,7 +25,7 @@ public enum GradleLinkKeyWords implements DocumentKeyWord {
 
 	private String text;
 
-	private GradleLinkKeyWords(String text) {
+	private GradleApplyKeyWords(String text) {
 		this.text = text;
 	}
 

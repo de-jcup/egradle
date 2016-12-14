@@ -15,40 +15,95 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  *
  */
 
-
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
 public class GradleEditorPreferences {
-	
 
 	public static GradleEditorPreferences EDITOR_PREFERENCES = new GradleEditorPreferences();
 	private IPreferenceStore store;
 
 	GradleEditorPreferences() {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
+		store.addPropertyChangeListener(new IPropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event==null){
+					return;
+				}
+				String property = event.getProperty();
+				if (property==null){
+					return;
+				}
+				boolean colorChanged = false;
+				for (GradleEditorSyntaxColorPreferenceConstants c: GradleEditorSyntaxColorPreferenceConstants.values()){
+					if (property.equals(c.getId())){
+						colorChanged=true;
+						break;
+					}
+				}
+				if (colorChanged){
+					updateColorsInEGradleEditors();
+				}
+				
+				
+			}
+
+			private void updateColorsInEGradleEditors() {
+				/* inform all EGradle editors about color changes*/
+				IWorkbenchPage activePage = EGradleUtil.getActivePage();
+				if (activePage==null){
+					return;
+				}
+				IEditorReference[] references = activePage.getEditorReferences();
+				for (IEditorReference ref: references){
+					IEditorPart editor = ref.getEditor(false);
+					if (editor==null){
+						continue;
+					}
+					if (! (editor instanceof GradleEditor)){
+						continue;
+					}
+					GradleEditor geditor = (GradleEditor) editor;
+					geditor.handleColorSettingsChanged();
+				}
+			}
+		});
+			
 	}
 
 	public String getStringPreference(GradleEditorPreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
-		if (data==null){
-			data="";
+		if (data == null) {
+			data = "";
 		}
 		return data;
 	}
-	
+
 	public boolean getBooleanPreference(GradleEditorPreferenceConstants id) {
 		boolean data = getPreferenceStore().getBoolean(id.getId());
 		return data;
 	}
-	
-	public void setBooleanPreference(GradleEditorPreferenceConstants id, boolean value){
-		getPreferenceStore().setValue(id.getId(),value);
+
+	public void setBooleanPreference(GradleEditorPreferenceConstants id, boolean value) {
+		getPreferenceStore().setValue(id.getId(), value);
 	}
-	
+
 	public IPreferenceStore getPreferenceStore() {
 		return store;
 	}
@@ -56,5 +111,14 @@ public class GradleEditorPreferences {
 	public boolean getDefaultBooleanPreference(GradleEditorPreferenceConstants id) {
 		boolean data = getPreferenceStore().getDefaultBoolean(id.getId());
 		return data;
+	}
+
+	public RGB getColor(PreferenceIdentifiable identifiable) {
+		RGB color = PreferenceConverter.getColor(getPreferenceStore(), identifiable.getId());
+		return color;
+	}
+
+	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color) {
+		PreferenceConverter.setDefault(getPreferenceStore(), identifiable.getId(), color);
 	}
 }

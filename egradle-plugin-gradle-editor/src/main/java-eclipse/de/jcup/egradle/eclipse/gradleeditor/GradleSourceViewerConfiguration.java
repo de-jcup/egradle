@@ -15,6 +15,9 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
@@ -39,11 +42,14 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
+
 //	private GradleEditorDoubleClickStrategy doubleClickStrategy;
 	private GradleDefaultTextScanner gradleScanner;
 	private ColorManager colorManager;
@@ -62,7 +68,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		this.annotationHoover=new GradleEditorAnnotationHoover();
 		this.colorManager = adaptable.getAdapter(ColorManager.class);
 		Assert.isNotNull(colorManager," adaptable must support color manager");
-		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(GradleEditorColorConstants.BLACK));
+		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT)));
 	}
 
 	@Override
@@ -117,22 +123,22 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		addDefaultPresentation(reconciler);
 
-		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(), GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_JAVA_KEYWORD),SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GROOVY_KEYWORD),SWT.BOLD);
 		// Groovy provides different strings: simple and GStrings, so we use separate colors:
-		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(), GradleEditorColorConstants.STRING_DEFAULT_BLUE,SWT.NONE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GSTRING.getId(), GradleEditorColorConstants.ROYALBLUE,SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(), EDITOR_PREFERENCES.getColor(COLOR_NORMAL_STRING),SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GSTRING.getId(), EDITOR_PREFERENCES.getColor(COLOR_GSTRING),SWT.NONE);
 		
-		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), GradleEditorColorConstants.COMMENT_DEFAULT_GREEN,SWT.NONE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_LINK_KEYWORD.getId(), GradleEditorColorConstants.LINK_DEFAULT_BLUE,SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), GradleEditorColorConstants.TASK_DEFAULT_RED,SWT.BOLD|SWT.ITALIC);
+		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), EDITOR_PREFERENCES.getColor(COLOR_COMMENT),SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_APPLY_KEYWORD),SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_KEYWORD),SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_TASK_KEYWORD),SWT.BOLD|SWT.ITALIC);
 		
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), GradleEditorColorConstants.DARK_GRAY,SWT.ITALIC);
-		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(), GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE,SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_VARIABLE),SWT.ITALIC);
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(),  EDITOR_PREFERENCES.getColor(COLOR_JAVA_LITERAL),SWT.BOLD);
 		return reconciler;
 	}
-
+	
 	private void addDefaultPresentation(PresentationReconciler reconciler) {
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getGradleDefaultTextScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
@@ -154,9 +160,17 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private GradleDefaultTextScanner getGradleDefaultTextScanner() {
 		if (gradleScanner == null) {
 			gradleScanner = new GradleDefaultTextScanner(colorManager);
-			gradleScanner.setDefaultReturnToken(createColorToken(GradleEditorColorConstants.BLACK));
+			updateTextScannerDefaultColorToken();
 		}
 		return gradleScanner;
+	}
+
+	public void updateTextScannerDefaultColorToken() {
+		if (gradleScanner==null){
+			return;
+		}
+		RGB color = EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT);
+		gradleScanner.setDefaultReturnToken(createColorToken(color));
 	}
 
 }

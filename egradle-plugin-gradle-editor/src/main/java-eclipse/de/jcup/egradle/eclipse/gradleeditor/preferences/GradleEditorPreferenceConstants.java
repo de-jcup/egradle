@@ -1,4 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor.preferences;
+
+import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
+
 /*
  * Copyright 2016 Albert Tregnaghi
  *
@@ -19,7 +22,7 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 /**
  * Constant definitions for plug-in preferences
  */
-public enum GradleEditorPreferenceConstants {
+public enum GradleEditorPreferenceConstants implements PreferenceIdentifiable{
 	
 	/**
 	 * Tasks which are executed on test
@@ -29,7 +32,8 @@ public enum GradleEditorPreferenceConstants {
 	P_EDITOR_MATCHING_BRACKETS_ENABLED("matchingBrackets"),
 	P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION("highlightBracketAtCaretLocation"),
 	P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
-	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor");
+	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor"),
+	;
 
 	private String id;
 
