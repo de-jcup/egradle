@@ -15,28 +15,34 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor.document;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
-import org.eclipse.jface.text.rules.FastPartitioner;
-import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 
-public class GradleDocumentProvider extends FileDocumentProvider {
+/**
+ * Document provider for files outside of workspace
+ * 
+ * @author albert
+ *
+ */
+public class GradleTextFileDocumentProvider extends TextFileDocumentProvider {
 
 	@Override
-	protected IDocument createDocument(Object element) throws CoreException {
-		IDocument document = super.createDocument(element);
-		if (document != null) {
-			
-			String[] legalContentTypes = GradleDocumentIdentifiers.allIdsToStringArray();
-
-			GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
-			IDocumentPartitioner partitioner = new FastPartitioner(scanner, legalContentTypes);
-
-			partitioner.connect(document);
-			document.setDocumentPartitioner(partitioner);
+	public IDocument getDocument(Object element) {
+		IDocument document = super.getDocument(element);
+		if (document == null) {
+			return null;
 		}
+		IDocumentPartitioner formerPartitioner = document.getDocumentPartitioner();
+		if (formerPartitioner instanceof GradlePartitioner) {
+			return document;
+		}
+		/* installation necessary */
+		IDocumentPartitioner partitioner = GradlePartionerFactory.create();
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
+		
 		return document;
 	}
-	
+
 }

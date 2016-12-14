@@ -21,8 +21,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.Icon;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -47,9 +45,10 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.ide.FileStoreEditorInput;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -59,7 +58,8 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentProvider;
+import de.jcup.egradle.eclipse.gradleeditor.document.GradleFileDocumentProvider;
+import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
@@ -92,8 +92,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
-		setDocumentProvider(new GradleDocumentProvider());
-
+		
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
@@ -277,12 +276,25 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
+		setDocumentProvider(createDocumentProvider(input));
 		super.doSetInput(input);
 		IDocument document = getDocument();
+		if (document==null){
+			EGradleUtil.logWarning("No document available for given input:"+input);
+			return;
+		}
 		document.addDocumentListener(documentListener);
 		outlinePage.inputChanged(document);
 	}
 
+	private IDocumentProvider createDocumentProvider(IEditorInput input) {
+		 if(input instanceof FileStoreEditorInput){
+	        return new GradleTextFileDocumentProvider();
+	    } else {
+	        return new GradleFileDocumentProvider();
+	    }
+	}
+	
 	public IDocument getDocument() {
 		return getDocumentProvider().getDocument(getEditorInput());
 	}
