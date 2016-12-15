@@ -66,7 +66,7 @@ public class EGradleMessageDialogSupport {
 					path="icons/gradle-script-failure.png";
 				}
 				Image backgroundImage = EGradleUtil.getImage(path);
-				Image titleImage = EGradleUtil.getImage("icons/gradle-og.gif");
+				Image titleImage = EGradleUtil.getImage("icons/gradle-og.png");
 				
 				Shell shell = getActiveWorkbenchShell();
 				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);

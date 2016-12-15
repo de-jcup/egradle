@@ -115,7 +115,7 @@ public class BuildFailedDialog extends Dialog {
 	public static void main(String[] args) {
 		Display display = new Display();
 		Image backgroundImage = new Image(display, "./icons/gradle-build-failed.png");
-		Image titleImage = new Image(display, "./icons/gradle-og.gif");
+		Image titleImage = new Image(display, "./icons/gradle-og.png");
 		Shell shell = new Shell(display);
 		shell.setText("Shell");
 		shell.setSize(200, 200);

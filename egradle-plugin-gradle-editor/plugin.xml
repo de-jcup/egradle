@@ -9,7 +9,7 @@
       <editor
       		name="EGradle Editor"
             extensions="gradle"
-            icon="icons/gradle-og.gif"
+            icon="icons/gradle-og.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"
             id="egradle.editors.GradleEditor">

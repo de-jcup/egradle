@@ -273,7 +273,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 
 	@Override
 	public Image getImage() {
-		return EGradleUtil.getImage("icons/gradle-og.gif");
+		return EGradleUtil.getImage("icons/gradle-og.png");
 	}
 
 	@Override

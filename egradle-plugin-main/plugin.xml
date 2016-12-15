@@ -353,7 +353,7 @@
    <extension point="org.eclipse.ui.console.consoleFactories">
 	   <consoleFactory
 	         class="de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory"
-	         icon="icons/gradle-og.gif"
+	         icon="icons/gradle-og.png"
 	         label="EGradle System Console">
 	   </consoleFactory>
    </extension>
@@ -398,7 +398,7 @@
 	  <launchConfigurationTypeImage
 	     id="de.jcup.egradle.launchConfigurationTypeImage"
 	     configTypeID="de.jcup.egradle.launchConfigurationType"
-	     icon="icons/gradle-og.gif">
+	     icon="icons/gradle-og.png">
 	  </launchConfigurationTypeImage>
  	</extension>
  	<!-- launch shortcuts for Run...as ... -->
@@ -407,7 +407,7 @@
         id="de.jcup.egradle.eGradleLaunchShortcut"
         class="de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut"
         label="EGradle"
-        icon="icons/gradle-og.gif"
+        icon="icons/gradle-og.png"
         modes="run">
             <contextualLaunch>
             
@@ -437,7 +437,7 @@
 			id = "de.jcup.egradle.launchGroup"
 			mode = "run"
 			label = "EGradle"
-			image = "icons/gradle-og.gif"
+			image = "icons/gradle-og.png"
 			bannerImage = "icons/egradle-banner_128x128.png">
 		</launchGroup>
 		

@@ -288,7 +288,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	}
 
 	Image getValidationButtonImage() {
-		return EGradleUtil.getImage("icons/gradle-og.gif");
+		return EGradleUtil.getImage("icons/gradle-og.png");
 	}
 
 	private void setValid(boolean valid) {
