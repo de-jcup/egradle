@@ -19,9 +19,9 @@ import org.eclipse.swt.graphics.RGB;
 
 public interface GradleEditorColorConstants {
 	
-	public static final RGB DEFAULT_CARET_HIGHLIGHTING = rgb(192,192,192);//grey as in java
+	public static final RGB GRAY_JAVA = rgb(192,192,192);//grey as in java
 	
-	public static final RGB COMMENT_DEFAULT_GREEN = rgb(63, 127, 95); // green
+	public static final RGB GREEN_JAVA = rgb(63, 127, 95); // green
 																		// as
 																		// java
 																		// eclipse
@@ -58,6 +58,11 @@ public interface GradleEditorColorConstants {
 																	// java
 																	// outline
 																	// string
+	public static final RGB MIDDLE_GRAY = rgb(128,128,128);
+	public static final RGB MIDDLE_GREEN = rgb(0, 128, 0);
+	public static final RGB MIDDLE_BROWN = rgb(128, 128, 0);
+	public static final RGB MIDDLE_RED = rgb(128, 0, 0);
+	public static final RGB MIDDLE_ORANGE = rgb(255,128,64);
 
 	public static final RGB DARK_GREEN = rgb(0, 64, 0);
 	public static final RGB TASK_DEFAULT_RED = rgb(128, 0, 0);
@@ -70,6 +75,7 @@ public interface GradleEditorColorConstants {
 	public static final RGB MAGENTA = rgb(170, 0, 170);
 	public static final RGB CYANN = rgb(0, 170, 170);
 	public static final RGB GRAY = rgb(170, 170, 170);
+	public static final RGB DARK_THEME_GRAY = rgb(97, 97, 97);
 	public static final RGB DARK_GRAY = rgb(85, 85, 85);
 	public static final RGB BRIGHT_RED = rgb(255, 85, 85);
 	public static final RGB BRIGHT_GREEN = rgb(85, 255, 85);

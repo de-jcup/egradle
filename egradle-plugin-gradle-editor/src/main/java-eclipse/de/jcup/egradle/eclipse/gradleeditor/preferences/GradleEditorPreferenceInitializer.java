@@ -39,7 +39,7 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), false);
 		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), false);
 		/* bracket color */
-		EDITOR_PREFERENCES.setDefaultColor(P_EDITOR_MATCHING_BRACKETS_COLOR, GradleEditorColorConstants.DEFAULT_CARET_HIGHLIGHTING);
+		EDITOR_PREFERENCES.setDefaultColor(P_EDITOR_MATCHING_BRACKETS_COLOR, GradleEditorColorConstants.GRAY_JAVA);
 		
 		/* editor colors */
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_NORMAL_TEXT, GradleEditorColorConstants.BLACK);
@@ -48,16 +48,17 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GROOVY_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_NORMAL_STRING, GradleEditorColorConstants.STRING_DEFAULT_BLUE);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GSTRING, GradleEditorColorConstants.ROYALBLUE);
-		EDITOR_PREFERENCES.setDefaultColor(COLOR_COMMENT, GradleEditorColorConstants.COMMENT_DEFAULT_GREEN);
+		EDITOR_PREFERENCES.setDefaultColor(COLOR_COMMENT, GradleEditorColorConstants.GREEN_JAVA);
 		
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_APPLY_KEYWORD, GradleEditorColorConstants.LINK_DEFAULT_BLUE);
-		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
+		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_OTHER_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
 		
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_TASK_KEYWORD, GradleEditorColorConstants.TASK_DEFAULT_RED);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_VARIABLE, GradleEditorColorConstants.DARK_GRAY);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_JAVA_LITERAL, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
 		
 	}
+	
 	
 	
 }

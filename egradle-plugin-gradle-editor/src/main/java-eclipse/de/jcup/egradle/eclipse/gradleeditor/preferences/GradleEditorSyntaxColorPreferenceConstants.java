@@ -15,6 +15,8 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  *
  */
 
+import org.eclipse.swt.graphics.RGB;
+
 import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.api.PreferenceLabeled;
 
@@ -31,7 +33,7 @@ public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIden
 	COLOR_COMMENT("colorComments", "Comment"),
 	COLOR_GRADLE_APPLY_KEYWORD("colorApplyKeywords","Gradle apply keywords"),
 	COLOR_GRADLE_TASK_KEYWORD("colorGradleTaskKeywords","Gradle task keywords"),
-	COLOR_GRADLE_KEYWORD("colorGradleOtherKeywords","Gradle other  keywords"),
+	COLOR_GRADLE_OTHER_KEYWORD("colorGradleOtherKeywords","Gradle other  keywords"),
 	COLOR_GRADLE_VARIABLE("colorGradleVariables","Gradle variables"),
 	
 	;
@@ -50,5 +52,10 @@ public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIden
 	
 	public String getId() {
 		return id;
+	}
+
+	public RGB getDefaultThemeRGB() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
