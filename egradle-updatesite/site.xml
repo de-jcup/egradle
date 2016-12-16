@@ -15,6 +15,9 @@
    <feature url="features/de.jcup.egradle.eclipse.feature_1.1.4.jar" id="de.jcup.egradle.eclipse.feature" version="1.1.4">
       <category name="site.egradle.category.stable"/>
    </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_1.2.0.jar" id="de.jcup.egradle.eclipse.feature" version="1.2.0">
+      <category name="site.egradle.category.stable"/>
+   </feature>
    <category-def name="site.egradle.category.beta" label="EGradle Beta Versions">
       <description>
          Beta versions of EGradle
