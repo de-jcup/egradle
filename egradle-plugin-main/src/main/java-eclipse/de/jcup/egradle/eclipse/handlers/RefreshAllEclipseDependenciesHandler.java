@@ -46,5 +46,6 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 		ui.setShowEGradleSystemConsole(true);
 		return ui;
 	}
+	
 
 }

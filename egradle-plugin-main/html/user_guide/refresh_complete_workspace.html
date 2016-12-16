@@ -10,13 +10,23 @@
 	<img src="./../images/egradle-banner_128x128.png" />
 	<a href="../user_guide.html">User guide</a>
 	<h1>Refresh complete workspace</h1>
-	Will call "bash gradlew cleanEclipse eclipse" inside your configured
-	gradle multiproject. After execution all eclipse projects will be
-	refreshed automatically.
-	<br>
+	<p>When you want to refresh eclipse dependencies, simply click on
+		the red marked button:</p>
 	<img src="images/egradle-refresh-eclipse.png" />
+	<p>This will
+	<ul>
+		<li>Call "cleanEclipse eclipse" task inside your configured
+			gradle root project.</li>
+		<li>Refresh all eclipse projects</li>
+		<li>Gradle build folders are automatically derived if <a href="filehandling.html#automatically_derive_buildfolders">derive
+				feature</a> is enabled in preferences
+	</ul>
+	</p>
+
+	<br>
+	<br>
+	<p>
+		<a href="#top">Top</a>
+	</p>
 </body>
-<p>
-	<a href="#top">Top</a>
-</p>
 </html>

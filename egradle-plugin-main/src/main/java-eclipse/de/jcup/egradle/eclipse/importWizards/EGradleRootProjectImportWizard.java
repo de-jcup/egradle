@@ -45,6 +45,7 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
+import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 
@@ -58,9 +59,10 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	private String gradleInstallPath;
 	private EGradleShellType shell;
 	private String callTypeId;
+	private AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler;
 
 	public EGradleRootProjectImportWizard() {
-		
+		automaticalDeriveBuildFoldersHandler = new AutomaticalDeriveBuildFoldersHandler();
 	}
 
 	/**
@@ -208,6 +210,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 				importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
 				IProject project = getResourceHelper().importProject(folder, monitor);
 				project.open(monitor);
+				automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
 				monitor.worked(++worked);
 			}
 

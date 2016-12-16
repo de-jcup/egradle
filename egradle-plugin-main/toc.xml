@@ -23,6 +23,8 @@
   <topic href="html/user_guide/editor.html" label="Editor">
   </topic> 
   <topic href="html/user_guide/validation.html" label="Validation">
+  </topic>
+  <topic href="html/user_guide/filehandling.html" label="File handling">
   </topic> 
 	</topic>
 </toc>

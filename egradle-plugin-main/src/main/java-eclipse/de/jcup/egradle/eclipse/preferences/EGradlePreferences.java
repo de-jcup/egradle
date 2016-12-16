@@ -26,7 +26,7 @@ import de.jcup.egradle.eclipse.Activator;
 
 public class EGradlePreferences {
 	
-	public static EGradlePreferences INSTANCE = new EGradlePreferences();
+	public static EGradlePreferences EGRADLE_IDE_PREFERENCES = new EGradlePreferences();
 	
 	private IPreferenceStore store;
 
@@ -49,6 +49,11 @@ public class EGradlePreferences {
 	public boolean isOutputValidationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
+	}
+	
+	public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
+		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore().getBoolean(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
+		return automaticallyDeriveBuildFoldersEnabled;
 	}
 	
 	public boolean isSubProjectIconDecorationEnabled() {
@@ -106,5 +111,7 @@ public class EGradlePreferences {
 	public void setGradleCallTypeID(String callTypeId) {
 		getPreferenceStore().setValue(P_GRADLE_CALL_TYPE.getId(), callTypeId);
 	}
+
+	
 	
 }

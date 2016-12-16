@@ -339,6 +339,12 @@
          name="Decoration"
          category="egradle.preferences.EGradlePreferencePage">
       </page>
+       <page
+         id="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
+         class="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
+         name="File handling"
+         category="egradle.preferences.EGradlePreferencePage">
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">

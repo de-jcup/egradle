@@ -74,6 +74,7 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
+import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
@@ -111,7 +112,7 @@ public class EGradleUtil {
 	 * @return egradle preferences, never <code>null</code>
 	 */
 	public static EGradlePreferences getPreferences() {
-		return EGradlePreferences.INSTANCE;
+		return EGradlePreferences.EGRADLE_IDE_PREFERENCES;
 	}
 
 	public static EGradleMessageDialogSupport getDialogSupport() {
@@ -590,7 +591,7 @@ public class EGradleUtil {
 		if (! folder.isDirectory()){
 			throwCoreException("new root folder must be a directory, but is not :\n"+folder.getAbsolutePath());
 		}
-		EGradlePreferences.INSTANCE.setRootProjectPath(folder.getAbsolutePath());
+		EGradlePreferences.EGRADLE_IDE_PREFERENCES.setRootProjectPath(folder.getAbsolutePath());
 		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 		try {
@@ -640,14 +641,15 @@ public class EGradleUtil {
 
 	}
 
-	public static void refreshAllProjects() {
-		refreshAllProjects(null);
-	}
-
+	/**
+	 * Does a refresh to projects. If enabled build folders are automatically derived
+	 * @param monitor
+	 */
 	public static void refreshAllProjects(IProgressMonitor monitor) {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
+		AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler = new AutomaticalDeriveBuildFoldersHandler();
 		outputToSystemConsole("start refreshing all projects");
 		IProject[] projects = getAllProjects();
 		for (IProject project : projects) {
@@ -658,6 +660,9 @@ public class EGradleUtil {
 				String text = "refreshing project " + project.getName();
 				monitor.subTask(text);
 				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				
+				automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
+				
 			} catch (CoreException e) {
 				log(e);
 				outputToSystemConsole(Constants.CONSOLE_FAILED + " to refresh project " + project.getName());

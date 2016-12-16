@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EGradle refresh complete workspace</title>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner_128x128.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>File handling</h1>
+	<h2 id="automatically_derive_buildfolders">Automatically derive build folders</h2>
+	<p>Inside file handling preferences you can turn on the automatical derive of builder folders - it's turned off per default:</p>
+	<img src="images/eclipse-filehandling-preferences.png" />
+	<h3>Example</h3>
+	<h4>Build folders not set to "derived"</h4>
+	<p>When you have not enabled the feature, you will have build resources inside search results and
+	also inside your "Open Resource" dialog appearing (see next picture). Sometimes this is very
+	inconvenient, e.g. when you accidently edit a HTML file in build instead of source...<p>
+	<img src="images/eclipse-filehandling-auto-derive-off.png" />
+	<h4>Build folders automatically set to "derived"</h4>
+	<p>By enabling the feature in preferences, every call of <a href="refresh_complete_workspace.html">Refresh eclipse dependencies</a> and also
+	<a href="import.html">EGradle imports</a> will automatically set gradle build folders as "derived" which will
+	change the results:</p>
+	<img src="images/eclipse-filehandling-auto-derive-on.png" />
+	<h4>How does it work / how can I change this to former behaviour?"</h4>
+	<p>EGradle does only set "derived" to gradle build folders. You could change this in folder properties manually:</p>
+	<img src="images/eclipse-filehandling-auto-derive-on-resource-build-folder.png"/>
+	<br>
+	<br>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>
