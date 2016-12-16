@@ -46,6 +46,11 @@ public class EGradlePreferences {
 		return store;
 	}
 
+	public boolean isShowingConsoleOnBuildFailed() {
+		boolean showConsoleOnBuildFailed = getPreferenceStore().getBoolean(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());
+		return showConsoleOnBuildFailed;
+	}
+	
 	public boolean isOutputValidationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
@@ -111,6 +116,8 @@ public class EGradlePreferences {
 	public void setGradleCallTypeID(String callTypeId) {
 		getPreferenceStore().setValue(P_GRADLE_CALL_TYPE.getId(), callTypeId);
 	}
+
+	
 
 	
 	

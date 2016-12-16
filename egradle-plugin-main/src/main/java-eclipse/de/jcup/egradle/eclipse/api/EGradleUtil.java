@@ -53,6 +53,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
@@ -187,6 +188,9 @@ public class EGradleUtil {
 	 * @return active page or <code>null</code>
 	 */
 	public static IWorkbenchPage getActivePage() {
+		if (! PlatformUI.isWorkbenchRunning()){
+			return null;
+		}
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window == null) {
 			return null;
@@ -195,6 +199,9 @@ public class EGradleUtil {
 	}
 
 	public static Shell getActiveWorkbenchShell() {
+		if (! PlatformUI.isWorkbenchRunning()){
+			return null;
+		}
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		Shell shell = null;
 		if (window != null) {
@@ -783,6 +790,18 @@ public class EGradleUtil {
 
 	public static ImageDescriptor createSharedImageDescriptor(String id) {
 		return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(id);
+	}
+
+	public static void showConsoleView() {
+		IWorkbenchPage activePage = getActivePage();
+		if (activePage!=null){
+			try {
+				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
+			} catch (PartInitException e) {
+				logWarning("Was not able to show console");
+			}
+			
+		}
 	}
 
 }

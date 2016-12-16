@@ -42,6 +42,7 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
@@ -167,11 +168,14 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 			Result result = executeGradleEclipse(rootProject, monitor);
 			if (!result.isOkay()) {
+				
+				EGradleUtil.openSystemConsole();
+				
 				/*
 				 * UNDO !
 				 */
 				getDialogSupport()
-						.showError("Was not able to execute 'gradle eclipse'. Look into gradle system console for more details.\n\n"
+						.showError("Was not able to execute 'gradle eclipse'. Look into opened gradle system console for more details.\n\n"
 								+ "Will now UNDO former actions!\n\n"
 								+ "Please check your settings are correct in egradle preferences.\n"
 								+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"

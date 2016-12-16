@@ -37,6 +37,7 @@ public class EGradlePreferenceInitializer extends AbstractPreferenceInitializer 
 		}
 		store.setDefault(P_OUTPUT_VALIDATION_ENABLED.getId(), true);
 		store.setDefault(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), false);
+		store.setDefault(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(), true);
 		store.setDefault(P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(), true);
 
 		store.setDefault(P_GRADLE_CALL_TYPE.getId(),defaultCallType.getId());

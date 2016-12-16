@@ -25,6 +25,7 @@ public enum EGradlePreferenceConstants {
 	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
 	P_GRADLE_CALL_COMMAND("commandGradle"),
 	P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
+	P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 	P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
 	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
 
