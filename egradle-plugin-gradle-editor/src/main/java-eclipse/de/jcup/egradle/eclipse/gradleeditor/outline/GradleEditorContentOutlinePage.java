@@ -85,8 +85,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			viewer.setInput(input);
 		}
 
-		ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
-		ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
 		CollapseAllAction collapseAllAction = new CollapseAllAction();
 		ExpandAllAction expandAllAction = new ExpandAllAction();
 		toggleLinkingAction = new ToggleLinkingAction();
@@ -100,9 +98,16 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
+		
 		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS){
+
+			ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
+			ShowGradleOutlineUnfilteredAction showGradleOutlineUnfilteredAction = new ShowGradleOutlineUnfilteredAction();
+			ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
+			
 			viewMenuManager.add(showGroovyFullAntlrModelAction);
 			viewMenuManager.add(showGradleOutlineModelAction);
+			viewMenuManager.add(showGradleOutlineUnfilteredAction);
 		}
 		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
 		viewMenuManager.add(expandAllAction);
@@ -214,6 +219,34 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 	}
 
+	private class ToggleLinkingAction extends Action {
+		
+	
+		private ToggleLinkingAction() {
+			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
+			setDescription("link with editor");
+			initImage();
+			initText();
+		}
+	
+		@Override
+		public void run() {
+			linkingWithEditorEnabled = !linkingWithEditorEnabled;
+			
+			initText();
+			initImage();
+		}
+	
+		private void initImage() {
+			setImageDescriptor(linkingWithEditorEnabled ? IMG_DESC_LINKED : IMG_DESC_NOT_LINKED);
+		}
+	
+		private void initText() {
+			setText(linkingWithEditorEnabled ? "Click to unlink from editor" : "Click to link with editor");
+		}
+	
+	}
+
 	private class ShowGroovyFullAntlrModelAction extends ChangeModelTypeAction {
 
 		@Override
@@ -223,40 +256,21 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 	}
 	
-
-	private class ToggleLinkingAction extends Action {
-		
-
-		private ToggleLinkingAction() {
-			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
-			setDescription("link with editor");
-			initImage();
-			initText();
-		}
-
-		@Override
-		public void run() {
-			linkingWithEditorEnabled = !linkingWithEditorEnabled;
-			
-			initText();
-			initImage();
-		}
-
-		private void initImage() {
-			setImageDescriptor(linkingWithEditorEnabled ? IMG_DESC_LINKED : IMG_DESC_NOT_LINKED);
-		}
-
-		private void initText() {
-			setText(linkingWithEditorEnabled ? "Click to unlink from editor" : "Click to link with editor");
-		}
-
-	}
-
 	private class ShowGradleOutlineModelAction extends ChangeModelTypeAction {
 
 		@Override
 		protected ModelType changeTo() {
 			return ModelType.GRADLE;
+		}
+
+	}
+	
+
+	private class ShowGradleOutlineUnfilteredAction extends ChangeModelTypeAction {
+
+		@Override
+		protected ModelType changeTo() {
+			return ModelType.GRADLE__UNFILTERED;
 		}
 
 	}

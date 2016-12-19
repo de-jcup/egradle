@@ -182,7 +182,7 @@ class GradleModelBuilderSupport {
 	
 			AST firstChild = ast.getFirstChild();
 			if (GroovyTokenTypes.EXPR == type) {
-				return resolveName(firstChild);
+				return resolveExpressionName(ast);
 			} else if (GroovyTokenTypes.SL == type) {
 				return resolveStringOfFirstChildAndSiblings(ast) + " <<";
 			} else if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
@@ -212,6 +212,11 @@ class GradleModelBuilderSupport {
 			}
 		}
 		return ast.toString();
+	}
+
+	private String resolveExpressionName(AST firstChild) {
+		String x = resolveStringOfFirstChildAndSiblings(firstChild);
+		return x;
 	}
 
 	String resolveStringOfFirstChildAndSiblings(AST ast) {
@@ -344,7 +349,9 @@ class GradleModelBuilderSupport {
 		if (ast == null) {
 			return;
 		}
-		if (ast.getType() == GroovyTokenTypes.SL) {
+		if (ast.getType()==GroovyTokenTypes.ELIST){
+			appendELISTParts(sb, ast);
+		}else if (ast.getType() == GroovyTokenTypes.SL) {
 	
 		} else if (ast.getType() == GroovyTokenTypes.DOT) {
 			/* is dot */
@@ -371,13 +378,18 @@ class GradleModelBuilderSupport {
 					}
 					if (next.getType()==GroovyTokenTypes.ELIST){
 						sb.append(" ");
-						sb.append(resolveAsSimpleString(next.getFirstChild()));
+						appendELISTParts(sb, next);
 					}
 				}
 			}
 	
 		}
 	
+	}
+
+	private void appendELISTParts(StringBuilder sb, AST next) {
+		AST firstChild = next.getFirstChild();
+		sb.append(resolveAsSimpleString(firstChild));
 	}
 
 	Item createItem(Context context, AST ast) {
@@ -403,6 +415,47 @@ class GradleModelBuilderSupport {
 			item.setLength(1);
 		}
 		return item;
+	}
+
+	/**
+	 * Resolve name from given object<br><br>
+	 * <pre>
+	 * configure{} -> "configure"
+	 * configure('bla') {} ->"configure('bla')
+	 * configure(){} -> "configure"
+	 * </pre>
+	 * @param methodCall
+	 * @return name
+	 */
+	String resolveMethodCallName(AST methodCall) {
+		if (GroovyTokenTypes.METHOD_CALL != methodCall.getType()) {
+			return "<no method call/>";
+		}
+		StringBuilder sb = new StringBuilder();
+		
+		String methodParams = null;
+		
+		AST firstChild = methodCall.getFirstChild();
+		if (firstChild==null){
+			return sb.toString();
+		}
+		String methodName = firstChild.getText();
+		if (methodName==null){
+			methodName="<noMethodName/>";
+		}
+		AST next = firstChild.getNextSibling();
+		if (next!=null){
+			if (next.getType()!=CLOSABLE_BLOCK){
+				methodParams = resolveName(next);
+			}
+		}
+		sb.append(methodName);
+		if (methodParams!=null) {
+			sb.append("(");
+			sb.append(methodParams);
+			sb.append(")");
+		}
+		return sb.toString();
 	}
 
 

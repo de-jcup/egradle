@@ -31,8 +31,6 @@ import de.jcup.egradle.core.api.MultiFilter;
 import de.jcup.egradle.core.model.BuildContext;
 import de.jcup.egradle.core.model.Error;
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.core.model.ItemFilter;
-import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
@@ -148,7 +146,10 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				elements = buildGroovyASTModel(charset, is);
 				break;
 			case GRADLE:
-				elements = buildGradleModel(charset, is);
+				elements = buildGradleModel(charset, is,true);
+				break;
+			case GRADLE__UNFILTERED:
+				elements = buildGradleModel(charset, is,false);
 				break;
 			default:
 				elements = new Object[] { modelType + " not supported as modeltype!" };
@@ -204,10 +205,12 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		return elements;
 	}
 
-	private Object[] buildGradleModel(String charset, InputStream is) throws Exception {
+	private Object[] buildGradleModel(String charset, InputStream is,boolean filteringEnabled) throws Exception {
 		GradleModelBuilder builder = new GradleModelBuilder(is);
-		builder.setPreCreationFilter(getFilter());
-		builder.setPostCreationFilter(GRADLE_FILTER);
+		if (filteringEnabled){
+			builder.setPreCreationFilter(getFilter());
+			builder.setPostCreationFilter(GRADLE_FILTER);
+		}
 
 		BuildContext context = new BuildContext();
 		Object[] elements = createModelAndGetRootElements(context, builder);
@@ -298,24 +301,12 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 
 	public enum ModelType {
 		GRADLE,
+		
+		/* debug variants:*/
 
-		GROOVY_FULL_ANTLR,
-
-	}
-
-	private static class GradleOutlineItemFilter implements ItemFilter {
-
-		@Override
-		public boolean isFiltered(Item item) {
-			/*
-			 * we do not show item which are remaining as METHOD_CALL will not
-			 * be shown in outline
-			 */
-			if (ItemType.METHOD_CALL == item.getItemType()) {
-				return true;
-			}
-			return false;
-		}
+		GROOVY_FULL_ANTLR, 
+		
+		GRADLE__UNFILTERED,
 
 	}
 

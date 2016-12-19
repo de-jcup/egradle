@@ -385,12 +385,10 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (ename == null) {
 			return null;
 		}
-		AST astForName = methodChild;
-		String enameString = support.resolveName(astForName);
+		String enameString = support.resolveMethodCallName(methodCall);
 		if (enameString == null) {
 			return null;
 		}
-
 		ItemType outlineType = null;
 		if (methodCall.getType() == METHOD_CALL) {
 
@@ -412,21 +410,41 @@ public class GradleModelBuilder implements ModelBuilder {
 		item.setName(enameString);
 		item.setClosed(true);
 
+		/* 
+		 * FIXME ATR: think about removing this block (exeption dependency). could all be done with method cal !??!
+		 * (after this the item types should be changed of course)
+		 * 
+		 */
 		AST lastAst = ename.getNextSibling();
 		if ("task".equals(enameString) || enameString.startsWith("task ")) {
 			item.setItemType(ItemType.TASK);
 			lastAst = support.handleTaskClosure(enameString, item, lastAst);
-		} else if (enameString.startsWith("tasks.")) {
+		} else if (enameString.startsWith("xtasks.")) {
 			item.setItemType(ItemType.TASKS);
-		} else if (enameString.equals("apply") || enameString.startsWith("apply ")) {
+		} else if (enameString.startsWith("apply(")) {
 			item.setItemType(ItemType.APPLY_SETUP);
 			support.handleApplyType(item, lastAst);
-		}
-		if (outlineType == ItemType.DEPENDENCY) {
+		}else if (outlineType == ItemType.DEPENDENCY) {
 			return support.handleDependencyAndReturnItem(methodCall, item);
-		}
-		if (outlineType == ItemType.REPOSITORY) {
+		}else if (outlineType == ItemType.REPOSITORY) {
 			return item;
+		}else if (outlineType == ItemType.METHOD_CALL){
+			if (methodCall.getFirstChild()!=null){
+				boolean methodCallHandled=false;
+				/* ( child*/
+				AST m1 = methodCall.getFirstChild();
+				AST m2 = m1.getNextSibling();
+				if (!methodCallHandled){
+					while (m2!=null){
+						m2 = m1.getNextSibling();
+						if (m2!=null){
+							m1 = m2;
+						}
+					}
+					/* child ){*/
+					lastAst=m1;
+				}
+			}
 		}
 		if (lastAst != null) {
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
