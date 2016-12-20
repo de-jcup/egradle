@@ -37,6 +37,8 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		implements IStyledLabelProvider, IColorProvider {
 
 	private static final String ICON_ALL_PROJECTS = "prj_mode.png";
+	private static final String ICON_PROJECT = "prj_obj.png";
+	private static final String ICON_ECLIPSE = "eclipse16.png";
 	private static final String ICON_APPLY_FROM_PNG = "apply_from.png";
 	private static final String ICON_APPLY_PLUGIN_PNG = "plugins.png";
 	private static final String ICON_BUILDSCRIPT = "cheatsheet_item_obj.png";
@@ -47,12 +49,13 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_CONFIGURATIONS = "th_single.png";
 	private static final String ICON_DEPENDENCIES = "module_view.png";
 	private static final String ICON_DEPENDENCY = "imp_obj.png";
+	private static final String ICON_ASSIGNMENT = "assignment.png";
 	private static final String ICON_DO_FIRST = "doFirst.png";
 	private static final String ICON_DO_LAST = "doLast.png";
 	private static final String ICON_PACKAGE = "package_obj.png";
 	private static final String ICON_PRIVATE_CO_PNG = "private_co.png";
 	private static final String ICON_PROTECTED_CO_PNG = "protected_co.png";
-	// private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
+//	private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
 	private static final String ICON_PUBLIC_CO_PNG = "public_co.png";
 	
 	/* fields */
@@ -124,6 +127,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 			Modifier modifier = item.getModifier();
 			String path = null;
 			switch (type) {
+			case ASSIGNMENT:
+				path =  ICON_ASSIGNMENT;
+				return getOutlineImage(path);
 			case VARIABLE:
 				switch (modifier) {
 				case PRIVATE:
@@ -178,6 +184,10 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return getOutlineImage(ICON_ALL_PROJECTS);
 			case SUB_PROJECTS:
 				return getOutlineImage(ICON_SUB_PROJECTS);
+			case PROJECT:
+				return getOutlineImage(ICON_PROJECT);
+			case ECLIPSE:
+				return getOutlineImage(ICON_ECLIPSE);
 			case DEPENDENCIES:
 				return getOutlineImage(ICON_DEPENDENCIES);
 			case DEPENDENCY:

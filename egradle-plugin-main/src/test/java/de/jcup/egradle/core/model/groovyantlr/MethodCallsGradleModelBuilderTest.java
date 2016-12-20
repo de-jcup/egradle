@@ -50,7 +50,7 @@ public class MethodCallsGradleModelBuilderTest {
 		assertEquals(1, items.length);
 		Item configure = items[0];
 		assertEquals(ItemType.CLOSURE, configure.getItemType());
-		assertEquals("configure(subprojects.findAll(IS_PLUGIN))", configure.getName());
+		assertEquals("configure subprojects.findAll(IS_PLUGIN)", configure.getName());
 
 		Item[] configChildren = configure.getChildren();
 		assertEquals(3, configChildren.length);

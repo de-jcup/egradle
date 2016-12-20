@@ -19,6 +19,9 @@ public enum ItemType {
 	UNKNOWN,
 
 	VARIABLE, 
+
+	/* nearly same as a variable but has no modifiers*/
+	ASSIGNMENT, 
 	
 	CLOSURE, 
 	
@@ -41,6 +44,8 @@ public enum ItemType {
 	
 	SUB_PROJECTS, 
 	
+	PROJECT,
+	
 	DEPENDENCIES, 
 	
 	DEPENDENCY, 
@@ -59,6 +64,8 @@ public enum ItemType {
 	
 	REPOSITORY, 
 	
+	ECLIPSE, 
+
 	CLASS, 
 
 	JAR, 
@@ -75,5 +82,7 @@ public enum ItemType {
 	 * A method (defintion)
 	 */
 	METHOD, 
+	
+	
 	
 }

@@ -24,7 +24,6 @@ import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
-import org.junit.FixMethodOrder;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -137,6 +136,14 @@ public class GradleModelBuilder implements ModelBuilder {
 		return model;
 	}
 
+	/**
+	 * Method itself will NOT look into children - so no recursion hell triggering... Only next sibling is resolved and tried to build as item!
+	 * So build method should not handle to next sibling parts!
+	 * @param context
+	 * @param parent
+	 * @param current
+	 * @throws ModelBuilderException
+	 */
 	protected void walkThroughASTandSiblings(Context context, Item parent, AST current) throws ModelBuilderException {
 		while (current != null) {
 			Item item = buildItem(context, parent, current);
@@ -164,7 +171,8 @@ public class GradleModelBuilder implements ModelBuilder {
 			return null;
 		}
 		Item item;
-		switch (current.getType()) {
+		int type = current.getType();
+		switch (type) {
 		case CLASS_DEF:
 			item = buildClass(context, current);
 			break;
@@ -174,6 +182,9 @@ public class GradleModelBuilder implements ModelBuilder {
 		case VARIABLE_DEF:
 			item = buildVariableDef(context, current);
 			break;
+		case ASSIGN:
+			item = buildAssign(context, current);
+			break;
 		case METHOD_DEF:
 			item = buildMethodDef(context, current);
 			break;
@@ -182,6 +193,12 @@ public class GradleModelBuilder implements ModelBuilder {
 			break;
 		case IMPORT:
 			item = buildImport(context, current);
+			break;
+		case MAP_CONSTRUCTOR:
+			item = buildMap(context, parent, current);
+			break;
+		case ELIST:
+			item = buildList(context, parent, current);
 			break;
 		default:
 			item = null;
@@ -194,6 +211,46 @@ public class GradleModelBuilder implements ModelBuilder {
 
 	}
 
+	Item buildList(Context context, Item parent, AST list) throws ModelBuilderException {
+		AST firstListElement = list.getFirstChild();
+		walkThroughASTandSiblings(context, parent, firstListElement);
+		/* the list itself is not added */
+		return null;
+	}
+
+	Item buildMap(Context context, Item parent, AST map) throws ModelBuilderException {
+		return buildItem(context, parent, map.getFirstChild());
+	}
+
+	Item buildAssign(Context context, AST assign) throws ModelBuilderException {
+		/* library = [...]*/
+		/* public library = [...]*/
+		
+		Item item = null;
+
+		AST assignmentIdentifier = assign.getFirstChild();
+		if (assignmentIdentifier== null) {
+			return null;
+		}
+		int firstType = assignmentIdentifier.getType();
+		if (IDENT != firstType) {
+			return null;
+		}
+		AST assignedValue = assignmentIdentifier.getNextSibling();
+		
+		String name = support.resolveAsSimpleString(assignmentIdentifier);
+		
+		item = support.createItem(context, assign);
+		item.setName(name);
+		item.setItemType(ItemType.ASSIGNMENT);
+		
+		if (assignedValue!=null){
+			walkThroughASTandSiblings(context, item, assignedValue);
+		}
+		
+		return item;
+	}
+	
 	Item buildImport(Context context, AST current) {
 		Item item = null;
 
@@ -229,7 +286,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		item.setItemType(ItemType.PACKAGE);
 		return item;
 	}
-
+	
 	Item buildVariableDef(Context context, AST current) throws ModelBuilderException {
 		/* def variable = "" */
 		/* variable = "" */
@@ -356,7 +413,7 @@ public class GradleModelBuilder implements ModelBuilder {
 	}
 
 	Item buildExpression(Context context, Item parent, AST expression) throws ModelBuilderException {
- 		AST next = expression.getFirstChild();
+		AST next = expression.getFirstChild();
 		if (next == null) {
 			return null;
 		}
@@ -365,6 +422,10 @@ public class GradleModelBuilder implements ModelBuilder {
 			if (next == null) {
 				return null;
 			}
+		}
+		
+		if (GroovyTokenTypes.ASSIGN == next.getType()) {
+			return buildAssign(context, next);
 		}
 		if (GroovyTokenTypes.METHOD_CALL != next.getType()) {
 			return null;
@@ -411,7 +472,19 @@ public class GradleModelBuilder implements ModelBuilder {
 
 		AST lastAst = ename.getNextSibling();
 
-		if (outlineType == ItemType.METHOD_CALL) {
+		if ("task".equals(enameString) || enameString.startsWith("task ")) {
+			item.setItemType(ItemType.TASK);
+			lastAst = support.handleTaskClosure(enameString, item, lastAst);
+		} else if (enameString.startsWith("tasks.")) {
+			item.setItemType(ItemType.TASKS);
+		} else if (enameString.startsWith("apply ")) {
+			item.setItemType(ItemType.APPLY_SETUP);
+			support.handleApplyType(item, lastAst);
+		} else if (outlineType == ItemType.DEPENDENCY) {
+			return support.handleDependencyAndReturnItem(methodCall, item);
+		} else if (outlineType == ItemType.REPOSITORY) {
+			/* ? */
+		} else if (outlineType == ItemType.METHOD_CALL) {
 			if (methodCall.getFirstChild() != null) {
 				/* ( child */
 				AST m1 = methodCall.getFirstChild();
@@ -424,13 +497,10 @@ public class GradleModelBuilder implements ModelBuilder {
 				}
 				/* child ){ */
 				lastAst = m1;
-				
-				/* FIXME ATR, 20.12.2016: here is a problem: When this is not last point for closable block - e.g.
-				 * on a ELIST. The following child block is not reached. To enable this
-				 * there must be a support.scanForLastClosableBlock method written!
-				 */
+
 			}
 		}
+
 		if (lastAst != null) {
 			int type = lastAst.getType();
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
@@ -456,41 +526,29 @@ public class GradleModelBuilder implements ModelBuilder {
 					item.setItemType(ItemType.TEST);
 				} else if ("clean".equals(name)) {
 					item.setItemType(ItemType.CLEAN);
-				} else if ("buildscript".equals(name)) {
+				} else if ("buildscript".equals(name)|| name.startsWith("buildscript.")) {
 					item.setItemType(ItemType.BUILDSCRIPT);
-				} else if ("configurations".equals(name)) {
+				} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
 					item.setItemType(ItemType.CONFIGURATIONS);
 				} else if ("doFirst".equals(name)) {
 					item.setItemType(ItemType.DO_FIRST);
 				} else if ("doLast".equals(name)) {
 					item.setItemType(ItemType.DO_LAST);
-				} else if (name.startsWith("task ")) {
+				} else if ("eclipse".equals(name)) {
+					item.setItemType(ItemType.ECLIPSE);
+				} else if (name.startsWith("task ") || name.startsWith("task.")) {
 					item.setItemType(ItemType.TASK);
 				} else if (name.startsWith("tasks.")) {
 					item.setItemType(ItemType.TASKS);
 				} else if (name.startsWith("apply ")) {
 					item.setItemType(ItemType.APPLY_SETUP);
+				} else if (name.startsWith("project ") || name.equals("project")|| name.startsWith("project.")  ) {
+					item.setItemType(ItemType.PROJECT);
 				} else {
 					item.setItemType(ItemType.CLOSURE);
 				}
 				/* inspect children... */
 				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
-			} else {
-				/* single line without closure content */
-				if ("task".equals(enameString) || enameString.startsWith("task ")) {
-					item.setItemType(ItemType.TASK);
-					lastAst = support.handleTaskClosure(enameString, item, lastAst);
-				} else if (enameString.startsWith("tasks.")) {
-					item.setItemType(ItemType.TASKS);
-				} else if (enameString.startsWith("apply ")) {
-					item.setItemType(ItemType.APPLY_SETUP);
-					support.handleApplyType(item, lastAst);
-				} else if (outlineType == ItemType.DEPENDENCY) {
-					return support.handleDependencyAndReturnItem(methodCall, item);
-				} else if (outlineType == ItemType.REPOSITORY) {
-					/* ? */
-				}
-
 			}
 		}
 

@@ -595,7 +595,7 @@ public class GradleModelBuilderTest {
 
 		Item taskSetupItem = items[0];
 		assertEquals(ItemType.METHOD_CALL, taskSetupItem.getItemType());
-		assertEquals("xyz.sonarrunner.dependson", taskSetupItem.getName());
+		assertEquals("xyz.sonarrunner.dependson check", taskSetupItem.getName());
 
 	}
 
@@ -618,6 +618,89 @@ public class GradleModelBuilderTest {
 		assertEquals("tasks.sonarrunner.dependson check", taskSetupItem.getName());
 		assertEquals(ItemType.TASKS, taskSetupItem.getItemType());
 
+	}
+	
+	@Test
+	public void assign_map() throws Exception{
+		// @formatter:off
+		String code = 
+		"ext {                                                                    \n"+
+		"	                                                                      \n"+
+		"	 library = [                                                    \n"+
+		"		                                                                  \n"+
+		"		junit:							\"junit:junit:4.9\",                \n"+
+		"		mockito_all:					\"org.mockito:mockito-all:1.8.5\",  \n"+
+		"	]                                                                     \n"+
+		"	                                                                      \n"+
+		"}                                                                        \n";
+		// @formatter:on
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+
+		Item extItem = items[0];
+		assertEquals(ItemType.CLOSURE, extItem.getItemType());
+		assertTrue(extItem.hasChildren());
+		Item[] children = extItem.getChildren();
+		assertEquals(1, children.length);
+		Item libraryItem = children[0];
+		assertEquals(ItemType.ASSIGNMENT, libraryItem.getItemType());
+		assertEquals("library", libraryItem.getName());
+	}
+	
+	@Test
+	public void assign_map_with_map_inside() throws Exception{
+		// @formatter:off
+		String code = 
+		"ext {                                                                    \n"+
+		"	                                                                      \n"+
+		"	 library = [                                                    \n"+
+		"		                                                                  \n"+
+		"		junit:							\"junit:junit:4.9\",                \n"+
+		"		mockito_all:					\"org.mockito:mockito-all:1.8.5\",  \n"+
+		"       entries = [ \n"+
+		"                      key:'value'\n"+
+		"	    ]                                                                     \n"+
+		"	]                                                                     \n"+
+		"	                                                                      \n"+
+		"}                                                                        \n";
+		// @formatter:on
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		/* level 0*/
+		assertEquals(1, items.length);
+		
+		/* level 1*/
+		Item extItem = items[0];
+		assertEquals(ItemType.CLOSURE, extItem.getItemType());
+		assertTrue(extItem.hasChildren());
+		Item[] children = extItem.getChildren();
+		assertEquals(1, children.length);
+		Item libraryItem = children[0];
+		assertEquals(ItemType.ASSIGNMENT, libraryItem.getItemType());
+		assertEquals("library", libraryItem.getName());
+		
+		/* level 2*/
+		assertTrue(libraryItem.hasChildren());
+		Item[] children2 = libraryItem.getChildren();
+		assertEquals(1, children2.length);
+		Item entriesItem = children2[0];
+		assertEquals(ItemType.ASSIGNMENT, entriesItem.getItemType());
+		assertEquals("entries", entriesItem.getName());
 	}
 	
 	@Test

@@ -167,100 +167,6 @@ class GradleModelBuilderSupport {
 		item.setTarget(target);
 	}
 
-	String resolveAsSimpleString(AST ast) {
-		if (ast == null) {
-			return "";
-		}
-		int type = ast.getType();
-		if (GroovyTokenTypes.STRING_LITERAL == type) {
-			return ast.getText();
-		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
-			return resolveStringOfFirstChildAndSiblings(ast);
-		} else if (GroovyTokenTypes.METHOD_CALL == type) {
-			return "";
-		} else {
-
-			AST firstChild = ast.getFirstChild();
-			if (GroovyTokenTypes.EXPR == type) {
-				return resolveExpressionName(ast);
-			} else if (GroovyTokenTypes.SL == type) {
-				return resolveStringOfFirstChildAndSiblings(ast) + " <<";
-			} else if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
-				return "";
-			} else if (GroovyTokenTypes.SLIST == type) {
-				return resolveStringOfFirstChildAndSiblings(ast);
-			} else if (GroovyTokenTypes.ELIST == type) {
-				return resolveStringOfFirstChildAndSiblings(ast, ", ");
-			} else if (GroovyTokenTypes.DOT == type) {
-				if (firstChild == null) {
-					return "";
-				}
-				StringBuilder sb = new StringBuilder();
-				sb.append(resolveAsSimpleString(firstChild));
-				sb.append('.');
-				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
-				return sb.toString();
-			} else if (GroovyTokenTypes.LABELED_ARG == type) {
-				if (firstChild == null) {
-					return "";
-				}
-				StringBuilder sb = new StringBuilder();
-				sb.append(resolveAsSimpleString(firstChild));
-				sb.append(':');
-				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
-				return sb.toString();
-			}
-		}
-		return ast.toString();
-	}
-
-	private String resolveExpressionName(AST firstChild) {
-		String x = resolveStringOfFirstChildAndSiblings(firstChild);
-		return x;
-	}
-
-	String resolveStringOfFirstChildAndSiblings(AST ast) {
-		return resolveStringOfFirstChildAndSiblings(ast, null);
-	}
-
-	String resolveStringOfFirstChildAndSiblings(AST ast, String separator) {
-		StringBuilder sb = new StringBuilder();
-		AST part = ast.getFirstChild();
-		if (part == null) {
-			return "";
-		}
-		boolean wasMethodCall = false;
-		if (GroovyTokenTypes.METHOD_CALL == part.getType()) {
-			wasMethodCall = true;
-			part = part.getFirstChild();
-		}
-		if (part == null) {
-			if (wasMethodCall) {
-				return "()";
-			}
-			return "";
-		}
-		while (part != null) {
-			sb.append(resolveAsSimpleString(part));
-			if (wasMethodCall) {
-				sb.append("(");
-				AST next = part.getNextSibling();
-				if (next != null) {
-					sb.append(resolveAsSimpleString(part.getNextSibling()));
-				}
-				sb.append(")");
-				return sb.toString();
-			}
-			part = part.getNextSibling();
-			if (part != null) {
-				if (separator != null) {
-					sb.append(separator);
-				}
-			}
-		}
-		return sb.toString();
-	}
-
 	AST handleTaskClosure(String enameString, Item item, AST lastAst) {
 		if (lastAst == null) {
 			return null;
@@ -345,51 +251,51 @@ class GradleModelBuilderSupport {
 		return sb.toString();
 	}
 
-	void resolveName(StringBuilder sb, AST ast) {
+	String resolveAsSimpleString(AST ast) {
 		if (ast == null) {
-			return;
+			return "";
 		}
-		if (ast.getType() == GroovyTokenTypes.ELIST) {
-			appendELISTParts(sb, ast);
-		} else if (ast.getType() == GroovyTokenTypes.SL) {
-
-		} else if (ast.getType() == GroovyTokenTypes.DOT) {
-			/* is dot */
-			AST content = ast.getFirstChild();
-			resolveName(sb, content);
-			AST next = ast.getNextSibling();
-			if (next != null) {
-				if (next.getType() == GroovyTokenTypes.IDENT) {
-					sb.append('.');
-					sb.append(next.getText());
-				}
-			}
+		int type = ast.getType();
+		if (GroovyTokenTypes.STRING_LITERAL == type) {
+			return ast.getText();
+		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
+			return resolveStringOfFirstChildAndSiblings(ast);
+		} else if (GroovyTokenTypes.METHOD_CALL == type) {
+			return "";
 		} else {
-			/* no dot, so content separated with DOT */
-			sb.append(ast.getText());
-			AST next = ast.getNextSibling();
-			if (next != null) {
-				if (next.getType() == GroovyTokenTypes.IDENT) {
-					sb.append('.');
-					sb.append(next.getText());
-				} else {
-					if (next.getType() == GroovyTokenTypes.CLOSABLE_BLOCK) {
-						return;
-					}
-					if (next.getType() == GroovyTokenTypes.ELIST) {
-						sb.append(" ");
-						appendELISTParts(sb, next);
-					}
+	
+			AST firstChild = ast.getFirstChild();
+			if (GroovyTokenTypes.EXPR == type) {
+				return resolveExpressionName(ast);
+			} else if (GroovyTokenTypes.SL == type) {
+				return resolveStringOfFirstChildAndSiblings(ast) + " <<";
+			} else if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
+				return "";
+			} else if (GroovyTokenTypes.SLIST == type) {
+				return resolveStringOfFirstChildAndSiblings(ast);
+			} else if (GroovyTokenTypes.ELIST == type) {
+				return resolveStringOfFirstChildAndSiblings(ast, ", ");
+			} else if (GroovyTokenTypes.DOT == type) {
+				if (firstChild == null) {
+					return "";
 				}
+				StringBuilder sb = new StringBuilder();
+				sb.append(resolveAsSimpleString(firstChild));
+				sb.append('.');
+				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
+				return sb.toString();
+			} else if (GroovyTokenTypes.LABELED_ARG == type) {
+				if (firstChild == null) {
+					return "";
+				}
+				StringBuilder sb = new StringBuilder();
+				sb.append(resolveAsSimpleString(firstChild));
+				sb.append(':');
+				sb.append(resolveAsSimpleString(firstChild.getNextSibling()));
+				return sb.toString();
 			}
-
 		}
-
-	}
-
-	private void appendELISTParts(StringBuilder sb, AST next) {
-		AST firstChild = next.getFirstChild();
-		sb.append(resolveAsSimpleString(firstChild));
+		return ast.toString();
 	}
 
 	Item createItem(Context context, AST ast) {
@@ -399,12 +305,12 @@ class GradleModelBuilderSupport {
 		item.setColumn(column);
 		item.setLine(line);
 		item.setOffset(context.buffer.getOffset(line, column));
-
+	
 		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
 			int offset1 = item.getOffset();
 			int offset2 = context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
-
+	
 			int length = offset2 - offset1;
 			if (length < 0) {
 				/* fall back */
@@ -432,31 +338,117 @@ class GradleModelBuilderSupport {
 	 */
 	String resolveMethodCallName(AST methodCall) {
 		if (GroovyTokenTypes.METHOD_CALL != methodCall.getType()) {
-			return "<no method call/>";
+			return "--no method call--";
 		}
-		StringBuilder sb = new StringBuilder();
-
-		String methodParams = null;
-
+	
 		AST firstChild = methodCall.getFirstChild();
 		if (firstChild == null) {
-			return sb.toString();
+			return "--no method child--";
 		}
 		String methodName = resolveName(firstChild);
 		if (methodName == null) {
-			methodName = "<noMethodName/>";
+			methodName = "--no method name--";
 		}
-		AST next = firstChild.getNextSibling();
-		if (next != null) {
-			int type = next.getType();
-			if (type != CLOSABLE_BLOCK) {
-				methodParams = resolveName(next);
+		return methodName;
+	}
+
+	private void resolveName(StringBuilder sb, AST ast) {
+		if (ast == null) {
+			return;
+		}
+		if (ast.getType() == GroovyTokenTypes.ELIST) {
+			appendELISTParts(sb, ast);
+		} else if (ast.getType() == GroovyTokenTypes.SL) {
+	
+		} else if (ast.getType() == GroovyTokenTypes.DOT) {
+			/* is dot */
+			AST content = ast.getFirstChild();
+			resolveName(sb, content);
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				int type = next.getType();
+				if (type == GroovyTokenTypes.IDENT) {
+					sb.append('.');
+					sb.append(next.getText());
+				}else if (type == ELIST){
+					appendELIST(sb, next);
+				}
 			}
+		} else {
+			/* no dot, so content separated with DOT */
+			sb.append(ast.getText());
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				if (next.getType() == GroovyTokenTypes.IDENT) {
+					sb.append('.');
+					sb.append(next.getText());
+				} else {
+					if (next.getType() == GroovyTokenTypes.CLOSABLE_BLOCK) {
+						return;
+					}
+					if (next.getType() == GroovyTokenTypes.ELIST) {
+						appendELIST(sb, next);
+					}
+				}
+			}
+	
 		}
-		sb.append(methodName);
-		if (methodParams != null && methodParams.length()>0) {
-			sb.append(" ");
-			sb.append(methodParams);
+	
+	}
+
+	private void appendELIST(StringBuilder sb, AST next) {
+		sb.append(" ");
+		appendELISTParts(sb, next);
+	}
+
+	private void appendELISTParts(StringBuilder sb, AST next) {
+		AST firstChild = next.getFirstChild();
+		sb.append(resolveAsSimpleString(firstChild));
+	}
+
+	private String resolveExpressionName(AST firstChild) {
+		String x = resolveStringOfFirstChildAndSiblings(firstChild);
+		return x;
+	}
+
+	private String resolveStringOfFirstChildAndSiblings(AST ast) {
+		return resolveStringOfFirstChildAndSiblings(ast, null);
+	}
+
+	private String resolveStringOfFirstChildAndSiblings(AST ast, String separator) {
+		StringBuilder sb = new StringBuilder();
+		AST part = ast.getFirstChild();
+		if (part == null) {
+			return "";
+		}
+		boolean wasMethodCall = false;
+		if (GroovyTokenTypes.METHOD_CALL == part.getType()) {
+			wasMethodCall = true;
+			part = part.getFirstChild();
+		}
+		if (part == null) {
+			if (wasMethodCall) {
+				return "()";
+			}
+			return "";
+		}
+		while (part != null) {
+			sb.append(resolveAsSimpleString(part));
+			if (wasMethodCall) {
+				sb.append("(");
+				AST next = part.getNextSibling();
+				if (next != null) {
+					sb.append(resolveAsSimpleString(part.getNextSibling()));
+				}
+				sb.append(")");
+				return sb.toString();
+			}
+			part = part.getNextSibling();
+			if (part != null) {
+				if (separator != null) {
+					sb.append(separator);
+				}
+			}
 		}
 		return sb.toString();
 	}
