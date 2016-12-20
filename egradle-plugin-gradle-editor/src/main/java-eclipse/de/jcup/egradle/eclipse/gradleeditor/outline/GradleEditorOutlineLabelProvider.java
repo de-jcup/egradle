@@ -162,7 +162,6 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 					return null;
 				}
 				return getOutlineImage(path);
-			case TASK_CLOSURE:
 			case TASK:
 				return getOutlineImage(ICON_TASK_PNG);
 			case TASKS:

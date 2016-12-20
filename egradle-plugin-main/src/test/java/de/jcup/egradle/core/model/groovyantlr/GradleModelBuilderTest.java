@@ -292,7 +292,7 @@ public class GradleModelBuilderTest {
 		Item taskClosure = items[0];
 
 		assertEquals("task jacocoRemoteDump() <<jacocoRemoteDump", taskClosure.getName());
-		assertEquals(ItemType.TASK_CLOSURE, taskClosure.getItemType());
+		assertEquals(ItemType.TASK, taskClosure.getItemType());
 
 	}
 
@@ -313,7 +313,7 @@ public class GradleModelBuilderTest {
 		Item taskClosure = items[0];
 
 		assertEquals("task jacocoRemoteDump", taskClosure.getName());
-		assertEquals(ItemType.TASK_CLOSURE, taskClosure.getItemType());
+		assertEquals(ItemType.TASK, taskClosure.getItemType());
 
 	}
 
@@ -538,7 +538,7 @@ public class GradleModelBuilderTest {
 
 		Item taskDef = items[0];
 		assertEquals("task doit", taskDef.getName());
-		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
+		assertEquals(ItemType.TASK, taskDef.getItemType());
 
 		items = taskDef.getChildren();
 
@@ -567,7 +567,7 @@ public class GradleModelBuilderTest {
 		Item taskDef = items[0];
 		assertEquals("task doit", taskDef.getName());
 		assertEquals("compile", taskDef.getType());
-		assertEquals(ItemType.TASK_CLOSURE, taskDef.getItemType());
+		assertEquals(ItemType.TASK, taskDef.getItemType());
 
 		items = taskDef.getChildren();
 
@@ -615,11 +615,11 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 
 		Item taskSetupItem = items[0];
+		assertEquals("tasks.sonarrunner.dependson check", taskSetupItem.getName());
 		assertEquals(ItemType.TASKS, taskSetupItem.getItemType());
-		assertEquals("tasks.sonarrunner.dependson", taskSetupItem.getName());
 
 	}
-
+	
 	@Test
 	public void apply_plugin_java() throws Exception {
 		/* prepare */

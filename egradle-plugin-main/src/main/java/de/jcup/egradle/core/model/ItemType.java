@@ -29,8 +29,6 @@ public enum ItemType {
 
 	TASK, 
 	
-	TASK_CLOSURE, 
-	
 	APPLY_SETUP,
 
 	APPLY_FROM,

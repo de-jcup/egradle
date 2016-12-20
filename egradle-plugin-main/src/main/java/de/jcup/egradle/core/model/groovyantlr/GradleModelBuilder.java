@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 
@@ -24,6 +24,7 @@ import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
+import org.junit.FixMethodOrder;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -50,13 +51,15 @@ public class GradleModelBuilder implements ModelBuilder {
 	private ItemFilter postCreationFilter;
 	private Filter preCreationFilter;
 	private GradleModelBuilderSupport support = new GradleModelBuilderSupport();
-	
+
 	public GradleModelBuilder(InputStream is) {
 		this.is = is;
 	}
-	
+
 	/**
-	 * Set pre creation filter to filter AST parts not wanted to be source for building items (can be used to speed up)
+	 * Set pre creation filter to filter AST parts not wanted to be source for
+	 * building items (can be used to speed up)
+	 * 
 	 * @param preCreationFilter
 	 */
 	public void setPreCreationFilter(Filter preCreationFilter) {
@@ -64,9 +67,10 @@ public class GradleModelBuilder implements ModelBuilder {
 	}
 
 	/**
-	 * Set a post creation filter - is used when adding created items to model. If it filters the
-	 * created item, the item (and all children) will not be listed inside
-	 * model. At postCreationFilter time the items have already the correct gradle item type
+	 * Set a post creation filter - is used when adding created items to model.
+	 * If it filters the created item, the item (and all children) will not be
+	 * listed inside model. At postCreationFilter time the items have already
+	 * the correct gradle item type
 	 * 
 	 * @param postCreationFilter
 	 */
@@ -156,7 +160,7 @@ public class GradleModelBuilder implements ModelBuilder {
 	 * @throws ModelBuilderException
 	 */
 	protected Item buildItem(Context context, Item parent, AST current) throws ModelBuilderException {
-		if (getPreCreationFilter().isFiltered(current)){
+		if (getPreCreationFilter().isFiltered(current)) {
 			return null;
 		}
 		Item item;
@@ -236,23 +240,23 @@ public class GradleModelBuilder implements ModelBuilder {
 		AST modifiers = null;
 		AST type = null;
 		AST first = current.getFirstChild();
-		if (first== null) {
+		if (first == null) {
 			return null;
 		}
 		int firstType = first.getType();
-		if (GroovyTokenTypes.TYPE==firstType){
-			type=first;
-		}else if (GroovyTokenTypes.MODIFIERS==firstType){
-			modifiers=first;
-		}else{
+		if (GroovyTokenTypes.TYPE == firstType) {
+			type = first;
+		} else if (GroovyTokenTypes.MODIFIERS == firstType) {
+			modifiers = first;
+		} else {
 			return null;
 		}
-		if (type==null){
+		if (type == null) {
 			type = modifiers.getNextSibling();
 			if (type == null) {
 				return null;
 			}
-			
+
 		}
 		/* type */
 		String typeDefText = null;
@@ -274,7 +278,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		item.setItemType(ItemType.VARIABLE);
 		return item;
 	}
-	
+
 	Item buildMethodDef(Context context, AST current) throws ModelBuilderException {
 		/* def method(params) */
 		Item item = null;
@@ -282,23 +286,23 @@ public class GradleModelBuilder implements ModelBuilder {
 		AST modifiers = null;
 		AST type = null;
 		AST first = current.getFirstChild();
-		if (first== null) {
+		if (first == null) {
 			return null;
 		}
 		int firstType = first.getType();
-		if (GroovyTokenTypes.TYPE==firstType){
-			type=first;
-		}else if (GroovyTokenTypes.MODIFIERS==firstType){
-			modifiers=first;
-		}else{
+		if (GroovyTokenTypes.TYPE == firstType) {
+			type = first;
+		} else if (GroovyTokenTypes.MODIFIERS == firstType) {
+			modifiers = first;
+		} else {
 			return null;
 		}
-		if (type==null){
+		if (type == null) {
 			type = modifiers.getNextSibling();
 			if (type == null) {
 				return null;
 			}
-			
+
 		}
 		/* type */
 		String typeDefText = null;
@@ -318,24 +322,22 @@ public class GradleModelBuilder implements ModelBuilder {
 		support.appendModifiers(item, modifiers);
 		item.setType(typeDefText);
 		item.setItemType(ItemType.METHOD);
-		
+
 		AST parameters = name.getNextSibling();
-		if (parameters!=null){
-			if (parameters.getType()==GroovyTokenTypes.PARAMETERS){
-				support.appendParameters(item,parameters);
+		if (parameters != null) {
+			if (parameters.getType() == GroovyTokenTypes.PARAMETERS) {
+				support.appendParameters(item, parameters);
 			}
-			
+
 			AST slist = parameters.getNextSibling();
-			if (slist.getType()==GroovyTokenTypes.SLIST){
+			if (slist.getType() == GroovyTokenTypes.SLIST) {
 				walkThroughASTandSiblings(context, item, slist.getFirstChild());
 			}
 		}
-		
-		
+
 		return item;
 	}
 
-	
 	Item buildClass(Context context, AST current) throws ModelBuilderException {
 		Item item = null;
 		AST classDefModifiers = current.getFirstChild();
@@ -353,8 +355,8 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildExpression(Context context, Item parent, AST current) throws ModelBuilderException {
-		AST next = current.getFirstChild();
+	Item buildExpression(Context context, Item parent, AST expression) throws ModelBuilderException {
+ 		AST next = expression.getFirstChild();
 		if (next == null) {
 			return null;
 		}
@@ -367,7 +369,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (GroovyTokenTypes.METHOD_CALL != next.getType()) {
 			return null;
 		}
-		AST methodCall = current.getFirstChild();
+		AST methodCall = expression.getFirstChild();
 		if (methodCall == null) {
 			return null;
 		}
@@ -381,10 +383,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (methodChild == null) {
 			return null;
 		}
-		AST ename = methodCall.getFirstChild();
-		if (ename == null) {
-			return null;
-		}
+		AST ename = methodChild;
 		String enameString = support.resolveMethodCallName(methodCall);
 		if (enameString == null) {
 			return null;
@@ -405,97 +404,106 @@ public class GradleModelBuilder implements ModelBuilder {
 		} else {
 			return null;
 		}
-		Item item = support.createItem(context, current);
+		Item item = support.createItem(context, expression);
 		item.setItemType(outlineType);
 		item.setName(enameString);
 		item.setClosed(true);
 
-		/* 
-		 * FIXME ATR: think about removing this block (exeption dependency). could all be done with method cal !??!
-		 * (after this the item types should be changed of course)
-		 * 
-		 */
 		AST lastAst = ename.getNextSibling();
-		if ("task".equals(enameString) || enameString.startsWith("task ")) {
-			item.setItemType(ItemType.TASK);
-			lastAst = support.handleTaskClosure(enameString, item, lastAst);
-		} else if (enameString.startsWith("xtasks.")) {
-			item.setItemType(ItemType.TASKS);
-		} else if (enameString.startsWith("apply(")) {
-			item.setItemType(ItemType.APPLY_SETUP);
-			support.handleApplyType(item, lastAst);
-		}else if (outlineType == ItemType.DEPENDENCY) {
-			return support.handleDependencyAndReturnItem(methodCall, item);
-		}else if (outlineType == ItemType.REPOSITORY) {
-			return item;
-		}else if (outlineType == ItemType.METHOD_CALL){
-			if (methodCall.getFirstChild()!=null){
-				boolean methodCallHandled=false;
-				/* ( child*/
+
+		if (outlineType == ItemType.METHOD_CALL) {
+			if (methodCall.getFirstChild() != null) {
+				/* ( child */
 				AST m1 = methodCall.getFirstChild();
 				AST m2 = m1.getNextSibling();
-				if (!methodCallHandled){
-					while (m2!=null){
-						m2 = m1.getNextSibling();
-						if (m2!=null){
-							m1 = m2;
-						}
+				while (m2 != null) {
+					m2 = m1.getNextSibling();
+					if (m2 != null) {
+						m1 = m2;
 					}
-					/* child ){*/
-					lastAst=m1;
 				}
+				/* child ){ */
+				lastAst = m1;
+				
+				/* FIXME ATR, 20.12.2016: here is a problem: When this is not last point for closable block - e.g.
+				 * on a ELIST. The following child block is not reached. To enable this
+				 * there must be a support.scanForLastClosableBlock method written!
+				 */
 			}
 		}
 		if (lastAst != null) {
-			if (GroovyTokenTypes.CLOSABLE_BLOCK == lastAst.getType()) {
-				if (item.getItemType() == ItemType.TASK) {
-					item.setItemType(ItemType.TASK_CLOSURE);
+			int type = lastAst.getType();
+			if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
+				String name = item.getName();
+				if (name == null) {
+					return item;
+				}
+				if ("repositories".equals(name)) {
+					item.setItemType(ItemType.REPOSITORIES);
+				} else if ("allprojects".equals(name)) {
+					item.setItemType(ItemType.ALL_PROJECTS);
+				} else if ("subprojects".equals(name)) {
+					item.setItemType(ItemType.SUB_PROJECTS);
+				} else if ("dependencies".equals(name)) {
+					item.setItemType(ItemType.DEPENDENCIES);
+				} else if ("sourceSets".equals(name)) {
+					item.setItemType(ItemType.SOURCESETS);
+				} else if ("main".equals(name)) {
+					item.setItemType(ItemType.MAIN);
+				} else if ("jar".equals(name)) {
+					item.setItemType(ItemType.JAR);
+				} else if ("test".equals(name)) {
+					item.setItemType(ItemType.TEST);
+				} else if ("clean".equals(name)) {
+					item.setItemType(ItemType.CLEAN);
+				} else if ("buildscript".equals(name)) {
+					item.setItemType(ItemType.BUILDSCRIPT);
+				} else if ("configurations".equals(name)) {
+					item.setItemType(ItemType.CONFIGURATIONS);
+				} else if ("doFirst".equals(name)) {
+					item.setItemType(ItemType.DO_FIRST);
+				} else if ("doLast".equals(name)) {
+					item.setItemType(ItemType.DO_LAST);
+				} else if (name.startsWith("task ")) {
+					item.setItemType(ItemType.TASK);
+				} else if (name.startsWith("tasks.")) {
+					item.setItemType(ItemType.TASKS);
+				} else if (name.startsWith("apply ")) {
+					item.setItemType(ItemType.APPLY_SETUP);
 				} else {
-					String name = item.getName();
-					if ("repositories".equals(name)) {
-						item.setItemType(ItemType.REPOSITORIES);
-					} else if ("allprojects".equals(name)) {
-						item.setItemType(ItemType.ALL_PROJECTS);
-					} else if ("subprojects".equals(name)) {
-						item.setItemType(ItemType.SUB_PROJECTS);
-					} else if ("dependencies".equals(name)) {
-						item.setItemType(ItemType.DEPENDENCIES);
-					} else if ("sourceSets".equals(name)) {
-						item.setItemType(ItemType.SOURCESETS);
-					} else if ("main".equals(name)) {
-						item.setItemType(ItemType.MAIN);
-					} else if ("jar".equals(name)) {
-						item.setItemType(ItemType.JAR);
-					} else if ("test".equals(name)) {
-						item.setItemType(ItemType.TEST);
-					} else if ("clean".equals(name)) {
-						item.setItemType(ItemType.CLEAN);
-					} else if ("buildscript".equals(name)) {
-						item.setItemType(ItemType.BUILDSCRIPT);
-					} else if ("configurations".equals(name)) {
-						item.setItemType(ItemType.CONFIGURATIONS);
-					} else if ("doFirst".equals(name)) {
-						item.setItemType(ItemType.DO_FIRST);
-					} else if ("doLast".equals(name)) {
-						item.setItemType(ItemType.DO_LAST);
-					} else {
-						item.setItemType(ItemType.CLOSURE);
-					}
+					item.setItemType(ItemType.CLOSURE);
 				}
 				/* inspect children... */
 				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
+			} else {
+				/* single line without closure content */
+				if ("task".equals(enameString) || enameString.startsWith("task ")) {
+					item.setItemType(ItemType.TASK);
+					lastAst = support.handleTaskClosure(enameString, item, lastAst);
+				} else if (enameString.startsWith("tasks.")) {
+					item.setItemType(ItemType.TASKS);
+				} else if (enameString.startsWith("apply ")) {
+					item.setItemType(ItemType.APPLY_SETUP);
+					support.handleApplyType(item, lastAst);
+				} else if (outlineType == ItemType.DEPENDENCY) {
+					return support.handleDependencyAndReturnItem(methodCall, item);
+				} else if (outlineType == ItemType.REPOSITORY) {
+					/* ? */
+				}
+
 			}
 		}
 
 		return item;
 	}
+
 	private Filter getPreCreationFilter() {
-		if (preCreationFilter==null){
-			preCreationFilter=Filter.NOTHING_FILTERED;
+		if (preCreationFilter == null) {
+			preCreationFilter = Filter.NOTHING_FILTERED;
 		}
 		return preCreationFilter;
 	}
-	
+
 	class Context {
 		ExtendedSourceBuffer buffer;
 	}
