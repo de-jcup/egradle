@@ -37,24 +37,53 @@ public class ModelImpl implements Model {
 		synchronized(map){
 			Item item = map.get(offset);
 			if (item == null) {
-				/* scan inside parts before of sorted tree map... */
-				Set<Integer> sortedKeys = map.keySet();
-				int keyBefore=-1;
-				for (int key : sortedKeys) {
-					if (key < offset) {
-						keyBefore=key;
-						/* ignore because we start at offset! */
-						continue;
-					}
-					if (keyBefore==-1){
-						break;
-					}
-					item = map.get(keyBefore);
-					break;
-				}
+				item = findApplyableItem(offset);
 			}
 			return item;
 		}
+	}
+
+	/**
+	 * Example:
+	 * <pre>
+	 * 
+	 * offset1a
+	 * 		offset2a
+	 * 		 x
+	 * 		offset2b
+	 *   y-->given offset
+	 * offset1b
+	 * </pre>
+	 * The result should be item having offset1a/b
+	 * @param offset offset to scan for
+	 * @return item most appliable to given offset
+	 */
+	private Item findApplyableItem(int offset) {
+	
+		int scanStart=offset;
+		while (scanStart>0){
+			Item item = map.get(--scanStart);
+			if (item==null){
+				continue;
+			}
+			int start = item.getOffset();
+			int end = start+item.getLength();
+			if (offset>start && offset<end){
+				return item;
+			}
+		}
+		Item simpleFallback = getSimpleFallbackForOffset(offset);
+		return simpleFallback;
+	}
+
+	private Item getSimpleFallbackForOffset(int offset) {
+		Item simpleFallback = null;
+		/* fall back - select part before */
+		int scanStart = offset;
+		while (scanStart>0 && simpleFallback==null){
+			simpleFallback = map.get(--scanStart);
+		}
+		return simpleFallback;
 	}
 
 	@Override

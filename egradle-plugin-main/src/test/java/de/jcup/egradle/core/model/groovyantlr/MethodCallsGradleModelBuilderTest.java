@@ -110,7 +110,7 @@ public class MethodCallsGradleModelBuilderTest {
 
 		assertEquals(1, items.length);
 		Item configure = items[0];
-		assertEquals(ItemType.CLOSURE, configure.getItemType());
+		assertEquals(ItemType.CONFIGURATIONS, configure.getItemType());
 		assertEquals("configurations.all", configure.getName());
 
 		Item[] configChildren = configure.getChildren();

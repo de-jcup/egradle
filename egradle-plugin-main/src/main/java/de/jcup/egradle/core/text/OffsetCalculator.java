@@ -33,13 +33,13 @@ public class OffsetCalculator {
 		if (line > lines.length){
 			return UNKNOWN_OFFSET;
 		}
-		int columnIndex= column-1;
 		int lineIndex = line-1;
 		CharSequence lastSequence = lines[lineIndex];
 		if (column>lastSequence.length()){
 			return UNKNOWN_OFFSET;
 		}
 		
+		int columnIndex= column-1;
 		int offset = 0;
 		for (int index=0;index<lines.length;index++){
 			CharSequence sequence = lines[index]; 

@@ -68,4 +68,32 @@ public class ModelImplTest {
 		
 		assertEquals(child1, modelToTest.getItemAt(15));
 	}
+	
+
+	@Test
+	/**
+	 * <pre>
+	 * 		root (0-21)
+	 *         child1 (10-14)
+	 *         ->x (15) (no item)
+	 *         child2 (18-20)
+	 * </pre>
+	 * Expected result for x is root
+	 */
+	public void getItemAt_pos_between_child1_and_child2__returns_root() {
+		Item root= new Item();
+		root.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		root.setLength(21);
+		root.add(child1);
+		root.add(child2);
+		modelToTest.getRoot().add(root);
+		
+		assertEquals(root, modelToTest.getItemAt(15));
+	}
 }

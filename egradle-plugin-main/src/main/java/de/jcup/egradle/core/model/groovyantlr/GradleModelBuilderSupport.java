@@ -309,12 +309,14 @@ class GradleModelBuilderSupport {
 		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
 			int offset1 = item.getOffset();
-			int offset2 = context.buffer.getOffset(gast.getLineLast(), gast.getColumnLast());
+			int lineLast = gast.getLineLast();
+			int columnLast = gast.getColumnLast();
+			int offset2 = context.buffer.getOffset(lineLast, columnLast);
 	
 			int length = offset2 - offset1;
 			if (length < 0) {
 				/* fall back */
-				length = gast.getColumnLast() - column;
+				length = columnLast - column;
 			}
 			item.setLength(length);
 		} else {

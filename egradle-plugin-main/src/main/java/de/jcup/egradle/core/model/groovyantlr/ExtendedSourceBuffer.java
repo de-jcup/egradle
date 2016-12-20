@@ -151,16 +151,42 @@ public class ExtendedSourceBuffer extends SourceBuffer {
 		synchronized(lines){
 			if (!frozen){
 				frozen=true;
-				frozenLinesAsArray = lines.toArray(new StringBuilder[lines.size()]);
+				if (lines==null || lines.size()==0){
+					frozenLinesAsArray=new StringBuilder[]{new StringBuilder()};
+				}else{
+					frozenLinesAsArray = lines.toArray(new StringBuilder[lines.size()]);
+				}
 			}
 		}
 	}
 
+	void assertNotFrozen(){
+		if (frozen){
+			throw new IllegalStateException("frozen!");
+		}
+	}
+	
 	private OffsetCalculator getCalculator() {
 		if (calculator == null) {
 			calculator = new OffsetCalculator();
 		}
 		return calculator;
+	}
+
+	/**
+	 * Its necessary to have line endings on each line. If last line has none, these will be appended
+	 */
+	public void appendLineEndToLastLineIfMissing() {
+		ensureFrozen();
+		StringBuilder lastLine = frozenLinesAsArray[frozenLinesAsArray.length-1];
+		int length = lastLine.length();
+		boolean needsAppend= false;
+		needsAppend = needsAppend || length==0;
+		needsAppend = needsAppend || !("\n".equals(lastLine.substring(length-1)));
+		
+		if (needsAppend){
+			lastLine.append("\n");
+		}
 	}
 	
 

@@ -103,7 +103,7 @@ public class GradleModelBuilder implements ModelBuilder {
 			AST first = parser.getAST();
 
 			Context context = new Context();
-			context.buffer = sourceBuffer;
+			context.init(sourceBuffer);
 
 			Item rootItem = model.getRoot();
 			walkThroughASTandSiblings(context, rootItem, first);
@@ -564,6 +564,11 @@ public class GradleModelBuilder implements ModelBuilder {
 
 	class Context {
 		ExtendedSourceBuffer buffer;
+
+		protected void init(ExtendedSourceBuffer sourceBuffer) {
+			this.buffer=sourceBuffer;
+			this.buffer.appendLineEndToLastLineIfMissing();
+		}
 	}
 
 }

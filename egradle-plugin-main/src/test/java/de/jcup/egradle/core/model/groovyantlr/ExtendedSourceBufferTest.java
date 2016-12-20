@@ -36,6 +36,62 @@ public class ExtendedSourceBufferTest {
 	}
 
 	@Test
+	public void appendMissingLineEndingToLastLine_appends_newline_when_no_content(){
+		write("", bufferToTest);
+		bufferToTest.ensureFrozen();
+		/* check */
+		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("",bufferToTest.frozenLinesAsArray[0].toString());
+		/* execute */
+		bufferToTest.appendLineEndToLastLineIfMissing();
+		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
+		
+	}
+	
+	@Test
+	public void appendMissingLineEndingToLastLine_appends_newline_when_content_but_newlinew_is_missing(){
+		write("abc", bufferToTest);
+		bufferToTest.ensureFrozen();
+		/* check */
+		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("abc",bufferToTest.frozenLinesAsArray[0].toString());
+		/* execute */
+		bufferToTest.appendLineEndToLastLineIfMissing();
+		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
+		
+	}
+	
+	@Test
+	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_exists(){
+		write("\n", bufferToTest);
+		/* check */
+		bufferToTest.ensureFrozen();
+		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
+		/* execute */
+		bufferToTest.appendLineEndToLastLineIfMissing();
+		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
+		
+	}
+	
+	@Test
+	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_with_content_exists(){
+		write("abc\n", bufferToTest);
+		/* check */
+		bufferToTest.ensureFrozen();
+		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
+		/* execute */
+		bufferToTest.appendLineEndToLastLineIfMissing();
+		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
+		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
+		
+	}
+	
+	@Test
 	public void getOffset_for_text_EMPTY_line_10_column_20__calculator_is_called_with_frozenLinesAsArray__and_line_10_column_20() {
 		/* prepare */
 		write("", bufferToTest);
