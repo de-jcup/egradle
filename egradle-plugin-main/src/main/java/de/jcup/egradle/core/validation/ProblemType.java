@@ -20,6 +20,8 @@ enum ProblemType {
 	
 	COULD_NOT_COMPILE_SCRIPT("Could not compile script"),
 	
+	COULD_NOT_COMPILE_BUILDFILE("Could not compile build file"),
+	
 	COULD_NOT_COMPILE_SETTINGS("Could not compile settings file");
 
 	String text;

@@ -70,7 +70,7 @@ public class GradleOutputValidatorTest {
 		assertTrue(problem.hasProblem());
 		assertEquals(28, problem.getLine());
 		assertEquals(
-				"/home/albert/dev/src/git/egradle-testcase-projects/singleproject-01-java-with-gradlewrapper/build.gradle",
+				"C:\\dev_custom\\projects\\JCUP\\egradle-testcase-projects\\singleproject-01-java-with-gradlewrapper\\build.gradle",
 				problem.getScriptPath());
 
 	}
@@ -123,7 +123,7 @@ public class GradleOutputValidatorTest {
 		/* test */
 		ValidationResult problem = validatorToTest.validate(output);
 		assertNotNull(problem);
-		assertFalse(problem.hasScriptEvaluationProblem());
+		assertFalse(problem.hasProblem());
 		assertTestOutputDoesNotExceedLimits();
 	}
 
@@ -145,7 +145,8 @@ public class GradleOutputValidatorTest {
 		/* test */
 		ValidationResult problem = validatorToTest.validate(output);
 		assertNotNull(problem);
-		assertTrue(problem.hasScriptEvaluationProblem());
+		assertTrue(problem.hasProblem());
+		assertTrue(problem.hasProblem());
 		assertEquals(1, problem.getLine());
 		assertEquals("/home/albert/dev/src/git/gradle-project-template/build.gradle", problem.getScriptPath());
 		assertEquals("Cannot get property 'x' on null object", problem.getErrorMessage());
@@ -164,7 +165,7 @@ public class GradleOutputValidatorTest {
 		/* test */
 		ValidationResult problem = validatorToTest.validate(output);
 		assertNotNull(problem);
-		assertTrue(problem.hasScriptEvaluationProblem());
+		assertTrue(problem.hasProblem());
 		assertEquals(612, problem.getLine());
 		assertEquals("home/albert/build.gradle", problem.getScriptPath());
 		assertEquals("Could not get unknown property 'x' for root project 'xyz' of type org.gradle.api.Project",
@@ -205,7 +206,7 @@ public class GradleOutputValidatorTest {
 		/* test */
 		ValidationResult problem = validatorToTest.validate(output);
 		assertNotNull(problem);
-		assertTrue(problem.hasCompileProblem());
+		assertTrue(problem.hasProblem());
 		assertEquals(7, problem.getLine());
 		assertEquals("/home/albert/dev/src/git/gradle-project-template/settings.gradle", problem.getScriptPath());
 		assertTrue(problem.getErrorMessage().indexOf("unexpected token: import ") != -1);
@@ -247,7 +248,7 @@ public class GradleOutputValidatorTest {
 		/* test */
 		ValidationResult problem = validatorToTest.validate(output);
 		assertNotNull(problem);
-		assertTrue(problem.hasCompileProblem());
+		assertTrue(problem.hasProblem());
 		assertEquals(7, problem.getLine());
 		assertEquals("/home/albert/dev/src/git/code2doc/libraries.gradle", problem.getScriptPath());
 		assertTrue(problem.getErrorMessage().indexOf("expecting ']', found 'mockito_all' ") != -1);

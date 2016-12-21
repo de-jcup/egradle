@@ -25,17 +25,11 @@ public class ValidationResult {
 	int column=-1;
 
 	public boolean hasProblem(){
-		boolean hasProblem = false;
-		hasProblem=hasProblem || hasScriptEvaluationProblem();
-		hasProblem=hasProblem || hasCompileProblem();
+		boolean hasProblem = problemType!=null;
 		return hasProblem;
 		
 	}
 	
-	boolean hasScriptEvaluationProblem() {
-		return problemType == ProblemType.A_PROBLEM_OCCURRED_WHILE_EVALUATING;
-	}
-
 	public int getLine() {
 		return line;
 	}
@@ -48,11 +42,14 @@ public class ValidationResult {
 		return problemMessage;
 	}
 
-	boolean hasCompileProblem() {
-		return problemType == ProblemType.COULD_NOT_COMPILE_SCRIPT || problemType== ProblemType.COULD_NOT_COMPILE_SETTINGS;
-	}
-
 	public int getColumn() {
 		return column;
 	}
+
+	@Override
+	public String toString() {
+		return "ValidationResult [problemType=" + problemType + ", problemMessage=" + problemMessage
+				+ ", problemScriptPath=" + problemScriptPath + ", line=" + line + ", column=" + column + "]";
+	}
+	
 }
