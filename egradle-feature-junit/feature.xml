@@ -81,7 +81,7 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="EGradle update site" url="https://raw.githubusercontent.com/de-jcup/egradle/master/egradle-updatesite/"/>
+      <update label="EGradle update site" url="https://dl.bintray.com/de-jcup/egradle/ "/>
    </url>
 
    <requires>
