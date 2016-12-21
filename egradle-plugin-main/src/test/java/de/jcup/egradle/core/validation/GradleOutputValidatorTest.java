@@ -36,6 +36,45 @@ public class GradleOutputValidatorTest {
 		output = new ArrayList<>();
 	}
 
+	
+	@Test
+	public void test_bugfix_157_works(){
+		// @formatter:off
+		output.add("FAILURE: Build failed with an exception.                                                                                                                                    ");
+		output.add("                                                                                                                                                                            ");
+		output.add("* Where:                                                                                                                                                                    ");
+		output.add("Build file 'C:\\dev_custom\\projects\\JCUP\\egradle-testcase-projects\\singleproject-01-java-with-gradlewrapper\\build.gradle' line: 28                                     ");
+		output.add("                                                                                                                                                                            ");
+		output.add("* What went wrong:                                                                                                                                                          ");
+		output.add("Could not compile build file 'C:\\dev_custom\\projects\\JCUP\\egradle-testcase-projects\\singleproject-01-java-with-gradlewrapper\\build.gradle'.                           ");
+		output.add("> startup failed:                                                                                                                                                           ");
+		output.add("  build file 'C:\\dev_custom\\projects\\JCUP\\egradle-testcase-projects\\singleproject-01-java-with-gradlewrapper\\build.gradle': 28: Modifier 'protected' not allowed here.");
+		output.add(" @ line 28, column 1.                                                                                                                                                       ");
+		output.add("     def protected variable1=\"hello world\"                                                                                                                                ");
+		output.add("     ^                                                                                                                                                                      ");
+		output.add("                                                                                                                                                                            ");
+		output.add("  1 error                                                                                                                                                                   ");
+		output.add("                                                                                                                                                                            ");
+		output.add("                                                                                                                                                                            ");
+		output.add("* Try:                                                                                                                                                                      ");
+		output.add("Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.                                                              ");
+		output.add("                                                                                                                                                                            ");
+		output.add("BUILD FAILED                                                                                                                                                                ");
+		output.add("                                                                                                                                                                            ");
+		output.add("Total time: 2.416 secs                                                                                                                                                      ");
+		// @formatter:on
+		
+		ValidationResult problem = validatorToTest.validate(output);
+		assertTestOutputDoesNotExceedLimits();
+		assertNotNull(problem);
+		assertTrue(problem.hasProblem());
+		assertEquals(28, problem.getLine());
+		assertEquals(
+				"/home/albert/dev/src/git/egradle-testcase-projects/singleproject-01-java-with-gradlewrapper/build.gradle",
+				problem.getScriptPath());
+
+	}
+	
 	@Test
 	public void convert_problem_is_recognized() {
 		output.add("* Where:");
@@ -217,6 +256,8 @@ public class GradleOutputValidatorTest {
 	}
 
 	/**
+	 * Assert output in test is not larger than in real world
+	 * <br><br>
 	 * This is not optimal and tests another component part, but it tests that each output created by this tests, does not exceed the current shrink limit.
 	 * Otherwise the tests will not fail but it will not work in EGradle, because the console line handler shrinks the output to the limit given in 
 	 * {@link Constants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So everything what is tested here, has to work in EGradle too
