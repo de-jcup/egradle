@@ -124,5 +124,24 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertTrue(matcherToTest.matches(item));
 	}
+	
+	@Test
+	public void item_with_configuration_testCompile_is_matched_by_asterisk_and_test() {
+		/* prepare */
+		item.setConfiguration("testCompile");
+		matcherToTest.setFilterText("*test");
 
+		/* execute + test */
+		assertTrue(matcherToTest.matches(item));
+	}
+	
+	@Test
+	public void item_with_info_someThing_is_matched_by_asterisk_and_thing() {
+		/* prepare */
+		item.setInfo("someThing");
+		matcherToTest.setFilterText("*thing");
+
+		/* execute + test */
+		assertTrue(matcherToTest.matches(item));
+	}
 }

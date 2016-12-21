@@ -302,4 +302,43 @@ public class Item {
 		this.parameters = parameters;
 	}
 
+	/**
+	 * Creates a string containing all information of this item, separated by space, parameters with comma
+	 * @return full string
+	 */
+	String buildSearchString() {
+		StringBuilder sb = new StringBuilder();
+		if (type != null) {
+			sb.append(type);
+			sb.append(" ");
+		}
+		if (configuration != null) {
+			sb.append(configuration);
+			sb.append(" ");
+		}
+		if (name != null) {
+			sb.append(name);
+			sb.append(" ");
+		}
+		if (target != null) {
+			sb.append(target);
+			sb.append(" ");
+		}
+		if (parameters != null) {
+			for (String param : parameters) {
+				if (param != null) {
+					sb.append(param);
+					sb.append(",");
+				}
+
+			}
+		}
+		if (info != null) {
+			sb.append(info);
+			sb.append(" ");
+		}
+		String itemText = sb.toString();
+		return itemText;
+	}
+
 }

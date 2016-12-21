@@ -28,7 +28,7 @@ public class ItemTextMatcher implements Matcher<Item> {
 				return true;
 			}
 			
-			String itemText = buildCompareString(item);
+			String itemText = item.buildSearchString();
 			if (itemText.length()==0){
 				return false;
 			}
@@ -38,23 +38,6 @@ public class ItemTextMatcher implements Matcher<Item> {
 			return filterPatternMatches;
 		}
 
-		private String buildCompareString(Item item) {
-			StringBuilder sb = new StringBuilder();
-			String name = item.getName();
-			if (name!=null){
-				sb.append(name);
-			}
-			String type = item.getType();
-			if (type!=null){
-				sb.append(type);
-			}
-			String target = item.getTarget();
-			if (target!=null){
-				sb.append(target);
-			}
-			String itemText = sb.toString();
-			return itemText;
-		}
 
 		public void setFilterText(String filterText) {
 			this.filterPattern = null;
