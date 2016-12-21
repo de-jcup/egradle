@@ -240,7 +240,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		
 		String name = support.resolveAsSimpleString(assignmentIdentifier);
 		
-		item = support.createItem(context, assign);
+		item = support.createItem(context, assignmentIdentifier);
 		item.setName(name);
 		item.setItemType(ItemType.ASSIGNMENT);
 		
