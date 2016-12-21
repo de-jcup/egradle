@@ -90,6 +90,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
+	private boolean ignoreNextCaretMove;
+
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
 		
@@ -247,6 +249,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
 				int length = item.getLength();
+				ignoreNextCaretMove=true;
 				selectAndReveal(offset, length);
 			}
 		}
@@ -367,7 +370,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 
 	}
-
+	
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
@@ -378,6 +381,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			lastCaretPosition = event.caretOffset;
 			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS) {
 				setStatusLineMessage("caret moved:" + event.caretOffset);
+			}
+			if (ignoreNextCaretMove){
+				ignoreNextCaretMove=false;
+				return;
 			}
 			if (outlinePage == null) {
 				return;
