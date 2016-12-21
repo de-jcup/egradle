@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import java.util.ArrayList;
 
@@ -24,18 +24,17 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.osgi.util.TextProcessor;
 
 import de.jcup.egradle.core.api.Matcher;
 import de.jcup.egradle.core.model.Item;
 
 class ItemTextViewerFilter extends ViewerFilter {
-	private Matcher<String> matcher;
+	private Matcher<Item> matcher;
 
 	public ItemTextViewerFilter() {
 	}
 
-	public void setMatcher(Matcher<String> matcher) {
+	public void setMatcher(Matcher<Item> matcher) {
 		this.matcher = matcher;
 	}
 
@@ -100,9 +99,7 @@ class ItemTextViewerFilter extends ViewerFilter {
 			return Boolean.FALSE;
 		}
 		Item item = (Item) element;
-		String matchName = item.getName();
-		matchName = TextProcessor.deprocess(matchName);
-		if (matchName != null && matcher.matches(matchName)){
+		if (matcher.matches(item)){
 			return Boolean.TRUE;
 		}
 		/* maybe children are matching*/

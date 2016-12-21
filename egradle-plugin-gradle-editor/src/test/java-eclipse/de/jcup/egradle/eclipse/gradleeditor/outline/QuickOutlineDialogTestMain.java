@@ -20,6 +20,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.eclipse.api.ColorManager;
+
 public class QuickOutlineDialogTestMain {
 
 	/**
@@ -28,6 +30,7 @@ public class QuickOutlineDialogTestMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		ColorManager.setStandalone(new ColorManager());
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setText("Shell");

@@ -418,11 +418,16 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		}
 	}
 
-	private class OutlineTextMatcher implements Matcher<String> {
+	private class OutlineTextMatcher implements Matcher<Item> {
 
 		@Override
-		public boolean matches(String itemText) {
-			if (itemText == null) {
+		public boolean matches(Item item) {
+			if (item == null) {
+				return false;
+			}
+			
+			String itemText = buildCompareString(item);
+			if (itemText.length()==0){
 				return false;
 			}
 
@@ -447,6 +452,24 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			/* filter pattern set */
 			boolean filterPatternMatches = filterPattern.matcher(itemText).matches();
 			return filterPatternMatches;
+		}
+
+		private String buildCompareString(Item item) {
+			StringBuilder sb = new StringBuilder();
+			String name = item.getName();
+			if (name!=null){
+				sb.append(name);
+			}
+			String type = item.getType();
+			if (type!=null){
+				sb.append(type);
+			}
+			String target = item.getTarget();
+			if (target!=null){
+				sb.append(target);
+			}
+			String itemText = sb.toString();
+			return itemText;
 		}
 	}
 
