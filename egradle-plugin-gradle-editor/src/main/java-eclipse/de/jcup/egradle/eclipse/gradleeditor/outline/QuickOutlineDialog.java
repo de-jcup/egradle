@@ -13,10 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
-
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -46,8 +43,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.progress.UIJob;
 
-import de.jcup.egradle.core.api.Matcher;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemTextMatcher;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractQuickDialog;
@@ -71,19 +68,17 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	private static final int DEFAULT_X = 600;
 	private static final int DEFAULT_Y = 400;
 
-	private Pattern filterPattern;
-
 	private GradleEditor gradleEditor;
 	private Object input;
 
 	private Object monitor = new Object();
-	private Pattern PATTERN_DEREGEX_ASTERISK = Pattern.compile("\\*");
-	private Pattern PATTERN_DEREGEX_DOT = Pattern.compile("\\.");
+
 	private Text text;
 	private TreeViewer treeViewer;
 	private String currentUsedFilterText;
 	private ITreeContentProvider contentProvider;
 	private ItemTextViewerFilter textFilter;
+	private ItemTextMatcher matcher;
 
 	/**
 	 * Creates a quick outline dialog
@@ -97,7 +92,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	 *            shell to use is null the outline will have no content! If the
 	 *            gradle editor is null location setting etc. will not work.
 	 *            <br>
-	 * 			<br>
+	 *            <br>
 	 */
 	public QuickOutlineDialog(IAdaptable adaptable, Shell parent) {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS, DO_SHOW_DIALOG,
@@ -125,7 +120,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			return;
 		}
 		if (gradleEditor == null) {
-			System.out.println("selected:" + selection);
+			System.out.println("No editor available, would select:" + selection);
 			return;
 		}
 		gradleEditor.openSelectedTreeItemInEditor(selection);
@@ -186,7 +181,8 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 		/* filter */
 		textFilter = new ItemTextViewerFilter();
-		textFilter.setMatcher(new OutlineTextMatcher());
+		matcher = new ItemTextMatcher();
+		textFilter.setMatcher(matcher);
 		treeViewer.setFilters(textFilter);
 
 		tree.setLayoutData(gridData);
@@ -242,7 +238,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		}
 		return super.getInitialLocation(initialSize);
 	}
-	
+
 	@Override
 	protected Point getInitialSize() {
 		IDialogSettings dialogSettings = getDialogSettings();
@@ -266,7 +262,6 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 	}
 
 	protected void rebuildFilterTextPattern() {
-		filterPattern = null;
 		if (text == null) {
 			return;
 		}
@@ -275,31 +270,18 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		}
 		String filterText = text.getText();
 		if (filterText == null) {
+			if (currentUsedFilterText == null) {
+				/* same as before*/
+				return;
+			}
+		} else if (filterText.equals(currentUsedFilterText)) {
+			/* same as before*/
 			return;
 		}
-		filterText = filterText.trim();
-		if (filterText.length() == 0) {
-			return;
-		}
-		/*
-		 * make user entry not being a regular expression but simple wild card
-		 * handled
-		 */
-		// change "bla*" to "bla.*"
-		// change "bla." to "bla\."
-		String newPattern = filterText;
-		if (!newPattern.endsWith("*")) {
-			newPattern += "*";
-		}
-		newPattern = PATTERN_DEREGEX_ASTERISK.matcher(newPattern).replaceAll(".*");
-		newPattern = PATTERN_DEREGEX_DOT.matcher(newPattern).replaceAll("\\.");
 
-		try {
-			filterPattern = Pattern.compile(newPattern, Pattern.CASE_INSENSITIVE);
-			currentUsedFilterText = filterText;
-		} catch (PatternSyntaxException e) {
-			/* ignore - filterPattern is now null, fall back is used */
-		}
+		matcher.setFilterText(filterText);
+
+		currentUsedFilterText = filterText;
 
 	}
 
@@ -337,9 +319,9 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			if (treeViewer == null) {
 				return;
 			}
-			
+
 		}
-		
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			String filterText = text.getText();
@@ -369,7 +351,7 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 							return Status.CANCEL_STATUS;
 						}
 						treeViewer.refresh();
-						if (filterPattern != null) {
+						if (matcher.hasFilterPattern()) {
 							/*
 							 * something was entered into filter - so results
 							 * must be expanded:
@@ -415,61 +397,6 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 
 		private ITreeContentProvider getTreeContentProvider() {
 			return contentProvider;
-		}
-	}
-
-	private class OutlineTextMatcher implements Matcher<Item> {
-
-		@Override
-		public boolean matches(Item item) {
-			if (item == null) {
-				return false;
-			}
-			
-			String itemText = buildCompareString(item);
-			if (itemText.length()==0){
-				return false;
-			}
-
-			if (filterPattern == null) {
-				/* fall back ... */
-				String filterText = text.getText();
-				if (filterText == null) {
-					return true;
-				}
-				filterText = filterText.trim();
-				if (filterText.length() == 0) {
-					return true;
-				}
-
-				if (itemText.indexOf(filterText) != -1) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-
-			/* filter pattern set */
-			boolean filterPatternMatches = filterPattern.matcher(itemText).matches();
-			return filterPatternMatches;
-		}
-
-		private String buildCompareString(Item item) {
-			StringBuilder sb = new StringBuilder();
-			String name = item.getName();
-			if (name!=null){
-				sb.append(name);
-			}
-			String type = item.getType();
-			if (type!=null){
-				sb.append(type);
-			}
-			String target = item.getTarget();
-			if (target!=null){
-				sb.append(target);
-			}
-			String itemText = sb.toString();
-			return itemText;
 		}
 	}
 
