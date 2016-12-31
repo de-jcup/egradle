@@ -24,6 +24,8 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlinkPresenter;
 import org.eclipse.jface.text.hyperlink.URLHyperlinkDetector;
@@ -42,6 +44,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
@@ -55,6 +58,8 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private TextAttribute defaultTextAttribute;
 	private IAnnotationHover annotationHoover;
 	private IAdaptable adaptable;
+	private ContentAssistant contentAssistant;
+	private GradleContentAssistProcessor gradleContentAssistProcessor;
 	
 	/**
 	 * Creates configuration by given adaptable
@@ -64,10 +69,36 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		Assert.isNotNull(adaptable,"adaptable may not be null!"); 
 		this.adaptable=adaptable;
 		this.annotationHoover=new GradleEditorAnnotationHoover();
+
 		this.colorManager = adaptable.getAdapter(ColorManager.class);
 		Assert.isNotNull(colorManager," adaptable must support color manager");
 		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT)));
+
+		/* code completion */
+		this.contentAssistant=new ContentAssistant();
+		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable);
+		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
+		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
+				GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId());
+		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
+				GradleDocumentIdentifiers.GRADLE_KEYWORD.getId());
+		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
+				GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId());
+		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
+				GradleDocumentIdentifiers.GRADLE_VARIABLE.getId());
+		
+		/* enable auto activation */
+		contentAssistant.enableAutoActivation(true);
+	
+		/* set a propert orientation for proposal */
+		contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 	}
+	
+	@Override
+		public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+			contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+			return contentAssistant;
+		}
 
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
