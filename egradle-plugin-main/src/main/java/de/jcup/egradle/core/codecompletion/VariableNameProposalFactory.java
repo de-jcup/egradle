@@ -1,0 +1,46 @@
+package de.jcup.egradle.core.codecompletion;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemType;
+import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.core.model.ModelInspector;
+
+/**
+ * This factory creates proposals by fetching all available variables AND assignments at given offset
+ * @author albert
+ *
+ */
+public class VariableNameProposalFactory extends AbstractProposalFactory {
+
+	@Override
+	protected List<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+		Model model = contentProvider.getModel();
+		if (model==null){
+			return null;
+		}
+		
+		List<Proposal> proposals = new ArrayList<>();
+		
+		/* very easy (silly) first approach - just collect all variables without handling visibility etc.*/
+		ModelInspector inspector = new ModelInspector();
+		List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, model);
+		for (Item variableItem: allVariables){
+			proposals.add(new ProposalImpl(variableItem));
+		}
+		List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, model);
+		for (Item assignmentItem: allAssignments){
+			proposals.add(new ProposalImpl(assignmentItem));
+		}
+		
+		/* FIXME albert,02.01.2017: implementation must handle parts already entered. Eg. "file" exists and user entered "fi", so only "le" should be added to code */
+		/* FIXME albert,02.01.2017: implementation must be aware about position - there should be no access to variables not already defined! */
+		/* FIXME albert,02.01.2017: Types are not handled correct. "java.lang.String" is not correct parsed in outline! */
+		return proposals;
+	}
+
+	
+	
+}

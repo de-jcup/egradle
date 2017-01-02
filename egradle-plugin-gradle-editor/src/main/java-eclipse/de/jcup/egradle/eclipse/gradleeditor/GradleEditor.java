@@ -55,6 +55,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
@@ -166,6 +167,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
+		}
+		if (Model.class.equals(adapter)){
+			return (T) contentProvider.getModel();
 		}
 		if (ISourceViewer.class.equals(adapter)) {
 			return (T) getSourceViewer();

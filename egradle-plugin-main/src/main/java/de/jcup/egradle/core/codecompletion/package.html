@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>About code completion package</title>
+</head>
+<body>
+	Code completion shall be testable and easy implemented. To handle  this, each part of the 
+	code completion provided by EGradle Editor will be 
+	<ul>
+		<li>Inside this package</li>
+		<li>Have its own XYZProposalFactory implementation</li>
+	</ul>
+	Why specialized proposal factories? So each factory is only responsible for a dedicated part of proposal.
+	So its much easier to write, read, maintain and -last but not least- easy to test.
+</body>
+</html>
