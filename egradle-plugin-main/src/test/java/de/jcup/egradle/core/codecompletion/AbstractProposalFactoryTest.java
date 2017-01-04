@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -31,7 +33,7 @@ public class AbstractProposalFactoryTest {
 		/* prepare */
 		when(mockedContentProvider.getEditorSourceEnteredAt(1)).thenReturn("file");
 		
-		List<Proposal> list = new ArrayList<>();
+		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
 		when(mockedProposal1.getCode()).thenReturn("file");
 		
@@ -43,7 +45,7 @@ public class AbstractProposalFactoryTest {
 		factoryToTest.fakeCreationResult=list;
 		
 		/* execute */
-		List<Proposal> proposals = factoryToTest.createProposals(1 ,mockedContentProvider);
+		Set<Proposal> proposals = factoryToTest.createProposals(1 ,mockedContentProvider);
 		
 		/* test */
 		assertNotNull(proposals);
@@ -55,7 +57,7 @@ public class AbstractProposalFactoryTest {
 		/* prepare */
 		when(mockedContentProvider.getEditorSourceEnteredAt(1)).thenReturn("fi");
 		
-		List<Proposal> list = new ArrayList<>();
+		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
 		when(mockedProposal1.getCode()).thenReturn("file");
 		
@@ -71,7 +73,7 @@ public class AbstractProposalFactoryTest {
 		factoryToTest.fakeCreationResult=list;
 		
 		/* execute */
-		List<Proposal> proposals = factoryToTest.createProposals(1 ,mockedContentProvider);
+		Set<Proposal> proposals = factoryToTest.createProposals(1 ,mockedContentProvider);
 		
 		/* test */
 		assertNotNull(proposals);
@@ -89,7 +91,7 @@ public class AbstractProposalFactoryTest {
 		factoryToTest.fakeCreationResult=null;
 		
 		/* execute */
-		List<Proposal> proposals = factoryToTest.createProposals(index,mockedContentProvider);
+		Set<Proposal> proposals = factoryToTest.createProposals(index,mockedContentProvider);
 		
 		/* test */
 		assertNotNull(proposals);
@@ -113,9 +115,9 @@ public class AbstractProposalFactoryTest {
 	public void proposals_is_an_empty_list_when_index_negative_one_even_when_implementation_returns_a_filled_list(){
 		/* prepare */
 		int index = -1;
-		factoryToTest.fakeCreationResult=Collections.singletonList(mock(ItemProposalImpl.class));
+		factoryToTest.fakeCreationResult=Collections.singleton(mock(ItemProposalImpl.class));
 		/* execute */
-		List<Proposal> proposals = factoryToTest.createProposals(index,mockedContentProvider);
+		Set<Proposal> proposals = factoryToTest.createProposals(index,mockedContentProvider);
 		
 		/* test */
 		assertNotNull(proposals);
@@ -124,11 +126,11 @@ public class AbstractProposalFactoryTest {
 	
 	private class TestAbstractProposalFactory extends AbstractProposalFactory{
 
-		private List<Proposal> fakeCreationResult;
+		private Set<Proposal> fakeCreationResult;
 
 
 		@Override
-		protected List<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+		protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
 			return fakeCreationResult;
 		}
 		

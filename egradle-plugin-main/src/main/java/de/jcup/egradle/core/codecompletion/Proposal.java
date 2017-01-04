@@ -1,6 +1,6 @@
 package de.jcup.egradle.core.codecompletion;
 
-public interface Proposal {
+public interface Proposal extends Comparable<Proposal>{
 
 	/**
 	 * 
@@ -18,5 +18,11 @@ public interface Proposal {
 	 * @return type or <code>null</code>
 	 */
 	String getType();
+	
+	/**
+	 * 
+	 * @return description or <code>null</code>
+	 */
+	String getDescription();
 
 }

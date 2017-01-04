@@ -4,13 +4,13 @@ import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPrefe
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ContextInformation;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -20,7 +20,6 @@ import org.eclipse.swt.graphics.Image;
 import de.jcup.egradle.core.codecompletion.Proposal;
 import de.jcup.egradle.core.codecompletion.ProposalFactory;
 import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
-import de.jcup.egradle.core.codecompletion.ItemProposalImpl;
 import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
 import de.jcup.egradle.core.model.Item;
@@ -31,7 +30,6 @@ import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 
-/* FIXME ATR, 31.12.2016 - make a generic approach, independent from eclipse, so easy testable*/
 public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
 
@@ -101,11 +99,13 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			return NO_COMPLETION_PROPOSALS;
 		}
 		
-		List<ICompletionProposal> list = new ArrayList<>();
-		for (ProposalFactory proposalFactory: proposalFactories){
-			appendProposals(offset, proposalFactory, list, contentProvider);
-		}
 		
+		Set<Proposal> allProposals = new TreeSet<>();
+		for (ProposalFactory proposalFactory: proposalFactories){
+			Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
+			allProposals.addAll(proposalsOfCurrentFactory);
+		}
+		List<ICompletionProposal> list = createEclipseProposals(offset, allProposals, contentProvider);
 		return list.toArray(new ICompletionProposal[list.size()]);
 	}
 
@@ -113,9 +113,9 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		return EDITOR_PREFERENCES.getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODECOMPLETION_ENABLED);
 	}
 
-	private void appendProposals(int offset, ProposalFactory proposalFactory, List<ICompletionProposal> list, ProposalFactoryContentProvider contentProvider) {
-		List<Proposal> result = proposalFactory.createProposals(offset, contentProvider);
-		for (Proposal p: result){
+	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,  ProposalFactoryContentProvider contentProvider) {
+		List<ICompletionProposal> list = new ArrayList<>();
+		for (Proposal p: allProposals){
 			Image image = null;
 			if (p instanceof Itemable){
 				Itemable a = (Itemable) p;
@@ -132,12 +132,15 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			int length = p.getCode().length();
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), offset, length, offset+length,image,p.getName(),contextInformation,additionalProposalInfo);
 			list.add(proposal);
+			
 		}
+		return list;
 		
 	}
 
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
+		/* TODO ATR, 04.01.2017: implement or remove next lines:*/
 //		ContextInformation info = new ContextInformation("contextDisplayString:"+offset, "informationDisplayString");
 //		return new IContextInformation[]{info};
 		return null;

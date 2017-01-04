@@ -1,6 +1,6 @@
 package de.jcup.egradle.core.codecompletion;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProposalFactory {
 
@@ -12,5 +12,5 @@ public interface ProposalFactory {
 	 * @param contentProvider provides content for proposals
 	 * @return list of proposals, never <code>null</code>
 	 */
-	public List<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider);
+	public Set<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider);
 }

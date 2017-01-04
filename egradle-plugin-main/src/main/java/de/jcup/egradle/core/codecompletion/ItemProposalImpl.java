@@ -1,24 +1,22 @@
 package de.jcup.egradle.core.codecompletion;
 
-import org.apache.commons.lang3.StringUtils;
-
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 
-public class ItemProposalImpl implements Proposal, Itemable{
+public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
 
-	
 	private Item item;
 	private String code;
 
 	public ItemProposalImpl(Item item) {
-		// TODO check if item is lightweight enough!
+		if (item==null){
+			return;
+		}
+		this.name=item.getName();
+		this.code=item.getName();
+		this.type=item.getType();
+		
 		this.item=item;
-	}
-
-	@Override
-	public String getName() {
-		return item.getName();
 	}
 
 	@Override
@@ -27,17 +25,8 @@ public class ItemProposalImpl implements Proposal, Itemable{
 	}
 
 	@Override
-	public String getCode() {
-		return item.getName();
-	}
-
-	@Override
-	public String getType() {
-		return item.getType();
-	}
-
 	public Item getItem() {
 		return item;
 	}
-	
+
 }

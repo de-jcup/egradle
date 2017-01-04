@@ -1,6 +1,6 @@
 package de.jcup.egradle.core.codecompletion;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * A special proposal factory which will create proposals by current position inside outline model and
@@ -52,7 +52,7 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 	}
 	
 	@Override
-	public List<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
 		/* FIXME albert,04.01.2017: implement + use XMLProposalDataModel */
 		
 		return null;

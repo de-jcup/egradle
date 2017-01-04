@@ -1,8 +1,9 @@
 package de.jcup.egradle.core.codecompletion;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,16 +14,16 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AbstractProposalFactory implements ProposalFactory {
 	
-	public final List<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider) {
+	public final Set<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider) {
 		if (contentProvider==null){
 			throw new IllegalArgumentException("proposal factorycontent provider may not be null!");
 		}
 		if (offset<0){
-			return Collections.emptyList();
+			return Collections.emptySet();
 		}
-		List<Proposal> result = createProposalsImpl(offset,contentProvider);
+		Set<Proposal> result = createProposalsImpl(offset,contentProvider);
 		if (result==null){
-			return Collections.emptyList();
+			return Collections.emptySet();
 		}
 		/* we got proposals, so filter unusable ones:*/
 		String entered = contentProvider.getEditorSourceEnteredAt(offset);
@@ -38,7 +39,7 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 	 * @param contentProvider - is not <code>null</code> here
 	 * @return created proposals or <code>null</code>
 	 */
-	protected abstract List<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) ;
+	protected abstract Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) ;
 
 
 	/**
@@ -47,12 +48,12 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 	 * @param entered relevant code, already entered by user
 	 * @return
 	 */
-	protected List<Proposal> filterAndSetupProposals(List<Proposal> proposals, String entered){
+	protected Set<Proposal> filterAndSetupProposals(Set<Proposal> proposals, String entered){
 		if (StringUtils.isEmpty(entered)){
 			/* no relavant code entered*/
-			return proposals;
+			return new LinkedHashSet<>(proposals);
 		}
-		List<Proposal> filteredResult = new ArrayList<>();
+		Set<Proposal> filteredResult = new LinkedHashSet<>();
 		for (Proposal proposal: proposals){
 			String code = proposal.getCode();
 			if (code.indexOf(entered)!=-1){

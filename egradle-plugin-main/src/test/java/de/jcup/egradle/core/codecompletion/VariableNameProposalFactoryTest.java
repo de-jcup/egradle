@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,12 +39,12 @@ public class VariableNameProposalFactoryTest {
 		int index = code.length();
 
 		/* execute */
-		List<Proposal> proposals = factoryToTest.createProposals(index, mockedContentProvider);
+		Set<Proposal> proposals = factoryToTest.createProposals(index, mockedContentProvider);
 
 		/* test */
 		assertNotNull(proposals);
 		assertEquals(1, proposals.size());
-		Proposal proposal = proposals.get(0);
+		Proposal proposal = proposals.iterator().next();
 		assertEquals("file", proposal.getName());
 	}
 }
