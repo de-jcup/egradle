@@ -71,7 +71,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 			
 			contentProvider = new ProposalFactoryContentProvider() {
-				
+				private String relevant;
 				@Override
 				public Model getModel() {
 					return adaptable.getAdapter(Model.class);
@@ -79,8 +79,14 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 				@Override
 				public String getEditorSourceEnteredAt(int cursorOffset) {
-					String code = document.get();
-					String relevant = codeCutter.getRelevantCode(code, cursorOffset);
+					/* the content provider is only used one time per cursor offset - so we
+					 * simply cache the relevant calculation iniside internal string to
+					 * speed up...
+					 */
+					if (relevant==null){
+						String code = document.get();
+						relevant = codeCutter.getRelevantCode(code, cursorOffset);
+					}
 					return relevant;
 						
 				}
@@ -133,8 +139,13 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			sb.append(p.getDescription());
 			sb.append("<html>");
 			String additionalProposalInfo = sb.toString();
+			String alreadyEntered=contentProvider.getEditorSourceEnteredAt(offset);
 			int length = p.getCode().length();
-			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), offset, length, offset+length,image,p.getName(),contextInformation,additionalProposalInfo);
+			int alreadyEnteredChars = alreadyEntered.length();
+			int cursorOffset=offset-alreadyEnteredChars;
+			int replacementLength=alreadyEnteredChars;
+			int cursorMovement=length;
+			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), cursorOffset, replacementLength, cursorMovement ,image,p.getName(),contextInformation,additionalProposalInfo);
 			list.add(proposal);
 			
 		}
