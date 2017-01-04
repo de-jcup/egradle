@@ -1,5 +1,7 @@
 package de.jcup.egradle.core.codecompletion;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class AbstractProposalImpl implements Proposal{
 
 	String name;
@@ -13,6 +15,9 @@ public abstract class AbstractProposalImpl implements Proposal{
 	
 	@Override
 	public String getName() {
+		if (name==null){
+			return StringUtils.EMPTY;
+		}
 		return name;
 	}
 	
@@ -21,6 +26,9 @@ public abstract class AbstractProposalImpl implements Proposal{
 	}
 
 	public String getCode() {
+		if (code==null){
+			return StringUtils.EMPTY;
+		}
 		return code;
 	}
 	

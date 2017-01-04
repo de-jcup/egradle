@@ -7,6 +7,30 @@ import org.junit.Test;
 public class AbstractProposalImplTest {
 
 	@Test
+	public void getCode_never_null(){
+		TestProposalImpl1 impl = new TestProposalImpl1();
+		assertNotNull(impl.getCode());
+	}
+	
+	@Test
+	public void getName_never_null(){
+		TestProposalImpl1 impl = new TestProposalImpl1();
+		assertNotNull(impl.getName());
+	}
+	
+	@Test
+	public void getDescription_can_be_null(){
+		TestProposalImpl1 impl = new TestProposalImpl1();
+		assertNull(impl.getDescription());
+	}
+	
+	@Test
+	public void getType_can_be_null(){
+		TestProposalImpl1 impl = new TestProposalImpl1();
+		assertNull(impl.getType());
+	}
+	
+	@Test
 	public void compare_two_different_implementations_with_same_name_returns_0() {
 		TestProposalImpl1 impl1 = new TestProposalImpl1();
 		impl1.setName("name1");

@@ -36,6 +36,10 @@ public class VariableNameProposalFactory extends AbstractProposalFactory {
 		for (Item assignmentItem: allAssignments){
 			proposals.add(new ItemProposalImpl(assignmentItem));
 		}
+		List<Item> allDefinedTasks = inspector.findAllItemsOfType(ItemType.TASK,model);
+		for (Item definedTaskItem: allDefinedTasks){
+			proposals.add(new ItemProposalImpl(definedTaskItem));
+		}
 		
 		/* FIXME albert,02.01.2017: implementation must be aware about position - there should be no access to variables not already defined! */
 		/* FIXME albert,02.01.2017: Types are not handled correct. "java.lang.String" is not correct parsed in outline! */

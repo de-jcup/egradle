@@ -128,7 +128,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				image =EGradleUtil.getImage("/icons/gradle-og.png", Activator.PLUGIN_ID); 
 			}
 			IContextInformation contextInformation =null;
-			String additionalProposalInfo = "<html><b>Type:</b>"+p.getType()+"</html>";
+			StringBuilder sb = new StringBuilder();
+			sb.append("<html>");
+			sb.append(p.getDescription());
+			sb.append("<html>");
+			String additionalProposalInfo = sb.toString();
 			int length = p.getCode().length();
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), offset, length, offset+length,image,p.getName(),contextInformation,additionalProposalInfo);
 			list.add(proposal);
