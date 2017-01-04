@@ -1,11 +1,11 @@
 package de.jcup.egradle.core.codecompletion;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.runtime.IAdaptable;
 
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.Itemable;
 
-public class ProposalImpl implements Proposal, IAdaptable{
+public class ProposalImpl implements Proposal, Itemable{
 
 	
 	private Item item;
@@ -38,13 +38,8 @@ public class ProposalImpl implements Proposal, IAdaptable{
 		return item.getType();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getAdapter(Class<T> adapter) {
-		if (Item.class.equals(adapter)){
-			return (T) item;
-		}
-		return null;
+	public Item getItem() {
+		return item;
 	}
 	
 }

@@ -17,8 +17,10 @@ import org.eclipse.swt.graphics.Image;
 import de.jcup.egradle.core.codecompletion.Proposal;
 import de.jcup.egradle.core.codecompletion.ProposalFactory;
 import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
+import de.jcup.egradle.core.codecompletion.ProposalImpl;
 import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
@@ -91,9 +93,9 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		List<Proposal> result = proposalFactory.createProposals(offset, contentProvider);
 		for (Proposal p: result){
 			Image image = null;
-			if (p instanceof IAdaptable){
-				IAdaptable a = (IAdaptable) p;
-				Item item = a.getAdapter(Item.class);
+			if (p instanceof Itemable){
+				Itemable a = (Itemable) p;
+				Item item = a.getItem();
 				if (item!=null){
 					image = labelProvider.getImage(item);
 				}
