@@ -43,6 +43,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
+import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
@@ -76,7 +77,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		/* code completion */
 		this.contentAssistant=new ContentAssistant();
-		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable);
+		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
 				GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId());

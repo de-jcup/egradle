@@ -3,6 +3,7 @@ package de.jcup.egradle.eclipse.gradleeditor.codecompletion;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -17,7 +18,8 @@ import org.eclipse.swt.graphics.Image;
 import de.jcup.egradle.core.codecompletion.Proposal;
 import de.jcup.egradle.core.codecompletion.ProposalFactory;
 import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
-import de.jcup.egradle.core.codecompletion.ProposalImpl;
+import de.jcup.egradle.core.codecompletion.ItemProposalImpl;
+import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
@@ -35,12 +37,17 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	private List<ProposalFactory> proposalFactories = new ArrayList<>();
 	private static GradleEditorOutlineLabelProvider labelProvider =new GradleEditorOutlineLabelProvider();
 	
-
-	public GradleContentAssistProcessor(IAdaptable adaptable) {
+	private RelevantCodeCutter codeCutter;
+	
+	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
 		if (adaptable==null){
 			throw new IllegalArgumentException("adaptable may not be null!");
 		}
+		if (codeCutter==null){
+			throw new IllegalArgumentException("codeCutter may not be null!");
+		}
 		this.adaptable=adaptable;
+		this.codeCutter=codeCutter;
 		
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
@@ -48,6 +55,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		IDocument document = viewer.getDocument();
+		
 		ProposalFactoryContentProvider contentProvider=null;
 		try {
 			int line = document.getLineOfOffset(offset);
@@ -63,8 +71,10 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 				@Override
 				public String getEditorSourceEnteredAt(int cursorOffset) {
-					/* FIXME albert,04.01.2017:implement! */
-					return null;
+					String code = document.get();
+					String relevant = codeCutter.getRelevantCode(code, cursorOffset);
+					return relevant;
+						
 				}
 
 				@Override

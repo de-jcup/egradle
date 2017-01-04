@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
-import de.jcup.egradle.core.codecompletion.ProposalImpl;
+import de.jcup.egradle.core.codecompletion.ItemProposalImpl;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 

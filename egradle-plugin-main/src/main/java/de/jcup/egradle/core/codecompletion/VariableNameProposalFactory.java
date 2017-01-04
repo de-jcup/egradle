@@ -28,11 +28,11 @@ public class VariableNameProposalFactory extends AbstractProposalFactory {
 		ModelInspector inspector = new ModelInspector();
 		List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, model);
 		for (Item variableItem: allVariables){
-			proposals.add(new ProposalImpl(variableItem));
+			proposals.add(new ItemProposalImpl(variableItem));
 		}
 		List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, model);
 		for (Item assignmentItem: allAssignments){
-			proposals.add(new ProposalImpl(assignmentItem));
+			proposals.add(new ItemProposalImpl(assignmentItem));
 		}
 		
 		/* FIXME albert,02.01.2017: implementation must handle parts already entered. Eg. "file" exists and user entered "fi", so only "le" should be added to code */

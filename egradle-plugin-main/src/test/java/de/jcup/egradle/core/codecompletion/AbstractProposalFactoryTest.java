@@ -113,7 +113,7 @@ public class AbstractProposalFactoryTest {
 	public void proposals_is_an_empty_list_when_index_negative_one_even_when_implementation_returns_a_filled_list(){
 		/* prepare */
 		int index = -1;
-		factoryToTest.fakeCreationResult=Collections.singletonList(mock(ProposalImpl.class));
+		factoryToTest.fakeCreationResult=Collections.singletonList(mock(ItemProposalImpl.class));
 		/* execute */
 		List<Proposal> proposals = factoryToTest.createProposals(index,mockedContentProvider);
 		
