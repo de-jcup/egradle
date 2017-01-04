@@ -33,6 +33,8 @@ public enum GradleEditorPreferenceConstants implements PreferenceIdentifiable{
 	P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION("highlightBracketAtCaretLocation"),
 	P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
 	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor"),
+	
+	P_EDITOR_CODECOMPLETION_ENABLED("codeCompletionEnabled"),
 	;
 
 	private String id;

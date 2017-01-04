@@ -38,6 +38,9 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		store.setDefault(P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), true); // per default matching is enabled, but without the two other special parts
 		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), false);
 		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), false);
+		
+		store.setDefault(P_EDITOR_CODECOMPLETION_ENABLED.getId(), true);
+		
 		/* bracket color */
 		EDITOR_PREFERENCES.setDefaultColor(P_EDITOR_MATCHING_BRACKETS_COLOR, GradleEditorColorConstants.GRAY_JAVA);
 		

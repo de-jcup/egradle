@@ -59,6 +59,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 	private Button matchingBracketRadioButton;
 
 	private BooleanFieldEditor linkEditorWithOutline;
+	private BooleanFieldEditor codeCompletionEnabled;
 	private ColorFieldEditor matchingBracketsColor;
 
 	private ArrayList<MasterButtonSlaveSelectionListener> masterSlaveListeners = new ArrayList<>();
@@ -193,6 +194,9 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 		addField(matchingBracketsColor);
 		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getLabelControl(radioComposite));
 		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getColorSelector().getButton());
+		
+		codeCompletionEnabled = new BooleanFieldEditor(P_EDITOR_CODECOMPLETION_ENABLED.getId(), "Code completion enabled", getFieldEditorParent());
+		addField(codeCompletionEnabled);
 
 	}
 

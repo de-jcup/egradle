@@ -47,6 +47,7 @@ import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 

@@ -1,5 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor.codecompletion;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,12 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 
 /* FIXME ATR, 31.12.2016 - make a generic approach, independent from eclipse, so easy testable*/
 public class GradleContentAssistProcessor implements IContentAssistProcessor {
+	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
+
 	private String errorMessage;
 
 	private IAdaptable adaptable;
@@ -54,6 +59,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
+		if (! isCodeCompletionEnabled()){
+			errorMessage="EGradle editor code completion is disabled. Change your preferences!";
+			return NO_COMPLETION_PROPOSALS;
+		}
+		errorMessage=null;
 		IDocument document = viewer.getDocument();
 		
 		ProposalFactoryContentProvider contentProvider=null;
@@ -88,7 +98,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				}
 			};
 		} catch (BadLocationException e) {
-			return new ICompletionProposal[0];
+			return NO_COMPLETION_PROPOSALS;
 		}
 		
 		List<ICompletionProposal> list = new ArrayList<>();
@@ -97,6 +107,10 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		}
 		
 		return list.toArray(new ICompletionProposal[list.size()]);
+	}
+
+	private boolean isCodeCompletionEnabled() {
+		return EDITOR_PREFERENCES.getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODECOMPLETION_ENABLED);
 	}
 
 	private void appendProposals(int offset, ProposalFactory proposalFactory, List<ICompletionProposal> list, ProposalFactoryContentProvider contentProvider) {
@@ -124,8 +138,9 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		ContextInformation info = new ContextInformation("contextDisplayString:"+offset, "informationDisplayString");
-		return new IContextInformation[]{info};
+//		ContextInformation info = new ContextInformation("contextDisplayString:"+offset, "informationDisplayString");
+//		return new IContextInformation[]{info};
+		return null;
 	}
 
 	@Override
