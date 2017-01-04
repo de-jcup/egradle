@@ -14,7 +14,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
-public class EnhancedProposal implements ICompletionProposal, ICompletionProposalExtension3 {
+public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;
@@ -76,7 +76,7 @@ public class EnhancedProposal implements ICompletionProposal, ICompletionProposa
 	 * @param additionalProposalInfo
 	 *            the additional information associated with this proposal
 	 */
-	public EnhancedProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition,
+	public GradleCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition,
 			Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo) {
 		Assert.isNotNull(replacementString);
 		Assert.isTrue(replacementOffset >= 0);

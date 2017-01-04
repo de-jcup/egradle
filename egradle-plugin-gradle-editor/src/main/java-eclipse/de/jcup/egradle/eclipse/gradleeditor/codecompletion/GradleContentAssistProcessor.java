@@ -46,28 +46,39 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		IDocument document = viewer.getDocument();
-
+		ProposalFactoryContentProvider contentProvider=null;
 		try {
-			int lineOfOffset = document.getLineOfOffset(offset);
-			int lineOffset = document.getLineOffset(lineOfOffset);
+			int line = document.getLineOfOffset(offset);
+			int offsetOfFirstCharacterInLine = document.getLineOffset(line);
 
-//			/*
-//			 * do not show any content assist in case the offset is not at the
-//			 * beginning of a line
-//			 */
-//			if (offset != lineOffset) {
-//				return new ICompletionProposal[0];
-//			}
+			
+			contentProvider = new ProposalFactoryContentProvider() {
+				
+				@Override
+				public Model getModel() {
+					return adaptable.getAdapter(Model.class);
+				}
+
+				@Override
+				public String getEditorSourceEnteredAt(int cursorOffset) {
+					/* FIXME albert,04.01.2017:implement! */
+					return null;
+				}
+
+				@Override
+				public int getLineAt(int offset) {
+					return line;
+				}
+
+				@Override
+				public int getOffsetOfFirstCharacterInLine(int line) {
+					return offsetOfFirstCharacterInLine;
+				}
+			};
 		} catch (BadLocationException e) {
 			return new ICompletionProposal[0];
 		}
-		ProposalFactoryContentProvider contentProvider = new ProposalFactoryContentProvider() {
-			
-			@Override
-			public Model getModel() {
-				return adaptable.getAdapter(Model.class);
-			}
-		};
+		
 		List<ICompletionProposal> list = new ArrayList<>();
 		for (ProposalFactory proposalFactory: proposalFactories){
 			appendProposals(offset, proposalFactory, list, contentProvider);
@@ -93,7 +104,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			IContextInformation contextInformation =null;
 			String additionalProposalInfo = "<html><b>Type:</b>"+p.getType()+"</html>";
 			int length = p.getCode().length();
-			EnhancedProposal proposal = new EnhancedProposal(p.getCode(), offset, length, offset+length,image,p.getName(),contextInformation,additionalProposalInfo);
+			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), offset, length, offset+length,image,p.getName(),contextInformation,additionalProposalInfo);
 			list.add(proposal);
 		}
 		

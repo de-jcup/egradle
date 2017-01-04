@@ -40,10 +40,19 @@ import java.util.List;
  * @author albert
  *
  */
-public class XMLProposalFactory implements ProposalFactory{
+public class XMLProposalFactory extends AbstractProposalFactory{
 
+	private XMLProposalDataModelProvider provider;
+
+	public XMLProposalFactory(XMLProposalDataModelProvider provider) {
+		if (provider==null){
+			throw new IllegalArgumentException("data model provider may not be null!");
+		}
+		this.provider=provider;
+	}
+	
 	@Override
-	public List<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider) {
+	public List<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
 		/* FIXME albert,04.01.2017: implement + use XMLProposalDataModel */
 		
 		return null;
