@@ -30,6 +30,10 @@ public class XMLProposalDataModel {
 		return id;
 	}
 
+	/**
+	 * Ensure preparation is done. Means calculation of container per path is done. This is only necessary when model is initial loaded and containers are relevant!
+	 * @throws PreparationException
+	 */
 	public void ensurePrepared() throws PreparationException{
 		if (!prepared){
 			prepare();

@@ -9,7 +9,6 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.PreparationException;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalData;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
 import de.jcup.egradle.core.model.Item;

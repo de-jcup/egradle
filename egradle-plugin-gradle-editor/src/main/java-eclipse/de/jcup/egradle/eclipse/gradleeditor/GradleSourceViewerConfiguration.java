@@ -44,10 +44,11 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
+import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModelProvider;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
@@ -62,6 +63,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private IAdaptable adaptable;
 	private ContentAssistant contentAssistant;
 	private GradleContentAssistProcessor gradleContentAssistProcessor;
+	private XMLProposalDataModelProvider xmlDataModelProvider;
 	
 	/**
 	 * Creates configuration by given adaptable
@@ -78,7 +80,8 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		/* code completion */
 		this.contentAssistant=new ContentAssistant();
-		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
+		xmlDataModelProvider=UserHomeBasedXMLProposalDataModelProvider.INSTANCE;
+		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter(), xmlDataModelProvider);
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
 				GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId());

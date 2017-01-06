@@ -119,7 +119,13 @@
          name="Syntax coloring"
          category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage">
       </page>
-   </extension>
+      <page
+         id="egradle.eclipse.gradleeditor.preferences.EGradleEditorCodeCompletionPreferencePage"
+         class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorCodeCompletionPreferencePage"
+         name="Code completion"
+         category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage">
+      </page>
+    </extension>
     <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer

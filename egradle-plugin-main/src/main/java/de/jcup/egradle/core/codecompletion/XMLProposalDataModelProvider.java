@@ -17,5 +17,7 @@ public interface XMLProposalDataModelProvider {
 	 * @return list with data models, never <code>null</code>
 	 */
 	public List<XMLProposalDataModel> getDataModels();
+	
+	
 
 }

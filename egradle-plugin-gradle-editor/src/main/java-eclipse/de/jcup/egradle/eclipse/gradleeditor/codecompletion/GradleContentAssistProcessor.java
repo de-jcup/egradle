@@ -22,6 +22,8 @@ import de.jcup.egradle.core.codecompletion.ProposalFactory;
 import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
 import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModelProvider;
+import de.jcup.egradle.core.codecompletion.XMLProposalFactory;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
@@ -42,7 +44,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	
 	private RelevantCodeCutter codeCutter;
 	
-	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
+	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter, XMLProposalDataModelProvider dataModelProvider) {
 		if (adaptable==null){
 			throw new IllegalArgumentException("adaptable may not be null!");
 		}
@@ -53,6 +55,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		this.codeCutter=codeCutter;
 		
 		proposalFactories.add(new VariableNameProposalFactory());
+		proposalFactories.add(new XMLProposalFactory(dataModelProvider));
 	}
 
 	@Override
@@ -135,7 +138,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			}
 			IContextInformation contextInformation =null;
 			StringBuilder sb = new StringBuilder();
-			if (p.getDescription()==null){
+			if (p.getDescription()!=null){
 				sb.append("<html>");
 				sb.append(p.getDescription());
 				sb.append("<html>");

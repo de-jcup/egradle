@@ -26,6 +26,7 @@ import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
 import de.jcup.egradle.eclipse.api.ColorManager;
 
 /**
@@ -55,6 +56,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		UserHomeBasedXMLProposalDataModelProvider.INSTANCE.setErrorHandler(EGradleErrorHandler.INSTANCE);
 	}
 
 	public void stop(BundleContext context) throws Exception {

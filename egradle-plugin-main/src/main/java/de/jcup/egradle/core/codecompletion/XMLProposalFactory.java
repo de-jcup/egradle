@@ -24,9 +24,9 @@ import de.jcup.egradle.core.model.Model;
  *   	proposal
  *   		context
  *   			root
- *   			  path="."
- *   			  path=".allProjects"
- *   			  path=".project"
+ *   			  path=""
+ *   			  path="allProjects"
+ *   			  path="project"
  *   		element="repositories"
  *   			description="Defines repositories available inside the current context"
  *   			proposal value="mavenLocal()" max="1"
@@ -74,9 +74,9 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		if (outlineModel==null){
 			return null;
 		}
+		/* FIXME albert,07.01.2017: this is a problem - outline model does always return most recent part- but for root not correct! instead of "" "subprojects.artifacts" was returned!  */
 		Item item = outlineModel.getItemAt(offset);
 		if (item==null){
-			/* FIXME albert,06.01.2017: check is current item null when on root element?!?!? */
 			return null;
 		}
 		List<XMLProposalDataModel> models = provider.getDataModels();
@@ -96,6 +96,7 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 				continue;
 			}
 			try {
+				/* FIXME albert,07.01.2017: is ensurePrepared needed to be public or should the mehod only used internally and only once when failure occurs? */
 				model.ensurePrepared();
 
 				Set<XMLProposalContainer> possibleParentElements = model.getContainersByPath(itemPath);
