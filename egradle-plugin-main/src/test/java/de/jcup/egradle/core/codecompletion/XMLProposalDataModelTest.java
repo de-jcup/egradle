@@ -11,8 +11,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.PreparationException;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.SyntheticXMLProposalContainer;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalContainer;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalData;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalRootPathEntry;
@@ -22,27 +27,81 @@ public class XMLProposalDataModelTest {
 
 	private XMLProposalDataModel modelToTest;
 
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+	
 	@Before
 	public void before() {
 		modelToTest = new XMLProposalDataModel();
 	}
+	
+	@Test
+	public void preparation_throws_exception_when_dive_more_than_1000() throws Exception{
+		prepareModelWithDiveFromElement1(999);
+		/* prepare test*/
+		expectedException.expect(PreparationException.class);		
+		/* execute */
+		modelToTest.ensurePrepared();
+	}
+	
+	@Test
+	public void preparation_throws_NO_exception_when_dive_is_1000() throws Exception{
+		prepareModelWithDiveFromElement1(998);
+		/* execute */
+		modelToTest.ensurePrepared();
+	}
+
+	private void prepareModelWithDiveFromElement1(int additionalElementChildren) {
+		/* prepare */
+		modelToTest.id = "id1";
+
+		XMLProposalData proposalData1 = new XMLProposalData();
+		modelToTest.getProposals().add(proposalData1);
+
+		// set context
+		XMLProposalRootPathEntry rootPath = new XMLProposalRootPathEntry();
+		rootPath.path = "";
+		proposalData1.getContext().getRootPathEntries().add(rootPath);
+		
+		XMLProposalRootPathEntry rootPath2 = new XMLProposalRootPathEntry();
+		rootPath2.path = "repositories";
+		proposalData1.getContext().getRootPathEntries().add(rootPath2);
+		
+
+		// add element
+		XMLProposalElement element1 = new XMLProposalElement();
+
+		element1.description = "element1:";
+		element1.name = "element1";
+
+		proposalData1.getElements().add(element1);
+		
+		XMLProposalElement parent = element1;
+		for (int i=0;i<additionalElementChildren;i++){
+			XMLProposalElement subElement = new XMLProposalElement();
+			subElement.name="subElement-"+i;
+			parent.getElements().add(subElement);
+			parent=subElement;
+		}
+	}
+
 
 	@Test
 	public void path_correct_prepared() throws Exception {
 		/* prepare */
 		modelToTest.id = "id1";
 
-		XMLProposalData data1 = new XMLProposalData();
-		modelToTest.getProposals().add(data1);
+		XMLProposalData proposalData1 = new XMLProposalData();
+		modelToTest.getProposals().add(proposalData1);
 
 		// set context
 		XMLProposalRootPathEntry rootPath = new XMLProposalRootPathEntry();
 		rootPath.path = "";
-		data1.getContext().getRootPathEntries().add(rootPath);
+		proposalData1.getContext().getRootPathEntries().add(rootPath);
 		
 		XMLProposalRootPathEntry rootPath2 = new XMLProposalRootPathEntry();
 		rootPath2.path = "allProjects";
-		data1.getContext().getRootPathEntries().add(rootPath2);
+		proposalData1.getContext().getRootPathEntries().add(rootPath2);
 		
 
 		// add element
@@ -67,8 +126,8 @@ public class XMLProposalDataModelTest {
 		directValue.code="apply plugin: '$cursor'";
 		directValue.description="Applies plugin";
 
-		data1.getElements().add(element1);
-		data1.getValues().add(directValue);
+		proposalData1.getElements().add(element1);
+		proposalData1.getValues().add(directValue);
 		
 		XMLProposalElement subElement = new XMLProposalElement();
 		subElement.name="subElement";
@@ -79,12 +138,24 @@ public class XMLProposalDataModelTest {
 		modelToTest.ensurePrepared();
 
 		/* test */
-		Set<XMLProposalElement> data = modelToTest.getElementsByPath("repositories");
-		assertNotNull(data);
-		assertEquals(1,data.size());
-		assertEquals(element1,data.iterator().next());
+		Set<XMLProposalContainer> data0 = modelToTest.getContainersByPath("");
+		assertNotNull(data0);
+		assertEquals(1,data0.size());
+		XMLProposalContainer next = data0.iterator().next();
+		assertNotNull(next);
+		assertTrue(next instanceof SyntheticXMLProposalContainer);
+		List<XMLProposalElement> children = next.getElements();
+		assertNotNull(children);
+		assertEquals(1,children.size());
+		assertEquals(element1,children.iterator().next());
 		
-		Set<XMLProposalElement> data2 = modelToTest.getElementsByPath("repositories.subElement");
+		
+		Set<XMLProposalContainer> data1 = modelToTest.getContainersByPath("repositories");
+		assertNotNull(data1);
+		assertEquals(1,data1.size());
+		assertEquals(element1,data1.iterator().next());
+		
+		Set<XMLProposalContainer> data2 = modelToTest.getContainersByPath("repositories.subElement");
 		assertEquals(subElement,data2.iterator().next());
 	}
 	

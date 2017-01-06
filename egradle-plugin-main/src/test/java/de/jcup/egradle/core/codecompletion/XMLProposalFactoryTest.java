@@ -9,6 +9,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.PreparationException;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalData;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
 import de.jcup.egradle.core.model.Item;
@@ -45,10 +46,9 @@ public class XMLProposalFactoryTest {
 	}
 	
 	@Test
-	public void when_cursor_at_root_and_model_contains_parent_with_child_only_parent_is_in_proposal() {
+	public void when_cursor_at_root_and_model_contains_parent_with_child_only_parent_is_in_proposal() throws Exception {
 		/* prepare */
 		XMLProposalDataModel model = createParent1Child1Model();
-		model.ensurePrepared();
 		
 		when(mockedDataModelProvider.getDataModels()).thenReturn(singletonList(model));
 		Model outlineModel = mock(Model.class);

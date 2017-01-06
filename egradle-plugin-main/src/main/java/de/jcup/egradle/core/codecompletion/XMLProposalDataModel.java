@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,6 +19,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlRootElement(name = "model")
 public class XMLProposalDataModel {
 
+	private static final int DIVE_MAXIMUM = 1000;
+
 	@XmlAttribute(name = "id")
 	String id;
 	
@@ -29,41 +30,58 @@ public class XMLProposalDataModel {
 		return id;
 	}
 
-	/**
-	 * Ensure model is prepared (pathes calculated etc.) - if already prepared, nothing happens
-	 */
-	public void ensurePrepared(){
+	public void ensurePrepared() throws PreparationException{
 		if (!prepared){
 			prepare();
 		}
 	}
 	
-	private Map<String, Set<XMLProposalElement>> elementsByPathMap = new TreeMap<>();
+	private Map<String, Set<XMLProposalContainer>> containerMap = new TreeMap<>();
 	
 	/**
-	 * Returns a set containing all suitable {@link XMLProposalElement} instances
+	 * Returns a set containing all suitable {@link XMLProposalContainer} instances
 	 * @param path
 	 * @return set of proposal elements, never <code>null</code>
 	 */
-	public Set<XMLProposalElement> getElementsByPath(String path) {
-		Set<XMLProposalElement> set = elementsByPathMap.get(path);
+	public Set<XMLProposalContainer> getContainersByPath(String path) {
+		Set<XMLProposalContainer> set = containerMap.get(path);
 		if (set==null){
 			return Collections.emptySet();
 		}
 		return set;
 	}
 
-	private void prepare() {
+	private void prepare() throws PreparationException {
 		prepared=true;
 		/* calulate Ids */
 		for (XMLProposalData data: proposals){
 			List<XMLProposalRootPathEntry> rootPathEntries = data.getContext().getRootPathEntries();
-			calculateAndAddPathesToMap(data, null, rootPathEntries, data.getElements());
+			if (rootPathEntries.isEmpty()){
+				/* create as fallback standard root path */
+				XMLProposalRootPathEntry rootPathEntry = new XMLProposalRootPathEntry();
+				rootPathEntry.path="";
+				rootPathEntries.add(rootPathEntry);
+			}
+			calculateAndAddPathesToMap(data, null, rootPathEntries, data.getElements(),0);
 		}
-		
 	}
 
-	private void calculateAndAddPathesToMap(XMLProposalData data ,StringBuilder parentSB, List<XMLProposalRootPathEntry> rootPathEntries, List<XMLProposalElement> elements) {
+	private void calculateAndAddPathesToMap(XMLProposalData data ,StringBuilder parentSB, List<XMLProposalRootPathEntry> rootPathEntries, List<XMLProposalElement> elements, int dive) throws PreparationException {
+		if (dive==0){
+			/* first call so add root parts as synthetic containers for given elements!*/
+			for (XMLProposalRootPathEntry entry: rootPathEntries){
+				SyntheticXMLProposalContainer container = new SyntheticXMLProposalContainer();
+				container.elements=elements;
+				String uid = entry.path;
+				registerContainer(container, uid);
+			}
+			
+		}
+		dive++;
+		if (dive>DIVE_MAXIMUM){
+			/* to avoid infinite loops or stack overflow exceptions we hardly prevent this:*/
+			throw new PreparationException("Dive greater than maximum:"+DIVE_MAXIMUM);
+		}
 		for (XMLProposalElement element:elements){
 			StringBuilder sb = new StringBuilder();
 			if (parentSB!=null){
@@ -71,21 +89,25 @@ public class XMLProposalDataModel {
 				sb.append('.');
 			}
 			sb.append(element.getName());
-			calculateAndAddPathesToMap(data, sb, rootPathEntries, element.getElements());
+			calculateAndAddPathesToMap(data, sb, rootPathEntries, element.getElements(), dive);
 			for (XMLProposalRootPathEntry rootPath : rootPathEntries){
 				StringBuilder uidSb = new StringBuilder();
 				uidSb.append(rootPath.path);
 				uidSb.append(sb);
 				String uid = uidSb.toString();
 				
-				Set<XMLProposalElement> set = elementsByPathMap.get(uid);
-				if (set == null){
-					set = new LinkedHashSet<>();
-					elementsByPathMap.put(uid, set);
-				}
-				set.add(element);
+				registerContainer(element, uid);
 			}
 		}
+	}
+
+	private void registerContainer(XMLProposalContainer element, String uid) {
+		Set<XMLProposalContainer> set = containerMap.get(uid);
+		if (set == null){
+			set = new LinkedHashSet<>();
+			containerMap.put(uid, set);
+		}
+		set.add(element);
 	}
 
 	@XmlElement(name = "proposal")
@@ -125,6 +147,9 @@ public class XMLProposalDataModel {
 		@XmlElement(name = "rootPathEntry")
 		private List<XMLProposalRootPathEntry> rootPathEntries = new ArrayList<>();
 
+		/**
+		 * @return root path entries, never <code>null</code>
+		 */
 		public List<XMLProposalRootPathEntry> getRootPathEntries() {
 			return rootPathEntries;
 		}
@@ -146,7 +171,7 @@ public class XMLProposalDataModel {
 	 * @author albert
 	 *
 	 */
-	public static class XMLProposalElement implements XMLProposalDescribed {
+	public static class XMLProposalElement implements XMLProposal,XMLProposalContainer {
 		
 		@XmlAttribute(name = "name", required=true)
 		String name;
@@ -165,6 +190,13 @@ public class XMLProposalDataModel {
 		@XmlElement(name = "value")
 		private List<XMLProposalValue> values = new ArrayList<>();
 
+		@XmlAttribute(name = "code")
+		String code;
+
+		public String getCode() {
+			return code;
+		}
+		
 		public List<XMLProposalValue> getValues() {
 			return values;
 		}
@@ -187,8 +219,17 @@ public class XMLProposalDataModel {
 	 * @author albert
 	 *
 	 */
-	public static class XMLProposalValue implements XMLProposalDescribed {
+	public static class XMLProposalValue implements XMLProposal {
 
+		@XmlAttribute(name = "name")
+		String name;
+
+		
+		@Override
+		public String getName() {
+			return name;
+		}
+		
 		@XmlAttribute(name = "code")
 		String code;
 
@@ -212,9 +253,66 @@ public class XMLProposalDataModel {
 		}
 
 	}
+	
+	/**
+	 * Synthetic xml prosal container - e.g. for root path entries not available in model but necessary to find...
+	 * @author albert
+	 *
+	 */
+	public static class SyntheticXMLProposalContainer implements XMLProposalContainer{
 
-	public static interface XMLProposalDescribed {
+		private List<XMLProposalElement> elements = new ArrayList<>();
+		private List<XMLProposalValue> values;
+
+		@Override
+		public List<XMLProposalElement> getElements() {
+			return elements;
+		}
+
+		@Override
+		public List<XMLProposalValue> getValues() {
+			return values;
+		}
+		
+	}
+
+	public static interface XMLProposal {
+		
+		/**
+		 * Returns display name (and also the name used for UID creation!)
+		 * @return name
+		 */
+		public String getName();
+		
+		/**
+		 * Returns code of proposal
+		 * @return code
+		 */
+		public String getCode();
+		
+		/**
+		 * Returns description of proposal
+		 * @return description
+		 */
 		public String getDescription();
+	}
+	
+	public static interface XMLProposalContainer {
+		
+		public List<XMLProposalElement> getElements();
+		
+		public List<XMLProposalValue> getValues();
+	}
+	
+	public static class PreparationException extends Exception{
+
+		private static final long serialVersionUID = 1L;
+
+		public PreparationException(String message) {
+			super(message);
+		}
+
+		
 	}
 
 }

@@ -4,6 +4,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.PreparationException;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalContainer;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
@@ -50,12 +53,17 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 
 	private ItemPathCreator itemPathCreator = new ItemPathCreator();
 	private XMLProposalDataModelProvider provider;
-
+	private ErrorHandler errorHandler;
+	
 	public XMLProposalFactory(XMLProposalDataModelProvider dataModelProvider) {
 		if (dataModelProvider==null){
 			throw new IllegalArgumentException("data model provider may not be null!");
 		}
 		this.provider=dataModelProvider;
+	}
+
+	public void setErrorHandler(ErrorHandler errorHandler) {
+		this.errorHandler = errorHandler;
 	}
 	
 	@Override
@@ -87,20 +95,25 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 			if (model==null){
 				continue;
 			}
-			model.ensurePrepared();
-			
-			Set<XMLProposalElement> possibleParentElements = model.getElementsByPath(itemPath);
-			for (XMLProposalElement possibleParent: possibleParentElements){
-				appendProposals(possibleParent, proposals);
+			try {
+				model.ensurePrepared();
+
+				Set<XMLProposalContainer> possibleParentElements = model.getContainersByPath(itemPath);
+				for (XMLProposalContainer possibleParent: possibleParentElements){
+					appendProposals(possibleParent, proposals);
+				}
+			} catch (PreparationException e) {
+				if (errorHandler!=null){
+					errorHandler.handleError("Was not able to prepare model:"+model.getId(), e);
+				}
 			}
-			
 			
 		}
 		return proposals;
 	}
 	/* FIXME albert,06.01.2017: solve problem of cursor inside item and not at end! code completion maybe destroys item! */
 
-	private void appendProposals(XMLProposalElement possibleParent, Set<Proposal> proposals) {
+	private void appendProposals(XMLProposalContainer possibleParent, Set<Proposal> proposals) {
 		List<XMLProposalElement> children = possibleParent.getElements();
 		for (XMLProposalElement child: children){
 			XMLProposalImpl proposal = new XMLProposalImpl();
