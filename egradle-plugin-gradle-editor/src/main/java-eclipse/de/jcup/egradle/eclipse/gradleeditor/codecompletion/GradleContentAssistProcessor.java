@@ -135,9 +135,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			}
 			IContextInformation contextInformation =null;
 			StringBuilder sb = new StringBuilder();
-			sb.append("<html>");
-			sb.append(p.getDescription());
-			sb.append("<html>");
+			if (p.getDescription()==null){
+				sb.append("<html>");
+				sb.append(p.getDescription());
+				sb.append("<html>");
+			}
 			String additionalProposalInfo = sb.toString();
 			String alreadyEntered=contentProvider.getEditorSourceEnteredAt(offset);
 			int length = p.getCode().length();

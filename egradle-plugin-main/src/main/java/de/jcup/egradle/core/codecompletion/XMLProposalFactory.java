@@ -1,6 +1,12 @@
 package de.jcup.egradle.core.codecompletion;
 
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
+import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.Model;
 
 /**
  * A special proposal factory which will create proposals by current position inside outline model and
@@ -42,20 +48,74 @@ import java.util.Set;
  */
 public class XMLProposalFactory extends AbstractProposalFactory{
 
+	private ItemPathCreator itemPathCreator = new ItemPathCreator();
 	private XMLProposalDataModelProvider provider;
 
-	public XMLProposalFactory(XMLProposalDataModelProvider provider) {
-		if (provider==null){
+	public XMLProposalFactory(XMLProposalDataModelProvider dataModelProvider) {
+		if (dataModelProvider==null){
 			throw new IllegalArgumentException("data model provider may not be null!");
 		}
-		this.provider=provider;
+		this.provider=dataModelProvider;
 	}
 	
 	@Override
 	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
-		/* FIXME albert,04.01.2017: implement + use XMLProposalDataModel */
+		/* FIXME albert,04.01.2017: keep on implementing*/
+		/* FIXME albert,04.01.2017: integrate implementation / use it...*/
+		Model outlineModel = contentProvider.getModel();
+		if (outlineModel==null){
+			return null;
+		}
+		Item item = outlineModel.getItemAt(offset);
+		if (item==null){
+			/* FIXME albert,06.01.2017: check is current item null when on root element?!?!? */
+			return null;
+		}
+		List<XMLProposalDataModel> models = provider.getDataModels();
+		if (models==null){
+			return null;
+		}
+		if (models.isEmpty()){
+			return null;
+		}
 		
-		return null;
+		Set<Proposal> proposals = new LinkedHashSet<>();
+		
+		String itemPath = itemPathCreator.createPath(item);
+		
+		for (XMLProposalDataModel model: models){
+			if (model==null){
+				continue;
+			}
+			model.ensurePrepared();
+			
+			Set<XMLProposalElement> possibleParentElements = model.getElementsByPath(itemPath);
+			for (XMLProposalElement possibleParent: possibleParentElements){
+				appendProposals(possibleParent, proposals);
+			}
+			
+			
+		}
+		return proposals;
+	}
+	/* FIXME albert,06.01.2017: solve problem of cursor inside item and not at end! code completion maybe destroys item! */
+
+	private void appendProposals(XMLProposalElement possibleParent, Set<Proposal> proposals) {
+		List<XMLProposalElement> children = possibleParent.getElements();
+		for (XMLProposalElement child: children){
+			XMLProposalImpl proposal = new XMLProposalImpl();
+			proposal.setCode(child.getName());
+			proposal.setName(child.getName());
+			proposal.setDescription(child.getDescription());
+			/* FIXME albert,06.01.2017: what about types ? */
+			/* FIXME albert,06.01.2017: implement duplicate entries (max amount ) */
+			proposals.add(proposal);
+		}
+	}
+	
+	
+	private class XMLProposalImpl extends AbstractProposalImpl{
+		
 	}
 
 }

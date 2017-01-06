@@ -51,6 +51,10 @@ public class Item {
 	public void setItemType(ItemType type) {
 		this.itemType = type;
 	}
+	
+	public boolean isRoot(){
+		return parent==null;
+	}
 
 	/**
 	 * @return modifier never <code>null</code>
