@@ -7,8 +7,33 @@ import org.junit.Test;
 import de.jcup.egradle.core.model.Item;
 
 public class ItemPathCreatorTest {
+	
+	@Test
+	public void path_for_task_xyz__is_truncated_to_task_only(){
+		/* prepare */
+		ItemPathCreator creatorToTest = new ItemPathCreator();
+		
+		Item root = new Item();
+		root.setName("root");
+		
+		Item task = new Item();
+		task.setName("task xyz");
+		
+		root.add(task);
+		
+		/* execute */
+		String path = creatorToTest.createPath(task);
+		
+		/* test */
+		assertEquals("task",path);
+	}
 
-	/* FIXME albert,06.01.2017: add tests for root element / null */
+	@Test
+	public void path_for_null_is_an_empty_string(){
+		ItemPathCreator creatorToTest = new ItemPathCreator();
+		assertEquals("", creatorToTest.createPath(null));
+	}
+	
 	@Test
 	public void item1_with_parent1_having_parent_0_returns_parent1dotitem1_as_id() {
 		/* prepare */

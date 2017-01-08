@@ -116,7 +116,7 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		List<XMLProposalElement> children = possibleParent.getElements();
 		for (XMLProposalElement child: children){
 			XMLProposalImpl proposal = new XMLProposalImpl();
-			proposal.setCode(child.getName());
+			proposal.setCode(child.getCode());
 			proposal.setName(child.getName());
 			proposal.setDescription(child.getDescription());
 			/* FIXME albert,06.01.2017: what about types ? */

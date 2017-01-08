@@ -34,6 +34,24 @@ public class XMLProposalDataModelTest {
 	public void before() {
 		modelToTest = new XMLProposalDataModel();
 	}
+	@Test
+	public void an_xml_element_having_name_but_not_having_a_code_returns_name_with_brackets_and_cursor_variable_as_fallback(){
+		XMLProposalElement element = new XMLProposalElement();
+		element.name="name";
+		assertNull(element.code);
+		
+		assertEquals("name {\n\t$cursor\n}",element.getCode());
+		assertNotNull("Element code must be set after call", element.code);
+	}
+	
+	@Test
+	public void an_xml_element_having_a_name_and_a_code_definition_returns_code(){
+		XMLProposalElement element = new XMLProposalElement();
+		element.name="name";
+		element.code="code";
+		
+		assertEquals("code",element.getCode());
+	}
 	
 	@Test
 	public void preparation_throws_exception_when_dive_more_than_1000() throws Exception{

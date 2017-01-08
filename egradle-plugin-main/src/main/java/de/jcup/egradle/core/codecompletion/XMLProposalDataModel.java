@@ -198,6 +198,10 @@ public class XMLProposalDataModel {
 		String code;
 
 		public String getCode() {
+			if (code==null) {
+				/* If code is not explicit set in XML we lazily create a fall back code to name */
+				code= name +" {\n\t$cursor\n}";
+			}
 			return code;
 		}
 		
