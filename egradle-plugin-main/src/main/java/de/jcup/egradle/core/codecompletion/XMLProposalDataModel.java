@@ -57,11 +57,11 @@ public class XMLProposalDataModel {
 
 	private void prepare() throws PreparationException {
 		prepared=true;
-		/* calulate Ids */
+		/* calculate IDs */
 		for (XMLProposalData data: proposals){
 			List<XMLProposalRootPathEntry> rootPathEntries = data.getContext().getRootPathEntries();
 			if (rootPathEntries.isEmpty()){
-				/* create as fallback standard root path */
+				/* create as fall back standard root path */
 				XMLProposalRootPathEntry rootPathEntry = new XMLProposalRootPathEntry();
 				rootPathEntry.path="";
 				rootPathEntries.add(rootPathEntry);

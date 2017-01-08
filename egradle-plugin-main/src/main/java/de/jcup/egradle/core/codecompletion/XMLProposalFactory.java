@@ -69,14 +69,12 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 	@Override
 	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
 		/* FIXME albert,04.01.2017: keep on implementing*/
-		/* FIXME albert,04.01.2017: integrate implementation / use it...*/
 		Model outlineModel = contentProvider.getModel();
 		if (outlineModel==null){
 			return null;
 		}
-		/* FIXME albert,07.01.2017: this is a problem - outline model does always return most recent part- but for root not correct! instead of "" "subprojects.artifacts" was returned!  */
-		Item item = outlineModel.getItemAt(offset);
-		if (item==null){
+		Item parentItem = outlineModel.getParentItemAt(offset);
+		if (parentItem==null){
 			return null;
 		}
 		List<XMLProposalDataModel> models = provider.getDataModels();
@@ -89,7 +87,7 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		
 		Set<Proposal> proposals = new LinkedHashSet<>();
 		
-		String itemPath = itemPathCreator.createPath(item);
+		String itemPath = itemPathCreator.createPath(parentItem);
 		
 		for (XMLProposalDataModel model: models){
 			if (model==null){

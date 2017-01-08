@@ -24,13 +24,21 @@ public interface Model {
 
 	/**
 	 * Finds item, starting at given offset. If no item found at given start
-	 * offset algorighm tries to resolve next possible items. If no item found
+	 * offset algorithm tries to resolve next possible items. If no item found
 	 * <code>null</code> is returned
 	 * 
 	 * @param offset
 	 * @return item or <code>null</code>
 	 */
 	Item getItemAt(int offset);
+	
+	/**
+	 * Finds parent item, starting at given offset. 
+	 * 
+	 * @param offset
+	 * @return parent item, never <code>null</code>
+	 */
+	Item getParentItemAt(int offset);
 
 	/**
 	 * Returns the root item

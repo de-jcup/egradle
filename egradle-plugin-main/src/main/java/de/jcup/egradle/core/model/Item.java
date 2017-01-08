@@ -48,6 +48,8 @@ public class Item {
 
 	private String type;
 
+	private boolean aPossibleParent;
+
 	public void setItemType(ItemType type) {
 		this.itemType = type;
 	}
@@ -343,6 +345,23 @@ public class Item {
 		}
 		String itemText = sb.toString();
 		return itemText;
+	}
+
+	/**
+	 * Set item to be a possible parent or not
+	 * @param canBeParent
+	 */
+	public void setAPossibleParent(boolean canBeParent) {
+		this.aPossibleParent=canBeParent;
+	}
+	
+	
+	/**
+	 * 
+	 * @return <code>true</code> when this item can be a parent
+	 */
+	public boolean isAPossibleParent() {
+		return aPossibleParent;
 	}
 
 }

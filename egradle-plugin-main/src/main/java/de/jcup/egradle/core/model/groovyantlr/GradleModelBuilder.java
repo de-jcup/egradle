@@ -547,6 +547,7 @@ public class GradleModelBuilder implements ModelBuilder {
 				} else {
 					item.setItemType(ItemType.CLOSURE);
 				}
+				item.setAPossibleParent(true);
 				/* inspect children... */
 				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
 			}

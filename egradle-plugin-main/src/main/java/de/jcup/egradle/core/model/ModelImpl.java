@@ -15,18 +15,19 @@
  */
  package de.jcup.egradle.core.model;
 
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class ModelImpl implements Model {
 
 	protected SortedMap<Integer, Item> map = new TreeMap<>();
-	private Item root = new Item();
+	private Item root;
 	private boolean offsetRegistrationDone;
 
 	public ModelImpl() {
-		super();
+		root = new Item();
+		root.setName("root");
+		root.setAPossibleParent(true);
 	}
 
 	@Override
@@ -41,6 +42,55 @@ public class ModelImpl implements Model {
 			}
 			return item;
 		}
+	}
+
+	/**
+	 * Example:
+	 * <pre>
+	 * a{
+	 * 	b{
+	 * 	  x-bla1
+	 *  }(p1)
+	 * }
+	 * (p4)
+	 * c{
+	 * 	(p3)	
+	 * }
+	 * 
+	 * x-bla2
+	 * (p4)
+	 * </pre>
+	 * p1- 
+	 */
+	@Override
+	public Item getParentItemAt(int offset) {
+		Item nextItem = getItemAt(offset);
+		if (nextItem==null){
+			/* should never happen but...*/
+			return getRoot();
+		}
+		Item potentialParent = nextItem;
+		while (potentialParent!=null && !canBeParentOf(offset, potentialParent)){
+			potentialParent=potentialParent.getParent();
+		}
+		if (potentialParent==null){
+			return getRoot();
+		}
+		return potentialParent;
+	}
+	
+	private boolean canBeParentOf(int offset, Item item){
+		/* must be already a parent or must be a possible one, otherwise guard close...*/
+		if (! item.hasChildren() && !item.isAPossibleParent()){
+			return false;
+		}
+		/* check offset position is between this element */
+		int itemStartPos = item.getOffset();
+		int itemEndPos = itemStartPos+ item.getLength();
+		if (offset>itemStartPos && offset<itemEndPos){
+			return true;
+		}
+		return false;
 	}
 
 	/**

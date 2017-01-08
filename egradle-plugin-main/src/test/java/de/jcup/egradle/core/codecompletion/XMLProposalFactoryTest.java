@@ -50,9 +50,10 @@ public class XMLProposalFactoryTest {
 		XMLProposalDataModel model = createParent1Child1Model();
 		
 		when(mockedDataModelProvider.getDataModels()).thenReturn(singletonList(model));
-		Model outlineModel = mock(Model.class);
-		when(outlineModel.getItemAt(0)).thenReturn(new Item());
-		when(mockedContentProvider.getModel()).thenReturn(outlineModel);
+		
+		Model mockedOutlineModel = mock(Model.class);
+		when(mockedOutlineModel.getParentItemAt(0)).thenReturn(new Item());
+		when(mockedContentProvider.getModel()).thenReturn(mockedOutlineModel);
 		
 		/* execute */
 		Set<Proposal> proposals = factoryToTest.createProposals(0, mockedContentProvider);

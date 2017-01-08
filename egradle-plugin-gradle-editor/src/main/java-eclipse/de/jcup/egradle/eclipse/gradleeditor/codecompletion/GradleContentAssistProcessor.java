@@ -27,6 +27,7 @@ import de.jcup.egradle.core.codecompletion.XMLProposalFactory;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.eclipse.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
@@ -55,7 +56,9 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		this.codeCutter=codeCutter;
 		
 		proposalFactories.add(new VariableNameProposalFactory());
-		proposalFactories.add(new XMLProposalFactory(dataModelProvider));
+		XMLProposalFactory xmlProposalFactory = new XMLProposalFactory(dataModelProvider);
+		xmlProposalFactory.setErrorHandler(EGradleErrorHandler.INSTANCE);
+		proposalFactories.add(xmlProposalFactory);
 	}
 
 	@Override
