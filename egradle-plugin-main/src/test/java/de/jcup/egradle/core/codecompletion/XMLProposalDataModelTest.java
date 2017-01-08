@@ -40,7 +40,7 @@ public class XMLProposalDataModelTest {
 		element.name="name";
 		assertNull(element.code);
 		
-		assertEquals("name {\n\t$cursor\n}",element.getCode());
+		assertEquals("name {\n\t$cursor\n}\n",element.getCode());
 		assertNotNull("Element code must be set after call", element.code);
 	}
 	

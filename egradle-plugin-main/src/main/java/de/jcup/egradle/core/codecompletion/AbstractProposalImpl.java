@@ -4,10 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractProposalImpl implements Proposal{
 
-	String name;
-	String code;
-	String type;
-	String description; 
+	private String name;
+	private String code;
+	private String type;
+	private String description;
+	private int cursorPos=-1; 
 	
 	void setName(String name) {
 		this.name = name;
@@ -23,6 +24,17 @@ public abstract class AbstractProposalImpl implements Proposal{
 	
 	void setCode(String code) {
 		this.code = code;
+	}
+	
+	void setCursorPos(int cursorOffset) {
+		this.cursorPos=cursorOffset;
+	}
+	
+	/**
+	 * @return cursor position - if set, otherwise -1
+	 */
+	public int getCursorPos() {
+		return cursorPos;
 	}
 
 	public String getCode() {

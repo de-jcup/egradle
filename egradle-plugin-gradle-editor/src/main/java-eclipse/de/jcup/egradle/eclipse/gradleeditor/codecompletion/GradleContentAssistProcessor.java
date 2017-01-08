@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -16,6 +17,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
+import org.junit.FixMethodOrder;
 
 import de.jcup.egradle.core.codecompletion.Proposal;
 import de.jcup.egradle.core.codecompletion.ProposalFactory;
@@ -74,8 +76,12 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		try {
 			int line = document.getLineOfOffset(offset);
 			int offsetOfFirstCharacterInLine = document.getLineOffset(line);
-
+			int length = offset-offsetOfFirstCharacterInLine;
 			
+			/* FIXME ATR, 08.01.2017: not correct - e.g. when "\t\tallp" only "\t\t" should be relevant... change this*/
+			String stringToColumnPosOfLine = document.get(offsetOfFirstCharacterInLine, length);
+			
+				
 			contentProvider = new ProposalFactoryContentProvider() {
 				private String relevant;
 				@Override
@@ -84,27 +90,32 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				}
 
 				@Override
-				public String getEditorSourceEnteredAt(int cursorOffset) {
+				public String getEditorSourceEnteredAtCursorPosition() {
 					/* the content provider is only used one time per cursor offset - so we
 					 * simply cache the relevant calculation iniside internal string to
 					 * speed up...
 					 */
 					if (relevant==null){
 						String code = document.get();
-						relevant = codeCutter.getRelevantCode(code, cursorOffset);
+						relevant = codeCutter.getRelevantCode(code, offset);
 					}
 					return relevant;
 						
 				}
 
 				@Override
-				public int getLineAt(int offset) {
+				public int getLineAtCursorPosition() {
 					return line;
 				}
 
 				@Override
-				public int getOffsetOfFirstCharacterInLine(int line) {
+				public int getOffsetOfFirstCharacterInLine() {
 					return offsetOfFirstCharacterInLine;
+				}
+				
+				@Override
+				public String getColumnTextBeforeCursorPosition() {
+					return stringToColumnPosOfLine;
 				}
 			};
 		} catch (BadLocationException e) {
@@ -147,12 +158,20 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				sb.append("<html>");
 			}
 			String additionalProposalInfo = sb.toString();
-			String alreadyEntered=contentProvider.getEditorSourceEnteredAt(offset);
-			int length = p.getCode().length();
+			String alreadyEntered=contentProvider.getEditorSourceEnteredAtCursorPosition();
+			
 			int alreadyEnteredChars = alreadyEntered.length();
 			int cursorOffset=offset-alreadyEnteredChars;
+			
 			int replacementLength=alreadyEnteredChars;
-			int cursorMovement=length;
+			int cursorMovement=-1;
+			int proposedCursorPostion = p.getCursorPos();
+			if ( proposedCursorPostion==-1){
+				int length = p.getCode().length();
+				cursorMovement=length;
+			}else {
+				cursorMovement=proposedCursorPostion;
+			}
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), cursorOffset, replacementLength, cursorMovement ,image,p.getName(),contextInformation,additionalProposalInfo);
 			list.add(proposal);
 			

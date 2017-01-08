@@ -11,12 +11,14 @@ public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
 		if (item==null){
 			return;
 		}
-		this.name=item.getName();
+		String name = item.getName();
 		if (name.startsWith("task ")){
 			name=name.substring(5);
 		}
-		this.code=item.getName();
-		this.type=item.getType();
+		setName(name);
+		setCode(item.getName());
+		String type = item.getType();
+		setType(type);
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h3>");
 		sb.append(item.getItemType());
@@ -29,13 +31,13 @@ public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
 			sb.append(type);
 			sb.append("<br>");
 		}
-		this.description=sb.toString();
+		setDescription(sb.toString());
 		this.item=item;
 	}
 
 	@Override
 	public String toString() {
-		return "ItemProposalImpl [code=" + code + ", item=" + item + "]";
+		return "ItemProposalImpl [code=" + getCode() + ", item=" + item + "]";
 	}
 
 	@Override

@@ -25,4 +25,9 @@ public interface Proposal extends Comparable<Proposal>{
 	 */
 	String getDescription();
 
+	/**
+	 * Returns cursor position or -1
+	 * @return cursor position or -1
+	 */
+	int getCursorPos();
 }

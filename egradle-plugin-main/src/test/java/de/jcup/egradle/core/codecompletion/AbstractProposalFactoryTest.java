@@ -31,7 +31,7 @@ public class AbstractProposalFactoryTest {
 	@Test
 	public void filtering__when_file_was_already_entered_and_proposal_impl_says_file_xile_an_empty_list_is_returned(){
 		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAt(1)).thenReturn("file");
+		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("file");
 		
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
@@ -55,7 +55,7 @@ public class AbstractProposalFactoryTest {
 	@Test
 	public void filtering__when_fi_was_already_entered_and_proposal_impl_says_file_xile_and_affiliate_only_file_and_affiliate_are_returned(){
 		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAt(1)).thenReturn("fi");
+		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("fi");
 		
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);

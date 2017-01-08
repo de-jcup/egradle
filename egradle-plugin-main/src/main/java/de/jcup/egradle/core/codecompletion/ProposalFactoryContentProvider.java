@@ -15,22 +15,24 @@ public interface ProposalFactoryContentProvider {
 	public Model getModel();
 
 	/**
-	 * @param cursorOffset index where cursor is
 	 * @return relevant editor source code at given cursor position or <code>null</code>
 	 */
-	public String getEditorSourceEnteredAt(int cursorOffset);
+	public String getEditorSourceEnteredAtCursorPosition();
 
 	/**
-	 * @param offset
 	 * @return line of offset or -1
 	 */
-	public int getLineAt(int offset);
+	public int getLineAtCursorPosition();
 	
 	/**
 	 * 
-	 * @param offset
 	 * @return offset of first character in given line or -1
 	 */
-	public int getOffsetOfFirstCharacterInLine(int offset);
+	public int getOffsetOfFirstCharacterInLine();
+
+	/**
+	 * @return column of given offset
+	 */
+	public String getColumnTextBeforeCursorPosition();
 
 }

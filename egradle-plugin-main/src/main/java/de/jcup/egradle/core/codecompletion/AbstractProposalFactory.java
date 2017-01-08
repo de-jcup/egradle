@@ -26,7 +26,7 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 			return Collections.emptySet();
 		}
 		/* we got proposals, so filter unusable ones:*/
-		String entered = contentProvider.getEditorSourceEnteredAt(offset);
+		String entered = contentProvider.getEditorSourceEnteredAtCursorPosition();
 		result = filterAndSetupProposals(result, entered);
 		return result;
 	}
