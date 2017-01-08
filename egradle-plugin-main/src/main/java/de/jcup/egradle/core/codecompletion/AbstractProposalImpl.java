@@ -59,6 +59,14 @@ public abstract class AbstractProposalImpl implements Proposal{
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getClass().getSimpleName()+"[name=").append(name).append(", code=").append(code).append(", type=")
+				.append(type).append(", description=").append(description).append("]");
+		return builder.toString();
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

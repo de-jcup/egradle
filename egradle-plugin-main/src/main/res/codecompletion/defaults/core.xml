@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model id="core">
+    <proposal>
+        <context/>
+        <element name="allprojects">
+            <description><![CDATA[Define for <b>all projects</b> inside your gradle build.]]></description>
+        </element>
+        <element name="subprojects">
+            <description>
+            <![CDATA[Define for <b>subprojects</b> inside your gradle build.]]>
+            </description>
+             <element name="artifacts" >
+                        <description>Define your artifact parts which belongs to your build!</description>
+                         <element name="blubber-from-xml" >
+                              <description>Nothing</description>
+                         </element>
+                    </element>
+        </element>
+       
+        <value name="apply from:" code="apply from: '$cursor'"/>
+    </proposal>
+</model>

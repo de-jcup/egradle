@@ -34,7 +34,7 @@ public class XMLProposalDataModel {
 	 * Ensure preparation is done. Means calculation of container per path is done. This is only necessary when model is initial loaded and containers are relevant!
 	 * @throws PreparationException
 	 */
-	public void ensurePrepared() throws PreparationException{
+	void ensurePrepared() throws PreparationException{
 		if (!prepared){
 			prepare();
 		}
@@ -47,7 +47,8 @@ public class XMLProposalDataModel {
 	 * @param path
 	 * @return set of proposal elements, never <code>null</code>
 	 */
-	public Set<XMLProposalContainer> getContainersByPath(String path) {
+	public Set<XMLProposalContainer> getContainersByPath(String path) throws PreparationException{
+		ensurePrepared();
 		Set<XMLProposalContainer> set = containerMap.get(path);
 		if (set==null){
 			return Collections.emptySet();
@@ -201,6 +202,9 @@ public class XMLProposalDataModel {
 			if (code==null) {
 				/* If code is not explicit set in XML we lazily create a fall back code to name */
 				code= name +" {\n\t$cursor\n}";
+				/* FIXME albert,08.01.2017: implement $cursor behaviour in code injection! */
+				/* FIXME albert,08.01.2017: implement indention correction, so correctly shown! */
+				/* FIXME albert,08.01.2017: recreate outline model as soon as possible when code completion triggered -worng place here but necessary marker */
 			}
 			return code;
 		}

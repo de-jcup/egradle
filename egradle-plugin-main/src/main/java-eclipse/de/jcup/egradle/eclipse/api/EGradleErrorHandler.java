@@ -1,7 +1,6 @@
-package de.jcup.egradle.eclipse;
+package de.jcup.egradle.eclipse.api;
 
 import de.jcup.egradle.core.api.ErrorHandler;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class EGradleErrorHandler implements ErrorHandler{
 
@@ -19,6 +18,11 @@ public class EGradleErrorHandler implements ErrorHandler{
 	@Override
 	public void handleError(String message, Throwable t) {
 		EGradleUtil.log(message, t);
+	}
+
+	@Override
+	public void handleError(String message) {
+		EGradleUtil.log(message, null);		
 	}
 
 }

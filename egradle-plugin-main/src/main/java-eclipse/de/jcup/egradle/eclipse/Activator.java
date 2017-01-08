@@ -28,6 +28,7 @@ import org.osgi.framework.BundleContext;
 
 import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 
 /**
  * The activator class controls the plug-in life cycle

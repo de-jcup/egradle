@@ -5,7 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Reduces code to relevant parts for code completion
  * @author albert
- *
+ * TODO ATR, 08.01.2016: return result should be a dedicated type instead of string so it would be possible to differ between 
+ * variable inserts and method calls (xyz versus xyz.). Also point should be also a seperator...
  */
 public class RelevantCodeCutter {
 

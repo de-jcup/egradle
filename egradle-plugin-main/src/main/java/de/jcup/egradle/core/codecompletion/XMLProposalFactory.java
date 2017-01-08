@@ -68,7 +68,6 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 	
 	@Override
 	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
-		/* FIXME albert,04.01.2017: keep on implementing*/
 		Model outlineModel = contentProvider.getModel();
 		if (outlineModel==null){
 			return null;
@@ -94,9 +93,6 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 				continue;
 			}
 			try {
-				/* FIXME albert,07.01.2017: is ensurePrepared needed to be public or should the mehod only used internally and only once when failure occurs? */
-				model.ensurePrepared();
-
 				Set<XMLProposalContainer> possibleParentElements = model.getContainersByPath(itemPath);
 				for (XMLProposalContainer possibleParent: possibleParentElements){
 					appendProposals(possibleParent, proposals);
@@ -125,7 +121,11 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		}
 	}
 	
-	
+	/**
+	 * Extra proposals class for xml variant
+	 * @author albert
+	 *
+	 */
 	private class XMLProposalImpl extends AbstractProposalImpl{
 		
 	}

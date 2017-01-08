@@ -184,7 +184,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private GradleStringTransformer getGradleStringTransformer() {
 		/*
-		 * TODO ATR, 28.11.2016: with EGradle 1.2 this must be done via
+		 * TODO ATR, 28.11.2016: with EGradle 2.0 this must be done via
 		 * extension points, so other plugins are able to implement and register
 		 * own implementations:
 		 */

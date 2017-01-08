@@ -1,13 +1,15 @@
 package de.jcup.egradle.core.codecompletion;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,12 +18,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.api.ErrorHandler;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModel;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalData;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalValue;
-import de.jcup.egradle.core.model.ItemType;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModelProvider;
+import de.jcup.egradle.core.api.FileHelper;
 
 /**
  * Data model provider which simply reads all xml files from
@@ -49,8 +46,8 @@ public class UserHomeBasedXMLProposalDataModelProvider implements XMLProposalDat
 			loaded = true;
 			cachedDataModels.clear();
 
-			File[] files = findCodeCompletionFilesInUserHome();
-			if (files == null || files.length == 0) {
+			Set<File> files = findCodeCompletionFilesInUserHome();
+			if (files == null || files.size() == 0) {
 				return;
 			}
 			JAXBContext jc;
@@ -80,72 +77,94 @@ public class UserHomeBasedXMLProposalDataModelProvider implements XMLProposalDat
 		}
 	}
 
-	private File[] findCodeCompletionFilesInUserHome() {
+	private Set<File> findCodeCompletionFilesInUserHome() {
+		Set<File> fileSet = new HashSet<>();
 		/*
 		 * FIXME albert,06.01.2017: what about change this to changeable
 		 * preference value instead of always using user.home?!?!?
 		 */
-		String userHome = System.getProperty("user.home");
-		File file = new File(userHome);
-		File subDir = new File(file, ".egradle/codeCompletion");
-		if (!subDir.exists()) {
-			subDir.mkdirs();
-
-			JAXBContext jc;
-			/*
-			 * FIXME albert,07.01.2017: improve this. handle version updates
-			 * necessary, when egradle version updates having a new release etc.
-			 * what about subfolders .egradle/codeCompletion/defaults and
-			 * .egradle/codeCompletion/custom ?
-			 */
-			try {
-				jc = JAXBContext.newInstance(XMLProposalDataModel.class);
-				javax.xml.bind.Marshaller marshaller = jc.createMarshaller();
-				marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-				File defaultFile = new File(subDir, "default.xml");
-				FileOutputStream bos = new FileOutputStream(defaultFile);
-				XMLProposalDataModel defaultModel = createNewDefaultModel();
-				marshaller.marshal(defaultModel, bos);
-
-			} catch (Exception e) {
-				if (errorHandler != null) {
-					errorHandler.handleError("Was not able to create default xml code completion file!", e);
-				}
-			}
-			return new File[0];
+		File defaultsSubDir = ensureDefaultsTargetDirectory();
+		File customSubDir = ensureTargetDirectory("custom");
+		
+		File[] defaultFiles = defaultsSubDir.listFiles(fileFilter);
+		if (defaultFiles==null || defaultFiles.length==0){
+			installDefaultFiles(defaultsSubDir);
+			 defaultFiles = defaultsSubDir.listFiles(fileFilter);
 		}
+		File[] customFiles = customSubDir.listFiles(fileFilter);
+		addFiles(defaultFiles,fileSet);
+		addFiles(customFiles,fileSet);
+		return fileSet;
+	}
 
-		File[] files = subDir.listFiles(fileFilter);
-		return files;
+	private File ensureDefaultsTargetDirectory() {
+		return ensureTargetDirectory("defaults/"+getVersion());
+	}
+
+	private void addFiles(File[] files, Set<File> fileSet) {
+		if (files==null){
+			return;
+		}
+		for (File file: files){
+			if (file==null){
+				continue;
+			}
+			fileSet.add(file);
+		}
 	}
 	
-	/* FIXME albert,07.01.2017:provide restore default mechanism which is able to setup all default files to origin state */
+	public String getVersion() {
+		return "1.3";
+	}
 
-	private XMLProposalDataModel createNewDefaultModel() {
-		/* FIXME albert,07.01.2017: remove this code later, instead use a default xml file provided by plugin installation! */
-		XMLProposalDataModel model = new XMLProposalDataModel();
-		model.id = "default";
-		
-		List<XMLProposalData> props = model.getProposals();
-		XMLProposalData data = new XMLProposalData();
-		List<XMLProposalElement> rootElements = data.getElements();
-		XMLProposalElement allProjects = new XMLProposalElement();
-		/* FIXME albert,07.01.2017: handle html or support markup inside descriptions - xml does escape... or at least the pretty formatter here?!?!? */
-		allProjects.description="Configuration closure for <b>all projects</b>";
-		allProjects.name="allProjects";
-		allProjects.code="allProjects{ $cursor }";
-		rootElements.add(allProjects);
-		
-		List<XMLProposalValue> rootValues = data.getValues();
-		XMLProposalValue applyFromValue = new XMLProposalValue();
-		applyFromValue.name="apply from:";
-		applyFromValue.code="apply from: '$cursor'";
-		rootValues.add(applyFromValue);
-		
-		
-		props.add(data);
-		return model;
+	private File ensureTargetDirectory(String subDirName) {
+		String userHome = System.getProperty("user.home");
+		File file = new File(userHome);
+		File subDir = new File(file, ".egradle/codeCompletion/"+subDirName);
+		if (!subDir.exists()) {
+			subDir.mkdirs();
+		}
+		return subDir;
+	}
+	
+	public void restoreDefaults() {
+		File dir = ensureDefaultsTargetDirectory();
+		deleteOldDefaultFiles(dir);
+		installDefaultFiles(dir);
+		reload();
+	}
+
+	private void deleteOldDefaultFiles(File dir) {
+		File[] files = dir.listFiles(fileFilter);
+		for (File file: files){
+			if (!file.delete()){
+				if (errorHandler!=null){
+					errorHandler.handleError("Cannot delete old default file:"+file);
+				}
+			}
+		}
+	}
+	
+	private void installDefaultFiles(File dir) {
+		installNewDefaultFiles("/codecompletion/defaults/core.xml", dir, "core.xml");
+	}
+	
+	private void installNewDefaultFiles(String resPath, File dir, String fileName) {
+		FileHelper helper = getFileHelper();
+		InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(resPath);
+		try {
+			StringBuffer sb = helper.read(new InputStreamReader(in));
+			
+			getFileHelper().createTextFile(dir, fileName, sb.toString());
+		} catch (IOException e) {
+			if (errorHandler!=null){
+				errorHandler.handleError(e);
+			}
+		}
+	}
+	
+	private FileHelper getFileHelper(){
+		return FileHelper.DEFAULT;
 	}
 
 	private class CodeCompletionFileFilter implements FileFilter {
@@ -176,5 +195,7 @@ public class UserHomeBasedXMLProposalDataModelProvider implements XMLProposalDat
 			return cachedDataModels;
 		}
 	}
+
+	
 
 }

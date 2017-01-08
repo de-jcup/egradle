@@ -216,10 +216,22 @@ public class FileHelper {
 		}
 	}
 
+	/**
+	 * Read file to string buffer
+	 * @param fileName
+	 * @return string buffer, never <code>null</code>
+	 * @throws IOException
+	 */
 	public StringBuffer read(String fileName) throws IOException {
 		return read(new FileReader(fileName));
 	}
 
+	/**
+	 * Read by reader to string buffer
+	 * @param reader
+	 * @return string buffer never <code>null</code>
+	 * @throws IOException
+	 */
 	public StringBuffer read(Reader reader) throws IOException {
 		StringBuffer s = new StringBuffer();
 		try {

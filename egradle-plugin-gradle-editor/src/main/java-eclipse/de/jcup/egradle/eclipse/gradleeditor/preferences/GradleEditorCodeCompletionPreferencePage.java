@@ -50,7 +50,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 		super.performDefaults();
 		
 		/* reload xml parts */
-		UserHomeBasedXMLProposalDataModelProvider.INSTANCE.reload();
+		UserHomeBasedXMLProposalDataModelProvider.INSTANCE.restoreDefaults();
 		setMessage("XML code completion definition reloaded");
 	}
 	
