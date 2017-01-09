@@ -53,15 +53,11 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 			/* no relavant code entered*/
 			return new LinkedHashSet<>(proposals);
 		}
+		String enteredLowerCased = entered.toLowerCase();
 		Set<Proposal> filteredResult = new LinkedHashSet<>();
 		for (Proposal proposal: proposals){
-			String code = proposal.getCode();
-			if (code.indexOf(entered)!=-1){
-				if (code.equals(entered)){
-					// already complete entered, so ignore!
-					/* FIXME albert,04.01.2017: rethink about this behaviour! */
-					continue;
-				}
+			String codeLowerCased = proposal.getCode().toLowerCase();
+			if (codeLowerCased.indexOf(enteredLowerCased)!=-1){
 				filteredResult.add(proposal);
 			}
 		}

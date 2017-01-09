@@ -202,8 +202,6 @@ public class XMLProposalDataModel {
 			if (code==null) {
 				/* If code is not explicit set in XML we lazily create a fall back code to name */
 				code= name +" {\n\t$cursor\n}\n";
-				/* FIXME albert,08.01.2017: implement $cursor behaviour in code injection! */
-				/* FIXME albert,08.01.2017: implement indention correction, so correctly shown! */
 				/* FIXME albert,08.01.2017: recreate outline model as soon as possible when code completion triggered -worng place here but necessary marker */
 			}
 			return code;
