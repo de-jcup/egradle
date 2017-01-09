@@ -20,6 +20,7 @@ import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPrefe
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Delayed;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -87,7 +88,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private int lastCaretPosition;
 
-	private boolean dirty;
+	private boolean refreshOutlineInProgress;
 
 	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
@@ -95,11 +96,20 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
-		
+
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
 
+	}
+
+	/**
+	 * While refresh progress is active the outline model will not be changed
+	 * 
+	 * @return <code>true</code> when refresh is in progress.
+	 */
+	public boolean isRefreshOutlineInProgress() {
+		return refreshOutlineInProgress || documentListener.r.waitingForFurtherDocumentChanges;
 	}
 
 	public void setErrorMessage(String message) {
@@ -140,6 +150,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			bracketMatcher.dispose();
 			bracketMatcher = null;
 		}
+		if (documentListener != null) {
+			documentListener.dispose();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -168,7 +181,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
 		}
-		if (Model.class.equals(adapter)){
+		if (Model.class.equals(adapter)) {
 			return (T) contentProvider.getModel();
 		}
 		if (ISourceViewer.class.equals(adapter)) {
@@ -253,7 +266,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
 				int length = item.getLength();
-				ignoreNextCaretMove=true;
+				ignoreNextCaretMove = true;
 				selectAndReveal(offset, length);
 			}
 		}
@@ -286,8 +299,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		setDocumentProvider(createDocumentProvider(input));
 		super.doSetInput(input);
 		IDocument document = getDocument();
-		if (document==null){
-			EGradleUtil.logWarning("No document available for given input:"+input);
+		if (document == null) {
+			EGradleUtil.logWarning("No document available for given input:" + input);
 			return;
 		}
 		document.addDocumentListener(documentListener);
@@ -295,13 +308,13 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	private IDocumentProvider createDocumentProvider(IEditorInput input) {
-		 if(input instanceof FileStoreEditorInput){
-	        return new GradleTextFileDocumentProvider();
-	    } else {
-	        return new GradleFileDocumentProvider();
-	    }
+		if (input instanceof FileStoreEditorInput) {
+			return new GradleTextFileDocumentProvider();
+		} else {
+			return new GradleFileDocumentProvider();
+		}
 	}
-	
+
 	public IDocument getDocument() {
 		return getDocumentProvider().getDocument(getEditorInput());
 	}
@@ -326,24 +339,91 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private class DelayedDocumentListener implements IDocumentListener {
 
+		private DocumentChangeWaiter r = new DocumentChangeWaiter();
+		private long lastDocumentChangeTimeStamp;
+
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
+		}
+
+		public void dispose() {
+
+			if (r != null) {
+				r.dispose();
+			}
 		}
 
 		@Override
 		public void documentChanged(DocumentEvent event) {
 			synchronized (monitor) {
-				if (dirty) {
-					/* already marked as dirty, nothing to do */
+				lastDocumentChangeTimeStamp = System.currentTimeMillis();
+				if (refreshOutlineInProgress) {
+					/*
+					 * already marked as refreshOutlineInProgress, nothing to do
+					 */
 					return;
 				}
-				dirty = true;
+			}
+			if (!r.isListeningToFurtherDocumentChanges()) {
+				Thread t = new Thread(r, "waiting-for-keyboard-events");
+				t.start();
+			}
+		}
+
+		private class DocumentChangeWaiter implements Runnable {
+			private boolean waitingForFurtherDocumentChanges;
+			private boolean disposed;
+
+			@Override
+			public void run() {
+				waitingForFurtherDocumentChanges = true;
+
+				while (!disposed) {
+					try {
+						Thread.sleep(100);
+						long timeBetweenDocumentChanges = System.currentTimeMillis() - lastDocumentChangeTimeStamp;
+						if (timeBetweenDocumentChanges > 300) {
+							break;
+						}
+
+					} catch (InterruptedException e) {
+						/* ignore */
+					}
+				}
+				/* no longer waiting - do refresh */
+
+				if (!disposed) {
+					refreshOutline();
+				}
+				waitingForFurtherDocumentChanges = false;
+			}
+
+			public void dispose() {
+				disposed = true;
+
+			}
+
+			public boolean isListeningToFurtherDocumentChanges() {
+				synchronized (monitor) {
+					return waitingForFurtherDocumentChanges;
+				}
+			}
+
+		}
+
+		private void refreshOutline() {
+			refreshOutlineDelayed(0);
+		}
+
+		private void refreshOutlineDelayed(int delay) {
+			synchronized (monitor) {
+				refreshOutlineInProgress = true;
 			}
 			/*
 			 * we use a job to refresh the outline delayed and only when still
-			 * dirty. This is to avoid too many updates inside the outline -
-			 * otherwise every char entered at keyboard will reload complete AST
-			 * ...
+			 * refreshOutlineInProgress. This is to avoid too many updates
+			 * inside the outline - otherwise every char entered at keyboard
+			 * will reload complete AST ...
 			 */
 			/*
 			 * TODO ATR, 12.11.2016: while caret changes the update may not
@@ -355,14 +435,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					synchronized (monitor) {
-						if (!dirty) {
+						if (!refreshOutlineInProgress) {
 							/* already cleaned up by another job */
 							return Status.CANCEL_STATUS;
 						}
-						dirty = false;
 					}
 					EGradleUtil.safeAsyncExec(new Runnable() {
 						public void run() {
+							refreshOutlineInProgress = false;
 							IDocument document = getDocument();
 							outlinePage.inputChanged(document);
 						}
@@ -370,11 +450,11 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 					return Status.OK_STATUS;
 				}
 			};
-			job.schedule(1500);
+			job.schedule(delay);
 		}
 
 	}
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
@@ -386,8 +466,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS) {
 				setStatusLineMessage("caret moved:" + event.caretOffset);
 			}
-			if (ignoreNextCaretMove){
-				ignoreNextCaretMove=false;
+			if (ignoreNextCaretMove) {
+				ignoreNextCaretMove = false;
 				return;
 			}
 			if (outlinePage == null) {
@@ -402,10 +482,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		// done like in TextEditor for spelling
 		ISourceViewer viewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
-		if (viewer instanceof ISourceViewerExtension2){
+		if (viewer instanceof ISourceViewerExtension2) {
 			ISourceViewerExtension2 viewerExtension2 = (ISourceViewerExtension2) viewer;
 			viewerExtension2.unconfigure();
-			if (configuration instanceof GradleSourceViewerConfiguration){
+			if (configuration instanceof GradleSourceViewerConfiguration) {
 				GradleSourceViewerConfiguration gconf = (GradleSourceViewerConfiguration) configuration;
 				gconf.updateTextScannerDefaultColorToken();
 			}

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -17,7 +16,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
-import org.junit.FixMethodOrder;
+import org.eclipse.ui.IEditorPart;
 
 import de.jcup.egradle.core.codecompletion.Proposal;
 import de.jcup.egradle.core.codecompletion.ProposalFactory;
@@ -32,6 +31,7 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 
@@ -68,6 +68,23 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		if (! isCodeCompletionEnabled()){
 			errorMessage="EGradle editor code completion is disabled. Change your preferences!";
 			return NO_COMPLETION_PROPOSALS;
+		}
+		IEditorPart activeEditor = EGradleUtil.getActiveEditor();
+		if (activeEditor instanceof GradleEditor){
+			GradleEditor ge = (GradleEditor) activeEditor;
+			long start = System.currentTimeMillis();
+			/* wait for outline model is being refreshed*/
+			while (ge.isRefreshOutlineInProgress()){
+				long current = System.currentTimeMillis();
+				if (current-start>2000){
+					break;
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					/* ignore*/
+				}
+			}
 		}
 		errorMessage=null;
 		IDocument document = viewer.getDocument();

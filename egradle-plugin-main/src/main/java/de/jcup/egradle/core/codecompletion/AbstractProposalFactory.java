@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.FixMethodOrder;
 
 /**
  * Abstract proposal factory implementation as base for others
@@ -53,6 +54,7 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 			/* no relavant code entered*/
 			return new LinkedHashSet<>(proposals);
 		}
+		/* FIXME ATR, 10.1.2017 : there is a problem with \r inside code completions - so its not empty but we got no proposals here */
 		String enteredLowerCased = entered.toLowerCase();
 		Set<Proposal> filteredResult = new LinkedHashSet<>();
 		for (Proposal proposal: proposals){
