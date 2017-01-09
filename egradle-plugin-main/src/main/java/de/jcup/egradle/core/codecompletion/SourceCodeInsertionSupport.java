@@ -25,15 +25,7 @@ public class SourceCodeInsertionSupport {
 		/* first do indent if necessary */
 		if (StringUtils.isNotEmpty(textBeforeColumn)){
 			/* build indent*/
-			StringBuilder indentSb = new StringBuilder();
-			for (int i=0;i<textBeforeColumn.length();i++){
-				char c = textBeforeColumn.charAt(i);
-				if (Character.isWhitespace(c)){
-					indentSb.append(c);
-				}else{
-					indentSb.append(" ");
-				}
-			}
+			String indention = transformTextBeforeToIndentString(textBeforeColumn);
 			
 			/* for each line append indent before...*/
 			boolean endsWithNewLine=insertion.endsWith("\n");
@@ -49,7 +41,7 @@ public class SourceCodeInsertionSupport {
 					continue;
 				}
 				if (i>0 || !ignoreIndentOnFirstLine){
-					sb.append(indentSb);
+					sb.append(indention);
 				}
 				sb.append(splitted[i]);
 				sb.append("\n");
@@ -66,6 +58,43 @@ public class SourceCodeInsertionSupport {
 		}
 		return result;
 		
+	}
+
+	/**
+	 * Transform text before column to indent string. Purpose for this method is to have exact same column
+	 * as on code completion before. Because text before can also contain parts of the code proposal itself
+	 * the text before last whitespace will not be used for indention.<br><br>
+	 * 
+	 * An example:
+	 * <pre>
+	 * 	"123 cod" will be transformed to "    "
+	 *  "  3 cod" will be transformed to "    "
+	 *  "  3 co " will be transformed to "       "
+	 * 
+	 * </pre>
+	 * @param textBeforeColumn
+	 * @return transformed string never <code>null</code>
+	 */
+	String transformTextBeforeToIndentString(String textBeforeColumn) {
+		if (textBeforeColumn==null){
+			return "";
+		}
+		StringBuilder indentSb = new StringBuilder();
+		int lastOriginWhitespacePos=-1;
+		for (int i=0;i<textBeforeColumn.length();i++){
+			char c = textBeforeColumn.charAt(i);
+			if (Character.isWhitespace(c)){
+				indentSb.append(c);
+				lastOriginWhitespacePos=i+1;
+			}else{
+				indentSb.append(" ");
+			}
+		}
+		if (lastOriginWhitespacePos==-1){
+			return ""; // there were no origin whitespaces so do not indent
+		}
+		String indent =  indentSb.substring(0,lastOriginWhitespacePos);
+		return indent;
 	}
 	
 	

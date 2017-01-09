@@ -46,7 +46,43 @@ public class SourceCodeInsertionSupportTest {
 	}
 	
 	@Test
-	public void indention_for_textBeforeColumn_having_8_characters_create_new_lines_with_same_indention_but_remains_only_whitespaces(){
+	public void transform_textBefore_to_indent__space_123_tab_codePart__will_be_space_space_space_space_tab(){
+		String transformed = supportToTest.transformTextBeforeToIndentString(" 123\tcodePart");
+		assertEquals("    \t", transformed);
+	}
+	
+	@Test
+	public void transform_textBefore_to_indent__123_tab_codePart__will_be_space_space_space_tab(){
+		String transformed = supportToTest.transformTextBeforeToIndentString("123\tcodePart");
+		assertEquals("   \t", transformed);
+	}
+	
+	@Test
+	public void transform_textBefore_to_indent__123_space_codePart__will_be_space_space_space_space(){
+		String transformed = supportToTest.transformTextBeforeToIndentString("123 codePart");
+		assertEquals("    ", transformed);
+	}
+	
+	@Test
+	public void transform_textBefore_to_indent__1_space_XX_space_will_be_5xSpace(){
+		String transformed = supportToTest.transformTextBeforeToIndentString("1 XX ");
+		assertEquals("     ", transformed);
+	}
+	
+	@Test
+	public void transform_textBefore_to_indent__123456XX_will_be_empty(){
+		String transformed = supportToTest.transformTextBeforeToIndentString("123456XX");
+		assertEquals("", transformed);
+	}
+	
+	@Test
+	public void transform_textBefore_to_indent__123456XX_space_will_be_9xSpace(){
+		String transformed = supportToTest.transformTextBeforeToIndentString("123456XX ");
+		assertEquals("         ", transformed);
+	}
+	
+	@Test
+	public void indention_for_textBeforeColumn_having_8_characters_create_new_lines_with_same_indention_but_remains_only_whitespaces__until_last_sibling_which_is_handled_as_edited_part_of_code(){
 		/* prepare */
 		StringBuilder origin = new StringBuilder();
 		origin.append("parent {\n");
@@ -54,13 +90,13 @@ public class SourceCodeInsertionSupportTest {
 		origin.append("}\n");
 
 		/* execute */
-		InsertionData result = supportToTest.prepareInsertionString(origin.toString()," 2345\t78");
+		InsertionData result = supportToTest.prepareInsertionString(origin.toString()," 2345\tco");
 		
 		/* test */
 		StringBuilder expected = new StringBuilder();
 		expected.append("parent {\n");
-		expected.append("     \t    child\n");
-		expected.append("     \t  }\n");
+		expected.append("     \t  child\n");
+		expected.append("     \t}\n");
 		
 		assertEquals(expected.toString(),result.sourceCode);
 	}
