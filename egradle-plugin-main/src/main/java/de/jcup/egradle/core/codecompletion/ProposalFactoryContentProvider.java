@@ -33,6 +33,6 @@ public interface ProposalFactoryContentProvider {
 	/**
 	 * @return column of given offset
 	 */
-	public String getColumnTextBeforeCursorPosition();
+	public String getLineTextBeforeCursorPosition();
 
 }

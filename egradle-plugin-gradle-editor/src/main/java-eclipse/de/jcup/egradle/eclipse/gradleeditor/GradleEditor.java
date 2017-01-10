@@ -103,6 +103,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	}
 
+	public void setErrorMessage(String message) {
+		super.setStatusLineErrorMessage(message);
+	}
+
+	public GradleBracketsSupport getBracketMatcher() {
+		return bracketMatcher;
+	}
+	
 	/**
 	 * While refresh progress is active the outline model will not be changed
 	 * 
@@ -112,13 +120,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		return refreshOutlineInProgress || documentListener.r.waitingForFurtherDocumentChanges;
 	}
 
-	public void setErrorMessage(String message) {
-		super.setStatusLineErrorMessage(message);
-	}
-
-	public GradleBracketsSupport getBracketMatcher() {
-		return bracketMatcher;
-	}
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -339,7 +340,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private class DelayedDocumentListener implements IDocumentListener {
 
-		private DocumentChangeWaiter r = new DocumentChangeWaiter();
+		private WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable r = new WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable();
 		private long lastDocumentChangeTimeStamp;
 
 		@Override
@@ -369,8 +370,12 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				t.start();
 			}
 		}
-
-		private class DocumentChangeWaiter implements Runnable {
+		
+		/* FIXME ATR, 10.01.2017: too slow! entering text while code completion is visible
+		 * is super slow! the code completion should only use outline model and resolving for factory only when first activation and then cache!
+		 * 
+		 */
+		private class WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable implements Runnable {
 			private boolean waitingForFurtherDocumentChanges;
 			private boolean disposed;
 
@@ -411,11 +416,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 		}
 
-		private void refreshOutline() {
-			refreshOutlineDelayed(0);
+		void refreshOutline() {
+			synchronized (monitor) {
+				refreshOutlineInProgress = true;
+			}
+			refreshOutlineImpl();
 		}
 
-		private void refreshOutlineDelayed(int delay) {
+		void refreshOutlineDelayed(int delay) {
 			synchronized (monitor) {
 				refreshOutlineInProgress = true;
 			}
@@ -440,19 +448,24 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 							return Status.CANCEL_STATUS;
 						}
 					}
-					EGradleUtil.safeAsyncExec(new Runnable() {
-						public void run() {
-							refreshOutlineInProgress = false;
-							IDocument document = getDocument();
-							outlinePage.inputChanged(document);
-						}
-					});
+					refreshOutlineImpl();
+					
 					return Status.OK_STATUS;
 				}
 			};
 			job.schedule(delay);
 		}
 
+		private void refreshOutlineImpl() {
+			EGradleUtil.safeAsyncExec(new Runnable() {
+				public void run() {
+					refreshOutlineInProgress = false;
+					IDocument document = getDocument();
+					outlinePage.inputChanged(document);
+				}
+
+			});
+		}
 	}
 
 	private class GradleEditorCaretListener implements CaretListener {

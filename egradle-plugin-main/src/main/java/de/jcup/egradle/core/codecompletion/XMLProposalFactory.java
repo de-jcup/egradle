@@ -84,7 +84,7 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		if (models.isEmpty()){
 			return null;
 		}
-		String textBeforeColumn = contentProvider.getColumnTextBeforeCursorPosition()+1;
+		String textBeforeColumn = contentProvider.getLineTextBeforeCursorPosition()+1;
 		Set<Proposal> proposals = new LinkedHashSet<>();
 		
 		String itemPath = itemPathCreator.createPath(parentItem);

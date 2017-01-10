@@ -47,6 +47,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	
 	private RelevantCodeCutter codeCutter;
 	
+	private TreeSet<Proposal> cachedProposals;
+
 	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter, XMLProposalDataModelProvider dataModelProvider) {
 		if (adaptable==null){
 			throw new IllegalArgumentException("adaptable may not be null!");
@@ -54,6 +56,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		if (codeCutter==null){
 			throw new IllegalArgumentException("codeCutter may not be null!");
 		}
+		cachedProposals = new TreeSet<>();
 		this.adaptable=adaptable;
 		this.codeCutter=codeCutter;
 		
@@ -62,30 +65,14 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		xmlProposalFactory.setErrorHandler(EGradleErrorHandler.INSTANCE);
 		proposalFactories.add(xmlProposalFactory);
 	}
-
+	
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if (! isCodeCompletionEnabled()){
 			errorMessage="EGradle editor code completion is disabled. Change your preferences!";
 			return NO_COMPLETION_PROPOSALS;
 		}
-		IEditorPart activeEditor = EGradleUtil.getActiveEditor();
-		if (activeEditor instanceof GradleEditor){
-			GradleEditor ge = (GradleEditor) activeEditor;
-			long start = System.currentTimeMillis();
-			/* wait for outline model is being refreshed*/
-			while (ge.isRefreshOutlineInProgress()){
-				long current = System.currentTimeMillis();
-				if (current-start>2000){
-					break;
-				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					/* ignore*/
-				}
-			}
-		}
+//		waitForOutlineModelRefreshed();
 		errorMessage=null;
 		IDocument document = viewer.getDocument();
 		
@@ -95,10 +82,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			int offsetOfFirstCharacterInLine = document.getLineOffset(line);
 			int length = offset-offsetOfFirstCharacterInLine;
 			
-			/* FIXME ATR, 08.01.2017: not correct - e.g. when "\t\tallp" only "\t\t" should be relevant... change this*/
-			String stringToColumnPosOfLine = document.get(offsetOfFirstCharacterInLine, length);
+			String lineTextBeforeCursorPosition = document.get(offsetOfFirstCharacterInLine, length);
 			
+			if (cachedProposals.isEmpty()){
 				
+			}
 			contentProvider = new ProposalFactoryContentProvider() {
 				private String relevant;
 				@Override
@@ -131,22 +119,42 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				}
 				
 				@Override
-				public String getColumnTextBeforeCursorPosition() {
-					return stringToColumnPosOfLine;
+				public String getLineTextBeforeCursorPosition() {
+					return lineTextBeforeCursorPosition;
 				}
 			};
 		} catch (BadLocationException e) {
 			return NO_COMPLETION_PROPOSALS;
 		}
-		
-		
-		Set<Proposal> allProposals = new TreeSet<>();
+		/* FIXME ATRIGNA, 10.01.2017:  bug at example: child can always contain itself as child again, even when not defined */
+		/* FIXME ATRIGNA, 10.01.2017: implement caching correctly  - move filtering from proposal factory to own instance*/
+		cachedProposals.clear();
 		for (ProposalFactory proposalFactory: proposalFactories){
 			Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
-			allProposals.addAll(proposalsOfCurrentFactory);
+			cachedProposals.addAll(proposalsOfCurrentFactory);
 		}
-		List<ICompletionProposal> list = createEclipseProposals(offset, allProposals, contentProvider);
+		List<ICompletionProposal> list = createEclipseProposals(offset, cachedProposals, contentProvider);
 		return list.toArray(new ICompletionProposal[list.size()]);
+	}
+
+	private void waitForOutlineModelRefreshed() {
+		IEditorPart activeEditor = EGradleUtil.getActiveEditor();
+		if (activeEditor instanceof GradleEditor){
+			GradleEditor ge = (GradleEditor) activeEditor;
+			long start = System.currentTimeMillis();
+			/* wait for outline model is being refreshed*/
+			while (ge.isRefreshOutlineInProgress()){
+				long current = System.currentTimeMillis();
+				if (current-start>2000){
+					break;
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					/* ignore*/
+				}
+			}
+		}
 	}
 
 	private boolean isCodeCompletionEnabled() {
