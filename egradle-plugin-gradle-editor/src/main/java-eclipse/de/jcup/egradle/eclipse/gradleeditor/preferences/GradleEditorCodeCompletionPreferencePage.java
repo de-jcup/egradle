@@ -20,13 +20,18 @@ import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPrefe
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
 
-public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage
-		implements IWorkbenchPreferencePage {
+public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+	private boolean recreateDefaultsEnabled;
 	private BooleanFieldEditor codeCompletionEnabled;
 
 	public GradleEditorCodeCompletionPreferencePage() {
@@ -40,18 +45,35 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 
 	@Override
 	protected void createFieldEditors() {
+		Composite parent = getFieldEditorParent();
 		codeCompletionEnabled = new BooleanFieldEditor(P_EDITOR_CODECOMPLETION_ENABLED.getId(),
-				"Code completion enabled", getFieldEditorParent());
+				"Code completion enabled", parent);
 		addField(codeCompletionEnabled);
+		
+		Button reloadButton= new Button(parent, SWT.PUSH);
+		reloadButton.setText("Reload");
+		reloadButton.setToolTipText("Reload proposal xml files from user.home/.egradle/codeCompletion");
+		reloadButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				UserHomeBasedXMLProposalDataModelProvider.INSTANCE.reload();
+			}
+		});
 	}
 	
 	@Override
 	protected void performDefaults() {
+		recreateDefaultsEnabled=true;
 		super.performDefaults();
-		
-		/* reload xml parts */
-		UserHomeBasedXMLProposalDataModelProvider.INSTANCE.restoreDefaults();
-		setMessage("XML code completion definition reloaded");
+	}
+	
+	@Override
+	public boolean performOk() {
+		if (recreateDefaultsEnabled){
+			/* reload xml parts */
+			UserHomeBasedXMLProposalDataModelProvider.INSTANCE.restoreDefaults();
+		}
+		return super.performOk();
 	}
 	
 	

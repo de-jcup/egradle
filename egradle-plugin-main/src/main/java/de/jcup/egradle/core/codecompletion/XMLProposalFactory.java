@@ -9,6 +9,7 @@ import de.jcup.egradle.core.codecompletion.SourceCodeInsertionSupport.InsertionD
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.PreparationException;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalContainer;
 import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalElement;
+import de.jcup.egradle.core.codecompletion.XMLProposalDataModel.XMLProposalValue;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 
@@ -107,10 +108,13 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 		}
 		return proposals;
 	}
+	
+	/* FIXME ATR, 11.01.2017: in some circumstances the code completion did not work any more - must be tested in UI  */
 	/* FIXME albert,06.01.2017: solve problem of cursor inside item and not at end! code completion maybe destroys item! */
 	SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
 	
 	private void appendProposals(XMLProposalContainer possibleParent, Set<Proposal> proposals, String textBeforeColumn) {
+		/* elements */
 		List<XMLProposalElement> children = possibleParent.getElements();
 		for (XMLProposalElement child: children){
 			XMLProposalImpl proposal = new XMLProposalImpl();
@@ -121,6 +125,19 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 			proposal.setCursorPos(insertData.cursorOffset);
 			/* FIXME albert,06.01.2017: what about types ? */
 			/* FIXME albert,06.01.2017: implement duplicate entries (max amount ) */
+			proposals.add(proposal);
+		}
+		/* values */
+		List<XMLProposalValue> values = possibleParent.getValues();
+		for (XMLProposalValue value: values){
+			XMLProposalImpl proposal = new XMLProposalImpl();
+			InsertionData insertData = insertSupport.prepareInsertionString(value.getCode(),textBeforeColumn);
+			proposal.setCode(insertData.sourceCode);
+			proposal.setName(value.getName());
+			proposal.setDescription(value.getDescription());
+			proposal.setCursorPos(insertData.cursorOffset);
+			/* FIXME albert,10.01.2017: what about types ? */
+			/* FIXME albert,10.01.2017: implement duplicate entries (max amount ) */
 			proposals.add(proposal);
 		}
 	}

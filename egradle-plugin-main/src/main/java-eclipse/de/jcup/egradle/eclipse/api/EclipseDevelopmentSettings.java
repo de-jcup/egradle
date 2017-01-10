@@ -30,4 +30,9 @@ public interface EclipseDevelopmentSettings {
 	 */
 	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean.parseBoolean(System.getProperty("egradle.debug.menus"));
 	
+	/**
+	 * Feature toggle - allows outline reloading as full antlr parts also. interesting for debug purpose only. For normal usage uninteresting
+	 */
+	public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean.parseBoolean(System.getProperty("egradle.debug.logging"));
+	
 }

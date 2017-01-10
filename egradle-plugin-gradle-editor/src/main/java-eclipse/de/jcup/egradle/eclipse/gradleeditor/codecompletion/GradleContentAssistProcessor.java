@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -35,6 +36,7 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
@@ -144,11 +146,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		}
 
 		/*
-		 * FIXME ATRIGNA, 10.01.2017: bug at example: child can always contain
+		 * FIXME ATR, 10.01.2017: bug at example: child can always contain
 		 * itself as child again, even when not defined
 		 */
 		/*
-		 * FIXME ATRIGNA, 10.01.2017: implement caching correctly - move
+		 * FIXME ATR, 10.01.2017: implement caching correctly - move
 		 * filtering from proposal factory to own instance
 		 */
 		if (DEBUG) {
@@ -265,7 +267,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		return completionListener;
 	}
 
-	private static boolean DEBUG = true;
+	private static boolean DEBUG = EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING;
 
 	/**
 	 * As long as the code assistent session is alive we do not bother about

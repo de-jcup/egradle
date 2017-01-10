@@ -103,7 +103,7 @@ public class XMLProposalDataModelTest {
 		}
 	}
 
-
+	/* FIXME ATR, 11.01.2017: write test and implement multiple root path entries */
 	@Test
 	public void path_correct_prepared() throws Exception {
 		/* prepare */
@@ -111,7 +111,7 @@ public class XMLProposalDataModelTest {
 
 		XMLProposalData proposalData1 = new XMLProposalData();
 		modelToTest.getProposals().add(proposalData1);
-
+		
 		// set context
 		XMLProposalRootPathEntry rootPath = new XMLProposalRootPathEntry();
 		rootPath.path = "";
@@ -162,11 +162,16 @@ public class XMLProposalDataModelTest {
 		XMLProposalContainer next = data0.iterator().next();
 		assertNotNull(next);
 		assertTrue(next instanceof SyntheticXMLProposalContainer);
+		// root test element
 		List<XMLProposalElement> children = next.getElements();
 		assertNotNull(children);
 		assertEquals(1,children.size());
 		assertEquals(element1,children.iterator().next());
-		
+		// root test values
+		List<XMLProposalValue> values = next.getValues();
+		assertNotNull(values);
+		assertEquals(1,values.size());
+		assertEquals(directValue, values.iterator().next());
 		
 		Set<XMLProposalContainer> data1 = modelToTest.getContainersByPath("repositories");
 		assertNotNull(data1);

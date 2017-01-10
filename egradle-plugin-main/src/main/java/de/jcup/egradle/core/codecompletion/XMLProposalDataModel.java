@@ -46,6 +46,7 @@ public class XMLProposalDataModel {
 	 * Returns a set containing all suitable {@link XMLProposalContainer} instances
 	 * @param path
 	 * @return set of proposal elements, never <code>null</code>
+	 * @throws PreparationException 
 	 */
 	public Set<XMLProposalContainer> getContainersByPath(String path) throws PreparationException{
 		ensurePrepared();
@@ -67,16 +68,18 @@ public class XMLProposalDataModel {
 				rootPathEntry.path="";
 				rootPathEntries.add(rootPathEntry);
 			}
-			calculateAndAddPathesToMap(data, null, rootPathEntries, data.getElements(),0);
+			calculateAndAddPathesToMap(data, null, rootPathEntries, data.getElements(),data.getValues(), 0);
 		}
 	}
 
-	private void calculateAndAddPathesToMap(XMLProposalData data ,StringBuilder parentSB, List<XMLProposalRootPathEntry> rootPathEntries, List<XMLProposalElement> elements, int dive) throws PreparationException {
+	private void calculateAndAddPathesToMap(XMLProposalData data ,StringBuilder parentSB, List<XMLProposalRootPathEntry> rootPathEntries, List<XMLProposalElement> elements, List<XMLProposalValue> values, int dive) throws PreparationException {
 		if (dive==0){
 			/* first call so add root parts as synthetic containers for given elements!*/
 			for (XMLProposalRootPathEntry entry: rootPathEntries){
 				SyntheticXMLProposalContainer container = new SyntheticXMLProposalContainer();
+				container.path=entry.path;
 				container.elements=elements;
+				container.values=values;
 				String uid = entry.path;
 				registerContainer(container, uid);
 			}
@@ -94,7 +97,7 @@ public class XMLProposalDataModel {
 				sb.append('.');
 			}
 			sb.append(element.getName());
-			calculateAndAddPathesToMap(data, sb, rootPathEntries, element.getElements(), dive);
+			calculateAndAddPathesToMap(data, sb, rootPathEntries, element.getElements(), element.getValues(), dive);
 			for (XMLProposalRootPathEntry rootPath : rootPathEntries){
 				StringBuilder uidSb = new StringBuilder();
 				uidSb.append(rootPath.path);
@@ -271,8 +274,9 @@ public class XMLProposalDataModel {
 	 */
 	public static class SyntheticXMLProposalContainer implements XMLProposalContainer{
 
+		private String path;
 		private List<XMLProposalElement> elements = new ArrayList<>();
-		private List<XMLProposalValue> values;
+		private List<XMLProposalValue> values = new ArrayList<>();
 
 		@Override
 		public List<XMLProposalElement> getElements() {
@@ -282,6 +286,12 @@ public class XMLProposalDataModel {
 		@Override
 		public List<XMLProposalValue> getValues() {
 			return values;
+		}
+
+		@Override
+		public String toString() {
+			return "SyntheticXMLProposalContainer [path=" + path + ", values=" + values + ", elements=" + elements
+					+ "]";
 		}
 		
 	}
@@ -309,8 +319,16 @@ public class XMLProposalDataModel {
 	
 	public static interface XMLProposalContainer {
 		
+		/**
+		 * Return elements, never <code>null</code>
+		 * @return lements, never <code>null</code>
+		 */
 		public List<XMLProposalElement> getElements();
 		
+		/**
+		 * Return values, never <code>null</code>
+		 * @return values, never <code>null</code>
+		 */
 		public List<XMLProposalValue> getValues();
 	}
 	
