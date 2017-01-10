@@ -1,12 +1,12 @@
 package de.jcup.egradle.core.model;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 public class ModelInspectorTest {
 	

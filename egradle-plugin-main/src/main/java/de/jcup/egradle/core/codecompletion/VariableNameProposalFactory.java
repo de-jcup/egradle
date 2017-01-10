@@ -1,6 +1,5 @@
 package de.jcup.egradle.core.codecompletion;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;

@@ -20,7 +20,6 @@ import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPrefe
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Delayed;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -111,16 +110,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		return bracketMatcher;
 	}
 	
-	/**
-	 * While refresh progress is active the outline model will not be changed
-	 * 
-	 * @return <code>true</code> when refresh is in progress.
-	 */
-	public boolean isRefreshOutlineInProgress() {
-		return refreshOutlineInProgress || documentListener.r.waitingForFurtherDocumentChanges;
-	}
-
-
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
@@ -420,7 +410,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			synchronized (monitor) {
 				refreshOutlineInProgress = true;
 			}
-			refreshOutlineImpl();
+			internalRebuildOutline();
 		}
 
 		void refreshOutlineDelayed(int delay) {
@@ -448,7 +438,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 							return Status.CANCEL_STATUS;
 						}
 					}
-					refreshOutlineImpl();
+					internalRebuildOutline();
 					
 					return Status.OK_STATUS;
 				}
@@ -456,18 +446,56 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			job.schedule(delay);
 		}
 
-		private void refreshOutlineImpl() {
-			EGradleUtil.safeAsyncExec(new Runnable() {
-				public void run() {
-					refreshOutlineInProgress = false;
+		
+	}
+	
+	private Object waitForRebuild = new Object();
+	
+	/**
+	 * Rebuilds outline to current document model and wait
+	 */
+	public void rebuildOutlineAndWait() {
+		
+		Runnable r = new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					refreshOutlineInProgress=true;
+					internalRebuildOutline();
+					
+					synchronized(waitForRebuild){
+						waitForRebuild.wait();
+					}
+				} catch (InterruptedException e) {
+					/* ignore*/
+				}
+				
+			}
+		};
+		Thread t = new Thread(r, "rebuild outline and wait");
+		t.start();
+	}
+	
+	private void internalRebuildOutline() {
+		EGradleUtil.safeAsyncExec(new Runnable() {
+			public void run() {
+				try{
 					IDocument document = getDocument();
 					outlinePage.inputChanged(document);
+					refreshOutlineInProgress = false;
+				}finally{
+					synchronized(waitForRebuild){
+						waitForRebuild.notifyAll();
+					}
 				}
+				
+			}
 
-			});
-		}
+		});
 	}
-
+	
+	
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override

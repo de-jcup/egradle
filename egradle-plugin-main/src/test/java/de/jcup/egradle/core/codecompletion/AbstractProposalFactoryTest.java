@@ -1,18 +1,16 @@
 package de.jcup.egradle.core.codecompletion;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import static org.mockito.Mockito.*;
 
 public class AbstractProposalFactoryTest {
 
@@ -29,7 +27,7 @@ public class AbstractProposalFactoryTest {
 	}
 
 	@Test
-	public void filtering__when_file_was_already_entered_and_proposal_impl_says_file_xile_an_empty_list_is_returned(){
+	public void no_initial_filtering__when_file_was_already_entered_and_proposal_impl_says_file_xile_an_empty_list_is_returned(){
 		/* prepare */
 		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("file");
 		
@@ -49,11 +47,11 @@ public class AbstractProposalFactoryTest {
 		
 		/* test */
 		assertNotNull(proposals);
-		assertEquals(0,proposals.size());
+		assertEquals(2,proposals.size());
 	}
 	
 	@Test
-	public void filtering__when_fi_was_already_entered_and_proposal_impl_says_file_xile_and_affiliate_only_file_and_affiliate_are_returned(){
+	public void no_initial_filtering__when_fi_was_already_entered_and_proposal_impl_says_file_xile_and_affiliate_only_file_and_affiliate_are_returned(){
 		/* prepare */
 		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("fi");
 		
@@ -78,9 +76,9 @@ public class AbstractProposalFactoryTest {
 		/* test */
 		assertNotNull(proposals);
 		assertTrue(proposals.contains(mockedProposal1));
-		assertFalse(proposals.contains(mockedProposal2));
+		assertTrue(proposals.contains(mockedProposal2));
 		assertTrue(proposals.contains(mockedProposal3));
-		assertEquals(2,proposals.size());
+		assertEquals(3,proposals.size());
 	}
 	
 	

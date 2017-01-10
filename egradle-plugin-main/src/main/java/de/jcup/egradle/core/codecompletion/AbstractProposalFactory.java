@@ -1,12 +1,8 @@
 package de.jcup.egradle.core.codecompletion;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-import org.junit.FixMethodOrder;
 
 /**
  * Abstract proposal factory implementation as base for others
@@ -26,9 +22,6 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 		if (result==null){
 			return Collections.emptySet();
 		}
-		/* we got proposals, so filter unusable ones:*/
-		String entered = contentProvider.getEditorSourceEnteredAtCursorPosition();
-		result = filterAndSetupProposals(result, entered);
 		return result;
 	}
 	
@@ -43,27 +36,5 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 	protected abstract Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) ;
 
 
-	/**
-	 * Filter given proposals
-	 * @param proposals
-	 * @param entered relevant code, already entered by user
-	 * @return
-	 */
-	protected Set<Proposal> filterAndSetupProposals(Set<Proposal> proposals, String entered){
-		if (StringUtils.isEmpty(entered)){
-			/* no relavant code entered*/
-			return new LinkedHashSet<>(proposals);
-		}
-		/* FIXME ATR, 10.1.2017 : there is a problem with \r inside code completions - so its not empty but we got no proposals here */
-		String enteredLowerCased = entered.toLowerCase();
-		Set<Proposal> filteredResult = new LinkedHashSet<>();
-		for (Proposal proposal: proposals){
-			String codeLowerCased = proposal.getCode().toLowerCase();
-			if (codeLowerCased.indexOf(enteredLowerCased)!=-1){
-				filteredResult.add(proposal);
-			}
-		}
-		return filteredResult;
-		
-	}
+	
 }

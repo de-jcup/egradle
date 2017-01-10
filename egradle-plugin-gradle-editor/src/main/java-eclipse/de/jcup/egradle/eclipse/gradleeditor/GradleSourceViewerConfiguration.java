@@ -24,7 +24,10 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.text.contentassist.ContentAssistEvent;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.ICompletionListener;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlinkPresenter;
@@ -91,6 +94,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 				GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId());
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
 				GradleDocumentIdentifiers.GRADLE_VARIABLE.getId());
+		contentAssistant.addCompletionListener(gradleContentAssistProcessor.getCompletionListener());
 		
 		/* enable auto activation */
 		contentAssistant.enableAutoActivation(true);

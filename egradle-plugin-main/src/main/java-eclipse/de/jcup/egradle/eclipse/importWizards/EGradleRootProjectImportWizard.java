@@ -42,7 +42,6 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
