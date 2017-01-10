@@ -109,8 +109,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	public GradleBracketsSupport getBracketMatcher() {
 		return bracketMatcher;
 	}
-	
-	
+
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
@@ -360,9 +359,12 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				t.start();
 			}
 		}
-		
-		/* FIXME ATR, 10.01.2017: too slow! entering text while code completion is visible
-		 * is super slow! the code completion should only use outline model and resolving for factory only when first activation and then cache!
+
+		/*
+		 * FIXME ATR, 10.01.2017: too slow! entering text while code completion
+		 * is visible is super slow! the code completion should only use outline
+		 * model and resolving for factory only when first activation and then
+		 * cache!
 		 * 
 		 */
 		private class WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable implements Runnable {
@@ -439,63 +441,34 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 						}
 					}
 					internalRebuildOutline();
-					
+
 					return Status.OK_STATUS;
 				}
 			};
 			job.schedule(delay);
 		}
 
-		
 	}
-	
-	private Object waitForRebuild = new Object();
-	
+
 	/**
-	 * Rebuilds outline to current document model and wait
+	 * Rebuilds outline to current document model 
 	 */
-	public void rebuildOutlineAndWait() {
-		
-		Runnable r = new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					refreshOutlineInProgress=true;
-					internalRebuildOutline();
-					
-					synchronized(waitForRebuild){
-						waitForRebuild.wait();
-					}
-				} catch (InterruptedException e) {
-					/* ignore*/
-				}
-				
-			}
-		};
-		Thread t = new Thread(r, "rebuild outline and wait");
-		t.start();
+	public void rebuildOutline() {
+		refreshOutlineInProgress = true;
+		internalRebuildOutline();
 	}
-	
+
 	private void internalRebuildOutline() {
 		EGradleUtil.safeAsyncExec(new Runnable() {
 			public void run() {
-				try{
-					IDocument document = getDocument();
-					outlinePage.inputChanged(document);
-					refreshOutlineInProgress = false;
-				}finally{
-					synchronized(waitForRebuild){
-						waitForRebuild.notifyAll();
-					}
-				}
-				
+				IDocument document = getDocument();
+				outlinePage.inputChanged(document);
+				refreshOutlineInProgress = false;
 			}
 
 		});
 	}
-	
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override

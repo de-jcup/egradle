@@ -314,7 +314,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				if (DEBUG) {
 					debugCacheState("applied proposal-2");
 				}
-				ge.rebuildOutlineAndWait();
+				ge.rebuildOutline();
 				if (DEBUG) {
 					debugCacheState("applied proposal-3");
 				}
