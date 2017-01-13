@@ -52,7 +52,15 @@ import de.jcup.egradle.core.model.Model;
  *
  */
 public class XMLProposalFactory extends AbstractProposalFactory{
-
+	/* FIXME ATR, 11.01.2017: change xml : use closure instead of element */
+	/* FIXME ATR, 11.01.2017: change xml : use instruction instead of value */
+	/* FIXME ATR, 11.01.2017: https://docs.gradle.org/current/dsl/ integrate, or write generator */
+	/* FIXME ATR, 11.01.2017: create issue for gradles own build system for documentation to create xml proposal files automatically
+	 * see https://github.com/gradle/gradle/tree/master/subprojects/docs
+	 * see https://github.com/gradle/gradle/blob/master/buildSrc/src/main/groovy/org/gradle/build/docs/dsl/source/ExtractDslMetaDataTask.groovy
+	 *  */
+	/* FIXME ATR, 11.01.2017: fork gradle project and adopt doc subproject of gradle for generator */
+	/* FIXME ATR, 11.01.2017: use gradle versions in template pathes (very important for generated xml proposals!)*/
 	private ItemPathCreator itemPathCreator = new ItemPathCreator();
 	private XMLProposalDataModelProvider provider;
 	private ErrorHandler errorHandler;
@@ -115,6 +123,9 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 	
 	private void appendProposals(XMLProposalContainer possibleParent, Set<Proposal> proposals, String textBeforeColumn) {
 		/* elements */
+		/* FIXME albert,06.01.2017: what about types ? */
+		/* FIXME albert,06.01.2017: implement duplicate entries (max amount ) */
+		/* FIXME ATR, 11.01.2017: implementation change - be aware about using generated groovy dsl xml only! */
 		List<XMLProposalElement> children = possibleParent.getElements();
 		for (XMLProposalElement child: children){
 			XMLProposalImpl proposal = new XMLProposalImpl();
@@ -123,8 +134,6 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 			proposal.setName(child.getName());
 			proposal.setDescription(child.getDescription());
 			proposal.setCursorPos(insertData.cursorOffset);
-			/* FIXME albert,06.01.2017: what about types ? */
-			/* FIXME albert,06.01.2017: implement duplicate entries (max amount ) */
 			proposals.add(proposal);
 		}
 		/* values */
@@ -136,8 +145,6 @@ public class XMLProposalFactory extends AbstractProposalFactory{
 			proposal.setName(value.getName());
 			proposal.setDescription(value.getDescription());
 			proposal.setCursorPos(insertData.cursorOffset);
-			/* FIXME albert,10.01.2017: what about types ? */
-			/* FIXME albert,10.01.2017: implement duplicate entries (max amount ) */
 			proposals.add(proposal);
 		}
 	}

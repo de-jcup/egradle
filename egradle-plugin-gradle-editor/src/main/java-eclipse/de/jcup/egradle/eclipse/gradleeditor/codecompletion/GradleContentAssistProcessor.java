@@ -146,12 +146,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		}
 
 		/*
-		 * FIXME ATR, 10.01.2017: bug at example: child can always contain
-		 * itself as child again, even when not defined
-		 */
-		/*
-		 * FIXME ATR, 10.01.2017: implement caching correctly - move
-		 * filtering from proposal factory to own instance
+		 * FIXME ATR, 10.01.2017: xml schema necessary, no values like "bla-from-xml" allowed because
+		 * not parseable by groovy
 		 */
 		if (DEBUG) {
 			debugCacheState("proposal computing-1");

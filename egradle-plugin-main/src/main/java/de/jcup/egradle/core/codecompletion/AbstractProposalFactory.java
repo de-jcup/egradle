@@ -34,7 +34,5 @@ public abstract class AbstractProposalFactory implements ProposalFactory {
 	 * @return created proposals or <code>null</code>
 	 */
 	protected abstract Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) ;
-
-
 	
 }

@@ -360,13 +360,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			}
 		}
 
-		/*
-		 * FIXME ATR, 10.01.2017: too slow! entering text while code completion
-		 * is visible is super slow! the code completion should only use outline
-		 * model and resolving for factory only when first activation and then
-		 * cache!
-		 * 
-		 */
 		private class WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable implements Runnable {
 			private boolean waitingForFurtherDocumentChanges;
 			private boolean disposed;
