@@ -13,5 +13,6 @@
 	<classpathentry kind="src" path="src/main/res"/>
 	<classpathentry kind="lib" path="lib/hamcrest-core-1.1.jar" sourcepath="lib/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.8.5.jar" sourcepath="lib/mockito-all-1.8.5-sources.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-2.4.7.jar" sourcepath="lib/groovy-all-2.4.7-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
