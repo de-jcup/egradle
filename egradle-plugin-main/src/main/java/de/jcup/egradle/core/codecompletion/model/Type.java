@@ -9,9 +9,9 @@ import java.util.Set;
  */
 public interface Type extends LanguageElement{
 
-	public Set<Property> getProperties();
+	public Set<? extends Property> getProperties();
 	
-	public Set<Method> getMethods();
+	public Set<? extends Method> getMethods();
 
 	/**
 	 * 

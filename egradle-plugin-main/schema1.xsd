@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="method" type="xmlMethod"/>
+
+  <xs:element name="model" type="xmlType"/>
+
+  <xs:element name="parameter" type="xmlParameter"/>
+
+  <xs:element name="property" type="xmlProperty"/>
+
+  <xs:complexType name="xmlType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element ref="method" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="property" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="language" type="xs:string"/>
+    <xs:attribute name="version" type="xs:string"/>
+    <xs:attribute name="interface" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlMethod">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="returnType" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlParameter">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlProperty">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
+
