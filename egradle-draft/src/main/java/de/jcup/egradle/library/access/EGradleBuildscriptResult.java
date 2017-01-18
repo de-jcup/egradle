@@ -1,9 +1,9 @@
 package de.jcup.egradle.library.access;
-import org.codehaus.groovy.ast.stmt.Statement;
+import org.codehaus.groovy.ast.ASTNode;
 
 public class EGradleBuildscriptResult {
 
-	private Statement statement;
+	private ASTNode node;
 	
 	private Exception exception;
 	
@@ -11,16 +11,16 @@ public class EGradleBuildscriptResult {
 		this.exception = exception;
 	}
 	
-	public EGradleBuildscriptResult(Statement statement) {
-		this.statement = statement;
+	public EGradleBuildscriptResult(ASTNode node) {
+		this.node = node;
 	}
 	
 	public Exception getException() {
 		return exception;
 	}
 	
-	public Statement getStatement() {
-		return statement;
+	public ASTNode getNode() {
+		return node;
 	}
 }
 

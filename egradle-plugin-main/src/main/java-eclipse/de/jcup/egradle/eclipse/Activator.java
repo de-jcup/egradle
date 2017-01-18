@@ -26,9 +26,7 @@ import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -37,6 +35,7 @@ public class Activator extends AbstractUIPlugin {
 	private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
 
 	private ColorManager colorManager;
+
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.main"; //$NON-NLS-1$
@@ -53,11 +52,10 @@ public class Activator extends AbstractUIPlugin {
 	public ColorManager getColorManager() {
 		return colorManager;
 	}
-
+	
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		UserHomeBasedXMLProposalDataModelProvider.INSTANCE.setErrorHandler(EGradleErrorHandler.INSTANCE);
 	}
 
 	public void stop(BundleContext context) throws Exception {

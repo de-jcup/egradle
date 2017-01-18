@@ -18,7 +18,9 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.jcup.egradle.core.codecompletion.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -32,11 +34,14 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	private ColorManager colorManager;
 
+	private CodeCompletionRegistry codeCompletionRegistry;
+
 	/**
 	 * The constructor
 	 */
 	public Activator() {
 		colorManager=new ColorManager();
+		codeCompletionRegistry=new CodeCompletionRegistry();
 	}
 
 
@@ -47,6 +52,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		codeCompletionRegistry.setErrorHandler(EGradleErrorHandler.INSTANCE);
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -55,6 +61,11 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	public CodeCompletionRegistry getCodeCompletionRegistry(){
+		return codeCompletionRegistry;
+	}
+
+	
 	/**
 	 * Returns the shared instance
 	 *

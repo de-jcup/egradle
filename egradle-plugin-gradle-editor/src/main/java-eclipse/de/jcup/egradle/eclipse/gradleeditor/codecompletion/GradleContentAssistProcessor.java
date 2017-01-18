@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -28,13 +27,9 @@ import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
 import de.jcup.egradle.core.codecompletion.ProposalFilter;
 import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModelProvider;
-import de.jcup.egradle.core.codecompletion.XMLProposalFactory;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
-import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
@@ -61,8 +56,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private ICompletionListener completionListener;
 
-	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter,
-			XMLProposalDataModelProvider dataModelProvider) {
+	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter
+			) {
 		if (adaptable == null) {
 			throw new IllegalArgumentException("adaptable may not be null!");
 		}
@@ -75,14 +70,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		this.cachedProposals = new TreeSet<>();
 		this.completionListener = new CacheValidListener();
 
-		addFactories(dataModelProvider);
+		addFactories();
 	}
 
-	private void addFactories(XMLProposalDataModelProvider dataModelProvider) {
+	private void addFactories() {
 		proposalFactories.add(new VariableNameProposalFactory());
-		XMLProposalFactory xmlProposalFactory = new XMLProposalFactory(dataModelProvider);
-		xmlProposalFactory.setErrorHandler(EGradleErrorHandler.INSTANCE);
-		proposalFactories.add(xmlProposalFactory);
 	}
 
 	@Override

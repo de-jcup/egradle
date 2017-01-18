@@ -10,6 +10,7 @@ public class ASTBuilderCaller {
 	public List<ASTNode> build(String code){
 		AstBuilder builder = new AstBuilder();
 		List<ASTNode> nodes = builder.buildFromString(code);
+//				builder.buildFromString(CompilePhase.CANONICALIZATION, code);
 		return nodes;
 	}
 }

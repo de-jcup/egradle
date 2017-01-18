@@ -20,7 +20,7 @@ allprojects{
 		
 }
 
-def doAutomateEclipseSetup = ['egradle-other','egradle-library-access'];
+def doAutomateEclipseSetup = ['egradle-other','egradle-draft'];
 
 subprojects {
     apply plugin: 'java'

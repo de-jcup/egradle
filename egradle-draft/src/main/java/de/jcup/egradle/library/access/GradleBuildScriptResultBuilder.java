@@ -13,8 +13,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 import org.codehaus.groovy.ast.ASTNode;
-import org.codehaus.groovy.ast.ClassNode;
-import org.codehaus.groovy.ast.MethodNode;
 import org.codehaus.groovy.ast.expr.ClosureExpression;
 import org.codehaus.groovy.ast.expr.DeclarationExpression;
 import org.codehaus.groovy.ast.expr.Expression;
@@ -23,19 +21,7 @@ import org.codehaus.groovy.ast.stmt.ReturnStatement;
 import org.codehaus.groovy.ast.stmt.Statement;
 
 public class GradleBuildScriptResultBuilder {
-	public static void main(String[] args) throws Exception {
-		String pathToGradle = System.getProperty("user.home")
-				+ "/.gradle/wrapper/dists/gradle-3.1-bin/37qejo6a26ua35lyn7h1u9v2n/gradle-3.1";
-		StringBuilder buildScript = new StringBuilder();
 
-		buildScript.append("subProjects{\napply from: \"${rootProject.projectDir}/libraries.gradle\"\n}");
-
-		Future<EGradleBuildscriptResult> futureStatement = new GradleBuildScriptResultBuilder().build(buildScript.toString(), pathToGradle);
-		EGradleBuildscriptResult buildscriptResult = futureStatement.get();
-		Statement statement = buildscriptResult.getStatement();
-		String text = statement!=null ? statement.getText():"error";
-		System.out.println("script:"+text);
-	}
 
 	public Future<EGradleBuildscriptResult> build(String buildScript, String pathToGradle) {
 		CompletableFuture<EGradleBuildscriptResult> future = new CompletableFuture<>();
@@ -44,7 +30,7 @@ public class GradleBuildScriptResultBuilder {
 			@Override
 			public void run() {
 				try {
-					new GradleBuildScriptResultBuilder().start(future, buildScript, pathToGradle);
+					GradleBuildScriptResultBuilder.this.start(future, buildScript, pathToGradle);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,11 +63,7 @@ public class GradleBuildScriptResultBuilder {
 		URLClassLoader child = new URLClassLoader(urls);
 		Thread.currentThread().setContextClassLoader(child);
 
-		StringBuilder buildscriptWrapper = new StringBuilder();
-//		buildscriptWrapper.append("import org.gradle.api.internal.project.*\n");
-		buildscriptWrapper.append("org.gradle.api.internal.project.ProjectScript buildscript= {\n");
-		buildscriptWrapper.append(buildScript);
-		buildscriptWrapper.append("\n}");
+		StringBuilder buildscriptWrapper = createBuildscriptWrapper(buildScript);
 
 		try {
 			Class<?> classToLoad;
@@ -92,30 +74,11 @@ public class GradleBuildScriptResultBuilder {
 			@SuppressWarnings("unchecked")
 			List<ASTNode> result = (List<ASTNode>) method.invoke(instance, buildscriptWrapper.toString());
 
-			for (ASTNode node : result) {
-				BlockStatement bs = (BlockStatement) node;
-				for (org.codehaus.groovy.ast.stmt.Statement st : bs.getStatements()) {
-					if (st instanceof ReturnStatement) {
-						ReturnStatement rs = (ReturnStatement) st;
-						Expression expression = rs.getExpression();
-						if (expression instanceof DeclarationExpression) {
-							DeclarationExpression de = (DeclarationExpression) expression;
-							Expression right = de.getRightExpression();
-							if (right instanceof ClosureExpression) {
-								ClosureExpression ce = (ClosureExpression) right;
-								ClassNode dc = ce.getDeclaringClass();
-								if (dc != null) {
-									List<MethodNode> methods = dc.getAbstractMethods();
-									System.out.println("methods:" + methods);
-								}
-								Statement buildCode = ce.getCode();
-								future.complete(new EGradleBuildscriptResult(buildCode));
-								return;
-							}
-						}
-					}
-				}
+			completeFutureByResults(future, result);
+			if (future.isDone()){
+				return;
 			}
+			error = new EGradleBuildScriptException("Did not found expected buildscript closure!");
 		} catch (InvocationTargetException | ClassNotFoundException | NoSuchMethodException | InstantiationException
 				| IllegalAccessException e) {
 			error=new EGradleBuildScriptException("Reflection problems", e);
@@ -126,6 +89,48 @@ public class GradleBuildScriptResultBuilder {
 			future.complete(new EGradleBuildscriptResult(error));
 		}
 
+	}
+
+	protected StringBuilder createBuildscriptWrapper(String buildScript) {
+		StringBuilder buildscriptWrapper = new StringBuilder();
+		buildscriptWrapper.append("import org.gradle.api.internal.project.*\n");
+//		buildscriptWrapper.append("org.gradle.api.internal.project.ProjectScript buildscript= {\n");
+//		buildscriptWrapper.append("ProjectScript buildscript= {\n");
+		buildscriptWrapper.append("DefaultProject p = new DefaultProject(); \n");
+		buildscriptWrapper.append("p.buidscript {");
+		buildscriptWrapper.append(buildScript);
+		buildscriptWrapper.append("\n}");
+		return buildscriptWrapper;
+	}
+
+	protected void completeFutureByResults(CompletableFuture<EGradleBuildscriptResult> future, List<ASTNode> result) {
+		for (ASTNode node : result) {
+			BlockStatement bs = (BlockStatement) node;
+			for (org.codehaus.groovy.ast.stmt.Statement st : bs.getStatements()) {
+				if (st instanceof ReturnStatement) {
+					ReturnStatement rs = (ReturnStatement) st;
+					Expression expression = rs.getExpression();
+					if (expression instanceof DeclarationExpression) {
+						DeclarationExpression de = (DeclarationExpression) expression;
+						String name = de.getVariableExpression().getName();
+						if (! "buildscript".equals(name)){
+							continue;
+						}
+						Expression right = de.getRightExpression();
+						if (right instanceof ClosureExpression) {
+							ClosureExpression ce = (ClosureExpression) right;
+							Statement buildCode = ce.getCode();
+							
+							future.complete(new EGradleBuildscriptResult(buildCode));
+							return;
+						}else{
+							future.complete(new EGradleBuildscriptResult(new EGradleBuildScriptException("Did not found expected buildscript closure ,but:"+right)));
+							return;
+						}
+					}
+				}
+			}
+		}
 	}
 
 

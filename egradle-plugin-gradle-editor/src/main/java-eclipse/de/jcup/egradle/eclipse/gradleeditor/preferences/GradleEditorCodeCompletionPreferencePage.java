@@ -28,10 +28,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
+import de.jcup.egradle.core.codecompletion.CodeCompletionRegistry;
+import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
 public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
-	private boolean recreateDefaultsEnabled;
 	private BooleanFieldEditor codeCompletionEnabled;
 
 	public GradleEditorCodeCompletionPreferencePage() {
@@ -51,30 +51,19 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 		addField(codeCompletionEnabled);
 		
 		Button reloadButton= new Button(parent, SWT.PUSH);
-		reloadButton.setText("Reload");
-		reloadButton.setToolTipText("Reload proposal xml files from user.home/.egradle/codeCompletion");
+		reloadButton.setText("Clean cache");
+		reloadButton.setToolTipText("Clean cache of code completion ");
 		reloadButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				UserHomeBasedXMLProposalDataModelProvider.INSTANCE.reload();
+				Activator activator = Activator.getDefault();
+				CodeCompletionRegistry registry = activator.getCodeCompletionRegistry();
+				if (registry==null){
+					return;
+				}
+				registry.rebuild();;
 			}
 		});
 	}
-	
-	@Override
-	protected void performDefaults() {
-		recreateDefaultsEnabled=true;
-		super.performDefaults();
-	}
-	
-	@Override
-	public boolean performOk() {
-		if (recreateDefaultsEnabled){
-			/* reload xml parts */
-			UserHomeBasedXMLProposalDataModelProvider.INSTANCE.restoreDefaults();
-		}
-		return super.performOk();
-	}
-	
 	
 }

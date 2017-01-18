@@ -6,4 +6,5 @@ dependencies {
 	
 	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.7'
 	
+	compile project(':egradle-plugin-main')
 }

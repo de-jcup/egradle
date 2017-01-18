@@ -24,10 +24,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.jface.text.contentassist.ContentAssistEvent;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
-import org.eclipse.jface.text.contentassist.ICompletionListener;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlinkPresenter;
@@ -47,8 +44,6 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
-import de.jcup.egradle.core.codecompletion.UserHomeBasedXMLProposalDataModelProvider;
-import de.jcup.egradle.core.codecompletion.XMLProposalDataModelProvider;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
@@ -66,7 +61,6 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private IAdaptable adaptable;
 	private ContentAssistant contentAssistant;
 	private GradleContentAssistProcessor gradleContentAssistProcessor;
-	private XMLProposalDataModelProvider xmlDataModelProvider;
 	
 	/**
 	 * Creates configuration by given adaptable
@@ -83,8 +77,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		/* code completion */
 		this.contentAssistant=new ContentAssistant();
-		xmlDataModelProvider=UserHomeBasedXMLProposalDataModelProvider.INSTANCE;
-		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter(), xmlDataModelProvider);
+		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
 				GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId());
