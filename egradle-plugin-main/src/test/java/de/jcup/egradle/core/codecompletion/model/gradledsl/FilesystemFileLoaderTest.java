@@ -49,7 +49,7 @@ public class FilesystemFileLoaderTest {
 		when(mockedImporter.importType(any(InputStream.class))).thenReturn(mockedType);
 		
 		/* execute */
-		Type type = loaderToTest.load("org.gradle.api.Action");
+		Type type = loaderToTest.load("org.gradle.api.TestAction");
 		
 		/* test */
 		assertEquals(mockedType, type);
