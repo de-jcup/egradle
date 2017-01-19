@@ -63,7 +63,7 @@ public class ModelImpl implements Model {
 	 * p1- 
 	 */
 	@Override
-	public Item getParentItemAt(int offset) {
+	public Item getParentItemOf(int offset) {
 		Item nextItem = getItemAt(offset);
 		if (nextItem==null){
 			/* should never happen but...*/

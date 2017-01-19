@@ -38,7 +38,7 @@ public interface Model {
 	 * @param offset
 	 * @return parent item, never <code>null</code>
 	 */
-	Item getParentItemAt(int offset);
+	Item getParentItemOf(int offset);
 
 	/**
 	 * Returns the root item

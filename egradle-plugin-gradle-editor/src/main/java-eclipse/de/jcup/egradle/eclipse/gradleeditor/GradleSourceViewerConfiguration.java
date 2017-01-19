@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
+import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -43,7 +44,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
-import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
+import de.jcup.egradle.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
@@ -135,6 +136,11 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 	    return annotationHoover;
+	}
+
+	@Override
+	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+		return super.getTextHover(sourceViewer, contentType);
 	}
 	
 	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover{

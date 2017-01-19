@@ -21,12 +21,17 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 
-import de.jcup.egradle.core.codecompletion.Proposal;
-import de.jcup.egradle.core.codecompletion.ProposalFactory;
-import de.jcup.egradle.core.codecompletion.ProposalFactoryContentProvider;
-import de.jcup.egradle.core.codecompletion.ProposalFilter;
-import de.jcup.egradle.core.codecompletion.RelevantCodeCutter;
-import de.jcup.egradle.core.codecompletion.VariableNameProposalFactory;
+import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
+import de.jcup.egradle.codecompletion.GradleDSLProposalFactory;
+import de.jcup.egradle.codecompletion.Proposal;
+import de.jcup.egradle.codecompletion.ProposalFactory;
+import de.jcup.egradle.codecompletion.ProposalFactoryContentProvider;
+import de.jcup.egradle.codecompletion.ProposalFilter;
+import de.jcup.egradle.codecompletion.RelevantCodeCutter;
+import de.jcup.egradle.codecompletion.VariableNameProposalFactory;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLCodeBuilder;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleTypeEstimater;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
@@ -74,6 +79,12 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private void addFactories() {
+		CodeCompletionRegistry codeCompletionRegistry = Activator.getDefault().getCodeCompletionRegistry();
+		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
+		
+		GradleTypeEstimater estimator = new GradleTypeEstimater(typeProvider);
+		/* FIXME ATR, 19.01.2017:  what about sharing the factories between processors? check amount of created processor instances! */
+		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(),estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
 

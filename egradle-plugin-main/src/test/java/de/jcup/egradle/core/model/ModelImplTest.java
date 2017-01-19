@@ -56,7 +56,7 @@ public class ModelImplTest {
 		parent.add(child2);
 		modelToTest.getRoot().add(parent);
 		
-		assertEquals(parent, modelToTest.getParentItemAt(15));
+		assertEquals(parent, modelToTest.getParentItemOf(15));
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class ModelImplTest {
 		parent.add(child2);
 		modelToTest.getRoot().add(parent);
 		
-		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemAt(22));
+		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemOf(22));
 	}
 	
 	@Test
@@ -105,7 +105,7 @@ public class ModelImplTest {
 		modelToTest.getRoot().add(parent1);
 		modelToTest.getRoot().add(parent2);
 		
-		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemAt(22));
+		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemOf(22));
 	}
 	
 	@Test
@@ -135,7 +135,7 @@ public class ModelImplTest {
 		modelToTest.getRoot().add(parent1);
 		modelToTest.getRoot().add(parent2);
 		
-		assertEquals(parent2, modelToTest.getParentItemAt(30));
+		assertEquals(parent2, modelToTest.getParentItemOf(30));
 	}
 	
 	@Test
@@ -166,7 +166,7 @@ public class ModelImplTest {
 		modelToTest.getRoot().add(parent1);
 		modelToTest.getRoot().add(parent2);
 		
-		assertEquals(parent2, modelToTest.getParentItemAt(29));
+		assertEquals(parent2, modelToTest.getParentItemOf(29));
 	}
 	
 	@Test

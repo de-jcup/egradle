@@ -18,7 +18,12 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.jcup.egradle.core.codecompletion.CodeCompletionRegistry;
+import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
+import de.jcup.egradle.codecompletion.dsl.AbstractDSLTypeProvider;
+import de.jcup.egradle.codecompletion.dsl.FilesystemFileLoader;
+import de.jcup.egradle.codecompletion.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 
@@ -53,6 +58,15 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		codeCompletionRegistry.setErrorHandler(EGradleErrorHandler.INSTANCE);
+	
+		/* init code completion parts */
+		XMLDSLTypeImporter importer = new XMLDSLTypeImporter();
+		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/
+		FilesystemFileLoader loader = new FilesystemFileLoader(importer);
+		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("dsl/gradle/3.0"));
+		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
+		/* install dsl type provider as service, so it must be definitely used shared...*/
+		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
 	}
 
 	public void stop(BundleContext context) throws Exception {
