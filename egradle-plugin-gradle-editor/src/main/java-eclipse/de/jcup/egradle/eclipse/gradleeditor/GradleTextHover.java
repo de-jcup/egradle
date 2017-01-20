@@ -1,21 +1,25 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
-import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.internal.text.html.HTMLTextPresenter;
+import org.eclipse.jface.text.DefaultInformationControl;
+import org.eclipse.jface.text.IInformationControl;
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.codecompletion.dsl.Type;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 
-public class GradleTextHover implements ITextHover {
+public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 	private GradleSourceViewerConfiguration gradleSourceViewerConfiguration;
 	private ISourceViewer sourceViewer;
@@ -34,7 +38,7 @@ public class GradleTextHover implements ITextHover {
 		if (type == null) {
 			return null;
 		}
-		return "Type:"+type.getName()+": "+type.getDescription();
+		return "<html><body><b>"+type.getName()+"</b><br><br>"+type.getDescription()+"</body></html>";
 	}
 
 	@Override
@@ -64,15 +68,15 @@ public class GradleTextHover implements ITextHover {
 		return type;
 	}
 
-	// public String getHoverInfo(ITextViewer tv, IRegion r) {
-	// try {
-	// IDocument doc = tv.getDocument();
-	// EscriptModel em = EscriptModel.getModel(doc, null);
-	// return em.getElementAt(r.getOffset()).
-	// getHoverHelp();
-	// }
-	// catch (Exception e) {
-	// return "";
-	// }
-	// }
+	@Override
+	public IInformationControlCreator getHoverControlCreator() {
+		return new IInformationControlCreator() {
+			
+			@Override
+			public IInformationControl createInformationControl(Shell parent) {
+				return new DefaultInformationControl(parent,true);
+			}
+		};
+	}
+
 }
