@@ -14,8 +14,14 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.codecompletion.dsl.LanguageElement;
+import de.jcup.egradle.codecompletion.dsl.Method;
+import de.jcup.egradle.codecompletion.dsl.Property;
 import de.jcup.egradle.codecompletion.dsl.Type;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 
@@ -34,11 +40,44 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 	@Override
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-		Type type = getTypeAt(hoverRegion.getOffset());
-		if (type == null) {
+		HoverData data = getLanguageElementAt(hoverRegion.getOffset());
+		if (data == null) {
 			return null;
 		}
-		return "<html><body><b>"+type.getName()+"</b><br><br>"+type.getDescription()+"</body></html>";
+		if (data.item == null) {
+			return null;
+		}
+		if (data.element == null) {
+			return null;
+		}
+		String description=null;
+		if (data.element instanceof Method){
+			Method method = (Method) data.element;
+			Type returnType = method.getReturnType();
+			if (returnType==null || data.item.getItemType()==ItemType.CLOSURE){
+				/* when VOID(null) or it is a closure type use description instead of type */
+				description=method.getDescription();
+			}else{
+				/* use method type as description...*/
+				description=returnType.getDescription();
+			}
+		}else if (data.element instanceof Property){
+			Property property = (Property) data.element;
+			Type returnType = property.getType();
+			if (returnType==null || data.item.getItemType()==ItemType.CLOSURE){
+				/* when VOID(null) or it is a closure type use use property description instead of type */
+				description=property.getDescription();
+			}else{
+				/* use method type as description...*/
+				description=returnType.getDescription();
+			}
+		}
+		return "<html><body><b>"+data.element.getName()+"</b><br><br>"+description+"</body></html>";
+	}
+	
+	private class HoverData{
+		private LanguageElement element;
+		private Item item;
 	}
 
 	@Override
@@ -46,7 +85,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		return new Region(offset, 0);
 	}
 
-	public Type getTypeAt(int offset) {
+	HoverData getLanguageElementAt(int offset) {
 		IContentAssistant assist = gradleSourceViewerConfiguration.getContentAssistant(sourceViewer);
 		if (assist == null) {
 			return null;
@@ -64,8 +103,13 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		if (item == null) {
 			return null;
 		}
-		Type type = gprocessor.getEstimator().estimateFromGradleProjectAsRoot(item);
-		return type;
+		HoverData data = new HoverData();
+		data.item=item;
+		GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
+		GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
+		LanguageElement element = estimator.estimate(item,fileType);
+		data.element=element;
+		return data;
 	}
 
 	@Override

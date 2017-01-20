@@ -55,6 +55,7 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.codecompletion.dsl.Type;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
@@ -96,6 +97,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
 	private boolean ignoreNextCaretMove;
+	private GradleFileType cachedGradleFileType;
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
@@ -155,6 +157,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
 		}
+		if (GradleFileType.class.equals(adapter)) {
+			return (T) getGradleFileType();
+		}
 		if (GradleStringTransformer.class.equals(adapter)) {
 			return (T) getGradleStringTransformer();
 		}
@@ -185,6 +190,46 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			return (T) this;
 		}
 		return super.getAdapter(adapter);
+	}
+
+	private GradleFileType getGradleFileType() {
+		if (cachedGradleFileType != null) {
+			return cachedGradleFileType;
+		}
+		IEditorInput editorInput = getEditorInput();
+		if (editorInput == null) {
+			return null;
+		}
+		String name = editorInput.getName();
+		if (name == null) {
+			return null;
+		}
+		if (!name.endsWith(".gradle")) {
+			cachedGradleFileType = GradleFileType.UNKNOWN;
+			return cachedGradleFileType;
+		}
+		/* It is a gradle file...*/
+		if (name.equals("settings.gradle")) {
+			cachedGradleFileType = GradleFileType.GRADLE_SETTINGS_SCRIPT;
+		} else if (name.equals("init.gradle")) {
+			/*
+			 * We do not check if USER_HOME/.gradle/init.d/ or for
+			 * GRADLE_HOME/init.d/... The files are inside workspace and so we
+			 * only support init.gradle - for 100% correct variant description see
+			 * https://docs.gradle.org/current/userguide/init_scripts.html
+			 */
+			cachedGradleFileType = GradleFileType.GRADLE_INIT_SCRIPT;
+		} else {
+			/* nothing special - must be init script */
+			cachedGradleFileType = GradleFileType.GRADLE_BUILD_SCRIPT;
+		}
+		return cachedGradleFileType;
+	}
+
+	@Override
+	protected void handleEditorInputChanged() {
+		cachedGradleFileType = null;
+		super.handleEditorInputChanged();
 	}
 
 	private GradleStringTransformer transformer;
@@ -507,7 +552,5 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			viewer.configure(configuration);
 		}
 	}
-
-	
 
 }

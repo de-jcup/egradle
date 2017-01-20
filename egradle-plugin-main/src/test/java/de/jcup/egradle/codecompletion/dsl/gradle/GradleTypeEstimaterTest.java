@@ -9,21 +9,22 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.codecompletion.dsl.LanguageElement;
 import de.jcup.egradle.codecompletion.dsl.Method;
 import de.jcup.egradle.codecompletion.dsl.Type;
 import de.jcup.egradle.codecompletion.dsl.TypeProvider;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleTypeEstimater;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.core.model.Item;
 public class GradleTypeEstimaterTest {
 
-	private GradleTypeEstimater estimatorToTest;
+	private GradleLanguageElementEstimater estimatorToTest;
 	private TypeProvider mockedTypeProvider;
 
 	@Before
 	public void before(){
 		
 		mockedTypeProvider = mock(TypeProvider.class);
-		estimatorToTest = new GradleTypeEstimater(mockedTypeProvider);
+		estimatorToTest = new GradleLanguageElementEstimater(mockedTypeProvider);
 	}
 	
 	@Test
@@ -51,10 +52,10 @@ public class GradleTypeEstimaterTest {
 		
 		
 		/* execute */
-		Type type = estimatorToTest.estimateFromGradleProjectAsRoot(item1);
+		LanguageElement element = estimatorToTest.estimate(item1,GradleFileType.GRADLE_BUILD_SCRIPT);
 		
 		/* test */
-		assertEquals(happyType,type);
+		assertEquals(happyMethod,element);
 	}
 
 }

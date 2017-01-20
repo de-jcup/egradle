@@ -1,5 +1,6 @@
 package de.jcup.egradle.codecompletion;
 
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.model.Model;
 
 /**
@@ -34,5 +35,7 @@ public interface ProposalFactoryContentProvider {
 	 * @return column of given offset
 	 */
 	public String getLineTextBeforeCursorPosition();
+
+	public GradleFileType getFileType();
 
 }

@@ -45,6 +45,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.codecompletion.RelevantCodeCutter;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
@@ -208,6 +209,10 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		}
 		RGB color = EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT);
 		gradleScanner.setDefaultReturnToken(createColorToken(color));
+	}
+
+	public GradleFileType getFileType() {
+		return adaptable.getAdapter(GradleFileType.class);
 	}
 
 }

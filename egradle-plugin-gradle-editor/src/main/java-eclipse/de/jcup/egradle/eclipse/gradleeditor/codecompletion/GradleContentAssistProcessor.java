@@ -21,6 +21,7 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 
+import de.jcup.egradle.codecompletion.AbstractModelProposalFactory.ModelProposal;
 import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
 import de.jcup.egradle.codecompletion.GradleDSLProposalFactory;
 import de.jcup.egradle.codecompletion.Proposal;
@@ -31,7 +32,8 @@ import de.jcup.egradle.codecompletion.RelevantCodeCutter;
 import de.jcup.egradle.codecompletion.VariableNameProposalFactory;
 import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLCodeBuilder;
 import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleTypeEstimater;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
+import de.jcup.egradle.codecompletion.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
@@ -61,7 +63,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private ICompletionListener completionListener;
 
-	private GradleTypeEstimater estimator;
+	private GradleLanguageElementEstimater estimator;
 
 	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter
 			) {
@@ -84,13 +86,13 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		CodeCompletionRegistry codeCompletionRegistry = Activator.getDefault().getCodeCompletionRegistry();
 		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
 		
-		estimator = new GradleTypeEstimater(typeProvider);
+		estimator = new GradleLanguageElementEstimater(typeProvider);
 		/* FIXME ATR, 19.01.2017:  what about sharing the factories between processors? check amount of created processor instances! */
 		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(),estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
 	
-	public GradleTypeEstimater getEstimator() {
+	public GradleLanguageElementEstimater getEstimator() {
 		return estimator;
 	}
 
@@ -149,6 +151,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				public String getLineTextBeforeCursorPosition() {
 					return lineTextBeforeCursorPosition;
 				}
+
+				@Override
+				public GradleFileType getFileType() {
+					return adaptable.getAdapter(GradleFileType.class);
+				}
 			};
 		} catch (BadLocationException e) {
 			return NO_COMPLETION_PROPOSALS;
@@ -202,6 +209,13 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				Item item = a.getItem();
 				if (item != null) {
 					image = labelProvider.getImage(item);
+				}
+			}else if (p instanceof ModelProposal){
+				ModelProposal mp = (ModelProposal) p;
+				if (mp.isMethod()){
+					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png",Activator.PLUGIN_ID);
+				}else if (mp.isProperty()){
+					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png",Activator.PLUGIN_ID);
 				}
 			}
 			if (image == null) {
