@@ -54,6 +54,7 @@ public class GradleTypeEstimater {
 		/*
 		 * check if current type is applyable for next - and identify next type
 		 */
+		Type estimatedType = null;
 		Type currentType = rootType;
 		while (pathIterator.hasNext()) {
 			Item checkItem = pathIterator.next();
@@ -62,31 +63,51 @@ public class GradleTypeEstimater {
 				continue;
 			}
 
-			/* FIXME ATR, 20.01.2017: add properties can also use closures because of return type */
-			for (Method m : currentType.getMethods()) {
-				if (currentType==null){
-					break;
-				}
-				String methodName = m.getName();
-				if (checkItemName.equals(methodName)) {
-					List<Parameter> parameters = m.getParameters();
-					for (Parameter p: parameters){
-						Type paramType = p.getType();
-						/* ignore string parameters */
-						if (!isString(paramType)){
-							currentType=paramType;
-							break;
-						}
-					}
-					if (currentType==null){
-						currentType = m.getReturnType();
-					}
-					break;
-				}
+			Type newCurrentType = findByMethods(currentType, checkItemName);
+			if (newCurrentType==null){
+				newCurrentType = findByProperties(currentType, checkItemName);
+			}
+			currentType=newCurrentType;
+		}
+		estimatedType=currentType;
+		return estimatedType;
+	}
+
+	/* FIXME ATR, 20.01.2017: write a test case for properties */
+	private Type findByProperties(Type currentType, String checkItemName) {
+		if (currentType==null){
+			return null;
+		}
+		for (Property p: currentType.getProperties()){
+			String propertyName = p.getName();
+			if (checkItemName.equals(propertyName)) {
+				return p.getType();
 			}
 		}
-		Type estimatedType = currentType;
-		return estimatedType;
+		return null;
+	}
+
+	private Type findByMethods(Type currentType, String checkItemName) {
+		if (currentType==null){
+			return null;
+		}
+		for (Method m : currentType.getMethods()) {
+			String methodName = m.getName();
+			/* FIXME ATR, 20.01.2017: get groovy magic resolving must be improved */
+			if (checkItemName.equals(methodName) || ("get"+checkItemName).equalsIgnoreCase(methodName)) {
+				List<Parameter> parameters = m.getParameters();
+				for (Parameter p: parameters){
+					Type paramType = p.getType();
+					/* ignore string parameters */
+					if (!isString(paramType)){
+						return paramType;
+					}
+				}
+				/* fall back to return type if no param */
+				return m.getReturnType();
+			}
+		}
+		return null;
 	}
 
 	private boolean isString(Type paramType) {

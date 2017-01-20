@@ -61,6 +61,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private ICompletionListener completionListener;
 
+	private GradleTypeEstimater estimator;
+
 	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter
 			) {
 		if (adaptable == null) {
@@ -82,10 +84,14 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		CodeCompletionRegistry codeCompletionRegistry = Activator.getDefault().getCodeCompletionRegistry();
 		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
 		
-		GradleTypeEstimater estimator = new GradleTypeEstimater(typeProvider);
+		estimator = new GradleTypeEstimater(typeProvider);
 		/* FIXME ATR, 19.01.2017:  what about sharing the factories between processors? check amount of created processor instances! */
 		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(),estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
+	}
+	
+	public GradleTypeEstimater getEstimator() {
+		return estimator;
 	}
 
 	@Override
@@ -178,7 +184,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		return list.toArray(new ICompletionProposal[list.size()]);
 	}
 
-	protected Model getModel() {
+	public Model getModel() {
 		return adaptable.getAdapter(Model.class);
 	}
 

@@ -140,7 +140,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		return super.getTextHover(sourceViewer, contentType);
+		return new GradleTextHover(this,sourceViewer, contentType);
 	}
 	
 	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover{

@@ -31,6 +31,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.ISourceViewerExtension2;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
@@ -52,6 +54,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.jcup.egradle.codecompletion.dsl.Type;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.model.Item;
@@ -59,6 +62,7 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
@@ -209,10 +213,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	public Item getItemAtCarretPosition() {
+		return getItemAt(lastCaretPosition);
+	}
+
+	public Item getItemAt(int offset) {
 		if (contentProvider == null) {
 			return null;
 		}
-		Item item = contentProvider.tryToFindByOffset(lastCaretPosition);
+		Item item = contentProvider.tryToFindByOffset(offset);
 		return item;
 	}
 
@@ -444,7 +452,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	/**
-	 * Rebuilds outline to current document model 
+	 * Rebuilds outline to current document model
 	 */
 	public void rebuildOutline() {
 		refreshOutlineInProgress = true;
@@ -499,5 +507,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			viewer.configure(configuration);
 		}
 	}
+
+	
 
 }
