@@ -23,6 +23,8 @@ public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	
 	GROOVY_KEYWORD ,
 	
+	ANNOTATION,
+	
 	COMMENT,
 	
 	STRING,

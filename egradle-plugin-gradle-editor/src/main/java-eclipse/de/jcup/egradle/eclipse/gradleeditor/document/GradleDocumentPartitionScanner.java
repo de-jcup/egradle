@@ -20,6 +20,7 @@ import static de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdenti
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWordDetector;
@@ -27,6 +28,7 @@ import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.jface.text.rules.WordPatternRule;
 
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.DocumentKeyWord;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
@@ -39,10 +41,12 @@ import de.jcup.egradle.eclipse.gradleeditor.document.keywords.JavaLiteralKeyWord
 public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 
 	private OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();
+	private AnnotationWordDetector onlyAnnotationWordDetector = new AnnotationWordDetector();
 	private JavaWordDetector javaWordDetector = new JavaWordDetector();
 	
 	public GradleDocumentPartitionScanner() {
-
+		
+		IToken groovyAnnotation = createToken(ANNOTATION);
 		IToken groovyComment = createToken(COMMENT);
 		IToken groovySimpleString = createToken(STRING);
 		IToken groovyGString = createToken(GSTRING);
@@ -68,10 +72,17 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 		buildWordRules(rules, javaKeyWord, JavaKeyWords.values(),javaWordDetector);
 		buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(),javaWordDetector);
 		buildWordRules(rules, gradleVariable, GradleSpecialVariableKeyWords.values(),onlyLettersWordDetector);
+
+		buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
 		
 		setPredicateRules(rules.toArray(new IPredicateRule[rules.size()]));
 	}
 
+	private void buildAnnotationRules(List<IPredicateRule> rules, IToken token,
+			IWordDetector wordDetector) {
+		rules.add(new WordPatternRule(wordDetector,"@","", token));
+		
+	}
 	private void buildWordRules(List<IPredicateRule> rules, IToken token,
 			DocumentKeyWord[] values, IWordDetector wordDetector) {
 		for (DocumentKeyWord keyWord: values){

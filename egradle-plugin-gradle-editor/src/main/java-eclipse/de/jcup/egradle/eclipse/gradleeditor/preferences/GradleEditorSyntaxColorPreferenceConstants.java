@@ -31,6 +31,7 @@ public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIden
 	COLOR_NORMAL_STRING("colorNormalStrings", "Normal strings"),
 	COLOR_GSTRING("colorGStrings", "GStrings"),
 	COLOR_COMMENT("colorComments", "Comment"),
+	COLOR_ANNOTATION("colorAnnotations", "Annotations"),
 	COLOR_GRADLE_APPLY_KEYWORD("colorApplyKeywords","Gradle apply keywords"),
 	COLOR_GRADLE_TASK_KEYWORD("colorGradleTaskKeywords","Gradle task keywords"),
 	COLOR_GRADLE_OTHER_KEYWORD("colorGradleOtherKeywords","Gradle other  keywords"),
