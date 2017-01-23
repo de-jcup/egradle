@@ -163,6 +163,245 @@ public class GradleModelBuilderTest {
 		assertEquals("MyAdminTask", classDef.getName());
 
 	}
+	
+	
+	@Test
+	public void class_constructor_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n"
+				+ "MyAdminTask(){\n"
+				+ "}\n"
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.CLASS, classDef.getItemType());
+		assertEquals("MyAdminTask", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(1,children.length);
+		
+		Item child = children[0];
+		assertNotNull(child);
+		assertEquals(ItemType.CONSTRUCTOR, child.getItemType());
+		
+		assertEquals("MyAdminTask", child.getName());
+	}
+	
+	@Test
+	public void class_public_method1_with_annotations_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n"
+				+ "@Deprecated\n"
+				+ "public void method1(){\n"
+				+ "}\n"
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.CLASS, classDef.getItemType());
+		assertEquals("MyAdminTask", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(1,children.length);
+		
+		Item child = children[0];
+		assertNotNull(child);
+		assertEquals(ItemType.METHOD, child.getItemType());
+		
+		assertEquals("method1", child.getName());
+	}
+	
+	@Test
+	public void interface_public_method1_definitions_are_contained_as_chilren_of_interface_item() throws ModelBuilderException {
+		String text = "interface People {\n"
+				+ "public String talk() "
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.INTERFACE, classDef.getItemType());
+		assertEquals("People", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(1,children.length);
+		
+		Item child = children[0];
+		assertNotNull(child);
+		assertEquals(ItemType.METHOD, child.getItemType());
+		
+		assertEquals("talk", child.getName());
+	}
+	
+	@Test
+	public void enum_defintion_contains_also_entries() throws ModelBuilderException {
+		String text = "enum Directions {\n"
+				+ "NORTH, SOUTH, WEST, EAST "
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.ENUM, classDef.getItemType());
+		assertEquals("Directions", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(4,children.length);
+		
+		Item child = children[0];
+		assertNotNull(child);
+		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
+		
+		assertEquals("NORTH", child.getName());
+		
+		child = children[1];
+		assertNotNull(child);
+		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
+		
+		assertEquals("SOUTH", child.getName());
+		
+		child = children[2];
+		assertNotNull(child);
+		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
+		
+		assertEquals("WEST", child.getName());
+		
+		child = children[3];
+		assertNotNull(child);
+		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
+		
+		assertEquals("EAST", child.getName());
+	}
+	
+	@Test
+	public void class_public_method1_and_method2_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n"
+				+ "public void method1(){\n"
+				+ "}\n"
+				+ "public String method2(){\n"
+				+ " return 'test';\n"
+				+ "}\n"
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.CLASS, classDef.getItemType());
+		assertEquals("MyAdminTask", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(2,children.length);
+		
+		Item child1 = children[0];
+		assertNotNull(child1);
+		
+		assertEquals("method1", child1.getName());
+		assertEquals(ItemType.METHOD, child1.getItemType());
+		
+		Item child2 = children[1];
+		assertNotNull(child2);
+		
+		assertEquals("method2", child2.getName());
+		assertEquals(ItemType.METHOD, child2.getItemType());
+	}
+	
+	@Test
+	public void class_public_variable1_method1__definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n"
+				+ "private String data='test';\n"
+				+ "\n"
+				+ "public String method2(){\n"
+				+ " return data;\n"
+				+ "}\n"
+				+ "}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals(ItemType.CLASS, classDef.getItemType());
+		assertEquals("MyAdminTask", classDef.getName());
+		
+		assertTrue(classDef.hasChildren());
+		Item[] children = classDef.getChildren();
+		assertNotNull(children);
+		assertEquals(2,children.length);
+		
+		Item child1 = children[0];
+		assertNotNull(child1);
+		
+		assertEquals("data", child1.getName());
+		assertEquals(ItemType.VARIABLE, child1.getItemType());
+		Item child2 = children[1];
+		assertNotNull(child2);
+		
+		assertEquals("method2", child2.getName());
+		assertEquals(ItemType.METHOD, child2.getItemType());
+	}
 
 	@Test
 	public void package_definition_returns_package_item() throws ModelBuilderException {

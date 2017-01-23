@@ -20,6 +20,8 @@ public enum JavaKeyWords implements DocumentKeyWord {
 
 	ABSTRACT("abstract"),
 	
+	INTERFACE("interface"), /* must be at this position to not be overwhelmed with "int" */
+	
 	CONTINUE("continue"),
 	
 	FOR("for"),
@@ -92,7 +94,6 @@ public enum JavaKeyWords implements DocumentKeyWord {
 	
 	FINAL("final"),
 	
-	INTERFACE("interface"),
 	
 	STATIC("static"),
 	

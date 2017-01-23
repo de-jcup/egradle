@@ -19,6 +19,8 @@ public enum ItemType {
 	UNKNOWN,
 
 	VARIABLE, 
+	
+	ENUM_CONSTANT,
 
 	/* nearly same as a variable but has no modifiers*/
 	ASSIGNMENT, 
@@ -66,6 +68,10 @@ public enum ItemType {
 	
 	ECLIPSE, 
 
+	ENUM,
+	
+	INTERFACE,
+	
 	CLASS, 
 
 	JAR, 
@@ -82,6 +88,10 @@ public enum ItemType {
 	 * A method (defintion)
 	 */
 	METHOD, 
+	
+	CONSTRUCTOR, 
+	
+	 
 	
 	
 	
