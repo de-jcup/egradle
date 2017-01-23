@@ -15,6 +15,7 @@
  */
  package de.jcup.egradle.eclipse.ui;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.resource.JFaceResources;
@@ -30,14 +31,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import de.jcup.egradle.eclipse.Activator;
+
 public class QuickLaunchDialog extends AbstractQuickDialog {
 
 	private static final String TITLE = "EGradle quick launch";
 	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
 
 	public QuickLaunchDialog(Shell parent) {
-		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_NO_SIZE, PERSIST_NO_BOUNDS,
-				SHOW_NO_DIALOG_MENU, SHOW_NO_PERSIST_ACTIONS, TITLE, INFOTEXT);
+		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
+				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
 	}
 
 	String inputText;
@@ -72,6 +75,15 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 			}
 		});
 		return composite;
+	}
+	
+	@Override
+	protected IDialogSettings getDialogSettings() {
+		Activator activator = Activator.getDefault();
+		if (activator == null) {
+			return null;
+		}
+		return activator.getDialogSettings();
 	}
 	
 	public String getValue() {
