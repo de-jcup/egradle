@@ -48,11 +48,17 @@
    <!--                          COMMANDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension point="org.eclipse.ui.commands">
-		<command
+	  <command
             name="Quick outline"
             description="Show quick outline dialog"
             categoryId="egradle.commands.category"
             id="egradle.editor.commands.quickoutline">
+      </command>
+      <command
+            name="Toggle comment"
+            description="Toggle comment in selected line(s)"
+            categoryId="egradle.commands.category"
+            id="egradle.editor.commands.source.toggleComment">
       </command>
       <command
             name="Goto matching bracket"
@@ -65,6 +71,10 @@
       <handler
             commandId="egradle.editor.commands.quickoutline"
             class="de.jcup.egradle.eclipse.gradleeditor.handlers.OpenQuickOutlineHandler">
+      </handler>
+      <handler
+            commandId="egradle.editor.commands.source.toggleComment"
+            class="de.jcup.egradle.eclipse.gradleeditor.handlers.ToggleCommentHandler">
       </handler>
        <handler
             commandId="egradle.editor.commands.gotomatchingbracket"
@@ -83,12 +93,19 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">	  
 		</key>
 		<key
+            sequence="M1+7"
+            contextId="org.egradle.editors.GradleEditor.context"
+            commandId="egradle.editor.commands.source.toggleComment"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">	  
+		</key>
+		<key
             sequence="M1+M2+P"
             contextId="org.egradle.editors.GradleEditor.context"
             commandId="egradle.editor.commands.gotomatchingbracket"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">	  
 		</key>
     </extension> 
+    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          MENU                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -101,6 +118,26 @@
                <!-- mnemonic="%contributions.view.quickoutline.mnemonic" -->
          </command>
       </menuContribution>
+      
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=edit">
+            
+         <menu
+               id="egradle.editor.menu.sourceMenu"
+               label="Source"
+               mnemonic="S"
+               >
+               <visibleWhen checkEnabled="true">
+                     <with variable="activeEditor">
+                     	<instanceof
+                            value="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"/>
+                     </with>
+               </visibleWhen>
+            <command commandId="egradle.editor.commands.source.toggleComment">
+            </command>
+         </menu>
+      </menuContribution>
+      
       </extension> 
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->

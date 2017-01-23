@@ -28,9 +28,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.ISourceViewerExtension2;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
@@ -94,7 +97,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
-		
+
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
@@ -249,7 +252,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
 				int length = item.getLength();
-				ignoreNextCaretMove=true;
+				ignoreNextCaretMove = true;
 				selectAndReveal(offset, length);
 			}
 		}
@@ -282,8 +285,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		setDocumentProvider(createDocumentProvider(input));
 		super.doSetInput(input);
 		IDocument document = getDocument();
-		if (document==null){
-			EGradleUtil.logWarning("No document available for given input:"+input);
+		if (document == null) {
+			EGradleUtil.logWarning("No document available for given input:" + input);
 			return;
 		}
 		document.addDocumentListener(documentListener);
@@ -291,13 +294,13 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	private IDocumentProvider createDocumentProvider(IEditorInput input) {
-		 if(input instanceof FileStoreEditorInput){
-	        return new GradleTextFileDocumentProvider();
-	    } else {
-	        return new GradleFileDocumentProvider();
-	    }
+		if (input instanceof FileStoreEditorInput) {
+			return new GradleTextFileDocumentProvider();
+		} else {
+			return new GradleFileDocumentProvider();
+		}
 	}
-	
+
 	public IDocument getDocument() {
 		return getDocumentProvider().getDocument(getEditorInput());
 	}
@@ -370,7 +373,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 
 	}
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override
@@ -382,8 +385,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS) {
 				setStatusLineMessage("caret moved:" + event.caretOffset);
 			}
-			if (ignoreNextCaretMove){
-				ignoreNextCaretMove=false;
+			if (ignoreNextCaretMove) {
+				ignoreNextCaretMove = false;
 				return;
 			}
 			if (outlinePage == null) {
@@ -398,14 +401,81 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		// done like in TextEditor for spelling
 		ISourceViewer viewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
-		if (viewer instanceof ISourceViewerExtension2){
+		if (viewer instanceof ISourceViewerExtension2) {
 			ISourceViewerExtension2 viewerExtension2 = (ISourceViewerExtension2) viewer;
 			viewerExtension2.unconfigure();
-			if (configuration instanceof GradleSourceViewerConfiguration){
+			if (configuration instanceof GradleSourceViewerConfiguration) {
 				GradleSourceViewerConfiguration gconf = (GradleSourceViewerConfiguration) configuration;
 				gconf.updateTextScannerDefaultColorToken();
 			}
 			viewer.configure(configuration);
+		}
+	}
+
+	/**
+	 * Toggles comment of current selected lines
+	 */
+	public void toggleComment() {
+		ISelection selection = getSelectionProvider().getSelection();
+		if (! (selection instanceof TextSelection)){
+			return;
+		}
+		IDocumentProvider dp = getDocumentProvider();
+		IDocument doc = dp.getDocument(getEditorInput());
+		TextSelection ts = (TextSelection) selection;
+		int startLine = ts.getStartLine();
+		int endLine = ts.getEndLine();
+		
+		/* do comment /uncomment */
+		for (int i=startLine;i<=endLine;i++){
+			IRegion info;
+			try {
+				info = doc.getLineInformation(i);
+				int offset = info.getOffset();
+				String line = doc.get(info.getOffset(),info.getLength());
+				StringBuilder foundCode = new StringBuilder();
+				StringBuilder whitespaces = new StringBuilder();
+				for (int j=0;j<line.length();j++){
+					char ch = line.charAt(j);
+					if (Character.isWhitespace(ch)){
+						if (foundCode.length()==0){
+							whitespaces.append(ch);
+						}
+					}else{
+						foundCode.append(ch);
+					}
+					if (foundCode.length()>1){
+						break; 
+					}
+				}
+				int whitespaceOffsetAdd=whitespaces.length();
+				if ("//".equals(foundCode.toString())){
+					/* comment before */
+					doc.replace(offset+whitespaceOffsetAdd, 2, "");
+				}else{
+					/* not commented */
+					doc.replace(offset, 0, "//");
+				}
+				
+			} catch (BadLocationException e) {
+				/* ignore and continue */
+				continue;
+			}
+			
+		}
+		/* reselect */
+		int selectionStartOffset;
+		try {
+			selectionStartOffset = doc.getLineOffset(startLine);
+			int endlineOffset= doc.getLineOffset(endLine);
+			int endlineLength= doc.getLineLength(endLine);
+			int endlineLastPartOffset = endlineOffset+endlineLength;
+			int length = endlineLastPartOffset-selectionStartOffset;
+			
+			ISelection newSelection = new TextSelection(selectionStartOffset, length);
+			getSelectionProvider().setSelection(newSelection);
+		} catch (BadLocationException e) {
+			/* ignore */
 		}
 	}
 
