@@ -463,6 +463,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		}
 		item = support.createItem(context, current);
 		item.setItemType(ItemType.CONSTRUCTOR);
+		item.setName(parentItemName);
 		if (parameters.getType() == GroovyTokenTypes.PARAMETERS) {
 			support.appendParameters(item, parameters);
 		}
@@ -473,7 +474,6 @@ public class GradleModelBuilder implements ModelBuilder {
 			}
 		}
 
-		item.setName(parentItemName);
 		return item;
 	}
 

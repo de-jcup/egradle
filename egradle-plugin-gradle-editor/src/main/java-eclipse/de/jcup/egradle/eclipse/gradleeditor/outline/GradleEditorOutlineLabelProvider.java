@@ -151,6 +151,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 					return null;
 				}
 				return getOutlineImage(path);
+			case CONSTRUCTOR:
 			case METHOD:
 				switch (modifier) {
 				case PRIVATE:
@@ -297,7 +298,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		/* show add parameters if existing */
 		boolean paramsMustBeShown=false;
 		
-		paramsMustBeShown=paramsMustBeShown || ItemType.METHOD.equals(item.getItemType());
+		ItemType itemType = item.getItemType();
+		paramsMustBeShown=paramsMustBeShown || ItemType.METHOD.equals(itemType);
+		paramsMustBeShown=paramsMustBeShown || ItemType.CONSTRUCTOR.equals(itemType);
 		
 		if (!paramsMustBeShown){
 			return;
