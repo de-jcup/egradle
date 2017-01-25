@@ -15,7 +15,6 @@
  */
  package de.jcup.egradle.core.model;
 
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 

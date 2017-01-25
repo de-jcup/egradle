@@ -1,5 +1,8 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
@@ -8,9 +11,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 class GradleBracketInsertionCompleter extends KeyAdapter {
 
@@ -33,6 +33,9 @@ class GradleBracketInsertionCompleter extends KeyAdapter {
 		 * could be different
 		 */
 		ISelectionProvider selectionProvider = this.gradleEditor.getSelectionProvider();
+		if (selectionProvider==null){
+			return;
+		}
 		ISelection selection = selectionProvider.getSelection();
 		if (! (selection instanceof ITextSelection)) {
 			return;
@@ -47,6 +50,9 @@ class GradleBracketInsertionCompleter extends KeyAdapter {
 		
 		try {
 			IDocument document = this.gradleEditor.getDocument();
+			if (document==null){
+				return;
+			}
 			document.replace(offset-1, 1, "{ }");
 			selectionProvider.setSelection(new TextSelection(offset+1, 0));
 		} catch (BadLocationException e1) {

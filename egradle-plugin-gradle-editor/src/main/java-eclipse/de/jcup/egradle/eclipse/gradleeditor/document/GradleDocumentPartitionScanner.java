@@ -20,7 +20,6 @@ import static de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdenti
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWordDetector;
