@@ -38,6 +38,7 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		store.setDefault(P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), true); // per default matching is enabled, but without the two other special parts
 		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), false);
 		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), false);
+		store.setDefault(P_EDITOR_AUTO_CREATE_END_BRACKETSY.getId(), true);
 		/* bracket color */
 		EDITOR_PREFERENCES.setDefaultColor(P_EDITOR_MATCHING_BRACKETS_COLOR, GradleEditorColorConstants.GRAY_JAVA);
 		
@@ -58,7 +59,6 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_TASK_KEYWORD, GradleEditorColorConstants.TASK_DEFAULT_RED);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GRADLE_VARIABLE, GradleEditorColorConstants.DARK_GRAY);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_JAVA_LITERAL, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
-		
 	}
 	
 	

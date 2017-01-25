@@ -66,6 +66,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 	private boolean enclosingBrackets;
 	private boolean highlightBracketAtCaretLocation;
 	private boolean matchingBrackets;
+	private BooleanFieldEditor autoCreateEndBrackets;
 
 	public GradleEditorPreferencePage() {
 		super(GRID);
@@ -194,6 +195,9 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getLabelControl(radioComposite));
 		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getColorSelector().getButton());
 
+		
+		autoCreateEndBrackets = new BooleanFieldEditor(P_EDITOR_AUTO_CREATE_END_BRACKETSY.getId(), "Auto create ending brackets", getFieldEditorParent());
+		addField(autoCreateEndBrackets);
 	}
 
 	@Override

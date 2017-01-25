@@ -43,6 +43,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -133,6 +134,10 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
 				.getPreferenceStore();
 		getSourceViewerDecorationSupport(getSourceViewer()).install(preferenceStoreForDecorationSupport);
+	
+		
+		StyledText styledText = getSourceViewer().getTextWidget();
+		styledText.addKeyListener(new GradleBracketInsertionCompleter(this));
 	}
 
 	@Override
@@ -417,7 +422,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	 */
 	public void toggleComment() {
 		ISelection selection = getSelectionProvider().getSelection();
-		if (! (selection instanceof TextSelection)){
+		if (!(selection instanceof TextSelection)) {
 			return;
 		}
 		IDocumentProvider dp = getDocumentProvider();
@@ -425,53 +430,53 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		TextSelection ts = (TextSelection) selection;
 		int startLine = ts.getStartLine();
 		int endLine = ts.getEndLine();
-		
+
 		/* do comment /uncomment */
-		for (int i=startLine;i<=endLine;i++){
+		for (int i = startLine; i <= endLine; i++) {
 			IRegion info;
 			try {
 				info = doc.getLineInformation(i);
 				int offset = info.getOffset();
-				String line = doc.get(info.getOffset(),info.getLength());
+				String line = doc.get(info.getOffset(), info.getLength());
 				StringBuilder foundCode = new StringBuilder();
 				StringBuilder whitespaces = new StringBuilder();
-				for (int j=0;j<line.length();j++){
+				for (int j = 0; j < line.length(); j++) {
 					char ch = line.charAt(j);
-					if (Character.isWhitespace(ch)){
-						if (foundCode.length()==0){
+					if (Character.isWhitespace(ch)) {
+						if (foundCode.length() == 0) {
 							whitespaces.append(ch);
 						}
-					}else{
+					} else {
 						foundCode.append(ch);
 					}
-					if (foundCode.length()>1){
-						break; 
+					if (foundCode.length() > 1) {
+						break;
 					}
 				}
-				int whitespaceOffsetAdd=whitespaces.length();
-				if ("//".equals(foundCode.toString())){
+				int whitespaceOffsetAdd = whitespaces.length();
+				if ("//".equals(foundCode.toString())) {
 					/* comment before */
-					doc.replace(offset+whitespaceOffsetAdd, 2, "");
-				}else{
+					doc.replace(offset + whitespaceOffsetAdd, 2, "");
+				} else {
 					/* not commented */
 					doc.replace(offset, 0, "//");
 				}
-				
+
 			} catch (BadLocationException e) {
 				/* ignore and continue */
 				continue;
 			}
-			
+
 		}
 		/* reselect */
 		int selectionStartOffset;
 		try {
 			selectionStartOffset = doc.getLineOffset(startLine);
-			int endlineOffset= doc.getLineOffset(endLine);
-			int endlineLength= doc.getLineLength(endLine);
-			int endlineLastPartOffset = endlineOffset+endlineLength;
-			int length = endlineLastPartOffset-selectionStartOffset;
-			
+			int endlineOffset = doc.getLineOffset(endLine);
+			int endlineLength = doc.getLineLength(endLine);
+			int endlineLastPartOffset = endlineOffset + endlineLength;
+			int length = endlineLastPartOffset - selectionStartOffset;
+
 			ISelection newSelection = new TextSelection(selectionStartOffset, length);
 			getSelectionProvider().setSelection(newSelection);
 		} catch (BadLocationException e) {
