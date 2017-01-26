@@ -74,7 +74,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		if (sourceViewer == null)
 			return null;
 
-		return new IHyperlinkDetector[] { new URLHyperlinkDetector(), new GradleFileHyperlinkDetector(adaptable) };
+		return new IHyperlinkDetector[] { new URLHyperlinkDetector(), new GradleHyperlinkDetector(adaptable) };
 	}
 
 	@Override

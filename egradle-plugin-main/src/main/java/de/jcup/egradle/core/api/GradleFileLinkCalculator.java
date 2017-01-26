@@ -22,7 +22,7 @@ public class GradleFileLinkCalculator {
 	private GradleStringTransformer transformer;
 
 
-	public GradleFileLinkResult createFileLinkString(String line, int offsetInLine) {
+	public GradleHyperLinkResult createFileLinkString(String line, int offsetInLine) {
 		if (line == null) {
 			return null;
 		}
@@ -101,24 +101,11 @@ public class GradleFileLinkCalculator {
 			 
 		 }
 
-		GradleFileLinkResult result = new GradleFileLinkResult();
+		GradleHyperLinkResult result = new GradleHyperLinkResult();
 		result.linkOffsetInLine = urlOffsetInLine;
 		result.linkContent = linkContent;
 		result.linkLength = urlLength;
 		return result;
-	}
-
-	public class GradleFileLinkResult {
-		@Override
-		public String toString() {
-			return "GradleFileLinkResult [linkContent=" + linkContent + ", linkOffsetInLine=" + linkOffsetInLine
-					+ ", linkLength=" + linkLength + "]";
-		}
-
-		public String linkContent;
-		public int linkOffsetInLine;
-		public int linkLength;
-
 	}
 
 	/**

@@ -32,15 +32,22 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
 import de.jcup.egradle.core.api.GradleFileLinkCalculator;
-import de.jcup.egradle.core.api.GradleFileLinkCalculator.GradleFileLinkResult;
+import de.jcup.egradle.core.api.GradleHyperLinkResult;
+import de.jcup.egradle.core.api.GradleResourceLinkCalculator;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 
 /* TODO ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
-public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
+
+/**
+ * Hyperlink detector for all kind of hyperlinks in egradle editor.
+ * @author Albert Tregnaghi
+ *
+ */
+public class GradleHyperlinkDetector extends AbstractHyperlinkDetector {
 	private GradleStringTransformer transformer;
 	private File editorFile;
-	public GradleFileHyperlinkDetector(IAdaptable adaptable) {
+	public GradleHyperlinkDetector(IAdaptable adaptable) {
 		Assert.isNotNull(adaptable, "Adaptable may not be null!");
 		IFile ifile = adaptable.getAdapter(IFile.class);
 		try {
@@ -89,10 +96,30 @@ public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
 
 		GradleFileLinkCalculator linkCalculator= new GradleFileLinkCalculator();
 		linkCalculator.setTransformer(transformer);
-		GradleFileLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
-		if (result==null){
+		GradleHyperLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
+		if (result!=null){
+			return handleFileLink(lineInfo, result);
+		}
+		GradleResourceLinkCalculator resCalculator = new GradleResourceLinkCalculator();
+		result = resCalculator.createResourceLinkString(line, offsetInLine);
+		if (result!=null){
+			return handlerResourceLink(lineInfo, result);
+		}
+		return null;
+
+	}
+
+	private IHyperlink[] handlerResourceLink(IRegion lineInfo, GradleHyperLinkResult result) {
+		try {
+			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
+			GradleResourceHyperlink	gradleResourceLink = new GradleResourceHyperlink(urlRegion, result.linkContent);
+			return new IHyperlink[] { gradleResourceLink };
+		} catch (RuntimeException e) {
 			return null;
 		}
+	}
+	
+	private IHyperlink[] handleFileLink(IRegion lineInfo, GradleHyperLinkResult result) {
 		try {
 			File folder = editorFile.getParentFile();
 			String fileName = result.linkContent;
@@ -104,19 +131,17 @@ public class GradleFileHyperlinkDetector extends AbstractHyperlinkDetector {
 			if (!target.exists()) {
 				return null;
 			}
-			
-			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
 
 			IFileStore fileStore = EFS.getLocalFileSystem().getStore(target.toURI());
 			if (fileStore==null){
 				return null;
 			}
+			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
 			GradleFileHyperlink	gradleFileHyperlink = new GradleFileHyperlink(urlRegion, fileStore);
 			return new IHyperlink[] { gradleFileHyperlink };
 		} catch (RuntimeException e) {
 			return null;
 		}
-
 	}
 
 }

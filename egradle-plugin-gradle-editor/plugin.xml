@@ -26,7 +26,7 @@
    
    <extension point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector            
-            class="de.jcup.egradle.eclipse.gradleeditor.GradleFileHyperlinkDetector"
+            class="de.jcup.egradle.eclipse.gradleeditor.GradleHyperlinkDetector"
             id="de.jcup.egradle.eclipse.editors.EGradleEditorApplyFromlHyperlinkDetector"
             name="Gradle editor Apply from hyperlink detector"
             targetId="de.jcup.egradle.eclipse.gradleeditor.applyfromhyperlinktarget">

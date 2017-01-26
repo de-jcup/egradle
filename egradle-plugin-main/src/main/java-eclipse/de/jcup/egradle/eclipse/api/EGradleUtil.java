@@ -198,15 +198,28 @@ public class EGradleUtil {
 	}
 
 	public static Shell getActiveWorkbenchShell() {
+		IWorkbench workbench = getWorkbench();
+		if (workbench==null){
+			return null;
+		}
+		IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
+		if (window==null){
+			return null;
+		}
+		Shell shell = window.getShell();
+		return shell;
+	}
+
+	/**
+	 * Returns workbench or <code>null</code>
+	 * @return workbench or <code>null</code>
+	 */
+	public static IWorkbench getWorkbench() {
 		if (! PlatformUI.isWorkbenchRunning()){
 			return null;
 		}
-		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		Shell shell = null;
-		if (window != null) {
-			shell = window.getShell();
-		}
-		return shell;
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		return workbench;
 	}
 
 	public static IProject[] getAllProjects() {
