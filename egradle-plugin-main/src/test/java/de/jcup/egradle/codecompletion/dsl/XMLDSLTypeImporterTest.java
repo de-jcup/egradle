@@ -1,31 +1,17 @@
-package de.jcup.egradle.codecompletion.dsl.gradle;
+package de.jcup.egradle.codecompletion.dsl;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
 
-import de.jcup.egradle.codecompletion.dsl.Method;
-import de.jcup.egradle.codecompletion.dsl.Parameter;
-import de.jcup.egradle.codecompletion.dsl.Property;
-import de.jcup.egradle.codecompletion.dsl.Type;
-import de.jcup.egradle.codecompletion.dsl.XMLDSLTypeImporter;
-import de.jcup.egradle.codecompletion.dsl.XMLParameter;
-import de.jcup.egradle.codecompletion.dsl.XMLProperty;
-import de.jcup.egradle.codecompletion.dsl.XMLType;
 import de.jcup.egradle.core.TestUtil;
-
-import static org.mockito.Mockito.*;
 public class XMLDSLTypeImporterTest {
 
 	@Rule
