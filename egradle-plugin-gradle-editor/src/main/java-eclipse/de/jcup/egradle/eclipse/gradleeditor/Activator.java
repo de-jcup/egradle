@@ -21,6 +21,7 @@ import org.osgi.framework.BundleContext;
 import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
 import de.jcup.egradle.codecompletion.dsl.AbstractDSLTypeProvider;
 import de.jcup.egradle.codecompletion.dsl.FilesystemFileLoader;
+import de.jcup.egradle.codecompletion.dsl.XMLDSLPluginsImporter;
 import de.jcup.egradle.codecompletion.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.FileHelper;
@@ -60,9 +61,10 @@ public class Activator extends AbstractUIPlugin {
 		codeCompletionRegistry.setErrorHandler(EGradleErrorHandler.INSTANCE);
 	
 		/* init code completion parts */
-		XMLDSLTypeImporter importer = new XMLDSLTypeImporter();
+		XMLDSLTypeImporter typeImporter = new XMLDSLTypeImporter();
+		XMLDSLPluginsImporter pluginsImporter = new XMLDSLPluginsImporter();
 		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/
-		FilesystemFileLoader loader = new FilesystemFileLoader(importer);
+		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter);
 		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("dsl/gradle/3.0"));
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
 		/* install dsl type provider as service, so it must be definitely used shared...*/

@@ -9,8 +9,6 @@ import javax.xml.bind.Unmarshaller;
 
 public class XMLDSLTypeImporter {
 
-	/* FIXME ATR, 18.01.2017: implement full*/
-	
 	/**
 	 * Import type by given steram
 	 * @param stream - may not be <code>null</code>

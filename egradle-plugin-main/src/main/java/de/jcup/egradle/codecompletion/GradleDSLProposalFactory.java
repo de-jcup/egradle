@@ -1,14 +1,10 @@
 package de.jcup.egradle.codecompletion;
 
-import java.util.List;
 import java.util.Set;
-
-import org.junit.FixMethodOrder;
 
 import de.jcup.egradle.codecompletion.dsl.CodeBuilder;
 import de.jcup.egradle.codecompletion.dsl.LanguageElement;
 import de.jcup.egradle.codecompletion.dsl.Method;
-import de.jcup.egradle.codecompletion.dsl.Parameter;
 import de.jcup.egradle.codecompletion.dsl.Property;
 import de.jcup.egradle.codecompletion.dsl.Type;
 import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
