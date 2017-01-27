@@ -816,4 +816,12 @@ public class EGradleUtil {
 		}
 	}
 
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		IWorkbench workbench = getWorkbench();
+		if (workbench==null){
+			return null;
+		}
+		return workbench.getActiveWorkbenchWindow();
+	}
+
 }
