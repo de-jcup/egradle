@@ -25,9 +25,9 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/commons-lang3-3.4.jar,
  lib/antlr-2.7.7.jar
-Export-Package: de.jcup.egradle.codecompletion,
- de.jcup.egradle.codecompletion.dsl,
- de.jcup.egradle.codecompletion.dsl.gradle,
+Export-Package: de.jcup.egradle.codeassist,
+ de.jcup.egradle.codeassist.dsl,
+ de.jcup.egradle.codeassist.dsl.gradle,
  de.jcup.egradle.core.api,
  de.jcup.egradle.core.domain,
  de.jcup.egradle.core.model,

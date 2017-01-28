@@ -44,10 +44,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
-import de.jcup.egradle.codecompletion.RelevantCodeCutter;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
+import de.jcup.egradle.codeassist.RelevantCodeCutter;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
+import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;

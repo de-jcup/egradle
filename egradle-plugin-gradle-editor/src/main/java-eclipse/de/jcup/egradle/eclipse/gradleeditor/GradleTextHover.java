@@ -14,16 +14,16 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.codecompletion.dsl.LanguageElement;
-import de.jcup.egradle.codecompletion.dsl.Method;
-import de.jcup.egradle.codecompletion.dsl.Property;
-import de.jcup.egradle.codecompletion.dsl.Type;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleFileType;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.LanguageElement;
+import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.Property;
+import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.eclipse.gradleeditor.codecompletion.GradleContentAssistProcessor;
+import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
 

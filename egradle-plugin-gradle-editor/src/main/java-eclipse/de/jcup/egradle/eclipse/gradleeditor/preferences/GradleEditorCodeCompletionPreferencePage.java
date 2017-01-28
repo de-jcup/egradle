@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
+import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
 public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {

@@ -18,12 +18,12 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.jcup.egradle.codecompletion.CodeCompletionRegistry;
-import de.jcup.egradle.codecompletion.dsl.AbstractDSLTypeProvider;
-import de.jcup.egradle.codecompletion.dsl.FilesystemFileLoader;
-import de.jcup.egradle.codecompletion.dsl.XMLDSLPluginsImporter;
-import de.jcup.egradle.codecompletion.dsl.XMLDSLTypeImporter;
-import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.codeassist.CodeCompletionRegistry;
+import de.jcup.egradle.codeassist.dsl.AbstractDSLTypeProvider;
+import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
+import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.eclipse.api.ColorManager;
