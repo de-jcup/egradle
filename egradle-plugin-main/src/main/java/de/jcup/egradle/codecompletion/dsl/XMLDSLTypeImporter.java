@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 public class XMLDSLTypeImporter {
 
 	/**
-	 * Import type by given steram
+	 * Import type by given stream
 	 * @param stream - may not be <code>null</code>
 	 * @return type
 	 * @throws IOException

@@ -92,6 +92,9 @@ public class XMLType implements Type {
 		}
 		for (Method method : mixinType.getMethods()) {
 			methods.add(method);
+			if(reason!=null){
+				methodReasons.put(method, reason);
+			}
 		}
 		/*
 		 * TODO ATR, 28.01.2017: use a map and handle mixin type + a reason
@@ -114,6 +117,9 @@ public class XMLType implements Type {
 			extensionId="null";
 		}
 		extensionMap.put(extensionId, extensionType);
+		if (reason!=null){
+			extensionReasonMap.put(extensionId, reason);
+		}
 	}
 	
 	public Map<String, Type> getExtensions() {
