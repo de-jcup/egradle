@@ -66,6 +66,59 @@ public class PluginMergerTest {
 	}
 
 	@Test
+	public void targetType_addExtension_called_when_plugin_is_for_targettype_and_hasExtension_with_id_type1() {
+		/* prepare */
+		TypeExtension mockedTypeExtension1 = mock(TypeExtension.class);
+		when(mockedTypeExtension1.getTargetTypeAsString()).thenReturn(TARGET_TYPE);
+		when(mockedTypeExtension1.getExtensionTypeAsString()).thenReturn(TYPE1);
+		when(mockedTypeExtension1.getId()).thenReturn("extension1");
+		plugin1Extensions.add(mockedTypeExtension1);
+
+		/* execute */
+		merger.merge(mockedTargetType, mockedPlugins);
+
+		/* test */
+		verify(mockedTargetType).addExtension("extension1", mockedType1);
+
+	}
+
+	@Test
+	public void targetType_addExtension_is_not_called_when_plugin_is_for_targettype_and_hasExtension_with_id_unprovidedType() {
+		/* prepare */
+		TypeExtension mockedTypeExtension1 = mock(TypeExtension.class);
+		when(mockedTypeExtension1.getTargetTypeAsString()).thenReturn(TARGET_TYPE);
+		when(mockedTypeExtension1.getExtensionTypeAsString()).thenReturn("unprovidedType");
+		when(mockedTypeExtension1.getId()).thenReturn("extension1");
+		plugin1Extensions.add(mockedTypeExtension1);
+
+		/* execute */
+		merger.merge(mockedTargetType, mockedPlugins);
+
+		/* test */
+		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class));
+		verify(mockedErrorHandler).handleError(any(String.class));
+	}
+
+	
+	@Test
+	public void targetType_addExtension_is_not_called_when_plugin_is_for_other_targettype_and_hasExtension_with_id_type1() {
+		/* prepare */
+		TypeExtension mockedTypeExtension1 = mock(TypeExtension.class);
+		when(mockedTypeExtension1.getTargetTypeAsString()).thenReturn("otherTargetType");
+		when(mockedTypeExtension1.getExtensionTypeAsString()).thenReturn(TYPE1);
+		when(mockedTypeExtension1.getId()).thenReturn("extension1");
+		plugin1Extensions.add(mockedTypeExtension1);
+
+		/* execute */
+		merger.merge(mockedTargetType, mockedPlugins);
+
+		/* test */
+		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class));
+
+	}
+
+	
+	@Test
 	public void targetType_mixin_type1_called_when_plugin_is_for_targettype_and_mixesIn_type1() {
 		/* prepare */
 		TypeExtension mockedTypeExtension1 = mock(TypeExtension.class);

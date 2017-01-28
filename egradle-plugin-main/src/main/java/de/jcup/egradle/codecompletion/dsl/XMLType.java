@@ -72,4 +72,16 @@ public class XMLType implements Type{
 	public String toString() {
 		return "XMLType [name=" + name + "]";
 	}
+
+	@Override
+	public void mixin(Type mixinType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addExtension(String extensionId, Type extensionType) {
+		// TODO Auto-generated method stub
+		
+	}
 }

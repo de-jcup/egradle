@@ -42,23 +42,45 @@ public class PluginMerger{
 			if (extensions.isEmpty()){
 				continue;
 			}
-			for (TypeExtension extension: extensions){
-				if (!typeAsString.equals(extension.getTargetTypeAsString())){
+			for (TypeExtension typeExtension: extensions){
+				if (!typeAsString.equals(typeExtension.getTargetTypeAsString())){
 					continue;
 				}
-				String mixinTypeAsString = extension.getMixinTypeAsString();
-				if (! StringUtils.isBlank(mixinTypeAsString)){
-					/* resolve type by provider*/
-					Type mixinType = provider.getType(mixinTypeAsString);
-					if (mixinType==null){
-						errorHandler.handleError("mixin type not found by provider:"+mixinTypeAsString);
-					}else{
-						type.mixin(mixinType);
-					}
-				}
+				handleMixin(type, typeExtension);
+				handleExtension(type, typeExtension);
+				
 			}
 		
 		}
+	}
+
+	private String handleMixin(Type type, TypeExtension typeExtension) {
+		String mixinTypeAsString = typeExtension.getMixinTypeAsString();
+		if (! StringUtils.isBlank(mixinTypeAsString)){
+			/* resolve type by provider*/
+			Type mixinType = provider.getType(mixinTypeAsString);
+			if (mixinType==null){
+				errorHandler.handleError("mixin type not found by provider:"+mixinTypeAsString);
+			}else{
+				type.mixin(mixinType);
+			}
+		}
+		return mixinTypeAsString;
+	}
+	
+	private String handleExtension(Type type, TypeExtension typeExtension) {
+		String extensionTypeAsString = typeExtension.getExtensionTypeAsString();
+		if (! StringUtils.isBlank(extensionTypeAsString)){
+			/* resolve type by provider*/
+			Type extensionType = provider.getType(extensionTypeAsString);
+			if (extensionType==null){
+				errorHandler.handleError("extension type not found by provider:"+extensionTypeAsString);
+			}else{
+				String extensionId= typeExtension.getId();
+				type.addExtension(extensionId, extensionType);
+			}
+		}
+		return extensionTypeAsString;
 	}
 
 }

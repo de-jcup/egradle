@@ -20,4 +20,7 @@ public interface Type extends LanguageElement{
 	public String getShortName();
 	
 	public void mixin(Type mixinType);
+
+	public void addExtension(String extensionId, Type extensionType);
+
 }
