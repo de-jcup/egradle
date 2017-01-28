@@ -75,8 +75,12 @@ public class XMLType implements Type{
 
 	@Override
 	public void mixin(Type mixinType) {
-		// TODO Auto-generated method stub
-		
+		if (mixinType==null){
+			return;
+		}
+		for(Method method: mixinType.getMethods()){
+			methods.add(method);
+		}
 	}
 
 	@Override
