@@ -86,7 +86,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName = type.getFullyQualifiedName();
 		}
 		/*
-		 * Fallback when having not a java element with correct full classname
+		 * Fallback when having not a java type with correct full classname
 		 * set. Can happen when calls are done from a virtual root project path
 		 */
 		if (fullClassName.indexOf('.') == -1) {

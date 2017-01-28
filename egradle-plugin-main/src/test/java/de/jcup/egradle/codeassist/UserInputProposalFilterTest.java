@@ -13,20 +13,20 @@ import org.junit.rules.ExpectedException;
 
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
-import de.jcup.egradle.codeassist.ProposalFilter;
+import de.jcup.egradle.codeassist.UserInputProposalFilter;
 
-public class ProposalFilterTest {
+public class UserInputProposalFilterTest {
 
 	private ProposalFactoryContentProvider mockedContentProvider;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
-	private ProposalFilter filterToTest;
+	private UserInputProposalFilter filterToTest;
 
 	@Before
 	public void before() {
-		filterToTest = new ProposalFilter();
+		filterToTest = new UserInputProposalFilter();
 		mockedContentProvider = mock(ProposalFactoryContentProvider.class);
 	}
 

@@ -20,6 +20,7 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
@@ -107,7 +108,11 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		data.item=item;
 		GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
 		GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
-		LanguageElement element = estimator.estimate(item,fileType);
+		EstimationResult result = estimator.estimate(item,fileType);
+		LanguageElement element = null;
+		if (result !=null){
+			element=result.getElement();
+		}
 		data.element=element;
 		return data;
 	}

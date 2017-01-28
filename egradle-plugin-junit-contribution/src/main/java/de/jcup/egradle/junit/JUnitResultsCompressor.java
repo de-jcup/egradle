@@ -166,7 +166,7 @@ public class JUnitResultsCompressor {
 			String tagName = testSuite.getTagName();
 			if (!tagName.equals(TESTSUITE)) {
 				throw new IllegalStateException(
-						"root element of document not testsuite but " + tagName + ", doc=" + doc.getLocalName());
+						"root type of document not testsuite but " + tagName + ", doc=" + doc.getLocalName());
 			}
 			errors += converter.convertToInt(testSuite.getAttribute(ATTRIBUTE_ERRORS));
 			failures += converter.convertToInt(testSuite.getAttribute(ATTRIBUTE_FAILURES));

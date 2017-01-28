@@ -23,13 +23,13 @@ import org.eclipse.ui.IEditorPart;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
+import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.ProposalFactory;
 import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
-import de.jcup.egradle.codeassist.ProposalFilter;
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
+import de.jcup.egradle.codeassist.UserInputProposalFilter;
 import de.jcup.egradle.codeassist.VariableNameProposalFactory;
-import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeBuilder;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
@@ -48,7 +48,11 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
 
 	private String errorMessage;
-	private boolean useCache;
+	
+	/**
+	 * Caching is only done while code assist sessions is alive!
+	 */
+	private boolean useCacheBecauseCodeAssistSessionOngoing;
 
 	private IAdaptable adaptable;
 
@@ -59,7 +63,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private TreeSet<Proposal> cachedProposals;
 
-	private ProposalFilter filter = new ProposalFilter();
+	private UserInputProposalFilter filter = new UserInputProposalFilter();
 
 	private ICompletionListener completionListener;
 
@@ -168,7 +172,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		if (DEBUG) {
 			debugCacheState("proposal computing-1");
 		}
-		if (!useCache) {
+		if (!useCacheBecauseCodeAssistSessionOngoing) {
 			if (DEBUG) {
 				debugCacheState("proposal computing-2");
 			}
@@ -178,7 +182,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
 				cachedProposals.addAll(proposalsOfCurrentFactory);
 			}
-			useCache = true;
+			useCacheBecauseCodeAssistSessionOngoing = true;
 			if (DEBUG) {
 				debugCacheState("proposal computing-3");
 			}
@@ -300,7 +304,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 		@Override
 		public void assistSessionStarted(ContentAssistEvent event) {
-			useCache = false;
+			useCacheBecauseCodeAssistSessionOngoing = false;
 			if (DEBUG) {
 				debugCacheState("assistSessionStarted");
 			}
@@ -309,7 +313,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 		@Override
 		public void assistSessionEnded(ContentAssistEvent event) {
-			useCache = false;
+			useCacheBecauseCodeAssistSessionOngoing = false;
 			if (DEBUG) {
 				debugCacheState("assistSessionEnded");
 			}
@@ -346,6 +350,6 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private void debugCacheState(String message) {
-		EGradleUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCache=" + useCache);
+		EGradleUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing=" + useCacheBecauseCodeAssistSessionOngoing);
 	}
 }

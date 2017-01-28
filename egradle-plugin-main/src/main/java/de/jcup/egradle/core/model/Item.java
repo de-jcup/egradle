@@ -50,6 +50,16 @@ public class Item {
 
 	private boolean aPossibleParent;
 
+	private boolean isClosureBlock;
+	
+	public boolean isClosureBlock() {
+		return isClosureBlock;
+	}
+	
+	public void setClosureBlock(boolean isClosure) {
+		this.isClosureBlock = isClosure;
+	}
+	
 	public void setItemType(ItemType type) {
 		this.itemType = type;
 	}

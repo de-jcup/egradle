@@ -504,6 +504,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (lastAst != null) {
 			int type = lastAst.getType();
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
+				item.setClosureBlock(true);
 				String name = item.getName();
 				if (name == null) {
 					return item;

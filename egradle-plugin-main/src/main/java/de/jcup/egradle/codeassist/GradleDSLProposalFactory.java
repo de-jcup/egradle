@@ -1,10 +1,13 @@
 package de.jcup.egradle.codeassist;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 import de.jcup.egradle.codeassist.dsl.CodeBuilder;
@@ -17,6 +20,8 @@ import de.jcup.egradle.codeassist.dsl.Reason;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.CreationMode;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 
@@ -25,8 +30,46 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	private CodeBuilder codeBuilder;
 	SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
 
+	private GradleLanguageElementEstimater typeEstimator;
 
-	public Set<Proposal> createProposals(Type identifiedType, String textBeforeColumn) {
+	/**
+	 * Creates new gradle dsl proposal factory
+	 * 
+	 * @param codeBuilder
+	 * @param typeEstimator
+	 */
+	public GradleDSLProposalFactory(CodeBuilder codeBuilder, GradleLanguageElementEstimater typeEstimator) {
+		if (codeBuilder == null) {
+			throw new IllegalArgumentException("code codeBuilder may not be null");
+		}
+		this.codeBuilder = codeBuilder;
+		if (typeEstimator == null) {
+			throw new IllegalArgumentException("typeEstimator may not be null!");
+		}
+		this.typeEstimator = typeEstimator;
+	}
+
+	@Override
+	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+		if (contentProvider == null) {
+			return null;
+		}
+		EstimationResult result = tryToIdentifyContextType(offset, contentProvider);
+
+		if (result == null) {
+			return null;
+		}
+		if (result.getElementType() == null) {
+			return null;
+		}
+		String textBeforeColumn = contentProvider.getLineTextBeforeCursorPosition();
+		Set<Proposal> proposals = createProposals(result, textBeforeColumn);
+		return proposals;
+	}
+
+	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
+		Type identifiedType = result.getElementType();
+		CreationMode mode = result.getMode();
 		Set<Proposal> proposals = new TreeSet<>();
 		Map<String, Type> extensions = identifiedType.getExtensions();
 		/*
@@ -34,6 +77,9 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		 * every creation but only when getter is called - refactoring necessary
 		 */
 		for (String extensionId : extensions.keySet()) {
+			if (extensionId == null) {
+				continue;
+			}
 			Type extensionType = extensions.get(extensionId);
 			if (extensionType == null) {
 				continue;
@@ -45,9 +91,13 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			Reason reason = identifiedType.getReasonForExtension(extensionId);
 			StringBuilder description = new StringBuilder();
+			StringBuilder name = new StringBuilder();
+			name.append(extensionId);
 			if (reason != null) {
 				Plugin plugin = reason.getPlugin();
 				if (plugin != null) {
+					// name.append("-");
+					// name.append(plugin.getId());
 					description.append("<p>reasoned by plugin:<b>");
 					description.append(plugin.getId());
 					description.append("</b></p><br><br>");
@@ -55,7 +105,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 				}
 			}
 			description.append(extensionType.getDescription());
+			description.append("<br><br>Type:");
+			description.append(extensionType.getName());
 			p.setDescription(description.toString());
+			p.setName(name.toString());
 			calculateAndSetCursor(p, textBeforeColumn);
 			proposals.add(p);
 		}
@@ -74,7 +127,23 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(p);
 		}
 		for (Method method : identifiedType.getMethods()) {
+			if (mode == CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
+				if (method.getName().startsWith("get")) {
+					continue;
+				}
+				if (method.getName().startsWith("set")){
+					continue;
+				}
+
+				List<Parameter> params = method.getParameters();
+				if (params.size() == 0) {
+					continue;
+				}
+
+			}
+
 			ModelProposal p = new ModelProposal();
+
 			Reason reason = identifiedType.getReasonForMethod(method);
 			String methodLabel = createMethodLabel(method);
 			StringBuilder description = new StringBuilder();
@@ -85,7 +154,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 					description.append(plugin.getId());
 					description.append("</b></p><br><br>");
 
-					methodLabel = methodLabel + "(" + plugin.getId() + ")";
+					methodLabel = methodLabel + "-" + plugin.getId();
 
 				}
 			}
@@ -106,7 +175,25 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		return proposals;
 	}
 
-	public String createMethodLabel(Method method) {
+	/*
+	 * FIXME ATR, 20.01.2017: think about providing multiple types here as
+	 * result - its often not clear what can be estimated...
+	 */
+	private EstimationResult tryToIdentifyContextType(int offset, ProposalFactoryContentProvider contentProvider) {
+		Model model = contentProvider.getModel();
+		if (model == null) {
+			return null;
+		}
+		Item outlineItem = model.getParentItemOf(offset);
+		if (outlineItem == null) {
+			return null;
+		}
+		GradleFileType fileType = contentProvider.getFileType();
+		EstimationResult result = typeEstimator.estimate(outlineItem, fileType);
+		return result;
+	}
+
+	private String createMethodLabel(Method method) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(method.getName());
 		List<Parameter> parameters = method.getParameters();
@@ -131,6 +218,13 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		proposal.setCode(insertData.sourceCode);
 	}
 
+	private boolean isString(Type paramType) {
+		if (paramType == null) {
+			return false;
+		}
+		return "java.lang.String".equals(paramType.getName());
+	}
+
 	public enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
 	}
@@ -146,100 +240,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		public boolean isProperty() {
 			return ModelProposalType.PROPERTY.equals(type);
 		}
-	}
-
-	private GradleLanguageElementEstimater typeEstimator;
-	/*
-	 * FIXME ATR, 19.01.2017:check memory foot print of these factories and
-	 * think about shared instances
-	 */
-
-	/**
-	 * Creates new gradle dsl proposal factory
-	 * 
-	 * @param codeBuilder
-	 * @param typeEstimator
-	 */
-	public GradleDSLProposalFactory(CodeBuilder codeBuilder, GradleLanguageElementEstimater typeEstimator) {
-		if (codeBuilder == null) {
-			throw new IllegalArgumentException("code codeBuilder may not be null");
-		}
-		this.codeBuilder = codeBuilder;
-		if (typeEstimator == null) {
-			throw new IllegalArgumentException("typeEstimator may not be null!");
-		}
-		this.typeEstimator = typeEstimator;
-	}
-
-	@Override
-	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
-		if (contentProvider == null) {
-			return null;
-		}
-		Type identifiedType = tryToIdentifyParentType(offset, contentProvider);
-		if (identifiedType == null) {
-			return null;
-		}
-		String textBeforeColumn = contentProvider.getLineTextBeforeCursorPosition() + 1;
-		Set<Proposal> proposals = createProposals(identifiedType, textBeforeColumn);
-		return proposals;
-	}
-
-	/*
-	 * FIXME ATR, 20.01.2017: think about providing multiple types here as
-	 * result - its often not clear what can be estimated...
-	 */
-	private Type tryToIdentifyParentType(int offset, ProposalFactoryContentProvider contentProvider) {
-		Model model = contentProvider.getModel();
-		if (model == null) {
-			return null;
-		}
-		Item outlineItem = model.getParentItemOf(offset);
-		if (outlineItem == null) {
-			return null;
-		}
-		GradleFileType fileType = contentProvider.getFileType();
-		LanguageElement elementForItem = typeEstimator.estimate(outlineItem, fileType);
-		if (elementForItem instanceof Type) {
-			Type type = (Type) elementForItem;
-			return type;
-		}
-		if (elementForItem instanceof Method) {
-			/*
-			 * FIXME ATR, 20.01.2017: HIGH PRIO:problem: when method parameter
-			 * is a closure the target type is only available form documentation
-			 * - arg!!
-			 */
-			// something like {@link ObjectConfigurationAction} first occuring
-			// seems to be the target where the closure is executed!
-			Method m = (Method) elementForItem;
-			// List<Parameter> parameters = m.getParameters();
-			// for (Parameter p: parameters){
-			// Type paramType = p.getType();
-			// /* ignore string parameters */
-			// if (!isString(paramType)){
-			// return p.getType();
-			// }
-			// }
-			/* fall back to return type if no param */
-			return m.getReturnType();
-		}
-		if (elementForItem instanceof Property) {
-			Property p = (Property) elementForItem;
-			return p.getType();
-		}
-		if (elementForItem instanceof Type) {
-			return (Type) elementForItem;
-		}
-		/* unresolveable */
-		return null;
-	}
-
-	private boolean isString(Type paramType) {
-		if (paramType == null) {
-			return false;
-		}
-		return "java.lang.String".equals(paramType.getName());
 	}
 
 }

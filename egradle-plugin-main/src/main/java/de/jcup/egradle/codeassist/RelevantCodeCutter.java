@@ -12,16 +12,16 @@ public class RelevantCodeCutter {
 
 	/**
 	 * <pre>
-					   xx fi bb 
+					   element fi bb 
 					      ^-- fi
-					   xx fi bb 
+					   element fi bb 
 					        ^-- fi
-					   xx .fi bb     
+					   element .fi bb     
 					      ^--- .fi
-					   xx fi  bb
+					   element fi  bb
 					         ^--- empty 
 					         
-					   xx
+					   element
 					   ^-- offset first character in line
 					         ^-- other: given offset
 					    01234 678 0123  
@@ -76,7 +76,8 @@ public class RelevantCodeCutter {
 			}
 			sb.append(c);
 		}
-		return sb.toString();
+		String data = StringUtils.removeEndIgnoreCase(sb.toString(), "\r");
+		return data;
 	}
 	
 	private boolean isDelimiter(char c) {

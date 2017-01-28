@@ -65,7 +65,7 @@ public class RelevantCodeCutterTest {
         "\n"+
 		"}\n"+
         "\n"+
-		"file = new File(\"xx\")\n";
+		"file = new File(\"element\")\n";
 		int index=code.length();
 		code = code +
         "  \n"+

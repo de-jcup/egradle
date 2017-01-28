@@ -84,7 +84,7 @@ public class ModelImpl implements Model {
 		if (! item.hasChildren() && !item.isAPossibleParent()){
 			return false;
 		}
-		/* check offset position is between this element */
+		/* check offset position is between this type */
 		int itemStartPos = item.getOffset();
 		int itemEndPos = itemStartPos+ item.getLength();
 		if (offset>itemStartPos && offset<itemEndPos){

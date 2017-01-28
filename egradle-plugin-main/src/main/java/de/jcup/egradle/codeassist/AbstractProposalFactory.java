@@ -11,6 +11,9 @@ import java.util.Set;
  */
 public abstract class AbstractProposalFactory implements ProposalFactory {
 	
+	/**
+	 * Creates proposals for given offset. 
+	 */
 	public final Set<Proposal> createProposals(int offset, ProposalFactoryContentProvider contentProvider) {
 		if (contentProvider==null){
 			throw new IllegalArgumentException("proposal factorycontent provider may not be null!");

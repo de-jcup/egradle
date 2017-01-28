@@ -1,7 +1,7 @@
 package de.jcup.egradle.codeassist.dsl;
 
 /**
- * Represents an element of the language
+ * Represents an type of the language
  * @author Albert Tregnaghi
  *
  */
