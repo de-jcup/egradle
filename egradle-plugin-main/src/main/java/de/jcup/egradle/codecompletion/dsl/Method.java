@@ -12,4 +12,5 @@ public interface Method extends LanguageElement{
 	public Type getReturnType();
 	
 	public List<Parameter> getParameters();
+
 }

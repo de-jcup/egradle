@@ -16,30 +16,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "type")
 public class XMLType implements Type {
 
-	@XmlAttribute(name = "name")
-	private String name;
-
-	@XmlAttribute(name = "language")
-	private String language;
+	@XmlAttribute(name = "interface")
+	private boolean _interface;
 
 	@XmlElement(name = "description")
 	private String description;
 
-	@XmlAttribute(name = "version")
-	private String version;
+	private Map<String, Type> extensionMap = new TreeMap<>();
 
-	@XmlAttribute(name = "interface")
-	private boolean _interface;
+	private Map<String, Reason> extensionReasonMap = new TreeMap<>();
+
+	@XmlAttribute(name = "language")
+	private String language;
+
+	private Map<Method, Reason> methodReasons = new HashMap<>();
 
 	@XmlElement(name = "method", type = XMLMethod.class)
 	private Set<Method> methods = new LinkedHashSet<>();
 
+	@XmlAttribute(name = "name")
+	private String name;
+
 	@XmlElement(name = "property", type = XMLProperty.class)
 	private Set<Property> properties = new LinkedHashSet<>();
 
+	@XmlAttribute(name = "version")
+	private String version;
+
 	@Override
-	public String getName() {
-		return name;
+	public void addExtension(String extensionId, Type extensionType, Reason reason) {
+		if (extensionType == null) {
+			return;
+		}
+		if (extensionId == null) {
+			extensionId = "null";
+		}
+		extensionMap.put(extensionId, extensionType);
+		if (reason != null) {
+			extensionReasonMap.put(extensionId, reason);
+		}
 	}
 
 	@Override
@@ -47,9 +62,12 @@ public class XMLType implements Type {
 		return description;
 	}
 
-	@Override
-	public Set<Property> getProperties() {
-		return properties;
+	public Map<String, Type> getExtensions() {
+		return extensionMap;
+	}
+
+	public String getLanguage() {
+		return language;
 	}
 
 	@Override
@@ -57,8 +75,34 @@ public class XMLType implements Type {
 		return methods;
 	}
 
-	public String getLanguage() {
-		return language;
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public Set<Property> getProperties() {
+		return properties;
+	}
+
+	public Reason getReasonForExtension(String extensionId) {
+		if (extensionId == null) {
+			return null;
+		}
+		return extensionReasonMap.get(extensionId);
+	}
+
+	public Reason getReasonForMethod(Method method) {
+		if (method == null) {
+			return null;
+		}
+		return methodReasons.get(method);
+	}
+
+	@Override
+	public String getShortName() {
+		/* FIXME ATR, 18.01.2017: implement or remove*/
+		return null;
 	}
 
 	public String getVersion() {
@@ -66,9 +110,16 @@ public class XMLType implements Type {
 	}
 
 	@Override
-	public String getShortName() {
-		/* FIXME ATR, 18.01.2017: implement */
-		return null;
+	public void mixin(Type mixinType, Reason reason) {
+		if (mixinType == null) {
+			return;
+		}
+		for (Method method : mixinType.getMethods()) {
+			methods.add(method);
+			if (reason != null) {
+				methodReasons.put(method, reason);
+			}
+		}
 	}
 
 	@Override
@@ -76,61 +127,4 @@ public class XMLType implements Type {
 		return "XMLType [name=" + name + "]";
 	}
 
-	private Map<Method, Reason> methodReasons = new HashMap<>();
-	
-	public Reason getReasonForMethod(Method method){
-		if (method==null){
-			return null;
-		}
-		return methodReasons.get(method);
-	}
-	
-	@Override
-	public void mixin(Type mixinType, Reason reason) {
-		if (mixinType == null) {
-			return;
-		}
-		for (Method method : mixinType.getMethods()) {
-			methods.add(method);
-			if(reason!=null){
-				methodReasons.put(method, reason);
-			}
-		}
-		/*
-		 * TODO ATR, 28.01.2017: use a map and handle mixin type + a reason
-		 * object So a cleanup can be done and also methods like isMixedIn() and
-		 * getMixinReason() can be easily implemented. This becomes important
-		 * when plugins are not all applied but only dedicated, and also to show
-		 * information about reasoning why this method comes up (should appear
-		 * in code propsals and descriptions later)
-		 */
-	}
-	private Map<String, Type> extensionMap= new TreeMap<>();
-	private Map<String, Reason> extensionReasonMap= new TreeMap<>();
-
-	@Override
-	public void addExtension(String extensionId, Type extensionType, Reason reason) {
-		if (extensionType==null){
-			return;
-		}
-		if (extensionId==null){
-			extensionId="null";
-		}
-		extensionMap.put(extensionId, extensionType);
-		if (reason!=null){
-			extensionReasonMap.put(extensionId, reason);
-		}
-	}
-	
-	public Map<String, Type> getExtensions() {
-		return extensionMap;
-	}
-	
-	public Reason getReasonForExtension(String extensionId){
-		if (extensionId==null){
-			return null;
-		}
-		return extensionReasonMap.get(extensionId);
-	}
-	
 }

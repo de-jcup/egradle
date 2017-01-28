@@ -1,6 +1,7 @@
 package de.jcup.egradle.codecompletion.dsl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;

@@ -11,8 +11,14 @@ public class GradleDSLCodeBuilder implements CodeBuilder {
 
 	@Override
 	public String createClosure(LanguageElement element) {
+		String name = element.getName();
+		return createClosure(name);
+	}
+
+	@Override
+	public String createClosure(String name) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(element.getName());
+		sb.append(name);
 		sb.append("{\n    ").append(CURSOR_VARIABLE).append("\n");
 		sb.append("}");
 		return sb.toString();

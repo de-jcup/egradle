@@ -43,8 +43,8 @@ public class GradleDSLProposalFactory extends AbstractModelProposalFactory {
 		if (identifiedType == null) {
 			return null;
 		}
-
-		Set<Proposal> proposals = super.createProposals(identifiedType);
+		String textBeforeColumn = contentProvider.getLineTextBeforeCursorPosition()+1;
+		Set<Proposal> proposals = super.createProposals(identifiedType,textBeforeColumn);
 		return proposals;
 	}
 

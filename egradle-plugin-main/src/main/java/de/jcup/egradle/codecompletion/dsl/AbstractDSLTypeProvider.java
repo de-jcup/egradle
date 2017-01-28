@@ -52,6 +52,10 @@ public abstract class AbstractDSLTypeProvider implements TypeProvider {
 		try {
 			type = fileLoader.loadType(name);
 		} catch (IOException e) {
+			/*
+			 * FIXME ATR, 28.01.2017: it can often be normal to not resolve an
+			 * external type - handle this  better! e.g. java.lang.* cannot be available...
+			 */
 			getErrorHandler().handleError("Cannot load dsl type:" + name, e);
 		}
 		if (type == null) {
@@ -61,9 +65,6 @@ public abstract class AbstractDSLTypeProvider implements TypeProvider {
 
 		/* put uninitialized type - so avoiding endless loops ... */
 		nameToTypeMapping.put(name, type);
-		if (!(type instanceof XMLType)) {
-			return type;
-		}
 		
 		if (plugins==null){
 			/* load plugins.xml */
@@ -76,15 +77,13 @@ public abstract class AbstractDSLTypeProvider implements TypeProvider {
 				plugins = new LinkedHashSet<>();
 			}
 		}
-		/* FIXME ATR, 28.01.2017: go on implementation! */
-//		for (Plugin plugin: plugins){
-//			if (plugin.get)
-//		}
+		if (!(type instanceof XMLType)) {
+			return type;
+		}
 		
-		/*
-		 * FIXME ATR, 19.01.2017: handle mixins etc. - should be done in gralde
-		 * impl, or this abstract class has to be removed instead
-		 */
+		PluginMerger merger = new PluginMerger(this,getErrorHandler());
+		merger.merge(type, plugins);
+		
 		/* inititialize xml type */
 		for (Method m : type.getMethods()) {
 			XMLMethod xm = (XMLMethod) m;

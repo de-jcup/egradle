@@ -24,9 +24,11 @@ import de.jcup.egradle.codecompletion.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codecompletion.dsl.XMLDSLPluginsImporter;
 import de.jcup.egradle.codecompletion.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codecompletion.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -58,7 +60,8 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		codeCompletionRegistry.setErrorHandler(EGradleErrorHandler.INSTANCE);
+		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
+		codeCompletionRegistry.setErrorHandler(errorHandler);
 	
 		/* init code completion parts */
 		XMLDSLTypeImporter typeImporter = new XMLDSLTypeImporter();
@@ -67,6 +70,7 @@ public class Activator extends AbstractUIPlugin {
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter);
 		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("dsl/gradle/3.0"));
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
+		gradleDslProvider.setErrorHandler(errorHandler);
 		/* install dsl type provider as service, so it must be definitely used shared...*/
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
 	}

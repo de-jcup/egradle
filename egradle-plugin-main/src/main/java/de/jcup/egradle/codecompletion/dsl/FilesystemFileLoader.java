@@ -24,7 +24,7 @@ public class FilesystemFileLoader implements DSLFileLoader {
 			throw new IllegalArgumentException("pluginsImporter must not be null!");
 		}
 		this.typeImporter = typeImporter;
-		this.pluginsImporter=pluginsImporter;
+		this.pluginsImporter = pluginsImporter;
 	}
 
 	public void setDSLFolder(File folder) {
@@ -48,8 +48,8 @@ public class FilesystemFileLoader implements DSLFileLoader {
 		String path = PATTERN_EVERY_DOT.matcher(name).replaceAll("/");
 		path += ".xml";
 		File sourceFile = new File(dslFolder, path);
-		if (!sourceFile.exists()){
-			throw new FileNotFoundException("Did not found:"+sourceFile);
+		if (!sourceFile.exists()) {
+			throw new FileNotFoundException("Did not found:" + sourceFile);
 		}
 		InputStream stream = new FileInputStream(sourceFile);
 
@@ -70,8 +70,8 @@ public class FilesystemFileLoader implements DSLFileLoader {
 			throw new DSLFolderNotValidException("DSL folder ist not a directory:" + dslFolder);
 		}
 		File sourceFile = new File(dslFolder, "plugins.xml");
-		if (!sourceFile.exists()){
-			throw new FileNotFoundException("Did not found:"+sourceFile);
+		if (!sourceFile.exists()) {
+			throw new FileNotFoundException("Did not found:" + sourceFile);
 		}
 		InputStream stream = new FileInputStream(sourceFile);
 
