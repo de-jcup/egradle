@@ -2,13 +2,13 @@ package de.jcup.egradle.codecompletion.dsl;
 
 public interface TypeExtension {
 
-	public Object getId();
+	public String getId();
 
-	public Type getTargetType();
+	public String getTargetTypeAsString();
 	
-	public Type getExtensionType();
+	public String getExtensionTypeAsString();
 	
-	public Type getMixinType();
+	public String getMixinTypeAsString();
 
 
 }
