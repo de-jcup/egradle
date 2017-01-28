@@ -25,7 +25,7 @@ public class XMLTypeTest {
 		assertTrue(type.getMethods().isEmpty());
 		
 		/* execute */
-		type.mixin(mixinType);
+		type.mixin(mixinType, null);
 		
 		/* test */
 		assertFalse(type.getMethods().isEmpty());
@@ -50,7 +50,7 @@ public class XMLTypeTest {
 		assertTrue(type.getMethods().isEmpty());
 		
 		/* execute */
-		type.mixin(mixinType);
+		type.mixin(mixinType, null);
 		
 		/* test */
 		assertFalse(type.getMethods().isEmpty());

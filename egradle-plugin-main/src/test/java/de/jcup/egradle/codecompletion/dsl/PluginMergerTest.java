@@ -30,6 +30,8 @@ public class PluginMergerTest {
 	private Type mockedType4;
 	private Type mockedTargetType;
 	private ErrorHandler mockedErrorHandler;
+	private ReasonImpl reason1;
+	private ReasonImpl reason2;
 
 	@Before
 	public void before() {
@@ -38,9 +40,14 @@ public class PluginMergerTest {
 		mockedErrorHandler = mock(ErrorHandler.class);
 
 		merger = new PluginMerger(mockedProvider,mockedErrorHandler);
-
 		mockedPlugin1 = mock(Plugin.class);
 		mockedPlugin2 = mock(Plugin.class);
+
+		reason1 = new ReasonImpl();
+		reason2 = new ReasonImpl();
+		reason1.setPlugin(mockedPlugin1);
+		reason2.setPlugin(mockedPlugin2);
+		
 		plugin1Extensions = new LinkedHashSet<>();
 		when(mockedPlugin1.getExtensions()).thenReturn(plugin1Extensions);
 
@@ -78,7 +85,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType).addExtension("extension1", mockedType1);
+		verify(mockedTargetType).addExtension("extension1", mockedType1, reason1);
 
 	}
 
@@ -95,7 +102,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class));
+		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class),any(Reason.class));
 		verify(mockedErrorHandler).handleError(any(String.class));
 	}
 
@@ -113,7 +120,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class));
+		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class), any(Reason.class));
 
 	}
 
@@ -130,7 +137,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType).mixin(mockedType1);
+		verify(mockedTargetType).mixin(mockedType1, reason1);
 
 	}
 	
@@ -146,7 +153,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).mixin(mockedType1);
+		verify(mockedTargetType,never()).mixin(mockedType1, reason1);
 		verify(mockedErrorHandler,never()).handleError(any(String.class));
 
 
@@ -164,7 +171,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).mixin(any());
+		verify(mockedTargetType,never()).mixin(any(), any(Reason.class));
 		verify(mockedErrorHandler).handleError(any(String.class));
 
 	}
@@ -196,10 +203,10 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType, times(1)).mixin(mockedType1);
-		verify(mockedTargetType, times(1)).mixin(mockedType2);
-		verify(mockedTargetType, times(1)).mixin(mockedType3);
-		verify(mockedTargetType, never()).mixin(mockedType4);
+		verify(mockedTargetType, times(1)).mixin(mockedType1, reason1);
+		verify(mockedTargetType, times(1)).mixin(mockedType2, reason1);
+		verify(mockedTargetType, times(1)).mixin(mockedType3, reason2);
+		verify(mockedTargetType, never()).mixin(mockedType4, reason2);
 
 	}
 

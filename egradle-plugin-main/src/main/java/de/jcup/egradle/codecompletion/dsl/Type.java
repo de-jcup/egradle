@@ -1,5 +1,6 @@
 package de.jcup.egradle.codecompletion.dsl;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -19,8 +20,24 @@ public interface Type extends LanguageElement{
 	 */
 	public String getShortName();
 	
-	public void mixin(Type mixinType);
+	public void mixin(Type mixinType, Reason reason);
 
-	public void addExtension(String extensionId, Type extensionType);
+	public void addExtension(String extensionId, Type extensionType, Reason reason);
 
+	public Map<String, Type> getExtensions();
+	
+	/**
+	 * Returns the reason for given extension id
+	 * @param extensionId
+	 * @return reason or <code>null</code> if no reason specified
+	 */
+	public Reason getReasonForExtension(String extensionId);
+	
+	/**
+	 * Returns reason for method
+	 * @param method
+	 * @return reason or <code>null</code> when no reason is specified
+	 */
+	public Reason getReasonForMethod(Method method);
+		
 }
