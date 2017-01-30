@@ -31,6 +31,15 @@ public class GradleLanguageElementEstimater {
 	public class EstimationResult {
 		private LanguageElement element;
 		private CreationMode mode;
+		private String extensionName;
+
+		public boolean isTypeFromExtensionConfigurationPoint() {
+			return extensionName != null;
+		}
+
+		public String getExtensionName() {
+			return extensionName;
+		}
 
 		public LanguageElement getElement() {
 			return element;
@@ -41,39 +50,17 @@ public class GradleLanguageElementEstimater {
 		}
 
 		public Type getElementType() {
-			/*
-			 * FIXME ATR, 28.01.2017: implement mode resolution better -
-			 * currently always closure
-			 */
 			if (element instanceof Type) {
 				Type type = (Type) element;
 				return type;
 
 			} else if (element instanceof Method) {
-				/*
-				 * FIXME ATR, 20.01.2017: HIGH PRIO:problem: when method
-				 * parameter is a closure the target type is only available form
-				 * documentation - arg!!
-				 */
-				// something like {@link ObjectConfigurationAction} first
-				// occuring
-				// seems to be the target where the closure is executed!
 				Method m = (Method) element;
-				// List<Parameter> parameters = m.getParameters();
-				// for (Parameter p: parameters){
-				// Type paramType = p.getType();
-				// /* ignore string parameters */
-				// if (!isString(paramType)){
-				// return p.getType();
-				// }
-				// }
-				/* fall back to return type if no param */
 				return m.getReturnType();
 			} else if (element instanceof Property) {
 				Property p = (Property) element;
 				return p.getType();
 			}
-
 			return null;
 
 		}
@@ -125,56 +112,62 @@ public class GradleLanguageElementEstimater {
 		/*
 		 * check if current type is applyable for next - and identify next type
 		 */
-		Estimation current = new Estimation();
+		InternalEstimationData current = new InternalEstimationData();
 		current.type = rootType;
+		String extensionName = null;
 		while (pathIterator.hasNext()) {
+			extensionName = null;
 			Item currentPathItem = pathIterator.next();
 			String currentPathItemName = currentPathItem.getName();
 			if (currentPathItemName == null) {
 				continue;
 			}
 
-			Estimation found = null;
+			InternalEstimationData found = null;
 			if (found == null) {
 				found = findByExtensions(current.type, currentPathItemName);
-			}
-			if (found == null) {
-				found = findByProperties(current.type, currentPathItemName);
+				if (found != null) {
+					extensionName = currentPathItemName;
+				}
 			}
 			if (found == null) {
 				found = findByMethods(current.type, currentPathItemName);
 			}
+			if (found == null) {
+				found = findByProperties(current.type, currentPathItemName);
+			}
 			if (found != null) {
 				current = found;
-				
-				if (currentPathItem.isClosureBlock()){
-					result.mode=CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
+
+				if (currentPathItem.isClosureBlock()) {
+					result.mode = CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
 				}
-			
+
 			}
 			if (current.type == null) {
 				break;
 			}
 		}
+		result.extensionName = extensionName;
 		result.element = current.element;
 
 		return result;
 	}
 
-	private class Estimation {
+	private class InternalEstimationData {
 		private Type type;
 		private LanguageElement element;
 	}
 
 	/* FIXME ATR, 20.01.2017: write a test case for properties */
-	private Estimation findByProperties(Type currentType, String checkItemName) {
+	private InternalEstimationData findByProperties(Type currentType, String checkItemName) {
 		if (currentType == null) {
 			return null;
 		}
 		for (Property p : currentType.getProperties()) {
 			String propertyName = p.getName();
 			if (checkItemName.equals(propertyName)) {
-				Estimation r = new Estimation();
+				InternalEstimationData r = new InternalEstimationData();
 				r.type = p.getType();
 				r.element = p;
 				return r;
@@ -183,7 +176,7 @@ public class GradleLanguageElementEstimater {
 		return null;
 	}
 
-	private Estimation findByExtensions(Type currentType, String checkItemName) {
+	private InternalEstimationData findByExtensions(Type currentType, String checkItemName) {
 		if (currentType == null) {
 			return null;
 		}
@@ -194,7 +187,7 @@ public class GradleLanguageElementEstimater {
 		for (String extensionId : extensions.keySet()) {
 			if (checkItemName.equals(extensionId)) {
 				Type type = extensions.get(extensionId);
-				Estimation r = new Estimation();
+				InternalEstimationData r = new InternalEstimationData();
 				r.type = type;
 				r.element = type;
 				return r;
@@ -203,18 +196,19 @@ public class GradleLanguageElementEstimater {
 		return null;
 	}
 
-	private Estimation findByMethods(Type currentType, String checkItemName) {
+	private InternalEstimationData findByMethods(Type currentType, String checkItemName) {
 		if (currentType == null) {
 			return null;
 		}
 		String getMagicPendant = null;
-		if (checkItemName.length() > 1) {
-			getMagicPendant = "get" + checkItemName.substring(0, 1).toUpperCase() + checkItemName.substring(1);
-		}
+		// if (checkItemName.length() > 1) {
+		// getMagicPendant = "get" + checkItemName.substring(0, 1).toUpperCase()
+		// + checkItemName.substring(1);
+		// }
 		for (Method m : currentType.getMethods()) {
 			String methodName = m.getName();
 			if (checkItemName.equals(methodName) || (getMagicPendant != null && getMagicPendant.equals(methodName))) {
-				Estimation r = new Estimation();
+				InternalEstimationData r = new InternalEstimationData();
 				r.type = m.getReturnType();
 				r.element = m;
 				return r;

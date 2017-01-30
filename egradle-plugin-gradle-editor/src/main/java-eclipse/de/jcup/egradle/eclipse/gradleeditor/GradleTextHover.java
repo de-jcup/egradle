@@ -1,5 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import java.util.List;
+
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -17,13 +19,14 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.XMLProperty;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
@@ -45,10 +48,10 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	@Override
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		HoverData data = null;
-		if (hoverRegion instanceof HoverData){
-			data = (HoverData)hoverRegion;
+		if (hoverRegion instanceof HoverData) {
+			data = (HoverData) hoverRegion;
 		}
-		if (data==null){
+		if (data == null) {
 			data = getLanguageElementAt(hoverRegion.getOffset());
 		}
 		if (data == null) {
@@ -57,65 +60,92 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		if (data.item == null) {
 			return null;
 		}
-		if (data.element == null) {
+		if (data.result == null) {
 			return null;
 		}
-		String description = null;
-		if (data.element instanceof Method) {
-			Method method = (Method) data.element;
-			Type returnType = method.getReturnType();
-			if (returnType == null || data.item.getItemType() == ItemType.CLOSURE) {
-				/*
-				 * when VOID(null) or it is a closure type use description
-				 * instead of type
-				 */
-				description = method.getDescription();
-			} else {
-				/* use method type as description... */
-				description = returnType.getDescription();
-			}
-		} else if (data.element instanceof Property) {
-			Property property = (Property) data.element;
-			Type returnType = property.getType();
-			if (returnType == null || data.item.getItemType() == ItemType.CLOSURE) {
-				/*
-				 * when VOID(null) or it is a closure type use use property
-				 * description instead of type
-				 */
-				description = property.getDescription();
-			} else {
-				/* use method type as description... */
-				description = returnType.getDescription();
-			}
-		} else {
-			description = data.element.getDescription();
+		LanguageElement element = data.result.getElement();
+		if (element == null) {
+			return null;
 		}
-		return "<html><body><b>" + data.element.getName() + "</b><br><br>" + description + "</body></html>";
+		return buildDescription(data, element);
 	}
 
-	private class HoverData implements IRegion{
-		private LanguageElement element;
-		private Item item;
-		private int length;
-		private int offset;
-	
-		@Override
-		public int getLength() {
-			return length;
+	/*
+	 * Given parameters are checked for null before
+	 */
+	private String buildDescription(HoverData data, LanguageElement element) {
+		StringBuilder description = new StringBuilder();
+		if (element instanceof Method) {
+			Method method = (Method) element;
+			description.append("Mehod:" + method.getName());
+			description.append("<br>");
+			description.append(method.getDescription());
+			if (data.item.isClosureBlock()) {
+				List<Parameter> params = method.getParameters();
+				for (Parameter param : params) {
+					Type type = param.getType();
+					/*
+					 * FIXME ATR, 30.01.2017: problematic - at this point often got only
+					 * "closure" as type not the wanted one. this must be made
+					 * available by xml data - or by inspecting the javadoc of method
+					 */
+					if (type != null) {
+						description.append("closure block type:" + type.getName());
+						description.append("<br>");
+						description.append(type.getDescription());
+						break;
+					}
+				}
+			}
+		} else if (element instanceof Property) {
+			Property property = (Property) element;
+			Type propertyType = property.getType();
+			description.append("<b>Property</b> name:" + property.getName());
+			description.append("<br>");
+			description.append(property.getDescription());
+			description.append("<br>");
+			description.append("Type:");
+			if (propertyType == null) {
+				if (property instanceof XMLProperty) {
+					XMLProperty xmlProp = (XMLProperty) property;
+					description.append(" (raw) ");
+					description.append(xmlProp.getTypeAsString());
+				} else {
+					description.append("null");
+				}
+			} else {
+				description.append(propertyType.getName());
+				description.append("<br>");
+				description.append(propertyType.getDescription());
+			}
+
+		} else if (element instanceof Type) {
+			if (data.result.isTypeFromExtensionConfigurationPoint()) {
+				description.append("Extension name:" + data.result.getExtensionName());
+				description.append("<br>");
+			}
+			description.append("Type:" + element.getName());
+			description.append("<br>");
+			description.append(element.getDescription());
 		}
-		@Override
-		public int getOffset() {
-			return offset;
-		}
+		return "<html><body>" + description + "</body></html>";
 	}
 
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		HoverData data= getLanguageElementAt(offset);
-		if (data!=null){
+		HoverData data = getLanguageElementAt(offset);
+		if (data != null) {
 			return data;
 		}
 		return new Region(offset, 0);
+	}
+
+	@Override
+	public IInformationControlCreator getHoverControlCreator() {
+		if (creator == null) {
+			creator = new GradleTextHoverControlCreator();
+		}
+		return creator;
 	}
 
 	HoverData getLanguageElementAt(int offset) {
@@ -137,31 +167,36 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			return null;
 		}
 		HoverData data = new HoverData();
-		data.offset=offset;
+		data.offset = offset;
 		data.item = item;
 		String name = item.getName();
-		if (name!=null){
-			data.length=name.length();
+		if (name != null) {
+			data.length = name.length();
 		}
-		data.offset=item.getOffset();
+		data.offset = item.getOffset();
 
 		GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
 		GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
 		EstimationResult result = estimator.estimate(item, fileType);
-		LanguageElement element = null;
-		if (result != null) {
-			element = result.getElement();
-		}
-		data.element = element;
+		data.result = result;
 		return data;
 	}
 
-	@Override
-	public IInformationControlCreator getHoverControlCreator() {
-		if (creator == null) {
-			creator = new GradleTextHoverControlCreator();
+	private class HoverData implements IRegion {
+		private EstimationResult result;
+		private Item item;
+		private int length;
+		private int offset;
+
+		@Override
+		public int getLength() {
+			return length;
 		}
-		return creator;
+
+		@Override
+		public int getOffset() {
+			return offset;
+		}
 	}
 
 	private class GradleTextHoverControlCreator implements IInformationControlCreator {

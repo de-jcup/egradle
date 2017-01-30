@@ -11,6 +11,10 @@ public interface Method extends LanguageElement{
 
 	public Type getReturnType();
 	
+	/**
+	 * Returns parameters never <code>null</code>
+	 * @return parameter list, never <code>null</code>
+	 */
 	public List<Parameter> getParameters();
 
 }
