@@ -18,6 +18,9 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
@@ -63,6 +66,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private IAdaptable adaptable;
 	private ContentAssistant contentAssistant;
 	private GradleContentAssistProcessor gradleContentAssistProcessor;
+	private Map<String, GradleTextHover> gradleTextHoverMap = new HashMap<String, GradleTextHover>();
 	
 	/**
 	 * Creates configuration by given adaptable
@@ -141,7 +145,12 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		return new GradleTextHover(this,sourceViewer, contentType);
+		GradleTextHover gradleTextHover = gradleTextHoverMap.get(contentType);
+		if (gradleTextHover==null){
+			gradleTextHover=new GradleTextHover(this,sourceViewer, contentType);
+			gradleTextHoverMap.put(contentType, gradleTextHover);
+		}
+		return gradleTextHover;
 	}
 	
 	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover{

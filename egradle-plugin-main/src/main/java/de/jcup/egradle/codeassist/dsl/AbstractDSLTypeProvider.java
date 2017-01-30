@@ -52,11 +52,12 @@ public abstract class AbstractDSLTypeProvider implements TypeProvider {
 		try {
 			type = fileLoader.loadType(name);
 		} catch (IOException e) {
-			/*
-			 * FIXME ATR, 28.01.2017: it can often be normal to not resolve an
-			 * external type - handle this  better! e.g. java.lang.* cannot be available...
-			 */
-			getErrorHandler().handleError("Cannot load dsl type:" + name, e);
+//			/*
+//			 * FIXME ATR, 28.01.2017: it can often be normal to not resolve an
+//			 * external type - handle this  better! e.g. java.lang.* cannot be available...
+//			 */
+//			getErrorHandler().handleError("Cannot load dsl type:" + name, e);
+			/* ignore*/
 		}
 		if (type == null) {
 			unresolveableNames.add(name);
