@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Slider;
 
 /**
  * EGradles own simple browser information control, inspired by
- * "BrowserInformationControl"}. Because the eclipse control is internal,so an
+ * "BrowserInformationControl"}. Because the eclipse control is internal an
  * own implementation was necessary.
  */
 public class SimpleBrowserInformationControl extends AbstractInformationControl {
@@ -66,16 +66,25 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	@Override
 	public void setInformation(String information) {
 		this.information = information;
-		if (browser != null) {
+		if (isBrowserNotDisposed()) {
 			StringBuilder htmlSb = new StringBuilder();
 			htmlSb.append("<html><body>");
 			htmlSb.append(information);
 			htmlSb.append("</body></html>");
 
-			browser.setText(htmlSb.toString());
+			boolean success = browser.setText(htmlSb.toString());
+			if (!success){
+				/* FIXME ATR, 01.02.2017: implement better.. and remove sysout */
+				System.out.println("error cannot set text");
+			}
 		}
 	}
 
+	public void redraw(){
+		if (isBrowserNotDisposed()){
+			browser.redraw();
+		}
+	}
 	/**
 	 * Tells whether this control is available for given parent composite
 	 * 

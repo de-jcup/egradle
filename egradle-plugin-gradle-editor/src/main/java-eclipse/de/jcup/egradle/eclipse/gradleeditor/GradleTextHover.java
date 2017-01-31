@@ -28,6 +28,7 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
@@ -209,8 +210,31 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 					@Override
 					public void changed(LocationEvent event) {
 						System.out.println(GradleTextHover.class.getSimpleName() + "-locationevent:" + event);
+						String newLocation = event.location;
+						if (newLocation.startsWith("type://")){
+							/* FIXME ATR, 31.01.2017: implement real loading */
+							EGradleUtil.safeAsyncExec(new Runnable(){
+
+								@Override
+								public void run() {
+									control.setInformation("<html><bod>New location should be:"+newLocation+"</body></html>");
+									control.redraw();
+								}
+								
+							});
+						}
+					}
+					
+					@Override
+					public void changing(LocationEvent event) {
+						System.out.println(GradleTextHover.class.getSimpleName() + "-locationevent:" + event);
+						String newLocation = event.location;
+						if (newLocation.startsWith("type://")){
+							event.doit=true;
+						}
 					}
 				});
+				
 				return control;
 			} else {
 				return new DefaultInformationControl(parent, true);
