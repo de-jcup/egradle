@@ -1,11 +1,16 @@
 package de.jcup.egradle.eclipse.gradleeditor.control;
 
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ToolBarManager;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.AbstractInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.LocationAdapter;
+import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.browser.OpenWindowListener;
 import org.eclipse.swt.browser.WindowEvent;
@@ -15,6 +20,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Slider;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * EGradles own simple browser information control, inspired by
@@ -28,12 +35,39 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	private static Point cachedScrollBarSize;
 	private String information;
 	private Browser browser;
-
+	private BrowserLinkListener browserLinkListener;
+	private boolean linksEnabled;
+	private OpenWindowListener windowListener;
+	private LocationListener locationListener;
+	
+	/**
+	 * Creates an simple browser information control being resizable, providing NO toolbar and
+	 * does NOT support hyper link listening
+	 * @param parentShell
+	 */
 	public SimpleBrowserInformationControl(Shell parentShell) {
 		super(parentShell, true);
+		this.linksEnabled=false;
+		create();
+	}
+	
+	/**
+	 * Creates an simple browser information control being resizable, providing a toolbar and
+	 * uses hyperlink listener 
+	 * 
+	 * @param parentShell
+	 * @param style
+	 */
+	SimpleBrowserInformationControl(Shell parentShell, int style) {
+		super(parentShell, new ToolBarManager(style));
+		this.linksEnabled=true;
 		create();
 	}
 
+	public void setBrowserLinkListener(BrowserLinkListener browserLinkListener) {
+		this.browserLinkListener = browserLinkListener;
+	}
+	
 	@Override
 	public void setBackgroundColor(Color background) {
 		super.setBackgroundColor(background);
@@ -51,32 +85,21 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	}
 
-	public void add(LocationListener locationListener) {
-		if (isBrowserNotDisposed()) {
-			browser.addLocationListener(locationListener);
-		}
-	}
-
-	public void remove(LocationListener locationListener) {
-		if (isBrowserNotDisposed()) {
-			browser.removeLocationListener(locationListener);
-		}
-	}
 
 	@Override
 	public void setInformation(String information) {
 		this.information = information;
 		if (isBrowserNotDisposed()) {
+			boolean hasHtmlElementInside = information.startsWith("<html");
 			StringBuilder htmlSb = new StringBuilder();
-			htmlSb.append("<html><body>");
-			htmlSb.append(information);
-			htmlSb.append("</body></html>");
-
-			boolean success = browser.setText(htmlSb.toString());
-			if (!success){
-				/* FIXME ATR, 01.02.2017: implement better.. and remove sysout */
-				System.out.println("error cannot set text");
+			if (!hasHtmlElementInside){
+				htmlSb.append("<html><body>");
 			}
+			htmlSb.append(information);
+			if (!hasHtmlElementInside){
+				htmlSb.append("</body></html>");
+			}
+			browser.setText(htmlSb.toString());
 		}
 	}
 
@@ -144,12 +167,59 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 												// | SWT.RESIZE);
 		browser.setJavascriptEnabled(false);
 
-		browser.addOpenWindowListener(new OpenWindowListener() {
+		if (linksEnabled){
+			Action browsBackitem = new Action() {
+				@Override
+				public void run() {
+					if (browser.isBackEnabled()){
+						browser.back();
+					}
+				}
+				
+			};
+			
+			ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
+			ImageDescriptor back = sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_BACK);
+			browsBackitem.setText("back");
+			browsBackitem.setImageDescriptor(back);
+			ToolBarManager toolBarManager = getToolBarManager();
+			toolBarManager.add(browsBackitem);
+			toolBarManager.update(true);
+		}
+		
+		windowListener = new OpenWindowListener() {
 			@Override
 			public void open(WindowEvent event) {
 				event.required = true; // Cancel opening of new windows
 			}
-		});
+		};
+		locationListener = new LocationAdapter() {
+
+			@Override
+			public void changing(LocationEvent event) {
+				if (event.location == "about:blank") {
+					event.doit = false;
+				}
+			}
+			
+			@Override
+			public void changed(LocationEvent event) {
+				if (!linksEnabled){
+					return;
+				}	
+				String newLocation = event.location;
+				if (newLocation==null){
+					return;
+				}
+				if (browserLinkListener!=null){
+					browserLinkListener.onHyperlinkClicked(SimpleBrowserInformationControl.this, newLocation);
+				}
+			}
+		};
+		
+		browser.addOpenWindowListener(windowListener);
+		browser.addLocationListener(locationListener);
+		
 		/* disable browser menu */
 		browser.setMenu(new Menu(getShell(), SWT.NONE));
 
@@ -159,6 +229,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	public void dispose() {
 		super.dispose();
 		if (isBrowserNotDisposed()) {
+			browser.removeOpenWindowListener(windowListener);
+			browser.removeLocationListener(locationListener);
+
 			browser.dispose();
 		}
 	}
@@ -187,11 +260,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		return new IInformationControlCreator() {
 			@Override
 			public IInformationControl createInformationControl(Shell parent) {
-				/*
-				 * TODO ATR: maybe provide another control here in future ?
-				 * -with control back /forward ?
-				 */
-				return new SimpleBrowserInformationControl(parent);
+				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent,SWT.NONE);
+				newControl.setBrowserLinkListener(browserLinkListener);
+				return newControl;
 			}
 		};
 	}

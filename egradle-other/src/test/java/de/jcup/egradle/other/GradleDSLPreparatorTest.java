@@ -57,7 +57,20 @@ public class GradleDSLPreparatorTest {
 	@Test
 	public void testJavaDocLink3(){
 		String line = "More examples in docs for {@link EclipseProject}, {@link EclipseClasspath}, {@link EclipseWtp} ";
-		String expected = "More examples in docs for <a href='type://EclipseProject'>EclipseProject</a>, <a href='type://EclipseClasspath'>EclipseClasspath</a>, <a href='type://EclipseClasspath'>EclipseClasspath</a>";
+		String expected = "More examples in docs for "
+				+ "<a href='type://EclipseProject'>EclipseProject</a>, "
+				+ "<a href='type://EclipseClasspath'>EclipseClasspath</a>, "
+				+ "<a href='type://EclipseWtp'>EclipseWtp</a> ";
+		assertEquals(expected, preparatorToTest.convertLine(line));
+	}
+	
+	@Test
+	public void testJavaDocLink4_mixed_arguments(){
+		String line = "More examples in docs for {@link EclipseProject}, {@return EclipseClasspath}, {@link EclipseWtp} ";
+		String expected = "More examples in docs for "
+				+ "<a href='type://EclipseProject'>EclipseProject</a>, "
+				+ "{@return EclipseClasspath}, "
+				+ "<a href='type://EclipseWtp'>EclipseWtp</a> ";
 		assertEquals(expected, preparatorToTest.convertLine(line));
 	}
 	

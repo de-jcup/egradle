@@ -30,6 +30,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
+import de.jcup.egradle.eclipse.gradleeditor.control.BrowserLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
@@ -86,9 +87,10 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 				for (Parameter param : params) {
 					Type type = param.getType();
 					/*
-					 * FIXME ATR, 30.01.2017: problematic - at this point often got only
-					 * "closure" as type not the wanted one. this must be made
-					 * available by xml data - or by inspecting the javadoc of method
+					 * FIXME ATR, 30.01.2017: problematic - at this point often
+					 * got only "closure" as type not the wanted one. this must
+					 * be made available by xml data - or by inspecting the
+					 * javadoc of method
 					 */
 					if (type != null) {
 						description.append("closure block type:" + type.getName());
@@ -206,35 +208,15 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public IInformationControl createInformationControl(Shell parent) {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.add(new LocationAdapter() {
-					@Override
-					public void changed(LocationEvent event) {
-						System.out.println(GradleTextHover.class.getSimpleName() + "-locationevent:" + event);
-						String newLocation = event.location;
-						if (newLocation.startsWith("type://")){
-							/* FIXME ATR, 31.01.2017: implement real loading */
-							EGradleUtil.safeAsyncExec(new Runnable(){
-
-								@Override
-								public void run() {
-									control.setInformation("<html><bod>New location should be:"+newLocation+"</body></html>");
-									control.redraw();
-								}
-								
-							});
-						}
-					}
+				control.setBrowserLinkListener(new BrowserLinkListener() {
 					
 					@Override
-					public void changing(LocationEvent event) {
-						System.out.println(GradleTextHover.class.getSimpleName() + "-locationevent:" + event);
-						String newLocation = event.location;
-						if (newLocation.startsWith("type://")){
-							event.doit=true;
+					public void onHyperlinkClicked(IInformationControl control, String target) {
+						if (target.startsWith("type://")){
+							control.setInformation("<html><bod>New location should be:"+target+"</body></html>");
 						}
 					}
 				});
-				
 				return control;
 			} else {
 				return new DefaultInformationControl(parent, true);
