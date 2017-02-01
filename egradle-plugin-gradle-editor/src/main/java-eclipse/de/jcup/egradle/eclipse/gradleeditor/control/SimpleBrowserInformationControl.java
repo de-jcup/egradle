@@ -1,5 +1,8 @@
 package de.jcup.egradle.eclipse.gradleeditor.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -23,6 +26,8 @@ import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
+import de.jcup.egradle.core.api.History;
+
 /**
  * EGradles own simple browser information control, inspired by
  * "BrowserInformationControl"}. Because the eclipse control is internal an
@@ -33,12 +38,13 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	private static boolean browserAvailabilityChecked;
 	private static boolean swtBrowserCanBeUsed;
 	private static Point cachedScrollBarSize;
-	private String information;
+	private String currentHTML;
 	private Browser browser;
 	private BrowserLinkListener browserLinkListener;
 	private boolean linksEnabled;
 	private OpenWindowListener windowListener;
 	private LocationListener locationListener;
+	private History<String> history;
 	
 	/**
 	 * Creates an simple browser information control being resizable, providing NO toolbar and
@@ -47,6 +53,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	 */
 	public SimpleBrowserInformationControl(Shell parentShell) {
 		super(parentShell, true);
+		this.history=new History<>(0);
 		this.linksEnabled=false;
 		create();
 	}
@@ -58,8 +65,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	 * @param parentShell
 	 * @param style
 	 */
-	SimpleBrowserInformationControl(Shell parentShell, int style) {
-		super(parentShell, new ToolBarManager(style));
+	SimpleBrowserInformationControl(Shell parentShell, int maximumHistory) {
+		super(parentShell, new ToolBarManager());
+		this.history=new History<>(maximumHistory);
 		this.linksEnabled=true;
 		create();
 	}
@@ -88,7 +96,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	@Override
 	public void setInformation(String information) {
-		this.information = information;
+		if (information==null){
+			information="";
+		}
 		if (isBrowserNotDisposed()) {
 			boolean hasHtmlElementInside = information.startsWith("<html");
 			StringBuilder htmlSb = new StringBuilder();
@@ -99,7 +109,8 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 			if (!hasHtmlElementInside){
 				htmlSb.append("</body></html>");
 			}
-			browser.setText(htmlSb.toString());
+			this.currentHTML = htmlSb.toString();
+			browser.setText(information);
 		}
 	}
 
@@ -147,7 +158,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	@Override
 	public boolean hasContents() {
-		return information != null && information.length() > 0;
+		return currentHTML != null && currentHTML.length() > 0;
 	}
 
 	int getToolbarWidth() {
@@ -159,6 +170,8 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		assertAvailable();
 		return cachedScrollBarSize.x;
 	}
+	
+	
 
 	@Override
 	protected void createContent(Composite parent) {
@@ -166,14 +179,16 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser = new Browser(parent, SWT.FILL);// , SWT.H_SCROLL | SWT.V_SCROLL
 												// | SWT.RESIZE);
 		browser.setJavascriptEnabled(false);
-
+	
 		if (linksEnabled){
 			Action browsBackitem = new Action() {
 				@Override
 				public void run() {
-					if (browser.isBackEnabled()){
-						browser.back();
+					String backContent = history.goBack();
+					if (backContent==null){
+						return;
 					}
+					setInformation(backContent);
 				}
 				
 			};
@@ -212,7 +227,13 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 					return;
 				}
 				if (browserLinkListener!=null){
-					browserLinkListener.onHyperlinkClicked(SimpleBrowserInformationControl.this, newLocation);
+					SimpleBrowserInformationControl control = SimpleBrowserInformationControl.this;
+					if (browserLinkListener.isAcceptingHyperlink(newLocation)) {
+						if (isBrowserNotDisposed()){
+							history.add(currentHTML);
+							browserLinkListener.onHyperlinkClicked(control, newLocation);
+						}
+					}
 				}
 			}
 		};
@@ -260,7 +281,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		return new IInformationControlCreator() {
 			@Override
 			public IInformationControl createInformationControl(Shell parent) {
-				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent,SWT.NONE);
+				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent,5);
 				newControl.setBrowserLinkListener(browserLinkListener);
 				return newControl;
 			}

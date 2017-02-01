@@ -13,8 +13,6 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.swt.browser.LocationAdapter;
-import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
@@ -28,7 +26,6 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.BrowserLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
@@ -209,12 +206,15 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
 				control.setBrowserLinkListener(new BrowserLinkListener() {
-					
+
 					@Override
 					public void onHyperlinkClicked(IInformationControl control, String target) {
-						if (target.startsWith("type://")){
-							control.setInformation("<html><bod>New location should be:"+target+"</body></html>");
-						}
+						control.setInformation("<html><bod>New location should be:" + target + "</body></html>");
+					}
+
+					@Override
+					public boolean isAcceptingHyperlink(String target) {
+						return target.startsWith("type://");
 					}
 				});
 				return control;
