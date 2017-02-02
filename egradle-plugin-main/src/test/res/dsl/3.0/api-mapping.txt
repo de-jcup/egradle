@@ -1,0 +1,2 @@
+Delete:org.gradle.api.tasks.Delete;
+ShortNameTestAction:org.gradle.api.TestAction;

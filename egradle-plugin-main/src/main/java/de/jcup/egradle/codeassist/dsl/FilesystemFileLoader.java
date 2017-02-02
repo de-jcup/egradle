@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -14,17 +15,22 @@ public class FilesystemFileLoader implements DSLFileLoader {
 	private File dslFolder;
 	private XMLDSLTypeImporter typeImporter;
 	private XMLDSLPluginsImporter pluginsImporter;
+	private ApiMappingImporter apiMappingImporter;
 	private static final Pattern PATTERN_EVERY_DOT = Pattern.compile("\\.");
 
-	public FilesystemFileLoader(XMLDSLTypeImporter typeImporter, XMLDSLPluginsImporter pluginsImporter) {
+	public FilesystemFileLoader(XMLDSLTypeImporter typeImporter, XMLDSLPluginsImporter pluginsImporter, ApiMappingImporter apiMappingImporter) {
 		if (typeImporter == null) {
 			throw new IllegalArgumentException("typeImporter must not be null!");
 		}
 		if (pluginsImporter == null) {
 			throw new IllegalArgumentException("pluginsImporter must not be null!");
 		}
+		if (apiMappingImporter == null) {
+			throw new IllegalArgumentException("apiMappingImporter must not be null!");
+		}
 		this.typeImporter = typeImporter;
 		this.pluginsImporter = pluginsImporter;
+		this.apiMappingImporter=apiMappingImporter;
 	}
 
 	public void setDSLFolder(File folder) {
@@ -73,11 +79,30 @@ public class FilesystemFileLoader implements DSLFileLoader {
 		if (!sourceFile.exists()) {
 			throw new FileNotFoundException("Did not found:" + sourceFile);
 		}
-		InputStream stream = new FileInputStream(sourceFile);
+		try(InputStream stream = new FileInputStream(sourceFile)){
+			Set<Plugin> plugins = pluginsImporter.importPlugins(stream);
+			return plugins;
+			
+		}
 
-		Set<Plugin> plugins = pluginsImporter.importPlugins(stream);
+	}
 
-		return plugins;
+	@Override
+	public Map<String, String> loadApiMappings() throws IOException {
+		Map<String, String> alternative;
+		Map<String, String> origin;
+		/* first load alternate api mapping */
+		try(InputStream stream = new FileInputStream(new File(dslFolder,"alternative-api-mapping.txt"))){
+			alternative = apiMappingImporter.importMapping(stream);
+		}
+		/* second load origin api mapping. */
+		try(InputStream stream = new FileInputStream(new File(dslFolder,"api-mapping.txt"))){
+			origin = apiMappingImporter.importMapping(stream);
+		}
+		/* merge results, origin api wins, if there are conflicts */
+		Map<String, String> result= alternative;
+		result.putAll(origin);
+		return result;
 	}
 
 	public class DSLFolderNotSetException extends IOException {

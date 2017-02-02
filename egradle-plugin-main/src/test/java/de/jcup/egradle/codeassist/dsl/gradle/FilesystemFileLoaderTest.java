@@ -1,28 +1,26 @@
 package de.jcup.egradle.codeassist.dsl.gradle;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
 
+import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
+import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader.DSLFolderNotSetException;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
-import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader.DSLFolderNotSetException;
 import de.jcup.egradle.core.TestUtil;
-
-import static org.mockito.Mockito.*;
 public class FilesystemFileLoaderTest {
 
 	@Rule
@@ -30,24 +28,39 @@ public class FilesystemFileLoaderTest {
 	private File dslFolder;
 	private XMLDSLTypeImporter mockedTypeImporter;
 	private XMLDSLPluginsImporter mockedPluginsImporter;
+	private ApiMappingImporter mockedApiMappingImporter;
 	
 	@Before
 	public void before(){
 		dslFolder = new File(TestUtil.PARENT_OF_TEST,"dsl/3.0");
 		mockedTypeImporter = mock(XMLDSLTypeImporter.class);
 		mockedPluginsImporter = mock(XMLDSLPluginsImporter.class);
+		mockedApiMappingImporter = mock(ApiMappingImporter.class);
+	}
+	
+
+	public void filesystem_loader_constructor_with_null_apiImporter_importers_throws_illegal_argument() {
+		expectedException.expect(IllegalArgumentException.class);
+		new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter, null);
 	}
 	
 	@Test
-	public void filesystem_loader_constructor_with_null_importer_throws_illegal_argument() {
+	public void filesystem_loader_constructor_with_null_typeImporter_importers_throws_illegal_argument() {
 		expectedException.expect(IllegalArgumentException.class);
-		new FilesystemFileLoader(null, null);
+		new FilesystemFileLoader(null, mockedPluginsImporter, mockedApiMappingImporter);
 	}
+	
+	@Test
+	public void filesystem_loader_constructor_with_null_pluginImporter_importers_throws_illegal_argument() {
+		expectedException.expect(IllegalArgumentException.class);
+		new FilesystemFileLoader(mockedTypeImporter, null, mockedApiMappingImporter);
+	}
+	
 	//testfile_type_Action_xml__is_loaded_for_type_Action_and_contains_data
 	@Test
 	public void calls_xmlimporter_and_returns_importer_result() throws Exception {
 		/* prepare */
-		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter,mockedPluginsImporter);
+		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter,mockedPluginsImporter, mockedApiMappingImporter);
 		loaderToTest.setDSLFolder(dslFolder);
 		
 		Type mockedType = mock(Type.class);
@@ -65,7 +78,7 @@ public class FilesystemFileLoaderTest {
 	@Test
 	public void throws_file_notfound_exception_when_file_not_available() throws Exception {
 		/* prepare */
-		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter);
+		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter, mockedApiMappingImporter);
 		loaderToTest.setDSLFolder(dslFolder);
 		Type mockedType = mock(Type.class);
 		when(mockedTypeImporter.importType(any(InputStream.class))).thenReturn(mockedType);
@@ -81,7 +94,7 @@ public class FilesystemFileLoaderTest {
 	@Test
 	public void throws_io_exception_when_dslfolder_not_set() throws Exception {
 		/* prepare */
-		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter);
+		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter, mockedApiMappingImporter);
 		loaderToTest.setDSLFolder(null);
 		
 

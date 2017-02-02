@@ -15,15 +15,18 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLProperty;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
+import de.jcup.egradle.core.api.LinkToTypeConverter;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
@@ -36,12 +39,14 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	private ISourceViewer sourceViewer;
 	private String contentType;
 	private GradleTextHoverControlCreator creator;
+	private LinkToTypeConverter linkToTypeConverter;
 
 	public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer,
 			String contentType) {
 		this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
 		this.sourceViewer = sourceViewer;
 		this.contentType = contentType;
+		this.linkToTypeConverter = new LinkToTypeConverter();
 	}
 
 	@Override
@@ -79,21 +84,23 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			description.append("Mehod:" + method.getName());
 			description.append("<br>");
 			description.append(method.getDescription());
-			if (data.item.isClosureBlock()) {
-				List<Parameter> params = method.getParameters();
-				for (Parameter param : params) {
-					Type type = param.getType();
-					/*
-					 * FIXME ATR, 30.01.2017: problematic - at this point often
-					 * got only "closure" as type not the wanted one. this must
-					 * be made available by xml data - or by inspecting the
-					 * javadoc of method
-					 */
-					if (type != null) {
-						description.append("closure block type:" + type.getName());
-						description.append("<br>");
-						description.append(type.getDescription());
-						break;
+			if (data != null) {
+				if (data.item.isClosureBlock()) {
+					List<Parameter> params = method.getParameters();
+					for (Parameter param : params) {
+						Type type = param.getType();
+						/*
+						 * FIXME ATR, 30.01.2017: problematic - at this point
+						 * often got only "closure" as type not the wanted one.
+						 * this must be made available by xml data - or by
+						 * inspecting the javadoc of method
+						 */
+						if (type != null) {
+							description.append("closure block type:" + type.getName());
+							description.append("<br>");
+							description.append(type.getDescription());
+							break;
+						}
 					}
 				}
 			}
@@ -120,9 +127,11 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			}
 
 		} else if (element instanceof Type) {
-			if (data.result.isTypeFromExtensionConfigurationPoint()) {
-				description.append("Extension name:" + data.result.getExtensionName());
-				description.append("<br>");
+			if (data != null) {
+				if (data.result.isTypeFromExtensionConfigurationPoint()) {
+					description.append("Extension name:" + data.result.getExtensionName());
+					description.append("<br>");
+				}
 			}
 			description.append("Type:" + element.getName());
 			description.append("<br>");
@@ -209,12 +218,43 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 					@Override
 					public void onHyperlinkClicked(IInformationControl control, String target) {
+						String convertedName = linkToTypeConverter.convertLink(target);
+						if (convertedName == null) {
+							showFallBackInfo(target);
+							return;
+						}
+						CodeCompletionRegistry registry = Activator.getDefault().getCodeCompletionRegistry();
+						if (registry == null) {
+							showFallBackInfo("Code completion registry not available!");
+							return;
+						}
+						GradleDSLTypeProvider provider = registry.getService(GradleDSLTypeProvider.class);
+						if (provider == null) {
+							showFallBackInfo("Type provider not available!");
+							return;
+						}
+
+						/*
+						 * FIXME ATR, 02.02.2017: works currently not correct
+						 * because target parts ends with /!?!?!?
+						 */
+
+						Type type = provider.getType(convertedName);
+						if (type == null) {
+							showFallBackInfo(convertedName);
+							return;
+						}
+						control.setInformation(buildDescription(null, type));
+
+					}
+
+					private void showFallBackInfo(String target) {
 						control.setInformation("<html><bod>New location should be:" + target + "</body></html>");
 					}
 
 					@Override
 					public boolean isAcceptingHyperlink(String target) {
-						return target.startsWith("type://");
+						return linkToTypeConverter.isLinkSchemaConvertable(target);
 					}
 				});
 				return control;

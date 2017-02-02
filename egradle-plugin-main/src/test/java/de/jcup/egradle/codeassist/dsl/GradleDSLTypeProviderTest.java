@@ -3,10 +3,12 @@ package de.jcup.egradle.codeassist.dsl;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.dsl.AbstractDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
@@ -14,7 +16,7 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 public class GradleDSLTypeProviderTest {
 
 	private DSLFileLoader mockedDSLFileLoader;
-	private AbstractDSLTypeProvider typeProviderToTest;
+	private GradleDSLTypeProvider typeProviderToTest;
 
 	//// C:\dev_custom\projects\JCUP\gradle\subprojects\docs\build\src-egradle\egradle-dsl
 	@Before
@@ -22,6 +24,30 @@ public class GradleDSLTypeProviderTest {
 		mockedDSLFileLoader = mock(DSLFileLoader.class);
 		
 		typeProviderToTest = new GradleDSLTypeProvider(mockedDSLFileLoader);
+	}
+	
+	@Test
+	public void type_provider_loads_mappings_by_apimapping_importer_only_one_time_next_type_resolving_for_other_type_does_not_load() throws Exception{
+		/* prepare */
+		Map<String, String> map = new TreeMap<>();
+		map.put("shortName1","long.name1");
+		map.put("shortName2","long.name2");
+		
+		when(mockedDSLFileLoader.loadApiMappings()).thenReturn(map);
+		
+		Type longName1Type =  mock(Type.class);
+		Type longName2Type =  mock(Type.class);
+		when(mockedDSLFileLoader.loadType("long.name1")).thenReturn(longName1Type);
+		when(mockedDSLFileLoader.loadType("long.name2")).thenReturn(longName2Type);
+		
+		/* execute */
+		Type typeResultForShortName1 = typeProviderToTest.getType("shortName1");
+		Type typeResultForShortName2 = typeProviderToTest.getType("shortName2");
+		
+		/* test */
+		verify(mockedDSLFileLoader,times(1)).loadApiMappings();
+		assertEquals(typeResultForShortName1,longName1Type);
+		assertEquals(typeResultForShortName2,longName2Type);
 	}
 	
 	@Test
@@ -67,4 +93,5 @@ public class GradleDSLTypeProviderTest {
 		assertEquals(value, typeProviderToTest.getType("something"));
 		
 	}
+	
 }

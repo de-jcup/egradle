@@ -19,7 +19,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
-import de.jcup.egradle.codeassist.dsl.AbstractDSLTypeProvider;
+import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
@@ -28,7 +28,6 @@ import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -66,13 +65,18 @@ public class Activator extends AbstractUIPlugin {
 		/* init code completion parts */
 		XMLDSLTypeImporter typeImporter = new XMLDSLTypeImporter();
 		XMLDSLPluginsImporter pluginsImporter = new XMLDSLPluginsImporter();
+		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter,apiMappingImporter);
 		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter);
-		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("dsl/gradle/3.0"));
+		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("sdk/1.0.0/gradle"));
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 		/* install dsl type provider as service, so it must be definitely used shared...*/
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
+		
+		/* load project per default so show up time for tooltips faster*/
+		gradleDslProvider.getType("org.gradle.api.Project");
+		
 	}
 
 	public void stop(BundleContext context) throws Exception {

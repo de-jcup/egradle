@@ -1,5 +1,6 @@
 package de.jcup.egradle.other;
 
+import java.awt.image.BufferedImageFilter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,10 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -28,7 +31,7 @@ import org.apache.commons.io.FileUtils;
  * @author Albert Tregnaghi
  *
  */
-public class GradleDSLPreparator {
+public class SDKBuilder {
 
 	/*
 	 * FIXME ATR, 20.01.2017: docbook does know the target!
@@ -36,7 +39,7 @@ public class GradleDSLPreparator {
 	 * BlockDetailRenderer.java
 	 */
 	public static void main(String[] args) throws IOException {
-		new GradleDSLPreparator("./../../gradle/subprojects/docs").startTransformToUserHome("3.0");
+		new SDKBuilder("./../../gradle/subprojects/docs").startTransformToUserHome("3.0", "1.0.0");
 		;
 	}
 	/*
@@ -47,19 +50,22 @@ public class GradleDSLPreparator {
 
 	private File gradleEGradleDSLRootFolder;
 	private File gradleOriginPluginsFile;
+	private File gradleOriginMappingFile;
 
 	/**
 	 * Only for tests
 	 */
-	GradleDSLPreparator() {
+	SDKBuilder() {
 
 	}
 
-	public GradleDSLPreparator(String pathToData) throws IOException {
+	public SDKBuilder(String pathToData) throws IOException {
 		gradleEGradleDSLRootFolder = new File(pathToData, "/build/src-egradle/egradle-dsl");
 		gradleOriginPluginsFile = new File(pathToData, "/src/docs/dsl/plugins.xml");
-
+		gradleOriginMappingFile = new File(pathToData, "/build/generated-resources/main/api-mapping.txt");
+		
 		assertFileExists(gradleOriginPluginsFile);
+		assertFileExists(gradleOriginMappingFile);
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
 	}
 
@@ -82,10 +88,13 @@ public class GradleDSLPreparator {
 		}
 	}
 
-	private void startTransformToUserHome(String version) throws IOException {
-		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, version);
-		FileUtils.copyFile(gradleOriginPluginsFile, new File(sourceParentDirectory, gradleOriginPluginsFile.getName()));
+	private void startTransformToUserHome(String gradleVersion, String targetSDKVersion) throws IOException {
+		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
+
+		
+		FileUtils.copyFile(gradleOriginPluginsFile, new File(sourceParentDirectory, gradleOriginPluginsFile.getName()));
+		FileUtils.copyFile(gradleOriginMappingFile, new File(sourceParentDirectory, gradleOriginMappingFile.getName()));
 
 		/* healthy check: */
 		File healthCheck = new File(sourceParentDirectory, "org/gradle/api/Project.xml");
@@ -95,39 +104,73 @@ public class GradleDSLPreparator {
 					+ "\nEither your path or version is incorrect or you forgot to generate...");
 		}
 		String userHome = System.getProperty("user.home");
-		File targetPathDirectory = new File(userHome, ".egradle/dsl/gradle/" + version);
+		File targetPathDirectory = new File(userHome, ".egradle/sdk/"+targetSDKVersion+"/gradle/");
 		if (targetPathDirectory.exists()) {
 			System.out.println(
 					"Target directory exists - will be deleted before:" + targetPathDirectory.getCanonicalPath());
 			FileUtils.deleteDirectory(targetPathDirectory);
 		}
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
-		inspectFilesAdoptAndGenerateTarget(sourceParentDirectory, targetPathDirectory);
+		/* create alternative api-mapping because e.g EclipseWTP is not listed in orgin mapping file!*/
+		Map<String,String> alternativeApiMapping = new TreeMap<>();
+		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory);
+		System.out.println("- generate alternative api mapping file");
+		StringBuilder sb = new StringBuilder();
+		boolean first=true;
+		for (String shortName: alternativeApiMapping.keySet()){
+			if(first){
+				first=false;
+			}else{
+				sb.append("\n");
+			}
+			sb.append(shortName);
+			sb.append(':');
+			sb.append(alternativeApiMapping.get(shortName));
+			sb.append(';');
+		}
+		File alternativeApiMappingFile = new File(targetPathDirectory,"alternative-api-mapping.txt");
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))){
+			bw.write(sb.toString());
+		}
+		
 		System.out.println("DONE");
 	}
 
-	private void inspectFilesAdoptAndGenerateTarget(File sourceDir, File targetDir) throws IOException {
+	private void inspectFilesAdoptAndGenerateTarget(Map<String,String> alternativeApiMapping, File sourceDir, File targetDir) throws IOException {
 		for (File newSourceFile : sourceDir.listFiles()) {
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
-				inspectFilesAdoptAndGenerateTarget(newSourceFile, newTargetDir);
+				inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, newSourceFile, newTargetDir);
 			} else if (newSourceFile.isFile()) {
 				File newTargetFile = new File(targetDir, name);
 
-				String changedSource = readAndAdopt(newSourceFile);
+				String changedSource = readAndAdopt(alternativeApiMapping, newSourceFile);
 				write(changedSource, newTargetFile);
 			}
 		}
 	}
 
-	private String readAndAdopt(File sourceFile) throws IOException {
+	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader(sourceFile))) {
 			String line = "";
+			boolean foundType=false;
 			while ((line = reader.readLine()) != null) {
 				if (sb.length() != 0) {
 					sb.append("\n");
+				}
+				if (!foundType){
+					if (line.trim().startsWith("<type")){
+						foundType=true;
+						String name = StringUtils.substringBetween(line, "name=\"", "\"");
+						if (name==null){
+							System.err.println("WARN:name=null for line:"+line);
+						}else{
+							String shortName = FilenameUtils.getBaseName(sourceFile.getName());
+							alternativeApiMapping.put(shortName, name);
+						}
+					}
 				}
 				String adoptedLine = convertLine(line);
 				sb.append(adoptedLine);
@@ -143,11 +186,6 @@ public class GradleDSLPreparator {
 		return result;
 	}
 
-	private static final Pattern PATTERN_JAVADOC_LINK = Pattern.compile(buildReplaceJavadocPattern("link"));
-
-	private static String buildReplaceJavadocPattern(String javaDocTag) {
-		return "([^{]*)\\{@" + javaDocTag + "\\s*([0-9|a-z|A-Z|\\.]*)\\s*\\}";
-	}
 
 	private abstract class ContentReplacer {
 
@@ -221,11 +259,6 @@ public class GradleDSLPreparator {
 	}
 
 	private String replaceJavaDocLinksWithHTMLLink(String line) {
-		// Matcher matcher = PATTERN_JAVADOC_LINK.matcher(line);
-		// while (matcher.matches()) {
-		// line = matcher.replaceAll("$1<a href='type://$2'>$2</a>");
-		// matcher = PATTERN_JAVADOC_LINK.matcher(line);
-		// }
 		String replaced = replaceJavaDoc(line, "@link", new ContentReplacer() {
 
 			@Override
