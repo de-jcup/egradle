@@ -13,6 +13,9 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
@@ -29,9 +32,13 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.Esti
 import de.jcup.egradle.core.api.LinkToTypeConverter;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
-import de.jcup.egradle.eclipse.gradleeditor.control.BrowserLinkListener;
+import de.jcup.egradle.eclipse.gradleeditor.control.BrowserEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
@@ -81,8 +88,8 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		StringBuilder description = new StringBuilder();
 		if (element instanceof Method) {
 			Method method = (Method) element;
-			description.append("Mehod:" + method.getName());
-			description.append("<br>");
+			description.append("<h3>Mehod:" + method.getName());
+			description.append("</h3>");
 			description.append(method.getDescription());
 			if (data != null) {
 				if (data.item.isClosureBlock()) {
@@ -133,11 +140,57 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 					description.append("<br>");
 				}
 			}
-			description.append("Type:" + element.getName());
-			description.append("<br>");
+			description.append("<h3>Type:" + element.getName());
+			description.append("</h3>");
+			
+			/* FIXME ATR, 02.02.2017: make the origin doc url parts configurable in prefs or in sdk!*/
+			String linkToGradleOriginDoc =
+			"https://docs.gradle.org/3.0/dsl/"+element.getName()+".html";
+			
+			description.append("<br><table style='background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;'><tr><td><a href='");
+			description.append(linkToGradleOriginDoc);
+			description.append("''>Link to origin gradle doc (internet connection necessary)");
+			description.append("</a><br><i>(URL=");
+			description.append(linkToGradleOriginDoc);
+			description.append(")</i></td></tr></table><br>");
 			description.append(element.getDescription());
 		}
-		return "<html><body>" + description + "</body></html>";
+		StringBuilder style = new StringBuilder();
+		if (sourceViewer!=null){
+			StyledText textWidget = sourceViewer.getTextWidget();
+			if (textWidget!=null){
+				/* TODO ATR, 03.02.2017: there should be an easier approach to get editors back and foreground, without syncexec */
+				EGradleUtil.getSafeDisplay().syncExec(new Runnable() {
+					
+					@Override
+					public void run() {
+						String bgColor = convertToHexColor(textWidget.getBackground());
+						String fgColor = convertToHexColor(textWidget.getForeground());
+						if (bgColor!=null && fgColor!=null){
+							style.append("body{");
+							style.append("color:").append(fgColor);
+							style.append(";background-color:").append(bgColor);
+							style.append("}");
+						}
+						
+					}
+				});
+			}
+			
+		}
+		style.append("pre {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
+		style.append("a {color: #229922;}");
+		
+		return "<html><head><style>"+style.toString()+"</style></head><body>" + description + "</body></html>";
+	}
+	
+	private String convertToHexColor(Color color){
+		if (color ==null){
+			return null;
+		}
+		RGB rgb = color.getRGB();
+		String hex = String.format("#%02x%02x%02x", rgb.red, rgb.green,rgb.blue);
+		return hex;
 	}
 
 	@Override
@@ -214,10 +267,10 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public IInformationControl createInformationControl(Shell parent) {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.setBrowserLinkListener(new BrowserLinkListener() {
+				control.setBrowserEGradleLinkListener(new BrowserEGradleLinkListener() {
 
 					@Override
-					public void onHyperlinkClicked(IInformationControl control, String target) {
+					public void onEGradleHyperlinkClicked(IInformationControl control, String target) {
 						String convertedName = linkToTypeConverter.convertLink(target);
 						if (convertedName == null) {
 							showFallBackInfo(target);
@@ -233,11 +286,6 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 							showFallBackInfo("Type provider not available!");
 							return;
 						}
-
-						/*
-						 * FIXME ATR, 02.02.2017: works currently not correct
-						 * because target parts ends with /!?!?!?
-						 */
 
 						Type type = provider.getType(convertedName);
 						if (type == null) {

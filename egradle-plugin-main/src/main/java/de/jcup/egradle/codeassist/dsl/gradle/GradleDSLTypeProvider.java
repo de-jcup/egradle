@@ -79,7 +79,6 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		/* try to load */
 		String nameToUseForLoading = name;
 		String longName = apiMapping.get(name);
-		/* FIXME ATR, 02.02.2017: "EclipseWTP is not part of mapping-text!" */
 		
 		if (longName != null) {
 			nameToUseForLoading = longName;

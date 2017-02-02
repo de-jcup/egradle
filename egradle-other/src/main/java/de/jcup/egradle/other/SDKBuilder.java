@@ -111,6 +111,7 @@ public class SDKBuilder {
 			FileUtils.deleteDirectory(targetPathDirectory);
 		}
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
+		System.out.println("- inspect files and generate targets");
 		/* create alternative api-mapping because e.g EclipseWTP is not listed in orgin mapping file!*/
 		Map<String,String> alternativeApiMapping = new TreeMap<>();
 		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory);
@@ -167,8 +168,11 @@ public class SDKBuilder {
 						if (name==null){
 							System.err.println("WARN:name=null for line:"+line);
 						}else{
-							String shortName = FilenameUtils.getBaseName(sourceFile.getName());
-							alternativeApiMapping.put(shortName, name);
+							/* we exclude gradle tooling here because of duplicates with api parts*/
+							if (!name.startsWith("org.gradle.tooling")){
+								String shortName = FilenameUtils.getBaseName(sourceFile.getName());
+								alternativeApiMapping.put(shortName, name);
+							}
 						}
 					}
 				}
