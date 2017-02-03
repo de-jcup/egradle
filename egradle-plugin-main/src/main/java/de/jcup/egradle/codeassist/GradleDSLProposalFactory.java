@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 import de.jcup.egradle.codeassist.dsl.CodeBuilder;
+import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Parameter;
@@ -18,6 +19,7 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.CreationMode;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
+import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 
@@ -82,10 +84,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			if (extensionType == null) {
 				continue;
 			}
-			ModelProposal p = new ModelProposal();
-			p.type = ModelProposalType.EXTENSION;
-			p.setType(extensionType.getName());
-			p.setCode(codeBuilder.createClosure(extensionId));
+			ModelProposal proposal = new ModelProposal();
+			proposal.type = ModelProposalType.EXTENSION;
+			proposal.setType(extensionType.getName());
+			proposal.setCode(codeBuilder.createClosure(extensionId));
 
 			Reason reason = identifiedType.getReasonForExtension(extensionId);
 			StringBuilder description = new StringBuilder();
@@ -105,24 +107,31 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			description.append(extensionType.getDescription());
 			description.append("<br><br>Type:");
 			description.append(extensionType.getName());
-			p.setDescription(description.toString());
-			p.setName(name.toString());
-			calculateAndSetCursor(p, textBeforeColumn);
-			proposals.add(p);
+			proposal.setDescription(description.toString());
+			proposal.setName(name.toString());
+			calculateAndSetCursor(proposal, textBeforeColumn);
+			
+			proposal.setExtensionId(extensionId);
+			proposal.setElement(extensionType);
+			
+			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
 			/*
 			 * FIXME ATR, 28.01.2017: check if mixin does copy properties as
 			 * well. If so implementation is needed
 			 */
-			ModelProposal p = new ModelProposal();
-			p.type = ModelProposalType.PROPERTY;
-			p.setName(property.getName());
-			p.setType(identifiedType.getName());
-			p.setCode(codeBuilder.createPropertyAssignment(property));
-			p.setDescription(property.getDescription());
-			calculateAndSetCursor(p, textBeforeColumn);
-			proposals.add(p);
+			ModelProposal proposal = new ModelProposal();
+			proposal.type = ModelProposalType.PROPERTY;
+			proposal.setName(property.getName());
+			proposal.setType(identifiedType.getName());
+			proposal.setCode(codeBuilder.createPropertyAssignment(property));
+			proposal.setDescription(property.getDescription());
+			calculateAndSetCursor(proposal, textBeforeColumn);
+			
+			proposal.setElement(property);
+			
+			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
 			if (mode == CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
@@ -140,7 +149,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			}
 
-			ModelProposal p = new ModelProposal();
+			ModelProposal proposal = new ModelProposal();
 
 			Reason reason = identifiedType.getReasonForMethod(method);
 			String methodLabel = createMethodLabel(method);
@@ -156,19 +165,22 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 				}
 			}
-			p.setName(methodLabel);
+			proposal.setName(methodLabel);
 			descSb.append(method.getDescription());
 			Type returnType = method.getReturnType();
 			if (returnType != null) {
 				descSb.append("<br><br>returns:");
 				descSb.append(returnType.getName());
 			}
-			p.type = ModelProposalType.METHOD;
-			p.setType(identifiedType.getName());
-			p.setCode(codeBuilder.createSmartMethodCall(method));
-			p.setDescription(descSb.toString());
-			calculateAndSetCursor(p, textBeforeColumn);
-			proposals.add(p);
+			proposal.type = ModelProposalType.METHOD;
+			proposal.setType(identifiedType.getName());
+			proposal.setCode(codeBuilder.createSmartMethodCall(method));
+			proposal.setDescription(descSb.toString());
+			calculateAndSetCursor(proposal, textBeforeColumn);
+			
+			proposal.setElement(method);
+			
+			proposals.add(proposal);
 		}
 		return proposals;
 	}
@@ -204,27 +216,44 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		proposal.setCode(insertData.sourceCode);
 	}
 
-	private boolean isString(Type paramType) {
-		if (paramType == null) {
-			return false;
-		}
-		return "java.lang.String".equals(paramType.getName());
-	}
-
 	public enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
 	}
 
-	public class ModelProposal extends AbstractProposalImpl {
+	public class ModelProposal extends AbstractProposalImpl implements LanguageElementMetaData {
 
 		private ModelProposalType type;
+		private LanguageElement element;
+		private String extensionId;
+		
+		public void setElement(LanguageElement element) {
+			this.element = element;
+		}
+		
+		public void setExtensionId(String extensionId) {
+			this.extensionId=extensionId;
+		}
 
+		public LanguageElement getElement() {
+			return element;
+		}
+		
 		public boolean isMethod() {
 			return ModelProposalType.METHOD.equals(type);
 		}
 
 		public boolean isProperty() {
 			return ModelProposalType.PROPERTY.equals(type);
+		}
+
+		@Override
+		public boolean isTypeFromExtensionConfigurationPoint() {
+			return extensionId!=null;
+		}
+
+		@Override
+		public String getExtensionName() {
+			return extensionId;
 		}
 	}
 

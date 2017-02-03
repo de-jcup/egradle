@@ -151,6 +151,47 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 	}
 
+	public String getBackGroundColorAsWeb() {
+		ensureColorsFetched();
+		return bgColor;
+	}
+
+	public String getForeGroundColorAsWeb() {
+		ensureColorsFetched();
+		return fgColor;
+	}
+
+	private void ensureColorsFetched() {
+		if (bgColor == null || fgColor == null) {
+
+			ISourceViewer sourceViewer = getSourceViewer();
+			if (sourceViewer == null) {
+				return;
+			}
+			StyledText textWidget = sourceViewer.getTextWidget();
+			if (textWidget == null) {
+				return;
+			}
+
+			/*
+			 * TODO ATR, 03.02.2017: there should be an easier approach to get
+			 * editors back and foreground, without syncexec
+			 */
+			EGradleUtil.getSafeDisplay().syncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					bgColor = EGradleUtil.convertToHexColor(textWidget.getBackground());
+					fgColor = EGradleUtil.convertToHexColor(textWidget.getForeground());
+				}
+			});
+		}
+
+	}
+
+	private String bgColor;
+	private String fgColor;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
@@ -208,15 +249,15 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			cachedGradleFileType = GradleFileType.UNKNOWN;
 			return cachedGradleFileType;
 		}
-		/* It is a gradle file...*/
+		/* It is a gradle file... */
 		if (name.equals("settings.gradle")) {
 			cachedGradleFileType = GradleFileType.GRADLE_SETTINGS_SCRIPT;
 		} else if (name.equals("init.gradle")) {
 			/*
 			 * We do not check if USER_HOME/.gradle/init.d/ or for
 			 * GRADLE_HOME/init.d/... The files are inside workspace and so we
-			 * only support init.gradle - for 100% correct variant description see
-			 * https://docs.gradle.org/current/userguide/init_scripts.html
+			 * only support init.gradle - for 100% correct variant description
+			 * see https://docs.gradle.org/current/userguide/init_scripts.html
 			 */
 			cachedGradleFileType = GradleFileType.GRADLE_INIT_SCRIPT;
 		} else {

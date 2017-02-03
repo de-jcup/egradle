@@ -3,10 +3,8 @@ package de.jcup.egradle.codeassist.dsl;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
-	/*
-	 * Given parameters are checked for null before
-	 */
-	public String buildHoverHTML(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element) {
+	
+	public String buildHTMLDescription(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element) {
 		StringBuilder descSb = new StringBuilder();
 		if (element instanceof Method) {
 			Method method = (Method) element;
@@ -48,7 +46,7 @@ public class HTMLDescriptionBuilder {
 		if (element!=null){
 			title=element.getName();
 		}else{
-			title="null";
+			title="element is null";
 		}
 		String html =  createHTMLBody(fgColor, bgColor, title, descSb);
 		return html;

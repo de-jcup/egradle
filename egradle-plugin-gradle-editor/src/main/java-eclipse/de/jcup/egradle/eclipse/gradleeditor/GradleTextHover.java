@@ -108,7 +108,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			}
 			
 		}
-		return builder.buildHoverHTML(fgColor, bgColor ,data, element);
+		return builder.buildHTMLDescription(fgColor, bgColor ,data, element);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 							showFallBackInfo(convertedName);
 							return;
 						}
-						control.setInformation(builder.buildHoverHTML(fgColor, bgColor, null, type));
+						control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, null, type));
 
 					}
 

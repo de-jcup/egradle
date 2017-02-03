@@ -18,6 +18,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 
@@ -30,6 +31,8 @@ import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.UserInputProposalFilter;
 import de.jcup.egradle.codeassist.VariableNameProposalFactory;
+import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
+import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeBuilder;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
@@ -48,7 +51,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
 
 	private String errorMessage;
-	
+
 	/**
 	 * Caching is only done while code assist sessions is alive!
 	 */
@@ -69,8 +72,10 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private GradleLanguageElementEstimater estimator;
 
-	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter
-			) {
+
+	private HTMLDescriptionBuilder descriptionBuilder;
+
+	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
 		if (adaptable == null) {
 			throw new IllegalArgumentException("adaptable may not be null!");
 		}
@@ -82,20 +87,24 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		this.proposalFactories = new ArrayList<>();
 		this.cachedProposals = new TreeSet<>();
 		this.completionListener = new CacheValidListener();
-
+		
+		this.descriptionBuilder=new HTMLDescriptionBuilder();
 		addFactories();
 	}
 
 	private void addFactories() {
 		CodeCompletionRegistry codeCompletionRegistry = Activator.getDefault().getCodeCompletionRegistry();
 		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
-		
+
 		estimator = new GradleLanguageElementEstimater(typeProvider);
-		/* FIXME ATR, 19.01.2017:  what about sharing the factories between processors? check amount of created processor instances! */
-		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(),estimator));
+		/*
+		 * FIXME ATR, 19.01.2017: what about sharing the factories between
+		 * processors? check amount of created processor instances!
+		 */
+		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(), estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
-	
+
 	public GradleLanguageElementEstimater getEstimator() {
 		return estimator;
 	}
@@ -108,6 +117,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		}
 		// waitForOutlineModelRefreshed();
 		errorMessage = null;
+
 		IDocument document = viewer.getDocument();
 
 		ProposalFactoryContentProvider contentProvider = null;
@@ -166,8 +176,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		}
 
 		/*
-		 * FIXME ATR, 10.01.2017: xml schema necessary, no values like "bla-from-xml" allowed because
-		 * not parseable by groovy
+		 * FIXME ATR, 10.01.2017: xml schema necessary, no values like
+		 * "bla-from-xml" allowed because not parseable by groovy
 		 */
 		if (DEBUG) {
 			debugCacheState("proposal computing-1");
@@ -205,6 +215,15 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,
 			ProposalFactoryContentProvider contentProvider) {
+		
+		GradleEditor editor = adaptable.getAdapter(GradleEditor.class);
+		
+		String bgColor = null;
+		String fgColor = null;
+		if (editor != null) {
+			bgColor = editor.getBackGroundColorAsWeb();
+			fgColor = editor.getForeGroundColorAsWeb();
+		}
 		List<ICompletionProposal> list = new ArrayList<>();
 		for (Proposal p : allProposals) {
 			Image image = null;
@@ -214,25 +233,25 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				if (item != null) {
 					image = labelProvider.getImage(item);
 				}
-			}else if (p instanceof ModelProposal){
+			} else if (p instanceof ModelProposal) {
 				ModelProposal mp = (ModelProposal) p;
-				if (mp.isMethod()){
-					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png",Activator.PLUGIN_ID);
-				}else if (mp.isProperty()){
-					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png",Activator.PLUGIN_ID);
+				if (mp.isMethod()) {
+					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png", Activator.PLUGIN_ID);
+				} else if (mp.isProperty()) {
+					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", Activator.PLUGIN_ID);
 				}
 			}
 			if (image == null) {
 				image = EGradleUtil.getImage("/icons/gradle-og.png", Activator.PLUGIN_ID);
 			}
 			IContextInformation contextInformation = null;
-			StringBuilder sb = new StringBuilder();
-			if (p.getDescription() != null) {
-				sb.append("<html>");
-				sb.append(p.getDescription());
-				sb.append("<html>");
-			}
-			String additionalProposalInfo = sb.toString();
+//			StringBuilder sb = new StringBuilder();
+//			if (p.getDescription() != null) {
+//				sb.append("<html>");
+//				sb.append(p.getDescription());
+//				sb.append("<html>");
+//			}
+//			String additionalProposalInfo = sb.toString();
 			String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();
 
 			int alreadyEnteredChars = alreadyEntered.length();
@@ -247,8 +266,17 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 			} else {
 				cursorMovement = proposedCursorPostion;
 			}
+			LazyLanguageElementHTMLDescriptionBuilder lazyBuilder = null;
+			if (p instanceof ModelProposal) {
+				ModelProposal mp = (ModelProposal) p;
+				LanguageElement element = mp.getElement();
+				if (element != null) {
+					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, element,mp, descriptionBuilder);
+				}
+			}
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), cursorOffset,
-					replacementLength, cursorMovement, image, p.getName(), contextInformation, additionalProposalInfo);
+					replacementLength, cursorMovement, image, p.getName(), contextInformation, null,
+					lazyBuilder);
 			list.add(proposal);
 
 		}
@@ -350,6 +378,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private void debugCacheState(String message) {
-		EGradleUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing=" + useCacheBecauseCodeAssistSessionOngoing);
+		EGradleUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
+				+ useCacheBecauseCodeAssistSessionOngoing);
 	}
 }

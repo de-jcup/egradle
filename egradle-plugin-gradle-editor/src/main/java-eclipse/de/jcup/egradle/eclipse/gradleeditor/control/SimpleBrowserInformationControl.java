@@ -65,9 +65,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	 * a toolbar and uses hyperlink listener
 	 * 
 	 * @param parentShell
-	 * @param style
+	 * @param maximumHistory maximum amount of history items
 	 */
-	SimpleBrowserInformationControl(Shell parentShell, int maximumHistory) {
+	public SimpleBrowserInformationControl(Shell parentShell, int maximumHistory) {
 		super(parentShell, new ToolBarManager());
 		this.history = new History<>(maximumHistory);
 		this.linksEnabled = true;

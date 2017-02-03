@@ -14,6 +14,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
 public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
@@ -35,26 +36,8 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	/** The additional info of this proposal. */
 	private String fAdditionalProposalInfo;
 	private IInformationControlCreator informationControlCreator;
+	private LazyLanguageElementHTMLDescriptionBuilder lazyBuilder;
 
-//	/**
-//	 * Creates a new completion proposal based on the provided information. The
-//	 * replacement string is considered being the display string too. All
-//	 * remaining fields are set to <code>null</code>.
-//	 *
-//	 * @param replacementString
-//	 *            the actual string to be inserted into the document
-//	 * @param replacementOffset
-//	 *            the offset of the text to be replaced
-//	 * @param replacementLength
-//	 *            the length of the text to be replaced
-//	 * @param cursorPosition
-//	 *            the position of the cursor following the insert relative to
-//	 *            replacementOffset
-//	 */
-//	public EnhancedProposal(String replacementString, int replacementOffset, int replacementLength,
-//			int cursorPosition) {
-//		this(replacementString, replacementOffset, replacementLength, cursorPosition, null, null, null, null);
-//	}
 
 	/**
 	 * Creates a new completion proposal. All fields are initialized based on
@@ -77,9 +60,10 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	 *            the context information associated with this proposal
 	 * @param additionalProposalInfo
 	 *            the additional information associated with this proposal
+	 * @param lazyBuilder lazy builder or <code>null</code>
 	 */
 	public GradleCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition,
-			Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo) {
+			Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo, LazyLanguageElementHTMLDescriptionBuilder lazyBuilder) {
 		Assert.isNotNull(replacementString);
 		Assert.isTrue(replacementOffset >= 0);
 		Assert.isTrue(replacementLength >= 0);
@@ -93,6 +77,8 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		fDisplayString = displayString;
 		fContextInformation = contextInformation;
 		fAdditionalProposalInfo = additionalProposalInfo;
+		
+		this.lazyBuilder=lazyBuilder;
 	}
 
 	@Override
@@ -121,13 +107,22 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 
 	@Override
 	public String getDisplayString() {
-		if (fDisplayString != null)
+		if (fDisplayString != null){
 			return fDisplayString;
+		}
 		return fReplacementString;
 	}
 
 	@Override
 	public String getAdditionalProposalInfo() {
+		if (lazyBuilder!=null){
+			
+			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
+				System.out.println(getClass().getSimpleName()+":lazyBuilder creating html called!");
+			}
+			
+			return lazyBuilder.createHTML();
+		}
 		return fAdditionalProposalInfo;
 	}
 
@@ -156,7 +151,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		@Override
 		public IInformationControl doCreateInformationControl(Shell shell) {
 			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
-				return new SimpleBrowserInformationControl(shell);
+				return new SimpleBrowserInformationControl(shell,5);
 			}
 			return new DefaultInformationControl(shell, true);
 		}
