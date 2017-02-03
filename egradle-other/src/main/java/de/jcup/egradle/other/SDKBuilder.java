@@ -63,7 +63,7 @@ public class SDKBuilder {
 		gradleEGradleDSLRootFolder = new File(pathToData, "/build/src-egradle/egradle-dsl");
 		gradleOriginPluginsFile = new File(pathToData, "/src/docs/dsl/plugins.xml");
 		gradleOriginMappingFile = new File(pathToData, "/build/generated-resources/main/api-mapping.txt");
-		
+
 		assertFileExists(gradleOriginPluginsFile);
 		assertFileExists(gradleOriginMappingFile);
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
@@ -92,7 +92,6 @@ public class SDKBuilder {
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
 
-		
 		FileUtils.copyFile(gradleOriginPluginsFile, new File(sourceParentDirectory, gradleOriginPluginsFile.getName()));
 		FileUtils.copyFile(gradleOriginMappingFile, new File(sourceParentDirectory, gradleOriginMappingFile.getName()));
 
@@ -104,7 +103,7 @@ public class SDKBuilder {
 					+ "\nEither your path or version is incorrect or you forgot to generate...");
 		}
 		String userHome = System.getProperty("user.home");
-		File targetPathDirectory = new File(userHome, ".egradle/sdk/"+targetSDKVersion+"/gradle/");
+		File targetPathDirectory = new File(userHome, ".egradle/sdk/" + targetSDKVersion + "/gradle/");
 		if (targetPathDirectory.exists()) {
 			System.out.println(
 					"Target directory exists - will be deleted before:" + targetPathDirectory.getCanonicalPath());
@@ -112,16 +111,19 @@ public class SDKBuilder {
 		}
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
 		System.out.println("- inspect files and generate targets");
-		/* create alternative api-mapping because e.g EclipseWTP is not listed in orgin mapping file!*/
-		Map<String,String> alternativeApiMapping = new TreeMap<>();
+		/*
+		 * create alternative api-mapping because e.g EclipseWTP is not listed
+		 * in orgin mapping file!
+		 */
+		Map<String, String> alternativeApiMapping = new TreeMap<>();
 		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory);
 		System.out.println("- generate alternative api mapping file");
 		StringBuilder sb = new StringBuilder();
-		boolean first=true;
-		for (String shortName: alternativeApiMapping.keySet()){
-			if(first){
-				first=false;
-			}else{
+		boolean first = true;
+		for (String shortName : alternativeApiMapping.keySet()) {
+			if (first) {
+				first = false;
+			} else {
 				sb.append("\n");
 			}
 			sb.append(shortName);
@@ -129,15 +131,16 @@ public class SDKBuilder {
 			sb.append(alternativeApiMapping.get(shortName));
 			sb.append(';');
 		}
-		File alternativeApiMappingFile = new File(targetPathDirectory,"alternative-api-mapping.txt");
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))){
+		File alternativeApiMappingFile = new File(targetPathDirectory, "alternative-api-mapping.txt");
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))) {
 			bw.write(sb.toString());
 		}
-		
+
 		System.out.println("DONE");
 	}
 
-	private void inspectFilesAdoptAndGenerateTarget(Map<String,String> alternativeApiMapping, File sourceDir, File targetDir) throws IOException {
+	private void inspectFilesAdoptAndGenerateTarget(Map<String, String> alternativeApiMapping, File sourceDir,
+			File targetDir) throws IOException {
 		for (File newSourceFile : sourceDir.listFiles()) {
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
@@ -156,20 +159,23 @@ public class SDKBuilder {
 		StringBuilder sb = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader(sourceFile))) {
 			String line = "";
-			boolean foundType=false;
+			boolean foundType = false;
 			while ((line = reader.readLine()) != null) {
 				if (sb.length() != 0) {
 					sb.append("\n");
 				}
-				if (!foundType){
-					if (line.trim().startsWith("<type")){
-						foundType=true;
+				if (!foundType) {
+					if (line.trim().startsWith("<type")) {
+						foundType = true;
 						String name = StringUtils.substringBetween(line, "name=\"", "\"");
-						if (name==null){
-							System.err.println("WARN:name=null for line:"+line);
-						}else{
-							/* we exclude gradle tooling here because of duplicates with api parts*/
-							if (!name.startsWith("org.gradle.tooling")){
+						if (name == null) {
+							System.err.println("WARN:name=null for line:" + line);
+						} else {
+							/*
+							 * we exclude gradle tooling here because of
+							 * duplicates with api parts
+							 */
+							if (!name.startsWith("org.gradle.tooling")) {
 								String shortName = FilenameUtils.getBaseName(sourceFile.getName());
 								alternativeApiMapping.put(shortName, name);
 							}
@@ -184,12 +190,14 @@ public class SDKBuilder {
 		return sb.toString();
 	}
 
-	String convertLine(String line) {
-		String result = removeWhitespacesAndStars(line);
-		result = replaceJavaDocLinksWithHTMLLink(result);
-		return result;
+	String convertLine(String origin) {
+		String line = removeWhitespacesAndStars(origin);
+		line = replaceJavaDocLinks(line);
+		line = replaceJavaDocCode(line);
+		line = replaceJavaDocParams(line);
+		line = replaceJavaDocReturn(line);
+		return line;
 	}
-
 
 	private abstract class ContentReplacer {
 
@@ -201,7 +209,7 @@ public class SDKBuilder {
 		JAVADOC_TAG_FOUND, CURLY_BRACKET_OPENED, CURLY_BRACKET_CLOSED, UNKNOWN
 	}
 
-	private String replaceJavaDoc(String line, String javaDocId, ContentReplacer replacer) {
+	String replaceJavaDocTagInCurls(String line, String javaDocId, ContentReplacer replacer) {
 		StringBuilder sb = new StringBuilder();
 		JavaDocState state = JavaDocState.UNKNOWN;
 		/* scan for first { found" */
@@ -232,38 +240,116 @@ public class SDKBuilder {
 				state = JavaDocState.CURLY_BRACKET_CLOSED;
 				continue;
 			}
-			if (state == JavaDocState.CURLY_BRACKET_OPENED){
+			if (state == JavaDocState.CURLY_BRACKET_OPENED) {
 				curlyContentUnchanged.append(c);
 				curlyContent.append(c);
-			}else if (state == JavaDocState.JAVADOC_TAG_FOUND){
+			} else if (state == JavaDocState.JAVADOC_TAG_FOUND) {
 				curlyContentUnchanged.append(c);
-				if (Character.isWhitespace(c)){
-					if (curlyContent.length()==0){
-						/* forget leading whitespaces*/
+				if (Character.isWhitespace(c)) {
+					if (curlyContent.length() == 0) {
+						/* forget leading whitespaces */
 						continue;
 					}
 				}
 				curlyContent.append(c);
 			}
-			
+
 			if (state == JavaDocState.CURLY_BRACKET_OPENED) {
 				if (curlyContent.toString().equals(javaDocId)) {
 					state = JavaDocState.JAVADOC_TAG_FOUND;
 					curlyContent = new StringBuilder();
 				}
-			} 
-			if (state == JavaDocState.UNKNOWN || state==JavaDocState.CURLY_BRACKET_CLOSED){
+			}
+			if (state == JavaDocState.UNKNOWN || state == JavaDocState.CURLY_BRACKET_CLOSED) {
 				sb.append(c);
 			}
-				
 
 		}
 		String result = sb.toString();
 		return result;
 	}
 
-	private String replaceJavaDocLinksWithHTMLLink(String line) {
-		String replaced = replaceJavaDoc(line, "@link", new ContentReplacer() {
+	/**
+	 * Replace key value pair until whitespace or end. E.g. "@param name1 description " will replace "@param name1" only
+	 * @param line
+	 * @param javadocId
+	 * @param replacer
+	 * @return replaced string
+	 */
+	String replaceJavaDocKeyValue(String line, String javadocId, ContentReplacer replacer){
+		int index = line.indexOf(javadocId);
+		if (index==-1){
+			return line;
+		}
+		int length = line.length();
+		StringBuilder content = new StringBuilder();
+		String before = StringUtils.substring(line, 0, index);
+		boolean leadingWhiteSpaces=true;
+		int pos=index+javadocId.length();
+		while (pos<length){
+			char c = line.charAt(pos++);
+			if (Character.isWhitespace(c)){
+				if (leadingWhiteSpaces){
+					continue;
+				}else{
+					/* no leading but another whitespace so end reached */
+					break;
+				}
+			}
+			leadingWhiteSpaces=false;
+			content.append(c);
+		}
+		String remaining="";
+		if (pos<length){
+			remaining=StringUtils.substring(line, pos);
+		}
+		String replaced = replacer.replace(content.toString());
+		String result = before+replaced+remaining;
+		return result;
+	}
+	
+	private String replaceJavaDocParams(String line) {
+		// * @param msg asdfasfasf
+		String replaced = replaceJavaDocKeyValue(line, "@param", new ContentReplacer() {
+
+			@Override
+			public String replace(String content) {
+				return "<br>Parameter:<div class='param'>" + content + "</div>";
+			}
+		});
+		return replaced;
+
+	}
+
+	private String replaceJavaDocReturn(String line) {
+		// * @return ...
+		String replaced = replaceJavaDocKeyValue(line, "@return", new ContentReplacer() {
+
+			@Override
+			public String replace(String content) {
+				return "<br>Returns:<div class='return'>" + content + "</div>";
+			}
+		});
+		return replaced;
+
+	}
+
+	private String replaceJavaDocCode(String line) {
+		// * @return ...
+		String replaced = replaceJavaDocTagInCurls(line, "@code", new ContentReplacer() {
+
+			@Override
+			public String replace(String content) {
+				//return "<div class='code'>" + content + "</div>";
+				return "<a href='type://" + content + "'>" + content + "</a>";
+			}
+		});
+		return replaced;
+
+	}
+
+	private String replaceJavaDocLinks(String line) {
+		String replaced = replaceJavaDocTagInCurls(line, "@link", new ContentReplacer() {
 
 			@Override
 			public String replace(String content) {

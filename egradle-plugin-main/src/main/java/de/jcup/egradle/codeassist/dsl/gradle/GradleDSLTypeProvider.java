@@ -115,9 +115,10 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		/* inititialize xml type */
 		for (Method m : type.getMethods()) {
 			XMLMethod xm = (XMLMethod) m;
+			xm.setParent(type);
 			Type resolvedReturnType = getType(xm.getReturnTypeAsString());
 			xm.setReturnType(resolvedReturnType);
-
+			
 			for (Parameter p : m.getParameters()) {
 				XMLParameter xp = (XMLParameter) p;
 				Type resolvedParamType = getType(xp.getTypeAsString());
@@ -126,6 +127,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		}
 		for (Property p : type.getProperties()) {
 			XMLProperty xp = (XMLProperty) p;
+			xp.setParent(type);
 			Type resolvedReturnType = getType(xp.getTypeAsString());
 			xp.setType(resolvedReturnType);
 		}

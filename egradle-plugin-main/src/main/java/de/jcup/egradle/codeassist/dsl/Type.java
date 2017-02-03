@@ -39,5 +39,11 @@ public interface Type extends LanguageElement{
 	 * @return reason or <code>null</code> when no reason is specified
 	 */
 	public Reason getReasonForMethod(Method method);
+
+	/**
+	 * Returns the version for this type
+	 * @return version, never null. If not version set "current" will be returned
+	 */
+	public String getVersion();
 		
 }

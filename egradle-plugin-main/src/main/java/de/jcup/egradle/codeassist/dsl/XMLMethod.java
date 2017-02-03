@@ -1,7 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,6 +26,8 @@ public class XMLMethod implements Method{
 	private List<Parameter> parameters = new ArrayList<>();
 
 	private Type returnType;
+
+	private Type parent;
 
 	@Override
 	public String getName() {
@@ -61,4 +62,13 @@ public class XMLMethod implements Method{
 		return "XMLMethod [name=" + name + ", returnType=" + returnTypeAsString + "]";
 	}
 	
+	@Override
+	public Type getParent() {
+		return parent;
+	}
+	
+	public void setParent(Type parent) {
+		this.parent = parent;
+	}
+
 }

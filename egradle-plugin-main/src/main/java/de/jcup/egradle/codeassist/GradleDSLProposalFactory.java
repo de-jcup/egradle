@@ -1,18 +1,14 @@
 package de.jcup.egradle.codeassist;
 
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
-
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 import de.jcup.egradle.codeassist.dsl.CodeBuilder;
-import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.Property;
@@ -68,6 +64,8 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	}
 
 	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
+		/* FIXME ATR, 03.02.2017:  at this point the HTMLDescriptionBuilder like in 
+		 * GradleTextHover should be used- so we got only one HTML preview*/
 		Type identifiedType = result.getElementType();
 		CreationMode mode = result.getMode();
 		Set<Proposal> proposals = new TreeSet<>();
@@ -150,7 +148,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			if (reason != null) {
 				Plugin plugin = reason.getPlugin();
 				if (plugin != null) {
-					description.append("<p>reasoned by plugin:<b>");
+					description.append("<p>Reasoned by plugin:<b>");
 					description.append(plugin.getId());
 					description.append("</b></p><br><br>");
 
@@ -194,19 +192,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	}
 
 	private String createMethodLabel(Method method) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(method.getName());
-		List<Parameter> parameters = method.getParameters();
-		sb.append("(");
-		for (Iterator<Parameter> itp = parameters.iterator(); itp.hasNext();) {
-			Parameter param = itp.next();
-			param.getName();
-			if (itp.hasNext()) {
-				sb.append(",");
-			}
-		}
-		sb.append(")");
-		return sb.toString();
+		return MethodUtils.createSignature(method);
 
 	}
 

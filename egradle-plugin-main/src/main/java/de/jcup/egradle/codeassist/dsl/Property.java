@@ -5,7 +5,12 @@ package de.jcup.egradle.codeassist.dsl;
  * @author Albert Tregnaghi
  *
  */
-public interface Property extends LanguageElement{
+public interface Property extends LanguageElement, TypeChild{
 
+	/**
+	 * Returns type of property itself
+	 * @return type of property
+	 */
 	public Type getType();
+	
 }

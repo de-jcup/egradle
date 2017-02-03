@@ -21,6 +21,8 @@ public class XMLProperty implements Property{
 
 	private Type type;
 
+	private Type parent;
+
 	@Override
 	public String getName() {
 		return name;
@@ -47,6 +49,15 @@ public class XMLProperty implements Property{
 	@Override
 	public String toString() {
 		return "XMLProperty [name=" + name + ", type=" + typeAsString + "]";
+	}
+
+	@Override
+	public Type getParent() {
+		return parent;
+	}
+	
+	public void setParent(Type parent) {
+		this.parent = parent;
 	}
 	
 }

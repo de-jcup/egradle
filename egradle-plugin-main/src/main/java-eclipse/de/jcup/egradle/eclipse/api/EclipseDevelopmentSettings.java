@@ -16,7 +16,7 @@
  package de.jcup.egradle.eclipse.api;
 
 /**
- * Provides states of debug features to enable
+ * Provides states of debug features to enable. Only interesting for egradle development itself.
  * @author Albert Tregnaghi
  *
  */
@@ -31,7 +31,7 @@ public interface EclipseDevelopmentSettings {
 	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean.parseBoolean(System.getProperty("egradle.debug.menus"));
 	
 	/**
-	 * Feature toggle - allows outline reloading as full antlr parts also. interesting for debug purpose only. For normal usage uninteresting
+	 * Feature toggle - enables special logging information
 	 */
 	public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean.parseBoolean(System.getProperty("egradle.debug.logging"));
 	

@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.StringUtils;
+
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "type")
 public class XMLType implements Type {
@@ -101,11 +103,13 @@ public class XMLType implements Type {
 
 	@Override
 	public String getShortName() {
-		/* FIXME ATR, 18.01.2017: implement or remove*/
-		return null;
+		return StringUtils.substringAfterLast(name, ".");
 	}
 
 	public String getVersion() {
+		if (version==null || version.length()==0){
+			return "current";
+		}
 		return version;
 	}
 

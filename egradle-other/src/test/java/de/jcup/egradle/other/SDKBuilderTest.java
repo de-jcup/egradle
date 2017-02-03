@@ -51,6 +51,13 @@ public class SDKBuilderTest {
 		String expected = "<a href='type://EclipseProject'>EclipseProject</a>";
 		assertEquals(expected, preparatorToTest.convertLine(line));
 	}
+	
+	@Test
+	public void testJavadocParamConversion() {
+		String line = "*  @param name1 a description";
+		String expected = "  <br>Parameter:<div class='param'>name1</div>a description";
+		assertEquals(expected, preparatorToTest.convertLine(line));
+	}
 
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_short_path_name_but_prefix() {
@@ -70,9 +77,9 @@ public class SDKBuilderTest {
 
 	@Test
 	public void testJavaDocLink4_mixed_arguments() {
-		String line = "More examples in docs for {@link EclipseProject}, {@return EclipseClasspath}, {@link EclipseWtp} ";
+		String line = "More examples in docs for {@link EclipseProject}, {@xxx EclipseClasspath}, {@link EclipseWtp} ";
 		String expected = "More examples in docs for " + "<a href='type://EclipseProject'>EclipseProject</a>, "
-				+ "{@return EclipseClasspath}, " + "<a href='type://EclipseWtp'>EclipseWtp</a> ";
+				+ "{@xxx EclipseClasspath}, " + "<a href='type://EclipseWtp'>EclipseWtp</a> ";
 		assertEquals(expected, preparatorToTest.convertLine(line));
 	}
 

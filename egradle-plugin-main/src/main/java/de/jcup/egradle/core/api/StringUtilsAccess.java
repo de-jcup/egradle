@@ -21,4 +21,8 @@ public class StringUtilsAccess {
 	public static String substring(String str, int start, int end){
 		return StringUtils.substring(str, start, end);
 	}
+
+	public static String abbreviate(String currentHTML, int maxWidth) {
+		return StringUtils.abbreviate(currentHTML, maxWidth);
+	}
 }

@@ -42,7 +42,9 @@ import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IDecoratorManager;
@@ -159,7 +161,7 @@ public class EGradleUtil {
 		job.schedule(1000L); // 1 second delay to give IDE the chance to delete old parts
 
 	}
-
+	
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -802,5 +804,21 @@ public class EGradleUtil {
 			
 		}
 	}
+
+	public static String convertToHexColor(Color color) {
+		if (color==null){
+			return null;
+		}
+		return convertToHexColor(color.getRGB());
+	}
+
+	public static String convertToHexColor(RGB rgb){
+		if (rgb==null){
+			return null;
+		}
+		String hex = String.format("#%02x%02x%02x", rgb.red, rgb.green,rgb.blue);
+		return hex;
+	}
+
 
 }

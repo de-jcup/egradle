@@ -28,15 +28,23 @@ public class GradleLanguageElementEstimater {
 		PARENT_TYPE_IS_METHODCALL, PARENT_TYPE_IS_CONFIGURATION_CLOSURE
 	}
 
-	public class EstimationResult {
+	public class EstimationResult implements LanguageElementMetaData {
 		private LanguageElement element;
 		private CreationMode mode;
 		private String extensionName;
 
+		/* (non-Javadoc)
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#isTypeFromExtensionConfigurationPoint()
+		 */
+		@Override
 		public boolean isTypeFromExtensionConfigurationPoint() {
 			return extensionName != null;
 		}
 
+		/* (non-Javadoc)
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#getExtensionName()
+		 */
+		@Override
 		public String getExtensionName() {
 			return extensionName;
 		}

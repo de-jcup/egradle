@@ -1,5 +1,6 @@
 package de.jcup.egradle.eclipse.gradleeditor.control;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -24,6 +25,8 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.core.api.History;
+import de.jcup.egradle.core.api.StringUtilsAccess;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 
 /**
  * EGradles own simple browser information control, inspired by
@@ -94,6 +97,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	@Override
 	public void setInformation(String information) {
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
+			debug("set information="+information);
+		}
 		if (information == null) {
 			information = "";
 		}
@@ -183,10 +189,16 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 				public void run() {
 					if (isBrowserNotDisposed()) {
 						String backContent = history.goBack();
+						if (isDebugEnabled()){
+							debug("history.back="+backContent);
+						}
 						if (backContent == null) {
 							return;
 						}
 						if (REAL_HTML_SITE_IDENTIFIER.equals(backContent)){
+							if (isDebugEnabled()){
+								debug("no real html page, so set information");
+							}
 							if (browser.isBackEnabled()) {
 								/*
 								 * okay, a real website was shown, so try to go back
@@ -194,6 +206,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 								browser.back();
 								return;
 							}
+						}
+						if (isDebugEnabled()){
+							debug("no real html page, so set information");
 						}
 						setInformation(backContent);
 					}
@@ -220,6 +235,9 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 			@Override
 			public void changing(LocationEvent event) {
+				if (isDebugEnabled()){
+					debug("changing location:"+event);
+				}
 				if (event.location == "about:blank") {
 					event.doit = false;
 				}
@@ -227,8 +245,14 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 			@Override
 			public void changed(LocationEvent event) {
+				if (isDebugEnabled()){
+					debug("changed location(1):"+event);
+				}
 				if (!linksEnabled) {
 					return;
+				}
+				if (isDebugEnabled()){
+					debug("changed location(2)-links are enabled");
 				}
 				String newLocation = event.location;
 				if (newLocation == null) {
@@ -238,10 +262,19 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 					SimpleBrowserInformationControl control = SimpleBrowserInformationControl.this;
 					if (browserEGradleLinkListener.isAcceptingHyperlink(newLocation)) {
 						if (isBrowserNotDisposed()) {
+							if (isDebugEnabled()){
+								debug("changed location(3)-add history"+StringUtilsAccess.abbreviate(currentHTML, 40));
+							}
 							history.add(currentHTML);
+							if (isDebugEnabled()){
+								debug("changed location(4)-calling gradle hyperlink listener");
+							}
 							browserEGradleLinkListener.onEGradleHyperlinkClicked(control, newLocation);
 						}
 					} else if (newLocation.startsWith("http")) {
+						if (isDebugEnabled()){
+							debug("changed location(5)-real html page");
+						}
 						/*
 						 * a real html site - so add currentHTML to history if
 						 * not already present
@@ -259,7 +292,14 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser.setMenu(new Menu(getShell(), SWT.NONE));
 
 	}
-
+	private void debug(String text){
+		System.out.println(getClass().getSimpleName()+":"+text);
+	}
+	
+	private boolean isDebugEnabled() {
+		return EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING;
+	}
+	
 	@Override
 	public void dispose() {
 		super.dispose();
