@@ -14,6 +14,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
+
 public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
 
 	/** The string to be displayed in the completion proposal popup. */
@@ -153,6 +155,9 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	protected static class EGradleInformationControlCreator extends AbstractReusableInformationControlCreator {
 		@Override
 		public IInformationControl doCreateInformationControl(Shell shell) {
+			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
+				return new SimpleBrowserInformationControl(shell);
+			}
 			return new DefaultInformationControl(shell, true);
 		}
 	}
