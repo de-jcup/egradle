@@ -119,7 +119,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			p.type = ModelProposalType.PROPERTY;
 			p.setName(property.getName());
 			p.setType(identifiedType.getName());
-			p.setCode(codeBuilder.createClosure(property));
+			p.setCode(codeBuilder.createPropertyAssignment(property));
 			p.setDescription(property.getDescription());
 			calculateAndSetCursor(p, textBeforeColumn);
 			proposals.add(p);
@@ -134,7 +134,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 				}
 
 				List<Parameter> params = method.getParameters();
-				if (params.size() == 0) {
+				if (params.size() == 0) {// currently only supporting closure content with at least one param
 					continue;
 				}
 
@@ -144,29 +144,29 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			Reason reason = identifiedType.getReasonForMethod(method);
 			String methodLabel = createMethodLabel(method);
-			StringBuilder description = new StringBuilder();
+			StringBuilder descSb = new StringBuilder();
 			if (reason != null) {
 				Plugin plugin = reason.getPlugin();
 				if (plugin != null) {
-					description.append("<p>Reasoned by plugin:<b>");
-					description.append(plugin.getId());
-					description.append("</b></p><br><br>");
+					descSb.append("<p>Reasoned by plugin:<b>");
+					descSb.append(plugin.getId());
+					descSb.append("</b></p><br><br>");
 
 					methodLabel = methodLabel + "-" + plugin.getId();
 
 				}
 			}
 			p.setName(methodLabel);
-			description.append(method.getDescription());
+			descSb.append(method.getDescription());
 			Type returnType = method.getReturnType();
 			if (returnType != null) {
-				description.append("<br><br>returns:");
-				description.append(returnType.getName());
+				descSb.append("<br><br>returns:");
+				descSb.append(returnType.getName());
 			}
 			p.type = ModelProposalType.METHOD;
 			p.setType(identifiedType.getName());
-			p.setCode(codeBuilder.createClosure(method));
-			p.setDescription(description.toString());
+			p.setCode(codeBuilder.createSmartMethodCall(method));
+			p.setDescription(descSb.toString());
 			calculateAndSetCursor(p, textBeforeColumn);
 			proposals.add(p);
 		}

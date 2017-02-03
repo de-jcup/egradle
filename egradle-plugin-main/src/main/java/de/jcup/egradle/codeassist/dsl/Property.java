@@ -13,4 +13,6 @@ public interface Property extends LanguageElement, TypeChild{
 	 */
 	public Type getType();
 	
+	public String getTypeAsString();
+	
 }

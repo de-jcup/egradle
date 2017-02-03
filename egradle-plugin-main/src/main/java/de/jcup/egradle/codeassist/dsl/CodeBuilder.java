@@ -17,4 +17,6 @@ public interface CodeBuilder {
 	 */
 	String createClosure(String name);
 
+	String createSmartMethodCall(Method method);
+
 }

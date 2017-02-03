@@ -8,4 +8,6 @@ package de.jcup.egradle.codeassist.dsl;
 public interface Parameter extends LanguageElement {
 
 	public Type getType();
+	
+	public String getTypeAsString();
 }

@@ -18,4 +18,5 @@ public interface LanguageElement {
 	 * @return desription or <code>null</code>
 	 */
 	public String getDescription();
+	
 }
