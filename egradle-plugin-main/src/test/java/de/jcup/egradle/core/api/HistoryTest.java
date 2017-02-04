@@ -7,9 +7,56 @@ import org.junit.Test;
 public class HistoryTest {
 
 	@Test
-	public void nothing_in_history_0_go_back_returns_null() {
+	public void one_entry_in_history_1_is_empty_returns_false() {
 		/* prepare */
 		History<String> historyToTest = new History<>(1);
+		historyToTest.add("content");
+		
+		/* execute + test */
+		assertFalse(historyToTest.isEmpty());
+	}
+
+	@Test
+	public void nothing_in_history_1_is_empty_returns_true() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		
+		/* execute + test */
+		assertTrue(historyToTest.isEmpty());
+	}
+	
+	@Test
+	public void one_entry_in_history_1_getCount_returns_1() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		historyToTest.add("content");
+		
+		/* execute + test */
+		assertEquals(1, historyToTest.getCount());
+	}
+	
+	@Test
+	public void nothing_in_history_1_getCount_returns_0() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		
+		/* execute + test */
+		assertEquals(0, historyToTest.getCount());
+	}
+	
+	@Test
+	public void nothing_in_history_1_max_returns_1() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		
+		/* execute + test */
+		assertEquals(1, historyToTest.getMax());
+	}
+	
+	@Test
+	public void nothing_in_history_0_go_back_returns_null() {
+		/* prepare */
+		History<String> historyToTest = new History<>(0);
 		
 		/* execute + test */
 		assertEquals(null, historyToTest.goBack());

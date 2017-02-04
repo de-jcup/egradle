@@ -2,6 +2,10 @@ package de.jcup.egradle.core.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A simple history implementation with an maximum amount of history entries
@@ -17,6 +21,19 @@ public class History<T>{
 		public History(int max){
 			this.max=max;
 			this.list=new ArrayList<>(max+1);
+		}
+		/**
+		 * @return maximum count of elements in history
+		 */
+		public int getMax() {
+			return max;
+		}
+		
+		/**
+		 * @return current count of elements in history
+		 */
+		public int getCount(){
+			return list.size();
 		}
 		
 		/**
@@ -37,7 +54,7 @@ public class History<T>{
 		}
 		
 		/**
-		 * Returns history entry, or when no more entry available <code>null</code>
+		 * Returns last history entry and removes it from history, or when no more entry available <code>null</code>
 		 * @return entry or <code>null</code>
 		 */
 		public T goBack(){
@@ -54,5 +71,26 @@ public class History<T>{
 		 */
 		public void clear(){
 			list.clear();
+		}
+
+		public boolean isEmpty() {
+			return list.isEmpty();
+		}
+		
+		public String toString(){
+			StringBuilder sb = new StringBuilder();
+			sb.append("History (");
+			sb.append(list.size());
+			sb.append('/');
+			sb.append(max);
+			sb.append("):\n");
+			int i=0;
+			for (T data: list){
+				sb.append(i);
+				sb.append('=');
+				sb.append(StringUtils.abbreviate(Objects.toString(data),40));
+				sb.append("\n");
+			}
+			return sb.toString();
 		}
 	}
