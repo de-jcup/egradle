@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
+import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.StringUtilsAccess;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
@@ -192,8 +193,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	@Override
 	protected void createContent(Composite parent) {
 		assertAvailable();
-		browser = new Browser(parent, SWT.FILL);// , SWT.H_SCROLL | SWT.V_SCROLL
-												// | SWT.RESIZE);
+		browser = new Browser(parent, SWT.FILL);
 		browser.setJavascriptEnabled(false);
 
 		if (linksEnabled) {
@@ -285,13 +285,13 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 				if (isDebugEnabled()){
 					debug("changing location:"+event);
 				}
-				if (event.location == "about:blank") {
+				if (event.location == null) {
+					event.doit = false;
+				}else if (event.location == "about:blank") {
+					event.doit = false;
+				}else if (event.location.startsWith(DSLConstants.HYPERLINK_TYPE_PREFIX)){
 					event.doit = false;
 				}
-			}
-
-			@Override
-			public void changed(LocationEvent event) {
 				if (isDebugEnabled()){
 					debug("changed location(1):"+event);
 				}
@@ -317,7 +317,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 						if (isBrowserNotDisposed()) {
 							if (isDebugEnabled()){
 								debug("changed location(3)-add to history:"+newLocation);
-							}
+						}
 							history.add(newLocation);
 							if (isDebugEnabled()){
 								debug("now:"+history.toString());
