@@ -63,7 +63,7 @@ public class GradleLanguageElementEstimaterTest {
 	}
 	
 	@Test
-	public void estimateFromGradleProjectAsRoot__when_parent_is_happ_expression() {
+	public void estimateFromGradleProjectAsRoot__when_parent_is_happy_extension() {
 		/* prepare */
 		Type happyType = mock(Type.class); 
 		Type projectType = mock(Type.class); 
@@ -71,6 +71,7 @@ public class GradleLanguageElementEstimaterTest {
 		extensions.put("happy", happyType);
 		
 		when(projectType.getExtensions()).thenReturn(extensions);
+		
 		when(mockedTypeProvider.getType("org.gradle.api.Project")).thenReturn(projectType);
 		when(mockedTypeProvider.getType("test.something.HappyType")).thenReturn(happyType);
 		when(happyType.getName()).thenReturn("test.something.HappyType");
@@ -78,6 +79,7 @@ public class GradleLanguageElementEstimaterTest {
 		
 		Item item1 = mock(Item.class);
 		Item root = mock(Item.class);
+		when(item1.isClosureBlock()).thenReturn(true);
 		when(item1.getParent()).thenReturn(root);
 		when(item1.getName()).thenReturn("happy");
 		
