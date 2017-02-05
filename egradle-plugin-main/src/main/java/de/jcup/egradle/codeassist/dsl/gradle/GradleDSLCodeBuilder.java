@@ -12,11 +12,9 @@ import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
-
+import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 public class GradleDSLCodeBuilder implements CodeBuilder {
-	public static final String GROOVY_CLOSURE = "groovy.lang.Closure";
-	public static final String JAVA_STRING = "java.lang.String";
-	public static final String JAVA_FILE = "java.io.File";
+	
 
 	@Override
 	public String createClosure(LanguageElement element) {

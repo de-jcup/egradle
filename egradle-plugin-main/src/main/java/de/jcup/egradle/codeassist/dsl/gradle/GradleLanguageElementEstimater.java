@@ -6,13 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.core.model.Item;
-
+import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 public class GradleLanguageElementEstimater {
 
 	private TypeProvider typeProvider;
@@ -24,13 +26,13 @@ public class GradleLanguageElementEstimater {
 		this.typeProvider = provider;
 	}
 
-	public enum CreationMode {
-		PARENT_TYPE_IS_METHODCALL, PARENT_TYPE_IS_CONFIGURATION_CLOSURE
+	public enum TypeContext {
+		PARENT_TYPE_IS_METHODCALL, PARENT_TYPE_IS_CONFIGURATION_CLOSURE, UNKNOWN
 	}
 
 	public class EstimationResult implements LanguageElementMetaData {
 		private LanguageElement element;
-		private CreationMode mode;
+		private TypeContext mode;
 		private String extensionName;
 
 		/* (non-Javadoc)
@@ -53,7 +55,7 @@ public class GradleLanguageElementEstimater {
 			return element;
 		}
 
-		public CreationMode getMode() {
+		public TypeContext getMode() {
 			return mode;
 		}
 
@@ -110,7 +112,7 @@ public class GradleLanguageElementEstimater {
 		}
 		if (path.isEmpty()) {
 			result.element = rootType;
-			result.mode = CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
+			result.mode = TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
 			return result;
 		}
 		/* reverse - so root-child is on top */
@@ -130,26 +132,27 @@ public class GradleLanguageElementEstimater {
 			if (currentPathItemName == null) {
 				continue;
 			}
-
+			TypeContext currentMode = TypeContext.UNKNOWN;
+			if (currentPathItem.isClosureBlock()) {
+				currentMode = TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
+			}
 			InternalEstimationData found = null;
 			if (found == null) {
-				found = findByExtensions(current.type, currentPathItemName);
+				found = findByExtensions(current.type, currentPathItem);
 				if (found != null) {
 					extensionName = currentPathItemName;
 				}
 			}
 			if (found == null) {
-				found = findByMethods(current.type, currentPathItemName);
+				found = findByMethods(current.type, currentPathItem);
 			}
 			if (found == null) {
-				found = findByProperties(current.type, currentPathItemName);
+				found = findByProperties(current.type, currentPathItem);
 			}
 			if (found != null) {
 				current = found;
 
-				if (currentPathItem.isClosureBlock()) {
-					result.mode = CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE;
-				}
+				result.mode = currentMode;
 
 			}
 			if (current.type == null) {
@@ -167,9 +170,18 @@ public class GradleLanguageElementEstimater {
 		private LanguageElement element;
 	}
 
-	/* FIXME ATR, 20.01.2017: write a test case for properties */
-	private InternalEstimationData findByProperties(Type currentType, String checkItemName) {
+	private InternalEstimationData findByProperties(Type currentType, Item item) {
 		if (currentType == null) {
+			return null;
+		}
+		if (item==null) {
+			return null;
+		}
+		if (item.isClosureBlock()){
+			return null;
+		}
+		String checkItemName = item.getName();
+		if (checkItemName==null) {
 			return null;
 		}
 		for (Property p : currentType.getProperties()) {
@@ -184,8 +196,18 @@ public class GradleLanguageElementEstimater {
 		return null;
 	}
 
-	private InternalEstimationData findByExtensions(Type currentType, String checkItemName) {
+	private InternalEstimationData findByExtensions(Type currentType, Item item) {
 		if (currentType == null) {
+			return null;
+		}
+		if (item==null) {
+			return null;
+		}
+		if (! item.isClosureBlock()){
+			return null;
+		}
+		String checkItemName = item.getName();
+		if (checkItemName==null) {
 			return null;
 		}
 		Map<String, Type> extensions = currentType.getExtensions();
@@ -204,20 +226,41 @@ public class GradleLanguageElementEstimater {
 		return null;
 	}
 
-	private InternalEstimationData findByMethods(Type currentType, String checkItemName) {
+	private InternalEstimationData findByMethods(Type currentType, Item item) {
 		if (currentType == null) {
 			return null;
 		}
-		String getMagicPendant = null;
-		// if (checkItemName.length() > 1) {
-		// getMagicPendant = "get" + checkItemName.substring(0, 1).toUpperCase()
-		// + checkItemName.substring(1);
-		// }
+		if (item==null) {
+			return null;
+		}
+		String checkItemName = item.getName();
+		if (checkItemName==null) {
+			return null;
+		}
 		for (Method m : currentType.getMethods()) {
 			String methodName = m.getName();
-			if (checkItemName.equals(methodName) || (getMagicPendant != null && getMagicPendant.equals(methodName))) {
+			if (checkItemName.equals(methodName) ) {
+				/* name okay, could be ...*/
+				boolean isClosureMethod=false;
+				List<Parameter> parameters = m.getParameters();
+				for (Parameter p: parameters) {
+					if (GROOVY_CLOSURE.equals(p.getTypeAsString())){
+						isClosureMethod=true;
+						break;
+					}
+				}
+				/* FIXME ATR, 05.02.2017: outline model param detection  bad implemented and so this resolvingtoo. improve!*/
+//				String[] itemParams = item.getParameters();
+				if (isClosureMethod != item.isClosureBlock()){
+					/* different, so not compatible!*/
+					continue;
+				}
 				InternalEstimationData r = new InternalEstimationData();
-				r.type = m.getReturnType();
+				if (isClosureMethod){
+					r.type=m.getDelegationTarget();
+				}else{
+					r.type = m.getReturnType();
+				}
 				r.element = m;
 				return r;
 			}

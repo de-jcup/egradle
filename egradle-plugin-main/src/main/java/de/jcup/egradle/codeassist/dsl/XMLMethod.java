@@ -19,6 +19,9 @@ public class XMLMethod implements Method{
 	@XmlAttribute(name = "returnType")
 	private String returnTypeAsString;
 	
+	@XmlAttribute(name = "delegationTarget")
+	private String delegationTargetAsString;
+	
 	@XmlElement(name = "description")
 	private String description;
 
@@ -28,6 +31,8 @@ public class XMLMethod implements Method{
 	private Type returnType;
 
 	private Type parent;
+
+	private Type delegationTarget;
 
 	@Override
 	public String getName() {
@@ -69,6 +74,24 @@ public class XMLMethod implements Method{
 	
 	public void setParent(Type parent) {
 		this.parent = parent;
+	}
+
+	@Override
+	public String getDelegationTargetAsString() {
+		return delegationTargetAsString;
+	}
+
+	public void setDelegationTargetAsString(String delegationTargetAsString) {
+		this.delegationTargetAsString = delegationTargetAsString;
+	}
+	
+	public void setDelegationTarget(Type target) {
+		this.delegationTarget = target;
+	}
+	
+	@Override
+	public Type getDelegationTarget() {
+		return delegationTarget;
 	}
 
 }

@@ -20,6 +20,7 @@ import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader.DSLFolderNotSetExcept
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.core.TestUtil;
 public class FilesystemFileLoaderTest {
 
@@ -63,7 +64,7 @@ public class FilesystemFileLoaderTest {
 		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter,mockedPluginsImporter, mockedApiMappingImporter);
 		loaderToTest.setDSLFolder(dslFolder);
 		
-		Type mockedType = mock(Type.class);
+		XMLType mockedType = mock(XMLType.class);
 		when(mockedTypeImporter.importType(any(InputStream.class))).thenReturn(mockedType);
 		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(Collections.emptySet());
 		
@@ -80,7 +81,7 @@ public class FilesystemFileLoaderTest {
 		/* prepare */
 		FilesystemFileLoader loaderToTest = new FilesystemFileLoader(mockedTypeImporter, mockedPluginsImporter, mockedApiMappingImporter);
 		loaderToTest.setDSLFolder(dslFolder);
-		Type mockedType = mock(Type.class);
+		XMLType mockedType = mock(XMLType.class);
 		when(mockedTypeImporter.importType(any(InputStream.class))).thenReturn(mockedType);
 		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(Collections.emptySet());
 		

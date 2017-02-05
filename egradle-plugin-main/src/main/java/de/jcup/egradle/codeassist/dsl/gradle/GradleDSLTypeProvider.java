@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEvent;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 import de.jcup.egradle.codeassist.CodeCompletionService;
@@ -67,7 +69,9 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 	public Type getType(String name) {
 		ensurePluginsLoaded();
 		ensureApiMappingLoaded();
-
+		if (StringUtils.isBlank(name)){
+			return null;
+		}
 		Type type = nameToTypeMapping.get(name);
 		if (type != null) {
 			return type;
@@ -118,6 +122,12 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			xm.setParent(type);
 			Type resolvedReturnType = getType(xm.getReturnTypeAsString());
 			xm.setReturnType(resolvedReturnType);
+			
+			String delegationTargetAsString = xm.getDelegationTargetAsString();
+			if (!StringUtils.isBlank(delegationTargetAsString)){
+				Type resolvedDelegationTargetType = getType(delegationTargetAsString);
+				xm.setDelegationTarget(resolvedDelegationTargetType);
+			}
 			
 			for (Parameter p : m.getParameters()) {
 				XMLParameter xp = (XMLParameter) p;

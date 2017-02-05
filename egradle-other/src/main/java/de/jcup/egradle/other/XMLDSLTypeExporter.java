@@ -1,13 +1,15 @@
-package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.other;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.Marshaller;
 
-public class XMLDSLTypeImporter {
+import de.jcup.egradle.codeassist.dsl.XMLType;
+
+public class XMLDSLTypeExporter {
 
 	/**
 	 * Import type by given stream
@@ -16,14 +18,12 @@ public class XMLDSLTypeImporter {
 	 * @throws IOException
 	 * 
 	 */
-	public XMLType importType(InputStream stream) throws IOException{
+	public void exportType(XMLType type , OutputStream stream) throws IOException{
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLType.class);
-			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLType loadedModel = (XMLType) unmarshaller
-					.unmarshal(stream);
-			return loadedModel;
+			Marshaller marshaller = jc.createMarshaller();
+			marshaller.marshal(type, stream);
 		} catch (JAXBException e) {
 			throw new IOException("Was not able to create unmarshaller", e);
 		}

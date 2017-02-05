@@ -1,10 +1,14 @@
 package de.jcup.egradle.other;
 
-import java.awt.image.BufferedImageFilter;
+import static de.jcup.egradle.codeassist.dsl.DSLConstants.HYPERLINK_TYPE_PREFIX;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +19,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLMethod;
+import de.jcup.egradle.codeassist.dsl.XMLType;
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
  * special task called "dslEgradle".<br>
@@ -58,6 +67,9 @@ public class SDKBuilder {
 	SDKBuilder() {
 
 	}
+	
+	private XMLDSLTypeImporter importer= new XMLDSLTypeImporter();
+	private XMLDSLTypeExporter exporter = new XMLDSLTypeExporter();
 
 	public SDKBuilder(String pathToData) throws IOException {
 		gradleEGradleDSLRootFolder = new File(pathToData, "/build/src-egradle/egradle-dsl");
@@ -69,32 +81,10 @@ public class SDKBuilder {
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
 	}
 
-	private void assertDirectoryAndExists(File folder) throws IOException {
-		if (!folder.exists()) {
-			throw new FileNotFoundException(folder.getCanonicalPath() + " does not exist!");
-		}
-
-		if (!folder.isDirectory()) {
-			throw new FileNotFoundException(folder.getCanonicalPath() + " ist not a directory!");
-		}
-	}
-
-	private void assertFileExists(File file) throws FileNotFoundException, IOException {
-		if (!file.exists()) {
-			throw new FileNotFoundException(file.getCanonicalPath() + " does not exist!");
-		}
-		if (!file.isFile()) {
-			throw new FileNotFoundException(file.getCanonicalPath() + " ist not a file!");
-		}
-	}
-
-	private void startTransformToUserHome(String gradleVersion, String targetSDKVersion) throws IOException {
+	public void startTransformToUserHome(String gradleVersion, String targetSDKVersion) throws IOException {
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
-
-		FileUtils.copyFile(gradleOriginPluginsFile, new File(sourceParentDirectory, gradleOriginPluginsFile.getName()));
-		FileUtils.copyFile(gradleOriginMappingFile, new File(sourceParentDirectory, gradleOriginMappingFile.getName()));
-
+	
 		/* healthy check: */
 		File healthCheck = new File(sourceParentDirectory, "org/gradle/api/Project.xml");
 		if (!healthCheck.exists()) {
@@ -110,6 +100,11 @@ public class SDKBuilder {
 			FileUtils.deleteDirectory(targetPathDirectory);
 		}
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
+
+		System.out.println("- copy plugins.xml and origin mapping file");
+		FileUtils.copyFile(gradleOriginPluginsFile, new File(targetPathDirectory, gradleOriginPluginsFile.getName()));
+		FileUtils.copyFile(gradleOriginMappingFile, new File(targetPathDirectory, gradleOriginMappingFile.getName()));
+		
 		System.out.println("- inspect files and generate targets");
 		/*
 		 * create alternative api-mapping because e.g EclipseWTP is not listed
@@ -135,13 +130,47 @@ public class SDKBuilder {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))) {
 			bw.write(sb.toString());
 		}
-
+		System.out.println("- normal file generation done, type:// is now set in hyperlinks");
+		System.out.println("- start delegatesTo estimation");
+		/* now load the xml files as type data - and inspect all descriptions*/
+		
 		System.out.println("DONE");
+	}
+
+	private void assertDirectoryAndExists(File folder) throws IOException {
+		if (!folder.exists()) {
+			throw new FileNotFoundException(folder.getCanonicalPath() + " does not exist!");
+		}
+
+		if (!folder.isDirectory()) {
+			throw new FileNotFoundException(folder.getCanonicalPath() + " ist not a directory!");
+		}
+	}
+
+	private void assertFileExists(File file) throws FileNotFoundException, IOException {
+		if (!file.exists()) {
+			throw new FileNotFoundException(file.getCanonicalPath() + " does not exist!");
+		}
+		if (!file.isFile()) {
+			throw new FileNotFoundException(file.getCanonicalPath() + " ist not a file!");
+		}
 	}
 
 	private void inspectFilesAdoptAndGenerateTarget(Map<String, String> alternativeApiMapping, File sourceDir,
 			File targetDir) throws IOException {
-		for (File newSourceFile : sourceDir.listFiles()) {
+		for (File newSourceFile : sourceDir.listFiles(new FileFilter() {
+			
+			@Override
+			public boolean accept(File file) {
+				if (file==null){
+					return false;
+				}
+				if (file.isDirectory()){
+					return true;
+				}
+				return file.getName().endsWith(".xml");
+			}
+		})) {
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
@@ -151,18 +180,103 @@ public class SDKBuilder {
 
 				String changedSource = readAndAdopt(alternativeApiMapping, newSourceFile);
 				write(changedSource, newTargetFile);
+				
+				/* new TargetFile is now written*/
+				
+				boolean ignore = false;
+				String targetFileName = newTargetFile.getName();
+				ignore = ignore | targetFileName.endsWith("plugins.xml");
+				
+				if (!ignore){
+					startDelegateTargetEstimation(newTargetFile);
+				}
 			}
 		}
 	}
 
-	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
+	private void startDelegateTargetEstimation(File newTargetFile) throws IOException, FileNotFoundException {
+		try{
+			XMLType type =null;
+			
+			try(FileInputStream inputStream = new FileInputStream(newTargetFile)){
+				type = importer.importType(inputStream);
+				
+			}
+			if (type==null){
+				throw new IllegalStateException("was not able to read type:"+newTargetFile);
+			}
+			estimateDelegateTargets(type);
+			try(FileOutputStream outputStream = new FileOutputStream(newTargetFile)){
+				exporter.exportType(type, outputStream);
+			}
+		}catch(IOException e){
+			throw new IOException("Problems with file:"+newTargetFile.getAbsolutePath(),e);
+		}
+	}
+
+	
+	void estimateDelegateTargets(Type type) {
+		for (Method m: type.getMethods()){
+			if (! (m instanceof XMLMethod)){
+				continue;
+			}
+			XMLMethod method = (XMLMethod) m;
+			String delegationTarget = method.getDelegationTargetAsString();
+			if (! StringUtils.isBlank(delegationTarget)){
+				continue;// already set - maybe in future
+			}
+			String description = method.getDescription();
+			if (description==null){
+				System.out.println("- WARN: method has no description:"+type.getName()+"#"+method.getName());
+				continue;
+			}
+			String targetType = null;
+			int index = 0;
+			while (targetType==null && index!=-1){
+				int from = index+1;
+				index = StringUtils.indexOf(description, HYPERLINK_TYPE_PREFIX, from);
+				if (index!=-1){
+					targetType=inspect(index,description);
+				}
+			}
+		
+			if (targetType!=null){
+				method.setDelegationTargetAsString(targetType);
+			}
+		}
+		
+	}
+
+	private String inspect(int index, String description) {
 		StringBuilder sb = new StringBuilder();
+		index=index+HYPERLINK_TYPE_PREFIX.length();
+		int length = description.length();
+		for (int i=index;i<length;i++){
+			char c  = description.charAt(i);
+			if (Character.isLetterOrDigit(c) || c=='.'){
+				sb.append(c);
+			}else{
+				if (c=='#'){
+					return null;
+				}
+				break;
+			}
+		}
+		String targetType = sb.toString();
+		return targetType;
+		
+	}
+
+	
+	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
+		StringBuilder fullDescription = new StringBuilder();
 		try (BufferedReader reader = new BufferedReader(new FileReader(sourceFile))) {
+			
 			String line = "";
 			boolean foundType = false;
 			while ((line = reader.readLine()) != null) {
-				if (sb.length() != 0) {
-					sb.append("\n");
+				if (fullDescription.length() != 0) {
+					fullDescription.append("\n");
 				}
 				if (!foundType) {
 					if (line.trim().startsWith("<type")) {
@@ -182,16 +296,17 @@ public class SDKBuilder {
 						}
 					}
 				}
-				String adoptedLine = convertLine(line);
-				sb.append(adoptedLine);
+				line=removeWhitespacesAndStars(line);
+				fullDescription.append(line);
+				fullDescription.append(' ');
 
 			}
 		}
-		return sb.toString();
+		return convertString(fullDescription.toString());
 	}
 
-	String convertLine(String origin) {
-		String line = removeWhitespacesAndStars(origin);
+	String convertString(String origin) {
+		String line = origin;
 		line = replaceJavaDocLinks(line);
 		line = replaceJavaDocCode(line);
 		line = replaceJavaDocParams(line);
@@ -230,7 +345,7 @@ public class SDKBuilder {
 			} else if (c == '}') {
 				curlyContentUnchanged.append(c);
 				if (state == JavaDocState.JAVADOC_TAG_FOUND) {
-					String replaced = replacer.replace(curlyContent.toString());
+					String replaced = replacer.replace(curlyContent.toString().trim());
 					sb.append(replaced);
 				} else {
 					sb.append(curlyContentUnchanged);
@@ -242,7 +357,13 @@ public class SDKBuilder {
 			}
 			if (state == JavaDocState.CURLY_BRACKET_OPENED) {
 				curlyContentUnchanged.append(c);
-				curlyContent.append(c);
+				if (curlyContent.length()==0){
+					if (!Character.isWhitespace(c)) { // no leading whitespaces after {
+						curlyContent.append(c);
+					}
+				}else{
+					curlyContent.append(c);
+				}
 			} else if (state == JavaDocState.JAVADOC_TAG_FOUND) {
 				curlyContentUnchanged.append(c);
 				if (Character.isWhitespace(c)) {
@@ -375,7 +496,7 @@ public class SDKBuilder {
 			@Override
 			public String replace(String content) {
 				//return "<div class='code'>" + content + "</div>";
-				return "<a href='type://" + content + "'>" + content + "</a>";
+				return "<a href='"+HYPERLINK_TYPE_PREFIX+ content + "'>" + content + "</a>";
 			}
 		});
 		return replaced;
@@ -387,13 +508,13 @@ public class SDKBuilder {
 
 			@Override
 			public String replace(String content) {
-				return "<a href='type://" + content + "'>" + content + "</a>";
+				return "<a href='" + HYPERLINK_TYPE_PREFIX+content + "'>" + content + "</a>";
 			}
 		});
 		return replaced;
 	}
 
-	private String removeWhitespacesAndStars(String line) {
+	String removeWhitespacesAndStars(String line) {
 		StringBuilder sb = new StringBuilder();
 
 		boolean firstNonWhitespaceWorked = false;

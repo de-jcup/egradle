@@ -2,8 +2,6 @@ package de.jcup.egradle.codeassist.dsl;
 
 import java.util.List;
 
-import de.jcup.egradle.core.api.StringUtilsAccess;
-
 /**
  * Represents a method / function
  * @author Albert Tregnaghi
@@ -12,6 +10,17 @@ import de.jcup.egradle.core.api.StringUtilsAccess;
 public interface Method extends LanguageElement, TypeChild{
 
 	public Type getReturnType();
+	
+	public String getReturnTypeAsString();
+	
+	
+	public Type getDelegationTarget();
+	
+	/**
+	 * Returns delegation target or <code>null</code>
+	 * @return delegation target or <code>null</code>
+	 */
+	public String getDelegationTargetAsString();
 	
 	/**
 	 * Returns parameters never <code>null</code>

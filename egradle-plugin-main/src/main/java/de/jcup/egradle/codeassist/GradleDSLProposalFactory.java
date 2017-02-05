@@ -17,7 +17,7 @@ import de.jcup.egradle.codeassist.dsl.Reason;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.CreationMode;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.TypeContext;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 import de.jcup.egradle.core.model.Item;
@@ -69,7 +69,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		/* FIXME ATR, 03.02.2017:  at this point the HTMLDescriptionBuilder like in 
 		 * GradleTextHover should be used- so we got only one HTML preview*/
 		Type identifiedType = result.getElementType();
-		CreationMode mode = result.getMode();
+		TypeContext mode = result.getMode();
 		Set<Proposal> proposals = new TreeSet<>();
 		Map<String, Type> extensions = identifiedType.getExtensions();
 		/*
@@ -134,7 +134,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
-			if (mode == CreationMode.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
+			if (mode == TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
 				if (method.getName().startsWith("get")) {
 					continue;
 				}

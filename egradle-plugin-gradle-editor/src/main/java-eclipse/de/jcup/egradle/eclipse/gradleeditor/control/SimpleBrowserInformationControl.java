@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.codeassist.dsl.DSLConstants;
+import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.StringUtilsAccess;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
@@ -35,7 +35,7 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
  */
 public class SimpleBrowserInformationControl extends AbstractInformationControl {
 
-	private static final String REAL_HTML_SITE_IDENTIFIER = "REAL_HTML_SITE:";
+	
 	private static boolean browserAvailabilityChecked;
 	private static boolean swtBrowserCanBeUsed;
 	private static Point cachedScrollBarSize;
@@ -234,7 +234,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 							history.add(backContent);// add types again to history so still current again.
 							return;
 							
-						}else if (backContent.startsWith(REAL_HTML_SITE_IDENTIFIER)){
+						}else if (backContent.startsWith(HYPERLINK_HTTP_PREFIX)){
 							if (isDebugEnabled()){
 								debug("history detected for real html page, so use browser history");
 							}
@@ -289,7 +289,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 					event.doit = false;
 				}else if (event.location == "about:blank") {
 					event.doit = false;
-				}else if (event.location.startsWith(DSLConstants.HYPERLINK_TYPE_PREFIX)){
+				}else if (event.location.startsWith(HYPERLINK_TYPE_PREFIX)){
 					event.doit = false;
 				}
 				if (isDebugEnabled()){
@@ -327,11 +327,11 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 							}
 							browserEGradleLinkListener.onEGradleHyperlinkClicked(control, newLocation);
 						}
-					} else if (newLocation.startsWith("http")) {
+					} else if (newLocation.startsWith(HYPERLINK_HTTP_PREFIX)) {
 						if (isDebugEnabled()){
 							debug("changed location(4)-add history:"+newLocation);
 						}
-						history.add(REAL_HTML_SITE_IDENTIFIER+newLocation);
+						history.add(newLocation);
 						if (isDebugEnabled()){
 							debug("now:"+history.toString());
 						}
