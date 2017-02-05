@@ -270,13 +270,13 @@ public class SDKBuilder {
 	}
 
 	/**
-	 * Replace key value pair until whitespace or end. E.g. "@param name1 description " will replace "@param name1" only
+	 * Replace javadoc identifier tag and all rest of line
 	 * @param line
 	 * @param javadocId
 	 * @param replacer
 	 * @return replaced string
 	 */
-	String replaceJavaDocKeyValue(String line, String javadocId, ContentReplacer replacer){
+	String replaceJavaDocTagAndTrailingParts(String line, String javadocId, ContentReplacer replacer){
 		int index = line.indexOf(javadocId);
 		if (index==-1){
 			return line;
@@ -290,6 +290,40 @@ public class SDKBuilder {
 			char c = line.charAt(pos++);
 			if (Character.isWhitespace(c)){
 				if (leadingWhiteSpaces){
+					continue;
+				}
+			}
+			leadingWhiteSpaces=false;
+			content.append(c);
+		}
+		String replaced = replacer.replace(content.toString());
+		String result = before+replaced;
+		return result;
+	}
+
+	/**
+	 * Replace key value pair until whitespace or end. E.g. "@param name1 description " will replace "@param name1" only
+	 * @param line
+	 * @param javadocId
+	 * @param replacer
+	 * @param onlyEndTermination when true trailing whitespaces are not terminating
+	 * @return replaced string
+	 * @deprecated does not work correct currently
+	 */
+	String replaceJavaDocKeyValue(String line, String javadocId, ContentReplacer replacer, boolean onlyEndTermination){
+		int index = line.indexOf(javadocId);
+		if (index==-1){
+			return line;
+		}
+		int length = line.length();
+		StringBuilder content = new StringBuilder();
+		String before = StringUtils.substring(line, 0, index);
+		boolean leadingWhiteSpaces=true;
+		int pos=index+javadocId.length();
+		while (pos<length){
+			char c = line.charAt(pos++);
+			if (Character.isWhitespace(c)){
+				if (onlyEndTermination || leadingWhiteSpaces){
 					continue;
 				}else{
 					/* no leading but another whitespace so end reached */
@@ -310,11 +344,11 @@ public class SDKBuilder {
 	
 	private String replaceJavaDocParams(String line) {
 		// * @param msg asdfasfasf
-		String replaced = replaceJavaDocKeyValue(line, "@param", new ContentReplacer() {
+		String replaced = replaceJavaDocTagAndTrailingParts(line, "@param", new ContentReplacer() {
 
 			@Override
 			public String replace(String content) {
-				return "<br>Parameter:<div class='param'>" + content + "</div>";
+				return "<br><b class='param'>param:</b>" + content;
 			}
 		});
 		return replaced;
@@ -323,11 +357,11 @@ public class SDKBuilder {
 
 	private String replaceJavaDocReturn(String line) {
 		// * @return ...
-		String replaced = replaceJavaDocKeyValue(line, "@return", new ContentReplacer() {
+		String replaced = replaceJavaDocTagAndTrailingParts(line, "@return", new ContentReplacer() {
 
 			@Override
 			public String replace(String content) {
-				return "<br>Returns:<div class='return'>" + content + "</div>";
+				return "<br><b class='return'>returns:</b>" + content;
 			}
 		});
 		return replaced;

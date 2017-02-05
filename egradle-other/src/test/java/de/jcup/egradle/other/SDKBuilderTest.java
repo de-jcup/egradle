@@ -55,7 +55,14 @@ public class SDKBuilderTest {
 	@Test
 	public void testJavadocParamConversion() {
 		String line = "*  @param name1 a description";
-		String expected = "  <br>Parameter:<div class='param'>name1</div>a description";
+		String expected = "  <br><b class='param'>param:</b>name1 a description";
+		assertEquals(expected, preparatorToTest.convertLine(line));
+	}
+	
+	@Test
+	public void testJavadocReturnConversion() {
+		String line = "*  @return name1 a description";
+		String expected = "  <br><b class='return'>returns:</b>name1 a description";
 		assertEquals(expected, preparatorToTest.convertLine(line));
 	}
 

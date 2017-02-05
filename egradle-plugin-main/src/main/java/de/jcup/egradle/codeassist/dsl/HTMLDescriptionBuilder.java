@@ -67,6 +67,8 @@ public class HTMLDescriptionBuilder {
 		style.append("}");
 		style.append("pre {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
 		style.append("a {color: #229922;}");
+		style.append(".param {color: #229922;}");
+		style.append(".return {color: #229922;}");
 		style.append(".originLinkURL {font-size:x-small;color: #999999;font-family:'Courier New', Courier, monospace}");
 		
 		return "<html><head><title>"+title+"</title><style>"+style.toString()+"</style></head><body>" + descSb + "</body></html>";

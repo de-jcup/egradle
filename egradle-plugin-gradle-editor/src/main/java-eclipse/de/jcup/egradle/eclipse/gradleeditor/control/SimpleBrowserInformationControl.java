@@ -403,7 +403,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		return new IInformationControlCreator() {
 			@Override
 			public IInformationControl createInformationControl(Shell parent) {
-				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent, 5);
+				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent,20);
 				newControl.setBrowserEGradleLinkListener(browserEGradleLinkListener);
 				return newControl;
 			}

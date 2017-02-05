@@ -19,20 +19,21 @@ public class ApiMappingImporter {
 	 */
 	public Map<String,String> importMapping(InputStream stream) throws IOException{
 		Map<String,String> map = new TreeMap<>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-		String line = "";
-		while ((line=reader.readLine())!=null){
-			/* file contains as following "shortName:longName;" */
-			String[] parts = StringUtils.split(line, ":;");
-			if (parts==null){
-				continue;
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream))){
+			String line = "";
+			while ((line=reader.readLine())!=null){
+				/* file contains as following "shortName:longName;" */
+				String[] parts = StringUtils.split(line, ":;");
+				if (parts==null){
+					continue;
+				}
+				if (parts.length<2){
+					continue;
+				}
+				map.put(parts[0],parts[1]);
 			}
-			if (parts.length<2){
-				continue;
-			}
-			map.put(parts[0],parts[1]);
+			return map;
 		}
-		return map;
 	}
 
 }

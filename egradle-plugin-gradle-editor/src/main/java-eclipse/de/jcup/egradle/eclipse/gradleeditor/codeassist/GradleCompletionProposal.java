@@ -151,7 +151,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		@Override
 		public IInformationControl doCreateInformationControl(Shell shell) {
 			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
-				return new SimpleBrowserInformationControl(shell,5);
+				return new SimpleBrowserInformationControl(shell,20);
 			}
 			return new DefaultInformationControl(shell, true);
 		}
