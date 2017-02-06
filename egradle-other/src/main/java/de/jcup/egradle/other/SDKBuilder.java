@@ -26,6 +26,7 @@ import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLType;
 import static java.nio.charset.StandardCharsets.*;
+
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
  * special task called "dslEgradle".<br>
@@ -54,7 +55,10 @@ public class SDKBuilder {
 		;
 	}
 
-	/* FIXME ATR, 06.02.2017: sdk builder MUST set fix links like <a href="#method(x.x..)"> to  <a href="#method(x.x..)"*/
+	/*
+	 * FIXME ATR, 06.02.2017: sdk builder MUST set fix links like <a
+	 * href="#method(x.x..)"> to <a href="#method(x.x..)"
+	 */
 	private File gradleEGradleDSLRootFolder;
 	private File gradleOriginPluginsFile;
 	private File gradleOriginMappingFile;
@@ -65,8 +69,8 @@ public class SDKBuilder {
 	SDKBuilder() {
 
 	}
-	
-	private XMLDSLTypeImporter importer= new XMLDSLTypeImporter();
+
+	private XMLDSLTypeImporter importer = new XMLDSLTypeImporter();
 	private XMLDSLTypeExporter exporter = new XMLDSLTypeExporter();
 
 	public SDKBuilder(String pathToData) throws IOException {
@@ -82,7 +86,7 @@ public class SDKBuilder {
 	public void startTransformToUserHome(String gradleVersion, String targetSDKVersion) throws IOException {
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
-	
+
 		/* healthy check: */
 		File healthCheck = new File(sourceParentDirectory, "org/gradle/api/Project.xml");
 		if (!healthCheck.exists()) {
@@ -102,7 +106,7 @@ public class SDKBuilder {
 		System.out.println("- copy plugins.xml and origin mapping file");
 		FileUtils.copyFile(gradleOriginPluginsFile, new File(targetPathDirectory, gradleOriginPluginsFile.getName()));
 		FileUtils.copyFile(gradleOriginMappingFile, new File(targetPathDirectory, gradleOriginMappingFile.getName()));
-		
+
 		System.out.println("- inspect files and generate targets");
 		/*
 		 * create alternative api-mapping because e.g EclipseWTP is not listed
@@ -110,7 +114,8 @@ public class SDKBuilder {
 		 */
 		BuilderContext builderContext = new BuilderContext();
 		Map<String, String> alternativeApiMapping = new TreeMap<>();
-		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory,builderContext );
+		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory,
+				builderContext);
 		System.out.println("- generate alternative api mapping file");
 		StringBuilder sb = new StringBuilder();
 		boolean first = true;
@@ -131,8 +136,8 @@ public class SDKBuilder {
 		}
 		System.out.println("- normal file generation done, type:// is now set in hyperlinks");
 		System.out.println("- start delegatesTo estimation");
-		/* now load the xml files as type data - and inspect all descriptions*/
-		System.out.println("- info:"+builderContext.getInfo());
+		/* now load the xml files as type data - and inspect all descriptions */
+		System.out.println("- info:" + builderContext.getInfo());
 		System.out.println("DONE");
 	}
 
@@ -158,13 +163,13 @@ public class SDKBuilder {
 	private void inspectFilesAdoptAndGenerateTarget(Map<String, String> alternativeApiMapping, File sourceDir,
 			File targetDir, BuilderContext builderContext) throws IOException {
 		for (File newSourceFile : sourceDir.listFiles(new FileFilter() {
-			
+
 			@Override
 			public boolean accept(File file) {
-				if (file==null){
+				if (file == null) {
 					return false;
 				}
-				if (file.isDirectory()){
+				if (file.isDirectory()) {
 					return true;
 				}
 				return file.getName().endsWith(".xml");
@@ -173,79 +178,81 @@ public class SDKBuilder {
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
-				inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, newSourceFile, newTargetDir,builderContext);
+				inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, newSourceFile, newTargetDir, builderContext);
 			} else if (newSourceFile.isFile()) {
 				File newTargetFile = new File(targetDir, name);
 
 				String changedSource = readAndAdopt(alternativeApiMapping, newSourceFile);
 				write(changedSource, newTargetFile);
-				
-				/* new TargetFile is now written*/
-				
+
+				/* new TargetFile is now written */
+
 				boolean ignore = false;
 				String targetFileName = newTargetFile.getName();
 				ignore = ignore | targetFileName.endsWith("plugins.xml");
-				
-				if (!ignore){
-					startDelegateTargetEstimation(newTargetFile,builderContext);
+
+				if (!ignore) {
+					startDelegateTargetEstimation(newTargetFile, builderContext);
 				}
 			}
 		}
 	}
 
-	private void startDelegateTargetEstimation(File newTargetFile, BuilderContext builderContext) throws IOException, FileNotFoundException {
-		try{
-			XMLType type =null;
-			
-			try(FileInputStream inputStream = new FileInputStream(newTargetFile)){
+	private void startDelegateTargetEstimation(File newTargetFile, BuilderContext builderContext)
+			throws IOException, FileNotFoundException {
+		try {
+			XMLType type = null;
+
+			try (FileInputStream inputStream = new FileInputStream(newTargetFile)) {
 				type = importer.importType(inputStream);
-				
+
 			}
-			if (type==null){
-				throw new IllegalStateException("was not able to read type:"+newTargetFile);
+			if (type == null) {
+				throw new IllegalStateException("was not able to read type:" + newTargetFile);
 			}
-			estimateDelegateTargets(type,builderContext);
-			try(FileOutputStream outputStream = new FileOutputStream(newTargetFile)){
+			estimateDelegateTargets(type, builderContext);
+			try (FileOutputStream outputStream = new FileOutputStream(newTargetFile)) {
 				exporter.exportType(type, outputStream);
 			}
-		}catch(IOException e){
-			throw new IOException("Problems with file:"+newTargetFile.getAbsolutePath(),e);
+		} catch (IOException e) {
+			throw new IOException("Problems with file:" + newTargetFile.getAbsolutePath(), e);
 		}
 	}
 
-	private class BuilderContext{
+	private class BuilderContext {
 		int methodWithOutDescriptionCount;
 		int methodAllCount;
-		
+
 		public String getInfo() {
-			double missingDescriptionPercent =0;
-			if (methodWithOutDescriptionCount!=0 && methodAllCount!=0){
-				double onePercent = methodAllCount/100;
-				missingDescriptionPercent = methodWithOutDescriptionCount/onePercent;
+			double missingDescriptionPercent = 0;
+			if (methodWithOutDescriptionCount != 0 && methodAllCount != 0) {
+				double onePercent = methodAllCount / 100;
+				missingDescriptionPercent = methodWithOutDescriptionCount / onePercent;
 			}
-			return "Methods all:"+methodAllCount+" - missing descriptions:"+methodWithOutDescriptionCount+" ="+missingDescriptionPercent+"%";
+			return "Methods all:" + methodAllCount + " - missing descriptions:" + methodWithOutDescriptionCount + " ="
+					+ missingDescriptionPercent + "%";
 		}
 	}
-	
+
 	void estimateDelegateTargets(Type type) {
 		estimateDelegateTargets(type, new BuilderContext());
 	}
-	
+
 	void estimateDelegateTargets(Type type, BuilderContext builderContext) {
-		int problemCount =0;
+		int problemCount = 0;
 		StringBuilder problems = new StringBuilder();
-		for (Method m: type.getMethods()){
-			if (! (m instanceof XMLMethod)){
+		for (Method m : type.getMethods()) {
+			if (!(m instanceof XMLMethod)) {
 				continue;
 			}
 			builderContext.methodAllCount++;
 			XMLMethod method = (XMLMethod) m;
 			String delegationTarget = method.getDelegationTargetAsString();
-			if (! StringUtils.isBlank(delegationTarget)){
+			if (!StringUtils.isBlank(delegationTarget)) {
 				continue;// already set - maybe in future
 			}
 			String description = method.getDescription();
-			if (description==null){
+			if (description == null) {
 				problemCount++;
 				problems.append(method.getName());
 				problems.append(" ");
@@ -253,36 +260,36 @@ public class SDKBuilder {
 			}
 			String targetType = null;
 			int index = 0;
-			while (targetType==null && index!=-1){
-				int from = index+1;
+			while (targetType == null && index != -1) {
+				int from = index + 1;
 				index = StringUtils.indexOf(description, HYPERLINK_TYPE_PREFIX, from);
-				if (index!=-1){
-					targetType=inspect(index,description);
+				if (index != -1) {
+					targetType = inspect(index, description);
 				}
 			}
-		
-			if (targetType!=null){
+
+			if (targetType != null) {
 				method.setDelegationTargetAsString(targetType);
 			}
 		}
-		if (problemCount>0){
-			System.out.println("- WARN: type:"+type.getName()+" has following method without descriptions: has no description "+problems.toString());
-			builderContext.methodWithOutDescriptionCount+=problemCount;
+		if (problemCount > 0) {
+			System.out.println("- WARN: type:" + type.getName()
+					+ " has following method without descriptions: has no description " + problems.toString());
+			builderContext.methodWithOutDescriptionCount += problemCount;
 		}
-		
-		
+
 	}
 
 	private String inspect(int index, String description) {
 		StringBuilder sb = new StringBuilder();
-		index=index+HYPERLINK_TYPE_PREFIX.length();
+		index = index + HYPERLINK_TYPE_PREFIX.length();
 		int length = description.length();
-		for (int i=index;i<length;i++){
-			char c  = description.charAt(i);
-			if (Character.isLetterOrDigit(c) || c=='.'){
+		for (int i = index; i < length; i++) {
+			char c = description.charAt(i);
+			if (Character.isLetterOrDigit(c) || c == '.') {
 				sb.append(c);
-			}else{
-				if (c=='#'){
+			} else {
+				if (c == '#') {
 					return null;
 				}
 				break;
@@ -290,45 +297,54 @@ public class SDKBuilder {
 		}
 		String targetType = sb.toString();
 		return targetType;
-		
+
 	}
 
-	
 	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
 		StringBuilder fullDescription = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(sourceFile),UTF_8))) {
-			
-			String line = "";
-			boolean foundType = false;
-			while ((line = reader.readLine()) != null) {
-				if (fullDescription.length() != 0) {
-					fullDescription.append("\n");
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(new FileInputStream(sourceFile), UTF_8))) {
+			readLines(alternativeApiMapping, sourceFile, fullDescription, new LineResolver() {
+
+				public String getNextLine() throws IOException {
+					return reader.readLine();
 				}
-				if (!foundType) {
-					if (line.trim().startsWith("<type")) {
-						foundType = true;
-						String name = StringUtils.substringBetween(line, "name=\"", "\"");
-						if (name == null) {
-							System.err.println("WARN:name=null for line:" + line);
-						} else {
-							/*
-							 * we exclude gradle tooling here because of
-							 * duplicates with api parts
-							 */
-							if (!name.startsWith("org.gradle.tooling")) {
-								String shortName = FilenameUtils.getBaseName(sourceFile.getName());
-								alternativeApiMapping.put(shortName, name);
-							}
+			});
+		}
+		return convertString(fullDescription.toString());
+	}
+
+	void readLines(Map<String, String> alternativeApiMapping, File sourceFile, StringBuilder fullDescription,
+			LineResolver lineResolver) throws IOException {
+		String line = "";
+		boolean foundType = false;
+		while ((line = lineResolver.getNextLine()) != null) {
+			if (fullDescription.length() != 0) {
+				fullDescription.append("\n");
+			}
+			if (!foundType) {
+				if (line.trim().startsWith("<type")) {
+					foundType = true;
+					String name = StringUtils.substringBetween(line, "name=\"", "\"");
+					if (name == null) {
+						System.err.println("WARN:name=null for line:" + line);
+					} else {
+						/*
+						 * we exclude gradle tooling here because of duplicates
+						 * with api parts
+						 */
+						if (!name.startsWith("org.gradle.tooling")) {
+							String shortName = FilenameUtils.getBaseName(sourceFile.getName());
+							alternativeApiMapping.put(shortName, name);
 						}
 					}
 				}
-				line=removeWhitespacesAndStars(line);
-				fullDescription.append(line);
-				fullDescription.append(' ');
-
 			}
+			line = removeWhitespacesAndStars(line);
+			fullDescription.append(line);
+			fullDescription.append(' ');
+
 		}
-		return convertString(fullDescription.toString());
 	}
 
 	String convertString(String origin) {
@@ -383,11 +399,12 @@ public class SDKBuilder {
 			}
 			if (state == JavaDocState.CURLY_BRACKET_OPENED) {
 				curlyContentUnchanged.append(c);
-				if (curlyContent.length()==0){
-					if (!Character.isWhitespace(c)) { // no leading whitespaces after {
+				if (curlyContent.length() == 0) {
+					if (!Character.isWhitespace(c)) { // no leading whitespaces
+														// after {
 						curlyContent.append(c);
 					}
-				}else{
+				} else {
 					curlyContent.append(c);
 				}
 			} else if (state == JavaDocState.JAVADOC_TAG_FOUND) {
@@ -418,77 +435,39 @@ public class SDKBuilder {
 
 	/**
 	 * Replace javadoc identifier tag and all rest of line
+	 * 
 	 * @param line
 	 * @param javadocId
 	 * @param replacer
 	 * @return replaced string
 	 */
-	String replaceJavaDocTagAndTrailingParts(String line, String javadocId, ContentReplacer replacer){
-		int index = line.indexOf(javadocId);
-		if (index==-1){
-			return line;
-		}
-		int length = line.length();
-		StringBuilder content = new StringBuilder();
-		String before = StringUtils.substring(line, 0, index);
-		boolean leadingWhiteSpaces=true;
-		int pos=index+javadocId.length();
-		while (pos<length){
-			char c = line.charAt(pos++);
-			if (Character.isWhitespace(c)){
-				if (leadingWhiteSpaces){
-					continue;
-				}
+	String replaceJavaDocTagAndTrailingParts(String xline, String javadocId, ContentReplacer replacer) {
+		String result = xline;
+		while(true){
+			int index = result.indexOf(javadocId);
+			if (index == -1) {
+				return result;
 			}
-			leadingWhiteSpaces=false;
-			content.append(c);
+			int length = result.length();
+			StringBuilder content = new StringBuilder();
+			String before = StringUtils.substring(result, 0, index);
+			boolean leadingWhiteSpaces = true;
+			int pos = index + javadocId.length();
+			while (pos < length) {
+				char c = result.charAt(pos++);
+				if (Character.isWhitespace(c)) {
+					if (leadingWhiteSpaces) {
+						continue;
+					}
+				}
+				leadingWhiteSpaces = false;
+				content.append(c);
+			}
+			String replaced = replacer.replace(content.toString());
+			result = before + replaced;
 		}
-		String replaced = replacer.replace(content.toString());
-		String result = before+replaced;
-		return result;
 	}
 
-	/**
-	 * Replace key value pair until whitespace or end. E.g. "@param name1 description " will replace "@param name1" only
-	 * @param line
-	 * @param javadocId
-	 * @param replacer
-	 * @param onlyEndTermination when true trailing whitespaces are not terminating
-	 * @return replaced string
-	 * @deprecated does not work correct currently
-	 */
-	String replaceJavaDocKeyValue(String line, String javadocId, ContentReplacer replacer, boolean onlyEndTermination){
-		int index = line.indexOf(javadocId);
-		if (index==-1){
-			return line;
-		}
-		int length = line.length();
-		StringBuilder content = new StringBuilder();
-		String before = StringUtils.substring(line, 0, index);
-		boolean leadingWhiteSpaces=true;
-		int pos=index+javadocId.length();
-		while (pos<length){
-			char c = line.charAt(pos++);
-			if (Character.isWhitespace(c)){
-				if (onlyEndTermination || leadingWhiteSpaces){
-					continue;
-				}else{
-					/* no leading but another whitespace so end reached */
-					break;
-				}
-			}
-			leadingWhiteSpaces=false;
-			content.append(c);
-		}
-		String remaining="";
-		if (pos<length){
-			remaining=StringUtils.substring(line, pos);
-		}
-		String replaced = replacer.replace(content.toString());
-		String result = before+replaced+remaining;
-		return result;
-	}
-	
 	private String replaceJavaDocParams(String line) {
 		// * @param msg asdfasfasf
 		String replaced = replaceJavaDocTagAndTrailingParts(line, "@param", new ContentReplacer() {
@@ -521,8 +500,8 @@ public class SDKBuilder {
 
 			@Override
 			public String replace(String content) {
-				//return "<div class='code'>" + content + "</div>";
-				return "<a href='"+HYPERLINK_TYPE_PREFIX+ content + "'>" + content + "</a>";
+				// return "<div class='code'>" + content + "</div>";
+				return "<a href='" + HYPERLINK_TYPE_PREFIX + content + "'>" + content + "</a>";
 			}
 		});
 		return replaced;
@@ -534,7 +513,7 @@ public class SDKBuilder {
 
 			@Override
 			public String replace(String content) {
-				return "<a href='" + HYPERLINK_TYPE_PREFIX+content + "'>" + content + "</a>";
+				return "<a href='" + HYPERLINK_TYPE_PREFIX + content + "'>" + content + "</a>";
 			}
 		});
 		return replaced;
@@ -563,7 +542,8 @@ public class SDKBuilder {
 
 	private void write(String changedSource, File newTargetFile) throws IOException {
 		newTargetFile.getParentFile().mkdirs();
-		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newTargetFile),UTF_8))) {
+		try (BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(newTargetFile), UTF_8))) {
 			bw.write(changedSource);
 		}
 
