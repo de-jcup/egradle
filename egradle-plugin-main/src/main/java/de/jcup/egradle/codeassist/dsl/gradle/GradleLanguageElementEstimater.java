@@ -66,6 +66,9 @@ public class GradleLanguageElementEstimater {
 
 			} else if (element instanceof Method) {
 				Method m = (Method) element;
+				if (mode==TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE){
+					return m.getDelegationTarget();
+				}
 				return m.getReturnType();
 			} else if (element instanceof Property) {
 				Property p = (Property) element;

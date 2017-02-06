@@ -15,6 +15,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.gradleeditor.DefaultEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
 public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
@@ -147,11 +148,15 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		return 0;
 	}
 	
-	protected static class EGradleInformationControlCreator extends AbstractReusableInformationControlCreator {
+	protected class EGradleInformationControlCreator extends AbstractReusableInformationControlCreator {
 		@Override
 		public IInformationControl doCreateInformationControl(Shell shell) {
 			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
-				return new SimpleBrowserInformationControl(shell,20);
+				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(shell,20);
+				if (lazyBuilder!=null){
+					control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(lazyBuilder.getFgColor(), lazyBuilder.getBgColor(), lazyBuilder.getBuilder()));
+				}
+				return control;
 			}
 			return new DefaultInformationControl(shell, true);
 		}

@@ -19,6 +19,17 @@ public class LazyLanguageElementHTMLDescriptionBuilder {
 		this.fgColor = fgColor;
 		this.bgColor = bgColor;
 	}
+	public String getFgColor() {
+		return fgColor;
+	}
+	
+	public HTMLDescriptionBuilder getBuilder() {
+		return builder;
+	}
+	
+	public String getBgColor() {
+		return bgColor;
+	}
 	
 	public String createHTML(){
 		if (element==null){

@@ -135,7 +135,11 @@ public class Item {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		if (name==null){
+			this.name=null;
+			return;
+		}
+		this.name = name.trim();
 	}
 
 	public String getName() {

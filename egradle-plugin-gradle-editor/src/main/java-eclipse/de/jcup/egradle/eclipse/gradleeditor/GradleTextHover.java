@@ -12,24 +12,18 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
-import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
-import de.jcup.egradle.core.api.LinkToTypeConverter;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
-import de.jcup.egradle.eclipse.gradleeditor.control.BrowserEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
@@ -39,7 +33,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	private ISourceViewer sourceViewer;
 	private String contentType;
 	private GradleTextHoverControlCreator creator;
-	private LinkToTypeConverter linkToTypeConverter;
+	
 	private String fgColor;
 	private String bgColor;
 
@@ -48,7 +42,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
 		this.sourceViewer = sourceViewer;
 		this.contentType = contentType;
-		this.linkToTypeConverter = new LinkToTypeConverter();
+		
 		builder = new HTMLDescriptionBuilder();
 	}
 
@@ -191,44 +185,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public IInformationControl createInformationControl(Shell parent) {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.setBrowserEGradleLinkListener(new BrowserEGradleLinkListener() {
-
-					@Override
-					public void onEGradleHyperlinkClicked(IInformationControl control, String target) {
-						String convertedName = linkToTypeConverter.convertLink(target);
-						if (convertedName == null) {
-							showFallBackInfo(target);
-							return;
-						}
-						CodeCompletionRegistry registry = Activator.getDefault().getCodeCompletionRegistry();
-						if (registry == null) {
-							showFallBackInfo("Code completion registry not available!");
-							return;
-						}
-						GradleDSLTypeProvider provider = registry.getService(GradleDSLTypeProvider.class);
-						if (provider == null) {
-							showFallBackInfo("Type provider not available!");
-							return;
-						}
-
-						Type type = provider.getType(convertedName);
-						if (type == null) {
-							showFallBackInfo(convertedName);
-							return;
-						}
-						control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, null, type));
-
-					}
-
-					private void showFallBackInfo(String target) {
-						control.setInformation("<html><bod>New location should be:" + target + "</body></html>");
-					}
-
-					@Override
-					public boolean isAcceptingHyperlink(String target) {
-						return linkToTypeConverter.isLinkSchemaConvertable(target);
-					}
-				});
+				control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(fgColor,bgColor,builder));
 				return control;
 			} else {
 				return new DefaultInformationControl(parent, true);
