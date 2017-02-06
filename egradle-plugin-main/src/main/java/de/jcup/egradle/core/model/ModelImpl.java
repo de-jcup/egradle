@@ -32,12 +32,21 @@ public class ModelImpl implements Model {
 
 	@Override
 	public Item getItemAt(int offset) {
+		return getItemInternal(offset,true);
+	}
+	
+	@Override
+	public Item getItemOnlyAt(int offset) {
+		return getItemInternal(offset,false);
+	}
+
+	private Item getItemInternal(int offset, boolean fallbackEnabled) {
 		if (!offsetRegistrationDone) {
 			startOffsetRegistration();
 		}
 		synchronized(map){
 			Item item = map.get(offset);
-			if (item == null) {
+			if (item == null && fallbackEnabled) {
 				item = findApplyableItem(offset);
 			}
 			return item;

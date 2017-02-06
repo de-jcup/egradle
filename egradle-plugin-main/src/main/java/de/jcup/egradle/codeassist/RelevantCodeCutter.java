@@ -44,6 +44,24 @@ public class RelevantCodeCutter {
 		String rightText = getRightText(code,offset);
 		return leftText+rightText;
 	}
+	
+	/**
+	 * Return start offset for given code or -1
+	 * @param code
+	 * @param offset
+	 * @return start offset for given code or -1s
+	 */
+	public int getRelevantCodeStartOffset(String code, int offset) {
+		if (code==null){
+			return -1;
+		}
+		if (offset<0){
+			return -1;
+		}
+		String leftText = getLeftText(code,offset);
+		int newOffset=offset-leftText.length();
+		return newOffset;
+	}
 
 	private String getLeftText(String code, int offset) {
 		char[] chars = code.toCharArray();

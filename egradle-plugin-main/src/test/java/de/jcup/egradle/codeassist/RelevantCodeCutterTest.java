@@ -32,7 +32,14 @@ public class RelevantCodeCutterTest {
 	}
 	
 	@Test
-	public void test_01234_678_0123__pos6__returns_678() {
+	public void test_01234_678_0123__pos6__returns_6() {
+		String code =_01234_678_0123;
+		int relevant = codeCutterToTest.getRelevantCodeStartOffset(code, 8);
+		assertEquals(6,relevant);
+	}
+	
+	@Test
+	public void start_offset_test_01234_678_0123__pos6__returns_678() {
 		String code =_01234_678_0123;
 		String relevant = codeCutterToTest.getRelevantCode(code, 6);
 		assertEquals("678",relevant);

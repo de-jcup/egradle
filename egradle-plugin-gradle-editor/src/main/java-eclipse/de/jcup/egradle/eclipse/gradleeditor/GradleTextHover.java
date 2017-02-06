@@ -14,6 +14,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
@@ -36,7 +37,8 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	
 	private String fgColor;
 	private String bgColor;
-
+	private RelevantCodeCutter codeCutter;
+	
 	public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer,
 			String contentType) {
 		this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
@@ -44,15 +46,16 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		this.contentType = contentType;
 		
 		builder = new HTMLDescriptionBuilder();
+		codeCutter = new RelevantCodeCutter();
 	}
 
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		HoverData data = getLanguageElementAt(offset);
+		HoverData data = getLanguageElementAt(offset,textViewer);
 		if (data != null) {
 			return data;
 		}
-		return new Region(offset, 0);
+		return null;// do not hover!
 	}
 
 	@Override
@@ -70,7 +73,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			data = (HoverData) hoverRegion;
 		}
 		if (data == null) {
-			data = getLanguageElementAt(hoverRegion.getOffset());
+			data = getLanguageElementAt(hoverRegion.getOffset(),textViewer);
 		}
 		if (data == null) {
 			return null;
@@ -108,9 +111,10 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	/**
 	 * Get language at given offset
 	 * @param offset
+	 * @param textViewer 
 	 * @return language element or <code>null</code>
 	 */
-	protected HoverData getLanguageElementAt(int offset) {
+	protected HoverData getLanguageElementAt(int offset, ITextViewer textViewer) {
 		IContentAssistant assist = gradleSourceViewerConfiguration.getContentAssistant(sourceViewer);
 		if (assist == null) {
 			return null;
@@ -124,7 +128,14 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		if (model == null) {
 			return null;
 		}
-		Item item = model.getItemAt(offset);
+		
+		String allText = textViewer.getDocument().get();
+	
+		int startOffset = codeCutter.getRelevantCodeStartOffset(allText, offset);
+		if (startOffset==-1){
+			return null;
+		}
+		Item item = model.getItemOnlyAt(startOffset);
 		if (item == null) {
 			return null;
 		}
