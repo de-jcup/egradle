@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.GradlePublication" version="3.0"><description> 
+ Represents some publication produced by a Gradle project, typically to a Maven or Ivy repository. 
+ 
+ @since 1.12 
+</description><method name="getId" returnType="org.gradle.tooling.model.GradleModuleVersion"><description> 
+ Returns the unique identifier of the publication. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the unique identifier of the publication 
+</description></method><property name="id" type="org.gradle.tooling.model.GradleModuleVersion"><description> 
+ Returns the unique identifier of the publication. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the unique identifier of the publication 
+</description></property></type>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.TaskCollection" version="3.0"><description> 
+ A &lt;a href='type://TaskCollection'&gt;TaskCollection&lt;/a&gt; contains a set of &lt;a href='type://Task'&gt;Task&lt;/a&gt; instances, and provides a number of query methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of tasks which this collection contains. 
+</description><method name="matching" returnType="org.gradle.api.tasks.TaskCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="withType" returnType="org.gradle.api.tasks.TaskCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Class" name="type"/></method><method name="getByName" returnType="T"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/></method><method name="whenTaskAdded" returnType="void"><description> 
+ Adds a closure to be called when a task is added to this collection. The task is passed to the closure as the 
+ parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to be called 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getAt" returnType="T"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/></method><method name="matching" returnType="org.gradle.api.tasks.TaskCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="whenTaskAdded" returnType="org.gradle.api.Action" delegationTarget="Action"><description> 
+ Adds an &lt;a href='type://Action'&gt;Action&lt;/a&gt; to be executed when a task is added to this collection. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to be executed 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the supplied action 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getByName" returnType="T"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="at" type="T"><description> 
+ {@inheritDoc} 
+</description></property><property name="byName" type="T"><description> 
+ {@inheritDoc} 
+</description></property></type>

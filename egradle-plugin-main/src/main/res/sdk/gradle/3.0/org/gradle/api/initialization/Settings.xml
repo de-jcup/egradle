@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.initialization.Settings" version="3.0"><description> 
+ &lt;p&gt;Declares the configuration required to instantiate and configure the hierarchy of &lt;a href='type://org.gradle.api.Project'&gt;org.gradle.api.Project&lt;/a&gt; instances which are to participate in a build.&lt;/p&gt; 
+ 
+ &lt;p&gt;There is a one-to-one correspondence between a &lt;code&gt;Settings&lt;/code&gt; instance and a &lt;code&gt;{@value 
+ #DEFAULT_SETTINGS_FILE}&lt;/code&gt; settings file. Before Gradle assembles the projects for a build, it creates a 
+ &lt;code&gt;Settings&lt;/code&gt; instance and executes the settings file against it.&lt;/p&gt; 
+ 
+ &lt;h3&gt;Assembling a Multi-Project Build&lt;/h3&gt; 
+ 
+ &lt;p&gt;One of the purposes of the &lt;code&gt;Settings&lt;/code&gt; object is to allow you to declare the projects which are to be 
+ included in the build. You add projects to the build using the &lt;a href='type://Settings#include(String[])'&gt;#include(String[])&lt;/a&gt; method.  There is always a 
+ root project included in a build.  It is added automatically when the &lt;code&gt;Settings&lt;/code&gt; object is created.  The 
+ root project's name defaults to the name of the directory containing the settings file. The root project's project 
+ directory defaults to the directory containing the settings file.&lt;/p&gt; 
+ 
+ &lt;p&gt;When a project is included in the build, a &lt;a href='type://ProjectDescriptor'&gt;ProjectDescriptor&lt;/a&gt; is created. You can use this descriptor to 
+ change the default values for several properties of the project.&lt;/p&gt; 
+ 
+ &lt;h3&gt;Using Settings in a Settings File&lt;/h3&gt; 
+ 
+ &lt;h4&gt;Dynamic Properties&lt;/h4&gt; 
+ 
+ &lt;p&gt;In addition to the properties of this interface, the &lt;a href='type://Settings'&gt;Settings&lt;/a&gt; object makes some additional read-only 
+ properties available to the settings script. This includes properties from the following sources:&lt;/p&gt; 
+ 
+ &lt;ul&gt; 
+ 
+ &lt;li&gt;Defined in the {@value org.gradle.api.Project#GRADLE_PROPERTIES} file located in the settings directory of the 
+ build.&lt;/li&gt; 
+ 
+ &lt;li&gt;Defined the {@value org.gradle.api.Project#GRADLE_PROPERTIES} file located in the user's &lt;a href='type://.gradle'&gt;.gradle&lt;/a&gt; 
+ directory.&lt;/li&gt; 
+ 
+ &lt;li&gt;Provided on the command-line using the -P option.&lt;/li&gt; 
+ 
+ &lt;/ul&gt; 
+</description><method name="getSettingsDir" returnType="java.io.File"><description> 
+ &lt;p&gt;Returns the settings directory of the build. The settings directory is the directory containing the settings 
+ file.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings directory. Never returns null. 
+</description></method><method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the project with the given project directory.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The project directory. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project with the given project directory. Returns null if no such project exists. 
+</description><parameter type="java.io.File" name="projectDir"/></method><method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the project with the given project directory.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The project directory. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project with the given project directory. Never returns null. 
+ @throws UnknownProjectException If no project with the given path exists. 
+</description><parameter type="java.io.File" name="projectDir"/></method><method name="getRootDir" returnType="java.io.File"><description> 
+ &lt;p&gt;Returns the root directory of the build. The root directory is the project directory of the root project.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root directory. Never returns null. 
+</description></method><method name="getStartParameter" returnType="org.gradle.StartParameter"><description> 
+ &lt;p&gt;Returns the set of parameters used to invoke this instance of Gradle.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parameters. Never returns null. 
+</description></method><method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the project with the given path.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project with the given path. Returns null if no such project exists. 
+</description><parameter type="java.lang.String" name="path"/></method><method name="include" returnType="void" delegationTarget="a"><description> 
+ &lt;p&gt;Adds the given projects to the build. Each path in the supplied list is treated as the path of a project to 
+ add to the build. Note that these path are not file paths, but instead specify the location of the new project in 
+ the project hierarchy. As such, the supplied paths must use the ':' character as separator.&lt;/p&gt; 
+ 
+ &lt;p&gt;The last element of the supplied path is used as the project name. The supplied path is converted to a project 
+ directory relative to the root project directory.&lt;/p&gt; 
+ 
+ &lt;p&gt;As an example, the path &lt;a href='type://a:b'&gt;a:b&lt;/a&gt; adds a project with path &lt;a href='type://:a:b'&gt;:a:b&lt;/a&gt;, name &lt;a href='type://b'&gt;b&lt;/a&gt; and project 
+ directory &lt;a href='type://$rootDir/a/b'&gt;$rootDir/a/b&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectPaths the projects to add. 
+</description><parameter type="java.lang.String" name="projectPaths"/></method><method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the project with the given path.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project with the given path. Never returns null. 
+ @throws UnknownProjectException If no project with the given path exists. 
+</description><parameter type="java.lang.String" name="path"/></method><method name="getGradle" returnType="org.gradle.api.invocation.Gradle" delegationTarget="Gradle"><description> 
+ Returns the &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance for the current build. 
+  
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle instance. Never returns null. 
+</description></method><method name="getSettings" returnType="org.gradle.api.initialization.Settings"><description> 
+ &lt;p&gt;Returns this settings object.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This settings object. Never returns null. 
+</description></method><method name="getRootProject" returnType="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the root project of the build.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
+</description></method><method name="includeFlat" returnType="void" delegationTarget="a"><description> 
+ &lt;p&gt;Adds the given projects to the build. Each name in the supplied list is treated as the name of a project to 
+ add to the build.&lt;/p&gt; 
+ 
+ &lt;p&gt;The supplied name is converted to a project directory relative to the &lt;em&gt;parent&lt;/em&gt; directory of the root 
+ project directory.&lt;/p&gt; 
+ 
+ &lt;p&gt;As an example, the name &lt;a href='type://a'&gt;a&lt;/a&gt; add a project with path &lt;a href='type://:a'&gt;:a&lt;/a&gt;, name &lt;a href='type://a'&gt;a&lt;/a&gt; and project directory 
+ &lt;a href='type://$rootDir/../a'&gt;$rootDir/../a&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectNames the projects to add. 
+</description><parameter type="java.lang.String" name="projectNames"/></method><property name="settings" type="org.gradle.api.initialization.Settings"><description> 
+ &lt;p&gt;Returns this settings object.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This settings object. Never returns null. 
+</description></property><property name="gradle" type="org.gradle.api.invocation.Gradle"><description> 
+ Returns the &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance for the current build. 
+  
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle instance. Never returns null. 
+</description></property><property name="rootProject" type="org.gradle.api.initialization.ProjectDescriptor"><description> 
+ &lt;p&gt;Returns the root project of the build.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
+</description></property><property name="rootDir" type="java.io.File"><description> 
+ &lt;p&gt;Returns the root directory of the build. The root directory is the project directory of the root project.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root directory. Never returns null. 
+</description></property><property name="settingsDir" type="java.io.File"><description> 
+ &lt;p&gt;Returns the settings directory of the build. The settings directory is the directory containing the settings 
+ file.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings directory. Never returns null. 
+</description></property><property name="startParameter" type="org.gradle.StartParameter"><description> 
+ &lt;p&gt;Returns the set of parameters used to invoke this instance of Gradle.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parameters. Never returns null. 
+</description></property></type>

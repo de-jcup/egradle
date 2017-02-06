@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.JettyRunWar" version="3.0"><description> 
+ &lt;p&gt;Deploys a WAR to an embedded Jetty web container.&lt;/p&gt; 
+ 
+ &lt;p&gt; Once started, the web container can be configured to run continuously, scanning for changes to the war file and automatically performing a hot redeploy when necessary. &lt;/p&gt; 
+ 
+ @deprecated The Jetty plugin has been deprecated 
+</description><method name="configureScanner" returnType="void"/><method name="finishConfigurationBeforeStart" returnType="void"/><method name="restartWebApp" returnType="void"><parameter type="boolean" name="reconfigureScanner"/></method><method name="getWebApp" returnType="java.io.File"><description> 
+ Returns the web application to deploy. 
+</description></method><method name="filesChanged" returnType="void"><parameter type="java.util.List" name="changes"/></method><method name="setWebApp" returnType="void"><parameter type="java.io.File" name="webApp"/></method><method name="validateConfiguration" returnType="void"/><method name="createServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/><method name="configureWebApplication" returnType="void"/><method name="applyJettyXml" returnType="void"/><property name="webApp" type="java.io.File"><description> 
+ Returns the web application to deploy. 
+</description></property></type>

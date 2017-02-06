@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.TaskState" version="3.0"><description> 
+ &lt;a href='type://TaskState'&gt;TaskState&lt;/a&gt; provides information about the execution state of a &lt;a href='type://org.gradle.api.Task'&gt;org.gradle.api.Task&lt;/a&gt;. You can obtain a 
+ &lt;a href='type://TaskState'&gt;TaskState&lt;/a&gt; instance by calling &lt;a href='type://org.gradle.api.Task#getState()'&gt;org.gradle.api.Task#getState()&lt;/a&gt;. 
+</description><method name="getFailure" returnType="java.lang.Throwable"><description> 
+ Returns the exception describing the task failure, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exception, or null if the task did not fail. 
+</description></method><method name="getUpToDate" returnType="boolean"><description> 
+ Returns true if the execution of this task was skipped because the task was up-to-date. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been considered up-to-date 
+ 
+ @since 2.5 
+</description></method><method name="getExecuted" returnType="boolean"><description> 
+ &lt;p&gt;Returns true if this task has been executed.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed. 
+</description></method><method name="getSkipped" returnType="boolean"><description> 
+ Returns true if the execution of this task was skipped for some reason. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed and skipped. 
+</description></method><method name="rethrowFailure" returnType="void"><description> 
+ Throws the task failure, if any. Does nothing if the task did not fail. 
+</description></method><method name="getSkipMessage" returnType="java.lang.String"><description> 
+ Returns a message describing why the task was skipped. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the message. returns null if the task was not skipped. 
+</description></method><method name="getDidWork" returnType="boolean"><description> 
+ &lt;p&gt;Checks if the task actually did any work.  Even if a task executes, it may determine that it has nothing to 
+ do.  For example, a compilation task may determine that source files have not changed since the last time a the 
+ task was run.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed and did any work. 
+</description></method><property name="skipMessage" type="java.lang.String"><description> 
+ Returns a message describing why the task was skipped. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the message. returns null if the task was not skipped. 
+</description></property><property name="didWork" type="boolean"><description> 
+ &lt;p&gt;Checks if the task actually did any work.  Even if a task executes, it may determine that it has nothing to 
+ do.  For example, a compilation task may determine that source files have not changed since the last time a the 
+ task was run.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed and did any work. 
+</description></property><property name="failure" type="java.lang.Throwable"><description> 
+ Returns the exception describing the task failure, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exception, or null if the task did not fail. 
+</description></property><property name="upToDate" type="boolean"><description> 
+ Returns true if the execution of this task was skipped because the task was up-to-date. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been considered up-to-date 
+ 
+ @since 2.5 
+</description></property><property name="executed" type="boolean"><description> 
+ &lt;p&gt;Returns true if this task has been executed.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed. 
+</description></property><property name="skipped" type="boolean"><description> 
+ Returns true if the execution of this task was skipped for some reason. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been executed and skipped. 
+</description></property></type>

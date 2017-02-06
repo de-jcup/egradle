@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.javascript.rhino.worker.RhinoWorker" version="3.0"><description> 
+ This should have originally been an internal API. 
+</description><method name="process" returnType="R"><parameter type="P" name="payload"/></method></type>

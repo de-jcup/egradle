@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.buildinit.plugins.WrapperPlugin" version="3.0"><description> 
+ The wrapper plugin. 
+</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

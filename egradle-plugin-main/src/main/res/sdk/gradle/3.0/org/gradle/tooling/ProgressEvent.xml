@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.ProgressEvent" version="3.0"><description> 
+ Some information about a piece of work of a long running operation. 
+ @since 1.0-milestone-3 
+</description><method name="getDescription" returnType="java.lang.String"><description> 
+ A description of the current piece of work. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description. 
+ @since 1.0-milestone-3 
+</description></method><property name="description" type="java.lang.String"><description> 
+ A description of the current piece of work. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description. 
+ @since 1.0-milestone-3 
+</description></property></type>

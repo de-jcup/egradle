@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.BuildType" version="3.0"><description> 
+ Specifies a build-type for a native binary. Common build types are 'debug' and 'release', but others may be defined. 
+</description><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns a human-consumable name for this build type. 
+</description></method><property name="displayName" type="java.lang.String"><description> 
+ Returns a human-consumable name for this build type. 
+</description></property></type>

@@ -22,7 +22,7 @@ public class ApiMappingImporterTest {
 	@Before
 	public void before(){
 		importerToTest = new ApiMappingImporter();
-		dslFolder = new File(TestUtil.PARENT_OF_TEST,"dsl/3.0");
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		mappingsFile = new File(dslFolder,"api-mapping.txt");
 	}
 	

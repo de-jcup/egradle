@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskSuccessResult" version="3.0"><description> 
+ Describes how a task operation finished successfully. 
+ 
+ @since 2.5 
+</description><method name="isUpToDate" returnType="boolean" delegationTarget="true"><description> 
+ Returns whether this task was uptodate. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if this task was uptodate 
+</description></method><property name="upToDate" type="boolean"><description> 
+ Returns whether this task was uptodate. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if this task was uptodate 
+</description></property></type>

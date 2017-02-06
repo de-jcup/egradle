@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.StartParameter" version="3.0"><description> 
+ &lt;p&gt;&lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; defines the configuration used by a Gradle instance to execute a build. The properties of &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; generally correspond to the command-line options of 
+ Gradle. 
+ 
+ &lt;p&gt;You can obtain an instance of a &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; by either creating a new one, or duplicating an existing one using &lt;a href='type://StartParameter#newInstance'&gt;#newInstance&lt;/a&gt; or &lt;a href='type://StartParameter#newBuild'&gt;#newBuild&lt;/a&gt;.&lt;/p&gt; 
+</description><method name="isBuildProjectDependencies" returnType="boolean"><description> 
+ Returns true if project dependencies are to be built, false if they should not be. The default is true. 
+</description></method><method name="getSettingsFile" returnType="java.io.File"><description> 
+ Returns the explicit settings file to use for the build, or null. 
+ 
+ Will return null if the default settings file is to be used. However, if &lt;a href='type://StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt; returns true, then no settings file at all will be used. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings file. May be null. 
+ @see #isUseEmptySettings() 
+</description></method><method name="getInitScripts" returnType="java.util.List"><description> 
+ Returns all explicitly added init scripts that will be run before the build starts.  This list does not contain the user init script located in ${user.home}/.gradle/init.gradle, even though 
+ that init script will also be run. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;list of all explicitly added init scripts. 
+</description></method><method name="getCurrentDir" returnType="java.io.File"><description> 
+ Returns the directory to use to select the default project, and to search for the settings file. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The current directory. Never returns null. 
+</description></method><method name="setGradleHomeDir" returnType="void"><description> 
+ Package scope for testing purposes. 
+</description><parameter type="java.io.File" name="gradleHomeDir"/></method><method name="prepareNewBuild" returnType="org.gradle.StartParameter"><parameter type="org.gradle.StartParameter" name="p"/></method><method name="getAllInitScripts" returnType="java.util.List"><description> 
+ Returns all init scripts, including explicit init scripts and implicit init scripts. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All init scripts, including explicit init scripts and implicit init scripts. 
+</description></method><method name="newBuild" returnType="org.gradle.StartParameter"><description> 
+ &lt;p&gt;Creates the parameters for a new build, using these parameters as a template. Copies the environmental properties from this parameter (eg Gradle user home dir, etc), but does not copy the 
+ build specific properties (eg task names).&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new parameters. 
+</description></method><method name="setContinuous" returnType="void"><parameter type="boolean" name="enabled"/></method><method name="isRerunTasks" returnType="boolean"><description> 
+ Specifies whether the cached task results should be ignored and each task should be forced to be executed. 
+</description></method><method name="setCurrentDir" returnType="void"><description> 
+ Sets the directory to use to select the default project, and to search for the settings file. Set to null to use the default current directory. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;currentDir The directory. Set to null to use the default. 
+</description><parameter type="java.io.File" name="currentDir"/></method><method name="setBuildFile" returnType="void"><description> 
+ Sets the build file to use to select the default project. Use null to disable selecting the default project using the build file. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildFile The build file. May be null. 
+</description><parameter type="java.io.File" name="buildFile"/></method><method name="isRefreshDependencies" returnType="boolean"><description> 
+ Specifies whether the dependencies should be refreshed.. 
+</description></method><method name="setExcludedTaskNames" returnType="void"><description> 
+ Sets the tasks to exclude from this build. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludedTaskNames The task names. Can be null. 
+</description><parameter type="java.lang.Iterable" name="excludedTaskNames"/></method><method name="getExcludedTaskNames" returnType="java.util.Set"><description> 
+ Returns the names of the tasks to be excluded from this build. When empty, no tasks are excluded from the build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of the excluded tasks. Returns an empty set if there are no such tasks. 
+</description></method><method name="setMaxWorkerCount" returnType="void" delegationTarget="maxWorkerCount"><description> 
+ Specifies the maximum number of concurrent workers used for underlying build operations. 
+ 
+ @throws IllegalArgumentException if &lt;a href='type://maxWorkerCount'&gt;maxWorkerCount&lt;/a&gt; is &amp;lt; 1 
+ @see #getMaxWorkerCount() 
+</description><parameter type="int" name="maxWorkerCount"/></method><method name="getConsoleOutput" returnType="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
+ {@inheritDoc} 
+</description></method><method name="getGradleUserHomeDir" returnType="java.io.File"><description> 
+ Returns the directory to use as the user home directory. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. 
+</description></method><method name="isProfile" returnType="boolean"><description> 
+ Returns true if a profile report will be generated. 
+</description></method><method name="useEmptySettings" returnType="org.gradle.StartParameter"><description> 
+ Specifies that an empty settings script should be used. 
+ 
+ This means that even if a settings file exists in the conventional location, or has been previously specified by &lt;a href='type://StartParameter#setSettingsFile(java.io.File)'&gt;#setSettingsFile(java.io.File)&lt;/a&gt;, it will not be used. 
+ 
+ If &lt;a href='type://StartParameter#setSettingsFile(java.io.File)'&gt;#setSettingsFile(java.io.File)&lt;/a&gt; is called after this, it will supersede calling this method. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description></method><method name="toString" returnType="java.lang.String"/><method name="isRecompileScripts" returnType="boolean"><description> 
+ Specifies whether the build scripts should be recompiled. 
+</description></method><method name="newInstance" returnType="org.gradle.StartParameter" delegationTarget="StartParameter"><description> 
+ Duplicates this &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; instance. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the new parameters. 
+</description></method><method name="isConfigureOnDemand" returnType="boolean"><description> 
+ If the configure-on-demand mode is active 
+</description></method><method name="getBuildFile" returnType="java.io.File"><description> 
+ Returns the build file to use to select the default project. Returns null when the build file is not used to select the default project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null. 
+</description></method><method name="setDryRun" returnType="void"><parameter type="boolean" name="dryRun"/></method><method name="setShowStacktrace" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.logging.configuration.ShowStacktrace" name="showStacktrace"/></method><method name="getProjectProperties" returnType="java.util.Map"/><method name="setRerunTasks" returnType="void"><description> 
+ Specifies whether the cached task results should be ignored and each task should be forced to be executed. 
+</description><parameter type="boolean" name="rerunTasks"/></method><method name="setParallelProjectExecutionEnabled" returnType="void"><description> 
+ Enables/disables parallel project execution. 
+ 
+ @see #isParallelProjectExecutionEnabled() 
+</description><parameter type="boolean" name="parallelProjectExecution"/></method><method name="setSettingsFile" returnType="void"><description> 
+ Sets the settings file to use for the build. Use null to use the default settings file. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;settingsFile The settings file to use. May be null. 
+</description><parameter type="java.io.File" name="settingsFile"/></method><method name="setBuildProjectDependencies" returnType="org.gradle.StartParameter"><description> 
+ Specifies whether project dependencies should be built. Defaults to true. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="boolean" name="build"/></method><method name="setSystemPropertiesArgs" returnType="void"><parameter type="java.util.Map" name="systemPropertiesArgs"/></method><method name="setProfile" returnType="void"><description> 
+ Specifies if a profile report should be generated. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;profile true if a profile report should be generated 
+</description><parameter type="boolean" name="profile"/></method><method name="setOffline" returnType="void"><description> 
+ Specifies whether the build should be performed offline (ie without network access). 
+</description><parameter type="boolean" name="offline"/></method><method name="setGradleUserHomeDir" returnType="void"><description> 
+ Sets the directory to use as the user home directory. Set to null to use the default directory. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The home directory. May be null. 
+</description><parameter type="java.io.File" name="gradleUserHomeDir"/></method><method name="getProjectCacheDir" returnType="java.io.File"><description> 
+ Returns the project's cache dir. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project's cache dir, or null if the default location is to be used. 
+</description></method><method name="setProjectCacheDir" returnType="void"><description> 
+ Sets the project's cache location. Set to null to use the default location. 
+</description><parameter type="java.io.File" name="projectCacheDir"/></method><method name="equals" returnType="boolean"><parameter type="java.lang.Object" name="obj"/></method><method name="getTaskNames" returnType="java.util.List" delegationTarget="TaskExecutionRequest"><description> 
+ Returns the names of the tasks to execute in this build. When empty, the default tasks for the project will be executed. If &lt;a href='type://TaskExecutionRequest'&gt;TaskExecutionRequest&lt;/a&gt;s are set for this build then names from 
+ these task parameters are returned. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the names of the tasks to execute in this build. Never returns null. 
+</description></method><method name="isOffline" returnType="boolean"><description> 
+ Specifies whether the build should be performed offline (ie without network access). 
+</description></method><method name="setConsoleOutput" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.logging.configuration.ConsoleOutput" name="consoleOutput"/></method><method name="getTaskRequests" returnType="java.util.List"><description> 
+ Returns the tasks to execute in this build. When empty, the default tasks for the project will be executed. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the tasks to execute in this build. Never returns null. 
+</description></method><method name="isContinuous" returnType="boolean"/><method name="addInitScript" returnType="void"><description> 
+ Adds the given file to the list of init scripts that are run before the build starts.  This list is in addition to the default init scripts. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;initScriptFile The init scripts. 
+</description><parameter type="java.io.File" name="initScriptFile"/></method><method name="getMaxWorkerCount" returnType="int"><description> 
+ Returns the maximum number of concurrent workers used for underlying build operations. 
+ 
+ Workers can be threads, processes or whatever Gradle considers a "worker". Some examples: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;A thread running a task&lt;/li&gt; 
+     &lt;li&gt;A test process&lt;/li&gt; 
+     &lt;li&gt;A language compiler in a forked process&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ Defaults to the number of processors available to the Java virtual machine. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;maximum number of concurrent workers, always &gt;= 1. 
+ @see java.lang.Runtime#availableProcessors() 
+</description></method><method name="setLogLevel" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="logLevel"/></method><method name="setTaskRequests" returnType="void"><description> 
+ &lt;p&gt;Sets the task parameters to execute in this build. Set to an empty list, to execute the default tasks for the project. The tasks are executed in the order provided, subject to dependency 
+ between the tasks.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskParameters the tasks to execute in this build. 
+</description><parameter type="java.lang.Iterable" name="taskParameters"/></method><method name="prepareNewInstance" returnType="org.gradle.StartParameter"><parameter type="org.gradle.StartParameter" name="p"/></method><method name="setTaskNames" returnType="void"><description> 
+ &lt;p&gt;Sets the tasks to execute in this build. Set to an empty list, or null, to execute the default tasks for the project. The tasks are executed in the order provided, subject to dependency 
+ between the tasks.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskNames the names of the tasks to execute in this build. 
+</description><parameter type="java.lang.Iterable" name="taskNames"/></method><method name="getSystemPropertiesArgs" returnType="java.util.Map"/><method name="isSearchUpwards" returnType="boolean"/><method name="setProjectProperties" returnType="void"><parameter type="java.util.Map" name="projectProperties"/></method><method name="setContinueOnFailure" returnType="void"><description> 
+ Specifies whether the build should continue on task failure. The default is false. 
+</description><parameter type="boolean" name="continueOnFailure"/></method><method name="setRefreshDependencies" returnType="void"><description> 
+ Specifies whether the dependencies should be refreshed.. 
+</description><parameter type="boolean" name="refreshDependencies"/></method><method name="setSearchUpwards" returnType="void"><parameter type="boolean" name="searchUpwards"/></method><method name="isContinueOnFailure" returnType="boolean"><description> 
+ Specifies whether the build should continue on task failure. The default is false. 
+</description></method><method name="getShowStacktrace" returnType="org.gradle.api.logging.configuration.ShowStacktrace"><description> 
+ {@inheritDoc} 
+</description></method><method name="setInitScripts" returnType="void"><description> 
+ Sets the list of init scripts to be run before the build starts. This list is in addition to the default init scripts. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;initScripts The init scripts. 
+</description><parameter type="java.util.List" name="initScripts"/></method><method name="hashCode" returnType="int"/><method name="isUseEmptySettings" returnType="boolean"><description> 
+ Returns whether an empty settings script will be used regardless of whether one exists in the default location. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether to use empty settings or not. 
+</description></method><method name="setProjectDir" returnType="void"><description> 
+ Sets the project directory to use to select the default project. Use null to use the default criteria for selecting the default project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The project directory. May be null. 
+</description><parameter type="java.io.File" name="projectDir"/></method><method name="getLogLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
+ {@inheritDoc} 
+</description></method><method name="getProjectDir" returnType="java.io.File"><description> 
+ Returns the project dir to use to select the default project. 
+ 
+ Returns null when the build file is not used to select the default project 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project dir. May be null. 
+</description></method><method name="isDryRun" returnType="boolean"/><method name="isParallelProjectExecutionEnabled" returnType="boolean"><description> 
+ Returns true if parallel project execution is enabled. 
+ 
+ @see #getMaxWorkerCount() 
+</description></method><method name="setRecompileScripts" returnType="void"><description> 
+ Specifies whether the build scripts should be recompiled. 
+</description><parameter type="boolean" name="recompileScripts"/></method><method name="setConfigureOnDemand" returnType="void"><parameter type="boolean" name="configureOnDemand"/></method><property name="configureOnDemand" type="boolean"><description> 
+ If the configure-on-demand mode is active 
+</description></property><property name="searchUpwards" type="boolean"/><property name="buildFile" type="java.io.File"><description> 
+ Returns the build file to use to select the default project. Returns null when the build file is not used to select the default project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null. 
+</description></property><property name="projectCacheDir" type="java.io.File"><description> 
+ Returns the project's cache dir. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project's cache dir, or null if the default location is to be used. 
+</description></property><property name="continueOnFailure" type="boolean"><description> 
+ Specifies whether the build should continue on task failure. The default is false. 
+</description></property><property name="rerunTasks" type="boolean"><description> 
+ Specifies whether the cached task results should be ignored and each task should be forced to be executed. 
+</description></property><property name="dryRun" type="boolean"/><property name="gradleUserHomeDir" type="java.io.File"><description> 
+ Returns the directory to use as the user home directory. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. 
+</description></property><property name="offline" type="boolean"><description> 
+ Specifies whether the build should be performed offline (ie without network access). 
+</description></property><property name="excludedTaskNames" type="java.util.Set"><description> 
+ Returns the names of the tasks to be excluded from this build. When empty, no tasks are excluded from the build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of the excluded tasks. Returns an empty set if there are no such tasks. 
+</description></property><property name="refreshDependencies" type="boolean"><description> 
+ Specifies whether the dependencies should be refreshed.. 
+</description></property><property name="gradleHomeDir" type="java.io.File"><description> 
+ Package scope for testing purposes. 
+</description></property><property name="logLevel" type="org.gradle.api.logging.LogLevel"><description> 
+ {@inheritDoc} 
+</description></property><property name="projectDir" type="java.io.File"><description> 
+ Returns the project dir to use to select the default project. 
+ 
+ Returns null when the build file is not used to select the default project 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project dir. May be null. 
+</description></property><property name="buildProjectDependencies" type="boolean"><description> 
+ Returns true if project dependencies are to be built, false if they should not be. The default is true. 
+</description></property><property name="taskRequests" type="java.util.List"><description> 
+ Returns the tasks to execute in this build. When empty, the default tasks for the project will be executed. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the tasks to execute in this build. Never returns null. 
+</description></property><property name="systemPropertiesArgs" type="java.util.Map"/><property name="projectProperties" type="java.util.Map"/><property name="currentDir" type="java.io.File"><description> 
+ Returns the directory to use to select the default project, and to search for the settings file. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The current directory. Never returns null. 
+</description></property><property name="consoleOutput" type="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
+ {@inheritDoc} 
+</description></property><property name="showStacktrace" type="org.gradle.api.logging.configuration.ShowStacktrace"><description> 
+ {@inheritDoc} 
+</description></property><property name="initScripts" type="java.util.List"><description> 
+ Returns all explicitly added init scripts that will be run before the build starts.  This list does not contain the user init script located in ${user.home}/.gradle/init.gradle, even though 
+ that init script will also be run. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;list of all explicitly added init scripts. 
+</description></property><property name="continuous" type="boolean"/><property name="recompileScripts" type="boolean"><description> 
+ Specifies whether the build scripts should be recompiled. 
+</description></property><property name="maxWorkerCount" type="int"><description> 
+ Returns the maximum number of concurrent workers used for underlying build operations. 
+ 
+ Workers can be threads, processes or whatever Gradle considers a "worker". Some examples: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;A thread running a task&lt;/li&gt; 
+     &lt;li&gt;A test process&lt;/li&gt; 
+     &lt;li&gt;A language compiler in a forked process&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ Defaults to the number of processors available to the Java virtual machine. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;maximum number of concurrent workers, always &gt;= 1. 
+ @see java.lang.Runtime#availableProcessors() 
+</description></property><property name="allInitScripts" type="java.util.List"><description> 
+ Returns all init scripts, including explicit init scripts and implicit init scripts. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All init scripts, including explicit init scripts and implicit init scripts. 
+</description></property><property name="profile" type="boolean"><description> 
+ Returns true if a profile report will be generated. 
+</description></property><property name="settingsFile" type="java.io.File"><description> 
+ Returns the explicit settings file to use for the build, or null. 
+ 
+ Will return null if the default settings file is to be used. However, if &lt;a href='type://StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt; returns true, then no settings file at all will be used. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings file. May be null. 
+ @see #isUseEmptySettings() 
+</description></property><property name="useEmptySettings" type="boolean"><description> 
+ Returns whether an empty settings script will be used regardless of whether one exists in the default location. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether to use empty settings or not. 
+</description></property><property name="taskNames" type="java.util.List"><description> 
+ Returns the names of the tasks to execute in this build. When empty, the default tasks for the project will be executed. If &lt;a href='type://TaskExecutionRequest'&gt;TaskExecutionRequest&lt;/a&gt;s are set for this build then names from 
+ these task parameters are returned. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the names of the tasks to execute in this build. Never returns null. 
+</description></property><property name="parallelProjectExecutionEnabled" type="boolean"><description> 
+ Returns true if parallel project execution is enabled. 
+ 
+ @see #getMaxWorkerCount() 
+</description></property></type>

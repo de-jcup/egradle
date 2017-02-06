@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.language.assembler.plugins.AssemblerPlugin" version="3.0"><description> 
+ A plugin for projects wishing to build native binary components from Assembly language sources. 
+ 
+ &lt;p&gt;Automatically includes the &lt;a href='type://AssemblerLangPlugin'&gt;AssemblerLangPlugin&lt;/a&gt; for core Assembler support and the &lt;a href='type://NativeComponentPlugin'&gt;NativeComponentPlugin&lt;/a&gt; for native component support.&lt;/p&gt; 
+ 
+ &lt;li&gt;Creates a &lt;a href='type://org.gradle.language.assembler.tasks.Assemble'&gt;org.gradle.language.assembler.tasks.Assemble&lt;/a&gt; task for each &lt;a href='type://org.gradle.language.assembler.AssemblerSourceSet'&gt;org.gradle.language.assembler.AssemblerSourceSet&lt;/a&gt; to assemble the sources.&lt;/li&gt; 
+</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

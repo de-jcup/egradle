@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.AbstractCopyTask" version="3.0"><description> 
+ &lt;a href='type://AbstractCopyTask'&gt;AbstractCopyTask&lt;/a&gt; is the base class for all copy tasks. 
+</description><method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/><method name="setDirMode" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Integer" name="mode"/></method><method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="destPath"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;renamer 
+</description><parameter type="org.gradle.api.Transformer" name="renamer"/></method><method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.regex.Pattern" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="getFileMode" returnType="java.lang.Integer"><description> 
+ {@inheritDoc} 
+</description></method><method name="getMainSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/><method name="getFileSystem" returnType="org.gradle.internal.nativeplatform.filesystem.FileSystem"/><method name="setIncludes" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/><method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="groovy.lang.Closure" name="c"/></method><method name="getFilteringCharset" returnType="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></method><method name="getDirMode" returnType="java.lang.Integer"><description> 
+ {@inheritDoc} 
+</description></method><method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="destDir"/></method><method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="getSource" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the source files for this task. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source files. Never returns null. 
+</description></method><method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;transformer 
+</description><parameter type="org.gradle.api.Transformer" name="transformer"/></method><method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Class" name="filterType"/></method><method name="getExcludes" returnType="java.util.Set"><description> 
+ {@inheritDoc} 
+</description></method><method name="getRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/><method name="getIncludeEmptyDirs" returnType="boolean"><description> 
+ {@inheritDoc} 
+</description></method><method name="setExcludes" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="setCaseSensitive" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="boolean" name="caseSensitive"/></method><method name="with" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.file.CopySpec" name="sourceSpecs"/></method><method name="expand" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="sourcePaths"/></method><method name="setIncludeEmptyDirs" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="boolean" name="includeEmptyDirs"/></method><method name="filesNotMatching" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="setFilteringCharset" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="charset"/></method><method name="setFileMode" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Integer" name="mode"/></method><method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="includes"/></method><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="copy" returnType="void"/><method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="properties"/><parameter type="java.lang.Class" name="filterType"/></method><method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="excludes"/></method><method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><method name="getFileLookup" returnType="org.gradle.api.internal.file.FileLookup"/><method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="isCaseSensitive" returnType="boolean"><description> 
+ {@inheritDoc} 
+</description></method><method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="into" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="destPath"/><parameter type="org.gradle.api.Action" name="copySpec"/></method><method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="getIncludes" returnType="java.util.Set"><description> 
+ {@inheritDoc} 
+</description></method><method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/><method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="getDuplicatesStrategy" returnType="org.gradle.api.file.DuplicatesStrategy"><description> 
+ {@inheritDoc} 
+</description></method><method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="filesMatching" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="setDuplicatesStrategy" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.file.DuplicatesStrategy" name="strategy"/></method><property name="excludes" type="java.util.Set"><description> 
+ {@inheritDoc} 
+</description></property><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/><property name="fileLookup" type="org.gradle.api.internal.file.FileLookup"/><property name="source" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the source files for this task. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source files. Never returns null. 
+</description></property><property name="includeEmptyDirs" type="boolean"><description> 
+ {@inheritDoc} 
+</description></property><property name="fileSystem" type="org.gradle.internal.nativeplatform.filesystem.FileSystem"/><property name="rootSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/><property name="filteringCharset" type="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></property><property name="fileMode" type="java.lang.Integer"><description> 
+ {@inheritDoc} 
+</description></property><property name="caseSensitive" type="boolean"><description> 
+ {@inheritDoc} 
+</description></property><property name="dirMode" type="java.lang.Integer"><description> 
+ {@inheritDoc} 
+</description></property><property name="includes" type="java.util.Set"><description> 
+ {@inheritDoc} 
+</description></property><property name="mainSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/><property name="duplicatesStrategy" type="org.gradle.api.file.DuplicatesStrategy"><description> 
+ {@inheritDoc} 
+</description></property><property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/></type>

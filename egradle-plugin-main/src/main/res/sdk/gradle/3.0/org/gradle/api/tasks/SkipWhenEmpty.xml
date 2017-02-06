@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.SkipWhenEmpty" version="3.0"><description> 
+ &lt;p&gt;Attached to a task property to indicate that the task should be skipped when the value of the property is an empty 
+ &lt;a href='type://org.gradle.api.file.FileCollection'&gt;org.gradle.api.file.FileCollection&lt;/a&gt; or directory.&lt;/p&gt; 
+ 
+ &lt;p&gt;This annotation can be used with the following annotations:&lt;/p&gt; 
+ 
+ &lt;ul&gt;&lt;li&gt;&lt;a href='type://org.gradle.api.tasks.InputFiles'&gt;org.gradle.api.tasks.InputFiles&lt;/a&gt;&lt;/li&gt; 
+ 
+ &lt;li&gt;&lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; 
+</description></type>

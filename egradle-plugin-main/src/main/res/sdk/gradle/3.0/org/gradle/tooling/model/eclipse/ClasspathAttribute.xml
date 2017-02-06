@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.ClasspathAttribute" version="3.0"><description> 
+ Optional description associated with Eclipse classpath entries. 
+ 
+ @see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IClasspathAttribute.html"&gt;IClassAttribute Javadoc&lt;/a&gt; 
+ 
+ @since 2.14 
+</description><method name="getName" returnType="java.lang.String"><description> 
+ Returns the key of this attribute. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The key of this attribute.. 
+</description></method><method name="getValue" returnType="java.lang.String"><description> 
+ Returns the value of this attribute. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of this classpath attribute. 
+</description></method><property name="value" type="java.lang.String"><description> 
+ Returns the value of this attribute. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of this classpath attribute. 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the key of this attribute. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The key of this attribute.. 
+</description></property></type>

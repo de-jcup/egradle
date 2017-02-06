@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.api.XmlGeneratorTask" version="3.0"><description> 
+ A convenience superclass for those tasks which generate XML configuration files from a domain object of type T. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The domain object type. 
+</description><method name="create" returnType="T"/><method name="getXmlTransformer" returnType="org.gradle.internal.xml.XmlTransformer"/><method name="create" returnType="T"/><method name="configure" returnType="void"><parameter type="T" name="object"/></method><method name="configure" returnType="void"><parameter type="T" name="object"/></method><property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/></type>

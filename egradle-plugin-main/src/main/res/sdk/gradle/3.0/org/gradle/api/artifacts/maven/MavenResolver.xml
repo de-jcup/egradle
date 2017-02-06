@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.maven.MavenResolver" version="3.0"><description> 
+ An &lt;a href='type://ArtifactRepository'&gt;ArtifactRepository&lt;/a&gt; which can be used to publish artifacts to Maven repositories. 
+</description><method name="getSettings" returnType="java.lang.Object"><description> 
+ Returns a Maven settings object. This can be used for example to figure out where the local repository is 
+ located. This property is populated on demand. 
+</description></method><method name="beforeDeployment" returnType="void" delegationTarget="org.gradle.api.artifacts.maven.MavenDeployment"><description> 
+ Adds a closure to be executed immediately before a deployment to this resolver. The closure is passed a &lt;a href='type://org.gradle.api.artifacts.maven.MavenDeployment'&gt;org.gradle.api.artifacts.maven.MavenDeployment&lt;/a&gt; as a parameter. The closure is executed after all artifacts have 
+ been build, including generation of the POM. The closure can modify the set of artifacts to be deployed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="action"/></method><method name="beforeDeployment" returnType="void"><description> 
+ Adds an action to be executed immediately before a deployment to this resolver. The action is executed after all 
+ artifacts have been build, including generation of the POM. The action can modify the set of artifacts to be 
+ deployed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="settings" type="java.lang.Object"><description> 
+ Returns a Maven settings object. This can be used for example to figure out where the local repository is 
+ located. This property is populated on demand. 
+</description></property></type>

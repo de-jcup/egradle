@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.PolymorphicDomainObjectContainer" version="3.0"><description> 
+ A &lt;a href='type://NamedDomainObjectContainer'&gt;NamedDomainObjectContainer&lt;/a&gt; that allows to create domain objects with different types. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the (base) type of domain objects in the container 
+</description><method name="create" returnType="U"><description> 
+ Creates a domain object with the specified name and type, adds it to the container, and configures 
+ it with the specified action. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the name of the domain object to be created 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of the domain object to be created 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration an action for configuring the domain object 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of the domain object to be created 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the created domain object 
+ 
+ @throws InvalidUserDataException if a domain object with the specified name already exists 
+ or the container does not support creating a domain object with the specified type 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/><parameter type="org.gradle.api.Action" name="configuration"/></method><method name="maybeCreate" returnType="U"><description> 
+ Looks for an item with the given name and type, creating and adding it to this container if it does not exist. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the name of the domain object to be created 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of the domain object to be created 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of the domain object to be created 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the found or created domain object, never &lt;code&gt;null&lt;/code&gt;. 
+ 
+ @throws InvalidUserDataException if the container does not support creating a domain object with the specified type 
+ @throws ClassCastException if a domain object with the specified name exists with a different type 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><method name="create" returnType="U"><description> 
+ Creates a domain object with the specified name and type, and adds it to the container. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the name of the domain object to be created 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of the domain object to be created 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of the domain object to be created 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the created domain object 
+ 
+ @throws InvalidUserDataException if a domain object with the specified name already exists 
+ or the container does not support creating a domain object with the specified type 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><method name="containerWithType" returnType="org.gradle.api.NamedDomainObjectContainer" delegationTarget="NamedDomainObjectContainer"><description> 
+ Creates a regular container that wraps the polymorphic container presenting all elements of a specified type. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of the container elements 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of the container elements 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a &lt;a href='type://NamedDomainObjectContainer'&gt;NamedDomainObjectContainer&lt;/a&gt; providing access to elements of type U. 
+</description><parameter type="java.lang.Class" name="type"/></method></type>

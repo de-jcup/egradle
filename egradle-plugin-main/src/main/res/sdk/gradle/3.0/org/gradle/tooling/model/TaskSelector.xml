@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.TaskSelector" version="3.0"><description> 
+ Represents a &lt;a href='type://Launchable'&gt;Launchable&lt;/a&gt; that uses task name to select tasks executed from a given project and its sub-projects. This is 
+ roughly equivalent to running `gradle &amp;lt;task-name&gt;` from the command-line. 
+ 
+ @since 1.12 
+</description><method name="getName" returnType="java.lang.String"><description> 
+ Returns the name that will be used to select tasks. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name used by this selector. 
+</description></method><property name="name" type="java.lang.String"><description> 
+ Returns the name that will be used to select tasks. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name used by this selector. 
+</description></property></type>

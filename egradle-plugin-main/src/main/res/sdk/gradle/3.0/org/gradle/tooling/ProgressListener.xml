@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.ProgressListener" version="3.0"><description> 
+ A listener which is notified as some long running operation makes progress. 
+ @since 1.0-milestone-3 
+</description><method name="statusChanged" returnType="void"><description> 
+ Called when the progress status changes. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;event An event describing the status change. 
+ @since 1.0-milestone-3 
+</description><parameter type="org.gradle.tooling.ProgressEvent" name="event"/></method></type>

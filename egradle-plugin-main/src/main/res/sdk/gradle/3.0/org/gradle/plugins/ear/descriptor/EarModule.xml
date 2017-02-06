@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.ear.descriptor.EarModule" version="3.0"><description> 
+ A module element in a deployment descriptor like application.xml. 
+</description><method name="setAltDeployDescriptor" returnType="void"><parameter type="java.lang.String" name="altDeployDescriptor"/></method><method name="getAltDeployDescriptor" returnType="java.lang.String"><description> 
+ The alt-dd element specifies an optional URI to the post-assembly version of the deployment descriptor file for a 
+ particular Java EE module. The URI must specify the full pathname of the deployment descriptor file relative to 
+ the application's root directory. If alt-dd is not specified, the deployer must read the deployment descriptor 
+ from the default location and file name required by the respective component specification. 
+</description></method><method name="getPath" returnType="java.lang.String"><description> 
+ The connector element specifies the URI of an archive file, relative to the top level of the application package. 
+</description></method><method name="setPath" returnType="void"><parameter type="java.lang.String" name="path"/></method><method name="toXmlNode" returnType="groovy.util.Node"><description> 
+ Convert this object to an XML Node (or two nodes if altDeployDescriptor is not null). 
+  
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parentModule 
+            The parent &amp;lt;module&amp;gt; node to add this node to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name 
+            The name of this node. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new node. If an &amp;lt;alt-dd&amp;gt; node is created it is not returned. 
+</description><parameter type="groovy.util.Node" name="parentModule"/><parameter type="java.lang.Object" name="name"/></method><property name="path" type="java.lang.String"><description> 
+ The connector element specifies the URI of an archive file, relative to the top level of the application package. 
+</description></property><property name="altDeployDescriptor" type="java.lang.String"><description> 
+ The alt-dd element specifies an optional URI to the post-assembly version of the deployment descriptor file for a 
+ particular Java EE module. The URI must specify the full pathname of the deployment descriptor file relative to 
+ the application's root directory. If alt-dd is not specified, the deployer must read the deployment descriptor 
+ from the default location and file name required by the respective component specification. 
+</description></property></type>

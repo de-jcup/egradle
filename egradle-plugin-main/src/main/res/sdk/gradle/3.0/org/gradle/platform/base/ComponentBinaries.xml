@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.platform.base.ComponentBinaries" version="3.0"><description> 
+ Declares the binaries that should be built for a custom &lt;a href='type://org.gradle.platform.base.ComponentSpec'&gt;org.gradle.platform.base.ComponentSpec&lt;/a&gt; type. 
+ 
+ The following example demonstrates how to register a binary for a custom component type using a plugin with a 
+ &lt;a href='type://org.gradle.platform.base.ComponentBinaries'&gt;org.gradle.platform.base.ComponentBinaries&lt;/a&gt; annotation. 
+ Furthermore the plugin registers 'DefaultSampleBinary' as implementation for &lt;a href='type://org.gradle.platform.base.BinarySpec'&gt;org.gradle.platform.base.BinarySpec&lt;/a&gt;. 
+ 
+ &lt;pre autoTested='true'&gt; 
+ interface SampleComponent extends VariantComponentSpec {} 
+ interface SampleBinary extends BinarySpec {} 
+ class DefaultSampleBinary extends BaseBinarySpec implements SampleBinary {} 
+ 
+ apply plugin: MyCustomBinariesPlugin 
+ 
+ class MyCustomBinariesPlugin extends RuleSource {@literal @}ComponentType 
+     void register(TypeBuilder&lt;SampleBinary&gt; builder) { 
+         builder.defaultImplementation(DefaultSampleBinary) 
+     } 
+ 
+     {@literal @}ComponentBinaries 
+     void createBinariesForSampleLibrary(ModelMap&lt;SampleBinary&gt; binaries, SampleComponent component) {component.name}Binary", SampleBinary) 
+     } 
+ } 
+ &lt;/pre&gt; 
+</description></type>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.Rules" version="3.0"><description> 
+ Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation defines additional rules based on its inputs. 
+</description></type>

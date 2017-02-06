@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.ApplicationBinarySpec" version="3.0"><description> 
+ A binary produced from a `&lt;a href='type://org.gradle.platform.base.ApplicationSpec'&gt;org.gradle.platform.base.ApplicationSpec&lt;/a&gt;`. 
+ </description><method name="getApplication" returnType="org.gradle.platform.base.ApplicationSpec"><description> 
+ The application that this binary belongs to. 
+</description></method><property name="application" type="org.gradle.platform.base.ApplicationSpec"><description> 
+ The application that this binary belongs to. 
+</description></property></type>

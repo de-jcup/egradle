@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ComponentResult" version="3.0"><description> 
+ The result of resolving a component. 
+ 
+ @since 2.0 
+</description><method name="getId" returnType="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
+ Returns the ID of the requested component. 
+</description></method><property name="id" type="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
+ Returns the ID of the requested component. 
+</description></property></type>

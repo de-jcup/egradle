@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.javascript.envjs.http.HttpFileServerFactory" version="3.0"><method name="start" returnType="org.gradle.plugins.javascript.envjs.http.HttpFileServer"><parameter type="java.io.File" name="contentRoot"/><parameter type="int" name="port"/></method></type>

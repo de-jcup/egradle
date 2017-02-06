@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.PrebuiltLibraries" version="3.0"><description> 
+ A container of &lt;a href='type://PrebuiltLibrary'&gt;PrebuiltLibrary&lt;/a&gt; instances. 
+</description><method name="resolveLibrary" returnType="org.gradle.nativeplatform.PrebuiltLibrary"><parameter type="java.lang.String" name="name"/></method></type>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.logging.Logging" version="3.0"><description> 
+ &lt;p&gt;The main entry point for Gradle's logging system. Gradle routes all logging via SLF4J. You can use either an SLF4J 
+ &lt;a href='type://org.slf4j.Logger'&gt;org.slf4j.Logger&lt;/a&gt; or a Gradle &lt;a href='type://Logger'&gt;Logger&lt;/a&gt; to perform logging.&lt;/p&gt; 
+</description><method name="getLogger" returnType="org.gradle.api.logging.Logger"><description> 
+ Returns the logger for the given class. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;c the class. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the logger. Never returns null. 
+</description><parameter type="java.lang.Class" name="c"/></method><method name="getLogger" returnType="org.gradle.api.logging.Logger"><description> 
+ Returns the logger with the given name. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the logger name. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the logger. Never returns null. 
+</description><parameter type="java.lang.String" name="name"/></method><property name="logger" type="org.gradle.api.logging.Logger"><description> 
+ Returns the logger with the given name. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the logger name. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the logger. Never returns null. 
+</description></property></type>

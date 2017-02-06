@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.signing.type.BinarySignatureType" version="3.0"><description> 
+ Binary signature type. 
+</description><method name="getExtension" returnType="java.lang.String"/><property name="extension" type="java.lang.String"/></type>

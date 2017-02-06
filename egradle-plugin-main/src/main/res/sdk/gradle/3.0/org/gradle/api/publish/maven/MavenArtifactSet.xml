@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.publish.maven.MavenArtifactSet" version="3.0"><description> 
+ A Collection of &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt;s to be included in a &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;. 
+ 
+ Being a &lt;a href='type://DomainObjectSet'&gt;DomainObjectSet&lt;/a&gt;, a &lt;a href='type://MavenArtifactSet'&gt;MavenArtifactSet&lt;/a&gt; provides convenient methods for querying, filtering, and applying actions to the set of &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt;s. 
+ 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: 'maven-publish' 
+ 
+ def publication = publishing.publications.create("name", MavenPublication) 
+ def artifacts = publication.artifacts 
+ 
+ artifacts.matching({ 
+     it.classifier == "classy" 
+ }).all({ 
+     it.extension = "ext" 
+ }) 
+ &lt;/pre&gt; 
+ 
+ @see DomainObjectSet 
+</description><method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact"><description> 
+ Creates and adds a &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to the set, which is configured by the associated action. 
+ 
+ The semantics of this method are the same as &lt;a href='type://MavenPublication#artifact(Object, Action)'&gt;MavenPublication#artifact(Object, Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config An action or closure to configure the values of the constructed &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="source"/><parameter type="org.gradle.api.Action" name="config"/></method><method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact"><description> 
+ Creates and adds a &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to the set. 
+ 
+ The semantics of this method are the same as &lt;a href='type://MavenPublication#artifact(Object)'&gt;MavenPublication#artifact(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact content. 
+</description><parameter type="java.lang.Object" name="source"/></method></type>

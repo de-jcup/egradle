@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.Named.Namer" version="3.0"><description> 
+ An implementation of the namer interface for objects implementing the named interface. 
+</description><method name="forType" returnType="org.gradle.api.Namer"><parameter type="java.lang.Class" name="type"/></method><method name="determineName" returnType="java.lang.String"><parameter type="org.gradle.api.Named" name="object"/></method></type>

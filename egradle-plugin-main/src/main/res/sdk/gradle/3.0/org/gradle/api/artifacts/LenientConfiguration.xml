@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.LenientConfiguration" version="3.0"><description> 
+ Resolved configuration that does not fail eagerly when some dependencies are not resolved, or some artifacts do not exist. 
+</description><method name="getUnresolvedModuleDependencies" returnType="java.util.Set"><description> 
+ returns dependencies that were attempted to resolve but failed. 
+ If empty then all dependencies are neatly resolved. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only unresolved dependencies 
+</description></method><method name="getFiles" returnType="java.util.Set"><description> 
+ Returns successfully resolved files for successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolved dependencies files 
+</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><method name="getArtifacts" returnType="java.util.Set"><description> 
+ Gets successfully resolved artifacts for dependencies that match given dependency spec. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;successfully resolved artifacts for dependencies that match given dependency spec 
+</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><method name="getFirstLevelModuleDependencies" returnType="java.util.Set"><description> 
+ Returns successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
+</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><property name="artifacts" type="java.util.Set"><description> 
+ Gets successfully resolved artifacts for dependencies that match given dependency spec. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;successfully resolved artifacts for dependencies that match given dependency spec 
+</description></property><property name="firstLevelModuleDependencies" type="java.util.Set"><description> 
+ Returns successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
+</description></property><property name="files" type="java.util.Set"><description> 
+ Returns successfully resolved files for successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolved dependencies files 
+</description></property><property name="unresolvedModuleDependencies" type="java.util.Set"><description> 
+ returns dependencies that were attempted to resolve but failed. 
+ If empty then all dependencies are neatly resolved. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only unresolved dependencies 
+</description></property></type>

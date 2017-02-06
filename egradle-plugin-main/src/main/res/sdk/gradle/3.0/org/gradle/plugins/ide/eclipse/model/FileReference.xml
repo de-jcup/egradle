@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.ide.eclipse.model.FileReference" version="3.0"><description> 
+ A reference to a file in eclipse. 
+</description><method name="getPath" returnType="java.lang.String"><description> 
+ Returns the logical path for the file. 
+</description></method><method name="getJarURL" returnType="java.lang.String"><description> 
+ Returns the jar URL of the file 
+</description></method><method name="getFile" returnType="java.io.File"><description> 
+ Returns the target file. 
+</description></method><method name="isRelativeToPathVariable" returnType="boolean"><description> 
+ Returns true if this reference is relative to a path variable. 
+</description></method><property name="file" type="java.io.File"><description> 
+ Returns the target file. 
+</description></property><property name="relativeToPathVariable" type="boolean"><description> 
+ Returns true if this reference is relative to a path variable. 
+</description></property><property name="path" type="java.lang.String"><description> 
+ Returns the logical path for the file. 
+</description></property><property name="jarURL" type="java.lang.String"><description> 
+ Returns the jar URL of the file 
+</description></property></type>

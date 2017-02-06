@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.WriteOnlyModelViewException" version="3.0"><description> 
+ Thrown when an attempt is made to read the value of a model element that is not readable at the time. 
+</description><method name="createMessage" returnType="java.lang.String"><parameter type="java.lang.String" name="property"/><parameter type="org.gradle.model.internal.core.ModelPath" name="path"/><parameter type="org.gradle.model.internal.type.ModelType" name="type"/><parameter type="org.gradle.model.internal.core.rule.describe.ModelRuleDescriptor" name="ruleDescriptor"/></method></type>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator" version="3.0"><description> 
+ Interface for generating scripts with the provided details based on a provided template. 
+</description><method name="setTemplate" returnType="void"><description> 
+ Sets the template text resource used for generating script. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;template Template text resource 
+</description><parameter type="org.gradle.api.resources.TextResource" name="template"/></method><method name="getTemplate" returnType="org.gradle.api.resources.TextResource"><description> 
+ Gets the template reader used for generating script. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Template reader 
+</description></method><property name="template" type="org.gradle.api.resources.TextResource"><description> 
+ Gets the template reader used for generating script. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Template reader 
+</description></property></type>

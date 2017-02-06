@@ -33,7 +33,7 @@ public class FilesystemFileLoaderTest {
 	
 	@Before
 	public void before(){
-		dslFolder = new File(TestUtil.PARENT_OF_TEST,"dsl/3.0");
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		mockedTypeImporter = mock(XMLDSLTypeImporter.class);
 		mockedPluginsImporter = mock(XMLDSLPluginsImporter.class);
 		mockedApiMappingImporter = mock(ApiMappingImporter.class);

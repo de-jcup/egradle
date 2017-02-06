@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.reporting.ReportContainer.ImmutableViolationException" version="3.0"><description> 
+ The exception thrown when any of this container's mutation methods are called. 
+ &lt;p&gt; 
+ This applies to the standard &lt;a href='type://java.util.Collection'&gt;java.util.Collection&lt;/a&gt; methods such as &lt;a href='type://add()'&gt;add()&lt;/a&gt;, &lt;a href='type://remove()'&gt;remove()&lt;/a&gt; 
+ and &lt;a href='type://clear()'&gt;clear()&lt;/a&gt;. 
+</description></type>

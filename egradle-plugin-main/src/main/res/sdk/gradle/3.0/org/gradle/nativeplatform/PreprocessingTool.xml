@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.PreprocessingTool" version="3.0"><description> 
+ A tool that permits configuration of the C preprocessor. 
+</description><method name="define" returnType="void"><description> 
+ Defines a named preprocessor macro with a value, which will be used when compiling this binary. 
+ The macro will be supplied to the compiler as '-D name=definition'. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="definition"/></method><method name="getMacros" returnType="java.util.Map"><description> 
+ The set of preprocessor macros to define when compiling this binary. 
+</description></method><method name="define" returnType="void"><description> 
+ Defines a named preprocessor macros to use when compiling this binary. 
+ The macro will be supplied to the compiler as '-D name'. 
+</description><parameter type="java.lang.String" name="name"/></method><property name="macros" type="java.util.Map"><description> 
+ The set of preprocessor macros to define when compiling this binary. 
+</description></property></type>

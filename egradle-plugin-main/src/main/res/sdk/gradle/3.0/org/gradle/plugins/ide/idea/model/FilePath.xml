@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.FilePath" version="3.0"><description> 
+ A Path that keeps the reference to the File 
+</description><method name="getFile" returnType="java.io.File"/><property name="file" type="java.io.File"/></type>

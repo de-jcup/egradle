@@ -68,7 +68,7 @@ public class Activator extends AbstractUIPlugin {
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter,apiMappingImporter);
 		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/
-		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("sdk/1.0.0/gradle"));
+		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("sdk/gradle/3.0"));
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 		/* install dsl type provider as service, so it must be definitely used shared...*/

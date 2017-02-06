@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.SharedLibraryBinarySpec.TasksCollection" version="3.0"><description> 
+ Provides access to key tasks used for building the binary. 
+</description><method name="getLink" returnType="org.gradle.api.Task"><description> 
+ Returns the link task for this binary. 
+</description></method><property name="link" type="org.gradle.api.Task"><description> 
+ Returns the link task for this binary. 
+</description></property></type>

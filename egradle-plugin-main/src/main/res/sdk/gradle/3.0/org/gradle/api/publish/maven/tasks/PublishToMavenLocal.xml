@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.PublishToMavenLocal" version="3.0"><description> 
+ Publishes a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; to the Maven Local repository. 
+ 
+ @since 1.4 
+</description><method name="publish" returnType="void"/><method name="publish" returnType="void"/></type>

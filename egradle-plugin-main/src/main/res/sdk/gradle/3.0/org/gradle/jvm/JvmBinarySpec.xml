@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.jvm.JvmBinarySpec" version="3.0"><description> 
+ Represents a binary artifact that is the result of building a jvm component. 
+</description><method name="setResourcesDir" returnType="void"><description> 
+ Sets the resources directory for this binary. 
+</description><parameter type="java.io.File" name="dir"/></method><method name="setTargetPlatform" returnType="void"><description> 
+ Sets the target platform for this binary. 
+</description><parameter type="org.gradle.jvm.platform.JavaPlatform" name="platform"/></method><method name="getClassesDir" returnType="java.io.File"><description> 
+ The classes directory for this binary. 
+</description></method><method name="getTargetPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"><description> 
+ The target platform for this binary. 
+</description></method><method name="getResourcesDir" returnType="java.io.File"><description> 
+ The resources directory for this binary. 
+</description></method><method name="setToolChain" returnType="void" delegationTarget="org.gradle.jvm.toolchain.JavaToolChain"><description> 
+ Sets the &lt;a href='type://org.gradle.jvm.toolchain.JavaToolChain'&gt;org.gradle.jvm.toolchain.JavaToolChain&lt;/a&gt; that will be used to build this binary. 
+</description><parameter type="org.gradle.jvm.toolchain.JavaToolChain" name="toolChain"/></method><method name="getToolChain" returnType="org.gradle.jvm.toolchain.JavaToolChain" delegationTarget="org.gradle.jvm.toolchain.JavaToolChain"><description> 
+ Returns the &lt;a href='type://org.gradle.jvm.toolchain.JavaToolChain'&gt;org.gradle.jvm.toolchain.JavaToolChain&lt;/a&gt; that will be used to build this binary. 
+</description></method><method name="setClassesDir" returnType="void"><description> 
+ Sets the classes directory for this binary. 
+</description><parameter type="java.io.File" name="classesDir"/></method><property name="targetPlatform" type="org.gradle.jvm.platform.JavaPlatform"><description> 
+ The target platform for this binary. 
+</description></property><property name="classesDir" type="java.io.File"><description> 
+ The classes directory for this binary. 
+</description></property><property name="resourcesDir" type="java.io.File"><description> 
+ The resources directory for this binary. 
+</description></property><property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain"><description> 
+ Returns the &lt;a href='type://org.gradle.jvm.toolchain.JavaToolChain'&gt;org.gradle.jvm.toolchain.JavaToolChain&lt;/a&gt; that will be used to build this binary. 
+</description></property></type>

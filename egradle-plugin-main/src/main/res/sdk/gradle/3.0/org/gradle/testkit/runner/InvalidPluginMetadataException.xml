@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.testkit.runner.InvalidPluginMetadataException" version="3.0"><description> 
+ Thrown when the plugin under test metadata cannot be read. 
+ 
+ @since 2.13 
+ @see GradleRunner#withPluginClasspath() 
+</description></type>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.BuildAction" version="3.0"><description> 
+ An action that executes against a Gradle build and produces a result of type &lt;a href='type://T'&gt;T&lt;/a&gt;. 
+ 
+ &lt;p&gt;You can execute a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; using the &lt;a href='type://ProjectConnection#action(BuildAction)'&gt;ProjectConnection#action(BuildAction)&lt;/a&gt; method.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of result produced by this action. 
+ @since 1.8 
+</description><method name="execute" returnType="T"><description> 
+ Executes this action and returns the result. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;controller The controller to use to access and control the build. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The result 
+ @since 1.8 
+</description><parameter type="org.gradle.tooling.BuildController" name="controller"/></method></type>

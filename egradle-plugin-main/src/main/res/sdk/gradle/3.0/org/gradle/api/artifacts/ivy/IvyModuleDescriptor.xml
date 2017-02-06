@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.ivy.IvyModuleDescriptor" version="3.0"><description> 
+ The metadata about an Ivy module that acts as an input to a component metadata rule. 
+</description><method name="getBranch" returnType="java.lang.String"><description>* 
+ Returns the branch attribute of the info element in this descriptor. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the branch for this descriptor, or null if no branch was declared in the descriptor. 
+</description></method><method name="getExtraInfo" returnType="org.gradle.api.artifacts.ivy.IvyExtraInfo" delegationTarget="org.gradle.api.artifacts.ivy.IvyExtraInfo"><description> 
+ Returns an &lt;a href='type://org.gradle.api.artifacts.ivy.IvyExtraInfo'&gt;org.gradle.api.artifacts.ivy.IvyExtraInfo&lt;/a&gt; representing the "extra" info declared 
+ in this descriptor. 
+ &lt;p&gt; 
+ The extra info is the set of all non-standard subelements of the &lt;em&gt;info&lt;/em&gt; element. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an &lt;a href='type://org.gradle.api.artifacts.ivy.IvyExtraInfo'&gt;org.gradle.api.artifacts.ivy.IvyExtraInfo&lt;/a&gt; representing the extra info declared in this descriptor 
+</description></method><method name="getIvyStatus" returnType="java.lang.String" delegationTarget="org.gradle.api.artifacts.ComponentMetadataDetails"><description> 
+ Returns the status attribute of the info element in this descriptor.  Note that this &lt;i&gt;always&lt;/i&gt; represents 
+ the status from the ivy.xml for this module.  It is not affected by changes to the status made via 
+ the &lt;a href='type://org.gradle.api.artifacts.ComponentMetadataDetails'&gt;org.gradle.api.artifacts.ComponentMetadataDetails&lt;/a&gt; interface in a component metadata rule. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status for this descriptor 
+</description></method><property name="extraInfo" type="org.gradle.api.artifacts.ivy.IvyExtraInfo"><description> 
+ Returns an &lt;a href='type://org.gradle.api.artifacts.ivy.IvyExtraInfo'&gt;org.gradle.api.artifacts.ivy.IvyExtraInfo&lt;/a&gt; representing the "extra" info declared 
+ in this descriptor. 
+ &lt;p&gt; 
+ The extra info is the set of all non-standard subelements of the &lt;em&gt;info&lt;/em&gt; element. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an &lt;a href='type://org.gradle.api.artifacts.ivy.IvyExtraInfo'&gt;org.gradle.api.artifacts.ivy.IvyExtraInfo&lt;/a&gt; representing the extra info declared in this descriptor 
+</description></property><property name="branch" type="java.lang.String"><description>* 
+ Returns the branch attribute of the info element in this descriptor. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the branch for this descriptor, or null if no branch was declared in the descriptor. 
+</description></property><property name="ivyStatus" type="java.lang.String"><description> 
+ Returns the status attribute of the info element in this descriptor.  Note that this &lt;i&gt;always&lt;/i&gt; represents 
+ the status from the ivy.xml for this module.  It is not affected by changes to the status made via 
+ the &lt;a href='type://org.gradle.api.artifacts.ComponentMetadataDetails'&gt;org.gradle.api.artifacts.ComponentMetadataDetails&lt;/a&gt; interface in a component metadata rule. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status for this descriptor 
+</description></property></type>

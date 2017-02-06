@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.testing.base.TestSuiteBinarySpec" version="3.0"><description> 
+ A binary which runs a suite of tests. 
+</description><method name="getTestSuite" returnType="org.gradle.testing.base.TestSuiteSpec"><description> 
+ Returns the test suite that this binary belongs to. 
+</description></method><property name="testSuite" type="org.gradle.testing.base.TestSuiteSpec"><description> 
+ Returns the test suite that this binary belongs to. 
+</description></property></type>

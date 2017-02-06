@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.testkit.runner.BuildResult" version="3.0"><description> 
+ The result of executing a build, via the &lt;a href='type://GradleRunner'&gt;GradleRunner&lt;/a&gt;. 
+ 
+ @since 2.6 
+ @see GradleRunner#build() 
+ @see GradleRunner#buildAndFail() 
+</description><method name="tasks" returnType="java.util.List"><description> 
+ The subset of &lt;a href='type://BuildResult#getTasks()'&gt;#getTasks()&lt;/a&gt; that had the given outcome. 
+ &lt;p&gt; 
+ The returned list is an unmodifiable view of items. 
+ The returned list will be empty if no tasks were executed with the given outcome. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outcome the desired outcome 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build tasks with the given outcome 
+</description><parameter type="org.gradle.testkit.runner.TaskOutcome" name="outcome"/></method><method name="getTasks" returnType="java.util.List"><description> 
+ The tasks that were part of the build. 
+ &lt;p&gt; 
+ The order of the tasks corresponds to the order in which the tasks were started. 
+ If executing a parallel enabled build, the order is not guaranteed to be deterministic. 
+ &lt;p&gt; 
+ The returned list is an unmodifiable view of items. 
+ The returned list will be empty if no tasks were executed. 
+ This can occur if the build fails early, due to a build script failing to compile for example. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build tasks 
+</description></method><method name="getOutput" returnType="java.lang.String" delegationTarget=""><description> 
+ The textual output produced during the build. 
+ &lt;p&gt; 
+ This is equivalent to the console output produced when running a build from the command line. 
+ It contains both the standard output, and standard error output, of the build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build output, or an empty string if there was no build output (e.g. ran with &lt;a href='type://-q'&gt;-q&lt;/a&gt;) 
+ @since 2.9 
+</description></method><method name="taskPaths" returnType="java.util.List"><description> 
+ The paths of the subset of &lt;a href='type://BuildResult#getTasks()'&gt;#getTasks()&lt;/a&gt; that had the given outcome. 
+ &lt;p&gt; 
+ The returned list is an unmodifiable view of items. 
+ The returned list will be empty if no tasks were executed with the given outcome. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outcome the desired outcome 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the paths of the build tasks with the given outcome 
+</description><parameter type="org.gradle.testkit.runner.TaskOutcome" name="outcome"/></method><method name="task" returnType="org.gradle.testkit.runner.BuildTask" delegationTarget="null"><description> 
+ Returns the result object for a particular task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the given task was not part of the build. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskPath the path of the target task 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;information about the executed task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the task was not executed 
+</description><parameter type="java.lang.String" name="taskPath"/></method><property name="output" type="java.lang.String"><description> 
+ The textual output produced during the build. 
+ &lt;p&gt; 
+ This is equivalent to the console output produced when running a build from the command line. 
+ It contains both the standard output, and standard error output, of the build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build output, or an empty string if there was no build output (e.g. ran with &lt;a href='type://-q'&gt;-q&lt;/a&gt;) 
+ @since 2.9 
+</description></property><property name="tasks" type="java.util.List"><description> 
+ The tasks that were part of the build. 
+ &lt;p&gt; 
+ The order of the tasks corresponds to the order in which the tasks were started. 
+ If executing a parallel enabled build, the order is not guaranteed to be deterministic. 
+ &lt;p&gt; 
+ The returned list is an unmodifiable view of items. 
+ The returned list will be empty if no tasks were executed. 
+ This can occur if the build fails early, due to a build script failing to compile for example. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build tasks 
+</description></property></type>

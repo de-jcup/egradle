@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.ModuleDependencySpecBuilder" version="3.0"><description> 
+ A builder of a &lt;a href='type://ModuleDependencySpec'&gt;ModuleDependencySpec&lt;/a&gt;. 
+</description><method name="module" returnType="org.gradle.platform.base.ModuleDependencySpecBuilder"><description> 
+ Narrows this dependency specification down to a specific module. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the module name 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this instance 
+</description><parameter type="java.lang.String" name="name"/></method><method name="version" returnType="org.gradle.platform.base.ModuleDependencySpecBuilder"><description> 
+ Narrows this dependency specification down to a specific version range. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;range the version range 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this instance 
+</description><parameter type="java.lang.String" name="range"/></method><method name="group" returnType="org.gradle.platform.base.ModuleDependencySpecBuilder"><description> 
+ Narrows this dependency specification down to a specific group. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the group name 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this instance 
+</description><parameter type="java.lang.String" name="name"/></method></type>

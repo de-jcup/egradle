@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.ConfigurableFileCollection" version="3.0"><description> 
+ &lt;p&gt;A &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; is a mutable &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;p&gt;You can obtain an instance of &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; by calling &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;&lt;/p&gt; 
+</description><method name="setFrom" returnType="void"><description> 
+ Sets the source paths for this collection. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The paths. 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="setBuiltBy" returnType="org.gradle.api.file.ConfigurableFileCollection"><description> 
+ Sets the tasks which build the files of this collection. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Iterable" name="tasks"/></method><method name="getBuiltBy" returnType="java.util.Set"><description> 
+ Returns the set of tasks which build the files of this collection. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set. Returns an empty set when there are no such tasks. 
+</description></method><method name="builtBy" returnType="org.gradle.api.file.ConfigurableFileCollection"><description> 
+ Registers some tasks which build the files of this collection. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="tasks"/></method><method name="setFrom" returnType="void"><description> 
+ Sets the source paths for this collection. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The paths. 
+</description><parameter type="java.lang.Iterable" name="paths"/></method><method name="getFrom" returnType="java.util.Set"><description> 
+ Returns the set of source paths for this collection. The paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source paths. Returns an empty set if none. 
+</description></method><method name="from" returnType="org.gradle.api.file.ConfigurableFileCollection"><description> 
+ Adds a set of source paths to this collection. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The files to add. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="paths"/></method><property name="builtBy" type="java.util.Set"><description> 
+ Returns the set of tasks which build the files of this collection. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set. Returns an empty set when there are no such tasks. 
+</description></property><property name="from" type="java.util.Set"><description> 
+ Returns the set of source paths for this collection. The paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source paths. Returns an empty set if none. 
+</description></property></type>

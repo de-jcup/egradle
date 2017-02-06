@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.FileVisitor" version="3.0"><description> 
+ &lt;p&gt;A &lt;a href='type://FileVisitor'&gt;FileVisitor&lt;/a&gt; is used to visit each of the files in a &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt;.&lt;/p&gt; 
+</description><method name="visitFile" returnType="void"><description> 
+ Visits a file. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;fileDetails Meta-info about the file. 
+</description><parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/></method><method name="visitDir" returnType="void"><description> 
+ Visits a directory. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dirDetails Meta-info about the directory. 
+</description><parameter type="org.gradle.api.file.FileVisitDetails" name="dirDetails"/></method></type>

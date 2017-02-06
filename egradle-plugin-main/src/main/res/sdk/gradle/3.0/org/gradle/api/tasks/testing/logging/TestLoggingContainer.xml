@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.testing.logging.TestLoggingContainer" version="3.0"><description> 
+ Container for all test logging related options. Different options 
+ can be set for each log level. Options that are set directly (without 
+ specifying a log level) apply to log level LIFECYCLE. Example: 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ 
+ test { 
+             events "started", "skipped", "failed" 
+             exceptionFormat "full" 
+         } 
+ 
+         // remove standard output/error logging from --info builds 
+         // by assigning only 'failed' and 'skipped' events 
+         info.events = ["failed", "skipped"] 
+     } 
+ } 
+ &lt;/pre&gt; 
+ 
+ The defaults that are in place show progressively more information 
+ on log levels LIFECYCLE, INFO, and DEBUG, respectively. 
+</description><method name="getDebug" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for debug level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for debug level 
+</description></method><method name="getQuiet" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for quiet level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for quiet level 
+</description></method><method name="getError" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for error level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for error level 
+</description></method><method name="setQuiet" returnType="void"><description> 
+ Sets logging options for quiet level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for quiet level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="getWarn" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Gets logging options for warn level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for warn level 
+</description></method><method name="debug" returnType="void"><description> 
+ Configures logging options for debug level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for debug level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="info" returnType="void"><description> 
+ Configures logging options for info level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for info level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="setWarn" returnType="void"><description> 
+ Sets logging options for warn level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for warn level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="error" returnType="void"><description> 
+ Configures logging options for error level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for error level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="warn" returnType="void"><description> 
+ Configures logging options for warn level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for warn level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="setInfo" returnType="void"><description> 
+ Sets logging options for info level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for info level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="get" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for the specified level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level the level whose logging options are to be returned 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for the specified level 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/></method><method name="getInfo" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Gets logging options for info level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for info level 
+</description></method><method name="setDebug" returnType="void"><description> 
+ Sets logging options for debug level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for debug level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="quiet" returnType="void"><description> 
+ Configures logging options for quiet level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for quiet level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="setLifecycle" returnType="void"><description> 
+ Sets logging options for lifecycle level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for lifecycle level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="setError" returnType="void"><description> 
+ Sets logging options for error level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logging logging options for error level 
+</description><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="logging"/></method><method name="getLifecycle" returnType="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for lifecycle level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for lifecycle level 
+</description></method><method name="lifecycle" returnType="void"><description> 
+ Configures logging options for lifecycle level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action logging options for lifecycle level 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="debug" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for debug level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for debug level 
+</description></property><property name="info" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Gets logging options for info level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for info level 
+</description></property><property name="quiet" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for quiet level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for quiet level 
+</description></property><property name="warn" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Gets logging options for warn level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for warn level 
+</description></property><property name="error" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for error level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for error level 
+</description></property><property name="lifecycle" type="org.gradle.api.tasks.testing.logging.TestLogging"><description> 
+ Returns logging options for lifecycle level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for lifecycle level 
+</description></property></type>

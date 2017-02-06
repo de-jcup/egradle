@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.VisualCpp" version="3.0"><description> 
+ The Visual C++ tool chain. 
+</description><method name="setInstallDir" returnType="void"><description> 
+ The directory where Visual Studio or Visual C++ is installed. 
+</description><parameter type="java.lang.Object" name="installDir"/></method><method name="setWindowsSdkDir" returnType="void"><description> 
+ The directory where Windows SDK is installed. 
+</description><parameter type="java.lang.Object" name="installDir"/></method><method name="getInstallDir" returnType="java.io.File"><description> 
+ The directory where Visual Studio or Visual C++ is installed. 
+</description></method><method name="getWindowsSdkDir" returnType="java.io.File"><description> 
+ The directory where Windows SDK is installed. 
+</description></method><method name="eachPlatform" returnType="void"><description> 
+ Adds an action that can fine-tune the tool configuration for each platform supported by this tool chain. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="installDir" type="java.io.File"><description> 
+ The directory where Visual Studio or Visual C++ is installed. 
+</description></property><property name="windowsSdkDir" type="java.io.File"><description> 
+ The directory where Windows SDK is installed. 
+</description></property></type>

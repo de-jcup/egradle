@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.plugins.PlayPlugin" version="3.0"><description> 
+ Plugin for Play Framework component support. Registers the &lt;a href='type://org.gradle.play.PlayApplicationSpec'&gt;org.gradle.play.PlayApplicationSpec&lt;/a&gt; component type for the components container. 
+</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

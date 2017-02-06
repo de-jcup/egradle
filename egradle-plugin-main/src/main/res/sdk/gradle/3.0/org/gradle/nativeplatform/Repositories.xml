@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.Repositories" version="3.0"><description> 
+ The repositories that Gradle will search for prebuilt libraries. 
+</description></type>

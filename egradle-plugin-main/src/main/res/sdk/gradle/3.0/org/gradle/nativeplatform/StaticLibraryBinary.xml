@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.StaticLibraryBinary" version="3.0"><description> 
+ A &lt;a href='type://NativeLibrary'&gt;NativeLibrary&lt;/a&gt; that has been compiled and archived into a static library. 
+</description><method name="getStaticLibraryFile" returnType="java.io.File"><description> 
+ The static library file. 
+</description></method><property name="staticLibraryFile" type="java.io.File"><description> 
+ The static library file. 
+</description></property></type>

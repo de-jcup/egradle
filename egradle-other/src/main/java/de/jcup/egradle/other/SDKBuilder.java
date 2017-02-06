@@ -1,6 +1,7 @@
 package de.jcup.egradle.other;
 
-import static de.jcup.egradle.codeassist.dsl.DSLConstants.HYPERLINK_TYPE_PREFIX;
+import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
+import static java.nio.charset.StandardCharsets.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +29,6 @@ import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLType;
-import static java.nio.charset.StandardCharsets.*;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -54,8 +54,15 @@ public class SDKBuilder {
 	 * BlockDetailRenderer.java
 	 */
 	public static void main(String[] args) throws IOException {
-		new SDKBuilder("./../../gradle/subprojects/docs").startTransformToUserHome("3.0", "1.0.0");
-		;
+		new SDKBuilder("./../../gradle/subprojects/docs").
+			startTransformToUserHome(createUserHomeTargetRoot(),"3.0");
+//			startTransformToUserHome(new File("./../egradle-plugin-main/src/main/res/"), "3.0");
+	}
+
+	public static File createUserHomeTargetRoot() {
+		String userHome = System.getProperty("user.home");
+		File targetRootDirectory = new File(userHome, ".egradle");
+		return targetRootDirectory;
 	}
 
 	/*
@@ -86,7 +93,7 @@ public class SDKBuilder {
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
 	}
 
-	public void startTransformToUserHome(String gradleVersion, String targetSDKVersion) throws IOException {
+	public void startTransformToUserHome(File targetRootDirectory, String gradleVersion) throws IOException {
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
 
@@ -97,8 +104,7 @@ public class SDKBuilder {
 					+ healthCheck.getCanonicalPath()
 					+ "\nEither your path or version is incorrect or you forgot to generate...");
 		}
-		String userHome = System.getProperty("user.home");
-		File targetPathDirectory = new File(userHome, ".egradle/sdk/" + targetSDKVersion + "/gradle/");
+		File targetPathDirectory = new File(targetRootDirectory,"sdk/gradle/"+gradleVersion);
 		if (targetPathDirectory.exists()) {
 			System.out.println(
 					"Target directory exists - will be deleted before:" + targetPathDirectory.getCanonicalPath());
@@ -314,23 +320,24 @@ public class SDKBuilder {
 				}
 			});
 		}
-		String replacedJavaDocParts= replaceJavaDocParts(fullDescription.toString());
+		String replacedJavaDocParts = replaceJavaDocParts(fullDescription.toString());
 		replacedJavaDocParts = handleTypeLinksWithoutType(replacedJavaDocParts, sourceFile);
 		return replacedJavaDocParts;
 	}
-	private static final String TYPE_PREFIX_WITHOUT_TYPE = DSLConstants.HYPERLINK_TYPE_PREFIX+"#";
+
+	private static final String TYPE_PREFIX_WITHOUT_TYPE = DSLConstants.HYPERLINK_TYPE_PREFIX + "#";
 	private static final Pattern PATTERN_TYPE_PREFIX_WITHOUT_TYPE = Pattern.compile(TYPE_PREFIX_WITHOUT_TYPE);
 
 	String handleTypeLinksWithoutType(String replacedJavaDocParts, File sourceFile) {
-		if (sourceFile==null){
+		if (sourceFile == null) {
 			return replacedJavaDocParts;
 		}
-		if (replacedJavaDocParts.indexOf(TYPE_PREFIX_WITHOUT_TYPE)==-1){
+		if (replacedJavaDocParts.indexOf(TYPE_PREFIX_WITHOUT_TYPE) == -1) {
 			return replacedJavaDocParts;
 		}
 		String typeName = FilenameUtils.getBaseName(sourceFile.getName());
 		Matcher matcher = PATTERN_TYPE_PREFIX_WITHOUT_TYPE.matcher(replacedJavaDocParts);
-		replacedJavaDocParts = matcher.replaceAll(DSLConstants.HYPERLINK_TYPE_PREFIX+typeName+"#");
+		replacedJavaDocParts = matcher.replaceAll(DSLConstants.HYPERLINK_TYPE_PREFIX + typeName + "#");
 		return replacedJavaDocParts;
 	}
 
@@ -463,7 +470,7 @@ public class SDKBuilder {
 	 */
 	String replaceJavaDocTagAndTrailingParts(String xline, String javadocId, ContentReplacer replacer) {
 		String result = xline;
-		while(true){
+		while (true) {
 			int index = result.indexOf(javadocId);
 			if (index == -1) {
 				return result;
@@ -487,7 +494,10 @@ public class SDKBuilder {
 			result = before + replaced;
 		}
 	}
-	/* FIXME ATR, 06.02.2017: @see xyz(xxx) should be converted to <a href="type://xyz(xxx)>!!! */
+	/*
+	 * FIXME ATR, 06.02.2017: @see xyz(xxx) should be converted to <a
+	 * href="type://xyz(xxx)>!!!
+	 */
 
 	private String replaceJavaDocParams(String line) {
 		// * @param msg asdfasfasf

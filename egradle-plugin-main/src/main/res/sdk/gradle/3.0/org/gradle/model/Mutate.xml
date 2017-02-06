@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.Mutate" version="3.0"><description> 
+ Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation mutates the rule subject. 
+ &lt;p&gt; 
+ Mutate rules execute after &lt;a href='type://Defaults'&gt;Defaults&lt;/a&gt; rules, but before &lt;a href='type://Finalize'&gt;Finalize&lt;/a&gt; rules. 
+ The first parameter of the rule is the rule subject, which is mutable for the duration of the rule. 
+ &lt;p&gt; 
+ Please see &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; for more information on method rules. 
+</description></type>

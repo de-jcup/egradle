@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.reporting.model.ModelReport.Format" version="3.0"><description> 
+ The report format. 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;i&gt;full&lt;/i&gt; (default value) will show details about types, rules and creators&lt;/li&gt; 
+     &lt;li&gt;&lt;i&gt;short&lt;/i&gt; will only show nodes and their values&lt;/li&gt; 
+ &lt;/ul&gt; 
+</description></type>

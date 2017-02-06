@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.plugins.ExtensionAware" version="3.0"><description> 
+ Objects that can be extended at runtime with other objects. 
+ 
+ &lt;pre autoTested=""&gt; 
+ // Extensions are just plain objects, there is no interface/type 
+ class MyExtension { 
+     this.foo = foo 
+   } 
+ } 
+ 
+ // Add new extensions via the extension container 
+ project.extensions.create('custom', MyExtension, "bar") 
+ //                       («name»,   «type»,       «constructor args», …) 
+ 
+ // extensions appear as properties on the target object by the given name 
+ assert project.custom instanceof MyExtension 
+ assert project.custom.foo == "bar" 
+ 
+ // also via a namespace method 
+ project.custom { 
+   assert foo == "bar" 
+   foo = "other" 
+ } 
+ assert project.custom.foo == "other" 
+ 
+ // Extensions added with the extension container's create method are themselves extensible 
+ assert project.custom instanceof ExtensionAware 
+ project.custom.extensions.create("nested", MyExtension, "baz") 
+ assert project.custom.nested.foo == "baz" 
+ 
+ // All extension aware objects have a special “ext” extension of type ExtraPropertiesExtension 
+ assert project.hasProperty("myProperty") == false 
+ project.ext.myProperty = "myValue" 
+ 
+ // Properties added to the “ext” extension are promoted to the owning object 
+ assert project.myProperty == "myValue" 
+ &lt;/pre&gt; 
+ 
+ Many Gradle objects are extension aware. This includes; projects, tasks, configurations, dependencies etc. 
+ &lt;p&gt; 
+ For more on adding &amp; creating extensions, see &lt;a href='type://ExtensionContainer'&gt;ExtensionContainer&lt;/a&gt;. 
+ &lt;p&gt; 
+ For more on extra properties, see &lt;a href='type://ExtraPropertiesExtension'&gt;ExtraPropertiesExtension&lt;/a&gt;. 
+ &lt;p&gt; 
+ An &lt;code&gt;ExtensionAware&lt;/code&gt; object has several 'scopes' that Gradle searches for properties. These scopes are:&lt;/p&gt; 
+ 
+ &lt;ul&gt; 
+ &lt;li&gt;The object itself. This scope includes any property getters and setters declared by the 
+ implementation class. The properties of this scope are readable or writable depending on the presence 
+ of the corresponding getter or setter method.&lt;/li&gt; 
+ 
+ &lt;li&gt;Groovy Meta-programming methods implemented by the object's class, like &lt;code&gt;propertyMissing()&lt;/code&gt;. Care must be taken by plugin authors to 
+ ensure &lt;code&gt;propertyMissing()&lt;/code&gt; is implemented such that if a property is not found a MissingPropertyException(String, Class) exception is thrown. 
+ If &lt;code&gt;propertyMissing()&lt;/code&gt; always returns a value for any property, &lt;em&gt;Gradle will not search the rest of the scopes below.&lt;/em&gt;&lt;/li&gt; 
+ 
+ &lt;li&gt;The &lt;em&gt;extra&lt;/em&gt; properties of the object.  Each object maintains a map of extra properties, which 
+ can contain any arbitrary name -&gt; value pair.  Once defined, the properties of this scope are readable and writable.&lt;/li&gt; 
+ 
+ &lt;li&gt;The &lt;em&gt;extensions&lt;/em&gt; added to the object by plugins. Each extension is available as a read-only property with the same name as the extension.&lt;/li&gt; 
+ &lt;/ul&gt; 
+</description><method name="getExtensions" returnType="org.gradle.api.plugins.ExtensionContainer"><description> 
+ The container of extensions. 
+</description></method><property name="extensions" type="org.gradle.api.plugins.ExtensionContainer"><description> 
+ The container of extensions. 
+</description></property></type>

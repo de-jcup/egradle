@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.UnknownPluginException" version="3.0"><description> 
+ A &lt;a href='type://UnknownPluginException'&gt;UnknownPluginException&lt;/a&gt; is thrown when an unknown plugin id is provided.  
+</description></type>

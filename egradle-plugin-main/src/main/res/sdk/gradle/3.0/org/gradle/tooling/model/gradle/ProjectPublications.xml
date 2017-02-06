@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.ProjectPublications" version="3.0"><description> 
+ A model providing information about the publications of a Gradle project. 
+ 
+ @since 1.12 
+</description><method name="getPublications" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the publications for this project. 
+</description></method><method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier"><description> 
+ Returns the identifier for the Gradle project that these invocations originate from. 
+ 
+ @since 2.13 
+</description></method><property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier"><description> 
+ Returns the identifier for the Gradle project that these invocations originate from. 
+ 
+ @since 2.13 
+</description></property><property name="publications" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the publications for this project. 
+</description></property></type>

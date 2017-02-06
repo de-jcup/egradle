@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.CancellationToken" version="3.0"><description> 
+ Token that propagates notification that an operation should be cancelled. See &lt;a href='type://org.gradle.tooling.CancellationTokenSource'&gt;org.gradle.tooling.CancellationTokenSource&lt;/a&gt; for details. 
+ 
+ &lt;p&gt;All implementations of this interface are required to be thread safe.&lt;/p&gt; 
+ 
+ @since 2.1 
+</description><method name="isCancellationRequested" returnType="boolean"><description> 
+ Gets whether cancellation has been requested for this token. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Cancellation status. 
+</description></method><property name="cancellationRequested" type="boolean"><description> 
+ Gets whether cancellation has been requested for this token. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Cancellation status. 
+</description></property></type>

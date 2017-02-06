@@ -26,7 +26,7 @@ public class XMLDSLPluginsImporterTest {
 	@Before
 	public void before(){
 		importerToTest = new XMLDSLPluginsImporter();
-		dslFolder = new File(TestUtil.PARENT_OF_TEST,"dsl/3.0");
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		pluginsXMLFile = new File(dslFolder,"plugins.xml");
 	}
 	

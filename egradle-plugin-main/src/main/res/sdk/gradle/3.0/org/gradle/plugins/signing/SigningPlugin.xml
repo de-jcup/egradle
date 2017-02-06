@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.signing.SigningPlugin" version="3.0"><description> 
+ Adds the ability to digitally sign files and artifacts. 
+</description><method name="apply" returnType="void" delegationTarget="SigningExtension"><description> 
+ &lt;p&gt;Adds the ability to digitally sign files and artifacts.&lt;/p&gt; 
+ 
+ &lt;p&gt;Adds the extension &lt;a href='type://SigningExtension'&gt;SigningExtension&lt;/a&gt; with the name “signing”.&lt;/p&gt; 
+ &lt;p&gt;Also adds conventions to all &lt;a href='type://Sign sign tasks'&gt;Sign sign tasks&lt;/a&gt; to use the signing extension setting defaults.&lt;/p&gt; 
+ 
+ @see SigningExtension 
+</description><parameter type="org.gradle.api.Project" name="project"/></method></type>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.TaskInputs" version="3.0"><description> 
+ &lt;p&gt;A &lt;a href='type://TaskInputs'&gt;TaskInputs&lt;/a&gt; represents the inputs for a task.&lt;/p&gt; 
+ 
+ &lt;p&gt;You can obtain a &lt;a href='type://TaskInputs'&gt;TaskInputs&lt;/a&gt; instance using &lt;a href='type://org.gradle.api.Task#getInputs()'&gt;org.gradle.api.Task#getInputs()&lt;/a&gt;.&lt;/p&gt; 
+</description><method name="properties" returnType="org.gradle.api.tasks.TaskInputs"><description> 
+ Registers a set of input properties for this task. See &lt;a href='type://TaskInputs#property(String, Object)'&gt;#property(String, Object)&lt;/a&gt; for details. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;properties The properties. 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="getHasInputs" returnType="boolean"><description> 
+ Returns true if this task has declared the inputs that it consumes. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any inputs. 
+</description></method><method name="getFiles" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the input files of this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input files. Returns an empty collection if this task has no input files. 
+</description></method><method name="property" returnType="org.gradle.api.tasks.TaskInputs" delegationTarget="equals"><description> 
+ &lt;p&gt;Registers an input property for this task. This value is persisted when the task executes, and is compared 
+ against the property value for later invocations of the task, to determine if the task is up-to-date.&lt;/p&gt; 
+ 
+ &lt;p&gt;The given value for the property must be Serializable, so that it can be persisted. It should also provide a 
+ useful &lt;a href='type://equals()'&gt;equals()&lt;/a&gt; method.&lt;/p&gt; 
+ 
+ &lt;p&gt;You can specify a closure or &lt;a href='type://Callable'&gt;Callable&lt;/a&gt; as the value of the property. In which case, the closure or 
+ &lt;a href='type://Callable'&gt;Callable&lt;/a&gt; is executed to determine the actual property value.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property. Must not be null. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The value for the property. Can be null. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Object" name="value"/></method><method name="files" returnType="org.gradle.api.tasks.TaskInputFilePropertyBuilder"><description> 
+ Registers some input files for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The input files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure the property. 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="getHasSourceFiles" returnType="boolean"><description> 
+ Returns true if this task has declared that it accepts source files. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has source files, false if not. 
+</description></method><method name="dir" returnType="org.gradle.api.tasks.TaskInputFilePropertyBuilder"><description> 
+ Registers an input directory hierarchy. All files found under the given directory are treated as input files for 
+ this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dirPath The directory. The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure the property. 
+</description><parameter type="java.lang.Object" name="dirPath"/></method><method name="source" returnType="org.gradle.api.tasks.TaskInputs" delegationTarget="skipWhenEmpty"><description> 
+ Registers some source files for this task. Note that source files are also considered input files, so calling this method implies 
+ a call to &lt;a href='type://TaskInputs#files(Object...)'&gt;#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path. This is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ 
+ @deprecated Use &lt;a href='type://TaskInputs#file(Object)'&gt;#file(Object)&lt;/a&gt; instead and set &lt;a href='type://skipWhenEmpty'&gt;skipWhenEmpty&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="sourceDir" returnType="org.gradle.api.tasks.TaskInputs" delegationTarget="skipWhenEmpty"><description> 
+ Registers a source directory for this task. All files under this directory are treated as source files for this task. Note that 
+ source files are also considered input files, so calling this method implies a call to &lt;a href='type://TaskInputs#dir(Object)'&gt;#dir(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path. This is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ 
+ @deprecated Use &lt;a href='type://TaskInputs#dir(Object)'&gt;#dir(Object)&lt;/a&gt; instead and set &lt;a href='type://skipWhenEmpty'&gt;skipWhenEmpty&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="getSourceFiles" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the set of source files for this task. These are the subset of input files which the task actually does work on. 
+ A task is skipped if it has declared it accepts source files, and this collection is empty. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source files for this task. 
+</description></method><method name="file" returnType="org.gradle.api.tasks.TaskInputFilePropertyBuilder"><description> 
+ Registers some input file for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The input file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure the property. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="source" returnType="org.gradle.api.tasks.TaskInputs" delegationTarget="skipWhenEmpty"><description> 
+ Registers some source files for this task. Note that source files are also considered input files, so calling this method implies 
+ a call to &lt;a href='type://TaskInputs#files(Object...)'&gt;#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The paths. These are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ 
+ @deprecated Use &lt;a href='type://TaskInputs#files(Object...)'&gt;#files(Object...)&lt;/a&gt; instead and set &lt;a href='type://skipWhenEmpty'&gt;skipWhenEmpty&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="getProperties" returnType="java.util.Map"><description> 
+ Returns the set of input properties for this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The properties. 
+</description></method><property name="files" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the input files of this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input files. Returns an empty collection if this task has no input files. 
+</description></property><property name="hasSourceFiles" type="boolean"><description> 
+ Returns true if this task has declared that it accepts source files. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has source files, false if not. 
+</description></property><property name="sourceFiles" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the set of source files for this task. These are the subset of input files which the task actually does work on. 
+ A task is skipped if it has declared it accepts source files, and this collection is empty. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source files for this task. 
+</description></property><property name="hasInputs" type="boolean"><description> 
+ Returns true if this task has declared the inputs that it consumes. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any inputs. 
+</description></property><property name="properties" type="java.util.Map"><description> 
+ Returns the set of input properties for this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The properties. 
+</description></property></type>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.IllegalDependencyNotation" version="3.0"><description> 
+ This exceptions is thrown, if a dependency is declared with a illegal notation. 
+</description></type>

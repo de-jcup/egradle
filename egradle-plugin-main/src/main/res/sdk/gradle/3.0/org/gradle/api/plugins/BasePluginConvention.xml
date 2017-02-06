@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.BasePluginConvention" version="3.0"><description> 
+ &lt;p&gt;A &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; used for the BasePlugin.&lt;/p&gt; 
+</description><method name="setDistsDirName" returnType="void"><parameter type="java.lang.String" name="distsDirName"/></method><method name="setArchivesBaseName" returnType="void"><parameter type="java.lang.String" name="archivesBaseName"/></method><method name="setLibsDirName" returnType="void"><parameter type="java.lang.String" name="libsDirName"/></method><method name="setProject" returnType="void"><parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/></method><method name="getProject" returnType="org.gradle.api.internal.project.ProjectInternal"/><method name="getLibsDirName" returnType="java.lang.String"><description> 
+ The name for the libs directory. This in interpreted relative to the project' build directory. 
+</description></method><method name="getDistsDirName" returnType="java.lang.String"><description> 
+ The name for the distributions directory. This in interpreted relative to the project' build directory. 
+</description></method><method name="getArchivesBaseName" returnType="java.lang.String"><description> 
+ The base name to use for archive files. 
+</description></method><method name="getDistsDir" returnType="java.io.File"><description> 
+ Returns the directory to generate TAR and ZIP archives into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. 
+</description></method><method name="getLibsDir" returnType="java.io.File"><description> 
+ Returns the directory to generate JAR and WAR archives into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. 
+</description></method><property name="libsDirName" type="java.lang.String"><description> 
+ The name for the libs directory. This in interpreted relative to the project' build directory. 
+</description></property><property name="archivesBaseName" type="java.lang.String"><description> 
+ The base name to use for archive files. 
+</description></property><property name="distsDir" type="java.io.File"><description> 
+ Returns the directory to generate TAR and ZIP archives into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. 
+</description></property><property name="project" type="org.gradle.api.internal.project.ProjectInternal"/><property name="distsDirName" type="java.lang.String"><description> 
+ The name for the distributions directory. This in interpreted relative to the project' build directory. 
+</description></property><property name="libsDir" type="java.io.File"><description> 
+ Returns the directory to generate JAR and WAR archives into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. 
+</description></property></type>

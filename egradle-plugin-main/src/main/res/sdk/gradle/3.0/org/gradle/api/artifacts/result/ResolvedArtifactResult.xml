@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ResolvedArtifactResult" version="3.0"><description> 
+ The result of successfully downloading an artifact. 
+ 
+ @since 2.0 
+</description><method name="getFile" returnType="java.io.File"><description> 
+ The file for the artifact. 
+</description></method><property name="file" type="java.io.File"><description> 
+ The file for the artifact. 
+</description></property></type>

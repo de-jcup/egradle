@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestTaskReports" version="3.0"><description> 
+ The reports produced by the &lt;a href='type://Test'&gt;Test&lt;/a&gt; task. 
+</description><method name="getJunitXml" returnType="org.gradle.api.tasks.testing.JUnitXmlReport"><description> 
+ The test results in “JUnit XML” format. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test results in “JUnit XML” format 
+</description></method><method name="getHtml" returnType="org.gradle.api.reporting.DirectoryReport"><description> 
+ A HTML report indicate the results of the test execution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The HTML report 
+</description></method><property name="html" type="org.gradle.api.reporting.DirectoryReport"><description> 
+ A HTML report indicate the results of the test execution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The HTML report 
+</description></property><property name="junitXml" type="org.gradle.api.tasks.testing.JUnitXmlReport"><description> 
+ The test results in “JUnit XML” format. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test results in “JUnit XML” format 
+</description></property></type>

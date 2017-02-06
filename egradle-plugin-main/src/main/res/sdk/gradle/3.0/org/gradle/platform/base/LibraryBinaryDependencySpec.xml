@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.LibraryBinaryDependencySpec" version="3.0"><description> 
+ A dependency onto a specific binary of a library published by a project. 
+</description><method name="getLibraryName" returnType="java.lang.String"><description> 
+ Returns the name of the library this dependency refers to. If null, it should be assumed that the project 
+ defines a single library. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name 
+</description></method><method name="getVariant" returnType="java.lang.String"><description> 
+ Returns the variant of this binary. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library variant 
+</description></method><method name="getProjectPath" returnType="java.lang.String"><description> 
+ Returns the project path of the project this dependency refers to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path 
+</description></method><property name="projectPath" type="java.lang.String"><description> 
+ Returns the project path of the project this dependency refers to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path 
+</description></property><property name="libraryName" type="java.lang.String"><description> 
+ Returns the name of the library this dependency refers to. If null, it should be assumed that the project 
+ defines a single library. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name 
+</description></property><property name="variant" type="java.lang.String"><description> 
+ Returns the variant of this binary. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library variant 
+</description></property></type>

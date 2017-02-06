@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.events.test.TestFinishEvent" version="3.0"><description> 
+ An event that informs about a test having finished its execution. You can query the result of the 
+ test using &lt;a href='type://TestFinishEvent#getResult()'&gt;#getResult()&lt;/a&gt;. 
+ 
+ @since 2.4 
+</description><method name="getResult" returnType="org.gradle.tooling.events.test.TestOperationResult" delegationTarget="TestSuccessResult"><description> 
+ Returns the result of the finished test operation. Currently, the result will be one of the following 
+ sub-types: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://TestSuccessResult'&gt;TestSuccessResult&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://TestSkippedResult'&gt;TestSkippedResult&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://TestFailureResult'&gt;TestFailureResult&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the finished test operation 
+</description></method><property name="result" type="org.gradle.tooling.events.test.TestOperationResult"><description> 
+ Returns the result of the finished test operation. Currently, the result will be one of the following 
+ sub-types: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://TestSuccessResult'&gt;TestSuccessResult&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://TestSkippedResult'&gt;TestSkippedResult&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://TestFailureResult'&gt;TestFailureResult&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the finished test operation 
+</description></property></type>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.incremental.IncrementalTaskInputs" version="3.0"><description> 
+ Provides access to any input files that need to be processed by an incremental task. 
+ &lt;p&gt; 
+ An incremental task action is one that accepts a single &lt;a href='type://IncrementalTaskInputs'&gt;IncrementalTaskInputs&lt;/a&gt; parameter. 
+ The task can then provide an action to execute for all input files that are out of date with respect to the previous execution of the task, 
+ and a separate action for all input files that have been removed since the previous execution. 
+ 
+ &lt;pre autoTested="true"&gt; 
+ class IncrementalReverseTask extends DefaultTask {@literal @}InputDirectory 
+      def File inputDir 
+ 
+      {@literal @}OutputDirectory 
+      def File outputDir 
+ 
+      {@literal @}TaskAction 
+      void execute(IncrementalTaskInputs inputs) {change.file.name}") 
+              targetFile.text = change.file.text.reverse() 
+          } 
+ 
+          inputs.removed {change.file.name}") 
+              if (targetFile.exists()) { 
+                  targetFile.delete() 
+              } 
+          } 
+      } 
+  } 
+ &lt;/pre&gt; 
+ 
+ &lt;p&gt; 
+ In the case where Gradle is unable to determine which input files need to be reprocessed, then all of the input files will be reported as &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;. 
+ Cases where this occurs include: 
+ &lt;ul&gt; 
+     &lt;li&gt;There is no history available from a previous execution.&lt;/li&gt; 
+     &lt;li&gt;An &lt;a href='type://org.gradle.api.tasks.TaskOutputs#upToDateWhen(groovy.lang.Closure)'&gt;org.gradle.api.tasks.TaskOutputs#upToDateWhen(groovy.lang.Closure)&lt;/a&gt; criteria added to the task returns &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt; 
+     &lt;li&gt;An &lt;a href='type://org.gradle.api.tasks.Input'&gt;org.gradle.api.tasks.Input&lt;/a&gt; property has changed since the previous execution.&lt;/li&gt; 
+     &lt;li&gt;One or more output files have changed since the previous execution.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ Note that this is a stateful API: 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt; and &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt; can each only be executed a single time per &lt;a href='type://IncrementalTaskInputs'&gt;IncrementalTaskInputs&lt;/a&gt; instance.&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt; must be executed before &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt; is called.&lt;/li&gt; 
+ &lt;/ul&gt; 
+</description><method name="removed" returnType="void" delegationTarget="groovy.lang.Closure"><description> 
+ Executes the action for all of the input files that were removed since the previous task execution. The action may also be supplied as a &lt;a href='type://groovy.lang.Closure'&gt;groovy.lang.Closure&lt;/a&gt;. 
+ &lt;ul&gt; 
+     &lt;li&gt;When &lt;a href='type://IncrementalTaskInputs#isIncremental()'&gt;#isIncremental()&lt;/a&gt; == &lt;code&gt;true&lt;/code&gt;, the action will be executed for any removed input file.&lt;/li&gt; 
+     &lt;li&gt;When &lt;a href='type://IncrementalTaskInputs#isIncremental()'&gt;#isIncremental()&lt;/a&gt; == &lt;code&gt;false&lt;/code&gt;, the action will not be executed.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;p&gt; 
+ This method may only be called a single time for a single &lt;a href='type://IncrementalTaskInputs'&gt;IncrementalTaskInputs&lt;/a&gt; instance. 
+ &lt;/p&gt;&lt;p&gt; 
+ This method may only be called after &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt; has been called. 
+ &lt;/p&gt; 
+ @throws IllegalStateException if invoked prior to &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;, or if invoked more than once. 
+</description><parameter type="org.gradle.api.Action" name="removedAction"/></method><method name="outOfDate" returnType="void" delegationTarget="groovy.lang.Closure"><description> 
+ Executes the action for all of the input files that are out-of-date since the previous task execution. The action may also be supplied as a &lt;a href='type://groovy.lang.Closure'&gt;groovy.lang.Closure&lt;/a&gt;. 
+ &lt;ul&gt; 
+     &lt;li&gt;When &lt;a href='type://IncrementalTaskInputs#isIncremental()'&gt;#isIncremental()&lt;/a&gt; == &lt;code&gt;true&lt;/code&gt;, the action will be executed for any added or modified input file.&lt;/li&gt; 
+     &lt;li&gt;When &lt;a href='type://IncrementalTaskInputs#isIncremental()'&gt;#isIncremental()&lt;/a&gt; == &lt;code&gt;false&lt;/code&gt;, the action will be executed for every input file for the task.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;p&gt; 
+ This method may only be called a single time for a single &lt;a href='type://IncrementalTaskInputs'&gt;IncrementalTaskInputs&lt;/a&gt; instance. 
+ &lt;/p&gt; 
+ @throws IllegalStateException on second and subsequent invocations. 
+</description><parameter type="org.gradle.api.Action" name="outOfDateAction"/></method><method name="isIncremental" returnType="boolean"><description> 
+ Indicates if it was possible for Gradle to determine which exactly input files were out of date compared to a previous execution. 
+ This is &lt;em&gt;not&lt;/em&gt; possible in the case of no previous execution, changed input properties, output files, etc. 
+ &lt;p&gt; 
+ When &lt;code&gt;true&lt;/code&gt;: 
+ &lt;ul&gt; 
+     &lt;li&gt;Any input file that has been added or modified since previous execution will be considered 'out-of-date' and reported to &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;.&lt;/li&gt; 
+     &lt;li&gt;Any input files that has been removed since previous execution will be reported to &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt;.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;/p&gt; 
+ &lt;p&gt; 
+ When &lt;code&gt;false&lt;/code&gt;: 
+ &lt;ul&gt; 
+     &lt;li&gt;Every input file will be considered to be 'out-of-date' and will be reported to &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;.&lt;/li&gt; 
+     &lt;li&gt;No input files will be reported to &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt;.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;/p&gt; 
+</description></method><property name="incremental" type="boolean"><description> 
+ Indicates if it was possible for Gradle to determine which exactly input files were out of date compared to a previous execution. 
+ This is &lt;em&gt;not&lt;/em&gt; possible in the case of no previous execution, changed input properties, output files, etc. 
+ &lt;p&gt; 
+ When &lt;code&gt;true&lt;/code&gt;: 
+ &lt;ul&gt; 
+     &lt;li&gt;Any input file that has been added or modified since previous execution will be considered 'out-of-date' and reported to &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;.&lt;/li&gt; 
+     &lt;li&gt;Any input files that has been removed since previous execution will be reported to &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt;.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;/p&gt; 
+ &lt;p&gt; 
+ When &lt;code&gt;false&lt;/code&gt;: 
+ &lt;ul&gt; 
+     &lt;li&gt;Every input file will be considered to be 'out-of-date' and will be reported to &lt;a href='type://IncrementalTaskInputs#outOfDate'&gt;#outOfDate&lt;/a&gt;.&lt;/li&gt; 
+     &lt;li&gt;No input files will be reported to &lt;a href='type://IncrementalTaskInputs#removed'&gt;#removed&lt;/a&gt;.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;/p&gt; 
+</description></property></type>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.FileVisitDetails" version="3.0"><description> 
+ Provides access to details about a file or directory being visited by a &lt;a href='type://FileVisitor'&gt;FileVisitor&lt;/a&gt;. 
+ 
+ @see FileTree#visit(groovy.lang.Closure) 
+</description><method name="stopVisiting" returnType="void"><description> 
+ Requests that file visiting terminate after the current file. 
+</description></method></type>

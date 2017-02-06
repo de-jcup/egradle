@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.AntBuilder.AntMessagePriority" version="3.0"><description> 
+ Represents the normal Ant message priorities. 
+</description><method name="from" returnType="org.gradle.api.AntBuilder.AntMessagePriority" delegationTarget="AntBuilder"><description> 
+ &lt;p&gt;An &lt;a href='type://AntBuilder'&gt;AntBuilder&lt;/a&gt; allows you to use Ant from your build script.&lt;/p&gt; 
+</description><parameter type="int" name="messagePriority"/></method></type>

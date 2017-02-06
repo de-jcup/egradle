@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.result.DependencyResult" version="3.0"><description> 
+ An edge in the dependency graph. Provides information about the origin of the dependency and the requested component. 
+ 
+ @see ResolutionResult 
+</description><method name="getFrom" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
+ Returns the origin of the dependency. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the origin of the dependency 
+</description></method><method name="getRequested" returnType="org.gradle.api.artifacts.component.ComponentSelector" delegationTarget="org.gradle.api.artifacts.component.ComponentSelector"><description> 
+ &lt;p&gt;Returns the requested component. 
+ 
+ &lt;p&gt;The return type is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.component.ComponentSelector'&gt;org.gradle.api.artifacts.component.ComponentSelector&lt;/a&gt;, however the selector may also implement one of the following interfaces:&lt;/p&gt; 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ProjectComponentSelector'&gt;org.gradle.api.artifacts.component.ProjectComponentSelector&lt;/a&gt; for those dependencies that request a component from some other project in the current build.&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ModuleComponentSelector'&gt;org.gradle.api.artifacts.component.ModuleComponentSelector&lt;/a&gt; for those dependencies that request a component to be found in some repository.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the requested component 
+</description></method><property name="requested" type="org.gradle.api.artifacts.component.ComponentSelector"><description> 
+ &lt;p&gt;Returns the requested component. 
+ 
+ &lt;p&gt;The return type is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.component.ComponentSelector'&gt;org.gradle.api.artifacts.component.ComponentSelector&lt;/a&gt;, however the selector may also implement one of the following interfaces:&lt;/p&gt; 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ProjectComponentSelector'&gt;org.gradle.api.artifacts.component.ProjectComponentSelector&lt;/a&gt; for those dependencies that request a component from some other project in the current build.&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ModuleComponentSelector'&gt;org.gradle.api.artifacts.component.ModuleComponentSelector&lt;/a&gt; for those dependencies that request a component to be found in some repository.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the requested component 
+</description></property><property name="from" type="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
+ Returns the origin of the dependency. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the origin of the dependency 
+</description></property></type>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.test.NativeTestSuiteSpec" version="3.0"><description> 
+ A component representing a suite of tests that will be executed together. 
+</description><method name="getTestedComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"/><property name="testedComponent" type="org.gradle.nativeplatform.NativeComponentSpec"/></type>

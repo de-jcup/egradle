@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.TargetedNativeComponent" version="3.0"><description> 
+ A native component that can be configured to target certain variant dimensions. 
+ This functionality is a temporary workaround to eliminate configuration of unnecessary domain objects and tasks. 
+</description><method name="targetFlavors" returnType="void" delegationTarget="Flavor"><description> 
+ Specifies the names of one or more &lt;a href='type://Flavor'&gt;Flavor&lt;/a&gt;s that this component should be built for. 
+</description><parameter type="java.lang.String" name="flavorSelectors"/></method><method name="targetBuildTypes" returnType="void" delegationTarget="BuildType"><description> 
+ Specifies the names of one or more &lt;a href='type://BuildType'&gt;BuildType&lt;/a&gt;s that this component should be built for. 
+</description><parameter type="java.lang.String" name="buildTypeSelectors"/></method></type>

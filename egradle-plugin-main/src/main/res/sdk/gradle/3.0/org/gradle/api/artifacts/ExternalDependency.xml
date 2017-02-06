@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.ExternalDependency" version="3.0"><description> 
+ &lt;p&gt;An &lt;a href='type://ExternalDependency'&gt;ExternalDependency&lt;/a&gt; is a &lt;a href='type://Dependency'&gt;Dependency&lt;/a&gt; on a source outside the current project hierarchy.&lt;/p&gt; 
+</description><method name="isForce" returnType="boolean"><description> 
+ Returns whether or not the version of this dependency should be enforced in the case of version conflicts. 
+</description></method><method name="setForce" returnType="org.gradle.api.artifacts.ExternalDependency"><description> 
+ Sets whether or not the version of this dependency should be enforced in the case of version conflicts. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;force Whether to force this version or not. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="boolean" name="force"/></method><method name="copy" returnType="org.gradle.api.artifacts.ExternalDependency"><description> 
+ {@inheritDoc} 
+</description></method><property name="force" type="boolean"><description> 
+ Returns whether or not the version of this dependency should be enforced in the case of version conflicts. 
+</description></property></type>

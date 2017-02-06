@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.CreateStaticLibrary" version="3.0"><description> 
+ Assembles a static library from object files. 
+</description><method name="source" returnType="void"><description> 
+ Adds a set of object files to be linked. &lt;p&gt; The provided source object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="source"/></method><method name="getStaticLibArgs" returnType="java.util.List"><description> 
+ Additional arguments passed to the archiver. 
+</description></method><method name="getOperationLoggerFactory" returnType="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/><method name="getSource" returnType="org.gradle.api.file.FileCollection"><description> 
+ The source object files to be passed to the archiver. 
+</description></method><method name="setTargetPlatform" returnType="void"><parameter type="org.gradle.nativeplatform.platform.NativePlatform" name="targetPlatform"/></method><method name="setStaticLibArgs" returnType="void"><parameter type="java.util.List" name="staticLibArgs"/></method><method name="call" returnType="java.lang.String"/><method name="setOutputFile" returnType="void"><parameter type="java.io.File" name="outputFile"/></method><method name="setToolChain" returnType="void"><parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/></method><method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform"><description> 
+ The platform being targeted. 
+</description></method><method name="getOutputFile" returnType="java.io.File"><description> 
+ The file where the output binary will be located. 
+</description></method><method name="link" returnType="void"/><method name="getToolChain" returnType="org.gradle.nativeplatform.toolchain.NativeToolChain"><description> 
+ The tool chain used for creating the static library. 
+</description></method><property name="outputFile" type="java.io.File"><description> 
+ The file where the output binary will be located. 
+</description></property><property name="staticLibArgs" type="java.util.List"><description> 
+ Additional arguments passed to the archiver. 
+</description></property><property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform"><description> 
+ The platform being targeted. 
+</description></property><property name="source" type="org.gradle.api.file.FileCollection"><description> 
+ The source object files to be passed to the archiver. 
+</description></property><property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain"><description> 
+ The tool chain used for creating the static library. 
+</description></property><property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/></type>

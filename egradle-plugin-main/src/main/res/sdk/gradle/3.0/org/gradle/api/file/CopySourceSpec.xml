@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.CopySourceSpec" version="3.0"><description> 
+ Specifies sources for a file copy. 
+</description><method name="from" returnType="org.gradle.api.file.CopySourceSpec" delegationTarget="CopySpec"><description> 
+ Specifies the source files or directories for a copy and creates a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. The given source 
+ path is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; . 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourcePath Path to source for the copy 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction action for configuring the child CopySpec 
+</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="from" returnType="org.gradle.api.file.CopySourceSpec"><description> 
+ Specifies source files or directories for a copy. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourcePaths Paths to source files for the copy 
+</description><parameter type="java.lang.Object" name="sourcePaths"/></method><method name="from" returnType="org.gradle.api.file.CopySourceSpec" delegationTarget="CopySourceSpec"><description> 
+ Specifies the source files or directories for a copy and creates a child &lt;a href='type://CopySourceSpec'&gt;CopySourceSpec&lt;/a&gt;. The given source 
+ path is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; . 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourcePath Path to source for the copy 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure closure for configuring the child CopySourceSpec 
+</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method></type>

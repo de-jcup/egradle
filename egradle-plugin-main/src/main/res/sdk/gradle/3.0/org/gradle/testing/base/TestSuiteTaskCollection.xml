@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.testing.base.TestSuiteTaskCollection" version="3.0"><description> 
+ Provides access to key tasks used by a test suite. 
+</description><method name="getRun" returnType="org.gradle.api.Task"><description> 
+ The run task. 
+</description></method><property name="run" type="org.gradle.api.Task"><description> 
+ The run task. 
+</description></property></type>

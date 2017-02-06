@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.file.UnableToDeleteFileException" version="3.0"><description> 
+ Thrown by Gradle when it is unable to delete a file. 
+</description><method name="toMessage" returnType="java.lang.String"><parameter type="java.io.File" name="file"/></method><method name="getFile" returnType="java.io.File"/><property name="file" type="java.io.File"/></type>

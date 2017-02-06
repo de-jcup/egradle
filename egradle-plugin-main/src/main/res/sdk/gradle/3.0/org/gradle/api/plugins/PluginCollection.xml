@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.plugins.PluginCollection" version="3.0"><description> 
+ &lt;p&gt;A &lt;a href='type://PluginCollection'&gt;PluginCollection&lt;/a&gt; represents a collection of &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; instances.&lt;/p&gt; 
+  
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of plugins which this collection contains. 
+</description><method name="withType" returnType="org.gradle.api.plugins.PluginCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Class" name="type"/></method><method name="matching" returnType="org.gradle.api.plugins.PluginCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="matching" returnType="org.gradle.api.plugins.PluginCollection"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="whenPluginAdded" returnType="org.gradle.api.Action" delegationTarget="Action"><description> 
+ Adds an &lt;a href='type://Action'&gt;Action&lt;/a&gt; to be executed when a plugin is added to this collection. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to be executed 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the supplied action 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="whenPluginAdded" returnType="void"><description> 
+ Adds a closure to be called when a plugin is added to this collection. The plugin is passed to the closure as the 
+ parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to be called 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method></type>

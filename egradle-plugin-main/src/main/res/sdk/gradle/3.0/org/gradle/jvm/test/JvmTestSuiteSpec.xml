@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.jvm.test.JvmTestSuiteSpec" version="3.0"><description> 
+ Base type for all JVM test suites. 
+ 
+ @since 2.11 
+</description><method name="getTestedComponent" returnType="org.gradle.jvm.JvmComponentSpec"/><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"><description> 
+ The set of dependencies applicable to the entire test suite. 
+</description></method><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"><description> 
+ The set of dependencies applicable to the entire test suite. 
+</description></property><property name="testedComponent" type="org.gradle.jvm.JvmComponentSpec"/></type>

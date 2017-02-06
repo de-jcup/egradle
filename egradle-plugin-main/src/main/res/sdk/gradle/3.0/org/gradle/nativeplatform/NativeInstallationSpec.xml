@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.NativeInstallationSpec" version="3.0"><description> 
+ Specifies the installation location for a native executable. 
+</description><method name="setDirectory" returnType="void"><parameter type="java.io.File" name="directory"/></method><method name="getDirectory" returnType="java.io.File"/><property name="directory" type="java.io.File"/></type>

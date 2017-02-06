@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.Action" version="3.0"><description> 
+ Performs some action against objects of type T. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of object which this action accepts.  
+</description><method name="execute" returnType="void"><description> 
+ Performs this action against the given object. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;t The object to perform the action on. 
+</description><parameter type="T" name="t"/></method></type>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.publish.PublicationContainer" version="3.0"><description> 
+ A &lt;a href='type://PublicationContainer'&gt;PublicationContainer&lt;/a&gt; is responsible for creating and managing &lt;a href='type://Publication'&gt;Publication&lt;/a&gt; instances. 
+ 
+ The set of available publication types is dependent on the application of particular plugins: 
+ &lt;ul&gt; 
+     &lt;li&gt;The &lt;a href='type://org.gradle.api.publish.maven.plugins.MavenPublishPlugin'&gt;org.gradle.api.publish.maven.plugins.MavenPublishPlugin&lt;/a&gt; makes it possible to create &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; instances.&lt;/li&gt; 
+     &lt;li&gt;The &lt;a href='type://org.gradle.api.publish.ivy.plugins.IvyPublishPlugin'&gt;org.gradle.api.publish.ivy.plugins.IvyPublishPlugin&lt;/a&gt; makes it possible to create &lt;a href='type://org.gradle.api.publish.ivy.IvyPublication'&gt;org.gradle.api.publish.ivy.IvyPublication&lt;/a&gt; instances.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: 'ivy-publish' 
+ 
+ publishing.publications.create('publication-name', IvyPublication) { 
+     // Configure the ivy publication here 
+ } 
+ &lt;/pre&gt; 
+ 
+ The usual way to add publications is via a configuration block. 
+ See the documentation for &lt;a href='type://PublishingExtension#publications(org.gradle.api.Action)'&gt;PublishingExtension#publications(org.gradle.api.Action)&lt;/a&gt; for examples of how to create and configure publications. 
+ 
+ @since 1.3 
+ @see Publication 
+ @see PublishingExtension 
+</description></type>

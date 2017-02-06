@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.tasks.JavaScriptMinify" version="3.0"><description> 
+ Task to minify JavaScript assets. 
+</description><method name="getDestinationDir" returnType="java.io.File"><description> 
+ Returns the output directory that processed JavaScript is written to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description></method><method name="setDestinationDir" returnType="void"><description> 
+ Sets the output directory where processed JavaScript should be written. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destinationDir The output directory. 
+</description><parameter type="java.io.File" name="destinationDir"/></method><method name="compileJavaScriptSources" returnType="void"/><method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/><method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
+ The fork options to be applied to the JavaScript compiler. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The fork options for the JavaScript compiler. 
+</description></method><method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"><description> 
+ Returns the tool chain that will be used to compile the JavaScript source. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
+</description></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/><method name="setPlayPlatform" returnType="void"><description> 
+ Sets the target Play platform. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;playPlatform The target Play platform. 
+</description><parameter type="org.gradle.play.platform.PlayPlatform" name="playPlatform"/></method><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="playPlatform" type="org.gradle.play.platform.PlayPlatform"><description> 
+ Sets the target Play platform. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;playPlatform The target Play platform. 
+</description></property><property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/><property name="destinationDir" type="java.io.File"><description> 
+ Returns the output directory that processed JavaScript is written to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description></property><property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
+ The fork options to be applied to the JavaScript compiler. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The fork options for the JavaScript compiler. 
+</description></property><property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"><description> 
+ Returns the tool chain that will be used to compile the JavaScript source. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
+</description></property></type>

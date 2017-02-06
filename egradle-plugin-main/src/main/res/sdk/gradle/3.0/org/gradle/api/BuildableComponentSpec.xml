@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.BuildableComponentSpec" version="3.0"><description> 
+ A &lt;a href='type://ComponentSpec'&gt;ComponentSpec&lt;/a&gt; that is directly &lt;a href='type://Buildable'&gt;Buildable&lt;/a&gt; via a specified task. 
+</description><method name="hasBuildDependencies" returnType="boolean"/><method name="setBuildTask" returnType="void"><description> 
+ Specifies the task responsible for building this component. 
+</description><parameter type="org.gradle.api.Task" name="buildTask"/></method><method name="builtBy" returnType="void"><description> 
+ Adds tasks required to build this component. Tasks added this way are subsequently 
+ added as dependencies of this component's &lt;a href='type://BuildableComponentSpec#getBuildTask() build task'&gt;#getBuildTask() build task&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="tasks"/></method><method name="getBuildTask" returnType="org.gradle.api.Task"><description> 
+ Returns the task responsible for building this component. 
+</description></method><property name="buildTask" type="org.gradle.api.Task"><description> 
+ Returns the task responsible for building this component. 
+</description></property></type>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseLinkedResource" version="3.0"><description> 
+ Linked resources are files and folders that are stored in locations in the file system outside of the project's location. 
+ 
+ @since 1.0-milestone-4 
+</description><method name="getType" returnType="java.lang.String"><description> 
+ The resource type. 
+ &lt;p&gt; 
+ If 'location' property is used the values are: "1" for a file, or "2" for a folder. 
+ &lt;p&gt; 
+ If 'locationUri' property is used then the values are: 
+ "1" for file or folder when 'locationUri' first segment is a workspace path variable (or path variable navigation element), 
+ "2" for an eclipse virtual folder. 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Eclipse link type 
+</description></method><method name="getLocation" returnType="java.lang.String"><description> 
+ The local file system absolute path of the target of the linked resource. For example: '/path/to/somewhere'. 
+ Mutually exclusive with 'locationUri' 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;location 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
+ The project-relative path of the linked resource as it appears in the workspace. 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ &lt;p&gt; 
+ For example, a linked resource to a file system folder /some/path/to/someFolder can have a name 'someFolder' 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;name 
+</description></method><method name="getLocationUri" returnType="java.lang.String"><description> 
+ If the file is not in the local file system, this attribute contains the absolute URI of the resource in some backing file system. 
+ Mutually exclusive with 'location'. 
+ &lt;p&gt; 
+ When workspace path variable is used as part of path then this property must be used instead of 'location' 
+ &lt;p&gt; 
+ Used for virtual folders. In that case the value is: 'virtual:/virtual' 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;location uri 
+</description></method><property name="locationUri" type="java.lang.String"><description> 
+ If the file is not in the local file system, this attribute contains the absolute URI of the resource in some backing file system. 
+ Mutually exclusive with 'location'. 
+ &lt;p&gt; 
+ When workspace path variable is used as part of path then this property must be used instead of 'location' 
+ &lt;p&gt; 
+ Used for virtual folders. In that case the value is: 'virtual:/virtual' 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;location uri 
+</description></property><property name="location" type="java.lang.String"><description> 
+ The local file system absolute path of the target of the linked resource. For example: '/path/to/somewhere'. 
+ Mutually exclusive with 'locationUri' 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;location 
+</description></property><property name="name" type="java.lang.String"><description> 
+ The project-relative path of the linked resource as it appears in the workspace. 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ &lt;p&gt; 
+ For example, a linked resource to a file system folder /some/path/to/someFolder can have a name 'someFolder' 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;name 
+</description></property><property name="type" type="java.lang.String"><description> 
+ The resource type. 
+ &lt;p&gt; 
+ If 'location' property is used the values are: "1" for a file, or "2" for a folder. 
+ &lt;p&gt; 
+ If 'locationUri' property is used then the values are: 
+ "1" for file or folder when 'locationUri' first segment is a workspace path variable (or path variable navigation element), 
+ "2" for an eclipse virtual folder. 
+ &lt;p&gt; 
+ See the official Eclipse documentation for most up-to-date information on properties of a linked resource 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Eclipse link type 
+</description></property></type>

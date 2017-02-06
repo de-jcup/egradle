@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeExecutableBinary" version="3.0"><description> 
+ A binary artifact for a &lt;a href='type://NativeExecutable'&gt;NativeExecutable&lt;/a&gt;, targeted at a particular platform with specific configuration. 
+</description><method name="getExecutableFile" returnType="java.io.File"><description> 
+ The executable file. 
+</description></method><property name="executableFile" type="java.io.File"><description> 
+ The executable file. 
+</description></property></type>

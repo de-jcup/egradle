@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler" version="3.0"><description> 
+ Allows to modify the metadata of depended-on software components. 
+ 
+ &lt;p&gt; Example: 
+ &lt;pre autoTested=''&gt; 
+ dependencies { 
+             replacedBy("com.google.guava:guava") 
+         } 
+     } 
+ } 
+ &lt;/pre&gt; 
+ 
+ @since 2.2 
+</description><method name="module" returnType="void" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
+ Enables configuring component module metadata. 
+ This metadata applies to the entire component module (e.g. "group:name", like "org.gradle:gradle-core") regardless of the component version. 
+ 
+ &lt;pre autoTested=''&gt; 
+ //declaring that google collections are replaced by guava 
+ //so that conflict resolution can take advantage of this information: 
+ dependencies.modules.module('com.google.collections:google-collections') { replacedBy('com.google.guava:guava') } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleNotation an identifier of the module. String "group:name", e.g. 'org.gradle:gradle-core' 
+ or an instance of &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule a rule that applies to the components of the specified module 
+ @since 2.2 
+</description><parameter type="java.lang.Object" name="moduleNotation"/><parameter type="org.gradle.api.Action" name="rule"/></method></type>

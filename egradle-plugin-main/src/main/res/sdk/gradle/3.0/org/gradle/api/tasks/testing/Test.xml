@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.testing.Test" version="3.0"><description> 
+ Executes JUnit (3.8.x or 4.x) or TestNG tests. Test are always run in (one or more) separate JVMs. 
+ The sample below shows various configuration options. 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' // adds 'test' task 
+ 
+ test { descriptor -&gt; 
+      logger.lifecycle("Running test: " + descriptor) 
+   } 
+ 
+   // listen to standard out and standard error of the test JVM(s) 
+   onOutput { descriptor, event -&gt; 
+      logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message ) 
+   } 
+ } 
+ &lt;/pre&gt; 
+ &lt;p&gt; 
+ The test process can be started in debug mode (see &lt;a href='type://Test#getDebug()'&gt;#getDebug()&lt;/a&gt;) in an ad-hoc manner by supplying the `--debug-jvm` switch when invoking the build. 
+ &lt;pre&gt; 
+ gradle someTestTask --debug-jvm 
+ &lt;/pre&gt; 
+ 
+</description><method name="addCandidateClassFilesHashProperty" returnType="void"/><method name="setEnableAssertions" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="boolean" name="enabled"/></method><method name="getDefaultCharacterEncoding" returnType="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></method><method name="getBinResultsDir" returnType="java.io.File"><description> 
+ Returns the root folder for the test results in internal binary format. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the test result directory, containing the test results in binary format. 
+</description></method><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="addTestOutputListener" returnType="void"><description> 
+ Registers a output listener with this task. Quicker way of hooking into output events is using the &lt;a href='type://Test#onOutput(groovy.lang.Closure)'&gt;#onOutput(groovy.lang.Closure)&lt;/a&gt; method. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add. 
+</description><parameter type="org.gradle.api.tasks.testing.TestOutputListener" name="listener"/></method><method name="getOptions" returnType="org.gradle.api.tasks.testing.TestFrameworkOptions"><description> 
+ Returns test framework specific options. Make sure to call &lt;a href='type://Test#useJUnit()'&gt;#useJUnit()&lt;/a&gt; or &lt;a href='type://Test#useTestNG()'&gt;#useTestNG()&lt;/a&gt; before using this method. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test framework options. 
+</description></method><method name="isScanForTestClasses" returnType="boolean" delegationTarget="true"><description> 
+ Specifies whether test classes should be detected. When &lt;a href='type://true'&gt;true&lt;/a&gt; the classes which match the include and exclude patterns are scanned for test classes, and any found are executed. When 
+ &lt;a href='type://false'&gt;false&lt;/a&gt; the classes which match the include and exclude patterns are executed. 
+</description></method><method name="getIncludes" returnType="java.util.Set"><description> 
+ Returns the include patterns for test execution. 
+ 
+ @see #include(String...) 
+</description></method><method name="include" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Adds include patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')). 
+ 
+ @see #setIncludes(Iterable) 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="determineCurrentLogLevel" returnType="org.gradle.api.logging.LogLevel"/><method name="getModuleRegistry" returnType="org.gradle.api.internal.classpath.ModuleRegistry"/><method name="getFilter" returnType="org.gradle.api.tasks.testing.TestFilter"><description> 
+ Allows filtering tests for execution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;filter object 
+ @since 1.10 
+</description></method><method name="setSystemProperties" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/><method name="getBootstrapClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+ {@inheritDoc} 
+</description></method><method name="getEnableAssertions" returnType="boolean"><description> 
+ {@inheritDoc} 
+</description></method><method name="useTestFramework" returnType="org.gradle.api.internal.tasks.testing.TestFramework"><parameter type="org.gradle.api.internal.tasks.testing.TestFramework" name="testFramework"/><parameter type="groovy.lang.Closure" name="testFrameworkConfigure"/></method><method name="reports" returnType="org.gradle.api.tasks.testing.TestTaskReports"><description> 
+ Configures the reports that this task potentially produces. 
+ 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports that this task potentially produces 
+</description><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/><method name="getListenerManager" returnType="org.gradle.internal.event.ListenerManager"/><method name="getDebug" returnType="boolean"><description> 
+ {@inheritDoc} 
+</description></method><method name="getBuildOperationProcessor" returnType="org.gradle.internal.operations.BuildOperationProcessor"/><method name="useTestNG" returnType="void"><description> 
+ Specifies that TestNG should be used to execute the tests. &lt;p&gt; To configure TestNG specific options, see &lt;a href='type://Test#useTestNG(Closure)'&gt;#useTestNG(Closure)&lt;/a&gt;. 
+</description></method><method name="setExecutable" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="executable"/></method><method name="removeTestListener" returnType="void"><description> 
+ Unregisters a test listener with this task.  This method will only remove listeners that were added by calling &lt;a href='type://Test#addTestListener(org.gradle.api.tasks.testing.TestListener)'&gt;#addTestListener(org.gradle.api.tasks.testing.TestListener)&lt;/a&gt; on this task. 
+ If the listener was registered with Gradle using &lt;a href='type://org.gradle.api.invocation.Gradle#addListener(Object)'&gt;org.gradle.api.invocation.Gradle#addListener(Object)&lt;/a&gt; this method will not do anything. Instead, use &lt;a href='type://org.gradle.api.invocation.Gradle#removeListener(Object)'&gt;org.gradle.api.invocation.Gradle#removeListener(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove. 
+</description><parameter type="org.gradle.api.tasks.testing.TestListener" name="listener"/></method><method name="calculateCandidateClassFilesHash" returnType="java.lang.Integer"/><method name="beforeSuite" returnType="void" delegationTarget="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ &lt;p&gt;Adds a closure to be notified before a test suite is executed. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; instance is passed to the closure as a parameter.&lt;/p&gt; 
+ 
+ &lt;p&gt;This method is also called before any test suites are executed. The provided descriptor will have a null parent suite.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="beforeTest" returnType="void" delegationTarget="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ Adds a closure to be notified before a test is executed. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; instance is passed to the closure as a parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getEnvironment" returnType="java.util.Map"><description> 
+ {@inheritDoc} 
+</description></method><method name="addTestListener" returnType="void"><description> 
+ Registers a test listener with this task. Consider also the following handy methods for quicker hooking into test execution: &lt;a href='type://Test#beforeTest(groovy.lang.Closure)'&gt;#beforeTest(groovy.lang.Closure)&lt;/a&gt;, &lt;a href='type://Test#afterTest(groovy.lang.Closure)'&gt;#afterTest(groovy.lang.Closure)&lt;/a&gt;, &lt;a href='type://Test#beforeSuite(groovy.lang.Closure)'&gt;#beforeSuite(groovy.lang.Closure)&lt;/a&gt;, &lt;a href='type://Test#afterSuite(groovy.lang.Closure)'&gt;#afterSuite(groovy.lang.Closure)&lt;/a&gt; &lt;p&gt; This listener will NOT be notified of tests executed by other tasks. To 
+ get that behavior, use &lt;a href='type://org.gradle.api.invocation.Gradle#addListener(Object)'&gt;org.gradle.api.invocation.Gradle#addListener(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add. 
+</description><parameter type="org.gradle.api.tasks.testing.TestListener" name="listener"/></method><method name="getCandidateClassFiles" returnType="org.gradle.api.file.FileTree"><description> 
+ Returns the classes files to scan for test classes. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The candidate class files. 
+</description></method><method name="exclude" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Adds exclude patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')). 
+ 
+ @see #setExcludes(Iterable) 
+</description><parameter type="java.lang.String" name="excludes"/></method><method name="setAllJvmArgs" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="arguments"/></method><method name="include" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="setMaxHeapSize" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="heapSize"/></method><method name="include" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Adds include patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')). 
+ 
+ @see #setIncludes(Iterable) 
+</description><parameter type="java.lang.String" name="includes"/></method><method name="setDefaultCharacterEncoding" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="defaultCharacterEncoding"/></method><method name="setTestExecuter" returnType="void"><parameter type="org.gradle.api.internal.tasks.testing.detection.TestExecuter" name="testExecuter"/></method><method name="filter" returnType="void"><description> 
+ Executes the action against the &lt;a href='type://Test#getFilter()'&gt;#getFilter()&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action configuration of the test filter 
+ @since 1.10 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="useTestNG" returnType="void" delegationTarget="org.gradle.api.tasks.testing.testng.TestNGOptions"><description> 
+ Specifies that TestNG should be used to execute the tests, configuring TestNG specific options. &lt;p&gt; The supplied closure configures an instance of &lt;a href='type://org.gradle.api.tasks.testing.testng.TestNGOptions'&gt;org.gradle.api.tasks.testing.testng.TestNGOptions&lt;/a&gt;, which can be used to configure how TestNG runs. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testFrameworkConfigure A closure used to configure the TestNG options. 
+</description><parameter type="groovy.lang.Closure" name="testFrameworkConfigure"/></method><method name="setBootstrapClasspath" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="jvmArgs" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="arguments"/></method><method name="setBinResultsDir" returnType="void"><description> 
+ Sets the root folder for the test results in internal binary format. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;binResultsDir The root folder 
+</description><parameter type="java.io.File" name="binResultsDir"/></method><method name="handleTestFailures" returnType="void"/><method name="bootstrapClasspath" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="classpath"/></method><method name="options" returnType="org.gradle.api.tasks.testing.TestFrameworkOptions"><description> 
+ Configures test framework specific options. Make sure to call &lt;a href='type://Test#useJUnit()'&gt;#useJUnit()&lt;/a&gt; or &lt;a href='type://Test#useTestNG()'&gt;#useTestNG()&lt;/a&gt; before using this method. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test framework options. 
+</description><parameter type="groovy.lang.Closure" name="testFrameworkConfigure"/></method><method name="setMinHeapSize" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="heapSize"/></method><method name="onOutput" returnType="void" delegationTarget="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ Adds a closure to be notified when output from the test received. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.testing.TestOutputEvent'&gt;org.gradle.api.tasks.testing.TestOutputEvent&lt;/a&gt; instance are 
+ passed to the closure as a parameter. &lt;pre autoTested=''&gt; apply plugin: 'java' 
+ 
+ test { logger.error("Test: " + descriptor + ", error: " + event.message) } } } &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setTestReporter" returnType="void"><description> 
+ ATM. for testing only 
+</description><parameter type="org.gradle.api.internal.tasks.testing.junit.report.TestReporter" name="testReporter"/></method><method name="setTestNameIncludePatterns" returnType="org.gradle.api.tasks.testing.Test" delegationTarget="TestFilter"><description> 
+ Sets the test name patterns to be included in execution. 
+ Classes or method names are supported, wildcard '*' is supported. 
+ For more information see the user guide chapter on testing. 
+ 
+ For more information on supported patterns see &lt;a href='type://TestFilter'&gt;TestFilter&lt;/a&gt; 
+</description><parameter type="java.util.List" name="testNamePattern"/></method><method name="executable" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="executable"/></method><method name="getActorFactory" returnType="org.gradle.internal.actor.ActorFactory"/><method name="getAllJvmArgs" returnType="java.util.List"><description> 
+ {@inheritDoc} 
+</description></method><method name="copyTo" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.process.ProcessForkOptions" name="target"/></method><method name="getReports" returnType="org.gradle.api.tasks.testing.TestTaskReports"><description> 
+ The reports that this task potentially produces. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports that this task potentially produces 
+</description></method><method name="getClassLoaderCache" returnType="org.gradle.api.internal.initialization.loadercache.ClassLoaderCache"/><method name="reports" returnType="org.gradle.api.tasks.testing.TestTaskReports"><description> 
+ Configures the reports that this task potentially produces. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports that this task potentially produces 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="useJUnit" returnType="void"><description> 
+ Specifies that JUnit should be used to execute the tests. &lt;p&gt; To configure JUnit specific options, see &lt;a href='type://Test#useJUnit(groovy.lang.Closure)'&gt;#useJUnit(groovy.lang.Closure)&lt;/a&gt;. 
+</description></method><method name="setDebug" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="boolean" name="enabled"/></method><method name="getWorkingDir" returnType="java.io.File"><description> 
+ {@inheritDoc} 
+</description></method><method name="exclude" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="setExcludes" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Sets the exclude patterns for test execution. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes The patterns list 
+ @see #exclude(String...) 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="setTestClassesDir" returnType="void"><description> 
+ Sets the root folder for the compiled test sources. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testClassesDir The root folder 
+</description><parameter type="java.io.File" name="testClassesDir"/></method><method name="getSystemProperties" returnType="java.util.Map"><description> 
+ {@inheritDoc} 
+</description></method><method name="getTestLogging" returnType="org.gradle.api.tasks.testing.logging.TestLoggingContainer" delegationTarget="TestLoggingContainer"><description> 
+ Allows to set options related to which test events are logged to the console, and on which detail level. For example, to show more information about exceptions use: 
+ 
+ &lt;pre autoTested=''&gt; apply plugin: 'java' 
+ 
+ test.testLogging { exceptionFormat "full" } &lt;/pre&gt; 
+ 
+ For further information see &lt;a href='type://TestLoggingContainer'&gt;TestLoggingContainer&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description></method><method name="getTestClassesDir" returnType="java.io.File"><description> 
+ Returns the root folder for the compiled test sources. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All test class directories to be used. 
+</description></method><method name="environment" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Object" name="value"/></method><method name="getTestOutputListenerBroadcaster" returnType="org.gradle.internal.event.ListenerBroadcast"/><method name="workingDir" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="dir"/></method><method name="copyTo" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.process.JavaForkOptions" name="target"/></method><method name="visitFile" returnType="void"><parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/></method><method name="systemProperties" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="getExceptionFormatter" returnType="org.gradle.api.internal.tasks.testing.logging.TestExceptionFormatter"><parameter type="org.gradle.api.tasks.testing.logging.TestLogging" name="testLogging"/></method><method name="jvmArgs" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="arguments"/></method><method name="setIncludes" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Sets the include patterns for test execution. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes The patterns list 
+ @see #include(String...) 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="useJUnit" returnType="void" delegationTarget="org.gradle.api.tasks.testing.junit.JUnitOptions"><description> 
+ Specifies that JUnit should be used to execute the tests, configuring JUnit specific options. &lt;p&gt; The supplied closure configures an instance of &lt;a href='type://org.gradle.api.tasks.testing.junit.JUnitOptions'&gt;org.gradle.api.tasks.testing.junit.JUnitOptions&lt;/a&gt;, which can be used to configure how JUnit runs. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testFrameworkConfigure A closure used to configure the JUnit options. 
+</description><parameter type="groovy.lang.Closure" name="testFrameworkConfigure"/></method><method name="getIgnoreFailures" returnType="boolean"><description> 
+ {@inheritDoc} 
+</description></method><method name="getProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/><method name="systemProperty" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Object" name="value"/></method><method name="setEnvironment" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="environmentVariables"/></method><method name="executeTests" returnType="void"/><method name="getProgressLoggerFactory" returnType="org.gradle.internal.logging.progress.ProgressLoggerFactory"/><method name="setClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="afterSuite" returnType="void" delegationTarget="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ &lt;p&gt;Adds a closure to be notified after a test suite has executed. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; and &lt;a href='type://TestResult'&gt;TestResult&lt;/a&gt; instance are passed to the closure as a 
+ parameter.&lt;/p&gt; 
+ 
+ &lt;p&gt;This method is also called after all test suites are executed. The provided descriptor will have a null parent suite.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="environment" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="environmentVariables"/></method><method name="setMaxParallelForks" returnType="void"><description> 
+ Sets the maximum number of forked test processes to execute in parallel. Set to 1 to disable parallel test execution. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;maxParallelForks The maximum number of forked test processes. 
+</description><parameter type="int" name="maxParallelForks"/></method><method name="getMinHeapSize" returnType="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></method><method name="useTestFramework" returnType="org.gradle.api.internal.tasks.testing.TestFramework"><parameter type="org.gradle.api.internal.tasks.testing.TestFramework" name="testFramework"/></method><method name="exclude" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ Adds exclude patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')). 
+ 
+ @see #setExcludes(Iterable) 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="getMaxHeapSize" returnType="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></method><method name="setScanForTestClasses" returnType="void"><parameter type="boolean" name="scanForTestClasses"/></method><method name="call" returnType="java.lang.Integer"/><method name="exclude" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><method name="removeTestOutputListener" returnType="void"><description> 
+ Unregisters a test output listener with this task.  This method will only remove listeners that were added by calling &lt;a href='type://Test#addTestOutputListener(org.gradle.api.tasks.testing.TestOutputListener)'&gt;#addTestOutputListener(org.gradle.api.tasks.testing.TestOutputListener)&lt;/a&gt; 
+ on this task.  If the listener was registered with Gradle using &lt;a href='type://org.gradle.api.invocation.Gradle#addListener(Object)'&gt;org.gradle.api.invocation.Gradle#addListener(Object)&lt;/a&gt; this method will not do anything. Instead, use &lt;a href='type://org.gradle.api.invocation.Gradle#removeListener(Object)'&gt;org.gradle.api.invocation.Gradle#removeListener(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove. 
+</description><parameter type="org.gradle.api.tasks.testing.TestOutputListener" name="listener"/></method><method name="setJvmArgs" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Iterable" name="arguments"/></method><method name="getJvmArgs" returnType="java.util.List"><description> 
+ {@inheritDoc} 
+</description></method><method name="getTestFramework" returnType="org.gradle.api.internal.tasks.testing.TestFramework"/><method name="getExcludes" returnType="java.util.Set"><description> 
+ Returns the exclude patterns for test execution. 
+ 
+ @see #exclude(String...) 
+</description></method><method name="testFramework" returnType="org.gradle.api.internal.tasks.testing.TestFramework"><parameter type="groovy.lang.Closure" name="testFrameworkConfigure"/></method><method name="getTestListenerInternalBroadcaster" returnType="org.gradle.internal.event.ListenerBroadcast"/><method name="testLogging" returnType="void"><description> 
+ Allows configuring the logging of the test execution, for example log eagerly the standard output, etc. &lt;pre autoTested=''&gt; apply plugin: 'java' 
+ 
+ //makes the standard streams (err and out) visible at console when running tests test.testLogging { showStandardStreams = true } &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure configure closure 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setForkEvery" returnType="void"><description> 
+ Sets the maximum number of test classes to execute in a forked test process. Use null or 0 to use no maximum. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;forkEvery The maximum number of test classes. Use null or 0 to specify no maximum. 
+</description><parameter type="java.lang.Long" name="forkEvery"/></method><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath to use to execute the tests. 
+</description></method><method name="getMaxParallelForks" returnType="int"><description> 
+ Returns the maximum number of forked test processes to execute in parallel. The default value is 1 (no parallel test execution). 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The maximum number of forked test processes. 
+</description></method><method name="getExecutable" returnType="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></method><method name="setWorkingDir" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="dir"/></method><method name="getForkEvery" returnType="long"><description> 
+ Returns the maximum number of test classes to execute in a forked test process. The forked test process will be restarted when this limit is reached. The default value is 0 (no maximum). 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The maximum number of test classes. Returns 0 when there is no maximum. 
+</description></method><method name="getTestListenerBroadcaster" returnType="org.gradle.internal.event.ListenerBroadcast"/><method name="setIgnoreFailures" returnType="void"><description> 
+ {@inheritDoc} 
+</description><parameter type="boolean" name="ignoreFailures"/></method><method name="include" returnType="org.gradle.api.tasks.testing.Test"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="afterTest" returnType="void" delegationTarget="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ Adds a closure to be notified after a test has executed. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; and &lt;a href='type://TestResult'&gt;TestResult&lt;/a&gt; instance are passed to the closure as a parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><property name="buildOperationProcessor" type="org.gradle.internal.operations.BuildOperationProcessor"/><property name="jvmArgs" type="java.util.List"><description> 
+ {@inheritDoc} 
+</description></property><property name="exceptionFormatter" type="org.gradle.api.internal.tasks.testing.logging.TestExceptionFormatter"/><property name="reports" type="org.gradle.api.tasks.testing.TestTaskReports"><description> 
+ The reports that this task potentially produces. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports that this task potentially produces 
+</description></property><property name="testReporter" type="org.gradle.api.internal.tasks.testing.junit.report.TestReporter"><description> 
+ ATM. for testing only 
+</description></property><property name="environment" type="java.util.Map"><description> 
+ {@inheritDoc} 
+</description></property><property name="bootstrapClasspath" type="org.gradle.api.file.FileCollection"><description> 
+ {@inheritDoc} 
+</description></property><property name="binResultsDir" type="java.io.File"><description> 
+ Returns the root folder for the test results in internal binary format. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the test result directory, containing the test results in binary format. 
+</description></property><property name="forkEvery" type="long"><description> 
+ Returns the maximum number of test classes to execute in a forked test process. The forked test process will be restarted when this limit is reached. The default value is 0 (no maximum). 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The maximum number of test classes. Returns 0 when there is no maximum. 
+</description></property><property name="allJvmArgs" type="java.util.List"><description> 
+ {@inheritDoc} 
+</description></property><property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/><property name="ignoreFailures" type="boolean"><description> 
+ {@inheritDoc} 
+</description></property><property name="testExecuter" type="org.gradle.api.internal.tasks.testing.detection.TestExecuter"/><property name="enableAssertions" type="boolean"><description> 
+ {@inheritDoc} 
+</description></property><property name="debug" type="boolean"><description> 
+ {@inheritDoc} 
+</description></property><property name="minHeapSize" type="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></property><property name="options" type="org.gradle.api.tasks.testing.TestFrameworkOptions"><description> 
+ Returns test framework specific options. Make sure to call &lt;a href='type://Test#useJUnit()'&gt;#useJUnit()&lt;/a&gt; or &lt;a href='type://Test#useTestNG()'&gt;#useTestNG()&lt;/a&gt; before using this method. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test framework options. 
+</description></property><property name="systemProperties" type="java.util.Map"><description> 
+ {@inheritDoc} 
+</description></property><property name="testListenerBroadcaster" type="org.gradle.internal.event.ListenerBroadcast"/><property name="maxParallelForks" type="int"><description> 
+ Returns the maximum number of forked test processes to execute in parallel. The default value is 1 (no parallel test execution). 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The maximum number of forked test processes. 
+</description></property><property name="processBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/><property name="executable" type="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></property><property name="testOutputListenerBroadcaster" type="org.gradle.internal.event.ListenerBroadcast"/><property name="defaultCharacterEncoding" type="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></property><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/><property name="excludes" type="java.util.Set"><description> 
+ Returns the exclude patterns for test execution. 
+ 
+ @see #exclude(String...) 
+</description></property><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath to use to execute the tests. 
+</description></property><property name="moduleRegistry" type="org.gradle.api.internal.classpath.ModuleRegistry"/><property name="testFramework" type="org.gradle.api.internal.tasks.testing.TestFramework"/><property name="testListenerInternalBroadcaster" type="org.gradle.internal.event.ListenerBroadcast"/><property name="workingDir" type="java.io.File"><description> 
+ {@inheritDoc} 
+</description></property><property name="listenerManager" type="org.gradle.internal.event.ListenerManager"/><property name="progressLoggerFactory" type="org.gradle.internal.logging.progress.ProgressLoggerFactory"/><property name="actorFactory" type="org.gradle.internal.actor.ActorFactory"/><property name="testNameIncludePatterns" type="java.util.List"><description> 
+ Sets the test name patterns to be included in execution. 
+ Classes or method names are supported, wildcard '*' is supported. 
+ For more information see the user guide chapter on testing. 
+ 
+ For more information on supported patterns see &lt;a href='type://TestFilter'&gt;TestFilter&lt;/a&gt; 
+</description></property><property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/><property name="classLoaderCache" type="org.gradle.api.internal.initialization.loadercache.ClassLoaderCache"/><property name="includes" type="java.util.Set"><description> 
+ Returns the include patterns for test execution. 
+ 
+ @see #include(String...) 
+</description></property><property name="testLogging" type="org.gradle.api.tasks.testing.logging.TestLoggingContainer"><description> 
+ Allows to set options related to which test events are logged to the console, and on which detail level. For example, to show more information about exceptions use: 
+ 
+ &lt;pre autoTested=''&gt; apply plugin: 'java' 
+ 
+ test.testLogging { exceptionFormat "full" } &lt;/pre&gt; 
+ 
+ For further information see &lt;a href='type://TestLoggingContainer'&gt;TestLoggingContainer&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description></property><property name="filter" type="org.gradle.api.tasks.testing.TestFilter"><description> 
+ Allows filtering tests for execution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;filter object 
+ @since 1.10 
+</description></property><property name="testClassesDir" type="java.io.File"><description> 
+ Returns the root folder for the compiled test sources. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All test class directories to be used. 
+</description></property><property name="maxHeapSize" type="java.lang.String"><description> 
+ {@inheritDoc} 
+</description></property><property name="candidateClassFiles" type="org.gradle.api.file.FileTree"><description> 
+ Returns the classes files to scan for test classes. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The candidate class files. 
+</description></property><property name="scanForTestClasses" type="boolean"><description> 
+ Specifies whether test classes should be detected. When &lt;a href='type://true'&gt;true&lt;/a&gt; the classes which match the include and exclude patterns are scanned for test classes, and any found are executed. When 
+ &lt;a href='type://false'&gt;false&lt;/a&gt; the classes which match the include and exclude patterns are executed. 
+</description></property></type>

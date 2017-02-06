@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.specs.AndSpec" version="3.0"><description> 
+ A &lt;a href='type://org.gradle.api.specs.CompositeSpec'&gt;org.gradle.api.specs.CompositeSpec&lt;/a&gt; which requires all its specs to be true in order to evaluate to true. 
+ Uses lazy evaluation. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The target type for this Spec 
+</description><method name="and" returnType="org.gradle.api.specs.AndSpec"><parameter type="groovy.lang.Closure" name="spec"/></method><method name="isSatisfiedBy" returnType="boolean"><parameter type="T" name="object"/></method><method name="hashCode" returnType="int"/><method name="and" returnType="org.gradle.api.specs.AndSpec"><parameter type="org.gradle.api.specs.Spec" name="specs"/></method><property name="satisfiedBy" type="boolean"/></type>

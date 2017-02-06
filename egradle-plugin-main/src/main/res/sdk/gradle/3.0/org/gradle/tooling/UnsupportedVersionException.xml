@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.UnsupportedVersionException" version="3.0"><description> 
+ Thrown when the target Gradle version does not support a particular feature. 
+ 
+ @since 1.0-milestone-3 
+</description></type>

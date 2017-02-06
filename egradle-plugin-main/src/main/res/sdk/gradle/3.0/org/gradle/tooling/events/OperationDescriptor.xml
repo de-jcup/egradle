@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.events.OperationDescriptor" version="3.0"><description> 
+ Describes an operation for which an event has occurred. 
+ 
+ &lt;p&gt;You can use &lt;a href='type://equals()'&gt;equals()&lt;/a&gt; to determine whether 2 different descriptors refer to the same operation.&lt;/p&gt; 
+ 
+ &lt;p&gt;The subtypes of this interface define specific types of operations, such as task execution.&lt;/p&gt; 
+ 
+ @since 2.4 
+</description><method name="getName" returnType="java.lang.String"><description> 
+ Returns the name of the operation. This name does not necessarily uniquely identify the operation. However, the name can be used 
+ by a human to disambiguate between the children of a given operation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the operation. 
+</description></method><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns a human consumable display name for the operation. This display name provides enough context for a human to uniquely identify the operation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The display name of the operation. 
+</description></method><method name="getParent" returnType="org.gradle.tooling.events.OperationDescriptor"><description> 
+ Returns the parent operation, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent operation. 
+</description></method><property name="displayName" type="java.lang.String"><description> 
+ Returns a human consumable display name for the operation. This display name provides enough context for a human to uniquely identify the operation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The display name of the operation. 
+</description></property><property name="parent" type="org.gradle.tooling.events.OperationDescriptor"><description> 
+ Returns the parent operation, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent operation. 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the name of the operation. This name does not necessarily uniquely identify the operation. However, the name can be used 
+ by a human to disambiguate between the children of a given operation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the operation. 
+</description></property></type>

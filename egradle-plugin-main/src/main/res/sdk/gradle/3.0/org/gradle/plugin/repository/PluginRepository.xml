@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugin.repository.PluginRepository" version="3.0"><description> 
+ Represents a repository from which Gradle plugins can be resolved. 
+ &lt;p&gt; 
+ This type of repository will only be consulted when resolving plugins 
+ applied using the &lt;code&gt;plugins {}&lt;/code&gt; syntax. 
+</description></type>

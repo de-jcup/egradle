@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask" version="3.0"><description> 
+ Generates a report that attempts to answer questions like: 
+ &lt;ul&gt; 
+  &lt;li&gt;Why is this dependency in the dependency graph?&lt;/li&gt; 
+  &lt;li&gt;Exactly which dependencies are pulling this dependency into the graph?&lt;/li&gt; 
+  &lt;li&gt;What is the actual version (i.e. *selected* version) of the dependency that will be used? Is it the same as what was *requested*?&lt;/li&gt; 
+  &lt;li&gt;Why is the *selected* version of a dependency different to the *requested*?&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ Use this task to get insight into a particular dependency (or dependencies) 
+ and find out what exactly happens during dependency resolution and conflict resolution. 
+ If the dependency version was forced or selected by the conflict resolution 
+ this information will be available in the report. 
+ &lt;p&gt; 
+ While the regular dependencies report (&lt;a href='type://DependencyReportTask'&gt;DependencyReportTask&lt;/a&gt;) shows the path from the top level dependencies down through the transitive dependencies, 
+ the dependency insight report shows the path from a particular dependency to the dependencies that pulled it in. 
+ That is, it is an inverted view of the regular dependencies report. 
+ &lt;p&gt; 
+ The task requires setting the dependency spec and the configuration. 
+ For more information on how to configure those please refer to docs for 
+ &lt;a href='type://DependencyInsightReportTask#setDependencySpec(Object)'&gt;DependencyInsightReportTask#setDependencySpec(Object)&lt;/a&gt; and 
+ &lt;a href='type://DependencyInsightReportTask#setConfiguration(String)'&gt;DependencyInsightReportTask#setConfiguration(String)&lt;/a&gt;. 
+ &lt;p&gt; 
+ The task can also be configured from the command line. 
+ For more information please refer to &lt;a href='type://DependencyInsightReportTask#setDependencySpec(Object)'&gt;DependencyInsightReportTask#setDependencySpec(Object)&lt;/a&gt; 
+ and &lt;a href='type://DependencyInsightReportTask#setConfiguration(String)'&gt;DependencyInsightReportTask#setConfiguration(String)&lt;/a&gt; 
+</description><method name="getConfiguration" returnType="org.gradle.api.artifacts.Configuration"><description> 
+ Configuration to look the dependency in 
+</description></method><method name="setConfiguration" returnType="void"><description> 
+ Sets the configuration (via name) to look the dependency in. 
+ &lt;p&gt; 
+ This method is exposed to the command line interface. Example usage: 
+ &lt;pre&gt;gradle dependencyInsight --configuration runtime --dependency slf4j&lt;/pre&gt; 
+</description><parameter type="java.lang.String" name="configurationName"/></method><method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/><method name="getDependencySpec" returnType="org.gradle.api.specs.Spec"><description> 
+ Selects the dependency (or dependencies if multiple matches found) to show the report for. 
+</description></method><method name="report" returnType="void"/><method name="setDependencySpec" returnType="void" delegationTarget="DependencyResult"><description> 
+ The dependency spec selects the dependency (or dependencies if multiple matches found) to show the report for. The spec receives an instance of &lt;a href='type://DependencyResult'&gt;DependencyResult&lt;/a&gt; as parameter. 
+</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><method name="setConfiguration" returnType="void"><description> 
+ Sets the configuration to look the dependency in. 
+</description><parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.artifacts.result.DependencyResult" name="dependencyResult"/></method><method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/><method name="setDependencySpec" returnType="void" delegationTarget="Spec"><description> 
+ Configures the dependency to show the report for. 
+ Multiple notation formats are supported: Strings, instances of &lt;a href='type://Spec'&gt;Spec&lt;/a&gt; 
+ and groovy closures. Spec and closure receive &lt;a href='type://DependencyResult'&gt;DependencyResult&lt;/a&gt; as parameter. 
+ Examples of String notation: 'org.slf4j:slf4j-api', 'slf4j-api', or simply: 'slf4j'. 
+ The input may potentially match multiple dependencies. 
+ See also &lt;a href='type://DependencyInsightReportTask#setDependencySpec(Spec)'&gt;DependencyInsightReportTask#setDependencySpec(Spec)&lt;/a&gt; 
+ &lt;p&gt; 
+ This method is exposed to the command line interface. Example usage: 
+ &lt;pre&gt;gradle dependencyInsight --dependency slf4j&lt;/pre&gt; 
+</description><parameter type="java.lang.Object" name="dependencyInsightNotation"/></method><method name="execute" returnType="void"><parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="out"/></method><method name="renderNode" returnType="void"><parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="target"/><parameter type="org.gradle.api.tasks.diagnostics.internal.graph.nodes.RenderableDependency" name="node"/><parameter type="boolean" name="alreadyRendered"/></method><method name="getVersionSelectorScheme" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/><property name="configuration" type="org.gradle.api.artifacts.Configuration"><description> 
+ Configuration to look the dependency in 
+</description></property><property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/><property name="dependencySpec" type="org.gradle.api.specs.Spec"><description> 
+ Selects the dependency (or dependencies if multiple matches found) to show the report for. 
+</description></property><property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/><property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/></type>

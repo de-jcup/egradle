@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.quality.JDependExtension" version="3.0"><description> 
+ Configuration options for the JDepend plugin. 
+ 
+ @see JDependPlugin 
+</description></type>

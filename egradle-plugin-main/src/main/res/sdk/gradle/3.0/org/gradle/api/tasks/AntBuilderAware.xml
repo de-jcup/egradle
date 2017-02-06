@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.AntBuilderAware" version="3.0"><description> 
+ An &lt;a href='type://AntBuilderAware'&gt;AntBuilderAware&lt;/a&gt; represents an object which can add itself to Ant tasks, using an &lt;a href='type://org.gradle.api.AntBuilder'&gt;org.gradle.api.AntBuilder&lt;/a&gt;. 
+</description><method name="addToAntBuilder" returnType="java.lang.Object"><parameter type="java.lang.Object" name="node"/><parameter type="java.lang.String" name="childNodeName"/></method></type>

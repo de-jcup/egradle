@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.ide.eclipse.model.ClasspathEntry" version="3.0"><description> 
+ Represents an entry in the Eclipse classpath. 
+</description><method name="getKind" returnType="java.lang.String"/><method name="appendNode" returnType="void"><parameter type="groovy.util.Node" name="node"/></method><property name="kind" type="java.lang.String"/></type>

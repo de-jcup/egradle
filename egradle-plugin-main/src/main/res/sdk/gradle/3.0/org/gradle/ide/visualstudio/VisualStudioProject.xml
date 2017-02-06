@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.ide.visualstudio.VisualStudioProject" version="3.0"><description> 
+ A visual studio project, created from one or more &lt;a href='type://org.gradle.nativeplatform.NativeBinary'&gt;org.gradle.nativeplatform.NativeBinary&lt;/a&gt; instances. 
+ 
+ &lt;p/&gt; 
+ 
+ The content and location of the generate project file can be modified by the supplied methods: 
+ 
+ &lt;pre autoTested="true"&gt; 
+  apply plugin: "visual-studio" 
+  model {name}.vcxproj" 
+              projectFile.withXml {project.name}") 
+              } 
+          } 
+      } 
+  } 
+ &lt;/pre&gt; 
+</description><method name="getFiltersFile" returnType="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
+ Configuration for the generated filters file. 
+</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"><description> 
+ The component that this project represents. 
+</description></method><method name="getProjectFile" returnType="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
+ Configuration for the generated project file. 
+</description></method><property name="filtersFile" type="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
+ Configuration for the generated filters file. 
+</description></property><property name="projectFile" type="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
+ Configuration for the generated project file. 
+</description></property><property name="component" type="org.gradle.nativeplatform.NativeComponentSpec"><description> 
+ The component that this project represents. 
+</description></property></type>

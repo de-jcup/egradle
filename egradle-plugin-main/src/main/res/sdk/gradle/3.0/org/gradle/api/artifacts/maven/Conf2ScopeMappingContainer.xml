@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" version="3.0"><description> 
+ Defines a set of rules for how to map the Gradle dependencies to a POM. This mapping is based 
+ on the configuration the dependencies belong to. 
+</description><method name="getMapping" returnType="org.gradle.api.artifacts.maven.Conf2ScopeMapping"><description> 
+ Returns a scope that corresponds to the given configurations. Dependencies of different configurations can 
+ be equal. But only one of those equals dependencies (which might differ in content) can be mapped to a POM 
+ (due to the nature of a Maven POM). 
+ 
+ &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://Conf2ScopeMappingContainer#addMapping(int, Configuration, String)'&gt;#addMapping(int, Configuration, String)&lt;/a&gt;. If 
+ only one configuration is mapped, this mapping is used to choose the scope. If more than one configuration of a 
+ dependency is mapped, and those mappings all map to the same scope, this scope is used. If more than one 
+ configuration is mapped and the mappings map to different scopes, the mapping with the highest priority is used. 
+ If there is more than one mapping with the highest priority and those mappings map to different scopes, an 
+ exception is thrown.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The scope corresponding to the given configurations. Returns null if no such scope can be found. 
+ @see #addMapping(int, Configuration, String) 
+</description><parameter type="java.util.Collection" name="configurations"/></method><method name="isSkipUnmappedConfs" returnType="boolean"><description> 
+ Returns whether unmapped configuration should be skipped or not. Defaults to true. 
+ @see #setSkipUnmappedConfs(boolean)  
+</description></method><method name="getMappings" returnType="java.util.Map"><description> 
+ Returns a map with all the configuration to scope mappings. If no such mapping has been defined, 
+ an empty map is returned. 
+ 
+ @see #addMapping(int, Configuration, String)  
+</description></method><method name="setSkipUnmappedConfs" returnType="void"><description> 
+ Sets, whether unmapped configuration should be skipped or not. If this is set to 
+ false, dependencies belonging to unmapped configurations will be added to the Maven POM with no 
+ scope specified. This means they belong to the Maven default scope, which is 'compile'. 
+</description><parameter type="boolean" name="skipDependenciesWithUnmappedConfiguration"/></method><method name="addMapping" returnType="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer"><description> 
+ &lt;p&gt;Specifies that dependencies of a certain configuration should be mapped against a certain 
+ Maven scope. A configuration can be mapped to one and only one scope. If this method is called 
+ more than once for a particular configuration, the last call wins.&lt;/p&gt; 
+ 
+ See &lt;a href='type://Conf2ScopeMappingContainer#getMapping(java.util.Collection)'&gt;#getMapping(java.util.Collection)&lt;/a&gt; for the rules how a scope is choosen from a set of mappings. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;priority a number that is used for comparison with the priority of other scopes. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration a Gradle configuration name (must not be null). 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scope A Maven scope name (must not be null) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see #getMapping(java.util.Collection)  
+</description><parameter type="int" name="priority"/><parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/><parameter type="java.lang.String" name="scope"/></method><property name="mapping" type="org.gradle.api.artifacts.maven.Conf2ScopeMapping"><description> 
+ Returns a scope that corresponds to the given configurations. Dependencies of different configurations can 
+ be equal. But only one of those equals dependencies (which might differ in content) can be mapped to a POM 
+ (due to the nature of a Maven POM). 
+ 
+ &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://Conf2ScopeMappingContainer#addMapping(int, Configuration, String)'&gt;#addMapping(int, Configuration, String)&lt;/a&gt;. If 
+ only one configuration is mapped, this mapping is used to choose the scope. If more than one configuration of a 
+ dependency is mapped, and those mappings all map to the same scope, this scope is used. If more than one 
+ configuration is mapped and the mappings map to different scopes, the mapping with the highest priority is used. 
+ If there is more than one mapping with the highest priority and those mappings map to different scopes, an 
+ exception is thrown.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The scope corresponding to the given configurations. Returns null if no such scope can be found. 
+ @see #addMapping(int, Configuration, String) 
+</description></property><property name="skipUnmappedConfs" type="boolean"><description> 
+ Returns whether unmapped configuration should be skipped or not. Defaults to true. 
+ @see #setSkipUnmappedConfs(boolean)  
+</description></property><property name="mappings" type="java.util.Map"><description> 
+ Returns a map with all the configuration to scope mappings. If no such mapping has been defined, 
+ an empty map is returned. 
+ 
+ @see #addMapping(int, Configuration, String)  
+</description></property></type>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.NamedDomainObjectList" version="3.0"><description> 
+ &lt;p&gt;A specialisation of &lt;a href='type://org.gradle.api.NamedDomainObjectCollection'&gt;org.gradle.api.NamedDomainObjectCollection&lt;/a&gt; that also implements &lt;a href='type://java.util.List'&gt;java.util.List&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;p&gt;All object equality is determined in terms of object names. That is, calling &lt;a href='type://remove()'&gt;remove()&lt;/a&gt; with an object that is NOT equal to 
+ an existing object in terms of &lt;a href='type://equals'&gt;equals&lt;/a&gt;, but IS in terms of name equality will result in the existing collection item with 
+ the equal name being removed.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of element in the set 
+</description><method name="matching" returnType="org.gradle.api.NamedDomainObjectList"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="matching" returnType="org.gradle.api.NamedDomainObjectList"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="spec"/></method><method name="withType" returnType="org.gradle.api.NamedDomainObjectList"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Class" name="type"/></method><method name="findAll" returnType="java.util.List"><description> 
+ {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="spec"/></method></type>

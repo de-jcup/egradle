@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.BasicGradleProject" version="3.0"><description> 
+ Provides some basic details about a Gradle project. 
+ 
+ @since 1.8 
+</description><method name="getName" returnType="java.lang.String"><description> 
+ Returns the name of this project. Note that the name is not a unique identifier for the project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this project. 
+</description></method><method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier"><description> 
+ Returns the identifier for this Gradle project. 
+ 
+ @since 2.13 
+</description></method><method name="getProjectDirectory" returnType="java.io.File"><description> 
+ Returns the project directory for this project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. 
+</description></method><method name="getPath" returnType="java.lang.String"><description> 
+ Returns the path of this project. The path can be used as a unique identifier for the project within a given build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this project. 
+</description></method><method name="getParent" returnType="org.gradle.tooling.model.gradle.BasicGradleProject" delegationTarget="null"><description> 
+ Returns the parent of this project, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this is the root project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this project, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this is the root project. 
+</description></method><method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the child projects of this project, or the empty set if there are no child projects. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child projects of this project, or the empty set if there are no child projects. 
+</description></method><property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier"><description> 
+ Returns the identifier for this Gradle project. 
+ 
+ @since 2.13 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the name of this project. Note that the name is not a unique identifier for the project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this project. 
+</description></property><property name="projectDirectory" type="java.io.File"><description> 
+ Returns the project directory for this project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. 
+</description></property><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the child projects of this project, or the empty set if there are no child projects. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child projects of this project, or the empty set if there are no child projects. 
+</description></property><property name="parent" type="org.gradle.tooling.model.gradle.BasicGradleProject"><description> 
+ Returns the parent of this project, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this is the root project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this project, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this is the root project. 
+</description></property><property name="path" type="java.lang.String"><description> 
+ Returns the path of this project. The path can be used as a unique identifier for the project within a given build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this project. 
+</description></property></type>

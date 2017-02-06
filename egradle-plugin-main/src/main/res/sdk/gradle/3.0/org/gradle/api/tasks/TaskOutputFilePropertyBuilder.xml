@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.TaskOutputFilePropertyBuilder" version="3.0"><description> 
+ Describes an output property of a task that contains zero or more files. 
+</description><method name="optional" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ Sets whether the task property is optional. If the task property is optional, it means that a value does not have to be 
+ specified for the property, but any value specified must meet the validation constraints for the property. 
+</description><parameter type="boolean" name="optional"/></method><method name="getHasOutput" returnType="boolean"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#getHasOutput()'&gt;TaskOutputs#getHasOutput()&lt;/a&gt; instead. 
+</description></method><method name="optional" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ Marks a task property as optional. This means that a value does not have to be specified for the property, but any 
+ value specified must meet the validation constraints for the property. 
+</description></method><method name="upToDateWhen" returnType="void"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#upToDateWhen(Closure)'&gt;TaskOutputs#upToDateWhen(Closure)&lt;/a&gt; instead. 
+</description><parameter type="groovy.lang.Closure" name="upToDateClosure"/></method><method name="withPropertyName" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="propertyName"/></method><method name="getFiles" returnType="org.gradle.api.file.FileCollection"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#getFiles()'&gt;TaskOutputs#getFiles()&lt;/a&gt; instead. 
+</description></method><method name="upToDateWhen" returnType="void"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#upToDateWhen(Spec)'&gt;TaskOutputs#upToDateWhen(Spec)&lt;/a&gt; instead. 
+</description><parameter type="org.gradle.api.specs.Spec" name="upToDateSpec"/></method><method name="files" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#files(Object...)'&gt;TaskOutputs#files(Object...)&lt;/a&gt; instead. 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#dir(Object)'&gt;TaskOutputs#dir(Object)&lt;/a&gt; instead. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="file" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#file(Object)'&gt;TaskOutputs#file(Object)&lt;/a&gt; instead. 
+</description><parameter type="java.lang.Object" name="path"/></method><property name="hasOutput" type="boolean"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#getHasOutput()'&gt;TaskOutputs#getHasOutput()&lt;/a&gt; instead. 
+</description></property><property name="files" type="org.gradle.api.file.FileCollection"><description> 
+ {@inheritDoc} 
+ 
+ @deprecated Use &lt;a href='type://TaskOutputs#getFiles()'&gt;TaskOutputs#getFiles()&lt;/a&gt; instead. 
+</description></property></type>

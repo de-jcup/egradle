@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ComponentArtifactIdentifier" version="3.0"><description> 
+ An immutable identifier for an artifact that belongs to some component instance. 
+</description><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns some human-consumable display name for this artifact. 
+</description></method><method name="getComponentIdentifier" returnType="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
+ Returns the id of the component that this artifact belongs to. 
+</description></method><property name="displayName" type="java.lang.String"><description> 
+ Returns some human-consumable display name for this artifact. 
+</description></property><property name="componentIdentifier" type="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
+ Returns the id of the component that this artifact belongs to. 
+</description></property></type>

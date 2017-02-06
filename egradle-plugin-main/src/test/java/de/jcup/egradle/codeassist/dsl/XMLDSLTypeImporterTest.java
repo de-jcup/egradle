@@ -30,7 +30,7 @@ public class XMLDSLTypeImporterTest {
 	
 	@Before
 	public void before(){
-		dslFolder = new File(TestUtil.PARENT_OF_TEST,"dsl/3.0");
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		actionXMLFile = new File(dslFolder,"org/gradle/api/TestAction.xml");
 		importerToTest=new XMLDSLTypeImporter();
 	}

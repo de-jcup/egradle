@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.Workspace" version="3.0"><description> 
+ Represents the customizable elements of an ipr (via XML hooks everything of the ipr is customizable). 
+</description><method name="load" returnType="void"><parameter type="groovy.util.Node" name="xml"/></method><method name="getDefaultResourceName" returnType="java.lang.String"/><method name="store" returnType="void"><parameter type="groovy.util.Node" name="xml"/></method><property name="defaultResourceName" type="java.lang.String"/></type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.events.test.JvmTestOperationDescriptor" version="3.0"><description> 
+ Describes a test that runs on the JVM and for which an event has occurred. At least 
+ a suite name, class name, or method name is available for each JVM test. 
+ 
+ @since 2.4 
+</description><method name="getMethodName" returnType="java.lang.String"><description> 
+ Returns the name of the test method, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test method. 
+</description></method><method name="getJvmTestKind" returnType="org.gradle.tooling.events.test.JvmTestKind"><description> 
+ Returns what kind of test this is. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test kind. 
+</description></method><method name="getClassName" returnType="java.lang.String"><description> 
+ Returns the name of the test class, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test class. 
+</description></method><method name="getSuiteName" returnType="java.lang.String"><description> 
+ Returns the name of the test suite, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test suite. 
+</description></method><property name="methodName" type="java.lang.String"><description> 
+ Returns the name of the test method, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test method. 
+</description></property><property name="jvmTestKind" type="org.gradle.tooling.events.test.JvmTestKind"><description> 
+ Returns what kind of test this is. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test kind. 
+</description></property><property name="className" type="java.lang.String"><description> 
+ Returns the name of the test class, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test class. 
+</description></property><property name="suiteName" type="java.lang.String"><description> 
+ Returns the name of the test suite, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test suite. 
+</description></property></type>

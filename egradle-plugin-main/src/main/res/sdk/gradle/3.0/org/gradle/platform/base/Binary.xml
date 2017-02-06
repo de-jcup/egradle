@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.Binary" version="3.0"><description> 
+ A physical binary artifact, which can run on a particular platform or runtime. 
+</description><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns a human-consumable display name for this binary. 
+</description></method><property name="displayName" type="java.lang.String"><description> 
+ Returns a human-consumable display name for this binary. 
+</description></property></type>
