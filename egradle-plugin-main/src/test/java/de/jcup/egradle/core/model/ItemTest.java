@@ -43,4 +43,28 @@ public class ItemTest {
 		assertEquals(2,item3.getChildren().length);
 	}
 	
+	
+	@Test
+	public void item_set_name_a_b__has_identifier_a_only__but_a_b_as_name(){
+		Item item = new Item();
+		item.setName("a b");
+		assertEquals("a b",item.getName());
+		assertEquals("a",item.getIdentifier());
+	}
+	
+	@Test
+	public void item_set_name_null_has_identifier_and_name_as_empty_string(){
+		Item item = new Item();
+		item.setName(null);
+		assertEquals("",item.getName());
+		assertEquals("",item.getIdentifier());
+	}
+	
+	@Test
+	public void item_set_name_a_has_identifier_and_name_as_a(){
+		Item item = new Item();
+		item.setName("a");
+		assertEquals("a",item.getName());
+		assertEquals("a",item.getIdentifier());
+	}
 }

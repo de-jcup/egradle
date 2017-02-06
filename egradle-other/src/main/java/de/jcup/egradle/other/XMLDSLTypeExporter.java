@@ -12,11 +12,10 @@ import de.jcup.egradle.codeassist.dsl.XMLType;
 public class XMLDSLTypeExporter {
 
 	/**
-	 * Import type by given stream
-	 * @param stream - may not be <code>null</code>
-	 * @return type
+	 * Export XMLType
+	 * @param type
+	 * @param stream
 	 * @throws IOException
-	 * 
 	 */
 	public void exportType(XMLType type , OutputStream stream) throws IOException{
 		JAXBContext jc;

@@ -131,7 +131,7 @@ public class GradleLanguageElementEstimater {
 		while (pathIterator.hasNext()) {
 			extensionName = null;
 			Item currentPathItem = pathIterator.next();
-			String currentPathItemName = currentPathItem.getName();
+			String currentPathItemName = currentPathItem.getIdentifier();
 			if (currentPathItemName == null) {
 				continue; // FIXME ATR, 06.02.2017: is this correct to continue here ?!?!
 			}
@@ -183,7 +183,7 @@ public class GradleLanguageElementEstimater {
 		if (item.isClosureBlock()){
 			return null;
 		}
-		String checkItemName = item.getName();
+		String checkItemName = item.getIdentifier();
 		if (checkItemName==null) {
 			return null;
 		}
@@ -209,7 +209,7 @@ public class GradleLanguageElementEstimater {
 		if (! item.isClosureBlock()){
 			return null;
 		}
-		String checkItemName = item.getName();
+		String checkItemName = item.getIdentifier();
 		if (checkItemName==null) {
 			return null;
 		}
@@ -236,7 +236,7 @@ public class GradleLanguageElementEstimater {
 		if (item==null) {
 			return null;
 		}
-		String checkItemName = item.getName();
+		String checkItemName = item.getIdentifier();
 		if (checkItemName==null) {
 			return null;
 		}

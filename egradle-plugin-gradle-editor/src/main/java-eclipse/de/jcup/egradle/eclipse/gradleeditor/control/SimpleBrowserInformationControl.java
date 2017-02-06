@@ -35,7 +35,6 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
  */
 public class SimpleBrowserInformationControl extends AbstractInformationControl {
 
-	
 	private static boolean browserAvailabilityChecked;
 	private static boolean swtBrowserCanBeUsed;
 	private static Point cachedScrollBarSize;
@@ -66,7 +65,8 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	 * a toolbar and uses hyperlink listener
 	 * 
 	 * @param parentShell
-	 * @param maximumHistory maximum amount of history items
+	 * @param maximumHistory
+	 *            maximum amount of history items
 	 */
 	public SimpleBrowserInformationControl(Shell parentShell, int maximumHistory) {
 		super(parentShell, new ToolBarManager());
@@ -98,8 +98,8 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	@Override
 	public void setInformation(String information) {
-		if (isDebugEnabled()){
-			debug("set information="+StringUtilsAccess.abbreviate(information, 40));
+		if (isDebugEnabled()) {
+			debug("set information=" + StringUtilsAccess.abbreviate(information, 40));
 		}
 		if (information == null) {
 			information = "";
@@ -115,17 +115,18 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 				htmlSb.append("</body></html>");
 			}
 			this.currentHTML = htmlSb.toString();
-			if (history.isEmpty()){
-				if (isDebugEnabled()){
+			if (history.isEmpty()) {
+				if (isDebugEnabled()) {
 					debug("add to history intial");
 				}
-				/* this means it's the initial page. To go back to the page by history it is
-				 * necessary to add current HTML to history too! All other history entries
-				 * are done by link mechanism.
+				/*
+				 * this means it's the initial page. To go back to the page by
+				 * history it is necessary to add current HTML to history too!
+				 * All other history entries are done by link mechanism.
 				 */
 				history.add(currentHTML);
-				if (isDebugEnabled()){
-					debug("now:"+history.toString());
+				if (isDebugEnabled()) {
+					debug("now:" + history.toString());
 				}
 			}
 			browser.setText(information);
@@ -202,58 +203,64 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 				public void run() {
 					goBack();
 					updateBrowseBackItem();
-					if (isDebugEnabled()){
-						debug("go back-after:\n"+history.toString());
+					if (isDebugEnabled()) {
+						debug("go back-after:\n" + history.toString());
 					}
 				}
 
 				private void goBack() {
-					if (isDebugEnabled()){
-						debug("go back-before:\n"+history.toString());
+					if (isDebugEnabled()) {
+						debug("go back-before:\n" + history.toString());
 					}
 					if (isBrowserNotDisposed()) {
-						if (history.isEmpty()){
+						if (history.isEmpty()) {
 							return;
 						}
 						String current = history.goBack();
-						if (isDebugEnabled()){
-							debug("history.current was "+current);
+						if (isDebugEnabled()) {
+							debug("history.current was " + current);
 						}
 						String backContent = history.goBack();
-						if (isDebugEnabled()){
-							debug("history.back="+backContent);
+						if (isDebugEnabled()) {
+							debug("history.back=" + backContent);
 						}
 						if (backContent == null) {
 							return;
 						}
-						if (browserEGradleLinkListener.isAcceptingHyperlink(backContent)){
-							if (isDebugEnabled()){
+						if (browserEGradleLinkListener.isAcceptingHyperlink(backContent)) {
+							if (isDebugEnabled()) {
 								debug("history detected for type, so use link handler");
 							}
-							browserEGradleLinkListener.onEGradleHyperlinkClicked(SimpleBrowserInformationControl.this, backContent);
-							history.add(backContent);// add types again to history so still current again.
+							browserEGradleLinkListener.onEGradleHyperlinkClicked(SimpleBrowserInformationControl.this,
+									backContent);
+							history.add(backContent);// add types again to
+														// history so still
+														// current again.
 							return;
-							
-						}else if (backContent.startsWith(HYPERLINK_HTTP_PREFIX)){
-							if (isDebugEnabled()){
+
+						} else if (backContent.startsWith(HYPERLINK_HTTP_PREFIX)) {
+							if (isDebugEnabled()) {
 								debug("history detected for real html page, so use browser history");
 							}
 							if (browser.isBackEnabled()) {
 								/*
-								 * okay, a real website was shown, so try to go back
+								 * okay, a real website was shown, so try to go
+								 * back
 								 */
 								browser.back();
 								return;
-							}else{
-								if (isDebugEnabled()){
+							} else {
+								if (isDebugEnabled()) {
 									debug("browser back not enabled!");
 								}
-								/* retry - can happen when first html page shown */
+								/*
+								 * retry - can happen when first html page shown
+								 */
 								goBack();
 								return;
 							}
-						}else{
-							if (isDebugEnabled()){
+						} else {
+							if (isDebugEnabled()) {
 								debug("no type or http protocoll, so simply set information");
 							}
 							setInformation(backContent);
@@ -282,31 +289,31 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 			@Override
 			public void changing(LocationEvent event) {
-				if (isDebugEnabled()){
-					debug("changing location:"+event);
+				if (isDebugEnabled()) {
+					debug("changing location:" + event);
 				}
 				if (event.location == null) {
 					event.doit = false;
-				}else if (event.location == "about:blank") {
+				} else if (event.location == "about:blank") {
 					event.doit = false;
-				}else if (event.location.startsWith(HYPERLINK_TYPE_PREFIX)){
+				} else if (event.location.startsWith(HYPERLINK_TYPE_PREFIX)) {
 					event.doit = false;
 				}
-				if (isDebugEnabled()){
-					debug("changed location(1):"+event);
+				if (isDebugEnabled()) {
+					debug("changed location(1):" + event);
 				}
 				if (!linksEnabled) {
-					if (isDebugEnabled()){
+					if (isDebugEnabled()) {
 						debug("changed location(1b): no linksEnabled - so guard closing");
 					}
 					return;
 				}
-				if (isDebugEnabled()){
+				if (isDebugEnabled()) {
 					debug("changed location(2)-links are enabled");
 				}
 				String newLocation = event.location;
 				if (newLocation == null) {
-					if (isDebugEnabled()){
+					if (isDebugEnabled()) {
 						debug("changed location(2b): no new location set - guard close");
 					}
 					return;
@@ -315,25 +322,25 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 					SimpleBrowserInformationControl control = SimpleBrowserInformationControl.this;
 					if (browserEGradleLinkListener.isAcceptingHyperlink(newLocation)) {
 						if (isBrowserNotDisposed()) {
-							if (isDebugEnabled()){
-								debug("changed location(3)-add to history:"+newLocation);
-						}
-							history.add(newLocation);
-							if (isDebugEnabled()){
-								debug("now:"+history.toString());
+							if (isDebugEnabled()) {
+								debug("changed location(3)-add to history:" + newLocation);
 							}
-							if (isDebugEnabled()){
+							history.add(newLocation);
+							if (isDebugEnabled()) {
+								debug("now:" + history.toString());
+							}
+							if (isDebugEnabled()) {
 								debug("changed location(3b)-calling gradle hyperlink listener");
 							}
 							browserEGradleLinkListener.onEGradleHyperlinkClicked(control, newLocation);
 						}
 					} else if (newLocation.startsWith(HYPERLINK_HTTP_PREFIX)) {
-						if (isDebugEnabled()){
-							debug("changed location(4)-add history:"+newLocation);
+						if (isDebugEnabled()) {
+							debug("changed location(4)-add history:" + newLocation);
 						}
 						history.add(newLocation);
-						if (isDebugEnabled()){
-							debug("now:"+history.toString());
+						if (isDebugEnabled()) {
+							debug("now:" + history.toString());
 						}
 					}
 				}
@@ -348,25 +355,26 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser.setMenu(new Menu(getShell(), SWT.NONE));
 
 	}
+
 	protected void updateBrowseBackItem() {
-		if (browsBackitem==null){
+		if (browsBackitem == null) {
 			return;
 		}
-		if (history==null){
+		if (history == null) {
 			return;
 		}
-		browsBackitem.setEnabled(history.getCount()>1);
-		browsBackitem.setText("back ("+history.getCount()+"/"+history.getMax()+")");
+		browsBackitem.setEnabled(history.getCount() > 1);
+		browsBackitem.setText("back (" + history.getCount() + "/" + history.getMax() + ")");
 	}
 
-	private void debug(String text){
-		System.out.println(getClass().getSimpleName()+":"+text);
+	private void debug(String text) {
+		System.out.println(getClass().getSimpleName() + ":" + text);
 	}
-	
+
 	private boolean isDebugEnabled() {
 		return EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING;
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -403,7 +411,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		return new IInformationControlCreator() {
 			@Override
 			public IInformationControl createInformationControl(Shell parent) {
-				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent,20);
+				SimpleBrowserInformationControl newControl = new SimpleBrowserInformationControl(parent, 20);
 				newControl.setBrowserEGradleLinkListener(browserEGradleLinkListener);
 				return newControl;
 			}

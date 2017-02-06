@@ -26,12 +26,33 @@ public class HistoryTest {
 	}
 	
 	@Test
+	public void nothing_in_history_1_current_returns_null() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		
+		/* execute + test */
+		assertEquals(null, historyToTest.current());
+	}
+	
+	@Test
 	public void one_entry_in_history_1_getCount_returns_1() {
 		/* prepare */
 		History<String> historyToTest = new History<>(1);
 		historyToTest.add("content");
 		
 		/* execute + test */
+		assertEquals(1, historyToTest.getCount());
+	}
+	
+	@Test
+	public void one_entry_in_history_1_current_returns_value_size_keeps_1() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		historyToTest.add("content");
+		
+		/* execute + test */
+		assertEquals(1, historyToTest.getCount());
+		assertEquals("content", historyToTest.current());
 		assertEquals(1, historyToTest.getCount());
 	}
 	

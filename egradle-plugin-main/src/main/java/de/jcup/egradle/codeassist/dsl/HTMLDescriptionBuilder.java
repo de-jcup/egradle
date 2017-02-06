@@ -66,6 +66,10 @@ public class HTMLDescriptionBuilder {
 		}
 		style.append("}");
 		style.append("pre {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
+		style.append("table {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
+		style.append("th {background-color: black;color: #229922;border:solid #999999 2px; }");
+		style.append("tr {background-color: black;color: #999999;border:solid #999999 2px; }");
+//		/style.append("td {background-color: black;color: #999999;border:solid #999999 2px; }");
 		style.append("a {color: #229922;}");
 		style.append(".param {color: #229922;}");
 		style.append(".return {color: #229922;}");

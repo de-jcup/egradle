@@ -50,7 +50,7 @@ public class GradleLanguageElementEstimaterTest {
 		Item item1 = mock(Item.class);
 		Item root = mock(Item.class);
 		when(item1.getParent()).thenReturn(root);
-		when(item1.getName()).thenReturn("happy");
+		when(item1.getIdentifier()).thenReturn("happy");
 
 		when(root.getParent()).thenReturn(null);
 		
@@ -81,7 +81,7 @@ public class GradleLanguageElementEstimaterTest {
 		Item root = mock(Item.class);
 		when(item1.isClosureBlock()).thenReturn(true);
 		when(item1.getParent()).thenReturn(root);
-		when(item1.getName()).thenReturn("happy");
+		when(item1.getIdentifier()).thenReturn("happy");
 		
 		
 		when(root.getParent()).thenReturn(null);

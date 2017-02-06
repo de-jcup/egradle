@@ -30,6 +30,16 @@ public class History<T>{
 		}
 		
 		/**
+		 * Returns last entry but does not influence history. Element will stay on stack
+		 * @return current or <code>null</code> if not existing.
+		 */
+		public T current(){
+			if (list.size()==0){
+				return null;
+			}
+			return list.get(list.size()-1);
+		}
+		/**
 		 * @return current count of elements in history
 		 */
 		public int getCount(){

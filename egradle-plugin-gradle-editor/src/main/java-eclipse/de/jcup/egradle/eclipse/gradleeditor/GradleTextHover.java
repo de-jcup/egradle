@@ -140,7 +140,6 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			return null;
 		}
 		HoverData data = new HoverData();
-		data.offset = offset;
 		data.item = item;
 		String name = item.getName();
 		if (name != null) {

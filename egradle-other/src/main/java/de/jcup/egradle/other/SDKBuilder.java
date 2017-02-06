@@ -9,9 +9,10 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,6 +25,7 @@ import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import static java.nio.charset.StandardCharsets.*;
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
  * special task called "dslEgradle".<br>
@@ -51,12 +53,8 @@ public class SDKBuilder {
 		new SDKBuilder("./../../gradle/subprojects/docs").startTransformToUserHome("3.0", "1.0.0");
 		;
 	}
-	/*
-	 * FIXME ATR, 31.01.2017: versioning- use version 0.1 and see it as
-	 * EGradle-SDK.. the gradle version is done already inside the files in type
-	 * element!
-	 */
 
+	/* FIXME ATR, 06.02.2017: sdk builder MUST set fix links like <a href="#method(x.x..)"> to  <a href="#method(x.x..)"*/
 	private File gradleEGradleDSLRootFolder;
 	private File gradleOriginPluginsFile;
 	private File gradleOriginMappingFile;
@@ -110,8 +108,9 @@ public class SDKBuilder {
 		 * create alternative api-mapping because e.g EclipseWTP is not listed
 		 * in orgin mapping file!
 		 */
+		BuilderContext builderContext = new BuilderContext();
 		Map<String, String> alternativeApiMapping = new TreeMap<>();
-		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory);
+		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory,builderContext );
 		System.out.println("- generate alternative api mapping file");
 		StringBuilder sb = new StringBuilder();
 		boolean first = true;
@@ -133,7 +132,7 @@ public class SDKBuilder {
 		System.out.println("- normal file generation done, type:// is now set in hyperlinks");
 		System.out.println("- start delegatesTo estimation");
 		/* now load the xml files as type data - and inspect all descriptions*/
-		
+		System.out.println("- info:"+builderContext.getInfo());
 		System.out.println("DONE");
 	}
 
@@ -157,7 +156,7 @@ public class SDKBuilder {
 	}
 
 	private void inspectFilesAdoptAndGenerateTarget(Map<String, String> alternativeApiMapping, File sourceDir,
-			File targetDir) throws IOException {
+			File targetDir, BuilderContext builderContext) throws IOException {
 		for (File newSourceFile : sourceDir.listFiles(new FileFilter() {
 			
 			@Override
@@ -174,7 +173,7 @@ public class SDKBuilder {
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
-				inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, newSourceFile, newTargetDir);
+				inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, newSourceFile, newTargetDir,builderContext);
 			} else if (newSourceFile.isFile()) {
 				File newTargetFile = new File(targetDir, name);
 
@@ -188,13 +187,13 @@ public class SDKBuilder {
 				ignore = ignore | targetFileName.endsWith("plugins.xml");
 				
 				if (!ignore){
-					startDelegateTargetEstimation(newTargetFile);
+					startDelegateTargetEstimation(newTargetFile,builderContext);
 				}
 			}
 		}
 	}
 
-	private void startDelegateTargetEstimation(File newTargetFile) throws IOException, FileNotFoundException {
+	private void startDelegateTargetEstimation(File newTargetFile, BuilderContext builderContext) throws IOException, FileNotFoundException {
 		try{
 			XMLType type =null;
 			
@@ -205,7 +204,7 @@ public class SDKBuilder {
 			if (type==null){
 				throw new IllegalStateException("was not able to read type:"+newTargetFile);
 			}
-			estimateDelegateTargets(type);
+			estimateDelegateTargets(type,builderContext);
 			try(FileOutputStream outputStream = new FileOutputStream(newTargetFile)){
 				exporter.exportType(type, outputStream);
 			}
@@ -214,12 +213,32 @@ public class SDKBuilder {
 		}
 	}
 
+	private class BuilderContext{
+		int methodWithOutDescriptionCount;
+		int methodAllCount;
+		
+		public String getInfo() {
+			double missingDescriptionPercent =0;
+			if (methodWithOutDescriptionCount!=0 && methodAllCount!=0){
+				double onePercent = methodAllCount/100;
+				missingDescriptionPercent = methodWithOutDescriptionCount/onePercent;
+			}
+			return "Methods all:"+methodAllCount+" - missing descriptions:"+methodWithOutDescriptionCount+" ="+missingDescriptionPercent+"%";
+		}
+	}
 	
 	void estimateDelegateTargets(Type type) {
+		estimateDelegateTargets(type, new BuilderContext());
+	}
+	
+	void estimateDelegateTargets(Type type, BuilderContext builderContext) {
+		int problemCount =0;
+		StringBuilder problems = new StringBuilder();
 		for (Method m: type.getMethods()){
 			if (! (m instanceof XMLMethod)){
 				continue;
 			}
+			builderContext.methodAllCount++;
 			XMLMethod method = (XMLMethod) m;
 			String delegationTarget = method.getDelegationTargetAsString();
 			if (! StringUtils.isBlank(delegationTarget)){
@@ -227,7 +246,9 @@ public class SDKBuilder {
 			}
 			String description = method.getDescription();
 			if (description==null){
-				System.out.println("- WARN: method has no description:"+type.getName()+"#"+method.getName());
+				problemCount++;
+				problems.append(method.getName());
+				problems.append(" ");
 				continue;
 			}
 			String targetType = null;
@@ -244,6 +265,11 @@ public class SDKBuilder {
 				method.setDelegationTargetAsString(targetType);
 			}
 		}
+		if (problemCount>0){
+			System.out.println("- WARN: type:"+type.getName()+" has following method without descriptions: has no description "+problems.toString());
+			builderContext.methodWithOutDescriptionCount+=problemCount;
+		}
+		
 		
 	}
 
@@ -270,7 +296,7 @@ public class SDKBuilder {
 	
 	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
 		StringBuilder fullDescription = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new FileReader(sourceFile))) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(sourceFile),UTF_8))) {
 			
 			String line = "";
 			boolean foundType = false;
@@ -537,7 +563,7 @@ public class SDKBuilder {
 
 	private void write(String changedSource, File newTargetFile) throws IOException {
 		newTargetFile.getParentFile().mkdirs();
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(newTargetFile))) {
+		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newTargetFile),UTF_8))) {
 			bw.write(changedSource);
 		}
 
