@@ -1,9 +1,7 @@
 package de.jcup.egradle.other;
 
 import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.BufferedReader;
@@ -17,10 +15,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.jcup.egradle.codeassist.dsl.XMLMethod;
-import de.jcup.egradle.core.TestUtil;
+import org.junit.Before;
+import org.junit.Test;
+
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.XMLMethod;
 
 public class SDKBuilderTest {
 	private SDKBuilder preparatorToTest;
@@ -197,35 +197,42 @@ public class SDKBuilderTest {
 	public void testJavadocLinkConversion_simple_link_with_full_path_name() {
 		String line = "{@link org.gradle.api.invocation.Gradle}";
 		String expected = "<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_full_path_name__whitespaces_after_curly() {
 		String line = "{      @link org.gradle.api.invocation.Gradle}";
 		String expected = "<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void handle_type_links_without_type() {
+		String line = "<a href='type://#method(xyz)'>org.gradle.api.invocation.Gradle</a>";
+		String expected = "<a href='type://Blubb#method(xyz)'>org.gradle.api.invocation.Gradle</a>";
+		assertEquals(expected, preparatorToTest.handleTypeLinksWithoutType(line,new File("src/res/Blubb.xml"))); 
 	}
 
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_full_path_name__whitespaces_after_curly__and_after_link() {
 		String line = "{      @link     org.gradle.api.invocation.Gradle}";
 		String expected = "<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_short_path_name() {
 		String line = "{@link EclipseProject}";
 		String expected = "<a href='type://EclipseProject'>EclipseProject</a>";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
 	public void testJavadocParamConversion() {
 		String line = "  @param    name1 a description";
 		String expected = "  <br><b class='param'>param:</b>name1 a description";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
@@ -234,7 +241,7 @@ public class SDKBuilderTest {
 		String line = " * @param gradle The build which has been loaded. Never null.";
 		line = preparatorToTest.removeWhitespacesAndStars(line);
 		String expected = " <br><b class='param'>param:</b>gradle The build which has been loaded. Never null.";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
@@ -265,14 +272,14 @@ public class SDKBuilderTest {
 			}
 		});
 		String transformed = fullDescription.toString();
-		transformed = preparatorToTest.convertString(transformed);
+		transformed = preparatorToTest.replaceJavaDocParts(transformed);
 		assertTrue(transformed.indexOf("@param") == -1);
 	}
 
 	@Test
 	public void testJavadocParamConversion5_two_params_following() throws Exception {
 		String line = "  @param    name1 a description\n  @param    name2 a description\n";
-		String converted = preparatorToTest.convertString(line);
+		String converted = preparatorToTest.replaceJavaDocParts(line);
 		assertTrue(converted.indexOf("@param") == -1);
 	}
 
@@ -281,7 +288,7 @@ public class SDKBuilderTest {
 		File file = new File(OtherTestUtil.PARENT_OF_TEST, "BuildListener.xml");
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			StringBuilder fullDescription = new StringBuilder();
-			preparatorToTest.readLines(new HashMap<>(), TestUtil.PARENT_OF_TEST, fullDescription, new LineResolver() {
+			preparatorToTest.readLines(new HashMap<>(), file, fullDescription, new LineResolver() {
 
 				@Override
 				public String getNextLine() throws IOException {
@@ -292,7 +299,7 @@ public class SDKBuilderTest {
 			assertFalse(transformed.indexOf("@param") == -1);
 			assertFalse(transformed.indexOf("@code") == -1);
 			
-			transformed = preparatorToTest.convertString(transformed);
+			transformed = preparatorToTest.replaceJavaDocParts(transformed);
 			
 			assertTrue(transformed.indexOf("@param") == -1);
 			assertTrue(transformed.indexOf("@code") == -1);
@@ -303,15 +310,15 @@ public class SDKBuilderTest {
 	@Test
 	public void testJavadocReturnConversion() {
 		String line = "  @return name1 a description";
-		String expected = "  <br><b class='return'>returns:</b>name1 a description";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		String expected = "  <br><br><b class='return'>returns:</b>name1 a description";
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_short_path_name_but_prefix() {
 		String line = "More examples in docs for {@link EclipseProject}";
 		String expected = "More examples in docs for <a href='type://EclipseProject'>EclipseProject</a>";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
@@ -320,7 +327,7 @@ public class SDKBuilderTest {
 		String expected = "More examples in docs for " + "<a href='type://EclipseProject'>EclipseProject</a>, "
 				+ "<a href='type://EclipseClasspath'>EclipseClasspath</a>, "
 				+ "<a href='type://EclipseWtp'>EclipseWtp</a> ";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 	@Test
@@ -328,7 +335,7 @@ public class SDKBuilderTest {
 		String line = "More examples in docs for {@link EclipseProject}, {@xxx EclipseClasspath}, {@link EclipseWtp} ";
 		String expected = "More examples in docs for " + "<a href='type://EclipseProject'>EclipseProject</a>, "
 				+ "{@xxx EclipseClasspath}, " + "<a href='type://EclipseWtp'>EclipseWtp</a> ";
-		assertEquals(expected, preparatorToTest.convertString(line));
+		assertEquals(expected, preparatorToTest.replaceJavaDocParts(line));
 	}
 
 }

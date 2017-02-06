@@ -15,11 +15,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
@@ -311,7 +314,24 @@ public class SDKBuilder {
 				}
 			});
 		}
-		return convertString(fullDescription.toString());
+		String replacedJavaDocParts= replaceJavaDocParts(fullDescription.toString());
+		replacedJavaDocParts = handleTypeLinksWithoutType(replacedJavaDocParts, sourceFile);
+		return replacedJavaDocParts;
+	}
+	private static final String TYPE_PREFIX_WITHOUT_TYPE = DSLConstants.HYPERLINK_TYPE_PREFIX+"#";
+	private static final Pattern PATTERN_TYPE_PREFIX_WITHOUT_TYPE = Pattern.compile(TYPE_PREFIX_WITHOUT_TYPE);
+
+	String handleTypeLinksWithoutType(String replacedJavaDocParts, File sourceFile) {
+		if (sourceFile==null){
+			return replacedJavaDocParts;
+		}
+		if (replacedJavaDocParts.indexOf(TYPE_PREFIX_WITHOUT_TYPE)==-1){
+			return replacedJavaDocParts;
+		}
+		String typeName = FilenameUtils.getBaseName(sourceFile.getName());
+		Matcher matcher = PATTERN_TYPE_PREFIX_WITHOUT_TYPE.matcher(replacedJavaDocParts);
+		replacedJavaDocParts = matcher.replaceAll(DSLConstants.HYPERLINK_TYPE_PREFIX+typeName+"#");
+		return replacedJavaDocParts;
 	}
 
 	void readLines(Map<String, String> alternativeApiMapping, File sourceFile, StringBuilder fullDescription,
@@ -347,7 +367,7 @@ public class SDKBuilder {
 		}
 	}
 
-	String convertString(String origin) {
+	String replaceJavaDocParts(String origin) {
 		String line = origin;
 		line = replaceJavaDocLinks(line);
 		line = replaceJavaDocCode(line);
@@ -467,6 +487,7 @@ public class SDKBuilder {
 			result = before + replaced;
 		}
 	}
+	/* FIXME ATR, 06.02.2017: @see xyz(xxx) should be converted to <a href="type://xyz(xxx)>!!! */
 
 	private String replaceJavaDocParams(String line) {
 		// * @param msg asdfasfasf
@@ -487,7 +508,7 @@ public class SDKBuilder {
 
 			@Override
 			public String replace(String content) {
-				return "<br><b class='return'>returns:</b>" + content;
+				return "<br><br><b class='return'>returns:</b>" + content;
 			}
 		});
 		return replaced;

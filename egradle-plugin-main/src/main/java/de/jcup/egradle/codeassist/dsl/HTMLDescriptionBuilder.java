@@ -8,7 +8,12 @@ public class HTMLDescriptionBuilder {
 		StringBuilder descSb = new StringBuilder();
 		if (element instanceof Method) {
 			Method method = (Method) element;
-			descSb.append("<h4>Mehod:");
+			descSb.append("<h4>");
+			Type type = method.getParent();
+			if (type!=null){
+				descSb.append(type.getName());
+				descSb.append(".");
+			}
 			String signature = MethodUtils.createSignature(method);
 			descSb.append(signature);
 			descSb.append("</h4>");
@@ -17,7 +22,12 @@ public class HTMLDescriptionBuilder {
 		} else if (element instanceof Property) {
 			Property property = (Property) element;
 //			Type propertyType = property.getType();
-			descSb.append("<h4>Property:");
+			descSb.append("<h4>");
+			Type type = property.getParent();
+			if (type!=null){
+				descSb.append(type.getName());
+				descSb.append(".");
+			}
 			descSb.append(property.getName());
 			descSb.append("</h4>");
 			descSb.append(property.getDescription());
@@ -91,7 +101,7 @@ public class HTMLDescriptionBuilder {
 				description.append("</h4>");
 			}
 		}
-		description.append("<h4>Type:");
+		description.append("<h4>");
 		description.append(type.getName());
 		description.append("</h4>");
 		

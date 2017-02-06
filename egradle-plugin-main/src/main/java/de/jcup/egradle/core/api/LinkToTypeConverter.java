@@ -50,6 +50,29 @@ public class LinkToTypeConverter {
 	 * @return converted type name, or <code>null</code> if not convertable
 	 */
 	public LinkData convertLink(String link) {
+		LinkData data = internalConvertLink(link);
+		cleanupSlashes(data);
+		return data;
+	}
+
+	private void cleanupSlashes(LinkData data) {
+		if (data==null){
+			return;
+		}
+		String typeName = data.typeName;
+		if (typeName==null){
+			return;
+		}
+		while (typeName.endsWith("/")) {
+			typeName = StringUtils.chop(typeName);
+		}
+		while (typeName.startsWith("/")) {
+			typeName = StringUtils.removeStart(typeName, "/");
+		}
+		data.typeName=typeName;
+	}
+
+	private LinkData internalConvertLink(String link) {
 		/* FIXME ATR, 06.02.2017:  logic about link resolving (method) should be used in
 		 * language element estimator also! currently the first potential matching method is used! */
 		if (link == null) {
@@ -66,12 +89,6 @@ public class LinkToTypeConverter {
 		String typeName = StringUtils.substring(link, DSLConstants.HYPERLINK_TYPE_PREFIX.length());
 		if (StringUtils.isBlank(typeName)) {
 			return null;
-		}
-		while (typeName.endsWith("/")) {
-			typeName = StringUtils.chop(typeName);
-		}
-		while (typeName.startsWith("/")) {
-			typeName = StringUtils.removeStart(typeName, "/");
 		}
 
 		LinkData data = new LinkData();

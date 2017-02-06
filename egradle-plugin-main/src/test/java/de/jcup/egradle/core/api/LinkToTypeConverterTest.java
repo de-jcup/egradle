@@ -52,6 +52,15 @@ public class LinkToTypeConverterTest {
 		assertEquals(null, convertLink.getMethodName());
 		assertEquals(0, convertLink.getParameters().length);
 	}
+	
+	@Test
+	public void test_type__Eclipse_method_slash_between() {
+		LinkData convertLink = converterToTest.convertLink("type://Eclipse/#bla()");
+		assertEquals("Eclipse", convertLink.getTypeName());
+		assertEquals(null, convertLink.getMethodName());
+		assertEquals(0, convertLink.getParameters().length);
+	}
+//	type://Configuration/#getExcludeRules()
 
 	@Test
 	public void test_type__Eclipse_not_slash_ended_converted_to_Eclipse() {

@@ -52,6 +52,8 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 			return;
 		}
 
+		/* FIXME ATR, 06.02.2017: move this to own class!! and creat testcases! */
+		
 		Type type = provider.getType(convertedName);
 		if (type == null) {
 			return;
@@ -62,7 +64,8 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 			
 			/* scan for method */
 			for (Method methodOfType: type.getMethods()){
-				if (!methodOfType.getName().equals(dataMethodName)){
+				String methodNameOfType = methodOfType.getName();
+				if (!methodNameOfType.equals(dataMethodName)){
 					continue;
 				}
 				List<Parameter> mParams = methodOfType.getParameters();
@@ -74,9 +77,22 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 				for(Parameter mParam: mParams){
 					String mParamType = mParam.getTypeAsString();
 					String dataParamType = dataParameters[i++];
-					if (mParamType== null || !mParamType.equals(dataParamType)){
+					if (mParamType== null ){
 						allParametersSame=false;
 						break;
+					}
+					if (!mParamType.equals(dataParamType)){
+						/* try shorting names*/
+						int index = mParamType.lastIndexOf(".");
+						if (index==-1 || index==mParamType.length()-1){
+							allParametersSame=false;
+							break;
+						}
+						String shortendMParamType = mParamType.substring(index);
+						if (!shortendMParamType.equals(dataParamType)){
+							allParametersSame=false;
+							break;
+						}
 					}
 				}
 				if (allParametersSame){
