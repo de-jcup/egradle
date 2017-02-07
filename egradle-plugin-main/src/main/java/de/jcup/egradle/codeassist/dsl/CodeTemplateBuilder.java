@@ -1,6 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
-public interface CodeBuilder {
+public interface CodeTemplateBuilder {
 
 	String createClosure(LanguageElement element);
 	

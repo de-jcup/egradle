@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.codeassist.dsl.CodeBuilder;
+import de.jcup.egradle.codeassist.dsl.CodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
-public class GradleDSLCodeBuilder implements CodeBuilder {
+public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 	
 
 	@Override

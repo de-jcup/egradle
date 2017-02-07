@@ -14,6 +14,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.DefaultEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
@@ -22,14 +23,11 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;
-	/** The replacement string. */
-	private String fReplacementString;
 	/** The replacement offset. */
 	private int fReplacementOffset;
 	/** The replacement length. */
 	private int fReplacementLength;
-	/** The cursor position after this proposal has been applied. */
-	private int fCursorPosition;
+	
 	/** The image to be displayed in the completion proposal popup. */
 	private Image fImage;
 	/** The context information of this proposal. */
@@ -39,53 +37,46 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	private IInformationControlCreator informationControlCreator;
 	private LazyLanguageElementHTMLDescriptionBuilder lazyBuilder;
 
+	private LazyCursorMovement movement;
+	private Proposal proposal;
 
 	/**
 	 * Creates a new completion proposal. All fields are initialized based on
 	 * the provided information.
+	 * @param proposal 
 	 *
-	 * @param replacementString
-	 *            the actual string to be inserted into the document
 	 * @param replacementOffset
 	 *            the offset of the text to be replaced
 	 * @param replacementLength
 	 *            the length of the text to be replaced
-	 * @param cursorPosition
-	 *            the position of the cursor following the insert relative to
-	 *            replacementOffset
 	 * @param image
 	 *            the image to display for this proposal
-	 * @param displayString
-	 *            the string to be displayed for the proposal
 	 * @param contextInformation
 	 *            the context information associated with this proposal
 	 * @param additionalProposalInfo
 	 *            the additional information associated with this proposal
-	 * @param lazyBuilder lazy builder or <code>null</code>
+	 * @param lazyHtmlBuilder lazy builder or <code>null</code>
 	 */
-	public GradleCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition,
-			Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo, LazyLanguageElementHTMLDescriptionBuilder lazyBuilder) {
-		Assert.isNotNull(replacementString);
+	public GradleCompletionProposal(Proposal proposal, int replacementOffset, int replacementLength, Image image, IContextInformation contextInformation, String additionalProposalInfo, LazyLanguageElementHTMLDescriptionBuilder lazyHtmlBuilder) {
 		Assert.isTrue(replacementOffset >= 0);
 		Assert.isTrue(replacementLength >= 0);
-		Assert.isTrue(cursorPosition >= 0);
-
-		fReplacementString = replacementString;
+		Assert.isNotNull(proposal);
+		this.proposal=proposal;
+		this.movement = new LazyCursorMovement(proposal);
 		fReplacementOffset = replacementOffset;
 		fReplacementLength = replacementLength;
-		fCursorPosition = cursorPosition;
 		fImage = image;
-		fDisplayString = displayString;
+		fDisplayString = proposal.getLabel();
 		fContextInformation = contextInformation;
 		fAdditionalProposalInfo = additionalProposalInfo;
 		
-		this.lazyBuilder=lazyBuilder;
+		this.lazyBuilder=lazyHtmlBuilder;
 	}
 
 	@Override
 	public void apply(IDocument document) {
 		try {
-			document.replace(fReplacementOffset, fReplacementLength, fReplacementString);
+			document.replace(fReplacementOffset, fReplacementLength, proposal.getCode());
 		} catch (BadLocationException x) {
 			// ignore
 		}
@@ -93,7 +84,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 
 	@Override
 	public Point getSelection(IDocument document) {
-		return new Point(fReplacementOffset + fCursorPosition, 0);
+		return new Point(fReplacementOffset + movement.getCursorMove(), 0);
 	}
 
 	@Override
@@ -111,7 +102,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		if (fDisplayString != null){
 			return fDisplayString;
 		}
-		return fReplacementString;
+		return "";
 	}
 
 	@Override

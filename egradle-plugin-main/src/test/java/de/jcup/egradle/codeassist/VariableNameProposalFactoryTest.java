@@ -47,6 +47,6 @@ public class VariableNameProposalFactoryTest {
 		assertNotNull(proposals);
 		assertEquals(1, proposals.size());
 		Proposal proposal = proposals.iterator().next();
-		assertEquals("file", proposal.getName());
+		assertEquals("file", proposal.getLabel());
 	}
 }

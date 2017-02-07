@@ -17,11 +17,11 @@ import java.util.List;
 
 public class GradleDSLCodeBuilderTest {
 
-	private GradleDSLCodeBuilder builderToTest;
+	private GradleDSLCodeTemplateBuilder builderToTest;
 	
 	@Before
 	public void before() {
-		builderToTest = new GradleDSLCodeBuilder();
+		builderToTest = new GradleDSLCodeTemplateBuilder();
 	}
 	@Test
 	public void property_with_name1__with_type_string() {

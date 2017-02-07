@@ -16,7 +16,7 @@ public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
 			name=name.substring(5);
 		}
 		setName(name);
-		setCode(item.getName());
+		setLazyCodeBuilder(new SimpleStringCodeBuilder(item.getName()));
 		String type = item.getType();
 		setType(type);
 		StringBuilder sb = new StringBuilder();

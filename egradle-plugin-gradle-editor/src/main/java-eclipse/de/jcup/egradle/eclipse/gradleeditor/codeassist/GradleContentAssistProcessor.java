@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContentAssistEvent;
@@ -18,7 +17,6 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 
@@ -28,18 +26,23 @@ import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.ProposalFactory;
 import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
+import de.jcup.egradle.codeassist.ProposalFactoryContentProviderException;
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
+import de.jcup.egradle.codeassist.StaticOffsetProposalFactoryContentProvider;
 import de.jcup.egradle.codeassist.UserInputProposalFilter;
 import de.jcup.egradle.codeassist.VariableNameProposalFactory;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeBuilder;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.core.ModelProvider;
+import de.jcup.egradle.core.TextProvider;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.eclipse.api.DocumentTextProvider;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
@@ -47,7 +50,7 @@ import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 
-public class GradleContentAssistProcessor implements IContentAssistProcessor {
+public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
 
 	private String errorMessage;
@@ -101,7 +104,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		 * FIXME ATR, 19.01.2017: what about sharing the factories between
 		 * processors? check amount of created processor instances!
 		 */
-		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeBuilder(), estimator));
+		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeTemplateBuilder(), estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
 
@@ -119,66 +122,20 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 		errorMessage = null;
 
 		IDocument document = viewer.getDocument();
-
+		if (document==null){
+			return NO_COMPLETION_PROPOSALS;
+		}
 		ProposalFactoryContentProvider contentProvider = null;
 		try {
-			int line = document.getLineOfOffset(offset);
-			int offsetOfFirstCharacterInLine = document.getLineOffset(line);
-			int length = offset - offsetOfFirstCharacterInLine;
+			GradleFileType fileType = adaptable.getAdapter(GradleFileType.class);
+			TextProvider textProvider = new DocumentTextProvider(document);
+			ModelProvider modelProvider = GradleContentAssistProcessor.this;
+			contentProvider = new StaticOffsetProposalFactoryContentProvider(fileType, modelProvider, textProvider, codeCutter, offset);
 
-			String lineTextBeforeCursorPosition = document.get(offsetOfFirstCharacterInLine, length);
-
-			contentProvider = new ProposalFactoryContentProvider() {
-				private String relevant;
-
-				@Override
-				public Model getModel() {
-					return GradleContentAssistProcessor.this.getModel();
-				}
-
-				@Override
-				public String getEditorSourceEnteredAtCursorPosition() {
-					/*
-					 * the content provider is only used one time per cursor
-					 * offset - so we simply cache the relevant calculation
-					 * iniside internal string to speed up...
-					 */
-					if (relevant == null) {
-						String code = document.get();
-						relevant = codeCutter.getRelevantCode(code, offset);
-					}
-					return relevant;
-
-				}
-
-				@Override
-				public int getLineAtCursorPosition() {
-					return line;
-				}
-
-				@Override
-				public int getOffsetOfFirstCharacterInLine() {
-					return offsetOfFirstCharacterInLine;
-				}
-
-				@Override
-				public String getLineTextBeforeCursorPosition() {
-					return lineTextBeforeCursorPosition;
-				}
-
-				@Override
-				public GradleFileType getFileType() {
-					return adaptable.getAdapter(GradleFileType.class);
-				}
-			};
-		} catch (BadLocationException e) {
+		} catch (ProposalFactoryContentProviderException e) {
 			return NO_COMPLETION_PROPOSALS;
 		}
 
-		/*
-		 * FIXME ATR, 10.01.2017: xml schema necessary, no values like
-		 * "bla-from-xml" allowed because not parseable by groovy
-		 */
 		if (DEBUG) {
 			debugCacheState("proposal computing-1");
 		}
@@ -245,27 +202,13 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 				image = EGradleUtil.getImage("/icons/gradle-og.png", Activator.PLUGIN_ID);
 			}
 			IContextInformation contextInformation = null;
-//			StringBuilder sb = new StringBuilder();
-//			if (p.getDescription() != null) {
-//				sb.append("<html>");
-//				sb.append(p.getDescription());
-//				sb.append("<html>");
-//			}
-//			String additionalProposalInfo = sb.toString();
 			String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();
 
 			int alreadyEnteredChars = alreadyEntered.length();
 			int cursorOffset = offset - alreadyEnteredChars;
 
 			int replacementLength = alreadyEnteredChars;
-			int cursorMovement = -1;
-			int proposedCursorPostion = p.getCursorPos();
-			if (proposedCursorPostion == -1) {
-				int length = p.getCode().length();
-				cursorMovement = length;
-			} else {
-				cursorMovement = proposedCursorPostion;
-			}
+			
 			LazyLanguageElementHTMLDescriptionBuilder lazyBuilder = null;
 			if (p instanceof ModelProposal) {
 				ModelProposal mp = (ModelProposal) p;
@@ -274,9 +217,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, element,mp, descriptionBuilder);
 				}
 			}
-			GradleCompletionProposal proposal = new GradleCompletionProposal(p.getCode(), cursorOffset,
-					replacementLength, cursorMovement, image, p.getName(), contextInformation, null,
-					lazyBuilder);
+			GradleCompletionProposal proposal = new GradleCompletionProposal(p,cursorOffset,
+					replacementLength, image, contextInformation, null,lazyBuilder);
 			list.add(proposal);
 
 		}
@@ -286,11 +228,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		/* TODO ATR, 04.01.2017: implement or remove next lines: */
-		// ContextInformation info = new
-		// ContextInformation("contextDisplayString:"+offset,
-		// "informationDisplayString");
-		// return new IContextInformation[]{info};
+		/* TODO ATR, 07.02.2017: currently not implemented - maybe necessary in future */
 		return null;
 	}
 

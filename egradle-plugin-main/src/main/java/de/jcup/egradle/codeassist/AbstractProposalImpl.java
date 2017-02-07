@@ -5,43 +5,66 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class AbstractProposalImpl implements Proposal{
 
 	private String name;
-	private String code;
 	private String type;
 	private String description;
-	private int cursorPos=-1; 
+	private String textBeforeColumn;
+	
+	private LazyCodeBuilder lazyBuilder; 
 	
 	void setName(String name) {
 		this.name = name;
 	}
 	
+
+	public void setTextBefore(String textBeforeColumn) {
+		this.textBeforeColumn = textBeforeColumn;
+	}
+
+	public String getTextBeforeColumn() {
+		if (textBeforeColumn==null){
+			return "";
+		}
+		return textBeforeColumn;
+	}
+	
+	
 	@Override
-	public String getName() {
+	public String getTemplate() {
+		if (lazyBuilder!=null){
+			return lazyBuilder.getTemplate();
+		}
+		return "";
+	}
+	
+	@Override
+	public String getLabel() {
 		if (name==null){
 			return StringUtils.EMPTY;
 		}
 		return name;
 	}
 	
-	void setCode(String code) {
-		this.code = code;
+	void setLazyCodeBuilder(LazyCodeBuilder builder) {
+		this.lazyBuilder=builder;
 	}
 	
-	void setCursorPos(int cursorOffset) {
-		this.cursorPos=cursorOffset;
+	public LazyCodeBuilder getLazyBuilder() {
+		return lazyBuilder;
 	}
+	
 	
 	/**
 	 * @return cursor position - if set, otherwise -1
 	 */
 	public int getCursorPos() {
-		return cursorPos;
+		return lazyBuilder.getCursorPos(this, getTextBeforeColumn());
 	}
 
 	public String getCode() {
-		if (code==null){
+		if (lazyBuilder==null){
 			return StringUtils.EMPTY;
 		}
-		return code;
+		return lazyBuilder.getCode(this,getTextBeforeColumn());
 	}
 	
 	void setType(String type) {
@@ -66,14 +89,14 @@ public abstract class AbstractProposalImpl implements Proposal{
 		if (o==null){
 			return 1;
 		}
-		int result = getName().compareTo(o.getName());
+		int result = getLabel().compareTo(o.getLabel());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(getClass().getSimpleName()+"[name=").append(name).append(", code=").append(code).append(", type=")
+		builder.append(getClass().getSimpleName()+"[name=").append(name).append(", type=")
 				.append(type).append(", description=").append(description).append("]");
 		return builder.toString();
 	}
@@ -82,7 +105,6 @@ public abstract class AbstractProposalImpl implements Proposal{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -97,11 +119,6 @@ public abstract class AbstractProposalImpl implements Proposal{
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractProposalImpl other = (AbstractProposalImpl) obj;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;

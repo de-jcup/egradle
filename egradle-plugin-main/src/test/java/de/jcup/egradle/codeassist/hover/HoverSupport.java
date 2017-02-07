@@ -9,6 +9,16 @@ import de.jcup.egradle.core.model.Model;
 
 public class HoverSupport {
 
+	/**
+	 * Calculates hover data
+	 * @param allText text for which is hover data calculated , may not be <code>null</code>
+	 * @param offset offset inside text , may not be out of range
+	 * @param codeCutter necessary , may not be <code>null</code>
+	 * @param model necessary , may not be <code>null</code>
+	 * @param fileType necessary , may not be <code>null</code>
+	 * @param estimator necessary , may not be <code>null</code>
+	 * @return hover data or <code>null</code>
+	 */
 	public HoverData caclulateHoverData(String allText, int offset, RelevantCodeCutter codeCutter, Model model,GradleFileType fileType,GradleLanguageElementEstimater estimator){
 		if (model == null) {
 			return null;

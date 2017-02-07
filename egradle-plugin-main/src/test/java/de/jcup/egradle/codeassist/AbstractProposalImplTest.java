@@ -15,9 +15,9 @@ public class AbstractProposalImplTest {
 	}
 	
 	@Test
-	public void getName_never_null(){
+	public void getLabel_never_null(){
 		TestProposalImpl1 impl = new TestProposalImpl1();
-		assertNotNull(impl.getName());
+		assertNotNull(impl.getLabel());
 	}
 	
 	@Test

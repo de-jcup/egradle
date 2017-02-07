@@ -21,11 +21,6 @@ public interface ProposalFactoryContentProvider {
 	public String getEditorSourceEnteredAtCursorPosition();
 
 	/**
-	 * @return line of offset or -1
-	 */
-	public int getLineAtCursorPosition();
-	
-	/**
 	 * 
 	 * @return offset of first character in given line or -1
 	 */

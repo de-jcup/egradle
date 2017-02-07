@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
-import de.jcup.egradle.codeassist.dsl.CodeBuilder;
+import de.jcup.egradle.codeassist.dsl.CodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
@@ -17,30 +16,29 @@ import de.jcup.egradle.codeassist.dsl.Reason;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.TypeContext;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.TypeContext;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 
 public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
-	private CodeBuilder codeBuilder;
-	SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
+	private CodeTemplateBuilder codeTemplateBuilder;
 
 	private GradleLanguageElementEstimater typeEstimator;
 
 	/**
 	 * Creates new gradle dsl proposal factory
 	 * 
-	 * @param codeBuilder
+	 * @param codeTemplateBuilder
 	 * @param typeEstimator
 	 */
-	public GradleDSLProposalFactory(CodeBuilder codeBuilder, GradleLanguageElementEstimater typeEstimator) {
-		if (codeBuilder == null) {
-			throw new IllegalArgumentException("code codeBuilder may not be null");
+	public GradleDSLProposalFactory(CodeTemplateBuilder codeTemplateBuilder, GradleLanguageElementEstimater typeEstimator) {
+		if (codeTemplateBuilder == null) {
+			throw new IllegalArgumentException("code codeTemplateBuilder may not be null");
 		}
-		this.codeBuilder = codeBuilder;
+		this.codeTemplateBuilder = codeTemplateBuilder;
 		if (typeEstimator == null) {
 			throw new IllegalArgumentException("typeEstimator may not be null!");
 		}
@@ -48,7 +46,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	}
 
 	@Override
-	public Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+	protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
 		if (contentProvider == null) {
 			return null;
 		}
@@ -66,8 +64,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	}
 
 	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
-		/* FIXME ATR, 03.02.2017:  at this point the HTMLDescriptionBuilder like in 
-		 * GradleTextHover should be used- so we got only one HTML preview*/
+		/*
+		 * FIXME ATR, 03.02.2017: at this point the HTMLDescriptionBuilder like
+		 * in GradleTextHover should be used- so we got only one HTML preview
+		 */
 		Type identifiedType = result.getElementType();
 		TypeContext mode = result.getMode();
 		Set<Proposal> proposals = new TreeSet<>();
@@ -87,7 +87,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			ModelProposal proposal = new ModelProposal();
 			proposal.type = ModelProposalType.EXTENSION;
 			proposal.setType(extensionType.getName());
-			proposal.setCode(codeBuilder.createClosure(extensionId));
+			proposal.setLazyCodeBuilder(new ClosureByStringCodeBuilder(extensionId, codeTemplateBuilder));
 
 			Reason reason = identifiedType.getReasonForExtension(extensionId);
 			StringBuilder description = new StringBuilder();
@@ -109,11 +109,11 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			description.append(extensionType.getName());
 			proposal.setDescription(description.toString());
 			proposal.setName(name.toString());
-			calculateAndSetCursor(proposal, textBeforeColumn);
-			
+			proposal.setTextBefore(textBeforeColumn);
+
 			proposal.setExtensionId(extensionId);
 			proposal.setElement(extensionType);
-			
+
 			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
@@ -125,12 +125,12 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposal.type = ModelProposalType.PROPERTY;
 			proposal.setName(property.getName());
 			proposal.setType(identifiedType.getName());
-			proposal.setCode(codeBuilder.createPropertyAssignment(property));
+			proposal.setLazyCodeBuilder(new PropertyAssignmentCodeBuilder(property, codeTemplateBuilder));
 			proposal.setDescription(property.getDescription());
-			calculateAndSetCursor(proposal, textBeforeColumn);
-			
+			proposal.setTextBefore(textBeforeColumn);
+
 			proposal.setElement(property);
-			
+
 			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
@@ -138,12 +138,13 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 				if (method.getName().startsWith("get")) {
 					continue;
 				}
-				if (method.getName().startsWith("set")){
+				if (method.getName().startsWith("set")) {
 					continue;
 				}
 
 				List<Parameter> params = method.getParameters();
-				if (params.size() == 0) {// currently only supporting closure content with at least one param
+				if (params.size() == 0) {// currently only supporting closure
+											// content with at least one param
 					continue;
 				}
 
@@ -174,12 +175,12 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			}
 			proposal.type = ModelProposalType.METHOD;
 			proposal.setType(identifiedType.getName());
-			proposal.setCode(codeBuilder.createSmartMethodCall(method));
+			proposal.setLazyCodeBuilder(new SmartMethodCodeBuilder(method, codeTemplateBuilder));
 			proposal.setDescription(descSb.toString());
-			calculateAndSetCursor(proposal, textBeforeColumn);
-			
+			proposal.setTextBefore(textBeforeColumn);
+
 			proposal.setElement(method);
-			
+
 			proposals.add(proposal);
 		}
 		return proposals;
@@ -208,14 +209,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	}
 
-	private void calculateAndSetCursor(ModelProposal proposal, String textBeforeColumn) {
-		String code = proposal.getCode();
-		InsertionData insertData = insertSupport.prepareInsertionString(code, textBeforeColumn);
-
-		proposal.setCursorPos(insertData.cursorOffset);
-		proposal.setCode(insertData.sourceCode);
-	}
-
 	public enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
 	}
@@ -229,15 +222,17 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		public void setElement(LanguageElement element) {
 			this.element = element;
 		}
+
 		
+
 		public void setExtensionId(String extensionId) {
-			this.extensionId=extensionId;
+			this.extensionId = extensionId;
 		}
 
 		public LanguageElement getElement() {
 			return element;
 		}
-		
+
 		public boolean isMethod() {
 			return ModelProposalType.METHOD.equals(type);
 		}
@@ -248,13 +243,14 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 		@Override
 		public boolean isTypeFromExtensionConfigurationPoint() {
-			return extensionId!=null;
+			return extensionId != null;
 		}
 
 		@Override
 		public String getExtensionName() {
 			return extensionId;
 		}
+		
 	}
 
 }

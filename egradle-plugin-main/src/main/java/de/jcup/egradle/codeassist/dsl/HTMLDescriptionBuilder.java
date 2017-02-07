@@ -1,5 +1,9 @@
 package de.jcup.egradle.codeassist.dsl;
 
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
@@ -104,10 +108,51 @@ public class HTMLDescriptionBuilder {
 		description.append("<h4>");
 		description.append(type.getName());
 		description.append("</h4>");
+		description.append("<a href='#appendix'>Go to appendix</a>");
 		
 		description.append(type.getDescription());
 		appendLinkToGradleOriginDoc(type, description);
+		
+		description.append("<h4 id='appendix'>Appendix:</h4>");
+		description.append("<h5>Methods:</h5>");
+		Set<Method> methods = type.getMethods();
+		SortedSet<String> sortedLinkReferences =new TreeSet<>();
+		for (Method m: methods){
+			String methodSignature = MethodUtils.createSignature(m);
+			StringBuilder referenceLink = new StringBuilder();
+			referenceLink.append("<a href='type://").append(type.getName()).append("#").append(methodSignature).append("'>");
+			referenceLink.append(methodSignature);
+			referenceLink.append("</a>");
+			sortedLinkReferences.add(referenceLink.toString());
+			
+		}
+		description.append("<ul>");
+		for (String referenceLink: sortedLinkReferences){
+			description.append("<li>");
+			description.append(referenceLink);
+		}
+		description.append("</ul>");
+		description.append("<h5>Properties:</h5>");
+		Set<Property> properties= type.getProperties();
+		sortedLinkReferences =new TreeSet<>();
+		/* FIXME ATR, 07.02.2017: properties must be resolveable by type url also! */
+		for (Property p: properties){
+			String propertySignature = p.getName();
+			StringBuilder referenceLink = new StringBuilder();
+			referenceLink.append("<a href='type://").append(type.getName()).append("#").append(propertySignature).append("'>");
+			referenceLink.append(propertySignature);
+			referenceLink.append("</a>");
+			sortedLinkReferences.add(referenceLink.toString());
+			
+		}
+		description.append("<ul>");
+		for (String referenceLink: sortedLinkReferences){
+			description.append("<li>");
+			description.append(referenceLink);
+		}
+		description.append("</ul>");
 	}
+	
 
 	private void appendLinkToGradleOriginDoc(LanguageElement element, StringBuilder descSb) {
 		if (element==null){
