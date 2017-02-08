@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.core;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 
 public class TestUtil {
@@ -70,4 +72,25 @@ public class TestUtil {
 	public static final File ROOTFOLDER_4_TEST4_GRADLE = new File(ROOTFOLDER_4, "test4.gradle");
 	public static final File ROOTFOLDER_4_TEST5_GRADLE = new File(ROOTFOLDER_4, "test5.gradle");
 
+	/**
+	 * Calculates index of search string in given text. E.g. a search string "alpha" in text "alpha beta gamma" returns 5 because it is the end position of "alpha"  
+	 * @param text
+	 * @param searchString
+	 * @return index end
+	 * @throws IllegalArgumentException when text is <code>null</code> or searchstring is <code>null</code> or when search string is not found
+	 */
+	public static int calculateIndexEndOf(String text, String searchString) {
+		if (text==null){
+			throw new IllegalArgumentException("test case corrupt, argument 'text' may not be null!");
+		}
+		if (searchString==null){
+			throw new IllegalArgumentException("test case corrupt, argument 'searchString' may not be null!");
+		}
+		int index = text.indexOf(searchString);
+		if (index==-1){
+			throw new IllegalArgumentException("test case corrupt - did not found searchString:'"+searchString+"' inside text:"+text);
+		}
+		index=index+searchString.length();
+		return index;
+	}
 }

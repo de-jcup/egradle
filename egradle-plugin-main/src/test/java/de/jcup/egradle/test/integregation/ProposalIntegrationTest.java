@@ -1,14 +1,17 @@
 package de.jcup.egradle.test.integregation;
 
+import static de.jcup.egradle.core.TestUtil.*;
+import static de.jcup.egradle.test.integregation.ProposalsAssert.assertThat;
 import static org.junit.Assert.*;
-import static de.jcup.egradle.test.integregation.ProposalsAssert.*;
+
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
 import de.jcup.egradle.codeassist.Proposal;
-
+import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
 public class ProposalIntegrationTest {
 
 	private IntegrationTestComponents components;
@@ -22,17 +25,21 @@ public class ProposalIntegrationTest {
 	public void buildfile__with_dependencies_in_root__when_cursor_is_after_dependencies_bracket() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test1-dependencies-block-inside-root.gradle");
-		int offset = text.indexOf("dependencies {");
+		int offset = calculateIndexEndOf(text,"dependencies {");
 
 		/* execute */
-		Set<Proposal> proposals = components.getGradleDSLProposalFactory().createProposals(offset,components.buildContentProvider(text,offset));
+		Set<Proposal> proposals = createProposals(text, offset);
+		
 		/* test */
 		/* @formatter:off*/
 		assertThat(proposals).
-			hasAtLeastOneProposal().
-			assertProposalHavingLabel("add(String configurationName, Object dependencyNotation, Closure configureClosure)").
-				hasDescription().
-				assertDone();
+			containsAtLeastOneProposal().
+				whichHasReasonType("org.gradle.api.artifacts.dsl.DependencyHandler").
+		and().
+			containsProposalWithLabel("add(String configurationName, Object dependencyNotation, Closure configureClosure)").
+				whichHasReasonType("org.gradle.api.artifacts.dsl.DependencyHandler").
+				whichHasDescription().
+		and();
 		/* @formatter:on*/
 	}
 	
@@ -41,18 +48,27 @@ public class ProposalIntegrationTest {
 		/* prepare */
 		String text = "";
 		int offset = 0;
-
+	
 		/* execute */
-		Set<Proposal> proposals = components.getGradleDSLProposalFactory().createProposals(offset,components.buildContentProvider(text,offset));
+		Set<Proposal> proposals = createProposals(text, offset);
 		/* test */
 		/* @formatter:off*/
 		assertThat(proposals).
-			hasAtLeastOneProposal().
-			assertProposalHavingLabel("dependencies(Closure configureClosure)").
-				hasDescription().
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("dependencies(Closure configureClosure)").
+				whichHasDescription().
 				hasTemplate("dependencies {\n    $cursor\n}").
-				assertDone();
+		and();
 		/* @formatter:on*/
+	}
+
+	
+
+	private Set<Proposal> createProposals(String text, int offset) {
+		ProposalFactoryContentProvider contentProvider = components.buildContentProvider(text,offset);
+		GradleDSLProposalFactory gradleDSLProposalFactory = components.getGradleDSLProposalFactory();
+		return gradleDSLProposalFactory.createProposals(offset,contentProvider);
 	}
 	
 	private String loadTextFromIntegrationTestFile(String testFileName) {

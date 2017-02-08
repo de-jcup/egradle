@@ -84,7 +84,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			if (extensionType == null) {
 				continue;
 			}
-			ModelProposal proposal = new ModelProposal();
+			ModelProposal proposal = createModelProposal(result);
 			proposal.type = ModelProposalType.EXTENSION;
 			proposal.setType(extensionType.getName());
 			proposal.setLazyCodeBuilder(new ClosureByStringCodeBuilder(extensionId, codeTemplateBuilder));
@@ -121,7 +121,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			 * FIXME ATR, 28.01.2017: check if mixin does copy properties as
 			 * well. If so implementation is needed
 			 */
-			ModelProposal proposal = new ModelProposal();
+			ModelProposal proposal = createModelProposal(result);
 			proposal.type = ModelProposalType.PROPERTY;
 			proposal.setName(property.getName());
 			proposal.setType(identifiedType.getName());
@@ -135,22 +135,22 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		}
 		for (Method method : identifiedType.getMethods()) {
 			if (mode == TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
-				if (method.getName().startsWith("get")) {
-					continue;
-				}
-				if (method.getName().startsWith("set")) {
-					continue;
-				}
-
-				List<Parameter> params = method.getParameters();
-				if (params.size() == 0) {// currently only supporting closure
-											// content with at least one param
-					continue;
-				}
+//				if (method.getName().startsWith("get")) {
+//					continue;
+//				}
+//				if (method.getName().startsWith("set")) {
+//					continue;
+//				}
+//
+//				List<Parameter> params = method.getParameters();
+//				if (params.size() == 0) {// currently only supporting closure
+//											// content with at least one param
+//					continue;
+//				}
 
 			}
 
-			ModelProposal proposal = new ModelProposal();
+			ModelProposal proposal = createModelProposal(result);
 
 			Reason reason = identifiedType.getReasonForMethod(method);
 			String methodLabel = createMethodLabel(method);
@@ -186,6 +186,12 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		return proposals;
 	}
 
+	private ModelProposal createModelProposal(EstimationResult result) {
+		ModelProposal proposal = new ModelProposal();
+		proposal.reason=result;
+		return proposal;
+	}
+
 	/*
 	 * FIXME ATR, 20.01.2017: think about providing multiple types here as
 	 * result - its often not clear what can be estimated...
@@ -218,6 +224,16 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		private ModelProposalType type;
 		private LanguageElement element;
 		private String extensionId;
+		private EstimationResult reason;
+		
+		/**
+		 * Returns estimation result which was the reason for this proposal.
+		 * Only for test and debug purposes
+		 * @return estimation result or <code>null</code> if not set
+		 */
+		public EstimationResult getReason() {
+			return reason;
+		}
 		
 		public void setElement(LanguageElement element) {
 			this.element = element;

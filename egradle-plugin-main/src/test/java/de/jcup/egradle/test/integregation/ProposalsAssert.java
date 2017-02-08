@@ -7,8 +7,10 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.codeassist.AbstractProposalImpl;
+import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.Proposal;
-import de.jcup.egradle.test.integregation.ProposalsAssert.ProposalAssert;
+import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 
 public class ProposalsAssert {
 
@@ -25,12 +27,12 @@ public class ProposalsAssert {
 		this.proposals=proposals;
 	}
 
-	public ProposalsAssert hasAtLeastOneProposal() {
+	public ProposalAssert containsAtLeastOneProposal() {
 		assertFalse("No proposals found!", proposals.isEmpty());
-		return this;
+		return new ProposalAssert(proposals.iterator().next());
 	}
 
-	public ProposalAssert assertProposalHavingLabel(String label) {
+	public ProposalAssert containsProposalWithLabel(String label) {
 		for (Proposal proposal: proposals){
 			String name = proposal.getLabel();
 			if (name.equals(label)){
@@ -50,11 +52,11 @@ public class ProposalsAssert {
 			this.proposal=proposal;
 		}
 		
-		public ProposalsAssert assertDone(){
+		public ProposalsAssert and(){
 			return ProposalsAssert.this;
 		}
 
-		public ProposalAssert hasDescription() {
+		public ProposalAssert whichHasDescription() {
 			String description = proposal.getDescription();
 			if (StringUtils.isBlank(description)){
 				fail("description is blank!");
@@ -70,6 +72,21 @@ public class ProposalsAssert {
 			assertEquals(expectedCode, apo.getLazyBuilder().getTemplate());
 			return this;
 		}
+
+		public ProposalAssert whichHasReasonType(String typeNameAsString) {
+			if (! (proposal instanceof ModelProposal)){
+				throw new IllegalArgumentException("proposal is not ModelProposal... so this is not testable here! ");
+			}
+			ModelProposal mp = (ModelProposal) proposal;
+			EstimationResult reason = mp.getReason();
+			assertNotNull("Reason is null! for given proposal!", reason);
+			Type type = reason.getElementType();
+			assertNotNull("Reasons element type is null! for given proposal!", type);
+			String foundTypeName = type.getName();
+			assertEquals("Unexepcted type as reason found!",typeNameAsString, foundTypeName);
+			return this;
+		}
 	}
+
 	
 }

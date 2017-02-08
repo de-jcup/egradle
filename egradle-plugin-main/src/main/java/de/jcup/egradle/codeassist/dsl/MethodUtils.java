@@ -22,17 +22,14 @@ public class MethodUtils {
 				pname="arg"+pos;
 			}
 			if (pos>0){
-				signatureSb.append(" ,");
+				signatureSb.append(", ");
 			}
 			String typeAsString = null;
 			Type pType = param.getType();
 			if (pType!=null){
 				typeAsString = pType.getShortName();
 			}else{
-				if (param instanceof XMLParameter){
-					XMLParameter xp = (XMLParameter) param;
-					typeAsString = xp.getTypeAsString();
-				}
+				typeAsString = param.getTypeAsString();
 			}
 			if (typeAsString!=null){
 				int index = typeAsString.lastIndexOf('.');

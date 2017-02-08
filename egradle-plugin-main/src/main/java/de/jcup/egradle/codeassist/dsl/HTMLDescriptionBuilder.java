@@ -4,6 +4,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.crypto.spec.DESedeKeySpec;
+
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
@@ -13,11 +15,7 @@ public class HTMLDescriptionBuilder {
 		if (element instanceof Method) {
 			Method method = (Method) element;
 			descSb.append("<h4>");
-			Type type = method.getParent();
-			if (type!=null){
-				descSb.append(type.getName());
-				descSb.append(".");
-			}
+			appendLinkToParentType(element, descSb,true);
 			String signature = MethodUtils.createSignature(method);
 			descSb.append(signature);
 			descSb.append("</h4>");
@@ -25,30 +23,12 @@ public class HTMLDescriptionBuilder {
 			appendLinkToGradleOriginDoc(method, descSb);
 		} else if (element instanceof Property) {
 			Property property = (Property) element;
-//			Type propertyType = property.getType();
 			descSb.append("<h4>");
-			Type type = property.getParent();
-			if (type!=null){
-				descSb.append(type.getName());
-				descSb.append(".");
-			}
+			appendLinkToParentType(element, descSb,true);
 			descSb.append(property.getName());
 			descSb.append("</h4>");
 			descSb.append(property.getDescription());
 			appendLinkToGradleOriginDoc(property, descSb);
-//			descSb.append("<br>");
-//			if (propertyType == null) {
-//				descSb.append("Type:");
-//				if (property instanceof XMLProperty) {
-//					XMLProperty xmlProp = (XMLProperty) property;
-//					descSb.append(" (raw) ");
-//					descSb.append(xmlProp.getTypeAsString());
-//				} else {
-//					descSb.append("unknown");
-//				}
-//			} else {
-//				appendTypeDescription(null, propertyType, descSb);
-//			}
 
 		} else if (element instanceof Type) {
 			Type type = (Type) element;
@@ -64,6 +44,23 @@ public class HTMLDescriptionBuilder {
 		}
 		String html =  createHTMLBody(fgColor, bgColor, title, descSb);
 		return html;
+	}
+
+	private void appendLinkToParentType(LanguageElement element, StringBuilder descSb, boolean withEndingDot) {
+		if (element instanceof TypeChild){
+			TypeChild child = (TypeChild) element;
+			Type type = child.getParent();
+			if (type!=null){
+				descSb.append("<a href='type://");
+				descSb.append(type.getName());
+				descSb.append("'>");
+				descSb.append(type.getName());
+				descSb.append("</a>");
+				if (withEndingDot){
+					descSb.append('.');
+				}
+			}
+		}
 	}
 
 	private String createHTMLBody(String fgColor, String bgColor,String title, StringBuilder descSb) {
