@@ -259,21 +259,29 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 		return doc.get();
 	}
-
-	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus) {
+	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus){
+		openSelectedTreeItemInEditor(selection, grabFocus,false);
+	}
+	
+	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus, boolean fullSelection) {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object firstElement = ss.getFirstElement();
 			if (firstElement instanceof Item) {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
-				/*
-				 * Why not using item.getLength() ? Because would makes full
-				 * selection. Why not using item.getName().getLength() ? Because
-				 * can differ to editor part! so... get first word at item
-				 * position
-				 */
-				int length = TextUtil.getLettersOrDigitsAt(offset, getDocumentText()).length();
+				int length=0;
+				if (fullSelection){
+					length = item.getLength();
+				}else{
+					/*
+					 * Why not using item.getLength() ? Because would makes full
+					 * selection. Why not using item.getName().getLength() ? Because
+					 * can differ to editor part! so... get first word at item
+					 * position
+					 */
+					length = TextUtil.getLettersOrDigitsAt(offset, getDocumentText()).length();
+				}
 				if (length == 0) {
 					/* absolute fall back variant - but should never happen*/
 					length = 1;

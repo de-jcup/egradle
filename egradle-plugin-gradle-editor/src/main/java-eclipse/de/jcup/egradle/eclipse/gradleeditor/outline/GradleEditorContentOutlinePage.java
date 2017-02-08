@@ -68,7 +68,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			contentProvider = new FallbackOutlineContentProvider();
 		}
 	}
-	
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 
@@ -84,7 +83,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		if (input!=null){
 			viewer.setInput(input);
 		}
-
+		BlockSelectionAction blockSelectionAction = new BlockSelectionAction();
 		CollapseAllAction collapseAllAction = new CollapseAllAction();
 		ExpandAllAction expandAllAction = new ExpandAllAction();
 		toggleLinkingAction = new ToggleLinkingAction();
@@ -95,6 +94,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		toolBarManager.add(expandAllAction);
 		toolBarManager.add(collapseAllAction);
 		toolBarManager.add(toggleLinkingAction);
+		toolBarManager.add(new Separator("selectionGroup1"));//$NON-NLS-1$
+		toolBarManager.add(blockSelectionAction);
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
@@ -113,6 +114,8 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		viewMenuManager.add(expandAllAction);
 		viewMenuManager.add(collapseAllAction);
 		viewMenuManager.add(toggleLinkingAction);
+		viewMenuManager.add(new Separator("selectionGroup2"));//$NON-NLS-1$
+		viewMenuManager.add(blockSelectionAction);
 	}
 
 	@Override
@@ -222,6 +225,28 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		public void run() {
 			getTreeViewer().expandAll();
 		}
+	}
+	
+	private class BlockSelectionAction extends Action {
+
+		private BlockSelectionAction() {
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/mark_occurrences.png", Activator.PLUGIN_ID));
+			setText("Mark selected item full");
+		}
+
+		@Override
+		public void run() {
+			if (gradleEditor==null){
+				return;
+			}
+			TreeViewer treeViewer= getTreeViewer();
+			if (treeViewer==null){
+				return;
+			}
+			gradleEditor.openSelectedTreeItemInEditor(treeViewer.getSelection(), true, true);
+		}
+
+		
 	}
 
 	private class ToggleLinkingAction extends Action {
