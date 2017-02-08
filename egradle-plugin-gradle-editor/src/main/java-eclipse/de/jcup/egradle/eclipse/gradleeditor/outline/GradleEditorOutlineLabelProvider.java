@@ -274,6 +274,19 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				StringBuilder sb = new StringBuilder();
 				sb.append(" --[");
 				sb.append(item.getItemType());
+				String[] parameters = item.getParameters();
+				if (parameters!=null && parameters.length>0){
+					sb.append(", params={");
+					boolean first=true;
+					for (String param: parameters){
+						if (!first){
+							sb.append(", ");
+						}
+						first=false;
+						sb.append(param);
+					}
+					sb.append('}');
+				}
 				sb.append(']');
 				StyledString debugString = new StyledString(sb.toString(), outlineItemConfigurationStyler);
 				styled.append(debugString);

@@ -13,11 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
@@ -43,13 +44,16 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
+
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
-	
-	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",Activator.PLUGIN_ID);
-	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/sync_broken.png",Activator.PLUGIN_ID);
-	
+
+	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",
+			Activator.PLUGIN_ID);
+	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil
+			.createImageDescriptor("/icons/outline/sync_broken.png", Activator.PLUGIN_ID);
+
 	private ITreeContentProvider contentProvider;
-	
+
 	private GradleEditor gradleEditor;
 	private boolean ignoreNextSelectionEvents;
 	private GradleEditorOutlineLabelProvider labelProvider;
@@ -58,17 +62,17 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	private Object input;
 
 	public GradleEditorContentOutlinePage(IAdaptable adaptable) {
-		if (adaptable==null){
+		if (adaptable == null) {
 			contentProvider = new FallbackOutlineContentProvider();
 			return;
 		}
 		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
 		this.contentProvider = adaptable.getAdapter(ITreeContentProvider.class);
-		if (contentProvider==null){
+		if (contentProvider == null) {
 			contentProvider = new FallbackOutlineContentProvider();
 		}
 	}
-	
+
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 
@@ -79,9 +83,9 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		viewer.addDoubleClickListener(this);
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		viewer.addSelectionChangedListener(this);
-		
-		/* it can happen that input is already updated before control created*/
-		if (input!=null){
+
+		/* it can happen that input is already updated before control created */
+		if (input != null) {
 			viewer.setInput(input);
 		}
 
@@ -98,13 +102,15 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-		
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS){
+
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
+			DumpTreeToConsoleAction dumpTreeAction = new DumpTreeToConsoleAction();
+			toolBarManager.add(dumpTreeAction);
 
 			ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
 			ShowGradleOutlineUnfilteredAction showGradleOutlineUnfilteredAction = new ShowGradleOutlineUnfilteredAction();
 			ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
-			
+
 			viewMenuManager.add(showGroovyFullAntlrModelAction);
 			viewMenuManager.add(showGradleOutlineModelAction);
 			viewMenuManager.add(showGradleOutlineUnfilteredAction);
@@ -117,7 +123,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
-		if (linkingWithEditorEnabled){
+		if (linkingWithEditorEnabled) {
 			return; // already handled by single click
 		}
 		ISelection selection = event.getSelection();
@@ -125,7 +131,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	}
 
 	public void ignoreNextSelectionEvents(boolean ignore) {
-	
+
 	}
 
 	public void onEditorCaretMoved(int caretOffset) {
@@ -133,12 +139,12 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			return;
 		}
 		ignoreNextSelectionEvents = true;
-		if (contentProvider instanceof GradleEditorOutlineContentProvider){
+		if (contentProvider instanceof GradleEditorOutlineContentProvider) {
 			GradleEditorOutlineContentProvider gcp = (GradleEditorOutlineContentProvider) contentProvider;
 			Item item = gcp.tryToFindByOffset(caretOffset);
 			if (item != null) {
 				StructuredSelection selection = new StructuredSelection(item);
-				getTreeViewer().setSelection(selection,true);
+				getTreeViewer().setSelection(selection, true);
 			}
 		}
 		ignoreNextSelectionEvents = false;
@@ -150,7 +156,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		if (!linkingWithEditorEnabled) {
 			return;
 		}
-	
+
 		if (ignoreNextSelectionEvents) {
 			return;
 		}
@@ -158,18 +164,17 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		gradleEditor.openSelectedTreeItemInEditor(selection);
 	}
 
-	public void inputChanged(Object input){
-		this.input=input;
-		if (contentProvider instanceof GradleEditorOutlineContentProvider){
-			((GradleEditorOutlineContentProvider)contentProvider).clearModelCache();
+	public void inputChanged(Object input) {
+		this.input = input;
+		if (contentProvider instanceof GradleEditorOutlineContentProvider) {
+			((GradleEditorOutlineContentProvider) contentProvider).clearModelCache();
 		}
 		TreeViewer treeViewer = getTreeViewer();
-		if (treeViewer==null){
+		if (treeViewer == null) {
 			return;
 		}
 		treeViewer.setInput(input);
 	}
-	
 
 	private abstract class ChangeModelTypeAction extends Action {
 
@@ -179,7 +184,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		@Override
 		public void run() {
-			if (contentProvider instanceof GradleEditorOutlineContentProvider){
+			if (contentProvider instanceof GradleEditorOutlineContentProvider) {
 				GradleEditorOutlineContentProvider gcp = (GradleEditorOutlineContentProvider) contentProvider;
 				gcp.setModelType(changeTo());
 				gcp.clearModelCache();
@@ -204,8 +209,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 	}
 
-	
-
 	private class ExpandAllAction extends Action {
 
 		private ExpandAllAction() {
@@ -220,31 +223,30 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	}
 
 	private class ToggleLinkingAction extends Action {
-		
-	
+
 		private ToggleLinkingAction() {
 			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
 			setDescription("link with editor");
 			initImage();
 			initText();
 		}
-	
+
 		@Override
 		public void run() {
 			linkingWithEditorEnabled = !linkingWithEditorEnabled;
-			
+
 			initText();
 			initImage();
 		}
-	
+
 		private void initImage() {
 			setImageDescriptor(linkingWithEditorEnabled ? IMG_DESC_LINKED : IMG_DESC_NOT_LINKED);
 		}
-	
+
 		private void initText() {
 			setText(linkingWithEditorEnabled ? "Click to unlink from editor" : "Click to link with editor");
 		}
-	
+
 	}
 
 	private class ShowGroovyFullAntlrModelAction extends ChangeModelTypeAction {
@@ -255,7 +257,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 
 	}
-	
+
 	private class ShowGradleOutlineModelAction extends ChangeModelTypeAction {
 
 		@Override
@@ -264,7 +266,6 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 
 	}
-	
 
 	private class ShowGradleOutlineUnfilteredAction extends ChangeModelTypeAction {
 
@@ -275,4 +276,54 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 	}
 
+	private class DumpTreeToConsoleAction extends Action {
+
+		private DumpTreeToConsoleAction() {
+			setImageDescriptor(
+					EGradleUtil.createImageDescriptor("/icons/outline/cheatsheet_item_obj.png", Activator.PLUGIN_ID));
+			setText("Dump to System.out");
+			setToolTipText("Dump selected item and its children to System.out as comments");
+		}
+
+		@Override
+		public void run() {
+			ISelection selection = getSelection();
+			if (!(selection instanceof StructuredSelection)) {
+				return;
+			}
+			StructuredSelection ss = (StructuredSelection) selection;
+
+			Object element = ss.getFirstElement();
+			if (!(element instanceof Item)){
+				return;
+			}
+			Item item = (Item) element;
+			StringBuilder sb = new StringBuilder();;
+			dump(item,sb,0);
+			System.out.println();
+			System.out.println(sb);
+		}
+		
+		private void dump(Item item, StringBuilder sb, int indent){
+			if (item==null){
+				return;
+			}
+			StringBuilder indentSb = new StringBuilder();
+			indentSb.append("// ");
+			for (int i=0;i<indent;i++){
+				indentSb.append(" ");
+			}
+			sb.append(indentSb);
+			sb.append("o-"+item.getName());
+			sb.append(":");
+			sb.append(item.getInfo());
+			sb.append("\n");
+			if (! item.hasChildren()){
+				return;
+			}
+			for (Item child: item.getChildren()){
+				dump(child,sb,indent+1);
+			}
+		}
+	}
 }

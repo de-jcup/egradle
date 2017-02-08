@@ -6,15 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
-import de.jcup.egradle.codeassist.dsl.Parameter;
+import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.core.model.Item;
-import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 public class GradleLanguageElementEstimater {
 
 	private TypeProvider typeProvider;
@@ -241,32 +239,22 @@ public class GradleLanguageElementEstimater {
 			return null;
 		}
 		for (Method m : currentType.getMethods()) {
-			String methodName = m.getName();
-			if (checkItemName.equals(methodName) ) {
-				/* name okay, could be ...*/
-				boolean isClosureMethod=false;
-				List<Parameter> parameters = m.getParameters();
-				for (Parameter p: parameters) {
-					if (GROOVY_CLOSURE.equals(p.getTypeAsString())){
-						isClosureMethod=true;
-						break;
-					}
-				}
-				/* FIXME ATR, 05.02.2017: outline model param detection  bad implemented and so this resolvingtoo. improve!*/
-//				String[] itemParams = item.getParameters();
-				if (isClosureMethod != item.isClosureBlock()){
-					/* different, so not compatible!*/
-					continue;
-				}
+			boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(m);
+			if (hasGroovyClosureAsParameter != item.isClosureBlock()){
+				/* different, so not compatible! speed guard close...*/
+				continue;
+			}
+			if (MethodUtils.isMethodIdentified(m,checkItemName, item.getParameters())){
 				InternalEstimationData r = new InternalEstimationData();
-				if (isClosureMethod){
-					r.type=m.getDelegationTarget();
+				if (hasGroovyClosureAsParameter){
+					r.type = m.getDelegationTarget();
 				}else{
 					r.type = m.getReturnType();
 				}
 				r.element = m;
 				return r;
 			}
+			
 		}
 		return null;
 	}

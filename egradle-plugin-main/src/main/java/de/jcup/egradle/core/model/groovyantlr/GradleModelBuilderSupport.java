@@ -263,7 +263,7 @@ class GradleModelBuilderSupport {
 		} else if (GroovyTokenTypes.METHOD_CALL == type) {
 			return "";
 		} else {
-	
+
 			AST firstChild = ast.getFirstChild();
 			if (GroovyTokenTypes.EXPR == type) {
 				return resolveExpressionName(ast);
@@ -298,6 +298,14 @@ class GradleModelBuilderSupport {
 		return ast.toString();
 	}
 
+	/**
+	 * Creates an item, filled with information by context. Will do initial
+	 * setup for item (e.g. offset, length etc.)
+	 * 
+	 * @param context
+	 * @param ast
+	 * @return item, never <code>null</code>
+	 */
 	Item createItem(Context context, AST ast) {
 		Item item = new Item();
 		int column = ast.getColumn();
@@ -305,14 +313,14 @@ class GradleModelBuilderSupport {
 		item.setColumn(column);
 		item.setLine(line);
 		item.setOffset(context.buffer.getOffset(line, column));
-	
+
 		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
 			int offset1 = item.getOffset();
 			int lineLast = gast.getLineLast();
 			int columnLast = gast.getColumnLast();
 			int offset2 = context.buffer.getOffset(lineLast, columnLast);
-	
+
 			int length = offset2 - offset1;
 			if (length < 0) {
 				/* fall back */
@@ -342,7 +350,7 @@ class GradleModelBuilderSupport {
 		if (GroovyTokenTypes.METHOD_CALL != methodCall.getType()) {
 			return "--no method call--";
 		}
-	
+
 		AST firstChild = methodCall.getFirstChild();
 		if (firstChild == null) {
 			return "--no method child--";
@@ -361,7 +369,7 @@ class GradleModelBuilderSupport {
 		if (ast.getType() == GroovyTokenTypes.ELIST) {
 			appendELISTParts(sb, ast);
 		} else if (ast.getType() == GroovyTokenTypes.SL) {
-	
+
 		} else if (ast.getType() == GroovyTokenTypes.DOT) {
 			/* is dot */
 			AST content = ast.getFirstChild();
@@ -372,7 +380,7 @@ class GradleModelBuilderSupport {
 				if (type == GroovyTokenTypes.IDENT) {
 					sb.append('.');
 					sb.append(next.getText());
-				}else if (type == ELIST){
+				} else if (type == ELIST) {
 					appendELIST(sb, next);
 				}
 			}
@@ -393,9 +401,9 @@ class GradleModelBuilderSupport {
 					}
 				}
 			}
-	
+
 		}
-	
+
 	}
 
 	private void appendELIST(StringBuilder sb, AST next) {
@@ -455,4 +463,131 @@ class GradleModelBuilderSupport {
 		return sb.toString();
 	}
 
+	/**
+	 * Resolves parameter list
+	 * 
+	 * @param elist
+	 * @return list, never <code>null</code>
+	 */
+	public List<String> resolveParameterList(AST elist) {
+		List<String> list = new ArrayList<>();
+		if (elist == null) {
+			return list;
+		}
+
+		if (elist.getType() != ELIST) {
+			return list;
+		}
+		resolveParameterList(list, elist);
+
+		return list;
+	}
+
+	private String resolveAsParameterDescription(AST ast) {
+		if (ast == null) {
+			return "";
+		}
+		int type = ast.getType();
+		switch (type) {
+		case STRING_LITERAL:
+		case STRING_CH:
+		case STRING_CONSTRUCTOR:
+		case STRING_NL:
+			return "java.lang.String";
+		case ARRAY_DECLARATOR:
+			return "Object[]";
+		case ELIST:
+			return "java.util.List";
+		case LABELED_ARG:
+			return "java.util.Map";
+		case LITERAL_boolean:
+			return "boolean";
+		case LITERAL_byte:
+			return "byte";
+		case LITERAL_char:
+			return "char";
+		case NUM_BIG_DECIMAL:
+			return "java.math.BigDecimal";
+		case NUM_BIG_INT:
+			return "java.math.BigInteger";
+		case LITERAL_short:
+			return "short";
+		case NUM_INT:
+		case LITERAL_int:
+			return "int";
+		case NUM_FLOAT:
+		case LITERAL_float:
+			return "float";
+		case NUM_LONG:
+		case LITERAL_long:
+			return "long";
+		case NUM_DOUBLE:
+		case LITERAL_double:
+			return "double";
+		case LIST_CONSTRUCTOR:
+			return "java.util.List";
+		case MAP_CONSTRUCTOR:
+			return "java.util.Map";
+		case SPREAD_MAP_ARG:
+			return "java.util.Map";
+		}
+		/* unknown, so return object : name - so after build of model maybe by variable reference check its possible to determine the correct type (in future)*/
+		return "Object:" + resolveAsSimpleString(ast);
+	}
+
+	void resolveParameterList(List<String> list, AST ast) {
+		if (ast == null) {
+			return;
+		}
+		AST firstChild = ast.getFirstChild();
+		if (ast.getType() == GroovyTokenTypes.ELIST) {
+			resolveParameterList(list, firstChild);
+		} else if (ast.getType() == GroovyTokenTypes.METHOD_CALL) {
+			resolveParameterList(list, firstChild);
+		} else if (ast.getType() == GroovyTokenTypes.SL) {
+
+		} else if (ast.getType() == GroovyTokenTypes.DOT) {
+			/* is dot */
+			AST content = firstChild;
+			String simpleString = resolveAsParameterDescription(content);
+			if (simpleString != null) {
+				list.add(simpleString);
+			}
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				int type = next.getType();
+				if (type == GroovyTokenTypes.IDENT) {
+					simpleString = resolveAsParameterDescription(next);
+					if (simpleString != null) {
+						list.add(simpleString);
+					}
+				} else if (type == ELIST) {
+					resolveParameterList(list, next);
+				}else if (type == GroovyTokenTypes.CLOSABLE_BLOCK) {
+					list.add("groovy.lang.Closure");
+				}
+			}
+		} else {
+			/* no dot, so content separated with DOT */
+			String simpleString = resolveAsParameterDescription(ast);
+			if (simpleString != null) {
+				list.add(simpleString);
+			}
+			AST next = ast.getNextSibling();
+			if (next != null) {
+				if (next.getType() == GroovyTokenTypes.IDENT) {
+					simpleString = next.getText();
+					list.add(simpleString);
+				} else {
+					if (next.getType() == GroovyTokenTypes.CLOSABLE_BLOCK) {
+						list.add("groovy.lang.Closure");
+					}
+					if (next.getType() == GroovyTokenTypes.ELIST) {
+						resolveParameterList(list, next);
+					}
+				}
+			}
+
+		}
+	}
 }

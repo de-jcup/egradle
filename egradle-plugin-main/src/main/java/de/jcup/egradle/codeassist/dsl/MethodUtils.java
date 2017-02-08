@@ -1,5 +1,7 @@
 package de.jcup.egradle.codeassist.dsl;
 
+import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +46,73 @@ public class MethodUtils {
 		}
 		signatureSb.append(')');
 		return signatureSb.toString();
+	}
+
+	public static boolean isMethodIdentified(Method method, String itemIdentifier, String ... itemParameters) {
+		if (method==null){
+			return false;
+		}
+		if (itemIdentifier==null){
+			return false;
+		}
+		String methodName = method.getName();
+		if (methodName==null){
+			return false;
+		}
+		if (itemParameters==null){
+			itemParameters=new String[]{};
+		}
+		if (itemIdentifier.equals(methodName) ) {
+			/* name okay, could be ...*/
+			
+			boolean allParamsSame = true;
+			List<Parameter> parameters = method.getParameters();
+			/* check size same */
+			if (parameters.size()!=itemParameters.length){
+				return false;
+			}
+			/* same size */
+			int pos =0;
+			for (Parameter p: parameters) {
+				String itemParam = itemParameters[pos++];
+				if (p==null){
+					/* should never happen */
+					return false;
+				}
+				if (itemParam==null){
+					return false;
+				}
+				/* if item parameter is with color we remove this meta information*/
+				itemParam=StringUtils.substringBefore(itemParam, ":");
+				
+				if (! p.getTypeAsString().equals(itemParam)){
+					allParamsSame=false;
+					break;
+				}
+			}
+			return allParamsSame;
+			
+		}
+		return false;
+	}
+
+	public static boolean hasGroovyClosureAsParameter(Method m) {
+		if (m==null){
+			return false;
+		}
+		List<Parameter> parameters = m.getParameters();
+		if (parameters==null){
+			return false;
+		}
+		for (Parameter p: parameters) {
+			if (p==null){
+				continue;
+			}
+			if (GROOVY_CLOSURE.equals(p.getTypeAsString())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
