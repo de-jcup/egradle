@@ -123,7 +123,11 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			System.out.println("No editor available, would select:" + selection);
 			return;
 		}
-		gradleEditor.openSelectedTreeItemInEditor(selection);
+		/*
+		 * select part in editor - grab focus not necessary, because this will
+		 * close quick outline dialog as well, so editor will get focus back
+		 */
+		gradleEditor.openSelectedTreeItemInEditor(selection, false);
 	}
 
 	/**
@@ -271,11 +275,11 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 		String filterText = text.getText();
 		if (filterText == null) {
 			if (currentUsedFilterText == null) {
-				/* same as before*/
+				/* same as before */
 				return;
 			}
 		} else if (filterText.equals(currentUsedFilterText)) {
-			/* same as before*/
+			/* same as before */
 			return;
 		}
 

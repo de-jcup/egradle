@@ -57,6 +57,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
+import de.jcup.egradle.core.api.TextUtil;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -133,8 +134,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
 				.getPreferenceStore();
 		getSourceViewerDecorationSupport(getSourceViewer()).install(preferenceStoreForDecorationSupport);
-	
-		
+
 		StyledText styledText = getSourceViewer().getTextWidget();
 		styledText.addKeyListener(new GradleBracketInsertionCompleter(this));
 	}
@@ -248,16 +248,41 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 	}
 
-	public void openSelectedTreeItemInEditor(ISelection selection) {
+	/**
+	 * Get document text - safe way.
+	 * @return string, never <code>null</code>
+	 */
+	String getDocumentText() {
+		IDocument doc = getDocument();
+		if (doc == null) {
+			return "";
+		}
+		return doc.get();
+	}
+
+	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus) {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object firstElement = ss.getFirstElement();
 			if (firstElement instanceof Item) {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
-				int length = item.getLength();
+				/*
+				 * Why not using item.getLength() ? Because would makes full
+				 * selection. Why not using item.getName().getLength() ? Because
+				 * can differ to editor part! so... get first word at item
+				 * position
+				 */
+				int length = TextUtil.getLettersOrDigitsAt(offset, getDocumentText()).length();
+				if (length == 0) {
+					/* absolute fall back variant - but should never happen*/
+					length = 1;
+				}
 				ignoreNextCaretMove = true;
 				selectAndReveal(offset, length);
+				if (grabFocus) {
+					setFocus();
+				}
 			}
 		}
 	}
@@ -266,7 +291,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	public void selectAndReveal(int start, int length) {
 		super.selectAndReveal(start, length);
 		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_TEXTS) {
-			setStatusLineMessage("selected range: start=" + start + ", length=" + length);
+			setStatusLineMessage("DEBUG:selected range: start=" + start + ", length=" + length);
 		}
 	}
 

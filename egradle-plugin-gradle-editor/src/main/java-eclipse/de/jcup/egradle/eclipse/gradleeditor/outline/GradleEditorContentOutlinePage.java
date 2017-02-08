@@ -117,11 +117,16 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
+		if (gradleEditor==null){
+			return;
+		}
 		if (linkingWithEditorEnabled){
-			return; // already handled by single click
+			gradleEditor.setFocus();
+			// selection itself is already handled by single click
+			return; 
 		}
 		ISelection selection = event.getSelection();
-		gradleEditor.openSelectedTreeItemInEditor(selection);
+		gradleEditor.openSelectedTreeItemInEditor(selection,true);
 	}
 
 	public void ignoreNextSelectionEvents(boolean ignore) {
@@ -155,7 +160,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 			return;
 		}
 		ISelection selection = event.getSelection();
-		gradleEditor.openSelectedTreeItemInEditor(selection);
+		gradleEditor.openSelectedTreeItemInEditor(selection,false);
 	}
 
 	public void inputChanged(Object input){
