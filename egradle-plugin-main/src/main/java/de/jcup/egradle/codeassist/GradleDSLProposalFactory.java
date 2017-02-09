@@ -1,6 +1,5 @@
 package de.jcup.egradle.codeassist;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -9,7 +8,6 @@ import de.jcup.egradle.codeassist.dsl.CodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
-import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Reason;
@@ -27,7 +25,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	private CodeTemplateBuilder codeTemplateBuilder;
 
 	private GradleLanguageElementEstimater typeEstimator;
-
+	
 	/**
 	 * Creates new gradle dsl proposal factory
 	 * 
@@ -44,6 +42,8 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		}
 		this.typeEstimator = typeEstimator;
 	}
+	
+	
 
 	@Override
 	protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
@@ -134,22 +134,17 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
-			if (mode == TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
-//				if (method.getName().startsWith("get")) {
-//					continue;
-//				}
-//				if (method.getName().startsWith("set")) {
-//					continue;
-//				}
-//
-//				List<Parameter> params = method.getParameters();
-//				if (params.size() == 0) {// currently only supporting closure
-//											// content with at least one param
-//					continue;
-//				}
-
+			if (isIgnoreGetterOrSetter()){
+				if (method.getName().startsWith("get")) {
+					continue;
+				}
+				if (method.getName().startsWith("set")) {
+					continue;
+				}
 			}
-
+			/* TODO ATR, 09.02.2017: what about marking properties as read or write only?
+			 * could be done here, or by xml generation so in xml as attribute available...
+			 */
 			ModelProposal proposal = createModelProposal(result);
 
 			Reason reason = identifiedType.getReasonForMethod(method);

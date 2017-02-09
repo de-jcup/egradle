@@ -57,7 +57,7 @@ import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
-//	private GradleEditorDoubleClickStrategy doubleClickStrategy;
+	// private GradleEditorDoubleClickStrategy doubleClickStrategy;
 	private GradleDefaultTextScanner gradleScanner;
 	private ColorManager colorManager;
 
@@ -67,23 +67,26 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private ContentAssistant contentAssistant;
 	private GradleContentAssistProcessor gradleContentAssistProcessor;
 	private Map<String, GradleTextHover> gradleTextHoverMap = new HashMap<String, GradleTextHover>();
-	
+
 	/**
 	 * Creates configuration by given adaptable
-	 * @param adaptable must provide {@link ColorManager} and {@link IFile}
+	 * 
+	 * @param adaptable
+	 *            must provide {@link ColorManager} and {@link IFile}
 	 */
 	public GradleSourceViewerConfiguration(IAdaptable adaptable) {
-		Assert.isNotNull(adaptable,"adaptable may not be null!"); 
-		this.adaptable=adaptable;
-		this.annotationHoover=new GradleEditorAnnotationHoover();
+		Assert.isNotNull(adaptable, "adaptable may not be null!");
+		this.adaptable = adaptable;
+		this.annotationHoover = new GradleEditorAnnotationHoover();
 
 		this.colorManager = adaptable.getAdapter(ColorManager.class);
-		Assert.isNotNull(colorManager," adaptable must support color manager");
-		this.defaultTextAttribute=new TextAttribute(colorManager.getColor(EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT)));
+		Assert.isNotNull(colorManager, " adaptable must support color manager");
+		this.defaultTextAttribute = new TextAttribute(
+				colorManager.getColor(EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT)));
 
 		/* code completion */
-		this.contentAssistant=new ContentAssistant();
-		this.gradleContentAssistProcessor=new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
+		this.contentAssistant = new ContentAssistant();
+		this.gradleContentAssistProcessor = new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
 		contentAssistant.setContentAssistProcessor(gradleContentAssistProcessor,
 				GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId());
@@ -95,19 +98,22 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 				GradleDocumentIdentifiers.GRADLE_VARIABLE.getId());
 		contentAssistant.addCompletionListener(gradleContentAssistProcessor.getCompletionListener());
 		
+		//contentAssistant.enableColoredLabels(true); - when... ICompletionProposalExtension6 implemented
+
 		/* enable auto activation */
 		contentAssistant.enableAutoActivation(true);
-	
+
 		/* set a propert orientation for proposal */
 		contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 	}
-	
-	@Override
-		public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-			contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
-			return contentAssistant;
-		}
 
+	@Override
+	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+		contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+		return contentAssistant;
+	}
+	
+	
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
 		if (sourceViewer == null)
@@ -120,7 +126,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	public IHyperlinkPresenter getHyperlinkPresenter(ISourceViewer sourceViewer) {
 		return super.getHyperlinkPresenter(sourceViewer);
 	}
-	
+
 	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		/* @formatter:off */
@@ -137,29 +143,30 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		// return doubleClickStrategy;
 		return super.getDoubleClickStrategy(sourceViewer, contentType);
 	}
-	
+
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
-	    return annotationHoover;
+		return annotationHoover;
 	}
 
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+	
 		GradleTextHover gradleTextHover = gradleTextHoverMap.get(contentType);
-		if (gradleTextHover==null){
-			gradleTextHover=new GradleTextHover(this,sourceViewer, contentType);
+		if (gradleTextHover == null) {
+			gradleTextHover = new GradleTextHover(this, sourceViewer, contentType);
 			gradleTextHoverMap.put(contentType, gradleTextHover);
 		}
 		return gradleTextHover;
 	}
-	
-	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover{
+
+	private class GradleEditorAnnotationHoover extends DefaultAnnotationHover {
 		@Override
 		protected boolean isIncluded(Annotation annotation) {
-			if (annotation instanceof MarkerAnnotation){
+			if (annotation instanceof MarkerAnnotation) {
 				return true;
 			}
-			/* we do not support other annotations*/
+			/* we do not support other annotations */
 			return false;
 		}
 	}
@@ -170,22 +177,33 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 		addDefaultPresentation(reconciler);
 
-		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_JAVA_KEYWORD),SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GROOVY_KEYWORD),SWT.BOLD);
-		// Groovy provides different strings: simple and GStrings, so we use separate colors:
-		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(), EDITOR_PREFERENCES.getColor(COLOR_NORMAL_STRING),SWT.NONE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GSTRING.getId(), EDITOR_PREFERENCES.getColor(COLOR_GSTRING),SWT.NONE);
-		
-		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), EDITOR_PREFERENCES.getColor(COLOR_COMMENT),SWT.NONE);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_APPLY_KEYWORD),SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_OTHER_KEYWORD),SWT.BOLD);
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_TASK_KEYWORD),SWT.BOLD|SWT.ITALIC);
-		
-		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_VARIABLE),SWT.ITALIC);
-		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(),  EDITOR_PREFERENCES.getColor(COLOR_JAVA_LITERAL),SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_KEYWORD.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_JAVA_KEYWORD), SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_KEYWORD.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GROOVY_KEYWORD), SWT.BOLD);
+		// Groovy provides different strings: simple and GStrings, so we use
+		// separate colors:
+		addPresentation(reconciler, GradleDocumentIdentifiers.STRING.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_NORMAL_STRING), SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GSTRING.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GSTRING), SWT.NONE);
+
+		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_COMMENT), SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GRADLE_APPLY_KEYWORD), SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GRADLE_OTHER_KEYWORD), SWT.BOLD);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GRADLE_TASK_KEYWORD), SWT.BOLD | SWT.ITALIC);
+
+		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_VARIABLE.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_GRADLE_VARIABLE), SWT.ITALIC);
+		addPresentation(reconciler, GradleDocumentIdentifiers.JAVA_LITERAL.getId(),
+				EDITOR_PREFERENCES.getColor(COLOR_JAVA_LITERAL), SWT.BOLD);
 		return reconciler;
 	}
-	
+
 	private void addDefaultPresentation(PresentationReconciler reconciler) {
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getGradleDefaultTextScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
@@ -198,7 +216,8 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	}
 
 	private void addPresentation(PresentationReconciler reconciler, String id, RGB rgb, int style) {
-		TextAttribute textAttribute = new TextAttribute(colorManager.getColor(rgb),defaultTextAttribute.getBackground(), style);
+		TextAttribute textAttribute = new TextAttribute(colorManager.getColor(rgb),
+				defaultTextAttribute.getBackground(), style);
 		PresentationSupport presentation = new PresentationSupport(textAttribute);
 		reconciler.setDamager(presentation, id);
 		reconciler.setRepairer(presentation, id);
@@ -213,7 +232,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	}
 
 	public void updateTextScannerDefaultColorToken() {
-		if (gradleScanner==null){
+		if (gradleScanner == null) {
 			return;
 		}
 		RGB color = EDITOR_PREFERENCES.getColor(COLOR_NORMAL_TEXT);

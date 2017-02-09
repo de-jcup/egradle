@@ -120,4 +120,16 @@ public class GradleEditorPreferences {
 	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color) {
 		PreferenceConverter.setDefault(getPreferenceStore(), identifiable.getId(), color);
 	}
+
+	public boolean isCodeAssistProposalsEnabled() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_PROPOSALS_ENABLED);
+	}
+	
+	public boolean isCodeAssistNoProposalsForGetterOrSetter() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
+	}
+	
+	public boolean isCodeAssistTooltipsEnabled() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
+	}
 }

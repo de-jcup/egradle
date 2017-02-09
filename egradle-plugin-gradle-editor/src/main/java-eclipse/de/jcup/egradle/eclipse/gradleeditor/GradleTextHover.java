@@ -1,5 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -69,6 +71,10 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 	@Override
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+		if (!EDITOR_PREFERENCES.isCodeAssistTooltipsEnabled()){
+			return null;
+		}
+		
 		HoverData data = null;
 		if (hoverRegion instanceof HoverDataRegion) {
 			HoverDataRegion hdr = (HoverDataRegion) hoverRegion;

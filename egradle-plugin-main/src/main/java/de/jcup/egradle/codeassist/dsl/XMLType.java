@@ -20,6 +20,9 @@ public class XMLType implements Type {
 
 	@XmlAttribute(name = "interface")
 	private boolean _interface;
+	
+	@XmlElement(name = "superClass")
+	private String superClassName;
 
 	@XmlElement(name = "description")
 	private String description;

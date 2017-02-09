@@ -10,16 +10,16 @@ import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
 import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.codeassist.Proposal;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.DefaultEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
-public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
+public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 /*, ICompletionProposalExtension6*/ {
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;
@@ -104,7 +104,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		}
 		return "";
 	}
-
+	
 	@Override
 	public String getAdditionalProposalInfo() {
 		if (lazyBuilder!=null){
@@ -147,4 +147,6 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 			return new DefaultInformationControl(shell, true);
 		}
 	}
+
+
 }

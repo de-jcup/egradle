@@ -21,6 +21,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
+import de.jcup.egradle.codeassist.FilterableProposalFactory;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.Proposal;
@@ -48,7 +49,6 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants;
 
 public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
@@ -144,8 +144,12 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				debugCacheState("proposal computing-2");
 			}
 			cachedProposals.clear();
-
+			boolean filterGetterAndSetter = EDITOR_PREFERENCES.isCodeAssistNoProposalsForGetterOrSetter();
 			for (ProposalFactory proposalFactory : proposalFactories) {
+				if (proposalFactory instanceof FilterableProposalFactory){
+					FilterableProposalFactory fpropFactory = (FilterableProposalFactory) proposalFactory;
+					fpropFactory.setFilterGetterAndSetter(filterGetterAndSetter);
+				}
 				Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
 				cachedProposals.addAll(proposalsOfCurrentFactory);
 			}
@@ -167,7 +171,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private boolean isCodeCompletionEnabled() {
-		return EDITOR_PREFERENCES.getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODECOMPLETION_ENABLED);
+		return EDITOR_PREFERENCES.isCodeAssistProposalsEnabled();
 	}
 
 	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,

@@ -44,6 +44,72 @@ public class ProposalIntegrationTest {
 	}
 	
 	@Test
+	public void buildfile__with_task_in_root__when_cursor_is_after_task_bracket() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test8-task-inside-root.gradle");
+		int offset = calculateIndexEndOf(text,"task myTask {");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+				whichHasReasonType("org.gradle.api.Task").
+		and().
+			containsProposalWithLabel("doFirst(Closure action)").
+				whichHasReasonType("org.gradle.api.Task").
+				whichHasDescription().
+		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void buildfile__with_task_extendending_jar_in_root__when_cursor_is_after_task_bracket() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test9-task-extending-jar-inside-root.gradle");
+		int offset = calculateIndexEndOf(text,"task myTask(type:jar) {");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+				whichHasReasonType("org.gradle.api.Task").
+		and().
+			containsProposalWithLabel("doFirst(Closure action)").
+				whichHasReasonType("org.gradle.api.Task").
+				whichHasDescription().
+		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void buildfile__with_jar_configuration_in_root__when_cursor_is_after_dependencies_bracket() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-10-jar-task-configuration-in-root.gradle");
+		int offset = calculateIndexEndOf(text,"jar {");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+				whichHasReasonType("org.gradle.api.tasks.bundling.Jar").
+		and().
+			containsProposalWithLabel("eachFile(Closure closure)").
+				whichHasReasonType("org.gradle.api.tasks.bundling.Jar").
+				whichHasDescription().
+		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
 	public void buildfile__empty_offset_is_0() {
 		/* prepare */
 		String text = "";

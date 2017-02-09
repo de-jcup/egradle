@@ -31,8 +31,11 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
-public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
-	private BooleanFieldEditor codeCompletionEnabled;
+public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage
+		implements IWorkbenchPreferencePage {
+	private BooleanFieldEditor codeAssistProposalsEnabled;
+	private BooleanFieldEditor codeAssistNoProposalsForGetterOrSetter;
+	private BooleanFieldEditor codeAssistTooltipsEnabled;
 
 	public GradleEditorCodeCompletionPreferencePage() {
 		setPreferenceStore(EDITOR_PREFERENCES.getPreferenceStore());
@@ -46,11 +49,20 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 	@Override
 	protected void createFieldEditors() {
 		Composite parent = getFieldEditorParent();
-		codeCompletionEnabled = new BooleanFieldEditor(P_EDITOR_CODECOMPLETION_ENABLED.getId(),
+		codeAssistProposalsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(),
 				"Code completion enabled", parent);
-		addField(codeCompletionEnabled);
-		
-		Button reloadButton= new Button(parent, SWT.PUSH);
+		addField(codeAssistProposalsEnabled);
+
+		codeAssistNoProposalsForGetterOrSetter = new BooleanFieldEditor(
+				P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), "No proposals for getter or setter",
+				parent);
+		addField(codeAssistNoProposalsForGetterOrSetter);
+
+		codeAssistTooltipsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(),
+				"Code tooltips enabled", parent);
+		addField(codeAssistTooltipsEnabled);
+
+		Button reloadButton = new Button(parent, SWT.PUSH);
 		reloadButton.setText("Clean cache");
 		reloadButton.setToolTipText("Clean cache of code completion ");
 		reloadButton.addSelectionListener(new SelectionAdapter() {
@@ -58,12 +70,13 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 			public void widgetSelected(SelectionEvent e) {
 				Activator activator = Activator.getDefault();
 				CodeCompletionRegistry registry = activator.getCodeCompletionRegistry();
-				if (registry==null){
+				if (registry == null) {
 					return;
 				}
-				registry.rebuild();;
+				registry.rebuild();
+				;
 			}
 		});
 	}
-	
+
 }
