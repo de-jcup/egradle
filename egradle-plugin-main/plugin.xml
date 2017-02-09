@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          KEYWORDS                                    -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.ui.keywords">
+     <keyword
+   		id="egradle.preferences.keyword.egradle"
+   		label="egradle">
+     </keyword>
+   </extension>
    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          MARKER                          			 -->
@@ -326,24 +335,36 @@
             name="EGradle"
             class="de.jcup.egradle.eclipse.preferences.EGradlePreferencePage"
             id="egradle.preferences.EGradlePreferencePage">
+            <keywordReference
+                  id="egradle.preferences.keyword.egradle">
+            </keywordReference>
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
          class="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
          name="Validation"
          category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
          class="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
          name="Decoration"
          category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
        <page
          id="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
          class="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
          name="File handling"
          category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
    </extension>
    <extension

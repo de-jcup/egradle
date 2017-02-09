@@ -2,6 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          KEYWORDS                                    -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.ui.keywords">
+     <keyword
+   		id="egradle.preferences.keyword.egradle"
+   		label="egradle">
+     </keyword>
+   </extension>
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          EDITOR                                      -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
@@ -149,12 +158,18 @@
          class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferencePage"
          name="Editor"
          category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
       <page
          id="egradle.eclipse.gradleeditor.preferences.EGradleEditorSyntaxColorPreferencePage"
          class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferencePage"
          name="Syntax coloring"
          category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
    </extension>
     <extension

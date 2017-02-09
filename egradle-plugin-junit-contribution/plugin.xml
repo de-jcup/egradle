@@ -2,6 +2,16 @@
 <?eclipse version="3.4"?>
 <plugin>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          KEYWORDS                                    -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.ui.keywords">
+     <keyword
+   		id="egradle.preferences.keyword.egradle"
+   		label="egradle">
+     </keyword>
+   </extension>
+
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PREFERENCES                                 -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
@@ -11,6 +21,9 @@
          class="de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferencePage"
          name="JUnit"
          category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
       </page>
    </extension>
     <extension
