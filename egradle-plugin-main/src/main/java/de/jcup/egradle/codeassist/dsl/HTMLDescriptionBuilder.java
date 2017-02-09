@@ -4,29 +4,51 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.crypto.spec.DESedeKeySpec;
-
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
-	
+	/**
+	 * Builds HTML description for given language element
+	 * 
+	 * @param fgColor
+	 * @param bgColor
+	 * @param data
+	 * @param element
+	 * @return description, never <code>null</code>
+	 */
 	public String buildHTMLDescription(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element) {
+		return buildHTMLDescription(fgColor, bgColor, data, element, null);
+	}
+	/**
+	 * Builds HTML description for given language element
+	 * 
+	 * @param fgColor
+	 * @param bgColor
+	 * @param data
+	 * @param element
+	 * @param prefix can be <code>null</code>, otherwise its rendered before first body element
+	 * @return description, never <code>null</code>
+	 */
+	public String buildHTMLDescription(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element, String prefix) {
 		StringBuilder descSb = new StringBuilder();
+		if (prefix!=null){
+			descSb.append(prefix);
+		}
 		if (element instanceof Method) {
 			Method method = (Method) element;
-			descSb.append("<h4>");
+			descSb.append("<div class='fullName'>");
 			appendLinkToParentType(element, descSb,true);
 			String signature = MethodUtils.createSignature(method);
 			descSb.append(signature);
-			descSb.append("</h4>");
+			descSb.append("</div>");
 			descSb.append(method.getDescription());
 			appendLinkToGradleOriginDoc(method, descSb);
 		} else if (element instanceof Property) {
 			Property property = (Property) element;
-			descSb.append("<h4>");
+			descSb.append("<div class='fullName'>");
 			appendLinkToParentType(element, descSb,true);
 			descSb.append(property.getName());
-			descSb.append("</h4>");
+			descSb.append("</div>");
 			descSb.append(property.getDescription());
 			appendLinkToGradleOriginDoc(property, descSb);
 
@@ -34,7 +56,7 @@ public class HTMLDescriptionBuilder {
 			Type type = (Type) element;
 			appendTypeDescription(data, type, descSb);
 		}else{
-			
+			/* do nothing*/
 		}
 		String title = null;
 		if (element!=null){
@@ -76,15 +98,16 @@ public class HTMLDescriptionBuilder {
 			style.append(";");
 		}
 		style.append("}");
-		style.append("pre {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
-		style.append("table {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}");
-		style.append("th {background-color: black;color: #229922;border:solid #999999 2px; }");
-		style.append("tr {background-color: black;color: #999999;border:solid #999999 2px; }");
-//		/style.append("td {background-color: black;color: #999999;border:solid #999999 2px; }");
-		style.append("a {color: #229922;}");
-		style.append(".param {color: #229922;}");
-		style.append(".return {color: #229922;}");
-		style.append(".originLinkURL {font-size:x-small;color: #999999;font-family:'Courier New', Courier, monospace}");
+		style.append("pre {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}\n");
+		style.append("table {background-color: black;color: #999999;border-collapse:separate;border:solid #999999 2px; border-radius:6px; -moz-border-radius:6px;}\n");
+		style.append("th {background-color: black;color: #229922;border:solid #999999 2px; }\n");
+		style.append("tr {background-color: black;color: #999999;border:solid #999999 2px; }\n");
+		style.append("a {color: #229922;}\n");
+		style.append(".fullName{font-weight: bold;white-space: nowrap;font-family:'Courier New', Courier, monospace}\n");
+		style.append(".param {color: #229922;}\n");
+		style.append(".return {color: #229922;}\n");
+		style.append(".warnSmall {color: #ff0000;font-size:small}\n");
+		style.append(".originLinkURL {font-size:x-small;color: #999999;font-family:'Courier New', Courier, monospace}\n");
 		
 		return "<html><head><title>"+title+"</title><style>"+style.toString()+"</style></head><body>" + descSb + "</body></html>";
 	}
@@ -98,13 +121,13 @@ public class HTMLDescriptionBuilder {
 		}
 		if (data != null ) {
 			if (data.isTypeFromExtensionConfigurationPoint()) {
-				description.append("<h4>Extension:" + data.getExtensionName());
-				description.append("</h4>");
+				description.append("<div class='fullName'>Extension:" + data.getExtensionName());
+				description.append("</div>");
 			}
 		}
-		description.append("<h4>");
+		description.append("<div class='fullName'>");
 		description.append(type.getName());
-		description.append("</h4>");
+		description.append("</div>");
 		description.append("<a href='#appendix'>Go to appendix</a>");
 		
 		description.append(type.getDescription());

@@ -139,24 +139,28 @@ public class Item {
 	}
 
 	/**
-	 * Set name and calculate identifier
+	 * Set name and calculate identifier - if you want to explicit set identifer you must it after calling this method via
+	 * {@link #setIdentifier(String)}
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
 		if (name == null) {
-			name="";
+			name = "";
 		}
 		this.name = name;
 		String[] splitted = StringUtils.split(name.trim());
-		if (splitted==null || splitted.length==0){
-			this.identifier="";
-		}else{
+		if (splitted == null || splitted.length == 0) {
+			this.identifier = "";
+		} else {
 			this.identifier = splitted[0];
 		}
 	}
 
 	/**
-	 * Get the name of the item. Can contain additional parts - e.g. "task myTask"
+	 * Get the name of the item. Can contain additional parts - e.g. "task
+	 * myTask"
+	 * 
 	 * @return name
 	 */
 	public String getName() {
@@ -164,7 +168,18 @@ public class Item {
 	}
 
 	/**
-	 * Get the identifier of the item, means name without additional parts - e.g. name="task myTask", identifier="task"
+	 * Be aware: {@link #setName(String)} does change identifier too! Calling this method
+	 * should only be necessary in some special cases!
+	 * @param identifier
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
+	 * Get the identifier of the item, means name without additional parts -
+	 * e.g. name="task myTask", identifier="task"
+	 * 
 	 * @return identifier
 	 */
 	public String getIdentifier() {

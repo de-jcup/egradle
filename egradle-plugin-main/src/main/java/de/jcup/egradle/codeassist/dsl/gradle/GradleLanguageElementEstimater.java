@@ -13,6 +13,13 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.core.model.Item;
+
+/**
+ * Estimates language elements by given items from model
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
 public class GradleLanguageElementEstimater {
 
 	private TypeProvider typeProvider;
@@ -22,59 +29,6 @@ public class GradleLanguageElementEstimater {
 			throw new IllegalArgumentException("provider may not be null");
 		}
 		this.typeProvider = provider;
-	}
-
-	public enum TypeContext {
-		PARENT_TYPE_IS_METHODCALL, PARENT_TYPE_IS_CONFIGURATION_CLOSURE, UNKNOWN
-	}
-
-	public class EstimationResult implements LanguageElementMetaData {
-		private LanguageElement element;
-		private TypeContext mode;
-		private String extensionName;
-
-		/* (non-Javadoc)
-		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#isTypeFromExtensionConfigurationPoint()
-		 */
-		@Override
-		public boolean isTypeFromExtensionConfigurationPoint() {
-			return extensionName != null;
-		}
-
-		/* (non-Javadoc)
-		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#getExtensionName()
-		 */
-		@Override
-		public String getExtensionName() {
-			return extensionName;
-		}
-
-		public LanguageElement getElement() {
-			return element;
-		}
-
-		public TypeContext getMode() {
-			return mode;
-		}
-
-		public Type getElementType() {
-			if (element instanceof Type) {
-				Type type = (Type) element;
-				return type;
-
-			} else if (element instanceof Method) {
-				Method m = (Method) element;
-				if (mode==TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE){
-					return m.getDelegationTarget();
-				}
-				return m.getReturnType();
-			} else if (element instanceof Property) {
-				Property p = (Property) element;
-				return p.getType();
-			}
-			return null;
-
-		}
 	}
 
 	/**
@@ -126,6 +80,7 @@ public class GradleLanguageElementEstimater {
 		InternalEstimationData current = new InternalEstimationData();
 		current.type = rootType;
 		String extensionName = null;
+		double averagePercentage = 100;
 		while (pathIterator.hasNext()) {
 			extensionName = null;
 			Item currentPathItem = pathIterator.next();
@@ -150,25 +105,31 @@ public class GradleLanguageElementEstimater {
 			if (found == null) {
 				found = findByProperties(current.type, currentPathItem);
 			}
+			int currentReliability;
 			if (found != null) {
 				current = found;
-
+				currentReliability=current.percent;
 				result.mode = currentMode;
-
+			}else{
+				currentReliability=0;
 			}
+			/* make average reliability */
+			if (averagePercentage<99){
+				double formerProblemPercent = 100-averagePercentage;
+				currentReliability-=formerProblemPercent;
+			}
+			averagePercentage+=currentReliability;
+			averagePercentage/=2;
+			
 			if (current.type == null) {
 				break;
 			}
 		}
 		result.extensionName = extensionName;
 		result.element = current.element;
+		result.reliability = averagePercentage;
 
 		return result;
-	}
-
-	private class InternalEstimationData {
-		private Type type;
-		private LanguageElement element;
 	}
 
 	private InternalEstimationData findByProperties(Type currentType, Item item) {
@@ -238,25 +199,124 @@ public class GradleLanguageElementEstimater {
 		if (checkItemName==null) {
 			return null;
 		}
+
+		MethodIdentificationData idData = new MethodIdentificationData();
+		
 		for (Method m : currentType.getMethods()) {
 			boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(m);
 			if (hasGroovyClosureAsParameter != item.isClosureBlock()){
 				/* different, so not compatible! speed guard close...*/
 				continue;
 			}
-			if (MethodUtils.isMethodIdentified(m,checkItemName, item.getParameters())){
-				InternalEstimationData r = new InternalEstimationData();
-				if (hasGroovyClosureAsParameter){
-					r.type = m.getDelegationTarget();
-				}else{
-					r.type = m.getReturnType();
-				}
-				r.element = m;
-				return r;
+			int percent = MethodUtils.calculateMethodIdentificationPercentage(m,checkItemName, item.getParameters());
+			if (percent==100){
+				return createEstimationData(m, hasGroovyClosureAsParameter,percent);
+			}
+			if (percent>idData.percent){
+				idData.percent=percent;
+				idData.method=m;
 			}
 			
 		}
+		
+		/* no 100% reached */
+		if(idData.method!=null){
+			if (idData.percent>=50){
+				boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(idData.method);
+				return createEstimationData(idData.method, hasGroovyClosureAsParameter,idData.percent);
+			}
+		}
+		
 		return null;
+	}
+
+	private InternalEstimationData createEstimationData(Method m, boolean hasGroovyClosureAsParameter, int percent) {
+		InternalEstimationData r = new InternalEstimationData();
+		if (hasGroovyClosureAsParameter){
+			r.type = m.getDelegationTarget();
+		}else{
+			r.type = m.getReturnType();
+		}
+		r.element = m;
+		r.percent=percent;
+		return r;
+	}
+	
+	private class MethodIdentificationData{
+		private int percent;
+		private Method method;
+	}
+
+	public enum TypeContext {
+		PARENT_TYPE_IS_METHODCALL, 
+		
+		PARENT_TYPE_IS_CONFIGURATION_CLOSURE, 
+		
+		UNKNOWN
+	}
+
+	public class EstimationResult implements LanguageElementMetaData {
+		private double reliability;
+		private LanguageElement element;
+		private TypeContext mode;
+		private String extensionName;
+	
+		/* (non-Javadoc)
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#isTypeFromExtensionConfigurationPoint()
+		 */
+		@Override
+		public boolean isTypeFromExtensionConfigurationPoint() {
+			return extensionName != null;
+		}
+		
+		/**
+		 * Returns reliability in percentage
+		 * @return reliability of estimation
+		 */
+		public double getReliability() {
+			return reliability;
+		}
+	
+		/* (non-Javadoc)
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#getExtensionName()
+		 */
+		@Override
+		public String getExtensionName() {
+			return extensionName;
+		}
+	
+		public LanguageElement getElement() {
+			return element;
+		}
+	
+		public TypeContext getMode() {
+			return mode;
+		}
+	
+		public Type getElementType() {
+			if (element instanceof Type) {
+				Type type = (Type) element;
+				return type;
+	
+			} else if (element instanceof Method) {
+				Method m = (Method) element;
+				if (mode==TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE){
+					return m.getDelegationTarget();
+				}
+				return m.getReturnType();
+			} else if (element instanceof Property) {
+				Property p = (Property) element;
+				return p.getType();
+			}
+			return null;
+	
+		}
+	}
+
+	private class InternalEstimationData {
+		public int percent;
+		private Type type;
+		private LanguageElement element;
 	}
 
 }

@@ -92,7 +92,7 @@ public class MethodUtilsTest {
 		when(method.getName()).thenReturn("myMethod");
 
 		/* execute + test */
-		assertTrue(MethodUtils.isMethodIdentified(method,"myMethod"));
+		assert100Percent(MethodUtils.calculateMethodIdentificationPercentage(method,"myMethod"));
 	}
 	
 	@Test
@@ -101,7 +101,7 @@ public class MethodUtilsTest {
 		when(method.getName()).thenReturn("myMethod");
 
 		/* execute + test */
-		assertFalse(MethodUtils.isMethodIdentified(method,"otherMethod"));
+		assertNoPercent(MethodUtils.calculateMethodIdentificationPercentage(method,"otherMethod"));
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class MethodUtilsTest {
 		parameters.add(param1);
 
 		/* execute + test */
-		assertTrue("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "String"));
+		assert100Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "String"));
 	}
 	
 	@Test
@@ -127,7 +127,7 @@ public class MethodUtilsTest {
 		parameters.add(param1);
 
 		/* execute + test */
-		assertFalse("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod"));
+		assert50Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod"));
 	}
 	
 	@Test
@@ -140,7 +140,7 @@ public class MethodUtilsTest {
 		parameters.add(param1);
 
 		/* execute + test */
-		assertFalse("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "Object"));
+		assert50Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "Object"));
 	}
 	
 	@Test
@@ -153,7 +153,7 @@ public class MethodUtilsTest {
 		parameters.add(param1);
 
 		/* execute + test */
-		assertTrue("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "Object:text"));
+		assert100Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "Object:text"));
 	}
 
 	@Test
@@ -171,7 +171,7 @@ public class MethodUtilsTest {
 		parameters.add(param2);
 
 		/* execute + test */
-		assertTrue("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "String", "Object"));
+		assert100Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "String", "Object"));
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class MethodUtilsTest {
 		parameters.add(param3);
 
 		/* execute + test */
-		assertTrue("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "String", "Object","int"));
+		assert100Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "String", "Object","int"));
 	}
 	
 	@Test
@@ -217,10 +217,12 @@ public class MethodUtilsTest {
 		parameters.add(param3);
 
 		/* execute + test */
-		assertFalse("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "String", "int","Object"));
-		assertFalse("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "Object", "String", "Object"));
+		assertPercent(66, MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "String", "int","Object"));
+		assert50Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "Object", "String", "Object"));
 	}
 	
+	
+
 	@Test
 	public void isMethodIdentified_method_myMethod_with_param1_String_name_param2_Object_data_param3_int_size__NOT_when_another_argument_given() {
 		/* prepare */
@@ -241,7 +243,7 @@ public class MethodUtilsTest {
 		parameters.add(param3);
 
 		/* execute + test */
-		assertFalse("myMethod(String name)", MethodUtils.isMethodIdentified(method, "myMethod", "String", "Object", "int", "String"));
+		assert50Percent(MethodUtils.calculateMethodIdentificationPercentage(method, "myMethod", "String", "Object", "int", "String"));
 	}
 	
 	@Test
@@ -288,5 +290,21 @@ public class MethodUtilsTest {
 		
 		/* execute + test */
 		assertTrue(MethodUtils.hasGroovyClosureAsParameter(method));
+	}
+	
+	private void assertPercent(int percent,int calculatedPercentage) {
+		assertEquals("Percentage differs", percent, calculatedPercentage);
+	}
+
+	private void assert50Percent(int calculatedPercentage) {
+		assertPercent(50, calculatedPercentage);
+	}
+	
+	private void assert100Percent(int calculatedPercentage) {
+		assertPercent(100, calculatedPercentage);
+	}
+
+	private void assertNoPercent(int calculatedPercentage) {
+		assertPercent(0, calculatedPercentage);
 	}
 }

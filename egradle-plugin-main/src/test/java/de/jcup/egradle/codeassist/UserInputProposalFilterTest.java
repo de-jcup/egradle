@@ -37,10 +37,10 @@ public class UserInputProposalFilterTest {
 
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getCode()).thenReturn("file");
+		when(mockedProposal1.getLabel()).thenReturn("file");
 
 		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getCode()).thenReturn("xile");
+		when(mockedProposal2.getLabel()).thenReturn("xile");
 
 		list.add(mockedProposal1);
 		list.add(mockedProposal2);
@@ -60,10 +60,10 @@ public class UserInputProposalFilterTest {
 
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getCode()).thenReturn("file");
+		when(mockedProposal1.getLabel()).thenReturn("file");
 
 		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getCode()).thenReturn("xile");
+		when(mockedProposal2.getLabel()).thenReturn("xile");
 
 		list.add(mockedProposal1);
 		list.add(mockedProposal2);
@@ -83,10 +83,10 @@ public class UserInputProposalFilterTest {
 
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getCode()).thenReturn("file");
+		when(mockedProposal1.getLabel()).thenReturn("file");
 
 		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getCode()).thenReturn("xile");
+		when(mockedProposal2.getLabel()).thenReturn("xile");
 
 		list.add(mockedProposal1);
 		list.add(mockedProposal2);
@@ -106,13 +106,13 @@ public class UserInputProposalFilterTest {
 
 		Set<Proposal> list = new LinkedHashSet<>();
 		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getCode()).thenReturn("file");
+		when(mockedProposal1.getLabel()).thenReturn("file");
 
 		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getCode()).thenReturn("xile");
+		when(mockedProposal2.getLabel()).thenReturn("xile");
 
 		Proposal mockedProposal3 = mock(Proposal.class);
-		when(mockedProposal3.getCode()).thenReturn("affiliate");
+		when(mockedProposal3.getLabel()).thenReturn("affiliate");
 
 		list.add(mockedProposal1);
 		list.add(mockedProposal2);

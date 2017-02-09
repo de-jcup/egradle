@@ -18,6 +18,7 @@ import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.codeassist.hover.HoverData;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.model.Model;
@@ -85,10 +86,11 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		if (data.getItem() == null) {
 			return null;
 		}
-		if (data.getResult() == null) {
+		EstimationResult dataEstimationResult = data.getResult();
+		if (dataEstimationResult == null) {
 			return null;
 		}
-		LanguageElement element = data.getResult().getElement();
+		LanguageElement element = dataEstimationResult.getElement();
 		if (element == null) {
 			return null;
 		}
@@ -109,7 +111,12 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			}
 			
 		}
-		return builder.buildHTMLDescription(fgColor, bgColor ,data, element);
+		String prefix = null;
+		double reliability = dataEstimationResult.getReliability();
+		if (reliability<80){
+			prefix="<div class='warnSmall'>This type estimation has a reliability of:"+reliability+"</div>";
+		}
+		return builder.buildHTMLDescription(fgColor, bgColor ,data, element, prefix);
 	}
 
 	private class HoverDataRegion implements IRegion {

@@ -108,11 +108,6 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	@Override
 	public String getAdditionalProposalInfo() {
 		if (lazyBuilder!=null){
-			
-			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
-				System.out.println(getClass().getSimpleName()+":lazyBuilder creating html called!");
-			}
-			
 			return lazyBuilder.createHTML();
 		}
 		return fAdditionalProposalInfo;

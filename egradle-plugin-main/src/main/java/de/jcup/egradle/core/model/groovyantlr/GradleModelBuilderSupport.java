@@ -124,8 +124,11 @@ class GradleModelBuilderSupport {
 			return item;
 		}
 		String depencyName = resolveAsSimpleString(configurationParameter);
+		String methodName = resolveAsSimpleString(methodCall,true);
 		item.setConfiguration(configuration.getText());
 		item.setName(depencyName);
+		item.setIdentifier(methodName);
+		
 		return item;
 	}
 
@@ -250,8 +253,21 @@ class GradleModelBuilderSupport {
 		resolveName(sb, ast);
 		return sb.toString();
 	}
-
+	/**
+	 * Will NOT resolve method call names! (does it not greedy...)
+	 * @param ast
+	 * @return
+	 */
 	String resolveAsSimpleString(AST ast) {
+		return resolveAsSimpleString(ast,false);
+	}
+	/**
+	 * Resolve AST parts as simple string 
+	 * @param ast
+	 * @param greedy - if true, even method call's etc. are resolved!
+	 * @return string
+	 */
+	String resolveAsSimpleString(AST ast, boolean greedy) {
 		if (ast == null) {
 			return "";
 		}
@@ -261,6 +277,9 @@ class GradleModelBuilderSupport {
 		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
 			return resolveStringOfFirstChildAndSiblings(ast);
 		} else if (GroovyTokenTypes.METHOD_CALL == type) {
+			if (greedy){
+				return resolveStringOfFirstChildAndSiblings(ast);
+			}
 			return "";
 		} else {
 

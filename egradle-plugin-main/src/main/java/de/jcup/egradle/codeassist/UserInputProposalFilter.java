@@ -45,7 +45,8 @@ public class UserInputProposalFilter {
 		String enteredLowerCased = entered.toLowerCase();
 		Set<Proposal> filteredResult = new LinkedHashSet<>();
 		for (Proposal proposal : proposals) {
-			String codeLowerCased = proposal.getLabel().toLowerCase();
+			String label = proposal.getLabel();
+			String codeLowerCased = label.toLowerCase();
 			if (codeLowerCased.indexOf(enteredLowerCased) != -1) {
 				filteredResult.add(proposal);
 			}

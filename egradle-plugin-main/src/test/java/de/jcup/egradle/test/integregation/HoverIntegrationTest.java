@@ -32,6 +32,19 @@ public class HoverIntegrationTest {
 	}
 	
 	@Test
+	public void buildfile__with_dependencies_in_root__when_cursor_is_at_gradleApi_offset_exactly__has_correct_hoverdata() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test7-dependencies-block-inside-root-with-gradleApi.gradle");
+		int offset = text.indexOf("gradleApi");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForMethod("org.gradle.api.artifacts.dsl.DependencyHandler.gradleApi");
+	}
+	
+	@Test
 	public void buildfile__with_dependencies_in_root__when_cursor_is_at_dependencies_offset_negative_one__no_hoverdata() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test1-dependencies-block-inside-root.gradle");
