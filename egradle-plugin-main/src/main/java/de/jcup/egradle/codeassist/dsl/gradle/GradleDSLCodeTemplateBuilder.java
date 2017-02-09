@@ -124,7 +124,6 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 				}
 			}
 		}
-		method.getParameters();
 		return sb.toString();
 	}
 

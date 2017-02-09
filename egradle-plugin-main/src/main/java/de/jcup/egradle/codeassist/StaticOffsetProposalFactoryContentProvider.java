@@ -37,10 +37,10 @@ public class StaticOffsetProposalFactoryContentProvider implements ProposalFacto
 		this.modelProvider = modelProvider;
 		this.textProvider = textProvider;
 		this.codeCutter = codeCutter;
-		this.length = offset - offsetOfFirstCharacterInLine;
 		try {
-			this.lineTextBeforeCursorPosition = textProvider.getText(offsetOfFirstCharacterInLine, length);
 			offsetOfFirstCharacterInLine = textProvider.getLineOffset(offset);
+			this.length = offset - offsetOfFirstCharacterInLine;
+			this.lineTextBeforeCursorPosition = textProvider.getText(offsetOfFirstCharacterInLine, length);
 		} catch (TextProviderException e) {
 			throw new ProposalFactoryContentProviderException("Cannot get line text before cursor position",e);
 		}
