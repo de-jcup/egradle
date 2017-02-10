@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.InvalidModelRuleException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.InvalidModelRuleException" version="3.0" superType="org.gradle.api.GradleException"><description> 
  Thrown when there is a problem with the usage of a model rule. 
  &lt;p&gt; 
  This exception is different to &lt;a href='type://InvalidModelRuleDeclarationException'&gt;InvalidModelRuleDeclarationException&lt;/a&gt; in that it signifies a problem 

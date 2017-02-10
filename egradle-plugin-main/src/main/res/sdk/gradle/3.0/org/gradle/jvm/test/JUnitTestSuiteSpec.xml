@@ -2,4 +2,4 @@
  Represents a JUnit test suite. 
  
  @since 2.11 
-</description><method name="setjUnitVersion" returnType="void"><parameter type="java.lang.String" name="junitVersion"/></method><method name="getjUnitVersion" returnType="java.lang.String"/><property name="jUnitVersion" type="java.lang.String"/></type>
+</description><method name="getjUnitVersion" returnType="java.lang.String"/><method name="setjUnitVersion" returnType="void"><parameter type="java.lang.String" name="junitVersion"/></method><property name="jUnitVersion" type="java.lang.String"/></type>

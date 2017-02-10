@@ -17,19 +17,15 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level The log level to route System.out to. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/></method><method name="getStandardOutputCaptureLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
- Returns the log level that output written to System.out will be mapped to. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard output capture is disabled. 
-</description></method><method name="getLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/></method><method name="getLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
  Returns the current logging level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The current logging level. 
-</description></method><property name="standardErrorCaptureLevel" type="org.gradle.api.logging.LogLevel"><description> 
- Returns the log level that output written to System.err will be mapped to. 
+</description></method><method name="getStandardOutputCaptureLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
+ Returns the log level that output written to System.out will be mapped to. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard error capture is disabled. 
-</description></property><property name="level" type="org.gradle.api.logging.LogLevel"><description> 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard output capture is disabled. 
+</description></method><property name="level" type="org.gradle.api.logging.LogLevel"><description> 
  Returns the current logging level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The current logging level. 
@@ -37,4 +33,8 @@
  Returns the log level that output written to System.out will be mapped to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard output capture is disabled. 
+</description></property><property name="standardErrorCaptureLevel" type="org.gradle.api.logging.LogLevel"><description> 
+ Returns the log level that output written to System.err will be mapped to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard error capture is disabled. 
 </description></property></type>

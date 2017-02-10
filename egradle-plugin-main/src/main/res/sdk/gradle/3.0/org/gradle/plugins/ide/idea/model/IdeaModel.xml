@@ -3,34 +3,34 @@
  First point of entry when it comes to customizing the IDEA generation. 
  &lt;p&gt; 
  See the examples in docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; or &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description><method name="getProject" returnType="org.gradle.plugins.ide.idea.model.IdeaProject" delegationTarget="IdeaProject"><description> 
- Configures IDEA project information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></method><method name="setTargetVersion" returnType="void"><parameter type="java.lang.String" name="targetVersion"/></method><method name="pathVariables" returnType="void" delegationTarget="IdeaModule"><description> 
- Adds path variables to be used for replacing absolute paths in resulting files (*.iml, etc.). &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pathVariables A map with String-&gt;File pairs. 
-</description><parameter type="java.util.Map" name="pathVariables"/></method><method name="setModule" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaModule" name="module"/></method><method name="getTargetVersion" returnType="java.lang.String"><description> 
- Configures the target IDEA version. 
-</description></method><method name="setWorkspace" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaWorkspace" name="workspace"/></method><method name="getWorkspace" returnType="org.gradle.plugins.ide.idea.model.IdeaWorkspace" delegationTarget="IdeaWorkspace"><description> 
- Configures IDEA workspace information. 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
-</description></method><method name="workspace" returnType="void" delegationTarget="IdeaWorkspace"><description> 
- Configures IDEA workspace information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="module" returnType="void" delegationTarget="IdeaModule"><description> 
+</description><method name="module" returnType="void" delegationTarget="IdeaModule"><description> 
  Configures IDEA module information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
 </description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getModule" returnType="org.gradle.plugins.ide.idea.model.IdeaModule" delegationTarget="IdeaModule"><description> 
  Configures IDEA module information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
+</description></method><method name="setModule" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaModule" name="module"/></method><method name="getWorkspace" returnType="org.gradle.plugins.ide.idea.model.IdeaWorkspace" delegationTarget="IdeaWorkspace"><description> 
+ Configures IDEA workspace information. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
+</description></method><method name="getTargetVersion" returnType="java.lang.String"><description> 
+ Configures the target IDEA version. 
+</description></method><method name="setWorkspace" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaWorkspace" name="workspace"/></method><method name="workspace" returnType="void" delegationTarget="IdeaWorkspace"><description> 
+ Configures IDEA workspace information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setProject" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaProject" name="project"/></method><method name="pathVariables" returnType="void" delegationTarget="IdeaModule"><description> 
+ Adds path variables to be used for replacing absolute paths in resulting files (*.iml, etc.). &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pathVariables A map with String-&gt;File pairs. 
+</description><parameter type="java.util.Map" name="pathVariables"/></method><method name="getProject" returnType="org.gradle.plugins.ide.idea.model.IdeaProject" delegationTarget="IdeaProject"><description> 
+ Configures IDEA project information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description></method><method name="project" returnType="void" delegationTarget="IdeaProject"><description> 
  Configures IDEA project information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setProject" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaProject" name="project"/></method><property name="project" type="org.gradle.plugins.ide.idea.model.IdeaProject"><description> 
- Configures IDEA project information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></property><property name="targetVersion" type="java.lang.String"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setTargetVersion" returnType="void"><parameter type="java.lang.String" name="targetVersion"/></method><property name="targetVersion" type="java.lang.String"><description> 
  Configures the target IDEA version. 
+</description></property><property name="module" type="org.gradle.plugins.ide.idea.model.IdeaModule"><description> 
+ Configures IDEA module information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
+</description></property><property name="project" type="org.gradle.plugins.ide.idea.model.IdeaProject"><description> 
+ Configures IDEA project information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description></property><property name="workspace" type="org.gradle.plugins.ide.idea.model.IdeaWorkspace"><description> 
  Configures IDEA workspace information. 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
-</description></property><property name="module" type="org.gradle.plugins.ide.idea.model.IdeaModule"><description> 
- Configures IDEA module information. &lt;p&gt; For examples see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
 </description></property></type>

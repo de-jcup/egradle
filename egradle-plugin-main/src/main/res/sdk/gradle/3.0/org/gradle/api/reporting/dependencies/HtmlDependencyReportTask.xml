@@ -18,18 +18,18 @@
  The report is generated in the &lt;code&gt;build/reports/project/dependencies&lt;/code&gt; directory by default. 
  This can also be changed by setting the &lt;code&gt;outputDirectory&lt;/code&gt; 
  property. 
-</description><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/><method name="getProjects" returnType="java.util.Set"><description> 
+</description><method name="getProjects" returnType="java.util.Set"><description> 
  Returns the set of projects to generate a report for. By default, the report is generated for the task's 
  containing project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files. 
-</description></method><method name="isSatisfiedBy" returnType="boolean"><parameter type="org.gradle.api.Task" name="element"/></method><method name="generate" returnType="void"/><method name="reports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="reports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setProjects" returnType="void"><description> 
+</description></method><method name="reports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="reports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"><parameter type="groovy.lang.Closure" name="closure"/></method><method name="isSatisfiedBy" returnType="boolean"><parameter type="org.gradle.api.Task" name="element"/></method><method name="getReports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"/><method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/><method name="setProjects" returnType="void"><description> 
  Specifies the set of projects to generate this report for. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projects The set of projects. Must not be null. 
-</description><parameter type="java.util.Set" name="projects"/></method><method name="getVersionSelectorScheme" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/><method name="getReports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"/><property name="projects" type="java.util.Set"><description> 
+</description><parameter type="java.util.Set" name="projects"/></method><method name="generate" returnType="void"/><method name="getVersionSelectorScheme" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/><property name="reports" type="org.gradle.api.reporting.dependencies.DependencyReportContainer"/><property name="projects" type="java.util.Set"><description> 
  Returns the set of projects to generate a report for. By default, the report is generated for the task's 
  containing project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files. 
-</description></property><property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/><property name="reports" type="org.gradle.api.reporting.dependencies.DependencyReportContainer"/><property name="satisfiedBy" type="boolean"/><property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/></type>
+</description></property><property name="satisfiedBy" type="boolean"/><property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/><property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/></type>

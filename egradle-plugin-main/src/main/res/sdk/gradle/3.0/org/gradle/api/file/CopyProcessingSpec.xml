@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.CopyProcessingSpec" version="3.0"><description> 
  Specifies the destination of a copy. 
 </description><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
- Renames files based on a regular expression. See &lt;a href='type://CopyProcessingSpec#rename(String, String)'&gt;#rename(String, String)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceRegEx Source regular expression 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;replaceWith Replacement string (use $ syntax for capture groups) 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.util.regex.Pattern" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
  Renames a source file. The function will be called with a single parameter, the name of the file. 
  The function should return a new target name. The function may return null, 
  in which case the original name will be used. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;renamer rename function 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.Transformer" name="renamer"/></method><method name="setFileMode" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="null"><description> 
+</description><parameter type="org.gradle.api.Transformer" name="renamer"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
+ Renames files based on a regular expression. See &lt;a href='type://CopyProcessingSpec#rename(String, String)'&gt;#rename(String, String)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceRegEx Source regular expression 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;replaceWith Replacement string (use $ syntax for capture groups) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.util.regex.Pattern" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="setFileMode" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="null"><description> 
  Sets the Unix permissions to use for the target files. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
  permissions are preserved. It is dependent on the copy action implementation whether these permissions 
  will actually be applied. 
@@ -27,33 +27,25 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mode The directory permissions. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Integer" name="mode"/></method><method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
- Adds an action to be applied to each file as it is about to be copied into its destination. The action can change 
- the destination path of the file, filter the contents of the file, or exclude the file from the result entirely. 
- Actions are executed in the order added, and are inherited from the parent spec. 
+</description><parameter type="java.lang.Integer" name="mode"/></method><method name="getDirMode" returnType="java.lang.Integer" delegationTarget="null"><description> 
+ Returns the Unix permissions to use for the target directories. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
+ permissions are preserved. It is dependent on the copy action implementation whether these permissions 
+ will actually be applied. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
- Adds an action to be applied to each file as it about to be copied into its destination. The given closure is 
- called with a &lt;a href='type://org.gradle.api.file.FileCopyDetails'&gt;org.gradle.api.file.FileCopyDetails&lt;/a&gt; as its parameter. Actions are executed in the order 
- added, and are inherited from the parent spec. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory permissions, or &lt;a href='type://null'&gt;null&lt;/a&gt; if existing permissions should be preserved. 
+</description></method><method name="into" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
+ Specifies the destination directory for a copy. The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The action to execute. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
+</description><parameter type="java.lang.Object" name="destPath"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
  Renames a source file. The closure will be called with a single parameter, the name of the file. 
  The closure should return a String object with a new target name. The closure may return null, 
  in which case the original name will be used. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure rename closure 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="into" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
- Specifies the destination directory for a copy. The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="destPath"/></method><method name="getFileMode" returnType="java.lang.Integer" delegationTarget="null"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getFileMode" returnType="java.lang.Integer" delegationTarget="null"><description> 
  Returns the Unix permissions to use for the target files. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
  permissions are preserved. It is dependent on the copy action implementation whether these permissions 
  will actually be applied. 
@@ -73,22 +65,30 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceRegEx Source regular expression 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;replaceWith Replacement string (use $ syntax for capture groups) 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.String" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="getDirMode" returnType="java.lang.Integer" delegationTarget="null"><description> 
+</description><parameter type="java.lang.String" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
+ Adds an action to be applied to each file as it is about to be copied into its destination. The action can change 
+ the destination path of the file, filter the contents of the file, or exclude the file from the result entirely. 
+ Actions are executed in the order added, and are inherited from the parent spec. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
+ Adds an action to be applied to each file as it about to be copied into its destination. The given closure is 
+ called with a &lt;a href='type://org.gradle.api.file.FileCopyDetails'&gt;org.gradle.api.file.FileCopyDetails&lt;/a&gt; as its parameter. Actions are executed in the order 
+ added, and are inherited from the parent spec. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The action to execute. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><property name="dirMode" type="java.lang.Integer"><description> 
  Returns the Unix permissions to use for the target directories. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
  permissions are preserved. It is dependent on the copy action implementation whether these permissions 
  will actually be applied. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory permissions, or &lt;a href='type://null'&gt;null&lt;/a&gt; if existing permissions should be preserved. 
-</description></method><property name="fileMode" type="java.lang.Integer"><description> 
+</description></property><property name="fileMode" type="java.lang.Integer"><description> 
  Returns the Unix permissions to use for the target files. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
  permissions are preserved. It is dependent on the copy action implementation whether these permissions 
  will actually be applied. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file permissions, or &lt;a href='type://null'&gt;null&lt;/a&gt; if existing permissions should be preserved. 
-</description></property><property name="dirMode" type="java.lang.Integer"><description> 
- Returns the Unix permissions to use for the target directories. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 
- permissions are preserved. It is dependent on the copy action implementation whether these permissions 
- will actually be applied. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory permissions, or &lt;a href='type://null'&gt;null&lt;/a&gt; if existing permissions should be preserved. 
 </description></property></type>

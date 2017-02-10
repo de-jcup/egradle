@@ -27,13 +27,29 @@
  &lt;/pre&gt; 
  
  @since 1.3 
-</description><method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler"><description> 
- The container of possible repositories to publish to. 
+</description><method name="publications" returnType="void" delegationTarget="ivy.xml"><description> 
+ Configures the publications of this project. 
  &lt;p&gt; 
- See &lt;a href='type://PublishingExtension#repositories(org.gradle.api.Action)'&gt;#repositories(org.gradle.api.Action)&lt;/a&gt; for more information. 
+ The publications container defines the outgoing publications of the project. That is, the consumable representations of things produced 
+ by building the project. An example of a publication would be an Ivy Module (i.e. &lt;a href='type://ivy.xml'&gt;ivy.xml&lt;/a&gt; and artifacts), or 
+ Maven Project (i.e. &lt;a href='type://pom.xml'&gt;pom.xml&lt;/a&gt; and artifacts). 
+ &lt;p&gt; 
+ Actual publication implementations and the ability to create them are provided by different plugins. The “publishing” plugin itself does not provide any publication types. 
+ For example, given that the 'maven-publish' plugin provides a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; type, you can create a publication like: 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: 'maven-publish' 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to. 
-</description></method><method name="getPublications" returnType="org.gradle.api.publish.PublicationContainer"><description> 
+ publishing { 
+       // Configure the publication here 
+     } 
+   } 
+ } 
+ &lt;/pre&gt; 
+ &lt;p&gt; 
+ Please see &lt;a href='type://org.gradle.api.publish.ivy.IvyPublication'&gt;org.gradle.api.publish.ivy.IvyPublication&lt;/a&gt; and &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; for more information on publishing in these specific formats. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The action or closure to configure the publications with. 
+</description><parameter type="org.gradle.api.Action" name="configure"/></method><method name="getPublications" returnType="org.gradle.api.publish.PublicationContainer"><description> 
  The publications of the project. 
  &lt;p&gt; 
  See &lt;a href='type://PublishingExtension#publications(org.gradle.api.Action)'&gt;#publications(org.gradle.api.Action)&lt;/a&gt; for more information. 
@@ -60,29 +76,13 @@
  for information on how this can be used for publishing to Ivy repositories. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The action to configure the container of repositories with. 
-</description><parameter type="org.gradle.api.Action" name="configure"/></method><method name="publications" returnType="void" delegationTarget="ivy.xml"><description> 
- Configures the publications of this project. 
+</description><parameter type="org.gradle.api.Action" name="configure"/></method><method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler"><description> 
+ The container of possible repositories to publish to. 
  &lt;p&gt; 
- The publications container defines the outgoing publications of the project. That is, the consumable representations of things produced 
- by building the project. An example of a publication would be an Ivy Module (i.e. &lt;a href='type://ivy.xml'&gt;ivy.xml&lt;/a&gt; and artifacts), or 
- Maven Project (i.e. &lt;a href='type://pom.xml'&gt;pom.xml&lt;/a&gt; and artifacts). 
- &lt;p&gt; 
- Actual publication implementations and the ability to create them are provided by different plugins. The “publishing” plugin itself does not provide any publication types. 
- For example, given that the 'maven-publish' plugin provides a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; type, you can create a publication like: 
- &lt;pre autoTested="true"&gt; 
- apply plugin: 'maven-publish' 
+ See &lt;a href='type://PublishingExtension#repositories(org.gradle.api.Action)'&gt;#repositories(org.gradle.api.Action)&lt;/a&gt; for more information. 
  
- publishing { 
-       // Configure the publication here 
-     } 
-   } 
- } 
- &lt;/pre&gt; 
- &lt;p&gt; 
- Please see &lt;a href='type://org.gradle.api.publish.ivy.IvyPublication'&gt;org.gradle.api.publish.ivy.IvyPublication&lt;/a&gt; and &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; for more information on publishing in these specific formats. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The action or closure to configure the publications with. 
-</description><parameter type="org.gradle.api.Action" name="configure"/></method><property name="publications" type="org.gradle.api.publish.PublicationContainer"><description> 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to. 
+</description></method><property name="publications" type="org.gradle.api.publish.PublicationContainer"><description> 
  The publications of the project. 
  &lt;p&gt; 
  See &lt;a href='type://PublishingExtension#publications(org.gradle.api.Action)'&gt;#publications(org.gradle.api.Action)&lt;/a&gt; for more information. 

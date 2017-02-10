@@ -7,10 +7,11 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The convention object type. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Returns null if there is no such object. 
  @throws IllegalStateException When there are multiple matching objects. 
-</description><parameter type="java.lang.Class" name="type"/></method><method name="getPlugins" returnType="java.util.Map"><description> 
- Returns the plugin convention objects contained in this convention. 
+</description><parameter type="java.lang.Class" name="type"/></method><method name="getExtensionsAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject"><description> 
+ Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this 
+ convention. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object 
 </description></method><method name="getPlugin" returnType="T"><description> 
  Locates the plugin convention object with the given type. 
  
@@ -18,25 +19,24 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Never returns null. 
  @throws IllegalStateException When there is no such object contained in this convention, or when there are 
  multiple such objects. 
-</description><parameter type="java.lang.Class" name="type"/></method><method name="getExtensionsAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject"><description> 
+</description><parameter type="java.lang.Class" name="type"/></method><method name="getPlugins" returnType="java.util.Map"><description> 
+ Returns the plugin convention objects contained in this convention. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
+</description></method><property name="plugins" type="java.util.Map"><description> 
+ Returns the plugin convention objects contained in this convention. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
+</description></property><property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"><description> 
  Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this 
  convention. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object 
-</description></method><property name="plugin" type="T"><description> 
+</description></property><property name="plugin" type="T"><description> 
  Locates the plugin convention object with the given type. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The convention object type. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Never returns null. 
  @throws IllegalStateException When there is no such object contained in this convention, or when there are 
  multiple such objects. 
-</description></property><property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"><description> 
- Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this 
- convention. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object 
-</description></property><property name="plugins" type="java.util.Map"><description> 
- Returns the plugin convention objects contained in this convention. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
 </description></property></type>

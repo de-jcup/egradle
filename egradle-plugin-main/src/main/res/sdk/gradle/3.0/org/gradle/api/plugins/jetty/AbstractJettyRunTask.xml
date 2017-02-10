@@ -2,9 +2,33 @@
  Base class for all tasks which deploy a web application to an embedded Jetty web container. 
  
  @deprecated The Jetty plugin has been deprecated 
-</description><method name="setHttpPort" returnType="void"><parameter type="java.lang.Integer" name="httpPort"/></method><method name="setStopKey" returnType="void"><parameter type="java.lang.String" name="stopKey"/></method><method name="setStopPort" returnType="void"><parameter type="java.lang.Integer" name="stopPort"/></method><method name="setAdditionalRuntimeJars" returnType="void"><parameter type="java.lang.Iterable" name="additionalRuntimeJars"/></method><method name="setOverrideWebXml" returnType="void"><parameter type="java.io.File" name="overrideWebXml"/></method><method name="getOverrideWebXml" returnType="java.io.File"/><method name="getStopKey" returnType="java.lang.String"><description> 
- Returns the key to use to stop Jetty. 
-</description></method><method name="getWebDefaultXml" returnType="java.io.File"/><method name="configureScanner" returnType="void"/><method name="getScanner" returnType="org.mortbay.util.Scanner"/><method name="start" returnType="void"/><method name="startJetty" returnType="void"/><method name="getReload" returnType="java.lang.String" delegationTarget=""><description> 
+</description><method name="finishConfigurationBeforeStart" returnType="void"/><method name="setWebAppConfig" returnType="void"><parameter type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext" name="webAppConfig"/></method><method name="getStopPort" returnType="java.lang.Integer"><description> 
+ Returns the TCP port for Jetty to listen on for stop requests. 
+</description></method><method name="getConnectors" returnType="org.mortbay.jetty.Connector"/><method name="restartWebApp" returnType="void"><parameter type="boolean" name="reconfigureScanner"/></method><method name="setUserRealms" returnType="void"><parameter type="org.mortbay.jetty.security.UserRealm" name="userRealms"/></method><method name="start" returnType="void"/><method name="getScannerListeners" returnType="java.util.List"/><method name="setDaemon" returnType="void"><parameter type="boolean" name="daemon"/></method><method name="setStopPort" returnType="void"><parameter type="java.lang.Integer" name="stopPort"/></method><method name="validateConfiguration" returnType="void"/><method name="getContextPath" returnType="java.lang.String"><description> 
+ Returns the context path to use to deploy the web application. 
+</description></method><method name="isDaemon" returnType="boolean" delegationTarget="true"><description> 
+ Specifies whether the Jetty server should run in the background. When &lt;a href='type://true'&gt;true&lt;/a&gt;, this task completes as soon as the server has started. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task blocks until the Jetty 
+ server is stopped. 
+</description></method><method name="getHttpPort" returnType="java.lang.Integer"><description> 
+ Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
+</description></method><method name="setOverrideWebXml" returnType="void"><parameter type="java.io.File" name="overrideWebXml"/></method><method name="setScanIntervalSeconds" returnType="void" delegationTarget="reload"><description> 
+ Sets the interval in seconds between scanning the web app for file changes. 
+ If file changes are detected, the web app is reloaded. Only relevant 
+ if &lt;a href='type://reload'&gt;reload&lt;/a&gt; is set to &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt;. Defaults to &lt;a href='type://0'&gt;0&lt;/a&gt;, 
+ which &lt;em&gt;disables&lt;/em&gt; automatic reloading. 
+</description><parameter type="int" name="scanIntervalSeconds"/></method><method name="getScanner" returnType="org.mortbay.util.Scanner"/><method name="createServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"><description> 
+ create a proxy that wraps a particular jetty version Server object. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Jetty Plugin Server 
+</description></method><method name="getWebAppConfig" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/><method name="setStopKey" returnType="void"><parameter type="java.lang.String" name="stopKey"/></method><method name="getWebDefaultXml" returnType="java.io.File"/><method name="startScanner" returnType="void"><description> 
+ Run a scanner thread on the given list of files and directories, calling stop/start on the given list of LifeCycle objects if any of the watched files change. 
+</description></method><method name="getRequestLog" returnType="org.mortbay.jetty.RequestLog"/><method name="startJettyInternal" returnType="void"/><method name="getAdditionalRuntimeJars" returnType="java.lang.Iterable"><description> 
+ Returns the classpath to make available to the web application. 
+</description></method><method name="getServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/><method name="configureWebApplication" returnType="void"><description> 
+ Subclasses should invoke this to setup basic info on the webapp. 
+</description></method><method name="startConsoleScanner" returnType="void"><description> 
+ Run a thread that monitors the console input to detect ENTER hits. 
+</description></method><method name="setHttpPort" returnType="void"><parameter type="java.lang.Integer" name="httpPort"/></method><method name="getReload" returnType="java.lang.String" delegationTarget=""><description> 
  Returns the reload mode, which is either &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt; or &lt;a href='type://"manual"'&gt;"manual"&lt;/a&gt;. 
  
  &lt;p&gt;In automatic mode, the web app is scanned for file changes every n seconds, where n is 
@@ -13,38 +37,20 @@
  detected, the web app is reloaded. 
  
  &lt;p&gt;In manual mode, the web app is reloaded whenever the Enter key is pressed. 
-</description></method><method name="getRequestLog" returnType="org.mortbay.jetty.RequestLog"/><method name="setDaemon" returnType="void"><parameter type="boolean" name="daemon"/></method><method name="getUserRealms" returnType="org.mortbay.jetty.security.UserRealm"/><method name="setServer" returnType="void"><parameter type="org.gradle.api.plugins.jetty.internal.JettyPluginServer" name="server"/></method><method name="finishConfigurationBeforeStart" returnType="void"/><method name="setContextPath" returnType="void"><parameter type="java.lang.String" name="contextPath"/></method><method name="getHttpPort" returnType="java.lang.Integer"><description> 
- Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
-</description></method><method name="setRequestLog" returnType="void"><parameter type="org.mortbay.jetty.RequestLog" name="requestLog"/></method><method name="restartWebApp" returnType="void"><parameter type="boolean" name="reconfigureScanner"/></method><method name="setConnectors" returnType="void"><parameter type="org.mortbay.jetty.Connector" name="connectors"/></method><method name="setScanIntervalSeconds" returnType="void" delegationTarget="reload"><description> 
- Sets the interval in seconds between scanning the web app for file changes. 
- If file changes are detected, the web app is reloaded. Only relevant 
- if &lt;a href='type://reload'&gt;reload&lt;/a&gt; is set to &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt;. Defaults to &lt;a href='type://0'&gt;0&lt;/a&gt;, 
- which &lt;em&gt;disables&lt;/em&gt; automatic reloading. 
-</description><parameter type="int" name="scanIntervalSeconds"/></method><method name="getConnectors" returnType="org.mortbay.jetty.Connector"/><method name="getScanIntervalSeconds" returnType="int" delegationTarget="reload"><description> 
+</description></method><method name="getScanIntervalSeconds" returnType="int" delegationTarget="reload"><description> 
  Returns the interval in seconds between scanning the web app for file changes. 
  If file changes are detected, the web app is reloaded. Only relevant 
  if &lt;a href='type://reload'&gt;reload&lt;/a&gt; is set to &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt;. Defaults to &lt;a href='type://0'&gt;0&lt;/a&gt;, 
  which &lt;em&gt;disables&lt;/em&gt; automatic reloading. 
-</description></method><method name="applyJettyXml" returnType="void"/><method name="isDaemon" returnType="boolean" delegationTarget="true"><description> 
- Specifies whether the Jetty server should run in the background. When &lt;a href='type://true'&gt;true&lt;/a&gt;, this task completes as soon as the server has started. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task blocks until the Jetty 
- server is stopped. 
-</description></method><method name="setUserRealms" returnType="void"><parameter type="org.mortbay.jetty.security.UserRealm" name="userRealms"/></method><method name="getStopPort" returnType="java.lang.Integer"><description> 
- Returns the TCP port for Jetty to listen on for stop requests. 
+</description></method><method name="configureScanner" returnType="void"/><method name="setAdditionalRuntimeJars" returnType="void"><parameter type="java.lang.Iterable" name="additionalRuntimeJars"/></method><method name="setScannerListeners" returnType="void"><parameter type="java.util.List" name="listeners"/></method><method name="setConnectors" returnType="void"><parameter type="org.mortbay.jetty.Connector" name="connectors"/></method><method name="setServer" returnType="void"><parameter type="org.gradle.api.plugins.jetty.internal.JettyPluginServer" name="server"/></method><method name="getJettyConfig" returnType="java.io.File" delegationTarget="null"><description> 
+ Returns the jetty configuration file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no configuration file is used. 
 </description></method><method name="findJettyWebXmlFile" returnType="java.io.File"><description> 
  Try and find a jetty-web.xml file, using some historical naming conventions if necessary. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;File object to the location of the jetty-web.xml 
-</description><parameter type="java.io.File" name="webInfDir"/></method><method name="setScannerListeners" returnType="void"><parameter type="java.util.List" name="listeners"/></method><method name="setJettyConfig" returnType="void"><parameter type="java.io.File" name="jettyConfig"/></method><method name="setWebDefaultXml" returnType="void"><parameter type="java.io.File" name="webDefaultXml"/></method><method name="getContextPath" returnType="java.lang.String"><description> 
- Returns the context path to use to deploy the web application. 
-</description></method><method name="startJettyInternal" returnType="void"/><method name="validateConfiguration" returnType="void"/><method name="getAdditionalRuntimeJars" returnType="java.lang.Iterable"><description> 
- Returns the classpath to make available to the web application. 
-</description></method><method name="getWebAppConfig" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/><method name="startConsoleScanner" returnType="void"><description> 
- Run a thread that monitors the console input to detect ENTER hits. 
-</description></method><method name="createServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"><description> 
- create a proxy that wraps a particular jetty version Server object. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Jetty Plugin Server 
-</description></method><method name="getScannerListeners" returnType="java.util.List"/><method name="setReload" returnType="void" delegationTarget=""><description> 
+</description><parameter type="java.io.File" name="webInfDir"/></method><method name="getOverrideWebXml" returnType="java.io.File"/><method name="setRequestLog" returnType="void"><parameter type="org.mortbay.jetty.RequestLog" name="requestLog"/></method><method name="getStopKey" returnType="java.lang.String"><description> 
+ Returns the key to use to stop Jetty. 
+</description></method><method name="applyJettyXml" returnType="void"/><method name="startJetty" returnType="void"/><method name="setJettyConfig" returnType="void"><parameter type="java.io.File" name="jettyConfig"/></method><method name="setContextPath" returnType="void"><parameter type="java.lang.String" name="contextPath"/></method><method name="setWebDefaultXml" returnType="void"><parameter type="java.io.File" name="webDefaultXml"/></method><method name="getUserRealms" returnType="org.mortbay.jetty.security.UserRealm"/><method name="setReload" returnType="void" delegationTarget=""><description> 
  Sets the reload mode, which is either &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt; or &lt;a href='type://"manual"'&gt;"manual"&lt;/a&gt;. 
  
  &lt;p&gt;In automatic mode, the web app is scanned for file changes every n seconds, where n is 
@@ -53,26 +59,20 @@
  detected, the web app is reloaded. 
  
  &lt;p&gt;In manual mode, the web app is reloaded whenever the Enter key is pressed. 
-</description><parameter type="java.lang.String" name="reload"/></method><method name="startScanner" returnType="void"><description> 
- Run a scanner thread on the given list of files and directories, calling stop/start on the given list of LifeCycle objects if any of the watched files change. 
-</description></method><method name="getJettyConfig" returnType="java.io.File" delegationTarget="null"><description> 
- Returns the jetty configuration file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no configuration file is used. 
-</description></method><method name="setWebAppConfig" returnType="void"><parameter type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext" name="webAppConfig"/></method><method name="getServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/><method name="configureWebApplication" returnType="void"><description> 
- Subclasses should invoke this to setup basic info on the webapp. 
-</description></method><property name="requestLog" type="org.mortbay.jetty.RequestLog"/><property name="contextPath" type="java.lang.String"><description> 
- Returns the context path to use to deploy the web application. 
-</description></property><property name="scanIntervalSeconds" type="int"><description> 
+</description><parameter type="java.lang.String" name="reload"/></method><property name="scanIntervalSeconds" type="int"><description> 
  Returns the interval in seconds between scanning the web app for file changes. 
  If file changes are detected, the web app is reloaded. Only relevant 
  if &lt;a href='type://reload'&gt;reload&lt;/a&gt; is set to &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt;. Defaults to &lt;a href='type://0'&gt;0&lt;/a&gt;, 
  which &lt;em&gt;disables&lt;/em&gt; automatic reloading. 
-</description></property><property name="webDefaultXml" type="java.io.File"/><property name="overrideWebXml" type="java.io.File"/><property name="daemon" type="boolean"><description> 
+</description></property><property name="daemon" type="boolean"><description> 
  Specifies whether the Jetty server should run in the background. When &lt;a href='type://true'&gt;true&lt;/a&gt;, this task completes as soon as the server has started. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task blocks until the Jetty 
  server is stopped. 
-</description></property><property name="userRealms" type="org.mortbay.jetty.security.UserRealm"/><property name="connectors" type="org.mortbay.jetty.Connector"/><property name="scannerListeners" type="java.util.List"/><property name="scanner" type="org.mortbay.util.Scanner"/><property name="stopKey" type="java.lang.String"><description> 
- Returns the key to use to stop Jetty. 
-</description></property><property name="additionalRuntimeJars" type="java.lang.Iterable"><description> 
- Returns the classpath to make available to the web application. 
+</description></property><property name="contextPath" type="java.lang.String"><description> 
+ Returns the context path to use to deploy the web application. 
+</description></property><property name="webDefaultXml" type="java.io.File"/><property name="scannerListeners" type="java.util.List"/><property name="jettyConfig" type="java.io.File"><description> 
+ Returns the jetty configuration file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no configuration file is used. 
+</description></property><property name="scanner" type="org.mortbay.util.Scanner"/><property name="webAppConfig" type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/><property name="httpPort" type="java.lang.Integer"><description> 
+ Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
 </description></property><property name="reload" type="java.lang.String"><description> 
  Returns the reload mode, which is either &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt; or &lt;a href='type://"manual"'&gt;"manual"&lt;/a&gt;. 
  
@@ -82,10 +82,10 @@
  detected, the web app is reloaded. 
  
  &lt;p&gt;In manual mode, the web app is reloaded whenever the Enter key is pressed. 
-</description></property><property name="httpPort" type="java.lang.Integer"><description> 
- Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
-</description></property><property name="jettyConfig" type="java.io.File"><description> 
- Returns the jetty configuration file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no configuration file is used. 
-</description></property><property name="server" type="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/><property name="webAppConfig" type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/><property name="stopPort" type="java.lang.Integer"><description> 
+</description></property><property name="overrideWebXml" type="java.io.File"/><property name="connectors" type="org.mortbay.jetty.Connector"/><property name="server" type="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/><property name="stopKey" type="java.lang.String"><description> 
+ Returns the key to use to stop Jetty. 
+</description></property><property name="stopPort" type="java.lang.Integer"><description> 
  Returns the TCP port for Jetty to listen on for stop requests. 
-</description></property></type>
+</description></property><property name="requestLog" type="org.mortbay.jetty.RequestLog"/><property name="additionalRuntimeJars" type="java.lang.Iterable"><description> 
+ Returns the classpath to make available to the web application. 
+</description></property><property name="userRealms" type="org.mortbay.jetty.security.UserRealm"/></type>

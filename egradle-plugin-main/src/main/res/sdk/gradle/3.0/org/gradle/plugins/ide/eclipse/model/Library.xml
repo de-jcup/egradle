@@ -1,3 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Library" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Library" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractLibrary"><description> 
  A classpath entry representing a library. 
 </description><method name="toString" returnType="java.lang.String"/><method name="getKind" returnType="java.lang.String"/><property name="kind" type="java.lang.String"/></type>

@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugins.signing.type.SignatureType" version="3.0"><description> 
  The type of signature. 
-</description><method name="combinedExtension" returnType="java.lang.String"><description> 
+</description><method name="getExtension" returnType="java.lang.String"><description> 
+ The file extension (without the leading dot) associated to this type of signature. 
+</description></method><method name="combinedExtension" returnType="java.lang.String"><description> 
  Combines the extension of the given file with the expected signature extension. 
  
  @see #getExtension() 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toSign The file to be signed 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The combined file extension (without the leading dot) 
-</description><parameter type="java.io.File" name="toSign"/></method><method name="fileFor" returnType="java.io.File"><description> 
- Calculates the file where to store the signature of the given file to be signed. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toSign The file to be signed 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file where to write the signature of the given file to be signed 
-</description><parameter type="java.io.File" name="toSign"/></method><method name="getExtension" returnType="java.lang.String"><description> 
- The file extension (without the leading dot) associated to this type of signature. 
-</description></method><method name="sign" returnType="java.io.File"><description> 
+</description><parameter type="java.io.File" name="toSign"/></method><method name="sign" returnType="java.io.File"><description> 
  Signs the given file and returns the file where the signature has been written to. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;signatory The signatory 
@@ -25,6 +20,11 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;signatory The signatory 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toSign The source of the data to be signed 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destination Where the signature will be written to 
-</description><parameter type="org.gradle.plugins.signing.signatory.Signatory" name="signatory"/><parameter type="java.io.InputStream" name="toSign"/><parameter type="java.io.OutputStream" name="destination"/></method><property name="extension" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.plugins.signing.signatory.Signatory" name="signatory"/><parameter type="java.io.InputStream" name="toSign"/><parameter type="java.io.OutputStream" name="destination"/></method><method name="fileFor" returnType="java.io.File"><description> 
+ Calculates the file where to store the signature of the given file to be signed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toSign The file to be signed 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file where to write the signature of the given file to be signed 
+</description><parameter type="java.io.File" name="toSign"/></method><property name="extension" type="java.lang.String"><description> 
  The file extension (without the leading dot) associated to this type of signature. 
 </description></property></type>

@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.lang3.StringUtils;
+import org.junit.rules.ExternalResource;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
@@ -27,7 +27,6 @@ import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.ModelProvider;
 import de.jcup.egradle.core.TestUtil;
 import de.jcup.egradle.core.TextProvider;
-import de.jcup.egradle.core.TextProviderException;
 import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
@@ -38,9 +37,9 @@ import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
  * @author Albert Tregnaghi
  *
  */
-public class IntegrationTestComponents {
-
-	public static IntegrationTestComponents INSTANCE = new IntegrationTestComponents();
+public class IntegrationTestComponents extends ExternalResource{
+	
+	private static IntegrationTestComponents INSTANCE = new IntegrationTestComponents();
 	private CodeCompletionRegistry codeCompletionRegistry;
 	private ErrorHandler errorHandler;
 	private GradleDSLTypeProvider gradleDslProvider;
@@ -52,6 +51,10 @@ public class IntegrationTestComponents {
 
 	private IntegrationTestComponents() {
 		startSDKParts();
+	}
+	
+	public static IntegrationTestComponents initialize(){
+		return INSTANCE;
 	}
 	
 	public RelevantCodeCutter getRelevantCodeCutter() {
@@ -101,7 +104,7 @@ public class IntegrationTestComponents {
 		XMLDSLPluginsImporter pluginsImporter = new XMLDSLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		loader.setDSLFolder(new File(TestUtil.SRC_MAIN_RES_FOLDER,"sdk/gradle/3.0")); // FIXME ATR, 07.02.2017: make versuib changeable!
+		loader.setDSLFolder(new File(TestUtil.SRC_MAIN_RES_FOLDER,"sdk/gradle/3.0")); // FIXME ATR, 07.02.2017: make this changeable!
 		gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 		/*

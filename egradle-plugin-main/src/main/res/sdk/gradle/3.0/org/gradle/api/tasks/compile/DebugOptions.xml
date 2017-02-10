@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.compile.DebugOptions" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.compile.DebugOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions"><description> 
  Debug options for Java compilation. Only take effect if &lt;a href='type://CompileOptions#debug'&gt;CompileOptions#debug&lt;/a&gt; 
  is set to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
-</description><method name="setDebugLevel" returnType="void"><description> 
- Sets which debug information is to be generated. 
-</description><parameter type="java.lang.String" name="debugLevel"/></method><method name="getDebugLevel" returnType="java.lang.String" delegationTarget="source"><description> 
+</description><method name="getDebugLevel" returnType="java.lang.String" delegationTarget="source"><description> 
  Tells which debugging information is to be generated. The value is a comma-separated 
  list of any of the following keywords (without spaces in between): 
  
@@ -17,7 +15,9 @@
  &lt;/dl&gt; 
  
  By default, only source and line debugging information will be generated. 
-</description></method><property name="debugLevel" type="java.lang.String"><description> 
+</description></method><method name="setDebugLevel" returnType="void"><description> 
+ Sets which debug information is to be generated. 
+</description><parameter type="java.lang.String" name="debugLevel"/></method><property name="debugLevel" type="java.lang.String"><description> 
  Tells which debugging information is to be generated. The value is a comma-separated 
  list of any of the following keywords (without spaces in between): 
  

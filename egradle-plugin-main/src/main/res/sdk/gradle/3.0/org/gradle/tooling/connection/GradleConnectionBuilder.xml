@@ -17,13 +17,7 @@
     connection.close(); 
  } 
  &lt;/pre&gt; 
-</description><method name="addParticipant" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
- Adds a new participant build to this connection, returning a build for further configuration. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDirectory The root project directory for the participant. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. Never returns null. 
-</description><parameter type="java.io.File" name="projectDirectory"/></method><method name="build" returnType="org.gradle.tooling.connection.GradleConnection"><description> 
+</description><method name="build" returnType="org.gradle.tooling.connection.GradleConnection"><description> 
  Builds the connection. You should call &lt;a href='type://GradleConnection#close()'&gt;GradleConnection#close()&lt;/a&gt; when you are finished with the connection. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The connection. Never returns null. 
@@ -33,4 +27,10 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The user's Gradle home directory to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.io.File" name="gradleUserHomeDir"/></method></type>
+</description><parameter type="java.io.File" name="gradleUserHomeDir"/></method><method name="addParticipant" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
+ Adds a new participant build to this connection, returning a build for further configuration. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDirectory The root project directory for the participant. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. Never returns null. 
+</description><parameter type="java.io.File" name="projectDirectory"/></method></type>

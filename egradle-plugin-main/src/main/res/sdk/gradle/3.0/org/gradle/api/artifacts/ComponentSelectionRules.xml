@@ -23,7 +23,25 @@
          } 
      } 
  &lt;/pre&gt; 
-</description><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate"><description> 
+</description><method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
+ Adds a component selection rule that will apply to the specified module. 
+ 
+ Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument 
+ as well as any other arguments specified for the closure. 
+ Allowable closure arguments are &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; (required), 
+ &lt;a href='type://org.gradle.api.artifacts.ComponentMetadata'&gt;org.gradle.api.artifacts.ComponentMetadata&lt;/a&gt; and/or 
+ &lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the Closure that implements a rule to be applied 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="id"/><parameter type="groovy.lang.Closure" name="closure"/></method><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
+ Adds a simple component selection rule that will apply to all resolved components. 
+ Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;selectionAction the Action that implements a rule to be applied 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="org.gradle.api.Action" name="selectionAction"/></method><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate"><description> 
  Adds a rule-source backed component selection rule that will apply to all resolved components. 
  
  The ruleSource provides the rule as exactly one rule method annotated with &lt;a href='type://org.gradle.model.Mutate'&gt;org.gradle.model.Mutate&lt;/a&gt;. 
@@ -37,7 +55,18 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource an instance providing a rule implementation 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="ruleSource"/></method><method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
+</description><parameter type="java.lang.Object" name="ruleSource"/></method><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
+ Adds a component selection rule that will apply to all resolved components. 
+ 
+ Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument 
+ as well as any other arguments specified for the closure. 
+ Allowable closure arguments are &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; (required), 
+ &lt;a href='type://org.gradle.api.artifacts.ComponentMetadata'&gt;org.gradle.api.artifacts.ComponentMetadata&lt;/a&gt; and/or 
+ &lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the Closure that implements a rule to be applied 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
  Adds a component selection rule that will apply to the specified module. 
  Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument. 
  
@@ -59,33 +88,4 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource an instance providing a rule implementation 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="id"/><parameter type="java.lang.Object" name="ruleSource"/></method><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
- Adds a simple component selection rule that will apply to all resolved components. 
- Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;selectionAction the Action that implements a rule to be applied 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.Action" name="selectionAction"/></method><method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
- Adds a component selection rule that will apply to all resolved components. 
- 
- Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument 
- as well as any other arguments specified for the closure. 
- Allowable closure arguments are &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; (required), 
- &lt;a href='type://org.gradle.api.artifacts.ComponentMetadata'&gt;org.gradle.api.artifacts.ComponentMetadata&lt;/a&gt; and/or 
- &lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the Closure that implements a rule to be applied 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection"><description> 
- Adds a component selection rule that will apply to the specified module. 
- 
- Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument 
- as well as any other arguments specified for the closure. 
- Allowable closure arguments are &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; (required), 
- &lt;a href='type://org.gradle.api.artifacts.ComponentMetadata'&gt;org.gradle.api.artifacts.ComponentMetadata&lt;/a&gt; and/or 
- &lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the Closure that implements a rule to be applied 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="id"/><parameter type="groovy.lang.Closure" name="closure"/></method></type>
+</description><parameter type="java.lang.Object" name="id"/><parameter type="java.lang.Object" name="ruleSource"/></method></type>

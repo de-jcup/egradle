@@ -6,10 +6,10 @@
  The name of the required library. 
 </description></method><method name="getLinkage" returnType="java.lang.String"><description> 
  The required linkage. 
-</description></method><property name="linkage" type="java.lang.String"><description> 
- The required linkage. 
-</description></property><property name="libraryName" type="java.lang.String"><description> 
+</description></method><property name="libraryName" type="java.lang.String"><description> 
  The name of the required library. 
+</description></property><property name="linkage" type="java.lang.String"><description> 
+ The required linkage. 
 </description></property><property name="projectPath" type="java.lang.String"><description> 
  The path to the project containing the library. 
 </description></property></type>

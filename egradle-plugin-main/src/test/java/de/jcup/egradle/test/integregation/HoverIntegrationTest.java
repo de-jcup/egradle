@@ -3,7 +3,7 @@ package de.jcup.egradle.test.integregation;
 import static de.jcup.egradle.test.integregation.HoverDataAssert.assertThat;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
@@ -11,12 +11,8 @@ import de.jcup.egradle.codeassist.hover.HoverData;
 
 public class HoverIntegrationTest {
 
-	private IntegrationTestComponents components;
-
-	@Before
-	public void before() {
-		components = IntegrationTestComponents.INSTANCE;
-	}
+	@Rule
+	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
 	@Test
 	public void buildfile__with_dependencies_in_root__when_cursor_is_at_dependencies_offset_exactly__has_correct_hoverdata() {

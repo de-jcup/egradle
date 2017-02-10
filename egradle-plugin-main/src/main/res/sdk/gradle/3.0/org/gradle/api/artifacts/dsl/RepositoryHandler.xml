@@ -31,27 +31,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A list of urls of repositories to look for artifacts only. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added repository 
-</description><parameter type="java.util.Map" name="args"/></method><method name="maven" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository" delegationTarget="MavenArtifactRepository"><description> 
- Adds and configures a Maven repository. Newly created instance of &lt;a href='type://MavenArtifactRepository'&gt;MavenArtifactRepository&lt;/a&gt; is passed as an argument to the closure. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="ivy" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository"><description> 
- Adds and configures an Ivy repository. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
- Adds an configures a repository which will look for dependencies in a number of local directories. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository. 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="ivy" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository" delegationTarget="IvyArtifactRepository"><description> 
- Adds and configures an Ivy repository. Newly created instance of &lt;a href='type://IvyArtifactRepository'&gt;IvyArtifactRepository&lt;/a&gt; is passed as an argument to the closure. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
+</description><parameter type="java.util.Map" name="args"/></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
  Adds an configures a repository which will look for dependencies in a number of local directories. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute to configure the repository. 
@@ -61,44 +41,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="mavenCentral" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
- Adds a repository which looks in the Maven central repository for dependencies. The URL used to access this repository is 
- {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#MAVEN_CENTRAL_URL}. The name of the repository is 
- {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#DEFAULT_MAVEN_CENTRAL_REPO_NAME}. 
- 
- &lt;p&gt;Examples: 
- &lt;pre autoTested=""&gt; 
- repositories { 
-     mavenCentral() 
- } 
- &lt;/pre&gt; 
- &lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
- @see #mavenCentral(java.util.Map) 
-</description></method><method name="mavenLocal" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
- Adds a repository which looks in the local Maven cache for dependencies. The name of the repository is 
- {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#DEFAULT_MAVEN_LOCAL_REPO_NAME}. 
- 
- &lt;p&gt;Examples: 
- &lt;pre autoTested=""&gt; 
- repositories { 
-     mavenLocal() 
- } 
- &lt;/pre&gt; 
- &lt;/p&gt; 
- &lt;p&gt; 
- The location for the repository is determined as follows (in order of precedence): 
- &lt;ol&gt; 
- &lt;li&gt;The value of system property 'maven.repo.local' if set;&lt;/li&gt; 
- &lt;li&gt;The value of element &amp;lt;localRepository&amp;gt; of &lt;code&gt;~/.m2/settings.xml&lt;/code&gt; if this file exists and element is set;&lt;/li&gt; 
- &lt;li&gt;The value of element &amp;lt;localRepository&amp;gt; of &lt;code&gt;$M2_HOME/conf/settings.xml&lt;/code&gt; (where &lt;code&gt;$M2_HOME&lt;/code&gt; is the value of the environment variable with that name) if this file exists and element is set;&lt;/li&gt; 
- &lt;li&gt;The path &lt;code&gt;~/.m2/repository&lt;/code&gt;.&lt;/li&gt; 
- &lt;/ol&gt; 
- &lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
-</description></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
  Adds a resolver that looks into a number of directories for artifacts. The artifacts are expected to be located in the 
  root of the specified directories. The resolver ignores any group/organization information specified in the 
  dependency section of your build script. If you only use this kind of resolver you might specify your 
@@ -130,7 +73,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
  @throws org.gradle.api.InvalidUserDataException In the case neither rootDir nor rootDirs is specified of if both 
  are specified. 
-</description><parameter type="java.util.Map" name="args"/></method><method name="jcenter" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
+</description><parameter type="java.util.Map" name="args"/></method><method name="ivy" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository" delegationTarget="IvyArtifactRepository"><description> 
+ Adds and configures an Ivy repository. Newly created instance of &lt;a href='type://IvyArtifactRepository'&gt;IvyArtifactRepository&lt;/a&gt; is passed as an argument to the closure. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="jcenter" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
  Adds a repository which looks in Bintray's JCenter repository for dependencies. 
  &lt;p&gt; 
  The URL used to access this repository is {@literal "https://jcenter.bintray.com/"}. 
@@ -150,6 +98,53 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action a configuration action 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added repository 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="mavenCentral" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
+ Adds a repository which looks in the Maven central repository for dependencies. The URL used to access this repository is 
+ {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#MAVEN_CENTRAL_URL}. The name of the repository is 
+ {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#DEFAULT_MAVEN_CENTRAL_REPO_NAME}. 
+ 
+ &lt;p&gt;Examples: 
+ &lt;pre autoTested=""&gt; 
+ repositories { 
+     mavenCentral() 
+ } 
+ &lt;/pre&gt; 
+ &lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
+ @see #mavenCentral(java.util.Map) 
+</description></method><method name="flatDir" returnType="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository"><description> 
+ Adds an configures a repository which will look for dependencies in a number of local directories. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository. 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenLocal" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
+ Adds a repository which looks in the local Maven cache for dependencies. The name of the repository is 
+ {@value org.gradle.api.artifacts.ArtifactRepositoryContainer#DEFAULT_MAVEN_LOCAL_REPO_NAME}. 
+ 
+ &lt;p&gt;Examples: 
+ &lt;pre autoTested=""&gt; 
+ repositories { 
+     mavenLocal() 
+ } 
+ &lt;/pre&gt; 
+ &lt;/p&gt; 
+ &lt;p&gt; 
+ The location for the repository is determined as follows (in order of precedence): 
+ &lt;ol&gt; 
+ &lt;li&gt;The value of system property 'maven.repo.local' if set;&lt;/li&gt; 
+ &lt;li&gt;The value of element &amp;lt;localRepository&amp;gt; of &lt;code&gt;~/.m2/settings.xml&lt;/code&gt; if this file exists and element is set;&lt;/li&gt; 
+ &lt;li&gt;The value of element &amp;lt;localRepository&amp;gt; of &lt;code&gt;$M2_HOME/conf/settings.xml&lt;/code&gt; (where &lt;code&gt;$M2_HOME&lt;/code&gt; is the value of the environment variable with that name) if this file exists and element is set;&lt;/li&gt; 
+ &lt;li&gt;The path &lt;code&gt;~/.m2/repository&lt;/code&gt;.&lt;/li&gt; 
+ &lt;/ol&gt; 
+ &lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
+</description></method><method name="ivy" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository"><description> 
+ Adds and configures an Ivy repository. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
 </description><parameter type="org.gradle.api.Action" name="action"/></method><method name="jcenter" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository"><description> 
  Adds a repository which looks in Bintray's JCenter repository for dependencies. 
  &lt;p&gt; 
@@ -165,4 +160,9 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added resolver 
  @see #jcenter(Action) 
-</description></method></type>
+</description></method><method name="maven" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository" delegationTarget="MavenArtifactRepository"><description> 
+ Adds and configures a Maven repository. Newly created instance of &lt;a href='type://MavenArtifactRepository'&gt;MavenArtifactRepository&lt;/a&gt; is passed as an argument to the closure. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method></type>

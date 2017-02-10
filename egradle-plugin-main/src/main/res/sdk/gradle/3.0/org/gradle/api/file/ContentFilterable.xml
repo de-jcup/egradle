@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.ContentFilterable" version="3.0"><description> 
  Represents some binary resource whose content can be filtered. 
-</description><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="java.io.FilterReader"><description> 
- &lt;p&gt;Adds a content filter to be used during the copy.  Multiple calls to filter, add additional filters to the 
- filter chain.  Each filter should implement &lt;a href='type://java.io.FilterReader'&gt;java.io.FilterReader&lt;/a&gt;. Include &lt;a href='type://org.apache.tools.ant.filters.*'&gt;org.apache.tools.ant.filters.*&lt;/a&gt; for access to all the standard Ant filters.&lt;/p&gt; 
- 
- &lt;p&gt; Examples: 
- &lt;pre&gt; 
-    filter(StripJavaComments) 
-    filter(com.mycompany.project.CustomFilter) 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;filterType Class of filter to add 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Class" name="filterType"/></method><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="null"><description> 
+</description><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="null"><description> 
  Adds a content filter based on the provided transformer.  The Closure will be called with each line (stripped of line 
  endings) and should return a String to replace the line or &lt;a href='type://null'&gt;null&lt;/a&gt; to remove the line.  If every line is 
  removed, the result will be an empty file, not an absent one. 
@@ -42,7 +30,19 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;properties to implement line based filtering 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.util.Map" name="properties"/></method><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="null"><description> 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="java.io.FilterReader"><description> 
+ &lt;p&gt;Adds a content filter to be used during the copy.  Multiple calls to filter, add additional filters to the 
+ filter chain.  Each filter should implement &lt;a href='type://java.io.FilterReader'&gt;java.io.FilterReader&lt;/a&gt;. Include &lt;a href='type://org.apache.tools.ant.filters.*'&gt;org.apache.tools.ant.filters.*&lt;/a&gt; for access to all the standard Ant filters.&lt;/p&gt; 
+ 
+ &lt;p&gt; Examples: 
+ &lt;pre&gt; 
+    filter(StripJavaComments) 
+    filter(com.mycompany.project.CustomFilter) 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;filterType Class of filter to add 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Class" name="filterType"/></method><method name="filter" returnType="org.gradle.api.file.ContentFilterable" delegationTarget="null"><description> 
  Adds a content filter based on the provided closure.  The Closure will be called with each line (stripped of line 
  endings) and should return a String to replace the line or &lt;a href='type://null'&gt;null&lt;/a&gt; to remove the line.  If every line is 
  removed, the result will be an empty file, not an absent one. 

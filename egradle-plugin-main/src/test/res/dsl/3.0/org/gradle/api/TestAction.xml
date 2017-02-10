@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<type interface="true" language="gradle" name="org.gradle.api.TestActionName" version="0.1">
+<type interface="true" superType="the.superType" language="gradle" name="org.gradle.api.TestActionName" version="0.1">
     <method name="execute" returnType="void">
         <parameter name="param1Name" type="param1Type"/>
         <description><![CDATA[

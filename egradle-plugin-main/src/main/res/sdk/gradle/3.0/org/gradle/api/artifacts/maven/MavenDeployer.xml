@@ -16,17 +16,7 @@
  is used for uploading snapshot artifacts. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;snapshotRepository The repository to be used 
-</description><parameter type="java.lang.Object" name="snapshotRepository"/></method><method name="getRepository" returnType="java.lang.Object"><description> 
- Returns the repository to be used for uploading artifacts. 
- 
- @see #setRepository(Object) 
-</description></method><method name="addProtocolProviderJars" returnType="void"><description> 
- Out of the box only uploading to the filesysten and via http is supported. If other protocolls should be used, 
- the appropriate Maven wagon jars have to be passed via this method. 
-</description><parameter type="java.util.Collection" name="jars"/></method><method name="setUniqueVersion" returnType="void"><description> 
- Sets whether to assign snapshots a unique version comprised of the timestamp and build number, or to use the same 
- version each time. Defaults to true. 
-</description><parameter type="boolean" name="uniqueVersion"/></method><method name="isUniqueVersion" returnType="boolean"><description> 
+</description><parameter type="java.lang.Object" name="snapshotRepository"/></method><method name="isUniqueVersion" returnType="boolean"><description> 
  Returns whether to assign snapshots a unique version comprised of the timestamp and build number, or to use the 
  same version each time. Defaults to true. 
 </description></method><method name="setRepository" returnType="void"><description> 
@@ -34,19 +24,29 @@
  is also used for uploading snapshot artifacts. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to be used 
-</description><parameter type="java.lang.Object" name="repository"/></method><method name="getSnapshotRepository" returnType="java.lang.Object"><description> 
+</description><parameter type="java.lang.Object" name="repository"/></method><method name="getRepository" returnType="java.lang.Object"><description> 
+ Returns the repository to be used for uploading artifacts. 
+ 
+ @see #setRepository(Object) 
+</description></method><method name="getSnapshotRepository" returnType="java.lang.Object"><description> 
  Returns the repository to be used for uploading snapshot artifacts. 
  
  @see #setSnapshotRepository(Object) 
-</description></method><property name="snapshotRepository" type="java.lang.Object"><description> 
+</description></method><method name="setUniqueVersion" returnType="void"><description> 
+ Sets whether to assign snapshots a unique version comprised of the timestamp and build number, or to use the same 
+ version each time. Defaults to true. 
+</description><parameter type="boolean" name="uniqueVersion"/></method><method name="addProtocolProviderJars" returnType="void"><description> 
+ Out of the box only uploading to the filesysten and via http is supported. If other protocolls should be used, 
+ the appropriate Maven wagon jars have to be passed via this method. 
+</description><parameter type="java.util.Collection" name="jars"/></method><property name="snapshotRepository" type="java.lang.Object"><description> 
  Returns the repository to be used for uploading snapshot artifacts. 
  
  @see #setSnapshotRepository(Object) 
-</description></property><property name="uniqueVersion" type="boolean"><description> 
- Returns whether to assign snapshots a unique version comprised of the timestamp and build number, or to use the 
- same version each time. Defaults to true. 
 </description></property><property name="repository" type="java.lang.Object"><description> 
  Returns the repository to be used for uploading artifacts. 
  
  @see #setRepository(Object) 
+</description></property><property name="uniqueVersion" type="boolean"><description> 
+ Returns whether to assign snapshots a unique version comprised of the timestamp and build number, or to use the 
+ same version each time. Defaults to true. 
 </description></property></type>

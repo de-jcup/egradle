@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.process.ExecResult" version="3.0"><description> 
  Represents the result of running an external process. 
-</description><method name="rethrowFailure" returnType="org.gradle.process.ExecResult"><description> 
- Re-throws any failure executing this process. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @throws ExecException the execution failure 
-</description></method><method name="assertNormalExitValue" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.internal.ExecException"><description> 
+</description><method name="assertNormalExitValue" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.internal.ExecException"><description> 
  Throws an &lt;a href='type://org.gradle.process.internal.ExecException'&gt;org.gradle.process.internal.ExecException&lt;/a&gt; if the process exited with a non-zero exit value. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @throws ExecException if the process exited with a non-zero exit value 
 </description></method><method name="getExitValue" returnType="int"><description> 
  Returns the exit value of the process. 
+</description></method><method name="rethrowFailure" returnType="org.gradle.process.ExecResult"><description> 
+ Re-throws any failure executing this process. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @throws ExecException the execution failure 
 </description></method><property name="exitValue" type="int"><description> 
  Returns the exit value of the process. 
 </description></property></type>

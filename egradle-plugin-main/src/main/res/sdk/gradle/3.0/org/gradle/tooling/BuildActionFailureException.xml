@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.BuildActionFailureException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.BuildActionFailureException" version="3.0" superType="org.gradle.tooling.GradleConnectionException"><description> 
  Thrown when a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; fails. 
  
  @since 1.8 

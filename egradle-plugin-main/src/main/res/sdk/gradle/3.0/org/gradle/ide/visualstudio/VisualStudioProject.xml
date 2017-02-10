@@ -16,10 +16,10 @@
  &lt;/pre&gt; 
 </description><method name="getFiltersFile" returnType="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
  Configuration for the generated filters file. 
-</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"><description> 
- The component that this project represents. 
 </description></method><method name="getProjectFile" returnType="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
  Configuration for the generated project file. 
+</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"><description> 
+ The component that this project represents. 
 </description></method><property name="filtersFile" type="org.gradle.ide.visualstudio.XmlConfigFile"><description> 
  Configuration for the generated filters file. 
 </description></property><property name="projectFile" type="org.gradle.ide.visualstudio.XmlConfigFile"><description> 

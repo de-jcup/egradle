@@ -13,11 +13,7 @@
  Always returns &lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
-</description></method><property name="destination" type="java.io.File"/><property name="outputType" type="OutputType"><description> 
- Always returns &lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
-</description></property><property name="entryPoint" type="java.io.File"><description> 
+</description></method><property name="entryPoint" type="java.io.File"><description> 
  Returns the entry point of a directory based Report 
  
  This can be the index.html file in a HTML report 
@@ -26,4 +22,8 @@
  &lt;a href='type://org.gradle.api.reporting.DirectoryReport#getDestination()'&gt;org.gradle.api.reporting.DirectoryReport#getDestination()&lt;/a&gt; 
  if no entry point defined 
  
+</description></property><property name="destination" type="java.io.File"/><property name="outputType" type="OutputType"><description> 
+ Always returns &lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
 </description></property></type>

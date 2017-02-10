@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder" version="3.0"><description> 
  Builds a new participant that will be included in the connection. 
-</description><method name="useBuildDistribution" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
- Specifies the Gradle distribution described in the build should be used. 
+</description><method name="useGradleVersion" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
+ Specifies the version of Gradle to use. 
  
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleVersion The version to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description></method><method name="useDistribution" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
+</description><parameter type="java.lang.String" name="gradleVersion"/></method><method name="useDistribution" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
  Specifies the Gradle distribution to use. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleDistribution The distribution to use. 
@@ -15,9 +16,8 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleHome The Gradle installation directory. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.io.File" name="gradleHome"/></method><method name="useGradleVersion" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
- Specifies the version of Gradle to use. 
+</description><parameter type="java.io.File" name="gradleHome"/></method><method name="useBuildDistribution" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder"><description> 
+ Specifies the Gradle distribution described in the build should be used. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleVersion The version to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.String" name="gradleVersion"/></method></type>
+</description></method></type>

@@ -15,31 +15,31 @@
  &lt;/ol&gt; 
  
  &lt;p&gt;You can reuse a builder to create multiple &lt;a href='type://Project'&gt;Project&lt;/a&gt; instances.&lt;/p&gt; 
-</description><method name="builder" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
- Creates a project builder. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description></method><method name="withName" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
+</description><method name="withName" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
  Specifies the name for the project 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name project name 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description><parameter type="java.lang.String" name="name"/></method><method name="withGradleUserHomeDir" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
- Specifies the Gradle user home for the builder. If not set, an empty directory under the project directory 
- will be used. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description><parameter type="java.io.File" name="dir"/></method><method name="withParent" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="withParent" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
  Specifies the parent project. Use it to create multi-module projects. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent parent project 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description><parameter type="org.gradle.api.Project" name="parent"/></method><method name="withProjectDir" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
+</description><parameter type="org.gradle.api.Project" name="parent"/></method><method name="build" returnType="org.gradle.api.Project"><description> 
+ Creates the project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project 
+</description></method><method name="withGradleUserHomeDir" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
+ Specifies the Gradle user home for the builder. If not set, an empty directory under the project directory 
+ will be used. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
+</description><parameter type="java.io.File" name="dir"/></method><method name="builder" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
+ Creates a project builder. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
+</description></method><method name="withProjectDir" returnType="org.gradle.testfixtures.ProjectBuilder"><description> 
  Specifies the project directory for the project to build. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The project directory 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description><parameter type="java.io.File" name="dir"/></method><method name="build" returnType="org.gradle.api.Project"><description> 
- Creates the project. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project 
-</description></method></type>
+</description><parameter type="java.io.File" name="dir"/></method></type>

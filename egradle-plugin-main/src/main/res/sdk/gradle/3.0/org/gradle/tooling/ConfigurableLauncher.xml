@@ -5,62 +5,62 @@
  @since 2.6 
  </description><method name="addProgressListener" returnType="T"><description> 
  {@inheritDoc} 
- @since 2.6 
-</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="org.gradle.tooling.events.OperationType" name="operationTypes"/></method><method name="addProgressListener" returnType="T"><description> 
- {@inheritDoc} 
  @since 2.5 
 </description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="java.util.Set" name="eventTypes"/></method><method name="addProgressListener" returnType="T"><description> 
  {@inheritDoc} 
  @since 1.0-milestone-3 
-</description><parameter type="org.gradle.tooling.ProgressListener" name="listener"/></method><method name="withCancellationToken" returnType="T"><description> 
+</description><parameter type="org.gradle.tooling.ProgressListener" name="listener"/></method><method name="setJavaHome" returnType="T"><description> 
  {@inheritDoc} 
- @since 2.3 
-</description><parameter type="org.gradle.tooling.CancellationToken" name="cancellationToken"/></method><method name="withArguments" returnType="T"><description> 
- {@inheritDoc} 
- @since 1.0 
-</description><parameter type="java.lang.String" name="arguments"/></method><method name="withArguments" returnType="T"><description> 
+ @since 1.0-milestone-8 
+</description><parameter type="java.io.File" name="javaHome"/></method><method name="withArguments" returnType="T"><description> 
  {@inheritDoc} 
  @since 2.6 
 </description><parameter type="java.lang.Iterable" name="arguments"/></method><method name="setJvmArguments" returnType="T"><description> 
  {@inheritDoc} 
  @since 1.0-milestone-9 
-</description><parameter type="java.lang.String" name="jvmArguments"/></method><method name="setStandardError" returnType="T"><description> 
- {@inheritDoc} 
- @since 1.0-milestone-3 
-</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="setStandardOutput" returnType="T"><description> 
- {@inheritDoc} 
- @since 1.0-milestone-3 
-</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="setStandardInput" returnType="T"><description> 
- {@inheritDoc} 
- @since 1.0-milestone-7 
-</description><parameter type="java.io.InputStream" name="inputStream"/></method><method name="addProgressListener" returnType="T"><description> 
- {@inheritDoc} 
- @since 2.5 
-</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/></method><method name="setJavaHome" returnType="T"><description> 
- {@inheritDoc} 
- @since 1.0-milestone-8 
-</description><parameter type="java.io.File" name="javaHome"/></method><method name="setColorOutput" returnType="T"><description> 
- {@inheritDoc} 
- @since 2.3 
-</description><parameter type="boolean" name="colorOutput"/></method><method name="setJvmArguments" returnType="T"><description> 
+</description><parameter type="java.lang.String" name="jvmArguments"/></method><method name="setJvmArguments" returnType="T"><description> 
  {@inheritDoc} 
  @since 2.6 
-</description><parameter type="java.lang.Iterable" name="jvmArguments"/></method><property name="colorOutput" type="boolean"><description> 
+</description><parameter type="java.lang.Iterable" name="jvmArguments"/></method><method name="withCancellationToken" returnType="T"><description> 
  {@inheritDoc} 
  @since 2.3 
-</description></property><property name="standardInput" type="java.io.InputStream"><description> 
+</description><parameter type="org.gradle.tooling.CancellationToken" name="cancellationToken"/></method><method name="addProgressListener" returnType="T"><description> 
  {@inheritDoc} 
- @since 1.0-milestone-7 
-</description></property><property name="standardError" type="java.io.OutputStream"><description> 
+ @since 2.5 
+</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/></method><method name="setStandardOutput" returnType="T"><description> 
  {@inheritDoc} 
  @since 1.0-milestone-3 
-</description></property><property name="jvmArguments" type="java.lang.String"><description> 
+</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="setStandardError" returnType="T"><description> 
  {@inheritDoc} 
- @since 1.0-milestone-9 
-</description></property><property name="standardOutput" type="java.io.OutputStream"><description> 
+ @since 1.0-milestone-3 
+</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="withArguments" returnType="T"><description> 
+ {@inheritDoc} 
+ @since 1.0 
+</description><parameter type="java.lang.String" name="arguments"/></method><method name="setStandardInput" returnType="T"><description> 
+ {@inheritDoc} 
+ @since 1.0-milestone-7 
+</description><parameter type="java.io.InputStream" name="inputStream"/></method><method name="setColorOutput" returnType="T"><description> 
+ {@inheritDoc} 
+ @since 2.3 
+</description><parameter type="boolean" name="colorOutput"/></method><method name="addProgressListener" returnType="T"><description> 
+ {@inheritDoc} 
+ @since 2.6 
+</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="org.gradle.tooling.events.OperationType" name="operationTypes"/></method><property name="standardOutput" type="java.io.OutputStream"><description> 
  {@inheritDoc} 
  @since 1.0-milestone-3 
 </description></property><property name="javaHome" type="java.io.File"><description> 
  {@inheritDoc} 
  @since 1.0-milestone-8 
+</description></property><property name="standardError" type="java.io.OutputStream"><description> 
+ {@inheritDoc} 
+ @since 1.0-milestone-3 
+</description></property><property name="standardInput" type="java.io.InputStream"><description> 
+ {@inheritDoc} 
+ @since 1.0-milestone-7 
+</description></property><property name="colorOutput" type="boolean"><description> 
+ {@inheritDoc} 
+ @since 2.3 
+</description></property><property name="jvmArguments" type="java.lang.String"><description> 
+ {@inheritDoc} 
+ @since 1.0-milestone-9 
 </description></property></type>

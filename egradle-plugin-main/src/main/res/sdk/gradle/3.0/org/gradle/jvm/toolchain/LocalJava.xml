@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.jvm.toolchain.LocalJava" version="3.0"><description> 
  A local JDK, JRE or Java 9+ installation. 
-</description><method name="setPath" returnType="void"><description> 
- Sets the path to the local Java installation. 
-</description><parameter type="java.io.File" name="path"/></method><method name="getPath" returnType="java.io.File"><description> 
+</description><method name="getPath" returnType="java.io.File"><description> 
  Returns the path to the local Java installation. 
-</description></method><property name="path" type="java.io.File"><description> 
+</description></method><method name="setPath" returnType="void"><description> 
+ Sets the path to the local Java installation. 
+</description><parameter type="java.io.File" name="path"/></method><property name="path" type="java.io.File"><description> 
  Returns the path to the local Java installation. 
 </description></property></type>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.Copy" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.Copy" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask"><description> 
  Copies files into a destination directory. This task can also rename and filter files as it copies. The task 
  implements &lt;a href='type://org.gradle.api.file.CopySpec CopySpec'&gt;org.gradle.api.file.CopySpec CopySpec&lt;/a&gt; for specifying what to copy. 
  
@@ -37,15 +37,15 @@
      with dataContent 
  } 
  &lt;/pre&gt; 
-</description><method name="getRootSpec" returnType="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/><method name="setDestinationDir" returnType="void"><description> 
- Sets the directory to copy files into. This is the same as calling &lt;a href='type://Copy#into(Object)'&gt;#into(Object)&lt;/a&gt; on this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destinationDir The destination directory. Must not be null. 
-</description><parameter type="java.io.File" name="destinationDir"/></method><method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/><method name="getDestinationDir" returnType="java.io.File"><description> 
+</description><method name="getDestinationDir" returnType="java.io.File"><description> 
  Returns the directory to copy files into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination dir. 
-</description></method><method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/><property name="rootSpec" type="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/><property name="destinationDir" type="java.io.File"><description> 
+</description></method><method name="getRootSpec" returnType="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/><method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/><method name="setDestinationDir" returnType="void"><description> 
+ Sets the directory to copy files into. This is the same as calling &lt;a href='type://Copy#into(Object)'&gt;#into(Object)&lt;/a&gt; on this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destinationDir The destination directory. Must not be null. 
+</description><parameter type="java.io.File" name="destinationDir"/></method><method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/><property name="rootSpec" type="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/><property name="destinationDir" type="java.io.File"><description> 
  Returns the directory to copy files into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination dir. 

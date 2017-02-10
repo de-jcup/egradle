@@ -12,11 +12,7 @@
  The JaCoCo (single file) CSV report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) CSV report 
-</description></method><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
- The JaCoCo (single file) XML report 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) XML report 
-</description></property><property name="csv" type="org.gradle.api.reporting.SingleFileReport"><description> 
+</description></method><property name="csv" type="org.gradle.api.reporting.SingleFileReport"><description> 
  The JaCoCo (single file) CSV report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) CSV report 
@@ -24,4 +20,8 @@
  The JaCoCo HTML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo HTML report 
+</description></property><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
+ The JaCoCo (single file) XML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) XML report 
 </description></property></type>

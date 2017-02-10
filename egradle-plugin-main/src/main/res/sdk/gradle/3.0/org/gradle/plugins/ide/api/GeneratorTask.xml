@@ -16,30 +16,30 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The domain object for the configuration file. 
-</description><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="generate" returnType="void"/><method name="getOutputFile" returnType="java.io.File"><description> 
- The output file to write the final configuration to. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. 
-</description></method><method name="getInputFileIfExists" returnType="java.io.File"/><method name="getInputFile" returnType="java.io.File"><description> 
- The input file to load the initial configuration from. Defaults to the output file. If the specified input file 
- does not exist, this task uses some default initial configuration. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input file. 
-</description></method><method name="setInputFile" returnType="void"><description> 
+</description><method name="setInputFile" returnType="void"><description> 
  Sets the input file to load the initial configuration from. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;inputFile The input file. Use null to use the output file. 
-</description><parameter type="java.io.File" name="inputFile"/></method><method name="setOutputFile" returnType="void"><description> 
+</description><parameter type="java.io.File" name="inputFile"/></method><method name="getInputFileIfExists" returnType="java.io.File"/><method name="generate" returnType="void"/><method name="setOutputFile" returnType="void"><description> 
  Sets the output file to write the final configuration to. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputFile The output file. 
-</description><parameter type="java.io.File" name="outputFile"/></method><property name="outputFile" type="java.io.File"><description> 
- The output file to write the final configuration to. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. 
-</description></property><property name="inputFileIfExists" type="java.io.File"/><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/><property name="inputFile" type="java.io.File"><description> 
+</description><parameter type="java.io.File" name="outputFile"/></method><method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/><method name="getInputFile" returnType="java.io.File"><description> 
  The input file to load the initial configuration from. Defaults to the output file. If the specified input file 
  does not exist, this task uses some default initial configuration. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input file. 
-</description></property></type>
+</description></method><method name="getOutputFile" returnType="java.io.File"><description> 
+ The output file to write the final configuration to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. 
+</description></method><property name="inputFile" type="java.io.File"><description> 
+ The input file to load the initial configuration from. Defaults to the output file. If the specified input file 
+ does not exist, this task uses some default initial configuration. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input file. 
+</description></property><property name="outputFile" type="java.io.File"><description> 
+ The output file to write the final configuration to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. 
+</description></property><property name="inputFileIfExists" type="java.io.File"/><property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/></type>

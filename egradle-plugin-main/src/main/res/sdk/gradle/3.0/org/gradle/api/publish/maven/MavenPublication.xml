@@ -47,13 +47,23 @@
  &lt;/pre&gt; 
  
  @since 1.4 
-</description><method name="getGroupId" returnType="java.lang.String"><description> 
- Returns the groupId for this publication. 
-</description></method><method name="setVersion" returnType="void"><description> 
+</description><method name="setGroupId" returnType="void"><description> 
+ Sets the groupId for this publication. 
+</description><parameter type="java.lang.String" name="groupId"/></method><method name="setArtifactId" returnType="void"><description> 
+ Sets the artifactId for this publication. 
+</description><parameter type="java.lang.String" name="artifactId"/></method><method name="setVersion" returnType="void"><description> 
  Sets the version for this publication. 
 </description><parameter type="java.lang.String" name="version"/></method><method name="getArtifacts" returnType="org.gradle.api.publish.maven.MavenArtifactSet"><description> 
  Returns the complete set of artifacts for this publication. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
+</description></method><method name="getArtifactId" returnType="java.lang.String"><description> 
+ Returns the artifactId for this publication. 
+</description></method><method name="getPom" returnType="org.gradle.api.publish.maven.MavenPom"><description> 
+ The POM that will be published. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM that will be published. 
+</description></method><method name="getVersion" returnType="java.lang.String"><description> 
+ Returns the version for this publication. 
 </description></method><method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact"><description> 
  Creates an &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to be included in the publication, which is configured by the associated action. 
  
@@ -108,11 +118,7 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;component The software component to publish. 
-</description><parameter type="org.gradle.api.component.SoftwareComponent" name="component"/></method><method name="setGroupId" returnType="void"><description> 
- Sets the groupId for this publication. 
-</description><parameter type="java.lang.String" name="groupId"/></method><method name="setArtifactId" returnType="void"><description> 
- Sets the artifactId for this publication. 
-</description><parameter type="java.lang.String" name="artifactId"/></method><method name="setArtifacts" returnType="void"><description> 
+</description><parameter type="org.gradle.api.component.SoftwareComponent" name="component"/></method><method name="setArtifacts" returnType="void"><description> 
  Clears any previously added artifacts from &lt;a href='type://MavenPublication#getArtifacts'&gt;#getArtifacts&lt;/a&gt; and creates artifacts from the specified sources. 
  Each supplied source is interpreted as per &lt;a href='type://MavenPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt;. 
  
@@ -134,10 +140,8 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sources The set of artifacts for this publication. 
-</description><parameter type="java.lang.Iterable" name="sources"/></method><method name="getVersion" returnType="java.lang.String"><description> 
- Returns the version for this publication. 
-</description></method><method name="getArtifactId" returnType="java.lang.String"><description> 
- Returns the artifactId for this publication. 
+</description><parameter type="java.lang.Iterable" name="sources"/></method><method name="getGroupId" returnType="java.lang.String"><description> 
+ Returns the groupId for this publication. 
 </description></method><method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact"><description> 
  Creates a custom &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to be included in the publication. 
  
@@ -169,27 +173,23 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact content. 
-</description><parameter type="java.lang.Object" name="source"/></method><method name="getPom" returnType="org.gradle.api.publish.maven.MavenPom"><description> 
- The POM that will be published. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM that will be published. 
-</description></method><method name="pom" returnType="void"><description> 
+</description><parameter type="java.lang.Object" name="source"/></method><method name="pom" returnType="void"><description> 
  Configures the POM that will be published. 
  
  The supplied action will be executed against the &lt;a href='type://MavenPublication#getPom()'&gt;#getPom()&lt;/a&gt; result. This method also accepts a closure argument, by type coercion. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The configuration action. 
-</description><parameter type="org.gradle.api.Action" name="configure"/></method><property name="version" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.api.Action" name="configure"/></method><property name="artifacts" type="org.gradle.api.publish.maven.MavenArtifactSet"><description> 
+ Returns the complete set of artifacts for this publication. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
+</description></property><property name="version" type="java.lang.String"><description> 
  Returns the version for this publication. 
+</description></property><property name="groupId" type="java.lang.String"><description> 
+ Returns the groupId for this publication. 
 </description></property><property name="pom" type="org.gradle.api.publish.maven.MavenPom"><description> 
  The POM that will be published. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM that will be published. 
-</description></property><property name="groupId" type="java.lang.String"><description> 
- Returns the groupId for this publication. 
-</description></property><property name="artifacts" type="org.gradle.api.publish.maven.MavenArtifactSet"><description> 
- Returns the complete set of artifacts for this publication. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
 </description></property><property name="artifactId" type="java.lang.String"><description> 
  Returns the artifactId for this publication. 
 </description></property></type>

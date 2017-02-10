@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.testing.jacoco.plugins.JacocoTaskExtension" version="3.0"><description> 
  Extension for tasks that should run with a Jacoco agent to generate coverage execution data. 
-</description><method name="getAgent" returnType="org.gradle.internal.jacoco.JacocoAgentJar"><description> 
- agent 
- @deprecated Agent should be considered final. 
-</description></method><method name="getSessionId" returnType="java.lang.String"><description> 
- An identifier for the session written to the execution data. Defaults to an auto-generated identifier. 
-</description></method><method name="getAsJvmArg" returnType="java.lang.String"><description> 
- Gets all properties in the format expected of the agent JVM argument. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;state of extension in a JVM argument 
-</description></method><method name="getOutput" returnType="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output"><description> 
- The type of output to generate. Defaults to &lt;a href='type://Output#FILE'&gt;Output#FILE&lt;/a&gt;. 
-</description></method><method name="setAgent" returnType="void"><description> 
- agent 
- @deprecated Agent should be considered final. 
-</description><parameter type="org.gradle.internal.jacoco.JacocoAgentJar" name="agent"/></method><method name="setPort" returnType="void"><parameter type="int" name="port"/></method><method name="getClassDumpFile" returnType="java.io.File"><description> 
- Path to dump all class files the agent sees are dumped to. Defaults to no dumps. 
-</description></method><method name="setEnabled" returnType="void"><parameter type="boolean" name="enabled"/></method><method name="setSessionId" returnType="void"><parameter type="java.lang.String" name="sessionId"/></method><method name="setDestinationFile" returnType="void"><parameter type="java.io.File" name="destinationFile"/></method><method name="getAddress" returnType="java.lang.String"><description> 
- IP address or hostname to use with &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to localhost. 
+</description><method name="getPort" returnType="int"><description> 
+ Port to bind to for &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to 6300. 
 </description></method><method name="getIncludes" returnType="java.util.List"><description> 
  List of class names that should be included in analysis. Names can use wildcards (* and ?). If left empty, all classes will be included. Defaults to an empty list. 
-</description></method><method name="isEnabled" returnType="boolean" delegationTarget="true"><description> 
- Whether or not the task should generate execution data. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
-</description></method><method name="isJmx" returnType="boolean" delegationTarget="org.jacoco"><description> 
+</description></method><method name="setEnabled" returnType="void"><parameter type="boolean" name="enabled"/></method><method name="isJmx" returnType="boolean" delegationTarget="org.jacoco"><description> 
  Whether or not to expose functionality via JMX under &lt;a href='type://org.jacoco:type=Runtime'&gt;org.jacoco:type=Runtime&lt;/a&gt;. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
  
  The configuration of the jmx property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.6.2) 
-</description></method><method name="setClassDumpFile" returnType="void"><parameter type="java.io.File" name="classDumpFile"/></method><method name="setIncludeNoLocationClasses" returnType="void"><parameter type="boolean" name="includeNoLocationClasses"/></method><method name="setJmx" returnType="void"><parameter type="boolean" name="jmx"/></method><method name="setExcludeClassLoaders" returnType="void"><parameter type="java.util.List" name="excludeClassLoaders"/></method><method name="setOutput" returnType="void"><parameter type="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output" name="output"/></method><method name="isIncludeNoLocationClasses" returnType="boolean" delegationTarget="false"><description> 
- Whether or not classes without source location should be instrumented. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
- 
- This property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.7.6) 
-</description></method><method name="setExcludes" returnType="void"><parameter type="java.util.List" name="excludes"/></method><method name="isAppend" returnType="boolean" delegationTarget="destinationFile"><description> 
- Whether or not data should be appended if the &lt;a href='type://destinationFile'&gt;destinationFile&lt;/a&gt; already exists. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
-</description></method><method name="isDumpOnExit" returnType="boolean" delegationTarget="true"><description> 
- Whether or not to dump the coverage data at VM shutdown. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
-</description></method><method name="setAddress" returnType="void"><parameter type="java.lang.String" name="address"/></method><method name="getExcludes" returnType="java.util.List"><description> 
- List of class names that should be excluded from analysis. Names can use wildcard (* and ?). Defaults to an empty list. 
-</description></method><method name="setAppend" returnType="void"><parameter type="boolean" name="append"/></method><method name="getExcludeClassLoaders" returnType="java.util.List"><description> 
- List of classloader names that should be excluded from analysis. Names can use wildcards (* and ?). Defaults to an empty list. 
-</description></method><method name="getPort" returnType="int"><description> 
- Port to bind to for &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to 6300. 
-</description></method><method name="setDumpOnExit" returnType="void"><parameter type="boolean" name="dumpOnExit"/></method><method name="getDestinationFile" returnType="java.io.File"><description> 
- The path for the execution data to be written to. 
-</description></method><method name="setIncludes" returnType="void"><parameter type="java.util.List" name="includes"/></method><property name="asJvmArg" type="java.lang.String"><description> 
+</description></method><method name="setDumpOnExit" returnType="void"><parameter type="boolean" name="dumpOnExit"/></method><method name="setOutput" returnType="void"><parameter type="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output" name="output"/></method><method name="getAsJvmArg" returnType="java.lang.String"><description> 
  Gets all properties in the format expected of the agent JVM argument. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;state of extension in a JVM argument 
-</description></property><property name="excludeClassLoaders" type="java.util.List"><description> 
+</description></method><method name="getDestinationFile" returnType="java.io.File"><description> 
+ The path for the execution data to be written to. 
+</description></method><method name="getExcludes" returnType="java.util.List"><description> 
+ List of class names that should be excluded from analysis. Names can use wildcard (* and ?). Defaults to an empty list. 
+</description></method><method name="getAgent" returnType="org.gradle.internal.jacoco.JacocoAgentJar"><description> 
+ agent 
+ @deprecated Agent should be considered final. 
+</description></method><method name="setSessionId" returnType="void"><parameter type="java.lang.String" name="sessionId"/></method><method name="isAppend" returnType="boolean" delegationTarget="destinationFile"><description> 
+ Whether or not data should be appended if the &lt;a href='type://destinationFile'&gt;destinationFile&lt;/a&gt; already exists. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description></method><method name="setAppend" returnType="void"><parameter type="boolean" name="append"/></method><method name="getSessionId" returnType="java.lang.String"><description> 
+ An identifier for the session written to the execution data. Defaults to an auto-generated identifier. 
+</description></method><method name="setAddress" returnType="void"><parameter type="java.lang.String" name="address"/></method><method name="getAddress" returnType="java.lang.String"><description> 
+ IP address or hostname to use with &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to localhost. 
+</description></method><method name="setIncludes" returnType="void"><parameter type="java.util.List" name="includes"/></method><method name="setIncludeNoLocationClasses" returnType="void"><parameter type="boolean" name="includeNoLocationClasses"/></method><method name="isEnabled" returnType="boolean" delegationTarget="true"><description> 
+ Whether or not the task should generate execution data. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description></method><method name="isIncludeNoLocationClasses" returnType="boolean" delegationTarget="false"><description> 
+ Whether or not classes without source location should be instrumented. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
+ 
+ This property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.7.6) 
+</description></method><method name="getExcludeClassLoaders" returnType="java.util.List"><description> 
  List of classloader names that should be excluded from analysis. Names can use wildcards (* and ?). Defaults to an empty list. 
-</description></property><property name="classDumpFile" type="java.io.File"><description> 
- Path to dump all class files the agent sees are dumped to. Defaults to no dumps. 
-</description></property><property name="output" type="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output"><description> 
- The type of output to generate. Defaults to &lt;a href='type://Output#FILE'&gt;Output#FILE&lt;/a&gt;. 
-</description></property><property name="includes" type="java.util.List"><description> 
- List of class names that should be included in analysis. Names can use wildcards (* and ?). If left empty, all classes will be included. Defaults to an empty list. 
-</description></property><property name="dumpOnExit" type="boolean"><description> 
+</description></method><method name="isDumpOnExit" returnType="boolean" delegationTarget="true"><description> 
  Whether or not to dump the coverage data at VM shutdown. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description></method><method name="setPort" returnType="void"><parameter type="int" name="port"/></method><method name="getOutput" returnType="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output"><description> 
+ The type of output to generate. Defaults to &lt;a href='type://Output#FILE'&gt;Output#FILE&lt;/a&gt;. 
+</description></method><method name="setDestinationFile" returnType="void"><parameter type="java.io.File" name="destinationFile"/></method><method name="getClassDumpFile" returnType="java.io.File"><description> 
+ Path to dump all class files the agent sees are dumped to. Defaults to no dumps. 
+</description></method><method name="setJmx" returnType="void"><parameter type="boolean" name="jmx"/></method><method name="setExcludeClassLoaders" returnType="void"><parameter type="java.util.List" name="excludeClassLoaders"/></method><method name="setAgent" returnType="void"><description> 
+ agent 
+ @deprecated Agent should be considered final. 
+</description><parameter type="org.gradle.internal.jacoco.JacocoAgentJar" name="agent"/></method><method name="setClassDumpFile" returnType="void"><parameter type="java.io.File" name="classDumpFile"/></method><method name="setExcludes" returnType="void"><parameter type="java.util.List" name="excludes"/></method><property name="jmx" type="boolean"><description> 
+ Whether or not to expose functionality via JMX under &lt;a href='type://org.jacoco:type=Runtime'&gt;org.jacoco:type=Runtime&lt;/a&gt;. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
+ 
+ The configuration of the jmx property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.6.2) 
+</description></property><property name="asJvmArg" type="java.lang.String"><description> 
+ Gets all properties in the format expected of the agent JVM argument. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;state of extension in a JVM argument 
 </description></property><property name="excludes" type="java.util.List"><description> 
  List of class names that should be excluded from analysis. Names can use wildcard (* and ?). Defaults to an empty list. 
+</description></property><property name="sessionId" type="java.lang.String"><description> 
+ An identifier for the session written to the execution data. Defaults to an auto-generated identifier. 
+</description></property><property name="port" type="int"><description> 
+ Port to bind to for &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to 6300. 
+</description></property><property name="classDumpFile" type="java.io.File"><description> 
+ Path to dump all class files the agent sees are dumped to. Defaults to no dumps. 
 </description></property><property name="address" type="java.lang.String"><description> 
  IP address or hostname to use with &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to localhost. 
-</description></property><property name="append" type="boolean"><description> 
- Whether or not data should be appended if the &lt;a href='type://destinationFile'&gt;destinationFile&lt;/a&gt; already exists. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description></property><property name="includeNoLocationClasses" type="boolean"><description> 
+ Whether or not classes without source location should be instrumented. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
+ 
+ This property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.7.6) 
 </description></property><property name="agent" type="org.gradle.internal.jacoco.JacocoAgentJar"><description> 
  agent 
  @deprecated Agent should be considered final. 
 </description></property><property name="enabled" type="boolean"><description> 
  Whether or not the task should generate execution data. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
-</description></property><property name="jmx" type="boolean"><description> 
- Whether or not to expose functionality via JMX under &lt;a href='type://org.jacoco:type=Runtime'&gt;org.jacoco:type=Runtime&lt;/a&gt;. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
- 
- The configuration of the jmx property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.6.2) 
-</description></property><property name="port" type="int"><description> 
- Port to bind to for &lt;a href='type://Output#TCP_SERVER'&gt;Output#TCP_SERVER&lt;/a&gt; or &lt;a href='type://Output#TCP_CLIENT'&gt;Output#TCP_CLIENT&lt;/a&gt;. Defaults to 6300. 
-</description></property><property name="includeNoLocationClasses" type="boolean"><description> 
- Whether or not classes without source location should be instrumented. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
- 
- This property is only taken into account if the used JaCoCo version supports this option (JaCoCo version &gt;= 0.7.6) 
-</description></property><property name="sessionId" type="java.lang.String"><description> 
- An identifier for the session written to the execution data. Defaults to an auto-generated identifier. 
+</description></property><property name="dumpOnExit" type="boolean"><description> 
+ Whether or not to dump the coverage data at VM shutdown. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description></property><property name="destinationFile" type="java.io.File"><description> 
  The path for the execution data to be written to. 
+</description></property><property name="includes" type="java.util.List"><description> 
+ List of class names that should be included in analysis. Names can use wildcards (* and ?). If left empty, all classes will be included. Defaults to an empty list. 
+</description></property><property name="excludeClassLoaders" type="java.util.List"><description> 
+ List of classloader names that should be excluded from analysis. Names can use wildcards (* and ?). Defaults to an empty list. 
+</description></property><property name="append" type="boolean"><description> 
+ Whether or not data should be appended if the &lt;a href='type://destinationFile'&gt;destinationFile&lt;/a&gt; already exists. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description></property><property name="output" type="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output"><description> 
+ The type of output to generate. Defaults to &lt;a href='type://Output#FILE'&gt;Output#FILE&lt;/a&gt;. 
 </description></property></type>

@@ -7,15 +7,15 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The input file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="files" returnType="org.gradle.api.tasks.TaskInputs"><description> 
- Registers some input files for this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The input files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="paths"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskInputs"><description> 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskInputs"><description> 
  Registers an input directory hierarchy. All files found under the given directory are treated as input files for 
  this task. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The directory. The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="path"/></method></type>
+</description><parameter type="java.lang.Object" name="path"/></method><method name="files" returnType="org.gradle.api.tasks.TaskInputs"><description> 
+ Registers some input files for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The input files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="paths"/></method></type>

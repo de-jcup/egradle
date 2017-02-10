@@ -30,17 +30,19 @@
  } 
  
  &lt;/pre&gt; 
-</description><method name="getFacets" returnType="java.util.List" delegationTarget="EclipseWtpFacet"><description> 
- The facets to be added as elements. 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
-</description></method><method name="facet" returnType="void" delegationTarget="EclipseWtpFacet"><description> 
+</description><method name="facet" returnType="void" delegationTarget="EclipseWtpFacet"><description> 
  Adds a facet. 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map that must contain a 'name' and 'version' key with corresponding values. 
-</description><parameter type="java.util.Map" name="args"/></method><method name="setFacets" returnType="void"><parameter type="java.util.List" name="facets"/></method><method name="mergeXmlFacet" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.WtpFacet" name="xmlFacet"/></method><method name="file" returnType="void" delegationTarget="WtpFacet"><description> 
+</description><parameter type="java.util.Map" name="args"/></method><method name="setFacets" returnType="void"><parameter type="java.util.List" name="facets"/></method><method name="getFacets" returnType="java.util.List" delegationTarget="EclipseWtpFacet"><description> 
+ The facets to be added as elements. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+</description></method><method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+ See &lt;a href='type://EclipseWtpFacet#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
+</description></method><method name="file" returnType="void" delegationTarget="WtpFacet"><description> 
  Enables advanced configuration like tinkering with the output XML 
  or affecting the way existing wtp facet file content is merged with gradle build information 
  &lt;p&gt; 
@@ -48,12 +50,10 @@
  &lt;p&gt; 
  
  For example see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
- See &lt;a href='type://EclipseWtpFacet#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
-</description></method><property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
- See &lt;a href='type://EclipseWtpFacet#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
-</description></property><property name="facets" type="java.util.List"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="mergeXmlFacet" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.WtpFacet" name="xmlFacet"/></method><property name="facets" type="java.util.List"><description> 
  The facets to be added as elements. 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+</description></property><property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+ See &lt;a href='type://EclipseWtpFacet#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
 </description></property></type>

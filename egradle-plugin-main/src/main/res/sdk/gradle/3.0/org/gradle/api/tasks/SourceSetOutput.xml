@@ -57,13 +57,20 @@
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to. 
-</description></method><method name="getClassesDir" returnType="java.io.File" delegationTarget="SourceSetOutput"><description> 
- Returns the directory to assemble the compiled classes into. 
+</description></method><method name="setClassesDir" returnType="void" delegationTarget="SourceSetOutput"><description> 
+ Sets the directory to assemble the compiled classes into. 
  &lt;p&gt; 
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null. 
-</description></method><method name="dir" returnType="void" delegationTarget="SourceSetOutput"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir the classes dir. Should not be null. 
+</description><parameter type="java.lang.Object" name="classesDir"/></method><method name="dir" returnType="void" delegationTarget="SourceSetOutput"><description> 
+ Registers an extra output dir and the builtBy information. Useful for generated resources. 
+ &lt;p&gt; 
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options - use 'builtBy' key to configure the 'builtBy' task of the dir 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir - will be resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
+</description><parameter type="java.util.Map" name="options"/><parameter type="java.lang.Object" name="dir"/></method><method name="dir" returnType="void" delegationTarget="SourceSetOutput"><description> 
  Registers an extra output dir. Useful for generated resources. 
  &lt;p&gt; 
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
@@ -76,31 +83,30 @@
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new instance of registered dirs with resolved files 
-</description></method><method name="dir" returnType="void" delegationTarget="SourceSetOutput"><description> 
- Registers an extra output dir and the builtBy information. Useful for generated resources. 
+</description></method><method name="getClassesDir" returnType="java.io.File" delegationTarget="SourceSetOutput"><description> 
+ Returns the directory to assemble the compiled classes into. 
  &lt;p&gt; 
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options - use 'builtBy' key to configure the 'builtBy' task of the dir 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir - will be resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
-</description><parameter type="java.util.Map" name="options"/><parameter type="java.lang.Object" name="dir"/></method><method name="setResourcesDir" returnType="void" delegationTarget="SourceSetOutput"><description> 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null. 
+</description></method><method name="setResourcesDir" returnType="void" delegationTarget="SourceSetOutput"><description> 
  Sets the output directory for resources 
  &lt;p&gt; 
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;resourcesDir the classes dir. Should not be null. 
-</description><parameter type="java.lang.Object" name="resourcesDir"/></method><method name="setClassesDir" returnType="void" delegationTarget="SourceSetOutput"><description> 
- Sets the directory to assemble the compiled classes into. 
- &lt;p&gt; 
- See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir the classes dir. Should not be null. 
-</description><parameter type="java.lang.Object" name="classesDir"/></method><property name="resourcesDir" type="java.io.File"><description> 
+</description><parameter type="java.lang.Object" name="resourcesDir"/></method><property name="resourcesDir" type="java.io.File"><description> 
  Returns the output directory for resources 
  &lt;p&gt; 
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to. 
+</description></property><property name="classesDir" type="java.io.File"><description> 
+ Returns the directory to assemble the compiled classes into. 
+ &lt;p&gt; 
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null. 
 </description></property><property name="dirs" type="org.gradle.api.file.FileCollection"><description> 
  Returns all dirs registered with #dir method. 
  Each file is resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
@@ -108,10 +114,4 @@
  See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new instance of registered dirs with resolved files 
-</description></property><property name="classesDir" type="java.io.File"><description> 
- Returns the directory to assemble the compiled classes into. 
- &lt;p&gt; 
- See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null. 
 </description></property></type>

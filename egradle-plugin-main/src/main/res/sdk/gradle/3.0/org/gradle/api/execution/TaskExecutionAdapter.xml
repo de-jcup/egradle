@@ -2,4 +2,4 @@
  A &lt;a href='type://TaskExecutionListener'&gt;TaskExecutionListener&lt;/a&gt; adapter class for receiving task execution events. 
  
  The methods in this class are empty. This class exists as convenience for creating listener objects. 
-</description><method name="beforeExecute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/></method><method name="afterExecute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/><parameter type="org.gradle.api.tasks.TaskState" name="state"/></method></type>
+</description><method name="afterExecute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/><parameter type="org.gradle.api.tasks.TaskState" name="state"/></method><method name="beforeExecute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/></method></type>

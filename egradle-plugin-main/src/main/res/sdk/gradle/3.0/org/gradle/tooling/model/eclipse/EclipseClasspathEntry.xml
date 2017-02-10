@@ -2,28 +2,28 @@
  An element that can have classpath attributes. 
  
  @since 2.14 
-</description><method name="getAccessRules" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+</description><method name="getClasspathAttributes" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the classpath attributes associated with this classpath entry. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath attributes. 
+ @throws UnsupportedMethodException For Gradle versions older than 2.14, where this method is not supported. 
+</description></method><method name="getAccessRules" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the access rules associated with this classpath entry. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The access rules. 
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported. 
  
  @since 3.0 
-</description></method><method name="getClasspathAttributes" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the classpath attributes associated with this classpath entry. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath attributes. 
- @throws UnsupportedMethodException For Gradle versions older than 2.14, where this method is not supported. 
-</description></method><property name="classpathAttributes" type="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the classpath attributes associated with this classpath entry. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath attributes. 
- @throws UnsupportedMethodException For Gradle versions older than 2.14, where this method is not supported. 
-</description></property><property name="accessRules" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+</description></method><property name="accessRules" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the access rules associated with this classpath entry. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The access rules. 
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported. 
  
  @since 3.0 
+</description></property><property name="classpathAttributes" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the classpath attributes associated with this classpath entry. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath attributes. 
+ @throws UnsupportedMethodException For Gradle versions older than 2.14, where this method is not supported. 
 </description></property></type>

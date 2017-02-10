@@ -112,6 +112,8 @@ public class GradleLanguageElementEstimater {
 				result.mode = currentMode;
 			}else{
 				currentReliability=0;
+				/* FIXME ATR, 10.02.2017: I think the return null is correct here always. so remove teh if (true). This supresses tooltips for items not resolveable */
+				if (true)return null;
 			}
 			/* make average reliability */
 			if (averagePercentage<99){
@@ -122,6 +124,7 @@ public class GradleLanguageElementEstimater {
 			averagePercentage/=2;
 			
 			if (current.type == null) {
+				if (true)return null;	
 				break;
 			}
 		}

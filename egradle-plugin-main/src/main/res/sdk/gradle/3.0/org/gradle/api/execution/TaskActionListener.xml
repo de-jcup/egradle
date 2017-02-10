@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.execution.TaskActionListener" version="3.0"><description> 
  &lt;p&gt;A &lt;a href='type://TaskWorkListener'&gt;TaskWorkListener&lt;/a&gt; is notified of the actions that a task performs.&lt;/p&gt; 
-</description><method name="afterActions" returnType="void"><description> 
- This method is called immediately after the task has completed performing its actions. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;task The task which has performed some actions. 
-</description><parameter type="org.gradle.api.Task" name="task"/></method><method name="beforeActions" returnType="void"><description> 
+</description><method name="beforeActions" returnType="void"><description> 
  This method is called immediately before the task starts performing its actions. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;task The task which is to perform some actions. 
+</description><parameter type="org.gradle.api.Task" name="task"/></method><method name="afterActions" returnType="void"><description> 
+ This method is called immediately after the task has completed performing its actions. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;task The task which has performed some actions. 
 </description><parameter type="org.gradle.api.Task" name="task"/></method></type>

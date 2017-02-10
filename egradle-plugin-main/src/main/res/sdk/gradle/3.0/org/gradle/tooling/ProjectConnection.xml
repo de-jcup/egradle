@@ -29,27 +29,26 @@
  &lt;p&gt;All notifications from a given &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; instance are delivered by a single thread at a time. Note, however, that the delivery thread may change over time.&lt;/p&gt; 
  
  @since 1.0-milestone-3 
-</description><method name="getModel" returnType="void" delegationTarget="model"><description> 
- Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later 
- passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
+</description><method name="action" returnType="org.gradle.tooling.BuildActionExecuter"><description> 
+ Creates an executer which can be used to run the given action. The action is serialized into the build 
+ process and executed, then its result is serialized back to the caller. 
  
- &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception. 
- See &lt;a href='type://ProjectConnection#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with. 
+ &lt;p&gt;Requires Gradle 1.8 or later.&lt;/p&gt; 
  
- &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://model(modelType).get(handler)'&gt;model(modelType).get(handler)&lt;/a&gt;&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
- @throws IllegalStateException When this connection has been closed or is closing. 
- @since 1.0-milestone-3 
-</description><parameter type="java.lang.Class" name="modelType"/><parameter type="org.gradle.tooling.ResultHandler" name="handler"/></method><method name="newTestLauncher" returnType="org.gradle.tooling.TestLauncher"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildAction The action to run. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. 
+ @since 1.8 
+</description><parameter type="org.gradle.tooling.BuildAction" name="buildAction"/></method><method name="newTestLauncher" returnType="org.gradle.tooling.TestLauncher"><description> 
  Creates a test launcher which can be used to execute tests. 
  
  &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
  @since 2.6 
+</description></method><method name="close" returnType="void"><description> 
+ Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
+ @since 1.0-milestone-3 
 </description></method><method name="getModel" returnType="T" delegationTarget="model"><description> 
  Fetches a snapshot of the model of the given type for this project. This method blocks until the model is available. 
  
@@ -64,7 +63,28 @@
  @throws GradleConnectionException On some other failure using the connection. 
  @throws IllegalStateException When this connection has been closed or is closing. 
  @since 1.0-milestone-3 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="model" returnType="org.gradle.tooling.ModelBuilder" delegationTarget="org.gradle.tooling.model.gradle.GradleBuild"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
+ Creates a launcher which can be used to execute a build. 
+ 
+ &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
+ @since 1.0-milestone-3 
+</description></method><method name="getModel" returnType="void" delegationTarget="model"><description> 
+ Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later 
+ passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
+ 
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception. 
+ See &lt;a href='type://ProjectConnection#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with. 
+ 
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://model(modelType).get(handler)'&gt;model(modelType).get(handler)&lt;/a&gt;&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ @throws IllegalStateException When this connection has been closed or is closing. 
+ @since 1.0-milestone-3 
+</description><parameter type="java.lang.Class" name="modelType"/><parameter type="org.gradle.tooling.ResultHandler" name="handler"/></method><method name="model" returnType="org.gradle.tooling.ModelBuilder" delegationTarget="org.gradle.tooling.model.gradle.GradleBuild"><description> 
  Creates a builder which can be used to query the model of the given type. 
  
  &lt;p&gt;Any of following models types may be available, depending on the version of Gradle being used by the target 
@@ -90,27 +110,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. 
  @since 1.0-milestone-3 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="action" returnType="org.gradle.tooling.BuildActionExecuter"><description> 
- Creates an executer which can be used to run the given action. The action is serialized into the build 
- process and executed, then its result is serialized back to the caller. 
- 
- &lt;p&gt;Requires Gradle 1.8 or later.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildAction The action to run. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. 
- @since 1.8 
-</description><parameter type="org.gradle.tooling.BuildAction" name="buildAction"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
- Creates a launcher which can be used to execute a build. 
- 
- &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
- @since 1.0-milestone-3 
-</description></method><method name="close" returnType="void"><description> 
- Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
- @since 1.0-milestone-3 
-</description></method><property name="model" type="void"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><property name="model" type="void"><description> 
  Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
  

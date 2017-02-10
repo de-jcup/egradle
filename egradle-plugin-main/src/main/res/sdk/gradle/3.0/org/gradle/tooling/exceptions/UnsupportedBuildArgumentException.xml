@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.exceptions.UnsupportedBuildArgumentException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.exceptions.UnsupportedBuildArgumentException" version="3.0" superType="org.gradle.tooling.GradleConnectionException"><description> 
  Thrown when the &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; has been configured 
  with unsupported build arguments. For more information see the 
  &lt;a href='type://org.gradle.tooling.LongRunningOperation#withArguments(String...)'&gt;org.gradle.tooling.LongRunningOperation#withArguments(String...)&lt;/a&gt; method. 

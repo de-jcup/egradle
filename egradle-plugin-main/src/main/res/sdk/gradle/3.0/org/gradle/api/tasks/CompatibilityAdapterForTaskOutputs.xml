@@ -2,19 +2,19 @@
  Helper interface for binary compatibility with Gradle 2.x version of the &lt;a href='type://TaskOutputs'&gt;TaskOutputs&lt;/a&gt; interface. 
  
  @deprecated The interface is only here to allow plugins built against Gradle 2.x to run and it will be removed in Gradle 4.0. 
-</description><method name="file" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
- Registers some output file for this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
- Registers an output directory for this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output directory. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="files" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
+</description><method name="files" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
  Registers some output files for this task. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The output files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="paths"/></method></type>
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
+ Registers an output directory for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output directory. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="file" returnType="org.gradle.api.tasks.TaskOutputs"><description> 
+ Registers some output file for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="path"/></method></type>

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeExecutableBinarySpec" version="3.0"><description> 
  An binary built by Gradle for a native application. 
-</description><method name="getTasks" returnType="org.gradle.nativeplatform.NativeExecutableBinarySpec.TasksCollection"><description> 
+</description><method name="getExecutable" returnType="org.gradle.nativeplatform.NativeExecutableFileSpec"><description> 
+ Native Executable File. 
+</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
  {@inheritDoc} 
 </description></method><method name="getApplication" returnType="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
  {@inheritDoc} 
 </description></method><method name="getInstallation" returnType="org.gradle.nativeplatform.NativeInstallationSpec"><description> 
  Native Installation location for a native executable. 
-</description></method><method name="getExecutable" returnType="org.gradle.nativeplatform.NativeExecutableFileSpec"><description> 
- Native Executable File. 
-</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
+</description></method><method name="getTasks" returnType="org.gradle.nativeplatform.NativeExecutableBinarySpec.TasksCollection"><description> 
  {@inheritDoc} 
-</description></method><property name="application" type="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
+</description></method><property name="installation" type="org.gradle.nativeplatform.NativeInstallationSpec"><description> 
+ Native Installation location for a native executable. 
+</description></property><property name="application" type="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
  {@inheritDoc} 
 </description></property><property name="tasks" type="org.gradle.nativeplatform.NativeExecutableBinarySpec.TasksCollection"><description> 
  {@inheritDoc} 
 </description></property><property name="executable" type="org.gradle.nativeplatform.NativeExecutableFileSpec"><description> 
  Native Executable File. 
-</description></property><property name="installation" type="org.gradle.nativeplatform.NativeInstallationSpec"><description> 
- Native Installation location for a native executable. 
 </description></property><property name="component" type="org.gradle.nativeplatform.NativeExecutableSpec"><description> 
  {@inheritDoc} 
 </description></property></type>

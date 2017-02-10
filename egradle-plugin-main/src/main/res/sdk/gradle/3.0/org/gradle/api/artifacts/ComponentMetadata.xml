@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.ComponentMetadata" version="3.0"><description> 
  Provides a read-only view of a resolved component's metadata, which typically originates from 
  a component descriptor (Ivy file, Maven POM). 
-</description><method name="getId" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier"><description> 
- Returns the identifier of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier of the component. 
-</description></method><method name="getStatus" returnType="java.lang.String"><description> 
+</description><method name="getStatus" returnType="java.lang.String"><description> 
  Returns the status of the component. Must 
  match one of the values in &lt;a href='type://ComponentMetadata#getStatusScheme()'&gt;#getStatusScheme()&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status of the component 
+</description></method><method name="getId" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier"><description> 
+ Returns the identifier of the component. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier of the component. 
 </description></method><method name="getStatusScheme" returnType="java.util.List" delegationTarget=""><description> 
  Returns the status scheme of the component. Values are 
  ordered from least to most mature status. 
@@ -24,6 +24,11 @@
  Tells whether the component is changing or immutable. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether the component is changing or immutable. 
+</description></property><property name="status" type="java.lang.String"><description> 
+ Returns the status of the component. Must 
+ match one of the values in &lt;a href='type://ComponentMetadata#getStatusScheme()'&gt;#getStatusScheme()&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status of the component 
 </description></property><property name="id" type="org.gradle.api.artifacts.ModuleVersionIdentifier"><description> 
  Returns the identifier of the component. 
  
@@ -34,9 +39,4 @@
  Defaults to &lt;a href='type://["integration", "milestone", "release"]'&gt;["integration", "milestone", "release"]&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status scheme of the component 
-</description></property><property name="status" type="java.lang.String"><description> 
- Returns the status of the component. Must 
- match one of the values in &lt;a href='type://ComponentMetadata#getStatusScheme()'&gt;#getStatusScheme()&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status of the component 
 </description></property></type>

@@ -27,7 +27,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath a class path containing a 'scala-library' Jar 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a class path containing a corresponding 'scala-compiler' Jar and its dependencies 
-</description><parameter type="java.lang.Iterable" name="classpath"/></method><method name="getDisplayName" returnType="java.lang.String"/><method name="visitDependencies" returnType="void"><parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/></method><method name="findScalaJar" returnType="java.io.File" delegationTarget="null"><description> 
+</description><parameter type="java.lang.Iterable" name="classpath"/></method><method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/><method name="getDisplayName" returnType="java.lang.String"/><method name="visitDependencies" returnType="void"><parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/></method><method name="findScalaJar" returnType="java.io.File" delegationTarget="null"><description> 
  Searches the specified class path for a Scala Jar file (scala-compiler, scala-library, 
  scala-jdbc, etc.) with the specified appendix (compiler, library, jdbc, etc.). 
  If no such file is found, &lt;a href='type://null'&gt;null&lt;/a&gt; is returned. 
@@ -45,7 +45,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scalaJar a Scala Jar file 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version of the Scala Jar file 
-</description><parameter type="java.io.File" name="scalaJar"/></method><method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/><property name="displayName" type="java.lang.String"/><property name="scalaVersion" type="java.lang.String"><description> 
+</description><parameter type="java.io.File" name="scalaJar"/></method><property name="scalaVersion" type="java.lang.String"><description> 
  Determines the version of a Scala Jar file (scala-compiler, scala-library, 
  scala-jdbc, etc.). If the version cannot be determined, or the file is not a Scala 
  Jar file, &lt;a href='type://null'&gt;null&lt;/a&gt; is returned. 
@@ -55,4 +55,4 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scalaJar a Scala Jar file 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version of the Scala Jar file 
-</description></property></type>
+</description></property><property name="displayName" type="java.lang.String"/></type>

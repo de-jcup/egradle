@@ -2,14 +2,7 @@
  &lt;p&gt;Provides implementations of signatory implementations for a project.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The specific &lt;a href='type://Signatory'&gt;Signatory&lt;/a&gt; subtype 
-</description><method name="getDefaultSignatory" returnType="T" delegationTarget="null"><description> 
- &lt;p&gt;Attempts to create a signatory for the project that will be used everywhere something is to be signed and an explicit signatory has not been set (for the task/operation).&lt;/p&gt; 
- 
- &lt;p&gt;This may be called multiple times and the implementor is free to return a different instance if the project state has changed in someway that influences the default signatory.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;project The project which the signatory is for 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is insufficient information available to create one. 
-</description><parameter type="org.gradle.api.Project" name="project"/></method><method name="configure" returnType="void"><description> 
+</description><method name="configure" returnType="void"><description> 
  Evaluates the given DSL-containing-closure as signatory configuration. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;settings The signing settings for the project the configure is happening for 
@@ -18,16 +11,23 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The desired signatory's name. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory with the given name if found, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no signatory is found with this name. 
-</description><parameter type="java.lang.String" name="name"/></method><property name="defaultSignatory" type="T"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getDefaultSignatory" returnType="T" delegationTarget="null"><description> 
  &lt;p&gt;Attempts to create a signatory for the project that will be used everywhere something is to be signed and an explicit signatory has not been set (for the task/operation).&lt;/p&gt; 
  
  &lt;p&gt;This may be called multiple times and the implementor is free to return a different instance if the project state has changed in someway that influences the default signatory.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;project The project which the signatory is for 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is insufficient information available to create one. 
-</description></property><property name="signatory" type="T"><description> 
+</description><parameter type="org.gradle.api.Project" name="project"/></method><property name="signatory" type="T"><description> 
  Retrieves the signatory with the given name. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The desired signatory's name. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory with the given name if found, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no signatory is found with this name. 
+</description></property><property name="defaultSignatory" type="T"><description> 
+ &lt;p&gt;Attempts to create a signatory for the project that will be used everywhere something is to be signed and an explicit signatory has not been set (for the task/operation).&lt;/p&gt; 
+ 
+ &lt;p&gt;This may be called multiple times and the implementor is free to return a different instance if the project state has changed in someway that influences the default signatory.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;project The project which the signatory is for 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is insufficient information available to create one. 
 </description></property></type>

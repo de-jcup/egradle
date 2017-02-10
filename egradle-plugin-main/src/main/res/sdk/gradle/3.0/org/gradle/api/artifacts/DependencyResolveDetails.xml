@@ -17,11 +17,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version to use when resolving this dependency, cannot be null. 
  It is valid to configure the same version as requested. 
-</description><parameter type="java.lang.String" name="version"/></method><method name="getRequested" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
- The module, before it is resolved. 
- The requested module does not change even if there are multiple dependency resolve rules 
- that manipulate the dependency metadata. 
-</description></method><method name="useTarget" returnType="void" delegationTarget="ModuleVersionSelector"><description> 
+</description><parameter type="java.lang.String" name="version"/></method><method name="useTarget" returnType="void" delegationTarget="ModuleVersionSelector"><description> 
  Allows to override the details of the dependency (see &lt;a href='type://DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt;) 
  when it is resolved (see &lt;a href='type://DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt;). 
  This method can be used to change the dependency before it is resolved, 
@@ -35,11 +31,15 @@
  or instances of ModuleVersionSelector. 
  
  @since 1.5 
-</description><parameter type="java.lang.Object" name="notation"/></method><property name="target" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
- The target module selector used to resolve the dependency. 
- Never returns null. Target module is updated when methods like &lt;a href='type://DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used. 
-</description></property><property name="requested" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+</description><parameter type="java.lang.Object" name="notation"/></method><method name="getRequested" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
  The module, before it is resolved. 
  The requested module does not change even if there are multiple dependency resolve rules 
  that manipulate the dependency metadata. 
+</description></method><property name="requested" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+ The module, before it is resolved. 
+ The requested module does not change even if there are multiple dependency resolve rules 
+ that manipulate the dependency metadata. 
+</description></property><property name="target" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+ The target module selector used to resolve the dependency. 
+ Never returns null. Target module is updated when methods like &lt;a href='type://DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used. 
 </description></property></type>

@@ -3,11 +3,7 @@
  they can be used in a wider scope than just the JVM where the exception failed. 
  
  @since 2.4 
-</description><method name="getCauses" returnType="java.util.List"><description> 
- Returns the underlying causes for this failure, if any. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the causes for this failure. Returns an empty list if this failure has no causes. 
-</description></method><method name="getMessage" returnType="java.lang.String"><description> 
+</description><method name="getMessage" returnType="java.lang.String"><description> 
  Returns a short message (typically one line) for the failure. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the failure message 
@@ -15,16 +11,20 @@
  Returns a long description of the failure. For example, a stack trace. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a long description of the failure 
+</description></method><method name="getCauses" returnType="java.util.List"><description> 
+ Returns the underlying causes for this failure, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the causes for this failure. Returns an empty list if this failure has no causes. 
 </description></method><property name="causes" type="java.util.List"><description> 
  Returns the underlying causes for this failure, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the causes for this failure. Returns an empty list if this failure has no causes. 
-</description></property><property name="description" type="java.lang.String"><description> 
- Returns a long description of the failure. For example, a stack trace. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a long description of the failure 
 </description></property><property name="message" type="java.lang.String"><description> 
  Returns a short message (typically one line) for the failure. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the failure message 
+</description></property><property name="description" type="java.lang.String"><description> 
+ Returns a long description of the failure. For example, a stack trace. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a long description of the failure 
 </description></property></type>

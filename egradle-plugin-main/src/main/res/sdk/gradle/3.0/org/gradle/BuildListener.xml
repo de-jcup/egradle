@@ -7,25 +7,25 @@
  evaluated.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradle The build which has been loaded. Never null. 
-</description><parameter type="org.gradle.api.invocation.Gradle" name="gradle"/></method><method name="buildStarted" returnType="void"><description> 
- &lt;p&gt;Called when the build is started.&lt;/p&gt; 
+</description><parameter type="org.gradle.api.invocation.Gradle" name="gradle"/></method><method name="projectsEvaluated" returnType="void"><description> 
+ &lt;p&gt;Called when all projects for the build have been evaluated. The project objects are fully configured and are 
+ ready to use to populate the task graph.&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradle The build which is being started. Never null. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradle The build which has been evaluated. Never null. 
 </description><parameter type="org.gradle.api.invocation.Gradle" name="gradle"/></method><method name="settingsEvaluated" returnType="void"><description> 
  &lt;p&gt;Called when the build settings have been loaded and evaluated. The settings object is fully configured and is 
  ready to use to load the build projects.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;settings The settings. Never null. 
-</description><parameter type="org.gradle.api.initialization.Settings" name="settings"/></method><method name="projectsEvaluated" returnType="void"><description> 
- &lt;p&gt;Called when all projects for the build have been evaluated. The project objects are fully configured and are 
- ready to use to populate the task graph.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradle The build which has been evaluated. Never null. 
-</description><parameter type="org.gradle.api.invocation.Gradle" name="gradle"/></method><method name="buildFinished" returnType="void"><description> 
+</description><parameter type="org.gradle.api.initialization.Settings" name="settings"/></method><method name="buildFinished" returnType="void"><description> 
  &lt;p&gt;Called when the build is completed. All selected tasks have been executed.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;result The result of the build. Never null. 
-</description><parameter type="org.gradle.BuildResult" name="result"/></method><property name="tingsEvaluated" type="org.gradle.api.initialization.Settings"><description> 
+</description><parameter type="org.gradle.BuildResult" name="result"/></method><method name="buildStarted" returnType="void"><description> 
+ &lt;p&gt;Called when the build is started.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradle The build which is being started. Never null. 
+</description><parameter type="org.gradle.api.invocation.Gradle" name="gradle"/></method><property name="tingsEvaluated" type="org.gradle.api.initialization.Settings"><description> 
  &lt;p&gt;Called when the build settings have been loaded and evaluated. The settings object is fully configured and is 
  ready to use to load the build projects.&lt;/p&gt; 
  

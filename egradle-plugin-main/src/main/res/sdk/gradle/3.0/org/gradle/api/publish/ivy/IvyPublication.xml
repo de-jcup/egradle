@@ -92,35 +92,20 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact content. 
-</description><parameter type="java.lang.Object" name="source"/></method><method name="from" returnType="void"><description> 
- Provides the software component that should be published. 
- 
- &lt;ul&gt; 
-     &lt;li&gt;Any artifacts declared by the component will be included in the publication.&lt;/li&gt; 
-     &lt;li&gt;The dependencies declared by the component will be included in the published meta-data.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- Currently 2 types of component are supported: 'components.java' (added by the JavaPlugin) and 'components.web' (added by the WarPlugin). 
- For any individual IvyPublication, only a single component can be provided in this way. 
- 
- The following example demonstrates how to publish the 'java' component to a ivy repository. 
- &lt;pre autoTested="true"&gt; 
- apply plugin: "java" 
- apply plugin: "ivy-publish" 
- 
- publishing { 
-       from components.java 
-     } 
-   } 
- } 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;component The software component to publish. 
-</description><parameter type="org.gradle.api.component.SoftwareComponent" name="component"/></method><method name="setArtifacts" returnType="void"><description> 
+</description><parameter type="java.lang.Object" name="source"/></method><method name="setArtifacts" returnType="void"><description> 
  Sets the artifacts for this publication. Each supplied value is interpreted as per &lt;a href='type://IvyPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sources The set of artifacts for this publication. 
-</description><parameter type="java.lang.Iterable" name="sources"/></method><method name="getArtifacts" returnType="org.gradle.api.publish.ivy.IvyArtifactSet"><description> 
+</description><parameter type="java.lang.Iterable" name="sources"/></method><method name="getDescriptor" returnType="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec"><description> 
+ The module descriptor that will be published. 
+ &lt;p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor that will be published. 
+</description></method><method name="getModule" returnType="java.lang.String"><description> 
+ Returns the module for this publication. 
+</description></method><method name="setModule" returnType="void"><description> 
+ Sets the module for this publication. 
+</description><parameter type="java.lang.String" name="module"/></method><method name="getArtifacts" returnType="org.gradle.api.publish.ivy.IvyArtifactSet"><description> 
  The complete set of artifacts for this publication. 
  
  &lt;p&gt; 
@@ -145,7 +130,9 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
-</description></method><method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact"><description> 
+</description></method><method name="setRevision" returnType="void"><description> 
+ Sets the revision for this publication. 
+</description><parameter type="java.lang.String" name="revision"/></method><method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact"><description> 
  Creates an &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to be included in the publication, which is configured by the associated action. 
  
  The first parameter is used to create a custom artifact and add it to the publication, as per &lt;a href='type://IvyPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt;. 
@@ -181,33 +168,31 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config An action to configure the values of the constructed &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt;. 
-</description><parameter type="java.lang.Object" name="source"/><parameter type="org.gradle.api.Action" name="config"/></method><method name="getModule" returnType="java.lang.String"><description> 
- Returns the module for this publication. 
-</description></method><method name="getRevision" returnType="java.lang.String"><description> 
- Returns the revision for this publication. 
-</description></method><method name="getDescriptor" returnType="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec"><description> 
- The module descriptor that will be published. 
- &lt;p&gt; 
+</description><parameter type="java.lang.Object" name="source"/><parameter type="org.gradle.api.Action" name="config"/></method><method name="from" returnType="void"><description> 
+ Provides the software component that should be published. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor that will be published. 
-</description></method><method name="setRevision" returnType="void"><description> 
- Sets the revision for this publication. 
-</description><parameter type="java.lang.String" name="revision"/></method><method name="setModule" returnType="void"><description> 
- Sets the module for this publication. 
-</description><parameter type="java.lang.String" name="module"/></method><method name="getOrganisation" returnType="java.lang.String"><description> 
- Returns the organisation for this publication. 
-</description></method><method name="getConfigurations" returnType="org.gradle.api.publish.ivy.IvyConfigurationContainer"><description> 
- Returns the complete set of configurations for this publication. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations 
-</description></method><method name="descriptor" returnType="void"><description> 
- Configures the descriptor that will be published. 
- &lt;p&gt; 
- The descriptor XML can be modified by using the &lt;a href='type://IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)'&gt;IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)&lt;/a&gt; method. 
+ &lt;ul&gt; 
+     &lt;li&gt;Any artifacts declared by the component will be included in the publication.&lt;/li&gt; 
+     &lt;li&gt;The dependencies declared by the component will be included in the published meta-data.&lt;/li&gt; 
+ &lt;/ul&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The configuration action. 
-</description><parameter type="org.gradle.api.Action" name="configure"/></method><method name="setOrganisation" returnType="void"><description> 
- Sets the organisation for this publication. 
-</description><parameter type="java.lang.String" name="organisation"/></method><method name="configurations" returnType="void" delegationTarget="IvyConfiguration"><description> 
+ Currently 2 types of component are supported: 'components.java' (added by the JavaPlugin) and 'components.web' (added by the WarPlugin). 
+ For any individual IvyPublication, only a single component can be provided in this way. 
+ 
+ The following example demonstrates how to publish the 'java' component to a ivy repository. 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: "java" 
+ apply plugin: "ivy-publish" 
+ 
+ publishing { 
+       from components.java 
+     } 
+   } 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;component The software component to publish. 
+</description><parameter type="org.gradle.api.component.SoftwareComponent" name="component"/></method><method name="configurations" returnType="void" delegationTarget="IvyConfiguration"><description> 
  Defines some &lt;a href='type://IvyConfiguration'&gt;IvyConfiguration&lt;/a&gt;s that should be included in the published ivy module descriptor file. 
  
  The following example demonstrates how to add a "testCompile" configuration, and a "testRuntime" configuration that extends it. 
@@ -226,7 +211,33 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config An action or closure to configure the values of the constructed &lt;a href='type://IvyConfiguration'&gt;IvyConfiguration&lt;/a&gt;. 
-</description><parameter type="org.gradle.api.Action" name="config"/></method><property name="artifacts" type="org.gradle.api.publish.ivy.IvyArtifactSet"><description> 
+</description><parameter type="org.gradle.api.Action" name="config"/></method><method name="descriptor" returnType="void"><description> 
+ Configures the descriptor that will be published. 
+ &lt;p&gt; 
+ The descriptor XML can be modified by using the &lt;a href='type://IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)'&gt;IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)&lt;/a&gt; method. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The configuration action. 
+</description><parameter type="org.gradle.api.Action" name="configure"/></method><method name="getOrganisation" returnType="java.lang.String"><description> 
+ Returns the organisation for this publication. 
+</description></method><method name="setOrganisation" returnType="void"><description> 
+ Sets the organisation for this publication. 
+</description><parameter type="java.lang.String" name="organisation"/></method><method name="getRevision" returnType="java.lang.String"><description> 
+ Returns the revision for this publication. 
+</description></method><method name="getConfigurations" returnType="org.gradle.api.publish.ivy.IvyConfigurationContainer"><description> 
+ Returns the complete set of configurations for this publication. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations 
+</description></method><property name="revision" type="java.lang.String"><description> 
+ Returns the revision for this publication. 
+</description></property><property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec"><description> 
+ The module descriptor that will be published. 
+ &lt;p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor that will be published. 
+</description></property><property name="module" type="java.lang.String"><description> 
+ Returns the module for this publication. 
+</description></property><property name="organisation" type="java.lang.String"><description> 
+ Returns the organisation for this publication. 
+</description></property><property name="artifacts" type="org.gradle.api.publish.ivy.IvyArtifactSet"><description> 
  The complete set of artifacts for this publication. 
  
  &lt;p&gt; 
@@ -251,18 +262,7 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
-</description></property><property name="organisation" type="java.lang.String"><description> 
- Returns the organisation for this publication. 
-</description></property><property name="revision" type="java.lang.String"><description> 
- Returns the revision for this publication. 
 </description></property><property name="configurations" type="org.gradle.api.publish.ivy.IvyConfigurationContainer"><description> 
  Returns the complete set of configurations for this publication. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations 
-</description></property><property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec"><description> 
- The module descriptor that will be published. 
- &lt;p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor that will be published. 
-</description></property><property name="module" type="java.lang.String"><description> 
- Returns the module for this publication. 
 </description></property></type>

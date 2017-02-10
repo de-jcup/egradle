@@ -12,14 +12,14 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child elements, or the empty set if there are no child elements. 
  @since 1.0-milestone-5 
-</description></method><property name="parent" type="org.gradle.tooling.model.HierarchicalElement"><description> 
- Returns the parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- @since 1.0-milestone-5 
-</description></property><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+</description></method><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the child elements, or the empty set if there are no child elements. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child elements, or the empty set if there are no child elements. 
+ @since 1.0-milestone-5 
+</description></property><property name="parent" type="org.gradle.tooling.model.HierarchicalElement"><description> 
+ Returns the parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
  @since 1.0-milestone-5 
 </description></property></type>

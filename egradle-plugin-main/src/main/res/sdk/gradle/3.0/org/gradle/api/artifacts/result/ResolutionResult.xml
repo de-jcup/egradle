@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ResolutionResult" version="3.0"><description> 
  Contains the information about the result of dependency resolution. You can use this type to determine all the component instances that are included 
  in the resolved dependency graph, and the dependencies between them. 
-</description><method name="getAllDependencies" returnType="java.util.Set" delegationTarget="ResolvedDependencyResult"><description> 
- Retrieves all dependencies, including unresolved dependencies. 
- Resolved dependencies are represented by instances of &lt;a href='type://ResolvedDependencyResult'&gt;ResolvedDependencyResult&lt;/a&gt;, 
- unresolved dependencies by &lt;a href='type://UnresolvedDependencyResult'&gt;UnresolvedDependencyResult&lt;/a&gt;. 
- 
- In dependency graph terminology, this method returns the edges of the graph. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all dependencies, including unresolved dependencies. 
-</description></method><method name="getAllComponents" returnType="java.util.Set" delegationTarget="ResolvedComponentResult"><description> 
- Retrieves all instances of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; from the graph, 
- e.g. all nodes of the dependency graph. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all nodes of the dependency graph. 
-</description></method><method name="allDependencies" returnType="void" delegationTarget="DependencyResult"><description> 
+</description><method name="allDependencies" returnType="void" delegationTarget="DependencyResult"><description> 
  Applies given closure for each dependency. 
  An instance of &lt;a href='type://DependencyResult'&gt;DependencyResult&lt;/a&gt; is passed as parameter to the closure. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure - closure that is applied for each dependency 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="allComponents" returnType="void" delegationTarget="ResolvedComponentResult"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getAllComponents" returnType="java.util.Set" delegationTarget="ResolvedComponentResult"><description> 
+ Retrieves all instances of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; from the graph, 
+ e.g. all nodes of the dependency graph. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all nodes of the dependency graph. 
+</description></method><method name="allComponents" returnType="void" delegationTarget="ResolvedComponentResult"><description> 
+ Applies given action for each component. 
+ An instance of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; is passed as parameter to the action. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action - action that is applied for each component 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="allComponents" returnType="void" delegationTarget="ResolvedComponentResult"><description> 
  Applies given closure for each component. 
  An instance of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; is passed as parameter to the closure. 
  
@@ -29,23 +26,7 @@
  An instance of &lt;a href='type://DependencyResult'&gt;DependencyResult&lt;/a&gt; is passed as parameter to the action. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action - action that is applied for each dependency 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getRoot" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
- Gives access to the root of resolved dependency graph. 
- You can walk the graph recursively from the root to obtain information about resolved dependencies. 
- For example, Gradle's built-in 'dependencies' task uses this to render the dependency tree. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the root node of the resolved dependency graph 
-</description></method><method name="allComponents" returnType="void" delegationTarget="ResolvedComponentResult"><description> 
- Applies given action for each component. 
- An instance of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; is passed as parameter to the action. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action - action that is applied for each component 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="allComponents" type="java.util.Set"><description> 
- Retrieves all instances of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; from the graph, 
- e.g. all nodes of the dependency graph. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all nodes of the dependency graph. 
-</description></property><property name="allDependencies" type="java.util.Set"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getAllDependencies" returnType="java.util.Set" delegationTarget="ResolvedDependencyResult"><description> 
  Retrieves all dependencies, including unresolved dependencies. 
  Resolved dependencies are represented by instances of &lt;a href='type://ResolvedDependencyResult'&gt;ResolvedDependencyResult&lt;/a&gt;, 
  unresolved dependencies by &lt;a href='type://UnresolvedDependencyResult'&gt;UnresolvedDependencyResult&lt;/a&gt;. 
@@ -53,6 +34,25 @@
  In dependency graph terminology, this method returns the edges of the graph. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all dependencies, including unresolved dependencies. 
+</description></method><method name="getRoot" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
+ Gives access to the root of resolved dependency graph. 
+ You can walk the graph recursively from the root to obtain information about resolved dependencies. 
+ For example, Gradle's built-in 'dependencies' task uses this to render the dependency tree. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the root node of the resolved dependency graph 
+</description></method><property name="allDependencies" type="java.util.Set"><description> 
+ Retrieves all dependencies, including unresolved dependencies. 
+ Resolved dependencies are represented by instances of &lt;a href='type://ResolvedDependencyResult'&gt;ResolvedDependencyResult&lt;/a&gt;, 
+ unresolved dependencies by &lt;a href='type://UnresolvedDependencyResult'&gt;UnresolvedDependencyResult&lt;/a&gt;. 
+ 
+ In dependency graph terminology, this method returns the edges of the graph. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all dependencies, including unresolved dependencies. 
+</description></property><property name="allComponents" type="java.util.Set"><description> 
+ Retrieves all instances of &lt;a href='type://ResolvedComponentResult'&gt;ResolvedComponentResult&lt;/a&gt; from the graph, 
+ e.g. all nodes of the dependency graph. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all nodes of the dependency graph. 
 </description></property><property name="root" type="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
  Gives access to the root of resolved dependency graph. 
  You can walk the graph recursively from the root to obtain information about resolved dependencies. 

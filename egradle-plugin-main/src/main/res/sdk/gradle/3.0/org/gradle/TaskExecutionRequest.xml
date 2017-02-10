@@ -2,20 +2,20 @@
  A request to execute some tasks, along with an optional project path context to provide information necessary to select the tasks 
  
  @since 2.0 
-</description><method name="getProjectPath" returnType="java.lang.String" delegationTarget="null"><description> 
- Project path associated with this task request if any. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project path or &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default project path. 
-</description></method><method name="getArgs" returnType="java.util.List"><description> 
+</description><method name="getArgs" returnType="java.util.List"><description> 
  The arguments to use to select and optionally configure the tasks, as if provided on the command-line. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;task name. 
-</description></method><property name="args" type="java.util.List"><description> 
- The arguments to use to select and optionally configure the tasks, as if provided on the command-line. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;task name. 
-</description></property><property name="projectPath" type="java.lang.String"><description> 
+</description></method><method name="getProjectPath" returnType="java.lang.String" delegationTarget="null"><description> 
  Project path associated with this task request if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project path or &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default project path. 
+</description></method><property name="projectPath" type="java.lang.String"><description> 
+ Project path associated with this task request if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project path or &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default project path. 
+</description></property><property name="args" type="java.util.List"><description> 
+ The arguments to use to select and optionally configure the tasks, as if provided on the command-line. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;task name. 
 </description></property></type>

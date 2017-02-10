@@ -1,75 +1,75 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.tasks.RoutesCompile" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.tasks.RoutesCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask"><description> 
  Task for compiling routes templates into Scala code. 
  &lt;p&gt; 
  This task is usually created as one of the build tasks when building a Play application with the &lt;a href='type://org.gradle.play.plugins.PlayPlugin'&gt;org.gradle.play.plugins.PlayPlugin&lt;/a&gt; plugin. 
  
  Explicit configuration of this task is not expected and should be performed on the equivalent settings at the &lt;a href='type://org.gradle.play.PlayApplicationSpec'&gt;org.gradle.play.PlayApplicationSpec&lt;/a&gt; level. 
  &lt;/p&gt; 
-</description><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/><method name="setInjectedRoutesGenerator" returnType="void"><description> 
+</description><method name="setInjectedRoutesGenerator" returnType="void"><description> 
  Configure if the injected routes generator should be used to generate routes. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;injectedRoutesGenerator false - use StaticRoutesGenerator 
  true - use InjectedRoutesGenerator 
-</description><parameter type="boolean" name="injectedRoutesGenerator"/></method><method name="getOutputDirectory" returnType="java.io.File"><description> 
- Returns the directory to generate the parser source files into. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
-</description></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.play.platform.PlayPlatform" name="platform"/></method><method name="setAdditionalImports" returnType="void"><description> 
- Specifies the additional imports of the Play Routes compiler. 
-</description><parameter type="java.util.List" name="additionalImports"/></method><method name="setOutputDirectory" returnType="void"><description> 
- Specifies the directory to generate the parser source files into. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputDirectory The output directory. Must not be null. 
-</description><parameter type="java.io.File" name="outputDirectory"/></method><method name="isJavaProject" returnType="boolean"/><method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"><description> 
- Returns the tool chain that will be used to compile the routes source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
+</description><parameter type="boolean" name="injectedRoutesGenerator"/></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/><method name="isGenerateReverseRoutes" returnType="boolean"><description> 
+ Whether a reverse router should be generated.  Default is true. 
 </description></method><method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
  The fork options to be applied to the Routes compiler. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The fork options for the Routes compiler. 
-</description></method><method name="compile" returnType="void"/><method name="setGenerateReverseRoutes" returnType="void"><description> 
- Sets whether or not a reverse router should be generated. 
-</description><parameter type="boolean" name="generateReverseRoutes"/></method><method name="getAdditionalImports" returnType="java.util.List"><description> 
- Returns the additional imports of the Play Routes compiler. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional imports. 
-</description></method><method name="getInjectedRoutesGenerator" returnType="boolean"><description> 
- Is the injected routes generator (&lt;code&gt;play.routes.compiler.InjectedRoutesGenerator&lt;/code&gt;) used for 
- generating routes?  Default is false. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false if StaticRoutesGenerator will be used to generate routes, 
- true if InjectedRoutesGenerator will be used to generate routes. 
-</description></method><method name="isNamespaceReverseRouter" returnType="boolean"><description> 
- Whether the reverse router should be namespaced. 
-</description></method><method name="isGenerateReverseRoutes" returnType="boolean"><description> 
- Whether a reverse router should be generated.  Default is true. 
-</description></method><method name="setNamespaceReverseRouter" returnType="void"><description> 
- Sets whether or not the reverse router should be namespaced. 
-</description><parameter type="boolean" name="namespaceReverseRouter"/></method><property name="javaProject" type="boolean"/><property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"><description> 
+</description></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.play.platform.PlayPlatform" name="platform"/></method><method name="isJavaProject" returnType="boolean"/><method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"><description> 
  Returns the tool chain that will be used to compile the routes source. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
-</description></property><property name="platform" type="org.gradle.play.platform.PlayPlatform"/><property name="injectedRoutesGenerator" type="boolean"><description> 
+</description></method><method name="setGenerateReverseRoutes" returnType="void"><description> 
+ Sets whether or not a reverse router should be generated. 
+</description><parameter type="boolean" name="generateReverseRoutes"/></method><method name="setNamespaceReverseRouter" returnType="void"><description> 
+ Sets whether or not the reverse router should be namespaced. 
+</description><parameter type="boolean" name="namespaceReverseRouter"/></method><method name="getInjectedRoutesGenerator" returnType="boolean"><description> 
  Is the injected routes generator (&lt;code&gt;play.routes.compiler.InjectedRoutesGenerator&lt;/code&gt;) used for 
  generating routes?  Default is false. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false if StaticRoutesGenerator will be used to generate routes, 
  true if InjectedRoutesGenerator will be used to generate routes. 
-</description></property><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="outputDirectory" type="java.io.File"><description> 
- Returns the directory to generate the parser source files into. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
-</description></property><property name="generateReverseRoutes" type="boolean"><description> 
- Whether a reverse router should be generated.  Default is true. 
-</description></property><property name="additionalImports" type="java.util.List"><description> 
+</description></method><method name="getAdditionalImports" returnType="java.util.List"><description> 
  Returns the additional imports of the Play Routes compiler. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional imports. 
+</description></method><method name="getOutputDirectory" returnType="java.io.File"><description> 
+ Returns the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description></method><method name="isNamespaceReverseRouter" returnType="boolean"><description> 
+ Whether the reverse router should be namespaced. 
+</description></method><method name="setOutputDirectory" returnType="void"><description> 
+ Specifies the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputDirectory The output directory. Must not be null. 
+</description><parameter type="java.io.File" name="outputDirectory"/></method><method name="compile" returnType="void"/><method name="setAdditionalImports" returnType="void"><description> 
+ Specifies the additional imports of the Play Routes compiler. 
+</description><parameter type="java.util.List" name="additionalImports"/></method><property name="javaProject" type="boolean"/><property name="platform" type="org.gradle.play.platform.PlayPlatform"/><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"><description> 
+ Returns the tool chain that will be used to compile the routes source. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description></property><property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
  The fork options to be applied to the Routes compiler. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The fork options for the Routes compiler. 
+</description></property><property name="generateReverseRoutes" type="boolean"><description> 
+ Whether a reverse router should be generated.  Default is true. 
 </description></property><property name="namespaceReverseRouter" type="boolean"><description> 
  Whether the reverse router should be namespaced. 
+</description></property><property name="outputDirectory" type="java.io.File"><description> 
+ Returns the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description></property><property name="additionalImports" type="java.util.List"><description> 
+ Returns the additional imports of the Play Routes compiler. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional imports. 
+</description></property><property name="injectedRoutesGenerator" type="boolean"><description> 
+ Is the injected routes generator (&lt;code&gt;play.routes.compiler.InjectedRoutesGenerator&lt;/code&gt;) used for 
+ generating routes?  Default is false. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false if StaticRoutesGenerator will be used to generate routes, 
+ true if InjectedRoutesGenerator will be used to generate routes. 
 </description></property></type>

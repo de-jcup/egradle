@@ -23,32 +23,32 @@
          &lt;td&gt;"solaris", "sunos"&lt;/td&gt; 
      &lt;/tr&gt; 
  &lt;/table&gt; 
-</description><method name="getDisplayName" returnType="java.lang.String"><description> 
- Returns a human-consumable display name for this operating system. 
+</description><method name="isCurrent" returnType="boolean"><description> 
+ Is this the current OS? 
 </description></method><method name="isMacOsX" returnType="boolean"><description> 
  Is it Mac OS X? 
-</description></method><method name="isCurrent" returnType="boolean"><description> 
- Is this the current OS? 
-</description></method><method name="getName" returnType="java.lang.String"/><method name="isFreeBSD" returnType="boolean"><description> 
- Is it FreeBSD? 
-</description></method><method name="isLinux" returnType="boolean"><description> 
- Is it Linux? 
 </description></method><method name="isWindows" returnType="boolean"><description> 
  Is it Windows? 
+</description></method><method name="isLinux" returnType="boolean"><description> 
+ Is it Linux? 
+</description></method><method name="isFreeBSD" returnType="boolean"><description> 
+ Is it FreeBSD? 
 </description></method><method name="isSolaris" returnType="boolean"><description> 
  Is it Solaris? 
-</description></method><property name="current" type="boolean"><description> 
- Is this the current OS? 
-</description></property><property name="macOsX" type="boolean"><description> 
- Is it Mac OS X? 
-</description></property><property name="solaris" type="boolean"><description> 
- Is it Solaris? 
-</description></property><property name="displayName" type="java.lang.String"><description> 
+</description></method><method name="getDisplayName" returnType="java.lang.String"><description> 
  Returns a human-consumable display name for this operating system. 
-</description></property><property name="windows" type="boolean"><description> 
- Is it Windows? 
+</description></method><method name="getName" returnType="java.lang.String"/><property name="solaris" type="boolean"><description> 
+ Is it Solaris? 
 </description></property><property name="linux" type="boolean"><description> 
  Is it Linux? 
-</description></property><property name="name" type="java.lang.String"/><property name="freeBSD" type="boolean"><description> 
+</description></property><property name="windows" type="boolean"><description> 
+ Is it Windows? 
+</description></property><property name="current" type="boolean"><description> 
+ Is this the current OS? 
+</description></property><property name="freeBSD" type="boolean"><description> 
  Is it FreeBSD? 
+</description></property><property name="name" type="java.lang.String"/><property name="displayName" type="java.lang.String"><description> 
+ Returns a human-consumable display name for this operating system. 
+</description></property><property name="macOsX" type="boolean"><description> 
+ Is it Mac OS X? 
 </description></property></type>

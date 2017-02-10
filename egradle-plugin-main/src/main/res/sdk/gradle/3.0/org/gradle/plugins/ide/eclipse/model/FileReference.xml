@@ -4,16 +4,16 @@
  Returns the logical path for the file. 
 </description></method><method name="getJarURL" returnType="java.lang.String"><description> 
  Returns the jar URL of the file 
-</description></method><method name="getFile" returnType="java.io.File"><description> 
- Returns the target file. 
 </description></method><method name="isRelativeToPathVariable" returnType="boolean"><description> 
  Returns true if this reference is relative to a path variable. 
-</description></method><property name="file" type="java.io.File"><description> 
+</description></method><method name="getFile" returnType="java.io.File"><description> 
  Returns the target file. 
-</description></property><property name="relativeToPathVariable" type="boolean"><description> 
- Returns true if this reference is relative to a path variable. 
-</description></property><property name="path" type="java.lang.String"><description> 
+</description></method><property name="path" type="java.lang.String"><description> 
  Returns the logical path for the file. 
+</description></property><property name="file" type="java.io.File"><description> 
+ Returns the target file. 
 </description></property><property name="jarURL" type="java.lang.String"><description> 
  Returns the jar URL of the file 
+</description></property><property name="relativeToPathVariable" type="boolean"><description> 
+ Returns true if this reference is relative to a path variable. 
 </description></property></type>

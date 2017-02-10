@@ -46,6 +46,7 @@ public class XMLDSLTypeImporterTest {
 		XMLType xmlType = (XMLType)type;
 		assertEquals("gradle",xmlType.getLanguage());
 		assertEquals("0.1",xmlType.getVersion());
+		assertEquals("the.superType",type.getSuperTypeAsString());	
 		
 		/* test method */
 		assertEquals(1, type.getMethods().size());

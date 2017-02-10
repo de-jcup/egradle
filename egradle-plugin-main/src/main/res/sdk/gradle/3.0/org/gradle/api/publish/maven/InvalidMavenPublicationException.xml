@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.maven.InvalidMavenPublicationException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.maven.InvalidMavenPublicationException" version="3.0" superType="org.gradle.api.InvalidUserDataException"><description> 
  Thrown when attempting to publish with an invalid &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;. 
  
  @since 1.4 

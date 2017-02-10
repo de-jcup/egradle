@@ -4,8 +4,8 @@
  The shared library link file. 
 </description></method><method name="getSharedLibraryFile" returnType="java.io.File"><description> 
  The shared library file. 
-</description></method><property name="sharedLibraryFile" type="java.io.File"><description> 
- The shared library file. 
-</description></property><property name="sharedLibraryLinkFile" type="java.io.File"><description> 
+</description></method><property name="sharedLibraryLinkFile" type="java.io.File"><description> 
  The shared library link file. 
+</description></property><property name="sharedLibraryFile" type="java.io.File"><description> 
+ The shared library file. 
 </description></property></type>

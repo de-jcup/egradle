@@ -1,3 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.Jar" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.Jar" version="3.0" superType="org.gradle.jvm.tasks.Jar"><description> 
  Assembles a JAR archive. 
 </description><method name="manifest" returnType="org.gradle.api.tasks.bundling.Jar"><parameter type="groovy.lang.Closure" name="configureClosure"/></method></type>

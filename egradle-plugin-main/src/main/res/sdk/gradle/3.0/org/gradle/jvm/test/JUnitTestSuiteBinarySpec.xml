@@ -2,4 +2,4 @@
  Represents a JUnit test suite binary. 
  
  @since 2.11 
-</description><method name="getjUnitVersion" returnType="java.lang.String"/><method name="getTestSuite" returnType="org.gradle.jvm.test.JUnitTestSuiteSpec"/><method name="setjUnitVersion" returnType="void"><parameter type="java.lang.String" name="version"/></method><property name="testSuite" type="org.gradle.jvm.test.JUnitTestSuiteSpec"/><property name="jUnitVersion" type="java.lang.String"/></type>
+</description><method name="setjUnitVersion" returnType="void"><parameter type="java.lang.String" name="version"/></method><method name="getTestSuite" returnType="org.gradle.jvm.test.JUnitTestSuiteSpec"/><method name="getjUnitVersion" returnType="java.lang.String"/><property name="testSuite" type="org.gradle.jvm.test.JUnitTestSuiteSpec"/><property name="jUnitVersion" type="java.lang.String"/></type>

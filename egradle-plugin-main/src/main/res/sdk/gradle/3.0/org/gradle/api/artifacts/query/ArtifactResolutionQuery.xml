@@ -20,17 +20,17 @@
 </description><method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
  Specifies the set of components to include in the result. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
-</description><parameter type="java.lang.Iterable" name="componentIds"/></method><method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
+</description><parameter type="org.gradle.api.artifacts.component.ComponentIdentifier" name="componentIds"/></method><method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
  Specifies the set of components to include in the result. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
-</description><parameter type="org.gradle.api.artifacts.component.ComponentIdentifier" name="componentIds"/></method><method name="withArtifacts" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
+</description><parameter type="java.lang.Iterable" name="componentIds"/></method><method name="execute" returnType="org.gradle.api.artifacts.result.ArtifactResolutionResult"><description> 
+ Actually execute the query, returning a query result. 
+ Note that &lt;a href='type://ArtifactResolutionQuery#withArtifacts(Class, Class[])'&gt;#withArtifacts(Class, Class[])&lt;/a&gt; must be called before executing the query. 
+</description></method><method name="withArtifacts" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
  Defines the type of component that is expected in the result, and the artifacts to retrieve for components of this type. 
  
  Presently, only a single component type and set of artifacts is permitted. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentType The expected type of the component. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactTypes The artifacts to retrieve for the queried components. 
-</description><parameter type="java.lang.Class" name="componentType"/><parameter type="java.lang.Class" name="artifactTypes"/></method><method name="execute" returnType="org.gradle.api.artifacts.result.ArtifactResolutionResult"><description> 
- Actually execute the query, returning a query result. 
- Note that &lt;a href='type://ArtifactResolutionQuery#withArtifacts(Class, Class[])'&gt;#withArtifacts(Class, Class[])&lt;/a&gt; must be called before executing the query. 
-</description></method></type>
+</description><parameter type="java.lang.Class" name="componentType"/><parameter type="java.lang.Class" name="artifactTypes"/></method></type>

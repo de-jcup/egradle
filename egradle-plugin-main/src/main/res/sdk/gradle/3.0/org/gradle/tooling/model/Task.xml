@@ -9,36 +9,36 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the group a task belongs to. 
  @since 2.5 
-</description></method><method name="getDescription" returnType="java.lang.String" delegationTarget="null"><description> 
- Returns the description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
+</description></method><method name="getPath" returnType="java.lang.String"><description> 
+ Returns the path of this task. This is a fully qualified unique name for this task. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this task. 
  @since 1.0-milestone-3 
 </description></method><method name="getName" returnType="java.lang.String"><description> 
  Returns the name of this task. Note that the name is not necessarily a unique identifier for the task. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this task. 
  @since 1.0-milestone-3 
-</description></method><method name="getPath" returnType="java.lang.String"><description> 
- Returns the path of this task. This is a fully qualified unique name for this task. 
+</description></method><method name="getDescription" returnType="java.lang.String" delegationTarget="null"><description> 
+ Returns the description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this task. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  @since 1.0-milestone-3 
-</description></method><property name="name" type="java.lang.String"><description> 
- Returns the name of this task. Note that the name is not necessarily a unique identifier for the task. 
+</description></method><property name="group" type="java.lang.String"><description> 
+ Returns the group a task belongs to. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this task. 
- @since 1.0-milestone-3 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the group a task belongs to. 
+ @since 2.5 
 </description></property><property name="description" type="java.lang.String"><description> 
  Returns the description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  @since 1.0-milestone-3 
-</description></property><property name="group" type="java.lang.String"><description> 
- Returns the group a task belongs to. 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the name of this task. Note that the name is not necessarily a unique identifier for the task. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the group a task belongs to. 
- @since 2.5 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this task. 
+ @since 1.0-milestone-3 
 </description></property><property name="path" type="java.lang.String"><description> 
  Returns the path of this task. This is a fully qualified unique name for this task. 
  

@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.plugins.osgi.OsgiManifest" version="3.0"><description> 
  Represents a manifest file for a JAR containing an OSGi bundle. 
-</description><method name="setDocURL" returnType="void"><description> 
- A convenient method for setting a Bundle-DocURL instruction. 
+</description><method name="instructionValue" returnType="java.util.List"><description> 
+ Returns the list of arguments for a particular instruction. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;docURL the docURL to set. 
-</description><parameter type="java.lang.String" name="docURL"/></method><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath. 
- 
- @see #setClasspath(org.gradle.api.file.FileCollection)  
-</description></method><method name="getDocURL" returnType="java.lang.String"><description> 
- Returns the docURL value. 
- 
- @see #setDocURL(String) 
-</description></method><method name="setSymbolicName" returnType="void"><description> 
- A convenient method for setting a Bundle-SymbolicName instruction. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;symbolicName the symbolicName to set 
-</description><parameter type="java.lang.String" name="symbolicName"/></method><method name="setName" returnType="void"><description> 
- A convenient method for setting a Bundle-Name instruction. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the name to set 
-</description><parameter type="java.lang.String" name="name"/></method><method name="getVersion" returnType="java.lang.String"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;instructionName 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of arguments 
+ @see #instruction(String, String...) 
+</description><parameter type="java.lang.String" name="instructionName"/></method><method name="getVersion" returnType="java.lang.String"><description> 
  Returns the version. 
  
  @see #setVersion(String)  
-</description></method><method name="setClassesDir" returnType="void"><description> 
- Sets the classes dir. This directory is the major source of input for generation the OSGi manifest. All classes 
- are analyzed for its packages and package dependencies. Based on this the Import-Package value is set. 
- This auto generated value can be overwritten by explicitly setting an instruction. 
+</description></method><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir 
-  
- @see #instruction(String, String...) 
-</description><parameter type="java.io.File" name="classesDir"/></method><method name="instructionReplace" returnType="org.gradle.api.plugins.osgi.OsgiManifest"><description> 
+ @see #setClasspath(org.gradle.api.file.FileCollection)  
+</description></method><method name="getVendor" returnType="java.lang.String"><description> 
+ Returns the vendor. 
+ 
+ @see #setVendor(String)  
+</description></method><method name="instructionReplace" returnType="org.gradle.api.plugins.osgi.OsgiManifest"><description> 
  Sets the values for an instruction. If the instruction does not exists, it is created. If it does exists, the 
  values replace the existing values. 
  
@@ -50,11 +36,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @see #instruction(String, String...) 
  @see #instructionReplace(String, String...) 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="values"/></method><method name="getClassesDir" returnType="java.io.File"><description> 
- Returns the classes dir. 
- 
- @see #setClassesDir(java.io.File)  
-</description></method><method name="getInstructions" returnType="java.util.Map"><description> 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="values"/></method><method name="getInstructions" returnType="java.util.Map"><description> 
  Returns all existing instruction. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map with instructions. The key of the map is the instruction name, the value a list of arguments. 
@@ -62,21 +44,7 @@
  A convenient method for setting a Bundle-License instruction. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;license The license to set 
-</description><parameter type="java.lang.String" name="license"/></method><method name="setClasspath" returnType="void"><description> 
- A convenient method for setting a Bundle-Classpath instruction. The information of the classpath elements are only 
- used if they are OSGi bundles. In this case for example the version information provided by the bundle is used in the Import-Package of the generated 
- OSGi bundle. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath elements 
-</description><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="getDescription" returnType="java.lang.String"><description> 
- Returns the description. 
- 
- @see #setDescription(String)  
-</description></method><method name="setVendor" returnType="void"><description> 
- A convenient method for setting a Bundle-Vendor instruction. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;vendor The vendor to set 
-</description><parameter type="java.lang.String" name="vendor"/></method><method name="instruction" returnType="org.gradle.api.plugins.osgi.OsgiManifest"><description> 
+</description><parameter type="java.lang.String" name="license"/></method><method name="instruction" returnType="org.gradle.api.plugins.osgi.OsgiManifest"><description> 
  Adds arguments to an instruction. If the instruction does not exists, it is created. If it does exists, the 
  arguments are appended to the existing arguments. 
   
@@ -85,74 +53,106 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @see #instructionFirst(String, String...) 
  @see #instructionReplace(String, String...) 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="values"/></method><method name="getVendor" returnType="java.lang.String"><description> 
- Returns the vendor. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="values"/></method><method name="getLicense" returnType="java.lang.String"><description> 
+ Returns the license. 
+ @see #setLicense(String)  
+</description></method><method name="getDescription" returnType="java.lang.String"><description> 
+ Returns the description. 
  
- @see #setVendor(String)  
-</description></method><method name="getName" returnType="java.lang.String"><description> 
- Returns the name. 
+ @see #setDescription(String)  
+</description></method><method name="setSymbolicName" returnType="void"><description> 
+ A convenient method for setting a Bundle-SymbolicName instruction. 
  
- @see #setName(String) 
-</description></method><method name="setVersion" returnType="void"><description> 
- A convenient method for setting a Bundle-Version instruction. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;symbolicName the symbolicName to set 
+</description><parameter type="java.lang.String" name="symbolicName"/></method><method name="setDocURL" returnType="void"><description> 
+ A convenient method for setting a Bundle-DocURL instruction. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version the version to set 
-</description><parameter type="java.lang.String" name="version"/></method><method name="setDescription" returnType="void"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;docURL the docURL to set. 
+</description><parameter type="java.lang.String" name="docURL"/></method><method name="getDocURL" returnType="java.lang.String"><description> 
+ Returns the docURL value. 
+ 
+ @see #setDocURL(String) 
+</description></method><method name="getClassesDir" returnType="java.io.File"><description> 
+ Returns the classes dir. 
+ 
+ @see #setClassesDir(java.io.File)  
+</description></method><method name="setVendor" returnType="void"><description> 
+ A convenient method for setting a Bundle-Vendor instruction. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;vendor The vendor to set 
+</description><parameter type="java.lang.String" name="vendor"/></method><method name="setDescription" returnType="void"><description> 
  A convenient method for setting a Bundle-Description instruction. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;description the description to set 
-</description><parameter type="java.lang.String" name="description"/></method><method name="getLicense" returnType="java.lang.String"><description> 
- Returns the license. 
- @see #setLicense(String)  
-</description></method><method name="getSymbolicName" returnType="java.lang.String"><description> 
+</description><parameter type="java.lang.String" name="description"/></method><method name="setClassesDir" returnType="void"><description> 
+ Sets the classes dir. This directory is the major source of input for generation the OSGi manifest. All classes 
+ are analyzed for its packages and package dependencies. Based on this the Import-Package value is set. 
+ This auto generated value can be overwritten by explicitly setting an instruction. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir 
+  
+ @see #instruction(String, String...) 
+</description><parameter type="java.io.File" name="classesDir"/></method><method name="getName" returnType="java.lang.String"><description> 
+ Returns the name. 
+ 
+ @see #setName(String) 
+</description></method><method name="setName" returnType="void"><description> 
+ A convenient method for setting a Bundle-Name instruction. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the name to set 
+</description><parameter type="java.lang.String" name="name"/></method><method name="setClasspath" returnType="void"><description> 
+ A convenient method for setting a Bundle-Classpath instruction. The information of the classpath elements are only 
+ used if they are OSGi bundles. In this case for example the version information provided by the bundle is used in the Import-Package of the generated 
+ OSGi bundle. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath elements 
+</description><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="getSymbolicName" returnType="java.lang.String"><description> 
  Returns the symbolic name. 
  
  @see #setSymbolicName(String) 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the symbolic name. 
-</description></method><method name="instructionValue" returnType="java.util.List"><description> 
- Returns the list of arguments for a particular instruction. 
+</description></method><method name="setVersion" returnType="void"><description> 
+ A convenient method for setting a Bundle-Version instruction. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;instructionName 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of arguments 
- @see #instruction(String, String...) 
-</description><parameter type="java.lang.String" name="instructionName"/></method><property name="classesDir" type="java.io.File"><description> 
- Returns the classes dir. 
- 
- @see #setClassesDir(java.io.File)  
-</description></property><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath. 
- 
- @see #setClasspath(org.gradle.api.file.FileCollection)  
-</description></property><property name="version" type="java.lang.String"><description> 
- Returns the version. 
- 
- @see #setVersion(String)  
-</description></property><property name="description" type="java.lang.String"><description> 
- Returns the description. 
- 
- @see #setDescription(String)  
-</description></property><property name="vendor" type="java.lang.String"><description> 
- Returns the vendor. 
- 
- @see #setVendor(String)  
-</description></property><property name="name" type="java.lang.String"><description> 
- Returns the name. 
- 
- @see #setName(String) 
-</description></property><property name="docURL" type="java.lang.String"><description> 
- Returns the docURL value. 
- 
- @see #setDocURL(String) 
-</description></property><property name="instructions" type="java.util.Map"><description> 
- Returns all existing instruction. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map with instructions. The key of the map is the instruction name, the value a list of arguments. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version the version to set 
+</description><parameter type="java.lang.String" name="version"/></method><property name="license" type="java.lang.String"><description> 
+ Returns the license. 
+ @see #setLicense(String)  
 </description></property><property name="symbolicName" type="java.lang.String"><description> 
  Returns the symbolic name. 
  
  @see #setSymbolicName(String) 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the symbolic name. 
-</description></property><property name="license" type="java.lang.String"><description> 
- Returns the license. 
- @see #setLicense(String)  
+</description></property><property name="docURL" type="java.lang.String"><description> 
+ Returns the docURL value. 
+ 
+ @see #setDocURL(String) 
+</description></property><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath. 
+ 
+ @see #setClasspath(org.gradle.api.file.FileCollection)  
+</description></property><property name="classesDir" type="java.io.File"><description> 
+ Returns the classes dir. 
+ 
+ @see #setClassesDir(java.io.File)  
+</description></property><property name="version" type="java.lang.String"><description> 
+ Returns the version. 
+ 
+ @see #setVersion(String)  
+</description></property><property name="instructions" type="java.util.Map"><description> 
+ Returns all existing instruction. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map with instructions. The key of the map is the instruction name, the value a list of arguments. 
+</description></property><property name="vendor" type="java.lang.String"><description> 
+ Returns the vendor. 
+ 
+ @see #setVendor(String)  
+</description></property><property name="description" type="java.lang.String"><description> 
+ Returns the description. 
+ 
+ @see #setDescription(String)  
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the name. 
+ 
+ @see #setName(String) 
 </description></property></type>

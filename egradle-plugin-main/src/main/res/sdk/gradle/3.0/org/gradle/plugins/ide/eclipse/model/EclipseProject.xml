@@ -71,88 +71,61 @@
    } 
  } 
  &lt;/pre&gt; 
-</description><method name="mergeXmlProject" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.Project" name="xmlProject"/></method><method name="getReferencedProjects" returnType="java.util.Set"/><method name="referencedProjects" returnType="void" delegationTarget="EclipseProject"><description> 
- The referenced projects of this Eclipse project (*not*: java build path project references). &lt;p&gt; Referencing projects does not mean adding a build path dependencies between them! If you need to 
- configure a build path dependency use Gradle's dependencies section or eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><method name="getBuildCommands" returnType="java.util.List"/><method name="buildCommand" returnType="void" delegationTarget="EclipseProject"><description> 
+ Adds a build command to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A maps with the args for the link. Legal keys for the map are name, type, location and locationUri. 
-</description><parameter type="java.lang.String" name="referencedProjects"/></method><method name="buildCommand" returnType="void" delegationTarget="EclipseProject"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command 
+ @see #buildCommand(Map, String) 
+</description><parameter type="java.lang.String" name="buildCommand"/></method><method name="getNatures" returnType="java.util.List"/><method name="setLinkedResources" returnType="void" delegationTarget="EclipseProject"><description> 
+ The linked resources to be added to this Eclipse project. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.util.Set" name="linkedResources"/></method><method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+ See &lt;a href='type://EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
+</description></method><method name="mergeXmlProject" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.Project" name="xmlProject"/></method><method name="getComment" returnType="java.lang.String"/><method name="setBuildCommands" returnType="void" delegationTarget="EclipseProject"><description> 
+ The build commands to be added to this Eclipse project. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.util.List" name="buildCommands"/></method><method name="buildCommand" returnType="void" delegationTarget="EclipseProject"><description> 
  Adds a build command with arguments to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map with arguments, where the key is the name of the argument and the value the value. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command. 
  @see #buildCommand(String) 
-</description><parameter type="java.util.Map" name="args"/><parameter type="java.lang.String" name="buildCommand"/></method><method name="setNatures" returnType="void" delegationTarget="EclipseProject"><description> 
- The natures to be added to this Eclipse project. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.util.List" name="natures"/></method><method name="getName" returnType="java.lang.String"/><method name="getLinkedResources" returnType="java.util.Set"/><method name="natures" returnType="void" delegationTarget="EclipseProject"><description> 
- Appends natures entries to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.util.Map" name="args"/><parameter type="java.lang.String" name="buildCommand"/></method><method name="linkedResource" returnType="void" delegationTarget="EclipseProject"><description> 
+ Adds a resource link (aka 'source link') to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;natures the nature names 
-</description><parameter type="java.lang.String" name="natures"/></method><method name="setReferencedProjects" returnType="void" delegationTarget="EclipseProject"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A maps with the args for the link. Legal keys for the map are name, type, location and locationUri. 
+</description><parameter type="java.util.Map" name="args"/></method><method name="referencedProjects" returnType="void" delegationTarget="EclipseProject"><description> 
+ The referenced projects of this Eclipse project (*not*: java build path project references). &lt;p&gt; Referencing projects does not mean adding a build path dependencies between them! If you need to 
+ configure a build path dependency use Gradle's dependencies section or eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.lang.String" name="referencedProjects"/></method><method name="getReferencedProjects" returnType="java.util.Set"/><method name="getLinkedResources" returnType="java.util.Set"/><method name="setReferencedProjects" returnType="void" delegationTarget="EclipseProject"><description> 
  The referenced projects of this Eclipse project (*not*: java build path project references). 
  &lt;p&gt; 
  Referencing projects does not mean adding a build path dependencies between them! 
  If you need to configure a build path dependency use Gradle's dependencies section or 
  eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.util.Set" name="referencedProjects"/></method><method name="setComment" returnType="void" delegationTarget="EclipseProject"><description> 
+</description><parameter type="java.util.Set" name="referencedProjects"/></method><method name="setNatures" returnType="void" delegationTarget="EclipseProject"><description> 
+ The natures to be added to this Eclipse project. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.util.List" name="natures"/></method><method name="setComment" returnType="void" delegationTarget="EclipseProject"><description> 
  A comment used for the eclipse project. By default it will be configured to &lt;b&gt;project.description&lt;/b&gt; 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.lang.String" name="comment"/></method><method name="setLinkedResources" returnType="void" delegationTarget="EclipseProject"><description> 
- The linked resources to be added to this Eclipse project. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.util.Set" name="linkedResources"/></method><method name="buildCommand" returnType="void" delegationTarget="EclipseProject"><description> 
- Adds a build command to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description><parameter type="java.lang.String" name="comment"/></method><method name="natures" returnType="void" delegationTarget="EclipseProject"><description> 
+ Appends natures entries to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command 
- @see #buildCommand(Map, String) 
-</description><parameter type="java.lang.String" name="buildCommand"/></method><method name="setName" returnType="void" delegationTarget="EclipseProject"><description> 
- Configures eclipse project name. It is &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you. 
- By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt; 
- to make sure the moduleName is unique in the scope of a multi-module build. 
- The 'uniqueness' of a module name is required for correct import 
- into Eclipse and the task will make sure the name is unique. 
- &lt;p&gt; 
- The logic that makes sure project names are unique is available &lt;b&gt;since&lt;/b&gt; 1.0-milestone-2 
- &lt;p&gt; 
- If your project has problems with unique names it is recommended to always run gradle eclipse from the root, e.g. for all subprojects, including generation of .classpath. 
- If you run the generation of the eclipse project only for a single subproject then you may have different results 
- because the unique names are calculated based on eclipse projects that are involved in the specific build run. 
- &lt;p&gt; 
- If you update the project names then make sure you run gradle eclipse from the root, e.g. for all subprojects. 
- The reason is that there may be subprojects that depend on the subproject with amended eclipse project name. 
- So you want them to be generated as well because the project dependencies in .classpath need to refer to the amended project name. 
- Basically, for non-trivial projects it is recommended to always run gradle eclipse from the root. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.lang.String" name="name"/></method><method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
- See &lt;a href='type://EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
-</description></method><method name="getBuildCommands" returnType="java.util.List"/><method name="getComment" returnType="java.lang.String"/><method name="getNatures" returnType="java.util.List"/><method name="file" returnType="void" delegationTarget="Project"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;natures the nature names 
+</description><parameter type="java.lang.String" name="natures"/></method><method name="getName" returnType="java.lang.String"/><method name="file" returnType="void" delegationTarget="Project"><description> 
  Enables advanced configuration like tinkering with the output XML or affecting the way existing .project content is merged with gradle build information &lt;p&gt; The object passed to whenMerged{} 
  and beforeMerged{} closures is of type &lt;a href='type://Project'&gt;Project&lt;/a&gt; &lt;p&gt; 
  
  For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setBuildCommands" returnType="void" delegationTarget="EclipseProject"><description> 
- The build commands to be added to this Eclipse project. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><property name="linkedResources" type="java.util.Set"><description> 
+ The linked resources to be added to this Eclipse project. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description><parameter type="java.util.List" name="buildCommands"/></method><property name="comment" type="java.lang.String"><description> 
- A comment used for the eclipse project. By default it will be configured to &lt;b&gt;project.description&lt;/b&gt; 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></property><property name="buildCommands" type="java.util.List"><description> 
- The build commands to be added to this Eclipse project. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></property><property name="natures" type="java.util.List"><description> 
- The natures to be added to this Eclipse project. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></property><property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
- See &lt;a href='type://EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
 </description></property><property name="name" type="java.lang.String"><description> 
  Configures eclipse project name. It is &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you. 
  By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt; 
@@ -172,14 +145,24 @@
  Basically, for non-trivial projects it is recommended to always run gradle eclipse from the root. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description></property><property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+ See &lt;a href='type://EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
+</description></property><property name="comment" type="java.lang.String"><description> 
+ A comment used for the eclipse project. By default it will be configured to &lt;b&gt;project.description&lt;/b&gt; 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description></property><property name="buildCommands" type="java.util.List"><description> 
+ The build commands to be added to this Eclipse project. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
 </description></property><property name="referencedProjects" type="java.util.Set"><description> 
  The referenced projects of this Eclipse project (*not*: java build path project references). 
  &lt;p&gt; 
  Referencing projects does not mean adding a build path dependencies between them! 
  If you need to configure a build path dependency use Gradle's dependencies section or 
  eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></property><property name="linkedResources" type="java.util.Set"><description> 
- The linked resources to be added to this Eclipse project. 
+</description></property><property name="natures" type="java.util.List"><description> 
+ The natures to be added to this Eclipse project. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
 </description></property></type>

@@ -38,7 +38,8 @@ public interface Type extends LanguageElement{
 	public Reason getReasonForExtension(String extensionId);
 	
 	/**
-	 * Returns reason for element
+	 * Returns reason for element. A reason will contain information about plugin or super type.
+	 * reason will be null if element is not contained, or element is defined in type itself.
 	 * @param element
 	 * @return reason or <code>null</code> when no reason is specified
 	 */

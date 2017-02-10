@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.GenerateMavenPom" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.GenerateMavenPom" version="3.0" superType="org.gradle.api.DefaultTask"><description> 
  Generates a Maven module descriptor (POM) file. 
  
  @since 1.4 
-</description><method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/><method name="getVersionRangeMapper" returnType="org.gradle.api.publication.maven.internal.VersionRangeMapper"/><method name="doGenerate" returnType="void"/><method name="setDestination" returnType="void"><description> 
+</description><method name="setDestination" returnType="void"><description> 
  Sets the destination the descriptor will be written to. 
  
  The value is resolved with &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destination The file the descriptor will be written to. 
-</description><parameter type="java.lang.Object" name="destination"/></method><method name="getDestination" returnType="java.io.File"><description> 
+</description><parameter type="java.lang.Object" name="destination"/></method><method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/><method name="getDestination" returnType="java.io.File"><description> 
  The file the POM will be written to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file the POM will be written to 
-</description></method><method name="getPom" returnType="org.gradle.api.publish.maven.MavenPom"><description> 
+</description></method><method name="getVersionRangeMapper" returnType="org.gradle.api.publication.maven.internal.VersionRangeMapper"/><method name="doGenerate" returnType="void"/><method name="getPom" returnType="org.gradle.api.publish.maven.MavenPom"><description> 
  The Maven POM. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Maven POM. 
-</description></method><method name="setPom" returnType="void"><parameter type="org.gradle.api.publish.maven.MavenPom" name="pom"/></method><property name="pom" type="org.gradle.api.publish.maven.MavenPom"><description> 
- The Maven POM. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Maven POM. 
-</description></property><property name="destination" type="java.io.File"><description> 
+</description></method><method name="setPom" returnType="void"><parameter type="org.gradle.api.publish.maven.MavenPom" name="pom"/></method><property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/><property name="destination" type="java.io.File"><description> 
  The file the POM will be written to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file the POM will be written to 
-</description></property><property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/><property name="versionRangeMapper" type="org.gradle.api.publication.maven.internal.VersionRangeMapper"/></type>
+</description></property><property name="versionRangeMapper" type="org.gradle.api.publication.maven.internal.VersionRangeMapper"/><property name="pom" type="org.gradle.api.publish.maven.MavenPom"><description> 
+ The Maven POM. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Maven POM. 
+</description></property></type>

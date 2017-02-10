@@ -6,10 +6,10 @@
  @since 1.1-rc-1 
 </description></method><method name="getProblem" returnType="java.lang.Throwable"><description> 
  the exception that is the cause of unresolved state 
-</description></method><property name="problem" type="java.lang.Throwable"><description> 
- the exception that is the cause of unresolved state 
-</description></property><property name="selector" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+</description></method><property name="selector" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
  The module selector of the dependency. 
  
  @since 1.1-rc-1 
+</description></property><property name="problem" type="java.lang.Throwable"><description> 
+ the exception that is the cause of unresolved state 
 </description></property></type>

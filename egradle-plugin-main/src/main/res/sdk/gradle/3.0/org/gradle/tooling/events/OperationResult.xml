@@ -2,14 +2,14 @@
  Describes the result of running an operation. 
  
  @since 2.4 
-</description><method name="getEndTime" returnType="long"><description> 
- Returns the time when the operation finished its execution. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The end time, in milliseconds since the epoch. 
-</description></method><method name="getStartTime" returnType="long"><description> 
+</description><method name="getStartTime" returnType="long"><description> 
  Returns the time when the operation started its execution. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start time, in milliseconds since the epoch. 
+</description></method><method name="getEndTime" returnType="long"><description> 
+ Returns the time when the operation finished its execution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The end time, in milliseconds since the epoch. 
 </description></method><property name="startTime" type="long"><description> 
  Returns the time when the operation started its execution. 
  

@@ -3,11 +3,11 @@
 </description><method name="define" returnType="void"><description> 
  Defines a named preprocessor macro with a value, which will be used when compiling this binary. 
  The macro will be supplied to the compiler as '-D name=definition'. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="definition"/></method><method name="getMacros" returnType="java.util.Map"><description> 
- The set of preprocessor macros to define when compiling this binary. 
-</description></method><method name="define" returnType="void"><description> 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.String" name="definition"/></method><method name="define" returnType="void"><description> 
  Defines a named preprocessor macros to use when compiling this binary. 
  The macro will be supplied to the compiler as '-D name'. 
-</description><parameter type="java.lang.String" name="name"/></method><property name="macros" type="java.util.Map"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getMacros" returnType="java.util.Map"><description> 
+ The set of preprocessor macros to define when compiling this binary. 
+</description></method><property name="macros" type="java.util.Map"><description> 
  The set of preprocessor macros to define when compiling this binary. 
 </description></property></type>

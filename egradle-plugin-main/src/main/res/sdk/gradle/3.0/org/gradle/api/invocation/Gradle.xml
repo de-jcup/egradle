@@ -2,7 +2,35 @@
  Represents an invocation of Gradle. 
  
  &lt;p&gt;You can obtain a &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance by calling &lt;a href='type://Project#getGradle()'&gt;Project#getGradle()&lt;/a&gt;.&lt;/p&gt; 
-</description><method name="addListener" returnType="void" delegationTarget="org.gradle.BuildListener"><description> 
+</description><method name="settingsEvaluated" returnType="void" delegationTarget="org.gradle.api.initialization.Settings"><description> 
+ Adds a closure to be called when the build settings have been loaded and evaluated. 
+ 
+ The settings object is fully configured and is ready to use to load the build projects. The 
+ &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object is passed to the closure as a parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getTaskGraph" returnType="org.gradle.api.execution.TaskExecutionGraph" delegationTarget="TaskExecutionGraph"><description> 
+ Returns the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; for this build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task graph. Never returns null. 
+</description></method><method name="getStartParameter" returnType="org.gradle.StartParameter" delegationTarget="StartParameter"><description> 
+ Returns the &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; used to start this build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start parameter. Never returns null. 
+</description></method><method name="rootProject" returnType="void"><description> 
+ Adds an action to execute against the root project of this build. 
+ 
+ If the root project is already available, the action 
+ is executed immediately. Otherwise, the action is executed when the root project becomes available. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getGradleUserHomeDir" returnType="java.io.File"><description> 
+ Returns the Gradle user home directory. 
+ 
+ This directory is used to cache downloaded resources, compiled build scripts and so on. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The user home directory. Never returns null. 
+</description></method><method name="addListener" returnType="void" delegationTarget="org.gradle.BuildListener"><description> 
  Adds the given listener to this build. The listener may implement any of the given listener interfaces: 
  
  &lt;ul&gt; 
@@ -18,12 +46,7 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add. Does nothing if this listener has already been added. 
-</description><parameter type="java.lang.Object" name="listener"/></method><method name="beforeProject" returnType="void"><description> 
- Adds a closure to be called immediately before a project is evaluated. The project is passed to the closure as a 
- parameter. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="useLogger" returnType="void"><description> 
+</description><parameter type="java.lang.Object" name="listener"/></method><method name="useLogger" returnType="void"><description> 
  Uses the given object as a logger. 
  
  The logger object may implement any of the listener interfaces supported by 
@@ -35,64 +58,13 @@
  provides with your own implementation, for certain types of events. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logger The logger to use. 
-</description><parameter type="java.lang.Object" name="logger"/></method><method name="rootProject" returnType="void"><description> 
- Adds an action to execute against the root project of this build. 
+</description><parameter type="java.lang.Object" name="logger"/></method><method name="buildStarted" returnType="void" delegationTarget="Gradle"><description> 
+ Adds a closure to be called when the build is started. 
  
- If the root project is already available, the action 
- is executed immediately. Otherwise, the action is executed when the root project becomes available. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="buildFinished" returnType="void" delegationTarget="org.gradle.BuildResult"><description> 
- Adds a closure to be called when the build is completed. 
- 
- All selected tasks have been executed. 
- A &lt;a href='type://org.gradle.BuildResult'&gt;org.gradle.BuildResult&lt;/a&gt; instance is passed to the closure as a parameter. 
+ This &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance is passed to the closure as the first parameter. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="removeProjectEvaluationListener" returnType="void"><description> 
- Removes the given listener from this build. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove. Does nothing if this listener has not been added. 
-</description><parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/></method><method name="afterProject" returnType="void"><description> 
- Adds a closure to be called immediately after a project is evaluated. 
- 
- The project is passed to the closure as the first parameter. The project evaluation failure, if any, 
- is passed as the second parameter. Both parameters are optional. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="addBuildListener" returnType="void" delegationTarget="BuildListener"><description> 
- Adds a &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; to this Build instance. 
- 
- The listener is notified of events which occur during the execution of the build. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildListener The listener to add. 
-</description><parameter type="org.gradle.BuildListener" name="buildListener"/></method><method name="getGradle" returnType="org.gradle.api.invocation.Gradle" delegationTarget="Gradle"><description> 
- Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 
- 
- This method is useful in init scripts to explicitly access Gradle 
- properties and methods. For example, using &lt;code&gt;gradle.parent&lt;/code&gt; can express your intent better than using 
- &lt;code&gt;parent&lt;/code&gt;. This property also allows you to access Gradle properties from a scope where the property 
- may be hidden, such as, for example, from a method or closure. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this. Never returns null. 
-</description></method><method name="getRootProject" returnType="org.gradle.api.Project"><description> 
- Returns the root project of this build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
- @throws IllegalStateException When called before the root project is available. 
-</description></method><method name="settingsEvaluated" returnType="void" delegationTarget="org.gradle.api.initialization.Settings"><description> 
- Adds a closure to be called when the build settings have been loaded and evaluated. 
- 
- The settings object is fully configured and is ready to use to load the build projects. The 
- &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object is passed to the closure as a parameter. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="addProjectEvaluationListener" returnType="org.gradle.api.ProjectEvaluationListener"><description> 
- Adds a listener to this build, to receive notifications as projects are evaluated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add. Does nothing if this listener has already been added. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added listener. 
-</description><parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/></method><method name="getGradleHomeDir" returnType="java.io.File"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getGradleHomeDir" returnType="java.io.File"><description> 
  Returns the Gradle home directory, if any. 
  
  This directory is the directory containing the Gradle distribution executing this build. 
@@ -104,14 +76,46 @@
  &lt;a href="http://docs.gradle.org/current/userguide/gradle_daemon.html"&gt;the user guide&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. May return null. 
-</description></method><method name="projectsEvaluated" returnType="void" delegationTarget="Gradle"><description> 
+</description></method><method name="getGradle" returnType="org.gradle.api.invocation.Gradle" delegationTarget="Gradle"><description> 
+ Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 
+ 
+ This method is useful in init scripts to explicitly access Gradle 
+ properties and methods. For example, using &lt;code&gt;gradle.parent&lt;/code&gt; can express your intent better than using 
+ &lt;code&gt;parent&lt;/code&gt;. This property also allows you to access Gradle properties from a scope where the property 
+ may be hidden, such as, for example, from a method or closure. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this. Never returns null. 
+</description></method><method name="getGradleVersion" returnType="java.lang.String"><description> 
+ Returns the current Gradle version. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version. Never returns null. 
+</description></method><method name="buildFinished" returnType="void" delegationTarget="org.gradle.BuildResult"><description> 
+ Adds a closure to be called when the build is completed. 
+ 
+ All selected tasks have been executed. 
+ A &lt;a href='type://org.gradle.BuildResult'&gt;org.gradle.BuildResult&lt;/a&gt; instance is passed to the closure as a parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="projectsEvaluated" returnType="void" delegationTarget="Gradle"><description> 
  Adds a closure to be called when all projects for the build have been evaluated. 
  
  The project objects are fully configured and are ready to use to populate the task graph. 
  This &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance is passed to the closure as a parameter. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="projectsLoaded" returnType="void" delegationTarget="Gradle"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="afterProject" returnType="void"><description> 
+ Adds a closure to be called immediately after a project is evaluated. 
+ 
+ The project is passed to the closure as the first parameter. The project evaluation failure, if any, 
+ is passed as the second parameter. Both parameters are optional. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getRootProject" returnType="org.gradle.api.Project"><description> 
+ Returns the root project of this build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
+ @throws IllegalStateException When called before the root project is available. 
+</description></method><method name="projectsLoaded" returnType="void" delegationTarget="Gradle"><description> 
  Adds a closure to be called when the projects for the build have been created from the settings. 
  
  None of the projects have been evaluated. This &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance is passed to the closure as a parameter. 
@@ -130,46 +134,53 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="removeListener" returnType="void"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="beforeProject" returnType="void"><description> 
+ Adds a closure to be called immediately before a project is evaluated. The project is passed to the closure as a 
+ parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="addProjectEvaluationListener" returnType="org.gradle.api.ProjectEvaluationListener"><description> 
+ Adds a listener to this build, to receive notifications as projects are evaluated. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add. Does nothing if this listener has already been added. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added listener. 
+</description><parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/></method><method name="removeListener" returnType="void"><description> 
  Removes the given listener from this build. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove. Does nothing if this listener has not been added. 
-</description><parameter type="java.lang.Object" name="listener"/></method><method name="getGradleUserHomeDir" returnType="java.io.File"><description> 
- Returns the Gradle user home directory. 
+</description><parameter type="java.lang.Object" name="listener"/></method><method name="addBuildListener" returnType="void" delegationTarget="BuildListener"><description> 
+ Adds a &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; to this Build instance. 
  
- This directory is used to cache downloaded resources, compiled build scripts and so on. 
+ The listener is notified of events which occur during the execution of the build. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The user home directory. Never returns null. 
-</description></method><method name="getParent" returnType="org.gradle.api.invocation.Gradle"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildListener The listener to add. 
+</description><parameter type="org.gradle.BuildListener" name="buildListener"/></method><method name="getParent" returnType="org.gradle.api.invocation.Gradle"><description> 
  Returns the parent build of this build, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent build. May return null. 
-</description></method><method name="getTaskGraph" returnType="org.gradle.api.execution.TaskExecutionGraph" delegationTarget="TaskExecutionGraph"><description> 
- Returns the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; for this build. 
+</description></method><method name="removeProjectEvaluationListener" returnType="void"><description> 
+ Removes the given listener from this build. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task graph. Never returns null. 
-</description></method><method name="getStartParameter" returnType="org.gradle.StartParameter" delegationTarget="StartParameter"><description> 
- Returns the &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; used to start this build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start parameter. Never returns null. 
-</description></method><method name="buildStarted" returnType="void" delegationTarget="Gradle"><description> 
- Adds a closure to be called when the build is started. 
- 
- This &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance is passed to the closure as the first parameter. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="allprojects" returnType="void"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove. Does nothing if this listener has not been added. 
+</description><parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/></method><method name="allprojects" returnType="void"><description> 
  Adds an action to execute against all projects of this build. 
  
  The action is executed immediately against all projects which are 
  already available. It is also executed as subsequent projects are added to this build. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getGradleVersion" returnType="java.lang.String"><description> 
- Returns the current Gradle version. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="taskGraph" type="org.gradle.api.execution.TaskExecutionGraph"><description> 
+ Returns the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; for this build. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version. Never returns null. 
-</description></method><property name="rootProject" type="org.gradle.api.Project"><description> 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task graph. Never returns null. 
+</description></property><property name="tingsEvaluated" type="groovy.lang.Closure"><description> 
+ Adds a closure to be called when the build settings have been loaded and evaluated. 
+ 
+ The settings object is fully configured and is ready to use to load the build projects. The 
+ &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object is passed to the closure as a parameter. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description></property><property name="rootProject" type="org.gradle.api.Project"><description> 
  Returns the root project of this build. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
@@ -184,6 +195,23 @@
  This directory is used to cache downloaded resources, compiled build scripts and so on. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The user home directory. Never returns null. 
+</description></property><property name="gradle" type="org.gradle.api.invocation.Gradle"><description> 
+ Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 
+ 
+ This method is useful in init scripts to explicitly access Gradle 
+ properties and methods. For example, using &lt;code&gt;gradle.parent&lt;/code&gt; can express your intent better than using 
+ &lt;code&gt;parent&lt;/code&gt;. This property also allows you to access Gradle properties from a scope where the property 
+ may be hidden, such as, for example, from a method or closure. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this. Never returns null. 
+</description></property><property name="startParameter" type="org.gradle.StartParameter"><description> 
+ Returns the &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; used to start this build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start parameter. Never returns null. 
+</description></property><property name="parent" type="org.gradle.api.invocation.Gradle"><description> 
+ Returns the parent build of this build, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent build. May return null. 
 </description></property><property name="gradleHomeDir" type="java.io.File"><description> 
  Returns the Gradle home directory, if any. 
  
@@ -196,32 +224,4 @@
  &lt;a href="http://docs.gradle.org/current/userguide/gradle_daemon.html"&gt;the user guide&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. May return null. 
-</description></property><property name="gradle" type="org.gradle.api.invocation.Gradle"><description> 
- Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 
- 
- This method is useful in init scripts to explicitly access Gradle 
- properties and methods. For example, using &lt;code&gt;gradle.parent&lt;/code&gt; can express your intent better than using 
- &lt;code&gt;parent&lt;/code&gt;. This property also allows you to access Gradle properties from a scope where the property 
- may be hidden, such as, for example, from a method or closure. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this. Never returns null. 
-</description></property><property name="taskGraph" type="org.gradle.api.execution.TaskExecutionGraph"><description> 
- Returns the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; for this build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task graph. Never returns null. 
-</description></property><property name="parent" type="org.gradle.api.invocation.Gradle"><description> 
- Returns the parent build of this build, if any. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent build. May return null. 
-</description></property><property name="startParameter" type="org.gradle.StartParameter"><description> 
- Returns the &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; used to start this build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start parameter. Never returns null. 
-</description></property><property name="tingsEvaluated" type="groovy.lang.Closure"><description> 
- Adds a closure to be called when the build settings have been loaded and evaluated. 
- 
- The settings object is fully configured and is ready to use to load the build projects. The 
- &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object is passed to the closure as a parameter. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
 </description></property></type>

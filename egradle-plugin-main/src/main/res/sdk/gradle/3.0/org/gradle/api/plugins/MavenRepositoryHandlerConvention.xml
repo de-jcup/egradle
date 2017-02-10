@@ -4,39 +4,16 @@
 </description><method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer"><description> 
  Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
- @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
- Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
- 
- The following parameter are accepted as keys for the map: 
- 
- &lt;table summary="Shows property keys and associated values"&gt; 
- &lt;tr&gt;&lt;th&gt;Key&lt;/th&gt; 
-     &lt;th&gt;Description of Associated Value&lt;/th&gt;&lt;/tr&gt; 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;name&lt;/code&gt;&lt;/td&gt; 
-     &lt;td&gt;&lt;em&gt;(optional)&lt;/em&gt; The name of the repository. The default is &lt;em&gt;mavenInstaller-{SOME_ID}&lt;/em&gt;. 
- The name is used in the console output, 
- to point to information related to a particular repository. A name must be unique amongst a repository group. 
- &lt;/td&gt;&lt;/tr&gt; 
- &lt;/table&gt; 
- 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
- @see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure) 
-</description><parameter type="java.util.Map" name="args"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
+</description><parameter type="java.util.Map" name="args"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
  @see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure) 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer"><description> 
- Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
- @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
-</description></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository 
@@ -60,15 +37,38 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
  @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
-</description><parameter type="java.util.Map" name="args"/></method><method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer"><description> 
- Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
-</description><parameter type="java.util.Map" name="args"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
+</description><parameter type="java.util.Map" name="args"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
  @see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure) 
-</description></method></type>
+</description></method><method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer"><description> 
+ Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
+ @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
+</description></method><method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer"><description> 
+ Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
+ @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver"><description> 
+ Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
+ 
+ The following parameter are accepted as keys for the map: 
+ 
+ &lt;table summary="Shows property keys and associated values"&gt; 
+ &lt;tr&gt;&lt;th&gt;Key&lt;/th&gt; 
+     &lt;th&gt;Description of Associated Value&lt;/th&gt;&lt;/tr&gt; 
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;name&lt;/code&gt;&lt;/td&gt; 
+     &lt;td&gt;&lt;em&gt;(optional)&lt;/em&gt; The name of the repository. The default is &lt;em&gt;mavenInstaller-{SOME_ID}&lt;/em&gt;. 
+ The name is used in the console output, 
+ to point to information related to a particular repository. A name must be unique amongst a repository group. 
+ &lt;/td&gt;&lt;/tr&gt; 
+ &lt;/table&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository 
+ @see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure) 
+</description><parameter type="java.util.Map" name="args"/></method></type>

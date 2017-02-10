@@ -15,11 +15,11 @@
  Enables advanced manipulation of the output XML. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setIws" returnType="void"><parameter type="org.gradle.plugins.ide.api.XmlFileContentMerger" name="iws"/></method><method name="mergeXmlWorkspace" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Workspace" name="xmlWorkspace"/></method><method name="getIws" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger" delegationTarget="IdeaWorkspace"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getIws" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger" delegationTarget="IdeaWorkspace"><description> 
  Enables advanced manipulation of the output XML. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
-</description></method><property name="iws" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+</description></method><method name="setIws" returnType="void"><parameter type="org.gradle.plugins.ide.api.XmlFileContentMerger" name="iws"/></method><method name="mergeXmlWorkspace" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Workspace" name="xmlWorkspace"/></method><property name="iws" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
  Enables advanced manipulation of the output XML. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 

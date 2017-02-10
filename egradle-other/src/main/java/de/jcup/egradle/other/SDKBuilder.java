@@ -55,8 +55,8 @@ public class SDKBuilder {
 	 */
 	public static void main(String[] args) throws IOException {
 		new SDKBuilder("./../../gradle/subprojects/docs").
-			startTransformToUserHome(createUserHomeTargetRoot(),"3.0");
-//			startTransformToUserHome(new File("./../egradle-plugin-main/src/main/res/"), "3.0");
+//			startTransformToUserHome(createUserHomeTargetRoot(),"3.0");
+			startTransformToUserHome(new File("./../egradle-plugin-main/src/main/res/"), "3.0");
 	}
 
 	public static File createUserHomeTargetRoot() {

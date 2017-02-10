@@ -2,11 +2,11 @@
  Contains immutable component module metadata information. 
  
  @since 2.2 
-</description><method name="getReplacedBy" returnType="org.gradle.api.artifacts.ModuleIdentifier"><description> 
+</description><method name="getId" returnType="org.gradle.api.artifacts.ModuleIdentifier"><description> 
+ The identifier of the module. 
+</description></method><method name="getReplacedBy" returnType="org.gradle.api.artifacts.ModuleIdentifier"><description> 
  The identifier of module that replaces this module. 
  A real world example: 'com.google.collections:google-collections' is replaced by 'com.google.guava:guava'. 
-</description></method><method name="getId" returnType="org.gradle.api.artifacts.ModuleIdentifier"><description> 
- The identifier of the module. 
 </description></method><property name="id" type="org.gradle.api.artifacts.ModuleIdentifier"><description> 
  The identifier of the module. 
 </description></property><property name="replacedBy" type="org.gradle.api.artifacts.ModuleIdentifier"><description> 

@@ -13,4 +13,4 @@
    } 
  } 
  &lt;/pre&gt; 
-</description><method name="setTargetCompatibility" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetCompatibility"/></method><method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion"/><property name="targetCompatibility" type="org.gradle.api.JavaVersion"/></type>
+</description><method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion"/><method name="setTargetCompatibility" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetCompatibility"/></method><property name="targetCompatibility" type="org.gradle.api.JavaVersion"/></type>

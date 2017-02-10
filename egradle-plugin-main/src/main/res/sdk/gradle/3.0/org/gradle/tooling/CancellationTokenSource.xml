@@ -13,12 +13,7 @@
  &lt;p&gt;All implementations of this interface are required to be thread safe.&lt;/p&gt; 
  
  @since 2.1 
-</description><method name="token" returnType="org.gradle.tooling.CancellationToken" delegationTarget="CancellationTokenSource"><description> 
- Returns a token associated with this &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt;. 
- Always returns the same instance. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The cancellation token. 
-</description></method><method name="cancel" returnType="void" delegationTarget="BuildCancelledException"><description> 
+</description><method name="cancel" returnType="void" delegationTarget="BuildCancelledException"><description> 
  Initiates cancel request. All operations that have been associated with this token will be cancelled. 
  
  &lt;p&gt;It is assumed that the implementation will do 'best-effort' attempt to perform cancellation. 
@@ -26,4 +21,9 @@
  will notify its &lt;a href='type://org.gradle.tooling.ResultHandler#onFailure(GradleConnectionException)'&gt;org.gradle.tooling.ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; 
  with a &lt;a href='type://BuildCancelledException'&gt;BuildCancelledException&lt;/a&gt; describing how it was cancelled. 
  &lt;/p&gt; 
+</description></method><method name="token" returnType="org.gradle.tooling.CancellationToken" delegationTarget="CancellationTokenSource"><description> 
+ Returns a token associated with this &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt;. 
+ Always returns the same instance. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The cancellation token. 
 </description></method></type>

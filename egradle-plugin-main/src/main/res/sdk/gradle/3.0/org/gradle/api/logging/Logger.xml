@@ -3,45 +3,7 @@
  levels.&lt;/p&gt; 
  
  &lt;p&gt;You can obtain a &lt;a href='type://Logger'&gt;Logger&lt;/a&gt; instance using &lt;a href='type://Logging#getLogger(Class)'&gt;Logging#getLogger(Class)&lt;/a&gt; or &lt;a href='type://Logging#getLogger(String)'&gt;Logging#getLogger(String)&lt;/a&gt;. A &lt;a href='type://Logger'&gt;Logger&lt;/a&gt; instance is also available through &lt;a href='type://org.gradle.api.Project#getLogger()'&gt;org.gradle.api.Project#getLogger()&lt;/a&gt;, &lt;a href='type://org.gradle.api.Task#getLogger()'&gt;org.gradle.api.Task#getLogger()&lt;/a&gt; and &lt;a href='type://org.gradle.api.Script#getLogger()'&gt;org.gradle.api.Script#getLogger()&lt;/a&gt;.&lt;/p&gt; 
-</description><method name="isLifecycleEnabled" returnType="boolean"><description> 
- Returns true if lifecycle log level is enabled for this logger. 
-</description></method><method name="quiet" returnType="void"><description> 
- Logs the given message at quiet log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="lifecycle" returnType="void"><description> 
- Logs the given message at lifecycle log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
-</description><parameter type="java.lang.String" name="message"/></method><method name="log" returnType="void"><description> 
- Logs the given message at the given log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level the log level. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/></method><method name="isQuietEnabled" returnType="boolean"><description> 
- Returns true if quiet log level is enabled for this logger. 
-</description></method><method name="lifecycle" returnType="void"><description> 
- Logs the given message at lifecycle log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="info" returnType="void"><description> 
- Logs the given message at info log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="lifecycle" returnType="void"><description> 
- Logs the given message at lifecycle log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;throwable the exception to log. 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="quiet" returnType="void"><description> 
- Logs the given message at quiet log level. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;throwable the exception to log. 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="quiet" returnType="void"><description> 
+</description><method name="quiet" returnType="void"><description> 
  Logs the given message at quiet log level. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
@@ -51,23 +13,61 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level the log level. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;throwable the exception to log. 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="isEnabled" returnType="boolean"><description> 
- Returns true if the given log level is enabled for this logger. 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/></method><method name="debug" returnType="void"><description> 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="quiet" returnType="void"><description> 
+ Logs the given message at quiet log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;throwable the exception to log. 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="log" returnType="void"><description> 
+ Logs the given message at the given log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level the log level. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/></method><method name="debug" returnType="void"><description> 
  Multiple-parameters friendly debug method 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters 
-</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="log" returnType="void"><description> 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="lifecycle" returnType="void"><description> 
+ Logs the given message at lifecycle log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+</description><parameter type="java.lang.String" name="message"/></method><method name="quiet" returnType="void"><description> 
+ Logs the given message at quiet log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="lifecycle" returnType="void"><description> 
+ Logs the given message at lifecycle log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="lifecycle" returnType="void"><description> 
+ Logs the given message at lifecycle log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;throwable the exception to log. 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Throwable" name="throwable"/></method><method name="info" returnType="void"><description> 
+ Logs the given message at info log level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
+</description><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="isEnabled" returnType="boolean"><description> 
+ Returns true if the given log level is enabled for this logger. 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/></method><method name="isQuietEnabled" returnType="boolean"><description> 
+ Returns true if quiet log level is enabled for this logger. 
+</description></method><method name="log" returnType="void"><description> 
  Logs the given message at the given log level. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;level the log level. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;message the log message. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects the log message parameters. 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><property name="enabled" type="boolean"><description> 
- Returns true if the given log level is enabled for this logger. 
-</description></property><property name="lifecycleEnabled" type="boolean"><description> 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="level"/><parameter type="java.lang.String" name="message"/><parameter type="java.lang.Object" name="objects"/></method><method name="isLifecycleEnabled" returnType="boolean"><description> 
+ Returns true if lifecycle log level is enabled for this logger. 
+</description></method><property name="lifecycleEnabled" type="boolean"><description> 
  Returns true if lifecycle log level is enabled for this logger. 
 </description></property><property name="quietEnabled" type="boolean"><description> 
  Returns true if quiet log level is enabled for this logger. 
+</description></property><property name="enabled" type="boolean"><description> 
+ Returns true if the given log level is enabled for this logger. 
 </description></property></type>

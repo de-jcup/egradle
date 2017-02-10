@@ -15,7 +15,11 @@
  The name of the module to select the component from. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module name 
-</description></method><property name="group" type="java.lang.String"><description> 
+</description></method><property name="version" type="java.lang.String"><description> 
+ The version of the module to select the component from. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module version 
+</description></property><property name="group" type="java.lang.String"><description> 
  The group of the module to select the component from. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module group 
@@ -24,8 +28,4 @@
  The name of the module to select the component from. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module name 
-</description></property><property name="version" type="java.lang.String"><description> 
- The version of the module to select the component from. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module version 
 </description></property></type>

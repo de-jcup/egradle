@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile"><description> 
  Compiles Scala source files, and optionally, Java source files. 
-</description><method name="getScalaCompileOptions" returnType="org.gradle.api.tasks.scala.ScalaCompileOptions"/><method name="assertScalaClasspathIsNonEmpty" returnType="void"/><method name="setZincClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="zincClasspath"/></method><method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath to use to load the Scala compiler. 
-</description></method><method name="configureIncrementalCompilation" returnType="void"><parameter type="org.gradle.api.internal.tasks.scala.ScalaCompileSpec" name="spec"/></method><method name="setCompiler" returnType="void"><description> 
- For testing only. 
-</description><parameter type="org.gradle.language.base.internal.compile.Compiler" name="compiler"/></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"><parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/></method><method name="setScalaClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="scalaClasspath"/></method><method name="getZincClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+</description><method name="getZincClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
-</description></method><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="scalaClasspath" type="org.gradle.api.file.FileCollection"><description> 
+</description></method><method name="setScalaClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="scalaClasspath"/></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"><parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/></method><method name="setCompiler" returnType="void"><description> 
+ For testing only. 
+</description><parameter type="org.gradle.language.base.internal.compile.Compiler" name="compiler"/></method><method name="setZincClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="zincClasspath"/></method><method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath to use to load the Scala compiler. 
+</description></method><method name="assertScalaClasspathIsNonEmpty" returnType="void"/><method name="getScalaCompileOptions" returnType="org.gradle.api.tasks.scala.ScalaCompileOptions"/><method name="configureIncrementalCompilation" returnType="void"><parameter type="org.gradle.api.internal.tasks.scala.ScalaCompileSpec" name="spec"/></method><property name="scalaCompileOptions" type="org.gradle.api.tasks.scala.ScalaCompileOptions"/><property name="scalaClasspath" type="org.gradle.api.file.FileCollection"><description> 
  Returns the classpath to use to load the Scala compiler. 
 </description></property><property name="zincClasspath" type="org.gradle.api.file.FileCollection"><description> 
  Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
-</description></property><property name="scalaCompileOptions" type="org.gradle.api.tasks.scala.ScalaCompileOptions"/></type>
+</description></property><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/></type>

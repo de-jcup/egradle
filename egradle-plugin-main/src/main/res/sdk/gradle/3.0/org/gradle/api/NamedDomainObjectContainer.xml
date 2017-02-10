@@ -9,31 +9,31 @@
   
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of domain objects in this container. 
  @see NamedDomainObjectSet 
-</description><method name="configure" returnType="org.gradle.api.NamedDomainObjectContainer"><description> 
- &lt;p&gt;Allows the container to be configured, creating missing objects as they are referenced.&lt;/p&gt; 
-  
- &lt;p&gt;TODO: example usage&lt;/p&gt; 
-  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to configure this container with 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This. 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="create" returnType="T"><description> 
+</description><method name="create" returnType="T"><description> 
  Creates a new item with the given name, adding it to this container, then configuring it with the given closure. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name to assign to the created object 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to configure the created object with 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The created object. Never null. 
  @throws InvalidUserDataException if an object with the given name already exists in this container. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="create" returnType="T"><description> 
+</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="configure" returnType="org.gradle.api.NamedDomainObjectContainer"><description> 
+ &lt;p&gt;Allows the container to be configured, creating missing objects as they are referenced.&lt;/p&gt; 
+  
+ &lt;p&gt;TODO: example usage&lt;/p&gt; 
+  
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to configure this container with 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This. 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="maybeCreate" returnType="T"><description> 
+ Looks for an item with the given name, creating and adding it to this container if it does not exist. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name to find or assign to the created object 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The found or created object. Never null. 
+</description><parameter type="java.lang.String" name="name"/></method><method name="create" returnType="T"><description> 
  Creates a new item with the given name, adding it to this container. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name to assign to the created object 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The created object. Never null. 
  @throws InvalidUserDataException if an object with the given name already exists in this container. 
-</description><parameter type="java.lang.String" name="name"/></method><method name="maybeCreate" returnType="T"><description> 
- Looks for an item with the given name, creating and adding it to this container if it does not exist. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name to find or assign to the created object 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The found or created object. Never null. 
 </description><parameter type="java.lang.String" name="name"/></method><method name="create" returnType="T"><description> 
  Creates a new item with the given name, adding it to this container, then configuring it with the given action. 
  

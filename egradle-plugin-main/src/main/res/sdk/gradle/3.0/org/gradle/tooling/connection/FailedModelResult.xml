@@ -11,12 +11,12 @@
  Identifier of the project that originated this failure, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project. 
-</description></method><property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier"><description> 
- Identifier of the project that originated this failure, if any. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project. 
-</description></property><property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier"><description> 
+</description></method><property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier"><description> 
  Identifier of the build that originated this failure. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build identifier, never null. 
+</description></property><property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier"><description> 
+ Identifier of the project that originated this failure, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project. 
 </description></property></type>

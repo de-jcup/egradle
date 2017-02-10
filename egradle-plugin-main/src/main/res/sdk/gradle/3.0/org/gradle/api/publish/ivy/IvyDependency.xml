@@ -11,7 +11,9 @@
  The revision value for this dependency. 
 </description></method><method name="getOrganisation" returnType="java.lang.String"><description> 
  The organisation value for this dependency. 
-</description></method><property name="module" type="java.lang.String"><description> 
+</description></method><property name="revision" type="java.lang.String"><description> 
+ The revision value for this dependency. 
+</description></property><property name="module" type="java.lang.String"><description> 
  The module value for this dependency. 
 </description></property><property name="organisation" type="java.lang.String"><description> 
  The organisation value for this dependency. 
@@ -20,6 +22,4 @@
  A null value indicates that no "conf" attribute will be written for this dependency. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configuration mapping 
-</description></property><property name="revision" type="java.lang.String"><description> 
- The revision value for this dependency. 
 </description></property></type>

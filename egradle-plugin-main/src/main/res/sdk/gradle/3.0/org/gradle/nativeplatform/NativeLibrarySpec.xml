@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeLibrarySpec" version="3.0"><description> 
  Definition of a native library component that is to be built by Gradle. 
-</description><method name="getStatic" returnType="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
+</description><method name="getApi" returnType="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
+ Converts this library to a native library requirement that uses the api library linkage. 
+</description></method><method name="getStatic" returnType="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
  Converts this library to a native library requirement that uses the static library variant. 
 </description></method><method name="getShared" returnType="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
  Converts this library to a native library requirement that uses the shared library variant. This is the default. 
-</description></method><method name="getApi" returnType="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
+</description></method><property name="api" type="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
  Converts this library to a native library requirement that uses the api library linkage. 
-</description></method><property name="shared" type="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
- Converts this library to a native library requirement that uses the shared library variant. This is the default. 
 </description></property><property name="static" type="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
  Converts this library to a native library requirement that uses the static library variant. 
-</description></property><property name="api" type="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
- Converts this library to a native library requirement that uses the api library linkage. 
+</description></property><property name="shared" type="org.gradle.nativeplatform.NativeLibraryRequirement"><description> 
+ Converts this library to a native library requirement that uses the shared library variant. This is the default. 
 </description></property></type>

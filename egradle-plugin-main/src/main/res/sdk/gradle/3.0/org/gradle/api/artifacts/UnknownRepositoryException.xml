@@ -1,3 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.artifacts.UnknownRepositoryException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.artifacts.UnknownRepositoryException" version="3.0" superType="org.gradle.api.UnknownDomainObjectException"><description> 
  An &lt;a href='type://UnknownRepositoryException'&gt;UnknownRepositoryException&lt;/a&gt; is thrown when a repository referenced by name cannot be found. 
 </description></type>

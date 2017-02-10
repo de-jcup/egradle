@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.signing.type.DefaultSignatureTypeProvider" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.signing.type.DefaultSignatureTypeProvider" version="3.0" superType="org.gradle.plugins.signing.type.AbstractSignatureTypeProvider"><description> 
  The default &lt;a href='type://SignatureTypeProvider'&gt;SignatureTypeProvider&lt;/a&gt; implementation including support for 
  &lt;a href='type://BinarySignatureType'&gt;BinarySignatureType&lt;/a&gt; and &lt;a href='type://ArmoredSignatureType'&gt;ArmoredSignatureType&lt;/a&gt; signatures. 
 </description></type>

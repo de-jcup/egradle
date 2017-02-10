@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.file.DuplicateFileCopyingException" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.file.DuplicateFileCopyingException" version="3.0" superType="org.gradle.api.GradleException"><description> 
  Thrown when more than one file with the same relative path name is to be copied 
  and the &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt; is set to DuplicatesStrategy.FAIL 
 </description></type>

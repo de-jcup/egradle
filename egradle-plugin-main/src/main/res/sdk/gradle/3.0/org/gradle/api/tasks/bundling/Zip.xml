@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.Zip" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.Zip" version="3.0" superType="org.gradle.api.tasks.bundling.AbstractArchiveTask"><description> 
  Assembles a ZIP archive. 
  
  The default is to compress the contents of the zip. 
-</description><method name="getCompressor" returnType="org.gradle.api.internal.file.copy.ZipCompressor"/><method name="setEntryCompression" returnType="void" delegationTarget="STORED"><description> 
+</description><method name="getEntryCompression" returnType="org.gradle.api.tasks.bundling.ZipEntryCompression"><description> 
+ Returns the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is 
+ compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the compression level of the archive contents. 
+</description></method><method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/><method name="setEntryCompression" returnType="void" delegationTarget="STORED"><description> 
  Sets the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is 
  compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;entryCompression &lt;a href='type://STORED'&gt;STORED&lt;/a&gt; or &lt;a href='type://DEFLATED'&gt;DEFLATED&lt;/a&gt; 
-</description><parameter type="org.gradle.api.tasks.bundling.ZipEntryCompression" name="entryCompression"/></method><method name="setZip64" returnType="void"><description> 
- Enables building zips with more than 65535 files or bigger than 4GB. 
- 
- @see #isZip64() 
-</description><parameter type="boolean" name="allowZip64"/></method><method name="isZip64" returnType="boolean" delegationTarget="java.util.zip.ZipInputStream"><description> 
+</description><parameter type="org.gradle.api.tasks.bundling.ZipEntryCompression" name="entryCompression"/></method><method name="isZip64" returnType="boolean" delegationTarget="java.util.zip.ZipInputStream"><description> 
  Whether the zip can contain more than 65535 files and/or support files greater than 4GB in size. 
  &lt;p&gt; 
  The standard zip format has hard limits on file size and count. 
@@ -21,34 +22,23 @@
  However, not all Zip readers support the Zip64 extensions. 
  Notably, the &lt;a href='type://java.util.zip.ZipInputStream'&gt;java.util.zip.ZipInputStream&lt;/a&gt; JDK class does not support Zip64 for versions earlier than Java 7. 
  This means you should not enable this property if you are building JARs to be used with Java 6 and earlier runtimes. 
+</description></method><method name="getCompressor" returnType="org.gradle.api.internal.file.copy.ZipCompressor"/><method name="setZip64" returnType="void"><description> 
+ Enables building zips with more than 65535 files or bigger than 4GB. 
+ 
+ @see #isZip64() 
+</description><parameter type="boolean" name="allowZip64"/></method><method name="getMetadataCharset" returnType="java.lang.String"><description> 
+ The character set used to encode ZIP metadata like file names. 
+ Defaults to the platform's default character set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;null if using the platform's default character set for ZIP metadata 
+ @since 2.14 
 </description></method><method name="setMetadataCharset" returnType="void"><description> 
  The character set used to encode ZIP metadata like file names. 
  Defaults to the platform's default character set. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;metadataCharset the character set used to encode ZIP metadata like file names 
  @since 2.14 
-</description><parameter type="java.lang.String" name="metadataCharset"/></method><method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/><method name="getEntryCompression" returnType="org.gradle.api.tasks.bundling.ZipEntryCompression"><description> 
- Returns the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is 
- compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the compression level of the archive contents. 
-</description></method><method name="getMetadataCharset" returnType="java.lang.String"><description> 
- The character set used to encode ZIP metadata like file names. 
- Defaults to the platform's default character set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;null if using the platform's default character set for ZIP metadata 
- @since 2.14 
-</description></method><property name="compressor" type="org.gradle.api.internal.file.copy.ZipCompressor"/><property name="zip64" type="boolean"><description> 
- Whether the zip can contain more than 65535 files and/or support files greater than 4GB in size. 
- &lt;p&gt; 
- The standard zip format has hard limits on file size and count. 
- The &lt;a href="http://en.wikipedia.org/wiki/Zip_(file_format)#ZIP64"&gt;Zip64 format extension&lt;/a&gt; 
- practically removes these limits and is therefore required for building large zips. 
- &lt;p&gt; 
- However, not all Zip readers support the Zip64 extensions. 
- Notably, the &lt;a href='type://java.util.zip.ZipInputStream'&gt;java.util.zip.ZipInputStream&lt;/a&gt; JDK class does not support Zip64 for versions earlier than Java 7. 
- This means you should not enable this property if you are building JARs to be used with Java 6 and earlier runtimes. 
-</description></property><property name="metadataCharset" type="java.lang.String"><description> 
+</description><parameter type="java.lang.String" name="metadataCharset"/></method><property name="metadataCharset" type="java.lang.String"><description> 
  The character set used to encode ZIP metadata like file names. 
  Defaults to the platform's default character set. 
  
@@ -59,4 +49,14 @@
  compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the compression level of the archive contents. 
-</description></property></type>
+</description></property><property name="zip64" type="boolean"><description> 
+ Whether the zip can contain more than 65535 files and/or support files greater than 4GB in size. 
+ &lt;p&gt; 
+ The standard zip format has hard limits on file size and count. 
+ The &lt;a href="http://en.wikipedia.org/wiki/Zip_(file_format)#ZIP64"&gt;Zip64 format extension&lt;/a&gt; 
+ practically removes these limits and is therefore required for building large zips. 
+ &lt;p&gt; 
+ However, not all Zip readers support the Zip64 extensions. 
+ Notably, the &lt;a href='type://java.util.zip.ZipInputStream'&gt;java.util.zip.ZipInputStream&lt;/a&gt; JDK class does not support Zip64 for versions earlier than Java 7. 
+ This means you should not enable this property if you are building JARs to be used with Java 6 and earlier runtimes. 
+</description></property><property name="compressor" type="org.gradle.api.internal.file.copy.ZipCompressor"/></type>

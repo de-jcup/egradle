@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.play.PlayApplicationSpec" version="3.0"><description> 
  Definition of a Play Framework software component that is built by Gradle. 
-</description><method name="getInjectedRoutesGenerator" returnType="boolean"><description> 
- Will an injected router be generated for this application? 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false if a static router will be generated for the application, 
- true if an injected router will be generated. 
-</description></method><method name="setInjectedRoutesGenerator" returnType="void"><description> 
+</description><method name="setInjectedRoutesGenerator" returnType="void"><description> 
  Configures the style of router to use with this application. 
  
  &lt;p&gt; 
@@ -20,7 +15,12 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;injectedRoutesGenerator false if a static router should be generated (default). 
  true if an injected router should be generated. 
-</description><parameter type="boolean" name="injectedRoutesGenerator"/></method><method name="platform" returnType="void" delegationTarget="org.gradle.play.platform.PlayPlatform"><description> 
+</description><parameter type="boolean" name="injectedRoutesGenerator"/></method><method name="getInjectedRoutesGenerator" returnType="boolean"><description> 
+ Will an injected router be generated for this application? 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false if a static router will be generated for the application, 
+ true if an injected router will be generated. 
+</description></method><method name="platform" returnType="void" delegationTarget="org.gradle.play.platform.PlayPlatform"><description> 
  Specifies a &lt;a href='type://org.gradle.play.platform.PlayPlatform'&gt;org.gradle.play.platform.PlayPlatform&lt;/a&gt; with a given set of requirements that this 
  component should be built be for.  Can accept a map of play, scala and/or java requirements or a string 
  representation of the desired play platform. 

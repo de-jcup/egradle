@@ -6,12 +6,12 @@
  the equal name being removed.&lt;/p&gt; 
   
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of element in the set 
-</description><method name="withType" returnType="org.gradle.api.NamedDomainObjectSet"><description> 
+</description><method name="matching" returnType="org.gradle.api.NamedDomainObjectSet"><description> 
  {@inheritDoc} 
-</description><parameter type="java.lang.Class" name="type"/></method><method name="findAll" returnType="java.util.Set"><description> 
+</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="findAll" returnType="java.util.Set"><description> 
  {@inheritDoc} 
 </description><parameter type="groovy.lang.Closure" name="spec"/></method><method name="matching" returnType="org.gradle.api.NamedDomainObjectSet"><description> 
  {@inheritDoc} 
-</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="matching" returnType="org.gradle.api.NamedDomainObjectSet"><description> 
+</description><parameter type="groovy.lang.Closure" name="spec"/></method><method name="withType" returnType="org.gradle.api.NamedDomainObjectSet"><description> 
  {@inheritDoc} 
-</description><parameter type="groovy.lang.Closure" name="spec"/></method></type>
+</description><parameter type="java.lang.Class" name="type"/></method></type>

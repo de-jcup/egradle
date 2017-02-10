@@ -8,7 +8,13 @@
  To add elements to the set, the &lt;a href='type://ModelSet#create(Action)'&gt;#create(Action)&lt;/a&gt; method can be used. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the type of model object 
-</description><method name="create" returnType="void"><description> 
+</description><method name="afterEach" returnType="void" delegationTarget="org.gradle.model.Finalize"><description> 
+ Apply the given action to each set element just before it is considered to be realised. 
+ &lt;p&gt; 
+ The configuration action is equivalent in terms of lifecycle to &lt;a href='type://org.gradle.model.Finalize'&gt;org.gradle.model.Finalize&lt;/a&gt; rule methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction the object configuration 
+</description><parameter type="org.gradle.api.Action" name="configAction"/></method><method name="create" returnType="void"><description> 
  Declares a new set element, configured by the given action. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the object configuration 
@@ -16,12 +22,6 @@
  Apply the given action to each set element just after it is created. 
  &lt;p&gt; 
  The configuration action is equivalent in terms of lifecycle to &lt;a href='type://org.gradle.model.Defaults'&gt;org.gradle.model.Defaults&lt;/a&gt; rule methods. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction the object configuration 
-</description><parameter type="org.gradle.api.Action" name="configAction"/></method><method name="afterEach" returnType="void" delegationTarget="org.gradle.model.Finalize"><description> 
- Apply the given action to each set element just before it is considered to be realised. 
- &lt;p&gt; 
- The configuration action is equivalent in terms of lifecycle to &lt;a href='type://org.gradle.model.Finalize'&gt;org.gradle.model.Finalize&lt;/a&gt; rule methods. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction the object configuration 
 </description><parameter type="org.gradle.api.Action" name="configAction"/></method></type>

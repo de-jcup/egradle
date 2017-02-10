@@ -8,12 +8,12 @@
  The pmd (single file) HTML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) HTML report 
-</description></method><property name="html" type="org.gradle.api.reporting.SingleFileReport"><description> 
- The pmd (single file) HTML report 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) HTML report 
-</description></property><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
+</description></method><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
  The pmd (single file) XML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) XML report 
+</description></property><property name="html" type="org.gradle.api.reporting.SingleFileReport"><description> 
+ The pmd (single file) HTML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) HTML report 
 </description></property></type>

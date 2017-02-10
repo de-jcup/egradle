@@ -10,18 +10,18 @@
  the addition of new report object and/or the removal of existing report objects. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The base report type for reports of this container. 
-</description><method name="getNames" returnType="java.util.SortedSet"/><method name="getRules" returnType="java.util.List"/><method name="getAsMap" returnType="java.util.SortedMap"/><method name="getEnabled" returnType="org.gradle.api.NamedDomainObjectSet" delegationTarget="Report"><description> 
+</description><method name="getEnabled" returnType="org.gradle.api.NamedDomainObjectSet" delegationTarget="Report"><description> 
  Returns an immutable collection of all the enabled &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects in this container. 
  &lt;p&gt; 
  The returned collection is live. That is, as reports are enabled/disabled the returned collection always 
  reflects the current set of enabled reports. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The enabled reports. 
-</description></method><method name="getNamer" returnType="org.gradle.api.Namer"/><method name="isEmpty" returnType="boolean"/><property name="empty" type="boolean"/><property name="namer" type="org.gradle.api.Namer"/><property name="names" type="java.util.SortedSet"/><property name="enabled" type="org.gradle.api.NamedDomainObjectSet"><description> 
+</description></method><method name="getAsMap" returnType="java.util.SortedMap"/><method name="getRules" returnType="java.util.List"/><method name="isEmpty" returnType="boolean"/><method name="getNames" returnType="java.util.SortedSet"/><method name="getNamer" returnType="org.gradle.api.Namer"/><property name="names" type="java.util.SortedSet"/><property name="asMap" type="java.util.SortedMap"/><property name="enabled" type="org.gradle.api.NamedDomainObjectSet"><description> 
  Returns an immutable collection of all the enabled &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects in this container. 
  &lt;p&gt; 
  The returned collection is live. That is, as reports are enabled/disabled the returned collection always 
  reflects the current set of enabled reports. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The enabled reports. 
-</description></property><property name="asMap" type="java.util.SortedMap"/><property name="rules" type="java.util.List"/></type>
+</description></property><property name="namer" type="org.gradle.api.Namer"/><property name="rules" type="java.util.List"/><property name="empty" type="boolean"/></type>

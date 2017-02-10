@@ -1,3 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.LinkExecutable" version="3.0"><description> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.LinkExecutable" version="3.0" superType="org.gradle.nativeplatform.tasks.AbstractLinkTask"><description> 
  Links a binary executable from object files and libraries. 
 </description><method name="createLinkerSpec" returnType="org.gradle.nativeplatform.internal.LinkerSpec"/></type>

@@ -2,4 +2,4 @@
  Plugin for configuring IDE plugins when the project uses the Play Framework component support. 
  
  &lt;p&gt;NOTE: This currently supports configuring the 'idea' plugin only.&lt;/p&gt; 
-</description><method name="execute" returnType="void"><parameter type="org.gradle.api.plugins.AppliedPlugin" name="appliedPlugin"/></method><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>
+</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.plugins.AppliedPlugin" name="appliedPlugin"/></method></type>

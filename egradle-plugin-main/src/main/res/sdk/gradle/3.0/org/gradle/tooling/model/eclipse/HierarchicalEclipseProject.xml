@@ -7,11 +7,16 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project dependencies. Returns an empty set if the project has no project dependencies. 
  @since 1.0-milestone-3 
-</description></method><method name="getLinkedResources" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the linked resources for this project. 
+</description></method><method name="getParent" returnType="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
+ {@inheritDoc} 
+</description></method><method name="getIdentifier" returnType="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier"><description> 
+ The unique identifier for this eclipse project. 
+ Useful to correlate project dependencies with `EclipseProject` instances. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The linked resources. 
- @since 1.0-milestone-4 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The unique identifier for this eclipse project. 
+ @since 2.14 
+</description></method><method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ {@inheritDoc} 
 </description></method><method name="getSourceDirectories" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the source directories for this project. 
  
@@ -23,17 +28,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. 
  @since 1.0-milestone-9 
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-9, where this method is not supported. 
-</description></method><method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
- {@inheritDoc} 
-</description></method><method name="getParent" returnType="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
- {@inheritDoc} 
-</description></method><method name="getIdentifier" returnType="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier"><description> 
- The unique identifier for this eclipse project. 
- Useful to correlate project dependencies with `EclipseProject` instances. 
+</description></method><method name="getLinkedResources" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the linked resources for this project. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The unique identifier for this eclipse project. 
- @since 2.14 
-</description></method><property name="sourceDirectories" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The linked resources. 
+ @since 1.0-milestone-4 
+</description></method><property name="parent" type="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
+ {@inheritDoc} 
+</description></property><property name="sourceDirectories" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the source directories for this project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directories. Returns an empty set if the project has no source directories. 
@@ -44,11 +46,6 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. 
  @since 1.0-milestone-9 
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-9, where this method is not supported. 
-</description></property><property name="linkedResources" type="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the linked resources for this project. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The linked resources. 
- @since 1.0-milestone-4 
 </description></property><property name="projectDependencies" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the project dependencies for this project. 
  
@@ -60,8 +57,11 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The unique identifier for this eclipse project. 
  @since 2.14 
-</description></property><property name="parent" type="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
- {@inheritDoc} 
+</description></property><property name="linkedResources" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the linked resources for this project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The linked resources. 
+ @since 1.0-milestone-4 
 </description></property><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  {@inheritDoc} 
 </description></property></type>

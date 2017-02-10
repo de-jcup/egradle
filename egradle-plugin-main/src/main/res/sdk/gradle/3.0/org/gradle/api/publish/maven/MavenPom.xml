@@ -4,7 +4,9 @@
  The &lt;a href='type://MavenPom#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; method can be used to modify the descriptor after it has been generated according to the publication data. 
  
  @since 1.4 
-</description><method name="setPackaging" returnType="void"><description> 
+</description><method name="getPackaging" returnType="java.lang.String"><description> 
+ Returns the packaging for this publication. 
+</description></method><method name="setPackaging" returnType="void"><description> 
  Sets the packaging for this publication. 
 </description><parameter type="java.lang.String" name="packaging"/></method><method name="withXml" returnType="void" delegationTarget="Action"><description> 
  Allows configuration of the POM, after it has been generated according to the input data. 
@@ -31,8 +33,6 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The configuration action. 
  @see MavenPublication 
  @see XmlProvider 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getPackaging" returnType="java.lang.String"><description> 
- Returns the packaging for this publication. 
-</description></method><property name="packaging" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="packaging" type="java.lang.String"><description> 
  Returns the packaging for this publication. 
 </description></property></type>

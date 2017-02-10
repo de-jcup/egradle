@@ -209,28 +209,41 @@
  
  The module notation is the same as the dependency notations described above, except that the classifier property is 
  not available. Client modules are represented using a &lt;a href='type://org.gradle.api.artifacts.ClientModule'&gt;org.gradle.api.artifacts.ClientModule&lt;/a&gt;. 
-</description><method name="getModules" returnType="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler"><description> 
+</description><method name="getComponents" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
+ Returns the component metadata handler for this project. The returned handler can be used for adding rules 
+ that modify the metadata of depended-on software components. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project 
+ @since 1.8 
+</description></method><method name="gradleApi" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ Creates a dependency on the API of the current version of Gradle. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description></method><method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
+ Creates an artifact resolution query. 
+ 
+ @since 2.0 
+</description></method><method name="getModules" returnType="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler"><description> 
  Returns the component module metadata handler for this project. The returned handler can be used for adding rules 
  that modify the metadata of depended-on software components. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project 
  @since 2.2 
-</description></method><method name="gradleApi" returnType="org.gradle.api.artifacts.Dependency"><description> 
- Creates a dependency on the API of the current version of Gradle. 
+</description></method><method name="create" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ Creates a dependency without adding it to a configuration, and configures the dependency using 
+ the given closure. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description></method><method name="module" returnType="org.gradle.api.artifacts.Dependency"><description> 
- Creates a dependency on a client module. The dependency is configured using the given closure before it is 
- returned. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The module notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description><parameter type="java.lang.Object" name="notation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery"><description> 
- Creates an artifact resolution query. 
+</description><parameter type="java.lang.Object" name="dependencyNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="components" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
+ Configures component metadata for this project. 
  
- @since 2.0 
-</description></method><method name="gradleTestKit" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentMetadataHandler&lt;/a&gt; for this project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata 
+ @since 1.8 
+</description><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="gradleTestKit" returnType="org.gradle.api.artifacts.Dependency"><description> 
  Creates a dependency on the &lt;a href="http://docs.gradle.org/current/userguide/test_kit.html"&gt;Gradle test-kit&lt;/a&gt; API. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
@@ -243,11 +256,19 @@
  
  The dependency notation, in one of the notations described above. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="dependencyNotation"/></method><method name="localGroovy" returnType="org.gradle.api.artifacts.Dependency"><description> 
- Creates a dependency on the Groovy that is distributed with the current version of Gradle. 
+</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="dependencyNotation"/></method><method name="create" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ Creates a dependency without adding it to a configuration. 
  
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description></method><method name="module" returnType="org.gradle.api.artifacts.Dependency"><description> 
+</description><parameter type="java.lang.Object" name="dependencyNotation"/></method><method name="module" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ Creates a dependency on a client module. The dependency is configured using the given closure before it is 
+ returned. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The module notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description><parameter type="java.lang.Object" name="notation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="module" returnType="org.gradle.api.artifacts.Dependency"><description> 
  Creates a dependency on a client module. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The module notation, in one of the notations described above. 
@@ -259,19 +280,11 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="dependencyNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="components" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
- Configures component metadata for this project. 
+</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="dependencyNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="localGroovy" returnType="org.gradle.api.artifacts.Dependency"><description> 
+ Creates a dependency on the Groovy that is distributed with the current version of Gradle. 
  
- &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentMetadataHandler&lt;/a&gt; for this project. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata 
- @since 1.8 
-</description><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="create" returnType="org.gradle.api.artifacts.Dependency"><description> 
- Creates a dependency without adding it to a configuration. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description><parameter type="java.lang.Object" name="dependencyNotation"/></method><method name="project" returnType="org.gradle.api.artifacts.Dependency"><description> 
+</description></method><method name="project" returnType="org.gradle.api.artifacts.Dependency"><description> 
  Creates a dependency on a project. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The project notation, in one of the notations described above. 
@@ -283,29 +296,16 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata 
  @since 2.2 
-</description><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="getComponents" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
+</description><parameter type="org.gradle.api.Action" name="configureAction"/></method><property name="components" type="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
  Returns the component metadata handler for this project. The returned handler can be used for adding rules 
  that modify the metadata of depended-on software components. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project 
  @since 1.8 
-</description></method><method name="create" returnType="org.gradle.api.artifacts.Dependency"><description> 
- Creates a dependency without adding it to a configuration, and configures the dependency using 
- the given closure. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
-</description><parameter type="java.lang.Object" name="dependencyNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="modules" type="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler"><description> 
+</description></property><property name="modules" type="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler"><description> 
  Returns the component module metadata handler for this project. The returned handler can be used for adding rules 
  that modify the metadata of depended-on software components. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project 
  @since 2.2 
-</description></property><property name="components" type="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
- Returns the component metadata handler for this project. The returned handler can be used for adding rules 
- that modify the metadata of depended-on software components. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project 
- @since 1.8 
 </description></property></type>

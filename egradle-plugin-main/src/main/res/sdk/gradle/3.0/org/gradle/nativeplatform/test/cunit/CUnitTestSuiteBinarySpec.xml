@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteBinarySpec" version="3.0"><description> 
  An executable which run a CUnit test suite. 
-</description><method name="getComponent" returnType="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
+</description><method name="getTestSuite" returnType="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
  {@inheritDoc} 
-</description></method><method name="getTestSuite" returnType="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
+</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
  {@inheritDoc} 
-</description></method><property name="component" type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
+</description></method><property name="testSuite" type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
  {@inheritDoc} 
-</description></property><property name="testSuite" type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
+</description></property><property name="component" type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec"><description> 
  {@inheritDoc} 
 </description></property></type>

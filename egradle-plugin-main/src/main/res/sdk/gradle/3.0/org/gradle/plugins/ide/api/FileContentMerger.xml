@@ -4,16 +4,6 @@
  For examples see docs for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject'&gt;org.gradle.plugins.ide.eclipse.model.EclipseProject&lt;/a&gt; 
  or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
 </description><method name="beforeMerged" returnType="void" delegationTarget="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
- Adds a closure to be called after content is loaded from existing file but before gradle build information is merged. 
- &lt;p&gt; 
- This is advanced api that gives access to internal implementation. 
- It might be useful if you want to alter the way gradle build information is merged into existing file content. 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject'&gt;org.gradle.plugins.ide.eclipse.model.EclipseProject&lt;/a&gt; 
- or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setBeforeMerged" returnType="void"><parameter type="org.gradle.listener.ActionBroadcast" name="beforeMerged"/></method><method name="setWhenMerged" returnType="void"><parameter type="org.gradle.listener.ActionBroadcast" name="whenMerged"/></method><method name="beforeMerged" returnType="void" delegationTarget="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
  Adds an action to be called after content is loaded from existing file but before gradle build information is merged. 
  &lt;p&gt; 
  This is advanced api that gives access to internal implementation. 
@@ -33,7 +23,7 @@
  or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getWhenMerged" returnType="org.gradle.listener.ActionBroadcast"/><method name="getBeforeMerged" returnType="org.gradle.listener.ActionBroadcast"/><method name="whenMerged" returnType="void" delegationTarget="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setBeforeMerged" returnType="void"><parameter type="org.gradle.listener.ActionBroadcast" name="beforeMerged"/></method><method name="setWhenMerged" returnType="void"><parameter type="org.gradle.listener.ActionBroadcast" name="whenMerged"/></method><method name="whenMerged" returnType="void" delegationTarget="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
  Adds an action to be called after content is loaded from existing file and after gradle build information is merged. 
  &lt;p&gt; 
  This is advanced api that gives access to internal implementation of idea plugin. 
@@ -43,4 +33,14 @@
  or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="whenMerged" type="org.gradle.listener.ActionBroadcast"/><property name="beforeMerged" type="org.gradle.listener.ActionBroadcast"/></type>
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="beforeMerged" returnType="void" delegationTarget="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
+ Adds a closure to be called after content is loaded from existing file but before gradle build information is merged. 
+ &lt;p&gt; 
+ This is advanced api that gives access to internal implementation. 
+ It might be useful if you want to alter the way gradle build information is merged into existing file content. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject'&gt;org.gradle.plugins.ide.eclipse.model.EclipseProject&lt;/a&gt; 
+ or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getWhenMerged" returnType="org.gradle.listener.ActionBroadcast"/><method name="getBeforeMerged" returnType="org.gradle.listener.ActionBroadcast"/><property name="whenMerged" type="org.gradle.listener.ActionBroadcast"/><property name="beforeMerged" type="org.gradle.listener.ActionBroadcast"/></type>

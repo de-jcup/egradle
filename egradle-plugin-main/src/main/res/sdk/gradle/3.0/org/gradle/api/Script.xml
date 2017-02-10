@@ -6,68 +6,47 @@
  &lt;p&gt;Generally, a &lt;a href='type://Script'&gt;Script&lt;/a&gt; object will have a delegate object attached to it. For example, a build script will 
  have a &lt;a href='type://Project'&gt;Project&lt;/a&gt; instance attached to it, and an initialization script will have a &lt;a href='type://org.gradle.api.invocation.Gradle'&gt;org.gradle.api.invocation.Gradle&lt;/a&gt; instance attached to it. Any property reference or method call which is not found 
  on this &lt;a href='type://Script'&gt;Script&lt;/a&gt; object is forwarded to the delegate object.&lt;/p&gt; 
-</description><method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec"><description> 
- Executes a Java main class. The closure configures a &lt;a href='type://org.gradle.process.JavaExecSpec'&gt;org.gradle.process.JavaExecSpec&lt;/a&gt;. 
+</description><method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec"><description> 
+ Executes an external command. The closure configures a &lt;a href='type://org.gradle.process.ExecSpec'&gt;org.gradle.process.ExecSpec&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure for configuring the execution. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="uri" returnType="java.net.URI"><description> 
- &lt;p&gt;Resolves a file path to a URI, relative to the directory containing this script. Evaluates the provided path 
- object as described for &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;, with the exception that any URI scheme is supported, not just 
- 'file:' URIs.&lt;/p&gt; 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
+ &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the given base directory. The given baseDir path is evaluated 
+ as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. The closure will be used to configure the new file tree. 
+ The file tree is passed to the closure as its delegate.  Example:&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The object to resolve as a URI. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The resolved URI. Never returns null. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="apply" returnType="void" delegationTarget="org.gradle.api.plugins.ObjectConfigurationAction"><description> 
- &lt;p&gt;Configures the delegate object for this script using plugins or scripts. 
- 
- &lt;p&gt;The given closure is used to configure an &lt;a href='type://org.gradle.api.plugins.ObjectConfigurationAction'&gt;org.gradle.api.plugins.ObjectConfigurationAction&lt;/a&gt; which is 
- then used to configure the delegate object.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to configure the &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="delete" returnType="boolean"><description> 
- Deletes files and directories. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths Any type of object accepted by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if anything got deleted, false otherwise 
-</description><parameter type="java.lang.Object" name="paths"/></method><method name="file" returnType="java.io.File" delegationTarget="PathValidation"><description> 
- &lt;p&gt;Resolves a file path relative to the directory containing this script and validates it using the given scheme. 
- See &lt;a href='type://PathValidation'&gt;PathValidation&lt;/a&gt; for the list of possible validations.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path An object to resolve as a File. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;validation The validation to perform on the file. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The resolved file. Never returns null. 
- @throws InvalidUserDataException When the file does not meet the given validation constraint. 
-</description><parameter type="java.lang.Object" name="path"/><parameter type="org.gradle.api.PathValidation" name="validation"/></method><method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec"><description> 
- Creates a &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. The 
- given closure is used to configure the &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; before it is returned by this 
- method. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure Closure to configure the CopySpec 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The CopySpec 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getLogger" returnType="org.gradle.api.logging.Logger"><description> 
- Returns the logger for this script. You can use this in your script to write log messages. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null. 
-</description></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
- &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the provided map of arguments.  The map will be applied as 
- properties on the new file tree.  Example:&lt;/p&gt; 
  &lt;pre&gt; 
- fileTree(dir:'src', excludes:['**&amp;#47;ignore/**','**&amp;#47;.svn/**']) 
+ fileTree('src') { 
+    exclude '**&amp;#47;.svn/**' 
+ }.copy { into 'dest'} 
  &lt;/pre&gt; 
+ 
  &lt;p&gt;The returned file tree is lazy, so that it scans for files only when the contents of the file tree are 
  queried. The file tree is also live, so that it scans for files each time the contents of the file tree are 
  queried.&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args map of property assignments to &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; object 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;baseDir The base directory of the file tree. Evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure Closure to configure the &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; object. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configured file tree. Never returns null. 
-</description><parameter type="java.util.Map" name="args"/></method><method name="mkdir" returnType="java.io.File"><description> 
+</description><parameter type="java.lang.Object" name="baseDir"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="relativePath" returnType="java.lang.String"><description> 
+ &lt;p&gt;Returns the relative path from the directory containing this script to the given path. The given path object 
+ is (logically) resolved as described for &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;, from which a relative path is calculated.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path to convert to a relative path. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The relative path. Never returns null. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="mkdir" returnType="java.io.File"><description> 
  Creates a directory and returns a file pointing to it. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path for the directory to be created. Evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the created directory 
  @throws org.gradle.api.InvalidUserDataException If the path points to an existing file. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection"><description> 
+ &lt;p&gt;Returns a &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; containing the given files. This works as described for &lt;a href='type://Project#files(Object...)'&gt;Project#files(Object...)&lt;/a&gt;. Relative paths are resolved relative to the directory containing this script.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The paths to the files. May be empty. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file collection. Never returns null. 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
  &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the given base directory. The given baseDir path is evaluated 
  as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;.&lt;/p&gt; 
   
@@ -82,12 +61,14 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The object to resolve as a File. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The resolved file. Never returns null. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec"><description> 
- Executes an external command. The closure configures a &lt;a href='type://org.gradle.process.ExecSpec'&gt;org.gradle.process.ExecSpec&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="uri" returnType="java.net.URI"><description> 
+ &lt;p&gt;Resolves a file path to a URI, relative to the directory containing this script. Evaluates the provided path 
+ object as described for &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;, with the exception that any URI scheme is supported, not just 
+ 'file:' URIs.&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure for configuring the execution. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="tarTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The object to resolve as a URI. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The resolved URI. Never returns null. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="tarTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree"><description> 
  Creates a new &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the contents of the given TAR file. The given tarPath path can be: 
  &lt;ul&gt; 
    &lt;li&gt;an instance of &lt;a href='type://org.gradle.api.resources.Resource'&gt;org.gradle.api.resources.Resource&lt;/a&gt;&lt;/li&gt; 
@@ -121,56 +102,23 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tarPath The TAR file or an instance of &lt;a href='type://org.gradle.api.resources.Resource'&gt;org.gradle.api.resources.Resource&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the file tree. Never returns null. 
-</description><parameter type="java.lang.Object" name="tarPath"/></method><method name="getBuildscript" returnType="org.gradle.api.initialization.dsl.ScriptHandler"><description> 
- Returns the script handler for this script. You can use this handler to manage the classpath used to compile and 
- execute this script. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath handler. Never returns null. 
-</description></method><method name="getResources" returnType="org.gradle.api.resources.ResourceHandler"><description> 
- Provides access to resource-specific utility methods, for example factory methods that create various resources. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance contains various resource-specific utility methods. 
-</description></method><method name="getLogging" returnType="org.gradle.api.logging.LoggingManager" delegationTarget="org.gradle.api.logging.LoggingManager"><description> 
+</description><parameter type="java.lang.Object" name="tarPath"/></method><method name="getLogging" returnType="org.gradle.api.logging.LoggingManager" delegationTarget="org.gradle.api.logging.LoggingManager"><description> 
  Returns the &lt;a href='type://org.gradle.api.logging.LoggingManager'&gt;org.gradle.api.logging.LoggingManager&lt;/a&gt; which can be used to control the logging level and 
  standard output/error capture for this script. By default, System.out is redirected to the Gradle logging system 
  at the QUIET log level, and System.err is redirected at the ERROR log level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the LoggingManager. Never returns null. 
-</description></method><method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection"><description> 
- &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; using the given paths. The file collection is configured 
- using the given closure. This method works as described for &lt;a href='type://Project#files(Object, groovy.lang.Closure)'&gt;Project#files(Object, groovy.lang.Closure)&lt;/a&gt;. 
- Relative paths are resolved relative to the directory containing this script.&lt;/p&gt; 
+</description></method><method name="delete" returnType="boolean"><description> 
+ Deletes files and directories. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The contents of the file collection. Evaluated as per &lt;a href='type://Script#files(Object...)'&gt;#files(Object...)&lt;/a&gt;. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the file collection. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configured file tree. Never returns null. 
-</description><parameter type="java.lang.Object" name="paths"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="exec" returnType="org.gradle.process.ExecResult"><description> 
- Executes an external command. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths Any type of object accepted by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if anything got deleted, false otherwise 
+</description><parameter type="java.lang.Object" name="paths"/></method><method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec"><description> 
+ Executes a Java main class. The closure configures a &lt;a href='type://org.gradle.process.JavaExecSpec'&gt;org.gradle.process.JavaExecSpec&lt;/a&gt;. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action for configuring the execution. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure for configuring the execution. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection"><description> 
- &lt;p&gt;Returns a &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; containing the given files. This works as described for &lt;a href='type://Project#files(Object...)'&gt;Project#files(Object...)&lt;/a&gt;. Relative paths are resolved relative to the directory containing this script.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The paths to the files. May be empty. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file collection. Never returns null. 
-</description><parameter type="java.lang.Object" name="paths"/></method><method name="zipTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree"><description> 
- &lt;p&gt;Creates a new &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the contents of the given ZIP file. The given zipPath path is 
- evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. You can combine this method with the &lt;a href='type://Script#copy(groovy.lang.Closure)'&gt;#copy(groovy.lang.Closure)&lt;/a&gt; 
- method to unzip a ZIP file.&lt;/p&gt; 
- 
- &lt;p&gt;The returned file tree is lazy, so that it scans for files only when the contents of the file tree are 
- queried. The file tree is also live, so that it scans for files each time the contents of the file tree are 
- queried.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;zipPath The ZIP file. Evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the file tree. Never returns null. 
-</description><parameter type="java.lang.Object" name="zipPath"/></method><method name="javaexec" returnType="org.gradle.process.ExecResult"><description> 
- Executes a Java main class. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action for configuring the execution. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="org.gradle.api.file.CopySpec"><description> 
  Copy the specified files.  The given closure is used to configure a &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt;, which 
  is then used to copy the files. Example: 
  &lt;pre&gt; 
@@ -193,31 +141,58 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure Closure to configure the CopySpec 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://org.gradle.api.tasks.WorkResult'&gt;org.gradle.api.tasks.WorkResult&lt;/a&gt; that can be used to check if the copy did any work. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="relativePath" returnType="java.lang.String"><description> 
- &lt;p&gt;Returns the relative path from the directory containing this script to the given path. The given path object 
- is (logically) resolved as described for &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;, from which a relative path is calculated.&lt;/p&gt; 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="file" returnType="java.io.File" delegationTarget="PathValidation"><description> 
+ &lt;p&gt;Resolves a file path relative to the directory containing this script and validates it using the given scheme. 
+ See &lt;a href='type://PathValidation'&gt;PathValidation&lt;/a&gt; for the list of possible validations.&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path to convert to a relative path. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The relative path. Never returns null. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
- &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the given base directory. The given baseDir path is evaluated 
- as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. The closure will be used to configure the new file tree. 
- The file tree is passed to the closure as its delegate.  Example:&lt;/p&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path An object to resolve as a File. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;validation The validation to perform on the file. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The resolved file. Never returns null. 
+ @throws InvalidUserDataException When the file does not meet the given validation constraint. 
+</description><parameter type="java.lang.Object" name="path"/><parameter type="org.gradle.api.PathValidation" name="validation"/></method><method name="getLogger" returnType="org.gradle.api.logging.Logger"><description> 
+ Returns the logger for this script. You can use this in your script to write log messages. 
  
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null. 
+</description></method><method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection"><description> 
+ &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; using the given paths. The file collection is configured 
+ using the given closure. This method works as described for &lt;a href='type://Project#files(Object, groovy.lang.Closure)'&gt;Project#files(Object, groovy.lang.Closure)&lt;/a&gt;. 
+ Relative paths are resolved relative to the directory containing this script.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The contents of the file collection. Evaluated as per &lt;a href='type://Script#files(Object...)'&gt;#files(Object...)&lt;/a&gt;. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the file collection. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configured file tree. Never returns null. 
+</description><parameter type="java.lang.Object" name="paths"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree"><description> 
+ &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the provided map of arguments.  The map will be applied as 
+ properties on the new file tree.  Example:&lt;/p&gt; 
  &lt;pre&gt; 
- fileTree('src') { 
-    exclude '**&amp;#47;.svn/**' 
- }.copy { into 'dest'} 
+ fileTree(dir:'src', excludes:['**&amp;#47;ignore/**','**&amp;#47;.svn/**']) 
  &lt;/pre&gt; 
- 
  &lt;p&gt;The returned file tree is lazy, so that it scans for files only when the contents of the file tree are 
  queried. The file tree is also live, so that it scans for files each time the contents of the file tree are 
  queried.&lt;/p&gt; 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;baseDir The base directory of the file tree. Evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure Closure to configure the &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; object. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args map of property assignments to &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; object 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configured file tree. Never returns null. 
-</description><parameter type="java.lang.Object" name="baseDir"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="apply" returnType="void" delegationTarget="from"><description> 
+</description><parameter type="java.util.Map" name="args"/></method><method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec"><description> 
+ Creates a &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. The 
+ given closure is used to configure the &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; before it is returned by this 
+ method. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure Closure to configure the CopySpec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The CopySpec 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="buildscript" returnType="void" delegationTarget="ScriptHandler"><description> 
+ Configures the classpath for this script. 
+ 
+ &lt;p&gt;The given closure is executed against this script's &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt;. The &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt; is passed 
+ to the closure as the closure's delegate. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure the closure to use to configure the script classpath. 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="javaexec" returnType="org.gradle.process.ExecResult"><description> 
+ Executes a Java main class. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action for configuring the execution. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="apply" returnType="void" delegationTarget="from"><description> 
  &lt;p&gt;Configures the delegate object for this script using plugins or scripts. 
  
  &lt;p&gt;The following options are available:&lt;/p&gt; 
@@ -229,17 +204,43 @@
  &lt;li&gt;&lt;a href='type://to'&gt;to&lt;/a&gt;: The target delegate object or objects.&lt;/li&gt;&lt;/ul&gt; &lt;p/&gt; &lt;p&gt;For more detail, see &lt;a href='type://org.gradle.api.plugins.ObjectConfigurationAction'&gt;org.gradle.api.plugins.ObjectConfigurationAction&lt;/a&gt;.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options The options to use to configure the &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;. 
-</description><parameter type="java.util.Map" name="options"/></method><method name="buildscript" returnType="void" delegationTarget="ScriptHandler"><description> 
- Configures the classpath for this script. 
+</description><parameter type="java.util.Map" name="options"/></method><method name="exec" returnType="org.gradle.process.ExecResult"><description> 
+ Executes an external command. 
  
- &lt;p&gt;The given closure is executed against this script's &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt;. The &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt; is passed 
- to the closure as the closure's delegate. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action for configuring the execution. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the execution 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getResources" returnType="org.gradle.api.resources.ResourceHandler"><description> 
+ Provides access to resource-specific utility methods, for example factory methods that create various resources. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure the closure to use to configure the script classpath. 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="logger" type="org.gradle.api.logging.Logger"><description> 
- Returns the logger for this script. You can use this in your script to write log messages. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance contains various resource-specific utility methods. 
+</description></method><method name="apply" returnType="void" delegationTarget="org.gradle.api.plugins.ObjectConfigurationAction"><description> 
+ &lt;p&gt;Configures the delegate object for this script using plugins or scripts. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null. 
+ &lt;p&gt;The given closure is used to configure an &lt;a href='type://org.gradle.api.plugins.ObjectConfigurationAction'&gt;org.gradle.api.plugins.ObjectConfigurationAction&lt;/a&gt; which is 
+ then used to configure the delegate object.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to configure the &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="zipTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree"><description> 
+ &lt;p&gt;Creates a new &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the contents of the given ZIP file. The given zipPath path is 
+ evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. You can combine this method with the &lt;a href='type://Script#copy(groovy.lang.Closure)'&gt;#copy(groovy.lang.Closure)&lt;/a&gt; 
+ method to unzip a ZIP file.&lt;/p&gt; 
+ 
+ &lt;p&gt;The returned file tree is lazy, so that it scans for files only when the contents of the file tree are 
+ queried. The file tree is also live, so that it scans for files each time the contents of the file tree are 
+ queried.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;zipPath The ZIP file. Evaluated as per &lt;a href='type://Script#file(Object)'&gt;#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the file tree. Never returns null. 
+</description><parameter type="java.lang.Object" name="zipPath"/></method><method name="getBuildscript" returnType="org.gradle.api.initialization.dsl.ScriptHandler"><description> 
+ Returns the script handler for this script. You can use this handler to manage the classpath used to compile and 
+ execute this script. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath handler. Never returns null. 
+</description></method><property name="buildscript" type="org.gradle.api.initialization.dsl.ScriptHandler"><description> 
+ Returns the script handler for this script. You can use this handler to manage the classpath used to compile and 
+ execute this script. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath handler. Never returns null. 
 </description></property><property name="logging" type="org.gradle.api.logging.LoggingManager"><description> 
  Returns the &lt;a href='type://org.gradle.api.logging.LoggingManager'&gt;org.gradle.api.logging.LoggingManager&lt;/a&gt; which can be used to control the logging level and 
  standard output/error capture for this script. By default, System.out is redirected to the Gradle logging system 
@@ -250,9 +251,8 @@
  Provides access to resource-specific utility methods, for example factory methods that create various resources. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance contains various resource-specific utility methods. 
-</description></property><property name="buildscript" type="org.gradle.api.initialization.dsl.ScriptHandler"><description> 
- Returns the script handler for this script. You can use this handler to manage the classpath used to compile and 
- execute this script. 
+</description></property><property name="logger" type="org.gradle.api.logging.Logger"><description> 
+ Returns the logger for this script. You can use this in your script to write log messages. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath handler. Never returns null. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null. 
 </description></property></type>

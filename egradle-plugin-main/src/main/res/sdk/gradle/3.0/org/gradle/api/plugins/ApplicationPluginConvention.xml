@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.ApplicationPluginConvention" version="3.0"><description> 
  &lt;p&gt;The &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; used for configuring the &lt;a href='type://ApplicationPlugin'&gt;ApplicationPlugin&lt;/a&gt;.&lt;/p&gt; 
-</description><method name="setApplicationName" returnType="void"><description> 
+</description><method name="setApplicationDistribution" returnType="void"><parameter type="org.gradle.api.file.CopySpec" name="applicationDistribution"/></method><method name="getMainClassName" returnType="java.lang.String"><description> 
+ The fully qualified name of the application's main class. 
+</description></method><method name="setApplicationDefaultJvmArgs" returnType="void"><description> 
+ Array of string arguments to pass to the JVM when running the application 
+</description><parameter type="java.lang.Iterable" name="applicationDefaultJvmArgs"/></method><method name="getApplicationDefaultJvmArgs" returnType="java.lang.Iterable"><description> 
+ Array of string arguments to pass to the JVM when running the application 
+</description></method><method name="getProject" returnType="org.gradle.api.Project"/><method name="getApplicationName" returnType="java.lang.String"><description> 
  The name of the application. 
-</description><parameter type="java.lang.String" name="applicationName"/></method><method name="getApplicationDistribution" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec"><description> 
+</description></method><method name="getApplicationDistribution" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec"><description> 
  &lt;p&gt;The specification of the contents of the distribution.&lt;/p&gt; 
  &lt;p&gt; 
  Use this &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; to include extra files/resource in the application distribution. 
@@ -17,20 +23,16 @@
  Note that the application plugin pre configures this spec to; include the contents of "&lt;a href='type://src/dist'&gt;src/dist&lt;/a&gt;", 
  copy the application start scripts into the "&lt;a href='type://bin'&gt;bin&lt;/a&gt;" directory, and copy the built jar and its dependencies 
  into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory. 
-</description></method><method name="getApplicationName" returnType="java.lang.String"><description> 
+</description></method><method name="setApplicationName" returnType="void"><description> 
  The name of the application. 
-</description></method><method name="getProject" returnType="org.gradle.api.Project"/><method name="setApplicationDistribution" returnType="void"><parameter type="org.gradle.api.file.CopySpec" name="applicationDistribution"/></method><method name="getApplicationDefaultJvmArgs" returnType="java.lang.Iterable"><description> 
- Array of string arguments to pass to the JVM when running the application 
-</description></method><method name="getMainClassName" returnType="java.lang.String"><description> 
+</description><parameter type="java.lang.String" name="applicationName"/></method><method name="setMainClassName" returnType="void"><description> 
  The fully qualified name of the application's main class. 
-</description></method><method name="setMainClassName" returnType="void"><description> 
+</description><parameter type="java.lang.String" name="mainClassName"/></method><property name="mainClassName" type="java.lang.String"><description> 
  The fully qualified name of the application's main class. 
-</description><parameter type="java.lang.String" name="mainClassName"/></method><method name="setApplicationDefaultJvmArgs" returnType="void"><description> 
+</description></property><property name="applicationDefaultJvmArgs" type="java.lang.Iterable"><description> 
  Array of string arguments to pass to the JVM when running the application 
-</description><parameter type="java.lang.Iterable" name="applicationDefaultJvmArgs"/></method><property name="applicationName" type="java.lang.String"><description> 
+</description></property><property name="applicationName" type="java.lang.String"><description> 
  The name of the application. 
-</description></property><property name="project" type="org.gradle.api.Project"/><property name="mainClassName" type="java.lang.String"><description> 
- The fully qualified name of the application's main class. 
 </description></property><property name="applicationDistribution" type="org.gradle.api.file.CopySpec"><description> 
  &lt;p&gt;The specification of the contents of the distribution.&lt;/p&gt; 
  &lt;p&gt; 
@@ -46,6 +48,4 @@
  Note that the application plugin pre configures this spec to; include the contents of "&lt;a href='type://src/dist'&gt;src/dist&lt;/a&gt;", 
  copy the application start scripts into the "&lt;a href='type://bin'&gt;bin&lt;/a&gt;" directory, and copy the built jar and its dependencies 
  into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory. 
-</description></property><property name="applicationDefaultJvmArgs" type="java.lang.Iterable"><description> 
- Array of string arguments to pass to the JVM when running the application 
-</description></property></type>
+</description></property><property name="project" type="org.gradle.api.Project"/></type>

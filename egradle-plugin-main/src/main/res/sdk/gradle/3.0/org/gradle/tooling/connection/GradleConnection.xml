@@ -32,7 +32,38 @@
  &lt;/pre&gt; 
  
  @since 2.13 
-</description><method name="models" returnType="org.gradle.tooling.ModelBuilder" delegationTarget="org.gradle.tooling.model.gradle.GradleBuild"><description> 
+</description><method name="getModels" returnType="org.gradle.tooling.connection.ModelResults" delegationTarget="models"><description> 
+ Fetches a Set of snapshots of the model of the given type for this composite. This method blocks until the model is available. 
+ 
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://models(modelType).get()'&gt;models(modelType).get()&lt;/a&gt;&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ @throws GradleConnectionException On failure using the connection. 
+ @throws IllegalStateException When this connection has been closed or is closing. 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="close" returnType="void"><description> 
+ Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
+</description></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
+ Creates a launcher which can be used to execute a build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
+</description></method><method name="getModels" returnType="void" delegationTarget="onFailure"><description> 
+ Starts fetching a Set of snapshots of the model of the given type for this composite, passing the result to the given handler when complete. This method returns immediately, and the result is later 
+ passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method after fetching all of the composite's models. 
+ 
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception. 
+ See &lt;a href='type://GradleConnection#getModels(Class)'&gt;#getModels(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with.&lt;/p&gt; 
+ 
+ &lt;p&gt;An operation will fail if there is a problem fetching the model from any of the composite's builds. 
+ The handler's &lt;a href='type://onFailure'&gt;onFailure&lt;/a&gt; method will only be called one time with the first failure.&lt;/p&gt; 
+ 
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://models(modelType).get(handler)'&gt;models(modelType).get(handler)&lt;/a&gt;&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler that will be notified of results. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ @throws IllegalStateException When this connection has been closed or is closing. 
+</description><parameter type="java.lang.Class" name="modelType"/><parameter type="org.gradle.tooling.ResultHandler" name="handler"/></method><method name="models" returnType="org.gradle.tooling.ModelBuilder" delegationTarget="org.gradle.tooling.model.gradle.GradleBuild"><description> 
  Creates a builder which can be used to query the model of the given type for all projects in the composite. 
  
  &lt;p&gt;The set of projects is "live", so that models from projects added to the overall composite after the builder 
@@ -57,38 +88,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="close" returnType="void"><description> 
- Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
-</description></method><method name="getModels" returnType="org.gradle.tooling.connection.ModelResults" delegationTarget="models"><description> 
- Fetches a Set of snapshots of the model of the given type for this composite. This method blocks until the model is available. 
- 
- &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://models(modelType).get()'&gt;models(modelType).get()&lt;/a&gt;&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
- @throws GradleConnectionException On failure using the connection. 
- @throws IllegalStateException When this connection has been closed or is closing. 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="getModels" returnType="void" delegationTarget="onFailure"><description> 
- Starts fetching a Set of snapshots of the model of the given type for this composite, passing the result to the given handler when complete. This method returns immediately, and the result is later 
- passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method after fetching all of the composite's models. 
- 
- &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception. 
- See &lt;a href='type://GradleConnection#getModels(Class)'&gt;#getModels(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with.&lt;/p&gt; 
- 
- &lt;p&gt;An operation will fail if there is a problem fetching the model from any of the composite's builds. 
- The handler's &lt;a href='type://onFailure'&gt;onFailure&lt;/a&gt; method will only be called one time with the first failure.&lt;/p&gt; 
- 
- &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://models(modelType).get(handler)'&gt;models(modelType).get(handler)&lt;/a&gt;&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler that will be notified of results. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
- @throws IllegalStateException When this connection has been closed or is closing. 
-</description><parameter type="java.lang.Class" name="modelType"/><parameter type="org.gradle.tooling.ResultHandler" name="handler"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
- Creates a launcher which can be used to execute a build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
-</description></method><property name="models" type="void"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><property name="models" type="void"><description> 
  Starts fetching a Set of snapshots of the model of the given type for this composite, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method after fetching all of the composite's models. 
  

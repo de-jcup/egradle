@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.SharedLibraryBinarySpec" version="3.0"><description> 
  A shared library binary built by Gradle for a native library. 
-</description><method name="setSharedLibraryFile" returnType="void"><description> 
- The shared library file. 
-</description><parameter type="java.io.File" name="sharedLibraryFile"/></method><method name="setSharedLibraryLinkFile" returnType="void"><description> 
- The shared library link file. 
-</description><parameter type="java.io.File" name="sharedLibraryLinkFile"/></method><method name="getSharedLibraryFile" returnType="java.io.File"><description> 
- The shared library file. 
-</description></method><method name="getTasks" returnType="org.gradle.nativeplatform.SharedLibraryBinarySpec.TasksCollection"><description> 
+</description><method name="getTasks" returnType="org.gradle.nativeplatform.SharedLibraryBinarySpec.TasksCollection"><description> 
  {@inheritDoc} 
-</description></method><method name="getSharedLibraryLinkFile" returnType="java.io.File"><description> 
+</description></method><method name="getSharedLibraryFile" returnType="java.io.File"><description> 
+ The shared library file. 
+</description></method><method name="setSharedLibraryLinkFile" returnType="void"><description> 
  The shared library link file. 
-</description></method><property name="sharedLibraryLinkFile" type="java.io.File"><description> 
+</description><parameter type="java.io.File" name="sharedLibraryLinkFile"/></method><method name="getSharedLibraryLinkFile" returnType="java.io.File"><description> 
  The shared library link file. 
+</description></method><method name="setSharedLibraryFile" returnType="void"><description> 
+ The shared library file. 
+</description><parameter type="java.io.File" name="sharedLibraryFile"/></method><property name="sharedLibraryFile" type="java.io.File"><description> 
+ The shared library file. 
 </description></property><property name="tasks" type="org.gradle.nativeplatform.SharedLibraryBinarySpec.TasksCollection"><description> 
  {@inheritDoc} 
-</description></property><property name="sharedLibraryFile" type="java.io.File"><description> 
- The shared library file. 
+</description></property><property name="sharedLibraryLinkFile" type="java.io.File"><description> 
+ The shared library link file. 
 </description></property></type>

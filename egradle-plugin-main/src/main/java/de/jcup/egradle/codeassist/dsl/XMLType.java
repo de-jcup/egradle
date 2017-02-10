@@ -21,9 +21,6 @@ public class XMLType implements ModifiableType {
 	@XmlAttribute(name = "interface")
 	private boolean _interface;
 	
-	@XmlElement(name = "superClass")
-	private String superClassName;
-
 	@XmlElement(name = "description")
 	private String description;
 

@@ -8,29 +8,6 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The output files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure this property. 
 </description><parameter type="java.lang.Object" name="paths"/></method><method name="upToDateWhen" returnType="void"><description> 
- &lt;p&gt;Adds a predicate to determine whether the outputs of this task are up-to-date. The given spec is evaluated at 
- task execution time. If the spec returns false, the task outputs are considered out-of-date and the task will be 
- executed.&lt;/p&gt; 
- 
- &lt;p&gt;You can add multiple such predicates. The task outputs are considered out-of-date when any predicate returns 
- false.&lt;p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;upToDateSpec The spec to use to determine whether the task outputs are up-to-date. 
-</description><parameter type="org.gradle.api.specs.Spec" name="upToDateSpec"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
- Registers an output directory for this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output directory. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure this property. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="getFiles" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the output files of this task. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output files. Returns an empty collection if this task has no output files. 
-</description></method><method name="file" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
- Registers some output file for this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure this property. 
-</description><parameter type="java.lang.Object" name="path"/></method><method name="upToDateWhen" returnType="void"><description> 
  &lt;p&gt;Adds a predicate to determine whether the outputs of this task are up-to-date. The given closure is executed 
  at task execution time. The closure is passed the task as a parameter. If the closure returns false, the task 
  outputs are considered out-of-date and the task will be executed.&lt;/p&gt; 
@@ -39,25 +16,48 @@
  false.&lt;p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;upToDateClosure The closure to use to determine whether the task outputs are up-to-date. 
-</description><parameter type="groovy.lang.Closure" name="upToDateClosure"/></method><method name="cacheIf" returnType="void"><description> 
+</description><parameter type="groovy.lang.Closure" name="upToDateClosure"/></method><method name="dir" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ Registers an output directory for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output directory. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure this property. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="file" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder"><description> 
+ Registers some output file for this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The output file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a property builder to further configure this property. 
+</description><parameter type="java.lang.Object" name="path"/></method><method name="cacheIf" returnType="void"><description> 
  &lt;p&gt;Cache the results of the task only if the given spec is satisfied. The spec will be evaluated at task execution time, not 
  during configuration. If the Spec is not satisfied, the results of the task will not be cached.&lt;/p&gt; 
  
  &lt;p&gt;You may add multiple such predicates. The results of the task are not cached if any of the predicates return false.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;spec specifies if the results of the task should be cached. 
-</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="getHasOutput" returnType="boolean"><description> 
- Returns true if this task has declared any outputs. Note that a task may be able to produce output files and 
- still have an empty set of output files. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any outputs, otherwise false. 
-</description></method><property name="files" type="org.gradle.api.file.FileCollection"><description> 
+</description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="getFiles" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the output files of this task. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output files. Returns an empty collection if this task has no output files. 
-</description></property><property name="hasOutput" type="boolean"><description> 
+</description></method><method name="upToDateWhen" returnType="void"><description> 
+ &lt;p&gt;Adds a predicate to determine whether the outputs of this task are up-to-date. The given spec is evaluated at 
+ task execution time. If the spec returns false, the task outputs are considered out-of-date and the task will be 
+ executed.&lt;/p&gt; 
+ 
+ &lt;p&gt;You can add multiple such predicates. The task outputs are considered out-of-date when any predicate returns 
+ false.&lt;p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;upToDateSpec The spec to use to determine whether the task outputs are up-to-date. 
+</description><parameter type="org.gradle.api.specs.Spec" name="upToDateSpec"/></method><method name="getHasOutput" returnType="boolean"><description> 
  Returns true if this task has declared any outputs. Note that a task may be able to produce output files and 
  still have an empty set of output files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any outputs, otherwise false. 
+</description></method><property name="hasOutput" type="boolean"><description> 
+ Returns true if this task has declared any outputs. Note that a task may be able to produce output files and 
+ still have an empty set of output files. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any outputs, otherwise false. 
+</description></property><property name="files" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the output files of this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output files. Returns an empty collection if this task has no output files. 
 </description></property></type>

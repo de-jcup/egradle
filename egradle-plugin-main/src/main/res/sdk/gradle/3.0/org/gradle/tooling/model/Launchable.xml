@@ -5,17 +5,17 @@
  to either &lt;a href='type://org.gradle.tooling.BuildLauncher#forTasks(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forTasks(Iterable)&lt;/a&gt; or &lt;a href='type://org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)&lt;/a&gt;.&lt;/p&gt; 
  
  @since 1.12 
-</description><method name="getDisplayName" returnType="java.lang.String"><description> 
- Returns a human-consumable display name for this launchable. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable. 
- @since 1.12 
-</description></method><method name="isPublic" returnType="boolean"><description> 
+</description><method name="isPublic" returnType="boolean"><description> 
  Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for 
  an end user of the build to run. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Public property. 
  @since 2.1 
+</description></method><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns a human-consumable display name for this launchable. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable. 
+ @since 1.12 
 </description></method><method name="getDescription" returnType="java.lang.String" delegationTarget="null"><description> 
  Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
@@ -29,11 +29,6 @@
  Returns the identifier for the Gradle project that this model originated from. 
  
  @since 2.13 
-</description></property><property name="displayName" type="java.lang.String"><description> 
- Returns a human-consumable display name for this launchable. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable. 
- @since 1.12 
 </description></property><property name="public" type="boolean"><description> 
  Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for 
  an end user of the build to run. 
@@ -44,5 +39,10 @@
  Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
+ @since 1.12 
+</description></property><property name="displayName" type="java.lang.String"><description> 
+ Returns a human-consumable display name for this launchable. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable. 
  @since 1.12 
 </description></property></type>

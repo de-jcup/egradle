@@ -12,7 +12,48 @@
  to understand what kind of exception throw and when is it thrown. 
  
  @since 1.0-milestone-7 
-</description><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="Incubating"><description> 
+</description><method name="setStandardInput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="java.io.InputStream"><description> 
+ Sets the &lt;a href='type://java.io.InputStream'&gt;java.io.InputStream&lt;/a&gt; that will be used as standard input for this operation. 
+ Defaults to an empty input stream. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;inputStream The input stream 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-8 
+</description><parameter type="java.io.InputStream" name="inputStream"/></method><method name="setJavaHome" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
+ Specifies the Java home directory to use for this operation. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
+ If you want to get hold of this information you can ask tooling API to build this model. 
+ &lt;p&gt; 
+ If not configured or null is passed, then the sensible default will be used. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;javaHome to use for the Gradle process 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @throws IllegalArgumentException when supplied javaHome is not a valid folder. 
+ @since 1.0-milestone-8 
+</description><parameter type="java.io.File" name="javaHome"/></method><method name="setJvmArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
+ Specifies the Java VM arguments to use for this operation. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
+ If you want to get hold of this information you can ask tooling API to build this model. 
+ &lt;p&gt; 
+ If not configured, null, or an empty list is passed, then the reasonable default will be used. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 2.6 
+</description><parameter type="java.lang.Iterable" name="jvmArguments"/></method><method name="setJvmArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
+ Specifies the Java VM arguments to use for this operation. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
+ If you want to get hold of this information you can ask tooling API to build this model. 
+ &lt;p&gt; 
+ If not configured, null, or an empty array is passed, then the reasonable default will be used. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-8 
+</description><parameter type="java.lang.String" name="jvmArguments"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="Incubating"><description> 
  Adds a progress listener which will receive progress events as the operation runs. 
  
  &lt;p&gt;This method is intended to be replaced by &lt;a href='type://LongRunningOperation#addProgressListener(org.gradle.tooling.events.ProgressListener)'&gt;#addProgressListener(org.gradle.tooling.events.ProgressListener)&lt;/a&gt;. The new progress listener type 
@@ -24,28 +65,23 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-7 
-</description><parameter type="org.gradle.tooling.ProgressListener" name="listener"/></method><method name="setStandardOutput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="java.io.OutputStream"><description> 
+</description><parameter type="org.gradle.tooling.ProgressListener" name="listener"/></method><method name="setColorOutput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="true"><description> 
+ Specifies whether to generate colored (ANSI encoded) output for logging. The default is to not generate color output. 
+ 
+ &lt;p&gt;Supported by Gradle 2.3 or later. Ignored for older versions.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;colorOutput &lt;a href='type://true'&gt;true&lt;/a&gt; to request color output (using ANSI encoding). 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 2.3 
+</description><parameter type="boolean" name="colorOutput"/></method><method name="setStandardOutput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="java.io.OutputStream"><description> 
  Sets the &lt;a href='type://java.io.OutputStream'&gt;java.io.OutputStream&lt;/a&gt; which should receive standard output logging generated while running the operation. 
  The default is to discard the output. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputStream The output stream. The system default character encoding will be used to encode characters written to this stream. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-7 
-</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="setStandardError" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="OutputStream"><description> 
- Sets the &lt;a href='type://OutputStream'&gt;OutputStream&lt;/a&gt; which should receive standard error logging generated while running the operation. 
- The default is to discard the output. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputStream The output stream. The system default character encoding will be used to encode characters written to this stream. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-7 
-</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="withCancellationToken" returnType="org.gradle.tooling.LongRunningOperation"><description> 
- Sets the cancellation token to use to cancel the operation if required. 
- 
- &lt;p&gt;Supported by Gradle 2.1 or later. Ignored for older versions.&lt;/p&gt; 
- 
- @since 2.1 
-</description><parameter type="org.gradle.tooling.CancellationToken" name="cancellationToken"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation"><description> 
- Adds a progress listener which will receive progress events of all types as the operation runs. 
+</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation"><description> 
+ Adds a progress listener which will receive progress events as the operations of the requested type run. 
  
  &lt;p&gt;This method is intended to replace &lt;a href='type://LongRunningOperation#addProgressListener(ProgressListener)'&gt;#addProgressListener(ProgressListener)&lt;/a&gt;. You should prefer using the new progress listener method where possible, 
  as the new interface provides much richer information and much better handling of parallel operations that run during the build. 
@@ -54,20 +90,10 @@
  &lt;p&gt;Supported by Gradle 2.5 or later. Gradle 2.4 supports &lt;a href='type://OperationType#TEST'&gt;OperationType#TEST&lt;/a&gt; operations only. Ignored for older versions.&lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;operationTypes The types of operations to receive progress events for. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 2.5 
-</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/></method><method name="setJvmArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
- Specifies the Java VM arguments to use for this operation. 
- &lt;p&gt; 
- &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
- If you want to get hold of this information you can ask tooling API to build this model. 
- &lt;p&gt; 
- If not configured, null, or an empty array is passed, then the reasonable default will be used. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-8 
-</description><parameter type="java.lang.String" name="jvmArguments"/></method><method name="withArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="BuildLauncher"><description> 
+ @since 2.6 
+</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="org.gradle.tooling.events.OperationType" name="operationTypes"/></method><method name="withArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="BuildLauncher"><description> 
  Specify the command line build arguments. Useful mostly for running tasks via &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt;. 
  &lt;p&gt; 
  Be aware that not all of the Gradle command line options are supported! 
@@ -99,26 +125,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments Gradle command line arguments 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0 
-</description><parameter type="java.lang.String" name="arguments"/></method><method name="setJvmArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
- Specifies the Java VM arguments to use for this operation. 
- &lt;p&gt; 
- &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
- If you want to get hold of this information you can ask tooling API to build this model. 
- &lt;p&gt; 
- If not configured, null, or an empty list is passed, then the reasonable default will be used. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 2.6 
-</description><parameter type="java.lang.Iterable" name="jvmArguments"/></method><method name="setColorOutput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="true"><description> 
- Specifies whether to generate colored (ANSI encoded) output for logging. The default is to not generate color output. 
- 
- &lt;p&gt;Supported by Gradle 2.3 or later. Ignored for older versions.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;colorOutput &lt;a href='type://true'&gt;true&lt;/a&gt; to request color output (using ANSI encoding). 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 2.3 
-</description><parameter type="boolean" name="colorOutput"/></method><method name="withArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="BuildLauncher"><description> 
+</description><parameter type="java.lang.String" name="arguments"/></method><method name="withArguments" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="BuildLauncher"><description> 
  Specify the command line build arguments. Useful mostly for running tasks via &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt;. 
  &lt;p&gt; 
  If not configured, null, or an empty list is passed, then the reasonable default will be used. 
@@ -129,6 +136,18 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 2.6 
 </description><parameter type="java.lang.Iterable" name="arguments"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation"><description> 
+ Adds a progress listener which will receive progress events of all types as the operation runs. 
+ 
+ &lt;p&gt;This method is intended to replace &lt;a href='type://LongRunningOperation#addProgressListener(ProgressListener)'&gt;#addProgressListener(ProgressListener)&lt;/a&gt;. You should prefer using the new progress listener method where possible, 
+ as the new interface provides much richer information and much better handling of parallel operations that run during the build. 
+ &lt;/p&gt; 
+ 
+ &lt;p&gt;Supported by Gradle 2.5 or later. Gradle 2.4 supports &lt;a href='type://OperationType#TEST'&gt;OperationType#TEST&lt;/a&gt; operations only. Ignored for older versions.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 2.5 
+</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation"><description> 
  Adds a progress listener which will receive progress events as the operations of the requested type run. 
  
  &lt;p&gt;This method is intended to replace &lt;a href='type://LongRunningOperation#addProgressListener(ProgressListener)'&gt;#addProgressListener(ProgressListener)&lt;/a&gt;. You should prefer using the new progress listener method where possible, 
@@ -141,7 +160,20 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;operationTypes The types of operations to receive progress events for. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 2.5 
-</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="java.util.Set" name="operationTypes"/></method><method name="setJavaHome" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="org.gradle.tooling.model.build.BuildEnvironment"><description> 
+</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="java.util.Set" name="operationTypes"/></method><method name="setStandardError" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="OutputStream"><description> 
+ Sets the &lt;a href='type://OutputStream'&gt;OutputStream&lt;/a&gt; which should receive standard error logging generated while running the operation. 
+ The default is to discard the output. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputStream The output stream. The system default character encoding will be used to encode characters written to this stream. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-7 
+</description><parameter type="java.io.OutputStream" name="outputStream"/></method><method name="withCancellationToken" returnType="org.gradle.tooling.LongRunningOperation"><description> 
+ Sets the cancellation token to use to cancel the operation if required. 
+ 
+ &lt;p&gt;Supported by Gradle 2.1 or later. Ignored for older versions.&lt;/p&gt; 
+ 
+ @since 2.1 
+</description><parameter type="org.gradle.tooling.CancellationToken" name="cancellationToken"/></method><property name="javaHome" type="java.io.File"><description> 
  Specifies the Java home directory to use for this operation. 
  &lt;p&gt; 
  &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
@@ -153,57 +185,6 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @throws IllegalArgumentException when supplied javaHome is not a valid folder. 
  @since 1.0-milestone-8 
-</description><parameter type="java.io.File" name="javaHome"/></method><method name="addProgressListener" returnType="org.gradle.tooling.LongRunningOperation"><description> 
- Adds a progress listener which will receive progress events as the operations of the requested type run. 
- 
- &lt;p&gt;This method is intended to replace &lt;a href='type://LongRunningOperation#addProgressListener(ProgressListener)'&gt;#addProgressListener(ProgressListener)&lt;/a&gt;. You should prefer using the new progress listener method where possible, 
- as the new interface provides much richer information and much better handling of parallel operations that run during the build. 
- &lt;/p&gt; 
- 
- &lt;p&gt;Supported by Gradle 2.5 or later. Gradle 2.4 supports &lt;a href='type://OperationType#TEST'&gt;OperationType#TEST&lt;/a&gt; operations only. Ignored for older versions.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;operationTypes The types of operations to receive progress events for. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 2.6 
-</description><parameter type="org.gradle.tooling.events.ProgressListener" name="listener"/><parameter type="org.gradle.tooling.events.OperationType" name="operationTypes"/></method><method name="setStandardInput" returnType="org.gradle.tooling.LongRunningOperation" delegationTarget="java.io.InputStream"><description> 
- Sets the &lt;a href='type://java.io.InputStream'&gt;java.io.InputStream&lt;/a&gt; that will be used as standard input for this operation. 
- Defaults to an empty input stream. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;inputStream The input stream 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-8 
-</description><parameter type="java.io.InputStream" name="inputStream"/></method><property name="javaHome" type="java.io.File"><description> 
- Specifies the Java home directory to use for this operation. 
- &lt;p&gt; 
- &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
- If you want to get hold of this information you can ask tooling API to build this model. 
- &lt;p&gt; 
- If not configured or null is passed, then the sensible default will be used. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;javaHome to use for the Gradle process 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @throws IllegalArgumentException when supplied javaHome is not a valid folder. 
- @since 1.0-milestone-8 
-</description></property><property name="jvmArguments" type="java.lang.String"><description> 
- Specifies the Java VM arguments to use for this operation. 
- &lt;p&gt; 
- &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
- If you want to get hold of this information you can ask tooling API to build this model. 
- &lt;p&gt; 
- If not configured, null, or an empty array is passed, then the reasonable default will be used. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-8 
-</description></property><property name="colorOutput" type="boolean"><description> 
- Specifies whether to generate colored (ANSI encoded) output for logging. The default is to not generate color output. 
- 
- &lt;p&gt;Supported by Gradle 2.3 or later. Ignored for older versions.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;colorOutput &lt;a href='type://true'&gt;true&lt;/a&gt; to request color output (using ANSI encoding). 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 2.3 
 </description></property><property name="standardInput" type="java.io.InputStream"><description> 
  Sets the &lt;a href='type://java.io.InputStream'&gt;java.io.InputStream&lt;/a&gt; that will be used as standard input for this operation. 
  Defaults to an empty input stream. 
@@ -225,4 +206,23 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputStream The output stream. The system default character encoding will be used to encode characters written to this stream. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-7 
+</description></property><property name="colorOutput" type="boolean"><description> 
+ Specifies whether to generate colored (ANSI encoded) output for logging. The default is to not generate color output. 
+ 
+ &lt;p&gt;Supported by Gradle 2.3 or later. Ignored for older versions.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;colorOutput &lt;a href='type://true'&gt;true&lt;/a&gt; to request color output (using ANSI encoding). 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 2.3 
+</description></property><property name="jvmArguments" type="java.lang.String"><description> 
+ Specifies the Java VM arguments to use for this operation. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt; model contains information such as Java or Gradle environment. 
+ If you want to get hold of this information you can ask tooling API to build this model. 
+ &lt;p&gt; 
+ If not configured, null, or an empty array is passed, then the reasonable default will be used. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;jvmArguments to use for the Gradle process 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-8 
 </description></property></type>
