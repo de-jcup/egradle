@@ -1,5 +1,7 @@
 package de.jcup.egradle.eclipse.gradleeditor.control;
 
+import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -23,10 +25,11 @@ import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.StringUtilsAccess;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.gradleeditor.Activator;
 
 /**
  * EGradles own simple browser information control, inspired by
@@ -46,6 +49,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 	private LocationListener locationListener;
 	private History<String> history;
 	private Action browsBackitem;
+	private OpenInExternalBrowserAction openInBrowserAction;
 
 	/**
 	 * Creates an simple browser information control being resizable, providing
@@ -198,11 +202,16 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser.setJavascriptEnabled(false);
 
 		if (linksEnabled) {
+
+			openInBrowserAction = new OpenInExternalBrowserAction();
+			openInBrowserAction.setImageDescriptor(EGradleUtil.createImageDescriptor("icons/codecompletion/external_browser.png", Activator.PLUGIN_ID));
+			openInBrowserAction.setToolTipText("Open this page in external browser");
+			
 			browsBackitem = new Action() {
 				@Override
 				public void run() {
 					goBack();
-					updateBrowseBackItem();
+					updateActions();
 					if (isDebugEnabled()) {
 						debug("go back-after:\n" + history.toString());
 					}
@@ -273,9 +282,10 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 			ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 			ImageDescriptor back = sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_BACK);
 			browsBackitem.setImageDescriptor(back);
-			updateBrowseBackItem();
+			updateActions();
 			ToolBarManager toolBarManager = getToolBarManager();
 			toolBarManager.add(browsBackitem);
+			toolBarManager.add(openInBrowserAction);
 			toolBarManager.update(true);
 		}
 
@@ -344,7 +354,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 						}
 					}
 				}
-				updateBrowseBackItem();
+				updateActions();
 			}
 		};
 
@@ -356,7 +366,19 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	}
 
-	protected void updateBrowseBackItem() {
+	protected void updateActions() {
+		String potentialtarget = history.current();
+		if (potentialtarget!=null && potentialtarget.startsWith("http")){
+			openInBrowserAction.setTarget(potentialtarget);
+			openInBrowserAction.setEnabled(true);
+		}else{
+			openInBrowserAction.setEnabled(false);
+			openInBrowserAction.setTarget(null);
+		}
+		updateBrowsBackAction();
+	}
+
+	private void updateBrowsBackAction() {
 		if (browsBackitem == null) {
 			return;
 		}
