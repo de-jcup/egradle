@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "property")
-public class XMLProperty implements Property{
+public class XMLProperty implements ModifiableProperty{
 	
 	@XmlAttribute(name = "name")
 	private String name;
@@ -42,6 +42,7 @@ public class XMLProperty implements Property{
 		return type;
 	}
 	
+	@Override
 	public void setType(Type returnType) {
 		this.type = returnType;
 	}
@@ -56,6 +57,7 @@ public class XMLProperty implements Property{
 		return parent;
 	}
 	
+	@Override
 	public void setParent(Type parent) {
 		this.parent = parent;
 	}

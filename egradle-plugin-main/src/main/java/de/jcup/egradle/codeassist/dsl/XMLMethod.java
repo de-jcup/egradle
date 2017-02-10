@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "method")
-public class XMLMethod implements Method{
+public class XMLMethod implements ModifiableMethod{
 	
 	@XmlAttribute(name = "name")
 	private String name;
@@ -53,6 +53,10 @@ public class XMLMethod implements Method{
 		return returnType;
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setReturnType(de.jcup.egradle.codeassist.dsl.Type)
+	 */
+	@Override
 	public void setReturnType(Type returnType) {
 		this.returnType = returnType;
 	}
@@ -72,6 +76,10 @@ public class XMLMethod implements Method{
 		return parent;
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setParent(de.jcup.egradle.codeassist.dsl.Type)
+	 */
+	@Override
 	public void setParent(Type parent) {
 		this.parent = parent;
 	}
@@ -81,10 +89,18 @@ public class XMLMethod implements Method{
 		return delegationTargetAsString;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setDelegationTargetAsString(java.lang.String)
+	 */
+	@Override
 	public void setDelegationTargetAsString(String delegationTargetAsString) {
 		this.delegationTargetAsString = delegationTargetAsString;
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setDelegationTarget(de.jcup.egradle.codeassist.dsl.Type)
+	 */
+	@Override
 	public void setDelegationTarget(Type target) {
 		this.delegationTarget = target;
 	}

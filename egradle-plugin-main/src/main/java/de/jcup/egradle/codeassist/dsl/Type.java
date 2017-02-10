@@ -10,8 +10,16 @@ import java.util.Set;
  */
 public interface Type extends LanguageElement{
 
+	/**
+	 * Return properties, never <code>null</code>
+	 * @return properties, never <code>null</code>
+	 */
 	public Set<Property> getProperties();
 	
+	/**
+	 * Return methods, never <code>null</code>
+	 * @return methods, never <code>null</code>
+	 */
 	public Set<Method> getMethods();
 
 	/**
@@ -20,10 +28,6 @@ public interface Type extends LanguageElement{
 	 */
 	public String getShortName();
 	
-	public void mixin(Type mixinType, Reason reason);
-
-	public void addExtension(String extensionId, Type extensionType, Reason reason);
-
 	public Map<String, Type> getExtensions();
 	
 	/**
@@ -34,16 +38,24 @@ public interface Type extends LanguageElement{
 	public Reason getReasonForExtension(String extensionId);
 	
 	/**
-	 * Returns reason for method
-	 * @param method
+	 * Returns reason for element
+	 * @param element
 	 * @return reason or <code>null</code> when no reason is specified
 	 */
-	public Reason getReasonForMethod(Method method);
+	public Reason getReasonFor(LanguageElement element);
 
 	/**
 	 * Returns the version for this type
 	 * @return version, never null. If not version set "current" will be returned
 	 */
 	public String getVersion();
+
+	/**
+	 * Returns super type as string or <code>null</code>
+	 * @return name of super type or <code>null</code>
+	 */
+	public String getSuperTypeAsString();
+	
+	
 		
 }

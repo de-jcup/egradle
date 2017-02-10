@@ -1,17 +1,23 @@
-package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl.gradle;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
+import de.jcup.egradle.codeassist.dsl.ModifiableType;
+import de.jcup.egradle.codeassist.dsl.Plugin;
+import de.jcup.egradle.codeassist.dsl.PluginMerger;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.codeassist.dsl.XMLType;
 
 public class GradleDSLTypeProviderTest {
 
@@ -24,6 +30,66 @@ public class GradleDSLTypeProviderTest {
 		mockedDSLFileLoader = mock(DSLFileLoader.class);
 		
 		typeProviderToTest = new GradleDSLTypeProvider(mockedDSLFileLoader);
+	}
+	
+	@Test
+	public void type_provider_resolves_super_type_for_type_and_set_instance_into_type() throws Exception{
+		/* prepare */
+		ModifiableType mockedType = mock(ModifiableType.class);
+		when(mockedType.getSuperTypeAsString()).thenReturn("superType");
+		Type mockedSuperType = mock(Type.class);
+
+		when(mockedDSLFileLoader.loadType("type")).thenReturn(mockedType);
+		when(mockedDSLFileLoader.loadType("superType")).thenReturn(mockedSuperType);
+		
+		/* execute */
+		typeProviderToTest.getType("type");
+
+		/* test */
+		verify(mockedType).extendBySuperType(mockedSuperType);
+	}
+	
+	@Test
+	public void type_provider_resolves_super_types_and_its_superSuperType_for_type_and_set_instance_into_type() throws Exception{
+		/* prepare */
+		ModifiableType mockedType = mock(ModifiableType.class);
+		when(mockedType.getSuperTypeAsString()).thenReturn("superType");
+		
+		ModifiableType mockedSuperType = mock(ModifiableType.class);
+		when(mockedSuperType.getSuperTypeAsString()).thenReturn("superSuperType");
+		
+		Type mockedSuperSuperType = mock(Type.class);
+
+		when(mockedDSLFileLoader.loadType("type")).thenReturn(mockedType);
+		when(mockedDSLFileLoader.loadType("superType")).thenReturn(mockedSuperType);
+		when(mockedDSLFileLoader.loadType("superSuperType")).thenReturn(mockedSuperSuperType);
+		
+		/* execute */
+		typeProviderToTest.getType("type");
+
+		/* test */
+		verify(mockedType).extendBySuperType(mockedSuperType);
+		verify(mockedSuperType).extendBySuperType(mockedSuperSuperType);
+	}
+	
+	@Test
+	public void type_provider_calls_plugin_merger_with_loaded_type_and_all_plugins() throws Exception{
+		/* prepare */
+		Set<Plugin> plugins = new LinkedHashSet<>();
+		XMLType type = mock(XMLType.class);
+		
+		PluginMerger mockedPluginMerger = mock(PluginMerger.class);
+		typeProviderToTest.merger=mockedPluginMerger;
+		
+		when(mockedDSLFileLoader.loadPlugins()).thenReturn(plugins);
+		when(mockedDSLFileLoader.loadApiMappings()).thenReturn(Collections.emptyMap());
+		when(mockedDSLFileLoader.loadType("typename")).thenReturn(type);
+		
+		/* execute */
+		typeProviderToTest.getType("typename");
+		
+		/* test */
+		verify(mockedPluginMerger).merge(type, plugins);
 	}
 	
 	@Test

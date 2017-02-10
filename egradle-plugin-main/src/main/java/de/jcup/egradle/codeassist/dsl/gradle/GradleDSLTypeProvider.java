@@ -2,7 +2,6 @@ package de.jcup.egradle.codeassist.dsl.gradle;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +15,10 @@ import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 import de.jcup.egradle.codeassist.CodeCompletionService;
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
+import de.jcup.egradle.codeassist.dsl.ModifiableParameter;
+import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
+import de.jcup.egradle.codeassist.dsl.ModifiableType;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.PluginMerger;
@@ -36,6 +39,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 	private ErrorHandler errorHandler;
 	private Set<Plugin> plugins;
 	private Map<String, String> apiMapping;
+	PluginMerger merger;
 
 	public GradleDSLTypeProvider(DSLFileLoader loader) {
 		if (loader == null) {
@@ -51,7 +55,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		nameToTypeMapping.clear();
 		unresolveableNames.clear();
 		plugins = null;
-		apiMapping=null;
+		apiMapping = null;
 	}
 
 	public void setErrorHandler(ErrorHandler errorHandler) {
@@ -65,11 +69,18 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		return errorHandler;
 	}
 
+	protected PluginMerger getPluginMerger() {
+		if (merger == null) {
+			merger = new PluginMerger(this, getErrorHandler());
+		}
+		return merger;
+	}
+
 	@Override
 	public Type getType(String name) {
 		ensurePluginsLoaded();
 		ensureApiMappingLoaded();
-		if (StringUtils.isBlank(name)){
+		if (StringUtils.isBlank(name)) {
 			return null;
 		}
 		Type type = nameToTypeMapping.get(name);
@@ -83,7 +94,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		/* try to load */
 		String nameToUseForLoading = name;
 		String longName = apiMapping.get(name);
-		
+
 		if (longName != null) {
 			nameToUseForLoading = longName;
 		}
@@ -109,37 +120,53 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		/* put uninitialized type - so avoiding endless loops ... */
 		nameToTypeMapping.put(name, type);
 
-		if (!(type instanceof XMLType)) {
+		if (!(type instanceof ModifiableType)) {
 			return type;
 		}
+		ModifiableType modifiableType = (ModifiableType) type;
+		String superTypeAsString = type.getSuperTypeAsString();
+		if (StringUtils.isNotBlank(superTypeAsString)) {
+			Type superType = getType(superTypeAsString);
+			if (superType != null) {
+				modifiableType.extendBySuperType(superType);
+			}
+		}
 
-		PluginMerger merger = new PluginMerger(this, getErrorHandler());
-		merger.merge(type, plugins);
+		getPluginMerger().merge(type, plugins);
 
 		/* inititialize xml type */
 		for (Method m : type.getMethods()) {
-			XMLMethod xm = (XMLMethod) m;
-			xm.setParent(type);
-			Type resolvedReturnType = getType(xm.getReturnTypeAsString());
-			xm.setReturnType(resolvedReturnType);
-			
-			String delegationTargetAsString = xm.getDelegationTargetAsString();
-			if (!StringUtils.isBlank(delegationTargetAsString)){
-				Type resolvedDelegationTargetType = getType(delegationTargetAsString);
-				xm.setDelegationTarget(resolvedDelegationTargetType);
+			if (!(m instanceof ModifiableMethod)) {
+				continue;
 			}
-			
+			ModifiableMethod modifiableMethod = (ModifiableMethod) m;
+			modifiableMethod.setParent(type);
+			Type resolvedReturnType = getType(modifiableMethod.getReturnTypeAsString());
+			modifiableMethod.setReturnType(resolvedReturnType);
+
+			String delegationTargetAsString = modifiableMethod.getDelegationTargetAsString();
+			if (!StringUtils.isBlank(delegationTargetAsString)) {
+				Type resolvedDelegationTargetType = getType(delegationTargetAsString);
+				modifiableMethod.setDelegationTarget(resolvedDelegationTargetType);
+			}
+
 			for (Parameter p : m.getParameters()) {
-				XMLParameter xp = (XMLParameter) p;
-				Type resolvedParamType = getType(xp.getTypeAsString());
-				xp.setType(resolvedParamType);
+				if (!(p instanceof ModifiableParameter)){
+					continue;
+				}
+				ModifiableParameter modifiableParam = (ModifiableParameter) p;
+				Type resolvedParamType = getType(modifiableParam.getTypeAsString());
+				modifiableParam.setType(resolvedParamType);
 			}
 		}
 		for (Property p : type.getProperties()) {
-			XMLProperty xp = (XMLProperty) p;
-			xp.setParent(type);
-			Type resolvedReturnType = getType(xp.getTypeAsString());
-			xp.setType(resolvedReturnType);
+			if ( !(p instanceof ModifiableProperty)){
+				continue;
+			}
+			ModifiableProperty modifiableProperty = (ModifiableProperty) p;
+			modifiableProperty.setParent(type);
+			Type resolvedReturnType = getType(modifiableProperty.getTypeAsString());
+			modifiableProperty.setType(resolvedReturnType);
 		}
 		return type;
 	}

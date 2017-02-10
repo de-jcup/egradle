@@ -34,8 +34,13 @@ public class PluginMerger{
 		if (plugins.isEmpty()){
 			return;
 		}
+		
+		if (! (type instanceof ModifiableType)){
+			return;
+		}
 	
-		String typeAsString = type.getName();
+		ModifiableType modifiableType = (ModifiableType) type;
+		String typeAsString = modifiableType.getName();
 		
 		for (Plugin plugin: plugins){
 			Set<TypeExtension> extensions = plugin.getExtensions();
@@ -46,15 +51,15 @@ public class PluginMerger{
 				if (!typeAsString.equals(typeExtension.getTargetTypeAsString())){
 					continue;
 				}
-				handleMixin(plugin, type, typeExtension);
-				handleExtension(plugin, type, typeExtension);
+				handleMixin(plugin, modifiableType, typeExtension);
+				handleExtension(plugin, modifiableType, typeExtension);
 				
 			}
 		
 		}
 	}
 
-	private String handleMixin(Plugin plugin, Type type, TypeExtension typeExtension) {
+	private String handleMixin(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {
 		String mixinTypeAsString = typeExtension.getMixinTypeAsString();
 		if (! StringUtils.isBlank(mixinTypeAsString)){
 			/* resolve type by provider*/
@@ -68,7 +73,7 @@ public class PluginMerger{
 		return mixinTypeAsString;
 	}
 	
-	private String handleExtension(Plugin plugin, Type type, TypeExtension typeExtension) {
+	private String handleExtension(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {
 		String extensionTypeAsString = typeExtension.getExtensionTypeAsString();
 		if (! StringUtils.isBlank(extensionTypeAsString)){
 			/* resolve type by provider*/

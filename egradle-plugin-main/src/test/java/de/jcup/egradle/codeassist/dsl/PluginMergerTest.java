@@ -35,7 +35,7 @@ public class PluginMergerTest {
 	private Type mockedType2;
 	private Type mockedType3;
 	private Type mockedType4;
-	private Type mockedTargetType;
+	private ModifiableType mockedTargetType;
 	private ErrorHandler mockedErrorHandler;
 	private ReasonImpl reason1;
 	private ReasonImpl reason2;
@@ -61,7 +61,7 @@ public class PluginMergerTest {
 		plugin2Extensions = new LinkedHashSet<>();
 		when(mockedPlugin2.getExtensions()).thenReturn(plugin2Extensions);
 
-		mockedTargetType = mock(Type.class);
+		mockedTargetType = mock(ModifiableType.class);
 		when(mockedTargetType.getName()).thenReturn(TARGET_TYPE);
 
 		mockedType1 = mock(Type.class);

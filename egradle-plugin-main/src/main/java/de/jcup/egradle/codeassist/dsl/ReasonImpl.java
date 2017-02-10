@@ -3,6 +3,7 @@ package de.jcup.egradle.codeassist.dsl;
 public class ReasonImpl implements Reason {
 
 	private Plugin plugin;
+	private Type superType;
 
 	public ReasonImpl() {
 	}
@@ -42,4 +43,12 @@ public class ReasonImpl implements Reason {
 		return true;
 	}
 
+	@Override
+	public Type getSuperType() {
+		return superType;
+	}
+
+	public void setSuperType(Type superType) {
+		this.superType = superType;
+	}
 }

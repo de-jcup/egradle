@@ -147,7 +147,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			 */
 			ModelProposal proposal = createModelProposal(result);
 
-			Reason reason = identifiedType.getReasonForMethod(method);
+			Reason reason = identifiedType.getReasonFor(method);
 			String methodLabel = createMethodLabel(method);
 			StringBuilder descSb = new StringBuilder();
 			if (reason != null) {

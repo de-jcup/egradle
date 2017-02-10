@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "parameter")
-public class XMLParameter implements Parameter {
+public class XMLParameter implements Parameter, ModifiableParameter {
 
 
 	@XmlAttribute(name = "type")
@@ -31,6 +31,10 @@ public class XMLParameter implements Parameter {
 		return name;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableParameter#setType(de.jcup.egradle.codeassist.dsl.Type)
+	 */
+	@Override
 	public void setType(Type type) {
 		this.type = type;
 	}

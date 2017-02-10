@@ -6,4 +6,6 @@ public interface Reason {
 	 * @return plugin or <code>null</code> if not from plugin
 	 */
 	public Plugin getPlugin();
+	
+	public Type getSuperType();
 }

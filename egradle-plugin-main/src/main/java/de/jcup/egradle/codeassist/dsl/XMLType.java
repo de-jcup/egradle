@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "type")
-public class XMLType implements Type {
+public class XMLType implements ModifiableType {
 
 	@XmlAttribute(name = "interface")
 	private boolean _interface;
@@ -34,19 +34,27 @@ public class XMLType implements Type {
 	@XmlAttribute(name = "language")
 	private String language;
 
-	private Map<Method, Reason> methodReasons = new HashMap<>();
+	private Map<LanguageElement, Reason> elementReasons = new HashMap<>();
 
 	@XmlElement(name = "method", type = XMLMethod.class)
-	private Set<Method> methods = new LinkedHashSet<>();
+	Set<Method> methods = new LinkedHashSet<>();
 
 	@XmlAttribute(name = "name")
 	private String name;
 
 	@XmlElement(name = "property", type = XMLProperty.class)
-	private Set<Property> properties = new LinkedHashSet<>();
+	Set<Property> properties = new LinkedHashSet<>();
 
 	@XmlAttribute(name = "version")
 	private String version;
+
+	@XmlAttribute(name = "superType")
+	private String superTypeAsString;
+
+	private Type superType;
+
+	private Set<Method> mergedMethods;
+	private Set<Property> mergedProperties;
 
 	@Override
 	public void addExtension(String extensionId, Type extensionType, Reason reason) {
@@ -77,7 +85,10 @@ public class XMLType implements Type {
 
 	@Override
 	public Set<Method> getMethods() {
-		return methods;
+		if (superType==null){
+			return methods;
+		}
+		return mergedMethods;
 	}
 
 	@Override
@@ -87,7 +98,10 @@ public class XMLType implements Type {
 
 	@Override
 	public Set<Property> getProperties() {
-		return properties;
+		if (superType==null){
+			return properties;
+		}
+		return mergedProperties;
 	}
 
 	public Reason getReasonForExtension(String extensionId) {
@@ -97,11 +111,11 @@ public class XMLType implements Type {
 		return extensionReasonMap.get(extensionId);
 	}
 
-	public Reason getReasonForMethod(Method method) {
-		if (method == null) {
+	public Reason getReasonFor(LanguageElement element) {
+		if (element == null) {
 			return null;
 		}
-		return methodReasons.get(method);
+		return elementReasons.get(element);
 	}
 
 	@Override
@@ -124,7 +138,7 @@ public class XMLType implements Type {
 		for (Method method : mixinType.getMethods()) {
 			methods.add(method);
 			if (reason != null) {
-				methodReasons.put(method, reason);
+				elementReasons.put(method, reason);
 			}
 		}
 	}
@@ -132,6 +146,50 @@ public class XMLType implements Type {
 	@Override
 	public String toString() {
 		return "XMLType [name=" + name + "]";
+	}
+
+	@Override
+	public String getSuperTypeAsString() {
+		return superTypeAsString;
+	}
+
+	@Override
+	public void extendBySuperType(Type superType) {
+		if (this.superType!=null){
+			/* unregister former reasons*/
+			Set<Method> formerSuperMethods = this.superType.getMethods();
+			for (Method sm : formerSuperMethods){
+				elementReasons.remove(sm);
+			}
+			
+			Set<Property> formerSuperProperties = this.superType.getProperties();
+			for (Property sm : formerSuperProperties){
+				elementReasons.remove(sm);
+			}
+		}
+		this.superType=superType;
+		if (superType==null){
+			mergedMethods=null;
+			mergedProperties=null;
+			return;
+		}
+		this.mergedMethods=new LinkedHashSet<>(methods);
+		Set<Method> superMethods = superType.getMethods();
+		this.mergedMethods.addAll(superMethods);
+		/* register super methods and reason*/
+		ReasonImpl superTypeReason = new ReasonImpl();
+		superTypeReason.setSuperType(superType);
+		for (Method sm : superMethods){
+			elementReasons.put(sm,superTypeReason);
+		}
+		
+		Set<Property> superProperties = this.superType.getProperties();
+		this.mergedProperties=new LinkedHashSet<>(properties);
+		this.mergedProperties.addAll(superProperties);
+		/* register super properties and reason*/
+		for (Property sm : superProperties){
+			elementReasons.put(sm,superTypeReason);
+		}
 	}
 
 }
