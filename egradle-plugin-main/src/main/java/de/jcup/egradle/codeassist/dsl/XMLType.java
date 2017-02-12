@@ -151,7 +151,7 @@ public class XMLType implements ModifiableType {
 	}
 
 	@Override
-	public void extendBySuperType(Type superType) {
+	public void inheritFrom(Type superType) {
 		if (this.superType!=null){
 			/* unregister former reasons*/
 			Set<Method> formerSuperMethods = this.superType.getMethods();

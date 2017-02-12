@@ -36,7 +36,7 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.getMethods().isEmpty());
 
 		/* execute */
-		typeToTest.extendBySuperType(superType);
+		typeToTest.inheritFrom(superType);
 
 		/* test */
 		assertFalse(typeToTest.getMethods().isEmpty());
@@ -60,7 +60,7 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.getMethods().isEmpty());
 
 		/* execute */
-		typeToTest.extendBySuperType(superType);
+		typeToTest.inheritFrom(superType);
 
 		/* test */
 		assertFalse(typeToTest.getProperties().isEmpty());
@@ -87,7 +87,7 @@ public class XMLTypeTest {
 		assertEquals(1, typeToTest.getMethods().size());
 
 		/* execute */
-		typeToTest.extendBySuperType(superType);
+		typeToTest.inheritFrom(superType);
 
 		/* test */
 		assertEquals(2, typeToTest.getMethods().size());
@@ -118,7 +118,7 @@ public class XMLTypeTest {
 		assertEquals(1, typeToTest.getProperties().size());
 
 		/* execute */
-		typeToTest.extendBySuperType(superType);
+		typeToTest.inheritFrom(superType);
 
 		/* test */
 		assertEquals(2, typeToTest.getProperties().size());
@@ -147,12 +147,12 @@ public class XMLTypeTest {
 		assertTrue(methods.isEmpty());
 
 		/* execute */
-		typeToTest.extendBySuperType(superType);
+		typeToTest.inheritFrom(superType);
 		methods = typeToTest.getMethods();
 		assertFalse(methods.isEmpty());
 		
 		/* now reset */
-		typeToTest.extendBySuperType(null);
+		typeToTest.inheritFrom(null);
 
 		/* test */
 		methods = typeToTest.getMethods();

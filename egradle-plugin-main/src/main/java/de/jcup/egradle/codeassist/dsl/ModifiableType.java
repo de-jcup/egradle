@@ -1,15 +1,27 @@
 package de.jcup.egradle.codeassist.dsl;
 
 public interface ModifiableType extends Type {
+	
+	/**
+	 * Mixin methods and properties from given mixin type
+	 * @param mixinType
+	 * @param reason
+	 */
 	public void mixin(Type mixinType, Reason reason);
 
+	/**
+	 * Add an extension to this type
+	 * @param extensionId
+	 * @param extensionType
+	 * @param reason
+	 */
 	public void addExtension(String extensionId, Type extensionType, Reason reason);
 
 	/**
-	 * Extends this type by given one
+	 * Inherit methdods and properties from super type
 	 * 
 	 * @param superType
 	 */
-	public void extendBySuperType(Type superType);
+	public void inheritFrom(Type superType);
 
 }

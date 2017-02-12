@@ -46,7 +46,7 @@ public class GradleDSLTypeProviderTest {
 		typeProviderToTest.getType("type");
 
 		/* test */
-		verify(mockedType).extendBySuperType(mockedSuperType);
+		verify(mockedType).inheritFrom(mockedSuperType);
 	}
 	
 	@Test
@@ -68,8 +68,8 @@ public class GradleDSLTypeProviderTest {
 		typeProviderToTest.getType("type");
 
 		/* test */
-		verify(mockedType).extendBySuperType(mockedSuperType);
-		verify(mockedSuperType).extendBySuperType(mockedSuperSuperType);
+		verify(mockedType).inheritFrom(mockedSuperType);
+		verify(mockedSuperType).inheritFrom(mockedSuperSuperType);
 	}
 	
 	@Test
