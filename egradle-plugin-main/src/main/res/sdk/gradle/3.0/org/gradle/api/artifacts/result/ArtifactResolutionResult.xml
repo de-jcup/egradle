@@ -2,12 +2,7 @@
  The result of executing an artifact resolution query. 
  
  @since 2.0 
-</description><method name="getResolvedComponents" returnType="java.util.Set" delegationTarget="ComponentArtifactsResult"><description> 
- &lt;p&gt;Return a set of ComponentResults representing all successfully resolved components. 
- 
- &lt;p&gt;Calling this method is the same as calling &lt;a href='type://ArtifactResolutionResult#getComponents()'&gt;#getComponents()&lt;/a&gt; and filtering the resulting set for elements of type &lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of all successfully resolved components 
-</description></method><method name="getComponents" returnType="java.util.Set" delegationTarget="org.gradle.api.artifacts.result.ComponentResult"><description> 
+</description><method name="getComponents" returnType="java.util.Set" delegationTarget="org.gradle.api.artifacts.result.ComponentResult"><description> 
  &lt;p&gt;Return a set of ComponentResults representing all requested components. 
  
  &lt;p&gt;Each element in the returned set is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.result.ComponentResult'&gt;org.gradle.api.artifacts.result.ComponentResult&lt;/a&gt;. 
@@ -18,6 +13,11 @@
      &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.result.UnresolvedComponentResult'&gt;org.gradle.api.artifacts.result.UnresolvedComponentResult&lt;/a&gt; for any component whose ID could not be resolved from the set of repositories.&lt;/li&gt; 
  &lt;/ul&gt; 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of results for all requested components 
+</description></method><method name="getResolvedComponents" returnType="java.util.Set" delegationTarget="ComponentArtifactsResult"><description> 
+ &lt;p&gt;Return a set of ComponentResults representing all successfully resolved components. 
+ 
+ &lt;p&gt;Calling this method is the same as calling &lt;a href='type://ArtifactResolutionResult#getComponents()'&gt;#getComponents()&lt;/a&gt; and filtering the resulting set for elements of type &lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of all successfully resolved components 
 </description></method><property name="components" type="java.util.Set"><description> 
  &lt;p&gt;Return a set of ComponentResults representing all requested components. 
  

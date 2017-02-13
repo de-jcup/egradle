@@ -35,6 +35,6 @@
  &lt;/table&gt; 
 </description><method name="getDisplayName" returnType="java.lang.String"><description> 
  Returns a human-consumable display name for this architecture. 
-</description></method><method name="getName" returnType="java.lang.String"/><property name="name" type="java.lang.String"/><property name="displayName" type="java.lang.String"><description> 
+</description></method><method name="getName" returnType="java.lang.String"/><property name="displayName" type="java.lang.String"><description> 
  Returns a human-consumable display name for this architecture. 
-</description></property></type>
+</description></property><property name="name" type="java.lang.String"/></type>

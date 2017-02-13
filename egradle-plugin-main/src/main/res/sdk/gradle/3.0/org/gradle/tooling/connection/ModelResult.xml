@@ -3,16 +3,16 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; Type of model in the result 
  @since 2.13 
-</description><method name="getModel" returnType="T"><description> 
- Returns the model produced. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the model, never null. 
- @throws GradleConnectionException if the model could not be retrieved. 
-</description></method><method name="getFailure" returnType="org.gradle.tooling.GradleConnectionException" delegationTarget="FailedModelResult"><description> 
+</description><method name="getFailure" returnType="org.gradle.tooling.GradleConnectionException" delegationTarget="FailedModelResult"><description> 
  The failure retrieving the model. 
  If this value is not null, further details can be obtained by casting to &lt;a href='type://FailedModelResult'&gt;FailedModelResult&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the failure, or null if the result was successful. 
+</description></method><method name="getModel" returnType="T"><description> 
+ Returns the model produced. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the model, never null. 
+ @throws GradleConnectionException if the model could not be retrieved. 
 </description></method><property name="failure" type="org.gradle.tooling.GradleConnectionException"><description> 
  The failure retrieving the model. 
  If this value is not null, further details can be obtained by casting to &lt;a href='type://FailedModelResult'&gt;FailedModelResult&lt;/a&gt;. 

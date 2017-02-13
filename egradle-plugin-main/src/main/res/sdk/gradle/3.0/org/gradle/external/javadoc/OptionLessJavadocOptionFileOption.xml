@@ -2,4 +2,4 @@
  Represents a Javadoc option. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type which this option represents. 
-</description><method name="setValue" returnType="void"><parameter type="T" name="value"/></method><method name="getValue" returnType="T"/><method name="write" returnType="void"><parameter type="org.gradle.external.javadoc.internal.JavadocOptionFileWriterContext" name="writerContext"/></method><property name="value" type="T"/></type>
+</description><method name="getValue" returnType="T"/><method name="setValue" returnType="void"><parameter type="T" name="value"/></method><method name="write" returnType="void"><parameter type="org.gradle.external.javadoc.internal.JavadocOptionFileWriterContext" name="writerContext"/></method><property name="value" type="T"/></type>

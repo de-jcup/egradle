@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.reporting.DirectoryReport" version="3.0"><description> 
  A directory based report to be created. 
-</description><method name="getEntryPoint" returnType="java.io.File"><description> 
+</description><method name="getDestination" returnType="java.io.File"/><method name="getEntryPoint" returnType="java.io.File"><description> 
  Returns the entry point of a directory based Report 
  
  This can be the index.html file in a HTML report 
@@ -9,11 +9,11 @@
  &lt;a href='type://org.gradle.api.reporting.DirectoryReport#getDestination()'&gt;org.gradle.api.reporting.DirectoryReport#getDestination()&lt;/a&gt; 
  if no entry point defined 
  
-</description></method><method name="getDestination" returnType="java.io.File"/><method name="getOutputType" returnType="OutputType"><description> 
+</description></method><method name="getOutputType" returnType="OutputType"><description> 
  Always returns &lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
-</description></method><property name="entryPoint" type="java.io.File"><description> 
+</description></method><property name="destination" type="java.io.File"/><property name="entryPoint" type="java.io.File"><description> 
  Returns the entry point of a directory based Report 
  
  This can be the index.html file in a HTML report 
@@ -22,7 +22,7 @@
  &lt;a href='type://org.gradle.api.reporting.DirectoryReport#getDestination()'&gt;org.gradle.api.reporting.DirectoryReport#getDestination()&lt;/a&gt; 
  if no entry point defined 
  
-</description></property><property name="destination" type="java.io.File"/><property name="outputType" type="OutputType"><description> 
+</description></property><property name="outputType" type="OutputType"><description> 
  Always returns &lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 

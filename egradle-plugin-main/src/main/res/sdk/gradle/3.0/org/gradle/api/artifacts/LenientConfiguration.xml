@@ -10,22 +10,17 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolved dependencies files 
+</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><method name="getFirstLevelModuleDependencies" returnType="java.util.Set"><description> 
+ Returns successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
 </description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><method name="getUnresolvedModuleDependencies" returnType="java.util.Set"><description> 
  returns dependencies that were attempted to resolve but failed. 
  If empty then all dependencies are neatly resolved. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only unresolved dependencies 
-</description></method><method name="getFirstLevelModuleDependencies" returnType="java.util.Set"><description> 
- Returns successfully resolved dependencies. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
-</description><parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/></method><property name="firstLevelModuleDependencies" type="java.util.Set"><description> 
- Returns successfully resolved dependencies. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
-</description></property><property name="artifacts" type="java.util.Set"><description> 
+</description></method><property name="artifacts" type="java.util.Set"><description> 
  Gets successfully resolved artifacts for dependencies that match given dependency spec. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
@@ -35,6 +30,11 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolved dependencies files 
+</description></property><property name="firstLevelModuleDependencies" type="java.util.Set"><description> 
+ Returns successfully resolved dependencies. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec dependency spec 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;only resolved dependencies 
 </description></property><property name="unresolvedModuleDependencies" type="java.util.Set"><description> 
  returns dependencies that were attempted to resolve but failed. 
  If empty then all dependencies are neatly resolved. 

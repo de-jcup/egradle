@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.javadoc.Groovydoc.Link" version="3.0"><description> 
  A Link class represent a link between groovydoc/javadoc output and url. 
-</description><method name="getPackages" returnType="java.util.List"><description> 
+</description><method name="equals" returnType="boolean"><parameter type="java.lang.Object" name="o"/></method><method name="getPackages" returnType="java.util.List"><description> 
  Returns a list of package prefixes to be linked with an external site. 
 </description></method><method name="getUrl" returnType="java.lang.String"><description> 
  Returns the base url for the external site. 
-</description></method><method name="hashCode" returnType="int"/><method name="throwExceptionIfNull" returnType="void"><parameter type="java.lang.String" name="value"/><parameter type="java.lang.String" name="message"/></method><method name="equals" returnType="boolean"><parameter type="java.lang.Object" name="o"/></method><property name="packages" type="java.util.List"><description> 
+</description></method><method name="hashCode" returnType="int"/><method name="throwExceptionIfNull" returnType="void"><parameter type="java.lang.String" name="value"/><parameter type="java.lang.String" name="message"/></method><property name="packages" type="java.util.List"><description> 
  Returns a list of package prefixes to be linked with an external site. 
 </description></property><property name="url" type="java.lang.String"><description> 
  Returns the base url for the external site. 

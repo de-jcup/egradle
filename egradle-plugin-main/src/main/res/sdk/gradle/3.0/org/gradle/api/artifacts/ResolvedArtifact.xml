@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.ResolvedArtifact" version="3.0"><description> 
  Information about a resolved artifact. 
-</description><method name="getId" returnType="org.gradle.api.artifacts.component.ComponentArtifactIdentifier"/><method name="getType" returnType="java.lang.String"/><method name="getName" returnType="java.lang.String"/><method name="getFile" returnType="java.io.File"/><method name="getExtension" returnType="java.lang.String"/><method name="getModuleVersion" returnType="org.gradle.api.artifacts.ResolvedModuleVersion"><description> 
+</description><method name="getClassifier" returnType="java.lang.String"/><method name="getExtension" returnType="java.lang.String"/><method name="getFile" returnType="java.io.File"/><method name="getId" returnType="org.gradle.api.artifacts.component.ComponentArtifactIdentifier"/><method name="getModuleVersion" returnType="org.gradle.api.artifacts.ResolvedModuleVersion"><description> 
  Returns the module which this artifact belongs to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module. 
-</description></method><method name="getClassifier" returnType="java.lang.String"/><property name="name" type="java.lang.String"/><property name="file" type="java.io.File"/><property name="extension" type="java.lang.String"/><property name="classifier" type="java.lang.String"/><property name="id" type="org.gradle.api.artifacts.component.ComponentArtifactIdentifier"/><property name="type" type="java.lang.String"/><property name="moduleVersion" type="org.gradle.api.artifacts.ResolvedModuleVersion"><description> 
+</description></method><method name="getName" returnType="java.lang.String"/><method name="getType" returnType="java.lang.String"/><property name="classifier" type="java.lang.String"/><property name="extension" type="java.lang.String"/><property name="file" type="java.io.File"/><property name="id" type="org.gradle.api.artifacts.component.ComponentArtifactIdentifier"/><property name="moduleVersion" type="org.gradle.api.artifacts.ResolvedModuleVersion"><description> 
  Returns the module which this artifact belongs to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module. 
-</description></property></type>
+</description></property><property name="name" type="java.lang.String"/><property name="type" type="java.lang.String"/></type>

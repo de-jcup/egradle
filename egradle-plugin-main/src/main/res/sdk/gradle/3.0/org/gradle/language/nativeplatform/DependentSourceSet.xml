@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.nativeplatform.DependentSourceSet" version="3.0"><description> 
  A source set that depends on one or more &lt;a href='type://org.gradle.nativeplatform.NativeDependencySet'&gt;org.gradle.nativeplatform.NativeDependencySet&lt;/a&gt;s to be built. 
-</description><method name="getPreCompiledHeader" returnType="java.lang.String"><description> 
+</description><method name="getLibs" returnType="java.util.Collection"><description> 
+ The libraries that this source set requires. 
+</description></method><method name="getPreCompiledHeader" returnType="java.lang.String"><description> 
  Returns the pre-compiled header configured for this source set. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the pre-compiled header 
-</description></method><method name="getLibs" returnType="java.util.Collection"><description> 
- The libraries that this source set requires. 
 </description></method><method name="lib" returnType="void" delegationTarget="org.gradle.nativeplatform.NativeLibrarySpec"><description> 
  Adds a library that this source set requires. This method accepts the following types: 
  

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,44 @@ public class XMLTypeTest {
 	@Before
 	public void before() {
 		typeToTest = new XMLType();
+	}
+	@Test
+	public void type1_extends_type2_so_type1_is_descendant_of_type2(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		when(superType1.getName()).thenReturn("test.Super1");
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertTrue(typeToTest.isDescendantOf("test.Super1"));
+	}
+	
+	@Test
+	public void type1_extends_type2_so_type1_is_NOT_descendant_of_type3(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		when(superType1.getName()).thenReturn("test.Super1");
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertFalse(typeToTest.isDescendantOf("test.SuperX"));
+	}
+	
+	@Test
+	public void type1_extends_type2_extends_typ3__so_type1_is_descendant_of_type2_and_also_of_type3(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		when(superType1.getName()).thenReturn("test.Super1");
+		
+		Type superType2 = mock(Type.class);
+		when(superType2.getName()).thenReturn("test.Super2");
+		when(superType1.isDescendantOf("test.Super2")).thenReturn(true);
+		
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertTrue(typeToTest.isDescendantOf("test.Super1"));
+		assertTrue(typeToTest.isDescendantOf("test.Super2"));
 	}
 	
 	@Test
@@ -83,6 +122,10 @@ public class XMLTypeTest {
 		superMethodSet.add(method1);
 		when(superType.getMethods()).thenReturn(superMethodSet);
 		
+		/* tree set does not add when compare==0 */
+		when(method0.compareTo(method1)).thenReturn(-1);
+		when(method1.compareTo(method0)).thenReturn(1);
+		
 		/* check preconditions */
 		assertEquals(1, typeToTest.getMethods().size());
 
@@ -109,10 +152,13 @@ public class XMLTypeTest {
 		typeToTest.properties.add(property0);
 
 		Type superType = mock(Type.class);
-		Property proeprty1 = mock(Property.class);
-		Set<Property> propertySet = new LinkedHashSet<>();
-		propertySet.add(proeprty1);
+		Property property1 = mock(Property.class);
+		Set<Property> propertySet = new TreeSet<>();
+		propertySet.add(property1);
 		when(superType.getProperties()).thenReturn(propertySet);
+		/* tree set does not add when compare==0 */
+		when(property0.compareTo(property1)).thenReturn(-1);
+		when(property1.compareTo(property0)).thenReturn(1);
 		
 		/* check preconditions */
 		assertEquals(1, typeToTest.getProperties().size());
@@ -122,13 +168,13 @@ public class XMLTypeTest {
 
 		/* test */
 		assertEquals(2, typeToTest.getProperties().size());
-		assertTrue(typeToTest.getProperties().contains(proeprty1));
+		assertTrue(typeToTest.getProperties().contains(property1));
 		assertTrue(typeToTest.getProperties().contains(property0));
 		
 		Reason reason0 = typeToTest.getReasonFor(property0);
 		assertNull(reason0);
 		
-		Reason reason1 = typeToTest.getReasonFor(proeprty1);
+		Reason reason1 = typeToTest.getReasonFor(property1);
 		assertNotNull(reason1);
 		assertEquals(superType,reason1.getSuperType());
 	}

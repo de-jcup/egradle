@@ -2,14 +2,14 @@
  Models a collection of native type dependencies. 
 </description><method name="getIncludeRoots" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the header file directories to use at compile time. 
-</description></method><method name="getRuntimeFiles" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the files to use at runtime. 
 </description></method><method name="getLinkFiles" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the files to use at link time. 
+</description></method><method name="getRuntimeFiles" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the files to use at runtime. 
 </description></method><property name="includeRoots" type="org.gradle.api.file.FileCollection"><description> 
  Returns the header file directories to use at compile time. 
-</description></property><property name="runtimeFiles" type="org.gradle.api.file.FileCollection"><description> 
- Returns the files to use at runtime. 
 </description></property><property name="linkFiles" type="org.gradle.api.file.FileCollection"><description> 
  Returns the files to use at link time. 
+</description></property><property name="runtimeFiles" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the files to use at runtime. 
 </description></property></type>

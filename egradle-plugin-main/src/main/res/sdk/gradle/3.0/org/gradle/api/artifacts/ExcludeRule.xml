@@ -5,8 +5,8 @@
  The exact name of the organization or group that should be excluded. 
 </description></method><method name="getModule" returnType="java.lang.String"><description> 
  The exact name of the module that should be excluded. 
-</description></method><property name="module" type="java.lang.String"><description> 
- The exact name of the module that should be excluded. 
-</description></property><property name="group" type="java.lang.String"><description> 
+</description></method><property name="group" type="java.lang.String"><description> 
  The exact name of the organization or group that should be excluded. 
+</description></property><property name="module" type="java.lang.String"><description> 
+ The exact name of the module that should be excluded. 
 </description></property></type>

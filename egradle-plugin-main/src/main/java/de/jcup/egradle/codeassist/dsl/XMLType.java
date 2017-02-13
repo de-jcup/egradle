@@ -1,10 +1,11 @@
 package de.jcup.egradle.codeassist.dsl;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.TreeSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -34,13 +35,13 @@ public class XMLType implements ModifiableType {
 	private Map<LanguageElement, Reason> elementReasons = new HashMap<>();
 
 	@XmlElement(name = "method", type = XMLMethod.class)
-	Set<Method> methods = new LinkedHashSet<>();
+	Set<Method> methods = new TreeSet<>();
 
 	@XmlAttribute(name = "name")
 	private String name;
 
 	@XmlElement(name = "property", type = XMLProperty.class)
-	Set<Property> properties = new LinkedHashSet<>();
+	Set<Property> properties = new TreeSet<>();
 
 	@XmlAttribute(name = "version")
 	private String version;
@@ -170,7 +171,7 @@ public class XMLType implements ModifiableType {
 			mergedProperties=null;
 			return;
 		}
-		this.mergedMethods=new LinkedHashSet<>(methods);
+		this.mergedMethods=new TreeSet<>(methods);
 		Set<Method> superMethods = superType.getMethods();
 		this.mergedMethods.addAll(superMethods);
 		/* register super methods and reason*/
@@ -181,12 +182,37 @@ public class XMLType implements ModifiableType {
 		}
 		
 		Set<Property> superProperties = this.superType.getProperties();
-		this.mergedProperties=new LinkedHashSet<>(properties);
+		this.mergedProperties=new TreeSet<>(properties);
 		this.mergedProperties.addAll(superProperties);
 		/* register super properties and reason*/
 		for (Property sm : superProperties){
 			elementReasons.put(sm,superTypeReason);
 		}
 	}
+
+	@Override
+	public boolean isDescendantOf(String type) {
+		if (type==null){
+			return false;
+		}
+		if (superType==null){
+			return false;
+		}
+		if (type.equals(superType.getName())){
+			return true;
+		}
+		return superType.isDescendantOf(type);
+	}
+
+	@Override
+	public Set<Property> getDefinedProperties() {
+		return properties;
+	}
+
+	@Override
+	public Set<Method> getDefinedMethods() {
+		return methods;
+	}
+
 
 }

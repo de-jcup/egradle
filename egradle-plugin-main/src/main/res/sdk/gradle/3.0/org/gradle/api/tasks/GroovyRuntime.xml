@@ -19,7 +19,7 @@
      // The returned class path can be used to configure the 'groovyClasspath' property of tasks 
      // such as 'GroovyCompile' or 'Groovydoc', or to execute these and other Groovy tools directly. 
  &lt;/pre&gt; 
-</description><method name="getDisplayName" returnType="java.lang.String"/><method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="groovy"><description> 
+</description><method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/><method name="findGroovyJarFile" returnType="org.gradle.api.internal.plugins.GroovyJarFile"><parameter type="java.lang.Iterable" name="classpath"/></method><method name="getDisplayName" returnType="java.lang.String"/><method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="groovy"><description> 
  Searches the specified class path for Groovy Jars (&lt;a href='type://groovy(-indy)'&gt;groovy(-indy)&lt;/a&gt;, &lt;a href='type://groovy-all(-indy)'&gt;groovy-all(-indy)&lt;/a&gt;) and returns a corresponding class path for executing Groovy tools such as the Groovy 
  compiler and Groovydoc tool. The tool versions will match those of the Groovy Jars found. If no Groovy Jars are found on the specified class path, a class path with the contents of the &lt;a href='type://groovy'&gt;groovy&lt;/a&gt; configuration will be returned. 
  
@@ -27,4 +27,4 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath a class path containing Groovy Jars 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a corresponding class path for executing Groovy tools such as the Groovy compiler and Groovydoc tool 
-</description><parameter type="java.lang.Iterable" name="classpath"/></method><method name="visitDependencies" returnType="void"><parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/></method><method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/><method name="findGroovyJarFile" returnType="org.gradle.api.internal.plugins.GroovyJarFile"><parameter type="java.lang.Iterable" name="classpath"/></method><property name="displayName" type="java.lang.String"/></type>
+</description><parameter type="java.lang.Iterable" name="classpath"/></method><method name="visitDependencies" returnType="void"><parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/></method><property name="displayName" type="java.lang.String"/></type>

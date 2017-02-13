@@ -1,6 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
-public interface TypeExtension {
+public interface TypeExtension extends Comparable<TypeExtension> {
 
 	public String getId();
 

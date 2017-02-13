@@ -5,7 +5,16 @@
  
  @see org.gradle.api.plugins.PluginAware 
  @since 2.3 
-</description><method name="getName" returnType="java.lang.String" delegationTarget=""><description> 
+</description><method name="getId" returnType="java.lang.String" delegationTarget=""><description> 
+ The ID of the plugin. 
+ &lt;p&gt; 
+ An example of a plugin ID would be &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
+ This method always returns the fully qualified ID, regardless of whether the fully qualified ID was used to apply the plugin or not. 
+ &lt;p&gt; 
+ This value is guaranteed to be unique, for a given &lt;a href='type://org.gradle.api.plugins.PluginAware'&gt;org.gradle.api.plugins.PluginAware&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the ID of the plugin 
+</description></method><method name="getName" returnType="java.lang.String" delegationTarget=""><description> 
  The name of the plugin. 
  &lt;p&gt; 
  An example of a plugin name would be &lt;a href='type://"java"'&gt;"java"&lt;/a&gt; for the plugin with ID &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
@@ -23,15 +32,6 @@
  If the plugin has an unqualified ID, this method will return &lt;a href='type://null'&gt;null&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the namespace of the plugin 
-</description></method><method name="getId" returnType="java.lang.String" delegationTarget=""><description> 
- The ID of the plugin. 
- &lt;p&gt; 
- An example of a plugin ID would be &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
- This method always returns the fully qualified ID, regardless of whether the fully qualified ID was used to apply the plugin or not. 
- &lt;p&gt; 
- This value is guaranteed to be unique, for a given &lt;a href='type://org.gradle.api.plugins.PluginAware'&gt;org.gradle.api.plugins.PluginAware&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the ID of the plugin 
 </description></method><property name="id" type="java.lang.String"><description> 
  The ID of the plugin. 
  &lt;p&gt; 
@@ -41,15 +41,6 @@
  This value is guaranteed to be unique, for a given &lt;a href='type://org.gradle.api.plugins.PluginAware'&gt;org.gradle.api.plugins.PluginAware&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the ID of the plugin 
-</description></property><property name="namespace" type="java.lang.String"><description> 
- The namespace of the plugin. 
- &lt;p&gt; 
- An example of a plugin namespace would be &lt;a href='type://"org.gradle"'&gt;"org.gradle"&lt;/a&gt; for the plugin with ID &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
- This method always returns the namespace, regardless of whether the fully qualified ID was used to apply the plugin or not. 
- &lt;p&gt; 
- If the plugin has an unqualified ID, this method will return &lt;a href='type://null'&gt;null&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the namespace of the plugin 
 </description></property><property name="name" type="java.lang.String"><description> 
  The name of the plugin. 
  &lt;p&gt; 
@@ -59,4 +50,13 @@
  If the plugin has an unqualified ID, this method will return the same value as &lt;a href='type://AppliedPlugin#getId()'&gt;#getId()&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the name of the plugin 
+</description></property><property name="namespace" type="java.lang.String"><description> 
+ The namespace of the plugin. 
+ &lt;p&gt; 
+ An example of a plugin namespace would be &lt;a href='type://"org.gradle"'&gt;"org.gradle"&lt;/a&gt; for the plugin with ID &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
+ This method always returns the namespace, regardless of whether the fully qualified ID was used to apply the plugin or not. 
+ &lt;p&gt; 
+ If the plugin has an unqualified ID, this method will return &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the namespace of the plugin 
 </description></property></type>

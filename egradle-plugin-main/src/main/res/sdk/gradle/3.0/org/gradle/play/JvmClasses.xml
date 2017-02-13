@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.play.JvmClasses" version="3.0"><description> 
  A set of classes and resources that operate together. 
-</description><method name="getResourceDirs" returnType="java.util.Set"><description> 
- A set of resource directories for this binary. 
-</description></method><method name="getClassesDir" returnType="java.io.File"><description> 
- The classes directory for this binary. 
-</description></method><method name="addResourceDir" returnType="void"><description> 
+</description><method name="addResourceDir" returnType="void"><description> 
  Add a resource directory to this binary. 
-</description><parameter type="java.io.File" name="resourceDir"/></method><method name="setClassesDir" returnType="void"><description> 
+</description><parameter type="java.io.File" name="resourceDir"/></method><method name="getClassesDir" returnType="java.io.File"><description> 
+ The classes directory for this binary. 
+</description></method><method name="getResourceDirs" returnType="java.util.Set"><description> 
+ A set of resource directories for this binary. 
+</description></method><method name="setClassesDir" returnType="void"><description> 
  Sets the classes directory for this binary. 
 </description><parameter type="java.io.File" name="classesDir"/></method><property name="classesDir" type="java.io.File"><description> 
  The classes directory for this binary. 

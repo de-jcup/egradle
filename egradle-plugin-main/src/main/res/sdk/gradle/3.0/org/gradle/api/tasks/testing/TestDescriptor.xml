@@ -9,18 +9,18 @@
  Returns the name of the test.  Not guaranteed to be unique. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test name 
-</description></method><method name="isComposite" returnType="boolean"><description> 
- Is this test a composite test? 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this test is a composite test. 
 </description></method><method name="getParent" returnType="org.gradle.api.tasks.testing.TestDescriptor"><description> 
  Returns the parent of this test, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
-</description></method><property name="parent" type="org.gradle.api.tasks.testing.TestDescriptor"><description> 
- Returns the parent of this test, if any. 
+</description></method><method name="isComposite" returnType="boolean"><description> 
+ Is this test a composite test? 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this test is a composite test. 
+</description></method><property name="className" type="java.lang.String"><description> 
+ Returns the test class name for this test, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The class name. May return null. 
 </description></property><property name="composite" type="boolean"><description> 
  Is this test a composite test? 
  
@@ -29,8 +29,8 @@
  Returns the name of the test.  Not guaranteed to be unique. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test name 
-</description></property><property name="className" type="java.lang.String"><description> 
- Returns the test class name for this test, if any. 
+</description></property><property name="parent" type="org.gradle.api.tasks.testing.TestDescriptor"><description> 
+ Returns the parent of this test, if any. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The class name. May return null. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
 </description></property></type>

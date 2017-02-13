@@ -6,16 +6,16 @@
  Returns the stop key. 
  
  @see #setStopKey(String) 
+</description></method><method name="getStopPort" returnType="java.lang.Integer"><description> 
+ Returns the TCP port to use to send stop command. 
 </description></method><method name="setStopKey" returnType="void"><description> 
  Sets key to provide when stopping jetty. 
 </description><parameter type="java.lang.String" name="stopKey"/></method><method name="setStopPort" returnType="void"><description> 
  Sets the TCP port to use to send stop command. 
-</description><parameter type="java.lang.Integer" name="stopPort"/></method><method name="stop" returnType="void"/><method name="getStopPort" returnType="java.lang.Integer"><description> 
- Returns the TCP port to use to send stop command. 
-</description></method><property name="stopPort" type="java.lang.Integer"><description> 
- Returns the TCP port to use to send stop command. 
-</description></property><property name="stopKey" type="java.lang.String"><description> 
+</description><parameter type="java.lang.Integer" name="stopPort"/></method><method name="stop" returnType="void"/><property name="stopKey" type="java.lang.String"><description> 
  Returns the stop key. 
  
  @see #setStopKey(String) 
+</description></property><property name="stopPort" type="java.lang.Integer"><description> 
+ Returns the TCP port to use to send stop command. 
 </description></property></type>

@@ -57,19 +57,19 @@
  &lt;/pre&gt; 
  
  Examples on configuring the &lt;b&gt;resolution strategy&lt;/b&gt; - see docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; 
-</description><method name="getAt" returnType="org.gradle.api.artifacts.Configuration"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/></method><method name="getByName" returnType="org.gradle.api.artifacts.Configuration"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="detachedConfiguration" returnType="org.gradle.api.artifacts.Configuration"><description> 
+</description><method name="detachedConfiguration" returnType="org.gradle.api.artifacts.Configuration"><description> 
  Creates a configuration, but does not add it to this container. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencies The dependencies of the configuration. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration. 
-</description><parameter type="org.gradle.api.artifacts.Dependency" name="dependencies"/></method><method name="getByName" returnType="org.gradle.api.artifacts.Configuration"><description> 
+</description><parameter type="org.gradle.api.artifacts.Dependency" name="dependencies"/></method><method name="getAt" returnType="org.gradle.api.artifacts.Configuration"><description> 
  {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/></method><property name="byName" type="org.gradle.api.artifacts.Configuration"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getByName" returnType="org.gradle.api.artifacts.Configuration"><description> 
  {@inheritDoc} 
-</description></property><property name="at" type="org.gradle.api.artifacts.Configuration"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getByName" returnType="org.gradle.api.artifacts.Configuration"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="at" type="org.gradle.api.artifacts.Configuration"><description> 
+ {@inheritDoc} 
+</description></property><property name="byName" type="org.gradle.api.artifacts.Configuration"><description> 
  {@inheritDoc} 
 </description></property></type>

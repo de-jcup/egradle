@@ -6,8 +6,8 @@
  {@inheritDoc} 
 </description><parameter type="groovy.lang.Closure" name="spec"/></method><method name="matching" returnType="org.gradle.api.DomainObjectSet"><description> 
  {@inheritDoc} 
+</description><parameter type="groovy.lang.Closure" name="spec"/></method><method name="matching" returnType="org.gradle.api.DomainObjectSet"><description> 
+ {@inheritDoc} 
 </description><parameter type="org.gradle.api.specs.Spec" name="spec"/></method><method name="withType" returnType="org.gradle.api.DomainObjectSet"><description> 
  {@inheritDoc} 
-</description><parameter type="java.lang.Class" name="type"/></method><method name="matching" returnType="org.gradle.api.DomainObjectSet"><description> 
- {@inheritDoc} 
-</description><parameter type="groovy.lang.Closure" name="spec"/></method></type>
+</description><parameter type="java.lang.Class" name="type"/></method></type>

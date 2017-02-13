@@ -16,13 +16,13 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the Groovy source. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="groovy" type="org.gradle.api.file.SourceDirectorySet"><description> 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="allGroovy" type="org.gradle.api.file.SourceDirectorySet"><description> 
+ All Groovy source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Groovy source. Never returns null. 
+</description></property><property name="groovy" type="org.gradle.api.file.SourceDirectorySet"><description> 
  Returns the source to be compiled by the Groovy compiler for this source set. Any Java source present in this set 
  will be passed to the Groovy compiler for joint compilation. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy/Java source. Never returns null. 
-</description></property><property name="allGroovy" type="org.gradle.api.file.SourceDirectorySet"><description> 
- All Groovy source for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Groovy source. Never returns null. 
 </description></property></type>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.tasks.ScalaSourceSet" version="3.0"><description> 
  A &lt;a href='type://ScalaSourceSetConvention'&gt;ScalaSourceSetConvention&lt;/a&gt; defines the properties and methods added to a &lt;a href='type://org.gradle.api.tasks.SourceSet'&gt;org.gradle.api.tasks.SourceSet&lt;/a&gt; by the &lt;a href='type://ScalaPlugin'&gt;ScalaPlugin&lt;/a&gt;. 
-</description><method name="getScala" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
+</description><method name="getAllScala" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
+ All Scala source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Scala source. Never returns null. 
+</description></method><method name="getScala" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
  Returns the source to be compiled by the Scala compiler for this source set. This may contain both Java and Scala 
  source files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Scala source. Never returns null. 
-</description></method><method name="getAllScala" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
- All Scala source for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Scala source. Never returns null. 
 </description></method><method name="scala" returnType="org.gradle.api.tasks.ScalaSourceSet" delegationTarget="SourceDirectorySet"><description> 
  Configures the Scala source for this set. 
  
@@ -16,13 +16,13 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the Scala source. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="scala" type="org.gradle.api.file.SourceDirectorySet"><description> 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="allScala" type="org.gradle.api.file.SourceDirectorySet"><description> 
+ All Scala source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Scala source. Never returns null. 
+</description></property><property name="scala" type="org.gradle.api.file.SourceDirectorySet"><description> 
  Returns the source to be compiled by the Scala compiler for this source set. This may contain both Java and Scala 
  source files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Scala source. Never returns null. 
-</description></property><property name="allScala" type="org.gradle.api.file.SourceDirectorySet"><description> 
- All Scala source for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Scala source. Never returns null. 
 </description></property></type>

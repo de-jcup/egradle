@@ -32,7 +32,9 @@
  &lt;/pre&gt; 
  
  @since 2.13 
-</description><method name="getModels" returnType="org.gradle.tooling.connection.ModelResults" delegationTarget="models"><description> 
+</description><method name="close" returnType="void"><description> 
+ Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
+</description></method><method name="getModels" returnType="org.gradle.tooling.connection.ModelResults" delegationTarget="models"><description> 
  Fetches a Set of snapshots of the model of the given type for this composite. This method blocks until the model is available. 
  
  &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://models(modelType).get()'&gt;models(modelType).get()&lt;/a&gt;&lt;/p&gt; 
@@ -41,13 +43,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
  @throws GradleConnectionException On failure using the connection. 
  @throws IllegalStateException When this connection has been closed or is closing. 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="close" returnType="void"><description> 
- Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
-</description></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
- Creates a launcher which can be used to execute a build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
-</description></method><method name="getModels" returnType="void" delegationTarget="onFailure"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="getModels" returnType="void" delegationTarget="onFailure"><description> 
  Starts fetching a Set of snapshots of the model of the given type for this composite, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method after fetching all of the composite's models. 
  
@@ -88,7 +84,11 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
-</description><parameter type="java.lang.Class" name="modelType"/></method><property name="models" type="void"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
+ Creates a launcher which can be used to execute a build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
+</description></method><property name="models" type="void"><description> 
  Starts fetching a Set of snapshots of the model of the given type for this composite, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method after fetching all of the composite's models. 
  

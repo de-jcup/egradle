@@ -57,16 +57,27 @@
  @throws UnsupportedVersionException When the target Gradle version does not support this version of the tooling API. 
  @throws GradleConnectionException On failure to establish a connection with the target Gradle version. 
  @since 1.0-milestone-3 
+</description></method><method name="forProjectDirectory" returnType="org.gradle.tooling.GradleConnector"><description> 
+ Specifies the working directory to use. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The working directory. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-3 
+</description><parameter type="java.io.File" name="projectDir"/></method><method name="newCancellationTokenSource" returnType="org.gradle.tooling.CancellationTokenSource" delegationTarget="CancellationTokenSource"><description> 
+ Creates a new &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt; that can be used to cancel one or more &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; executions. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ @since 2.1 
+</description></method><method name="newConnector" returnType="org.gradle.tooling.GradleConnector"><description> 
+ Creates a new connector instance. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns null. 
+ @since 1.0-milestone-3 
 </description></method><method name="newGradleConnection" returnType="org.gradle.tooling.connection.GradleConnectionBuilder"><description> 
  Creates a new connection builder instance for creating Gradle composite builds. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns null. 
  @since 2.13 
-</description></method><method name="newCancellationTokenSource" returnType="org.gradle.tooling.CancellationTokenSource" delegationTarget="CancellationTokenSource"><description> 
- Creates a new &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt; that can be used to cancel one or more &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; executions. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
- @since 2.1 
 </description></method><method name="useBuildDistribution" returnType="org.gradle.tooling.GradleConnector"><description> 
  Specifies to use the Gradle distribution defined by the target Gradle build. The appropriate distribution defined by the target Gradle build is downloaded and installed into the user's 
  Gradle home directory. If the target Gradle build does not define the distribution that it should be built with, the Gradle version of this connector is used. This replaces any value 
@@ -80,34 +91,23 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleDistribution The distribution to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-3 
-</description><parameter type="java.net.URI" name="gradleDistribution"/></method><method name="useGradleVersion" returnType="org.gradle.tooling.GradleConnector"><description> 
+</description><parameter type="java.net.URI" name="gradleDistribution"/></method><method name="useGradleUserHomeDir" returnType="org.gradle.tooling.GradleConnector" delegationTarget=""><description> 
+ Specifies the user's Gradle home directory to use. Defaults to &lt;a href='type://~/.gradle'&gt;~/.gradle&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The user's Gradle home directory to use. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-3 
+</description><parameter type="java.io.File" name="gradleUserHomeDir"/></method><method name="useGradleVersion" returnType="org.gradle.tooling.GradleConnector"><description> 
  Specifies which Gradle version to use. The appropriate distribution is downloaded and installed into the user's Gradle home directory. This replaces any value specified using &lt;a href='type://GradleConnector#useInstallation(File)'&gt;#useInstallation(File)&lt;/a&gt;, &lt;a href='type://GradleConnector#useDistribution(URI)'&gt;#useDistribution(URI)&lt;/a&gt;, or &lt;a href='type://GradleConnector#useBuildDistribution()'&gt;#useBuildDistribution()&lt;/a&gt;. Defaults to a project-specific Gradle version. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleVersion The version to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-3 
-</description><parameter type="java.lang.String" name="gradleVersion"/></method><method name="newConnector" returnType="org.gradle.tooling.GradleConnector"><description> 
- Creates a new connector instance. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns null. 
- @since 1.0-milestone-3 
-</description></method><method name="forProjectDirectory" returnType="org.gradle.tooling.GradleConnector"><description> 
- Specifies the working directory to use. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The working directory. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-3 
-</description><parameter type="java.io.File" name="projectDir"/></method><method name="useInstallation" returnType="org.gradle.tooling.GradleConnector"><description> 
+</description><parameter type="java.lang.String" name="gradleVersion"/></method><method name="useInstallation" returnType="org.gradle.tooling.GradleConnector"><description> 
  Specifies which Gradle installation to use. This replaces any value specified using &lt;a href='type://GradleConnector#useDistribution(URI)'&gt;#useDistribution(URI)&lt;/a&gt;, &lt;a href='type://GradleConnector#useGradleVersion(String)'&gt;#useGradleVersion(String)&lt;/a&gt;, or &lt;a href='type://GradleConnector#useBuildDistribution()'&gt;#useBuildDistribution()&lt;/a&gt;. 
  Defaults to a project-specific Gradle version. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleHome The Gradle installation directory. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.0-milestone-3 
-</description><parameter type="java.io.File" name="gradleHome"/></method><method name="useGradleUserHomeDir" returnType="org.gradle.tooling.GradleConnector" delegationTarget=""><description> 
- Specifies the user's Gradle home directory to use. Defaults to &lt;a href='type://~/.gradle'&gt;~/.gradle&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The user's Gradle home directory to use. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @since 1.0-milestone-3 
-</description><parameter type="java.io.File" name="gradleUserHomeDir"/></method></type>
+</description><parameter type="java.io.File" name="gradleHome"/></method></type>

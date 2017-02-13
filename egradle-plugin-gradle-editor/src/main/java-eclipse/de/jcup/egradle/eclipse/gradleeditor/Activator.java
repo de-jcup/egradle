@@ -21,8 +21,8 @@ import org.osgi.framework.BundleContext;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
-import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.api.FileHelper;
@@ -63,8 +63,8 @@ public class Activator extends AbstractUIPlugin {
 		codeCompletionRegistry.setErrorHandler(errorHandler);
 	
 		/* init code completion parts */
-		XMLDSLTypeImporter typeImporter = new XMLDSLTypeImporter();
-		XMLDSLPluginsImporter pluginsImporter = new XMLDSLPluginsImporter();
+		XMLTypeImporter typeImporter = new XMLTypeImporter();
+		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter,apiMappingImporter);
 		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/

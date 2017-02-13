@@ -139,8 +139,9 @@ public class HTMLDescriptionBuilder {
 		SortedSet<String> sortedLinkReferences =new TreeSet<>();
 		for (Method m: methods){
 			String methodSignature = MethodUtils.createSignature(m);
+			Type declaringType = m.getParent();
 			StringBuilder referenceLink = new StringBuilder();
-			referenceLink.append("<a href='type://").append(type.getName()).append("#").append(methodSignature).append("'>");
+			referenceLink.append("<a href='type://").append(declaringType.getName()).append("#").append(methodSignature).append("'>");
 			referenceLink.append(methodSignature);
 			referenceLink.append("</a>");
 			sortedLinkReferences.add(referenceLink.toString());
@@ -159,7 +160,8 @@ public class HTMLDescriptionBuilder {
 		for (Property p: properties){
 			String propertySignature = p.getName();
 			StringBuilder referenceLink = new StringBuilder();
-			referenceLink.append("<a href='type://").append(type.getName()).append("#").append(propertySignature).append("'>");
+			Type declaringType = p.getParent();
+			referenceLink.append("<a href='type://").append(declaringType.getName()).append("#").append(propertySignature).append("'>");
 			referenceLink.append(propertySignature);
 			referenceLink.append("</a>");
 			sortedLinkReferences.add(referenceLink.toString());
@@ -169,6 +171,7 @@ public class HTMLDescriptionBuilder {
 		for (String referenceLink: sortedLinkReferences){
 			description.append("<li>");
 			description.append(referenceLink);
+			description.append("</li>");
 		}
 		description.append("</ul>");
 	}

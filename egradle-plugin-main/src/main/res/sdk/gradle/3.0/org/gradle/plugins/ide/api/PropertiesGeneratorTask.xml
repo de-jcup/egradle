@@ -2,4 +2,4 @@
  A convenience superclass for those tasks which generate Properties configuration files from a domain object of type T. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The domain object type. 
-</description><method name="create" returnType="T"/><method name="configure" returnType="void"><parameter type="T" name="object"/></method><method name="getTransformer" returnType="org.gradle.api.internal.PropertiesTransformer"/><method name="create" returnType="T"/><method name="configure" returnType="void"><parameter type="T" name="object"/></method><property name="transformer" type="org.gradle.api.internal.PropertiesTransformer"/></type>
+</description><method name="configure" returnType="void"><parameter type="T" name="object"/></method><method name="create" returnType="T"/><method name="getTransformer" returnType="org.gradle.api.internal.PropertiesTransformer"/><property name="transformer" type="org.gradle.api.internal.PropertiesTransformer"/></type>

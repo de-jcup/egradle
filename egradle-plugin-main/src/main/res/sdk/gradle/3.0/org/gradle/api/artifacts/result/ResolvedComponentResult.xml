@@ -12,11 +12,10 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependencies of this component 
-</description></method><method name="getModuleVersion" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier" delegationTarget="null"><description> 
- Returns the module version which this component belongs to, if any. A component will belong to a module version if it was found in some repository, or if the 
- module version for the component has been declared, usually by declaring how the component should be published. 
+</description></method><method name="getDependents" returnType="java.util.Set"><description> 
+ Returns the incoming dependencies of this component. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version of the component, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this component has no associated module version. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependents of this component 
 </description></method><method name="getId" returnType="org.gradle.api.artifacts.component.ComponentIdentifier" delegationTarget="ComponentIdentifier"><description> 
  &lt;p&gt;Returns the identifier of this component. This can be used to uniquely identify the component within the current build, but it is not necessarily unique between 
  different builds. 
@@ -29,38 +28,17 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier of this component 
+</description></method><method name="getModuleVersion" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier" delegationTarget="null"><description> 
+ Returns the module version which this component belongs to, if any. A component will belong to a module version if it was found in some repository, or if the 
+ module version for the component has been declared, usually by declaring how the component should be published. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version of the component, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this component has no associated module version. 
 </description></method><method name="getSelectionReason" returnType="org.gradle.api.artifacts.result.ComponentSelectionReason"><description> 
  Returns the reason why this particular component was selected in the result. 
  Useful if multiple candidate components were found during dependency resolution. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the reason for selecting the component 
-</description></method><method name="getDependents" returnType="java.util.Set"><description> 
- Returns the incoming dependencies of this component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependents of this component 
-</description></method><property name="id" type="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
- &lt;p&gt;Returns the identifier of this component. This can be used to uniquely identify the component within the current build, but it is not necessarily unique between 
- different builds. 
- 
- &lt;p&gt;The return type is declared as an opaque &lt;a href='type://ComponentIdentifier'&gt;ComponentIdentifier&lt;/a&gt;, however the identifier may also implement one of the following interfaces:&lt;/p&gt; 
- 
- &lt;ul&gt; 
-     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ProjectComponentIdentifier'&gt;org.gradle.api.artifacts.component.ProjectComponentIdentifier&lt;/a&gt; for those component instances which are produced by the current build.&lt;/li&gt; 
-     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ModuleComponentIdentifier'&gt;org.gradle.api.artifacts.component.ModuleComponentIdentifier&lt;/a&gt; for those component instances which are found in some repository.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier of this component 
-</description></property><property name="selectionReason" type="org.gradle.api.artifacts.result.ComponentSelectionReason"><description> 
- Returns the reason why this particular component was selected in the result. 
- Useful if multiple candidate components were found during dependency resolution. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the reason for selecting the component 
-</description></property><property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier"><description> 
- Returns the module version which this component belongs to, if any. A component will belong to a module version if it was found in some repository, or if the 
- module version for the component has been declared, usually by declaring how the component should be published. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version of the component, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this component has no associated module version. 
-</description></property><property name="dependencies" type="java.util.Set"><description> 
+</description></method><property name="dependencies" type="java.util.Set"><description> 
  &lt;p&gt;Returns the dependencies of this component. Includes resolved and unresolved dependencies (if any). 
  
  &lt;p&gt;The elements of the returned collection are declared as &lt;a href='type://DependencyResult'&gt;DependencyResult&lt;/a&gt;, however the dependency instances will also implement one of the 
@@ -76,4 +54,26 @@
  Returns the incoming dependencies of this component. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependents of this component 
+</description></property><property name="id" type="org.gradle.api.artifacts.component.ComponentIdentifier"><description> 
+ &lt;p&gt;Returns the identifier of this component. This can be used to uniquely identify the component within the current build, but it is not necessarily unique between 
+ different builds. 
+ 
+ &lt;p&gt;The return type is declared as an opaque &lt;a href='type://ComponentIdentifier'&gt;ComponentIdentifier&lt;/a&gt;, however the identifier may also implement one of the following interfaces:&lt;/p&gt; 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ProjectComponentIdentifier'&gt;org.gradle.api.artifacts.component.ProjectComponentIdentifier&lt;/a&gt; for those component instances which are produced by the current build.&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ModuleComponentIdentifier'&gt;org.gradle.api.artifacts.component.ModuleComponentIdentifier&lt;/a&gt; for those component instances which are found in some repository.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier of this component 
+</description></property><property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier"><description> 
+ Returns the module version which this component belongs to, if any. A component will belong to a module version if it was found in some repository, or if the 
+ module version for the component has been declared, usually by declaring how the component should be published. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version of the component, or &lt;a href='type://null'&gt;null&lt;/a&gt; if this component has no associated module version. 
+</description></property><property name="selectionReason" type="org.gradle.api.artifacts.result.ComponentSelectionReason"><description> 
+ Returns the reason why this particular component was selected in the result. 
+ Useful if multiple candidate components were found during dependency resolution. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the reason for selecting the component 
 </description></property></type>

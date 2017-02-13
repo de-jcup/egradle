@@ -16,16 +16,16 @@
       } 
   } 
  &lt;/pre&gt; 
-</description><method name="getSolutionFile" returnType="org.gradle.ide.visualstudio.TextConfigFile"><description> 
- Configuration for the generated solution file. 
-</description></method><method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"><description> 
+</description><method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"><description> 
  The component that this solution represents. 
 </description></method><method name="getProjects" returnType="java.util.Set"><description> 
  The set of projects included in this solution. 
-</description></method><property name="projects" type="java.util.Set"><description> 
- The set of projects included in this solution. 
-</description></property><property name="component" type="org.gradle.nativeplatform.NativeComponentSpec"><description> 
+</description></method><method name="getSolutionFile" returnType="org.gradle.ide.visualstudio.TextConfigFile"><description> 
+ Configuration for the generated solution file. 
+</description></method><property name="component" type="org.gradle.nativeplatform.NativeComponentSpec"><description> 
  The component that this solution represents. 
+</description></property><property name="projects" type="java.util.Set"><description> 
+ The set of projects included in this solution. 
 </description></property><property name="solutionFile" type="org.gradle.ide.visualstudio.TextConfigFile"><description> 
  Configuration for the generated solution file. 
 </description></property></type>

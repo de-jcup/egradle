@@ -2,6 +2,7 @@ package de.jcup.egradle.codeassist.dsl;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XMLPlugins{
 	
 	@XmlElement(name = "plugin", type=XMLPlugin.class)
-	private Set<Plugin> plugins = new LinkedHashSet<>();
+	private Set<Plugin> plugins = new TreeSet<>();
 
 	public Set<Plugin> getPlugins() {
 		return plugins;

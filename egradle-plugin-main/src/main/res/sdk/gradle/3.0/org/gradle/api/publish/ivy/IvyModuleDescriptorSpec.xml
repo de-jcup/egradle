@@ -6,7 +6,17 @@
  The &lt;a href='type://IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; method can be used to modify the descriptor after it has been generated according to the publication data. 
  
  @since 1.3 
-</description><method name="setStatus" returnType="void"><description> 
+</description><method name="extraInfo" returnType="void"><description> 
+ Adds a new extra info element to the publication 
+</description><parameter type="java.lang.String" name="namespace"/><parameter type="java.lang.String" name="elementName"/><parameter type="java.lang.String" name="value"/></method><method name="getBranch" returnType="java.lang.String"><description> 
+ Returns the branch for this publication 
+</description></method><method name="getExtraInfo" returnType="org.gradle.api.publish.ivy.IvyExtraInfoSpec"><description> 
+ Returns the extra info element spec for this publication 
+</description></method><method name="getStatus" returnType="java.lang.String"><description> 
+ Returns the status for this publication. 
+</description></method><method name="setBranch" returnType="void"><description> 
+ Sets the branch for this publication 
+</description><parameter type="java.lang.String" name="branch"/></method><method name="setStatus" returnType="void"><description> 
  Sets the status for this publication. 
 </description><parameter type="java.lang.String" name="status"/></method><method name="withXml" returnType="void" delegationTarget="Action"><description> 
  Allow configuration of the descriptor, after it has been generated according to the input data. 
@@ -35,20 +45,10 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The configuration action. 
  @see IvyPublication 
  @see XmlProvider 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getExtraInfo" returnType="org.gradle.api.publish.ivy.IvyExtraInfoSpec"><description> 
- Returns the extra info element spec for this publication 
-</description></method><method name="getStatus" returnType="java.lang.String"><description> 
- Returns the status for this publication. 
-</description></method><method name="setBranch" returnType="void"><description> 
- Sets the branch for this publication 
-</description><parameter type="java.lang.String" name="branch"/></method><method name="getBranch" returnType="java.lang.String"><description> 
- Returns the branch for this publication 
-</description></method><method name="extraInfo" returnType="void"><description> 
- Adds a new extra info element to the publication 
-</description><parameter type="java.lang.String" name="namespace"/><parameter type="java.lang.String" name="elementName"/><parameter type="java.lang.String" name="value"/></method><property name="status" type="java.lang.String"><description> 
- Returns the status for this publication. 
-</description></property><property name="branch" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="branch" type="java.lang.String"><description> 
  Returns the branch for this publication 
 </description></property><property name="extraInfo" type="org.gradle.api.publish.ivy.IvyExtraInfoSpec"><description> 
  Returns the extra info element spec for this publication 
+</description></property><property name="status" type="java.lang.String"><description> 
+ Returns the status for this publication. 
 </description></property></type>

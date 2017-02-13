@@ -4,6 +4,14 @@
  The group of the module. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
+ The name of the module. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
+</description></method><method name="getVersion" returnType="java.lang.String"><description> 
+ The version of the module 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module version 
 </description></method><method name="matchesStrictly" returnType="boolean"><description> 
  To match strictly means that the given identifier needs to have 
  equal group, module name and version. 
@@ -11,15 +19,7 @@
  e.g. '1.+' selector does not strictly match '1.2' identifier. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if this selector matches exactly the given identifier. 
-</description><parameter type="org.gradle.api.artifacts.ModuleVersionIdentifier" name="identifier"/></method><method name="getVersion" returnType="java.lang.String"><description> 
- The version of the module 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module version 
-</description></method><method name="getName" returnType="java.lang.String"><description> 
- The name of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
-</description></method><property name="group" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.api.artifacts.ModuleVersionIdentifier" name="identifier"/></method><property name="group" type="java.lang.String"><description> 
  The group of the module. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 

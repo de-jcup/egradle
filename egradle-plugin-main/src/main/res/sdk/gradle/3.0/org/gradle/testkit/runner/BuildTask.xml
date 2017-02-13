@@ -3,7 +3,11 @@
  
  @since 2.6 
  @see BuildResult 
-</description><method name="getPath" returnType="java.lang.String" delegationTarget="bar"><description> 
+</description><method name="getOutcome" returnType="org.gradle.testkit.runner.TaskOutcome"><description> 
+ The outcome of attempting to execute this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task outcome 
+</description></method><method name="getPath" returnType="java.lang.String" delegationTarget="bar"><description> 
  The unique path of the task. 
  &lt;p&gt; 
  The task path is a combination of its enclosing project's path and its name. 
@@ -13,11 +17,11 @@
  This value corresponds to the value output by Gradle for the task during its normal progress logging. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task path 
-</description></method><method name="getOutcome" returnType="org.gradle.testkit.runner.TaskOutcome"><description> 
+</description></method><property name="outcome" type="org.gradle.testkit.runner.TaskOutcome"><description> 
  The outcome of attempting to execute this task. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task outcome 
-</description></method><property name="path" type="java.lang.String"><description> 
+</description></property><property name="path" type="java.lang.String"><description> 
  The unique path of the task. 
  &lt;p&gt; 
  The task path is a combination of its enclosing project's path and its name. 
@@ -27,8 +31,4 @@
  This value corresponds to the value output by Gradle for the task during its normal progress logging. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task path 
-</description></property><property name="outcome" type="org.gradle.testkit.runner.TaskOutcome"><description> 
- The outcome of attempting to execute this task. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task outcome 
 </description></property></type>

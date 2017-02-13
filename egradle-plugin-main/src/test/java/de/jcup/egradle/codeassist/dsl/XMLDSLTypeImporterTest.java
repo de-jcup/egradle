@@ -15,7 +15,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.XMLParameter;
 import de.jcup.egradle.codeassist.dsl.XMLProperty;
 import de.jcup.egradle.codeassist.dsl.XMLType;
@@ -25,14 +25,14 @@ public class XMLDSLTypeImporterTest {
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 	private File dslFolder;
-	private XMLDSLTypeImporter importerToTest;
+	private XMLTypeImporter importerToTest;
 	private File actionXMLFile;
 	
 	@Before
 	public void before(){
 		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		actionXMLFile = new File(dslFolder,"org/gradle/api/TestAction.xml");
-		importerToTest=new XMLDSLTypeImporter();
+		importerToTest=new XMLTypeImporter();
 	}
 	
 	@Test

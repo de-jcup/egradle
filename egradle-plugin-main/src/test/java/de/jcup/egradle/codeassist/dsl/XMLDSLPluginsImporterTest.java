@@ -13,19 +13,19 @@ import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.TypeExtension;
-import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeExtension;
 import de.jcup.egradle.core.TestUtil;
 
 public class XMLDSLPluginsImporterTest {
 
-	private XMLDSLPluginsImporter importerToTest;
+	private XMLPluginsImporter importerToTest;
 	private File dslFolder;
 	private File pluginsXMLFile;
 
 	@Before
 	public void before(){
-		importerToTest = new XMLDSLPluginsImporter();
+		importerToTest = new XMLPluginsImporter();
 		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
 		pluginsXMLFile = new File(dslFolder,"plugins.xml");
 	}
@@ -33,7 +33,8 @@ public class XMLDSLPluginsImporterTest {
 	@Test
 	public void java_plugin_found_test_res__and_contains_mixin_and_extension_classes() throws Exception{
 		
-		 Set<Plugin> plugins = importerToTest.importPlugins(new FileInputStream(pluginsXMLFile));
+		 XMLPlugins xmlPlugins = importerToTest.importPlugins(new FileInputStream(pluginsXMLFile));
+		 Set<Plugin> plugins = xmlPlugins.getPlugins();
 		 
 		 assertNotNull(plugins);
 		 for (Plugin plugin: plugins){

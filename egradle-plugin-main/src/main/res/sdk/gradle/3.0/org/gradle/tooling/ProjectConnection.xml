@@ -39,14 +39,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. 
  @since 1.8 
-</description><parameter type="org.gradle.tooling.BuildAction" name="buildAction"/></method><method name="newTestLauncher" returnType="org.gradle.tooling.TestLauncher"><description> 
- Creates a test launcher which can be used to execute tests. 
- 
- &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
- @since 2.6 
-</description></method><method name="close" returnType="void"><description> 
+</description><parameter type="org.gradle.tooling.BuildAction" name="buildAction"/></method><method name="close" returnType="void"><description> 
  Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads. 
  @since 1.0-milestone-3 
 </description></method><method name="getModel" returnType="T" delegationTarget="model"><description> 
@@ -63,14 +56,7 @@
  @throws GradleConnectionException On some other failure using the connection. 
  @throws IllegalStateException When this connection has been closed or is closing. 
  @since 1.0-milestone-3 
-</description><parameter type="java.lang.Class" name="modelType"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
- Creates a launcher which can be used to execute a build. 
- 
- &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
- @since 1.0-milestone-3 
-</description></method><method name="getModel" returnType="void" delegationTarget="model"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="getModel" returnType="void" delegationTarget="model"><description> 
  Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
  
@@ -110,7 +96,21 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. 
  @since 1.0-milestone-3 
-</description><parameter type="java.lang.Class" name="modelType"/></method><property name="model" type="void"><description> 
+</description><parameter type="java.lang.Class" name="modelType"/></method><method name="newBuild" returnType="org.gradle.tooling.BuildLauncher"><description> 
+ Creates a launcher which can be used to execute a build. 
+ 
+ &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
+ @since 1.0-milestone-3 
+</description></method><method name="newTestLauncher" returnType="org.gradle.tooling.TestLauncher"><description> 
+ Creates a test launcher which can be used to execute tests. 
+ 
+ &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher. 
+ @since 2.6 
+</description></method><property name="model" type="void"><description> 
  Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later 
  passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
  

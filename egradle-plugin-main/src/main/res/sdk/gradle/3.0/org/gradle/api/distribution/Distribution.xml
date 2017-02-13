@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.distribution.Distribution" version="3.0"><description> 
  A distribution allow to bundle an application or a library including dependencies,sources... 
-</description><method name="getBaseName" returnType="java.lang.String" delegationTarget="main"><description> 
- The baseName of the distribution, used in naming the distribution archives. 
- &lt;p&gt; 
- If the &lt;a href='type://Distribution#getName()'&gt;#getName()&lt;/a&gt; of this distribution is "&lt;a href='type://main'&gt;main&lt;/a&gt;" this defaults to the project's name. 
- Otherwise it is "&lt;a href='type://$project.name-$this.name'&gt;$project.name-$this.name&lt;/a&gt;". 
-</description></method><method name="setBaseName" returnType="void"><description> 
- The baseName of the distribution. 
- &lt;p&gt; 
- Set to change the name of the distribution archives. 
-</description><parameter type="java.lang.String" name="baseName"/></method><method name="getContents" returnType="org.gradle.api.file.CopySpec"><description> 
- The contents of the distribution. 
-</description></method><method name="getName" returnType="java.lang.String"><description> 
- The name of this distribution. 
-</description></method><method name="contents" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><method name="contents" returnType="org.gradle.api.file.CopySpec"><description> 
  Configures the contents of the distribution. 
  &lt;p&gt; 
  Can be used to configure the contents of the distribution: 
@@ -27,13 +14,26 @@
  } 
  &lt;/pre&gt; 
  The DSL inside the {} } block is the same DSL used for Copy tasks. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="name" type="java.lang.String"><description> 
- The name of this distribution. 
-</description></property><property name="contents" type="org.gradle.api.file.CopySpec"><description> 
- The contents of the distribution. 
-</description></property><property name="baseName" type="java.lang.String"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getBaseName" returnType="java.lang.String" delegationTarget="main"><description> 
  The baseName of the distribution, used in naming the distribution archives. 
  &lt;p&gt; 
  If the &lt;a href='type://Distribution#getName()'&gt;#getName()&lt;/a&gt; of this distribution is "&lt;a href='type://main'&gt;main&lt;/a&gt;" this defaults to the project's name. 
  Otherwise it is "&lt;a href='type://$project.name-$this.name'&gt;$project.name-$this.name&lt;/a&gt;". 
+</description></method><method name="getContents" returnType="org.gradle.api.file.CopySpec"><description> 
+ The contents of the distribution. 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
+ The name of this distribution. 
+</description></method><method name="setBaseName" returnType="void"><description> 
+ The baseName of the distribution. 
+ &lt;p&gt; 
+ Set to change the name of the distribution archives. 
+</description><parameter type="java.lang.String" name="baseName"/></method><property name="baseName" type="java.lang.String"><description> 
+ The baseName of the distribution, used in naming the distribution archives. 
+ &lt;p&gt; 
+ If the &lt;a href='type://Distribution#getName()'&gt;#getName()&lt;/a&gt; of this distribution is "&lt;a href='type://main'&gt;main&lt;/a&gt;" this defaults to the project's name. 
+ Otherwise it is "&lt;a href='type://$project.name-$this.name'&gt;$project.name-$this.name&lt;/a&gt;". 
+</description></property><property name="contents" type="org.gradle.api.file.CopySpec"><description> 
+ The contents of the distribution. 
+</description></property><property name="name" type="java.lang.String"><description> 
+ The name of this distribution. 
 </description></property></type>

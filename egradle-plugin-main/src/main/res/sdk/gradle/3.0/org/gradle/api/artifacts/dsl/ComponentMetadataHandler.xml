@@ -43,12 +43,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="rule"/></method><method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
- Adds a rule action that may modify the metadata of any resolved software component. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.Action" name="rule"/></method><method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.model.Mutate"><description> 
+</description><parameter type="groovy.lang.Closure" name="rule"/></method><method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.model.Mutate"><description> 
  Adds a rule that may modify the metadata of any resolved software component. 
  
  &lt;p&gt;The ruleSource is an Object that has a single rule method annotated with &lt;a href='type://org.gradle.model.Mutate'&gt;org.gradle.model.Mutate&lt;/a&gt;. 
@@ -62,7 +57,12 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource  the rule source object to be added 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="ruleSource"/></method><method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
+</description><parameter type="java.lang.Object" name="ruleSource"/></method><method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler"><description> 
+ Adds a rule action that may modify the metadata of any resolved software component. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="org.gradle.api.Action" name="rule"/></method><method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
  Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
  
  &lt;p&gt;The rule closure parameter is subject to the same requirements as &lt;a href='type://ComponentMetadataHandler#all(groovy.lang.Closure)'&gt;#all(groovy.lang.Closure)&lt;/a&gt;. 
@@ -73,15 +73,15 @@
 </description><parameter type="java.lang.Object" name="id"/><parameter type="groovy.lang.Closure" name="rule"/></method><method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
  Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="id"/><parameter type="org.gradle.api.Action" name="rule"/></method><method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
- Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
- 
  &lt;p&gt;The rule source parameter is subject to the same requirements as &lt;a href='type://ComponentMetadataHandler#all(Object)'&gt;#all(Object)&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource the rule source object to be added 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="id"/><parameter type="java.lang.Object" name="ruleSource"/></method></type>
+</description><parameter type="java.lang.Object" name="id"/><parameter type="java.lang.Object" name="ruleSource"/></method><method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier"><description> 
+ Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="id"/><parameter type="org.gradle.api.Action" name="rule"/></method></type>

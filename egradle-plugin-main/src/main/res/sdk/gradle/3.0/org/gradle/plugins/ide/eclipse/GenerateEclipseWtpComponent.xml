@@ -3,8 +3,8 @@
  If you want to fine tune the eclipse configuration 
  &lt;p&gt; 
  At this moment nearly all configuration is done via &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt;. 
-</description><method name="configure" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.WtpComponent" name="xmlComponent"/></method><method name="getComponent" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent"><description> 
+</description><method name="configure" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.WtpComponent" name="xmlComponent"/></method><method name="create" returnType="org.gradle.plugins.ide.eclipse.model.WtpComponent"/><method name="getComponent" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent"><description> 
  The Eclipse WTP component model that contains details required to generate the settings file. 
-</description></method><method name="setComponent" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" name="component"/></method><method name="create" returnType="org.gradle.plugins.ide.eclipse.model.WtpComponent"/><property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent"><description> 
+</description></method><method name="setComponent" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" name="component"/></method><property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent"><description> 
  The Eclipse WTP component model that contains details required to generate the settings file. 
 </description></property></type>

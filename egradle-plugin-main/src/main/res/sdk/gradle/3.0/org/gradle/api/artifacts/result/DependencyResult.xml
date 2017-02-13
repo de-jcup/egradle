@@ -2,7 +2,11 @@
  An edge in the dependency graph. Provides information about the origin of the dependency and the requested component. 
  
  @see ResolutionResult 
-</description><method name="getRequested" returnType="org.gradle.api.artifacts.component.ComponentSelector" delegationTarget="org.gradle.api.artifacts.component.ComponentSelector"><description> 
+</description><method name="getFrom" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
+ Returns the origin of the dependency. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the origin of the dependency 
+</description></method><method name="getRequested" returnType="org.gradle.api.artifacts.component.ComponentSelector" delegationTarget="org.gradle.api.artifacts.component.ComponentSelector"><description> 
  &lt;p&gt;Returns the requested component. 
  
  &lt;p&gt;The return type is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.component.ComponentSelector'&gt;org.gradle.api.artifacts.component.ComponentSelector&lt;/a&gt;, however the selector may also implement one of the following interfaces:&lt;/p&gt; 
@@ -12,10 +16,6 @@
      &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.component.ModuleComponentSelector'&gt;org.gradle.api.artifacts.component.ModuleComponentSelector&lt;/a&gt; for those dependencies that request a component to be found in some repository.&lt;/li&gt; 
  &lt;/ul&gt; 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the requested component 
-</description></method><method name="getFrom" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
- Returns the origin of the dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the origin of the dependency 
 </description></method><property name="from" type="org.gradle.api.artifacts.result.ResolvedComponentResult"><description> 
  Returns the origin of the dependency. 
  

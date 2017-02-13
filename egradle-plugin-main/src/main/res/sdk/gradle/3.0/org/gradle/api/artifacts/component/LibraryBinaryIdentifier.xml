@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.component.LibraryBinaryIdentifier" version="3.0"><description> 
  An identifier for a library instance that is built as part of the current build. 
-</description><method name="getVariant" returnType="java.lang.String"><description> 
- The variant of the library. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the variant identifier of the library. 
-</description></method><method name="getLibraryName" returnType="java.lang.String"><description> 
+</description><method name="getLibraryName" returnType="java.lang.String"><description> 
  The name of the library 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the name of the library 
 </description></method><method name="getProjectPath" returnType="java.lang.String"><description> 
  The project path of the library. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project path of the library. 
-</description></method><property name="variant" type="java.lang.String"><description> 
+</description></method><method name="getVariant" returnType="java.lang.String"><description> 
  The variant of the library. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the variant identifier of the library. 
-</description></property><property name="libraryName" type="java.lang.String"><description> 
+</description></method><property name="libraryName" type="java.lang.String"><description> 
  The name of the library 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the name of the library 
 </description></property><property name="projectPath" type="java.lang.String"><description> 
  The project path of the library. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project path of the library. 
+</description></property><property name="variant" type="java.lang.String"><description> 
+ The variant of the library. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the variant identifier of the library. 
 </description></property></type>

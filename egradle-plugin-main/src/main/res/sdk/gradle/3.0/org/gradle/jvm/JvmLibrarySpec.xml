@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.jvm.JvmLibrarySpec" version="3.0"><description> 
  Definition of a JVM library component that is to be built by Gradle. 
-</description><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"><description> 
- The component-level dependencies of this library. 
-</description></method><method name="getApi" returnType="org.gradle.jvm.JvmApiSpec"><description> 
+</description><method name="getApi" returnType="org.gradle.jvm.JvmApiSpec"><description> 
  The public API of this library. 
-</description></method><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"><description> 
+</description></method><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"><description> 
  The component-level dependencies of this library. 
-</description></property><property name="api" type="org.gradle.jvm.JvmApiSpec"><description> 
+</description></method><property name="api" type="org.gradle.jvm.JvmApiSpec"><description> 
  The public API of this library. 
+</description></property><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"><description> 
+ The component-level dependencies of this library. 
 </description></property></type>

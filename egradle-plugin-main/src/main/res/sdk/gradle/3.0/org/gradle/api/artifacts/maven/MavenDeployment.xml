@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.maven.MavenDeployment" version="3.0"><description> 
  Represents the artifacts which will be deployed to a Maven repository. You can use this interface to modify the set 
  of artifacts. 
-</description><method name="getArtifacts" returnType="java.util.Set"><description> 
- Returns the artifacts which will be deployed. Includes the POM artifact. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifacts. Never null. 
-</description></method><method name="addArtifact" returnType="void"><description> 
+</description><method name="addArtifact" returnType="void"><description> 
  Adds an additional artifact to this deployment. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifact The artifact to add. 
-</description><parameter type="org.gradle.api.artifacts.PublishArtifact" name="artifact"/></method><method name="getAttachedArtifacts" returnType="java.util.Set"><description> 
+</description><parameter type="org.gradle.api.artifacts.PublishArtifact" name="artifact"/></method><method name="getArtifacts" returnType="java.util.Set"><description> 
+ Returns the artifacts which will be deployed. Includes the POM artifact. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifacts. Never null. 
+</description></method><method name="getAttachedArtifacts" returnType="java.util.Set"><description> 
  Returns the additional artifacts for this deployment. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the additional artifacts for this deployment. Never null. 
-</description></method><method name="getPomArtifact" returnType="org.gradle.api.artifacts.PublishArtifact"><description> 
- Returns the POM for this deployment. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM. Never null. 
 </description></method><method name="getMainArtifact" returnType="org.gradle.api.artifacts.PublishArtifact"><description> 
  Returns the main artifact for this deployment. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The main artifact. May be null. 
-</description></method><property name="mainArtifact" type="org.gradle.api.artifacts.PublishArtifact"><description> 
+</description></method><method name="getPomArtifact" returnType="org.gradle.api.artifacts.PublishArtifact"><description> 
+ Returns the POM for this deployment. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM. Never null. 
+</description></method><property name="artifacts" type="java.util.Set"><description> 
+ Returns the artifacts which will be deployed. Includes the POM artifact. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifacts. Never null. 
+</description></property><property name="attachedArtifacts" type="java.util.Set"><description> 
+ Returns the additional artifacts for this deployment. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the additional artifacts for this deployment. Never null. 
+</description></property><property name="mainArtifact" type="org.gradle.api.artifacts.PublishArtifact"><description> 
  Returns the main artifact for this deployment. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The main artifact. May be null. 
@@ -29,12 +37,4 @@
  Returns the POM for this deployment. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM. Never null. 
-</description></property><property name="attachedArtifacts" type="java.util.Set"><description> 
- Returns the additional artifacts for this deployment. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the additional artifacts for this deployment. Never null. 
-</description></property><property name="artifacts" type="java.util.Set"><description> 
- Returns the artifacts which will be deployed. Includes the POM artifact. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifacts. Never null. 
 </description></property></type>

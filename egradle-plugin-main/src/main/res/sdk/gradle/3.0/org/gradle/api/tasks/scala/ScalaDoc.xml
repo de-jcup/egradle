@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.tasks.scala.ScalaDoc" version="3.0" superType="org.gradle.api.tasks.SourceTask"><description> 
  Generates HTML API documentation for Scala source files. 
-</description><method name="getAntBuilder" returnType="org.gradle.api.internal.project.IsolatedAntBuilder"/><method name="setTitle" returnType="void"><parameter type="java.lang.String" name="title"/></method><method name="setScalaDocOptions" returnType="void"><parameter type="org.gradle.api.tasks.scala.ScalaDocOptions" name="scalaDocOptions"/></method><method name="getTitle" returnType="java.lang.String"><description> 
- Returns the documentation title. 
-</description></method><method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath to use to load the ScalaDoc tool. 
-</description></method><method name="generate" returnType="void"/><method name="getScalaDocOptions" returnType="org.gradle.api.tasks.scala.ScalaDocOptions"><description> 
- Returns the ScalaDoc generation options. 
-</description></method><method name="setScalaClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="scalaClasspath"/></method><method name="setClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+</description><method name="generate" returnType="void"/><method name="getAntBuilder" returnType="org.gradle.api.internal.project.IsolatedAntBuilder"/><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
  &lt;p&gt;Returns the classpath to use to locate classes referenced by the documented source.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
 </description></method><method name="getDestinationDir" returnType="java.io.File"><description> 
  Returns the directory to generate the API documentation into. 
-</description></method><method name="setDestinationDir" returnType="void"><parameter type="java.io.File" name="destinationDir"/></method><property name="scalaClasspath" type="org.gradle.api.file.FileCollection"><description> 
+</description></method><method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the classpath to use to load the ScalaDoc tool. 
-</description></property><property name="destinationDir" type="java.io.File"><description> 
- Returns the directory to generate the API documentation into. 
-</description></property><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
+</description></method><method name="getScalaDocOptions" returnType="org.gradle.api.tasks.scala.ScalaDocOptions"><description> 
+ Returns the ScalaDoc generation options. 
+</description></method><method name="getTitle" returnType="java.lang.String"><description> 
+ Returns the documentation title. 
+</description></method><method name="setClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="setDestinationDir" returnType="void"><parameter type="java.io.File" name="destinationDir"/></method><method name="setScalaClasspath" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="scalaClasspath"/></method><method name="setScalaDocOptions" returnType="void"><parameter type="org.gradle.api.tasks.scala.ScalaDocOptions" name="scalaDocOptions"/></method><method name="setTitle" returnType="void"><parameter type="java.lang.String" name="title"/></method><property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
  &lt;p&gt;Returns the classpath to use to locate classes referenced by the documented source.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
-</description></property><property name="title" type="java.lang.String"><description> 
- Returns the documentation title. 
+</description></property><property name="destinationDir" type="java.io.File"><description> 
+ Returns the directory to generate the API documentation into. 
+</description></property><property name="scalaClasspath" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath to use to load the ScalaDoc tool. 
 </description></property><property name="scalaDocOptions" type="org.gradle.api.tasks.scala.ScalaDocOptions"><description> 
  Returns the ScalaDoc generation options. 
-</description></property><property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/></type>
+</description></property><property name="title" type="java.lang.String"><description> 
+ Returns the documentation title. 
+</description></property></type>

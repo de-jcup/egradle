@@ -11,16 +11,29 @@ import java.util.Set;
 public interface Type extends LanguageElement{
 
 	/**
-	 * Return properties, never <code>null</code>
+	 * Return properties (defined + inherited), never <code>null</code>
 	 * @return properties, never <code>null</code>
 	 */
 	public Set<Property> getProperties();
 	
 	/**
-	 * Return methods, never <code>null</code>
+	 * Return defined properties, never <code>null</code>
+	 * @return properties, never <code>null</code>
+	 */
+	public Set<Property> getDefinedProperties();
+	
+	/**
+	 * Return methods (defined + inherited), never <code>null</code>
 	 * @return methods, never <code>null</code>
 	 */
 	public Set<Method> getMethods();
+	
+	/**
+	 * Return defined method (not inherited), never <code>null</code>
+	 * @return methods, never <code>null</code>
+	 */
+	public Set<Method> getDefinedMethods();
+
 
 	/**
 	 * 
@@ -56,7 +69,8 @@ public interface Type extends LanguageElement{
 	 * @return name of super type or <code>null</code>
 	 */
 	public String getSuperTypeAsString();
-	
-	
+
+	public boolean isDescendantOf(String type);
+
 		
 }

@@ -18,24 +18,25 @@ import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader.DSLFolderNotSetException;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLPlugins;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.core.TestUtil;
 public class FilesystemFileLoaderTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 	private File dslFolder;
-	private XMLDSLTypeImporter mockedTypeImporter;
-	private XMLDSLPluginsImporter mockedPluginsImporter;
+	private XMLTypeImporter mockedTypeImporter;
+	private XMLPluginsImporter mockedPluginsImporter;
 	private ApiMappingImporter mockedApiMappingImporter;
 	
 	@Before
 	public void before(){
 		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
-		mockedTypeImporter = mock(XMLDSLTypeImporter.class);
-		mockedPluginsImporter = mock(XMLDSLPluginsImporter.class);
+		mockedTypeImporter = mock(XMLTypeImporter.class);
+		mockedPluginsImporter = mock(XMLPluginsImporter.class);
 		mockedApiMappingImporter = mock(ApiMappingImporter.class);
 	}
 	
@@ -66,7 +67,9 @@ public class FilesystemFileLoaderTest {
 		
 		XMLType mockedType = mock(XMLType.class);
 		when(mockedTypeImporter.importType(any(InputStream.class))).thenReturn(mockedType);
-		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(Collections.emptySet());
+		XMLPlugins xmlPlugins = mock(XMLPlugins.class);
+		when(xmlPlugins.getPlugins()).thenReturn(Collections.emptySet());
+		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(xmlPlugins);
 		
 		/* execute */
 		Type type = loaderToTest.loadType("org.gradle.api.TestAction");
@@ -83,7 +86,9 @@ public class FilesystemFileLoaderTest {
 		loaderToTest.setDSLFolder(dslFolder);
 		XMLType mockedType = mock(XMLType.class);
 		when(mockedTypeImporter.importType(any(InputStream.class))).thenReturn(mockedType);
-		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(Collections.emptySet());
+		XMLPlugins xmlPlugins = mock(XMLPlugins.class);
+		when(xmlPlugins.getPlugins()).thenReturn(Collections.emptySet());
+		when(mockedPluginsImporter.importPlugins(any(InputStream.class))).thenReturn(xmlPlugins);
 		
 		/* test -after*/
 		expectedException.expect(FileNotFoundException.class);

@@ -3,57 +3,7 @@
  
  &lt;p&gt;You can obtain a &lt;a href='type://TaskContainer'&gt;TaskContainer&lt;/a&gt; instance by calling &lt;a href='type://org.gradle.api.Project#getTasks()'&gt;org.gradle.api.Project#getTasks()&lt;/a&gt;, or using the 
  &lt;a href='type://tasks'&gt;tasks&lt;/a&gt; property in your build script.&lt;/p&gt; 
-</description><method name="replace" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
- &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this container, replacing any existing task with the 
- same name.&lt;/p&gt; 
- 
- &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
- by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
- @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/></method><method name="replace" returnType="T" delegationTarget="Task"><description> 
- &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, and adds it to this container, replacing any existing 
- task of the same name.&lt;/p&gt; 
- 
- &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
- by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
- @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><method name="create" returnType="T" delegationTarget="Task"><description> 
- &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, and adds it to this container.&lt;/p&gt; 
- 
- &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
- by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
- @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><method name="getByPath" returnType="org.gradle.api.Task"><description> 
- &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 
- interpreted relative to the project for this container. This method throws an exception if no task with the given 
- path exists.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the path of the task to be returned 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task. Never returns null 
- @throws UnknownTaskException If no task with the given path exists. 
-</description><parameter type="java.lang.String" name="path"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
- &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name adds it to this container. The given closure is used to configure 
- the task before it is returned by this method.&lt;/p&gt; 
- 
- &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
- by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the task. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
- @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
+</description><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this container.&lt;/p&gt; 
  
  &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
@@ -62,25 +12,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
  @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/></method><method name="create" returnType="T" delegationTarget="Task"><description> 
- &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, configures it with the given action, and adds it to this container.&lt;/p&gt; 
- 
- &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
- by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration The action to configure the task with. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object. 
- @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/><parameter type="org.gradle.api.Action" name="configuration"/></method><method name="findByPath" returnType="org.gradle.api.Task"><description> 
- &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 
- interpreted relative to the project for this container. This method returns null if no task with the given path 
- exists.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the path of the task to be returned 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task. Returns null if so such task exists. 
-</description><parameter type="java.lang.String" name="path"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; and adds it to this container. A map of creation options can be passed to this method 
  to control how the task is created. The following options are available:&lt;/p&gt; 
  
@@ -121,6 +53,27 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
  @throws InvalidUserDataException If a task with the given name already exists in this project. 
 </description><parameter type="java.util.Map" name="options"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
+ &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name adds it to this container. The given closure is used to configure 
+ the task before it is returned by this method.&lt;/p&gt; 
+ 
+ &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
+ by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the task. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
+ @throws InvalidUserDataException If a task with the given name already exists in this project. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="create" returnType="T" delegationTarget="Task"><description> 
+ &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, and adds it to this container.&lt;/p&gt; 
+ 
+ &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
+ by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
+ @throws InvalidUserDataException If a task with the given name already exists in this project. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><method name="create" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; adds it to this container. A map of creation options can be passed to this method to 
  control how the task is created. See &lt;a href='type://TaskContainer#create(java.util.Map)'&gt;#create(java.util.Map)&lt;/a&gt; for the list of options available. The given 
  closure is used to configure the task before it is returned by this method.&lt;/p&gt; 
@@ -132,7 +85,54 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the task. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
  @throws InvalidUserDataException If a task with the given name already exists in this project. 
-</description><parameter type="java.util.Map" name="options"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="byPath" type="org.gradle.api.Task"><description> 
+</description><parameter type="java.util.Map" name="options"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="create" returnType="T" delegationTarget="Task"><description> 
+ &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, configures it with the given action, and adds it to this container.&lt;/p&gt; 
+ 
+ &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
+ by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration The action to configure the task with. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object. 
+ @throws InvalidUserDataException If a task with the given name already exists in this project. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/><parameter type="org.gradle.api.Action" name="configuration"/></method><method name="findByPath" returnType="org.gradle.api.Task"><description> 
+ &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 
+ interpreted relative to the project for this container. This method returns null if no task with the given path 
+ exists.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the path of the task to be returned 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task. Returns null if so such task exists. 
+</description><parameter type="java.lang.String" name="path"/></method><method name="getByPath" returnType="org.gradle.api.Task"><description> 
+ &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 
+ interpreted relative to the project for this container. This method throws an exception if no task with the given 
+ path exists.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the path of the task to be returned 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task. Never returns null 
+ @throws UnknownTaskException If no task with the given path exists. 
+</description><parameter type="java.lang.String" name="path"/></method><method name="replace" returnType="org.gradle.api.Task" delegationTarget="Task"><description> 
+ &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this container, replacing any existing task with the 
+ same name.&lt;/p&gt; 
+ 
+ &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
+ by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
+ @throws InvalidUserDataException If a task with the given name already exists in this project. 
+</description><parameter type="java.lang.String" name="name"/></method><method name="replace" returnType="T" delegationTarget="Task"><description> 
+ &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and type, and adds it to this container, replacing any existing 
+ task of the same name.&lt;/p&gt; 
+ 
+ &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task 
+ by name in your build file. See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the task to be created. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of task to create. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created task object 
+ @throws InvalidUserDataException If a task with the given name already exists in this project. 
+</description><parameter type="java.lang.String" name="name"/><parameter type="java.lang.Class" name="type"/></method><property name="byPath" type="org.gradle.api.Task"><description> 
  &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 
  interpreted relative to the project for this container. This method throws an exception if no task with the given 
  path exists.&lt;/p&gt; 

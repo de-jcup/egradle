@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaCompilerOutput" version="3.0"><description> 
  IDEA compiler output settings. 
-</description><method name="getTestOutputDir" returnType="java.io.File"><description> 
- directory to store module's test classes and resources. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;directory to store test output. non-&lt;code&gt;null&lt;/code&gt; if 
-            &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
-</description></method><method name="getInheritOutputDirs" returnType="boolean"><description> 
+</description><method name="getInheritOutputDirs" returnType="boolean"><description> 
  whether current module should inherit project's output directory. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;inherit output dirs flag 
@@ -16,12 +11,12 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;directory to store production output. non-&lt;code&gt;null&lt;/code&gt; if 
             &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
-</description></method><property name="testOutputDir" type="java.io.File"><description> 
+</description></method><method name="getTestOutputDir" returnType="java.io.File"><description> 
  directory to store module's test classes and resources. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;directory to store test output. non-&lt;code&gt;null&lt;/code&gt; if 
             &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
-</description></property><property name="inheritOutputDirs" type="boolean"><description> 
+</description></method><property name="inheritOutputDirs" type="boolean"><description> 
  whether current module should inherit project's output directory. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;inherit output dirs flag 
@@ -31,5 +26,10 @@
  directory to store module's production classes and resources. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;directory to store production output. non-&lt;code&gt;null&lt;/code&gt; if 
+            &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
+</description></property><property name="testOutputDir" type="java.io.File"><description> 
+ directory to store module's test classes and resources. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;directory to store test output. non-&lt;code&gt;null&lt;/code&gt; if 
             &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
 </description></property></type>

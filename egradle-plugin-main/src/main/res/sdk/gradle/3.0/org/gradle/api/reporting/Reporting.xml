@@ -32,7 +32,14 @@
  &lt;/p&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The base type of the report container 
-</description><method name="reports" returnType="T"><description> 
+</description><method name="getReports" returnType="T" delegationTarget="ReportContainer"><description> 
+ A &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; instance. 
+ &lt;p&gt; 
+ Implementors specify a specific implementation of &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; that describes the types of reports that 
+ are available. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
+</description></method><method name="reports" returnType="T"><description> 
  Allow configuration of the report container by closure. 
  
  &lt;pre&gt; 
@@ -45,14 +52,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getReports" returnType="T" delegationTarget="ReportContainer"><description> 
- A &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; instance. 
- &lt;p&gt; 
- Implementors specify a specific implementation of &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; that describes the types of reports that 
- are available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
-</description></method><method name="reports" returnType="T"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="reports" returnType="T"><description> 
  Allow configuration of the report container by closure. 
  
  &lt;pre&gt; 

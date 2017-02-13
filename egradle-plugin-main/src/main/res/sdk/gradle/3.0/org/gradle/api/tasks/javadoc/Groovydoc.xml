@@ -4,112 +4,112 @@
  &lt;p&gt;This task uses Groovy's Groovydoc tool to generate the API documentation. Please note 
  that the Groovydoc tool has some limitations at the moment. The version of the Groovydoc 
  that is used, is the one from the Groovy dependency defined in the build script. 
-</description><method name="getWindowTitle" returnType="java.lang.String" delegationTarget="null"><description> 
- Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
+</description><method name="checkGroovyClasspathNonEmpty" returnType="void"><parameter type="java.util.Collection" name="classpath"/></method><method name="generate" returnType="void"/><method name="getAntGroovydoc" returnType="org.gradle.api.internal.tasks.AntGroovydoc"/><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath used to locate classes referenced by the documented sources. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath used to locate classes referenced by the documented sources 
+</description></method><method name="getDestinationDir" returnType="java.io.File"><description> 
+ Returns the directory to generate the documentation into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory to generate the documentation into 
+</description></method><method name="getDocTitle" returnType="java.lang.String" delegationTarget="null"><description> 
+ Returns the title for the package index(first) page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no document title. 
+</description></method><method name="getFooter" returnType="java.lang.String" delegationTarget="null"><description> 
+ Returns the HTML footer for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no footer. 
 </description></method><method name="getGroovyClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
  Returns the classpath containing the Groovy library to be used. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath containing the Groovy library to be used 
-</description></method><method name="getDocTitle" returnType="java.lang.String" delegationTarget="null"><description> 
- Returns the title for the package index(first) page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no document title. 
-</description></method><method name="getLinks" returnType="java.util.Set"><description> 
- Returns the links to groovydoc/javadoc output at the given URL. 
-</description></method><method name="setNoVersionStamp" returnType="void"><description> 
- Sets whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
-</description><parameter type="boolean" name="noVersionStamp"/></method><method name="getDestinationDir" returnType="java.io.File"><description> 
- Returns the directory to generate the documentation into. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory to generate the documentation into 
 </description></method><method name="getHeader" returnType="java.lang.String" delegationTarget="null"><description> 
  Returns the HTML header for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no header. 
-</description></method><method name="setDocTitle" returnType="void"><description> 
- Sets title for the package index(first) page (optional). 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;docTitle the docTitle as HTML 
-</description><parameter type="java.lang.String" name="docTitle"/></method><method name="getAntGroovydoc" returnType="org.gradle.api.internal.tasks.AntGroovydoc"/><method name="setHeader" returnType="void"><description> 
- Sets header text for each page (optional). 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;header the header as HTML 
-</description><parameter type="java.lang.String" name="header"/></method><method name="getOverviewText" returnType="org.gradle.api.resources.TextResource" delegationTarget="null"><description> 
+</description></method><method name="getLinks" returnType="java.util.Set"><description> 
+ Returns the links to groovydoc/javadoc output at the given URL. 
+</description></method><method name="getOverviewText" returnType="org.gradle.api.resources.TextResource" delegationTarget="null"><description> 
  Returns a HTML text to be used for overview documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no overview text. 
+</description></method><method name="getPathToOverview" returnType="java.lang.String"/><method name="getWindowTitle" returnType="java.lang.String" delegationTarget="null"><description> 
+ Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
+</description></method><method name="isIncludePrivate" returnType="boolean"><description> 
+ Returns whether to include all classes and members (i.e. including private ones). 
+</description></method><method name="isNoTimestamp" returnType="boolean"><description> 
+ Returns whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
+</description></method><method name="isNoVersionStamp" returnType="boolean"><description> 
+ Returns whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
+</description></method><method name="isUse" returnType="boolean"><description> 
+ Returns whether to create class and package usage pages. 
 </description></method><method name="link" returnType="void"><description> 
  Add links to groovydoc/javadoc output at the given URL. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url Base URL of external site 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;packages list of package prefixes 
-</description><parameter type="java.lang.String" name="url"/><parameter type="java.lang.String" name="packages"/></method><method name="setGroovyClasspath" returnType="void"><description> 
- Sets the classpath containing the Groovy library to be used. 
-</description><parameter type="org.gradle.api.file.FileCollection" name="groovyClasspath"/></method><method name="generate" returnType="void"/><method name="setWindowTitle" returnType="void"><description> 
- Sets the browser window title for the documentation. 
+</description><parameter type="java.lang.String" name="url"/><parameter type="java.lang.String" name="packages"/></method><method name="setAntGroovydoc" returnType="void"><parameter type="org.gradle.api.internal.tasks.AntGroovydoc" name="antGroovydoc"/></method><method name="setClasspath" returnType="void"><description> 
+ Sets the classpath used to locate classes referenced by the documented sources. 
+</description><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="setDestinationDir" returnType="void"><description> 
+ Sets the directory to generate the documentation into. 
+</description><parameter type="java.io.File" name="destinationDir"/></method><method name="setDocTitle" returnType="void"><description> 
+ Sets title for the package index(first) page (optional). 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;windowTitle A text for the windows title 
-</description><parameter type="java.lang.String" name="windowTitle"/></method><method name="checkGroovyClasspathNonEmpty" returnType="void"><parameter type="java.util.Collection" name="classpath"/></method><method name="isUse" returnType="boolean"><description> 
- Returns whether to create class and package usage pages. 
-</description></method><method name="setLinks" returnType="void"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;docTitle the docTitle as HTML 
+</description><parameter type="java.lang.String" name="docTitle"/></method><method name="setFooter" returnType="void"><description> 
+ Sets footer text for each page (optional). 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;footer the footer as HTML 
+</description><parameter type="java.lang.String" name="footer"/></method><method name="setGroovyClasspath" returnType="void"><description> 
+ Sets the classpath containing the Groovy library to be used. 
+</description><parameter type="org.gradle.api.file.FileCollection" name="groovyClasspath"/></method><method name="setHeader" returnType="void"><description> 
+ Sets header text for each page (optional). 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;header the header as HTML 
+</description><parameter type="java.lang.String" name="header"/></method><method name="setIncludePrivate" returnType="void"><description> 
+ Sets whether to include all classes and members (i.e. including private ones) if set to true. 
+</description><parameter type="boolean" name="includePrivate"/></method><method name="setLinks" returnType="void"><description> 
  Sets links to groovydoc/javadoc output at the given URL. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;links The links to set 
  @see #link(String, String...) 
-</description><parameter type="java.util.Set" name="links"/></method><method name="isIncludePrivate" returnType="boolean"><description> 
- Returns whether to include all classes and members (i.e. including private ones). 
-</description></method><method name="setClasspath" returnType="void"><description> 
- Sets the classpath used to locate classes referenced by the documented sources. 
-</description><parameter type="org.gradle.api.file.FileCollection" name="classpath"/></method><method name="setDestinationDir" returnType="void"><description> 
- Sets the directory to generate the documentation into. 
-</description><parameter type="java.io.File" name="destinationDir"/></method><method name="setFooter" returnType="void"><description> 
- Sets footer text for each page (optional). 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;footer the footer as HTML 
-</description><parameter type="java.lang.String" name="footer"/></method><method name="isNoTimestamp" returnType="boolean"><description> 
- Returns whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
-</description></method><method name="setAntGroovydoc" returnType="void"><parameter type="org.gradle.api.internal.tasks.AntGroovydoc" name="antGroovydoc"/></method><method name="setUse" returnType="void"><description> 
- Sets whether to create class and package usage pages. 
-</description><parameter type="boolean" name="use"/></method><method name="getClasspath" returnType="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath used to locate classes referenced by the documented sources. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath used to locate classes referenced by the documented sources 
-</description></method><method name="setIncludePrivate" returnType="void"><description> 
- Sets whether to include all classes and members (i.e. including private ones) if set to true. 
-</description><parameter type="boolean" name="includePrivate"/></method><method name="getPathToOverview" returnType="java.lang.String"/><method name="getFooter" returnType="java.lang.String" delegationTarget="null"><description> 
- Returns the HTML footer for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no footer. 
-</description></method><method name="setOverviewText" returnType="void" delegationTarget="overviewText"><description> 
+</description><parameter type="java.util.Set" name="links"/></method><method name="setNoTimestamp" returnType="void"><description> 
+ Sets whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
+</description><parameter type="boolean" name="noTimestamp"/></method><method name="setNoVersionStamp" returnType="void"><description> 
+ Sets whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
+</description><parameter type="boolean" name="noVersionStamp"/></method><method name="setOverviewText" returnType="void" delegationTarget="overviewText"><description> 
  Sets a HTML text to be used for overview documentation (optional). 
  &lt;p&gt; 
  &lt;b&gt;Example:&lt;/b&gt; &lt;a href='type://overviewText = resources.text.fromFile("/overview.html")'&gt;overviewText = resources.text.fromFile("/overview.html")&lt;/a&gt; 
-</description><parameter type="org.gradle.api.resources.TextResource" name="overviewText"/></method><method name="setNoTimestamp" returnType="void"><description> 
- Sets whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
-</description><parameter type="boolean" name="noTimestamp"/></method><method name="isNoVersionStamp" returnType="boolean"><description> 
- Returns whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
-</description></method><property name="includePrivate" type="boolean"><description> 
- Returns whether to include all classes and members (i.e. including private ones). 
-</description></property><property name="groovyClasspath" type="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath containing the Groovy library to be used. 
+</description><parameter type="org.gradle.api.resources.TextResource" name="overviewText"/></method><method name="setUse" returnType="void"><description> 
+ Sets whether to create class and package usage pages. 
+</description><parameter type="boolean" name="use"/></method><method name="setWindowTitle" returnType="void"><description> 
+ Sets the browser window title for the documentation. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath containing the Groovy library to be used 
-</description></property><property name="footer" type="java.lang.String"><description> 
- Returns the HTML footer for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no footer. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;windowTitle A text for the windows title 
+</description><parameter type="java.lang.String" name="windowTitle"/></method><property name="antGroovydoc" type="org.gradle.api.internal.tasks.AntGroovydoc"/><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath used to locate classes referenced by the documented sources. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath used to locate classes referenced by the documented sources 
 </description></property><property name="destinationDir" type="java.io.File"><description> 
  Returns the directory to generate the documentation into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory to generate the documentation into 
-</description></property><property name="antGroovydoc" type="org.gradle.api.internal.tasks.AntGroovydoc"/><property name="docTitle" type="java.lang.String"><description> 
+</description></property><property name="docTitle" type="java.lang.String"><description> 
  Returns the title for the package index(first) page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no document title. 
+</description></property><property name="footer" type="java.lang.String"><description> 
+ Returns the HTML footer for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no footer. 
+</description></property><property name="groovyClasspath" type="org.gradle.api.file.FileCollection"><description> 
+ Returns the classpath containing the Groovy library to be used. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath containing the Groovy library to be used 
 </description></property><property name="header" type="java.lang.String"><description> 
  Returns the HTML header for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no header. 
-</description></property><property name="use" type="boolean"><description> 
- Returns whether to create class and package usage pages. 
-</description></property><property name="pathToOverview" type="java.lang.String"/><property name="noTimestamp" type="boolean"><description> 
+</description></property><property name="includePrivate" type="boolean"><description> 
+ Returns whether to include all classes and members (i.e. including private ones). 
+</description></property><property name="links" type="java.util.Set"><description> 
+ Returns the links to groovydoc/javadoc output at the given URL. 
+</description></property><property name="noTimestamp" type="boolean"><description> 
  Returns whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
 </description></property><property name="noVersionStamp" type="boolean"><description> 
  Returns whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
-</description></property><property name="classpath" type="org.gradle.api.file.FileCollection"><description> 
- Returns the classpath used to locate classes referenced by the documented sources. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath used to locate classes referenced by the documented sources 
-</description></property><property name="windowTitle" type="java.lang.String"><description> 
- Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
 </description></property><property name="overviewText" type="org.gradle.api.resources.TextResource"><description> 
  Returns a HTML text to be used for overview documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no overview text. 
-</description></property><property name="links" type="java.util.Set"><description> 
- Returns the links to groovydoc/javadoc output at the given URL. 
+</description></property><property name="pathToOverview" type="java.lang.String"/><property name="use" type="boolean"><description> 
+ Returns whether to create class and package usage pages. 
+</description></property><property name="windowTitle" type="java.lang.String"><description> 
+ Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
 </description></property></type>

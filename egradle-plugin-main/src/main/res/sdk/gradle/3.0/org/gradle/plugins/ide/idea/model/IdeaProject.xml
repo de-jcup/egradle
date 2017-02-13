@@ -63,8 +63,37 @@
    } 
  } 
  &lt;/pre&gt; 
-</description><method name="getPathFactory" returnType="org.gradle.plugins.ide.idea.model.PathFactory"/><method name="getIpr" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+</description><method name="getIpr" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
  See &lt;a href='type://IdeaProject#ipr(Closure)'&gt;#ipr(Closure)&lt;/a&gt; 
+</description></method><method name="getJdkName" returnType="java.lang.String" delegationTarget="IdeaProject"><description> 
+ The java version used for defining the project sdk. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
+</description></method><method name="getLanguageLevel" returnType="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" delegationTarget="sourceCompatibility"><description> 
+ The default Java language Level to use for this project. 
+ &lt;p&gt; 
+ Generally, it isn't recommended to change this value. Instead, you are encouraged to set &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; and &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; 
+ for your Gradle projects which allows you to have full control over language levels in Gradle projects, and means that Gradle and IDEA will use the same 
+ settings when compiling. 
+ &lt;p&gt; 
+ When not explicitly set, this is calculated as the maximum language level for the Idea modules of this Idea project. 
+</description></method><method name="getModules" returnType="java.util.List" delegationTarget="org.gradle.api.dsl.ConventionProperty"><description> 
+ A &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; that holds modules for the ipr file. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
+ The name of the IDEA project. It is a convenience property that returns the name of the output file (without the file extension). 
+ In IDEA, the project name is driven by the name of the 'ipr' file. 
+</description></method><method name="getOutputFile" returnType="java.io.File" delegationTarget="IdeaProject"><description> 
+ Output *.ipr 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description></method><method name="getPathFactory" returnType="org.gradle.plugins.ide.idea.model.PathFactory"/><method name="getProject" returnType="org.gradle.api.Project"><description> 
+ An owner of this IDEA project. 
+ &lt;p&gt; 
+ If IdeaProject requires some information from gradle this field should not be used for this purpose. 
+</description></method><method name="getProjectLibraries" returnType="java.util.Set"><description> 
+ The project-level libraries to be added to the IDEA project. 
 </description></method><method name="getTargetBytecodeVersion" returnType="org.gradle.api.JavaVersion" delegationTarget="sourceCompatibility"><description> 
  The target bytecode version to use for this project. 
  &lt;p&gt; 
@@ -73,10 +102,22 @@
  settings when compiling. 
  &lt;p&gt; 
  When &lt;a href='type://languageLevel'&gt;languageLevel&lt;/a&gt; is not explicitly set, this is calculated as the maximum target bytecode version for the Idea modules of this Idea project. 
-</description></method><method name="getName" returnType="java.lang.String"><description> 
- The name of the IDEA project. It is a convenience property that returns the name of the output file (without the file extension). 
- In IDEA, the project name is driven by the name of the 'ipr' file. 
-</description></method><method name="setLanguageLevel" returnType="void" delegationTarget="IdeaProject"><description> 
+</description></method><method name="getVcs" returnType="java.lang.String" delegationTarget="IdeaProject"><description> 
+ The vcs for the project. 
+ &lt;p&gt; 
+ Values are the same as used in IDEA's “Version Control” preference window (e.g. 'Git', 'Subversion'). 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description></method><method name="getWildcards" returnType="java.util.Set" delegationTarget="IdeaProject"><description> 
+ The wildcard resource patterns. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description></method><method name="includeModulesFromComposite" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlProject"/></method><method name="ipr" returnType="void" delegationTarget="IdeaProject"><description> 
+ Enables advanced configuration like tinkering with the output XML 
+ or affecting the way existing *.ipr content is merged with Gradle build information. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="mergeXmlProject" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlProject"/></method><method name="setJdkName" returnType="void"><parameter type="java.lang.String" name="jdkName"/></method><method name="setLanguageLevel" returnType="void" delegationTarget="IdeaProject"><description> 
  Sets the java language level for the project. 
  Pass a valid Java version number (e.g. '1.5') or IDEA language level (e.g. 'JDK_1_5'). 
  &lt;p&gt; 
@@ -84,88 +125,12 @@
  &lt;p&gt; 
  When explicitly set in the build script, this setting overrides any calculated values for Idea project 
  and Idea module. 
-</description><parameter type="java.lang.Object" name="languageLevel"/></method><method name="setVcs" returnType="void"><parameter type="java.lang.String" name="vcs"/></method><method name="getProjectLibraries" returnType="java.util.Set"><description> 
- The project-level libraries to be added to the IDEA project. 
-</description></method><method name="setOutputFile" returnType="void"><parameter type="java.io.File" name="outputFile"/></method><method name="includeModulesFromComposite" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlProject"/></method><method name="setProjectLibraries" returnType="void"><parameter type="java.util.Set" name="projectLibraries"/></method><method name="setPathFactory" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.PathFactory" name="pathFactory"/></method><method name="setTargetBytecodeVersion" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetBytecodeVersion"/></method><method name="getVcs" returnType="java.lang.String" delegationTarget="IdeaProject"><description> 
- The vcs for the project. 
- &lt;p&gt; 
- Values are the same as used in IDEA's “Version Control” preference window (e.g. 'Git', 'Subversion'). 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></method><method name="setJdkName" returnType="void"><parameter type="java.lang.String" name="jdkName"/></method><method name="getWildcards" returnType="java.util.Set" delegationTarget="IdeaProject"><description> 
- The wildcard resource patterns. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></method><method name="getProject" returnType="org.gradle.api.Project"><description> 
- An owner of this IDEA project. 
- &lt;p&gt; 
- If IdeaProject requires some information from gradle this field should not be used for this purpose. 
-</description></method><method name="setWildcards" returnType="void"><parameter type="java.util.Set" name="wildcards"/></method><method name="getModules" returnType="java.util.List" delegationTarget="org.gradle.api.dsl.ConventionProperty"><description> 
- A &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; that holds modules for the ipr file. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
-</description></method><method name="ipr" returnType="void" delegationTarget="IdeaProject"><description> 
- Enables advanced configuration like tinkering with the output XML 
- or affecting the way existing *.ipr content is merged with Gradle build information. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setModules" returnType="void"><parameter type="java.util.List" name="modules"/></method><method name="getOutputFile" returnType="java.io.File" delegationTarget="IdeaProject"><description> 
- Output *.ipr 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></method><method name="mergeXmlProject" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlProject"/></method><method name="getLanguageLevel" returnType="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" delegationTarget="sourceCompatibility"><description> 
- The default Java language Level to use for this project. 
- &lt;p&gt; 
- Generally, it isn't recommended to change this value. Instead, you are encouraged to set &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; and &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; 
- for your Gradle projects which allows you to have full control over language levels in Gradle projects, and means that Gradle and IDEA will use the same 
- settings when compiling. 
- &lt;p&gt; 
- When not explicitly set, this is calculated as the maximum language level for the Idea modules of this Idea project. 
-</description></method><method name="getJdkName" returnType="java.lang.String" delegationTarget="IdeaProject"><description> 
- The java version used for defining the project sdk. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
-</description></method><property name="wildcards" type="java.util.Set"><description> 
- The wildcard resource patterns. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
-</description></property><property name="modules" type="java.util.List"><description> 
- A &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; that holds modules for the ipr file. 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
-</description></property><property name="project" type="org.gradle.api.Project"><description> 
- An owner of this IDEA project. 
- &lt;p&gt; 
- If IdeaProject requires some information from gradle this field should not be used for this purpose. 
-</description></property><property name="outputFile" type="java.io.File"><description> 
- Output *.ipr 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="languageLevel"/></method><method name="setModules" returnType="void"><parameter type="java.util.List" name="modules"/></method><method name="setOutputFile" returnType="void"><parameter type="java.io.File" name="outputFile"/></method><method name="setPathFactory" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.PathFactory" name="pathFactory"/></method><method name="setProjectLibraries" returnType="void"><parameter type="java.util.Set" name="projectLibraries"/></method><method name="setTargetBytecodeVersion" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetBytecodeVersion"/></method><method name="setVcs" returnType="void"><parameter type="java.lang.String" name="vcs"/></method><method name="setWildcards" returnType="void"><parameter type="java.util.Set" name="wildcards"/></method><property name="ipr" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
+ See &lt;a href='type://IdeaProject#ipr(Closure)'&gt;#ipr(Closure)&lt;/a&gt; 
 </description></property><property name="jdkName" type="java.lang.String"><description> 
  The java version used for defining the project sdk. 
  &lt;p&gt; 
  See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
-</description></property><property name="name" type="java.lang.String"><description> 
- The name of the IDEA project. It is a convenience property that returns the name of the output file (without the file extension). 
- In IDEA, the project name is driven by the name of the 'ipr' file. 
-</description></property><property name="targetBytecodeVersion" type="org.gradle.api.JavaVersion"><description> 
- The target bytecode version to use for this project. 
- &lt;p&gt; 
- Generally, it isn't recommended to change this value. Instead, you are encouraged to set &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; and &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; 
- for your Gradle projects which allows you to have full control over language levels in Gradle projects, and means that Gradle and IDEA will use the same 
- settings when compiling. 
- &lt;p&gt; 
- When &lt;a href='type://languageLevel'&gt;languageLevel&lt;/a&gt; is not explicitly set, this is calculated as the maximum target bytecode version for the Idea modules of this Idea project. 
-</description></property><property name="pathFactory" type="org.gradle.plugins.ide.idea.model.PathFactory"/><property name="ipr" type="org.gradle.plugins.ide.api.XmlFileContentMerger"><description> 
- See &lt;a href='type://IdeaProject#ipr(Closure)'&gt;#ipr(Closure)&lt;/a&gt; 
-</description></property><property name="projectLibraries" type="java.util.Set"><description> 
- The project-level libraries to be added to the IDEA project. 
-</description></property><property name="vcs" type="java.lang.String"><description> 
- The vcs for the project. 
- &lt;p&gt; 
- Values are the same as used in IDEA's “Version Control” preference window (e.g. 'Git', 'Subversion'). 
- &lt;p&gt; 
- See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description></property><property name="languageLevel" type="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel"><description> 
  The default Java language Level to use for this project. 
  &lt;p&gt; 
@@ -174,4 +139,39 @@
  settings when compiling. 
  &lt;p&gt; 
  When not explicitly set, this is calculated as the maximum language level for the Idea modules of this Idea project. 
+</description></property><property name="modules" type="java.util.List"><description> 
+ A &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; that holds modules for the ipr file. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt; 
+</description></property><property name="name" type="java.lang.String"><description> 
+ The name of the IDEA project. It is a convenience property that returns the name of the output file (without the file extension). 
+ In IDEA, the project name is driven by the name of the 'ipr' file. 
+</description></property><property name="outputFile" type="java.io.File"><description> 
+ Output *.ipr 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description></property><property name="pathFactory" type="org.gradle.plugins.ide.idea.model.PathFactory"/><property name="project" type="org.gradle.api.Project"><description> 
+ An owner of this IDEA project. 
+ &lt;p&gt; 
+ If IdeaProject requires some information from gradle this field should not be used for this purpose. 
+</description></property><property name="projectLibraries" type="java.util.Set"><description> 
+ The project-level libraries to be added to the IDEA project. 
+</description></property><property name="targetBytecodeVersion" type="org.gradle.api.JavaVersion"><description> 
+ The target bytecode version to use for this project. 
+ &lt;p&gt; 
+ Generally, it isn't recommended to change this value. Instead, you are encouraged to set &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; and &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; 
+ for your Gradle projects which allows you to have full control over language levels in Gradle projects, and means that Gradle and IDEA will use the same 
+ settings when compiling. 
+ &lt;p&gt; 
+ When &lt;a href='type://languageLevel'&gt;languageLevel&lt;/a&gt; is not explicitly set, this is calculated as the maximum target bytecode version for the Idea modules of this Idea project. 
+</description></property><property name="vcs" type="java.lang.String"><description> 
+ The vcs for the project. 
+ &lt;p&gt; 
+ Values are the same as used in IDEA's “Version Control” preference window (e.g. 'Git', 'Subversion'). 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
+</description></property><property name="wildcards" type="java.util.Set"><description> 
+ The wildcard resource patterns. 
+ &lt;p&gt; 
+ See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description></property></type>

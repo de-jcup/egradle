@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.logging.configuration.LoggingConfiguration" version="3.0"><description> 
  A &lt;a href='type://LoggingConfiguration'&gt;LoggingConfiguration&lt;/a&gt; defines the logging settings for a Gradle build. 
-</description><method name="getShowStacktrace" returnType="org.gradle.api.logging.configuration.ShowStacktrace"><description> 
+</description><method name="getConsoleOutput" returnType="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
+ Returns the style of logging output that should be written to the console. 
+ Defaults to &lt;a href='type://ConsoleOutput#Auto'&gt;ConsoleOutput#Auto&lt;/a&gt; 
+</description></method><method name="getLogLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
+ Returns the minimum logging level to use. All log messages with a lower log level are ignored. 
+ Defaults to &lt;a href='type://LogLevel#LIFECYCLE'&gt;LogLevel#LIFECYCLE&lt;/a&gt;. 
+</description></method><method name="getShowStacktrace" returnType="org.gradle.api.logging.configuration.ShowStacktrace"><description> 
  Returns the detail that should be included in stacktraces. Defaults to &lt;a href='type://ShowStacktrace#INTERNAL_EXCEPTIONS'&gt;ShowStacktrace#INTERNAL_EXCEPTIONS&lt;/a&gt;. 
-</description></method><method name="setShowStacktrace" returnType="void"><description> 
- Sets the detail that should be included in stacktraces. 
-</description><parameter type="org.gradle.api.logging.configuration.ShowStacktrace" name="showStacktrace"/></method><method name="setConsoleOutput" returnType="void"><description> 
+</description></method><method name="setConsoleOutput" returnType="void"><description> 
  Specifies the style of logging output that should be written to the console. 
-</description><parameter type="org.gradle.api.logging.configuration.ConsoleOutput" name="consoleOutput"/></method><method name="getConsoleOutput" returnType="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
- Returns the style of logging output that should be written to the console. 
- Defaults to &lt;a href='type://ConsoleOutput#Auto'&gt;ConsoleOutput#Auto&lt;/a&gt; 
-</description></method><method name="setLogLevel" returnType="void"><description> 
+</description><parameter type="org.gradle.api.logging.configuration.ConsoleOutput" name="consoleOutput"/></method><method name="setLogLevel" returnType="void"><description> 
  Specifies the minimum logging level to use. All log messages with a lower log level are ignored. 
-</description><parameter type="org.gradle.api.logging.LogLevel" name="logLevel"/></method><method name="getLogLevel" returnType="org.gradle.api.logging.LogLevel"><description> 
- Returns the minimum logging level to use. All log messages with a lower log level are ignored. 
- Defaults to &lt;a href='type://LogLevel#LIFECYCLE'&gt;LogLevel#LIFECYCLE&lt;/a&gt;. 
-</description></method><property name="logLevel" type="org.gradle.api.logging.LogLevel"><description> 
- Returns the minimum logging level to use. All log messages with a lower log level are ignored. 
- Defaults to &lt;a href='type://LogLevel#LIFECYCLE'&gt;LogLevel#LIFECYCLE&lt;/a&gt;. 
-</description></property><property name="consoleOutput" type="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
+</description><parameter type="org.gradle.api.logging.LogLevel" name="logLevel"/></method><method name="setShowStacktrace" returnType="void"><description> 
+ Sets the detail that should be included in stacktraces. 
+</description><parameter type="org.gradle.api.logging.configuration.ShowStacktrace" name="showStacktrace"/></method><property name="consoleOutput" type="org.gradle.api.logging.configuration.ConsoleOutput"><description> 
  Returns the style of logging output that should be written to the console. 
  Defaults to &lt;a href='type://ConsoleOutput#Auto'&gt;ConsoleOutput#Auto&lt;/a&gt; 
+</description></property><property name="logLevel" type="org.gradle.api.logging.LogLevel"><description> 
+ Returns the minimum logging level to use. All log messages with a lower log level are ignored. 
+ Defaults to &lt;a href='type://LogLevel#LIFECYCLE'&gt;LogLevel#LIFECYCLE&lt;/a&gt;. 
 </description></property><property name="showStacktrace" type="org.gradle.api.logging.configuration.ShowStacktrace"><description> 
  Returns the detail that should be included in stacktraces. Defaults to &lt;a href='type://ShowStacktrace#INTERNAL_EXCEPTIONS'&gt;ShowStacktrace#INTERNAL_EXCEPTIONS&lt;/a&gt;. 
 </description></property></type>

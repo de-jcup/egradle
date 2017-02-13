@@ -91,79 +91,26 @@
  } 
  
  &lt;/pre&gt; 
-</description><method name="setSingleEntryLibraries" returnType="void"><parameter type="java.util.Map" name="singleEntryLibraries"/></method><method name="getTargetBytecodeVersion" returnType="org.gradle.api.JavaVersion" delegationTarget="null"><description> 
- The module specific bytecode version to use for this module. 
- When &lt;a href='type://null'&gt;null&lt;/a&gt;, the module will inherit the bytecode version from the idea project. 
- &lt;p&gt; 
- The Idea module bytecode version is based on the &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; settings for the associated Gradle project. 
-</description></method><method name="pathsOf" returnType="java.util.Set"><parameter type="java.util.Set" name="files"/></method><method name="isDownloadSources" returnType="boolean" delegationTarget="IdeaModule"><description> 
- Whether to download and add sources associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="apply" returnType="org.gradle.plugins.ide.idea.model.Path"><parameter type="java.io.File" name="file"/></method><method name="getContentRoot" returnType="java.io.File" delegationTarget="IdeaModule"><description> 
+</description><method name="apply" returnType="boolean"><parameter type="java.io.File" name="file"/></method><method name="existing" returnType="java.util.Set"><parameter type="java.util.Set" name="files"/></method><method name="getContentRoot" returnType="java.io.File" delegationTarget="IdeaModule"><description> 
  The content root directory of the module. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setDownloadSources" returnType="void"><parameter type="boolean" name="downloadSources"/></method><method name="isOffline" returnType="boolean"><description> 
- If true then external artifacts (e.g. those found in repositories) will not be included in the resulting classpath (only project and local file dependencies will be included). 
-</description></method><method name="getOutputFile" returnType="java.io.File"><description> 
- Configures output *.iml file. 
- It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you (including making sure it is unique in the multi-module build). 
- If you really need to change the output file name (or the module name) it is much easier to do it via the &lt;b&gt;moduleName&lt;/b&gt; property! 
- &lt;p&gt; 
- Please refer to documentation on &lt;b&gt;moduleName&lt;/b&gt; property. 
- In IntelliJ IDEA the module name is the same as the name of the *.iml file. 
-</description></method><method name="getPathFactory" returnType="org.gradle.plugins.ide.idea.model.PathFactory"/><method name="mergeXmlModule" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Module" name="xmlModule"/></method><method name="setDownloadJavadoc" returnType="void"><parameter type="boolean" name="downloadJavadoc"/></method><method name="getExcludeDirs" returnType="java.util.Set" delegationTarget="org.gradle.api.dsl.ConventionProperty"><description> 
+</description></method><method name="getExcludeDirs" returnType="java.util.Set" delegationTarget="org.gradle.api.dsl.ConventionProperty"><description> 
  &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for the directories to be excluded. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setTargetBytecodeVersion" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetBytecodeVersion"/></method><method name="getInheritOutputDirs" returnType="java.lang.Boolean" delegationTarget="IdeaModule"><description> 
+</description></method><method name="getGeneratedSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
+ The directories containing the generated sources (both production and test sources). 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="getIml" returnType="org.gradle.plugins.ide.idea.model.IdeaModuleIml"><description> 
+ See &lt;a href='type://IdeaModule#iml(Closure)'&gt;#iml(Closure)&lt;/a&gt; 
+</description></method><method name="getInheritOutputDirs" returnType="java.lang.Boolean" delegationTarget="IdeaModule"><description> 
  If true, output directories for this module will be located below the output directory for the project; 
  otherwise, they will be set to the directories specified by &lt;a href='type://IdeaModule#getOutputDir()'&gt;#getOutputDir()&lt;/a&gt; and &lt;a href='type://IdeaModule#getTestOutputDir()'&gt;#getTestOutputDir()&lt;/a&gt;. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setInheritOutputDirs" returnType="void"><parameter type="java.lang.Boolean" name="inheritOutputDirs"/></method><method name="setScalaPlatform" returnType="void"><parameter type="org.gradle.language.scala.ScalaPlatform" name="scalaPlatform"/></method><method name="existing" returnType="java.util.Set"><parameter type="java.util.Set" name="files"/></method><method name="getOutputDir" returnType="java.io.File" delegationTarget="null"><description> 
- The output directory for production classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setScopes" returnType="void"><parameter type="java.util.Map" name="scopes"/></method><method name="resolveDependencies" returnType="java.util.Set"><description> 
- Resolves and returns the module's dependencies. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependencies 
-</description></method><method name="setGeneratedSourceDirs" returnType="void"><parameter type="java.util.Set" name="generatedSourceDirs"/></method><method name="getSingleEntryLibraries" returnType="java.util.Map"/><method name="setOutputFile" returnType="void"><parameter type="java.io.File" name="newOutputFile"/></method><method name="iml" returnType="void" delegationTarget="IdeaModule"><description> 
- Enables advanced configuration like tinkering with the output XML or affecting the way existing *.iml content is merged with gradle build information. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getPathVariables" returnType="java.util.Map" delegationTarget="GRADLE"><description> 
- The variables to be used for replacing absolute paths in the iml entries. 
- For example, you might add a &lt;a href='type://GRADLE_USER_HOME'&gt;GRADLE_USER_HOME&lt;/a&gt; variable to point to the Gradle user home dir. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="getScopes" returnType="java.util.Map" delegationTarget="org.gradle.api.artifacts.Configuration"><description> 
- The keys of this map are the IDEA scopes. Each key points to another map that has two keys, plus and minus. 
- The values of those keys are collections of &lt;a href='type://org.gradle.api.artifacts.Configuration'&gt;org.gradle.api.artifacts.Configuration&lt;/a&gt; objects. The files of the 
- plus configurations are added minus the files from the minus configurations. See example below... 
- &lt;p&gt; 
- Example how to use scopes property to enable 'provided' dependencies in the output *.iml file: 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- apply plugin: 'idea' 
- 
- configurations { 
-   provided 
-   provided.extendsFrom(compile) 
- } 
- 
- dependencies { 
-   //provided "some.interesting:dependency:1.0" 
- } 
- 
- idea { 
-     scopes.PROVIDED.plus += [ configurations.provided ] 
-   } 
- } 
- &lt;/pre&gt; 
-</description></method><method name="setPathFactory" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.PathFactory" name="pathFactory"/></method><method name="setName" returnType="void"><parameter type="java.lang.String" name="name"/></method><method name="setTestSourceDirs" returnType="void"><parameter type="java.util.Set" name="testSourceDirs"/></method><method name="setPathVariables" returnType="void"><parameter type="java.util.Map" name="pathVariables"/></method><method name="getScalaPlatform" returnType="org.gradle.language.scala.ScalaPlatform"><description> 
- The Scala version used by this module. 
-</description></method><method name="setSourceDirs" returnType="void"><parameter type="java.util.Set" name="sourceDirs"/></method><method name="setContentRoot" returnType="void"><parameter type="java.io.File" name="contentRoot"/></method><method name="getTestSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
- The directories containing the test sources. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="getSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
- The directories containing the production sources. 
+</description></method><method name="getJdkName" returnType="java.lang.String" delegationTarget="null"><description> 
+ The JDK to use for this module. 
+ If &lt;a href='type://null'&gt;null&lt;/a&gt;, the value of the existing or default ipr XML (inherited) is used. 
+ If it is set to &lt;code&gt;inherited&lt;/code&gt;, the project SDK is used. 
+ Otherwise the SDK for the corresponding value of java version is used for this module. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></method><method name="getLanguageLevel" returnType="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" delegationTarget="null"><description> 
@@ -171,11 +118,6 @@
  When &lt;a href='type://null'&gt;null&lt;/a&gt;, the module will inherit the language level from the idea project. 
  &lt;p&gt; 
  The Idea module language level is based on the &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; settings for the associated Gradle project. 
-</description></method><method name="getProject" returnType="org.gradle.api.Project"><description> 
- An owner of this IDEA module. 
- &lt;p&gt; 
- If IdeaModule requires some information from gradle this field should not be used for this purpose. 
- IdeaModule instances should be configured with all necessary information by the plugin or user. 
 </description></method><method name="getName" returnType="java.lang.String" delegationTarget="IdeaModule"><description> 
  Configures module name, that is the name of the *.iml file. 
  &lt;p&gt; 
@@ -200,38 +142,98 @@
  Basically, for non-trivial projects it is recommended to always run &lt;tt&gt;gradle idea&lt;/tt&gt; from the root. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="getOutputDir" returnType="java.io.File" delegationTarget="null"><description> 
+ The output directory for production classes. 
+ If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="getOutputFile" returnType="java.io.File"><description> 
+ Configures output *.iml file. 
+ It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you (including making sure it is unique in the multi-module build). 
+ If you really need to change the output file name (or the module name) it is much easier to do it via the &lt;b&gt;moduleName&lt;/b&gt; property! 
+ &lt;p&gt; 
+ Please refer to documentation on &lt;b&gt;moduleName&lt;/b&gt; property. 
+ In IntelliJ IDEA the module name is the same as the name of the *.iml file. 
+</description></method><method name="getPathFactory" returnType="org.gradle.plugins.ide.idea.model.PathFactory"/><method name="getPathVariables" returnType="java.util.Map" delegationTarget="GRADLE"><description> 
+ The variables to be used for replacing absolute paths in the iml entries. 
+ For example, you might add a &lt;a href='type://GRADLE_USER_HOME'&gt;GRADLE_USER_HOME&lt;/a&gt; variable to point to the Gradle user home dir. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="getProject" returnType="org.gradle.api.Project"><description> 
+ An owner of this IDEA module. 
+ &lt;p&gt; 
+ If IdeaModule requires some information from gradle this field should not be used for this purpose. 
+ IdeaModule instances should be configured with all necessary information by the plugin or user. 
+</description></method><method name="getScalaPlatform" returnType="org.gradle.language.scala.ScalaPlatform"><description> 
+ The Scala version used by this module. 
+</description></method><method name="getScopes" returnType="java.util.Map" delegationTarget="org.gradle.api.artifacts.Configuration"><description> 
+ The keys of this map are the IDEA scopes. Each key points to another map that has two keys, plus and minus. 
+ The values of those keys are collections of &lt;a href='type://org.gradle.api.artifacts.Configuration'&gt;org.gradle.api.artifacts.Configuration&lt;/a&gt; objects. The files of the 
+ plus configurations are added minus the files from the minus configurations. See example below... 
+ &lt;p&gt; 
+ Example how to use scopes property to enable 'provided' dependencies in the output *.iml file: 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ apply plugin: 'idea' 
+ 
+ configurations { 
+   provided 
+   provided.extendsFrom(compile) 
+ } 
+ 
+ dependencies { 
+   //provided "some.interesting:dependency:1.0" 
+ } 
+ 
+ idea { 
+     scopes.PROVIDED.plus += [ configurations.provided ] 
+   } 
+ } 
+ &lt;/pre&gt; 
+</description></method><method name="getSingleEntryLibraries" returnType="java.util.Map"/><method name="getSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
+ The directories containing the production sources. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="getTargetBytecodeVersion" returnType="org.gradle.api.JavaVersion" delegationTarget="null"><description> 
+ The module specific bytecode version to use for this module. 
+ When &lt;a href='type://null'&gt;null&lt;/a&gt;, the module will inherit the bytecode version from the idea project. 
+ &lt;p&gt; 
+ The Idea module bytecode version is based on the &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; settings for the associated Gradle project. 
 </description></method><method name="getTestOutputDir" returnType="java.io.File" delegationTarget="null"><description> 
  The output directory for test classes. 
  If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setOffline" returnType="void"><parameter type="boolean" name="offline"/></method><method name="setExcludeDirs" returnType="void"><parameter type="java.util.Set" name="excludeDirs"/></method><method name="apply" returnType="boolean"><parameter type="java.io.File" name="file"/></method><method name="setOutputDir" returnType="void"><parameter type="java.io.File" name="outputDir"/></method><method name="isDownloadJavadoc" returnType="boolean" delegationTarget="IdeaModule"><description> 
+</description></method><method name="getTestSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
+ The directories containing the test sources. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="iml" returnType="void" delegationTarget="IdeaModule"><description> 
+ Enables advanced configuration like tinkering with the output XML or affecting the way existing *.iml content is merged with gradle build information. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;. 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="isDownloadJavadoc" returnType="boolean" delegationTarget="IdeaModule"><description> 
  Whether to download and add javadoc associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setTestOutputDir" returnType="void"><parameter type="java.io.File" name="testOutputDir"/></method><method name="getGeneratedSourceDirs" returnType="java.util.Set" delegationTarget="IdeaModule"><description> 
+</description></method><method name="isDownloadSources" returnType="boolean" delegationTarget="IdeaModule"><description> 
+ Whether to download and add sources associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></method><method name="isOffline" returnType="boolean"><description> 
+ If true then external artifacts (e.g. those found in repositories) will not be included in the resulting classpath (only project and local file dependencies will be included). 
+</description></method><method name="mergeXmlModule" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.Module" name="xmlModule"/></method><method name="pathsOf" returnType="java.util.Set"><parameter type="java.util.Set" name="files"/></method><method name="resolveDependencies" returnType="java.util.Set"><description> 
+ Resolves and returns the module's dependencies. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependencies 
+</description></method><method name="setContentRoot" returnType="void"><parameter type="java.io.File" name="contentRoot"/></method><method name="setDownloadJavadoc" returnType="void"><parameter type="boolean" name="downloadJavadoc"/></method><method name="setDownloadSources" returnType="void"><parameter type="boolean" name="downloadSources"/></method><method name="setExcludeDirs" returnType="void"><parameter type="java.util.Set" name="excludeDirs"/></method><method name="setGeneratedSourceDirs" returnType="void"><parameter type="java.util.Set" name="generatedSourceDirs"/></method><method name="setInheritOutputDirs" returnType="void"><parameter type="java.lang.Boolean" name="inheritOutputDirs"/></method><method name="setJdkName" returnType="void"><parameter type="java.lang.String" name="jdkName"/></method><method name="setLanguageLevel" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" name="languageLevel"/></method><method name="setName" returnType="void"><parameter type="java.lang.String" name="name"/></method><method name="setOffline" returnType="void"><parameter type="boolean" name="offline"/></method><method name="setOutputDir" returnType="void"><parameter type="java.io.File" name="outputDir"/></method><method name="setOutputFile" returnType="void"><parameter type="java.io.File" name="newOutputFile"/></method><method name="setPathFactory" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.PathFactory" name="pathFactory"/></method><method name="setPathVariables" returnType="void"><parameter type="java.util.Map" name="pathVariables"/></method><method name="setScalaPlatform" returnType="void"><parameter type="org.gradle.language.scala.ScalaPlatform" name="scalaPlatform"/></method><method name="setScopes" returnType="void"><parameter type="java.util.Map" name="scopes"/></method><method name="setSingleEntryLibraries" returnType="void"><parameter type="java.util.Map" name="singleEntryLibraries"/></method><method name="setSourceDirs" returnType="void"><parameter type="java.util.Set" name="sourceDirs"/></method><method name="setTargetBytecodeVersion" returnType="void"><parameter type="org.gradle.api.JavaVersion" name="targetBytecodeVersion"/></method><method name="setTestOutputDir" returnType="void"><parameter type="java.io.File" name="testOutputDir"/></method><method name="setTestSourceDirs" returnType="void"><parameter type="java.util.Set" name="testSourceDirs"/></method><property name="contentRoot" type="java.io.File"><description> 
+ The content root directory of the module. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="downloadJavadoc" type="boolean"><description> 
+ Whether to download and add javadoc associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="downloadSources" type="boolean"><description> 
+ Whether to download and add sources associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="excludeDirs" type="java.util.Set"><description> 
+ &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for the directories to be excluded. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="generatedSourceDirs" type="java.util.Set"><description> 
  The directories containing the generated sources (both production and test sources). 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="setLanguageLevel" returnType="void"><parameter type="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" name="languageLevel"/></method><method name="getJdkName" returnType="java.lang.String" delegationTarget="null"><description> 
- The JDK to use for this module. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, the value of the existing or default ipr XML (inherited) is used. 
- If it is set to &lt;code&gt;inherited&lt;/code&gt;, the project SDK is used. 
- Otherwise the SDK for the corresponding value of java version is used for this module. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></method><method name="getIml" returnType="org.gradle.plugins.ide.idea.model.IdeaModuleIml"><description> 
+</description></property><property name="iml" type="org.gradle.plugins.ide.idea.model.IdeaModuleIml"><description> 
  See &lt;a href='type://IdeaModule#iml(Closure)'&gt;#iml(Closure)&lt;/a&gt; 
-</description></method><method name="setJdkName" returnType="void"><parameter type="java.lang.String" name="jdkName"/></method><property name="pathVariables" type="java.util.Map"><description> 
- The variables to be used for replacing absolute paths in the iml entries. 
- For example, you might add a &lt;a href='type://GRADLE_USER_HOME'&gt;GRADLE_USER_HOME&lt;/a&gt; variable to point to the Gradle user home dir. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="project" type="org.gradle.api.Project"><description> 
- An owner of this IDEA module. 
- &lt;p&gt; 
- If IdeaModule requires some information from gradle this field should not be used for this purpose. 
- IdeaModule instances should be configured with all necessary information by the plugin or user. 
-</description></property><property name="excludeDirs" type="java.util.Set"><description> 
- &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for the directories to be excluded. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></property><property name="inheritOutputDirs" type="java.lang.Boolean"><description> 
  If true, output directories for this module will be located below the output directory for the project; 
  otherwise, they will be set to the directories specified by &lt;a href='type://IdeaModule#getOutputDir()'&gt;#getOutputDir()&lt;/a&gt; and &lt;a href='type://IdeaModule#getTestOutputDir()'&gt;#getTestOutputDir()&lt;/a&gt;. 
@@ -249,12 +251,37 @@
  When &lt;a href='type://null'&gt;null&lt;/a&gt;, the module will inherit the language level from the idea project. 
  &lt;p&gt; 
  The Idea module language level is based on the &lt;a href='type://sourceCompatibility'&gt;sourceCompatibility&lt;/a&gt; settings for the associated Gradle project. 
-</description></property><property name="iml" type="org.gradle.plugins.ide.idea.model.IdeaModuleIml"><description> 
- See &lt;a href='type://IdeaModule#iml(Closure)'&gt;#iml(Closure)&lt;/a&gt; 
-</description></property><property name="testSourceDirs" type="java.util.Set"><description> 
- The directories containing the test sources. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="downloadJavadoc" type="boolean"><description> 
- Whether to download and add javadoc associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Configures module name, that is the name of the *.iml file. 
+ &lt;p&gt; 
+ It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you. 
+ By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt; to make 
+ sure the module name is unique in the scope of a multi-module build. 
+ The 'uniqueness' of a module name is required for correct import into IDEA and the task will make sure the name 
+ is unique. 
+ &lt;p&gt; 
+ &lt;b&gt;since&lt;/b&gt; 1.0-milestone-2 
+ &lt;p&gt; 
+ If your project has problems with unique names it is recommended to always run &lt;tt&gt;gradle idea&lt;/tt&gt; from the 
+ root, i.e. for all subprojects. 
+ If you run the generation of the IDEA module only for a single subproject then you may have different results 
+ because the unique names are calculated based on IDEA modules that are involved in the specific build run. 
+ &lt;p&gt; 
+ If you update the module names then make sure you run &lt;tt&gt;gradle idea&lt;/tt&gt; from the root, e.g. for all 
+ subprojects, including generation of IDEA project. 
+ The reason is that there may be subprojects that depend on the subproject with amended module name. 
+ So you want them to be generated as well because the module dependencies need to refer to the amended project 
+ name. 
+ Basically, for non-trivial projects it is recommended to always run &lt;tt&gt;gradle idea&lt;/tt&gt; from the root. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="offline" type="boolean"><description> 
+ If true then external artifacts (e.g. those found in repositories) will not be included in the resulting classpath (only project and local file dependencies will be included). 
+</description></property><property name="outputDir" type="java.io.File"><description> 
+ The output directory for production classes. 
+ If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></property><property name="outputFile" type="java.io.File"><description> 
  Configures output *.iml file. 
  It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you (including making sure it is unique in the multi-module build). 
@@ -262,11 +289,18 @@
  &lt;p&gt; 
  Please refer to documentation on &lt;b&gt;moduleName&lt;/b&gt; property. 
  In IntelliJ IDEA the module name is the same as the name of the *.iml file. 
-</description></property><property name="outputDir" type="java.io.File"><description> 
- The output directory for production classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
+</description></property><property name="pathFactory" type="org.gradle.plugins.ide.idea.model.PathFactory"/><property name="pathVariables" type="java.util.Map"><description> 
+ The variables to be used for replacing absolute paths in the iml entries. 
+ For example, you might add a &lt;a href='type://GRADLE_USER_HOME'&gt;GRADLE_USER_HOME&lt;/a&gt; variable to point to the Gradle user home dir. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="project" type="org.gradle.api.Project"><description> 
+ An owner of this IDEA module. 
+ &lt;p&gt; 
+ If IdeaModule requires some information from gradle this field should not be used for this purpose. 
+ IdeaModule instances should be configured with all necessary information by the plugin or user. 
+</description></property><property name="scalaPlatform" type="org.gradle.language.scala.ScalaPlatform"><description> 
+ The Scala version used by this module. 
 </description></property><property name="scopes" type="java.util.Map"><description> 
  The keys of this map are the IDEA scopes. Each key points to another map that has two keys, plus and minus. 
  The values of those keys are collections of &lt;a href='type://org.gradle.api.artifacts.Configuration'&gt;org.gradle.api.artifacts.Configuration&lt;/a&gt; objects. The files of the 
@@ -291,54 +325,20 @@
    } 
  } 
  &lt;/pre&gt; 
-</description></property><property name="scalaPlatform" type="org.gradle.language.scala.ScalaPlatform"><description> 
- The Scala version used by this module. 
+</description></property><property name="singleEntryLibraries" type="java.util.Map"/><property name="sourceDirs" type="java.util.Set"><description> 
+ The directories containing the production sources. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></property><property name="targetBytecodeVersion" type="org.gradle.api.JavaVersion"><description> 
  The module specific bytecode version to use for this module. 
  When &lt;a href='type://null'&gt;null&lt;/a&gt;, the module will inherit the bytecode version from the idea project. 
  &lt;p&gt; 
  The Idea module bytecode version is based on the &lt;a href='type://targetCompatibility'&gt;targetCompatibility&lt;/a&gt; settings for the associated Gradle project. 
-</description></property><property name="contentRoot" type="java.io.File"><description> 
- The content root directory of the module. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="pathFactory" type="org.gradle.plugins.ide.idea.model.PathFactory"/><property name="downloadSources" type="boolean"><description> 
- Whether to download and add sources associated with the dependency jars. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></property><property name="testOutputDir" type="java.io.File"><description> 
  The output directory for test classes. 
  If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="offline" type="boolean"><description> 
- If true then external artifacts (e.g. those found in repositories) will not be included in the resulting classpath (only project and local file dependencies will be included). 
-</description></property><property name="sourceDirs" type="java.util.Set"><description> 
- The directories containing the production sources. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="generatedSourceDirs" type="java.util.Set"><description> 
- The directories containing the generated sources (both production and test sources). 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
-</description></property><property name="singleEntryLibraries" type="java.util.Map"/><property name="name" type="java.lang.String"><description> 
- Configures module name, that is the name of the *.iml file. 
- &lt;p&gt; 
- It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you. 
- By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt; to make 
- sure the module name is unique in the scope of a multi-module build. 
- The 'uniqueness' of a module name is required for correct import into IDEA and the task will make sure the name 
- is unique. 
- &lt;p&gt; 
- &lt;b&gt;since&lt;/b&gt; 1.0-milestone-2 
- &lt;p&gt; 
- If your project has problems with unique names it is recommended to always run &lt;tt&gt;gradle idea&lt;/tt&gt; from the 
- root, i.e. for all subprojects. 
- If you run the generation of the IDEA module only for a single subproject then you may have different results 
- because the unique names are calculated based on IDEA modules that are involved in the specific build run. 
- &lt;p&gt; 
- If you update the module names then make sure you run &lt;tt&gt;gradle idea&lt;/tt&gt; from the root, e.g. for all 
- subprojects, including generation of IDEA project. 
- The reason is that there may be subprojects that depend on the subproject with amended module name. 
- So you want them to be generated as well because the module dependencies need to refer to the amended project 
- name. 
- Basically, for non-trivial projects it is recommended to always run &lt;tt&gt;gradle idea&lt;/tt&gt; from the root. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
+</description></property><property name="testSourceDirs" type="java.util.Set"><description> 
+ The directories containing the test sources. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description></property></type>

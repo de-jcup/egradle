@@ -2,7 +2,7 @@
  Base class for tasks that publish a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt;. 
  
  @since 2.4 
-</description><method name="call" returnType="org.gradle.api.file.FileCollection"/><method name="toPublicationInternal" returnType="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"><parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/></method><method name="getPublication" returnType="org.gradle.api.publish.maven.MavenPublication"><description> 
+</description><method name="call" returnType="org.gradle.api.file.FileCollection"/><method name="getLoggingManagerFactory" returnType="org.gradle.internal.Factory"/><method name="getMavenRepositoryLocator" returnType="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/><method name="getPublication" returnType="org.gradle.api.publish.maven.MavenPublication"><description> 
  The publication to be published. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publication to be published 
@@ -10,8 +10,8 @@
  Sets the publication to be published. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;publication The publication to be published 
-</description><parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/></method><method name="getLoggingManagerFactory" returnType="org.gradle.internal.Factory"/><method name="getMavenRepositoryLocator" returnType="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/><property name="publicationInternal" type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"/><property name="loggingManagerFactory" type="org.gradle.internal.Factory"/><property name="publication" type="org.gradle.api.publish.maven.MavenPublication"><description> 
+</description><parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/></method><method name="toPublicationInternal" returnType="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"><parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/></method><property name="loggingManagerFactory" type="org.gradle.internal.Factory"/><property name="mavenRepositoryLocator" type="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/><property name="publication" type="org.gradle.api.publish.maven.MavenPublication"><description> 
  The publication to be published. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publication to be published 
-</description></property><property name="mavenRepositoryLocator" type="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/></type>
+</description></property><property name="publicationInternal" type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"/></type>

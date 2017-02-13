@@ -3,14 +3,14 @@
  
  Exactly one of the XML or HTML reports can be enabled when the task executes. If more than one or none is enabled, an &lt;a href='type://org.gradle.api.InvalidUserDataException'&gt;org.gradle.api.InvalidUserDataException&lt;/a&gt; 
  will be thrown. 
-</description><method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
- The jdepend XML report 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The jdepend XML report 
-</description></method><method name="getText" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
+</description><method name="getText" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
  The jdepend text report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The jdepend text report 
+</description></method><method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
+ The jdepend XML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The jdepend XML report 
 </description></method><property name="text" type="org.gradle.api.reporting.SingleFileReport"><description> 
  The jdepend text report 
  

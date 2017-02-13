@@ -5,9 +5,9 @@
 </description></method><method name="getName" returnType="java.lang.String"><description> 
  Returns the name of this element. Each element has a name associated with it, that uniquely identifies the element amongst its siblings. 
  Some element have their name generated or automatically assigned, and for these elements the name may not be human consumable. 
-</description></method><property name="name" type="java.lang.String"><description> 
+</description></method><property name="displayName" type="java.lang.String"><description> 
+ Returns a human-consumable display name for this element. 
+</description></property><property name="name" type="java.lang.String"><description> 
  Returns the name of this element. Each element has a name associated with it, that uniquely identifies the element amongst its siblings. 
  Some element have their name generated or automatically assigned, and for these elements the name may not be human consumable. 
-</description></property><property name="displayName" type="java.lang.String"><description> 
- Returns a human-consumable display name for this element. 
 </description></property></type>

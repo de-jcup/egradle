@@ -1,6 +1,7 @@
 package de.jcup.egradle.codeassist.dsl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XMLMethod implements ModifiableMethod{
 	
 	@XmlAttribute(name = "name")
-	private String name;
+	String name;
 	
 	@XmlAttribute(name = "returnType")
 	private String returnTypeAsString;
@@ -26,7 +27,7 @@ public class XMLMethod implements ModifiableMethod{
 	private String description;
 
 	@XmlElement(name = "parameter", type=XMLParameter.class)
-	private List<Parameter> parameters = new ArrayList<>();
+	List<Parameter> parameters = new ArrayList<>();
 
 	private Type returnType;
 
@@ -108,6 +109,91 @@ public class XMLMethod implements ModifiableMethod{
 	@Override
 	public Type getDelegationTarget() {
 		return delegationTarget;
+	}
+
+	@Override
+	public int compareTo(Method o) {
+		if (o==null){
+			return 1;
+		}
+		if (o==this){
+			return 0;
+		}
+		if (name==null){
+			return -1;
+		}
+		String otherName = o.getName();
+		if (otherName==null){
+			return 1;
+		}
+		int compared = name.compareTo(otherName);
+		if (compared!=0){
+			return compared;
+		}
+		/* okay - check parameters */
+		List<Parameter> otherParameters = o.getParameters();
+		if (otherParameters==null){
+			return 1;
+		}
+		int diff = parameters.size()-otherParameters.size();
+		if (diff !=0){
+			return diff;
+		}
+		/* same parameter length*/
+		Iterator<Parameter> paramIt=parameters.iterator();
+		Iterator<Parameter> otherParamIt=otherParameters.iterator();
+		while(paramIt.hasNext()){
+			Parameter p = paramIt.next();
+			Parameter op = otherParamIt.next();
+			int paramCompared = p.compareTo(op);
+			if (paramCompared!=0){
+				return paramCompared;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((delegationTargetAsString == null) ? 0 : delegationTargetAsString.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((parameters == null) ? 0 : parameters.hashCode());
+		result = prime * result + ((returnTypeAsString == null) ? 0 : returnTypeAsString.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		XMLMethod other = (XMLMethod) obj;
+		if (delegationTargetAsString == null) {
+			if (other.delegationTargetAsString != null)
+				return false;
+		} else if (!delegationTargetAsString.equals(other.delegationTargetAsString))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (parameters == null) {
+			if (other.parameters != null)
+				return false;
+		} else if (!parameters.equals(other.parameters))
+			return false;
+		if (returnTypeAsString == null) {
+			if (other.returnTypeAsString != null)
+				return false;
+		} else if (!returnTypeAsString.equals(other.returnTypeAsString))
+			return false;
+		return true;
 	}
 
 }

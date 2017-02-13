@@ -4,28 +4,28 @@
  task has finished, etc. 
  
  @since 2.4 
-</description><method name="getDisplayName" returnType="java.lang.String"><description> 
- Returns a human consumable short description of the event. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The short description of the event. 
-</description></method><method name="getDescriptor" returnType="org.gradle.tooling.events.OperationDescriptor"><description> 
+</description><method name="getDescriptor" returnType="org.gradle.tooling.events.OperationDescriptor"><description> 
  Returns the description of the operation for which progress is reported. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the operation. 
+</description></method><method name="getDisplayName" returnType="java.lang.String"><description> 
+ Returns a human consumable short description of the event. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The short description of the event. 
 </description></method><method name="getEventTime" returnType="long"><description> 
  Returns the time this event was triggered. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The event time, in milliseconds since the epoch. 
-</description></method><property name="eventTime" type="long"><description> 
- Returns the time this event was triggered. 
+</description></method><property name="descriptor" type="org.gradle.tooling.events.OperationDescriptor"><description> 
+ Returns the description of the operation for which progress is reported. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The event time, in milliseconds since the epoch. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the operation. 
 </description></property><property name="displayName" type="java.lang.String"><description> 
  Returns a human consumable short description of the event. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The short description of the event. 
-</description></property><property name="descriptor" type="org.gradle.tooling.events.OperationDescriptor"><description> 
- Returns the description of the operation for which progress is reported. 
+</description></property><property name="eventTime" type="long"><description> 
+ Returns the time this event was triggered. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the operation. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The event time, in milliseconds since the epoch. 
 </description></property></type>

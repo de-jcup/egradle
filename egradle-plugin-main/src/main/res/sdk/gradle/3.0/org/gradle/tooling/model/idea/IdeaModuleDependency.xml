@@ -2,22 +2,22 @@
  Dependency on a module in a project. 
  
  @since 1.0-milestone-5 
-</description><method name="getTarget" returnType="org.gradle.tooling.model.idea.IdeaModuleIdentifier"><description> 
+</description><method name="getDependencyModule" returnType="org.gradle.tooling.model.idea.IdeaModule"><description> 
+ returns dependency module, or null if the dependency module is not in the same Gradle build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependency module 
+</description></method><method name="getTarget" returnType="org.gradle.tooling.model.idea.IdeaModuleIdentifier"><description> 
  Returns the identifier of the target Idea module. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null. 
  @since 2.14 
-</description></method><method name="getDependencyModule" returnType="org.gradle.tooling.model.idea.IdeaModule"><description> 
+</description></method><property name="dependencyModule" type="org.gradle.tooling.model.idea.IdeaModule"><description> 
  returns dependency module, or null if the dependency module is not in the same Gradle build. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependency module 
-</description></method><property name="target" type="org.gradle.tooling.model.idea.IdeaModuleIdentifier"><description> 
+</description></property><property name="target" type="org.gradle.tooling.model.idea.IdeaModuleIdentifier"><description> 
  Returns the identifier of the target Idea module. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null. 
  @since 2.14 
-</description></property><property name="dependencyModule" type="org.gradle.tooling.model.idea.IdeaModule"><description> 
- returns dependency module, or null if the dependency module is not in the same Gradle build. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependency module 
 </description></property></type>

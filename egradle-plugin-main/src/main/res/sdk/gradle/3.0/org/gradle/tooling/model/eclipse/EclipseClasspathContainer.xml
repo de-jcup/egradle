@@ -2,20 +2,20 @@
  Eclipse classpath entry used by third-party plugins to contribute to the project's classpath. 
  
  @since 3.0 
-</description><method name="isExported" returnType="boolean"><description> 
- Marks this container as exported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported. 
-</description></method><method name="getPath" returnType="java.lang.String"><description> 
+</description><method name="getPath" returnType="java.lang.String"><description> 
  Returns the path of this container. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this container. Does not return null. 
-</description></method><property name="path" type="java.lang.String"><description> 
- Returns the path of this container. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this container. Does not return null. 
-</description></property><property name="exported" type="boolean"><description> 
+</description></method><method name="isExported" returnType="boolean"><description> 
  Marks this container as exported. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported. 
+</description></method><property name="exported" type="boolean"><description> 
+ Marks this container as exported. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported. 
+</description></property><property name="path" type="java.lang.String"><description> 
+ Returns the path of this container. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this container. Does not return null. 
 </description></property></type>

@@ -1,50 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.publish.ivy.IvyArtifact" version="3.0"><description> 
  An artifact published as part of a &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;. 
-</description><method name="setExtension" returnType="void"><description> 
- Sets the extension used to publish the artifact file. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension The extension. 
-</description><parameter type="java.lang.String" name="extension"/></method><method name="getType" returnType="java.lang.String"><description> 
- The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
-</description></method><method name="getExtension" returnType="java.lang.String"><description> 
- The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
- For an artifact without an extension, this value will be an empty String. 
-</description></method><method name="getName" returnType="java.lang.String"><description> 
- The name used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
- Defaults to the name of the module that this artifact belongs to. 
-</description></method><method name="setType" returnType="void"><description> 
- Sets the type used to publish the artifact file. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. 
-</description><parameter type="java.lang.String" name="type"/></method><method name="getConf" returnType="java.lang.String"><description> 
+</description><method name="builtBy" returnType="void"><description> 
+ Registers some tasks which build this artifact. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="tasks"/></method><method name="getClassifier" returnType="java.lang.String"><description> 
+ The classifier used to publish the artifact file. 
+ A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier. 
+</description></method><method name="getConf" returnType="java.lang.String"><description> 
  A comma separated list of public configurations in which this artifact is published. 
  The '*' wildcard is used to designate that the artifact is published in all public configurations. 
  A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a conf attribute. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of 'conf' for this artifact. 
-</description></method><method name="builtBy" returnType="void"><description> 
- Registers some tasks which build this artifact. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
-</description><parameter type="java.lang.Object" name="tasks"/></method><method name="setName" returnType="void"><description> 
- Sets the name used to publish the artifact file. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
-</description><parameter type="java.lang.String" name="name"/></method><method name="setConf" returnType="void"><description> 
+</description></method><method name="getExtension" returnType="java.lang.String"><description> 
+ The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
+ For an artifact without an extension, this value will be an empty String. 
+</description></method><method name="getFile" returnType="java.io.File"><description> 
+ The actual file contents to publish. 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
+ The name used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
+ Defaults to the name of the module that this artifact belongs to. 
+</description></method><method name="getType" returnType="java.lang.String"><description> 
+ The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
+</description></method><method name="setClassifier" returnType="void"><description> 
+ Sets the classifier used to publish the artifact file. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier. 
+</description><parameter type="java.lang.String" name="classifier"/></method><method name="setConf" returnType="void"><description> 
  Sets a comma separated list of public configurations in which this artifact is published. 
  The '*' wildcard can be used to designate that the artifact is published in all public configurations. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;conf The value of 'conf' for this artifact. 
-</description><parameter type="java.lang.String" name="conf"/></method><method name="setClassifier" returnType="void"><description> 
- Sets the classifier used to publish the artifact file. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier. 
-</description><parameter type="java.lang.String" name="classifier"/></method><method name="getFile" returnType="java.io.File"><description> 
- The actual file contents to publish. 
-</description></method><method name="getClassifier" returnType="java.lang.String"><description> 
+</description><parameter type="java.lang.String" name="conf"/></method><method name="setExtension" returnType="void"><description> 
+ Sets the extension used to publish the artifact file. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension The extension. 
+</description><parameter type="java.lang.String" name="extension"/></method><method name="setName" returnType="void"><description> 
+ Sets the name used to publish the artifact file. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+</description><parameter type="java.lang.String" name="name"/></method><method name="setType" returnType="void"><description> 
+ Sets the type used to publish the artifact file. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. 
+</description><parameter type="java.lang.String" name="type"/></method><property name="classifier" type="java.lang.String"><description> 
  The classifier used to publish the artifact file. 
  A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier. 
-</description></method><property name="file" type="java.io.File"><description> 
- The actual file contents to publish. 
-</description></property><property name="classifier" type="java.lang.String"><description> 
- The classifier used to publish the artifact file. 
- A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier. 
-</description></property><property name="type" type="java.lang.String"><description> 
- The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
 </description></property><property name="conf" type="java.lang.String"><description> 
  A comma separated list of public configurations in which this artifact is published. 
  The '*' wildcard is used to designate that the artifact is published in all public configurations. 
@@ -53,7 +49,11 @@
 </description></property><property name="extension" type="java.lang.String"><description> 
  The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
  For an artifact without an extension, this value will be an empty String. 
+</description></property><property name="file" type="java.io.File"><description> 
+ The actual file contents to publish. 
 </description></property><property name="name" type="java.lang.String"><description> 
  The name used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
  Defaults to the name of the module that this artifact belongs to. 
+</description></property><property name="type" type="java.lang.String"><description> 
+ The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
 </description></property></type>

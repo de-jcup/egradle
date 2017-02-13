@@ -23,7 +23,9 @@
  the platform's default encoding is used. 
  
  @since 2.2 
-</description><method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget=""><description> 
+</description><method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromArchiveEntry"><description> 
+ Same as &lt;a href='type://fromArchiveEntry(archive, path, Charset.defaultCharset().name())'&gt;fromArchiveEntry(archive, path, Charset.defaultCharset().name())&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="archive"/><parameter type="java.lang.String" name="path"/></method><method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget=""><description> 
  Creates a text resource backed by the archive entry at the given path within the given archive. 
  The archive format is determined based on the archive's file extension. If the archive format 
  is not supported or cannot be determined, any attempt to access the resource will fail with an exception. 
@@ -33,14 +35,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the archive entry's character encoding (e.g. &lt;a href='type://"utf-8"'&gt;"utf-8"&lt;/a&gt;) 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the archive entry at the given path within the given archive 
-</description><parameter type="java.lang.Object" name="archive"/><parameter type="java.lang.String" name="entryPath"/><parameter type="java.lang.String" name="charset"/></method><method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromArchiveEntry"><description> 
- Same as &lt;a href='type://fromArchiveEntry(archive, path, Charset.defaultCharset().name())'&gt;fromArchiveEntry(archive, path, Charset.defaultCharset().name())&lt;/a&gt;. 
-</description><parameter type="java.lang.Object" name="archive"/><parameter type="java.lang.String" name="path"/></method><method name="fromString" returnType="org.gradle.api.resources.TextResource"><description> 
- Creates a text resource backed by the given string. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;string a string 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the given string 
-</description><parameter type="java.lang.String" name="string"/></method><method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromFile"><description> 
+</description><parameter type="java.lang.Object" name="archive"/><parameter type="java.lang.String" name="entryPath"/><parameter type="java.lang.String" name="charset"/></method><method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromFile"><description> 
  Same as &lt;a href='type://fromFile(file, Charset.defaultCharset())'&gt;fromFile(file, Charset.defaultCharset())&lt;/a&gt;. 
 </description><parameter type="java.lang.Object" name="file"/></method><method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget=""><description> 
  Creates a text resource backed by the given file. 
@@ -48,4 +43,9 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file a text file evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the file's character encoding (e.g. &lt;a href='type://"utf-8"'&gt;"utf-8"&lt;/a&gt;) 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the given file 
-</description><parameter type="java.lang.Object" name="file"/><parameter type="java.lang.String" name="charset"/></method></type>
+</description><parameter type="java.lang.Object" name="file"/><parameter type="java.lang.String" name="charset"/></method><method name="fromString" returnType="org.gradle.api.resources.TextResource"><description> 
+ Creates a text resource backed by the given string. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;string a string 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the given string 
+</description><parameter type="java.lang.String" name="string"/></method></type>

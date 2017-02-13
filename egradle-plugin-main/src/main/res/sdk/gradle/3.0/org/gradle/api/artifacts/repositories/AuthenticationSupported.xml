@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.AuthenticationSupported" version="3.0"><description> 
  An artifact repository which supports username/password authentication. 
-</description><method name="getAuthentication" returnType="org.gradle.api.artifacts.repositories.AuthenticationContainer"><description> 
- Returns the authentication schemes for this repository. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the authentication schemes for this repository 
-</description></method><method name="authentication" returnType="void" delegationTarget="AuthenticationContainer"><description> 
+</description><method name="authentication" returnType="void" delegationTarget="AuthenticationContainer"><description> 
  &lt;p&gt;Configures the authentication schemes for this repository. 
  
  &lt;p&gt;This method executes the given action against the &lt;a href='type://AuthenticationContainer'&gt;AuthenticationContainer&lt;/a&gt; for this project. The &lt;a href='type://AuthenticationContainer'&gt;AuthenticationContainer&lt;/a&gt; is passed to the closure as the closure's delegate. 
@@ -23,16 +19,7 @@
  Supported authentication scheme types extend &lt;a href='type://org.gradle.authentication.Authentication'&gt;org.gradle.authentication.Authentication&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to use to configure the authentication schemes. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getCredentials" returnType="org.gradle.api.artifacts.repositories.PasswordCredentials" delegationTarget="PasswordCredentials"><description> 
- Returns the username and password credentials used to authenticate to this repository. 
- &lt;p&gt; 
- If no credentials have been assigned to this repository, an empty set of username and password credentials is assigned to this repository and returned. 
- &lt;p&gt; 
- If you are using a different type of credentials than &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt;, please use &lt;a href='type://AuthenticationSupported#getCredentials(Class)'&gt;#getCredentials(Class)&lt;/a&gt; to obtain the credentials. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the credentials 
- @throws IllegalStateException if the credential type was previously set with &lt;a href='type://AuthenticationSupported#credentials(Class, Action)'&gt;#credentials(Class, Action)&lt;/a&gt; where the type was not &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt; 
-</description></method><method name="credentials" returnType="void" delegationTarget="PasswordCredentials"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="credentials" returnType="void" delegationTarget="PasswordCredentials"><description> 
  Configures the username and password credentials for this repository using the supplied action. 
  &lt;p&gt; 
  If no credentials have been assigned to this repository, an empty set of username and password credentials is assigned to this repository and passed to the action. 
@@ -47,15 +34,7 @@
  &lt;/pre&gt; 
  
  @throws IllegalStateException when the credentials assigned to this repository are not of type &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt; 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getCredentials" returnType="T"><description> 
- Returns the credentials of the specified type used to authenticate with this repository. 
- &lt;p&gt; 
- If no credentials have been assigned to this repository, an empty set of credentials of the specified type is assigned to this repository and returned. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;credentialsType type of the credential 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The credentials 
- @throws IllegalArgumentException when the credentials assigned to this repository are not assignable to the specified type 
-</description><parameter type="java.lang.Class" name="credentialsType"/></method><method name="credentials" returnType="void" delegationTarget="credentialsType"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="credentials" returnType="void" delegationTarget="credentialsType"><description> 
  Configures the credentials for this repository using the supplied action. 
  &lt;p&gt; 
  If no credentials have been assigned to this repository, an empty set of credentials of the specified type will be assigned to this repository and given to the configuration action. 
@@ -78,7 +57,28 @@
  
  @throws IllegalArgumentException if &lt;a href='type://credentialsType'&gt;credentialsType&lt;/a&gt; is not of a supported type 
  @throws IllegalArgumentException if &lt;a href='type://credentialsType'&gt;credentialsType&lt;/a&gt; is of a different type to the credentials previously specified for this repository 
-</description><parameter type="java.lang.Class" name="credentialsType"/><parameter type="org.gradle.api.Action" name="action"/></method><property name="authentication" type="org.gradle.api.artifacts.repositories.AuthenticationContainer"><description> 
+</description><parameter type="java.lang.Class" name="credentialsType"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="getAuthentication" returnType="org.gradle.api.artifacts.repositories.AuthenticationContainer"><description> 
+ Returns the authentication schemes for this repository. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the authentication schemes for this repository 
+</description></method><method name="getCredentials" returnType="org.gradle.api.artifacts.repositories.PasswordCredentials" delegationTarget="PasswordCredentials"><description> 
+ Returns the username and password credentials used to authenticate to this repository. 
+ &lt;p&gt; 
+ If no credentials have been assigned to this repository, an empty set of username and password credentials is assigned to this repository and returned. 
+ &lt;p&gt; 
+ If you are using a different type of credentials than &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt;, please use &lt;a href='type://AuthenticationSupported#getCredentials(Class)'&gt;#getCredentials(Class)&lt;/a&gt; to obtain the credentials. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the credentials 
+ @throws IllegalStateException if the credential type was previously set with &lt;a href='type://AuthenticationSupported#credentials(Class, Action)'&gt;#credentials(Class, Action)&lt;/a&gt; where the type was not &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt; 
+</description></method><method name="getCredentials" returnType="T"><description> 
+ Returns the credentials of the specified type used to authenticate with this repository. 
+ &lt;p&gt; 
+ If no credentials have been assigned to this repository, an empty set of credentials of the specified type is assigned to this repository and returned. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;credentialsType type of the credential 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The credentials 
+ @throws IllegalArgumentException when the credentials assigned to this repository are not assignable to the specified type 
+</description><parameter type="java.lang.Class" name="credentialsType"/></method><property name="authentication" type="org.gradle.api.artifacts.repositories.AuthenticationContainer"><description> 
  Returns the authentication schemes for this repository. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the authentication schemes for this repository 

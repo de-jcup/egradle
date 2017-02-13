@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.scala.ScalaPlatform" version="3.0"><description> 
  Defines and configures a Scala Platform. 
-</description><method name="getScalaCompatibilityVersion" returnType="java.lang.String"/><method name="getScalaVersion" returnType="java.lang.String"/><property name="scalaVersion" type="java.lang.String"/><property name="scalaCompatibilityVersion" type="java.lang.String"/></type>
+</description><method name="getScalaCompatibilityVersion" returnType="java.lang.String"/><method name="getScalaVersion" returnType="java.lang.String"/><property name="scalaCompatibilityVersion" type="java.lang.String"/><property name="scalaVersion" type="java.lang.String"/></type>

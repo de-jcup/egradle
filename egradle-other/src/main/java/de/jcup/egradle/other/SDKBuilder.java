@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,12 +25,23 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
+import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.Plugin;
+import de.jcup.egradle.codeassist.dsl.Task;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
+import de.jcup.egradle.codeassist.dsl.XMLPlugin;
+import de.jcup.egradle.codeassist.dsl.XMLPlugins;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLTask;
+import de.jcup.egradle.codeassist.dsl.XMLTasks;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.codeassist.dsl.XMLTypeExtension;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -54,9 +67,14 @@ public class SDKBuilder {
 	 * BlockDetailRenderer.java
 	 */
 	public static void main(String[] args) throws IOException {
-		new SDKBuilder("./../../gradle/subprojects/docs").
-//			startTransformToUserHome(createUserHomeTargetRoot(),"3.0");
-			startTransformToUserHome(new File("./../egradle-plugin-main/src/main/res/"), "3.0");
+		SDKBuilder builder = new SDKBuilder("./../../gradle/subprojects/docs");
+		File srcMainResTarget = new File("./../egradle-plugin-main/src/main/res/");
+		BuilderContext context = builder.buildSDK(srcMainResTarget, "3.0");
+
+		File userHomeTargetPathDirectory = context.createTargetFile(createUserHomeTargetRoot());
+		System.out.println("-- copying from \n"+srcMainResTarget+"\nto:\n"+userHomeTargetPathDirectory);
+		FileUtils.deleteDirectory(userHomeTargetPathDirectory);
+		FileUtils.copyDirectory(context.targetPathDirectory, userHomeTargetPathDirectory);
 	}
 
 	public static File createUserHomeTargetRoot() {
@@ -80,8 +98,11 @@ public class SDKBuilder {
 
 	}
 
-	private XMLDSLTypeImporter importer = new XMLDSLTypeImporter();
-	private XMLDSLTypeExporter exporter = new XMLDSLTypeExporter();
+	private XMLTypeImporter typeImporter = new XMLTypeImporter();
+	private XMLTypeExporter typeExporter = new XMLTypeExporter();
+
+	XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+	XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
 
 	public SDKBuilder(String pathToData) throws IOException {
 		gradleEGradleDSLRootFolder = new File(pathToData, "/build/src-egradle/egradle-dsl");
@@ -93,7 +114,28 @@ public class SDKBuilder {
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
 	}
 
-	public void startTransformToUserHome(File targetRootDirectory, String gradleVersion) throws IOException {
+	public BuilderContext buildSDK(File targetRootDirectory, String gradleVersion) throws IOException {
+		BuilderContext builderContext = createBuilderContext(targetRootDirectory, gradleVersion);
+
+
+		handleApiMappingAndTargetEstimation(builderContext);
+		handlePlugins(builderContext);
+
+		startTaskDataEstimation(builderContext);
+
+		writeTasksFile(builderContext);
+
+		System.out.println("- info:" + builderContext.getInfo());
+		System.out.println("generated into:" + builderContext.targetPathDirectory.getCanonicalPath());
+
+		System.out.println("DONE");
+		return builderContext;
+	}
+
+	private BuilderContext createBuilderContext(File targetRootDirectory, String gradleVersion) throws IOException {
+		BuilderContext builderContext = new BuilderContext();
+		builderContext.gradleVersion=gradleVersion;
+		
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
 
@@ -104,16 +146,26 @@ public class SDKBuilder {
 					+ healthCheck.getCanonicalPath()
 					+ "\nEither your path or version is incorrect or you forgot to generate...");
 		}
-		File targetPathDirectory = new File(targetRootDirectory,"sdk/gradle/"+gradleVersion);
+		File targetPathDirectory = builderContext.createTargetFile(targetRootDirectory);
 		if (targetPathDirectory.exists()) {
 			System.out.println(
 					"Target directory exists - will be deleted before:" + targetPathDirectory.getCanonicalPath());
 			FileUtils.deleteDirectory(targetPathDirectory);
 		}
-		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
+		targetPathDirectory.mkdirs();
+		builderContext.sourceParentDirectory = sourceParentDirectory;
+		builderContext.targetPathDirectory = targetPathDirectory;
+		System.out.println("start generation into:" + builderContext.targetPathDirectory.getCanonicalPath());
 
-		System.out.println("- copy plugins.xml and origin mapping file");
-		FileUtils.copyFile(gradleOriginPluginsFile, new File(targetPathDirectory, gradleOriginPluginsFile.getName()));
+		return builderContext;
+	}
+
+	
+
+	private BuilderContext handleApiMappingAndTargetEstimation(BuilderContext builderContext) throws IOException {
+		System.out.println("- copy api mappings");
+		File sourceParentDirectory = builderContext.sourceParentDirectory;
+		File targetPathDirectory = builderContext.targetPathDirectory;
 		FileUtils.copyFile(gradleOriginMappingFile, new File(targetPathDirectory, gradleOriginMappingFile.getName()));
 
 		System.out.println("- inspect files and generate targets");
@@ -121,7 +173,6 @@ public class SDKBuilder {
 		 * create alternative api-mapping because e.g EclipseWTP is not listed
 		 * in orgin mapping file!
 		 */
-		BuilderContext builderContext = new BuilderContext();
 		Map<String, String> alternativeApiMapping = new TreeMap<>();
 		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory,
 				builderContext);
@@ -143,11 +194,156 @@ public class SDKBuilder {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))) {
 			bw.write(sb.toString());
 		}
-		System.out.println("- normal file generation done, type:// is now set in hyperlinks");
-		System.out.println("- start delegatesTo estimation");
+		return builderContext;
+	}
+
+	private void handlePlugins(BuilderContext builderContext) throws IOException, FileNotFoundException {
+		System.out.println("- adopt plugins.xml");
+		File targetXMLPluginsFile = new File(builderContext.targetPathDirectory, gradleOriginPluginsFile.getName());
+		try (FileInputStream fis = new FileInputStream(gradleOriginPluginsFile);
+				FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
+		
+			XMLPlugins xmlPlugins = pluginsImporter.importPlugins(fis);
+			appendMissingPluginExtensions(xmlPlugins);
+
+			pluginsExporter.exportPlugins(xmlPlugins, outputStream);
+
+		}
+		System.out.println("- written:" + targetXMLPluginsFile);
+	}
+
+	private void appendMissingPluginExtensions(XMLPlugins xmlPlugins) {
+		Set<Plugin> plugins = xmlPlugins.getPlugins();
+		// boolean jarPluginFound = false;
+		// boolean zipPluginFound = false;
+		// for (Plugin p: plugins){
+		// if ("jar".equals(p.getId())){
+		// jarPluginFound=true;
+		// }
+		// if ("zip".equals(p.getId())){
+		// jarPluginFound=true;
+		// }
+		// }
+		/* append missing ones */
+		XMLPlugin corePlugin = addPlugin(plugins, "core", "Core Plugin");
+		addExtension(corePlugin, "jar", "org.gradle.api.tasks.bundling.Jar");
+		addExtension(corePlugin, "zip", "org.gradle.api.tasks.bundling.Zip");
+		addExtension(corePlugin, "tar", "org.gradle.api.tasks.bundling.Tar");
+
+	}
+
+	// <plugin id="war" description="War Plugin">
+	// <extends targetClass="org.gradle.api.Project"
+	// mixinClass="org.gradle.api.plugins.WarPluginConvention"/>
+	// </plugin>
+	private XMLPlugin addPlugin(Set<Plugin> plugins, String id, String description) {
+		XMLPlugin plugin = new XMLPlugin();
+		plugin.setId(id);
+		plugin.setDescription(description + "(added by SDK builder)");
+		plugins.add(plugin);
+		return plugin;
+	}
+
+	private void addExtension(XMLPlugin plugin, String extensionId, String extensionTypeAsString) {
+		XMLTypeExtension jarTypeExtension = new XMLTypeExtension();
+		jarTypeExtension.setId(extensionId);
+		jarTypeExtension.setTargetTypeAsString("org.gradle.api.Project");
+		jarTypeExtension.setExtensionTypeAsString(extensionTypeAsString);
+		plugin.getExtensions().add(jarTypeExtension);
+	}
+
+	private void writeTasksFile(BuilderContext builderContext) throws IOException {
+		XMLTasksExporter exporter = new XMLTasksExporter();
+		File outputFile = new File(builderContext.targetPathDirectory, "tasks.xml");
+		XMLTasks tasks = new XMLTasks();
+		Set<Task> xmlTasks = tasks.getTasks();
+		for (String key : builderContext.tasks.keySet()) {
+			if (key.indexOf("org.gradle") != -1) {
+				/* we only show tasks from API */
+				if (key.indexOf("org.gradle.api") == -1) {
+					continue;
+				}
+			}
+			if (key.indexOf("Abstract") != -1) {
+				/* we ignore abstract tasks */
+				continue;
+			}
+			Type taskType = builderContext.tasks.get(key);
+
+			XMLTask task = new XMLTask();
+			task.setType(taskType);
+			task.setTypeAsString(taskType.getName());
+			task.setName(taskType.getShortName().toLowerCase());
+
+			xmlTasks.add(task);
+		}
+
+		try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+			exporter.exportTasks(tasks, fos);
+		}
+
+	}
+
+	private void startTaskDataEstimation(BuilderContext builderContext) {
 		/* now load the xml files as type data - and inspect all descriptions */
-		System.out.println("- info:" + builderContext.getInfo());
-		System.out.println("DONE");
+		System.out.println("- start task data estimation");
+		XMLTypeImporter typeImporter = new XMLTypeImporter();
+		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		loader.setDSLFolder(builderContext.targetPathDirectory);
+		GradleDSLTypeProvider provider = new GradleDSLTypeProvider(loader);
+		for (String typeName : builderContext.allTypes) {
+			tryToResolveTask(builderContext, provider, typeName);
+		}
+	}
+
+	private void tryToResolveTask(BuilderContext builderContext, GradleDSLTypeProvider provider, String typeName) {
+
+		Type type = provider.getType(typeName);
+		if (type == null) {
+			throw new IllegalArgumentException("typeAsString:" + typeName + ", type:" + type + " is null!!?");
+		}
+		String typeAsString = type.getName();
+
+		/*
+		 * FIXME ATR, 12.02.2017: problematic, not all data avialbel - e.g.
+		 * AbstractTAsk not inside, no interfaces like org.gradle.api.Task
+		 * available etc.
+		 */
+		boolean isTask = false;
+		isTask = type.isDescendantOf("org.gradle.api.DefaultTask)");
+		// isTask=isTask ||
+		// type.isDescendantOf("org.gradle.api.tasks.AbstractCopyTask");
+		// isTask=isTask ||
+		// type.isDescendantOf("org.gradle.api.tasks.AbstractExecTask");
+		/*
+		 * FIXME ATR, 13.02.2017: change this!!! this is ultra ugly implemented
+		 * Either use ASM or do it by reflection on runtime, but every task
+		 * (everything implementing the interface )must be fetched!
+		 */
+		// isTask=isTask ||
+		// type.isDescendantOf("org.gradle.api.tasks.AbstractExecTask");
+		if (!isTask) {
+			if (typeAsString.startsWith("org.gradle") && typeAsString.endsWith("Task")) {
+				isTask = true;
+			}
+		}
+		if (!isTask) {
+			for (String acceptedAsTask : builderContext.tasks.keySet()) {
+				if (type.isDescendantOf(acceptedAsTask)) {
+					isTask = true;
+					break;
+				}
+			}
+		}
+		if (isTask) {
+			/*
+			 * FIXME ATR, 12.02.2017: determine reason for type - means plugin.
+			 * necessary for future
+			 */
+			builderContext.tasks.put(type.getName(), type);
+		}
 	}
 
 	private void assertDirectoryAndExists(File folder) throws IOException {
@@ -213,15 +409,16 @@ public class SDKBuilder {
 			XMLType type = null;
 
 			try (FileInputStream inputStream = new FileInputStream(newTargetFile)) {
-				type = importer.importType(inputStream);
+				type = typeImporter.importType(inputStream);
 
 			}
 			if (type == null) {
 				throw new IllegalStateException("was not able to read type:" + newTargetFile);
 			}
 			estimateDelegateTargets(type, builderContext);
+			builderContext.allTypes.add(type.getName());
 			try (FileOutputStream outputStream = new FileOutputStream(newTargetFile)) {
-				exporter.exportType(type, outputStream);
+				typeExporter.exportType(type, outputStream);
 			}
 		} catch (IOException e) {
 			throw new IOException("Problems with file:" + newTargetFile.getAbsolutePath(), e);
@@ -229,8 +426,14 @@ public class SDKBuilder {
 	}
 
 	private class BuilderContext {
+		String gradleVersion;
+		File sourceParentDirectory;
+		File targetPathDirectory;
+		Map<String, Type> tasks = new TreeMap<>();
 		int methodWithOutDescriptionCount;
 		int methodAllCount;
+
+		private Set<String> allTypes = new TreeSet<>();
 
 		public String getInfo() {
 			double missingDescriptionPercent = 0;
@@ -240,6 +443,10 @@ public class SDKBuilder {
 			}
 			return "Methods all:" + methodAllCount + " - missing descriptions:" + methodWithOutDescriptionCount + " ="
 					+ missingDescriptionPercent + "%";
+		}
+		
+		public File createTargetFile(File targetRootDirectory) {
+			return new File(targetRootDirectory, "sdk/gradle/" + gradleVersion);
 		}
 	}
 

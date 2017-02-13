@@ -6,30 +6,30 @@
  The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property. 
  
  @since 2.2 
-</description></method><method name="setReportFormat" returnType="void"><parameter type="java.lang.String" name="reportFormat"/></method><method name="setMaxPriority1Violations" returnType="void"><parameter type="int" name="maxPriority1Violations"/></method><method name="getMaxPriority2Violations" returnType="int"><description> 
- The maximum number of priority 2 violations allowed before failing the build. 
-</description></method><method name="setMaxPriority2Violations" returnType="void"><parameter type="int" name="maxPriority2Violations"/></method><method name="setMaxPriority3Violations" returnType="void"><parameter type="int" name="maxPriority3Violations"/></method><method name="getMaxPriority3Violations" returnType="int"><description> 
- The maximum number of priority 3 violations allowed before failing the build. 
-</description></method><method name="setConfig" returnType="void"><parameter type="org.gradle.api.resources.TextResource" name="config"/></method><method name="getConfigFile" returnType="java.io.File"><description> 
+</description></method><method name="getConfigFile" returnType="java.io.File"><description> 
  The CodeNarc configuration file to use. 
-</description></method><method name="setConfigFile" returnType="void"><description> 
- The CodeNarc configuration file to use. 
-</description><parameter type="java.io.File" name="file"/></method><method name="getMaxPriority1Violations" returnType="int"><description> 
+</description></method><method name="getMaxPriority1Violations" returnType="int"><description> 
  The maximum number of priority 1 violations allowed before failing the build. 
+</description></method><method name="getMaxPriority2Violations" returnType="int"><description> 
+ The maximum number of priority 2 violations allowed before failing the build. 
+</description></method><method name="getMaxPriority3Violations" returnType="int"><description> 
+ The maximum number of priority 3 violations allowed before failing the build. 
 </description></method><method name="getReportFormat" returnType="java.lang.String"><description> 
  The format type of the CodeNarc report. One of &lt;tt&gt;html&lt;/tt&gt;, &lt;tt&gt;xml&lt;/tt&gt;, &lt;tt&gt;text&lt;/tt&gt;, &lt;tt&gt;console&lt;/tt&gt;. 
-</description></method><property name="configFile" type="java.io.File"><description> 
+</description></method><method name="setConfig" returnType="void"><parameter type="org.gradle.api.resources.TextResource" name="config"/></method><method name="setConfigFile" returnType="void"><description> 
  The CodeNarc configuration file to use. 
-</description></property><property name="maxPriority2Violations" type="int"><description> 
- The maximum number of priority 2 violations allowed before failing the build. 
-</description></property><property name="config" type="org.gradle.api.resources.TextResource"><description> 
+</description><parameter type="java.io.File" name="file"/></method><method name="setMaxPriority1Violations" returnType="void"><parameter type="int" name="maxPriority1Violations"/></method><method name="setMaxPriority2Violations" returnType="void"><parameter type="int" name="maxPriority2Violations"/></method><method name="setMaxPriority3Violations" returnType="void"><parameter type="int" name="maxPriority3Violations"/></method><method name="setReportFormat" returnType="void"><parameter type="java.lang.String" name="reportFormat"/></method><property name="config" type="org.gradle.api.resources.TextResource"><description> 
  The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property. 
  
  @since 2.2 
+</description></property><property name="configFile" type="java.io.File"><description> 
+ The CodeNarc configuration file to use. 
+</description></property><property name="maxPriority1Violations" type="int"><description> 
+ The maximum number of priority 1 violations allowed before failing the build. 
+</description></property><property name="maxPriority2Violations" type="int"><description> 
+ The maximum number of priority 2 violations allowed before failing the build. 
 </description></property><property name="maxPriority3Violations" type="int"><description> 
  The maximum number of priority 3 violations allowed before failing the build. 
 </description></property><property name="reportFormat" type="java.lang.String"><description> 
  The format type of the CodeNarc report. One of &lt;tt&gt;html&lt;/tt&gt;, &lt;tt&gt;xml&lt;/tt&gt;, &lt;tt&gt;text&lt;/tt&gt;, &lt;tt&gt;console&lt;/tt&gt;. 
-</description></property><property name="maxPriority1Violations" type="int"><description> 
- The maximum number of priority 1 violations allowed before failing the build. 
 </description></property></type>

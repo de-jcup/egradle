@@ -135,7 +135,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		getPluginMerger().merge(type, plugins);
 
 		/* inititialize xml type */
-		for (Method m : type.getMethods()) {
+		for (Method m : type.getDefinedMethods()) {
 			if (!(m instanceof ModifiableMethod)) {
 				continue;
 			}
@@ -159,7 +159,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 				modifiableParam.setType(resolvedParamType);
 			}
 		}
-		for (Property p : type.getProperties()) {
+		for (Property p : type.getDefinedProperties()) {
 			if ( !(p instanceof ModifiableProperty)){
 				continue;
 			}

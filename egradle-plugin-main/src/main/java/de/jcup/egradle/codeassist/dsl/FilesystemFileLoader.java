@@ -13,13 +13,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class FilesystemFileLoader implements DSLFileLoader {
 	private File dslFolder;
-	private XMLDSLTypeImporter typeImporter;
-	private XMLDSLPluginsImporter pluginsImporter;
+	private XMLTypeImporter typeImporter;
+	private XMLPluginsImporter pluginsImporter;
 	private ApiMappingImporter apiMappingImporter;
 	private static final Pattern PATTERN_EVERY_DOT = Pattern.compile("\\.");
 
 	/* FIXME ATR, 06.02.2017:  make an abstract class and provide direct loading from plugin src/res... */
-	public FilesystemFileLoader(XMLDSLTypeImporter typeImporter, XMLDSLPluginsImporter pluginsImporter, ApiMappingImporter apiMappingImporter) {
+	public FilesystemFileLoader(XMLTypeImporter typeImporter, XMLPluginsImporter pluginsImporter, ApiMappingImporter apiMappingImporter) {
 		if (typeImporter == null) {
 			throw new IllegalArgumentException("typeImporter must not be null!");
 		}
@@ -81,7 +81,8 @@ public class FilesystemFileLoader implements DSLFileLoader {
 			throw new FileNotFoundException("Did not found:" + sourceFile);
 		}
 		try(InputStream stream = new FileInputStream(sourceFile)){
-			Set<Plugin> plugins = pluginsImporter.importPlugins(stream);
+			XMLPlugins xmlPlugins = pluginsImporter.importPlugins(stream);
+			Set<Plugin> plugins = xmlPlugins.getPlugins();
 			return plugins;
 			
 		}

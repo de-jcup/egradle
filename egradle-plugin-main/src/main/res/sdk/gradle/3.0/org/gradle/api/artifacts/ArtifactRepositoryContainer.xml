@@ -21,17 +21,11 @@
      url 'some-url' 
  } 
  &lt;/pre&gt; 
-</description><method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/></method><method name="add" returnType="boolean"><description> 
+</description><method name="add" returnType="boolean"><description> 
  Adds a repository to this container, at the end of the repository sequence. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add. 
-</description><parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/></method><method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="getAt" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.String" name="name"/></method><method name="addFirst" returnType="void"><description> 
+</description><parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/></method><method name="addFirst" returnType="void"><description> 
  Adds a repository to this container, at the start of the repository sequence. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add. 
@@ -39,8 +33,14 @@
  Adds a repository to this container, at the end of the repository sequence. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add. 
-</description><parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/></method><property name="byName" type="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
+</description><parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/></method><method name="getAt" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
  {@inheritDoc} 
-</description></property><property name="at" type="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/></method><method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="name"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><property name="at" type="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
+ {@inheritDoc} 
+</description></property><property name="byName" type="org.gradle.api.artifacts.repositories.ArtifactRepository"><description> 
  {@inheritDoc} 
 </description></property></type>

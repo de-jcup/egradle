@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.BinarySpec" version="3.0"><description> 
  Represents a binary that is the result of building a component. 
-</description><method name="getSources" returnType="org.gradle.model.ModelMap"><description> 
- The sources owned by this binary. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the sources owned by the binary. 
-</description></method><method name="isBuildable" returnType="boolean"><description> 
- Can this binary be built in the current environment? 
-</description></method><method name="getTasks" returnType="org.gradle.platform.base.BinaryTasksCollection"><description> 
- The set of tasks associated with this binary. 
-</description></method><method name="getInputs" returnType="org.gradle.api.DomainObjectSet"><description> 
+</description><method name="getInputs" returnType="org.gradle.api.DomainObjectSet"><description> 
  Returns all inputs of the binary. This includes source sets owned by the binary, 
  and other source sets created elsewhere (e.g. inherited from the binary's component). 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all inputs of the binary. 
-</description></method><property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection"><description> 
- The set of tasks associated with this binary. 
-</description></property><property name="sources" type="org.gradle.model.ModelMap"><description> 
+</description></method><method name="getSources" returnType="org.gradle.model.ModelMap"><description> 
  The sources owned by this binary. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the sources owned by the binary. 
-</description></property><property name="buildable" type="boolean"><description> 
+</description></method><method name="getTasks" returnType="org.gradle.platform.base.BinaryTasksCollection"><description> 
+ The set of tasks associated with this binary. 
+</description></method><method name="isBuildable" returnType="boolean"><description> 
+ Can this binary be built in the current environment? 
+</description></method><property name="buildable" type="boolean"><description> 
  Can this binary be built in the current environment? 
 </description></property><property name="inputs" type="org.gradle.api.DomainObjectSet"><description> 
  Returns all inputs of the binary. This includes source sets owned by the binary, 
  and other source sets created elsewhere (e.g. inherited from the binary's component). 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all inputs of the binary. 
+</description></property><property name="sources" type="org.gradle.model.ModelMap"><description> 
+ The sources owned by this binary. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the sources owned by the binary. 
+</description></property><property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection"><description> 
+ The set of tasks associated with this binary. 
 </description></property></type>

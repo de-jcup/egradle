@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ear.EarPluginConvention" version="3.0"><description> 
  Ear Plugin Convention. 
-</description><method name="getAppDirName" returnType="java.lang.String"><description> 
- The name of the application directory, relative to the project directory. 
- Default is "src/main/application". 
-</description></method><method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor"><description> 
- A custom deployment descriptor configuration. 
- Default is an "application.xml" with sensible defaults. 
-</description></method><method name="appDirName" returnType="void"><description> 
+</description><method name="appDirName" returnType="void"><description> 
  Allows changing the application directory. 
  Default is "src/main/application". 
 </description><parameter type="java.lang.String" name="appDirName"/></method><method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.EarPluginConvention" delegationTarget="DeploymentDescriptor"><description> 
@@ -17,18 +11,24 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This. 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="setLibDirName" returnType="void"><parameter type="java.lang.String" name="libDirName"/></method><method name="libDirName" returnType="void"><description> 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="getAppDirName" returnType="java.lang.String"><description> 
+ The name of the application directory, relative to the project directory. 
+ Default is "src/main/application". 
+</description></method><method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor"><description> 
+ A custom deployment descriptor configuration. 
+ Default is an "application.xml" with sensible defaults. 
+</description></method><method name="getLibDirName" returnType="java.lang.String"><description> 
+ The name of the library directory in the EAR file. 
+ Default is "lib". 
+</description></method><method name="libDirName" returnType="void"><description> 
  Allows changing the library directory in the EAR file. Default is "lib". 
-</description><parameter type="java.lang.String" name="libDirName"/></method><method name="getLibDirName" returnType="java.lang.String"><description> 
- The name of the library directory in the EAR file. 
- Default is "lib". 
-</description></method><method name="setAppDirName" returnType="void"><parameter type="java.lang.String" name="appDirName"/></method><method name="setDeploymentDescriptor" returnType="void"><parameter type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor"/></method><property name="libDirName" type="java.lang.String"><description> 
- The name of the library directory in the EAR file. 
- Default is "lib". 
-</description></property><property name="appDirName" type="java.lang.String"><description> 
+</description><parameter type="java.lang.String" name="libDirName"/></method><method name="setAppDirName" returnType="void"><parameter type="java.lang.String" name="appDirName"/></method><method name="setDeploymentDescriptor" returnType="void"><parameter type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor"/></method><method name="setLibDirName" returnType="void"><parameter type="java.lang.String" name="libDirName"/></method><property name="appDirName" type="java.lang.String"><description> 
  The name of the application directory, relative to the project directory. 
  Default is "src/main/application". 
 </description></property><property name="deploymentDescriptor" type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor"><description> 
  A custom deployment descriptor configuration. 
  Default is an "application.xml" with sensible defaults. 
+</description></property><property name="libDirName" type="java.lang.String"><description> 
+ The name of the library directory in the EAR file. 
+ Default is "lib". 
 </description></property></type>

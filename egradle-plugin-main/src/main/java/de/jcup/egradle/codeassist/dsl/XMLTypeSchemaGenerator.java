@@ -8,9 +8,9 @@ import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 
-public class XMLDSLTypeSchemaGenerator {
+public class XMLTypeSchemaGenerator {
 	public static void main(String[] args) throws Exception {
-		new XMLDSLTypeSchemaGenerator().generate();
+		new XMLTypeSchemaGenerator().generate();
 	}
 
 	private void generate() throws Exception {

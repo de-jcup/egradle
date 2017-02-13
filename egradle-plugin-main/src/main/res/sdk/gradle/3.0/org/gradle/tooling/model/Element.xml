@@ -2,24 +2,24 @@
  Described model element. 
  
  @since 1.0-milestone-5 
-</description><method name="getName" returnType="java.lang.String"><description> 
- Returns the name of the element. Note that the name is not a unique identifier. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the element. 
- @since 1.0-milestone-5 
-</description></method><method name="getDescription" returnType="java.lang.String" delegationTarget="null"><description> 
+</description><method name="getDescription" returnType="java.lang.String" delegationTarget="null"><description> 
  Returns the description of the element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  @since 1.0-milestone-5 
-</description></method><property name="name" type="java.lang.String"><description> 
+</description></method><method name="getName" returnType="java.lang.String"><description> 
  Returns the name of the element. Note that the name is not a unique identifier. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the element. 
  @since 1.0-milestone-5 
-</description></property><property name="description" type="java.lang.String"><description> 
+</description></method><property name="description" type="java.lang.String"><description> 
  Returns the description of the element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 
+ @since 1.0-milestone-5 
+</description></property><property name="name" type="java.lang.String"><description> 
+ Returns the name of the element. Note that the name is not a unique identifier. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the element. 
  @since 1.0-milestone-5 
 </description></property></type>

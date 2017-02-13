@@ -9,7 +9,10 @@
 </description><method name="artifact" returnType="void"><description> 
  Adds an Ivy artifact pattern to define where artifacts are located in this repository. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern The ivy pattern 
-</description><parameter type="java.lang.String" name="pattern"/></method><method name="ivy" returnType="void"><description> 
+</description><parameter type="java.lang.String" name="pattern"/></method><method name="getM2Compatible" returnType="boolean" delegationTarget="false"><description> 
+ Tells whether a Maven style layout is to be used for the 'organisation' part, replacing any dots with forward slashes. 
+ Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
+</description></method><method name="ivy" returnType="void"><description> 
  Adds an Ivy pattern to define where ivy files are located in this repository. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern The ivy pattern 
 </description><parameter type="java.lang.String" name="pattern"/></method><method name="setM2compatible" returnType="void" delegationTarget="false"><description> 
@@ -17,15 +20,12 @@
  Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;m2compatible whether a Maven style layout is to be used for the 'organisation' part 
-</description><parameter type="boolean" name="m2compatible"/></method><method name="getM2Compatible" returnType="boolean" delegationTarget="false"><description> 
+</description><parameter type="boolean" name="m2compatible"/></method><property name="m2Compatible" type="boolean"><description> 
  Tells whether a Maven style layout is to be used for the 'organisation' part, replacing any dots with forward slashes. 
  Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
-</description></method><property name="m2compatible" type="boolean"><description> 
+</description></property><property name="m2compatible" type="boolean"><description> 
  Sets whether a Maven style layout is to be used for the 'organisation' part, replacing any dots with forward slashes. 
  Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;m2compatible whether a Maven style layout is to be used for the 'organisation' part 
-</description></property><property name="m2Compatible" type="boolean"><description> 
- Tells whether a Maven style layout is to be used for the 'organisation' part, replacing any dots with forward slashes. 
- Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description></property></type>

@@ -3,25 +3,7 @@
  create elements of new types. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the (base) container element type 
-</description><method name="registerFactory" returnType="void"><description> 
- Registers a factory for creating elements of the specified type. Typically, the specified type 
- is an interface type. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of objects created by the factory 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;factory the factory to register 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of objects created by the factory 
- 
- @throws IllegalArgumentException if the specified type is not a subtype of the container element type 
-</description><parameter type="java.lang.Class" name="type"/><parameter type="org.gradle.api.NamedDomainObjectFactory" name="factory"/></method><method name="registerFactory" returnType="void"><description> 
- Registers a factory for creating elements of the specified type. 
- Typically, the specified type is an interface type. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of objects created by the factory 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;factory the factory to register 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of objects created by the factory 
- 
- @throws IllegalArgumentException if the specified type is not a subtype of the container element type 
-</description><parameter type="java.lang.Class" name="type"/><parameter type="groovy.lang.Closure" name="factory"/></method><method name="registerBinding" returnType="void" delegationTarget="javax.inject.Inject"><description> 
+</description><method name="registerBinding" returnType="void" delegationTarget="javax.inject.Inject"><description> 
  Registers a binding from the specified "public" domain object type to the specified implementation type. 
  Whenever the container is asked to create an element with the binding's public type, it will instantiate 
  the binding's implementation type. If the implementation type has a constructor annotated with 
@@ -32,4 +14,22 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type a public domain object type 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;implementationType the corresponding implementation type 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; a public domain object type 
-</description><parameter type="java.lang.Class" name="type"/><parameter type="java.lang.Class" name="implementationType"/></method></type>
+</description><parameter type="java.lang.Class" name="type"/><parameter type="java.lang.Class" name="implementationType"/></method><method name="registerFactory" returnType="void"><description> 
+ Registers a factory for creating elements of the specified type. 
+ Typically, the specified type is an interface type. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of objects created by the factory 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;factory the factory to register 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of objects created by the factory 
+ 
+ @throws IllegalArgumentException if the specified type is not a subtype of the container element type 
+</description><parameter type="java.lang.Class" name="type"/><parameter type="groovy.lang.Closure" name="factory"/></method><method name="registerFactory" returnType="void"><description> 
+ Registers a factory for creating elements of the specified type. Typically, the specified type 
+ is an interface type. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type of objects created by the factory 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;factory the factory to register 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;U&gt; the type of objects created by the factory 
+ 
+ @throws IllegalArgumentException if the specified type is not a subtype of the container element type 
+</description><parameter type="java.lang.Class" name="type"/><parameter type="org.gradle.api.NamedDomainObjectFactory" name="factory"/></method></type>

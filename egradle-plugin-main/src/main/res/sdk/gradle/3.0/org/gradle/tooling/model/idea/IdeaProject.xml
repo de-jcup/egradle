@@ -14,12 +14,6 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java language settings for the current project, never null. 
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-8, where this method is not supported. 
  @since 2.11 
-</description></method><method name="getModules" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the modules of this IDEA project. Most projects have at least one module. 
- Alias for &lt;a href='type://IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project. 
- @since 1.0-milestone-5 
 </description></method><method name="getJdkName" returnType="java.lang.String"><description> 
  Returns the name of the JDK. 
  
@@ -33,28 +27,15 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The language level to use within the current project. 
  @since 1.0-milestone-5 
-</description></method><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+</description></method><method name="getModules" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the modules of this IDEA project. Most projects have at least one module. 
- Alias for &lt;a href='type://IdeaProject#getModules()'&gt;#getModules()&lt;/a&gt;. 
+ Alias for &lt;a href='type://IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project. 
  @since 1.0-milestone-5 
-</description></property><property name="languageLevel" type="org.gradle.tooling.model.idea.IdeaLanguageLevel"><description> 
- Returns the language level to use within the current project. 
- &lt;p&gt; 
- Note: To determine the project language level &lt;a href='type://IdeaModule#getJavaLanguageSettings()'&gt;IdeaModule#getJavaLanguageSettings()&lt;/a&gt; 
- should be preferred. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The language level to use within the current project. 
- @since 1.0-milestone-5 
-</description></property><property name="jdkName" type="java.lang.String"><description> 
- Returns the name of the JDK. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the JDK. 
- @since 1.0-milestone-5 
-</description></property><property name="modules" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+</description></method><property name="children" type="org.gradle.tooling.model.DomainObjectSet"><description> 
  Returns the modules of this IDEA project. Most projects have at least one module. 
- Alias for &lt;a href='type://IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;. 
+ Alias for &lt;a href='type://IdeaProject#getModules()'&gt;#getModules()&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project. 
  @since 1.0-milestone-5 
@@ -64,4 +45,23 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java language settings for the current project, never null. 
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-8, where this method is not supported. 
  @since 2.11 
+</description></property><property name="jdkName" type="java.lang.String"><description> 
+ Returns the name of the JDK. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the JDK. 
+ @since 1.0-milestone-5 
+</description></property><property name="languageLevel" type="org.gradle.tooling.model.idea.IdeaLanguageLevel"><description> 
+ Returns the language level to use within the current project. 
+ &lt;p&gt; 
+ Note: To determine the project language level &lt;a href='type://IdeaModule#getJavaLanguageSettings()'&gt;IdeaModule#getJavaLanguageSettings()&lt;/a&gt; 
+ should be preferred. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The language level to use within the current project. 
+ @since 1.0-milestone-5 
+</description></property><property name="modules" type="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the modules of this IDEA project. Most projects have at least one module. 
+ Alias for &lt;a href='type://IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project. 
+ @since 1.0-milestone-5 
 </description></property></type>

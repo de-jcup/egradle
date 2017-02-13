@@ -4,13 +4,7 @@
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject'&gt;org.gradle.plugins.ide.eclipse.model.EclipseProject&lt;/a&gt; 
  or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
-</description><method name="withXml" returnType="void"><description> 
- Adds an action to be called when the file has been created. 
- &lt;p&gt; 
- See &lt;a href='type://XmlFileContentMerger#withXml(Closure)'&gt;#withXml(Closure)&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute when the XML has been created. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getXmlTransformer" returnType="org.gradle.internal.xml.XmlTransformer"/><method name="withXml" returnType="void" delegationTarget="XmlProvider"><description> 
+</description><method name="getXmlTransformer" returnType="org.gradle.internal.xml.XmlTransformer"/><method name="setXmlTransformer" returnType="void"><parameter type="org.gradle.internal.xml.XmlTransformer" name="xmlTransformer"/></method><method name="withXml" returnType="void" delegationTarget="XmlProvider"><description> 
  Adds a closure to be called when the file has been created. 
  The XML is passed to the closure as a parameter in form of a &lt;a href='type://XmlProvider'&gt;XmlProvider&lt;/a&gt;. 
  The closure can modify the XML before it is written to the output file. 
@@ -19,4 +13,10 @@
  or &lt;a href='type://org.gradle.plugins.ide.idea.model.IdeaProject'&gt;org.gradle.plugins.ide.idea.model.IdeaProject&lt;/a&gt; and others. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute when the XML has been created. 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setXmlTransformer" returnType="void"><parameter type="org.gradle.internal.xml.XmlTransformer" name="xmlTransformer"/></method><property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/></type>
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="withXml" returnType="void"><description> 
+ Adds an action to be called when the file has been created. 
+ &lt;p&gt; 
+ See &lt;a href='type://XmlFileContentMerger#withXml(Closure)'&gt;#withXml(Closure)&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute when the XML has been created. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/></type>

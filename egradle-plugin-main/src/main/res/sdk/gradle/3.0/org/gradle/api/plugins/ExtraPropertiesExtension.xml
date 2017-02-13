@@ -69,21 +69,6 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to get the value of 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value for the property with the given name. 
  @throws UnknownPropertyException if there is no property registered with the given name 
-</description><parameter type="java.lang.String" name="name"/></method><method name="has" returnType="boolean" delegationTarget="true"><description> 
- Returns whether or not the extension has a property registered via the given name. 
- 
- &lt;pre autoTested=""&gt; 
- assert project.ext.has("foo") == false 
- assert project.hasProperty("foo") == false 
- 
- project.ext.foo = "bar" 
- 
- assert project.ext.has("foo") 
- assert project.hasProperty("foo") 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to check for 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if a property has been registered with this name, otherwise &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description><parameter type="java.lang.String" name="name"/></method><method name="getProperties" returnType="java.util.Map"><description> 
  Returns all of the registered properties and their current values as a map. 
  
@@ -105,7 +90,22 @@
  &lt;/pre&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map. 
-</description></method><method name="set" returnType="void"><description> 
+</description></method><method name="has" returnType="boolean" delegationTarget="true"><description> 
+ Returns whether or not the extension has a property registered via the given name. 
+ 
+ &lt;pre autoTested=""&gt; 
+ assert project.ext.has("foo") == false 
+ assert project.hasProperty("foo") == false 
+ 
+ project.ext.foo = "bar" 
+ 
+ assert project.ext.has("foo") 
+ assert project.hasProperty("foo") 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to check for 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if a property has been registered with this name, otherwise &lt;a href='type://false'&gt;false&lt;/a&gt;. 
+</description><parameter type="java.lang.String" name="name"/></method><method name="set" returnType="void"><description> 
  Updates the value for, or creates, the registered property with the given name to the given value. 
  
  When using an extra properties extension from Groovy, you can also set properties via Groovy's property syntax. 

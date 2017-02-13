@@ -19,47 +19,35 @@
  &lt;/pre&gt; 
  
  More examples in docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;, &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt;, &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
-</description><method name="getClasspath" returnType="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" delegationTarget="EclipseClasspath"><description> 
- Configures eclipse classpath information 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; 
-</description></method><method name="setProject" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseProject" name="project"/></method><method name="jdt" returnType="void" delegationTarget="EclipseProject"><description> 
- Configures eclipse java compatibility information (jdt) 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="project" returnType="void" delegationTarget="EclipseProject"><description> 
- Configures eclipse project information 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="wtp" returnType="void" delegationTarget="EclipseWtp"><description> 
- Configures eclipse wtp information 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getProject" returnType="org.gradle.plugins.ide.eclipse.model.EclipseProject" delegationTarget="EclipseProject"><description> 
- Configures eclipse project information 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></method><method name="setWtp" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtp" name="wtp"/></method><method name="classpath" returnType="void" delegationTarget="EclipseClasspath"><description> 
+</description><method name="classpath" returnType="void" delegationTarget="EclipseClasspath"><description> 
  Configures eclipse classpath information 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setClasspath" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" name="classpath"/></method><method name="getWtp" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtp" delegationTarget="EclipseWtp"><description> 
- Configures eclipse wtp information 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="getClasspath" returnType="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" delegationTarget="EclipseClasspath"><description> 
+ Configures eclipse classpath information 
  &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
-</description></method><method name="setJdt" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" name="jdt"/></method><method name="getJdt" returnType="org.gradle.plugins.ide.eclipse.model.EclipseJdt" delegationTarget="EclipseProject"><description> 
+ For examples see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; 
+</description></method><method name="getJdt" returnType="org.gradle.plugins.ide.eclipse.model.EclipseJdt" delegationTarget="EclipseProject"><description> 
  Configures eclipse java compatibility information (jdt) 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></method><method name="pathVariables" returnType="void" delegationTarget="EclipseModel"><description> 
+</description></method><method name="getProject" returnType="org.gradle.plugins.ide.eclipse.model.EclipseProject" delegationTarget="EclipseProject"><description> 
+ Configures eclipse project information 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description></method><method name="getWtp" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtp" delegationTarget="EclipseWtp"><description> 
+ Configures eclipse wtp information 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
+</description></method><method name="jdt" returnType="void" delegationTarget="EclipseProject"><description> 
+ Configures eclipse java compatibility information (jdt) 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="pathVariables" returnType="void" delegationTarget="EclipseModel"><description> 
  Adds path variables to be used for replacing absolute paths in classpath entries. 
  &lt;p&gt; 
  If the beginning of the absolute path of a library or other path-related element matches a value of a variable, 
@@ -68,20 +56,32 @@
  For example see docs for &lt;a href='type://EclipseModel'&gt;EclipseModel&lt;/a&gt; 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pathVariables A map with String-&gt;File pairs. 
-</description><parameter type="java.util.Map" name="pathVariables"/></method><property name="wtp" type="org.gradle.plugins.ide.eclipse.model.EclipseWtp"><description> 
- Configures eclipse wtp information 
- &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
-</description></property><property name="project" type="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
+</description><parameter type="java.util.Map" name="pathVariables"/></method><method name="project" returnType="void" delegationTarget="EclipseProject"><description> 
  Configures eclipse project information 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="setClasspath" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" name="classpath"/></method><method name="setJdt" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" name="jdt"/></method><method name="setProject" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseProject" name="project"/></method><method name="setWtp" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtp" name="wtp"/></method><method name="wtp" returnType="void" delegationTarget="EclipseWtp"><description> 
+ Configures eclipse wtp information 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><property name="classpath" type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath"><description> 
+ Configures eclipse classpath information 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; 
 </description></property><property name="jdt" type="org.gradle.plugins.ide.eclipse.model.EclipseJdt"><description> 
  Configures eclipse java compatibility information (jdt) 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
-</description></property><property name="classpath" type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath"><description> 
- Configures eclipse classpath information 
+</description></property><property name="project" type="org.gradle.plugins.ide.eclipse.model.EclipseProject"><description> 
+ Configures eclipse project information 
  &lt;p&gt; 
- For examples see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; 
+ For examples see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
+</description></property><property name="wtp" type="org.gradle.plugins.ide.eclipse.model.EclipseWtp"><description> 
+ Configures eclipse wtp information 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
 </description></property></type>

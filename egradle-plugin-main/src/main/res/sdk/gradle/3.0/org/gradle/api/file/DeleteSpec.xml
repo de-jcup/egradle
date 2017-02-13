@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.file.DeleteSpec" version="3.0"><description> 
  A specification for deleting files from the filesystem. 
-</description><method name="setFollowSymlinks" returnType="void"><description> 
- Specifies whether or not symbolic links should be followed during deletion. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;followSymlinks deletion will follow symlniks when true. 
-</description><parameter type="boolean" name="followSymlinks"/></method><method name="delete" returnType="org.gradle.api.file.DeleteSpec"><description> 
+</description><method name="delete" returnType="org.gradle.api.file.DeleteSpec"><description> 
  Specifies the files to delete. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;files the list of files which should be deleted. Any type of object 
  accepted by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
-</description><parameter type="java.lang.Object" name="files"/></method><property name="followSymlinks" type="boolean"><description> 
+</description><parameter type="java.lang.Object" name="files"/></method><method name="setFollowSymlinks" returnType="void"><description> 
+ Specifies whether or not symbolic links should be followed during deletion. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;followSymlinks deletion will follow symlniks when true. 
+</description><parameter type="boolean" name="followSymlinks"/></method><property name="followSymlinks" type="boolean"><description> 
  Specifies whether or not symbolic links should be followed during deletion. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;followSymlinks deletion will follow symlniks when true. 

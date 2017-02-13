@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseProjectDependency" version="3.0"><description> 
  Represents a dependency on another Eclipse project. 
-</description><method name="getTargetProject" returnType="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
- Returns the target of this dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target project, or null for a dependency on a different build within a composite. 
-</description></method><method name="getPath" returnType="java.lang.String"><description> 
+</description><method name="getPath" returnType="java.lang.String"><description> 
  Returns the path to use for this project dependency. 
-</description></method><method name="isExported" returnType="boolean"><description> 
- Marks this dependency as exported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
- @since 2.5 
 </description></method><method name="getTarget" returnType="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier"><description> 
  Returns the identifier of the target eclipse project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null. 
  @since 2.14 
-</description></method><property name="target" type="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier"><description> 
+</description></method><method name="getTargetProject" returnType="org.gradle.tooling.model.eclipse.HierarchicalEclipseProject"><description> 
+ Returns the target of this dependency. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target project, or null for a dependency on a different build within a composite. 
+</description></method><method name="isExported" returnType="boolean"><description> 
+ Marks this dependency as exported. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
+ @since 2.5 
+</description></method><property name="exported" type="boolean"><description> 
+ Marks this dependency as exported. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
+ @since 2.5 
+</description></property><property name="path" type="java.lang.String"><description> 
+ Returns the path to use for this project dependency. 
+</description></property><property name="target" type="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier"><description> 
  Returns the identifier of the target eclipse project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null. 
@@ -25,11 +32,4 @@
  Returns the target of this dependency. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target project, or null for a dependency on a different build within a composite. 
-</description></property><property name="exported" type="boolean"><description> 
- Marks this dependency as exported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
- @since 2.5 
-</description></property><property name="path" type="java.lang.String"><description> 
- Returns the path to use for this project dependency. 
 </description></property></type>

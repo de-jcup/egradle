@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.BuildResult" version="3.0"><description> 
  &lt;p&gt;A &lt;a href='type://BuildResult'&gt;BuildResult&lt;/a&gt; packages up the results of a build executed by a &lt;a href='type://org.gradle.initialization.GradleLauncher'&gt;org.gradle.initialization.GradleLauncher&lt;/a&gt; instance.&lt;/p&gt; 
-</description><method name="rethrowFailure" returnType="org.gradle.BuildResult"><description> 
+</description><method name="getAction" returnType="java.lang.String"><description> 
+ The action performed by this build. Either `Build` or `Configure`. 
+</description></method><method name="getFailure" returnType="java.lang.Throwable"/><method name="getGradle" returnType="org.gradle.api.invocation.Gradle"/><method name="rethrowFailure" returnType="org.gradle.BuildResult"><description> 
  &lt;p&gt;Rethrows the build failure. Does nothing if there was no build failure.&lt;/p&gt; 
-</description></method><method name="getGradle" returnType="org.gradle.api.invocation.Gradle"/><method name="getAction" returnType="java.lang.String"><description> 
+</description></method><property name="action" type="java.lang.String"><description> 
  The action performed by this build. Either `Build` or `Configure`. 
-</description></method><method name="getFailure" returnType="java.lang.Throwable"/><property name="failure" type="java.lang.Throwable"/><property name="action" type="java.lang.String"><description> 
- The action performed by this build. Either `Build` or `Configure`. 
-</description></property><property name="gradle" type="org.gradle.api.invocation.Gradle"/></type>
+</description></property><property name="failure" type="java.lang.Throwable"/><property name="gradle" type="org.gradle.api.invocation.Gradle"/></type>

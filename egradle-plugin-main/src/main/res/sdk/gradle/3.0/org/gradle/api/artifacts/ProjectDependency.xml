@@ -9,11 +9,11 @@
  associated with this project dependency. 
  
  @see #getDependencyProject() 
-</description></method><property name="projectConfiguration" type="org.gradle.api.artifacts.Configuration"><description> 
+</description></method><property name="dependencyProject" type="org.gradle.api.Project"><description> 
+ Returns the project associated with this project dependency. 
+</description></property><property name="projectConfiguration" type="org.gradle.api.artifacts.Configuration"><description> 
  Returns the configuration associated with this project dependency. The configuration belongs to the project 
  associated with this project dependency. 
  
  @see #getDependencyProject() 
-</description></property><property name="dependencyProject" type="org.gradle.api.Project"><description> 
- Returns the project associated with this project dependency. 
 </description></property></type>

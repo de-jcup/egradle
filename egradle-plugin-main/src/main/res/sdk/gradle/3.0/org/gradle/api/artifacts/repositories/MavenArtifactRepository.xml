@@ -2,28 +2,21 @@
  An artifact repository which uses a Maven format to store artifacts and meta-data. 
  &lt;p&gt; 
  Repositories of this type are created by the &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)&lt;/a&gt; group of methods. 
-</description><method name="setUrl" returnType="void" delegationTarget="File"><description> 
- Sets the base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
- 
- &lt;p&gt;The provided value is evaluated as per &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;. This means, for example, you can pass in a &lt;a href='type://File'&gt;File&lt;/a&gt; object, or a relative path to be evaluated relative 
- to the project directory. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url The base URL. 
-</description><parameter type="java.lang.Object" name="url"/></method><method name="artifactUrls" returnType="void" delegationTarget="File"><description> 
+</description><method name="artifactUrls" returnType="void" delegationTarget="File"><description> 
  Adds some additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
  &lt;p&gt;The provided values are evaluated as per &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;. This means, for example, you can pass in a &lt;a href='type://File'&gt;File&lt;/a&gt; object, or a relative path to be evaluated 
  relative to the project directory. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;urls The URLs to add. 
-</description><parameter type="java.lang.Object" name="urls"/></method><method name="getUrl" returnType="java.net.URI"><description> 
- The base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
-</description></method><method name="getArtifactUrls" returnType="java.util.Set"><description> 
+</description><parameter type="java.lang.Object" name="urls"/></method><method name="getArtifactUrls" returnType="java.util.Set"><description> 
  Returns the additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional URLs. Returns an empty list if there are no such URLs. 
+</description></method><method name="getUrl" returnType="java.net.URI"><description> 
+ The base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description></method><method name="setArtifactUrls" returnType="void" delegationTarget="File"><description> 
  Sets the additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
@@ -31,12 +24,19 @@
  relative to the project directory. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;urls The URLs. 
-</description><parameter type="java.lang.Iterable" name="urls"/></method><property name="url" type="java.net.URI"><description> 
- The base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
+</description><parameter type="java.lang.Iterable" name="urls"/></method><method name="setUrl" returnType="void" delegationTarget="File"><description> 
+ Sets the base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
-</description></property><property name="artifactUrls" type="java.util.Set"><description> 
+ &lt;p&gt;The provided value is evaluated as per &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;. This means, for example, you can pass in a &lt;a href='type://File'&gt;File&lt;/a&gt; object, or a relative path to be evaluated relative 
+ to the project directory. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url The base URL. 
+</description><parameter type="java.lang.Object" name="url"/></method><property name="artifactUrls" type="java.util.Set"><description> 
  Returns the additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional URLs. Returns an empty list if there are no such URLs. 
+</description></property><property name="url" type="java.net.URI"><description> 
+ The base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description></property></type>

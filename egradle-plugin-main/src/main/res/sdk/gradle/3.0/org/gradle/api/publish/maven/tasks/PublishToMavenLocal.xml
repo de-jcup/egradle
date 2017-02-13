@@ -2,4 +2,4 @@
  Publishes a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; to the Maven Local repository. 
  
  @since 1.4 
-</description><method name="publish" returnType="void"/><method name="publish" returnType="void"/></type>
+</description><method name="publish" returnType="void"/></type>

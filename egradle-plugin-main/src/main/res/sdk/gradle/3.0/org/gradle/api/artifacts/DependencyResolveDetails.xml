@@ -3,21 +3,14 @@
  Provides means to manipulate dependency metadata when it is resolved. 
  
  @since 1.4 
-</description><method name="getTarget" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+</description><method name="getRequested" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+ The module, before it is resolved. 
+ The requested module does not change even if there are multiple dependency resolve rules 
+ that manipulate the dependency metadata. 
+</description></method><method name="getTarget" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
  The target module selector used to resolve the dependency. 
  Never returns null. Target module is updated when methods like &lt;a href='type://DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used. 
-</description></method><method name="useVersion" returnType="void"><description> 
- Allows to override the version when the dependency &lt;a href='type://DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt; is resolved. 
- Can be used to select a version that is different than requested. 
- Forcing modules via &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;ResolutionStrategy#force(Object...)&lt;/a&gt; uses this capability. 
- Configuring a version different than requested will cause &lt;a href='type://DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt; method 
- return a target module with updated target version. 
- &lt;p&gt; 
- If you need to change not only the version but also group or name please use the &lt;a href='type://DependencyResolveDetails#useTarget(Object)'&gt;#useTarget(Object)&lt;/a&gt; method. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version to use when resolving this dependency, cannot be null. 
- It is valid to configure the same version as requested. 
-</description><parameter type="java.lang.String" name="version"/></method><method name="useTarget" returnType="void" delegationTarget="ModuleVersionSelector"><description> 
+</description></method><method name="useTarget" returnType="void" delegationTarget="ModuleVersionSelector"><description> 
  Allows to override the details of the dependency (see &lt;a href='type://DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt;) 
  when it is resolved (see &lt;a href='type://DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt;). 
  This method can be used to change the dependency before it is resolved, 
@@ -31,11 +24,18 @@
  or instances of ModuleVersionSelector. 
  
  @since 1.5 
-</description><parameter type="java.lang.Object" name="notation"/></method><method name="getRequested" returnType="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
- The module, before it is resolved. 
- The requested module does not change even if there are multiple dependency resolve rules 
- that manipulate the dependency metadata. 
-</description></method><property name="requested" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
+</description><parameter type="java.lang.Object" name="notation"/></method><method name="useVersion" returnType="void"><description> 
+ Allows to override the version when the dependency &lt;a href='type://DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt; is resolved. 
+ Can be used to select a version that is different than requested. 
+ Forcing modules via &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;ResolutionStrategy#force(Object...)&lt;/a&gt; uses this capability. 
+ Configuring a version different than requested will cause &lt;a href='type://DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt; method 
+ return a target module with updated target version. 
+ &lt;p&gt; 
+ If you need to change not only the version but also group or name please use the &lt;a href='type://DependencyResolveDetails#useTarget(Object)'&gt;#useTarget(Object)&lt;/a&gt; method. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version to use when resolving this dependency, cannot be null. 
+ It is valid to configure the same version as requested. 
+</description><parameter type="java.lang.String" name="version"/></method><property name="requested" type="org.gradle.api.artifacts.ModuleVersionSelector"><description> 
  The module, before it is resolved. 
  The requested module does not change even if there are multiple dependency resolve rules 
  that manipulate the dependency metadata. 

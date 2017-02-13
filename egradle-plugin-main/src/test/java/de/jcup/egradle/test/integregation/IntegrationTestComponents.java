@@ -17,8 +17,8 @@ import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.StaticOffsetProposalFactoryContentProvider;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
-import de.jcup.egradle.codeassist.dsl.XMLDSLPluginsImporter;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
@@ -100,8 +100,8 @@ public class IntegrationTestComponents extends ExternalResource{
 
 		};
 		codeCompletionRegistry = new CodeCompletionRegistry();
-		XMLDSLTypeImporter typeImporter = new XMLDSLTypeImporter();
-		XMLDSLPluginsImporter pluginsImporter = new XMLDSLPluginsImporter();
+		XMLTypeImporter typeImporter = new XMLTypeImporter();
+		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
 		loader.setDSLFolder(new File(TestUtil.SRC_MAIN_RES_FOLDER,"sdk/gradle/3.0")); // FIXME ATR, 07.02.2017: make this changeable!

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.InstallExecutable" version="3.0" superType="org.gradle.api.DefaultTask"><description> 
  Installs an executable with it's dependent libraries so it can be easily executed. 
-</description><method name="getPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform"><description> 
- The platform describing the install target. 
-</description></method><method name="installToDir" returnType="void"><parameter type="java.io.File" name="binaryDir"/></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.nativeplatform.platform.NativePlatform" name="platform"/></method><method name="installWindows" returnType="void"/><method name="install" returnType="void"/><method name="setDestinationDir" returnType="void"><parameter type="java.io.File" name="destinationDir"/></method><method name="setLibs" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="libs"/></method><method name="lib" returnType="void"><description> 
- Adds a set of library files to be installed. The provided libs object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
-</description><parameter type="java.lang.Object" name="libs"/></method><method name="getExecutable" returnType="java.io.File"><description> 
+</description><method name="execute" returnType="void"><parameter type="org.gradle.api.file.CopySpec" name="copySpec"/></method><method name="getDestinationDir" returnType="java.io.File"><description> 
+ The directory to install files into. 
+</description></method><method name="getExecutable" returnType="java.io.File"><description> 
  The executable file to install. 
+</description></method><method name="getFileOperations" returnType="org.gradle.api.internal.file.FileOperations"/><method name="getFileSystem" returnType="org.gradle.internal.nativeintegration.filesystem.FileSystem"/><method name="getLibs" returnType="org.gradle.api.file.FileCollection"><description> 
+ The library files that should be installed. 
+</description></method><method name="getPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform"><description> 
+ The platform describing the install target. 
+</description></method><method name="getRunScript" returnType="java.io.File"><description> 
+ Returns the script file that can be used to run the install image. 
 </description></method><method name="getToolChain" returnType="org.gradle.platform.base.ToolChain"><description> 
  The tool chain used for linking. 
-</description></method><method name="installUnix" returnType="void"/><method name="getDestinationDir" returnType="java.io.File"><description> 
+</description></method><method name="install" returnType="void"/><method name="installToDir" returnType="void"><parameter type="java.io.File" name="binaryDir"/></method><method name="installUnix" returnType="void"/><method name="installWindows" returnType="void"/><method name="lib" returnType="void"><description> 
+ Adds a set of library files to be installed. The provided libs object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+</description><parameter type="java.lang.Object" name="libs"/></method><method name="setDestinationDir" returnType="void"><parameter type="java.io.File" name="destinationDir"/></method><method name="setExecutable" returnType="void"><parameter type="java.io.File" name="executable"/></method><method name="setLibs" returnType="void"><parameter type="org.gradle.api.file.FileCollection" name="libs"/></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.nativeplatform.platform.NativePlatform" name="platform"/></method><method name="setToolChain" returnType="void"><parameter type="org.gradle.platform.base.ToolChain" name="toolChain"/></method><property name="destinationDir" type="java.io.File"><description> 
  The directory to install files into. 
-</description></method><method name="setToolChain" returnType="void"><parameter type="org.gradle.platform.base.ToolChain" name="toolChain"/></method><method name="getFileOperations" returnType="org.gradle.api.internal.file.FileOperations"/><method name="getFileSystem" returnType="org.gradle.internal.nativeintegration.filesystem.FileSystem"/><method name="setExecutable" returnType="void"><parameter type="java.io.File" name="executable"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.file.CopySpec" name="copySpec"/></method><method name="getRunScript" returnType="java.io.File"><description> 
- Returns the script file that can be used to run the install image. 
-</description></method><method name="getLibs" returnType="org.gradle.api.file.FileCollection"><description> 
- The library files that should be installed. 
-</description></method><property name="runScript" type="java.io.File"><description> 
- Returns the script file that can be used to run the install image. 
 </description></property><property name="executable" type="java.io.File"><description> 
  The executable file to install. 
-</description></property><property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/><property name="destinationDir" type="java.io.File"><description> 
- The directory to install files into. 
+</description></property><property name="fileOperations" type="org.gradle.api.internal.file.FileOperations"/><property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/><property name="libs" type="org.gradle.api.file.FileCollection"><description> 
+ The library files that should be installed. 
 </description></property><property name="platform" type="org.gradle.nativeplatform.platform.NativePlatform"><description> 
  The platform describing the install target. 
-</description></property><property name="fileOperations" type="org.gradle.api.internal.file.FileOperations"/><property name="libs" type="org.gradle.api.file.FileCollection"><description> 
- The library files that should be installed. 
+</description></property><property name="runScript" type="java.io.File"><description> 
+ Returns the script file that can be used to run the install image. 
 </description></property><property name="toolChain" type="org.gradle.platform.base.ToolChain"><description> 
  The tool chain used for linking. 
 </description></property></type>

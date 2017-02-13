@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.nativeplatform.HeaderExportingSourceSet" version="3.0"><description> 
  A source set that exposes headers 
-</description><method name="getImplicitHeaders" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
- The headers that are private to this source set and implicitly available. These are not explicitly made available for compilation. 
-</description></method><method name="getExportedHeaders" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
+</description><method name="getExportedHeaders" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
  The headers as a directory set. 
+</description></method><method name="getImplicitHeaders" returnType="org.gradle.api.file.SourceDirectorySet"><description> 
+ The headers that are private to this source set and implicitly available. These are not explicitly made available for compilation. 
 </description></method><property name="exportedHeaders" type="org.gradle.api.file.SourceDirectorySet"><description> 
  The headers as a directory set. 
 </description></property><property name="implicitHeaders" type="org.gradle.api.file.SourceDirectorySet"><description> 

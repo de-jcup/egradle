@@ -2,8 +2,8 @@
  Base type for all JVM test suites. 
  
  @since 2.11 
-</description><method name="getTestedComponent" returnType="org.gradle.jvm.JvmComponentSpec"/><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"><description> 
+</description><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"><description> 
  The set of dependencies applicable to the entire test suite. 
-</description></method><property name="testedComponent" type="org.gradle.jvm.JvmComponentSpec"/><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"><description> 
+</description></method><method name="getTestedComponent" returnType="org.gradle.jvm.JvmComponentSpec"/><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"><description> 
  The set of dependencies applicable to the entire test suite. 
-</description></property></type>
+</description></property><property name="testedComponent" type="org.gradle.jvm.JvmComponentSpec"/></type>

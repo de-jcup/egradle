@@ -2,10 +2,10 @@
  The conventional configuration for the `ProjectReportsPlugin`. 
 </description><method name="getProjectReportDir" returnType="java.io.File"><description> 
  Returns the directory to generate the project reports into. 
-</description></method><method name="getProjects" returnType="java.util.Set"/><method name="getProjectReportDirName" returnType="java.lang.String"><description> 
+</description></method><method name="getProjectReportDirName" returnType="java.lang.String"><description> 
  The name of the directory to generate the project reports into, relative to the project's reports dir. 
-</description></method><method name="setProjectReportDirName" returnType="void"><parameter type="java.lang.String" name="projectReportDirName"/></method><property name="projects" type="java.util.Set"/><property name="projectReportDirName" type="java.lang.String"><description> 
- The name of the directory to generate the project reports into, relative to the project's reports dir. 
-</description></property><property name="projectReportDir" type="java.io.File"><description> 
+</description></method><method name="getProjects" returnType="java.util.Set"/><method name="setProjectReportDirName" returnType="void"><parameter type="java.lang.String" name="projectReportDirName"/></method><property name="projectReportDir" type="java.io.File"><description> 
  Returns the directory to generate the project reports into. 
-</description></property></type>
+</description></property><property name="projectReportDirName" type="java.lang.String"><description> 
+ The name of the directory to generate the project reports into, relative to the project's reports dir. 
+</description></property><property name="projects" type="java.util.Set"/></type>

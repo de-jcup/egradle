@@ -23,11 +23,7 @@
  Returns the plugin convention objects contained in this convention. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
-</description></method><property name="plugins" type="java.util.Map"><description> 
- Returns the plugin convention objects contained in this convention. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
-</description></property><property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"><description> 
+</description></method><property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"><description> 
  Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this 
  convention. 
  
@@ -39,4 +35,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Never returns null. 
  @throws IllegalStateException When there is no such object contained in this convention, or when there are 
  multiple such objects. 
+</description></property><property name="plugins" type="java.util.Map"><description> 
+ Returns the plugin convention objects contained in this convention. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
 </description></property></type>

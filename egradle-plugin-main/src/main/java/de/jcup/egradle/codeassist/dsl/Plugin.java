@@ -2,7 +2,7 @@ package de.jcup.egradle.codeassist.dsl;
 
 import java.util.Set;
 
-public interface Plugin {
+public interface Plugin extends Comparable<Plugin>{
 
 	public String getId();
 	

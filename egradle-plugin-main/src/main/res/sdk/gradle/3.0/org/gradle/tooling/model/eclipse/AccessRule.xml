@@ -4,11 +4,7 @@
  @see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IAccessRule.html"&gt;IAccessRule Javadoc&lt;/a&gt; 
  
  @since 3.0 
-</description><method name="getPattern" returnType="java.lang.String"><description> 
- Returns the file pattern of this access rule. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file pattern of this access rule. 
-</description></method><method name="getKind" returnType="int"><description> 
+</description><method name="getKind" returnType="int"><description> 
  Returns the encoded type of the access rule. The meaning of the values: 
  &lt;ul&gt; 
      &lt;li&gt;0: the rule defines accessible paths&lt;/li&gt; 
@@ -17,11 +13,11 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type of this access rule. 
-</description></method><property name="pattern" type="java.lang.String"><description> 
+</description></method><method name="getPattern" returnType="java.lang.String"><description> 
  Returns the file pattern of this access rule. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file pattern of this access rule. 
-</description></property><property name="kind" type="int"><description> 
+</description></method><property name="kind" type="int"><description> 
  Returns the encoded type of the access rule. The meaning of the values: 
  &lt;ul&gt; 
      &lt;li&gt;0: the rule defines accessible paths&lt;/li&gt; 
@@ -30,4 +26,8 @@
  &lt;/ul&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type of this access rule. 
+</description></property><property name="pattern" type="java.lang.String"><description> 
+ Returns the file pattern of this access rule. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file pattern of this access rule. 
 </description></property></type>

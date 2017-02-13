@@ -12,7 +12,7 @@ public class XMLParameter implements Parameter, ModifiableParameter {
 
 
 	@XmlAttribute(name = "type")
-	private String typeAsString;
+	String typeAsString;
 	
 	@XmlAttribute(name = "name")
 	private String name;
@@ -52,4 +52,47 @@ public class XMLParameter implements Parameter, ModifiableParameter {
 	public String toString() {
 		return "XMLType [name=" + name + ", type="+typeAsString+" ]";
 	}
+
+	@Override
+	public int compareTo(Parameter o) {
+		if (o==null){
+			return 1;
+		}
+		String otherTypeAsString = o.getTypeAsString();
+		if (otherTypeAsString==null){
+			return 1;
+		}
+		if (typeAsString==null){
+			return -1;
+		}
+		int comparedType= typeAsString.compareTo(otherTypeAsString);
+		return comparedType;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((typeAsString == null) ? 0 : typeAsString.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		XMLParameter other = (XMLParameter) obj;
+		if (typeAsString == null) {
+			if (other.typeAsString != null)
+				return false;
+		} else if (!typeAsString.equals(other.typeAsString))
+			return false;
+		return true;
+	}
+	
+	
 }

@@ -10,12 +10,12 @@
  scope of the current dependency. Not-&lt;code&gt;null&lt;/code&gt; all the time 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;scope 
-</description></method><property name="scope" type="org.gradle.tooling.model.idea.IdeaDependencyScope"><description> 
- scope of the current dependency. Not-&lt;code&gt;null&lt;/code&gt; all the time 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;scope 
-</description></property><property name="exported" type="boolean"><description> 
+</description></method><property name="exported" type="boolean"><description> 
  Allows to check if current dependency is transitive, i.e.&lt;!-- --&gt; is visible to the module which depends on module that has current dependency. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;code&gt;true&lt;/code&gt; if current dependency is transitive; &lt;code&gt;false&lt;/code&gt; otherwise 
+</description></property><property name="scope" type="org.gradle.tooling.model.idea.IdeaDependencyScope"><description> 
+ scope of the current dependency. Not-&lt;code&gt;null&lt;/code&gt; all the time 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;scope 
 </description></property></type>

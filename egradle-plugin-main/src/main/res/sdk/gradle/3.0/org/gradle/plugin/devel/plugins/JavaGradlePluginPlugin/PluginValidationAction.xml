@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin.PluginValidationAction" version="3.0"><description> 
  Implements plugin validation tasks to validate that a proper plugin jar is produced. 
-</description><method name="hasFullyQualifiedClass" returnType="boolean"><parameter type="java.lang.String" name="fqClass"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/></method></type>
+</description><method name="execute" returnType="void"><parameter type="org.gradle.api.Task" name="task"/></method><method name="hasFullyQualifiedClass" returnType="boolean"><parameter type="java.lang.String" name="fqClass"/></method></type>

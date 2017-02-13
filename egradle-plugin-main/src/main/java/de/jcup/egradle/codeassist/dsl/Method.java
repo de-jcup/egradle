@@ -7,7 +7,7 @@ import java.util.List;
  * @author Albert Tregnaghi
  *
  */
-public interface Method extends LanguageElement, TypeChild{
+public interface Method extends LanguageElement, TypeChild, Comparable<Method>{
 
 	public Type getReturnType();
 	

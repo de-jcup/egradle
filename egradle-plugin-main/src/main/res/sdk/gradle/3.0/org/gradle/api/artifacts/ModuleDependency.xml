@@ -11,15 +11,7 @@
  the implicit default artifact won't be used any longer.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.artifacts.DependencyArtifact" name="artifact"/></method><method name="getExcludeRules" returnType="java.util.Set"><description> 
- Returns the exclude rules for this dependency. 
- 
- @see #exclude(java.util.Map) 
-</description></method><method name="isTransitive" returnType="boolean"><description> 
- Returns whether this dependency should be resolved including or excluding its transitive dependencies. 
- 
- @see #setTransitive(boolean) 
-</description></method><method name="artifact" returnType="org.gradle.api.artifacts.DependencyArtifact" delegationTarget="org.gradle.api.artifacts.DependencyArtifact"><description> 
+</description><parameter type="org.gradle.api.artifacts.DependencyArtifact" name="artifact"/></method><method name="artifact" returnType="org.gradle.api.artifacts.DependencyArtifact" delegationTarget="org.gradle.api.artifacts.DependencyArtifact"><description> 
  &lt;p&gt;Adds an artifact to this dependency. The given closure is passed a &lt;a href='type://org.gradle.api.artifacts.DependencyArtifact'&gt;org.gradle.api.artifacts.DependencyArtifact&lt;/a&gt; instance, which it can configure.&lt;/p&gt; 
  
  &lt;p&gt;If no artifact is added to a dependency, an implicit default artifact is used. This default artifact has the 
@@ -27,10 +19,8 @@
  the implicit default artifact won't be used any longer.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="getArtifacts" returnType="java.util.Set"><description> 
- Returns the artifacts belonging to this dependency. 
- 
- @see #addArtifact(DependencyArtifact) 
+</description><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="copy" returnType="org.gradle.api.artifacts.ModuleDependency"><description> 
+ {@inheritDoc} 
 </description></method><method name="exclude" returnType="org.gradle.api.artifacts.ModuleDependency"><description> 
  Adds an exclude rule to exclude transitive dependencies of this dependency. 
  &lt;p&gt; 
@@ -62,13 +52,23 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeProperties the properties to define the exclude rule. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.util.Map" name="excludeProperties"/></method><method name="copy" returnType="org.gradle.api.artifacts.ModuleDependency"><description> 
- {@inheritDoc} 
+</description><parameter type="java.util.Map" name="excludeProperties"/></method><method name="getArtifacts" returnType="java.util.Set"><description> 
+ Returns the artifacts belonging to this dependency. 
+ 
+ @see #addArtifact(DependencyArtifact) 
 </description></method><method name="getConfiguration" returnType="java.lang.String"><description> 
  Returns the configuration of this dependency module (not the configurations this dependency belongs too). Never 
  returns null. The default value for the configuration is &lt;a href='type://ModuleDependency#DEFAULT_CONFIGURATION'&gt;#DEFAULT_CONFIGURATION&lt;/a&gt;. A dependency source 
  might have multiple configurations. Every configuration represents a different set of artifacts and dependencies 
  for this dependency module. 
+</description></method><method name="getExcludeRules" returnType="java.util.Set"><description> 
+ Returns the exclude rules for this dependency. 
+ 
+ @see #exclude(java.util.Map) 
+</description></method><method name="isTransitive" returnType="boolean"><description> 
+ Returns whether this dependency should be resolved including or excluding its transitive dependencies. 
+ 
+ @see #setTransitive(boolean) 
 </description></method><method name="setTransitive" returnType="org.gradle.api.artifacts.ModuleDependency"><description> 
  Sets whether this dependency should be resolved including or excluding its transitive dependencies. The artifacts 
  belonging to this dependency might themselve have dependencies on other artifacts. The latter are called 
@@ -76,21 +76,21 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;transitive Whether transitive dependencies should be resolved. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="boolean" name="transitive"/></method><property name="configuration" type="java.lang.String"><description> 
+</description><parameter type="boolean" name="transitive"/></method><property name="artifacts" type="java.util.Set"><description> 
+ Returns the artifacts belonging to this dependency. 
+ 
+ @see #addArtifact(DependencyArtifact) 
+</description></property><property name="configuration" type="java.lang.String"><description> 
  Returns the configuration of this dependency module (not the configurations this dependency belongs too). Never 
  returns null. The default value for the configuration is &lt;a href='type://ModuleDependency#DEFAULT_CONFIGURATION'&gt;#DEFAULT_CONFIGURATION&lt;/a&gt;. A dependency source 
  might have multiple configurations. Every configuration represents a different set of artifacts and dependencies 
  for this dependency module. 
-</description></property><property name="transitive" type="boolean"><description> 
- Returns whether this dependency should be resolved including or excluding its transitive dependencies. 
- 
- @see #setTransitive(boolean) 
 </description></property><property name="excludeRules" type="java.util.Set"><description> 
  Returns the exclude rules for this dependency. 
  
  @see #exclude(java.util.Map) 
-</description></property><property name="artifacts" type="java.util.Set"><description> 
- Returns the artifacts belonging to this dependency. 
+</description></property><property name="transitive" type="boolean"><description> 
+ Returns whether this dependency should be resolved including or excluding its transitive dependencies. 
  
- @see #addArtifact(DependencyArtifact) 
+ @see #setTransitive(boolean) 
 </description></property></type>

@@ -51,63 +51,57 @@
  
  @see org.gradle.api.tasks.Copy Copy Task 
  @see org.gradle.api.Project#copy(groovy.lang.Closure) Project.copy() 
-</description><method name="expand" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><method name="eachFile" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
-</description><parameter type="java.util.Map" name="properties"/></method><method name="setDuplicatesStrategy" returnType="void" delegationTarget="null"><description> 
- The strategy to use when trying to copy more than one file to the same destination. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default strategy, which is inherited 
- from the parent copy spec, if any, or &lt;a href='type://DuplicatesStrategy#INCLUDE'&gt;DuplicatesStrategy#INCLUDE&lt;/a&gt; if this copy spec has no parent. 
-</description><parameter type="org.gradle.api.file.DuplicatesStrategy" name="strategy"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="eachFile" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
  
  @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="filesMatching" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
+</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.String" name="excludes"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="expand" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.Map" name="properties"/></method><method name="filesMatching" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
  Configure the &lt;a href='type://org.gradle.api.file.FileCopyDetails'&gt;org.gradle.api.file.FileCopyDetails&lt;/a&gt; for each file whose path matches the specified Ant-style pattern. 
  This is equivalent to using eachFile() and selectively applying a configuration based on the file's path. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern Ant-style pattern used to match against files' relative paths 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action action called for the FileCopyDetails of each file matching pattern 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="rename" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="org.gradle.api.Transformer" name="renamer"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
- {@inheritDoc} 
-</description><parameter type="java.util.regex.Pattern" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec"><description> 
- Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with the given destination path. 
- The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="filesNotMatching" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
+ Configure the &lt;a href='type://org.gradle.api.file.FileCopyDetails'&gt;org.gradle.api.file.FileCopyDetails&lt;/a&gt; for each file whose path does not match the specified 
+ Ant-style pattern. This is equivalent to using eachFile() and selectively applying a configuration based on the 
+ file's path. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern Ant-style pattern used to match against files' relative paths 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action action called for the FileCopyDetails of each file that does not match pattern 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="destPath"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
-</description><parameter type="java.util.Map" name="properties"/><parameter type="java.lang.Class" name="filterType"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="java.lang.Class" name="filterType"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.String" name="excludes"/></method><method name="eachFile" returnType="org.gradle.api.file.CopySpec"><description> 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;transformer 
+</description><parameter type="org.gradle.api.Transformer" name="transformer"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="eachFile" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="java.util.Map" name="properties"/><parameter type="java.lang.Class" name="filterType"/></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="java.lang.Object" name="sourcePaths"/></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec"><description> 
- Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with the given destination path. 
- The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;copySpec The action to use to configure the child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.Object" name="destPath"/><parameter type="org.gradle.api.Action" name="copySpec"/></method><method name="setExcludes" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="groovy.lang.Closure" name="c"/></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
 </description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="org.gradle.api.Action" name="configureAction"/></method><method name="getDuplicatesStrategy" returnType="org.gradle.api.file.DuplicatesStrategy" delegationTarget=""><description> 
  Returns the strategy to use when trying to copy more than one file to the same destination. 
@@ -128,9 +122,75 @@
  Tells if empty target directories will be included in the copy. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;tt&gt;true&lt;/tt&gt; if empty target directories will be included in the copy, &lt;tt&gt;false&lt;/tt&gt; otherwise 
+</description></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.String" name="includes"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="into" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.Object" name="destPath"/></method><method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec"><description> 
+ Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with the given destination path. 
+ The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="destPath"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec"><description> 
+ Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with the given destination path. 
+ The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destPath Path to the destination directory for a Copy 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;copySpec The action to use to configure the child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description><parameter type="java.lang.Object" name="destPath"/><parameter type="org.gradle.api.Action" name="copySpec"/></method><method name="isCaseSensitive" returnType="boolean"><description> 
+ Specifies whether case-sensitive pattern matching should be used. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true for case-sensitive matching. 
 </description></method><method name="rename" returnType="org.gradle.api.file.CopySpec"><description> 
  {@inheritDoc} 
-</description><parameter type="java.lang.String" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="with" returnType="org.gradle.api.file.CopySpec"><description> 
+</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="rename" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="org.gradle.api.Transformer" name="renamer"/></method><method name="rename" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.lang.String" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec"><description> 
+ {@inheritDoc} 
+</description><parameter type="java.util.regex.Pattern" name="sourceRegEx"/><parameter type="java.lang.String" name="replaceWith"/></method><method name="setCaseSensitive" returnType="void"><description> 
+ Specifies whether case-sensitive pattern matching should be used for this CopySpec. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;caseSensitive true for case-sensitive matching. 
+</description><parameter type="boolean" name="caseSensitive"/></method><method name="setDuplicatesStrategy" returnType="void" delegationTarget="null"><description> 
+ The strategy to use when trying to copy more than one file to the same destination. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default strategy, which is inherited 
+ from the parent copy spec, if any, or &lt;a href='type://DuplicatesStrategy#INCLUDE'&gt;DuplicatesStrategy#INCLUDE&lt;/a&gt; if this copy spec has no parent. 
+</description><parameter type="org.gradle.api.file.DuplicatesStrategy" name="strategy"/></method><method name="setExcludes" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="setFilteringCharset" returnType="void"><description> 
+ Specifies the charset used to read and write files when filtering. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the name of the charset to use when filtering files 
+ @since 2.14 
+</description><parameter type="java.lang.String" name="charset"/></method><method name="setIncludeEmptyDirs" returnType="void"><description> 
+ Controls if empty target directories should be included in the copy. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeEmptyDirs &lt;tt&gt;true&lt;/tt&gt; if empty target directories should be included in the copy, &lt;tt&gt;false&lt;/tt&gt; otherwise 
+</description><parameter type="boolean" name="includeEmptyDirs"/></method><method name="setIncludes" returnType="org.gradle.api.file.CopySpec"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="with" returnType="org.gradle.api.file.CopySpec"><description> 
  Adds the given specs as a child of this spec. 
  
  &lt;pre autoTested=''&gt; 
@@ -147,73 +207,7 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceSpecs The specs to add 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="org.gradle.api.file.CopySpec" name="sourceSpecs"/></method><method name="into" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.Object" name="destPath"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="rename" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;transformer 
-</description><parameter type="org.gradle.api.Transformer" name="transformer"/></method><method name="exclude" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><method name="filesNotMatching" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileCopyDetails"><description> 
- Configure the &lt;a href='type://org.gradle.api.file.FileCopyDetails'&gt;org.gradle.api.file.FileCopyDetails&lt;/a&gt; for each file whose path does not match the specified 
- Ant-style pattern. This is equivalent to using eachFile() and selectively applying a configuration based on the 
- file's path. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern Ant-style pattern used to match against files' relative paths 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action action called for the FileCopyDetails of each file that does not match pattern 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description><parameter type="java.lang.String" name="pattern"/><parameter type="org.gradle.api.Action" name="action"/></method><method name="setIncludeEmptyDirs" returnType="void"><description> 
- Controls if empty target directories should be included in the copy. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeEmptyDirs &lt;tt&gt;true&lt;/tt&gt; if empty target directories should be included in the copy, &lt;tt&gt;false&lt;/tt&gt; otherwise 
-</description><parameter type="boolean" name="includeEmptyDirs"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.Object" name="sourcePaths"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="groovy.lang.Closure" name="closure"/></method><method name="include" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.String" name="includes"/></method><method name="setIncludes" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="setFilteringCharset" returnType="void"><description> 
- Specifies the charset used to read and write files when filtering. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the name of the charset to use when filtering files 
- @since 2.14 
-</description><parameter type="java.lang.String" name="charset"/></method><method name="filter" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.Class" name="filterType"/></method><method name="setCaseSensitive" returnType="void"><description> 
- Specifies whether case-sensitive pattern matching should be used for this CopySpec. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;caseSensitive true for case-sensitive matching. 
-</description><parameter type="boolean" name="caseSensitive"/></method><method name="isCaseSensitive" returnType="boolean"><description> 
- Specifies whether case-sensitive pattern matching should be used. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true for case-sensitive matching. 
-</description></method><method name="from" returnType="org.gradle.api.file.CopySpec"><description> 
- {@inheritDoc} 
-</description><parameter type="java.lang.Object" name="sourcePath"/><parameter type="groovy.lang.Closure" name="c"/></method><property name="filteringCharset" type="java.lang.String"><description> 
- Gets the charset used to read and write files when filtering. 
- By default, the JVM default charset is used. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the charset used to read and write files when filtering 
- @since 2.14 
-</description></property><property name="caseSensitive" type="boolean"><description> 
+</description><parameter type="org.gradle.api.file.CopySpec" name="sourceSpecs"/></method><property name="caseSensitive" type="boolean"><description> 
  Specifies whether case-sensitive pattern matching should be used. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true for case-sensitive matching. 
@@ -226,15 +220,21 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for files included by this copy spec. 
  @see DuplicatesStrategy 
+</description></property><property name="excludes" type="java.lang.Iterable"><description> 
+ {@inheritDoc} 
+ 
+ @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
+</description></property><property name="filteringCharset" type="java.lang.String"><description> 
+ Gets the charset used to read and write files when filtering. 
+ By default, the JVM default charset is used. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the charset used to read and write files when filtering 
+ @since 2.14 
 </description></property><property name="includeEmptyDirs" type="boolean"><description> 
  Tells if empty target directories will be included in the copy. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;tt&gt;true&lt;/tt&gt; if empty target directories will be included in the copy, &lt;tt&gt;false&lt;/tt&gt; otherwise 
 </description></property><property name="includes" type="java.lang.Iterable"><description> 
- {@inheritDoc} 
- 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
-</description></property><property name="excludes" type="java.lang.Iterable"><description> 
  {@inheritDoc} 
  
  @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 

@@ -2,12 +2,12 @@
  A model providing information about the publications of a Gradle project. 
  
  @since 1.12 
-</description><method name="getPublications" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
- Returns the publications for this project. 
-</description></method><method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier"><description> 
+</description><method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier"><description> 
  Returns the identifier for the Gradle project that these invocations originate from. 
  
  @since 2.13 
+</description></method><method name="getPublications" returnType="org.gradle.tooling.model.DomainObjectSet"><description> 
+ Returns the publications for this project. 
 </description></method><property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier"><description> 
  Returns the identifier for the Gradle project that these invocations originate from. 
  

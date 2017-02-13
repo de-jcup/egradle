@@ -40,49 +40,22 @@
  
  &lt;p&gt;If no exclude patterns or spec are specified, then no files will be excluded. If any exclude patterns or specs are 
  specified, then a file is include only if it matches none of the patterns or specs.&lt;/p&gt; 
-</description><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable" delegationTarget="org.gradle.api.file.FileTreeElement"><description> 
- Adds an include spec. This method may be called multiple times to append new specs. The given closure is passed a 
- &lt;a href='type://org.gradle.api.file.FileTreeElement'&gt;org.gradle.api.file.FileTreeElement&lt;/a&gt; as its parameter. 
+</description><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable" delegationTarget="org.gradle.api.file.FileTreeElement"><description> 
+ Adds an exclude spec. This method may be called multiple times to append new specs.The given closure is passed a 
+ &lt;a href='type://org.gradle.api.file.FileTreeElement'&gt;org.gradle.api.file.FileTreeElement&lt;/a&gt; as its parameter. The closure should return true or false. Example: 
  
- If includes are not provided, then all files in this container will be included. If includes are provided, then a 
- file must match at least one of the include patterns or specs to be included. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see PatternFilterable Pattern Format 
-</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
- Adds an exclude spec. This method may be called multiple times to append new specs. 
+ &lt;pre autoTested='true'&gt; 
+ copySpec { it.file in configurations.someConf.files } 
+ } 
+ &lt;/pre&gt; 
  
  If excludes are not provided, then no files will be excluded. If excludes are provided, then files must not match 
  any exclude pattern to be processed. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeSpec the spec to add 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see PatternFilterable Pattern Format 
-</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="setExcludes" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
- Set the allowable exclude patterns.  Note that unlike &lt;a href='type://PatternFilterable#exclude(Iterable)'&gt;#exclude(Iterable)&lt;/a&gt; this replaces any previously 
- defined excludes. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes an Iterable providing new exclude patterns 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="setIncludes" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
- Set the allowable include patterns.  Note that unlike &lt;a href='type://PatternFilterable#include(Iterable)'&gt;#include(Iterable)&lt;/a&gt; this replaces any previously 
- defined includes. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes an Iterable providing new include patterns 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="includes"/></method><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
- Adds an include spec. This method may be called multiple times to append new specs. 
- 
- If includes are not provided, then all files in this container will be included. If includes are provided, then a 
- file must match at least one of the include patterns or specs to be included. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see PatternFilterable Pattern Format 
-</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ @see FileTreeElement 
+</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
  Adds an ANT style exclude pattern. This method may be called multiple times to append new patterns and multiple 
  patterns may be specified in a single call. 
  
@@ -92,11 +65,44 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes a Iterable providing new exclude patterns 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @see PatternFilterable Pattern Format 
-</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="getExcludes" returnType="java.util.Set"><description> 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ Adds an ANT style exclude pattern. This method may be called multiple times to append new patterns and multiple 
+ patterns may be specified in a single call. 
+ 
+ If excludes are not provided, then no files will be excluded. If excludes are provided, then files must not match 
+ any exclude pattern to be processed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes a vararg list of exclude patterns 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see PatternFilterable Pattern Format 
+</description><parameter type="java.lang.String" name="excludes"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ Adds an exclude spec. This method may be called multiple times to append new specs. 
+ 
+ If excludes are not provided, then no files will be excluded. If excludes are provided, then files must not match 
+ any exclude pattern to be processed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeSpec the spec to add 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see PatternFilterable Pattern Format 
+</description><parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/></method><method name="getExcludes" returnType="java.util.Set"><description> 
  Returns the set of exclude patterns. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude patterns. Returns an empty set when there are no exclude patterns. 
-</description></method><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+</description></method><method name="getIncludes" returnType="java.util.Set"><description> 
+ Returns the set of include patterns. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The include patterns. Returns an empty set when there are no include patterns. 
+</description></method><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable" delegationTarget="org.gradle.api.file.FileTreeElement"><description> 
+ Adds an include spec. This method may be called multiple times to append new specs. The given closure is passed a 
+ &lt;a href='type://org.gradle.api.file.FileTreeElement'&gt;org.gradle.api.file.FileTreeElement&lt;/a&gt; as its parameter. 
+ 
+ If includes are not provided, then all files in this container will be included. If includes are provided, then a 
+ file must match at least one of the include patterns or specs to be included. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see PatternFilterable Pattern Format 
+</description><parameter type="groovy.lang.Closure" name="includeSpec"/></method><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
  Adds an ANT style include pattern. This method may be called multiple times to append new patterns and multiple 
  patterns may be specified in a single call. 
  
@@ -116,36 +122,30 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes a vararg list of include patterns 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @see PatternFilterable Pattern Format 
-</description><parameter type="java.lang.String" name="includes"/></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
- Adds an ANT style exclude pattern. This method may be called multiple times to append new patterns and multiple 
- patterns may be specified in a single call. 
+</description><parameter type="java.lang.String" name="includes"/></method><method name="include" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ Adds an include spec. This method may be called multiple times to append new specs. 
  
- If excludes are not provided, then no files will be excluded. If excludes are provided, then files must not match 
- any exclude pattern to be processed. 
+ If includes are not provided, then all files in this container will be included. If includes are provided, then a 
+ file must match at least one of the include patterns or specs to be included. 
  
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes a vararg list of exclude patterns 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @see PatternFilterable Pattern Format 
-</description><parameter type="java.lang.String" name="excludes"/></method><method name="getIncludes" returnType="java.util.Set"><description> 
- Returns the set of include patterns. 
+</description><parameter type="org.gradle.api.specs.Spec" name="includeSpec"/></method><method name="setExcludes" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ Set the allowable exclude patterns.  Note that unlike &lt;a href='type://PatternFilterable#exclude(Iterable)'&gt;#exclude(Iterable)&lt;/a&gt; this replaces any previously 
+ defined excludes. 
  
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The include patterns. Returns an empty set when there are no include patterns. 
-</description></method><method name="exclude" returnType="org.gradle.api.tasks.util.PatternFilterable" delegationTarget="org.gradle.api.file.FileTreeElement"><description> 
- Adds an exclude spec. This method may be called multiple times to append new specs.The given closure is passed a 
- &lt;a href='type://org.gradle.api.file.FileTreeElement'&gt;org.gradle.api.file.FileTreeElement&lt;/a&gt; as its parameter. The closure should return true or false. Example: 
- 
- &lt;pre autoTested='true'&gt; 
- copySpec { it.file in configurations.someConf.files } 
- } 
- &lt;/pre&gt; 
- 
- If excludes are not provided, then no files will be excluded. If excludes are provided, then files must not match 
- any exclude pattern to be processed. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeSpec the spec to add 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes an Iterable providing new exclude patterns 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
- @see FileTreeElement 
-</description><parameter type="groovy.lang.Closure" name="excludeSpec"/></method><property name="excludes" type="java.util.Set"><description> 
+ @see PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="excludes"/></method><method name="setIncludes" returnType="org.gradle.api.tasks.util.PatternFilterable"><description> 
+ Set the allowable include patterns.  Note that unlike &lt;a href='type://PatternFilterable#include(Iterable)'&gt;#include(Iterable)&lt;/a&gt; this replaces any previously 
+ defined includes. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes an Iterable providing new include patterns 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see PatternFilterable Pattern Format 
+</description><parameter type="java.lang.Iterable" name="includes"/></method><property name="excludes" type="java.util.Set"><description> 
  Returns the set of exclude patterns. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude patterns. Returns an empty set when there are no exclude patterns. 

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.plugins.quality.PmdReports" version="3.0"><description> 
  The reporting configuration for the &lt;a href='type://Pmd'&gt;Pmd&lt;/a&gt; task. 
-</description><method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
- The pmd (single file) XML report 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) XML report 
-</description></method><method name="getHtml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
+</description><method name="getHtml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
  The pmd (single file) HTML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) HTML report 
-</description></method><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
+</description></method><method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport"><description> 
  The pmd (single file) XML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) XML report 
-</description></property><property name="html" type="org.gradle.api.reporting.SingleFileReport"><description> 
+</description></method><property name="html" type="org.gradle.api.reporting.SingleFileReport"><description> 
  The pmd (single file) HTML report 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) HTML report 
+</description></property><property name="xml" type="org.gradle.api.reporting.SingleFileReport"><description> 
+ The pmd (single file) XML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) XML report 
 </description></property></type>

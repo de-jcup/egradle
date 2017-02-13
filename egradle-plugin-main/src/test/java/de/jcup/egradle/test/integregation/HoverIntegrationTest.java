@@ -6,8 +6,12 @@ import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.hover.HoverData;
+import de.jcup.egradle.codeassist.hover.HoverSupport;
+import de.jcup.egradle.core.model.Model;
 
 public class HoverIntegrationTest {
 
@@ -282,8 +286,12 @@ public class HoverIntegrationTest {
 
 	/* short cut method for calculation */
 	private HoverData calculateHoverData(String text, int offset) {
-		return components.getHoverSupport().caclulateHoverData(text, offset, components.getRelevantCodeCutter(),
-				components.buildModel(text), GradleFileType.GRADLE_BUILD_SCRIPT, components.getEstimator());
+		HoverSupport hoverSupport = components.getHoverSupport();
+		RelevantCodeCutter relevantCodeCutter = components.getRelevantCodeCutter();
+		Model buildModel = components.buildModel(text);
+		GradleLanguageElementEstimater estimator = components.getEstimator();
+		return hoverSupport.caclulateHoverData(text, offset, relevantCodeCutter,
+				buildModel, GradleFileType.GRADLE_BUILD_SCRIPT, estimator);
 	}
 
 	private String loadTextFromIntegrationTestFile(String testFileName) {

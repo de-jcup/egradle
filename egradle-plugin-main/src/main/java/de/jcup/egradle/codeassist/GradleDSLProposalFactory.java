@@ -90,24 +90,14 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposal.setLazyCodeBuilder(new ClosureByStringCodeBuilder(extensionId, codeTemplateBuilder));
 
 			Reason reason = identifiedType.getReasonForExtension(extensionId);
-			StringBuilder description = new StringBuilder();
 			StringBuilder name = new StringBuilder();
 			name.append(extensionId);
-			if (reason != null) {
+			if (reason!=null){
 				Plugin plugin = reason.getPlugin();
-				if (plugin != null) {
-					// name.append("-");
-					// name.append(plugin.getId());
-					description.append("<p>reasoned by plugin:<b>");
-					description.append(plugin.getId());
-					description.append("</b></p><br><br>");
-
+				if (plugin!=null){
+					name.append("-"+plugin.getId());
 				}
 			}
-			description.append(extensionType.getDescription());
-			description.append("<br><br>Type:");
-			description.append(extensionType.getName());
-			proposal.setDescription(description.toString());
 			proposal.setName(name.toString());
 			proposal.setTextBefore(textBeforeColumn);
 
@@ -187,10 +177,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		return proposal;
 	}
 
-	/*
-	 * FIXME ATR, 20.01.2017: think about providing multiple types here as
-	 * result - its often not clear what can be estimated...
-	 */
 	private EstimationResult tryToIdentifyContextType(int offset, ProposalFactoryContentProvider contentProvider) {
 		Model model = contentProvider.getModel();
 		if (model == null) {

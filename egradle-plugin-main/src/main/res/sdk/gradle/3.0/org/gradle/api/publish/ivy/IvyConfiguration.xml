@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.publish.ivy.IvyConfiguration" version="3.0"><description> 
  A configuration included in an &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;, which will be published in the ivy descriptor file generated. 
-</description><method name="getExtends" returnType="java.util.Set"><description> 
- The set of names of extended configurations, added via &lt;a href='type://IvyConfiguration#extend(String)'&gt;#extend(String)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of extended configurations. 
-</description></method><method name="extend" returnType="void"><description> 
+</description><method name="extend" returnType="void"><description> 
  Add the name of a configuration that this configuration extends. 
  The extend value can use the following wildcards: 
  &lt;ul&gt; 
@@ -13,7 +9,11 @@
      &lt;li&gt;*(private) - all other private configurations&lt;/li&gt; 
  &lt;/ul&gt; 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration The extended configuration name 
-</description><parameter type="java.lang.String" name="configuration"/></method><property name="extends" type="java.util.Set"><description> 
+</description><parameter type="java.lang.String" name="configuration"/></method><method name="getExtends" returnType="java.util.Set"><description> 
+ The set of names of extended configurations, added via &lt;a href='type://IvyConfiguration#extend(String)'&gt;#extend(String)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of extended configurations. 
+</description></method><property name="extends" type="java.util.Set"><description> 
  The set of names of extended configurations, added via &lt;a href='type://IvyConfiguration#extend(String)'&gt;#extend(String)&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of extended configurations. 

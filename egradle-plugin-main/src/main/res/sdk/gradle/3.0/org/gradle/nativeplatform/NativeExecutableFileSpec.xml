@@ -2,4 +2,4 @@
  Specifies how to build and where to place a native executable file. 
  
  &lt;p&gt;TODO:HH resolve naming conflict with existing NativeExecutableSpec&lt;/p&gt; 
-</description><method name="setToolChain" returnType="void"><parameter type="org.gradle.platform.base.ToolChain" name="toolChain"/></method><method name="getToolChain" returnType="org.gradle.platform.base.ToolChain"/><method name="setFile" returnType="void"><parameter type="java.io.File" name="file"/></method><method name="getFile" returnType="java.io.File"/><property name="file" type="java.io.File"/><property name="toolChain" type="org.gradle.platform.base.ToolChain"/></type>
+</description><method name="getFile" returnType="java.io.File"/><method name="getToolChain" returnType="org.gradle.platform.base.ToolChain"/><method name="setFile" returnType="void"><parameter type="java.io.File" name="file"/></method><method name="setToolChain" returnType="void"><parameter type="org.gradle.platform.base.ToolChain" name="toolChain"/></method><property name="file" type="java.io.File"/><property name="toolChain" type="org.gradle.platform.base.ToolChain"/></type>

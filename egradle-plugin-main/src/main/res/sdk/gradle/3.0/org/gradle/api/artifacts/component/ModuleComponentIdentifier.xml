@@ -7,22 +7,17 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component group 
  @since 1.10 
-</description></method><method name="getVersion" returnType="java.lang.String"><description> 
- The module version of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component version 
- @since 1.10 
 </description></method><method name="getModule" returnType="java.lang.String"><description> 
  The module name of the component. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component module 
  @since 1.10 
-</description></method><property name="version" type="java.lang.String"><description> 
+</description></method><method name="getVersion" returnType="java.lang.String"><description> 
  The module version of the component. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component version 
  @since 1.10 
-</description></property><property name="group" type="java.lang.String"><description> 
+</description></method><property name="group" type="java.lang.String"><description> 
  The module group of the component. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component group 
@@ -31,5 +26,10 @@
  The module name of the component. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component module 
+ @since 1.10 
+</description></property><property name="version" type="java.lang.String"><description> 
+ The module version of the component. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component version 
  @since 1.10 
 </description></property></type>

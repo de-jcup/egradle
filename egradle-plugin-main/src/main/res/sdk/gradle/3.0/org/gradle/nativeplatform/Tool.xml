@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.Tool" version="3.0"><description> 
  Configuration of the arguments of a ToolChain executable. 
-</description><method name="getArgs" returnType="java.util.List"><description> 
- The arguments passed when executing this tool. 
-</description></method><method name="args" returnType="void"><description> 
+</description><method name="args" returnType="void"><description> 
  Adds a number of arguments to be passed to the tool. 
-</description><parameter type="java.lang.String" name="args"/></method><property name="args" type="java.util.List"><description> 
+</description><parameter type="java.lang.String" name="args"/></method><method name="getArgs" returnType="java.util.List"><description> 
+ The arguments passed when executing this tool. 
+</description></method><property name="args" type="java.util.List"><description> 
  The arguments passed when executing this tool. 
 </description></property></type>

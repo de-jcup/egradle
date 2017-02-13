@@ -3,12 +3,7 @@
  &lt;p&gt; 
  Plugin repositories added via this interface will used to resolve plugins specified 
  in the &lt;code&gt;plugins {}&lt;/code&gt; block. 
-</description><method name="maven" returnType="org.gradle.plugin.repository.MavenPluginRepository" delegationTarget="MavenPluginRepository"><description> 
- Adds and configures a &lt;a href='type://MavenPluginRepository'&gt;MavenPluginRepository&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="gradlePluginPortal" returnType="org.gradle.plugin.repository.GradlePluginPortal"><description> 
+</description><method name="gradlePluginPortal" returnType="org.gradle.plugin.repository.GradlePluginPortal"><description> 
  Adds the Gradle Plugin Portal (plugins.gradle.org) as a plugin repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
  @throws IllegalArgumentException if called more than once. 
@@ -17,4 +12,9 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the added repository. 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="maven" returnType="org.gradle.plugin.repository.MavenPluginRepository" delegationTarget="MavenPluginRepository"><description> 
+ Adds and configures a &lt;a href='type://MavenPluginRepository'&gt;MavenPluginRepository&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to use to configure the repository. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
 </description><parameter type="org.gradle.api.Action" name="action"/></method></type>

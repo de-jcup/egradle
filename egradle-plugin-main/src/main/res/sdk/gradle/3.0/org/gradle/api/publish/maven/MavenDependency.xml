@@ -6,10 +6,10 @@
  The groupId value for this dependency. 
 </description></method><method name="getVersion" returnType="java.lang.String"><description> 
  The version value for this dependency. 
-</description></method><property name="groupId" type="java.lang.String"><description> 
+</description></method><property name="artifactId" type="java.lang.String"><description> 
+ The artifactId value for this dependency. 
+</description></property><property name="groupId" type="java.lang.String"><description> 
  The groupId value for this dependency. 
 </description></property><property name="version" type="java.lang.String"><description> 
  The version value for this dependency. 
-</description></property><property name="artifactId" type="java.lang.String"><description> 
- The artifactId value for this dependency. 
 </description></property></type>

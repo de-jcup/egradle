@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.tasks.TwirlCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask"><description> 
  Task for compiling Twirl templates into Scala code. 
-</description><method name="compile" returnType="void"><parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.tasks.incremental.InputFileDetails" name="inputFileDetails"/></method><method name="getDependencyNotation" returnType="java.lang.Object"/><method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"><description> 
+</description><method name="compile" returnType="void"><parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.tasks.incremental.InputFileDetails" name="inputFileDetails"/></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/><method name="getDefaultImports" returnType="org.gradle.language.twirl.TwirlImports"><description> 
+ Returns the default imports that will be used when compiling templates. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used. 
+</description></method><method name="getDependencyNotation" returnType="java.lang.Object"/><method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
+ fork options for the twirl compiler. 
+</description></method><method name="getOutputDirectory" returnType="java.io.File"><description> 
+ Returns the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description></method><method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"><description> 
  Returns the tool chain that will be used to compile the twirl source. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
-</description></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.play.platform.PlayPlatform" name="platform"/></method><method name="setDefaultImports" returnType="void"><description> 
+</description></method><method name="setCleaner" returnType="void"><parameter type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner" name="cleaner"/></method><method name="setDefaultImports" returnType="void"><description> 
  Sets the default imports to be used when compiling templates. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultImports The imports to be used. 
 </description><parameter type="org.gradle.language.twirl.TwirlImports" name="defaultImports"/></method><method name="setOutputDirectory" returnType="void"><description> 
  Specifies the directory to generate the parser source files into. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputDirectory The output directory. Must not be null. 
-</description><parameter type="java.io.File" name="outputDirectory"/></method><method name="setToolChain" returnType="void"><description> 
+</description><parameter type="java.io.File" name="outputDirectory"/></method><method name="setPlatform" returnType="void"><parameter type="org.gradle.play.platform.PlayPlatform" name="platform"/></method><method name="setToolChain" returnType="void"><description> 
  Sets the tool chain that will be used to compile the twirl source. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toolChain The tool chain. 
-</description><parameter type="org.gradle.play.toolchain.PlayToolChain" name="toolChain"/></method><method name="getOutputDirectory" returnType="java.io.File"><description> 
+</description><parameter type="org.gradle.play.toolchain.PlayToolChain" name="toolChain"/></method><property name="cleaner" type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner"/><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="defaultImports" type="org.gradle.language.twirl.TwirlImports"><description> 
+ Returns the default imports that will be used when compiling templates. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used. 
+</description></property><property name="dependencyNotation" type="java.lang.Object"/><property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
+ fork options for the twirl compiler. 
+</description></property><property name="outputDirectory" type="java.io.File"><description> 
  Returns the directory to generate the parser source files into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
-</description></method><method name="execute" returnType="void"><parameter type="org.gradle.api.tasks.incremental.InputFileDetails" name="inputFileDetails"/></method><method name="getDefaultImports" returnType="org.gradle.language.twirl.TwirlImports"><description> 
- Returns the default imports that will be used when compiling templates. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used. 
-</description></method><method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
- fork options for the twirl compiler. 
-</description></method><method name="setCleaner" returnType="void"><parameter type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner" name="cleaner"/></method><method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/><property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"><description> 
+</description></property><property name="platform" type="org.gradle.play.platform.PlayPlatform"/><property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"><description> 
  Returns the tool chain that will be used to compile the twirl source. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
-</description></property><property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions"><description> 
- fork options for the twirl compiler. 
-</description></property><property name="platform" type="org.gradle.play.platform.PlayPlatform"/><property name="outputDirectory" type="java.io.File"><description> 
- Returns the directory to generate the parser source files into. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
-</description></property><property name="defaultImports" type="org.gradle.language.twirl.TwirlImports"><description> 
- Returns the default imports that will be used when compiling templates. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used. 
-</description></property><property name="dependencyNotation" type="java.lang.Object"/><property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/><property name="cleaner" type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner"/></type>
+</description></property></type>

@@ -3,4 +3,4 @@
  true. Uses lazy evaluation. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The target type for this Spec 
-</description><method name="isSatisfiedBy" returnType="boolean"><parameter type="T" name="object"/></method><method name="hashCode" returnType="int"/><property name="satisfiedBy" type="boolean"/></type>
+</description><method name="hashCode" returnType="int"/><method name="isSatisfiedBy" returnType="boolean"><parameter type="T" name="object"/></method><property name="satisfiedBy" type="boolean"/></type>

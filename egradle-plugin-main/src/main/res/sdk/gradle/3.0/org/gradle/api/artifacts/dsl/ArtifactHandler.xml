@@ -52,12 +52,12 @@
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactNotation The artifact notation, in one of the notations described above. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute to configure the artifact. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact. 
-</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="artifactNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method><method name="add" returnType="org.gradle.api.artifacts.PublishArtifact"><description> 
+</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="artifactNotation"/></method><method name="add" returnType="org.gradle.api.artifacts.PublishArtifact"><description> 
  Adds an artifact to the given configuration. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactNotation The artifact notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute to configure the artifact. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact. 
-</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="artifactNotation"/></method></type>
+</description><parameter type="java.lang.String" name="configurationName"/><parameter type="java.lang.Object" name="artifactNotation"/><parameter type="groovy.lang.Closure" name="configureClosure"/></method></type>

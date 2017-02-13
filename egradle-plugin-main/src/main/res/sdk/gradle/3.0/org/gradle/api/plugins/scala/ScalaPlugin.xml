@@ -2,4 +2,4 @@
  &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which sets up a Scala project.&lt;/p&gt; 
  
  @see ScalaBasePlugin 
-</description><method name="call" returnType="org.gradle.api.file.FileCollection"/><method name="execute" returnType="void"><parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/></method><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="configureScaladoc" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>
+</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="call" returnType="org.gradle.api.file.FileCollection"/><method name="configureScaladoc" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/></method></type>

@@ -20,36 +20,15 @@
  &lt;/pre&gt; 
  
  @since 1.0-milestone-6 
-</description><method name="failOnVersionConflict" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="Configuration"><description> 
- In case of conflict, Gradle by default uses the newest of conflicting versions. 
- However, you can change this behavior. Use this method to configure the resolution to fail eagerly on any version conflict, e.g. 
- multiple different versions of the same dependency (group and name are equal) in the same &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt;. 
- The check includes both first level and transitive dependencies. See example below: 
+</description><method name="cacheChangingModulesFor" returnType="void" delegationTarget="valueOf"><description> 
+ Sets the length of time that changing modules will be cached, with units expressed as a String. 
  
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' //so that there are some configurations 
- 
- configurations.all { 
-   resolutionStrategy.failOnVersionConflict() 
- } 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this resolution strategy instance 
- @since 1.0-milestone-6 
-</description></method><method name="cacheDynamicVersionsFor" returnType="void" delegationTarget="valueOf"><description> 
- Sets the length of time that dynamic versions will be cached, with units expressed as a String. 
- 
- &lt;p&gt;A convenience method for &lt;a href='type://ResolutionStrategy#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String. 
+ &lt;p&gt;A convenience method for &lt;a href='type://ResolutionStrategy#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String. 
  Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt; 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
  @since 1.0-milestone-6 
-</description><parameter type="int" name="value"/><parameter type="java.lang.String" name="units"/></method><method name="getComponentSelection" returnType="org.gradle.api.artifacts.ComponentSelectionRules"><description> 
- Returns the currently configured version selection rules object. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version selection rules 
- @since 2.2 
-</description></method><method name="cacheChangingModulesFor" returnType="void"><description> 
+</description><parameter type="int" name="value"/><parameter type="java.lang.String" name="units"/></method><method name="cacheChangingModulesFor" returnType="void"><description> 
  Sets the length of time that changing modules will be cached. 
  
  &lt;p&gt;Gradle caches the contents and artifacts of changing modules. By default, these cached values are kept for 24 hours, 
@@ -58,7 +37,30 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
  @since 1.0-milestone-6 
-</description><parameter type="int" name="value"/><parameter type="java.util.concurrent.TimeUnit" name="units"/></method><method name="dependencySubstitution" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="DependencySubstitutions"><description> 
+</description><parameter type="int" name="value"/><parameter type="java.util.concurrent.TimeUnit" name="units"/></method><method name="cacheDynamicVersionsFor" returnType="void" delegationTarget="valueOf"><description> 
+ Sets the length of time that dynamic versions will be cached, with units expressed as a String. 
+ 
+ &lt;p&gt;A convenience method for &lt;a href='type://ResolutionStrategy#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String. 
+ Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
+ @since 1.0-milestone-6 
+</description><parameter type="int" name="value"/><parameter type="java.lang.String" name="units"/></method><method name="cacheDynamicVersionsFor" returnType="void"><description> 
+ Sets the length of time that dynamic versions will be cached. 
+ 
+ &lt;p&gt;Gradle keeps a cache of dynamic version =&gt; resolved version (ie 2.+ =&gt; 2.3). By default, these cached values are kept for 24 hours, after which the cached entry is expired 
+ and the dynamic version is resolved again.&lt;/p&gt; 
+ &lt;p&gt;Use this method to provide a custom expiry time after which the cached value for any dynamic version will be expired.&lt;/p&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
+ @since 1.0-milestone-6 
+</description><parameter type="int" name="value"/><parameter type="java.util.concurrent.TimeUnit" name="units"/></method><method name="componentSelection" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="ComponentSelectionRules"><description> 
+ The componentSelection block provides rules to filter or blacklist certain components from appearing in the resolution result. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action Action to be applied to the &lt;a href='type://ComponentSelectionRules'&gt;ComponentSelectionRules&lt;/a&gt; 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance 
+ @since 2.2 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="dependencySubstitution" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="DependencySubstitutions"><description> 
  Configures the set of dependency substitution rules for this configuration.  The action receives an instance of &lt;a href='type://DependencySubstitutions'&gt;DependencySubstitutions&lt;/a&gt; which 
  can then be configured with substitution rules. 
  &lt;p/&gt; 
@@ -79,61 +81,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance 
  @see DependencySubstitutions 
  @since 2.5 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="cacheDynamicVersionsFor" returnType="void"><description> 
- Sets the length of time that dynamic versions will be cached. 
- 
- &lt;p&gt;Gradle keeps a cache of dynamic version =&gt; resolved version (ie 2.+ =&gt; 2.3). By default, these cached values are kept for 24 hours, after which the cached entry is expired 
- and the dynamic version is resolved again.&lt;/p&gt; 
- &lt;p&gt;Use this method to provide a custom expiry time after which the cached value for any dynamic version will be expired.&lt;/p&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
- @since 1.0-milestone-6 
-</description><parameter type="int" name="value"/><parameter type="java.util.concurrent.TimeUnit" name="units"/></method><method name="cacheChangingModulesFor" returnType="void" delegationTarget="valueOf"><description> 
- Sets the length of time that changing modules will be cached, with units expressed as a String. 
- 
- &lt;p&gt;A convenience method for &lt;a href='type://ResolutionStrategy#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String. 
- Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units 
- @since 1.0-milestone-6 
-</description><parameter type="int" name="value"/><parameter type="java.lang.String" name="units"/></method><method name="componentSelection" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="ComponentSelectionRules"><description> 
- The componentSelection block provides rules to filter or blacklist certain components from appearing in the resolution result. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action Action to be applied to the &lt;a href='type://ComponentSelectionRules'&gt;ComponentSelectionRules&lt;/a&gt; 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance 
- @since 2.2 
-</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="getDependencySubstitution" returnType="org.gradle.api.artifacts.DependencySubstitutions"><description> 
- Returns the set of dependency substitution rules that are set for this configuration. 
- 
- @since 2.5 
-</description></method><method name="getForcedModules" returnType="java.util.Set"><description> 
- Returns currently configured forced modules. For more information on forcing versions see &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;#force(Object...)&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;forced modules 
- @since 1.0-milestone-7 
-</description></method><method name="force" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="ModuleVersionSelector"><description> 
- Allows forcing certain versions of dependencies, including transitive dependencies. 
- &lt;b&gt;Appends&lt;/b&gt; new forced modules to be considered when resolving dependencies. 
- &lt;p&gt; 
- It accepts following notations: 
- &lt;ul&gt; 
-   &lt;li&gt;String in a format of: 'group:name:version', for example: 'org.gradle:gradle-core:1.0'&lt;/li&gt; 
-   &lt;li&gt;instance of &lt;a href='type://ModuleVersionSelector'&gt;ModuleVersionSelector&lt;/a&gt;&lt;/li&gt; 
-   &lt;li&gt;any collection or array of above will be automatically flattened&lt;/li&gt; 
- &lt;/ul&gt; 
- Example: 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' //so that there are some configurations 
- 
- configurations.all { 
-   resolutionStrategy.force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4' 
- } 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleVersionSelectorNotations typically group:name:version notations to append 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance 
- @since 1.0-milestone-7 
-</description><parameter type="java.lang.Object" name="moduleVersionSelectorNotations"/></method><method name="eachDependency" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="DependencyResolveDetails"><description> 
+</description><parameter type="org.gradle.api.Action" name="action"/></method><method name="eachDependency" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="DependencyResolveDetails"><description> 
  Adds a dependency substitution rule that is triggered for every dependency (including transitive) 
  when the configuration is being resolved. The action receives an instance of &lt;a href='type://DependencyResolveDetails'&gt;DependencyResolveDetails&lt;/a&gt; 
  that can be used to find out what dependency is being resolved and to influence the resolution process. 
@@ -156,7 +104,59 @@
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
  @since 1.4 
-</description><parameter type="org.gradle.api.Action" name="rule"/></method><method name="setForcedModules" returnType="org.gradle.api.artifacts.ResolutionStrategy"><description> 
+</description><parameter type="org.gradle.api.Action" name="rule"/></method><method name="failOnVersionConflict" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="Configuration"><description> 
+ In case of conflict, Gradle by default uses the newest of conflicting versions. 
+ However, you can change this behavior. Use this method to configure the resolution to fail eagerly on any version conflict, e.g. 
+ multiple different versions of the same dependency (group and name are equal) in the same &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt;. 
+ The check includes both first level and transitive dependencies. See example below: 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' //so that there are some configurations 
+ 
+ configurations.all { 
+   resolutionStrategy.failOnVersionConflict() 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this resolution strategy instance 
+ @since 1.0-milestone-6 
+</description></method><method name="force" returnType="org.gradle.api.artifacts.ResolutionStrategy" delegationTarget="ModuleVersionSelector"><description> 
+ Allows forcing certain versions of dependencies, including transitive dependencies. 
+ &lt;b&gt;Appends&lt;/b&gt; new forced modules to be considered when resolving dependencies. 
+ &lt;p&gt; 
+ It accepts following notations: 
+ &lt;ul&gt; 
+   &lt;li&gt;String in a format of: 'group:name:version', for example: 'org.gradle:gradle-core:1.0'&lt;/li&gt; 
+   &lt;li&gt;instance of &lt;a href='type://ModuleVersionSelector'&gt;ModuleVersionSelector&lt;/a&gt;&lt;/li&gt; 
+   &lt;li&gt;any collection or array of above will be automatically flattened&lt;/li&gt; 
+ &lt;/ul&gt; 
+ Example: 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' //so that there are some configurations 
+ 
+ configurations.all { 
+   resolutionStrategy.force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4' 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleVersionSelectorNotations typically group:name:version notations to append 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance 
+ @since 1.0-milestone-7 
+</description><parameter type="java.lang.Object" name="moduleVersionSelectorNotations"/></method><method name="getComponentSelection" returnType="org.gradle.api.artifacts.ComponentSelectionRules"><description> 
+ Returns the currently configured version selection rules object. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version selection rules 
+ @since 2.2 
+</description></method><method name="getDependencySubstitution" returnType="org.gradle.api.artifacts.DependencySubstitutions"><description> 
+ Returns the set of dependency substitution rules that are set for this configuration. 
+ 
+ @since 2.5 
+</description></method><method name="getForcedModules" returnType="java.util.Set"><description> 
+ Returns currently configured forced modules. For more information on forcing versions see &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;#force(Object...)&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;forced modules 
+ @since 1.0-milestone-7 
+</description></method><method name="setForcedModules" returnType="org.gradle.api.artifacts.ResolutionStrategy"><description> 
  Allows forcing certain versions of dependencies, including transitive dependencies. 
  &lt;b&gt;Replaces&lt;/b&gt; existing forced modules with the input. 
  &lt;p&gt; 

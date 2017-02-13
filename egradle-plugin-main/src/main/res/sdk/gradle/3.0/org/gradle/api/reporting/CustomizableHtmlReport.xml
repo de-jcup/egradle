@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.reporting.CustomizableHtmlReport" version="3.0"><description> 
  A HTML Report whose generation can be customized with a XSLT stylesheet. 
-</description><method name="setStylesheet" returnType="void"><description> 
- The stylesheet to use to generate the report. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;stylesheet the stylesheet to use to generate the HTML report 
-</description><parameter type="org.gradle.api.resources.TextResource" name="stylesheet"/></method><method name="getStylesheet" returnType="org.gradle.api.resources.TextResource"><description> 
+</description><method name="getStylesheet" returnType="org.gradle.api.resources.TextResource"><description> 
  The stylesheet to use to generate the HTML report. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the stylesheet to use to generate the HTML report 
-</description></method><property name="stylesheet" type="org.gradle.api.resources.TextResource"><description> 
+</description></method><method name="setStylesheet" returnType="void"><description> 
+ The stylesheet to use to generate the report. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;stylesheet the stylesheet to use to generate the HTML report 
+</description><parameter type="org.gradle.api.resources.TextResource" name="stylesheet"/></method><property name="stylesheet" type="org.gradle.api.resources.TextResource"><description> 
  The stylesheet to use to generate the HTML report. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the stylesheet to use to generate the HTML report 
