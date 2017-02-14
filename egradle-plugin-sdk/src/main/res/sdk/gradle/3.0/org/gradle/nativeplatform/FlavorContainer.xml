@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.FlavorContainer" version="3.0"><description> 
- A container of &lt;a href='type://Flavor'&gt;Flavor&lt;/a&gt;s. 
- &lt;p/&gt; 
- If no flavor is explicitly configured, will contain a single &lt;a href='type://Flavor'&gt;Flavor&lt;/a&gt; named 'default'. 
- Any flavors explicitly configured will overwrite the default flavor. 
-</description></type>

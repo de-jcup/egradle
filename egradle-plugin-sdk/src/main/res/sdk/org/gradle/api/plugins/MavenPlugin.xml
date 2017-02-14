@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.MavenPlugin" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; which allows project artifacts to be deployed to a Maven repository, or installed 
+ to the local Maven cache.&lt;/p&gt; 
+</description>
+    <method name="addConventionObject" returnType="org.gradle.api.plugins.MavenPluginConvention">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+        <parameter type="org.gradle.api.publication.maven.internal.MavenFactory" name="mavenFactory"/>
+    </method>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+    </method>
+    <method name="configureInstall" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureJavaScopeMappings" returnType="void">
+        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
+        <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="mavenScopeMappings"/>
+    </method>
+    <method name="configureUploadArchivesTask" returnType="void"/>
+    <method name="configureUploadTasks" returnType="void">
+        <parameter type="org.gradle.api.publication.maven.internal.DefaultDeployerFactory" name="deployerFactory"/>
+    </method>
+    <method name="configureWarScopeMappings" returnType="void">
+        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
+        <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="mavenScopeMappings"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.JavaPlugin" name="javaPlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.WarPlugin" name="warPlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.Upload" name="upload"/>
+    </method>
+</type>

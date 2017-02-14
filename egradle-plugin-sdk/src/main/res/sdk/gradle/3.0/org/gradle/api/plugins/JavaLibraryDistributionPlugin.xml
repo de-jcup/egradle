@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.JavaLibraryDistributionPlugin" version="3.0"><description> 
- A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which package a Java project as a distribution including the JAR and runtime dependencies. 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/></method></type>

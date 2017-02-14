@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.PrebuiltLibrary" version="3.0">
+    <description> 
+ A library component that is not built by gradle. 
+</description>
+    <method name="getBinaries" returnType="org.gradle.api.DomainObjectSet">
+        <description> 
+ The binaries that are built for this component. You can use this to configure the binaries for this component. 
+</description>
+    </method>
+    <method name="getHeaders" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ The headers exported by this library. These headers will be added to all binaries for this library. 
+</description>
+    </method>
+    <property name="binaries" type="org.gradle.api.DomainObjectSet">
+        <description> 
+ The binaries that are built for this component. You can use this to configure the binaries for this component. 
+</description>
+    </property>
+    <property name="headers" type="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ The headers exported by this library. These headers will be added to all binaries for this library. 
+</description>
+    </property>
+</type>

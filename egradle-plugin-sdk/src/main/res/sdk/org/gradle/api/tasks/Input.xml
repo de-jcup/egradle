@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.Input" version="3.0">
+    <description> 
+ &lt;p&gt;Attached to a task property to indicate that the property specifies some input value for the task.&lt;/p&gt; 
+ 
+ &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt; 
+ 
+ &lt;p&gt;This will cause the task to be considered out-of-date when the property has changed. When used on a 
+ &lt;a href='type://java.io.File'&gt;java.io.File&lt;/a&gt; object that refers to a file or directory, the up-to-date check is only dependent on the 
+ path and not the contents of the file or directory. To make it depend on the contents, use 
+ &lt;a href='type://org.gradle.api.tasks.InputFile'&gt;org.gradle.api.tasks.InputFile&lt;/a&gt; or &lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt; respectively. 
+</description>
+</type>

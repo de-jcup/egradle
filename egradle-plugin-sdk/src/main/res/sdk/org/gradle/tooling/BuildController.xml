@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.BuildController" version="3.0">
+    <description> 
+ Provides a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; various ways to control a Gradle build and access information about the build. 
+ 
+ @since 1.8 
+</description>
+    <method name="findModel" returnType="T">
+        <description> 
+ Fetches a snapshot of the model of the given type, if available. 
+ 
+ &lt;p&gt;See &lt;a href='type://BuildController#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model, or null if not present. 
+</description>
+        <parameter type="java.lang.Class" name="modelType"/>
+    </method>
+    <method name="findModel" returnType="T">
+        <description> 
+ Fetches a snapshot of the model of the given type, if available. 
+ 
+ &lt;p&gt;See &lt;a href='type://BuildController#getModel(Model, Class)'&gt;#getModel(Model, Class)&lt;/a&gt; for more details.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model, or null if not present. 
+</description>
+        <parameter type="org.gradle.tooling.model.Model" name="target"/>
+        <parameter type="java.lang.Class" name="modelType"/>
+    </method>
+    <method name="getBuildModel" returnType="org.gradle.tooling.model.gradle.GradleBuild">
+        <description> 
+ Returns an overview of the Gradle build, including some basic details of the projects that make up the build. 
+ This is equivalent to calling &lt;a href='type://BuildController#getModel(GradleBuild.class)'&gt;#getModel(GradleBuild.class)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model. 
+</description>
+    </method>
+    <method name="getModel" returnType="T" delegationTarget="ProjectConnection">
+        <description> 
+ Fetches a snapshot of the model of the given type for the default project. The default project is generally the 
+ project referenced when a &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; is created. 
+ 
+ &lt;p&gt;Any of following models types may be available, depending on the version of Gradle being used by the target 
+ build: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;&lt;a href='type://GradleBuild'&gt;GradleBuild&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.GradleProject'&gt;org.gradle.tooling.model.GradleProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.gradle.BuildInvocations'&gt;org.gradle.tooling.model.gradle.BuildInvocations&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.gradle.ProjectPublications'&gt;org.gradle.tooling.model.gradle.ProjectPublications&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.idea.IdeaProject'&gt;org.gradle.tooling.model.idea.IdeaProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.idea.BasicIdeaProject'&gt;org.gradle.tooling.model.idea.BasicIdeaProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.eclipse.EclipseProject'&gt;org.gradle.tooling.model.eclipse.EclipseProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.eclipse.HierarchicalEclipseProject'&gt;org.gradle.tooling.model.eclipse.HierarchicalEclipseProject&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;p&gt;A build may also expose additional custom tooling models. You can use this method to query these models. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model. 
+ @throws UnknownModelException When the default project does not support the requested model. 
+ 
+ @since 1.8 
+</description>
+        <parameter type="java.lang.Class" name="modelType"/>
+    </method>
+    <method name="getModel" returnType="T" delegationTarget="org.gradle.tooling.model.gradle.BasicGradleProject">
+        <description> 
+ Fetches a snapshot of the model of the given type for the given element, usually a Gradle project. 
+ 
+ &lt;p&gt;The following elements are supported: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.gradle.BasicGradleProject'&gt;org.gradle.tooling.model.gradle.BasicGradleProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.GradleProject'&gt;org.gradle.tooling.model.GradleProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.eclipse.EclipseProject'&gt;org.gradle.tooling.model.eclipse.EclipseProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule'&gt;org.gradle.tooling.model.idea.IdeaModule&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;p&gt;See &lt;a href='type://BuildController#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for more details. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target The target element, usually a project. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model. 
+ @throws UnknownModelException When the target project does not support the requested model. 
+</description>
+        <parameter type="org.gradle.tooling.model.Model" name="target"/>
+        <parameter type="java.lang.Class" name="modelType"/>
+    </method>
+    <property name="buildModel" type="org.gradle.tooling.model.gradle.GradleBuild">
+        <description> 
+ Returns an overview of the Gradle build, including some basic details of the projects that make up the build. 
+ This is equivalent to calling &lt;a href='type://BuildController#getModel(GradleBuild.class)'&gt;#getModel(GradleBuild.class)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model. 
+</description>
+    </property>
+    <property name="model" type="T">
+        <description> 
+ Fetches a snapshot of the model of the given type for the given element, usually a Gradle project. 
+ 
+ &lt;p&gt;The following elements are supported: 
+ 
+ &lt;ul&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.gradle.BasicGradleProject'&gt;org.gradle.tooling.model.gradle.BasicGradleProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.GradleProject'&gt;org.gradle.tooling.model.GradleProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.eclipse.EclipseProject'&gt;org.gradle.tooling.model.eclipse.EclipseProject&lt;/a&gt;&lt;/li&gt; 
+     &lt;li&gt;Any &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule'&gt;org.gradle.tooling.model.idea.IdeaModule&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;p&gt;See &lt;a href='type://BuildController#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for more details. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target The target element, usually a project. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model. 
+ @throws UnknownModelException When the target project does not support the requested model. 
+</description>
+    </property>
+</type>

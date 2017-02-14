@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.routes.RoutesSourceSet" version="3.0"><description> 
- Represents a source set containing routes files 
-</description></type>

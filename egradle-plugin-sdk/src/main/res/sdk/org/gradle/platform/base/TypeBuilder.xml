@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.TypeBuilder" version="3.0">
+    <description> 
+ A TypeBuilder to configure the registration of a type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The registered type. 
+</description>
+    <method name="defaultImplementation" returnType="org.gradle.platform.base.TypeBuilder">
+        <description> 
+ Allows the plugin to register the implementation type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;implementation the implementation class. 
+</description>
+        <parameter type="java.lang.Class" name="implementation"/>
+    </method>
+    <method name="internalView" returnType="org.gradle.platform.base.TypeBuilder">
+        <description> 
+ Allows type registration rules to add internal views to the registered type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;internalView the internal view class 
+</description>
+        <parameter type="java.lang.Class" name="internalView"/>
+    </method>
+</type>

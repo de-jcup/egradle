@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.Project" version="3.0">
+    <description> 
+ Represents the customizable elements of an ipr (via XML hooks everything of the ipr is customizable). 
+</description>
+    <method name="apply" returnType="org.gradle.plugins.ide.idea.model.Path">
+        <parameter type="org.gradle.plugins.ide.idea.model.IdeaModule" name="module"/>
+    </method>
+    <method name="collectRootUrlAsFiles" returnType="java.util.Set">
+        <parameter type="java.util.List" name="nodes"/>
+    </method>
+    <method name="configure" returnType="void">
+        <parameter type="java.util.List" name="modules"/>
+        <parameter type="java.lang.String" name="jdkName"/>
+        <parameter type="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" name="languageLevel"/>
+        <parameter type="org.gradle.api.JavaVersion" name="bytecodeVersion"/>
+        <parameter type="java.util.Collection" name="wildcards"/>
+        <parameter type="java.util.Collection" name="projectLibraries"/>
+        <parameter type="java.lang.String" name="vcs"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="findCompilerConfiguration" returnType="groovy.util.Node"/>
+    <method name="findOrCreateBytecodeLevelConfiguration" returnType="groovy.util.Node"/>
+    <method name="findOrCreateLibraryTable" returnType="groovy.util.Node"/>
+    <method name="findOrCreateModules" returnType="groovy.util.Node"/>
+    <method name="findProjectRootManager" returnType="groovy.util.Node"/>
+    <method name="findVcsDirectoryMappings" returnType="groovy.util.Node"/>
+    <method name="getDefaultResourceName" returnType="java.lang.String"/>
+    <method name="getJdk" returnType="org.gradle.plugins.ide.idea.model.Jdk">
+        <description> 
+ Represent the jdk information of the project java sdk. 
+</description>
+    </method>
+    <method name="getModulePaths" returnType="java.util.Set" delegationTarget="Path">
+        <description> 
+ A set of &lt;a href='type://Path'&gt;Path&lt;/a&gt; instances pointing to the modules contained in the ipr. 
+</description>
+    </method>
+    <method name="getProjectLibraries" returnType="java.util.Set">
+        <description> 
+ The project-level libraries of the IDEA project. 
+</description>
+    </method>
+    <method name="getVcs" returnType="java.lang.String">
+        <description> 
+ The vcs used by the project. 
+</description>
+    </method>
+    <method name="getWildcards" returnType="java.util.Set">
+        <description> 
+ A set of wildcard string to be included/excluded from the resources. 
+</description>
+    </method>
+    <method name="hashCode" returnType="int"/>
+    <method name="load" returnType="void">
+        <parameter type="groovy.util.Node" name="xml"/>
+    </method>
+    <method name="loadJdk" returnType="void"/>
+    <method name="loadModulePaths" returnType="void"/>
+    <method name="loadProjectLibraries" returnType="void"/>
+    <method name="loadWildcards" returnType="void"/>
+    <method name="setJdk" returnType="void">
+        <parameter type="org.gradle.plugins.ide.idea.model.Jdk" name="jdk"/>
+    </method>
+    <method name="setModulePaths" returnType="void">
+        <parameter type="java.util.Set" name="modulePaths"/>
+    </method>
+    <method name="setProjectLibraries" returnType="void">
+        <parameter type="java.util.Set" name="projectLibraries"/>
+    </method>
+    <method name="setVcs" returnType="void">
+        <parameter type="java.lang.String" name="vcs"/>
+    </method>
+    <method name="setWildcards" returnType="void">
+        <parameter type="java.util.Set" name="wildcards"/>
+    </method>
+    <method name="store" returnType="void">
+        <parameter type="groovy.util.Node" name="xml"/>
+    </method>
+    <method name="storeBytecodeLevels" returnType="void"/>
+    <method name="storeJdk" returnType="void"/>
+    <method name="storeModulePaths" returnType="void"/>
+    <method name="storeProjectLibraries" returnType="void"/>
+    <method name="storeVcs" returnType="void"/>
+    <method name="storeWildcards" returnType="void"/>
+    <property name="defaultResourceName" type="java.lang.String"/>
+    <property name="jdk" type="org.gradle.plugins.ide.idea.model.Jdk">
+        <description> 
+ Represent the jdk information of the project java sdk. 
+</description>
+    </property>
+    <property name="modulePaths" type="java.util.Set">
+        <description> 
+ A set of &lt;a href='type://Path'&gt;Path&lt;/a&gt; instances pointing to the modules contained in the ipr. 
+</description>
+    </property>
+    <property name="projectLibraries" type="java.util.Set">
+        <description> 
+ The project-level libraries of the IDEA project. 
+</description>
+    </property>
+    <property name="vcs" type="java.lang.String">
+        <description> 
+ The vcs used by the project. 
+</description>
+    </property>
+    <property name="wildcards" type="java.util.Set">
+        <description> 
+ A set of wildcard string to be included/excluded from the resources. 
+</description>
+    </property>
+</type>

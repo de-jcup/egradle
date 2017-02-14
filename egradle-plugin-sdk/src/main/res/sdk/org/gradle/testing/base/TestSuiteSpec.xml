@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.testing.base.TestSuiteSpec" version="3.0">
+    <description> 
+ A component representing a suite of tests that will be built and executed together. 
+</description>
+    <method name="getTestedComponent" returnType="org.gradle.platform.base.ComponentSpec">
+        <description> 
+ The tested component. 
+</description>
+    </method>
+    <method name="setTestedComponent" returnType="void">
+        <description> 
+ Sets the tested component. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testedComponent the component under test 
+</description>
+        <parameter type="org.gradle.platform.base.ComponentSpec" name="testedComponent"/>
+    </method>
+    <method name="testing" returnType="void">
+        <description> 
+ Sets the tested component. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testedComponent the component under test 
+</description>
+        <parameter type="org.gradle.platform.base.ComponentSpec" name="testedComponent"/>
+    </method>
+    <property name="testedComponent" type="org.gradle.platform.base.ComponentSpec">
+        <description> 
+ The tested component. 
+</description>
+    </property>
+</type>

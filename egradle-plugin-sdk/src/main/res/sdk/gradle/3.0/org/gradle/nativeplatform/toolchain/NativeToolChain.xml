@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.NativeToolChain" version="3.0"><description> 
- A set of compilers and linkers that are used together to construct a native binary. 
-</description></type>

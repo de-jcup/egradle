@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeSourceCompileTask" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask"><description> 
- Compiles native source files into object files. 
-</description><method name="configureSpec" returnType="void"><parameter type="org.gradle.nativeplatform.toolchain.internal.NativeCompileSpec" name="spec"/></method><method name="getPreCompiledHeader" returnType="org.gradle.nativeplatform.toolchain.internal.PreCompiledHeader"><description> 
- Returns the pre-compiled header to be used during compilation 
-</description></method><method name="setPreCompiledHeader" returnType="void"><parameter type="org.gradle.nativeplatform.toolchain.internal.PreCompiledHeader" name="preCompiledHeader"/></method><property name="preCompiledHeader" type="org.gradle.nativeplatform.toolchain.internal.PreCompiledHeader"><description> 
- Returns the pre-compiled header to be used during compilation 
-</description></property></type>

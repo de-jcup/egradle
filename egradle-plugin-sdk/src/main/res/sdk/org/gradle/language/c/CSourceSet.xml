@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.c.CSourceSet" version="3.0">
+    <description> 
+ A set of C source files. 
+ 
+ &lt;p&gt;A C source set contains a set of source files, together with an optional set of exported header files.&lt;/p&gt; 
+ 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: "c" 
+ 
+ model {@literal /}*.c" 
+                     } 
+                     exportedHeaders { 
+                         srcDirs "src/main/include" 
+                     } 
+                 } 
+             } 
+         } 
+     } 
+ } 
+ &lt;/pre&gt; 
+</description>
+</type>

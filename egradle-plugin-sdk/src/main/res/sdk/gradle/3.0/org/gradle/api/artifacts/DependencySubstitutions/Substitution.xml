@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.DependencySubstitutions.Substitution" version="3.0"><description> 
- Provides a DSL-friendly mechanism for specifying the target of a substitution. 
-</description><method name="with" returnType="void"><description> 
- Specify the target of the substitution. 
-</description><parameter type="org.gradle.api.artifacts.component.ComponentSelector" name="notation"/></method></type>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.javascript.coffeescript.CoffeeScriptBasePlugin" version="3.0">
+    <method name="addJsConfiguration" returnType="org.gradle.api.artifacts.Configuration">
+        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
+        <parameter type="org.gradle.api.artifacts.dsl.DependencyHandler" name="dependencies"/>
+        <parameter type="org.gradle.plugins.javascript.coffeescript.CoffeeScriptExtension" name="extension"/>
+    </method>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="org.gradle.api.artifacts.Configuration"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.DependencySet" name="configDependencies"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile" name="task"/>
+    </method>
+</type>

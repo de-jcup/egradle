@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.nativeplatform.plugins.NativeComponentPlugin" version="3.0">
+    <description> 
+ A plugin that creates tasks used for constructing native binaries. 
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+    </method>
+</type>

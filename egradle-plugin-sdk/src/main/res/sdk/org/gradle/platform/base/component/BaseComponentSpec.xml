@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.platform.base.component.BaseComponentSpec" version="3.0">
+    <description> 
+ Base class that may be used for custom &lt;a href='type://GeneralComponentSpec'&gt;GeneralComponentSpec&lt;/a&gt; implementations. However, it is generally better to use an 
+ interface annotated with &lt;a href='type://org.gradle.model.Managed'&gt;org.gradle.model.Managed&lt;/a&gt; and not use an implementation class at all. 
+</description>
+    <method name="getBinaries" returnType="org.gradle.model.ModelMap"/>
+    <method name="getSources" returnType="org.gradle.model.ModelMap"/>
+    <property name="binaries" type="org.gradle.model.ModelMap"/>
+    <property name="sources" type="org.gradle.model.ModelMap"/>
+</type>

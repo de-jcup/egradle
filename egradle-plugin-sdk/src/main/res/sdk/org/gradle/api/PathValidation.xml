@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.PathValidation" version="3.0">
+    <description> 
+ An enumeration for describing validation policies for file paths. 
+</description>
+</type>

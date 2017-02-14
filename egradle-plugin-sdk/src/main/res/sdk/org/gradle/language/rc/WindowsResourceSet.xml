@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.rc.WindowsResourceSet" version="3.0">
+    <description> 
+ A set of Windows Resource definition files. 
+ 
+ &lt;p&gt;A Windows Resource set contains a set of script files, together with an optional set of header files.&lt;/p&gt; 
+ 
+ &lt;pre autoTested="true"&gt; 
+ apply plugin: "windows-resources" 
+ 
+ model {@literal /}*.rc" 
+                     } 
+                     exportedHeaders { 
+                         srcDirs "src/main/include" 
+                     } 
+                 } 
+             } 
+         } 
+     } 
+ } 
+ &lt;/pre&gt; 
+</description>
+</type>

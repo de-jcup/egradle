@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.test.TestProgressEvent" version="3.0">
+    <description> 
+ Root interface for all events that signal progress while executing a test or test suite. 
+ 
+ @since 2.4 
+</description>
+    <method name="getDescriptor" returnType="org.gradle.tooling.events.test.TestOperationDescriptor" delegationTarget="JvmTestOperationDescriptor">
+        <description> 
+ Returns the description of the test for which progress is reported. For JVM-based tests, 
+ the descriptor is of sub-type &lt;a href='type://JvmTestOperationDescriptor'&gt;JvmTestOperationDescriptor&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying test operation. 
+</description>
+    </method>
+    <property name="descriptor" type="org.gradle.tooling.events.test.TestOperationDescriptor">
+        <description> 
+ Returns the description of the test for which progress is reported. For JVM-based tests, 
+ the descriptor is of sub-type &lt;a href='type://JvmTestOperationDescriptor'&gt;JvmTestOperationDescriptor&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying test operation. 
+</description>
+    </property>
+</type>

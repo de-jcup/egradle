@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.testing.jacoco.plugins.JacocoTaskExtension.Output" version="3.0">
+    <description> 
+ The types of output that the agent can use for execution data. 
+</description>
+    <method name="getAsArg" returnType="java.lang.String">
+        <description> 
+ Extension for tasks that should run with a Jacoco agent to generate coverage execution data. 
+</description>
+    </method>
+    <property name="asArg" type="java.lang.String">
+        <description> 
+ Extension for tasks that should run with a Jacoco agent to generate coverage execution data. 
+</description>
+    </property>
+</type>

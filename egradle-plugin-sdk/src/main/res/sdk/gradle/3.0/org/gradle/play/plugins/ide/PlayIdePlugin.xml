@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.play.plugins.ide.PlayIdePlugin" version="3.0"><description> 
- Plugin for configuring IDE plugins when the project uses the Play Framework component support. 
- 
- &lt;p&gt;NOTE: This currently supports configuring the 'idea' plugin only.&lt;/p&gt; 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="execute" returnType="void"><parameter type="org.gradle.api.plugins.AppliedPlugin" name="appliedPlugin"/></method></type>

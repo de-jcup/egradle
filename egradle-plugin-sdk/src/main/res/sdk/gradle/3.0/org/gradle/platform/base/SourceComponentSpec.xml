@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.SourceComponentSpec" version="3.0"><description> 
- Represents some component whose implementation can be represented as a collection of source files, and whose other 
- outputs are built from this source. 
-</description><method name="getSources" returnType="org.gradle.model.ModelMap"><description> 
- The source sets for this component. 
-</description></method><property name="sources" type="org.gradle.model.ModelMap"><description> 
- The source sets for this component. 
-</description></property></type>

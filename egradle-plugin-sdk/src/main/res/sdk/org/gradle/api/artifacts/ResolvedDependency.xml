@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ResolvedDependency" version="3.0">
+    <description> 
+ Information about a resolved dependency. 
+</description>
+    <method name="getAllArtifacts" returnType="java.util.Set">
+        <description> 
+ Returns the parent artifacts of this dependency and its children. Never returns null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+        <parameter type="org.gradle.api.artifacts.ResolvedDependency" name="parent"/>
+    </method>
+    <method name="getAllModuleArtifacts" returnType="java.util.Set">
+        <description> 
+ Returns the module artifacts belonging to this ResolvedDependency and recursively to its children. Returns never null. 
+ 
+ @see #getModuleArtifacts() 
+</description>
+    </method>
+    <method name="getArtifacts" returnType="java.util.Set">
+        <description> 
+ Returns the parent artifacts of this dependency. Never returns null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+        <parameter type="org.gradle.api.artifacts.ResolvedDependency" name="parent"/>
+    </method>
+    <method name="getChildren" returnType="java.util.Set">
+        <description> 
+ Returns the transitive ResolvedDependency instances of this resolved dependency. Returns never null. 
+</description>
+    </method>
+    <method name="getConfiguration" returnType="java.lang.String">
+        <description> 
+ Returns the configuration under which this instance was resolved. 
+</description>
+    </method>
+    <method name="getModule" returnType="org.gradle.api.artifacts.ResolvedModuleVersion">
+        <description> 
+ Returns the module which this resolved dependency belongs to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module. 
+</description>
+    </method>
+    <method name="getModuleArtifacts" returnType="java.util.Set">
+        <description> 
+ Returns the module artifacts belonging to this ResolvedDependency. A module artifact is an artifact that belongs 
+ to a ResolvedDependency independent of a particular parent. Returns never null.  
+</description>
+    </method>
+    <method name="getModuleGroup" returnType="java.lang.String">
+        <description> 
+ Returns the module group of the resolved dependency. 
+</description>
+    </method>
+    <method name="getModuleName" returnType="java.lang.String">
+        <description> 
+ Returns the module name of the resolved dependency. 
+</description>
+    </method>
+    <method name="getModuleVersion" returnType="java.lang.String">
+        <description> 
+ Returns the module version of the resolved dependency. 
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ Returns the name of the resolved dependency. 
+</description>
+    </method>
+    <method name="getParentArtifacts" returnType="java.util.Set">
+        <description> 
+ Returns the artifacts belonging to this ResolvedDependency which it only has for a particular parent. Returns never null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+        <parameter type="org.gradle.api.artifacts.ResolvedDependency" name="parent"/>
+    </method>
+    <method name="getParents" returnType="java.util.Set">
+        <description> 
+ Returns the ResolvedDependency instances that have this instance as a transitive dependency. Returns never null. 
+</description>
+    </method>
+    <property name="allArtifacts" type="java.util.Set">
+        <description> 
+ Returns the parent artifacts of this dependency and its children. Never returns null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+    </property>
+    <property name="allModuleArtifacts" type="java.util.Set">
+        <description> 
+ Returns the module artifacts belonging to this ResolvedDependency and recursively to its children. Returns never null. 
+ 
+ @see #getModuleArtifacts() 
+</description>
+    </property>
+    <property name="artifacts" type="java.util.Set">
+        <description> 
+ Returns the parent artifacts of this dependency. Never returns null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+    </property>
+    <property name="children" type="java.util.Set">
+        <description> 
+ Returns the transitive ResolvedDependency instances of this resolved dependency. Returns never null. 
+</description>
+    </property>
+    <property name="configuration" type="java.lang.String">
+        <description> 
+ Returns the configuration under which this instance was resolved. 
+</description>
+    </property>
+    <property name="module" type="org.gradle.api.artifacts.ResolvedModuleVersion">
+        <description> 
+ Returns the module which this resolved dependency belongs to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module. 
+</description>
+    </property>
+    <property name="moduleArtifacts" type="java.util.Set">
+        <description> 
+ Returns the module artifacts belonging to this ResolvedDependency. A module artifact is an artifact that belongs 
+ to a ResolvedDependency independent of a particular parent. Returns never null.  
+</description>
+    </property>
+    <property name="moduleGroup" type="java.lang.String">
+        <description> 
+ Returns the module group of the resolved dependency. 
+</description>
+    </property>
+    <property name="moduleName" type="java.lang.String">
+        <description> 
+ Returns the module name of the resolved dependency. 
+</description>
+    </property>
+    <property name="moduleVersion" type="java.lang.String">
+        <description> 
+ Returns the module version of the resolved dependency. 
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> 
+ Returns the name of the resolved dependency. 
+</description>
+    </property>
+    <property name="parentArtifacts" type="java.util.Set">
+        <description> 
+ Returns the artifacts belonging to this ResolvedDependency which it only has for a particular parent. Returns never null. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent A parent of the ResolvedDependency. Must not be null. 
+ @throws org.gradle.api.InvalidUserDataException If the parent is unknown or null 
+</description>
+    </property>
+    <property name="parents" type="java.util.Set">
+        <description> 
+ Returns the ResolvedDependency instances that have this instance as a transitive dependency. Returns never null. 
+</description>
+    </property>
+</type>

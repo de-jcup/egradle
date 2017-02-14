@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.jvm.test.JvmTestSuiteBinarySpec" version="3.0">
+    <description> 
+ Base type of JVM test suite binaries. 
+ 
+ @since 2.11 
+</description>
+    <method name="getRuntimeClasspath" returnType="org.gradle.jvm.internal.DependencyResolvingClasspath"/>
+    <method name="getTasks" returnType="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks"/>
+    <method name="getTestSuite" returnType="org.gradle.jvm.test.JvmTestSuiteSpec"/>
+    <method name="getTestedBinary" returnType="org.gradle.jvm.JvmBinarySpec"/>
+    <property name="runtimeClasspath" type="org.gradle.jvm.internal.DependencyResolvingClasspath"/>
+    <property name="tasks" type="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks"/>
+    <property name="testSuite" type="org.gradle.jvm.test.JvmTestSuiteSpec"/>
+    <property name="testedBinary" type="org.gradle.jvm.JvmBinarySpec"/>
+</type>

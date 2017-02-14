@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.play.distribution.PlayDistribution" version="3.0"><description> 
- Represents a Play distribution package 
-</description><method name="getBinary" returnType="org.gradle.play.PlayApplicationBinarySpec"><description> 
- The binary this distribution is associated with 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the binary 
-</description></method><property name="binary" type="org.gradle.play.PlayApplicationBinarySpec"><description> 
- The binary this distribution is associated with 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the binary 
-</description></property></type>

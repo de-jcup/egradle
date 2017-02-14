@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.scala.ScalaLanguageSourceSet" version="3.0"><description> 
- A set of sources passed to the Scala compiler. 
-</description><method name="getCompileClasspath" returnType="org.gradle.jvm.Classpath"/><property name="compileClasspath" type="org.gradle.jvm.Classpath"/></type>

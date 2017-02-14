@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.PublishToMavenRepository" version="3.0" superType="org.gradle.api.publish.maven.tasks.AbstractPublishToMaven">
+    <description> 
+ Publishes a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; to a &lt;a href='type://MavenArtifactRepository'&gt;MavenArtifactRepository&lt;/a&gt;. 
+ 
+ @since 1.4 
+</description>
+    <method name="doPublish" returnType="void">
+        <parameter type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal" name="publication"/>
+        <parameter type="org.gradle.api.artifacts.repositories.MavenArtifactRepository" name="repository"/>
+    </method>
+    <method name="getRepository" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
+        <description> 
+ The repository to publish to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to 
+</description>
+    </method>
+    <method name="getRepositoryTransportFactory" returnType="org.gradle.api.internal.artifacts.repositories.transport.RepositoryTransportFactory"/>
+    <method name="publish" returnType="void"/>
+    <method name="setRepository" returnType="void">
+        <description> 
+ Sets the repository to publish to. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to publish to 
+</description>
+        <parameter type="org.gradle.api.artifacts.repositories.MavenArtifactRepository" name="repository"/>
+    </method>
+    <property name="repository" type="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
+        <description> 
+ The repository to publish to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to 
+</description>
+    </property>
+    <property name="repositoryTransportFactory" type="org.gradle.api.internal.artifacts.repositories.transport.RepositoryTransportFactory"/>
+</type>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.FindBugsExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
+    <description> 
+ Configuration options for the FindBugs plugin. All options have sensible defaults. 
+ See the &lt;a href="http://findbugs.sourceforge.net/manual/"&gt;FindBugs Manual&lt;/a&gt; for additional information 
+ on these options. 
+ 
+ &lt;p&gt;Below is a full configuration example. Since all properties have sensible defaults, 
+ typically only selected properties will be configured. 
+ 
+ &lt;pre autoTested=''&gt; 
+     apply plugin: "java" 
+     apply plugin: "findbugs" 
+ 
+     findbugs { 
+         toolVersion = "2.0.1" 
+         sourceSets = [sourceSets.main] 
+         ignoreFailures = true 
+         reportsDir = file("$project.buildDir/findbugsReports") 
+         effort = "max" 
+         reportLevel = "high" 
+         visitors = ["FindSqlInjection", "SwitchFallthrough"] 
+         omitVisitors = ["FindNonShortCircuit"] 
+         includeFilter = file("$rootProject.projectDir/config/findbugs/includeFilter.xml") 
+         excludeFilter = file("$rootProject.projectDir/config/findbugs/excludeFilter.xml") 
+         excludeBugsFilter = file("$rootProject.projectDir/config/findbugs/excludeBugsFilter.xml") 
+     } 
+ &lt;/pre&gt; 
+ 
+ @see FindBugsPlugin 
+</description>
+    <method name="getEffort" returnType="java.lang.String" delegationTarget="min">
+        <description> 
+ The analysis effort level. 
+ The value specified should be one of &lt;a href='type://min'&gt;min&lt;/a&gt;, &lt;a href='type://default'&gt;default&lt;/a&gt;, or &lt;a href='type://max'&gt;max&lt;/a&gt;. 
+ Higher levels increase precision and find more bugs at the expense of running time and memory consumption. 
+</description>
+    </method>
+    <method name="getExcludeBugsFilter" returnType="java.io.File">
+        <description> 
+ The filename of a filter specifying baseline bugs to exclude from being reported. 
+</description>
+    </method>
+    <method name="getExcludeBugsFilterConfig" returnType="org.gradle.api.resources.TextResource">
+        <description> 
+ A filter specifying baseline bugs to exclude from being reported. 
+ 
+ @since 2.4 
+</description>
+    </method>
+    <method name="getExcludeFilter" returnType="java.io.File">
+        <description> 
+ The filename of a filter specifying bugs to exclude from being reported. 
+</description>
+    </method>
+    <method name="getExcludeFilterConfig" returnType="org.gradle.api.resources.TextResource" delegationTarget="excludeFilter">
+        <description> 
+ A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property. 
+ 
+ @since 2.2 
+</description>
+    </method>
+    <method name="getExtraArgs" returnType="java.util.Collection" delegationTarget="effort">
+        <description> 
+ Any additional arguments (not covered here more explicitly like &lt;a href='type://effort'&gt;effort&lt;/a&gt;) to be passed along to FindBugs. 
+ &lt;p&gt; 
+ Extra arguments are passed to FindBugs after the arguments Gradle understands (like &lt;a href='type://effort'&gt;effort&lt;/a&gt; but before the list of classes to analyze. 
+ This should only be used for arguments that cannot be provided by Gradle directly. 
+ Gradle does not try to interpret or validate the arguments before passing them to FindBugs. 
+ &lt;p&gt; 
+ See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs 
+ TextUICommandLine source&lt;/a&gt; for available options. 
+ 
+ @since 2.6 
+</description>
+    </method>
+    <method name="getIncludeFilter" returnType="java.io.File">
+        <description> 
+ The filename of a filter specifying which bugs are reported. 
+</description>
+    </method>
+    <method name="getIncludeFilterConfig" returnType="org.gradle.api.resources.TextResource" delegationTarget="includeFilter">
+        <description> 
+ A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property. 
+ 
+ @since 2.2 
+</description>
+    </method>
+    <method name="getOmitVisitors" returnType="java.util.Collection" delegationTarget="visitors">
+        <description> 
+ Similar to &lt;a href='type://visitors'&gt;visitors&lt;/a&gt; except that it specifies bug detectors which should not be run. 
+ By default, no visitors are omitted. 
+</description>
+    </method>
+    <method name="getReportLevel" returnType="java.lang.String" delegationTarget="low">
+        <description> 
+ The priority threshold for reporting bugs. 
+ If set to &lt;a href='type://low'&gt;low&lt;/a&gt;, all bugs are reported. 
+ If set to &lt;a href='type://medium'&gt;medium&lt;/a&gt; (the default), medium and high priority bugs are reported. 
+ If set to &lt;a href='type://high'&gt;high&lt;/a&gt;, only high priority bugs are reported. 
+</description>
+    </method>
+    <method name="getVisitors" returnType="java.util.Collection">
+        <description> 
+ The bug detectors which should be run. 
+ The bug detectors are specified by their class names, without any package qualification. 
+ By default, all detectors which are not disabled by default are run. 
+</description>
+    </method>
+    <method name="setEffort" returnType="void">
+        <parameter type="java.lang.String" name="effort"/>
+    </method>
+    <method name="setExcludeBugsFilter" returnType="void">
+        <description> 
+ The filename of a filter specifying baseline bugs to exclude from being reported. 
+</description>
+        <parameter type="java.io.File" name="filter"/>
+    </method>
+    <method name="setExcludeBugsFilterConfig" returnType="void">
+        <parameter type="org.gradle.api.resources.TextResource" name="excludeBugsFilterConfig"/>
+    </method>
+    <method name="setExcludeFilter" returnType="void">
+        <description> 
+ The filename of a filter specifying bugs to exclude from being reported. 
+</description>
+        <parameter type="java.io.File" name="filter"/>
+    </method>
+    <method name="setExcludeFilterConfig" returnType="void">
+        <parameter type="org.gradle.api.resources.TextResource" name="excludeFilterConfig"/>
+    </method>
+    <method name="setExtraArgs" returnType="void">
+        <parameter type="java.util.Collection" name="extraArgs"/>
+    </method>
+    <method name="setIncludeFilter" returnType="void">
+        <description> 
+ The filename of a filter specifying which bugs are reported. 
+</description>
+        <parameter type="java.io.File" name="filter"/>
+    </method>
+    <method name="setIncludeFilterConfig" returnType="void">
+        <parameter type="org.gradle.api.resources.TextResource" name="includeFilterConfig"/>
+    </method>
+    <method name="setOmitVisitors" returnType="void">
+        <parameter type="java.util.Collection" name="omitVisitors"/>
+    </method>
+    <method name="setReportLevel" returnType="void">
+        <parameter type="java.lang.String" name="reportLevel"/>
+    </method>
+    <method name="setVisitors" returnType="void">
+        <parameter type="java.util.Collection" name="visitors"/>
+    </method>
+    <property name="effort" type="java.lang.String">
+        <description> 
+ The analysis effort level. 
+ The value specified should be one of &lt;a href='type://min'&gt;min&lt;/a&gt;, &lt;a href='type://default'&gt;default&lt;/a&gt;, or &lt;a href='type://max'&gt;max&lt;/a&gt;. 
+ Higher levels increase precision and find more bugs at the expense of running time and memory consumption. 
+</description>
+    </property>
+    <property name="excludeBugsFilter" type="java.io.File">
+        <description> 
+ The filename of a filter specifying baseline bugs to exclude from being reported. 
+</description>
+    </property>
+    <property name="excludeBugsFilterConfig" type="org.gradle.api.resources.TextResource">
+        <description> 
+ A filter specifying baseline bugs to exclude from being reported. 
+ 
+ @since 2.4 
+</description>
+    </property>
+    <property name="excludeFilter" type="java.io.File">
+        <description> 
+ The filename of a filter specifying bugs to exclude from being reported. 
+</description>
+    </property>
+    <property name="excludeFilterConfig" type="org.gradle.api.resources.TextResource">
+        <description> 
+ A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property. 
+ 
+ @since 2.2 
+</description>
+    </property>
+    <property name="extraArgs" type="java.util.Collection">
+        <description> 
+ Any additional arguments (not covered here more explicitly like &lt;a href='type://effort'&gt;effort&lt;/a&gt;) to be passed along to FindBugs. 
+ &lt;p&gt; 
+ Extra arguments are passed to FindBugs after the arguments Gradle understands (like &lt;a href='type://effort'&gt;effort&lt;/a&gt; but before the list of classes to analyze. 
+ This should only be used for arguments that cannot be provided by Gradle directly. 
+ Gradle does not try to interpret or validate the arguments before passing them to FindBugs. 
+ &lt;p&gt; 
+ See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs 
+ TextUICommandLine source&lt;/a&gt; for available options. 
+ 
+ @since 2.6 
+</description>
+    </property>
+    <property name="includeFilter" type="java.io.File">
+        <description> 
+ The filename of a filter specifying which bugs are reported. 
+</description>
+    </property>
+    <property name="includeFilterConfig" type="org.gradle.api.resources.TextResource">
+        <description> 
+ A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property. 
+ 
+ @since 2.2 
+</description>
+    </property>
+    <property name="omitVisitors" type="java.util.Collection">
+        <description> 
+ Similar to &lt;a href='type://visitors'&gt;visitors&lt;/a&gt; except that it specifies bug detectors which should not be run. 
+ By default, no visitors are omitted. 
+</description>
+    </property>
+    <property name="reportLevel" type="java.lang.String">
+        <description> 
+ The priority threshold for reporting bugs. 
+ If set to &lt;a href='type://low'&gt;low&lt;/a&gt;, all bugs are reported. 
+ If set to &lt;a href='type://medium'&gt;medium&lt;/a&gt; (the default), medium and high priority bugs are reported. 
+ If set to &lt;a href='type://high'&gt;high&lt;/a&gt;, only high priority bugs are reported. 
+</description>
+    </property>
+    <property name="visitors" type="java.util.Collection">
+        <description> 
+ The bug detectors which should be run. 
+ The bug detectors are specified by their class names, without any package qualification. 
+ By default, all detectors which are not disabled by default are run. 
+</description>
+    </property>
+</type>

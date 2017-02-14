@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.PlatformAwareComponentSpec" version="3.0">
+    <description> 
+ Defines Platform specific operations for ComponentSpecs 
+</description>
+    <method name="targetPlatform" returnType="void">
+        <description> 
+ Specifies a platform that this component should be built be for. 
+</description>
+        <parameter type="java.lang.String" name="targetPlatform"/>
+    </method>
+</type>

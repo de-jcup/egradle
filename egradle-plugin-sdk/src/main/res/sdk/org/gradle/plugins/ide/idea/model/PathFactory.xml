@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.PathFactory" version="3.0">
+    <description> 
+ Path Factory. 
+</description>
+    <method name="addPathVariable" returnType="org.gradle.plugins.ide.idea.model.PathFactory">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.io.File" name="dir"/>
+    </method>
+    <method name="getPathList" returnType="java.util.List">
+        <parameter type="java.io.File" name="f"/>
+    </method>
+    <method name="getRelativePath" returnType="java.lang.String">
+        <parameter type="java.io.File" name="rootDir"/>
+        <parameter type="java.lang.String" name="rootDirString"/>
+        <parameter type="java.io.File" name="file"/>
+    </method>
+    <method name="matchPathLists" returnType="java.lang.String">
+        <parameter type="java.util.List" name="r"/>
+        <parameter type="java.util.List" name="f"/>
+    </method>
+    <method name="path" returnType="org.gradle.plugins.ide.idea.model.FilePath">
+        <description> 
+ Creates a path for the given file. 
+</description>
+        <parameter type="java.io.File" name="file"/>
+    </method>
+    <method name="path" returnType="org.gradle.plugins.ide.idea.model.Path">
+        <description> 
+ Creates a path for the given URL. 
+</description>
+        <parameter type="java.lang.String" name="url"/>
+    </method>
+    <method name="path" returnType="org.gradle.plugins.ide.idea.model.FilePath">
+        <description> 
+ Creates a path for the given file. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The file to generate a path for 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useFileScheme Whether 'file://' prefixed URI should be used even for JAR files 
+</description>
+        <parameter type="java.io.File" name="file"/>
+        <parameter type="boolean" name="useFileScheme"/>
+    </method>
+    <method name="path" returnType="org.gradle.plugins.ide.idea.model.Path">
+        <description> 
+ Creates a path for the given URL. 
+</description>
+        <parameter type="java.lang.String" name="url"/>
+        <parameter type="java.lang.String" name="relPath"/>
+    </method>
+    <method name="relativePath" returnType="org.gradle.plugins.ide.idea.model.FilePath">
+        <description> 
+ Creates a path relative to the given path variable. 
+</description>
+        <parameter type="java.lang.String" name="pathVar"/>
+        <parameter type="java.io.File" name="file"/>
+    </method>
+    <method name="relativePathToURI" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="relpath"/>
+    </method>
+    <method name="relativePathToURI" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="relpath"/>
+        <parameter type="boolean" name="useFileScheme"/>
+    </method>
+    <method name="resolvePath" returnType="org.gradle.plugins.ide.idea.model.FilePath">
+        <parameter type="java.io.File" name="rootDir"/>
+        <parameter type="java.lang.String" name="rootDirName"/>
+        <parameter type="java.io.File" name="file"/>
+    </method>
+    <method name="toUrl" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="scheme"/>
+        <parameter type="java.io.File" name="file"/>
+    </method>
+    <property name="pathList" type="java.util.List"/>
+    <property name="relativePath" type="java.lang.String"/>
+</type>

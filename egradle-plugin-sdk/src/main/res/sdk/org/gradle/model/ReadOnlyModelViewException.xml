@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.model.ReadOnlyModelViewException" version="3.0" superType="org.gradle.api.GradleException">
+    <description> 
+ Thrown when an attempt is made to change the value of a model element that is not writable at the time. 
+</description>
+    <method name="createMessage" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="viewType"/>
+        <parameter type="org.gradle.model.internal.core.ModelPath" name="path"/>
+        <parameter type="org.gradle.model.internal.type.ModelType" name="type"/>
+        <parameter type="org.gradle.model.internal.core.rule.describe.ModelRuleDescriptor" name="ruleDescriptor"/>
+    </method>
+</type>

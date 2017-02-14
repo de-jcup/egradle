@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.javascript.base.JavaScriptRepositoriesExtension" version="3.0">
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repo"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.repositories.IvyPatternRepositoryLayout" name="layout"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.repositories.MavenArtifactRepository" name="repository"/>
+    </method>
+    <method name="googleApis" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository"/>
+    <method name="googleApis" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="gradle" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
+    <method name="gradle" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+</type>

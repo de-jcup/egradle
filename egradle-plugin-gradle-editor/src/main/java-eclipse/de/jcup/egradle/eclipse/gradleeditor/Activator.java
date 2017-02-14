@@ -15,6 +15,9 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -25,9 +28,11 @@ import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
-import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
+import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.plugin.sdk.SDK;
+import de.jcup.egradle.eclipse.plugin.sdk.SDKManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -47,10 +52,9 @@ public class Activator extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public Activator() {
-		colorManager=new ColorManager();
-		codeCompletionRegistry=new CodeCompletionRegistry();
+		colorManager = new ColorManager();
+		codeCompletionRegistry = new CodeCompletionRegistry();
 	}
-
 
 	public ColorManager getColorManager() {
 		return colorManager;
@@ -61,22 +65,51 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
 		codeCompletionRegistry.setErrorHandler(errorHandler);
-	
-		/* init code completion parts */
+		
+		SDK sdk = SDKManager.get().getCurrentSDK();
+		
+		
+		/* FIXME ATR, 14.02.2017: 14.02.2017: bundle resolving of folde does not seem to work. maybe its would be better
+		 * to do xz-packaging to a file and suport the file from SDK to this location and copy + unpack it to user.home
+		 * (when not already installed)
+		 *  */
+		System.out.println("current sdk:"+sdk);
+		if (! sdk.isInstalled()){
+			try{
+				sdk.install();
+			}catch(IOException e){
+				EGradleUtil.log("Was not able install SDK:"+sdk.getVersion(),e);
+			}
+		}
+		File dslFolder = sdk.getSDKInstallationFolder();
+//		File dslFolder = fetchSDKDSLFolder(errorHandler);
+		/*
+		 * init code completion parts - when dsl folder not correctly set it
+		 * will not work but it is robust will only do nothing
+		 */
 		XMLTypeImporter typeImporter = new XMLTypeImporter();
 		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter,pluginsImporter,apiMappingImporter);
-		/* FIXME ATR, 19.01.2017: make version changeable... Maybe codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...*/
-		loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("sdk/gradle/3.0"));
+		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		/*
+		 * FIXME ATR, 19.01.2017: make version changeable... Maybe
+		 * codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...
+		 */
+		// loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("SDK/gradle/3.0"));
+		if (dslFolder != null) {
+			loader.setDSLFolder(dslFolder);
+		}
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
-		/* install dsl type provider as service, so it must be definitely used shared...*/
+		/*
+		 * install dsl type provider as service, so it must be definitely used
+		 * shared...
+		 */
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
-		
-		/* load project per default so show up time for tooltips faster*/
+
+		/* load project per default so show up time for tooltips faster */
 		gradleDslProvider.getType("org.gradle.api.Project");
-		
+
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -85,11 +118,10 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
-	public CodeCompletionRegistry getCodeCompletionRegistry(){
+	public CodeCompletionRegistry getCodeCompletionRegistry() {
 		return codeCompletionRegistry;
 	}
 
-	
 	/**
 	 * Returns the shared instance
 	 *

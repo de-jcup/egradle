@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.InvalidModelRuleException" version="3.0" superType="org.gradle.api.GradleException"><description> 
- Thrown when there is a problem with the usage of a model rule. 
- &lt;p&gt; 
- This exception is different to &lt;a href='type://InvalidModelRuleDeclarationException'&gt;InvalidModelRuleDeclarationException&lt;/a&gt; in that it signifies a problem 
- with using a model rule in a particular context, whereas &lt;a href='type://InvalidModelRuleDeclarationException'&gt;InvalidModelRuleDeclarationException&lt;/a&gt; signifies 
- a problem with the declaration of the model rule itself (which therefore means that the rule could not be used in any context). 
- &lt;p&gt; 
- This exception should always have cause, that provides information about the actual problem. 
-</description><method name="getDescriptor" returnType="java.lang.String"/><property name="descriptor" type="java.lang.String"/></type>

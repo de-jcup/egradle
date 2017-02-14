@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.antlr.AntlrTask" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+    <description> 
+ Generates parsers from Antlr grammars. 
+</description>
+    <method name="evaluate" returnType="void">
+        <parameter type="org.gradle.api.plugins.antlr.internal.AntlrResult" name="result"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.incremental.InputFileDetails" name="details"/>
+    </method>
+    <method name="getAntlrClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the classpath containing the Ant ANTLR task implementation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Ant task implementation classpath. 
+</description>
+    </method>
+    <method name="getArguments" returnType="java.util.List">
+        <description> 
+ List of command-line arguments passed to the antlr process 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The antlr command-line arguments 
+</description>
+    </method>
+    <method name="getMaxHeapSize" returnType="java.lang.String">
+        <description> 
+ The maximum heap size for the forked antlr process (ex: '1g'). 
+</description>
+    </method>
+    <method name="getOutputDirectory" returnType="java.io.File">
+        <description> 
+ Returns the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description>
+    </method>
+    <method name="getSource" returnType="org.gradle.api.file.FileTree">
+        <description> 
+ Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
+</description>
+    </method>
+    <method name="getWorkerProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/>
+    <method name="isTrace" returnType="boolean" delegationTarget="traceIn">
+        <description> 
+ Specifies that all rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="isTraceLexer" returnType="boolean" delegationTarget="traceIn">
+        <description> 
+ Specifies that all lexer rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="isTraceParser" returnType="boolean" delegationTarget="traceIn">
+        <description> 
+ Specifies that all parser rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="isTraceTreeWalker" returnType="boolean" delegationTarget="traceIn">
+        <description> 
+ Specifies that all tree walker rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="setAntlrClasspath" returnType="void">
+        <description> 
+ Specifies the classpath containing the Ant ANTLR task implementation. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;antlrClasspath The Ant task implementation classpath. Must not be null. 
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="antlrClasspath"/>
+    </method>
+    <method name="setArguments" returnType="void">
+        <parameter type="java.util.List" name="arguments"/>
+    </method>
+    <method name="setMaxHeapSize" returnType="void">
+        <parameter type="java.lang.String" name="maxHeapSize"/>
+    </method>
+    <method name="setOutputDirectory" returnType="void">
+        <description> 
+ Specifies the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputDirectory The output directory. Must not be null. 
+</description>
+        <parameter type="java.io.File" name="outputDirectory"/>
+    </method>
+    <method name="setSource" returnType="void" delegationTarget="SourceDirectorySet">
+        <description> 
+ Sets the source for this task. Delegates to &lt;a href='type://SourceTask#setSource(Object)'&gt;SourceTask#setSource(Object)&lt;/a&gt;. 
+ 
+ If the source is of type &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt;, then the relative path of each source grammar files 
+ is used to determine the relative output path of the generated source 
+ If the source is not of type &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt;, then the generated source files end up 
+ flattened in the specified output directory. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source. 
+</description>
+        <parameter type="java.lang.Object" name="source"/>
+    </method>
+    <method name="setTrace" returnType="void">
+        <parameter type="boolean" name="trace"/>
+    </method>
+    <method name="setTraceLexer" returnType="void">
+        <parameter type="boolean" name="traceLexer"/>
+    </method>
+    <method name="setTraceParser" returnType="void">
+        <parameter type="boolean" name="traceParser"/>
+    </method>
+    <method name="setTraceTreeWalker" returnType="void">
+        <parameter type="boolean" name="traceTreeWalker"/>
+    </method>
+    <property name="antlrClasspath" type="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the classpath containing the Ant ANTLR task implementation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Ant task implementation classpath. 
+</description>
+    </property>
+    <property name="arguments" type="java.util.List">
+        <description> 
+ List of command-line arguments passed to the antlr process 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The antlr command-line arguments 
+</description>
+    </property>
+    <property name="maxHeapSize" type="java.lang.String">
+        <description> 
+ The maximum heap size for the forked antlr process (ex: '1g'). 
+</description>
+    </property>
+    <property name="outputDirectory" type="java.io.File">
+        <description> 
+ Returns the directory to generate the parser source files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
+</description>
+    </property>
+    <property name="source" type="org.gradle.api.file.FileTree">
+        <description> 
+ Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
+</description>
+    </property>
+    <property name="trace" type="boolean">
+        <description> 
+ Specifies that all rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="traceLexer" type="boolean">
+        <description> 
+ Specifies that all lexer rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="traceParser" type="boolean">
+        <description> 
+ Specifies that all parser rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="traceTreeWalker" type="boolean">
+        <description> 
+ Specifies that all tree walker rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
+</type>

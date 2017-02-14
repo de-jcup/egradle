@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.GroovySourceSet" version="3.0">
+    <description> 
+ A &lt;a href='type://GroovySourceSetConvention'&gt;GroovySourceSetConvention&lt;/a&gt; defines the properties and methods added to a &lt;a href='type://SourceSet'&gt;SourceSet&lt;/a&gt; by the &lt;a href='type://org.gradle.api.plugins.GroovyPlugin'&gt;org.gradle.api.plugins.GroovyPlugin&lt;/a&gt;. 
+</description>
+    <method name="getAllGroovy" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ All Groovy source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Groovy source. Never returns null. 
+</description>
+    </method>
+    <method name="getGroovy" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ Returns the source to be compiled by the Groovy compiler for this source set. Any Java source present in this set 
+ will be passed to the Groovy compiler for joint compilation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy/Java source. Never returns null. 
+</description>
+    </method>
+    <method name="groovy" returnType="org.gradle.api.tasks.GroovySourceSet" delegationTarget="SourceDirectorySet">
+        <description> 
+ Configures the Groovy source for this set. 
+ 
+ &lt;p&gt;The given closure is used to configure the &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt; which contains the Groovy source. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the Groovy source. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <property name="allGroovy" type="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ All Groovy source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Groovy source. Never returns null. 
+</description>
+    </property>
+    <property name="groovy" type="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ Returns the source to be compiled by the Groovy compiler for this source set. Any Java source present in this set 
+ will be passed to the Groovy compiler for joint compilation. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy/Java source. Never returns null. 
+</description>
+    </property>
+</type>

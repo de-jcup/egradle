@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.ModuleDependency" version="3.0">
+    <description> 
+ Represents an orderEntry of type module in the iml XML. 
+</description>
+    <method name="addToNode" returnType="void">
+        <parameter type="groovy.util.Node" name="parentNode"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getAttributeMapForScopeAndExported" returnType="java.util.Map"/>
+    <method name="getGradlePath" returnType="java.lang.String"/>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ The name of the module the module depends on. 
+ Must not be null. 
+</description>
+    </method>
+    <method name="getScope" returnType="java.lang.String">
+        <description> 
+ The scope for this dependency. If null the scope attribute is not added. 
+</description>
+    </method>
+    <method name="getScopeHash" returnType="int"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="isExported" returnType="boolean"/>
+    <method name="scopeEquals" returnType="boolean">
+        <parameter type="java.lang.String" name="lhs"/>
+        <parameter type="java.lang.String" name="rhs"/>
+    </method>
+    <method name="setExported" returnType="void">
+        <parameter type="boolean" name="exported"/>
+    </method>
+    <method name="setGradlePath" returnType="void">
+        <parameter type="java.lang.String" name="gradlePath"/>
+    </method>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setScope" returnType="void">
+        <parameter type="java.lang.String" name="scope"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="attributeMapForScopeAndExported" type="java.util.Map"/>
+    <property name="exported" type="boolean"/>
+    <property name="gradlePath" type="java.lang.String"/>
+    <property name="name" type="java.lang.String">
+        <description> 
+ The name of the module the module depends on. 
+ Must not be null. 
+</description>
+    </property>
+    <property name="scope" type="java.lang.String">
+        <description> 
+ The scope for this dependency. If null the scope attribute is not added. 
+</description>
+    </property>
+    <property name="scopeHash" type="int"/>
+</type>

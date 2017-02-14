@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.announce.BuildAnnouncementsPlugin" version="3.0"><description> 
- A plugin which announces interesting build lifecycle events. 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

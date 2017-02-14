@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.GeneralComponentSpec" version="3.0">
+    <description> 
+ A general purpose component specification, that can be used to represent some software component built from source and producing 
+ multiple output variants. 
+</description>
+</type>

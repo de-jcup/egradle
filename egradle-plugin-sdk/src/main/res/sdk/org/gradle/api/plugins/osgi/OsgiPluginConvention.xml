@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.osgi.OsgiPluginConvention" version="3.0">
+    <description> 
+ Is mixed into the project when applying the &lt;a href='type://org.gradle.api.plugins.osgi.OsgiPlugin'&gt;org.gradle.api.plugins.osgi.OsgiPlugin&lt;/a&gt;. 
+</description>
+    <method name="call" returnType="java.lang.Object"/>
+    <method name="createDefaultOsgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+    </method>
+    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest">
+        <description> 
+ Creates a new instance of &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt;. The returned object is preconfigured with: 
+ &lt;pre&gt; 
+ version: project.version 
+ name: project.archivesBaseName 
+ symbolicName: project.group + "." + project.archivesBaseName (see below for exceptions to this rule) 
+ &lt;/pre&gt; 
+ 
+ The symbolic name is usually the group + "." + archivesBaseName, with the following exceptions 
+ &lt;ul&gt; 
+ &lt;li&gt;if group has only one section (no dots) and archivesBaseName is not null then the 
+ first package name with classes is returned. eg. commons-logging:commons-logging -&gt; 
+ org.apache.commons.logging&lt;/li&gt; 
+ &lt;li&gt;if archivesBaseName is equal to last section of group then group is returned. eg. 
+ org.gradle:gradle -&gt; org.gradle&lt;/li&gt; 
+ &lt;li&gt;if archivesBaseName starts with last section of group that portion is removed. eg. 
+ org.gradle:gradle-core -&gt; org.gradle.core&lt;/li&gt; 
+ &lt;/ul&gt; 
+</description>
+    </method>
+    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest">
+        <description> 
+ Creates and configures a new instance of an  &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt; . The closure configures 
+ the new manifest instance before it is returned. 
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+</type>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.WarPluginConvention" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; used for the WarPlugin.&lt;/p&gt; 
+</description>
+    <method name="getProject" returnType="org.gradle.api.Project"/>
+    <method name="getWebAppDir" returnType="java.io.File">
+        <description> 
+ Returns the web application directory. 
+</description>
+    </method>
+    <method name="getWebAppDirName" returnType="java.lang.String">
+        <description> 
+ The name of the web application directory, relative to the project directory. 
+</description>
+    </method>
+    <method name="setWebAppDirName" returnType="void">
+        <parameter type="java.lang.String" name="webAppDirName"/>
+    </method>
+    <property name="project" type="org.gradle.api.Project"/>
+    <property name="webAppDir" type="java.io.File">
+        <description> 
+ Returns the web application directory. 
+</description>
+    </property>
+    <property name="webAppDirName" type="java.lang.String">
+        <description> 
+ The name of the web application directory, relative to the project directory. 
+</description>
+    </property>
+</type>

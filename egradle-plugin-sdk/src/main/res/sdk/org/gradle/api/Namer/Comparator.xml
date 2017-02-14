@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.Namer.Comparator" version="3.0">
+    <description> 
+ A comparator implementation based on the names returned by the given namer. 
+</description>
+    <method name="compare" returnType="int">
+        <parameter type="T" name="o1"/>
+        <parameter type="T" name="o2"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="obj"/>
+    </method>
+    <method name="hashCode" returnType="int"/>
+</type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.model.ModelViewClosedException" version="3.0" superType="org.gradle.model.ReadOnlyModelViewException">
+    <description> 
+ Thrown when at attempt is made to mutate a subject of a rule after the rule has completed. 
+ &lt;p&gt; 
+ This can potentially happen when a reference to the subject is retained during a rule and then used afterwards, 
+ Such as when an anonymous inner class or closure “closes over” the subject. 
+</description>
+</type>

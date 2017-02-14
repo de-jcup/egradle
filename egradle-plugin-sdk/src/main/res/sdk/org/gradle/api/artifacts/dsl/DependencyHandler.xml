@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.DependencyHandler" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://DependencyHandler'&gt;DependencyHandler&lt;/a&gt; is used to declare dependencies. Dependencies are grouped into 
+ configurations (see &lt;a href='type://org.gradle.api.artifacts.Configuration'&gt;org.gradle.api.artifacts.Configuration&lt;/a&gt;).&lt;/p&gt; 
+ 
+ &lt;p&gt;To declare a specific dependency for a configuration you can use the following syntax:&lt;/p&gt; 
+ 
+ &lt;pre&gt; 
+ dependencies { 
+     &lt;i&gt;configurationName&lt;/i&gt; &lt;i&gt;dependencyNotation1&lt;/i&gt;, &lt;i&gt;dependencyNotation2&lt;/i&gt;, ... 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;p&gt;Example shows a basic way of declaring dependencies. 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ //so that we can use 'compile', 'testCompile' for dependencies 
+ 
+ dependencies { 
+   //for dependencies found in artifact repositories you can use 
+   //the group:name:version notation 
+   compile 'commons-lang:commons-lang:2.6' 
+   testCompile 'org.mockito:mockito:1.9.0-rc1' 
+ 
+   //map-style notation: 
+   compile group: 'com.google.code.guice', name: 'guice', version: '1.0' 
+ 
+   //declaring arbitrary files as dependencies 
+   compile files('hibernate.jar', 'libs/spring.jar') 
+ 
+   //putting all jars from 'libs' onto compile classpath 
+   compile fileTree('libs') 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;h2&gt;Advanced dependency configuration&lt;/h2&gt; 
+ &lt;p&gt;To do some advanced configuration on a dependency when it is declared, you can additionally pass a configuration closure:&lt;/p&gt; 
+ 
+ &lt;pre&gt; 
+ dependencies { 
+         &lt;i&gt;configStatement1&lt;/i&gt; 
+         &lt;i&gt;configStatement2&lt;/i&gt; 
+     } 
+ } 
+ &lt;/pre&gt; 
+ 
+ Examples of advanced dependency declaration including: 
+ &lt;ul&gt; 
+ &lt;li&gt;Forcing certain dependency version in case of the conflict.&lt;/li&gt; 
+ &lt;li&gt;Excluding certain dependencies by name, group or both. 
+      More details about per-dependency exclusions can be found in 
+      docs for &lt;a href='type://org.gradle.api.artifacts.ModuleDependency#exclude(java.util.Map)'&gt;org.gradle.api.artifacts.ModuleDependency#exclude(java.util.Map)&lt;/a&gt;.&lt;/li&gt; 
+ &lt;li&gt;Avoiding transitive dependencies for certain dependency.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' //so that I can declare 'compile' dependencies 
+ 
+ dependencies { 
+     //in case of versions conflict '3.1' version of hibernate wins: 
+     force = true 
+ 
+     //excluding a particular transitive dependency: 
+     exclude module: 'cglib' //by artifact name 
+     exclude group: 'org.jmock' //by group 
+     exclude group: 'org.unwanted', module: 'iAmBuggy' //by both name and group 
+ 
+     //disabling all transitive dependencies of this dependency 
+     transitive = false 
+   } 
+ } 
+ &lt;/pre&gt; 
+ 
+ More examples of advanced configuration, useful when dependency module has multiple artifacts: 
+ &lt;ul&gt; 
+   &lt;li&gt;Declaring dependency to a specific configuration of the module.&lt;/li&gt; 
+   &lt;li&gt;Explicit specification of the artifact. See also &lt;a href='type://org.gradle.api.artifacts.ModuleDependency#artifact(groovy.lang.Closure)'&gt;org.gradle.api.artifacts.ModuleDependency#artifact(groovy.lang.Closure)&lt;/a&gt;.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' //so that I can declare 'compile' dependencies 
+ 
+ dependencies { 
+       //useful when some artifact properties unconventional 
+       name = 'someArtifact' //artifact name different than module name 
+       extension = 'someExt' 
+       type = 'someType' 
+       classifier = 'someClassifier' 
+     } 
+   } 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;h2&gt;Dependency notations&lt;/h2&gt; 
+ 
+ &lt;p&gt;There are several supported dependency notations. These are described below. For each dependency declared this 
+ way, a &lt;a href='type://Dependency'&gt;Dependency&lt;/a&gt; object is created. You can use this object to query or further configure the 
+ dependency.&lt;/p&gt; 
+ 
+ &lt;p&gt;You can also always add instances of 
+ &lt;a href='type://org.gradle.api.artifacts.Dependency'&gt;org.gradle.api.artifacts.Dependency&lt;/a&gt; directly:&lt;/p&gt; 
+ 
+ &lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; &amp;lt;instance&amp;gt;&lt;/code&gt; 
+ 
+ &lt;h3&gt;External dependencies&lt;/h3&gt; 
+ 
+ &lt;p&gt;There are two notations supported for declaring a dependency on an external module. 
+ One is a string notation formatted this way:&lt;/p&gt; 
+ 
+ &lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; "&lt;i&gt;group&lt;/i&gt;:&lt;i&gt;name&lt;/i&gt;:&lt;i&gt;version&lt;/i&gt;:&lt;i&gt;classifier&lt;/i&gt;@&lt;i&gt;extension&lt;/i&gt;"&lt;/code&gt; 
+ 
+ &lt;p&gt;The other is a map notation:&lt;/p&gt; 
+ 
+ &lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; group: &lt;i&gt;group&lt;/i&gt;, name: &lt;i&gt;name&lt;/i&gt;, version: &lt;i&gt;version&lt;/i&gt;, classifier: 
+ &lt;i&gt;classifier&lt;/i&gt;, ext: &lt;i&gt;extension&lt;/i&gt;&lt;/code&gt; 
+ 
+ &lt;p&gt;In both notations, all properties, except name, are optional.&lt;/p&gt; 
+ 
+ &lt;p&gt;External dependencies are represented by a &lt;a href='type://org.gradle.api.artifacts.ExternalModuleDependency'&gt;org.gradle.api.artifacts.ExternalModuleDependency&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ //so that we can use 'compile', 'testCompile' for dependencies 
+ 
+ dependencies { 
+   //for dependencies found in artifact repositories you can use 
+   //the string notation, e.g. group:name:version 
+   compile 'commons-lang:commons-lang:2.6' 
+   testCompile 'org.mockito:mockito:1.9.0-rc1' 
+ 
+   //map notation: 
+   compile group: 'com.google.code.guice', name: 'guice', version: '1.0' 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;h3&gt;Project dependencies&lt;/h3&gt; 
+ 
+ &lt;p&gt;To add a project dependency, you use the following notation: 
+ &lt;p&gt;&lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; project(':someProject')&lt;/code&gt; 
+ 
+ &lt;p&gt;The notation &lt;code&gt;project(':projectA')&lt;/code&gt; is similar to the syntax you use 
+ when configuring a projectA in a multi-module gradle project. 
+ 
+ &lt;p&gt;By default, when you declare dependency to projectA, you actually declare dependency to the 'default' configuration of the projectA. 
+ If you need to depend on a specific configuration of projectA, use map notation for projects: 
+ &lt;p&gt;&lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; project(path: ':projectA', configuration: 'someOtherConfiguration')&lt;/code&gt; 
+ 
+ &lt;p&gt;Project dependencies are represented using a &lt;a href='type://org.gradle.api.artifacts.ProjectDependency'&gt;org.gradle.api.artifacts.ProjectDependency&lt;/a&gt;. 
+ 
+ &lt;h3&gt;File dependencies&lt;/h3&gt; 
+ 
+ &lt;p&gt;You can also add a dependency using a &lt;a href='type://org.gradle.api.file.FileCollection'&gt;org.gradle.api.file.FileCollection&lt;/a&gt;:&lt;/p&gt; 
+ &lt;code&gt;&lt;i&gt;configurationName&lt;/i&gt; files('a file')&lt;/code&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ //so that we can use 'compile', 'testCompile' for dependencies 
+ 
+ dependencies { 
+   //declaring arbitrary files as dependencies 
+   compile files('hibernate.jar', 'libs/spring.jar') 
+ 
+   //putting all jars from 'libs' onto compile classpath 
+   compile fileTree('libs') 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;p&gt;File dependencies are represented using a &lt;a href='type://org.gradle.api.artifacts.SelfResolvingDependency'&gt;org.gradle.api.artifacts.SelfResolvingDependency&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;h3&gt;Dependencies to other configurations&lt;/h3&gt; 
+ 
+ &lt;p&gt;You can add a dependency using a &lt;a href='type://org.gradle.api.artifacts.Configuration'&gt;org.gradle.api.artifacts.Configuration&lt;/a&gt;.&lt;/p&gt; 
+ 
+ &lt;p&gt;When the configuration is from the same project as the target configuration, the target configuration is changed 
+ to extend from the provided configuration.&lt;/p&gt; 
+ 
+ &lt;p&gt;When the configuration is from a different project, a project dependency is added.&lt;/p&gt; 
+ 
+ &lt;h3&gt;Gradle distribution specific dependencies&lt;/h3&gt; 
+ 
+ &lt;p&gt;It is possible to depend on certain Gradle APIs or libraries that Gradle ships with. 
+ It is particularly useful for Gradle plugin development. Example:&lt;/p&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ //Our Gradle plugin is written in groovy 
+ apply plugin: 'groovy' 
+ //now we can use the 'compile' configuration for declaring dependencies 
+ 
+ dependencies { 
+   //we will use the Groovy version that ships with Gradle: 
+   compile localGroovy() 
+ 
+   //our plugin requires Gradle API interfaces and classes to compile: 
+   compile gradleApi() 
+ 
+   //we will use the Gradle test-kit to test build logic: 
+   testCompile gradleTestKit() 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;h3&gt;Client module dependencies&lt;/h3&gt; 
+ 
+ &lt;p&gt;To add a client module to a configuration you can use the notation:&lt;/p&gt; 
+ 
+ &lt;pre&gt; 
+ &lt;i&gt;configurationName&lt;/i&gt; module(&lt;i&gt;moduleNotation&lt;/i&gt;) { 
+     &lt;i&gt;module dependencies&lt;/i&gt; 
+ } 
+ &lt;/pre&gt; 
+ 
+ The module notation is the same as the dependency notations described above, except that the classifier property is 
+ not available. Client modules are represented using a &lt;a href='type://org.gradle.api.artifacts.ClientModule'&gt;org.gradle.api.artifacts.ClientModule&lt;/a&gt;. 
+</description>
+    <method name="add" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Adds a dependency to the given configuration. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation 
+ 
+ The dependency notation, in one of the notations described above. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.String" name="configurationName"/>
+        <parameter type="java.lang.Object" name="dependencyNotation"/>
+    </method>
+    <method name="add" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Adds a dependency to the given configuration, and configures the dependency using the given closure. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.String" name="configurationName"/>
+        <parameter type="java.lang.Object" name="dependencyNotation"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="components" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+        <description> 
+ Configures component metadata for this project. 
+ 
+ &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentMetadataHandler&lt;/a&gt; for this project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata 
+ @since 1.8 
+</description>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <method name="create" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency without adding it to a configuration. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.Object" name="dependencyNotation"/>
+    </method>
+    <method name="create" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency without adding it to a configuration, and configures the dependency using 
+ the given closure. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencyNotation The dependency notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.Object" name="dependencyNotation"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery">
+        <description> 
+ Creates an artifact resolution query. 
+ 
+ @since 2.0 
+</description>
+    </method>
+    <method name="getComponents" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+        <description> 
+ Returns the component metadata handler for this project. The returned handler can be used for adding rules 
+ that modify the metadata of depended-on software components. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project 
+ @since 1.8 
+</description>
+    </method>
+    <method name="getModules" returnType="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler">
+        <description> 
+ Returns the component module metadata handler for this project. The returned handler can be used for adding rules 
+ that modify the metadata of depended-on software components. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project 
+ @since 2.2 
+</description>
+    </method>
+    <method name="gradleApi" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on the API of the current version of Gradle. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+    </method>
+    <method name="gradleTestKit" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on the &lt;a href="http://docs.gradle.org/current/userguide/test_kit.html"&gt;Gradle test-kit&lt;/a&gt; API. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+ @since 2.6 
+</description>
+    </method>
+    <method name="localGroovy" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on the Groovy that is distributed with the current version of Gradle. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+    </method>
+    <method name="module" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on a client module. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The module notation, in one of the notations described above. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.Object" name="notation"/>
+    </method>
+    <method name="module" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on a client module. The dependency is configured using the given closure before it is 
+ returned. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The module notation, in one of the notations described above. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the dependency. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.lang.Object" name="notation"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="modules" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler">
+        <description> 
+ Configures module metadata for this project. 
+ 
+ &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler&lt;/a&gt; for this project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata 
+ @since 2.2 
+</description>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <method name="project" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates a dependency on a project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation The project notation, in one of the notations described above. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
+</description>
+        <parameter type="java.util.Map" name="notation"/>
+    </method>
+    <property name="components" type="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+        <description> 
+ Returns the component metadata handler for this project. The returned handler can be used for adding rules 
+ that modify the metadata of depended-on software components. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project 
+ @since 1.8 
+</description>
+    </property>
+    <property name="modules" type="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler">
+        <description> 
+ Returns the component module metadata handler for this project. The returned handler can be used for adding rules 
+ that modify the metadata of depended-on software components. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project 
+ @since 2.2 
+</description>
+    </property>
+</type>

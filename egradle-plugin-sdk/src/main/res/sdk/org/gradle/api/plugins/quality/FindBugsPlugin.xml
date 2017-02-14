@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.FindBugsPlugin" version="3.0">
+    <description> 
+ A plugin for the &lt;a href="http://findbugs.sourceforge.net"&gt;FindBugs&lt;/a&gt; byte code analyzer. 
+ 
+ &lt;p&gt; 
+ Declares a &lt;tt&gt;findbugs&lt;/tt&gt; configuration which needs to be configured with the FindBugs library to be used. 
+ Additional plugins can be added to the &lt;tt&gt;findbugsPlugins&lt;/tt&gt; configuration. 
+ 
+ &lt;p&gt; 
+ For projects that have the Java (base) plugin applied, a &lt;a href='type://FindBugs'&gt;FindBugs&lt;/a&gt; task is 
+ created for each source set. 
+ 
+ @see FindBugs 
+ @see FindBugsExtension 
+</description>
+    <method name="beforeApply" returnType="void"/>
+    <method name="call" returnType="java.util.Collection"/>
+    <method name="configureDefaultDependencies" returnType="void">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
+    </method>
+    <method name="configureFindBugsConfigurations" returnType="void"/>
+    <method name="configureForSourceSet" returnType="void">
+        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
+        <parameter type="org.gradle.api.plugins.quality.FindBugs" name="task"/>
+    </method>
+    <method name="configureReportsConventionMapping" returnType="void">
+        <parameter type="org.gradle.api.plugins.quality.FindBugs" name="task"/>
+        <parameter type="java.lang.String" name="baseName"/>
+    </method>
+    <method name="configureTaskConventionMapping" returnType="void">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
+        <parameter type="org.gradle.api.plugins.quality.FindBugs" name="task"/>
+    </method>
+    <method name="configureTaskDefaults" returnType="void">
+        <parameter type="org.gradle.api.plugins.quality.FindBugs" name="task"/>
+        <parameter type="java.lang.String" name="baseName"/>
+    </method>
+    <method name="createExtension" returnType="org.gradle.api.plugins.quality.CodeQualityExtension"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.DependencySet" name="dependencies"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.reporting.SingleFileReport" name="report"/>
+    </method>
+    <method name="getTaskType" returnType="java.lang.Class"/>
+    <method name="getToolName" returnType="java.lang.String"/>
+    <property name="taskType" type="java.lang.Class"/>
+    <property name="toolName" type="java.lang.String"/>
+</type>

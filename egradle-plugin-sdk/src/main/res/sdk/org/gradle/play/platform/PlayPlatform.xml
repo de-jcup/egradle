@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.play.platform.PlayPlatform" version="3.0">
+    <description> 
+ Defines and configures a Play Framework environment including versions of Play, Scala and Java. 
+</description>
+    <method name="getJavaPlatform" returnType="org.gradle.jvm.platform.JavaPlatform">
+        <description> 
+ Version of Java Runtime to use. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Java runtime 
+</description>
+    </method>
+    <method name="getPlayVersion" returnType="java.lang.String">
+        <description> 
+ Version of Play Framework to use 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Play Framework 
+</description>
+    </method>
+    <method name="getScalaPlatform" returnType="org.gradle.language.scala.ScalaPlatform">
+        <description> 
+ Version of Scala Runtime to use. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Scala runtime 
+</description>
+    </method>
+    <property name="javaPlatform" type="org.gradle.jvm.platform.JavaPlatform">
+        <description> 
+ Version of Java Runtime to use. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Java runtime 
+</description>
+    </property>
+    <property name="playVersion" type="java.lang.String">
+        <description> 
+ Version of Play Framework to use 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Play Framework 
+</description>
+    </property>
+    <property name="scalaPlatform" type="org.gradle.language.scala.ScalaPlatform">
+        <description> 
+ Version of Scala Runtime to use. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Scala runtime 
+</description>
+    </property>
+</type>

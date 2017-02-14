@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.Named" version="3.0">
+    <description> 
+ Types can implement this interface and use the embedded &lt;a href='type://Namer'&gt;Namer&lt;/a&gt; implementation, to satisfy API that calls for a namer. 
+</description>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ The object's name. 
+ &lt;p&gt; 
+ Must be constant for the life of the object. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never null. 
+</description>
+    </method>
+    <property name="name" type="java.lang.String">
+        <description> 
+ The object's name. 
+ &lt;p&gt; 
+ Must be constant for the life of the object. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never null. 
+</description>
+    </property>
+</type>

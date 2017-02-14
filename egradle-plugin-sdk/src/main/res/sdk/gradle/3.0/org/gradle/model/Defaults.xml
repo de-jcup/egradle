@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.Defaults" version="3.0"><description> 
- Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation initializes the rule subject with default values. 
- &lt;p&gt; 
- Default rules execute first for a given subject, just after the subject has been created but before &lt;a href='type://Model'&gt;Model&lt;/a&gt; rules and &lt;a href='type://Mutate'&gt;Mutate&lt;/a&gt; rules. 
- The first parameter of the rule is the rule subject, which is mutable for the duration of the rule. 
- &lt;p&gt; 
- Please see &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; for more information on method rules. 
-</description></type>

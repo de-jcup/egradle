@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.Incubating" version="3.0"><description> 
- Indicates that a feature is incubating. This means that the feature is currently a work-in-progress and may 
- change at any time. 
-</description></type>

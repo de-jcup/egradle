@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.model.Path" version="3.0">
+    <description> 
+ Specifies a model path on a parameter 
+</description>
+</type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.plugins.ide.eclipse.model.WbModuleEntry" version="3.0">
+    <description> 
+ Represents an entry in &lt;code&gt;wb-module&lt;/code&gt;. 
+</description>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+</type>

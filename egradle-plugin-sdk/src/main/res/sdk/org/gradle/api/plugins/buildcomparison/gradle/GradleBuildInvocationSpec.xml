@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" version="3.0">
+    <description> 
+ A specification for launching a Gradle build with a specified Gradle version. 
+</description>
+    <method name="getArguments" returnType="java.util.List">
+        <description> 
+ The command line arguments (excluding tasks) to invoke the build with. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The command line arguments (excluding tasks) to invoke the build with. 
+</description>
+    </method>
+    <method name="getGradleVersion" returnType="java.lang.String">
+        <description> 
+ The Gradle version to run the build with. 
+ 
+ Defaults to the current Gradle version of the running build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version to run the build with. Never null. 
+</description>
+    </method>
+    <method name="getProjectDir" returnType="java.io.File">
+        <description> 
+ The “root” directory of the build. 
+ 
+ Defaults to the current build's root directory. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The “root” project directory of the build. Never null. 
+</description>
+    </method>
+    <method name="getTasks" returnType="java.util.List">
+        <description> 
+ The tasks to execute. 
+ 
+ Defaults to an empty list. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks to execute. 
+</description>
+    </method>
+    <method name="setArguments" returnType="void">
+        <description> 
+ Sets the command line arguments (excluding tasks) to invoke the build with. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments The command line arguments (excluding tasks) to invoke the build with. 
+</description>
+        <parameter type="java.lang.Iterable" name="arguments"/>
+    </method>
+    <method name="setGradleVersion" returnType="void" delegationTarget="">
+        <description> 
+ Sets the Gradle version to run the build with. 
+ 
+ The value must be a valid, published, Gradle version number. 
+ 
+ Examples are: 
+ &lt;ul&gt; 
+ &lt;li&gt;&lt;a href='type://"1.1"'&gt;"1.1"&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;a href='type://"1.0-rc-1"'&gt;"1.0-rc-1"&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleVersion The Gradle version to run the build with. 
+</description>
+        <parameter type="java.lang.String" name="gradleVersion"/>
+    </method>
+    <method name="setProjectDir" returnType="void">
+        <description> 
+ Sets the “root” directory of the build. 
+ 
+ This should not be the project directory of child project in a multi project build. 
+ It should always be the root of the multiproject build. 
+ 
+ The value is interpreted as a file as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The “root” directory of the build. 
+</description>
+        <parameter type="java.lang.Object" name="projectDir"/>
+    </method>
+    <method name="setTasks" returnType="void">
+        <description> 
+ Sets the tasks to execute. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks to execute. 
+</description>
+        <parameter type="java.lang.Iterable" name="tasks"/>
+    </method>
+    <property name="arguments" type="java.util.List">
+        <description> 
+ The command line arguments (excluding tasks) to invoke the build with. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The command line arguments (excluding tasks) to invoke the build with. 
+</description>
+    </property>
+    <property name="gradleVersion" type="java.lang.String">
+        <description> 
+ The Gradle version to run the build with. 
+ 
+ Defaults to the current Gradle version of the running build. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version to run the build with. Never null. 
+</description>
+    </property>
+    <property name="projectDir" type="java.io.File">
+        <description> 
+ The “root” directory of the build. 
+ 
+ Defaults to the current build's root directory. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The “root” project directory of the build. Never null. 
+</description>
+    </property>
+    <property name="tasks" type="java.util.List">
+        <description> 
+ The tasks to execute. 
+ 
+ Defaults to an empty list. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks to execute. 
+</description>
+    </property>
+</type>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ClientModule" version="3.0">
+    <description> 
+ To model a module in your dependency declarations. Usually you can either declare a single dependency 
+ artifact or you declare a module dependency that depends on a module descriptor in a repository. With 
+ a client module you can declare a module dependency without the need of a module descriptor in a 
+ remote repository. 
+</description>
+    <method name="addDependency" returnType="void">
+        <description> 
+ Add a dependency to the client module. Such a dependency is transitive dependency for the 
+ project that has a dependency on the client module. 
+   
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependency The dependency to add to the client module. 
+ @see #getDependencies()  
+</description>
+        <parameter type="org.gradle.api.artifacts.ModuleDependency" name="dependency"/>
+    </method>
+    <method name="copy" returnType="org.gradle.api.artifacts.ClientModule">
+        <description> 
+ {@inheritDoc} 
+</description>
+    </method>
+    <method name="getDependencies" returnType="java.util.Set">
+        <description> 
+ Returns all the dependencies added to the client module. 
+ 
+ @see #addDependency(ModuleDependency) 
+</description>
+    </method>
+    <method name="getId" returnType="java.lang.String">
+        <description> 
+ Returns the id of the client module. This is usually only used for internal handling of the 
+ client module. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The id of the client module 
+</description>
+    </method>
+    <property name="dependencies" type="java.util.Set">
+        <description> 
+ Returns all the dependencies added to the client module. 
+ 
+ @see #addDependency(ModuleDependency) 
+</description>
+    </property>
+    <property name="id" type="java.lang.String">
+        <description> 
+ Returns the id of the client module. This is usually only used for internal handling of the 
+ client module. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The id of the client module 
+</description>
+    </property>
+</type>

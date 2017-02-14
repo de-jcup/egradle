@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.Dependency" version="3.0">
+    <description> 
+ A &lt;a href='type://Dependency'&gt;Dependency&lt;/a&gt; represents a dependency on the artifacts from a particular source. A source can be an Ivy 
+ module, a Maven POM, another Gradle project, a collection of Files, etc... A source can have zero or more artifacts. 
+</description>
+    <method name="contentEquals" returnType="boolean">
+        <description> 
+ Returns whether two dependencies have identical values for their properties. A dependency is an entity with a 
+ key. Therefore dependencies might be equal and yet have different properties. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependency The dependency to compare this dependency with 
+</description>
+        <parameter type="org.gradle.api.artifacts.Dependency" name="dependency"/>
+    </method>
+    <method name="copy" returnType="org.gradle.api.artifacts.Dependency">
+        <description> 
+ Creates and returns a new dependency with the property values of this one. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The copy. Never returns null. 
+</description>
+    </method>
+    <method name="getGroup" returnType="java.lang.String">
+        <description> 
+ Returns the group of this dependency. The group is often required to find the artifacts of a dependency in a 
+ repository. For example, the group name corresponds to a directory name in a Maven like repository. Might return 
+ null. 
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ Returns the name of this dependency. The name is almost always required to find the artifacts of a dependency in 
+ a repository. Never returns null. 
+</description>
+    </method>
+    <method name="getVersion" returnType="java.lang.String">
+        <description> 
+ Returns the version of this dependency. The version is often required to find the artifacts of a dependency in a 
+ repository. For example the version name corresponds to a directory name in a Maven like repository. Might return 
+ null. 
+</description>
+    </method>
+    <property name="group" type="java.lang.String">
+        <description> 
+ Returns the group of this dependency. The group is often required to find the artifacts of a dependency in a 
+ repository. For example, the group name corresponds to a directory name in a Maven like repository. Might return 
+ null. 
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> 
+ Returns the name of this dependency. The name is almost always required to find the artifacts of a dependency in 
+ a repository. Never returns null. 
+</description>
+    </property>
+    <property name="version" type="java.lang.String">
+        <description> 
+ Returns the version of this dependency. The version is often required to find the artifacts of a dependency in a 
+ repository. For example the version name corresponds to a directory name in a Maven like repository. Might return 
+ null. 
+</description>
+    </property>
+</type>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ComponentSelection" version="3.0">
+    <description>* 
+ Represents a tuple of the component selector of a module and a candidate version 
+ to be evaluated in a component selection rule. 
+</description>
+    <method name="getCandidate" returnType="org.gradle.api.artifacts.component.ModuleComponentIdentifier">
+        <description> 
+ Gets the candidate version of the module. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the candidate version of the module 
+</description>
+    </method>
+    <method name="reject" returnType="void">
+        <description> 
+ Rejects the candidate for the resolution. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;reason The reason the candidate was rejected. 
+</description>
+        <parameter type="java.lang.String" name="reason"/>
+    </method>
+    <property name="candidate" type="org.gradle.api.artifacts.component.ModuleComponentIdentifier">
+        <description> 
+ Gets the candidate version of the module. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the candidate version of the module 
+</description>
+    </property>
+</type>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.java.archives.Attributes" version="3.0">
+    <description> 
+ Represent the attributes of a manifest section. 
+</description>
+</type>

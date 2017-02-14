@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.reporting.GenerateBuildDashboard.ReportState" version="3.0"><method name="equals" returnType="boolean"><parameter type="java.lang.Object" name="obj"/></method><method name="hashCode" returnType="int"/></type>

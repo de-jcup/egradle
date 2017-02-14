@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.UnknownTaskException" version="3.0" superType="org.gradle.api.UnknownDomainObjectException"><description> 
- &lt;p&gt;An &lt;code&gt;UnknownTaskException&lt;/code&gt; is thrown when a task referenced by path cannot be found.&lt;/p&gt; 
-</description></type>

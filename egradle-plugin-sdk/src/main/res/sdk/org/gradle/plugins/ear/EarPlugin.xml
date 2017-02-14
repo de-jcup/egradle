@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ear.EarPlugin" version="3.0">
+    <description> 
+ &lt;p&gt; 
+ A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; with tasks which assemble a web application into a EAR file. 
+ &lt;/p&gt; 
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="configureConfigurations" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureWithJavaPluginApplied" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earPluginConvention"/>
+        <parameter type="org.gradle.api.plugins.PluginContainer" name="plugins"/>
+    </method>
+    <method name="configureWithNoJavaPluginApplied" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earPluginConvention"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.JavaPlugin" name="javaPlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.plugins.ear.Ear" name="task"/>
+    </method>
+    <method name="setupEarTask" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="convention"/>
+    </method>
+    <method name="wireEarTaskConventions" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earConvention"/>
+    </method>
+</type>

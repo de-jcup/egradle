@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.javascript.base.SourceTransformationException" version="3.0" superType="org.gradle.api.GradleException"><description> 
- Thrown when a source code transformation fails. 
-</description></type>

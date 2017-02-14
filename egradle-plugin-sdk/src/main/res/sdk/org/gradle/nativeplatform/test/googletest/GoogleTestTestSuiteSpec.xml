@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec" version="3.0">
+    <description> 
+ Test suite of Google Test tests. 
+</description>
+</type>

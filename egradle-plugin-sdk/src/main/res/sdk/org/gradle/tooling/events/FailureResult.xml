@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.FailureResult" version="3.0">
+    <description> 
+ Describes how an operation finished with failures. 
+ 
+ @since 2.4 
+</description>
+    <method name="getFailures" returnType="java.util.List">
+        <description> 
+ Returns the failures that occurred while running the operation, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the failures, empty if the operation failed without any specific failure information. 
+</description>
+    </method>
+    <property name="failures" type="java.util.List">
+        <description> 
+ Returns the failures that occurred while running the operation, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the failures, empty if the operation failed without any specific failure information. 
+</description>
+    </property>
+</type>

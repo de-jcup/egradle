@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.SourceFolder" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
+    <description> 
+ SourceFolder.path contains only project relative path. 
+</description>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getAbsolutePath" returnType="java.lang.String"/>
+    <method name="getDir" returnType="java.io.File"/>
+    <method name="getExcludes" returnType="java.util.List"/>
+    <method name="getIncludes" returnType="java.util.List"/>
+    <method name="getKind" returnType="java.lang.String"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getOutput" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="parseNodeListAttribute" returnType="java.util.List">
+        <parameter type="groovy.util.Node" name="node"/>
+        <parameter type="java.lang.String" name="attributeName"/>
+    </method>
+    <method name="setDir" returnType="void">
+        <parameter type="java.io.File" name="dir"/>
+    </method>
+    <method name="setExcludes" returnType="void">
+        <parameter type="java.util.List" name="excludes"/>
+    </method>
+    <method name="setIncludes" returnType="void">
+        <parameter type="java.util.List" name="includes"/>
+    </method>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setOutput" returnType="void">
+        <parameter type="java.lang.String" name="output"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <method name="trim" returnType="void"/>
+    <method name="trim" returnType="void">
+        <parameter type="java.lang.String" name="prefix"/>
+    </method>
+    <property name="absolutePath" type="java.lang.String"/>
+    <property name="dir" type="java.io.File"/>
+    <property name="excludes" type="java.util.List"/>
+    <property name="includes" type="java.util.List"/>
+    <property name="kind" type="java.lang.String"/>
+    <property name="name" type="java.lang.String"/>
+    <property name="output" type="java.lang.String"/>
+</type>

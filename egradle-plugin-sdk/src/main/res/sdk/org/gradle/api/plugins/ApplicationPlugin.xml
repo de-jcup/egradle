@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.ApplicationPlugin" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which runs a project as a Java Application.&lt;/p&gt; 
+ 
+ &lt;p&gt;The plugin can be configured via its companion &lt;a href='type://ApplicationPluginConvention'&gt;ApplicationPluginConvention&lt;/a&gt; object.&lt;/p&gt; 
+</description>
+    <method name="addCreateScriptsTask" returnType="void"/>
+    <method name="addPluginConvention" returnType="void"/>
+    <method name="addRunTask" returnType="void"/>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="java.lang.Object"/>
+    <method name="configureDistSpec" returnType="org.gradle.api.file.CopySpec">
+        <parameter type="org.gradle.api.file.CopySpec" name="distSpec"/>
+    </method>
+    <method name="configureInstallTask" returnType="void">
+        <parameter type="org.gradle.api.Task" name="installTask"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.Task" name="task"/>
+    </method>
+</type>

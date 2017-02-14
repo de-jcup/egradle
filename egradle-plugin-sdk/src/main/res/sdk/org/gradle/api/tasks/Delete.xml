@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.Delete" version="3.0">
+    <description> 
+ &lt;p&gt;Deletes files or directories. Example:&lt;/p&gt; 
+ &lt;pre autoTested=''&gt; 
+ task makePretty(type: Delete) { 
+   delete 'uglyFolder', 'uglyFile' 
+   followSymlinks = true 
+ } 
+ &lt;/pre&gt; 
+ 
+ Be default symlinks will not be followed when deleting files. To change this behavior call 
+ &lt;a href='type://Delete#setFollowSymlinks(boolean)'&gt;Delete#setFollowSymlinks(boolean)&lt;/a&gt; with true. On systems that do not support symlinks, 
+ this will have no effect. 
+</description>
+    <method name="clean" returnType="void"/>
+    <method name="delete" returnType="org.gradle.api.tasks.Delete">
+        <description> 
+ Adds some files to be deleted by this task. The given targets are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;targets Any type of object accepted by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
+</description>
+        <parameter type="java.lang.Object" name="targets"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.file.DeleteSpec" name="deleteSpec"/>
+    </method>
+    <method name="getDelete" returnType="java.util.Set">
+        <description> 
+ Returns the set of files which will be deleted by this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
+</description>
+    </method>
+    <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
+    <method name="getFileSystem" returnType="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
+    <method name="getTargetFiles" returnType="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the resolved set of files which will be deleted by this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
+</description>
+    </method>
+    <method name="isFollowSymlinks" returnType="boolean">
+        <description> 
+ Returns if symlinks should be followed when doing a delete. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if symlinks will be followed. 
+</description>
+    </method>
+    <method name="setDelete" returnType="void">
+        <description> 
+ Sets the files to be deleted by this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target Any type of object accepted by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
+</description>
+        <parameter type="java.lang.Object" name="target"/>
+    </method>
+    <method name="setFollowSymlinks" returnType="void">
+        <description> 
+ Set if symlinks should be followed. If the platform doesn't support symlinks, then this will have no effect. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;followSymlinks if symlinks should be followed. 
+</description>
+        <parameter type="boolean" name="followSymlinks"/>
+    </method>
+    <property name="delete" type="java.util.Set">
+        <description> 
+ Returns the set of files which will be deleted by this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
+</description>
+    </property>
+    <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
+    <property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
+    <property name="followSymlinks" type="boolean">
+        <description> 
+ Returns if symlinks should be followed when doing a delete. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if symlinks will be followed. 
+</description>
+    </property>
+    <property name="targetFiles" type="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the resolved set of files which will be deleted by this task. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
+</description>
+    </property>
+</type>

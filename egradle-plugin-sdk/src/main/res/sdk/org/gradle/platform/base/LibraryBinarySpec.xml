@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.LibraryBinarySpec" version="3.0">
+    <description> 
+ A binary produced from a `&lt;a href='type://org.gradle.platform.base.LibrarySpec'&gt;org.gradle.platform.base.LibrarySpec&lt;/a&gt;`. 
+</description>
+    <method name="getLibrary" returnType="org.gradle.platform.base.LibrarySpec">
+        <description> 
+ The library that this binary belongs to. 
+</description>
+    </method>
+    <property name="library" type="org.gradle.platform.base.LibrarySpec">
+        <description> 
+ The library that this binary belongs to. 
+</description>
+    </property>
+</type>

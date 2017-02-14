@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.PathFactory.Variable" version="3.0">
+    <method name="getDir" returnType="java.io.File"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getPrefix" returnType="java.lang.String"/>
+    <property name="dir" type="java.io.File"/>
+    <property name="name" type="java.lang.String"/>
+    <property name="prefix" type="java.lang.String"/>
+</type>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.ZipEntryCompression" version="3.0">
+    <description> 
+ Specifies the compression level of an archives contents. 
+</description>
+</type>

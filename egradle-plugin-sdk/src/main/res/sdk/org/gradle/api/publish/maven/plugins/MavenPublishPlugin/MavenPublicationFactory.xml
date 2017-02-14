@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin.MavenPublicationFactory" version="3.0">
+    <method name="create" returnType="org.gradle.api.publish.maven.MavenPublication">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+</type>

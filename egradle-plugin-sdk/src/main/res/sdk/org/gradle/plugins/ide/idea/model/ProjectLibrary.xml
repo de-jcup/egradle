@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.ProjectLibrary" version="3.0">
+    <description> 
+ A project-level IDEA library. 
+</description>
+    <method name="addToNode" returnType="void">
+        <parameter type="groovy.util.Node" name="parentNode"/>
+        <parameter type="org.gradle.plugins.ide.idea.model.PathFactory" name="pathFactory"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="obj"/>
+    </method>
+    <method name="getClasses" returnType="java.util.Set">
+        <description> 
+ A set of Jar files or directories containing compiled code. 
+</description>
+    </method>
+    <method name="getCompilerClasspath" returnType="java.util.Set">
+        <description> 
+ A set of Jar files containing compiler classes. 
+</description>
+    </method>
+    <method name="getJavadoc" returnType="java.util.Set">
+        <description> 
+ A set of Jar files or directories containing javadoc. 
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ The name of the library. 
+</description>
+    </method>
+    <method name="getSources" returnType="java.util.Set">
+        <description> 
+ A set of directories containing sources. 
+</description>
+    </method>
+    <method name="getType" returnType="java.lang.String">
+        <description> 
+ The type of the library. 
+</description>
+    </method>
+    <method name="hashCode" returnType="int"/>
+    <method name="setClasses" returnType="void">
+        <description> 
+ A set of Jar files or directories containing source code. 
+</description>
+        <parameter type="java.util.Set" name="classes"/>
+    </method>
+    <method name="setCompilerClasspath" returnType="void">
+        <parameter type="java.util.Set" name="compilerClasspath"/>
+    </method>
+    <method name="setJavadoc" returnType="void">
+        <parameter type="java.util.Set" name="javadoc"/>
+    </method>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setSources" returnType="void">
+        <parameter type="java.util.Set" name="sources"/>
+    </method>
+    <method name="setType" returnType="void">
+        <parameter type="java.lang.String" name="type"/>
+    </method>
+    <property name="classes" type="java.util.Set">
+        <description> 
+ A set of Jar files or directories containing compiled code. 
+</description>
+    </property>
+    <property name="compilerClasspath" type="java.util.Set">
+        <description> 
+ A set of Jar files containing compiler classes. 
+</description>
+    </property>
+    <property name="javadoc" type="java.util.Set">
+        <description> 
+ A set of Jar files or directories containing javadoc. 
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> 
+ The name of the library. 
+</description>
+    </property>
+    <property name="sources" type="java.util.Set">
+        <description> 
+ A set of directories containing sources. 
+</description>
+    </property>
+    <property name="type" type="java.lang.String">
+        <description> 
+ The type of the library. 
+</description>
+    </property>
+</type>

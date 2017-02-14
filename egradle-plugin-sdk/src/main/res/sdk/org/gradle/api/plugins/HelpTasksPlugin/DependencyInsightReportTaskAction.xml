@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.HelpTasksPlugin.DependencyInsightReportTaskAction" version="3.0">
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask" name="task"/>
+    </method>
+</type>

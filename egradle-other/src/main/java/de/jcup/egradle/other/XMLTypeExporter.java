@@ -22,7 +22,7 @@ public class XMLTypeExporter {
 		try {
 			jc = JAXBContext.newInstance(XMLType.class);
 			Marshaller marshaller = jc.createMarshaller();
-//			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marshaller.marshal(type, stream);
 		} catch (JAXBException e) {
 			throw new IOException("Was not able to create unmarshaller", e);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.ide.visualstudio.TextProvider" version="3.0">
+    <description> 
+ Provides access to the content of a generated text file. 
+</description>
+    <method name="asBuilder" returnType="java.lang.StringBuilder" delegationTarget="StringBuilder">
+        <description> 
+ Get the content as a &lt;a href='type://StringBuilder'&gt;StringBuilder&lt;/a&gt;, permitting direct modification. 
+</description>
+    </method>
+    <method name="getText" returnType="java.lang.String">
+        <description> 
+ The text content. 
+</description>
+    </method>
+    <method name="setText" returnType="void">
+        <description> 
+ Replace the content. 
+</description>
+        <parameter type="java.lang.String" name="value"/>
+    </method>
+    <property name="text" type="java.lang.String">
+        <description> 
+ The text content. 
+</description>
+    </property>
+</type>

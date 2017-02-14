@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractLibrary" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
+    <description> 
+ Common superclass for the library elements. 
+</description>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getJavadocPath" returnType="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <method name="getLibrary" returnType="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <method name="getModuleVersion" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier"/>
+    <method name="getSourcePath" returnType="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setJavadocPath" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.FileReference" name="path"/>
+    </method>
+    <method name="setLibrary" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.FileReference" name="library"/>
+    </method>
+    <method name="setModuleVersion" returnType="void">
+        <parameter type="org.gradle.api.artifacts.ModuleVersionIdentifier" name="moduleVersion"/>
+    </method>
+    <method name="setSourcePath" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.FileReference" name="sourcePath"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="javadocPath" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <property name="library" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier"/>
+    <property name="sourcePath" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+</type>

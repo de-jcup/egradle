@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.plugins.ProjectReportsPlugin" version="3.0"><description> 
- &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which adds some project visualization report tasks to a project.&lt;/p&gt; 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method><method name="call" returnType="java.lang.Object"/></type>

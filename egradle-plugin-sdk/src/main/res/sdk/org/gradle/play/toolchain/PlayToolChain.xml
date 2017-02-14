@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.play.toolchain.PlayToolChain" version="3.0">
+    <description> 
+ A set of tools for building applications using the Play Framework. 
+</description>
+</type>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.AntBuilder" version="3.0">
+    <description> 
+ &lt;p&gt;An &lt;a href='type://AntBuilder'&gt;AntBuilder&lt;/a&gt; allows you to use Ant from your build script.&lt;/p&gt; 
+</description>
+    <method name="getAnt" returnType="org.gradle.api.AntBuilder">
+        <description> 
+ Returns this AntBuilder. Useful when you need to pass this builder to methods from within closures. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+    </method>
+    <method name="getLifecycleLogLevel" returnType="org.gradle.api.AntBuilder.AntMessagePriority">
+        <description> 
+ Returns the Ant message priority that corresponds to the Gradle "lifecycle" log level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logLevel The Ant log level that maps to the Gradle lifecycle log level 
+</description>
+    </method>
+    <method name="getProperties" returnType="java.util.Map">
+        <description> 
+ Returns the properties of the Ant project. This is a live map, you that you can make changes to the map and these 
+ changes are reflected in the Ant project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The properties. Never returns null. 
+</description>
+    </method>
+    <method name="getReferences" returnType="java.util.Map">
+        <description> 
+ Returns the references of the Ant project. This is a live map, you that you can make changes to the map and these 
+ changes are reflected in the Ant project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The references. Never returns null. 
+</description>
+    </method>
+    <method name="importBuild" returnType="void">
+        <description> 
+ Imports an Ant build into the associated Gradle project. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;antBuildFile The build file. This is resolved as per &lt;a href='type://Project#file(Object)'&gt;Project#file(Object)&lt;/a&gt;. 
+</description>
+        <parameter type="java.lang.Object" name="antBuildFile"/>
+    </method>
+    <method name="importBuild" returnType="void" delegationTarget="taskNamer">
+        <description> 
+ Imports an Ant build into the associated Gradle project, potentially providing alternative names for Gradle tasks that correspond to Ant targets. 
+ &lt;p&gt; 
+ For each Ant target that is to be converted to a Gradle task, the given &lt;a href='type://taskNamer'&gt;taskNamer&lt;/a&gt; receives the Ant target name as input 
+ and is expected to return the desired name for the corresponding Gradle task. 
+ The transformer may be called multiple times with the same input. 
+ Implementations should ensure uniqueness of the return value for a distinct input. 
+ That is, no two inputs should yield the same return value. 
+  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;antBuildFile The build file. This is resolved as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskNamer A transformer that calculates the name of the Gradle task for a corresponding Ant target. 
+</description>
+        <parameter type="java.lang.Object" name="antBuildFile"/>
+        <parameter type="org.gradle.api.Transformer" name="taskNamer"/>
+    </method>
+    <method name="setLifecycleLogLevel" returnType="void">
+        <description> 
+ Sets the Ant message priority that should correspond to the Gradle "lifecycle" log level.  Any messages logged at this 
+ priority (or more critical priority) will be logged at least at lifecycle in Gradle's logger.  If the Ant priority already maps to a 
+ higher Gradle log level, it will continue to be logged at that level.  Acceptable values are "VERBOSE", "DEBUG", "INFO", "WARN", 
+ and "ERROR". 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logLevel The Ant log level to map to the Gradle lifecycle log level 
+</description>
+        <parameter type="java.lang.String" name="logLevel"/>
+    </method>
+    <method name="setLifecycleLogLevel" returnType="void">
+        <description> 
+ Sets the Ant message priority that should correspond to the Gradle "lifecycle" log level.  Any messages logged at this 
+ priority (or more critical priority) will be logged at least at lifecycle in Gradle's logger.  If the Ant priority already maps to a 
+ higher Gradle log level, it will continue to be logged at that level. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;logLevel The Ant log level to map to the Gradle lifecycle log level 
+</description>
+        <parameter type="org.gradle.api.AntBuilder.AntMessagePriority" name="logLevel"/>
+    </method>
+    <property name="ant" type="org.gradle.api.AntBuilder">
+        <description> 
+ Returns this AntBuilder. Useful when you need to pass this builder to methods from within closures. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+    </property>
+    <property name="lifecycleLogLevel" type="org.gradle.api.AntBuilder.AntMessagePriority">
+        <description> 
+ Returns the Ant message priority that corresponds to the Gradle "lifecycle" log level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logLevel The Ant log level that maps to the Gradle lifecycle log level 
+</description>
+    </property>
+    <property name="properties" type="java.util.Map">
+        <description> 
+ Returns the properties of the Ant project. This is a live map, you that you can make changes to the map and these 
+ changes are reflected in the Ant project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The properties. Never returns null. 
+</description>
+    </property>
+    <property name="references" type="java.util.Map">
+        <description> 
+ Returns the references of the Ant project. This is a live map, you that you can make changes to the map and these 
+ changes are reflected in the Ant project. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The references. Never returns null. 
+</description>
+    </property>
+</type>

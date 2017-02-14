@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.ide.visualstudio.XmlConfigFile" version="3.0"><description> 
- An XML config file generated for Visual Studio. 
-</description><method name="withXml" returnType="void"><description> 
- Add an action that can manipulate the generated file content. 
-</description><parameter type="org.gradle.api.Action" name="action"/></method></type>

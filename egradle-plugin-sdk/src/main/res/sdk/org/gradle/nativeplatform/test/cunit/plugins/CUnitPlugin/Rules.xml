@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="configureCUnitTestSuiteSources" returnType="void">
+        <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="suite"/>
+        <parameter type="java.io.File" name="buildDir"/>
+    </method>
+    <method name="createCUnitLauncherTasks" returnType="void">
+        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
+        <parameter type="org.gradle.testing.base.TestSuiteContainer" name="testSuites"/>
+    </method>
+    <method name="createCUnitTestBinaries" returnType="void">
+        <parameter type="org.gradle.model.ModelMap" name="binaries"/>
+        <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="testSuite"/>
+        <parameter type="java.io.File" name="buildDir"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
+        <parameter type="org.gradle.api.internal.project.taskfactory.ITaskFactory" name="taskFactory"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.language.c.CSourceSet" name="cSourceSet"/>
+    </method>
+    <method name="findLauncherSources" returnType="org.gradle.language.c.CSourceSet">
+        <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="suite"/>
+    </method>
+    <method name="registerCUnitTestBinaryType" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerCUnitTestSuiteSpecType" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+</type>

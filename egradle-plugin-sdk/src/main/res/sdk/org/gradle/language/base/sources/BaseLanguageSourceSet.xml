@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.language.base.sources.BaseLanguageSourceSet" version="3.0">
+    <description> 
+ Base class that may be used for custom &lt;a href='type://LanguageSourceSet'&gt;LanguageSourceSet&lt;/a&gt; implementations. However, it is generally better to use an 
+ interface annotated with &lt;a href='type://org.gradle.model.Managed'&gt;org.gradle.model.Managed&lt;/a&gt; and not use an implementation class at all. 
+</description>
+    <method name="create" returnType="T">
+        <parameter type="java.lang.Class" name="publicType"/>
+        <parameter type="java.lang.Class" name="implementationType"/>
+        <parameter type="org.gradle.platform.base.internal.ComponentSpecIdentifier" name="componentId"/>
+        <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
+    </method>
+    <method name="validate" returnType="org.gradle.language.base.sources.BaseLanguageSourceSet.SourceSetInfo">
+        <parameter type="org.gradle.language.base.sources.BaseLanguageSourceSet.SourceSetInfo" name="info"/>
+    </method>
+</type>

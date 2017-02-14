@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.model.ModelSet" version="3.0">
+    <description> 
+ A set of managed model objects. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.model.Managed'&gt;org.gradle.model.Managed&lt;/a&gt; types may declare managed set properties. 
+ Managed sets can only contain managed types. 
+ &lt;p&gt; 
+ Managed set objects cannot be mutated via the mutative methods of the &lt;a href='type://java.util.Set'&gt;java.util.Set&lt;/a&gt; interface (e.g. &lt;a href='type://java.util.Set#add(Object)'&gt;java.util.Set#add(Object)&lt;/a&gt;, &lt;a href='type://java.util.Set#clear()'&gt;java.util.Set#clear()&lt;/a&gt;). 
+ To add elements to the set, the &lt;a href='type://ModelSet#create(Action)'&gt;#create(Action)&lt;/a&gt; method can be used. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the type of model object 
+</description>
+    <method name="afterEach" returnType="void" delegationTarget="org.gradle.model.Finalize">
+        <description> 
+ Apply the given action to each set element just before it is considered to be realised. 
+ &lt;p&gt; 
+ The configuration action is equivalent in terms of lifecycle to &lt;a href='type://org.gradle.model.Finalize'&gt;org.gradle.model.Finalize&lt;/a&gt; rule methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction the object configuration 
+</description>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="beforeEach" returnType="void" delegationTarget="org.gradle.model.Defaults">
+        <description> 
+ Apply the given action to each set element just after it is created. 
+ &lt;p&gt; 
+ The configuration action is equivalent in terms of lifecycle to &lt;a href='type://org.gradle.model.Defaults'&gt;org.gradle.model.Defaults&lt;/a&gt; rule methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction the object configuration 
+</description>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="create" returnType="void">
+        <description> 
+ Declares a new set element, configured by the given action. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the object configuration 
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+</type>

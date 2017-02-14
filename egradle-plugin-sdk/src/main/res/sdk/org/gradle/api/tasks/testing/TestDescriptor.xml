@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestDescriptor" version="3.0">
+    <description> 
+ Describes a test. A test may be a single atomic test, such as the execution of a test method, or it may be a 
+ composite test, made up of zero or more tests. 
+</description>
+    <method name="getClassName" returnType="java.lang.String">
+        <description> 
+ Returns the test class name for this test, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The class name. May return null. 
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ Returns the name of the test.  Not guaranteed to be unique. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test name 
+</description>
+    </method>
+    <method name="getParent" returnType="org.gradle.api.tasks.testing.TestDescriptor">
+        <description> 
+ Returns the parent of this test, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
+</description>
+    </method>
+    <method name="isComposite" returnType="boolean">
+        <description> 
+ Is this test a composite test? 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this test is a composite test. 
+</description>
+    </method>
+    <property name="className" type="java.lang.String">
+        <description> 
+ Returns the test class name for this test, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The class name. May return null. 
+</description>
+    </property>
+    <property name="composite" type="boolean">
+        <description> 
+ Is this test a composite test? 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this test is a composite test. 
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> 
+ Returns the name of the test.  Not guaranteed to be unique. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test name 
+</description>
+    </property>
+    <property name="parent" type="org.gradle.api.tasks.testing.TestDescriptor">
+        <description> 
+ Returns the parent of this test, if any. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
+</description>
+    </property>
+</type>

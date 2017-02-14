@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.maven.MavenPom" version="3.0">
+    <description> 
+ Is used for generating a Maven POM file and customizing the generation. 
+ To learn about the Maven POM see: &lt;a href="http://maven.apache.org/pom.html"&gt;http://maven.apache.org/pom.html&lt;/a&gt; 
+</description>
+    <method name="getArtifactId" returnType="java.lang.String">
+        <description> 
+ Returns the artifact id for this POM. 
+  
+ @see org.apache.maven.model.Model#getArtifactId() 
+</description>
+    </method>
+    <method name="getConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer">
+        <description> 
+ Returns the configuration container used for mapping configurations to Maven scopes. 
+</description>
+    </method>
+    <method name="getDependencies" returnType="java.util.List">
+        <description> 
+ Returns the dependencies for this POM. 
+  
+ @see org.apache.maven.model.Model#getDependencies() 
+</description>
+    </method>
+    <method name="getEffectivePom" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Returns a POM with the generated dependencies and the &lt;a href='type://MavenPom#whenConfigured(org.gradle.api.Action)'&gt;#whenConfigured(org.gradle.api.Action)&lt;/a&gt; actions applied. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the effective POM 
+</description>
+    </method>
+    <method name="getGroupId" returnType="java.lang.String">
+        <description> 
+ Returns the group id for this POM. 
+ 
+ @see org.apache.maven.model.Model#setGroupId(String) 
+</description>
+    </method>
+    <method name="getModel" returnType="java.lang.Object" delegationTarget="org.apache.maven.model.Model">
+        <description> 
+ Returns the underlying native Maven &lt;a href='type://org.apache.maven.model.Model'&gt;org.apache.maven.model.Model&lt;/a&gt; object. The MavenPom object 
+ delegates all the configuration information to this object. There Gradle MavenPom objects provides 
+ delegation methods just for setting the groupId, artifactId, version and packaging. For all other 
+ elements, either use the model object or &lt;a href='type://MavenPom#project(groovy.lang.Closure)'&gt;#project(groovy.lang.Closure)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the underlying native Maven object 
+</description>
+    </method>
+    <method name="getPackaging" returnType="java.lang.String">
+        <description> 
+ Returns the packaging for this POM. 
+ 
+ @see org.apache.maven.model.Model#getPackaging() 
+</description>
+    </method>
+    <method name="getScopeMappings" returnType="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer">
+        <description> 
+ Returns the scope mappings used for generating this POM. 
+</description>
+    </method>
+    <method name="getVersion" returnType="java.lang.String">
+        <description> 
+ Returns the version for this POM. 
+ 
+ @see org.apache.maven.model.Model#getVersion() 
+</description>
+    </method>
+    <method name="project" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Provides a builder for the Maven POM for adding or modifying properties of the Maven &lt;a href='type://MavenPom#getModel()'&gt;#getModel()&lt;/a&gt;. 
+ The syntax is exactly the same as used by polyglot Maven. For example: 
+ 
+ &lt;pre&gt; 
+ pom.project { 
+          name 'The Apache Software License, Version 2.0' 
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt' 
+          distribution 'repo' 
+       } 
+    } 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pom 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="groovy.lang.Closure" name="pom"/>
+    </method>
+    <method name="setArtifactId" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the artifact id for this POM. 
+ 
+ @see org.apache.maven.model.Model#setArtifactId(String) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.lang.String" name="artifactId"/>
+    </method>
+    <method name="setConfigurations" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the configuration container used for mapping configurations to Maven scopes. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
+    </method>
+    <method name="setDependencies" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the dependencies for this POM. 
+ 
+ @see org.apache.maven.model.Model#setDependencies(java.util.List) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.util.List" name="dependencies"/>
+    </method>
+    <method name="setGroupId" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the group id for this POM. 
+ 
+ @see org.apache.maven.model.Model#getGroupId 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.lang.String" name="groupId"/>
+    </method>
+    <method name="setModel" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="org.apache.maven.model.Model">
+        <description> 
+ Sets the underlying native Maven &lt;a href='type://org.apache.maven.model.Model'&gt;org.apache.maven.model.Model&lt;/a&gt; object. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;model 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @see #getModel()  
+</description>
+        <parameter type="java.lang.Object" name="model"/>
+    </method>
+    <method name="setPackaging" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the packaging for this POM. 
+ 
+ @see org.apache.maven.model.Model#setPackaging(String) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.lang.String" name="packaging"/>
+    </method>
+    <method name="setVersion" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Sets the version for this POM. 
+ 
+ @see org.apache.maven.model.Model#setVersion(String) 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.lang.String" name="version"/>
+    </method>
+    <method name="whenConfigured" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ &lt;p&gt;Adds a closure to be called when the POM has been configured. The POM is passed to the closure as a 
+ parameter.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute when the POM has been configured. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="whenConfigured" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ &lt;p&gt;Adds an action to be called when the POM has been configured. The POM is passed to the action as a 
+ parameter.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute when the POM has been configured. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="withXml" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="org.gradle.api.XmlProvider">
+        <description> 
+ &lt;p&gt;Adds a closure to be called when the POM XML has been created. The XML is passed to the closure as a 
+ parameter in form of a &lt;a href='type://org.gradle.api.XmlProvider'&gt;org.gradle.api.XmlProvider&lt;/a&gt;. The action can modify the XML.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute when the POM XML has been created. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="withXml" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="org.gradle.api.XmlProvider">
+        <description> 
+ &lt;p&gt;Adds an action to be called when the POM XML has been created. The XML is passed to the action as a 
+ parameter in form of a &lt;a href='type://org.gradle.api.XmlProvider'&gt;org.gradle.api.XmlProvider&lt;/a&gt;. The action can modify the XML.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to execute when the POM XML has been created. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="writeTo" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Writes the &lt;a href='type://MavenPom#getEffectivePom()'&gt;#getEffectivePom()&lt;/a&gt; XML to a writer while applying the &lt;a href='type://MavenPom#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; actions. Closes the supplied 
+ Writer when finished. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;writer The writer to write the POM to. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.io.Writer" name="writer"/>
+    </method>
+    <method name="writeTo" returnType="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Writes the &lt;a href='type://MavenPom#getEffectivePom()'&gt;#getEffectivePom()&lt;/a&gt; XML to a file while applying the &lt;a href='type://MavenPom#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; actions. 
+ The path is resolved as defined by &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; 
+ The file will be encoded as UTF-8. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path of the file to write the POM into. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="java.lang.Object" name="path"/>
+    </method>
+    <property name="artifactId" type="java.lang.String">
+        <description> 
+ Returns the artifact id for this POM. 
+  
+ @see org.apache.maven.model.Model#getArtifactId() 
+</description>
+    </property>
+    <property name="configurations" type="org.gradle.api.artifacts.ConfigurationContainer">
+        <description> 
+ Returns the configuration container used for mapping configurations to Maven scopes. 
+</description>
+    </property>
+    <property name="dependencies" type="java.util.List">
+        <description> 
+ Returns the dependencies for this POM. 
+  
+ @see org.apache.maven.model.Model#getDependencies() 
+</description>
+    </property>
+    <property name="effectivePom" type="org.gradle.api.artifacts.maven.MavenPom">
+        <description> 
+ Returns a POM with the generated dependencies and the &lt;a href='type://MavenPom#whenConfigured(org.gradle.api.Action)'&gt;#whenConfigured(org.gradle.api.Action)&lt;/a&gt; actions applied. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the effective POM 
+</description>
+    </property>
+    <property name="groupId" type="java.lang.String">
+        <description> 
+ Returns the group id for this POM. 
+ 
+ @see org.apache.maven.model.Model#setGroupId(String) 
+</description>
+    </property>
+    <property name="model" type="java.lang.Object">
+        <description> 
+ Returns the underlying native Maven &lt;a href='type://org.apache.maven.model.Model'&gt;org.apache.maven.model.Model&lt;/a&gt; object. The MavenPom object 
+ delegates all the configuration information to this object. There Gradle MavenPom objects provides 
+ delegation methods just for setting the groupId, artifactId, version and packaging. For all other 
+ elements, either use the model object or &lt;a href='type://MavenPom#project(groovy.lang.Closure)'&gt;#project(groovy.lang.Closure)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the underlying native Maven object 
+</description>
+    </property>
+    <property name="packaging" type="java.lang.String">
+        <description> 
+ Returns the packaging for this POM. 
+ 
+ @see org.apache.maven.model.Model#getPackaging() 
+</description>
+    </property>
+    <property name="scopeMappings" type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer">
+        <description> 
+ Returns the scope mappings used for generating this POM. 
+</description>
+    </property>
+    <property name="version" type="java.lang.String">
+        <description> 
+ Returns the version for this POM. 
+ 
+ @see org.apache.maven.model.Model#getVersion() 
+</description>
+    </property>
+</type>

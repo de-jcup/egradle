@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.plugin.repository.GradlePluginPortal" version="3.0"><description> 
- The Gradle Plugin Portal which can be used to resolve plugins. 
-</description></type>

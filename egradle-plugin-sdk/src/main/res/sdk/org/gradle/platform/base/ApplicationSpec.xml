@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ApplicationSpec" version="3.0">
+    <description> 
+ A specification of a &lt;a href='type://org.gradle.platform.base.Application'&gt;org.gradle.platform.base.Application&lt;/a&gt;. 
+</description>
+</type>

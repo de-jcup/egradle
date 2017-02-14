@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.language.jvm.plugins.JvmResourcesPlugin" version="3.0"><description> 
- Plugin for packaging JVM resources. Applies the &lt;a href='type://org.gradle.language.base.plugins.ComponentModelBasePlugin'&gt;org.gradle.language.base.plugins.ComponentModelBasePlugin&lt;/a&gt;. Registers "resources" language support with the &lt;a href='type://org.gradle.language.jvm.JvmResourceSet'&gt;org.gradle.language.jvm.JvmResourceSet&lt;/a&gt;. 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

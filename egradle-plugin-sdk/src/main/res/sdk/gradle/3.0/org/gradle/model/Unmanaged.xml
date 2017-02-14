@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.model.Unmanaged" version="3.0"><description> 
- Indicates that a property of a managed model element is explicitly of an unmanaged type. 
- &lt;p&gt; 
- This annotation must be present on the &lt;b&gt;getter&lt;/b&gt; of the property for the unmanaged type. 
- If the annotation is not present for a property that is not a managed type, a fatal error will occur. 
-</description></type>

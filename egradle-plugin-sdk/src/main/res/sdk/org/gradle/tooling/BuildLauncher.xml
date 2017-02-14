@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.BuildLauncher" version="3.0">
+    <description> 
+ A &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt; allows you to configure and execute a Gradle build. 
+ &lt;p&gt; 
+ Instances of &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt; are not thread-safe. You use a &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt; as follows: 
+ 
+ &lt;ul&gt; 
+ &lt;li&gt;Create an instance of &lt;a href='type://BuildLauncher'&gt;BuildLauncher&lt;/a&gt; by calling &lt;a href='type://org.gradle.tooling.ProjectConnection#newBuild()'&gt;org.gradle.tooling.ProjectConnection#newBuild()&lt;/a&gt;. 
+ &lt;li&gt;Configure the launcher as appropriate. 
+ &lt;li&gt;Call either &lt;a href='type://BuildLauncher#run()'&gt;#run()&lt;/a&gt; or &lt;a href='type://BuildLauncher#run(ResultHandler)'&gt;#run(ResultHandler)&lt;/a&gt; to execute the build. 
+ &lt;li&gt;Optionally, you can reuse the launcher to launch additional builds. 
+ &lt;/ul&gt; 
+ 
+ Example: 
+ &lt;pre autoTested=''&gt; 
+ ProjectConnection connection = GradleConnector.newConnector() 
+    .forProjectDirectory(new File("someFolder")) 
+    .connect(); 
+ 
+ try { 
+    BuildLauncher build = connection.newBuild(); 
+ 
+    //select tasks to run: 
+    build.forTasks("clean", "test"); 
+ 
+    //include some build arguments: 
+    build.withArguments("--no-search-upward", "-i", "--project-dir", "someProjectDir"); 
+ 
+    //configure the standard input: 
+    build.setStandardInput(new ByteArrayInputStream("consume this!".getBytes())); 
+ 
+    //in case you want the build to use java different than default: 
+    build.setJavaHome(new File("/path/to/java")); 
+ 
+    //if your build needs crazy amounts of memory: 
+    build.setJvmArguments("-Xmx2048m", "-XX:MaxPermSize=512m"); 
+ 
+    //if you want to listen to the progress events: 
+    ProgressListener listener = null; // use your implementation 
+    build.addProgressListener(listener); 
+ 
+    //kick the build off: 
+    build.run(); 
+ } finally { 
+    connection.close(); 
+ } 
+ &lt;/pre&gt; 
+ 
+ @since 1.0-milestone-3 
+</description>
+    <method name="forLaunchables" returnType="org.gradle.tooling.BuildLauncher">
+        <description> 
+ Sets the launchables to execute. If no entries are specified, the project's default tasks are executed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;launchables The launchables for this build. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.12 
+</description>
+        <parameter type="java.lang.Iterable" name="launchables"/>
+    </method>
+    <method name="forLaunchables" returnType="org.gradle.tooling.BuildLauncher">
+        <description> 
+ Sets the launchables to execute. If no entries are specified, the project's default tasks are executed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;launchables The launchables for this build. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.12 
+</description>
+        <parameter type="org.gradle.tooling.model.Launchable" name="launchables"/>
+    </method>
+    <method name="forTasks" returnType="org.gradle.tooling.BuildLauncher">
+        <description> 
+ Sets the tasks to be executed. If no tasks are specified, the project's default tasks are executed. 
+ 
+ &lt;p&gt;Note that the supplied tasks do not necessarily need to belong to the project which this launcher was created for. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks to be executed. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-3 
+</description>
+        <parameter type="java.lang.Iterable" name="tasks"/>
+    </method>
+    <method name="forTasks" returnType="org.gradle.tooling.BuildLauncher">
+        <description> 
+ Sets the tasks to be executed. If no tasks are specified, the project's default tasks are executed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The paths of the tasks to be executed. Relative paths are evaluated relative to the project for which this launcher was created. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-3 
+</description>
+        <parameter type="java.lang.String" name="tasks"/>
+    </method>
+    <method name="forTasks" returnType="org.gradle.tooling.BuildLauncher">
+        <description> 
+ Sets the tasks to be executed. If no tasks are specified, the project's default tasks are executed. 
+ 
+ &lt;p&gt;Note that the supplied tasks do not necessarily need to belong to the project which this launcher was created for. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks to be executed. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+ @since 1.0-milestone-3 
+</description>
+        <parameter type="org.gradle.tooling.model.Task" name="tasks"/>
+    </method>
+    <method name="run" returnType="void">
+        <description> 
+ Executes the build, blocking until it is complete. 
+ 
+ @throws UnsupportedVersionException When the target Gradle version does not support build execution. 
+ @throws org.gradle.tooling.exceptions.UnsupportedOperationConfigurationException 
+          When the target Gradle version does not support some requested configuration option such as &lt;a href='type://BuildLauncher#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt;. 
+ @throws org.gradle.tooling.exceptions.UnsupportedBuildArgumentException When there is a problem with build arguments provided by &lt;a href='type://BuildLauncher#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt;. 
+ @throws BuildException On some failure executing the Gradle build. 
+ @throws BuildCancelledException When the operation was cancelled before it completed successfully. 
+ @throws GradleConnectionException On some other failure using the connection. 
+ @throws IllegalStateException When the connection has been closed or is closing. 
+ @since 1.0-milestone-3 
+</description>
+    </method>
+    <method name="run" returnType="void">
+        <description> 
+ Launches the build. This method returns immediately, and the result is later passed to the given handler. 
+ 
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; 
+ method is called with the appropriate exception. See &lt;a href='type://BuildLauncher#run()'&gt;#run()&lt;/a&gt; for a description of the various exceptions that the operation may fail with. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to. 
+ @throws IllegalStateException When the connection has been closed or is closing. 
+ @since 1.0-milestone-3 
+</description>
+        <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
+    </method>
+</type>

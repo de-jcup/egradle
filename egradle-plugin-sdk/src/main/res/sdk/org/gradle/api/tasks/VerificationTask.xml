@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.VerificationTask" version="3.0">
+    <description> 
+ A &lt;a href='type://VerificationTask'&gt;VerificationTask&lt;/a&gt; is a task which performs some verification of the artifacts produced by a build. 
+</description>
+    <method name="getIgnoreFailures" returnType="boolean">
+        <description> 
+ Specifies whether the build should break when the verifications performed by this task fail. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false, when the build should break on failure, true when the failures should be ignored. 
+</description>
+    </method>
+    <method name="setIgnoreFailures" returnType="void">
+        <description> 
+ Specifies whether the build should break when the verifications performed by this task fail. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ignoreFailures false to break the build on failure, true to ignore the failures. The default is false. 
+</description>
+        <parameter type="boolean" name="ignoreFailures"/>
+    </method>
+    <property name="ignoreFailures" type="boolean">
+        <description> 
+ Specifies whether the build should break when the verifications performed by this task fail. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false, when the build should break on failure, true when the failures should be ignored. 
+</description>
+    </property>
+</type>

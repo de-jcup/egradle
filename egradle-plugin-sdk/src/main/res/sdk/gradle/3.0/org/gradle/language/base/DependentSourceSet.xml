@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.language.base.DependentSourceSet" version="3.0"><description> 
- A source set that can have dependencies on other Libraries. 
-</description><method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"/><property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"/></type>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.execution.TaskExecutionGraphListener" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://TaskExecutionGraphListener'&gt;TaskExecutionGraphListener&lt;/a&gt; is notified when the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; has been populated. You can 
+ use this interface in your build file to perform some action based on the contents of the graph, before any tasks are 
+ actually executed.&lt;/p&gt; 
+</description>
+    <method name="graphPopulated" returnType="void" delegationTarget="TaskExecutionGraph">
+        <description> 
+ &lt;p&gt;This method is called when the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; has been populated, and before any tasks are 
+ executed. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;graph The graph. Never null. 
+</description>
+        <parameter type="org.gradle.api.execution.TaskExecutionGraph" name="graph"/>
+    </method>
+</type>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.reporting.Reporting" version="3.0">
+    <description> 
+ An object that provides reporting options. 
+ &lt;p&gt; 
+ Tasks that produce reports as part of their execution expose configuration options of those reports via these methods. 
+ The &lt;a href='type://Reporting'&gt;Reporting&lt;/a&gt; interface is parameterized, where the parameter denotes the specific type of reporting container 
+ that is exposed. The specific type of the reporting container denotes the different types of reports available. 
+ &lt;p&gt; 
+ For example, given a task such as: 
+ &lt;/p&gt; 
+ &lt;pre&gt; 
+ class MyTask implements Reporting&amp;lt;MyReportContainer&amp;gt; { 
+     // implementation 
+ } 
+ 
+ interface MyReportContainer extends ReportContainer&amp;lt;Report&amp;gt; { 
+     Report getHtml(); 
+     Report getCsv(); 
+ } 
+ &lt;/pre&gt; 
+ &lt;p&gt; 
+ The reporting aspects of such a task can be configured as such: 
+ &lt;/p&gt; 
+ &lt;pre&gt; 
+ task my(type: MyTask) { 
+         html.enabled = true 
+         csv.enabled = false 
+     } 
+ } 
+ &lt;/pre&gt; 
+ &lt;p&gt; 
+ See the documentation for the specific &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; type for the task for information on report types and options. 
+ &lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The base type of the report container 
+</description>
+    <method name="getReports" returnType="T" delegationTarget="ReportContainer">
+        <description> 
+ A &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; instance. 
+ &lt;p&gt; 
+ Implementors specify a specific implementation of &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; that describes the types of reports that 
+ are available. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
+</description>
+    </method>
+    <method name="reports" returnType="T">
+        <description> 
+ Allow configuration of the report container by closure. 
+ 
+ &lt;pre&gt; 
+ reports { 
+     enabled false 
+   } 
+   xml.destination "build/reports/myReport.xml" 
+ } 
+ &lt;/pre&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="reports" returnType="T">
+        <description> 
+ Allow configuration of the report container by closure. 
+ 
+ &lt;pre&gt; 
+ reports { 
+     enabled false 
+   } 
+   xml.destination "build/reports/myReport.xml" 
+ } 
+ &lt;/pre&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction The configuration 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
+</description>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <property name="reports" type="T">
+        <description> 
+ A &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; instance. 
+ &lt;p&gt; 
+ Implementors specify a specific implementation of &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; that describes the types of reports that 
+ are available. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
+</description>
+    </property>
+</type>

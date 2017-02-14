@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.base.FunctionalSourceSet" version="3.0">
+    <description> 
+ A container holding &lt;a href='type://LanguageSourceSet'&gt;LanguageSourceSet&lt;/a&gt;s with a similar function 
+ (production code, test code, etc.). 
+</description>
+</type>

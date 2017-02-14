@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Facet.FacetType" version="3.0"><description> 
- An &lt;a href='type://installed'&gt;installed&lt;/a&gt; facet is really present on an Eclipse project whereas facet type &lt;a href='type://fixed'&gt;fixed&lt;/a&gt; means that 
- this facet is locked and cannot be simply removed. See also 
- &lt;a href="https://eclipse.org/articles/Article-BuildingProjectFacets/tutorial.html#defining.presets"&gt;here&lt;/a&gt;. 
-</description></type>

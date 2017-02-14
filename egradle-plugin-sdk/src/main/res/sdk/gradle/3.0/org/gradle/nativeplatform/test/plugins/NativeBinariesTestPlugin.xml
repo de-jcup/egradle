@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.test.plugins.NativeBinariesTestPlugin" version="3.0"><description> 
- A plugin that sets up the infrastructure for testing native binaries. 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

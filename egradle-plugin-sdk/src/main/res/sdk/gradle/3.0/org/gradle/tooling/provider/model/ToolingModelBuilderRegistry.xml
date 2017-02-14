@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.tooling.provider.model.ToolingModelBuilderRegistry" version="3.0"><description> 
- A registry of tooling model builders. Adding a builder to this registry makes a model (or models) available via the tooling API. 
-</description><method name="getBuilder" returnType="org.gradle.tooling.provider.model.ToolingModelBuilder"><parameter type="java.lang.String" name="modelName"/></method><method name="register" returnType="void"><parameter type="org.gradle.tooling.provider.model.ToolingModelBuilder" name="builder"/></method><property name="builder" type="org.gradle.tooling.provider.model.ToolingModelBuilder"/></type>

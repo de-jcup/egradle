@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.HelpTasksPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="addDefaultDependenciesReportConfiguration" returnType="void">
+        <parameter type="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask" name="task"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="services"/>
+    </method>
+    <method name="call" returnType="java.lang.Object"/>
+</type>

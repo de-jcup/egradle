@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ExcludeRule" version="3.0">
+    <description> 
+ An &lt;a href='type://ExcludeRule'&gt;ExcludeRule&lt;/a&gt; is used to describe transitive dependencies that should be excluded when resolving 
+ dependencies. 
+</description>
+    <method name="getGroup" returnType="java.lang.String">
+        <description> 
+ The exact name of the organization or group that should be excluded. 
+</description>
+    </method>
+    <method name="getModule" returnType="java.lang.String">
+        <description> 
+ The exact name of the module that should be excluded. 
+</description>
+    </method>
+    <property name="group" type="java.lang.String">
+        <description> 
+ The exact name of the organization or group that should be excluded. 
+</description>
+    </property>
+    <property name="module" type="java.lang.String">
+        <description> 
+ The exact name of the module that should be excluded. 
+</description>
+    </property>
+</type>

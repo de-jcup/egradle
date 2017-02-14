@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseJavaSourceSettings" version="3.0">
+    <description> 
+ Describes Eclipse Java source settings for compiling and running some Java source code. 
+ 
+ @since 2.10 
+</description>
+    <method name="getJdk" returnType="org.gradle.tooling.model.java.InstalledJdk" delegationTarget="null">
+        <description> 
+ Returns the JDK used for building. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JDK. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ @throws UnsupportedMethodException For provider Gradle versions older than 2.11, where this method is not supported. 
+ @since 2.11 
+</description>
+    </method>
+    <method name="getSourceLanguageLevel" returnType="org.gradle.api.JavaVersion" delegationTarget="null">
+        <description> 
+ Returns the Java source language level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source language level. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="getTargetBytecodeVersion" returnType="org.gradle.api.JavaVersion" delegationTarget="null">
+        <description> 
+ Returns the target bytecode level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target bytecode language version. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ @throws UnsupportedMethodException For Gradle versions older than 2.11, where this method is not supported. 
+ @since 2.11 
+</description>
+    </method>
+    <property name="jdk" type="org.gradle.tooling.model.java.InstalledJdk">
+        <description> 
+ Returns the JDK used for building. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JDK. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ @throws UnsupportedMethodException For provider Gradle versions older than 2.11, where this method is not supported. 
+ @since 2.11 
+</description>
+    </property>
+    <property name="sourceLanguageLevel" type="org.gradle.api.JavaVersion">
+        <description> 
+ Returns the Java source language level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source language level. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="targetBytecodeVersion" type="org.gradle.api.JavaVersion">
+        <description> 
+ Returns the target bytecode level. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target bytecode language version. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+ @throws UnsupportedMethodException For Gradle versions older than 2.11, where this method is not supported. 
+ @since 2.11 
+</description>
+    </property>
+</type>

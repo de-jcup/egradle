@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.Sync" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
+    <description> 
+ Synchronises the contents of a destination directory with some source directories and files. 
+</description>
+    <method name="createCopyAction" returnType="CopyAction"/>
+    <method name="createRootSpec" returnType="CopySpecInternal"/>
+    <method name="getDestinationDir" returnType="java.io.File">
+        <description> 
+ Returns the directory to copy files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination dir. 
+</description>
+    </method>
+    <method name="getRootSpec" returnType="DestinationRootCopySpec"/>
+    <method name="setDestinationDir" returnType="void">
+        <description> 
+ Sets the directory to copy files into. This is the same as calling &lt;a href='type://Sync#into(Object)'&gt;#into(Object)&lt;/a&gt; on this task. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destinationDir The destination directory. Must not be null. 
+</description>
+        <parameter type="java.io.File" name="destinationDir"/>
+    </method>
+    <property name="destinationDir" type="java.io.File">
+        <description> 
+ Returns the directory to copy files into. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination dir. 
+</description>
+    </property>
+    <property name="rootSpec" type="DestinationRootCopySpec"/>
+</type>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.logging.configuration.ConsoleOutput" version="3.0">
+    <description> 
+ Specifies how to treat color and dynamic console output. 
+</description>
+</type>

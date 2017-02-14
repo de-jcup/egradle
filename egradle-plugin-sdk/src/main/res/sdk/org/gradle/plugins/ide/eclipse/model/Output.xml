@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Output" version="3.0">
+    <description> 
+ A classpath entry representing an output folder. 
+</description>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getKind" returnType="java.lang.String"/>
+    <method name="getPath" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setPath" returnType="void">
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="kind" type="java.lang.String"/>
+    <property name="path" type="java.lang.String"/>
+</type>

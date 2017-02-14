@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ToolChainRegistry" version="3.0">
+    <description> 
+ A Provider of &lt;a href='type://ToolChain'&gt;ToolChain&lt;/a&gt;s. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;P&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; 
+</description>
+    <method name="getForPlatform" returnType="T">
+        <description> 
+ Returns the best tool chain to build for the target platform. 
+</description>
+        <parameter type="P" name="targetPlatform"/>
+    </method>
+    <property name="forPlatform" type="T">
+        <description> 
+ Returns the best tool chain to build for the target platform. 
+</description>
+    </property>
+</type>

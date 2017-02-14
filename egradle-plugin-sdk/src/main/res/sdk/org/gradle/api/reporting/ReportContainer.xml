@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.reporting.ReportContainer" version="3.0">
+    <description> 
+ A container of &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects, that represent potential reports. 
+ &lt;p&gt; 
+ Things that produce reports (typically tasks) expose a report container that contains &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects for each 
+ possible report that they can produce. Each report object can be configured individually, including whether or not it should 
+ be produced by way of its &lt;a href='type://Report#setEnabled(boolean) enabled'&gt;Report#setEnabled(boolean) enabled&lt;/a&gt; property. 
+ &lt;p&gt; 
+ &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; implementations are &lt;b&gt;immutable&lt;/b&gt; in that standard collection methods such as &lt;a href='type://add()'&gt;add()&lt;/a&gt;, &lt;a href='type://remove()'&gt;remove()&lt;/a&gt; 
+ and &lt;a href='type://clear()'&gt;clear()&lt;/a&gt; will throw an &lt;a href='type://ImmutableViolationException'&gt;ImmutableViolationException&lt;/a&gt;. However, implementations may provide new methods that allow 
+ the addition of new report object and/or the removal of existing report objects. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The base report type for reports of this container. 
+</description>
+    <method name="getAsMap" returnType="java.util.SortedMap"/>
+    <method name="getEnabled" returnType="org.gradle.api.NamedDomainObjectSet" delegationTarget="Report">
+        <description> 
+ Returns an immutable collection of all the enabled &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects in this container. 
+ &lt;p&gt; 
+ The returned collection is live. That is, as reports are enabled/disabled the returned collection always 
+ reflects the current set of enabled reports. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The enabled reports. 
+</description>
+    </method>
+    <method name="getNamer" returnType="org.gradle.api.Namer"/>
+    <method name="getNames" returnType="java.util.SortedSet"/>
+    <method name="getRules" returnType="java.util.List"/>
+    <method name="isEmpty" returnType="boolean"/>
+    <property name="asMap" type="java.util.SortedMap"/>
+    <property name="empty" type="boolean"/>
+    <property name="enabled" type="org.gradle.api.NamedDomainObjectSet">
+        <description> 
+ Returns an immutable collection of all the enabled &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects in this container. 
+ &lt;p&gt; 
+ The returned collection is live. That is, as reports are enabled/disabled the returned collection always 
+ reflects the current set of enabled reports. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The enabled reports. 
+</description>
+    </property>
+    <property name="namer" type="org.gradle.api.Namer"/>
+    <property name="names" type="java.util.SortedSet"/>
+    <property name="rules" type="java.util.List"/>
+</type>

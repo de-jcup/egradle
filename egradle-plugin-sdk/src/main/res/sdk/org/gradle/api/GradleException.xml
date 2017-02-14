@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.GradleException" version="3.0">
+    <description> 
+ &lt;p&gt;&lt;code&gt;GradleException&lt;/code&gt; is the base class of all exceptions thrown by Gradle.&lt;/p&gt; 
+</description>
+</type>

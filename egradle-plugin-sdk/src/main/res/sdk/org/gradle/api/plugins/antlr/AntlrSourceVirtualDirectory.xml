@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.antlr.AntlrSourceVirtualDirectory" version="3.0">
+    <description> 
+ Contract for a Gradle "convention object" that acts as a handler for what I call a virtual directory mapping, 
+ injecting a virtual directory named 'antlr' into the project's various &lt;a href='type://org.gradle.api.tasks.SourceSet source 
+ sets'&gt;org.gradle.api.tasks.SourceSet source 
+ sets&lt;/a&gt;. 
+</description>
+    <method name="antlr" returnType="org.gradle.api.plugins.antlr.AntlrSourceVirtualDirectory" delegationTarget="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ Configures the Antlr source for this set. The given closure is used to configure the &lt;a href='type://org.gradle.api.file.SourceDirectorySet'&gt;org.gradle.api.file.SourceDirectorySet&lt;/a&gt; (see 
+ &lt;a href='type://AntlrSourceVirtualDirectory#getAntlr'&gt;#getAntlr&lt;/a&gt;) which contains the Antlr source. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the Antlr source. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="getAntlr" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ All Antlr source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Antlr source.  Never returns null. 
+</description>
+    </method>
+    <property name="antlr" type="org.gradle.api.file.SourceDirectorySet">
+        <description> 
+ All Antlr source for this source set. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Antlr source.  Never returns null. 
+</description>
+    </property>
+</type>

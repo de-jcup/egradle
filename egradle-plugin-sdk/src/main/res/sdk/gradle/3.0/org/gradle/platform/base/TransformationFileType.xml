@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.platform.base.TransformationFileType" version="3.0"><description> 
- The type of a file of a transformation 
- </description></type>

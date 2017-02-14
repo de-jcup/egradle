@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.testing.base.plugins.TestingModelBasePlugin" version="3.0"><description> 
- Base plugin for testing. 
- 
- - Adds a &lt;a href='type://org.gradle.testing.base.TestSuiteContainer'&gt;org.gradle.testing.base.TestSuiteContainer&lt;/a&gt; named &lt;a href='type://testSuites'&gt;testSuites&lt;/a&gt; to the model. 
- - Copies test binaries from &lt;a href='type://testSuites'&gt;testSuites&lt;/a&gt; into &lt;a href='type://binaries'&gt;binaries&lt;/a&gt;. 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

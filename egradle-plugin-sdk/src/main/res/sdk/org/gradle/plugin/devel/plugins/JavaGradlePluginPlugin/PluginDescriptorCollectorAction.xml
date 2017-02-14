@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin.PluginDescriptorCollectorAction" version="3.0">
+    <description> 
+ A file copy action that collects plugin descriptors as they are added to the jar. 
+</description>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.file.FileCopyDetails" name="fileCopyDetails"/>
+    </method>
+</type>

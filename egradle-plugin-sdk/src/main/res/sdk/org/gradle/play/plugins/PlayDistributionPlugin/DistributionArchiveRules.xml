@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin.DistributionArchiveRules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="fixupDistributionArchiveNames" returnType="void">
+        <parameter type="org.gradle.api.tasks.bundling.AbstractArchiveTask" name="archiveTask"/>
+    </method>
+</type>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.language.jvm.tasks.ProcessResources" version="3.0" superType="org.gradle.api.tasks.Copy">
+    <description> 
+ Copies resources from their source to their target directory, potentially processing them. 
+ Makes sure no stale resources remain in the target directory. 
+</description>
+    <method name="copy" returnType="void"/>
+</type>

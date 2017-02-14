@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.model.ModelMap" version="3.0">
+    <description> 
+ Model backed map like structure allowing adding of items where instantiation is managed. 
+ &lt;p&gt; 
+ &lt;a href='type://org.gradle.model.Managed'&gt;org.gradle.model.Managed&lt;/a&gt; types may declare model map properties. 
+ Model maps can only contain managed types. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the contract type for all items 
+</description>
+    <method name="afterEach" returnType="void">
+        <description> 
+ Applies the given action to each item in the collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called after any actions provided to &lt;a href='type://ModelMap#beforeEach(org.gradle.api.Action)'&gt;#beforeEach(org.gradle.api.Action)&lt;/a&gt;, &lt;a href='type://ModelMap#create(String, 
+ org.gradle.api.Action)'&gt;#create(String, 
+ org.gradle.api.Action)&lt;/a&gt;, and other mutation methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="afterEach" returnType="void">
+        <description> 
+ Applies the given action to each item of the given type in the collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called after any actions provided to &lt;a href='type://ModelMap#beforeEach(org.gradle.api.Action)'&gt;#beforeEach(org.gradle.api.Action)&lt;/a&gt;, &lt;a href='type://ModelMap#create(String, 
+ org.gradle.api.Action)'&gt;#create(String, 
+ org.gradle.api.Action)&lt;/a&gt;, and other mutation methods. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of elements to apply the action to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="all" returnType="void">
+        <description> 
+ Applies the given action to each item in the collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called after any actions provided to &lt;a href='type://ModelMap#beforeEach(org.gradle.api.Action)'&gt;#beforeEach(org.gradle.api.Action)&lt;/a&gt; and &lt;a href='type://ModelMap#create(String, 
+ org.gradle.api.Action)'&gt;#create(String, 
+ org.gradle.api.Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="beforeEach" returnType="void">
+        <description> 
+ Applies the given action to each item in this collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called before any actions provided to &lt;a href='type://ModelMap#create(String, org.gradle.api.Action)'&gt;#create(String, org.gradle.api.Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="beforeEach" returnType="void">
+        <description> 
+ Applies the given action to each item of the given type in this collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called before any actions provided to &lt;a href='type://ModelMap#create(String, org.gradle.api.Action)'&gt;#create(String, org.gradle.api.Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of elements to apply the action to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="containsKey" returnType="boolean">
+        <description> 
+ Returns true if this collection contains an item with the given name. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the item. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this collection contains an item with the given name. 
+</description>
+        <parameter type="java.lang.Object" name="name"/>
+    </method>
+    <method name="containsValue" returnType="boolean">
+        <description> 
+ Returns true if this collection contains the given item. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;item The item. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this collection contains the given item. 
+</description>
+        <parameter type="java.lang.Object" name="item"/>
+    </method>
+    <method name="create" returnType="void">
+        <description> 
+ Defines an item with the given name and type T. The item is not created immediately, but is instead created as it is required. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="create" returnType="void">
+        <description> 
+ Defines an item with the given name and type. The item is not created immediately, but is instead created as it is required. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="create" returnType="void">
+        <description> 
+ Defines an item with the given name and type T. The item is not created immediately, but is instead created as it is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that initialises the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="create" returnType="void">
+        <description> 
+ Defines an item with the given name and type. The item is not created immediately, but is instead created as it is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that initialises the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="get" returnType="T">
+        <description> 
+ Returns the item with the given name, if any. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the item. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The item, or null if no such item. 
+</description>
+        <parameter type="java.lang.Object" name="name"/>
+    </method>
+    <method name="get" returnType="T">
+        <description> 
+ Returns the item with the given name, if any. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the item. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The item, or null if no such item. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="isEmpty" returnType="boolean">
+        <description> 
+ Returns true if this collection contains no items. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this collection is empty. 
+</description>
+    </method>
+    <method name="keySet" returnType="java.util.Set">
+        <description> 
+ Returns the names of the items in this collection. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names 
+</description>
+    </method>
+    <method name="named" returnType="void">
+        <description> 
+ Applies the given rule source class to the given item, when the item is required. 
+ 
+ &lt;p&gt;Rules are applied in the scope of the item therefore: 
+ &lt;ul&gt; 
+ &lt;li&gt;subject by-type and by-path bindings are of inner scope&lt;/li&gt; 
+ &lt;li&gt;subject can be bound by type to a child of the scope in which the rule is applied&lt;/li&gt; 
+ &lt;li&gt;input by-path bindings are of inner scope&lt;/li&gt; 
+ &lt;li&gt;input by-type bindings are of outer scope&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource A rule source class. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="ruleSource"/>
+    </method>
+    <method name="named" returnType="void">
+        <description> 
+ Applies the given action to the given item, when the item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called after any actions provided to &lt;a href='type://ModelMap#beforeEach(org.gradle.api.Action)'&gt;#beforeEach(org.gradle.api.Action)&lt;/a&gt; and &lt;a href='type://ModelMap#create(String, 
+ org.gradle.api.Action)'&gt;#create(String, 
+ org.gradle.api.Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <method name="put" returnType="void" delegationTarget="ModelMap">
+        <description> 
+ Adds an element to this &lt;a href='type://ModelMap'&gt;ModelMap&lt;/a&gt;. 
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="T" name="instance"/>
+    </method>
+    <method name="size" returnType="int">
+        <description> 
+ Returns the number of items in this collection. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the size of this collection. 
+</description>
+    </method>
+    <method name="values" returnType="java.util.Collection">
+        <description> 
+ Returns the items in this collection. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The items. 
+</description>
+    </method>
+    <method name="withType" returnType="org.gradle.model.ModelMap">
+        <description> 
+ Returns a collection containing the items from this collection which are of the specified type. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;S&gt; The type. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The collection. 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="withType" returnType="void">
+        <description> 
+ Applies the given rules to all items of the collection of the given type. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the type that the item must be/implement to have the rules applied 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rules rules to apply 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="java.lang.Class" name="rules"/>
+    </method>
+    <method name="withType" returnType="void">
+        <description> 
+ Applies the given action to each item of the given type in the collection, as each item is required. 
+ 
+ &lt;p&gt;The given action is invoked to configure the item when the item is required. It is called after any actions provided to &lt;a href='type://ModelMap#beforeEach(org.gradle.api.Action)'&gt;#beforeEach(org.gradle.api.Action)&lt;/a&gt; and &lt;a href='type://ModelMap#create(String, 
+ org.gradle.api.Action)'&gt;#create(String, 
+ org.gradle.api.Action)&lt;/a&gt;. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of elements to apply the action to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configAction An action that configures the item. The action is executed when the item is required. 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configAction"/>
+    </method>
+    <property name="empty" type="boolean">
+        <description> 
+ Returns true if this collection contains no items. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this collection is empty. 
+</description>
+    </property>
+</type>

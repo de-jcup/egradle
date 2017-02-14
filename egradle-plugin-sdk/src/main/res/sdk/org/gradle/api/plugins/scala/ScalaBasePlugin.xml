@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.scala.ScalaBasePlugin" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which compiles and tests Scala sources.&lt;/p&gt; 
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="java.io.File"/>
+    <method name="configureCompileDefaults" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.tasks.ScalaRuntime" name="scalaRuntime"/>
+    </method>
+    <method name="configureConfigurations" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureScalaCompile" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.plugins.JavaBasePlugin" name="javaPlugin"/>
+        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
+    </method>
+    <method name="configureScalaRuntimeExtension" returnType="org.gradle.api.tasks.ScalaRuntime">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureScaladoc" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.tasks.ScalaRuntime" name="scalaRuntime"/>
+    </method>
+    <method name="configureSourceSetDefaults" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.scala.ScalaCompile" name="compile"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/>
+    </method>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="org.gradle.api.file.FileTreeElement" name="element"/>
+    </method>
+    <method name="projectsEvaluated" returnType="void">
+        <parameter type="org.gradle.api.invocation.Gradle" name="gradle"/>
+    </method>
+    <property name="satisfiedBy" type="boolean"/>
+</type>

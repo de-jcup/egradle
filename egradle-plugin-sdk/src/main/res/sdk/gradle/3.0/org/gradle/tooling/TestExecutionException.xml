@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.tooling.TestExecutionException" version="3.0" superType="org.gradle.tooling.GradleConnectionException"><description> 
- Thrown when the &lt;a href='type://org.gradle.tooling.TestLauncher'&gt;org.gradle.tooling.TestLauncher&lt;/a&gt; cannot run tests, or when one or more tests fail. 
- &lt;p&gt; 
- 
- @since 2.6 
-</description></type>

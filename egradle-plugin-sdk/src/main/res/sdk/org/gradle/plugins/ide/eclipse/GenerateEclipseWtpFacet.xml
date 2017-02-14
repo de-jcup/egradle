@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseWtpFacet" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+    <description> 
+ Generates the org.eclipse.wst.common.project.facet.core settings file for Eclipse WTP. 
+ If you want to fine tune the eclipse configuration 
+ &lt;p&gt; 
+ At this moment nearly all configuration is done via &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt;. 
+</description>
+    <method name="configure" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.WtpFacet" name="xmlFacet"/>
+    </method>
+    <method name="create" returnType="org.gradle.plugins.ide.eclipse.model.WtpFacet"/>
+    <method name="getFacet" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet">
+        <description> 
+ The Eclipse WTP facet model containing the details required to generate the settings file. 
+</description>
+    </method>
+    <method name="setFacet" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet" name="facet"/>
+    </method>
+    <property name="facet" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet">
+        <description> 
+ The Eclipse WTP facet model containing the details required to generate the settings file. 
+</description>
+    </property>
+</type>

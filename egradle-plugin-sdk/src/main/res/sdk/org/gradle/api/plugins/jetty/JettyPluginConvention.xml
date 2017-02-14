@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.JettyPluginConvention" version="3.0">
+    <description> 
+ Convention properties and methods added by the &lt;a href='type://org.gradle.api.plugins.jetty.JettyPlugin'&gt;org.gradle.api.plugins.jetty.JettyPlugin&lt;/a&gt;. 
+ 
+ @deprecated The Jetty plugin has been deprecated 
+</description>
+    <method name="getHttpPort" returnType="java.lang.Integer">
+        <description> 
+ Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
+</description>
+    </method>
+    <method name="getStopKey" returnType="java.lang.String">
+        <description> 
+ Returns the key to use to stop Jetty. 
+</description>
+    </method>
+    <method name="getStopPort" returnType="java.lang.Integer">
+        <description> 
+ Returns the TCP port for Jetty to listen on for stop requests. 
+</description>
+    </method>
+    <method name="setHttpPort" returnType="void">
+        <parameter type="java.lang.Integer" name="httpPort"/>
+    </method>
+    <method name="setStopKey" returnType="void">
+        <parameter type="java.lang.String" name="stopKey"/>
+    </method>
+    <method name="setStopPort" returnType="void">
+        <parameter type="java.lang.Integer" name="stopPort"/>
+    </method>
+    <property name="httpPort" type="java.lang.Integer">
+        <description> 
+ Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
+</description>
+    </property>
+    <property name="stopKey" type="java.lang.String">
+        <description> 
+ Returns the key to use to stop Jetty. 
+</description>
+    </property>
+    <property name="stopPort" type="java.lang.Integer">
+        <description> 
+ Returns the TCP port for Jetty to listen on for stop requests. 
+</description>
+    </property>
+</type>

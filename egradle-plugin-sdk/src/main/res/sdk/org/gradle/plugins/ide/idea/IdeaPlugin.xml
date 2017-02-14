@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.IdeaPlugin" version="3.0">
+    <description> 
+ Adds a GenerateIdeaModule task. When applied to a root project, also adds a GenerateIdeaProject task. For projects that have the Java plugin applied, the tasks receive additional Java-specific 
+ configuration. 
+</description>
+    <method name="addScope" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.util.LinkedHashMap" name="scopes"/>
+    </method>
+    <method name="apply" returnType="org.gradle.api.JavaVersion">
+        <parameter type="org.gradle.api.Project" name="p"/>
+    </method>
+    <method name="call" returnType="java.lang.String"/>
+    <method name="configureForJavaPlugin" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureForScalaPlugin" returnType="void"/>
+    <method name="configureIdeaModule" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureIdeaModuleForJava" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureIdeaProject" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureIdeaWorkspace" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="createImlArtifact" returnType="org.gradle.internal.component.model.ComponentArtifactMetadata">
+        <parameter type="org.gradle.api.artifacts.component.ProjectComponentIdentifier" name="projectId"/>
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.invocation.Gradle" name="gradle"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.JavaPlugin" name="javaPlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.scala.ScalaBasePlugin" name="scalaBasePlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.language.scala.plugins.ScalaLanguagePlugin" name="scalaLanguagePlugin"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.plugins.ide.idea.GenerateIdeaModule" name="ideaModule"/>
+    </method>
+    <method name="getLifecycleTaskName" returnType="java.lang.String"/>
+    <method name="getMaxJavaModuleCompatibilityVersionFor" returnType="org.gradle.api.JavaVersion">
+        <parameter type="com.google.common.base.Function" name="toJavaVersion"/>
+    </method>
+    <method name="getModel" returnType="org.gradle.plugins.ide.idea.model.IdeaModel"/>
+    <method name="ideaModelFor" returnType="org.gradle.plugins.ide.idea.model.IdeaModel">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="ideaModuleDependsOnRoot" returnType="void"/>
+    <method name="includeModuleBytecodeLevelOverride" returnType="boolean">
+        <parameter type="org.gradle.api.Project" name="rootProject"/>
+        <parameter type="org.gradle.api.JavaVersion" name="moduleTargetBytecodeLevel"/>
+    </method>
+    <method name="includeModuleLanguageLevelOverride" returnType="boolean">
+        <parameter type="org.gradle.api.Project" name="rootProject"/>
+        <parameter type="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" name="moduleLanguageLevel"/>
+    </method>
+    <method name="isRoot" returnType="boolean">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="makeSureModuleNamesAreUnique" returnType="void"/>
+    <method name="onApply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="performPostEvaluationActions" returnType="void"/>
+    <method name="registerImlArtifacts" returnType="void"/>
+    <property name="lifecycleTaskName" type="java.lang.String"/>
+    <property name="maxJavaModuleCompatibilityVersionFor" type="org.gradle.api.JavaVersion"/>
+    <property name="model" type="org.gradle.plugins.ide.idea.model.IdeaModel"/>
+    <property name="root" type="boolean"/>
+</type>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskStartEvent" version="3.0">
+    <description> 
+ An event that informs about a task having started its execution. 
+ 
+ @since 2.5 
+</description>
+</type>

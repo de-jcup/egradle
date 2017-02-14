@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Facet" version="3.0">
+    <description> 
+ A project facet. 
+</description>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getType" returnType="org.gradle.plugins.ide.eclipse.model.Facet.FacetType"/>
+    <method name="getVersion" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setType" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.Facet.FacetType" name="type"/>
+    </method>
+    <method name="setVersion" returnType="void">
+        <parameter type="java.lang.String" name="version"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="name" type="java.lang.String"/>
+    <property name="type" type="org.gradle.plugins.ide.eclipse.model.Facet.FacetType"/>
+    <property name="version" type="java.lang.String"/>
+</type>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseWtp" version="3.0">
+    <description> 
+ Enables fine-tuning wtp/wst details of the Eclipse plugin 
+ &lt;p&gt; 
+ For projects applying the eclipse plugin and either one of the ear or war plugins, this plugin is auto-applied. 
+ &lt;p&gt; 
+ More interesting examples you will find in docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; and &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'war' //or 'ear' or 'java' 
+ apply plugin: 'eclipse-wtp' 
+ 
+ eclipse &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; 
+     } 
+ 
+     facet &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+     } 
+   } 
+ } 
+ 
+ &lt;/pre&gt; 
+</description>
+    <method name="component" returnType="void" delegationTarget="EclipseWtpComponent">
+        <description> 
+ Configures wtp component. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action 
+</description>
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="facet" returnType="void" delegationTarget="EclipseWtpFacet">
+        <description> 
+ Configures wtp facet. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action 
+</description>
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="getComponent" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" delegationTarget="EclipseWtpComponent">
+        <description> 
+ Configures wtp component. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; 
+</description>
+    </method>
+    <method name="getFacet" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet" delegationTarget="EclipseWtpFacet">
+        <description> 
+ Configures wtp facet. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+</description>
+    </method>
+    <method name="setComponent" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" name="component"/>
+    </method>
+    <method name="setFacet" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet" name="facet"/>
+    </method>
+    <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent">
+        <description> 
+ Configures wtp component. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; 
+</description>
+    </property>
+    <property name="facet" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet">
+        <description> 
+ Configures wtp facet. 
+ &lt;p&gt; 
+ For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
+</description>
+    </property>
+</type>

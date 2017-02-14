@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.test.TestSkippedResult" version="3.0">
+    <description> 
+ Describes how a test operation was skipped. 
+ 
+ @since 2.4 
+</description>
+</type>

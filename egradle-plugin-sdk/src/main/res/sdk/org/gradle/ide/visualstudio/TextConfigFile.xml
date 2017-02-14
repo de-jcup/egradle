@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.ide.visualstudio.TextConfigFile" version="3.0">
+    <description> 
+ A plain text config file generated for Visual Studio. 
+</description>
+    <method name="withContent" returnType="void">
+        <description> 
+ Add an action that can manipulate the generated file content. 
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+</type>

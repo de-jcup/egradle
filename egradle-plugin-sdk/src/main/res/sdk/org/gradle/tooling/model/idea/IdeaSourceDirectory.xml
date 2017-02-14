@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaSourceDirectory" version="3.0">
+    <description> 
+ IDEA source directory. 
+ 
+ @since 1.0-milestone-5 
+</description>
+    <method name="isGenerated" returnType="boolean" delegationTarget="true">
+        <description> 
+ Return &lt;a href='type://true'&gt;true&lt;/a&gt; if this source directory is generated. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if source directory is generated 
+ @since 2.2 
+</description>
+    </method>
+    <property name="generated" type="boolean">
+        <description> 
+ Return &lt;a href='type://true'&gt;true&lt;/a&gt; if this source directory is generated. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if source directory is generated 
+ @since 2.2 
+</description>
+    </property>
+</type>

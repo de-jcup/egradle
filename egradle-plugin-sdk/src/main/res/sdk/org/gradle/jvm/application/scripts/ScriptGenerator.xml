@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.jvm.application.scripts.ScriptGenerator" version="3.0">
+    <description> 
+ Generates a script to start a JVM application. 
+ 
+ @see TemplateBasedScriptGenerator 
+</description>
+    <method name="generateScript" returnType="void">
+        <description> 
+ Generate the script. 
+ &lt;p&gt; 
+ Implementations should not close the given writer. 
+ It is the responsibility of the caller to close the stream. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;details the application details 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destination the script destination 
+</description>
+        <parameter type="org.gradle.jvm.application.scripts.JavaAppStartScriptGenerationDetails" name="details"/>
+        <parameter type="java.io.Writer" name="destination"/>
+    </method>
+</type>

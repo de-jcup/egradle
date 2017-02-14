@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.model.ModelElement" version="3.0">
+    <description> 
+ Represents an element in a model. Elements are arranged in a hierarchy. 
+</description>
+    <method name="getDisplayName" returnType="java.lang.String">
+        <description> 
+ Returns a human-consumable display name for this element. 
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> 
+ Returns the name of this element. Each element has a name associated with it, that uniquely identifies the element amongst its siblings. 
+ Some element have their name generated or automatically assigned, and for these elements the name may not be human consumable. 
+</description>
+    </method>
+    <property name="displayName" type="java.lang.String">
+        <description> 
+ Returns a human-consumable display name for this element. 
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> 
+ Returns the name of this element. Each element has a name associated with it, that uniquely identifies the element amongst its siblings. 
+ Some element have their name generated or automatically assigned, and for these elements the name may not be human consumable. 
+</description>
+    </property>
+</type>

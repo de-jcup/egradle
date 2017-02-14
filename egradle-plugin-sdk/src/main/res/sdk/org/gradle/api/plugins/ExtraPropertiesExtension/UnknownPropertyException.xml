@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.ExtraPropertiesExtension.UnknownPropertyException" version="3.0" superType="org.gradle.api.InvalidUserDataException">
+    <description> 
+ The exception that will be thrown when an attempt is made to read a property that is not set. 
+</description>
+    <method name="createMessage" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="propertyName"/>
+    </method>
+</type>

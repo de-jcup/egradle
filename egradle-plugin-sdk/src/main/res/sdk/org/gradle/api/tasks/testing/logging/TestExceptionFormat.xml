@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.testing.logging.TestExceptionFormat" version="3.0">
+    <description> 
+ Determines how exceptions are formatted in test logging. 
+</description>
+</type>

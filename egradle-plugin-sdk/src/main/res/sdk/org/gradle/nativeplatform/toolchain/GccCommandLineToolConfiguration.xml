@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.GccCommandLineToolConfiguration" version="3.0">
+    <description> 
+ An executable tool used for GCC that allows customizing the executable. 
+</description>
+    <method name="getExecutable" returnType="java.lang.String">
+        <description> 
+ The name of the executable file for this tool. 
+</description>
+    </method>
+    <method name="setExecutable" returnType="void">
+        <description> 
+ Set the name of the executable file for this tool. 
+ The executable will be located in the tool chain path. 
+</description>
+        <parameter type="java.lang.String" name="file"/>
+    </method>
+    <property name="executable" type="java.lang.String">
+        <description> 
+ The name of the executable file for this tool. 
+</description>
+    </property>
+</type>

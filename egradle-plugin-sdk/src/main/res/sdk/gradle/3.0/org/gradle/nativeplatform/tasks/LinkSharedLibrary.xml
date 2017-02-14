@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.LinkSharedLibrary" version="3.0" superType="org.gradle.nativeplatform.tasks.AbstractLinkTask"><description> 
- Links a binary shared library from object files and imported libraries. 
-</description><method name="createLinkerSpec" returnType="org.gradle.nativeplatform.internal.LinkerSpec"/><method name="getInstallName" returnType="java.lang.String"/><method name="setInstallName" returnType="void"><parameter type="java.lang.String" name="installName"/></method><property name="installName" type="java.lang.String"/></type>

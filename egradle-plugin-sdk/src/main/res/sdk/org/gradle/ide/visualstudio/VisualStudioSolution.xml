@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.ide.visualstudio.VisualStudioSolution" version="3.0">
+    <description> 
+ A visual studio solution, representing one or more &lt;a href='type://org.gradle.nativeplatform.NativeBinarySpec'&gt;org.gradle.nativeplatform.NativeBinarySpec&lt;/a&gt; instances 
+ from the same &lt;a href='type://org.gradle.nativeplatform.NativeComponentSpec'&gt;org.gradle.nativeplatform.NativeComponentSpec&lt;/a&gt;. 
+ &lt;p/&gt; 
+ 
+ The content and location of the generate solution file can be modified by the supplied methods: 
+ 
+ &lt;pre autoTested="true"&gt; 
+  apply plugin: "visual-studio" 
+  model {name}.sln" 
+              solutionFile.withContent { TextProvider content -&gt; 
+                  content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n") 
+                  content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE") 
+              } 
+          } 
+      } 
+  } 
+ &lt;/pre&gt; 
+</description>
+    <method name="getComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec">
+        <description> 
+ The component that this solution represents. 
+</description>
+    </method>
+    <method name="getProjects" returnType="java.util.Set">
+        <description> 
+ The set of projects included in this solution. 
+</description>
+    </method>
+    <method name="getSolutionFile" returnType="org.gradle.ide.visualstudio.TextConfigFile">
+        <description> 
+ Configuration for the generated solution file. 
+</description>
+    </method>
+    <property name="component" type="org.gradle.nativeplatform.NativeComponentSpec">
+        <description> 
+ The component that this solution represents. 
+</description>
+    </property>
+    <property name="projects" type="java.util.Set">
+        <description> 
+ The set of projects included in this solution. 
+</description>
+    </property>
+    <property name="solutionFile" type="org.gradle.ide.visualstudio.TextConfigFile">
+        <description> 
+ Configuration for the generated solution file. 
+</description>
+    </property>
+</type>

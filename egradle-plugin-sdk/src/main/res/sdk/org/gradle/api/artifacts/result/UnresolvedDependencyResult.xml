@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.result.UnresolvedDependencyResult" version="3.0">
+    <description> 
+ A dependency that could not be resolved. 
+</description>
+    <method name="getAttempted" returnType="org.gradle.api.artifacts.component.ComponentSelector">
+        <description> 
+ Returns the selector that was attempted to be resolved. This may not be the same as the requested component. 
+</description>
+    </method>
+    <method name="getAttemptedReason" returnType="org.gradle.api.artifacts.result.ComponentSelectionReason">
+        <description> 
+ Returns the reasons why the failed selector was attempted. 
+</description>
+    </method>
+    <method name="getFailure" returnType="java.lang.Throwable">
+        <description> 
+ The failure that occurred. 
+</description>
+    </method>
+    <property name="attempted" type="org.gradle.api.artifacts.component.ComponentSelector">
+        <description> 
+ Returns the selector that was attempted to be resolved. This may not be the same as the requested component. 
+</description>
+    </property>
+    <property name="attemptedReason" type="org.gradle.api.artifacts.result.ComponentSelectionReason">
+        <description> 
+ Returns the reasons why the failed selector was attempted. 
+</description>
+    </property>
+    <property name="failure" type="java.lang.Throwable">
+        <description> 
+ The failure that occurred. 
+</description>
+    </property>
+</type>

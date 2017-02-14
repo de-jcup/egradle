@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.component.SoftwareComponentContainer" version="3.0">
+    <description> 
+ A Container that contains all of the Software Components produced by a Project. 
+</description>
+</type>

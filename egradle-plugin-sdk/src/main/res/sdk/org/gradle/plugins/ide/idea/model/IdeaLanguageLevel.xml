@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaLanguageLevel" version="3.0">
+    <description> 
+ Java language level used by IDEA projects. 
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getLevel" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setLevel" returnType="void">
+        <parameter type="java.lang.String" name="level"/>
+    </method>
+    <property name="level" type="java.lang.String"/>
+</type>

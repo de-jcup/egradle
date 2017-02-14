@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ProjectDependencySpec" version="3.0">
+    <description> 
+ A dependency onto a library published by a project. 
+</description>
+    <method name="getLibraryName" returnType="java.lang.String">
+        <description> 
+ Returns the name of the library this dependency refers to. If null, it should be assumed that the project 
+ defines a single library. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name 
+</description>
+    </method>
+    <method name="getProjectPath" returnType="java.lang.String">
+        <description> 
+ Returns the project path of the project this dependency refers to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path 
+</description>
+    </method>
+    <property name="libraryName" type="java.lang.String">
+        <description> 
+ Returns the name of the library this dependency refers to. If null, it should be assumed that the project 
+ defines a single library. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name 
+</description>
+    </property>
+    <property name="projectPath" type="java.lang.String">
+        <description> 
+ Returns the project path of the project this dependency refers to. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path 
+</description>
+    </property>
+</type>

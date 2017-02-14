@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.language.c.plugins.CPlugin" version="3.0"><description> 
- A plugin for projects wishing to build native binary components from C sources. 
- 
- &lt;p&gt;Automatically includes the &lt;a href='type://CLangPlugin'&gt;CLangPlugin&lt;/a&gt; for core C++ support and the &lt;a href='type://org.gradle.nativeplatform.plugins.NativeComponentPlugin'&gt;org.gradle.nativeplatform.plugins.NativeComponentPlugin&lt;/a&gt; for native component support.&lt;/p&gt; 
- 
- &lt;li&gt;Creates a &lt;a href='type://org.gradle.language.c.tasks.CCompile'&gt;org.gradle.language.c.tasks.CCompile&lt;/a&gt; task for each &lt;a href='type://org.gradle.language.c.CSourceSet'&gt;org.gradle.language.c.CSourceSet&lt;/a&gt; to compile the C sources.&lt;/li&gt; 
-</description><method name="apply" returnType="void"><parameter type="org.gradle.api.Project" name="project"/></method></type>

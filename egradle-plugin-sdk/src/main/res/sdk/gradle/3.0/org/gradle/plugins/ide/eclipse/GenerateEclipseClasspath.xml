@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask"><description> 
- Generates an Eclipse &lt;code&gt;.classpath&lt;/code&gt; file. If you want to fine tune the eclipse configuration 
- &lt;p&gt; 
- At this moment nearly all configuration is done via &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt;. 
-</description><method name="configure" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.Classpath" name="xmlClasspath"/></method><method name="create" returnType="org.gradle.plugins.ide.eclipse.model.Classpath"/><method name="getClasspath" returnType="org.gradle.plugins.ide.eclipse.model.EclipseClasspath"><description> 
- The Eclipse Classpath model containing the information required to generate the classpath file. 
-</description></method><method name="setClasspath" returnType="void"><parameter type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" name="classpath"/></method><property name="classpath" type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath"><description> 
- The Eclipse Classpath model containing the information required to generate the classpath file. 
-</description></property></type>

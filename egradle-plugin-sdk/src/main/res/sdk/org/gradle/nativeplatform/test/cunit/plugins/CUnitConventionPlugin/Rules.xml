@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitConventionPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="createCUnitTestSuitePerComponent" returnType="void">
+        <parameter type="org.gradle.testing.base.TestSuiteContainer" name="testSuites"/>
+        <parameter type="org.gradle.model.ModelMap" name="components"/>
+    </method>
+</type>

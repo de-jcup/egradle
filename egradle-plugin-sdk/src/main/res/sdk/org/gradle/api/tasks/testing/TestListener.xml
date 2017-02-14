@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestListener" version="3.0">
+    <description> 
+ Interface for listening to test execution.  The intent is to be 
+ framework agnostic.  Currently this interface can support feedback 
+ from JUnit and TestNG tests. 
+</description>
+    <method name="afterSuite" returnType="void">
+        <description> 
+ Called after a test suite is finished. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;suite The suite whose tests have finished being executed. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;result The aggregate result for the suite. 
+</description>
+        <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="suite"/>
+        <parameter type="org.gradle.api.tasks.testing.TestResult" name="result"/>
+    </method>
+    <method name="afterTest" returnType="void">
+        <description> 
+ Called after an atomic test is finished. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testDescriptor The test which has finished executing. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;result The test result. 
+</description>
+        <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="testDescriptor"/>
+        <parameter type="org.gradle.api.tasks.testing.TestResult" name="result"/>
+    </method>
+    <method name="beforeSuite" returnType="void">
+        <description> 
+ Called before a test suite is started. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;suite The suite whose tests are about to be executed. 
+</description>
+        <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="suite"/>
+    </method>
+    <method name="beforeTest" returnType="void">
+        <description> 
+ Called before an atomic test is started. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testDescriptor The test which is about to be executed. 
+</description>
+        <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="testDescriptor"/>
+    </method>
+</type>

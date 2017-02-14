@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.GroovyPlugin" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which extends the &lt;a href='type://JavaPlugin'&gt;JavaPlugin&lt;/a&gt; to provide support for compiling and documenting Groovy 
+ source files.&lt;/p&gt; 
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="configureGroovydoc" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+</type>

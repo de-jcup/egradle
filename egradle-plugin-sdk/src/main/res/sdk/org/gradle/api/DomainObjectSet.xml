@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.DomainObjectSet" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://DomainObjectSet'&gt;DomainObjectSet&lt;/a&gt; is a specialisation of &lt;a href='type://DomainObjectCollection'&gt;DomainObjectCollection&lt;/a&gt; that guarantees &lt;a href='type://Set'&gt;Set&lt;/a&gt; semantics.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of domain objects in this set. 
+</description>
+    <method name="findAll" returnType="java.util.Set">
+        <description> 
+ {@inheritDoc} 
+</description>
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <description> 
+ {@inheritDoc} 
+</description>
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <description> 
+ {@inheritDoc} 
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectSet">
+        <description> 
+ {@inheritDoc} 
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+</type>

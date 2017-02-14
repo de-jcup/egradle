@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.testing.base.plugins.TestingModelBasePlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="attachBinariesToCheckLifecycle" returnType="void">
+        <parameter type="org.gradle.api.Task" name="checkTask"/>
+        <parameter type="org.gradle.model.ModelMap" name="binaries"/>
+    </method>
+    <method name="copyTestBinariesToGlobalContainer" returnType="void">
+        <parameter type="org.gradle.platform.base.BinaryContainer" name="binaries"/>
+        <parameter type="org.gradle.testing.base.TestSuiteContainer" name="testSuites"/>
+    </method>
+    <method name="registerTestSuiteSpec" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="testSuites" returnType="void">
+        <parameter type="org.gradle.testing.base.TestSuiteContainer" name="testSuites"/>
+    </method>
+</type>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration" version="3.0"><description> 
- An executable tool that forms part of a tool chain. 
-</description><method name="withArguments" returnType="void"><description> 
- Adds an action that will be applied to the command-line arguments prior to execution. 
-</description><parameter type="org.gradle.api.Action" name="arguments"/></method></type>

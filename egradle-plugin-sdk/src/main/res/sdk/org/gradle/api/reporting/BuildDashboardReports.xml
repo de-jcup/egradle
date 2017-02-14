@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.reporting.BuildDashboardReports" version="3.0">
+    <description> 
+ The reporting configuration for the &lt;a href='type://GenerateBuildDashboard'&gt;GenerateBuildDashboard&lt;/a&gt; task. 
+</description>
+    <method name="getHtml" returnType="org.gradle.api.reporting.DirectoryReport">
+        <description> 
+ The build dashboard HTML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build dashboard HTML report 
+</description>
+    </method>
+    <property name="html" type="org.gradle.api.reporting.DirectoryReport">
+        <description> 
+ The build dashboard HTML report 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build dashboard HTML report 
+</description>
+    </property>
+</type>

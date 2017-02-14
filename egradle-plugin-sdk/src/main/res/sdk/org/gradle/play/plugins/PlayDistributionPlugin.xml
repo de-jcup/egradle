@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin" version="3.0" superType="org.gradle.model.RuleSource">
+    <description> 
+ A plugin that adds a distribution zip to a Play application build. 
+</description>
+    <method name="createDistributionContentTasks" returnType="void">
+        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
+        <parameter type="java.io.File" name="buildDir"/>
+        <parameter type="org.gradle.play.distribution.PlayDistributionContainer" name="distributions"/>
+        <parameter type="org.gradle.play.plugins.PlayPluginConfigurations" name="configurations"/>
+    </method>
+    <method name="createDistributionZipTasks" returnType="void">
+        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
+        <parameter type="java.io.File" name="buildDir"/>
+        <parameter type="org.gradle.play.distribution.PlayDistributionContainer" name="distributions"/>
+    </method>
+    <method name="createDistributions" returnType="void">
+        <parameter type="org.gradle.play.distribution.PlayDistributionContainer" name="distributions"/>
+        <parameter type="org.gradle.model.ModelMap" name="playBinaries"/>
+        <parameter type="org.gradle.play.plugins.PlayPluginConfigurations" name="configurations"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
+    </method>
+    <method name="createLifecycleTasks" returnType="void">
+        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
+    </method>
+    <method name="distributions" returnType="org.gradle.play.distribution.PlayDistributionContainer">
+        <parameter type="org.gradle.internal.reflect.Instantiator" name="instantiator"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.Task" name="task"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.Sync" name="sync"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.application.CreateStartScripts" name="createStartScripts"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.bundling.Tar" name="tar"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.bundling.Zip" name="zip"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.jvm.tasks.Jar" name="jar"/>
+    </method>
+</type>

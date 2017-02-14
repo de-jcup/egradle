@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.Transformer" version="3.0">
+    <description> 
+ &lt;p&gt;A &lt;a href='type://Transformer'&gt;Transformer&lt;/a&gt; transforms objects of type.&lt;/p&gt; 
+ 
+ &lt;p&gt;Implementations are free to return new objects or mutate the incoming value.&lt;/p&gt; 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;OUT&gt; The type the value is transformed to. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;IN&gt; The type of the value to be transformed. 
+</description>
+    <method name="transform" returnType="OUT">
+        <description> 
+ Transforms the given object, and returns the transformed value. 
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;in The object to transform. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The transformed object. 
+</description>
+        <parameter type="IN" name="in"/>
+    </method>
+</type>

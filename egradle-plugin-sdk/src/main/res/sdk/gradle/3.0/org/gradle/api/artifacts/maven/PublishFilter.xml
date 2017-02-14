@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="true" language="gradle" name="org.gradle.api.artifacts.maven.PublishFilter" version="3.0"><description> 
- A filter for artifacts to be published. 
-</description><method name="accept" returnType="boolean"><parameter type="org.apache.ivy.core.module.descriptor.Artifact" name="artifact"/><parameter type="java.io.File" name="src"/></method></type>

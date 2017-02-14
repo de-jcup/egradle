@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.external.javadoc.CoreJavadocOptions" version="3.0">
+    <description> 
+ Provides the core Javadoc Options. That is, provides the options which are not doclet specific. 
+</description>
+    <method name="addBooleanOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addBooleanOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="boolean" name="value"/>
+    </method>
+    <method name="addEnumOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addEnumOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="T" name="value"/>
+    </method>
+    <method name="addFileOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addFileOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="java.io.File" name="value"/>
+    </method>
+    <method name="addMultilineStringsOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="org.gradle.external.javadoc.JavadocOptionFileOption" name="option"/>
+    </method>
+    <method name="addPathOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addPathOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="java.lang.String" name="joinBy"/>
+    </method>
+    <method name="addStringOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addStringOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="java.lang.String" name="value"/>
+    </method>
+    <method name="addStringsOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+    </method>
+    <method name="addStringsOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
+        <parameter type="java.lang.String" name="option"/>
+        <parameter type="java.lang.String" name="joinBy"/>
+    </method>
+    <method name="bootClasspath" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.io.File" name="bootClasspath"/>
+    </method>
+    <method name="breakIterator" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="breakIterator" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="boolean" name="breakIterator"/>
+    </method>
+    <method name="classpath" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.io.File" name="classpath"/>
+    </method>
+    <method name="classpath" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.util.List" name="classpath"/>
+    </method>
+    <method name="contributeCommandLineOptions" returnType="void">
+        <parameter type="org.gradle.process.ExecSpec" name="execHandleBuilder"/>
+    </method>
+    <method name="doclet" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="doclet"/>
+    </method>
+    <method name="docletpath" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.io.File" name="docletpath"/>
+    </method>
+    <method name="encoding" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+    <method name="extDirs" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.io.File" name="extDirs"/>
+    </method>
+    <method name="getBootClasspath" returnType="java.util.List"/>
+    <method name="getClasspath" returnType="java.util.List"/>
+    <method name="getDoclet" returnType="java.lang.String"/>
+    <method name="getDocletpath" returnType="java.util.List"/>
+    <method name="getEncoding" returnType="java.lang.String"/>
+    <method name="getExtDirs" returnType="java.util.List"/>
+    <method name="getJFlags" returnType="java.util.List"/>
+    <method name="getLocale" returnType="java.lang.String"/>
+    <method name="getMemberLevel" returnType="org.gradle.external.javadoc.JavadocMemberLevel"/>
+    <method name="getOptionFiles" returnType="java.util.List"/>
+    <method name="getOutputLevel" returnType="org.gradle.external.javadoc.JavadocOutputLevel"/>
+    <method name="getOverview" returnType="java.lang.String"/>
+    <method name="getSource" returnType="java.lang.String"/>
+    <method name="getSourceNames" returnType="java.util.List"/>
+    <method name="isBreakIterator" returnType="boolean"/>
+    <method name="isVerbose" returnType="boolean"/>
+    <method name="jFlags" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="jFlags"/>
+    </method>
+    <method name="locale" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="locale"/>
+    </method>
+    <method name="optionFiles" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.io.File" name="argumentFiles"/>
+    </method>
+    <method name="overview" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <description> 
+ Fluent setter for the overview option. 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;overview The new overview. 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;MinimalJavadocOptions&lt;/code&gt; object. 
+</description>
+        <parameter type="java.lang.String" name="overview"/>
+    </method>
+    <method name="quiet" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="setBootClasspath" returnType="void">
+        <parameter type="java.util.List" name="bootClasspath"/>
+    </method>
+    <method name="setBreakIterator" returnType="void">
+        <parameter type="boolean" name="breakIterator"/>
+    </method>
+    <method name="setClasspath" returnType="void">
+        <parameter type="java.util.List" name="classpath"/>
+    </method>
+    <method name="setDoclet" returnType="void">
+        <parameter type="java.lang.String" name="doclet"/>
+    </method>
+    <method name="setDocletpath" returnType="void">
+        <parameter type="java.util.List" name="docletpath"/>
+    </method>
+    <method name="setEncoding" returnType="void">
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+    <method name="setExtDirs" returnType="void">
+        <parameter type="java.util.List" name="extDirs"/>
+    </method>
+    <method name="setJFlags" returnType="void">
+        <parameter type="java.util.List" name="jFlags"/>
+    </method>
+    <method name="setLocale" returnType="void">
+        <parameter type="java.lang.String" name="locale"/>
+    </method>
+    <method name="setMemberLevel" returnType="void">
+        <parameter type="org.gradle.external.javadoc.JavadocMemberLevel" name="memberLevel"/>
+    </method>
+    <method name="setOptionFiles" returnType="void">
+        <parameter type="java.util.List" name="optionFiles"/>
+    </method>
+    <method name="setOutputLevel" returnType="void">
+        <parameter type="org.gradle.external.javadoc.JavadocOutputLevel" name="outputLevel"/>
+    </method>
+    <method name="setOverview" returnType="void">
+        <parameter type="java.lang.String" name="overview"/>
+    </method>
+    <method name="setSource" returnType="void">
+        <parameter type="java.lang.String" name="source"/>
+    </method>
+    <method name="setSourceNames" returnType="void">
+        <parameter type="java.util.List" name="sourceNames"/>
+    </method>
+    <method name="showAll" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="showFromPackage" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="showFromPrivate" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="showFromProtected" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="showFromPublic" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="source" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="source"/>
+    </method>
+    <method name="sourceNames" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <parameter type="java.lang.String" name="sourceNames"/>
+    </method>
+    <method name="verbose" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>
+    <method name="write" returnType="void">
+        <parameter type="java.io.File" name="outputFile"/>
+    </method>
+    <property name="bootClasspath" type="java.util.List"/>
+    <property name="breakIterator" type="boolean"/>
+    <property name="classpath" type="java.util.List"/>
+    <property name="doclet" type="java.lang.String"/>
+    <property name="docletpath" type="java.util.List"/>
+    <property name="encoding" type="java.lang.String"/>
+    <property name="extDirs" type="java.util.List"/>
+    <property name="jFlags" type="java.util.List"/>
+    <property name="locale" type="java.lang.String"/>
+    <property name="memberLevel" type="org.gradle.external.javadoc.JavadocMemberLevel"/>
+    <property name="optionFiles" type="java.util.List"/>
+    <property name="outputLevel" type="org.gradle.external.javadoc.JavadocOutputLevel"/>
+    <property name="overview" type="java.lang.String"/>
+    <property name="source" type="java.lang.String"/>
+    <property name="sourceNames" type="java.util.List"/>
+    <property name="verbose" type="boolean"/>
+</type>

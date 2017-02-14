@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.SingleEntryModuleLibrary" version="3.0" superType="org.gradle.plugins.ide.idea.model.ModuleLibrary">
+    <description> 
+ Single entry module library 
+</description>
+    <method name="getJavadocFile" returnType="java.io.File">
+        <description> 
+ Returns a single javadoc jar or javadoc folder 
+</description>
+    </method>
+    <method name="getLibraryFile" returnType="java.io.File">
+        <description> 
+ Returns a single jar or class folder 
+</description>
+    </method>
+    <method name="getModuleVersion" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier">
+        <description> 
+ Module version of the library, if any. 
+</description>
+    </method>
+    <method name="getSourceFile" returnType="java.io.File">
+        <description> 
+ Returns a single source jar or source folder 
+</description>
+    </method>
+    <method name="setModuleVersion" returnType="void">
+        <parameter type="org.gradle.api.artifacts.ModuleVersionIdentifier" name="moduleVersion"/>
+    </method>
+    <property name="javadocFile" type="java.io.File">
+        <description> 
+ Returns a single javadoc jar or javadoc folder 
+</description>
+    </property>
+    <property name="libraryFile" type="java.io.File">
+        <description> 
+ Returns a single jar or class folder 
+</description>
+    </property>
+    <property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier">
+        <description> 
+ Module version of the library, if any. 
+</description>
+    </property>
+    <property name="sourceFile" type="java.io.File">
+        <description> 
+ Returns a single source jar or source folder 
+</description>
+    </property>
+</type>

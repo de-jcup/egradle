@@ -104,7 +104,7 @@ public class IntegrationTestComponents extends ExternalResource{
 		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		loader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk/gradle/3.0")); // FIXME ATR, 07.02.2017: make this changeable!
+		loader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk")); 
 		gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 		/*

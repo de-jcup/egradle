@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.specs.Specs" version="3.0">
+    <description> 
+ Provides a number of &lt;a href='type://org.gradle.api.specs.Spec'&gt;org.gradle.api.specs.Spec&lt;/a&gt; implementations. 
+</description>
+    <method name="convertClosureToSpec" returnType="org.gradle.api.specs.Spec">
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="doIntersect" returnType="org.gradle.api.specs.Spec">
+        <parameter type="java.util.Collection" name="specs"/>
+    </method>
+    <method name="doUnion" returnType="org.gradle.api.specs.Spec">
+        <parameter type="java.util.Collection" name="specs"/>
+    </method>
+    <method name="intersect" returnType="org.gradle.api.specs.Spec">
+        <description> 
+ Returns a spec that selects the intersection of those items selected by the given specs. Returns a spec that selects everything when no specs provided. 
+</description>
+        <parameter type="java.util.Collection" name="specs"/>
+    </method>
+    <method name="intersect" returnType="org.gradle.api.specs.Spec">
+        <description> 
+ Returns a spec that selects the intersection of those items selected by the given specs. Returns a spec that selects everything when no specs provided. 
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="specs"/>
+    </method>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="java.lang.Object" name="element"/>
+    </method>
+    <method name="negate" returnType="org.gradle.api.specs.Spec">
+        <description> 
+ Returns a spec that selects everything that is not selected by the given spec. 
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="satisfyAll" returnType="org.gradle.api.specs.Spec"/>
+    <method name="satisfyNone" returnType="org.gradle.api.specs.Spec"/>
+    <method name="union" returnType="org.gradle.api.specs.Spec">
+        <description> 
+ Returns a spec that selects the union of those items selected by the provided spec. Selects everything when no specs provided. 
+</description>
+        <parameter type="java.util.Collection" name="specs"/>
+    </method>
+    <method name="union" returnType="org.gradle.api.specs.Spec">
+        <description> 
+ Returns a spec that selects the union of those items selected by the provided spec. Selects everything when no specs provided. 
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="specs"/>
+    </method>
+    <property name="satisfiedBy" type="boolean"/>
+</type>

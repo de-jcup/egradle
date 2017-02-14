@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaWorkspace" version="3.0">
+    <description> 
+ Enables fine-tuning workspace details (*.iws file) of the IDEA plugin. 
+ &lt;p&gt; 
+ At the moment, the only practical way of manipulating the resulting content is via the withXml hook: 
+ 
+ &lt;pre autoTested=''&gt; 
+ apply plugin: 'java' 
+ apply plugin: 'idea' 
+ 
+ idea.workspace.iws.withXml { provider -&gt; 
+     provider.asNode().appendNode('gradleRocks', 'true') 
+ } 
+ &lt;/pre&gt; 
+</description>
+    <method name="getIws" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger" delegationTarget="IdeaWorkspace">
+        <description> 
+ Enables advanced manipulation of the output XML. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
+</description>
+    </method>
+    <method name="iws" returnType="void" delegationTarget="IdeaWorkspace">
+        <description> 
+ Enables advanced manipulation of the output XML. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="mergeXmlWorkspace" returnType="void">
+        <parameter type="org.gradle.plugins.ide.idea.model.Workspace" name="xmlWorkspace"/>
+    </method>
+    <method name="setIws" returnType="void">
+        <parameter type="org.gradle.plugins.ide.api.XmlFileContentMerger" name="iws"/>
+    </method>
+    <property name="iws" type="org.gradle.plugins.ide.api.XmlFileContentMerger">
+        <description> 
+ Enables advanced manipulation of the output XML. 
+ &lt;p&gt; 
+ For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
+</description>
+    </property>
+</type>

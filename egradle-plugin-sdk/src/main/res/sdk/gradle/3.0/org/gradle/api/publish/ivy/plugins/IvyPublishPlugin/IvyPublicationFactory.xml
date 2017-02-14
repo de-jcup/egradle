@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><type interface="false" language="gradle" name="org.gradle.api.publish.ivy.plugins.IvyPublishPlugin.IvyPublicationFactory" version="3.0"><method name="create" returnType="org.gradle.api.publish.ivy.IvyPublication"><parameter type="java.lang.String" name="name"/></method></type>

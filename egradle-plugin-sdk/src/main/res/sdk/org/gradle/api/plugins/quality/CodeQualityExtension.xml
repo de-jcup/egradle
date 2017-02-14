@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.CodeQualityExtension" version="3.0">
+    <description> 
+ Base Code Quality Extension. 
+</description>
+    <method name="getReportsDir" returnType="java.io.File">
+        <description> 
+ The directory where reports will be generated. 
+</description>
+    </method>
+    <method name="getSourceSets" returnType="java.util.Collection">
+        <description> 
+ The source sets to be analyzed as part of the &lt;tt&gt;check&lt;/tt&gt; and &lt;tt&gt;build&lt;/tt&gt; tasks. 
+</description>
+    </method>
+    <method name="getToolVersion" returnType="java.lang.String">
+        <description> 
+ The version of the code quality tool to be used. 
+</description>
+    </method>
+    <method name="isIgnoreFailures" returnType="boolean">
+        <description> 
+ Whether or not to allow the build to continue if there are warnings. 
+ 
+ Example: ignoreFailures = true 
+</description>
+    </method>
+    <method name="setIgnoreFailures" returnType="void">
+        <parameter type="boolean" name="ignoreFailures"/>
+    </method>
+    <method name="setReportsDir" returnType="void">
+        <parameter type="java.io.File" name="reportsDir"/>
+    </method>
+    <method name="setSourceSets" returnType="void">
+        <parameter type="java.util.Collection" name="sourceSets"/>
+    </method>
+    <method name="setToolVersion" returnType="void">
+        <parameter type="java.lang.String" name="toolVersion"/>
+    </method>
+    <property name="ignoreFailures" type="boolean">
+        <description> 
+ Whether or not to allow the build to continue if there are warnings. 
+ 
+ Example: ignoreFailures = true 
+</description>
+    </property>
+    <property name="reportsDir" type="java.io.File">
+        <description> 
+ The directory where reports will be generated. 
+</description>
+    </property>
+    <property name="sourceSets" type="java.util.Collection">
+        <description> 
+ The source sets to be analyzed as part of the &lt;tt&gt;check&lt;/tt&gt; and &lt;tt&gt;build&lt;/tt&gt; tasks. 
+</description>
+    </property>
+    <property name="toolVersion" type="java.lang.String">
+        <description> 
+ The version of the code quality tool to be used. 
+</description>
+    </property>
+</type>

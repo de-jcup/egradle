@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.language.rc.tasks.WindowsResourceCompile" version="3.0" superType="org.gradle.api.DefaultTask">
+    <description> 
+ Compiles Windows Resource scripts into .res files. 
+</description>
+    <method name="call" returnType="java.lang.String"/>
+    <method name="compile" returnType="void">
+        <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
+    </method>
+    <method name="doCompile" returnType="org.gradle.api.tasks.WorkResult">
+        <parameter type="T" name="spec"/>
+        <parameter type="org.gradle.nativeplatform.toolchain.internal.PlatformToolProvider" name="platformToolProvider"/>
+    </method>
+    <method name="getCompilerArgs" returnType="java.util.List">
+        <description> 
+ Additional arguments to provide to the compiler. 
+</description>
+    </method>
+    <method name="getIncludes" returnType="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the header directories to be used for compilation. 
+</description>
+    </method>
+    <method name="getIncrementalCompilerBuilder" returnType="org.gradle.language.nativeplatform.internal.incremental.IncrementalCompilerBuilder"/>
+    <method name="getMacros" returnType="java.util.Map">
+        <description> 
+ Macros that should be defined for the compiler. 
+</description>
+    </method>
+    <method name="getOperationLoggerFactory" returnType="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
+    <method name="getOutputDir" returnType="java.io.File">
+        <description> 
+ The directory where object files will be generated. 
+</description>
+    </method>
+    <method name="getSource" returnType="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the source files to be compiled. 
+</description>
+    </method>
+    <method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
+        <description> 
+ The platform being targeted. 
+</description>
+    </method>
+    <method name="getToolChain" returnType="org.gradle.nativeplatform.toolchain.NativeToolChain">
+        <description> 
+ The tool chain used for compilation. 
+</description>
+    </method>
+    <method name="includes" returnType="void">
+        <description> 
+ Add directories where the compiler should search for header files. 
+</description>
+        <parameter type="java.lang.Object" name="includeRoots"/>
+    </method>
+    <method name="setCompilerArgs" returnType="void">
+        <parameter type="java.util.List" name="compilerArgs"/>
+    </method>
+    <method name="setMacros" returnType="void">
+        <parameter type="java.util.Map" name="macros"/>
+    </method>
+    <method name="setOutputDir" returnType="void">
+        <parameter type="java.io.File" name="outputDir"/>
+    </method>
+    <method name="setTargetPlatform" returnType="void">
+        <parameter type="org.gradle.nativeplatform.platform.NativePlatform" name="targetPlatform"/>
+    </method>
+    <method name="setToolChain" returnType="void">
+        <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
+    </method>
+    <method name="source" returnType="void">
+        <description> 
+ Adds a set of source files to be compiled. The provided sourceFiles object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
+</description>
+        <parameter type="java.lang.Object" name="sourceFiles"/>
+    </method>
+    <property name="compilerArgs" type="java.util.List">
+        <description> 
+ Additional arguments to provide to the compiler. 
+</description>
+    </property>
+    <property name="includes" type="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the header directories to be used for compilation. 
+</description>
+    </property>
+    <property name="incrementalCompilerBuilder" type="org.gradle.language.nativeplatform.internal.incremental.IncrementalCompilerBuilder"/>
+    <property name="macros" type="java.util.Map">
+        <description> 
+ Macros that should be defined for the compiler. 
+</description>
+    </property>
+    <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
+    <property name="outputDir" type="java.io.File">
+        <description> 
+ The directory where object files will be generated. 
+</description>
+    </property>
+    <property name="source" type="org.gradle.api.file.FileCollection">
+        <description> 
+ Returns the source files to be compiled. 
+</description>
+    </property>
+    <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform">
+        <description> 
+ The platform being targeted. 
+</description>
+    </property>
+    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
+        <description> 
+ The tool chain used for compilation. 
+</description>
+    </property>
+</type>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.ForkOptions" version="3.0" superType="org.gradle.api.tasks.compile.BaseForkOptions">
+    <description> 
+ Fork options for Java compilation. Only take effect if &lt;a href='type://CompileOptions.fork'&gt;CompileOptions.fork&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
+</description>
+    <method name="excludeFromAntProperties" returnType="boolean">
+        <parameter type="java.lang.String" name="fieldName"/>
+    </method>
+    <method name="getExecutable" returnType="java.lang.String" delegationTarget="null">
+        <description> 
+ Returns the compiler executable to be used. If set, 
+ a new compiler process will be forked for every compile task. 
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+</description>
+    </method>
+    <method name="getTempDir" returnType="java.lang.String" delegationTarget="null">
+        <description> 
+ Returns the directory used for temporary files that may be created to pass 
+ command line arguments to the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, 
+ in which case the directory will be chosen automatically. 
+</description>
+    </method>
+    <method name="setExecutable" returnType="void" delegationTarget="null">
+        <description> 
+ Sets the compiler executable to be used. If set, 
+ a new compiler process will be forked for every compile task. 
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+</description>
+        <parameter type="java.lang.String" name="executable"/>
+    </method>
+    <method name="setTempDir" returnType="void" delegationTarget="null">
+        <description> 
+ Sets the directory used for temporary files that may be created to pass 
+ command line arguments to the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, 
+ in which case the directory will be chosen automatically. 
+</description>
+        <parameter type="java.lang.String" name="tempDir"/>
+    </method>
+    <property name="executable" type="java.lang.String">
+        <description> 
+ Returns the compiler executable to be used. If set, 
+ a new compiler process will be forked for every compile task. 
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
+</description>
+    </property>
+    <property name="tempDir" type="java.lang.String">
+        <description> 
+ Returns the directory used for temporary files that may be created to pass 
+ command line arguments to the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, 
+ in which case the directory will be chosen automatically. 
+</description>
+    </property>
+</type>

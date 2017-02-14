@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseOutputLocation" version="3.0">
+    <description> 
+ The output location of an Eclipse project. 
+ 
+ @since 3.0 
+</description>
+    <method name="getPath" returnType="java.lang.String">
+        <description> 
+ Returns the project-relative path to the output location. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path to the output location. Does not return null. 
+</description>
+    </method>
+    <property name="path" type="java.lang.String">
+        <description> 
+ Returns the project-relative path to the output location. 
+ 
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path to the output location. Does not return null. 
+</description>
+    </property>
+</type>

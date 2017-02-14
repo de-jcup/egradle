@@ -61,6 +61,8 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
  */
 public class SDKBuilder {
 
+	private static boolean USE_HOME_FOLDER;
+
 	/*
 	 * FIXME ATR, 20.01.2017: docbook does know the target!
 	 * /gradle/buildSrc/src/main/groovy/org/gradle/build/docs/dsl/docbook/
@@ -70,11 +72,11 @@ public class SDKBuilder {
 		SDKBuilder builder = new SDKBuilder("./../../gradle/subprojects/docs");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
 		BuilderContext context = builder.buildSDK(srcMainResTarget, "3.0");
-
+		if (!USE_HOME_FOLDER)return;
 		File userHomeTargetPathDirectory = context.createTargetFile(createUserHomeTargetRoot());
-		System.out.println("-- copying from \n"+srcMainResTarget+"\nto:\n"+userHomeTargetPathDirectory);
-		FileUtils.deleteDirectory(userHomeTargetPathDirectory);
-		FileUtils.copyDirectory(context.targetPathDirectory, userHomeTargetPathDirectory);
+//		System.out.println("-- copying from \n"+srcMainResTarget+"\nto:\n"+userHomeTargetPathDirectory);
+//		FileUtils.deleteDirectory(userHomeTargetPathDirectory);
+//		FileUtils.copyDirectory(context.targetPathDirectory, userHomeTargetPathDirectory);
 	}
 
 	public static File createUserHomeTargetRoot() {
@@ -127,7 +129,7 @@ public class SDKBuilder {
 
 		System.out.println("- info:" + builderContext.getInfo());
 		System.out.println("generated into:" + builderContext.targetPathDirectory.getCanonicalPath());
-
+		builderContext.writeSdkPropertiesFile();
 		System.out.println("DONE");
 		return builderContext;
 	}
@@ -156,7 +158,9 @@ public class SDKBuilder {
 		builderContext.sourceParentDirectory = sourceParentDirectory;
 		builderContext.targetPathDirectory = targetPathDirectory;
 		System.out.println("start generation into:" + builderContext.targetPathDirectory.getCanonicalPath());
-
+		
+		builderContext.sdkPropertiesFile=new File(targetPathDirectory,"sdk.properties");
+		builderContext.addSdkProperty("gradle.version",gradleVersion);
 		return builderContext;
 	}
 
@@ -426,6 +430,9 @@ public class SDKBuilder {
 	}
 
 	private class BuilderContext {
+		public File sdkPropertiesFile;
+		Map<String,String> sdkPropertiesMap = new TreeMap<>();
+		
 		String gradleVersion;
 		File sourceParentDirectory;
 		File targetPathDirectory;
@@ -445,8 +452,25 @@ public class SDKBuilder {
 					+ missingDescriptionPercent + "%";
 		}
 		
+		public void addSdkProperty(String key, String value) {
+			sdkPropertiesMap.put(key,value);
+		}
+
 		public File createTargetFile(File targetRootDirectory) {
-			return new File(targetRootDirectory, "sdk/gradle/" + gradleVersion);
+			return new File(targetRootDirectory, "sdk/");
+		}
+		
+		public void writeSdkPropertiesFile() throws IOException{
+			StringBuilder sb = new StringBuilder();
+			for (String key: sdkPropertiesMap.keySet()){
+				String value= sdkPropertiesMap.get(key);
+				sb.append(key);
+				sb.append('=');
+				sb.append(value);
+				sb.append("\n");
+			}
+			FileUtils.write(sdkPropertiesFile, sb.toString());
+			System.out.println("- written sdk properties file:"+sdkPropertiesFile);
 		}
 	}
 
