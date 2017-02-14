@@ -68,7 +68,7 @@ public class SDKBuilder {
 	 */
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle/subprojects/docs");
-		File srcMainResTarget = new File("./../egradle-plugin-main/src/main/res/");
+		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
 		BuilderContext context = builder.buildSDK(srcMainResTarget, "3.0");
 
 		File userHomeTargetPathDirectory = context.createTargetFile(createUserHomeTargetRoot());

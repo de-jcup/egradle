@@ -42,6 +42,18 @@ public class TestUtil {
 			SRC_MAIN_RES_FOLDER = new File("src/main/res/");
 		}
 	}
+	
+	public static File SDK__SRC_MAIN_RES_FOLDER = new File("egradle-plugin-sdk/src/main/res/");
+	static {
+		if (!SDK__SRC_MAIN_RES_FOLDER.exists()) {
+			/*
+			 * fall back - to be testable by eclipse in sub projects and also
+			 * via gradle from root project.
+			 */
+			SDK__SRC_MAIN_RES_FOLDER = new File("./../egradle-plugin-sdk/src/main/res/");
+		}
+	}
+	
 	public static final File ROOTFOLDER_1 = new File(SRC_TEST_RES_FOLDER, "rootproject1");
 	
 	/**
