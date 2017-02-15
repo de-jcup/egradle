@@ -1,4 +1,4 @@
-package de.jcup.egradle.eclipse.plugin.sdk.internal.util;
+package de.jcup.egradle.sdk.internal;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import org.junit.Test;
+
+import de.jcup.egradle.sdk.internal.FileUtil;
 
 public class FileUtilTest {
 

@@ -5,6 +5,7 @@ dependencies {
 	compile library.commons_io
 	
 	compile project(':egradle-plugin-main')
+	compile project(':egradle-plugin-sdk')
 	
 	compile group: 'org.ow2.asm', name: 'asm-all', version: '5.2'
 	

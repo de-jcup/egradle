@@ -31,8 +31,8 @@ import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.plugin.sdk.SDK;
-import de.jcup.egradle.eclipse.plugin.sdk.SDKManager;
+import de.jcup.egradle.sdk.SDK;
+import de.jcup.egradle.sdk.SDKManager;
 
 /**
  * The activator class controls the plug-in life cycle

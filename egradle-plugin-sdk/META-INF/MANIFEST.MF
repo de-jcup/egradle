@@ -10,4 +10,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: de.jcup.egradle.eclipse.plugin.sdk
+Export-Package: de.jcup.egradle.sdk

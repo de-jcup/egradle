@@ -15,9 +15,12 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Version;
 
-import de.jcup.egradle.eclipse.plugin.sdk.internal.ContainedResourcesCopyingSDK;
+import de.jcup.egradle.sdk.SDKManager;
+import de.jcup.egradle.sdk.internal.ContainedResourcesCopyingSDK;
+import de.jcup.egradle.sdk.internal.LogAdapter;
+import de.jcup.egradle.sdk.internal.RootFolderProvider;
 
-public class Activator extends AbstractUIPlugin {
+public class Activator extends AbstractUIPlugin implements LogAdapter, RootFolderProvider {
 
 	public static final String ID = "de.jcup.egradle.eclipse.plugin.sdk";
 
@@ -46,47 +49,18 @@ public class Activator extends AbstractUIPlugin {
 		Bundle bundle = bundleContext.getBundle();
 		Version version = bundle.getVersion();
 		
-		try{
-			File file = getFileInsidePlugin("sdk");
-			if (file==null){
-				return;
-			}
-			ContainedResourcesCopyingSDK sdk = new ContainedResourcesCopyingSDK(version.toString(), file);
-			sdk.setDescription("Contains Gradle DSL 3.0");
+			ContainedResourcesCopyingSDK sdk = new ContainedResourcesCopyingSDK(version.toString(),this,this);
 			
 			SDKManager.get().setCurrentSDK(sdk);
-		}catch(IOException e){
-			getLog().log(new Status(IStatus.ERROR, ID, "Was not able to resolve sdk file inside plugin",e));
-		}
 
 	}
-
-	private File getFileInsidePlugin(String path) throws IOException, URISyntaxException {
-		Bundle bundle = Platform.getBundle(ID);
-		URL url = bundle.getEntry(path);
-		if (url==null){
-			getLog().log(new Status(IStatus.WARNING, ID, "Was not able to resolve sdk file inside plugin by path:"+path));
-			String path2 = "bin/"+path;
-			url = bundle.getEntry(path2);
-			if (url==null){
-				return null;
-			}
-			getLog().log(new Status(IStatus.INFO, ID, "Fallback to bin folder (PDE) worked!"));
 			
-		}
-		URL resolvedFileURL = FileLocator.toFileURL(url);
-		if (resolvedFileURL==null){
-			getLog().log(new Status(IStatus.WARNING, ID, "Was not able to resolve sdk file inside plugin by URL:"+resolvedFileURL));
-			return null;
-		}
-
-		// We need to use the 3-arg constructor of URI in order to properly
-		// escape file system chars
-		URI resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
-		File file = new File(resolvedURI);
+	@Override
+	public File getRootFolder() throws IOException {
+		File file = getFileInsidePlugin("sdk");
 		return file;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -95,6 +69,53 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+	}
+
+	@Override
+	public void logInfo(String message) {
+		getLog().log(new Status(IStatus.INFO, ID, message));
+		
+	}
+
+	@Override
+	public void logWarn(String message) {
+		getLog().log(new Status(IStatus.WARNING, ID,message));
+	}
+
+	private File getFileInsidePlugin(String path) throws IOException {
+		Bundle bundle = Platform.getBundle(ID);
+		URL url = bundle.getEntry(path);
+		if (url == null) {
+			logWarn("Was not able to resolve sdk file inside plugin by path:" + path);
+			String path2 = "bin/" + path;
+			url = bundle.getEntry(path2);
+			if (url == null) {
+				return null;
+			}
+			logInfo("Fallback to bin folder (PDE) worked!");
+	
+		}
+		URL resolvedFileURL = FileLocator.toFileURL(url);
+		if (resolvedFileURL == null) {
+			logWarn("Was not able to resolve SDK file inside plugin by URL:" + resolvedFileURL);
+			return null;
+		}
+	
+		// We need to use the 3-arg constructor of URI in order to properly
+		// escape file system chars
+		URI resolvedURI;
+		try {
+			resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
+			File file = new File(resolvedURI);
+			if (! file.exists()){
+				getLog().log(new Status(IStatus.WARNING, ID,
+						"Resolved file does not exist::" + file));
+				return null;
+			}
+			return file;
+		} catch (URISyntaxException e) {
+			throw new IOException("Cannot find file for URL:"+resolvedFileURL,e);
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package de.jcup.egradle.eclipse.plugin.sdk.internal.util;
+package de.jcup.egradle.sdk.internal;
 
 import java.io.File;
 import java.io.FileInputStream;

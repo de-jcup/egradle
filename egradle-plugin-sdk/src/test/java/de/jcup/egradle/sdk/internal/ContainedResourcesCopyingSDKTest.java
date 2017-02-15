@@ -1,4 +1,4 @@
-package de.jcup.egradle.eclipse.plugin.sdk;
+package de.jcup.egradle.sdk.internal;
 
 import static org.junit.Assert.*;
 
@@ -7,15 +7,26 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.eclipse.plugin.sdk.internal.ContainedResourcesCopyingSDK;
+import de.jcup.egradle.sdk.SDK;
+import de.jcup.egradle.sdk.internal.ContainedResourcesCopyingSDK;
 
 public class ContainedResourcesCopyingSDKTest {
 
 	private SDK sdkToTest;
+	
+	private RootFolderProvider createRootFolderProvider(){
+		return new RootFolderProvider() {
+			
+			@Override
+			public File getRootFolder() {
+				return new File("test");
+			}
+		};
+	}
 
 	@Before
 	public void before() {
-		sdkToTest = new ContainedResourcesCopyingSDK("1.0.0",new File("test"));
+		sdkToTest = new ContainedResourcesCopyingSDK("1.0.0", createRootFolderProvider(),null);
 	}
 	
 	@Test
@@ -25,14 +36,14 @@ public class ContainedResourcesCopyingSDKTest {
 	
 	@Test
 	public void get_version_returns_unknown_for_manager_called_with_null() {
-		sdkToTest = new ContainedResourcesCopyingSDK(null,new File("test"));
+		sdkToTest = new ContainedResourcesCopyingSDK(null,createRootFolderProvider(),null);
 		assertEquals("unknown",sdkToTest.getVersion());
 	}
 	
 	@Test
 	public void get_version_returns_unknown_for_manager_called_with_blank_string() {
-		sdkToTest = new ContainedResourcesCopyingSDK(" ",new File("test"));
+		sdkToTest = new ContainedResourcesCopyingSDK(" ",createRootFolderProvider(),null);
 		assertEquals("unknown",sdkToTest.getVersion());
 	}
-
+	
 }

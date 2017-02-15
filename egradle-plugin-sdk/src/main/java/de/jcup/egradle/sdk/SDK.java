@@ -1,4 +1,4 @@
-package de.jcup.egradle.eclipse.plugin.sdk;
+package de.jcup.egradle.sdk;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,6 @@ public interface SDK {
 
 	String getVersion();
 	
-	String getDescription();
-
 	boolean isInstalled();
 
 	void install() throws IOException;
@@ -18,5 +16,11 @@ public interface SDK {
 	 * @return dsl folder or <code>null</code>
 	 */
 	File getSDKInstallationFolder();
+	
+	/**
+	 * Returns sdk info object , never <code>null</code>
+	 * @return sdk info object , never <code>null</code>
+	 */
+	SDKInfo getInfo();
 
 }

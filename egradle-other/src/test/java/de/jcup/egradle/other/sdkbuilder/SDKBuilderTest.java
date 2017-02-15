@@ -1,4 +1,4 @@
-package de.jcup.egradle.other;
+package de.jcup.egradle.other.sdkbuilder;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -21,6 +21,9 @@ import org.junit.Test;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
+import de.jcup.egradle.other.OtherTestUtil;
+import de.jcup.egradle.other.sdkbuilder.LineResolver;
+import de.jcup.egradle.other.sdkbuilder.SDKBuilder;
 
 public class SDKBuilderTest {
 	private SDKBuilder preparatorToTest;

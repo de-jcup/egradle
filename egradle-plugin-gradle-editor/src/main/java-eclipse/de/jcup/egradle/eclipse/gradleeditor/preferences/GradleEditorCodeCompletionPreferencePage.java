@@ -18,18 +18,29 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.ui.SWTFactory;
+import de.jcup.egradle.sdk.SDK;
+import de.jcup.egradle.sdk.SDKInfo;
+import de.jcup.egradle.sdk.SDKManager;
 
 public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
@@ -77,6 +88,37 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				;
 			}
 		});
+//		reloadButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 3, 1));
+		
+		/* sdk info group*/
+		GridData groupLayoutData = new GridData();
+		groupLayoutData.horizontalAlignment = GridData.FILL;
+		groupLayoutData.verticalAlignment = GridData.BEGINNING;
+		groupLayoutData.grabExcessHorizontalSpace = true;
+		groupLayoutData.grabExcessVerticalSpace = true;
+		groupLayoutData.verticalSpan = 2;
+		groupLayoutData.horizontalSpan = 3;
+
+		Group validationGroup = SWTFactory.createGroup(parent, "SDK information", 1, 10, SWT.FILL);
+		validationGroup.setLayoutData(groupLayoutData);
+		
+		/* SDK info*/
+		SDK sdk = SDKManager.get().getCurrentSDK();
+		
+		SDKInfo sdkInfo = sdk.getInfo();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
+		sb.append("- Gradle").append(sdkInfo.getGradleVersion()).append("\n");
+		Date installationDate = sdkInfo.getInstallationDate();
+		if (installationDate!=null){
+			sb.append("- Was installed at ").append(DateFormat.getDateTimeInstance().format(installationDate));
+		}
+		
+		Text text = new Text(validationGroup, SWT.MULTI);
+		text.setBackground(parent.getBackground());
+//		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
+		text.setText(sb.toString());
 	}
 
 }

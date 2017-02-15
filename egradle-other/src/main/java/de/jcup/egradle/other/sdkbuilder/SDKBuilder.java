@@ -1,4 +1,4 @@
-package de.jcup.egradle.other;
+package de.jcup.egradle.other.sdkbuilder;
 
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 import static java.nio.charset.StandardCharsets.*;
@@ -14,7 +14,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -35,13 +40,19 @@ import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsExporter;
 import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTask;
 import de.jcup.egradle.codeassist.dsl.XMLTasks;
+import de.jcup.egradle.codeassist.dsl.XMLTasksExporter;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.codeassist.dsl.XMLTypeExporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeExtension;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.sdk.SDKInfo;
+import de.jcup.egradle.sdk.internal.XMLSDKInfo;
+import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -61,22 +72,11 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
  */
 public class SDKBuilder {
 
-	private static boolean USE_HOME_FOLDER;
 
-	/*
-	 * FIXME ATR, 20.01.2017: docbook does know the target!
-	 * /gradle/buildSrc/src/main/groovy/org/gradle/build/docs/dsl/docbook/
-	 * BlockDetailRenderer.java
-	 */
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle/subprojects/docs");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
-		BuilderContext context = builder.buildSDK(srcMainResTarget, "3.0");
-		if (!USE_HOME_FOLDER)return;
-		File userHomeTargetPathDirectory = context.createTargetFile(createUserHomeTargetRoot());
-//		System.out.println("-- copying from \n"+srcMainResTarget+"\nto:\n"+userHomeTargetPathDirectory);
-//		FileUtils.deleteDirectory(userHomeTargetPathDirectory);
-//		FileUtils.copyDirectory(context.targetPathDirectory, userHomeTargetPathDirectory);
+		builder.buildSDK(srcMainResTarget, "3.0");
 	}
 
 	public static File createUserHomeTargetRoot() {
@@ -129,14 +129,18 @@ public class SDKBuilder {
 
 		System.out.println("- info:" + builderContext.getInfo());
 		System.out.println("generated into:" + builderContext.targetPathDirectory.getCanonicalPath());
-		builderContext.writeSdkPropertiesFile();
+		
+		
+		builderContext.writeSDKInfo();
 		System.out.println("DONE");
 		return builderContext;
 	}
 
 	private BuilderContext createBuilderContext(File targetRootDirectory, String gradleVersion) throws IOException {
 		BuilderContext builderContext = new BuilderContext();
-		builderContext.gradleVersion=gradleVersion;
+		
+		builderContext.sdkInfo.setCreationDate(new Date());
+		builderContext.sdkInfo.setGradleVersion(gradleVersion);
 		
 		File sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
@@ -159,8 +163,7 @@ public class SDKBuilder {
 		builderContext.targetPathDirectory = targetPathDirectory;
 		System.out.println("start generation into:" + builderContext.targetPathDirectory.getCanonicalPath());
 		
-		builderContext.sdkPropertiesFile=new File(targetPathDirectory,"sdk.properties");
-		builderContext.addSdkProperty("gradle.version",gradleVersion);
+		builderContext.sdkInfoFile=new File(targetPathDirectory,SDKInfo.FILENAME);
 		return builderContext;
 	}
 
@@ -430,10 +433,9 @@ public class SDKBuilder {
 	}
 
 	private class BuilderContext {
-		public File sdkPropertiesFile;
-		Map<String,String> sdkPropertiesMap = new TreeMap<>();
+		public File sdkInfoFile;
 		
-		String gradleVersion;
+		XMLSDKInfo sdkInfo = new XMLSDKInfo();
 		File sourceParentDirectory;
 		File targetPathDirectory;
 		Map<String, Type> tasks = new TreeMap<>();
@@ -452,25 +454,18 @@ public class SDKBuilder {
 					+ missingDescriptionPercent + "%";
 		}
 		
-		public void addSdkProperty(String key, String value) {
-			sdkPropertiesMap.put(key,value);
-		}
-
 		public File createTargetFile(File targetRootDirectory) {
 			return new File(targetRootDirectory, "sdk/");
 		}
 		
-		public void writeSdkPropertiesFile() throws IOException{
-			StringBuilder sb = new StringBuilder();
-			for (String key: sdkPropertiesMap.keySet()){
-				String value= sdkPropertiesMap.get(key);
-				sb.append(key);
-				sb.append('=');
-				sb.append(value);
-				sb.append("\n");
+		public void writeSDKInfo() throws IOException{
+			
+			try(FileOutputStream stream = new FileOutputStream(sdkInfoFile)){
+
+				XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
+				exporter.exportSDKInfo(sdkInfo, stream);
+				System.out.println("- written sdk info file:"+sdkInfoFile);
 			}
-			FileUtils.write(sdkPropertiesFile, sb.toString());
-			System.out.println("- written sdk properties file:"+sdkPropertiesFile);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package de.jcup.egradle.other;
+package de.jcup.egradle.other.sdkbuilder;
 
 import java.io.IOException;
 
