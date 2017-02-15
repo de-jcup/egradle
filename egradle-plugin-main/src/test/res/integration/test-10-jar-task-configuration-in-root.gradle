@@ -3,4 +3,7 @@ jar {
         attributes 'Implementation-Title': 'Gradle Quickstart',
                    'Implementation-Version': version
     }
+    eachFile { 
+    	
+    }
 }

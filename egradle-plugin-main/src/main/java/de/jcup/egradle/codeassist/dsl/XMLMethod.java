@@ -69,7 +69,7 @@ public class XMLMethod implements ModifiableMethod{
 
 	@Override
 	public String toString() {
-		return "XMLMethod [name=" + name + ", returnType=" + returnTypeAsString + "]";
+		return "XMLMethod ["+MethodUtils.createSignature(this,true)+"]";
 	}
 	
 	@Override

@@ -1,7 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
 import java.util.HashMap;
-import java.util.TreeSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;

@@ -283,6 +283,57 @@ public class HoverIntegrationTest {
 		/* @formatter:on*/
 
 	}
+	
+	@Test
+	public void buildfile_10_with_dependencies_in_root__when_cursor_is_at_jar_offset__has_correct_hoverdata() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-10-jar-task-configuration-in-root.gradle");
+		int offset = text.indexOf("jar");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset+2);
+
+		/* test */
+		assertThat(hoverData).isForExtension("jar", "org.gradle.api.tasks.bundling.Jar");
+		
+	}
+	
+	@Test
+	public void buildfile_10_with_dependencies_in_root__when_cursor_is_at_manifest_offset__has_correct_hoverdata() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-10-jar-task-configuration-in-root.gradle");
+		int offset = text.indexOf("manifest");
+
+		/* FIXME ATR, 16.02.2017: test fails, because delegation target not available */
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset+2);
+
+		/* test */
+		assertThat(hoverData).isForElementType("org.gradle.api.java.archives.Manifest");
+		
+	}
+	
+	@Test
+	public void buildfile_10_with_dependencies_in_root__when_cursor_is_at_eachFile_offset__has_correct_hoverdata() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-10-jar-task-configuration-in-root.gradle");
+		int offset = text.indexOf("eachFile");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset+2);
+		/* FIXME ATR, 16.02.2017: test fails, because delegation target not available */
+		/* FIXME ATR, 16.02.2017: from CopyProcessSpec interface: @DelegatesTo(value=FileCopyDetails.class, strategy=1) 
+		 * at least 11 matches. So this can be used by sdk builder to provide more and better delegate informatino
+		 * but its necessary to get better interface information in sdk/xml
+		 */
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(hoverData).
+			isForMethod("org.gradle.api.tasks.AbstractCopyTask.eachFile", "groovy.lang.Closure").
+			isForElementType("org.gradle.api.file.FileCopyDetails");
+		/* @formatter:on*/
+	}
 
 	/* short cut method for calculation */
 	private HoverData calculateHoverData(String text, int offset) {

@@ -86,7 +86,8 @@ public class GradleLanguageElementEstimater {
 			Item currentPathItem = pathIterator.next();
 			String currentPathItemName = currentPathItem.getIdentifier();
 			if (currentPathItemName == null) {
-				continue; // FIXME ATR, 06.02.2017: is this correct to continue here ?!?!
+				continue; // FIXME ATR, 06.02.2017: is this correct to continue
+							// here ?!?!
 			}
 			TypeContext currentMode = TypeContext.UNKNOWN;
 			if (currentPathItem.isClosureBlock()) {
@@ -108,23 +109,33 @@ public class GradleLanguageElementEstimater {
 			int currentReliability;
 			if (found != null) {
 				current = found;
-				currentReliability=current.percent;
+				currentReliability = current.percent;
 				result.mode = currentMode;
-			}else{
-				currentReliability=0;
-				/* FIXME ATR, 10.02.2017: I think the return null is correct here always. so remove teh if (true). This supresses tooltips for items not resolveable */
-				if (true)return null;
+			} else {
+				currentReliability = 0;
+				/*
+				 * FIXME ATR, 10.02.2017: I think the return null is correct
+				 * here always. so remove teh if (true). This supresses tooltips
+				 * for items not resolveable
+				 */
+				if (true)
+					return null;
 			}
 			/* make average reliability */
-			if (averagePercentage<99){
-				double formerProblemPercent = 100-averagePercentage;
-				currentReliability-=formerProblemPercent;
+			if (averagePercentage < 99) {
+				double formerProblemPercent = 100 - averagePercentage;
+				currentReliability -= formerProblemPercent;
 			}
-			averagePercentage+=currentReliability;
-			averagePercentage/=2;
-			
+			averagePercentage += currentReliability;
+			averagePercentage /= 2;
 			if (current.type == null) {
-				if (true)return null;	
+				/*
+				 * jar{ manifest {} } - when manifest is missing delegation target so
+				 * current type is null! so just do a break except when element is also not null
+				 */
+				if (current.element==null){
+					return null;
+				}
 				break;
 			}
 		}
@@ -139,14 +150,14 @@ public class GradleLanguageElementEstimater {
 		if (currentType == null) {
 			return null;
 		}
-		if (item==null) {
+		if (item == null) {
 			return null;
 		}
-		if (item.isClosureBlock()){
+		if (item.isClosureBlock()) {
 			return null;
 		}
 		String checkItemName = item.getIdentifier();
-		if (checkItemName==null) {
+		if (checkItemName == null) {
 			return null;
 		}
 		for (Property p : currentType.getProperties()) {
@@ -155,6 +166,7 @@ public class GradleLanguageElementEstimater {
 				InternalEstimationData r = new InternalEstimationData();
 				r.type = p.getType();
 				r.element = p;
+				r.percent = 100;
 				return r;
 			}
 		}
@@ -165,14 +177,14 @@ public class GradleLanguageElementEstimater {
 		if (currentType == null) {
 			return null;
 		}
-		if (item==null) {
+		if (item == null) {
 			return null;
 		}
-		if (! item.isClosureBlock()){
+		if (!item.isClosureBlock()) {
 			return null;
 		}
 		String checkItemName = item.getIdentifier();
-		if (checkItemName==null) {
+		if (checkItemName == null) {
 			return null;
 		}
 		Map<String, Type> extensions = currentType.getExtensions();
@@ -185,6 +197,7 @@ public class GradleLanguageElementEstimater {
 				InternalEstimationData r = new InternalEstimationData();
 				r.type = type;
 				r.element = type;
+				r.percent = 100;
 				return r;
 			}
 		}
@@ -195,66 +208,67 @@ public class GradleLanguageElementEstimater {
 		if (currentType == null) {
 			return null;
 		}
-		if (item==null) {
+		if (item == null) {
 			return null;
 		}
 		String checkItemName = item.getIdentifier();
-		if (checkItemName==null) {
+		if (checkItemName == null) {
 			return null;
 		}
 
 		MethodIdentificationData idData = new MethodIdentificationData();
-		
-		for (Method m : currentType.getMethods()) {
-			boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(m);
-			if (hasGroovyClosureAsParameter != item.isClosureBlock()){
-				/* different, so not compatible! speed guard close...*/
+
+		for (Method method : currentType.getMethods()) {
+			boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(method);
+			if (hasGroovyClosureAsParameter != item.isClosureBlock()) {
+				/* different, so not compatible! speed guard close... */
 				continue;
 			}
-			int percent = MethodUtils.calculateMethodIdentificationPercentage(m,checkItemName, item.getParameters());
-			if (percent==100){
-				return createEstimationData(m, hasGroovyClosureAsParameter,percent);
+			int percent = MethodUtils.calculateMethodIdentificationPercentage(method, checkItemName,
+					item.getParameters());
+			if (percent == 100) {
+				return createEstimationData(method, hasGroovyClosureAsParameter, percent);
 			}
-			if (percent>idData.percent){
-				idData.percent=percent;
-				idData.method=m;
+			if (percent > idData.percent) {
+				idData.percent = percent;
+				idData.method = method;
 			}
-			
+
 		}
-		
+
 		/* no 100% reached */
-		if(idData.method!=null){
-			if (idData.percent>=50){
+		if (idData.method != null) {
+			if (idData.percent >= 50) {
 				boolean hasGroovyClosureAsParameter = MethodUtils.hasGroovyClosureAsParameter(idData.method);
-				return createEstimationData(idData.method, hasGroovyClosureAsParameter,idData.percent);
+				return createEstimationData(idData.method, hasGroovyClosureAsParameter, idData.percent);
 			}
 		}
-		
+
 		return null;
 	}
 
 	private InternalEstimationData createEstimationData(Method m, boolean hasGroovyClosureAsParameter, int percent) {
 		InternalEstimationData r = new InternalEstimationData();
-		if (hasGroovyClosureAsParameter){
+		if (hasGroovyClosureAsParameter) {
 			r.type = m.getDelegationTarget();
-		}else{
+		} else {
 			r.type = m.getReturnType();
 		}
 		r.element = m;
-		r.percent=percent;
+		r.percent = percent;
 		return r;
 	}
-	
-	private class MethodIdentificationData{
+
+	private class MethodIdentificationData {
 		private int percent;
 		private Method method;
 	}
 
 	public enum TypeContext {
-		PARENT_TYPE_IS_METHODCALL, 
-		
-		PARENT_TYPE_IS_CONFIGURATION_CLOSURE, 
-		
+		PARENT_TYPE_IS_METHODCALL,
+
+		PARENT_TYPE_IS_CONFIGURATION_CLOSURE,
+
 		UNKNOWN
 	}
 
@@ -263,47 +277,54 @@ public class GradleLanguageElementEstimater {
 		private LanguageElement element;
 		private TypeContext mode;
 		private String extensionName;
-	
-		/* (non-Javadoc)
-		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#isTypeFromExtensionConfigurationPoint()
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#
+		 * isTypeFromExtensionConfigurationPoint()
 		 */
 		@Override
 		public boolean isTypeFromExtensionConfigurationPoint() {
 			return extensionName != null;
 		}
-		
+
 		/**
 		 * Returns reliability in percentage
+		 * 
 		 * @return reliability of estimation
 		 */
 		public double getReliability() {
 			return reliability;
 		}
-	
-		/* (non-Javadoc)
-		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#getExtensionName()
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData#
+		 * getExtensionName()
 		 */
 		@Override
 		public String getExtensionName() {
 			return extensionName;
 		}
-	
+
 		public LanguageElement getElement() {
 			return element;
 		}
-	
+
 		public TypeContext getMode() {
 			return mode;
 		}
-	
+
 		public Type getElementType() {
 			if (element instanceof Type) {
 				Type type = (Type) element;
 				return type;
-	
+
 			} else if (element instanceof Method) {
 				Method m = (Method) element;
-				if (mode==TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE){
+				if (mode == TypeContext.PARENT_TYPE_IS_CONFIGURATION_CLOSURE) {
 					return m.getDelegationTarget();
 				}
 				return m.getReturnType();
@@ -312,7 +333,7 @@ public class GradleLanguageElementEstimater {
 				return p.getType();
 			}
 			return null;
-	
+
 		}
 	}
 

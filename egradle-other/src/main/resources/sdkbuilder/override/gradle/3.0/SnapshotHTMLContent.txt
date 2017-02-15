@@ -1,0 +1,52 @@
+#Help Task types
+TaskReportTask
+ProjectReportTask
+DependencyReportTask
+DependencyInsightReportTask
+PropertyReportTask
+ComponentReport
+ModelReport
+#Task types
+AntlrTask
+BuildEnvironmentReportTask
+Checkstyle
+CodeNarc
+CompareGradleBuilds
+Copy
+CreateStartScripts
+Delete
+Ear (Ear-Plugin)
+Exec
+FindBugs
+GenerateIvyDescriptor
+GenerateMavenPom
+GenerateBuildDashboard
+GradleBuild
+GroovyCompile
+Groovydoc
+HtmlDependencyReportTask
+JacocoReport
+JacocoMerge
+Jar (alternative)
+JavaCompile
+Javadoc
+JavaExec
+JDepend
+JettyRun
+JettyRunWar
+JettyStop
+Pmd
+PublishToIvyRepository
+PublishToMavenRepository
+ScalaCompile
+ScalaDoc
+InitBuild
+Sign
+Sync
+Tar (alternative)
+Test
+TestReport
+Upload
+War(War-Plugin)
+Wrapper (-no extension found)
+Zip (alternative)

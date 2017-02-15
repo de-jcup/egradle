@@ -30,7 +30,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -88,7 +87,6 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				;
 			}
 		});
-//		reloadButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 3, 1));
 		
 		/* sdk info group*/
 		GridData groupLayoutData = new GridData();
@@ -117,7 +115,6 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 		
 		Text text = new Text(validationGroup, SWT.MULTI);
 		text.setBackground(parent.getBackground());
-//		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
 		text.setText(sb.toString());
 	}
 

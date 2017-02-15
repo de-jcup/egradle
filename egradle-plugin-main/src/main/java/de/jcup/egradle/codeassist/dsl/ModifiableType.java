@@ -23,5 +23,6 @@ public interface ModifiableType extends Type {
 	 * @param superType
 	 */
 	public void inheritFrom(Type superType);
+	
 
 }

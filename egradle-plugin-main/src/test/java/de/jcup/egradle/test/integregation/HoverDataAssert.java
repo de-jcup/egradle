@@ -72,6 +72,26 @@ public class HoverDataAssert {
 		}
 		return this;
 	}
+	
+	public HoverDataAssert isForExtension(String extensionName, String typeNameAsString) {
+		/* check name correct */
+		if (!ensuredResult().isTypeFromExtensionConfigurationPoint()){
+			fail("This is not an extension:"+ensuredResult().getElement());
+		}
+		String foundExtensionName = ensuredResult().getExtensionName();
+		assertEquals("Name of extension differs!", extensionName, foundExtensionName);
+		LanguageElement element = ensuredElement();
+		if (!(element instanceof Type)){
+			fail("Element is not a type:"+element);
+		}
+		Type type = (Type) element;
+		String foundFullName = buildFullName(type);
+		
+		assertEquals("Extension has not wanted type:", typeNameAsString, foundFullName);
+		
+		return this;
+	}
+
 
 	private String buildFullName(LanguageElement element) {
 		StringBuilder sb = new StringBuilder();
@@ -105,6 +125,5 @@ public class HoverDataAssert {
 		assertNotNull("estimation result in data is null!!", result);
 		return result;
 	}
-
 	
 }

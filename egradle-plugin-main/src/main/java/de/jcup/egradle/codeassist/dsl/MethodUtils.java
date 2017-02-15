@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 public class MethodUtils {
-
 	/**
 	 * Create a method signature string
 	 * 
@@ -16,6 +15,18 @@ public class MethodUtils {
 	 * @return string, never <code>null</code>
 	 */
 	public static String createSignature(Method method) {
+		return createSignature(method, false);
+	}
+
+	/**
+	 * Create a method signature string
+	 * 
+	 * @param method
+	 *            - if <code>null</code> - result will be "null"
+	 * @param longTypeNames
+	 * @return string, never <code>null</code>
+	 */
+	public static String createSignature(Method method, boolean longTypeNames) {
 		if (method == null) {
 			return "null";
 		}
@@ -36,14 +47,20 @@ public class MethodUtils {
 			String typeAsString = null;
 			Type pType = param.getType();
 			if (pType != null) {
-				typeAsString = pType.getShortName();
+				if (longTypeNames) {
+					typeAsString = pType.getName();
+				} else {
+					typeAsString = pType.getShortName();
+				}
 			} else {
 				typeAsString = param.getTypeAsString();
 			}
 			if (typeAsString != null) {
-				int index = typeAsString.lastIndexOf('.');
-				if (index != -1) {
-					typeAsString = StringUtils.substring(typeAsString, index + 1);
+				if (!longTypeNames) {
+					int index = typeAsString.lastIndexOf('.');
+					if (index != -1) {
+						typeAsString = StringUtils.substring(typeAsString, index + 1);
+					}
 				}
 				signatureSb.append(typeAsString);
 				signatureSb.append(" ");
@@ -93,7 +110,7 @@ public class MethodUtils {
 		/* - start percentage calculation - */
 		/* -------------------------------- */
 		int percentage = 50; // 50% reached because name is equal
-		
+
 		/* name okay, could be ... */
 
 		List<Parameter> parameters = method.getParameters();
@@ -102,17 +119,17 @@ public class MethodUtils {
 		if (paramSize != itemParameters.length) {
 			return percentage;
 		}
-		
-		if (paramSize==0){
+
+		if (paramSize == 0) {
 			/* speed up and avoid failures on percentage calculation */
 			return 100;
 		}
-		
+
 		/* okay at least same size */
 		int pos = 0;
-		int percentPerCorrectParam=50/paramSize;
-		
-		int paramPercents=0;
+		int percentPerCorrectParam = 50 / paramSize;
+
+		int paramPercents = 0;
 		boolean allParamsSame = true;
 		for (Parameter p : parameters) {
 			String itemParam = itemParameters[pos++];
@@ -128,17 +145,18 @@ public class MethodUtils {
 			 */
 			itemParam = StringUtils.substringBefore(itemParam, ":");
 
-			if (!p.getTypeAsString().equals(itemParam)) {
+			String typeAsString = p.getTypeAsString();
+			if (!typeAsString.equals(itemParam)) {
 				allParamsSame = false;
-			}else{
-				paramPercents+=percentPerCorrectParam;
+			} else {
+				paramPercents += percentPerCorrectParam;
 			}
 		}
 		if (allParamsSame) {
 			percentage += 50;
-		}else{
-			if (paramPercents>=50){
-				/* should never happen but...*/
+		} else {
+			if (paramPercents >= 50) {
+				/* should never happen but... */
 				paramPercents = 49;
 			}
 			percentage += paramPercents;

@@ -14,12 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -232,6 +228,7 @@ public class SDKBuilder {
 		// }
 		// }
 		/* append missing ones */
+		/* FIXME ATR, 15.02.2017: load gradle.override/$gradleversion/alternative-plugins.xml instead and apply informations */
 		XMLPlugin corePlugin = addPlugin(plugins, "core", "Core Plugin");
 		addExtension(corePlugin, "jar", "org.gradle.api.tasks.bundling.Jar");
 		addExtension(corePlugin, "zip", "org.gradle.api.tasks.bundling.Zip");
