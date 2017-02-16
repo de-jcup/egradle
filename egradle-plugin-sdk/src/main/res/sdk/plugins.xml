@@ -15,7 +15,7 @@
     <plugin id="codenarc" description="CodeNarc Plugin">
         <extends id="codenarc" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.plugins.quality.CodeNarcExtension"/>
     </plugin>
-    <plugin id="core" description="Core Plugin(added by SDK builder)">
+    <plugin id="core" description="Gradle API parts(alternative)">
         <extends id="jar" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Jar"/>
         <extends id="tar" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Tar"/>
         <extends id="zip" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Zip"/>

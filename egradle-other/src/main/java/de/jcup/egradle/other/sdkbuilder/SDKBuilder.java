@@ -43,7 +43,6 @@ import de.jcup.egradle.codeassist.dsl.XMLTasks;
 import de.jcup.egradle.codeassist.dsl.XMLTasksExporter;
 import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.codeassist.dsl.XMLTypeExporter;
-import de.jcup.egradle.codeassist.dsl.XMLTypeExtension;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.sdk.SDKInfo;
@@ -68,7 +67,16 @@ import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
  */
 public class SDKBuilder {
 
-
+	public static File PARENT_OF_RES = new File("egradle-other/src/main/res/");
+	static {
+		if (!PARENT_OF_RES.exists()) {
+			/*
+			 * fall back - so sdk builder could be run from gradle root project as well
+			 * via gradle from root project.
+			 */
+			PARENT_OF_RES = new File("src/main/res/");
+		}
+	}
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle/subprojects/docs");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
@@ -203,57 +211,51 @@ public class SDKBuilder {
 	private void handlePlugins(BuilderContext builderContext) throws IOException, FileNotFoundException {
 		System.out.println("- adopt plugins.xml");
 		File targetXMLPluginsFile = new File(builderContext.targetPathDirectory, gradleOriginPluginsFile.getName());
-		try (FileInputStream fis = new FileInputStream(gradleOriginPluginsFile);
-				FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
+		XMLPlugins xmlPlugins = null;
+		try (FileInputStream fis = new FileInputStream(gradleOriginPluginsFile)	) {
+			xmlPlugins = pluginsImporter.importPlugins(fis);
+		}
 		
-			XMLPlugins xmlPlugins = pluginsImporter.importPlugins(fis);
-			appendMissingPluginExtensions(xmlPlugins);
-
+		Set<Plugin> standardPlugins = xmlPlugins.getPlugins();
+		for (Plugin standardPlugin: standardPlugins){
+			String standardId = standardPlugin.getId();
+			if (standardId==null){
+				/* TODO ATR,16.02.2017: use a schema and make id mandatory instead of this!*/
+				throw new IllegalStateException("found standard plugin with id NULL");
+			}
+		}
+		
+		XMLPlugins alternativeXMLPugins = null;
+		File alternativePluginsFile = new File(PARENT_OF_RES,"sdkbuilder/override/gradle/"+builderContext.sdkInfo.getGradleVersion()+"/alternative-plugins.xml");
+		if (!alternativePluginsFile.exists()){
+			System.err.println("- WARN::alternative plugins file does not exists:"+alternativePluginsFile);
+		}else{
+			try (FileInputStream fis = new FileInputStream(alternativePluginsFile)	) {
+				alternativeXMLPugins = pluginsImporter.importPlugins(fis);
+			}
+			Set<Plugin> alternativePlugins = alternativeXMLPugins.getPlugins();
+			
+			for (Plugin alternativePlugin: alternativePlugins){
+				String alternativeId = alternativePlugin.getId();
+				if (alternativeId==null){
+					/* TODO ATR,16.02.2017: use a schema and make id mandatory instead of this!*/
+					throw new IllegalStateException("found alternative plugin with id NULL");
+				}
+				XMLPlugin alternativeXmlPlugin = (XMLPlugin) alternativePlugin;
+				String description = alternativeXmlPlugin.getDescription();
+				if (description==null){
+					description+="";
+				}
+				alternativeXmlPlugin.setDescription(description+"(alternative)");
+				standardPlugins.add(alternativePlugin);
+			}
+			
+		}
+		
+		try (FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
 			pluginsExporter.exportPlugins(xmlPlugins, outputStream);
-
 		}
 		System.out.println("- written:" + targetXMLPluginsFile);
-	}
-
-	private void appendMissingPluginExtensions(XMLPlugins xmlPlugins) {
-		Set<Plugin> plugins = xmlPlugins.getPlugins();
-		// boolean jarPluginFound = false;
-		// boolean zipPluginFound = false;
-		// for (Plugin p: plugins){
-		// if ("jar".equals(p.getId())){
-		// jarPluginFound=true;
-		// }
-		// if ("zip".equals(p.getId())){
-		// jarPluginFound=true;
-		// }
-		// }
-		/* append missing ones */
-		/* FIXME ATR, 15.02.2017: load gradle.override/$gradleversion/alternative-plugins.xml instead and apply informations */
-		XMLPlugin corePlugin = addPlugin(plugins, "core", "Core Plugin");
-		addExtension(corePlugin, "jar", "org.gradle.api.tasks.bundling.Jar");
-		addExtension(corePlugin, "zip", "org.gradle.api.tasks.bundling.Zip");
-		addExtension(corePlugin, "tar", "org.gradle.api.tasks.bundling.Tar");
-
-	}
-
-	// <plugin id="war" description="War Plugin">
-	// <extends targetClass="org.gradle.api.Project"
-	// mixinClass="org.gradle.api.plugins.WarPluginConvention"/>
-	// </plugin>
-	private XMLPlugin addPlugin(Set<Plugin> plugins, String id, String description) {
-		XMLPlugin plugin = new XMLPlugin();
-		plugin.setId(id);
-		plugin.setDescription(description + "(added by SDK builder)");
-		plugins.add(plugin);
-		return plugin;
-	}
-
-	private void addExtension(XMLPlugin plugin, String extensionId, String extensionTypeAsString) {
-		XMLTypeExtension jarTypeExtension = new XMLTypeExtension();
-		jarTypeExtension.setId(extensionId);
-		jarTypeExtension.setTargetTypeAsString("org.gradle.api.Project");
-		jarTypeExtension.setExtensionTypeAsString(extensionTypeAsString);
-		plugin.getExtensions().add(jarTypeExtension);
 	}
 
 	private void writeTasksFile(BuilderContext builderContext) throws IOException {
@@ -431,7 +433,6 @@ public class SDKBuilder {
 
 	private class BuilderContext {
 		public File sdkInfoFile;
-		
 		XMLSDKInfo sdkInfo = new XMLSDKInfo();
 		File sourceParentDirectory;
 		File targetPathDirectory;
