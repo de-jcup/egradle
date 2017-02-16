@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.SourceCodeInsertionSupport;
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 
 public class SourceCodeInsertionSupportTest {

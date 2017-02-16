@@ -9,5 +9,6 @@
     <method name="setjUnitVersion" returnType="void">
         <parameter type="java.lang.String" name="junitVersion"/>
     </method>
+    <interface name="org.gradle.jvm.test.JvmTestSuiteSpec"/>
     <property name="jUnitVersion" type="java.lang.String"/>
 </type>

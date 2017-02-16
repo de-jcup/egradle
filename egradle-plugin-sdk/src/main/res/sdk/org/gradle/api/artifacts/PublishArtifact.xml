@@ -52,6 +52,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. Never null. 
 </description>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
     <property name="classifier" type="java.lang.String">
         <description> 
  Returns the classifier of this published artifact, if any. 

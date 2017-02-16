@@ -39,4 +39,6 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
+    <interface name="java.util.Set"/>
+    <interface name="org.gradle.model.ModelElement"/>
 </type>

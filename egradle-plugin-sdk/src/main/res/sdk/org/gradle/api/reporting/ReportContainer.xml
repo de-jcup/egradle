@@ -28,6 +28,8 @@
     <method name="getNames" returnType="java.util.SortedSet"/>
     <method name="getRules" returnType="java.util.List"/>
     <method name="isEmpty" returnType="boolean"/>
+    <interface name="org.gradle.api.NamedDomainObjectSet"/>
+    <interface name="org.gradle.util.Configurable"/>
     <property name="asMap" type="java.util.SortedMap"/>
     <property name="empty" type="boolean"/>
     <property name="enabled" type="org.gradle.api.NamedDomainObjectSet">

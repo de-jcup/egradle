@@ -45,6 +45,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard output capture is disabled. 
 </description>
     </method>
+    <interface name="org.gradle.api.logging.LoggingOutput"/>
     <property name="level" type="org.gradle.api.logging.LogLevel">
         <description> 
  Returns the current logging level. 

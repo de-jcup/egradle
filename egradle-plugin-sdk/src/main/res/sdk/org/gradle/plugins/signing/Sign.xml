@@ -132,6 +132,7 @@
 </description>
         <parameter type="org.gradle.plugins.signing.type.SignatureType" name="type"/>
     </method>
+    <interface name="org.gradle.plugins.signing.SignatureSpec"/>
     <property name="fileCollectionFactory" type="org.gradle.api.internal.file.FileCollectionFactory"/>
     <property name="filesToSign" type="org.gradle.api.file.FileCollection">
         <description> 

@@ -8,6 +8,7 @@
  The path to the project containing this component. 
 </description>
     </method>
+    <interface name="org.gradle.model.ModelElement"/>
     <property name="projectPath" type="java.lang.String">
         <description> 
  The path to the project containing this component. 

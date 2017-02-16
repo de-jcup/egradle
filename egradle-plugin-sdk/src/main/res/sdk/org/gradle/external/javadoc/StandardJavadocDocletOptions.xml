@@ -301,6 +301,7 @@
     <method name="windowTitle" returnType="org.gradle.external.javadoc.StandardJavadocDocletOptions">
         <parameter type="java.lang.String" name="windowTitle"/>
     </method>
+    <interface name="org.gradle.external.javadoc.MinimalJavadocOptions"/>
     <property name="author" type="boolean"/>
     <property name="bottom" type="java.lang.String"/>
     <property name="charSet" type="java.lang.String"/>

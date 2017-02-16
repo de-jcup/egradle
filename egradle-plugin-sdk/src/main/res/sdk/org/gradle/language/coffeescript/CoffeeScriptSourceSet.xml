@@ -3,4 +3,5 @@
     <description> 
  Represents a source set for CoffeeScript sources 
 </description>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
 </type>

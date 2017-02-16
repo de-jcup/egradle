@@ -256,6 +256,7 @@
 </description>
         <parameter type="java.lang.Object" name="logger"/>
     </method>
+    <interface name="org.gradle.api.plugins.PluginAware"/>
     <property name="gradle" type="org.gradle.api.invocation.Gradle">
         <description> 
  Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 

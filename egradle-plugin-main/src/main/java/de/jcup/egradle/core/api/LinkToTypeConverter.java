@@ -1,13 +1,13 @@
 package de.jcup.egradle.core.api;
 
+import static java.nio.charset.StandardCharsets.*;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
-import static java.nio.charset.StandardCharsets.*;
-
-import java.io.UnsupportedEncodingException;
 public class LinkToTypeConverter {
 
 	public static class LinkData {

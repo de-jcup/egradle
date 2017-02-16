@@ -401,6 +401,7 @@
 </description>
         <parameter type="boolean" name="visible"/>
     </method>
+    <interface name="org.gradle.api.file.FileCollection"/>
     <property name="all" type="java.util.Set">
         <description> 
  Returns all the configurations belonging to the same configuration container as this 

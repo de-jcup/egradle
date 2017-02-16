@@ -1,6 +1,11 @@
 package de.jcup.egradle.codeassist.dsl.gradle;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,12 +13,6 @@ import org.junit.Test;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
-
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GradleDSLCodeBuilderTest {
 

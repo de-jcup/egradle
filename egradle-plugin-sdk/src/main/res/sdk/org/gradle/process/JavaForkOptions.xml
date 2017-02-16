@@ -206,6 +206,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="value"/>
     </method>
+    <interface name="org.gradle.process.ProcessForkOptions"/>
     <property name="allJvmArgs" type="java.util.List">
         <description> 
  Returns the full set of arguments to use to launch the JVM for the process. This includes arguments to define 

@@ -32,6 +32,7 @@
  Configuration for the generated project file. 
 </description>
     </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
     <property name="component" type="org.gradle.nativeplatform.NativeComponentSpec">
         <description> 
  The component that this project represents. 

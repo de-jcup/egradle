@@ -44,6 +44,8 @@
 </description>
         <parameter type="java.io.File" name="jarFile"/>
     </method>
+    <interface name="org.gradle.jvm.JvmBinarySpec"/>
+    <interface name="org.gradle.platform.base.LibraryBinarySpec"/>
     <property name="apiJarFile" type="java.io.File">
         <description> 
  The API jar file output for this binary. 

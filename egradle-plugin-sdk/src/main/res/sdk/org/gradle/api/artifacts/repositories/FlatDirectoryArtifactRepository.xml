@@ -55,6 +55,7 @@
 </description>
         <parameter type="java.lang.Iterable" name="dirs"/>
     </method>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
     <property name="dirs" type="java.util.Set">
         <description> 
  Returns the directories where this repository will look for artifacts. 

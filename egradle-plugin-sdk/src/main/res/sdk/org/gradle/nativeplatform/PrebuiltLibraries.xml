@@ -6,4 +6,6 @@
     <method name="resolveLibrary" returnType="org.gradle.nativeplatform.PrebuiltLibrary">
         <parameter type="java.lang.String" name="name"/>
     </method>
+    <interface name="org.gradle.api.NamedDomainObjectSet"/>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
 </type>

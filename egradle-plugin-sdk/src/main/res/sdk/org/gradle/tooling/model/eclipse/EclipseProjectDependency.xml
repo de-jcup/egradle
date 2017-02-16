@@ -31,6 +31,8 @@
  @since 2.5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.ProjectDependency"/>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
     <property name="exported" type="boolean">
         <description> 
  Marks this dependency as exported. 

@@ -96,5 +96,6 @@
     <method name="overwriteDebugIfDebugPropertyIsSet" returnType="void">
         <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
     <property name="taskPrefixedProperty" type="java.lang.String"/>
 </type>

@@ -12,4 +12,5 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="target"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
 </type>

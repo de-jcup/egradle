@@ -98,6 +98,7 @@
 </description>
         <parameter type="java.lang.Object" name="sources"/>
     </method>
+    <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="excludes" type="java.util.Set">
         <description> 
  {@inheritDoc} 

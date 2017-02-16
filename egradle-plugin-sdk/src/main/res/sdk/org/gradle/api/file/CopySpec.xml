@@ -367,6 +367,9 @@
 </description>
         <parameter type="org.gradle.api.file.CopySpec" name="sourceSpecs"/>
     </method>
+    <interface name="org.gradle.api.file.CopyProcessingSpec"/>
+    <interface name="org.gradle.api.file.CopySourceSpec"/>
+    <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="caseSensitive" type="boolean">
         <description> 
  Specifies whether case-sensitive pattern matching should be used. 

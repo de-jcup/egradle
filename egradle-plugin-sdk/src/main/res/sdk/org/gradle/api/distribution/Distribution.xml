@@ -47,6 +47,7 @@
 </description>
         <parameter type="java.lang.String" name="baseName"/>
     </method>
+    <interface name="org.gradle.api.Named"/>
     <property name="baseName" type="java.lang.String">
         <description> 
  The baseName of the distribution, used in naming the distribution archives. 

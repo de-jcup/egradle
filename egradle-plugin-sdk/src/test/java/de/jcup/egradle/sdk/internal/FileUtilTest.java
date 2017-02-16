@@ -9,8 +9,6 @@ import java.io.FileWriter;
 
 import org.junit.Test;
 
-import de.jcup.egradle.sdk.internal.FileUtil;
-
 public class FileUtilTest {
 
 	@Test

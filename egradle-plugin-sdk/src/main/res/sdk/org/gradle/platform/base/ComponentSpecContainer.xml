@@ -3,4 +3,5 @@
     <description> 
  A container of software components. 
 </description>
+    <interface name="org.gradle.model.ModelMap"/>
 </type>

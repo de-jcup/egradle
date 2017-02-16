@@ -42,6 +42,7 @@
 </description>
         <parameter type="java.lang.String" name="extension"/>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
     <property name="classifier" type="java.lang.String">
         <description> 
  The classifier used to publish the artifact file. 

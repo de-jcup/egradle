@@ -3,4 +3,5 @@
     <description> 
  Represent the attributes of a manifest section. 
 </description>
+    <interface name="java.util.Map"/>
 </type>

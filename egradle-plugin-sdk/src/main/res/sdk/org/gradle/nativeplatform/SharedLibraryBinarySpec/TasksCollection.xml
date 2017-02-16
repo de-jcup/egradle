@@ -8,6 +8,7 @@
  Returns the link task for this binary. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
     <property name="link" type="org.gradle.api.Task">
         <description> 
  Returns the link task for this binary. 

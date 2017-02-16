@@ -3,4 +3,6 @@
     <description> 
  A set of artifact dependencies. 
 </description>
+    <interface name="org.gradle.api.Buildable"/>
+    <interface name="org.gradle.api.DomainObjectSet"/>
 </type>

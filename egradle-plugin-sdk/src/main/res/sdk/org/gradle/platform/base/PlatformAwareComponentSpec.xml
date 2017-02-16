@@ -9,4 +9,5 @@
 </description>
         <parameter type="java.lang.String" name="targetPlatform"/>
     </method>
+    <interface name="org.gradle.platform.base.VariantComponentSpec"/>
 </type>

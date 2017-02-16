@@ -19,6 +19,7 @@
         <parameter type="java.lang.String" name="sourcePath"/>
     </method>
     <method name="toString" returnType="java.lang.String"/>
+    <interface name="org.gradle.plugins.ide.eclipse.model.WbModuleEntry"/>
     <property name="deployPath" type="java.lang.String"/>
     <property name="sourcePath" type="java.lang.String"/>
 </type>

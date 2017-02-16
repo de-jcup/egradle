@@ -178,6 +178,7 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.DomainObjectCollection"/>
     <property name="asMap" type="java.util.SortedMap">
         <description> 
  &lt;p&gt;Returns the objects in this collection, as a map from object name to object instance.&lt;/p&gt; 

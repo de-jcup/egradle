@@ -13,6 +13,7 @@
  @since 1.0-milestone-5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Element"/>
     <property name="tasks" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  Returns the tasks of this project. 

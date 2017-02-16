@@ -9,6 +9,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if the module is changing 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
     <property name="changing" type="boolean">
         <description> 
  Does the module change content over time? 

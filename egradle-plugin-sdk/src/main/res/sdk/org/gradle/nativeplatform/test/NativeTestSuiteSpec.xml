@@ -4,5 +4,7 @@
  A component representing a suite of tests that will be executed together. 
 </description>
     <method name="getTestedComponent" returnType="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <interface name="org.gradle.testing.base.TestSuiteSpec"/>
     <property name="testedComponent" type="org.gradle.nativeplatform.NativeComponentSpec"/>
 </type>

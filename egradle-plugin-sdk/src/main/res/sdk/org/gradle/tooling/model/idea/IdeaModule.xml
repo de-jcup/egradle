@@ -74,6 +74,8 @@
  @since 1.0-milestone-5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.HasGradleProject"/>
+    <interface name="org.gradle.tooling.model.HierarchicalElement"/>
     <property name="compilerOutput" type="org.gradle.tooling.model.idea.IdeaCompilerOutput">
         <description> 
  Returns information about idea compiler output (output dirs, inheritance of output dir, etc.) 

@@ -8,6 +8,7 @@
  The executable file. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeBinary"/>
     <property name="executableFile" type="java.io.File">
         <description> 
  The executable file. 

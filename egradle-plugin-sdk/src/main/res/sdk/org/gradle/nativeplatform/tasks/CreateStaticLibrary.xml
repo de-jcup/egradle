@@ -49,6 +49,7 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
+    <interface name="org.gradle.nativeplatform.tasks.ObjectFilesToBinary"/>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <property name="outputFile" type="java.io.File">
         <description> 

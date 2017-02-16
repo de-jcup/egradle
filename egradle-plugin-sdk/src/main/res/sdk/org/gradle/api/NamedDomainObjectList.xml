@@ -33,4 +33,6 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="java.util.List"/>
+    <interface name="org.gradle.api.NamedDomainObjectCollection"/>
 </type>

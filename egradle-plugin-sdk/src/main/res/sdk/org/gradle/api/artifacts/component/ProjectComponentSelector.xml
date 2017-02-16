@@ -13,6 +13,7 @@
  @since 1.10 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.component.ComponentSelector"/>
     <property name="projectPath" type="java.lang.String">
         <description> 
  The path of the project to select the component from. 

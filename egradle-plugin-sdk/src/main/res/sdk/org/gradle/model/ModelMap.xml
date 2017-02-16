@@ -246,6 +246,8 @@
         <parameter type="java.lang.Class" name="type"/>
         <parameter type="org.gradle.api.Action" name="configAction"/>
     </method>
+    <interface name="java.lang.Iterable"/>
+    <interface name="org.gradle.model.ModelElement"/>
     <property name="empty" type="boolean">
         <description> 
  Returns true if this collection contains no items. 

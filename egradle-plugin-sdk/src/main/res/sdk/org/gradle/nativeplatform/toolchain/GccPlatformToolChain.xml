@@ -38,6 +38,7 @@
  Returns the settings to use for the C compiler. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.toolchain.NativePlatformToolChain"/>
     <property name="assembler" type="org.gradle.nativeplatform.toolchain.GccCommandLineToolConfiguration">
         <description> 
  Returns the settings to use for the assembler. 

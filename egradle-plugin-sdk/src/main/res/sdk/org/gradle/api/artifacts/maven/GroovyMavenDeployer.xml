@@ -17,4 +17,5 @@
  instead of repository, the snapshot repository is build. 
  @see MavenDeployer 
 </description>
+    <interface name="org.gradle.api.artifacts.maven.MavenDeployer"/>
 </type>

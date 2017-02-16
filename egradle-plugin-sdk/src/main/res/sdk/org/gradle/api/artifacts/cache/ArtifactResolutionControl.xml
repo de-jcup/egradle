@@ -4,4 +4,5 @@
  Command methods for controlling artifact resolution via the DSL. 
 </description>
     <method name="belongsToChangingModule" returnType="boolean"/>
+    <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
 </type>

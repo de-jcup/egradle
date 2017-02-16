@@ -18,6 +18,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.DependencySpec"/>
     <property name="libraryName" type="java.lang.String">
         <description> 
  Returns the name of the library this dependency refers to. If null, it should be assumed that the project 

@@ -5,4 +5,6 @@
  
  @since 2.14 
 </description>
+    <interface name="org.gradle.tooling.model.ExternalDependency"/>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
 </type>

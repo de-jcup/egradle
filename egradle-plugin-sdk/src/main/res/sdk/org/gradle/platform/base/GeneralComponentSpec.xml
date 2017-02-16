@@ -4,4 +4,7 @@
  A general purpose component specification, that can be used to represent some software component built from source and producing 
  multiple output variants. 
 </description>
+    <interface name="org.gradle.platform.base.ComponentSpec"/>
+    <interface name="org.gradle.platform.base.SourceComponentSpec"/>
+    <interface name="org.gradle.platform.base.VariantComponentSpec"/>
 </type>

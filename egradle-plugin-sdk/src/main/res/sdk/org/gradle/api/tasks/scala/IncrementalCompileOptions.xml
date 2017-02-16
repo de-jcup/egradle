@@ -32,6 +32,7 @@
 </description>
         <parameter type="java.io.File" name="publishedCode"/>
     </method>
+    <interface name="java.io.Serializable"/>
     <property name="analysisFile" type="java.io.File">
         <description> 
  Returns the file path where results of code analysis are to be stored. 

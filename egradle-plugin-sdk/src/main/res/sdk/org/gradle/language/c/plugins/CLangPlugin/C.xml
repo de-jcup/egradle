@@ -5,6 +5,7 @@
     <method name="getPchTransformTask" returnType="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
     <method name="getSourceSetType" returnType="java.lang.Class"/>
     <method name="getTransformTask" returnType="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+    <interface name="org.gradle.nativeplatform.internal.pch.PchEnabledLanguageTransform"/>
     <property name="binaryTools" type="java.util.Map"/>
     <property name="languageName" type="java.lang.String"/>
     <property name="pchTransformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>

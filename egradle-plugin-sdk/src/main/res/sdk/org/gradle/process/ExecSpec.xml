@@ -69,6 +69,7 @@
 </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
+    <interface name="org.gradle.process.BaseExecSpec"/>
     <property name="args" type="java.util.List">
         <description> 
  Returns the arguments for the command to be executed. Defaults to an empty list. 

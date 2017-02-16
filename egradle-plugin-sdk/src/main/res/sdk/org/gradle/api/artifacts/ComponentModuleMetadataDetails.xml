@@ -19,4 +19,5 @@
 </description>
         <parameter type="java.lang.Object" name="moduleNotation"/>
     </method>
+    <interface name="org.gradle.api.artifacts.ComponentModuleMetadata"/>
 </type>

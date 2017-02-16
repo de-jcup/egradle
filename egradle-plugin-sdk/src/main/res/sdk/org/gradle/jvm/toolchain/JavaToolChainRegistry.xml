@@ -3,4 +3,5 @@
     <description> 
  A container for &lt;a href='type://JavaToolChain'&gt;JavaToolChain&lt;/a&gt;s. 
 </description>
+    <interface name="org.gradle.platform.base.ToolChainRegistry"/>
 </type>

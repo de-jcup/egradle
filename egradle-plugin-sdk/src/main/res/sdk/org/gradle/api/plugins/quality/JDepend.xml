@@ -65,6 +65,7 @@
     <method name="setJdependClasspath" returnType="void">
         <parameter type="org.gradle.api.file.FileCollection" name="jdependClasspath"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
     <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="classesDir" type="java.io.File">
         <description> 

@@ -18,4 +18,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.plugins.javascript.rhino.RhinoShellExec" name="task"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
 </type>

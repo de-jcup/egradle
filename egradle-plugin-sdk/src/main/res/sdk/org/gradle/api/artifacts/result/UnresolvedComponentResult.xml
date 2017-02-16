@@ -10,6 +10,7 @@
  Returns the failure that occurred when trying to resolve the component. 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.result.ComponentResult"/>
     <property name="failure" type="java.lang.Throwable">
         <description> 
  Returns the failure that occurred when trying to resolve the component. 

@@ -10,4 +10,5 @@
  Requests that file visiting terminate after the current file. 
 </description>
     </method>
+    <interface name="org.gradle.api.file.FileTreeElement"/>
 </type>

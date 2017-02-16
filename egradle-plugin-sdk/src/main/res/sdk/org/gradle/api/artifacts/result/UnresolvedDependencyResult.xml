@@ -18,6 +18,7 @@
  The failure that occurred. 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.result.DependencyResult"/>
     <property name="attempted" type="org.gradle.api.artifacts.component.ComponentSelector">
         <description> 
  Returns the selector that was attempted to be resolved. This may not be the same as the requested component. 

@@ -3,4 +3,5 @@
     <description> 
  LanguageOutputType marking Jvm byte code. 
  </description>
+    <interface name="org.gradle.platform.base.TransformationFileType"/>
 </type>

@@ -17,6 +17,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The test results in “JUnit XML” format 
 </description>
     </method>
+    <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="html" type="org.gradle.api.reporting.DirectoryReport">
         <description> 
  A HTML report indicate the results of the test execution. 

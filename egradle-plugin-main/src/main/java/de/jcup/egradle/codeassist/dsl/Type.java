@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Albert Tregnaghi
  *
  */
-public interface Type extends LanguageElement{
+public interface Type extends LanguageElement, Comparable<Type>{
 
 	/**
 	 * Return properties (defined + inherited), never <code>null</code>
@@ -34,6 +34,7 @@ public interface Type extends LanguageElement{
 	 */
 	public Set<Method> getDefinedMethods();
 
+	public Set<TypeReference> getInterfaces();
 
 	/**
 	 * 
@@ -71,6 +72,8 @@ public interface Type extends LanguageElement{
 	public String getSuperTypeAsString();
 
 	public boolean isDescendantOf(String type);
+	
+	public boolean isInterface();
 
 		
 }

@@ -24,4 +24,5 @@
         <parameter type="java.io.InputStream" name="toSign"/>
         <parameter type="java.io.OutputStream" name="destination"/>
     </method>
+    <interface name="org.gradle.plugins.signing.type.SignatureType"/>
 </type>

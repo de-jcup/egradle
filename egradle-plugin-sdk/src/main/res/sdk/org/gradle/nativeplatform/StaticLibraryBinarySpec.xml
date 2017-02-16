@@ -25,6 +25,7 @@
 </description>
         <parameter type="java.io.File" name="staticLibraryFile"/>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeLibraryBinarySpec"/>
     <property name="staticLibraryFile" type="java.io.File">
         <description> 
  The static library file. 

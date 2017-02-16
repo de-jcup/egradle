@@ -13,6 +13,7 @@
 </description>
         <parameter type="java.lang.Object" name="file"/>
     </method>
+    <interface name="org.gradle.api.reporting.Report"/>
     <property name="destination" type="java.lang.Object">
         <description> 
  Sets the destination for the report. 

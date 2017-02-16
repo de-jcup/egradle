@@ -8,6 +8,7 @@
  Returns a human-consumable name for this build type. 
 </description>
     </method>
+    <interface name="org.gradle.api.Named"/>
     <property name="displayName" type="java.lang.String">
         <description> 
  Returns a human-consumable name for this build type. 

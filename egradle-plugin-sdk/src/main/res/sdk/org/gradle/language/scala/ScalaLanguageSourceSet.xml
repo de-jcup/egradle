@@ -4,5 +4,6 @@
  A set of sources passed to the Scala compiler. 
 </description>
     <method name="getCompileClasspath" returnType="org.gradle.jvm.Classpath"/>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="compileClasspath" type="org.gradle.jvm.Classpath"/>
 </type>

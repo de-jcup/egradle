@@ -12,6 +12,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if this task was uptodate 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.SuccessResult"/>
+    <interface name="org.gradle.tooling.events.task.TaskOperationResult"/>
     <property name="upToDate" type="boolean">
         <description> 
  Returns whether this task was uptodate. 

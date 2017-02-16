@@ -12,6 +12,7 @@
     <method name="setLocal" returnType="void">
         <parameter type="org.gradle.api.plugins.announce.Announcer" name="local"/>
     </method>
+    <interface name="org.gradle.api.plugins.announce.Announcer"/>
     <property name="extension" type="org.gradle.api.plugins.announce.AnnouncePluginExtension"/>
     <property name="local" type="org.gradle.api.plugins.announce.Announcer"/>
 </type>

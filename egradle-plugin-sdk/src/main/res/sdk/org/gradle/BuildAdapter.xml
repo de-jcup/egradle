@@ -19,5 +19,6 @@
     <method name="settingsEvaluated" returnType="void">
         <parameter type="org.gradle.api.initialization.Settings" name="settings"/>
     </method>
+    <interface name="org.gradle.BuildListener"/>
     <property name="tingsEvaluated" type="org.gradle.api.initialization.Settings"/>
 </type>

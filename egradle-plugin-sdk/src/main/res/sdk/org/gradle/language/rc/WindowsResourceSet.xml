@@ -20,4 +20,7 @@
  } 
  &lt;/pre&gt; 
 </description>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
+    <interface name="org.gradle.language.nativeplatform.HeaderExportingSourceSet"/>
+    <interface name="org.gradle.language.nativeplatform.NativeResourceSet"/>
 </type>

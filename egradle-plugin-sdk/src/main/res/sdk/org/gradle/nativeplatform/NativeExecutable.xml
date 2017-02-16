@@ -3,4 +3,5 @@
     <description> 
  An executable native component that is built by Gradle. 
 </description>
+    <interface name="org.gradle.platform.base.Application"/>
 </type>

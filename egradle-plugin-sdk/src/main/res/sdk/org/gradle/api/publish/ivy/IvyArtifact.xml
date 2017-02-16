@@ -83,6 +83,7 @@
 </description>
         <parameter type="java.lang.String" name="type"/>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
     <property name="classifier" type="java.lang.String">
         <description> 
  The classifier used to publish the artifact file. 

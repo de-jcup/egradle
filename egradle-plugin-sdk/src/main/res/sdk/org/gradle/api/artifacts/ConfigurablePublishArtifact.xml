@@ -44,6 +44,7 @@
 </description>
         <parameter type="java.lang.String" name="type"/>
     </method>
+    <interface name="org.gradle.api.artifacts.PublishArtifact"/>
     <property name="classifier" type="java.lang.String">
         <description> 
  Sets the classifier of this artifact. 

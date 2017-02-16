@@ -143,6 +143,8 @@
 </description>
         <parameter type="java.lang.Object" name="url"/>
     </method>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
+    <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
     <property name="resolve" type="org.gradle.api.artifacts.repositories.IvyArtifactRepositoryMetaDataProvider">
         <description> 
  Returns the meta-data provider used when resolving artifacts from this repository. The provider is responsible for locating and interpreting the meta-data 

@@ -8,6 +8,7 @@
  The create static library task. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
     <property name="createStaticLib" type="org.gradle.api.Task">
         <description> 
  The create static library task. 

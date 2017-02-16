@@ -3,17 +3,15 @@ package de.jcup.egradle.codeassist.dsl;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import de.jcup.egradle.codeassist.dsl.Method;
-import de.jcup.egradle.codeassist.dsl.Reason;
-import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLType;
 
 public class XMLTypeTest {
 
@@ -23,6 +21,88 @@ public class XMLTypeTest {
 	public void before() {
 		typeToTest = new XMLType();
 	}
+	
+	@Test
+	public void type1_extends_type2__which_has_no_interfaces_so_type1_has_no_interfaces(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		
+		when(superType1.getInterfaces()).thenReturn(Collections.emptySet());
+		
+		/* execute */
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertTrue(typeToTest.getInterfaces().isEmpty());
+	}
+	
+	@Test
+	public void type1_has_interface_type_3_and_extends_type2__which_has_no_interfaces_so_type1_has_only_interface_type3(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		Type superType3 = mock(Type.class);
+		TypeReference ref = mock(TypeReference.class);
+		
+		when(superType1.getInterfaces()).thenReturn(Collections.emptySet());
+		
+		typeToTest.interfaces.add(ref);
+
+		/* execute */
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertTrue(typeToTest.getInterfaces().contains(superType3));
+	}
+	
+	@Test
+	public void type1_extends_type2__which_has_interface_type3_so_type1_has_now_also_type3_as_interface(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		Type superType3 = mock(Type.class);
+		
+		TypeReference referenceType3 = mock(TypeReference.class);
+		when(referenceType3.getType()).thenReturn(superType3);
+		
+		when(superType1.getInterfaces()).thenReturn(Collections.singleton(referenceType3));
+		
+		/* execute */
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		assertTrue(typeToTest.getInterfaces().contains(superType3));
+	}
+	
+	@Test
+	public void type1_extends_type2__which_has_interface_type3_and_interface_type3_extends_interface_type4_and_5_so_type1_has_now_also_all_three_interfaces(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		Type superType3 = mock(Type.class);
+		Type superType4 = mock(Type.class);
+		Type superType5 = mock(Type.class);
+		
+		TypeReference referenceType3 = mock(TypeReference.class);
+		when(referenceType3.getType()).thenReturn(superType3);
+		
+		TypeReference referenceType4 = mock(TypeReference.class);
+		when(referenceType4.getType()).thenReturn(superType4);
+		
+		TypeReference referenceType5 = mock(TypeReference.class);
+		when(referenceType5.getType()).thenReturn(superType5);
+		
+		when(superType1.getInterfaces()).thenReturn(Collections.singleton(referenceType3));
+		when(superType3.getInterfaces()).thenReturn(new HashSet<>(Arrays.asList(referenceType4,referenceType5)));
+		
+		/* execute */
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		Set<TypeReference> interfaces = typeToTest.getInterfaces();
+		assertTrue(interfaces.contains(referenceType3));
+		assertTrue(interfaces.contains(referenceType4));
+		assertTrue(interfaces.contains(referenceType5));
+	}
+	
+	
 	@Test
 	public void type1_extends_type2_so_type1_is_descendant_of_type2(){
 		/* prepare */
@@ -306,5 +386,45 @@ public class XMLTypeTest {
 		assertTrue(type.getMethods().contains(method1));
 		assertTrue(type.getMethods().contains(method2));
 	}
+	
+	@Test
+	public void type_with_nameX_compare_to_other_type_with_same_name_is_0_both_ways(){
+		/* prepare */
+		XMLType type1 = new XMLType();
+		type1.name="nameX";
+		
+		XMLType type2 = new XMLType();
+		type2.name="nameX";
+		
+		/* test + execute */
+		assertEquals(0,type2.compareTo(type1));
+		assertEquals(0,type1.compareTo(type2));
+	}
+	
+	
+	@Test
+	public void type_with_name1_compare_to_other_type_with_name2_is_lower_0(){
+		/* prepare */
+		XMLType type1 = new XMLType();
+		type1.name="name1";
+		
+		XMLType type2 = new XMLType();
+		type2.name="name2";
+		
+		/* test + execute */
+		assertTrue(type1.compareTo(type2)<0);
+	}
 
+	@Test
+	public void type_with_name2_compare_to_other_type_with_name1_is_higher_0(){
+		/* prepare */
+		XMLType type1 = new XMLType();
+		type1.name="name1";
+		
+		XMLType type2 = new XMLType();
+		type2.name="name2";
+		
+		/* test + execute */
+		assertTrue(type2.compareTo(type1)>0);
+	}
 }

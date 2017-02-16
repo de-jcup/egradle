@@ -117,6 +117,7 @@
 </description>
         <parameter type="java.lang.Object" name="library"/>
     </method>
+    <interface name="org.gradle.platform.base.BinarySpec"/>
     <property name="assembler" type="org.gradle.nativeplatform.Tool">
         <description> 
  The configuration of the assembler used when compiling assembly sources this binary. 

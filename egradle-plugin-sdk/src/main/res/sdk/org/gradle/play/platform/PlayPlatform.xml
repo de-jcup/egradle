@@ -21,6 +21,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Scala runtime 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.Platform"/>
     <property name="javaPlatform" type="org.gradle.jvm.platform.JavaPlatform">
         <description> 
  Version of Java Runtime to use. 

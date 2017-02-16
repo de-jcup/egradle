@@ -8,6 +8,7 @@
  Returns the test suite that this binary belongs to. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinarySpec"/>
     <property name="testSuite" type="org.gradle.testing.base.TestSuiteSpec">
         <description> 
  Returns the test suite that this binary belongs to. 

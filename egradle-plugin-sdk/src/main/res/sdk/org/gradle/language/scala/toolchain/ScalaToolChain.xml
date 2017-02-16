@@ -3,4 +3,5 @@
     <description> 
  A set of tools for building Scala applications 
 </description>
+    <interface name="org.gradle.platform.base.ToolChain"/>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  A set of tools for building applications using the Play Framework. 
 </description>
+    <interface name="org.gradle.platform.base.ToolChain"/>
 </type>

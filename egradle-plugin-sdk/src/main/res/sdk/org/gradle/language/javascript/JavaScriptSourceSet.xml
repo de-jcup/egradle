@@ -3,4 +3,5 @@
     <description> 
  Represents a source set containing javascript sources. 
 </description>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
 </type>

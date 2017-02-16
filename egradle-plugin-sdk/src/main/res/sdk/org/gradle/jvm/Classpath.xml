@@ -4,5 +4,6 @@
  A collection of files to be used as a class path. 
 </description>
     <method name="getFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <interface name="org.gradle.api.Buildable"/>
     <property name="files" type="org.gradle.api.file.FileCollection"/>
 </type>

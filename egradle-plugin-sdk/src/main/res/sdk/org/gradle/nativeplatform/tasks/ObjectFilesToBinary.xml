@@ -10,4 +10,5 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
+    <interface name="org.gradle.api.Task"/>
 </type>

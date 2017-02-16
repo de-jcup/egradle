@@ -1,6 +1,7 @@
 package de.jcup.egradle.codeassist.dsl.gradle;
 
 import static de.jcup.egradle.codeassist.SourceCodeInsertionSupport.*;
+import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,6 @@ import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
-import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 	
 

@@ -26,6 +26,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.BuildModel"/>
+    <interface name="org.gradle.tooling.model.Model"/>
     <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
         <description> 
  Returns the identifier for this Gradle build. 

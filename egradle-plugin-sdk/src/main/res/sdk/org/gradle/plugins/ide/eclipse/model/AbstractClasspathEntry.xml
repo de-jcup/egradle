@@ -50,6 +50,7 @@
     <method name="writeEntryAttributes" returnType="void">
         <parameter type="groovy.util.Node" name="node"/>
     </method>
+    <interface name="org.gradle.plugins.ide.eclipse.model.ClasspathEntry"/>
     <property name="accessRules" type="java.util.Set"/>
     <property name="entryAttributes" type="java.util.Map"/>
     <property name="exported" type="boolean"/>

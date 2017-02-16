@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.RelevantCodeCutter;
-
 public class RelevantCodeCutterTest {
 
 	private static final String _01234_678_0123 = "01234 678 0123";

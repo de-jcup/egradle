@@ -26,6 +26,8 @@
  The tested binary. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeBinarySpec"/>
+    <interface name="org.gradle.testing.base.TestSuiteBinarySpec"/>
     <property name="component" type="org.gradle.nativeplatform.test.NativeTestSuiteSpec"/>
     <property name="executable" type="org.gradle.nativeplatform.NativeExecutableFileSpec"/>
     <property name="executableFile" type="java.io.File">

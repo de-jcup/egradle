@@ -39,6 +39,7 @@
  @since 1.0-milestone-3 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Launchable"/>
     <property name="description" type="java.lang.String">
         <description> 
  Returns the description of this task, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 

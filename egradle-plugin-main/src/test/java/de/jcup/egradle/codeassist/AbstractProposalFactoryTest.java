@@ -12,11 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.codeassist.AbstractProposalFactory;
-import de.jcup.egradle.codeassist.ItemProposalImpl;
-import de.jcup.egradle.codeassist.Proposal;
-import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
-
 public class AbstractProposalFactoryTest {
 
 	private TestAbstractProposalFactory factoryToTest;

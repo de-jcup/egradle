@@ -3,4 +3,5 @@
     <description> 
  An Ivy Module component. 
 </description>
+    <interface name="org.gradle.api.component.Component"/>
 </type>

@@ -222,6 +222,8 @@
     <method name="setVisitors" returnType="void">
         <parameter type="java.util.Collection" name="visitors"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="classes" type="org.gradle.api.file.FileCollection">
         <description> 
  The classes to be analyzed. 

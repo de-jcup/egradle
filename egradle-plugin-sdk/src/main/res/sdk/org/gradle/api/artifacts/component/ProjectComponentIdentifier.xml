@@ -12,6 +12,7 @@
  @since 1.10 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.component.ComponentIdentifier"/>
     <property name="projectPath" type="java.lang.String">
         <description> 
  Returns the path of the project which the component belongs to. 

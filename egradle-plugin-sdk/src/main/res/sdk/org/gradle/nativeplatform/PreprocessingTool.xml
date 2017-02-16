@@ -23,6 +23,7 @@
  The set of preprocessor macros to define when compiling this binary. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.Tool"/>
     <property name="macros" type="java.util.Map">
         <description> 
  The set of preprocessor macros to define when compiling this binary. 

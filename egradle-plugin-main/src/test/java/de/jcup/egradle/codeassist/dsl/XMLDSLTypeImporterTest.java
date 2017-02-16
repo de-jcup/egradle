@@ -11,14 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.codeassist.dsl.Method;
-import de.jcup.egradle.codeassist.dsl.Parameter;
-import de.jcup.egradle.codeassist.dsl.Property;
-import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
-import de.jcup.egradle.codeassist.dsl.XMLParameter;
-import de.jcup.egradle.codeassist.dsl.XMLProperty;
-import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.core.TestUtil;
 public class XMLDSLTypeImporterTest {
 

@@ -15,6 +15,7 @@
     <method name="uncheckedCast" returnType="T">
         <parameter type="java.lang.Object" name="object"/>
     </method>
+    <interface name="org.gradle.api.specs.Spec"/>
     <property name="empty" type="boolean"/>
     <property name="specs" type="java.util.List"/>
     <property name="specsArray" type="org.gradle.api.specs.Spec"/>

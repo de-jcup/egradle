@@ -52,6 +52,8 @@
 </description>
         <parameter type="java.lang.Object" name="url"/>
     </method>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
+    <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
     <property name="artifactUrls" type="java.util.Set">
         <description> 
  Returns the additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 

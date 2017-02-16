@@ -13,6 +13,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying test operation. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.ProgressEvent"/>
     <property name="descriptor" type="org.gradle.tooling.events.test.TestOperationDescriptor">
         <description> 
  Returns the description of the test for which progress is reported. For JVM-based tests, 

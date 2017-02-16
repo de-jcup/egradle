@@ -51,6 +51,7 @@
 </description>
         <parameter type="java.util.Set" name="projects"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
     <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="projects" type="java.util.Set">
         <description> 

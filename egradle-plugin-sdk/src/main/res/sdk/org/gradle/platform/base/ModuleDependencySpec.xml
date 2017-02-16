@@ -24,6 +24,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version range 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.DependencySpec"/>
     <property name="group" type="java.lang.String">
         <description> 
  The group of the module this dependency specification refers to. 

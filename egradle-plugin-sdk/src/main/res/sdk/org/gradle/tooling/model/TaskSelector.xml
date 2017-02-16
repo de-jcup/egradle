@@ -13,6 +13,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name used by this selector. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Launchable"/>
     <property name="name" type="java.lang.String">
         <description> 
  Returns the name that will be used to select tasks. 

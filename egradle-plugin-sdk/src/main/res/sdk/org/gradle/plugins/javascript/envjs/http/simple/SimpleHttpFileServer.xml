@@ -6,6 +6,7 @@
         <parameter type="java.lang.String" name="path"/>
     </method>
     <method name="stop" returnType="void"/>
+    <interface name="org.gradle.plugins.javascript.envjs.http.HttpFileServer"/>
     <property name="contentRoot" type="java.io.File"/>
     <property name="port" type="int"/>
     <property name="resourceUrl" type="java.lang.String"/>

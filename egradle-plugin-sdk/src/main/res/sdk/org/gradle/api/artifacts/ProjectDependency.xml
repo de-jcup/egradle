@@ -21,6 +21,8 @@
  @see #getDependencyProject() 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.ModuleDependency"/>
+    <interface name="org.gradle.api.artifacts.SelfResolvingDependency"/>
     <property name="dependencyProject" type="org.gradle.api.Project">
         <description> 
  Returns the project associated with this project dependency. 

@@ -3,4 +3,7 @@
     <description> 
  Definition of a native executable component that is to be built by Gradle. 
 </description>
+    <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <interface name="org.gradle.nativeplatform.TargetedNativeComponent"/>
+    <interface name="org.gradle.platform.base.ApplicationSpec"/>
 </type>

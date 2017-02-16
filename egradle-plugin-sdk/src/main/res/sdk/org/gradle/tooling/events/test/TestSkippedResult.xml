@@ -5,4 +5,6 @@
  
  @since 2.4 
 </description>
+    <interface name="org.gradle.tooling.events.SkippedResult"/>
+    <interface name="org.gradle.tooling.events.test.TestOperationResult"/>
 </type>

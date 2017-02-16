@@ -25,6 +25,7 @@
     </method>
     <method name="optionMap" returnType="java.util.Map"/>
     <method name="run" returnType="void"/>
+    <interface name="java.io.Serializable"/>
     <property name="antPropertyName" type="java.lang.String"/>
     <property name="antPropertyValue" type="java.lang.Object"/>
     <property name="optionField" type="boolean"/>

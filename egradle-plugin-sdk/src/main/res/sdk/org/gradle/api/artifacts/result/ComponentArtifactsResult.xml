@@ -21,6 +21,7 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.artifacts.result.ComponentResult"/>
     <property name="artifacts" type="java.util.Set">
         <description> 
  &lt;p&gt;Returns the component artifacts of the specified type. Includes resolved and unresolved artifacts (if any). 

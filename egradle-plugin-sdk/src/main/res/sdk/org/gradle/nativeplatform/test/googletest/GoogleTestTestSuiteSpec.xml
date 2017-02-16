@@ -3,4 +3,5 @@
     <description> 
  Test suite of Google Test tests. 
 </description>
+    <interface name="org.gradle.nativeplatform.test.NativeTestSuiteSpec"/>
 </type>

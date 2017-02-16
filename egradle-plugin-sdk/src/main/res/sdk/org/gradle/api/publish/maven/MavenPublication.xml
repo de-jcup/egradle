@@ -230,6 +230,7 @@
 </description>
         <parameter type="java.lang.String" name="version"/>
     </method>
+    <interface name="org.gradle.api.publish.Publication"/>
     <property name="artifactId" type="java.lang.String">
         <description> 
  Returns the artifactId for this publication. 

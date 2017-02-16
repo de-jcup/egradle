@@ -3,4 +3,5 @@
     <description> 
  A software application. 
 </description>
+    <interface name="org.gradle.api.component.Component"/>
 </type>

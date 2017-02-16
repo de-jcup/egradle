@@ -149,6 +149,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
+    <interface name="org.gradle.api.plugins.PluginAware"/>
     <property name="gradle" type="org.gradle.api.invocation.Gradle">
         <description> 
  Returns the &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance for the current build. 

@@ -33,6 +33,7 @@
 </description>
         <parameter type="java.util.List" name="statusScheme"/>
     </method>
+    <interface name="org.gradle.api.artifacts.ComponentMetadata"/>
     <property name="changing" type="boolean">
         <description> 
  Sets whether the component is changing or immutable. 

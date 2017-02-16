@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.AbstractProposalImpl;
-
 public class AbstractProposalImplTest {
 
 	@Test

@@ -10,6 +10,7 @@
  The failure that occurred when the artifact was resolved. 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.result.ArtifactResult"/>
     <property name="failure" type="java.lang.Throwable">
         <description> 
  The failure that occurred when the artifact was resolved. 

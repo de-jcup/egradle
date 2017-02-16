@@ -21,6 +21,7 @@
  @since 1.0-milestone-5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Element"/>
     <property name="children" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  Returns the child elements, or the empty set if there are no child elements. 

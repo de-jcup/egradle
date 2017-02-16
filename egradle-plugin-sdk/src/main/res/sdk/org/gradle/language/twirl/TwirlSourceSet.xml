@@ -14,6 +14,7 @@
 </description>
         <parameter type="org.gradle.language.twirl.TwirlImports" name="defaultImports"/>
     </method>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="defaultImports" type="org.gradle.language.twirl.TwirlImports">
         <description> 
  The default imports that should be added to generated source files 

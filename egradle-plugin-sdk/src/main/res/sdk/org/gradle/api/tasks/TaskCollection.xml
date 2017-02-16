@@ -60,6 +60,7 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.NamedDomainObjectSet"/>
     <property name="at" type="T">
         <description> 
  {@inheritDoc} 

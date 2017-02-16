@@ -49,6 +49,8 @@
 </description>
         <parameter type="boolean" name="injectedRoutesGenerator"/>
     </method>
+    <interface name="org.gradle.platform.base.ApplicationSpec"/>
+    <interface name="org.gradle.play.PlayPlatformAwareComponentSpec"/>
     <property name="injectedRoutesGenerator" type="boolean">
         <description> 
  Will an injected router be generated for this application? 

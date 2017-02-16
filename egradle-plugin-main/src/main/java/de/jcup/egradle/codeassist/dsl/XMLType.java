@@ -35,9 +35,12 @@ public class XMLType implements ModifiableType {
 
 	@XmlElement(name = "method", type = XMLMethod.class)
 	Set<Method> methods = new TreeSet<>();
-
+	
+	@XmlElement(name = "interface", type = XMLTypeReference.class)
+	Set<TypeReference> interfaces = new TreeSet<>();
+	
 	@XmlAttribute(name = "name")
-	private String name;
+	String name;
 
 	@XmlElement(name = "property", type = XMLProperty.class)
 	Set<Property> properties = new TreeSet<>();
@@ -52,6 +55,8 @@ public class XMLType implements ModifiableType {
 
 	private Set<Method> mergedMethods;
 	private Set<Property> mergedProperties;
+
+	private Set<TypeReference> mergedInterfaces;
 
 	@Override
 	public void addExtension(String extensionId, Type extensionType, Reason reason) {
@@ -168,8 +173,14 @@ public class XMLType implements ModifiableType {
 		if (superType==null){
 			mergedMethods=null;
 			mergedProperties=null;
+			mergedInterfaces=null;
 			return;
 		}
+		
+		this.mergedInterfaces=new TreeSet<>(interfaces);
+		Set<TypeReference> superInterfaceReferrences = superType.getInterfaces();
+		this.mergedInterfaces.addAll(superInterfaceReferrences);
+		
 		this.mergedMethods=new TreeSet<>(methods);
 		Set<Method> superMethods = superType.getMethods();
 		this.mergedMethods.addAll(superMethods);
@@ -213,5 +224,101 @@ public class XMLType implements ModifiableType {
 		return methods;
 	}
 
+	@Override
+	public boolean isInterface() {
+		return _interface;
+	}
+	
+	public Set<TypeReference> getInterfaces() {
+		if (superType==null){
+			return interfaces;
+		}
+		return mergedInterfaces;
+	}
 
+	@Override
+	public int compareTo(Type o) {
+		if (o==null){
+			return 1;
+		}
+		String otherName = o.getName();
+		if (otherName==null){
+			if (this.name==null){
+				return 0;
+			}
+			return 1;
+		}
+		if (this.name==null){
+			return 1;
+		}
+		int compare = this.name.compareTo(otherName);
+		return compare;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (_interface ? 1231 : 1237);
+		result = prime * result + ((interfaces == null) ? 0 : interfaces.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((methods == null) ? 0 : methods.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
+		result = prime * result + ((superTypeAsString == null) ? 0 : superTypeAsString.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		XMLType other = (XMLType) obj;
+		if (_interface != other._interface)
+			return false;
+		if (interfaces == null) {
+			if (other.interfaces != null)
+				return false;
+		} else if (!interfaces.equals(other.interfaces))
+			return false;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
+		if (methods == null) {
+			if (other.methods != null)
+				return false;
+		} else if (!methods.equals(other.methods))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
+			return false;
+		if (superTypeAsString == null) {
+			if (other.superTypeAsString != null)
+				return false;
+		} else if (!superTypeAsString.equals(other.superTypeAsString))
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
+			return false;
+		return true;
+	}
+
+	
+	
 }

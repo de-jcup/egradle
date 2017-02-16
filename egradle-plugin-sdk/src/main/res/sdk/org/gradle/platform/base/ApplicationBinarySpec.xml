@@ -8,6 +8,7 @@
  The application that this binary belongs to. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinarySpec"/>
     <property name="application" type="org.gradle.platform.base.ApplicationSpec">
         <description> 
  The application that this binary belongs to. 

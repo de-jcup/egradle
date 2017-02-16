@@ -13,6 +13,8 @@
  The headers exported by this library. These headers will be added to all binaries for this library. 
 </description>
     </method>
+    <interface name="org.gradle.api.Named"/>
+    <interface name="org.gradle.nativeplatform.NativeLibrary"/>
     <property name="binaries" type="org.gradle.api.DomainObjectSet">
         <description> 
  The binaries that are built for this component. You can use this to configure the binaries for this component. 

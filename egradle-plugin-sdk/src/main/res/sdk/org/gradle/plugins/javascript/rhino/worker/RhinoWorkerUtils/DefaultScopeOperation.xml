@@ -7,4 +7,5 @@
     <method name="initContext" returnType="void">
         <parameter type="org.mozilla.javascript.Context" name="context"/>
     </method>
+    <interface name="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils.ScopeOperation"/>
 </type>

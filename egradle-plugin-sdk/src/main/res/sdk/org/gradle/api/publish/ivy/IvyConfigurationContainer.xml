@@ -18,4 +18,5 @@
  } 
  &lt;/pre&gt; 
 </description>
+    <interface name="org.gradle.api.NamedDomainObjectContainer"/>
 </type>

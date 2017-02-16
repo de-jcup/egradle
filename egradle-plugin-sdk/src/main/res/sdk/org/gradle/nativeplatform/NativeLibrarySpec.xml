@@ -18,6 +18,9 @@
  Converts this library to a native library requirement that uses the static library variant. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <interface name="org.gradle.nativeplatform.TargetedNativeComponent"/>
+    <interface name="org.gradle.platform.base.LibrarySpec"/>
     <property name="api" type="org.gradle.nativeplatform.NativeLibraryRequirement">
         <description> 
  Converts this library to a native library requirement that uses the api library linkage. 

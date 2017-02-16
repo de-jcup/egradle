@@ -27,6 +27,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module version 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.component.ComponentSelector"/>
     <property name="group" type="java.lang.String">
         <description> 
  The group of the module to select the component from. 

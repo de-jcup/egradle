@@ -4,5 +4,6 @@
  A source set that can have dependencies on other Libraries. 
 </description>
     <method name="getDependencies" returnType="org.gradle.platform.base.DependencySpecContainer"/>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer"/>
 </type>

@@ -11,10 +11,6 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.dsl.Plugin;
-import de.jcup.egradle.codeassist.dsl.TypeExtension;
-import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
-import de.jcup.egradle.codeassist.dsl.XMLTypeExtension;
 import de.jcup.egradle.core.TestUtil;
 
 public class XMLDSLPluginsImporterTest {

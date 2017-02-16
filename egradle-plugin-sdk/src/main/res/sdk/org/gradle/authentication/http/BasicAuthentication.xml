@@ -3,4 +3,5 @@
     <description> 
  Authentication scheme for basic access authentication over HTTP. When using this scheme, credentials are sent preemptively. 
 </description>
+    <interface name="org.gradle.authentication.Authentication"/>
 </type>

@@ -18,6 +18,7 @@
 </description>
         <parameter type="org.gradle.api.resources.TextResource" name="template"/>
     </method>
+    <interface name="org.gradle.jvm.application.scripts.ScriptGenerator"/>
     <property name="template" type="org.gradle.api.resources.TextResource">
         <description> 
  Gets the template reader used for generating script. 

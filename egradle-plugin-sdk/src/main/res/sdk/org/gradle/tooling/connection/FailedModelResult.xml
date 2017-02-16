@@ -20,6 +20,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.connection.ModelResult"/>
     <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
         <description> 
  Identifier of the build that originated this failure. 

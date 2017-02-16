@@ -14,6 +14,7 @@
 </description>
         <parameter type="boolean" name="outputPerTestCase"/>
     </method>
+    <interface name="org.gradle.api.reporting.DirectoryReport"/>
     <property name="outputPerTestCase" type="boolean">
         <description> 
  Should the output be associated with individual test cases instead of at the suite level. 

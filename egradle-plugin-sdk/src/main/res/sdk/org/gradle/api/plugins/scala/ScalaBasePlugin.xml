@@ -45,5 +45,6 @@
     <method name="projectsEvaluated" returnType="void">
         <parameter type="org.gradle.api.invocation.Gradle" name="gradle"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
     <property name="satisfiedBy" type="boolean"/>
 </type>

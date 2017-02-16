@@ -33,4 +33,5 @@
 </description>
         <parameter type="java.lang.String" name="range"/>
     </method>
+    <interface name="org.gradle.platform.base.DependencySpecBuilder"/>
 </type>

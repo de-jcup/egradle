@@ -19,6 +19,7 @@
     <method name="setDefaultType" returnType="void">
         <parameter type="java.lang.String" name="defaultTypeExtension"/>
     </method>
+    <interface name="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
     <property name="defaultType" type="org.gradle.plugins.signing.type.SignatureType"/>
     <property name="typeForExtension" type="org.gradle.plugins.signing.type.SignatureType"/>
 </type>

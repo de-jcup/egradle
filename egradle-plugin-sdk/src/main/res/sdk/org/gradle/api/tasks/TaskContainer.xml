@@ -181,6 +181,8 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
+    <interface name="org.gradle.api.tasks.TaskCollection"/>
     <property name="byPath" type="org.gradle.api.Task">
         <description> 
  &lt;p&gt;Locates a task by path. You can supply a task name, a relative path, or an absolute path. Relative paths are 

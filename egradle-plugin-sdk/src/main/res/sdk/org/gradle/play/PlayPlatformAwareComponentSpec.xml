@@ -6,4 +6,5 @@
     <method name="platform" returnType="void">
         <parameter type="java.lang.Object" name="platformRequirements"/>
     </method>
+    <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
 </type>

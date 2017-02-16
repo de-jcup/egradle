@@ -44,6 +44,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
+    <interface name="org.gradle.platform.base.Platform"/>
     <property name="architecture" type="org.gradle.nativeplatform.platform.Architecture">
         <description> 
  The cpu architecture being targeted. Defaults to the default architecture produced by the tool chain. 

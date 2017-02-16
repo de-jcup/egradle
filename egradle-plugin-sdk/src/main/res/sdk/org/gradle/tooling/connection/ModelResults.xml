@@ -4,4 +4,5 @@
  A set of model results for multiple projects. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the type of model requested 
 </description>
+    <interface name="java.lang.Iterable"/>
 </type>

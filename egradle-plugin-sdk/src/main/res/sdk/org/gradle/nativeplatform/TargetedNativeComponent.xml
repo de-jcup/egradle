@@ -16,4 +16,6 @@
 </description>
         <parameter type="java.lang.String" name="flavorSelectors"/>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
 </type>

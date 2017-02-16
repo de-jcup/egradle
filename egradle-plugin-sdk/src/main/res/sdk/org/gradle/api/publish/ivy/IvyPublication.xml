@@ -284,6 +284,7 @@
 </description>
         <parameter type="java.lang.String" name="revision"/>
     </method>
+    <interface name="org.gradle.api.publish.Publication"/>
     <property name="artifacts" type="org.gradle.api.publish.ivy.IvyArtifactSet">
         <description> 
  The complete set of artifacts for this publication. 

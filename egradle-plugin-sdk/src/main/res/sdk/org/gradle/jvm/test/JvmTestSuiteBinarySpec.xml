@@ -9,6 +9,9 @@
     <method name="getTasks" returnType="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks"/>
     <method name="getTestSuite" returnType="org.gradle.jvm.test.JvmTestSuiteSpec"/>
     <method name="getTestedBinary" returnType="org.gradle.jvm.JvmBinarySpec"/>
+    <interface name="org.gradle.jvm.JvmBinarySpec"/>
+    <interface name="org.gradle.jvm.internal.WithDependencies"/>
+    <interface name="org.gradle.testing.base.TestSuiteBinarySpec"/>
     <property name="runtimeClasspath" type="org.gradle.jvm.internal.DependencyResolvingClasspath"/>
     <property name="tasks" type="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks"/>
     <property name="testSuite" type="org.gradle.jvm.test.JvmTestSuiteSpec"/>

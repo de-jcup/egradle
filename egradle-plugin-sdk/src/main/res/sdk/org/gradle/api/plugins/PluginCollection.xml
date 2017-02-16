@@ -41,4 +41,5 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.DomainObjectSet"/>
 </type>

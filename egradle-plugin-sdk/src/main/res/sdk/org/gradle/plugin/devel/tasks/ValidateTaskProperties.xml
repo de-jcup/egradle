@@ -124,6 +124,7 @@
     <method name="visitFile" returnType="void">
         <parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/>
     </method>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="classLoaderFactory" type="org.gradle.internal.classloader.ClassLoaderFactory"/>
     <property name="classesDir" type="java.io.File">
         <description> 

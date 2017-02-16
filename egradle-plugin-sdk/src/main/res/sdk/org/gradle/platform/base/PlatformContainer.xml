@@ -3,4 +3,5 @@
     <description> 
  A container of &lt;a href='type://Platform'&gt;Platform&lt;/a&gt;s. 
 </description>
+    <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
 </type>

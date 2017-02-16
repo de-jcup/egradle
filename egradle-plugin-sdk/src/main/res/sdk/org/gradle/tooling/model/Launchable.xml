@@ -40,6 +40,7 @@
  @since 2.1 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.ProjectModel"/>
     <property name="description" type="java.lang.String">
         <description> 
  Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description. 

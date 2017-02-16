@@ -9,6 +9,7 @@
  may have been requested, or the version may have been substituted due to conflict resolution, or by being forced, or for some other reason. 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.result.DependencyResult"/>
     <property name="selected" type="org.gradle.api.artifacts.result.ResolvedComponentResult">
         <description> 
  Returns the selected component. This may not necessarily be the same as the requested component. For example, a dynamic version 

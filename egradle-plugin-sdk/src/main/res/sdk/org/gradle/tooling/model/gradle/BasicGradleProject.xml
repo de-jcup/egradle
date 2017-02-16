@@ -47,6 +47,8 @@
  @since 2.13 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Model"/>
+    <interface name="org.gradle.tooling.model.ProjectModel"/>
     <property name="children" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  Returns the child projects of this project, or the empty set if there are no child projects. 

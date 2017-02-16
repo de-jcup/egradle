@@ -26,4 +26,6 @@
 </description>
         <parameter type="boolean" name="transitive"/>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
+    <interface name="org.gradle.api.artifacts.Dependency"/>
 </type>

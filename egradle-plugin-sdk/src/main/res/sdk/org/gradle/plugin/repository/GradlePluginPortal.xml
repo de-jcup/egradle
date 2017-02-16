@@ -3,4 +3,5 @@
     <description> 
  The Gradle Plugin Portal which can be used to resolve plugins. 
 </description>
+    <interface name="org.gradle.plugin.repository.PluginRepository"/>
 </type>

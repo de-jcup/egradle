@@ -66,6 +66,7 @@
 </description>
         <parameter type="boolean" name="uniqueVersion"/>
     </method>
+    <interface name="org.gradle.api.artifacts.maven.MavenResolver"/>
     <property name="repository" type="java.lang.Object">
         <description> 
  Returns the repository to be used for uploading artifacts. 

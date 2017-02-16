@@ -62,6 +62,7 @@
  Is it Windows? 
 </description>
     </method>
+    <interface name="org.gradle.api.Named"/>
     <property name="current" type="boolean">
         <description> 
  Is this the current OS? 

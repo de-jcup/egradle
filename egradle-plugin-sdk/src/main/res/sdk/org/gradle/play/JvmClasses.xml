@@ -25,6 +25,7 @@
 </description>
         <parameter type="java.io.File" name="classesDir"/>
     </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
     <property name="classesDir" type="java.io.File">
         <description> 
  The classes directory for this binary. 

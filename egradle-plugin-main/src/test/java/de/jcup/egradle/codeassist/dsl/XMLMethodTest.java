@@ -2,6 +2,7 @@ package de.jcup.egradle.codeassist.dsl;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+
 import org.junit.Test;
 
 public class XMLMethodTest {

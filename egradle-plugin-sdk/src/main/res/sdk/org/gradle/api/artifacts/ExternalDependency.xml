@@ -22,6 +22,8 @@
 </description>
         <parameter type="boolean" name="force"/>
     </method>
+    <interface name="org.gradle.api.artifacts.ModuleDependency"/>
+    <interface name="org.gradle.api.artifacts.ModuleVersionSelector"/>
     <property name="force" type="boolean">
         <description> 
  Returns whether or not the version of this dependency should be enforced in the case of version conflicts. 

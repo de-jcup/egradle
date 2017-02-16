@@ -51,6 +51,7 @@
  @since 1.0-milestone-5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.HierarchicalElement"/>
     <property name="children" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  Returns the modules of this IDEA project. Most projects have at least one module. 

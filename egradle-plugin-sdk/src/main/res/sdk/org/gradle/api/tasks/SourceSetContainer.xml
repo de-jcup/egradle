@@ -3,4 +3,6 @@
     <description> 
  A &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt; manages a set of &lt;a href='type://SourceSet'&gt;SourceSet&lt;/a&gt; objects. 
 </description>
+    <interface name="org.gradle.api.NamedDomainObjectContainer"/>
+    <interface name="org.gradle.api.NamedDomainObjectSet"/>
 </type>

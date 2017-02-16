@@ -55,6 +55,10 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
+    <interface name="org.gradle.api.file.DirectoryTree"/>
+    <interface name="org.gradle.api.file.FileTree"/>
+    <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="builtBy" type="java.util.Set">
         <description> 
  Returns the set of tasks which build the files of this collection. 

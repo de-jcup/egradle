@@ -9,4 +9,5 @@
     <method name="hasFullyQualifiedClass" returnType="boolean">
         <parameter type="java.lang.String" name="fqClass"/>
     </method>
+    <interface name="org.gradle.api.Action"/>
 </type>

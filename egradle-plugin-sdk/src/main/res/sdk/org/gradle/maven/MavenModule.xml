@@ -3,4 +3,5 @@
     <description> 
  A Maven Module component. 
 </description>
+    <interface name="org.gradle.api.component.Component"/>
 </type>

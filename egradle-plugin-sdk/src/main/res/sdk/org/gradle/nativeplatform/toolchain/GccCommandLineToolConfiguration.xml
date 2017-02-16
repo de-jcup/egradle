@@ -15,6 +15,7 @@
 </description>
         <parameter type="java.lang.String" name="file"/>
     </method>
+    <interface name="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration"/>
     <property name="executable" type="java.lang.String">
         <description> 
  The name of the executable file for this tool. 

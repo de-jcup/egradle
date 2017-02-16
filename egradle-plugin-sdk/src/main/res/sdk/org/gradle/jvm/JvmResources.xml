@@ -3,4 +3,5 @@
     <description> 
  LanguageOutputType marking Jvm Resource Output 
 </description>
+    <interface name="org.gradle.platform.base.TransformationFileType"/>
 </type>

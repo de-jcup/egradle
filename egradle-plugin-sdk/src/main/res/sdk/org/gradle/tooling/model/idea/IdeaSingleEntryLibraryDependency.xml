@@ -26,6 +26,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null when the source is not available for this dependency. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.ExternalDependency"/>
+    <interface name="org.gradle.tooling.model.idea.IdeaDependency"/>
     <property name="file" type="java.io.File">
         <description> 
  Returns the file for this dependency. 

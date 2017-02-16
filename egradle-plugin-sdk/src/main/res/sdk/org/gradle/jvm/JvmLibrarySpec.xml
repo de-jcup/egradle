@@ -13,6 +13,9 @@
  The component-level dependencies of this library. 
 </description>
     </method>
+    <interface name="org.gradle.jvm.JvmComponentSpec"/>
+    <interface name="org.gradle.platform.base.LibrarySpec"/>
+    <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
     <property name="api" type="org.gradle.jvm.JvmApiSpec">
         <description> 
  The public API of this library. 

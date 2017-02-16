@@ -28,6 +28,7 @@
  Can this binary be built in the current environment? 
 </description>
     </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
     <property name="buildable" type="boolean">
         <description> 
  Can this binary be built in the current environment? 

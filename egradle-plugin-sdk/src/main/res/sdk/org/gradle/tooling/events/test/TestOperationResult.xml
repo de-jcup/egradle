@@ -5,4 +5,5 @@
  
  @since 2.4 
 </description>
+    <interface name="org.gradle.tooling.events.OperationResult"/>
 </type>

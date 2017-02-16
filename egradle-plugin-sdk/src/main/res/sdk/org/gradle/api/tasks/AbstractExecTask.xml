@@ -177,6 +177,7 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
+    <interface name="org.gradle.process.ExecSpec"/>
     <property name="args" type="java.util.List">
         <description> 
  {@inheritDoc} 

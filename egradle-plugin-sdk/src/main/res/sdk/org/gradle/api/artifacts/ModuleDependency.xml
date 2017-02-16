@@ -110,6 +110,7 @@
 </description>
         <parameter type="boolean" name="transitive"/>
     </method>
+    <interface name="org.gradle.api.artifacts.Dependency"/>
     <property name="artifacts" type="java.util.Set">
         <description> 
  Returns the artifacts belonging to this dependency. 

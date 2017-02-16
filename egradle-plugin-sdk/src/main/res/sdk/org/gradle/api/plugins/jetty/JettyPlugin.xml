@@ -47,6 +47,7 @@
     <method name="getWebXml" returnType="java.lang.Object">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
     <property name="javaConvention" type="org.gradle.api.plugins.JavaPluginConvention"/>
     <property name="warConvention" type="org.gradle.api.plugins.WarPluginConvention"/>
     <property name="webXml" type="java.lang.Object"/>

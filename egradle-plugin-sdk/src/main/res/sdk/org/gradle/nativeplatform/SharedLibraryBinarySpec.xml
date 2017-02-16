@@ -30,6 +30,7 @@
 </description>
         <parameter type="java.io.File" name="sharedLibraryLinkFile"/>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeLibraryBinarySpec"/>
     <property name="sharedLibraryFile" type="java.io.File">
         <description> 
  The shared library file. 

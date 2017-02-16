@@ -19,6 +19,8 @@
     <method name="setImplementationClass" returnType="void">
         <parameter type="java.lang.String" name="implementationClass"/>
     </method>
+    <interface name="java.io.Serializable"/>
+    <interface name="org.gradle.api.Named"/>
     <property name="id" type="java.lang.String"/>
     <property name="implementationClass" type="java.lang.String"/>
     <property name="name" type="java.lang.String"/>

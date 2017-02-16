@@ -114,6 +114,7 @@
         <parameter type="java.lang.String" name="pluginId"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
+    <interface name="org.gradle.api.plugins.PluginCollection"/>
     <property name="at" type="T">
         <description> 
  Returns a plugin with the specified type if this plugin has been used in the project. You can use the Groovy 

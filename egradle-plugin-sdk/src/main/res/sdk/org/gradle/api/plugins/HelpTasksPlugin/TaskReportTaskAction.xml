@@ -3,4 +3,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.diagnostics.TaskReportTask" name="task"/>
     </method>
+    <interface name="org.gradle.api.Action"/>
 </type>

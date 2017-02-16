@@ -78,6 +78,8 @@
 </description>
         <parameter type="java.lang.String" name="main"/>
     </method>
+    <interface name="org.gradle.process.BaseExecSpec"/>
+    <interface name="org.gradle.process.JavaForkOptions"/>
     <property name="args" type="java.util.List">
         <description> 
  Returns the arguments passed to the main class to be executed. 

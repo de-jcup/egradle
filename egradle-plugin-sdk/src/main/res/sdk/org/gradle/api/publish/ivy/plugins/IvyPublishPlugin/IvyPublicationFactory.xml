@@ -3,4 +3,5 @@
     <method name="create" returnType="org.gradle.api.publish.ivy.IvyPublication">
         <parameter type="java.lang.String" name="name"/>
     </method>
+    <interface name="org.gradle.api.NamedDomainObjectFactory"/>
 </type>

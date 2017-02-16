@@ -3,4 +3,5 @@
     <description> 
  LanguageOutputType marking object file output type. 
  </description>
+    <interface name="org.gradle.platform.base.TransformationFileType"/>
 </type>

@@ -71,4 +71,5 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.NamedDomainObjectContainer"/>
 </type>

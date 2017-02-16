@@ -23,6 +23,7 @@
 </description>
         <parameter type="boolean" name="withMessages"/>
     </method>
+    <interface name="org.gradle.api.reporting.SingleFileReport"/>
     <property name="withMessages" type="boolean">
         <description> 
  Whether or not FindBugs should generate XML augmented with human-readable messages. 

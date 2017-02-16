@@ -65,6 +65,7 @@
         <parameter type="java.util.Set" name="sources"/>
     </method>
     <method name="toString" returnType="java.lang.String"/>
+    <interface name="org.gradle.plugins.ide.idea.model.Dependency"/>
     <property name="attributeMapForScopeAndExported" type="java.util.Map"/>
     <property name="classes" type="java.util.Set">
         <description> 

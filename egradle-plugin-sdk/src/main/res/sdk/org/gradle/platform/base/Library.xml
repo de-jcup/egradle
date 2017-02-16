@@ -3,4 +3,5 @@
     <description> 
  A library that can be linked into or depended on by another software element. 
 </description>
+    <interface name="org.gradle.api.component.Component"/>
 </type>

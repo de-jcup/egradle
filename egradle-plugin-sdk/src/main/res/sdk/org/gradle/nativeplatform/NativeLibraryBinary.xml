@@ -6,6 +6,7 @@
     <method name="getHeaderDirs" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getLinkFiles" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getRuntimeFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <interface name="org.gradle.nativeplatform.NativeBinary"/>
     <property name="headerDirs" type="org.gradle.api.file.FileCollection"/>
     <property name="linkFiles" type="org.gradle.api.file.FileCollection"/>
     <property name="runtimeFiles" type="org.gradle.api.file.FileCollection"/>

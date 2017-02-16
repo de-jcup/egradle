@@ -15,4 +15,5 @@
  } 
  &lt;/pre&gt; 
 </description>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
 </type>

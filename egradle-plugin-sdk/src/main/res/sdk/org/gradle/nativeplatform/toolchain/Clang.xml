@@ -3,4 +3,5 @@
     <description> 
  The &lt;a href="http://clang.llvm.org"&gt;Clang&lt;/a&gt; tool chain. 
 </description>
+    <interface name="org.gradle.nativeplatform.toolchain.GccCompatibleToolChain"/>
 </type>

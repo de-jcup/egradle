@@ -173,6 +173,7 @@
     <method name="write" returnType="void">
         <parameter type="java.io.File" name="outputFile"/>
     </method>
+    <interface name="org.gradle.external.javadoc.MinimalJavadocOptions"/>
     <property name="bootClasspath" type="java.util.List"/>
     <property name="breakIterator" type="boolean"/>
     <property name="classpath" type="java.util.List"/>

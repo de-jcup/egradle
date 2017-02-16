@@ -23,6 +23,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#DIRECTORY'&gt;Report.OutputType#DIRECTORY&lt;/a&gt; 
 </description>
     </method>
+    <interface name="org.gradle.api.reporting.ConfigurableReport"/>
     <property name="destination" type="java.io.File"/>
     <property name="entryPoint" type="java.io.File">
         <description> 

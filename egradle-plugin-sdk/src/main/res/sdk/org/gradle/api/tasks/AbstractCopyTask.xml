@@ -285,6 +285,8 @@
 </description>
         <parameter type="org.gradle.api.file.CopySpec" name="sourceSpecs"/>
     </method>
+    <interface name="org.gradle.api.file.CopySpec"/>
+    <interface name="org.gradle.api.internal.file.copy.CopySpecSource"/>
     <property name="caseSensitive" type="boolean">
         <description> 
  {@inheritDoc} 

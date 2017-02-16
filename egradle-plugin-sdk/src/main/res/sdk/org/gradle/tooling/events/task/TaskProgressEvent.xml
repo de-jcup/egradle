@@ -12,6 +12,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying task operation. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.ProgressEvent"/>
     <property name="descriptor" type="org.gradle.tooling.events.task.TaskOperationDescriptor">
         <description> 
  Returns the description of the task for which progress is reported. 

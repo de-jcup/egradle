@@ -126,6 +126,7 @@
 </description>
         <parameter type="java.lang.Integer" name="mode"/>
     </method>
+    <interface name="org.gradle.api.file.ContentFilterable"/>
     <property name="dirMode" type="java.lang.Integer">
         <description> 
  Returns the Unix permissions to use for the target directories. &lt;a href='type://null'&gt;null&lt;/a&gt; means that existing 

@@ -42,6 +42,7 @@
 </description>
         <parameter type="java.lang.Object" name="pomDir"/>
     </method>
+    <interface name="org.gradle.api.publication.maven.internal.MavenPomMetaInfoProvider"/>
     <property name="conf2ScopeMappings" type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer">
         <description> 
  Returns the set of rules for how to map Gradle dependencies to Maven scopes. 

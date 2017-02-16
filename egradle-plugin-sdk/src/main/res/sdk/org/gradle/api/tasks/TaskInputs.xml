@@ -118,6 +118,7 @@
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
+    <interface name="org.gradle.api.tasks.CompatibilityAdapterForTaskInputs"/>
     <property name="files" type="org.gradle.api.file.FileCollection">
         <description> 
  Returns the input files of this task. 

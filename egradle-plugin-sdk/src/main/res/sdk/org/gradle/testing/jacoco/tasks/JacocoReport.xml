@@ -156,6 +156,7 @@
 </description>
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSets"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
     <property name="additionalClassDirs" type="org.gradle.api.file.FileCollection">
         <description> 
  Additional class dirs that coverage data should be reported for. 

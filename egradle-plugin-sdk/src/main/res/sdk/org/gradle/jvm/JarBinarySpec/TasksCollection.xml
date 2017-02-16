@@ -8,6 +8,7 @@
  The jar task used to create an archive for this binary. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
     <property name="jar" type="org.gradle.api.Task">
         <description> 
  The jar task used to create an archive for this binary. 

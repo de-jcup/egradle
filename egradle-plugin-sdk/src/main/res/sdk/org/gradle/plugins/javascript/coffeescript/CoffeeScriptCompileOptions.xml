@@ -4,5 +4,6 @@
     <method name="setEncoding" returnType="void">
         <parameter type="java.lang.String" name="encoding"/>
     </method>
+    <interface name="java.io.Serializable"/>
     <property name="encoding" type="java.lang.String"/>
 </type>

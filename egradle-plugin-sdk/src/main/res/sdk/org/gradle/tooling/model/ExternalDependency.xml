@@ -42,6 +42,7 @@
  @since 2.5 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Dependency"/>
     <property name="exported" type="boolean">
         <description> 
  Marks this dependency as exported. 

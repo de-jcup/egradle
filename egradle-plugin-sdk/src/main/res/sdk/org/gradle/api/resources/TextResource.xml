@@ -55,6 +55,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input properties registered when this resource is used as task input 
 </description>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
     <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency"/>
     <property name="inputFiles" type="org.gradle.api.file.FileCollection">
         <description> 

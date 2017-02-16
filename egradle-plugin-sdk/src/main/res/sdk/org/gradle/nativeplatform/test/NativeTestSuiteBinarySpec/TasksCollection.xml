@@ -13,6 +13,7 @@
  The link task. 
 </description>
     </method>
+    <interface name="org.gradle.testing.base.TestSuiteTaskCollection"/>
     <property name="install" type="org.gradle.api.Task">
         <description> 
  The install task. 

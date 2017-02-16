@@ -19,6 +19,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
     <property name="exported" type="boolean">
         <description> 
  Marks this container as exported. 

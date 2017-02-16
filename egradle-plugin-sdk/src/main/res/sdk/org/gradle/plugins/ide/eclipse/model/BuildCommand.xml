@@ -16,6 +16,7 @@
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="toString" returnType="java.lang.String"/>
+    <interface name="java.io.Serializable"/>
     <property name="arguments" type="java.util.Map"/>
     <property name="name" type="java.lang.String"/>
 </type>

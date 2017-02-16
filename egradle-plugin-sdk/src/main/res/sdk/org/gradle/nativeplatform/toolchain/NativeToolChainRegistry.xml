@@ -3,4 +3,6 @@
     <description> 
  A container for &lt;a href='type://NativeToolChain'&gt;NativeToolChain&lt;/a&gt;s. 
 </description>
+    <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
+    <interface name="org.gradle.platform.base.ToolChainRegistry"/>
 </type>

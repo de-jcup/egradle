@@ -36,6 +36,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The id of the client module 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.ExternalModuleDependency"/>
     <property name="dependencies" type="java.util.Set">
         <description> 
  Returns all the dependencies added to the client module. 

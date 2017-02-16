@@ -12,4 +12,5 @@
     <method name="beforeExecute" returnType="void">
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
+    <interface name="org.gradle.api.execution.TaskExecutionListener"/>
 </type>

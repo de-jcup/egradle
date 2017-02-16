@@ -24,6 +24,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) XML report 
 </description>
     </method>
+    <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="csv" type="org.gradle.api.reporting.SingleFileReport">
         <description> 
  The JaCoCo (single file) CSV report 

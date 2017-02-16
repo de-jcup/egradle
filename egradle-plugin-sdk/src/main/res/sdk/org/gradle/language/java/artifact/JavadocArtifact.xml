@@ -5,4 +5,5 @@
  
  @since 2.0 
 </description>
+    <interface name="org.gradle.api.component.Artifact"/>
 </type>

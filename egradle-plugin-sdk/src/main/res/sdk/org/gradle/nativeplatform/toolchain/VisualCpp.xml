@@ -31,6 +31,7 @@
 </description>
         <parameter type="java.lang.Object" name="installDir"/>
     </method>
+    <interface name="org.gradle.nativeplatform.toolchain.NativeToolChain"/>
     <property name="installDir" type="java.io.File">
         <description> 
  The directory where Visual Studio or Visual C++ is installed. 

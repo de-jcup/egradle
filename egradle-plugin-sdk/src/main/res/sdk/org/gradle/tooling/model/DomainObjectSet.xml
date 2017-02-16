@@ -21,6 +21,7 @@
 </description>
         <parameter type="int" name="index"/>
     </method>
+    <interface name="java.util.Set"/>
     <property name="all" type="java.util.List">
         <description> 
  Returns the elements of this set in the set's iteration order. 

@@ -22,6 +22,7 @@
 </description>
         <parameter type="org.gradle.platform.base.ComponentSpec" name="testedComponent"/>
     </method>
+    <interface name="org.gradle.platform.base.GeneralComponentSpec"/>
     <property name="testedComponent" type="org.gradle.platform.base.ComponentSpec">
         <description> 
  The tested component. 

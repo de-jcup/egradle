@@ -57,6 +57,8 @@
  @since 1.0-milestone-3 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.HasGradleProject"/>
+    <interface name="org.gradle.tooling.model.HierarchicalElement"/>
     <property name="children" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  {@inheritDoc} 

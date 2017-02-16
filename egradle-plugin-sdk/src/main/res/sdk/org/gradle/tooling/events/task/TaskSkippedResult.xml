@@ -12,6 +12,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the message describing the skip reason 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.SkippedResult"/>
+    <interface name="org.gradle.tooling.events.task.TaskOperationResult"/>
     <property name="skipMessage" type="java.lang.String">
         <description> 
  Returns a message describing the reason for skipping the task. 

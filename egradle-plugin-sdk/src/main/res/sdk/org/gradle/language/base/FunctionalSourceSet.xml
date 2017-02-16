@@ -4,4 +4,5 @@
  A container holding &lt;a href='type://LanguageSourceSet'&gt;LanguageSourceSet&lt;/a&gt;s with a similar function 
  (production code, test code, etc.). 
 </description>
+    <interface name="org.gradle.model.ModelMap"/>
 </type>

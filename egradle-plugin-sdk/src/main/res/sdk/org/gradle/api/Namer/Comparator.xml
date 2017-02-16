@@ -11,4 +11,5 @@
         <parameter type="java.lang.Object" name="obj"/>
     </method>
     <method name="hashCode" returnType="int"/>
+    <interface name="java.util.Comparator"/>
 </type>

@@ -13,6 +13,8 @@
  {@inheritDoc} 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeBinarySpec"/>
+    <interface name="org.gradle.platform.base.LibraryBinarySpec"/>
     <property name="component" type="org.gradle.nativeplatform.NativeLibrarySpec">
         <description> 
  {@inheritDoc} 

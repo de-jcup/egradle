@@ -102,6 +102,8 @@
     </method>
     <method name="segmentIterator" returnType="java.util.ListIterator"/>
     <method name="toString" returnType="java.lang.String"/>
+    <interface name="java.io.Serializable"/>
+    <interface name="java.lang.Comparable"/>
     <property name="file" type="java.io.File"/>
     <property name="lastName" type="java.lang.String"/>
     <property name="parent" type="org.gradle.api.file.RelativePath">

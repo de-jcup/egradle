@@ -9,4 +9,5 @@
     <method name="forType" returnType="org.gradle.api.Namer">
         <parameter type="java.lang.Class" name="type"/>
     </method>
+    <interface name="org.gradle.api.Namer"/>
 </type>

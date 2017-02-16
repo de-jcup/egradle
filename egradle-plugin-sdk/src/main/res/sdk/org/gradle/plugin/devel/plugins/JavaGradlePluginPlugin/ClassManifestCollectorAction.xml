@@ -6,4 +6,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.file.FileCopyDetails" name="fileCopyDetails"/>
     </method>
+    <interface name="org.gradle.api.Action"/>
 </type>

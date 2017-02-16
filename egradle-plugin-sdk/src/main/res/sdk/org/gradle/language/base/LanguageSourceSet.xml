@@ -12,6 +12,7 @@
  The source files. 
 </description>
     </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
     <property name="parentName" type="java.lang.String"/>
     <property name="source" type="org.gradle.api.file.SourceDirectorySet">
         <description> 

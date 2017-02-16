@@ -40,6 +40,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects. 
 </description>
     </method>
+    <interface name="org.gradle.api.plugins.ExtensionContainer"/>
     <property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject">
         <description> 
  Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this 

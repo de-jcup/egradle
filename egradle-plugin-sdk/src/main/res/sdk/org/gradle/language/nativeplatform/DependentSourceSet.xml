@@ -44,6 +44,7 @@
 </description>
         <parameter type="java.lang.String" name="header"/>
     </method>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="libs" type="java.util.Collection">
         <description> 
  The libraries that this source set requires. 

@@ -4,5 +4,6 @@
     <method name="setInstallName" returnType="void">
         <parameter type="java.lang.String" name="installName"/>
     </method>
+    <interface name="org.gradle.nativeplatform.internal.SharedLibraryLinkerSpec"/>
     <property name="installName" type="java.lang.String"/>
 </type>

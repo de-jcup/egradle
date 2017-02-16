@@ -1,5 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.LinkedHashSet;
@@ -8,13 +9,6 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.codeassist.dsl.Plugin;
-import de.jcup.egradle.codeassist.dsl.PluginMerger;
-import de.jcup.egradle.codeassist.dsl.Reason;
-import de.jcup.egradle.codeassist.dsl.ReasonImpl;
-import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.TypeExtension;
-import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
 
 public class PluginMergerTest {

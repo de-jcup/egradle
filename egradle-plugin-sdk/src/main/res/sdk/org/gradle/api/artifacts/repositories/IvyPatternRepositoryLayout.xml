@@ -38,6 +38,7 @@
 </description>
         <parameter type="boolean" name="m2compatible"/>
     </method>
+    <interface name="org.gradle.api.artifacts.repositories.RepositoryLayout"/>
     <property name="m2Compatible" type="boolean">
         <description> 
  Tells whether a Maven style layout is to be used for the 'organisation' part, replacing any dots with forward slashes. 

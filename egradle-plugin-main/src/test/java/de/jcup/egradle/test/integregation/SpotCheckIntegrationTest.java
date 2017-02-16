@@ -19,6 +19,15 @@ public class SpotCheckIntegrationTest {
 	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
 	@Test
+	public void jar_has_interface_copy_spec(){
+		/* execute */
+		Type jarType = components.getGradleDslProvider().getType("org.gradle.api.tasks.bundling.Jar");
+
+		/* test */
+		assertType(jarType).hasInterface("org.gradle.api.file.CopySpec");
+	}
+	
+	@Test
 	public void sourceset_fullname_has_mixin_parts_from_scala() {
 		/* execute */
 		Type sourceSetType = components.getGradleDslProvider().getType("org.gradle.api.tasks.SourceSet");

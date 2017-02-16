@@ -76,6 +76,8 @@
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
+    <interface name="org.gradle.api.tasks.TaskOutputs"/>
+    <interface name="org.gradle.api.tasks.TaskPropertyBuilder"/>
     <property name="files" type="org.gradle.api.file.FileCollection">
         <description> 
  {@inheritDoc} 

@@ -112,6 +112,8 @@
 </description>
         <parameter type="org.gradle.api.file.RelativePath" name="path"/>
     </method>
+    <interface name="org.gradle.api.file.ContentFilterable"/>
+    <interface name="org.gradle.api.file.FileTreeElement"/>
     <property name="duplicatesStrategy" type="org.gradle.api.file.DuplicatesStrategy">
         <description> 
  The strategy to use if there is already a file at this file's destination. 

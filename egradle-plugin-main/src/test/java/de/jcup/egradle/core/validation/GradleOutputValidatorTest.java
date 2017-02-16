@@ -23,6 +23,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.core.Constants;
 
 public class GradleOutputValidatorTest {

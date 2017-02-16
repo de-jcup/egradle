@@ -22,6 +22,7 @@
         <parameter type="java.lang.String" name="keyId"/>
     </method>
     <method name="toString" returnType="java.lang.String"/>
+    <interface name="java.lang.Comparable"/>
     <property name="asHex" type="java.lang.String"/>
     <property name="asLong" type="long"/>
 </type>

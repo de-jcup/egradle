@@ -5,4 +5,6 @@
  
  @since 2.5 
 </description>
+    <interface name="org.gradle.tooling.events.StartEvent"/>
+    <interface name="org.gradle.tooling.events.task.TaskProgressEvent"/>
 </type>

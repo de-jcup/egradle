@@ -27,6 +27,7 @@
     </method>
     <method name="getTaskPrefix" returnType="java.lang.String"/>
     <method name="getTaskType" returnType="java.lang.Class"/>
+    <interface name="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
     <property name="taskPrefix" type="java.lang.String"/>
     <property name="taskType" type="java.lang.Class"/>
 </type>

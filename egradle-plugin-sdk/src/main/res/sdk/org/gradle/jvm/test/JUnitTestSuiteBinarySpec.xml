@@ -10,6 +10,7 @@
     <method name="setjUnitVersion" returnType="void">
         <parameter type="java.lang.String" name="version"/>
     </method>
+    <interface name="org.gradle.jvm.test.JvmTestSuiteBinarySpec"/>
     <property name="jUnitVersion" type="java.lang.String"/>
     <property name="testSuite" type="org.gradle.jvm.test.JUnitTestSuiteSpec"/>
 </type>

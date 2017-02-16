@@ -26,6 +26,7 @@
 </description>
         <parameter type="boolean" name="changing"/>
     </method>
+    <interface name="org.gradle.api.artifacts.ExternalDependency"/>
     <property name="changing" type="boolean">
         <description> 
  Returns whether or not Gradle should always check for a change in the remote repository. 

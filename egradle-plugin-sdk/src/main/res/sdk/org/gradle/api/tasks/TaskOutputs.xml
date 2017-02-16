@@ -84,6 +84,7 @@
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="upToDateSpec"/>
     </method>
+    <interface name="org.gradle.api.tasks.CompatibilityAdapterForTaskOutputs"/>
     <property name="files" type="org.gradle.api.file.FileCollection">
         <description> 
  Returns the output files of this task. 

@@ -49,6 +49,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path for this source directory. Does not return null. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.SourceDirectory"/>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
     <property name="classpathAttributes" type="org.gradle.tooling.model.DomainObjectSet">
         <description> 
  {@inheritDoc} 

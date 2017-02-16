@@ -106,6 +106,7 @@
 </description>
         <parameter type="org.gradle.tooling.CancellationToken" name="cancellationToken"/>
     </method>
+    <interface name="org.gradle.tooling.LongRunningOperation"/>
     <property name="colorOutput" type="boolean">
         <description> 
  {@inheritDoc} 

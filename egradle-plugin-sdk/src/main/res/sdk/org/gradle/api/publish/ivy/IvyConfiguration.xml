@@ -23,6 +23,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of extended configurations. 
 </description>
     </method>
+    <interface name="org.gradle.api.Named"/>
     <property name="extends" type="java.util.Set">
         <description> 
  The set of names of extended configurations, added via &lt;a href='type://IvyConfiguration#extend(String)'&gt;#extend(String)&lt;/a&gt;. 

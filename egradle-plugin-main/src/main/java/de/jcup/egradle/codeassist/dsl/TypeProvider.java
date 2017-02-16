@@ -1,7 +1,5 @@
 package de.jcup.egradle.codeassist.dsl;
 
-import de.jcup.egradle.codeassist.CodeCompletionService;
-
 /**
  * A provider for types
  * @author Albert Tregnaghi

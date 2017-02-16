@@ -8,6 +8,7 @@
  The run task. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
     <property name="run" type="org.gradle.api.Task">
         <description> 
  The run task. 

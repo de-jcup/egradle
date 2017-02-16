@@ -67,6 +67,8 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
+    <interface name="org.gradle.api.NamedDomainObjectList"/>
+    <interface name="org.gradle.util.Configurable"/>
     <property name="at" type="org.gradle.api.artifacts.repositories.ArtifactRepository">
         <description> 
  {@inheritDoc} 

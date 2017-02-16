@@ -17,6 +17,8 @@
  Returns the publications for this project. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.Model"/>
+    <interface name="org.gradle.tooling.model.ProjectModel"/>
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
         <description> 
  Returns the identifier for the Gradle project that these invocations originate from. 

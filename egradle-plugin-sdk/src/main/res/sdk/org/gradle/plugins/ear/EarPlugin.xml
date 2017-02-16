@@ -35,4 +35,5 @@
         <parameter type="org.gradle.api.Project" name="project"/>
         <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earConvention"/>
     </method>
+    <interface name="org.gradle.api.Plugin"/>
 </type>

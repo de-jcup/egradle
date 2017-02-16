@@ -2,8 +2,6 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import java.util.List;
 
-import org.eclipse.jface.text.IInformationControl;
-
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
@@ -11,7 +9,6 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.LinkToTypeConverter;
 import de.jcup.egradle.core.api.LinkToTypeConverter.LinkData;
 import de.jcup.egradle.eclipse.gradleeditor.control.BrowserEGradleLinkListener;

@@ -14,6 +14,7 @@
 </description>
         <parameter type="java.lang.String" name="baseName"/>
     </method>
+    <interface name="org.gradle.platform.base.ComponentSpec"/>
     <property name="baseName" type="java.lang.String">
         <description> 
  The name that is used to construct the output file names when building this component. 

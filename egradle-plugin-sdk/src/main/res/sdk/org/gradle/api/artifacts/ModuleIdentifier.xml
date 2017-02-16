@@ -17,6 +17,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
 </description>
     </method>
+    <interface name="java.io.Serializable"/>
     <property name="group" type="java.lang.String">
         <description> 
  The group of the module. 

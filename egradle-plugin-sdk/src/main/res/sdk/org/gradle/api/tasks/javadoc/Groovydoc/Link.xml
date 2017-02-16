@@ -21,6 +21,7 @@
         <parameter type="java.lang.String" name="value"/>
         <parameter type="java.lang.String" name="message"/>
     </method>
+    <interface name="java.io.Serializable"/>
     <property name="packages" type="java.util.List">
         <description> 
  Returns a list of package prefixes to be linked with an external site. 

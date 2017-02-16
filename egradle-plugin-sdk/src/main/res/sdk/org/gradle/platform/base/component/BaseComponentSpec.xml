@@ -6,6 +6,7 @@
 </description>
     <method name="getBinaries" returnType="org.gradle.model.ModelMap"/>
     <method name="getSources" returnType="org.gradle.model.ModelMap"/>
+    <interface name="org.gradle.platform.base.GeneralComponentSpec"/>
     <property name="binaries" type="org.gradle.model.ModelMap"/>
     <property name="sources" type="org.gradle.model.ModelMap"/>
 </type>

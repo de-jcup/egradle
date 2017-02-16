@@ -70,6 +70,8 @@
 </description>
         <parameter type="boolean" name="enabled"/>
     </method>
+    <interface name="java.io.Serializable"/>
+    <interface name="org.gradle.util.Configurable"/>
     <property name="destination" type="java.io.File">
         <description> 
  The location on the filesystem of the report when it is generated. 

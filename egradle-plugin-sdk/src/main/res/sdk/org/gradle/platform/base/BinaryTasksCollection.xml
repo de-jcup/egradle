@@ -26,6 +26,7 @@
         <parameter type="java.lang.String" name="verb"/>
         <parameter type="java.lang.String" name="object"/>
     </method>
+    <interface name="org.gradle.api.DomainObjectSet"/>
     <property name="build" type="org.gradle.api.Task">
         <description> 
  The task that can be used to assemble this binary. 

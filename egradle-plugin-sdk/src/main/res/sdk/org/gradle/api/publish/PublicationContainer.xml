@@ -25,4 +25,5 @@
  @see Publication 
  @see PublishingExtension 
 </description>
+    <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
 </type>

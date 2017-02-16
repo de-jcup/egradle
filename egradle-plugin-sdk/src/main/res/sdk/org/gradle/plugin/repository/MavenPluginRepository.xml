@@ -23,6 +23,8 @@
 </description>
         <parameter type="java.lang.Object" name="url"/>
     </method>
+    <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
+    <interface name="org.gradle.plugin.repository.PluginRepository"/>
     <property name="url" type="java.net.URI">
         <description> 
  The base URL of this repository. This URL is used to find Gradle plugins. 

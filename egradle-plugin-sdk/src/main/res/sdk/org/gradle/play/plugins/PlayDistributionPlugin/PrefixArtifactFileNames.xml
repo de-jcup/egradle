@@ -27,5 +27,7 @@
     <method name="shouldBeRenamed" returnType="boolean">
         <parameter type="java.io.File" name="file"/>
     </method>
+    <interface name="com.google.common.base.Function"/>
+    <interface name="org.gradle.api.Action"/>
     <property name="resolvedArtifacts" type="java.util.Set"/>
 </type>

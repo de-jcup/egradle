@@ -18,6 +18,7 @@
  Returns the &lt;a href='type://org.gradle.nativeplatform.platform.NativePlatform'&gt;org.gradle.nativeplatform.platform.NativePlatform&lt;/a&gt; that this binary is targeted to run on. 
 </description>
     </method>
+    <interface name="org.gradle.platform.base.Binary"/>
     <property name="buildType" type="org.gradle.nativeplatform.BuildType">
         <description> 
  Returns the &lt;a href='type://org.gradle.nativeplatform.BuildType'&gt;org.gradle.nativeplatform.BuildType&lt;/a&gt; used to construct this binary. 

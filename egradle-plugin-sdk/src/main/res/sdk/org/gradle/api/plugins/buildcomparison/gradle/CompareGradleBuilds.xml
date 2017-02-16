@@ -101,6 +101,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
     <property name="ignoreFailures" type="boolean">
         <description> 

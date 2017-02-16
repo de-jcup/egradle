@@ -10,6 +10,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency HTML report 
 </description>
     </method>
+    <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="html" type="org.gradle.api.reporting.DirectoryReport">
         <description> 
  The dependency HTML report 

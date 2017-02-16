@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.sdk.SDK;
-import de.jcup.egradle.sdk.internal.ContainedResourcesCopyingSDK;
 
 public class ContainedResourcesCopyingSDKTest {
 

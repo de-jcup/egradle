@@ -23,4 +23,5 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
+    <interface name="org.gradle.platform.base.DependencySpecBuilder"/>
 </type>

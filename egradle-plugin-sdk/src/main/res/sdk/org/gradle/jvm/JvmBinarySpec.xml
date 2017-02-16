@@ -47,6 +47,7 @@
 </description>
         <parameter type="org.gradle.jvm.toolchain.JavaToolChain" name="toolChain"/>
     </method>
+    <interface name="org.gradle.platform.base.BinarySpec"/>
     <property name="classesDir" type="java.io.File">
         <description> 
  The classes directory for this binary. 

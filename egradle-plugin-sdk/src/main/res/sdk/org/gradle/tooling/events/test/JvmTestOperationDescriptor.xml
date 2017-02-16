@@ -34,6 +34,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test suite. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.test.TestOperationDescriptor"/>
     <property name="className" type="java.lang.String">
         <description> 
  Returns the name of the test class, if any. 

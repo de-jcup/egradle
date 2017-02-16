@@ -82,6 +82,7 @@
 </description>
         <parameter type="org.gradle.api.file.FileVisitor" name="visitor"/>
     </method>
+    <interface name="org.gradle.api.file.FileCollection"/>
     <property name="asFileTree" type="org.gradle.api.file.FileTree">
         <description> 
  Returns this. 

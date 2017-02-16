@@ -20,6 +20,7 @@
  @since 2.14 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.idea.IdeaDependency"/>
     <property name="dependencyModule" type="org.gradle.tooling.model.idea.IdeaModule">
         <description> 
  returns dependency module, or null if the dependency module is not in the same Gradle build. 

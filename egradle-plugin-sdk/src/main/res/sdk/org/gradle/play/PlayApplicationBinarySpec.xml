@@ -41,6 +41,7 @@
 </description>
     </method>
     <method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"/>
+    <interface name="org.gradle.platform.base.ApplicationBinarySpec"/>
     <property name="application" type="org.gradle.play.PlayApplicationSpec">
         <description> 
  {@inheritDoc} 

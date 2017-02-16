@@ -22,8 +22,6 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.other.OtherTestUtil;
-import de.jcup.egradle.other.sdkbuilder.LineResolver;
-import de.jcup.egradle.other.sdkbuilder.SDKBuilder;
 
 public class SDKBuilderTest {
 	private SDKBuilder preparatorToTest;

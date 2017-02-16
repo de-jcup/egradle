@@ -11,6 +11,8 @@
 </description>
     </method>
     <method name="getTestedComponent" returnType="org.gradle.jvm.JvmComponentSpec"/>
+    <interface name="org.gradle.jvm.JvmComponentSpec"/>
+    <interface name="org.gradle.testing.base.TestSuiteSpec"/>
     <property name="dependencies" type="org.gradle.platform.base.DependencySpecContainer">
         <description> 
  The set of dependencies applicable to the entire test suite. 

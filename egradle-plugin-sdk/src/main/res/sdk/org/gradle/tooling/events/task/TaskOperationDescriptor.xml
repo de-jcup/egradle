@@ -10,6 +10,7 @@
  Returns the path of the task. 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.OperationDescriptor"/>
     <property name="taskPath" type="java.lang.String">
         <description> 
  Returns the path of the task. 

@@ -13,6 +13,7 @@
  The shared library link file. 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.NativeLibraryBinary"/>
     <property name="sharedLibraryFile" type="java.io.File">
         <description> 
  The shared library file. 

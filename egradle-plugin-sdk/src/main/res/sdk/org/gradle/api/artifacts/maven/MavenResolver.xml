@@ -28,6 +28,8 @@
  located. This property is populated on demand. 
 </description>
     </method>
+    <interface name="org.gradle.api.artifacts.maven.PomFilterContainer"/>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
     <property name="settings" type="java.lang.Object">
         <description> 
  Returns a Maven settings object. This can be used for example to figure out where the local repository is 

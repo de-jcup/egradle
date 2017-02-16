@@ -11,6 +11,7 @@
     <method name="getOutputType" returnType="java.lang.Class"/>
     <method name="getSourceSetType" returnType="java.lang.Class"/>
     <method name="getTransformTask" returnType="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+    <interface name="org.gradle.language.base.internal.registry.LanguageTransform"/>
     <property name="binaryTools" type="java.util.Map"/>
     <property name="languageName" type="java.lang.String"/>
     <property name="outputType" type="java.lang.Class"/>

@@ -18,6 +18,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the finished task operation 
 </description>
     </method>
+    <interface name="org.gradle.tooling.events.FinishEvent"/>
+    <interface name="org.gradle.tooling.events.task.TaskProgressEvent"/>
     <property name="result" type="org.gradle.tooling.events.task.TaskOperationResult">
         <description> 
  Returns the result of the finished task operation. Currently, the result will be one of the following sub-types: 

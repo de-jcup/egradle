@@ -132,6 +132,7 @@
         <parameter type="java.lang.String" name="message"/>
         <parameter type="java.lang.Throwable" name="throwable"/>
     </method>
+    <interface name="org.slf4j.Logger"/>
     <property name="enabled" type="boolean">
         <description> 
  Returns true if the given log level is enabled for this logger. 

@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import de.jcup.egradle.codeassist.Proposal;
-import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
-import de.jcup.egradle.codeassist.VariableNameProposalFactory;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 

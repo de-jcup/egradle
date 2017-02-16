@@ -122,6 +122,8 @@
     <method name="setShowViolations" returnType="void">
         <parameter type="boolean" name="showViolations"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="checkstyleClasspath" type="org.gradle.api.file.FileCollection">
         <description> 

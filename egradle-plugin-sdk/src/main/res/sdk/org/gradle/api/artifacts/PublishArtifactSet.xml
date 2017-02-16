@@ -4,5 +4,7 @@
  A set of artifacts to be published. 
 </description>
     <method name="getFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <interface name="org.gradle.api.Buildable"/>
+    <interface name="org.gradle.api.DomainObjectSet"/>
     <property name="files" type="org.gradle.api.file.FileCollection"/>
 </type>

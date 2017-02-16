@@ -13,6 +13,7 @@
  {@inheritDoc} 
 </description>
     </method>
+    <interface name="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec"/>
     <property name="component" type="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec">
         <description> 
  {@inheritDoc} 

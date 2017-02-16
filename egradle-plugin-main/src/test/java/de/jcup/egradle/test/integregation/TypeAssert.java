@@ -8,6 +8,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.TypeReference;
 
 public class TypeAssert {
 
@@ -111,6 +112,29 @@ public class TypeAssert {
 		}
 		if (!foundProperty){
 			fail("Did not found property :"+propertyName+" in type:"+type.getName());
+		}
+		return this;
+	}
+	
+	/**
+	 * Assert type has given interface and interface type is not null
+	 * @param interfaceName
+	 * @return assert object
+	 */
+	public TypeAssert hasInterface(String interfaceName) {
+		if (interfaceName==null){
+			throw new IllegalArgumentException("Testcase corrupt: interface name may not be null");
+		}
+		boolean found = false;
+		for (TypeReference ref: type.getInterfaces()){
+			if (interfaceName.equals(ref.getTypeAsString())){
+				found=true;
+				/* check type is set...*/
+				assertNotNull("Did found interface reference, but references does not contain type but null!",ref.getType());
+			}
+		}
+		if (!found){
+			fail("Did not found interface :"+interfaceName+" in type:"+type.getName());
 		}
 		return this;
 	}

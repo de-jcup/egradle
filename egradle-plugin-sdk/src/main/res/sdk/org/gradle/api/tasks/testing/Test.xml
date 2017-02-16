@@ -652,6 +652,10 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
+    <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
+    <interface name="org.gradle.process.JavaForkOptions"/>
     <property name="actorFactory" type="org.gradle.internal.actor.ActorFactory"/>
     <property name="allJvmArgs" type="java.util.List">
         <description> 

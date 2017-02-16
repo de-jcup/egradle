@@ -1490,6 +1490,9 @@
 </description>
         <parameter type="java.lang.Object" name="zipPath"/>
     </method>
+    <interface name="java.lang.Comparable"/>
+    <interface name="org.gradle.api.plugins.ExtensionAware"/>
+    <interface name="org.gradle.api.plugins.PluginAware"/>
     <property name="allTasks" type="java.util.Map">
         <description> 
  &lt;p&gt;Returns a map of the tasks contained in this project, and optionally its subprojects.&lt;/p&gt; 

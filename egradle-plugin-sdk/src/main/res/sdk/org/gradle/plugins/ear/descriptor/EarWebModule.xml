@@ -11,6 +11,7 @@
     <method name="setContextRoot" returnType="void">
         <parameter type="java.lang.String" name="contextRoot"/>
     </method>
+    <interface name="org.gradle.plugins.ear.descriptor.EarModule"/>
     <property name="contextRoot" type="java.lang.String">
         <description> 
  The context-root element specifies the context root of a web application. 

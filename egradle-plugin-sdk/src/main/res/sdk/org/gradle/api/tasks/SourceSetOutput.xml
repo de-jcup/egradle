@@ -124,6 +124,7 @@
 </description>
         <parameter type="java.lang.Object" name="resourcesDir"/>
     </method>
+    <interface name="org.gradle.api.file.FileCollection"/>
     <property name="classesDir" type="java.io.File">
         <description> 
  Returns the directory to assemble the compiled classes into. 

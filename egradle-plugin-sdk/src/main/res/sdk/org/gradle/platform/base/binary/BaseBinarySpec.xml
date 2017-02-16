@@ -46,6 +46,7 @@
     <method name="validate" returnType="org.gradle.platform.base.binary.BaseBinarySpec.BinaryInfo">
         <parameter type="org.gradle.platform.base.binary.BaseBinarySpec.BinaryInfo" name="info"/>
     </method>
+    <interface name="BinarySpecInternal"/>
     <property name="binaryBuildAbility" type="BinaryBuildAbility"/>
     <property name="buildAbility" type="BinaryBuildAbility"/>
     <property name="buildable" type="boolean"/>

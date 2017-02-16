@@ -20,5 +20,6 @@
     <method name="setTargetCompatibility" returnType="void">
         <parameter type="org.gradle.api.JavaVersion" name="targetCompatibility"/>
     </method>
+    <interface name="org.gradle.platform.base.Platform"/>
     <property name="targetCompatibility" type="org.gradle.api.JavaVersion"/>
 </type>

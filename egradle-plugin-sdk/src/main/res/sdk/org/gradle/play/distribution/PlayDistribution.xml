@@ -9,6 +9,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the binary 
 </description>
     </method>
+    <interface name="org.gradle.api.distribution.Distribution"/>
     <property name="binary" type="org.gradle.play.PlayApplicationBinarySpec">
         <description> 
  The binary this distribution is associated with 

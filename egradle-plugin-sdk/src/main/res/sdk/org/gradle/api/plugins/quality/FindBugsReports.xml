@@ -34,6 +34,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs XML report 
 </description>
     </method>
+    <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="emacs" type="org.gradle.api.reporting.SingleFileReport">
         <description> 
  The findbugs Emacs report 

@@ -100,4 +100,5 @@
 </description>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
     </method>
+    <interface name="org.gradle.tooling.ConfigurableLauncher"/>
 </type>

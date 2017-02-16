@@ -3,4 +3,5 @@
     <description> 
  An Ivy descriptor artifact. 
 </description>
+    <interface name="org.gradle.api.component.Artifact"/>
 </type>

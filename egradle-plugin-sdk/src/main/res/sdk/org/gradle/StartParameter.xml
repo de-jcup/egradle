@@ -412,6 +412,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
 </description>
     </method>
+    <interface name="java.io.Serializable"/>
+    <interface name="org.gradle.api.logging.configuration.LoggingConfiguration"/>
     <property name="allInitScripts" type="java.util.List">
         <description> 
  Returns all init scripts, including explicit init scripts and implicit init scripts. 

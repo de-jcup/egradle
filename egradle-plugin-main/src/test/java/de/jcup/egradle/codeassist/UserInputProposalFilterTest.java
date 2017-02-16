@@ -11,10 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.codeassist.Proposal;
-import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
-import de.jcup.egradle.codeassist.UserInputProposalFilter;
-
 public class UserInputProposalFilterTest {
 
 	private ProposalFactoryContentProvider mockedContentProvider;

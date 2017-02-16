@@ -19,16 +19,14 @@ import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
 import de.jcup.egradle.codeassist.dsl.ModifiableParameter;
 import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
 import de.jcup.egradle.codeassist.dsl.ModifiableType;
+import de.jcup.egradle.codeassist.dsl.ModifiableTypeReference;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.PluginMerger;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
-import de.jcup.egradle.codeassist.dsl.XMLMethod;
-import de.jcup.egradle.codeassist.dsl.XMLParameter;
-import de.jcup.egradle.codeassist.dsl.XMLProperty;
-import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.core.api.ErrorHandler;
 
 public class GradleDSLTypeProvider implements CodeCompletionService, RegistryListener, TypeProvider {
@@ -124,6 +122,8 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			return type;
 		}
 		ModifiableType modifiableType = (ModifiableType) type;
+		
+		/* inheritance */
 		String superTypeAsString = type.getSuperTypeAsString();
 		if (StringUtils.isNotBlank(superTypeAsString)) {
 			Type superType = getType(superTypeAsString);
@@ -131,9 +131,25 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 				modifiableType.inheritFrom(superType);
 			}
 		}
-
+		
+		/* adopt extensions and mixins */
 		getPluginMerger().merge(type, plugins);
 
+		/* resolve interface references and setup types */
+		for (TypeReference interfaceRef: modifiableType.getInterfaces()){
+			if (! (interfaceRef instanceof ModifiableTypeReference)){
+				continue;
+			}
+			ModifiableTypeReference modInterfaceRef = (ModifiableTypeReference) interfaceRef;
+			String interfaceTypeAsString = interfaceRef.getTypeAsString();
+			
+			if (StringUtils.isBlank(interfaceTypeAsString)){
+				continue;
+			}
+			Type resolvedInterfaceRefType = getType(interfaceTypeAsString);
+			modInterfaceRef.setType(resolvedInterfaceRefType);
+		}
+		
 		/* inititialize xml type */
 		for (Method m : type.getDefinedMethods()) {
 			if (!(m instanceof ModifiableMethod)) {

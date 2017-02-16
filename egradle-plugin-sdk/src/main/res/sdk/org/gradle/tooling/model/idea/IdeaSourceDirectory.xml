@@ -13,6 +13,7 @@
  @since 2.2 
 </description>
     </method>
+    <interface name="org.gradle.tooling.model.SourceDirectory"/>
     <property name="generated" type="boolean">
         <description> 
  Return &lt;a href='type://true'&gt;true&lt;/a&gt; if this source directory is generated. 

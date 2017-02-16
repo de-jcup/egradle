@@ -75,6 +75,8 @@
     <method name="setIncludes" returnType="org.gradle.api.tasks.util.PatternSet">
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
+    <interface name="org.gradle.api.tasks.AntBuilderAware"/>
+    <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="asExcludeSpec" type="org.gradle.api.specs.Spec"/>
     <property name="asIncludeSpec" type="org.gradle.api.specs.Spec"/>
     <property name="asSpec" type="org.gradle.api.specs.Spec"/>

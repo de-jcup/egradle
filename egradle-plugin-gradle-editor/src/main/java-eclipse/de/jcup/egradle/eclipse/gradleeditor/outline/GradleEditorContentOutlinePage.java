@@ -18,7 +18,6 @@ package de.jcup.egradle.eclipse.gradleeditor.outline;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;

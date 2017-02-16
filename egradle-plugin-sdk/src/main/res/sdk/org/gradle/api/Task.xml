@@ -650,6 +650,8 @@
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
+    <interface name="java.lang.Comparable"/>
+    <interface name="org.gradle.api.plugins.ExtensionAware"/>
     <property name="actions" type="java.util.List">
         <description> 
  &lt;p&gt;Returns the sequence of &lt;a href='type://Action'&gt;Action&lt;/a&gt; objects which will be executed by this task, in the order of 

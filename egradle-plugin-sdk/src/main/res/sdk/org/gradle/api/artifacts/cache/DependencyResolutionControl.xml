@@ -3,4 +3,5 @@
     <description> 
  Command methods for controlling dependency resolution via the DSL. 
 </description>
+    <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
 </type>

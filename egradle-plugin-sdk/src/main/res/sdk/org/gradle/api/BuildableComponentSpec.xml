@@ -22,6 +22,8 @@
 </description>
         <parameter type="org.gradle.api.Task" name="buildTask"/>
     </method>
+    <interface name="org.gradle.api.Buildable"/>
+    <interface name="org.gradle.platform.base.ComponentSpec"/>
     <property name="buildTask" type="org.gradle.api.Task">
         <description> 
  Returns the task responsible for building this component. 

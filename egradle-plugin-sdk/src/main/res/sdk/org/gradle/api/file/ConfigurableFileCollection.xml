@@ -62,6 +62,7 @@
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
+    <interface name="org.gradle.api.file.FileCollection"/>
     <property name="builtBy" type="java.util.Set">
         <description> 
  Returns the set of tasks which build the files of this collection. 

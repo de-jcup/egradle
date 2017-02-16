@@ -78,6 +78,7 @@
 </description>
         <parameter type="java.io.OutputStream" name="outputStream"/>
     </method>
+    <interface name="org.gradle.process.ProcessForkOptions"/>
     <property name="commandLine" type="java.util.List">
         <description> 
  Returns the full command line, including the executable plus its arguments. 

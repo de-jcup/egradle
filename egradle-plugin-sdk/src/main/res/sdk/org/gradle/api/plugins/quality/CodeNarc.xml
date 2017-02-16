@@ -85,6 +85,8 @@
     <method name="setMaxPriority3Violations" returnType="void">
         <parameter type="int" name="maxPriority3Violations"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="codenarcClasspath" type="org.gradle.api.file.FileCollection">
         <description> 

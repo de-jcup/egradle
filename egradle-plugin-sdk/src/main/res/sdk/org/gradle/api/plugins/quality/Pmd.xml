@@ -130,6 +130,8 @@
 </description>
         <parameter type="int" name="value"/>
     </method>
+    <interface name="org.gradle.api.reporting.Reporting"/>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="classpath" type="org.gradle.api.file.FileCollection">
         <description> 
