@@ -22,25 +22,27 @@ public class VariableNameProposalFactory extends AbstractProposalFactory {
 		if (model==null){
 			return null;
 		}
-		
+		Item modelNode = model.getItemAt(offset);
+		if (modelNode==null){
+			return null;
+		}
 		Set<Proposal> proposals = new LinkedHashSet<>();
 		
 		/* very easy (silly) first approach - just collect all variables without handling visibility etc.*/
 		ModelInspector inspector = new ModelInspector();
-		List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, model);
+		List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, modelNode);
 		for (Item variableItem: allVariables){
 			proposals.add(new ItemProposalImpl(variableItem));
 		}
-		List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, model);
+		List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, modelNode);
 		for (Item assignmentItem: allAssignments){
 			proposals.add(new ItemProposalImpl(assignmentItem));
 		}
-		List<Item> allDefinedTasks = inspector.findAllItemsOfType(ItemType.TASK,model);
+		List<Item> allDefinedTasks = inspector.findAllItemsOfType(ItemType.TASK,modelNode);
 		for (Item definedTaskItem: allDefinedTasks){
 			proposals.add(new ItemProposalImpl(definedTaskItem));
 		}
 		
-		/* FIXME albert,02.01.2017: implementation must be aware about position - there should be no access to variables not already defined! */
 		/* FIXME albert,02.01.2017: Types are not handled correct. "java.lang.String" is not correct parsed in outline! */
 		return proposals;
 	}

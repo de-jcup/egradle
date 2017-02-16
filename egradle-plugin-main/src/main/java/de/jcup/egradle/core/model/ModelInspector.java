@@ -22,19 +22,28 @@ public class ModelInspector {
 			return Collections.emptyList();
 		}
 		List<Item> result = new ArrayList<>();
-		addItemsWithGivenTypeToList(result, model.getRoot(),type);
+		addItemsWithGivenTypeToList(result, model.getRoot(),type,true);
 		return result;
 	}
 
-	private void addItemsWithGivenTypeToList(List<Item> result, Item item, ItemType type) {
+	private void addItemsWithGivenTypeToList(List<Item> result, Item item, ItemType type, boolean recursive) {
 		if (type.equals(item.getItemType())){
 			result.add(item);
 		}
-		if (!item.hasChildren()){
+		if (!recursive || !item.hasChildren()){
 			return;
 		}
 		for (Item child : item.getChildren()){
-			addItemsWithGivenTypeToList(result,child, type);
+			addItemsWithGivenTypeToList(result,child, type,recursive);
 		}
+	}
+
+	public List<Item> findAllItemsOfType(ItemType type, Item node) {
+		if (type==null){
+			return Collections.emptyList();
+		}
+		List<Item> result = new ArrayList<>();
+		addItemsWithGivenTypeToList(result, node,type,true);
+		return result;
 	}
 }
