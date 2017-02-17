@@ -18,6 +18,8 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -31,6 +33,7 @@ import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKManager;
 
@@ -63,52 +66,29 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
-		codeCompletionRegistry.setErrorHandler(errorHandler);
+		long timeStart=System.currentTimeMillis();
+		
 		
 		SDK sdk = SDKManager.get().getCurrentSDK();
-		
-		
-		/* FIXME ATR, 14.02.2017: 14.02.2017: bundle resolving of folde does not seem to work. maybe its would be better
-		 * to do xz-packaging to a file and suport the file from SDK to this location and copy + unpack it to user.home
-		 * (when not already installed)
-		 *  */
-		System.out.println("current sdk:"+sdk);
+		boolean sdkInstalled=false;
 		if (! sdk.isInstalled()){
 			try{
 				sdk.install();
+				sdkInstalled=true;
 			}catch(IOException e){
 				EGradleUtil.log("Was not able install SDK:"+sdk.getVersion(),e);
 			}
 		}
-		File dslFolder = sdk.getSDKInstallationFolder();
-//		File dslFolder = fetchSDKDSLFolder(errorHandler);
-		/*
-		 * init code completion parts - when dsl folder not correctly set it
-		 * will not work but it is robust will only do nothing
-		 */
-		XMLTypeImporter typeImporter = new XMLTypeImporter();
-		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
-		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		/*
-		 * FIXME ATR, 19.01.2017: make version changeable... Maybe
-		 * codeCompletionRegistry.get(GradleDSLTypeProvider.changeVersion...
-		 */
-		// loader.setDSLFolder(FileHelper.DEFAULT.getEGradleUserHomeFolder("SDK/gradle/3.0"));
-		if (dslFolder != null) {
-			loader.setDSLFolder(dslFolder);
-		}
-		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
-		gradleDslProvider.setErrorHandler(errorHandler);
-		/*
-		 * install dsl type provider as service, so it must be definitely used
-		 * shared...
-		 */
-		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
+		
+		GradleDSLTypeProvider gradleDslProvider = initTypeProvider(sdk);
 
 		/* load project per default so show up time for tooltips faster */
 		gradleDslProvider.getType("org.gradle.api.Project");
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
+			long timeEnd = System.currentTimeMillis();
+			double seconds = (timeEnd-timeStart)/1000;
+			getLog().log(new Status(IStatus.INFO, PLUGIN_ID,"Gradle editor startup in :"+seconds+" seconds"+", sdk installed:"+sdkInstalled));
+		}
 
 	}
 
@@ -129,6 +109,28 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	private GradleDSLTypeProvider initTypeProvider(SDK sdk) {
+		File dslFolder = sdk.getSDKInstallationFolder();
+		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
+		codeCompletionRegistry.setErrorHandler(errorHandler);
+		
+		/*
+		 * init code completion parts - when dsl folder not correctly set it
+		 * will not work but it is robust will only do nothing
+		 */
+		XMLTypeImporter typeImporter = new XMLTypeImporter();
+		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		loader.setDSLFolder(dslFolder);
+		
+		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
+		gradleDslProvider.setErrorHandler(errorHandler);
+		
+		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
+		return gradleDslProvider;
 	}
 
 }

@@ -135,7 +135,15 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		/* adopt extensions and mixins */
 		getPluginMerger().merge(type, plugins);
 
-		/* resolve interface references and setup types */
+		/* initialize type */
+		initInterfaceReferences(modifiableType);
+		initMethods(type);
+		initProperties(type);
+		return type;
+	}
+	
+	/* resolve interface references and setup types */
+	private void initInterfaceReferences(ModifiableType modifiableType) {
 		for (TypeReference interfaceRef: modifiableType.getInterfaces()){
 			if (! (interfaceRef instanceof ModifiableTypeReference)){
 				continue;
@@ -149,8 +157,9 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			Type resolvedInterfaceRefType = getType(interfaceTypeAsString);
 			modInterfaceRef.setType(resolvedInterfaceRefType);
 		}
-		
-		/* inititialize xml type */
+	}
+
+	private void initMethods(Type type) {
 		for (Method m : type.getDefinedMethods()) {
 			if (!(m instanceof ModifiableMethod)) {
 				continue;
@@ -175,6 +184,9 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 				modifiableParam.setType(resolvedParamType);
 			}
 		}
+	}
+
+	private void initProperties(Type type) {
 		for (Property p : type.getDefinedProperties()) {
 			if ( !(p instanceof ModifiableProperty)){
 				continue;
@@ -184,7 +196,6 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			Type resolvedReturnType = getType(modifiableProperty.getTypeAsString());
 			modifiableProperty.setType(resolvedReturnType);
 		}
-		return type;
 	}
 
 	private void ensureApiMappingLoaded() {

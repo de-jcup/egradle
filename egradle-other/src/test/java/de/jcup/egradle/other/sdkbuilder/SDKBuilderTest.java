@@ -50,10 +50,14 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type,createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type1");
+	}
+
+	private SDKBuilderContext createBuilderContext() {
+		return new SDKBuilderContext();
 	}
 
 	@Test
@@ -70,7 +74,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("org.destination.Type1");
@@ -90,7 +94,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
 
 		/* test */
 		verify(m1, never()).setDelegationTargetAsString(any());
@@ -119,7 +123,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type1");
@@ -140,7 +144,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
 
 		/* test */
 		verify(m1, never()).setDelegationTargetAsString(any());
@@ -161,7 +165,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type);
+		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type2");
