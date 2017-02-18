@@ -53,4 +53,5 @@
             &lt;a href='type://IdeaCompilerOutput#getInheritOutputDirs()'&gt;#getInheritOutputDirs()&lt;/a&gt; returns &lt;code&gt;'false'&lt;/code&gt; 
 </description>
     </property>
+    <documentation/>
 </type>

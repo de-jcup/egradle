@@ -226,4 +226,26 @@
  @see #setVerbose(boolean) 
 </description>
     </property>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="${project.docsDir}/javadoc"/>
+        <property name="maxMemory"/>
+        <property name="null"/>
+        <property name="title"/>
+        <property name="project.reporting.apiDocTitle"/>
+        <property name="classpath"/>
+        <property name="project.sourceSets.main.compileClasspath"/>
+        <property name="options"/>
+        <property name="failOnError"/>
+        <property name="true"/>
+        <property name="executable"/>
+        <property name="null"/>
+        <property name="source"/>
+        <property name="project.sourceSets.main.allJava"/>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+        <property name="toolChain"/>
+    </documentation>
 </type>

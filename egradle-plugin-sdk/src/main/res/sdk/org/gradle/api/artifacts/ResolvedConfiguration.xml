@@ -96,4 +96,5 @@
  @throws ResolveException when the resolve was not successful. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -71,4 +71,7 @@
  The container of extensions. 
 </description>
     </property>
+    <documentation>
+        <property name="extensions"/>
+    </documentation>
 </type>

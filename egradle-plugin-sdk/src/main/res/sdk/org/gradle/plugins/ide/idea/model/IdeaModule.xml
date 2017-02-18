@@ -556,4 +556,46 @@
  The directories containing the test sources. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="name"/>
+        <property name="${project.name} (sometimes prefixed with parts of ${project.path} to guarantee uniqeness)"/>
+        <property name="sourceDirs"/>
+        <property name="[]"/>
+        <property name="source dirs from project.sourceSets.main.allSource"/>
+        <property name="scopes"/>
+        <property name="[:]"/>
+        <property name="&#xA;                    &#xA;                        COMPILE -&gt; project.configurations.compile&#xA;                        RUNTIME -&gt; project.configurations.runtime - project.configurations.compile&#xA;                        TEST -&gt; project.configurations.testRuntime - project.configurations.runtime&#xA;                        PROVIDED&#xA;                    &#xA;                "/>
+        <property name="generatedSourceDirs"/>
+        <property name="[]"/>
+        <property name="downloadSources"/>
+        <property name="true"/>
+        <property name="downloadJavadoc"/>
+        <property name="false"/>
+        <property name="contentRoot"/>
+        <property name="project.projectDir"/>
+        <property name="testSourceDirs"/>
+        <property name="[]"/>
+        <property name="source dirs from project.sourceSets.test.allSource"/>
+        <property name="excludeDirs"/>
+        <property name="[project.buildDir, project.file('.gradle')]"/>
+        <property name="inheritOutputDirs"/>
+        <property name="null"/>
+        <property name="null"/>
+        <property name="outputDir"/>
+        <property name="null"/>
+        <property name="null"/>
+        <property name="testOutputDir"/>
+        <property name="null"/>
+        <property name="null"/>
+        <property name="jdkName"/>
+        <property name="'inherited'"/>
+        <property name="languageLevel"/>
+        <property name="project.sourceCompatibility"/>
+        <property name="targetBytecodeVersion"/>
+        <property name="project.targetCompatibility"/>
+        <property name="iml"/>
+        <property name="outputFile"/>
+        <property name="#name + '.iml'"/>
+        <method name="iml"/>
+    </documentation>
 </type>

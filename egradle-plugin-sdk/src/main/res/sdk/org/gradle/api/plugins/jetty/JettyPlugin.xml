@@ -51,4 +51,5 @@
     <property name="javaConvention" type="org.gradle.api.plugins.JavaPluginConvention"/>
     <property name="warConvention" type="org.gradle.api.plugins.WarPluginConvention"/>
     <property name="webXml" type="java.lang.Object"/>
+    <documentation/>
 </type>

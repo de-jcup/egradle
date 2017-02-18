@@ -15,4 +15,7 @@
  The source sets for this component. 
 </description>
     </property>
+    <documentation>
+        <property name="sources"/>
+    </documentation>
 </type>

@@ -4,4 +4,5 @@
  Manages a set of &lt;a href='type://org.gradle.api.distribution.Distribution'&gt;org.gradle.api.distribution.Distribution&lt;/a&gt; objects. 
 </description>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
+    <documentation/>
 </type>

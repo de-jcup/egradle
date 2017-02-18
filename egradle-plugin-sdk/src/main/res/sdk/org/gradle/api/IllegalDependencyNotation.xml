@@ -3,4 +3,5 @@
     <description> 
  This exceptions is thrown, if a dependency is declared with a illegal notation. 
 </description>
+    <documentation/>
 </type>

@@ -6,4 +6,5 @@
     <method name="createMessage" returnType="java.lang.String">
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
+    <documentation/>
 </type>

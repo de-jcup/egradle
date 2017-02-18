@@ -24,4 +24,5 @@
  The exact name of the module that should be excluded. 
 </description>
     </property>
+    <documentation/>
 </type>

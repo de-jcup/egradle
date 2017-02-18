@@ -100,4 +100,10 @@
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
     <property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
     <property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
+    <documentation>
+        <property name="configuration"/>
+        <property name="compile configuration"/>
+        <property name="dependencySpec"/>
+        <property name="-"/>
+    </documentation>
 </type>

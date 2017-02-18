@@ -69,4 +69,5 @@
  @see #getExtension() 
 </description>
     </property>
+    <documentation/>
 </type>

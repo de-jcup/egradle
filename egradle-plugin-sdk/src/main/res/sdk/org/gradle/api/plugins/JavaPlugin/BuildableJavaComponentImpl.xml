@@ -9,4 +9,5 @@
     <property name="compileDependencies" type="org.gradle.api.artifacts.Configuration"/>
     <property name="rebuildTasks" type="java.util.Collection"/>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>
+    <documentation/>
 </type>

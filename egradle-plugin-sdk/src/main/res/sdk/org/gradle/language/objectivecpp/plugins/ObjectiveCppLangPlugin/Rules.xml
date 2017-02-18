@@ -7,4 +7,5 @@
         <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languages"/>
         <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
     </method>
+    <documentation/>
 </type>

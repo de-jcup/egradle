@@ -20,4 +20,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://Report.OutputType#FILE'&gt;Report.OutputType#FILE&lt;/a&gt; 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -49,4 +49,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The event time, in milliseconds since the epoch. 
 </description>
     </property>
+    <documentation/>
 </type>

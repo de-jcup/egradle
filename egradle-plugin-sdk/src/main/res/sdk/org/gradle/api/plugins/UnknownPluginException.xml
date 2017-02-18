@@ -3,4 +3,5 @@
     <description> 
  A &lt;a href='type://UnknownPluginException'&gt;UnknownPluginException&lt;/a&gt; is thrown when an unknown plugin id is provided.  
 </description>
+    <documentation/>
 </type>

@@ -67,4 +67,9 @@
  The tool chain being used to build. 
 </description>
     </property>
+    <documentation>
+        <property name="objectFileDir"/>
+        <property name="assemblerArgs"/>
+        <method name="source"/>
+    </documentation>
 </type>

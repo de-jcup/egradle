@@ -88,4 +88,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="delete"/>
+        <property name="targetFiles"/>
+        <property name="followSymlinks"/>
+        <method name="delete"/>
+    </documentation>
 </type>

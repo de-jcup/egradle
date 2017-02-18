@@ -7,4 +7,5 @@
         <parameter type="java.io.InputStream" name="toSign"/>
     </method>
     <interface name="org.gradle.plugins.signing.signatory.Signatory"/>
+    <documentation/>
 </type>

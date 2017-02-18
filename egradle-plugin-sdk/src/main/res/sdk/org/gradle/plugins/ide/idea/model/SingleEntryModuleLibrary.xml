@@ -46,4 +46,5 @@
  Returns a single source jar or source folder 
 </description>
     </property>
+    <documentation/>
 </type>

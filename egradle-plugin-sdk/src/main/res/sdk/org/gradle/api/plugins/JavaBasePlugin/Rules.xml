@@ -8,4 +8,5 @@
         <parameter type="org.gradle.language.base.ProjectSourceSet" name="projectSourceSet"/>
         <parameter type="org.gradle.api.plugins.JavaBasePlugin.BridgedBinaries" name="bridgedBinaries"/>
     </method>
+    <documentation/>
 </type>

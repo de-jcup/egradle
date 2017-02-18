@@ -6,4 +6,5 @@
  This type of repository will only be consulted when resolving plugins 
  applied using the &lt;code&gt;plugins {}&lt;/code&gt; syntax. 
 </description>
+    <documentation/>
 </type>

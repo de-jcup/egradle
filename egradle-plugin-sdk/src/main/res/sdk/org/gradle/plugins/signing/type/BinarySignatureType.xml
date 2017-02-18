@@ -5,4 +5,5 @@
 </description>
     <method name="getExtension" returnType="java.lang.String"/>
     <property name="extension" type="java.lang.String"/>
+    <documentation/>
 </type>

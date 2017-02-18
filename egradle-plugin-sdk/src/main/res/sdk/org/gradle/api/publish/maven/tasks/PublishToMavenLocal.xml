@@ -6,4 +6,5 @@
  @since 1.4 
 </description>
     <method name="publish" returnType="void"/>
+    <documentation/>
 </type>

@@ -43,4 +43,8 @@
  These are used to locate tools for this tool chain, and are prepended to the system PATH when executing these tools. 
 </description>
     </property>
+    <documentation>
+        <property name="path"/>
+        <method name="path"/>
+    </documentation>
 </type>

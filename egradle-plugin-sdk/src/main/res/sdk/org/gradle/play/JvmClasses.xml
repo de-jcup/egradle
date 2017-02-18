@@ -36,4 +36,9 @@
  A set of resource directories for this binary. 
 </description>
     </property>
+    <documentation>
+        <property name="classesDir"/>
+        <property name="resourceDirs"/>
+        <method name="addResourceDir"/>
+    </documentation>
 </type>

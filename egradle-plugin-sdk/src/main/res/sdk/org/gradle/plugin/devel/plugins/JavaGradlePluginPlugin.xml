@@ -55,4 +55,5 @@
         <parameter type="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" name="extension"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

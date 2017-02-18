@@ -21,4 +21,5 @@
     </method>
     <interface name="org.gradle.BuildListener"/>
     <property name="tingsEvaluated" type="org.gradle.api.initialization.Settings"/>
+    <documentation/>
 </type>

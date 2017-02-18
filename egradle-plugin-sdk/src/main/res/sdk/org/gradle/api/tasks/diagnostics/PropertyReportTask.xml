@@ -12,4 +12,5 @@
         <parameter type="org.gradle.api.tasks.diagnostics.internal.PropertyReportRenderer" name="renderer"/>
     </method>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
+    <documentation/>
 </type>

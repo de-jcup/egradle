@@ -33,4 +33,5 @@
  Sets the target compatibility for the compiler. 
 </description>
     </property>
+    <documentation/>
 </type>

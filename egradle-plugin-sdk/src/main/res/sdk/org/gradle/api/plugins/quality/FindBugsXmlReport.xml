@@ -35,4 +35,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not FindBugs should generate XML augmented with human-readable messages. 
 </description>
     </property>
+    <documentation>
+        <property name="withMessages"/>
+    </documentation>
 </type>

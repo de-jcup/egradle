@@ -23,4 +23,5 @@
 </description>
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
+    <documentation/>
 </type>

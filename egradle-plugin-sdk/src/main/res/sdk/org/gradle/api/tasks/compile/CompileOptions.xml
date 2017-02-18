@@ -374,4 +374,40 @@
  Tells whether to log warning messages. The default is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="failOnError"/>
+        <property name="true"/>
+        <property name="verbose"/>
+        <property name="false"/>
+        <property name="listFiles"/>
+        <property name="false"/>
+        <property name="deprecation"/>
+        <property name="false"/>
+        <property name="warnings"/>
+        <property name="true"/>
+        <property name="encoding"/>
+        <property name="null"/>
+        <property name="debug"/>
+        <property name="true"/>
+        <property name="debugOptions"/>
+        <property name="fork"/>
+        <property name="false"/>
+        <property name="forkOptions"/>
+        <property name="useDepend"/>
+        <property name="false"/>
+        <property name="dependOptions"/>
+        <property name="bootClasspath"/>
+        <property name="null"/>
+        <property name="extensionDirs"/>
+        <property name="null"/>
+        <property name="compilerArgs"/>
+        <property name="[]"/>
+        <property name="sourcepath"/>
+        <property name="null"/>
+        <property name="incremental"/>
+        <property name="false"/>
+        <method name="debug"/>
+        <method name="fork"/>
+        <method name="depend"/>
+    </documentation>
 </type>

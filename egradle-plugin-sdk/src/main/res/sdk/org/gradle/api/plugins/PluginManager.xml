@@ -81,4 +81,10 @@
         <parameter type="java.lang.String" name="id"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
+    <documentation>
+        <method name="apply"/>
+        <method name="findPlugin"/>
+        <method name="hasPlugin"/>
+        <method name="withPlugin"/>
+    </documentation>
 </type>

@@ -82,4 +82,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no source is available. 
 </description>
     </property>
+    <documentation/>
 </type>

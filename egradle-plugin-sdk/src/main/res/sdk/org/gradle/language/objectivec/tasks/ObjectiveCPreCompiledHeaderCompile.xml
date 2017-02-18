@@ -4,4 +4,5 @@
  Compiles Objective C header source files into object files. 
 </description>
     <method name="createCompileSpec" returnType="org.gradle.nativeplatform.toolchain.internal.NativeCompileSpec"/>
+    <documentation/>
 </type>

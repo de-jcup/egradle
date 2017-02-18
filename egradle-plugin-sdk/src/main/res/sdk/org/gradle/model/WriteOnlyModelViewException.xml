@@ -9,4 +9,5 @@
         <parameter type="org.gradle.model.internal.type.ModelType" name="type"/>
         <parameter type="org.gradle.model.internal.core.rule.describe.ModelRuleDescriptor" name="ruleDescriptor"/>
     </method>
+    <documentation/>
 </type>

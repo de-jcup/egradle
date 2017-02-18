@@ -7,4 +7,5 @@
  @see GradleRunner#build() 
  @see GradleRunner#buildAndFail() 
 </description>
+    <documentation/>
 </type>

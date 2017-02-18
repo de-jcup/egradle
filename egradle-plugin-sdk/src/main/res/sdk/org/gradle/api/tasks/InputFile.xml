@@ -9,4 +9,5 @@
  have changed. To make the up-to-date check only dependent on the path and not the contents 
  of the file or directory, annotate it instead with &lt;a href='type://org.gradle.api.tasks.Input'&gt;org.gradle.api.tasks.Input&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

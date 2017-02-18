@@ -11,4 +11,5 @@
 </description>
     <method name="getDescriptor" returnType="java.lang.String"/>
     <property name="descriptor" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -46,4 +46,8 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <property name="sharedLibraryFile"/>
+        <property name="sharedLibraryLinkFile"/>
+    </documentation>
 </type>

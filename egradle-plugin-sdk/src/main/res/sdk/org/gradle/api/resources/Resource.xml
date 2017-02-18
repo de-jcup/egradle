@@ -46,4 +46,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;unique URI, should not be null 
 </description>
     </property>
+    <documentation/>
 </type>

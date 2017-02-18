@@ -22,4 +22,10 @@
  The Eclipse project model that contains the details required to generate the project file. 
 </description>
     </property>
+    <documentation>
+        <property name="projectModel"/>
+        <property name="project.eclipse.project"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/.project"/>
+    </documentation>
 </type>

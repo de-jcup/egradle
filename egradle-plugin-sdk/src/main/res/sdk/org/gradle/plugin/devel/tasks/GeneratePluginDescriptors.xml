@@ -19,4 +19,5 @@
     </method>
     <property name="declarations" type="java.util.List"/>
     <property name="outputDirectory" type="java.io.File"/>
+    <documentation/>
 </type>

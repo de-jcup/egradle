@@ -18,4 +18,8 @@
     </method>
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
+    <documentation>
+        <method name="targetFlavors"/>
+        <method name="targetBuildTypes"/>
+    </documentation>
 </type>

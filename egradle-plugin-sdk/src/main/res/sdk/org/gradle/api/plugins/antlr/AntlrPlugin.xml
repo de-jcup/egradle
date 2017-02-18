@@ -17,4 +17,5 @@
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

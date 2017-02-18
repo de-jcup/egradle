@@ -11,4 +11,5 @@
     <property name="playPlatform" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <property name="playRun" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <property name="playTest" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
+    <documentation/>
 </type>

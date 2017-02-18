@@ -35,4 +35,5 @@
     </method>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>
     <property name="testCompileClasspath" type="org.gradle.api.file.FileCollection"/>
+    <documentation/>
 </type>

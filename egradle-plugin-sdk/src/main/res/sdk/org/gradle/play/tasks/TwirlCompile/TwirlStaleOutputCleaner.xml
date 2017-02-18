@@ -6,4 +6,5 @@
     <method name="execute" returnType="void">
         <parameter type="java.util.Set" name="staleSources"/>
     </method>
+    <documentation/>
 </type>

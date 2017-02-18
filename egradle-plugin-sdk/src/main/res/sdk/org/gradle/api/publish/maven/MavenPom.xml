@@ -52,4 +52,8 @@
  Returns the packaging for this publication. 
 </description>
     </property>
+    <documentation>
+        <property name="packaging"/>
+        <method name="withXml"/>
+    </documentation>
 </type>

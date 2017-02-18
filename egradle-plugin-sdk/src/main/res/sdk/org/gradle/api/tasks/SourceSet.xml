@@ -329,4 +329,26 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name, generally of the form ${verb}${name}${noun} 
 </description>
     </property>
+    <documentation>
+        <property name="allJava"/>
+        <property name="[java]"/>
+        <property name="allSource"/>
+        <property name="[java, resources]"/>
+        <property name="name"/>
+        <property name="output"/>
+        <property name="See "/>
+        <property name="compileClasspath"/>
+        <property name="project.configurations.compile (or project.configurations.testCompile for the test source set)."/>
+        <property name="java"/>
+        <property name="[${project.projectDir}/src/${sourceSet.name}/java]"/>
+        <property name="resources"/>
+        <property name="[${project.projectDir}/src/${sourceSet.name}/resources]"/>
+        <property name="runtimeClasspath"/>
+        <property name="sourceSet.output + project.configurations.runtime (or sourceSet.output + project.configurations.testRuntime for the test source set)."/>
+        <method name="resources"/>
+        <method name="java"/>
+        <method name="compiledBy"/>
+        <method name="getCompileTaskName"/>
+        <method name="getTaskName"/>
+    </documentation>
 </type>

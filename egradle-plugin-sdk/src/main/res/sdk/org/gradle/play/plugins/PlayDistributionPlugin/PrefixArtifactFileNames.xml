@@ -30,4 +30,5 @@
     <interface name="com.google.common.base.Function"/>
     <interface name="org.gradle.api.Action"/>
     <property name="resolvedArtifacts" type="java.util.Set"/>
+    <documentation/>
 </type>

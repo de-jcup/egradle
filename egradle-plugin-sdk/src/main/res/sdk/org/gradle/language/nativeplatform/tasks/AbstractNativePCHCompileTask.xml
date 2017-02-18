@@ -3,4 +3,5 @@
     <description> 
  Compiles native header source files into object files. 
 </description>
+    <documentation/>
 </type>

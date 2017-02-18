@@ -34,4 +34,5 @@
     <property name="rhinoOptions" type="java.util.List"/>
     <property name="script" type="java.io.File"/>
     <property name="scriptArgs" type="java.util.List"/>
+    <documentation/>
 </type>

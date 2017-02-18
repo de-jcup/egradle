@@ -123,4 +123,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map with the sections, where the key represents the section name and value the section attributes. 
 </description>
     </property>
+    <documentation/>
 </type>

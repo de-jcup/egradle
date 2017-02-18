@@ -22,4 +22,5 @@
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description>
     </property>
+    <documentation/>
 </type>

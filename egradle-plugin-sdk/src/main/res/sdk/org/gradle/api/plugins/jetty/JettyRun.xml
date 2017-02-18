@@ -106,4 +106,12 @@
 </description>
     </property>
     <property name="webXmlIfExists" type="java.io.File"/>
+    <documentation>
+        <property name="webXml"/>
+        <property name="project.war.webXml, if not null, or ${project.webAppDir}/WEB-INF/web.xml"/>
+        <property name="webAppSourceDirectory"/>
+        <property name="project.webAppDir"/>
+        <property name="classpath"/>
+        <property name="project.sourceSets.main.runtimeClasspath"/>
+    </documentation>
 </type>

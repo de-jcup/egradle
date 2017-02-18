@@ -8,4 +8,5 @@
  
  &lt;p&gt;This will cause the task &lt;em&gt;not&lt;/em&gt; to be considered out-of-date when the property has changed.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

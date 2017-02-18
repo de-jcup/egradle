@@ -32,4 +32,5 @@
  The task that can be used to assemble this binary. 
 </description>
     </property>
+    <documentation/>
 </type>

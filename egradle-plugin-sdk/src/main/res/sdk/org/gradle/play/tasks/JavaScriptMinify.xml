@@ -73,4 +73,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description>
     </property>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="forkOptions"/>
+    </documentation>
 </type>

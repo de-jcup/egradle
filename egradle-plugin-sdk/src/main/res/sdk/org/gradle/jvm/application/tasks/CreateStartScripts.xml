@@ -213,4 +213,14 @@
  Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="applicationName"/>
+        <property name="mainClassName"/>
+        <property name="classpath"/>
+        <property name="defaultJvmOpts"/>
+        <property name="outputDir"/>
+        <property name="optsEnvironmentVar"/>
+        <property name="unixStartScriptGenerator"/>
+        <property name="windowsStartScriptGenerator"/>
+    </documentation>
 </type>

@@ -44,4 +44,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.jvm.tasks.Jar" name="jar"/>
     </method>
+    <documentation/>
 </type>

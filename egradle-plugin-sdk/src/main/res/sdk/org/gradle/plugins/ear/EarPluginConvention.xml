@@ -73,4 +73,15 @@
  Default is "lib". 
 </description>
     </property>
+    <documentation>
+        <property name="appDirName"/>
+        <property name="'src/main/application'"/>
+        <property name="libDirName"/>
+        <property name="'lib'"/>
+        <property name="deploymentDescriptor"/>
+        <property name="A deployment descriptor initialized with sensible defaults"/>
+        <method name="deploymentDescriptor"/>
+        <method name="appDirName"/>
+        <method name="libDirName"/>
+    </documentation>
 </type>

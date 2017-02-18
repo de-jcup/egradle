@@ -64,4 +64,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java compile options. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="groovyOptions"/>
+        <property name="options"/>
+        <property name="source"/>
+        <property name="sourceSet.groovy"/>
+        <property name="groovyClasspath"/>
+        <property name="Groovy library found on classpath"/>
+    </documentation>
 </type>

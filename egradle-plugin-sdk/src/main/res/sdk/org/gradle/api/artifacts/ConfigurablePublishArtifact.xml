@@ -73,4 +73,5 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. Should not be null. 
 </description>
     </property>
+    <documentation/>
 </type>

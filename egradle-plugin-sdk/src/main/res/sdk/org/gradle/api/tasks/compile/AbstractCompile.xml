@@ -92,4 +92,18 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target JVM. 
 </description>
     </property>
+    <documentation>
+        <property name="classpath"/>
+        <property name="sourceSet.compileClasspath"/>
+        <property name="destinationDir"/>
+        <property name="sourceSet.output.classesDir"/>
+        <property name="sourceCompatibility"/>
+        <property name="project.sourceCompatibility"/>
+        <property name="targetCompatibility"/>
+        <property name="project.targetCompatibility"/>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+    </documentation>
 </type>

@@ -18,4 +18,5 @@
  @see MavenDeployer 
 </description>
     <interface name="org.gradle.api.artifacts.maven.MavenDeployer"/>
+    <documentation/>
 </type>

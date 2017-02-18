@@ -6,4 +6,5 @@
     <method name="getRun" returnType="org.gradle.api.tasks.testing.Test"/>
     <interface name="org.gradle.testing.base.TestSuiteTaskCollection"/>
     <property name="run" type="org.gradle.api.tasks.testing.Test"/>
+    <documentation/>
 </type>

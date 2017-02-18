@@ -5,4 +5,5 @@
  &lt;p&gt; 
  Should always be thrown as the cause of a &lt;a href='type://org.gradle.model.InvalidModelRuleException'&gt;org.gradle.model.InvalidModelRuleException&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

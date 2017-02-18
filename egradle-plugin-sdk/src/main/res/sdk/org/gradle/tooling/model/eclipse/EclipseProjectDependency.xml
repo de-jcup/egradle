@@ -61,4 +61,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target project, or null for a dependency on a different build within a composite. 
 </description>
     </property>
+    <documentation/>
 </type>

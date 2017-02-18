@@ -29,4 +29,5 @@
  Returns the exit value of the process. 
 </description>
     </property>
+    <documentation/>
 </type>

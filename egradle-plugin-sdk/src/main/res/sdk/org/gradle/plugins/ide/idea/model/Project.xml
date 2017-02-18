@@ -111,4 +111,5 @@
  A set of wildcard string to be included/excluded from the resources. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -17,4 +17,5 @@
         <parameter type="org.gradle.plugins.javascript.envjs.browser.BrowserEvaluate" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

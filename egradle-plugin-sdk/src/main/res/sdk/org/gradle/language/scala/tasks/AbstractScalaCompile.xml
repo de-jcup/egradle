@@ -40,4 +40,10 @@
  Returns the Scala compilation options. 
 </description>
     </property>
+    <documentation>
+        <property name="options"/>
+        <property name="scalaCompileOptions"/>
+        <property name="source"/>
+        <property name="sourceSet.scala"/>
+    </documentation>
 </type>

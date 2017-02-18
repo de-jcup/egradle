@@ -122,4 +122,10 @@
  @throws IllegalArgumentException when the credentials assigned to this repository are not assignable to the specified type 
 </description>
     </property>
+    <documentation>
+        <property name="credentials"/>
+        <property name="authentication"/>
+        <method name="credentials"/>
+        <method name="authentication"/>
+    </documentation>
 </type>

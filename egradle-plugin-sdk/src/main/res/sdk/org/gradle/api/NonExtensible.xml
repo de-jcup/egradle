@@ -5,4 +5,5 @@
  &lt;p&gt; 
  This means that it will not be enhanced with &lt;a href='type://org.gradle.api.plugins.ExtensionAware'&gt;org.gradle.api.plugins.ExtensionAware&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

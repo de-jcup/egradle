@@ -64,4 +64,5 @@
  Returns the settings to use for the archiver. 
 </description>
     </property>
+    <documentation/>
 </type>

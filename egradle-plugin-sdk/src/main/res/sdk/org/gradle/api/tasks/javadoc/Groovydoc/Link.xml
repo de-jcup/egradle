@@ -32,4 +32,5 @@
  Returns the base url for the external site. 
 </description>
     </property>
+    <documentation/>
 </type>

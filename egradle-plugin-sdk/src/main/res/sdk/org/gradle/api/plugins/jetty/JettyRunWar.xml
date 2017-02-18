@@ -32,4 +32,12 @@
  Returns the web application to deploy. 
 </description>
     </property>
+    <documentation>
+        <property name="webApp"/>
+        <property name="project.war.archivePath"/>
+        <property name="reload"/>
+        <property name="&quot;automatic&quot;"/>
+        <property name="scanIntervalSeconds"/>
+        <property name="0"/>
+    </documentation>
 </type>

@@ -129,4 +129,16 @@
  The tool chain used for compilation. 
 </description>
     </property>
+    <documentation>
+        <property name="positionIndependentCode"/>
+        <property name="objectFileDir"/>
+        <property name="macros"/>
+        <property name="compilerArgs"/>
+        <property name="toolChain"/>
+        <property name="targetPlatform"/>
+        <property name="source"/>
+        <property name="includes"/>
+        <method name="includes"/>
+        <method name="source"/>
+    </documentation>
 </type>

@@ -28,4 +28,5 @@
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
+    <documentation/>
 </type>

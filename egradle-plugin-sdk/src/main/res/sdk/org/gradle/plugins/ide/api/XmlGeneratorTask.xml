@@ -11,4 +11,5 @@
     <method name="create" returnType="T"/>
     <method name="getXmlTransformer" returnType="org.gradle.internal.xml.XmlTransformer"/>
     <property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/>
+    <documentation/>
 </type>

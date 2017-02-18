@@ -16,4 +16,5 @@
         <parameter type="org.gradle.plugins.javascript.jshint.JsHint" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

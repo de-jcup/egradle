@@ -60,4 +60,5 @@
     <property name="publicType" type="java.lang.Class"/>
     <property name="sources" type="org.gradle.model.ModelMap"/>
     <property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection"/>
+    <documentation/>
 </type>

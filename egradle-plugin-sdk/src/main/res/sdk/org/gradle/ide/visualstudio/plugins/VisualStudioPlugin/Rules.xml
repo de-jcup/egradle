@@ -34,4 +34,5 @@
         <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
         <parameter type="org.gradle.api.internal.project.ProjectIdentifier" name="projectIdentifier"/>
     </method>
+    <documentation/>
 </type>

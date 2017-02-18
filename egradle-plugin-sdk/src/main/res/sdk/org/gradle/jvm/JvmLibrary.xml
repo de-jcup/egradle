@@ -4,4 +4,5 @@
  A Library component that runs on the Java Virtual Machine. 
 </description>
     <interface name="org.gradle.platform.base.Library"/>
+    <documentation/>
 </type>

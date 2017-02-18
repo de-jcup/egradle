@@ -8,4 +8,5 @@
         <parameter type="org.gradle.jvm.platform.JavaPlatform" name="platform"/>
     </method>
     <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
+    <documentation/>
 </type>

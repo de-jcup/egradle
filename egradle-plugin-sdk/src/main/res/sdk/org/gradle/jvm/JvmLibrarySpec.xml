@@ -26,4 +26,5 @@
  The component-level dependencies of this library. 
 </description>
     </property>
+    <documentation/>
 </type>

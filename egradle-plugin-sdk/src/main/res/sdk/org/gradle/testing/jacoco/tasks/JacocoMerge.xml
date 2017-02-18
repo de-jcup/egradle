@@ -59,4 +59,10 @@
  Collection of execution data files to merge. 
 </description>
     </property>
+    <documentation>
+        <property name="executionData"/>
+        <property name="destinationFile"/>
+        <property name="buildDir/jacoco/task.name.exec"/>
+        <method name="executionData"/>
+    </documentation>
 </type>

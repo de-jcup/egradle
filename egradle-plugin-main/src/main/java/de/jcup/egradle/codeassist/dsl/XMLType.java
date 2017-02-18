@@ -58,8 +58,10 @@ public class XMLType implements ModifiableType {
 
 	private Set<TypeReference> mergedInterfaces;
 
-	@XmlElement(name="info")
-	private XMLDSLTypeInfo dslInfo;
+	@XmlElement(name="documentation", type = XMLDSLTypeDocumentation.class)
+	private XMLDSLTypeDocumentation dslDocumentation = new XMLDSLTypeDocumentation();
+	
+	
 
 	@Override
 	public void addExtension(String extensionId, Type extensionType, Reason reason) {
@@ -322,8 +324,11 @@ public class XMLType implements ModifiableType {
 		return true;
 	}
 
-	public void setInfo(XMLDSLTypeInfo dslInfo) {
-		this.dslInfo=dslInfo;
+	public void setDocumentation(XMLDSLTypeDocumentation documentation) {
+		if (documentation==null){
+			documentation = new XMLDSLTypeDocumentation();
+		}
+		this.dslDocumentation=documentation;
 	}
 
 	

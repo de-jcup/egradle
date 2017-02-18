@@ -6,4 +6,5 @@
         <parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/>
     </method>
     <property name="displayName" type="java.lang.String"/>
+    <documentation/>
 </type>

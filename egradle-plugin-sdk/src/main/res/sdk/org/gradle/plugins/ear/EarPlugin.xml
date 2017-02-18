@@ -36,4 +36,5 @@
         <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earConvention"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

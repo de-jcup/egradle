@@ -3,4 +3,5 @@
     <description> 
  Indicates a problem that occurs during project configuration (evaluation) phase. 
 </description>
+    <documentation/>
 </type>

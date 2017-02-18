@@ -33,4 +33,7 @@
         <parameter type="java.lang.Object" name="moduleNotation"/>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
+    <documentation>
+        <method name="module"/>
+    </documentation>
 </type>

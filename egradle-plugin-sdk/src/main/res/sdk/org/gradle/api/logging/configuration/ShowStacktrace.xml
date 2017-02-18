@@ -3,4 +3,5 @@
     <description> 
  Specifies the detail to include in stacktraces. 
 </description>
+    <documentation/>
 </type>

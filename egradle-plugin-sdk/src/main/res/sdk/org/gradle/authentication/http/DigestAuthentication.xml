@@ -4,4 +4,5 @@
  Authentication scheme for digest access authentication over HTTP. 
 </description>
     <interface name="org.gradle.authentication.Authentication"/>
+    <documentation/>
 </type>

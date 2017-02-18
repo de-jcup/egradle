@@ -5,4 +5,5 @@
  with unsupported build arguments. For more information see the 
  &lt;a href='type://org.gradle.tooling.LongRunningOperation#withArguments(String...)'&gt;org.gradle.tooling.LongRunningOperation#withArguments(String...)&lt;/a&gt; method. 
 </description>
+    <documentation/>
 </type>

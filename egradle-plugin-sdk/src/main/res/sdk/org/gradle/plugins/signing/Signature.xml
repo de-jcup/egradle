@@ -203,4 +203,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if the file to sign or signature type are unknown at this time. 
 </description>
     </property>
+    <documentation/>
 </type>

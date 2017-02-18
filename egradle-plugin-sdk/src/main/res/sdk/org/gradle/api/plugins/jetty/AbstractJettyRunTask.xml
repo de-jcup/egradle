@@ -242,4 +242,24 @@
     <property name="userRealms" type="org.mortbay.jetty.security.UserRealm"/>
     <property name="webAppConfig" type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/>
     <property name="webDefaultXml" type="java.io.File"/>
+    <documentation>
+        <property name="contextPath"/>
+        <property name="project.war.baseName"/>
+        <property name="jettyConfig"/>
+        <property name="null"/>
+        <property name="stopPort"/>
+        <property name="project.stopPort"/>
+        <property name="stopKey"/>
+        <property name="project.stopKey"/>
+        <property name="daemon"/>
+        <property name="false"/>
+        <property name="httpPort"/>
+        <property name="project.httpPort"/>
+        <property name="reload"/>
+        <property name="&quot;automatic&quot;"/>
+        <property name="scanIntervalSeconds"/>
+        <property name="0"/>
+        <property name="additionalRuntimeJars"/>
+        <property name="[]"/>
+    </documentation>
 </type>

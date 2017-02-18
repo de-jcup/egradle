@@ -130,4 +130,5 @@
         <parameter type="org.gradle.api.plugins.ExtensionContainer" name="extensionContainer"/>
     </method>
     <property name="files" type="org.gradle.api.file.FileCollection"/>
+    <documentation/>
 </type>

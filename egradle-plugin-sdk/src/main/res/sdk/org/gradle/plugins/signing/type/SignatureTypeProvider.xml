@@ -15,4 +15,5 @@
     </method>
     <property name="defaultType" type="org.gradle.plugins.signing.type.SignatureType"/>
     <property name="typeForExtension" type="org.gradle.plugins.signing.type.SignatureType"/>
+    <documentation/>
 </type>

@@ -15,4 +15,5 @@
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="org.gradle.api.internal.artifacts.ivyservice.projectmodule.ProjectPublicationRegistry" name="publicationRegistry"/>
     </method>
+    <documentation/>
 </type>

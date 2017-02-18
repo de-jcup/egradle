@@ -22,4 +22,5 @@
     </property>
     <property name="failure" type="java.lang.Throwable"/>
     <property name="gradle" type="org.gradle.api.invocation.Gradle"/>
+    <documentation/>
 </type>

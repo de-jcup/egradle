@@ -121,4 +121,5 @@
         <parameter type="org.gradle.platform.base.internal.PlatformResolvers" name="platforms"/>
     </method>
     <property name="targetPlatform" type="org.gradle.platform.base.internal.PlatformRequirement"/>
+    <documentation/>
 </type>

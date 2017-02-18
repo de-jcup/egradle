@@ -13,4 +13,5 @@
  Extension for tasks that should run with a Jacoco agent to generate coverage execution data. 
 </description>
     </property>
+    <documentation/>
 </type>

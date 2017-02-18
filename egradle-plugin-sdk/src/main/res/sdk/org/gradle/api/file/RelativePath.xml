@@ -115,4 +115,5 @@
     </property>
     <property name="pathString" type="java.lang.String"/>
     <property name="segments" type="java.lang.String"/>
+    <documentation/>
 </type>

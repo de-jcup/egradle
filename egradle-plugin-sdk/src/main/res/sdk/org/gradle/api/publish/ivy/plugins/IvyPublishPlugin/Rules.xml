@@ -11,4 +11,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository" name="publishTask"/>
     </method>
+    <documentation/>
 </type>

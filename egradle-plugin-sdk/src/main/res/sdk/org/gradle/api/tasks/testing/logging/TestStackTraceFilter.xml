@@ -3,4 +3,5 @@
     <description> 
  Stack trace filters for test logging. Multiple filters can be combined. 
 </description>
+    <documentation/>
 </type>

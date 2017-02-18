@@ -6,4 +6,5 @@
     </method>
     <interface name="java.io.Serializable"/>
     <property name="encoding" type="java.lang.String"/>
+    <documentation/>
 </type>

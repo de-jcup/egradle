@@ -32,4 +32,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description>
     </property>
+    <documentation>
+        <method name="getUrl"/>
+        <method name="setUrl"/>
+    </documentation>
 </type>

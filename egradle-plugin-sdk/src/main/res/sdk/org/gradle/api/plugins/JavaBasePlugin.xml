@@ -98,4 +98,5 @@
     </method>
     <interface name="org.gradle.api.Plugin"/>
     <property name="taskPrefixedProperty" type="java.lang.String"/>
+    <documentation/>
 </type>

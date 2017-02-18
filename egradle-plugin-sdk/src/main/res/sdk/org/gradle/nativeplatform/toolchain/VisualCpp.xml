@@ -42,4 +42,8 @@
  The directory where Windows SDK is installed. 
 </description>
     </property>
+    <documentation>
+        <property name="installDir"/>
+        <property name="windowsSdkDir"/>
+    </documentation>
 </type>

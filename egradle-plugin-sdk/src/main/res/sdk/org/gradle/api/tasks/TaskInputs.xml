@@ -155,4 +155,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source files for this task. 
 </description>
     </property>
+    <documentation/>
 </type>

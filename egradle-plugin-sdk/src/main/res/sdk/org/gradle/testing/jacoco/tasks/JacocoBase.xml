@@ -16,4 +16,8 @@
  Classpath containing Jacoco classes for use by the task. 
 </description>
     </property>
+    <documentation>
+        <property name="jacocoClasspath"/>
+        <property name="&#xA;                    project.configurations.jacocoAnt&#xA;                "/>
+    </documentation>
 </type>

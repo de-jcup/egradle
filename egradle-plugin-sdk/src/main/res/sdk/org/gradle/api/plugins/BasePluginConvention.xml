@@ -75,4 +75,16 @@
 </description>
     </property>
     <property name="project" type="org.gradle.api.internal.project.ProjectInternal"/>
+    <documentation>
+        <property name="distsDir"/>
+        <property name="${project.buildDir}/${project.distsDirName}"/>
+        <property name="distsDirName"/>
+        <property name="'distributions'"/>
+        <property name="libsDir"/>
+        <property name="${project.buildDir}/${project.libsDirName}"/>
+        <property name="libsDirName"/>
+        <property name="'libs'"/>
+        <property name="archivesBaseName"/>
+        <property name="project.name"/>
+    </documentation>
 </type>

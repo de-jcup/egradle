@@ -72,4 +72,8 @@
     </method>
     <property name="beforeMerged" type="org.gradle.listener.ActionBroadcast"/>
     <property name="whenMerged" type="org.gradle.listener.ActionBroadcast"/>
+    <documentation>
+        <method name="beforeMerged"/>
+        <method name="whenMerged"/>
+    </documentation>
 </type>

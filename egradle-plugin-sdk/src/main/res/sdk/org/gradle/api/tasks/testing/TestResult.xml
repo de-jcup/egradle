@@ -131,4 +131,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The number of tests, possibly 0 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -64,4 +64,5 @@
  Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -62,4 +62,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to 
 </description>
     </property>
+    <documentation>
+        <property name="publication"/>
+        <property name="repository"/>
+    </documentation>
 </type>

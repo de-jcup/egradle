@@ -5,4 +5,5 @@
  
  &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

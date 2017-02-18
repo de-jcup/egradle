@@ -172,4 +172,24 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if violations should be displayed on console 
 </description>
     </property>
+    <documentation>
+        <property name="classpath"/>
+        <property name="sourceSet.output"/>
+        <property name="config"/>
+        <property name="project.checkstyle.config"/>
+        <property name="configFile"/>
+        <property name="project.checkstyle.configFile"/>
+        <property name="ignoreFailures"/>
+        <property name="project.checkstyle.ignoreFailures"/>
+        <property name="showViolations"/>
+        <property name="project.checkstyle.showViolations"/>
+        <property name="configProperties"/>
+        <property name="project.checkstyle.configProperties"/>
+        <property name="source"/>
+        <property name="sourceSet.allJava"/>
+        <property name="checkstyleClasspath"/>
+        <property name="project.configurations.checkstyle"/>
+        <property name="reports"/>
+        <method name="reports"/>
+    </documentation>
 </type>

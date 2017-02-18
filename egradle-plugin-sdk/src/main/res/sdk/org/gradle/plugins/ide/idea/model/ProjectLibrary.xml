@@ -92,4 +92,5 @@
  The type of the library. 
 </description>
     </property>
+    <documentation/>
 </type>

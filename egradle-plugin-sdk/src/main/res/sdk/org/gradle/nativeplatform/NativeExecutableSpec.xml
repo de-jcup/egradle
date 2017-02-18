@@ -6,4 +6,5 @@
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.nativeplatform.TargetedNativeComponent"/>
     <interface name="org.gradle.platform.base.ApplicationSpec"/>
+    <documentation/>
 </type>

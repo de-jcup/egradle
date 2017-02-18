@@ -6,4 +6,5 @@
     </method>
     <method name="stop" returnType="void"/>
     <interface name="org.gradle.plugins.javascript.envjs.http.HttpFileServerFactory"/>
+    <documentation/>
 </type>

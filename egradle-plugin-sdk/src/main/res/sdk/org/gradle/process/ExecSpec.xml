@@ -82,4 +82,5 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
 </description>
     </property>
+    <documentation/>
 </type>

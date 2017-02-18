@@ -39,4 +39,5 @@
         <parameter type="org.gradle.api.tasks.Upload" name="upload"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

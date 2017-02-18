@@ -54,4 +54,10 @@
  The set of tasks associated with this binary. 
 </description>
     </property>
+    <documentation>
+        <property name="buildable"/>
+        <property name="sources"/>
+        <property name="inputs"/>
+        <property name="tasks"/>
+    </documentation>
 </type>

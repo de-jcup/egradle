@@ -17,4 +17,5 @@
     <method name="gradle" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
+    <documentation/>
 </type>

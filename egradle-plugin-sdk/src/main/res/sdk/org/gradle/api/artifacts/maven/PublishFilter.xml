@@ -7,4 +7,5 @@
         <parameter type="org.apache.ivy.core.module.descriptor.Artifact" name="artifact"/>
         <parameter type="java.io.File" name="src"/>
     </method>
+    <documentation/>
 </type>

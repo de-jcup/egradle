@@ -22,4 +22,5 @@
     <interface name="org.gradle.plugins.ide.eclipse.model.WbModuleEntry"/>
     <property name="name" type="java.lang.String"/>
     <property name="value" type="java.lang.String"/>
+    <documentation/>
 </type>

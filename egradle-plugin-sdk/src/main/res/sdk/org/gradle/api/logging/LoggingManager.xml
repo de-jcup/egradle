@@ -67,4 +67,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The log level. Returns null when standard output capture is disabled. 
 </description>
     </property>
+    <documentation/>
 </type>

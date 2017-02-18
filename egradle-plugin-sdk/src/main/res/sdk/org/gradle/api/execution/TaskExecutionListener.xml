@@ -25,4 +25,5 @@
 </description>
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
+    <documentation/>
 </type>

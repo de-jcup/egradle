@@ -119,4 +119,5 @@
     <method name="validateNoDuplicate" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="jdks"/>
     </method>
+    <documentation/>
 </type>

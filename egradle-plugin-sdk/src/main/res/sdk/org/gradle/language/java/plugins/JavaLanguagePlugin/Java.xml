@@ -17,4 +17,5 @@
     <property name="outputType" type="java.lang.Class"/>
     <property name="sourceSetType" type="java.lang.Class"/>
     <property name="transformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+    <documentation/>
 </type>

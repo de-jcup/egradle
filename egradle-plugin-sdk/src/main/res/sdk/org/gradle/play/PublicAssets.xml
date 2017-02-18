@@ -20,4 +20,8 @@
  A set of asset directories for this binary. 
 </description>
     </property>
+    <documentation>
+        <property name="assetDirs"/>
+        <method name="addAssetDir"/>
+    </documentation>
 </type>

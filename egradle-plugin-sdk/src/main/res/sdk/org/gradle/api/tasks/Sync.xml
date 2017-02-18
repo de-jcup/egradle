@@ -29,4 +29,8 @@
 </description>
     </property>
     <property name="rootSpec" type="DestinationRootCopySpec"/>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="null"/>
+    </documentation>
 </type>

@@ -61,4 +61,5 @@
     <property name="classFile" type="boolean"/>
     <property name="exportedPackages" type="java.util.Set"/>
     <property name="outputFile" type="java.io.File"/>
+    <documentation/>
 </type>

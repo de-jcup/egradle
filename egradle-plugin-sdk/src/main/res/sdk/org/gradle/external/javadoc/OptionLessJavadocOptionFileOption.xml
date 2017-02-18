@@ -13,4 +13,5 @@
         <parameter type="org.gradle.external.javadoc.internal.JavadocOptionFileWriterContext" name="writerContext"/>
     </method>
     <property name="value" type="T"/>
+    <documentation/>
 </type>

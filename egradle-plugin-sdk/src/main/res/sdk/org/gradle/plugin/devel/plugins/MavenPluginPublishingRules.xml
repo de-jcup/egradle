@@ -21,4 +21,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.XmlProvider" name="xmlProvider"/>
     </method>
+    <documentation/>
 </type>

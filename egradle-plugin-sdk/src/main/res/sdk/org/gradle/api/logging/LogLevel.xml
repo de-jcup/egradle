@@ -3,4 +3,5 @@
     <description> 
  The log levels supported by Gradle. 
 </description>
+    <documentation/>
 </type>

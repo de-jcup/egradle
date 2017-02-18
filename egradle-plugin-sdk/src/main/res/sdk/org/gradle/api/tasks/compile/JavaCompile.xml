@@ -85,4 +85,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description>
     </property>
+    <documentation>
+        <property name="options"/>
+        <property name="toolChain"/>
+        <property name="source"/>
+        <property name="sourceSet.java"/>
+    </documentation>
 </type>

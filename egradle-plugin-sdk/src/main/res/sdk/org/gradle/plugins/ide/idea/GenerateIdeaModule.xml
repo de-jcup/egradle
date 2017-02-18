@@ -41,4 +41,10 @@
  the module name is the same as the name of the *.iml file. 
 </description>
     </property>
+    <documentation>
+        <property name="module"/>
+        <property name="project.idea.module"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/${project.name}.iml&#xA;                    (sometimes the project.name is prefixed with parts of ${project.path} to guarantee uniqeness).&#xA;                    Bear in mind that usually it is easier to use moduleName property instead of outputFile property.&#xA;                "/>
+    </documentation>
 </type>

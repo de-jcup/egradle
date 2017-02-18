@@ -36,4 +36,5 @@
 </description>
         <parameter type="java.lang.String" name="modelName"/>
     </method>
+    <documentation/>
 </type>

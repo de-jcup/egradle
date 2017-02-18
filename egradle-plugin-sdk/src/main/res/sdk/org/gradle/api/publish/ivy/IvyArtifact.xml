@@ -120,4 +120,13 @@
  The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="file"/>
+        <property name="name"/>
+        <property name="type"/>
+        <property name="extension"/>
+        <property name="classifier"/>
+        <property name="conf"/>
+        <method name="builtBy"/>
+    </documentation>
 </type>

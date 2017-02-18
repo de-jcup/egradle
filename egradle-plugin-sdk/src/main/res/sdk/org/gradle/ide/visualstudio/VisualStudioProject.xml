@@ -48,4 +48,8 @@
  Configuration for the generated project file. 
 </description>
     </property>
+    <documentation>
+        <property name="projectFile"/>
+        <property name="filtersFile"/>
+    </documentation>
 </type>

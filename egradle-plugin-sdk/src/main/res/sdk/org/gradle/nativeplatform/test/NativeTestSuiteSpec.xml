@@ -7,4 +7,5 @@
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.testing.base.TestSuiteSpec"/>
     <property name="testedComponent" type="org.gradle.nativeplatform.NativeComponentSpec"/>
+    <documentation/>
 </type>

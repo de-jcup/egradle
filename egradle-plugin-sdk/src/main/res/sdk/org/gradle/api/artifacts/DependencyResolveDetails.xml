@@ -65,4 +65,5 @@
  Never returns null. Target module is updated when methods like &lt;a href='type://DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used. 
 </description>
     </property>
+    <documentation/>
 </type>

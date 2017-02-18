@@ -37,4 +37,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The element at the given index according to the set's iteration order. 
 </description>
     </property>
+    <documentation/>
 </type>

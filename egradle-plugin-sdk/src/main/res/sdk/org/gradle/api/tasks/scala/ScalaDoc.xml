@@ -75,4 +75,21 @@
  Returns the documentation title. 
 </description>
     </property>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="${project.docsDir}/scaladoc"/>
+        <property name="classpath"/>
+        <property name="project.sourceSets.main.output + project.sourceSets.main.compileClasspath"/>
+        <property name="scalaClasspath"/>
+        <property name="scala-compiler dependency matching the scala-library version found on classpath"/>
+        <property name="scalaDocOptions"/>
+        <property name="title"/>
+        <property name="project.reporting.apiDocTitle"/>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+        <property name="source"/>
+        <property name="project.sourceSets.main.scala"/>
+    </documentation>
 </type>

@@ -339,4 +339,33 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source files. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+        <property name="source"/>
+        <property name="[]"/>
+        <property name="caseSensitive"/>
+        <property name="true"/>
+        <property name="dirMode"/>
+        <property name="null"/>
+        <property name="fileMode"/>
+        <property name="null"/>
+        <property name="includeEmptyDirs"/>
+        <property name="true"/>
+        <property name="duplicatesStrategy"/>
+        <property name="null"/>
+        <method name="from"/>
+        <method name="into"/>
+        <method name="with"/>
+        <method name="include"/>
+        <method name="exclude"/>
+        <method name="rename"/>
+        <method name="filter"/>
+        <method name="expand"/>
+        <method name="eachFile"/>
+        <method name="filesMatching"/>
+        <method name="filesNotMatching"/>
+    </documentation>
 </type>

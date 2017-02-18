@@ -4,4 +4,5 @@
  Thrown when more than one file with the same relative path name is to be copied 
  and the &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt; is set to DuplicatesStrategy.FAIL 
 </description>
+    <documentation/>
 </type>

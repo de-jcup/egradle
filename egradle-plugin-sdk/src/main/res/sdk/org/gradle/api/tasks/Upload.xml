@@ -75,4 +75,11 @@
  Specifies whether the dependency descriptor should be uploaded. 
 </description>
     </property>
+    <documentation>
+        <property name="uploadDescriptor"/>
+        <property name="repositories"/>
+        <property name="configuration"/>
+        <property name="artifacts"/>
+        <method name="repositories"/>
+    </documentation>
 </type>

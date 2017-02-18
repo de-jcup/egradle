@@ -8,4 +8,5 @@
  &lt;p&gt;This will cause the task to be considered out-of-date when the directory paths or task 
  output to those directories have been modified since the task was last run.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

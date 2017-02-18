@@ -55,4 +55,5 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -4,4 +4,5 @@
  A library component that is built by a gradle project. 
 </description>
     <interface name="org.gradle.platform.base.Library"/>
+    <documentation/>
 </type>

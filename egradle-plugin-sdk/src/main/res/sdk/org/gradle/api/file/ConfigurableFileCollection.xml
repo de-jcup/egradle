@@ -77,4 +77,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of source paths. Returns an empty set if none. 
 </description>
     </property>
+    <documentation/>
 </type>

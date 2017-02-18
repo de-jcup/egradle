@@ -14,4 +14,5 @@
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="platform" type="org.gradle.language.scala.ScalaPlatform"/>
     <property name="toolChain" type="org.gradle.language.scala.internal.toolchain.ScalaToolChainInternal"/>
+    <documentation/>
 </type>

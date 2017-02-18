@@ -26,4 +26,7 @@
  Some element have their name generated or automatically assigned, and for these elements the name may not be human consumable. 
 </description>
     </property>
+    <documentation>
+        <property name="displayName"/>
+    </documentation>
 </type>

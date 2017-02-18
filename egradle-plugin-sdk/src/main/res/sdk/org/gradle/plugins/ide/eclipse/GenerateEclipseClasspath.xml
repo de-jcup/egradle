@@ -22,4 +22,10 @@
  The Eclipse Classpath model containing the information required to generate the classpath file. 
 </description>
     </property>
+    <documentation>
+        <property name="classpath"/>
+        <property name="project.eclipse.classpath"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/.classpath"/>
+    </documentation>
 </type>

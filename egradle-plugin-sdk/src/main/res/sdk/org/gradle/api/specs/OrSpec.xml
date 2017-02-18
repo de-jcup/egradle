@@ -11,4 +11,5 @@
         <parameter type="T" name="object"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
+    <documentation/>
 </type>

@@ -90,4 +90,22 @@
  The format type of the CodeNarc report. One of &lt;tt&gt;html&lt;/tt&gt;, &lt;tt&gt;xml&lt;/tt&gt;, &lt;tt&gt;text&lt;/tt&gt;, &lt;tt&gt;console&lt;/tt&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="0.23"/>
+        <property name="reportsDir"/>
+        <property name="${project.reporting.baseDir}/codenarc"/>
+        <property name="config"/>
+        <property name="${project.projectDir}/config/codenarc/codenarc.xml"/>
+        <property name="configFile"/>
+        <property name="${project.projectDir}/config/codenarc/codenarc.xml"/>
+        <property name="maxPriority1Violations"/>
+        <property name="0"/>
+        <property name="maxPriority2Violations"/>
+        <property name="0"/>
+        <property name="maxPriority3Violations"/>
+        <property name="0"/>
+        <property name="reportFormat"/>
+        <property name="html"/>
+    </documentation>
 </type>

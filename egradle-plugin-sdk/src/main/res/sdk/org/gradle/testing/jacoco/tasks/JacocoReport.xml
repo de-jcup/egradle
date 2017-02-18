@@ -205,4 +205,13 @@
  Source sets that coverage should be reported for. 
 </description>
     </property>
+    <documentation>
+        <property name="executionData"/>
+        <property name="sourceDirectories"/>
+        <property name="classDirectories"/>
+        <property name="additionalClassDirs"/>
+        <property name="additionalSourceDirs"/>
+        <property name="reports"/>
+        <method name="executionData"/>
+    </documentation>
 </type>

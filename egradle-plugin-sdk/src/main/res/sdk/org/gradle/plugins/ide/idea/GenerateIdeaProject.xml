@@ -33,4 +33,10 @@
  output *.ipr file 
 </description>
     </property>
+    <documentation>
+        <property name="ideaProject"/>
+        <property name="project.idea.project"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/${project.name}.ipr"/>
+    </documentation>
 </type>

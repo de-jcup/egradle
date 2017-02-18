@@ -16,4 +16,5 @@
     <property name="tasks" type="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks"/>
     <property name="testSuite" type="org.gradle.jvm.test.JvmTestSuiteSpec"/>
     <property name="testedBinary" type="org.gradle.jvm.JvmBinarySpec"/>
+    <documentation/>
 </type>

@@ -31,4 +31,5 @@
     <property name="outputFile" type="java.io.File"/>
     <property name="transformer" type="org.gradle.api.Transformer"/>
     <property name="visualStudioProject" type="org.gradle.ide.visualstudio.VisualStudioProject"/>
+    <documentation/>
 </type>

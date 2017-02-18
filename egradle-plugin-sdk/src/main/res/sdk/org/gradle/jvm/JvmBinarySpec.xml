@@ -68,4 +68,5 @@
  Returns the &lt;a href='type://org.gradle.jvm.toolchain.JavaToolChain'&gt;org.gradle.jvm.toolchain.JavaToolChain&lt;/a&gt; that will be used to build this binary. 
 </description>
     </property>
+    <documentation/>
 </type>

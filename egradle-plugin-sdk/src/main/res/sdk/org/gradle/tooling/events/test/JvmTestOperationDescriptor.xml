@@ -63,4 +63,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the test suite. 
 </description>
     </property>
+    <documentation/>
 </type>

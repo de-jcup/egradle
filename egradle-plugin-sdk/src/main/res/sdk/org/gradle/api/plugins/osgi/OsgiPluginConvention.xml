@@ -35,4 +35,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
+    <documentation>
+        <method name="osgiManifest"/>
+    </documentation>
 </type>

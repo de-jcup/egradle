@@ -33,4 +33,5 @@
  The path to the project containing the library. 
 </description>
     </property>
+    <documentation/>
 </type>

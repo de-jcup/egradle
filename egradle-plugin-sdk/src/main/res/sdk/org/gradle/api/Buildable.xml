@@ -24,4 +24,7 @@
          tasks. 
 </description>
     </property>
+    <documentation>
+        <property name="buildDependencies"/>
+    </documentation>
 </type>

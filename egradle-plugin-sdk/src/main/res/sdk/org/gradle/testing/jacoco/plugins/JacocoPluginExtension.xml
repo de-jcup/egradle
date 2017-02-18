@@ -74,4 +74,11 @@
  Version of Jacoco JARs to use. 
 </description>
     </property>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="0.7.6.201602180812"/>
+        <property name="reportsDir"/>
+        <property name="${project.reporting.baseDir}/jacoco"/>
+        <method name="applyTo"/>
+    </documentation>
 </type>

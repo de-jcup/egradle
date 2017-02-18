@@ -5,4 +5,5 @@
 </description>
     <method name="getDidWork" returnType="boolean"/>
     <property name="didWork" type="boolean"/>
+    <documentation/>
 </type>

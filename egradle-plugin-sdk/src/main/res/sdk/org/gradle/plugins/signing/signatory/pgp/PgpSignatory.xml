@@ -29,4 +29,5 @@
     </method>
     <property name="keyId" type="org.gradle.plugins.signing.signatory.pgp.PgpKeyId"/>
     <property name="name" type="java.lang.String"/>
+    <documentation/>
 </type>

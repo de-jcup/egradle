@@ -214,4 +214,12 @@
 </description>
     </method>
     <interface name="org.gradle.api.artifacts.ArtifactRepositoryContainer"/>
+    <documentation>
+        <method name="ivy"/>
+        <method name="maven"/>
+        <method name="mavenCentral"/>
+        <method name="jcenter"/>
+        <method name="mavenLocal"/>
+        <method name="flatDir"/>
+    </documentation>
 </type>

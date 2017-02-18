@@ -13,4 +13,5 @@
     <interface name="org.gradle.api.Plugin"/>
     <property name="defaultCoffeeScriptDependencyNotation" type="java.lang.String"/>
     <property name="defaultRhinoDependencyNotation" type="java.lang.String"/>
+    <documentation/>
 </type>

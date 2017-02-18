@@ -92,4 +92,5 @@
  @deprecated Use &lt;a href='type://TaskOutputs#getHasOutput()'&gt;TaskOutputs#getHasOutput()&lt;/a&gt; instead. 
 </description>
     </property>
+    <documentation/>
 </type>

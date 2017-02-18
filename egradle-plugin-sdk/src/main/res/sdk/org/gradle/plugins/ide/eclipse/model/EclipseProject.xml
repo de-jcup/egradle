@@ -262,4 +262,24 @@
  eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="name"/>
+        <property name="${project.name} (sometimes prefixed with parts of ${project.path} to guarantee uniqeness)"/>
+        <property name="comment"/>
+        <property name="project.description"/>
+        <property name="referencedProjects"/>
+        <property name="[]"/>
+        <property name="natures"/>
+        <property name="Java nature, plus Groovy, Scala and Web natures as appropriate."/>
+        <property name="buildCommands"/>
+        <property name="Java builder, plus Scala and Web builders as appropriate."/>
+        <property name="linkedResources"/>
+        <property name="[]"/>
+        <property name="file"/>
+        <method name="natures"/>
+        <method name="referencedProjects"/>
+        <method name="buildCommand"/>
+        <method name="linkedResource"/>
+        <method name="file"/>
+    </documentation>
 </type>

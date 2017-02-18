@@ -7,4 +7,5 @@
  
  &lt;p&gt;Caching for individual task instances can be disabled via &lt;a href='type://TaskOutputs#cacheIf(Spec)'&gt;TaskOutputs#cacheIf(Spec)&lt;/a&gt;.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

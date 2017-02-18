@@ -65,4 +65,8 @@
     </property>
     <property name="reportConfigurations" type="java.util.Set"/>
     <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
+    <documentation>
+        <property name="outputFile"/>
+        <property name="projects"/>
+    </documentation>
 </type>

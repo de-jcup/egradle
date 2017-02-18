@@ -4,4 +4,5 @@
  Indicates that a feature is incubating. This means that the feature is currently a work-in-progress and may 
  change at any time. 
 </description>
+    <documentation/>
 </type>

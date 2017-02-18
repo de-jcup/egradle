@@ -55,4 +55,5 @@
  The file extension (without the leading dot) associated to this type of signature. 
 </description>
     </property>
+    <documentation/>
 </type>

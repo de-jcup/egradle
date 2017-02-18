@@ -73,4 +73,5 @@
         <parameter type="java.util.Map" name="properties"/>
         <parameter type="java.lang.Class" name="filterType"/>
     </method>
+    <documentation/>
 </type>

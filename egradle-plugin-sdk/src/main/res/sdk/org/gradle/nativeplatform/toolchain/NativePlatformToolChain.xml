@@ -13,4 +13,5 @@
  Returns the platform which this tool chain builds for. 
 </description>
     </property>
+    <documentation/>
 </type>

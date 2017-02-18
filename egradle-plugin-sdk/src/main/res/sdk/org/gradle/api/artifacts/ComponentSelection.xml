@@ -26,4 +26,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the candidate version of the module 
 </description>
     </property>
+    <documentation>
+        <property name="requested"/>
+        <property name="candidate"/>
+        <method name="reject"/>
+    </documentation>
 </type>

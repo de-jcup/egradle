@@ -35,4 +35,5 @@
         <parameter type="java.io.File" name="destination"/>
         <parameter type="java.lang.String" name="encoding"/>
     </method>
+    <documentation/>
 </type>

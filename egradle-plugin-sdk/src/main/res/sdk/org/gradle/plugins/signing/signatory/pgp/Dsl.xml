@@ -11,4 +11,5 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="args"/>
     </method>
+    <documentation/>
 </type>

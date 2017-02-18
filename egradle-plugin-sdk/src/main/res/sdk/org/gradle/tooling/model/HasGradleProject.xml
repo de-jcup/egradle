@@ -13,4 +13,5 @@
  The associated Gradle project. Via the gradle project you can access (list, run, etc.) Gradle tasks. 
 </description>
     </property>
+    <documentation/>
 </type>

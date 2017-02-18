@@ -227,4 +227,26 @@
  By default, all detectors which are not disabled by default are run. 
 </description>
     </property>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="3.0.1"/>
+        <property name="reportsDir"/>
+        <property name="${project.reporting.baseDir}/findbugs"/>
+        <property name="effort"/>
+        <property name="'default'"/>
+        <property name="reportLevel"/>
+        <property name="'medium'"/>
+        <property name="visitors"/>
+        <property name="[]"/>
+        <property name="omitVisitors"/>
+        <property name="[]"/>
+        <property name="includeFilterConfig"/>
+        <property name="null"/>
+        <property name="excludeFilterConfig"/>
+        <property name="null"/>
+        <property name="includeFilter"/>
+        <property name="null"/>
+        <property name="excludeFilter"/>
+        <property name="null"/>
+    </documentation>
 </type>

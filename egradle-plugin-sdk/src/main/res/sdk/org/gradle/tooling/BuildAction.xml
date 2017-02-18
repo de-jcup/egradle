@@ -19,4 +19,5 @@
         <parameter type="org.gradle.tooling.BuildController" name="controller"/>
     </method>
     <interface name="java.io.Serializable"/>
+    <documentation/>
 </type>

@@ -19,4 +19,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path to the output location. Does not return null. 
 </description>
     </property>
+    <documentation/>
 </type>

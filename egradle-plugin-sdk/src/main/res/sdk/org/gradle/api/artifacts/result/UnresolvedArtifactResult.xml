@@ -16,4 +16,5 @@
  The failure that occurred when the artifact was resolved. 
 </description>
     </property>
+    <documentation/>
 </type>

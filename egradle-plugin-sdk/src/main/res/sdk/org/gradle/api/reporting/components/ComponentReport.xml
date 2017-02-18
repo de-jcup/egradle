@@ -20,4 +20,5 @@
     <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
     <property name="modelRegistry" type="org.gradle.model.internal.registry.ModelRegistry"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
+    <documentation/>
 </type>

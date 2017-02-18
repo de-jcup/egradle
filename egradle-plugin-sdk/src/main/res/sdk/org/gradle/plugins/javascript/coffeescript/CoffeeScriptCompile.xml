@@ -26,4 +26,5 @@
     <property name="options" type="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions"/>
     <property name="rhinoClasspath" type="org.gradle.api.file.FileCollection"/>
     <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
+    <documentation/>
 </type>

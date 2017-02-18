@@ -35,4 +35,10 @@
  The &lt;a href='type://NativeLibrarySpec'&gt;NativeLibrarySpec&lt;/a&gt; components produced by the build. 
 </description>
     </property>
+    <documentation>
+        <property name="executables"/>
+        <property name="libraries"/>
+        <method name="executables"/>
+        <method name="libraries"/>
+    </documentation>
 </type>

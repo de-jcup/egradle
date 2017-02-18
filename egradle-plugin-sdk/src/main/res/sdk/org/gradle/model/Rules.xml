@@ -3,4 +3,5 @@
     <description> 
  Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation defines additional rules based on its inputs. 
 </description>
+    <documentation/>
 </type>

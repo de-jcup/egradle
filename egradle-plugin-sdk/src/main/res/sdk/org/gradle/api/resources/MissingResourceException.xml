@@ -3,4 +3,5 @@
     <description> 
  Exception thrown when the resource does not exist 
 </description>
+    <documentation/>
 </type>

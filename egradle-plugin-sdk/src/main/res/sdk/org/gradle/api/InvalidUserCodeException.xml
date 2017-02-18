@@ -3,4 +3,5 @@
     <description> 
  A &lt;code&gt;InvalidUserCodeException&lt;/code&gt; is thrown when user-provided code cannot be executed. 
 </description>
+    <documentation/>
 </type>

@@ -48,4 +48,5 @@
         <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

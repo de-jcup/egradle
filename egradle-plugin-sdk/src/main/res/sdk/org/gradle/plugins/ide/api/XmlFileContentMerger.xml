@@ -35,4 +35,7 @@
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/>
+    <documentation>
+        <method name="withXml"/>
+    </documentation>
 </type>

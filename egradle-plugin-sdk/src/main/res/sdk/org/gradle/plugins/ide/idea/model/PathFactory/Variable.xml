@@ -6,4 +6,5 @@
     <property name="dir" type="java.io.File"/>
     <property name="name" type="java.lang.String"/>
     <property name="prefix" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  An enumeration for describing validation policies for file paths. 
 </description>
+    <documentation/>
 </type>

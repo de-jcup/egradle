@@ -97,4 +97,7 @@
 </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
+    <documentation>
+        <method name="id"/>
+    </documentation>
 </type>

@@ -193,4 +193,16 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parameters. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="gradle"/>
+        <property name="rootDir"/>
+        <property name="rootProject"/>
+        <property name="settings"/>
+        <property name="settingsDir"/>
+        <property name="startParameter"/>
+        <method name="include"/>
+        <method name="includeFlat"/>
+        <method name="findProject"/>
+        <method name="project"/>
+    </documentation>
 </type>

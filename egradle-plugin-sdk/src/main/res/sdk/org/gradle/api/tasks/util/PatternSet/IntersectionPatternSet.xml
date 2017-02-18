@@ -15,4 +15,5 @@
     <method name="isEmpty" returnType="boolean"/>
     <property name="asSpec" type="org.gradle.api.specs.Spec"/>
     <property name="empty" type="boolean"/>
+    <documentation/>
 </type>

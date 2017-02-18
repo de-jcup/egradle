@@ -19,4 +19,7 @@
  The source files. 
 </description>
     </property>
+    <documentation>
+        <property name="source"/>
+    </documentation>
 </type>

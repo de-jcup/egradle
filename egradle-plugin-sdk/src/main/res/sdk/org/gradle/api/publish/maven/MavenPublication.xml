@@ -259,4 +259,15 @@
  Returns the version for this publication. 
 </description>
     </property>
+    <documentation>
+        <property name="pom"/>
+        <property name="artifacts"/>
+        <property name="groupId"/>
+        <property name="artifactId"/>
+        <property name="version"/>
+        <method name="pom"/>
+        <method name="from"/>
+        <method name="artifact"/>
+        <method name="setArtifacts"/>
+    </documentation>
 </type>

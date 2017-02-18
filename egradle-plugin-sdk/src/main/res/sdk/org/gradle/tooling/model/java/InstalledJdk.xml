@@ -33,4 +33,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java version. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;. 
 </description>
     </property>
+    <documentation/>
 </type>

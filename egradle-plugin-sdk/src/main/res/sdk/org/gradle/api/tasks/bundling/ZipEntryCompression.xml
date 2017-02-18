@@ -3,4 +3,5 @@
     <description> 
  Specifies the compression level of an archives contents. 
 </description>
+    <documentation/>
 </type>

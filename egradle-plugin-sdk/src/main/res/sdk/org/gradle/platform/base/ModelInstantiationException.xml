@@ -3,4 +3,5 @@
     <description> 
  Thrown when a model element cannot be instantiated for some reason. 
 </description>
+    <documentation/>
 </type>

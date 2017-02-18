@@ -95,4 +95,5 @@
     <property name="excludes" type="java.util.Set"/>
     <property name="includeSpecs" type="java.util.Set"/>
     <property name="includes" type="java.util.Set"/>
+    <documentation/>
 </type>

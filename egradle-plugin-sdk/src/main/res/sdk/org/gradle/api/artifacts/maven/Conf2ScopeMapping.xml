@@ -39,4 +39,5 @@
  Returns the Maven scope name. 
 </description>
     </property>
+    <documentation/>
 </type>

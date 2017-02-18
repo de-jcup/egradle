@@ -100,4 +100,5 @@
         <parameter type="org.gradle.tooling.events.test.TestOperationDescriptor" name="descriptors"/>
     </method>
     <interface name="org.gradle.tooling.ConfigurableLauncher"/>
+    <documentation/>
 </type>

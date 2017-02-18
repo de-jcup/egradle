@@ -24,4 +24,8 @@
  The shared library link file. 
 </description>
     </property>
+    <documentation>
+        <property name="sharedLibraryFile"/>
+        <property name="sharedLibraryLinkFile"/>
+    </documentation>
 </type>

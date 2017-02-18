@@ -73,4 +73,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input properties registered when this resource is used as task input 
 </description>
     </property>
+    <documentation>
+        <method name="asString"/>
+        <method name="asReader"/>
+        <method name="asFile"/>
+    </documentation>
 </type>

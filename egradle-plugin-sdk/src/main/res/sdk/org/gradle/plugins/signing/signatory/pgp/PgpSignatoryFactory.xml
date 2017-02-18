@@ -85,4 +85,5 @@
         <parameter type="java.lang.String" name="sourceDescription"/>
     </method>
     <property name="qualifiedPropertyName" type="java.lang.Object"/>
+    <documentation/>
 </type>

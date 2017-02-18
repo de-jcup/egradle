@@ -3,4 +3,5 @@
     <description> 
  Represents the available sets of default imports that can be used when compiling Twirl templates. 
 </description>
+    <documentation/>
 </type>

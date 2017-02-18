@@ -8,4 +8,5 @@
  &lt;p&gt;This will cause the task to be considered out-of-date when the file paths or contents 
  have changed. Also see &lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

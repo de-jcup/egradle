@@ -37,4 +37,7 @@
 </description>
     </property>
     <property name="publicationInternal" type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"/>
+    <documentation>
+        <property name="publication"/>
+    </documentation>
 </type>

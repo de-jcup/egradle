@@ -3,4 +3,5 @@
     <description> 
  Ant types which a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt; can be mapped to. 
 </description>
+    <documentation/>
 </type>

@@ -14,4 +14,5 @@
 </description>
         <parameter type="org.gradle.api.execution.TaskExecutionGraph" name="graph"/>
     </method>
+    <documentation/>
 </type>

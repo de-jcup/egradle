@@ -178,4 +178,5 @@
  Returns the text to appear in the window title. 
 </description>
     </property>
+    <documentation/>
 </type>

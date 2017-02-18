@@ -345,4 +345,39 @@
  Non-existing resource directory declarations lead to errors when project is imported into Eclipse. 
 </description>
     </property>
+    <documentation>
+        <property name="sourceDirs"/>
+        <property name="source dirs from project.sourceSets.main.allSource"/>
+        <property name="The same unless java plugin not applied, then: [project.appDirName]"/>
+        <property name="rootConfigurations"/>
+        <property name="[]"/>
+        <property name="[project.configurations.deploy]]"/>
+        <property name="libConfigurations"/>
+        <property name="[project.configurations.runtime]"/>
+        <property name="[project.configurations.earlib]"/>
+        <property name="minusConfigurations"/>
+        <property name="[project.configurations.providedRuntime]"/>
+        <property name="[]"/>
+        <property name="deployName"/>
+        <property name="eclipse.project.name"/>
+        <property name="eclipse.project.name"/>
+        <property name="resources"/>
+        <property name="[deployPath: '/', sourcePath: project.webAppDirName]"/>
+        <property name="[]"/>
+        <property name="properties"/>
+        <property name="[]"/>
+        <property name="[]"/>
+        <property name="contextPath"/>
+        <property name="project.war.baseName"/>
+        <property name="classesDeployPath"/>
+        <property name="/WEB-INF/classes"/>
+        <property name="/"/>
+        <property name="libDeployPath"/>
+        <property name="/WEB-INF/lib"/>
+        <property name="/lib"/>
+        <property name="file"/>
+        <method name="property"/>
+        <method name="resource"/>
+        <method name="file"/>
+    </documentation>
 </type>

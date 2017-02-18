@@ -34,4 +34,9 @@
  Returns the &lt;a href='type://org.gradle.nativeplatform.platform.NativePlatform'&gt;org.gradle.nativeplatform.platform.NativePlatform&lt;/a&gt; that this binary is targeted to run on. 
 </description>
     </property>
+    <documentation>
+        <property name="flavor"/>
+        <property name="targetPlatform"/>
+        <property name="buildType"/>
+    </documentation>
 </type>

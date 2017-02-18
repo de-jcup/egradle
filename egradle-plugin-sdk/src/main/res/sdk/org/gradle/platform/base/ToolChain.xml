@@ -18,4 +18,7 @@
  @since 1.11 
 </description>
     </property>
+    <documentation>
+        <property name="displayName"/>
+    </documentation>
 </type>

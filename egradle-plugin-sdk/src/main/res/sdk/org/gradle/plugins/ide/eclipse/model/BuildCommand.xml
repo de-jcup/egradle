@@ -19,4 +19,5 @@
     <interface name="java.io.Serializable"/>
     <property name="arguments" type="java.util.Map"/>
     <property name="name" type="java.lang.String"/>
+    <documentation/>
 </type>

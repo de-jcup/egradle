@@ -153,4 +153,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to. 
 </description>
     </property>
+    <documentation>
+        <property name="classesDir"/>
+        <property name="${project.buildDir}/classes/${sourceSet.name}"/>
+        <property name="resourcesDir"/>
+        <property name="${project.buildDir}/classes/${sourceSet.name}"/>
+        <method name="dir"/>
+        <method name="getDirs"/>
+    </documentation>
 </type>

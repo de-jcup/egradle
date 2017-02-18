@@ -167,4 +167,22 @@
 </description>
     </property>
     <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
+    <documentation>
+        <property name="antlrClasspath"/>
+        <property name="project.configurations.antlr"/>
+        <property name="outputDirectory"/>
+        <property name="&#xA;                ${project.buildDir}/generated-src/antlr/${sourceSet.name}"/>
+        <property name="trace"/>
+        <property name="false"/>
+        <property name="traceLexer"/>
+        <property name="false"/>
+        <property name="traceParser"/>
+        <property name="false"/>
+        <property name="traceTreeWalker"/>
+        <property name="false"/>
+        <property name="maxHeapSize"/>
+        <property name="null"/>
+        <property name="source"/>
+        <property name="sourceSet.antlr"/>
+    </documentation>
 </type>

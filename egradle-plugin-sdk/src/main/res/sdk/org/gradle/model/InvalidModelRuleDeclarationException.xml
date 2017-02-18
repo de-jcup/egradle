@@ -3,4 +3,5 @@
     <description> 
  Thrown when a model rule, or source of model rules, is declared in an invalid way. 
 </description>
+    <documentation/>
 </type>

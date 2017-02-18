@@ -33,4 +33,5 @@
         <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
         <parameter type="java.io.File" name="buildDir"/>
     </method>
+    <documentation/>
 </type>

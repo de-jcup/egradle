@@ -143,4 +143,15 @@
  For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="project"/>
+        <property name="classpath"/>
+        <property name="jdt"/>
+        <property name="wtp"/>
+        <method name="project"/>
+        <method name="classpath"/>
+        <method name="jdt"/>
+        <method name="wtp"/>
+        <method name="pathVariables"/>
+    </documentation>
 </type>

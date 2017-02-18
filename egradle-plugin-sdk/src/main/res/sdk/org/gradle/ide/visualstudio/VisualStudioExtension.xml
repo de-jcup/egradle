@@ -23,4 +23,8 @@
  The &lt;a href='type://VisualStudioSolution'&gt;VisualStudioSolution&lt;/a&gt;s generated. 
 </description>
     </property>
+    <documentation>
+        <property name="projects"/>
+        <property name="solutions"/>
+    </documentation>
 </type>

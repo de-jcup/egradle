@@ -3,4 +3,5 @@
     <description> 
  This enum maps to the -verbose and -quiet options of the javadoc executable. 
 </description>
+    <documentation/>
 </type>

@@ -4,4 +4,5 @@
  &lt;p&gt;A &lt;code&gt;CircularReferenceException&lt;/code&gt; is thrown if circular references exists between tasks, the project 
  evaluation order or the project dependsOn order.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

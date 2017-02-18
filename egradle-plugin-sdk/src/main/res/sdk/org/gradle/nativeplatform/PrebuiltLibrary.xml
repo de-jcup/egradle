@@ -25,4 +25,5 @@
  The headers exported by this library. These headers will be added to all binaries for this library. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -7,4 +7,5 @@
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

@@ -6,4 +6,5 @@
  This can potentially happen when a reference to the subject is retained during a rule and then used afterwards, 
  Such as when an anonymous inner class or closure “closes over” the subject. 
 </description>
+    <documentation/>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  Indicates that the value of an element can be null. 
 </description>
+    <documentation/>
 </type>

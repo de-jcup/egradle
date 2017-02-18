@@ -12,4 +12,5 @@
     </method>
     <method name="hashCode" returnType="int"/>
     <interface name="java.util.Comparator"/>
+    <documentation/>
 </type>

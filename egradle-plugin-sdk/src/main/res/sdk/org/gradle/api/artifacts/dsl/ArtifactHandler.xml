@@ -74,4 +74,7 @@
         <parameter type="java.lang.Object" name="artifactNotation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
+    <documentation>
+        <method name="add"/>
+    </documentation>
 </type>

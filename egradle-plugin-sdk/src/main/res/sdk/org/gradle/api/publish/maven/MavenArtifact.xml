@@ -60,4 +60,10 @@
  The actual file contents to publish. 
 </description>
     </property>
+    <documentation>
+        <property name="file"/>
+        <property name="extension"/>
+        <property name="classifier"/>
+        <method name="builtBy"/>
+    </documentation>
 </type>

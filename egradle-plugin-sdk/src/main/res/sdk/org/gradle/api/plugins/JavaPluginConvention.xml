@@ -189,4 +189,25 @@
  The name of the test results directory. Can be a name or a path relative to the build dir. 
 </description>
     </property>
+    <documentation>
+        <property name="docsDirName"/>
+        <property name="'docs'"/>
+        <property name="docsDir"/>
+        <property name="${project.buildDir}/${project.docsDirName}"/>
+        <property name="testResultsDirName"/>
+        <property name="'test-results'"/>
+        <property name="testResultsDir"/>
+        <property name="${project.buildDir}/${project.testResultsDirName}"/>
+        <property name="testReportDirName"/>
+        <property name="'tests'"/>
+        <property name="testReportDir"/>
+        <property name="${project.reporting.baseDir}/${project.testReportDirName}"/>
+        <property name="sourceSets"/>
+        <property name="sourceCompatibility"/>
+        <property name="Value of the current used JVM (e.g. JavaVersion.JAVA_1_6 on a 1.6 JVM)."/>
+        <property name="targetCompatibility"/>
+        <property name="project.sourceCompatibility"/>
+        <method name="sourceSets"/>
+        <method name="manifest"/>
+    </documentation>
 </type>

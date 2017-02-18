@@ -4,4 +4,5 @@
         <parameter type="org.gradle.ide.visualstudio.tasks.internal.VisualStudioSolutionFile" name="solutionFile"/>
     </method>
     <method name="create" returnType="org.gradle.ide.visualstudio.tasks.internal.VisualStudioSolutionFile"/>
+    <documentation/>
 </type>

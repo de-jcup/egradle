@@ -8,4 +8,5 @@
     </method>
     <method name="call" returnType="java.lang.Object"/>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

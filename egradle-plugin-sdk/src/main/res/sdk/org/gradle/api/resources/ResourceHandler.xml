@@ -41,4 +41,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s 
 </description>
     </property>
+    <documentation>
+        <property name="text"/>
+        <method name="gzip"/>
+        <method name="bzip2"/>
+    </documentation>
 </type>

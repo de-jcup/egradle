@@ -3,4 +3,5 @@
     <description> 
  &lt;p&gt;An &lt;a href='type://UnknownConfigurationException'&gt;UnknownConfigurationException&lt;/a&gt; is thrown when a configuration referenced by name cannot be found.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

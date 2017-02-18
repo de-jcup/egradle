@@ -35,4 +35,5 @@
  The code under test. Defaults to &lt;a href='type://sourceSets.main.runtimeClasspath'&gt;sourceSets.main.runtimeClasspath&lt;/a&gt;. 
 </description>
     </property>
+    <documentation/>
 </type>

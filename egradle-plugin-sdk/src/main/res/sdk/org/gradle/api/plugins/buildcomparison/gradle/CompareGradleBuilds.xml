@@ -144,4 +144,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the target build. 
 </description>
     </property>
+    <documentation>
+        <property name="sourceBuild"/>
+        <property name="targetBuild"/>
+        <property name="reportDir"/>
+        <property name="${project.reporting.file(this.name)}"/>
+        <property name="ignoreFailures"/>
+        <property name="false"/>
+        <method name="sourceBuild"/>
+        <method name="targetBuild"/>
+    </documentation>
 </type>

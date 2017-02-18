@@ -373,4 +373,25 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance contains various resource-specific utility methods. 
 </description>
     </property>
+    <documentation>
+        <property name="buildscript"/>
+        <property name="logger"/>
+        <property name="logging"/>
+        <property name="resources"/>
+        <method name="apply"/>
+        <method name="buildscript"/>
+        <method name="file"/>
+        <method name="files"/>
+        <method name="uri"/>
+        <method name="relativePath"/>
+        <method name="fileTree"/>
+        <method name="zipTree"/>
+        <method name="tarTree"/>
+        <method name="copy"/>
+        <method name="copySpec"/>
+        <method name="mkdir"/>
+        <method name="delete"/>
+        <method name="javaexec"/>
+        <method name="exec"/>
+    </documentation>
 </type>

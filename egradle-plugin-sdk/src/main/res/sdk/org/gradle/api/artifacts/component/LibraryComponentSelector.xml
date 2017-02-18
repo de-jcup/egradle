@@ -41,4 +41,5 @@
 </description>
     </property>
     <property name="variant" type="java.lang.String"/>
+    <documentation/>
 </type>

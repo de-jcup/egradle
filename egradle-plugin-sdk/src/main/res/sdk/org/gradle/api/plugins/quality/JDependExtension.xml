@@ -5,4 +5,10 @@
  
  @see JDependPlugin 
 </description>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="2.9.1"/>
+        <property name="reportsDir"/>
+        <property name="${project.reporting.baseDir}/jdepend"/>
+    </documentation>
 </type>

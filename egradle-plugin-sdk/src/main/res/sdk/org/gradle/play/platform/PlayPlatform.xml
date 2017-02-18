@@ -40,4 +40,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Scala runtime 
 </description>
     </property>
+    <documentation>
+        <property name="playVersion"/>
+        <property name="scalaPlatform"/>
+        <property name="javaPlatform"/>
+    </documentation>
 </type>

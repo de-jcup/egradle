@@ -37,4 +37,5 @@
 </description>
         <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="testDescriptor"/>
     </method>
+    <documentation/>
 </type>

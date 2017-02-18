@@ -20,4 +20,10 @@
  The Idea workspace model containing the details required to generate the workspace file. 
 </description>
     </property>
+    <documentation>
+        <property name="workspace"/>
+        <property name="project.idea.workspace"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/${project.name}.iws"/>
+    </documentation>
 </type>

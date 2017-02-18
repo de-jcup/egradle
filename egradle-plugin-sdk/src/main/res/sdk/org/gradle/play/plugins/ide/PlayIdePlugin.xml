@@ -12,4 +12,5 @@
         <parameter type="org.gradle.api.plugins.AppliedPlugin" name="appliedPlugin"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

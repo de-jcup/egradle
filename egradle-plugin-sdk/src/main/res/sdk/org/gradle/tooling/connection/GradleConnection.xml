@@ -129,4 +129,5 @@
  @throws IllegalStateException When this connection has been closed or is closing. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -329,4 +329,38 @@
 </description>
     </property>
     <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
+    <documentation>
+        <property name="classes"/>
+        <property name="sourceSet.output"/>
+        <property name="classpath"/>
+        <property name="sourceSet.compileClasspath"/>
+        <property name="source"/>
+        <property name="sourceSet.allJava"/>
+        <property name="findbugsClasspath"/>
+        <property name="project.configurations.findbugs"/>
+        <property name="pluginClasspath"/>
+        <property name="project.configurations.findbugsPlugins"/>
+        <property name="ignoreFailures"/>
+        <property name="project.findbugs.ignoreFailures"/>
+        <property name="effort"/>
+        <property name="project.findbugs.effort"/>
+        <property name="reportLevel"/>
+        <property name="project.findbugs.reportLevel"/>
+        <property name="maxHeapSize"/>
+        <property name="null"/>
+        <property name="visitors"/>
+        <property name="project.findbugs.visitors"/>
+        <property name="omitVisitors"/>
+        <property name="project.findbugs.omitVisitors"/>
+        <property name="includeFilterConfig"/>
+        <property name="project.findbugs.includeFilterConfig"/>
+        <property name="excludeFilterConfig"/>
+        <property name="project.findbugs.excludeFilterConfig"/>
+        <property name="includeFilter"/>
+        <property name="project.findbugs.includeFilter"/>
+        <property name="excludeFilter"/>
+        <property name="project.findbugs.excludeFilter"/>
+        <property name="reports"/>
+        <method name="reports"/>
+    </documentation>
 </type>

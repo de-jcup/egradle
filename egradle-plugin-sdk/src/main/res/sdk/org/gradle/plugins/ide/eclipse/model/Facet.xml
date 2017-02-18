@@ -26,4 +26,5 @@
     <property name="name" type="java.lang.String"/>
     <property name="type" type="org.gradle.plugins.ide.eclipse.model.Facet.FacetType"/>
     <property name="version" type="java.lang.String"/>
+    <documentation/>
 </type>

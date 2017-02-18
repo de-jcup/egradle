@@ -52,4 +52,9 @@
         <parameter type="java.lang.Class" name="componentType"/>
         <parameter type="java.lang.Class" name="artifactTypes"/>
     </method>
+    <documentation>
+        <method name="forComponents"/>
+        <method name="withArtifacts"/>
+        <method name="execute"/>
+    </documentation>
 </type>

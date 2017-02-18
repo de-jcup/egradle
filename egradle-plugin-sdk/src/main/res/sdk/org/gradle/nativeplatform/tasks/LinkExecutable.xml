@@ -4,4 +4,5 @@
  Links a binary executable from object files and libraries. 
 </description>
     <method name="createLinkerSpec" returnType="org.gradle.nativeplatform.internal.LinkerSpec"/>
+    <documentation/>
 </type>

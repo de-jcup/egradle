@@ -342,4 +342,16 @@
  Returns the revision for this publication. 
 </description>
     </property>
+    <documentation>
+        <property name="descriptor"/>
+        <property name="artifacts"/>
+        <property name="configurations"/>
+        <property name="organisation"/>
+        <property name="module"/>
+        <property name="revision"/>
+        <method name="from"/>
+        <method name="descriptor"/>
+        <method name="artifact"/>
+        <method name="configurations"/>
+    </documentation>
 </type>

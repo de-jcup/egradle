@@ -88,4 +88,14 @@
  For examples see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="project"/>
+        <property name="module"/>
+        <property name="workspace"/>
+        <property name="targetVersion"/>
+        <method name="project"/>
+        <method name="module"/>
+        <method name="workspace"/>
+        <method name="pathVariables"/>
+    </documentation>
 </type>

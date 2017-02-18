@@ -5,4 +5,5 @@
 </description>
     <method name="getTask" returnType="org.gradle.api.Task"/>
     <property name="task" type="org.gradle.api.Task"/>
+    <documentation/>
 </type>

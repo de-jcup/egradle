@@ -164,4 +164,5 @@
  Returns the ResolvedDependency instances that have this instance as a transitive dependency. Returns never null. 
 </description>
     </property>
+    <documentation/>
 </type>

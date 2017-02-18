@@ -17,4 +17,5 @@
 </description>
         <parameter type="IN" name="in"/>
     </method>
+    <documentation/>
 </type>

@@ -95,4 +95,16 @@
  This means you should not enable this property if you are building JARs to be used with Java 6 and earlier runtimes. 
 </description>
     </property>
+    <documentation>
+        <property name="metadataCharset"/>
+        <property name="Platform default encoding"/>
+        <property name="entryCompression"/>
+        <property name="ZipEntryCompression.DEFLATED"/>
+        <property name="extension"/>
+        <property name="zip"/>
+        <property name="metadataCharset"/>
+        <property name="Platform default encoding"/>
+        <property name="zip64"/>
+        <property name="false"/>
+    </documentation>
 </type>

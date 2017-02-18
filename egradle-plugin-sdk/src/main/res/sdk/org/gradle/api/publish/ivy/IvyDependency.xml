@@ -49,4 +49,5 @@
  The revision value for this dependency. 
 </description>
     </property>
+    <documentation/>
 </type>

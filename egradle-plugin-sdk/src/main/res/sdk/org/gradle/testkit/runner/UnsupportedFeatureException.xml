@@ -8,4 +8,5 @@
  @see GradleRunner#withGradleInstallation(java.io.File) 
  @see GradleRunner#withGradleDistribution(java.net.URI) 
 </description>
+    <documentation/>
 </type>

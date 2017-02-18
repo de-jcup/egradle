@@ -18,4 +18,5 @@
     <method name="toString" returnType="java.lang.String"/>
     <property name="kind" type="java.lang.String"/>
     <property name="pattern" type="java.lang.String"/>
+    <documentation/>
 </type>

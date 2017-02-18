@@ -7,4 +7,5 @@
     <method name="getSupportedExtensions" returnType="java.util.List"/>
     <property name="defaultExtension" type="java.lang.String"/>
     <property name="supportedExtensions" type="java.util.List"/>
+    <documentation/>
 </type>

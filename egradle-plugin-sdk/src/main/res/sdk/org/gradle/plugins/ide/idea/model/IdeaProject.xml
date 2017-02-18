@@ -283,4 +283,27 @@
  See the examples in the docs for &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="modules"/>
+        <property name="project.allprojects.idea.module"/>
+        <property name="vcs"/>
+        <property name="jdkName"/>
+        <property name="Java version used to run Gradle, for example '1.6'"/>
+        <property name="Java version used to run Gradle, for example '1.6'"/>
+        <property name="languageLevel"/>
+        <property name="JavaVersion.JAVA_1_6"/>
+        <property name="project.sourceCompatibility"/>
+        <property name="targetBytecodeVersion"/>
+        <property name="JavaVersion.JAVA_1_6"/>
+        <property name="Highest project.targetCompatibility value of all java subprojects or JavaVersion.JAVA_1_6 if no java project found."/>
+        <property name="wildcards"/>
+        <property name="['!?*.java', '!?*.groovy']"/>
+        <property name="ipr"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/${project.name}.ipr"/>
+        <property name="projectLibraries"/>
+        <property name="[] ([scala-library] with scala-base plugin)"/>
+        <property name="[] ([scala-library] with scala-base plugin)"/>
+        <method name="ipr"/>
+    </documentation>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  A &lt;a href='type://TaskInstantiationException'&gt;TaskInstantiationException&lt;/a&gt; is thrown when a task cannot be instantiated for some reason. 
 </description>
+    <documentation/>
 </type>

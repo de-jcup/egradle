@@ -31,4 +31,5 @@
  Returns the publications for this project. 
 </description>
     </property>
+    <documentation/>
 </type>

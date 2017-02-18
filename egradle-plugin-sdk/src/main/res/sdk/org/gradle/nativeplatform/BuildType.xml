@@ -14,4 +14,5 @@
  Returns a human-consumable name for this build type. 
 </description>
     </property>
+    <documentation/>
 </type>

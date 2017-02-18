@@ -20,4 +20,5 @@
     <method name="validateComponentSpecRegistrations" returnType="void">
         <parameter type="org.gradle.platform.base.component.internal.ComponentSpecFactory" name="instanceFactory"/>
     </method>
+    <documentation/>
 </type>

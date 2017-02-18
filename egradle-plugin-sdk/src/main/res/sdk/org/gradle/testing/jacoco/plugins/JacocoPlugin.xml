@@ -80,4 +80,5 @@
         <parameter type="org.gradle.testing.jacoco.tasks.JacocoReport" name="reportTask"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

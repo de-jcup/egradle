@@ -31,4 +31,5 @@
     <property name="library" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
     <property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier"/>
     <property name="sourcePath" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
+    <documentation/>
 </type>

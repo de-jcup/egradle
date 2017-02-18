@@ -214,4 +214,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for warn level 
 </description>
     </property>
+    <documentation>
+        <property name="debug"/>
+        <property name="info"/>
+        <property name="lifecycle"/>
+        <property name="warn"/>
+        <property name="quiet"/>
+        <property name="error"/>
+    </documentation>
 </type>

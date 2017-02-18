@@ -34,4 +34,5 @@
  @see #setChanging(boolean) 
 </description>
     </property>
+    <documentation/>
 </type>

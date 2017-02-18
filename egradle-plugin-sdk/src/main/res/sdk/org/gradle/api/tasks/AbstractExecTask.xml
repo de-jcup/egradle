@@ -232,4 +232,21 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <property name="args"/>
+        <property name="commandLine"/>
+        <property name="executable"/>
+        <property name="workingDir"/>
+        <property name="environment"/>
+        <property name="standardInput"/>
+        <property name="standardOutput"/>
+        <property name="errorOutput"/>
+        <property name="ignoreExitValue"/>
+        <property name="execResult"/>
+        <method name="commandLine"/>
+        <method name="args"/>
+        <method name="executable"/>
+        <method name="workingDir"/>
+        <method name="environment"/>
+    </documentation>
 </type>

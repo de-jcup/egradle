@@ -15,4 +15,5 @@
  Returns the ID of the requested component. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -11,4 +11,5 @@
         <parameter type="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

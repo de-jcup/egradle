@@ -115,4 +115,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks to execute. 
 </description>
     </property>
+    <documentation>
+        <property name="projectDir"/>
+        <property name="gradleVersion"/>
+        <property name="tasks"/>
+        <property name="arguments"/>
+    </documentation>
 </type>

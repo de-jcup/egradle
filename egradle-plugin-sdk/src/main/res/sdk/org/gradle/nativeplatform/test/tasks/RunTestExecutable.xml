@@ -18,4 +18,5 @@
     </method>
     <property name="ignoreFailures" type="boolean"/>
     <property name="outputDir" type="java.io.File"/>
+    <documentation/>
 </type>

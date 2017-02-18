@@ -28,4 +28,10 @@
 </description>
     </property>
     <property name="projects" type="java.util.Set"/>
+    <documentation>
+        <property name="projectReportDirName"/>
+        <property name="'project'"/>
+        <property name="projectReportDir"/>
+        <property name="${project.reporting.baseDir}/${project.projectReportDirName}"/>
+    </documentation>
 </type>

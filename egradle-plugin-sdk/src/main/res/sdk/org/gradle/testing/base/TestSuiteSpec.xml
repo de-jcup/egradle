@@ -28,4 +28,5 @@
  The tested component. 
 </description>
     </property>
+    <documentation/>
 </type>

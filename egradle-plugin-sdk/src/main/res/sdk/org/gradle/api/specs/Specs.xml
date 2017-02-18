@@ -48,4 +48,5 @@
         <parameter type="org.gradle.api.specs.Spec" name="specs"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
+    <documentation/>
 </type>

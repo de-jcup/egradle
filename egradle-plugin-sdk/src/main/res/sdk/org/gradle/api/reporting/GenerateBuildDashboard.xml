@@ -80,4 +80,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports container 
 </description>
     </property>
+    <documentation>
+        <property name="reports"/>
+        <method name="reports"/>
+        <method name="aggregate"/>
+    </documentation>
 </type>

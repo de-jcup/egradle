@@ -34,4 +34,5 @@
     <method name="getToolName" returnType="java.lang.String"/>
     <property name="taskType" type="java.lang.Class"/>
     <property name="toolName" type="java.lang.String"/>
+    <documentation/>
 </type>

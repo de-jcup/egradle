@@ -47,4 +47,5 @@
         <parameter type="org.gradle.api.tasks.Delete" name="clean"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

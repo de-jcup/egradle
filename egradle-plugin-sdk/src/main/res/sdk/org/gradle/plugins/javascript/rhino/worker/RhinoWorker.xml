@@ -6,4 +6,5 @@
     <method name="process" returnType="R">
         <parameter type="P" name="payload"/>
     </method>
+    <documentation/>
 </type>

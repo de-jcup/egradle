@@ -7,4 +7,5 @@
 </description>
     <interface name="org.gradle.tooling.events.StartEvent"/>
     <interface name="org.gradle.tooling.events.task.TaskProgressEvent"/>
+    <documentation/>
 </type>

@@ -22,4 +22,5 @@
     </method>
     <property name="children" type="java.util.List"/>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.TextReportRenderer"/>
+    <documentation/>
 </type>

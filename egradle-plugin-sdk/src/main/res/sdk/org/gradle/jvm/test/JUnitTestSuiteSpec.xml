@@ -11,4 +11,5 @@
     </method>
     <interface name="org.gradle.jvm.test.JvmTestSuiteSpec"/>
     <property name="jUnitVersion" type="java.lang.String"/>
+    <documentation/>
 </type>

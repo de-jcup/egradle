@@ -117,4 +117,9 @@
  @since 2.14 
 </description>
     </property>
+    <documentation>
+        <property name="manifest"/>
+        <method name="manifest"/>
+        <method name="metaInf"/>
+    </documentation>
 </type>

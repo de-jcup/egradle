@@ -67,4 +67,5 @@
 </description>
         <parameter type="java.io.File" name="dir"/>
     </method>
+    <documentation/>
 </type>

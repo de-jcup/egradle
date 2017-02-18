@@ -19,4 +19,5 @@
  Returns the pre-compiled header to be used during compilation 
 </description>
     </property>
+    <documentation/>
 </type>

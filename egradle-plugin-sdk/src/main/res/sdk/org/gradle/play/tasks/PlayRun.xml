@@ -92,4 +92,11 @@
     </property>
     <property name="playToolProvider" type="org.gradle.play.internal.toolchain.PlayToolProvider"/>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>
+    <documentation>
+        <property name="forkOptions"/>
+        <property name="httpPort"/>
+        <property name="applicationJar"/>
+        <property name="assetsJar"/>
+        <property name="assetsDirs"/>
+    </documentation>
 </type>

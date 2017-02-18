@@ -23,7 +23,7 @@ public class XMLTypeExporter {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marshaller.marshal(type, stream);
 		} catch (JAXBException e) {
-			throw new IOException("Was not able to create unmarshaller", e);
+			throw new IOException("Was not able to create marshaller", e);
 		}
 	}
 }

@@ -102,4 +102,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directories. Returns an empty set when this set contains no source directories. 
 </description>
     </property>
+    <documentation/>
 </type>

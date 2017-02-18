@@ -13,4 +13,5 @@
 </description>
         <parameter type="T" name="t"/>
     </method>
+    <documentation/>
 </type>

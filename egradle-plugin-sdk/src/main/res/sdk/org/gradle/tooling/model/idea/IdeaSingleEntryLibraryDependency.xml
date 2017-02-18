@@ -49,4 +49,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null when the source is not available for this dependency. 
 </description>
     </property>
+    <documentation/>
 </type>

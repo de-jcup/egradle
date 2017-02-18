@@ -49,4 +49,5 @@
  is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks 
 </description>
     </property>
+    <documentation/>
 </type>

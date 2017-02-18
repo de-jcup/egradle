@@ -68,4 +68,8 @@
     </method>
     <interface name="org.gradle.api.NamedDomainObjectSet"/>
     <interface name="org.gradle.util.Configurable"/>
+    <documentation>
+        <method name="create"/>
+        <method name="maybeCreate"/>
+    </documentation>
 </type>

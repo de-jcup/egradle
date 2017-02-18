@@ -18,4 +18,5 @@
  
  &lt;li&gt;&lt;a href='type://org.gradle.api.tasks.OutputDirectory'&gt;org.gradle.api.tasks.OutputDirectory&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; 
 </description>
+    <documentation/>
 </type>

@@ -180,4 +180,5 @@
  Generate unchecked information. 
 </description>
     </property>
+    <documentation/>
 </type>

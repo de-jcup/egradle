@@ -3,4 +3,5 @@
     <description> 
  Determines how exceptions are formatted in test logging. 
 </description>
+    <documentation/>
 </type>

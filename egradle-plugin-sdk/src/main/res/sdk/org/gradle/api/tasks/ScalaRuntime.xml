@@ -80,4 +80,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version of the Scala Jar file 
 </description>
     </property>
+    <documentation>
+        <method name="inferScalaClasspath"/>
+        <method name="findScalaJar"/>
+        <method name="getScalaVersion"/>
+    </documentation>
 </type>

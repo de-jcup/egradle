@@ -3,4 +3,5 @@
     <method name="gradlePluginDevelopmentExtension" returnType="org.gradle.plugin.devel.GradlePluginDevelopmentExtension">
         <parameter type="org.gradle.api.plugins.ExtensionContainer" name="extensionContainer"/>
     </method>
+    <documentation/>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  &lt;code&gt;UncheckedIOException&lt;/code&gt; is used to wrap an &lt;a href='type://java.io.IOException'&gt;java.io.IOException&lt;/a&gt; into an unchecked exception. 
 </description>
+    <documentation/>
 </type>

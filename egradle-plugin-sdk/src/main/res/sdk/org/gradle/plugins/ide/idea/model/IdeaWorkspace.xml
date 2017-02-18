@@ -42,4 +42,8 @@
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="iws"/>
+        <method name="iws"/>
+    </documentation>
 </type>

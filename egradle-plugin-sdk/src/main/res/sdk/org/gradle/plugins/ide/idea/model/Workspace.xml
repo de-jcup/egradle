@@ -11,4 +11,5 @@
         <parameter type="groovy.util.Node" name="xml"/>
     </method>
     <property name="defaultResourceName" type="java.lang.String"/>
+    <documentation/>
 </type>

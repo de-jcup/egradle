@@ -3,4 +3,5 @@
     <description> 
  The base class for any test framework specific options. 
 </description>
+    <documentation/>
 </type>

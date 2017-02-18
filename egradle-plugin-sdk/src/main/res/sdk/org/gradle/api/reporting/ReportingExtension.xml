@@ -56,4 +56,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The base directory for all reports 
 </description>
     </property>
+    <documentation>
+        <property name="baseDir"/>
+        <method name="file"/>
+    </documentation>
 </type>

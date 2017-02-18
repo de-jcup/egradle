@@ -28,4 +28,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks which the given task depends on. Returns an empty set if the task has no dependencies. 
 </description>
     </property>
+    <documentation/>
 </type>

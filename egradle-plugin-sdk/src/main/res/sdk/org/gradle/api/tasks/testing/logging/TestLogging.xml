@@ -248,4 +248,16 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of filters to be used for sanitizing test stack traces 
 </description>
     </property>
+    <documentation>
+        <property name="events"/>
+        <property name="minGranularity"/>
+        <property name="maxGranularity"/>
+        <property name="displayGranularity"/>
+        <property name="showExceptions"/>
+        <property name="showCauses"/>
+        <property name="showStackTraces"/>
+        <property name="showStandardStreams"/>
+        <property name="exceptionFormat"/>
+        <property name="stackTraceFilters"/>
+    </documentation>
 </type>

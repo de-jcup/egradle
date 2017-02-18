@@ -3,4 +3,5 @@
     <description> 
  A &lt;a href='type://TaskValidationException'&gt;TaskValidationException&lt;/a&gt; is thrown when there is some validation problem with a task. 
 </description>
+    <documentation/>
 </type>

@@ -17,4 +17,5 @@
     <method name="registerBaseBinarySpec" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
+    <documentation/>
 </type>

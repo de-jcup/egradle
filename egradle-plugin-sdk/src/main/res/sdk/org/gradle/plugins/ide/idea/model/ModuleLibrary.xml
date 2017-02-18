@@ -98,4 +98,5 @@
  A set of Jar files or directories containing source code. 
 </description>
     </property>
+    <documentation/>
 </type>

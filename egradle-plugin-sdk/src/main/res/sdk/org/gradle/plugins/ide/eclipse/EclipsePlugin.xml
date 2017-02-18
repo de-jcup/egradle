@@ -97,4 +97,5 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <property name="lifecycleTaskName" type="java.lang.String"/>
+    <documentation/>
 </type>

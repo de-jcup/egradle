@@ -65,4 +65,10 @@
 </description>
         <parameter type="org.gradle.api.artifacts.component.ComponentSelector" name="substitutedDependency"/>
     </method>
+    <documentation>
+        <method name="all"/>
+        <method name="module"/>
+        <method name="project"/>
+        <method name="substitute"/>
+    </documentation>
 </type>

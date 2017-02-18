@@ -3,4 +3,5 @@
     <description> 
  Specifies how the wrapper path should be interpreted. 
 </description>
+    <documentation/>
 </type>

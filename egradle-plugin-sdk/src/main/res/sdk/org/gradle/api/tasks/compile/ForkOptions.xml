@@ -50,4 +50,5 @@
  in which case the directory will be chosen automatically. 
 </description>
     </property>
+    <documentation/>
 </type>

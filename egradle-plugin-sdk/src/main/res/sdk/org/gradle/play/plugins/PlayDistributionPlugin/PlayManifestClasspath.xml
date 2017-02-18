@@ -4,4 +4,5 @@
  Represents a classpath to be defined in a jar manifest 
 </description>
     <method name="toString" returnType="java.lang.String"/>
+    <documentation/>
 </type>

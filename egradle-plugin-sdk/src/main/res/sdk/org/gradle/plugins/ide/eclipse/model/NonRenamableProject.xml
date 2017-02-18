@@ -59,4 +59,5 @@
     <property name="natures" type="java.util.List"/>
     <property name="referencedProjects" type="java.util.Set"/>
     <property name="xml" type="groovy.util.Node"/>
+    <documentation/>
 </type>

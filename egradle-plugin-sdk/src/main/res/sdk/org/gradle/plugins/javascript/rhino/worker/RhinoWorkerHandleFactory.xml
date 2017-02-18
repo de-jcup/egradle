@@ -10,4 +10,5 @@
         <parameter type="org.gradle.api.logging.LogLevel" name="logLevel"/>
         <parameter type="java.io.File" name="workingDir"/>
     </method>
+    <documentation/>
 </type>

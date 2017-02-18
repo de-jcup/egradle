@@ -10,4 +10,5 @@
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <interface name="org.gradle.ide.visualstudio.ConfigFile"/>
+    <documentation/>
 </type>

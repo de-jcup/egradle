@@ -19,4 +19,5 @@
     <property name="modelRegistry" type="org.gradle.model.internal.registry.ModelRegistry"/>
     <property name="showHidden" type="boolean"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
+    <documentation/>
 </type>

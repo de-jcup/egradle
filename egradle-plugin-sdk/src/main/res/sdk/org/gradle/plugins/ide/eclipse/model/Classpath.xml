@@ -47,4 +47,5 @@
     <property name="dependency" type="boolean"/>
     <property name="entries" type="java.util.List"/>
     <property name="jreContainer" type="boolean"/>
+    <documentation/>
 </type>

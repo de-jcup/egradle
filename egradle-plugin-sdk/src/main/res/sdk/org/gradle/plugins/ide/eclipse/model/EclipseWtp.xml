@@ -75,4 +75,10 @@
  For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="component"/>
+        <property name="facet"/>
+        <method name="component"/>
+        <method name="facet"/>
+    </documentation>
 </type>

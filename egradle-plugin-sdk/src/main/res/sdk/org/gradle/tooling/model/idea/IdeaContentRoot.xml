@@ -71,4 +71,5 @@
  The set of test source directories. 
 </description>
     </property>
+    <documentation/>
 </type>

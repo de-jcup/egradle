@@ -4,4 +4,5 @@
         <parameter type="org.gradle.testing.base.TestSuiteContainer" name="testSuites"/>
         <parameter type="org.gradle.model.ModelMap" name="components"/>
     </method>
+    <documentation/>
 </type>

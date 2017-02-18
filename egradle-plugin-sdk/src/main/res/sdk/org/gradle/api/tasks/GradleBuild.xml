@@ -94,4 +94,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The sequence. May be empty. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="dir"/>
+        <property name="buildFile"/>
+        <property name="tasks"/>
+        <property name="startParameter"/>
+    </documentation>
 </type>

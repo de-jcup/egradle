@@ -92,4 +92,14 @@
 </description>
     </property>
     <property name="project" type="org.gradle.api.Project"/>
+    <documentation>
+        <property name="applicationName"/>
+        <property name="project.name"/>
+        <property name="mainClassName"/>
+        <property name="null"/>
+        <property name="applicationDefaultJvmArgs"/>
+        <property name="[]"/>
+        <property name="applicationDistribution"/>
+        <property name="A copy spec that; includes all of the contents of src/dist, copies the start scripts into bin, and copies the built jar and all dependencies into lib"/>
+    </documentation>
 </type>

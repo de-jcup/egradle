@@ -340,4 +340,30 @@
  Tells whether to turn on verbose output. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
+    <documentation>
+        <property name="failOnError"/>
+        <property name="true"/>
+        <property name="verbose"/>
+        <property name="false"/>
+        <property name="listFiles"/>
+        <property name="false"/>
+        <property name="configurationScript"/>
+        <property name="null"/>
+        <property name="encoding"/>
+        <property name="UTF-8"/>
+        <property name="fork"/>
+        <property name="true"/>
+        <property name="forkOptions"/>
+        <property name="optimizationOptions"/>
+        <property name="[:]"/>
+        <property name="stubDir"/>
+        <property name="null"/>
+        <property name="fileExtensions"/>
+        <property name="[&quot;java&quot;, &quot;groovy&quot;]"/>
+        <property name="keepStubs"/>
+        <property name="false"/>
+        <property name="javaAnnotationProcessing"/>
+        <property name="false"/>
+        <method name="fork"/>
+    </documentation>
 </type>

@@ -15,4 +15,5 @@
     </method>
     <property name="file" type="java.io.File"/>
     <property name="toolChain" type="org.gradle.platform.base.ToolChain"/>
+    <documentation/>
 </type>

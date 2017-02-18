@@ -20,4 +20,7 @@
  The default imports that should be added to generated source files 
 </description>
     </property>
+    <documentation>
+        <property name="defaultImports"/>
+    </documentation>
 </type>

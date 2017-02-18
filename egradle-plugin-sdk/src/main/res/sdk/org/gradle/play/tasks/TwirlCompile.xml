@@ -94,4 +94,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description>
     </property>
+    <documentation>
+        <property name="outputDirectory"/>
+        <property name="forkOptions"/>
+        <property name="defaultImports"/>
+    </documentation>
 </type>

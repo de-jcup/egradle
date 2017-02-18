@@ -27,4 +27,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://StringBuilder'&gt;StringBuilder&lt;/a&gt; representation of the XML. 
 </description>
     </method>
+    <documentation/>
 </type>

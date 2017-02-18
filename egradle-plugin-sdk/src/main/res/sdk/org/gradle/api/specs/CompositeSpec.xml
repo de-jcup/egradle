@@ -19,4 +19,5 @@
     <property name="empty" type="boolean"/>
     <property name="specs" type="java.util.List"/>
     <property name="specsArray" type="org.gradle.api.specs.Spec"/>
+    <documentation/>
 </type>

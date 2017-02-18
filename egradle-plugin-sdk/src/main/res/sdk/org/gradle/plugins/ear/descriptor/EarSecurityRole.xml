@@ -29,4 +29,5 @@
  The name of the security role. Required. 
 </description>
     </property>
+    <documentation/>
 </type>

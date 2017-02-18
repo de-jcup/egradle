@@ -9,4 +9,5 @@
         <parameter type="java.lang.String" name="installName"/>
     </method>
     <property name="installName" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -48,4 +48,5 @@
     <property name="kind" type="java.lang.String"/>
     <property name="name" type="java.lang.String"/>
     <property name="output" type="java.lang.String"/>
+    <documentation/>
 </type>

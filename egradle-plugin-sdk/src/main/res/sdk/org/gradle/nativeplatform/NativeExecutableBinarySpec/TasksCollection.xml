@@ -24,4 +24,5 @@
  The link task. 
 </description>
     </property>
+    <documentation/>
 </type>

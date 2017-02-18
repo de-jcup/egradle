@@ -45,4 +45,7 @@
     <property name="namer" type="org.gradle.api.Namer"/>
     <property name="names" type="java.util.SortedSet"/>
     <property name="rules" type="java.util.List"/>
+    <documentation>
+        <property name="enabled"/>
+    </documentation>
 </type>

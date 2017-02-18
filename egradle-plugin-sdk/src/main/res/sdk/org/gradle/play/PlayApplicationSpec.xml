@@ -59,4 +59,8 @@
  true if an injected router will be generated. 
 </description>
     </property>
+    <documentation>
+        <property name="injectedRoutesGenerator"/>
+        <method name="platform"/>
+    </documentation>
 </type>

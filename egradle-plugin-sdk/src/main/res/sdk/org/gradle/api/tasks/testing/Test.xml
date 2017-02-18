@@ -846,4 +846,73 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <property name="testClassesDir"/>
+        <property name="project.sourceSets.test.output.classesDir"/>
+        <property name="binResultsDir"/>
+        <property name="project.testResultsDir/binary/task.name"/>
+        <property name="reports"/>
+        <property name="project.testReportDir"/>
+        <property name="classpath"/>
+        <property name="project.sourceSets.test.runtimeClasspath"/>
+        <property name="workingDir"/>
+        <property name="project.projectDir"/>
+        <property name="scanForTestClasses"/>
+        <property name="true"/>
+        <property name="forkEvery"/>
+        <property name="0"/>
+        <property name="maxParallelForks"/>
+        <property name="1"/>
+        <property name="executable"/>
+        <property name="java command for the current JVM."/>
+        <property name="systemProperties"/>
+        <property name="[:]"/>
+        <property name="bootstrapClasspath"/>
+        <property name="[]"/>
+        <property name="maxHeapSize"/>
+        <property name="null"/>
+        <property name="minHeapSize"/>
+        <property name="null"/>
+        <property name="jvmArgs"/>
+        <property name="[]"/>
+        <property name="enableAssertions"/>
+        <property name="true"/>
+        <property name="debug"/>
+        <property name="false"/>
+        <property name="allJvmArgs"/>
+        <property name="environment"/>
+        <property name="environment of the current process"/>
+        <property name="ignoreFailures"/>
+        <property name="false"/>
+        <property name="options"/>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+        <property name="testLogging"/>
+        <method name="addTestListener"/>
+        <method name="removeTestListener"/>
+        <method name="addTestOutputListener"/>
+        <method name="removeTestOutputListener"/>
+        <method name="beforeSuite"/>
+        <method name="afterSuite"/>
+        <method name="beforeTest"/>
+        <method name="afterTest"/>
+        <method name="include"/>
+        <method name="exclude"/>
+        <method name="useJUnit"/>
+        <method name="useTestNG"/>
+        <method name="workingDir"/>
+        <method name="executable"/>
+        <method name="setTestNameIncludePatterns"/>
+        <method name="systemProperties"/>
+        <method name="bootstrapClasspath"/>
+        <method name="jvmArgs"/>
+        <method name="environment"/>
+        <method name="copyTo"/>
+        <method name="onOutput"/>
+        <method name="testLogging"/>
+        <method name="reports"/>
+        <method name="options"/>
+    </documentation>
 </type>

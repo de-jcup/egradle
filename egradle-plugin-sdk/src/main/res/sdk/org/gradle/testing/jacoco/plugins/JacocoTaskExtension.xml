@@ -226,4 +226,19 @@
  An identifier for the session written to the execution data. Defaults to an auto-generated identifier. 
 </description>
     </property>
+    <documentation>
+        <property name="destinationFile"/>
+        <property name="append"/>
+        <property name="includes"/>
+        <property name="excludes"/>
+        <property name="excludeClassLoaders"/>
+        <property name="sessionId"/>
+        <property name="dumpOnExit"/>
+        <property name="output"/>
+        <property name="address"/>
+        <property name="port"/>
+        <property name="classDumpFile"/>
+        <property name="jmx"/>
+        <method name="getAsJvmArg"/>
+    </documentation>
 </type>

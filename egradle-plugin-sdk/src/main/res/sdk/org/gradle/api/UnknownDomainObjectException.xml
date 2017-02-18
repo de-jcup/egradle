@@ -4,4 +4,5 @@
  &lt;p&gt;A &lt;a href='type://UnknownDomainObjectException'&gt;UnknownDomainObjectException&lt;/a&gt; is the super class of all exceptions thrown when a given domain object 
  cannot be located.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

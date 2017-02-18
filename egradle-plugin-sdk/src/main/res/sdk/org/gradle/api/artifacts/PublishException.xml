@@ -3,4 +3,5 @@
     <description> 
  &lt;p&gt;A &lt;code&gt;PublishException&lt;/code&gt; is thrown when a dependency configuration cannot be published for some reason.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

@@ -22,4 +22,5 @@
     <property name="evaluator" type="org.gradle.plugins.javascript.envjs.browser.BrowserEvaluator"/>
     <property name="resource" type="java.lang.String"/>
     <property name="result" type="java.io.File"/>
+    <documentation/>
 </type>

@@ -99,4 +99,9 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <method name="getByName"/>
+        <method name="getAt"/>
+        <method name="detachedConfiguration"/>
+    </documentation>
 </type>

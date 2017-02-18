@@ -57,4 +57,5 @@
     <property name="nativeLibraryLocation" type="java.lang.String"/>
     <property name="nodeExported" type="boolean"/>
     <property name="path" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -43,4 +43,5 @@
  &lt;p&gt; 
  In order to prevent two tasks from executing in parallel, a &lt;a href='type://org.gradle.api.Task#mustRunAfter(Object...)'&gt;org.gradle.api.Task#mustRunAfter(Object...)&lt;/a&gt; relationship can be set up between the tasks. 
 </description>
+    <documentation/>
 </type>

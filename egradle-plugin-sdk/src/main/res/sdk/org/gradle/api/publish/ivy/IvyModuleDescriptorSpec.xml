@@ -90,4 +90,11 @@
  Returns the status for this publication. 
 </description>
     </property>
+    <documentation>
+        <property name="branch"/>
+        <property name="status"/>
+        <property name="extraInfo"/>
+        <method name="withXml"/>
+        <method name="extraInfo"/>
+    </documentation>
 </type>

@@ -97,4 +97,12 @@
  For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="sourceCompatibility"/>
+        <property name="project.sourceCompatibility"/>
+        <property name="targetCompatibility"/>
+        <property name="project.targetCompatibility"/>
+        <property name="file"/>
+        <method name="file"/>
+    </documentation>
 </type>

@@ -102,4 +102,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. Never null. 
 </description>
     </property>
+    <documentation/>
 </type>

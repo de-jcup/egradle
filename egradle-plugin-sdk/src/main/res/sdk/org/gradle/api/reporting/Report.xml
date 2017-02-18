@@ -125,4 +125,11 @@
  Tasks that produce reports expose instances of this type for configuration via the &lt;a href='type://Reporting'&gt;Reporting&lt;/a&gt; interface. 
 </description>
     </property>
+    <documentation>
+        <property name="destination"/>
+        <property name="displayName"/>
+        <property name="name"/>
+        <property name="outputType"/>
+        <property name="enabled"/>
+    </documentation>
 </type>

@@ -138,4 +138,5 @@
  @throws IllegalStateException if there is not exactly one registered signature. 
 </description>
     </property>
+    <documentation/>
 </type>

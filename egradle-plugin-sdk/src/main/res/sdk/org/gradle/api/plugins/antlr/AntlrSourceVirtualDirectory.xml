@@ -30,4 +30,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Antlr source.  Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="antlr"/>
+        <property name="[${project.projectDir}/src/${sourceSet.name}/antlr]"/>
+        <method name="antlr"/>
+    </documentation>
 </type>

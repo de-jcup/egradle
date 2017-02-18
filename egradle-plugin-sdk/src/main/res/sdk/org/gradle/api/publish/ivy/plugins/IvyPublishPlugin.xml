@@ -12,4 +12,5 @@
         <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

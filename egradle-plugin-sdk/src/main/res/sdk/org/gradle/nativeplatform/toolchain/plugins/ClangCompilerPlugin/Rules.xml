@@ -7,4 +7,5 @@
     <method name="create" returnType="org.gradle.nativeplatform.toolchain.Clang">
         <parameter type="java.lang.String" name="name"/>
     </method>
+    <documentation/>
 </type>

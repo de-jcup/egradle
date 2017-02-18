@@ -98,4 +98,9 @@
  @see PluginManager#hasPlugin(String) 
 </description>
     </property>
+    <documentation>
+        <property name="plugins"/>
+        <property name="pluginManager"/>
+        <method name="apply"/>
+    </documentation>
 </type>

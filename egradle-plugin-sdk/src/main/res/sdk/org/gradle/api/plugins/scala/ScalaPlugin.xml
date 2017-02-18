@@ -16,4 +16,5 @@
         <parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

@@ -31,7 +31,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.Task;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeInfo;
+import de.jcup.egradle.codeassist.dsl.XMLDSLTypeDocumentation;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
@@ -115,13 +115,12 @@ public class SDKBuilder {
 				gradleVersion);
 
 		/* delete old sdk */
-		File targetPathDirectory = context.createTargetFile(targetRootDirectory);
-		if (targetPathDirectory.exists()) {
+		if (context.targetPathDirectory.exists()) {
 			System.out.println(
-					"Target directory exists - will be deleted before:" + targetPathDirectory.getCanonicalPath());
-			FileUtils.deleteDirectory(targetPathDirectory);
+					"Target directory exists - will be deleted before:" + context.targetPathDirectory.getCanonicalPath());
+			FileUtils.deleteDirectory(context.targetPathDirectory);
 		}
-		targetPathDirectory.mkdirs();
+		context.targetPathDirectory.mkdirs();
 
 		handleApiMappingAndTargetEstimation(context);
 		handlePlugins(context);
@@ -392,10 +391,11 @@ public class SDKBuilder {
 				String name = type.getName();
 				File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/"+name+".xml");
 				if (dslXML.exists()){
-					XMLDSLTypeInfo dslInfo = originDslTypeInfoImporter.collectDSL(dslXML);
-					type.setInfo(dslInfo);
+					XMLDSLTypeDocumentation dslInfo = originDslTypeInfoImporter.collectDSL(dslXML);
+					type.setDocumentation(dslInfo);
+					System.err.println("- added dsl info for file:"+dslXML);
 				}else{
-					System.err.println("no dsl xml file:"+dslXML);
+//					System.err.println("no dsl xml file:"+dslXML);
 				}
 				typeExporter.exportType(type, outputStream);
 			}

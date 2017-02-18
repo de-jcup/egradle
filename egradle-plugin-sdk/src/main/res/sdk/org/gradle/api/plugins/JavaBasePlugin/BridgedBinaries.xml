@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.JavaBasePlugin.BridgedBinaries" version="3.0"/>
+<type interface="false" language="gradle" name="org.gradle.api.plugins.JavaBasePlugin.BridgedBinaries" version="3.0">
+    <documentation/>
+</type>

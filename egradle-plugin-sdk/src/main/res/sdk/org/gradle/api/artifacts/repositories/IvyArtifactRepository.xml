@@ -160,4 +160,11 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description>
     </property>
+    <documentation>
+        <property name="url"/>
+        <property name="resolve"/>
+        <method name="artifactPattern"/>
+        <method name="ivyPattern"/>
+        <method name="layout"/>
+    </documentation>
 </type>

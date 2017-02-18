@@ -106,4 +106,8 @@
         <parameter type="java.util.Map" name="args"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
+    <documentation>
+        <method name="mavenDeployer"/>
+        <method name="mavenInstaller"/>
+    </documentation>
 </type>

@@ -68,4 +68,8 @@
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
+    <documentation>
+        <property name="outputFile"/>
+        <property name="projects"/>
+    </documentation>
 </type>

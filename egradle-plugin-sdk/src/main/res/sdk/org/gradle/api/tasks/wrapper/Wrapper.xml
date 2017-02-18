@@ -216,4 +216,24 @@
  Returns the file to write the wrapper script to. 
 </description>
     </property>
+    <documentation>
+        <property name="scriptFile"/>
+        <property name="${project.projectDir}/gradlew"/>
+        <property name="jarFile"/>
+        <property name="${project.projectDir}/gradle/wrapper/gradle-wrapper.jar"/>
+        <property name="propertiesFile"/>
+        <property name="jarFile, replacing .jar with .properties"/>
+        <property name="distributionPath"/>
+        <property name="'wrapper/dists'"/>
+        <property name="distributionBase"/>
+        <property name="PathBase.GRADLE_USER_HOME"/>
+        <property name="archivePath"/>
+        <property name="'wrapper/dists'"/>
+        <property name="archiveBase"/>
+        <property name="PathBase.GRADLE_USER_HOME"/>
+        <property name="distributionUrl"/>
+        <property name="&quot;http\://services.gradle.org/distributions/gradle-${gradleVersion}-bin.zip&quot;&#xA;                    (or&#xA;                    &quot;http\://services.gradle.org/distributions-snapshots/gradle-${gradleVersion}-bin.zip&quot;&#xA;                    for snapshot versions).&#xA;                "/>
+        <property name="gradleVersion"/>
+        <property name="gradle.gradleVersion"/>
+    </documentation>
 </type>

@@ -24,4 +24,5 @@
     <property name="id" type="java.lang.String"/>
     <property name="implementationClass" type="java.lang.String"/>
     <property name="name" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -20,4 +20,7 @@
  The name that is used to construct the output file names when building this component. 
 </description>
     </property>
+    <documentation>
+        <property name="baseName"/>
+    </documentation>
 </type>

@@ -9,4 +9,5 @@
 </description>
     <method name="getCauses" returnType="java.util.List"/>
     <property name="causes" type="java.util.List"/>
+    <documentation/>
 </type>

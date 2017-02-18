@@ -3,4 +3,5 @@
     <description> 
  Signals that a &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; rule should be applied to all matching descendant elements of the scope instead of the scope itself. 
 </description>
+    <documentation/>
 </type>

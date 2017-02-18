@@ -15,4 +15,5 @@
  The static library binary file. 
 </description>
     </property>
+    <documentation/>
 </type>

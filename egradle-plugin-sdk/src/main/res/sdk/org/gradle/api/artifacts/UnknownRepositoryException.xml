@@ -3,4 +3,5 @@
     <description> 
  An &lt;a href='type://UnknownRepositoryException'&gt;UnknownRepositoryException&lt;/a&gt; is thrown when a repository referenced by name cannot be found. 
 </description>
+    <documentation/>
 </type>

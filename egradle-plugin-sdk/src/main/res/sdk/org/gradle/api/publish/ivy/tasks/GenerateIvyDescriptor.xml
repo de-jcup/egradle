@@ -52,4 +52,8 @@
 </description>
     </property>
     <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
+    <documentation>
+        <property name="destination"/>
+        <property name="descriptor"/>
+    </documentation>
 </type>

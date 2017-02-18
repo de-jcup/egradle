@@ -43,4 +43,5 @@
     <method name="testTaskNameFor" returnType="java.lang.String">
         <parameter type="org.gradle.jvm.test.JvmTestSuiteBinarySpec" name="binary"/>
     </method>
+    <documentation/>
 </type>

@@ -24,4 +24,7 @@
  The headers that are private to this source set and implicitly available. These are not explicitly made available for compilation. 
 </description>
     </property>
+    <documentation>
+        <property name="exportedHeaders"/>
+    </documentation>
 </type>

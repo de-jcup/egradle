@@ -28,4 +28,10 @@
  The name of the web application directory, relative to the project directory. 
 </description>
     </property>
+    <documentation>
+        <property name="webAppDirName"/>
+        <property name="'src/main/webapp'"/>
+        <property name="webAppDir"/>
+        <property name="${project.projectDir}/${project.webAppDirName}"/>
+    </documentation>
 </type>

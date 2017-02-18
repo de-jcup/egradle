@@ -97,4 +97,10 @@
  The tool chain used for linking. 
 </description>
     </property>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="executable"/>
+        <property name="libs"/>
+        <method name="lib"/>
+    </documentation>
 </type>

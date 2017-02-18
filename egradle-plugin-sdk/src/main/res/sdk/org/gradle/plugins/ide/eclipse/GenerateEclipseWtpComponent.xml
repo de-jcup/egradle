@@ -23,4 +23,10 @@
  The Eclipse WTP component model that contains details required to generate the settings file. 
 </description>
     </property>
+    <documentation>
+        <property name="component"/>
+        <property name="project.eclipse.wtp.component"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/.settings/org.eclipse.wst.common.component"/>
+    </documentation>
 </type>

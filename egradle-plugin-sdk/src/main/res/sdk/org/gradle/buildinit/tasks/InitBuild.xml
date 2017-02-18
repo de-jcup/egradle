@@ -50,4 +50,10 @@
  This property can be set via command-line option '--type'. 
 </description>
     </property>
+    <documentation>
+        <property name="type"/>
+        <property name="empty (or pom if a pom.xml file exists in the project directory)"/>
+        <property name="testFramework"/>
+        <property name="empty (default test framework depends on the requested type)"/>
+    </documentation>
 </type>

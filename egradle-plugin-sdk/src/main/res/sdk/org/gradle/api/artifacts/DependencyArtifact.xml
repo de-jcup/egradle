@@ -102,4 +102,5 @@
  specified the user repositories are used for retrieving.  
 </description>
     </property>
+    <documentation/>
 </type>

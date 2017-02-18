@@ -9,4 +9,5 @@
     <interface name="org.gradle.platform.base.GeneralComponentSpec"/>
     <property name="binaries" type="org.gradle.model.ModelMap"/>
     <property name="sources" type="org.gradle.model.ModelMap"/>
+    <documentation/>
 </type>

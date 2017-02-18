@@ -55,4 +55,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the status for this descriptor 
 </description>
     </property>
+    <documentation/>
 </type>

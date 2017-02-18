@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.apache.commons.io.FileUtils;
-
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.sdk.SDKInfo;
 import de.jcup.egradle.sdk.internal.XMLSDKInfo;
@@ -44,6 +42,8 @@ public class SDKBuilderContext {
 	
 	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
 		gradleProjectFolder = new File(pathToradleProjectFolder);
+		targetPathDirectory =createTargetFile(targetRootDirectory);
+		
 		if (! this.gradleProjectFolder.exists()){
 			throw new IllegalArgumentException("gradle project folder does not exist:"+gradleProjectFolder);
 		}
@@ -90,7 +90,7 @@ public class SDKBuilderContext {
 				+ missingDescriptionPercent + "%";
 	}
 	
-	public File createTargetFile(File targetRootDirectory) {
+	private File createTargetFile(File targetRootDirectory) {
 		return new File(targetRootDirectory, "sdk/");
 	}
 	

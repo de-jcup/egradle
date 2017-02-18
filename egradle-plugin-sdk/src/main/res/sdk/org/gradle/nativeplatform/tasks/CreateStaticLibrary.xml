@@ -76,4 +76,11 @@
  The tool chain used for creating the static library. 
 </description>
     </property>
+    <documentation>
+        <property name="source"/>
+        <property name="outputFile"/>
+        <property name="toolChain"/>
+        <property name="staticLibArgs"/>
+        <method name="source"/>
+    </documentation>
 </type>

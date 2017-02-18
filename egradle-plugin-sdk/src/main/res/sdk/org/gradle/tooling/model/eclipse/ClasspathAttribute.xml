@@ -35,4 +35,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of this classpath attribute. 
 </description>
     </property>
+    <documentation/>
 </type>

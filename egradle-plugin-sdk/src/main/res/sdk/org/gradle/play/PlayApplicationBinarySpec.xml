@@ -80,4 +80,11 @@
 </description>
     </property>
     <property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"/>
+    <documentation>
+        <property name="targetPlatform"/>
+        <property name="jarFile"/>
+        <property name="assetsJarFile"/>
+        <property name="classes"/>
+        <property name="assets"/>
+    </documentation>
 </type>

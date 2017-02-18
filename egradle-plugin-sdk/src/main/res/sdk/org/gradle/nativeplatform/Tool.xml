@@ -19,4 +19,8 @@
  The arguments passed when executing this tool. 
 </description>
     </property>
+    <documentation>
+        <property name="args"/>
+        <method name="args"/>
+    </documentation>
 </type>

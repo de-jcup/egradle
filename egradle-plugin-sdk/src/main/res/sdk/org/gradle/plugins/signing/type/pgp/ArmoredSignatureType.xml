@@ -10,4 +10,5 @@
         <parameter type="java.io.OutputStream" name="destination"/>
     </method>
     <property name="extension" type="java.lang.String"/>
+    <documentation/>
 </type>

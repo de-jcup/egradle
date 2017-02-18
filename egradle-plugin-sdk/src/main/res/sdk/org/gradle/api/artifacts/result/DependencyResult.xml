@@ -45,4 +45,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the requested component 
 </description>
     </property>
+    <documentation/>
 </type>

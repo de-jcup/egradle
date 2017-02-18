@@ -10,4 +10,5 @@
     <method name="scalaToolChain" returnType="org.gradle.language.scala.toolchain.ScalaToolChain">
         <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
     </method>
+    <documentation/>
 </type>

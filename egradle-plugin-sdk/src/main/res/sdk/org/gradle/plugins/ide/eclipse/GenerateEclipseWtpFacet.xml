@@ -23,4 +23,10 @@
  The Eclipse WTP facet model containing the details required to generate the settings file. 
 </description>
     </property>
+    <documentation>
+        <property name="facet"/>
+        <property name="project.eclipse.wtp.facet"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/.settings/org.eclipse.wst.common.project.facet.core.xml"/>
+    </documentation>
 </type>

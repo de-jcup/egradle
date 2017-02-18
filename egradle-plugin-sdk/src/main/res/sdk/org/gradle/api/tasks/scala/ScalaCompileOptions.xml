@@ -3,4 +3,28 @@
     <description> 
  Options for Scala Compilation. 
 </description>
+    <documentation>
+        <property name="failOnError"/>
+        <property name="true"/>
+        <property name="deprecation"/>
+        <property name="true"/>
+        <property name="unchecked"/>
+        <property name="true"/>
+        <property name="debugLevel"/>
+        <property name="null"/>
+        <property name="optimize"/>
+        <property name="false"/>
+        <property name="encoding"/>
+        <property name="null"/>
+        <property name="force"/>
+        <property name="false"/>
+        <property name="additionalParameters"/>
+        <property name="null"/>
+        <property name="listFiles"/>
+        <property name="false"/>
+        <property name="loggingLevel"/>
+        <property name="null"/>
+        <property name="loggingPhases"/>
+        <property name="null"/>
+    </documentation>
 </type>

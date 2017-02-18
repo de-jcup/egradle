@@ -15,4 +15,5 @@
     <method name="nativeTestSuiteBinary" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
+    <documentation/>
 </type>

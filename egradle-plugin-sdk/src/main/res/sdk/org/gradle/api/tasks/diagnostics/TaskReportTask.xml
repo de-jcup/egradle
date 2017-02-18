@@ -20,4 +20,5 @@
     <property name="projectTaskLister" type="org.gradle.api.internal.project.ProjectTaskLister"/>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="showDetail" type="boolean"/>
+    <documentation/>
 </type>

@@ -20,4 +20,5 @@
     <property name="coffeeScriptJsNotation" type="java.lang.String"/>
     <property name="detachedConfiguration" type="org.gradle.api.artifacts.Configuration"/>
     <property name="rhinoClasspathNotation" type="java.lang.String"/>
+    <documentation/>
 </type>

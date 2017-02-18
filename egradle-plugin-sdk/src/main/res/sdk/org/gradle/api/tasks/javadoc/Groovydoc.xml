@@ -261,4 +261,39 @@
  Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
 </description>
     </property>
+    <documentation>
+        <property name="destinationDir"/>
+        <property name="${project.docsDir}/groovydoc"/>
+        <property name="groovyClasspath"/>
+        <property name="project.configurations.groovy"/>
+        <property name="classpath"/>
+        <property name="sourceSets.main.output + sourceSets.main.compileClasspath"/>
+        <property name="use"/>
+        <property name="false"/>
+        <property name="windowTitle"/>
+        <property name="project.reporting.apiDocTitle"/>
+        <property name="docTitle"/>
+        <property name="project.reporting.apiDocTitle"/>
+        <property name="header"/>
+        <property name="null"/>
+        <property name="footer"/>
+        <property name="null"/>
+        <property name="overviewText"/>
+        <property name="null"/>
+        <property name="includePrivate"/>
+        <property name="false"/>
+        <property name="links"/>
+        <property name="[]"/>
+        <property name="includes"/>
+        <property name="[]"/>
+        <property name="excludes"/>
+        <property name="[]"/>
+        <property name="source"/>
+        <property name="sourceSets.main.groovy"/>
+        <property name="noTimestamp"/>
+        <property name="false"/>
+        <property name="noVersionStamp"/>
+        <property name="false"/>
+        <method name="link"/>
+    </documentation>
 </type>

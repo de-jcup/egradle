@@ -3,4 +3,5 @@
     <description> 
  A &lt;a href='type://PluginInstantiationException'&gt;PluginInstantiationException&lt;/a&gt; is thrown when a plugin cannot be instantiated. 
 </description>
+    <documentation/>
 </type>

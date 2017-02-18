@@ -10,4 +10,5 @@
  path and not the contents of the file or directory. To make it depend on the contents, use 
  &lt;a href='type://org.gradle.api.tasks.InputFile'&gt;org.gradle.api.tasks.InputFile&lt;/a&gt; or &lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt; respectively. 
 </description>
+    <documentation/>
 </type>

@@ -29,4 +29,5 @@
     <property name="jdk15" type="boolean"/>
     <property name="languageLevel" type="java.lang.String"/>
     <property name="projectJdkName" type="java.lang.String"/>
+    <documentation/>
 </type>

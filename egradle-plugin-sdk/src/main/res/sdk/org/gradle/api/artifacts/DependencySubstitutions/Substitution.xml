@@ -9,4 +9,5 @@
 </description>
         <parameter type="org.gradle.api.artifacts.component.ComponentSelector" name="notation"/>
     </method>
+    <documentation/>
 </type>

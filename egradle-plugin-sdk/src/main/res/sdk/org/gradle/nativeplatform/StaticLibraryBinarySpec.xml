@@ -36,4 +36,7 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <property name="staticLibraryFile"/>
+    </documentation>
 </type>

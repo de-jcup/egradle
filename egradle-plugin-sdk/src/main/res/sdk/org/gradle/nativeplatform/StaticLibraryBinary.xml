@@ -14,4 +14,7 @@
  The static library file. 
 </description>
     </property>
+    <documentation>
+        <property name="staticLibraryFile"/>
+    </documentation>
 </type>

@@ -36,4 +36,5 @@
     <property name="basePlugin" type="java.lang.Class"/>
     <property name="taskType" type="java.lang.Class"/>
     <property name="toolName" type="java.lang.String"/>
+    <documentation/>
 </type>

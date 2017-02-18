@@ -52,4 +52,5 @@
  Returns the Ant target to execute. 
 </description>
     </property>
+    <documentation/>
 </type>

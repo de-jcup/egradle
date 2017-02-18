@@ -19,4 +19,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a label corresponding to the test kind 
 </description>
     </property>
+    <documentation/>
 </type>

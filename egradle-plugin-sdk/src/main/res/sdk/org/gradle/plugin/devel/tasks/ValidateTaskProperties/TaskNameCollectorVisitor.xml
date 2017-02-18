@@ -8,4 +8,5 @@
         <parameter type="java.lang.String" name="superName"/>
         <parameter type="java.lang.String" name="interfaces"/>
     </method>
+    <documentation/>
 </type>

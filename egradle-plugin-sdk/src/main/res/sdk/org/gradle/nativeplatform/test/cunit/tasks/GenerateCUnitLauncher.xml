@@ -18,4 +18,5 @@
     </method>
     <property name="headerDir" type="java.io.File"/>
     <property name="sourceDir" type="java.io.File"/>
+    <documentation/>
 </type>

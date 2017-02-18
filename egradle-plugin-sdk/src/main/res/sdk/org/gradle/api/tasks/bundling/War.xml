@@ -80,4 +80,16 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file. 
 </description>
     </property>
+    <documentation>
+        <property name="extension"/>
+        <property name="war"/>
+        <property name="classpath"/>
+        <property name="project.configurations.runtime - project.configurations.providedRuntime"/>
+        <property name="webXml"/>
+        <property name="null"/>
+        <property name="source"/>
+        <property name="[project.webAppDir]"/>
+        <method name="webInf"/>
+        <method name="classpath"/>
+    </documentation>
 </type>

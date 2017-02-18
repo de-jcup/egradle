@@ -4,4 +4,5 @@
  A &lt;a href='type://DistributionContainer'&gt;DistributionContainer&lt;/a&gt; manages a set of &lt;a href='type://Distribution'&gt;Distribution&lt;/a&gt; objects. 
 </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
+    <documentation/>
 </type>

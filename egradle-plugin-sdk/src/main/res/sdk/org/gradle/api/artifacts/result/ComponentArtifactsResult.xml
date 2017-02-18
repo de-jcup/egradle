@@ -37,4 +37,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts of this component with the specified type, or an empty set if no artifacts of the type exist. 
 </description>
     </property>
+    <documentation/>
 </type>

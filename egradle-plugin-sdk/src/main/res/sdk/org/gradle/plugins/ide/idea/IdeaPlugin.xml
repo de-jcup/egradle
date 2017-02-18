@@ -77,4 +77,5 @@
     <property name="maxJavaModuleCompatibilityVersionFor" type="org.gradle.api.JavaVersion"/>
     <property name="model" type="org.gradle.plugins.ide.idea.model.IdeaModel"/>
     <property name="root" type="boolean"/>
+    <documentation/>
 </type>

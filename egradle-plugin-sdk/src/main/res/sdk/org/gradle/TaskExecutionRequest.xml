@@ -33,4 +33,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;project path or &lt;a href='type://null'&gt;null&lt;/a&gt; to use the default project path. 
 </description>
     </property>
+    <documentation/>
 </type>

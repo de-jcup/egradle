@@ -7,4 +7,5 @@
  Any flavors explicitly configured will overwrite the default flavor. 
 </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
+    <documentation/>
 </type>

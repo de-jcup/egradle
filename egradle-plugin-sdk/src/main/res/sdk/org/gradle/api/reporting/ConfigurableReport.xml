@@ -23,4 +23,5 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The destination for the report. 
 </description>
     </property>
+    <documentation/>
 </type>

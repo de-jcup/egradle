@@ -11,4 +11,5 @@
 </description>
     </method>
     <interface name="org.gradle.api.resources.Resource"/>
+    <documentation/>
 </type>

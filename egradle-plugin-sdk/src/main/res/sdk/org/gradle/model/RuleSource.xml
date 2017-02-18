@@ -59,4 +59,5 @@
  &lt;li&gt;Implementations cannot be generic (i.e. cannot use type parameters).&lt;/li&gt; 
  &lt;/ul&gt; 
 </description>
+    <documentation/>
 </type>

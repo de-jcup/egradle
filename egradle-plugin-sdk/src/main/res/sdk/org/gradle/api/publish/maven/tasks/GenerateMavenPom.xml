@@ -51,4 +51,8 @@
 </description>
     </property>
     <property name="versionRangeMapper" type="org.gradle.api.publication.maven.internal.VersionRangeMapper"/>
+    <documentation>
+        <property name="destination"/>
+        <property name="pom"/>
+    </documentation>
 </type>

@@ -7,4 +7,5 @@
 </description>
     <interface name="org.gradle.tooling.events.FailureResult"/>
     <interface name="org.gradle.tooling.events.test.TestOperationResult"/>
+    <documentation/>
 </type>

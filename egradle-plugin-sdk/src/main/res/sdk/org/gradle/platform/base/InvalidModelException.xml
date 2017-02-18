@@ -3,4 +3,5 @@
     <description> 
  Thrown when a component model is declared in an invalid way. 
 </description>
+    <documentation/>
 </type>

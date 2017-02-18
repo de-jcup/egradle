@@ -33,4 +33,5 @@
  Returns the files to use at runtime. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -4,4 +4,5 @@
  A Maven POM artifact. 
 </description>
     <interface name="org.gradle.api.component.Artifact"/>
+    <documentation/>
 </type>

@@ -14,4 +14,5 @@
     <property name="languageName" type="java.lang.String"/>
     <property name="sourceSetType" type="java.lang.Class"/>
     <property name="transformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+    <documentation/>
 </type>

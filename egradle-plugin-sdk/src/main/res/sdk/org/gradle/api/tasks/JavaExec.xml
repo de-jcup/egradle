@@ -427,4 +427,49 @@
  {@inheritDoc} 
 </description>
     </property>
+    <documentation>
+        <property name="allJvmArgs"/>
+        <property name="jvmArgs"/>
+        <property name="[]"/>
+        <property name="systemProperties"/>
+        <property name="[:]"/>
+        <property name="bootstrapClasspath"/>
+        <property name="[]"/>
+        <property name="maxHeapSize"/>
+        <property name="null"/>
+        <property name="enableAssertions"/>
+        <property name="false"/>
+        <property name="debug"/>
+        <property name="false"/>
+        <property name="main"/>
+        <property name="null"/>
+        <property name="args"/>
+        <property name="[]"/>
+        <property name="classpath"/>
+        <property name="null"/>
+        <property name="executable"/>
+        <property name="java executable for current JVM"/>
+        <property name="workingDir"/>
+        <property name="project.projectDir"/>
+        <property name="environment"/>
+        <property name="Current process' environment"/>
+        <property name="standardInput"/>
+        <property name="An empty InputStream"/>
+        <property name="standardOutput"/>
+        <property name="System.out"/>
+        <property name="errorOutput"/>
+        <property name="System.err"/>
+        <property name="ignoreExitValue"/>
+        <property name="false"/>
+        <property name="commandLine"/>
+        <method name="jvmArgs"/>
+        <method name="systemProperties"/>
+        <method name="bootstrapClasspath"/>
+        <method name="args"/>
+        <method name="classpath"/>
+        <method name="copyTo"/>
+        <method name="executable"/>
+        <method name="workingDir"/>
+        <method name="environment"/>
+    </documentation>
 </type>

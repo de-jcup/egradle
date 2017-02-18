@@ -20,4 +20,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying task operation. 
 </description>
     </property>
+    <documentation/>
 </type>

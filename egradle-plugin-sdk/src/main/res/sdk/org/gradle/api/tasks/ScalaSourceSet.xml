@@ -44,4 +44,11 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Scala source. Never returns null. 
 </description>
     </property>
+    <documentation>
+        <property name="scala"/>
+        <property name="[${project.projectDir}/src/${sourceSet.name}/scala]"/>
+        <property name="allScala"/>
+        <property name="[scala]"/>
+        <method name="scala"/>
+    </documentation>
 </type>

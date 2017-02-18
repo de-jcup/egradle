@@ -17,4 +17,5 @@
     <property name="changingArtifacts" type="org.gradle.api.file.FileCollection"/>
     <property name="configuration" type="org.gradle.api.artifacts.Configuration"/>
     <property name="nonChangingArtifacts" type="org.gradle.api.file.FileCollection"/>
+    <documentation/>
 </type>

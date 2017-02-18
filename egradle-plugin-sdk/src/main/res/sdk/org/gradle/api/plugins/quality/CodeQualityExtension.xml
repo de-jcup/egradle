@@ -59,4 +59,12 @@
  The version of the code quality tool to be used. 
 </description>
     </property>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="reportsDir"/>
+        <property name="sourceSets"/>
+        <property name="project.sourceSets"/>
+        <property name="ignoreFailures"/>
+        <property name="false"/>
+    </documentation>
 </type>

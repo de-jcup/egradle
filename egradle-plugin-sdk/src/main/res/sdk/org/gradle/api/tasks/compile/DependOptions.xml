@@ -102,4 +102,5 @@
  Tells whether to warn on RMI stubs without source. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
     </property>
+    <documentation/>
 </type>

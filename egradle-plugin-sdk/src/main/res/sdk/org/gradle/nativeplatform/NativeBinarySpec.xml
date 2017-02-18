@@ -210,4 +210,21 @@
  Returns the &lt;a href='type://org.gradle.nativeplatform.toolchain.NativeToolChain'&gt;org.gradle.nativeplatform.toolchain.NativeToolChain&lt;/a&gt; that will be used to build this binary. 
 </description>
     </property>
+    <documentation>
+        <property name="buildType"/>
+        <property name="flavor"/>
+        <property name="targetPlatform"/>
+        <property name="component"/>
+        <property name="toolChain"/>
+        <property name="libs"/>
+        <property name="linker"/>
+        <property name="staticLibArchiver"/>
+        <property name="assembler"/>
+        <property name="cCompiler"/>
+        <property name="cppCompiler"/>
+        <property name="objcCompiler"/>
+        <property name="objcppCompiler"/>
+        <property name="rcCompiler"/>
+        <method name="lib"/>
+    </documentation>
 </type>

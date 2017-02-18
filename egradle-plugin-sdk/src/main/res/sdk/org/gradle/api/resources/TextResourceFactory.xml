@@ -75,4 +75,9 @@
 </description>
         <parameter type="java.lang.String" name="string"/>
     </method>
+    <documentation>
+        <method name="fromString"/>
+        <method name="fromFile"/>
+        <method name="fromArchiveEntry"/>
+    </documentation>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  Thrown when a plugin is found to be invalid when it is loaded. 
 </description>
+    <documentation/>
 </type>

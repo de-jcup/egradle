@@ -51,4 +51,5 @@
  The tested binary. 
 </description>
     </property>
+    <documentation/>
 </type>

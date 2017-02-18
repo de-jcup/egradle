@@ -595,4 +595,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether to use empty settings or not. 
 </description>
     </property>
+    <documentation/>
 </type>

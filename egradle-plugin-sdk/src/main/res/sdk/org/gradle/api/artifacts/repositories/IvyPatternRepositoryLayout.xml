@@ -53,4 +53,5 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;m2compatible whether a Maven style layout is to be used for the 'organisation' part 
 </description>
     </property>
+    <documentation/>
 </type>

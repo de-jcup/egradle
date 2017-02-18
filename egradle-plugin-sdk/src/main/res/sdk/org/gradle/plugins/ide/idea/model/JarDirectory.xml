@@ -29,4 +29,5 @@
 </description>
     </property>
     <property name="recursive" type="boolean"/>
+    <documentation/>
 </type>

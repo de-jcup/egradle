@@ -13,4 +13,5 @@
     <interface name="org.gradle.jvm.test.JvmTestSuiteBinarySpec"/>
     <property name="jUnitVersion" type="java.lang.String"/>
     <property name="testSuite" type="org.gradle.jvm.test.JUnitTestSuiteSpec"/>
+    <documentation/>
 </type>

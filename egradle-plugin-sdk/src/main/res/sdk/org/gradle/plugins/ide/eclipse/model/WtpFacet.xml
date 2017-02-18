@@ -26,4 +26,5 @@
     <method name="toString" returnType="java.lang.String"/>
     <property name="defaultResourceName" type="java.lang.String"/>
     <property name="facets" type="java.util.List"/>
+    <documentation/>
 </type>

@@ -22,4 +22,7 @@
  is used in preference to the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute. When disabled (the default), the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute is always used. 
 </description>
     </property>
+    <documentation>
+        <property name="dynamicMode"/>
+    </documentation>
 </type>

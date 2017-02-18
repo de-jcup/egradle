@@ -38,4 +38,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The closure being used as an action. 
 </description>
     </property>
+    <documentation/>
 </type>

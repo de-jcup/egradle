@@ -146,4 +146,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description>
     </property>
+    <documentation>
+        <property name="outputDirectory"/>
+        <property name="forkOptions"/>
+        <property name="additionalImports"/>
+        <property name="generateReverseRoutes"/>
+        <property name="namespaceReverseRouter"/>
+        <property name="injectedRoutesGenerator"/>
+    </documentation>
 </type>

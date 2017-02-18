@@ -34,4 +34,7 @@
 </description>
     </property>
     <property name="repositoryTransportFactory" type="org.gradle.api.internal.artifacts.repositories.transport.RepositoryTransportFactory"/>
+    <documentation>
+        <property name="repository"/>
+    </documentation>
 </type>

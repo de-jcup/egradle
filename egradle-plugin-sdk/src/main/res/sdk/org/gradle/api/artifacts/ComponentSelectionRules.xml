@@ -118,4 +118,8 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="org.gradle.api.Action" name="selectionAction"/>
     </method>
+    <documentation>
+        <method name="all"/>
+        <method name="withModule"/>
+    </documentation>
 </type>

@@ -14,4 +14,7 @@
  The variants of this component. 
 </description>
     </property>
+    <documentation>
+        <property name="binaries"/>
+    </documentation>
 </type>

@@ -114,4 +114,8 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
+    <documentation>
+        <method name="all"/>
+        <method name="withModule"/>
+    </documentation>
 </type>

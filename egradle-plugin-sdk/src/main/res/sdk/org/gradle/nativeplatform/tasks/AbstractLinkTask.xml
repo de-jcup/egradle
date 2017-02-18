@@ -109,4 +109,13 @@
  The tool chain used for linking. 
 </description>
     </property>
+    <documentation>
+        <property name="source"/>
+        <property name="libs"/>
+        <property name="linkerArgs"/>
+        <property name="outputFile"/>
+        <property name="toolChain"/>
+        <method name="source"/>
+        <method name="lib"/>
+    </documentation>
 </type>

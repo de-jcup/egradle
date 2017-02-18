@@ -37,4 +37,5 @@
         <parameter type="org.gradle.api.tasks.bundling.AbstractArchiveTask" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

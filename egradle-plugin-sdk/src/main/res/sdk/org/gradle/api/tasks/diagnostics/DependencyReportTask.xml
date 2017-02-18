@@ -6,4 +6,12 @@
 </description>
     <method name="getTaskConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer"/>
     <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
+    <documentation>
+        <property name="configurations"/>
+        <property name="project.configurations"/>
+        <property name="outputFile"/>
+        <property name="${project.projectReportDir}/dependencies.txt"/>
+        <property name="projects"/>
+        <property name="[project]"/>
+    </documentation>
 </type>

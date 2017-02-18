@@ -180,4 +180,22 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version. May be null. 
 </description>
     </property>
+    <documentation>
+        <property name="archiveName"/>
+        <property name="${baseName}-${appendix}-${version}-${classifier}.${extension}"/>
+        <property name="archivePath"/>
+        <property name="${destinationDir}/${archiveName}"/>
+        <property name="appendix"/>
+        <property name="null"/>
+        <property name="baseName"/>
+        <property name="project.archivesBaseName"/>
+        <property name="version"/>
+        <property name="project.version"/>
+        <property name="extension"/>
+        <property name="classifier"/>
+        <property name="null"/>
+        <property name="destinationDir"/>
+        <property name="project.distsDir"/>
+        <method name="into"/>
+    </documentation>
 </type>

@@ -6,4 +6,5 @@
     <method name="appendNode" returnType="void">
         <parameter type="groovy.util.Node" name="node"/>
     </method>
+    <documentation/>
 </type>

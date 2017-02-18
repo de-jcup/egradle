@@ -3,4 +3,5 @@
     <description> 
  Thrown when an unknown tooling model is requested. 
 </description>
+    <documentation/>
 </type>

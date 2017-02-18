@@ -10,4 +10,5 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

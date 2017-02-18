@@ -114,4 +114,9 @@
  &lt;/p&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="incremental"/>
+        <method name="outOfDate"/>
+        <method name="removed"/>
+    </documentation>
 </type>

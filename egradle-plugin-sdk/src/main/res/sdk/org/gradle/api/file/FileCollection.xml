@@ -193,4 +193,5 @@ nodeName,AntType.ResourceCollection)&lt;/a&gt;.
  @throws IllegalStateException when this collection does not contain exactly one file. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -18,4 +18,5 @@
     <method name="validateJUnitVersion" returnType="void">
         <parameter type="org.gradle.jvm.test.JUnitTestSuiteSpec" name="jUnitTestSuiteSpec"/>
     </method>
+    <documentation/>
 </type>

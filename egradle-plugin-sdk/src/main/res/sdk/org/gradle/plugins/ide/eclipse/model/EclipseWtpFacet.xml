@@ -85,4 +85,11 @@
  See &lt;a href='type://EclipseWtpFacet#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
 </description>
     </property>
+    <documentation>
+        <property name="facets"/>
+        <property name="Java and web facets."/>
+        <property name="file"/>
+        <method name="facet"/>
+        <method name="file"/>
+    </documentation>
 </type>

@@ -24,4 +24,5 @@
 </description>
         <parameter type="org.gradle.tooling.GradleConnectionException" name="failure"/>
     </method>
+    <documentation/>
 </type>

@@ -16,4 +16,5 @@
     <property name="inputFile" type="java.io.File"/>
     <property name="outputFile" type="java.io.File"/>
     <property name="visualStudioProject" type="org.gradle.ide.visualstudio.VisualStudioProject"/>
+    <documentation/>
 </type>

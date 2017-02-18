@@ -44,4 +44,5 @@
  By default, only source and line debugging information will be generated. 
 </description>
     </property>
+    <documentation/>
 </type>

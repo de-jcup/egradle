@@ -5,4 +5,5 @@
  Makes sure no stale resources remain in the target directory. 
 </description>
     <method name="copy" returnType="void"/>
+    <documentation/>
 </type>

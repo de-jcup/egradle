@@ -16,4 +16,5 @@
  Returns the best tool chain to build for the target platform. 
 </description>
     </property>
+    <documentation/>
 </type>

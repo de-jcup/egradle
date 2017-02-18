@@ -50,4 +50,8 @@
  Configuration for the generated solution file. 
 </description>
     </property>
+    <documentation>
+        <property name="projects"/>
+        <property name="solutionFile"/>
+    </documentation>
 </type>

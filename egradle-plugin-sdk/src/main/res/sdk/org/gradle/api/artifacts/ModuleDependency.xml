@@ -140,4 +140,5 @@
  @see #setTransitive(boolean) 
 </description>
     </property>
+    <documentation/>
 </type>

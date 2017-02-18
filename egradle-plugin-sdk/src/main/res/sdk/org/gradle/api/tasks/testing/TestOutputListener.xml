@@ -13,4 +13,5 @@
         <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="testDescriptor"/>
         <parameter type="org.gradle.api.tasks.testing.TestOutputEvent" name="outputEvent"/>
     </method>
+    <documentation/>
 </type>

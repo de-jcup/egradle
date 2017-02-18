@@ -822,4 +822,37 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. The directory will already exist. 
 </description>
     </property>
+    <documentation>
+        <property name="name"/>
+        <property name="project"/>
+        <property name="path"/>
+        <property name="actions"/>
+        <property name="convention"/>
+        <property name="description"/>
+        <property name="group"/>
+        <property name="inputs"/>
+        <property name="outputs"/>
+        <property name="temporaryDir"/>
+        <property name="taskDependencies"/>
+        <property name="dependsOn"/>
+        <property name="mustRunAfter"/>
+        <property name="finalizedBy"/>
+        <property name="state"/>
+        <property name="didWork"/>
+        <property name="enabled"/>
+        <property name="ant"/>
+        <property name="logger"/>
+        <property name="logging"/>
+        <method name="dependsOn"/>
+        <method name="mustRunAfter"/>
+        <method name="finalizedBy"/>
+        <method name="onlyIf"/>
+        <method name="doFirst"/>
+        <method name="doLast"/>
+        <method name="leftShift"/>
+        <method name="deleteAllActions"/>
+        <method name="property"/>
+        <method name="hasProperty"/>
+        <method name="setProperty"/>
+    </documentation>
 </type>

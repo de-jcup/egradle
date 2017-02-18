@@ -43,4 +43,7 @@
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
     <interface name="org.gradle.api.DomainObjectSet"/>
+    <documentation>
+        <method name="artifact"/>
+    </documentation>
 </type>

@@ -151,4 +151,5 @@
  Returns the output file to store the report in. 
 </description>
     </property>
+    <documentation/>
 </type>

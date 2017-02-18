@@ -31,4 +31,5 @@
     </method>
     <interface name="java.util.Set"/>
     <interface name="org.gradle.api.DomainObjectCollection"/>
+    <documentation/>
 </type>

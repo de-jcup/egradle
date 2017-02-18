@@ -7,4 +7,5 @@
         <parameter type="org.gradle.api.artifacts.Configuration" name="c"/>
     </method>
     <interface name="org.gradle.api.Namer"/>
+    <documentation/>
 </type>

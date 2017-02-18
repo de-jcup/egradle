@@ -55,4 +55,5 @@
  the user can reconfigure the sourceSets anywhere in the gradle script - 
  and still the test.testClassesDir will point to the right folder. 
 </description>
+    <documentation/>
 </type>

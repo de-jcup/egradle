@@ -15,4 +15,5 @@
 </description>
         <parameter type="T" name="target"/>
     </method>
+    <documentation/>
 </type>

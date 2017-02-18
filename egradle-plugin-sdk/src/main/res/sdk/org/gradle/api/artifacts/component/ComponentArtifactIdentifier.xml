@@ -23,4 +23,5 @@
  Returns some human-consumable display name for this artifact. 
 </description>
     </property>
+    <documentation/>
 </type>

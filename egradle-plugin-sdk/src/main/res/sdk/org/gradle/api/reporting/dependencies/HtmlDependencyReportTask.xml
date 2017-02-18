@@ -65,4 +65,8 @@
     <property name="satisfiedBy" type="boolean"/>
     <property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
     <property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
+    <documentation>
+        <property name="projects"/>
+        <property name="[project]"/>
+    </documentation>
 </type>

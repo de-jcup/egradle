@@ -9,4 +9,5 @@
         <parameter type="java.lang.String" name="publicationName"/>
         <parameter type="java.lang.String" name="error"/>
     </method>
+    <documentation/>
 </type>

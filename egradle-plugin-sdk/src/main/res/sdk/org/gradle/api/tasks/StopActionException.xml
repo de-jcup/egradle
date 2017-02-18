@@ -15,4 +15,5 @@
  
  &lt;p&gt;Note that throwing this exception does not fail the execution of the task or the build.&lt;/p&gt; 
 </description>
+    <documentation/>
 </type>

@@ -117,4 +117,12 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
 </description>
     </property>
+    <documentation>
+        <property name="includes"/>
+        <property name="source"/>
+        <property name="excludes"/>
+        <method name="source"/>
+        <method name="include"/>
+        <method name="exclude"/>
+    </documentation>
 </type>

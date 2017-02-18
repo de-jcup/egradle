@@ -247,4 +247,21 @@
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
+    <documentation>
+        <property name="plusConfigurations"/>
+        <property name="project.configurations.testRuntime"/>
+        <property name="minusConfigurations"/>
+        <property name="[]"/>
+        <property name="containers"/>
+        <property name="[JRE container]"/>
+        <property name="defaultOutputDir"/>
+        <property name="${project.projectDir}/bin"/>
+        <property name="downloadSources"/>
+        <property name="true"/>
+        <property name="downloadJavadoc"/>
+        <property name="false"/>
+        <property name="file"/>
+        <method name="containers"/>
+        <method name="file"/>
+    </documentation>
 </type>

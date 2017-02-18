@@ -5,4 +5,5 @@
  this facet is locked and cannot be simply removed. See also 
  &lt;a href="https://eclipse.org/articles/Article-BuildingProjectFacets/tutorial.html#defining.presets"&gt;here&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

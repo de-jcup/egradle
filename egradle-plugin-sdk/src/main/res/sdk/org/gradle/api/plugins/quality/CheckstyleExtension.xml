@@ -68,4 +68,18 @@
  Example: showViolations = false 
 </description>
     </property>
+    <documentation>
+        <property name="toolVersion"/>
+        <property name="5.9"/>
+        <property name="reportsDir"/>
+        <property name="${project.reporting.baseDir}/checkstyle"/>
+        <property name="config"/>
+        <property name="${project.projectDir}/config/checkstyle/checkstyle.xml"/>
+        <property name="configFile"/>
+        <property name="${project.projectDir}/config/checkstyle/checkstyle.xml"/>
+        <property name="configProperties"/>
+        <property name="[:]"/>
+        <property name="showViolations"/>
+        <property name="true"/>
+    </documentation>
 </type>

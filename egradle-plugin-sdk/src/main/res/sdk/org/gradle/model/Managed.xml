@@ -90,4 +90,5 @@
  &lt;p&gt; 
  Please see &lt;a href='type://Model'&gt;Model&lt;/a&gt; for information on creating model elements of managed types. 
 </description>
+    <documentation/>
 </type>

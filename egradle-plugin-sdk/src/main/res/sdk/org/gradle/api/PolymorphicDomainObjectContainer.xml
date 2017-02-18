@@ -72,4 +72,9 @@
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
+    <documentation>
+        <method name="create"/>
+        <method name="maybeCreate"/>
+        <method name="containerWithType"/>
+    </documentation>
 </type>

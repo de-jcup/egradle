@@ -174,4 +174,9 @@
  @throws IllegalStateException if there is not exactly one signature. 
 </description>
     </property>
+    <documentation>
+        <property name="signatory"/>
+        <method name="signatory"/>
+        <method name="sign"/>
+    </documentation>
 </type>

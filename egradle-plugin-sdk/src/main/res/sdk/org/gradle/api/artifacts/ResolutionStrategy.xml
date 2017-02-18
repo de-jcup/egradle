@@ -252,4 +252,16 @@
  @since 1.0-milestone-7 
 </description>
     </property>
+    <documentation>
+        <property name="forcedModules"/>
+        <property name="componentSelection"/>
+        <property name="dependencySubstitution"/>
+        <method name="failOnVersionConflict"/>
+        <method name="force"/>
+        <method name="cacheDynamicVersionsFor"/>
+        <method name="cacheChangingModulesFor"/>
+        <method name="eachDependency"/>
+        <method name="dependencySubstitution"/>
+        <method name="componentSelection"/>
+    </documentation>
 </type>

@@ -3,4 +3,5 @@
     <description> 
  Test events that can be logged. 
 </description>
+    <documentation/>
 </type>

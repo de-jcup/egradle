@@ -20,4 +20,5 @@
     <property name="directory" type="java.io.File"/>
     <property name="excludes" type="java.util.List"/>
     <property name="includes" type="java.util.List"/>
+    <documentation/>
 </type>

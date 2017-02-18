@@ -15,10 +15,10 @@ public class XMLDSLTypeInfoExporter {
 	 * @param stream
 	 * @throws IOException
 	 */
-	public void exportTasks(XMLDSLTypeInfo dslTypeInfo , OutputStream stream) throws IOException{
+	public void exportTasks(XMLDSLTypeDocumentation dslTypeInfo , OutputStream stream) throws IOException{
 		JAXBContext jc;
 		try {
-			jc = JAXBContext.newInstance(XMLDSLTypeInfo.class);
+			jc = JAXBContext.newInstance(XMLDSLTypeDocumentation.class);
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marshaller.marshal(dslTypeInfo, stream);

@@ -5,4 +5,5 @@
     </method>
     <method name="hashCode" returnType="int"/>
     <interface name="java.io.Serializable"/>
+    <documentation/>
 </type>

@@ -29,4 +29,10 @@
 </description>
     </property>
     <property name="compressor" type="org.gradle.api.internal.file.archive.compression.ArchiveOutputStreamFactory"/>
+    <documentation>
+        <property name="compression"/>
+        <property name="Compression.NONE"/>
+        <property name="extension"/>
+        <property name="tar"/>
+    </documentation>
 </type>

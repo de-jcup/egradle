@@ -145,4 +145,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file permissions, or &lt;a href='type://null'&gt;null&lt;/a&gt; if existing permissions should be preserved. 
 </description>
     </property>
+    <documentation/>
 </type>

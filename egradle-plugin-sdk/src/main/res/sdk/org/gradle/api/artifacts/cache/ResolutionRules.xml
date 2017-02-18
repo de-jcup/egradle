@@ -25,4 +25,5 @@
 </description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
+    <documentation/>
 </type>

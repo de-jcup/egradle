@@ -13,4 +13,5 @@
     <method name="validate" returnType="org.gradle.language.base.sources.BaseLanguageSourceSet.SourceSetInfo">
         <parameter type="org.gradle.language.base.sources.BaseLanguageSourceSet.SourceSetInfo" name="info"/>
     </method>
+    <documentation/>
 </type>

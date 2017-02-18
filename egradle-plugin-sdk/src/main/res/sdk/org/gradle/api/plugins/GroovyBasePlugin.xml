@@ -31,4 +31,5 @@
     </method>
     <interface name="org.gradle.api.Plugin"/>
     <property name="satisfiedBy" type="boolean"/>
+    <documentation/>
 </type>

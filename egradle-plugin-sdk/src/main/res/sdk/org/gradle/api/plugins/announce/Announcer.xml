@@ -7,4 +7,5 @@
         <parameter type="java.lang.String" name="title"/>
         <parameter type="java.lang.String" name="message"/>
     </method>
+    <documentation/>
 </type>

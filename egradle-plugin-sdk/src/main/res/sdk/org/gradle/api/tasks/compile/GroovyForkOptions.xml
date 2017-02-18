@@ -4,4 +4,5 @@
  Fork options for Groovy compilation. Only take effect if &lt;a href='type://GroovyCompileOptions.fork'&gt;GroovyCompileOptions.fork&lt;/a&gt; 
  is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
+    <documentation/>
 </type>

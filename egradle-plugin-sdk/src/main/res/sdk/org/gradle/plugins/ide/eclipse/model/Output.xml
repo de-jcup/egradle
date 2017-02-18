@@ -19,4 +19,5 @@
     <interface name="org.gradle.plugins.ide.eclipse.model.ClasspathEntry"/>
     <property name="kind" type="java.lang.String"/>
     <property name="path" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -26,4 +26,5 @@
         <parameter type="org.gradle.api.distribution.Distribution" name="dist"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

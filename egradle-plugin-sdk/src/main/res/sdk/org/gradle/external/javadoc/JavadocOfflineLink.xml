@@ -9,4 +9,5 @@
     <method name="toString" returnType="java.lang.String"/>
     <property name="extDocUrl" type="java.lang.String"/>
     <property name="packagelistLoc" type="java.lang.String"/>
+    <documentation/>
 </type>

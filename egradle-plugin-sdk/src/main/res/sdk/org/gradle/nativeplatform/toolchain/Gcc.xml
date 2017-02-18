@@ -4,4 +4,5 @@
  The &lt;a href="http://gcc.gnu.org/"&gt;GNU GCC&lt;/a&gt; tool chain. 
 </description>
     <interface name="org.gradle.nativeplatform.toolchain.GccCompatibleToolChain"/>
+    <documentation/>
 </type>

@@ -45,4 +45,8 @@
  Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
 </description>
     </property>
+    <documentation>
+        <property name="scalaClasspath"/>
+        <property name="scala-compiler dependency matching the scala-library version found on classpath"/>
+    </documentation>
 </type>

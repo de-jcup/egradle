@@ -29,4 +29,8 @@
  The set of preprocessor macros to define when compiling this binary. 
 </description>
     </property>
+    <documentation>
+        <property name="macros"/>
+        <method name="define"/>
+    </documentation>
 </type>

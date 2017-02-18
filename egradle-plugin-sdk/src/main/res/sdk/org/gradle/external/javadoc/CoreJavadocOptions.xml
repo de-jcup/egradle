@@ -190,4 +190,5 @@
     <property name="source" type="java.lang.String"/>
     <property name="sourceNames" type="java.util.List"/>
     <property name="verbose" type="boolean"/>
+    <documentation/>
 </type>

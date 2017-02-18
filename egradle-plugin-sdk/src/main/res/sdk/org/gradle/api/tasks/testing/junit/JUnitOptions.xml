@@ -35,4 +35,5 @@
  The set of categories to run. 
 </description>
     </property>
+    <documentation/>
 </type>

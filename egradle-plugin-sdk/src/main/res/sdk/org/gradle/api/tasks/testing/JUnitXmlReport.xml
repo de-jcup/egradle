@@ -20,4 +20,5 @@
  Should the output be associated with individual test cases instead of at the suite level. 
 </description>
     </property>
+    <documentation/>
 </type>

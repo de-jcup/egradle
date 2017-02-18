@@ -73,4 +73,5 @@
     </method>
     <property name="pathList" type="java.util.List"/>
     <property name="relativePath" type="java.lang.String"/>
+    <documentation/>
 </type>

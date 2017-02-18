@@ -41,4 +41,5 @@
     <property name="deployName" type="java.lang.String"/>
     <property name="wbModuleEntries" type="java.util.List"/>
     <property name="wbModuleNode" type="groovy.util.Node"/>
+    <documentation/>
 </type>

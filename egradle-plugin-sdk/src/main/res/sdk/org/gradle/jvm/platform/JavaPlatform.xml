@@ -22,4 +22,5 @@
     </method>
     <interface name="org.gradle.platform.base.Platform"/>
     <property name="targetCompatibility" type="org.gradle.api.JavaVersion"/>
+    <documentation/>
 </type>

@@ -56,4 +56,5 @@
         <parameter type="org.gradle.api.plugins.ExtensionContainer" name="extensions"/>
         <parameter type="org.gradle.platform.base.PlatformContainer" name="platforms"/>
     </method>
+    <documentation/>
 </type>

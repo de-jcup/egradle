@@ -202,4 +202,28 @@
  The target JDK to use with PMD. 
 </description>
     </property>
+    <documentation>
+        <property name="pmdClasspath"/>
+        <property name="project.configurations.pmd"/>
+        <property name="ruleSets"/>
+        <property name="project.pmd.ruleSets"/>
+        <property name="ruleSetConfig"/>
+        <property name="project.pmd.ruleSetConfig"/>
+        <property name="ruleSetFiles"/>
+        <property name="project.pmd.ruleSetFiles"/>
+        <property name="ignoreFailures"/>
+        <property name="project.pmd.ignoreFailures"/>
+        <property name="rulePriority"/>
+        <property name="project.pmd.rulePriority"/>
+        <property name="consoleOutput"/>
+        <property name="project.pmd.consoleOutput"/>
+        <property name="targetJdk"/>
+        <property name="project.pmd.targetJdk"/>
+        <property name="source"/>
+        <property name="sourceSet.allJava"/>
+        <property name="reports"/>
+        <property name="classpath"/>
+        <property name="&#xA;                    sourceSet.output and&#xA;                    sourceSet.compileClasspath&#xA;                "/>
+        <method name="reports"/>
+    </documentation>
 </type>

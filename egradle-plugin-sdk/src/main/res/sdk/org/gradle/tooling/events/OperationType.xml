@@ -5,4 +5,5 @@
  
  @see org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener, java.util.Set) 
 </description>
+    <documentation/>
 </type>

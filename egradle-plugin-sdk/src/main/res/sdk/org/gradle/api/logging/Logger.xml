@@ -148,4 +148,5 @@
  Returns true if quiet log level is enabled for this logger. 
 </description>
     </property>
+    <documentation/>
 </type>

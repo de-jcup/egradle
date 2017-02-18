@@ -42,4 +42,10 @@
  Returns the TCP port to use to send stop command. 
 </description>
     </property>
+    <documentation>
+        <property name="stopPort"/>
+        <property name="project.stopPort"/>
+        <property name="stopKey"/>
+        <property name="project.stopKey"/>
+    </documentation>
 </type>

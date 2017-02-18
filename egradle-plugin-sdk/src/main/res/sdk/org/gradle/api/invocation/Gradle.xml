@@ -339,4 +339,28 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
 </description>
     </property>
+    <documentation>
+        <property name="gradleVersion"/>
+        <property name="gradleUserHomeDir"/>
+        <property name="gradleHomeDir"/>
+        <property name="gradle"/>
+        <property name="parent"/>
+        <property name="rootProject"/>
+        <property name="taskGraph"/>
+        <property name="startParameter"/>
+        <method name="addProjectEvaluationListener"/>
+        <method name="removeProjectEvaluationListener"/>
+        <method name="beforeProject"/>
+        <method name="afterProject"/>
+        <method name="settingsEvaluated"/>
+        <method name="projectsEvaluated"/>
+        <method name="projectsLoaded"/>
+        <method name="buildFinished"/>
+        <method name="addBuildListener"/>
+        <method name="addListener"/>
+        <method name="removeListener"/>
+        <method name="useLogger"/>
+        <method name="rootProject"/>
+        <method name="allprojects"/>
+    </documentation>
 </type>

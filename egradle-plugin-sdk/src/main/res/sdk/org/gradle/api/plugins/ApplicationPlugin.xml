@@ -22,4 +22,5 @@
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
+    <documentation/>
 </type>

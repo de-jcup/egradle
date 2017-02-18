@@ -36,4 +36,9 @@
  Converts this library to a native library requirement that uses the static library variant. 
 </description>
     </property>
+    <documentation>
+        <property name="api"/>
+        <property name="shared"/>
+        <property name="static"/>
+    </documentation>
 </type>

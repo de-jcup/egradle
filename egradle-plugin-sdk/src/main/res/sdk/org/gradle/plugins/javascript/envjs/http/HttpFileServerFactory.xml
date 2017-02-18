@@ -4,4 +4,5 @@
         <parameter type="java.io.File" name="contentRoot"/>
         <parameter type="int" name="port"/>
     </method>
+    <documentation/>
 </type>

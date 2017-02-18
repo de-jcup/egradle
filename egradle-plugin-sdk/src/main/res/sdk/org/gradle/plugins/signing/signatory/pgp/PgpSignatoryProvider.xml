@@ -19,4 +19,5 @@
     <interface name="org.gradle.plugins.signing.signatory.SignatoryProvider"/>
     <property name="defaultSignatory" type="org.gradle.plugins.signing.signatory.pgp.PgpSignatory"/>
     <property name="signatory" type="org.gradle.plugins.signing.signatory.pgp.PgpSignatory"/>
+    <documentation/>
 </type>

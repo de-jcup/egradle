@@ -117,4 +117,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to. 
 </description>
     </property>
+    <documentation>
+        <property name="publications"/>
+        <property name="repositories"/>
+        <method name="publications"/>
+        <method name="repositories"/>
+    </documentation>
 </type>

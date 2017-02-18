@@ -21,4 +21,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project nature id. 
 </description>
     </property>
+    <documentation/>
 </type>

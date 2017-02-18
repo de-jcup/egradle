@@ -563,4 +563,30 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this is a visible configuration. 
 </description>
     </property>
+    <documentation>
+        <property name="name"/>
+        <property name="description"/>
+        <property name="state"/>
+        <property name="incoming"/>
+        <property name="visible"/>
+        <property name="transitive"/>
+        <property name="extendsFrom"/>
+        <property name="hierarchy"/>
+        <property name="resolvedConfiguration"/>
+        <property name="buildDependencies"/>
+        <property name="dependencies"/>
+        <property name="allDependencies"/>
+        <property name="artifacts"/>
+        <property name="allArtifacts"/>
+        <property name="excludeRules"/>
+        <property name="resolutionStrategy"/>
+        <method name="extendsFrom"/>
+        <method name="files"/>
+        <method name="fileCollection"/>
+        <method name="exclude"/>
+        <method name="copy"/>
+        <method name="copyRecursive"/>
+        <method name="getTaskDependencyFromProjectDependency"/>
+        <method name="defaultDependencies"/>
+    </documentation>
 </type>

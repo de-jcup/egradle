@@ -55,4 +55,10 @@
  Returns the directory to generate Maven POMs into. 
 </description>
     </property>
+    <documentation>
+        <property name="mavenPomDir"/>
+        <property name="${project.buildDir}/poms"/>
+        <property name="conf2ScopeMappings"/>
+        <method name="pom"/>
+    </documentation>
 </type>

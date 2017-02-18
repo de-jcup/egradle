@@ -44,4 +44,12 @@
  Returns the TCP port for Jetty to listen on for stop requests. 
 </description>
     </property>
+    <documentation>
+        <property name="httpPort"/>
+        <property name="8080"/>
+        <property name="stopPort"/>
+        <property name="null"/>
+        <property name="stopKey"/>
+        <property name="null"/>
+    </documentation>
 </type>

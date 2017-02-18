@@ -166,4 +166,10 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map. 
 </description>
     </property>
+    <documentation>
+        <property name="properties"/>
+        <method name="get"/>
+        <method name="set"/>
+        <method name="has"/>
+    </documentation>
 </type>

@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -15,7 +16,7 @@ import org.xml.sax.SAXException;
 
 import de.jcup.egradle.codeassist.dsl.XMLDSLMethodInfo;
 import de.jcup.egradle.codeassist.dsl.XMLDSLPropertyInfo;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeInfo;
+import de.jcup.egradle.codeassist.dsl.XMLDSLTypeDocumentation;
 
 public class OriginXMLDSlTypeInfoImporter {
 
@@ -53,7 +54,7 @@ public class OriginXMLDSlTypeInfoImporter {
 	    </section>
 		</section>
  		@formatter:off*/
-	public XMLDSLTypeInfo collectDSL(File file) throws IOException {
+	public XMLDSLTypeDocumentation collectDSL(File file) throws IOException {
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		File lastParsedFile = null;
@@ -63,8 +64,7 @@ public class OriginXMLDSlTypeInfoImporter {
 				lastParsedFile = file;
 				try (FileInputStream fis = new FileInputStream(file)) {
 
-					XMLDSLTypeInfo target = new XMLDSLTypeInfo();
-					target.setName(file.getName());
+					XMLDSLTypeDocumentation target = new XMLDSLTypeDocumentation();
 					
 					Document document = builder.parse(fis);
 
@@ -72,9 +72,13 @@ public class OriginXMLDSlTypeInfoImporter {
 					for (int i = 0; i < section1s.getLength(); i++) {
 						Element section1 = (Element) section1s.item(i);
 						NodeList section2s = section1.getElementsByTagName("section");
-						for (int j = 0; i < section2s.getLength(); j++) {
-							Element section2 = (Element)section1s.item(j);
-							scanSecton2(section2,target);
+						for (int j = 0; j < section2s.getLength(); j++) {
+							Element section2 = (Element)section2s.item(j);
+							if (section2!=null){
+								scanSecton2(section2,target);
+							}else{
+								System.err.println("- no section2 found in"+file);
+							}
 						}
 					}
 					return target;
@@ -86,7 +90,7 @@ public class OriginXMLDSlTypeInfoImporter {
 		}
 	}
 
-	private void scanSecton2(Element element, XMLDSLTypeInfo target) {
+	private void scanSecton2(Element element, XMLDSLTypeDocumentation target) {
 		
 		NodeList titles = element.getElementsByTagName("title");
 		Element titleElement = (Element)titles.item(0);
@@ -99,8 +103,18 @@ public class OriginXMLDSlTypeInfoImporter {
 			NodeList tdElements = element.getElementsByTagName("td");
 			for (int i = 0; i < tdElements.getLength(); i++) {
 				Element tdElement = (Element) tdElements.item(i);
+				String textContent = tdElement.getTextContent();
+				if (StringUtils.isBlank(textContent)){
+					continue;
+				}
+				if (textContent.startsWith("Default")){
+					continue;
+				}
+				if (textContent.equals("Name")){
+					continue;
+				}
 				XMLDSLPropertyInfo propInfo= new XMLDSLPropertyInfo();
-				propInfo.setName(tdElement.getTextContent());
+				propInfo.setName(textContent);
 				target.getProperties().add(propInfo);
 			}
 		}else if ("methods".equals(title)){
@@ -108,7 +122,17 @@ public class OriginXMLDSlTypeInfoImporter {
 			for (int i = 0; i < tdElements.getLength(); i++) {
 				Element tdElement = (Element) tdElements.item(i);
 				XMLDSLMethodInfo methodInfo= new XMLDSLMethodInfo();
-				methodInfo.setName(tdElement.getTextContent());
+				String textContent = tdElement.getTextContent();
+				if (StringUtils.isBlank(textContent)){
+					continue;
+				}
+				if (textContent.startsWith("Default")){
+					continue;
+				}
+				if (textContent.equals("Name")){
+					continue;
+				}
+				methodInfo.setName(textContent);
 				target.getMethods().add(methodInfo);
 			}
 		}

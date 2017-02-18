@@ -3,4 +3,5 @@
     <description> 
  The type of output the report produces 
 </description>
+    <documentation/>
 </type>

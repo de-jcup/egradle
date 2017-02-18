@@ -64,4 +64,13 @@
  The username to use for announcements. 
 </description>
     </property>
+    <documentation>
+        <property name="username"/>
+        <property name="null"/>
+        <property name="password"/>
+        <property name="null"/>
+        <property name="local"/>
+        <property name="-"/>
+        <method name="announce"/>
+    </documentation>
 </type>

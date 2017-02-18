@@ -6,4 +6,5 @@
     <method name="buildMessage" returnType="java.lang.String">
         <parameter type="java.lang.String" name="resolveContext"/>
     </method>
+    <documentation/>
 </type>

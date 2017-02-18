@@ -102,4 +102,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;included test name patterns 
 </description>
     </property>
+    <documentation/>
 </type>

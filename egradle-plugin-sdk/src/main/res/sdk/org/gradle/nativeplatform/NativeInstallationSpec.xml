@@ -8,4 +8,5 @@
         <parameter type="java.io.File" name="directory"/>
     </method>
     <property name="directory" type="java.io.File"/>
+    <documentation/>
 </type>

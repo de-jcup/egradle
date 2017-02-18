@@ -22,4 +22,10 @@
  Eclipse JDT model that contains information needed to generate the JDT file. 
 </description>
     </property>
+    <documentation>
+        <property name="jdt"/>
+        <property name="project.eclipse.jdt"/>
+        <property name="outputFile"/>
+        <property name="${project.projectDir}/.settings/org.eclipse.jdt.core.prefs"/>
+    </documentation>
 </type>

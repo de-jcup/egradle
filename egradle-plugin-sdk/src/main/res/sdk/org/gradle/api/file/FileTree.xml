@@ -97,4 +97,5 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Returns an empty set if this tree is empty. 
 </description>
     </property>
+    <documentation/>
 </type>

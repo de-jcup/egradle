@@ -231,4 +231,8 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The rules, in the order they will be applied. 
 </description>
     </property>
+    <documentation>
+        <method name="getByName"/>
+        <method name="getAt"/>
+    </documentation>
 </type>

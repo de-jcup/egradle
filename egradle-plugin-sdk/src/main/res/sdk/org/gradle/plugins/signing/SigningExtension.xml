@@ -271,4 +271,11 @@
 </description>
     </property>
     <property name="signatureTypes" type="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
+    <documentation>
+        <property name="signatory"/>
+        <property name="signatureType"/>
+        <property name="required"/>
+        <method name="sign"/>
+        <method name="signPom"/>
+    </documentation>
 </type>

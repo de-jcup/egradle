@@ -290,4 +290,5 @@
  generate: TestNG variant of HTML results, TestNG variant of XML results in JUnit format, emailable HTML test report, XML results in TestNG format. 
 </description>
     </property>
+    <documentation/>
 </type>

@@ -38,4 +38,5 @@
  The url of the path. Must not be null. 
 </description>
     </property>
+    <documentation/>
 </type>

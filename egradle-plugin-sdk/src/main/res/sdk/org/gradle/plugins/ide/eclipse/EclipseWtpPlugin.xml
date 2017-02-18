@@ -68,4 +68,5 @@
     </method>
     <property name="lifecycleTaskName" type="java.lang.String"/>
     <property name="mainSourceDirs" type="java.util.Set"/>
+    <documentation/>
 </type>

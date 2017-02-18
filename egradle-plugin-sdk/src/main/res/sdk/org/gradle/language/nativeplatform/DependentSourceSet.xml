@@ -57,4 +57,9 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the pre-compiled header 
 </description>
     </property>
+    <documentation>
+        <property name="libs"/>
+        <property name="preCompiledHeader"/>
+        <method name="lib"/>
+    </documentation>
 </type>

@@ -14,4 +14,5 @@
     <property name="outputFile" type="java.io.File"/>
     <property name="solution" type="org.gradle.ide.visualstudio.VisualStudioSolution"/>
     <property name="visualStudioSolution" type="org.gradle.ide.visualstudio.VisualStudioSolution"/>
+    <documentation/>
 </type>

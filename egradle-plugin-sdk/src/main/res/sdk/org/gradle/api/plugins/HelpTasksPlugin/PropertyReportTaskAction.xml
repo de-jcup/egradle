@@ -4,4 +4,5 @@
         <parameter type="org.gradle.api.tasks.diagnostics.PropertyReportTask" name="task"/>
     </method>
     <interface name="org.gradle.api.Action"/>
+    <documentation/>
 </type>

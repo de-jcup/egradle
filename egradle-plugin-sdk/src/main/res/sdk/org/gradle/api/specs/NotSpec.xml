@@ -12,4 +12,5 @@
     <interface name="org.gradle.api.specs.Spec"/>
     <property name="satisfiedBy" type="boolean"/>
     <property name="sourceSpec" type="org.gradle.api.specs.Spec"/>
+    <documentation/>
 </type>

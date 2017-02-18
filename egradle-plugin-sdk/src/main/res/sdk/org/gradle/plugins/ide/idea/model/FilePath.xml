@@ -5,4 +5,5 @@
 </description>
     <method name="getFile" returnType="java.io.File"/>
     <property name="file" type="java.io.File"/>
+    <documentation/>
 </type>

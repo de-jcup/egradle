@@ -25,4 +25,5 @@
     <interface name="java.lang.Comparable"/>
     <property name="asHex" type="java.lang.String"/>
     <property name="asLong" type="long"/>
+    <documentation/>
 </type>

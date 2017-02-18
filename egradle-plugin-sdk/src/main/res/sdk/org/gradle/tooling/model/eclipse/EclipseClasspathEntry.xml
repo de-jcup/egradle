@@ -41,4 +41,5 @@
  @throws UnsupportedMethodException For Gradle versions older than 2.14, where this method is not supported. 
 </description>
     </property>
+    <documentation/>
 </type>

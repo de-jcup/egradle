@@ -9,4 +9,5 @@
 </description>
         <parameter type="int" name="messagePriority"/>
     </method>
+    <documentation/>
 </type>

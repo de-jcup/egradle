@@ -17,12 +17,12 @@ public class XMLDSLTypeInfoImporter {
 	 * @throws IOException
 	 * 
 	 */
-	public XMLDSLTypeInfo importTypeInfo(InputStream stream) throws IOException{
+	public XMLDSLTypeDocumentation importTypeInfo(InputStream stream) throws IOException{
 		JAXBContext jc;
 		try {
-			jc = JAXBContext.newInstance(XMLDSLTypeInfo.class);
+			jc = JAXBContext.newInstance(XMLDSLTypeDocumentation.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLDSLTypeInfo loadedModel = (XMLDSLTypeInfo) unmarshaller
+			XMLDSLTypeDocumentation loadedModel = (XMLDSLTypeDocumentation) unmarshaller
 					.unmarshal(stream);
 			return loadedModel;
 		} catch (JAXBException e) {

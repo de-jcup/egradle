@@ -376,4 +376,17 @@
  @since 2.2 
 </description>
     </property>
+    <documentation>
+        <property name="components"/>
+        <property name="modules"/>
+        <method name="add"/>
+        <method name="create"/>
+        <method name="module"/>
+        <method name="project"/>
+        <method name="gradleApi"/>
+        <method name="localGroovy"/>
+        <method name="components"/>
+        <method name="modules"/>
+        <method name="createArtifactResolutionQuery"/>
+    </documentation>
 </type>

@@ -5,4 +5,5 @@
 </description>
     <method name="getScope" returnType="java.lang.String"/>
     <property name="scope" type="java.lang.String"/>
+    <documentation/>
 </type>

@@ -4,4 +4,5 @@
  A Container that contains all of the Software Components produced by a Project. 
 </description>
     <interface name="org.gradle.api.NamedDomainObjectSet"/>
+    <documentation/>
 </type>
