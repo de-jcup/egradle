@@ -77,7 +77,6 @@ public abstract class AbstractProposalImpl implements Proposal {
 		this.type = type;
 	}
 
-	@Override
 	public String getType() {
 		return type;
 	}

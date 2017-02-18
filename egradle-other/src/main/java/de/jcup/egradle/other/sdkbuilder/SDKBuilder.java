@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -32,6 +31,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.Task;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.XMLDSLTypeInfo;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
@@ -44,7 +44,6 @@ import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.codeassist.dsl.XMLTypeExporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.sdk.SDKInfo;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -68,12 +67,13 @@ public class SDKBuilder {
 	static {
 		if (!PARENT_OF_RES.exists()) {
 			/*
-			 * fall back - so sdk builder could be run from gradle root project as well
-			 * via gradle from root project.
+			 * fall back - so sdk builder could be run from gradle root project
+			 * as well via gradle from root project.
 			 */
 			PARENT_OF_RES = new File("src/main/res/");
 		}
 	}
+
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
@@ -90,7 +90,7 @@ public class SDKBuilder {
 	 * FIXME ATR, 06.02.2017: sdk builder MUST set fix links like <a
 	 * href="#method(x.x..)"> to <a href="#method(x.x..)"
 	 */
-	
+
 	/**
 	 * Only for tests
 	 */
@@ -100,19 +100,20 @@ public class SDKBuilder {
 
 	private XMLTypeImporter typeImporter = new XMLTypeImporter();
 	private XMLTypeExporter typeExporter = new XMLTypeExporter();
+	private OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
 
 	XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 	XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
 	private String pathTorGradleRootProjectFolder;
-	
 
 	public SDKBuilder(String pathTorGradleRootProjectFolder) {
-		this.pathTorGradleRootProjectFolder=pathTorGradleRootProjectFolder;
+		this.pathTorGradleRootProjectFolder = pathTorGradleRootProjectFolder;
 	}
 
 	public SDKBuilderContext buildSDK(File targetRootDirectory, String gradleVersion) throws IOException {
-		SDKBuilderContext context = new SDKBuilderContext(pathTorGradleRootProjectFolder, targetRootDirectory,gradleVersion);
-		
+		SDKBuilderContext context = new SDKBuilderContext(pathTorGradleRootProjectFolder, targetRootDirectory,
+				gradleVersion);
+
 		/* delete old sdk */
 		File targetPathDirectory = context.createTargetFile(targetRootDirectory);
 		if (targetPathDirectory.exists()) {
@@ -122,70 +123,30 @@ public class SDKBuilder {
 		}
 		targetPathDirectory.mkdirs();
 
-		
-		
 		handleApiMappingAndTargetEstimation(context);
 		handlePlugins(context);
 
 		startTaskDataEstimation(context);
-		startDSLExtraction(context);
 
 		writeTasksFile(context);
 
 		System.out.println("- info:" + context.getInfo());
 		System.out.println("generated into:" + context.targetPathDirectory.getCanonicalPath());
-		
-		
+
 		context.writeSDKInfo();
 		System.out.println("DONE");
 		return context;
 	}
 
-	/** In files like "gradle/subprojects/docs/src/docs/dsl/org.gradle.api.artifacts.ComponentSelection.xml"
-	 * is information contained, which methods are visible at DSL home page of gradle.
-	 * 
-	 * This is an execellent point to reduce proposals to only interesting stuff (for closure handling only...)
-	 */
-	private void startDSLExtraction(SDKBuilderContext context) {
-		//		subprojects\docs\src\docs\dsl
-		
-		File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/dsl.xml");
-		if (! dslXML.exists()){
-			/* we do not need this file - only the others, but it should be there if not there are no others normally.*/
-			throw new IllegalStateException("Did not find dsl.xml file:"+dslXML);
-		}
-		File dslFolder = dslXML.getParentFile();
-		File[] dslXMLFiles = dslFolder.listFiles(new FileFilter() {
-			
-			@Override
-			public boolean accept(File file) {
-				if (file.equals(dslXML)){
-					return false; // ignore this file it contains the navigation bar parts
-				}
-				if (file.getName().endsWith(".xml")){
-					return true;
-				}
-				
-				return false;
-			}
-		});
-		/* FIXME ATR, 17.02.2017: implement dsl data extraction. This shall be used for filtering unwished dsl proposals 
-		 * inside ui, will automatically filter private parts too... the filters must be applied to all involved types, 
-		 * with inheritance...  */
-		
-		/* format shall be:*/
-		/* <dsl type="org.gradle.api.artifacts.ComponentSelection.xml"><property name="requested"/>...<method name="reject"> ...*/
-		
-		
-	}
-
 	
+
 
 	private SDKBuilderContext handleApiMappingAndTargetEstimation(SDKBuilderContext context) throws IOException {
 		System.out.println("- copy api mappings");
 		File sourceParentDirectory = context.sourceParentDirectory;
 		File targetPathDirectory = context.targetPathDirectory;
-		FileUtils.copyFile(context.gradleOriginMappingFile, new File(targetPathDirectory, context.gradleOriginMappingFile.getName()));
+		FileUtils.copyFile(context.gradleOriginMappingFile,
+				new File(targetPathDirectory, context.gradleOriginMappingFile.getName()));
 
 		System.out.println("- inspect files and generate targets");
 		/*
@@ -193,8 +154,7 @@ public class SDKBuilder {
 		 * in orgin mapping file!
 		 */
 		Map<String, String> alternativeApiMapping = new TreeMap<>();
-		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory,
-				context);
+		inspectFilesAdoptAndGenerateTarget(alternativeApiMapping, sourceParentDirectory, targetPathDirectory, context);
 		System.out.println("- generate alternative api mapping file");
 		StringBuilder sb = new StringBuilder();
 		boolean first = true;
@@ -220,46 +180,53 @@ public class SDKBuilder {
 		System.out.println("- adopt plugins.xml");
 		File targetXMLPluginsFile = new File(context.targetPathDirectory, context.gradleOriginPluginsFile.getName());
 		XMLPlugins xmlPlugins = null;
-		try (FileInputStream fis = new FileInputStream(context.gradleOriginPluginsFile)	) {
+		try (FileInputStream fis = new FileInputStream(context.gradleOriginPluginsFile)) {
 			xmlPlugins = pluginsImporter.importPlugins(fis);
 		}
-		
+
 		Set<Plugin> standardPlugins = xmlPlugins.getPlugins();
-		for (Plugin standardPlugin: standardPlugins){
+		for (Plugin standardPlugin : standardPlugins) {
 			String standardId = standardPlugin.getId();
-			if (standardId==null){
-				/* TODO ATR,16.02.2017: use a schema and make id mandatory instead of this!*/
+			if (standardId == null) {
+				/*
+				 * TODO ATR,16.02.2017: use a schema and make id mandatory
+				 * instead of this!
+				 */
 				throw new IllegalStateException("found standard plugin with id NULL");
 			}
 		}
-		
+
 		XMLPlugins alternativeXMLPugins = null;
-		File alternativePluginsFile = new File(PARENT_OF_RES,"sdkbuilder/override/gradle/"+context.sdkInfo.getGradleVersion()+"/alternative-plugins.xml");
-		if (!alternativePluginsFile.exists()){
-			System.err.println("- WARN::alternative plugins file does not exists:"+alternativePluginsFile);
-		}else{
-			try (FileInputStream fis = new FileInputStream(alternativePluginsFile)	) {
+		File alternativePluginsFile = new File(PARENT_OF_RES,
+				"sdkbuilder/override/gradle/" + context.sdkInfo.getGradleVersion() + "/alternative-plugins.xml");
+		if (!alternativePluginsFile.exists()) {
+			System.err.println("- WARN::alternative plugins file does not exists:" + alternativePluginsFile);
+		} else {
+			try (FileInputStream fis = new FileInputStream(alternativePluginsFile)) {
 				alternativeXMLPugins = pluginsImporter.importPlugins(fis);
 			}
 			Set<Plugin> alternativePlugins = alternativeXMLPugins.getPlugins();
-			
-			for (Plugin alternativePlugin: alternativePlugins){
+
+			for (Plugin alternativePlugin : alternativePlugins) {
 				String alternativeId = alternativePlugin.getId();
-				if (alternativeId==null){
-					/* TODO ATR,16.02.2017: use a schema and make id mandatory instead of this!*/
+				if (alternativeId == null) {
+					/*
+					 * TODO ATR,16.02.2017: use a schema and make id mandatory
+					 * instead of this!
+					 */
 					throw new IllegalStateException("found alternative plugin with id NULL");
 				}
 				XMLPlugin alternativeXmlPlugin = (XMLPlugin) alternativePlugin;
 				String description = alternativeXmlPlugin.getDescription();
-				if (description==null){
-					description+="";
+				if (description == null) {
+					description += "";
 				}
-				alternativeXmlPlugin.setDescription(description+"(alternative)");
+				alternativeXmlPlugin.setDescription(description + "(alternative)");
 				standardPlugins.add(alternativePlugin);
 			}
-			
+
 		}
-		
+
 		try (FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
 			pluginsExporter.exportPlugins(xmlPlugins, outputStream);
 		}
@@ -301,7 +268,6 @@ public class SDKBuilder {
 	private void startTaskDataEstimation(SDKBuilderContext context) {
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- start task data estimation");
-		XMLTypeImporter typeImporter = new XMLTypeImporter();
 		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
@@ -313,8 +279,9 @@ public class SDKBuilder {
 	}
 
 	/**
-	 * Currently tasks.xml is only for information. but coulde be used in future for task
-	 * type resolving. 
+	 * Currently tasks.xml is only for information. but coulde be used in future
+	 * for task type resolving.
+	 * 
 	 * @param context
 	 * @param provider
 	 * @param typeName
@@ -367,23 +334,23 @@ public class SDKBuilder {
 		}
 	}
 
-	
-
 	private void inspectFilesAdoptAndGenerateTarget(Map<String, String> alternativeApiMapping, File sourceDir,
 			File targetDir, SDKBuilderContext context) throws IOException {
-		for (File newSourceFile : sourceDir.listFiles(new FileFilter() {
+		File[] listFiles = sourceDir.listFiles(new FileFilter() {
 
-			@Override
-			public boolean accept(File file) {
-				if (file == null) {
-					return false;
-				}
-				if (file.isDirectory()) {
-					return true;
-				}
-				return file.getName().endsWith(".xml");
-			}
-		})) {
+					@Override
+					public boolean accept(File file) {
+						if (file == null) {
+							return false;
+						}
+						if (file.isDirectory()) {
+							return true;
+						}
+						return file.getName().endsWith(".xml");
+					}
+				});
+		for (File newSourceFile : listFiles) {
+			
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
@@ -422,6 +389,14 @@ public class SDKBuilder {
 			estimateDelegateTargets(type, context);
 			context.allTypes.add(type.getName());
 			try (FileOutputStream outputStream = new FileOutputStream(newTargetFile)) {
+				String name = type.getName();
+				File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/"+name+".xml");
+				if (dslXML.exists()){
+					XMLDSLTypeInfo dslInfo = originDslTypeInfoImporter.collectDSL(dslXML);
+					type.setInfo(dslInfo);
+				}else{
+					System.err.println("no dsl xml file:"+dslXML);
+				}
 				typeExporter.exportType(type, outputStream);
 			}
 		} catch (IOException e) {
@@ -464,8 +439,9 @@ public class SDKBuilder {
 			}
 		}
 		if (problemCount > 0) {
-//			System.out.println("- WARN: type:" + type.getName()
-//					+ " has following method without descriptions: has no description " + problems.toString());
+			// System.out.println("- WARN: type:" + type.getName()
+			// + " has following method without descriptions: has no description
+			// " + problems.toString());
 			context.methodWithOutDescriptionCount += problemCount;
 		}
 

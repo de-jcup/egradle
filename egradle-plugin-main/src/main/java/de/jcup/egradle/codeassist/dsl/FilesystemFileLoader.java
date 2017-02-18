@@ -18,7 +18,6 @@ public class FilesystemFileLoader implements DSLFileLoader {
 	private ApiMappingImporter apiMappingImporter;
 	private static final Pattern PATTERN_EVERY_DOT = Pattern.compile("\\.");
 
-	/* FIXME ATR, 06.02.2017:  make an abstract class and provide direct loading from plugin src/res... */
 	public FilesystemFileLoader(XMLTypeImporter typeImporter, XMLPluginsImporter pluginsImporter, ApiMappingImporter apiMappingImporter) {
 		if (typeImporter == null) {
 			throw new IllegalArgumentException("typeImporter must not be null!");

@@ -49,7 +49,9 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 			return;
 		}
 
-		/* FIXME ATR, 06.02.2017: move this to own class!! and creat testcases! */
+		/* FIXME ATR, 06.02.2017: move link parameter resolving into own class!! and create testcases! 
+		 * maybe it could be used for generation /link building as well
+		 * */
 		
 		Type type = provider.getType(convertedName);
 		if (type == null) {

@@ -14,13 +14,6 @@ public interface Proposal extends Comparable<Proposal>{
 	String getCode();
 	
 	/**
-	 * FIXME ATR, 07.02.2016: remove this if unnecessary! YAGNI
-	 * @deprecated seems to be not used!
-	 * @return type or <code>null</code>
-	 */
-	String getType();
-	
-	/**
 	 * Returns tempalte used on apply
 	 * @return template, never <code>null</code>
 	 */

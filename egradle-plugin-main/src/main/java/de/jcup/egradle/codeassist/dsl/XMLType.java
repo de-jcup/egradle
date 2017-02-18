@@ -58,6 +58,9 @@ public class XMLType implements ModifiableType {
 
 	private Set<TypeReference> mergedInterfaces;
 
+	@XmlElement(name="info")
+	private XMLDSLTypeInfo dslInfo;
+
 	@Override
 	public void addExtension(String extensionId, Type extensionType, Reason reason) {
 		if (extensionType == null) {
@@ -317,6 +320,10 @@ public class XMLType implements ModifiableType {
 		} else if (!version.equals(other.version))
 			return false;
 		return true;
+	}
+
+	public void setInfo(XMLDSLTypeInfo dslInfo) {
+		this.dslInfo=dslInfo;
 	}
 
 	

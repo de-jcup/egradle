@@ -64,18 +64,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	}
 
 	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
-		/*
-		 * FIXME ATR, 03.02.2017: at this point the HTMLDescriptionBuilder like
-		 * in GradleTextHover should be used- so we got only one HTML preview
-		 */
 		Type identifiedType = result.getElementType();
-		TypeContext mode = result.getMode();
 		Set<Proposal> proposals = new TreeSet<>();
+		
 		Map<String, Type> extensions = identifiedType.getExtensions();
-		/*
-		 * TODO ATR, 28.01.2017: speed up by not calculating and setting code on
-		 * every creation but only when getter is called - refactoring necessary
-		 */
 		for (String extensionId : extensions.keySet()) {
 			if (extensionId == null) {
 				continue;

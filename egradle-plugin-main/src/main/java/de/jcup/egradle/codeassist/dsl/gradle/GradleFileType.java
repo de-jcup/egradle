@@ -1,6 +1,5 @@
 package de.jcup.egradle.codeassist.dsl.gradle;
 
-/* FIXME ATR, 20.01.2017: implement all types (INTIAL, BUILDSCRIPT, SETTINGS) and setup in editor on startup time and use it inside code completion! */
 /**
  * See types of gradle scripts at <a href="https://docs.gradle.org/current/dsl/">Gradle Build Language Reference</a>
  * @author Albert Tregnaghi
