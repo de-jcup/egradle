@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpFacet" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpFacet" version="3.0">
     <description> 
  Creates the .settings/org.eclipse.wst.common.project.facet.core.xml file for WTP projects. 
 </description>
@@ -26,5 +26,4 @@
     <method name="toString" returnType="java.lang.String"/>
     <property name="defaultResourceName" type="java.lang.String"/>
     <property name="facets" type="java.util.List"/>
-    <documentation/>
 </type>

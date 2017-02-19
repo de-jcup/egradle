@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.AbstractLinkTask" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.nativeplatform.tasks.AbstractLinkTask" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Base task for linking a native binary from object files and libraries. 
 </description>
@@ -41,7 +41,7 @@
  The tool chain used for linking. 
 </description>
     </method>
-    <method name="lib" returnType="void">
+    <method name="lib" returnType="void" documented="true">
         <description> 
  Adds a set of library files to be linked. The provided libs object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
@@ -66,7 +66,7 @@
     <method name="setToolChain" returnType="void">
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
-    <method name="source" returnType="void">
+    <method name="source" returnType="void" documented="true">
         <description> 
  Adds a set of object files to be linked. The provided source object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
@@ -78,23 +78,23 @@
  Include the destination directory as an output, to pick up auxiliary files produced alongside the main output file 
 </description>
     </property>
-    <property name="libs" type="org.gradle.api.file.FileCollection">
+    <property name="libs" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The library files to be passed to the linker. 
 </description>
     </property>
-    <property name="linkerArgs" type="java.util.List">
+    <property name="linkerArgs" type="java.util.List" documented="true">
         <description> 
  Additional arguments passed to the linker. 
 </description>
     </property>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
-    <property name="outputFile" type="java.io.File">
+    <property name="outputFile" type="java.io.File" documented="true">
         <description> 
  The file where the linked binary will be located. 
 </description>
     </property>
-    <property name="source" type="org.gradle.api.file.FileCollection">
+    <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The source object files to be passed to the linker. 
 </description>
@@ -104,18 +104,9 @@
  The platform that the linked binary will run on. 
 </description>
     </property>
-    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
+    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
         <description> 
  The tool chain used for linking. 
 </description>
     </property>
-    <documentation>
-        <property name="source"/>
-        <property name="libs"/>
-        <property name="linkerArgs"/>
-        <property name="outputFile"/>
-        <property name="toolChain"/>
-        <method name="source"/>
-        <method name="lib"/>
-    </documentation>
 </type>

@@ -3,7 +3,7 @@
     <description> 
  An artifact published as part of a &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;. 
 </description>
-    <method name="builtBy" returnType="void">
+    <method name="builtBy" returnType="void" documented="true">
         <description> 
  Registers some tasks which build this artifact. 
  
@@ -84,13 +84,13 @@
         <parameter type="java.lang.String" name="type"/>
     </method>
     <interface name="org.gradle.api.Buildable"/>
-    <property name="classifier" type="java.lang.String">
+    <property name="classifier" type="java.lang.String" documented="true">
         <description> 
  The classifier used to publish the artifact file. 
  A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier. 
 </description>
     </property>
-    <property name="conf" type="java.lang.String">
+    <property name="conf" type="java.lang.String" documented="true">
         <description> 
  A comma separated list of public configurations in which this artifact is published. 
  The '*' wildcard is used to designate that the artifact is published in all public configurations. 
@@ -98,35 +98,26 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of 'conf' for this artifact. 
 </description>
     </property>
-    <property name="extension" type="java.lang.String">
+    <property name="extension" type="java.lang.String" documented="true">
         <description> 
  The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
  For an artifact without an extension, this value will be an empty String. 
 </description>
     </property>
-    <property name="file" type="java.io.File">
+    <property name="file" type="java.io.File" documented="true">
         <description> 
  The actual file contents to publish. 
 </description>
     </property>
-    <property name="name" type="java.lang.String">
+    <property name="name" type="java.lang.String" documented="true">
         <description> 
  The name used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
  Defaults to the name of the module that this artifact belongs to. 
 </description>
     </property>
-    <property name="type" type="java.lang.String">
+    <property name="type" type="java.lang.String" documented="true">
         <description> 
  The type used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
 </description>
     </property>
-    <documentation>
-        <property name="file"/>
-        <property name="name"/>
-        <property name="type"/>
-        <property name="extension"/>
-        <property name="classifier"/>
-        <property name="conf"/>
-        <method name="builtBy"/>
-    </documentation>
 </type>

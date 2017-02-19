@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.StopActionException" version="3.0" superType="org.gradle.api.GradleException">
+<type language="gradle" name="org.gradle.api.tasks.StopActionException" version="3.0" superType="org.gradle.api.GradleException">
     <description> 
  &lt;p&gt;A &lt;code&gt;StopActionException&lt;/code&gt; is be thrown by a task &lt;a href='type://org.gradle.api.Action'&gt;org.gradle.api.Action&lt;/a&gt; or task action closure to 
  stop its own execution and to start execution of the task's next action. An action can usually be stopped by just 
@@ -15,5 +15,4 @@
  
  &lt;p&gt;Note that throwing this exception does not fail the execution of the task or the build.&lt;/p&gt; 
 </description>
-    <documentation/>
 </type>

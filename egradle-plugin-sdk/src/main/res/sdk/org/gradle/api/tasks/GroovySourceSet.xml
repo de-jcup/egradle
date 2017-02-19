@@ -18,7 +18,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy/Java source. Never returns null. 
 </description>
     </method>
-    <method name="groovy" returnType="org.gradle.api.tasks.GroovySourceSet" delegationTarget="SourceDirectorySet">
+    <method name="groovy" returnType="org.gradle.api.tasks.GroovySourceSet" delegationTarget="SourceDirectorySet" documented="true">
         <description> 
  Configures the Groovy source for this set. 
  
@@ -29,14 +29,14 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <property name="allGroovy" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="allGroovy" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  All Groovy source for this source set. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Groovy source. Never returns null. 
 </description>
     </property>
-    <property name="groovy" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="groovy" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  Returns the source to be compiled by the Groovy compiler for this source set. Any Java source present in this set 
  will be passed to the Groovy compiler for joint compilation. 
@@ -44,11 +44,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy/Java source. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="groovy"/>
-        <property name="[${project.projectDir}/src/${sourceSet.name}/groovy]"/>
-        <property name="allGroovy"/>
-        <property name="[groovy]"/>
-        <method name="groovy"/>
-    </documentation>
 </type>

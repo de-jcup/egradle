@@ -96,5 +96,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the root node of the resolved dependency graph 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -40,18 +40,14 @@
  The component that this solution represents. 
 </description>
     </property>
-    <property name="projects" type="java.util.Set">
+    <property name="projects" type="java.util.Set" documented="true">
         <description> 
  The set of projects included in this solution. 
 </description>
     </property>
-    <property name="solutionFile" type="org.gradle.ide.visualstudio.TextConfigFile">
+    <property name="solutionFile" type="org.gradle.ide.visualstudio.TextConfigFile" documented="true">
         <description> 
  Configuration for the generated solution file. 
 </description>
     </property>
-    <documentation>
-        <property name="projects"/>
-        <property name="solutionFile"/>
-    </documentation>
 </type>

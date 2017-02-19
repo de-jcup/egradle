@@ -97,5 +97,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path for this source directory. Does not return null. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.Named.Namer" version="3.0">
+<type language="gradle" name="org.gradle.api.Named.Namer" version="3.0">
     <description> 
  An implementation of the namer interface for objects implementing the named interface. 
 </description>
@@ -10,5 +10,4 @@
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <interface name="org.gradle.api.Namer"/>
-    <documentation/>
 </type>

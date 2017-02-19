@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.assembler.tasks.Assemble" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.language.assembler.tasks.Assemble" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Translates Assembly language source files into object files. 
 </description>
@@ -39,18 +39,18 @@
     <method name="setToolChain" returnType="void">
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
-    <method name="source" returnType="void">
+    <method name="source" returnType="void" documented="true">
         <description> 
  Adds a set of assembler sources files to be translated. The provided sourceFiles object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
         <parameter type="java.lang.Object" name="sourceFiles"/>
     </method>
-    <property name="assemblerArgs" type="java.util.List">
+    <property name="assemblerArgs" type="java.util.List" documented="true">
         <description> 
  Additional arguments to provide to the assembler. 
 </description>
     </property>
-    <property name="objectFileDir" type="java.io.File">
+    <property name="objectFileDir" type="java.io.File" documented="true">
         <description> 
  The directory where object files will be generated. 
 </description>
@@ -67,9 +67,4 @@
  The tool chain being used to build. 
 </description>
     </property>
-    <documentation>
-        <property name="objectFileDir"/>
-        <property name="assemblerArgs"/>
-        <method name="source"/>
-    </documentation>
 </type>

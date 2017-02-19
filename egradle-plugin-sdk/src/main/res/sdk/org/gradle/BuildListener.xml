@@ -56,5 +56,4 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;settings The settings. Never null. 
 </description>
     </property>
-    <documentation/>
 </type>

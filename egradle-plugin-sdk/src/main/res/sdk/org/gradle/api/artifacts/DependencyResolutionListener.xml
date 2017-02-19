@@ -19,5 +19,4 @@
 </description>
         <parameter type="org.gradle.api.artifacts.ResolvableDependencies" name="dependencies"/>
     </method>
-    <documentation/>
 </type>

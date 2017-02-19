@@ -3,14 +3,14 @@
     <description> 
  Represents an Ivy repository which contains Gradle plugins. 
 </description>
-    <method name="getUrl" returnType="java.net.URI">
+    <method name="getUrl" returnType="java.net.URI" documented="true">
         <description> 
  The base URL of this repository. This URL is used to find Gradle plugins. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description>
     </method>
-    <method name="setUrl" returnType="void" delegationTarget="File">
+    <method name="setUrl" returnType="void" delegationTarget="File" documented="true">
         <description> 
  Sets the base URL of this repository. This URL is used to find Gradle plugins. 
  
@@ -32,8 +32,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description>
     </property>
-    <documentation>
-        <method name="getUrl"/>
-        <method name="setUrl"/>
-    </documentation>
 </type>

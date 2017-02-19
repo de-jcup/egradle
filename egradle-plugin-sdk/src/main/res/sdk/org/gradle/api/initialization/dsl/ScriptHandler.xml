@@ -122,5 +122,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source URI. Returns null if the script source has no URI. 
 </description>
     </property>
-    <documentation/>
 </type>

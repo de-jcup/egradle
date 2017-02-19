@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.JettyRunWar" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask">
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyRunWar" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask">
     <description> 
  &lt;p&gt;Deploys a WAR to an embedded Jetty web container.&lt;/p&gt; 
  
@@ -27,17 +27,9 @@
         <parameter type="java.io.File" name="webApp"/>
     </method>
     <method name="validateConfiguration" returnType="void"/>
-    <property name="webApp" type="java.io.File">
+    <property name="webApp" type="java.io.File" documented="true">
         <description> 
  Returns the web application to deploy. 
 </description>
     </property>
-    <documentation>
-        <property name="webApp"/>
-        <property name="project.war.archivePath"/>
-        <property name="reload"/>
-        <property name="&quot;automatic&quot;"/>
-        <property name="scanIntervalSeconds"/>
-        <property name="0"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.jvm.tasks.api.ApiJar" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.jvm.tasks.api.ApiJar" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Assembles an "API Jar" containing only the members of a library's public API. 
  
@@ -61,5 +61,4 @@
     <property name="classFile" type="boolean"/>
     <property name="exportedPackages" type="java.util.Set"/>
     <property name="outputFile" type="java.io.File"/>
-    <documentation/>
 </type>

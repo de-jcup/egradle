@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.tasks.PluginUnderTestMetadata" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.plugin.devel.tasks.PluginUnderTestMetadata" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Custom task for generating the metadata for a plugin user test. 
  
@@ -35,5 +35,4 @@
  The code under test. Defaults to &lt;a href='type://sourceSets.main.runtimeClasspath'&gt;sourceSets.main.runtimeClasspath&lt;/a&gt;. 
 </description>
     </property>
-    <documentation/>
 </type>

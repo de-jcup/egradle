@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.binary.BaseBinarySpec" version="3.0">
+<type language="gradle" name="org.gradle.platform.base.binary.BaseBinarySpec" version="3.0">
     <description> 
  Base class that may be used for custom &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt; implementations. However, it is generally better to use an 
  interface annotated with &lt;a href='type://org.gradle.model.Managed'&gt;org.gradle.model.Managed&lt;/a&gt; and not use an implementation class at all. 
@@ -60,5 +60,4 @@
     <property name="publicType" type="java.lang.Class"/>
     <property name="sources" type="org.gradle.model.ModelMap"/>
     <property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection"/>
-    <documentation/>
 </type>

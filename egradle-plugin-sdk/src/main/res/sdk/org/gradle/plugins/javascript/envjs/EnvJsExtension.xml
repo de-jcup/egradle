@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.envjs.EnvJsExtension" version="3.0">
+<type language="gradle" name="org.gradle.plugins.javascript.envjs.EnvJsExtension" version="3.0">
     <method name="getJs" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getVersion" returnType="java.lang.String"/>
     <method name="setJs" returnType="void">
@@ -10,5 +10,4 @@
     </method>
     <property name="js" type="org.gradle.api.file.FileCollection"/>
     <property name="version" type="java.lang.String"/>
-    <documentation/>
 </type>

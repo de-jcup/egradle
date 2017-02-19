@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.testing.TestReport" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.tasks.testing.TestReport" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generates an HTML test report from the results of one or more &lt;a href='type://Test'&gt;Test&lt;/a&gt; tasks. 
 </description>
@@ -20,7 +20,7 @@
  Returns the set of binary test results to include in the report. 
 </description>
     </method>
-    <method name="reportOn" returnType="void" delegationTarget="Test">
+    <method name="reportOn" returnType="void" delegationTarget="Test" documented="true">
         <description> 
  Adds some results to include in the report. 
  
@@ -59,19 +59,14 @@
         <parameter type="java.io.File" name="dir"/>
     </method>
     <property name="buildOperationProcessor" type="org.gradle.internal.operations.BuildOperationProcessor"/>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to write the HTML report to. 
 </description>
     </property>
-    <property name="testResultDirs" type="org.gradle.api.file.FileCollection">
+    <property name="testResultDirs" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the set of binary test results to include in the report. 
 </description>
     </property>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="testResultDirs"/>
-        <method name="reportOn"/>
-    </documentation>
 </type>

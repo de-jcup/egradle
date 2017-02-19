@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.AbstractExecTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.AbstractExecTask" version="3.0">
     <description> 
  &lt;a href='type://AbstractExecTask'&gt;AbstractExecTask&lt;/a&gt; is the base class for all exec tasks. 
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The concrete type of the class. 
 </description>
-    <method name="args" returnType="T">
+    <method name="args" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
-    <method name="args" returnType="T">
+    <method name="args" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
-    <method name="commandLine" returnType="T">
+    <method name="commandLine" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
-    <method name="commandLine" returnType="T">
+    <method name="commandLine" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -35,13 +35,13 @@
 </description>
         <parameter type="org.gradle.process.ProcessForkOptions" name="target"/>
     </method>
-    <method name="environment" returnType="T">
+    <method name="environment" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.util.Map" name="environmentVariables"/>
     </method>
-    <method name="environment" returnType="T">
+    <method name="environment" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -49,7 +49,7 @@
         <parameter type="java.lang.Object" name="value"/>
     </method>
     <method name="exec" returnType="void"/>
-    <method name="executable" returnType="T">
+    <method name="executable" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -171,82 +171,65 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
-    <method name="workingDir" returnType="T">
+    <method name="workingDir" returnType="T" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <interface name="org.gradle.process.ExecSpec"/>
-    <property name="args" type="java.util.List">
+    <property name="args" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="commandLine" type="java.util.List">
+    <property name="commandLine" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="environment" type="java.util.Map">
+    <property name="environment" type="java.util.Map" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="errorOutput" type="java.io.OutputStream">
+    <property name="errorOutput" type="java.io.OutputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
     <property name="execAction" type="org.gradle.process.internal.ExecAction"/>
     <property name="execActionFactory" type="org.gradle.process.internal.ExecActionFactory"/>
-    <property name="execResult" type="org.gradle.process.ExecResult">
+    <property name="execResult" type="org.gradle.process.ExecResult" documented="true">
         <description> 
  Returns the result for the command run by this task. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The result. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet. 
 </description>
     </property>
-    <property name="executable" type="java.lang.String">
+    <property name="executable" type="java.lang.String" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="ignoreExitValue" type="boolean">
+    <property name="ignoreExitValue" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="standardInput" type="java.io.InputStream">
+    <property name="standardInput" type="java.io.InputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="standardOutput" type="java.io.OutputStream">
+    <property name="standardOutput" type="java.io.OutputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="workingDir" type="java.io.File">
+    <property name="workingDir" type="java.io.File" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <documentation>
-        <property name="args"/>
-        <property name="commandLine"/>
-        <property name="executable"/>
-        <property name="workingDir"/>
-        <property name="environment"/>
-        <property name="standardInput"/>
-        <property name="standardOutput"/>
-        <property name="errorOutput"/>
-        <property name="ignoreExitValue"/>
-        <property name="execResult"/>
-        <method name="commandLine"/>
-        <method name="args"/>
-        <method name="executable"/>
-        <method name="workingDir"/>
-        <method name="environment"/>
-    </documentation>
 </type>

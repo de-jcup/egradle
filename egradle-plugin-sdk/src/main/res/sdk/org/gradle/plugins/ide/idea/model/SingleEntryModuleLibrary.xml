@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.SingleEntryModuleLibrary" version="3.0" superType="org.gradle.plugins.ide.idea.model.ModuleLibrary">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.SingleEntryModuleLibrary" version="3.0" superType="org.gradle.plugins.ide.idea.model.ModuleLibrary">
     <description> 
  Single entry module library 
 </description>
@@ -46,5 +46,4 @@
  Returns a single source jar or source folder 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -1,4 +1,4 @@
-package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.other.sdkbuilder;
 
 import java.io.IOException;
 import java.io.OutputStream;

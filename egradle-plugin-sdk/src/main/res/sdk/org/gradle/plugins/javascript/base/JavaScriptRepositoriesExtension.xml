@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.base.JavaScriptRepositoriesExtension" version="3.0">
+<type language="gradle" name="org.gradle.plugins.javascript.base.JavaScriptRepositoriesExtension" version="3.0">
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repo"/>
     </method>
@@ -17,5 +17,4 @@
     <method name="gradle" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <documentation/>
 </type>

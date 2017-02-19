@@ -135,5 +135,4 @@
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
     <interface name="java.util.Collection"/>
-    <documentation/>
 </type>

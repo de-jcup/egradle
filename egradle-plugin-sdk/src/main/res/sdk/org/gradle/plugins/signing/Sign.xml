@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.Sign" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.plugins.signing.Sign" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  A task for creating digital signature files for one or more; tasks, files, publishable artifacts or configurations. 
  
@@ -83,31 +83,31 @@
     <method name="setSignatureType" returnType="void">
         <parameter type="org.gradle.plugins.signing.type.SignatureType" name="signatureType"/>
     </method>
-    <method name="sign" returnType="void">
+    <method name="sign" returnType="void" documented="true">
         <description> 
  Configures the task to sign each of the given files 
 </description>
         <parameter type="java.io.File" name="files"/>
     </method>
-    <method name="sign" returnType="void">
+    <method name="sign" returnType="void" documented="true">
         <description> 
  Configures the task to sign the archive produced for each of the given tasks (which must be archive tasks). 
 </description>
         <parameter type="org.gradle.api.Task" name="tasks"/>
     </method>
-    <method name="sign" returnType="void">
+    <method name="sign" returnType="void" documented="true">
         <description> 
  Configures the task to sign every artifact of the given configurations 
 </description>
         <parameter type="org.gradle.api.artifacts.Configuration" name="configurations"/>
     </method>
-    <method name="sign" returnType="void">
+    <method name="sign" returnType="void" documented="true">
         <description> 
  Configures the task to sign each of the given artifacts 
 </description>
         <parameter type="org.gradle.api.artifacts.PublishArtifact" name="publishArtifacts"/>
     </method>
-    <method name="sign" returnType="void">
+    <method name="sign" returnType="void" documented="true">
         <description> 
  Configures the task to sign each of the given artifacts, using the given classifier as the classifier for the resultant signature publish artifact. 
 </description>
@@ -120,7 +120,7 @@
     <method name="signTask" returnType="void">
         <parameter type="org.gradle.api.tasks.bundling.AbstractArchiveTask" name="archiveTask"/>
     </method>
-    <method name="signatory" returnType="void">
+    <method name="signatory" returnType="void" documented="true">
         <description> 
  Changes the signatory of the signatures. 
 </description>
@@ -149,7 +149,7 @@
 </description>
     </property>
     <property name="satisfiedBy" type="boolean"/>
-    <property name="signatory" type="org.gradle.plugins.signing.signatory.Signatory">
+    <property name="signatory" type="org.gradle.plugins.signing.signatory.Signatory" documented="true">
         <description> 
  Returns the signatory for this signing task. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the signatory 
@@ -174,9 +174,4 @@
  @throws IllegalStateException if there is not exactly one signature. 
 </description>
     </property>
-    <documentation>
-        <property name="signatory"/>
-        <method name="signatory"/>
-        <method name="sign"/>
-    </documentation>
 </type>

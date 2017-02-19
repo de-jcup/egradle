@@ -5,5 +5,4 @@
 </description>
     <method name="belongsToChangingModule" returnType="boolean"/>
     <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
-    <documentation/>
 </type>

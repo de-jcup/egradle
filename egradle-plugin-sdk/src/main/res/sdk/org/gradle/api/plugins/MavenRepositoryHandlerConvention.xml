@@ -4,7 +4,7 @@
  Allows Maven repositories for publishing artifacts to be defined. The Maven plugin mixes-in this interface to the &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler&lt;/a&gt; associated with each 
  task of type &lt;a href='type://org.gradle.api.tasks.Upload'&gt;org.gradle.api.tasks.Upload&lt;/a&gt;. 
 </description>
-    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer">
+    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description> 
  Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
  
@@ -12,7 +12,7 @@
  @see #mavenDeployer(java.util.Map, groovy.lang.Closure) 
 </description>
     </method>
-    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer">
+    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description> 
  Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
  
@@ -22,7 +22,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer">
+    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description> 
  Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
  
@@ -44,7 +44,7 @@
 </description>
         <parameter type="java.util.Map" name="args"/>
     </method>
-    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer">
+    <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description> 
  Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies. 
  
@@ -55,7 +55,7 @@
         <parameter type="java.util.Map" name="args"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver">
+    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
@@ -63,7 +63,7 @@
  @see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure) 
 </description>
     </method>
-    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver">
+    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
@@ -73,7 +73,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver">
+    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
@@ -95,7 +95,7 @@
 </description>
         <parameter type="java.util.Map" name="args"/>
     </method>
-    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver">
+    <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description> 
  Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies. 
  
@@ -106,8 +106,4 @@
         <parameter type="java.util.Map" name="args"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <documentation>
-        <method name="mavenDeployer"/>
-        <method name="mavenInstaller"/>
-    </documentation>
 </type>

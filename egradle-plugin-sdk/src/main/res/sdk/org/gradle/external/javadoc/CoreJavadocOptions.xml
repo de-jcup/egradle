@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.external.javadoc.CoreJavadocOptions" version="3.0">
+<type language="gradle" name="org.gradle.external.javadoc.CoreJavadocOptions" version="3.0">
     <description> 
  Provides the core Javadoc Options. That is, provides the options which are not doclet specific. 
 </description>
@@ -190,5 +190,4 @@
     <property name="source" type="java.lang.String"/>
     <property name="sourceNames" type="java.util.List"/>
     <property name="verbose" type="boolean"/>
-    <documentation/>
 </type>

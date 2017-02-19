@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.Jdk" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.Jdk" version="3.0">
     <description> 
  Represents information for the project Java SDK. 
  This translates to attributes of the ProjectRootManager element in the ipr. 
@@ -29,5 +29,4 @@
     <property name="jdk15" type="boolean"/>
     <property name="languageLevel" type="java.lang.String"/>
     <property name="projectJdkName" type="java.lang.String"/>
-    <documentation/>
 </type>

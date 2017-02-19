@@ -21,24 +21,19 @@
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.nativeplatform.TargetedNativeComponent"/>
     <interface name="org.gradle.platform.base.LibrarySpec"/>
-    <property name="api" type="org.gradle.nativeplatform.NativeLibraryRequirement">
+    <property name="api" type="org.gradle.nativeplatform.NativeLibraryRequirement" documented="true">
         <description> 
  Converts this library to a native library requirement that uses the api library linkage. 
 </description>
     </property>
-    <property name="shared" type="org.gradle.nativeplatform.NativeLibraryRequirement">
+    <property name="shared" type="org.gradle.nativeplatform.NativeLibraryRequirement" documented="true">
         <description> 
  Converts this library to a native library requirement that uses the shared library variant. This is the default. 
 </description>
     </property>
-    <property name="static" type="org.gradle.nativeplatform.NativeLibraryRequirement">
+    <property name="static" type="org.gradle.nativeplatform.NativeLibraryRequirement" documented="true">
         <description> 
  Converts this library to a native library requirement that uses the static library variant. 
 </description>
     </property>
-    <documentation>
-        <property name="api"/>
-        <property name="shared"/>
-        <property name="static"/>
-    </documentation>
 </type>

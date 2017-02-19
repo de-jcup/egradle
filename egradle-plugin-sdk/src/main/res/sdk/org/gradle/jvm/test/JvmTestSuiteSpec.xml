@@ -19,5 +19,4 @@
 </description>
     </property>
     <property name="testedComponent" type="org.gradle.jvm.JvmComponentSpec"/>
-    <documentation/>
 </type>

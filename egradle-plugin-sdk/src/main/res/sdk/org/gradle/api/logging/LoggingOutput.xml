@@ -35,5 +35,4 @@
 </description>
         <parameter type="org.gradle.api.logging.StandardOutputListener" name="listener"/>
     </method>
-    <documentation/>
 </type>

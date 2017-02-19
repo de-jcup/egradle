@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.model.Managed" version="3.0">
+<type language="gradle" name="org.gradle.model.Managed" version="3.0">
     <description> 
  A managed type is transparent to the model space, and enforces immutability at the appropriate times in the object's lifecycle. 
  &lt;p&gt; 
@@ -90,5 +90,4 @@
  &lt;p&gt; 
  Please see &lt;a href='type://Model'&gt;Model&lt;/a&gt; for information on creating model elements of managed types. 
 </description>
-    <documentation/>
 </type>

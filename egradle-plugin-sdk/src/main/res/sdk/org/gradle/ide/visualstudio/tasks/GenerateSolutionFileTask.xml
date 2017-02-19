@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateSolutionFileTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask">
+<type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateSolutionFileTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask">
     <description> 
  Task for generating a solution file. 
 </description>
@@ -14,5 +14,4 @@
     <property name="outputFile" type="java.io.File"/>
     <property name="solution" type="org.gradle.ide.visualstudio.VisualStudioSolution"/>
     <property name="visualStudioSolution" type="org.gradle.ide.visualstudio.VisualStudioSolution"/>
-    <documentation/>
 </type>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testing.jacoco.plugins.JacocoPluginExtension" version="3.0">
+<type language="gradle" name="org.gradle.testing.jacoco.plugins.JacocoPluginExtension" version="3.0">
     <description> 
  Extension including common properties and methods for Jacoco. 
 </description>
-    <method name="applyTo" returnType="void">
+    <method name="applyTo" returnType="void" documented="true">
         <description> 
  Applies Jacoco to the given task. 
  Configuration options will be provided on a task extension named 'jacoco'. 
@@ -14,7 +14,7 @@
 </description>
         <parameter type="T" name="task"/>
     </method>
-    <method name="applyTo" returnType="void">
+    <method name="applyTo" returnType="void" documented="true">
         <description> 
  Applies Jacoco to all of the given tasks. 
  
@@ -64,21 +64,14 @@
  @deprecated logger should be considered final. 
 </description>
     </property>
-    <property name="reportsDir" type="java.io.File">
+    <property name="reportsDir" type="java.io.File" documented="true">
         <description> 
  The directory where reports will be generated. 
 </description>
     </property>
-    <property name="toolVersion" type="java.lang.String">
+    <property name="toolVersion" type="java.lang.String" documented="true">
         <description> 
  Version of Jacoco JARs to use. 
 </description>
     </property>
-    <documentation>
-        <property name="toolVersion"/>
-        <property name="0.7.6.201602180812"/>
-        <property name="reportsDir"/>
-        <property name="${project.reporting.baseDir}/jacoco"/>
-        <method name="applyTo"/>
-    </documentation>
 </type>

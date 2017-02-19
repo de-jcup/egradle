@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.testing.junit.JUnitOptions" version="3.0" superType="org.gradle.api.tasks.testing.TestFrameworkOptions">
+<type language="gradle" name="org.gradle.api.tasks.testing.junit.JUnitOptions" version="3.0" superType="org.gradle.api.tasks.testing.TestFrameworkOptions">
     <description> 
  The JUnit specific test options. 
 </description>
@@ -35,5 +35,4 @@
  The set of categories to run. 
 </description>
     </property>
-    <documentation/>
 </type>

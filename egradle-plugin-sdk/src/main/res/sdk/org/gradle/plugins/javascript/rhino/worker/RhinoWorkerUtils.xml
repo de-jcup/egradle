@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils" version="3.0">
+<type language="gradle" name="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils" version="3.0">
     <description> 
  This should have originally been an internal API. 
 </description>
@@ -35,5 +35,4 @@
         <parameter type="java.io.File" name="destination"/>
         <parameter type="java.lang.String" name="encoding"/>
     </method>
-    <documentation/>
 </type>

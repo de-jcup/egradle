@@ -60,7 +60,7 @@
  
  Examples on configuring the &lt;b&gt;resolution strategy&lt;/b&gt; - see docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; 
 </description>
-    <method name="detachedConfiguration" returnType="org.gradle.api.artifacts.Configuration">
+    <method name="detachedConfiguration" returnType="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  Creates a configuration, but does not add it to this container. 
  
@@ -69,19 +69,19 @@
 </description>
         <parameter type="org.gradle.api.artifacts.Dependency" name="dependencies"/>
     </method>
-    <method name="getAt" returnType="org.gradle.api.artifacts.Configuration">
+    <method name="getAt" returnType="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="getByName" returnType="org.gradle.api.artifacts.Configuration">
+    <method name="getByName" returnType="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="getByName" returnType="org.gradle.api.artifacts.Configuration">
+    <method name="getByName" returnType="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -99,9 +99,4 @@
  {@inheritDoc} 
 </description>
     </property>
-    <documentation>
-        <method name="getByName"/>
-        <method name="getAt"/>
-        <method name="detachedConfiguration"/>
-    </documentation>
 </type>

@@ -14,7 +14,7 @@
          tasks. 
 </description>
     </method>
-    <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency">
+    <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency" documented="true">
         <description> 
  Returns a dependency which contains the tasks which build this artifact. All &lt;a href='type://Buildable'&gt;Buildable&lt;/a&gt; implementations 
  must ensure that the returned dependency object is live, so that it tracks changes to the dependencies of this 
@@ -24,7 +24,4 @@
          tasks. 
 </description>
     </property>
-    <documentation>
-        <property name="buildDependencies"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.ProjectReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.ProjectReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
     <description> 
  &lt;p&gt;Displays a list of projects in the build. An instance of this type is used when you execute the &lt;a href='type://projects'&gt;projects&lt;/a&gt; 
  task from the command-line.&lt;/p&gt; 
@@ -22,5 +22,4 @@
     </method>
     <property name="children" type="java.util.List"/>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.TextReportRenderer"/>
-    <documentation/>
 </type>

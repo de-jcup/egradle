@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.api.XmlGeneratorTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.api.XmlGeneratorTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask">
     <description> 
  A convenience superclass for those tasks which generate XML configuration files from a domain object of type T. 
  
@@ -11,5 +11,4 @@
     <method name="create" returnType="T"/>
     <method name="getXmlTransformer" returnType="org.gradle.internal.xml.XmlTransformer"/>
     <property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/>
-    <documentation/>
 </type>

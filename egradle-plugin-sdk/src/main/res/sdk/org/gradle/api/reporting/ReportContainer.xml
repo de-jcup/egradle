@@ -32,7 +32,7 @@
     <interface name="org.gradle.util.Configurable"/>
     <property name="asMap" type="java.util.SortedMap"/>
     <property name="empty" type="boolean"/>
-    <property name="enabled" type="org.gradle.api.NamedDomainObjectSet">
+    <property name="enabled" type="org.gradle.api.NamedDomainObjectSet" documented="true">
         <description> 
  Returns an immutable collection of all the enabled &lt;a href='type://Report'&gt;Report&lt;/a&gt; objects in this container. 
  &lt;p&gt; 
@@ -45,7 +45,4 @@
     <property name="namer" type="org.gradle.api.Namer"/>
     <property name="names" type="java.util.SortedSet"/>
     <property name="rules" type="java.util.List"/>
-    <documentation>
-        <property name="enabled"/>
-    </documentation>
 </type>

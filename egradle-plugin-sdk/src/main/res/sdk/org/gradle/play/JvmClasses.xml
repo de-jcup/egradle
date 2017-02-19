@@ -3,7 +3,7 @@
     <description> 
  A set of classes and resources that operate together. 
 </description>
-    <method name="addResourceDir" returnType="void">
+    <method name="addResourceDir" returnType="void" documented="true">
         <description> 
  Add a resource directory to this binary. 
 </description>
@@ -26,19 +26,14 @@
         <parameter type="java.io.File" name="classesDir"/>
     </method>
     <interface name="org.gradle.api.BuildableComponentSpec"/>
-    <property name="classesDir" type="java.io.File">
+    <property name="classesDir" type="java.io.File" documented="true">
         <description> 
  The classes directory for this binary. 
 </description>
     </property>
-    <property name="resourceDirs" type="java.util.Set">
+    <property name="resourceDirs" type="java.util.Set" documented="true">
         <description> 
  A set of resource directories for this binary. 
 </description>
     </property>
-    <documentation>
-        <property name="classesDir"/>
-        <property name="resourceDirs"/>
-        <method name="addResourceDir"/>
-    </documentation>
 </type>

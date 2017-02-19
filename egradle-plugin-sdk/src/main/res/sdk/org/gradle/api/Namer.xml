@@ -15,5 +15,4 @@
 </description>
         <parameter type="T" name="object"/>
     </method>
-    <documentation/>
 </type>

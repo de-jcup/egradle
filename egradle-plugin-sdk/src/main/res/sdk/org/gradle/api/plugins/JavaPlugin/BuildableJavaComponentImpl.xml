@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.JavaPlugin.BuildableJavaComponentImpl" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.JavaPlugin.BuildableJavaComponentImpl" version="3.0">
     <method name="getBuildTasks" returnType="java.util.Collection"/>
     <method name="getCompileDependencies" returnType="org.gradle.api.artifacts.Configuration"/>
     <method name="getRebuildTasks" returnType="java.util.Collection"/>
@@ -9,5 +9,4 @@
     <property name="compileDependencies" type="org.gradle.api.artifacts.Configuration"/>
     <property name="rebuildTasks" type="java.util.Collection"/>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>
-    <documentation/>
 </type>

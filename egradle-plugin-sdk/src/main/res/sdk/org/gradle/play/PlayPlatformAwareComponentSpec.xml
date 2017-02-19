@@ -7,5 +7,4 @@
         <parameter type="java.lang.Object" name="platformRequirements"/>
     </method>
     <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
-    <documentation/>
 </type>

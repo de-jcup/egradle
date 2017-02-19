@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.test.cunit.tasks.GenerateCUnitLauncher" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.nativeplatform.test.cunit.tasks.GenerateCUnitLauncher" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generated the Gradle CUnit launcher: main method and header. 
 </description>
@@ -18,5 +18,4 @@
     </method>
     <property name="headerDir" type="java.io.File"/>
     <property name="sourceDir" type="java.io.File"/>
-    <documentation/>
 </type>

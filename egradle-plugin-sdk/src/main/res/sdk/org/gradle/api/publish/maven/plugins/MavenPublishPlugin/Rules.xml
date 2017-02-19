@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="createGeneratePomTask" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal" name="publication"/>
@@ -33,5 +33,4 @@
         <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
         <parameter type="java.io.File" name="buildDir"/>
     </method>
-    <documentation/>
 </type>

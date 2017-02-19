@@ -52,5 +52,4 @@
     </method>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
     <interface name="org.gradle.api.internal.rules.NamedDomainObjectFactoryRegistry"/>
-    <documentation/>
 </type>

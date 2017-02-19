@@ -14,7 +14,7 @@
 </description>
     </method>
     <interface name="org.gradle.language.base.LanguageSourceSet"/>
-    <property name="exportedHeaders" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="exportedHeaders" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  The headers as a directory set. 
 </description>
@@ -24,7 +24,4 @@
  The headers that are private to this source set and implicitly available. These are not explicitly made available for compilation. 
 </description>
     </property>
-    <documentation>
-        <property name="exportedHeaders"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.CacheableTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.CacheableTask" version="3.0">
     <description> 
  &lt;p&gt;Attached to a task type to indicate that task output caching should be enabled by default for tasks of this type.&lt;/p&gt; 
  
@@ -7,5 +7,4 @@
  
  &lt;p&gt;Caching for individual task instances can be disabled via &lt;a href='type://TaskOutputs#cacheIf(Spec)'&gt;TaskOutputs#cacheIf(Spec)&lt;/a&gt;.&lt;/p&gt; 
 </description>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseJdt" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseJdt" version="3.0">
     <description> 
  Enables fine-tuning jdt details of the Eclipse plugin 
  
@@ -23,7 +23,7 @@
  } 
  &lt;/pre&gt; 
 </description>
-    <method name="file" returnType="void" delegationTarget="Jdt">
+    <method name="file" returnType="void" delegationTarget="Jdt" documented="true">
         <description> 
  Enables advanced configuration like affecting the way existing jdt file content 
  is merged with gradle build information 
@@ -71,7 +71,7 @@
     <method name="setTargetCompatibility" returnType="void">
         <parameter type="java.lang.Object" name="targetCompatibility"/>
     </method>
-    <property name="file" type="org.gradle.plugins.ide.api.PropertiesFileContentMerger">
+    <property name="file" type="org.gradle.plugins.ide.api.PropertiesFileContentMerger" documented="true">
         <description> 
  See &lt;a href='type://EclipseJdt#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
 </description>
@@ -83,26 +83,18 @@
  For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
 </description>
     </property>
-    <property name="sourceCompatibility" type="org.gradle.api.JavaVersion">
+    <property name="sourceCompatibility" type="org.gradle.api.JavaVersion" documented="true">
         <description> 
  The source Java language level. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
 </description>
     </property>
-    <property name="targetCompatibility" type="org.gradle.api.JavaVersion">
+    <property name="targetCompatibility" type="org.gradle.api.JavaVersion" documented="true">
         <description> 
  The target JVM to generate &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
 </description>
     </property>
-    <documentation>
-        <property name="sourceCompatibility"/>
-        <property name="project.sourceCompatibility"/>
-        <property name="targetCompatibility"/>
-        <property name="project.targetCompatibility"/>
-        <property name="file"/>
-        <method name="file"/>
-    </documentation>
 </type>

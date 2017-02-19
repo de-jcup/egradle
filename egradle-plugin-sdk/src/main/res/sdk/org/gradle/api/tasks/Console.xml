@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Console" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.Console" version="3.0">
     <description> 
  &lt;p&gt;Attached to a task property to indicate that the property is not to be taken into account for up-to-date checking, 
  because its value only influences the console output of the task.&lt;/p&gt; 
@@ -8,5 +8,4 @@
  
  &lt;p&gt;This will cause the task &lt;em&gt;not&lt;/em&gt; to be considered out-of-date when the property has changed.&lt;/p&gt; 
 </description>
-    <documentation/>
 </type>

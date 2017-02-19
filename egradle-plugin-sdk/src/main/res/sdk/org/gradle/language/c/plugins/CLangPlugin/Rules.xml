@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.c.plugins.CLangPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.language.c.plugins.CLangPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="registerLanguage" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
@@ -7,5 +7,4 @@
         <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languages"/>
         <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
     </method>
-    <documentation/>
 </type>

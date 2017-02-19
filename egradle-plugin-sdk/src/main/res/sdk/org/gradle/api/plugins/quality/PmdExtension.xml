@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.PmdExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
+<type language="gradle" name="org.gradle.api.plugins.quality.PmdExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
     <description> 
  Configuration options for the PMD plugin. 
  
@@ -51,7 +51,7 @@
  Whether or not to write PMD results to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
 </description>
     </method>
-    <method name="ruleSetFiles" returnType="void">
+    <method name="ruleSetFiles" returnType="void" documented="true">
         <description> 
  Convenience method for adding rule set files. 
  
@@ -61,7 +61,7 @@
 </description>
         <parameter type="java.lang.Object" name="ruleSetFiles"/>
     </method>
-    <method name="ruleSets" returnType="void">
+    <method name="ruleSets" returnType="void" documented="true">
         <description> 
  Convenience method for adding rule sets. 
  
@@ -97,12 +97,12 @@
 </description>
         <parameter type="java.lang.Object" name="value"/>
     </method>
-    <property name="consoleOutput" type="boolean">
+    <property name="consoleOutput" type="boolean" documented="true">
         <description> 
  Whether or not to write PMD results to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
 </description>
     </property>
-    <property name="rulePriority" type="int">
+    <property name="rulePriority" type="int" documented="true">
         <description> 
  The rule priority threshold; violations for rules with a lower priority will not be reported. Default value is 5, which means that all violations will be reported. 
  
@@ -113,7 +113,7 @@
  Example: rulePriority = 3 
 </description>
     </property>
-    <property name="ruleSetConfig" type="org.gradle.api.resources.TextResource">
+    <property name="ruleSetConfig" type="org.gradle.api.resources.TextResource" documented="true">
         <description> 
  The custom rule set to be used (if any). Replaces &lt;a href='type://ruleSetFiles'&gt;ruleSetFiles&lt;/a&gt;, except that it does not currently support multiple rule sets. 
  
@@ -124,45 +124,23 @@
  @since 2.2 
 </description>
     </property>
-    <property name="ruleSetFiles" type="org.gradle.api.file.FileCollection">
+    <property name="ruleSetFiles" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The custom rule set files to be used. See the &lt;a href="http://pmd.sourceforge.net/howtomakearuleset.html"&gt;official documentation&lt;/a&gt; for how to author a rule set file. 
  
  Example: ruleSetFiles = files("config/pmd/myRuleSet.xml") 
 </description>
     </property>
-    <property name="ruleSets" type="java.util.List">
+    <property name="ruleSets" type="java.util.List" documented="true">
         <description> 
  The built-in rule sets to be used. See the &lt;a href="http://pmd.sourceforge.net/rules/index.html"&gt;official list&lt;/a&gt; of built-in rule sets. 
  
  Example: ruleSets = ["basic", "braces"] 
 </description>
     </property>
-    <property name="targetJdk" type="org.gradle.api.plugins.quality.TargetJdk">
+    <property name="targetJdk" type="org.gradle.api.plugins.quality.TargetJdk" documented="true">
         <description> 
  The target jdk to use with pmd, 1.3, 1.4, 1.5, 1.6, 1.7 or jsp 
 </description>
     </property>
-    <documentation>
-        <property name="toolVersion"/>
-        <property name="5.2.3"/>
-        <property name="reportsDir"/>
-        <property name="${project.reporting.baseDir}/pmd"/>
-        <property name="ruleSets"/>
-        <property name="[&quot;basic&quot;]"/>
-        <property name="ruleSetConfig"/>
-        <property name="null"/>
-        <property name="ruleSetFiles"/>
-        <property name="[]"/>
-        <property name="targetJdk"/>
-        <property name="project.sourceCompatibility"/>
-        <property name="ignoreFailures"/>
-        <property name="false"/>
-        <property name="rulePriority"/>
-        <property name="5"/>
-        <property name="consoleOutput"/>
-        <property name="false"/>
-        <method name="ruleSets"/>
-        <method name="ruleSetFiles"/>
-    </documentation>
 </type>

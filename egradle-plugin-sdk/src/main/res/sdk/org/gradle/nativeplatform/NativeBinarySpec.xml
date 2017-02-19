@@ -95,7 +95,7 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'c' plugin is applied. 
 </description>
     </method>
-    <method name="lib" returnType="void" delegationTarget="NativeLibrarySpec">
+    <method name="lib" returnType="void" delegationTarget="NativeLibrarySpec" documented="true">
         <description> 
  Adds a library as input to this binary. 
  &lt;p/&gt; 
@@ -118,7 +118,7 @@
         <parameter type="java.lang.Object" name="library"/>
     </method>
     <interface name="org.gradle.platform.base.BinarySpec"/>
-    <property name="assembler" type="org.gradle.nativeplatform.Tool">
+    <property name="assembler" type="org.gradle.nativeplatform.Tool" documented="true">
         <description> 
  The configuration of the assembler used when compiling assembly sources this binary. 
  
@@ -126,12 +126,12 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'assembler' plugin is applied. 
 </description>
     </property>
-    <property name="buildType" type="org.gradle.nativeplatform.BuildType">
+    <property name="buildType" type="org.gradle.nativeplatform.BuildType" documented="true">
         <description> 
  Returns the &lt;a href='type://org.gradle.nativeplatform.BuildType'&gt;org.gradle.nativeplatform.BuildType&lt;/a&gt; used to construct this binary. 
 </description>
     </property>
-    <property name="cCompiler" type="org.gradle.nativeplatform.PreprocessingTool">
+    <property name="cCompiler" type="org.gradle.nativeplatform.PreprocessingTool" documented="true">
         <description> 
  The configuration of the C compiler used when compiling C sources for this binary. 
  
@@ -139,12 +139,12 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'c' plugin is applied. 
 </description>
     </property>
-    <property name="component" type="org.gradle.nativeplatform.NativeComponentSpec">
+    <property name="component" type="org.gradle.nativeplatform.NativeComponentSpec" documented="true">
         <description> 
  The component that this binary was built from. 
 </description>
     </property>
-    <property name="cppCompiler" type="org.gradle.nativeplatform.PreprocessingTool">
+    <property name="cppCompiler" type="org.gradle.nativeplatform.PreprocessingTool" documented="true">
         <description> 
  The configuration of the C++ compiler used when compiling C++ sources for this binary. 
  
@@ -152,24 +152,24 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'cpp' plugin is applied. 
 </description>
     </property>
-    <property name="flavor" type="org.gradle.nativeplatform.Flavor">
+    <property name="flavor" type="org.gradle.nativeplatform.Flavor" documented="true">
         <description> 
  The &lt;a href='type://org.gradle.nativeplatform.Flavor'&gt;org.gradle.nativeplatform.Flavor&lt;/a&gt; that this binary was built with. 
 </description>
     </property>
-    <property name="libs" type="java.util.Collection">
+    <property name="libs" type="java.util.Collection" documented="true">
         <description> 
  The libraries that should be linked into this binary. 
 </description>
     </property>
-    <property name="linker" type="org.gradle.nativeplatform.Tool">
+    <property name="linker" type="org.gradle.nativeplatform.Tool" documented="true">
         <description> 
  The configuration of the linker used when linking this binary. 
  
  Valid for &lt;a href='type://SharedLibraryBinarySpec'&gt;SharedLibraryBinarySpec&lt;/a&gt; and &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt;. 
 </description>
     </property>
-    <property name="objcCompiler" type="org.gradle.nativeplatform.PreprocessingTool">
+    <property name="objcCompiler" type="org.gradle.nativeplatform.PreprocessingTool" documented="true">
         <description> 
  The configuration of the Objective-C compiler used when compiling Objective-C sources for this binary. 
  
@@ -177,7 +177,7 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'objective-c' plugin is applied. 
 </description>
     </property>
-    <property name="objcppCompiler" type="org.gradle.nativeplatform.PreprocessingTool">
+    <property name="objcppCompiler" type="org.gradle.nativeplatform.PreprocessingTool" documented="true">
         <description> 
  The configuration of the Objective-C++ compiler used when compiling Objective-C++ sources for this binary. 
  
@@ -185,7 +185,7 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'objective-cpp' plugin is applied. 
 </description>
     </property>
-    <property name="rcCompiler" type="org.gradle.nativeplatform.PreprocessingTool">
+    <property name="rcCompiler" type="org.gradle.nativeplatform.PreprocessingTool" documented="true">
         <description> 
  The configuration of the Resource compiler used when compiling resources for this binary. 
  
@@ -193,38 +193,21 @@
  &lt;a href='type://NativeExecutableBinarySpec'&gt;NativeExecutableBinarySpec&lt;/a&gt; when the 'windows-resources' plugin is applied. 
 </description>
     </property>
-    <property name="staticLibArchiver" type="org.gradle.nativeplatform.Tool">
+    <property name="staticLibArchiver" type="org.gradle.nativeplatform.Tool" documented="true">
         <description> 
  The configuration of the static library archiver used when creating this binary. 
  
  Valid for &lt;a href='type://StaticLibraryBinarySpec'&gt;StaticLibraryBinarySpec&lt;/a&gt;. 
 </description>
     </property>
-    <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform">
+    <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform" documented="true">
         <description> 
  Returns the &lt;a href='type://org.gradle.nativeplatform.platform.NativePlatform'&gt;org.gradle.nativeplatform.platform.NativePlatform&lt;/a&gt; that this binary is targeted to run on. 
 </description>
     </property>
-    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
+    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
         <description> 
  Returns the &lt;a href='type://org.gradle.nativeplatform.toolchain.NativeToolChain'&gt;org.gradle.nativeplatform.toolchain.NativeToolChain&lt;/a&gt; that will be used to build this binary. 
 </description>
     </property>
-    <documentation>
-        <property name="buildType"/>
-        <property name="flavor"/>
-        <property name="targetPlatform"/>
-        <property name="component"/>
-        <property name="toolChain"/>
-        <property name="libs"/>
-        <property name="linker"/>
-        <property name="staticLibArchiver"/>
-        <property name="assembler"/>
-        <property name="cCompiler"/>
-        <property name="cppCompiler"/>
-        <property name="objcCompiler"/>
-        <property name="objcppCompiler"/>
-        <property name="rcCompiler"/>
-        <method name="lib"/>
-    </documentation>
 </type>

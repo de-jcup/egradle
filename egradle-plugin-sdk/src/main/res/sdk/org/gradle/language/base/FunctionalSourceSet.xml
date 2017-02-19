@@ -5,5 +5,4 @@
  (production code, test code, etc.). 
 </description>
     <interface name="org.gradle.model.ModelMap"/>
-    <documentation/>
 </type>

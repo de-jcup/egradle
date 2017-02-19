@@ -26,7 +26,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <property name="name" type="java.lang.String">
+    <property name="name" type="java.lang.String" documented="true">
         <description> 
  Returns the name for this repository. A name must be unique amongst a repository set. A default name is provided for the repository if none 
  is provided. 
@@ -36,7 +36,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. 
 </description>
     </property>
-    <documentation>
-        <property name="name"/>
-    </documentation>
 </type>

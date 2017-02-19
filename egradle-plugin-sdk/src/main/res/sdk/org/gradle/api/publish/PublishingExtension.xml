@@ -48,7 +48,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to. 
 </description>
     </method>
-    <method name="publications" returnType="void" delegationTarget="ivy.xml">
+    <method name="publications" returnType="void" delegationTarget="ivy.xml" documented="true">
         <description> 
  Configures the publications of this project. 
  &lt;p&gt; 
@@ -74,7 +74,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configure"/>
     </method>
-    <method name="repositories" returnType="void" delegationTarget="repositories">
+    <method name="repositories" returnType="void" delegationTarget="repositories" documented="true">
         <description> 
  Configures the container of possible repositories to publish to. 
  
@@ -99,7 +99,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configure"/>
     </method>
-    <property name="publications" type="org.gradle.api.publish.PublicationContainer">
+    <property name="publications" type="org.gradle.api.publish.PublicationContainer" documented="true">
         <description> 
  The publications of the project. 
  &lt;p&gt; 
@@ -108,7 +108,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publications of this project. 
 </description>
     </property>
-    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler">
+    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
         <description> 
  The container of possible repositories to publish to. 
  &lt;p&gt; 
@@ -117,10 +117,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to. 
 </description>
     </property>
-    <documentation>
-        <property name="publications"/>
-        <property name="repositories"/>
-        <method name="publications"/>
-        <method name="repositories"/>
-    </documentation>
 </type>

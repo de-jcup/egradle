@@ -24,5 +24,11 @@ public interface ModifiableType extends Type {
 	 */
 	public void inheritFrom(Type superType);
 	
+	/**
+	 * Set <code>true</code> when this type is part of official gradle DSL documentation
+	 * @param partOfGradleDSLDocumentation
+	 */
+	public void setDocumented(boolean partOfGradleDSLDocumentation);
+	
 
 }

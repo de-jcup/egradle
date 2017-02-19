@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.model.RuleTarget" version="3.0">
+<type language="gradle" name="org.gradle.model.RuleTarget" version="3.0">
     <description> 
  Attached to the getter for a property on a &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; to denote that the property defines the target for the rule source. 
 </description>
-    <documentation/>
 </type>

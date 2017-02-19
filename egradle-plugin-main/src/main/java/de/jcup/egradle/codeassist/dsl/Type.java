@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Albert Tregnaghi
  *
  */
-public interface Type extends LanguageElement, Comparable<Type>{
+public interface Type extends LanguageElement, GradleDocumentationInfo, Comparable<Type>{
 
 	/**
 	 * Return properties (defined + inherited), never <code>null</code>
@@ -74,6 +74,5 @@ public interface Type extends LanguageElement, Comparable<Type>{
 	public boolean isDescendantOf(String type);
 	
 	public boolean isInterface();
-
-		
+	
 }

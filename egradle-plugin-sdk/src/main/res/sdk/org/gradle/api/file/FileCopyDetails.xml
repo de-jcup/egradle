@@ -179,5 +179,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the containing file tree. Never returns null. 
 </description>
     </property>
-    <documentation/>
 </type>

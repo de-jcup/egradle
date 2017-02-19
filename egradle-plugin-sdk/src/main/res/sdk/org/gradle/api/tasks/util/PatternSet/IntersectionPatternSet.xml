@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.util.PatternSet.IntersectionPatternSet" version="3.0" superType="org.gradle.api.tasks.util.PatternSet">
+<type language="gradle" name="org.gradle.api.tasks.util.PatternSet.IntersectionPatternSet" version="3.0" superType="org.gradle.api.tasks.util.PatternSet">
     <method name="addToAntBuilder" returnType="java.lang.Object">
         <parameter type="java.lang.Object" name="node"/>
         <parameter type="java.lang.String" name="childNodeName"/>
@@ -15,5 +15,4 @@
     <method name="isEmpty" returnType="boolean"/>
     <property name="asSpec" type="org.gradle.api.specs.Spec"/>
     <property name="empty" type="boolean"/>
-    <documentation/>
 </type>

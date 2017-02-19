@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.jvm.plugins.JUnitTestSuitePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.jvm.plugins.JUnitTestSuitePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="configureBinaryJUnitVersion" returnType="void">
         <parameter type="org.gradle.jvm.test.JUnitTestSuiteBinarySpec" name="testSuiteBinary"/>
     </method>
@@ -18,5 +18,4 @@
     <method name="validateJUnitVersion" returnType="void">
         <parameter type="org.gradle.jvm.test.JUnitTestSuiteSpec" name="jUnitTestSuiteSpec"/>
     </method>
-    <documentation/>
 </type>

@@ -13,18 +13,14 @@
  The &lt;a href='type://VisualStudioSolution'&gt;VisualStudioSolution&lt;/a&gt;s generated. 
 </description>
     </method>
-    <property name="projects" type="org.gradle.api.NamedDomainObjectSet">
+    <property name="projects" type="org.gradle.api.NamedDomainObjectSet" documented="true">
         <description> 
  The &lt;a href='type://VisualStudioProject'&gt;VisualStudioProject&lt;/a&gt;s generated. 
 </description>
     </property>
-    <property name="solutions" type="org.gradle.api.NamedDomainObjectSet">
+    <property name="solutions" type="org.gradle.api.NamedDomainObjectSet" documented="true">
         <description> 
  The &lt;a href='type://VisualStudioSolution'&gt;VisualStudioSolution&lt;/a&gt;s generated. 
 </description>
     </property>
-    <documentation>
-        <property name="projects"/>
-        <property name="solutions"/>
-    </documentation>
 </type>

@@ -20,7 +20,7 @@
  
  @see DomainObjectSet 
 </description>
-    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact" documented="true">
         <description> 
  Creates and adds a &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to the set. 
  
@@ -30,7 +30,7 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
-    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact" documented="true">
         <description> 
  Creates and adds a &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to the set, which is configured by the associated action. 
  
@@ -43,7 +43,4 @@
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
     <interface name="org.gradle.api.DomainObjectSet"/>
-    <documentation>
-        <method name="artifact"/>
-    </documentation>
 </type>

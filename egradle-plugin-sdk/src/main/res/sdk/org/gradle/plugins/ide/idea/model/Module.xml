@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.Module" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.Module" version="3.0">
     <description> 
  Represents the customizable elements of an iml (via XML hooks everything of the iml is customizable). 
 </description>
@@ -203,5 +203,4 @@
  Must not be null. 
 </description>
     </property>
-    <documentation/>
 </type>

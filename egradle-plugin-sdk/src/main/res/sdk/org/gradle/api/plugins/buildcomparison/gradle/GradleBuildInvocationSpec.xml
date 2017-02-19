@@ -81,14 +81,14 @@
 </description>
         <parameter type="java.lang.Iterable" name="tasks"/>
     </method>
-    <property name="arguments" type="java.util.List">
+    <property name="arguments" type="java.util.List" documented="true">
         <description> 
  The command line arguments (excluding tasks) to invoke the build with. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The command line arguments (excluding tasks) to invoke the build with. 
 </description>
     </property>
-    <property name="gradleVersion" type="java.lang.String">
+    <property name="gradleVersion" type="java.lang.String" documented="true">
         <description> 
  The Gradle version to run the build with. 
  
@@ -97,7 +97,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version to run the build with. Never null. 
 </description>
     </property>
-    <property name="projectDir" type="java.io.File">
+    <property name="projectDir" type="java.io.File" documented="true">
         <description> 
  The “root” directory of the build. 
  
@@ -106,7 +106,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The “root” project directory of the build. Never null. 
 </description>
     </property>
-    <property name="tasks" type="java.util.List">
+    <property name="tasks" type="java.util.List" documented="true">
         <description> 
  The tasks to execute. 
  
@@ -115,10 +115,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks to execute. 
 </description>
     </property>
-    <documentation>
-        <property name="projectDir"/>
-        <property name="gradleVersion"/>
-        <property name="tasks"/>
-        <property name="arguments"/>
-    </documentation>
 </type>

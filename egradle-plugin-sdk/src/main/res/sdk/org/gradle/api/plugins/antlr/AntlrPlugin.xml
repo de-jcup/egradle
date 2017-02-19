@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.antlr.AntlrPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.antlr.AntlrPlugin" version="3.0">
     <description> 
  A plugin for adding Antlr support to &lt;a href='type://JavaPlugin java projects'&gt;JavaPlugin java projects&lt;/a&gt;. 
 </description>
@@ -17,5 +17,4 @@
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

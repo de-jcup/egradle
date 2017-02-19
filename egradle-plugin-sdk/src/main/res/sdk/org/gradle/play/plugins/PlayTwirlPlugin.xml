@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayTwirlPlugin" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.play.plugins.PlayTwirlPlugin" version="3.0" superType="org.gradle.model.RuleSource">
     <description> 
  Plugin for compiling Twirl sources in a Play application. 
 </description>
@@ -28,5 +28,4 @@
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
-    <documentation/>
 </type>

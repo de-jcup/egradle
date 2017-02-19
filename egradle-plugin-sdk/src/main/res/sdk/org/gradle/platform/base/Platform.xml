@@ -20,5 +20,4 @@
 </description>
     </property>
     <property name="name" type="java.lang.String"/>
-    <documentation/>
 </type>

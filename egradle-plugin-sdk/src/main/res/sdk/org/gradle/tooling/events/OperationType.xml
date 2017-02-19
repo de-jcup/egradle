@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.tooling.events.OperationType" version="3.0">
+<type language="gradle" name="org.gradle.tooling.events.OperationType" version="3.0">
     <description> 
  Enumerates the different types of operations for which progress events can be received. 
  
  @see org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener, java.util.Set) 
 </description>
-    <documentation/>
 </type>

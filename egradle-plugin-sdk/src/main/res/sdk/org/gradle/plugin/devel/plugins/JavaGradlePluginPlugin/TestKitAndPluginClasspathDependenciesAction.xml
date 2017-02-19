@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin.TestKitAndPluginClasspathDependenciesAction" version="3.0">
+<type language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin.TestKitAndPluginClasspathDependenciesAction" version="3.0">
     <description> 
  An action that automatically declares the TestKit dependency for the test compile configuration and a dependency 
  on the plugin classpath manifest generation task for the test runtime configuration. 
@@ -8,5 +8,4 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <interface name="org.gradle.api.Action"/>
-    <documentation/>
 </type>

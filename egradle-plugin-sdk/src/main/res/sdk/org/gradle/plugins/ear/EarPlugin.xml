@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ear.EarPlugin" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ear.EarPlugin" version="3.0">
     <description> 
  &lt;p&gt; 
  A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; with tasks which assemble a web application into a EAR file. 
@@ -36,5 +36,4 @@
         <parameter type="org.gradle.plugins.ear.EarPluginConvention" name="earConvention"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

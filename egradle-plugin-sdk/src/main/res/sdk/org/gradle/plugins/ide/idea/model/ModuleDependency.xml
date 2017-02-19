@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.ModuleDependency" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.ModuleDependency" version="3.0">
     <description> 
  Represents an orderEntry of type module in the iml XML. 
 </description>
@@ -58,5 +58,4 @@
 </description>
     </property>
     <property name="scopeHash" type="int"/>
-    <documentation/>
 </type>

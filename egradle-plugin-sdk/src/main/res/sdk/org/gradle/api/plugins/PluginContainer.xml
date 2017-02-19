@@ -132,5 +132,4 @@
  @throws UnknownPluginException When there is no plugin with the given type. 
 </description>
     </property>
-    <documentation/>
 </type>

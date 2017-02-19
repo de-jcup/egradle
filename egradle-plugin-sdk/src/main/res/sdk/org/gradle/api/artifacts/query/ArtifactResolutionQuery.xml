@@ -20,27 +20,27 @@
  
  @since 2.0 
 </description>
-    <method name="execute" returnType="org.gradle.api.artifacts.result.ArtifactResolutionResult">
+    <method name="execute" returnType="org.gradle.api.artifacts.result.ArtifactResolutionResult" documented="true">
         <description> 
  Actually execute the query, returning a query result. 
  Note that &lt;a href='type://ArtifactResolutionQuery#withArtifacts(Class, Class[])'&gt;#withArtifacts(Class, Class[])&lt;/a&gt; must be called before executing the query. 
 </description>
     </method>
-    <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery">
+    <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
         <description> 
  Specifies the set of components to include in the result. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
 </description>
         <parameter type="java.lang.Iterable" name="componentIds"/>
     </method>
-    <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery">
+    <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
         <description> 
  Specifies the set of components to include in the result. 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
 </description>
         <parameter type="org.gradle.api.artifacts.component.ComponentIdentifier" name="componentIds"/>
     </method>
-    <method name="withArtifacts" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery">
+    <method name="withArtifacts" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
         <description> 
  Defines the type of component that is expected in the result, and the artifacts to retrieve for components of this type. 
  
@@ -52,9 +52,4 @@
         <parameter type="java.lang.Class" name="componentType"/>
         <parameter type="java.lang.Class" name="artifactTypes"/>
     </method>
-    <documentation>
-        <method name="forComponents"/>
-        <method name="withArtifacts"/>
-        <method name="execute"/>
-    </documentation>
 </type>

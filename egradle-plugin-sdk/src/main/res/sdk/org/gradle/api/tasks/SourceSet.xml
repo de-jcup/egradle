@@ -16,7 +16,7 @@
  } 
  &lt;/pre&gt; 
 </description>
-    <method name="compiledBy" returnType="org.gradle.api.tasks.SourceSet">
+    <method name="compiledBy" returnType="org.gradle.api.tasks.SourceSet" documented="true">
         <description> 
  Registers a set of tasks which are responsible for compiling this source set into the classes directory. The 
  paths are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
@@ -84,7 +84,7 @@
  @since 2.12 
 </description>
     </method>
-    <method name="getCompileTaskName" returnType="java.lang.String">
+    <method name="getCompileTaskName" returnType="java.lang.String" documented="true">
         <description> 
  Returns the name of a compile task for this source set. 
  
@@ -149,7 +149,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The runtime configuration name 
 </description>
     </method>
-    <method name="getTaskName" returnType="java.lang.String">
+    <method name="getTaskName" returnType="java.lang.String" documented="true">
         <description> 
  Returns the name of a task for this source set. 
  
@@ -160,7 +160,7 @@
         <parameter type="java.lang.String" name="verb"/>
         <parameter type="java.lang.String" name="target"/>
     </method>
-    <method name="java" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet">
+    <method name="java" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet" documented="true">
         <description> 
  Configures the Java source for this set. 
  
@@ -171,7 +171,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="resources" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet">
+    <method name="resources" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet" documented="true">
         <description> 
  Configures the non-Java resources for this set. 
  
@@ -198,7 +198,7 @@
 </description>
         <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
     </method>
-    <property name="allJava" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="allJava" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  All Java source files for this source set. This includes, for example, source which is directly compiled, and 
  source which is indirectly compiled through joint compilation. 
@@ -206,7 +206,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
 </description>
     </property>
-    <property name="allSource" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="allSource" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  All source files for this source set. 
  
@@ -220,7 +220,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
 </description>
     </property>
-    <property name="compileClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="compileClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath used to compile this source. 
  
@@ -271,21 +271,21 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
 </description>
     </property>
-    <property name="java" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="java" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  Returns the Java source which is to be compiled by the Java compiler into the class output directory. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
 </description>
     </property>
-    <property name="name" type="java.lang.String">
+    <property name="name" type="java.lang.String" documented="true">
         <description> 
  Returns the name of this source set. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never returns null. 
 </description>
     </property>
-    <property name="output" type="org.gradle.api.tasks.SourceSetOutput">
+    <property name="output" type="org.gradle.api.tasks.SourceSetOutput" documented="true">
         <description> 
  &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; is a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt; of all output directories (compiled classes, processed resources, etc.) 
   and it provides means to configure the default output dirs and register additional output dirs. See examples in &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
@@ -300,14 +300,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
 </description>
     </property>
-    <property name="resources" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="resources" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  Returns the non-Java resources which are to be copied into the resources output directory. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the resources. Never returns null. 
 </description>
     </property>
-    <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath used to execute this source. 
  
@@ -329,26 +329,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name, generally of the form ${verb}${name}${noun} 
 </description>
     </property>
-    <documentation>
-        <property name="allJava"/>
-        <property name="[java]"/>
-        <property name="allSource"/>
-        <property name="[java, resources]"/>
-        <property name="name"/>
-        <property name="output"/>
-        <property name="See "/>
-        <property name="compileClasspath"/>
-        <property name="project.configurations.compile (or project.configurations.testCompile for the test source set)."/>
-        <property name="java"/>
-        <property name="[${project.projectDir}/src/${sourceSet.name}/java]"/>
-        <property name="resources"/>
-        <property name="[${project.projectDir}/src/${sourceSet.name}/resources]"/>
-        <property name="runtimeClasspath"/>
-        <property name="sourceSet.output + project.configurations.runtime (or sourceSet.output + project.configurations.testRuntime for the test source set)."/>
-        <method name="resources"/>
-        <method name="java"/>
-        <method name="compiledBy"/>
-        <method name="getCompileTaskName"/>
-        <method name="getTaskName"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.GenerateIdeaWorkspace" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.idea.GenerateIdeaWorkspace" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
     <description> 
  Generates an IDEA workspace file *only* for root project. There's little you can configure about workspace generation at the moment. 
 </description>
@@ -15,15 +15,9 @@
     <method name="setWorkspace" returnType="void">
         <parameter type="org.gradle.plugins.ide.idea.model.IdeaWorkspace" name="workspace"/>
     </method>
-    <property name="workspace" type="org.gradle.plugins.ide.idea.model.IdeaWorkspace">
+    <property name="workspace" type="org.gradle.plugins.ide.idea.model.IdeaWorkspace" documented="true">
         <description> 
  The Idea workspace model containing the details required to generate the workspace file. 
 </description>
     </property>
-    <documentation>
-        <property name="workspace"/>
-        <property name="project.idea.workspace"/>
-        <property name="outputFile"/>
-        <property name="${project.projectDir}/${project.name}.iws"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.GradleBuild" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.GradleBuild" version="3.0">
     <description> 
  Executes a Gradle build. 
 </description>
@@ -65,7 +65,7 @@
 </description>
         <parameter type="java.util.Collection" name="tasks"/>
     </method>
-    <property name="buildFile" type="java.io.File">
+    <property name="buildFile" type="java.io.File" documented="true">
         <description> 
  Returns the build file that should be used for this build. Defaults to {@value 
  org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory. 
@@ -73,31 +73,25 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null. 
 </description>
     </property>
-    <property name="dir" type="java.io.File">
+    <property name="dir" type="java.io.File" documented="true">
         <description> 
  Returns the project directory for the build. Defaults to the project directory. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. Never returns null. 
 </description>
     </property>
-    <property name="startParameter" type="org.gradle.StartParameter">
+    <property name="startParameter" type="org.gradle.StartParameter" documented="true">
         <description> 
  Returns the full set of parameters that will be used to execute the build. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the parameters. Never returns null. 
 </description>
     </property>
-    <property name="tasks" type="java.util.List">
+    <property name="tasks" type="java.util.List" documented="true">
         <description> 
  Returns the tasks that should be executed for this build. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The sequence. May be empty. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="dir"/>
-        <property name="buildFile"/>
-        <property name="tasks"/>
-        <property name="startParameter"/>
-    </documentation>
 </type>

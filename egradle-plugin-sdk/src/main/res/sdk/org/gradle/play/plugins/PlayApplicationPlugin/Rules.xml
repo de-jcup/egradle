@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayApplicationPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.play.plugins.PlayApplicationPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="addRunSupportDependencies" returnType="void">
         <parameter type="org.gradle.play.plugins.PlayPluginConfigurations" name="configurations"/>
         <parameter type="org.gradle.play.platform.PlayPlatform" name="playPlatform"/>
@@ -121,5 +121,4 @@
         <parameter type="org.gradle.platform.base.internal.PlatformResolvers" name="platforms"/>
     </method>
     <property name="targetPlatform" type="org.gradle.platform.base.internal.PlatformRequirement"/>
-    <documentation/>
 </type>

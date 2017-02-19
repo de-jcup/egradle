@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.InstallExecutable" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.nativeplatform.tasks.InstallExecutable" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Installs an executable with it's dependent libraries so it can be easily executed. 
 </description>
@@ -44,7 +44,7 @@
     </method>
     <method name="installUnix" returnType="void"/>
     <method name="installWindows" returnType="void"/>
-    <method name="lib" returnType="void">
+    <method name="lib" returnType="void" documented="true">
         <description> 
  Adds a set of library files to be installed. The provided libs object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
@@ -65,19 +65,19 @@
     <method name="setToolChain" returnType="void">
         <parameter type="org.gradle.platform.base.ToolChain" name="toolChain"/>
     </method>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  The directory to install files into. 
 </description>
     </property>
-    <property name="executable" type="java.io.File">
+    <property name="executable" type="java.io.File" documented="true">
         <description> 
  The executable file to install. 
 </description>
     </property>
     <property name="fileOperations" type="org.gradle.api.internal.file.FileOperations"/>
     <property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
-    <property name="libs" type="org.gradle.api.file.FileCollection">
+    <property name="libs" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The library files that should be installed. 
 </description>
@@ -97,10 +97,4 @@
  The tool chain used for linking. 
 </description>
     </property>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="executable"/>
-        <property name="libs"/>
-        <method name="lib"/>
-    </documentation>
 </type>

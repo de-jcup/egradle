@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Copy" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
+<type language="gradle" name="org.gradle.api.tasks.Copy" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
     <description> 
  Copies files into a destination directory. This task can also rename and filter files as it copies. The task 
  implements &lt;a href='type://org.gradle.api.file.CopySpec CopySpec'&gt;org.gradle.api.file.CopySpec CopySpec&lt;/a&gt; for specifying what to copy. 
@@ -58,7 +58,7 @@
 </description>
         <parameter type="java.io.File" name="destinationDir"/>
     </method>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to copy files into. 
  
@@ -66,8 +66,4 @@
 </description>
     </property>
     <property name="rootSpec" type="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="null"/>
-    </documentation>
 </type>

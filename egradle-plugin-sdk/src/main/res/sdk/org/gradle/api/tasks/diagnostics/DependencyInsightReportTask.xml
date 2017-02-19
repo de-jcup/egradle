@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generates a report that attempts to answer questions like: 
  &lt;ul&gt; 
@@ -87,12 +87,12 @@
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
     </method>
-    <property name="configuration" type="org.gradle.api.artifacts.Configuration">
+    <property name="configuration" type="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  Configuration to look the dependency in 
 </description>
     </property>
-    <property name="dependencySpec" type="org.gradle.api.specs.Spec">
+    <property name="dependencySpec" type="org.gradle.api.specs.Spec" documented="true">
         <description> 
  Selects the dependency (or dependencies if multiple matches found) to show the report for. 
 </description>
@@ -100,10 +100,4 @@
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
     <property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
     <property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
-    <documentation>
-        <property name="configuration"/>
-        <property name="compile configuration"/>
-        <property name="dependencySpec"/>
-        <property name="-"/>
-    </documentation>
 </type>

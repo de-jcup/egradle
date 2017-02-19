@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.file.EmptyFileVisitor" version="3.0">
+<type language="gradle" name="org.gradle.api.file.EmptyFileVisitor" version="3.0">
     <description> 
  The EmptyFileVisitor can be extends by implementations that only require to implement one of the 2 visit methods 
  (dir or file). This is just to limit the amount of code clutter when not both visit methods need to be implemented. 
@@ -11,5 +11,4 @@
         <parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/>
     </method>
     <interface name="org.gradle.api.file.FileVisitor"/>
-    <documentation/>
 </type>

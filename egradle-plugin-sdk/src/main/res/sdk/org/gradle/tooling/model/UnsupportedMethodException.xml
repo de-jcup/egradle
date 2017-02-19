@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.tooling.model.UnsupportedMethodException" version="3.0">
+<type language="gradle" name="org.gradle.tooling.model.UnsupportedMethodException" version="3.0">
     <description> 
  Thrown when the tooling API client attempts to use a method that does not exist 
  in the version of Gradle that the tooling API is connected to. 
@@ -9,5 +9,4 @@
  
  @since 1.0-milestone-8 
 </description>
-    <documentation/>
 </type>

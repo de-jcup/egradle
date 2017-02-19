@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseWtp" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseWtp" version="3.0">
     <description> 
  Enables fine-tuning wtp/wst details of the Eclipse plugin 
  &lt;p&gt; 
@@ -21,7 +21,7 @@
  
  &lt;/pre&gt; 
 </description>
-    <method name="component" returnType="void" delegationTarget="EclipseWtpComponent">
+    <method name="component" returnType="void" delegationTarget="EclipseWtpComponent" documented="true">
         <description> 
  Configures wtp component. 
  &lt;p&gt; 
@@ -31,7 +31,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="action"/>
     </method>
-    <method name="facet" returnType="void" delegationTarget="EclipseWtpFacet">
+    <method name="facet" returnType="void" delegationTarget="EclipseWtpFacet" documented="true">
         <description> 
  Configures wtp facet. 
  &lt;p&gt; 
@@ -61,24 +61,18 @@
     <method name="setFacet" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet" name="facet"/>
     </method>
-    <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent">
+    <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" documented="true">
         <description> 
  Configures wtp component. 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; 
 </description>
     </property>
-    <property name="facet" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet">
+    <property name="facet" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpFacet" documented="true">
         <description> 
  Configures wtp facet. 
  &lt;p&gt; 
  For examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt; 
 </description>
     </property>
-    <documentation>
-        <property name="component"/>
-        <property name="facet"/>
-        <method name="component"/>
-        <method name="facet"/>
-    </documentation>
 </type>

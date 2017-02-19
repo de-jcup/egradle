@@ -10,5 +10,4 @@
         <parameter type="org.gradle.tooling.provider.model.ToolingModelBuilder" name="builder"/>
     </method>
     <property name="builder" type="org.gradle.tooling.provider.model.ToolingModelBuilder"/>
-    <documentation/>
 </type>

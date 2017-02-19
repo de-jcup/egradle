@@ -164,5 +164,4 @@
  @deprecated Use &lt;a href='type://TaskInputs#getSourceFiles()'&gt;TaskInputs#getSourceFiles()&lt;/a&gt; directly instead. 
 </description>
     </property>
-    <documentation/>
 </type>

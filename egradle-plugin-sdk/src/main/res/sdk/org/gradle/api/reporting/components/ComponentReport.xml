@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.reporting.components.ComponentReport" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.reporting.components.ComponentReport" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Displays some details about the software components produced by the project. 
 </description>
@@ -20,5 +20,4 @@
     <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
     <property name="modelRegistry" type="org.gradle.model.internal.registry.ModelRegistry"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <documentation/>
 </type>

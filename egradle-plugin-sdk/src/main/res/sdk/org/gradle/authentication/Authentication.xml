@@ -4,5 +4,4 @@
  Base interface for transport authentication schemes. 
 </description>
     <interface name="org.gradle.api.Named"/>
-    <documentation/>
 </type>

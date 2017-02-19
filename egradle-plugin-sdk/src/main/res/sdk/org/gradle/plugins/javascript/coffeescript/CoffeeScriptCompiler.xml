@@ -3,5 +3,4 @@
     <method name="compile" returnType="org.gradle.api.tasks.WorkResult">
         <parameter type="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileSpec" name="spec"/>
     </method>
-    <documentation/>
 </type>

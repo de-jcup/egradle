@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Publishes an IvyPublication to an IvyArtifactRepository. 
  
@@ -47,7 +47,7 @@
         <parameter type="org.gradle.api.publish.ivy.IvyPublication" name="publication"/>
     </method>
     <property name="ivyPublisher" type="org.gradle.api.publish.ivy.internal.publisher.IvyPublisher"/>
-    <property name="publication" type="org.gradle.api.publish.ivy.IvyPublication">
+    <property name="publication" type="org.gradle.api.publish.ivy.IvyPublication" documented="true">
         <description> 
  The publication to be published. 
  
@@ -55,15 +55,11 @@
 </description>
     </property>
     <property name="publicationInternal" type="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal"/>
-    <property name="repository" type="org.gradle.api.artifacts.repositories.IvyArtifactRepository">
+    <property name="repository" type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" documented="true">
         <description> 
  The repository to publish to. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to 
 </description>
     </property>
-    <documentation>
-        <property name="publication"/>
-        <property name="repository"/>
-    </documentation>
 </type>

@@ -18,7 +18,7 @@
 </description>
         <parameter type="java.lang.String" name="packaging"/>
     </method>
-    <method name="withXml" returnType="void" delegationTarget="Action">
+    <method name="withXml" returnType="void" delegationTarget="Action" documented="true">
         <description> 
  Allows configuration of the POM, after it has been generated according to the input data. 
  
@@ -47,13 +47,9 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <property name="packaging" type="java.lang.String">
+    <property name="packaging" type="java.lang.String" documented="true">
         <description> 
  Returns the packaging for this publication. 
 </description>
     </property>
-    <documentation>
-        <property name="packaging"/>
-        <method name="withXml"/>
-    </documentation>
 </type>

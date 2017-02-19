@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.reporting.model.ModelReport" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.reporting.model.ModelReport" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Displays some details about the configuration model of the project. 
  An instance of this type is used when you execute the &lt;a href='type://model'&gt;model&lt;/a&gt; task from the command-line. 
@@ -19,5 +19,4 @@
     <property name="modelRegistry" type="org.gradle.model.internal.registry.ModelRegistry"/>
     <property name="showHidden" type="boolean"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <documentation/>
 </type>

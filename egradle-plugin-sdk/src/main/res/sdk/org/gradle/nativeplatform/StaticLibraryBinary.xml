@@ -9,12 +9,9 @@
 </description>
     </method>
     <interface name="org.gradle.nativeplatform.NativeLibraryBinary"/>
-    <property name="staticLibraryFile" type="java.io.File">
+    <property name="staticLibraryFile" type="java.io.File" documented="true">
         <description> 
  The static library file. 
 </description>
     </property>
-    <documentation>
-        <property name="staticLibraryFile"/>
-    </documentation>
 </type>

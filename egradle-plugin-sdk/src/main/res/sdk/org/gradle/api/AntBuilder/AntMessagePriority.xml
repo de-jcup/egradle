@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.AntBuilder.AntMessagePriority" version="3.0">
+<type language="gradle" name="org.gradle.api.AntBuilder.AntMessagePriority" version="3.0">
     <description> 
  Represents the normal Ant message priorities. 
 </description>
@@ -9,5 +9,4 @@
 </description>
         <parameter type="int" name="messagePriority"/>
     </method>
-    <documentation/>
 </type>

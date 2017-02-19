@@ -13,5 +13,4 @@
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
-    <documentation/>
 </type>

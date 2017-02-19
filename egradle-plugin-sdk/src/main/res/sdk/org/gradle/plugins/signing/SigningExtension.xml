@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.SigningExtension" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.SigningExtension" version="3.0">
     <description> 
  The global signing configuration for a project. 
 </description>
@@ -116,7 +116,7 @@
     <method name="setSignatureTypes" returnType="void">
         <parameter type="org.gradle.plugins.signing.type.SignatureTypeProvider" name="signatureTypes"/>
     </method>
-    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SignOperation">
+    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SignOperation" documented="true">
         <description> 
  Creates a new &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt; using the given closure to configure it before executing it. 
  
@@ -130,7 +130,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension">
+    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension" documented="true">
         <description> 
  Digitally signs the files, generating signature files alongside them. 
  
@@ -143,7 +143,7 @@
 </description>
         <parameter type="java.io.File" name="files"/>
     </method>
-    <method name="sign" returnType="java.util.List" delegationTarget="org.gradle.api.tasks.bundling.AbstractArchiveTask">
+    <method name="sign" returnType="java.util.List" delegationTarget="org.gradle.api.tasks.bundling.AbstractArchiveTask" documented="true">
         <description> 
  Creates signing tasks that depend on and sign the "archive" produced by the given tasks. 
  
@@ -155,7 +155,7 @@
 </description>
         <parameter type="org.gradle.api.Task" name="tasks"/>
     </method>
-    <method name="sign" returnType="java.util.List">
+    <method name="sign" returnType="java.util.List" documented="true">
         <description> 
  Creates signing tasks that sign &lt;a href='type://Configuration#getAllArtifacts() all of the artifacts'&gt;Configuration#getAllArtifacts() all of the artifacts&lt;/a&gt; of the given configurations. 
  
@@ -168,7 +168,7 @@
 </description>
         <parameter type="org.gradle.api.artifacts.Configuration" name="configurations"/>
     </method>
-    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension">
+    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension" documented="true">
         <description> 
  Digitally signs the publish artifacts, generating signature files alongside them. 
  
@@ -181,7 +181,7 @@
 </description>
         <parameter type="org.gradle.api.artifacts.PublishArtifact" name="publishArtifacts"/>
     </method>
-    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension">
+    <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SigningExtension" documented="true">
         <description> 
  Digitally signs the files, generating signature files alongside them. 
  
@@ -196,7 +196,7 @@
         <parameter type="java.lang.String" name="classifier"/>
         <parameter type="java.io.File" name="files"/>
     </method>
-    <method name="signPom" returnType="org.gradle.plugins.signing.Signature" delegationTarget="SignOperation">
+    <method name="signPom" returnType="org.gradle.plugins.signing.Signature" delegationTarget="SignOperation" documented="true">
         <description> 
  Signs the POM artifact for the given Maven deployment. 
  
@@ -210,7 +210,7 @@
 </description>
         <parameter type="org.gradle.api.artifacts.maven.MavenDeployment" name="mavenDeployment"/>
     </method>
-    <method name="signPom" returnType="org.gradle.plugins.signing.Signature" delegationTarget="SignOperation">
+    <method name="signPom" returnType="org.gradle.plugins.signing.Signature" delegationTarget="SignOperation" documented="true">
         <description> 
  Signs the POM artifact for the given Maven deployment. 
  
@@ -246,7 +246,7 @@
 </description>
     </property>
     <property name="project" type="org.gradle.api.Project"/>
-    <property name="required" type="boolean">
+    <property name="required" type="boolean" documented="true">
         <description> 
  Whether or not this task should fail if no signatory or signature type are configured at generation time. 
  
@@ -256,14 +256,14 @@
 </description>
     </property>
     <property name="signatories" type="org.gradle.plugins.signing.signatory.SignatoryProvider"/>
-    <property name="signatory" type="org.gradle.plugins.signing.signatory.Signatory">
+    <property name="signatory" type="org.gradle.plugins.signing.signatory.Signatory" documented="true">
         <description> 
  The signatory that will be used for signing when an explicit signatory has not been specified. 
  
  &lt;p&gt;Delegates to the signatory provider's default signatory.&lt;/p&gt; 
 </description>
     </property>
-    <property name="signatureType" type="org.gradle.plugins.signing.type.SignatureType">
+    <property name="signatureType" type="org.gradle.plugins.signing.type.SignatureType" documented="true">
         <description> 
  The signature type that will be used for signing files when an explicit signature type has not been specified. 
  
@@ -271,11 +271,4 @@
 </description>
     </property>
     <property name="signatureTypes" type="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
-    <documentation>
-        <property name="signatory"/>
-        <property name="signatureType"/>
-        <property name="required"/>
-        <method name="sign"/>
-        <method name="signPom"/>
-    </documentation>
 </type>

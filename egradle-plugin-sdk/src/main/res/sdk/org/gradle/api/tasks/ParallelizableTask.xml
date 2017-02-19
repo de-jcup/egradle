@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.ParallelizableTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.ParallelizableTask" version="3.0">
     <description> 
  Declares that the associated task can be safely executed in parallel with other tasks. 
  
@@ -43,5 +43,4 @@
  &lt;p&gt; 
  In order to prevent two tasks from executing in parallel, a &lt;a href='type://org.gradle.api.Task#mustRunAfter(Object...)'&gt;org.gradle.api.Task#mustRunAfter(Object...)&lt;/a&gt; relationship can be set up between the tasks. 
 </description>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="configureCUnitTestSuiteSources" returnType="void">
         <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="suite"/>
         <parameter type="java.io.File" name="buildDir"/>
@@ -27,5 +27,4 @@
     <method name="registerCUnitTestSuiteSpecType" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
-    <documentation/>
 </type>

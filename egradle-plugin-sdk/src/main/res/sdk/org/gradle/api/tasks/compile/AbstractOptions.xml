@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.AbstractOptions" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.compile.AbstractOptions" version="3.0">
     <description> 
  Base class for compilation-related options. 
 </description>
@@ -29,5 +29,4 @@
     <property name="antPropertyName" type="java.lang.String"/>
     <property name="antPropertyValue" type="java.lang.Object"/>
     <property name="optionField" type="boolean"/>
-    <documentation/>
 </type>

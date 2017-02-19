@@ -18,5 +18,4 @@
         <parameter type="org.gradle.jvm.application.scripts.JavaAppStartScriptGenerationDetails" name="details"/>
         <parameter type="java.io.Writer" name="destination"/>
     </method>
-    <documentation/>
 </type>

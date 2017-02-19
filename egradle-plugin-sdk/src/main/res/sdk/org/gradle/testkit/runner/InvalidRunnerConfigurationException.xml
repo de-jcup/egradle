@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testkit.runner.InvalidRunnerConfigurationException" version="3.0">
+<type language="gradle" name="org.gradle.testkit.runner.InvalidRunnerConfigurationException" version="3.0">
     <description> 
  Thrown when a build cannot be executed due to the runner being in an invalid state. 
  
@@ -7,5 +7,4 @@
  @see GradleRunner#build() 
  @see GradleRunner#buildAndFail() 
 </description>
-    <documentation/>
 </type>

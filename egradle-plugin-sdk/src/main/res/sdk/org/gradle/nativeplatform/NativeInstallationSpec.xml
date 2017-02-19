@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.NativeInstallationSpec" version="3.0">
+<type language="gradle" name="org.gradle.nativeplatform.NativeInstallationSpec" version="3.0">
     <description> 
  Specifies the installation location for a native executable. 
 </description>
@@ -8,5 +8,4 @@
         <parameter type="java.io.File" name="directory"/>
     </method>
     <property name="directory" type="java.io.File"/>
-    <documentation/>
 </type>

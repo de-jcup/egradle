@@ -12,5 +12,4 @@
 </description>
         <parameter type="java.lang.CharSequence" name="output"/>
     </method>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.plugins.ComponentBasePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.platform.base.plugins.ComponentBasePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="componentSpecFactory" returnType="org.gradle.platform.base.component.internal.ComponentSpecFactory">
         <parameter type="org.gradle.api.internal.project.ProjectIdentifier" name="projectIdentifier"/>
         <parameter type="org.gradle.internal.reflect.Instantiator" name="instantiator"/>
@@ -20,5 +20,4 @@
     <method name="validateComponentSpecRegistrations" returnType="void">
         <parameter type="org.gradle.platform.base.component.internal.ComponentSpecFactory" name="instanceFactory"/>
     </method>
-    <documentation/>
 </type>

@@ -4,5 +4,4 @@
         <parameter type="java.lang.String" name="url"/>
         <parameter type="java.io.Writer" name="writer"/>
     </method>
-    <documentation/>
 </type>

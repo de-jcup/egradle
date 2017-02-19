@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.AbstractCopyTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.AbstractCopyTask" version="3.0">
     <description> 
  &lt;a href='type://AbstractCopyTask'&gt;AbstractCopyTask&lt;/a&gt; is the base class for all copy tasks. 
 </description>
     <method name="copy" returnType="void"/>
     <method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/>
     <method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/>
-    <method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="excludeSpec"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="excludes"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/>
     </method>
-    <method name="expand" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="expand" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.util.Map" name="properties"/>
     </method>
-    <method name="filesMatching" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filesMatching" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="pattern"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="filesNotMatching" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filesNotMatching" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="pattern"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Class" name="filterType"/>
     </method>
-    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;transformer 
 </description>
         <parameter type="org.gradle.api.Transformer" name="transformer"/>
     </method>
-    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="filter" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.util.Map" name="properties"/>
         <parameter type="java.lang.Class" name="filterType"/>
     </method>
-    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="sourcePaths"/>
     </method>
-    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="sourcePath"/>
         <parameter type="groovy.lang.Closure" name="c"/>
     </method>
-    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="from" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -155,44 +155,44 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source files. Never returns null. 
 </description>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="includeSpec"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="includes"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="includeSpec"/>
     </method>
-    <method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="destDir"/>
     </method>
-    <method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="into" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="destPath"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="into" returnType="org.gradle.api.file.CopySpec">
+    <method name="into" returnType="org.gradle.api.file.CopySpec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -204,27 +204,27 @@
  {@inheritDoc} 
 </description>
     </method>
-    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;renamer 
 </description>
         <parameter type="org.gradle.api.Transformer" name="renamer"/>
     </method>
-    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="sourceRegEx"/>
         <parameter type="java.lang.String" name="replaceWith"/>
     </method>
-    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask">
+    <method name="rename" returnType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -279,7 +279,7 @@
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
-    <method name="with" returnType="org.gradle.api.file.CopySpec">
+    <method name="with" returnType="org.gradle.api.file.CopySpec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -287,28 +287,28 @@
     </method>
     <interface name="org.gradle.api.file.CopySpec"/>
     <interface name="org.gradle.api.internal.file.copy.CopySpecSource"/>
-    <property name="caseSensitive" type="boolean">
+    <property name="caseSensitive" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="dirMode" type="java.lang.Integer">
+    <property name="dirMode" type="java.lang.Integer" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="duplicatesStrategy" type="org.gradle.api.file.DuplicatesStrategy">
+    <property name="duplicatesStrategy" type="org.gradle.api.file.DuplicatesStrategy" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="excludes" type="java.util.Set">
+    <property name="excludes" type="java.util.Set" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
     <property name="fileLookup" type="org.gradle.api.internal.file.FileLookup"/>
-    <property name="fileMode" type="java.lang.Integer">
+    <property name="fileMode" type="java.lang.Integer" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -320,12 +320,12 @@
  {@inheritDoc} 
 </description>
     </property>
-    <property name="includeEmptyDirs" type="boolean">
+    <property name="includeEmptyDirs" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="includes" type="java.util.Set">
+    <property name="includes" type="java.util.Set" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -333,39 +333,10 @@
     <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="mainSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <property name="rootSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/>
-    <property name="source" type="org.gradle.api.file.FileCollection">
+    <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the source files for this task. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source files. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="includes"/>
-        <property name="[]"/>
-        <property name="excludes"/>
-        <property name="[]"/>
-        <property name="source"/>
-        <property name="[]"/>
-        <property name="caseSensitive"/>
-        <property name="true"/>
-        <property name="dirMode"/>
-        <property name="null"/>
-        <property name="fileMode"/>
-        <property name="null"/>
-        <property name="includeEmptyDirs"/>
-        <property name="true"/>
-        <property name="duplicatesStrategy"/>
-        <property name="null"/>
-        <method name="from"/>
-        <method name="into"/>
-        <method name="with"/>
-        <method name="include"/>
-        <method name="exclude"/>
-        <method name="rename"/>
-        <method name="filter"/>
-        <method name="expand"/>
-        <method name="eachFile"/>
-        <method name="filesMatching"/>
-        <method name="filesNotMatching"/>
-    </documentation>
 </type>

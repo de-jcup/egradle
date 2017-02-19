@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin" version="3.0" superType="org.gradle.model.RuleSource">
     <description> 
  A plugin that adds a distribution zip to a Play application build. 
 </description>
@@ -44,5 +44,4 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.jvm.tasks.Jar" name="jar"/>
     </method>
-    <documentation/>
 </type>

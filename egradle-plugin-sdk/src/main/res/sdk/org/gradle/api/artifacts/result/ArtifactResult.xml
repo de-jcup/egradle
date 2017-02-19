@@ -7,5 +7,4 @@
 </description>
     <method name="getType" returnType="java.lang.Class"/>
     <property name="type" type="java.lang.Class"/>
-    <documentation/>
 </type>

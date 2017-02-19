@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.test.tasks.RunTestExecutable" version="3.0" superType="org.gradle.api.tasks.AbstractExecTask">
+<type language="gradle" name="org.gradle.nativeplatform.test.tasks.RunTestExecutable" version="3.0" superType="org.gradle.api.tasks.AbstractExecTask">
     <description> 
  Runs a compiled and installed test executable. 
 </description>
@@ -18,5 +18,4 @@
     </method>
     <property name="ignoreFailures" type="boolean"/>
     <property name="outputDir" type="java.io.File"/>
-    <documentation/>
 </type>

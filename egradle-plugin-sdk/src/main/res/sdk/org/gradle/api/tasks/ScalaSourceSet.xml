@@ -18,7 +18,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Scala source. Never returns null. 
 </description>
     </method>
-    <method name="scala" returnType="org.gradle.api.tasks.ScalaSourceSet" delegationTarget="SourceDirectorySet">
+    <method name="scala" returnType="org.gradle.api.tasks.ScalaSourceSet" delegationTarget="SourceDirectorySet" documented="true">
         <description> 
  Configures the Scala source for this set. 
  
@@ -29,14 +29,14 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <property name="allScala" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="allScala" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  All Scala source for this source set. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Scala source. Never returns null. 
 </description>
     </property>
-    <property name="scala" type="org.gradle.api.file.SourceDirectorySet">
+    <property name="scala" type="org.gradle.api.file.SourceDirectorySet" documented="true">
         <description> 
  Returns the source to be compiled by the Scala compiler for this source set. This may contain both Java and Scala 
  source files. 
@@ -44,11 +44,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Scala source. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="scala"/>
-        <property name="[${project.projectDir}/src/${sourceSet.name}/scala]"/>
-        <property name="allScala"/>
-        <property name="[scala]"/>
-        <method name="scala"/>
-    </documentation>
 </type>

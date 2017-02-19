@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.specs.AndSpec" version="3.0" superType="org.gradle.api.specs.CompositeSpec">
+<type language="gradle" name="org.gradle.api.specs.AndSpec" version="3.0" superType="org.gradle.api.specs.CompositeSpec">
     <description> 
  A &lt;a href='type://org.gradle.api.specs.CompositeSpec'&gt;org.gradle.api.specs.CompositeSpec&lt;/a&gt; which requires all its specs to be true in order to evaluate to true. 
  Uses lazy evaluation. 
@@ -17,5 +17,4 @@
         <parameter type="T" name="object"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
-    <documentation/>
 </type>

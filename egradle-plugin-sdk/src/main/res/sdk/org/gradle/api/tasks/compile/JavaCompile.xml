@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.JavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile">
+<type language="gradle" name="org.gradle.api.tasks.compile.JavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile">
     <description> 
  Compiles Java source files. 
  
@@ -70,7 +70,7 @@
     <property name="jarSnapshotCache" type="org.gradle.api.internal.tasks.compile.incremental.jar.JarSnapshotCache"/>
     <property name="localClassSetAnalysisStore" type="org.gradle.api.internal.tasks.compile.incremental.deps.LocalClassSetAnalysisStore"/>
     <property name="localJarClasspathSnapshotStore" type="org.gradle.api.internal.tasks.compile.incremental.jar.LocalJarClasspathSnapshotStore"/>
-    <property name="options" type="org.gradle.api.tasks.compile.CompileOptions">
+    <property name="options" type="org.gradle.api.tasks.compile.CompileOptions" documented="true">
         <description> 
  Returns the compilation options. 
  
@@ -78,17 +78,11 @@
 </description>
     </property>
     <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
-    <property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain">
+    <property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain" documented="true">
         <description> 
  Returns the tool chain that will be used to compile the Java source. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
 </description>
     </property>
-    <documentation>
-        <property name="options"/>
-        <property name="toolChain"/>
-        <property name="source"/>
-        <property name="sourceSet.java"/>
-    </documentation>
 </type>

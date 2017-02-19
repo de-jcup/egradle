@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseJdt" version="3.0" superType="org.gradle.plugins.ide.api.PropertiesGeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseJdt" version="3.0" superType="org.gradle.plugins.ide.api.PropertiesGeneratorTask">
     <description> 
  Generates the Eclipse JDT configuration file. If you want to fine tune the eclipse configuration 
  &lt;p&gt; 
@@ -17,15 +17,9 @@
     <method name="setJdt" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" name="jdt"/>
     </method>
-    <property name="jdt" type="org.gradle.plugins.ide.eclipse.model.EclipseJdt">
+    <property name="jdt" type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" documented="true">
         <description> 
  Eclipse JDT model that contains information needed to generate the JDT file. 
 </description>
     </property>
-    <documentation>
-        <property name="jdt"/>
-        <property name="project.eclipse.jdt"/>
-        <property name="outputFile"/>
-        <property name="${project.projectDir}/.settings/org.eclipse.jdt.core.prefs"/>
-    </documentation>
 </type>

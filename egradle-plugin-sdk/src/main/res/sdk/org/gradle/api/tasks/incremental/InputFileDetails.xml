@@ -51,5 +51,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if the file was removed since the last execution 
 </description>
     </property>
-    <documentation/>
 </type>

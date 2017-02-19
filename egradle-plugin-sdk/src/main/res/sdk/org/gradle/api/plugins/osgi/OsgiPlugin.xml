@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.osgi.OsgiPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.osgi.OsgiPlugin" version="3.0">
     <description> 
  A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which extends the &lt;a href='type://JavaPlugin'&gt;JavaPlugin&lt;/a&gt; to add OSGi meta-information to the project Jars. 
 </description>
@@ -10,5 +10,4 @@
         <parameter type="org.gradle.api.plugins.JavaPlugin" name="javaPlugin"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

@@ -10,5 +10,4 @@
     <property name="headerDirs" type="org.gradle.api.file.FileCollection"/>
     <property name="linkFiles" type="org.gradle.api.file.FileCollection"/>
     <property name="runtimeFiles" type="org.gradle.api.file.FileCollection"/>
-    <documentation/>
 </type>

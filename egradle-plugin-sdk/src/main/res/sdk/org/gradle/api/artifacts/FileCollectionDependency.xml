@@ -8,5 +8,4 @@
         <parameter type="FileSystemSubset.Builder" name="builder"/>
     </method>
     <interface name="org.gradle.api.artifacts.SelfResolvingDependency"/>
-    <documentation/>
 </type>

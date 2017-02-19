@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseWtpComponent" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseWtpComponent" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
     <description> 
  Generates the org.eclipse.wst.common.component settings file for Eclipse WTP. 
  If you want to fine tune the eclipse configuration 
@@ -18,15 +18,9 @@
     <method name="setComponent" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" name="component"/>
     </method>
-    <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent">
+    <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" documented="true">
         <description> 
  The Eclipse WTP component model that contains details required to generate the settings file. 
 </description>
     </property>
-    <documentation>
-        <property name="component"/>
-        <property name="project.eclipse.wtp.component"/>
-        <property name="outputFile"/>
-        <property name="${project.projectDir}/.settings/org.eclipse.wst.common.component"/>
-    </documentation>
 </type>

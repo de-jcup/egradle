@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.UnknownDomainObjectException" version="3.0" superType="org.gradle.api.GradleException">
+<type language="gradle" name="org.gradle.api.UnknownDomainObjectException" version="3.0" superType="org.gradle.api.GradleException">
     <description> 
  &lt;p&gt;A &lt;a href='type://UnknownDomainObjectException'&gt;UnknownDomainObjectException&lt;/a&gt; is the super class of all exceptions thrown when a given domain object 
  cannot be located.&lt;/p&gt; 
 </description>
-    <documentation/>
 </type>

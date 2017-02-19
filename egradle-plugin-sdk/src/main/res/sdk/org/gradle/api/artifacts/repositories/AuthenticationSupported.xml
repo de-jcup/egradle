@@ -3,7 +3,7 @@
     <description> 
  An artifact repository which supports username/password authentication. 
 </description>
-    <method name="authentication" returnType="void" delegationTarget="AuthenticationContainer">
+    <method name="authentication" returnType="void" delegationTarget="AuthenticationContainer" documented="true">
         <description> 
  &lt;p&gt;Configures the authentication schemes for this repository. 
  
@@ -26,7 +26,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="credentials" returnType="void" delegationTarget="PasswordCredentials">
+    <method name="credentials" returnType="void" delegationTarget="PasswordCredentials" documented="true">
         <description> 
  Configures the username and password credentials for this repository using the supplied action. 
  &lt;p&gt; 
@@ -45,7 +45,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="credentials" returnType="void" delegationTarget="credentialsType">
+    <method name="credentials" returnType="void" delegationTarget="credentialsType" documented="true">
         <description> 
  Configures the credentials for this repository using the supplied action. 
  &lt;p&gt; 
@@ -104,14 +104,14 @@
 </description>
         <parameter type="java.lang.Class" name="credentialsType"/>
     </method>
-    <property name="authentication" type="org.gradle.api.artifacts.repositories.AuthenticationContainer">
+    <property name="authentication" type="org.gradle.api.artifacts.repositories.AuthenticationContainer" documented="true">
         <description> 
  Returns the authentication schemes for this repository. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the authentication schemes for this repository 
 </description>
     </property>
-    <property name="credentials" type="T">
+    <property name="credentials" type="T" documented="true">
         <description> 
  Returns the credentials of the specified type used to authenticate with this repository. 
  &lt;p&gt; 
@@ -122,10 +122,4 @@
  @throws IllegalArgumentException when the credentials assigned to this repository are not assignable to the specified type 
 </description>
     </property>
-    <documentation>
-        <property name="credentials"/>
-        <property name="authentication"/>
-        <method name="credentials"/>
-        <method name="authentication"/>
-    </documentation>
 </type>

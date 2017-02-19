@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.AbstractJettyRunTask" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.jetty.AbstractJettyRunTask" version="3.0">
     <description> 
  Base class for all tasks which deploy a web application to an embedded Jetty web container. 
  
@@ -177,35 +177,35 @@
 </description>
     </method>
     <method name="validateConfiguration" returnType="void"/>
-    <property name="additionalRuntimeJars" type="java.lang.Iterable">
+    <property name="additionalRuntimeJars" type="java.lang.Iterable" documented="true">
         <description> 
  Returns the classpath to make available to the web application. 
 </description>
     </property>
     <property name="connectors" type="org.mortbay.jetty.Connector"/>
-    <property name="contextPath" type="java.lang.String">
+    <property name="contextPath" type="java.lang.String" documented="true">
         <description> 
  Returns the context path to use to deploy the web application. 
 </description>
     </property>
-    <property name="daemon" type="boolean">
+    <property name="daemon" type="boolean" documented="true">
         <description> 
  Specifies whether the Jetty server should run in the background. When &lt;a href='type://true'&gt;true&lt;/a&gt;, this task completes as soon as the server has started. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task blocks until the Jetty 
  server is stopped. 
 </description>
     </property>
-    <property name="httpPort" type="java.lang.Integer">
+    <property name="httpPort" type="java.lang.Integer" documented="true">
         <description> 
  Returns the TCP port for Jetty to listen on for incoming HTTP requests. 
 </description>
     </property>
-    <property name="jettyConfig" type="java.io.File">
+    <property name="jettyConfig" type="java.io.File" documented="true">
         <description> 
  Returns the jetty configuration file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no configuration file is used. 
 </description>
     </property>
     <property name="overrideWebXml" type="java.io.File"/>
-    <property name="reload" type="java.lang.String">
+    <property name="reload" type="java.lang.String" documented="true">
         <description> 
  Returns the reload mode, which is either &lt;a href='type://"automatic"'&gt;"automatic"&lt;/a&gt; or &lt;a href='type://"manual"'&gt;"manual"&lt;/a&gt;. 
  
@@ -218,7 +218,7 @@
 </description>
     </property>
     <property name="requestLog" type="org.mortbay.jetty.RequestLog"/>
-    <property name="scanIntervalSeconds" type="int">
+    <property name="scanIntervalSeconds" type="int" documented="true">
         <description> 
  Returns the interval in seconds between scanning the web app for file changes. 
  If file changes are detected, the web app is reloaded. Only relevant 
@@ -229,12 +229,12 @@
     <property name="scanner" type="org.mortbay.util.Scanner"/>
     <property name="scannerListeners" type="java.util.List"/>
     <property name="server" type="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/>
-    <property name="stopKey" type="java.lang.String">
+    <property name="stopKey" type="java.lang.String" documented="true">
         <description> 
  Returns the key to use to stop Jetty. 
 </description>
     </property>
-    <property name="stopPort" type="java.lang.Integer">
+    <property name="stopPort" type="java.lang.Integer" documented="true">
         <description> 
  Returns the TCP port for Jetty to listen on for stop requests. 
 </description>
@@ -242,24 +242,4 @@
     <property name="userRealms" type="org.mortbay.jetty.security.UserRealm"/>
     <property name="webAppConfig" type="org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext"/>
     <property name="webDefaultXml" type="java.io.File"/>
-    <documentation>
-        <property name="contextPath"/>
-        <property name="project.war.baseName"/>
-        <property name="jettyConfig"/>
-        <property name="null"/>
-        <property name="stopPort"/>
-        <property name="project.stopPort"/>
-        <property name="stopKey"/>
-        <property name="project.stopKey"/>
-        <property name="daemon"/>
-        <property name="false"/>
-        <property name="httpPort"/>
-        <property name="project.httpPort"/>
-        <property name="reload"/>
-        <property name="&quot;automatic&quot;"/>
-        <property name="scanIntervalSeconds"/>
-        <property name="0"/>
-        <property name="additionalRuntimeJars"/>
-        <property name="[]"/>
-    </documentation>
 </type>

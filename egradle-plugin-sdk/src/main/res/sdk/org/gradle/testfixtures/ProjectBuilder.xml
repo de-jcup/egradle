@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testfixtures.ProjectBuilder" version="3.0">
+<type language="gradle" name="org.gradle.testfixtures.ProjectBuilder" version="3.0">
     <description> 
  &lt;p&gt;Creates dummy instances of &lt;a href='type://org.gradle.api.Project'&gt;org.gradle.api.Project&lt;/a&gt; which you can use in testing custom task and plugin 
  implementations.&lt;/p&gt; 
@@ -67,5 +67,4 @@
 </description>
         <parameter type="java.io.File" name="dir"/>
     </method>
-    <documentation/>
 </type>

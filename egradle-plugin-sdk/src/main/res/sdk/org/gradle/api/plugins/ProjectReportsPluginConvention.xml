@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.ProjectReportsPluginConvention" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.ProjectReportsPluginConvention" version="3.0">
     <description> 
  The conventional configuration for the `ProjectReportsPlugin`. 
 </description>
@@ -17,21 +17,15 @@
     <method name="setProjectReportDirName" returnType="void">
         <parameter type="java.lang.String" name="projectReportDirName"/>
     </method>
-    <property name="projectReportDir" type="java.io.File">
+    <property name="projectReportDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to generate the project reports into. 
 </description>
     </property>
-    <property name="projectReportDirName" type="java.lang.String">
+    <property name="projectReportDirName" type="java.lang.String" documented="true">
         <description> 
  The name of the directory to generate the project reports into, relative to the project's reports dir. 
 </description>
     </property>
     <property name="projects" type="java.util.Set"/>
-    <documentation>
-        <property name="projectReportDirName"/>
-        <property name="'project'"/>
-        <property name="projectReportDir"/>
-        <property name="${project.reporting.baseDir}/${project.projectReportDirName}"/>
-    </documentation>
 </type>

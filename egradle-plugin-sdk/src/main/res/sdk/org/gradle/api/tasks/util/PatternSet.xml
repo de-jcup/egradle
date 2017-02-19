@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.util.PatternSet" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.util.PatternSet" version="3.0">
     <description> 
  Standalone implementation of &lt;a href='type://PatternFilterable'&gt;PatternFilterable&lt;/a&gt;. 
 </description>
@@ -95,5 +95,4 @@
     <property name="excludes" type="java.util.Set"/>
     <property name="includeSpecs" type="java.util.Set"/>
     <property name="includes" type="java.util.Set"/>
-    <documentation/>
 </type>

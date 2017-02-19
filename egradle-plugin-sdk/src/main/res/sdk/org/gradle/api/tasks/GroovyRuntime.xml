@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.GroovyRuntime" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.GroovyRuntime" version="3.0">
     <description> 
  Provides information related to the Groovy runtime(s) used in a project. Added by the 
  &lt;a href='type://org.gradle.api.plugins.GroovyBasePlugin'&gt;org.gradle.api.plugins.GroovyBasePlugin&lt;/a&gt; as a project extension named &lt;a href='type://groovyRuntime'&gt;groovyRuntime&lt;/a&gt;. 
@@ -27,7 +27,7 @@
         <parameter type="java.lang.Iterable" name="classpath"/>
     </method>
     <method name="getDisplayName" returnType="java.lang.String"/>
-    <method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="groovy">
+    <method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="groovy" documented="true">
         <description> 
  Searches the specified class path for Groovy Jars (&lt;a href='type://groovy(-indy)'&gt;groovy(-indy)&lt;/a&gt;, &lt;a href='type://groovy-all(-indy)'&gt;groovy-all(-indy)&lt;/a&gt;) and returns a corresponding class path for executing Groovy tools such as the Groovy 
  compiler and Groovydoc tool. The tool versions will match those of the Groovy Jars found. If no Groovy Jars are found on the specified class path, a class path with the contents of the &lt;a href='type://groovy'&gt;groovy&lt;/a&gt; configuration will be returned. 
@@ -43,7 +43,4 @@
         <parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/>
     </method>
     <property name="displayName" type="java.lang.String"/>
-    <documentation>
-        <method name="inferGroovyClasspath"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin" version="3.0">
+<type language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin" version="3.0">
     <description> 
  A plugin for building java gradle plugins. Automatically generates plugin descriptors. Emits warnings for common error conditions. &lt;p&gt; Provides a direct integration with TestKit by declaring the 
  &lt;a href='type://gradleTestKit()'&gt;gradleTestKit()&lt;/a&gt; dependency for the test compile configuration and a dependency on the plugin classpath manifest generation task for the test runtime configuration. Default conventions can 
@@ -55,5 +55,4 @@
         <parameter type="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" name="extension"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

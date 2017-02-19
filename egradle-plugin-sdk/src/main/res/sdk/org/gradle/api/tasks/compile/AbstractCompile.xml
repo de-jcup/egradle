@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.AbstractCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+<type language="gradle" name="org.gradle.api.tasks.compile.AbstractCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask">
     <description> 
  The base class for all JVM-based language compilation tasks. 
 </description>
@@ -64,46 +64,32 @@
 </description>
         <parameter type="java.lang.String" name="targetCompatibility"/>
     </method>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath to use to compile the source files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
 </description>
     </property>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination directory. 
 </description>
     </property>
-    <property name="sourceCompatibility" type="java.lang.String">
+    <property name="sourceCompatibility" type="java.lang.String" documented="true">
         <description> 
  Returns the Java language level to use to compile the source files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source language level. 
 </description>
     </property>
-    <property name="targetCompatibility" type="java.lang.String">
+    <property name="targetCompatibility" type="java.lang.String" documented="true">
         <description> 
  Returns the target JVM to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target JVM. 
 </description>
     </property>
-    <documentation>
-        <property name="classpath"/>
-        <property name="sourceSet.compileClasspath"/>
-        <property name="destinationDir"/>
-        <property name="sourceSet.output.classesDir"/>
-        <property name="sourceCompatibility"/>
-        <property name="project.sourceCompatibility"/>
-        <property name="targetCompatibility"/>
-        <property name="project.targetCompatibility"/>
-        <property name="includes"/>
-        <property name="[]"/>
-        <property name="excludes"/>
-        <property name="[]"/>
-    </documentation>
 </type>

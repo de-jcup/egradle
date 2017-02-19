@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.Zip" version="3.0" superType="org.gradle.api.tasks.bundling.AbstractArchiveTask">
+<type language="gradle" name="org.gradle.api.tasks.bundling.Zip" version="3.0" superType="org.gradle.api.tasks.bundling.AbstractArchiveTask">
     <description> 
  Assembles a ZIP archive. 
  
@@ -65,7 +65,7 @@
         <parameter type="boolean" name="allowZip64"/>
     </method>
     <property name="compressor" type="org.gradle.api.internal.file.copy.ZipCompressor"/>
-    <property name="entryCompression" type="org.gradle.api.tasks.bundling.ZipEntryCompression">
+    <property name="entryCompression" type="org.gradle.api.tasks.bundling.ZipEntryCompression" documented="true">
         <description> 
  Returns the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is 
  compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed. 
@@ -73,7 +73,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the compression level of the archive contents. 
 </description>
     </property>
-    <property name="metadataCharset" type="java.lang.String">
+    <property name="metadataCharset" type="java.lang.String" documented="true">
         <description> 
  The character set used to encode ZIP metadata like file names. 
  Defaults to the platform's default character set. 
@@ -82,7 +82,7 @@
  @since 2.14 
 </description>
     </property>
-    <property name="zip64" type="boolean">
+    <property name="zip64" type="boolean" documented="true">
         <description> 
  Whether the zip can contain more than 65535 files and/or support files greater than 4GB in size. 
  &lt;p&gt; 
@@ -95,16 +95,4 @@
  This means you should not enable this property if you are building JARs to be used with Java 6 and earlier runtimes. 
 </description>
     </property>
-    <documentation>
-        <property name="metadataCharset"/>
-        <property name="Platform default encoding"/>
-        <property name="entryCompression"/>
-        <property name="ZipEntryCompression.DEFLATED"/>
-        <property name="extension"/>
-        <property name="zip"/>
-        <property name="metadataCharset"/>
-        <property name="Platform default encoding"/>
-        <property name="zip64"/>
-        <property name="false"/>
-    </documentation>
 </type>

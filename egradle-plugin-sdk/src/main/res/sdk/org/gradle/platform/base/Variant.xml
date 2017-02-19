@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.Variant" version="3.0">
+<type language="gradle" name="org.gradle.platform.base.Variant" version="3.0">
     <description> 
  Declares that a property represents a variant dimension. Variants are used in dependency 
  resolution to discriminate between various binaries that may match the requirements (such 
@@ -10,5 +10,4 @@
  
  @since 2.6 
 </description>
-    <documentation/>
 </type>

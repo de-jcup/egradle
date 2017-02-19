@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.java.tasks.PlatformJavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.JavaCompile">
+<type language="gradle" name="org.gradle.language.java.tasks.PlatformJavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.JavaCompile">
     <description> 
  A platform-aware Java compile task. 
 </description>
@@ -8,5 +8,4 @@
         <parameter type="org.gradle.jvm.platform.JavaPlatform" name="platform"/>
     </method>
     <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
-    <documentation/>
 </type>

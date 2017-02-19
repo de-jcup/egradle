@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.SourceTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.SourceTask" version="3.0">
     <description> 
  A &lt;a href='type://SourceTask'&gt;SourceTask&lt;/a&gt; performs some operation on source files. 
 </description>
-    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="excludeSpec"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="excludes"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -45,25 +45,25 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
 </description>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="groovy.lang.Closure" name="includeSpec"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.String" name="includes"/>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -89,7 +89,7 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
-    <method name="source" returnType="org.gradle.api.tasks.SourceTask">
+    <method name="source" returnType="org.gradle.api.tasks.SourceTask" documented="true">
         <description> 
  Adds some source to this task. The given source objects will be evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
  
@@ -99,30 +99,22 @@
         <parameter type="java.lang.Object" name="sources"/>
     </method>
     <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
-    <property name="excludes" type="java.util.Set">
+    <property name="excludes" type="java.util.Set" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="includes" type="java.util.Set">
+    <property name="includes" type="java.util.Set" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
     <property name="patternSetFactory" type="org.gradle.internal.Factory"/>
-    <property name="source" type="org.gradle.api.file.FileTree">
+    <property name="source" type="org.gradle.api.file.FileTree" documented="true">
         <description> 
  Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
 </description>
     </property>
-    <documentation>
-        <property name="includes"/>
-        <property name="source"/>
-        <property name="excludes"/>
-        <method name="source"/>
-        <method name="include"/>
-        <method name="exclude"/>
-    </documentation>
 </type>

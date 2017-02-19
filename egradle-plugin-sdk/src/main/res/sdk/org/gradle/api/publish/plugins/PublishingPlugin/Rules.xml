@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.plugins.PublishingPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.api.publish.plugins.PublishingPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="addConfiguredPublicationsToProjectPublicationRegistry" returnType="void">
         <parameter type="org.gradle.api.internal.artifacts.ivyservice.projectmodule.ProjectPublicationRegistry" name="projectPublicationRegistry"/>
         <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
@@ -15,5 +15,4 @@
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="org.gradle.api.internal.artifacts.ivyservice.projectmodule.ProjectPublicationRegistry" name="publicationRegistry"/>
     </method>
-    <documentation/>
 </type>

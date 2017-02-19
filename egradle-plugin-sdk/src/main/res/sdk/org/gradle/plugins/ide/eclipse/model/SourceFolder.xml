@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.SourceFolder" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.SourceFolder" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
     <description> 
  SourceFolder.path contains only project relative path. 
 </description>
@@ -48,5 +48,4 @@
     <property name="kind" type="java.lang.String"/>
     <property name="name" type="java.lang.String"/>
     <property name="output" type="java.lang.String"/>
-    <documentation/>
 </type>

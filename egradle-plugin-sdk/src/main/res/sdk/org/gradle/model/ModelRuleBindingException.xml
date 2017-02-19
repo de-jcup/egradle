@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.model.ModelRuleBindingException" version="3.0" superType="org.gradle.api.GradleException">
+<type language="gradle" name="org.gradle.model.ModelRuleBindingException" version="3.0" superType="org.gradle.api.GradleException">
     <description> 
  Thrown when there is a problem binding the model element references of a model rule. 
  &lt;p&gt; 
  Should always be thrown as the cause of a &lt;a href='type://org.gradle.model.InvalidModelRuleException'&gt;org.gradle.model.InvalidModelRuleException&lt;/a&gt;. 
 </description>
-    <documentation/>
 </type>

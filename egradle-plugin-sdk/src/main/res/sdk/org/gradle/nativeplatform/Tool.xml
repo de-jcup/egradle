@@ -3,7 +3,7 @@
     <description> 
  Configuration of the arguments of a ToolChain executable. 
 </description>
-    <method name="args" returnType="void">
+    <method name="args" returnType="void" documented="true">
         <description> 
  Adds a number of arguments to be passed to the tool. 
 </description>
@@ -14,13 +14,9 @@
  The arguments passed when executing this tool. 
 </description>
     </method>
-    <property name="args" type="java.util.List">
+    <property name="args" type="java.util.List" documented="true">
         <description> 
  The arguments passed when executing this tool. 
 </description>
     </property>
-    <documentation>
-        <property name="args"/>
-        <method name="args"/>
-    </documentation>
 </type>

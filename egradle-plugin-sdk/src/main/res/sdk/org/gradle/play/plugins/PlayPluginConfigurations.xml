@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations" version="3.0">
+<type language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations" version="3.0">
     <description> 
  Conventional locations and names for play plugins. 
 </description>
@@ -11,5 +11,4 @@
     <property name="playPlatform" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <property name="playRun" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <property name="playTest" type="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
-    <documentation/>
 </type>

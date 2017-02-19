@@ -26,7 +26,7 @@
         <parameter type="java.io.File" name="staticLibraryFile"/>
     </method>
     <interface name="org.gradle.nativeplatform.NativeLibraryBinarySpec"/>
-    <property name="staticLibraryFile" type="java.io.File">
+    <property name="staticLibraryFile" type="java.io.File" documented="true">
         <description> 
  The static library file. 
 </description>
@@ -36,7 +36,4 @@
  {@inheritDoc} 
 </description>
     </property>
-    <documentation>
-        <property name="staticLibraryFile"/>
-    </documentation>
 </type>

@@ -4,5 +4,4 @@
  The repositories that Gradle will search for prebuilt libraries. 
 </description>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
-    <documentation/>
 </type>

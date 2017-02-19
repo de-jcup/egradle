@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractLibrary" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractLibrary" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
     <description> 
  Common superclass for the library elements. 
 </description>
@@ -31,5 +31,4 @@
     <property name="library" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
     <property name="moduleVersion" type="org.gradle.api.artifacts.ModuleVersionIdentifier"/>
     <property name="sourcePath" type="org.gradle.plugins.ide.eclipse.model.FileReference"/>
-    <documentation/>
 </type>

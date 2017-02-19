@@ -66,7 +66,7 @@
  To use a community plugin, the fully qualified id must be specified along with a version. 
  &lt;/p&gt; 
 </description>
-    <method name="id" returnType="org.gradle.plugin.use.PluginDependencySpec" delegationTarget="apply">
+    <method name="id" returnType="org.gradle.plugin.use.PluginDependencySpec" delegationTarget="apply" documented="true">
         <description> 
  Add a dependency on the plugin with the given id. 
  &lt;p&gt; 
@@ -97,7 +97,4 @@
 </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
-    <documentation>
-        <method name="id"/>
-    </documentation>
 </type>

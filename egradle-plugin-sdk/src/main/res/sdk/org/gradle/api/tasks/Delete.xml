@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Delete" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.Delete" version="3.0">
     <description> 
  &lt;p&gt;Deletes files or directories. Example:&lt;/p&gt; 
  &lt;pre autoTested=''&gt; 
@@ -14,7 +14,7 @@
  this will have no effect. 
 </description>
     <method name="clean" returnType="void"/>
-    <method name="delete" returnType="org.gradle.api.tasks.Delete">
+    <method name="delete" returnType="org.gradle.api.tasks.Delete" documented="true">
         <description> 
  Adds some files to be deleted by this task. The given targets are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
  
@@ -65,7 +65,7 @@
         <parameter type="boolean" name="followSymlinks"/>
     </method>
     <interface name="org.gradle.api.file.DeleteSpec"/>
-    <property name="delete" type="java.util.Set">
+    <property name="delete" type="java.util.Set" documented="true">
         <description> 
  Returns the set of files which will be deleted by this task. 
  
@@ -74,24 +74,18 @@
     </property>
     <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
     <property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
-    <property name="followSymlinks" type="boolean">
+    <property name="followSymlinks" type="boolean" documented="true">
         <description> 
  Returns if symlinks should be followed when doing a delete. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if symlinks will be followed. 
 </description>
     </property>
-    <property name="targetFiles" type="org.gradle.api.file.FileCollection">
+    <property name="targetFiles" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the resolved set of files which will be deleted by this task. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="delete"/>
-        <property name="targetFiles"/>
-        <property name="followSymlinks"/>
-        <method name="delete"/>
-    </documentation>
 </type>

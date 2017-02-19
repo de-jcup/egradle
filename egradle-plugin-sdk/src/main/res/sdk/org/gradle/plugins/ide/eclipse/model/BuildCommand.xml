@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.BuildCommand" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.BuildCommand" version="3.0">
     <description> 
  A build command. 
 </description>
@@ -19,5 +19,4 @@
     <interface name="java.io.Serializable"/>
     <property name="arguments" type="java.util.Map"/>
     <property name="name" type="java.lang.String"/>
-    <documentation/>
 </type>

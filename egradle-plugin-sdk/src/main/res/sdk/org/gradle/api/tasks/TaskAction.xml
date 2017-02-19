@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.TaskAction" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.TaskAction" version="3.0">
     <description> 
  Marks a method as the action to run when the task is executed. 
 </description>
-    <documentation/>
 </type>

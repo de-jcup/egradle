@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.tooling.events.test.JvmTestKind" version="3.0">
+<type language="gradle" name="org.gradle.tooling.events.test.JvmTestKind" version="3.0">
     <description> 
  Enumerates the different kinds of JVM tests. This allows to differentiate between test suites, atomic tests, etc. 
  
@@ -19,5 +19,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a label corresponding to the test kind 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -47,19 +47,19 @@
  {@inheritDoc} 
 </description>
     </property>
-    <property name="assets" type="org.gradle.play.PublicAssets">
+    <property name="assets" type="org.gradle.play.PublicAssets" documented="true">
         <description> 
  A buildable object representing the public assets that will be included in the assets jar file. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the PublicAssets for this binary 
 </description>
     </property>
-    <property name="assetsJarFile" type="java.io.File">
+    <property name="assetsJarFile" type="java.io.File" documented="true">
         <description> 
  The assets jar file produced for this binary. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the assets jar file 
 </description>
     </property>
-    <property name="classes" type="org.gradle.play.JvmClasses">
+    <property name="classes" type="org.gradle.play.JvmClasses" documented="true">
         <description> 
  A buildable object representing the class files and resources that will be included in the application jar file. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the JvmClasses for this binary 
@@ -67,24 +67,17 @@
     </property>
     <property name="generatedJavaScript" type="java.util.Map"/>
     <property name="generatedScala" type="java.util.Map"/>
-    <property name="jarFile" type="java.io.File">
+    <property name="jarFile" type="java.io.File" documented="true">
         <description> 
  The application jar file produced for this binary. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the application jar file 
 </description>
     </property>
-    <property name="targetPlatform" type="org.gradle.play.platform.PlayPlatform">
+    <property name="targetPlatform" type="org.gradle.play.platform.PlayPlatform" documented="true">
         <description> 
  The PlayPlatform this binary is built for. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;platform for this binary 
 </description>
     </property>
     <property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"/>
-    <documentation>
-        <property name="targetPlatform"/>
-        <property name="jarFile"/>
-        <property name="assetsJarFile"/>
-        <property name="classes"/>
-        <property name="assets"/>
-    </documentation>
 </type>

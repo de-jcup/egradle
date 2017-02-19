@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -28,10 +29,12 @@ import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
+import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
 import de.jcup.egradle.codeassist.dsl.Plugin;
+import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Task;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeDocumentation;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
@@ -391,11 +394,12 @@ public class SDKBuilder {
 				String name = type.getName();
 				File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/"+name+".xml");
 				if (dslXML.exists()){
+					type.setDocumented(false);
 					XMLDSLTypeDocumentation dslInfo = originDslTypeInfoImporter.collectDSL(dslXML);
-					type.setDocumentation(dslInfo);
-					System.err.println("- added dsl info for file:"+dslXML);
+					markGradleDSLMethods(type, dslInfo);
+					markGradleDSLPropertiess(type, dslInfo);
 				}else{
-//					System.err.println("no dsl xml file:"+dslXML);
+					type.setDocumented(false);
 				}
 				typeExporter.exportType(type, outputStream);
 			}
@@ -403,6 +407,48 @@ public class SDKBuilder {
 			throw new IOException("Problems with file:" + newTargetFile.getAbsolutePath(), e);
 		}
 	}
+
+	private void markGradleDSLMethods(XMLType type, XMLDSLTypeDocumentation dslInfo) {
+		Set<XMLDSLMethodInfo> methodInfos = dslInfo.getMethods();
+		
+		Set<Method> methods = type.getMethods();
+		for (Method method: methods){
+			if (!(method instanceof ModifiableMethod)){
+				continue;
+			}
+			ModifiableMethod modifiableMethod = (ModifiableMethod) method;
+			Iterator<XMLDSLMethodInfo> methodInfoIterator = methodInfos.iterator();
+			String methodName = modifiableMethod.getName();
+			while (methodInfoIterator.hasNext()){
+				XMLDSLMethodInfo methodInfo = methodInfoIterator.next();
+				String methodInfoName = methodInfo.getName();
+				if (methodName.equals(methodInfoName)){
+					modifiableMethod.setDocumented(true);
+				}
+			}
+		}
+	}
+	private void markGradleDSLPropertiess(XMLType type, XMLDSLTypeDocumentation dslInfo) {
+		Set<XMLDSLPropertyInfo> propertyInfos = dslInfo.getProperties();
+		
+		Set<Property> properties = type.getProperties();
+		for (Property method: properties){
+			if (!(method instanceof ModifiableProperty)){
+				continue;
+			}
+			ModifiableProperty modifiableProperty = (ModifiableProperty) method;
+			Iterator<XMLDSLPropertyInfo> propertyInfoIterator = propertyInfos.iterator();
+			String propertyName = modifiableProperty.getName();
+			while (propertyInfoIterator.hasNext()){
+				XMLDSLPropertyInfo methodInfo = propertyInfoIterator.next();
+				String propertyInfoName = methodInfo.getName();
+				if (propertyName.equals(propertyInfoName)){
+					modifiableProperty.setDocumented(true);
+				}
+			}
+		}
+	}
+	
 
 	void estimateDelegateTargets(Type type, SDKBuilderContext context) {
 		int problemCount = 0;

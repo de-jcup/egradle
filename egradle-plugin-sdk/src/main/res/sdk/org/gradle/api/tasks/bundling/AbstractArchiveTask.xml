@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.AbstractArchiveTask" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
+<type language="gradle" name="org.gradle.api.tasks.bundling.AbstractArchiveTask" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
     <description> 
  &lt;a href='type://AbstractArchiveTask'&gt;AbstractArchiveTask&lt;/a&gt; is the base class for all archive tasks. 
 </description>
@@ -58,7 +58,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version. May be null. 
 </description>
     </method>
-    <method name="into" returnType="org.gradle.api.tasks.bundling.AbstractArchiveTask">
+    <method name="into" returnType="org.gradle.api.tasks.bundling.AbstractArchiveTask" documented="true">
         <description> 
  Specifies the destination directory *inside* the archive for the files. 
  The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
@@ -69,7 +69,7 @@
 </description>
         <parameter type="java.lang.Object" name="destPath"/>
     </method>
-    <method name="into" returnType="org.gradle.api.tasks.bundling.AbstractArchiveTask" delegationTarget="CopySpec">
+    <method name="into" returnType="org.gradle.api.tasks.bundling.AbstractArchiveTask" delegationTarget="CopySpec" documented="true">
         <description> 
  Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with a destination directory *inside* the archive for the files. 
  The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
@@ -82,7 +82,7 @@
         <parameter type="java.lang.Object" name="destPath"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec">
+    <method name="into" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec" documented="true">
         <description> 
  Creates and configures a child &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; with a destination directory *inside* the archive for the files. 
  The destination is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
@@ -125,14 +125,14 @@
     <method name="setVersion" returnType="void">
         <parameter type="java.lang.String" name="version"/>
     </method>
-    <property name="appendix" type="java.lang.String">
+    <property name="appendix" type="java.lang.String" documented="true">
         <description> 
  Returns the appendix part of the archive name, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the appendix. May be null 
 </description>
     </property>
-    <property name="archiveName" type="java.lang.String">
+    <property name="archiveName" type="java.lang.String" documented="true">
         <description> 
  Returns the archive name. If the name has not been explicitly set, the pattern for the name is: 
  &lt;code&gt;[baseName]-[appendix]-[version]-[classifier].[extension]&lt;/code&gt; 
@@ -140,62 +140,44 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the archive name. 
 </description>
     </property>
-    <property name="archivePath" type="java.io.File">
+    <property name="archivePath" type="java.io.File" documented="true">
         <description> 
  The path where the archive is constructed. The path is simply the &lt;a href='type://destinationDir'&gt;destinationDir&lt;/a&gt; plus the &lt;a href='type://archiveName'&gt;archiveName&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a File object with the path to the archive 
 </description>
     </property>
-    <property name="baseName" type="java.lang.String">
+    <property name="baseName" type="java.lang.String" documented="true">
         <description> 
  Returns the base name of the archive. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the base name. 
 </description>
     </property>
-    <property name="classifier" type="java.lang.String">
+    <property name="classifier" type="java.lang.String" documented="true">
         <description> 
  Returns the classifier part of the archive name, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classifier. May be null. 
 </description>
     </property>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory where the archive is generated into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory 
 </description>
     </property>
-    <property name="extension" type="java.lang.String">
+    <property name="extension" type="java.lang.String" documented="true">
         <description> 
  Returns the extension part of the archive name. 
 </description>
     </property>
-    <property name="version" type="java.lang.String">
+    <property name="version" type="java.lang.String" documented="true">
         <description> 
  Returns the version part of the archive name, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version. May be null. 
 </description>
     </property>
-    <documentation>
-        <property name="archiveName"/>
-        <property name="${baseName}-${appendix}-${version}-${classifier}.${extension}"/>
-        <property name="archivePath"/>
-        <property name="${destinationDir}/${archiveName}"/>
-        <property name="appendix"/>
-        <property name="null"/>
-        <property name="baseName"/>
-        <property name="project.archivesBaseName"/>
-        <property name="version"/>
-        <property name="project.version"/>
-        <property name="extension"/>
-        <property name="classifier"/>
-        <property name="null"/>
-        <property name="destinationDir"/>
-        <property name="project.distsDir"/>
-        <method name="into"/>
-    </documentation>
 </type>

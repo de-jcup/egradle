@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateFiltersFileTask" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+<type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateFiltersFileTask" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
     <description> 
  Task for generating a filters file. 
 </description>
@@ -16,5 +16,4 @@
     <property name="inputFile" type="java.io.File"/>
     <property name="outputFile" type="java.io.File"/>
     <property name="visualStudioProject" type="org.gradle.ide.visualstudio.VisualStudioProject"/>
-    <documentation/>
 </type>

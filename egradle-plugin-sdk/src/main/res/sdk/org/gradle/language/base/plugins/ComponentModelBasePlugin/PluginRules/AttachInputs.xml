@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.base.plugins.ComponentModelBasePlugin.PluginRules.AttachInputs" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.language.base.plugins.ComponentModelBasePlugin.PluginRules.AttachInputs" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="execute" returnType="void">
         <parameter type="BinarySpecInternal" name="binary"/>
     </method>
@@ -16,5 +16,4 @@
     </method>
     <property name="binaries" type="org.gradle.model.ModelMap"/>
     <property name="sources" type="org.gradle.model.ModelMap"/>
-    <documentation/>
 </type>

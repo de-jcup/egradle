@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Facet" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Facet" version="3.0">
     <description> 
  A project facet. 
 </description>
@@ -26,5 +26,4 @@
     <property name="name" type="java.lang.String"/>
     <property name="type" type="org.gradle.plugins.ide.eclipse.model.Facet.FacetType"/>
     <property name="version" type="java.lang.String"/>
-    <documentation/>
 </type>

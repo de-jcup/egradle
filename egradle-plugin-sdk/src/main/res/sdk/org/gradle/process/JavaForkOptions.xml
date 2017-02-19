@@ -274,5 +274,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The system properties. Returns an empty map when there are no system properties. 
 </description>
     </property>
-    <documentation/>
 </type>

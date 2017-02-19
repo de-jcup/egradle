@@ -14,10 +14,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import de.jcup.egradle.codeassist.dsl.XMLDSLMethodInfo;
-import de.jcup.egradle.codeassist.dsl.XMLDSLPropertyInfo;
-import de.jcup.egradle.codeassist.dsl.XMLDSLTypeDocumentation;
-
 public class OriginXMLDSlTypeInfoImporter {
 
 	/* Example:org.gradle.api.artifacts.ComponentSelection.xml content:

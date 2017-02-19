@@ -38,18 +38,14 @@
  The component that this project represents. 
 </description>
     </property>
-    <property name="filtersFile" type="org.gradle.ide.visualstudio.XmlConfigFile">
+    <property name="filtersFile" type="org.gradle.ide.visualstudio.XmlConfigFile" documented="true">
         <description> 
  Configuration for the generated filters file. 
 </description>
     </property>
-    <property name="projectFile" type="org.gradle.ide.visualstudio.XmlConfigFile">
+    <property name="projectFile" type="org.gradle.ide.visualstudio.XmlConfigFile" documented="true">
         <description> 
  Configuration for the generated project file. 
 </description>
     </property>
-    <documentation>
-        <property name="projectFile"/>
-        <property name="filtersFile"/>
-    </documentation>
 </type>

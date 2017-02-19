@@ -11,14 +11,11 @@
 </description>
     </method>
     <interface name="org.gradle.api.Named"/>
-    <property name="displayName" type="java.lang.String">
+    <property name="displayName" type="java.lang.String" documented="true">
         <description> 
  Returns a human consumable name for this tool chain. 
  
  @since 1.11 
 </description>
     </property>
-    <documentation>
-        <property name="displayName"/>
-    </documentation>
 </type>

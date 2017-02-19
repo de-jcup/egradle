@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.JavaPluginConvention" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.JavaPluginConvention" version="3.0">
     <description> 
  Is mixed into the project when applying the &lt;a href='type://org.gradle.api.plugins.JavaBasePlugin'&gt;org.gradle.api.plugins.JavaBasePlugin&lt;/a&gt; or the 
  &lt;a href='type://org.gradle.api.plugins.JavaPlugin'&gt;org.gradle.api.plugins.JavaPlugin&lt;/a&gt;. 
@@ -57,12 +57,12 @@
  The name of the test results directory. Can be a name or a path relative to the build dir. 
 </description>
     </method>
-    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest">
+    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest" documented="true">
         <description> 
  Creates a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;. 
 </description>
     </method>
-    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest">
+    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest" documented="true">
         <description> 
  Creates and configures a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;. The given closure configures 
  the new manifest instance before it is returned. 
@@ -106,7 +106,7 @@
     <method name="setTestResultsDirName" returnType="void">
         <parameter type="java.lang.String" name="testResultsDirName"/>
     </method>
-    <method name="sourceSets" returnType="java.lang.Object" delegationTarget="SourceSetContainer">
+    <method name="sourceSets" returnType="java.lang.Object" delegationTarget="SourceSetContainer" documented="true">
         <description> 
  Configures the source sets of this project. 
  
@@ -137,12 +137,12 @@
  The name of the dependency cache dir. 
 </description>
     </property>
-    <property name="docsDir" type="java.io.File">
+    <property name="docsDir" type="java.io.File" documented="true">
         <description> 
  Returns a file pointing to the root directory supposed to be used for all docs. 
 </description>
     </property>
-    <property name="docsDirName" type="java.lang.String">
+    <property name="docsDirName" type="java.lang.String" documented="true">
         <description> 
  The name of the docs directory. Can be a name or a path relative to the build dir. 
 </description>
@@ -154,60 +154,39 @@
 </description>
     </property>
     <property name="reportsDir" type="java.io.File"/>
-    <property name="sourceCompatibility" type="org.gradle.api.JavaVersion">
+    <property name="sourceCompatibility" type="org.gradle.api.JavaVersion" documented="true">
         <description> 
  Returns the source compatibility used for compiling Java sources. 
 </description>
     </property>
-    <property name="sourceSets" type="org.gradle.api.tasks.SourceSetContainer">
+    <property name="sourceSets" type="org.gradle.api.tasks.SourceSetContainer" documented="true">
         <description> 
  The source sets container. 
 </description>
     </property>
-    <property name="targetCompatibility" type="org.gradle.api.JavaVersion">
+    <property name="targetCompatibility" type="org.gradle.api.JavaVersion" documented="true">
         <description> 
  Returns the target compatibility used for compiling Java sources. 
 </description>
     </property>
-    <property name="testReportDir" type="java.io.File">
+    <property name="testReportDir" type="java.io.File" documented="true">
         <description> 
  Returns a file pointing to the root directory to be used for reports. 
 </description>
     </property>
-    <property name="testReportDirName" type="java.lang.String">
+    <property name="testReportDirName" type="java.lang.String" documented="true">
         <description> 
  The name of the test reports directory. Can be a name or a path relative to &lt;a href='type://org.gradle.api.reporting.ReportingExtension#getBaseDir'&gt;org.gradle.api.reporting.ReportingExtension#getBaseDir&lt;/a&gt;. 
 </description>
     </property>
-    <property name="testResultsDir" type="java.io.File">
+    <property name="testResultsDir" type="java.io.File" documented="true">
         <description> 
  Returns a file pointing to the root directory of the test results. 
 </description>
     </property>
-    <property name="testResultsDirName" type="java.lang.String">
+    <property name="testResultsDirName" type="java.lang.String" documented="true">
         <description> 
  The name of the test results directory. Can be a name or a path relative to the build dir. 
 </description>
     </property>
-    <documentation>
-        <property name="docsDirName"/>
-        <property name="'docs'"/>
-        <property name="docsDir"/>
-        <property name="${project.buildDir}/${project.docsDirName}"/>
-        <property name="testResultsDirName"/>
-        <property name="'test-results'"/>
-        <property name="testResultsDir"/>
-        <property name="${project.buildDir}/${project.testResultsDirName}"/>
-        <property name="testReportDirName"/>
-        <property name="'tests'"/>
-        <property name="testReportDir"/>
-        <property name="${project.reporting.baseDir}/${project.testReportDirName}"/>
-        <property name="sourceSets"/>
-        <property name="sourceCompatibility"/>
-        <property name="Value of the current used JVM (e.g. JavaVersion.JAVA_1_6 on a 1.6 JVM)."/>
-        <property name="targetCompatibility"/>
-        <property name="project.sourceCompatibility"/>
-        <method name="sourceSets"/>
-        <method name="manifest"/>
-    </documentation>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.SkipWhenEmpty" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.SkipWhenEmpty" version="3.0">
     <description> 
  &lt;p&gt;Attached to a task property to indicate that the task should be skipped when the value of the property is an empty 
  &lt;a href='type://org.gradle.api.file.FileCollection'&gt;org.gradle.api.file.FileCollection&lt;/a&gt; or directory.&lt;/p&gt; 
@@ -10,5 +10,4 @@
  
  &lt;li&gt;&lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; 
 </description>
-    <documentation/>
 </type>

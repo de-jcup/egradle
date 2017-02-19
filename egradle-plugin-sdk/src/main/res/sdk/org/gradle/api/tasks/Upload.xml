@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Upload" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.Upload" version="3.0">
     <description> 
  Uploads the artifacts of a &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; to a set of repositories. 
 </description>
@@ -31,7 +31,7 @@
  Specifies whether the dependency descriptor should be uploaded. 
 </description>
     </method>
-    <method name="repositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
+    <method name="repositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
         <description> 
  Configures the set of repositories to upload to. 
 </description>
@@ -47,14 +47,14 @@
         <parameter type="boolean" name="uploadDescriptor"/>
     </method>
     <method name="upload" returnType="void"/>
-    <property name="artifacts" type="org.gradle.api.file.FileCollection">
+    <property name="artifacts" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the artifacts which will be uploaded. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
 </description>
     </property>
-    <property name="configuration" type="org.gradle.api.artifacts.Configuration">
+    <property name="configuration" type="org.gradle.api.artifacts.Configuration" documented="true">
         <description> 
  Returns the configuration to upload. 
 </description>
@@ -65,21 +65,14 @@
 </description>
     </property>
     <property name="publicationServices" type="org.gradle.api.internal.artifacts.ArtifactPublicationServices"/>
-    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler">
+    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
         <description> 
  Returns the repositories to upload to. 
 </description>
     </property>
-    <property name="uploadDescriptor" type="boolean">
+    <property name="uploadDescriptor" type="boolean" documented="true">
         <description> 
  Specifies whether the dependency descriptor should be uploaded. 
 </description>
     </property>
-    <documentation>
-        <property name="uploadDescriptor"/>
-        <property name="repositories"/>
-        <property name="configuration"/>
-        <property name="artifacts"/>
-        <method name="repositories"/>
-    </documentation>
 </type>

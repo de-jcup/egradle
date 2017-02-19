@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.antlr.AntlrTask" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+<type language="gradle" name="org.gradle.api.plugins.antlr.AntlrTask" version="3.0" superType="org.gradle.api.tasks.SourceTask">
     <description> 
  Generates parsers from Antlr grammars. 
 </description>
@@ -113,7 +113,7 @@
     <method name="setTraceTreeWalker" returnType="void">
         <parameter type="boolean" name="traceTreeWalker"/>
     </method>
-    <property name="antlrClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="antlrClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath containing the Ant ANTLR task implementation. 
  
@@ -127,62 +127,44 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The antlr command-line arguments 
 </description>
     </property>
-    <property name="maxHeapSize" type="java.lang.String">
+    <property name="maxHeapSize" type="java.lang.String" documented="true">
         <description> 
  The maximum heap size for the forked antlr process (ex: '1g'). 
 </description>
     </property>
-    <property name="outputDirectory" type="java.io.File">
+    <property name="outputDirectory" type="java.io.File" documented="true">
         <description> 
  Returns the directory to generate the parser source files into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output directory. 
 </description>
     </property>
-    <property name="source" type="org.gradle.api.file.FileTree">
+    <property name="source" type="org.gradle.api.file.FileTree" documented="true">
         <description> 
  Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source. 
 </description>
     </property>
-    <property name="trace" type="boolean">
+    <property name="trace" type="boolean" documented="true">
         <description> 
  Specifies that all rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
 </description>
     </property>
-    <property name="traceLexer" type="boolean">
+    <property name="traceLexer" type="boolean" documented="true">
         <description> 
  Specifies that all lexer rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
 </description>
     </property>
-    <property name="traceParser" type="boolean">
+    <property name="traceParser" type="boolean" documented="true">
         <description> 
  Specifies that all parser rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
 </description>
     </property>
-    <property name="traceTreeWalker" type="boolean">
+    <property name="traceTreeWalker" type="boolean" documented="true">
         <description> 
  Specifies that all tree walker rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;. 
 </description>
     </property>
     <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
-    <documentation>
-        <property name="antlrClasspath"/>
-        <property name="project.configurations.antlr"/>
-        <property name="outputDirectory"/>
-        <property name="&#xA;                ${project.buildDir}/generated-src/antlr/${sourceSet.name}"/>
-        <property name="trace"/>
-        <property name="false"/>
-        <property name="traceLexer"/>
-        <property name="false"/>
-        <property name="traceParser"/>
-        <property name="false"/>
-        <property name="traceTreeWalker"/>
-        <property name="false"/>
-        <property name="maxHeapSize"/>
-        <property name="null"/>
-        <property name="source"/>
-        <property name="sourceSet.antlr"/>
-    </documentation>
 </type>

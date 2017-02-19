@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 public class XMLType implements ModifiableType {
 
 	@XmlAttribute(name = "interface")
-	private boolean _interface;
+	private Boolean _interface;
 	
 	@XmlElement(name = "description")
 	private String description;
@@ -58,10 +58,8 @@ public class XMLType implements ModifiableType {
 
 	private Set<TypeReference> mergedInterfaces;
 
-	@XmlElement(name="documentation", type = XMLDSLTypeDocumentation.class)
-	private XMLDSLTypeDocumentation dslDocumentation = new XMLDSLTypeDocumentation();
-	
-	
+	@XmlAttribute(name = "documented", required=false)
+	private Boolean partOfGradleDSLDocumentation = null;
 
 	@Override
 	public void addExtension(String extensionId, Type extensionType, Reason reason) {
@@ -231,7 +229,11 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public boolean isInterface() {
-		return _interface;
+		/* jaxb hack to suppress xyz="false" attributes */
+		if (_interface==null){
+			return false;
+		}
+		return _interface.booleanValue();
 	}
 	
 	public Set<TypeReference> getInterfaces() {
@@ -324,13 +326,18 @@ public class XMLType implements ModifiableType {
 		return true;
 	}
 
-	public void setDocumentation(XMLDSLTypeDocumentation documentation) {
-		if (documentation==null){
-			documentation = new XMLDSLTypeDocumentation();
-		}
-		this.dslDocumentation=documentation;
+	@Override
+	public boolean isDocumented() {
+		/* workaround for JAXM preventing to: atribute="false" */
+		return partOfGradleDSLDocumentation!=null && partOfGradleDSLDocumentation.booleanValue();
 	}
-
 	
+	public void setDocumented(boolean partOfGradleDSLDocumentation) {
+		if (!partOfGradleDSLDocumentation){
+			this.partOfGradleDSLDocumentation = null;
+		}else{
+			this.partOfGradleDSLDocumentation = Boolean.TRUE;
+		}
+	}
 	
 }

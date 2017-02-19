@@ -29,7 +29,7 @@
  
  @since 1.8 
 </description>
-    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="ComponentMetadataDetails">
+    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="ComponentMetadataDetails" documented="true">
         <description> 
  Adds a rule closure that may modify the metadata of any resolved software component. 
  
@@ -50,7 +50,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="rule"/>
     </method>
-    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.model.Mutate">
+    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.model.Mutate" documented="true">
         <description> 
  Adds a rule that may modify the metadata of any resolved software component. 
  
@@ -68,7 +68,7 @@
 </description>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
-    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
         <description> 
  Adds a rule action that may modify the metadata of any resolved software component. 
  
@@ -77,7 +77,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier">
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
         <description> 
  Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
  
@@ -90,7 +90,7 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="groovy.lang.Closure" name="rule"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier">
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
         <description> 
  Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
  
@@ -103,7 +103,7 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier">
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
         <description> 
  Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
  
@@ -114,8 +114,4 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
-    <documentation>
-        <method name="all"/>
-        <method name="withModule"/>
-    </documentation>
 </type>

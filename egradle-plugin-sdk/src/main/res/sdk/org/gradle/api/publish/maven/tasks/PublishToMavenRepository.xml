@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.PublishToMavenRepository" version="3.0" superType="org.gradle.api.publish.maven.tasks.AbstractPublishToMaven">
+<type language="gradle" name="org.gradle.api.publish.maven.tasks.PublishToMavenRepository" version="3.0" superType="org.gradle.api.publish.maven.tasks.AbstractPublishToMaven">
     <description> 
  Publishes a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; to a &lt;a href='type://MavenArtifactRepository'&gt;MavenArtifactRepository&lt;/a&gt;. 
  
@@ -26,7 +26,7 @@
 </description>
         <parameter type="org.gradle.api.artifacts.repositories.MavenArtifactRepository" name="repository"/>
     </method>
-    <property name="repository" type="org.gradle.api.artifacts.repositories.MavenArtifactRepository">
+    <property name="repository" type="org.gradle.api.artifacts.repositories.MavenArtifactRepository" documented="true">
         <description> 
  The repository to publish to. 
  
@@ -34,7 +34,4 @@
 </description>
     </property>
     <property name="repositoryTransportFactory" type="org.gradle.api.internal.artifacts.repositories.transport.RepositoryTransportFactory"/>
-    <documentation>
-        <property name="repository"/>
-    </documentation>
 </type>

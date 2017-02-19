@@ -1,4 +1,4 @@
-package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.other.sdkbuilder;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,21 +7,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "method")
-public class XMLDSLMethodInfo{
+public class XMLDSLMethodInfo {
 	@XmlAttribute(name = "name")
 	private String name;
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "XMLDSLMethodInfo [ name=" + name + "]";
 	}
-	
+
 }

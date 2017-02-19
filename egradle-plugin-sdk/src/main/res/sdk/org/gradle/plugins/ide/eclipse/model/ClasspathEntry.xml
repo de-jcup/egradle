@@ -8,5 +8,4 @@
     </method>
     <method name="getKind" returnType="java.lang.String"/>
     <property name="kind" type="java.lang.String"/>
-    <documentation/>
 </type>

@@ -14,5 +14,4 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <documentation/>
 </type>

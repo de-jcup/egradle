@@ -26,7 +26,7 @@
      } 
  &lt;/pre&gt; 
 </description>
-    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection">
+    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection" documented="true">
         <description> 
  Adds a component selection rule that will apply to all resolved components. 
  
@@ -41,7 +41,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate">
+    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate" documented="true">
         <description> 
  Adds a rule-source backed component selection rule that will apply to all resolved components. 
  
@@ -59,7 +59,7 @@
 </description>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
-    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection">
+    <method name="all" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection" documented="true">
         <description> 
  Adds a simple component selection rule that will apply to all resolved components. 
  Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument. 
@@ -69,7 +69,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="selectionAction"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection">
+    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection" documented="true">
         <description> 
  Adds a component selection rule that will apply to the specified module. 
  
@@ -86,7 +86,7 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate">
+    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="org.gradle.model.Mutate" documented="true">
         <description> 
  Adds a rule-source backed component selection rule that will apply to the specified module. 
  
@@ -106,7 +106,7 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection">
+    <method name="withModule" returnType="org.gradle.api.artifacts.ComponentSelectionRules" delegationTarget="ComponentSelection" documented="true">
         <description> 
  Adds a component selection rule that will apply to the specified module. 
  Each rule will receive a &lt;a href='type://ComponentSelection'&gt;ComponentSelection&lt;/a&gt; object as an argument. 
@@ -118,8 +118,4 @@
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="org.gradle.api.Action" name="selectionAction"/>
     </method>
-    <documentation>
-        <method name="all"/>
-        <method name="withModule"/>
-    </documentation>
 </type>

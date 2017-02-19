@@ -32,18 +32,14 @@
         <parameter type="java.lang.Object" name="installDir"/>
     </method>
     <interface name="org.gradle.nativeplatform.toolchain.NativeToolChain"/>
-    <property name="installDir" type="java.io.File">
+    <property name="installDir" type="java.io.File" documented="true">
         <description> 
  The directory where Visual Studio or Visual C++ is installed. 
 </description>
     </property>
-    <property name="windowsSdkDir" type="java.io.File">
+    <property name="windowsSdkDir" type="java.io.File" documented="true">
         <description> 
  The directory where Windows SDK is installed. 
 </description>
     </property>
-    <documentation>
-        <property name="installDir"/>
-        <property name="windowsSdkDir"/>
-    </documentation>
 </type>

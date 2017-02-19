@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.tooling.BuildCancelledException" version="3.0" superType="org.gradle.tooling.GradleConnectionException">
+<type language="gradle" name="org.gradle.tooling.BuildCancelledException" version="3.0" superType="org.gradle.tooling.GradleConnectionException">
     <description> 
  Thrown when a &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; is cancelled before the operation completes. 
  
  @since 2.1 
 </description>
-    <documentation/>
 </type>

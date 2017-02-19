@@ -17,5 +17,4 @@
  The context-root element specifies the context root of a web application. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -60,5 +60,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this test. Null if this test has no parent. 
 </description>
     </property>
-    <documentation/>
 </type>

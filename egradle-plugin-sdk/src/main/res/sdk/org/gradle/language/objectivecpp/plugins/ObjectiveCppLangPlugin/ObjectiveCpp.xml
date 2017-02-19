@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.objectivecpp.plugins.ObjectiveCppLangPlugin.ObjectiveCpp" version="3.0">
+<type language="gradle" name="org.gradle.language.objectivecpp.plugins.ObjectiveCppLangPlugin.ObjectiveCpp" version="3.0">
     <method name="getBinaryTools" returnType="java.util.Map"/>
     <method name="getLanguageName" returnType="java.lang.String"/>
     <method name="getPchTransformTask" returnType="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
@@ -11,5 +11,4 @@
     <property name="pchTransformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
     <property name="sourceSetType" type="java.lang.Class"/>
     <property name="transformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
-    <documentation/>
 </type>

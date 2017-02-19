@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.DependencyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractDependencyReportTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.DependencyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractDependencyReportTask">
     <description> 
  Displays the dependency tree for a project. An instance of this type is used when you 
  execute the &lt;a href='type://dependencies'&gt;dependencies&lt;/a&gt; task from the command-line. 
 </description>
     <method name="getTaskConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer"/>
     <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
-    <documentation>
-        <property name="configurations"/>
-        <property name="project.configurations"/>
-        <property name="outputFile"/>
-        <property name="${project.projectReportDir}/dependencies.txt"/>
-        <property name="projects"/>
-        <property name="[project]"/>
-    </documentation>
 </type>

@@ -5,5 +5,4 @@
 </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
     <interface name="org.gradle.api.NamedDomainObjectSet"/>
-    <documentation/>
 </type>

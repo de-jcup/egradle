@@ -15,5 +15,4 @@
  Returns the identifier for the project that this model is associated with. 
 </description>
     </property>
-    <documentation/>
 </type>

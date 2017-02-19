@@ -6,5 +6,4 @@
     <method name="getCompileClasspath" returnType="org.gradle.jvm.Classpath"/>
     <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="compileClasspath" type="org.gradle.jvm.Classpath"/>
-    <documentation/>
 </type>

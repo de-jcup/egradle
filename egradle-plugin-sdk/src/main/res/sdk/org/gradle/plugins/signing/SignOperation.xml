@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.SignOperation" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.SignOperation" version="3.0">
     <description> 
  A sign operation creates digital signatures for one or more files or &lt;a href='type://PublishArtifact publish artifacts'&gt;PublishArtifact publish artifacts&lt;/a&gt;. 
  
@@ -138,5 +138,4 @@
  @throws IllegalStateException if there is not exactly one registered signature. 
 </description>
     </property>
-    <documentation/>
 </type>

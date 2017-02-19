@@ -14,7 +14,7 @@
  
  @since 2.2 
 </description>
-    <method name="module" returnType="void" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier">
+    <method name="module" returnType="void" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
         <description> 
  Enables configuring component module metadata. 
  This metadata applies to the entire component module (e.g. "group:name", like "org.gradle:gradle-core") regardless of the component version. 
@@ -33,7 +33,4 @@
         <parameter type="java.lang.Object" name="moduleNotation"/>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
-    <documentation>
-        <method name="module"/>
-    </documentation>
 </type>

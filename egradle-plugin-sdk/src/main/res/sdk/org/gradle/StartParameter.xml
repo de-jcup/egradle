@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.StartParameter" version="3.0">
+<type language="gradle" name="org.gradle.StartParameter" version="3.0">
     <description> 
  &lt;p&gt;&lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; defines the configuration used by a Gradle instance to execute a build. The properties of &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; generally correspond to the command-line options of 
  Gradle. 
@@ -595,5 +595,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether to use empty settings or not. 
 </description>
     </property>
-    <documentation/>
 </type>

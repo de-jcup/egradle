@@ -66,12 +66,9 @@
  The container of extensions. 
 </description>
     </method>
-    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer">
+    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer" documented="true">
         <description> 
  The container of extensions. 
 </description>
     </property>
-    <documentation>
-        <property name="extensions"/>
-    </documentation>
 </type>

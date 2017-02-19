@@ -4,5 +4,4 @@
  A set of resource files. 
 </description>
     <interface name="org.gradle.language.base.LanguageSourceSet"/>
-    <documentation/>
 </type>

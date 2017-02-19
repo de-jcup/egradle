@@ -4,5 +4,4 @@
  A container of &lt;a href='type://BuildType'&gt;BuildType&lt;/a&gt;s. 
 </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
-    <documentation/>
 </type>

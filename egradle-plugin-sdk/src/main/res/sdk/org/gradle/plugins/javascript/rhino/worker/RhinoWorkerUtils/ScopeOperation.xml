@@ -7,5 +7,4 @@
     <method name="initContext" returnType="void">
         <parameter type="org.mozilla.javascript.Context" name="context"/>
     </method>
-    <documentation/>
 </type>

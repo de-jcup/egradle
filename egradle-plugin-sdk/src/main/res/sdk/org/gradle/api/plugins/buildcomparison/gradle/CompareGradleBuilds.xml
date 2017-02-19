@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Executes two Gradle builds (that can be the same build) with specified versions and compares the outcomes. 
  
@@ -71,7 +71,7 @@
 </description>
         <parameter type="java.lang.Object" name="reportDir"/>
     </method>
-    <method name="sourceBuild" returnType="void">
+    <method name="sourceBuild" returnType="void" documented="true">
         <description> 
  Configures the source build. 
  
@@ -86,7 +86,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
-    <method name="targetBuild" returnType="void">
+    <method name="targetBuild" returnType="void" documented="true">
         <description> 
  Configures the target build. 
  
@@ -103,7 +103,7 @@
     </method>
     <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
-    <property name="ignoreFailures" type="boolean">
+    <property name="ignoreFailures" type="boolean" documented="true">
         <description> 
  Whether a comparison between non identical builds will fail the task execution. 
  
@@ -112,7 +112,7 @@
     </property>
     <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="progressLoggerFactory" type="org.gradle.internal.logging.progress.ProgressLoggerFactory"/>
-    <property name="reportDir" type="java.io.File">
+    <property name="reportDir" type="java.io.File" documented="true">
         <description> 
  The directory that will contain the HTML comparison report and any other report files. 
  
@@ -120,7 +120,7 @@
 </description>
     </property>
     <property name="satisfiedBy" type="boolean"/>
-    <property name="sourceBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
+    <property name="sourceBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
         <description> 
  The specification of how to invoke the source build. 
  
@@ -132,7 +132,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the source build. 
 </description>
     </property>
-    <property name="targetBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
+    <property name="targetBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
         <description> 
  The specification of how to invoke the target build. 
  
@@ -144,14 +144,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the target build. 
 </description>
     </property>
-    <documentation>
-        <property name="sourceBuild"/>
-        <property name="targetBuild"/>
-        <property name="reportDir"/>
-        <property name="${project.reporting.file(this.name)}"/>
-        <property name="ignoreFailures"/>
-        <property name="false"/>
-        <method name="sourceBuild"/>
-        <method name="targetBuild"/>
-    </documentation>
 </type>

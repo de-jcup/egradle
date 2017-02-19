@@ -24,7 +24,7 @@
         <parameter type="boolean" name="withMessages"/>
     </method>
     <interface name="org.gradle.api.reporting.SingleFileReport"/>
-    <property name="withMessages" type="boolean">
+    <property name="withMessages" type="boolean" documented="true">
         <description> 
  Whether or not FindBugs should generate XML augmented with human-readable messages. 
  You should use this format if you plan to generate a report using an XSL stylesheet. 
@@ -35,7 +35,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not FindBugs should generate XML augmented with human-readable messages. 
 </description>
     </property>
-    <documentation>
-        <property name="withMessages"/>
-    </documentation>
 </type>

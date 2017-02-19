@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.rhino.RhinoShellExec" version="3.0" superType="org.gradle.api.tasks.JavaExec">
+<type language="gradle" name="org.gradle.plugins.javascript.rhino.RhinoShellExec" version="3.0" superType="org.gradle.api.tasks.JavaExec">
     <method name="args" returnType="org.gradle.process.JavaExecSpec">
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
@@ -34,5 +34,4 @@
     <property name="rhinoOptions" type="java.util.List"/>
     <property name="script" type="java.io.File"/>
     <property name="scriptArgs" type="java.util.List"/>
-    <documentation/>
 </type>

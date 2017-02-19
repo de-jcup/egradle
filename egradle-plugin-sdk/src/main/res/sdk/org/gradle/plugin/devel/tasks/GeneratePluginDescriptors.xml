@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.tasks.GeneratePluginDescriptors" version="3.0">
+<type language="gradle" name="org.gradle.plugin.devel.tasks.GeneratePluginDescriptors" version="3.0">
     <description> 
  Generates plugin descriptors from plugin declarations. 
 </description>
@@ -19,5 +19,4 @@
     </method>
     <property name="declarations" type="java.util.List"/>
     <property name="outputDirectory" type="java.io.File"/>
-    <documentation/>
 </type>

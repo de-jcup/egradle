@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" version="3.0">
+<type language="gradle" name="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" version="3.0">
     <description> 
  Configuration options for the &lt;a href='type://org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin'&gt;org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin&lt;/a&gt;. 
  
@@ -107,5 +107,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the test source sets 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.wrapper.Wrapper" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.tasks.wrapper.Wrapper" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  &lt;p&gt;Generates scripts (for *nix and windows) which allow you to build your project with Gradle, without having to 
  install Gradle. 
@@ -148,13 +148,13 @@
     <method name="writeProperties" returnType="void">
         <parameter type="java.io.File" name="propertiesFileDestination"/>
     </method>
-    <property name="archiveBase" type="org.gradle.api.tasks.wrapper.Wrapper.PathBase">
+    <property name="archiveBase" type="org.gradle.api.tasks.wrapper.Wrapper.PathBase" documented="true">
         <description> 
  The archive base specifies whether the unpacked wrapper distribution should be stored in the project or in the 
  gradle user home dir. 
 </description>
     </property>
-    <property name="archivePath" type="java.lang.String">
+    <property name="archivePath" type="java.lang.String" documented="true">
         <description> 
  Returns the path where the gradle distributions archive should be saved (i.e. the parent dir). The path is 
  relative to the archive base directory. 
@@ -165,13 +165,13 @@
  Returns the file to write the wrapper batch script to. 
 </description>
     </property>
-    <property name="distributionBase" type="org.gradle.api.tasks.wrapper.Wrapper.PathBase">
+    <property name="distributionBase" type="org.gradle.api.tasks.wrapper.Wrapper.PathBase" documented="true">
         <description> 
  The distribution base specifies whether the unpacked wrapper distribution should be stored in the project or in 
  the gradle user home dir. 
 </description>
     </property>
-    <property name="distributionPath" type="java.lang.String">
+    <property name="distributionPath" type="java.lang.String" documented="true">
         <description> 
  Returns the path where the gradle distributions needed by the wrapper are unzipped. The path is relative to the 
  distribution base directory 
@@ -179,7 +179,7 @@
  @see #setDistributionPath(String) 
 </description>
     </property>
-    <property name="distributionUrl" type="java.lang.String">
+    <property name="distributionUrl" type="java.lang.String" documented="true">
         <description> 
  The URL to download the gradle distribution from. 
  
@@ -194,46 +194,26 @@
 </description>
     </property>
     <property name="fileLookup" type="org.gradle.api.internal.file.FileLookup"/>
-    <property name="gradleVersion" type="java.lang.String">
+    <property name="gradleVersion" type="java.lang.String" documented="true">
         <description> 
  Returns the gradle version for the wrapper. 
  
  @see #setGradleVersion(String) 
 </description>
     </property>
-    <property name="jarFile" type="java.io.File">
+    <property name="jarFile" type="java.io.File" documented="true">
         <description> 
  Returns the file to write the wrapper jar file to. 
 </description>
     </property>
-    <property name="propertiesFile" type="java.io.File">
+    <property name="propertiesFile" type="java.io.File" documented="true">
         <description> 
  Returns the file to write the wrapper properties to. 
 </description>
     </property>
-    <property name="scriptFile" type="java.io.File">
+    <property name="scriptFile" type="java.io.File" documented="true">
         <description> 
  Returns the file to write the wrapper script to. 
 </description>
     </property>
-    <documentation>
-        <property name="scriptFile"/>
-        <property name="${project.projectDir}/gradlew"/>
-        <property name="jarFile"/>
-        <property name="${project.projectDir}/gradle/wrapper/gradle-wrapper.jar"/>
-        <property name="propertiesFile"/>
-        <property name="jarFile, replacing .jar with .properties"/>
-        <property name="distributionPath"/>
-        <property name="'wrapper/dists'"/>
-        <property name="distributionBase"/>
-        <property name="PathBase.GRADLE_USER_HOME"/>
-        <property name="archivePath"/>
-        <property name="'wrapper/dists'"/>
-        <property name="archiveBase"/>
-        <property name="PathBase.GRADLE_USER_HOME"/>
-        <property name="distributionUrl"/>
-        <property name="&quot;http\://services.gradle.org/distributions/gradle-${gradleVersion}-bin.zip&quot;&#xA;                    (or&#xA;                    &quot;http\://services.gradle.org/distributions-snapshots/gradle-${gradleVersion}-bin.zip&quot;&#xA;                    for snapshot versions).&#xA;                "/>
-        <property name="gradleVersion"/>
-        <property name="gradle.gradleVersion"/>
-    </documentation>
 </type>

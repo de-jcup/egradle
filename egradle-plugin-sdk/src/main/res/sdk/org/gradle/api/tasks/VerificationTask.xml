@@ -25,5 +25,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;false, when the build should break on failure, true when the failures should be ignored. 
 </description>
     </property>
-    <documentation/>
 </type>

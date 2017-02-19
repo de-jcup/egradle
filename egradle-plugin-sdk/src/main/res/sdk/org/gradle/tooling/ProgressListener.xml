@@ -13,5 +13,4 @@
 </description>
         <parameter type="org.gradle.tooling.ProgressEvent" name="event"/>
     </method>
-    <documentation/>
 </type>

@@ -19,5 +19,4 @@
 </description>
         <parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/>
     </method>
-    <documentation/>
 </type>

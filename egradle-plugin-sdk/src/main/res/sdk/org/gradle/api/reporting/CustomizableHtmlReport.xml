@@ -19,14 +19,11 @@
         <parameter type="org.gradle.api.resources.TextResource" name="stylesheet"/>
     </method>
     <interface name="org.gradle.api.reporting.SingleFileReport"/>
-    <property name="stylesheet" type="org.gradle.api.resources.TextResource">
+    <property name="stylesheet" type="org.gradle.api.resources.TextResource" documented="true">
         <description> 
  The stylesheet to use to generate the HTML report. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the stylesheet to use to generate the HTML report 
 </description>
     </property>
-    <documentation>
-        <property name="stylesheet"/>
-    </documentation>
 </type>

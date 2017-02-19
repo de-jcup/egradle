@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.signatory.pgp.Dsl" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.signatory.pgp.Dsl" version="3.0">
     <description> 
  Configuration dsl for &lt;a href='type://PgpSignatoryProvider'&gt;PgpSignatoryProvider&lt;/a&gt;. 
 </description>
@@ -11,5 +11,4 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="args"/>
     </method>
-    <documentation/>
 </type>

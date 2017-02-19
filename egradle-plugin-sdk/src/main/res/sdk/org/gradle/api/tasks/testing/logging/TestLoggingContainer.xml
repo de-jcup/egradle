@@ -172,54 +172,46 @@
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <interface name="org.gradle.api.tasks.testing.logging.TestLogging"/>
-    <property name="debug" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="debug" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Returns logging options for debug level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for debug level 
 </description>
     </property>
-    <property name="error" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="error" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Returns logging options for error level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for error level 
 </description>
     </property>
-    <property name="info" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="info" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Gets logging options for info level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for info level 
 </description>
     </property>
-    <property name="lifecycle" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="lifecycle" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Returns logging options for lifecycle level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for lifecycle level 
 </description>
     </property>
-    <property name="quiet" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="quiet" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Returns logging options for quiet level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for quiet level 
 </description>
     </property>
-    <property name="warn" type="org.gradle.api.tasks.testing.logging.TestLogging">
+    <property name="warn" type="org.gradle.api.tasks.testing.logging.TestLogging" documented="true">
         <description> 
  Gets logging options for warn level. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;logging options for warn level 
 </description>
     </property>
-    <documentation>
-        <property name="debug"/>
-        <property name="info"/>
-        <property name="lifecycle"/>
-        <property name="warn"/>
-        <property name="quiet"/>
-        <property name="error"/>
-    </documentation>
 </type>

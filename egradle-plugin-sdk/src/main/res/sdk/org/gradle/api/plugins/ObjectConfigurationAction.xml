@@ -58,5 +58,4 @@
 </description>
         <parameter type="java.lang.Class" name="pluginClass"/>
     </method>
-    <documentation/>
 </type>

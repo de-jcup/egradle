@@ -71,5 +71,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this container doesn't contain any dependency specification. 
 </description>
     </property>
-    <documentation/>
 </type>

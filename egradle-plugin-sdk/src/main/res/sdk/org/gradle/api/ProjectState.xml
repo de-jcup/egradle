@@ -36,5 +36,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exception, or null if project evaluation did not fail. 
 </description>
     </property>
-    <documentation/>
 </type>

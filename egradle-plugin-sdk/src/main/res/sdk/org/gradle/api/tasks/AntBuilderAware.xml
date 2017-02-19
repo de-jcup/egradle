@@ -7,5 +7,4 @@
         <parameter type="java.lang.Object" name="node"/>
         <parameter type="java.lang.String" name="childNodeName"/>
     </method>
-    <documentation/>
 </type>

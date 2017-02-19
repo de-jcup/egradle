@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Jdt" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Jdt" version="3.0">
     <description> 
  Represents the Eclipse JDT settings. 
 </description>
@@ -33,5 +33,4 @@
  Sets the target compatibility for the compiler. 
 </description>
     </property>
-    <documentation/>
 </type>

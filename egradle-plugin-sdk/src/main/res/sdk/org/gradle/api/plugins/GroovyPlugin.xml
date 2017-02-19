@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.GroovyPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.GroovyPlugin" version="3.0">
     <description> 
  &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which extends the &lt;a href='type://JavaPlugin'&gt;JavaPlugin&lt;/a&gt; to provide support for compiling and documenting Groovy 
  source files.&lt;/p&gt; 
@@ -11,5 +11,4 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

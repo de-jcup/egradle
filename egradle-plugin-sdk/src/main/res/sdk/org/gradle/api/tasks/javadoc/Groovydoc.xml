@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.javadoc.Groovydoc" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+<type language="gradle" name="org.gradle.api.tasks.javadoc.Groovydoc" version="3.0" superType="org.gradle.api.tasks.SourceTask">
     <description> 
  &lt;p&gt;Generates HTML API documentation for Groovy source, and optionally, Java source. 
  
@@ -84,7 +84,7 @@
  Returns whether to create class and package usage pages. 
 </description>
     </method>
-    <method name="link" returnType="void">
+    <method name="link" returnType="void" documented="true">
         <description> 
  Add links to groovydoc/javadoc output at the given URL. 
  
@@ -189,111 +189,76 @@
         <parameter type="java.lang.String" name="windowTitle"/>
     </method>
     <property name="antGroovydoc" type="org.gradle.api.internal.tasks.AntGroovydoc"/>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath used to locate classes referenced by the documented sources. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath used to locate classes referenced by the documented sources 
 </description>
     </property>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to generate the documentation into. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory to generate the documentation into 
 </description>
     </property>
-    <property name="docTitle" type="java.lang.String">
+    <property name="docTitle" type="java.lang.String" documented="true">
         <description> 
  Returns the title for the package index(first) page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no document title. 
 </description>
     </property>
-    <property name="footer" type="java.lang.String">
+    <property name="footer" type="java.lang.String" documented="true">
         <description> 
  Returns the HTML footer for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no footer. 
 </description>
     </property>
-    <property name="groovyClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="groovyClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath containing the Groovy library to be used. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath containing the Groovy library to be used 
 </description>
     </property>
-    <property name="header" type="java.lang.String">
+    <property name="header" type="java.lang.String" documented="true">
         <description> 
  Returns the HTML header for each page. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no header. 
 </description>
     </property>
-    <property name="includePrivate" type="boolean">
+    <property name="includePrivate" type="boolean" documented="true">
         <description> 
  Returns whether to include all classes and members (i.e. including private ones). 
 </description>
     </property>
-    <property name="links" type="java.util.Set">
+    <property name="links" type="java.util.Set" documented="true">
         <description> 
  Returns the links to groovydoc/javadoc output at the given URL. 
 </description>
     </property>
-    <property name="noTimestamp" type="boolean">
+    <property name="noTimestamp" type="boolean" documented="true">
         <description> 
  Returns whether to include timestamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
 </description>
     </property>
-    <property name="noVersionStamp" type="boolean">
+    <property name="noVersionStamp" type="boolean" documented="true">
         <description> 
  Returns whether to include version stamp within hidden comment in generated HTML (Groovy &gt;= 2.4.6). 
 </description>
     </property>
-    <property name="overviewText" type="org.gradle.api.resources.TextResource">
+    <property name="overviewText" type="org.gradle.api.resources.TextResource" documented="true">
         <description> 
  Returns a HTML text to be used for overview documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no overview text. 
 </description>
     </property>
     <property name="pathToOverview" type="java.lang.String"/>
-    <property name="use" type="boolean">
+    <property name="use" type="boolean" documented="true">
         <description> 
  Returns whether to create class and package usage pages. 
 </description>
     </property>
-    <property name="windowTitle" type="java.lang.String">
+    <property name="windowTitle" type="java.lang.String" documented="true">
         <description> 
  Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title. 
 </description>
     </property>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="${project.docsDir}/groovydoc"/>
-        <property name="groovyClasspath"/>
-        <property name="project.configurations.groovy"/>
-        <property name="classpath"/>
-        <property name="sourceSets.main.output + sourceSets.main.compileClasspath"/>
-        <property name="use"/>
-        <property name="false"/>
-        <property name="windowTitle"/>
-        <property name="project.reporting.apiDocTitle"/>
-        <property name="docTitle"/>
-        <property name="project.reporting.apiDocTitle"/>
-        <property name="header"/>
-        <property name="null"/>
-        <property name="footer"/>
-        <property name="null"/>
-        <property name="overviewText"/>
-        <property name="null"/>
-        <property name="includePrivate"/>
-        <property name="false"/>
-        <property name="links"/>
-        <property name="[]"/>
-        <property name="includes"/>
-        <property name="[]"/>
-        <property name="excludes"/>
-        <property name="[]"/>
-        <property name="source"/>
-        <property name="sourceSets.main.groovy"/>
-        <property name="noTimestamp"/>
-        <property name="false"/>
-        <property name="noVersionStamp"/>
-        <property name="false"/>
-        <method name="link"/>
-    </documentation>
 </type>

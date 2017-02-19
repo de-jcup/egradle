@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.Path" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.Path" version="3.0">
     <description> 
  Represents a path in a format as used often in ipr and iml files. 
 </description>
@@ -38,5 +38,4 @@
  The url of the path. Must not be null. 
 </description>
     </property>
-    <documentation/>
 </type>

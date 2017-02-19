@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.AntBuilder" version="3.0">
+<type language="gradle" name="org.gradle.api.AntBuilder" version="3.0">
     <description> 
  &lt;p&gt;An &lt;a href='type://AntBuilder'&gt;AntBuilder&lt;/a&gt; allows you to use Ant from your build script.&lt;/p&gt; 
 </description>
@@ -105,5 +105,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The references. Never returns null. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -9,5 +9,4 @@
 </description>
         <parameter type="org.gradle.api.Action" name="arguments"/>
     </method>
-    <documentation/>
 </type>

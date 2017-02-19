@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.JavaExec" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.JavaExec" version="3.0">
     <description> 
  Executes a Java application in a child process. 
  &lt;p&gt; 
@@ -23,49 +23,49 @@
  gradle someJavaExecTask --debug-jvm 
  &lt;/pre&gt; 
 </description>
-    <method name="args" returnType="org.gradle.process.JavaExecSpec">
+    <method name="args" returnType="org.gradle.process.JavaExecSpec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
-    <method name="args" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="args" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
-    <method name="bootstrapClasspath" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="bootstrapClasspath" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="classpath"/>
     </method>
-    <method name="classpath" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="classpath" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
-    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="org.gradle.process.JavaForkOptions" name="options"/>
     </method>
-    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="org.gradle.process.ProcessForkOptions" name="target"/>
     </method>
-    <method name="environment" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="environment" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.util.Map" name="environmentVariables"/>
     </method>
-    <method name="environment" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="environment" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -73,7 +73,7 @@
         <parameter type="java.lang.Object" name="value"/>
     </method>
     <method name="exec" returnType="void"/>
-    <method name="executable" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="executable" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -180,13 +180,13 @@
  {@inheritDoc} 
 </description>
     </method>
-    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Iterable" name="arguments"/>
     </method>
-    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -306,7 +306,7 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
-    <method name="systemProperties" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="systemProperties" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -319,39 +319,39 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="value"/>
     </method>
-    <method name="workingDir" returnType="org.gradle.api.tasks.JavaExec">
+    <method name="workingDir" returnType="org.gradle.api.tasks.JavaExec" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <interface name="org.gradle.process.JavaExecSpec"/>
-    <property name="allJvmArgs" type="java.util.List">
+    <property name="allJvmArgs" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="args" type="java.util.List">
+    <property name="args" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="bootstrapClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="bootstrapClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="commandLine" type="java.util.List">
+    <property name="commandLine" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="debug" type="boolean">
+    <property name="debug" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -361,43 +361,43 @@
  {@inheritDoc} 
 </description>
     </property>
-    <property name="enableAssertions" type="boolean">
+    <property name="enableAssertions" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="environment" type="java.util.Map">
+    <property name="environment" type="java.util.Map" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="errorOutput" type="java.io.OutputStream">
+    <property name="errorOutput" type="java.io.OutputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
     <property name="execActionFactory" type="org.gradle.process.internal.ExecActionFactory"/>
-    <property name="executable" type="java.lang.String">
+    <property name="executable" type="java.lang.String" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="ignoreExitValue" type="boolean">
+    <property name="ignoreExitValue" type="boolean" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="jvmArgs" type="java.util.List">
+    <property name="jvmArgs" type="java.util.List" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="main" type="java.lang.String">
+    <property name="main" type="java.lang.String" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="maxHeapSize" type="java.lang.String">
+    <property name="maxHeapSize" type="java.lang.String" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
@@ -407,69 +407,24 @@
  {@inheritDoc} 
 </description>
     </property>
-    <property name="standardInput" type="java.io.InputStream">
+    <property name="standardInput" type="java.io.InputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="standardOutput" type="java.io.OutputStream">
+    <property name="standardOutput" type="java.io.OutputStream" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="systemProperties" type="java.util.Map">
+    <property name="systemProperties" type="java.util.Map" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <property name="workingDir" type="java.io.File">
+    <property name="workingDir" type="java.io.File" documented="true">
         <description> 
  {@inheritDoc} 
 </description>
     </property>
-    <documentation>
-        <property name="allJvmArgs"/>
-        <property name="jvmArgs"/>
-        <property name="[]"/>
-        <property name="systemProperties"/>
-        <property name="[:]"/>
-        <property name="bootstrapClasspath"/>
-        <property name="[]"/>
-        <property name="maxHeapSize"/>
-        <property name="null"/>
-        <property name="enableAssertions"/>
-        <property name="false"/>
-        <property name="debug"/>
-        <property name="false"/>
-        <property name="main"/>
-        <property name="null"/>
-        <property name="args"/>
-        <property name="[]"/>
-        <property name="classpath"/>
-        <property name="null"/>
-        <property name="executable"/>
-        <property name="java executable for current JVM"/>
-        <property name="workingDir"/>
-        <property name="project.projectDir"/>
-        <property name="environment"/>
-        <property name="Current process' environment"/>
-        <property name="standardInput"/>
-        <property name="An empty InputStream"/>
-        <property name="standardOutput"/>
-        <property name="System.out"/>
-        <property name="errorOutput"/>
-        <property name="System.err"/>
-        <property name="ignoreExitValue"/>
-        <property name="false"/>
-        <property name="commandLine"/>
-        <method name="jvmArgs"/>
-        <method name="systemProperties"/>
-        <method name="bootstrapClasspath"/>
-        <method name="args"/>
-        <method name="classpath"/>
-        <method name="copyTo"/>
-        <method name="executable"/>
-        <method name="workingDir"/>
-        <method name="environment"/>
-    </documentation>
 </type>

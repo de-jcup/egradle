@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.specs.Specs" version="3.0">
+<type language="gradle" name="org.gradle.api.specs.Specs" version="3.0">
     <description> 
  Provides a number of &lt;a href='type://org.gradle.api.specs.Spec'&gt;org.gradle.api.specs.Spec&lt;/a&gt; implementations. 
 </description>
@@ -48,5 +48,4 @@
         <parameter type="org.gradle.api.specs.Spec" name="specs"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.scala.IncrementalCompileOptions" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.scala.IncrementalCompileOptions" version="3.0">
     <description> 
  Options for incremental compilation of Scala code. Only used for compilation with Zinc. 
 </description>
@@ -49,5 +49,4 @@
  is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks 
 </description>
     </property>
-    <documentation/>
 </type>

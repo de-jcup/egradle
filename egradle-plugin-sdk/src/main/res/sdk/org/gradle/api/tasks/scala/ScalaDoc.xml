@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.scala.ScalaDoc" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+<type language="gradle" name="org.gradle.api.tasks.scala.ScalaDoc" version="3.0" superType="org.gradle.api.tasks.SourceTask">
     <description> 
  Generates HTML API documentation for Scala source files. 
 </description>
@@ -48,48 +48,31 @@
         <parameter type="java.lang.String" name="title"/>
     </method>
     <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  &lt;p&gt;Returns the classpath to use to locate classes referenced by the documented source.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
 </description>
     </property>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to generate the API documentation into. 
 </description>
     </property>
-    <property name="scalaClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="scalaClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath to use to load the ScalaDoc tool. 
 </description>
     </property>
-    <property name="scalaDocOptions" type="org.gradle.api.tasks.scala.ScalaDocOptions">
+    <property name="scalaDocOptions" type="org.gradle.api.tasks.scala.ScalaDocOptions" documented="true">
         <description> 
  Returns the ScalaDoc generation options. 
 </description>
     </property>
-    <property name="title" type="java.lang.String">
+    <property name="title" type="java.lang.String" documented="true">
         <description> 
  Returns the documentation title. 
 </description>
     </property>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="${project.docsDir}/scaladoc"/>
-        <property name="classpath"/>
-        <property name="project.sourceSets.main.output + project.sourceSets.main.compileClasspath"/>
-        <property name="scalaClasspath"/>
-        <property name="scala-compiler dependency matching the scala-library version found on classpath"/>
-        <property name="scalaDocOptions"/>
-        <property name="title"/>
-        <property name="project.reporting.apiDocTitle"/>
-        <property name="includes"/>
-        <property name="[]"/>
-        <property name="excludes"/>
-        <property name="[]"/>
-        <property name="source"/>
-        <property name="project.sourceSets.main.scala"/>
-    </documentation>
 </type>

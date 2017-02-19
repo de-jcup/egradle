@@ -3,14 +3,14 @@
     <description> 
  A tool that permits configuration of the C preprocessor. 
 </description>
-    <method name="define" returnType="void">
+    <method name="define" returnType="void" documented="true">
         <description> 
  Defines a named preprocessor macros to use when compiling this binary. 
  The macro will be supplied to the compiler as '-D name'. 
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="define" returnType="void">
+    <method name="define" returnType="void" documented="true">
         <description> 
  Defines a named preprocessor macro with a value, which will be used when compiling this binary. 
  The macro will be supplied to the compiler as '-D name=definition'. 
@@ -24,13 +24,9 @@
 </description>
     </method>
     <interface name="org.gradle.nativeplatform.Tool"/>
-    <property name="macros" type="java.util.Map">
+    <property name="macros" type="java.util.Map" documented="true">
         <description> 
  The set of preprocessor macros to define when compiling this binary. 
 </description>
     </property>
-    <documentation>
-        <property name="macros"/>
-        <method name="define"/>
-    </documentation>
 </type>

@@ -16,13 +16,10 @@
 </description>
         <parameter type="boolean" name="mode"/>
     </method>
-    <property name="dynamicMode" type="boolean">
+    <property name="dynamicMode" type="boolean" documented="true">
         <description> 
  Returns true if dynamic resolve mode should be used for Ivy modules. When enabled, the &lt;a href='type://revConstraint'&gt;revConstraint&lt;/a&gt; attribute for each dependency declaration 
  is used in preference to the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute. When disabled (the default), the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute is always used. 
 </description>
     </property>
-    <documentation>
-        <property name="dynamicMode"/>
-    </documentation>
 </type>

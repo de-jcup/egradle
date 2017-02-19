@@ -37,7 +37,7 @@
  
  &lt;/ul&gt; 
 </description>
-    <method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor">
+    <method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor" documented="true">
         <description> 
  &lt;p&gt;Returns the project with the given project directory.&lt;/p&gt; 
  
@@ -46,7 +46,7 @@
 </description>
         <parameter type="java.io.File" name="projectDir"/>
     </method>
-    <method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor">
+    <method name="findProject" returnType="org.gradle.api.initialization.ProjectDescriptor" documented="true">
         <description> 
  &lt;p&gt;Returns the project with the given path.&lt;/p&gt; 
  
@@ -98,7 +98,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parameters. Never returns null. 
 </description>
     </method>
-    <method name="include" returnType="void" delegationTarget="a">
+    <method name="include" returnType="void" delegationTarget="a" documented="true">
         <description> 
  &lt;p&gt;Adds the given projects to the build. Each path in the supplied list is treated as the path of a project to 
  add to the build. Note that these path are not file paths, but instead specify the location of the new project in 
@@ -114,7 +114,7 @@
 </description>
         <parameter type="java.lang.String" name="projectPaths"/>
     </method>
-    <method name="includeFlat" returnType="void" delegationTarget="a">
+    <method name="includeFlat" returnType="void" delegationTarget="a" documented="true">
         <description> 
  &lt;p&gt;Adds the given projects to the build. Each name in the supplied list is treated as the name of a project to 
  add to the build.&lt;/p&gt; 
@@ -129,7 +129,7 @@
 </description>
         <parameter type="java.lang.String" name="projectNames"/>
     </method>
-    <method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor">
+    <method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor" documented="true">
         <description> 
  &lt;p&gt;Returns the project with the given project directory.&lt;/p&gt; 
  
@@ -139,7 +139,7 @@
 </description>
         <parameter type="java.io.File" name="projectDir"/>
     </method>
-    <method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor">
+    <method name="project" returnType="org.gradle.api.initialization.ProjectDescriptor" documented="true">
         <description> 
  &lt;p&gt;Returns the project with the given path.&lt;/p&gt; 
  
@@ -150,35 +150,35 @@
         <parameter type="java.lang.String" name="path"/>
     </method>
     <interface name="org.gradle.api.plugins.PluginAware"/>
-    <property name="gradle" type="org.gradle.api.invocation.Gradle">
+    <property name="gradle" type="org.gradle.api.invocation.Gradle" documented="true">
         <description> 
  Returns the &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance for the current build. 
   
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle instance. Never returns null. 
 </description>
     </property>
-    <property name="rootDir" type="java.io.File">
+    <property name="rootDir" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;Returns the root directory of the build. The root directory is the project directory of the root project.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root directory. Never returns null. 
 </description>
     </property>
-    <property name="rootProject" type="org.gradle.api.initialization.ProjectDescriptor">
+    <property name="rootProject" type="org.gradle.api.initialization.ProjectDescriptor" documented="true">
         <description> 
  &lt;p&gt;Returns the root project of the build.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
 </description>
     </property>
-    <property name="settings" type="org.gradle.api.initialization.Settings">
+    <property name="settings" type="org.gradle.api.initialization.Settings" documented="true">
         <description> 
  &lt;p&gt;Returns this settings object.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This settings object. Never returns null. 
 </description>
     </property>
-    <property name="settingsDir" type="java.io.File">
+    <property name="settingsDir" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;Returns the settings directory of the build. The settings directory is the directory containing the settings 
  file.&lt;/p&gt; 
@@ -186,23 +186,11 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings directory. Never returns null. 
 </description>
     </property>
-    <property name="startParameter" type="org.gradle.StartParameter">
+    <property name="startParameter" type="org.gradle.StartParameter" documented="true">
         <description> 
  &lt;p&gt;Returns the set of parameters used to invoke this instance of Gradle.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parameters. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="gradle"/>
-        <property name="rootDir"/>
-        <property name="rootProject"/>
-        <property name="settings"/>
-        <property name="settingsDir"/>
-        <property name="startParameter"/>
-        <method name="include"/>
-        <method name="includeFlat"/>
-        <method name="findProject"/>
-        <method name="project"/>
-    </documentation>
 </type>

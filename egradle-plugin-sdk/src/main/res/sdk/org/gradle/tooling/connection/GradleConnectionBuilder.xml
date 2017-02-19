@@ -47,5 +47,4 @@
 </description>
         <parameter type="java.io.File" name="gradleUserHomeDir"/>
     </method>
-    <documentation/>
 </type>

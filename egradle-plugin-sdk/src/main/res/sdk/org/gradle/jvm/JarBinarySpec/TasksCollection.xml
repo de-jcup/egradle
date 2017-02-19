@@ -14,5 +14,4 @@
  The jar task used to create an archive for this binary. 
 </description>
     </property>
-    <documentation/>
 </type>

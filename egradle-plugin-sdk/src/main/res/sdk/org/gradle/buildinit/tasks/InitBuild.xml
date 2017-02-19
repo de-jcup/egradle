@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.buildinit.tasks.InitBuild" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.buildinit.tasks.InitBuild" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generates a Gradle project structure. 
 </description>
@@ -36,24 +36,18 @@
     <property name="availableBuildTypes" type="java.util.List"/>
     <property name="availableTestFrameworks" type="java.util.List"/>
     <property name="projectLayoutRegistry" type="org.gradle.buildinit.plugins.internal.ProjectLayoutSetupRegistry"/>
-    <property name="testFramework" type="java.lang.String">
+    <property name="testFramework" type="java.lang.String" documented="true">
         <description> 
  Alternative test framework to be used in the generated project. 
  
  This property can be set via command-line option '--test-framework' 
 </description>
     </property>
-    <property name="type" type="java.lang.String">
+    <property name="type" type="java.lang.String" documented="true">
         <description> 
  The desired type of build to create, defaults to 'pom' if 'pom.xml' is found in project root if no pom.xml is found, it defaults to 'basic'. 
  
  This property can be set via command-line option '--type'. 
 </description>
     </property>
-    <documentation>
-        <property name="type"/>
-        <property name="empty (or pom if a pom.xml file exists in the project directory)"/>
-        <property name="testFramework"/>
-        <property name="empty (default test framework depends on the requested type)"/>
-    </documentation>
 </type>

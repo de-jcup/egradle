@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.reporting.plugins.BuildDashboardPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.reporting.plugins.BuildDashboardPlugin" version="3.0">
     <description> 
  Adds a task, "buildDashboard", that aggregates the output of all tasks that produce reports. 
 </description>
@@ -11,5 +11,4 @@
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

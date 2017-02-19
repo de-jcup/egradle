@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.ScanTargetPattern" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.jetty.ScanTargetPattern" version="3.0">
     <description> 
  Patterns for scanning for file changes. 
  
@@ -20,5 +20,4 @@
     <property name="directory" type="java.io.File"/>
     <property name="excludes" type="java.util.List"/>
     <property name="includes" type="java.util.List"/>
-    <documentation/>
 </type>

@@ -5,7 +5,7 @@
  
  &lt;p&gt;You can obtain a &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance by calling &lt;a href='type://Project#getGradle()'&gt;Project#getGradle()&lt;/a&gt;.&lt;/p&gt; 
 </description>
-    <method name="addBuildListener" returnType="void" delegationTarget="BuildListener">
+    <method name="addBuildListener" returnType="void" delegationTarget="BuildListener" documented="true">
         <description> 
  Adds a &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; to this Build instance. 
  
@@ -15,7 +15,7 @@
 </description>
         <parameter type="org.gradle.BuildListener" name="buildListener"/>
     </method>
-    <method name="addListener" returnType="void" delegationTarget="org.gradle.BuildListener">
+    <method name="addListener" returnType="void" delegationTarget="org.gradle.BuildListener" documented="true">
         <description> 
  Adds the given listener to this build. The listener may implement any of the given listener interfaces: 
  
@@ -35,7 +35,7 @@
 </description>
         <parameter type="java.lang.Object" name="listener"/>
     </method>
-    <method name="addProjectEvaluationListener" returnType="org.gradle.api.ProjectEvaluationListener">
+    <method name="addProjectEvaluationListener" returnType="org.gradle.api.ProjectEvaluationListener" documented="true">
         <description> 
  Adds a listener to this build, to receive notifications as projects are evaluated. 
  
@@ -44,7 +44,7 @@
 </description>
         <parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/>
     </method>
-    <method name="afterProject" returnType="void">
+    <method name="afterProject" returnType="void" documented="true">
         <description> 
  Adds a closure to be called immediately after a project is evaluated. 
  
@@ -55,7 +55,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="allprojects" returnType="void">
+    <method name="allprojects" returnType="void" documented="true">
         <description> 
  Adds an action to execute against all projects of this build. 
  
@@ -66,7 +66,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="beforeProject" returnType="void">
+    <method name="beforeProject" returnType="void" documented="true">
         <description> 
  Adds a closure to be called immediately before a project is evaluated. The project is passed to the closure as a 
  parameter. 
@@ -75,7 +75,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="buildFinished" returnType="void" delegationTarget="org.gradle.BuildResult">
+    <method name="buildFinished" returnType="void" delegationTarget="org.gradle.BuildResult" documented="true">
         <description> 
  Adds a closure to be called when the build is completed. 
  
@@ -168,7 +168,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task graph. Never returns null. 
 </description>
     </method>
-    <method name="projectsEvaluated" returnType="void" delegationTarget="Gradle">
+    <method name="projectsEvaluated" returnType="void" delegationTarget="Gradle" documented="true">
         <description> 
  Adds a closure to be called when all projects for the build have been evaluated. 
  
@@ -179,7 +179,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="projectsLoaded" returnType="void" delegationTarget="Gradle">
+    <method name="projectsLoaded" returnType="void" delegationTarget="Gradle" documented="true">
         <description> 
  Adds a closure to be called when the projects for the build have been created from the settings. 
  
@@ -202,7 +202,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="removeListener" returnType="void">
+    <method name="removeListener" returnType="void" documented="true">
         <description> 
  Removes the given listener from this build. 
  
@@ -210,7 +210,7 @@
 </description>
         <parameter type="java.lang.Object" name="listener"/>
     </method>
-    <method name="removeProjectEvaluationListener" returnType="void">
+    <method name="removeProjectEvaluationListener" returnType="void" documented="true">
         <description> 
  Removes the given listener from this build. 
  
@@ -218,7 +218,7 @@
 </description>
         <parameter type="org.gradle.api.ProjectEvaluationListener" name="listener"/>
     </method>
-    <method name="rootProject" returnType="void">
+    <method name="rootProject" returnType="void" documented="true">
         <description> 
  Adds an action to execute against the root project of this build. 
  
@@ -229,7 +229,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="settingsEvaluated" returnType="void" delegationTarget="org.gradle.api.initialization.Settings">
+    <method name="settingsEvaluated" returnType="void" delegationTarget="org.gradle.api.initialization.Settings" documented="true">
         <description> 
  Adds a closure to be called when the build settings have been loaded and evaluated. 
  
@@ -240,7 +240,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="useLogger" returnType="void">
+    <method name="useLogger" returnType="void" documented="true">
         <description> 
  Uses the given object as a logger. 
  
@@ -257,7 +257,7 @@
         <parameter type="java.lang.Object" name="logger"/>
     </method>
     <interface name="org.gradle.api.plugins.PluginAware"/>
-    <property name="gradle" type="org.gradle.api.invocation.Gradle">
+    <property name="gradle" type="org.gradle.api.invocation.Gradle" documented="true">
         <description> 
  Returns this &lt;a href='type://Gradle'&gt;Gradle&lt;/a&gt; instance. 
  
@@ -269,7 +269,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this. Never returns null. 
 </description>
     </property>
-    <property name="gradleHomeDir" type="java.io.File">
+    <property name="gradleHomeDir" type="java.io.File" documented="true">
         <description> 
  Returns the Gradle home directory, if any. 
  
@@ -284,7 +284,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. May return null. 
 </description>
     </property>
-    <property name="gradleUserHomeDir" type="java.io.File">
+    <property name="gradleUserHomeDir" type="java.io.File" documented="true">
         <description> 
  Returns the Gradle user home directory. 
  
@@ -293,21 +293,21 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The user home directory. Never returns null. 
 </description>
     </property>
-    <property name="gradleVersion" type="java.lang.String">
+    <property name="gradleVersion" type="java.lang.String" documented="true">
         <description> 
  Returns the current Gradle version. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle version. Never returns null. 
 </description>
     </property>
-    <property name="parent" type="org.gradle.api.invocation.Gradle">
+    <property name="parent" type="org.gradle.api.invocation.Gradle" documented="true">
         <description> 
  Returns the parent build of this build, if any. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent build. May return null. 
 </description>
     </property>
-    <property name="rootProject" type="org.gradle.api.Project">
+    <property name="rootProject" type="org.gradle.api.Project" documented="true">
         <description> 
  Returns the root project of this build. 
  
@@ -315,14 +315,14 @@
  @throws IllegalStateException When called before the root project is available. 
 </description>
     </property>
-    <property name="startParameter" type="org.gradle.StartParameter">
+    <property name="startParameter" type="org.gradle.StartParameter" documented="true">
         <description> 
  Returns the &lt;a href='type://StartParameter'&gt;StartParameter&lt;/a&gt; used to start this build. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The start parameter. Never returns null. 
 </description>
     </property>
-    <property name="taskGraph" type="org.gradle.api.execution.TaskExecutionGraph">
+    <property name="taskGraph" type="org.gradle.api.execution.TaskExecutionGraph" documented="true">
         <description> 
  Returns the &lt;a href='type://TaskExecutionGraph'&gt;TaskExecutionGraph&lt;/a&gt; for this build. 
  
@@ -339,28 +339,4 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute. 
 </description>
     </property>
-    <documentation>
-        <property name="gradleVersion"/>
-        <property name="gradleUserHomeDir"/>
-        <property name="gradleHomeDir"/>
-        <property name="gradle"/>
-        <property name="parent"/>
-        <property name="rootProject"/>
-        <property name="taskGraph"/>
-        <property name="startParameter"/>
-        <method name="addProjectEvaluationListener"/>
-        <method name="removeProjectEvaluationListener"/>
-        <method name="beforeProject"/>
-        <method name="afterProject"/>
-        <method name="settingsEvaluated"/>
-        <method name="projectsEvaluated"/>
-        <method name="projectsLoaded"/>
-        <method name="buildFinished"/>
-        <method name="addBuildListener"/>
-        <method name="addListener"/>
-        <method name="removeListener"/>
-        <method name="useLogger"/>
-        <method name="rootProject"/>
-        <method name="allprojects"/>
-    </documentation>
 </type>

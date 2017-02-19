@@ -14,5 +14,4 @@
  &lt;/ul&gt; 
 </description>
     <interface name="org.gradle.platform.base.ToolChain"/>
-    <documentation/>
 </type>

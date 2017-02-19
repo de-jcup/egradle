@@ -3,7 +3,7 @@
     <description> 
  A set of public assets added to a binary. 
 </description>
-    <method name="addAssetDir" returnType="void">
+    <method name="addAssetDir" returnType="void" documented="true">
         <description> 
  Add an asset directory to this binary. 
 </description>
@@ -15,13 +15,9 @@
 </description>
     </method>
     <interface name="org.gradle.api.BuildableComponentSpec"/>
-    <property name="assetDirs" type="java.util.Set">
+    <property name="assetDirs" type="java.util.Set" documented="true">
         <description> 
  A set of asset directories for this binary. 
 </description>
     </property>
-    <documentation>
-        <property name="assetDirs"/>
-        <method name="addAssetDir"/>
-    </documentation>
 </type>

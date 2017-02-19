@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generates an Ivy XML Module Descriptor file. 
  
@@ -37,14 +37,14 @@
     <method name="toIvyModuleDescriptorInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyModuleDescriptorSpecInternal">
         <parameter type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" name="ivyModuleDescriptorSpec"/>
     </method>
-    <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec">
+    <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" documented="true">
         <description> 
  The module descriptor metadata. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor. 
 </description>
     </property>
-    <property name="destination" type="java.io.File">
+    <property name="destination" type="java.io.File" documented="true">
         <description> 
  The file the descriptor will be written to. 
  
@@ -52,8 +52,4 @@
 </description>
     </property>
     <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
-    <documentation>
-        <property name="destination"/>
-        <property name="descriptor"/>
-    </documentation>
 </type>

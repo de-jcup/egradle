@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
     <description> 
  Generates an Eclipse &lt;code&gt;.classpath&lt;/code&gt; file. If you want to fine tune the eclipse configuration 
  &lt;p&gt; 
@@ -17,15 +17,9 @@
     <method name="setClasspath" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" name="classpath"/>
     </method>
-    <property name="classpath" type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath">
+    <property name="classpath" type="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" documented="true">
         <description> 
  The Eclipse Classpath model containing the information required to generate the classpath file. 
 </description>
     </property>
-    <documentation>
-        <property name="classpath"/>
-        <property name="project.eclipse.classpath"/>
-        <property name="outputFile"/>
-        <property name="${project.projectDir}/.classpath"/>
-    </documentation>
 </type>

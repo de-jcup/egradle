@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractDependencyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractDependencyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
     <description> 
  Displays the dependency tree for a configuration. 
 </description>
@@ -65,8 +65,4 @@
     </property>
     <property name="reportConfigurations" type="java.util.Set"/>
     <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
-    <documentation>
-        <property name="outputFile"/>
-        <property name="projects"/>
-    </documentation>
 </type>

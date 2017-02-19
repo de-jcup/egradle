@@ -22,27 +22,22 @@
 </description>
     </method>
     <interface name="org.gradle.platform.base.Platform"/>
-    <property name="javaPlatform" type="org.gradle.jvm.platform.JavaPlatform">
+    <property name="javaPlatform" type="org.gradle.jvm.platform.JavaPlatform" documented="true">
         <description> 
  Version of Java Runtime to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Java runtime 
 </description>
     </property>
-    <property name="playVersion" type="java.lang.String">
+    <property name="playVersion" type="java.lang.String" documented="true">
         <description> 
  Version of Play Framework to use 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Play Framework 
 </description>
     </property>
-    <property name="scalaPlatform" type="org.gradle.language.scala.ScalaPlatform">
+    <property name="scalaPlatform" type="org.gradle.language.scala.ScalaPlatform" documented="true">
         <description> 
  Version of Scala Runtime to use. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;version of the Scala runtime 
 </description>
     </property>
-    <documentation>
-        <property name="playVersion"/>
-        <property name="scalaPlatform"/>
-        <property name="javaPlatform"/>
-    </documentation>
 </type>

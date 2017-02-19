@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.CodeQualityExtension" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.quality.CodeQualityExtension" version="3.0">
     <description> 
  Base Code Quality Extension. 
 </description>
@@ -37,34 +37,26 @@
     <method name="setToolVersion" returnType="void">
         <parameter type="java.lang.String" name="toolVersion"/>
     </method>
-    <property name="ignoreFailures" type="boolean">
+    <property name="ignoreFailures" type="boolean" documented="true">
         <description> 
  Whether or not to allow the build to continue if there are warnings. 
  
  Example: ignoreFailures = true 
 </description>
     </property>
-    <property name="reportsDir" type="java.io.File">
+    <property name="reportsDir" type="java.io.File" documented="true">
         <description> 
  The directory where reports will be generated. 
 </description>
     </property>
-    <property name="sourceSets" type="java.util.Collection">
+    <property name="sourceSets" type="java.util.Collection" documented="true">
         <description> 
  The source sets to be analyzed as part of the &lt;tt&gt;check&lt;/tt&gt; and &lt;tt&gt;build&lt;/tt&gt; tasks. 
 </description>
     </property>
-    <property name="toolVersion" type="java.lang.String">
+    <property name="toolVersion" type="java.lang.String" documented="true">
         <description> 
  The version of the code quality tool to be used. 
 </description>
     </property>
-    <documentation>
-        <property name="toolVersion"/>
-        <property name="reportsDir"/>
-        <property name="sourceSets"/>
-        <property name="project.sourceSets"/>
-        <property name="ignoreFailures"/>
-        <property name="false"/>
-    </documentation>
 </type>

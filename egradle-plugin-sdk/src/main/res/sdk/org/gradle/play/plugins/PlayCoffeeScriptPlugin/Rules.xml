@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayCoffeeScriptPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.play.plugins.PlayCoffeeScriptPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="configureCoffeeScriptCompileDefaults" returnType="void">
         <parameter type="org.gradle.play.tasks.PlayCoffeeScriptCompile" name="coffeeScriptCompile"/>
     </method>
@@ -22,5 +22,4 @@
     <method name="registerLanguageTransform" returnType="void">
         <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languages"/>
     </method>
-    <documentation/>
 </type>

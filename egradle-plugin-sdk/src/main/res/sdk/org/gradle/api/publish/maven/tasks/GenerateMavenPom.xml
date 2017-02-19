@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.maven.tasks.GenerateMavenPom" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.publish.maven.tasks.GenerateMavenPom" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Generates a Maven module descriptor (POM) file. 
  
@@ -35,7 +35,7 @@
     <method name="setPom" returnType="void">
         <parameter type="org.gradle.api.publish.maven.MavenPom" name="pom"/>
     </method>
-    <property name="destination" type="java.io.File">
+    <property name="destination" type="java.io.File" documented="true">
         <description> 
  The file the POM will be written to. 
  
@@ -43,7 +43,7 @@
 </description>
     </property>
     <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
-    <property name="pom" type="org.gradle.api.publish.maven.MavenPom">
+    <property name="pom" type="org.gradle.api.publish.maven.MavenPom" documented="true">
         <description> 
  The Maven POM. 
  
@@ -51,8 +51,4 @@
 </description>
     </property>
     <property name="versionRangeMapper" type="org.gradle.api.publication.maven.internal.VersionRangeMapper"/>
-    <documentation>
-        <property name="destination"/>
-        <property name="pom"/>
-    </documentation>
 </type>

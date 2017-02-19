@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testkit.runner.GradleRunner" version="3.0">
+<type language="gradle" name="org.gradle.testkit.runner.GradleRunner" version="3.0">
     <description> 
  Executes a Gradle build, allowing inspection of the outcome. 
  &lt;p&gt; 
@@ -406,5 +406,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory to execute the build in 
 </description>
     </property>
-    <documentation/>
 </type>

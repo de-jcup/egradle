@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations.FilterByProjectComponentTypeFileCollection" version="3.0">
+<type language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations.FilterByProjectComponentTypeFileCollection" version="3.0">
     <method name="createDelegate" returnType="org.gradle.api.internal.file.FileCollectionInternal"/>
     <method name="getDisplayName" returnType="java.lang.String"/>
     <method name="visitDependencies" returnType="void">
         <parameter type="org.gradle.api.internal.tasks.TaskDependencyResolveContext" name="context"/>
     </method>
     <property name="displayName" type="java.lang.String"/>
-    <documentation/>
 </type>

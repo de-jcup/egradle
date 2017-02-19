@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0">
     <description> 
  The base class for all project report tasks. 
 </description>
@@ -49,7 +49,7 @@
         <parameter type="java.util.Set" name="projects"/>
     </method>
     <property name="clientMetaData" type="org.gradle.initialization.BuildClientMetaData"/>
-    <property name="outputFile" type="java.io.File">
+    <property name="outputFile" type="java.io.File" documented="true">
         <description> 
  Returns the file which the report will be written to. When set to &lt;a href='type://null'&gt;null&lt;/a&gt;, the report is written to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
  Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
@@ -57,7 +57,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. May be null. 
 </description>
     </property>
-    <property name="projects" type="java.util.Set">
+    <property name="projects" type="java.util.Set" documented="true">
         <description> 
  Returns the set of project to generate this report for. By default, the report is generated for the task's 
  containing project. 
@@ -68,8 +68,4 @@
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <documentation>
-        <property name="outputFile"/>
-        <property name="projects"/>
-    </documentation>
 </type>

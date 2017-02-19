@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.scala.ScalaPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.scala.ScalaPlugin" version="3.0">
     <description> 
  &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which sets up a Scala project.&lt;/p&gt; 
  
@@ -16,5 +16,4 @@
         <parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

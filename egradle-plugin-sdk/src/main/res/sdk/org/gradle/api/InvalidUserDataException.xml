@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.InvalidUserDataException" version="3.0" superType="org.gradle.api.GradleException">
+<type language="gradle" name="org.gradle.api.InvalidUserDataException" version="3.0" superType="org.gradle.api.GradleException">
     <description> 
  A &lt;code&gt;InvalidUserDataException&lt;/code&gt; is thrown, if a user is providing illegal data for the build. 
 </description>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.ProjectLibrary" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.ProjectLibrary" version="3.0">
     <description> 
  A project-level IDEA library. 
 </description>
@@ -92,5 +92,4 @@
  The type of the library. 
 </description>
     </property>
-    <documentation/>
 </type>

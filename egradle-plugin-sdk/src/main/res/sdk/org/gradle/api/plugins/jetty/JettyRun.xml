@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.JettyRun" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask">
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyRun" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask">
     <description> 
  &lt;p&gt;Deploys an exploded web application to an embedded Jetty web container. Does not require that the web application 
  be assembled into a war, saving time during the development cycle.&lt;/p&gt; 
@@ -82,7 +82,7 @@
     </method>
     <method name="validateConfiguration" returnType="void"/>
     <property name="classPathFiles" type="java.util.List"/>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath for the web application. 
 </description>
@@ -95,23 +95,15 @@
     <property name="jettyEnvXmlFile" type="java.io.File"/>
     <property name="scanTargetPatterns" type="org.gradle.api.plugins.jetty.ScanTargetPattern"/>
     <property name="scanTargets" type="java.io.File"/>
-    <property name="webAppSourceDirectory" type="java.io.File">
+    <property name="webAppSourceDirectory" type="java.io.File" documented="true">
         <description> 
  Returns the directory containing the web application source files. 
 </description>
     </property>
-    <property name="webXml" type="java.io.File">
+    <property name="webXml" type="java.io.File" documented="true">
         <description> 
  Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is used. 
 </description>
     </property>
     <property name="webXmlIfExists" type="java.io.File"/>
-    <documentation>
-        <property name="webXml"/>
-        <property name="project.war.webXml, if not null, or ${project.webAppDir}/WEB-INF/web.xml"/>
-        <property name="webAppSourceDirectory"/>
-        <property name="project.webAppDir"/>
-        <property name="classpath"/>
-        <property name="project.sourceSets.main.runtimeClasspath"/>
-    </documentation>
 </type>

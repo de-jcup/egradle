@@ -17,5 +17,4 @@
         <parameter type="java.lang.String" name="value"/>
     </method>
     <interface name="org.gradle.api.artifacts.ivy.IvyExtraInfo"/>
-    <documentation/>
 </type>

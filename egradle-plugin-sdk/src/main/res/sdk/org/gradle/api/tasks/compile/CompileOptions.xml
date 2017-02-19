@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.CompileOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
+<type language="gradle" name="org.gradle.api.tasks.compile.CompileOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
     <description> 
  Main options for Java compilation. 
 </description>
-    <method name="debug" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="DebugOptions">
+    <method name="debug" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="DebugOptions" documented="true">
         <description> 
  Convenience method to set &lt;a href='type://DebugOptions'&gt;DebugOptions&lt;/a&gt; with named parameter syntax. 
  Calling this method will set &lt;a href='type://debug'&gt;debug&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
         <parameter type="java.util.Map" name="debugArgs"/>
     </method>
-    <method name="depend" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="DependOptions">
+    <method name="depend" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="DependOptions" documented="true">
         <description> 
  Convenience method to set &lt;a href='type://DependOptions'&gt;DependOptions&lt;/a&gt; with named parameter syntax. 
  Calling this method will set &lt;a href='type://useDepend'&gt;useDepend&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
@@ -20,7 +20,7 @@
     <method name="excludeFromAntProperties" returnType="boolean">
         <parameter type="java.lang.String" name="fieldName"/>
     </method>
-    <method name="fork" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="ForkOptions">
+    <method name="fork" returnType="org.gradle.api.tasks.compile.CompileOptions" delegationTarget="ForkOptions" documented="true">
         <description> 
  Convenience method to set &lt;a href='type://ForkOptions'&gt;ForkOptions&lt;/a&gt; with named parameter syntax. 
  Calling this method will set &lt;a href='type://fork'&gt;fork&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
@@ -262,12 +262,12 @@
     </method>
     <property name="antPropertyName" type="java.lang.String"/>
     <property name="antPropertyValue" type="java.lang.Object"/>
-    <property name="bootClasspath" type="java.lang.String">
+    <property name="bootClasspath" type="java.lang.String" documented="true">
         <description> 
  Returns the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
 </description>
     </property>
-    <property name="compilerArgs" type="java.util.List">
+    <property name="compilerArgs" type="java.util.List" documented="true">
         <description> 
  Returns any additional arguments to be passed to the compiler. 
  Defaults to the empty list. 
@@ -280,66 +280,66 @@
  are ignored. 
 </description>
     </property>
-    <property name="debug" type="boolean">
+    <property name="debug" type="boolean" documented="true">
         <description> 
  Tells whether to include debugging information in the generated class files. Defaults 
  to &lt;a href='type://true'&gt;true&lt;/a&gt;. See &lt;a href='type://DebugOptions#getDebugLevel()'&gt;DebugOptions#getDebugLevel()&lt;/a&gt; for which debugging information will be generated. 
 </description>
     </property>
-    <property name="debugOptions" type="org.gradle.api.tasks.compile.DebugOptions">
+    <property name="debugOptions" type="org.gradle.api.tasks.compile.DebugOptions" documented="true">
         <description> 
  Returns options for generating debugging information. 
 </description>
     </property>
-    <property name="dependOptions" type="org.gradle.api.tasks.compile.DependOptions">
+    <property name="dependOptions" type="org.gradle.api.tasks.compile.DependOptions" documented="true">
         <description> 
  Returns options for using the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task. 
 </description>
     </property>
-    <property name="deprecation" type="boolean">
+    <property name="deprecation" type="boolean" documented="true">
         <description> 
  Tells whether to log details of usage of deprecated members or classes. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
-    <property name="encoding" type="java.lang.String">
+    <property name="encoding" type="java.lang.String" documented="true">
         <description> 
  Returns the character encoding to be used when reading source files. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which 
  case the platform default encoding will be used. 
 </description>
     </property>
-    <property name="extensionDirs" type="java.lang.String">
+    <property name="extensionDirs" type="java.lang.String" documented="true">
         <description> 
  Returns the extension dirs to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
 </description>
     </property>
-    <property name="failOnError" type="boolean">
+    <property name="failOnError" type="boolean" documented="true">
         <description> 
  Tells whether to fail the build when compilation fails. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
     </property>
-    <property name="fork" type="boolean">
+    <property name="fork" type="boolean" documented="true">
         <description> 
  Tells whether to run the compiler in its own process. Note that this does 
  not necessarily mean that a new process will be created for each compile task. 
  Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
-    <property name="forkOptions" type="org.gradle.api.tasks.compile.ForkOptions">
+    <property name="forkOptions" type="org.gradle.api.tasks.compile.ForkOptions" documented="true">
         <description> 
  Returns options for running the compiler in a child process. 
 </description>
     </property>
-    <property name="incremental" type="boolean">
+    <property name="incremental" type="boolean" documented="true">
         <description> 
  informs whether to use experimental incremental compilation feature. See &lt;a href='type://CompileOptions#setIncremental(boolean)'&gt;#setIncremental(boolean)&lt;/a&gt; 
 </description>
     </property>
-    <property name="listFiles" type="boolean">
+    <property name="listFiles" type="boolean" documented="true">
         <description> 
  Tells whether to log the files to be compiled. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
-    <property name="sourcepath" type="org.gradle.api.file.FileCollection">
+    <property name="sourcepath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The source path to use for the compilation. 
  &lt;p&gt; 
@@ -357,57 +357,21 @@
  @see #setSourcepath(FileCollection) 
 </description>
     </property>
-    <property name="useDepend" type="boolean">
+    <property name="useDepend" type="boolean" documented="true">
         <description> 
  Tells whether to use the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task. 
  Only takes effect if &lt;a href='type://useAnt'&gt;useAnt&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. Defaults to 
  &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
-    <property name="verbose" type="boolean">
+    <property name="verbose" type="boolean" documented="true">
         <description> 
  Tells whether to produce verbose output. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;. 
 </description>
     </property>
-    <property name="warnings" type="boolean">
+    <property name="warnings" type="boolean" documented="true">
         <description> 
  Tells whether to log warning messages. The default is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
     </property>
-    <documentation>
-        <property name="failOnError"/>
-        <property name="true"/>
-        <property name="verbose"/>
-        <property name="false"/>
-        <property name="listFiles"/>
-        <property name="false"/>
-        <property name="deprecation"/>
-        <property name="false"/>
-        <property name="warnings"/>
-        <property name="true"/>
-        <property name="encoding"/>
-        <property name="null"/>
-        <property name="debug"/>
-        <property name="true"/>
-        <property name="debugOptions"/>
-        <property name="fork"/>
-        <property name="false"/>
-        <property name="forkOptions"/>
-        <property name="useDepend"/>
-        <property name="false"/>
-        <property name="dependOptions"/>
-        <property name="bootClasspath"/>
-        <property name="null"/>
-        <property name="extensionDirs"/>
-        <property name="null"/>
-        <property name="compilerArgs"/>
-        <property name="[]"/>
-        <property name="sourcepath"/>
-        <property name="null"/>
-        <property name="incremental"/>
-        <property name="false"/>
-        <method name="debug"/>
-        <method name="fork"/>
-        <method name="depend"/>
-    </documentation>
 </type>

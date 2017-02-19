@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Optional" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.Optional" version="3.0">
     <description> 
  &lt;p&gt;Marks a task property as optional. This means that a value does not have to be specified for the property, but any 
  value specified must meet the validation constraints for the property.&lt;/p&gt; 
@@ -18,5 +18,4 @@
  
  &lt;li&gt;&lt;a href='type://org.gradle.api.tasks.OutputDirectory'&gt;org.gradle.api.tasks.OutputDirectory&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; 
 </description>
-    <documentation/>
 </type>

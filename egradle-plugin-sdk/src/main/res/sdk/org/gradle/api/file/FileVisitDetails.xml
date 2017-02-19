@@ -11,5 +11,4 @@
 </description>
     </method>
     <interface name="org.gradle.api.file.FileTreeElement"/>
-    <documentation/>
 </type>

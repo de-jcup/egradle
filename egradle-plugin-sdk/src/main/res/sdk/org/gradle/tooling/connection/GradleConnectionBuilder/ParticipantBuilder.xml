@@ -38,5 +38,4 @@
 </description>
         <parameter type="java.io.File" name="gradleHome"/>
     </method>
-    <documentation/>
 </type>

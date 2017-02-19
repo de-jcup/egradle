@@ -5,7 +5,7 @@
  &lt;p&gt; 
  Repositories of this type are created by the &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)&lt;/a&gt; group of methods. 
 </description>
-    <method name="artifactUrls" returnType="void" delegationTarget="File">
+    <method name="artifactUrls" returnType="void" delegationTarget="File" documented="true">
         <description> 
  Adds some additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
@@ -54,23 +54,18 @@
     </method>
     <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
     <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
-    <property name="artifactUrls" type="java.util.Set">
+    <property name="artifactUrls" type="java.util.Set" documented="true">
         <description> 
  Returns the additional URLs to use to find artifact files. Note that these URLs are not used to find POM files. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The additional URLs. Returns an empty list if there are no such URLs. 
 </description>
     </property>
-    <property name="url" type="java.net.URI">
+    <property name="url" type="java.net.URI" documented="true">
         <description> 
  The base URL of this repository. This URL is used to find both POMs and artifact files. You can add additional URLs to use to look for artifact files, such as jars, using &lt;a href='type://MavenArtifactRepository#setArtifactUrls(Iterable)'&gt;#setArtifactUrls(Iterable)&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL. 
 </description>
     </property>
-    <documentation>
-        <property name="url"/>
-        <property name="artifactUrls"/>
-        <method name="artifactUrls"/>
-    </documentation>
 </type>

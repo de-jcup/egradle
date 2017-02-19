@@ -60,7 +60,7 @@
  
  @since 1.3 
 </description>
-    <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact" documented="true">
         <description> 
  Creates a custom &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to be included in the publication. 
  
@@ -99,7 +99,7 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
-    <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" delegationTarget="IvyArtifact" documented="true">
         <description> 
  Creates an &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to be included in the publication, which is configured by the associated action. 
  
@@ -140,7 +140,7 @@
         <parameter type="java.lang.Object" name="source"/>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
-    <method name="configurations" returnType="void" delegationTarget="IvyConfiguration">
+    <method name="configurations" returnType="void" delegationTarget="IvyConfiguration" documented="true">
         <description> 
  Defines some &lt;a href='type://IvyConfiguration'&gt;IvyConfiguration&lt;/a&gt;s that should be included in the published ivy module descriptor file. 
  
@@ -163,7 +163,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
-    <method name="descriptor" returnType="void">
+    <method name="descriptor" returnType="void" documented="true">
         <description> 
  Configures the descriptor that will be published. 
  &lt;p&gt; 
@@ -173,7 +173,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configure"/>
     </method>
-    <method name="from" returnType="void">
+    <method name="from" returnType="void" documented="true">
         <description> 
  Provides the software component that should be published. 
  
@@ -285,7 +285,7 @@
         <parameter type="java.lang.String" name="revision"/>
     </method>
     <interface name="org.gradle.api.publish.Publication"/>
-    <property name="artifacts" type="org.gradle.api.publish.ivy.IvyArtifactSet">
+    <property name="artifacts" type="org.gradle.api.publish.ivy.IvyArtifactSet" documented="true">
         <description> 
  The complete set of artifacts for this publication. 
  
@@ -313,13 +313,13 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
 </description>
     </property>
-    <property name="configurations" type="org.gradle.api.publish.ivy.IvyConfigurationContainer">
+    <property name="configurations" type="org.gradle.api.publish.ivy.IvyConfigurationContainer" documented="true">
         <description> 
  Returns the complete set of configurations for this publication. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations 
 </description>
     </property>
-    <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec">
+    <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" documented="true">
         <description> 
  The module descriptor that will be published. 
  &lt;p&gt; 
@@ -327,31 +327,19 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor that will be published. 
 </description>
     </property>
-    <property name="module" type="java.lang.String">
+    <property name="module" type="java.lang.String" documented="true">
         <description> 
  Returns the module for this publication. 
 </description>
     </property>
-    <property name="organisation" type="java.lang.String">
+    <property name="organisation" type="java.lang.String" documented="true">
         <description> 
  Returns the organisation for this publication. 
 </description>
     </property>
-    <property name="revision" type="java.lang.String">
+    <property name="revision" type="java.lang.String" documented="true">
         <description> 
  Returns the revision for this publication. 
 </description>
     </property>
-    <documentation>
-        <property name="descriptor"/>
-        <property name="artifacts"/>
-        <property name="configurations"/>
-        <property name="organisation"/>
-        <property name="module"/>
-        <property name="revision"/>
-        <method name="from"/>
-        <method name="descriptor"/>
-        <method name="artifact"/>
-        <method name="configurations"/>
-    </documentation>
 </type>

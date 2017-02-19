@@ -271,5 +271,4 @@
  @see org.apache.maven.model.Model#getVersion() 
 </description>
     </property>
-    <documentation/>
 </type>

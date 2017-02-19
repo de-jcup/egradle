@@ -11,7 +11,7 @@
  true if an injected router will be generated. 
 </description>
     </method>
-    <method name="platform" returnType="void" delegationTarget="org.gradle.play.platform.PlayPlatform">
+    <method name="platform" returnType="void" delegationTarget="org.gradle.play.platform.PlayPlatform" documented="true">
         <description> 
  Specifies a &lt;a href='type://org.gradle.play.platform.PlayPlatform'&gt;org.gradle.play.platform.PlayPlatform&lt;/a&gt; with a given set of requirements that this 
  component should be built be for.  Can accept a map of play, scala and/or java requirements or a string 
@@ -51,7 +51,7 @@
     </method>
     <interface name="org.gradle.platform.base.ApplicationSpec"/>
     <interface name="org.gradle.play.PlayPlatformAwareComponentSpec"/>
-    <property name="injectedRoutesGenerator" type="boolean">
+    <property name="injectedRoutesGenerator" type="boolean" documented="true">
         <description> 
  Will an injected router be generated for this application? 
  
@@ -59,8 +59,4 @@
  true if an injected router will be generated. 
 </description>
     </property>
-    <documentation>
-        <property name="injectedRoutesGenerator"/>
-        <method name="platform"/>
-    </documentation>
 </type>

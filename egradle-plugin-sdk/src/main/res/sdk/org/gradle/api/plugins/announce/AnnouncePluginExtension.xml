@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension" version="3.0">
     <description> 
  &lt;p&gt;The extension used by the AnnouncePlugin.&lt;/p&gt; 
 </description>
-    <method name="announce" returnType="void">
+    <method name="announce" returnType="void" documented="true">
         <description> 
  Sends an announcement of the given type. 
  
@@ -47,30 +47,21 @@
         <parameter type="java.lang.String" name="username"/>
     </method>
     <property name="announcerFactory" type="org.gradle.api.plugins.announce.internal.AnnouncerFactory"/>
-    <property name="local" type="org.gradle.api.plugins.announce.Announcer">
+    <property name="local" type="org.gradle.api.plugins.announce.Announcer" documented="true">
         <description> 
  Returns an &lt;a href='type://Announcer'&gt;Announcer&lt;/a&gt; that sends announcements to the local desktop, if a notification mechanism is available. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The announcer. 
 </description>
     </property>
-    <property name="password" type="java.lang.String">
+    <property name="password" type="java.lang.String" documented="true">
         <description> 
  The password to use for announcements. 
 </description>
     </property>
-    <property name="username" type="java.lang.String">
+    <property name="username" type="java.lang.String" documented="true">
         <description> 
  The username to use for announcements. 
 </description>
     </property>
-    <documentation>
-        <property name="username"/>
-        <property name="null"/>
-        <property name="password"/>
-        <property name="null"/>
-        <property name="local"/>
-        <property name="-"/>
-        <method name="announce"/>
-    </documentation>
 </type>

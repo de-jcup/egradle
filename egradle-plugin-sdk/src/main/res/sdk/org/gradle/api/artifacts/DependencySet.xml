@@ -5,5 +5,4 @@
 </description>
     <interface name="org.gradle.api.Buildable"/>
     <interface name="org.gradle.api.DomainObjectSet"/>
-    <documentation/>
 </type>

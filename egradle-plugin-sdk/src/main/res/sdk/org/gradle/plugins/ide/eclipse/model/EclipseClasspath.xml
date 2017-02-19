@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" version="3.0">
     <description> 
  The build path settings for the generated Eclipse project. Used by the 
  &lt;a href='type://org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath'&gt;org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath&lt;/a&gt; task to generate an Eclipse .classpath file. 
@@ -68,7 +68,7 @@
  } 
  &lt;/pre&gt; 
 </description>
-    <method name="containers" returnType="void" delegationTarget="EclipseClasspath">
+    <method name="containers" returnType="void" delegationTarget="EclipseClasspath" documented="true">
         <description> 
  Further classpath containers to be added. 
  &lt;p&gt; 
@@ -78,7 +78,7 @@
 </description>
         <parameter type="java.lang.String" name="containers"/>
     </method>
-    <method name="file" returnType="void" delegationTarget="Classpath">
+    <method name="file" returnType="void" delegationTarget="Classpath" documented="true">
         <description> 
  Enables advanced configuration like tinkering with the output XML or affecting the way 
  that the contents of an existing .classpath file is merged with Gradle build information. 
@@ -189,41 +189,41 @@
         <parameter type="java.lang.Iterable" name="sourceSets"/>
     </method>
     <property name="classFolders" type="java.util.List"/>
-    <property name="containers" type="java.util.Set">
+    <property name="containers" type="java.util.Set" documented="true">
         <description> 
  The classpath containers to be added. 
  &lt;p&gt; 
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
-    <property name="defaultOutputDir" type="java.io.File">
+    <property name="defaultOutputDir" type="java.io.File" documented="true">
         <description> 
  The default output directory where Eclipse puts compiled classes. 
  &lt;p&gt; 
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
-    <property name="downloadJavadoc" type="boolean">
+    <property name="downloadJavadoc" type="boolean" documented="true">
         <description> 
  Whether to download and associate Javadoc Jars with the dependency Jars. Defaults to false. 
  &lt;p&gt; 
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
-    <property name="downloadSources" type="boolean">
+    <property name="downloadSources" type="boolean" documented="true">
         <description> 
  Whether to download and associate source Jars with the dependency Jars. Defaults to true. 
  &lt;p&gt; 
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
-    <property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger">
+    <property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
         <description> 
  See &lt;a href='type://EclipseClasspath#file(Closure)'&gt;#file(Closure)&lt;/a&gt;. 
 </description>
     </property>
     <property name="fileReferenceFactory" type="org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory"/>
-    <property name="minusConfigurations" type="java.util.Collection">
+    <property name="minusConfigurations" type="java.util.Collection" documented="true">
         <description> 
  The configurations whose files are to be excluded from the classpath entries. 
  &lt;p&gt; 
@@ -231,7 +231,7 @@
 </description>
     </property>
     <property name="pathVariables" type="java.util.Map"/>
-    <property name="plusConfigurations" type="java.util.Collection">
+    <property name="plusConfigurations" type="java.util.Collection" documented="true">
         <description> 
  The configurations whose files are to be added as classpath entries. 
  &lt;p&gt; 
@@ -247,21 +247,4 @@
  See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example. 
 </description>
     </property>
-    <documentation>
-        <property name="plusConfigurations"/>
-        <property name="project.configurations.testRuntime"/>
-        <property name="minusConfigurations"/>
-        <property name="[]"/>
-        <property name="containers"/>
-        <property name="[JRE container]"/>
-        <property name="defaultOutputDir"/>
-        <property name="${project.projectDir}/bin"/>
-        <property name="downloadSources"/>
-        <property name="true"/>
-        <property name="downloadJavadoc"/>
-        <property name="false"/>
-        <property name="file"/>
-        <method name="containers"/>
-        <method name="file"/>
-    </documentation>
 </type>

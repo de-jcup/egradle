@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.scala.ScalaBasePlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.scala.ScalaBasePlugin" version="3.0">
     <description> 
  &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which compiles and tests Scala sources.&lt;/p&gt; 
 </description>
@@ -47,5 +47,4 @@
     </method>
     <interface name="org.gradle.api.Plugin"/>
     <property name="satisfiedBy" type="boolean"/>
-    <documentation/>
 </type>

@@ -54,7 +54,7 @@
  
  Find more information in &lt;a href='type://SourceSetOutput#dir(java.util.Map, Object)'&gt;#dir(java.util.Map, Object)&lt;/a&gt; and &lt;a href='type://SourceSetOutput#getDirs()'&gt;#getDirs()&lt;/a&gt; 
 </description>
-    <method name="dir" returnType="void" delegationTarget="SourceSetOutput">
+    <method name="dir" returnType="void" delegationTarget="SourceSetOutput" documented="true">
         <description> 
  Registers an extra output dir. Useful for generated resources. 
  &lt;p&gt; 
@@ -64,7 +64,7 @@
 </description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
-    <method name="dir" returnType="void" delegationTarget="SourceSetOutput">
+    <method name="dir" returnType="void" delegationTarget="SourceSetOutput" documented="true">
         <description> 
  Registers an extra output dir and the builtBy information. Useful for generated resources. 
  &lt;p&gt; 
@@ -85,7 +85,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null. 
 </description>
     </method>
-    <method name="getDirs" returnType="org.gradle.api.file.FileCollection" delegationTarget="SourceSetOutput">
+    <method name="getDirs" returnType="org.gradle.api.file.FileCollection" delegationTarget="SourceSetOutput" documented="true">
         <description> 
  Returns all dirs registered with #dir method. 
  Each file is resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
@@ -125,7 +125,7 @@
         <parameter type="java.lang.Object" name="resourcesDir"/>
     </method>
     <interface name="org.gradle.api.file.FileCollection"/>
-    <property name="classesDir" type="java.io.File">
+    <property name="classesDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to assemble the compiled classes into. 
  &lt;p&gt; 
@@ -144,7 +144,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new instance of registered dirs with resolved files 
 </description>
     </property>
-    <property name="resourcesDir" type="java.io.File">
+    <property name="resourcesDir" type="java.io.File" documented="true">
         <description> 
  Returns the output directory for resources 
  &lt;p&gt; 
@@ -153,12 +153,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to. 
 </description>
     </property>
-    <documentation>
-        <property name="classesDir"/>
-        <property name="${project.buildDir}/classes/${sourceSet.name}"/>
-        <property name="resourcesDir"/>
-        <property name="${project.buildDir}/classes/${sourceSet.name}"/>
-        <method name="dir"/>
-        <method name="getDirs"/>
-    </documentation>
 </type>

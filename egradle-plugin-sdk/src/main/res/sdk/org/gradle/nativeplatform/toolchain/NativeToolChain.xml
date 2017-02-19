@@ -4,5 +4,4 @@
  A set of compilers and linkers that are used together to construct a native binary. 
 </description>
     <interface name="org.gradle.platform.base.ToolChain"/>
-    <documentation/>
 </type>

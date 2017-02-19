@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.publish.ivy.plugins.IvyPublishPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.publish.ivy.plugins.IvyPublishPlugin" version="3.0">
     <description> 
  Adds the ability to publish in the Ivy format to Ivy repositories. 
  
@@ -12,5 +12,4 @@
         <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

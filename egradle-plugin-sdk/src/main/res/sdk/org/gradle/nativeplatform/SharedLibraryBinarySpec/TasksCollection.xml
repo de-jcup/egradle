@@ -14,5 +14,4 @@
  Returns the link task for this binary. 
 </description>
     </property>
-    <documentation/>
 </type>

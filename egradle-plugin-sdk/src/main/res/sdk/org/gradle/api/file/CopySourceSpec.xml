@@ -33,5 +33,4 @@
         <parameter type="java.lang.Object" name="sourcePath"/>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <documentation/>
 </type>

@@ -1,4 +1,4 @@
-package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.other.sdkbuilder;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,13 +15,14 @@ public class XMLDSLPropertyInfo{
 		this.name = name;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	@Override
 	public String toString() {
 		return "XMLDSLPropertyInfo [ name=" + name + "]";
 	}
-
-	
-
 	
 	
 }

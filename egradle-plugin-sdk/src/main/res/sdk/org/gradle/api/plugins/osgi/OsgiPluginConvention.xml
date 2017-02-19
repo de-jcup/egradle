@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.osgi.OsgiPluginConvention" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.osgi.OsgiPluginConvention" version="3.0">
     <description> 
  Is mixed into the project when applying the &lt;a href='type://org.gradle.api.plugins.osgi.OsgiPlugin'&gt;org.gradle.api.plugins.osgi.OsgiPlugin&lt;/a&gt;. 
 </description>
@@ -7,7 +7,7 @@
     <method name="createDefaultOsgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>
-    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest">
+    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest" documented="true">
         <description> 
  Creates a new instance of &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt;. The returned object is preconfigured with: 
  &lt;pre&gt; 
@@ -28,14 +28,11 @@
  &lt;/ul&gt; 
 </description>
     </method>
-    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest">
+    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest" documented="true">
         <description> 
  Creates and configures a new instance of an  &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt; . The closure configures 
  the new manifest instance before it is returned. 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <documentation>
-        <method name="osgiManifest"/>
-    </documentation>
 </type>

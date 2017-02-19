@@ -9,5 +9,4 @@
  @since 1.0-milestone-5 
 </description>
     <interface name="org.gradle.tooling.model.idea.IdeaProject"/>
-    <documentation/>
 </type>

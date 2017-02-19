@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.bundling.War" version="3.0" superType="org.gradle.api.tasks.bundling.Jar">
+<type language="gradle" name="org.gradle.api.tasks.bundling.War" version="3.0" superType="org.gradle.api.tasks.bundling.Jar">
     <description> 
  Assembles a WAR archive. 
 </description>
@@ -7,7 +7,7 @@
         <parameter type="java.io.File" name="input"/>
     </method>
     <method name="call" returnType="java.io.File"/>
-    <method name="classpath" returnType="void">
+    <method name="classpath" returnType="void" documented="true">
         <description> 
  Adds files to the classpath to include in the WAR archive. 
  
@@ -53,7 +53,7 @@
     <method name="transform" returnType="java.lang.String">
         <parameter type="java.lang.String" name="it"/>
     </method>
-    <method name="webInf" returnType="org.gradle.api.file.CopySpec" delegationTarget="WEB">
+    <method name="webInf" returnType="org.gradle.api.file.CopySpec" delegationTarget="WEB" documented="true">
         <description> 
  Adds some content to the &lt;a href='type://WEB-INF'&gt;WEB-INF&lt;/a&gt; directory for this WAR archive. 
  
@@ -64,7 +64,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath to include in the WAR archive. Any JAR or ZIP files in this classpath are included in the &lt;a href='type://WEB-INF/lib'&gt;WEB-INF/lib&lt;/a&gt; directory. Any directories in this classpath are included in 
  the &lt;a href='type://WEB-INF/classes'&gt;WEB-INF/classes&lt;/a&gt; directory. 
@@ -73,23 +73,11 @@
 </description>
     </property>
     <property name="webInf" type="org.gradle.api.file.CopySpec"/>
-    <property name="webXml" type="java.io.File">
+    <property name="webXml" type="java.io.File" documented="true">
         <description> 
  Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to include in the WAR archive. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is included in the WAR. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file. 
 </description>
     </property>
-    <documentation>
-        <property name="extension"/>
-        <property name="war"/>
-        <property name="classpath"/>
-        <property name="project.configurations.runtime - project.configurations.providedRuntime"/>
-        <property name="webXml"/>
-        <property name="null"/>
-        <property name="source"/>
-        <property name="[project.webAppDir]"/>
-        <method name="webInf"/>
-        <method name="classpath"/>
-    </documentation>
 </type>

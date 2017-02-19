@@ -154,7 +154,7 @@
  
  &lt;/ul&gt; 
 </description>
-    <method name="absoluteProjectPath" returnType="java.lang.String">
+    <method name="absoluteProjectPath" returnType="java.lang.String" documented="true">
         <description> 
  &lt;p&gt;Converts a name to an absolute project path, resolving names relative to this project.&lt;/p&gt; 
  
@@ -163,7 +163,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="afterEvaluate" returnType="void">
+    <method name="afterEvaluate" returnType="void" documented="true">
         <description> 
  &lt;p&gt;Adds a closure to be called immediately after this project has been evaluated. The project is passed to the 
  closure as a parameter. Such a listener gets notified when the build file belonging to this project has been 
@@ -175,7 +175,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="afterEvaluate" returnType="void">
+    <method name="afterEvaluate" returnType="void" documented="true">
         <description> 
  Adds an action to execute immediately after this project is evaluated. 
  
@@ -183,7 +183,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="allprojects" returnType="void" delegationTarget="Project">
+    <method name="allprojects" returnType="void" delegationTarget="Project" documented="true">
         <description> 
  &lt;p&gt;Configures this project and each of its sub-projects.&lt;/p&gt; 
  
@@ -194,7 +194,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="allprojects" returnType="void" delegationTarget="Action">
+    <method name="allprojects" returnType="void" delegationTarget="Action" documented="true">
         <description> 
  &lt;p&gt;Configures this project and each of its sub-projects.&lt;/p&gt; 
  
@@ -204,7 +204,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="ant" returnType="org.gradle.api.AntBuilder">
+    <method name="ant" returnType="org.gradle.api.AntBuilder" documented="true">
         <description> 
  &lt;p&gt;Executes the given closure against the &lt;code&gt;AntBuilder&lt;/code&gt; for this project. You can use this in your 
  build file to execute ant tasks. The &lt;code&gt;AntBuild&lt;/code&gt; is passed to the closure as the closure's 
@@ -215,7 +215,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="artifacts" returnType="void" delegationTarget="ArtifactHandler">
+    <method name="artifacts" returnType="void" delegationTarget="ArtifactHandler" documented="true">
         <description> 
  &lt;p&gt;Configures the published artifacts for this project. 
  
@@ -243,7 +243,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="beforeEvaluate" returnType="void">
+    <method name="beforeEvaluate" returnType="void" documented="true">
         <description> 
  &lt;p&gt;Adds a closure to be called immediately before this project is evaluated. The project is passed to the closure 
  as a parameter.&lt;/p&gt; 
@@ -252,7 +252,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="beforeEvaluate" returnType="void">
+    <method name="beforeEvaluate" returnType="void" documented="true">
         <description> 
  Adds an action to execute immediately before this project is evaluated. 
  
@@ -260,7 +260,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="buildscript" returnType="void" delegationTarget="ScriptHandler">
+    <method name="buildscript" returnType="void" delegationTarget="ScriptHandler" documented="true">
         <description> 
  &lt;p&gt;Configures the build script classpath for this project. 
  
@@ -271,7 +271,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="configurations" returnType="void" delegationTarget="ConfigurationContainer">
+    <method name="configurations" returnType="void" delegationTarget="ConfigurationContainer" documented="true">
         <description> 
  &lt;p&gt;Configures the dependency configurations for this project. 
  
@@ -284,7 +284,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="configure" returnType="java.lang.Iterable">
+    <method name="configure" returnType="java.lang.Iterable" documented="true">
         <description> 
  Configures a collection of objects via a closure. This is equivalent to calling &lt;a href='type://Project#configure(Object, 
  groovy.lang.Closure)'&gt;#configure(Object, 
@@ -297,7 +297,7 @@
         <parameter type="java.lang.Iterable" name="objects"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="configure" returnType="java.lang.Iterable">
+    <method name="configure" returnType="java.lang.Iterable" documented="true">
         <description> 
  Configures a collection of objects via an action. 
  
@@ -308,7 +308,7 @@
         <parameter type="java.lang.Iterable" name="objects"/>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <method name="configure" returnType="java.lang.Object">
+    <method name="configure" returnType="java.lang.Object" documented="true">
         <description> 
  &lt;p&gt;Configures an object via a closure, with the closure's delegate set to the supplied object. This way you don't 
  have to specify the context of a configuration statement multiple times. &lt;p/&gt; Instead of:&lt;/p&gt; 
@@ -338,7 +338,7 @@
         <parameter type="java.lang.Object" name="object"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer">
+    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer" documented="true">
         <description> 
  &lt;p&gt;Creates a container for managing named objects of the specified type. The specified type must have a public constructor which takes the name as a String parameter.&lt;p&gt; 
  
@@ -350,7 +350,7 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
-    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer">
+    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer" documented="true">
         <description> 
  &lt;p&gt;Creates a container for managing named objects of the specified type. The given closure is used to create object instances. The name of the instance to be created is passed as a parameter to 
  the closure.&lt;/p&gt; 
@@ -365,7 +365,7 @@
         <parameter type="java.lang.Class" name="type"/>
         <parameter type="groovy.lang.Closure" name="factoryClosure"/>
     </method>
-    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer">
+    <method name="container" returnType="org.gradle.api.NamedDomainObjectContainer" documented="true">
         <description> 
  &lt;p&gt;Creates a container for managing named objects of the specified type. The given factory is used to create object instances.&lt;/p&gt; 
  
@@ -379,7 +379,7 @@
         <parameter type="java.lang.Class" name="type"/>
         <parameter type="org.gradle.api.NamedDomainObjectFactory" name="factory"/>
     </method>
-    <method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="CopySpec">
+    <method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="CopySpec" documented="true">
         <description> 
  Copies the specified files.  The given closure is used to configure a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;, which is then used to 
  copy the files. Example: 
@@ -406,7 +406,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="CopySpec">
+    <method name="copy" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="CopySpec" documented="true">
         <description> 
  Copies the specified files.  The given action is used to configure a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;, which is then used to 
  copy the files. 
@@ -416,14 +416,14 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec">
+    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec" documented="true">
         <description> 
  Creates a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a newly created copy spec 
 </description>
     </method>
-    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec">
+    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec" documented="true">
         <description> 
  Creates a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. The given closure is used 
  to configure the &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; before it is returned by this method. 
@@ -445,7 +445,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec">
+    <method name="copySpec" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec" documented="true">
         <description> 
  Creates a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. The given action is used 
  to configure the &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; before it is returned by this method. 
@@ -474,7 +474,7 @@
 </description>
         <parameter type="java.lang.String" name="defaultTasks"/>
     </method>
-    <method name="delete" returnType="boolean">
+    <method name="delete" returnType="boolean" documented="true">
         <description> 
  Deletes files and directories. 
  &lt;p&gt; 
@@ -485,7 +485,7 @@
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
-    <method name="delete" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="DeleteSpec">
+    <method name="delete" returnType="org.gradle.api.tasks.WorkResult" delegationTarget="DeleteSpec" documented="true">
         <description> 
  Deletes the specified files.  The given action is used to configure a &lt;a href='type://DeleteSpec'&gt;DeleteSpec&lt;/a&gt;, which is then used to 
  delete the files. 
@@ -502,7 +502,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="dependencies" returnType="void" delegationTarget="DependencyHandler">
+    <method name="dependencies" returnType="void" delegationTarget="DependencyHandler" documented="true">
         <description> 
  &lt;p&gt;Configures the dependencies for this project. 
  
@@ -526,7 +526,7 @@
 </description>
         <parameter type="org.gradle.api.Project" name="otherProject"/>
     </method>
-    <method name="evaluationDependsOn" returnType="org.gradle.api.Project">
+    <method name="evaluationDependsOn" returnType="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Declares that this project has an evaluation dependency on the project with the given path.&lt;/p&gt; 
  
@@ -542,7 +542,7 @@
  
 </description>
     </method>
-    <method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec">
+    <method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec" documented="true">
         <description> 
  Executes an external command. The closure configures a &lt;a href='type://org.gradle.process.ExecSpec'&gt;org.gradle.process.ExecSpec&lt;/a&gt;. 
  
@@ -551,7 +551,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec">
+    <method name="exec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.ExecSpec" documented="true">
         <description> 
  Executes an external command. 
  &lt;p&gt; 
@@ -563,7 +563,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="file" returnType="java.io.File" delegationTarget="CharSequence">
+    <method name="file" returnType="java.io.File" delegationTarget="CharSequence" documented="true">
         <description> 
  &lt;p&gt;Resolves a file path relative to the project directory of this project. This method converts the supplied path 
  based on its type:&lt;/p&gt; 
@@ -590,7 +590,7 @@
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="file" returnType="java.io.File" delegationTarget="PathValidation">
+    <method name="file" returnType="java.io.File" delegationTarget="PathValidation" documented="true">
         <description> 
  &lt;p&gt;Resolves a file path relative to the project directory of this project and validates it using the given 
  scheme. See &lt;a href='type://PathValidation'&gt;PathValidation&lt;/a&gt; for the list of possible validations.&lt;/p&gt; 
@@ -603,7 +603,7 @@
         <parameter type="java.lang.Object" name="path"/>
         <parameter type="org.gradle.api.PathValidation" name="validation"/>
     </method>
-    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree">
+    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree" documented="true">
         <description> 
  &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the given base directory. The given baseDir path is evaluated 
  as per &lt;a href='type://Project#file(Object)'&gt;#file(Object)&lt;/a&gt;.&lt;/p&gt; 
@@ -627,7 +627,7 @@
 </description>
         <parameter type="java.lang.Object" name="baseDir"/>
     </method>
-    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree">
+    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree" documented="true">
         <description> 
  &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the provided map of arguments.  The map will be applied as 
  properties on the new file tree.  Example:&lt;/p&gt; 
@@ -649,7 +649,7 @@
 </description>
         <parameter type="java.util.Map" name="args"/>
     </method>
-    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree">
+    <method name="fileTree" returnType="org.gradle.api.file.ConfigurableFileTree" delegationTarget="ConfigurableFileTree" documented="true">
         <description> 
  &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; using the given base directory. The given baseDir path is evaluated 
  as per &lt;a href='type://Project#file(Object)'&gt;#file(Object)&lt;/a&gt;. The closure will be used to configure the new file tree. 
@@ -677,7 +677,7 @@
         <parameter type="java.lang.Object" name="baseDir"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection">
+    <method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection" documented="true">
         <description> 
  &lt;p&gt;Returns a &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; containing the given files. You can pass any of the following 
  types to this method:&lt;/p&gt; 
@@ -722,7 +722,7 @@
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
-    <method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection">
+    <method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection" documented="true">
         <description> 
  &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; using the given paths. The paths are evaluated as per &lt;a href='type://Project#files(Object...)'&gt;#files(Object...)&lt;/a&gt;. The file collection is configured using the given closure. The file collection is passed to 
  the closure as its delegate. Example:&lt;/p&gt; 
@@ -742,7 +742,7 @@
         <parameter type="java.lang.Object" name="paths"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="findProject" returnType="org.gradle.api.Project">
+    <method name="findProject" returnType="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Locates a project by path. If the path is relative, it is interpreted relative to this project.&lt;/p&gt; 
  
@@ -751,7 +751,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="findProperty" returnType="java.lang.Object">
+    <method name="findProperty" returnType="java.lang.Object" documented="true">
         <description> 
  &lt;p&gt;Returns the value of the given property or null if not found. 
  This method locates a property as follows:&lt;/p&gt; 
@@ -782,7 +782,7 @@
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
-    <method name="getAllTasks" returnType="java.util.Map">
+    <method name="getAllTasks" returnType="java.util.Map" documented="true">
         <description> 
  &lt;p&gt;Returns a map of the tasks contained in this project, and optionally its subprojects.&lt;/p&gt; 
  
@@ -1090,7 +1090,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the tasks of this project. 
 </description>
     </method>
-    <method name="getTasksByName" returnType="java.util.Set">
+    <method name="getTasksByName" returnType="java.util.Set" documented="true">
         <description> 
  &lt;p&gt;Returns the set of tasks with the given name contained in this project, and optionally its subprojects.&lt;/p&gt; 
  
@@ -1110,7 +1110,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of this project. Never returns null. 
 </description>
     </method>
-    <method name="hasProperty" returnType="boolean">
+    <method name="hasProperty" returnType="boolean" documented="true">
         <description> 
  &lt;p&gt;Determines if this project has the given property. See &lt;a href="#properties"&gt;here&lt;/a&gt; for details of the 
  properties which are available for a project.&lt;/p&gt; 
@@ -1120,7 +1120,7 @@
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
-    <method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec">
+    <method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec" documented="true">
         <description> 
  Executes a Java main class. The closure configures a &lt;a href='type://org.gradle.process.JavaExecSpec'&gt;org.gradle.process.JavaExecSpec&lt;/a&gt;. 
  
@@ -1129,7 +1129,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec">
+    <method name="javaexec" returnType="org.gradle.process.ExecResult" delegationTarget="org.gradle.process.JavaExecSpec" documented="true">
         <description> 
  Executes an external Java process. 
  &lt;p&gt; 
@@ -1141,7 +1141,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="mkdir" returnType="java.io.File">
+    <method name="mkdir" returnType="java.io.File" documented="true">
         <description> 
  Creates a directory and returns a file pointing to it. 
  
@@ -1151,7 +1151,7 @@
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="project" returnType="org.gradle.api.Project">
+    <method name="project" returnType="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Locates a project by path. If the path is relative, it is interpreted relative to this project.&lt;/p&gt; 
  
@@ -1161,7 +1161,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="project" returnType="org.gradle.api.Project">
+    <method name="project" returnType="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Locates a project by path and configures it using the given closure. If the path is relative, it is 
  interpreted relative to this project. The target project is passed to the closure as the closure's delegate.&lt;/p&gt; 
@@ -1174,7 +1174,7 @@
         <parameter type="java.lang.String" name="path"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="property" returnType="java.lang.Object" delegationTarget="MissingPropertyException">
+    <method name="property" returnType="java.lang.Object" delegationTarget="MissingPropertyException" documented="true">
         <description> 
  &lt;p&gt;Returns the value of the given property.  This method locates a property as follows:&lt;/p&gt; 
  
@@ -1205,7 +1205,7 @@
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
     </method>
-    <method name="relativePath" returnType="java.lang.String">
+    <method name="relativePath" returnType="java.lang.String" documented="true">
         <description> 
  &lt;p&gt;Returns the relative path from the project directory to the given path. The given path object is (logically) 
  resolved as described for &lt;a href='type://Project#file(Object)'&gt;#file(Object)&lt;/a&gt;, from which a relative path is calculated.&lt;/p&gt; 
@@ -1215,7 +1215,7 @@
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="relativeProjectPath" returnType="java.lang.String">
+    <method name="relativeProjectPath" returnType="java.lang.String" documented="true">
         <description> 
  &lt;p&gt;Converts a name to a project path relative to this project.&lt;/p&gt; 
  
@@ -1224,7 +1224,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="repositories" returnType="void" delegationTarget="RepositoryHandler">
+    <method name="repositories" returnType="void" delegationTarget="RepositoryHandler" documented="true">
         <description> 
  &lt;p&gt;Configures the repositories for this project. 
  
@@ -1269,7 +1269,7 @@
 </description>
         <parameter type="java.lang.Object" name="group"/>
     </method>
-    <method name="setProperty" returnType="void" delegationTarget="Convention">
+    <method name="setProperty" returnType="void" delegationTarget="Convention" documented="true">
         <description> 
  &lt;p&gt;Sets a property of this project.  This method searches for a property with the given name in the following 
  locations, and sets the property on the first location where it finds the property.&lt;/p&gt; 
@@ -1309,7 +1309,7 @@
 </description>
         <parameter type="java.lang.Object" name="version"/>
     </method>
-    <method name="subprojects" returnType="void" delegationTarget="Project">
+    <method name="subprojects" returnType="void" delegationTarget="Project" documented="true">
         <description> 
  &lt;p&gt;Configures the sub-projects of this project.&lt;/p&gt; 
  
@@ -1319,7 +1319,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="subprojects" returnType="void" delegationTarget="Action">
+    <method name="subprojects" returnType="void" delegationTarget="Action" documented="true">
         <description> 
  &lt;p&gt;Configures the sub-projects of this project&lt;/p&gt; 
  
@@ -1329,7 +1329,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="tarTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree">
+    <method name="tarTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree" documented="true">
         <description> 
  Creates a new &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the contents of the given TAR file. The given tarPath path can be: 
  &lt;ul&gt; 
@@ -1367,7 +1367,7 @@
 </description>
         <parameter type="java.lang.Object" name="tarPath"/>
     </method>
-    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task">
+    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task" documented="true">
         <description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. Calling this method is equivalent to 
  calling &lt;a href='type://Project#task(java.util.Map, String)'&gt;#task(java.util.Map, String)&lt;/a&gt; with an empty options map.&lt;/p&gt; 
@@ -1383,7 +1383,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task">
+    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task" documented="true">
         <description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. Before the task is returned, the given 
  closure is executed to configure the task.&lt;/p&gt; &lt;p/&gt; &lt;p&gt;After the task is added to the project, it is made 
@@ -1398,7 +1398,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task">
+    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task" documented="true">
         <description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. A map of creation options can be 
  passed to this method to control how the task is created. The following options are available:&lt;/p&gt; 
@@ -1442,7 +1442,7 @@
         <parameter type="java.util.Map" name="args"/>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task">
+    <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task" documented="true">
         <description> 
  &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. Before the task is returned, the given 
  closure is executed to configure the task. A map of creation options can be passed to this method to control how 
@@ -1464,7 +1464,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="uri" returnType="java.net.URI">
+    <method name="uri" returnType="java.net.URI" documented="true">
         <description> 
  &lt;p&gt;Resolves a file path to a URI, relative to the project directory of this project. Evaluates the provided path 
  object as described for &lt;a href='type://Project#file(Object)'&gt;#file(Object)&lt;/a&gt;, with the exception that any URI scheme is supported, not just 
@@ -1475,7 +1475,7 @@
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="zipTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree">
+    <method name="zipTree" returnType="org.gradle.api.file.FileTree" delegationTarget="FileTree" documented="true">
         <description> 
  &lt;p&gt;Creates a new &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the contents of the given ZIP file. The given zipPath path is 
  evaluated as per &lt;a href='type://Project#file(Object)'&gt;#file(Object)&lt;/a&gt;. You can combine this method with the &lt;a href='type://Project#copy(groovy.lang.Closure)'&gt;#copy(groovy.lang.Closure)&lt;/a&gt; 
@@ -1502,14 +1502,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map from project to a set of tasks. 
 </description>
     </property>
-    <property name="allprojects" type="java.util.Set">
+    <property name="allprojects" type="java.util.Set" documented="true">
         <description> 
  &lt;p&gt;Returns the set containing this project and its subprojects.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of projects. 
 </description>
     </property>
-    <property name="ant" type="org.gradle.api.AntBuilder">
+    <property name="ant" type="org.gradle.api.AntBuilder" documented="true">
         <description> 
  &lt;p&gt;Returns the &lt;code&gt;AntBuilder&lt;/code&gt; for this project. You can use this in your build file to execute ant 
  tasks. See example below.&lt;/p&gt; 
@@ -1555,13 +1555,13 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;AntBuilder&lt;/code&gt; for this project. Never returns null. 
 </description>
     </property>
-    <property name="artifacts" type="org.gradle.api.artifacts.dsl.ArtifactHandler">
+    <property name="artifacts" type="org.gradle.api.artifacts.dsl.ArtifactHandler" documented="true">
         <description> 
  Returns a handler for assigning artifacts produced by the project to configurations. 
  &lt;h3&gt;Examples:&lt;/h3&gt;See docs for &lt;a href='type://ArtifactHandler'&gt;ArtifactHandler&lt;/a&gt; 
 </description>
     </property>
-    <property name="buildDir" type="java.io.File">
+    <property name="buildDir" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;Returns the build directory of this project.  The build directory is the directory which all artifacts are 
  generated into.  The default value for the build directory is &lt;code&gt;&lt;i&gt;projectDir&lt;/i&gt;/build&lt;/code&gt;&lt;/p&gt; 
@@ -1569,7 +1569,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build directory. Never returns null. 
 </description>
     </property>
-    <property name="buildFile" type="java.io.File">
+    <property name="buildFile" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;Returns the build file Gradle will evaluate against this project object. The default is &lt;code&gt; {@value 
  #DEFAULT_BUILD_FILE}&lt;/code&gt;. If an embedded script is provided the build file will be null. &lt;/p&gt; 
@@ -1577,7 +1577,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Current build file. May return null. 
 </description>
     </property>
-    <property name="buildscript" type="org.gradle.api.initialization.dsl.ScriptHandler">
+    <property name="buildscript" type="org.gradle.api.initialization.dsl.ScriptHandler" documented="true">
         <description> 
  Returns the build script handler for this project. You can use this handler to query details about the build 
  script for this project, and manage the classpath used to compile and execute the project's build script. 
@@ -1585,7 +1585,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath handler. Never returns null. 
 </description>
     </property>
-    <property name="childProjects" type="java.util.Map">
+    <property name="childProjects" type="java.util.Map" documented="true">
         <description> 
  &lt;p&gt;Returns the direct children of this project.&lt;/p&gt; 
  
@@ -1600,7 +1600,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The components for this project. 
 </description>
     </property>
-    <property name="configurations" type="org.gradle.api.artifacts.ConfigurationContainer">
+    <property name="configurations" type="org.gradle.api.artifacts.ConfigurationContainer" documented="true">
         <description> 
  Returns the configurations of this project. 
  
@@ -1609,7 +1609,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration of this project. 
 </description>
     </property>
-    <property name="convention" type="org.gradle.api.plugins.Convention">
+    <property name="convention" type="org.gradle.api.plugins.Convention" documented="true">
         <description> 
  &lt;p&gt;Returns the &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; for this project.&lt;/p&gt; &lt;p/&gt; &lt;p&gt;You can access this property in your build file 
  using &lt;code&gt;convention&lt;/code&gt;. You can also can also access the properties and methods of the convention object 
@@ -1618,7 +1618,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;Convention&lt;/code&gt;. Never returns null. 
 </description>
     </property>
-    <property name="defaultTasks" type="java.util.List">
+    <property name="defaultTasks" type="java.util.List" documented="true">
         <description> 
  &lt;p&gt;Returns the names of the default tasks of this project. These are used when no tasks names are provided when 
  starting the build.&lt;/p&gt; 
@@ -1626,7 +1626,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default task names. Returns an empty list if this project has no default tasks. 
 </description>
     </property>
-    <property name="dependencies" type="org.gradle.api.artifacts.dsl.DependencyHandler">
+    <property name="dependencies" type="org.gradle.api.artifacts.dsl.DependencyHandler" documented="true">
         <description> 
  Returns the dependency handler of this project. The returned dependency handler instance can be used for adding 
  new dependencies. For accessing already declared dependencies, the configurations can be used. 
@@ -1644,28 +1644,28 @@
  0. In a multi-project hierarchy 0 is returned for the root project.&lt;/p&gt; 
 </description>
     </property>
-    <property name="description" type="java.lang.String">
+    <property name="description" type="java.lang.String" documented="true">
         <description> 
  Returns the description of this project. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May return null. 
 </description>
     </property>
-    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer">
+    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer" documented="true">
         <description> 
  Allows adding DSL extensions to the project. Useful for plugin authors. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance allows adding DSL extensions to the project 
 </description>
     </property>
-    <property name="gradle" type="org.gradle.api.invocation.Gradle">
+    <property name="gradle" type="org.gradle.api.invocation.Gradle" documented="true">
         <description> 
  &lt;p&gt;Returns the &lt;a href='type://org.gradle.api.invocation.Gradle'&gt;org.gradle.api.invocation.Gradle&lt;/a&gt; invocation which this project belongs to.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle object. Never returns null. 
 </description>
     </property>
-    <property name="group" type="java.lang.Object">
+    <property name="group" type="java.lang.Object" documented="true">
         <description> 
  &lt;p&gt;Returns the group of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the group. The group 
  defaults to the path with dots as separators.&lt;/p&gt; 
@@ -1673,14 +1673,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The group of this project. Never returns null. 
 </description>
     </property>
-    <property name="logger" type="org.gradle.api.logging.Logger">
+    <property name="logger" type="org.gradle.api.logging.Logger" documented="true">
         <description> 
  &lt;p&gt;Returns the logger for this project. You can use this in your build file to write log messages.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null. 
 </description>
     </property>
-    <property name="logging" type="org.gradle.api.logging.LoggingManager">
+    <property name="logging" type="org.gradle.api.logging.LoggingManager" documented="true">
         <description> 
  Returns the &lt;a href='type://org.gradle.api.logging.LoggingManager'&gt;org.gradle.api.logging.LoggingManager&lt;/a&gt; which can be used to control the logging level and 
  standard output/error capture for this project's build script. By default, System.out is redirected to the Gradle 
@@ -1689,7 +1689,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the LoggingManager. Never returns null. 
 </description>
     </property>
-    <property name="name" type="java.lang.String">
+    <property name="name" type="java.lang.String" documented="true">
         <description> 
  &lt;p&gt;Returns the name of this project. The project's name is not necessarily unique within a project hierarchy. You 
  should use the &lt;a href='type://Project#getPath()'&gt;#getPath()&lt;/a&gt; method for a unique identifier for the project.&lt;/p&gt; 
@@ -1697,21 +1697,21 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of this project. Never return null. 
 </description>
     </property>
-    <property name="parent" type="org.gradle.api.Project">
+    <property name="parent" type="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Returns the parent project of this project, if any.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent project, or null if this is the root project. 
 </description>
     </property>
-    <property name="path" type="java.lang.String">
+    <property name="path" type="java.lang.String" documented="true">
         <description> 
  &lt;p&gt;Returns the path of this project.  The path is the fully qualified name of the project.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path. Never returns null. 
 </description>
     </property>
-    <property name="project" type="org.gradle.api.Project">
+    <property name="project" type="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Returns this project. This method is useful in build files to explicitly access project properties and 
  methods. For example, using &lt;code&gt;project.name&lt;/code&gt; can express your intent better than using 
@@ -1721,14 +1721,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This project. Never returns null. 
 </description>
     </property>
-    <property name="projectDir" type="java.io.File">
+    <property name="projectDir" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;The directory containing the project build file.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. Never returns null. 
 </description>
     </property>
-    <property name="properties" type="java.util.Map">
+    <property name="properties" type="java.util.Map" documented="true">
         <description> 
  &lt;p&gt;Returns the properties of this project. See &lt;a href="#properties"&gt;here&lt;/a&gt; for details of the properties which 
  are available for a project.&lt;/p&gt; 
@@ -1736,7 +1736,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A map from property name to value. 
 </description>
     </property>
-    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler">
+    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
         <description> 
  Returns a handler to create repositories which are used for retrieving dependencies and uploading artifacts 
  produced by the project. 
@@ -1744,14 +1744,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the repository handler. Never returns null. 
 </description>
     </property>
-    <property name="resources" type="org.gradle.api.resources.ResourceHandler">
+    <property name="resources" type="org.gradle.api.resources.ResourceHandler" documented="true">
         <description> 
  Provides access to resource-specific utility methods, for example factory methods that create various resources. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Returned instance contains various resource-specific utility methods. 
 </description>
     </property>
-    <property name="rootDir" type="java.io.File">
+    <property name="rootDir" type="java.io.File" documented="true">
         <description> 
  &lt;p&gt;Returns the root directory of this project. The root directory is the project directory of the root 
  project.&lt;/p&gt; 
@@ -1759,7 +1759,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root directory. Never returns null. 
 </description>
     </property>
-    <property name="rootProject" type="org.gradle.api.Project">
+    <property name="rootProject" type="org.gradle.api.Project" documented="true">
         <description> 
  &lt;p&gt;Returns the root project for the hierarchy that this project belongs to.  In the case of a single-project 
  build, this method returns this project.&lt;/p&gt; 
@@ -1767,7 +1767,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project. Never returns null. 
 </description>
     </property>
-    <property name="state" type="org.gradle.api.ProjectState">
+    <property name="state" type="org.gradle.api.ProjectState" documented="true">
         <description> 
  Returns the evaluation state of this project. You can use this to access information about the evaluation of this 
  project, such as whether it has failed. 
@@ -1775,7 +1775,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project state. Never returns null. 
 </description>
     </property>
-    <property name="status" type="java.lang.Object">
+    <property name="status" type="java.lang.Object" documented="true">
         <description> 
  &lt;p&gt;Returns the status of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the status. The status 
  defaults to {@value #DEFAULT_STATUS}.&lt;/p&gt; 
@@ -1786,14 +1786,14 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The status of this project. Never returns null. 
 </description>
     </property>
-    <property name="subprojects" type="java.util.Set">
+    <property name="subprojects" type="java.util.Set" documented="true">
         <description> 
  &lt;p&gt;Returns the set containing the subprojects of this project.&lt;/p&gt; 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of projects.  Returns an empty set if this project has no subprojects. 
 </description>
     </property>
-    <property name="tasks" type="org.gradle.api.tasks.TaskContainer">
+    <property name="tasks" type="org.gradle.api.tasks.TaskContainer" documented="true">
         <description> 
  &lt;p&gt;Returns the tasks of this project.&lt;/p&gt; 
  
@@ -1810,7 +1810,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of tasks. Returns an empty set if no such tasks exist in this project. 
 </description>
     </property>
-    <property name="version" type="java.lang.Object">
+    <property name="version" type="java.lang.Object" documented="true">
         <description> 
  &lt;p&gt;Returns the version of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the version. The 
  version defaults to {@value #DEFAULT_VERSION}.&lt;/p&gt; 
@@ -1818,75 +1818,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of this project. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="allprojects"/>
-        <property name="artifacts"/>
-        <property name="ant"/>
-        <property name="buildDir"/>
-        <property name="buildFile"/>
-        <property name="buildscript"/>
-        <property name="childProjects"/>
-        <property name="configurations"/>
-        <property name="convention"/>
-        <property name="dependencies"/>
-        <property name="defaultTasks"/>
-        <property name="description"/>
-        <property name="extensions"/>
-        <property name="gradle"/>
-        <property name="group"/>
-        <property name="logger"/>
-        <property name="logging"/>
-        <property name="name"/>
-        <property name="parent"/>
-        <property name="path"/>
-        <property name="project"/>
-        <property name="projectDir"/>
-        <property name="properties"/>
-        <property name="repositories"/>
-        <property name="rootDir"/>
-        <property name="rootProject"/>
-        <property name="state"/>
-        <property name="status"/>
-        <property name="subprojects"/>
-        <property name="tasks"/>
-        <property name="version"/>
-        <property name="resources"/>
-        <method name="ant"/>
-        <method name="repositories"/>
-        <method name="configurations"/>
-        <method name="dependencies"/>
-        <method name="artifacts"/>
-        <method name="allprojects"/>
-        <method name="subprojects"/>
-        <method name="configure"/>
-        <method name="buildscript"/>
-        <method name="file"/>
-        <method name="files"/>
-        <method name="fileTree"/>
-        <method name="zipTree"/>
-        <method name="tarTree"/>
-        <method name="uri"/>
-        <method name="relativePath"/>
-        <method name="mkdir"/>
-        <method name="delete"/>
-        <method name="copy"/>
-        <method name="copySpec"/>
-        <method name="javaexec"/>
-        <method name="exec"/>
-        <method name="setProperty"/>
-        <method name="property"/>
-        <method name="hasProperty"/>
-        <method name="findProperty"/>
-        <method name="task"/>
-        <method name="evaluationDependsOn"/>
-        <method name="findProject"/>
-        <method name="project"/>
-        <method name="absoluteProjectPath"/>
-        <method name="relativeProjectPath"/>
-        <method name="getAllTasks"/>
-        <method name="getTasksByName"/>
-        <method name="beforeEvaluate"/>
-        <method name="afterEvaluate"/>
-        <method name="container"/>
-    </documentation>
 </type>

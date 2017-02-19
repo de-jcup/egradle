@@ -7,7 +7,7 @@
  &lt;p&gt; 
  For more on writing and applying plugins, see &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt;. 
 </description>
-    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction">
+    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction" documented="true">
         <description> 
  Applies zero or more plugins or scripts. 
  &lt;p&gt; 
@@ -20,7 +20,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction">
+    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction" documented="true">
         <description> 
  Applies a plugin or script, using the given options provided as a map. Does nothing if the plugin has already been applied. 
  &lt;p&gt; 
@@ -39,7 +39,7 @@
 </description>
         <parameter type="java.util.Map" name="options"/>
     </method>
-    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction">
+    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction" documented="true">
         <description> 
  Applies zero or more plugins or scripts. 
  &lt;p&gt; 
@@ -75,7 +75,7 @@
  @see PluginManager#hasPlugin(String) 
 </description>
     </method>
-    <property name="pluginManager" type="org.gradle.api.plugins.PluginManager">
+    <property name="pluginManager" type="org.gradle.api.plugins.PluginManager" documented="true">
         <description> 
  The plugin manager for this plugin aware object. 
  
@@ -83,7 +83,7 @@
  @since 2.3 
 </description>
     </property>
-    <property name="plugins" type="org.gradle.api.plugins.PluginContainer">
+    <property name="plugins" type="org.gradle.api.plugins.PluginContainer" documented="true">
         <description> 
  The container of plugins that have been applied to this object. 
  &lt;p&gt; 
@@ -98,9 +98,4 @@
  @see PluginManager#hasPlugin(String) 
 </description>
     </property>
-    <documentation>
-        <property name="plugins"/>
-        <property name="pluginManager"/>
-        <method name="apply"/>
-    </documentation>
 </type>

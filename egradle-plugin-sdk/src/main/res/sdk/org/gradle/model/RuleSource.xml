@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.model.RuleSource" version="3.0">
+<type language="gradle" name="org.gradle.model.RuleSource" version="3.0">
     <description> 
  A marker type for a class that is a collection of rules. 
  &lt;p&gt; 
@@ -59,5 +59,4 @@
  &lt;li&gt;Implementations cannot be generic (i.e. cannot use type parameters).&lt;/li&gt; 
  &lt;/ul&gt; 
 </description>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.tasks.JavaScriptMinify.MinifyFileVisitor" version="3.0">
+<type language="gradle" name="org.gradle.play.tasks.JavaScriptMinify.MinifyFileVisitor" version="3.0">
     <description> 
  Copies each file in the source set to the output directory and gathers relative files for compilation 
 </description>
@@ -13,5 +13,4 @@
         <parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/>
     </method>
     <interface name="org.gradle.api.file.FileVisitor"/>
-    <documentation/>
 </type>

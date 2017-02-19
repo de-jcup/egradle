@@ -27,5 +27,4 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;followSymlinks deletion will follow symlniks when true. 
 </description>
     </property>
-    <documentation/>
 </type>

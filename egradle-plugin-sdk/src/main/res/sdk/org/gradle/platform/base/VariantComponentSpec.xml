@@ -9,12 +9,9 @@
 </description>
     </method>
     <interface name="org.gradle.platform.base.ComponentSpec"/>
-    <property name="binaries" type="org.gradle.model.ModelMap">
+    <property name="binaries" type="org.gradle.model.ModelMap" documented="true">
         <description> 
  The variants of this component. 
 </description>
     </property>
-    <documentation>
-        <property name="binaries"/>
-    </documentation>
 </type>

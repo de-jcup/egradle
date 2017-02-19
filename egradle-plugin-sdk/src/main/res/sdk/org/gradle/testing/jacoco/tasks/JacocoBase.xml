@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testing.jacoco.tasks.JacocoBase" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.testing.jacoco.tasks.JacocoBase" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Base class for Jacoco tasks. 
 </description>
@@ -11,13 +11,9 @@
     <method name="setJacocoClasspath" returnType="void">
         <parameter type="org.gradle.api.file.FileCollection" name="jacocoClasspath"/>
     </method>
-    <property name="jacocoClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="jacocoClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Classpath containing Jacoco classes for use by the task. 
 </description>
     </property>
-    <documentation>
-        <property name="jacocoClasspath"/>
-        <property name="&#xA;                    project.configurations.jacocoAnt&#xA;                "/>
-    </documentation>
 </type>

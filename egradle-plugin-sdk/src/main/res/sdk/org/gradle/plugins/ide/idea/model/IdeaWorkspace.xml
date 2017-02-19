@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaWorkspace" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaWorkspace" version="3.0">
     <description> 
  Enables fine-tuning workspace details (*.iws file) of the IDEA plugin. 
  &lt;p&gt; 
@@ -21,7 +21,7 @@
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
 </description>
     </method>
-    <method name="iws" returnType="void" delegationTarget="IdeaWorkspace">
+    <method name="iws" returnType="void" delegationTarget="IdeaWorkspace" documented="true">
         <description> 
  Enables advanced manipulation of the output XML. 
  &lt;p&gt; 
@@ -35,15 +35,11 @@
     <method name="setIws" returnType="void">
         <parameter type="org.gradle.plugins.ide.api.XmlFileContentMerger" name="iws"/>
     </method>
-    <property name="iws" type="org.gradle.plugins.ide.api.XmlFileContentMerger">
+    <property name="iws" type="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
         <description> 
  Enables advanced manipulation of the output XML. 
  &lt;p&gt; 
  For example see docs for &lt;a href='type://IdeaWorkspace'&gt;IdeaWorkspace&lt;/a&gt; 
 </description>
     </property>
-    <documentation>
-        <property name="iws"/>
-        <method name="iws"/>
-    </documentation>
 </type>

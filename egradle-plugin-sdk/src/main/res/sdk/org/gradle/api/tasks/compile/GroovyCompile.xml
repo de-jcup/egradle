@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.GroovyCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile">
+<type language="gradle" name="org.gradle.api.tasks.compile.GroovyCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile">
     <description> 
  Compiles Groovy source files, and optionally, Java source files. 
 </description>
@@ -43,33 +43,25 @@
         <parameter type="org.gradle.api.file.FileCollection" name="groovyClasspath"/>
     </method>
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
-    <property name="groovyClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="groovyClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath containing the version of Groovy to use for compilation. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
 </description>
     </property>
-    <property name="groovyOptions" type="org.gradle.api.tasks.compile.GroovyCompileOptions">
+    <property name="groovyOptions" type="org.gradle.api.tasks.compile.GroovyCompileOptions" documented="true">
         <description> 
  Gets the options for the Groovy compilation. To set specific options for the nested Java compilation, use &lt;a href='type://GroovyCompile#getOptions()'&gt;#getOptions()&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy compile options. Never returns null. 
 </description>
     </property>
-    <property name="options" type="org.gradle.api.tasks.compile.CompileOptions">
+    <property name="options" type="org.gradle.api.tasks.compile.CompileOptions" documented="true">
         <description> 
  Returns the options for Java compilation. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java compile options. Never returns null. 
 </description>
     </property>
-    <documentation>
-        <property name="groovyOptions"/>
-        <property name="options"/>
-        <property name="source"/>
-        <property name="sourceSet.groovy"/>
-        <property name="groovyClasspath"/>
-        <property name="Groovy library found on classpath"/>
-    </documentation>
 </type>

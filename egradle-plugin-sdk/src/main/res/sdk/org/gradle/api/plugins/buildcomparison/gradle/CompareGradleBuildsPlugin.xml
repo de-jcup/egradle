@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuildsPlugin" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuildsPlugin" version="3.0">
     <description> 
  Preconfigures the project to run a gradle build comparison. 
 </description>
@@ -11,5 +11,4 @@
         <parameter type="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

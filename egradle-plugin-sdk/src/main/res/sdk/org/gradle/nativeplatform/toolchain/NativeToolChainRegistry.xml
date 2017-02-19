@@ -5,5 +5,4 @@
 </description>
     <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
     <interface name="org.gradle.platform.base.ToolChainRegistry"/>
-    <documentation/>
 </type>

@@ -20,5 +20,4 @@
     <property name="destinationDir" type="java.io.File"/>
     <property name="options" type="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions"/>
     <property name="source" type="org.gradle.api.file.FileCollection"/>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.jvm.application.tasks.CreateStartScripts" version="3.0">
+<type language="gradle" name="org.gradle.jvm.application.tasks.CreateStartScripts" version="3.0">
     <description> 
  Creates start scripts for launching JVM applications. 
  &lt;p&gt; 
@@ -153,17 +153,17 @@
     <method name="setWindowsStartScriptGenerator" returnType="void">
         <parameter type="org.gradle.jvm.application.scripts.ScriptGenerator" name="windowsStartScriptGenerator"/>
     </method>
-    <property name="applicationName" type="java.lang.String">
+    <property name="applicationName" type="java.lang.String" documented="true">
         <description> 
  The application's name. 
 </description>
     </property>
-    <property name="classpath" type="org.gradle.api.file.FileCollection">
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The class path for the application. 
 </description>
     </property>
-    <property name="defaultJvmOpts" type="java.lang.Iterable">
+    <property name="defaultJvmOpts" type="java.lang.Iterable" documented="true">
         <description> 
  The application's default JVM options. Defaults to an empty list. 
 </description>
@@ -173,17 +173,17 @@
  The environment variable to use to control exit value (Windows only). 
 </description>
     </property>
-    <property name="mainClassName" type="java.lang.String">
+    <property name="mainClassName" type="java.lang.String" documented="true">
         <description> 
  The main classname used to start the Java application. 
 </description>
     </property>
-    <property name="optsEnvironmentVar" type="java.lang.String">
+    <property name="optsEnvironmentVar" type="java.lang.String" documented="true">
         <description> 
  The environment variable to use to provide additional options to the JVM. 
 </description>
     </property>
-    <property name="outputDir" type="java.io.File">
+    <property name="outputDir" type="java.io.File" documented="true">
         <description> 
  The directory to write the scripts into. 
 </description>
@@ -194,7 +194,7 @@
  Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension. 
 </description>
     </property>
-    <property name="unixStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator">
+    <property name="unixStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator" documented="true">
         <description> 
  The UNIX-like start script generator. 
  &lt;p&gt; 
@@ -206,21 +206,11 @@
  Returns the full path to the Windows script. The target directory is represented by the output directory, the file name is the application name plus the file extension .bat. 
 </description>
     </property>
-    <property name="windowsStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator">
+    <property name="windowsStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator" documented="true">
         <description> 
  The Windows start script generator. 
  &lt;p&gt; 
  Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;. 
 </description>
     </property>
-    <documentation>
-        <property name="applicationName"/>
-        <property name="mainClassName"/>
-        <property name="classpath"/>
-        <property name="defaultJvmOpts"/>
-        <property name="outputDir"/>
-        <property name="optsEnvironmentVar"/>
-        <property name="unixStartScriptGenerator"/>
-        <property name="windowsStartScriptGenerator"/>
-    </documentation>
 </type>

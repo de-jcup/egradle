@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeSourceCompileTask" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask">
+<type language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeSourceCompileTask" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask">
     <description> 
  Compiles native source files into object files. 
 </description>
@@ -19,5 +19,4 @@
  Returns the pre-compiled header to be used during compilation 
 </description>
     </property>
-    <documentation/>
 </type>

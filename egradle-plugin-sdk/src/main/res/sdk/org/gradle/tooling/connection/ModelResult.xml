@@ -38,5 +38,4 @@
  @throws GradleConnectionException if the model could not be retrieved. 
 </description>
     </property>
-    <documentation/>
 </type>

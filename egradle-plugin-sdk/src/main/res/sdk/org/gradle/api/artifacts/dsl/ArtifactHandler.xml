@@ -50,7 +50,7 @@
  } 
  &lt;/pre&gt; 
 </description>
-    <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact">
+    <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact" documented="true">
         <description> 
  Adds an artifact to the given configuration. 
  
@@ -61,7 +61,7 @@
         <parameter type="java.lang.String" name="configurationName"/>
         <parameter type="java.lang.Object" name="artifactNotation"/>
     </method>
-    <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact">
+    <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact" documented="true">
         <description> 
  Adds an artifact to the given configuration. 
  
@@ -74,7 +74,4 @@
         <parameter type="java.lang.Object" name="artifactNotation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <documentation>
-        <method name="add"/>
-    </documentation>
 </type>

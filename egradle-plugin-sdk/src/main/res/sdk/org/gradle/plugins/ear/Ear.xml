@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ear.Ear" version="3.0" superType="org.gradle.api.tasks.bundling.Jar">
+<type language="gradle" name="org.gradle.plugins.ear.Ear" version="3.0" superType="org.gradle.api.tasks.bundling.Jar">
     <description> 
  Assembles an EAR archive. 
 </description>
@@ -40,7 +40,7 @@
  The name of the library directory in the EAR file. Default is "lib". 
 </description>
     </method>
-    <method name="lib" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec">
+    <method name="lib" returnType="org.gradle.api.file.CopySpec" delegationTarget="CopySpec" documented="true">
         <description> 
  Adds dependency libraries to include in the 'lib' directory of the EAR archive. 
  
@@ -76,11 +76,4 @@
  The name of the library directory in the EAR file. Default is "lib". 
 </description>
     </property>
-    <documentation>
-        <property name="extension"/>
-        <property name="ear"/>
-        <property name="source"/>
-        <property name="[project.appDir], not transitive"/>
-        <method name="lib"/>
-    </documentation>
 </type>

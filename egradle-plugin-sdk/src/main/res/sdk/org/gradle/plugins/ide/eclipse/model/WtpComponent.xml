@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpComponent" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpComponent" version="3.0">
     <description> 
  Creates the .settings/org.eclipse.wst.common.component file for WTP projects. 
 </description>
@@ -41,5 +41,4 @@
     <property name="deployName" type="java.lang.String"/>
     <property name="wbModuleEntries" type="java.util.List"/>
     <property name="wbModuleNode" type="groovy.util.Node"/>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.plugins.BinaryBasePlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.platform.base.plugins.BinaryBasePlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
     <method name="addSourceSetsOwnedByBinariesToTheirInputs" returnType="void">
         <parameter type="org.gradle.platform.base.internal.BinarySpecInternal" name="binary"/>
     </method>
@@ -17,5 +17,4 @@
     <method name="registerBaseBinarySpec" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
-    <documentation/>
 </type>

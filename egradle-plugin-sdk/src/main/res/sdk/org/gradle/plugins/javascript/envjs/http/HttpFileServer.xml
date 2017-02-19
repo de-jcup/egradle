@@ -9,5 +9,4 @@
     <property name="contentRoot" type="java.io.File"/>
     <property name="port" type="int"/>
     <property name="resourceUrl" type="java.lang.String"/>
-    <documentation/>
 </type>

@@ -31,12 +31,12 @@
         <parameter type="java.io.File" name="sharedLibraryLinkFile"/>
     </method>
     <interface name="org.gradle.nativeplatform.NativeLibraryBinarySpec"/>
-    <property name="sharedLibraryFile" type="java.io.File">
+    <property name="sharedLibraryFile" type="java.io.File" documented="true">
         <description> 
  The shared library file. 
 </description>
     </property>
-    <property name="sharedLibraryLinkFile" type="java.io.File">
+    <property name="sharedLibraryLinkFile" type="java.io.File" documented="true">
         <description> 
  The shared library link file. 
 </description>
@@ -46,8 +46,4 @@
  {@inheritDoc} 
 </description>
     </property>
-    <documentation>
-        <property name="sharedLibraryFile"/>
-        <property name="sharedLibraryLinkFile"/>
-    </documentation>
 </type>

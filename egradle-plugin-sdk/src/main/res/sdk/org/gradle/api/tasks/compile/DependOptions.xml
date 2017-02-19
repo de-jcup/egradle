@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.DependOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
+<type language="gradle" name="org.gradle.api.tasks.compile.DependOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
     <description> 
  Options for the Ant Depend task. Only take effect if &lt;a href='type://CompileOptions.useAnt'&gt;CompileOptions.useAnt&lt;/a&gt; and 
  &lt;a href='type://CompileOptions.useDepend'&gt;CompileOptions.useDepend&lt;/a&gt; are &lt;a href='type://true'&gt;true&lt;/a&gt;. 
@@ -102,5 +102,4 @@
  Tells whether to warn on RMI stubs without source. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;. 
 </description>
     </property>
-    <documentation/>
 </type>

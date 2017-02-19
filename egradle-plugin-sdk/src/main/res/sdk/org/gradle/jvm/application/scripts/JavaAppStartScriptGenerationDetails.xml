@@ -67,5 +67,4 @@
  The path of the script, relative to the application home directory. 
 </description>
     </property>
-    <documentation/>
 </type>

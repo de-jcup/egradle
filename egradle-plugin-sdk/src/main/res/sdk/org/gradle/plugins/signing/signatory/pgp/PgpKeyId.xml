@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.signatory.pgp.PgpKeyId" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.signatory.pgp.PgpKeyId" version="3.0">
     <description> 
  A normalised form for keys, which are friendliest for users as hex strings but used internally as longs. 
 </description>
@@ -25,5 +25,4 @@
     <interface name="java.lang.Comparable"/>
     <property name="asHex" type="java.lang.String"/>
     <property name="asLong" type="long"/>
-    <documentation/>
 </type>

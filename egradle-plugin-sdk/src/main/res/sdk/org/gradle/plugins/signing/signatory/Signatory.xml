@@ -36,5 +36,4 @@
  &lt;p&gt;The name must be constant for the life of the signatory and should uniquely identify it within a project.&lt;/p&gt; 
 </description>
     </property>
-    <documentation/>
 </type>

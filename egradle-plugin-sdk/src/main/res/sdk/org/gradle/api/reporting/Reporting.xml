@@ -45,7 +45,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
 </description>
     </method>
-    <method name="reports" returnType="T">
+    <method name="reports" returnType="T" documented="true">
         <description> 
  Allow configuration of the report container by closure. 
  
@@ -62,7 +62,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="reports" returnType="T">
+    <method name="reports" returnType="T" documented="true">
         <description> 
  Allow configuration of the report container by closure. 
  
@@ -78,7 +78,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <property name="reports" type="T">
+    <property name="reports" type="T" documented="true">
         <description> 
  A &lt;a href='type://ReportContainer'&gt;ReportContainer&lt;/a&gt; instance. 
  &lt;p&gt; 
@@ -88,8 +88,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The report container 
 </description>
     </property>
-    <documentation>
-        <property name="reports"/>
-        <method name="reports"/>
-    </documentation>
 </type>

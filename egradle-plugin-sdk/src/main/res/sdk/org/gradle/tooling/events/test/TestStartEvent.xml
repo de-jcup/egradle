@@ -7,5 +7,4 @@
 </description>
     <interface name="org.gradle.tooling.events.StartEvent"/>
     <interface name="org.gradle.tooling.events.test.TestProgressEvent"/>
-    <documentation/>
 </type>

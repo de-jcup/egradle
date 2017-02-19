@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaModuleIml" version="3.0" superType="org.gradle.plugins.ide.api.XmlFileContentMerger">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaModuleIml" version="3.0" superType="org.gradle.plugins.ide.api.XmlFileContentMerger">
     <description> 
  Models the generation/parsing/merging capabilities of an IDEA module. 
  &lt;p&gt; 
@@ -22,5 +22,4 @@
  For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; 
 </description>
     </property>
-    <documentation/>
 </type>

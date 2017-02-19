@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.reporting.ReportingExtension" version="3.0">
+<type language="gradle" name="org.gradle.api.reporting.ReportingExtension" version="3.0">
     <description> 
  A project extension named "reporting" that provides basic reporting settings and utilities. 
  &lt;p&gt; 
@@ -15,7 +15,7 @@
  via the &lt;a href='type://ReportingExtension#file(String)'&gt;#file(String)&lt;/a&gt; method of this extension. 
 </description>
     <method name="call" returnType="java.io.File"/>
-    <method name="file" returnType="java.io.File">
+    <method name="file" returnType="java.io.File" documented="true">
         <description> 
  Creates a file object for the given path, relative to &lt;a href='type://ReportingExtension#getBaseDir()'&gt;#getBaseDir()&lt;/a&gt;. 
  &lt;p&gt; 
@@ -47,7 +47,7 @@
         <parameter type="java.lang.Object" name="baseDir"/>
     </method>
     <property name="apiDocTitle" type="java.lang.String"/>
-    <property name="baseDir" type="java.io.File">
+    <property name="baseDir" type="java.io.File" documented="true">
         <description> 
  The base directory for all reports 
  &lt;p&gt; 
@@ -56,8 +56,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The base directory for all reports 
 </description>
     </property>
-    <documentation>
-        <property name="baseDir"/>
-        <method name="file"/>
-    </documentation>
 </type>

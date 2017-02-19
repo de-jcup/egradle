@@ -50,7 +50,7 @@
  
  @since 1.4 
 </description>
-    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact" documented="true">
         <description> 
  Creates a custom &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to be included in the publication. 
  
@@ -85,7 +85,7 @@
 </description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
-    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact">
+    <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" delegationTarget="MavenArtifact" documented="true">
         <description> 
  Creates an &lt;a href='type://MavenArtifact'&gt;MavenArtifact&lt;/a&gt; to be included in the publication, which is configured by the associated action. 
  
@@ -120,7 +120,7 @@
         <parameter type="java.lang.Object" name="source"/>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
-    <method name="from" returnType="void">
+    <method name="from" returnType="void" documented="true">
         <description> 
  Provides the software component that should be published. 
  
@@ -176,7 +176,7 @@
  Returns the version for this publication. 
 </description>
     </method>
-    <method name="pom" returnType="void">
+    <method name="pom" returnType="void" documented="true">
         <description> 
  Configures the POM that will be published. 
  
@@ -192,7 +192,7 @@
 </description>
         <parameter type="java.lang.String" name="artifactId"/>
     </method>
-    <method name="setArtifacts" returnType="void">
+    <method name="setArtifacts" returnType="void" documented="true">
         <description> 
  Clears any previously added artifacts from &lt;a href='type://MavenPublication#getArtifacts'&gt;#getArtifacts&lt;/a&gt; and creates artifacts from the specified sources. 
  Each supplied source is interpreted as per &lt;a href='type://MavenPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt;. 
@@ -231,43 +231,32 @@
         <parameter type="java.lang.String" name="version"/>
     </method>
     <interface name="org.gradle.api.publish.Publication"/>
-    <property name="artifactId" type="java.lang.String">
+    <property name="artifactId" type="java.lang.String" documented="true">
         <description> 
  Returns the artifactId for this publication. 
 </description>
     </property>
-    <property name="artifacts" type="org.gradle.api.publish.maven.MavenArtifactSet">
+    <property name="artifacts" type="org.gradle.api.publish.maven.MavenArtifactSet" documented="true">
         <description> 
  Returns the complete set of artifacts for this publication. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts. 
 </description>
     </property>
-    <property name="groupId" type="java.lang.String">
+    <property name="groupId" type="java.lang.String" documented="true">
         <description> 
  Returns the groupId for this publication. 
 </description>
     </property>
-    <property name="pom" type="org.gradle.api.publish.maven.MavenPom">
+    <property name="pom" type="org.gradle.api.publish.maven.MavenPom" documented="true">
         <description> 
  The POM that will be published. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM that will be published. 
 </description>
     </property>
-    <property name="version" type="java.lang.String">
+    <property name="version" type="java.lang.String" documented="true">
         <description> 
  Returns the version for this publication. 
 </description>
     </property>
-    <documentation>
-        <property name="pom"/>
-        <property name="artifacts"/>
-        <property name="groupId"/>
-        <property name="artifactId"/>
-        <property name="version"/>
-        <method name="pom"/>
-        <method name="from"/>
-        <method name="artifact"/>
-        <method name="setArtifacts"/>
-    </documentation>
 </type>

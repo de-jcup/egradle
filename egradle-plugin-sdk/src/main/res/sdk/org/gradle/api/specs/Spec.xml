@@ -9,5 +9,4 @@
         <parameter type="T" name="element"/>
     </method>
     <property name="satisfiedBy" type="boolean"/>
-    <documentation/>
 </type>

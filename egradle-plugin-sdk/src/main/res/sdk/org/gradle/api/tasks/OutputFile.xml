@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.OutputFile" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.OutputFile" version="3.0">
     <description> 
  &lt;p&gt;Marks a property as specifying an output file for a task.&lt;/p&gt; 
  
@@ -8,5 +8,4 @@
  &lt;p&gt;This will cause the task to be considered out-of-date when the file path or contents 
  are different to when the task was last run.&lt;/p&gt; 
 </description>
-    <documentation/>
 </type>

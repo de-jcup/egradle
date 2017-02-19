@@ -52,5 +52,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signatory with the given name if found, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no signatory is found with this name. 
 </description>
     </property>
-    <documentation/>
 </type>

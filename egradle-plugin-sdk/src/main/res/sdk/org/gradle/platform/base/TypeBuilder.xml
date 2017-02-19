@@ -18,5 +18,4 @@
 </description>
         <parameter type="java.lang.Class" name="internalView"/>
     </method>
-    <documentation/>
 </type>

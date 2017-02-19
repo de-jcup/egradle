@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.specs.CompositeSpec" version="3.0">
+<type language="gradle" name="org.gradle.api.specs.CompositeSpec" version="3.0">
     <description> 
  A &lt;a href='type://org.gradle.api.specs.Spec'&gt;org.gradle.api.specs.Spec&lt;/a&gt; which aggregates a sequence of other &lt;a href='type://Spec'&gt;Spec&lt;/a&gt; instances. 
  
@@ -19,5 +19,4 @@
     <property name="empty" type="boolean"/>
     <property name="specs" type="java.util.List"/>
     <property name="specsArray" type="org.gradle.api.specs.Spec"/>
-    <documentation/>
 </type>

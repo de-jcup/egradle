@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.plugins.BinaryBasePlugin" version="3.0">
+<type language="gradle" name="org.gradle.platform.base.plugins.BinaryBasePlugin" version="3.0">
     <description> 
  Base plugin for binaries support. 
  
@@ -13,5 +13,4 @@
         <parameter type="org.gradle.api.Project" name="target"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

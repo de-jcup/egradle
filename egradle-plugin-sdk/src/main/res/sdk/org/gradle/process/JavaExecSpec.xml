@@ -95,5 +95,4 @@
  Returns the fully qualified name of the Main class to be executed. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -100,5 +100,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has declared any outputs, otherwise false. 
 </description>
     </property>
-    <documentation/>
 </type>

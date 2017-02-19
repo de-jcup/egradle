@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.scala.plugins.ScalaLanguagePlugin.Scala" version="3.0">
+<type language="gradle" name="org.gradle.language.scala.plugins.ScalaLanguagePlugin.Scala" version="3.0">
     <method name="addSourceSetClasspath" returnType="void">
         <parameter type="org.gradle.language.scala.tasks.PlatformScalaCompile" name="compile"/>
         <parameter type="org.gradle.language.scala.ScalaLanguageSourceSet" name="scalaLanguageSourceSet"/>
@@ -44,5 +44,4 @@
     <property name="taskPrefix" type="java.lang.String"/>
     <property name="taskType" type="java.lang.Class"/>
     <property name="transformTask" type="org.gradle.language.base.internal.JointCompileTaskConfig"/>
-    <documentation/>
 </type>

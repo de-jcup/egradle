@@ -184,5 +184,4 @@
  @throws UnsupportedMethodException For Gradle versions older than 2.9, where this method is not supported. 
 </description>
     </property>
-    <documentation/>
 </type>

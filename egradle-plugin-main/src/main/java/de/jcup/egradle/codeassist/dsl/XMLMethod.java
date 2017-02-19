@@ -35,6 +35,9 @@ public class XMLMethod implements ModifiableMethod{
 
 	private Type delegationTarget;
 
+	@XmlAttribute(name = "documented", required=false)
+	private Boolean documented = null;
+
 	@Override
 	public String getName() {
 		return name;
@@ -109,6 +112,20 @@ public class XMLMethod implements ModifiableMethod{
 	@Override
 	public Type getDelegationTarget() {
 		return delegationTarget;
+	}
+	
+	@Override
+	public boolean isDocumented() {
+		/* workaround for JAXM preventing to: atribute="false" */
+		return documented!=null && documented.booleanValue();
+	}
+	
+	public void setDocumented(boolean partOfGradleDSLDocumentation) {
+		if (!partOfGradleDSLDocumentation){
+			this.documented = null;
+		}else{
+			this.documented = Boolean.TRUE;
+		}
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.jvm.plugins.JvmComponentPlugin" version="3.0">
+<type language="gradle" name="org.gradle.jvm.plugins.JvmComponentPlugin" version="3.0">
     <description> 
  Base plugin for JVM component support. Applies the &lt;a href='type://org.gradle.language.base.plugins.ComponentModelBasePlugin'&gt;org.gradle.language.base.plugins.ComponentModelBasePlugin&lt;/a&gt;. Registers the &lt;a href='type://JvmLibrarySpec'&gt;JvmLibrarySpec&lt;/a&gt; library type for the components 
  container. 
@@ -8,5 +8,4 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

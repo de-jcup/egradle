@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.tasks.CreateStaticLibrary" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.nativeplatform.tasks.CreateStaticLibrary" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Assembles a static library from object files. 
 </description>
@@ -43,7 +43,7 @@
     <method name="setToolChain" returnType="void">
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
-    <method name="source" returnType="void">
+    <method name="source" returnType="void" documented="true">
         <description> 
  Adds a set of object files to be linked. &lt;p&gt; The provided source object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
@@ -51,17 +51,17 @@
     </method>
     <interface name="org.gradle.nativeplatform.tasks.ObjectFilesToBinary"/>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
-    <property name="outputFile" type="java.io.File">
+    <property name="outputFile" type="java.io.File" documented="true">
         <description> 
  The file where the output binary will be located. 
 </description>
     </property>
-    <property name="source" type="org.gradle.api.file.FileCollection">
+    <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  The source object files to be passed to the archiver. 
 </description>
     </property>
-    <property name="staticLibArgs" type="java.util.List">
+    <property name="staticLibArgs" type="java.util.List" documented="true">
         <description> 
  Additional arguments passed to the archiver. 
 </description>
@@ -71,16 +71,9 @@
  The platform being targeted. 
 </description>
     </property>
-    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
+    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
         <description> 
  The tool chain used for creating the static library. 
 </description>
     </property>
-    <documentation>
-        <property name="source"/>
-        <property name="outputFile"/>
-        <property name="toolChain"/>
-        <property name="staticLibArgs"/>
-        <method name="source"/>
-    </documentation>
 </type>

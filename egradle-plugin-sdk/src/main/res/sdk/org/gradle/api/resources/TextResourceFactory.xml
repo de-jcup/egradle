@@ -26,14 +26,14 @@
  
  @since 2.2 
 </description>
-    <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromArchiveEntry">
+    <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromArchiveEntry" documented="true">
         <description> 
  Same as &lt;a href='type://fromArchiveEntry(archive, path, Charset.defaultCharset().name())'&gt;fromArchiveEntry(archive, path, Charset.defaultCharset().name())&lt;/a&gt;. 
 </description>
         <parameter type="java.lang.Object" name="archive"/>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="">
+    <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" delegationTarget="" documented="true">
         <description> 
  Creates a text resource backed by the archive entry at the given path within the given archive. 
  The archive format is determined based on the archive's file extension. If the archive format 
@@ -49,13 +49,13 @@
         <parameter type="java.lang.String" name="entryPath"/>
         <parameter type="java.lang.String" name="charset"/>
     </method>
-    <method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromFile">
+    <method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="fromFile" documented="true">
         <description> 
  Same as &lt;a href='type://fromFile(file, Charset.defaultCharset())'&gt;fromFile(file, Charset.defaultCharset())&lt;/a&gt;. 
 </description>
         <parameter type="java.lang.Object" name="file"/>
     </method>
-    <method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="">
+    <method name="fromFile" returnType="org.gradle.api.resources.TextResource" delegationTarget="" documented="true">
         <description> 
  Creates a text resource backed by the given file. 
  
@@ -66,7 +66,7 @@
         <parameter type="java.lang.Object" name="file"/>
         <parameter type="java.lang.String" name="charset"/>
     </method>
-    <method name="fromString" returnType="org.gradle.api.resources.TextResource">
+    <method name="fromString" returnType="org.gradle.api.resources.TextResource" documented="true">
         <description> 
  Creates a text resource backed by the given string. 
  
@@ -75,9 +75,4 @@
 </description>
         <parameter type="java.lang.String" name="string"/>
     </method>
-    <documentation>
-        <method name="fromString"/>
-        <method name="fromFile"/>
-        <method name="fromArchiveEntry"/>
-    </documentation>
 </type>

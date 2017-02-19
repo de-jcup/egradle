@@ -7,5 +7,4 @@
     <interface name="org.gradle.platform.base.ComponentSpec"/>
     <interface name="org.gradle.platform.base.SourceComponentSpec"/>
     <interface name="org.gradle.platform.base.VariantComponentSpec"/>
-    <documentation/>
 </type>

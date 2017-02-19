@@ -64,7 +64,7 @@
  &lt;/p&gt; 
 </description>
     </method>
-    <method name="outOfDate" returnType="void" delegationTarget="groovy.lang.Closure">
+    <method name="outOfDate" returnType="void" delegationTarget="groovy.lang.Closure" documented="true">
         <description> 
  Executes the action for all of the input files that are out-of-date since the previous task execution. The action may also be supplied as a &lt;a href='type://groovy.lang.Closure'&gt;groovy.lang.Closure&lt;/a&gt;. 
  &lt;ul&gt; 
@@ -78,7 +78,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="outOfDateAction"/>
     </method>
-    <method name="removed" returnType="void" delegationTarget="groovy.lang.Closure">
+    <method name="removed" returnType="void" delegationTarget="groovy.lang.Closure" documented="true">
         <description> 
  Executes the action for all of the input files that were removed since the previous task execution. The action may also be supplied as a &lt;a href='type://groovy.lang.Closure'&gt;groovy.lang.Closure&lt;/a&gt;. 
  &lt;ul&gt; 
@@ -94,7 +94,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="removedAction"/>
     </method>
-    <property name="incremental" type="boolean">
+    <property name="incremental" type="boolean" documented="true">
         <description> 
  Indicates if it was possible for Gradle to determine which exactly input files were out of date compared to a previous execution. 
  This is &lt;em&gt;not&lt;/em&gt; possible in the case of no previous execution, changed input properties, output files, etc. 
@@ -114,9 +114,4 @@
  &lt;/p&gt; 
 </description>
     </property>
-    <documentation>
-        <property name="incremental"/>
-        <method name="outOfDate"/>
-        <method name="removed"/>
-    </documentation>
 </type>

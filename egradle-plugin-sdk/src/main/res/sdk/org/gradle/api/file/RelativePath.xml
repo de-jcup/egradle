@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.file.RelativePath" version="3.0">
+<type language="gradle" name="org.gradle.api.file.RelativePath" version="3.0">
     <description> 
  &lt;p&gt;Represents a relative path from some base directory to a file.  Used in file copying to represent both a source 
  and target file path when copying files.&lt;/p&gt; 
@@ -115,5 +115,4 @@
     </property>
     <property name="pathString" type="java.lang.String"/>
     <property name="segments" type="java.lang.String"/>
-    <documentation/>
 </type>

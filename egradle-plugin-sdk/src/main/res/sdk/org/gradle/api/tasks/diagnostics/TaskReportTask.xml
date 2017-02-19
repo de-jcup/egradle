@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.TaskReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.TaskReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
     <description> 
  &lt;p&gt;Displays a list of tasks in the project. An instance of this type is used when you execute the &lt;a href='type://tasks'&gt;tasks&lt;/a&gt; task 
  from the command-line.&lt;/p&gt; 
@@ -20,5 +20,4 @@
     <property name="projectTaskLister" type="org.gradle.api.internal.project.ProjectTaskLister"/>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="showDetail" type="boolean"/>
-    <documentation/>
 </type>

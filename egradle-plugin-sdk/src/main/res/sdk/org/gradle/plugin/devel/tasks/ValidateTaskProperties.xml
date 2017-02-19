@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugin.devel.tasks.ValidateTaskProperties" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.plugin.devel.tasks.ValidateTaskProperties" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Validates task property annotations. 
  
@@ -151,5 +151,4 @@
  Returns the output file to store the report in. 
 </description>
     </property>
-    <documentation/>
 </type>

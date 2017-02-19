@@ -95,5 +95,4 @@
  @see #setSkipUnmappedConfs(boolean)  
 </description>
     </property>
-    <documentation/>
 </type>

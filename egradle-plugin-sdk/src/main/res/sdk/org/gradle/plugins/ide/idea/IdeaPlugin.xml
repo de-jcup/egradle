@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.IdeaPlugin" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.IdeaPlugin" version="3.0">
     <description> 
  Adds a GenerateIdeaModule task. When applied to a root project, also adds a GenerateIdeaProject task. For projects that have the Java plugin applied, the tasks receive additional Java-specific 
  configuration. 
@@ -77,5 +77,4 @@
     <property name="maxJavaModuleCompatibilityVersionFor" type="org.gradle.api.JavaVersion"/>
     <property name="model" type="org.gradle.plugins.ide.idea.model.IdeaModel"/>
     <property name="root" type="boolean"/>
-    <documentation/>
 </type>

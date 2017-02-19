@@ -46,5 +46,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the build command. Does not return null. 
 </description>
     </property>
-    <documentation/>
 </type>

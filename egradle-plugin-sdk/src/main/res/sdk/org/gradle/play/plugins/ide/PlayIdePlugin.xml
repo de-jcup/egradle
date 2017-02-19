@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.ide.PlayIdePlugin" version="3.0">
+<type language="gradle" name="org.gradle.play.plugins.ide.PlayIdePlugin" version="3.0">
     <description> 
  Plugin for configuring IDE plugins when the project uses the Play Framework component support. 
  
@@ -12,5 +12,4 @@
         <parameter type="org.gradle.api.plugins.AppliedPlugin" name="appliedPlugin"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

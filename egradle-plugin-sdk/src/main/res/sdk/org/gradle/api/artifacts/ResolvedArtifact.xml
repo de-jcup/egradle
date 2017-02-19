@@ -29,5 +29,4 @@
     </property>
     <property name="name" type="java.lang.String"/>
     <property name="type" type="java.lang.String"/>
-    <documentation/>
 </type>

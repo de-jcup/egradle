@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration" version="3.0">
+<type language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration" version="3.0">
     <description> 
  Wrapper around a Configuration instance used by the PlayApplicationPlugin. 
 </description>
@@ -17,5 +17,4 @@
     <property name="changingArtifacts" type="org.gradle.api.file.FileCollection"/>
     <property name="configuration" type="org.gradle.api.artifacts.Configuration"/>
     <property name="nonChangingArtifacts" type="org.gradle.api.file.FileCollection"/>
-    <documentation/>
 </type>

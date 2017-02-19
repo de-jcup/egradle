@@ -116,5 +116,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The working directory. Never returns null. 
 </description>
     </property>
-    <documentation/>
 </type>

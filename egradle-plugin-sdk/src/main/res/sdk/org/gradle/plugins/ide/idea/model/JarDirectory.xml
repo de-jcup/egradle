@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.model.JarDirectory" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.JarDirectory" version="3.0">
     <description> 
  Represents a jar directory element of an idea module library. 
 </description>
@@ -29,5 +29,4 @@
 </description>
     </property>
     <property name="recursive" type="boolean"/>
-    <documentation/>
 </type>

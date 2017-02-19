@@ -4,13 +4,13 @@
  A native component that can be configured to target certain variant dimensions. 
  This functionality is a temporary workaround to eliminate configuration of unnecessary domain objects and tasks. 
 </description>
-    <method name="targetBuildTypes" returnType="void" delegationTarget="BuildType">
+    <method name="targetBuildTypes" returnType="void" delegationTarget="BuildType" documented="true">
         <description> 
  Specifies the names of one or more &lt;a href='type://BuildType'&gt;BuildType&lt;/a&gt;s that this component should be built for. 
 </description>
         <parameter type="java.lang.String" name="buildTypeSelectors"/>
     </method>
-    <method name="targetFlavors" returnType="void" delegationTarget="Flavor">
+    <method name="targetFlavors" returnType="void" delegationTarget="Flavor" documented="true">
         <description> 
  Specifies the names of one or more &lt;a href='type://Flavor'&gt;Flavor&lt;/a&gt;s that this component should be built for. 
 </description>
@@ -18,8 +18,4 @@
     </method>
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.platform.base.PlatformAwareComponentSpec"/>
-    <documentation>
-        <method name="targetFlavors"/>
-        <method name="targetBuildTypes"/>
-    </documentation>
 </type>

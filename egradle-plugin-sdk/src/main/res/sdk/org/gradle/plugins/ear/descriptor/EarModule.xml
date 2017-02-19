@@ -48,5 +48,4 @@
  The connector element specifies the URI of an archive file, relative to the top level of the application package. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
+<type language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
     <description> 
  Compiles Scala source files, and optionally, Java source files. 
 </description>
@@ -34,7 +34,7 @@
         <parameter type="org.gradle.api.file.FileCollection" name="zincClasspath"/>
     </method>
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
-    <property name="scalaClasspath" type="org.gradle.api.file.FileCollection">
+    <property name="scalaClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the classpath to use to load the Scala compiler. 
 </description>
@@ -45,8 +45,4 @@
  Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
 </description>
     </property>
-    <documentation>
-        <property name="scalaClasspath"/>
-        <property name="scala-compiler dependency matching the scala-library version found on classpath"/>
-    </documentation>
 </type>

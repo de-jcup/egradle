@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.NonExtensible" version="3.0">
+<type language="gradle" name="org.gradle.api.NonExtensible" version="3.0">
     <description> 
  Indicates that the type, when DSL enhanced, does not support extensibility. 
  &lt;p&gt; 
  This means that it will not be enhanced with &lt;a href='type://org.gradle.api.plugins.ExtensionAware'&gt;org.gradle.api.plugins.ExtensionAware&lt;/a&gt;. 
 </description>
-    <documentation/>
 </type>

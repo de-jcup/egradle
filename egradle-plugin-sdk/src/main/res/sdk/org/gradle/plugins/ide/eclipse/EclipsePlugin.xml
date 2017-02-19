@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.EclipsePlugin" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.EclipsePlugin" version="3.0">
     <description> 
  &lt;p&gt;A plugin which generates Eclipse files.&lt;/p&gt; 
 </description>
@@ -97,5 +97,4 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <property name="lifecycleTaskName" type="java.lang.String"/>
-    <documentation/>
 </type>

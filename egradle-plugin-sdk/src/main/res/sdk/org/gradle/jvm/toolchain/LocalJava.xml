@@ -20,5 +20,4 @@
  Returns the path to the local Java installation. 
 </description>
     </property>
-    <documentation/>
 </type>

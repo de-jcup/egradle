@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.specs.NotSpec" version="3.0">
+<type language="gradle" name="org.gradle.api.specs.NotSpec" version="3.0">
     <description> 
  A &lt;a href='type://org.gradle.api.specs.Spec'&gt;org.gradle.api.specs.Spec&lt;/a&gt; implementation which negates another &lt;a href='type://Spec'&gt;Spec&lt;/a&gt;. 
   
@@ -12,5 +12,4 @@
     <interface name="org.gradle.api.specs.Spec"/>
     <property name="satisfiedBy" type="boolean"/>
     <property name="sourceSpec" type="org.gradle.api.specs.Spec"/>
-    <documentation/>
 </type>

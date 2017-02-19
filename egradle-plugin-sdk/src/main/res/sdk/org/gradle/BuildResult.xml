@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.BuildResult" version="3.0">
+<type language="gradle" name="org.gradle.BuildResult" version="3.0">
     <description> 
  &lt;p&gt;A &lt;a href='type://BuildResult'&gt;BuildResult&lt;/a&gt; packages up the results of a build executed by a &lt;a href='type://org.gradle.initialization.GradleLauncher'&gt;org.gradle.initialization.GradleLauncher&lt;/a&gt; instance.&lt;/p&gt; 
 </description>
@@ -22,5 +22,4 @@
     </property>
     <property name="failure" type="java.lang.Throwable"/>
     <property name="gradle" type="org.gradle.api.invocation.Gradle"/>
-    <documentation/>
 </type>

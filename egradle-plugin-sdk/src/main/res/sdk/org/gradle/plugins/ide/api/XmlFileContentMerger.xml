@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.api.XmlFileContentMerger" version="3.0" superType="org.gradle.plugins.ide.api.FileContentMerger">
+<type language="gradle" name="org.gradle.plugins.ide.api.XmlFileContentMerger" version="3.0" superType="org.gradle.plugins.ide.api.FileContentMerger">
     <description> 
  Models the generation/parsing/merging capabilities. 
  Adds XML-related hooks. 
@@ -11,7 +11,7 @@
     <method name="setXmlTransformer" returnType="void">
         <parameter type="org.gradle.internal.xml.XmlTransformer" name="xmlTransformer"/>
     </method>
-    <method name="withXml" returnType="void" delegationTarget="XmlProvider">
+    <method name="withXml" returnType="void" delegationTarget="XmlProvider" documented="true">
         <description> 
  Adds a closure to be called when the file has been created. 
  The XML is passed to the closure as a parameter in form of a &lt;a href='type://XmlProvider'&gt;XmlProvider&lt;/a&gt;. 
@@ -24,7 +24,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="withXml" returnType="void">
+    <method name="withXml" returnType="void" documented="true">
         <description> 
  Adds an action to be called when the file has been created. 
  &lt;p&gt; 
@@ -35,7 +35,4 @@
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <property name="xmlTransformer" type="org.gradle.internal.xml.XmlTransformer"/>
-    <documentation>
-        <method name="withXml"/>
-    </documentation>
 </type>

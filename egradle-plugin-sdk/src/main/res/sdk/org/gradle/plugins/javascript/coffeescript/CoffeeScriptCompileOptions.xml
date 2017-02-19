@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions" version="3.0">
+<type language="gradle" name="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions" version="3.0">
     <method name="getEncoding" returnType="java.lang.String"/>
     <method name="setEncoding" returnType="void">
         <parameter type="java.lang.String" name="encoding"/>
     </method>
     <interface name="java.io.Serializable"/>
     <property name="encoding" type="java.lang.String"/>
-    <documentation/>
 </type>

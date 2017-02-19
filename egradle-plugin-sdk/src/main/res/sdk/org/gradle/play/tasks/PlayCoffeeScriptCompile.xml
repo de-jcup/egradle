@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.play.tasks.PlayCoffeeScriptCompile" version="3.0" superType="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile">
+<type language="gradle" name="org.gradle.play.tasks.PlayCoffeeScriptCompile" version="3.0" superType="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile">
     <description> 
  Task for compiling CoffeeScript sources into JavaScript. 
 </description>
@@ -20,5 +20,4 @@
     <property name="coffeeScriptJsNotation" type="java.lang.String"/>
     <property name="detachedConfiguration" type="org.gradle.api.artifacts.Configuration"/>
     <property name="rhinoClasspathNotation" type="java.lang.String"/>
-    <documentation/>
 </type>

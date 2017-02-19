@@ -13,5 +13,4 @@
  Returns a human-consumable display name for this binary. 
 </description>
     </property>
-    <documentation/>
 </type>

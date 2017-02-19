@@ -4,5 +4,4 @@
  A software component produced by a Gradle software project. 
 </description>
     <interface name="org.gradle.api.Named"/>
-    <documentation/>
 </type>

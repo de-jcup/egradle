@@ -87,5 +87,4 @@
  same version each time. Defaults to true. 
 </description>
     </property>
-    <documentation/>
 </type>

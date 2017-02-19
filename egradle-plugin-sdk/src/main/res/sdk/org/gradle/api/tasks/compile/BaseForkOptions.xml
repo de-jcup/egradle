@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.compile.BaseForkOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
+<type language="gradle" name="org.gradle.api.tasks.compile.BaseForkOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
     <description> 
  Fork options for compilation. Only take effect if &lt;a href='type://fork'&gt;fork&lt;/a&gt; 
  is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
@@ -64,5 +64,4 @@
  Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used. 
 </description>
     </property>
-    <documentation/>
 </type>

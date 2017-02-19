@@ -4,7 +4,7 @@
  Allows replacing dependencies with other dependencies. 
  @since 2.5 
 </description>
-    <method name="all" returnType="org.gradle.api.artifacts.DependencySubstitutions" delegationTarget="DependencySubstitution">
+    <method name="all" returnType="org.gradle.api.artifacts.DependencySubstitutions" delegationTarget="DependencySubstitution" documented="true">
         <description> 
  Adds a dependency substitution rule that is triggered for every dependency (including transitive) 
  when the configuration is being resolved. The action receives an instance of &lt;a href='type://DependencySubstitution'&gt;DependencySubstitution&lt;/a&gt; 
@@ -34,19 +34,19 @@
 </description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
-    <method name="module" returnType="org.gradle.api.artifacts.component.ComponentSelector">
+    <method name="module" returnType="org.gradle.api.artifacts.component.ComponentSelector" documented="true">
         <description> 
  Create a ModuleComponentSelector from the provided input string. Strings must be in the format "{group}:{module}:{version}". 
 </description>
         <parameter type="java.lang.String" name="notation"/>
     </method>
-    <method name="project" returnType="org.gradle.api.artifacts.component.ComponentSelector">
+    <method name="project" returnType="org.gradle.api.artifacts.component.ComponentSelector" documented="true">
         <description> 
  Create a ProjectComponentSelector from the provided input string. Strings must be in the format ":path". 
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="substitute" returnType="org.gradle.api.artifacts.DependencySubstitutions.Substitution">
+    <method name="substitute" returnType="org.gradle.api.artifacts.DependencySubstitutions.Substitution" documented="true">
         <description> 
  DSL-friendly mechanism to construct a dependency substitution for dependencies matching the provided selector. 
  &lt;p/&gt; 
@@ -65,10 +65,4 @@
 </description>
         <parameter type="org.gradle.api.artifacts.component.ComponentSelector" name="substitutedDependency"/>
     </method>
-    <documentation>
-        <method name="all"/>
-        <method name="module"/>
-        <method name="project"/>
-        <method name="substitute"/>
-    </documentation>
 </type>

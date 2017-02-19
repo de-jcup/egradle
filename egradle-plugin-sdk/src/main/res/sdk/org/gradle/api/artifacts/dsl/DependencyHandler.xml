@@ -212,7 +212,7 @@
  The module notation is the same as the dependency notations described above, except that the classifier property is 
  not available. Client modules are represented using a &lt;a href='type://org.gradle.api.artifacts.ClientModule'&gt;org.gradle.api.artifacts.ClientModule&lt;/a&gt;. 
 </description>
-    <method name="add" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="add" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Adds a dependency to the given configuration. 
  
@@ -225,7 +225,7 @@
         <parameter type="java.lang.String" name="configurationName"/>
         <parameter type="java.lang.Object" name="dependencyNotation"/>
     </method>
-    <method name="add" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="add" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Adds a dependency to the given configuration, and configures the dependency using the given closure. 
  
@@ -238,7 +238,7 @@
         <parameter type="java.lang.Object" name="dependencyNotation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="components" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+    <method name="components" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
         <description> 
  Configures component metadata for this project. 
  
@@ -249,7 +249,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <method name="create" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="create" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency without adding it to a configuration. 
  
@@ -258,7 +258,7 @@
 </description>
         <parameter type="java.lang.Object" name="dependencyNotation"/>
     </method>
-    <method name="create" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="create" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency without adding it to a configuration, and configures the dependency using 
  the given closure. 
@@ -270,7 +270,7 @@
         <parameter type="java.lang.Object" name="dependencyNotation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery">
+    <method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
         <description> 
  Creates an artifact resolution query. 
  
@@ -295,7 +295,7 @@
  @since 2.2 
 </description>
     </method>
-    <method name="gradleApi" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="gradleApi" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency on the API of the current version of Gradle. 
  
@@ -310,14 +310,14 @@
  @since 2.6 
 </description>
     </method>
-    <method name="localGroovy" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="localGroovy" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency on the Groovy that is distributed with the current version of Gradle. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency. 
 </description>
     </method>
-    <method name="module" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="module" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency on a client module. 
  
@@ -326,7 +326,7 @@
 </description>
         <parameter type="java.lang.Object" name="notation"/>
     </method>
-    <method name="module" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="module" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency on a client module. The dependency is configured using the given closure before it is 
  returned. 
@@ -338,7 +338,7 @@
         <parameter type="java.lang.Object" name="notation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="modules" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler">
+    <method name="modules" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler" documented="true">
         <description> 
  Configures module metadata for this project. 
  
@@ -349,7 +349,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <method name="project" returnType="org.gradle.api.artifacts.Dependency">
+    <method name="project" returnType="org.gradle.api.artifacts.Dependency" documented="true">
         <description> 
  Creates a dependency on a project. 
  
@@ -358,7 +358,7 @@
 </description>
         <parameter type="java.util.Map" name="notation"/>
     </method>
-    <property name="components" type="org.gradle.api.artifacts.dsl.ComponentMetadataHandler">
+    <property name="components" type="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
         <description> 
  Returns the component metadata handler for this project. The returned handler can be used for adding rules 
  that modify the metadata of depended-on software components. 
@@ -367,7 +367,7 @@
  @since 1.8 
 </description>
     </property>
-    <property name="modules" type="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler">
+    <property name="modules" type="org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler" documented="true">
         <description> 
  Returns the component module metadata handler for this project. The returned handler can be used for adding rules 
  that modify the metadata of depended-on software components. 
@@ -376,17 +376,4 @@
  @since 2.2 
 </description>
     </property>
-    <documentation>
-        <property name="components"/>
-        <property name="modules"/>
-        <method name="add"/>
-        <method name="create"/>
-        <method name="module"/>
-        <method name="project"/>
-        <method name="gradleApi"/>
-        <method name="localGroovy"/>
-        <method name="components"/>
-        <method name="modules"/>
-        <method name="createArtifactResolutionQuery"/>
-    </documentation>
 </type>

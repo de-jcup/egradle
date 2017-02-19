@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.signatory.pgp.PgpSignatoryProvider" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.signatory.pgp.PgpSignatoryProvider" version="3.0">
     <description> 
  A &lt;a href='type://SignatoryProvider'&gt;SignatoryProvider&lt;/a&gt; of &lt;a href='type://PgpSignatory'&gt;PgpSignatory&lt;/a&gt; instances. 
 </description>
@@ -19,5 +19,4 @@
     <interface name="org.gradle.plugins.signing.signatory.SignatoryProvider"/>
     <property name="defaultSignatory" type="org.gradle.plugins.signing.signatory.pgp.PgpSignatory"/>
     <property name="signatory" type="org.gradle.plugins.signing.signatory.pgp.PgpSignatory"/>
-    <documentation/>
 </type>

@@ -4,5 +4,4 @@
  A specification of a &lt;a href='type://org.gradle.platform.base.Application'&gt;org.gradle.platform.base.Application&lt;/a&gt;. 
 </description>
     <interface name="org.gradle.platform.base.GeneralComponentSpec"/>
-    <documentation/>
 </type>

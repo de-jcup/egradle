@@ -27,5 +27,4 @@
  A real world example: 'com.google.collections:google-collections' is replaced by 'com.google.guava:guava'. 
 </description>
     </property>
-    <documentation/>
 </type>

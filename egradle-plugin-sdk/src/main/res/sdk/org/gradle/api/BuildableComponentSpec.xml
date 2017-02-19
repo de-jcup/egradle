@@ -29,5 +29,4 @@
  Returns the task responsible for building this component. 
 </description>
     </property>
-    <documentation/>
 </type>

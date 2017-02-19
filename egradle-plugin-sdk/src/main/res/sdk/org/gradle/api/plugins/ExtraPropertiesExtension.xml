@@ -48,7 +48,7 @@
  When the &lt;a href='type://ExtraPropertiesExtension#get(String)'&gt;#get(String)&lt;/a&gt; method is used, an &lt;a href='type://UnknownPropertyException'&gt;UnknownPropertyException&lt;/a&gt; will be thrown. 
  
 </description>
-    <method name="get" returnType="java.lang.Object" delegationTarget="UnknownPropertyException">
+    <method name="get" returnType="java.lang.Object" delegationTarget="UnknownPropertyException" documented="true">
         <description> 
  Returns the value for the registered property with the given name. 
  
@@ -100,7 +100,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map. 
 </description>
     </method>
-    <method name="has" returnType="boolean" delegationTarget="true">
+    <method name="has" returnType="boolean" delegationTarget="true" documented="true">
         <description> 
  Returns whether or not the extension has a property registered via the given name. 
  
@@ -119,7 +119,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="set" returnType="void">
+    <method name="set" returnType="void" documented="true">
         <description> 
  Updates the value for, or creates, the registered property with the given name to the given value. 
  
@@ -142,7 +142,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="value"/>
     </method>
-    <property name="properties" type="java.util.Map">
+    <property name="properties" type="java.util.Map" documented="true">
         <description> 
  Returns all of the registered properties and their current values as a map. 
  
@@ -166,10 +166,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map. 
 </description>
     </property>
-    <documentation>
-        <property name="properties"/>
-        <method name="get"/>
-        <method name="set"/>
-        <method name="has"/>
-    </documentation>
 </type>

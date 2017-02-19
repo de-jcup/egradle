@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.nativeplatform.NativeExecutableFileSpec" version="3.0">
+<type language="gradle" name="org.gradle.nativeplatform.NativeExecutableFileSpec" version="3.0">
     <description> 
  Specifies how to build and where to place a native executable file. 
  
@@ -15,5 +15,4 @@
     </method>
     <property name="file" type="java.io.File"/>
     <property name="toolChain" type="org.gradle.platform.base.ToolChain"/>
-    <documentation/>
 </type>

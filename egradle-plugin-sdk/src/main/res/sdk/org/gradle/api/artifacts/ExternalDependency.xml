@@ -29,5 +29,4 @@
  Returns whether or not the version of this dependency should be enforced in the case of version conflicts. 
 </description>
     </property>
-    <documentation/>
 </type>

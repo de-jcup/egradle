@@ -41,5 +41,4 @@
     </method>
     <interface name="java.util.Set"/>
     <interface name="org.gradle.model.ModelElement"/>
-    <documentation/>
 </type>

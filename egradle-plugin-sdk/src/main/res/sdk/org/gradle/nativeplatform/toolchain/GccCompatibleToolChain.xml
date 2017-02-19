@@ -15,7 +15,7 @@
  These are used to locate tools for this tool chain, and are prepended to the system PATH when executing these tools. 
 </description>
     </method>
-    <method name="path" returnType="void">
+    <method name="path" returnType="void" documented="true">
         <description> 
  Append an entry or entries to the tool chain path. 
  
@@ -37,14 +37,10 @@
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <interface name="org.gradle.nativeplatform.toolchain.NativeToolChain"/>
-    <property name="path" type="java.util.List">
+    <property name="path" type="java.util.List" documented="true">
         <description> 
  The paths setting required for executing the tool chain. 
  These are used to locate tools for this tool chain, and are prepended to the system PATH when executing these tools. 
 </description>
     </property>
-    <documentation>
-        <property name="path"/>
-        <method name="path"/>
-    </documentation>
 </type>

@@ -14,5 +14,4 @@
  Returns a human-consumable display name for this flavor. 
 </description>
     </property>
-    <documentation/>
 </type>

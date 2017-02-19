@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.CheckstyleExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
+<type language="gradle" name="org.gradle.api.plugins.quality.CheckstyleExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
     <description> 
  Configuration options for the Checkstyle plugin. 
  
@@ -44,42 +44,28 @@
     <method name="setShowViolations" returnType="void">
         <parameter type="boolean" name="showViolations"/>
     </method>
-    <property name="config" type="org.gradle.api.resources.TextResource">
+    <property name="config" type="org.gradle.api.resources.TextResource" documented="true">
         <description> 
  The Checkstyle configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property. 
  
  @since 2.2 
 </description>
     </property>
-    <property name="configFile" type="java.io.File">
+    <property name="configFile" type="java.io.File" documented="true">
         <description> 
  The Checkstyle configuration file to use. 
 </description>
     </property>
-    <property name="configProperties" type="java.util.Map">
+    <property name="configProperties" type="java.util.Map" documented="true">
         <description> 
  The properties available for use in the configuration file. These are substituted into the configuration file. 
 </description>
     </property>
-    <property name="showViolations" type="boolean">
+    <property name="showViolations" type="boolean" documented="true">
         <description> 
  Whether or not rule violations are to be displayed on the console. Defaults to &lt;tt&gt;true&lt;/tt&gt;. 
  
  Example: showViolations = false 
 </description>
     </property>
-    <documentation>
-        <property name="toolVersion"/>
-        <property name="5.9"/>
-        <property name="reportsDir"/>
-        <property name="${project.reporting.baseDir}/checkstyle"/>
-        <property name="config"/>
-        <property name="${project.projectDir}/config/checkstyle/checkstyle.xml"/>
-        <property name="configFile"/>
-        <property name="${project.projectDir}/config/checkstyle/checkstyle.xml"/>
-        <property name="configProperties"/>
-        <property name="[:]"/>
-        <property name="showViolations"/>
-        <property name="true"/>
-    </documentation>
 </type>

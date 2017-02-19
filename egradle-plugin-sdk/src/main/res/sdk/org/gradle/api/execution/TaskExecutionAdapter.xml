@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.execution.TaskExecutionAdapter" version="3.0">
+<type language="gradle" name="org.gradle.api.execution.TaskExecutionAdapter" version="3.0">
     <description> 
  A &lt;a href='type://TaskExecutionListener'&gt;TaskExecutionListener&lt;/a&gt; adapter class for receiving task execution events. 
  
@@ -13,5 +13,4 @@
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
     <interface name="org.gradle.api.execution.TaskExecutionListener"/>
-    <documentation/>
 </type>

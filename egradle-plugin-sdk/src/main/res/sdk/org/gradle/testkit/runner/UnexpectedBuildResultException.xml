@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildResultException" version="3.0">
+<type language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildResultException" version="3.0">
     <description> 
  Base class for &lt;a href='type://UnexpectedBuildFailure'&gt;UnexpectedBuildFailure&lt;/a&gt; and &lt;a href='type://UnexpectedBuildSuccess'&gt;UnexpectedBuildSuccess&lt;/a&gt;. 
  
@@ -20,5 +20,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the build execution 
 </description>
     </property>
-    <documentation/>
 </type>

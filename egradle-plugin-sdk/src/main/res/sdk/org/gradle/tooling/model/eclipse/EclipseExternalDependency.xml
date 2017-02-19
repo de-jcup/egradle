@@ -7,5 +7,4 @@
 </description>
     <interface name="org.gradle.tooling.model.ExternalDependency"/>
     <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
-    <documentation/>
 </type>

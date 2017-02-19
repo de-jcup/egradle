@@ -23,7 +23,7 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="create" returnType="T">
+    <method name="create" returnType="T" documented="true">
         <description> 
  Creates a new item with the given name, adding it to this container. 
  
@@ -33,7 +33,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="create" returnType="T">
+    <method name="create" returnType="T" documented="true">
         <description> 
  Creates a new item with the given name, adding it to this container, then configuring it with the given closure. 
  
@@ -45,7 +45,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="create" returnType="T">
+    <method name="create" returnType="T" documented="true">
         <description> 
  Creates a new item with the given name, adding it to this container, then configuring it with the given action. 
  
@@ -57,7 +57,7 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
-    <method name="maybeCreate" returnType="T">
+    <method name="maybeCreate" returnType="T" documented="true">
         <description> 
  Looks for an item with the given name, creating and adding it to this container if it does not exist. 
  
@@ -68,8 +68,4 @@
     </method>
     <interface name="org.gradle.api.NamedDomainObjectSet"/>
     <interface name="org.gradle.util.Configurable"/>
-    <documentation>
-        <method name="create"/>
-        <method name="maybeCreate"/>
-    </documentation>
 </type>

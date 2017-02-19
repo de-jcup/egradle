@@ -4,5 +4,4 @@
  Test suite of CUnit tests. 
 </description>
     <interface name="org.gradle.nativeplatform.test.NativeTestSuiteSpec"/>
-    <documentation/>
 </type>

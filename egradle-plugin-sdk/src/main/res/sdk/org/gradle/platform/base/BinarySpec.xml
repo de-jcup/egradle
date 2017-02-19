@@ -29,12 +29,12 @@
 </description>
     </method>
     <interface name="org.gradle.api.BuildableComponentSpec"/>
-    <property name="buildable" type="boolean">
+    <property name="buildable" type="boolean" documented="true">
         <description> 
  Can this binary be built in the current environment? 
 </description>
     </property>
-    <property name="inputs" type="org.gradle.api.DomainObjectSet">
+    <property name="inputs" type="org.gradle.api.DomainObjectSet" documented="true">
         <description> 
  Returns all inputs of the binary. This includes source sets owned by the binary, 
  and other source sets created elsewhere (e.g. inherited from the binary's component). 
@@ -42,22 +42,16 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;all inputs of the binary. 
 </description>
     </property>
-    <property name="sources" type="org.gradle.model.ModelMap">
+    <property name="sources" type="org.gradle.model.ModelMap" documented="true">
         <description> 
  The sources owned by this binary. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the sources owned by the binary. 
 </description>
     </property>
-    <property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection">
+    <property name="tasks" type="org.gradle.platform.base.BinaryTasksCollection" documented="true">
         <description> 
  The set of tasks associated with this binary. 
 </description>
     </property>
-    <documentation>
-        <property name="buildable"/>
-        <property name="sources"/>
-        <property name="inputs"/>
-        <property name="tasks"/>
-    </documentation>
 </type>

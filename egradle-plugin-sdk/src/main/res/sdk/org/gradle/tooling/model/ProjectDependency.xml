@@ -4,5 +4,4 @@
  Represents a dependency on another project. 
 </description>
     <interface name="org.gradle.tooling.model.Dependency"/>
-    <documentation/>
 </type>

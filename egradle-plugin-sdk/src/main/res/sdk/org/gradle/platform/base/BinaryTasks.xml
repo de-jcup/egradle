@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.platform.base.BinaryTasks" version="3.0">
+<type language="gradle" name="org.gradle.platform.base.BinaryTasks" version="3.0">
     <description> 
  Declares the tasks to build a custom &lt;a href='type://org.gradle.platform.base.BinarySpec'&gt;org.gradle.platform.base.BinarySpec&lt;/a&gt; binary. 
  
@@ -28,5 +28,4 @@
  } 
  &lt;/pre&gt; 
 </description>
-    <documentation/>
 </type>

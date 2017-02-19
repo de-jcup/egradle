@@ -16,5 +16,4 @@
  Returns the failure that occurred when trying to resolve the component. 
 </description>
     </property>
-    <documentation/>
 </type>

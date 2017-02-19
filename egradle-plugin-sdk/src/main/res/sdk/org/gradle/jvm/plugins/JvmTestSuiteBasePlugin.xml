@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.jvm.plugins.JvmTestSuiteBasePlugin" version="3.0" superType="org.gradle.model.RuleSource">
+<type language="gradle" name="org.gradle.jvm.plugins.JvmTestSuiteBasePlugin" version="3.0" superType="org.gradle.model.RuleSource">
     <description> 
  The base plugin that needs to be applied by all plugins which provide testing support 
  for the Java software model. 
@@ -43,5 +43,4 @@
     <method name="testTaskNameFor" returnType="java.lang.String">
         <parameter type="org.gradle.jvm.test.JvmTestSuiteBinarySpec" name="binary"/>
     </method>
-    <documentation/>
 </type>

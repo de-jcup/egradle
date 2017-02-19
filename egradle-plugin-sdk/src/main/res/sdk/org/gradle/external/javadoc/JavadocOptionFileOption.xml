@@ -8,5 +8,4 @@
     <method name="getOption" returnType="java.lang.String"/>
     <interface name="org.gradle.external.javadoc.OptionLessJavadocOptionFileOption"/>
     <property name="option" type="java.lang.String"/>
-    <documentation/>
 </type>

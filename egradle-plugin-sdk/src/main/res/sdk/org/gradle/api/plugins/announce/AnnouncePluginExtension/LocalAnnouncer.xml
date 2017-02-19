@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension.LocalAnnouncer" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension.LocalAnnouncer" version="3.0">
     <method name="getExtension" returnType="org.gradle.api.plugins.announce.AnnouncePluginExtension"/>
     <method name="getLocal" returnType="org.gradle.api.plugins.announce.Announcer"/>
     <method name="send" returnType="void">
@@ -15,5 +15,4 @@
     <interface name="org.gradle.api.plugins.announce.Announcer"/>
     <property name="extension" type="org.gradle.api.plugins.announce.AnnouncePluginExtension"/>
     <property name="local" type="org.gradle.api.plugins.announce.Announcer"/>
-    <documentation/>
 </type>

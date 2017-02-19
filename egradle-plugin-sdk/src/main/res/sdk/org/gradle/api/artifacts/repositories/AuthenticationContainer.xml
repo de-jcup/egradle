@@ -4,5 +4,4 @@
  Container for configuring repository authentication schemes of type &lt;a href='type://org.gradle.authentication.Authentication'&gt;org.gradle.authentication.Authentication&lt;/a&gt;. 
 </description>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
-    <documentation/>
 </type>

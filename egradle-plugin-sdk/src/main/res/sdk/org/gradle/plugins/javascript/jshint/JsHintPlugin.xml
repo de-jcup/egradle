@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.javascript.jshint.JsHintPlugin" version="3.0">
+<type language="gradle" name="org.gradle.plugins.javascript.jshint.JsHintPlugin" version="3.0">
     <method name="addConfiguration" returnType="org.gradle.api.artifacts.Configuration">
         <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
         <parameter type="org.gradle.api.artifacts.dsl.DependencyHandler" name="dependencies"/>
@@ -16,5 +16,4 @@
         <parameter type="org.gradle.plugins.javascript.jshint.JsHint" name="task"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
-    <documentation/>
 </type>

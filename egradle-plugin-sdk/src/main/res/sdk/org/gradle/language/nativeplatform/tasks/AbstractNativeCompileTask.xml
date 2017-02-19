@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Compiles native source files into object files. 
 </description>
@@ -52,7 +52,7 @@
  The tool chain used for compilation. 
 </description>
     </method>
-    <method name="includes" returnType="void">
+    <method name="includes" returnType="void" documented="true">
         <description> 
  Add directories where the compiler should search for header files. 
 </description>
@@ -81,64 +81,52 @@
     <method name="setToolChain" returnType="void">
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
-    <method name="source" returnType="void">
+    <method name="source" returnType="void" documented="true">
         <description> 
  Adds a set of source files to be compiled. The provided sourceFiles object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
 </description>
         <parameter type="java.lang.Object" name="sourceFiles"/>
     </method>
-    <property name="compilerArgs" type="java.util.List">
+    <property name="compilerArgs" type="java.util.List" documented="true">
         <description> 
  Additional arguments to provide to the compiler. 
 </description>
     </property>
-    <property name="includes" type="org.gradle.api.file.FileCollection">
+    <property name="includes" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the header directories to be used for compilation. 
 </description>
     </property>
     <property name="incrementalCompilerBuilder" type="org.gradle.language.nativeplatform.internal.incremental.IncrementalCompilerBuilder"/>
-    <property name="macros" type="java.util.Map">
+    <property name="macros" type="java.util.Map" documented="true">
         <description> 
  Macros that should be defined for the compiler. 
 </description>
     </property>
-    <property name="objectFileDir" type="java.io.File">
+    <property name="objectFileDir" type="java.io.File" documented="true">
         <description> 
  The directory where object files will be generated. 
 </description>
     </property>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
-    <property name="positionIndependentCode" type="boolean">
+    <property name="positionIndependentCode" type="boolean" documented="true">
         <description> 
  Should the compiler generate position independent code? 
 </description>
     </property>
-    <property name="source" type="org.gradle.api.file.FileCollection">
+    <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
         <description> 
  Returns the source files to be compiled. 
 </description>
     </property>
-    <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform">
+    <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform" documented="true">
         <description> 
  The platform being targeted. 
 </description>
     </property>
-    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
+    <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
         <description> 
  The tool chain used for compilation. 
 </description>
     </property>
-    <documentation>
-        <property name="positionIndependentCode"/>
-        <property name="objectFileDir"/>
-        <property name="macros"/>
-        <property name="compilerArgs"/>
-        <property name="toolChain"/>
-        <property name="targetPlatform"/>
-        <property name="source"/>
-        <property name="includes"/>
-        <method name="includes"/>
-        <method name="source"/>
-    </documentation>
 </type>

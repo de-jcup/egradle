@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.tooling.GradleConnector" version="3.0">
+<type language="gradle" name="org.gradle.tooling.GradleConnector" version="3.0">
     <description> 
  &lt;p&gt;A &lt;a href='type://GradleConnector'&gt;GradleConnector&lt;/a&gt; is the main entry point to the Gradle tooling API. You use this API as follows:&lt;/p&gt; 
  
@@ -148,5 +148,4 @@
 </description>
         <parameter type="java.io.File" name="gradleHome"/>
     </method>
-    <documentation/>
 </type>

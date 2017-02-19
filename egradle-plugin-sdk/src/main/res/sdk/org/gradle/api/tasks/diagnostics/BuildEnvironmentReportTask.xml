@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask" version="3.0" superType="org.gradle.api.DefaultTask">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> 
  Provides information about the build environment for the project that the task is associated with. 
  &lt;p&gt; 
@@ -27,5 +27,4 @@
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>
     <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <documentation/>
 </type>

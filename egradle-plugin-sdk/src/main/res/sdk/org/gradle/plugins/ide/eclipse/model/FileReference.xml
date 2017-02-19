@@ -43,5 +43,4 @@
  Returns true if this reference is relative to a path variable. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -33,5 +33,4 @@
 </description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
-    <documentation/>
 </type>

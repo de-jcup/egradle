@@ -160,5 +160,4 @@
     <property name="sourceNames" type="java.util.List"/>
     <property name="verbose" type="boolean"/>
     <property name="windowTitle" type="java.lang.String"/>
-    <documentation/>
 </type>

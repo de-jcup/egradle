@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0">
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0">
     <description> 
  Stops the embedded Jetty web container, if it is running. 
  
@@ -30,22 +30,16 @@
         <parameter type="java.lang.Integer" name="stopPort"/>
     </method>
     <method name="stop" returnType="void"/>
-    <property name="stopKey" type="java.lang.String">
+    <property name="stopKey" type="java.lang.String" documented="true">
         <description> 
  Returns the stop key. 
  
  @see #setStopKey(String) 
 </description>
     </property>
-    <property name="stopPort" type="java.lang.Integer">
+    <property name="stopPort" type="java.lang.Integer" documented="true">
         <description> 
  Returns the TCP port to use to send stop command. 
 </description>
     </property>
-    <documentation>
-        <property name="stopPort"/>
-        <property name="project.stopPort"/>
-        <property name="stopKey"/>
-        <property name="project.stopKey"/>
-    </documentation>
 </type>

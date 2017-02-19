@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.plugins.quality.JDependExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
+<type language="gradle" name="org.gradle.api.plugins.quality.JDependExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension">
     <description> 
  Configuration options for the JDepend plugin. 
  
  @see JDependPlugin 
 </description>
-    <documentation>
-        <property name="toolVersion"/>
-        <property name="2.9.1"/>
-        <property name="reportsDir"/>
-        <property name="${project.reporting.baseDir}/jdepend"/>
-    </documentation>
 </type>

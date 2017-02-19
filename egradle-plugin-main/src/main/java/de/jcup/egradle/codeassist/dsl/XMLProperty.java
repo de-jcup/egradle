@@ -21,6 +21,9 @@ public class XMLProperty implements ModifiableProperty{
 
 	private Type type;
 
+	@XmlAttribute(name = "documented", required=false)
+	private Boolean partOfGradleDSLDocumentation = null;
+
 	private Type parent;
 
 	@Override
@@ -60,6 +63,20 @@ public class XMLProperty implements ModifiableProperty{
 	@Override
 	public void setParent(Type parent) {
 		this.parent = parent;
+	}
+	
+	@Override
+	public boolean isDocumented() {
+		/* workaround for JAXM preventing to: atribute="false" */
+		return partOfGradleDSLDocumentation!=null && partOfGradleDSLDocumentation.booleanValue();
+	}
+	
+	public void setDocumented(boolean partOfGradleDSLDocumentation) {
+		if (!partOfGradleDSLDocumentation){
+			this.partOfGradleDSLDocumentation = null;
+		}else{
+			this.partOfGradleDSLDocumentation = Boolean.TRUE;
+		}
 	}
 
 	@Override

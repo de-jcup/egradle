@@ -5,7 +5,7 @@ package de.jcup.egradle.codeassist.dsl;
  * @author Albert Tregnaghi
  *
  */
-public interface Property extends LanguageElement, TypeChild, Comparable<Property>{
+public interface Property extends LanguageElement, GradleDocumentationInfo, TypeChild, Comparable<Property>{
 
 	/**
 	 * Returns type of property itself

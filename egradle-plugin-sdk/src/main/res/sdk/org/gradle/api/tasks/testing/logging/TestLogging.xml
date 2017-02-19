@@ -174,7 +174,7 @@
 </description>
         <parameter type="java.lang.Object" name="stackTraces"/>
     </method>
-    <property name="displayGranularity" type="int">
+    <property name="displayGranularity" type="int" documented="true">
         <description> 
  Returns the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If 
  set to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test. 
@@ -182,21 +182,21 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the display granularity of the events to be logged 
 </description>
     </property>
-    <property name="events" type="java.util.Set">
+    <property name="events" type="java.util.Set" documented="true">
         <description> 
  Returns the events to be logged. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the events to be logged 
 </description>
     </property>
-    <property name="exceptionFormat" type="org.gradle.api.tasks.testing.logging.TestExceptionFormat">
+    <property name="exceptionFormat" type="org.gradle.api.tasks.testing.logging.TestExceptionFormat" documented="true">
         <description> 
  Returns the format to be used for logging test exceptions. Only relevant if &lt;a href='type://showStackTraces'&gt;showStackTraces&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the format to be used for logging test exceptions 
 </description>
     </property>
-    <property name="maxGranularity" type="int">
+    <property name="maxGranularity" type="int" documented="true">
         <description> 
  Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite 
  for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity 
@@ -205,7 +205,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the maximum granularity of the events to be logged 
 </description>
     </property>
-    <property name="minGranularity" type="int">
+    <property name="minGranularity" type="int" documented="true">
         <description> 
  Returns the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite 
  for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity 
@@ -214,50 +214,38 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the minimum granularity of the events to be logged 
 </description>
     </property>
-    <property name="showCauses" type="boolean">
+    <property name="showCauses" type="boolean" documented="true">
         <description> 
  Tells whether causes of exceptions that occur during test execution will be logged. Only relevant if &lt;a href='type://showExceptions'&gt;showExceptions&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether causes of exceptions that occur during test execution will be logged 
 </description>
     </property>
-    <property name="showExceptions" type="boolean">
+    <property name="showExceptions" type="boolean" documented="true">
         <description> 
  Tells whether exceptions that occur during test execution will be logged. Typically these exceptions coincide with a "failed" event. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether exceptions that occur during test execution will be logged 
 </description>
     </property>
-    <property name="showStackTraces" type="boolean">
+    <property name="showStackTraces" type="boolean" documented="true">
         <description> 
  Tells whether stack traces of exceptions that occur during test execution will be logged. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether stack traces of exceptions that occur during test execution will be logged 
 </description>
     </property>
-    <property name="showStandardStreams" type="boolean">
+    <property name="showStandardStreams" type="boolean" documented="true">
         <description> 
  Tells whether output on standard out and standard error will be logged. Equivalent to checking if both log events &lt;a href='type://TestLogEvent.STANDARD_OUT'&gt;TestLogEvent.STANDARD_OUT&lt;/a&gt; and &lt;a href='type://TestLogEvent.STANDARD_ERROR'&gt;TestLogEvent.STANDARD_ERROR&lt;/a&gt; are 
  set. 
 </description>
     </property>
-    <property name="stackTraceFilters" type="java.util.Set">
+    <property name="stackTraceFilters" type="java.util.Set" documented="true">
         <description> 
  Returns the set of filters to be used for sanitizing test stack traces. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of filters to be used for sanitizing test stack traces 
 </description>
     </property>
-    <documentation>
-        <property name="events"/>
-        <property name="minGranularity"/>
-        <property name="maxGranularity"/>
-        <property name="displayGranularity"/>
-        <property name="showExceptions"/>
-        <property name="showCauses"/>
-        <property name="showStackTraces"/>
-        <property name="showStandardStreams"/>
-        <property name="exceptionFormat"/>
-        <property name="stackTraceFilters"/>
-    </documentation>
 </type>

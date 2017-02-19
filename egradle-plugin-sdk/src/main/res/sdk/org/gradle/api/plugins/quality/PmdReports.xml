@@ -32,5 +32,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The pmd (single file) XML report 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -55,5 +55,4 @@
  Returns the detail that should be included in stacktraces. Defaults to &lt;a href='type://ShowStacktrace#INTERNAL_EXCEPTIONS'&gt;ShowStacktrace#INTERNAL_EXCEPTIONS&lt;/a&gt;. 
 </description>
     </property>
-    <documentation/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.api.tasks.Sync" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
+<type language="gradle" name="org.gradle.api.tasks.Sync" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask">
     <description> 
  Synchronises the contents of a destination directory with some source directories and files. 
 </description>
@@ -21,7 +21,7 @@
 </description>
         <parameter type="java.io.File" name="destinationDir"/>
     </method>
-    <property name="destinationDir" type="java.io.File">
+    <property name="destinationDir" type="java.io.File" documented="true">
         <description> 
  Returns the directory to copy files into. 
  
@@ -29,8 +29,4 @@
 </description>
     </property>
     <property name="rootSpec" type="DestinationRootCopySpec"/>
-    <documentation>
-        <property name="destinationDir"/>
-        <property name="null"/>
-    </documentation>
 </type>

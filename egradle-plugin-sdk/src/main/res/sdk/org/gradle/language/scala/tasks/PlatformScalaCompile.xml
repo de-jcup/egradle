@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.language.scala.tasks.PlatformScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
+<type language="gradle" name="org.gradle.language.scala.tasks.PlatformScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
     <description> 
  A platform-aware Scala compile task. 
 </description>
@@ -14,5 +14,4 @@
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="platform" type="org.gradle.language.scala.ScalaPlatform"/>
     <property name="toolChain" type="org.gradle.language.scala.internal.toolchain.ScalaToolChainInternal"/>
-    <documentation/>
 </type>

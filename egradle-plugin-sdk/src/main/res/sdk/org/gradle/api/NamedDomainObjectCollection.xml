@@ -104,7 +104,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The objects. Returns an empty map if this collection is empty. 
 </description>
     </method>
-    <method name="getAt" returnType="T" delegationTarget="">
+    <method name="getAt" returnType="T" delegationTarget="" documented="true">
         <description> 
  Locates an object by name, failing if there is no such task. This method is identical to &lt;a href='type://NamedDomainObjectCollection#getByName(String)'&gt;#getByName(String)&lt;/a&gt;. You can call this method in your build script by using the groovy &lt;a href='type://[]'&gt;[]&lt;/a&gt; operator. 
  
@@ -114,7 +114,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="getByName" returnType="T">
+    <method name="getByName" returnType="T" documented="true">
         <description> 
  Locates an object by name, failing if there is no such object. 
  
@@ -124,7 +124,7 @@
 </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
-    <method name="getByName" returnType="T">
+    <method name="getByName" returnType="T" documented="true">
         <description> 
  Locates an object by name, failing if there is no such object. The given configure closure is executed against 
  the object before it is returned from this method. The object is passed to the closure as its delegate. 
@@ -231,8 +231,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The rules, in the order they will be applied. 
 </description>
     </property>
-    <documentation>
-        <method name="getByName"/>
-        <method name="getAt"/>
-    </documentation>
 </type>

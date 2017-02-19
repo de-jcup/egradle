@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.signing.type.AbstractSignatureTypeProvider" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.type.AbstractSignatureTypeProvider" version="3.0">
     <description> 
  Convenience base class for &lt;a href='type://SignatureTypeProvider'&gt;SignatureTypeProvider&lt;/a&gt; implementations. 
 </description>
@@ -22,5 +22,4 @@
     <interface name="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
     <property name="defaultType" type="org.gradle.plugins.signing.type.SignatureType"/>
     <property name="typeForExtension" type="org.gradle.plugins.signing.type.SignatureType"/>
-    <documentation/>
 </type>

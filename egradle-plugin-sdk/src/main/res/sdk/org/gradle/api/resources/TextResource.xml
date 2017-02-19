@@ -7,12 +7,12 @@
  
  @since 2.2 
 </description>
-    <method name="asFile" returnType="java.io.File" delegationTarget="asFile">
+    <method name="asFile" returnType="java.io.File" delegationTarget="asFile" documented="true">
         <description> 
  Same as &lt;a href='type://asFile(Charset.defaultCharset().name())'&gt;asFile(Charset.defaultCharset().name())&lt;/a&gt;. 
 </description>
     </method>
-    <method name="asFile" returnType="java.io.File" delegationTarget="">
+    <method name="asFile" returnType="java.io.File" delegationTarget="" documented="true">
         <description> 
  Returns a file containing the resource's text and using the given character encoding. 
  If this resource is backed by a file with a matching encoding, that file may be 
@@ -24,14 +24,14 @@
 </description>
         <parameter type="java.lang.String" name="charset"/>
     </method>
-    <method name="asReader" returnType="java.io.Reader" delegationTarget="Reader">
+    <method name="asReader" returnType="java.io.Reader" delegationTarget="Reader" documented="true">
         <description> 
  Returns an unbuffered &lt;a href='type://Reader'&gt;Reader&lt;/a&gt; that allows the resource's text to be read. The caller is responsible for closing the reader. 
  
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a reader that allows the resource's text to be read. 
 </description>
     </method>
-    <method name="asString" returnType="java.lang.String">
+    <method name="asString" returnType="java.lang.String" documented="true">
         <description> 
  Returns a string containing the resource's text 
  
@@ -73,9 +73,4 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input properties registered when this resource is used as task input 
 </description>
     </property>
-    <documentation>
-        <method name="asString"/>
-        <method name="asReader"/>
-        <method name="asFile"/>
-    </documentation>
 </type>

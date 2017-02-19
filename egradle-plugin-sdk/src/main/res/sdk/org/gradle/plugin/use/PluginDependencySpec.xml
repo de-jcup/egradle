@@ -34,7 +34,7 @@
 </description>
         <parameter type="boolean" name="apply"/>
     </method>
-    <method name="version" returnType="org.gradle.plugin.use.PluginDependencySpec" delegationTarget="null">
+    <method name="version" returnType="org.gradle.plugin.use.PluginDependencySpec" delegationTarget="null" documented="true">
         <description> 
  Specify the version of the plugin to depend on. 
  &lt;p/&gt; 
@@ -54,7 +54,4 @@
 </description>
         <parameter type="java.lang.String" name="version"/>
     </method>
-    <documentation>
-        <method name="version"/>
-    </documentation>
 </type>

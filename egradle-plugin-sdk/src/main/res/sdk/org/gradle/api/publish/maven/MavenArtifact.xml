@@ -3,7 +3,7 @@
     <description> 
  An artifact published as part of a &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;. 
 </description>
-    <method name="builtBy" returnType="void">
+    <method name="builtBy" returnType="void" documented="true">
         <description> 
  Registers some tasks which build this artifact. 
  
@@ -43,27 +43,21 @@
         <parameter type="java.lang.String" name="extension"/>
     </method>
     <interface name="org.gradle.api.Buildable"/>
-    <property name="classifier" type="java.lang.String">
+    <property name="classifier" type="java.lang.String" documented="true">
         <description> 
  The classifier used to publish the artifact file. 
  A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier. 
 </description>
     </property>
-    <property name="extension" type="java.lang.String">
+    <property name="extension" type="java.lang.String" documented="true">
         <description> 
  The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;. 
  For an artifact without an extension, this value will be an empty String. 
 </description>
     </property>
-    <property name="file" type="java.io.File">
+    <property name="file" type="java.io.File" documented="true">
         <description> 
  The actual file contents to publish. 
 </description>
     </property>
-    <documentation>
-        <property name="file"/>
-        <property name="extension"/>
-        <property name="classifier"/>
-        <method name="builtBy"/>
-    </documentation>
 </type>

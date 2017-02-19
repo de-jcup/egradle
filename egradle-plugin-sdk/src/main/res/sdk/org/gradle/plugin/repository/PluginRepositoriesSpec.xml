@@ -6,14 +6,14 @@
  Plugin repositories added via this interface will used to resolve plugins specified 
  in the &lt;code&gt;plugins {}&lt;/code&gt; block. 
 </description>
-    <method name="gradlePluginPortal" returnType="org.gradle.plugin.repository.GradlePluginPortal">
+    <method name="gradlePluginPortal" returnType="org.gradle.plugin.repository.GradlePluginPortal" documented="true">
         <description> 
  Adds the Gradle Plugin Portal (plugins.gradle.org) as a plugin repository. 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository. 
  @throws IllegalArgumentException if called more than once. 
 </description>
     </method>
-    <method name="ivy" returnType="org.gradle.plugin.repository.IvyPluginRepository" delegationTarget="IvyPluginRepository">
+    <method name="ivy" returnType="org.gradle.plugin.repository.IvyPluginRepository" delegationTarget="IvyPluginRepository" documented="true">
         <description> 
  Adds and configures an &lt;a href='type://IvyPluginRepository'&gt;IvyPluginRepository&lt;/a&gt;. 
  
@@ -22,7 +22,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="maven" returnType="org.gradle.plugin.repository.MavenPluginRepository" delegationTarget="MavenPluginRepository">
+    <method name="maven" returnType="org.gradle.plugin.repository.MavenPluginRepository" delegationTarget="MavenPluginRepository" documented="true">
         <description> 
  Adds and configures a &lt;a href='type://MavenPluginRepository'&gt;MavenPluginRepository&lt;/a&gt;. 
  
@@ -31,9 +31,4 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <documentation>
-        <method name="maven"/>
-        <method name="ivy"/>
-        <method name="gradlePluginPortal"/>
-    </documentation>
 </type>

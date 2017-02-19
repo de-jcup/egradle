@@ -419,5 +419,4 @@
  @see org.gradle.api.tasks.util.PatternFilterable Pattern Format 
 </description>
     </property>
-    <documentation/>
 </type>

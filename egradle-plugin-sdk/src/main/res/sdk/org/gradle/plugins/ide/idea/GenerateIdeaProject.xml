@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.idea.GenerateIdeaProject" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
+<type language="gradle" name="org.gradle.plugins.ide.idea.GenerateIdeaProject" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
     <description> 
  Generates an IDEA project file for root project *only*. If you want to fine tune the idea configuration &lt;p&gt; At this moment nearly all configuration is done via &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;. 
 </description>
@@ -23,20 +23,14 @@
     <method name="setOutputFile" returnType="void">
         <parameter type="java.io.File" name="newOutputFile"/>
     </method>
-    <property name="ideaProject" type="org.gradle.plugins.ide.idea.model.IdeaProject">
+    <property name="ideaProject" type="org.gradle.plugins.ide.idea.model.IdeaProject" documented="true">
         <description> 
  The Idea project model containing the details required to generate the project file. 
 </description>
     </property>
-    <property name="outputFile" type="java.io.File">
+    <property name="outputFile" type="java.io.File" documented="true">
         <description> 
  output *.ipr file 
 </description>
     </property>
-    <documentation>
-        <property name="ideaProject"/>
-        <property name="project.idea.project"/>
-        <property name="outputFile"/>
-        <property name="${project.projectDir}/${project.name}.ipr"/>
-    </documentation>
 </type>

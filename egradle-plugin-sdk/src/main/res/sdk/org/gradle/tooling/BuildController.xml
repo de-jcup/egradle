@@ -123,5 +123,4 @@
  @throws UnknownModelException When the target project does not support the requested model. 
 </description>
     </property>
-    <documentation/>
 </type>

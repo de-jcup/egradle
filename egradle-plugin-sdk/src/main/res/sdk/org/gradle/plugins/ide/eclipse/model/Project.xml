@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="false" language="gradle" name="org.gradle.plugins.ide.eclipse.model.Project" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Project" version="3.0">
     <description> 
  Represents the customizable elements of an eclipse project file. (via XML hooks everything is customizable). 
 </description>
@@ -105,5 +105,4 @@
  The referenced projects of this Eclipse project. 
 </description>
     </property>
-    <documentation/>
 </type>

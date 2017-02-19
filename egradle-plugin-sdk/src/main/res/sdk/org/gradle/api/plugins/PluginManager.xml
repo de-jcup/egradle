@@ -6,7 +6,7 @@
  @see PluginAware 
  @since 2.3 
 </description>
-    <method name="apply" returnType="void" delegationTarget="org.gradle.api.Plugin">
+    <method name="apply" returnType="void" delegationTarget="org.gradle.api.Plugin" documented="true">
         <description> 
  Applies the given plugin. Does nothing if the plugin has already been applied. 
  &lt;p&gt; 
@@ -23,7 +23,7 @@
 </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
-    <method name="apply" returnType="void" delegationTarget="">
+    <method name="apply" returnType="void" delegationTarget="" documented="true">
         <description> 
  Applies the plugin with the given ID. Does nothing if the plugin has already been applied. 
  &lt;p&gt; 
@@ -39,7 +39,7 @@
 </description>
         <parameter type="java.lang.String" name="pluginId"/>
     </method>
-    <method name="findPlugin" returnType="org.gradle.api.plugins.AppliedPlugin" delegationTarget="">
+    <method name="findPlugin" returnType="org.gradle.api.plugins.AppliedPlugin" delegationTarget="" documented="true">
         <description> 
  Returns the information about the plugin that has been applied with the given ID, or null if no plugin has been applied with the given ID. 
  &lt;p&gt; 
@@ -55,7 +55,7 @@
 </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
-    <method name="hasPlugin" returnType="boolean" delegationTarget="true">
+    <method name="hasPlugin" returnType="boolean" delegationTarget="true" documented="true">
         <description> 
  Returns &lt;a href='type://true'&gt;true&lt;/a&gt; if a plugin with the given ID has already been applied, otherwise &lt;a href='type://false'&gt;false&lt;/a&gt;. 
  
@@ -65,7 +65,7 @@
 </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
-    <method name="withPlugin" returnType="void">
+    <method name="withPlugin" returnType="void" documented="true">
         <description> 
  Executes the given action when the specified plugin is applied. 
  &lt;p&gt; 
@@ -81,10 +81,4 @@
         <parameter type="java.lang.String" name="id"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <documentation>
-        <method name="apply"/>
-        <method name="findPlugin"/>
-        <method name="hasPlugin"/>
-        <method name="withPlugin"/>
-    </documentation>
 </type>
