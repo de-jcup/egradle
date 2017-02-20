@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.wrapper.Wrapper.PathBase" version="3.0">
-    <description> 
- Specifies how the wrapper path should be interpreted. 
-</description>
+    <description>
+     * Specifies how the wrapper path should be interpreted.
+     </description>
 </type>

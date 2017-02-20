@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.ProjectIdentifier" version="3.0">
-    <description> 
- Identifies a Gradle project. 
- 
- &lt;p&gt; 
-     A Gradle Project is a project in a multi-project Gradle build or a single "standalone" project. 
- &lt;/p&gt; 
- 
- @since 2.13 
-</description>
+    <description>
+ * Identifies a Gradle project.
+ *
+ * &lt;p&gt;
+ *     A Gradle Project is a project in a multi-project Gradle build or a single "standalone" project.
+ * &lt;/p&gt;
+ *
+ * @since 2.13
+ </description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">
-        <description> 
- Identifier of the build this project is a member of. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;build identifier, never null. 
-</description>
+        <description>
+     * Identifier of the build this project is a member of.
+     * @return build identifier, never null.
+     </description>
     </method>
     <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
-        <description> 
- Identifier of the build this project is a member of. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;build identifier, never null. 
-</description>
+        <description>
+     * Identifier of the build this project is a member of.
+     * @return build identifier, never null.
+     </description>
     </property>
 </type>

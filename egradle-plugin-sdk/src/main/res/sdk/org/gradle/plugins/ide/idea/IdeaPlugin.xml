@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.IdeaPlugin" version="3.0">
-    <description> 
- Adds a GenerateIdeaModule task. When applied to a root project, also adds a GenerateIdeaProject task. For projects that have the Java plugin applied, the tasks receive additional Java-specific 
- configuration. 
-</description>
+    <description>
+ * Adds a GenerateIdeaModule task. When applied to a root project, also adds a GenerateIdeaProject task. For projects that have the Java plugin applied, the tasks receive additional Java-specific
+ * configuration.
+ </description>
     <method name="addScope" returnType="void">
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.util.LinkedHashMap" name="scopes"/>
@@ -11,7 +11,7 @@
     <method name="apply" returnType="org.gradle.api.JavaVersion">
         <parameter type="org.gradle.api.Project" name="p"/>
     </method>
-    <method name="call" returnType="java.lang.String"/>
+    <method name="call" returnType="java.util.List"/>
     <method name="configureForJavaPlugin" returnType="org.gradle.api.DomainObjectCollection">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

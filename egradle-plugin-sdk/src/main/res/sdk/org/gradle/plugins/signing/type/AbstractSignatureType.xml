@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.signing.type.AbstractSignatureType" version="3.0">
-    <description> 
- Convenience base class for &lt;a href='type://SignatureType'&gt;SignatureType&lt;/a&gt; implementations. 
-</description>
+    <description>
+ * Convenience base class for {@link SignatureType} implementations.
+ </description>
     <method name="combinedExtension" returnType="java.lang.String">
         <parameter type="java.io.File" name="toSign"/>
     </method>

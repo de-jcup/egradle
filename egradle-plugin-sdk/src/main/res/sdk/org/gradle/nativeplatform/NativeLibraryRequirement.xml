@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeLibraryRequirement" version="3.0">
-    <description> 
- A dependency on a native library within the build. 
-</description>
+    <description>
+ * A dependency on a native library within the build.
+ </description>
     <method name="getLibraryName" returnType="java.lang.String">
-        <description> 
- The name of the required library. 
-</description>
+        <description>
+     * The name of the required library.
+     </description>
     </method>
     <method name="getLinkage" returnType="java.lang.String">
-        <description> 
- The required linkage. 
-</description>
+        <description>
+     * The required linkage.
+     </description>
     </method>
     <method name="getProjectPath" returnType="java.lang.String">
-        <description> 
- The path to the project containing the library. 
-</description>
+        <description>
+     * The path to the project containing the library.
+     </description>
     </method>
     <property name="libraryName" type="java.lang.String">
-        <description> 
- The name of the required library. 
-</description>
+        <description>
+     * The name of the required library.
+     </description>
     </property>
     <property name="linkage" type="java.lang.String">
-        <description> 
- The required linkage. 
-</description>
+        <description>
+     * The required linkage.
+     </description>
     </property>
     <property name="projectPath" type="java.lang.String">
-        <description> 
- The path to the project containing the library. 
-</description>
+        <description>
+     * The path to the project containing the library.
+     </description>
     </property>
 </type>

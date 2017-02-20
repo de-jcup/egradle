@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.signing.type.pgp.ArmoredSignatureType" version="3.0" superType="org.gradle.plugins.signing.type.AbstractSignatureType">
-    <description> 
- Armored signature type. 
-</description>
+    <description>
+ * Armored signature type.
+ </description>
     <method name="getExtension" returnType="java.lang.String"/>
     <method name="sign" returnType="void">
         <parameter type="org.gradle.plugins.signing.signatory.Signatory" name="signatory"/>

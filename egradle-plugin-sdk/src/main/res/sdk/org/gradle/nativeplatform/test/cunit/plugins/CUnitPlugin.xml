@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitPlugin" version="3.0">
-    <description> 
- A plugin that sets up the infrastructure for testing native binaries with CUnit. 
-</description>
+    <description>
+ * A plugin that sets up the infrastructure for testing native binaries with CUnit.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

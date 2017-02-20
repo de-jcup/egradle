@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.BuildCommand" version="3.0">
-    <description> 
- A build command. 
-</description>
+    <description>
+ * A build command.
+ </description>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>

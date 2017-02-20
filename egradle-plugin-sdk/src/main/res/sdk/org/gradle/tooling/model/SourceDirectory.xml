@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.SourceDirectory" version="3.0">
-    <description> 
- Represents a source directory. 
-</description>
+    <description>
+ * Represents a source directory.
+ </description>
     <method name="getDirectory" returnType="java.io.File">
-        <description> 
- Returns the source directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directory. 
-</description>
+        <description>
+     * Returns the source directory.
+     *
+     * @return The source directory.
+     </description>
     </method>
     <property name="directory" type="java.io.File">
-        <description> 
- Returns the source directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directory. 
-</description>
+        <description>
+     * Returns the source directory.
+     *
+     * @return The source directory.
+     </description>
     </property>
 </type>

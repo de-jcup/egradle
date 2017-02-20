@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.platform.base.plugins.BinaryBasePlugin" version="3.0">
-    <description> 
- Base plugin for binaries support. 
- 
- - Adds a &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt; container named &lt;a href='type://binaries'&gt;binaries&lt;/a&gt; to the project. 
- - Registers the base &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt; type. 
- - For each &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt;, registers a lifecycle task to assemble that binary. 
- - For each &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt;, adds the binary's source sets as its default inputs. 
- - Links the tasks for each &lt;a href='type://BinarySpec'&gt;BinarySpec&lt;/a&gt; across to the tasks container. 
-</description>
+    <description>
+ * Base plugin for binaries support.
+ *
+ * - Adds a {@link BinarySpec} container named {@code binaries} to the project.
+ * - Registers the base {@link BinarySpec} type.
+ * - For each {@link BinarySpec}, registers a lifecycle task to assemble that binary.
+ * - For each {@link BinarySpec}, adds the binary's source sets as its default inputs.
+ * - Links the tasks for each {@link BinarySpec} across to the tasks container.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="target"/>
     </method>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.play.distribution.PlayDistributionContainer" version="3.0">
-    <description> 
- Manages a set of &lt;a href='type://org.gradle.api.distribution.Distribution'&gt;org.gradle.api.distribution.Distribution&lt;/a&gt; objects. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.play.distribution.PlayDistributionContainer" version="3.0" documented="true">
+    <description>
+ * Manages a set of {@link org.gradle.api.distribution.Distribution} objects.
+ </description>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
 </type>

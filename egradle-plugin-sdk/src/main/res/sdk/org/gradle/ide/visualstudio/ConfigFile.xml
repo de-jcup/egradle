@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.ide.visualstudio.ConfigFile" version="3.0">
-    <description> 
- A configuration file generated for Visual Studio. 
-</description>
+    <description>
+ * A configuration file generated for Visual Studio.
+ </description>
     <method name="getLocation" returnType="java.io.File">
-        <description> 
- The location where this file will be generated. 
-</description>
+        <description>
+     * The location where this file will be generated.
+     </description>
     </method>
     <method name="setLocation" returnType="void">
-        <description> 
- Specify the location where this file will be generated. 
-</description>
+        <description>
+     * Specify the location where this file will be generated.
+     </description>
         <parameter type="java.lang.Object" name="location"/>
     </method>
     <property name="location" type="java.io.File">
-        <description> 
- The location where this file will be generated. 
-</description>
+        <description>
+     * The location where this file will be generated.
+     </description>
     </property>
 </type>

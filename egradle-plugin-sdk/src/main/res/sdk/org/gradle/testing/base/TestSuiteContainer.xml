@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.testing.base.TestSuiteContainer" version="3.0">
-    <description> 
- A container of &lt;a href='type://TestSuiteSpec'&gt;TestSuiteSpec&lt;/a&gt; instances. 
-</description>
+    <description>
+ * A container of {@link TestSuiteSpec} instances.
+ </description>
     <interface name="org.gradle.model.ModelMap"/>
 </type>

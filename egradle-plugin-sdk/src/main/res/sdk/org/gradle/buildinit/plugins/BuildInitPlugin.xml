@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.buildinit.plugins.BuildInitPlugin" version="3.0">
-    <description> 
- The build init plugin. 
-</description>
+    <description>
+ * The build init plugin.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

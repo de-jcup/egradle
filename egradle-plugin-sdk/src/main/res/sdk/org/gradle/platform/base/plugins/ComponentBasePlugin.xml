@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.platform.base.plugins.ComponentBasePlugin" version="3.0">
-    <description> 
- Base plugin for &lt;a href='type://ComponentSpec'&gt;ComponentSpec&lt;/a&gt; support. 
- 
- - Registers the infrastructure to support the base &lt;a href='type://ComponentSpec'&gt;ComponentSpec&lt;/a&gt; type and extensions to this type. 
-</description>
+    <description>
+ * Base plugin for {@link ComponentSpec} support.
+ *
+ * - Registers the infrastructure to support the base {@link ComponentSpec} type and extensions to this type.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

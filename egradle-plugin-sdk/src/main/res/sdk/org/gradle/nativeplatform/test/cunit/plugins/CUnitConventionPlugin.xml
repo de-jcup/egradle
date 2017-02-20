@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.test.cunit.plugins.CUnitConventionPlugin" version="3.0">
-    <description> 
- A plugin that applies the &lt;a href='type://CUnitPlugin'&gt;CUnitPlugin&lt;/a&gt; and adds conventions on top of it. 
-</description>
+    <description>
+ * A plugin that applies the {@link CUnitPlugin} and adds conventions on top of it.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

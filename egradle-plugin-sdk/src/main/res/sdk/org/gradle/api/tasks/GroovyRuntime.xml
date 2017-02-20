@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.GroovyRuntime" version="3.0">
-    <description> 
- Provides information related to the Groovy runtime(s) used in a project. Added by the 
- &lt;a href='type://org.gradle.api.plugins.GroovyBasePlugin'&gt;org.gradle.api.plugins.GroovyBasePlugin&lt;/a&gt; as a project extension named &lt;a href='type://groovyRuntime'&gt;groovyRuntime&lt;/a&gt;. 
- 
- &lt;p&gt;Example usage: 
- 
- &lt;pre autoTested=""&gt; 
-     apply plugin: "groovy" 
- 
-     repositories { 
-         mavenCentral() 
-     } 
- 
-     dependencies { 
-         compile "org.codehaus.groovy:groovy-all:2.1.2" 
-     } 
- 
-     def groovyClasspath = groovyRuntime.inferGroovyClasspath(configurations.compile) 
-     // The returned class path can be used to configure the 'groovyClasspath' property of tasks 
-     // such as 'GroovyCompile' or 'Groovydoc', or to execute these and other Groovy tools directly. 
- &lt;/pre&gt; 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.GroovyRuntime" version="3.0" documented="true">
+    <description>
+ * Provides information related to the Groovy runtime(s) used in a project. Added by the
+ * {@link org.gradle.api.plugins.GroovyBasePlugin} as a project extension named {@code groovyRuntime}.
+ *
+ * &lt;p&gt;Example usage:
+ *
+ * &lt;pre autoTested=""&gt;
+ *     apply plugin: "groovy"
+ *
+ *     repositories {
+ *         mavenCentral()
+ *     }
+ *
+ *     dependencies {
+ *         compile "org.codehaus.groovy:groovy-all:2.1.2"
+ *     }
+ *
+ *     def groovyClasspath = groovyRuntime.inferGroovyClasspath(configurations.compile)
+ *     // The returned class path can be used to configure the 'groovyClasspath' property of tasks
+ *     // such as 'GroovyCompile' or 'Groovydoc', or to execute these and other Groovy tools directly.
+ * &lt;/pre&gt;
+ </description>
     <method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/>
     <method name="findGroovyJarFile" returnType="org.gradle.api.internal.plugins.GroovyJarFile">
         <parameter type="java.lang.Iterable" name="classpath"/>
     </method>
     <method name="getDisplayName" returnType="java.lang.String"/>
-    <method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="groovy" documented="true">
-        <description> 
- Searches the specified class path for Groovy Jars (&lt;a href='type://groovy(-indy)'&gt;groovy(-indy)&lt;/a&gt;, &lt;a href='type://groovy-all(-indy)'&gt;groovy-all(-indy)&lt;/a&gt;) and returns a corresponding class path for executing Groovy tools such as the Groovy 
- compiler and Groovydoc tool. The tool versions will match those of the Groovy Jars found. If no Groovy Jars are found on the specified class path, a class path with the contents of the &lt;a href='type://groovy'&gt;groovy&lt;/a&gt; configuration will be returned. 
- 
- &lt;p&gt;The returned class path may be empty, or may fail to resolve when asked for its contents. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath a class path containing Groovy Jars 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a corresponding class path for executing Groovy tools such as the Groovy compiler and Groovydoc tool 
-</description>
+    <method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" documented="true">
+        <description>
+     * Searches the specified class path for Groovy Jars ({@code groovy(-indy)}, {@code groovy-all(-indy)}) and returns a corresponding class path for executing Groovy tools such as the Groovy
+     * compiler and Groovydoc tool. The tool versions will match those of the Groovy Jars found. If no Groovy Jars are found on the specified class path, a class path with the contents of the {@code
+     * groovy} configuration will be returned.
+     *
+     * &lt;p&gt;The returned class path may be empty, or may fail to resolve when asked for its contents.
+     *
+     * @param classpath a class path containing Groovy Jars
+     * @return a corresponding class path for executing Groovy tools such as the Groovy compiler and Groovydoc tool
+     </description>
         <parameter type="java.lang.Iterable" name="classpath"/>
     </method>
     <method name="visitDependencies" returnType="void">

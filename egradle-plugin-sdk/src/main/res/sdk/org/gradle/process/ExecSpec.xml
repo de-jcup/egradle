@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.process.ExecSpec" version="3.0">
-    <description> 
- Specified the options for executing some command. 
-</description>
+    <description>
+ * Specified the options for executing some command.
+ </description>
     <method name="args" returnType="org.gradle.process.ExecSpec">
-        <description> 
- Adds arguments for the command to be executed. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args args for the command 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Adds arguments for the command to be executed.
+     *
+     * @param args args for the command
+     * @return this
+     </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
     <method name="args" returnType="org.gradle.process.ExecSpec">
-        <description> 
- Adds arguments for the command to be executed. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args args for the command 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Adds arguments for the command to be executed.
+     *
+     * @param args args for the command
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
     <method name="commandLine" returnType="org.gradle.process.ExecSpec">
-        <description> 
- Sets the full command line, including the executable to be executed plus its arguments. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Sets the full command line, including the executable to be executed plus its arguments.
+     *
+     * @param args the command plus the args to be executed
+     * @return this
+     </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
     <method name="commandLine" returnType="org.gradle.process.ExecSpec">
-        <description> 
- Sets the full command line, including the executable to be executed plus its arguments. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Sets the full command line, including the executable to be executed plus its arguments.
+     *
+     * @param args the command plus the args to be executed
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
     <method name="getArgs" returnType="java.util.List">
-        <description> 
- Returns the arguments for the command to be executed. Defaults to an empty list. 
-</description>
+        <description>
+     * Returns the arguments for the command to be executed. Defaults to an empty list.
+     </description>
     </method>
     <method name="setArgs" returnType="org.gradle.process.ExecSpec">
-        <description> 
- Sets the arguments for the command to be executed. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args args for the command 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Sets the arguments for the command to be executed.
+     *
+     * @param args args for the command
+     * @return this
+     </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
     <method name="setCommandLine" returnType="void">
-        <description> 
- Sets the full command line, including the executable to be executed plus its arguments. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
-</description>
+        <description>
+     * Sets the full command line, including the executable to be executed plus its arguments.
+     *
+     * @param args the command plus the args to be executed
+     </description>
         <parameter type="java.lang.Iterable" name="args"/>
     </method>
     <method name="setCommandLine" returnType="void">
-        <description> 
- Sets the full command line, including the executable to be executed plus its arguments. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
-</description>
+        <description>
+     * Sets the full command line, including the executable to be executed plus its arguments.
+     *
+     * @param args the command plus the args to be executed
+     </description>
         <parameter type="java.lang.Object" name="args"/>
     </method>
     <interface name="org.gradle.process.BaseExecSpec"/>
     <property name="args" type="java.util.List">
-        <description> 
- Returns the arguments for the command to be executed. Defaults to an empty list. 
-</description>
+        <description>
+     * Returns the arguments for the command to be executed. Defaults to an empty list.
+     </description>
     </property>
     <property name="commandLine" type="java.lang.Object">
-        <description> 
- Sets the full command line, including the executable to be executed plus its arguments. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args the command plus the args to be executed 
-</description>
+        <description>
+     * Sets the full command line, including the executable to be executed plus its arguments.
+     *
+     * @param args the command plus the args to be executed
+     </description>
     </property>
 </type>

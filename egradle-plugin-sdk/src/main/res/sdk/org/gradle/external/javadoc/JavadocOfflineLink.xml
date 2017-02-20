@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.external.javadoc.JavadocOfflineLink" version="3.0">
-    <description> 
- This class is used to hold the information that can be provided to the javadoc executable via the -linkoffline 
- option. 
-</description>
+    <description>
+ * This class is used to hold the information that can be provided to the javadoc executable via the -linkoffline
+ * option.
+ </description>
     <method name="getExtDocUrl" returnType="java.lang.String"/>
     <method name="getPackagelistLoc" returnType="java.lang.String"/>
     <method name="toString" returnType="java.lang.String"/>

@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.DependencySpecContainer" version="3.0">
-    <description> 
- A container for dependency specifications. 
-</description>
+    <description>
+ * A container for dependency specifications.
+ </description>
     <method name="getDependencies" returnType="java.util.Collection">
-        <description> 
- Returns an immutable view of dependencies stored in this container. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an immutable view of dependencies. Each dependency in the collection is itself immutable. 
-</description>
+        <description>
+     * Returns an immutable view of dependencies stored in this container.
+     *
+     * @return an immutable view of dependencies. Each dependency in the collection is itself immutable.
+     </description>
     </method>
     <method name="group" returnType="org.gradle.platform.base.ModuleDependencySpecBuilder">
-        <description> 
- Defines a new module dependency, based on a module group name. The returned dependency can be mutated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name of the module group 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a mutable module dependency, added to this container 
-</description>
+        <description>
+     * Defines a new module dependency, based on a module group name. The returned dependency can be mutated.
+     *
+     * @param name of the module group
+     *
+     * @return a mutable module dependency, added to this container
+     </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="isEmpty" returnType="boolean">
-        <description> 
- Returns true if this container doesn't hold any dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this container doesn't contain any dependency specification. 
-</description>
+        <description>
+     * Returns true if this container doesn't hold any dependency.
+     *
+     * @return true if this container doesn't contain any dependency specification.
+     </description>
     </method>
     <method name="library" returnType="org.gradle.platform.base.ProjectDependencySpecBuilder">
-        <description> 
- Defines a new dependency, based on a library name. The returned dependency can be mutated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name of the library 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a mutable dependency, added to this container 
-</description>
+        <description>
+     * Defines a new dependency, based on a library name. The returned dependency can be mutated.
+     *
+     * @param name of the library
+     *
+     * @return a mutable dependency, added to this container
+     </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="module" returnType="org.gradle.platform.base.ModuleDependencySpecBuilder">
-        <description> 
- Defines a new module dependency, based on a module id or a simple name. The returned dependency can be mutated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleIdOrName of the module 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a mutable module dependency, added to this container 
-</description>
+        <description>
+     * Defines a new module dependency, based on a module id or a simple name. The returned dependency can be mutated.
+     *
+     * @param moduleIdOrName of the module
+     *
+     * @return a mutable module dependency, added to this container
+     </description>
         <parameter type="java.lang.String" name="moduleIdOrName"/>
     </method>
     <method name="project" returnType="org.gradle.platform.base.ProjectDependencySpecBuilder">
-        <description> 
- Defines a new dependency, based on a project path. The returned dependency can be mutated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the project path 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a mutable dependency, added to this container 
-</description>
+        <description>
+     * Defines a new dependency, based on a project path. The returned dependency can be mutated.
+     *
+     * @param path the project path
+     *
+     * @return a mutable dependency, added to this container
+     </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
     <property name="dependencies" type="java.util.Collection">
-        <description> 
- Returns an immutable view of dependencies stored in this container. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an immutable view of dependencies. Each dependency in the collection is itself immutable. 
-</description>
+        <description>
+     * Returns an immutable view of dependencies stored in this container.
+     *
+     * @return an immutable view of dependencies. Each dependency in the collection is itself immutable.
+     </description>
     </property>
     <property name="empty" type="boolean">
-        <description> 
- Returns true if this container doesn't hold any dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this container doesn't contain any dependency specification. 
-</description>
+        <description>
+     * Returns true if this container doesn't hold any dependency.
+     *
+     * @return true if this container doesn't contain any dependency specification.
+     </description>
     </property>
 </type>

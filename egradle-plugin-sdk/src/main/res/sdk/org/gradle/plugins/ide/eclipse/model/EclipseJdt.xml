@@ -1,66 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseJdt" version="3.0">
-    <description> 
- Enables fine-tuning jdt details of the Eclipse plugin 
- 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- apply plugin: 'eclipse' 
- 
- eclipse &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt; 
- 
-       //closure executed after jdt file content is loaded from existing file 
-       //and after gradle build information is merged 
-       whenMerged &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt; here 
-       } 
- 
-       //withProperties allows addition of properties not currently 
-       //modeled by Gradle 
-       withProperties &lt;a href='type://java.util.Properties'&gt;java.util.Properties&lt;/a&gt; here 
-       } 
-     } 
-   } 
- } 
- &lt;/pre&gt; 
-</description>
-    <method name="file" returnType="void" delegationTarget="Jdt" documented="true">
-        <description> 
- Enables advanced configuration like affecting the way existing jdt file content 
- is merged with gradle build information 
- &lt;p&gt; 
- The object passed to whenMerged{} and beforeMerged{} closures is of type &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt; 
- &lt;p&gt; 
- The object passed to withProperties{} closures is of type &lt;a href='type://java.util.Properties'&gt;java.util.Properties&lt;/a&gt; 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseJdt" version="3.0" documented="true">
+    <description>
+ * Enables fine-tuning jdt details of the Eclipse plugin
+ *
+ * &lt;pre autoTested=''&gt;
+ * apply plugin: 'java'
+ * apply plugin: 'eclipse'
+ *
+ * eclipse {
+ *   jdt {
+ *     //if you want to alter the java versions (by default they are configured with gradle java plugin settings):
+ *     sourceCompatibility = 1.6
+ *     targetCompatibility = 1.5
+ *     javaRuntimeName = "J2SE-1.5"
+ *
+ *     file {
+ *       //whenMerged closure is the highest voodoo
+ *       //and probably should be used only to solve tricky edge cases.
+ *       //the type passed to the closure is {@link Jdt}
+ *
+ *       //closure executed after jdt file content is loaded from existing file
+ *       //and after gradle build information is merged
+ *       whenMerged { jdt
+ *         //you can tinker with the {@link Jdt} here
+ *       }
+ *
+ *       //withProperties allows addition of properties not currently
+ *       //modeled by Gradle
+ *       withProperties { properties -&gt;
+ *           //you can tinker with the {@link java.util.Properties} here
+ *       }
+ *     }
+ *   }
+ * }
+ * &lt;/pre&gt;
+ </description>
+    <method name="file" returnType="void" delegationTarget="org.gradle.plugins.ide.api.PropertiesFileContentMerger" documented="true">
+        <description>
+     * Enables advanced configuration like affecting the way existing jdt file content
+     * is merged with gradle build information
+     * &lt;p&gt;
+     * The object passed to whenMerged{} and beforeMerged{} closures is of type {@link Jdt}
+     * &lt;p&gt;
+     * The object passed to withProperties{} closures is of type {@link java.util.Properties}
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="getFile" returnType="org.gradle.plugins.ide.api.PropertiesFileContentMerger">
-        <description> 
- See &lt;a href='type://EclipseJdt#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
-</description>
+        <description>
+     * See {@link #file(Closure) }
+     </description>
     </method>
-    <method name="getJavaRuntimeName" returnType="java.lang.String" delegationTarget="EclipseJdt">
-        <description> 
- The name of the Java Runtime to use. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+    <method name="getJavaRuntimeName" returnType="java.lang.String">
+        <description>
+     * The name of the Java Runtime to use.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </method>
-    <method name="getSourceCompatibility" returnType="org.gradle.api.JavaVersion" delegationTarget="EclipseJdt">
-        <description> 
- The source Java language level. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+    <method name="getSourceCompatibility" returnType="org.gradle.api.JavaVersion">
+        <description>
+     * The source Java language level.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </method>
-    <method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion" delegationTarget=".class">
-        <description> 
- The target JVM to generate &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+    <method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion">
+        <description>
+     * The target JVM to generate {@code .class} files for.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </method>
     <method name="setJavaRuntimeName" returnType="void">
         <parameter type="java.lang.String" name="javaRuntimeName"/>
@@ -72,29 +84,29 @@
         <parameter type="java.lang.Object" name="targetCompatibility"/>
     </method>
     <property name="file" type="org.gradle.plugins.ide.api.PropertiesFileContentMerger" documented="true">
-        <description> 
- See &lt;a href='type://EclipseJdt#file(Closure)'&gt;#file(Closure)&lt;/a&gt; 
-</description>
+        <description>
+     * See {@link #file(Closure) }
+     </description>
     </property>
     <property name="javaRuntimeName" type="java.lang.String">
-        <description> 
- The name of the Java Runtime to use. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+        <description>
+     * The name of the Java Runtime to use.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </property>
     <property name="sourceCompatibility" type="org.gradle.api.JavaVersion" documented="true">
-        <description> 
- The source Java language level. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+        <description>
+     * The source Java language level.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </property>
     <property name="targetCompatibility" type="org.gradle.api.JavaVersion" documented="true">
-        <description> 
- The target JVM to generate &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for. 
- &lt;p&gt; 
- For example see docs for &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt; 
-</description>
+        <description>
+     * The target JVM to generate {@code .class} files for.
+     * &lt;p&gt;
+     * For example see docs for {@link EclipseJdt}
+     </description>
     </property>
 </type>

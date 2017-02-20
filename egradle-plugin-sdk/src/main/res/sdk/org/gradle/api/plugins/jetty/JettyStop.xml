@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0">
-    <description> 
- Stops the embedded Jetty web container, if it is running. 
- 
- @deprecated The Jetty plugin has been deprecated 
-</description>
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0" documented="true">
+    <description>
+ * Stops the embedded Jetty web container, if it is running.
+ *
+ * @deprecated The Jetty plugin has been deprecated
+ </description>
     <method name="getStopKey" returnType="java.lang.String">
-        <description> 
- Returns the stop key. 
- 
- @see #setStopKey(String) 
-</description>
+        <description>
+     * Returns the stop key.
+     *
+     * @see #setStopKey(String)
+     </description>
     </method>
     <method name="getStopPort" returnType="java.lang.Integer">
-        <description> 
- Returns the TCP port to use to send stop command. 
-</description>
+        <description>
+     * Returns the TCP port to use to send stop command.
+     </description>
     </method>
     <method name="setStopKey" returnType="void">
-        <description> 
- Sets key to provide when stopping jetty. 
-</description>
+        <description>
+     * Sets key to provide when stopping jetty.
+     </description>
         <parameter type="java.lang.String" name="stopKey"/>
     </method>
     <method name="setStopPort" returnType="void">
-        <description> 
- Sets the TCP port to use to send stop command. 
-</description>
+        <description>
+     * Sets the TCP port to use to send stop command.
+     </description>
         <parameter type="java.lang.Integer" name="stopPort"/>
     </method>
     <method name="stop" returnType="void"/>
     <property name="stopKey" type="java.lang.String" documented="true">
-        <description> 
- Returns the stop key. 
- 
- @see #setStopKey(String) 
-</description>
+        <description>
+     * Returns the stop key.
+     *
+     * @see #setStopKey(String)
+     </description>
     </property>
     <property name="stopPort" type="java.lang.Integer" documented="true">
-        <description> 
- Returns the TCP port to use to send stop command. 
-</description>
+        <description>
+     * Returns the TCP port to use to send stop command.
+     </description>
     </property>
 </type>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.InputDirectory" version="3.0">
-    <description> 
- &lt;p&gt;Marks a property as specifying an input directory for a task.&lt;/p&gt; 
- 
- &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt; 
- 
- &lt;p&gt;This will cause the task to be considered out-of-date when the directory location or contents 
- have changed. To make the task dependent on the directory location but not the 
- contents, use an &lt;a href='type://org.gradle.api.tasks.Input'&gt;org.gradle.api.tasks.Input&lt;/a&gt; annotation instead.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;Marks a property as specifying an input directory for a task.&lt;/p&gt;
+ *
+ * &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt;
+ *
+ * &lt;p&gt;This will cause the task to be considered out-of-date when the directory location or contents
+ * have changed. To make the task dependent on the directory location but not the
+ * contents, use an {@link org.gradle.api.tasks.Input} annotation instead.&lt;/p&gt;
+ </description>
 </type>

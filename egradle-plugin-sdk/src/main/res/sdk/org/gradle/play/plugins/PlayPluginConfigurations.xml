@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayPluginConfigurations" version="3.0">
-    <description> 
- Conventional locations and names for play plugins. 
-</description>
+    <description>
+ * Conventional locations and names for play plugins.
+ </description>
     <method name="getPlay" returnType="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <method name="getPlayPlatform" returnType="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>
     <method name="getPlayRun" returnType="org.gradle.play.plugins.PlayPluginConfigurations.PlayConfiguration"/>

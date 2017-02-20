@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractLibrary" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
-    <description> 
- Common superclass for the library elements. 
-</description>
+    <description>
+ * Common superclass for the library elements.
+ </description>
     <method name="appendNode" returnType="void">
         <parameter type="groovy.util.Node" name="node"/>
     </method>

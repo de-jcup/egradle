@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.platform.JavaPlatform" version="3.0">
-    <description> 
- Defines and configures a Java SE runtime environment, consisting of a JVM runtime and a set of class libraries. 
- 
- &lt;pre autoTested="true"&gt; 
- plugins { 
-   id "jvm-component" 
-   id "java-lang" 
- } 
- 
- model { 
-       targetPlatform "java6" 
-     } 
-   } 
- } 
- &lt;/pre&gt; 
-</description>
+    <description>
+ * Defines and configures a Java SE runtime environment, consisting of a JVM runtime and a set of class libraries.
+ *
+ * &lt;pre autoTested="true"&gt;
+ * plugins {
+ *   id "jvm-component"
+ *   id "java-lang"
+ * }
+ *
+ * model {
+ *   components {
+ *     myLib(JvmLibrarySpec) {
+ *       targetPlatform "java6"
+ *     }
+ *   }
+ * }
+ * &lt;/pre&gt;
+ </description>
     <method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion"/>
     <method name="setTargetCompatibility" returnType="void">
         <parameter type="org.gradle.api.JavaVersion" name="targetCompatibility"/>

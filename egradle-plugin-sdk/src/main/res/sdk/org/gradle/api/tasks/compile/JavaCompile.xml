@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.compile.JavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile">
-    <description> 
- Compiles Java source files. 
- 
- &lt;pre autoTested=''&gt; 
-     apply plugin: 'java' 
-     compileJava { 
-         //enable compilation in a separate daemon process 
-         options.fork = true 
- 
-         //enable incremental compilation 
-         options.incremental = true 
-     } 
- &lt;/pre&gt; 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.compile.JavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile" documented="true">
+    <description>
+ * Compiles Java source files.
+ *
+ * &lt;pre autoTested=''&gt;
+ *     apply plugin: 'java'
+ *     compileJava {
+ *         //enable compilation in a separate daemon process
+ *         options.fork = true
+ *
+ *         //enable incremental compilation
+ *         options.incremental = true
+ *     }
+ * &lt;/pre&gt;
+ </description>
     <method name="compile" returnType="void"/>
     <method name="compile" returnType="void">
         <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
@@ -32,19 +32,19 @@
     <method name="getLocalClassSetAnalysisStore" returnType="org.gradle.api.internal.tasks.compile.incremental.deps.LocalClassSetAnalysisStore"/>
     <method name="getLocalJarClasspathSnapshotStore" returnType="org.gradle.api.internal.tasks.compile.incremental.jar.LocalJarClasspathSnapshotStore"/>
     <method name="getOptions" returnType="org.gradle.api.tasks.compile.CompileOptions">
-        <description> 
- Returns the compilation options. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compilation options. 
-</description>
+        <description>
+     * Returns the compilation options.
+     *
+     * @return The compilation options.
+     </description>
     </method>
     <method name="getPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"/>
     <method name="getToolChain" returnType="org.gradle.jvm.toolchain.JavaToolChain">
-        <description> 
- Returns the tool chain that will be used to compile the Java source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
-</description>
+        <description>
+     * Returns the tool chain that will be used to compile the Java source.
+     *
+     * @return The tool chain.
+     </description>
     </method>
     <method name="performCompilation" returnType="void">
         <parameter type="org.gradle.api.internal.tasks.compile.JavaCompileSpec" name="spec"/>
@@ -54,11 +54,11 @@
         <parameter type="java.io.File" name="dependencyCacheDir"/>
     </method>
     <method name="setToolChain" returnType="void">
-        <description> 
- Sets the tool chain that should be used to compile the Java source. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toolChain The tool chain. 
-</description>
+        <description>
+     * Sets the tool chain that should be used to compile the Java source.
+     *
+     * @param toolChain The tool chain.
+     </description>
         <parameter type="org.gradle.jvm.toolchain.JavaToolChain" name="toolChain"/>
     </method>
     <property name="antBuilderFactory" type="org.gradle.internal.Factory"/>
@@ -71,18 +71,18 @@
     <property name="localClassSetAnalysisStore" type="org.gradle.api.internal.tasks.compile.incremental.deps.LocalClassSetAnalysisStore"/>
     <property name="localJarClasspathSnapshotStore" type="org.gradle.api.internal.tasks.compile.incremental.jar.LocalJarClasspathSnapshotStore"/>
     <property name="options" type="org.gradle.api.tasks.compile.CompileOptions" documented="true">
-        <description> 
- Returns the compilation options. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compilation options. 
-</description>
+        <description>
+     * Returns the compilation options.
+     *
+     * @return The compilation options.
+     </description>
     </property>
     <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
     <property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain" documented="true">
-        <description> 
- Returns the tool chain that will be used to compile the Java source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain. 
-</description>
+        <description>
+     * Returns the tool chain that will be used to compile the Java source.
+     *
+     * @return The tool chain.
+     </description>
     </property>
 </type>

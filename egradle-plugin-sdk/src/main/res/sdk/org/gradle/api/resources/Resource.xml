@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.resources.Resource" version="3.0">
-    <description> 
- A generic resource of some kind. Only describes the resource. 
- There are more specific interface that extend this one and specify ways of accessing the resource's content. 
-</description>
+    <description>
+ * A generic resource of some kind. Only describes the resource.
+ * There are more specific interface that extend this one and specify ways of accessing the resource's content.
+ </description>
     <method name="getBaseName" returnType="java.lang.String">
-        <description> 
- Short name that concisely describes this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;concise base name, should not be null 
-</description>
+        <description>
+     * Short name that concisely describes this resource
+     *
+     * @return concise base name, should not be null
+     </description>
     </method>
     <method name="getDisplayName" returnType="java.lang.String">
-        <description> 
- Human readable name of this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;human readable name, should not be null 
-</description>
+        <description>
+     * Human readable name of this resource
+     *
+     * @return human readable name, should not be null
+     </description>
     </method>
     <method name="getURI" returnType="java.net.URI">
-        <description> 
- Uniform resource identifier that uniquely describes this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;unique URI, should not be null 
-</description>
+        <description>
+     * Uniform resource identifier that uniquely describes this resource
+     *
+     * @return unique URI, should not be null
+     </description>
     </method>
     <property name="baseName" type="java.lang.String">
-        <description> 
- Short name that concisely describes this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;concise base name, should not be null 
-</description>
+        <description>
+     * Short name that concisely describes this resource
+     *
+     * @return concise base name, should not be null
+     </description>
     </property>
     <property name="displayName" type="java.lang.String">
-        <description> 
- Human readable name of this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;human readable name, should not be null 
-</description>
+        <description>
+     * Human readable name of this resource
+     *
+     * @return human readable name, should not be null
+     </description>
     </property>
     <property name="uRI" type="java.net.URI">
-        <description> 
- Uniform resource identifier that uniquely describes this resource 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;unique URI, should not be null 
-</description>
+        <description>
+     * Uniform resource identifier that uniquely describes this resource
+     *
+     * @return unique URI, should not be null
+     </description>
     </property>
 </type>

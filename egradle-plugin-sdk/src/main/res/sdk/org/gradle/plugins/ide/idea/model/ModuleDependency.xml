@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.model.ModuleDependency" version="3.0">
-    <description> 
- Represents an orderEntry of type module in the iml XML. 
-</description>
+    <description>
+ * Represents an orderEntry of type module in the iml XML.
+ </description>
     <method name="addToNode" returnType="void">
         <parameter type="groovy.util.Node" name="parentNode"/>
     </method>
@@ -12,15 +12,15 @@
     <method name="getAttributeMapForScopeAndExported" returnType="java.util.Map"/>
     <method name="getGradlePath" returnType="java.lang.String"/>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- The name of the module the module depends on. 
- Must not be null. 
-</description>
+        <description>
+     * The name of the module the module depends on.
+     * Must not be null.
+     </description>
     </method>
     <method name="getScope" returnType="java.lang.String">
-        <description> 
- The scope for this dependency. If null the scope attribute is not added. 
-</description>
+        <description>
+     * The scope for this dependency. If null the scope attribute is not added.
+     </description>
     </method>
     <method name="getScopeHash" returnType="int"/>
     <method name="hashCode" returnType="int"/>
@@ -47,15 +47,15 @@
     <property name="exported" type="boolean"/>
     <property name="gradlePath" type="java.lang.String"/>
     <property name="name" type="java.lang.String">
-        <description> 
- The name of the module the module depends on. 
- Must not be null. 
-</description>
+        <description>
+     * The name of the module the module depends on.
+     * Must not be null.
+     </description>
     </property>
     <property name="scope" type="java.lang.String">
-        <description> 
- The scope for this dependency. If null the scope attribute is not added. 
-</description>
+        <description>
+     * The scope for this dependency. If null the scope attribute is not added.
+     </description>
     </property>
     <property name="scopeHash" type="int"/>
 </type>

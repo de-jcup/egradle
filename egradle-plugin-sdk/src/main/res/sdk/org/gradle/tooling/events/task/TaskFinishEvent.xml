@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskFinishEvent" version="3.0">
-    <description> 
- An event that informs about a task having finished its execution. You can query the result of the task using &lt;a href='type://TaskFinishEvent#getResult()'&gt;#getResult()&lt;/a&gt;. 
- 
- @since 2.5 
-</description>
-    <method name="getResult" returnType="org.gradle.tooling.events.task.TaskOperationResult" delegationTarget="TaskSuccessResult">
-        <description> 
- Returns the result of the finished task operation. Currently, the result will be one of the following sub-types: 
- 
- &lt;ul&gt; 
-     &lt;li&gt;&lt;a href='type://TaskSuccessResult'&gt;TaskSuccessResult&lt;/a&gt;&lt;/li&gt; 
-     &lt;li&gt;&lt;a href='type://TaskSkippedResult'&gt;TaskSkippedResult&lt;/a&gt;&lt;/li&gt; 
-     &lt;li&gt;&lt;a href='type://TaskFailureResult'&gt;TaskFailureResult&lt;/a&gt;&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the finished task operation 
-</description>
+    <description>
+ * An event that informs about a task having finished its execution. You can query the result of the task using {@link #getResult()}.
+ *
+ * @since 2.5
+ </description>
+    <method name="getResult" returnType="org.gradle.tooling.events.task.TaskOperationResult">
+        <description>
+     * Returns the result of the finished task operation. Currently, the result will be one of the following sub-types:
+     *
+     * &lt;ul&gt;
+     *     &lt;li&gt;{@link TaskSuccessResult}&lt;/li&gt;
+     *     &lt;li&gt;{@link TaskSkippedResult}&lt;/li&gt;
+     *     &lt;li&gt;{@link TaskFailureResult}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @return the result of the finished task operation
+     </description>
     </method>
     <interface name="org.gradle.tooling.events.FinishEvent"/>
     <interface name="org.gradle.tooling.events.task.TaskProgressEvent"/>
     <property name="result" type="org.gradle.tooling.events.task.TaskOperationResult">
-        <description> 
- Returns the result of the finished task operation. Currently, the result will be one of the following sub-types: 
- 
- &lt;ul&gt; 
-     &lt;li&gt;&lt;a href='type://TaskSuccessResult'&gt;TaskSuccessResult&lt;/a&gt;&lt;/li&gt; 
-     &lt;li&gt;&lt;a href='type://TaskSkippedResult'&gt;TaskSkippedResult&lt;/a&gt;&lt;/li&gt; 
-     &lt;li&gt;&lt;a href='type://TaskFailureResult'&gt;TaskFailureResult&lt;/a&gt;&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the finished task operation 
-</description>
+        <description>
+     * Returns the result of the finished task operation. Currently, the result will be one of the following sub-types:
+     *
+     * &lt;ul&gt;
+     *     &lt;li&gt;{@link TaskSuccessResult}&lt;/li&gt;
+     *     &lt;li&gt;{@link TaskSkippedResult}&lt;/li&gt;
+     *     &lt;li&gt;{@link TaskFailureResult}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @return the result of the finished task operation
+     </description>
     </property>
 </type>

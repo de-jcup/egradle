@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.jetty.JettyPlugin" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which extends the &lt;a href='type://WarPlugin'&gt;WarPlugin&lt;/a&gt; to add tasks which run the web application using an embedded 
- Jetty web container.&lt;/p&gt; 
- 
- @deprecated The Jetty plugin has been deprecated 
-</description>
+    <description>
+ * &lt;p&gt;A {@link Plugin} which extends the {@link WarPlugin} to add tasks which run the web application using an embedded
+ * Jetty web container.&lt;/p&gt;
+ *
+ * @deprecated The Jetty plugin has been deprecated
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

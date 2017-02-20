@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description> 
- Provides information about the build environment for the project that the task is associated with. 
- &lt;p&gt; 
- Currently, this information is limited to the project's declared build script dependencies 
- visualised in a similar manner as provided by &lt;a href='type://DependencyReportTask'&gt;DependencyReportTask&lt;/a&gt;. 
- &lt;p&gt; 
- It is not necessary to manually add a task of this type to your project, 
- as every project automatically has a task of this type by the name &lt;a href='type://"buildEnvironment"'&gt;"buildEnvironment"&lt;/a&gt;. 
- 
- @since 2.10 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description>
+ * Provides information about the build environment for the project that the task is associated with.
+ * &lt;p&gt;
+ * Currently, this information is limited to the project's declared build script dependencies
+ * visualised in a similar manner as provided by {@link DependencyReportTask}.
+ * &lt;p&gt;
+ * It is not necessary to manually add a task of this type to your project,
+ * as every project automatically has a task of this type by the name {@code "buildEnvironment"}.
+ *
+ * @since 2.10
+ </description>
     <method name="generate" returnType="void"/>
     <method name="generateReport" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>

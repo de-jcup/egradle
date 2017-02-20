@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.plugin.use.PluginDependenciesSpec" version="3.0">
-    <description> 
- The DSL for declaring plugins to use in a script. 
- &lt;p&gt; 
- In a build script, the &lt;code&gt;plugins {}&lt;/code&gt; script block API is of this type. 
- That is, you can use this API in the body of the plugins script block to declare plugins to be used for the script. 
- &lt;/p&gt; 
- &lt;h3&gt;Relationship with the apply() method&lt;/h3&gt; 
- &lt;p&gt; 
- The &lt;code&gt;plugins {}&lt;/code&gt; block serves a similar purpose to the &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;org.gradle.api.plugins.PluginAware#apply(java.util.Map)&lt;/a&gt; method 
- that can be used to apply a plugin directly to a &lt;a href='type://Project'&gt;Project&lt;/a&gt; object or similar. 
- A key difference is that plugins applied via the &lt;code&gt;plugins {}&lt;/code&gt; block are conceptually applied to the script, and by extension the script target. 
- At this time there is no observable practical difference between the two approaches with regard to the end result. 
- The &lt;code&gt;plugins {}&lt;/code&gt; block is a new, incubating, Gradle feature that will evolve to offer benefits over the &lt;a href='type://apply()'&gt;apply()&lt;/a&gt; approach. 
- &lt;/p&gt; 
- &lt;h3&gt;Strict Syntax&lt;/h3&gt; 
- &lt;p&gt; 
- The &lt;code&gt;plugins {}&lt;/code&gt; block only allows a strict subset of the full build script programming language. 
- Only the API of this type can be used, and values must be literal (e.g. constant strings, not variables). 
- Moreover, the &lt;code&gt;plugins {}&lt;/code&gt; block must be the first code of a build script. 
- There is one exception to this, in that the {}} block (used for declaring script dependencies) must precede it. 
- &lt;/p&gt; 
- &lt;p&gt; 
- This implies the following constraints: 
- &lt;/p&gt; 
- &lt;ul&gt; 
- &lt;li&gt;Only &lt;a href='type://PluginDependenciesSpec#id(String)'&gt;#id(String)&lt;/a&gt; method calls may be top level statements&lt;/li&gt; 
- &lt;li&gt;&lt;a href='type://PluginDependenciesSpec#id(String)'&gt;#id(String)&lt;/a&gt; calls may only be followed by a &lt;a href='type://PluginDependencySpec#version(String)'&gt;PluginDependencySpec#version(String)&lt;/a&gt; and/or &lt;a href='type://PluginDependencySpec#apply(boolean)'&gt;PluginDependencySpec#apply(boolean)&lt;/a&gt; method call on the returned object&lt;/li&gt; 
- &lt;li&gt;&lt;a href='type://PluginDependenciesSpec#id(String)'&gt;#id(String)&lt;/a&gt;, &lt;a href='type://PluginDependencySpec#version(String)'&gt;PluginDependencySpec#version(String)&lt;/a&gt; and &lt;a href='type://PluginDependencySpec#apply(boolean)'&gt;PluginDependencySpec#apply(boolean)&lt;/a&gt; methods must be called with a literal argument (i.e. not a variable)&lt;/li&gt; 
- &lt;li&gt;The &lt;code&gt;plugins {}&lt;/code&gt; script block must follow any &lt;code&gt;buildscript {}&lt;/code&gt; script block, but must precede all other logic in the script&lt;/li&gt; 
- &lt;/ul&gt; 
- &lt;h3&gt;Available Plugins&lt;/h3&gt; 
- &lt;h4&gt;Core Plugins&lt;/h4&gt; 
- &lt;p&gt; 
- Core Gradle plugins are able to be applied using the &lt;code&gt;plugins {}&lt;/code&gt; block. 
- Core plugins must be specified without a version number, and can have a &lt;i&gt;qualified&lt;/i&gt; or &lt;i&gt;unqualified&lt;/i&gt; id. 
- That is, the &lt;a href='type://java'&gt;java&lt;/a&gt; plugin can be used via: 
- &lt;/p&gt; 
- &lt;pre&gt; 
- plugins { 
-   id 'java' 
- } 
- &lt;/pre&gt; 
- &lt;p&gt; 
- Or via: 
- &lt;/p&gt; 
- &lt;pre&gt; 
- plugins { 
-   id 'org.gradle.java' 
- } 
- &lt;/pre&gt; 
- &lt;p&gt; 
- Core Gradle plugins use the &lt;a href='type://org.gradle'&gt;org.gradle&lt;/a&gt; namespace. 
- &lt;/p&gt; 
- &lt;p&gt; 
- For the list of available core plugins for a particular Gradle version, please consult the User Guide. 
- &lt;/p&gt; 
- &lt;h4&gt;Community Plugins&lt;/h4&gt; 
- &lt;p&gt; 
- Non-core plugins are available from the &lt;a href="http://plugins.gradle.org"&gt;Gradle Plugin Portal&lt;/a&gt;. 
- These plugins are contributed by users of Gradle to extend Gradle's functionality. 
- Visit &lt;a href="http://plugins.gradle.org"&gt;plugins.gradle.org&lt;/a&gt; to browse the available plugins and versions. 
- &lt;/p&gt; 
- &lt;p&gt; 
- To use a community plugin, the fully qualified id must be specified along with a version. 
- &lt;/p&gt; 
-</description>
-    <method name="id" returnType="org.gradle.plugin.use.PluginDependencySpec" delegationTarget="apply" documented="true">
-        <description> 
- Add a dependency on the plugin with the given id. 
- &lt;p&gt; 
- &lt;pre&gt; 
- plugins { 
-     id "org.company.myplugin" 
- } 
- &lt;/pre&gt; 
- Further constraints (e.g. version number) can be specified by the methods of the return value. 
- &lt;pre&gt; 
- plugins { 
-     id "org.company.myplugin" version "1.3" 
- } 
- &lt;/pre&gt; 
- 
- Plugins are automatically applied to the current script by default. This can be disabled using the &lt;a href='type://apply false'&gt;apply false&lt;/a&gt; option: 
- 
- &lt;pre&gt; 
- plugins { 
-     id "org.company.myplugin" version "1.3" apply false 
- } 
- &lt;/pre&gt; 
- 
- This is useful to reuse task classes from a plugin or to apply it to some other target than the current script. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the id of the plugin to depend on 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a mutable plugin dependency specification that can be used to further refine the dependency 
-</description>
+<type interface="true" language="gradle" name="org.gradle.plugin.use.PluginDependenciesSpec" version="3.0" documented="true">
+    <description>
+ * The DSL for declaring plugins to use in a script.
+ * &lt;p&gt;
+ * In a build script, the &lt;code&gt;plugins {}&lt;/code&gt; script block API is of this type.
+ * That is, you can use this API in the body of the plugins script block to declare plugins to be used for the script.
+ * &lt;/p&gt;
+ * &lt;h3&gt;Relationship with the apply() method&lt;/h3&gt;
+ * &lt;p&gt;
+ * The &lt;code&gt;plugins {}&lt;/code&gt; block serves a similar purpose to the {@link org.gradle.api.plugins.PluginAware#apply(java.util.Map)} method
+ * that can be used to apply a plugin directly to a {@code Project} object or similar.
+ * A key difference is that plugins applied via the &lt;code&gt;plugins {}&lt;/code&gt; block are conceptually applied to the script, and by extension the script target.
+ * At this time there is no observable practical difference between the two approaches with regard to the end result.
+ * The &lt;code&gt;plugins {}&lt;/code&gt; block is a new, incubating, Gradle feature that will evolve to offer benefits over the {@code apply()} approach.
+ * &lt;/p&gt;
+ * &lt;h3&gt;Strict Syntax&lt;/h3&gt;
+ * &lt;p&gt;
+ * The &lt;code&gt;plugins {}&lt;/code&gt; block only allows a strict subset of the full build script programming language.
+ * Only the API of this type can be used, and values must be literal (e.g. constant strings, not variables).
+ * Moreover, the &lt;code&gt;plugins {}&lt;/code&gt; block must be the first code of a build script.
+ * There is one exception to this, in that the {@code buildscript {}} block (used for declaring script dependencies) must precede it.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * This implies the following constraints:
+ * &lt;/p&gt;
+ * &lt;ul&gt;
+ * &lt;li&gt;Only {@link #id(String)} method calls may be top level statements&lt;/li&gt;
+ * &lt;li&gt;{@link #id(String)} calls may only be followed by a {@link PluginDependencySpec#version(String)} and/or {@link PluginDependencySpec#apply(boolean)} method call on the returned object&lt;/li&gt;
+ * &lt;li&gt;{@link #id(String)}, {@link PluginDependencySpec#version(String)} and {@link PluginDependencySpec#apply(boolean)} methods must be called with a literal argument (i.e. not a variable)&lt;/li&gt;
+ * &lt;li&gt;The &lt;code&gt;plugins {}&lt;/code&gt; script block must follow any &lt;code&gt;buildscript {}&lt;/code&gt; script block, but must precede all other logic in the script&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;h3&gt;Available Plugins&lt;/h3&gt;
+ * &lt;h4&gt;Core Plugins&lt;/h4&gt;
+ * &lt;p&gt;
+ * Core Gradle plugins are able to be applied using the &lt;code&gt;plugins {}&lt;/code&gt; block.
+ * Core plugins must be specified without a version number, and can have a &lt;i&gt;qualified&lt;/i&gt; or &lt;i&gt;unqualified&lt;/i&gt; id.
+ * That is, the {@code java} plugin can be used via:
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ * plugins {
+ *   id 'java'
+ * }
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * Or via:
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ * plugins {
+ *   id 'org.gradle.java'
+ * }
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * Core Gradle plugins use the {@code org.gradle} namespace.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * For the list of available core plugins for a particular Gradle version, please consult the User Guide.
+ * &lt;/p&gt;
+ * &lt;h4&gt;Community Plugins&lt;/h4&gt;
+ * &lt;p&gt;
+ * Non-core plugins are available from the &lt;a href="http://plugins.gradle.org"&gt;Gradle Plugin Portal&lt;/a&gt;.
+ * These plugins are contributed by users of Gradle to extend Gradle's functionality.
+ * Visit &lt;a href="http://plugins.gradle.org"&gt;plugins.gradle.org&lt;/a&gt; to browse the available plugins and versions.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * To use a community plugin, the fully qualified id must be specified along with a version.
+ * &lt;/p&gt;
+ </description>
+    <method name="id" returnType="org.gradle.plugin.use.PluginDependencySpec" documented="true">
+        <description>
+     * Add a dependency on the plugin with the given id.
+     * &lt;p&gt;
+     * &lt;pre&gt;
+     * plugins {
+     *     id "org.company.myplugin"
+     * }
+     * &lt;/pre&gt;
+     * Further constraints (e.g. version number) can be specified by the methods of the return value.
+     * &lt;pre&gt;
+     * plugins {
+     *     id "org.company.myplugin" version "1.3"
+     * }
+     * &lt;/pre&gt;
+     *
+     * Plugins are automatically applied to the current script by default. This can be disabled using the {@code apply false} option:
+     *
+     * &lt;pre&gt;
+     * plugins {
+     *     id "org.company.myplugin" version "1.3" apply false
+     * }
+     * &lt;/pre&gt;
+     *
+     * This is useful to reuse task classes from a plugin or to apply it to some other target than the current script.
+     *
+     * @param id the id of the plugin to depend on
+     * @return a mutable plugin dependency specification that can be used to further refine the dependency
+     </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
 </type>

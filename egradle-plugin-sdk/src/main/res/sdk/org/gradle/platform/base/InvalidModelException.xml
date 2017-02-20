@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.platform.base.InvalidModelException" version="3.0" superType="org.gradle.api.GradleException">
-    <description> 
- Thrown when a component model is declared in an invalid way. 
-</description>
+    <description>
+ * Thrown when a component model is declared in an invalid way.
+ </description>
 </type>

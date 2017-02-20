@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.signing.signatory.pgp.PgpSignatory" version="3.0" superType="org.gradle.plugins.signing.signatory.SignatorySupport">
-    <description> 
- PGP signatory from PGP key and password. 
-</description>
+    <description>
+ * PGP signatory from PGP key and password.
+ </description>
     <method name="createPrivateKey" returnType="org.bouncycastle.openpgp.PGPPrivateKey">
         <parameter type="org.bouncycastle.openpgp.PGPSecretKey" name="secretKey"/>
         <parameter type="java.lang.String" name="password"/>
@@ -14,12 +14,12 @@
     </method>
     <method name="getKeyId" returnType="org.gradle.plugins.signing.signatory.pgp.PgpKeyId"/>
     <method name="getName" returnType="java.lang.String"/>
-    <method name="sign" returnType="void" delegationTarget="toSign">
-        <description> 
- Exhausts &lt;a href='type://toSign'&gt;toSign&lt;/a&gt;, and writes the signature to &lt;a href='type://signatureDestination'&gt;signatureDestination&lt;/a&gt;. 
- 
- The caller is responsible for closing the streams, though the output WILL be flushed. 
-</description>
+    <method name="sign" returnType="void">
+        <description>
+     * Exhausts {@code toSign}, and writes the signature to {@code signatureDestination}.
+     *
+     * The caller is responsible for closing the streams, though the output WILL be flushed.
+     </description>
         <parameter type="java.io.InputStream" name="toSign"/>
         <parameter type="java.io.OutputStream" name="signatureDestination"/>
     </method>

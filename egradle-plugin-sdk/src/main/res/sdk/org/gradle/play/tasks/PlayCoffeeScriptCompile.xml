@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.play.tasks.PlayCoffeeScriptCompile" version="3.0" superType="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile">
-    <description> 
- Task for compiling CoffeeScript sources into JavaScript. 
-</description>
+<type language="gradle" name="org.gradle.play.tasks.PlayCoffeeScriptCompile" version="3.0" superType="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile" documented="true">
+    <description>
+ * Task for compiling CoffeeScript sources into JavaScript.
+ </description>
     <method name="doCompile" returnType="void"/>
     <method name="getDetachedConfiguration" returnType="org.gradle.api.artifacts.Configuration">
         <parameter type="java.lang.String" name="notation"/>

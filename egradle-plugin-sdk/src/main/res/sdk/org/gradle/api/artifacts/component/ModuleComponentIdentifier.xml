@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ModuleComponentIdentifier" version="3.0">
-    <description> 
- An identifier for a component instance which is available as a module version. 
- 
- @since 1.10 
-</description>
+    <description>
+ * An identifier for a component instance which is available as a module version.
+ *
+ * @since 1.10
+ </description>
     <method name="getGroup" returnType="java.lang.String">
-        <description> 
- The module group of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component group 
- @since 1.10 
-</description>
+        <description>
+     * The module group of the component.
+     *
+     * @return Component group
+     * @since 1.10
+     </description>
     </method>
     <method name="getModule" returnType="java.lang.String">
-        <description> 
- The module name of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component module 
- @since 1.10 
-</description>
+        <description>
+     * The module name of the component.
+     *
+     * @return Component module
+     * @since 1.10
+     </description>
     </method>
     <method name="getVersion" returnType="java.lang.String">
-        <description> 
- The module version of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component version 
- @since 1.10 
-</description>
+        <description>
+     * The module version of the component.
+     *
+     * @return Component version
+     * @since 1.10
+     </description>
     </method>
     <interface name="org.gradle.api.artifacts.component.ComponentIdentifier"/>
     <property name="group" type="java.lang.String">
-        <description> 
- The module group of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component group 
- @since 1.10 
-</description>
+        <description>
+     * The module group of the component.
+     *
+     * @return Component group
+     * @since 1.10
+     </description>
     </property>
     <property name="module" type="java.lang.String">
-        <description> 
- The module name of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component module 
- @since 1.10 
-</description>
+        <description>
+     * The module name of the component.
+     *
+     * @return Component module
+     * @since 1.10
+     </description>
     </property>
     <property name="version" type="java.lang.String">
-        <description> 
- The module version of the component. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Component version 
- @since 1.10 
-</description>
+        <description>
+     * The module version of the component.
+     *
+     * @return Component version
+     * @since 1.10
+     </description>
     </property>
 </type>

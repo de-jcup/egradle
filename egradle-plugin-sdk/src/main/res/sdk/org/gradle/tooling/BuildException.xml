@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.tooling.BuildException" version="3.0" superType="org.gradle.tooling.GradleConnectionException">
-    <description> 
- Thrown when a Gradle build fails or when a model cannot be built. 
- 
- @since 1.0-milestone-3 
-</description>
+    <description>
+ * Thrown when a Gradle build fails or when a model cannot be built.
+ *
+ * @since 1.0-milestone-3
+ </description>
 </type>

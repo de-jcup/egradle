@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.publish.ivy.IvyConfigurationContainer" version="3.0">
-    <description> 
- The set of &lt;a href='type://IvyConfiguration'&gt;IvyConfiguration&lt;/a&gt;s that will be included in the &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;. 
- 
- Being a &lt;a href='type://org.gradle.api.NamedDomainObjectContainer'&gt;org.gradle.api.NamedDomainObjectContainer&lt;/a&gt;, a &lt;a href='type://IvyConfigurationContainer'&gt;IvyConfigurationContainer&lt;/a&gt; provides 
- convenient methods for adding, querying, filtering, and applying actions to the set of &lt;a href='type://IvyConfiguration'&gt;IvyConfiguration&lt;/a&gt;s. 
- 
- &lt;pre autoTested="true"&gt; 
- apply plugin: 'ivy-publish' 
- 
- def publication = publishing.publications.create("my-pub", IvyPublication) 
- def configurations = publication.configurations 
- 
- configurations.create("extended", { extend "default"}) 
- configurations.all { 
-     extend "base" 
- } 
- &lt;/pre&gt; 
-</description>
+    <description>
+ * The set of {@link IvyConfiguration}s that will be included in the {@link IvyPublication}.
+ *
+ * Being a {@link org.gradle.api.NamedDomainObjectContainer}, a {@code IvyConfigurationContainer} provides
+ * convenient methods for adding, querying, filtering, and applying actions to the set of {@link IvyConfiguration}s.
+ *
+ * &lt;pre autoTested="true"&gt;
+ * apply plugin: 'ivy-publish'
+ *
+ * def publication = publishing.publications.create("my-pub", IvyPublication)
+ * def configurations = publication.configurations
+ *
+ * configurations.create("extended", { extend "default"})
+ * configurations.all {
+ *     extend "base"
+ * }
+ * &lt;/pre&gt;
+ </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
 </type>

@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.DependencyArtifact" version="3.0">
-    <description> 
- &lt;p&gt;An &lt;a href='type://Artifact'&gt;Artifact&lt;/a&gt; represents an artifact included in a &lt;a href='type://org.gradle.api.artifacts.Dependency'&gt;org.gradle.api.artifacts.Dependency&lt;/a&gt;.&lt;/p&gt; 
- An artifact is an (immutable) value object. 
-</description>
+    <description>
+ * &lt;p&gt;An {@code Artifact} represents an artifact included in a {@link org.gradle.api.artifacts.Dependency}.&lt;/p&gt;
+ * An artifact is an (immutable) value object.
+ </description>
     <method name="getClassifier" returnType="java.lang.String">
-        <description> 
- Returns the classifier of this artifact. 
-</description>
+        <description>
+     * Returns the classifier of this artifact.
+     </description>
     </method>
     <method name="getExtension" returnType="java.lang.String">
-        <description> 
- Returns the extension of this artifact. Often the extension is the same as the type, 
- but sometimes this is not the case. For example for an ivy XML module descriptor, the type is 
- &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;. 
- 
- @see #getType()  
-</description>
+        <description>
+     * Returns the extension of this artifact. Often the extension is the same as the type,
+     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+     *
+     * @see #getType() 
+     </description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- Returns the name of this artifact. 
-</description>
+        <description>
+     * Returns the name of this artifact.
+     </description>
     </method>
     <method name="getType" returnType="java.lang.String">
-        <description> 
- Returns the type of this artifact. Often the type is the same as the extension, 
- but sometimes this is not the case. For example for an ivy XML module descriptor, the type is 
- &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;. 
- 
- @see #getExtension()  
-</description>
+        <description>
+     * Returns the type of this artifact. Often the type is the same as the extension,
+     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+     *
+     * @see #getExtension() 
+     </description>
     </method>
     <method name="getUrl" returnType="java.lang.String">
-        <description> 
- Returns an URL under which this artifact can be retrieved. If not 
- specified the user repositories are used for retrieving.  
-</description>
+        <description>
+     * Returns an URL under which this artifact can be retrieved. If not
+     * specified the user repositories are used for retrieving. 
+     </description>
     </method>
     <method name="setClassifier" returnType="void">
-        <description> 
- Sets the classifier of this artifact. 
-</description>
+        <description>
+     * Sets the classifier of this artifact.
+     </description>
         <parameter type="java.lang.String" name="classifier"/>
     </method>
     <method name="setExtension" returnType="void">
-        <description> 
- Sets the extension of this artifact. 
-</description>
+        <description>
+     * Sets the extension of this artifact.
+     </description>
         <parameter type="java.lang.String" name="extension"/>
     </method>
     <method name="setName" returnType="void">
-        <description> 
- Sets the name of this artifact. 
-</description>
+        <description>
+     * Sets the name of this artifact.
+     </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="setType" returnType="void">
-        <description> 
- Sets the type of this artifact. 
-</description>
+        <description>
+     * Sets the type of this artifact.
+     </description>
         <parameter type="java.lang.String" name="type"/>
     </method>
     <method name="setUrl" returnType="void">
-        <description> 
- Sets the URL for this artifact. 
-</description>
+        <description>
+     * Sets the URL for this artifact.
+     </description>
         <parameter type="java.lang.String" name="url"/>
     </method>
     <property name="classifier" type="java.lang.String">
-        <description> 
- Returns the classifier of this artifact. 
-</description>
+        <description>
+     * Returns the classifier of this artifact.
+     </description>
     </property>
     <property name="extension" type="java.lang.String">
-        <description> 
- Returns the extension of this artifact. Often the extension is the same as the type, 
- but sometimes this is not the case. For example for an ivy XML module descriptor, the type is 
- &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;. 
- 
- @see #getType()  
-</description>
+        <description>
+     * Returns the extension of this artifact. Often the extension is the same as the type,
+     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+     *
+     * @see #getType() 
+     </description>
     </property>
     <property name="name" type="java.lang.String">
-        <description> 
- Returns the name of this artifact. 
-</description>
+        <description>
+     * Returns the name of this artifact.
+     </description>
     </property>
     <property name="type" type="java.lang.String">
-        <description> 
- Returns the type of this artifact. Often the type is the same as the extension, 
- but sometimes this is not the case. For example for an ivy XML module descriptor, the type is 
- &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;. 
- 
- @see #getExtension()  
-</description>
+        <description>
+     * Returns the type of this artifact. Often the type is the same as the extension,
+     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+     *
+     * @see #getExtension() 
+     </description>
     </property>
     <property name="url" type="java.lang.String">
-        <description> 
- Returns an URL under which this artifact can be retrieved. If not 
- specified the user repositories are used for retrieving.  
-</description>
+        <description>
+     * Returns an URL under which this artifact can be retrieved. If not
+     * specified the user repositories are used for retrieving. 
+     </description>
     </property>
 </type>

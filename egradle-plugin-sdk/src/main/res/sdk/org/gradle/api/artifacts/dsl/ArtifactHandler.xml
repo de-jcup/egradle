@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.ArtifactHandler" version="3.0">
-    <description> 
- This class is for defining artifacts to be published and adding them to configurations. Creating publish artifacts 
- does not mean to create an archive. What is created is a domain object which represents a file to be published 
- and information on how it should be published (e.g. the name). 
- 
- &lt;p&gt;To create an publish artifact and assign it to a configuration you can use the following syntax:&lt;/p&gt; 
- 
- &lt;code&gt;&amp;lt;configurationName&gt; &amp;lt;artifact-notation&gt;, &amp;lt;artifact-notation&gt; ...&lt;/code&gt; 
- 
- or 
- 
- &lt;code&gt;&amp;lt;configurationName&gt; &amp;lt;artifact-notation&gt; { ... some code to configure the artifact }&lt;/code&gt; 
- 
- &lt;p&gt;The notation can be one of the following types:&lt;/p&gt; 
- 
- &lt;ul&gt; 
- 
- &lt;li&gt;&lt;a href='type://org.gradle.api.tasks.bundling.AbstractArchiveTask'&gt;org.gradle.api.tasks.bundling.AbstractArchiveTask&lt;/a&gt;. The information for publishing the artifact is extracted from the archive task (e.g. name, extension, ...). 
- An archive artifact is represented using an instance of &lt;a href='type://PublishArtifact'&gt;PublishArtifact&lt;/a&gt;.&lt;/li&gt; 
- 
- &lt;li&gt;&lt;a href='type://java.io.File'&gt;java.io.File&lt;/a&gt;. The information for publishing the artifact is extracted from the file name. You can tweak the resulting values by using 
- a closure to configure the properties of the artifact instance. A file artifact is represented using an instance of &lt;a href='type://org.gradle.api.artifacts.ConfigurablePublishArtifact'&gt;org.gradle.api.artifacts.ConfigurablePublishArtifact&lt;/a&gt; 
- &lt;/li&gt; 
- 
- &lt;li&gt;&lt;a href='type://java.util.Map'&gt;java.util.Map&lt;/a&gt;. The map should contain a 'file' key. This is converted to an artifact as described above. You can also 
- specify other properties of the artifact using entries in the map. 
- &lt;/li&gt; 
- 
- &lt;/ul&gt; 
- 
- &lt;h2&gt;Examples&lt;/h2&gt; 
- &lt;p&gt;An example showing how to associate an archive task with a configuration via the artifact handler. 
- This way the archive can be published or referred in other projects via the configuration. 
- &lt;pre autoTested=''&gt; 
- configurations { 
-   //declaring new configuration that will be used to associate with artifacts 
-   schema 
- } 
- 
- task schemaJar(type: Jar) { 
-   //some imaginary task that creates a jar artifact with some schema 
- } 
- 
- //associating the task that produces the artifact with the configuration 
- artifacts { 
-   //configuration name and the task: 
-   schema schemaJar 
- } 
- &lt;/pre&gt; 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.ArtifactHandler" version="3.0" documented="true">
+    <description>
+ * This class is for defining artifacts to be published and adding them to configurations. Creating publish artifacts
+ * does not mean to create an archive. What is created is a domain object which represents a file to be published
+ * and information on how it should be published (e.g. the name).
+ *
+ * &lt;p&gt;To create an publish artifact and assign it to a configuration you can use the following syntax:&lt;/p&gt;
+ *
+ * &lt;code&gt;&amp;lt;configurationName&gt; &amp;lt;artifact-notation&gt;, &amp;lt;artifact-notation&gt; ...&lt;/code&gt;
+ *
+ * or
+ *
+ * &lt;code&gt;&amp;lt;configurationName&gt; &amp;lt;artifact-notation&gt; { ... some code to configure the artifact }&lt;/code&gt;
+ *
+ * &lt;p&gt;The notation can be one of the following types:&lt;/p&gt;
+ *
+ * &lt;ul&gt;
+ *
+ * &lt;li&gt;{@link org.gradle.api.tasks.bundling.AbstractArchiveTask}. The information for publishing the artifact is extracted from the archive task (e.g. name, extension, ...).
+ * An archive artifact is represented using an instance of {@link PublishArtifact}.&lt;/li&gt;
+ *
+ * &lt;li&gt;{@link java.io.File}. The information for publishing the artifact is extracted from the file name. You can tweak the resulting values by using
+ * a closure to configure the properties of the artifact instance. A file artifact is represented using an instance of {@link org.gradle.api.artifacts.ConfigurablePublishArtifact}
+ * &lt;/li&gt;
+ *
+ * &lt;li&gt;{@link java.util.Map}. The map should contain a 'file' key. This is converted to an artifact as described above. You can also
+ * specify other properties of the artifact using entries in the map.
+ * &lt;/li&gt;
+ *
+ * &lt;/ul&gt;
+ *
+ * &lt;h2&gt;Examples&lt;/h2&gt;
+ * &lt;p&gt;An example showing how to associate an archive task with a configuration via the artifact handler.
+ * This way the archive can be published or referred in other projects via the configuration.
+ * &lt;pre autoTested=''&gt;
+ * configurations {
+ *   //declaring new configuration that will be used to associate with artifacts
+ *   schema
+ * }
+ *
+ * task schemaJar(type: Jar) {
+ *   //some imaginary task that creates a jar artifact with some schema
+ * }
+ *
+ * //associating the task that produces the artifact with the configuration
+ * artifacts {
+ *   //configuration name and the task:
+ *   schema schemaJar
+ * }
+ * &lt;/pre&gt;
+ </description>
     <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact" documented="true">
-        <description> 
- Adds an artifact to the given configuration. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactNotation The artifact notation, in one of the notations described above. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact. 
-</description>
+        <description>
+     * Adds an artifact to the given configuration.
+     *
+     * @param configurationName The name of the configuration.
+     * @param artifactNotation The artifact notation, in one of the notations described above.
+     * @return The artifact.
+     </description>
         <parameter type="java.lang.String" name="configurationName"/>
         <parameter type="java.lang.Object" name="artifactNotation"/>
     </method>
     <method name="add" returnType="org.gradle.api.artifacts.PublishArtifact" documented="true">
-        <description> 
- Adds an artifact to the given configuration. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName The name of the configuration. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactNotation The artifact notation, in one of the notations described above. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute to configure the artifact. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact. 
-</description>
+        <description>
+     * Adds an artifact to the given configuration.
+     *
+     * @param configurationName The name of the configuration.
+     * @param artifactNotation The artifact notation, in one of the notations described above.
+     * @param configureClosure The closure to execute to configure the artifact.
+     * @return The artifact.
+     </description>
         <parameter type="java.lang.String" name="configurationName"/>
         <parameter type="java.lang.Object" name="artifactNotation"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>

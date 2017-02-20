@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.UnresolvedComponentResult" version="3.0">
-    <description> 
- A component that could not be resolved. 
- 
- @since 2.0 
-</description>
+    <description>
+ * A component that could not be resolved.
+ *
+ * @since 2.0
+ </description>
     <method name="getFailure" returnType="java.lang.Throwable">
-        <description> 
- Returns the failure that occurred when trying to resolve the component. 
-</description>
+        <description>
+     * Returns the failure that occurred when trying to resolve the component.
+     </description>
     </method>
     <interface name="org.gradle.api.artifacts.result.ComponentResult"/>
     <property name="failure" type="java.lang.Throwable">
-        <description> 
- Returns the failure that occurred when trying to resolve the component. 
-</description>
+        <description>
+     * Returns the failure that occurred when trying to resolve the component.
+     </description>
     </property>
 </type>

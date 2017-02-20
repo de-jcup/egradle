@@ -43,10 +43,10 @@
         <parameter type="org.gradle.nativeplatform.toolchain.internal.NativeToolChainRegistryInternal" name="toolChains"/>
     </method>
     <method name="createInstallTasks" returnType="void">
-        <description> 
- Can't use @BinaryTasks because the binary is not _built-by_ the install task, but it is associated with it. Rule is called multiple times, so need to check for task existence before 
- creating. 
-</description>
+        <description>
+         * Can't use @BinaryTasks because the binary is not _built-by_ the install task, but it is associated with it. Rule is called multiple times, so need to check for task existence before
+         * creating.
+         </description>
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="org.gradle.platform.base.BinaryContainer" name="binaries"/>
     </method>

@@ -99,13 +99,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		try {
 			type = fileLoader.loadType(nameToUseForLoading);
 		} catch (IOException e) {
-			// /*
-			// * FIXME ATR, 28.01.2017: it can often be normal to not resolve an
-			// * external type - handle this better! e.g. java.lang.* cannot be
-			// available...
-			// */
-			// getErrorHandler().handleError("Cannot load dsl type:" + name, e);
-			/* ignore */
+			getErrorHandler().handleError("Cannot load dsl type:" + name, e);
 		}
 		if (type == null) {
 			unresolveableNames.add(name);

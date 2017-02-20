@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.Named.Namer" version="3.0">
-    <description> 
- An implementation of the namer interface for objects implementing the named interface. 
-</description>
+    <description>
+     * An implementation of the namer interface for objects implementing the named interface.
+     </description>
     <method name="determineName" returnType="java.lang.String">
         <parameter type="org.gradle.api.Named" name="object"/>
     </method>

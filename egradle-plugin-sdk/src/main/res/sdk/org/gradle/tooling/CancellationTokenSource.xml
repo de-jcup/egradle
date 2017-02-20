@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.CancellationTokenSource" version="3.0">
-    <description> 
- A &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt; allows you to issue cancellation requests to one or more &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; 
- instances. To use a token source: 
- 
- &lt;ul&gt; 
-     &lt;li&gt;Create a token source using &lt;a href='type://GradleConnector#newCancellationTokenSource()'&gt;GradleConnector#newCancellationTokenSource()&lt;/a&gt;.&lt;/li&gt; 
-     &lt;li&gt;Attach the token to one or more operations using &lt;a href='type://org.gradle.tooling.LongRunningOperation#withCancellationToken(CancellationToken)'&gt;org.gradle.tooling.LongRunningOperation#withCancellationToken(CancellationToken)&lt;/a&gt;. 
-     You need to do this before you start the operation. 
-     &lt;/li&gt; 
-     &lt;li&gt;Later, you can cancel the associated operations by calling &lt;a href='type://CancellationTokenSource#cancel()'&gt;#cancel()&lt;/a&gt; on this token source.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;p&gt;All implementations of this interface are required to be thread safe.&lt;/p&gt; 
- 
- @since 2.1 
-</description>
-    <method name="cancel" returnType="void" delegationTarget="BuildCancelledException">
-        <description> 
- Initiates cancel request. All operations that have been associated with this token will be cancelled. 
- 
- &lt;p&gt;It is assumed that the implementation will do 'best-effort' attempt to perform cancellation. 
- This method returns immediately and if the cancellation is successful the cancelled operation 
- will notify its &lt;a href='type://org.gradle.tooling.ResultHandler#onFailure(GradleConnectionException)'&gt;org.gradle.tooling.ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; 
- with a &lt;a href='type://BuildCancelledException'&gt;BuildCancelledException&lt;/a&gt; describing how it was cancelled. 
- &lt;/p&gt; 
-</description>
+    <description>
+ * A {@code CancellationTokenSource} allows you to issue cancellation requests to one or more {@link org.gradle.tooling.LongRunningOperation}
+ * instances. To use a token source:
+ *
+ * &lt;ul&gt;
+ *     &lt;li&gt;Create a token source using {@link GradleConnector#newCancellationTokenSource()}.&lt;/li&gt;
+ *     &lt;li&gt;Attach the token to one or more operations using {@link org.gradle.tooling.LongRunningOperation#withCancellationToken(CancellationToken)}.
+ *     You need to do this before you start the operation.
+ *     &lt;/li&gt;
+ *     &lt;li&gt;Later, you can cancel the associated operations by calling {@link #cancel()} on this token source.&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt;All implementations of this interface are required to be thread safe.&lt;/p&gt;
+ *
+ * @since 2.1
+ </description>
+    <method name="cancel" returnType="void">
+        <description>
+     * Initiates cancel request. All operations that have been associated with this token will be cancelled.
+     *
+     * &lt;p&gt;It is assumed that the implementation will do 'best-effort' attempt to perform cancellation.
+     * This method returns immediately and if the cancellation is successful the cancelled operation
+     * will notify its {@link org.gradle.tooling.ResultHandler#onFailure(GradleConnectionException)}
+     * with a {@link BuildCancelledException} describing how it was cancelled.
+     * &lt;/p&gt;
+     </description>
     </method>
-    <method name="token" returnType="org.gradle.tooling.CancellationToken" delegationTarget="CancellationTokenSource">
-        <description> 
- Returns a token associated with this &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt;. 
- Always returns the same instance. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The cancellation token. 
-</description>
+    <method name="token" returnType="org.gradle.tooling.CancellationToken">
+        <description>
+     * Returns a token associated with this {@code CancellationTokenSource}.
+     * Always returns the same instance.
+     *
+     * @return The cancellation token.
+     </description>
     </method>
 </type>

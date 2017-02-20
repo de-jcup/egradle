@@ -1,332 +1,403 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.tasks.SourceSet" version="3.0">
-    <description> 
- A &lt;a href='type://SourceSet'&gt;SourceSet&lt;/a&gt; represents a logical group of Java source and resources. 
- &lt;p&gt; 
- See the example below how &lt;a href='type://SourceSet'&gt;SourceSet&lt;/a&gt; 'main' is accessed and how the &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt; 'java' 
- is configured to exclude some package from compilation. 
- 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- 
- sourceSets { 
-       exclude 'some/unwanted/package/**' 
-     } 
-   } 
- } 
- &lt;/pre&gt; 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.SourceSet" version="3.0" documented="true">
+    <description>
+ * A {@code SourceSet} represents a logical group of Java source and resources.
+ * &lt;p&gt;
+ * See the example below how {@link SourceSet} 'main' is accessed and how the {@link SourceDirectorySet} 'java'
+ * is configured to exclude some package from compilation.
+ *
+ * &lt;pre autoTested=''&gt;
+ * apply plugin: 'java'
+ *
+ * sourceSets {
+ *   main {
+ *     java {
+ *       exclude 'some/unwanted/package/**'
+ *     }
+ *   }
+ * }
+ * &lt;/pre&gt;
+ </description>
+    <method name="antlr" returnType="org.gradle.api.plugins.antlr.AntlrSourceVirtualDirectory" delegationTarget="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description>
+     * Configures the Antlr source for this set. The given closure is used to configure the {@link org.gradle.api.file.SourceDirectorySet} (see
+     * {@link #getAntlr}) which contains the Antlr source.
+     *
+     * @param configureClosure The closure to use to configure the Antlr source.
+     * @return this
+     </description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
     <method name="compiledBy" returnType="org.gradle.api.tasks.SourceSet" documented="true">
-        <description> 
- Registers a set of tasks which are responsible for compiling this source set into the classes directory. The 
- paths are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskPaths The tasks which compile this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Registers a set of tasks which are responsible for compiling this source set into the classes directory. The
+     * paths are evaluated as per {@link org.gradle.api.Task#dependsOn(Object...)}.
+     *
+     * @param taskPaths The tasks which compile this source set.
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="taskPaths"/>
     </method>
+    <method name="getAllGroovy" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description>
+     * All Groovy source for this source set.
+     *
+     * @return the Groovy source. Never returns null.
+     </description>
+    </method>
     <method name="getAllJava" returnType="org.gradle.api.file.SourceDirectorySet">
-        <description> 
- All Java source files for this source set. This includes, for example, source which is directly compiled, and 
- source which is indirectly compiled through joint compilation. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
-</description>
+        <description>
+     * All Java source files for this source set. This includes, for example, source which is directly compiled, and
+     * source which is indirectly compiled through joint compilation.
+     *
+     * @return the Java source. Never returns null.
+     </description>
+    </method>
+    <method name="getAllScala" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description>
+     * All Scala source for this source set.
+     *
+     * @return the Scala source. Never returns null.
+     </description>
     </method>
     <method name="getAllSource" returnType="org.gradle.api.file.SourceDirectorySet">
-        <description> 
- All source files for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source. Never returns null. 
-</description>
+        <description>
+     * All source files for this source set.
+     *
+     * @return the source. Never returns null.
+     </description>
+    </method>
+    <method name="getAntlr" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description>
+     * All Antlr source for this source set.
+     *
+     * @return The Antlr source.  Never returns null.
+     </description>
     </method>
     <method name="getClassesTaskName" returnType="java.lang.String">
-        <description> 
- Returns the name of the classes task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the classes task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </method>
     <method name="getCompileClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath used to compile this source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Never returns null. 
-</description>
+        <description>
+     * Returns the classpath used to compile this source.
+     *
+     * @return The classpath. Never returns null.
+     </description>
     </method>
     <method name="getCompileClasspathConfigurationName" returnType="java.lang.String">
-        <description> 
- Returns the name of the compile classpath configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile classpath configuration 
- 
- @since 2.12 
-</description>
+        <description>
+     * Returns the name of the compile classpath configuration for this source set.
+     * @return The compile classpath configuration
+     *
+     * @since 2.12
+     </description>
     </method>
     <method name="getCompileConfigurationName" returnType="java.lang.String">
-        <description> 
- Returns the name of the compile configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration name 
-</description>
+        <description>
+     * Returns the name of the compile configuration for this source set.
+     * @return The configuration name
+     </description>
     </method>
     <method name="getCompileJavaTaskName" returnType="java.lang.String">
-        <description> 
- Returns the name of the compile Java task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the compile Java task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </method>
     <method name="getCompileOnlyConfigurationName" returnType="java.lang.String">
-        <description> 
- Returns the name of the compile only configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile only configuration name 
- 
- @since 2.12 
-</description>
+        <description>
+     * Returns the name of the compile only configuration for this source set.
+     * @return The compile only configuration name
+     *
+     * @since 2.12
+     </description>
     </method>
     <method name="getCompileTaskName" returnType="java.lang.String" documented="true">
-        <description> 
- Returns the name of a compile task for this source set. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;language The language to be compiled. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of a compile task for this source set.
+     *
+     * @param language The language to be compiled.
+     * @return The task name. Never returns null.
+     </description>
         <parameter type="java.lang.String" name="language"/>
     </method>
+    <method name="getGroovy" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description>
+     * Returns the source to be compiled by the Groovy compiler for this source set. Any Java source present in this set
+     * will be passed to the Groovy compiler for joint compilation.
+     *
+     * @return The Groovy/Java source. Never returns null.
+     </description>
+    </method>
     <method name="getJarTaskName" returnType="java.lang.String">
-        <description> 
- Returns the name of the Jar task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the Jar task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </method>
     <method name="getJava" returnType="org.gradle.api.file.SourceDirectorySet">
-        <description> 
- Returns the Java source which is to be compiled by the Java compiler into the class output directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
-</description>
+        <description>
+     * Returns the Java source which is to be compiled by the Java compiler into the class output directory.
+     *
+     * @return the Java source. Never returns null.
+     </description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- Returns the name of this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of this source set.
+     *
+     * @return The name. Never returns null.
+     </description>
     </method>
-    <method name="getOutput" returnType="org.gradle.api.tasks.SourceSetOutput" delegationTarget="SourceSetOutput">
-        <description> 
- &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; is a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt; of all output directories (compiled classes, processed resources, etc.) 
-  and it provides means to configure the default output dirs and register additional output dirs. See examples in &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output dirs, as a &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;. 
-</description>
+    <method name="getOutput" returnType="org.gradle.api.tasks.SourceSetOutput">
+        <description>
+     * {@link SourceSetOutput} is a {@link FileCollection} of all output directories (compiled classes, processed resources, etc.)
+     *  and it provides means to configure the default output dirs and register additional output dirs. See examples in {@link SourceSetOutput}
+     *
+     * @return The output dirs, as a {@link SourceSetOutput}.
+     </description>
     </method>
     <method name="getProcessResourcesTaskName" returnType="java.lang.String">
-        <description> 
- Returns the name of the resource process task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the resource process task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </method>
     <method name="getResources" returnType="org.gradle.api.file.SourceDirectorySet">
-        <description> 
- Returns the non-Java resources which are to be copied into the resources output directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the resources. Never returns null. 
-</description>
+        <description>
+     * Returns the non-Java resources which are to be copied into the resources output directory.
+     *
+     * @return the resources. Never returns null.
+     </description>
     </method>
     <method name="getRuntimeClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath used to execute this source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Never returns null. 
-</description>
+        <description>
+     * Returns the classpath used to execute this source.
+     *
+     * @return The classpath. Never returns null.
+     </description>
     </method>
     <method name="getRuntimeConfigurationName" returnType="java.lang.String">
-        <description> 
- Returns the name of the runtime configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The runtime configuration name 
-</description>
+        <description>
+     * Returns the name of the runtime configuration for this source set.
+     * @return The runtime configuration name
+     </description>
+    </method>
+    <method name="getScala" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description>
+     * Returns the source to be compiled by the Scala compiler for this source set. This may contain both Java and Scala
+     * source files.
+     *
+     * @return The Scala source. Never returns null.
+     </description>
     </method>
     <method name="getTaskName" returnType="java.lang.String" documented="true">
-        <description> 
- Returns the name of a task for this source set. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;verb The action, may be null. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target The target, may be null 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name, generally of the form ${verb}${name}${noun} 
-</description>
+        <description>
+     * Returns the name of a task for this source set.
+     *
+     * @param verb The action, may be null.
+     * @param target The target, may be null
+     * @return The task name, generally of the form ${verb}${name}${noun}
+     </description>
         <parameter type="java.lang.String" name="verb"/>
         <parameter type="java.lang.String" name="target"/>
     </method>
-    <method name="java" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet" documented="true">
-        <description> 
- Configures the Java source for this set. 
- 
- &lt;p&gt;The given closure is used to configure the &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt; which contains the Java source. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the Java source. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="groovy" returnType="org.gradle.api.tasks.GroovySourceSet" delegationTarget="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description>
+     * Configures the Groovy source for this set.
+     *
+     * &lt;p&gt;The given closure is used to configure the {@link SourceDirectorySet} which contains the Groovy source.
+     *
+     * @param configureClosure The closure to use to configure the Groovy source.
+     * @return this
+     </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="resources" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="SourceDirectorySet" documented="true">
-        <description> 
- Configures the non-Java resources for this set. 
- 
- &lt;p&gt;The given closure is used to configure the &lt;a href='type://SourceDirectorySet'&gt;SourceDirectorySet&lt;/a&gt; which contains the resources. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the resources. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="java" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description>
+     * Configures the Java source for this set.
+     *
+     * &lt;p&gt;The given closure is used to configure the {@link SourceDirectorySet} which contains the Java source.
+     *
+     * @param configureClosure The closure to use to configure the Java source.
+     * @return this
+     </description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="resources" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description>
+     * Configures the non-Java resources for this set.
+     *
+     * &lt;p&gt;The given closure is used to configure the {@link SourceDirectorySet} which contains the resources.
+     *
+     * @param configureClosure The closure to use to configure the resources.
+     * @return this
+     </description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="scala" returnType="org.gradle.api.tasks.ScalaSourceSet" delegationTarget="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description>
+     * Configures the Scala source for this set.
+     *
+     * &lt;p&gt;The given closure is used to configure the {@link SourceDirectorySet} which contains the Scala source.
+     *
+     * @param configureClosure The closure to use to configure the Scala source.
+     * @return this
+     </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="setCompileClasspath" returnType="void">
-        <description> 
- Sets the classpath used to compile this source. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath. Should not be null. 
-</description>
+        <description>
+     * Sets the classpath used to compile this source.
+     *
+     * @param classpath The classpath. Should not be null.
+     </description>
         <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
     </method>
     <method name="setRuntimeClasspath" returnType="void">
-        <description> 
- Sets the classpath used to execute this source. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath. Should not be null. 
-</description>
+        <description>
+     * Sets the classpath used to execute this source.
+     *
+     * @param classpath The classpath. Should not be null.
+     </description>
         <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
     </method>
     <property name="allJava" type="org.gradle.api.file.SourceDirectorySet" documented="true">
-        <description> 
- All Java source files for this source set. This includes, for example, source which is directly compiled, and 
- source which is indirectly compiled through joint compilation. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
-</description>
+        <description>
+     * All Java source files for this source set. This includes, for example, source which is directly compiled, and
+     * source which is indirectly compiled through joint compilation.
+     *
+     * @return the Java source. Never returns null.
+     </description>
     </property>
     <property name="allSource" type="org.gradle.api.file.SourceDirectorySet" documented="true">
-        <description> 
- All source files for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source. Never returns null. 
-</description>
+        <description>
+     * All source files for this source set.
+     *
+     * @return the source. Never returns null.
+     </description>
     </property>
     <property name="classesTaskName" type="java.lang.String">
-        <description> 
- Returns the name of the classes task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the classes task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </property>
     <property name="compileClasspath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the classpath used to compile this source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Never returns null. 
-</description>
+        <description>
+     * Returns the classpath used to compile this source.
+     *
+     * @return The classpath. Never returns null.
+     </description>
     </property>
     <property name="compileClasspathConfigurationName" type="java.lang.String">
-        <description> 
- Returns the name of the compile classpath configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile classpath configuration 
- 
- @since 2.12 
-</description>
+        <description>
+     * Returns the name of the compile classpath configuration for this source set.
+     * @return The compile classpath configuration
+     *
+     * @since 2.12
+     </description>
     </property>
     <property name="compileConfigurationName" type="java.lang.String">
-        <description> 
- Returns the name of the compile configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration name 
-</description>
+        <description>
+     * Returns the name of the compile configuration for this source set.
+     * @return The configuration name
+     </description>
     </property>
     <property name="compileJavaTaskName" type="java.lang.String">
-        <description> 
- Returns the name of the compile Java task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the compile Java task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </property>
     <property name="compileOnlyConfigurationName" type="java.lang.String">
-        <description> 
- Returns the name of the compile only configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile only configuration name 
- 
- @since 2.12 
-</description>
+        <description>
+     * Returns the name of the compile only configuration for this source set.
+     * @return The compile only configuration name
+     *
+     * @since 2.12
+     </description>
     </property>
     <property name="compileTaskName" type="java.lang.String">
-        <description> 
- Returns the name of a compile task for this source set. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;language The language to be compiled. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of a compile task for this source set.
+     *
+     * @param language The language to be compiled.
+     * @return The task name. Never returns null.
+     </description>
     </property>
     <property name="jarTaskName" type="java.lang.String">
-        <description> 
- Returns the name of the Jar task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the Jar task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </property>
     <property name="java" type="org.gradle.api.file.SourceDirectorySet" documented="true">
-        <description> 
- Returns the Java source which is to be compiled by the Java compiler into the class output directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java source. Never returns null. 
-</description>
+        <description>
+     * Returns the Java source which is to be compiled by the Java compiler into the class output directory.
+     *
+     * @return the Java source. Never returns null.
+     </description>
     </property>
     <property name="name" type="java.lang.String" documented="true">
-        <description> 
- Returns the name of this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of this source set.
+     *
+     * @return The name. Never returns null.
+     </description>
     </property>
     <property name="output" type="org.gradle.api.tasks.SourceSetOutput" documented="true">
-        <description> 
- &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; is a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt; of all output directories (compiled classes, processed resources, etc.) 
-  and it provides means to configure the default output dirs and register additional output dirs. See examples in &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output dirs, as a &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;. 
-</description>
+        <description>
+     * {@link SourceSetOutput} is a {@link FileCollection} of all output directories (compiled classes, processed resources, etc.)
+     *  and it provides means to configure the default output dirs and register additional output dirs. See examples in {@link SourceSetOutput}
+     *
+     * @return The output dirs, as a {@link SourceSetOutput}.
+     </description>
     </property>
     <property name="processResourcesTaskName" type="java.lang.String">
-        <description> 
- Returns the name of the resource process task for this source set. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name. Never returns null. 
-</description>
+        <description>
+     * Returns the name of the resource process task for this source set.
+     *
+     * @return The task name. Never returns null.
+     </description>
     </property>
     <property name="resources" type="org.gradle.api.file.SourceDirectorySet" documented="true">
-        <description> 
- Returns the non-Java resources which are to be copied into the resources output directory. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the resources. Never returns null. 
-</description>
+        <description>
+     * Returns the non-Java resources which are to be copied into the resources output directory.
+     *
+     * @return the resources. Never returns null.
+     </description>
     </property>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the classpath used to execute this source. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Never returns null. 
-</description>
+        <description>
+     * Returns the classpath used to execute this source.
+     *
+     * @return The classpath. Never returns null.
+     </description>
     </property>
     <property name="runtimeConfigurationName" type="java.lang.String">
-        <description> 
- Returns the name of the runtime configuration for this source set. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The runtime configuration name 
-</description>
+        <description>
+     * Returns the name of the runtime configuration for this source set.
+     * @return The runtime configuration name
+     </description>
     </property>
     <property name="taskName" type="java.lang.String">
-        <description> 
- Returns the name of a task for this source set. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;verb The action, may be null. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target The target, may be null 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task name, generally of the form ${verb}${name}${noun} 
-</description>
+        <description>
+     * Returns the name of a task for this source set.
+     *
+     * @param verb The action, may be null.
+     * @param target The target, may be null
+     * @return The task name, generally of the form ${verb}${name}${noun}
+     </description>
     </property>
 </type>

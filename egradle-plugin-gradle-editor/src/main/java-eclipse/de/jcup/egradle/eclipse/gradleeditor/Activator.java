@@ -127,7 +127,6 @@ public class Activator extends AbstractUIPlugin {
 		loader.setDSLFolder(dslFolder);
 		
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
-		gradleDslProvider.setErrorHandler(errorHandler);
 		
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
 		return gradleDslProvider;

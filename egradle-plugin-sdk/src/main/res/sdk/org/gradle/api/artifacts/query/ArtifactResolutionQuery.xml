@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.artifacts.query.ArtifactResolutionQuery" version="3.0">
-    <description> 
- A builder to construct a query that can resolve selected software artifacts of the specified components. 
- 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- 
- task resolveCompileSources &lt;&lt; { it.selected.id } 
- 
-     def result = dependencies.createArtifactResolutionQuery() 
-                              .forComponents(componentIds) 
-                              .withArtifacts(JvmLibrary, SourcesArtifact, JavadocArtifact) 
-                              .execute() 
- 
-     for (component in result.resolvedComponents) {component.id}: ${it.file}" } 
-     } 
- } 
- &lt;/pre&gt; 
- 
- @since 2.0 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.query.ArtifactResolutionQuery" version="3.0" documented="true">
+    <description>
+ * A builder to construct a query that can resolve selected software artifacts of the specified components.
+ *
+ * &lt;pre autoTested=''&gt;
+ * apply plugin: 'java'
+ *
+ * task resolveCompileSources &lt;&lt; {
+ *     def componentIds = configurations.compile.incoming.resolutionResult.allDependencies.collect { it.selected.id }
+ *
+ *     def result = dependencies.createArtifactResolutionQuery()
+ *                              .forComponents(componentIds)
+ *                              .withArtifacts(JvmLibrary, SourcesArtifact, JavadocArtifact)
+ *                              .execute()
+ *
+ *     for (component in result.resolvedComponents) {
+ *         component.getArtifacts(SourcesArtifact).each { println "Source artifact for ${component.id}: ${it.file}" }
+ *     }
+ * }
+ * &lt;/pre&gt;
+ *
+ * @since 2.0
+ </description>
     <method name="execute" returnType="org.gradle.api.artifacts.result.ArtifactResolutionResult" documented="true">
-        <description> 
- Actually execute the query, returning a query result. 
- Note that &lt;a href='type://ArtifactResolutionQuery#withArtifacts(Class, Class[])'&gt;#withArtifacts(Class, Class[])&lt;/a&gt; must be called before executing the query. 
-</description>
+        <description>
+     * Actually execute the query, returning a query result.
+     * Note that {@link #withArtifacts(Class, Class[])} must be called before executing the query.
+     </description>
     </method>
     <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
-        <description> 
- Specifies the set of components to include in the result. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
-</description>
+        <description>
+     * Specifies the set of components to include in the result.
+     * @param componentIds The identifiers of the components to be queried.
+     </description>
         <parameter type="java.lang.Iterable" name="componentIds"/>
     </method>
     <method name="forComponents" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
-        <description> 
- Specifies the set of components to include in the result. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentIds The identifiers of the components to be queried. 
-</description>
+        <description>
+     * Specifies the set of components to include in the result.
+     * @param componentIds The identifiers of the components to be queried.
+     </description>
         <parameter type="org.gradle.api.artifacts.component.ComponentIdentifier" name="componentIds"/>
     </method>
     <method name="withArtifacts" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
-        <description> 
- Defines the type of component that is expected in the result, and the artifacts to retrieve for components of this type. 
- 
- Presently, only a single component type and set of artifacts is permitted. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;componentType The expected type of the component. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;artifactTypes The artifacts to retrieve for the queried components. 
-</description>
+        <description>
+     * Defines the type of component that is expected in the result, and the artifacts to retrieve for components of this type.
+     *
+     * Presently, only a single component type and set of artifacts is permitted.
+     *
+     * @param componentType The expected type of the component.
+     * @param artifactTypes The artifacts to retrieve for the queried components.
+     </description>
         <parameter type="java.lang.Class" name="componentType"/>
         <parameter type="java.lang.Class" name="artifactTypes"/>
     </method>

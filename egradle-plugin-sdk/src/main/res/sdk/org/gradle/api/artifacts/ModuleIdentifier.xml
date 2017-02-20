@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.ModuleIdentifier" version="3.0">
-    <description> 
- The identifier of a module. 
-</description>
+    <description>
+ * The identifier of a module.
+ </description>
     <method name="getGroup" returnType="java.lang.String">
-        <description> 
- The group of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 
-</description>
+        <description>
+     * The group of the module.
+     *
+     * @return module group
+     </description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- The name of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
-</description>
+        <description>
+     * The name of the module.
+     *
+     * @return module name
+     </description>
     </method>
     <interface name="java.io.Serializable"/>
     <property name="group" type="java.lang.String">
-        <description> 
- The group of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 
-</description>
+        <description>
+     * The group of the module.
+     *
+     * @return module group
+     </description>
     </property>
     <property name="name" type="java.lang.String">
-        <description> 
- The name of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
-</description>
+        <description>
+     * The name of the module.
+     *
+     * @return module name
+     </description>
     </property>
 </type>

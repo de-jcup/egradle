@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.JarBinarySpec" version="3.0">
-    <description> 
- Definition of a Jar file binary that is to be built by Gradle. 
-</description>
+    <description>
+ * Definition of a Jar file binary that is to be built by Gradle.
+ </description>
     <method name="getApiJarFile" returnType="java.io.File">
-        <description> 
- The API jar file output for this binary. 
-</description>
+        <description>
+     * The API jar file output for this binary.
+     </description>
     </method>
     <method name="getExportedPackages" returnType="java.util.Set"/>
     <method name="getId" returnType="org.gradle.api.artifacts.component.LibraryBinaryIdentifier">
-        <description> 
- The unique identifier of this JarBinarySpec. 
-</description>
+        <description>
+     * The unique identifier of this JarBinarySpec.
+     </description>
     </method>
     <method name="getJarFile" returnType="java.io.File">
-        <description> 
- The jar file output for this binary. 
-</description>
+        <description>
+     * The jar file output for this binary.
+     </description>
     </method>
     <method name="getLibrary" returnType="org.gradle.jvm.JvmLibrarySpec">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </method>
     <method name="getTasks" returnType="org.gradle.jvm.JarBinarySpec.TasksCollection">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </method>
     <method name="setApiJarFile" returnType="void">
-        <description> 
- Sets the API jar file output for this binary. 
-</description>
+        <description>
+     * Sets the API jar file output for this binary.
+     </description>
         <parameter type="java.io.File" name="jarFile"/>
     </method>
     <method name="setExportedPackages" returnType="void">
         <parameter type="java.util.Set" name="exportedPackages"/>
     </method>
     <method name="setJarFile" returnType="void">
-        <description> 
- Sets the jar file output for this binary. 
-</description>
+        <description>
+     * Sets the jar file output for this binary.
+     </description>
         <parameter type="java.io.File" name="jarFile"/>
     </method>
     <interface name="org.gradle.jvm.JvmBinarySpec"/>
     <interface name="org.gradle.platform.base.LibraryBinarySpec"/>
     <property name="apiJarFile" type="java.io.File">
-        <description> 
- The API jar file output for this binary. 
-</description>
+        <description>
+     * The API jar file output for this binary.
+     </description>
     </property>
     <property name="exportedPackages" type="java.util.Set"/>
     <property name="id" type="org.gradle.api.artifacts.component.LibraryBinaryIdentifier">
-        <description> 
- The unique identifier of this JarBinarySpec. 
-</description>
+        <description>
+     * The unique identifier of this JarBinarySpec.
+     </description>
     </property>
     <property name="jarFile" type="java.io.File">
-        <description> 
- The jar file output for this binary. 
-</description>
+        <description>
+     * The jar file output for this binary.
+     </description>
     </property>
     <property name="library" type="org.gradle.jvm.JvmLibrarySpec">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </property>
     <property name="tasks" type="org.gradle.jvm.JarBinarySpec.TasksCollection">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </property>
 </type>

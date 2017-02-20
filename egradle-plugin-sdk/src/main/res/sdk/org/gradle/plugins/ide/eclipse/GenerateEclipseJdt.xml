@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseJdt" version="3.0" superType="org.gradle.plugins.ide.api.PropertiesGeneratorTask">
-    <description> 
- Generates the Eclipse JDT configuration file. If you want to fine tune the eclipse configuration 
- &lt;p&gt; 
- At this moment nearly all configuration is done via &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt;. 
-</description>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseJdt" version="3.0" superType="org.gradle.plugins.ide.api.PropertiesGeneratorTask" documented="true">
+    <description>
+ * Generates the Eclipse JDT configuration file. If you want to fine tune the eclipse configuration
+ * &lt;p&gt;
+ * At this moment nearly all configuration is done via {@link EclipseJdt}.
+ </description>
     <method name="configure" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.Jdt" name="jdtContent"/>
     </method>
     <method name="create" returnType="org.gradle.plugins.ide.eclipse.model.Jdt"/>
     <method name="getJdt" returnType="org.gradle.plugins.ide.eclipse.model.EclipseJdt">
-        <description> 
- Eclipse JDT model that contains information needed to generate the JDT file. 
-</description>
+        <description>
+     * Eclipse JDT model that contains information needed to generate the JDT file.
+     </description>
     </method>
     <method name="setJdt" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" name="jdt"/>
     </method>
     <property name="jdt" type="org.gradle.plugins.ide.eclipse.model.EclipseJdt" documented="true">
-        <description> 
- Eclipse JDT model that contains information needed to generate the JDT file. 
-</description>
+        <description>
+     * Eclipse JDT model that contains information needed to generate the JDT file.
+     </description>
     </property>
 </type>

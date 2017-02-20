@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.logging.StandardOutputListener" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;a href='type://StandardOutputListener'&gt;StandardOutputListener&lt;/a&gt; receives text written by Gradle's logging system to standard output or 
- error.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;A {@code StandardOutputListener} receives text written by Gradle's logging system to standard output or
+ * error.&lt;/p&gt;
+ </description>
     <method name="onOutput" returnType="void">
-        <description> 
- Called when some output is written by the logging system. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;output The text. 
-</description>
+        <description>
+     * Called when some output is written by the logging system.
+     *
+     * @param output The text.
+     </description>
         <parameter type="java.lang.CharSequence" name="output"/>
     </method>
 </type>

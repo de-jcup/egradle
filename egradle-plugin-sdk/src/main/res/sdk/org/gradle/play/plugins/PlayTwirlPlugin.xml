@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayTwirlPlugin" version="3.0" superType="org.gradle.model.RuleSource">
-    <description> 
- Plugin for compiling Twirl sources in a Play application. 
-</description>
+    <description>
+ * Plugin for compiling Twirl sources in a Play application.
+ </description>
     <method name="addPlayJavaDependencyIfNeeded" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="binaries"/>
         <parameter type="org.gradle.play.plugins.PlayPluginConfigurations" name="configurations"/>
@@ -13,7 +13,7 @@
         <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
     </method>
     <method name="execute" returnType="void">
-        <parameter type="org.gradle.play.internal.PlayApplicationBinarySpecInternal" name="playApplicationBinarySpec"/>
+        <parameter type="org.gradle.play.internal.PlayApplicationBinarySpecInternal" name="binary"/>
     </method>
     <method name="hasTwirlSourceSetsWithJavaImports" returnType="boolean">
         <parameter type="org.gradle.play.PlayApplicationSpec" name="playApplicationSpec"/>

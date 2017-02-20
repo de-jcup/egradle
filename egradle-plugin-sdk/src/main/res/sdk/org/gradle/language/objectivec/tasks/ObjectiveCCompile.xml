@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.language.objectivec.tasks.ObjectiveCCompile" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativeSourceCompileTask">
-    <description> 
- Compiles Objective-C source files into object files. 
-</description>
+<type language="gradle" name="org.gradle.language.objectivec.tasks.ObjectiveCCompile" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativeSourceCompileTask" documented="true">
+    <description>
+ * Compiles Objective-C source files into object files.
+ </description>
     <method name="createCompileSpec" returnType="org.gradle.nativeplatform.toolchain.internal.NativeCompileSpec"/>
 </type>

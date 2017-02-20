@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.play.PlayApplicationBinarySpec" version="3.0">
-    <description> 
- Represents a binary artifact that is the result of building a Play application software component. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.play.PlayApplicationBinarySpec" version="3.0" documented="true">
+    <description>
+ * Represents a binary artifact that is the result of building a Play application software component.
+ </description>
     <method name="getApplication" returnType="org.gradle.play.PlayApplicationSpec">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </method>
     <method name="getAssets" returnType="org.gradle.play.PublicAssets">
-        <description> 
- A buildable object representing the public assets that will be included in the assets jar file. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the PublicAssets for this binary 
-</description>
+        <description>
+     * A buildable object representing the public assets that will be included in the assets jar file.
+     * @return the PublicAssets for this binary
+     </description>
     </method>
     <method name="getAssetsJarFile" returnType="java.io.File">
-        <description> 
- The assets jar file produced for this binary. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the assets jar file 
-</description>
+        <description>
+     * The assets jar file produced for this binary.
+     * @return the assets jar file
+     </description>
     </method>
     <method name="getClasses" returnType="org.gradle.play.JvmClasses">
-        <description> 
- A buildable object representing the class files and resources that will be included in the application jar file. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the JvmClasses for this binary 
-</description>
+        <description>
+     * A buildable object representing the class files and resources that will be included in the application jar file.
+     * @return the JvmClasses for this binary
+     </description>
     </method>
     <method name="getGeneratedJavaScript" returnType="java.util.Map"/>
     <method name="getGeneratedScala" returnType="java.util.Map"/>
     <method name="getJarFile" returnType="java.io.File">
-        <description> 
- The application jar file produced for this binary. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the application jar file 
-</description>
+        <description>
+     * The application jar file produced for this binary.
+     * @return the application jar file
+     </description>
     </method>
     <method name="getTargetPlatform" returnType="org.gradle.play.platform.PlayPlatform">
-        <description> 
- The PlayPlatform this binary is built for. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;platform for this binary 
-</description>
+        <description>
+     * The PlayPlatform this binary is built for.
+     * @return platform for this binary
+     </description>
     </method>
     <method name="getToolChain" returnType="org.gradle.play.toolchain.PlayToolChain"/>
     <interface name="org.gradle.platform.base.ApplicationBinarySpec"/>
     <property name="application" type="org.gradle.play.PlayApplicationSpec">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </property>
     <property name="assets" type="org.gradle.play.PublicAssets" documented="true">
-        <description> 
- A buildable object representing the public assets that will be included in the assets jar file. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the PublicAssets for this binary 
-</description>
+        <description>
+     * A buildable object representing the public assets that will be included in the assets jar file.
+     * @return the PublicAssets for this binary
+     </description>
     </property>
     <property name="assetsJarFile" type="java.io.File" documented="true">
-        <description> 
- The assets jar file produced for this binary. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the assets jar file 
-</description>
+        <description>
+     * The assets jar file produced for this binary.
+     * @return the assets jar file
+     </description>
     </property>
     <property name="classes" type="org.gradle.play.JvmClasses" documented="true">
-        <description> 
- A buildable object representing the class files and resources that will be included in the application jar file. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the JvmClasses for this binary 
-</description>
+        <description>
+     * A buildable object representing the class files and resources that will be included in the application jar file.
+     * @return the JvmClasses for this binary
+     </description>
     </property>
     <property name="generatedJavaScript" type="java.util.Map"/>
     <property name="generatedScala" type="java.util.Map"/>
     <property name="jarFile" type="java.io.File" documented="true">
-        <description> 
- The application jar file produced for this binary. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the application jar file 
-</description>
+        <description>
+     * The application jar file produced for this binary.
+     * @return the application jar file
+     </description>
     </property>
     <property name="targetPlatform" type="org.gradle.play.platform.PlayPlatform" documented="true">
-        <description> 
- The PlayPlatform this binary is built for. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;platform for this binary 
-</description>
+        <description>
+     * The PlayPlatform this binary is built for.
+     * @return platform for this binary
+     </description>
     </property>
     <property name="toolChain" type="org.gradle.play.toolchain.PlayToolChain"/>
 </type>

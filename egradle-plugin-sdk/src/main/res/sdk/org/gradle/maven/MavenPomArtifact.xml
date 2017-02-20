@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.maven.MavenPomArtifact" version="3.0">
-    <description> 
- A Maven POM artifact. 
-</description>
+    <description>
+ * A Maven POM artifact.
+ </description>
     <interface name="org.gradle.api.component.Artifact"/>
 </type>

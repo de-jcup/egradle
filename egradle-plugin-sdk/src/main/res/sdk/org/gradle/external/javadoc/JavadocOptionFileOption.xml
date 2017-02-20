@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.external.javadoc.JavadocOptionFileOption" version="3.0">
-    <description> 
- Represents a Javadoc command-line option. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type which this option represents. 
-</description>
+    <description>
+ * Represents a Javadoc command-line option.
+ *
+ * @param &lt;T&gt; The type which this option represents.
+ </description>
     <method name="getOption" returnType="java.lang.String"/>
     <interface name="org.gradle.external.javadoc.OptionLessJavadocOptionFileOption"/>
     <property name="option" type="java.lang.String"/>

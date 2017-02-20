@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.GradleTask" version="3.0">
-    <description> 
- Represents a task which is executable by Gradle. 
- 
- @since 1.0-milestone-5 
-</description>
+    <description>
+ * Represents a task which is executable by Gradle.
+ *
+ * @since 1.0-milestone-5
+ </description>
     <method name="getProject" returnType="org.gradle.tooling.model.GradleProject">
-        <description> 
- Returns the Gradle project this task is defined in. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The element. 
- @since 1.0-milestone-5 
-</description>
+        <description>
+     * Returns the Gradle project this task is defined in.
+     *
+     * @return The element.
+     * @since 1.0-milestone-5
+     </description>
     </method>
     <interface name="org.gradle.tooling.model.Task"/>
     <property name="project" type="org.gradle.tooling.model.GradleProject">
-        <description> 
- Returns the Gradle project this task is defined in. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The element. 
- @since 1.0-milestone-5 
-</description>
+        <description>
+     * Returns the Gradle project this task is defined in.
+     *
+     * @return The element.
+     * @since 1.0-milestone-5
+     </description>
     </property>
 </type>

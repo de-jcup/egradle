@@ -92,13 +92,17 @@ public class FilesystemFileLoader implements DSLFileLoader {
 	public Map<String, String> loadApiMappings() throws IOException {
 		Map<String, String> alternative;
 		Map<String, String> origin;
-		/* first load alternate api mapping */
-		try(InputStream stream = new FileInputStream(new File(dslFolder,"alternative-api-mapping.txt"))){
-			alternative = apiMappingImporter.importMapping(stream);
-		}
-		/* second load origin api mapping. */
-		try(InputStream stream = new FileInputStream(new File(dslFolder,"api-mapping.txt"))){
+		/* first load alternate origin mapping */
+		File apiMappingFile = new File(dslFolder,"api-mapping.txt");
+		try(InputStream stream = new FileInputStream(apiMappingFile)){
 			origin = apiMappingImporter.importMapping(stream);
+		}
+		File alternativeApiMappingFile = new File(dslFolder,"alternative-api-mapping.txt");
+		if (! alternativeApiMappingFile.exists()){
+			return origin; 
+		}
+		try(InputStream stream = new FileInputStream(alternativeApiMappingFile)){
+			alternative = apiMappingImporter.importMapping(stream);
 		}
 		/* merge results, origin api wins, if there are conflicts */
 		Map<String, String> result= alternative;

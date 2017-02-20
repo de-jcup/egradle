@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Classpath" version="3.0">
-    <description> 
- Represents the customizable elements of an eclipse classpath file. (via XML hooks everything is customizable). 
-</description>
+    <description>
+ * Represents the customizable elements of an eclipse classpath file. (via XML hooks everything is customizable).
+ </description>
     <method name="configure" returnType="java.lang.Object">
         <parameter type="java.util.List" name="newEntries"/>
     </method>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
-    <method name="fileReference" returnType="org.gradle.plugins.ide.eclipse.model.FileReference" delegationTarget="FileReference">
-        <description> 
- Creates a new &lt;a href='type://FileReference'&gt;FileReference&lt;/a&gt; instance. 
- &lt;p&gt; 
- The created object can be used to configure custom source or javadoc location on &lt;a href='type://Library'&gt;Library&lt;/a&gt; and on &lt;a href='type://Variable'&gt;Variable&lt;/a&gt; objects. 
- &lt;p&gt; 
- This method can receive either String or File instances. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;reference The object to transform into a new file reference. Can be instance of File or String. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new file reference. 
- @see AbstractLibrary#setJavadocPath(FileReference) 
- @see AbstractLibrary#setSourcePath(FileReference) 
-</description>
+    <method name="fileReference" returnType="org.gradle.plugins.ide.eclipse.model.FileReference">
+        <description>
+     * Creates a new {@link FileReference} instance.
+     * &lt;p&gt;
+     * The created object can be used to configure custom source or javadoc location on {@link Library} and on {@link Variable} objects.
+     * &lt;p&gt;
+     * This method can receive either String or File instances.
+     *
+     * @param reference The object to transform into a new file reference. Can be instance of File or String.
+     * @return The new file reference.
+     * @see AbstractLibrary#setJavadocPath(FileReference)
+     * @see AbstractLibrary#setSourcePath(FileReference)
+     </description>
         <parameter type="java.lang.Object" name="reference"/>
     </method>
     <method name="getDefaultResourceName" returnType="java.lang.String"/>

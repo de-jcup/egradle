@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.distribution.plugins.DistributionPlugin" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; to package project as a distribution.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;A {@link Plugin} to package project as a distribution.&lt;/p&gt;
+ </description>
     <method name="addAssembleTask" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
         <parameter type="org.gradle.api.distribution.Distribution" name="distribution"/>

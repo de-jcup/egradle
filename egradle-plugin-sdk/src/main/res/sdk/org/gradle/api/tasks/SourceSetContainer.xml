@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.SourceSetContainer" version="3.0">
-    <description> 
- A &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt; manages a set of &lt;a href='type://SourceSet'&gt;SourceSet&lt;/a&gt; objects. 
-</description>
+    <description>
+ * A {@code SourceSetContainer} manages a set of {@link SourceSet} objects.
+ </description>
     <interface name="org.gradle.api.NamedDomainObjectContainer"/>
     <interface name="org.gradle.api.NamedDomainObjectSet"/>
 </type>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Variable" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractLibrary">
-    <description> 
- A variable library entry. 
-</description>
+    <description>
+ * A variable library entry.
+ </description>
     <method name="getKind" returnType="java.lang.String"/>
     <method name="toString" returnType="java.lang.String"/>
     <property name="kind" type="java.lang.String"/>

@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.cache.ResolutionControl" version="3.0">
-    <description> 
- Command methods for controlling dependency resolution via the DSL. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;A&gt; The type of the request object for this resolution 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;B&gt; The type of the result of this resolution 
-</description>
+    <description>
+ * Command methods for controlling dependency resolution via the DSL.
+ * @param &lt;A&gt; The type of the request object for this resolution
+ * @param &lt;B&gt; The type of the result of this resolution
+ </description>
     <method name="cacheFor" returnType="void">
-        <description> 
- States that the cached value should be used if it is no older than the specified duration. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of units 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The time units 
-</description>
+        <description>
+     * States that the cached value should be used if it is no older than the specified duration.
+     * @param value The number of units
+     * @param units The time units
+     </description>
         <parameter type="int" name="value"/>
         <parameter type="java.util.concurrent.TimeUnit" name="units"/>
     </method>
     <method name="getCachedResult" returnType="B">
-        <description> 
- Returns the cached result file or null if the result has not been cached. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the cached result 
-</description>
+        <description>
+     * Returns the cached result file or null if the result has not been cached.
+     * @return the cached result
+     </description>
     </method>
     <method name="getRequest" returnType="A">
-        <description> 
- Returns the query object that was requested in this resolution. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the request object 
-</description>
+        <description>
+     * Returns the query object that was requested in this resolution.
+     * @return the request object
+     </description>
     </method>
     <method name="refresh" returnType="void">
-        <description> 
- States that any cached value should be ignored, forcing a fresh resolve. 
-</description>
+        <description>
+     * States that any cached value should be ignored, forcing a fresh resolve.
+     </description>
     </method>
     <method name="useCachedResult" returnType="void">
-        <description> 
- States that the cached value should be used regardless of age. 
- If not cachedResult is available, resolution should fail. 
-</description>
+        <description>
+     * States that the cached value should be used regardless of age.
+     * If not cachedResult is available, resolution should fail.
+     </description>
     </method>
     <property name="cachedResult" type="B">
-        <description> 
- Returns the cached result file or null if the result has not been cached. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the cached result 
-</description>
+        <description>
+     * Returns the cached result file or null if the result has not been cached.
+     * @return the cached result
+     </description>
     </property>
     <property name="request" type="A">
-        <description> 
- Returns the query object that was requested in this resolution. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the request object 
-</description>
+        <description>
+     * Returns the query object that was requested in this resolution.
+     * @return the request object
+     </description>
     </property>
 </type>

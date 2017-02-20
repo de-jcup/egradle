@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateFiltersFileTask" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
-    <description> 
- Task for generating a filters file. 
-</description>
+    <description>
+ * Task for generating a filters file.
+ </description>
     <method name="configure" returnType="void">
         <parameter type="org.gradle.ide.visualstudio.tasks.internal.VisualStudioFiltersFile" name="filtersFile"/>
     </method>

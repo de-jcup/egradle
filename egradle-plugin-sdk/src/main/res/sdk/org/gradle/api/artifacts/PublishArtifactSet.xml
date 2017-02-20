@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.PublishArtifactSet" version="3.0">
-    <description> 
- A set of artifacts to be published. 
-</description>
+    <description>
+ * A set of artifacts to be published.
+ </description>
     <method name="getFiles" returnType="org.gradle.api.file.FileCollection"/>
     <interface name="org.gradle.api.Buildable"/>
     <interface name="org.gradle.api.DomainObjectSet"/>

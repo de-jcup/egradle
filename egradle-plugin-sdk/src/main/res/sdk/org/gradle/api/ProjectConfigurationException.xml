@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.ProjectConfigurationException" version="3.0" superType="org.gradle.api.GradleException">
-    <description> 
- Indicates a problem that occurs during project configuration (evaluation) phase. 
-</description>
+    <description>
+ * Indicates a problem that occurs during project configuration (evaluation) phase.
+ </description>
 </type>

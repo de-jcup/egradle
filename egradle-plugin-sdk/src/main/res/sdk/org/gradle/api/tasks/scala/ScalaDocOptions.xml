@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.scala.ScalaDocOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
-    <description> 
- Options for the ScalaDoc tool. 
-</description>
+    <description>
+ * Options for the ScalaDoc tool.
+ </description>
     <method name="getAdditionalParameters" returnType="java.util.List">
-        <description> 
- Returns the additional parameters passed to the compiler. 
- Each parameter starts with '-'. 
-</description>
+        <description>
+     * Returns the additional parameters passed to the compiler.
+     * Each parameter starts with '-'.
+     </description>
     </method>
     <method name="getAntPropertyName" returnType="java.lang.String">
         <parameter type="java.lang.String" name="fieldName"/>
@@ -17,165 +17,165 @@
         <parameter type="java.lang.Object" name="value"/>
     </method>
     <method name="getBottom" returnType="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the bottom text for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the bottom text for each page.
+     </description>
     </method>
     <method name="getDocTitle" returnType="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the main frame title. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the main frame title.
+     </description>
     </method>
     <method name="getFooter" returnType="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the footer for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the footer for each page.
+     </description>
     </method>
     <method name="getHeader" returnType="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the header for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the header for each page.
+     </description>
     </method>
     <method name="getStyleSheet" returnType="java.io.File">
-        <description> 
- Returns the style sheet to override default style. 
-</description>
+        <description>
+     * Returns the style sheet to override default style.
+     </description>
     </method>
     <method name="getTop" returnType="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the top text for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the top text for each page.
+     </description>
     </method>
     <method name="getWindowTitle" returnType="java.lang.String">
-        <description> 
- Returns the text to appear in the window title. 
-</description>
+        <description>
+     * Returns the text to appear in the window title.
+     </description>
     </method>
     <method name="isDeprecation" returnType="boolean">
-        <description> 
- Tells whether to generate deprecation information. 
-</description>
+        <description>
+     * Tells whether to generate deprecation information.
+     </description>
     </method>
     <method name="isUnchecked" returnType="boolean">
-        <description> 
- Tells whether to generate unchecked information. 
-</description>
+        <description>
+     * Tells whether to generate unchecked information.
+     </description>
     </method>
     <method name="setAdditionalParameters" returnType="void">
-        <description> 
- Sets the additional parameters passed to the compiler. 
- Each parameter must start with '-'. 
-</description>
+        <description>
+     * Sets the additional parameters passed to the compiler.
+     * Each parameter must start with '-'.
+     </description>
         <parameter type="java.util.List" name="additionalParameters"/>
     </method>
     <method name="setBottom" returnType="void">
-        <description> 
- Sets the HTML text to appear in the bottom text for each page. 
-</description>
+        <description>
+     * Sets the HTML text to appear in the bottom text for each page.
+     </description>
         <parameter type="java.lang.String" name="bottom"/>
     </method>
     <method name="setDeprecation" returnType="void">
-        <description> 
- Sets whether to generate deprecation information. 
-</description>
+        <description>
+     * Sets whether to generate deprecation information.
+     </description>
         <parameter type="boolean" name="deprecation"/>
     </method>
     <method name="setDocTitle" returnType="void">
-        <description> 
- Sets the HTML text to appear in the main frame title. 
-</description>
+        <description>
+     * Sets the HTML text to appear in the main frame title.
+     </description>
         <parameter type="java.lang.String" name="docTitle"/>
     </method>
     <method name="setFooter" returnType="void">
-        <description> 
- Sets the HTML text to appear in the footer for each page. 
-</description>
+        <description>
+     * Sets the HTML text to appear in the footer for each page.
+     </description>
         <parameter type="java.lang.String" name="footer"/>
     </method>
     <method name="setHeader" returnType="void">
-        <description> 
- Sets the HTML text to appear in the header for each page. 
-</description>
+        <description>
+     * Sets the HTML text to appear in the header for each page.
+     </description>
         <parameter type="java.lang.String" name="header"/>
     </method>
     <method name="setStyleSheet" returnType="void">
-        <description> 
- Sets the style sheet to override default style. 
-</description>
+        <description>
+     * Sets the style sheet to override default style.
+     </description>
         <parameter type="java.io.File" name="styleSheet"/>
     </method>
     <method name="setTop" returnType="void">
-        <description> 
- Sets the HTML text to appear in the top text for each page. 
-</description>
+        <description>
+     * Sets the HTML text to appear in the top text for each page.
+     </description>
         <parameter type="java.lang.String" name="top"/>
     </method>
     <method name="setUnchecked" returnType="void">
-        <description> 
- Sets whether to generate unchecked information. 
-</description>
+        <description>
+     * Sets whether to generate unchecked information.
+     </description>
         <parameter type="boolean" name="unchecked"/>
     </method>
     <method name="setWindowTitle" returnType="void">
-        <description> 
- Sets the text to appear in the window title. 
-</description>
+        <description>
+     * Sets the text to appear in the window title.
+     </description>
         <parameter type="java.lang.String" name="windowTitle"/>
     </method>
     <method name="toOnOffString" returnType="java.lang.String">
         <parameter type="boolean" name="value"/>
     </method>
     <property name="additionalParameters" type="java.util.List">
-        <description> 
- Returns the additional parameters passed to the compiler. 
- Each parameter starts with '-'. 
-</description>
+        <description>
+     * Returns the additional parameters passed to the compiler.
+     * Each parameter starts with '-'.
+     </description>
     </property>
     <property name="antPropertyName" type="java.lang.String"/>
     <property name="antPropertyValue" type="java.lang.Object"/>
     <property name="bottom" type="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the bottom text for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the bottom text for each page.
+     </description>
     </property>
     <property name="deprecation" type="boolean">
-        <description> 
- Tells whether to generate deprecation information. 
-</description>
+        <description>
+     * Tells whether to generate deprecation information.
+     </description>
     </property>
     <property name="docTitle" type="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the main frame title. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the main frame title.
+     </description>
     </property>
     <property name="footer" type="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the footer for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the footer for each page.
+     </description>
     </property>
     <property name="header" type="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the header for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the header for each page.
+     </description>
     </property>
     <property name="styleSheet" type="java.io.File">
-        <description> 
- Returns the style sheet to override default style. 
-</description>
+        <description>
+     * Returns the style sheet to override default style.
+     </description>
     </property>
     <property name="top" type="java.lang.String">
-        <description> 
- Returns the HTML text to appear in the top text for each page. 
-</description>
+        <description>
+     * Returns the HTML text to appear in the top text for each page.
+     </description>
     </property>
     <property name="unchecked" type="boolean">
-        <description> 
- Tells whether to generate unchecked information. 
-</description>
+        <description>
+     * Tells whether to generate unchecked information.
+     </description>
     </property>
     <property name="windowTitle" type="java.lang.String">
-        <description> 
- Returns the text to appear in the window title. 
-</description>
+        <description>
+     * Returns the text to appear in the window title.
+     </description>
     </property>
 </type>

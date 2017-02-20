@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0">
-    <description> 
- The base class for all project report tasks. 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0" documented="true">
+    <description>
+ * The base class for all project report tasks.
+ </description>
     <method name="generate" returnType="void"/>
     <method name="generate" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
@@ -11,59 +11,59 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="getClientMetaData" returnType="org.gradle.initialization.BuildClientMetaData"/>
-    <method name="getOutputFile" returnType="java.io.File" delegationTarget="null">
-        <description> 
- Returns the file which the report will be written to. When set to &lt;a href='type://null'&gt;null&lt;/a&gt;, the report is written to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
- Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. May be null. 
-</description>
+    <method name="getOutputFile" returnType="java.io.File">
+        <description>
+     * Returns the file which the report will be written to. When set to {@code null}, the report is written to {@code System.out}.
+     * Defaults to {@code null}.
+     *
+     * @return The output file. May be null.
+     </description>
     </method>
     <method name="getProjects" returnType="java.util.Set">
-        <description> 
- Returns the set of project to generate this report for. By default, the report is generated for the task's 
- containing project. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files. 
-</description>
+        <description>
+     * Returns the set of project to generate this report for. By default, the report is generated for the task's
+     * containing project.
+     *
+     * @return The set of files.
+     </description>
     </method>
     <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
     <method name="isSatisfiedBy" returnType="boolean">
         <parameter type="org.gradle.api.Task" name="element"/>
     </method>
-    <method name="setOutputFile" returnType="void" delegationTarget="null">
-        <description> 
- Sets the file which the report will be written to. Set this to &lt;a href='type://null'&gt;null&lt;/a&gt; to write the report to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputFile The output file. May be null. 
-</description>
+    <method name="setOutputFile" returnType="void">
+        <description>
+     * Sets the file which the report will be written to. Set this to {@code null} to write the report to {@code System.out}.
+     *
+     * @param outputFile The output file. May be null.
+     </description>
         <parameter type="java.io.File" name="outputFile"/>
     </method>
     <method name="setProjects" returnType="void">
-        <description> 
- Specifies the set of projects to generate this report for. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projects The set of projects. Must not be null. 
-</description>
+        <description>
+     * Specifies the set of projects to generate this report for.
+     *
+     * @param projects The set of projects. Must not be null.
+     </description>
         <parameter type="java.util.Set" name="projects"/>
     </method>
     <property name="clientMetaData" type="org.gradle.initialization.BuildClientMetaData"/>
     <property name="outputFile" type="java.io.File" documented="true">
-        <description> 
- Returns the file which the report will be written to. When set to &lt;a href='type://null'&gt;null&lt;/a&gt;, the report is written to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;. 
- Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output file. May be null. 
-</description>
+        <description>
+     * Returns the file which the report will be written to. When set to {@code null}, the report is written to {@code System.out}.
+     * Defaults to {@code null}.
+     *
+     * @return The output file. May be null.
+     </description>
     </property>
     <property name="projects" type="java.util.Set" documented="true">
-        <description> 
- Returns the set of project to generate this report for. By default, the report is generated for the task's 
- containing project. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files. 
-</description>
+        <description>
+     * Returns the set of project to generate this report for. By default, the report is generated for the task's
+     * containing project.
+     *
+     * @return The set of files.
+     </description>
     </property>
     <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>

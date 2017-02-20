@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.cache.ArtifactResolutionControl" version="3.0">
-    <description> 
- Command methods for controlling artifact resolution via the DSL. 
-</description>
+    <description>
+ * Command methods for controlling artifact resolution via the DSL.
+ </description>
     <method name="belongsToChangingModule" returnType="boolean"/>
     <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
 </type>

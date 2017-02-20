@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.DeferredConfigurable" version="3.0">
-    <description> 
- Indicates that the annotated object is designed to be configured only once, and that changes to configuration inputs made after configuration should not be allowed. 
-</description>
+    <description>
+ * Indicates that the annotated object is designed to be configured only once, and that changes to configuration inputs made after configuration should not be allowed.
+ </description>
 </type>

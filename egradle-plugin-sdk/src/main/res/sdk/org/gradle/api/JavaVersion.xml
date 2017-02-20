@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.JavaVersion" version="3.0">
-    <description> 
- An enumeration of Java versions. 
-</description>
+    <description>
+ * An enumeration of Java versions.
+ </description>
     <method name="current" returnType="org.gradle.api.JavaVersion">
-        <description> 
- Returns the version of the current JVM. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of the current JVM. 
-</description>
+        <description>
+     * Returns the version of the current JVM.
+     *
+     * @return The version of the current JVM.
+     </description>
     </method>
     <method name="forClass" returnType="org.gradle.api.JavaVersion">
         <parameter type="byte" name="classData"/>
@@ -30,14 +30,14 @@
     <method name="isJava9Compatible" returnType="boolean"/>
     <method name="resetCurrent" returnType="void"/>
     <method name="toString" returnType="java.lang.String"/>
-    <method name="toVersion" returnType="org.gradle.api.JavaVersion" delegationTarget="JavaVersion">
-        <description> 
- Converts the given object into a &lt;a href='type://JavaVersion'&gt;JavaVersion&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value An object whose toString() value is to be converted. May be null. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version, or null if the provided value is null. 
- @throws IllegalArgumentException when the provided value cannot be converted. 
-</description>
+    <method name="toVersion" returnType="org.gradle.api.JavaVersion">
+        <description>
+     * Converts the given object into a {@code JavaVersion}.
+     *
+     * @param value An object whose toString() value is to be converted. May be null.
+     * @return The version, or null if the provided value is null.
+     * @throws IllegalArgumentException when the provided value cannot be converted.
+     </description>
         <parameter type="java.lang.Object" name="value"/>
     </method>
     <property name="java5" type="boolean"/>

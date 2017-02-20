@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.language.java.JavaSourceSet" version="3.0">
-    <description> 
- A set of sources passed to the Java compiler. 
-</description>
+    <description>
+ * A set of sources passed to the Java compiler.
+ </description>
     <method name="getCompileClasspath" returnType="org.gradle.jvm.Classpath"/>
     <interface name="org.gradle.language.base.DependentSourceSet"/>
     <property name="compileClasspath" type="org.gradle.jvm.Classpath"/>

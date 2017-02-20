@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin.PlayManifestClasspath" version="3.0">
-    <description> 
- Represents a classpath to be defined in a jar manifest 
-</description>
+    <description>
+     * Represents a classpath to be defined in a jar manifest
+     </description>
     <method name="toString" returnType="java.lang.String"/>
 </type>

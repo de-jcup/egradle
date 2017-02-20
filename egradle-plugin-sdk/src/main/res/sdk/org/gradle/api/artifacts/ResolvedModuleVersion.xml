@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.ResolvedModuleVersion" version="3.0">
-    <description> 
- Represents meta-data about a resolved module version. 
-</description>
+    <description>
+ * Represents meta-data about a resolved module version.
+ </description>
     <method name="getId" returnType="org.gradle.api.artifacts.ModuleVersionIdentifier">
-        <description> 
- The identifier of this resolved module version. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier 
-</description>
+        <description>
+     * The identifier of this resolved module version.
+     * @return the identifier
+     </description>
     </method>
     <property name="id" type="org.gradle.api.artifacts.ModuleVersionIdentifier">
-        <description> 
- The identifier of this resolved module version. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the identifier 
-</description>
+        <description>
+     * The identifier of this resolved module version.
+     * @return the identifier
+     </description>
     </property>
 </type>

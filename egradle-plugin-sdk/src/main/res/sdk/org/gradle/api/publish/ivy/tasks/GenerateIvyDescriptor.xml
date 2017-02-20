@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description> 
- Generates an Ivy XML Module Descriptor file. 
- 
- @since 1.4 
-</description>
+<type language="gradle" name="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description>
+ * Generates an Ivy XML Module Descriptor file.
+ *
+ * @since 1.4
+ </description>
     <method name="doGenerate" returnType="void"/>
     <method name="getDescriptor" returnType="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec">
-        <description> 
- The module descriptor metadata. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor. 
-</description>
+        <description>
+     * The module descriptor metadata.
+     *
+     * @return The module descriptor.
+     </description>
     </method>
     <method name="getDestination" returnType="java.io.File">
-        <description> 
- The file the descriptor will be written to. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file the descriptor will be written to 
-</description>
+        <description>
+     * The file the descriptor will be written to.
+     *
+     * @return The file the descriptor will be written to
+     </description>
     </method>
     <method name="getFileResolver" returnType="org.gradle.internal.file.PathToFileResolver"/>
     <method name="setDescriptor" returnType="void">
         <parameter type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" name="descriptor"/>
     </method>
     <method name="setDestination" returnType="void">
-        <description> 
- Sets the destination the descriptor will be written to. 
- 
- The value is resolved with &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destination The file the descriptor will be written to. 
-</description>
+        <description>
+     * Sets the destination the descriptor will be written to.
+     *
+     * The value is resolved with {@link org.gradle.api.Project#file(Object)}
+     *
+     * @param destination The file the descriptor will be written to.
+     </description>
         <parameter type="java.lang.Object" name="destination"/>
     </method>
     <method name="toIvyModuleDescriptorInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyModuleDescriptorSpecInternal">
         <parameter type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" name="ivyModuleDescriptorSpec"/>
     </method>
     <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" documented="true">
-        <description> 
- The module descriptor metadata. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The module descriptor. 
-</description>
+        <description>
+     * The module descriptor metadata.
+     *
+     * @return The module descriptor.
+     </description>
     </property>
     <property name="destination" type="java.io.File" documented="true">
-        <description> 
- The file the descriptor will be written to. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file the descriptor will be written to 
-</description>
+        <description>
+     * The file the descriptor will be written to.
+     *
+     * @return The file the descriptor will be written to
+     </description>
     </property>
     <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
 </type>

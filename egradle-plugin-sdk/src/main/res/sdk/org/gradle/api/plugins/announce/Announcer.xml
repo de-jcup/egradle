@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.announce.Announcer" version="3.0">
-    <description> 
- An &lt;a href='type://Announcer'&gt;Announcer&lt;/a&gt; allows messages to be sent. 
-</description>
+    <description>
+ * An {@code Announcer} allows messages to be sent.
+ </description>
     <method name="send" returnType="void">
         <parameter type="java.lang.String" name="title"/>
         <parameter type="java.lang.String" name="message"/>

@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.javadoc.Javadoc" version="3.0" superType="org.gradle.api.tasks.SourceTask">
-    <description> 
- &lt;p&gt;Generates HTML API documentation for Java classes.&lt;/p&gt; 
- &lt;p&gt; 
- If you create your own Javadoc tasks remember to specify the 'source' property! 
- Without source the Javadoc task will not create any documentation. Example: 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- 
- task myJavadocs(type: Javadoc) { 
-   source = sourceSets.main.allJava 
- } 
- &lt;/pre&gt; 
- 
- &lt;p&gt; 
- An example how to create a task that runs a custom doclet implementation: 
- &lt;pre autoTested=''&gt; 
- apply plugin: 'java' 
- 
- configurations { 
-   jaxDoclet 
- } 
- 
- dependencies { 
-   //jaxDoclet "some.interesting:Dependency:1.0" 
- } 
- 
- task generateRestApiDocs(type: Javadoc) { 
-   source = sourceSets.main.allJava 
-   destinationDir = reporting.file("rest-api-docs") 
-   options.docletpath = configurations.jaxDoclet.files.asType(List) 
-   options.doclet = "com.lunatech.doclets.jax.jaxrs.JAXRSDoclet" 
-   options.addStringOption("jaxrscontext", "http://localhost:8080/myapp") 
- } 
- &lt;/pre&gt; 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.javadoc.Javadoc" version="3.0" superType="org.gradle.api.tasks.SourceTask" documented="true">
+    <description>
+ * &lt;p&gt;Generates HTML API documentation for Java classes.&lt;/p&gt;
+ * &lt;p&gt;
+ * If you create your own Javadoc tasks remember to specify the 'source' property!
+ * Without source the Javadoc task will not create any documentation. Example:
+ * &lt;pre autoTested=''&gt;
+ * apply plugin: 'java'
+ *
+ * task myJavadocs(type: Javadoc) {
+ *   source = sourceSets.main.allJava
+ * }
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * An example how to create a task that runs a custom doclet implementation:
+ * &lt;pre autoTested=''&gt;
+ * apply plugin: 'java'
+ *
+ * configurations {
+ *   jaxDoclet
+ * }
+ *
+ * dependencies {
+ *   //jaxDoclet "some.interesting:Dependency:1.0"
+ * }
+ *
+ * task generateRestApiDocs(type: Javadoc) {
+ *   source = sourceSets.main.allJava
+ *   destinationDir = reporting.file("rest-api-docs")
+ *   options.docletpath = configurations.jaxDoclet.files.asType(List)
+ *   options.doclet = "com.lunatech.doclets.jax.jaxrs.JAXRSDoclet"
+ *   options.addStringOption("jaxrscontext", "http://localhost:8080/myapp")
+ * }
+ * &lt;/pre&gt;
+ </description>
     <method name="executeExternalJavadoc" returnType="void"/>
     <method name="generate" returnType="void"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath to use to resolve type references in the source code. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
-</description>
+        <description>
+     * Returns the classpath to use to resolve type references in the source code.
+     *
+     * @return The classpath.
+     </description>
     </method>
     <method name="getDestinationDir" returnType="java.io.File">
-        <description> 
- &lt;p&gt;Returns the directory to generate the documentation into.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. 
-</description>
+        <description>
+     * &lt;p&gt;Returns the directory to generate the documentation into.&lt;/p&gt;
+     *
+     * @return The directory.
+     </description>
     </method>
-    <method name="getExecutable" returnType="java.lang.String" delegationTarget="null">
-        <description> 
- Returns the Javadoc executable to use to generate the Javadoc. When &lt;a href='type://null'&gt;null&lt;/a&gt;, the Javadoc executable for 
- the current JVM is used. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executable. May be null. 
-</description>
+    <method name="getExecutable" returnType="java.lang.String">
+        <description>
+     * Returns the Javadoc executable to use to generate the Javadoc. When {@code null}, the Javadoc executable for
+     * the current JVM is used.
+     *
+     * @return The executable. May be null.
+     </description>
     </method>
     <method name="getMaxMemory" returnType="java.lang.String">
-        <description> 
- Returns the amount of memory allocated to this task. 
-</description>
+        <description>
+     * Returns the amount of memory allocated to this task.
+     </description>
     </method>
     <method name="getOptions" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
-        <description> 
- Returns the Javadoc generation options. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The options. Never returns null. 
-</description>
+        <description>
+     * Returns the Javadoc generation options.
+     *
+     * @return The options. Never returns null.
+     </description>
     </method>
     <method name="getOptionsFile" returnType="java.io.File"/>
     <method name="getOutputDirectory" returnType="java.io.File"/>
     <method name="getPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"/>
     <method name="getTitle" returnType="java.lang.String">
-        <description> 
- &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The title, possibly null. 
-</description>
+        <description>
+     * &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt;
+     *
+     * @return The title, possibly null.
+     </description>
     </method>
     <method name="getToolChain" returnType="org.gradle.jvm.toolchain.JavaToolChain">
-        <description> 
- Returns the tool chain that will be used to generate the Javadoc. 
-</description>
+        <description>
+     * Returns the tool chain that will be used to generate the Javadoc.
+     </description>
     </method>
-    <method name="isFailOnError" returnType="boolean" delegationTarget="true">
-        <description> 
- Specifies whether this task should fail when errors are encountered during Javadoc generation. When &lt;a href='type://true'&gt;true&lt;/a&gt;, 
- this task will fail on Javadoc error. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task will ignore Javadoc errors. 
-</description>
+    <method name="isFailOnError" returnType="boolean">
+        <description>
+     * Specifies whether this task should fail when errors are encountered during Javadoc generation. When {@code true},
+     * this task will fail on Javadoc error. When {@code false}, this task will ignore Javadoc errors.
+     </description>
     </method>
     <method name="isVerbose" returnType="boolean">
-        <description> 
- Returns whether Javadoc generation is accompanied by verbose output. 
- 
- @see #setVerbose(boolean) 
-</description>
+        <description>
+     * Returns whether Javadoc generation is accompanied by verbose output.
+     *
+     * @see #setVerbose(boolean)
+     </description>
     </method>
-    <method name="options" returnType="void">
-        <description> 
- Convenience method for configuring Javadoc generation options. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;block The configuration block for Javadoc generation options. 
-</description>
+    <method name="options" returnType="void" delegationTarget="org.gradle.external.javadoc.MinimalJavadocOptions">
+        <description>
+     * Convenience method for configuring Javadoc generation options.
+     *
+     * @param block The configuration block for Javadoc generation options.
+     </description>
         <parameter type="groovy.lang.Closure" name="block"/>
     </method>
     <method name="setClasspath" returnType="void">
-        <description> 
- Sets the classpath to use to resolve type references in this source code. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath. Must not be null. 
-</description>
+        <description>
+     * Sets the classpath to use to resolve type references in this source code.
+     *
+     * @param classpath The classpath. Must not be null.
+     </description>
         <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
     </method>
     <method name="setDestinationDir" returnType="void">
-        <description> 
- &lt;p&gt;Sets the directory to generate the documentation into.&lt;/p&gt; 
-</description>
+        <description>
+     * &lt;p&gt;Sets the directory to generate the documentation into.&lt;/p&gt;
+     </description>
         <parameter type="java.io.File" name="destinationDir"/>
     </method>
     <method name="setExecutable" returnType="void">
@@ -128,102 +128,102 @@
         <parameter type="boolean" name="failOnError"/>
     </method>
     <method name="setMaxMemory" returnType="void">
-        <description> 
- Sets the amount of memory allocated to this task. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;maxMemory The amount of memory 
-</description>
+        <description>
+     * Sets the amount of memory allocated to this task.
+     *
+     * @param maxMemory The amount of memory
+     </description>
         <parameter type="java.lang.String" name="maxMemory"/>
     </method>
     <method name="setOptions" returnType="void">
-        <description> 
- Sets the Javadoc generation options. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options The options. Must not be null. 
-</description>
+        <description>
+     * Sets the Javadoc generation options.
+     *
+     * @param options The options. Must not be null.
+     </description>
         <parameter type="org.gradle.external.javadoc.MinimalJavadocOptions" name="options"/>
     </method>
     <method name="setTitle" returnType="void">
-        <description> 
- &lt;p&gt;Sets the title for the generated documentation.&lt;/p&gt; 
-</description>
+        <description>
+     * &lt;p&gt;Sets the title for the generated documentation.&lt;/p&gt;
+     </description>
         <parameter type="java.lang.String" name="title"/>
     </method>
     <method name="setToolChain" returnType="void">
-        <description> 
- Sets the tool chain to use to generate the Javadoc. 
-</description>
+        <description>
+     * Sets the tool chain to use to generate the Javadoc.
+     </description>
         <parameter type="org.gradle.jvm.toolchain.JavaToolChain" name="toolChain"/>
     </method>
     <method name="setVerbose" returnType="void">
-        <description> 
- Sets whether Javadoc generation is accompanied by verbose output or not. The verbose output is done via println 
- (by the underlying Ant task). Thus it is not handled by our logging. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;verbose Whether the output should be verbose. 
-</description>
+        <description>
+     * Sets whether Javadoc generation is accompanied by verbose output or not. The verbose output is done via println
+     * (by the underlying Ant task). Thus it is not handled by our logging.
+     *
+     * @param verbose Whether the output should be verbose.
+     </description>
         <parameter type="boolean" name="verbose"/>
     </method>
     <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the classpath to use to resolve type references in the source code. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. 
-</description>
+        <description>
+     * Returns the classpath to use to resolve type references in the source code.
+     *
+     * @return The classpath.
+     </description>
     </property>
     <property name="destinationDir" type="java.io.File" documented="true">
-        <description> 
- &lt;p&gt;Returns the directory to generate the documentation into.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. 
-</description>
+        <description>
+     * &lt;p&gt;Returns the directory to generate the documentation into.&lt;/p&gt;
+     *
+     * @return The directory.
+     </description>
     </property>
     <property name="executable" type="java.lang.String" documented="true">
-        <description> 
- Returns the Javadoc executable to use to generate the Javadoc. When &lt;a href='type://null'&gt;null&lt;/a&gt;, the Javadoc executable for 
- the current JVM is used. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executable. May be null. 
-</description>
+        <description>
+     * Returns the Javadoc executable to use to generate the Javadoc. When {@code null}, the Javadoc executable for
+     * the current JVM is used.
+     *
+     * @return The executable. May be null.
+     </description>
     </property>
     <property name="failOnError" type="boolean" documented="true">
-        <description> 
- Specifies whether this task should fail when errors are encountered during Javadoc generation. When &lt;a href='type://true'&gt;true&lt;/a&gt;, 
- this task will fail on Javadoc error. When &lt;a href='type://false'&gt;false&lt;/a&gt;, this task will ignore Javadoc errors. 
-</description>
+        <description>
+     * Specifies whether this task should fail when errors are encountered during Javadoc generation. When {@code true},
+     * this task will fail on Javadoc error. When {@code false}, this task will ignore Javadoc errors.
+     </description>
     </property>
     <property name="maxMemory" type="java.lang.String" documented="true">
-        <description> 
- Returns the amount of memory allocated to this task. 
-</description>
+        <description>
+     * Returns the amount of memory allocated to this task.
+     </description>
     </property>
     <property name="options" type="org.gradle.external.javadoc.MinimalJavadocOptions" documented="true">
-        <description> 
- Returns the Javadoc generation options. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The options. Never returns null. 
-</description>
+        <description>
+     * Returns the Javadoc generation options.
+     *
+     * @return The options. Never returns null.
+     </description>
     </property>
     <property name="optionsFile" type="java.io.File"/>
     <property name="outputDirectory" type="java.io.File"/>
     <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
     <property name="title" type="java.lang.String" documented="true">
-        <description> 
- &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The title, possibly null. 
-</description>
+        <description>
+     * &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt;
+     *
+     * @return The title, possibly null.
+     </description>
     </property>
     <property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain" documented="true">
-        <description> 
- Returns the tool chain that will be used to generate the Javadoc. 
-</description>
+        <description>
+     * Returns the tool chain that will be used to generate the Javadoc.
+     </description>
     </property>
     <property name="verbose" type="boolean">
-        <description> 
- Returns whether Javadoc generation is accompanied by verbose output. 
- 
- @see #setVerbose(boolean) 
-</description>
+        <description>
+     * Returns whether Javadoc generation is accompanied by verbose output.
+     *
+     * @see #setVerbose(boolean)
+     </description>
     </property>
 </type>

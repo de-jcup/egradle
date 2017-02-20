@@ -99,6 +99,9 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
+			if (! property.isDocumented()){
+				continue;
+			}
 			/*
 			 * FIXME ATR, 28.01.2017: check if mixin does copy properties as
 			 * well. If so implementation is needed
@@ -116,6 +119,9 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
+			if (! method.isDocumented()){
+				continue;
+			}
 			if (isIgnoreGetterOrSetter()){
 				if (method.getName().startsWith("get")) {
 					continue;

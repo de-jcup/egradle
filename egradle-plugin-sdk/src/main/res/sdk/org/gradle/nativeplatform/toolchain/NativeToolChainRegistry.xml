@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.NativeToolChainRegistry" version="3.0">
-    <description> 
- A container for &lt;a href='type://NativeToolChain'&gt;NativeToolChain&lt;/a&gt;s. 
-</description>
+    <description>
+ * A container for {@link NativeToolChain}s.
+ </description>
     <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
     <interface name="org.gradle.platform.base.ToolChainRegistry"/>
 </type>

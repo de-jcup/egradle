@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.model.Module" version="3.0">
-    <description> 
- Represents the customizable elements of an iml (via XML hooks everything of the iml is customizable). 
-</description>
+    <description>
+ * Represents the customizable elements of an iml (via XML hooks everything of the iml is customizable).
+ </description>
     <method name="addDependenciesToXml" returnType="void"/>
     <method name="addJdkToXml" returnType="void"/>
     <method name="addOutputDirsToXml" returnType="void"/>
@@ -32,66 +32,66 @@
     <method name="findSourceFolder" returnType="java.util.List"/>
     <method name="findTestOutputDir" returnType="groovy.util.Node"/>
     <method name="getContentPath" returnType="org.gradle.plugins.ide.idea.model.Path">
-        <description> 
- The directory for the content root of the module. 
- Defaults to the project directory. 
- If null, the directory containing the output file will be used. 
-</description>
+        <description>
+     * The directory for the content root of the module.
+     * Defaults to the project directory.
+     * If null, the directory containing the output file will be used.
+     </description>
     </method>
     <method name="getDefaultResourceName" returnType="java.lang.String"/>
     <method name="getDependencies" returnType="java.util.Set">
-        <description> 
- The dependencies of this module. 
- Must not be null. 
-</description>
+        <description>
+     * The dependencies of this module.
+     * Must not be null.
+     </description>
     </method>
     <method name="getExcludeFolders" returnType="java.util.Set">
-        <description> 
- The directories to be excluded. 
- Must not be null. 
-</description>
+        <description>
+     * The directories to be excluded.
+     * Must not be null.
+     </description>
     </method>
     <method name="getGeneratedSourceFolders" returnType="java.util.Set">
-        <description> 
- The directories containing generated the production sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing generated the production sources.
+     * Must not be null.
+     </description>
     </method>
     <method name="getJdkName" returnType="java.lang.String"/>
     <method name="getNewModuleRootManager" returnType="groovy.util.Node"/>
-    <method name="getOutputDir" returnType="org.gradle.plugins.ide.idea.model.Path" delegationTarget="null">
-        <description> 
- The output directory for production classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
-</description>
+    <method name="getOutputDir" returnType="org.gradle.plugins.ide.idea.model.Path">
+        <description>
+     * The output directory for production classes.
+     * If {@code null}, no entry will be created.
+     </description>
     </method>
     <method name="getSourceFolders" returnType="java.util.Set">
-        <description> 
- The directories containing the production sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing the production sources.
+     * Must not be null.
+     </description>
     </method>
-    <method name="getTestOutputDir" returnType="org.gradle.plugins.ide.idea.model.Path" delegationTarget="null">
-        <description> 
- The output directory for test classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
-</description>
+    <method name="getTestOutputDir" returnType="org.gradle.plugins.ide.idea.model.Path">
+        <description>
+     * The output directory for test classes.
+     * If {@code null}, no entry will be created.
+     </description>
     </method>
     <method name="getTestSourceFolders" returnType="java.util.Set">
-        <description> 
- The directories containing the test sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing the test sources.
+     * Must not be null.
+     </description>
     </method>
     <method name="hashCode" returnType="int"/>
     <method name="isDependencyOrderEntry" returnType="boolean">
         <parameter type="java.lang.Object" name="orderEntry"/>
     </method>
     <method name="isInheritOutputDirs" returnType="boolean">
-        <description> 
- If true, output directories for this module will be located below the output directory for the project; 
- otherwise, &lt;a href='type://Module#outputDir'&gt;#outputDir&lt;/a&gt; and &lt;a href='type://Module#testOutputDir'&gt;#testOutputDir&lt;/a&gt; will take effect. 
-</description>
+        <description>
+     * If true, output directories for this module will be located below the output directory for the project;
+     * otherwise, {@link #outputDir} and {@link #testOutputDir} will take effect.
+     </description>
     </method>
     <method name="load" returnType="void">
         <parameter type="groovy.util.Node" name="xml"/>
@@ -145,62 +145,62 @@
     <method name="writeInheritOutputDirsToXml" returnType="void"/>
     <method name="writeSourceLanguageLevel" returnType="void"/>
     <property name="contentPath" type="org.gradle.plugins.ide.idea.model.Path">
-        <description> 
- The directory for the content root of the module. 
- Defaults to the project directory. 
- If null, the directory containing the output file will be used. 
-</description>
+        <description>
+     * The directory for the content root of the module.
+     * Defaults to the project directory.
+     * If null, the directory containing the output file will be used.
+     </description>
     </property>
     <property name="defaultResourceName" type="java.lang.String"/>
     <property name="dependencies" type="java.util.Set">
-        <description> 
- The dependencies of this module. 
- Must not be null. 
-</description>
+        <description>
+     * The dependencies of this module.
+     * Must not be null.
+     </description>
     </property>
     <property name="dependencyOrderEntry" type="boolean"/>
     <property name="excludeFolders" type="java.util.Set">
-        <description> 
- The directories to be excluded. 
- Must not be null. 
-</description>
+        <description>
+     * The directories to be excluded.
+     * Must not be null.
+     </description>
     </property>
     <property name="generatedSourceFolders" type="java.util.Set">
-        <description> 
- The directories containing generated the production sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing generated the production sources.
+     * Must not be null.
+     </description>
     </property>
     <property name="inheritOutputDirs" type="boolean">
-        <description> 
- If true, output directories for this module will be located below the output directory for the project; 
- otherwise, &lt;a href='type://Module#outputDir'&gt;#outputDir&lt;/a&gt; and &lt;a href='type://Module#testOutputDir'&gt;#testOutputDir&lt;/a&gt; will take effect. 
-</description>
+        <description>
+     * If true, output directories for this module will be located below the output directory for the project;
+     * otherwise, {@link #outputDir} and {@link #testOutputDir} will take effect.
+     </description>
     </property>
     <property name="jdkName" type="java.lang.String"/>
     <property name="newModuleRootManager" type="groovy.util.Node"/>
     <property name="outputDir" type="org.gradle.plugins.ide.idea.model.Path">
-        <description> 
- The output directory for production classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
-</description>
+        <description>
+     * The output directory for production classes.
+     * If {@code null}, no entry will be created.
+     </description>
     </property>
     <property name="sourceFolders" type="java.util.Set">
-        <description> 
- The directories containing the production sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing the production sources.
+     * Must not be null.
+     </description>
     </property>
     <property name="testOutputDir" type="org.gradle.plugins.ide.idea.model.Path">
-        <description> 
- The output directory for test classes. 
- If &lt;a href='type://null'&gt;null&lt;/a&gt;, no entry will be created. 
-</description>
+        <description>
+     * The output directory for test classes.
+     * If {@code null}, no entry will be created.
+     </description>
     </property>
     <property name="testSourceFolders" type="java.util.Set">
-        <description> 
- The directories containing the test sources. 
- Must not be null. 
-</description>
+        <description>
+     * The directories containing the test sources.
+     * Must not be null.
+     </description>
     </property>
 </type>

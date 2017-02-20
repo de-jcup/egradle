@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.java.archives.ManifestException" version="3.0" superType="org.gradle.api.GradleException">
-    <description> 
- Is thrown in the case an operation is applied against a &lt;a href='type://org.gradle.api.java.archives.Manifest'&gt;org.gradle.api.java.archives.Manifest&lt;/a&gt; that violates 
- the Manifest specification. 
-</description>
+    <description>
+ * Is thrown in the case an operation is applied against a {@link org.gradle.api.java.archives.Manifest} that violates
+ * the Manifest specification.
+ </description>
 </type>

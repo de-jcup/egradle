@@ -16,7 +16,7 @@
         <parameter type="org.gradle.api.internal.project.taskfactory.ITaskFactory" name="taskFactory"/>
     </method>
     <method name="execute" returnType="void">
-        <parameter type="org.gradle.language.c.CSourceSet" name="cSourceSet"/>
+        <parameter type="org.gradle.language.c.CSourceSet" name="launcherSources"/>
     </method>
     <method name="findLauncherSources" returnType="org.gradle.language.c.CSourceSet">
         <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="suite"/>

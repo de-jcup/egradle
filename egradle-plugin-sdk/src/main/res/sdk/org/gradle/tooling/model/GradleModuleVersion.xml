@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.GradleModuleVersion" version="3.0">
-    <description> 
- Informs about a module version, i.e. group, name, version. 
- 
- @since 1.1 
-</description>
+    <description>
+ * Informs about a module version, i.e. group, name, version.
+ *
+ * @since 1.1
+ </description>
     <method name="getGroup" returnType="java.lang.String">
-        <description> 
- The group of the module, for example 'org.gradle'. 
-</description>
+        <description>
+     * The group of the module, for example 'org.gradle'.
+     </description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- The name of the module, for example 'gradle-tooling-api'. 
-</description>
+        <description>
+     * The name of the module, for example 'gradle-tooling-api'.
+     </description>
     </method>
     <method name="getVersion" returnType="java.lang.String">
-        <description> 
- The version, for example '1.0'. 
-</description>
+        <description>
+     * The version, for example '1.0'.
+     </description>
     </method>
     <property name="group" type="java.lang.String">
-        <description> 
- The group of the module, for example 'org.gradle'. 
-</description>
+        <description>
+     * The group of the module, for example 'org.gradle'.
+     </description>
     </property>
     <property name="name" type="java.lang.String">
-        <description> 
- The name of the module, for example 'gradle-tooling-api'. 
-</description>
+        <description>
+     * The name of the module, for example 'gradle-tooling-api'.
+     </description>
     </property>
     <property name="version" type="java.lang.String">
-        <description> 
- The version, for example '1.0'. 
-</description>
+        <description>
+     * The version, for example '1.0'.
+     </description>
     </property>
 </type>

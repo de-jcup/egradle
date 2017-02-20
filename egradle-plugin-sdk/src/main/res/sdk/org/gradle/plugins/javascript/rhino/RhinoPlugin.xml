@@ -6,7 +6,7 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="call" returnType="java.lang.String"/>
     <method name="configureDefaultRhinoDependency" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
         <parameter type="org.gradle.api.artifacts.dsl.DependencyHandler" name="dependencyHandler"/>

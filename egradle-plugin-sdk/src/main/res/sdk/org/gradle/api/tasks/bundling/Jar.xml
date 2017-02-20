@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.bundling.Jar" version="3.0" superType="org.gradle.jvm.tasks.Jar">
-    <description> 
- Assembles a JAR archive. 
-</description>
-    <method name="manifest" returnType="org.gradle.api.tasks.bundling.Jar">
+<type language="gradle" name="org.gradle.api.tasks.bundling.Jar" version="3.0" superType="org.gradle.jvm.tasks.Jar" documented="true">
+    <description>
+ * Assembles a JAR archive.
+ </description>
+    <method name="manifest" returnType="org.gradle.api.tasks.bundling.Jar" delegationTarget="org.gradle.api.java.archives.Manifest">
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
 </type>

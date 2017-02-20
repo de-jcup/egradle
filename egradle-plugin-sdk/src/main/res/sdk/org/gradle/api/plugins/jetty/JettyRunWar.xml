@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.plugins.jetty.JettyRunWar" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask">
-    <description> 
- &lt;p&gt;Deploys a WAR to an embedded Jetty web container.&lt;/p&gt; 
- 
- &lt;p&gt; Once started, the web container can be configured to run continuously, scanning for changes to the war file and automatically performing a hot redeploy when necessary. &lt;/p&gt; 
- 
- @deprecated The Jetty plugin has been deprecated 
-</description>
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyRunWar" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask" documented="true">
+    <description>
+ * &lt;p&gt;Deploys a WAR to an embedded Jetty web container.&lt;/p&gt;
+ *
+ * &lt;p&gt; Once started, the web container can be configured to run continuously, scanning for changes to the war file and automatically performing a hot redeploy when necessary. &lt;/p&gt;
+ *
+ * @deprecated The Jetty plugin has been deprecated
+ </description>
     <method name="applyJettyXml" returnType="void"/>
     <method name="configureScanner" returnType="void"/>
     <method name="configureWebApplication" returnType="void"/>
@@ -16,9 +16,9 @@
     </method>
     <method name="finishConfigurationBeforeStart" returnType="void"/>
     <method name="getWebApp" returnType="java.io.File">
-        <description> 
- Returns the web application to deploy. 
-</description>
+        <description>
+     * Returns the web application to deploy.
+     </description>
     </method>
     <method name="restartWebApp" returnType="void">
         <parameter type="boolean" name="reconfigureScanner"/>
@@ -28,8 +28,8 @@
     </method>
     <method name="validateConfiguration" returnType="void"/>
     <property name="webApp" type="java.io.File" documented="true">
-        <description> 
- Returns the web application to deploy. 
-</description>
+        <description>
+     * Returns the web application to deploy.
+     </description>
     </property>
 </type>

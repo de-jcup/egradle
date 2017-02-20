@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.HierarchicalElement" version="3.0">
-    <description> 
- Represents an element which belongs to some hierarchy. 
- 
- @since 1.0-milestone-5 
-</description>
+    <description>
+ * Represents an element which belongs to some hierarchy.
+ *
+ * @since 1.0-milestone-5
+ </description>
     <method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet">
-        <description> 
- Returns the child elements, or the empty set if there are no child elements. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child elements, or the empty set if there are no child elements. 
- @since 1.0-milestone-5 
-</description>
+        <description>
+     * Returns the child elements, or the empty set if there are no child elements.
+     *
+     * @return The child elements, or the empty set if there are no child elements.
+     * @since 1.0-milestone-5
+     </description>
     </method>
-    <method name="getParent" returnType="org.gradle.tooling.model.HierarchicalElement" delegationTarget="null">
-        <description> 
- Returns the parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- @since 1.0-milestone-5 
-</description>
+    <method name="getParent" returnType="org.gradle.tooling.model.HierarchicalElement">
+        <description>
+     * Returns the parent of this element, or {@code null} if there is no parent.
+     *
+     * @return The parent of this element, or {@code null} if there is no parent.
+     * @since 1.0-milestone-5
+     </description>
     </method>
     <interface name="org.gradle.tooling.model.Element"/>
     <property name="children" type="org.gradle.tooling.model.DomainObjectSet">
-        <description> 
- Returns the child elements, or the empty set if there are no child elements. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The child elements, or the empty set if there are no child elements. 
- @since 1.0-milestone-5 
-</description>
+        <description>
+     * Returns the child elements, or the empty set if there are no child elements.
+     *
+     * @return The child elements, or the empty set if there are no child elements.
+     * @since 1.0-milestone-5
+     </description>
     </property>
     <property name="parent" type="org.gradle.tooling.model.HierarchicalElement">
-        <description> 
- Returns the parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this element, or &lt;a href='type://null'&gt;null&lt;/a&gt; if there is no parent. 
- @since 1.0-milestone-5 
-</description>
+        <description>
+     * Returns the parent of this element, or {@code null} if there is no parent.
+     *
+     * @return The parent of this element, or {@code null} if there is no parent.
+     * @since 1.0-milestone-5
+     </description>
     </property>
 </type>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugin.devel.PluginDeclaration" version="3.0">
-    <description> 
- Describes a Gradle plugin under development. 
- 
- @see org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin 
- @since 2.14 
-</description>
+    <description>
+ * Describes a Gradle plugin under development.
+ *
+ * @see org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin
+ * @since 2.14
+ </description>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="obj"/>
     </method>

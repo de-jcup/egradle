@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.WbResource" version="3.0">
-    <description> 
- A wtp descriptor resource entry. 
-</description>
+    <description>
+ * A wtp descriptor resource entry.
+ </description>
     <method name="appendNode" returnType="void">
         <parameter type="groovy.util.Node" name="node"/>
     </method>

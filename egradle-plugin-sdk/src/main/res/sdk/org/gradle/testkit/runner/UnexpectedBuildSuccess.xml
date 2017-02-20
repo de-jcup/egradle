@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildSuccess" version="3.0" superType="org.gradle.testkit.runner.UnexpectedBuildResultException">
-    <description> 
- Thrown when executing a build that was expected to fail, but succeeded. 
- 
- @since 2.6 
- @see GradleRunner#buildAndFail() 
-</description>
+    <description>
+ * Thrown when executing a build that was expected to fail, but succeeded.
+ *
+ * @since 2.6
+ * @see GradleRunner#buildAndFail()
+ </description>
 </type>

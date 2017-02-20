@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.test.googletest.plugins.GoogleTestConventionPlugin" version="3.0">
-    <description> 
- A plugin that applies the &lt;a href='type://GoogleTestPlugin'&gt;GoogleTestPlugin&lt;/a&gt; and adds conventions on top of it. 
-</description>
+    <description>
+ * A plugin that applies the {@link GoogleTestPlugin} and adds conventions on top of it.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

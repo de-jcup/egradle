@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateProjectFileTask" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask">
-    <description> 
- Task for generating a project file. 
-</description>
+    <description>
+ * Task for generating a project file.
+ </description>
     <method name="buildGradleCommand" returnType="java.lang.String"/>
     <method name="call" returnType="java.lang.Object"/>
     <method name="configure" returnType="void">

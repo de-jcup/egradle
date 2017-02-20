@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugin.devel.tasks.PluginUnderTestMetadata" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description> 
- Custom task for generating the metadata for a plugin user test. 
- 
- @since 2.13 
-</description>
+    <description>
+ * Custom task for generating the metadata for a plugin user test.
+ *
+ * @since 2.13
+ </description>
     <method name="generate" returnType="void"/>
-    <method name="getOutputDirectory" returnType="java.io.File" delegationTarget="">
-        <description> 
- The target output directory used for writing the classpath manifest. Defaults to &lt;a href='type://"$buildDir/$task.name"'&gt;"$buildDir/$task.name"&lt;/a&gt;. 
-</description>
+    <method name="getOutputDirectory" returnType="java.io.File">
+        <description>
+     * The target output directory used for writing the classpath manifest. Defaults to {@code "$buildDir/$task.name"}.
+     </description>
     </method>
-    <method name="getPluginClasspath" returnType="org.gradle.api.file.FileCollection" delegationTarget="sourceSets.main.runtimeClasspath">
-        <description> 
- The code under test. Defaults to &lt;a href='type://sourceSets.main.runtimeClasspath'&gt;sourceSets.main.runtimeClasspath&lt;/a&gt;. 
-</description>
+    <method name="getPluginClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description>
+     * The code under test. Defaults to {@code sourceSets.main.runtimeClasspath}.
+     </description>
     </method>
     <method name="setOutputDirectory" returnType="void">
         <parameter type="java.io.File" name="outputDirectory"/>
@@ -26,13 +26,13 @@
         <parameter type="java.io.File" name="file"/>
     </method>
     <property name="outputDirectory" type="java.io.File">
-        <description> 
- The target output directory used for writing the classpath manifest. Defaults to &lt;a href='type://"$buildDir/$task.name"'&gt;"$buildDir/$task.name"&lt;/a&gt;. 
-</description>
+        <description>
+     * The target output directory used for writing the classpath manifest. Defaults to {@code "$buildDir/$task.name"}.
+     </description>
     </property>
     <property name="pluginClasspath" type="org.gradle.api.file.FileCollection">
-        <description> 
- The code under test. Defaults to &lt;a href='type://sourceSets.main.runtimeClasspath'&gt;sourceSets.main.runtimeClasspath&lt;/a&gt;. 
-</description>
+        <description>
+     * The code under test. Defaults to {@code sourceSets.main.runtimeClasspath}.
+     </description>
     </property>
 </type>

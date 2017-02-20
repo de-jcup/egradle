@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.connection.ModelResults" version="3.0">
-    <description> 
- A set of model results for multiple projects. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; the type of model requested 
-</description>
+    <description>
+ * A set of model results for multiple projects.
+ * @param &lt;T&gt; the type of model requested
+ </description>
     <interface name="java.lang.Iterable"/>
 </type>

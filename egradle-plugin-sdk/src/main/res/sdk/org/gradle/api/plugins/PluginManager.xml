@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.plugins.PluginManager" version="3.0">
-    <description> 
- Facilitates applying plugins and determining which plugins have been applied to a &lt;a href='type://PluginAware'&gt;PluginAware&lt;/a&gt; object. 
- 
- @see PluginAware 
- @since 2.3 
-</description>
-    <method name="apply" returnType="void" delegationTarget="org.gradle.api.Plugin" documented="true">
-        <description> 
- Applies the given plugin. Does nothing if the plugin has already been applied. 
- &lt;p&gt; 
- The given class should implement the &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; interface, and be parameterized for a compatible type of &lt;a href='type://this'&gt;this&lt;/a&gt;. 
- &lt;p&gt; 
- The following two lines are equivalent… 
- &lt;pre autoTested='true'&gt; 
- pluginManager.apply org.gradle.api.plugins.JavaPlugin 
- pluginManager.apply "org.gradle.java" 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the plugin class to apply 
- @since 2.3 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.PluginManager" version="3.0" documented="true">
+    <description>
+ * Facilitates applying plugins and determining which plugins have been applied to a {@link PluginAware} object.
+ *
+ * @see PluginAware
+ * @since 2.3
+ </description>
+    <method name="apply" returnType="void" documented="true">
+        <description>
+     * Applies the given plugin. Does nothing if the plugin has already been applied.
+     * &lt;p&gt;
+     * The given class should implement the {@link org.gradle.api.Plugin} interface, and be parameterized for a compatible type of {@code this}.
+     * &lt;p&gt;
+     * The following two lines are equivalent…
+     * &lt;pre autoTested='true'&gt;
+     * pluginManager.apply org.gradle.api.plugins.JavaPlugin
+     * pluginManager.apply "org.gradle.java"
+     * &lt;/pre&gt;
+     *
+     * @param type the plugin class to apply
+     * @since 2.3
+     </description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
-    <method name="apply" returnType="void" delegationTarget="" documented="true">
-        <description> 
- Applies the plugin with the given ID. Does nothing if the plugin has already been applied. 
- &lt;p&gt; 
- Plugins in the &lt;a href='type://"org.gradle"'&gt;"org.gradle"&lt;/a&gt; namespace can be applied directly via name. 
- That is, the following two lines are equivalent… 
- &lt;pre autoTested='true'&gt; 
- pluginManager.apply "org.gradle.java" 
- pluginManager.apply "java" 
- &lt;/pre&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginId the ID of the plugin to apply 
- @since 2.3 
-</description>
+    <method name="apply" returnType="void" documented="true">
+        <description>
+     * Applies the plugin with the given ID. Does nothing if the plugin has already been applied.
+     * &lt;p&gt;
+     * Plugins in the {@code "org.gradle"} namespace can be applied directly via name.
+     * That is, the following two lines are equivalent…
+     * &lt;pre autoTested='true'&gt;
+     * pluginManager.apply "org.gradle.java"
+     * pluginManager.apply "java"
+     * &lt;/pre&gt;
+     *
+     * @param pluginId the ID of the plugin to apply
+     * @since 2.3
+     </description>
         <parameter type="java.lang.String" name="pluginId"/>
     </method>
-    <method name="findPlugin" returnType="org.gradle.api.plugins.AppliedPlugin" delegationTarget="" documented="true">
-        <description> 
- Returns the information about the plugin that has been applied with the given ID, or null if no plugin has been applied with the given ID. 
- &lt;p&gt; 
- Plugins in the &lt;a href='type://"org.gradle"'&gt;"org.gradle"&lt;/a&gt; namespace (that is, core Gradle plugins) can be specified by either name (e.g. &lt;a href='type://"java"'&gt;"java"&lt;/a&gt;) or ID &lt;a href='type://"org.gradle.java"'&gt;"org.gradle.java"&lt;/a&gt;. 
- All other plugins must be queried for by their full ID (e.g. &lt;a href='type://"org.company.some-plugin"'&gt;"org.company.some-plugin"&lt;/a&gt;). 
- &lt;p&gt; 
- Some Gradle plugins have not yet migrated to fully qualified plugin IDs. 
- Such plugins can be detected with this method by simply using the unqualified ID (e.g. &lt;a href='type://"some-third-party-plugin"'&gt;"some-third-party-plugin"&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;information about the applied plugin, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no plugin has been applied with the given ID 
- @since 2.3 
-</description>
+    <method name="findPlugin" returnType="org.gradle.api.plugins.AppliedPlugin" documented="true">
+        <description>
+     * Returns the information about the plugin that has been applied with the given ID, or null if no plugin has been applied with the given ID.
+     * &lt;p&gt;
+     * Plugins in the {@code "org.gradle"} namespace (that is, core Gradle plugins) can be specified by either name (e.g. {@code "java"}) or ID {@code "org.gradle.java"}.
+     * All other plugins must be queried for by their full ID (e.g. {@code "org.company.some-plugin"}).
+     * &lt;p&gt;
+     * Some Gradle plugins have not yet migrated to fully qualified plugin IDs.
+     * Such plugins can be detected with this method by simply using the unqualified ID (e.g. {@code "some-third-party-plugin"}.
+     *
+     * @param id the plugin ID
+     * @return information about the applied plugin, or {@code null} if no plugin has been applied with the given ID
+     * @since 2.3
+     </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
-    <method name="hasPlugin" returnType="boolean" delegationTarget="true" documented="true">
-        <description> 
- Returns &lt;a href='type://true'&gt;true&lt;/a&gt; if a plugin with the given ID has already been applied, otherwise &lt;a href='type://false'&gt;false&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID. See &lt;a href='type://PluginManager#findPlugin(String)'&gt;#findPlugin(String)&lt;/a&gt; for details about this parameter. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if the plugin has been applied 
- @since 2.3 
-</description>
+    <method name="hasPlugin" returnType="boolean" documented="true">
+        <description>
+     * Returns {@code true} if a plugin with the given ID has already been applied, otherwise {@code false}.
+     *
+     * @param id the plugin ID. See {@link #findPlugin(String)} for details about this parameter.
+     * @return {@code true} if the plugin has been applied
+     * @since 2.3
+     </description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="withPlugin" returnType="void" documented="true">
-        <description> 
- Executes the given action when the specified plugin is applied. 
- &lt;p&gt; 
- If a plugin with the specified ID has already been applied, the supplied action will be executed immediately. 
- Otherwise, the action will executed immediately after a plugin with the specified ID is applied. 
- &lt;p&gt; 
- The given action is always executed after the plugin has been applied. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID. See &lt;a href='type://PluginManager#findPlugin(String)'&gt;#findPlugin(String)&lt;/a&gt; for details about this parameter. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to execute if/when the plugin is applied 
- @since 2.3 
-</description>
+        <description>
+     * Executes the given action when the specified plugin is applied.
+     * &lt;p&gt;
+     * If a plugin with the specified ID has already been applied, the supplied action will be executed immediately.
+     * Otherwise, the action will executed immediately after a plugin with the specified ID is applied.
+     * &lt;p&gt;
+     * The given action is always executed after the plugin has been applied.
+     *
+     * @param id the plugin ID. See {@link #findPlugin(String)} for details about this parameter.
+     * @param action the action to execute if/when the plugin is applied
+     * @since 2.3
+     </description>
         <parameter type="java.lang.String" name="id"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>

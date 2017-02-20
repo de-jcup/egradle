@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.VisualCppPlatformToolChain" version="3.0">
-    <description> 
- Visual C++ specific settings for the tools used to build for a particular platform. 
-</description>
+    <description>
+ * Visual C++ specific settings for the tools used to build for a particular platform.
+ </description>
     <method name="getAssembler" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the assembler. 
-</description>
+        <description>
+     * Returns the settings to use for the assembler.
+     </description>
     </method>
     <method name="getCppCompiler" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the C++ compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the C++ compiler.
+     </description>
     </method>
     <method name="getLinker" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the linker. 
-</description>
+        <description>
+     * Returns the settings to use for the linker.
+     </description>
     </method>
     <method name="getRcCompiler" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the Windows resources compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the Windows resources compiler.
+     </description>
     </method>
     <method name="getStaticLibArchiver" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the archiver. 
-</description>
+        <description>
+     * Returns the settings to use for the archiver.
+     </description>
     </method>
     <method name="getcCompiler" returnType="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the C compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the C compiler.
+     </description>
     </method>
     <interface name="org.gradle.nativeplatform.toolchain.NativePlatformToolChain"/>
     <property name="assembler" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the assembler. 
-</description>
+        <description>
+     * Returns the settings to use for the assembler.
+     </description>
     </property>
     <property name="cCompiler" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the C compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the C compiler.
+     </description>
     </property>
     <property name="cppCompiler" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the C++ compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the C++ compiler.
+     </description>
     </property>
     <property name="linker" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the linker. 
-</description>
+        <description>
+     * Returns the settings to use for the linker.
+     </description>
     </property>
     <property name="rcCompiler" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the Windows resources compiler. 
-</description>
+        <description>
+     * Returns the settings to use for the Windows resources compiler.
+     </description>
     </property>
     <property name="staticLibArchiver" type="org.gradle.nativeplatform.toolchain.CommandLineToolConfiguration">
-        <description> 
- Returns the settings to use for the archiver. 
-</description>
+        <description>
+     * Returns the settings to use for the archiver.
+     </description>
     </property>
 </type>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.MavenPlugin" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; which allows project artifacts to be deployed to a Maven repository, or installed 
- to the local Maven cache.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;A {@link org.gradle.api.Plugin} which allows project artifacts to be deployed to a Maven repository, or installed
+ * to the local Maven cache.&lt;/p&gt;
+ </description>
     <method name="addConventionObject" returnType="org.gradle.api.plugins.MavenPluginConvention">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
         <parameter type="org.gradle.api.publication.maven.internal.MavenFactory" name="mavenFactory"/>

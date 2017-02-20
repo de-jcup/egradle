@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask">
+<type language="gradle" name="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask" documented="true">
     <method name="doCompile" returnType="void"/>
     <method name="getCoffeeScriptJs" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getDestinationDir" returnType="java.io.File"/>
     <method name="getOptions" returnType="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions"/>
     <method name="getRhinoClasspath" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getWorkerProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/>
-    <method name="options" returnType="void">
+    <method name="options" returnType="void" delegationTarget="org.gradle.plugins.javascript.coffeescript.CoffeeScriptCompileOptions">
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="options" returnType="void">

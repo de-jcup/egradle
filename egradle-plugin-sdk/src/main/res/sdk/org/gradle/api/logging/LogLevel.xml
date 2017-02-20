@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.logging.LogLevel" version="3.0">
-    <description> 
- The log levels supported by Gradle. 
-</description>
+    <description>
+ * The log levels supported by Gradle.
+ </description>
 </type>

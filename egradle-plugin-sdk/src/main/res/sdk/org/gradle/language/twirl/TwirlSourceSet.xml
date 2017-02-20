@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.language.twirl.TwirlSourceSet" version="3.0">
-    <description> 
- Represents a source set containing twirl templates 
-</description>
+<type interface="true" language="gradle" name="org.gradle.language.twirl.TwirlSourceSet" version="3.0" documented="true">
+    <description>
+ * Represents a source set containing twirl templates
+ </description>
     <method name="getDefaultImports" returnType="org.gradle.language.twirl.TwirlImports">
-        <description> 
- The default imports that should be added to generated source files 
-</description>
+        <description>
+     * The default imports that should be added to generated source files
+     </description>
     </method>
     <method name="setDefaultImports" returnType="void">
-        <description> 
- Sets the default imports that should be added to generated source files to the given language 
-</description>
+        <description>
+     * Sets the default imports that should be added to generated source files to the given language
+     </description>
         <parameter type="org.gradle.language.twirl.TwirlImports" name="defaultImports"/>
     </method>
     <interface name="org.gradle.language.base.LanguageSourceSet"/>
     <property name="defaultImports" type="org.gradle.language.twirl.TwirlImports" documented="true">
-        <description> 
- The default imports that should be added to generated source files 
-</description>
+        <description>
+     * The default imports that should be added to generated source files
+     </description>
     </property>
 </type>

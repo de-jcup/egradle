@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.tooling.ListenerFailedException" version="3.0" superType="org.gradle.tooling.GradleConnectionException">
-    <description> 
- Thrown whenever a listener fails with an exception, which in general implies that 
- the build completed like it should, but that one of the listeners failed with an 
- exception. 
- 
- @since 2.5 
-</description>
+    <description>
+ * Thrown whenever a listener fails with an exception, which in general implies that
+ * the build completed like it should, but that one of the listeners failed with an
+ * exception.
+ *
+ * @since 2.5
+ </description>
     <method name="getCauses" returnType="java.util.List"/>
     <property name="causes" type="java.util.List"/>
 </type>

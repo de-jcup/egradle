@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.platform.base.ComponentType" version="3.0">
-    <description> 
- Declares a custom &lt;a href='type://org.gradle.platform.base.ComponentSpec'&gt;org.gradle.platform.base.ComponentSpec&lt;/a&gt; type. 
- 
- The following example demonstrates how to register a custom component type using a plugin with a 
- &lt;a href='type://ComponentType'&gt;ComponentType&lt;/a&gt; annotation. 
- Furthermore the plugin creates an instance of SampleComponent named 'sampleComponent'. 
- 
- &lt;pre autoTested='true'&gt; 
- interface SampleComponent extends ComponentSpec {} 
- class DefaultSampleComponent extends BaseComponentSpec implements SampleComponent {} 
- 
- apply plugin: MySamplePlugin 
- 
- class MySamplePlugin extends RuleSource {@literal @}ComponentType 
-     void register(TypeBuilder&amp;lt;SampleComponent&amp;gt; builder) { 
-         builder.defaultImplementation(DefaultSampleComponent) 
-     } 
- 
-     {@literal @}Mutate 
-     void createSampleLibraryComponents(ModelMap&amp;lt;SampleComponent&amp;gt; componentSpecs) { 
-         componentSpecs.create("sampleComponent") 
-     } 
- } 
- &lt;/pre&gt; 
-</description>
+    <description>
+ * Declares a custom {@link org.gradle.platform.base.ComponentSpec} type.
+ *
+ * The following example demonstrates how to register a custom component type using a plugin with a
+ * {@link ComponentType} annotation.
+ * Furthermore the plugin creates an instance of SampleComponent named 'sampleComponent'.
+ *
+ * &lt;pre autoTested='true'&gt;
+ * interface SampleComponent extends ComponentSpec {}
+ * class DefaultSampleComponent extends BaseComponentSpec implements SampleComponent {}
+ *
+ * apply plugin: MySamplePlugin
+ *
+ * class MySamplePlugin extends RuleSource {
+ *     {@literal @}ComponentType
+ *     void register(TypeBuilder&amp;lt;SampleComponent&amp;gt; builder) {
+ *         builder.defaultImplementation(DefaultSampleComponent)
+ *     }
+ *
+ *     {@literal @}Mutate
+ *     void createSampleLibraryComponents(ModelMap&amp;lt;SampleComponent&amp;gt; componentSpecs) {
+ *         componentSpecs.create("sampleComponent")
+ *     }
+ * }
+ * &lt;/pre&gt;
+ </description>
 </type>

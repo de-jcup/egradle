@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description> 
- Compiles native source files into object files. 
-</description>
+<type language="gradle" name="org.gradle.language.nativeplatform.tasks.AbstractNativeCompileTask" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description>
+ * Compiles native source files into object files.
+ </description>
     <method name="call" returnType="java.lang.String"/>
     <method name="compile" returnType="void">
         <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
@@ -16,52 +16,52 @@
         <parameter type="org.gradle.nativeplatform.toolchain.internal.PlatformToolProvider" name="platformToolProvider"/>
     </method>
     <method name="getCompilerArgs" returnType="java.util.List">
-        <description> 
- Additional arguments to provide to the compiler. 
-</description>
+        <description>
+     * Additional arguments to provide to the compiler.
+     </description>
     </method>
     <method name="getIncludes" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the header directories to be used for compilation. 
-</description>
+        <description>
+     * Returns the header directories to be used for compilation.
+     </description>
     </method>
     <method name="getIncrementalCompilerBuilder" returnType="org.gradle.language.nativeplatform.internal.incremental.IncrementalCompilerBuilder"/>
     <method name="getMacros" returnType="java.util.Map">
-        <description> 
- Macros that should be defined for the compiler. 
-</description>
+        <description>
+     * Macros that should be defined for the compiler.
+     </description>
     </method>
     <method name="getObjectFileDir" returnType="java.io.File">
-        <description> 
- The directory where object files will be generated. 
-</description>
+        <description>
+     * The directory where object files will be generated.
+     </description>
     </method>
     <method name="getOperationLoggerFactory" returnType="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <method name="getSource" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the source files to be compiled. 
-</description>
+        <description>
+     * Returns the source files to be compiled.
+     </description>
     </method>
     <method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
-        <description> 
- The platform being targeted. 
-</description>
+        <description>
+     * The platform being targeted.
+     </description>
     </method>
     <method name="getToolChain" returnType="org.gradle.nativeplatform.toolchain.NativeToolChain">
-        <description> 
- The tool chain used for compilation. 
-</description>
+        <description>
+     * The tool chain used for compilation.
+     </description>
     </method>
     <method name="includes" returnType="void" documented="true">
-        <description> 
- Add directories where the compiler should search for header files. 
-</description>
+        <description>
+     * Add directories where the compiler should search for header files.
+     </description>
         <parameter type="java.lang.Object" name="includeRoots"/>
     </method>
     <method name="isPositionIndependentCode" returnType="boolean">
-        <description> 
- Should the compiler generate position independent code? 
-</description>
+        <description>
+     * Should the compiler generate position independent code?
+     </description>
     </method>
     <method name="setCompilerArgs" returnType="void">
         <parameter type="java.util.List" name="compilerArgs"/>
@@ -82,51 +82,51 @@
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
     <method name="source" returnType="void" documented="true">
-        <description> 
- Adds a set of source files to be compiled. The provided sourceFiles object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;. 
-</description>
+        <description>
+     * Adds a set of source files to be compiled. The provided sourceFiles object is evaluated as per {@link org.gradle.api.Project#files(Object...)}.
+     </description>
         <parameter type="java.lang.Object" name="sourceFiles"/>
     </method>
     <property name="compilerArgs" type="java.util.List" documented="true">
-        <description> 
- Additional arguments to provide to the compiler. 
-</description>
+        <description>
+     * Additional arguments to provide to the compiler.
+     </description>
     </property>
     <property name="includes" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the header directories to be used for compilation. 
-</description>
+        <description>
+     * Returns the header directories to be used for compilation.
+     </description>
     </property>
     <property name="incrementalCompilerBuilder" type="org.gradle.language.nativeplatform.internal.incremental.IncrementalCompilerBuilder"/>
     <property name="macros" type="java.util.Map" documented="true">
-        <description> 
- Macros that should be defined for the compiler. 
-</description>
+        <description>
+     * Macros that should be defined for the compiler.
+     </description>
     </property>
     <property name="objectFileDir" type="java.io.File" documented="true">
-        <description> 
- The directory where object files will be generated. 
-</description>
+        <description>
+     * The directory where object files will be generated.
+     </description>
     </property>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <property name="positionIndependentCode" type="boolean" documented="true">
-        <description> 
- Should the compiler generate position independent code? 
-</description>
+        <description>
+     * Should the compiler generate position independent code?
+     </description>
     </property>
     <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the source files to be compiled. 
-</description>
+        <description>
+     * Returns the source files to be compiled.
+     </description>
     </property>
     <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform" documented="true">
-        <description> 
- The platform being targeted. 
-</description>
+        <description>
+     * The platform being targeted.
+     </description>
     </property>
     <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
-        <description> 
- The tool chain used for compilation. 
-</description>
+        <description>
+     * The tool chain used for compilation.
+     </description>
     </property>
 </type>

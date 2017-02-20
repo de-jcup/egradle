@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.testkit.runner.UnsupportedFeatureException" version="3.0">
-    <description> 
- Thrown when a build was executed with a target Gradle version that does not support a specific feature. 
- 
- @since 2.11 
- @see GradleRunner#withGradleVersion(java.lang.String) 
- @see GradleRunner#withGradleInstallation(java.io.File) 
- @see GradleRunner#withGradleDistribution(java.net.URI) 
-</description>
+    <description>
+ * Thrown when a build was executed with a target Gradle version that does not support a specific feature.
+ *
+ * @since 2.11
+ * @see GradleRunner#withGradleVersion(java.lang.String)
+ * @see GradleRunner#withGradleInstallation(java.io.File)
+ * @see GradleRunner#withGradleDistribution(java.net.URI)
+ </description>
 </type>

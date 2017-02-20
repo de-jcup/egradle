@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.ReportingBasePlugin" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which provides the basic skeleton for reporting.&lt;/p&gt; 
- 
- &lt;p&gt;This plugin adds the following extension objects to the project:&lt;/p&gt; 
- 
- &lt;ul&gt; 
- 
- &lt;li&gt;&lt;a href='type://org.gradle.api.reporting.ReportingExtension'&gt;org.gradle.api.reporting.ReportingExtension&lt;/a&gt;&lt;/li&gt; 
- 
- &lt;/ul&gt; 
-</description>
+    <description>
+ * &lt;p&gt;A {@link Plugin} which provides the basic skeleton for reporting.&lt;/p&gt;
+ *
+ * &lt;p&gt;This plugin adds the following extension objects to the project:&lt;/p&gt;
+ *
+ * &lt;ul&gt;
+ *
+ * &lt;li&gt;{@link org.gradle.api.reporting.ReportingExtension}&lt;/li&gt;
+ *
+ * &lt;/ul&gt;
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>

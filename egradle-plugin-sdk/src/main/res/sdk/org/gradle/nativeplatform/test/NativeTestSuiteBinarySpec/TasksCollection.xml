@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec.TasksCollection" version="3.0">
-    <description> 
- Provides access to key tasks used for building the binary. 
-</description>
+    <description>
+     * Provides access to key tasks used for building the binary.
+     </description>
     <method name="getInstall" returnType="org.gradle.api.Task">
-        <description> 
- The install task. 
-</description>
+        <description>
+         * The install task.
+         </description>
     </method>
     <method name="getLink" returnType="org.gradle.api.Task">
-        <description> 
- The link task. 
-</description>
+        <description>
+         * The link task.
+         </description>
     </method>
     <interface name="org.gradle.testing.base.TestSuiteTaskCollection"/>
     <property name="install" type="org.gradle.api.Task">
-        <description> 
- The install task. 
-</description>
+        <description>
+         * The install task.
+         </description>
     </property>
     <property name="link" type="org.gradle.api.Task">
-        <description> 
- The link task. 
-</description>
+        <description>
+         * The link task.
+         </description>
     </property>
 </type>

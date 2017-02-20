@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.logging.configuration.ShowStacktrace" version="3.0">
-    <description> 
- Specifies the detail to include in stacktraces. 
-</description>
+    <description>
+ * Specifies the detail to include in stacktraces.
+ </description>
 </type>

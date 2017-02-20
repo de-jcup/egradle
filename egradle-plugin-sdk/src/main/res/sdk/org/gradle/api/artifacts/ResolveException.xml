@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.artifacts.ResolveException" version="3.0">
-    <description> 
- &lt;p&gt;A &lt;code&gt;ResolveException&lt;/code&gt; is thrown when a dependency configuration cannot be resolved for some reason.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;A &lt;code&gt;ResolveException&lt;/code&gt; is thrown when a dependency configuration cannot be resolved for some reason.&lt;/p&gt;
+ </description>
     <method name="buildMessage" returnType="java.lang.String">
         <parameter type="java.lang.String" name="resolveContext"/>
     </method>

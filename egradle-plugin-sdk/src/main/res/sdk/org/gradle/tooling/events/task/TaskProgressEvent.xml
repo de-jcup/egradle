@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskProgressEvent" version="3.0">
-    <description> 
- Root interface for all events that signal progress while executing a task. 
- 
- @since 2.5 
-</description>
+    <description>
+ * Root interface for all events that signal progress while executing a task.
+ *
+ * @since 2.5
+ </description>
     <method name="getDescriptor" returnType="org.gradle.tooling.events.task.TaskOperationDescriptor">
-        <description> 
- Returns the description of the task for which progress is reported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying task operation. 
-</description>
+        <description>
+     * Returns the description of the task for which progress is reported.
+     *
+     * @return The description of the underlying task operation.
+     </description>
     </method>
     <interface name="org.gradle.tooling.events.ProgressEvent"/>
     <property name="descriptor" type="org.gradle.tooling.events.task.TaskOperationDescriptor">
-        <description> 
- Returns the description of the task for which progress is reported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of the underlying task operation. 
-</description>
+        <description>
+     * Returns the description of the task for which progress is reported.
+     *
+     * @return The description of the underlying task operation.
+     </description>
     </property>
 </type>

@@ -37,7 +37,7 @@ public class SDKBuilderTest {
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_delegate_from_javadoc_of_method_into_method__simple_name() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_delegate_from_javadoc_of_method_into_method__simple_name() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -50,7 +50,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type,createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type,createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type1");
@@ -61,7 +61,7 @@ public class SDKBuilderTest {
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_delegate_from_javadoc_of_method_into_method_fullpath_name() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_delegate_from_javadoc_of_method_into_method_fullpath_name() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -74,14 +74,14 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("org.destination.Type1");
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_no_delegate_from_javadoc_when_no_link_with_type_protocoll() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_no_delegate_from_javadoc_when_no_link_with_type_protocoll() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -94,14 +94,14 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type, createBuilderContext());
 
 		/* test */
 		verify(m1, never()).setDelegationTargetAsString(any());
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_delegate_from_javadoc_of_methods1_2_into_methods() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_delegate_from_javadoc_of_methods1_2_into_methods() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -123,7 +123,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type1");
@@ -131,7 +131,7 @@ public class SDKBuilderTest {
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_NO_delegate_from_javadoc_of_method_into_method__when_containing_hash() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_NO_delegate_from_javadoc_of_method_into_method__when_containing_hash() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -144,14 +144,14 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type, createBuilderContext());
 
 		/* test */
 		verify(m1, never()).setDelegationTargetAsString(any());
 	}
 
 	@Test
-	public void estimateDelegationTarget_for_type_set_type2_when_type1_is_with_hash() {
+	public void estimateDelegationTarget_byJavaDoc__for_type_set_type2_when_type1_is_with_hash() {
 		/* prepare */
 		Type type = mock(Type.class);
 		Set<Method> methods = new LinkedHashSet<>();
@@ -165,7 +165,7 @@ public class SDKBuilderTest {
 		when(type.getMethods()).thenReturn(methods);
 
 		/* execute */
-		preparatorToTest.estimateDelegateTargets(type, createBuilderContext());
+		preparatorToTest.estimateDelegateTargets_by_javdoc(type, createBuilderContext());
 
 		/* test */
 		verify(m1).setDelegationTargetAsString("Type2");

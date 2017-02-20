@@ -8,7 +8,7 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="call" returnType="java.io.File"/>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.artifacts.DependencySet" name="configDependencies"/>
     </method>

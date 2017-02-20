@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.diagnostics.ProjectReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask">
-    <description> 
- &lt;p&gt;Displays a list of projects in the build. An instance of this type is used when you execute the &lt;a href='type://projects'&gt;projects&lt;/a&gt; 
- task from the command-line.&lt;/p&gt; 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.ProjectReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask" documented="true">
+    <description>
+ * &lt;p&gt;Displays a list of projects in the build. An instance of this type is used when you execute the {@code projects}
+ * task from the command-line.&lt;/p&gt;
+ </description>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="styledTextOutput"/>
     </method>

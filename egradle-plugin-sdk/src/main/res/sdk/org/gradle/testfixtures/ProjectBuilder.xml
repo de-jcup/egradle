@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.testfixtures.ProjectBuilder" version="3.0">
-    <description> 
- &lt;p&gt;Creates dummy instances of &lt;a href='type://org.gradle.api.Project'&gt;org.gradle.api.Project&lt;/a&gt; which you can use in testing custom task and plugin 
- implementations.&lt;/p&gt; 
- 
- &lt;p&gt;To create a project instance:&lt;/p&gt; 
- 
- &lt;ol&gt; 
- 
- &lt;li&gt;Create a &lt;a href='type://ProjectBuilder'&gt;ProjectBuilder&lt;/a&gt; instance by calling &lt;a href='type://ProjectBuilder#builder()'&gt;#builder()&lt;/a&gt;.&lt;/li&gt; 
- 
- &lt;li&gt;Optionally, configure the builder.&lt;/li&gt; 
- 
- &lt;li&gt;Call &lt;a href='type://ProjectBuilder#build()'&gt;#build()&lt;/a&gt; to create the &lt;a href='type://Project'&gt;Project&lt;/a&gt; instance.&lt;/li&gt; 
- 
- &lt;/ol&gt; 
- 
- &lt;p&gt;You can reuse a builder to create multiple &lt;a href='type://Project'&gt;Project&lt;/a&gt; instances.&lt;/p&gt; 
-</description>
+    <description>
+ * &lt;p&gt;Creates dummy instances of {@link org.gradle.api.Project} which you can use in testing custom task and plugin
+ * implementations.&lt;/p&gt;
+ *
+ * &lt;p&gt;To create a project instance:&lt;/p&gt;
+ *
+ * &lt;ol&gt;
+ *
+ * &lt;li&gt;Create a {@code ProjectBuilder} instance by calling {@link #builder()}.&lt;/li&gt;
+ *
+ * &lt;li&gt;Optionally, configure the builder.&lt;/li&gt;
+ *
+ * &lt;li&gt;Call {@link #build()} to create the {@code Project} instance.&lt;/li&gt;
+ *
+ * &lt;/ol&gt;
+ *
+ * &lt;p&gt;You can reuse a builder to create multiple {@code Project} instances.&lt;/p&gt;
+ </description>
     <method name="build" returnType="org.gradle.api.Project">
-        <description> 
- Creates the project. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project 
-</description>
+        <description>
+     * Creates the project.
+     *
+     * @return The project
+     </description>
     </method>
     <method name="builder" returnType="org.gradle.testfixtures.ProjectBuilder">
-        <description> 
- Creates a project builder. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description>
+        <description>
+     * Creates a project builder.
+     *
+     * @return The builder
+     </description>
     </method>
     <method name="withGradleUserHomeDir" returnType="org.gradle.testfixtures.ProjectBuilder">
-        <description> 
- Specifies the Gradle user home for the builder. If not set, an empty directory under the project directory 
- will be used. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description>
+        <description>
+     * Specifies the Gradle user home for the builder. If not set, an empty directory under the project directory
+     * will be used.
+     * @return The builder
+     </description>
         <parameter type="java.io.File" name="dir"/>
     </method>
     <method name="withName" returnType="org.gradle.testfixtures.ProjectBuilder">
-        <description> 
- Specifies the name for the project 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name project name 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description>
+        <description>
+     * Specifies the name for the project
+     *
+     * @param name project name
+     * @return The builder
+     </description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="withParent" returnType="org.gradle.testfixtures.ProjectBuilder">
-        <description> 
- Specifies the parent project. Use it to create multi-module projects. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;parent parent project 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description>
+        <description>
+     * Specifies the parent project. Use it to create multi-module projects.
+     *
+     * @param parent parent project
+     * @return The builder
+     </description>
         <parameter type="org.gradle.api.Project" name="parent"/>
     </method>
     <method name="withProjectDir" returnType="org.gradle.testfixtures.ProjectBuilder">
-        <description> 
- Specifies the project directory for the project to build. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The project directory 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder 
-</description>
+        <description>
+     * Specifies the project directory for the project to build.
+     *
+     * @param dir The project directory
+     * @return The builder
+     </description>
         <parameter type="java.io.File" name="dir"/>
     </method>
 </type>

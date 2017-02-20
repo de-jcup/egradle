@@ -1,110 +1,114 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" version="3.0">
-    <description> 
- Configuration options for the &lt;a href='type://org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin'&gt;org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin&lt;/a&gt;. 
- 
- &lt;p&gt;Below is a full configuration example. Since all properties have sensible defaults, 
- typically only selected properties will be configured. 
- 
- &lt;pre autoTested=''&gt; 
-     apply plugin: "java-gradle-plugin" 
- 
-     gradlePlugin { 
-                 id  = 'org.example.hello' 
-                 implementationClass = 'org.example.HelloPlugin' 
-             } 
-         } 
-     } 
- &lt;/pre&gt; 
- 
- @see org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin 
- @since 2.13 
-</description>
-    <method name="getPluginSourceSet" returnType="org.gradle.api.tasks.SourceSet" delegationTarget="project.sourceSets.main">
-        <description> 
- Returns the source set that compiles the code under test. Defaults to &lt;a href='type://project.sourceSets.main'&gt;project.sourceSets.main&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin source set 
-</description>
+    <description>
+ * Configuration options for the {@link org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin}.
+ *
+ * &lt;p&gt;Below is a full configuration example. Since all properties have sensible defaults,
+ * typically only selected properties will be configured.
+ *
+ * &lt;pre autoTested=''&gt;
+ *     apply plugin: "java-gradle-plugin"
+ *
+ *     gradlePlugin {
+ *         pluginSourceSet project.sourceSets.customMain
+ *         testSourceSets project.sourceSets.functionalTest
+ *         plugins {
+ *             helloPlugin {
+ *                 id  = 'org.example.hello'
+ *                 implementationClass = 'org.example.HelloPlugin'
+ *             }
+ *         }
+ *     }
+ * &lt;/pre&gt;
+ *
+ * @see org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin
+ * @since 2.13
+ </description>
+    <method name="getPluginSourceSet" returnType="org.gradle.api.tasks.SourceSet">
+        <description>
+     * Returns the source set that compiles the code under test. Defaults to {@code project.sourceSets.main}.
+     *
+     * @return the plugin source set
+     </description>
     </method>
     <method name="getPlugins" returnType="org.gradle.api.NamedDomainObjectContainer">
-        <description> 
- Returns the declared plugins. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the declared plugins, never null 
-</description>
+        <description>
+     * Returns the declared plugins.
+     *
+     * @return the declared plugins, never null
+     </description>
     </method>
-    <method name="getTestSourceSets" returnType="java.util.Set" delegationTarget="project.sourceSets.test">
-        <description> 
- Returns the the source sets executing the functional tests with TestKit. Defaults to &lt;a href='type://project.sourceSets.test'&gt;project.sourceSets.test&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the test source sets 
-</description>
+    <method name="getTestSourceSets" returnType="java.util.Set">
+        <description>
+     * Returns the the source sets executing the functional tests with TestKit. Defaults to {@code project.sourceSets.test}.
+     *
+     * @return the test source sets
+     </description>
     </method>
     <method name="isAutomatedPublishing" returnType="boolean">
-        <description> 
- Whether the plugin should automatically configure the publications for the plugins. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if publishing should be automated, false otherwise 
-</description>
+        <description>
+     * Whether the plugin should automatically configure the publications for the plugins.
+     * @return true if publishing should be automated, false otherwise
+     </description>
     </method>
     <method name="pluginSourceSet" returnType="void">
-        <description> 
- Provides the source set that compiles the code under test. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginSourceSet the plugin source set 
-</description>
+        <description>
+     * Provides the source set that compiles the code under test.
+     *
+     * @param pluginSourceSet the plugin source set
+     </description>
         <parameter type="org.gradle.api.tasks.SourceSet" name="pluginSourceSet"/>
     </method>
     <method name="plugins" returnType="void">
-        <description> 
- Configures the declared plugins. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the configuration action to invoke on the plugins 
-</description>
+        <description>
+     * Configures the declared plugins.
+     *
+     * @param action the configuration action to invoke on the plugins
+     </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <method name="setAutomatedPublishing" returnType="void">
-        <description> 
- Configures whether the plugin should automatically configure the publications for the plugins. 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;automatedPublishing whether to automated publication 
-</description>
+        <description>
+     * Configures whether the plugin should automatically configure the publications for the plugins.
+     * @param automatedPublishing whether to automated publication
+     </description>
         <parameter type="boolean" name="automatedPublishing"/>
     </method>
     <method name="testSourceSets" returnType="void">
-        <description> 
- Provides the source sets executing the functional tests with TestKit. 
- &lt;p&gt; 
- Calling this method multiple times with different source sets is not additive. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testSourceSets the test source sets 
-</description>
+        <description>
+     * Provides the source sets executing the functional tests with TestKit.
+     * &lt;p&gt;
+     * Calling this method multiple times with different source sets is not additive.
+     *
+     * @param testSourceSets the test source sets
+     </description>
         <parameter type="org.gradle.api.tasks.SourceSet" name="testSourceSets"/>
     </method>
     <property name="automatedPublishing" type="boolean">
-        <description> 
- Whether the plugin should automatically configure the publications for the plugins. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if publishing should be automated, false otherwise 
-</description>
+        <description>
+     * Whether the plugin should automatically configure the publications for the plugins.
+     * @return true if publishing should be automated, false otherwise
+     </description>
     </property>
     <property name="pluginSourceSet" type="org.gradle.api.tasks.SourceSet">
-        <description> 
- Returns the source set that compiles the code under test. Defaults to &lt;a href='type://project.sourceSets.main'&gt;project.sourceSets.main&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin source set 
-</description>
+        <description>
+     * Returns the source set that compiles the code under test. Defaults to {@code project.sourceSets.main}.
+     *
+     * @return the plugin source set
+     </description>
     </property>
     <property name="plugins" type="org.gradle.api.NamedDomainObjectContainer">
-        <description> 
- Returns the declared plugins. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the declared plugins, never null 
-</description>
+        <description>
+     * Returns the declared plugins.
+     *
+     * @return the declared plugins, never null
+     </description>
     </property>
     <property name="testSourceSets" type="java.util.Set">
-        <description> 
- Returns the the source sets executing the functional tests with TestKit. Defaults to &lt;a href='type://project.sourceSets.test'&gt;project.sourceSets.test&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the test source sets 
-</description>
+        <description>
+     * Returns the the source sets executing the functional tests with TestKit. Defaults to {@code project.sourceSets.test}.
+     *
+     * @return the test source sets
+     </description>
     </property>
 </type>

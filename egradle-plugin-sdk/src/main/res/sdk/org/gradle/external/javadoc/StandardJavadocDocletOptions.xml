@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.external.javadoc.StandardJavadocDocletOptions" version="3.0" superType="org.gradle.external.javadoc.CoreJavadocOptions">
-    <description> 
- Provides the options for the standard Javadoc doclet. 
-</description>
+    <description>
+ * Provides the options for the standard Javadoc doclet.
+ </description>
     <method name="author" returnType="org.gradle.external.javadoc.StandardJavadocDocletOptions"/>
     <method name="author" returnType="org.gradle.external.javadoc.StandardJavadocDocletOptions">
         <parameter type="boolean" name="author"/>

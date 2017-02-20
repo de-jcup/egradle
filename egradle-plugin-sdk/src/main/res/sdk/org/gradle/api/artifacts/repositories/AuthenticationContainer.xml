@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.AuthenticationContainer" version="3.0">
-    <description> 
- Container for configuring repository authentication schemes of type &lt;a href='type://org.gradle.authentication.Authentication'&gt;org.gradle.authentication.Authentication&lt;/a&gt;. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.AuthenticationContainer" version="3.0" documented="true">
+    <description>
+ * Container for configuring repository authentication schemes of type {@link org.gradle.authentication.Authentication}.
+ </description>
     <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
 </type>

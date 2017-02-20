@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.XmlProvider" version="3.0">
-    <description> 
- Provides various ways to access the content of an XML document. 
-</description>
-    <method name="asElement" returnType="org.w3c.dom.Element" delegationTarget="org.w3c.dom.Element">
-        <description> 
- Returns the XML document as a DOM &lt;a href='type://org.w3c.dom.Element'&gt;org.w3c.dom.Element&lt;/a&gt;. Changes to the returned instance will be applied 
- to the XML. The returned instance is only valid until one of the other methods on this interface are called. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;An &lt;a href='type://Element'&gt;Element&lt;/a&gt; representation of the XML. 
-</description>
+    <description>
+ * Provides various ways to access the content of an XML document.
+ </description>
+    <method name="asElement" returnType="org.w3c.dom.Element">
+        <description>
+     * Returns the XML document as a DOM {@link org.w3c.dom.Element}. Changes to the returned instance will be applied
+     * to the XML. The returned instance is only valid until one of the other methods on this interface are called.
+     *
+     * @return An {@code Element} representation of the XML.
+     </description>
     </method>
-    <method name="asNode" returnType="groovy.util.Node" delegationTarget="groovy.util.Node">
-        <description> 
- Returns the XML document as a Groovy &lt;a href='type://groovy.util.Node'&gt;groovy.util.Node&lt;/a&gt;. Changes to the returned instance will be applied 
- to the XML. The returned instance is only valid until one of the other methods on this interface are called. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://Node'&gt;Node&lt;/a&gt; representation of the XML. 
-</description>
+    <method name="asNode" returnType="groovy.util.Node">
+        <description>
+     * Returns the XML document as a Groovy {@link groovy.util.Node}. Changes to the returned instance will be applied
+     * to the XML. The returned instance is only valid until one of the other methods on this interface are called.
+     *
+     * @return A {@code Node} representation of the XML.
+     </description>
     </method>
-    <method name="asString" returnType="java.lang.StringBuilder" delegationTarget="StringBuilder">
-        <description> 
- Returns the XML document as a &lt;a href='type://StringBuilder'&gt;StringBuilder&lt;/a&gt;. Changes to the returned instance will be applied to the XML. 
- The returned instance is only valid until one of the other methods on this interface are called. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://StringBuilder'&gt;StringBuilder&lt;/a&gt; representation of the XML. 
-</description>
+    <method name="asString" returnType="java.lang.StringBuilder">
+        <description>
+     * Returns the XML document as a {@link StringBuilder}. Changes to the returned instance will be applied to the XML.
+     * The returned instance is only valid until one of the other methods on this interface are called.
+     *
+     * @return A {@code StringBuilder} representation of the XML.
+     </description>
     </method>
 </type>

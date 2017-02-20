@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.Clang" version="3.0">
-    <description> 
- The &lt;a href="http://clang.llvm.org"&gt;Clang&lt;/a&gt; tool chain. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.Clang" version="3.0" documented="true">
+    <description>
+ * The &lt;a href="http://clang.llvm.org"&gt;Clang&lt;/a&gt; tool chain.
+ </description>
     <interface name="org.gradle.nativeplatform.toolchain.GccCompatibleToolChain"/>
 </type>

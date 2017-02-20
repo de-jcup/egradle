@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.jetty.ScanTargetPattern" version="3.0">
-    <description> 
- Patterns for scanning for file changes. 
- 
- @deprecated The Jetty plugin has been deprecated 
-</description>
+    <description>
+ * Patterns for scanning for file changes.
+ *
+ * @deprecated The Jetty plugin has been deprecated
+ </description>
     <method name="getDirectory" returnType="java.io.File"/>
     <method name="getExcludes" returnType="java.util.List"/>
     <method name="getIncludes" returnType="java.util.List"/>

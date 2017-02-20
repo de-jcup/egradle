@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.resources.ReadableResource" version="3.0">
-    <description> 
- A resource that can be read. The simplest example is a file. 
-</description>
-    <method name="read" returnType="java.io.InputStream" delegationTarget="InputStream">
-        <description> 
- Returns an unbuffered &lt;a href='type://InputStream'&gt;InputStream&lt;/a&gt; that provides means to read the resource. It is the caller's responsibility to close this stream. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;An input stream. 
-</description>
+    <description>
+ * A resource that can be read. The simplest example is a file.
+ </description>
+    <method name="read" returnType="java.io.InputStream">
+        <description>
+     * Returns an unbuffered {@link InputStream} that provides means to read the resource. It is the caller's responsibility to close this stream.
+     *
+     * @return An input stream.
+     </description>
     </method>
     <interface name="org.gradle.api.resources.Resource"/>
 </type>

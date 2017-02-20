@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugin.devel.tasks.GeneratePluginDescriptors" version="3.0">
-    <description> 
- Generates plugin descriptors from plugin declarations. 
-</description>
+    <description>
+ * Generates plugin descriptors from plugin declarations.
+ </description>
     <method name="clearOutputDirectory" returnType="void"/>
     <method name="generatePluginDescriptors" returnType="void"/>
     <method name="getDeclarations" returnType="java.util.List"/>

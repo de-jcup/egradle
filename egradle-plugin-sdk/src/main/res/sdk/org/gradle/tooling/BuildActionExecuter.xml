@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.BuildActionExecuter" version="3.0">
-    <description> 
- Used to execute a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; in the build process. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of result produced by this executer. 
- @since 1.8 
-</description>
+    <description>
+ * Used to execute a {@link BuildAction} in the build process.
+ *
+ * @param &lt;T&gt; The type of result produced by this executer.
+ * @since 1.8
+ </description>
     <method name="run" returnType="T">
-        <description> 
- Runs the action, blocking until its result is available. 
- 
- @throws UnsupportedVersionException When the target Gradle version does not support build action execution. 
- @throws org.gradle.tooling.exceptions.UnsupportedOperationConfigurationException 
-          When the target Gradle version does not support some requested configuration option. 
- @throws org.gradle.tooling.exceptions.UnsupportedBuildArgumentException When there is a problem with build arguments provided by &lt;a href='type://BuildActionExecuter#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt;. 
- @throws BuildActionFailureException When the build action fails with an exception. 
- @throws BuildCancelledException When the operation was cancelled before it completed successfully. 
- @throws BuildException On some failure executing the Gradle build. 
- @throws GradleConnectionException On some other failure using the connection. 
- @throws IllegalStateException When the connection has been closed or is closing. 
- @since 1.8 
-</description>
+        <description>
+     * Runs the action, blocking until its result is available.
+     *
+     * @throws UnsupportedVersionException When the target Gradle version does not support build action execution.
+     * @throws org.gradle.tooling.exceptions.UnsupportedOperationConfigurationException
+     *          When the target Gradle version does not support some requested configuration option.
+     * @throws org.gradle.tooling.exceptions.UnsupportedBuildArgumentException When there is a problem with build arguments provided by {@link #withArguments(String...)}.
+     * @throws BuildActionFailureException When the build action fails with an exception.
+     * @throws BuildCancelledException When the operation was cancelled before it completed successfully.
+     * @throws BuildException On some failure executing the Gradle build.
+     * @throws GradleConnectionException On some other failure using the connection.
+     * @throws IllegalStateException When the connection has been closed or is closing.
+     * @since 1.8
+     </description>
     </method>
     <method name="run" returnType="void">
-        <description> 
- Starts executing the action, passing the result to the given handler when complete. This method returns immediately, and the result is later passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method. 
- 
- &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception. See 
- &lt;a href='type://BuildActionExecuter#run()'&gt;#run()&lt;/a&gt; for a description of the various exceptions that the operation may fail with. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to. 
- @throws IllegalStateException When the connection has been closed or is closing. 
- @since 1.8 
-</description>
+        <description>
+     * Starts executing the action, passing the result to the given handler when complete. This method returns immediately, and the result is later passed to the given handler's {@link
+     * ResultHandler#onComplete(Object)} method.
+     *
+     * &lt;p&gt;If the operation fails, the handler's {@link ResultHandler#onFailure(GradleConnectionException)} method is called with the appropriate exception. See
+     * {@link #run()} for a description of the various exceptions that the operation may fail with.
+     *
+     * @param handler The handler to supply the result to.
+     * @throws IllegalStateException When the connection has been closed or is closing.
+     * @since 1.8
+     </description>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
     </method>
     <interface name="org.gradle.tooling.ConfigurableLauncher"/>

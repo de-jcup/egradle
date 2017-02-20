@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
-    <description> 
- Compiles Scala source files, and optionally, Java source files. 
-</description>
+<type language="gradle" name="org.gradle.api.tasks.scala.ScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile" documented="true">
+    <description>
+ * Compiles Scala source files, and optionally, Java source files.
+ </description>
     <method name="assertScalaClasspathIsNonEmpty" returnType="void"/>
     <method name="configureIncrementalCompilation" returnType="void">
         <parameter type="org.gradle.api.internal.tasks.scala.ScalaCompileSpec" name="spec"/>
@@ -11,20 +11,20 @@
         <parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/>
     </method>
     <method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath to use to load the Scala compiler. 
-</description>
+        <description>
+     * Returns the classpath to use to load the Scala compiler.
+     </description>
     </method>
     <method name="getScalaCompileOptions" returnType="org.gradle.api.tasks.scala.ScalaCompileOptions"/>
     <method name="getZincClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
-</description>
+        <description>
+     * Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler.
+     </description>
     </method>
     <method name="setCompiler" returnType="void">
-        <description> 
- For testing only. 
-</description>
+        <description>
+     * For testing only.
+     </description>
         <parameter type="org.gradle.language.base.internal.compile.Compiler" name="compiler"/>
     </method>
     <method name="setScalaClasspath" returnType="void">
@@ -35,14 +35,14 @@
     </method>
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="scalaClasspath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description> 
- Returns the classpath to use to load the Scala compiler. 
-</description>
+        <description>
+     * Returns the classpath to use to load the Scala compiler.
+     </description>
     </property>
     <property name="scalaCompileOptions" type="org.gradle.api.tasks.scala.ScalaCompileOptions"/>
     <property name="zincClasspath" type="org.gradle.api.file.FileCollection">
-        <description> 
- Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler. 
-</description>
+        <description>
+     * Returns the classpath to use to load the Zinc incremental compiler. This compiler in turn loads the Scala compiler.
+     </description>
     </property>
 </type>

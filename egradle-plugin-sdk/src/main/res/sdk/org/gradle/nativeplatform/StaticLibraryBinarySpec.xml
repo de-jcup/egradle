@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.nativeplatform.StaticLibraryBinarySpec" version="3.0">
-    <description> 
- A static library binary built by Gradle for a native library. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.StaticLibraryBinarySpec" version="3.0" documented="true">
+    <description>
+ * A static library binary built by Gradle for a native library.
+ </description>
     <method name="additionalLinkFiles" returnType="void">
-        <description> 
- Add some additional files required by consumers of this library at link time. 
-</description>
+        <description>
+     * Add some additional files required by consumers of this library at link time.
+     </description>
         <parameter type="org.gradle.api.file.FileCollection" name="files"/>
     </method>
     <method name="getStaticLibraryFile" returnType="java.io.File">
-        <description> 
- The static library file. 
-</description>
+        <description>
+     * The static library file.
+     </description>
     </method>
     <method name="getTasks" returnType="org.gradle.nativeplatform.StaticLibraryBinarySpec.TasksCollection">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </method>
     <method name="setStaticLibraryFile" returnType="void">
-        <description> 
- The static library binary file. 
-</description>
+        <description>
+     * The static library binary file.
+     </description>
         <parameter type="java.io.File" name="staticLibraryFile"/>
     </method>
     <interface name="org.gradle.nativeplatform.NativeLibraryBinarySpec"/>
     <property name="staticLibraryFile" type="java.io.File" documented="true">
-        <description> 
- The static library file. 
-</description>
+        <description>
+     * The static library file.
+     </description>
     </property>
     <property name="tasks" type="org.gradle.nativeplatform.StaticLibraryBinarySpec.TasksCollection">
-        <description> 
- {@inheritDoc} 
-</description>
+        <description>
+     * {@inheritDoc}
+     </description>
     </property>
 </type>

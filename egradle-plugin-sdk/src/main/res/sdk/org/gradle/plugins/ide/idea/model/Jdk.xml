@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.model.Jdk" version="3.0">
-    <description> 
- Represents information for the project Java SDK. 
- This translates to attributes of the ProjectRootManager element in the ipr. 
-</description>
+    <description>
+ * Represents information for the project Java SDK.
+ * This translates to attributes of the ProjectRootManager element in the ipr.
+ </description>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>

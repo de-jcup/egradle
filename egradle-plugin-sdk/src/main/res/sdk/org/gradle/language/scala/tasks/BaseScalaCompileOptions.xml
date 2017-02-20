@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.scala.tasks.BaseScalaCompileOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
-    <description> 
- Options for Scala platform compilation. 
-</description>
+    <description>
+ * Options for Scala platform compilation.
+ </description>
     <method name="getAdditionalParameters" returnType="java.util.List">
-        <description> 
- Additional parameters passed to the compiler. 
- Each parameter must start with '-'. 
-</description>
+        <description>
+     * Additional parameters passed to the compiler.
+     * Each parameter must start with '-'.
+     </description>
     </method>
     <method name="getDebugLevel" returnType="java.lang.String">
-        <description> 
- Generate debugging information. 
- Legal values: none, source, line, vars, notailcalls 
-</description>
+        <description>
+     * Generate debugging information.
+     * Legal values: none, source, line, vars, notailcalls
+     </description>
     </method>
     <method name="getEncoding" returnType="java.lang.String">
-        <description> 
- Encoding of source files. 
-</description>
+        <description>
+     * Encoding of source files.
+     </description>
     </method>
     <method name="getForkOptions" returnType="org.gradle.api.tasks.scala.ScalaForkOptions">
-        <description> 
- Options for running the Scala compiler in a separate process. 
-</description>
+        <description>
+     * Options for running the Scala compiler in a separate process.
+     </description>
     </method>
     <method name="getIncrementalOptions" returnType="org.gradle.api.tasks.scala.IncrementalCompileOptions"/>
     <method name="getLoggingLevel" returnType="java.lang.String">
-        <description> 
- Specifies the amount of logging. 
- Legal values:  none, verbose, debug 
-</description>
+        <description>
+     * Specifies the amount of logging.
+     * Legal values:  none, verbose, debug
+     </description>
     </method>
     <method name="getLoggingPhases" returnType="java.util.List">
-        <description> 
- Phases of the compiler to log. 
- Legal values: namer, typer, pickler, uncurry, tailcalls, transmatch, explicitouter, erasure, 
-               lambdalift, flatten, constructors, mixin, icode, jvm, terminal. 
-</description>
+        <description>
+     * Phases of the compiler to log.
+     * Legal values: namer, typer, pickler, uncurry, tailcalls, transmatch, explicitouter, erasure,
+     *               lambdalift, flatten, constructors, mixin, icode, jvm, terminal.
+     </description>
     </method>
     <method name="isDeprecation" returnType="boolean">
-        <description> 
- Generate deprecation information. 
-</description>
+        <description>
+     * Generate deprecation information.
+     </description>
     </method>
     <method name="isFailOnError" returnType="boolean">
-        <description> 
- Fail the build on compilation errors. 
-</description>
+        <description>
+     * Fail the build on compilation errors.
+     </description>
     </method>
     <method name="isForce" returnType="boolean">
-        <description> 
- Whether to force the compilation of all files. 
- Legal values: 
- - false (only compile modified files) 
- - true (always recompile all files) 
-</description>
+        <description>
+     * Whether to force the compilation of all files.
+     * Legal values:
+     * - false (only compile modified files)
+     * - true (always recompile all files)
+     </description>
     </method>
     <method name="isListFiles" returnType="boolean">
-        <description> 
- List files to be compiled. 
-</description>
+        <description>
+     * List files to be compiled.
+     </description>
     </method>
     <method name="isOptimize" returnType="boolean">
-        <description> 
- Run optimizations. 
-</description>
+        <description>
+     * Run optimizations.
+     </description>
     </method>
     <method name="isUnchecked" returnType="boolean">
-        <description> 
- Generate unchecked information. 
-</description>
+        <description>
+     * Generate unchecked information.
+     </description>
     </method>
     <method name="setAdditionalParameters" returnType="void">
         <parameter type="java.util.List" name="additionalParameters"/>
@@ -111,73 +111,73 @@
     <method name="setUnchecked" returnType="void">
         <parameter type="boolean" name="unchecked"/>
     </method>
-    <property name="additionalParameters" type="java.util.List">
-        <description> 
- Additional parameters passed to the compiler. 
- Each parameter must start with '-'. 
-</description>
+    <property name="additionalParameters" type="java.util.List" documented="true">
+        <description>
+     * Additional parameters passed to the compiler.
+     * Each parameter must start with '-'.
+     </description>
     </property>
-    <property name="debugLevel" type="java.lang.String">
-        <description> 
- Generate debugging information. 
- Legal values: none, source, line, vars, notailcalls 
-</description>
+    <property name="debugLevel" type="java.lang.String" documented="true">
+        <description>
+     * Generate debugging information.
+     * Legal values: none, source, line, vars, notailcalls
+     </description>
     </property>
-    <property name="deprecation" type="boolean">
-        <description> 
- Generate deprecation information. 
-</description>
+    <property name="deprecation" type="boolean" documented="true">
+        <description>
+     * Generate deprecation information.
+     </description>
     </property>
-    <property name="encoding" type="java.lang.String">
-        <description> 
- Encoding of source files. 
-</description>
+    <property name="encoding" type="java.lang.String" documented="true">
+        <description>
+     * Encoding of source files.
+     </description>
     </property>
-    <property name="failOnError" type="boolean">
-        <description> 
- Fail the build on compilation errors. 
-</description>
+    <property name="failOnError" type="boolean" documented="true">
+        <description>
+     * Fail the build on compilation errors.
+     </description>
     </property>
-    <property name="force" type="boolean">
-        <description> 
- Whether to force the compilation of all files. 
- Legal values: 
- - false (only compile modified files) 
- - true (always recompile all files) 
-</description>
+    <property name="force" type="boolean" documented="true">
+        <description>
+     * Whether to force the compilation of all files.
+     * Legal values:
+     * - false (only compile modified files)
+     * - true (always recompile all files)
+     </description>
     </property>
     <property name="forkOptions" type="org.gradle.api.tasks.scala.ScalaForkOptions">
-        <description> 
- Options for running the Scala compiler in a separate process. 
-</description>
+        <description>
+     * Options for running the Scala compiler in a separate process.
+     </description>
     </property>
     <property name="incrementalOptions" type="org.gradle.api.tasks.scala.IncrementalCompileOptions"/>
-    <property name="listFiles" type="boolean">
-        <description> 
- List files to be compiled. 
-</description>
+    <property name="listFiles" type="boolean" documented="true">
+        <description>
+     * List files to be compiled.
+     </description>
     </property>
-    <property name="loggingLevel" type="java.lang.String">
-        <description> 
- Specifies the amount of logging. 
- Legal values:  none, verbose, debug 
-</description>
+    <property name="loggingLevel" type="java.lang.String" documented="true">
+        <description>
+     * Specifies the amount of logging.
+     * Legal values:  none, verbose, debug
+     </description>
     </property>
-    <property name="loggingPhases" type="java.util.List">
-        <description> 
- Phases of the compiler to log. 
- Legal values: namer, typer, pickler, uncurry, tailcalls, transmatch, explicitouter, erasure, 
-               lambdalift, flatten, constructors, mixin, icode, jvm, terminal. 
-</description>
+    <property name="loggingPhases" type="java.util.List" documented="true">
+        <description>
+     * Phases of the compiler to log.
+     * Legal values: namer, typer, pickler, uncurry, tailcalls, transmatch, explicitouter, erasure,
+     *               lambdalift, flatten, constructors, mixin, icode, jvm, terminal.
+     </description>
     </property>
-    <property name="optimize" type="boolean">
-        <description> 
- Run optimizations. 
-</description>
+    <property name="optimize" type="boolean" documented="true">
+        <description>
+     * Run optimizations.
+     </description>
     </property>
-    <property name="unchecked" type="boolean">
-        <description> 
- Generate unchecked information. 
-</description>
+    <property name="unchecked" type="boolean" documented="true">
+        <description>
+     * Generate unchecked information.
+     </description>
     </property>
 </type>

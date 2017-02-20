@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.StringUtils;
+
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "method")
 public class XMLMethod implements ModifiableMethod{
@@ -20,7 +22,7 @@ public class XMLMethod implements ModifiableMethod{
 	@XmlAttribute(name = "returnType")
 	private String returnTypeAsString;
 	
-	@XmlAttribute(name = "delegationTarget")
+	@XmlAttribute(name = "delegationTarget", required=false)
 	private String delegationTargetAsString;
 	
 	@XmlElement(name = "description")
@@ -90,6 +92,10 @@ public class XMLMethod implements ModifiableMethod{
 
 	@Override
 	public String getDelegationTargetAsString() {
+		if (StringUtils.isBlank(delegationTargetAsString)){
+			/* hack for JAXB not writing always "delegationTarget='false'"*/
+			return null;
+		}
 		return delegationTargetAsString;
 	}
 

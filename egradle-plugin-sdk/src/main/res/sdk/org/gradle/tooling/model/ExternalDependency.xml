@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.ExternalDependency" version="3.0">
-    <description> 
- Represents an external artifact dependency. 
-</description>
+    <description>
+ * Represents an external artifact dependency.
+ </description>
     <method name="getFile" returnType="java.io.File">
-        <description> 
- Returns the file for this dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file for this dependency. 
-</description>
+        <description>
+     * Returns the file for this dependency.
+     *
+     * @return The file for this dependency.
+     </description>
     </method>
-    <method name="getGradleModuleVersion" returnType="org.gradle.tooling.model.GradleModuleVersion" delegationTarget="null">
-        <description> 
- Returns the Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not 
- originate from a remote repository. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not 
- originate from a remote repository. 
- @since 1.1 
-</description>
+    <method name="getGradleModuleVersion" returnType="org.gradle.tooling.model.GradleModuleVersion">
+        <description>
+     * Returns the Gradle module information for this dependency, or {@code null} if the dependency does not
+     * originate from a remote repository.
+     *
+     * @return The Gradle module information for this dependency, or {@code null} if the dependency does not
+     * originate from a remote repository.
+     * @since 1.1
+     </description>
     </method>
-    <method name="getJavadoc" returnType="java.io.File" delegationTarget="null">
-        <description> 
- Returns the Javadoc directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no Javadoc is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Javadoc directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no Javadoc is available. 
-</description>
+    <method name="getJavadoc" returnType="java.io.File">
+        <description>
+     * Returns the Javadoc directory or archive for this dependency, or {@code null} if no Javadoc is available.
+     *
+     * @return the Javadoc directory or archive for this dependency, or {@code null} if no Javadoc is available.
+     </description>
     </method>
-    <method name="getSource" returnType="java.io.File" delegationTarget="null">
-        <description> 
- Returns the source directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no source is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no source is available. 
-</description>
+    <method name="getSource" returnType="java.io.File">
+        <description>
+     * Returns the source directory or archive for this dependency, or {@code null} if no source is available.
+     *
+     * @return The source directory or archive for this dependency, or {@code null} if no source is available.
+     </description>
     </method>
     <method name="isExported" returnType="boolean">
-        <description> 
- Marks this dependency as exported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
- @since 2.5 
-</description>
+        <description>
+     * Marks this dependency as exported.
+     *
+     * @return whether this dependency needs to be exported.
+     * @since 2.5
+     </description>
     </method>
     <interface name="org.gradle.tooling.model.Dependency"/>
     <property name="exported" type="boolean">
-        <description> 
- Marks this dependency as exported. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported. 
- @since 2.5 
-</description>
+        <description>
+     * Marks this dependency as exported.
+     *
+     * @return whether this dependency needs to be exported.
+     * @since 2.5
+     </description>
     </property>
     <property name="file" type="java.io.File">
-        <description> 
- Returns the file for this dependency. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file for this dependency. 
-</description>
+        <description>
+     * Returns the file for this dependency.
+     *
+     * @return The file for this dependency.
+     </description>
     </property>
     <property name="gradleModuleVersion" type="org.gradle.tooling.model.GradleModuleVersion">
-        <description> 
- Returns the Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not 
- originate from a remote repository. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not 
- originate from a remote repository. 
- @since 1.1 
-</description>
+        <description>
+     * Returns the Gradle module information for this dependency, or {@code null} if the dependency does not
+     * originate from a remote repository.
+     *
+     * @return The Gradle module information for this dependency, or {@code null} if the dependency does not
+     * originate from a remote repository.
+     * @since 1.1
+     </description>
     </property>
     <property name="javadoc" type="java.io.File">
-        <description> 
- Returns the Javadoc directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no Javadoc is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Javadoc directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no Javadoc is available. 
-</description>
+        <description>
+     * Returns the Javadoc directory or archive for this dependency, or {@code null} if no Javadoc is available.
+     *
+     * @return the Javadoc directory or archive for this dependency, or {@code null} if no Javadoc is available.
+     </description>
     </property>
     <property name="source" type="java.io.File">
-        <description> 
- Returns the source directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no source is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source directory or archive for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no source is available. 
-</description>
+        <description>
+     * Returns the source directory or archive for this dependency, or {@code null} if no source is available.
+     *
+     * @return The source directory or archive for this dependency, or {@code null} if no source is available.
+     </description>
     </property>
 </type>

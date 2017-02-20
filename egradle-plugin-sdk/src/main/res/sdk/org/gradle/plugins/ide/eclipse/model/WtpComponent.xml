@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpComponent" version="3.0">
-    <description> 
- Creates the .settings/org.eclipse.wst.common.component file for WTP projects. 
-</description>
+    <description>
+ * Creates the .settings/org.eclipse.wst.common.component file for WTP projects.
+ </description>
     <method name="configure" returnType="void">
         <parameter type="java.lang.String" name="deployName"/>
         <parameter type="java.lang.String" name="contextPath"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.HelpTasksPlugin" version="3.0">
-    <description> 
- Adds various reporting tasks that provide information about the project. 
-</description>
+    <description>
+ * Adds various reporting tasks that provide information about the project.
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>

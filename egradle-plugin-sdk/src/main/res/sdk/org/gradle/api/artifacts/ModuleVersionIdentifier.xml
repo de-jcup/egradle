@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.ModuleVersionIdentifier" version="3.0">
-    <description> 
- The identifier of a module version. 
-</description>
+    <description>
+ * The identifier of a module version.
+ </description>
     <method name="getGroup" returnType="java.lang.String">
-        <description> 
- The group of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 
-</description>
+        <description>
+     * The group of the module.
+     *
+     * @return module group
+     </description>
     </method>
-    <method name="getModule" returnType="org.gradle.api.artifacts.ModuleIdentifier" delegationTarget="ModuleIdentifier">
-        <description> 
- Returns the &lt;a href='type://ModuleIdentifier'&gt;ModuleIdentifier&lt;/a&gt; containing the group and the name of this module. 
- Contains the same information as &lt;a href='type://ModuleVersionIdentifier#getGroup()'&gt;#getGroup()&lt;/a&gt; and &lt;a href='type://ModuleVersionIdentifier#getVersion()'&gt;#getVersion()&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module identifier 
- @since 1.4 
-</description>
+    <method name="getModule" returnType="org.gradle.api.artifacts.ModuleIdentifier">
+        <description>
+     * Returns the {@link ModuleIdentifier} containing the group and the name of this module.
+     * Contains the same information as {@link #getGroup()} and {@link #getVersion()}
+     *
+     * @return the module identifier
+     * @since 1.4
+     </description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description> 
- The name of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
-</description>
+        <description>
+     * The name of the module.
+     *
+     * @return module name
+     </description>
     </method>
     <method name="getVersion" returnType="java.lang.String">
-        <description> 
- The version of the module 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module version 
-</description>
+        <description>
+     * The version of the module
+     *
+     * @return module version
+     </description>
     </method>
     <interface name="java.io.Serializable"/>
     <property name="group" type="java.lang.String">
-        <description> 
- The group of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module group 
-</description>
+        <description>
+     * The group of the module.
+     *
+     * @return module group
+     </description>
     </property>
     <property name="module" type="org.gradle.api.artifacts.ModuleIdentifier">
-        <description> 
- Returns the &lt;a href='type://ModuleIdentifier'&gt;ModuleIdentifier&lt;/a&gt; containing the group and the name of this module. 
- Contains the same information as &lt;a href='type://ModuleVersionIdentifier#getGroup()'&gt;#getGroup()&lt;/a&gt; and &lt;a href='type://ModuleVersionIdentifier#getVersion()'&gt;#getVersion()&lt;/a&gt; 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module identifier 
- @since 1.4 
-</description>
+        <description>
+     * Returns the {@link ModuleIdentifier} containing the group and the name of this module.
+     * Contains the same information as {@link #getGroup()} and {@link #getVersion()}
+     *
+     * @return the module identifier
+     * @since 1.4
+     </description>
     </property>
     <property name="name" type="java.lang.String">
-        <description> 
- The name of the module. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module name 
-</description>
+        <description>
+     * The name of the module.
+     *
+     * @return module name
+     </description>
     </property>
     <property name="version" type="java.lang.String">
-        <description> 
- The version of the module 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;module version 
-</description>
+        <description>
+     * The version of the module
+     *
+     * @return module version
+     </description>
     </property>
 </type>

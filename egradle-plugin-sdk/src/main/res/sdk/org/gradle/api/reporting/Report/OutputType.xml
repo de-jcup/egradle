@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.reporting.Report.OutputType" version="3.0">
-    <description> 
- The type of output the report produces 
-</description>
+    <description>
+     * The type of output the report produces
+     </description>
 </type>

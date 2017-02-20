@@ -1,116 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" version="3.0">
-    <description> 
- Allows the build to provide rules that modify the metadata of depended-on software components. 
- 
- &lt;p&gt;Possible uses of component metadata rules are: 
- &lt;ul&gt; 
-     &lt;li&gt;Setting the status and status scheme of a component, overriding the value specified in the component descriptor.&lt;/li&gt; 
-     &lt;li&gt;Declaring whether or not a component is 'changing', thus impacting the cache behaviour of the component.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;p&gt; Example: 
- &lt;pre autoTested=''&gt; 
- dependencies { 
-                 def version = details.id.version 
-                 // assuming status is last part of version string 
-                 details.status = version.substring(version.lastIndexOf("-") + 1) 
-                 details.statusScheme = ["bronze", "silver", "gold", "platinum"] 
-             } 
-         } 
- 
-         // Treat all components in the module "org.foo:bar" as changing 
-         withModule("org.foo:bar") { ComponentMetadataDetails details -&gt; 
-             details.changing = true 
-         } 
-     } 
- } 
- &lt;/pre&gt; 
- 
- @since 1.8 
-</description>
-    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="ComponentMetadataDetails" documented="true">
-        <description> 
- Adds a rule closure that may modify the metadata of any resolved software component. 
- 
- &lt;p&gt;The supplied rule closure must declare a &lt;a href='type://ComponentMetadataDetails'&gt;ComponentMetadataDetails&lt;/a&gt; as it's first parameter, 
- allowing the component metadata to be modified. 
- 
- &lt;p&gt;In addition, the rule can declare additional (read-only) parameters, which may provide extra details 
- about the component. The order of these additional parameters is not significant. 
- 
- &lt;p&gt;The following additional parameter types are supported: 
- &lt;ul&gt; 
-     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt; - additional Ivy-specific 
-     metadata. Rules declaring this parameter will only be invoked for components packaged as an Ivy module.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" version="3.0" documented="true">
+    <description>
+ * Allows the build to provide rules that modify the metadata of depended-on software components.
+ *
+ * &lt;p&gt;Possible uses of component metadata rules are:
+ * &lt;ul&gt;
+ *     &lt;li&gt;Setting the status and status scheme of a component, overriding the value specified in the component descriptor.&lt;/li&gt;
+ *     &lt;li&gt;Declaring whether or not a component is 'changing', thus impacting the cache behaviour of the component.&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt; Example:
+ * &lt;pre autoTested=''&gt;
+ * dependencies {
+ *     components {
+ *         // Set the status and status scheme for every component belonging to a module in the group "org.foo"
+ *         all { ComponentMetadataDetails details -&gt;
+ *             if (details.id.group == "org.foo") {
+ *                 def version = details.id.version
+ *                 // assuming status is last part of version string
+ *                 details.status = version.substring(version.lastIndexOf("-") + 1)
+ *                 details.statusScheme = ["bronze", "silver", "gold", "platinum"]
+ *             }
+ *         }
+ *
+ *         // Treat all components in the module "org.foo:bar" as changing
+ *         withModule("org.foo:bar") { ComponentMetadataDetails details -&gt;
+ *             details.changing = true
+ *         }
+ *     }
+ * }
+ * &lt;/pre&gt;
+ *
+ * @since 1.8
+ </description>
+    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
+        <description>
+     * Adds a rule closure that may modify the metadata of any resolved software component.
+     *
+     * &lt;p&gt;The supplied rule closure must declare a {@link ComponentMetadataDetails} as it's first parameter,
+     * allowing the component metadata to be modified.
+     *
+     * &lt;p&gt;In addition, the rule can declare additional (read-only) parameters, which may provide extra details
+     * about the component. The order of these additional parameters is not significant.
+     *
+     * &lt;p&gt;The following additional parameter types are supported:
+     * &lt;ul&gt;
+     *     &lt;li&gt;{@link org.gradle.api.artifacts.ivy.IvyModuleDescriptor} - additional Ivy-specific
+     *     metadata. Rules declaring this parameter will only be invoked for components packaged as an Ivy module.&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param rule the rule to be added
+     * @return this
+     </description>
         <parameter type="groovy.lang.Closure" name="rule"/>
     </method>
-    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.model.Mutate" documented="true">
-        <description> 
- Adds a rule that may modify the metadata of any resolved software component. 
- 
- &lt;p&gt;The ruleSource is an Object that has a single rule method annotated with &lt;a href='type://org.gradle.model.Mutate'&gt;org.gradle.model.Mutate&lt;/a&gt;. 
- 
- &lt;p&gt;This rule method: 
- &lt;ul&gt; 
-     &lt;li&gt;must return void.&lt;/li&gt; 
-     &lt;li&gt;must have &lt;a href='type://ComponentMetadataDetails'&gt;ComponentMetadataDetails&lt;/a&gt; as the first parameter.&lt;/li&gt; 
-     &lt;li&gt;may have an additional parameter of type &lt;a href='type://org.gradle.api.artifacts.ivy.IvyModuleDescriptor'&gt;org.gradle.api.artifacts.ivy.IvyModuleDescriptor&lt;/a&gt;.&lt;/li&gt; 
- &lt;/ul&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource  the rule source object to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
+        <description>
+     * Adds a rule that may modify the metadata of any resolved software component.
+     *
+     * &lt;p&gt;The ruleSource is an Object that has a single rule method annotated with {@link org.gradle.model.Mutate}.
+     *
+     * &lt;p&gt;This rule method:
+     * &lt;ul&gt;
+     *     &lt;li&gt;must return void.&lt;/li&gt;
+     *     &lt;li&gt;must have {@link ComponentMetadataDetails} as the first parameter.&lt;/li&gt;
+     *     &lt;li&gt;may have an additional parameter of type {@link org.gradle.api.artifacts.ivy.IvyModuleDescriptor}.&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param ruleSource  the rule source object to be added
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
     <method name="all" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
-        <description> 
- Adds a rule action that may modify the metadata of any resolved software component. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+        <description>
+     * Adds a rule action that may modify the metadata of any resolved software component.
+     *
+     * @param rule the rule to be added
+     * @return this
+     </description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
-        <description> 
- Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
- 
- &lt;p&gt;The rule closure parameter is subject to the same requirements as &lt;a href='type://ComponentMetadataHandler#all(groovy.lang.Closure)'&gt;#all(groovy.lang.Closure)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
+        <description>
+     * Adds a rule that may modify the metadata of any resolved software component belonging to the specified module.
+     *
+     * &lt;p&gt;The rule closure parameter is subject to the same requirements as {@link #all(groovy.lang.Closure)}.
+     *
+     * @param id the module to apply this rule to in "group:module" format or as a {@link org.gradle.api.artifacts.ModuleIdentifier}
+     * @param rule the rule to be added
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="groovy.lang.Closure" name="rule"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
-        <description> 
- Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
- 
- &lt;p&gt;The rule source parameter is subject to the same requirements as &lt;a href='type://ComponentMetadataHandler#all(Object)'&gt;#all(Object)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ruleSource the rule source object to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
+        <description>
+     * Adds a rule that may modify the metadata of any resolved software component belonging to the specified module.
+     *
+     * &lt;p&gt;The rule source parameter is subject to the same requirements as {@link #all(Object)}.
+     *
+     * @param id the module to apply this rule to in "group:module" format or as a {@link org.gradle.api.artifacts.ModuleIdentifier}
+     * @param ruleSource the rule source object to be added
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="java.lang.Object" name="ruleSource"/>
     </method>
-    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" delegationTarget="org.gradle.api.artifacts.ModuleIdentifier" documented="true">
-        <description> 
- Adds a rule that may modify the metadata of any resolved software component belonging to the specified module. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the module to apply this rule to in "group:module" format or as a &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt; 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to be added 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this 
-</description>
+    <method name="withModule" returnType="org.gradle.api.artifacts.dsl.ComponentMetadataHandler" documented="true">
+        <description>
+     * Adds a rule that may modify the metadata of any resolved software component belonging to the specified module.
+     *
+     * @param id the module to apply this rule to in "group:module" format or as a {@link org.gradle.api.artifacts.ModuleIdentifier}
+     * @param rule the rule to be added
+     * @return this
+     </description>
         <parameter type="java.lang.Object" name="id"/>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>

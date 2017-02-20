@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.plugins.signing.SignatureSpec" version="3.0">
-    <description> 
- Specifies how objects will be signed. 
-</description>
-    <method name="getSignatory" returnType="org.gradle.plugins.signing.signatory.Signatory" delegationTarget="null">
-        <description> 
- The signatory that will be performing the signing. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the signatory, or &lt;a href='type://null'&gt;null&lt;/a&gt; if none specified. 
-</description>
+    <description>
+ * Specifies how objects will be signed.
+ </description>
+    <method name="getSignatory" returnType="org.gradle.plugins.signing.signatory.Signatory">
+        <description>
+     * The signatory that will be performing the signing.
+     *
+     * @return the signatory, or {@code null} if none specified.
+     </description>
     </method>
-    <method name="getSignatureType" returnType="org.gradle.plugins.signing.type.SignatureType" delegationTarget="null">
-        <description> 
- The signature representation that will be created. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the signature type, or &lt;a href='type://null'&gt;null&lt;/a&gt; if none specified. 
-</description>
+    <method name="getSignatureType" returnType="org.gradle.plugins.signing.type.SignatureType">
+        <description>
+     * The signature representation that will be created.
+     *
+     * @return the signature type, or {@code null} if none specified.
+     </description>
     </method>
     <method name="isRequired" returnType="boolean">
-        <description> 
- Whether or not it is required that this signature be generated. 
- 
- A signature may not be able to be generated if a signatory and/or a signature type have not been specified. If it is required and cannot be generated, an exception will be thrown. Otherwise, it 
- will not be generated. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not it is required that this signature be generated. 
-</description>
+        <description>
+     * Whether or not it is required that this signature be generated.
+     *
+     * A signature may not be able to be generated if a signatory and/or a signature type have not been specified. If it is required and cannot be generated, an exception will be thrown. Otherwise, it
+     * will not be generated.
+     *
+     * @return Whether or not it is required that this signature be generated.
+     </description>
     </method>
     <method name="setRequired" returnType="void">
-        <description> 
- Whether or not it is required that this signature be generated. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;required Whether or not it is required that this signature be generated. 
- @see #isRequired 
-</description>
+        <description>
+     * Whether or not it is required that this signature be generated.
+     *
+     * @param required Whether or not it is required that this signature be generated.
+     * @see #isRequired
+     </description>
         <parameter type="boolean" name="required"/>
     </method>
     <method name="setSignatory" returnType="void">
-        <description> 
- Sets the signatory that will be signing the input. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;signatory The signatory 
-</description>
+        <description>
+     * Sets the signatory that will be signing the input.
+     *
+     * @param signatory The signatory
+     </description>
         <parameter type="org.gradle.plugins.signing.signatory.Signatory" name="signatory"/>
     </method>
     <method name="setSignatureType" returnType="void">
-        <description> 
- Sets the signature representation that the signatures will be produced as. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the signature type to use 
-</description>
+        <description>
+     * Sets the signature representation that the signatures will be produced as.
+     *
+     * @param type the signature type to use
+     </description>
         <parameter type="org.gradle.plugins.signing.type.SignatureType" name="type"/>
     </method>
     <property name="required" type="boolean">
-        <description> 
- Whether or not it is required that this signature be generated. 
- 
- A signature may not be able to be generated if a signatory and/or a signature type have not been specified. If it is required and cannot be generated, an exception will be thrown. Otherwise, it 
- will not be generated. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not it is required that this signature be generated. 
-</description>
+        <description>
+     * Whether or not it is required that this signature be generated.
+     *
+     * A signature may not be able to be generated if a signatory and/or a signature type have not been specified. If it is required and cannot be generated, an exception will be thrown. Otherwise, it
+     * will not be generated.
+     *
+     * @return Whether or not it is required that this signature be generated.
+     </description>
     </property>
     <property name="signatory" type="org.gradle.plugins.signing.signatory.Signatory">
-        <description> 
- The signatory that will be performing the signing. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the signatory, or &lt;a href='type://null'&gt;null&lt;/a&gt; if none specified. 
-</description>
+        <description>
+     * The signatory that will be performing the signing.
+     *
+     * @return the signatory, or {@code null} if none specified.
+     </description>
     </property>
     <property name="signatureType" type="org.gradle.plugins.signing.type.SignatureType">
-        <description> 
- The signature representation that will be created. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the signature type, or &lt;a href='type://null'&gt;null&lt;/a&gt; if none specified. 
-</description>
+        <description>
+     * The signature representation that will be created.
+     *
+     * @return the signature type, or {@code null} if none specified.
+     </description>
     </property>
 </type>

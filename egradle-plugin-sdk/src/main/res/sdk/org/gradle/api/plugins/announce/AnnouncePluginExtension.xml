@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension" version="3.0">
-    <description> 
- &lt;p&gt;The extension used by the AnnouncePlugin.&lt;/p&gt; 
-</description>
+<type language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension" version="3.0" documented="true">
+    <description>
+ * &lt;p&gt;The extension used by the AnnouncePlugin.&lt;/p&gt;
+ </description>
     <method name="announce" returnType="void" documented="true">
-        <description> 
- Sends an announcement of the given type. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;msg The content of the announcement 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The announcement type. 
-</description>
+        <description>
+     * Sends an announcement of the given type.
+     *
+     * @param msg The content of the announcement
+     * @param type The announcement type.
+     </description>
         <parameter type="java.lang.String" name="msg"/>
         <parameter type="java.lang.String" name="type"/>
     </method>
     <method name="getAnnouncerFactory" returnType="org.gradle.api.plugins.announce.internal.AnnouncerFactory"/>
-    <method name="getLocal" returnType="org.gradle.api.plugins.announce.Announcer" delegationTarget="Announcer">
-        <description> 
- Returns an &lt;a href='type://Announcer'&gt;Announcer&lt;/a&gt; that sends announcements to the local desktop, if a notification mechanism is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The announcer. 
-</description>
+    <method name="getLocal" returnType="org.gradle.api.plugins.announce.Announcer">
+        <description>
+     * Returns an {@link Announcer} that sends announcements to the local desktop, if a notification mechanism is available.
+     *
+     * @return The announcer.
+     </description>
     </method>
     <method name="getPassword" returnType="java.lang.String">
-        <description> 
- The password to use for announcements. 
-</description>
+        <description>
+     * The password to use for announcements.
+     </description>
     </method>
     <method name="getUsername" returnType="java.lang.String">
-        <description> 
- The username to use for announcements. 
-</description>
+        <description>
+     * The username to use for announcements.
+     </description>
     </method>
     <method name="setAnnouncerFactory" returnType="void">
         <parameter type="org.gradle.api.plugins.announce.internal.AnnouncerFactory" name="announcerFactory"/>
     </method>
-    <method name="setLocal" returnType="void" delegationTarget="Announcer">
-        <description> 
- Sets the &lt;a href='type://Announcer'&gt;Announcer&lt;/a&gt; that should be used to send announcements to the local desktop. 
-</description>
+    <method name="setLocal" returnType="void">
+        <description>
+     * Sets the {@link Announcer} that should be used to send announcements to the local desktop.
+     </description>
         <parameter type="org.gradle.api.plugins.announce.Announcer" name="localAnnouncer"/>
     </method>
     <method name="setPassword" returnType="void">
@@ -48,20 +48,20 @@
     </method>
     <property name="announcerFactory" type="org.gradle.api.plugins.announce.internal.AnnouncerFactory"/>
     <property name="local" type="org.gradle.api.plugins.announce.Announcer" documented="true">
-        <description> 
- Returns an &lt;a href='type://Announcer'&gt;Announcer&lt;/a&gt; that sends announcements to the local desktop, if a notification mechanism is available. 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The announcer. 
-</description>
+        <description>
+     * Returns an {@link Announcer} that sends announcements to the local desktop, if a notification mechanism is available.
+     *
+     * @return The announcer.
+     </description>
     </property>
     <property name="password" type="java.lang.String" documented="true">
-        <description> 
- The password to use for announcements. 
-</description>
+        <description>
+     * The password to use for announcements.
+     </description>
     </property>
     <property name="username" type="java.lang.String" documented="true">
-        <description> 
- The username to use for announcements. 
-</description>
+        <description>
+     * The username to use for announcements.
+     </description>
     </property>
 </type>

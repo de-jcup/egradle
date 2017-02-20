@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.buildinit.tasks.InitBuild" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description> 
- Generates a Gradle project structure. 
-</description>
+<type language="gradle" name="org.gradle.buildinit.tasks.InitBuild" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description>
+ * Generates a Gradle project structure.
+ </description>
     <method name="apply" returnType="java.lang.String">
         <parameter type="java.lang.String" name="input"/>
     </method>
@@ -10,18 +10,18 @@
     <method name="getAvailableTestFrameworks" returnType="java.util.List"/>
     <method name="getProjectLayoutRegistry" returnType="org.gradle.buildinit.plugins.internal.ProjectLayoutSetupRegistry"/>
     <method name="getTestFramework" returnType="java.lang.String">
-        <description> 
- Alternative test framework to be used in the generated project. 
- 
- This property can be set via command-line option '--test-framework' 
-</description>
+        <description>
+     * Alternative test framework to be used in the generated project.
+     *
+     * This property can be set via command-line option '--test-framework'
+     </description>
     </method>
     <method name="getType" returnType="java.lang.String">
-        <description> 
- The desired type of build to create, defaults to 'pom' if 'pom.xml' is found in project root if no pom.xml is found, it defaults to 'basic'. 
- 
- This property can be set via command-line option '--type'. 
-</description>
+        <description>
+     * The desired type of build to create, defaults to 'pom' if 'pom.xml' is found in project root if no pom.xml is found, it defaults to 'basic'.
+     *
+     * This property can be set via command-line option '--type'.
+     </description>
     </method>
     <method name="setProjectLayoutRegistry" returnType="void">
         <parameter type="org.gradle.buildinit.plugins.internal.ProjectLayoutSetupRegistry" name="projectLayoutRegistry"/>
@@ -37,17 +37,17 @@
     <property name="availableTestFrameworks" type="java.util.List"/>
     <property name="projectLayoutRegistry" type="org.gradle.buildinit.plugins.internal.ProjectLayoutSetupRegistry"/>
     <property name="testFramework" type="java.lang.String" documented="true">
-        <description> 
- Alternative test framework to be used in the generated project. 
- 
- This property can be set via command-line option '--test-framework' 
-</description>
+        <description>
+     * Alternative test framework to be used in the generated project.
+     *
+     * This property can be set via command-line option '--test-framework'
+     </description>
     </property>
     <property name="type" type="java.lang.String" documented="true">
-        <description> 
- The desired type of build to create, defaults to 'pom' if 'pom.xml' is found in project root if no pom.xml is found, it defaults to 'basic'. 
- 
- This property can be set via command-line option '--type'. 
-</description>
+        <description>
+     * The desired type of build to create, defaults to 'pom' if 'pom.xml' is found in project root if no pom.xml is found, it defaults to 'basic'.
+     *
+     * This property can be set via command-line option '--type'.
+     </description>
     </property>
 </type>

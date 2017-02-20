@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ear.EarPluginConvention" version="3.0">
-    <description> 
- Ear Plugin Convention. 
-</description>
+<type language="gradle" name="org.gradle.plugins.ear.EarPluginConvention" version="3.0" documented="true">
+    <description>
+ * Ear Plugin Convention.
+ </description>
     <method name="appDirName" returnType="void" documented="true">
-        <description> 
- Allows changing the application directory. 
- Default is "src/main/application". 
-</description>
+        <description>
+     * Allows changing the application directory.
+     * Default is "src/main/application".
+     </description>
         <parameter type="java.lang.String" name="appDirName"/>
     </method>
-    <method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.EarPluginConvention" delegationTarget="DeploymentDescriptor" documented="true">
-        <description> 
- Configures the deployment descriptor for this EAR archive. 
- 
- &lt;p&gt;The given closure is executed to configure the deployment descriptor. 
- The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; is passed to the closure as its delegate.&lt;/p&gt; 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure. 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This. 
-</description>
+    <method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.EarPluginConvention" delegationTarget="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" documented="true">
+        <description>
+     * Configures the deployment descriptor for this EAR archive.
+     *
+     * &lt;p&gt;The given closure is executed to configure the deployment descriptor.
+     * The {@link DeploymentDescriptor} is passed to the closure as its delegate.&lt;/p&gt;
+     *
+     * @param configureClosure The closure.
+     * @return This.
+     </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="getAppDirName" returnType="java.lang.String">
-        <description> 
- The name of the application directory, relative to the project directory. 
- Default is "src/main/application". 
-</description>
+        <description>
+     * The name of the application directory, relative to the project directory.
+     * Default is "src/main/application".
+     </description>
     </method>
     <method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
-        <description> 
- A custom deployment descriptor configuration. 
- Default is an "application.xml" with sensible defaults. 
-</description>
+        <description>
+     * A custom deployment descriptor configuration.
+     * Default is an "application.xml" with sensible defaults.
+     </description>
     </method>
     <method name="getLibDirName" returnType="java.lang.String">
-        <description> 
- The name of the library directory in the EAR file. 
- Default is "lib". 
-</description>
+        <description>
+     * The name of the library directory in the EAR file.
+     * Default is "lib".
+     </description>
     </method>
     <method name="libDirName" returnType="void" documented="true">
-        <description> 
- Allows changing the library directory in the EAR file. Default is "lib". 
-</description>
+        <description>
+     * Allows changing the library directory in the EAR file. Default is "lib".
+     </description>
         <parameter type="java.lang.String" name="libDirName"/>
     </method>
     <method name="setAppDirName" returnType="void">
@@ -56,21 +56,21 @@
         <parameter type="java.lang.String" name="libDirName"/>
     </method>
     <property name="appDirName" type="java.lang.String" documented="true">
-        <description> 
- The name of the application directory, relative to the project directory. 
- Default is "src/main/application". 
-</description>
+        <description>
+     * The name of the application directory, relative to the project directory.
+     * Default is "src/main/application".
+     </description>
     </property>
     <property name="deploymentDescriptor" type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" documented="true">
-        <description> 
- A custom deployment descriptor configuration. 
- Default is an "application.xml" with sensible defaults. 
-</description>
+        <description>
+     * A custom deployment descriptor configuration.
+     * Default is an "application.xml" with sensible defaults.
+     </description>
     </property>
     <property name="libDirName" type="java.lang.String" documented="true">
-        <description> 
- The name of the library directory in the EAR file. 
- Default is "lib". 
-</description>
+        <description>
+     * The name of the library directory in the EAR file.
+     * Default is "lib".
+     </description>
     </property>
 </type>

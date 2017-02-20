@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin" version="3.0">
-    <description> 
- Adds the ability to publish in the Maven format to Maven repositories. 
- 
- @since 1.4 
-</description>
+    <description>
+ * Adds the ability to publish in the Maven format to Maven repositories.
+ *
+ * @since 1.4
+ </description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.model.Model" version="3.0">
-    <description> 
- Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation creates a new top level element in the model space. 
- &lt;p&gt; 
- The method must advertise a name and type for the model element. 
- The name is defined either by the name of the method, or the &lt;a href='type://Model#value'&gt;#value&lt;/a&gt; of this annotation. 
- The type is defined differently depending on whether the new element is &lt;a href='type://Managed'&gt;Managed&lt;/a&gt; or not. 
- 
- &lt;h3&gt;Creating managed model elements&lt;/h3&gt; 
- &lt;p&gt; 
- If the element is to be of a managed type, the method must return &lt;a href='type://void'&gt;void&lt;/a&gt; and receive the newly created instance as the &lt;b&gt;first&lt;/b&gt; parameter. 
- All other parameters are considered &lt;i&gt;inputs&lt;/i&gt;. 
- &lt;p&gt; 
- It is an error for a &lt;a href='type://@Model'&gt;@Model&lt;/a&gt; rule to return &lt;a href='type://void'&gt;void&lt;/a&gt; and specify a non-managed type as the first parameter. 
- It is an error for a &lt;a href='type://@Model'&gt;@Model&lt;/a&gt; rule to return &lt;a href='type://void'&gt;void&lt;/a&gt; and for the first parameter to be annotated with &lt;a href='type://Path'&gt;Path&lt;/a&gt;. 
- It is an error for a &lt;a href='type://@Model'&gt;@Model&lt;/a&gt; rule to specify a managed type as the return type. 
- 
- &lt;h3&gt;Creating non-managed model elements&lt;/h3&gt; 
- &lt;p&gt; 
- If the element is to be of a non-managed type, the method must return the newly created instance. 
- All parameters are considered &lt;i&gt;inputs&lt;/i&gt;. 
- 
- Please see &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; for more information on method rules. 
-</description>
+    <description>
+ * Denotes that the {@link RuleSource} method rule carrying this annotation creates a new top level element in the model space.
+ * &lt;p&gt;
+ * The method must advertise a name and type for the model element.
+ * The name is defined either by the name of the method, or the {@link #value} of this annotation.
+ * The type is defined differently depending on whether the new element is {@link Managed} or not.
+
+ * &lt;h3&gt;Creating managed model elements&lt;/h3&gt;
+ * &lt;p&gt;
+ * If the element is to be of a managed type, the method must return {@code void} and receive the newly created instance as the &lt;b&gt;first&lt;/b&gt; parameter.
+ * All other parameters are considered &lt;i&gt;inputs&lt;/i&gt;.
+ * &lt;p&gt;
+ * It is an error for a {@code @Model} rule to return {@code void} and specify a non-managed type as the first parameter.
+ * It is an error for a {@code @Model} rule to return {@code void} and for the first parameter to be annotated with {@link Path}.
+ * It is an error for a {@code @Model} rule to specify a managed type as the return type.
+
+ * &lt;h3&gt;Creating non-managed model elements&lt;/h3&gt;
+ * &lt;p&gt;
+ * If the element is to be of a non-managed type, the method must return the newly created instance.
+ * All parameters are considered &lt;i&gt;inputs&lt;/i&gt;.
+ *
+ * Please see {@link RuleSource} for more information on method rules.
+ </description>
 </type>

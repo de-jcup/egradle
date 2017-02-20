@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type interface="true" language="gradle" name="org.gradle.api.resources.ResourceHandler" version="3.0">
-    <description> 
- Provides access to resource-specific utility methods, for example factory methods that create various resources. 
-</description>
+<type interface="true" language="gradle" name="org.gradle.api.resources.ResourceHandler" version="3.0" documented="true">
+    <description>
+ * Provides access to resource-specific utility methods, for example factory methods that create various resources.
+ </description>
     <method name="bzip2" returnType="org.gradle.api.resources.ReadableResource" documented="true">
-        <description> 
- Creates resource that points to a bzip2 compressed file at the given path. 
- The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
-</description>
+        <description>
+     * Creates resource that points to a bzip2 compressed file at the given path.
+     * The path is evaluated as per {@link org.gradle.api.Project#file(Object)}.
+     *
+     * @param path The path evaluated as per {@link org.gradle.api.Project#file(Object)}.
+     </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="getText" returnType="org.gradle.api.resources.TextResourceFactory" delegationTarget="TextResource">
-        <description> 
- Returns a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s from various sources such as 
- strings, files, and archive entries. 
- 
- @since 2.2 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s 
-</description>
+    <method name="getText" returnType="org.gradle.api.resources.TextResourceFactory">
+        <description>
+     * Returns a factory for creating {@code TextResource}s from various sources such as
+     * strings, files, and archive entries.
+     *
+     * @since 2.2
+     *
+     * @return a factory for creating {@code TextResource}s
+     </description>
     </method>
     <method name="gzip" returnType="org.gradle.api.resources.ReadableResource" documented="true">
-        <description> 
- Creates resource that points to a gzip compressed file at the given path. 
- The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
- 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. 
-</description>
+        <description>
+     * Creates resource that points to a gzip compressed file at the given path.
+     * The path is evaluated as per {@link org.gradle.api.Project#file(Object)}.
+     *
+     * @param path The path evaluated as per {@link org.gradle.api.Project#file(Object)}.
+     </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
     <property name="text" type="org.gradle.api.resources.TextResourceFactory" documented="true">
-        <description> 
- Returns a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s from various sources such as 
- strings, files, and archive entries. 
- 
- @since 2.2 
- 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s 
-</description>
+        <description>
+     * Returns a factory for creating {@code TextResource}s from various sources such as
+     * strings, files, and archive entries.
+     *
+     * @since 2.2
+     *
+     * @return a factory for creating {@code TextResource}s
+     </description>
     </property>
 </type>
