@@ -20,6 +20,135 @@ public class MethodUtilsTest {
 		parameters = new ArrayList<>();
 		when(method.getParameters()).thenReturn(parameters);
 	}
+	
+	@Test
+	public void has_same_signature__true__for_same() {
+		/* prepare */
+		when(method.getName()).thenReturn("myMethod");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+
+		Parameter param2 = mock(Parameter.class);
+		when(param2.getTypeAsString()).thenReturn("Object");
+		when(param2.getName()).thenReturn("data");
+		parameters.add(param2);
+
+		Parameter param3 = mock(Parameter.class);
+		when(param3.getTypeAsString()).thenReturn("int");
+		when(param3.getName()).thenReturn("size");
+		parameters.add(param3);
+		
+		Method method2b = mock(Method.class);
+		List<Parameter> parameters2b = new ArrayList<>();
+		when(method2b.getParameters()).thenReturn(parameters2b);
+		
+		when(method2b.getName()).thenReturn("myMethod");
+		Parameter param1b = mock(Parameter.class);
+		when(param1b.getTypeAsString()).thenReturn("String");
+		when(param1b.getName()).thenReturn("name");
+		parameters2b.add(param1b);
+
+		Parameter param2b = mock(Parameter.class);
+		when(param2b.getTypeAsString()).thenReturn("Object");
+		when(param2b.getName()).thenReturn("data2b");
+		parameters2b.add(param2b);
+
+		Parameter param3b = mock(Parameter.class);
+		when(param3b.getTypeAsString()).thenReturn("int");
+		when(param3b.getName()).thenReturn("size");
+		parameters2b.add(param3b);
+
+		/* execute + test */
+		assertEquals(true,MethodUtils.haveSameSignatures(method, method2b));
+	}
+	
+	@Test
+	public void has_same_signature__true__for_same__except_one_param_has_other_type() {
+		/* prepare */
+		when(method.getName()).thenReturn("myMethod");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+
+		Parameter param2 = mock(Parameter.class);
+		when(param2.getTypeAsString()).thenReturn("Object");
+		when(param2.getName()).thenReturn("data");
+		parameters.add(param2);
+
+		Parameter param3 = mock(Parameter.class);
+		when(param3.getTypeAsString()).thenReturn("int");
+		when(param3.getName()).thenReturn("size");
+		parameters.add(param3);
+		
+		Method method2b = mock(Method.class);
+		List<Parameter> parameters2b = new ArrayList<>();
+		when(method2b.getParameters()).thenReturn(parameters2b);
+		
+		when(method2b.getName()).thenReturn("myMethod");
+		Parameter param1b = mock(Parameter.class);
+		when(param1b.getTypeAsString()).thenReturn("String");
+		when(param1b.getName()).thenReturn("name");
+		parameters2b.add(param1b);
+
+		Parameter param2b = mock(Parameter.class);
+		when(param2b.getTypeAsString()).thenReturn("String"); // other type
+		when(param2b.getName()).thenReturn("data");
+		parameters2b.add(param2b);
+
+		Parameter param3b = mock(Parameter.class);
+		when(param3b.getTypeAsString()).thenReturn("int");
+		when(param3b.getName()).thenReturn("size");
+		parameters2b.add(param3b);
+
+		/* execute + test */
+		assertEquals(false,MethodUtils.haveSameSignatures(method, method2b));
+	}
+	
+	@Test
+	public void has_same_signature__false__for_same_expect_name() {
+		/* prepare */
+		when(method.getName()).thenReturn("myMethod");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+
+		Parameter param2 = mock(Parameter.class);
+		when(param2.getTypeAsString()).thenReturn("Object");
+		when(param2.getName()).thenReturn("data");
+		parameters.add(param2);
+
+		Parameter param3 = mock(Parameter.class);
+		when(param3.getTypeAsString()).thenReturn("int");
+		when(param3.getName()).thenReturn("size");
+		parameters.add(param3);
+		
+		Method method2b = mock(Method.class);
+		List<Parameter> parameters2b = new ArrayList<>();
+		when(method2b.getParameters()).thenReturn(parameters2b);
+		
+		when(method2b.getName()).thenReturn("myMethodNot");
+		Parameter param1b = mock(Parameter.class);
+		when(param1b.getTypeAsString()).thenReturn("String");
+		when(param1b.getName()).thenReturn("name");
+		parameters2b.add(param1b);
+
+		Parameter param2b = mock(Parameter.class);
+		when(param2b.getTypeAsString()).thenReturn("Object");
+		when(param2b.getName()).thenReturn("data");
+		parameters2b.add(param2b);
+
+		Parameter param3b = mock(Parameter.class);
+		when(param3b.getTypeAsString()).thenReturn("int");
+		when(param3b.getName()).thenReturn("size");
+		parameters2b.add(param3b);
+
+		/* execute + test */
+		assertEquals(false,MethodUtils.haveSameSignatures(method, method2b));
+	}
 
 	@Test
 	public void createSignature_method_myMethod_with_no_param__methodSignatureCorrect() {

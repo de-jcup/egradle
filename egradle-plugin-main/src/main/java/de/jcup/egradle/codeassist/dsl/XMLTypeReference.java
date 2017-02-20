@@ -26,6 +26,9 @@ public class XMLTypeReference implements ModifiableTypeReference {
 	@Override
 	public void setType(Type returnType) {
 		this.type = returnType;
+		if (type!=null){
+			this.typeAsString=type.getName();
+		}
 	}
 
 	@Override

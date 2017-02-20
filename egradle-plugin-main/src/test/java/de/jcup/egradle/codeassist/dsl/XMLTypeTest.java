@@ -102,6 +102,28 @@ public class XMLTypeTest {
 		assertTrue(interfaces.contains(referenceType5));
 	}
 	
+
+	@Test
+	public void a_type_which_is_an_interface_returns_also_its_superinterface_when_get_interfaces_is_called(){
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		when(superType1.getName()).thenReturn("test.Super1");
+		when(superType1.isInterface()).thenReturn(true);
+		
+		/* execute */
+		typeToTest.isInterface=true;
+		typeToTest.inheritFrom(superType1);
+		
+		/* test */
+		Set<TypeReference> interfaces = typeToTest.getInterfaces();
+		assertNotNull(interfaces);
+		assertEquals(1, interfaces.size());
+
+		TypeReference ref = interfaces.iterator().next();
+		assertEquals("test.Super1", ref.getTypeAsString());
+		
+	}
+	
 	
 	@Test
 	public void type1_extends_type2_so_type1_is_descendant_of_type2(){

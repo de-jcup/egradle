@@ -2,6 +2,7 @@ package de.jcup.egradle.codeassist.dsl;
 
 import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -181,6 +182,57 @@ public class MethodUtils {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Check if methods have same signature. Having any null values will result in <code>false</code> as result!
+	 * @param method1
+	 * @param method2
+	 * @return result
+	 */
+	public static boolean haveSameSignatures(Method method1, Method method2) {
+		if (method1==null){
+			return false;
+		}
+		if (method2==null){
+			return false;
+		}
+		String name1 = method1.getName();
+		String name2 = method2.getName();
+		
+		if (name1==null){
+			name1="";
+		}
+		if (name2==null){
+			name2="";
+		}
+		
+		if (! name1.equals(name2)){
+			return false;
+		}
+		List<Parameter> parameters1 = method1.getParameters();
+		List<Parameter> parameters2 = method2.getParameters();
+		
+		if (parameters1.size()!=parameters2.size()){
+			return false;
+		}
+		Iterator<Parameter> p2iterator = parameters2.iterator();
+		for (Parameter p1: parameters1){
+			Parameter p2 = p2iterator.next();
+			String p1t = p1.getTypeAsString();
+			String p2t = p2.getTypeAsString();
+			if (p1t==null){
+				return false;
+			}
+			if (p2t==null){
+				return false;
+			}
+			if (!p1t.equals(p2t)){
+				return false;
+			}
+		}
+		return true;
+		
 	}
 
 }

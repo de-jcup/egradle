@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 public class XMLType implements ModifiableType {
 
 	@XmlAttribute(name = "interface")
-	private Boolean _interface;
+	Boolean isInterface;
 	
 	@XmlElement(name = "description")
 	private String description;
@@ -183,6 +183,11 @@ public class XMLType implements ModifiableType {
 		this.mergedInterfaces=new TreeSet<>(interfaces);
 		Set<TypeReference> superInterfaceReferrences = superType.getInterfaces();
 		this.mergedInterfaces.addAll(superInterfaceReferrences);
+		if (superType.isInterface()){
+			XMLTypeReference reference = new XMLTypeReference();
+			reference.setType(superType);
+			this.mergedInterfaces.add(reference);
+		}
 		
 		this.mergedMethods=new TreeSet<>(methods);
 		Set<Method> superMethods = superType.getMethods();
@@ -230,10 +235,10 @@ public class XMLType implements ModifiableType {
 	@Override
 	public boolean isInterface() {
 		/* jaxb hack to suppress xyz="false" attributes */
-		if (_interface==null){
+		if (isInterface==null){
 			return false;
 		}
-		return _interface.booleanValue();
+		return isInterface.booleanValue();
 	}
 	
 	public Set<TypeReference> getInterfaces() {
@@ -266,7 +271,7 @@ public class XMLType implements ModifiableType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (_interface ? 1231 : 1237);
+		result = prime * result + ((isInterface!=null && isInterface.booleanValue()) ? 1231 : 1237);
 		result = prime * result + ((interfaces == null) ? 0 : interfaces.hashCode());
 		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + ((methods == null) ? 0 : methods.hashCode());
@@ -286,7 +291,7 @@ public class XMLType implements ModifiableType {
 		if (getClass() != obj.getClass())
 			return false;
 		XMLType other = (XMLType) obj;
-		if (_interface != other._interface)
+		if (isInterface != other.isInterface)
 			return false;
 		if (interfaces == null) {
 			if (other.interfaces != null)

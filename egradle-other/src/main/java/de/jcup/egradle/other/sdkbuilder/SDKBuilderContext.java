@@ -34,7 +34,8 @@ public class SDKBuilderContext {
 	int methodWithOutDescriptionCount;
 	int methodAllCount;
 
-	Set<String> allTypes = new TreeSet<>();
+	Map<String,File> allTypes = new TreeMap<>();
+	File alternativeAPiMappingFile;
 
 	/* only for test */
 	SDKBuilderContext(){
@@ -78,6 +79,7 @@ public class SDKBuilderContext {
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
 		
 		sdkInfoFile=new File(targetPathDirectory,SDKInfo.FILENAME);
+		alternativeAPiMappingFile=new File(targetPathDirectory, "alternative-api-mapping.txt");
 	}
 
 	public String getInfo() {

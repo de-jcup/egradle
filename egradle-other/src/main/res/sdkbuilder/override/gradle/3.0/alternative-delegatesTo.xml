@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overrides>
+	<!-- 
+	
+		contains type override data where delegationTarget is set manually. Will be merged in loaded results and always override settings
+		Data should be merged before any child delegation target calculation is done, so its enough to set information on an interface 
+		so childs delegation target can be calculated by SDK builder. reduces override settings
+		
+		A typical approach is to scan for @groovy.lang.DelegatesTo inside gradle sources and do it manually here. This annotation is - currently - not often used, and
+		as long as EGradle does not startup Gradle binary and does a runtime analysis of classes (or ASM scannig) this is a very lightweight approach
+		to markup missing parts.
+		
+	 -->
+	<type name="org.gradle.api.file.CopyProcessingSpec" version="3.0">
+		 <method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="org.gradle.api.file.FileCopyDetails">
+		        <parameter type="groovy.lang.Closure" name="closure"/>
+		 </method>
+	 </type>
+</overrides>

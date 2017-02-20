@@ -30,6 +30,7 @@ import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
 import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
 import de.jcup.egradle.codeassist.dsl.Parameter;
@@ -37,6 +38,7 @@ import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Task;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
@@ -49,8 +51,6 @@ import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.codeassist.dsl.XMLTypeExporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.core.api.AbstractErrorHandler;
-import de.jcup.egradle.core.api.ErrorHandler;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -104,13 +104,15 @@ public class SDKBuilder {
 	SDKBuilder() {
 
 	}
+	OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
 
-	private XMLTypeImporter typeImporter = new XMLTypeImporter();
-	private XMLTypeExporter typeExporter = new XMLTypeExporter();
-	private OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
+	XMLTypeImporter typeImporter = new XMLTypeImporter();
+	XMLTypeExporter typeExporter = new XMLTypeExporter();
 
 	XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
 	XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
+	ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+	
 	private String pathTorGradleRootProjectFolder;
 
 	public SDKBuilder(String pathTorGradleRootProjectFolder) {
@@ -121,26 +123,35 @@ public class SDKBuilder {
 		SDKBuilderContext context = new SDKBuilderContext(pathTorGradleRootProjectFolder, targetRootDirectory,
 				gradleVersion);
 
-		/* delete old sdk */
-		if (context.targetPathDirectory.exists()) {
-			System.out.println(
-					"Target directory exists - will be deleted before:" + context.targetPathDirectory.getCanonicalPath());
-			FileUtils.deleteDirectory(context.targetPathDirectory);
-		}
-		context.targetPathDirectory.mkdirs();
-
+		prepareSDKFolder(context);
 		
 		/* be aware: at this moment the alternative mappings are not created and the source is not SDK but gradle */
-		FilesystemFileLoader loader = new FilesystemFileLoader(new XMLTypeImporter(), new XMLPluginsImporter(), new ApiMappingImporter());
-		loader.setDSLFolder(context.sourceParentDirectory);
-		GradleDSLTypeProvider originGradleFilesProvider = new GradleDSLTypeProvider(loader);
+		FilesystemFileLoader beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		beforeGenerationLoader.setDSLFolder(context.sourceParentDirectory);
+		GradleDSLTypeProvider originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
 		
+		XMLDSLTypeOverridesImporter overridesImporter = new XMLDSLTypeOverridesImporter();
+		File alternativeOverriesFile = new File(PARENT_OF_RES,
+				"sdkbuilder/override/gradle/" + context.sdkInfo.getGradleVersion() + "/alternative-delegatesTo.xml");
 		
-		handleApiMappingAndTargetEstimation(originGradleFilesProvider,context);
+		XMLDSLTypeOverrides overrides = null;
+		try(FileInputStream fis = new FileInputStream(alternativeOverriesFile)){
+			overrides = overridesImporter.importOverrides(fis);
+		}
+		inspectAndMapFilesAndAdopt(originGradleFilesProvider,overrides, context);
 		handlePlugins(context);
-
-		startTaskDataEstimation(context);
-
+		
+		/* generation is done now*/
+		
+		FilesystemFileLoader afterGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		afterGenerationLoader.setDSLFolder(context.targetPathDirectory);
+		GradleDSLTypeProvider afterGenerationProvider = new GradleDSLTypeProvider(afterGenerationLoader);
+		
+		startTaskDataEstimation(afterGenerationProvider, context);
+		estimateStillMissingDelegationTargets_byJavaDoc(afterGenerationProvider,context);
+		
+		exportAllTypesAgain(context, afterGenerationProvider);
+		
 		writeTasksFile(context);
 
 		System.out.println("- info:" + context.getInfo());
@@ -151,10 +162,30 @@ public class SDKBuilder {
 		return context;
 	}
 
+	private void prepareSDKFolder(SDKBuilderContext context) throws IOException {
+		/* delete old sdk */
+		if (context.targetPathDirectory.exists()) {
+			System.out.println(
+					"Target directory exists - will be deleted before:" + context.targetPathDirectory.getCanonicalPath());
+			FileUtils.deleteDirectory(context.targetPathDirectory);
+		}
+		context.targetPathDirectory.mkdirs();
+	}
+
+	private void exportAllTypesAgain(SDKBuilderContext context, GradleDSLTypeProvider provider)
+			throws IOException, FileNotFoundException {
+		for (String typeName : context.allTypes.keySet()) {
+			Type type=provider.getType(typeName);
+			try(FileOutputStream fos = new FileOutputStream(context.allTypes.get(typeName))){
+				typeExporter.exportType((XMLType) type, fos);
+			}
+		}
+	}
+
 	
 
 
-	private SDKBuilderContext handleApiMappingAndTargetEstimation(GradleDSLTypeProvider originGradleFilesProvider, SDKBuilderContext context) throws IOException {
+	private SDKBuilderContext inspectAndMapFilesAndAdopt(GradleDSLTypeProvider originGradleFilesProvider, XMLDSLTypeOverrides overrides, SDKBuilderContext context) throws IOException {
 		System.out.println("- copy api mappings");
 		File sourceParentDirectory = context.sourceParentDirectory;
 		File targetPathDirectory = context.targetPathDirectory;
@@ -167,7 +198,7 @@ public class SDKBuilder {
 		 * in orgin mapping file!
 		 */
 		Map<String, String> alternativeApiMapping = new TreeMap<>();
-		inspectFilesAndAdopt(originGradleFilesProvider,alternativeApiMapping, sourceParentDirectory, targetPathDirectory, context);
+		inspectFilesAndAdopt(overrides, originGradleFilesProvider,alternativeApiMapping, sourceParentDirectory, targetPathDirectory, context);
 		System.out.println("- generate alternative api mapping file");
 		StringBuilder sb = new StringBuilder();
 		boolean first = true;
@@ -182,7 +213,7 @@ public class SDKBuilder {
 			sb.append(alternativeApiMapping.get(shortName));
 			sb.append(';');
 		}
-		File alternativeApiMappingFile = new File(targetPathDirectory, "alternative-api-mapping.txt");
+		File alternativeApiMappingFile = context.alternativeAPiMappingFile;
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(alternativeApiMappingFile))) {
 			bw.write(sb.toString());
 		}
@@ -278,17 +309,24 @@ public class SDKBuilder {
 
 	}
 
-	private void startTaskDataEstimation(SDKBuilderContext context) {
+	private void startTaskDataEstimation(GradleDSLTypeProvider provider, SDKBuilderContext context) throws IOException{
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- start task data estimation");
-		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
-		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		loader.setDSLFolder(context.targetPathDirectory);
-		GradleDSLTypeProvider provider = new GradleDSLTypeProvider(loader);
-		for (String typeName : context.allTypes) {
+		
+		for (String typeName : context.allTypes.keySet()) {
 			tryToResolveTask(context, provider, typeName);
 		}
+		
+	}
+	private void estimateStillMissingDelegationTargets_byJavaDoc(GradleDSLTypeProvider provider, SDKBuilderContext context) throws IOException{
+		/* now load the xml files as type data - and inspect all descriptions */
+		System.out.println("- estimate still missing estimation targets my javadoc ");
+		
+		for (String typeName : context.allTypes.keySet()) {
+			Type type=provider.getType(typeName);
+			estimateDelegateTargets_by_javdoc(type,context);
+		}
+		
 	}
 
 	/**
@@ -348,7 +386,7 @@ public class SDKBuilder {
 	}
 
 	
-	private void inspectFilesAndAdopt(GradleDSLTypeProvider originGradleFilesProvider, Map<String, String> alternativeApiMapping, File sourceDir,
+	private void inspectFilesAndAdopt(XMLDSLTypeOverrides overrides, GradleDSLTypeProvider originGradleFilesProvider, Map<String, String> alternativeApiMapping, File sourceDir,
 			File targetDir, SDKBuilderContext context) throws IOException {
 		File[] listFiles = sourceDir.listFiles(new FileFilter() {
 
@@ -364,12 +402,14 @@ public class SDKBuilder {
 					}
 				});
 		
+		
+		
 		for (File newSourceFile : listFiles) {
 			
 			String name = newSourceFile.getName();
 			if (newSourceFile.isDirectory()) {
 				File newTargetDir = new File(targetDir, name);
-				inspectFilesAndAdopt(originGradleFilesProvider, alternativeApiMapping, newSourceFile, newTargetDir, context);
+				inspectFilesAndAdopt(overrides, originGradleFilesProvider, alternativeApiMapping, newSourceFile, newTargetDir, context);
 			} else if (newSourceFile.isFile()) {
 				File newTargetFile = new File(targetDir, name);
 
@@ -383,7 +423,7 @@ public class SDKBuilder {
 				ignore = ignore | targetFileName.endsWith("plugins.xml");
 
 				if (!ignore) {
-					handleMetaInformation(originGradleFilesProvider,newTargetFile, context);
+					handleMetaInformation(overrides, originGradleFilesProvider,newTargetFile, context);
 				}
 			}
 		}
@@ -395,13 +435,14 @@ public class SDKBuilder {
 	 * 	<li>delegate targets</li>
 	 * <li>documented or not identifications/merge</li>
 	 * </ul>
+	 * @param overrides 
 	 * @param provider 
 	 * @param newTargetFile
 	 * @param context
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	private void handleMetaInformation(GradleDSLTypeProvider provider, File newTargetFile, SDKBuilderContext context)
+	private void handleMetaInformation(XMLDSLTypeOverrides overrides, GradleDSLTypeProvider provider, File newTargetFile, SDKBuilderContext context)
 			throws IOException, FileNotFoundException {
 		try {
 			XMLType type2 = null;
@@ -411,26 +452,30 @@ public class SDKBuilder {
 
 			}
 			
-			
 			if (type2 == null) {
 				throw new IllegalStateException("was not able to read type:" + newTargetFile);
 			}
+			
+			
 			String typeName= type2.getName();
+			context.allTypes.put(type2.getName(),newTargetFile);
 			/* why so complicated - the provider has data already combined (so super class etc. is available). and typ2 is necessary, because 
 			 * I am too lazy to do name resolving again
 			 */
 			XMLType type = (XMLType) provider.getType(typeName);
+			
+			
+			
+			handleOverrides(type,overrides);
+			/* FIXME ATR, 21.02.2017: this is still a problem: the next stepp will try to calculate missing delegates -when interface 
+			 * calculation shall be done and override is first, all parts have to be overriden BEFORE all!  */
 			/*
 			 * calculate missing delegate targets 
 			 */
 			calculateStillMissingDelegateTargets(type, context);
 			
-			if (false){
-				/* last chance - when not already handled try with javadoc - ugly but it works */
-				estimateDelegateTargets_by_javdoc(type,context);
-			}
+			/* FIXME ATR, 21.02.2017: refactor this. this is mess!! */
 			
-			context.allTypes.add(type.getName());
 			try (FileOutputStream outputStream = new FileOutputStream(newTargetFile)) {
 				String name = type.getName();
 				File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/"+name+".xml");
@@ -446,6 +491,31 @@ public class SDKBuilder {
 			}
 		} catch (IOException e) {
 			throw new IOException("Problems with file:" + newTargetFile.getAbsolutePath(), e);
+		}
+	}
+
+	void handleOverrides(XMLType type, XMLDSLTypeOverrides overrides) {
+		for (XMLType overriden: overrides.getOverrideTypes()){
+			if (overriden.getName().equals(type.getName())){
+				handleOverrideDelegationTarget(type,overriden);
+			}
+		}
+		
+	}
+
+	private void handleOverrideDelegationTarget(XMLType type, XMLType overriden) {
+		Set<Method> overridenMethods = overriden.getMethods();
+		for (Method overridenMethod: overridenMethods){
+			for (Method method: type.getDefinedMethods()){
+				if (!(method instanceof ModifiableMethod)) {
+					continue;
+				}
+				if (MethodUtils.haveSameSignatures(method, overridenMethod)){
+					ModifiableMethod xmlMethod = (ModifiableMethod) method;
+					xmlMethod.setDelegationTargetAsString(overridenMethod.getDelegationTargetAsString());
+					
+				}
+			}
 		}
 	}
 
@@ -558,45 +628,49 @@ public class SDKBuilder {
 		}
 
 	}
-	
+	/**
+	 * Estimates delegation targets by javadoc. will be only done for method having a closure inside!
+	 * @param type
+	 * @param context
+	 */
 	void estimateDelegateTargets_by_javdoc(Type type, SDKBuilderContext context) {
+		estimateDelegateTargets_by_javdoc(type, context,true);
+	}
+	/**
+	 * Estimates delegation targets by javadoc. 
+	 * @param type
+	 * @param context
+	 * @param checkOnlyClosures when <code>true</code> only methods with containing closures inside will be estimated
+	 */
+	void estimateDelegateTargets_by_javdoc(Type type, SDKBuilderContext context, boolean checkOnlyClosures) {
 		int problemCount = 0;
 		StringBuilder problems = new StringBuilder();
-		for (Method m : type.getMethods()) {
+		for (Method m : type.getDefinedMethods()) {
 			if (!(m instanceof XMLMethod)) {
 				continue;
 			}
 			context.methodAllCount++;
 			XMLMethod method = (XMLMethod) m;
-			String delegationTarget = method.getDelegationTargetAsString();
+			String delegationTarget = m.getDelegationTargetAsString();
 			if (!StringUtils.isBlank(delegationTarget)) {
 				continue;// already set
 			}
-//			List<Parameter> parameters = method.getParameters();
-//			if (parameters.size()!=1){
-//				continue;
-//			}
-//			Parameter firstParam = parameters.iterator().next();
-//			if (! firstParam.getTypeAsString().equals("groovy.lang.Closure")){
-//				continue;
-//			}
+			if (checkOnlyClosures && !MethodUtils.hasGroovyClosureAsParameter(method)){
+				continue;
+			}
 			String description = method.getDescription();
 			if (description == null) {
+				/* not resolvable */
 				problemCount++;
 				problems.append(method.getName());
 				problems.append(" ");
 				continue;
 			}
-			String targetType = null;
-			int index = 0;
-			while (targetType == null && index != -1) {
-				int from = index + 1;
-				index = StringUtils.indexOf(description, HYPERLINK_TYPE_PREFIX, from);
-				if (index != -1) {
-					targetType = inspect(index, description);
-				}
+			if (description.indexOf(HYPERLINK_TYPE_PREFIX)==-1){
+				/* fetch interfaces */
+				description = fetchDescriptionFromInterfaces(type, method);
 			}
-
+			String targetType = inspectTargetTypeByDescription(description);
 			if (targetType != null) {
 				method.setDelegationTargetAsString(targetType);
 			}
@@ -608,6 +682,51 @@ public class SDKBuilder {
 			context.methodWithOutDescriptionCount += problemCount;
 		}
 
+	}
+
+	private String inspectTargetTypeByDescription(String description) {
+		if (description==null){
+			return null;
+		}
+		String targetType =null;
+		int index = 0;
+		while (targetType == null && index != -1) {
+			int from = index + 1;
+			index = StringUtils.indexOf(description, HYPERLINK_TYPE_PREFIX, from);
+			if (index != -1) {
+				targetType = inspect(index, description);
+			}
+		}
+		return targetType;
+	}
+
+	private String fetchDescriptionFromInterfaces(Type type, XMLMethod method) {
+		Set<TypeReference> interfaces = type.getInterfaces();
+		for (TypeReference interfaceReference: interfaces){
+			Type _interface = interfaceReference.getType();
+			if (_interface==null){
+				/* can happen - e.g. for java.util.Set...*/
+				continue;
+			}
+			for (Method m2 :_interface.getDefinedMethods()){
+				if (!MethodUtils.haveSameSignatures(m2,method)){
+					continue;
+				}
+				String description = m2.getDescription();
+				if (description == null) {
+					continue;
+				}
+				if (description.indexOf("@inheritDoc")!=-1){
+					continue;
+				}
+				if (description.indexOf(HYPERLINK_TYPE_PREFIX)==-1){
+					continue;
+				}
+				/* description found - use it!*/
+				return description;
+			}
+		}
+		return null;
 	}
 
 	private String scanProperties(Type type, String methodName) {

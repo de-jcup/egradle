@@ -3,7 +3,7 @@
     <description>
  * Specifies the destination of a copy.
  </description>
-    <method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec">
+    <method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="org.gradle.api.file.FileCopyDetails">
         <description>
      * Adds an action to be applied to each file as it about to be copied into its destination. The given closure is
      * called with a {@link org.gradle.api.file.FileCopyDetails} as its parameter. Actions are executed in the order
