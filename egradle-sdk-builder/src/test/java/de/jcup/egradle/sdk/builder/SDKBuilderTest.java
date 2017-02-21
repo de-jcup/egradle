@@ -22,12 +22,13 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
-import de.jcup.egradle.sdk.builder.LineResolver;
-import de.jcup.egradle.sdk.builder.SDKBuilder;
+import de.jcup.egradle.sdk.builder.OldSDKBuilder;
 import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.util.LineResolver;
 
 public class SDKBuilderTest {
-	private SDKBuilder sdkBuilderToTest;
+	/* FIXME ATR, 21.02.2017: adopt this test case to explicit action instea of old sdk builder */
+	private OldSDKBuilder sdkBuilderToTest;
 	private SDKBuilderContext context;
 
 	/*
@@ -37,7 +38,7 @@ public class SDKBuilderTest {
 	 */
 	@Before
 	public void before() {
-		sdkBuilderToTest = new SDKBuilder();
+		sdkBuilderToTest = new OldSDKBuilder();
 		context = mock(SDKBuilderContext.class);
 	}
 

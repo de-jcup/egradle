@@ -8,12 +8,25 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
+import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
+import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.codeassist.dsl.XMLPlugins;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsExporter;
+import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
+import de.jcup.egradle.codeassist.dsl.XMLTypeExporter;
+import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.sdk.SDKInfo;
+import de.jcup.egradle.sdk.builder.model.OriginXMLDSlTypeInfoImporter;
 import de.jcup.egradle.sdk.internal.XMLSDKInfo;
 import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
 
 public class SDKBuilderContext {
+	
+	public File PARENT_OF_RES = new File("egradle-other/src/main/res/");
+		
+	Map<String, String> alternativeApiMapping = new TreeMap<>();
 	File sdkInfoFile;
 	XMLSDKInfo sdkInfo = new XMLSDKInfo();
 	
@@ -35,8 +48,37 @@ public class SDKBuilderContext {
 	Map<String,File> allTypes = new TreeMap<>();
 	File alternativeAPiMappingFile;
 
+	XMLTypeImporter typeImporter = new XMLTypeImporter();
+	XMLTypeExporter typeExporter = new XMLTypeExporter();
+
+	XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+	XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
+	ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+
+	OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
+
+	
+	XMLPlugins xmlPlugins;
+
+	XMLPlugins alternativeXMLPugins;
+
+	FilesystemFileLoader beforeGenerationLoader;
+
+	GradleDSLTypeProvider originGradleFilesProvider;
+	
 	/* only for test */
 	SDKBuilderContext(){
+		if (!PARENT_OF_RES.exists()) {
+			/*
+			 * fall back - so sdk builder could be run from gradle root project
+			 * as well via gradle from root project.
+			 */
+			PARENT_OF_RES = new File("src/main/res/");
+		}
+		
+		beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
+
 	}
 	
 	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
@@ -78,6 +120,9 @@ public class SDKBuilderContext {
 		
 		sdkInfoFile=new File(targetPathDirectory,SDKInfo.FILENAME);
 		alternativeAPiMappingFile=new File(targetPathDirectory, "alternative-api-mapping.txt");
+		
+		beforeGenerationLoader.setDSLFolder(sourceParentDirectory);
+		
 	}
 
 	public String getInfo() {

@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.model;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-public class XMLDSLTypeOverridesImporter {
+public class XMLDSLTypeInfoImporter {
 
 	/**
 	 * Import type info by given stream
@@ -16,12 +16,12 @@ public class XMLDSLTypeOverridesImporter {
 	 * @throws IOException
 	 * 
 	 */
-	public XMLDSLTypeOverrides importOverrides(InputStream stream) throws IOException{
+	public XMLDSLTypeDocumentation importTypeInfo(InputStream stream) throws IOException{
 		JAXBContext jc;
 		try {
-			jc = JAXBContext.newInstance(XMLDSLTypeOverrides.class);
+			jc = JAXBContext.newInstance(XMLDSLTypeDocumentation.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLDSLTypeOverrides loadedModel = (XMLDSLTypeOverrides) unmarshaller
+			XMLDSLTypeDocumentation loadedModel = (XMLDSLTypeDocumentation) unmarshaller
 					.unmarshal(stream);
 			return loadedModel;
 		} catch (JAXBException e) {

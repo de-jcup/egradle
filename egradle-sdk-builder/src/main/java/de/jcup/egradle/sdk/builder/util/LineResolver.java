@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.util;
 
 import java.io.IOException;
 

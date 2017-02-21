@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.model;
 
 import java.io.IOException;
 import java.io.OutputStream;
