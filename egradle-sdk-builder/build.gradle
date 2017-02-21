@@ -1,0 +1,10 @@
+
+
+dependencies {
+	compile library.commons_lang
+	compile library.commons_io
+	
+	compile project(':egradle-plugin-main')
+	compile project(':egradle-plugin-sdk')
+	
+}

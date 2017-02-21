@@ -1,4 +1,4 @@
-package de.jcup.egradle.other.sdkbuilder;
+package de.jcup.egradle.sdk.builder;
 
 import java.io.File;
 import java.io.FileInputStream;

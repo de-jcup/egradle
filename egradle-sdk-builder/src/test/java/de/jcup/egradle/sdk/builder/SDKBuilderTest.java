@@ -1,4 +1,4 @@
-package de.jcup.egradle.other.sdkbuilder;
+package de.jcup.egradle.sdk.builder;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -22,7 +22,9 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
-import de.jcup.egradle.other.OtherTestUtil;
+import de.jcup.egradle.sdk.builder.LineResolver;
+import de.jcup.egradle.sdk.builder.SDKBuilder;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
 
 public class SDKBuilderTest {
 	private SDKBuilder sdkBuilderToTest;
@@ -392,7 +394,7 @@ public class SDKBuilderTest {
 
 	@Test
 	public void testJavadocParamConversion4_loadFiles() throws Exception {
-		File file = new File(OtherTestUtil.PARENT_OF_TEST, "BuildListener.xml");
+		File file = new File(SDKBuilderTestUtil.PARENT_OF_TEST, "BuildListener.xml");
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			StringBuilder fullDescription = new StringBuilder();
 			sdkBuilderToTest.readLines(new HashMap<>(), file, fullDescription, new LineResolver() {
