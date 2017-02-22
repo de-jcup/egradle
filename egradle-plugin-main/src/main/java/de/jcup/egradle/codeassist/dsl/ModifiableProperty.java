@@ -7,4 +7,6 @@ public interface ModifiableProperty extends Property{
 	public void setParent(Type parentType);
 	
 	public void setDocumented(boolean partOfGradleDSLDocumentation);
+
+	public void setDescription(String description);
 }

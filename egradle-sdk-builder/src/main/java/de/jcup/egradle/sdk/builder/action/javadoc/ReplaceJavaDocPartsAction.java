@@ -1,95 +1,83 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.javadoc;
 
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
-import static java.nio.charset.StandardCharsets.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
-import de.jcup.egradle.sdk.builder.util.LineResolver;
+import de.jcup.egradle.codeassist.dsl.Method;
+import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
+import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
+import de.jcup.egradle.codeassist.dsl.ModifiableType;
+import de.jcup.egradle.codeassist.dsl.Property;
+import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
-public class TransformJavadocDescriptionsToNormalHTMLAction implements SDKBuilderAction {
+public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 
 	private static final String TYPE_PREFIX_WITHOUT_TYPE = DSLConstants.HYPERLINK_TYPE_PREFIX + "#";
 	private static final Pattern PATTERN_TYPE_PREFIX_WITHOUT_TYPE = Pattern.compile(TYPE_PREFIX_WITHOUT_TYPE);
 	
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		throw new IllegalStateException("implement me....");
-		/* FIXME ATR, 21.02.2017: keep on implementing! */
+		if (context.allTypes.isEmpty()){
+			throw new IllegalStateException("all types is empty!");
+		}
+		for (String typeName : context.allTypes.keySet()){
+			Type type = context.originGradleFilesProvider.getType(typeName);
+			handleTypeAndContentInside(type,context);
+		}
 	}
 
-	private String readAndAdopt(Map<String, String> alternativeApiMapping, File sourceFile) throws IOException {
-		StringBuilder fullDescription = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(new FileInputStream(sourceFile), UTF_8))) {
-			readLines(alternativeApiMapping, sourceFile, fullDescription, new LineResolver() {
-
-				public String getNextLine() throws IOException {
-					return reader.readLine();
-				}
-			});
+	private void handleTypeAndContentInside(Type type,SDKBuilderContext context) throws IOException{
+		if (type instanceof ModifiableType) {
+			ModifiableType modifiableType = (ModifiableType) type;
+			String description = buildNewDescription(type,type.getDescription(),context);
+			modifiableType.setDescription(description);
 		}
-		String replacedJavaDocParts = replaceJavaDocParts(fullDescription.toString());
-		replacedJavaDocParts = handleTypeLinksWithoutType(replacedJavaDocParts, sourceFile);
-		return replacedJavaDocParts;
+		
+		for (Method method: type.getDefinedMethods()){
+			if (method instanceof ModifiableMethod) {
+				ModifiableMethod modifiableMethod = (ModifiableMethod) method;
+				String description = buildNewDescription(type, method.getDescription(), context);
+				modifiableMethod.setDescription(description);
+			}
+		}
+		
+		for (Property property: type.getDefinedProperties()){
+			if (property instanceof ModifiableProperty) {
+				ModifiableProperty modifiableProperty= (ModifiableProperty) property;
+				String description = buildNewDescription(type, property.getDescription(), context);
+				modifiableProperty.setDescription(description);
+			}
+		}
 	}
 	
-	String handleTypeLinksWithoutType(String replacedJavaDocParts, File sourceFile) {
-		if (sourceFile == null) {
-			return replacedJavaDocParts;
+	private String buildNewDescription(Type type, String description, SDKBuilderContext context) {
+		String replacedJavaDocParts = replaceJavaDocParts(description);
+		replacedJavaDocParts = handleTypeLinksWithoutType(replacedJavaDocParts, type);
+		return replacedJavaDocParts;
+	}
+
+	String handleTypeLinksWithoutType(String replacedJavaDocParts, Type parentType) {
+		if (parentType == null) {
+			throw new IllegalStateException("no parent type!");
 		}
 		if (replacedJavaDocParts.indexOf(TYPE_PREFIX_WITHOUT_TYPE) == -1) {
 			return replacedJavaDocParts;
 		}
-		String typeName = FilenameUtils.getBaseName(sourceFile.getName());
+		String typeName = parentType.getName();
 		Matcher matcher = PATTERN_TYPE_PREFIX_WITHOUT_TYPE.matcher(replacedJavaDocParts);
 		replacedJavaDocParts = matcher.replaceAll(DSLConstants.HYPERLINK_TYPE_PREFIX + typeName + "#");
 		return replacedJavaDocParts;
 	}
 
-	void readLines(Map<String, String> alternativeApiMapping, File sourceFile, StringBuilder fullDescription,
-			LineResolver lineResolver) throws IOException {
-		String line = "";
-		boolean foundType = false;
-		while ((line = lineResolver.getNextLine()) != null) {
-			if (fullDescription.length() != 0) {
-				fullDescription.append("\n");
-			}
-			if (!foundType) {
-				if (line.trim().startsWith("<type")) {
-					foundType = true;
-					String name = StringUtils.substringBetween(line, "name=\"", "\"");
-					if (name == null) {
-						System.err.println("WARN:name=null for line:" + line);
-					} else {
-						/*
-						 * we exclude gradle tooling here because of duplicates
-						 * with api parts
-						 */
-						if (!name.startsWith("org.gradle.tooling")) {
-							String shortName = FilenameUtils.getBaseName(sourceFile.getName());
-							alternativeApiMapping.put(shortName, name);
-						}
-					}
-				}
-			}
-			line = removeWhitespacesAndStars(line);
-			fullDescription.append(line);
-			fullDescription.append(' ');
-
-		}
-	}
+	
 
 	String replaceJavaDocParts(String origin) {
 		String line = origin;

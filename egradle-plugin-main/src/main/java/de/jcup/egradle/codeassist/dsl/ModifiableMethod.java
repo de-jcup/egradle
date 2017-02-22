@@ -11,4 +11,6 @@ public interface ModifiableMethod extends Method{
 	void setDelegationTarget(Type target);
 
 	public void setDocumented(boolean partOfGradleDSLDocumentation);
+
+	void setDescription(String description);
 }

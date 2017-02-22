@@ -1,9 +1,12 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.mapping;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class CreateAlternativeMappingFileAction implements SDKBuilderAction {
 

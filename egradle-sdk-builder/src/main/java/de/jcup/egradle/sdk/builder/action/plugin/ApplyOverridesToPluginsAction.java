@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.plugin;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +8,8 @@ import java.util.Set;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugin;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class ApplyOverridesToPluginsAction implements SDKBuilderAction {
 

@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.delegationtarget;
 
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 
@@ -12,6 +12,8 @@ import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.codeassist.dsl.XMLMethod;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class EstimateDelegationTargetsByJavadocAction implements SDKBuilderAction {
 

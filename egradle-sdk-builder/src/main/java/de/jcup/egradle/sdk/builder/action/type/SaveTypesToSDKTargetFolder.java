@@ -1,10 +1,12 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.type;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class SaveTypesToSDKTargetFolder implements SDKBuilderAction {
 

@@ -26,48 +26,48 @@ public class SDKBuilderContext {
 	
 	public File PARENT_OF_RES = new File("egradle-other/src/main/res/");
 		
-	Map<String, String> alternativeApiMapping = new TreeMap<>();
-	File sdkInfoFile;
-	XMLSDKInfo sdkInfo = new XMLSDKInfo();
+	public Map<String, String> alternativeApiMapping = new TreeMap<>();
+	public File sdkInfoFile;
+	public XMLSDKInfo sdkInfo = new XMLSDKInfo();
 	
-	File gradleEGradleDSLRootFolder;
-	File gradleOriginPluginsFile;
-	File gradleOriginMappingFile;
-	File gradleProjectFolder;
-	File gradleSubProjectDocsFolder;
+	public File gradleEGradleDSLRootFolder;
+	public File gradleOriginPluginsFile;
+	public File gradleOriginMappingFile;
+	public File gradleProjectFolder;
+	public File gradleSubProjectDocsFolder;
 	
 	/**
 	 * Source directory where 
 	 */
-	File sourceParentDirectory;
-	File targetPathDirectory;
-	Map<String, Type> tasks = new TreeMap<>();
-	int methodWithOutDescriptionCount;
-	int methodAllCount;
+	public File sourceParentDirectory;
+	public File targetPathDirectory;
+	public Map<String, Type> tasks = new TreeMap<>();
+	public int methodWithOutDescriptionCount;
+	public int methodAllCount;
 
-	Map<String,File> allTypes = new TreeMap<>();
-	File alternativeAPiMappingFile;
+	public Map<String,File> allTypes = new TreeMap<>();
+	public File alternativeAPiMappingFile;
 
-	XMLTypeImporter typeImporter = new XMLTypeImporter();
-	XMLTypeExporter typeExporter = new XMLTypeExporter();
+	public XMLTypeImporter typeImporter = new XMLTypeImporter();
+	public XMLTypeExporter typeExporter = new XMLTypeExporter();
 
-	XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
-	XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
-	ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+	public XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+	public XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
+	public ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 
-	OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
+	public OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
 
 	
-	XMLPlugins xmlPlugins;
+	public XMLPlugins xmlPlugins;
 
-	XMLPlugins alternativeXMLPugins;
+	public XMLPlugins alternativeXMLPugins;
 
-	FilesystemFileLoader beforeGenerationLoader;
+	public FilesystemFileLoader beforeGenerationLoader;
 
-	GradleDSLTypeProvider originGradleFilesProvider;
+	public GradleDSLTypeProvider originGradleFilesProvider;
 	
 	/* only for test */
-	SDKBuilderContext(){
+	public SDKBuilderContext(){
 		if (!PARENT_OF_RES.exists()) {
 			/*
 			 * fall back - so sdk builder could be run from gradle root project

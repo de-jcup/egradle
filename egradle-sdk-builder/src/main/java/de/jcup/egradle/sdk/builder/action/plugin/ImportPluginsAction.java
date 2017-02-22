@@ -1,10 +1,12 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.plugin;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Set;
 
 import de.jcup.egradle.codeassist.dsl.Plugin;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class ImportPluginsAction implements SDKBuilderAction {
 

@@ -79,6 +79,11 @@ public class XMLType implements ModifiableType {
 	public String getDescription() {
 		return description;
 	}
+	
+	@Override
+	public void setDescription(String description) {
+		this.description=description;
+	}
 
 	public Map<String, Type> getExtensions() {
 		return extensionMap;

@@ -49,6 +49,11 @@ public class XMLMethod implements ModifiableMethod{
 	public String getDescription() {
 		return description;
 	}
+	
+	@Override
+	public void setDescription(String description) {
+		this.description=description;
+	}
 
 	public String getReturnTypeAsString(){
 		return returnTypeAsString;

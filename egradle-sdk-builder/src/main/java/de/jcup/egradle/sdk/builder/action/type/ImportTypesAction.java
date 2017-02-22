@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.type;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -8,6 +8,8 @@ import java.io.InputStream;
 
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class ImportTypesAction implements SDKBuilderAction {
 

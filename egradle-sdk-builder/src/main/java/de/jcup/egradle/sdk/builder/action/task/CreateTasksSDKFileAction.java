@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.task;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,12 +11,14 @@ import de.jcup.egradle.codeassist.dsl.XMLTask;
 import de.jcup.egradle.codeassist.dsl.XMLTasks;
 import de.jcup.egradle.codeassist.dsl.XMLTasksExporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class CreateTasksSDKFileAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		// TODO Auto-generated method stub
+		startTaskDataEstimation(context.originGradleFilesProvider,context);
 
 	}
 	

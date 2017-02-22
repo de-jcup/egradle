@@ -29,6 +29,8 @@ public interface ModifiableType extends Type {
 	 * @param partOfGradleDSLDocumentation
 	 */
 	public void setDocumented(boolean partOfGradleDSLDocumentation);
+
+	public void setDescription(String description);
 	
 
 }

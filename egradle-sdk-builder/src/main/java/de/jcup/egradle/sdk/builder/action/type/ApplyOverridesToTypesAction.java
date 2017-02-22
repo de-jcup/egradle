@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.type;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,8 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 import de.jcup.egradle.sdk.builder.model.XMLDSLTypeOverrides;
 import de.jcup.egradle.sdk.builder.model.XMLDSLTypeOverridesImporter;
 

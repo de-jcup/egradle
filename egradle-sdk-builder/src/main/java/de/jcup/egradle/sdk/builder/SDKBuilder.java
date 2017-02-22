@@ -5,6 +5,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
+import de.jcup.egradle.sdk.builder.action.delegationtarget.CalculateDelegationTargetsAction;
+import de.jcup.egradle.sdk.builder.action.delegationtarget.EstimateDelegationTargetsByJavadocAction;
+import de.jcup.egradle.sdk.builder.action.init.InitSDKTargetFolderAction;
+import de.jcup.egradle.sdk.builder.action.javadoc.RemoveWhitespacesAndStarsFromJavadocAction;
+import de.jcup.egradle.sdk.builder.action.javadoc.ReplaceJavaDocPartsAction;
+import de.jcup.egradle.sdk.builder.action.mapping.CopyApiMappingsAction;
+import de.jcup.egradle.sdk.builder.action.mapping.CreateAlternativeMappingFileAction;
+import de.jcup.egradle.sdk.builder.action.plugin.ApplyOverridesToPluginsAction;
+import de.jcup.egradle.sdk.builder.action.plugin.ImportPluginsAction;
+import de.jcup.egradle.sdk.builder.action.plugin.SavePluginsToSDKTargetFolder;
+import de.jcup.egradle.sdk.builder.action.task.CreateTasksSDKFileAction;
+import de.jcup.egradle.sdk.builder.action.type.ApplyOverridesToTypesAction;
+import de.jcup.egradle.sdk.builder.action.type.ImportTypesAction;
+import de.jcup.egradle.sdk.builder.action.type.MarkDocumentedLanguageElementsAction;
+import de.jcup.egradle.sdk.builder.action.type.SaveTypesToSDKTargetFolder;
+
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
  * special task called "dslEgradle".<br>
@@ -41,25 +58,27 @@ public class SDKBuilder {
 		
 		/* create actions and add in wanted ordering */
 		List<SDKBuilderAction> actions = new ArrayList<>();
+		/* prepare*/
 		actions.add(new InitSDKTargetFolderAction());
 		actions.add(new CopyApiMappingsAction());
 		actions.add(new ImportTypesAction());
+		actions.add(new RemoveWhitespacesAndStarsFromJavadocAction());
 		
 		actions.add(new ImportPluginsAction());
 		actions.add(new ApplyOverridesToPluginsAction());
 		actions.add(new SavePluginsToSDKTargetFolder());
-
 		
 		actions.add(new ApplyOverridesToTypesAction());
-		actions.add(new TransformJavadocDescriptionsToNormalHTMLAction());
+		actions.add(new MarkDocumentedLanguageElementsAction());
+
+		actions.add(new ReplaceJavaDocPartsAction());
 
 		actions.add(new CalculateDelegationTargetsAction());
 		actions.add(new EstimateDelegationTargetsByJavadocAction());
 		
-		actions.add(new CreateAlternativeMappingFileAction());
-		actions.add(new MarkDocumentedLanguageElementsAction());
 
-		
+		/* persist */
+		actions.add(new CreateAlternativeMappingFileAction());
 		actions.add(new CreateTasksSDKFileAction());
 		actions.add(new SaveTypesToSDKTargetFolder());
 		

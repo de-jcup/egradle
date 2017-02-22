@@ -4,7 +4,7 @@ import java.io.File;
 
 public class SDKBuilderTestUtil {
 
-	public static File PARENT_OF_TEST = new File("egradle-other/src/test/res/");
+	public static File PARENT_OF_TEST = new File("egradle-sdk-builder/src/test/res/");
 	static {
 		if (!PARENT_OF_TEST.exists()) {
 			/*

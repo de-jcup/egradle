@@ -1,6 +1,8 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action;
 
 import java.io.IOException;
+
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
 
 public interface SDKBuilderAction {
 

@@ -1,8 +1,11 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.plugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class SavePluginsToSDKTargetFolder implements SDKBuilderAction {
 

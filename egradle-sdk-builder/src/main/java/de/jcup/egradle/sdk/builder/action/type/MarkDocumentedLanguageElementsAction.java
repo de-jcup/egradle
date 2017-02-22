@@ -1,4 +1,4 @@
-package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder.action.type;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
 import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.XMLType;
+import de.jcup.egradle.sdk.builder.SDKBuilderContext;
+import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 import de.jcup.egradle.sdk.builder.model.XMLDSLMethodInfo;
 import de.jcup.egradle.sdk.builder.model.XMLDSLPropertyInfo;
 import de.jcup.egradle.sdk.builder.model.XMLDSLTypeDocumentation;

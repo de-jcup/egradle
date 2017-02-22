@@ -35,6 +35,11 @@ public class XMLProperty implements ModifiableProperty{
 	public String getDescription() {
 		return description;
 	}
+	
+	@Override
+	public void setDescription(String description) {
+		this.description=description;
+	}
 
 	public String getTypeAsString(){
 		return typeAsString;
@@ -125,5 +130,7 @@ public class XMLProperty implements ModifiableProperty{
 			return false;
 		return true;
 	}
+
+	
 	
 }
