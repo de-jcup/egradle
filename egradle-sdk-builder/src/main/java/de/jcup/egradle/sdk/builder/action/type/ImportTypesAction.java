@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.sdk.builder.SDKBuilderContext;
@@ -19,14 +22,18 @@ public class ImportTypesAction implements SDKBuilderAction {
 		TypeImportFilter filter = new TypeImportFilter();
 		scanTypes(context.sourceParentDirectory, filter, context);
 	
-		if (context.allTypes.isEmpty()){
+		if (context.originTypeNameToOriginFileMapping.isEmpty()){
 			throw new IllegalStateException("no types found!");
 		}
 		
 		/* now types are scanned, so start importing all types */
-		for (String typeName: context.allTypes.keySet()){
+		for (String typeName: context.originTypeNameToOriginFileMapping.keySet()){
 			/* simply call the provider, it will resolve the type*/
 			Type buildtype = context.originGradleFilesProvider.getType(typeName);
+			if (!typeName.startsWith("org.gradle.tooling")) {
+				String shortName = StringUtils.substringAfterLast(typeName, ".");
+				context.alternativeApiMapping.put(shortName, typeName);
+			}
 			if (buildtype==null){
 				throw new IllegalArgumentException("Cannot build type:"+typeName);
 			}
@@ -43,7 +50,7 @@ public class ImportTypesAction implements SDKBuilderAction {
 			try(InputStream stream=new FileInputStream(file)){
 				XMLType tempType = context.typeImporter.importType(stream);
 				String typeName = tempType.getName();
-				context.allTypes.put(typeName, file);
+				context.originTypeNameToOriginFileMapping.put(typeName, file);
 			}
 		}
 	}

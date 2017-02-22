@@ -22,7 +22,7 @@ public class EstimateDelegationTargetsByJavadocAction implements SDKBuilderActio
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- estimate still missing estimation targets my javadoc ");
 		
-		for (String typeName : context.allTypes.keySet()) {
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			Type type=context.originGradleFilesProvider.getType(typeName);
 			estimateDelegateTargets_by_javdoc(type,context);
 		}

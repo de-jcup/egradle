@@ -28,7 +28,7 @@ public class ApplyOverridesToTypesAction implements SDKBuilderAction{
 			overrides = overridesImporter.importOverrides(fis);
 		}
 		
-		for (String typeName: context.allTypes.keySet()){
+		for (String typeName: context.originTypeNameToOriginFileMapping.keySet()){
 			XMLType originType = (XMLType)context.originGradleFilesProvider.getType(typeName);
 			handleOverrides(originType, overrides);
 		}

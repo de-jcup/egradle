@@ -8,6 +8,7 @@ import java.util.List;
 import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 import de.jcup.egradle.sdk.builder.action.delegationtarget.CalculateDelegationTargetsAction;
 import de.jcup.egradle.sdk.builder.action.delegationtarget.EstimateDelegationTargetsByJavadocAction;
+import de.jcup.egradle.sdk.builder.action.init.InitSDKInfoAction;
 import de.jcup.egradle.sdk.builder.action.init.InitSDKTargetFolderAction;
 import de.jcup.egradle.sdk.builder.action.javadoc.RemoveWhitespacesAndStarsFromJavadocAction;
 import de.jcup.egradle.sdk.builder.action.javadoc.ReplaceJavaDocPartsAction;
@@ -40,6 +41,7 @@ import de.jcup.egradle.sdk.builder.action.type.SaveTypesToSDKTargetFolder;
  */
 public class SDKBuilder {
 
+	/* FIXME ATR, 22.02.2017: change code to: SDKBuilder.executeActions()  */
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
@@ -60,6 +62,8 @@ public class SDKBuilder {
 		List<SDKBuilderAction> actions = new ArrayList<>();
 		/* prepare*/
 		actions.add(new InitSDKTargetFolderAction());
+		actions.add(new InitSDKInfoAction());
+		
 		actions.add(new CopyApiMappingsAction());
 		actions.add(new ImportTypesAction());
 		actions.add(new RemoveWhitespacesAndStarsFromJavadocAction());

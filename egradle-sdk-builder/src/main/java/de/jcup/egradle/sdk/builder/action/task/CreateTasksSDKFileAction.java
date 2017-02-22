@@ -26,7 +26,7 @@ public class CreateTasksSDKFileAction implements SDKBuilderAction {
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- start task data estimation");
 		
-		for (String typeName : context.allTypes.keySet()) {
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			tryToResolveTask(context, provider, typeName);
 		}
 		

@@ -19,7 +19,7 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		for (String typeName: context.allTypes.keySet()){
+		for (String typeName: context.originTypeNameToOriginFileMapping.keySet()){
 			XMLType originType = (XMLType)context.originGradleFilesProvider.getType(typeName);
 			calculateStillMissingDelegateTargets(originType, context);
 		}

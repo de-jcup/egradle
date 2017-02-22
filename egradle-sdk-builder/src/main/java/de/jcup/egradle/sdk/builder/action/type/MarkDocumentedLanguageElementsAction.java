@@ -20,7 +20,7 @@ public class MarkDocumentedLanguageElementsAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		for (String typeName: context.allTypes.keySet() ){
+		for (String typeName: context.originTypeNameToOriginFileMapping.keySet() ){
 			XMLType type = (XMLType) context.originGradleFilesProvider.getType(typeName);
 			File dslXML = new File(context.gradleSubProjectDocsFolder, "src/docs/dsl/"+typeName+".xml");
 			if (dslXML.exists()){

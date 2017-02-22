@@ -1,14 +1,8 @@
 package de.jcup.egradle.sdk.builder.action.javadoc;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.codeassist.dsl.DSLConstants;
@@ -20,7 +14,6 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.sdk.builder.SDKBuilderContext;
 import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
-import de.jcup.egradle.sdk.builder.util.LineResolver;
 
 public class RemoveWhitespacesAndStarsFromJavadocAction implements SDKBuilderAction {
 
@@ -29,10 +22,10 @@ public class RemoveWhitespacesAndStarsFromJavadocAction implements SDKBuilderAct
 	
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		if (context.allTypes.isEmpty()){
+		if (context.originTypeNameToOriginFileMapping.isEmpty()){
 			throw new IllegalStateException("all types is empty!");
 		}
-		for (String typeName : context.allTypes.keySet()){
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()){
 			Type type = context.originGradleFilesProvider.getType(typeName);
 			handleTypeAndContentInside(type,context);
 		}
@@ -65,51 +58,19 @@ public class RemoveWhitespacesAndStarsFromJavadocAction implements SDKBuilderAct
 	
 
 	private String buildNewDescription(Type parentType, String description,SDKBuilderContext context) throws IOException {
+		if (description==null){
+			return null;
+		}
 		StringBuilder fullDescription = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(new ByteArrayInputStream(description.getBytes())))) {
-			readLines(parentType, fullDescription, context, new LineResolver() {
-
-				public String getNextLine() throws IOException {
-					return reader.readLine();
-				}
-			});
+		String[] lines = StringUtils.split(description, System.getProperty("line.separator"));
+		for (String line: lines){
+			String newLine = removeWhitespacesAndStars(line);
+			fullDescription.append(newLine);
+			fullDescription.append("\n");
 		}
 		return fullDescription.toString();
 	}
 	
-	void readLines(Type type, StringBuilder fullDescription, SDKBuilderContext context,
-			LineResolver lineResolver) throws IOException {
-		String line = "";
-		boolean foundType = false;
-		while ((line = lineResolver.getNextLine()) != null) {
-			if (fullDescription.length() != 0) {
-				fullDescription.append("\n");
-			}
-			if (!foundType) {
-				if (line.trim().startsWith("<type")) {
-					foundType = true;
-					String name = StringUtils.substringBetween(line, "name=\"", "\"");
-					if (name == null) {
-						System.err.println("WARN:name=null for line:" + line);
-					} else {
-						/*
-						 * we exclude gradle tooling here because of duplicates
-						 * with api parts
-						 */
-						if (!name.startsWith("org.gradle.tooling")) {
-							String shortName = FilenameUtils.getBaseName(type.getName());
-							context.alternativeApiMapping.put(shortName, name);
-						}
-					}
-				}
-			}
-			line = removeWhitespacesAndStars(line);
-			fullDescription.append(line);
-			fullDescription.append(' ');
-
-		}
-	}
 
 	String removeWhitespacesAndStars(String line) {
 		StringBuilder sb = new StringBuilder();

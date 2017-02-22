@@ -45,7 +45,7 @@ public class SDKBuilderContext {
 	public int methodWithOutDescriptionCount;
 	public int methodAllCount;
 
-	public Map<String,File> allTypes = new TreeMap<>();
+	public Map<String,File> originTypeNameToOriginFileMapping = new TreeMap<>();
 	public File alternativeAPiMappingFile;
 
 	public XMLTypeImporter typeImporter = new XMLTypeImporter();
@@ -59,15 +59,12 @@ public class SDKBuilderContext {
 
 	
 	public XMLPlugins xmlPlugins;
-
 	public XMLPlugins alternativeXMLPugins;
-
 	public FilesystemFileLoader beforeGenerationLoader;
-
 	public GradleDSLTypeProvider originGradleFilesProvider;
 	
-	/* only for test */
-	public SDKBuilderContext(){
+	
+	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
 		if (!PARENT_OF_RES.exists()) {
 			/*
 			 * fall back - so sdk builder could be run from gradle root project
@@ -79,9 +76,7 @@ public class SDKBuilderContext {
 		beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
 		originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
 
-	}
-	
-	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
+		
 		gradleProjectFolder = new File(pathToradleProjectFolder);
 		targetPathDirectory =createTargetFile(targetRootDirectory);
 		
@@ -137,16 +132,6 @@ public class SDKBuilderContext {
 	
 	private File createTargetFile(File targetRootDirectory) {
 		return new File(targetRootDirectory, "sdk/");
-	}
-	
-	public void writeSDKInfo() throws IOException{
-		
-		try(FileOutputStream stream = new FileOutputStream(sdkInfoFile)){
-
-			XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
-			exporter.exportSDKInfo(sdkInfo, stream);
-			System.out.println("- written sdk info file:"+sdkInfoFile);
-		}
 	}
 	
 	private void assertDirectoryAndExists(File folder) throws IOException {

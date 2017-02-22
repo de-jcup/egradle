@@ -58,6 +58,7 @@ import de.jcup.egradle.sdk.builder.model.XMLDSLTypeDocumentation;
 import de.jcup.egradle.sdk.builder.model.XMLDSLTypeOverrides;
 import de.jcup.egradle.sdk.builder.model.XMLDSLTypeOverridesImporter;
 import de.jcup.egradle.sdk.builder.util.LineResolver;
+import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
 
 /**
  * The egradle <a href="https://github.com/de-jcup/gradle">gradle fork</a> has
@@ -164,9 +165,20 @@ public class OldSDKBuilder {
 		System.out.println("- info:" + context.getInfo());
 		System.out.println("generated into:" + context.targetPathDirectory.getCanonicalPath());
 
-		context.writeSDKInfo();
+		
+		writeSDKInfo(context);
 		System.out.println("DONE");
 		return context;
+	}
+	
+	public void writeSDKInfo(SDKBuilderContext context) throws IOException{
+		
+		try(FileOutputStream stream = new FileOutputStream(context.sdkInfoFile)){
+
+			XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
+			exporter.exportSDKInfo(context.sdkInfo, stream);
+			System.out.println("- written sdk info file:"+context.sdkInfoFile);
+		}
 	}
 
 	private void prepareSDKFolder(SDKBuilderContext context) throws IOException {
@@ -181,9 +193,9 @@ public class OldSDKBuilder {
 
 	private void exportAllTypesAgain(SDKBuilderContext context, GradleDSLTypeProvider provider)
 			throws IOException, FileNotFoundException {
-		for (String typeName : context.allTypes.keySet()) {
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			Type type=provider.getType(typeName);
-			try(FileOutputStream fos = new FileOutputStream(context.allTypes.get(typeName))){
+			try(FileOutputStream fos = new FileOutputStream(context.originTypeNameToOriginFileMapping.get(typeName))){
 				typeExporter.exportType((XMLType) type, fos);
 			}
 		}
@@ -320,7 +332,7 @@ public class OldSDKBuilder {
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- start task data estimation");
 		
-		for (String typeName : context.allTypes.keySet()) {
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			tryToResolveTask(context, provider, typeName);
 		}
 		
@@ -329,7 +341,7 @@ public class OldSDKBuilder {
 		/* now load the xml files as type data - and inspect all descriptions */
 		System.out.println("- estimate still missing estimation targets my javadoc ");
 		
-		for (String typeName : context.allTypes.keySet()) {
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			Type type=provider.getType(typeName);
 			estimateDelegateTargets_by_javdoc(type,context);
 		}
@@ -465,7 +477,7 @@ public class OldSDKBuilder {
 			
 			
 			String typeName= type2.getName();
-			context.allTypes.put(type2.getName(),newTargetFile);
+			context.originTypeNameToOriginFileMapping.put(type2.getName(),newTargetFile);
 			/* why so complicated - the provider has data already combined (so super class etc. is available). and typ2 is necessary, because 
 			 * I am too lazy to do name resolving again
 			 */

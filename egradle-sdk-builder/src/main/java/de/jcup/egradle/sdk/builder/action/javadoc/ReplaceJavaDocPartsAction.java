@@ -25,10 +25,10 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 	
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		if (context.allTypes.isEmpty()){
+		if (context.originTypeNameToOriginFileMapping.isEmpty()){
 			throw new IllegalStateException("all types is empty!");
 		}
-		for (String typeName : context.allTypes.keySet()){
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()){
 			Type type = context.originGradleFilesProvider.getType(typeName);
 			handleTypeAndContentInside(type,context);
 		}
@@ -68,6 +68,9 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 		if (parentType == null) {
 			throw new IllegalStateException("no parent type!");
 		}
+		if (replacedJavaDocParts==null){
+			return null;
+		}
 		if (replacedJavaDocParts.indexOf(TYPE_PREFIX_WITHOUT_TYPE) == -1) {
 			return replacedJavaDocParts;
 		}
@@ -80,6 +83,9 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 	
 
 	String replaceJavaDocParts(String origin) {
+		if (origin==null){
+			return null;
+		}
 		String line = origin;
 		line = replaceJavaDocLinks(line);
 		line = replaceJavaDocCode(line);
