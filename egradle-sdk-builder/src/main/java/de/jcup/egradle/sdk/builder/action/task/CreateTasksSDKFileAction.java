@@ -19,7 +19,7 @@ public class CreateTasksSDKFileAction implements SDKBuilderAction {
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
 		startTaskDataEstimation(context.originGradleFilesProvider,context);
-
+		writeTasksFile(context);
 	}
 	
 	private void startTaskDataEstimation(GradleDSLTypeProvider provider, SDKBuilderContext context) throws IOException{

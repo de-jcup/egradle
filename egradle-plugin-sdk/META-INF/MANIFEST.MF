@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle SDK
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.sdk
-Bundle-Version: 0.4.0.beta
+Bundle-Version: 0.5.0.beta
 Bundle-Activator: de.jcup.egradle.eclipse.plugin.sdk.Activator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.core.runtime,

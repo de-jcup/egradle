@@ -18,6 +18,7 @@
     <plugin id="core" description="Gradle API parts(alternative)">
         <extends id="jar" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Jar"/>
         <extends id="tar" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Tar"/>
+        <extends id="war" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.War"/>
         <extends id="zip" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.tasks.bundling.Zip"/>
     </plugin>
     <plugin id="distribution" description="Distribution Plugin">

@@ -41,6 +41,11 @@ public class HTMLDescriptionBuilder {
 			String signature = MethodUtils.createSignature(method);
 			descSb.append(signature);
 			descSb.append("</div>");
+			if (method.getDelegationTarget()!=null){
+				descSb.append("Delegates to:");
+				appendLinkToType(descSb, false, method.getDelegationTarget(), null);
+				descSb.append("<br");
+			}
 			descSb.append(method.getDescription());
 			appendLinkToGradleOriginDoc(method, descSb);
 		} else if (element instanceof Property) {
@@ -72,15 +77,21 @@ public class HTMLDescriptionBuilder {
 		if (element instanceof TypeChild){
 			TypeChild child = (TypeChild) element;
 			Type type = child.getParent();
-			if (type!=null){
-				descSb.append("<a href='type://");
-				descSb.append(type.getName());
-				descSb.append("'>");
-				descSb.append(type.getName());
-				descSb.append("</a>");
-				if (withEndingDot){
-					descSb.append('.');
-				}
+			appendLinkToType(descSb, withEndingDot, type,null);
+		}
+	}
+	private void appendLinkToType(StringBuilder descSb, boolean withEndingDot, Type type, String linkPostfix) {
+		if (type!=null){
+			descSb.append("<a href='type://");
+			descSb.append(type.getName());
+			if (linkPostfix!=null){
+				descSb.append(linkPostfix);
+			}
+			descSb.append("'>");
+			descSb.append(type.getName());
+			descSb.append("</a>");
+			if (withEndingDot){
+				descSb.append('.');
 			}
 		}
 	}
