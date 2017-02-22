@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.plugin.repository.IvyPluginRepository" version="3.0" documented="true">
-    <description>
- * Represents an Ivy repository which contains Gradle plugins.
- </description>
+    <description> Represents an Ivy repository which contains Gradle plugins.
+
+</description>
     <method name="getUrl" returnType="java.net.URI" documented="true">
-        <description>
-     * The base URL of this repository. This URL is used to find Gradle plugins.
-     *
-     * @return The URL.
-     </description>
+        <description> The base URL of this repository. This URL is used to find Gradle plugins.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL.
+
+</description>
     </method>
     <method name="setUrl" returnType="void" documented="true">
-        <description>
-     * Sets the base URL of this repository. This URL is used to find Gradle plugins.
-     *
-     * &lt;p&gt;The provided value is evaluated relative to the build's directory. This
-     * means, for example, you can pass in a {@code File} object, or a relative path to be
-     * evaluated relative to the directory of the {@code settings.gradle} file in which this
-     * repository is declared.
-     *
-     * @param url The base URL.
-     </description>
+        <description> Sets the base URL of this repository. This URL is used to find Gradle plugins.
+
+ &lt;p&gt;The provided value is evaluated relative to the build's directory. This
+ means, for example, you can pass in a &lt;a href='type://File'&gt;File&lt;/a&gt; object, or a relative path to be
+ evaluated relative to the directory of the &lt;a href='type://settings.gradle'&gt;settings.gradle&lt;/a&gt; file in which this
+ repository is declared.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url The base URL.
+
+</description>
         <parameter type="java.lang.Object" name="url"/>
     </method>
     <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
     <interface name="org.gradle.plugin.repository.PluginRepository"/>
     <property name="url" type="java.net.URI">
-        <description>
-     * The base URL of this repository. This URL is used to find Gradle plugins.
-     *
-     * @return The URL.
-     </description>
+        <description> The base URL of this repository. This URL is used to find Gradle plugins.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL.
+
+</description>
     </property>
 </type>

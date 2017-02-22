@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.resources.TextResourceFactory" version="3.0" documented="true">
-    <description>
- * Creates {@code TextResource}s backed by sources such as strings, files, and archive entries.
- *
- * &lt;p&gt;Example usages:
- *
- * &lt;pre autoTested=''&gt;
- * def sourcedFromString = resources.text.fromString("some text content")
- *
- * def sourcedFromFile = resources.text.fromFile("path/to/file.txt")
- *
- * task someTask {} // assumption: produces a text file and declares it as output
- * def sourcedFromTask = resources.text.fromFile(someTask)
- *
- * def sourcedFromArchiveEntry =
- *   resources.text.fromArchiveEntry("path/to/archive.zip", "path/to/archive/entry.txt")
- *
- * configurations { someConfig } // assumption: contains a single archive
- * def sourcedFromConfiguration =
- *   resources.text.fromArchiveEntry(configurations.someConfig, "path/to/archive/entry.txt")
- * &lt;/pre&gt;
- *
- * File based factory methods optionally accept a character encoding. If no encoding is specified,
- * the platform's default encoding is used.
- *
- * @since 2.2
- </description>
+    <description> Creates &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s backed by sources such as strings, files, and archive entries.
+
+ &lt;p&gt;Example usages:
+
+ &lt;pre autoTested=''&gt;
+ def sourcedFromString = resources.text.fromString("some text content")
+
+ def sourcedFromFile = resources.text.fromFile("path/to/file.txt")
+
+ task someTask {} // assumption: produces a text file and declares it as output
+ def sourcedFromTask = resources.text.fromFile(someTask)
+
+ def sourcedFromArchiveEntry =
+   resources.text.fromArchiveEntry("path/to/archive.zip", "path/to/archive/entry.txt")
+
+ configurations { someConfig } // assumption: contains a single archive
+ def sourcedFromConfiguration =
+   resources.text.fromArchiveEntry(configurations.someConfig, "path/to/archive/entry.txt")
+ &lt;/pre&gt;
+
+ File based factory methods optionally accept a character encoding. If no encoding is specified,
+ the platform's default encoding is used.
+
+ @since 2.2
+
+</description>
     <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * Same as {@code fromArchiveEntry(archive, path, Charset.defaultCharset().name())}.
-     </description>
+        <description> Same as &lt;a href='type://fromArchiveEntry(archive, path, Charset.defaultCharset().name())'&gt;fromArchiveEntry(archive, path, Charset.defaultCharset().name())&lt;/a&gt;.
+
+</description>
         <parameter type="java.lang.Object" name="archive"/>
         <parameter type="java.lang.String" name="path"/>
     </method>
     <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * Creates a text resource backed by the archive entry at the given path within the given archive.
-     * The archive format is determined based on the archive's file extension. If the archive format
-     * is not supported or cannot be determined, any attempt to access the resource will fail with an exception.
-     *
-     * @param archive an archive file evaluated as per {@link org.gradle.api.Project#files(Object...)}
-     * @param entryPath the path to an archive entry
-     * @param charset the archive entry's character encoding (e.g. {@code "utf-8"})
-     *
-     * @return a text resource backed by the archive entry at the given path within the given archive
-     </description>
+        <description> Creates a text resource backed by the archive entry at the given path within the given archive.
+ The archive format is determined based on the archive's file extension. If the archive format
+ is not supported or cannot be determined, any attempt to access the resource will fail with an exception.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;archive an archive file evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;entryPath the path to an archive entry
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the archive entry's character encoding (e.g. &lt;a href='type://"utf-8"'&gt;"utf-8"&lt;/a&gt;)
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the archive entry at the given path within the given archive
+
+</description>
         <parameter type="java.lang.Object" name="archive"/>
         <parameter type="java.lang.String" name="entryPath"/>
         <parameter type="java.lang.String" name="charset"/>
     </method>
     <method name="fromFile" returnType="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * Same as {@code fromFile(file, Charset.defaultCharset())}.
-     </description>
+        <description> Same as &lt;a href='type://fromFile(file, Charset.defaultCharset())'&gt;fromFile(file, Charset.defaultCharset())&lt;/a&gt;.
+
+</description>
         <parameter type="java.lang.Object" name="file"/>
     </method>
     <method name="fromFile" returnType="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * Creates a text resource backed by the given file.
-     *
-     * @param file a text file evaluated as per {@link org.gradle.api.Project#files(Object...)}
-     * @param charset the file's character encoding (e.g. {@code "utf-8"})
-     * @return a text resource backed by the given file
-     </description>
+        <description> Creates a text resource backed by the given file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file a text file evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the file's character encoding (e.g. &lt;a href='type://"utf-8"'&gt;"utf-8"&lt;/a&gt;)
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the given file
+
+</description>
         <parameter type="java.lang.Object" name="file"/>
         <parameter type="java.lang.String" name="charset"/>
     </method>
     <method name="fromString" returnType="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * Creates a text resource backed by the given string.
-     *
-     * @param string a string
-     * @return a text resource backed by the given string
-     </description>
+        <description> Creates a text resource backed by the given string.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;string a string
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a text resource backed by the given string
+
+</description>
         <parameter type="java.lang.String" name="string"/>
     </method>
 </type>

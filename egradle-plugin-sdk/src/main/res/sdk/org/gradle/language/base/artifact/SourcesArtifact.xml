@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.language.base.artifact.SourcesArtifact" version="3.0">
-    <description>
- * An artifact containing sources for a software component.
- *
- * @since 2.0
- </description>
+    <description> An artifact containing sources for a software component.
+
+ @since 2.0
+
+</description>
     <interface name="org.gradle.api.component.Artifact"/>
 </type>

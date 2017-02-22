@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.testing.JUnitXmlReport" version="3.0">
-    <description>
- * The JUnit XML files, commonly used to communicate results to CI servers.
- </description>
+    <description> The JUnit XML files, commonly used to communicate results to CI servers.
+
+</description>
     <method name="isOutputPerTestCase" returnType="boolean">
-        <description>
-     * Should the output be associated with individual test cases instead of at the suite level.
-     </description>
+        <description> Should the output be associated with individual test cases instead of at the suite level.
+
+</description>
     </method>
     <method name="setOutputPerTestCase" returnType="void">
-        <description>
-     * Should the output be associated with individual test cases instead of at the suite level.
-     </description>
+        <description> Should the output be associated with individual test cases instead of at the suite level.
+
+</description>
         <parameter type="boolean" name="outputPerTestCase"/>
     </method>
     <interface name="org.gradle.api.reporting.DirectoryReport"/>
     <property name="outputPerTestCase" type="boolean">
-        <description>
-     * Should the output be associated with individual test cases instead of at the suite level.
-     </description>
+        <description> Should the output be associated with individual test cases instead of at the suite level.
+
+</description>
     </property>
 </type>

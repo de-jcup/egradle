@@ -1,159 +1,159 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.ProjectConnection" version="3.0">
-    <description>
- * &lt;p&gt;Represents a long-lived connection to a Gradle project. You obtain an instance of a {@code ProjectConnection} by using {@link org.gradle.tooling.GradleConnector#connect()}.&lt;/p&gt;
- *
- * &lt;pre autoTested=''&gt;
- * ProjectConnection connection = GradleConnector.newConnector()
- *    .forProjectDirectory(new File("someFolder"))
- *    .connect();
- *
- * try {
- *    //obtain some information from the build
- *    BuildEnvironment environment = connection.model(BuildEnvironment.class)
- *      .get();
- *
- *    //run some tasks
- *    connection.newBuild()
- *      .forTasks("tasks")
- *      .setStandardOutput(System.out)
- *      .run();
- *
- * } finally {
- *    connection.close();
- * }
- * &lt;/pre&gt;
- *
- * &lt;h3&gt;Thread safety information&lt;/h3&gt;
- *
- * &lt;p&gt;All implementations of {@code ProjectConnection} are thread-safe, and may be shared by any number of threads.&lt;/p&gt;
- *
- * &lt;p&gt;All notifications from a given {@code ProjectConnection} instance are delivered by a single thread at a time. Note, however, that the delivery thread may change over time.&lt;/p&gt;
- *
- * @since 1.0-milestone-3
- </description>
+    <description> &lt;p&gt;Represents a long-lived connection to a Gradle project. You obtain an instance of a &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; by using &lt;a href='type://org.gradle.tooling.GradleConnector#connect()'&gt;org.gradle.tooling.GradleConnector#connect()&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;pre autoTested=''&gt;
+ ProjectConnection connection = GradleConnector.newConnector()
+    .forProjectDirectory(new File("someFolder"))
+    .connect();
+
+ try {
+    //obtain some information from the build
+    BuildEnvironment environment = connection.model(BuildEnvironment.class)
+      .get();
+
+    //run some tasks
+    connection.newBuild()
+      .forTasks("tasks")
+      .setStandardOutput(System.out)
+      .run();
+
+ } finally {
+    connection.close();
+ }
+ &lt;/pre&gt;
+
+ &lt;h3&gt;Thread safety information&lt;/h3&gt;
+
+ &lt;p&gt;All implementations of &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; are thread-safe, and may be shared by any number of threads.&lt;/p&gt;
+
+ &lt;p&gt;All notifications from a given &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; instance are delivered by a single thread at a time. Note, however, that the delivery thread may change over time.&lt;/p&gt;
+
+ @since 1.0-milestone-3
+
+</description>
     <method name="action" returnType="org.gradle.tooling.BuildActionExecuter">
-        <description>
-     * Creates an executer which can be used to run the given action. The action is serialized into the build
-     * process and executed, then its result is serialized back to the caller.
-     *
-     * &lt;p&gt;Requires Gradle 1.8 or later.&lt;/p&gt;
-     *
-     * @param buildAction The action to run.
-     * @param &lt;T&gt; The result type.
-     * @return The builder.
-     * @since 1.8
-     </description>
+        <description> Creates an executer which can be used to run the given action. The action is serialized into the build
+ process and executed, then its result is serialized back to the caller.
+
+ &lt;p&gt;Requires Gradle 1.8 or later.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildAction The action to run.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder.
+ @since 1.8
+
+</description>
         <parameter type="org.gradle.tooling.BuildAction" name="buildAction"/>
     </method>
     <method name="close" returnType="void">
-        <description>
-     * Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads.
+ @since 1.0-milestone-3
+
+</description>
     </method>
     <method name="getModel" returnType="T">
-        <description>
-     * Fetches a snapshot of the model of the given type for this project. This method blocks until the model is available.
-     *
-     * &lt;p&gt;This method is simply a convenience for calling {@code model(modelType).get()}&lt;/p&gt;
-     *
-     * @param modelType The model type.
-     * @param &lt;T&gt; The model type.
-     * @return The model.
-     * @throws UnsupportedVersionException When the target Gradle version does not support the given model.
-     * @throws UnknownModelException When the target Gradle version or build does not support the requested model.
-     * @throws BuildException On some failure executing the Gradle build, in order to build the model.
-     * @throws GradleConnectionException On some other failure using the connection.
-     * @throws IllegalStateException When this connection has been closed or is closing.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Fetches a snapshot of the model of the given type for this project. This method blocks until the model is available.
+
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://model(modelType).get()'&gt;model(modelType).get()&lt;/a&gt;&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model.
+ @throws UnsupportedVersionException When the target Gradle version does not support the given model.
+ @throws UnknownModelException When the target Gradle version or build does not support the requested model.
+ @throws BuildException On some failure executing the Gradle build, in order to build the model.
+ @throws GradleConnectionException On some other failure using the connection.
+ @throws IllegalStateException When this connection has been closed or is closing.
+ @since 1.0-milestone-3
+
+</description>
         <parameter type="java.lang.Class" name="modelType"/>
     </method>
     <method name="getModel" returnType="void">
-        <description>
-     * Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later
-     * passed to the given handler's {@link ResultHandler#onComplete(Object)} method.
-     *
-     * &lt;p&gt;If the operation fails, the handler's {@link ResultHandler#onFailure(GradleConnectionException)} method is called with the appropriate exception.
-     * See {@link #getModel(Class)} for a description of the various exceptions that the operation may fail with.
-     *
-     * &lt;p&gt;This method is simply a convenience for calling {@code model(modelType).get(handler)}&lt;/p&gt;
-     *
-     * @param modelType The model type.
-     * @param handler The handler to pass the result to.
-     * @param &lt;T&gt; The model type.
-     * @throws IllegalStateException When this connection has been closed or is closing.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later
+ passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method.
+
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception.
+ See &lt;a href='type://org.gradle.tooling.ProjectConnection#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with.
+
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://model(modelType).get(handler)'&gt;model(modelType).get(handler)&lt;/a&gt;&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
+ @throws IllegalStateException When this connection has been closed or is closing.
+ @since 1.0-milestone-3
+
+</description>
         <parameter type="java.lang.Class" name="modelType"/>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
     </method>
     <method name="model" returnType="org.gradle.tooling.ModelBuilder">
-        <description>
-     * Creates a builder which can be used to query the model of the given type.
-     *
-     * &lt;p&gt;Any of following models types may be available, depending on the version of Gradle being used by the target
-     * build:
-     *
-     * &lt;ul&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.gradle.GradleBuild}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.build.BuildEnvironment}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.GradleProject}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.gradle.BuildInvocations}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.gradle.ProjectPublications}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.idea.IdeaProject}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.idea.BasicIdeaProject}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.eclipse.EclipseProject}&lt;/li&gt;
-     *     &lt;li&gt;{@link org.gradle.tooling.model.eclipse.HierarchicalEclipseProject}&lt;/li&gt;
-     * &lt;/ul&gt;
-     *
-     * &lt;p&gt;A build may also expose additional custom tooling models. You can use this method to query these models.
-     *
-     * &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt;
-     *
-     * @param modelType The model type
-     * @param &lt;T&gt; The model type.
-     * @return The builder.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Creates a builder which can be used to query the model of the given type.
+
+ &lt;p&gt;Any of following models types may be available, depending on the version of Gradle being used by the target
+ build:
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.gradle.GradleBuild'&gt;org.gradle.tooling.model.gradle.GradleBuild&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.build.BuildEnvironment'&gt;org.gradle.tooling.model.build.BuildEnvironment&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.GradleProject'&gt;org.gradle.tooling.model.GradleProject&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.gradle.BuildInvocations'&gt;org.gradle.tooling.model.gradle.BuildInvocations&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.gradle.ProjectPublications'&gt;org.gradle.tooling.model.gradle.ProjectPublications&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.idea.IdeaProject'&gt;org.gradle.tooling.model.idea.IdeaProject&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.idea.BasicIdeaProject'&gt;org.gradle.tooling.model.idea.BasicIdeaProject&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.eclipse.EclipseProject'&gt;org.gradle.tooling.model.eclipse.EclipseProject&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.model.eclipse.HierarchicalEclipseProject'&gt;org.gradle.tooling.model.eclipse.HierarchicalEclipseProject&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;A build may also expose additional custom tooling models. You can use this method to query these models.
+
+ &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder.
+ @since 1.0-milestone-3
+
+</description>
         <parameter type="java.lang.Class" name="modelType"/>
     </method>
     <method name="newBuild" returnType="org.gradle.tooling.BuildLauncher">
-        <description>
-     * Creates a launcher which can be used to execute a build.
-     *
-     * &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt;
-     *
-     * @return The launcher.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Creates a launcher which can be used to execute a build.
+
+ &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher.
+ @since 1.0-milestone-3
+
+</description>
     </method>
     <method name="newTestLauncher" returnType="org.gradle.tooling.TestLauncher">
-        <description>
-     * Creates a test launcher which can be used to execute tests.
-     *
-     * &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt;
-     *
-     * @return The launcher.
-     * @since 2.6
-     </description>
+        <description> Creates a test launcher which can be used to execute tests.
+
+ &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher.
+ @since 2.6
+
+</description>
     </method>
     <property name="model" type="void">
-        <description>
-     * Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later
-     * passed to the given handler's {@link ResultHandler#onComplete(Object)} method.
-     *
-     * &lt;p&gt;If the operation fails, the handler's {@link ResultHandler#onFailure(GradleConnectionException)} method is called with the appropriate exception.
-     * See {@link #getModel(Class)} for a description of the various exceptions that the operation may fail with.
-     *
-     * &lt;p&gt;This method is simply a convenience for calling {@code model(modelType).get(handler)}&lt;/p&gt;
-     *
-     * @param modelType The model type.
-     * @param handler The handler to pass the result to.
-     * @param &lt;T&gt; The model type.
-     * @throws IllegalStateException When this connection has been closed or is closing.
-     * @since 1.0-milestone-3
-     </description>
+        <description> Starts fetching a snapshot of the given model, passing the result to the given handler when complete. This method returns immediately, and the result is later
+ passed to the given handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method.
+
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt; method is called with the appropriate exception.
+ See &lt;a href='type://org.gradle.tooling.ProjectConnection#getModel(Class)'&gt;#getModel(Class)&lt;/a&gt; for a description of the various exceptions that the operation may fail with.
+
+ &lt;p&gt;This method is simply a convenience for calling &lt;a href='type://model(modelType).get(handler)'&gt;model(modelType).get(handler)&lt;/a&gt;&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
+ @throws IllegalStateException When this connection has been closed or is closing.
+ @since 1.0-milestone-3
+
+</description>
     </property>
 </type>

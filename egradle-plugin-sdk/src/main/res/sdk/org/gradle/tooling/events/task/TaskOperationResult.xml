@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskOperationResult" version="3.0">
-    <description>
- * Describes the result of running a task operation.
- *
- * @since 2.5
- </description>
+    <description> Describes the result of running a task operation.
+
+ @since 2.5
+
+</description>
     <interface name="org.gradle.tooling.events.OperationResult"/>
 </type>

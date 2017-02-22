@@ -193,23 +193,26 @@ public class EstimateDelegationTargetsByJavadocActionTest {
 	@Test
 	public void estimateDelegationTarget_byJavaDoc__for_type_set_delegate_from_javadoc_of_methods1_2_into_methods() {
 		/* prepare */
-		Type type = mock(Type.class);
+		Type type = mock(Type.class,"type");
 		Set<Method> methods = new LinkedHashSet<>();
 
-		XMLMethod m1 = mock(XMLMethod.class);
+		XMLMethod m1 = mock(XMLMethod.class,"m1");
+		when(m1.getName()).thenReturn("m1");
 		when(m1.getDelegationTarget()).thenReturn(null);
 		StringBuilder description1 = new StringBuilder();
 		description1.append("bla\n<br> bla\n<br> bla <a href='type://Type1'>TypeX</a> and so on ...");
 		when(m1.getDescription()).thenReturn(description1.toString());
 		methods.add(m1);
 
-		XMLMethod m2 = mock(XMLMethod.class);
+		XMLMethod m2 = mock(XMLMethod.class,"m2");
+		when(m2.getName()).thenReturn("m2");
 		when(m2.getDelegationTarget()).thenReturn(null);
 		StringBuilder description2 = new StringBuilder();
 		description2.append("bla\n<br> bla\n<br> bla <a href='type://Type2'>TypeX</a> and so on ...");
 		when(m2.getDescription()).thenReturn(description2.toString());
 		methods.add(m2);
 
+		// type has two methods: m1 and m2, both have descriptions with delegation info inside
 		when(type.getDefinedMethods()).thenReturn(methods);
 
 		/* execute */

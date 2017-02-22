@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugin.devel.tasks.ValidateTaskProperties" version="3.0" superType="org.gradle.api.DefaultTask">
-    <description>
- * Validates task property annotations.
- *
- * &lt;p&gt;
- *     Task properties must be annotated with one of:
- * &lt;/p&gt;
- *
- * &lt;ul&gt;
- *     &lt;li&gt;
- *         &lt;b&gt;Properties taken into account during up-to-date checks:&lt;/b&gt;
- *         &lt;ul&gt;
-*              &lt;li&gt;
- *                 {@literal @}{@link org.gradle.api.tasks.Input},
- *                 {@literal @}{@link org.gradle.api.tasks.Nested},
- *                 {@literal @}{@link org.gradle.api.tasks.InputFile},
- *                 {@literal @}{@link org.gradle.api.tasks.InputDirectory},
- *                 {@literal @}{@link org.gradle.api.tasks.InputFiles}
- *                 to mark it as an input to the task.
- *             &lt;/li&gt;
- *             &lt;li&gt;
- *                 {@literal @}{@link org.gradle.api.tasks.OutputFile},
- *                 {@literal @}{@link org.gradle.api.tasks.OutputDirectory}
- *                 to mark it as an output of the task.
- *             &lt;/li&gt;
- *         &lt;/ul&gt;
- *    &lt;/li&gt;
- *    &lt;li&gt;
- *         &lt;b&gt;Properties ignored during up-to-date checks:&lt;/b&gt;
- *         &lt;ul&gt;
- *             &lt;li&gt;{@literal @}{@link javax.inject.Inject} marks a Gradle service used by the task.&lt;/li&gt;
- *             &lt;li&gt;{@literal @}{@link org.gradle.api.tasks.Console Console} marks a property that only influences the console output of the task.&lt;/li&gt;
- *             &lt;li&gt;{@literal @}{@link org.gradle.api.tasks.Internal Internal} mark an internal property of the task.&lt;/li&gt;
- *         &lt;/ul&gt;
- *     &lt;/li&gt;
- * &lt;/ul&gt;
- </description>
+    <description> Validates task property annotations.
+
+ &lt;p&gt;
+     Task properties must be annotated with one of:
+ &lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;
+         &lt;b&gt;Properties taken into account during up-to-date checks:&lt;/b&gt;
+         &lt;ul&gt;
+              &lt;li&gt;
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.Input'&gt;org.gradle.api.tasks.Input&lt;/a&gt;,
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.Nested'&gt;org.gradle.api.tasks.Nested&lt;/a&gt;,
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.InputFile'&gt;org.gradle.api.tasks.InputFile&lt;/a&gt;,
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt;,
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.InputFiles'&gt;org.gradle.api.tasks.InputFiles&lt;/a&gt;
+                 to mark it as an input to the task.
+             &lt;/li&gt;
+             &lt;li&gt;
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.OutputFile'&gt;org.gradle.api.tasks.OutputFile&lt;/a&gt;,
+                 {@literal @}&lt;a href='type://org.gradle.api.tasks.OutputDirectory'&gt;org.gradle.api.tasks.OutputDirectory&lt;/a&gt;
+                 to mark it as an output of the task.
+             &lt;/li&gt;
+         &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+         &lt;b&gt;Properties ignored during up-to-date checks:&lt;/b&gt;
+         &lt;ul&gt;
+             &lt;li&gt;{@literal @}&lt;a href='type://javax.inject.Inject'&gt;javax.inject.Inject&lt;/a&gt; marks a Gradle service used by the task.&lt;/li&gt;
+             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Console Console'&gt;org.gradle.api.tasks.Console Console&lt;/a&gt; marks a property that only influences the console output of the task.&lt;/li&gt;
+             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Internal Internal'&gt;org.gradle.api.tasks.Internal Internal&lt;/a&gt; mark an internal property of the task.&lt;/li&gt;
+         &lt;/ul&gt;
+     &lt;/li&gt;
+ &lt;/ul&gt;
+
+</description>
     <method name="apply" returnType="org.gradle.api.InvalidUserDataException">
         <parameter type="java.lang.String" name="problemMessage"/>
     </method>
@@ -45,60 +45,60 @@
     </method>
     <method name="getClassLoaderFactory" returnType="org.gradle.internal.classloader.ClassLoaderFactory"/>
     <method name="getClassesDir" returnType="java.io.File">
-        <description>
-     * The directory containing the classes to validate.
-     </description>
+        <description> The directory containing the classes to validate.
+
+</description>
     </method>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * The classpath used to load the classes under validation.
-     </description>
+        <description> The classpath used to load the classes under validation.
+
+</description>
     </method>
     <method name="getFailOnWarning" returnType="boolean">
-        <description>
-     * Returns whether the build should break when the verifications performed by this task detects a warning.
-     </description>
+        <description> Returns whether the build should break when the verifications performed by this task detects a warning.
+
+</description>
     </method>
     <method name="getIgnoreFailures" returnType="boolean">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </method>
     <method name="getOutputFile" returnType="java.io.File">
-        <description>
-     * Returns the output file to store the report in.
-     </description>
+        <description> Returns the output file to store the report in.
+
+</description>
     </method>
     <method name="setClassesDir" returnType="void">
-        <description>
-     * Sets the directory containing the classes to validate.
-     </description>
+        <description> Sets the directory containing the classes to validate.
+
+</description>
         <parameter type="java.io.File" name="classesDir"/>
     </method>
     <method name="setClasspath" returnType="void">
-        <description>
-     * Sets the classpath used to load the classes under validation.
-     </description>
+        <description> Sets the classpath used to load the classes under validation.
+
+</description>
         <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
     </method>
     <method name="setFailOnWarning" returnType="void">
-        <description>
-     * Specifies whether the build should break when the verifications performed by this task detects a warning.
-     *
-     * @param failOnWarning {@code true} to break the build on warning, {@code false} to ignore warnings. The default is {@code false}.
-     </description>
+        <description> Specifies whether the build should break when the verifications performed by this task detects a warning.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;failOnWarning &lt;a href='type://true'&gt;true&lt;/a&gt; to break the build on warning, &lt;a href='type://false'&gt;false&lt;/a&gt; to ignore warnings. The default is &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="failOnWarning"/>
     </method>
     <method name="setIgnoreFailures" returnType="void">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="boolean" name="ignoreFailures"/>
     </method>
     <method name="setOutputFile" returnType="void">
-        <description>
-     * Sets the output file to store the report in.
-     </description>
+        <description> Sets the output file to store the report in.
+
+</description>
         <parameter type="java.lang.Object" name="outputFile"/>
     </method>
     <method name="storeResults" returnType="void">
@@ -127,28 +127,28 @@
     <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="classLoaderFactory" type="org.gradle.internal.classloader.ClassLoaderFactory"/>
     <property name="classesDir" type="java.io.File">
-        <description>
-     * The directory containing the classes to validate.
-     </description>
+        <description> The directory containing the classes to validate.
+
+</description>
     </property>
     <property name="classpath" type="org.gradle.api.file.FileCollection">
-        <description>
-     * The classpath used to load the classes under validation.
-     </description>
+        <description> The classpath used to load the classes under validation.
+
+</description>
     </property>
     <property name="failOnWarning" type="boolean">
-        <description>
-     * Returns whether the build should break when the verifications performed by this task detects a warning.
-     </description>
+        <description> Returns whether the build should break when the verifications performed by this task detects a warning.
+
+</description>
     </property>
     <property name="ignoreFailures" type="boolean">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
     <property name="outputFile" type="java.io.File">
-        <description>
-     * Returns the output file to store the report in.
-     </description>
+        <description> Returns the output file to store the report in.
+
+</description>
     </property>
 </type>

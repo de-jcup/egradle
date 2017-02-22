@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.execution.TaskExecutionAdapter" version="3.0">
-    <description>
- * A {@link TaskExecutionListener} adapter class for receiving task execution events.
- *
- * The methods in this class are empty. This class exists as convenience for creating listener objects.
- </description>
+    <description> A &lt;a href='type://TaskExecutionListener'&gt;TaskExecutionListener&lt;/a&gt; adapter class for receiving task execution events.
+
+ The methods in this class are empty. This class exists as convenience for creating listener objects.
+
+</description>
     <method name="afterExecute" returnType="void">
         <parameter type="org.gradle.api.Task" name="task"/>
         <parameter type="org.gradle.api.tasks.TaskState" name="state"/>

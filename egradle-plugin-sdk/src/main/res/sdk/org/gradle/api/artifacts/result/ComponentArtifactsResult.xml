@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ComponentArtifactsResult" version="3.0">
-    <description>
- * The result of successfully resolving a component with a set of artifacts.
- *
- * @since 2.0
- </description>
+    <description> The result of successfully resolving a component with a set of artifacts.
+
+ @since 2.0
+
+</description>
     <method name="getArtifacts" returnType="java.util.Set">
-        <description>
-     * &lt;p&gt;Returns the component artifacts of the specified type. Includes resolved and unresolved artifacts (if any).
-     *
-     * &lt;p&gt;The elements of the returned collection are declared as {@link ArtifactResult}, however the artifact instances will also implement one of the
-     * following instances:&lt;/p&gt;
-     *
-     * &lt;ul&gt;
-     *     &lt;li&gt;{@link ResolvedArtifactResult} for artifacts which were successfully resolved.&lt;/li&gt;
-     *     &lt;li&gt;{@link UnresolvedArtifactResult} for artifacts which could not be resolved for some reason.&lt;/li&gt;
-     * &lt;/ul&gt;
-     *
-     * @return the artifacts of this component with the specified type, or an empty set if no artifacts of the type exist.
-     </description>
+        <description> &lt;p&gt;Returns the component artifacts of the specified type. Includes resolved and unresolved artifacts (if any).
+
+ &lt;p&gt;The elements of the returned collection are declared as &lt;a href='type://ArtifactResult'&gt;ArtifactResult&lt;/a&gt;, however the artifact instances will also implement one of the
+ following instances:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://ResolvedArtifactResult'&gt;ResolvedArtifactResult&lt;/a&gt; for artifacts which were successfully resolved.&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://UnresolvedArtifactResult'&gt;UnresolvedArtifactResult&lt;/a&gt; for artifacts which could not be resolved for some reason.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts of this component with the specified type, or an empty set if no artifacts of the type exist.
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <interface name="org.gradle.api.artifacts.result.ComponentResult"/>
     <property name="artifacts" type="java.util.Set">
-        <description>
-     * &lt;p&gt;Returns the component artifacts of the specified type. Includes resolved and unresolved artifacts (if any).
-     *
-     * &lt;p&gt;The elements of the returned collection are declared as {@link ArtifactResult}, however the artifact instances will also implement one of the
-     * following instances:&lt;/p&gt;
-     *
-     * &lt;ul&gt;
-     *     &lt;li&gt;{@link ResolvedArtifactResult} for artifacts which were successfully resolved.&lt;/li&gt;
-     *     &lt;li&gt;{@link UnresolvedArtifactResult} for artifacts which could not be resolved for some reason.&lt;/li&gt;
-     * &lt;/ul&gt;
-     *
-     * @return the artifacts of this component with the specified type, or an empty set if no artifacts of the type exist.
-     </description>
+        <description> &lt;p&gt;Returns the component artifacts of the specified type. Includes resolved and unresolved artifacts (if any).
+
+ &lt;p&gt;The elements of the returned collection are declared as &lt;a href='type://ArtifactResult'&gt;ArtifactResult&lt;/a&gt;, however the artifact instances will also implement one of the
+ following instances:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://ResolvedArtifactResult'&gt;ResolvedArtifactResult&lt;/a&gt; for artifacts which were successfully resolved.&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://UnresolvedArtifactResult'&gt;UnresolvedArtifactResult&lt;/a&gt; for artifacts which could not be resolved for some reason.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts of this component with the specified type, or an empty set if no artifacts of the type exist.
+
+</description>
     </property>
 </type>

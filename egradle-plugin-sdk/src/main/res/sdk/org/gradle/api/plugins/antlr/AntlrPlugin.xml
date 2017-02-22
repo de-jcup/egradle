@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.antlr.AntlrPlugin" version="3.0">
-    <description>
- * A plugin for adding Antlr support to {@link JavaPlugin java projects}.
- </description>
+    <description> A plugin for adding Antlr support to &lt;a href='type://JavaPlugin java projects'&gt;JavaPlugin java projects&lt;/a&gt;.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

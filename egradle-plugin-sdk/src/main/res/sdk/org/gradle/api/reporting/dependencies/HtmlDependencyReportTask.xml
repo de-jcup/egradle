@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.reporting.dependencies.HtmlDependencyReportTask" version="3.0" documented="true">
-    <description>
- * Generates an HTML dependency report. This report
- * combines the features of the ASCII dependency report and those of the ASCII
- * dependency insight report. For a given project, it generates a tree of the dependencies
- * of every configuration, and each dependency can be clicked to show the insight of
- * this dependency.
- * &lt;p&gt;
- * This task generates a report for the task's containing project by default. But it can also generate
- * a report for multiple projects, by setting the value of the
- * &lt;code&gt;projects&lt;/code&gt; property. Here's how to generate an HTML
- * dependency report for all the projects of a multi-project build, for example:
- * &lt;pre&gt;
- * htmlDependencyReport {
- *     projects = project.allprojects
- * }
- * &lt;/pre&gt;
- * &lt;p&gt;
- * The report is generated in the &lt;code&gt;build/reports/project/dependencies&lt;/code&gt; directory by default.
- * This can also be changed by setting the &lt;code&gt;outputDirectory&lt;/code&gt;
- * property.
- </description>
+    <description> Generates an HTML dependency report. This report
+ combines the features of the ASCII dependency report and those of the ASCII
+ dependency insight report. For a given project, it generates a tree of the dependencies
+ of every configuration, and each dependency can be clicked to show the insight of
+ this dependency.
+ &lt;p&gt;
+ This task generates a report for the task's containing project by default. But it can also generate
+ a report for multiple projects, by setting the value of the
+ &lt;code&gt;projects&lt;/code&gt; property. Here's how to generate an HTML
+ dependency report for all the projects of a multi-project build, for example:
+ &lt;pre&gt;
+ htmlDependencyReport {
+     projects = project.allprojects
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The report is generated in the &lt;code&gt;build/reports/project/dependencies&lt;/code&gt; directory by default.
+ This can also be changed by setting the &lt;code&gt;outputDirectory&lt;/code&gt;
+ property.
+
+</description>
     <method name="generate" returnType="void"/>
     <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="getProjects" returnType="java.util.Set">
-        <description>
-     * Returns the set of projects to generate a report for. By default, the report is generated for the task's
-     * containing project.
-     *
-     * @return The set of files.
-     </description>
+        <description> Returns the set of projects to generate a report for. By default, the report is generated for the task's
+ containing project.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files.
+
+</description>
     </method>
     <method name="getReports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"/>
     <method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
@@ -44,22 +44,22 @@
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
     <method name="setProjects" returnType="void">
-        <description>
-     * Specifies the set of projects to generate this report for.
-     *
-     * @param projects The set of projects. Must not be null.
-     </description>
+        <description> Specifies the set of projects to generate this report for.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projects The set of projects. Must not be null.
+
+</description>
         <parameter type="java.util.Set" name="projects"/>
     </method>
     <interface name="org.gradle.api.reporting.Reporting"/>
     <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="projects" type="java.util.Set" documented="true">
-        <description>
-     * Returns the set of projects to generate a report for. By default, the report is generated for the task's
-     * containing project.
-     *
-     * @return The set of files.
-     </description>
+        <description> Returns the set of projects to generate a report for. By default, the report is generated for the task's
+ containing project.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of files.
+
+</description>
     </property>
     <property name="reports" type="org.gradle.api.reporting.dependencies.DependencyReportContainer"/>
     <property name="satisfiedBy" type="boolean"/>

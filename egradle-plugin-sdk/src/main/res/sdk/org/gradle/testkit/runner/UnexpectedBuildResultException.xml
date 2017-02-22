@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildResultException" version="3.0">
-    <description>
- * Base class for {@link UnexpectedBuildFailure} and {@link UnexpectedBuildSuccess}.
- *
- * @since 2.9
- * @see BuildResult
- </description>
+    <description> Base class for &lt;a href='type://UnexpectedBuildFailure'&gt;UnexpectedBuildFailure&lt;/a&gt; and &lt;a href='type://UnexpectedBuildSuccess'&gt;UnexpectedBuildSuccess&lt;/a&gt;.
+
+ @since 2.9
+ @see BuildResult
+
+</description>
     <method name="getBuildResult" returnType="org.gradle.testkit.runner.BuildResult">
-        <description>
-     * The result of the build execution.
-     *
-     * @return the result of the build execution
-     </description>
+        <description> The result of the build execution.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the build execution
+
+</description>
     </method>
     <property name="buildResult" type="org.gradle.testkit.runner.BuildResult">
-        <description>
-     * The result of the build execution.
-     *
-     * @return the result of the build execution
-     </description>
+        <description> The result of the build execution.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the result of the build execution
+
+</description>
     </property>
 </type>

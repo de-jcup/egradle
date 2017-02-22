@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.artifacts.Configuration.Namer" version="3.0">
-    <description>
-     * A {@link org.gradle.api.Namer} namer for configurations that returns {@link #getName()}.
-     </description>
+    <description> A &lt;a href='type://org.gradle.api.Namer'&gt;org.gradle.api.Namer&lt;/a&gt; namer for configurations that returns &lt;a href='type://org.gradle.api.artifacts.Configuration.Namer#getName()'&gt;#getName()&lt;/a&gt;.
+
+</description>
     <method name="determineName" returnType="java.lang.String">
         <parameter type="org.gradle.api.artifacts.Configuration" name="c"/>
     </method>

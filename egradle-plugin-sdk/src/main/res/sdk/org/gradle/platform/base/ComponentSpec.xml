@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.ComponentSpec" version="3.0" documented="true">
-    <description>
- * A software component that is built by Gradle.
- </description>
+    <description> A software component that is built by Gradle.
+
+</description>
     <method name="getProjectPath" returnType="java.lang.String">
-        <description>
-     * The path to the project containing this component.
-     </description>
+        <description> The path to the project containing this component.
+
+</description>
     </method>
     <interface name="org.gradle.model.ModelElement"/>
     <property name="projectPath" type="java.lang.String">
-        <description>
-     * The path to the project containing this component.
-     </description>
+        <description> The path to the project containing this component.
+
+</description>
     </property>
 </type>

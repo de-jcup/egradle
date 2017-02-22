@@ -1,159 +1,156 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.SourceSetOutput" version="3.0" documented="true">
-    <description>
- * A collection of all output directories (compiled classes, processed resources, etc.) - notice that {@link SourceSetOutput} extends {@link FileCollection}.
- * &lt;p&gt;
- * Provides output information of the source set. Allows configuring the default output dirs and specify additional output dirs.
- *
- * &lt;pre autoTested=''&gt;
- * apply plugin: 'java'
- *
- * sourceSets {
- *   main {
- *     //if you truly want to override the defaults:
- *     output.resourcesDir = 'out/res'
- *     output.classesDir   = 'out/bin'
- *   }
- * }
- * &lt;/pre&gt;
- *
- * Working with generated resources.
- * &lt;p&gt;
- * In general, we recommend generating resources into folders different than the regular resourcesDir and classesDir.
- * Usually, it makes the build easier to understand and maintain. Also it gives some additional benefits
- * because other Gradle plugins can take advantage of the output dirs 'registered' in the SourceSet.output.
- * For example: Java plugin will use those dirs in calculating class paths and for jarring the content;
- * IDEA and Eclipse plugins will put those folders on relevant classpath.
- * &lt;p&gt;
- * An example how to work with generated resources:
- *
- * &lt;pre autoTested=''&gt;
- * apply plugin: 'java'
- *
- * def generatedResources = "$buildDir/generated-resources/main"
- *
- * sourceSets {
- *   main {
- *     //let's register an output folder on the main SourceSet:
- *     output.dir(generatedResources, builtBy: 'generateMyResources')
- *     //it is now a part of the 'main' classpath and will be a part of the jar
- *   }
- * }
- *
- * //a task that generates the resources:
- * task generateMyResources {
- *   doLast {
- *     def generated = new File(generatedResources, "myGeneratedResource.properties")
- *     generated.text = "message=Stay happy!"
- *   }
- * }
- *
- * //Java plugin task 'classes' and 'testClasses' will automatically depend on relevant tasks registered with 'builtBy'
- *
- * //Eclipse/IDEA plugins will automatically depend on 'generateMyResources'
- * //because the output dir was registered with 'builtBy' information
- * apply plugin: 'idea'; apply plugin: 'eclipse'
- * &lt;/pre&gt;
- *
- * Find more information in {@link #dir(java.util.Map, Object)} and {@link #getDirs()}
- </description>
+    <description> A collection of all output directories (compiled classes, processed resources, etc.) - notice that &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt; extends &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt;.
+ &lt;p&gt;
+ Provides output information of the source set. Allows configuring the default output dirs and specify additional output dirs.
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+
+ sourceSets {
+     //if you truly want to override the defaults:
+     output.resourcesDir = 'out/res'
+     output.classesDir   = 'out/bin'
+   }
+ }
+ &lt;/pre&gt;
+
+ Working with generated resources.
+ &lt;p&gt;
+ In general, we recommend generating resources into folders different than the regular resourcesDir and classesDir.
+ Usually, it makes the build easier to understand and maintain. Also it gives some additional benefits
+ because other Gradle plugins can take advantage of the output dirs 'registered' in the SourceSet.output.
+ For example: Java plugin will use those dirs in calculating class paths and for jarring the content;
+ IDEA and Eclipse plugins will put those folders on relevant classpath.
+ &lt;p&gt;
+ An example how to work with generated resources:
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+
+ def generatedResources = "$buildDir/generated-resources/main"
+
+ sourceSets {
+     //let's register an output folder on the main SourceSet:
+     output.dir(generatedResources, builtBy: 'generateMyResources')
+     //it is now a part of the 'main' classpath and will be a part of the jar
+   }
+ }
+
+ //a task that generates the resources:
+ task generateMyResources {
+     def generated = new File(generatedResources, "myGeneratedResource.properties")
+     generated.text = "message=Stay happy!"
+   }
+ }
+
+ //Java plugin task 'classes' and 'testClasses' will automatically depend on relevant tasks registered with 'builtBy'
+
+ //Eclipse/IDEA plugins will automatically depend on 'generateMyResources'
+ //because the output dir was registered with 'builtBy' information
+ apply plugin: 'idea'; apply plugin: 'eclipse'
+ &lt;/pre&gt;
+
+ Find more information in &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#dir(java.util.Map, Object)'&gt;#dir(java.util.Map, Object)&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#getDirs()'&gt;#getDirs()&lt;/a&gt;
+
+</description>
     <method name="dir" returnType="void" documented="true">
-        <description>
-     * Registers an extra output dir. Useful for generated resources.
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @param dir - will be resolved as {@link org.gradle.api.Project#file(Object)}
-     </description>
+        <description> Registers an extra output dir. Useful for generated resources.
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir - will be resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;
+
+</description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <method name="dir" returnType="void" documented="true">
-        <description>
-     * Registers an extra output dir and the builtBy information. Useful for generated resources.
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @param options - use 'builtBy' key to configure the 'builtBy' task of the dir
-     * @param dir - will be resolved as {@link org.gradle.api.Project#file(Object)}
-     </description>
+        <description> Registers an extra output dir and the builtBy information. Useful for generated resources.
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options - use 'builtBy' key to configure the 'builtBy' task of the dir
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir - will be resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;
+
+</description>
         <parameter type="java.util.Map" name="options"/>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <method name="getClassesDir" returnType="java.io.File">
-        <description>
-     * Returns the directory to assemble the compiled classes into.
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return The classes dir. Never returns null.
-     </description>
+        <description> Returns the directory to assemble the compiled classes into.
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null.
+
+</description>
     </method>
     <method name="getDirs" returnType="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Returns all dirs registered with #dir method.
-     * Each file is resolved as {@link org.gradle.api.Project#file(Object)}
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return a new instance of registered dirs with resolved files
-     </description>
+        <description> Returns all dirs registered with #dir method.
+ Each file is resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new instance of registered dirs with resolved files
+
+</description>
     </method>
     <method name="getResourcesDir" returnType="java.io.File">
-        <description>
-     * Returns the output directory for resources
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return The dir resources are copied to.
-     </description>
+        <description> Returns the output directory for resources
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to.
+
+</description>
     </method>
     <method name="setClassesDir" returnType="void">
-        <description>
-     * Sets the directory to assemble the compiled classes into.
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @param classesDir the classes dir. Should not be null.
-     </description>
+        <description> Sets the directory to assemble the compiled classes into.
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir the classes dir. Should not be null.
+
+</description>
         <parameter type="java.lang.Object" name="classesDir"/>
     </method>
     <method name="setResourcesDir" returnType="void">
-        <description>
-     * Sets the output directory for resources
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @param resourcesDir the classes dir. Should not be null.
-     </description>
+        <description> Sets the output directory for resources
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;resourcesDir the classes dir. Should not be null.
+
+</description>
         <parameter type="java.lang.Object" name="resourcesDir"/>
     </method>
     <interface name="org.gradle.api.file.FileCollection"/>
     <property name="classesDir" type="java.io.File" documented="true">
-        <description>
-     * Returns the directory to assemble the compiled classes into.
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return The classes dir. Never returns null.
-     </description>
+        <description> Returns the directory to assemble the compiled classes into.
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classes dir. Never returns null.
+
+</description>
     </property>
     <property name="dirs" type="org.gradle.api.file.FileCollection">
-        <description>
-     * Returns all dirs registered with #dir method.
-     * Each file is resolved as {@link org.gradle.api.Project#file(Object)}
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return a new instance of registered dirs with resolved files
-     </description>
+        <description> Returns all dirs registered with #dir method.
+ Each file is resolved as &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new instance of registered dirs with resolved files
+
+</description>
     </property>
     <property name="resourcesDir" type="java.io.File" documented="true">
-        <description>
-     * Returns the output directory for resources
-     * &lt;p&gt;
-     * See example at {@link SourceSetOutput}
-     *
-     * @return The dir resources are copied to.
-     </description>
+        <description> Returns the output directory for resources
+ &lt;p&gt;
+ See example at &lt;a href='type://SourceSetOutput'&gt;SourceSetOutput&lt;/a&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dir resources are copied to.
+
+</description>
     </property>
 </type>

@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.compile.BaseForkOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
-    <description>
- * Fork options for compilation. Only take effect if {@code fork}
- * is {@code true}.
- </description>
+    <description> Fork options for compilation. Only take effect if &lt;a href='type://fork'&gt;fork&lt;/a&gt;
+ is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     <method name="excludeFromAntProperties" returnType="boolean">
         <parameter type="java.lang.String" name="fieldName"/>
     </method>
     <method name="getJvmArgs" returnType="java.util.List">
-        <description>
-     * Returns any additional JVM arguments for the compiler process.
-     * Defaults to the empty list.
-     </description>
+        <description> Returns any additional JVM arguments for the compiler process.
+ Defaults to the empty list.
+
+</description>
     </method>
     <method name="getMemoryInitialSize" returnType="java.lang.String">
-        <description>
-     * Returns the initial heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Returns the initial heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
     </method>
     <method name="getMemoryMaximumSize" returnType="java.lang.String">
-        <description>
-     * Returns the maximum heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Returns the maximum heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
     </method>
     <method name="setJvmArgs" returnType="void">
-        <description>
-     * Sets any additional JVM arguments for the compiler process.
-     * Defaults to the empty list.
-     </description>
+        <description> Sets any additional JVM arguments for the compiler process.
+ Defaults to the empty list.
+
+</description>
         <parameter type="java.util.List" name="jvmArgs"/>
     </method>
     <method name="setMemoryInitialSize" returnType="void">
-        <description>
-     * Sets the initial heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Sets the initial heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
         <parameter type="java.lang.String" name="memoryInitialSize"/>
     </method>
     <method name="setMemoryMaximumSize" returnType="void">
-        <description>
-     * Sets the maximum heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Sets the maximum heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
         <parameter type="java.lang.String" name="memoryMaximumSize"/>
     </method>
     <property name="jvmArgs" type="java.util.List">
-        <description>
-     * Returns any additional JVM arguments for the compiler process.
-     * Defaults to the empty list.
-     </description>
+        <description> Returns any additional JVM arguments for the compiler process.
+ Defaults to the empty list.
+
+</description>
     </property>
     <property name="memoryInitialSize" type="java.lang.String">
-        <description>
-     * Returns the initial heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Returns the initial heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
     </property>
     <property name="memoryMaximumSize" type="java.lang.String">
-        <description>
-     * Returns the maximum heap size for the compiler process.
-     * Defaults to {@code null}, in which case the JVM's default will be used.
-     </description>
+        <description> Returns the maximum heap size for the compiler process.
+ Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which case the JVM's default will be used.
+
+</description>
     </property>
 </type>

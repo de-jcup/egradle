@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.ResultHandler" version="3.0">
-    <description>
- * A handler for an asynchronous operation which returns an object of type T.
- *
- * @param &lt;T&gt; The result type.
- * @since 1.0-milestone-3
- </description>
+    <description> A handler for an asynchronous operation which returns an object of type T.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type.
+ @since 1.0-milestone-3
+
+</description>
     <method name="onComplete" returnType="void">
-        <description>
-     * Handles successful completion of the operation.
-     *
-     * @param result the result
-     * @since 1.0-milestone-3
-     </description>
+        <description> Handles successful completion of the operation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;result the result
+ @since 1.0-milestone-3
+
+</description>
         <parameter type="T" name="result"/>
     </method>
     <method name="onFailure" returnType="void">
-        <description>
-     * Handles a failed operation. This method is invoked once only for a given operation.
-     *
-     * @param failure the failure
-     * @since 1.0-milestone-3
-     </description>
+        <description> Handles a failed operation. This method is invoked once only for a given operation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;failure the failure
+ @since 1.0-milestone-3
+
+</description>
         <parameter type="org.gradle.tooling.GradleConnectionException" name="failure"/>
     </method>
 </type>

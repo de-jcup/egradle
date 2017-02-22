@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.scala.tasks.AbstractScalaCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile" documented="true">
-    <description>
- * An abstract Scala compile task sharing common functionality for compiling scala.
- </description>
+    <description> An abstract Scala compile task sharing common functionality for compiling scala.
+
+</description>
     <method name="apply" returnType="boolean">
         <parameter type="Map.Entry" name="entry"/>
     </method>
@@ -20,24 +20,24 @@
         <parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/>
     </method>
     <method name="getOptions" returnType="org.gradle.api.tasks.compile.CompileOptions">
-        <description>
-     * Returns the Java compilation options.
-     </description>
+        <description> Returns the Java compilation options.
+
+</description>
     </method>
     <method name="getScalaCompileOptions" returnType="org.gradle.language.scala.tasks.BaseScalaCompileOptions">
-        <description>
-     * Returns the Scala compilation options.
-     </description>
+        <description> Returns the Scala compilation options.
+
+</description>
     </method>
     <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="options" type="org.gradle.api.tasks.compile.CompileOptions" documented="true">
-        <description>
-     * Returns the Java compilation options.
-     </description>
+        <description> Returns the Java compilation options.
+
+</description>
     </property>
     <property name="scalaCompileOptions" type="org.gradle.language.scala.tasks.BaseScalaCompileOptions" documented="true">
-        <description>
-     * Returns the Scala compilation options.
-     </description>
+        <description> Returns the Scala compilation options.
+
+</description>
     </property>
 </type>

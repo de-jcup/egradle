@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.scala.plugins.ScalaLanguagePlugin" version="3.0">
-    <description>
- * Plugin for compiling Scala code. Applies the {@link org.gradle.language.base.plugins.ComponentModelBasePlugin} and {@link org.gradle.language.jvm.plugins.JvmResourcesPlugin}.
- * Registers "scala" language support with the {@link org.gradle.language.scala.ScalaLanguageSourceSet}.
- </description>
+    <description> Plugin for compiling Scala code. Applies the &lt;a href='type://org.gradle.language.base.plugins.ComponentModelBasePlugin'&gt;org.gradle.language.base.plugins.ComponentModelBasePlugin&lt;/a&gt; and &lt;a href='type://org.gradle.language.jvm.plugins.JvmResourcesPlugin'&gt;org.gradle.language.jvm.plugins.JvmResourcesPlugin&lt;/a&gt;.
+ Registers "scala" language support with the &lt;a href='type://org.gradle.language.scala.ScalaLanguageSourceSet'&gt;org.gradle.language.scala.ScalaLanguageSourceSet&lt;/a&gt;.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

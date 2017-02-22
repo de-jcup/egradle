@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.ProjectEvaluationListener" version="3.0">
-    <description>
- * &lt;p&gt;An {@code ProjectEvaluationListener} is notified when a project is evaluated. You add can add an {@code
- * ProjectEvaluationListener} to a {@link org.gradle.api.invocation.Gradle} using {@link
- * org.gradle.api.invocation.Gradle#addProjectEvaluationListener(ProjectEvaluationListener)}.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;An &lt;a href='type://ProjectEvaluationListener'&gt;ProjectEvaluationListener&lt;/a&gt; is notified when a project is evaluated. You add can add an &lt;a href='type://ProjectEvaluationListener'&gt;ProjectEvaluationListener&lt;/a&gt; to a &lt;a href='type://org.gradle.api.invocation.Gradle'&gt;org.gradle.api.invocation.Gradle&lt;/a&gt; using &lt;a href='type://org.gradle.api.invocation.Gradle#addProjectEvaluationListener(ProjectEvaluationListener)'&gt;org.gradle.api.invocation.Gradle#addProjectEvaluationListener(ProjectEvaluationListener)&lt;/a&gt;.&lt;/p&gt;
+
+</description>
     <method name="afterEvaluate" returnType="void">
-        <description>
-     * &lt;p&gt;This method is called when a project has been evaluated, and before the evaluated project is made available to
-     * other projects.&lt;/p&gt;
-     *
-     * @param project The project which was evaluated. Never null.
-     * @param state The project evaluation state. If project evaluation failed, the exception is available in this
-     * state. Never null.
-     </description>
+        <description> &lt;p&gt;This method is called when a project has been evaluated, and before the evaluated project is made available to
+ other projects.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;project The project which was evaluated. Never null.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;state The project evaluation state. If project evaluation failed, the exception is available in this
+ state. Never null.
+
+</description>
         <parameter type="org.gradle.api.Project" name="project"/>
         <parameter type="org.gradle.api.ProjectState" name="state"/>
     </method>
     <method name="beforeEvaluate" returnType="void">
-        <description>
-     * This method is called immediately before a project is evaluated.
-     *
-     * @param project The which is to be evaluated. Never null.
-     </description>
+        <description> This method is called immediately before a project is evaluated.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;project The which is to be evaluated. Never null.
+
+</description>
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
 </type>

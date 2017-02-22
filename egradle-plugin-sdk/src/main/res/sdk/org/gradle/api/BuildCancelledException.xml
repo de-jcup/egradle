@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.BuildCancelledException" version="3.0" superType="org.gradle.api.GradleException">
-    <description>
- * &lt;p&gt;A &lt;code&gt;BuildCancelledException&lt;/code&gt; is thrown when a build is interrupted due to cancellation request.
- *
- * @since 2.1
- </description>
+    <description> &lt;p&gt;A &lt;code&gt;BuildCancelledException&lt;/code&gt; is thrown when a build is interrupted due to cancellation request.
+
+ @since 2.1
+
+</description>
 </type>

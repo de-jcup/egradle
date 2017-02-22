@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.BinaryTasksCollection" version="3.0">
-    <description>
- * A collection of tasks associated to a binary
- </description>
+    <description> A collection of tasks associated to a binary
+
+</description>
     <method name="create" returnType="void">
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Class" name="type"/>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
     <method name="getBuild" returnType="org.gradle.api.Task">
-        <description>
-     * The task that can be used to assemble this binary.
-     </description>
+        <description> The task that can be used to assemble this binary.
+
+</description>
     </method>
     <method name="taskName" returnType="java.lang.String">
-        <description>
-     * Generates a name for a task that performs some action on the binary.
-     </description>
+        <description> Generates a name for a task that performs some action on the binary.
+
+</description>
         <parameter type="java.lang.String" name="verb"/>
     </method>
     <method name="taskName" returnType="java.lang.String">
-        <description>
-     * Generates a name for a task that performs some action on the binary.
-     </description>
+        <description> Generates a name for a task that performs some action on the binary.
+
+</description>
         <parameter type="java.lang.String" name="verb"/>
         <parameter type="java.lang.String" name="object"/>
     </method>
     <interface name="org.gradle.api.DomainObjectSet"/>
     <property name="build" type="org.gradle.api.Task">
-        <description>
-     * The task that can be used to assemble this binary.
-     </description>
+        <description> The task that can be used to assemble this binary.
+
+</description>
     </property>
 </type>

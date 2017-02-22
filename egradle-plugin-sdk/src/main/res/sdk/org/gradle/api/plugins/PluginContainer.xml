@@ -1,135 +1,135 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.PluginContainer" version="3.0">
-    <description>
- * &lt;p&gt;A {@code PluginContainer} is used to manage a set of {@link org.gradle.api.Plugin} instances applied to a
- * particular project.&lt;/p&gt;
- *
- * &lt;p&gt;Plugins can be specified using either an id or type. The id of a plugin is specified using a
- * META-INF/gradle-plugins/${id}.properties classpath resource.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://PluginContainer'&gt;PluginContainer&lt;/a&gt; is used to manage a set of &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; instances applied to a
+ particular project.&lt;/p&gt;
+
+ &lt;p&gt;Plugins can be specified using either an id or type. The id of a plugin is specified using a
+ META-INF/gradle-plugins/${id}.properties classpath resource.&lt;/p&gt;
+
+</description>
     <method name="apply" returnType="T">
-        <description>
-     * Applies a plugin to the project. This usually means that the plugin uses the project API to add and modify the
-     * state of the project. This method can be called an arbitrary number of times for a particular plugin type. The
-     * plugin will be actually used only the first time this method is called.
-     *
-     * @param type The type of the plugin to be used
-     * @return The plugin which has been used against the project.
-     </description>
+        <description> Applies a plugin to the project. This usually means that the plugin uses the project API to add and modify the
+ state of the project. This method can be called an arbitrary number of times for a particular plugin type. The
+ plugin will be actually used only the first time this method is called.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin to be used
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugin which has been used against the project.
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <method name="apply" returnType="org.gradle.api.Plugin">
-        <description>
-     * Has the same behavior as {@link #apply(Class)} except that the plugin is specified via its id. Not all
-     * plugins have an id.
-     *
-     * @param id The id of the plugin to be applied.
-     * @return The plugin which has been used against the project.
-     </description>
+        <description> Has the same behavior as &lt;a href='type://org.gradle.api.plugins.PluginContainer#apply(Class)'&gt;#apply(Class)&lt;/a&gt; except that the plugin is specified via its id. Not all
+ plugins have an id.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id The id of the plugin to be applied.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugin which has been used against the project.
+
+</description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="findPlugin" returnType="T">
-        <description>
-     * Returns the plugin for the given type.
-     *
-     * @param type The type of the plugin
-     * @return the plugin or null if no plugin for the given type exists.
-     </description>
+        <description> Returns the plugin for the given type.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin or null if no plugin for the given type exists.
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <method name="findPlugin" returnType="org.gradle.api.Plugin">
-        <description>
-     * Returns the plugin for the given id.
-     *
-     * @param id The id of the plugin
-     * @return the plugin or null if no plugin for the given id exists.
-     </description>
+        <description> Returns the plugin for the given id.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id The id of the plugin
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin or null if no plugin for the given id exists.
+
+</description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="getAt" returnType="T">
-        <description>
-     * Returns a plugin with the specified type if this plugin has been used in the project. You can use the Groovy
-     * {@code []} operator to call this method from a build script.
-     *
-     * @param type The type of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given type.
-     </description>
+        <description> Returns a plugin with the specified type if this plugin has been used in the project. You can use the Groovy
+ &lt;a href='type://[]'&gt;[]&lt;/a&gt; operator to call this method from a build script.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+ @throws UnknownPluginException When there is no plugin with the given type.
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <method name="getAt" returnType="org.gradle.api.Plugin">
-        <description>
-     * Returns a plugin with the specified id if this plugin has been used in the project. You can use the Groovy
-     * {@code []} operator to call this method from a build script.
-     *
-     * @param id The id of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given id.
-     </description>
+        <description> Returns a plugin with the specified id if this plugin has been used in the project. You can use the Groovy
+ &lt;a href='type://[]'&gt;[]&lt;/a&gt; operator to call this method from a build script.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id The id of the plugin
+ @throws UnknownPluginException When there is no plugin with the given id.
+
+</description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="getPlugin" returnType="T">
-        <description>
-     * Returns a plugin with the specified type if this plugin has been used in the project.
-     *
-     * @param type The type of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given type.
-     </description>
+        <description> Returns a plugin with the specified type if this plugin has been used in the project.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+ @throws UnknownPluginException When there is no plugin with the given type.
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <method name="getPlugin" returnType="org.gradle.api.Plugin">
-        <description>
-     * Returns a plugin with the specified id if this plugin has been used in the project.
-     *
-     * @param id The id of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given id.
-     </description>
+        <description> Returns a plugin with the specified id if this plugin has been used in the project.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id The id of the plugin
+ @throws UnknownPluginException When there is no plugin with the given id.
+
+</description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="hasPlugin" returnType="boolean">
-        <description>
-     * Returns true if the container has a plugin with the given type, false otherwise.
-     *
-     * @param type The type of the plugin
-     </description>
+        <description> Returns true if the container has a plugin with the given type, false otherwise.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+
+</description>
         <parameter type="java.lang.Class" name="type"/>
     </method>
     <method name="hasPlugin" returnType="boolean">
-        <description>
-     * Returns true if the container has a plugin with the given id, false otherwise.
-     *
-     * @param id The id of the plugin
-     </description>
+        <description> Returns true if the container has a plugin with the given id, false otherwise.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id The id of the plugin
+
+</description>
         <parameter type="java.lang.String" name="id"/>
     </method>
     <method name="withId" returnType="void">
-        <description>
-     * Executes or registers an action for a plugin with given id.
-     * If the plugin was already applied, the action is executed.
-     * If the plugin is applied sometime later the action will be executed after the plugin is applied.
-     * If the plugin is never applied, the action is never executed.
-     * The behavior is similar to {@link #withType(Class, org.gradle.api.Action)}.
-     *
-     * @param pluginId the id of the plugin
-     * @param action the action
-     </description>
+        <description> Executes or registers an action for a plugin with given id.
+ If the plugin was already applied, the action is executed.
+ If the plugin is applied sometime later the action will be executed after the plugin is applied.
+ If the plugin is never applied, the action is never executed.
+ The behavior is similar to &lt;a href='type://org.gradle.api.plugins.PluginContainer#withType(Class, org.gradle.api.Action)'&gt;#withType(Class, org.gradle.api.Action)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginId the id of the plugin
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action
+
+</description>
         <parameter type="java.lang.String" name="pluginId"/>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <interface name="org.gradle.api.plugins.PluginCollection"/>
     <property name="at" type="T">
-        <description>
-     * Returns a plugin with the specified type if this plugin has been used in the project. You can use the Groovy
-     * {@code []} operator to call this method from a build script.
-     *
-     * @param type The type of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given type.
-     </description>
+        <description> Returns a plugin with the specified type if this plugin has been used in the project. You can use the Groovy
+ &lt;a href='type://[]'&gt;[]&lt;/a&gt; operator to call this method from a build script.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+ @throws UnknownPluginException When there is no plugin with the given type.
+
+</description>
     </property>
     <property name="plugin" type="T">
-        <description>
-     * Returns a plugin with the specified type if this plugin has been used in the project.
-     *
-     * @param type The type of the plugin
-     * @throws UnknownPluginException When there is no plugin with the given type.
-     </description>
+        <description> Returns a plugin with the specified type if this plugin has been used in the project.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the plugin
+ @throws UnknownPluginException When there is no plugin with the given type.
+
+</description>
     </property>
 </type>

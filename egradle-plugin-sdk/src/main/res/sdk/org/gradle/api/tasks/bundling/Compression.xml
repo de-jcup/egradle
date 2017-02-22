@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.bundling.Compression" version="3.0">
-    <description>
- * Specifies the compression which should be applied to a TAR archive.
- </description>
+    <description> Specifies the compression which should be applied to a TAR archive.
+
+</description>
     <method name="getDefaultExtension" returnType="java.lang.String"/>
     <method name="getSupportedExtensions" returnType="java.util.List"/>
     <property name="defaultExtension" type="java.lang.String"/>

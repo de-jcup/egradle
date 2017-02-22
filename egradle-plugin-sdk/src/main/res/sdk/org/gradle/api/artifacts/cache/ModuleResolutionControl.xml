@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.cache.ModuleResolutionControl" version="3.0">
-    <description>
- * Command methods for controlling module resolution via the DSL.
- </description>
+    <description> Command methods for controlling module resolution via the DSL.
+
+</description>
     <method name="isChanging" returnType="boolean">
-        <description>
-     * Does the module change content over time?
-     * @return if the module is changing
-     </description>
+        <description> Does the module change content over time?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if the module is changing
+
+</description>
     </method>
     <interface name="org.gradle.api.artifacts.cache.ResolutionControl"/>
     <property name="changing" type="boolean">
-        <description>
-     * Does the module change content over time?
-     * @return if the module is changing
-     </description>
+        <description> Does the module change content over time?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if the module is changing
+
+</description>
     </property>
 </type>

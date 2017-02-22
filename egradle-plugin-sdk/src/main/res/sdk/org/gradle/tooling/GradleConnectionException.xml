@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.tooling.GradleConnectionException" version="3.0">
-    <description>
- * Thrown when there is some problem using a Gradle connection.
- *
- * @since 1.0-milestone-3
- </description>
+    <description> Thrown when there is some problem using a Gradle connection.
+
+ @since 1.0-milestone-3
+
+</description>
 </type>

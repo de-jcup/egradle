@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.DependencySpecBuilder" version="3.0">
-    <description>
- * A builder of a {@link DependencySpec}. Implementations are required to return
- * immutable dependency specs.
- </description>
+    <description> A builder of a &lt;a href='type://DependencySpec'&gt;DependencySpec&lt;/a&gt;. Implementations are required to return
+ immutable dependency specs.
+
+</description>
     <method name="build" returnType="org.gradle.platform.base.DependencySpec">
-        <description>
-     * Builds a concrete immutable {@link DependencySpec} instance.
-     *
-     * @return an immutable dependency specification
-     </description>
+        <description> Builds a concrete immutable &lt;a href='type://DependencySpec'&gt;DependencySpec&lt;/a&gt; instance.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an immutable dependency specification
+
+</description>
     </method>
 </type>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.external.javadoc.CoreJavadocOptions" version="3.0">
-    <description>
- * Provides the core Javadoc Options. That is, provides the options which are not doclet specific.
- </description>
+    <description> Provides the core Javadoc Options. That is, provides the options which are not doclet specific.
+
+</description>
     <method name="addBooleanOption" returnType="org.gradle.external.javadoc.JavadocOptionFileOption">
         <parameter type="java.lang.String" name="option"/>
     </method>
@@ -105,11 +105,11 @@
         <parameter type="java.io.File" name="argumentFiles"/>
     </method>
     <method name="overview" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
-        <description>
-     * Fluent setter for the overview option.
-     * @param overview The new overview.
-     * @return The &lt;code&gt;MinimalJavadocOptions&lt;/code&gt; object.
-     </description>
+        <description> Fluent setter for the overview option.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;overview The new overview.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;MinimalJavadocOptions&lt;/code&gt; object.
+
+</description>
         <parameter type="java.lang.String" name="overview"/>
     </method>
     <method name="quiet" returnType="org.gradle.external.javadoc.MinimalJavadocOptions"/>

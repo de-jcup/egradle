@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.JDependPlugin" version="3.0">
-    <description>
- * A {@link org.gradle.api.Plugin} that generates design quality metrics by scanning your source packages.
- *
- * This is done using the JDepend tool. This plugin will automatically generate a task for each Java source set.
- *
- * See &lt;a href="http://www.clarkware.com/software/JDepend.html"&gt;JDepend&lt;/a&gt; for more information.
- *
- * @see JDependExtension
- * @see JDepend
- </description>
+    <description> A &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; that generates design quality metrics by scanning your source packages.
+
+ This is done using the JDepend tool. This plugin will automatically generate a task for each Java source set.
+
+ See &lt;a href="http://www.clarkware.com/software/JDepend.html"&gt;JDepend&lt;/a&gt; for more information.
+
+ @see JDependExtension
+ @see JDepend
+
+</description>
     <method name="call" returnType="java.io.File"/>
     <method name="configureDefaultDependencies" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>

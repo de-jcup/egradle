@@ -1,68 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.application.CreateStartScripts" version="3.0" superType="org.gradle.jvm.application.tasks.CreateStartScripts">
-    <description>
- * Creates start scripts for launching JVM applications.
- * &lt;p&gt;
- * Example:
- * &lt;pre autoTested=''&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   outputDir = file('build/sample')
- *   mainClassName = 'org.gradle.test.Main'
- *   applicationName = 'myApp'
- *   classpath = files('path/to/some.jar')
- * }
- * &lt;/pre&gt;
- * &lt;p&gt;
- * Note: the Gradle {@code "application"} plugin adds a pre-configured task of this type named {@code "createStartScripts"}.
- * &lt;p&gt;
- * The task generates separate scripts targeted at Microsoft Windows environments and UNIX-like environments (e.g. Linux, Mac OS X).
- * The actual generation is implemented by the {@link #getWindowsStartScriptGenerator()} and {@link #getUnixStartScriptGenerator()} properties, of type
- * {@link org.gradle.jvm.application.scripts.ScriptGenerator}.
- * &lt;p&gt;
- * Example:
- * &lt;pre autoTested=''&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   unixStartScriptGenerator = new CustomUnixStartScriptGenerator()
- *   windowsStartScriptGenerator = new CustomWindowsStartScriptGenerator()
- * }
- *
- * class CustomUnixStartScriptGenerator implements ScriptGenerator {
- *   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
- *     // implementation
- *   }
- * }
- *
- * class CustomWindowsStartScriptGenerator implements ScriptGenerator {
- *   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
- *     // implementation
- *   }
- * }
- * &lt;/pre&gt;
- * &lt;p&gt;
- * The default generators are of the type {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}, with default templates.
- * This templates can be changed via the {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)} method.
- * &lt;p&gt;
- * The default implementations used by this task use &lt;a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine"&gt;Groovy's SimpleTemplateEngine&lt;/a&gt;
- * to parse the template, with the following variables available:
- * &lt;p&gt;
- * &lt;ul&gt;
- * &lt;li&gt;{@code applicationName}&lt;/li&gt;
- * &lt;li&gt;{@code optsEnvironmentVar}&lt;/li&gt;
- * &lt;li&gt;{@code exitEnvironmentVar}&lt;/li&gt;
- * &lt;li&gt;{@code mainClassName}&lt;/li&gt;
- * &lt;li&gt;{@code defaultJvmOpts}&lt;/li&gt;
- * &lt;li&gt;{@code appNameSystemProperty}&lt;/li&gt;
- * &lt;li&gt;{@code appHomeRelativePath}&lt;/li&gt;
- * &lt;li&gt;{@code classpath}&lt;/li&gt;
- * &lt;/ul&gt;
- * &lt;p&gt;
- * Example:
- * &lt;p&gt;
- * &lt;pre&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   unixStartScriptGenerator.template = resources.text.fromFile('customUnixStartScript.txt')
- *   windowsStartScriptGenerator.template = resources.text.fromFile('customWindowsStartScript.txt')
- * }
- * &lt;/pre&gt;
- </description>
+    <description> Creates start scripts for launching JVM applications.
+ &lt;p&gt;
+ Example:
+ &lt;pre autoTested=''&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   outputDir = file('build/sample')
+   mainClassName = 'org.gradle.test.Main'
+   applicationName = 'myApp'
+   classpath = files('path/to/some.jar')
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Note: the Gradle &lt;a href='type://"application"'&gt;"application"&lt;/a&gt; plugin adds a pre-configured task of this type named &lt;a href='type://"createStartScripts"'&gt;"createStartScripts"&lt;/a&gt;.
+ &lt;p&gt;
+ The task generates separate scripts targeted at Microsoft Windows environments and UNIX-like environments (e.g. Linux, Mac OS X).
+ The actual generation is implemented by the &lt;a href='type://org.gradle.api.tasks.application.CreateStartScripts#getWindowsStartScriptGenerator()'&gt;#getWindowsStartScriptGenerator()&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.application.CreateStartScripts#getUnixStartScriptGenerator()'&gt;#getUnixStartScriptGenerator()&lt;/a&gt; properties, of type
+ &lt;a href='type://org.gradle.jvm.application.scripts.ScriptGenerator'&gt;org.gradle.jvm.application.scripts.ScriptGenerator&lt;/a&gt;.
+ &lt;p&gt;
+ Example:
+ &lt;pre autoTested=''&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   unixStartScriptGenerator = new CustomUnixStartScriptGenerator()
+   windowsStartScriptGenerator = new CustomWindowsStartScriptGenerator()
+ }
+
+ class CustomUnixStartScriptGenerator implements ScriptGenerator {
+     // implementation
+   }
+ }
+
+ class CustomWindowsStartScriptGenerator implements ScriptGenerator {
+     // implementation
+   }
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The default generators are of the type &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;, with default templates.
+ This templates can be changed via the &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)&lt;/a&gt; method.
+ &lt;p&gt;
+ The default implementations used by this task use &lt;a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine"&gt;Groovy's SimpleTemplateEngine&lt;/a&gt;
+ to parse the template, with the following variables available:
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href='type://applicationName'&gt;applicationName&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://optsEnvironmentVar'&gt;optsEnvironmentVar&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://exitEnvironmentVar'&gt;exitEnvironmentVar&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://mainClassName'&gt;mainClassName&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://defaultJvmOpts'&gt;defaultJvmOpts&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://appNameSystemProperty'&gt;appNameSystemProperty&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://appHomeRelativePath'&gt;appHomeRelativePath&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://classpath'&gt;classpath&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Example:
+ &lt;p&gt;
+ &lt;pre&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   unixStartScriptGenerator.template = resources.text.fromFile('customUnixStartScript.txt')
+   windowsStartScriptGenerator.template = resources.text.fromFile('customWindowsStartScript.txt')
+ }
+ &lt;/pre&gt;
+
+</description>
 </type>

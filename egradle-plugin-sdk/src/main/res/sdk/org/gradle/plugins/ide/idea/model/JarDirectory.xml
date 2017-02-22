@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.model.JarDirectory" version="3.0">
-    <description>
- * Represents a jar directory element of an idea module library.
- </description>
+    <description> Represents a jar directory element of an idea module library.
+
+</description>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
     <method name="getPath" returnType="org.gradle.plugins.ide.idea.model.Path">
-        <description>
-     * The path of the jar directory
-     </description>
+        <description> The path of the jar directory
+
+</description>
     </method>
     <method name="hashCode" returnType="int"/>
     <method name="isRecursive" returnType="boolean"/>
     <method name="setPath" returnType="void">
-        <description>
-     * The value for the recursive attribute of the jar directory element.
-     </description>
+        <description> The value for the recursive attribute of the jar directory element.
+
+</description>
         <parameter type="org.gradle.plugins.ide.idea.model.Path" name="path"/>
     </method>
     <method name="setRecursive" returnType="void">
@@ -24,9 +24,9 @@
     </method>
     <method name="toString" returnType="java.lang.String"/>
     <property name="path" type="org.gradle.plugins.ide.idea.model.Path">
-        <description>
-     * The path of the jar directory
-     </description>
+        <description> The path of the jar directory
+
+</description>
     </property>
     <property name="recursive" type="boolean"/>
 </type>

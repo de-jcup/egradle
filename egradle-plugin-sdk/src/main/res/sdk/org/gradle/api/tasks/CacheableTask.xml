@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.CacheableTask" version="3.0">
-    <description>
- * &lt;p&gt;Attached to a task type to indicate that task output caching should be enabled by default for tasks of this type.&lt;/p&gt;
- *
- * &lt;p&gt;Only tasks that produce reproducible and relocatable output should be marked with {@code CacheableTask}.&lt;/p&gt;
- *
- * &lt;p&gt;Caching for individual task instances can be disabled via {@link TaskOutputs#cacheIf(Spec)}.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;Attached to a task type to indicate that task output caching should be enabled by default for tasks of this type.&lt;/p&gt;
+
+ &lt;p&gt;Only tasks that produce reproducible and relocatable output should be marked with &lt;a href='type://CacheableTask'&gt;CacheableTask&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;Caching for individual task instances can be disabled via &lt;a href='type://TaskOutputs#cacheIf(Spec)'&gt;TaskOutputs#cacheIf(Spec)&lt;/a&gt;.&lt;/p&gt;
+
+</description>
 </type>

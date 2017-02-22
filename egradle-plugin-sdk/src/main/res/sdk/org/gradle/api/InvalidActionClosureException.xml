@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.InvalidActionClosureException" version="3.0" superType="org.gradle.api.GradleException">
-    <description>
- * Thrown when a {@link Closure} is given as an {@link Action} implementation, but has the wrong signature.
- </description>
+    <description> Thrown when a &lt;a href='type://Closure'&gt;Closure&lt;/a&gt; is given as an &lt;a href='type://Action'&gt;Action&lt;/a&gt; implementation, but has the wrong signature.
+
+</description>
     <method name="getArgument" returnType="java.lang.Object">
-        <description>
-     * The argument the action was executed with.
-     *
-     * @return The argument the action was executed with.
-     </description>
+        <description> The argument the action was executed with.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The argument the action was executed with.
+
+</description>
     </method>
     <method name="getClosure" returnType="groovy.lang.Closure">
-        <description>
-     * The closure being used as an action.
-     *
-     * @return The closure being used as an action.
-     </description>
+        <description> The closure being used as an action.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The closure being used as an action.
+
+</description>
     </method>
     <method name="toMessage" returnType="java.lang.String">
         <parameter type="groovy.lang.Closure" name="closure"/>
@@ -25,17 +25,17 @@
         <parameter type="java.lang.Class" name="clazz"/>
     </method>
     <property name="argument" type="java.lang.Object">
-        <description>
-     * The argument the action was executed with.
-     *
-     * @return The argument the action was executed with.
-     </description>
+        <description> The argument the action was executed with.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The argument the action was executed with.
+
+</description>
     </property>
     <property name="closure" type="groovy.lang.Closure">
-        <description>
-     * The closure being used as an action.
-     *
-     * @return The closure being used as an action.
-     </description>
+        <description> The closure being used as an action.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The closure being used as an action.
+
+</description>
     </property>
 </type>

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.SharedLibraryBinary" version="3.0" documented="true">
-    <description>
- * A {@link NativeLibrary} that has been compiled and linked as a shared library.
- </description>
+    <description> A &lt;a href='type://NativeLibrary'&gt;NativeLibrary&lt;/a&gt; that has been compiled and linked as a shared library.
+
+</description>
     <method name="getSharedLibraryFile" returnType="java.io.File">
-        <description>
-     * The shared library file.
-     </description>
+        <description> The shared library file.
+
+</description>
     </method>
     <method name="getSharedLibraryLinkFile" returnType="java.io.File">
-        <description>
-     * The shared library link file.
-     </description>
+        <description> The shared library link file.
+
+</description>
     </method>
     <interface name="org.gradle.nativeplatform.NativeLibraryBinary"/>
     <property name="sharedLibraryFile" type="java.io.File" documented="true">
-        <description>
-     * The shared library file.
-     </description>
+        <description> The shared library file.
+
+</description>
     </property>
     <property name="sharedLibraryLinkFile" type="java.io.File" documented="true">
-        <description>
-     * The shared library link file.
-     </description>
+        <description> The shared library link file.
+
+</description>
     </property>
 </type>

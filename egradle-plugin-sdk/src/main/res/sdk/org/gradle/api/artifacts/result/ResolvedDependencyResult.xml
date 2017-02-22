@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ResolvedDependencyResult" version="3.0">
-    <description>
- * A dependency that was resolved successfully.
- </description>
+    <description> A dependency that was resolved successfully.
+
+</description>
     <method name="getSelected" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult">
-        <description>
-     * Returns the selected component. This may not necessarily be the same as the requested component. For example, a dynamic version
-     * may have been requested, or the version may have been substituted due to conflict resolution, or by being forced, or for some other reason.
-     </description>
+        <description> Returns the selected component. This may not necessarily be the same as the requested component. For example, a dynamic version
+ may have been requested, or the version may have been substituted due to conflict resolution, or by being forced, or for some other reason.
+
+</description>
     </method>
     <interface name="org.gradle.api.artifacts.result.DependencyResult"/>
     <property name="selected" type="org.gradle.api.artifacts.result.ResolvedComponentResult">
-        <description>
-     * Returns the selected component. This may not necessarily be the same as the requested component. For example, a dynamic version
-     * may have been requested, or the version may have been substituted due to conflict resolution, or by being forced, or for some other reason.
-     </description>
+        <description> Returns the selected component. This may not necessarily be the same as the requested component. For example, a dynamic version
+ may have been requested, or the version may have been substituted due to conflict resolution, or by being forced, or for some other reason.
+
+</description>
     </property>
 </type>

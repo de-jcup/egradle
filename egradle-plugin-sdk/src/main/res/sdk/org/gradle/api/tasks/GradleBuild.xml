@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.GradleBuild" version="3.0" documented="true">
-    <description>
- * Executes a Gradle build.
- </description>
+    <description> Executes a Gradle build.
+
+</description>
     <method name="build" returnType="void"/>
     <method name="getBuildFile" returnType="java.io.File">
-        <description>
-     * Returns the build file that should be used for this build. Defaults to {@value
-     * org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
-     *
-     * @return The build file. May be null.
-     </description>
+        <description> Returns the build file that should be used for this build. Defaults to {@value
+ org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null.
+
+</description>
     </method>
     <method name="getDir" returnType="java.io.File">
-        <description>
-     * Returns the project directory for the build. Defaults to the project directory.
-     *
-     * @return The project directory. Never returns null.
-     </description>
+        <description> Returns the project directory for the build. Defaults to the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. Never returns null.
+
+</description>
     </method>
     <method name="getStartParameter" returnType="org.gradle.StartParameter">
-        <description>
-     * Returns the full set of parameters that will be used to execute the build.
-     *
-     * @return the parameters. Never returns null.
-     </description>
+        <description> Returns the full set of parameters that will be used to execute the build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the parameters. Never returns null.
+
+</description>
     </method>
     <method name="getTasks" returnType="java.util.List">
-        <description>
-     * Returns the tasks that should be executed for this build.
-     *
-     * @return The sequence. May be empty. Never returns null.
-     </description>
+        <description> Returns the tasks that should be executed for this build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The sequence. May be empty. Never returns null.
+
+</description>
     </method>
     <method name="setBuildFile" returnType="void">
-        <description>
-     * Sets the build file that should be used for this build.
-     *
-     * @param file The build file. May be null to use the default build file for the build.
-     </description>
+        <description> Sets the build file that should be used for this build.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The build file. May be null to use the default build file for the build.
+
+</description>
         <parameter type="java.lang.Object" name="file"/>
     </method>
     <method name="setDir" returnType="void">
-        <description>
-     * Sets the project directory for the build.
-     *
-     * @param dir The project directory. Should not be null.
-     </description>
+        <description> Sets the project directory for the build.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The project directory. Should not be null.
+
+</description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <method name="setStartParameter" returnType="void">
-        <description>
-     * Sets the full set of parameters that will be used to execute the build.
-     *
-     * @param startParameter the parameters. Should not be null.
-     </description>
+        <description> Sets the full set of parameters that will be used to execute the build.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;startParameter the parameters. Should not be null.
+
+</description>
         <parameter type="org.gradle.StartParameter" name="startParameter"/>
     </method>
     <method name="setTasks" returnType="void">
-        <description>
-     * Sets the tasks that should be executed for this build.
-     *
-     * @param tasks The task names. May be empty or null to use the default tasks for the build.
-     </description>
+        <description> Sets the tasks that should be executed for this build.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The task names. May be empty or null to use the default tasks for the build.
+
+</description>
         <parameter type="java.util.Collection" name="tasks"/>
     </method>
     <property name="buildFile" type="java.io.File" documented="true">
-        <description>
-     * Returns the build file that should be used for this build. Defaults to {@value
-     * org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
-     *
-     * @return The build file. May be null.
-     </description>
+        <description> Returns the build file that should be used for this build. Defaults to {@value
+ org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null.
+
+</description>
     </property>
     <property name="dir" type="java.io.File" documented="true">
-        <description>
-     * Returns the project directory for the build. Defaults to the project directory.
-     *
-     * @return The project directory. Never returns null.
-     </description>
+        <description> Returns the project directory for the build. Defaults to the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory. Never returns null.
+
+</description>
     </property>
     <property name="startParameter" type="org.gradle.StartParameter" documented="true">
-        <description>
-     * Returns the full set of parameters that will be used to execute the build.
-     *
-     * @return the parameters. Never returns null.
-     </description>
+        <description> Returns the full set of parameters that will be used to execute the build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the parameters. Never returns null.
+
+</description>
     </property>
     <property name="tasks" type="java.util.List" documented="true">
-        <description>
-     * Returns the tasks that should be executed for this build.
-     *
-     * @return The sequence. May be empty. Never returns null.
-     </description>
+        <description> Returns the tasks that should be executed for this build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The sequence. May be empty. Never returns null.
+
+</description>
     </property>
 </type>

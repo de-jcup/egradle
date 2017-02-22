@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.incremental.InputFileDetails" version="3.0">
-    <description>
- * A change to an input file.
- </description>
+    <description> A change to an input file.
+
+</description>
     <method name="getFile" returnType="java.io.File">
-        <description>
-     * The input file, which may no longer exist.
-     * @return the input file
-     </description>
+        <description> The input file, which may no longer exist.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input file
+
+</description>
     </method>
     <method name="isAdded" returnType="boolean">
-        <description>
-     * Was the file added?
-     * @return true if the file was added since the last execution
-     </description>
+        <description> Was the file added?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if the file was added since the last execution
+
+</description>
     </method>
     <method name="isModified" returnType="boolean">
-        <description>
-     * Was the file modified?
-     * @return if the file was modified
-     </description>
+        <description> Was the file modified?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if the file was modified
+
+</description>
     </method>
     <method name="isRemoved" returnType="boolean">
-        <description>
-     * Was the file removed?
-     * @return true if the file was removed since the last execution
-     </description>
+        <description> Was the file removed?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if the file was removed since the last execution
+
+</description>
     </method>
     <property name="added" type="boolean">
-        <description>
-     * Was the file added?
-     * @return true if the file was added since the last execution
-     </description>
+        <description> Was the file added?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if the file was added since the last execution
+
+</description>
     </property>
     <property name="file" type="java.io.File">
-        <description>
-     * The input file, which may no longer exist.
-     * @return the input file
-     </description>
+        <description> The input file, which may no longer exist.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input file
+
+</description>
     </property>
     <property name="modified" type="boolean">
-        <description>
-     * Was the file modified?
-     * @return if the file was modified
-     </description>
+        <description> Was the file modified?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if the file was modified
+
+</description>
     </property>
     <property name="removed" type="boolean">
-        <description>
-     * Was the file removed?
-     * @return true if the file was removed since the last execution
-     </description>
+        <description> Was the file removed?
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if the file was removed since the last execution
+
+</description>
     </property>
 </type>

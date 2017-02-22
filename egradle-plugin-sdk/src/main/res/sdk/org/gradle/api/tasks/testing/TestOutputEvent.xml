@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestOutputEvent" version="3.0">
-    <description>
- * Standard output or standard error message logged during the execution of the test
- </description>
+    <description> Standard output or standard error message logged during the execution of the test
+
+</description>
     <method name="getDestination" returnType="org.gradle.api.tasks.testing.TestOutputEvent.Destination">
-        <description>
-     * Destination of the message
-     </description>
+        <description> Destination of the message
+
+</description>
     </method>
     <method name="getMessage" returnType="java.lang.String">
-        <description>
-     * Message content
-     </description>
+        <description> Message content
+
+</description>
     </method>
     <property name="destination" type="org.gradle.api.tasks.testing.TestOutputEvent.Destination">
-        <description>
-     * Destination of the message
-     </description>
+        <description> Destination of the message
+
+</description>
     </property>
     <property name="message" type="java.lang.String">
-        <description>
-     * Message content
-     </description>
+        <description> Message content
+
+</description>
     </property>
 </type>

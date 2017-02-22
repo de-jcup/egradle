@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.publish.ivy.IvyArtifactSet" version="3.0" documented="true">
-    <description>
- * A Collection of {@link IvyArtifact}s to be included in an {@link IvyPublication}.
- *
- * Being a {@link DomainObjectSet}, a {@code IvyArtifactSet} provides convenient methods for querying, filtering, and applying actions to the set of {@link IvyArtifact}s.
- *
- * &lt;pre autoTested="true"&gt;
- * apply plugin: 'ivy-publish'
- *
- * def publication = publishing.publications.create("my-pub", IvyPublication)
- * def artifacts = publication.artifacts
- *
- * artifacts.matching({
- *     it.type == "source"
- * }).all({
- *     it.extension = "src.jar"
- * })
- * &lt;/pre&gt;
- *
- * @see DomainObjectSet
- </description>
+    <description> A Collection of &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt;s to be included in an &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;.
+
+ Being a &lt;a href='type://DomainObjectSet'&gt;DomainObjectSet&lt;/a&gt;, a &lt;a href='type://IvyArtifactSet'&gt;IvyArtifactSet&lt;/a&gt; provides convenient methods for querying, filtering, and applying actions to the set of &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt;s.
+
+ &lt;pre autoTested="true"&gt;
+ apply plugin: 'ivy-publish'
+
+ def publication = publishing.publications.create("my-pub", IvyPublication)
+ def artifacts = publication.artifacts
+
+ artifacts.matching({
+     it.type == "source"
+ }).all({
+     it.extension = "src.jar"
+ })
+ &lt;/pre&gt;
+
+ @see DomainObjectSet
+
+</description>
     <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" documented="true">
-        <description>
-     * Creates and adds a {@link IvyArtifact} to the set.
-     *
-     * The semantics of this method are the same as {@link IvyPublication#artifact(Object)}.
-     *
-     * @param source The source of the artifact content.
-     </description>
+        <description> Creates and adds a &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to the set.
+
+ The semantics of this method are the same as &lt;a href='type://IvyPublication#artifact(Object)'&gt;IvyPublication#artifact(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact content.
+
+</description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
     <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" documented="true">
-        <description>
-     * Creates and adds a {@link IvyArtifact} to the set, which is configured by the associated action.
-     *
-     * The semantics of this method are the same as {@link IvyPublication#artifact(Object, Action)}.
-     *
-     * @param source The source of the artifact.
-     * @param config An action to configure the values of the constructed {@link IvyArtifact}.
-     </description>
+        <description> Creates and adds a &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to the set, which is configured by the associated action.
+
+ The semantics of this method are the same as &lt;a href='type://IvyPublication#artifact(Object, Action)'&gt;IvyPublication#artifact(Object, Action)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config An action to configure the values of the constructed &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt;.
+
+</description>
         <parameter type="java.lang.Object" name="source"/>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>

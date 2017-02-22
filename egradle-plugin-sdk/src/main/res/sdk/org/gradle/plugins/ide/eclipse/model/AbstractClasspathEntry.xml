@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry" version="3.0">
-    <description>
- * Common superclass for all {@link ClasspathEntry} instances.
- </description>
+    <description> Common superclass for all &lt;a href='type://ClasspathEntry'&gt;ClasspathEntry&lt;/a&gt; instances.
+
+</description>
     <method name="addClasspathEntry" returnType="groovy.util.Node">
         <parameter type="groovy.util.Node" name="node"/>
         <parameter type="java.util.Map" name="attributes"/>

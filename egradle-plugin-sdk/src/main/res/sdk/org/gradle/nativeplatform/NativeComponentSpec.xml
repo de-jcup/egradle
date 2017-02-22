@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeComponentSpec" version="3.0" documented="true">
-    <description>
- * Definition of a software component that is to be built by Gradle to run a on JVM platform.
- </description>
+    <description> Definition of a software component that is to be built by Gradle to run a on JVM platform.
+
+</description>
     <method name="getBaseName" returnType="java.lang.String">
-        <description>
-     * The name that is used to construct the output file names when building this component.
-     </description>
+        <description> The name that is used to construct the output file names when building this component.
+
+</description>
     </method>
     <method name="setBaseName" returnType="void">
-        <description>
-     * Sets the name that is used to construct the output file names when building this component.
-     </description>
+        <description> Sets the name that is used to construct the output file names when building this component.
+
+</description>
         <parameter type="java.lang.String" name="baseName"/>
     </method>
     <interface name="org.gradle.platform.base.ComponentSpec"/>
     <property name="baseName" type="java.lang.String" documented="true">
-        <description>
-     * The name that is used to construct the output file names when building this component.
-     </description>
+        <description> The name that is used to construct the output file names when building this component.
+
+</description>
     </property>
 </type>

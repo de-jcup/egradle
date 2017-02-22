@@ -70,6 +70,8 @@ public interface Type extends LanguageElement, GradleDocumentationInfo, Comparab
 	 * @return name of super type or <code>null</code>
 	 */
 	public String getSuperTypeAsString();
+	
+	public Type getSuperType();
 
 	public boolean isDescendantOf(String type);
 	

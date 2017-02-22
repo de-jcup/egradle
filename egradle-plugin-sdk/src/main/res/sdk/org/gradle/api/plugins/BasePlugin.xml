@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.BasePlugin" version="3.0">
-    <description>
- * &lt;p&gt;A  {@link org.gradle.api.Plugin}  which defines a basic project lifecycle and some common convention properties.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A  &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt;  which defines a basic project lifecycle and some common convention properties.&lt;/p&gt;
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="java.io.File"/>
+    <method name="call" returnType="java.lang.String"/>
     <method name="configureArchiveDefaults" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
         <parameter type="org.gradle.api.plugins.BasePluginConvention" name="pluginConvention"/>

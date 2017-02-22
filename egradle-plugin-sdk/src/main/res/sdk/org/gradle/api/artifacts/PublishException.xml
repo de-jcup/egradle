@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.artifacts.PublishException" version="3.0" superType="org.gradle.api.GradleException">
-    <description>
- * &lt;p&gt;A &lt;code&gt;PublishException&lt;/code&gt; is thrown when a dependency configuration cannot be published for some reason.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;code&gt;PublishException&lt;/code&gt; is thrown when a dependency configuration cannot be published for some reason.&lt;/p&gt;
+
+</description>
 </type>

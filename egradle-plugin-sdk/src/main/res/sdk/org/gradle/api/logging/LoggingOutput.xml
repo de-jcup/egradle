@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.logging.LoggingOutput" version="3.0">
-    <description>
- * Provides access to the output of the Gradle logging system.
- </description>
+    <description> Provides access to the output of the Gradle logging system.
+
+</description>
     <method name="addStandardErrorListener" returnType="void">
-        <description>
-     * Adds a listener which receives output written to standard error by the Gradle logging system.
-     *
-     * @param listener The listener to add.
-     </description>
+        <description> Adds a listener which receives output written to standard error by the Gradle logging system.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add.
+
+</description>
         <parameter type="org.gradle.api.logging.StandardOutputListener" name="listener"/>
     </method>
     <method name="addStandardOutputListener" returnType="void">
-        <description>
-     * Adds a listener which receives output written to standard output by the Gradle logging system.
-     *
-     * @param listener The listener to add.
-     </description>
+        <description> Adds a listener which receives output written to standard output by the Gradle logging system.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to add.
+
+</description>
         <parameter type="org.gradle.api.logging.StandardOutputListener" name="listener"/>
     </method>
     <method name="removeStandardErrorListener" returnType="void">
-        <description>
-     * Removes a listener from standard error.
-     *
-     * @param listener The listener to remove.
-     </description>
+        <description> Removes a listener from standard error.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove.
+
+</description>
         <parameter type="org.gradle.api.logging.StandardOutputListener" name="listener"/>
     </method>
     <method name="removeStandardOutputListener" returnType="void">
-        <description>
-     * Removes a listener from standard output.
-     *
-     * @param listener The listener to remove.
-     </description>
+        <description> Removes a listener from standard output.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;listener The listener to remove.
+
+</description>
         <parameter type="org.gradle.api.logging.StandardOutputListener" name="listener"/>
     </method>
 </type>

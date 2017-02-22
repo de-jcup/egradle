@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.cache.ResolutionRules" version="3.0">
-    <description>
- * Represents a set of rules/actions that can be applied during dependency resolution.
- * Currently these are restricted to controlling caching, but these could possibly be extended in the future to include other manipulations.
- </description>
+    <description> Represents a set of rules/actions that can be applied during dependency resolution.
+ Currently these are restricted to controlling caching, but these could possibly be extended in the future to include other manipulations.
+
+</description>
     <method name="eachArtifact" returnType="void">
-        <description>
-     * Apply a rule to control resolution of artifacts.
-     * @param rule the rule to apply
-     </description>
+        <description> Apply a rule to control resolution of artifacts.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to apply
+
+</description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
     <method name="eachDependency" returnType="void">
-        <description>
-     * Apply a rule to control resolution of dependencies.
-     * @param rule the rule to apply
-     </description>
+        <description> Apply a rule to control resolution of dependencies.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to apply
+
+</description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
     <method name="eachModule" returnType="void">
-        <description>
-     * Apply a rule to control resolution of modules.
-     * @param rule the rule to apply
-     </description>
+        <description> Apply a rule to control resolution of modules.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule the rule to apply
+
+</description>
         <parameter type="org.gradle.api.Action" name="rule"/>
     </method>
 </type>

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.connection.GradleConnectionBuilder" version="3.0">
-    <description>
- * &lt;p&gt;Builds a new composite Gradle connection.&lt;/p&gt;
- *
- * &lt;pre autoTested=''&gt;
- * GradleConnectionBuilder builder = GradleConnector.newGradleConnection();
- * // Add a participant with root directory 'someFolder' using the Gradle version defined in the build
- * builder.addParticipant(new File("someFolder"));
- * // Add a participant with root directory 'someOtherFolder' using Gradle Version 2.6
- * builder.addParticipant(new File("someOtherFolder")).useGradleVersion("2.6");
- * // Set the Gradle user home for the entire connection
- * builder.useGradleUserHomeDir(new File("/path/to/.gradle"));
- * GradleConnection connection = builder.build();
- *
- * try {
- *    // Use connection
- * } finally {
- *    connection.close();
- * }
- * &lt;/pre&gt;
- </description>
+    <description> &lt;p&gt;Builds a new composite Gradle connection.&lt;/p&gt;
+
+ &lt;pre autoTested=''&gt;
+ GradleConnectionBuilder builder = GradleConnector.newGradleConnection();
+ // Add a participant with root directory 'someFolder' using the Gradle version defined in the build
+ builder.addParticipant(new File("someFolder"));
+ // Add a participant with root directory 'someOtherFolder' using Gradle Version 2.6
+ builder.addParticipant(new File("someOtherFolder")).useGradleVersion("2.6");
+ // Set the Gradle user home for the entire connection
+ builder.useGradleUserHomeDir(new File("/path/to/.gradle"));
+ GradleConnection connection = builder.build();
+
+ try {
+    // Use connection
+ } finally {
+    connection.close();
+ }
+ &lt;/pre&gt;
+
+</description>
     <method name="addParticipant" returnType="org.gradle.tooling.connection.GradleConnectionBuilder.ParticipantBuilder">
-        <description>
-     * Adds a new participant build to this connection, returning a build for further configuration.
-     *
-     * @param projectDirectory The root project directory for the participant.
-     *
-     * @return The builder. Never returns null.
-     </description>
+        <description> Adds a new participant build to this connection, returning a build for further configuration.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDirectory The root project directory for the participant.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder. Never returns null.
+
+</description>
         <parameter type="java.io.File" name="projectDirectory"/>
     </method>
     <method name="build" returnType="org.gradle.tooling.connection.GradleConnection">
-        <description>
-     * Builds the connection. You should call {@link GradleConnection#close()} when you are finished with the connection.
-     *
-     * @return The connection. Never returns null.
-     * @throws GradleConnectionException If the composite is invalid (e.g., no participants).
-     </description>
+        <description> Builds the connection. You should call &lt;a href='type://GradleConnection#close()'&gt;GradleConnection#close()&lt;/a&gt; when you are finished with the connection.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The connection. Never returns null.
+ @throws GradleConnectionException If the composite is invalid (e.g., no participants).
+
+</description>
     </method>
     <method name="useGradleUserHomeDir" returnType="org.gradle.tooling.connection.GradleConnectionBuilder">
-        <description>
-     * Specifies the user's Gradle home directory to use. Defaults to {@code ~/.gradle}.
-     *
-     * @param gradleUserHomeDir The user's Gradle home directory to use.
-     * @return this
-     </description>
+        <description> Specifies the user's Gradle home directory to use. Defaults to &lt;a href='type://~/.gradle'&gt;~/.gradle&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The user's Gradle home directory to use.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.io.File" name="gradleUserHomeDir"/>
     </method>
 </type>

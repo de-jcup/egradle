@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Project" version="3.0">
-    <description>
- * Represents the customizable elements of an eclipse project file. (via XML hooks everything is customizable).
- </description>
+    <description> Represents the customizable elements of an eclipse project file. (via XML hooks everything is customizable).
+
+</description>
     <method name="addBuildSpecToXml" returnType="void"/>
     <method name="addLinkedResourcesToXml" returnType="void"/>
     <method name="addNaturesToXml" returnType="void"/>
@@ -14,35 +14,35 @@
         <parameter type="java.lang.Object" name="o"/>
     </method>
     <method name="getBuildCommands" returnType="java.util.List">
-        <description>
-     * The build commands to be added to this Eclipse project.
-     </description>
+        <description> The build commands to be added to this Eclipse project.
+
+</description>
     </method>
     <method name="getComment" returnType="java.lang.String">
-        <description>
-     * A comment used for the eclipse project
-     </description>
+        <description> A comment used for the eclipse project
+
+</description>
     </method>
     <method name="getDefaultResourceName" returnType="java.lang.String"/>
     <method name="getLinkedResources" returnType="java.util.Set">
-        <description>
-     * The linkedResources to be added to this Eclipse project.
-     </description>
+        <description> The linkedResources to be added to this Eclipse project.
+
+</description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description>
-     * The name used for the name of the eclipse project
-     </description>
+        <description> The name used for the name of the eclipse project
+
+</description>
     </method>
     <method name="getNatures" returnType="java.util.List">
-        <description>
-     * The natures to be added to this Eclipse project.
-     </description>
+        <description> The natures to be added to this Eclipse project.
+
+</description>
     </method>
     <method name="getReferencedProjects" returnType="java.util.Set">
-        <description>
-     * The referenced projects of this Eclipse project.
-     </description>
+        <description> The referenced projects of this Eclipse project.
+
+</description>
     </method>
     <method name="hashCode" returnType="int"/>
     <method name="load" returnType="void">
@@ -75,34 +75,34 @@
     </method>
     <method name="toString" returnType="java.lang.String"/>
     <property name="buildCommands" type="java.util.List">
-        <description>
-     * The build commands to be added to this Eclipse project.
-     </description>
+        <description> The build commands to be added to this Eclipse project.
+
+</description>
     </property>
     <property name="comment" type="java.lang.String">
-        <description>
-     * A comment used for the eclipse project
-     </description>
+        <description> A comment used for the eclipse project
+
+</description>
     </property>
     <property name="defaultResourceName" type="java.lang.String"/>
     <property name="linkedResources" type="java.util.Set">
-        <description>
-     * The linkedResources to be added to this Eclipse project.
-     </description>
+        <description> The linkedResources to be added to this Eclipse project.
+
+</description>
     </property>
     <property name="name" type="java.lang.String">
-        <description>
-     * The name used for the name of the eclipse project
-     </description>
+        <description> The name used for the name of the eclipse project
+
+</description>
     </property>
     <property name="natures" type="java.util.List">
-        <description>
-     * The natures to be added to this Eclipse project.
-     </description>
+        <description> The natures to be added to this Eclipse project.
+
+</description>
     </property>
     <property name="referencedProjects" type="java.util.Set">
-        <description>
-     * The referenced projects of this Eclipse project.
-     </description>
+        <description> The referenced projects of this Eclipse project.
+
+</description>
     </property>
 </type>

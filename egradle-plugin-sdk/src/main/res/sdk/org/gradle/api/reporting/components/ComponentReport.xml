@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.reporting.components.ComponentReport" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
-    <description>
- * Displays some details about the software components produced by the project.
- </description>
+    <description> Displays some details about the software components produced by the project.
+
+</description>
     <method name="getBinaryRenderer" returnType="org.gradle.api.reporting.components.internal.TypeAwareBinaryRenderer"/>
     <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
     <method name="getModelRegistry" returnType="org.gradle.model.internal.registry.ModelRegistry"/>

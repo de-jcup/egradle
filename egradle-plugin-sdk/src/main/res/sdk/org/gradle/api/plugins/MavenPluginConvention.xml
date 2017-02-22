@@ -1,58 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.MavenPluginConvention" version="3.0" documented="true">
-    <description>
- * Properties and methods added by the {@link org.gradle.api.plugins.MavenPlugin}.
- </description>
+    <description> Properties and methods added by the &lt;a href='type://org.gradle.api.plugins.MavenPlugin'&gt;org.gradle.api.plugins.MavenPlugin&lt;/a&gt;.
+
+</description>
     <method name="getConf2ScopeMappings" returnType="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer">
-        <description>
-     * Returns the set of rules for how to map Gradle dependencies to Maven scopes.
-     *
-     * @return The mapping rules.
-     </description>
+        <description>Returns the set of rules for how to map Gradle dependencies to Maven scopes.
+&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The mapping rules.
+</description>
     </method>
     <method name="getMavenPomDir" returnType="java.io.File">
-        <description>
-     * Returns the directory to generate Maven POMs into.
-     </description>
+        <description>Returns the directory to generate Maven POMs into.
+</description>
     </method>
     <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom" documented="true">
-        <description>
-     * Creates a new {@link MavenPom}.
-     *
-     * @return The POM instance.
-     </description>
+        <description>Creates a new &lt;a href='type://MavenPom'&gt;MavenPom&lt;/a&gt;.
+&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM instance.
+</description>
     </method>
-    <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom" documented="true">
-        <description>
-     * Creates and configures a new {@link MavenPom}. The given closure is executed to configure the new POM instance.
-     *
-     * @param configureClosure The closure to use to configure the POM instance.
-     * @return The POM instance.
-     </description>
+    <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="MavenPom" documented="true">
+        <description>Creates and configures a new &lt;a href='type://MavenPom'&gt;MavenPom&lt;/a&gt;. The given closure is executed to configure the new POM instance.
+&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the POM instance.
+&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM instance.
+</description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="setConf2ScopeMappings" returnType="void">
         <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="conf2ScopeMappings"/>
     </method>
     <method name="setMavenPomDir" returnType="void">
-        <description>
-     * Sets the directory to generate Maven POMs into.
-     *
-     * @param pomDir The new POM directory. Evaluated as per {@link org.gradle.api.Project#file(Object)}.
-     </description>
+        <description>Sets the directory to generate Maven POMs into.
+&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pomDir The new POM directory. Evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+</description>
         <parameter type="java.lang.Object" name="pomDir"/>
     </method>
     <interface name="org.gradle.api.publication.maven.internal.MavenPomMetaInfoProvider"/>
     <property name="conf2ScopeMappings" type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" documented="true">
-        <description>
-     * Returns the set of rules for how to map Gradle dependencies to Maven scopes.
-     *
-     * @return The mapping rules.
-     </description>
+        <description> Returns the set of rules for how to map Gradle dependencies to Maven scopes.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The mapping rules.
+
+</description>
     </property>
     <property name="mavenPomDir" type="java.io.File" documented="true">
-        <description>
-     * Returns the directory to generate Maven POMs into.
-     </description>
+        <description> Returns the directory to generate Maven POMs into.
+
+</description>
     </property>
 </type>

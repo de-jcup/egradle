@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.twirl.TwirlImports" version="3.0">
-    <description>
- * Represents the available sets of default imports that can be used when compiling Twirl templates.
- </description>
+    <description> Represents the available sets of default imports that can be used when compiling Twirl templates.
+
+</description>
 </type>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.JavaPlugin" version="3.0">
-    <description>
- * &lt;p&gt;A {@link Plugin} which compiles and tests Java source, and assembles it into a JAR file.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which compiles and tests Java source, and assembles it into a JAR file.&lt;/p&gt;
+
+</description>
     <method name="addDependsOnTaskInOtherProjects" returnType="void">
-        <description>
-     * Adds a dependency on tasks with the specified name in other projects.  The other projects are determined from
-     * project lib dependencies using the specified configuration name. These may be projects this project depends on or
-     * projects that depend on this project based on the useDependOn argument.
-     *
-     * @param task Task to add dependencies to
-     * @param useDependedOn if true, add tasks from projects this project depends on, otherwise use projects that depend
-     * on this one.
-     * @param otherProjectTaskName name of task in other projects
-     * @param configurationName name of configuration to use to find the other projects
-     </description>
+        <description> Adds a dependency on tasks with the specified name in other projects.  The other projects are determined from
+ project lib dependencies using the specified configuration name. These may be projects this project depends on or
+ projects that depend on this project based on the useDependOn argument.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;task Task to add dependencies to
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useDependedOn if true, add tasks from projects this project depends on, otherwise use projects that depend
+ on this one.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;otherProjectTaskName name of task in other projects
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName name of configuration to use to find the other projects
+
+</description>
         <parameter type="org.gradle.api.Task" name="task"/>
         <parameter type="boolean" name="useDependedOn"/>
         <parameter type="java.lang.String" name="otherProjectTaskName"/>

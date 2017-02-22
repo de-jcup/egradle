@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteBinarySpec" version="3.0">
-    <description>
- * An executable which run a Google Test test suite.
- </description>
+    <description> An executable which run a Google Test test suite.
+
+</description>
     <method name="getComponent" returnType="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </method>
     <method name="getTestSuite" returnType="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </method>
     <interface name="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec"/>
     <property name="component" type="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
     <property name="testSuite" type="org.gradle.nativeplatform.test.googletest.GoogleTestTestSuiteSpec">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
 </type>

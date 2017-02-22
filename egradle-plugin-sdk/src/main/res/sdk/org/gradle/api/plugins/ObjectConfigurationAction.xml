@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.ObjectConfigurationAction" version="3.0">
-    <description>
- * &lt;p&gt;An {@code ObjectConfigurationAction} allows you to apply {@link org.gradle.api.Plugin}s and scripts to an object
- * or objects.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;An &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; allows you to apply &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt;s and scripts to an object
+ or objects.&lt;/p&gt;
+
+</description>
     <method name="from" returnType="org.gradle.api.plugins.ObjectConfigurationAction">
-        <description>
-     * Adds a script to use to configure the target objects. You can call this method multiple times, to use multiple
-     * scripts. Scripts and plugins are applied in the order that they are added.
-     *
-     * @param script The script. Evaluated as per {@link org.gradle.api.Project#file(Object)}. However, note that
-     * a URL can also be used, allowing the script to be fetched using HTTP, for example.
-     * @return this
-     </description>
+        <description> Adds a script to use to configure the target objects. You can call this method multiple times, to use multiple
+ scripts. Scripts and plugins are applied in the order that they are added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;script The script. Evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;. However, note that
+ a URL can also be used, allowing the script to be fetched using HTTP, for example.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="script"/>
     </method>
     <method name="plugin" returnType="org.gradle.api.plugins.ObjectConfigurationAction">
-        <description>
-     * Adds a {@link org.gradle.api.Plugin} to use to configure the target objects. You can call this method multiple
-     * times, to use multiple plugins. Scripts and plugins are applied in the order that they are added.
-     *
-     * @param pluginClass The plugin to apply.
-     * @return this
-     </description>
+        <description> Adds a &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; to use to configure the target objects. You can call this method multiple
+ times, to use multiple plugins. Scripts and plugins are applied in the order that they are added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginClass The plugin to apply.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Class" name="pluginClass"/>
     </method>
     <method name="plugin" returnType="org.gradle.api.plugins.ObjectConfigurationAction">
-        <description>
-     * Adds a {@link org.gradle.api.Plugin} to use to configure the target objects. You can call this method multiple
-     * times, to use multiple plugins. Scripts and plugins are applied in the order that they are added.
-     *
-     * @param pluginId The id of the plugin to apply.
-     * @return this
-     </description>
+        <description> Adds a &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; to use to configure the target objects. You can call this method multiple
+ times, to use multiple plugins. Scripts and plugins are applied in the order that they are added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginId The id of the plugin to apply.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.String" name="pluginId"/>
     </method>
     <method name="to" returnType="org.gradle.api.plugins.ObjectConfigurationAction">
-        <description>
-     * &lt;p&gt;Specifies some target objects to be configured. Any collections or arrays in the given parameters will be
-     * flattened, and the script applied to each object in the result, in the order given. Each call to this method adds
-     * some additional target objects.&lt;/p&gt;
-     *
-     * @param targets The target objects.
-     * @return this
-     </description>
+        <description> &lt;p&gt;Specifies some target objects to be configured. Any collections or arrays in the given parameters will be
+ flattened, and the script applied to each object in the result, in the order given. Each call to this method adds
+ some additional target objects.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;targets The target objects.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="targets"/>
     </method>
     <method name="type" returnType="org.gradle.api.plugins.ObjectConfigurationAction">
-        <description>
-     * Adds the plugin implemented by the given class to the target.
-     * &lt;p&gt;
-     * The class is expected to either implement {@link Plugin}, or extend {@link org.gradle.model.RuleSource}.
-     * An exception will be thrown if the class is not a valid plugin implementation.
-     *
-     * @param pluginClass the plugin to apply
-     * @return this
-     </description>
+        <description> Adds the plugin implemented by the given class to the target.
+ &lt;p&gt;
+ The class is expected to either implement &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt;, or extend &lt;a href='type://org.gradle.model.RuleSource'&gt;org.gradle.model.RuleSource&lt;/a&gt;.
+ An exception will be thrown if the class is not a valid plugin implementation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginClass the plugin to apply
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Class" name="pluginClass"/>
     </method>
 </type>

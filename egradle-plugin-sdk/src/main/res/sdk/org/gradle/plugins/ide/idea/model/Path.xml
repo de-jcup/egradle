@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.idea.model.Path" version="3.0">
-    <description>
- * Represents a path in a format as used often in ipr and iml files.
- </description>
+    <description> Represents a path in a format as used often in ipr and iml files.
+
+</description>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
     <method name="getCanonicalUrl" returnType="java.lang.String">
-        <description>
-     * Canonical url.
-     </description>
+        <description> Canonical url.
+
+</description>
     </method>
     <method name="getRelPath" returnType="java.lang.String">
-        <description>
-     * The relative path of the path. Must not be null.
-     </description>
+        <description> The relative path of the path. Must not be null.
+
+</description>
     </method>
     <method name="getUrl" returnType="java.lang.String">
-        <description>
-     * The url of the path. Must not be null.
-     </description>
+        <description> The url of the path. Must not be null.
+
+</description>
     </method>
     <method name="hashCode" returnType="int"/>
     <method name="toString" returnType="java.lang.String"/>
     <property name="canonicalUrl" type="java.lang.String">
-        <description>
-     * Canonical url.
-     </description>
+        <description> Canonical url.
+
+</description>
     </property>
     <property name="relPath" type="java.lang.String">
-        <description>
-     * The relative path of the path. Must not be null.
-     </description>
+        <description> The relative path of the path. Must not be null.
+
+</description>
     </property>
     <property name="url" type="java.lang.String">
-        <description>
-     * The url of the path. Must not be null.
-     </description>
+        <description> The url of the path. Must not be null.
+
+</description>
     </property>
 </type>

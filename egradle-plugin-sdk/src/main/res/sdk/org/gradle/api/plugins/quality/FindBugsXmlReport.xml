@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.quality.FindBugsXmlReport" version="3.0" documented="true">
-    <description>
- * The single file XML report for FindBugs.
- </description>
+    <description> The single file XML report for FindBugs.
+
+</description>
     <method name="isWithMessages" returnType="boolean">
-        <description>
-     * Whether or not FindBugs should generate XML augmented with human-readable messages.
-     * You should use this format if you plan to generate a report using an XSL stylesheet.
-     * &lt;p&gt;
-     * If {@code true}, FindBugs will augment the XML with human-readable messages.
-     * If {@code false}, FindBugs will not augment the XML with human-readable messages.
-     *
-     * @return Whether or not FindBugs should generate XML augmented with human-readable messages.
-     </description>
+        <description> Whether or not FindBugs should generate XML augmented with human-readable messages.
+ You should use this format if you plan to generate a report using an XSL stylesheet.
+ &lt;p&gt;
+ If &lt;a href='type://true'&gt;true&lt;/a&gt;, FindBugs will augment the XML with human-readable messages.
+ If &lt;a href='type://false'&gt;false&lt;/a&gt;, FindBugs will not augment the XML with human-readable messages.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not FindBugs should generate XML augmented with human-readable messages.
+
+</description>
     </method>
     <method name="setWithMessages" returnType="void">
-        <description>
-     * Whether or not FindBugs should generate XML augmented with human-readable messages.
-     *
-     * @see #isWithMessages()
-     * @param withMessages Whether or not FindBugs should generate XML augmented with human-readable messages.
-     </description>
+        <description> Whether or not FindBugs should generate XML augmented with human-readable messages.
+
+ @see #isWithMessages()
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;withMessages Whether or not FindBugs should generate XML augmented with human-readable messages.
+
+</description>
         <parameter type="boolean" name="withMessages"/>
     </method>
     <interface name="org.gradle.api.reporting.SingleFileReport"/>
     <property name="withMessages" type="boolean" documented="true">
-        <description>
-     * Whether or not FindBugs should generate XML augmented with human-readable messages.
-     * You should use this format if you plan to generate a report using an XSL stylesheet.
-     * &lt;p&gt;
-     * If {@code true}, FindBugs will augment the XML with human-readable messages.
-     * If {@code false}, FindBugs will not augment the XML with human-readable messages.
-     *
-     * @return Whether or not FindBugs should generate XML augmented with human-readable messages.
-     </description>
+        <description> Whether or not FindBugs should generate XML augmented with human-readable messages.
+ You should use this format if you plan to generate a report using an XSL stylesheet.
+ &lt;p&gt;
+ If &lt;a href='type://true'&gt;true&lt;/a&gt;, FindBugs will augment the XML with human-readable messages.
+ If &lt;a href='type://false'&gt;false&lt;/a&gt;, FindBugs will not augment the XML with human-readable messages.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Whether or not FindBugs should generate XML augmented with human-readable messages.
+
+</description>
     </property>
 </type>

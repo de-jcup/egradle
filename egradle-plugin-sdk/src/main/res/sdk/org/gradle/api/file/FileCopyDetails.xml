@@ -1,182 +1,182 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.file.FileCopyDetails" version="3.0">
-    <description>
- * &lt;p&gt;Provides details about a file or directory about to be copied, and allows some aspects of the destination file to
- * be modified.&lt;/p&gt;
- *
- * &lt;p&gt;Using this interface, you can change the destination path of the file, filter the content of the file, or exclude
- * the file from the result entirely.&lt;/p&gt;
- *
- * &lt;p&gt;Access to the source file itself after any filters have been added is not a supported operation.
- * &lt;/p&gt;
- *
- </description>
+    <description> &lt;p&gt;Provides details about a file or directory about to be copied, and allows some aspects of the destination file to
+ be modified.&lt;/p&gt;
+
+ &lt;p&gt;Using this interface, you can change the destination path of the file, filter the content of the file, or exclude
+ the file from the result entirely.&lt;/p&gt;
+
+ &lt;p&gt;Access to the source file itself after any filters have been added is not a supported operation.
+ &lt;/p&gt;
+
+
+</description>
     <method name="exclude" returnType="void">
-        <description>
-     * Excludes this file from the copy.
-     </description>
+        <description> Excludes this file from the copy.
+
+</description>
     </method>
     <method name="getDuplicatesStrategy" returnType="org.gradle.api.file.DuplicatesStrategy">
-        <description>
-     * The strategy to use if there is already a file at this file's destination.
-     * &lt;p&gt;
-     * The value can be set with a case insensitive string of the enum value (e.g. {@code 'exclude'} for {@link DuplicatesStrategy#EXCLUDE}).
-     *
-     * @see DuplicatesStrategy
-     * @return the strategy to use for this file.
-     </description>
+        <description> The strategy to use if there is already a file at this file's destination.
+ &lt;p&gt;
+ The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
+
+ @see DuplicatesStrategy
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for this file.
+
+</description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description>
-     * Returns the base name of this file at the copy destination.
-     *
-     * @return The destination name. Never returns null.
-     </description>
+        <description> Returns the base name of this file at the copy destination.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination name. Never returns null.
+
+</description>
     </method>
     <method name="getPath" returnType="java.lang.String">
-        <description>
-     * Returns the path of this file, relative to the root of the copy destination.
-     * &lt;p&gt;
-     * Always uses '/' as the hierarchy separator, regardless of platform file separator.
-     * Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
-     *
-     * @return The path, relative to the root of the copy destination. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the copy destination.
+ &lt;p&gt;
+ Always uses '/' as the hierarchy separator, regardless of platform file separator.
+ Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the copy destination. Never returns null.
+
+</description>
     </method>
     <method name="getRelativePath" returnType="org.gradle.api.file.RelativePath">
-        <description>
-     * Returns the path of this file, relative to the root of the copy destination.
-     *
-     * @return The path, relative to the root of the copy destination. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the copy destination.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the copy destination. Never returns null.
+
+</description>
     </method>
     <method name="getRelativeSourcePath" returnType="org.gradle.api.file.RelativePath">
-        <description>
-     * Returns the path of this file, relative to the root of the containing file tree.
-     *
-     * @return The path, relative to the root of the containing file tree. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the containing file tree. Never returns null.
+
+</description>
     </method>
     <method name="getSourceName" returnType="java.lang.String">
-        <description>
-     * Returns the base name of this file at the copy source.
-     *
-     * @return The source name. Never returns null.
-     </description>
+        <description> Returns the base name of this file at the copy source.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source name. Never returns null.
+
+</description>
     </method>
     <method name="getSourcePath" returnType="java.lang.String">
-        <description>
-     * Returns the path of this file, relative to the root of the containing file tree.
-     * &lt;p&gt;
-     * Always uses '/' as the hierarchy separator, regardless of platform file separator.
-     * Same as calling &lt;code&gt;getRelativeSourcePath().getPathString()&lt;/code&gt;.
-     *
-     * @return The path, relative to the root of the containing file tree. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+ &lt;p&gt;
+ Always uses '/' as the hierarchy separator, regardless of platform file separator.
+ Same as calling &lt;code&gt;getRelativeSourcePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the containing file tree. Never returns null.
+
+</description>
     </method>
     <method name="setDuplicatesStrategy" returnType="void">
-        <description>
-     * The strategy to use if there is already a file at this file's destination.
-     </description>
+        <description> The strategy to use if there is already a file at this file's destination.
+
+</description>
         <parameter type="org.gradle.api.file.DuplicatesStrategy" name="strategy"/>
     </method>
     <method name="setMode" returnType="void">
-        <description>
-     * Sets the Unix permissions of this file.
-     *
-     * @param mode the Unix permissions, e.g. {@code 0644}.
-     </description>
+        <description> Sets the Unix permissions of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mode the Unix permissions, e.g. &lt;a href='type://0644'&gt;0644&lt;/a&gt;.
+
+</description>
         <parameter type="int" name="mode"/>
     </method>
     <method name="setName" returnType="void">
-        <description>
-     * Sets the destination name of this file.
-     *
-     * @param name The destination name of this file.
-     </description>
+        <description> Sets the destination name of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The destination name of this file.
+
+</description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="setPath" returnType="void">
-        <description>
-     * Sets the destination path of this file.
-     *
-     * @param path The path of this file.
-     </description>
+        <description> Sets the destination path of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The path of this file.
+
+</description>
         <parameter type="java.lang.String" name="path"/>
     </method>
     <method name="setRelativePath" returnType="void">
-        <description>
-     * Sets the destination path of this file.
-     *
-     * @param path the new path for this file.
-     </description>
+        <description> Sets the destination path of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the new path for this file.
+
+</description>
         <parameter type="org.gradle.api.file.RelativePath" name="path"/>
     </method>
     <interface name="org.gradle.api.file.ContentFilterable"/>
     <interface name="org.gradle.api.file.FileTreeElement"/>
     <property name="duplicatesStrategy" type="org.gradle.api.file.DuplicatesStrategy">
-        <description>
-     * The strategy to use if there is already a file at this file's destination.
-     * &lt;p&gt;
-     * The value can be set with a case insensitive string of the enum value (e.g. {@code 'exclude'} for {@link DuplicatesStrategy#EXCLUDE}).
-     *
-     * @see DuplicatesStrategy
-     * @return the strategy to use for this file.
-     </description>
+        <description> The strategy to use if there is already a file at this file's destination.
+ &lt;p&gt;
+ The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
+
+ @see DuplicatesStrategy
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for this file.
+
+</description>
     </property>
     <property name="mode" type="int">
-        <description>
-     * Sets the Unix permissions of this file.
-     *
-     * @param mode the Unix permissions, e.g. {@code 0644}.
-     </description>
+        <description> Sets the Unix permissions of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mode the Unix permissions, e.g. &lt;a href='type://0644'&gt;0644&lt;/a&gt;.
+
+</description>
     </property>
     <property name="name" type="java.lang.String">
-        <description>
-     * Returns the base name of this file at the copy destination.
-     *
-     * @return The destination name. Never returns null.
-     </description>
+        <description> Returns the base name of this file at the copy destination.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination name. Never returns null.
+
+</description>
     </property>
     <property name="path" type="java.lang.String">
-        <description>
-     * Returns the path of this file, relative to the root of the copy destination.
-     * &lt;p&gt;
-     * Always uses '/' as the hierarchy separator, regardless of platform file separator.
-     * Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
-     *
-     * @return The path, relative to the root of the copy destination. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the copy destination.
+ &lt;p&gt;
+ Always uses '/' as the hierarchy separator, regardless of platform file separator.
+ Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the copy destination. Never returns null.
+
+</description>
     </property>
     <property name="relativePath" type="org.gradle.api.file.RelativePath">
-        <description>
-     * Returns the path of this file, relative to the root of the copy destination.
-     *
-     * @return The path, relative to the root of the copy destination. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the copy destination.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the copy destination. Never returns null.
+
+</description>
     </property>
     <property name="relativeSourcePath" type="org.gradle.api.file.RelativePath">
-        <description>
-     * Returns the path of this file, relative to the root of the containing file tree.
-     *
-     * @return The path, relative to the root of the containing file tree. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the containing file tree. Never returns null.
+
+</description>
     </property>
     <property name="sourceName" type="java.lang.String">
-        <description>
-     * Returns the base name of this file at the copy source.
-     *
-     * @return The source name. Never returns null.
-     </description>
+        <description> Returns the base name of this file at the copy source.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source name. Never returns null.
+
+</description>
     </property>
     <property name="sourcePath" type="java.lang.String">
-        <description>
-     * Returns the path of this file, relative to the root of the containing file tree.
-     * &lt;p&gt;
-     * Always uses '/' as the hierarchy separator, regardless of platform file separator.
-     * Same as calling &lt;code&gt;getRelativeSourcePath().getPathString()&lt;/code&gt;.
-     *
-     * @return The path, relative to the root of the containing file tree. Never returns null.
-     </description>
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+ &lt;p&gt;
+ Always uses '/' as the hierarchy separator, regardless of platform file separator.
+ Same as calling &lt;code&gt;getRelativeSourcePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path, relative to the root of the containing file tree. Never returns null.
+
+</description>
     </property>
 </type>

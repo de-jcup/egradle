@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.FindBugs" version="3.0" superType="org.gradle.api.tasks.SourceTask" documented="true">
-    <description>
- * Analyzes code with &lt;a href="http://findbugs.sourceforge.net"&gt;FindBugs&lt;/a&gt;. See the &lt;a href="http://findbugs.sourceforge.net/manual/"&gt;FindBugs Manual&lt;/a&gt; for additional information on configuration
- * options.
- </description>
+    <description> Analyzes code with &lt;a href="http://findbugs.sourceforge.net"&gt;FindBugs&lt;/a&gt;. See the &lt;a href="http://findbugs.sourceforge.net/manual/"&gt;FindBugs Manual&lt;/a&gt; for additional information on configuration
+ options.
+
+</description>
     <method name="apply" returnType="java.lang.String">
         <parameter type="java.io.File" name="input"/>
     </method>
@@ -18,152 +18,147 @@
     </method>
     <method name="generateSpec" returnType="org.gradle.api.plugins.quality.internal.findbugs.FindBugsSpec"/>
     <method name="getClasses" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * The classes to be analyzed.
-     </description>
+        <description> The classes to be analyzed.
+
+</description>
     </method>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * Compile class path for the classes to be analyzed. The classes on this class path are used during analysis but aren't analyzed themselves.
-     </description>
+        <description> Compile class path for the classes to be analyzed. The classes on this class path are used during analysis but aren't analyzed themselves.
+
+</description>
     </method>
     <method name="getEffort" returnType="java.lang.String">
-        <description>
-     * The analysis effort level. The value specified should be one of {@code min}, {@code default}, or {@code max}. Higher levels increase precision and find more bugs at the expense of running time
-     * and memory consumption.
-     </description>
+        <description> The analysis effort level. The value specified should be one of &lt;a href='type://min'&gt;min&lt;/a&gt;, &lt;a href='type://default'&gt;default&lt;/a&gt;, or &lt;a href='type://max'&gt;max&lt;/a&gt;. Higher levels increase precision and find more bugs at the expense of running time
+ and memory consumption.
+
+</description>
     </method>
     <method name="getExcludeBugsFilter" returnType="java.io.File">
-        <description>
-     * The filename of a filter specifying baseline bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying baseline bugs to exclude from being reported.
+
+</description>
     </method>
     <method name="getExcludeBugsFilterConfig" returnType="org.gradle.api.resources.TextResource">
-        <description>
-     * A filter specifying baseline bugs to exclude from being reported.
-     </description>
+        <description> A filter specifying baseline bugs to exclude from being reported.
+
+</description>
     </method>
     <method name="getExcludeFilter" returnType="java.io.File">
-        <description>
-     * The filename of a filter specifying bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying bugs to exclude from being reported.
+
+</description>
     </method>
     <method name="getExcludeFilterConfig" returnType="org.gradle.api.resources.TextResource">
-        <description>
-     * A filter specifying bugs to exclude from being reported. Replaces the {@code excludeFilter} property.
-     *
-     * @since 2.2
-     </description>
+        <description> A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property.
+
+ @since 2.2
+
+</description>
     </method>
     <method name="getExtraArgs" returnType="java.util.Collection">
-        <description>
-     * Any additional arguments (not covered here more explicitly like {@code effort}) to be passed along to FindBugs. &lt;p&gt; Extra arguments are passed to FindBugs after the arguments Gradle understands
-     * (like {@code effort} but before the list of classes to analyze. This should only be used for arguments that cannot be provided by Gradle directly. Gradle does not try to interpret or validate
-     * the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
-     * TextUICommandLine source&lt;/a&gt; for available options.
-     *
-     * @since 2.6
-     </description>
+        <description> Any additional arguments (not covered here more explicitly like &lt;a href='type://effort'&gt;effort&lt;/a&gt;) to be passed along to FindBugs. &lt;p&gt; Extra arguments are passed to FindBugs after the arguments Gradle understands
+ (like &lt;a href='type://effort'&gt;effort&lt;/a&gt; but before the list of classes to analyze. This should only be used for arguments that cannot be provided by Gradle directly. Gradle does not try to interpret or validate
+ the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
+ TextUICommandLine source&lt;/a&gt; for available options.
+
+ @since 2.6
+
+</description>
     </method>
     <method name="getFindbugsClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * Class path holding the FindBugs library.
-     </description>
+        <description> Class path holding the FindBugs library.
+
+</description>
     </method>
     <method name="getIgnoreFailures" returnType="boolean">
-        <description>
-     * Whether or not to allow the build to continue if there are warnings.
-     </description>
+        <description> Whether or not to allow the build to continue if there are warnings.
+
+</description>
     </method>
     <method name="getIncludeFilter" returnType="java.io.File">
-        <description>
-     * The filename of a filter specifying which bugs are reported.
-     </description>
+        <description> The filename of a filter specifying which bugs are reported.
+
+</description>
     </method>
     <method name="getIncludeFilterConfig" returnType="org.gradle.api.resources.TextResource">
-        <description>
-     * A filter specifying which bugs are reported. Replaces the {@code includeFilter} property.
-     *
-     * @since 2.2
-     </description>
+        <description> A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property.
+
+ @since 2.2
+
+</description>
     </method>
     <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="getMaxHeapSize" returnType="java.lang.String">
-        <description>
-     * The maximum heap size for the forked findbugs process (ex: '1g').
-     </description>
+        <description> The maximum heap size for the forked findbugs process (ex: '1g').
+
+</description>
     </method>
     <method name="getOmitVisitors" returnType="java.util.Collection">
-        <description>
-     * Similar to {@code visitors} except that it specifies bug detectors which should not be run. By default, no visitors are omitted.
-     </description>
+        <description> Similar to &lt;a href='type://visitors'&gt;visitors&lt;/a&gt; except that it specifies bug detectors which should not be run. By default, no visitors are omitted.
+
+</description>
     </method>
     <method name="getPluginClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * Class path holding any additional FindBugs plugins.
-     </description>
+        <description> Class path holding any additional FindBugs plugins.
+
+</description>
     </method>
     <method name="getReportLevel" returnType="java.lang.String">
-        <description>
-     * The priority threshold for reporting bugs. If set to {@code low}, all bugs are reported. If set to {@code medium} (the default), medium and high priority bugs are reported. If set to {@code
-     * high}, only high priority bugs are reported.
-     </description>
+        <description> The priority threshold for reporting bugs. If set to &lt;a href='type://low'&gt;low&lt;/a&gt;, all bugs are reported. If set to &lt;a href='type://medium'&gt;medium&lt;/a&gt; (the default), medium and high priority bugs are reported. If set to &lt;a href='type://high'&gt;high&lt;/a&gt;, only high priority bugs are reported.
+
+</description>
     </method>
     <method name="getReports" returnType="org.gradle.api.plugins.quality.FindBugsReports">
-        <description>
-     * The reports to be generated by this task.
-     *
-     * @return The reports container
-     </description>
+        <description> The reports to be generated by this task.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports container
+
+</description>
     </method>
     <method name="getVisitors" returnType="java.util.Collection">
-        <description>
-     * The bug detectors which should be run. The bug detectors are specified by their class names, without any package qualification. By default, all detectors which are not disabled by default are
-     * run.
-     </description>
+        <description> The bug detectors which should be run. The bug detectors are specified by their class names, without any package qualification. By default, all detectors which are not disabled by default are
+ run.
+
+</description>
     </method>
     <method name="getWorkerProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/>
     <method name="reports" returnType="org.gradle.api.plugins.quality.FindBugsReports" delegationTarget="org.gradle.api.plugins.quality.FindBugsReports" documented="true">
-        <description>
-     * Configures the reports to be generated by this task.
-     *
-     * The contained reports can be configured by name and closures. Example:
-     *
-     * &lt;pre&gt;
-     * findbugsTask {
-     *   reports {
-     *     xml {
-     *       destination "build/findbugs.xml"
-     *     }
-     *   }
-     * }
-     * &lt;/pre&gt;
-     *
-     * @param closure The configuration
-     * @return The reports container
-     </description>
+        <description> Configures the reports to be generated by this task.
+
+ The contained reports can be configured by name and closures. Example:
+
+ &lt;pre&gt;
+ findbugsTask {
+       destination "build/findbugs.xml"
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports container
+
+</description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="reports" returnType="org.gradle.api.plugins.quality.FindBugsReports" documented="true">
-        <description>
-     * Configures the reports to be generated by this task.
-     *
-     * The contained reports can be configured by name and closures. Example:
-     *
-     * &lt;pre&gt;
-     * findbugsTask {
-     *   reports {
-     *     xml {
-     *       destination "build/findbugs.xml"
-     *     }
-     *   }
-     * }
-     * &lt;/pre&gt;
-     *
-     *
-     * @param configureAction The configuration
-     * @return The reports container
-     </description>
+        <description> Configures the reports to be generated by this task.
+
+ The contained reports can be configured by name and closures. Example:
+
+ &lt;pre&gt;
+ findbugsTask {
+       destination "build/findbugs.xml"
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction The configuration
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports container
+
+</description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
     </method>
     <method name="run" returnType="void"/>
@@ -177,18 +172,18 @@
         <parameter type="java.lang.String" name="effort"/>
     </method>
     <method name="setExcludeBugsFilter" returnType="void">
-        <description>
-     * The filename of a filter specifying baseline bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying baseline bugs to exclude from being reported.
+
+</description>
         <parameter type="java.io.File" name="filter"/>
     </method>
     <method name="setExcludeBugsFilterConfig" returnType="void">
         <parameter type="org.gradle.api.resources.TextResource" name="excludeBugsFilterConfig"/>
     </method>
     <method name="setExcludeFilter" returnType="void">
-        <description>
-     * The filename of a filter specifying bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying bugs to exclude from being reported.
+
+</description>
         <parameter type="java.io.File" name="filter"/>
     </method>
     <method name="setExcludeFilterConfig" returnType="void">
@@ -204,9 +199,9 @@
         <parameter type="boolean" name="ignoreFailures"/>
     </method>
     <method name="setIncludeFilter" returnType="void">
-        <description>
-     * The filename of a filter specifying which bugs are reported.
-     </description>
+        <description> The filename of a filter specifying which bugs are reported.
+
+</description>
         <parameter type="java.io.File" name="filter"/>
     </method>
     <method name="setIncludeFilterConfig" returnType="void">
@@ -230,109 +225,108 @@
     <interface name="org.gradle.api.reporting.Reporting"/>
     <interface name="org.gradle.api.tasks.VerificationTask"/>
     <property name="classes" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * The classes to be analyzed.
-     </description>
+        <description> The classes to be analyzed.
+
+</description>
     </property>
     <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Compile class path for the classes to be analyzed. The classes on this class path are used during analysis but aren't analyzed themselves.
-     </description>
+        <description> Compile class path for the classes to be analyzed. The classes on this class path are used during analysis but aren't analyzed themselves.
+
+</description>
     </property>
     <property name="effort" type="java.lang.String" documented="true">
-        <description>
-     * The analysis effort level. The value specified should be one of {@code min}, {@code default}, or {@code max}. Higher levels increase precision and find more bugs at the expense of running time
-     * and memory consumption.
-     </description>
+        <description> The analysis effort level. The value specified should be one of &lt;a href='type://min'&gt;min&lt;/a&gt;, &lt;a href='type://default'&gt;default&lt;/a&gt;, or &lt;a href='type://max'&gt;max&lt;/a&gt;. Higher levels increase precision and find more bugs at the expense of running time
+ and memory consumption.
+
+</description>
     </property>
     <property name="excludeBugsFilter" type="java.io.File">
-        <description>
-     * The filename of a filter specifying baseline bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying baseline bugs to exclude from being reported.
+
+</description>
     </property>
     <property name="excludeBugsFilterConfig" type="org.gradle.api.resources.TextResource">
-        <description>
-     * A filter specifying baseline bugs to exclude from being reported.
-     </description>
+        <description> A filter specifying baseline bugs to exclude from being reported.
+
+</description>
     </property>
     <property name="excludeFilter" type="java.io.File" documented="true">
-        <description>
-     * The filename of a filter specifying bugs to exclude from being reported.
-     </description>
+        <description> The filename of a filter specifying bugs to exclude from being reported.
+
+</description>
     </property>
     <property name="excludeFilterConfig" type="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * A filter specifying bugs to exclude from being reported. Replaces the {@code excludeFilter} property.
-     *
-     * @since 2.2
-     </description>
+        <description> A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property.
+
+ @since 2.2
+
+</description>
     </property>
     <property name="extraArgs" type="java.util.Collection">
-        <description>
-     * Any additional arguments (not covered here more explicitly like {@code effort}) to be passed along to FindBugs. &lt;p&gt; Extra arguments are passed to FindBugs after the arguments Gradle understands
-     * (like {@code effort} but before the list of classes to analyze. This should only be used for arguments that cannot be provided by Gradle directly. Gradle does not try to interpret or validate
-     * the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
-     * TextUICommandLine source&lt;/a&gt; for available options.
-     *
-     * @since 2.6
-     </description>
+        <description> Any additional arguments (not covered here more explicitly like &lt;a href='type://effort'&gt;effort&lt;/a&gt;) to be passed along to FindBugs. &lt;p&gt; Extra arguments are passed to FindBugs after the arguments Gradle understands
+ (like &lt;a href='type://effort'&gt;effort&lt;/a&gt; but before the list of classes to analyze. This should only be used for arguments that cannot be provided by Gradle directly. Gradle does not try to interpret or validate
+ the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
+ TextUICommandLine source&lt;/a&gt; for available options.
+
+ @since 2.6
+
+</description>
     </property>
     <property name="findbugsClasspath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Class path holding the FindBugs library.
-     </description>
+        <description> Class path holding the FindBugs library.
+
+</description>
     </property>
     <property name="ignoreFailures" type="boolean" documented="true">
-        <description>
-     * Whether or not to allow the build to continue if there are warnings.
-     </description>
+        <description> Whether or not to allow the build to continue if there are warnings.
+
+</description>
     </property>
     <property name="includeFilter" type="java.io.File" documented="true">
-        <description>
-     * The filename of a filter specifying which bugs are reported.
-     </description>
+        <description> The filename of a filter specifying which bugs are reported.
+
+</description>
     </property>
     <property name="includeFilterConfig" type="org.gradle.api.resources.TextResource" documented="true">
-        <description>
-     * A filter specifying which bugs are reported. Replaces the {@code includeFilter} property.
-     *
-     * @since 2.2
-     </description>
+        <description> A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property.
+
+ @since 2.2
+
+</description>
     </property>
     <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="maxHeapSize" type="java.lang.String" documented="true">
-        <description>
-     * The maximum heap size for the forked findbugs process (ex: '1g').
-     </description>
+        <description> The maximum heap size for the forked findbugs process (ex: '1g').
+
+</description>
     </property>
     <property name="omitVisitors" type="java.util.Collection" documented="true">
-        <description>
-     * Similar to {@code visitors} except that it specifies bug detectors which should not be run. By default, no visitors are omitted.
-     </description>
+        <description> Similar to &lt;a href='type://visitors'&gt;visitors&lt;/a&gt; except that it specifies bug detectors which should not be run. By default, no visitors are omitted.
+
+</description>
     </property>
     <property name="pluginClasspath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Class path holding any additional FindBugs plugins.
-     </description>
+        <description> Class path holding any additional FindBugs plugins.
+
+</description>
     </property>
     <property name="reportLevel" type="java.lang.String" documented="true">
-        <description>
-     * The priority threshold for reporting bugs. If set to {@code low}, all bugs are reported. If set to {@code medium} (the default), medium and high priority bugs are reported. If set to {@code
-     * high}, only high priority bugs are reported.
-     </description>
+        <description> The priority threshold for reporting bugs. If set to &lt;a href='type://low'&gt;low&lt;/a&gt;, all bugs are reported. If set to &lt;a href='type://medium'&gt;medium&lt;/a&gt; (the default), medium and high priority bugs are reported. If set to &lt;a href='type://high'&gt;high&lt;/a&gt;, only high priority bugs are reported.
+
+</description>
     </property>
     <property name="reports" type="org.gradle.api.plugins.quality.FindBugsReports" documented="true">
-        <description>
-     * The reports to be generated by this task.
-     *
-     * @return The reports container
-     </description>
+        <description> The reports to be generated by this task.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The reports container
+
+</description>
     </property>
     <property name="visitors" type="java.util.Collection" documented="true">
-        <description>
-     * The bug detectors which should be run. The bug detectors are specified by their class names, without any package qualification. By default, all detectors which are not disabled by default are
-     * run.
-     </description>
+        <description> The bug detectors which should be run. The bug detectors are specified by their class names, without any package qualification. By default, all detectors which are not disabled by default are
+ run.
+
+</description>
     </property>
     <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
 </type>

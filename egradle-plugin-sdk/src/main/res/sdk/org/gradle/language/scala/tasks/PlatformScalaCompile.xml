@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.scala.tasks.PlatformScalaCompile" version="3.0" superType="org.gradle.language.scala.tasks.AbstractScalaCompile">
-    <description>
- * A platform-aware Scala compile task.
- </description>
+    <description> A platform-aware Scala compile task.
+
+</description>
     <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler">
         <parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/>
     </method>

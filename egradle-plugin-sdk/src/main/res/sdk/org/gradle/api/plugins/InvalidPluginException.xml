@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.InvalidPluginException" version="3.0" superType="org.gradle.api.GradleException">
-    <description>
- * Thrown when a plugin is found to be invalid when it is loaded.
- </description>
+    <description> Thrown when a plugin is found to be invalid when it is loaded.
+
+</description>
 </type>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.WorkResult" version="3.0">
-    <description>
- * Provides information about some work which was performed.
- </description>
+    <description> Provides information about some work which was performed.
+
+</description>
     <method name="getDidWork" returnType="boolean"/>
     <property name="didWork" type="boolean"/>
 </type>

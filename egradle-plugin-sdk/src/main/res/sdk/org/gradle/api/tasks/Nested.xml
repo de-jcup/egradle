@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.Nested" version="3.0">
-    <description>
- * &lt;p&gt;Marks a property as specifying a nested bean, whose properties should be checked for annotations.&lt;/p&gt;
- *
- * &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;Marks a property as specifying a nested bean, whose properties should be checked for annotations.&lt;/p&gt;
+
+ &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt;
+
+</description>
 </type>

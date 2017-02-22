@@ -547,7 +547,7 @@ NamedDomainObjectContainer:org.gradle.api.NamedDomainObjectContainer;
 NamedDomainObjectFactory:org.gradle.api.NamedDomainObjectFactory;
 NamedDomainObjectList:org.gradle.api.NamedDomainObjectList;
 NamedDomainObjectSet:org.gradle.api.NamedDomainObjectSet;
-Namer:org.gradle.api.Task.Namer;
+Namer:org.gradle.api.artifacts.Configuration.Namer;
 NativeBinariesTestPlugin:org.gradle.nativeplatform.test.plugins.NativeBinariesTestPlugin;
 NativeBinary:org.gradle.nativeplatform.NativeBinary;
 NativeBinarySpec:org.gradle.nativeplatform.NativeBinarySpec;

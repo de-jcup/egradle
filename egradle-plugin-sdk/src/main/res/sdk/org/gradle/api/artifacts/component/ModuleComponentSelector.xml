@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ModuleComponentSelector" version="3.0">
-    <description>
- * Criteria for selecting a component instance that is available as a module version.
- *
- * @since 1.10
- </description>
+    <description> Criteria for selecting a component instance that is available as a module version.
+
+ @since 1.10
+
+</description>
     <method name="getGroup" returnType="java.lang.String">
-        <description>
-     * The group of the module to select the component from.
-     *
-     * @return Module group
-     * @since 1.10
-     </description>
+        <description> The group of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module group
+ @since 1.10
+
+</description>
     </method>
     <method name="getModule" returnType="java.lang.String">
-        <description>
-     * The name of the module to select the component from.
-     *
-     * @return Module name
-     </description>
+        <description> The name of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module name
+
+</description>
     </method>
     <method name="getVersion" returnType="java.lang.String">
-        <description>
-     * The version of the module to select the component from.
-     *
-     * @return Module version
-     </description>
+        <description> The version of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module version
+
+</description>
     </method>
     <interface name="org.gradle.api.artifacts.component.ComponentSelector"/>
     <property name="group" type="java.lang.String">
-        <description>
-     * The group of the module to select the component from.
-     *
-     * @return Module group
-     * @since 1.10
-     </description>
+        <description> The group of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module group
+ @since 1.10
+
+</description>
     </property>
     <property name="module" type="java.lang.String">
-        <description>
-     * The name of the module to select the component from.
-     *
-     * @return Module name
-     </description>
+        <description> The name of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module name
+
+</description>
     </property>
     <property name="version" type="java.lang.String">
-        <description>
-     * The version of the module to select the component from.
-     *
-     * @return Module version
-     </description>
+        <description> The version of the module to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module version
+
+</description>
     </property>
 </type>

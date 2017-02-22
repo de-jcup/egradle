@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.java.archives.ManifestMergeSpec" version="3.0">
-    <description>
- * Specifies how the entries of multiple manifests should be merged together.
- </description>
-    <method name="eachEntry" returnType="org.gradle.api.java.archives.ManifestMergeSpec">
-        <description>
-     * Adds an action to be applied to each key-value tuple in a merge operation. If multiple merge paths are specified,
-     * the action is called for each key-value tuple of each merge operation. The given closure is called with a
-     * {@link org.gradle.api.java.archives.ManifestMergeDetails} as its parameter. Actions are executed
-     * in the order added.
-     *
-     * @param mergeAction The action to execute.
-     * @return this
-     </description>
+    <description> Specifies how the entries of multiple manifests should be merged together.
+
+</description>
+    <method name="eachEntry" returnType="org.gradle.api.java.archives.ManifestMergeSpec" delegationTarget="org.gradle.api.java.archives.ManifestMergeDetails">
+        <description> Adds an action to be applied to each key-value tuple in a merge operation. If multiple merge paths are specified,
+ the action is called for each key-value tuple of each merge operation. The given closure is called with a
+ &lt;a href='type://org.gradle.api.java.archives.ManifestMergeDetails'&gt;org.gradle.api.java.archives.ManifestMergeDetails&lt;/a&gt; as its parameter. Actions are executed
+ in the order added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mergeAction The action to execute.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="groovy.lang.Closure" name="mergeAction"/>
     </method>
     <method name="eachEntry" returnType="org.gradle.api.java.archives.ManifestMergeSpec">
-        <description>
-     * Adds an action to be applied to each key-value tuple in a merge operation. If multiple merge paths are specified,
-     * the action is called for each key-value tuple of each merge operation. The given action is called with a
-     * {@link org.gradle.api.java.archives.ManifestMergeDetails} as its parameter. Actions are executed
-     * in the order added.
-     *
-     * @param mergeAction A merge action to be executed.
-     * @return this
-     </description>
+        <description> Adds an action to be applied to each key-value tuple in a merge operation. If multiple merge paths are specified,
+ the action is called for each key-value tuple of each merge operation. The given action is called with a
+ &lt;a href='type://org.gradle.api.java.archives.ManifestMergeDetails'&gt;org.gradle.api.java.archives.ManifestMergeDetails&lt;/a&gt; as its parameter. Actions are executed
+ in the order added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mergeAction A merge action to be executed.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="org.gradle.api.Action" name="mergeAction"/>
     </method>
     <method name="from" returnType="org.gradle.api.java.archives.ManifestMergeSpec">
-        <description>
-     * Adds a merge path to a manifest that should be merged into the base manifest. A merge path can be either another
-     * {@link org.gradle.api.java.archives.Manifest} or a path that is evaluated as per
-     * {@link org.gradle.api.Project#files(Object...)} . If multiple merge paths are specified, the manifest are merged
-     * in the order in which they are added.
-     *
-     * @param mergePaths The paths of manifests to be merged
-     * @return this
-     </description>
+        <description> Adds a merge path to a manifest that should be merged into the base manifest. A merge path can be either another
+ &lt;a href='type://org.gradle.api.java.archives.Manifest'&gt;org.gradle.api.java.archives.Manifest&lt;/a&gt; or a path that is evaluated as per
+ &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt; . If multiple merge paths are specified, the manifest are merged
+ in the order in which they are added.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mergePaths The paths of manifests to be merged
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="mergePaths"/>
     </method>
     <method name="getContentCharset" returnType="java.lang.String">
-        <description>
-     * The character set used to decode the merged manifest content.
-     * Defaults to UTF-8.
-     *
-     * @return the character set used to decode the merged manifest content
-     * @since 2.14
-     </description>
+        <description> The character set used to decode the merged manifest content.
+ Defaults to UTF-8.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to decode the merged manifest content
+ @since 2.14
+
+</description>
     </method>
     <method name="setContentCharset" returnType="void">
-        <description>
-     * The character set used to decode the merged manifest content.
-     *
-     * @param contentCharset the character set used to decode the merged manifest content
-     * @see #getContentCharset()
-     * @since 2.14
-     </description>
+        <description> The character set used to decode the merged manifest content.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;contentCharset the character set used to decode the merged manifest content
+ @see #getContentCharset()
+ @since 2.14
+
+</description>
         <parameter type="java.lang.String" name="contentCharset"/>
     </method>
     <property name="contentCharset" type="java.lang.String">
-        <description>
-     * The character set used to decode the merged manifest content.
-     * Defaults to UTF-8.
-     *
-     * @return the character set used to decode the merged manifest content
-     * @since 2.14
-     </description>
+        <description> The character set used to decode the merged manifest content.
+ Defaults to UTF-8.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to decode the merged manifest content
+ @since 2.14
+
+</description>
     </property>
 </type>

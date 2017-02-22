@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils" version="3.0">
-    <description>
- * This should have originally been an internal API.
- </description>
+    <description> This should have originally been an internal API.
+
+</description>
     <method name="childScope" returnType="R">
         <parameter type="org.mozilla.javascript.Scriptable" name="parentScope"/>
         <parameter type="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils.ScopeOperation" name="operation"/>

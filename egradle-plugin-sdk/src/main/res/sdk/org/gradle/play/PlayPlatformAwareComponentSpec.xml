@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.play.PlayPlatformAwareComponentSpec" version="3.0">
-    <description>
- * Platform aware aspect of a Play Framework software component.
- </description>
+    <description> Platform aware aspect of a Play Framework software component.
+
+</description>
     <method name="platform" returnType="void">
         <parameter type="java.lang.Object" name="platformRequirements"/>
     </method>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.PmdPlugin" version="3.0">
-    <description>
- * A plugin for the &lt;a href="http://pmd.sourceforge.net/"&gt;PMD&lt;/a&gt; source code analyzer.
- * &lt;p&gt;
- * Declares a &lt;tt&gt;pmd&lt;/tt&gt; configuration which needs to be configured with the PMD library to be used.
- * &lt;p&gt;
- * For each source set that is to be analyzed, a {@link Pmd} task is created and configured to analyze all Java code.
- * &lt;p&gt;
- * All PMD tasks (including user-defined ones) are added to the &lt;tt&gt;check&lt;/tt&gt; lifecycle task.
- *
- * @see PmdExtension
- * @see Pmd
- </description>
+    <description> A plugin for the &lt;a href="http://pmd.sourceforge.net/"&gt;PMD&lt;/a&gt; source code analyzer.
+ &lt;p&gt;
+ Declares a &lt;tt&gt;pmd&lt;/tt&gt; configuration which needs to be configured with the PMD library to be used.
+ &lt;p&gt;
+ For each source set that is to be analyzed, a &lt;a href='type://Pmd'&gt;Pmd&lt;/a&gt; task is created and configured to analyze all Java code.
+ &lt;p&gt;
+ All PMD tasks (including user-defined ones) are added to the &lt;tt&gt;check&lt;/tt&gt; lifecycle task.
+
+ @see PmdExtension
+ @see Pmd
+
+</description>
     <method name="calculateDefaultDependencyNotation" returnType="java.lang.String">
         <parameter type="org.gradle.util.VersionNumber" name="toolVersion"/>
     </method>
-    <method name="call" returnType="org.gradle.api.plugins.quality.TargetJdk"/>
+    <method name="call" returnType="org.gradle.api.file.FileCollection"/>
     <method name="configureDefaultDependencies" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
     </method>

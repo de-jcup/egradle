@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.NativeExecutableFileSpec" version="3.0">
-    <description>
- * Specifies how to build and where to place a native executable file.
- *
- * &lt;p&gt;TODO:HH resolve naming conflict with existing NativeExecutableSpec&lt;/p&gt;
- </description>
+    <description> Specifies how to build and where to place a native executable file.
+
+ &lt;p&gt;TODO:HH resolve naming conflict with existing NativeExecutableSpec&lt;/p&gt;
+
+</description>
     <method name="getFile" returnType="java.io.File"/>
     <method name="getToolChain" returnType="org.gradle.platform.base.ToolChain"/>
     <method name="setFile" returnType="void">

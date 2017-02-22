@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.quality.FindBugsReports" version="3.0">
-    <description>
- * The reporting configuration for the {@link FindBugs} task.
- *
- * Only one of the reports can be enabled when the task executes. If more than one is enabled, an {@link org.gradle.api.InvalidUserDataException}
- * will be thrown.
- </description>
+    <description> The reporting configuration for the &lt;a href='type://FindBugs'&gt;FindBugs&lt;/a&gt; task.
+
+ Only one of the reports can be enabled when the task executes. If more than one is enabled, an &lt;a href='type://org.gradle.api.InvalidUserDataException'&gt;org.gradle.api.InvalidUserDataException&lt;/a&gt;
+ will be thrown.
+
+</description>
     <method name="getEmacs" returnType="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs Emacs report
-     *
-     * @return The findbugs Emacs report
-     </description>
+        <description> The findbugs Emacs report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs Emacs report
+
+</description>
     </method>
     <method name="getHtml" returnType="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs HTML report
-     *
-     * @return The findbugs HTML report
-     </description>
+        <description> The findbugs HTML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs HTML report
+
+</description>
     </method>
     <method name="getText" returnType="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs Text report
-     *
-     * @return The findbugs Text report
-     </description>
+        <description> The findbugs Text report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs Text report
+
+</description>
     </method>
     <method name="getXml" returnType="org.gradle.api.plugins.quality.FindBugsXmlReport">
-        <description>
-     * The findbugs XML report
-     *
-     * @return The findbugs XML report
-     </description>
+        <description> The findbugs XML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs XML report
+
+</description>
     </method>
     <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="emacs" type="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs Emacs report
-     *
-     * @return The findbugs Emacs report
-     </description>
+        <description> The findbugs Emacs report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs Emacs report
+
+</description>
     </property>
     <property name="html" type="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs HTML report
-     *
-     * @return The findbugs HTML report
-     </description>
+        <description> The findbugs HTML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs HTML report
+
+</description>
     </property>
     <property name="text" type="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The findbugs Text report
-     *
-     * @return The findbugs Text report
-     </description>
+        <description> The findbugs Text report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs Text report
+
+</description>
     </property>
     <property name="xml" type="org.gradle.api.plugins.quality.FindBugsXmlReport">
-        <description>
-     * The findbugs XML report
-     *
-     * @return The findbugs XML report
-     </description>
+        <description> The findbugs XML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The findbugs XML report
+
+</description>
     </property>
 </type>

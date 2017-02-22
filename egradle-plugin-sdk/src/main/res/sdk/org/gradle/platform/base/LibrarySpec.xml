@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.LibrarySpec" version="3.0" documented="true">
-    <description>
- * A specification of a {@link org.gradle.platform.base.Library}.
- </description>
+    <description> A specification of a &lt;a href='type://org.gradle.platform.base.Library'&gt;org.gradle.platform.base.Library&lt;/a&gt;.
+
+</description>
     <interface name="org.gradle.platform.base.GeneralComponentSpec"/>
 </type>

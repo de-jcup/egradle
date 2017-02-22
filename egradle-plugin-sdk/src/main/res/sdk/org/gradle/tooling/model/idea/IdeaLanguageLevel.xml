@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaLanguageLevel" version="3.0">
-    <description>
- * Language level setting for IDEA.
- *
- * @since 1.0-milestone-5
- </description>
+    <description> Language level setting for IDEA.
+
+ @since 1.0-milestone-5
+
+</description>
     <method name="getLevel" returnType="java.lang.String">
-        <description>
-     * Gets the level value
-     </description>
+        <description> Gets the level value
+
+</description>
     </method>
     <property name="level" type="java.lang.String">
-        <description>
-     * Gets the level value
-     </description>
+        <description> Gets the level value
+
+</description>
     </property>
 </type>

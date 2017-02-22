@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ProjectComponentSelector" version="3.0">
-    <description>
- * Criteria for selecting a component instance that is built as part of the current build.
- *
- * @since 1.10
- </description>
+    <description> Criteria for selecting a component instance that is built as part of the current build.
+
+ @since 1.10
+
+</description>
     <method name="getProjectPath" returnType="java.lang.String">
-        <description>
-     * The path of the project to select the component from.
-     *
-     * @return Project path
-     * @since 1.10
-     </description>
+        <description> The path of the project to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Project path
+ @since 1.10
+
+</description>
     </method>
     <interface name="org.gradle.api.artifacts.component.ComponentSelector"/>
     <property name="projectPath" type="java.lang.String">
-        <description>
-     * The path of the project to select the component from.
-     *
-     * @return Project path
-     * @since 1.10
-     </description>
+        <description> The path of the project to select the component from.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Project path
+ @since 1.10
+
+</description>
     </property>
 </type>

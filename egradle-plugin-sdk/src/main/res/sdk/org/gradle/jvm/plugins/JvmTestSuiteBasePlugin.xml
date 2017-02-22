@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.jvm.plugins.JvmTestSuiteBasePlugin" version="3.0" superType="org.gradle.model.RuleSource">
-    <description>
- * The base plugin that needs to be applied by all plugins which provide testing support
- * for the Java software model.
- *
- * @since 2.12
- </description>
+    <description> The base plugin that needs to be applied by all plugins which provide testing support
+ for the Java software model.
+
+ @since 2.12
+
+</description>
     <method name="addSourceSetSpecificDependencies" returnType="void">
         <parameter type="java.util.List" name="dependencies"/>
         <parameter type="org.gradle.model.ModelMap" name="sources"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.toolchain.plugins.GccCompilerPlugin" version="3.0">
-    <description>
- * A {@link Plugin} which makes the &lt;a href="http://gcc.gnu.org/"&gt;GNU GCC/G++ compiler&lt;/a&gt; available for compiling C/C++ code.
- </description>
+    <description> A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which makes the &lt;a href="http://gcc.gnu.org/"&gt;GNU GCC/G++ compiler&lt;/a&gt; available for compiling C/C++ code.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

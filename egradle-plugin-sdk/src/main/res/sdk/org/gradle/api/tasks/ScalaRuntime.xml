@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.ScalaRuntime" version="3.0" documented="true">
-    <description>
- * Provides information related to the Scala runtime(s) used in a project. Added by the
- * {@code org.gradle.api.plugins.scala.ScalaBasePlugin} as a project extension named {@code scalaRuntime}.
- *
- * &lt;p&gt;Example usage:
- *
- * &lt;pre autoTested=""&gt;
- *     apply plugin: "scala"
- *
- *     repositories {
- *         mavenCentral()
- *     }
- *
- *     dependencies {
- *         compile "org.scala-lang:scala-library:2.10.1"
- *     }
- *
- *     def scalaClasspath = scalaRuntime.inferScalaClasspath(configurations.compile)
- *     // The returned class path can be used to configure the 'scalaClasspath' property of tasks
- *     // such as 'ScalaCompile' or 'ScalaDoc', or to execute these and other Scala tools directly.
- * &lt;/pre&gt;
- </description>
+    <description> Provides information related to the Scala runtime(s) used in a project. Added by the
+ &lt;a href='type://org.gradle.api.plugins.scala.ScalaBasePlugin'&gt;org.gradle.api.plugins.scala.ScalaBasePlugin&lt;/a&gt; as a project extension named &lt;a href='type://scalaRuntime'&gt;scalaRuntime&lt;/a&gt;.
+
+ &lt;p&gt;Example usage:
+
+ &lt;pre autoTested=""&gt;
+     apply plugin: "scala"
+
+     repositories {
+         mavenCentral()
+     }
+
+     dependencies {
+         compile "org.scala-lang:scala-library:2.10.1"
+     }
+
+     def scalaClasspath = scalaRuntime.inferScalaClasspath(configurations.compile)
+     // The returned class path can be used to configure the 'scalaClasspath' property of tasks
+     // such as 'ScalaCompile' or 'ScalaDoc', or to execute these and other Scala tools directly.
+ &lt;/pre&gt;
+
+</description>
     <method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/>
     <method name="findScalaJar" returnType="java.io.File" documented="true">
-        <description>
-     * Searches the specified class path for a Scala Jar file (scala-compiler, scala-library,
-     * scala-jdbc, etc.) with the specified appendix (compiler, library, jdbc, etc.).
-     * If no such file is found, {@code null} is returned.
-     *
-     * @param classpath the class path to search
-     * @param appendix the appendix to search for
-     * @return a Scala Jar file with the specified appendix
-     </description>
+        <description> Searches the specified class path for a Scala Jar file (scala-compiler, scala-library,
+ scala-jdbc, etc.) with the specified appendix (compiler, library, jdbc, etc.).
+ If no such file is found, &lt;a href='type://null'&gt;null&lt;/a&gt; is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath the class path to search
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;appendix the appendix to search for
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a Scala Jar file with the specified appendix
+
+</description>
         <parameter type="java.lang.Iterable" name="classpath"/>
         <parameter type="java.lang.String" name="appendix"/>
     </method>
     <method name="getDisplayName" returnType="java.lang.String"/>
     <method name="getScalaVersion" returnType="java.lang.String" documented="true">
-        <description>
-     * Determines the version of a Scala Jar file (scala-compiler, scala-library,
-     * scala-jdbc, etc.). If the version cannot be determined, or the file is not a Scala
-     * Jar file, {@code null} is returned.
-     *
-     * &lt;p&gt;Implementation note: The version is determined by parsing the file name, which
-     * is expected to match the pattern 'scala-[component]-[version].jar'.
-     *
-     * @param scalaJar a Scala Jar file
-     * @return the version of the Scala Jar file
-     </description>
+        <description> Determines the version of a Scala Jar file (scala-compiler, scala-library,
+ scala-jdbc, etc.). If the version cannot be determined, or the file is not a Scala
+ Jar file, &lt;a href='type://null'&gt;null&lt;/a&gt; is returned.
+
+ &lt;p&gt;Implementation note: The version is determined by parsing the file name, which
+ is expected to match the pattern 'scala-[component]-[version].jar'.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scalaJar a Scala Jar file
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version of the Scala Jar file
+
+</description>
         <parameter type="java.io.File" name="scalaJar"/>
     </method>
     <method name="inferScalaClasspath" returnType="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Searches the specified class path for a 'scala-library' Jar, and returns a class path
-     * containing a corresponding (same version) 'scala-compiler' Jar and its dependencies.
-     *
-     * &lt;p&gt;The returned class path may be empty, or may fail to resolve when asked for its contents.
-     *
-     * @param classpath a class path containing a 'scala-library' Jar
-     * @return a class path containing a corresponding 'scala-compiler' Jar and its dependencies
-     </description>
+        <description> Searches the specified class path for a 'scala-library' Jar, and returns a class path
+ containing a corresponding (same version) 'scala-compiler' Jar and its dependencies.
+
+ &lt;p&gt;The returned class path may be empty, or may fail to resolve when asked for its contents.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath a class path containing a 'scala-library' Jar
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a class path containing a corresponding 'scala-compiler' Jar and its dependencies
+
+</description>
         <parameter type="java.lang.Iterable" name="classpath"/>
     </method>
     <method name="visitDependencies" returnType="void">
@@ -68,16 +68,16 @@
     </method>
     <property name="displayName" type="java.lang.String"/>
     <property name="scalaVersion" type="java.lang.String">
-        <description>
-     * Determines the version of a Scala Jar file (scala-compiler, scala-library,
-     * scala-jdbc, etc.). If the version cannot be determined, or the file is not a Scala
-     * Jar file, {@code null} is returned.
-     *
-     * &lt;p&gt;Implementation note: The version is determined by parsing the file name, which
-     * is expected to match the pattern 'scala-[component]-[version].jar'.
-     *
-     * @param scalaJar a Scala Jar file
-     * @return the version of the Scala Jar file
-     </description>
+        <description> Determines the version of a Scala Jar file (scala-compiler, scala-library,
+ scala-jdbc, etc.). If the version cannot be determined, or the file is not a Scala
+ Jar file, &lt;a href='type://null'&gt;null&lt;/a&gt; is returned.
+
+ &lt;p&gt;Implementation note: The version is determined by parsing the file name, which
+ is expected to match the pattern 'scala-[component]-[version].jar'.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scalaJar a Scala Jar file
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version of the Scala Jar file
+
+</description>
     </property>
 </type>

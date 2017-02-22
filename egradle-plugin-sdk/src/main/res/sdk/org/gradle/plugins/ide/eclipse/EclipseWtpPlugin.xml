@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.EclipseWtpPlugin" version="3.0">
-    <description>
- * A plugin which configures the Eclipse Web Tools Platform.
- </description>
+    <description> A plugin which configures the Eclipse Web Tools Platform.
+
+</description>
     <method name="call" returnType="java.util.List"/>
     <method name="configureEclipseClasspath" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>

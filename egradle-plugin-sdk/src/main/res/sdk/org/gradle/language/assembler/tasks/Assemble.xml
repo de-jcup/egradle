@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.assembler.tasks.Assemble" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
-    <description>
- * Translates Assembly language source files into object files.
- </description>
+    <description> Translates Assembly language source files into object files.
+
+</description>
     <method name="assemble" returnType="void"/>
     <method name="call" returnType="java.lang.String"/>
     <method name="getAssemblerArgs" returnType="java.util.List">
-        <description>
-     * Additional arguments to provide to the assembler.
-     </description>
+        <description> Additional arguments to provide to the assembler.
+
+</description>
     </method>
     <method name="getObjectFileDir" returnType="java.io.File">
-        <description>
-     * The directory where object files will be generated.
-     </description>
+        <description> The directory where object files will be generated.
+
+</description>
     </method>
     <method name="getOperationLoggerFactory" returnType="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <method name="getSource" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
-        <description>
-     * The platform being targeted.
-     </description>
+        <description> The platform being targeted.
+
+</description>
     </method>
     <method name="getToolChain" returnType="org.gradle.nativeplatform.toolchain.NativeToolChain">
-        <description>
-     * The tool chain being used to build.
-     </description>
+        <description> The tool chain being used to build.
+
+</description>
     </method>
     <method name="setAssemblerArgs" returnType="void">
         <parameter type="java.util.List" name="assemblerArgs"/>
@@ -40,31 +40,31 @@
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
     <method name="source" returnType="void" documented="true">
-        <description>
-     * Adds a set of assembler sources files to be translated. The provided sourceFiles object is evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     </description>
+        <description> Adds a set of assembler sources files to be translated. The provided sourceFiles object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+</description>
         <parameter type="java.lang.Object" name="sourceFiles"/>
     </method>
     <property name="assemblerArgs" type="java.util.List" documented="true">
-        <description>
-     * Additional arguments to provide to the assembler.
-     </description>
+        <description> Additional arguments to provide to the assembler.
+
+</description>
     </property>
     <property name="objectFileDir" type="java.io.File" documented="true">
-        <description>
-     * The directory where object files will be generated.
-     </description>
+        <description> The directory where object files will be generated.
+
+</description>
     </property>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <property name="source" type="org.gradle.api.file.FileCollection"/>
     <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform">
-        <description>
-     * The platform being targeted.
-     </description>
+        <description> The platform being targeted.
+
+</description>
     </property>
     <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain">
-        <description>
-     * The tool chain being used to build.
-     </description>
+        <description> The tool chain being used to build.
+
+</description>
     </property>
 </type>

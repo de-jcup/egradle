@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.jvm.JvmResources" version="3.0">
-    <description>
- * LanguageOutputType marking Jvm Resource Output
- </description>
+    <description> LanguageOutputType marking Jvm Resource Output
+
+</description>
     <interface name="org.gradle.platform.base.TransformationFileType"/>
 </type>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.platform.base.VariantComponentSpec" version="3.0" documented="true">
-    <description>
- * Represents a component that is made up of one or more mutually exclusive components.
- </description>
+    <description> Represents a component that is made up of one or more mutually exclusive components.
+
+</description>
     <method name="getBinaries" returnType="org.gradle.model.ModelMap">
-        <description>
-     * The variants of this component.
-     </description>
+        <description> The variants of this component.
+
+</description>
     </method>
     <interface name="org.gradle.platform.base.ComponentSpec"/>
     <property name="binaries" type="org.gradle.model.ModelMap" documented="true">
-        <description>
-     * The variants of this component.
-     </description>
+        <description> The variants of this component.
+
+</description>
     </property>
 </type>

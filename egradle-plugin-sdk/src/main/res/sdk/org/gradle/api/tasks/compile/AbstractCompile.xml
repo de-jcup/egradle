@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.compile.AbstractCompile" version="3.0" superType="org.gradle.api.tasks.SourceTask" documented="true">
-    <description>
- * The base class for all JVM-based language compilation tasks.
- </description>
+    <description> The base class for all JVM-based language compilation tasks.
+
+</description>
     <method name="compile" returnType="void"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * Returns the classpath to use to compile the source files.
-     *
-     * @return The classpath.
-     </description>
+        <description> Returns the classpath to use to compile the source files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath.
+
+</description>
     </method>
     <method name="getDestinationDir" returnType="java.io.File">
-        <description>
-     * Returns the directory to generate the {@code .class} files into.
-     *
-     * @return The destination directory.
-     </description>
+        <description> Returns the directory to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files into.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination directory.
+
+</description>
     </method>
     <method name="getSourceCompatibility" returnType="java.lang.String">
-        <description>
-     * Returns the Java language level to use to compile the source files.
-     *
-     * @return The source language level.
-     </description>
+        <description> Returns the Java language level to use to compile the source files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source language level.
+
+</description>
     </method>
     <method name="getTargetCompatibility" returnType="java.lang.String">
-        <description>
-     * Returns the target JVM to generate the {@code .class} files for.
-     *
-     * @return The target JVM.
-     </description>
+        <description> Returns the target JVM to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target JVM.
+
+</description>
     </method>
     <method name="setClasspath" returnType="void">
-        <description>
-     * Sets the classpath to use to compile the source files.
-     *
-     * @param configuration The classpath. Must not be null, but may be empty.
-     </description>
+        <description> Sets the classpath to use to compile the source files.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration The classpath. Must not be null, but may be empty.
+
+</description>
         <parameter type="org.gradle.api.file.FileCollection" name="configuration"/>
     </method>
     <method name="setDestinationDir" returnType="void">
-        <description>
-     * Sets the directory to generate the {@code .class} files into.
-     *
-     * @param destinationDir The destination directory. Must not be null.
-     </description>
+        <description> Sets the directory to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files into.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destinationDir The destination directory. Must not be null.
+
+</description>
         <parameter type="java.io.File" name="destinationDir"/>
     </method>
     <method name="setSourceCompatibility" returnType="void">
-        <description>
-     * Sets the Java language level to use to compile the source files.
-     *
-     * @param sourceCompatibility The source language level. Must not be null.
-     </description>
+        <description> Sets the Java language level to use to compile the source files.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceCompatibility The source language level. Must not be null.
+
+</description>
         <parameter type="java.lang.String" name="sourceCompatibility"/>
     </method>
     <method name="setTargetCompatibility" returnType="void">
-        <description>
-     * Sets the target JVM to generate the {@code .class} files for.
-     *
-     * @param targetCompatibility The target JVM. Must not be null.
-     </description>
+        <description> Sets the target JVM to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;targetCompatibility The target JVM. Must not be null.
+
+</description>
         <parameter type="java.lang.String" name="targetCompatibility"/>
     </method>
     <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * Returns the classpath to use to compile the source files.
-     *
-     * @return The classpath.
-     </description>
+        <description> Returns the classpath to use to compile the source files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath.
+
+</description>
     </property>
     <property name="destinationDir" type="java.io.File" documented="true">
-        <description>
-     * Returns the directory to generate the {@code .class} files into.
-     *
-     * @return The destination directory.
-     </description>
+        <description> Returns the directory to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files into.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The destination directory.
+
+</description>
     </property>
     <property name="sourceCompatibility" type="java.lang.String" documented="true">
-        <description>
-     * Returns the Java language level to use to compile the source files.
-     *
-     * @return The source language level.
-     </description>
+        <description> Returns the Java language level to use to compile the source files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source language level.
+
+</description>
     </property>
     <property name="targetCompatibility" type="java.lang.String" documented="true">
-        <description>
-     * Returns the target JVM to generate the {@code .class} files for.
-     *
-     * @return The target JVM.
-     </description>
+        <description> Returns the target JVM to generate the &lt;a href='type://.class'&gt;.class&lt;/a&gt; files for.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target JVM.
+
+</description>
     </property>
 </type>

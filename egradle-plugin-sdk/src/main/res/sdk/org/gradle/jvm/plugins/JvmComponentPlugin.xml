@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.jvm.plugins.JvmComponentPlugin" version="3.0">
-    <description>
- * Base plugin for JVM component support. Applies the {@link org.gradle.language.base.plugins.ComponentModelBasePlugin}. Registers the {@link JvmLibrarySpec} library type for the components
- * container.
- </description>
+    <description> Base plugin for JVM component support. Applies the &lt;a href='type://org.gradle.language.base.plugins.ComponentModelBasePlugin'&gt;org.gradle.language.base.plugins.ComponentModelBasePlugin&lt;/a&gt;. Registers the &lt;a href='type://JvmLibrarySpec'&gt;JvmLibrarySpec&lt;/a&gt; library type for the components
+ container.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

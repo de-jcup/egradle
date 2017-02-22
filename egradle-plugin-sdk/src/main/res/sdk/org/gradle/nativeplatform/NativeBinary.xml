@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeBinary" version="3.0" documented="true">
-    <description>
- * Represents a particular binary artifact.
- </description>
+    <description> Represents a particular binary artifact.
+
+</description>
     <method name="getBuildType" returnType="org.gradle.nativeplatform.BuildType">
-        <description>
-     * Returns the {@link org.gradle.nativeplatform.BuildType} used to construct this binary.
-     </description>
+        <description> Returns the &lt;a href='type://org.gradle.nativeplatform.BuildType'&gt;org.gradle.nativeplatform.BuildType&lt;/a&gt; used to construct this binary.
+
+</description>
     </method>
     <method name="getFlavor" returnType="org.gradle.nativeplatform.Flavor">
-        <description>
-     * The {@link org.gradle.nativeplatform.Flavor} that this binary was built with.
-     </description>
+        <description> The &lt;a href='type://org.gradle.nativeplatform.Flavor'&gt;org.gradle.nativeplatform.Flavor&lt;/a&gt; that this binary was built with.
+
+</description>
     </method>
     <method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
-        <description>
-     * Returns the {@link org.gradle.nativeplatform.platform.NativePlatform} that this binary is targeted to run on.
-     </description>
+        <description> Returns the &lt;a href='type://org.gradle.nativeplatform.platform.NativePlatform'&gt;org.gradle.nativeplatform.platform.NativePlatform&lt;/a&gt; that this binary is targeted to run on.
+
+</description>
     </method>
     <interface name="org.gradle.platform.base.Binary"/>
     <property name="buildType" type="org.gradle.nativeplatform.BuildType" documented="true">
-        <description>
-     * Returns the {@link org.gradle.nativeplatform.BuildType} used to construct this binary.
-     </description>
+        <description> Returns the &lt;a href='type://org.gradle.nativeplatform.BuildType'&gt;org.gradle.nativeplatform.BuildType&lt;/a&gt; used to construct this binary.
+
+</description>
     </property>
     <property name="flavor" type="org.gradle.nativeplatform.Flavor" documented="true">
-        <description>
-     * The {@link org.gradle.nativeplatform.Flavor} that this binary was built with.
-     </description>
+        <description> The &lt;a href='type://org.gradle.nativeplatform.Flavor'&gt;org.gradle.nativeplatform.Flavor&lt;/a&gt; that this binary was built with.
+
+</description>
     </property>
     <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform" documented="true">
-        <description>
-     * Returns the {@link org.gradle.nativeplatform.platform.NativePlatform} that this binary is targeted to run on.
-     </description>
+        <description> Returns the &lt;a href='type://org.gradle.nativeplatform.platform.NativePlatform'&gt;org.gradle.nativeplatform.platform.NativePlatform&lt;/a&gt; that this binary is targeted to run on.
+
+</description>
     </property>
 </type>

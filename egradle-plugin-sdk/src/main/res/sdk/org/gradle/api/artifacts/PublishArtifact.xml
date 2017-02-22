@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.PublishArtifact" version="3.0">
-    <description>
- * &lt;p&gt;A {@code PublishArtifact} is an artifact produced by a project.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://PublishArtifact'&gt;PublishArtifact&lt;/a&gt; is an artifact produced by a project.&lt;/p&gt;
+
+</description>
     <method name="getClassifier" returnType="java.lang.String">
-        <description>
-     * Returns the classifier of this published artifact, if any.
-     *
-     * @return The classifier. May be null.
-     </description>
+        <description> Returns the classifier of this published artifact, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classifier. May be null.
+
+</description>
     </method>
     <method name="getDate" returnType="java.util.Date">
-        <description>
-     * Returns the date that should be used when publishing this artifact. This is used
-     * in the module descriptor accompanying this artifact (the ivy.xml). If the date is
-     * not specified, the current date is used. If this artifact
-     * is published without an module descriptor, this property has no relevance.
-     *
-     * @return The date. May be null.
-     </description>
+        <description> Returns the date that should be used when publishing this artifact. This is used
+ in the module descriptor accompanying this artifact (the ivy.xml). If the date is
+ not specified, the current date is used. If this artifact
+ is published without an module descriptor, this property has no relevance.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The date. May be null.
+
+</description>
     </method>
     <method name="getExtension" returnType="java.lang.String">
-        <description>
-     * Returns the extension of this published artifact. Often the extension is the same as the type,
-     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
-     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
-     *
-     * @return The extension. Never null.
-     </description>
+        <description> Returns the extension of this published artifact. Often the extension is the same as the type,
+ but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+ &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extension. Never null.
+
+</description>
     </method>
     <method name="getFile" returnType="java.io.File">
-        <description>
-     * Returns the file of this artifact.
-     *
-     * @return The file. Never null.
-     </description>
+        <description> Returns the file of this artifact.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file. Never null.
+
+</description>
     </method>
     <method name="getName" returnType="java.lang.String">
-        <description>
-     * Returns the name of the artifact.
-     *
-     * @return The name. Never null.
-     </description>
+        <description> Returns the name of the artifact.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never null.
+
+</description>
     </method>
     <method name="getType" returnType="java.lang.String">
-        <description>
-     * Returns the type of the published artifact. Often the type is the same as the extension,
-     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
-     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
-     *
-     * @return The type. Never null.
-     </description>
+        <description> Returns the type of the published artifact. Often the type is the same as the extension,
+ but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+ &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. Never null.
+
+</description>
     </method>
     <interface name="org.gradle.api.Buildable"/>
     <property name="classifier" type="java.lang.String">
-        <description>
-     * Returns the classifier of this published artifact, if any.
-     *
-     * @return The classifier. May be null.
-     </description>
+        <description> Returns the classifier of this published artifact, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classifier. May be null.
+
+</description>
     </property>
     <property name="date" type="java.util.Date">
-        <description>
-     * Returns the date that should be used when publishing this artifact. This is used
-     * in the module descriptor accompanying this artifact (the ivy.xml). If the date is
-     * not specified, the current date is used. If this artifact
-     * is published without an module descriptor, this property has no relevance.
-     *
-     * @return The date. May be null.
-     </description>
+        <description> Returns the date that should be used when publishing this artifact. This is used
+ in the module descriptor accompanying this artifact (the ivy.xml). If the date is
+ not specified, the current date is used. If this artifact
+ is published without an module descriptor, this property has no relevance.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The date. May be null.
+
+</description>
     </property>
     <property name="extension" type="java.lang.String">
-        <description>
-     * Returns the extension of this published artifact. Often the extension is the same as the type,
-     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
-     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
-     *
-     * @return The extension. Never null.
-     </description>
+        <description> Returns the extension of this published artifact. Often the extension is the same as the type,
+ but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+ &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extension. Never null.
+
+</description>
     </property>
     <property name="file" type="java.io.File">
-        <description>
-     * Returns the file of this artifact.
-     *
-     * @return The file. Never null.
-     </description>
+        <description> Returns the file of this artifact.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file. Never null.
+
+</description>
     </property>
     <property name="name" type="java.lang.String">
-        <description>
-     * Returns the name of the artifact.
-     *
-     * @return The name. Never null.
-     </description>
+        <description> Returns the name of the artifact.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never null.
+
+</description>
     </property>
     <property name="type" type="java.lang.String">
-        <description>
-     * Returns the type of the published artifact. Often the type is the same as the extension,
-     * but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
-     * &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
-     *
-     * @return The type. Never null.
-     </description>
+        <description> Returns the type of the published artifact. Often the type is the same as the extension,
+ but sometimes this is not the case. For example for an ivy XML module descriptor, the type is
+ &lt;em&gt;ivy&lt;/em&gt; and the extension is &lt;em&gt;xml&lt;/em&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. Never null.
+
+</description>
     </property>
 </type>

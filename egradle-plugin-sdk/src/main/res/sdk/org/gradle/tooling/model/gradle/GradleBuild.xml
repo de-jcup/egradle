@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.GradleBuild" version="3.0">
-    <description>
- * Provides information about the structure of a Gradle build.
- *
- * @since 1.8
- </description>
+    <description> Provides information about the structure of a Gradle build.
+
+ @since 1.8
+
+</description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">
-        <description>
-     * Returns the identifier for this Gradle build.
-     *
-     * @since 2.13
-     </description>
+        <description> Returns the identifier for this Gradle build.
+
+ @since 2.13
+
+</description>
     </method>
     <method name="getProjects" returnType="org.gradle.tooling.model.DomainObjectSet">
-        <description>
-     * Returns the set of all projects for this build. Will include the root project and any ancestors.
-     *
-     * @return The set of all projects.
-     </description>
+        <description> Returns the set of all projects for this build. Will include the root project and any ancestors.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of all projects.
+
+</description>
     </method>
     <method name="getRootProject" returnType="org.gradle.tooling.model.gradle.BasicGradleProject">
-        <description>
-     * Returns the root project for this build.
-     *
-     * @return The root project
-     </description>
+        <description> Returns the root project for this build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project
+
+</description>
     </method>
     <interface name="org.gradle.tooling.model.BuildModel"/>
     <interface name="org.gradle.tooling.model.Model"/>
     <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
-        <description>
-     * Returns the identifier for this Gradle build.
-     *
-     * @since 2.13
-     </description>
+        <description> Returns the identifier for this Gradle build.
+
+ @since 2.13
+
+</description>
     </property>
     <property name="projects" type="org.gradle.tooling.model.DomainObjectSet">
-        <description>
-     * Returns the set of all projects for this build. Will include the root project and any ancestors.
-     *
-     * @return The set of all projects.
-     </description>
+        <description> Returns the set of all projects for this build. Will include the root project and any ancestors.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of all projects.
+
+</description>
     </property>
     <property name="rootProject" type="org.gradle.tooling.model.gradle.BasicGradleProject">
-        <description>
-     * Returns the root project for this build.
-     *
-     * @return The root project
-     </description>
+        <description> Returns the root project for this build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The root project
+
+</description>
     </property>
 </type>

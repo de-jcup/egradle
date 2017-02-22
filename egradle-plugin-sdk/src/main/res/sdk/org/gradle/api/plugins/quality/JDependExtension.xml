@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.JDependExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension" documented="true">
-    <description>
- * Configuration options for the JDepend plugin.
- *
- * @see JDependPlugin
- </description>
+    <description> Configuration options for the JDepend plugin.
+
+ @see JDependPlugin
+
+</description>
 </type>

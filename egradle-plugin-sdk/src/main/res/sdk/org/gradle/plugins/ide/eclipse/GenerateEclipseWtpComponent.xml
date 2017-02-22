@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.eclipse.GenerateEclipseWtpComponent" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask" documented="true">
-    <description>
- * Generates the org.eclipse.wst.common.component settings file for Eclipse WTP.
- * If you want to fine tune the eclipse configuration
- * &lt;p&gt;
- * At this moment nearly all configuration is done via {@link EclipseWtpComponent}.
- </description>
+    <description> Generates the org.eclipse.wst.common.component settings file for Eclipse WTP.
+ If you want to fine tune the eclipse configuration
+ &lt;p&gt;
+ At this moment nearly all configuration is done via &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt;.
+
+</description>
     <method name="configure" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.WtpComponent" name="xmlComponent"/>
     </method>
     <method name="create" returnType="org.gradle.plugins.ide.eclipse.model.WtpComponent"/>
     <method name="getComponent" returnType="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent">
-        <description>
-     * The Eclipse WTP component model that contains details required to generate the settings file.
-     </description>
+        <description> The Eclipse WTP component model that contains details required to generate the settings file.
+
+</description>
     </method>
     <method name="setComponent" returnType="void">
         <parameter type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" name="component"/>
     </method>
     <property name="component" type="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" documented="true">
-        <description>
-     * The Eclipse WTP component model that contains details required to generate the settings file.
-     </description>
+        <description> The Eclipse WTP component model that contains details required to generate the settings file.
+
+</description>
     </property>
 </type>

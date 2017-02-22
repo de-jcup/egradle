@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaDependencyScope" version="3.0">
-    <description>
- * The scope of the IDEA dependency.
- </description>
+    <description> The scope of the IDEA dependency.
+
+</description>
     <method name="getScope" returnType="java.lang.String"/>
     <property name="scope" type="java.lang.String"/>
 </type>

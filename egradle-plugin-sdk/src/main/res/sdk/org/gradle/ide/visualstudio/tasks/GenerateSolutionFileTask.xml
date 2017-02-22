@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateSolutionFileTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask">
-    <description>
- * Task for generating a solution file.
- </description>
+    <description> Task for generating a solution file.
+
+</description>
     <method name="call" returnType="java.util.Set"/>
     <method name="getInputFile" returnType="java.io.File"/>
     <method name="getOutputFile" returnType="java.io.File"/>

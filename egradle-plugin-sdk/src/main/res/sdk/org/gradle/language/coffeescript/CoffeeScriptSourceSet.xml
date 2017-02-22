@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.language.coffeescript.CoffeeScriptSourceSet" version="3.0" documented="true">
-    <description>
- * Represents a source set for CoffeeScript sources
- </description>
+    <description> Represents a source set for CoffeeScript sources
+
+</description>
     <interface name="org.gradle.language.base.LanguageSourceSet"/>
 </type>

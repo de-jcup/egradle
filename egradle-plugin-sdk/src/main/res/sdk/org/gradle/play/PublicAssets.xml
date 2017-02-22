@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.play.PublicAssets" version="3.0" documented="true">
-    <description>
- * A set of public assets added to a binary.
- </description>
+    <description> A set of public assets added to a binary.
+
+</description>
     <method name="addAssetDir" returnType="void" documented="true">
-        <description>
-     * Add an asset directory to this binary.
-     </description>
+        <description> Add an asset directory to this binary.
+
+</description>
         <parameter type="java.io.File" name="resourceDir"/>
     </method>
     <method name="getAssetDirs" returnType="java.util.Set">
-        <description>
-     * A set of asset directories for this binary.
-     </description>
+        <description> A set of asset directories for this binary.
+
+</description>
     </method>
     <interface name="org.gradle.api.BuildableComponentSpec"/>
     <property name="assetDirs" type="java.util.Set" documented="true">
-        <description>
-     * A set of asset directories for this binary.
-     </description>
+        <description> A set of asset directories for this binary.
+
+</description>
     </property>
 </type>

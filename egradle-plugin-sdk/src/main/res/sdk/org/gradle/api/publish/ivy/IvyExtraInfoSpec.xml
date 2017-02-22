@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.publish.ivy.IvyExtraInfoSpec" version="3.0">
-    <description>
- * Represents a modifiable form of IvyExtraInfo so that "extra" info elements
- * can be configured on an Ivy publication.
- </description>
+    <description> Represents a modifiable form of IvyExtraInfo so that "extra" info elements
+ can be configured on an Ivy publication.
+
+</description>
     <method name="add" returnType="void">
-        <description>
-     * Puts the specified extra element into the list of extra info elements.
-     *
-     * @param namespace The namespace of the element to add
-     * @param name The name of the element to add
-     * @param value The value of the element to add
-     </description>
+        <description> Puts the specified extra element into the list of extra info elements.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;namespace The namespace of the element to add
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the element to add
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The value of the element to add
+
+</description>
         <parameter type="java.lang.String" name="namespace"/>
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.String" name="value"/>

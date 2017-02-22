@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.resources.MissingResourceException" version="3.0" superType="org.gradle.api.resources.ResourceException">
-    <description>
- * Exception thrown when the resource does not exist
- </description>
+    <description> Exception thrown when the resource does not exist
+
+</description>
 </type>

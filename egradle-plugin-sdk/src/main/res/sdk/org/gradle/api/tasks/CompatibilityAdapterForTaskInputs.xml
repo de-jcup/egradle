@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.CompatibilityAdapterForTaskInputs" version="3.0">
-    <description>
- * Helper interface for binary compatibility with Gradle 2.x version of the {@link TaskInputs} interface.
- *
- * @deprecated The interface is only here to allow plugins built against Gradle 2.x to run and it will be removed in Gradle 4.0.
- </description>
+    <description> Helper interface for binary compatibility with Gradle 2.x version of the &lt;a href='type://TaskInputs'&gt;TaskInputs&lt;/a&gt; interface.
+
+ @deprecated The interface is only here to allow plugins built against Gradle 2.x to run and it will be removed in Gradle 4.0.
+
+</description>
     <method name="dir" returnType="org.gradle.api.tasks.TaskInputs">
-        <description>
-     * Registers an input directory hierarchy. All files found under the given directory are treated as input files for
-     * this task.
-     *
-     * @param path The directory. The path is evaluated as per {@link org.gradle.api.Project#file(Object)}.
-     * @return this
-     </description>
+        <description> Registers an input directory hierarchy. All files found under the given directory are treated as input files for
+ this task.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The directory. The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
     <method name="file" returnType="org.gradle.api.tasks.TaskInputs">
-        <description>
-     * Registers some input file for this task.
-     *
-     * @param path The input file. The given path is evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     * @return this
-     </description>
+        <description> Registers some input file for this task.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path The input file. The given path is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
     <method name="files" returnType="org.gradle.api.tasks.TaskInputs">
-        <description>
-     * Registers some input files for this task.
-     *
-     * @param paths The input files. The given paths are evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     * @return this
-     </description>
+        <description> Registers some input files for this task.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The input files. The given paths are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="paths"/>
     </method>
 </type>

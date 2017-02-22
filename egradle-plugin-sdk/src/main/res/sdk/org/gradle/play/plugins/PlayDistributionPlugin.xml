@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayDistributionPlugin" version="3.0" superType="org.gradle.model.RuleSource">
-    <description>
- * A plugin that adds a distribution zip to a Play application build.
- </description>
+    <description> A plugin that adds a distribution zip to a Play application build.
+
+</description>
     <method name="createDistributionContentTasks" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="java.io.File" name="buildDir"/>

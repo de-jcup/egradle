@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.tasks.PlayRun" version="3.0" documented="true">
-    <description>
- * Task to run a Play application.
- </description>
+    <description> Task to run a Play application.
+
+</description>
     <method name="getApplicationJar" returnType="java.io.File">
-        <description>
-     * The Play application jar to run.
-     </description>
+        <description> The Play application jar to run.
+
+</description>
     </method>
     <method name="getAssetsDirs" returnType="java.util.Set">
-        <description>
-     * The directories of the assets for the Play application (for live reload functionality).
-     </description>
+        <description> The directories of the assets for the Play application (for live reload functionality).
+
+</description>
     </method>
     <method name="getAssetsJar" returnType="java.io.File">
-        <description>
-     * The assets jar to run with the Play application.
-     </description>
+        <description> The assets jar to run with the Play application.
+
+</description>
     </method>
     <method name="getDeploymentRegistry" returnType="org.gradle.deployment.internal.DeploymentRegistry"/>
     <method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions">
-        <description>
-     * fork options for the running a Play application.
-     </description>
+        <description> fork options for the running a Play application.
+
+</description>
     </method>
     <method name="getHttpPort" returnType="int">
-        <description>
-     * The HTTP port listened to by the Play application.
-     *
-     * This port should be available.  The Play application will fail to start if the port is already in use.
-     *
-     * @return HTTP port
-     </description>
+        <description> The HTTP port listened to by the Play application.
+
+ This port should be available.  The Play application will fail to start if the port is already in use.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;HTTP port
+
+</description>
     </method>
     <method name="registerOrFindDeploymentHandle" returnType="org.gradle.play.internal.run.PlayApplicationDeploymentHandle">
         <parameter type="java.lang.String" name="deploymentId"/>
@@ -60,35 +60,35 @@
     </method>
     <method name="waitForCtrlD" returnType="void"/>
     <property name="applicationJar" type="java.io.File" documented="true">
-        <description>
-     * The Play application jar to run.
-     </description>
+        <description> The Play application jar to run.
+
+</description>
     </property>
     <property name="assetsDirs" type="java.util.Set" documented="true">
-        <description>
-     * The directories of the assets for the Play application (for live reload functionality).
-     </description>
+        <description> The directories of the assets for the Play application (for live reload functionality).
+
+</description>
     </property>
     <property name="assetsJar" type="java.io.File" documented="true">
-        <description>
-     * The assets jar to run with the Play application.
-     </description>
+        <description> The assets jar to run with the Play application.
+
+</description>
     </property>
     <property name="changingClasspath" type="org.gradle.api.file.FileCollection"/>
     <property name="deploymentRegistry" type="org.gradle.deployment.internal.DeploymentRegistry"/>
     <property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions" documented="true">
-        <description>
-     * fork options for the running a Play application.
-     </description>
+        <description> fork options for the running a Play application.
+
+</description>
     </property>
     <property name="httpPort" type="int" documented="true">
-        <description>
-     * The HTTP port listened to by the Play application.
-     *
-     * This port should be available.  The Play application will fail to start if the port is already in use.
-     *
-     * @return HTTP port
-     </description>
+        <description> The HTTP port listened to by the Play application.
+
+ This port should be available.  The Play application will fail to start if the port is already in use.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;HTTP port
+
+</description>
     </property>
     <property name="playToolProvider" type="org.gradle.play.internal.toolchain.PlayToolProvider"/>
     <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>

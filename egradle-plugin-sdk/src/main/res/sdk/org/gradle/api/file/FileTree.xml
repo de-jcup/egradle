@@ -1,101 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.file.FileTree" version="3.0">
-    <description>
- * &lt;p&gt;A {@code FileTree} represents a hierarchy of files. It extends {@link FileCollection} to add hierarchy query and
- * manipulation methods. You typically use a {@code FileTree} to represent files to copy or the contents of an
- * archive.&lt;/p&gt;
- *
- * &lt;p&gt;You can obtain a {@code FileTree} instance using {@link org.gradle.api.Project#fileTree(java.util.Map)},
- * {@link org.gradle.api.Project#zipTree(Object)} or {@link org.gradle.api.Project#tarTree(Object)}.
- * &lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; represents a hierarchy of files. It extends &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt; to add hierarchy query and
+ manipulation methods. You typically use a &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; to represent files to copy or the contents of an
+ archive.&lt;/p&gt;
+
+ &lt;p&gt;You can obtain a &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; instance using &lt;a href='type://org.gradle.api.Project#fileTree(java.util.Map)'&gt;org.gradle.api.Project#fileTree(java.util.Map)&lt;/a&gt;,
+ &lt;a href='type://org.gradle.api.Project#zipTree(Object)'&gt;org.gradle.api.Project#zipTree(Object)&lt;/a&gt; or &lt;a href='type://org.gradle.api.Project#tarTree(Object)'&gt;org.gradle.api.Project#tarTree(Object)&lt;/a&gt;.
+ &lt;/p&gt;
+
+</description>
     <method name="getAsFileTree" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * Returns this.
-     *
-     * @return this
-     </description>
+        <description> Returns this.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
     </method>
     <method name="getFiles" returnType="java.util.Set">
-        <description>
-     * Returns the contents of this tree as a flattened Set.
-     *
-     * @return The files. Returns an empty set if this tree is empty.
-     </description>
+        <description> Returns the contents of this tree as a flattened Set.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Returns an empty set if this tree is empty.
+
+</description>
     </method>
-    <method name="matching" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * &lt;p&gt;Restricts the contents of this tree to those files matching the given filter. The filtered tree is live, so
-     * that any changes to this tree are reflected in the filtered tree.&lt;/p&gt;
-     *
-     * &lt;p&gt;The given closure is used to configure the filter. A {@link org.gradle.api.tasks.util.PatternFilterable} is
-     * passed to the closure as its delegate. Only files which match the specified include patterns will be included in
-     * the filtered tree. Any files which match the specified exclude patterns will be excluded from the filtered
-     * tree.&lt;/p&gt;
-     *
-     * @param filterConfigClosure the closure to use to configure the filter.
-     * @return The filtered tree.
-     </description>
+    <method name="matching" returnType="org.gradle.api.file.FileTree" delegationTarget="org.gradle.api.tasks.util.PatternFilterable">
+        <description> &lt;p&gt;Restricts the contents of this tree to those files matching the given filter. The filtered tree is live, so
+ that any changes to this tree are reflected in the filtered tree.&lt;/p&gt;
+
+ &lt;p&gt;The given closure is used to configure the filter. A &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;org.gradle.api.tasks.util.PatternFilterable&lt;/a&gt; is
+ passed to the closure as its delegate. Only files which match the specified include patterns will be included in
+ the filtered tree. Any files which match the specified exclude patterns will be excluded from the filtered
+ tree.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;filterConfigClosure the closure to use to configure the filter.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The filtered tree.
+
+</description>
         <parameter type="groovy.lang.Closure" name="filterConfigClosure"/>
     </method>
     <method name="matching" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * &lt;p&gt;Restricts the contents of this tree to those files matching the given filter. The filtered tree is live, so
-     * that any changes to this tree are reflected in the filtered tree.&lt;/p&gt;
-     *
-     * &lt;p&gt;The given pattern set is used to configure the filter. Only files which match the specified include patterns
-     * will be included in the filtered tree. Any files which match the specified exclude patterns will be excluded from
-     * the filtered tree.&lt;/p&gt;
-     *
-     * @param patterns the pattern set to use to configure the filter.
-     * @return The filtered tree.
-     </description>
+        <description> &lt;p&gt;Restricts the contents of this tree to those files matching the given filter. The filtered tree is live, so
+ that any changes to this tree are reflected in the filtered tree.&lt;/p&gt;
+
+ &lt;p&gt;The given pattern set is used to configure the filter. Only files which match the specified include patterns
+ will be included in the filtered tree. Any files which match the specified exclude patterns will be excluded from
+ the filtered tree.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;patterns the pattern set to use to configure the filter.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The filtered tree.
+
+</description>
         <parameter type="org.gradle.api.tasks.util.PatternFilterable" name="patterns"/>
     </method>
     <method name="plus" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * Returns a {@code FileTree} which contains the union of this tree and the given tree. The returned tree is live,
-     * so that changes to either this tree or the other source tree are reflected in the returned tree.
-     *
-     * @param fileTree The tree. Should not be null.
-     * @return The union of this tree and the given tree.
-     </description>
+        <description> Returns a &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; which contains the union of this tree and the given tree. The returned tree is live,
+ so that changes to either this tree or the other source tree are reflected in the returned tree.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;fileTree The tree. Should not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The union of this tree and the given tree.
+
+</description>
         <parameter type="org.gradle.api.file.FileTree" name="fileTree"/>
     </method>
-    <method name="visit" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * Visits the files and directories in this file tree. Files are visited in depth-first prefix order, so that a directory
-     * is visited before its children. The file/directory to be visited is passed to the given closure as a {@link
-     * FileVisitDetails}
-     *
-     * @param visitor The visitor.
-     * @return this
-     </description>
+    <method name="visit" returnType="org.gradle.api.file.FileTree" delegationTarget="FileVisitDetails">
+        <description> Visits the files and directories in this file tree. Files are visited in depth-first prefix order, so that a directory
+ is visited before its children. The file/directory to be visited is passed to the given closure as a &lt;a href='type://FileVisitDetails'&gt;FileVisitDetails&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;visitor The visitor.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="groovy.lang.Closure" name="visitor"/>
     </method>
     <method name="visit" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * Visits the files and directories in this file tree. Files are visited in depth-first prefix order, so that a directory
-     * is visited before its children.
-     *
-     * @param visitor The visitor.
-     * @return this
-     </description>
+        <description> Visits the files and directories in this file tree. Files are visited in depth-first prefix order, so that a directory
+ is visited before its children.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;visitor The visitor.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="org.gradle.api.file.FileVisitor" name="visitor"/>
     </method>
     <interface name="org.gradle.api.file.FileCollection"/>
     <property name="asFileTree" type="org.gradle.api.file.FileTree">
-        <description>
-     * Returns this.
-     *
-     * @return this
-     </description>
+        <description> Returns this.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
     </property>
     <property name="files" type="java.util.Set">
-        <description>
-     * Returns the contents of this tree as a flattened Set.
-     *
-     * @return The files. Returns an empty set if this tree is empty.
-     </description>
+        <description> Returns the contents of this tree as a flattened Set.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files. Returns an empty set if this tree is empty.
+
+</description>
     </property>
 </type>

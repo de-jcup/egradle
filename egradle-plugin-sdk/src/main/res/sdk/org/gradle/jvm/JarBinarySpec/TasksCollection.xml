@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.JarBinarySpec.TasksCollection" version="3.0">
-    <description>
-     * Provides access to key tasks used for building the binary.
-     </description>
+    <description> Provides access to key tasks used for building the binary.
+
+</description>
     <method name="getJar" returnType="org.gradle.api.Task">
-        <description>
-         * The jar task used to create an archive for this binary.
-         </description>
+        <description> The jar task used to create an archive for this binary.
+
+</description>
     </method>
     <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
     <property name="jar" type="org.gradle.api.Task">
-        <description>
-         * The jar task used to create an archive for this binary.
-         </description>
+        <description> The jar task used to create an archive for this binary.
+
+</description>
     </property>
 </type>

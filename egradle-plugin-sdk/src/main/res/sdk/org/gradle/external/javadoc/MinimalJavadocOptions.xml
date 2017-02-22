@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.external.javadoc.MinimalJavadocOptions" version="3.0">
-    <description>
- * Provides the core Javadoc options.
- </description>
+    <description> Provides the core Javadoc options.
+
+</description>
     <method name="bootClasspath" returnType="org.gradle.external.javadoc.MinimalJavadocOptions">
         <parameter type="java.io.File" name="bootClasspath"/>
     </method>

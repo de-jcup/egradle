@@ -1,251 +1,251 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.tasks.testing.logging.TestLogging" version="3.0" documented="true">
-    <description>
- * Options that determine which test events get logged, and at which detail.
- </description>
+    <description> Options that determine which test events get logged, and at which detail.
+
+</description>
     <method name="events" returnType="void">
-        <description>
-     * Sets the events to be logged. Events can be passed as enum values (e.g. {@link TestLogEvent#FAILED}) or Strings (e.g. "failed").
-     *
-     * @param events the events to be logged
-     </description>
+        <description> Sets the events to be logged. Events can be passed as enum values (e.g. &lt;a href='type://TestLogEvent#FAILED'&gt;TestLogEvent#FAILED&lt;/a&gt;) or Strings (e.g. "failed").
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;events the events to be logged
+
+</description>
         <parameter type="java.lang.Object" name="events"/>
     </method>
     <method name="getDisplayGranularity" returnType="int">
-        <description>
-     * Returns the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If
-     * set to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
-     *
-     * @return the display granularity of the events to be logged
-     </description>
+        <description> Returns the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If
+ set to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the display granularity of the events to be logged
+
+</description>
     </method>
     <method name="getEvents" returnType="java.util.Set">
-        <description>
-     * Returns the events to be logged.
-     *
-     * @return the events to be logged
-     </description>
+        <description> Returns the events to be logged.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the events to be logged
+
+</description>
     </method>
     <method name="getExceptionFormat" returnType="org.gradle.api.tasks.testing.logging.TestExceptionFormat">
-        <description>
-     * Returns the format to be used for logging test exceptions. Only relevant if {@code showStackTraces} is {@code true}.
-     *
-     * @return the format to be used for logging test exceptions
-     </description>
+        <description> Returns the format to be used for logging test exceptions. Only relevant if &lt;a href='type://showStackTraces'&gt;showStackTraces&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the format to be used for logging test exceptions
+
+</description>
     </method>
     <method name="getMaxGranularity" returnType="int">
-        <description>
-     * Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
-     * for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
-     * and corresponds to an atomic test.
-     *
-     * @return the maximum granularity of the events to be logged
-     </description>
+        <description> Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
+ for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
+ and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the maximum granularity of the events to be logged
+
+</description>
     </method>
     <method name="getMinGranularity" returnType="int">
-        <description>
-     * Returns the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
-     * for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
-     * and corresponds to an atomic test.
-     *
-     * @return the minimum granularity of the events to be logged
-     </description>
+        <description> Returns the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
+ for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
+ and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the minimum granularity of the events to be logged
+
+</description>
     </method>
     <method name="getShowCauses" returnType="boolean">
-        <description>
-     * Tells whether causes of exceptions that occur during test execution will be logged. Only relevant if {@code showExceptions} is {@code true}.
-     *
-     * @return whether causes of exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether causes of exceptions that occur during test execution will be logged. Only relevant if &lt;a href='type://showExceptions'&gt;showExceptions&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether causes of exceptions that occur during test execution will be logged
+
+</description>
     </method>
     <method name="getShowExceptions" returnType="boolean">
-        <description>
-     * Tells whether exceptions that occur during test execution will be logged. Typically these exceptions coincide with a "failed" event.
-     *
-     * @return whether exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether exceptions that occur during test execution will be logged. Typically these exceptions coincide with a "failed" event.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether exceptions that occur during test execution will be logged
+
+</description>
     </method>
     <method name="getShowStackTraces" returnType="boolean">
-        <description>
-     * Tells whether stack traces of exceptions that occur during test execution will be logged.
-     *
-     * @return whether stack traces of exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether stack traces of exceptions that occur during test execution will be logged.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether stack traces of exceptions that occur during test execution will be logged
+
+</description>
     </method>
     <method name="getShowStandardStreams" returnType="boolean">
-        <description>
-     * Tells whether output on standard out and standard error will be logged. Equivalent to checking if both log events {@code TestLogEvent.STANDARD_OUT} and {@code TestLogEvent.STANDARD_ERROR} are
-     * set.
-     </description>
+        <description> Tells whether output on standard out and standard error will be logged. Equivalent to checking if both log events &lt;a href='type://TestLogEvent.STANDARD_OUT'&gt;TestLogEvent.STANDARD_OUT&lt;/a&gt; and &lt;a href='type://TestLogEvent.STANDARD_ERROR'&gt;TestLogEvent.STANDARD_ERROR&lt;/a&gt; are
+ set.
+
+</description>
     </method>
     <method name="getStackTraceFilters" returnType="java.util.Set">
-        <description>
-     * Returns the set of filters to be used for sanitizing test stack traces.
-     *
-     * @return the set of filters to be used for sanitizing test stack traces
-     </description>
+        <description> Returns the set of filters to be used for sanitizing test stack traces.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of filters to be used for sanitizing test stack traces
+
+</description>
     </method>
     <method name="setDisplayGranularity" returnType="void">
-        <description>
-     * Sets the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If set
-     * to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
-     *
-     * @param granularity the display granularity of the events to be logged
-     </description>
+        <description> Sets the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If set
+ to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;granularity the display granularity of the events to be logged
+
+</description>
         <parameter type="int" name="granularity"/>
     </method>
     <method name="setEvents" returnType="void">
-        <description>
-     * Sets the events to be logged.
-     *
-     * @param events the events to be logged
-     </description>
+        <description> Sets the events to be logged.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;events the events to be logged
+
+</description>
         <parameter type="java.lang.Iterable" name="events"/>
     </method>
     <method name="setExceptionFormat" returnType="void">
-        <description>
-     * Sets the format to be used for logging test exceptions. Only relevant if {@code showStackTraces} is {@code true}.
-     *
-     * @param exceptionFormat the format to be used for logging test exceptions
-     </description>
+        <description> Sets the format to be used for logging test exceptions. Only relevant if &lt;a href='type://showStackTraces'&gt;showStackTraces&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;exceptionFormat the format to be used for logging test exceptions
+
+</description>
         <parameter type="java.lang.Object" name="exceptionFormat"/>
     </method>
     <method name="setMaxGranularity" returnType="void">
-        <description>
-     * Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
-     * for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
-     * and corresponds to an atomic test.
-     *
-     * @param granularity the maximum granularity of the events to be logged
-     </description>
+        <description> Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
+ for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
+ and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;granularity the maximum granularity of the events to be logged
+
+</description>
         <parameter type="int" name="granularity"/>
     </method>
     <method name="setMinGranularity" returnType="void">
-        <description>
-     * Sets the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite for
-     * a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity and
-     * corresponds to an atomic test.
-     *
-     * @param granularity the minimum granularity of the events to be logged
-     </description>
+        <description> Sets the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite for
+ a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity and
+ corresponds to an atomic test.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;granularity the minimum granularity of the events to be logged
+
+</description>
         <parameter type="int" name="granularity"/>
     </method>
     <method name="setShowCauses" returnType="void">
-        <description>
-     * Sets whether causes of exceptions that occur during test execution will be logged. Only relevant if {@code showExceptions} is {@code true}.
-     *
-     * @param flag whether causes of exceptions that occur during test execution will be logged
-     </description>
+        <description> Sets whether causes of exceptions that occur during test execution will be logged. Only relevant if &lt;a href='type://showExceptions'&gt;showExceptions&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;flag whether causes of exceptions that occur during test execution will be logged
+
+</description>
         <parameter type="boolean" name="flag"/>
     </method>
     <method name="setShowExceptions" returnType="void">
-        <description>
-     * Sets whether exceptions that occur during test execution will be logged.
-     *
-     * @param flag whether exceptions that occur during test execution will be logged
-     </description>
+        <description> Sets whether exceptions that occur during test execution will be logged.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;flag whether exceptions that occur during test execution will be logged
+
+</description>
         <parameter type="boolean" name="flag"/>
     </method>
     <method name="setShowStackTraces" returnType="void">
-        <description>
-     * Sets whether stack traces of exceptions that occur during test execution will be logged.
-     *
-     * @param flag whether stack traces of exceptions that occur during test execution will be logged
-     </description>
+        <description> Sets whether stack traces of exceptions that occur during test execution will be logged.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;flag whether stack traces of exceptions that occur during test execution will be logged
+
+</description>
         <parameter type="boolean" name="flag"/>
     </method>
     <method name="setShowStandardStreams" returnType="org.gradle.api.tasks.testing.logging.TestLogging">
-        <description>
-     * Sets whether output on standard out and standard error will be logged. Equivalent to setting log events {@code TestLogEvent.STANDARD_OUT} and {@code TestLogEvent.STANDARD_ERROR}.
-     </description>
+        <description> Sets whether output on standard out and standard error will be logged. Equivalent to setting log events &lt;a href='type://TestLogEvent.STANDARD_OUT'&gt;TestLogEvent.STANDARD_OUT&lt;/a&gt; and &lt;a href='type://TestLogEvent.STANDARD_ERROR'&gt;TestLogEvent.STANDARD_ERROR&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="flag"/>
     </method>
     <method name="setStackTraceFilters" returnType="void">
-        <description>
-     * Sets the set of filters to be used for sanitizing test stack traces.
-     *
-     * @param stackTraces the set of filters to be used for sanitizing test stack traces
-     </description>
+        <description> Sets the set of filters to be used for sanitizing test stack traces.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;stackTraces the set of filters to be used for sanitizing test stack traces
+
+</description>
         <parameter type="java.lang.Iterable" name="stackTraces"/>
     </method>
     <method name="stackTraceFilters" returnType="void">
-        <description>
-     * Convenience method for {@link #setStackTraceFilters(java.lang.Iterable)}. Accepts both enum values and Strings.
-     </description>
+        <description> Convenience method for &lt;a href='type://org.gradle.api.tasks.testing.logging.TestLogging#setStackTraceFilters(java.lang.Iterable)'&gt;#setStackTraceFilters(java.lang.Iterable)&lt;/a&gt;. Accepts both enum values and Strings.
+
+</description>
         <parameter type="java.lang.Object" name="stackTraces"/>
     </method>
     <property name="displayGranularity" type="int" documented="true">
-        <description>
-     * Returns the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If
-     * set to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
-     *
-     * @return the display granularity of the events to be logged
-     </description>
+        <description> Returns the display granularity of the events to be logged. For example, if set to 0, a method-level event will be displayed as "Test Run &gt; Test Worker x &gt; org.SomeClass &gt; org.someMethod". If
+ set to 2, the same event will be displayed as "org.someClass &gt; org.someMethod". &lt;p&gt;-1 denotes the highest granularity and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the display granularity of the events to be logged
+
+</description>
     </property>
     <property name="events" type="java.util.Set" documented="true">
-        <description>
-     * Returns the events to be logged.
-     *
-     * @return the events to be logged
-     </description>
+        <description> Returns the events to be logged.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the events to be logged
+
+</description>
     </property>
     <property name="exceptionFormat" type="org.gradle.api.tasks.testing.logging.TestExceptionFormat" documented="true">
-        <description>
-     * Returns the format to be used for logging test exceptions. Only relevant if {@code showStackTraces} is {@code true}.
-     *
-     * @return the format to be used for logging test exceptions
-     </description>
+        <description> Returns the format to be used for logging test exceptions. Only relevant if &lt;a href='type://showStackTraces'&gt;showStackTraces&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the format to be used for logging test exceptions
+
+</description>
     </property>
     <property name="maxGranularity" type="int" documented="true">
-        <description>
-     * Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
-     * for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
-     * and corresponds to an atomic test.
-     *
-     * @return the maximum granularity of the events to be logged
-     </description>
+        <description> Returns the maximum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
+ for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
+ and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the maximum granularity of the events to be logged
+
+</description>
     </property>
     <property name="minGranularity" type="int" documented="true">
-        <description>
-     * Returns the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
-     * for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
-     * and corresponds to an atomic test.
-     *
-     * @return the minimum granularity of the events to be logged
-     </description>
+        <description> Returns the minimum granularity of the events to be logged. Typically, 0 corresponds to the Gradle-generated test suite for the whole test run, 1 corresponds to the Gradle-generated test suite
+ for a particular test JVM, 2 corresponds to a test class, and 3 corresponds to a test method. These values will vary if user-defined suites are executed. &lt;p&gt;-1 denotes the highest granularity
+ and corresponds to an atomic test.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the minimum granularity of the events to be logged
+
+</description>
     </property>
     <property name="showCauses" type="boolean" documented="true">
-        <description>
-     * Tells whether causes of exceptions that occur during test execution will be logged. Only relevant if {@code showExceptions} is {@code true}.
-     *
-     * @return whether causes of exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether causes of exceptions that occur during test execution will be logged. Only relevant if &lt;a href='type://showExceptions'&gt;showExceptions&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether causes of exceptions that occur during test execution will be logged
+
+</description>
     </property>
     <property name="showExceptions" type="boolean" documented="true">
-        <description>
-     * Tells whether exceptions that occur during test execution will be logged. Typically these exceptions coincide with a "failed" event.
-     *
-     * @return whether exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether exceptions that occur during test execution will be logged. Typically these exceptions coincide with a "failed" event.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether exceptions that occur during test execution will be logged
+
+</description>
     </property>
     <property name="showStackTraces" type="boolean" documented="true">
-        <description>
-     * Tells whether stack traces of exceptions that occur during test execution will be logged.
-     *
-     * @return whether stack traces of exceptions that occur during test execution will be logged
-     </description>
+        <description> Tells whether stack traces of exceptions that occur during test execution will be logged.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether stack traces of exceptions that occur during test execution will be logged
+
+</description>
     </property>
     <property name="showStandardStreams" type="boolean" documented="true">
-        <description>
-     * Tells whether output on standard out and standard error will be logged. Equivalent to checking if both log events {@code TestLogEvent.STANDARD_OUT} and {@code TestLogEvent.STANDARD_ERROR} are
-     * set.
-     </description>
+        <description> Tells whether output on standard out and standard error will be logged. Equivalent to checking if both log events &lt;a href='type://TestLogEvent.STANDARD_OUT'&gt;TestLogEvent.STANDARD_OUT&lt;/a&gt; and &lt;a href='type://TestLogEvent.STANDARD_ERROR'&gt;TestLogEvent.STANDARD_ERROR&lt;/a&gt; are
+ set.
+
+</description>
     </property>
     <property name="stackTraceFilters" type="java.util.Set" documented="true">
-        <description>
-     * Returns the set of filters to be used for sanitizing test stack traces.
-     *
-     * @return the set of filters to be used for sanitizing test stack traces
-     </description>
+        <description> Returns the set of filters to be used for sanitizing test stack traces.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of filters to be used for sanitizing test stack traces
+
+</description>
     </property>
 </type>

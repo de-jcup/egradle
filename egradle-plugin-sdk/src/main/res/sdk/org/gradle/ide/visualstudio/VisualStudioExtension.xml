@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.ide.visualstudio.VisualStudioExtension" version="3.0" documented="true">
-    <description>
- * The configuration for mapping a set of {@link org.gradle.nativeplatform.NativeComponentSpec}s to a Visual Studio project.
- </description>
+    <description> The configuration for mapping a set of &lt;a href='type://org.gradle.nativeplatform.NativeComponentSpec'&gt;org.gradle.nativeplatform.NativeComponentSpec&lt;/a&gt;s to a Visual Studio project.
+
+</description>
     <method name="getProjects" returnType="org.gradle.api.NamedDomainObjectSet">
-        <description>
-     * The {@link VisualStudioProject}s generated.
-     </description>
+        <description> The &lt;a href='type://VisualStudioProject'&gt;VisualStudioProject&lt;/a&gt;s generated.
+
+</description>
     </method>
     <method name="getSolutions" returnType="org.gradle.api.NamedDomainObjectSet">
-        <description>
-     * The {@link VisualStudioSolution}s generated.
-     </description>
+        <description> The &lt;a href='type://VisualStudioSolution'&gt;VisualStudioSolution&lt;/a&gt;s generated.
+
+</description>
     </method>
     <property name="projects" type="org.gradle.api.NamedDomainObjectSet" documented="true">
-        <description>
-     * The {@link VisualStudioProject}s generated.
-     </description>
+        <description> The &lt;a href='type://VisualStudioProject'&gt;VisualStudioProject&lt;/a&gt;s generated.
+
+</description>
     </property>
     <property name="solutions" type="org.gradle.api.NamedDomainObjectSet" documented="true">
-        <description>
-     * The {@link VisualStudioSolution}s generated.
-     </description>
+        <description> The &lt;a href='type://VisualStudioSolution'&gt;VisualStudioSolution&lt;/a&gt;s generated.
+
+</description>
     </property>
 </type>

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.reporting.ConfigurableReport" version="3.0">
-    <description>
- * A file based report to be created with a configurable destination.
- </description>
+    <description> A file based report to be created with a configurable destination.
+
+</description>
     <method name="setDestination" returnType="void">
-        <description>
-     * Sets the destination for the report.
-     *
-     * The file parameter is evaluated as per {@link org.gradle.api.Project#file(Object)}.
-     *
-     * @param file The destination for the report.
-     </description>
+        <description> Sets the destination for the report.
+
+ The file parameter is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The destination for the report.
+
+</description>
         <parameter type="java.lang.Object" name="file"/>
     </method>
     <interface name="org.gradle.api.reporting.Report"/>
     <property name="destination" type="java.lang.Object">
-        <description>
-     * Sets the destination for the report.
-     *
-     * The file parameter is evaluated as per {@link org.gradle.api.Project#file(Object)}.
-     *
-     * @param file The destination for the report.
-     </description>
+        <description> Sets the destination for the report.
+
+ The file parameter is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The destination for the report.
+
+</description>
     </property>
 </type>

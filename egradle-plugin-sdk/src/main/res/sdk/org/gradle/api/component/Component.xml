@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.component.Component" version="3.0">
-    <description>
- * A software component that can be queried via the Artifact Query API.
- *
- * @since 2.0
- </description>
+    <description> A software component that can be queried via the Artifact Query API.
+
+ @since 2.0
+
+</description>
 </type>

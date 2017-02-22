@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.CheckstylePlugin" version="3.0">
-    <description>
- * Checkstyle Plugin.
- </description>
-    <method name="call" returnType="java.util.Map"/>
+    <description> Checkstyle Plugin.
+
+</description>
+    <method name="call" returnType="java.io.File"/>
     <method name="configureDefaultDependencies" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
     </method>

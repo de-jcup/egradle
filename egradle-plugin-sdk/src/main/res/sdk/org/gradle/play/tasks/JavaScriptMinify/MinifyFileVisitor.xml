@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.tasks.JavaScriptMinify.MinifyFileVisitor" version="3.0">
-    <description>
-     * Copies each file in the source set to the output directory and gathers relative files for compilation
-     </description>
+    <description> Copies each file in the source set to the output directory and gathers relative files for compilation
+
+</description>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.file.CopySpec" name="copySpec"/>
     </method>

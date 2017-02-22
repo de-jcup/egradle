@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.component.LibraryComponentSelector" version="3.0">
-    <description>
- * Criteria for selecting a library instance that is built as part of the current build.
- *
- </description>
+    <description> Criteria for selecting a library instance that is built as part of the current build.
+
+
+</description>
     <method name="getLibraryName" returnType="java.lang.String">
-        <description>
-     * Return the library name of the selected library.
-     * If the library name is null then it is expected to find a single library defined in same project
-     * as the requesting component or dependency resolution will fail.
-     * If not &lt;code&gt;null&lt;/code&gt; then the name will never be empty.
-     *
-     * @return the library name
-     </description>
+        <description> Return the library name of the selected library.
+ If the library name is null then it is expected to find a single library defined in same project
+ as the requesting component or dependency resolution will fail.
+ If not &lt;code&gt;null&lt;/code&gt; then the name will never be empty.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name
+
+</description>
     </method>
     <method name="getProjectPath" returnType="java.lang.String">
-        <description>
-     * Return the project path of the selected library.
-     *
-     * @return the project path of the library
-     </description>
+        <description> Return the project path of the selected library.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path of the library
+
+</description>
     </method>
     <method name="getVariant" returnType="java.lang.String"/>
     <interface name="org.gradle.api.artifacts.component.ComponentSelector"/>
     <property name="libraryName" type="java.lang.String">
-        <description>
-     * Return the library name of the selected library.
-     * If the library name is null then it is expected to find a single library defined in same project
-     * as the requesting component or dependency resolution will fail.
-     * If not &lt;code&gt;null&lt;/code&gt; then the name will never be empty.
-     *
-     * @return the library name
-     </description>
+        <description> Return the library name of the selected library.
+ If the library name is null then it is expected to find a single library defined in same project
+ as the requesting component or dependency resolution will fail.
+ If not &lt;code&gt;null&lt;/code&gt; then the name will never be empty.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the library name
+
+</description>
     </property>
     <property name="projectPath" type="java.lang.String">
-        <description>
-     * Return the project path of the selected library.
-     *
-     * @return the project path of the library
-     </description>
+        <description> Return the project path of the selected library.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project path of the library
+
+</description>
     </property>
     <property name="variant" type="java.lang.String"/>
 </type>

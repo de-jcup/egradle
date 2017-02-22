@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayCoffeeScriptPlugin" version="3.0">
-    <description>
- * Plugin for adding coffeescript compilation to a Play application.  Adds support for
- * defining {@link org.gradle.language.coffeescript.CoffeeScriptSourceSet} source sets.  A
- * "coffeeScript" source set is created by default.
- </description>
+    <description> Plugin for adding coffeescript compilation to a Play application.  Adds support for
+ defining &lt;a href='type://org.gradle.language.coffeescript.CoffeeScriptSourceSet'&gt;org.gradle.language.coffeescript.CoffeeScriptSourceSet&lt;/a&gt; source sets.  A
+ "coffeeScript" source set is created by default.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="target"/>
     </method>

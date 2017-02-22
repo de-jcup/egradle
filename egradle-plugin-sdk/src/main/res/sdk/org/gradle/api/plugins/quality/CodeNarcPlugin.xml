@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.quality.CodeNarcPlugin" version="3.0">
-    <description>
- * CodeNarc Plugin.
- </description>
-    <method name="call" returnType="org.gradle.api.resources.TextResource"/>
+    <description> CodeNarc Plugin.
+
+</description>
+    <method name="call" returnType="java.lang.Integer"/>
     <method name="configureDefaultDependencies" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
     </method>

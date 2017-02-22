@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.objectivec.plugins.ObjectiveCPlugin" version="3.0">
-    <description>
- * A plugin for projects wishing to build native binary components from Objective-C sources.
- *
- * &lt;p&gt;Automatically includes the {@link ObjectiveCLangPlugin} for core Objective-C support and the {@link org.gradle.nativeplatform.plugins.NativeComponentPlugin} for native component support.&lt;/p&gt;
- *
- * &lt;li&gt;Creates a {@link org.gradle.language.objectivec.tasks.ObjectiveCCompile} task for each {@link org.gradle.language.objectivec.ObjectiveCSourceSet} to compile the Objective-C sources.&lt;/li&gt;
- </description>
+    <description> A plugin for projects wishing to build native binary components from Objective-C sources.
+
+ &lt;p&gt;Automatically includes the &lt;a href='type://ObjectiveCLangPlugin'&gt;ObjectiveCLangPlugin&lt;/a&gt; for core Objective-C support and the &lt;a href='type://org.gradle.nativeplatform.plugins.NativeComponentPlugin'&gt;org.gradle.nativeplatform.plugins.NativeComponentPlugin&lt;/a&gt; for native component support.&lt;/p&gt;
+
+ &lt;li&gt;Creates a &lt;a href='type://org.gradle.language.objectivec.tasks.ObjectiveCCompile'&gt;org.gradle.language.objectivec.tasks.ObjectiveCCompile&lt;/a&gt; task for each &lt;a href='type://org.gradle.language.objectivec.ObjectiveCSourceSet'&gt;org.gradle.language.objectivec.ObjectiveCSourceSet&lt;/a&gt; to compile the Objective-C sources.&lt;/li&gt;
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

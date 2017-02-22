@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.base.plugins.LanguageBasePlugin" version="3.0">
-    <description>
- * Base plugin for language support.
- *
- * - Adds a {@link ProjectSourceSet} named {@code sources} to the project.
- * - Registers the base {@link LanguageSourceSet} type.
- </description>
+    <description> Base plugin for language support.
+
+ - Adds a &lt;a href='type://ProjectSourceSet'&gt;ProjectSourceSet&lt;/a&gt; named &lt;a href='type://sources'&gt;sources&lt;/a&gt; to the project.
+ - Registers the base &lt;a href='type://LanguageSourceSet'&gt;LanguageSourceSet&lt;/a&gt; type.
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

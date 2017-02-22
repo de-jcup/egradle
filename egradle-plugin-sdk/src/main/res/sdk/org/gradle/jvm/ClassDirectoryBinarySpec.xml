@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.ClassDirectoryBinarySpec" version="3.0">
-    <description>
- * An exploded binary containing resources and compiled class files.
- </description>
+    <description> An exploded binary containing resources and compiled class files.
+
+</description>
     <interface name="org.gradle.jvm.JvmBinarySpec"/>
 </type>

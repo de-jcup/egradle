@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.testing.TestFrameworkOptions" version="3.0">
-    <description>
- * The base class for any test framework specific options.
- </description>
+    <description> The base class for any test framework specific options.
+
+</description>
 </type>

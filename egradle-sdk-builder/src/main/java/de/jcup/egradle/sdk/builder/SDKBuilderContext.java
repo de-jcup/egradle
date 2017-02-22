@@ -2,9 +2,10 @@ package de.jcup.egradle.sdk.builder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,7 +21,6 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.sdk.SDKInfo;
 import de.jcup.egradle.sdk.builder.model.OriginXMLDSlTypeInfoImporter;
 import de.jcup.egradle.sdk.internal.XMLSDKInfo;
-import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
 
 public class SDKBuilderContext {
 	
@@ -42,7 +42,6 @@ public class SDKBuilderContext {
 	public File sourceParentDirectory;
 	public File targetPathDirectory;
 	public Map<String, Type> tasks = new TreeMap<>();
-	public int methodWithOutDescriptionCount;
 	public int methodAllCount;
 
 	public Map<String,File> originTypeNameToOriginFileMapping = new TreeMap<>();
@@ -120,14 +119,17 @@ public class SDKBuilderContext {
 		
 	}
 
+	private List<String> warnings = new ArrayList<>();
+	
 	public String getInfo() {
-		double missingDescriptionPercent = 0;
-		if (methodWithOutDescriptionCount != 0 && methodAllCount != 0) {
-			double onePercent = methodAllCount / 100;
-			missingDescriptionPercent = methodWithOutDescriptionCount / onePercent;
+		StringBuilder sb = new StringBuilder();
+		
+		for (String warning: warnings){
+			sb.append("warn:"+warning);
+			sb.append("\n");
 		}
-		return "Methods all:" + methodAllCount + " - missing descriptions:" + methodWithOutDescriptionCount + " ="
-				+ missingDescriptionPercent + "%";
+		
+		return sb.toString();
 	}
 	
 	private File createTargetFile(File targetRootDirectory) {
@@ -151,5 +153,9 @@ public class SDKBuilderContext {
 		if (!file.isFile()) {
 			throw new FileNotFoundException(file.getCanonicalPath() + " ist not a file!");
 		}
+	}
+
+	public void addWarning(String message) {
+		warnings.add(message);
 	}
 }

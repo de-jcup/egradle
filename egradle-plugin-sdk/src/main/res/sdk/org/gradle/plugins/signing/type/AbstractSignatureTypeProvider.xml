@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.signing.type.AbstractSignatureTypeProvider" version="3.0">
-    <description>
- * Convenience base class for {@link SignatureTypeProvider} implementations.
- </description>
+    <description> Convenience base class for &lt;a href='type://SignatureTypeProvider'&gt;SignatureTypeProvider&lt;/a&gt; implementations.
+
+</description>
     <method name="assertHasTypeForExtension" returnType="void">
         <parameter type="java.lang.String" name="extension"/>
     </method>

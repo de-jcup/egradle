@@ -1,120 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.SourceTask" version="3.0" documented="true">
-    <description>
- * A {@code SourceTask} performs some operation on source files.
- </description>
-    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+    <description> A &lt;a href='type://SourceTask'&gt;SourceTask&lt;/a&gt; performs some operation on source files.
+
+</description>
+    <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" delegationTarget="org.gradle.api.file.FileTreeElement" documented="true">
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="groovy.lang.Closure" name="excludeSpec"/>
     </method>
     <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.Iterable" name="excludes"/>
     </method>
     <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.String" name="excludes"/>
     </method>
     <method name="exclude" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/>
     </method>
     <method name="getExcludes" returnType="java.util.Set">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </method>
     <method name="getIncludes" returnType="java.util.Set">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </method>
     <method name="getPatternSetFactory" returnType="org.gradle.internal.Factory"/>
     <method name="getSource" returnType="org.gradle.api.file.FileTree">
-        <description>
-     * Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
-     *
-     * @return The source.
-     </description>
+        <description> Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source.
+
+</description>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+    <method name="include" returnType="org.gradle.api.tasks.SourceTask" delegationTarget="org.gradle.api.file.FileTreeElement" documented="true">
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="groovy.lang.Closure" name="includeSpec"/>
     </method>
     <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
     <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.String" name="includes"/>
     </method>
     <method name="include" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="org.gradle.api.specs.Spec" name="includeSpec"/>
     </method>
     <method name="setExcludes" returnType="org.gradle.api.tasks.SourceTask">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.Iterable" name="excludes"/>
     </method>
     <method name="setIncludes" returnType="org.gradle.api.tasks.SourceTask">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.Iterable" name="includes"/>
     </method>
     <method name="setSource" returnType="void">
-        <description>
-     * Sets the source for this task. The given source object is evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     *
-     * @param source The source.
-     </description>
+        <description> Sets the source for this task. The given source object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source.
+
+</description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
     <method name="source" returnType="org.gradle.api.tasks.SourceTask" documented="true">
-        <description>
-     * Adds some source to this task. The given source objects will be evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     *
-     * @param sources The source to add
-     * @return this
-     </description>
+        <description> Adds some source to this task. The given source objects will be evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sources The source to add
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="sources"/>
     </method>
     <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="excludes" type="java.util.Set" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
     <property name="includes" type="java.util.Set" documented="true">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
     <property name="patternSetFactory" type="org.gradle.internal.Factory"/>
     <property name="source" type="org.gradle.api.file.FileTree" documented="true">
-        <description>
-     * Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
-     *
-     * @return The source.
-     </description>
+        <description> Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source.
+
+</description>
     </property>
 </type>

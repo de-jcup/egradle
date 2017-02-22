@@ -1,132 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.jvm.application.tasks.CreateStartScripts" version="3.0" documented="true">
-    <description>
- * Creates start scripts for launching JVM applications.
- * &lt;p&gt;
- * Example:
- * &lt;pre autoTested=''&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   outputDir = file('build/sample')
- *   mainClassName = 'org.gradle.test.Main'
- *   applicationName = 'myApp'
- *   classpath = files('path/to/some.jar')
- * }
- * &lt;/pre&gt;
- * &lt;p&gt;
- * Note: the Gradle {@code "application"} plugin adds a pre-configured task of this type named {@code "createStartScripts"}.
- * &lt;p&gt;
- * The task generates separate scripts targeted at Microsoft Windows environments and UNIX-like environments (e.g. Linux, Mac OS X).
- * The actual generation is implemented by the {@link #getWindowsStartScriptGenerator()} and {@link #getUnixStartScriptGenerator()} properties, of type {@link ScriptGenerator}.
- * &lt;p&gt;
- * Example:
- * &lt;pre autoTested=''&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   unixStartScriptGenerator = new CustomUnixStartScriptGenerator()
- *   windowsStartScriptGenerator = new CustomWindowsStartScriptGenerator()
- * }
- *
- * class CustomUnixStartScriptGenerator implements ScriptGenerator {
- *   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
- *     // implementation
- *   }
- * }
- *
- * class CustomWindowsStartScriptGenerator implements ScriptGenerator {
- *   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
- *     // implementation
- *   }
- * }
- * &lt;/pre&gt;
- * &lt;p&gt;
- * The default generators are of the type {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}, with default templates.
- * This templates can be changed via the {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)} method.
- * &lt;p&gt;
- * The default implementations used by this task use &lt;a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine"&gt;Groovy's SimpleTemplateEngine&lt;/a&gt;
- * to parse the template, with the following variables available:
- * &lt;p&gt;
- * &lt;ul&gt;
- * &lt;li&gt;{@code applicationName}&lt;/li&gt;
- * &lt;li&gt;{@code optsEnvironmentVar}&lt;/li&gt;
- * &lt;li&gt;{@code exitEnvironmentVar}&lt;/li&gt;
- * &lt;li&gt;{@code mainClassName}&lt;/li&gt;
- * &lt;li&gt;{@code defaultJvmOpts}&lt;/li&gt;
- * &lt;li&gt;{@code appNameSystemProperty}&lt;/li&gt;
- * &lt;li&gt;{@code appHomeRelativePath}&lt;/li&gt;
- * &lt;li&gt;{@code classpath}&lt;/li&gt;
- * &lt;/ul&gt;
- * &lt;p&gt;
- * Example:
- * &lt;p&gt;
- * &lt;pre&gt;
- * task createStartScripts(type: CreateStartScripts) {
- *   unixStartScriptGenerator.template = resources.text.fromFile('customUnixStartScript.txt')
- *   windowsStartScriptGenerator.template = resources.text.fromFile('customWindowsStartScript.txt')
- * }
- * &lt;/pre&gt;
- </description>
+    <description> Creates start scripts for launching JVM applications.
+ &lt;p&gt;
+ Example:
+ &lt;pre autoTested=''&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   outputDir = file('build/sample')
+   mainClassName = 'org.gradle.test.Main'
+   applicationName = 'myApp'
+   classpath = files('path/to/some.jar')
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Note: the Gradle &lt;a href='type://"application"'&gt;"application"&lt;/a&gt; plugin adds a pre-configured task of this type named &lt;a href='type://"createStartScripts"'&gt;"createStartScripts"&lt;/a&gt;.
+ &lt;p&gt;
+ The task generates separate scripts targeted at Microsoft Windows environments and UNIX-like environments (e.g. Linux, Mac OS X).
+ The actual generation is implemented by the &lt;a href='type://org.gradle.jvm.application.tasks.CreateStartScripts#getWindowsStartScriptGenerator()'&gt;#getWindowsStartScriptGenerator()&lt;/a&gt; and &lt;a href='type://org.gradle.jvm.application.tasks.CreateStartScripts#getUnixStartScriptGenerator()'&gt;#getUnixStartScriptGenerator()&lt;/a&gt; properties, of type &lt;a href='type://ScriptGenerator'&gt;ScriptGenerator&lt;/a&gt;.
+ &lt;p&gt;
+ Example:
+ &lt;pre autoTested=''&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   unixStartScriptGenerator = new CustomUnixStartScriptGenerator()
+   windowsStartScriptGenerator = new CustomWindowsStartScriptGenerator()
+ }
+
+ class CustomUnixStartScriptGenerator implements ScriptGenerator {
+     // implementation
+   }
+ }
+
+ class CustomWindowsStartScriptGenerator implements ScriptGenerator {
+     // implementation
+   }
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The default generators are of the type &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;, with default templates.
+ This templates can be changed via the &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator#setTemplate(org.gradle.api.resources.TextResource)&lt;/a&gt; method.
+ &lt;p&gt;
+ The default implementations used by this task use &lt;a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine"&gt;Groovy's SimpleTemplateEngine&lt;/a&gt;
+ to parse the template, with the following variables available:
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href='type://applicationName'&gt;applicationName&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://optsEnvironmentVar'&gt;optsEnvironmentVar&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://exitEnvironmentVar'&gt;exitEnvironmentVar&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://mainClassName'&gt;mainClassName&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://defaultJvmOpts'&gt;defaultJvmOpts&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://appNameSystemProperty'&gt;appNameSystemProperty&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://appHomeRelativePath'&gt;appHomeRelativePath&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://classpath'&gt;classpath&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Example:
+ &lt;p&gt;
+ &lt;pre&gt;
+ task createStartScripts(type: CreateStartScripts) {
+   unixStartScriptGenerator.template = resources.text.fromFile('customUnixStartScript.txt')
+   windowsStartScriptGenerator.template = resources.text.fromFile('customWindowsStartScript.txt')
+ }
+ &lt;/pre&gt;
+
+</description>
     <method name="apply" returnType="java.lang.String">
         <parameter type="java.io.File" name="input"/>
     </method>
     <method name="generate" returnType="void"/>
     <method name="getApplicationName" returnType="java.lang.String">
-        <description>
-     * The application's name.
-     </description>
+        <description> The application's name.
+
+</description>
     </method>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * The class path for the application.
-     </description>
+        <description> The class path for the application.
+
+</description>
     </method>
     <method name="getDefaultJvmOpts" returnType="java.lang.Iterable">
-        <description>
-     * The application's default JVM options. Defaults to an empty list.
-     </description>
+        <description> The application's default JVM options. Defaults to an empty list.
+
+</description>
     </method>
     <method name="getExitEnvironmentVar" returnType="java.lang.String">
-        <description>
-     * The environment variable to use to control exit value (Windows only).
-     </description>
+        <description> The environment variable to use to control exit value (Windows only).
+
+</description>
     </method>
     <method name="getMainClassName" returnType="java.lang.String">
-        <description>
-     * The main classname used to start the Java application.
-     </description>
+        <description> The main classname used to start the Java application.
+
+</description>
     </method>
     <method name="getOptsEnvironmentVar" returnType="java.lang.String">
-        <description>
-     * The environment variable to use to provide additional options to the JVM.
-     </description>
+        <description> The environment variable to use to provide additional options to the JVM.
+
+</description>
     </method>
     <method name="getOutputDir" returnType="java.io.File">
-        <description>
-     * The directory to write the scripts into.
-     </description>
+        <description> The directory to write the scripts into.
+
+</description>
     </method>
     <method name="getRelativeClasspath" returnType="java.lang.Iterable"/>
     <method name="getUnixScript" returnType="java.io.File">
-        <description>
-     * Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
-     </description>
+        <description> Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
+
+</description>
     </method>
     <method name="getUnixStartScriptGenerator" returnType="org.gradle.jvm.application.scripts.ScriptGenerator">
-        <description>
-     * The UNIX-like start script generator.
-     * &lt;p&gt;
-     * Defaults to an implementation of {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}.
-     </description>
+        <description> The UNIX-like start script generator.
+ &lt;p&gt;
+ Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;.
+
+</description>
     </method>
     <method name="getWindowsScript" returnType="java.io.File">
-        <description>
-     * Returns the full path to the Windows script. The target directory is represented by the output directory, the file name is the application name plus the file extension .bat.
-     </description>
+        <description> Returns the full path to the Windows script. The target directory is represented by the output directory, the file name is the application name plus the file extension .bat.
+
+</description>
     </method>
     <method name="getWindowsStartScriptGenerator" returnType="org.gradle.jvm.application.scripts.ScriptGenerator">
-        <description>
-     * The Windows start script generator.
-     * &lt;p&gt;
-     * Defaults to an implementation of {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}.
-     </description>
+        <description> The Windows start script generator.
+ &lt;p&gt;
+ Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;.
+
+</description>
     </method>
     <method name="setApplicationName" returnType="void">
         <parameter type="java.lang.String" name="applicationName"/>
@@ -156,63 +154,63 @@
         <parameter type="org.gradle.jvm.application.scripts.ScriptGenerator" name="windowsStartScriptGenerator"/>
     </method>
     <property name="applicationName" type="java.lang.String" documented="true">
-        <description>
-     * The application's name.
-     </description>
+        <description> The application's name.
+
+</description>
     </property>
     <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * The class path for the application.
-     </description>
+        <description> The class path for the application.
+
+</description>
     </property>
     <property name="defaultJvmOpts" type="java.lang.Iterable" documented="true">
-        <description>
-     * The application's default JVM options. Defaults to an empty list.
-     </description>
+        <description> The application's default JVM options. Defaults to an empty list.
+
+</description>
     </property>
     <property name="exitEnvironmentVar" type="java.lang.String">
-        <description>
-     * The environment variable to use to control exit value (Windows only).
-     </description>
+        <description> The environment variable to use to control exit value (Windows only).
+
+</description>
     </property>
     <property name="mainClassName" type="java.lang.String" documented="true">
-        <description>
-     * The main classname used to start the Java application.
-     </description>
+        <description> The main classname used to start the Java application.
+
+</description>
     </property>
     <property name="optsEnvironmentVar" type="java.lang.String" documented="true">
-        <description>
-     * The environment variable to use to provide additional options to the JVM.
-     </description>
+        <description> The environment variable to use to provide additional options to the JVM.
+
+</description>
     </property>
     <property name="outputDir" type="java.io.File" documented="true">
-        <description>
-     * The directory to write the scripts into.
-     </description>
+        <description> The directory to write the scripts into.
+
+</description>
     </property>
     <property name="relativeClasspath" type="java.lang.Iterable"/>
     <property name="unixScript" type="java.io.File">
-        <description>
-     * Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
-     </description>
+        <description> Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
+
+</description>
     </property>
     <property name="unixStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator" documented="true">
-        <description>
-     * The UNIX-like start script generator.
-     * &lt;p&gt;
-     * Defaults to an implementation of {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}.
-     </description>
+        <description> The UNIX-like start script generator.
+ &lt;p&gt;
+ Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;.
+
+</description>
     </property>
     <property name="windowsScript" type="java.io.File">
-        <description>
-     * Returns the full path to the Windows script. The target directory is represented by the output directory, the file name is the application name plus the file extension .bat.
-     </description>
+        <description> Returns the full path to the Windows script. The target directory is represented by the output directory, the file name is the application name plus the file extension .bat.
+
+</description>
     </property>
     <property name="windowsStartScriptGenerator" type="org.gradle.jvm.application.scripts.ScriptGenerator" documented="true">
-        <description>
-     * The Windows start script generator.
-     * &lt;p&gt;
-     * Defaults to an implementation of {@link org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator}.
-     </description>
+        <description> The Windows start script generator.
+ &lt;p&gt;
+ Defaults to an implementation of &lt;a href='type://org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator'&gt;org.gradle.jvm.application.scripts.TemplateBasedScriptGenerator&lt;/a&gt;.
+
+</description>
     </property>
 </type>

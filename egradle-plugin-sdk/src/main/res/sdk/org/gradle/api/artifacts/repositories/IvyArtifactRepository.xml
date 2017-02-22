@@ -1,165 +1,163 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.IvyArtifactRepository" version="3.0" documented="true">
-    <description>
- * An artifact repository which uses an Ivy format to store artifacts and meta-data.
- * &lt;p&gt;
- * When used to resolve metadata and artifact files, all available patterns will be searched.
- * &lt;p&gt;
- * When used to upload metadata and artifact files, only a single, primary pattern will be used:
- * &lt;ol&gt;
- * &lt;li&gt;If a URL is specified via {@link #setUrl} then that URL will be used for upload, combined with the applied {@link #layout(String)}.&lt;/li&gt;
- * &lt;li&gt;If no URL has been specified but additional patterns have been added via {@link #artifactPattern} or {@link #ivyPattern}, then the first defined pattern will be used.&lt;/li&gt;
- * &lt;/ol&gt;
- * &lt;p&gt;
- * Repositories of this type are created by the {@link org.gradle.api.artifacts.dsl.RepositoryHandler#ivy(org.gradle.api.Action)} group of methods.
- </description>
+    <description> An artifact repository which uses an Ivy format to store artifacts and meta-data.
+ &lt;p&gt;
+ When used to resolve metadata and artifact files, all available patterns will be searched.
+ &lt;p&gt;
+ When used to upload metadata and artifact files, only a single, primary pattern will be used:
+ &lt;ol&gt;
+ &lt;li&gt;If a URL is specified via &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#setUrl'&gt;#setUrl&lt;/a&gt; then that URL will be used for upload, combined with the applied &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String)'&gt;#layout(String)&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;If no URL has been specified but additional patterns have been added via &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#artifactPattern'&gt;#artifactPattern&lt;/a&gt; or &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#ivyPattern'&gt;#ivyPattern&lt;/a&gt;, then the first defined pattern will be used.&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;
+ Repositories of this type are created by the &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#ivy(org.gradle.api.Action)'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler#ivy(org.gradle.api.Action)&lt;/a&gt; group of methods.
+
+</description>
     <method name="artifactPattern" returnType="void" documented="true">
-        <description>
-     * Adds an independent pattern that will be used to locate artifact files in this repository. This pattern will be used to locate ivy files as well, unless a specific
-     * ivy pattern is supplied via {@link #ivyPattern(String)}.
-     *
-     * If this pattern is not a fully-qualified URL, it will be interpreted as a file relative to the project directory.
-     * It is not interpreted relative the URL specified in {@link #setUrl(Object)}.
-     *
-     * Patterns added in this way will be in addition to any layout-based patterns added via {@link #setUrl}.
-     *
-     * @param pattern The artifact pattern.
-     </description>
+        <description> Adds an independent pattern that will be used to locate artifact files in this repository. This pattern will be used to locate ivy files as well, unless a specific
+ ivy pattern is supplied via &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#ivyPattern(String)'&gt;#ivyPattern(String)&lt;/a&gt;.
+
+ If this pattern is not a fully-qualified URL, it will be interpreted as a file relative to the project directory.
+ It is not interpreted relative the URL specified in &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#setUrl(Object)'&gt;#setUrl(Object)&lt;/a&gt;.
+
+ Patterns added in this way will be in addition to any layout-based patterns added via &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#setUrl'&gt;#setUrl&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern The artifact pattern.
+
+</description>
         <parameter type="java.lang.String" name="pattern"/>
     </method>
     <method name="getResolve" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepositoryMetaDataProvider">
-        <description>
-     * Returns the meta-data provider used when resolving artifacts from this repository. The provider is responsible for locating and interpreting the meta-data
-     * for the modules and artifacts contained in this repository. Using this provider, you can fine tune how this resolution happens.
-     *
-     * @return The meta-data provider for this repository.
-     </description>
+        <description> Returns the meta-data provider used when resolving artifacts from this repository. The provider is responsible for locating and interpreting the meta-data
+ for the modules and artifacts contained in this repository. Using this provider, you can fine tune how this resolution happens.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The meta-data provider for this repository.
+
+</description>
     </method>
     <method name="getUrl" returnType="java.net.URI">
-        <description>
-     * The base URL of this repository.
-     *
-     * @return The URL.
-     </description>
+        <description> The base URL of this repository.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL.
+
+</description>
     </method>
     <method name="ivyPattern" returnType="void" documented="true">
-        <description>
-     * Adds an independent pattern that will be used to locate ivy files in this repository.
-     *
-     * If this pattern is not a fully-qualified URL, it will be interpreted as a file relative to the project directory.
-     * It is not interpreted relative the URL specified in {@link #setUrl(Object)}.
-     *
-     * Patterns added in this way will be in addition to any layout-based patterns added via {@link #setUrl}.
-     *
-     * @param pattern The ivy pattern.
-     </description>
+        <description> Adds an independent pattern that will be used to locate ivy files in this repository.
+
+ If this pattern is not a fully-qualified URL, it will be interpreted as a file relative to the project directory.
+ It is not interpreted relative the URL specified in &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#setUrl(Object)'&gt;#setUrl(Object)&lt;/a&gt;.
+
+ Patterns added in this way will be in addition to any layout-based patterns added via &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#setUrl'&gt;#setUrl&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pattern The ivy pattern.
+
+</description>
         <parameter type="java.lang.String" name="pattern"/>
     </method>
     <method name="layout" returnType="void" documented="true">
-        <description>
-     * Specifies the layout to use with this repository, based on the root url.
-     * See {@link #layout(String, Closure)}.
-     *
-     * @param layoutName The name of the layout to use.
-     </description>
+        <description> Specifies the layout to use with this repository, based on the root url.
+ See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, Closure)'&gt;#layout(String, Closure)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
+
+</description>
         <parameter type="java.lang.String" name="layoutName"/>
     </method>
-    <method name="layout" returnType="void" documented="true">
-        <description>
-     * Specifies how the items of the repository are organized. See {@link #layout(String, org.gradle.api.Action)}
-     *
-     * @param layoutName The name of the layout to use.
-     * @param config The closure used to configure the layout.
-     * An instance of {@link RepositoryLayout} is passed as a parameter to the closure.
-     </description>
+    <method name="layout" returnType="void" delegationTarget="RepositoryLayout" documented="true">
+        <description> Specifies how the items of the repository are organized. See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, org.gradle.api.Action)'&gt;#layout(String, org.gradle.api.Action)&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The closure used to configure the layout.
+ An instance of &lt;a href='type://RepositoryLayout'&gt;RepositoryLayout&lt;/a&gt; is passed as a parameter to the closure.
+
+</description>
         <parameter type="java.lang.String" name="layoutName"/>
         <parameter type="groovy.lang.Closure" name="config"/>
     </method>
     <method name="layout" returnType="void" documented="true">
-        <description>
-     * Specifies how the items of the repository are organized.
-     * &lt;p&gt;
-     * The layout is configured with the supplied closure.
-     * &lt;p&gt;
-     * Recognised values are as follows:
-     * &lt;/p&gt;
-     * &lt;h4&gt;'gradle'&lt;/h4&gt;
-     * &lt;p&gt;
-     * A Repository Layout that applies the following patterns:
-     * &lt;ul&gt;
-     *     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #GRADLE_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     *     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #GRADLE_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     * &lt;/ul&gt;
-     * &lt;/p&gt;
-     * &lt;h4&gt;'maven'&lt;/h4&gt;
-     * &lt;p&gt;
-     * A Repository Layout that applies the following patterns:
-     * &lt;ul&gt;
-     *     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #MAVEN_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     *     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #MAVEN_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     * &lt;/ul&gt;
-     * &lt;/p&gt;
-     * &lt;p&gt;
-     * Following the Maven convention, the 'organisation' value is further processed by replacing '.' with '/'.
-     * &lt;/p&gt;
-     * &lt;h4&gt;'ivy'&lt;/h4&gt;
-     * &lt;p&gt;
-     * A Repository Layout that applies the following patterns:
-     * &lt;ul&gt;
-     *     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     *     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     * &lt;/ul&gt;
-     * &lt;/p&gt;
-     * &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this pattern is currently {@link org.gradle.api.Incubating incubating}.&lt;/p&gt;
-     * &lt;h4&gt;'pattern'&lt;/h4&gt;
-     * &lt;p&gt;
-     * A repository layout that allows custom patterns to be defined. eg:
-     * &lt;pre autoTested=""&gt;
-     * repositories {
-     *     ivy {
-     *         layout 'pattern' , {
-     *             artifact '[module]/[revision]/[artifact](.[ext])'
-     *             ivy '[module]/[revision]/ivy.xml'
-     *         }
-     *     }
-     * }
-     * &lt;/pre&gt;
-     * &lt;/p&gt;
-     * &lt;p&gt;The available pattern tokens are listed as part of &lt;a href="http://ant.apache.org/ivy/history/latest-milestone/concept.html#patterns"&gt;Ivy's Main Concepts documentation&lt;/a&gt;.&lt;/p&gt;
-     *
-     * @param layoutName The name of the layout to use.
-     * @param config The action used to configure the layout.
-     * @since 2.3 (feature was already present in Groovy DSL, this particular method introduced in 2.3)
-     </description>
+        <description> Specifies how the items of the repository are organized.
+ &lt;p&gt;
+ The layout is configured with the supplied closure.
+ &lt;p&gt;
+ Recognised values are as follows:
+ &lt;/p&gt;
+ &lt;h4&gt;'gradle'&lt;/h4&gt;
+ &lt;p&gt;
+ A Repository Layout that applies the following patterns:
+ &lt;ul&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #GRADLE_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #GRADLE_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;h4&gt;'maven'&lt;/h4&gt;
+ &lt;p&gt;
+ A Repository Layout that applies the following patterns:
+ &lt;ul&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #MAVEN_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #MAVEN_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Following the Maven convention, the 'organisation' value is further processed by replacing '.' with '/'.
+ &lt;/p&gt;
+ &lt;h4&gt;'ivy'&lt;/h4&gt;
+ &lt;p&gt;
+ A Repository Layout that applies the following patterns:
+ &lt;ul&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this pattern is currently &lt;a href='type://org.gradle.api.Incubating incubating'&gt;org.gradle.api.Incubating incubating&lt;/a&gt;.&lt;/p&gt;
+ &lt;h4&gt;'pattern'&lt;/h4&gt;
+ &lt;p&gt;
+ A repository layout that allows custom patterns to be defined. eg:
+ &lt;pre autoTested=""&gt;
+ repositories {
+             artifact '[module]/[revision]/[artifact](.[ext])'
+             ivy '[module]/[revision]/ivy.xml'
+         }
+     }
+ }
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;p&gt;The available pattern tokens are listed as part of &lt;a href="http://ant.apache.org/ivy/history/latest-milestone/concept.html#patterns"&gt;Ivy's Main Concepts documentation&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The action used to configure the layout.
+ @since 2.3 (feature was already present in Groovy DSL, this particular method introduced in 2.3)
+
+</description>
         <parameter type="java.lang.String" name="layoutName"/>
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
     <method name="setUrl" returnType="void">
-        <description>
-     * Sets the base URL of this repository. The provided value is evaluated as per {@link org.gradle.api.Project#uri(Object)}. This means,
-     * for example, you can pass in a File object or a relative path which is evaluated relative to the project directory.
-     *
-     * File are resolved based on the supplied URL and the configured {@link #layout(String, Closure)} for this repository.
-     *
-     * @param url The base URL.
-     </description>
+        <description> Sets the base URL of this repository. The provided value is evaluated as per &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;. This means,
+ for example, you can pass in a File object or a relative path which is evaluated relative to the project directory.
+
+ File are resolved based on the supplied URL and the configured &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, Closure)'&gt;#layout(String, Closure)&lt;/a&gt; for this repository.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url The base URL.
+
+</description>
         <parameter type="java.lang.Object" name="url"/>
     </method>
     <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
     <interface name="org.gradle.api.artifacts.repositories.AuthenticationSupported"/>
     <property name="resolve" type="org.gradle.api.artifacts.repositories.IvyArtifactRepositoryMetaDataProvider" documented="true">
-        <description>
-     * Returns the meta-data provider used when resolving artifacts from this repository. The provider is responsible for locating and interpreting the meta-data
-     * for the modules and artifacts contained in this repository. Using this provider, you can fine tune how this resolution happens.
-     *
-     * @return The meta-data provider for this repository.
-     </description>
+        <description> Returns the meta-data provider used when resolving artifacts from this repository. The provider is responsible for locating and interpreting the meta-data
+ for the modules and artifacts contained in this repository. Using this provider, you can fine tune how this resolution happens.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The meta-data provider for this repository.
+
+</description>
     </property>
     <property name="url" type="java.net.URI" documented="true">
-        <description>
-     * The base URL of this repository.
-     *
-     * @return The URL.
-     </description>
+        <description> The base URL of this repository.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The URL.
+
+</description>
     </property>
 </type>

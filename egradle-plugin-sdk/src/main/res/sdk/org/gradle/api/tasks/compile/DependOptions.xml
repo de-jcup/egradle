@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.compile.DependOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
-    <description>
- * Options for the Ant Depend task. Only take effect if {@code CompileOptions.useAnt} and
- * {@code CompileOptions.useDepend} are {@code true}.
- *
- * &lt;p&gt;The Ant Depend task will delete out-of-date and dependent class files before compiling
- * so that only those files will be recompiled. This is not fool-proof but may result in faster compilation.
- * See the &lt;a href="http://ant.apache.org/manual/Tasks/depend.html" target="_blank"&gt;Ant Reference&lt;/a&gt;
- * for more information.
- *
- * &lt;p&gt;The {@code srcDir}, {@code destDir}, and {@code cache} properties of the Ant task
- * are set automatically. The latter is replaced by a {@code useCache} option to enable/disable caching of
- * dependency information.
- </description>
+    <description> Options for the Ant Depend task. Only take effect if &lt;a href='type://CompileOptions.useAnt'&gt;CompileOptions.useAnt&lt;/a&gt; and
+ &lt;a href='type://CompileOptions.useDepend'&gt;CompileOptions.useDepend&lt;/a&gt; are &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+ &lt;p&gt;The Ant Depend task will delete out-of-date and dependent class files before compiling
+ so that only those files will be recompiled. This is not fool-proof but may result in faster compilation.
+ See the &lt;a href="http://ant.apache.org/manual/Tasks/depend.html" target="_blank"&gt;Ant Reference&lt;/a&gt;
+ for more information.
+
+ &lt;p&gt;The &lt;a href='type://srcDir'&gt;srcDir&lt;/a&gt;, &lt;a href='type://destDir'&gt;destDir&lt;/a&gt;, and &lt;a href='type://cache'&gt;cache&lt;/a&gt; properties of the Ant task
+ are set automatically. The latter is replaced by a &lt;a href='type://useCache'&gt;useCache&lt;/a&gt; option to enable/disable caching of
+ dependency information.
+
+</description>
     <method name="excludeFromAntProperties" returnType="boolean">
         <parameter type="java.lang.String" name="fieldName"/>
     </method>
     <method name="getClasspath" returnType="java.lang.String">
-        <description>
-     * Returns the compile classpath for which dependencies should also be checked.
-     * Defaults to the empty string.
-     </description>
+        <description> Returns the compile classpath for which dependencies should also be checked.
+ Defaults to the empty string.
+
+</description>
     </method>
     <method name="isClosure" returnType="boolean">
-        <description>
-     * Tells whether to delete the transitive closure of outdated files or only their
-     * direct dependencies. Defaults to {@code false}.
-     </description>
+        <description> Tells whether to delete the transitive closure of outdated files or only their
+ direct dependencies. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
     </method>
     <method name="isDump" returnType="boolean">
-        <description>
-     * Tells whether to log dependency information. Defaults to {@code false}.
-     </description>
+        <description> Tells whether to log dependency information. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
     </method>
     <method name="isUseCache" returnType="boolean">
-        <description>
-     * Tells whether to cache dependency information. Defaults to {@code true}.
-     </description>
+        <description> Tells whether to cache dependency information. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     </method>
     <method name="isWarnOnRmiStubs" returnType="boolean">
-        <description>
-     * Tells whether to warn on RMI stubs without source. Defaults to {@code true}.
-     </description>
+        <description> Tells whether to warn on RMI stubs without source. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     </method>
     <method name="setClasspath" returnType="void">
-        <description>
-     * Sets the compile classpath for which dependencies should also be checked.
-     * Defaults to the empty string.
-     </description>
+        <description> Sets the compile classpath for which dependencies should also be checked.
+ Defaults to the empty string.
+
+</description>
         <parameter type="java.lang.String" name="classpath"/>
     </method>
     <method name="setClosure" returnType="void">
-        <description>
-     * Sets whether to delete the transitive closure of outdated files or only their
-     * direct dependencies. Defaults to {@code false}.
-     </description>
+        <description> Sets whether to delete the transitive closure of outdated files or only their
+ direct dependencies. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="closure"/>
     </method>
     <method name="setDump" returnType="void">
-        <description>
-     * Sets whether to log dependency information. Defaults to {@code false}.
-     </description>
+        <description> Sets whether to log dependency information. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="dump"/>
     </method>
     <method name="setUseCache" returnType="void">
-        <description>
-     * Sets whether to cache dependency information. Defaults to {@code true}.
-     </description>
+        <description> Sets whether to cache dependency information. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="useCache"/>
     </method>
     <method name="setWarnOnRmiStubs" returnType="void">
-        <description>
-     * Sets whether to warn on RMI stubs without source. Defaults to {@code true}.
-     </description>
+        <description> Sets whether to warn on RMI stubs without source. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
         <parameter type="boolean" name="warnOnRmiStubs"/>
     </method>
     <property name="classpath" type="java.lang.String">
-        <description>
-     * Returns the compile classpath for which dependencies should also be checked.
-     * Defaults to the empty string.
-     </description>
+        <description> Returns the compile classpath for which dependencies should also be checked.
+ Defaults to the empty string.
+
+</description>
     </property>
     <property name="closure" type="boolean">
-        <description>
-     * Tells whether to delete the transitive closure of outdated files or only their
-     * direct dependencies. Defaults to {@code false}.
-     </description>
+        <description> Tells whether to delete the transitive closure of outdated files or only their
+ direct dependencies. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
     </property>
     <property name="dump" type="boolean">
-        <description>
-     * Tells whether to log dependency information. Defaults to {@code false}.
-     </description>
+        <description> Tells whether to log dependency information. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
     </property>
     <property name="useCache" type="boolean">
-        <description>
-     * Tells whether to cache dependency information. Defaults to {@code true}.
-     </description>
+        <description> Tells whether to cache dependency information. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     </property>
     <property name="warnOnRmiStubs" type="boolean">
-        <description>
-     * Tells whether to warn on RMI stubs without source. Defaults to {@code true}.
-     </description>
+        <description> Tells whether to warn on RMI stubs without source. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     </property>
 </type>

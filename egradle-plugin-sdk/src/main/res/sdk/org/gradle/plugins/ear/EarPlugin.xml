@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ear.EarPlugin" version="3.0">
-    <description>
- * &lt;p&gt;
- * A {@link Plugin} with tasks which assemble a web application into a EAR file.
- * &lt;/p&gt;
- </description>
+    <description> &lt;p&gt;
+ A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; with tasks which assemble a web application into a EAR file.
+ &lt;/p&gt;
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="java.lang.Object"/>
+    <method name="call" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor"/>
     <method name="configureConfigurations" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

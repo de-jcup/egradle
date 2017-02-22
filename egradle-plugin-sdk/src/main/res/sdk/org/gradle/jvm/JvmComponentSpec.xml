@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.JvmComponentSpec" version="3.0">
-    <description>
- * Definition of a software component that is to be built by Gradle to run a on JVM platform.
- </description>
+    <description> Definition of a software component that is to be built by Gradle to run a on JVM platform.
+
+</description>
     <interface name="org.gradle.platform.base.ComponentSpec"/>
 </type>

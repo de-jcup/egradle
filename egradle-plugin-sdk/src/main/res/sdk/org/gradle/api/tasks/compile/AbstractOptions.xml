@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.compile.AbstractOptions" version="3.0" documented="true">
-    <description>
- * Base class for compilation-related options.
- </description>
+    <description> Base class for compilation-related options.
+
+</description>
     <method name="addValueToMapIfNotNull" returnType="void">
         <parameter type="java.util.Map" name="map"/>
         <parameter type="java.lang.reflect.Field" name="field"/>

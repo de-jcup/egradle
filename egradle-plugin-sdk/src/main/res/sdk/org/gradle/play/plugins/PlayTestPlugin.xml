@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.play.plugins.PlayTestPlugin" version="3.0" superType="org.gradle.model.RuleSource">
-    <description>
- * Plugin for executing tests from a Play Framework application.
- </description>
+    <description> Plugin for executing tests from a Play Framework application.
+
+</description>
     <method name="attachTestSuitesToCheckTask" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="tasks"/>
         <parameter type="org.gradle.model.ModelMap" name="playBinaries"/>

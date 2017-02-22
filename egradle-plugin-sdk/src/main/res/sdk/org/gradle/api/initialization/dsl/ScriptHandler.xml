@@ -1,128 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.initialization.dsl.ScriptHandler" version="3.0">
-    <description>
- * &lt;p&gt;A {@code ScriptHandler} allows you to manage the compilation and execution of a build script. You can declare the
- * classpath used to compile and execute a build script. This classpath is also used to load the plugins which the build
- * script uses.&lt;/p&gt;
- *
- * &lt;p&gt;You can obtain a {@code ScriptHandler} instance using {@link org.gradle.api.Project#getBuildscript()} or {@link
- * org.gradle.api.Script#getBuildscript()}.&lt;/p&gt;
- *
- * &lt;p&gt;To declare the script classpath, you use the {@link org.gradle.api.artifacts.dsl.DependencyHandler} provided by
- * {@link #getDependencies()} to attach dependencies to the {@value #CLASSPATH_CONFIGURATION} configuration. These
- * dependencies are resolved just prior to script compilation, and assembled into the classpath for the script.&lt;/p&gt;
- *
- * &lt;p&gt;For most external dependencies you will also need to declare one or more repositories where the dependencies can
- * be found, using the {@link org.gradle.api.artifacts.dsl.RepositoryHandler} provided by {@link
- * #getRepositories()}.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt; allows you to manage the compilation and execution of a build script. You can declare the
+ classpath used to compile and execute a build script. This classpath is also used to load the plugins which the build
+ script uses.&lt;/p&gt;
+
+ &lt;p&gt;You can obtain a &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt; instance using &lt;a href='type://org.gradle.api.Project#getBuildscript()'&gt;org.gradle.api.Project#getBuildscript()&lt;/a&gt; or &lt;a href='type://org.gradle.api.Script#getBuildscript()'&gt;org.gradle.api.Script#getBuildscript()&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;To declare the script classpath, you use the &lt;a href='type://org.gradle.api.artifacts.dsl.DependencyHandler'&gt;org.gradle.api.artifacts.dsl.DependencyHandler&lt;/a&gt; provided by
+ &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getDependencies()'&gt;#getDependencies()&lt;/a&gt; to attach dependencies to the {@value #CLASSPATH_CONFIGURATION} configuration. These
+ dependencies are resolved just prior to script compilation, and assembled into the classpath for the script.&lt;/p&gt;
+
+ &lt;p&gt;For most external dependencies you will also need to declare one or more repositories where the dependencies can
+ be found, using the &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler&lt;/a&gt; provided by &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getRepositories()'&gt;#getRepositories()&lt;/a&gt;.&lt;/p&gt;
+
+</description>
     <method name="dependencies" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.DependencyHandler">
-        <description>
-     * Configures the dependencies for the script. Executes the given closure against the {@link DependencyHandler} for
-     * this handler. The {@link DependencyHandler} is passed to the closure as the closure's delegate.
-     *
-     * @param configureClosure the closure to use to configure the dependencies.
-     </description>
+        <description> Configures the dependencies for the script. Executes the given closure against the &lt;a href='type://DependencyHandler'&gt;DependencyHandler&lt;/a&gt; for
+ this handler. The &lt;a href='type://DependencyHandler'&gt;DependencyHandler&lt;/a&gt; is passed to the closure as the closure's delegate.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure the closure to use to configure the dependencies.
+
+</description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="getClassLoader" returnType="java.lang.ClassLoader">
-        <description>
-     * Returns the {@code ClassLoader} which contains the classpath for this script.
-     *
-     * @return The ClassLoader. Never returns null.
-     </description>
+        <description> Returns the &lt;a href='type://ClassLoader'&gt;ClassLoader&lt;/a&gt; which contains the classpath for this script.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The ClassLoader. Never returns null.
+
+</description>
     </method>
     <method name="getConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer">
-        <description>
-     * Returns the configurations of this handler. This usually contains a single configuration, called {@value
-     * #CLASSPATH_CONFIGURATION}.
-     *
-     * @return The configuration of this handler.
-     </description>
+        <description> Returns the configurations of this handler. This usually contains a single configuration, called {@value
+ #CLASSPATH_CONFIGURATION}.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration of this handler.
+
+</description>
     </method>
     <method name="getDependencies" returnType="org.gradle.api.artifacts.dsl.DependencyHandler">
-        <description>
-     * Returns the dependencies of the script. The returned dependency handler instance can be used for adding new
-     * dependencies. For accessing already declared dependencies, the configurations can be used.
-     *
-     * @return the dependency handler. Never returns null.
-     * @see #getConfigurations()
-     </description>
+        <description> Returns the dependencies of the script. The returned dependency handler instance can be used for adding new
+ dependencies. For accessing already declared dependencies, the configurations can be used.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
+ @see #getConfigurations()
+
+</description>
     </method>
     <method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
-        <description>
-     * Returns a handler to create repositories which are used for retrieving dependencies for the script classpath.
-     *
-     * @return the repository handler. Never returns null.
-     </description>
+        <description> Returns a handler to create repositories which are used for retrieving dependencies for the script classpath.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the repository handler. Never returns null.
+
+</description>
     </method>
     <method name="getSourceFile" returnType="java.io.File">
-        <description>
-     * Returns the file containing the source for the script, if any.
-     *
-     * @return The source file. Returns null if the script source is not a file.
-     </description>
+        <description> Returns the file containing the source for the script, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null if the script source is not a file.
+
+</description>
     </method>
     <method name="getSourceURI" returnType="java.net.URI">
-        <description>
-     * Returns the URI for the script source, if any.
-     *
-     * @return The source URI. Returns null if the script source has no URI.
-     </description>
+        <description> Returns the URI for the script source, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source URI. Returns null if the script source has no URI.
+
+</description>
     </method>
     <method name="repositories" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.RepositoryHandler">
-        <description>
-     * Configures the repositories for the script dependencies. Executes the given closure against the {@link
-     * RepositoryHandler} for this handler. The {@link RepositoryHandler} is passed to the closure as the closure's
-     * delegate.
-     *
-     * @param configureClosure the closure to use to configure the repositories.
-     </description>
+        <description> Configures the repositories for the script dependencies. Executes the given closure against the &lt;a href='type://RepositoryHandler'&gt;RepositoryHandler&lt;/a&gt; for this handler. The &lt;a href='type://RepositoryHandler'&gt;RepositoryHandler&lt;/a&gt; is passed to the closure as the closure's
+ delegate.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure the closure to use to configure the repositories.
+
+</description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <property name="classLoader" type="java.lang.ClassLoader">
-        <description>
-     * Returns the {@code ClassLoader} which contains the classpath for this script.
-     *
-     * @return The ClassLoader. Never returns null.
-     </description>
+        <description> Returns the &lt;a href='type://ClassLoader'&gt;ClassLoader&lt;/a&gt; which contains the classpath for this script.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The ClassLoader. Never returns null.
+
+</description>
     </property>
     <property name="configurations" type="org.gradle.api.artifacts.ConfigurationContainer">
-        <description>
-     * Returns the configurations of this handler. This usually contains a single configuration, called {@value
-     * #CLASSPATH_CONFIGURATION}.
-     *
-     * @return The configuration of this handler.
-     </description>
+        <description> Returns the configurations of this handler. This usually contains a single configuration, called {@value
+ #CLASSPATH_CONFIGURATION}.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration of this handler.
+
+</description>
     </property>
     <property name="dependencies" type="org.gradle.api.artifacts.dsl.DependencyHandler">
-        <description>
-     * Returns the dependencies of the script. The returned dependency handler instance can be used for adding new
-     * dependencies. For accessing already declared dependencies, the configurations can be used.
-     *
-     * @return the dependency handler. Never returns null.
-     * @see #getConfigurations()
-     </description>
+        <description> Returns the dependencies of the script. The returned dependency handler instance can be used for adding new
+ dependencies. For accessing already declared dependencies, the configurations can be used.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
+ @see #getConfigurations()
+
+</description>
     </property>
     <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler">
-        <description>
-     * Returns a handler to create repositories which are used for retrieving dependencies for the script classpath.
-     *
-     * @return the repository handler. Never returns null.
-     </description>
+        <description> Returns a handler to create repositories which are used for retrieving dependencies for the script classpath.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the repository handler. Never returns null.
+
+</description>
     </property>
     <property name="sourceFile" type="java.io.File">
-        <description>
-     * Returns the file containing the source for the script, if any.
-     *
-     * @return The source file. Returns null if the script source is not a file.
-     </description>
+        <description> Returns the file containing the source for the script, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null if the script source is not a file.
+
+</description>
     </property>
     <property name="sourceURI" type="java.net.URI">
-        <description>
-     * Returns the URI for the script source, if any.
-     *
-     * @return The source URI. Returns null if the script source has no URI.
-     </description>
+        <description> Returns the URI for the script source, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source URI. Returns null if the script source has no URI.
+
+</description>
     </property>
 </type>

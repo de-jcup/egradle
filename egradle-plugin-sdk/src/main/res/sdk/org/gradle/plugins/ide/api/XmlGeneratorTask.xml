@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.ide.api.XmlGeneratorTask" version="3.0" superType="org.gradle.plugins.ide.api.GeneratorTask" documented="true">
-    <description>
- * A convenience superclass for those tasks which generate XML configuration files from a domain object of type T.
- *
- * @param &lt;T&gt; The domain object type.
- </description>
+    <description> A convenience superclass for those tasks which generate XML configuration files from a domain object of type T.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The domain object type.
+
+</description>
     <method name="configure" returnType="void">
         <parameter type="T" name="object"/>
     </method>

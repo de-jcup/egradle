@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.compile.DebugOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions">
-    <description>
- * Debug options for Java compilation. Only take effect if {@link CompileOptions#debug}
- * is set to {@code true}.
- </description>
+    <description> Debug options for Java compilation. Only take effect if &lt;a href='type://CompileOptions#debug'&gt;CompileOptions#debug&lt;/a&gt;
+ is set to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
     <method name="getDebugLevel" returnType="java.lang.String">
-        <description>
-     * Tells which debugging information is to be generated. The value is a comma-separated
-     * list of any of the following keywords (without spaces in between):
-     *
-     * &lt;dl&gt;
-     *     &lt;dt&gt;{@code source}
-     *     &lt;dd&gt;Source file debugging information
-     *     &lt;dt&gt;{@code lines}
-     *     &lt;dd&gt;Line number debugging information
-     *     &lt;dt&gt;{@code vars}
-     *     &lt;dd&gt;Local variable debugging information
-     * &lt;/dl&gt;
-     *
-     * By default, only source and line debugging information will be generated.
-     </description>
+        <description> Tells which debugging information is to be generated. The value is a comma-separated
+ list of any of the following keywords (without spaces in between):
+
+ &lt;dl&gt;
+     &lt;dt&gt;&lt;a href='type://source'&gt;source&lt;/a&gt;
+     &lt;dd&gt;Source file debugging information
+     &lt;dt&gt;&lt;a href='type://lines'&gt;lines&lt;/a&gt;
+     &lt;dd&gt;Line number debugging information
+     &lt;dt&gt;&lt;a href='type://vars'&gt;vars&lt;/a&gt;
+     &lt;dd&gt;Local variable debugging information
+ &lt;/dl&gt;
+
+ By default, only source and line debugging information will be generated.
+
+</description>
     </method>
     <method name="setDebugLevel" returnType="void">
-        <description>
-     * Sets which debug information is to be generated.
-     </description>
+        <description> Sets which debug information is to be generated.
+
+</description>
         <parameter type="java.lang.String" name="debugLevel"/>
     </method>
     <property name="debugLevel" type="java.lang.String">
-        <description>
-     * Tells which debugging information is to be generated. The value is a comma-separated
-     * list of any of the following keywords (without spaces in between):
-     *
-     * &lt;dl&gt;
-     *     &lt;dt&gt;{@code source}
-     *     &lt;dd&gt;Source file debugging information
-     *     &lt;dt&gt;{@code lines}
-     *     &lt;dd&gt;Line number debugging information
-     *     &lt;dt&gt;{@code vars}
-     *     &lt;dd&gt;Local variable debugging information
-     * &lt;/dl&gt;
-     *
-     * By default, only source and line debugging information will be generated.
-     </description>
+        <description> Tells which debugging information is to be generated. The value is a comma-separated
+ list of any of the following keywords (without spaces in between):
+
+ &lt;dl&gt;
+     &lt;dt&gt;&lt;a href='type://source'&gt;source&lt;/a&gt;
+     &lt;dd&gt;Source file debugging information
+     &lt;dt&gt;&lt;a href='type://lines'&gt;lines&lt;/a&gt;
+     &lt;dd&gt;Line number debugging information
+     &lt;dt&gt;&lt;a href='type://vars'&gt;vars&lt;/a&gt;
+     &lt;dd&gt;Local variable debugging information
+ &lt;/dl&gt;
+
+ By default, only source and line debugging information will be generated.
+
+</description>
     </property>
 </type>

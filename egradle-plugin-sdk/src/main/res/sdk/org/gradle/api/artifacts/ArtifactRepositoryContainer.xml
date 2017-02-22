@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.ArtifactRepositoryContainer" version="3.0">
-    <description>
- * &lt;p&gt;A {@code ResolverContainer} is responsible for managing a set of {@link ArtifactRepository} instances. Repositories are arranged in a sequence.&lt;/p&gt;
- *
- * &lt;p&gt;You can obtain a {@code ResolverContainer} instance by calling {@link org.gradle.api.Project#getRepositories()} or
- * using the {@code repositories} property in your build script.&lt;/p&gt;
- *
- * &lt;p&gt;The resolvers in a container are accessible as read-only properties of the container, using the name of the
- * resolver as the property name. For example:&lt;/p&gt;
- *
- * &lt;pre autoTested=''&gt;
- * repositories.maven { name 'myResolver' }
- * repositories.myResolver.url = 'some-url'
- * &lt;/pre&gt;
- *
- * &lt;p&gt;A dynamic method is added for each resolver which takes a configuration closure. This is equivalent to calling
- * {@link #getByName(String, groovy.lang.Closure)}. For example:&lt;/p&gt;
- *
- * &lt;pre autoTested=''&gt;
- * repositories.maven { name 'myResolver' }
- * repositories.myResolver {
- *     url 'some-url'
- * }
- * &lt;/pre&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://ResolverContainer'&gt;ResolverContainer&lt;/a&gt; is responsible for managing a set of &lt;a href='type://ArtifactRepository'&gt;ArtifactRepository&lt;/a&gt; instances. Repositories are arranged in a sequence.&lt;/p&gt;
+
+ &lt;p&gt;You can obtain a &lt;a href='type://ResolverContainer'&gt;ResolverContainer&lt;/a&gt; instance by calling &lt;a href='type://org.gradle.api.Project#getRepositories()'&gt;org.gradle.api.Project#getRepositories()&lt;/a&gt; or
+ using the &lt;a href='type://repositories'&gt;repositories&lt;/a&gt; property in your build script.&lt;/p&gt;
+
+ &lt;p&gt;The resolvers in a container are accessible as read-only properties of the container, using the name of the
+ resolver as the property name. For example:&lt;/p&gt;
+
+ &lt;pre autoTested=''&gt;
+ repositories.maven { name 'myResolver' }
+ repositories.myResolver.url = 'some-url'
+ &lt;/pre&gt;
+
+ &lt;p&gt;A dynamic method is added for each resolver which takes a configuration closure. This is equivalent to calling
+ &lt;a href='type://org.gradle.api.artifacts.ArtifactRepositoryContainer#getByName(String, groovy.lang.Closure)'&gt;#getByName(String, groovy.lang.Closure)&lt;/a&gt;. For example:&lt;/p&gt;
+
+ &lt;pre autoTested=''&gt;
+ repositories.maven { name 'myResolver' }
+ repositories.myResolver {
+     url 'some-url'
+ }
+ &lt;/pre&gt;
+
+</description>
     <method name="add" returnType="boolean">
-        <description>
-     * Adds a repository to this container, at the end of the repository sequence.
-     *
-     * @param repository The repository to add.
-     </description>
+        <description> Adds a repository to this container, at the end of the repository sequence.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add.
+
+</description>
         <parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/>
     </method>
     <method name="addFirst" returnType="void">
-        <description>
-     * Adds a repository to this container, at the start of the repository sequence.
-     *
-     * @param repository The repository to add.
-     </description>
+        <description> Adds a repository to this container, at the start of the repository sequence.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add.
+
+</description>
         <parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/>
     </method>
     <method name="addLast" returnType="void">
-        <description>
-     * Adds a repository to this container, at the end of the repository sequence.
-     *
-     * @param repository The repository to add.
-     </description>
+        <description> Adds a repository to this container, at the end of the repository sequence.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to add.
+
+</description>
         <parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="repository"/>
     </method>
     <method name="getAt" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.String" name="name"/>
     </method>
     <method name="getByName" returnType="org.gradle.api.artifacts.repositories.ArtifactRepository">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
         <parameter type="java.lang.String" name="name"/>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <interface name="org.gradle.api.NamedDomainObjectList"/>
     <interface name="org.gradle.util.Configurable"/>
     <property name="at" type="org.gradle.api.artifacts.repositories.ArtifactRepository">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
     <property name="byName" type="org.gradle.api.artifacts.repositories.ArtifactRepository">
-        <description>
-     * {@inheritDoc}
-     </description>
+        <description> {@inheritDoc}
+
+</description>
     </property>
 </type>

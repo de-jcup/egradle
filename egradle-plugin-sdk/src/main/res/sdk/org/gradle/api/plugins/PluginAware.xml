@@ -1,101 +1,101 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.plugins.PluginAware" version="3.0" documented="true">
-    <description>
- * Something that can have plugins applied to it.
- * &lt;p&gt;
- * The {@link #getPluginManager() plugin manager} can be used for applying and detecting whether plugins have been applied.
- * &lt;p&gt;
- * For more on writing and applying plugins, see {@link org.gradle.api.Plugin}.
- </description>
-    <method name="apply" returnType="void" documented="true">
-        <description>
-     * Applies zero or more plugins or scripts.
-     * &lt;p&gt;
-     * The given closure is used to configure an {@link ObjectConfigurationAction}, which “builds” the plugin application.
-     * &lt;p&gt;
-     * This method differs from {@link #apply(java.util.Map)} in that it allows methods of the configuration action to be invoked more than once.
-     *
-     * @param closure the closure to configure an {@link ObjectConfigurationAction} with before “executing” it
-     * @see #apply(java.util.Map)
-     </description>
+    <description> Something that can have plugins applied to it.
+ &lt;p&gt;
+ The &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; can be used for applying and detecting whether plugins have been applied.
+ &lt;p&gt;
+ For more on writing and applying plugins, see &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt;.
+
+</description>
+    <method name="apply" returnType="void" delegationTarget="ObjectConfigurationAction" documented="true">
+        <description> Applies zero or more plugins or scripts.
+ &lt;p&gt;
+ The given closure is used to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;, which “builds” the plugin application.
+ &lt;p&gt;
+ This method differs from &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt; in that it allows methods of the configuration action to be invoked more than once.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the closure to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; with before “executing” it
+ @see #apply(java.util.Map)
+
+</description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="apply" returnType="void" documented="true">
-        <description>
-     * Applies a plugin or script, using the given options provided as a map. Does nothing if the plugin has already been applied.
-     * &lt;p&gt;
-     * The given map is applied as a series of method calls to a newly created {@link ObjectConfigurationAction}.
-     * That is, each key in the map is expected to be the name of a method {@link ObjectConfigurationAction} and the value to be compatible arguments to that method.
-     *
-     * &lt;p&gt;The following options are available:&lt;/p&gt;
-     *
-     * &lt;ul&gt;&lt;li&gt;{@code from}: A script to apply. Accepts any path supported by {@link org.gradle.api.Project#uri(Object)}.&lt;/li&gt;
-     *
-     * &lt;li&gt;{@code plugin}: The id or implementation class of the plugin to apply.&lt;/li&gt;
-     *
-     * &lt;li&gt;{@code to}: The target delegate object or objects. The default is this plugin aware object. Use this to configure objects other than this object.&lt;/li&gt;&lt;/ul&gt;
-     *
-     * @param options the options to use to configure and {@link ObjectConfigurationAction} before “executing” it
-     </description>
+        <description> Applies a plugin or script, using the given options provided as a map. Does nothing if the plugin has already been applied.
+ &lt;p&gt;
+ The given map is applied as a series of method calls to a newly created &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;.
+ That is, each key in the map is expected to be the name of a method &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; and the value to be compatible arguments to that method.
+
+ &lt;p&gt;The following options are available:&lt;/p&gt;
+
+ &lt;ul&gt;&lt;li&gt;&lt;a href='type://from'&gt;from&lt;/a&gt;: A script to apply. Accepts any path supported by &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;.&lt;/li&gt;
+
+ &lt;li&gt;&lt;a href='type://plugin'&gt;plugin&lt;/a&gt;: The id or implementation class of the plugin to apply.&lt;/li&gt;
+
+ &lt;li&gt;&lt;a href='type://to'&gt;to&lt;/a&gt;: The target delegate object or objects. The default is this plugin aware object. Use this to configure objects other than this object.&lt;/li&gt;&lt;/ul&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options the options to use to configure and &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; before “executing” it
+
+</description>
         <parameter type="java.util.Map" name="options"/>
     </method>
     <method name="apply" returnType="void" documented="true">
-        <description>
-     * Applies zero or more plugins or scripts.
-     * &lt;p&gt;
-     * The given closure is used to configure an {@link ObjectConfigurationAction}, which “builds” the plugin application.
-     * &lt;p&gt;
-     * This method differs from {@link #apply(java.util.Map)} in that it allows methods of the configuration action to be invoked more than once.
-     *
-     * @param action the action to configure an {@link ObjectConfigurationAction} with before “executing” it
-     * @see #apply(java.util.Map)
-     </description>
+        <description> Applies zero or more plugins or scripts.
+ &lt;p&gt;
+ The given closure is used to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt;, which “builds” the plugin application.
+ &lt;p&gt;
+ This method differs from &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt; in that it allows methods of the configuration action to be invoked more than once.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; with before “executing” it
+ @see #apply(java.util.Map)
+
+</description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
     <method name="getPluginManager" returnType="org.gradle.api.plugins.PluginManager">
-        <description>
-     * The plugin manager for this plugin aware object.
-     *
-     * @return the plugin manager
-     * @since 2.3
-     </description>
+        <description> The plugin manager for this plugin aware object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin manager
+ @since 2.3
+
+</description>
     </method>
     <method name="getPlugins" returnType="org.gradle.api.plugins.PluginContainer">
-        <description>
-     * The container of plugins that have been applied to this object.
-     * &lt;p&gt;
-     * While not deprecated, it is preferred to use the methods of this interface or the {@link #getPluginManager() plugin manager} than use the plugin container.
-     * &lt;p&gt;
-     * Use one of the 'apply' methods on this interface or on the {@link #getPluginManager() plugin manager} to apply plugins instead of applying via the plugin container.
-     * &lt;p&gt;
-     * Use {@link PluginManager#hasPlugin(String)} or similar to query for the application of plugins instead of doing so via the plugin container.
-     *
-     * @return the plugin container
-     * @see #apply
-     * @see PluginManager#hasPlugin(String)
-     </description>
+        <description> The container of plugins that have been applied to this object.
+ &lt;p&gt;
+ While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; than use the plugin container.
+ &lt;p&gt;
+ Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
+ &lt;p&gt;
+ Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin container
+ @see #apply
+ @see PluginManager#hasPlugin(String)
+
+</description>
     </method>
     <property name="pluginManager" type="org.gradle.api.plugins.PluginManager" documented="true">
-        <description>
-     * The plugin manager for this plugin aware object.
-     *
-     * @return the plugin manager
-     * @since 2.3
-     </description>
+        <description> The plugin manager for this plugin aware object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin manager
+ @since 2.3
+
+</description>
     </property>
     <property name="plugins" type="org.gradle.api.plugins.PluginContainer" documented="true">
-        <description>
-     * The container of plugins that have been applied to this object.
-     * &lt;p&gt;
-     * While not deprecated, it is preferred to use the methods of this interface or the {@link #getPluginManager() plugin manager} than use the plugin container.
-     * &lt;p&gt;
-     * Use one of the 'apply' methods on this interface or on the {@link #getPluginManager() plugin manager} to apply plugins instead of applying via the plugin container.
-     * &lt;p&gt;
-     * Use {@link PluginManager#hasPlugin(String)} or similar to query for the application of plugins instead of doing so via the plugin container.
-     *
-     * @return the plugin container
-     * @see #apply
-     * @see PluginManager#hasPlugin(String)
-     </description>
+        <description> The container of plugins that have been applied to this object.
+ &lt;p&gt;
+ While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; than use the plugin container.
+ &lt;p&gt;
+ Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
+ &lt;p&gt;
+ Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin container
+ @see #apply
+ @see PluginManager#hasPlugin(String)
+
+</description>
     </property>
 </type>

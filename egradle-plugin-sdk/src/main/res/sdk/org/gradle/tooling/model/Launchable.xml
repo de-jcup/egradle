@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.Launchable" version="3.0">
-    <description>
- * Represents an object that can be used to launch a Gradle build, such as a task.
- *
- * &lt;p&gt;To launch a build, you pass one or more {@link org.gradle.tooling.model.Launchable} instances
- * to either {@link org.gradle.tooling.BuildLauncher#forTasks(Iterable)} or {@link org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)}.&lt;/p&gt;
- *
- * @since 1.12
- </description>
+    <description> Represents an object that can be used to launch a Gradle build, such as a task.
+
+ &lt;p&gt;To launch a build, you pass one or more &lt;a href='type://org.gradle.tooling.model.Launchable'&gt;org.gradle.tooling.model.Launchable&lt;/a&gt; instances
+ to either &lt;a href='type://org.gradle.tooling.BuildLauncher#forTasks(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forTasks(Iterable)&lt;/a&gt; or &lt;a href='type://org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)&lt;/a&gt;.&lt;/p&gt;
+
+ @since 1.12
+
+</description>
     <method name="getDescription" returnType="java.lang.String">
-        <description>
-     * Returns the description of this launchable, or {@code null} if it has no description.
-     *
-     * @return The description of this launchable, or {@code null} if it has no description.
-     * @since 1.12
-     </description>
+        <description> Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
+ @since 1.12
+
+</description>
     </method>
     <method name="getDisplayName" returnType="java.lang.String">
-        <description>
-     * Returns a human-consumable display name for this launchable.
-     *
-     * @return Display name of this launchable.
-     * @since 1.12
-     </description>
+        <description> Returns a human-consumable display name for this launchable.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable.
+ @since 1.12
+
+</description>
     </method>
     <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
-        <description>
-     * Returns the identifier for the Gradle project that this model originated from.
-     *
-     * @since 2.13
-     </description>
+        <description> Returns the identifier for the Gradle project that this model originated from.
+
+ @since 2.13
+
+</description>
     </method>
     <method name="isPublic" returnType="boolean">
-        <description>
-     * Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for
-     * an end user of the build to run.
-     *
-     * @return Public property.
-     * @since 2.1
-     </description>
+        <description> Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for
+ an end user of the build to run.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Public property.
+ @since 2.1
+
+</description>
     </method>
     <interface name="org.gradle.tooling.model.ProjectModel"/>
     <property name="description" type="java.lang.String">
-        <description>
-     * Returns the description of this launchable, or {@code null} if it has no description.
-     *
-     * @return The description of this launchable, or {@code null} if it has no description.
-     * @since 1.12
-     </description>
+        <description> Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
+ @since 1.12
+
+</description>
     </property>
     <property name="displayName" type="java.lang.String">
-        <description>
-     * Returns a human-consumable display name for this launchable.
-     *
-     * @return Display name of this launchable.
-     * @since 1.12
-     </description>
+        <description> Returns a human-consumable display name for this launchable.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable.
+ @since 1.12
+
+</description>
     </property>
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
-        <description>
-     * Returns the identifier for the Gradle project that this model originated from.
-     *
-     * @since 2.13
-     </description>
+        <description> Returns the identifier for the Gradle project that this model originated from.
+
+ @since 2.13
+
+</description>
     </property>
     <property name="public" type="boolean">
-        <description>
-     * Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for
-     * an end user of the build to run.
-     *
-     * @return Public property.
-     * @since 2.1
-     </description>
+        <description> Returns whether launchable is public or not. A public launchable is one that is considered a public 'entry point' to the build, that is interesting for
+ an end user of the build to run.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Public property.
+ @since 2.1
+
+</description>
     </property>
 </type>

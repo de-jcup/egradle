@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.InputFiles" version="3.0">
-    <description>
- * &lt;p&gt;Marks a property as specifying the input files for a task.&lt;/p&gt;
- *
- * &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt;
- *
- * &lt;p&gt;This will cause the task to be considered out-of-date when the file paths or contents
- * have changed. Also see {@link org.gradle.api.tasks.InputDirectory}.
- </description>
+    <description> &lt;p&gt;Marks a property as specifying the input files for a task.&lt;/p&gt;
+
+ &lt;p&gt;This annotation should be attached to the getter method or the field for the property.&lt;/p&gt;
+
+ &lt;p&gt;This will cause the task to be considered out-of-date when the file paths or contents
+ have changed. Also see &lt;a href='type://org.gradle.api.tasks.InputDirectory'&gt;org.gradle.api.tasks.InputDirectory&lt;/a&gt;.
+
+</description>
 </type>

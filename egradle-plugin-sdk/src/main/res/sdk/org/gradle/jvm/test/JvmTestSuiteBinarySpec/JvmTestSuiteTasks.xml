@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.jvm.test.JvmTestSuiteBinarySpec.JvmTestSuiteTasks" version="3.0">
-    <description>
-     * Provides direct access to important build tasks of JVM test suites.
-     </description>
+    <description> Provides direct access to important build tasks of JVM test suites.
+
+</description>
     <method name="getRun" returnType="org.gradle.api.tasks.testing.Test"/>
     <interface name="org.gradle.testing.base.TestSuiteTaskCollection"/>
     <property name="run" type="org.gradle.api.tasks.testing.Test"/>

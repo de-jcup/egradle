@@ -8,6 +8,7 @@ import java.util.List;
 import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 import de.jcup.egradle.sdk.builder.action.delegationtarget.CalculateDelegationTargetsAction;
 import de.jcup.egradle.sdk.builder.action.delegationtarget.EstimateDelegationTargetsByJavadocAction;
+import de.jcup.egradle.sdk.builder.action.delegationtarget.InheritDelegationTargetsAction;
 import de.jcup.egradle.sdk.builder.action.init.InitSDKInfoAction;
 import de.jcup.egradle.sdk.builder.action.init.InitSDKTargetFolderAction;
 import de.jcup.egradle.sdk.builder.action.javadoc.RemoveWhitespacesAndStarsFromJavadocAction;
@@ -73,6 +74,7 @@ public class SDKBuilder {
 		actions.add(new SavePluginsToSDKTargetFolder());
 		
 		actions.add(new ApplyOverridesToTypesAction());
+		actions.add(new InheritDelegationTargetsAction()); // after apply overrides!
 		actions.add(new MarkDocumentedLanguageElementsAction());
 
 		actions.add(new ReplaceJavaDocPartsAction());
@@ -88,10 +90,15 @@ public class SDKBuilder {
 		
 		/* execute sdk builder actions:*/
 		for (SDKBuilderAction action: actions){
+			info("executing:"+action.getClass().getSimpleName());
 			action.execute(context);
 		}
 		
-		System.out.println("DONE");
+		info("DONE");
+	}
+
+	private void info(String message) {
+		System.out.println(message);
 	}
 	
 }

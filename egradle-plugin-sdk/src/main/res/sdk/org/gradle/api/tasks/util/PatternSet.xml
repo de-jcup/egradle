@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.util.PatternSet" version="3.0">
-    <description>
- * Standalone implementation of {@link PatternFilterable}.
- </description>
+    <description> Standalone implementation of &lt;a href='type://PatternFilterable'&gt;PatternFilterable&lt;/a&gt;.
+
+</description>
     <method name="addToAntBuilder" returnType="java.lang.Object">
         <parameter type="java.lang.Object" name="node"/>
         <parameter type="java.lang.String" name="childNodeName"/>
@@ -16,7 +16,7 @@
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.util.PatternSet">
+    <method name="exclude" returnType="org.gradle.api.tasks.util.PatternSet" delegationTarget="org.gradle.api.file.FileTreeElement">
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="exclude" returnType="org.gradle.api.tasks.util.PatternSet">
@@ -39,7 +39,7 @@
     <method name="getIncludeSpecs" returnType="java.util.Set"/>
     <method name="getIncludes" returnType="java.util.Set"/>
     <method name="hashCode" returnType="int"/>
-    <method name="include" returnType="org.gradle.api.tasks.util.PatternSet">
+    <method name="include" returnType="org.gradle.api.tasks.util.PatternSet" delegationTarget="org.gradle.api.file.FileTreeElement">
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="include" returnType="org.gradle.api.tasks.util.PatternSet">
@@ -57,14 +57,14 @@
     <method name="intersect" returnType="org.gradle.api.tasks.util.PatternSet"/>
     <method name="isCaseSensitive" returnType="boolean"/>
     <method name="isEmpty" returnType="boolean">
-        <description>
-     * The PatternSet is considered empty when no includes or excludes have been added.
-     *
-     * The Spec returned by getAsSpec method only contains the default excludes patterns
-     * in this case.
-     *
-     * @return true when no includes or excludes have been added to this instance
-     </description>
+        <description> The PatternSet is considered empty when no includes or excludes have been added.
+
+ The Spec returned by getAsSpec method only contains the default excludes patterns
+ in this case.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true when no includes or excludes have been added to this instance
+
+</description>
     </method>
     <method name="setCaseSensitive" returnType="void">
         <parameter type="boolean" name="caseSensitive"/>
@@ -82,14 +82,14 @@
     <property name="asSpec" type="org.gradle.api.specs.Spec"/>
     <property name="caseSensitive" type="boolean"/>
     <property name="empty" type="boolean">
-        <description>
-     * The PatternSet is considered empty when no includes or excludes have been added.
-     *
-     * The Spec returned by getAsSpec method only contains the default excludes patterns
-     * in this case.
-     *
-     * @return true when no includes or excludes have been added to this instance
-     </description>
+        <description> The PatternSet is considered empty when no includes or excludes have been added.
+
+ The Spec returned by getAsSpec method only contains the default excludes patterns
+ in this case.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true when no includes or excludes have been added to this instance
+
+</description>
     </property>
     <property name="excludeSpecs" type="java.util.Set"/>
     <property name="excludes" type="java.util.Set"/>

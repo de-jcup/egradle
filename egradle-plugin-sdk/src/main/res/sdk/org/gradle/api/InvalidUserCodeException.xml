@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.InvalidUserCodeException" version="3.0" superType="org.gradle.api.GradleException">
-    <description>
- * A &lt;code&gt;InvalidUserCodeException&lt;/code&gt; is thrown when user-provided code cannot be executed.
- </description>
+    <description> A &lt;code&gt;InvalidUserCodeException&lt;/code&gt; is thrown when user-provided code cannot be executed.
+
+</description>
 </type>

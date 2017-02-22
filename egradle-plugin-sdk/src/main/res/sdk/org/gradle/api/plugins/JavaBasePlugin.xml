@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.plugins.JavaBasePlugin" version="3.0">
-    <description>
- * &lt;p&gt;A {@link org.gradle.api.Plugin} which compiles and tests Java source, and assembles it into a JAR file.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; which compiles and tests Java source, and assembles it into a JAR file.&lt;/p&gt;
+
+</description>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.BuildAdapter" version="3.0">
-    <description>
- * A {@link BuildListener} adapter class for receiving build events. The methods in this class are empty. This class
- * exists as convenience for creating listener objects.
- </description>
+    <description> A &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; adapter class for receiving build events. The methods in this class are empty. This class
+ exists as convenience for creating listener objects.
+
+</description>
     <method name="buildFinished" returnType="void">
         <parameter type="org.gradle.BuildResult" name="result"/>
     </method>

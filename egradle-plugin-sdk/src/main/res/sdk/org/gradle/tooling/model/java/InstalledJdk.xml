@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.tooling.model.java.InstalledJdk" version="3.0">
-    <description>
- * Represents a Java Development Kit machine installation.
- *
- * @since 2.11
- </description>
+    <description> Represents a Java Development Kit machine installation.
+
+ @since 2.11
+
+</description>
     <method name="getJavaHome" returnType="java.io.File">
-        <description>
-     * The home directory of the Java installation.
-     *
-     * @return The home directory. Never returns {@code null}.
-     * </description>
+        <description> The home directory of the Java installation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;.
+ 
+</description>
     </method>
     <method name="getJavaVersion" returnType="org.gradle.api.JavaVersion">
-        <description>*
-     * The version of the Java installation.
-     *
-     * @return The Java version. Never returns {@code null}.
-     </description>
+        <description>
+ The version of the Java installation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java version. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
     </method>
     <property name="javaHome" type="java.io.File">
-        <description>
-     * The home directory of the Java installation.
-     *
-     * @return The home directory. Never returns {@code null}.
-     * </description>
+        <description> The home directory of the Java installation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The home directory. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;.
+ 
+</description>
     </property>
     <property name="javaVersion" type="org.gradle.api.JavaVersion">
-        <description>*
-     * The version of the Java installation.
-     *
-     * @return The Java version. Never returns {@code null}.
-     </description>
+        <description>
+ The version of the Java installation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java version. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
     </property>
 </type>

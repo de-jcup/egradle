@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeExecutableSpec" version="3.0" documented="true">
-    <description>
- * Definition of a native executable component that is to be built by Gradle.
- </description>
+    <description> Definition of a native executable component that is to be built by Gradle.
+
+</description>
     <interface name="org.gradle.nativeplatform.NativeComponentSpec"/>
     <interface name="org.gradle.nativeplatform.TargetedNativeComponent"/>
     <interface name="org.gradle.platform.base.ApplicationSpec"/>

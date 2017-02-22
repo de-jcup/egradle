@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.nativeplatform.PrebuiltStaticLibraryBinary" version="3.0" documented="true">
-    <description>
- * A static library that exists at a known location on the filesystem.
- </description>
+    <description> A static library that exists at a known location on the filesystem.
+
+</description>
     <method name="setStaticLibraryFile" returnType="void">
-        <description>
-     * The static library binary file.
-     </description>
+        <description> The static library binary file.
+
+</description>
         <parameter type="java.io.File" name="staticLibraryFile"/>
     </method>
     <interface name="org.gradle.nativeplatform.StaticLibraryBinary"/>
     <property name="staticLibraryFile" type="java.io.File">
-        <description>
-     * The static library binary file.
-     </description>
+        <description> The static library binary file.
+
+</description>
     </property>
 </type>

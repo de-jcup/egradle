@@ -1,60 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.api.file.ConfigurableFileTree" version="3.0">
-    <description>
- * &lt;p&gt;A {@link FileTree} with a single base directory, which can be configured and modified.&lt;/p&gt;
- *
- * &lt;p&gt;You can obtain a {@code ConfigurableFileTree} instance by calling {@link org.gradle.api.Project#fileTree(java.util.Map)}.&lt;/p&gt;
- </description>
+    <description> &lt;p&gt;A &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt; with a single base directory, which can be configured and modified.&lt;/p&gt;
+
+ &lt;p&gt;You can obtain a &lt;a href='type://ConfigurableFileTree'&gt;ConfigurableFileTree&lt;/a&gt; instance by calling &lt;a href='type://org.gradle.api.Project#fileTree(java.util.Map)'&gt;org.gradle.api.Project#fileTree(java.util.Map)&lt;/a&gt;.&lt;/p&gt;
+
+</description>
     <method name="builtBy" returnType="org.gradle.api.file.ConfigurableFileTree">
-        <description>
-     * Registers some tasks which build the files of this collection.
-     *
-     * @param tasks The tasks. These are evaluated as per {@link org.gradle.api.Task#dependsOn(Object...)}.
-     * @return this
-     </description>
+        <description> Registers some tasks which build the files of this collection.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="tasks"/>
     </method>
     <method name="from" returnType="org.gradle.api.file.ConfigurableFileTree">
-        <description>
-     * Specifies base directory for this file tree using the given path. The path is evaluated as per {@link
-     * org.gradle.api.Project#file(Object)}.
-     *
-     * @param dir The base directory.
-     * @return this
-     </description>
+        <description> Specifies base directory for this file tree using the given path. The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The base directory.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <method name="getBuiltBy" returnType="java.util.Set">
-        <description>
-     * Returns the set of tasks which build the files of this collection.
-     *
-     * @return The set. Returns an empty set when there are no such tasks.
-     </description>
+        <description> Returns the set of tasks which build the files of this collection.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set. Returns an empty set when there are no such tasks.
+
+</description>
     </method>
     <method name="getDir" returnType="java.io.File">
-        <description>
-     * Returns the base directory of this file tree.
-     *
-     * @return The base directory. Never returns null.
-     </description>
+        <description> Returns the base directory of this file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The base directory. Never returns null.
+
+</description>
     </method>
     <method name="setBuiltBy" returnType="org.gradle.api.file.ConfigurableFileTree">
-        <description>
-     * Sets the tasks which build the files of this collection.
-     *
-     * @param tasks The tasks. These are evaluated as per {@link org.gradle.api.Task#dependsOn(Object...)}.
-     * @return this
-     </description>
+        <description> Sets the tasks which build the files of this collection.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Iterable" name="tasks"/>
     </method>
     <method name="setDir" returnType="org.gradle.api.file.ConfigurableFileTree">
-        <description>
-     * Specifies base directory for this file tree using the given path. The path is evaluated as per {@link
-     * org.gradle.api.Project#file(Object)}.
-     *
-     * @param dir The base directory.
-     * @return this
-     </description>
+        <description> Specifies base directory for this file tree using the given path. The path is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The base directory.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
         <parameter type="java.lang.Object" name="dir"/>
     </method>
     <interface name="org.gradle.api.Buildable"/>
@@ -62,17 +60,17 @@
     <interface name="org.gradle.api.file.FileTree"/>
     <interface name="org.gradle.api.tasks.util.PatternFilterable"/>
     <property name="builtBy" type="java.util.Set">
-        <description>
-     * Returns the set of tasks which build the files of this collection.
-     *
-     * @return The set. Returns an empty set when there are no such tasks.
-     </description>
+        <description> Returns the set of tasks which build the files of this collection.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set. Returns an empty set when there are no such tasks.
+
+</description>
     </property>
     <property name="dir" type="java.io.File">
-        <description>
-     * Returns the base directory of this file tree.
-     *
-     * @return The base directory. Never returns null.
-     </description>
+        <description> Returns the base directory of this file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The base directory. Never returns null.
+
+</description>
     </property>
 </type>

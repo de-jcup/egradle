@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type interface="true" language="gradle" name="org.gradle.testing.jacoco.tasks.JacocoReportsContainer" version="3.0">
-    <description>
- * The reporting configuration for the {@link JacocoReport} task.
- </description>
+    <description> The reporting configuration for the &lt;a href='type://JacocoReport'&gt;JacocoReport&lt;/a&gt; task.
+
+</description>
     <method name="getCsv" returnType="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The JaCoCo (single file) CSV report
-     *
-     * @return The JaCoCo (single file) CSV report
-     </description>
+        <description> The JaCoCo (single file) CSV report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) CSV report
+
+</description>
     </method>
     <method name="getHtml" returnType="org.gradle.api.reporting.DirectoryReport">
-        <description>
-     * The JaCoCo HTML report
-     *
-     * @return The JaCoCo HTML report
-     </description>
+        <description> The JaCoCo HTML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo HTML report
+
+</description>
     </method>
     <method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The JaCoCo (single file) XML report
-     *
-     * @return The JaCoCo (single file) XML report
-     </description>
+        <description> The JaCoCo (single file) XML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) XML report
+
+</description>
     </method>
     <interface name="org.gradle.api.reporting.ReportContainer"/>
     <property name="csv" type="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The JaCoCo (single file) CSV report
-     *
-     * @return The JaCoCo (single file) CSV report
-     </description>
+        <description> The JaCoCo (single file) CSV report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) CSV report
+
+</description>
     </property>
     <property name="html" type="org.gradle.api.reporting.DirectoryReport">
-        <description>
-     * The JaCoCo HTML report
-     *
-     * @return The JaCoCo HTML report
-     </description>
+        <description> The JaCoCo HTML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo HTML report
+
+</description>
     </property>
     <property name="xml" type="org.gradle.api.reporting.SingleFileReport">
-        <description>
-     * The JaCoCo (single file) XML report
-     *
-     * @return The JaCoCo (single file) XML report
-     </description>
+        <description> The JaCoCo (single file) XML report
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The JaCoCo (single file) XML report
+
+</description>
     </property>
 </type>

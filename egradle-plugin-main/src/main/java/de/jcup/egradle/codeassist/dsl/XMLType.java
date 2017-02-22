@@ -162,6 +162,10 @@ public class XMLType implements ModifiableType {
 	public String getSuperTypeAsString() {
 		return superTypeAsString;
 	}
+	
+	public Type getSuperType() {
+		return superType;
+	}
 
 	@Override
 	public void inheritFrom(Type superType) {

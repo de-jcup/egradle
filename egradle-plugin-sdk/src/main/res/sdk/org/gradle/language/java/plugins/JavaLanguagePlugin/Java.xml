@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.java.plugins.JavaLanguagePlugin.Java" version="3.0">
-    <description>
-     * The language transform implementation for Java sources.
-     </description>
+    <description> The language transform implementation for Java sources.
+
+</description>
     <method name="applyToBinary" returnType="boolean">
         <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
     </method>

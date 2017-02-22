@@ -56,8 +56,6 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 	 * @param context
 	 */
 	void calculateStillMissingDelegateTargets(Type type, SDKBuilderContext context) {
-		int problemCount = 0;
-		StringBuilder problems = new StringBuilder();
 		for (Method m : type.getMethods()) {
 			if (!(m instanceof XMLMethod)) {
 				continue;
@@ -83,12 +81,6 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 			if (targetType != null) {
 				method.setDelegationTargetAsString(targetType);
 			}
-		}
-		if (problemCount > 0) {
-			// System.out.println("- WARN: type:" + type.getName()
-			// + " has following method without descriptions: has no description
-			// " + problems.toString());
-			context.methodWithOutDescriptionCount += problemCount;
 		}
 
 	}

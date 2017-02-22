@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.nativeplatform.tasks.CreateStaticLibrary" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
-    <description>
- * Assembles a static library from object files.
- </description>
+    <description> Assembles a static library from object files.
+
+</description>
     <method name="call" returnType="java.lang.String"/>
     <method name="getOperationLoggerFactory" returnType="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <method name="getOutputFile" returnType="java.io.File">
-        <description>
-     * The file where the output binary will be located.
-     </description>
+        <description> The file where the output binary will be located.
+
+</description>
     </method>
     <method name="getSource" returnType="org.gradle.api.file.FileCollection">
-        <description>
-     * The source object files to be passed to the archiver.
-     </description>
+        <description> The source object files to be passed to the archiver.
+
+</description>
     </method>
     <method name="getStaticLibArgs" returnType="java.util.List">
-        <description>
-     * Additional arguments passed to the archiver.
-     </description>
+        <description> Additional arguments passed to the archiver.
+
+</description>
     </method>
     <method name="getTargetPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
-        <description>
-      * The platform being targeted.
-      </description>
+        <description> The platform being targeted.
+
+</description>
     </method>
     <method name="getToolChain" returnType="org.gradle.nativeplatform.toolchain.NativeToolChain">
-        <description>
-     * The tool chain used for creating the static library.
-     </description>
+        <description> The tool chain used for creating the static library.
+
+</description>
     </method>
     <method name="link" returnType="void"/>
     <method name="setOutputFile" returnType="void">
@@ -44,36 +44,36 @@
         <parameter type="org.gradle.nativeplatform.toolchain.NativeToolChain" name="toolChain"/>
     </method>
     <method name="source" returnType="void" documented="true">
-        <description>
-     * Adds a set of object files to be linked. &lt;p&gt; The provided source object is evaluated as per {@link org.gradle.api.Project#files(Object...)}.
-     </description>
+        <description> Adds a set of object files to be linked. &lt;p&gt; The provided source object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+</description>
         <parameter type="java.lang.Object" name="source"/>
     </method>
     <interface name="org.gradle.nativeplatform.tasks.ObjectFilesToBinary"/>
     <property name="operationLoggerFactory" type="org.gradle.internal.operations.logging.BuildOperationLoggerFactory"/>
     <property name="outputFile" type="java.io.File" documented="true">
-        <description>
-     * The file where the output binary will be located.
-     </description>
+        <description> The file where the output binary will be located.
+
+</description>
     </property>
     <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
-        <description>
-     * The source object files to be passed to the archiver.
-     </description>
+        <description> The source object files to be passed to the archiver.
+
+</description>
     </property>
     <property name="staticLibArgs" type="java.util.List" documented="true">
-        <description>
-     * Additional arguments passed to the archiver.
-     </description>
+        <description> Additional arguments passed to the archiver.
+
+</description>
     </property>
     <property name="targetPlatform" type="org.gradle.nativeplatform.platform.NativePlatform">
-        <description>
-      * The platform being targeted.
-      </description>
+        <description> The platform being targeted.
+
+</description>
     </property>
     <property name="toolChain" type="org.gradle.nativeplatform.toolchain.NativeToolChain" documented="true">
-        <description>
-     * The tool chain used for creating the static library.
-     </description>
+        <description> The tool chain used for creating the static library.
+
+</description>
     </property>
 </type>
