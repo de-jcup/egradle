@@ -93,7 +93,8 @@
  Truth. For example:
 
  &lt;pre&gt;
- signing { gradle.taskGraph.hasTask("uploadArchives") }
+ signing {
+   required = { gradle.taskGraph.hasTask("uploadArchives") }
  }
  &lt;/pre&gt;
 
@@ -117,15 +118,13 @@
         <parameter type="org.gradle.plugins.signing.type.SignatureTypeProvider" name="signatureTypes"/>
     </method>
     <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" delegationTarget="SignOperation" documented="true">
-        <description> Creates a new &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt; using the given closure to configure it before executing it.
+        <description> Creates a new &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; using the given closure to configure it before executing it.
 
- &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension signing settings'&gt;SigningExtension signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available (and one is not explicitly specified in this operation's configuration), the
+ &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension'&gt;signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available (and one is not explicitly specified in this operation's configuration), the
  sign operation will fail.
 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration of the &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt;.
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt;.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The configuration of the &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt;.
 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
@@ -133,12 +132,10 @@
     <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" documented="true">
         <description> Digitally signs the files, generating signature files alongside them.
 
- &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension signing settings'&gt;SigningExtension signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
+ &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension'&gt;signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;files The files to sign.
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt;.
 
 </description>
         <parameter type="java.io.File" name="files"/>
@@ -147,7 +144,7 @@
         <description> Creates signing tasks that depend on and sign the "archive" produced by the given tasks.
 
  &lt;p&gt;The created tasks will be named "sign&lt;i&gt;&amp;lt;input task name capitalized&amp;gt;&lt;/i&gt;". That is, given a task with the name "jar" the created task will be named "signJar". &lt;p&gt; If the task is not
- an &lt;a href='type://org.gradle.api.tasks.bundling.AbstractArchiveTask'&gt;org.gradle.api.tasks.bundling.AbstractArchiveTask&lt;/a&gt;, an &lt;a href='type://InvalidUserDataException'&gt;InvalidUserDataException&lt;/a&gt; will be thrown.&lt;/p&gt; &lt;p&gt; The signature artifact for the created task is added to the &lt;a href='type://org.gradle.plugins.signing.SigningExtension#getConfiguration() for this settings object'&gt;#getConfiguration() for this settings object&lt;/a&gt;.
+ an &lt;a href='type://org.gradle.api.tasks.bundling.AbstractArchiveTask'&gt;org.gradle.api.tasks.bundling.AbstractArchiveTask&lt;/a&gt;, an &lt;a href='type://InvalidUserDataException'&gt;InvalidUserDataException&lt;/a&gt; will be thrown.&lt;/p&gt; &lt;p&gt; The signature artifact for the created task is added to the &lt;a href='type://org.gradle.plugins.signing.SigningExtension#getConfiguration()'&gt;for this settings object&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks whose archives are to be signed
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the created tasks.
@@ -156,11 +153,11 @@
         <parameter type="org.gradle.api.Task" name="tasks"/>
     </method>
     <method name="sign" returnType="java.util.List" documented="true">
-        <description> Creates signing tasks that sign &lt;a href='type://Configuration#getAllArtifacts() all of the artifacts'&gt;Configuration#getAllArtifacts() all of the artifacts&lt;/a&gt; of the given configurations.
+        <description> Creates signing tasks that sign &lt;a href='type://Configuration#getAllArtifacts()'&gt;all of the artifacts&lt;/a&gt; of the given configurations.
 
  &lt;p&gt;The created tasks will be named "sign&lt;i&gt;&amp;lt;configuration name capitalized&amp;gt;&lt;/i&gt;". That is, given a configuration with the name "archives" the created task will be named "signArchives".
 
- The signature artifact for the created task is added to the &lt;a href='type://org.gradle.plugins.signing.SigningExtension#getConfiguration() for this settings object'&gt;#getConfiguration() for this settings object&lt;/a&gt;.
+ The signature artifact for the created task is added to the &lt;a href='type://org.gradle.plugins.signing.SigningExtension#getConfiguration()'&gt;for this settings object&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configurations whose archives are to be signed
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the created tasks.
@@ -171,12 +168,10 @@
     <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" documented="true">
         <description> Digitally signs the publish artifacts, generating signature files alongside them.
 
- &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension signing settings'&gt;SigningExtension signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
+ &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension'&gt;signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;publishArtifacts The publish artifacts to sign
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt;
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt;
 
 </description>
         <parameter type="org.gradle.api.artifacts.PublishArtifact" name="publishArtifacts"/>
@@ -184,13 +179,11 @@
     <method name="sign" returnType="org.gradle.plugins.signing.SignOperation" documented="true">
         <description> Digitally signs the files, generating signature files alongside them.
 
- &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension signing settings'&gt;SigningExtension signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
+ &lt;p&gt;The project's default signatory and default signature type from the &lt;a href='type://SigningExtension'&gt;signing settings&lt;/a&gt; will be used to generate the signature. The returned &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; gives access to the created signature files. &lt;p&gt; If there is no configured default signatory available, the sign operation will fail.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier to assign to the created signature artifacts.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;files The publish artifacts to sign.
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executed &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt;.
 
 </description>
         <parameter type="java.lang.String" name="classifier"/>
@@ -199,9 +192,8 @@
     <method name="signPom" returnType="org.gradle.plugins.signing.Signature" documented="true">
         <description> Signs the POM artifact for the given Maven deployment.
 
- &lt;p&gt;You can use this method to sign the generated POM when publishing to a Maven repository with the Maven plugin. &lt;/p&gt; &lt;pre autoTested=''&gt; uploadArchives { MavenDeployment deployment -&gt; signing.signPom(deployment) } } } } &lt;/pre&gt; &lt;p&gt;You can optionally provide a configuration closure to fine tune the &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; for the POM.&lt;/p&gt; &lt;p&gt; If &lt;a href='type://org.gradle.plugins.signing.SigningExtension#isRequired()'&gt;#isRequired()&lt;/a&gt; is false and the signature cannot be generated (e.g. no configured signatory), this method will silently do nothing. That is, a
+ &lt;p&gt;You can use this method to sign the generated POM when publishing to a Maven repository with the Maven plugin. &lt;/p&gt; &lt;pre autoTested=''&gt; uploadArchives { repositories { mavenDeployer {
+ beforeDeployment { MavenDeployment deployment -&gt; signing.signPom(deployment) } } } } &lt;/pre&gt; &lt;p&gt;You can optionally provide a configuration closure to fine tune the &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; for the POM.&lt;/p&gt; &lt;p&gt; If &lt;a href='type://org.gradle.plugins.signing.SigningExtension#isRequired()'&gt;#isRequired()&lt;/a&gt; is false and the signature cannot be generated (e.g. no configured signatory), this method will silently do nothing. That is, a
  signature for the POM file will not be uploaded.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mavenDeployment The deployment to sign the POM of
@@ -213,13 +205,12 @@
     <method name="signPom" returnType="org.gradle.plugins.signing.Signature" delegationTarget="SignOperation" documented="true">
         <description> Signs the POM artifact for the given Maven deployment.
 
- &lt;p&gt;You can use this method to sign the generated POM when publishing to a Maven repository with the Maven plugin. &lt;/p&gt; &lt;pre autoTested=''&gt; uploadArchives { MavenDeployment deployment -&gt; signing.signPom(deployment) } } } } &lt;/pre&gt; &lt;p&gt;You can optionally provide a configuration closure to fine tune the &lt;a href='type://SignOperation sign
- operation'&gt;SignOperation sign
- operation&lt;/a&gt; for the POM.&lt;/p&gt; &lt;p&gt; If &lt;a href='type://org.gradle.plugins.signing.SigningExtension#isRequired()'&gt;#isRequired()&lt;/a&gt; is false and the signature cannot be generated (e.g. no configured signatory), this method will silently do nothing. That is, a
+ &lt;p&gt;You can use this method to sign the generated POM when publishing to a Maven repository with the Maven plugin. &lt;/p&gt; &lt;pre autoTested=''&gt; uploadArchives { repositories { mavenDeployer {
+ beforeDeployment { MavenDeployment deployment -&gt; signing.signPom(deployment) } } } } &lt;/pre&gt; &lt;p&gt;You can optionally provide a configuration closure to fine tune the &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; for the POM.&lt;/p&gt; &lt;p&gt; If &lt;a href='type://org.gradle.plugins.signing.SigningExtension#isRequired()'&gt;#isRequired()&lt;/a&gt; is false and the signature cannot be generated (e.g. no configured signatory), this method will silently do nothing. That is, a
  signature for the POM file will not be uploaded.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mavenDeployment The deployment to sign the POM of
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the configuration of the underlying &lt;a href='type://SignOperation sign operation'&gt;SignOperation sign operation&lt;/a&gt; for the POM (optional)
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the configuration of the underlying &lt;a href='type://SignOperation'&gt;sign operation&lt;/a&gt; for the POM (optional)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the generated signature artifact
 
 </description>
@@ -227,7 +218,7 @@
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="signatories" returnType="org.gradle.plugins.signing.signatory.SignatoryProvider" delegationTarget="org.gradle.plugins.signing.signatory.SignatoryProvider">
-        <description> Configures the signatory provider (delegating to its &lt;a href='type://SignatoryProvider#configure(SigningExtension, Closure) configure method'&gt;SignatoryProvider#configure(SigningExtension, Closure) configure method&lt;/a&gt;).
+        <description> Configures the signatory provider (delegating to its &lt;a href='type://SignatoryProvider#configure(SigningExtension,'&gt;Closure) configure method&lt;/a&gt;).
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the signatory provider configuration DSL
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configured signatory provider

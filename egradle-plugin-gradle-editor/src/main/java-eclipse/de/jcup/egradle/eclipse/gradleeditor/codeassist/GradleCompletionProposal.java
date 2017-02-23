@@ -139,7 +139,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(shell,20);
 				if (lazyBuilder!=null){
-					control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(lazyBuilder.getFgColor(), lazyBuilder.getBgColor(), lazyBuilder.getBuilder()));
+					control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(lazyBuilder.getFgColor(), lazyBuilder.getBgColor(), lazyBuilder.getCommentColor(), lazyBuilder.getBuilder()));
 				}
 				return control;
 			}

@@ -6,28 +6,29 @@
    apply plugin: 'java'
 
    test {
-          //specific test method
+       filter {
+          &lt;em class='comment'&gt;//specific test method&lt;/em&gt;
           includeTestsMatching "org.gradle.SomeTest.someSpecificFeature"
 
-          //specific test method, use wildcard for packages
+          &lt;em class='comment'&gt;//specific test method, use wildcard for packages&lt;/em&gt;
           includeTestsMatching "*SomeTest.someSpecificFeature"
 
-          //specific test class
+          &lt;em class='comment'&gt;//specific test class&lt;/em&gt;
           includeTestsMatching "org.gradle.SomeTest"
 
-          //specific test class, wildcard for packages
+          &lt;em class='comment'&gt;//specific test class, wildcard for packages&lt;/em&gt;
           includeTestsMatching "*.SomeTest"
 
-          //all classes in package, recursively
+          &lt;em class='comment'&gt;//all classes in package, recursively&lt;/em&gt;
           includeTestsMatching "com.gradle.tooling.*"
 
-          //all integration tests, by naming convention
+          &lt;em class='comment'&gt;//all integration tests, by naming convention&lt;/em&gt;
           includeTestsMatching "*IntegTest"
 
-          //only ui tests from integration tests, by some naming convention
+          &lt;em class='comment'&gt;//only ui tests from integration tests, by some naming convention&lt;/em&gt;
           includeTestsMatching "*IntegTest*ui"
 
-          //specific test class and test method
+          &lt;em class='comment'&gt;//specific test class and test method&lt;/em&gt;
           includeTest "org.gradle.SomeTest", "someTestMethod"
        }
    }

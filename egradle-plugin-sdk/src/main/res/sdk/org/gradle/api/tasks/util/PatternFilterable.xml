@@ -48,7 +48,11 @@
  &lt;a href='type://org.gradle.api.file.FileTreeElement'&gt;org.gradle.api.file.FileTreeElement&lt;/a&gt; as its parameter. The closure should return true or false. Example:
 
  &lt;pre autoTested='true'&gt;
- copySpec { it.file in configurations.someConf.files }
+ copySpec {
+   from 'source'
+   into 'destination'
+   &lt;em class='comment'&gt;//an example of excluding files from certain configuration:&lt;/em&gt;
+   exclude { it.file in configurations.someConf.files }
  }
  &lt;/pre&gt;
 

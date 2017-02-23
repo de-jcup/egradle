@@ -14,7 +14,7 @@
     <method name="generate" returnType="void">
         <description> Generates the signature file.
 
- &lt;p&gt;In order to generate the signature, the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign() file to sign'&gt;#getToSign() file to sign&lt;/a&gt;, &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatory() signatory'&gt;#getSignatory() signatory&lt;/a&gt; and &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt; must be known (i.e. non &lt;a href='type://null'&gt;null&lt;/a&gt;).&lt;/p&gt;
+ &lt;p&gt;In order to generate the signature, the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign()'&gt;file to sign&lt;/a&gt;, &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatory()'&gt;signatory&lt;/a&gt; and &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt; must be known (i.e. non &lt;a href='type://null'&gt;null&lt;/a&gt;).&lt;/p&gt;
 
  @throws InvalidUserDataException if the there is insufficient information available to generate the signature.
 
@@ -32,7 +32,7 @@
     <method name="getDate" returnType="java.util.Date">
         <description> The date of the signature artifact.
 
- &lt;p&gt;Defaults to the last modified time of the &lt;a href='type://org.gradle.plugins.signing.Signature#getFile() signature file'&gt;#getFile() signature file&lt;/a&gt; (if exists)&lt;/p&gt;
+ &lt;p&gt;Defaults to the last modified time of the &lt;a href='type://org.gradle.plugins.signing.Signature#getFile()'&gt;signature file&lt;/a&gt; (if exists)&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The date of the signature. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -41,7 +41,7 @@
     <method name="getExtension" returnType="java.lang.String">
         <description> The extension of the signature artifact.
 
- &lt;p&gt;Defaults to the specified file extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;.&lt;/p&gt;
+ &lt;p&gt;Defaults to the specified file extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extension. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -50,7 +50,7 @@
     <method name="getFile" returnType="java.io.File">
         <description> The file for the generated signature, which may not yet exist.
 
- &lt;p&gt;Defaults to a file alongside the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign() file to sign'&gt;#getToSign() file to sign&lt;/a&gt; with the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;.&lt;/p&gt;
+ &lt;p&gt;Defaults to a file alongside the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign()'&gt;file to sign&lt;/a&gt; with the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signature file. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -59,7 +59,7 @@
     <method name="getName" returnType="java.lang.String">
         <description> The name of the signature artifact.
 
- &lt;p&gt;Defaults to the name of the signature &lt;a href='type://org.gradle.plugins.signing.Signature#getFile() file'&gt;#getFile() file&lt;/a&gt;.
+ &lt;p&gt;Defaults to the name of the signature &lt;a href='type://org.gradle.plugins.signing.Signature#getFile()'&gt;file&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -91,7 +91,7 @@
     <method name="getType" returnType="java.lang.String">
         <description> The type of the signature artifact.
 
- &lt;p&gt;Defaults to the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign() file to sign'&gt;#getToSign() file to sign&lt;/a&gt; plus the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;. For example, when signing the file ‘my.zip’ with a
+ &lt;p&gt;Defaults to the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign()'&gt;file to sign&lt;/a&gt; plus the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;. For example, when signing the file ‘my.zip’ with a
  signature type with extension ‘sig’, the default type is ‘zip.sig’.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if the file to sign or signature type are unknown at this time.
@@ -137,7 +137,7 @@
     <property name="date" type="java.util.Date">
         <description> The date of the signature artifact.
 
- &lt;p&gt;Defaults to the last modified time of the &lt;a href='type://org.gradle.plugins.signing.Signature#getFile() signature file'&gt;#getFile() signature file&lt;/a&gt; (if exists)&lt;/p&gt;
+ &lt;p&gt;Defaults to the last modified time of the &lt;a href='type://org.gradle.plugins.signing.Signature#getFile()'&gt;signature file&lt;/a&gt; (if exists)&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The date of the signature. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -146,7 +146,7 @@
     <property name="extension" type="java.lang.String">
         <description> The extension of the signature artifact.
 
- &lt;p&gt;Defaults to the specified file extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;.&lt;/p&gt;
+ &lt;p&gt;Defaults to the specified file extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extension. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -155,7 +155,7 @@
     <property name="file" type="java.io.File">
         <description> The file for the generated signature, which may not yet exist.
 
- &lt;p&gt;Defaults to a file alongside the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign() file to sign'&gt;#getToSign() file to sign&lt;/a&gt; with the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;.&lt;/p&gt;
+ &lt;p&gt;Defaults to a file alongside the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign()'&gt;file to sign&lt;/a&gt; with the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The signature file. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -164,7 +164,7 @@
     <property name="name" type="java.lang.String">
         <description> The name of the signature artifact.
 
- &lt;p&gt;Defaults to the name of the signature &lt;a href='type://org.gradle.plugins.signing.Signature#getFile() file'&gt;#getFile() file&lt;/a&gt;.
+ &lt;p&gt;Defaults to the name of the signature &lt;a href='type://org.gradle.plugins.signing.Signature#getFile()'&gt;file&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if unknown at this time.
 
@@ -196,7 +196,7 @@
     <property name="type" type="java.lang.String">
         <description> The type of the signature artifact.
 
- &lt;p&gt;Defaults to the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign() file to sign'&gt;#getToSign() file to sign&lt;/a&gt; plus the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType() signature type'&gt;#getSignatureType() signature type&lt;/a&gt;. For example, when signing the file ‘my.zip’ with a
+ &lt;p&gt;Defaults to the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getToSign()'&gt;file to sign&lt;/a&gt; plus the extension of the &lt;a href='type://org.gradle.plugins.signing.Signature#getSignatureType()'&gt;signature type&lt;/a&gt;. For example, when signing the file ‘my.zip’ with a
  signature type with extension ‘sig’, the default type is ‘zip.sig’.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type. May be &lt;a href='type://null'&gt;null&lt;/a&gt; if the file to sign or signature type are unknown at this time.

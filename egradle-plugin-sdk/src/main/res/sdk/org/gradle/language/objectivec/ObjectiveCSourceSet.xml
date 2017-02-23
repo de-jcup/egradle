@@ -7,7 +7,14 @@
  &lt;pre autoTested="true"&gt;
  apply plugin: "objective-c"
 
- model {@literal /}*.m"
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 objc {
+                     source {
+                         srcDirs "src/main/objectiveC", "src/shared/objectiveC"
+                         include "**{@literal /}*.m"
                      }
                      exportedHeaders {
                          srcDirs "src/main/include"

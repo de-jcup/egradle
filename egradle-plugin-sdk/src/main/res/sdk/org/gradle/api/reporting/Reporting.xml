@@ -10,7 +10,7 @@
  &lt;/p&gt;
  &lt;pre&gt;
  class MyTask implements Reporting&amp;lt;MyReportContainer&amp;gt; {
-     // implementation
+     &lt;em class='comment'&gt;// implementation&lt;/em&gt;
  }
 
  interface MyReportContainer extends ReportContainer&amp;lt;Report&amp;gt; {
@@ -23,6 +23,7 @@
  &lt;/p&gt;
  &lt;pre&gt;
  task my(type: MyTask) {
+     reports {
          html.enabled = true
          csv.enabled = false
      }
@@ -50,6 +51,7 @@
 
  &lt;pre&gt;
  reports {
+   html {
      enabled false
    }
    xml.destination "build/reports/myReport.xml"
@@ -67,6 +69,7 @@
 
  &lt;pre&gt;
  reports {
+   html {
      enabled false
    }
    xml.destination "build/reports/myReport.xml"

@@ -5,7 +5,9 @@
  You directly add a named Maven Publication the project's &lt;a href='type://publishing.publications'&gt;publishing.publications&lt;/a&gt; container by providing &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt; as the type.
  &lt;pre&gt;
  publishing {
-       // Configure the publication here
+   publications {
+     myPublicationName(MavenPublication) {
+       &lt;em class='comment'&gt;// Configure the publication here&lt;/em&gt;
      }
    }
  }
@@ -22,7 +24,7 @@
  For certain common use cases, it's often sufficient to specify the component to publish, and nothing more (&lt;a href='type://org.gradle.api.publish.maven.MavenPublication#from(org.gradle.api.component.SoftwareComponent)'&gt;#from(org.gradle.api.component.SoftwareComponent)&lt;/a&gt;.
  The published component is used to determine which artifacts to publish, and which dependencies should be listed in the generated POM file.
  &lt;/p&gt;&lt;p&gt;
- To add additional artifacts to the set published, use the &lt;a href='type://org.gradle.api.publish.maven.MavenPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt; and &lt;a href='type://org.gradle.api.publish.maven.MavenPublication#artifact(Object, org.gradle.api.Action)'&gt;#artifact(Object, org.gradle.api.Action)&lt;/a&gt; methods.
+ To add additional artifacts to the set published, use the &lt;a href='type://org.gradle.api.publish.maven.MavenPublication#artifact(Object)'&gt;#artifact(Object)&lt;/a&gt; and &lt;a href='type://org.gradle.api.publish.maven.MavenPublication#artifact(Object,'&gt;org.gradle.api.Action)&lt;/a&gt; methods.
  You can also completely replace the set of published artifacts using &lt;a href='type://org.gradle.api.publish.maven.MavenPublication#setArtifacts(Iterable)'&gt;#setArtifacts(Iterable)&lt;/a&gt;.
  Together, these methods give you full control over what artifacts will be published.
  &lt;/p&gt;&lt;p&gt;
@@ -40,6 +42,11 @@
  }
 
  publishing {
+   publications {
+     myPublication(MavenPublication) {
+       from components.java
+       artifact sourceJar
+       pom.withXml {
          asNode().appendNode('description', 'A demonstration of Maven POM customization')
        }
      }
@@ -72,8 +79,10 @@
  }
 
  publishing {
-       artifact sourceJar // Publish the output of the sourceJar task
-       artifact 'my-file-name.jar' // Publish a file created outside of the build
+   publications {
+     maven(MavenPublication) {
+       artifact sourceJar &lt;em class='comment'&gt;// Publish the output of the sourceJar task&lt;/em&gt;
+       artifact 'my-file-name.jar' &lt;em class='comment'&gt;// Publish a file created outside of the build&lt;/em&gt;
        artifact source: sourceJar, classifier: 'src', extension: 'zip'
      }
    }
@@ -100,7 +109,10 @@
  }
 
  publishing {
-         // These values will be used instead of the values from the task. The task values will not be updated.
+   publications {
+     maven(MavenPublication) {
+       artifact(sourceJar) {
+         &lt;em class='comment'&gt;// These values will be used instead of the values from the task. The task values will not be updated.&lt;/em&gt;
          classifier "src"
          extension "zip"
        }
@@ -137,6 +149,8 @@
  apply plugin: "maven-publish"
 
  publishing {
+   publications {
+     maven(MavenPublication) {
        from components.java
      }
    }
@@ -205,6 +219,8 @@
    classifier "sources"
  }
  publishing {
+   publications {
+     maven(MavenPublication) {
        from components.java
        artifacts = ["my-custom-jar.jar", sourceJar]
      }

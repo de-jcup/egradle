@@ -11,14 +11,18 @@
  &lt;p&gt; Example:
  &lt;pre autoTested=''&gt;
  dependencies {
+     components {
+         &lt;em class='comment'&gt;// Set the status and status scheme for every component belonging to a module in the group "org.foo"&lt;/em&gt;
+         all { ComponentMetadataDetails details -&gt;
+             if (details.id.group == "org.foo") {
                  def version = details.id.version
-                 // assuming status is last part of version string
+                 &lt;em class='comment'&gt;// assuming status is last part of version string&lt;/em&gt;
                  details.status = version.substring(version.lastIndexOf("-") + 1)
                  details.statusScheme = ["bronze", "silver", "gold", "platinum"]
              }
          }
 
-         // Treat all components in the module "org.foo:bar" as changing
+         &lt;em class='comment'&gt;// Treat all components in the module "org.foo:bar" as changing&lt;/em&gt;
          withModule("org.foo:bar") { ComponentMetadataDetails details -&gt;
              details.changing = true
          }

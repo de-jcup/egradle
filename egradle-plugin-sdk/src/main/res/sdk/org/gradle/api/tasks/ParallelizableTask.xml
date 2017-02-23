@@ -33,7 +33,7 @@
  Two tasks that write to overlapping parts of the filesystem are only prevented from running in parallel with each other, not other parallel enabled tasks.
  &lt;p&gt;
  Care must be taken with symbolic links, and other types of file system links, as Gradle does not exhaustively check that outputs of tasks do not overlap.
- It only considers the top level declared &lt;a href='type://OutputFile output files'&gt;OutputFile output files&lt;/a&gt; and &lt;a href='type://OutputDirectory output directories'&gt;OutputDirectory output directories&lt;/a&gt; of the task.
+ It only considers the top level declared &lt;a href='type://OutputFile'&gt;output files&lt;/a&gt; and &lt;a href='type://OutputDirectory'&gt;output directories&lt;/a&gt; of the task.
  &lt;p&gt;
  If a task traverses a link that is a child of a declared output in order to change or create files, the real location of the files will not be considered.
  However, declared outputs that are children of links &lt;b&gt;are&lt;/b&gt; resolved to their real location.

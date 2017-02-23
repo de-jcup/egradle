@@ -27,7 +27,7 @@
  be equal. But only one of those equals dependencies (which might differ in content) can be mapped to a POM
  (due to the nature of a Maven POM).
 
- &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int, Configuration, String)'&gt;#addMapping(int, Configuration, String)&lt;/a&gt;. If
+ &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;. If
  only one configuration is mapped, this mapping is used to choose the scope. If more than one configuration of a
  dependency is mapped, and those mappings all map to the same scope, this scope is used. If more than one
  configuration is mapped and the mappings map to different scopes, the mapping with the highest priority is used.
@@ -68,7 +68,7 @@
  be equal. But only one of those equals dependencies (which might differ in content) can be mapped to a POM
  (due to the nature of a Maven POM).
 
- &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int, Configuration, String)'&gt;#addMapping(int, Configuration, String)&lt;/a&gt;. If
+ &lt;p&gt;Which scope is returned depends on the existing mappings. See &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;. If
  only one configuration is mapped, this mapping is used to choose the scope. If more than one configuration of a
  dependency is mapped, and those mappings all map to the same scope, this scope is used. If more than one
  configuration is mapped and the mappings map to different scopes, the mapping with the highest priority is used.

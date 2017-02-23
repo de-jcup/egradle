@@ -9,50 +9,55 @@
  apply plugin: 'java'
  apply plugin: 'idea'
 
- //for the sake of this example, let's introduce a 'provided' configuration
+ &lt;em class='comment'&gt;//for the sake of this example, let's introduce a 'provided' configuration&lt;/em&gt;
  configurations {
    provided
    provided.extendsFrom(compile)
  }
 
  dependencies {
-   //provided "some.interesting:dependency:1.0"
+   &lt;em class='comment'&gt;//provided "some.interesting:dependency:1.0"&lt;/em&gt;
  }
 
  idea {
-     //if for some reason you want to add an extra sourceDirs
+
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting files (*.iml, etc.) to be replaced by variables (Files)&lt;/em&gt;
+   pathVariables GRADLE_HOME: file('~/cool-software/gradle')
+
+   module {
+     &lt;em class='comment'&gt;//if for some reason you want to add an extra sourceDirs&lt;/em&gt;
      sourceDirs += file('some-extra-source-folder')
 
-     //and some extra test source dirs
+     &lt;em class='comment'&gt;//and some extra test source dirs&lt;/em&gt;
      testSourceDirs += file('some-extra-test-dir')
 
-     //and hint to mark some of existing source dirs as generated sources
+     &lt;em class='comment'&gt;//and hint to mark some of existing source dirs as generated sources&lt;/em&gt;
      generatedSourceDirs += file('some-extra-source-folder')
 
-     //and some extra dirs that should be excluded by IDEA
+     &lt;em class='comment'&gt;//and some extra dirs that should be excluded by IDEA&lt;/em&gt;
      excludeDirs += file('some-extra-exclude-dir')
 
-     //if you don't like the name Gradle has chosen
+     &lt;em class='comment'&gt;//if you don't like the name Gradle has chosen&lt;/em&gt;
      name = 'some-better-name'
 
-     //if you prefer different output folders
+     &lt;em class='comment'&gt;//if you prefer different output folders&lt;/em&gt;
      inheritOutputDirs = false
      outputDir = file('muchBetterOutputDir')
      testOutputDir = file('muchBetterTestOutputDir')
 
-     //if you prefer different SDK than the one inherited from IDEA project
+     &lt;em class='comment'&gt;//if you prefer different SDK than the one inherited from IDEA project&lt;/em&gt;
      jdkName = '1.6'
 
-     //if you need to put 'provided' dependencies on the classpath
+     &lt;em class='comment'&gt;//if you need to put 'provided' dependencies on the classpath&lt;/em&gt;
      scopes.PROVIDED.plus += [ configurations.provided ]
 
-     //if 'content root' (as IDEA calls it) of the module is different
+     &lt;em class='comment'&gt;//if 'content root' (as IDEA calls it) of the module is different&lt;/em&gt;
      contentRoot = file('my-module-content-root')
 
-     //if you love browsing Javadoc
+     &lt;em class='comment'&gt;//if you love browsing Javadoc&lt;/em&gt;
      downloadJavadoc = true
 
-     //and hate reading sources :)
+     &lt;em class='comment'&gt;//and hate reading sources :)&lt;/em&gt;
      downloadSources = false
    }
  }
@@ -71,21 +76,29 @@
  apply plugin: 'idea'
 
  idea {
+   module {
+     iml {
+       &lt;em class='comment'&gt;//if you like to keep *.iml in a secret folder&lt;/em&gt;
+       generateTo = file('secret-modules-folder')
+
+       &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+       withXml {
          def node = it.asNode()
          node.appendNode('iLoveGradle', 'true')
          node.appendNode('butAlso', 'I find increasing pleasure tinkering with output *.iml contents. Yeah!!!')
        }
 
-       //closure executed after *.iml content is loaded from existing file
-       //but before gradle build information is merged
+       &lt;em class='comment'&gt;//closure executed after *.iml content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
        beforeMerged { module -&gt;
-         //if you want skip merging exclude dirs
+         &lt;em class='comment'&gt;//if you want skip merging exclude dirs&lt;/em&gt;
          module.excludeFolders.clear()
        }
 
-       //closure executed after *.iml content is loaded from existing file
-       //and after gradle build information is merged
-       whenMerged &lt;a href='type://Module'&gt;Module&lt;/a&gt;
+       &lt;em class='comment'&gt;//closure executed after *.iml content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { module -&gt;
+         &lt;em class='comment'&gt;//you can tinker with &lt;a href='type://Module'&gt;Module&lt;/a&gt;&lt;/em&gt;
        }
      }
    }
@@ -231,10 +244,11 @@
  }
 
  dependencies {
-   //provided "some.interesting:dependency:1.0"
+   &lt;em class='comment'&gt;//provided "some.interesting:dependency:1.0"&lt;/em&gt;
  }
 
  idea {
+   module {
      scopes.PROVIDED.plus += [ configurations.provided ]
    }
  }
@@ -516,10 +530,11 @@
  }
 
  dependencies {
-   //provided "some.interesting:dependency:1.0"
+   &lt;em class='comment'&gt;//provided "some.interesting:dependency:1.0"&lt;/em&gt;
  }
 
  idea {
+   module {
      scopes.PROVIDED.plus += [ configurations.provided ]
    }
  }

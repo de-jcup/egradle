@@ -12,23 +12,24 @@
  apply plugin: 'idea'
 
  idea {
-     //if you want to set specific jdk and language level
+   project {
+     &lt;em class='comment'&gt;//if you want to set specific jdk and language level&lt;/em&gt;
      jdkName = '1.6'
      languageLevel = '1.5'
 
-     //you can update the source wildcards
+     &lt;em class='comment'&gt;//you can update the source wildcards&lt;/em&gt;
      wildcards += '!?*.ruby'
 
-     //you can configure the VCS used by the project
+     &lt;em class='comment'&gt;//you can configure the VCS used by the project&lt;/em&gt;
      vcs = 'Git'
 
-     //you can change the modules of the *.ipr
-     //modules = project(':someProject').idea.module
+     &lt;em class='comment'&gt;//you can change the modules of the *.ipr&lt;/em&gt;
+     &lt;em class='comment'&gt;//modules = project(':someProject').idea.module&lt;/em&gt;
 
-     //you can change the output file
+     &lt;em class='comment'&gt;//you can change the output file&lt;/em&gt;
      outputFile = new File(outputFile.parentFile, 'someBetterName.ipr')
 
-     //you can add project-level libraries
+     &lt;em class='comment'&gt;//you can add project-level libraries&lt;/em&gt;
      projectLibraries &amp;lt;&amp;lt; new ProjectLibrary(name: "my-library", classes: [new File("path/to/library")])
    }
  }
@@ -47,18 +48,24 @@
  apply plugin: 'idea'
 
  idea {
+   project {
+     ipr {
+       &lt;em class='comment'&gt;//you can tinker with the output *.ipr file before it's written out&lt;/em&gt;
+       withXml {
          def node = it.asNode()
          node.appendNode('iLove', 'tinkering with the output *.ipr file!')
        }
 
-       //closure executed after *.ipr content is loaded from existing file
-       //but before gradle build information is merged
-       beforeMerged &lt;a href='type://Project'&gt;Project&lt;/a&gt;
+       &lt;em class='comment'&gt;//closure executed after *.ipr content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+       beforeMerged { project -&gt;
+         &lt;em class='comment'&gt;//you can tinker with &lt;a href='type://Project'&gt;Project&lt;/a&gt;&lt;/em&gt;
        }
 
-       //closure executed after *.ipr content is loaded from existing file
-       //and after gradle build information is merged
-       whenMerged &lt;a href='type://Project'&gt;Project&lt;/a&gt;
+       &lt;em class='comment'&gt;//closure executed after *.ipr content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { project -&gt;
+         &lt;em class='comment'&gt;//you can tinker with &lt;a href='type://Project'&gt;Project&lt;/a&gt;&lt;/em&gt;
        }
      }
    }

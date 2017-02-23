@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.tasks.Copy" version="3.0" superType="org.gradle.api.tasks.AbstractCopyTask" documented="true">
     <description> Copies files into a destination directory. This task can also rename and filter files as it copies. The task
- implements &lt;a href='type://org.gradle.api.file.CopySpec CopySpec'&gt;org.gradle.api.file.CopySpec CopySpec&lt;/a&gt; for specifying what to copy.
+ implements &lt;a href='type://org.gradle.api.file.CopySpec'&gt;CopySpec&lt;/a&gt; for specifying what to copy.
 
  &lt;p&gt; Examples:
  &lt;pre autoTested=''&gt;
@@ -10,16 +10,17 @@
      into 'build/target/doc'
  }
 
- //for Ant filter
+ &lt;em class='comment'&gt;//for Ant filter&lt;/em&gt;
  import org.apache.tools.ant.filters.ReplaceTokens
 
- //for including in the copy task
+ &lt;em class='comment'&gt;//for including in the copy task&lt;/em&gt;
  def dataContent = copySpec {
      from 'src/data'
      include '*.data'
  }
 
  task initConfig(type: Copy) {
+     from('src/main/config') {
          include '**&amp;#47;*.properties'
          include '**&amp;#47;*.xml'
          filter(ReplaceTokens, tokens: [version: '2.3.1'])

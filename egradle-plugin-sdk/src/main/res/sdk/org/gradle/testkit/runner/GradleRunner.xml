@@ -62,7 +62,7 @@
 </description>
     </method>
     <method name="forwardOutput" returnType="org.gradle.testkit.runner.GradleRunner">
-        <description> Forwards the output of executed builds to the &lt;a href='type://System#out System.out'&gt;System#out System.out&lt;/a&gt; stream.
+        <description> Forwards the output of executed builds to the &lt;a href='type://System#out'&gt;System.out&lt;/a&gt; stream.
  &lt;p&gt;
  The output of the build is always available via &lt;a href='type://BuildResult#getOutput()'&gt;BuildResult#getOutput()&lt;/a&gt;.
  This method can be used to additionally forward the output to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt; of the process using the runner.

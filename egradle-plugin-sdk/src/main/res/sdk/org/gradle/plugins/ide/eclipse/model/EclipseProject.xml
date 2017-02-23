@@ -10,31 +10,32 @@
  apply plugin: 'eclipse'
 
  eclipse {
-     //if you don't like the name Gradle has chosen
+   project {
+     &lt;em class='comment'&gt;//if you don't like the name Gradle has chosen&lt;/em&gt;
      name = 'someBetterName'
 
-     //if you want to specify the Eclipse project's comment
+     &lt;em class='comment'&gt;//if you want to specify the Eclipse project's comment&lt;/em&gt;
      comment = 'Very interesting top secret project'
 
-     //if you want to append some extra referenced projects in a declarative fashion:
+     &lt;em class='comment'&gt;//if you want to append some extra referenced projects in a declarative fashion:&lt;/em&gt;
      referencedProjects 'someProject', 'someOtherProject'
-     //if you want to assign referenced projects
+     &lt;em class='comment'&gt;//if you want to assign referenced projects&lt;/em&gt;
      referencedProjects = ['someProject'] as Set
 
-     //if you want to append some extra natures in a declarative fashion:
+     &lt;em class='comment'&gt;//if you want to append some extra natures in a declarative fashion:&lt;/em&gt;
      natures 'some.extra.eclipse.nature', 'some.another.interesting.nature'
-     //if you want to assign natures in a groovy fashion:
+     &lt;em class='comment'&gt;//if you want to assign natures in a groovy fashion:&lt;/em&gt;
      natures = ['some.extra.eclipse.nature', 'some.another.interesting.nature']
 
-     //if you want to append some extra build command:
+     &lt;em class='comment'&gt;//if you want to append some extra build command:&lt;/em&gt;
      buildCommand 'buildThisLovelyProject'
-     //if you want to append a build command with parameters:
+     &lt;em class='comment'&gt;//if you want to append a build command with parameters:&lt;/em&gt;
      buildCommand 'buildItWithTheArguments', argumentOne: "I'm first", argumentTwo: "I'm second"
 
-     //if you want to create an extra link in the eclipse project,
-     //by location uri:
-     linkedResource name: 'someLinkByLocationUri', type: 'someLinkType', locationUri: 'file://someUri'
-     //by location:
+     &lt;em class='comment'&gt;//if you want to create an extra link in the eclipse project,&lt;/em&gt;
+     &lt;em class='comment'&gt;//by location uri:&lt;/em&gt;
+     linkedResource name: 'someLinkByLocationUri', type: 'someLinkType', locationUri: 'file:&lt;em class='comment'&gt;//someUri'&lt;/em&gt;
+     &lt;em class='comment'&gt;//by location:&lt;/em&gt;
      linkedResource name: 'someLinkByLocation', type: 'someLinkType', location: '/some/location'
    }
  }
@@ -53,20 +54,26 @@
  apply plugin: 'eclipse'
 
  eclipse {
+   project {
+
+     file {
+       &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+       withXml {
          def node = it.asNode()
          node.appendNode('xml', 'is what I love')
        }
 
-       //closure executed after .project content is loaded from existing file
-       //but before gradle build information is merged
+       &lt;em class='comment'&gt;//closure executed after .project content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
        beforeMerged { project -&gt;
-         //if you want skip merging natures... (a very abstract example)
+         &lt;em class='comment'&gt;//if you want skip merging natures... (a very abstract example)&lt;/em&gt;
          project.natures.clear()
        }
 
-       //closure executed after .project content is loaded from existing file
-       //and after gradle build information is merged
-       whenMerged &lt;a href='type://Project'&gt;Project&lt;/a&gt; here
+       &lt;em class='comment'&gt;//closure executed after .project content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { project -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Project'&gt;Project&lt;/a&gt; here&lt;/em&gt;
        }
      }
    }
@@ -135,7 +142,11 @@
     </method>
     <method name="referencedProjects" returnType="void" documented="true">
         <description> The referenced projects of this Eclipse project (*not*: java build path project references). &lt;p&gt; Referencing projects does not mean adding a build path dependencies between them! If you need to
- configure a build path dependency use Gradle's dependencies section or eclipse.classpath.whenMerged </description>
+ configure a build path dependency use Gradle's dependencies section or eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;referencedProjects The name of the project references.
+
+</description>
         <parameter type="java.lang.String" name="referencedProjects"/>
     </method>
     <method name="setBuildCommands" returnType="void">
@@ -198,7 +209,9 @@
  &lt;p&gt;
  Referencing projects does not mean adding a build path dependencies between them!
  If you need to configure a build path dependency use Gradle's dependencies section or
- eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+ eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
 
 </description>
         <parameter type="java.util.Set" name="referencedProjects"/>
@@ -263,7 +276,9 @@
  &lt;p&gt;
  Referencing projects does not mean adding a build path dependencies between them!
  If you need to configure a build path dependency use Gradle's dependencies section or
- eclipse.classpath.whenMerged &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+ eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
 
 </description>
     </property>

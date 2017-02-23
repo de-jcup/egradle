@@ -13,7 +13,7 @@
  apply plugin: 'ivy-publish'
 
  publishing.publications.create('publication-name', IvyPublication) {
-     // Configure the ivy publication here
+     &lt;em class='comment'&gt;// Configure the ivy publication here&lt;/em&gt;
  }
  &lt;/pre&gt;
 

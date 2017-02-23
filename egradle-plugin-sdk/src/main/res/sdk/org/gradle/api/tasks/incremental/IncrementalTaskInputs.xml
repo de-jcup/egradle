@@ -7,18 +7,25 @@
  and a separate action for all input files that have been removed since the previous execution.
 
  &lt;pre autoTested="true"&gt;
- class IncrementalReverseTask extends DefaultTask {@literal @}InputDirectory
+ class IncrementalReverseTask extends DefaultTask {
+      {@literal @}InputDirectory
       def File inputDir
 
       {@literal @}OutputDirectory
       def File outputDir
 
       {@literal @}TaskAction
-      void execute(IncrementalTaskInputs inputs) {change.file.name}")
+      void execute(IncrementalTaskInputs inputs) {
+          if (!inputs.incremental)
+              project.delete(outputDir.listFiles())
+
+          inputs.outOfDate { change -&gt;
+              def targetFile = project.file("$outputDir/${change.file.name}")
               targetFile.text = change.file.text.reverse()
           }
 
-          inputs.removed {change.file.name}")
+          inputs.removed { change -&gt;
+              def targetFile = project.file("$outputDir/${change.file.name}")
               if (targetFile.exists()) {
                   targetFile.delete()
               }

@@ -65,6 +65,8 @@
 
  &lt;pre&gt;
  checkstyleTask {
+   reports {
+     html {
        destination "build/codenarc.html"
      }
    }
@@ -84,6 +86,8 @@
 
  &lt;pre&gt;
  checkstyleTask {
+   reports {
+     html {
        destination "build/codenarc.html"
      }
    }

@@ -19,12 +19,14 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 	private LinkToTypeConverter linkToTypeConverter;
 	private String fgColor;
 	private String bgColor;
+	private String commentColor;
 	private HTMLDescriptionBuilder builder;
 
-	public DefaultEGradleLinkListener(String fgColor, String bgColor, HTMLDescriptionBuilder builder) {
+	public DefaultEGradleLinkListener(String fgColor, String bgColor, String commentColor, HTMLDescriptionBuilder builder) {
 		this.linkToTypeConverter = new LinkToTypeConverter();
 		this.fgColor = fgColor;
 		this.bgColor = bgColor;
+		this.commentColor = commentColor;
 		this.builder=builder;
 	}
 
@@ -100,7 +102,7 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 				}
 			}
 		}
-		control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, null, elementTarget));
+		control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, commentColor, null, elementTarget,null));
 
 	}
 

@@ -33,7 +33,7 @@
     <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" documented="true">
         <description> Creates and adds a &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt; to the set, which is configured by the associated action.
 
- The semantics of this method are the same as &lt;a href='type://IvyPublication#artifact(Object, Action)'&gt;IvyPublication#artifact(Object, Action)&lt;/a&gt;.
+ The semantics of this method are the same as &lt;a href='type://IvyPublication#artifact(Object,'&gt;Action)&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;source The source of the artifact.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config An action to configure the values of the constructed &lt;a href='type://IvyArtifact'&gt;IvyArtifact&lt;/a&gt;.

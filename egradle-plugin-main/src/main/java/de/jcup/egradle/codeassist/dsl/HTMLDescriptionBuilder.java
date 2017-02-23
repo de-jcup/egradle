@@ -12,24 +12,13 @@ public class HTMLDescriptionBuilder {
 	 * 
 	 * @param fgColor
 	 * @param bgColor
-	 * @param data
-	 * @param element
-	 * @return description, never <code>null</code>
-	 */
-	public String buildHTMLDescription(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element) {
-		return buildHTMLDescription(fgColor, bgColor, data, element, null);
-	}
-	/**
-	 * Builds HTML description for given language element
-	 * 
-	 * @param fgColor
-	 * @param bgColor
+	 * @param commentColor 
 	 * @param data
 	 * @param element
 	 * @param prefix can be <code>null</code>, otherwise its rendered before first body element
 	 * @return description, never <code>null</code>
 	 */
-	public String buildHTMLDescription(String fgColor, String bgColor, LanguageElementMetaData data, LanguageElement element, String prefix) {
+	public String buildHTMLDescription(String fgColor, String bgColor, String commentColor, LanguageElementMetaData data, LanguageElement element, String prefix) {
 		StringBuilder descSb = new StringBuilder();
 		if (prefix!=null){
 			descSb.append(prefix);
@@ -69,7 +58,7 @@ public class HTMLDescriptionBuilder {
 		}else{
 			title="element is null";
 		}
-		String html =  createHTMLBody(fgColor, bgColor, title, descSb);
+		String html =  createHTMLBody(fgColor, bgColor, commentColor, title, descSb);
 		return html;
 	}
 
@@ -96,7 +85,7 @@ public class HTMLDescriptionBuilder {
 		}
 	}
 
-	private String createHTMLBody(String fgColor, String bgColor,String title, StringBuilder descSb) {
+	private String createHTMLBody(String fgColor, String bgColor,String commentColor, String title, StringBuilder descSb) {
 		
 		StringBuilder style = new StringBuilder();
 		style.append("body{");
@@ -118,6 +107,7 @@ public class HTMLDescriptionBuilder {
 		style.append(".param {color: #229922;}\n");
 		style.append(".return {color: #229922;}\n");
 		style.append(".warnSmall {color: #ff0000;font-size:small}\n");
+		style.append(".comment {color: "+commentColor+";}\n");
 		style.append(".originLinkURL {font-size:x-small;color: #999999;font-family:'Courier New', Courier, monospace}\n");
 		
 		return "<html><head><title>"+title+"</title><style>"+style.toString()+"</style></head><body>" + descSb + "</body></html>";

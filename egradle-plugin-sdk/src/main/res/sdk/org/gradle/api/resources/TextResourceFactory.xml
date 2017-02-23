@@ -9,13 +9,13 @@
 
  def sourcedFromFile = resources.text.fromFile("path/to/file.txt")
 
- task someTask {} // assumption: produces a text file and declares it as output
+ task someTask {} &lt;em class='comment'&gt;// assumption: produces a text file and declares it as output&lt;/em&gt;
  def sourcedFromTask = resources.text.fromFile(someTask)
 
  def sourcedFromArchiveEntry =
    resources.text.fromArchiveEntry("path/to/archive.zip", "path/to/archive/entry.txt")
 
- configurations { someConfig } // assumption: contains a single archive
+ configurations { someConfig } &lt;em class='comment'&gt;// assumption: contains a single archive&lt;/em&gt;
  def sourcedFromConfiguration =
    resources.text.fromArchiveEntry(configurations.someConfig, "path/to/archive/entry.txt")
  &lt;/pre&gt;

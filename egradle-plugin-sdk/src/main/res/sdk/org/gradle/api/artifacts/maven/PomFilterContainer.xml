@@ -40,7 +40,7 @@
         <parameter type="groovy.lang.Closure" name="filter"/>
     </method>
     <method name="filter" returnType="org.gradle.api.artifacts.maven.PublishFilter">
-        <description> Returns a filter added with &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)'&gt;#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;.
+        <description> Returns a filter added with &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the filter
 
@@ -76,7 +76,7 @@
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom">
-        <description> Returns the POM associated with a filter added with &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)'&gt;#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;.
+        <description> Returns the POM associated with a filter added with &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the filter.
 
@@ -96,12 +96,12 @@
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="setFilter" returnType="void">
-        <description> &lt;p&gt;Sets the default filter to be used. This filter is active if no custom filters have been added (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)'&gt;#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;).
+        <description> &lt;p&gt;Sets the default filter to be used. This filter is active if no custom filters have been added (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;).
  If at least one custom filter has been added the default filter is not used any longer.&lt;/p&gt;
  &lt;p&gt;The default for this property is &lt;a href='type://PublishFilter#ALWAYS_ACCEPT'&gt;PublishFilter#ALWAYS_ACCEPT&lt;/a&gt;.
  If there is only one artifact you are fine with this filter. If there is more than one artifact, deployment will lead to
  an exception, if you don't specify a filter that selects the artifact to deploy. If you want to deploy more than one artifact you have
- to use the (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)'&gt;#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt; method.&lt;/p&gt;
+ to use the (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt; method.&lt;/p&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultFilter
  @see #getFilter()
@@ -110,7 +110,7 @@
         <parameter type="org.gradle.api.artifacts.maven.PublishFilter" name="defaultFilter"/>
     </method>
     <method name="setPom" returnType="void">
-        <description> &lt;p&gt;Sets the default POM to be used. This POM is active if no custom filters have been added (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)'&gt;#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;).
+        <description> &lt;p&gt;Sets the default POM to be used. This POM is active if no custom filters have been added (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;).
  If at least one custom filter has been added the default POM is not used any longer.&lt;/p&gt;
  &lt;p&gt;Usually you don't need to set this property as the default value provides you a POM object you might use for configuration.
  By default the properties of such a POM object are all null.

@@ -70,7 +70,7 @@
 </description>
     </method>
     <method name="properties" returnType="org.gradle.api.tasks.TaskInputs">
-        <description> Registers a set of input properties for this task. See &lt;a href='type://org.gradle.api.tasks.TaskInputs#property(String, Object)'&gt;#property(String, Object)&lt;/a&gt; for details.
+        <description> Registers a set of input properties for this task. See &lt;a href='type://org.gradle.api.tasks.TaskInputs#property(String,'&gt;Object)&lt;/a&gt; for details.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;properties The properties.
 

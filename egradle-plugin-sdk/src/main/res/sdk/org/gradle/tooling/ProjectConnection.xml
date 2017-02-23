@@ -8,11 +8,11 @@
     .connect();
 
  try {
-    //obtain some information from the build
+    &lt;em class='comment'&gt;//obtain some information from the build&lt;/em&gt;
     BuildEnvironment environment = connection.model(BuildEnvironment.class)
       .get();
 
-    //run some tasks
+    &lt;em class='comment'&gt;//run some tasks&lt;/em&gt;
     connection.newBuild()
       .forTasks("tasks")
       .setStandardOutput(System.out)

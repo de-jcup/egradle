@@ -10,19 +10,19 @@
 
  &lt;pre&gt;
  someTask {
-   //Convention properties cannot be mutated,
-   //even if the object is mutable!
-   conventionProperty.add('c')  //WRONG!
+   &lt;em class='comment'&gt;//Convention properties cannot be mutated,&lt;/em&gt;
+   &lt;em class='comment'&gt;//even if the object is mutable!&lt;/em&gt;
+   conventionProperty.add('c')  &lt;em class='comment'&gt;//WRONG!&lt;/em&gt;
 
-   //However, convention properties can be assigned:
-   conventionProperty = ['a', 'b']  //OK
+   &lt;em class='comment'&gt;//However, convention properties can be assigned:&lt;/em&gt;
+   conventionProperty = ['a', 'b']  &lt;em class='comment'&gt;//OK&lt;/em&gt;
 
-   //Following may work but depends on the order of evaluation:
-   conventionProperty -= 'a'  //SENSITIVE
+   &lt;em class='comment'&gt;//Following may work but depends on the order of evaluation:&lt;/em&gt;
+   conventionProperty -= 'a'  &lt;em class='comment'&gt;//SENSITIVE&lt;/em&gt;
 
-   //Simple properties can be mutated or assigned:
-   simpleProperty = ['1.5']  //OK
-   simpleProperty.add('1.5')  //OK
+   &lt;em class='comment'&gt;//Simple properties can be mutated or assigned:&lt;/em&gt;
+   simpleProperty = ['1.5']  &lt;em class='comment'&gt;//OK&lt;/em&gt;
+   simpleProperty.add('1.5')  &lt;em class='comment'&gt;//OK&lt;/em&gt;
  }
  &lt;/pre&gt;
 
@@ -35,17 +35,17 @@
  apply plugin: 'java'
 
  test {
-   //test task has a testClassesDir convention property
-   //that is by default configured to 'test classes dir'
-   //testClassesDir = sourceSets.test.classesDir
+   &lt;em class='comment'&gt;//test task has a testClassesDir convention property&lt;/em&gt;
+   &lt;em class='comment'&gt;//that is by default configured to 'test classes dir'&lt;/em&gt;
+   &lt;em class='comment'&gt;//testClassesDir = sourceSets.test.classesDir&lt;/em&gt;
  }
 
- //what if someone reconfigured the 'test classes dir'
- //after the 'test' task was configured? Like that:
+ &lt;em class='comment'&gt;//what if someone reconfigured the 'test classes dir'&lt;/em&gt;
+ &lt;em class='comment'&gt;//after the 'test' task was configured? Like that:&lt;/em&gt;
  sourceSets.test.classesDir = new File(buildDir, 'test-classes')
 
- //will the already-configured test.testClassesDir property
- //on a 'test' task point to a wrong folder?
+ &lt;em class='comment'&gt;//will the already-configured test.testClassesDir property&lt;/em&gt;
+ &lt;em class='comment'&gt;//on a 'test' task point to a wrong folder?&lt;/em&gt;
  &lt;/pre&gt;
 
  Answer: It will all work fine!

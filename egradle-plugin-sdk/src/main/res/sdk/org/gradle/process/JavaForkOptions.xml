@@ -48,7 +48,7 @@
     <method name="getDefaultCharacterEncoding" returnType="java.lang.String">
         <description> Returns the default character encoding to use.
 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default character encoding. Returns null if the &lt;a href='type://java.nio.charset.Charset#defaultCharset() default character encoding of this JVM'&gt;java.nio.charset.Charset#defaultCharset() default character encoding of this JVM&lt;/a&gt; should be used.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default character encoding. Returns null if the &lt;a href='type://java.nio.charset.Charset#defaultCharset()'&gt;default character encoding of this JVM&lt;/a&gt; should be used.
 
 </description>
     </method>
@@ -140,7 +140,7 @@
  where this is the case, setting the &lt;a href='type://file.encoding'&gt;file.encoding&lt;/a&gt; property via &lt;a href='type://org.gradle.process.JavaForkOptions#setSystemProperties(java.util.Map)'&gt;#setSystemProperties(java.util.Map)&lt;/a&gt; or similar will have no effect as
  this value will be overridden by the value specified by &lt;a href='type://org.gradle.process.JavaForkOptions#getDefaultCharacterEncoding()'&gt;#getDefaultCharacterEncoding()&lt;/a&gt;.
 
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultCharacterEncoding The default character encoding. Use null to use &lt;a href='type://java.nio.charset.Charset#defaultCharset() this JVM's default charset'&gt;java.nio.charset.Charset#defaultCharset() this JVM's default charset&lt;/a&gt;
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultCharacterEncoding The default character encoding. Use null to use &lt;a href='type://java.nio.charset.Charset#defaultCharset()'&gt;this JVM's default charset&lt;/a&gt;
 
 </description>
         <parameter type="java.lang.String" name="defaultCharacterEncoding"/>
@@ -234,7 +234,7 @@
     <property name="defaultCharacterEncoding" type="java.lang.String">
         <description> Returns the default character encoding to use.
 
- &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default character encoding. Returns null if the &lt;a href='type://java.nio.charset.Charset#defaultCharset() default character encoding of this JVM'&gt;java.nio.charset.Charset#defaultCharset() default character encoding of this JVM&lt;/a&gt; should be used.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default character encoding. Returns null if the &lt;a href='type://java.nio.charset.Charset#defaultCharset()'&gt;default character encoding of this JVM&lt;/a&gt; should be used.
 
 </description>
     </property>

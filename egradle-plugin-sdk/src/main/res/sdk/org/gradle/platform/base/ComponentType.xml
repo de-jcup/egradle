@@ -12,7 +12,8 @@
 
  apply plugin: MySamplePlugin
 
- class MySamplePlugin extends RuleSource {@literal @}ComponentType
+ class MySamplePlugin extends RuleSource {
+     {@literal @}ComponentType
      void register(TypeBuilder&amp;lt;SampleComponent&amp;gt; builder) {
          builder.defaultImplementation(DefaultSampleComponent)
      }

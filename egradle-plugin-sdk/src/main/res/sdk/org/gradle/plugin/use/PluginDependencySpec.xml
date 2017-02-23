@@ -22,6 +22,7 @@
  }
 
  subprojects {
+     if (someCondition) {
          apply plugin: "org.company.myplugin"
      }
  }

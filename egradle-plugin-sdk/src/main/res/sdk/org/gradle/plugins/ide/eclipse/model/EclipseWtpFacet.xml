@@ -5,25 +5,35 @@
  Advanced configuration closures beforeMerged and whenMerged receive &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt; object as parameter.
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'war' //or 'ear' or 'java'
+ apply plugin: 'war' &lt;em class='comment'&gt;//or 'ear' or 'java'&lt;/em&gt;
  apply plugin: 'eclipse-wtp'
 
  eclipse {
+   wtp {
+     facet {
+       &lt;em class='comment'&gt;//you can add some extra wtp facets; mandatory keys: 'name', 'version':&lt;/em&gt;
+       facet name: 'someCoolFacet', version: '1.3'
+
+       file {
+         &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+         withXml {
            def node = it.asNode()
            node.appendNode('xml', 'is what I love')
          }
 
-         //beforeMerged and whenMerged closures are the highest voodoo for the tricky edge cases.
-         //the type passed to the closures is &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt;
+         &lt;em class='comment'&gt;//beforeMerged and whenMerged closures are the highest voodoo for the tricky edge cases.&lt;/em&gt;
+         &lt;em class='comment'&gt;//the type passed to the closures is &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt;&lt;/em&gt;
 
-         //closure executed after wtp facet file content is loaded from existing file
-         //but before gradle build information is merged
-         beforeMerged &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt; here
+         &lt;em class='comment'&gt;//closure executed after wtp facet file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+         beforeMerged { wtpFacet -&gt;
+           &lt;em class='comment'&gt;//tinker with &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt; here&lt;/em&gt;
          }
 
-         //closure executed after wtp facet file content is loaded from existing file
-         //and after gradle build information is merged
-         whenMerged &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt; here
+         &lt;em class='comment'&gt;//closure executed after wtp facet file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+         whenMerged { wtpFacet -&gt;
+           &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://WtpFacet'&gt;WtpFacet&lt;/a&gt; here&lt;/em&gt;
          }
        }
      }

@@ -8,7 +8,8 @@
  apply plugin: 'java'
 
  sourceSets {
-     //if you truly want to override the defaults:
+   main {
+     &lt;em class='comment'&gt;//if you truly want to override the defaults:&lt;/em&gt;
      output.resourcesDir = 'out/res'
      output.classesDir   = 'out/bin'
    }
@@ -31,27 +32,29 @@
  def generatedResources = "$buildDir/generated-resources/main"
 
  sourceSets {
-     //let's register an output folder on the main SourceSet:
+   main {
+     &lt;em class='comment'&gt;//let's register an output folder on the main SourceSet:&lt;/em&gt;
      output.dir(generatedResources, builtBy: 'generateMyResources')
-     //it is now a part of the 'main' classpath and will be a part of the jar
+     &lt;em class='comment'&gt;//it is now a part of the 'main' classpath and will be a part of the jar&lt;/em&gt;
    }
  }
 
- //a task that generates the resources:
+ &lt;em class='comment'&gt;//a task that generates the resources:&lt;/em&gt;
  task generateMyResources {
+   doLast {
      def generated = new File(generatedResources, "myGeneratedResource.properties")
      generated.text = "message=Stay happy!"
    }
  }
 
- //Java plugin task 'classes' and 'testClasses' will automatically depend on relevant tasks registered with 'builtBy'
+ &lt;em class='comment'&gt;//Java plugin task 'classes' and 'testClasses' will automatically depend on relevant tasks registered with 'builtBy'&lt;/em&gt;
 
- //Eclipse/IDEA plugins will automatically depend on 'generateMyResources'
- //because the output dir was registered with 'builtBy' information
+ &lt;em class='comment'&gt;//Eclipse/IDEA plugins will automatically depend on 'generateMyResources'&lt;/em&gt;
+ &lt;em class='comment'&gt;//because the output dir was registered with 'builtBy' information&lt;/em&gt;
  apply plugin: 'idea'; apply plugin: 'eclipse'
  &lt;/pre&gt;
 
- Find more information in &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#dir(java.util.Map, Object)'&gt;#dir(java.util.Map, Object)&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#getDirs()'&gt;#getDirs()&lt;/a&gt;
+ Find more information in &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#dir(java.util.Map,'&gt;Object)&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.SourceSetOutput#getDirs()'&gt;#getDirs()&lt;/a&gt;
 
 </description>
     <method name="dir" returnType="void" documented="true">

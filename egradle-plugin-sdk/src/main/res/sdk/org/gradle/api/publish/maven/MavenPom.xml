@@ -25,6 +25,9 @@
  apply plugin: "maven-publish"
 
  publishing {
+   publications {
+     maven(MavenPublication) {
+       pom.withXml {
          asNode().appendNode('description', 'A demonstration of Maven POM customization')
        }
      }

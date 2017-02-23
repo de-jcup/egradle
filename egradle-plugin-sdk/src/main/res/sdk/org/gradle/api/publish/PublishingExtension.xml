@@ -15,7 +15,8 @@
  &lt;p&gt;
  A 'publishing' configuration block does not need to dereference the publishing extension, and so will be evaluated late. eg:
  &lt;pre&gt;
-     publishing { ... }
+     publishing {
+         publications { ... }
          repositories.maven { ... }
      }
  &lt;/pre&gt;
@@ -61,7 +62,9 @@
  apply plugin: 'maven-publish'
 
  publishing {
-       // Configure the publication here
+   publications {
+     myPublicationName(MavenPublication) {
+       &lt;em class='comment'&gt;// Configure the publication here&lt;/em&gt;
      }
    }
  }
@@ -81,8 +84,11 @@
  apply plugin: 'publishing'
 
  publishing {
+   repositories {
+     &lt;em class='comment'&gt;// Create an ivy publication destination named “releases”&lt;/em&gt;
+     ivy {
        name "releases"
-       url "http://my.org/ivy-repos/releases"
+       url "http:&lt;em class='comment'&gt;//my.org/ivy-repos/releases"&lt;/em&gt;
      }
    }
  }

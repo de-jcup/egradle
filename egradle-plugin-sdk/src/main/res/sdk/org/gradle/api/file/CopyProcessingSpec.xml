@@ -94,7 +94,7 @@
         <parameter type="java.lang.String" name="replaceWith"/>
     </method>
     <method name="rename" returnType="org.gradle.api.file.CopyProcessingSpec">
-        <description> Renames files based on a regular expression. See &lt;a href='type://org.gradle.api.file.CopyProcessingSpec#rename(String, String)'&gt;#rename(String, String)&lt;/a&gt;.
+        <description> Renames files based on a regular expression. See &lt;a href='type://org.gradle.api.file.CopyProcessingSpec#rename(String,'&gt;String)&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourceRegEx Source regular expression
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;replaceWith Replacement string (use $ syntax for capture groups)

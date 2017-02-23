@@ -5,7 +5,14 @@
  &lt;pre autoTested="true"&gt;
  apply plugin: "assembler"
 
- model {@literal /}*.s"
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 asm {
+                     source {
+                         srcDirs "src/main/i386", "src/shared/asm"
+                         include "**{@literal /}*.s"
                      }
                  }
              }

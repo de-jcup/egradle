@@ -3,6 +3,7 @@ package de.jcup.egradle.sdk.builder.action.javadoc;
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,12 +87,58 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 		if (origin==null){
 			return null;
 		}
-		String line = origin;
-		line = replaceJavaDocLinks(line);
-		line = replaceJavaDocCode(line);
-		line = replaceJavaDocParams(line);
-		line = replaceJavaDocReturn(line);
-		return line;
+		String description = origin;
+		description = replaceJavaDocLinks(description);
+		description = replaceJavaDocCode(description);
+		description = replaceJavaDocParams(description);
+		description = replaceJavaDocReturn(description);
+		description = replaceDoubleSlashToEndWithCommentTag(description);
+		return description;
+	}
+
+	private String replaceDoubleSlashToEndWithCommentTag(String text) {
+		if (text.indexOf("//")==-1){
+			return text;
+		}
+		String[] splitted = StringUtils.splitByWholeSeparatorPreserveAllTokens(text,"\n");
+		StringBuilder sb = new StringBuilder();
+		int pos=0;
+		for (String line: splitted){
+			String replaced = replaceCommentInLine(line);
+			sb.append(replaced);
+			pos++;
+			if (pos<splitted.length){
+				sb.append("\n");
+			}
+		}
+		return sb.toString();
+	}
+
+	private String replaceCommentInLine(String text) {
+		if (text.indexOf("//")==-1){
+			return text;
+		}
+		String before = StringUtils.substringBefore(text, "//");
+		int lastindexOpening=before.lastIndexOf('<');
+		int lastindexClosing=before.lastIndexOf('>');
+		if (lastindexOpening>lastindexClosing){
+			/* e.g. a "< // comment" or a "<><//comment" which will be ignored*/
+			return text;
+		}
+		
+		String after = StringUtils.substringAfter(text,"//");
+		StringBuilder sb = new StringBuilder();
+		sb.append(before);
+		sb.append("<em class='comment'>//");
+		if (after.endsWith("\n")){
+			sb.append(StringUtils.substringBeforeLast(after, "\n"));	
+			sb.append("</em>\n");
+			
+		}else{
+			sb.append(after);	
+			sb.append("</em>");
+		}
+		return sb.toString();
 	}
 
 	private abstract class ContentReplacer {
@@ -104,7 +151,7 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 		JAVADOC_TAG_FOUND, CURLY_BRACKET_OPENED, CURLY_BRACKET_CLOSED, UNKNOWN
 	}
 
-	String replaceJavaDocTagInCurls(String line, String javaDocId, ContentReplacer replacer) {
+	String replaceJavaDocTagInCurls(String description, String javaDocId, ContentReplacer replacer) {
 		StringBuilder sb = new StringBuilder();
 		JavaDocState state = JavaDocState.UNKNOWN;
 		/* scan for first { found" */
@@ -114,8 +161,11 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 		 */
 		StringBuilder curlyContent = new StringBuilder();
 		StringBuilder curlyContentUnchanged = new StringBuilder();
-		for (char c : line.toCharArray()) {
+		for (char c : description.toCharArray()) {
 			if (c == '{') {
+				if (state==JavaDocState.CURLY_BRACKET_OPENED){
+					sb.append(curlyContentUnchanged);
+				}
 				curlyContent = new StringBuilder();
 				curlyContentUnchanged = new StringBuilder();
 				state = JavaDocState.CURLY_BRACKET_OPENED;
@@ -166,6 +216,10 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 				sb.append(c);
 			}
 
+		}
+		if (state==JavaDocState.CURLY_BRACKET_OPENED){
+			/* when last curly bracket was opened but not closed, we use complete content*/
+			sb.append(curlyContentUnchanged);
 		}
 		String result = sb.toString();
 		return result;
@@ -250,12 +304,29 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 
 	}
 
-	private String replaceJavaDocLinks(String line) {
-		String replaced = replaceJavaDocTagInCurls(line, "@link", new ContentReplacer() {
+	private String replaceJavaDocLinks(String description) {
+		String replaced = replaceJavaDocTagInCurls(description, "@link", new ContentReplacer() {
 
 			@Override
 			public String replace(String content) {
-				return "<a href='" + HYPERLINK_TYPE_PREFIX + content + "'>" + content + "</a>";
+				String[] splitted = StringUtils.split(content);
+				String text ="";
+				String target = "";
+				if (splitted.length<2){
+					text=content;
+					target=content;
+				}else{
+					target=splitted[0];
+					for (int i=1;i<splitted.length;i++){
+						text=text+splitted[i];
+						if (i<splitted.length-1){
+							text+=" ";
+						}
+					}
+					
+				}
+				String result ="<a href='" + HYPERLINK_TYPE_PREFIX + target + "'>" + text + "</a>"; 
+				return result;
 			}
 		});
 		return replaced;

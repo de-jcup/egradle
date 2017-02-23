@@ -11,7 +11,9 @@
  If no authentication schemes have been assigned to this repository, a default set of authentication schemes are used based on the repository's transport scheme.
 
  &lt;pre autoTested=''&gt;
- repositories {url}"
+ repositories {
+     maven {
+         url "${url}"
          authentication {
              basic(BasicAuthentication)
          }
@@ -31,7 +33,9 @@
  &lt;p&gt;
  If no credentials have been assigned to this repository, an empty set of username and password credentials is assigned to this repository and passed to the action.
  &lt;pre autoTested=''&gt;
- repositories {url}"
+ repositories {
+     maven {
+         url "${url}"
          credentials {
              username = 'joe'
              password = 'secret'
@@ -51,7 +55,9 @@
  If no credentials have been assigned to this repository, an empty set of credentials of the specified type will be assigned to this repository and given to the configuration action.
  If credentials have already been specified for this repository, they will be passed to the given configuration action.
  &lt;pre autoTested=''&gt;
- repositories {url}"
+ repositories {
+     maven {
+         url "${url}"
          credentials(AwsCredentials) {
              accessKey "myAccessKey"
              secretKey "mySecret"
@@ -88,7 +94,7 @@
  If you are using a different type of credentials than &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt;, please use &lt;a href='type://org.gradle.api.artifacts.repositories.AuthenticationSupported#getCredentials(Class)'&gt;#getCredentials(Class)&lt;/a&gt; to obtain the credentials.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the credentials
- @throws IllegalStateException if the credential type was previously set with &lt;a href='type://org.gradle.api.artifacts.repositories.AuthenticationSupported#credentials(Class, Action)'&gt;#credentials(Class, Action)&lt;/a&gt; where the type was not &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt;
+ @throws IllegalStateException if the credential type was previously set with &lt;a href='type://org.gradle.api.artifacts.repositories.AuthenticationSupported#credentials(Class,'&gt;Action)&lt;/a&gt; where the type was not &lt;a href='type://PasswordCredentials'&gt;PasswordCredentials&lt;/a&gt;
 
 </description>
     </method>

@@ -17,19 +17,23 @@
  }
 
  eclipse {
-     //you can tweak the classpath of the Eclipse project by adding extra configurations:
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting file to be replaced by variables (files):&lt;/em&gt;
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   classpath {
+     &lt;em class='comment'&gt;//you can tweak the classpath of the Eclipse project by adding extra configurations:&lt;/em&gt;
      plusConfigurations += [ configurations.provided ]
 
-     //you can also remove configurations from the classpath:
+     &lt;em class='comment'&gt;//you can also remove configurations from the classpath:&lt;/em&gt;
      minusConfigurations += [ configurations.someBoringConfig ]
 
-     //if you want to append extra containers:
+     &lt;em class='comment'&gt;//if you want to append extra containers:&lt;/em&gt;
      containers 'someFriendlyContainer', 'andYetAnotherContainer'
 
-     //customizing the classes output directory:
+     &lt;em class='comment'&gt;//customizing the classes output directory:&lt;/em&gt;
      defaultOutputDir = file('build-eclipse')
 
-     //default settings for downloading sources and Javadoc:
+     &lt;em class='comment'&gt;//default settings for downloading sources and Javadoc:&lt;/em&gt;
      downloadSources = true
      downloadJavadoc = false
    }
@@ -49,18 +53,24 @@
  apply plugin: 'eclipse'
 
  eclipse {
+   classpath {
+     file {
+       &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+       withXml {
          def node = it.asNode()
          node.appendNode('xml', 'is what I love')
        }
 
-       //closure executed after .classpath content is loaded from existing file
-       //but before gradle build information is merged
-       beforeMerged &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here
+       &lt;em class='comment'&gt;//closure executed after .classpath content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+       beforeMerged { classpath -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here&lt;/em&gt;
        }
 
-       //closure executed after .classpath content is loaded from existing file
-       //and after gradle build information is merged
-       whenMerged &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here
+       &lt;em class='comment'&gt;//closure executed after .classpath content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { classpath -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here&lt;/em&gt;
        }
      }
    }

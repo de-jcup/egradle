@@ -4,13 +4,35 @@
  The sample below shows various configuration options.
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' // adds 'test' task
+ apply plugin: 'java' &lt;em class='comment'&gt;// adds 'test' task&lt;/em&gt;
 
- test { descriptor -&gt;
+ test {
+   &lt;em class='comment'&gt;// enable TestNG support (default is JUnit)&lt;/em&gt;
+   useTestNG()
+
+   &lt;em class='comment'&gt;// set a system property for the test JVM(s)&lt;/em&gt;
+   systemProperty 'some.prop', 'value'
+
+   &lt;em class='comment'&gt;// explicitly include or exclude tests&lt;/em&gt;
+   include 'org/foo/**'
+   exclude 'org/boo/**'
+
+   &lt;em class='comment'&gt;// show standard out and standard error of the test JVM(s) on the console&lt;/em&gt;
+   testLogging.showStandardStreams = true
+
+   &lt;em class='comment'&gt;// set heap size for the test JVM(s)&lt;/em&gt;
+   minHeapSize = "128m"
+   maxHeapSize = "512m"
+
+   &lt;em class='comment'&gt;// set JVM arguments for the test JVM(s)&lt;/em&gt;
+   jvmArgs '-XX:MaxPermSize=256m'
+
+   &lt;em class='comment'&gt;// listen to events in the test execution lifecycle&lt;/em&gt;
+   beforeTest { descriptor -&gt;
       logger.lifecycle("Running test: " + descriptor)
    }
 
-   // listen to standard out and standard error of the test JVM(s)
+   &lt;em class='comment'&gt;// listen to standard out and standard error of the test JVM(s)&lt;/em&gt;
    onOutput { descriptor, event -&gt;
       logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
    }
@@ -378,7 +400,7 @@
         <description> Adds a closure to be notified when output from the test received. A &lt;a href='type://org.gradle.api.tasks.testing.TestDescriptor'&gt;org.gradle.api.tasks.testing.TestDescriptor&lt;/a&gt; and &lt;a href='type://org.gradle.api.tasks.testing.TestOutputEvent'&gt;org.gradle.api.tasks.testing.TestOutputEvent&lt;/a&gt; instance are
  passed to the closure as a parameter. &lt;pre autoTested=''&gt; apply plugin: 'java'
 
- test { logger.error("Test: " + descriptor + ", error: " + event.message) } } } &lt;/pre&gt;
+ test { onOutput { descriptor, event -&gt; if (event.destination == TestOutputEvent.Destination.StdErr) { logger.error("Test: " + descriptor + ", error: " + event.message) } } } &lt;/pre&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to call.
 
@@ -602,7 +624,7 @@
     <method name="testLogging" returnType="void" delegationTarget="org.gradle.api.tasks.testing.logging.TestLoggingContainer" documented="true">
         <description> Allows configuring the logging of the test execution, for example log eagerly the standard output, etc. &lt;pre autoTested=''&gt; apply plugin: 'java'
 
- //makes the standard streams (err and out) visible at console when running tests test.testLogging { showStandardStreams = true } &lt;/pre&gt;
+ &lt;em class='comment'&gt;//makes the standard streams (err and out) visible at console when running tests test.testLogging { showStandardStreams = true } &lt;/pre&gt;&lt;/em&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure configure closure
 

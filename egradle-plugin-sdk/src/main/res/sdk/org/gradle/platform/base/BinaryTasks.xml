@@ -11,17 +11,21 @@
 
  apply plugin: MyCustomBinariesPlugin
 
- class MyCustomBinaryCreationTask extends DefaultTask {@literal @}TaskAction void build() {
-          //building the binary
+ class MyCustomBinaryCreationTask extends DefaultTask {
+      {@literal @}TaskAction void build() {
+          &lt;em class='comment'&gt;//building the binary&lt;/em&gt;
       }
  }
 
- class MyCustomBinariesPlugin extends RuleSource {@literal @}ComponentType
+ class MyCustomBinariesPlugin extends RuleSource {
+     {@literal @}ComponentType
      void register(TypeBuilder&amp;lt;SampleBinary&amp;gt; builder) {}
 
      {@literal @}BinaryTasks
-     void createBinaryTasks(ModelMap&amp;lt;Task&amp;gt; tasks, SampleBinary binary) {binary.name}Task1", MyCustomBinaryCreationTask)
-         tasks.create("${binary.name}Task2") {binary.name}Task1"
+     void createBinaryTasks(ModelMap&amp;lt;Task&amp;gt; tasks, SampleBinary binary) {
+         tasks.create("${binary.name}Task1", MyCustomBinaryCreationTask)
+         tasks.create("${binary.name}Task2") {
+             dependsOn "${binary.name}Task1"
          }
      }
  }

@@ -13,13 +13,15 @@
 
  apply plugin: MyCustomBinariesPlugin
 
- class MyCustomBinariesPlugin extends RuleSource {@literal @}ComponentType
+ class MyCustomBinariesPlugin extends RuleSource {
+     {@literal @}ComponentType
      void register(TypeBuilder&lt;SampleBinary&gt; builder) {
          builder.defaultImplementation(DefaultSampleBinary)
      }
 
      {@literal @}ComponentBinaries
-     void createBinariesForSampleLibrary(ModelMap&lt;SampleBinary&gt; binaries, SampleComponent component) {component.name}Binary", SampleBinary)
+     void createBinariesForSampleLibrary(ModelMap&lt;SampleBinary&gt; binaries, SampleComponent component) {
+         binaries.create("${component.name}Binary", SampleBinary)
      }
  }
  &lt;/pre&gt;

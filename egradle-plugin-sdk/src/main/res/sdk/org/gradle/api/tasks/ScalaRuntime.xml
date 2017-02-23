@@ -17,8 +17,8 @@
      }
 
      def scalaClasspath = scalaRuntime.inferScalaClasspath(configurations.compile)
-     // The returned class path can be used to configure the 'scalaClasspath' property of tasks
-     // such as 'ScalaCompile' or 'ScalaDoc', or to execute these and other Scala tools directly.
+     &lt;em class='comment'&gt;// The returned class path can be used to configure the 'scalaClasspath' property of tasks&lt;/em&gt;
+     &lt;em class='comment'&gt;// such as 'ScalaCompile' or 'ScalaDoc', or to execute these and other Scala tools directly.&lt;/em&gt;
  &lt;/pre&gt;
 
 </description>

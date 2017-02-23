@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.plugins.PluginAware" version="3.0" documented="true">
     <description> Something that can have plugins applied to it.
  &lt;p&gt;
- The &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; can be used for applying and detecting whether plugins have been applied.
+ The &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager()'&gt;plugin manager&lt;/a&gt; can be used for applying and detecting whether plugins have been applied.
  &lt;p&gt;
  For more on writing and applying plugins, see &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt;.
 
@@ -63,9 +63,9 @@
     <method name="getPlugins" returnType="org.gradle.api.plugins.PluginContainer">
         <description> The container of plugins that have been applied to this object.
  &lt;p&gt;
- While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; than use the plugin container.
+ While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager()'&gt;plugin manager&lt;/a&gt; than use the plugin container.
  &lt;p&gt;
- Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
+ Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager()'&gt;plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
  &lt;p&gt;
  Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
 
@@ -86,9 +86,9 @@
     <property name="plugins" type="org.gradle.api.plugins.PluginContainer" documented="true">
         <description> The container of plugins that have been applied to this object.
  &lt;p&gt;
- While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; than use the plugin container.
+ While not deprecated, it is preferred to use the methods of this interface or the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager()'&gt;plugin manager&lt;/a&gt; than use the plugin container.
  &lt;p&gt;
- Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager() plugin manager'&gt;#getPluginManager() plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
+ Use one of the 'apply' methods on this interface or on the &lt;a href='type://org.gradle.api.plugins.PluginAware#getPluginManager()'&gt;plugin manager&lt;/a&gt; to apply plugins instead of applying via the plugin container.
  &lt;p&gt;
  Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
 

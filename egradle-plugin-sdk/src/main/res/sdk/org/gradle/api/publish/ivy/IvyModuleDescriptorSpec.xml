@@ -50,7 +50,12 @@
  &lt;pre autoTested=""&gt;
  apply plugin: "ivy-publish"
 
- publishing { it.@org == "junit" }.@rev = "4.10"
+ publishing {
+   publications {
+     ivy(IvyPublication) {
+       descriptor {
+         withXml {
+           asNode().dependencies.dependency.find { it.@org == "junit" }.@rev = "4.10"
          }
        }
      }

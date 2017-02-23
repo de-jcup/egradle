@@ -8,15 +8,23 @@
 
  &lt;pre autoTested=''&gt;
      configurations {
+         conf {
+             resolutionStrategy {
+                 componentSelection {
+                     all { ComponentSelection selection -&gt;
+                         if (selection.candidate.module == 'someModule' &amp;&amp; selection.candidate.version == '1.1') {
                              selection.reject("bad version '1.1' for 'someModule'")
                          }
                      }
-                     all {
+                     all { ComponentSelection selection, IvyModuleDescriptor descriptor, ComponentMetadata metadata -&gt;
+                         if (selection.candidate.module == 'someModule' &amp;&amp; descriptor.branch == 'testing') {
+                             if (metadata.status != 'milestone') {
                                  selection.reject("only use milestones for someModule:testing")
                              }
                          }
                      }
-                     withModule("org.sample:api") {
+                     withModule("org.sample:api") { ComponentSelection selection -&gt;
+                         if (selection.candidate.version == "1.1") {
                              selection.reject("known bad version")
                          }
                      }

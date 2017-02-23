@@ -49,6 +49,8 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
 
 public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
@@ -185,6 +187,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			bgColor = editor.getBackGroundColorAsWeb();
 			fgColor = editor.getForeGroundColorAsWeb();
 		}
+		String commentColorWeb = GradleEditorPreferences.EDITOR_PREFERENCES.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+		
 		List<ICompletionProposal> list = new ArrayList<>();
 		for (Proposal p : allProposals) {
 			Image image = null;
@@ -218,7 +222,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				ModelProposal mp = (ModelProposal) p;
 				LanguageElement element = mp.getElement();
 				if (element != null) {
-					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, element,mp, descriptionBuilder);
+					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb, element,mp, descriptionBuilder);
 				}
 			}
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p,cursorOffset,

@@ -99,6 +99,8 @@ is configured to exclude some package from compilation.
 &lt;pre autoTested=''&gt;
 apply plugin: 'java'
 sourceSets {
+main {
+java {
 exclude 'some/unwanted/package/**'
 }
 }

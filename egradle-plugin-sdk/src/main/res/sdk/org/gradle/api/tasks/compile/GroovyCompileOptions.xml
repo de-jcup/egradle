@@ -26,7 +26,7 @@
  This facilitates the following pattern:
  &lt;pre&gt;
  withConfig(configuration) {
-   // use compiler configuration DSL here
+   &lt;em class='comment'&gt;// use compiler configuration DSL here&lt;/em&gt;
  }
  &lt;/pre&gt;
  &lt;/p&gt;
@@ -233,7 +233,7 @@
  This facilitates the following pattern:
  &lt;pre&gt;
  withConfig(configuration) {
-   // use compiler configuration DSL here
+   &lt;em class='comment'&gt;// use compiler configuration DSL here&lt;/em&gt;
  }
  &lt;/pre&gt;
  &lt;/p&gt;

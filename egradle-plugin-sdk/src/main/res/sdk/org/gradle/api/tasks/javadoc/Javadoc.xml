@@ -22,7 +22,7 @@
  }
 
  dependencies {
-   //jaxDoclet "some.interesting:Dependency:1.0"
+   &lt;em class='comment'&gt;//jaxDoclet "some.interesting:Dependency:1.0"&lt;/em&gt;
  }
 
  task generateRestApiDocs(type: Javadoc) {
@@ -30,7 +30,7 @@
    destinationDir = reporting.file("rest-api-docs")
    options.docletpath = configurations.jaxDoclet.files.asType(List)
    options.doclet = "com.lunatech.doclets.jax.jaxrs.JAXRSDoclet"
-   options.addStringOption("jaxrscontext", "http://localhost:8080/myapp")
+   options.addStringOption("jaxrscontext", "http:&lt;em class='comment'&gt;//localhost:8080/myapp")&lt;/em&gt;
  }
  &lt;/pre&gt;
 

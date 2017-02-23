@@ -35,7 +35,7 @@
         <description> Creates a path for the given file.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;file The file to generate a path for
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useFileScheme Whether 'file://' prefixed URI should be used even for JAR files
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useFileScheme Whether 'file:&lt;em class='comment'&gt;//' prefixed URI should be used even for JAR files&lt;/em&gt;
 
 </description>
         <parameter type="java.io.File" name="file"/>

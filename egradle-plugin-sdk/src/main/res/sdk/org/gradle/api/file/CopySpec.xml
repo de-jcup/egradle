@@ -25,6 +25,9 @@
  allows constructs like:
  &lt;pre autoTested=''&gt;
  def myCopySpec = project.copySpec {
+   into('webroot')
+   exclude('**&amp;#47;.data/**')
+   from('src/main/webapp') {
      include '**&amp;#47;*.jsp'
    }
    from('src/main/js') {
@@ -40,6 +43,7 @@
 
  &lt;pre autoTested=''&gt;
  def contentSpec = copySpec {
+   from("content") {
      include "**&amp;#47;*.txt"
    }
  }
@@ -180,7 +184,7 @@
  &lt;p&gt;
  The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
  &lt;p&gt;
- This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String, org.gradle.api.Action)'&gt;#filesMatching(String, org.gradle.api.Action)&lt;/a&gt;.
+ This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String,'&gt;org.gradle.api.Action)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for files included by this copy spec.
  @see DuplicatesStrategy
@@ -351,6 +355,7 @@
 
  &lt;pre autoTested=''&gt;
  def contentSpec = copySpec {
+   from("content") {
      include "**&amp;#47;*.txt"
    }
  }
@@ -382,7 +387,7 @@
  &lt;p&gt;
  The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
  &lt;p&gt;
- This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String, org.gradle.api.Action)'&gt;#filesMatching(String, org.gradle.api.Action)&lt;/a&gt;.
+ This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String,'&gt;org.gradle.api.Action)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for files included by this copy spec.
  @see DuplicatesStrategy

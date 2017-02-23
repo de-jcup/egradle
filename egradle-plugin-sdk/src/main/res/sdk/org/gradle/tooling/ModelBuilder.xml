@@ -21,20 +21,20 @@
  try {
     ModelBuilder&amp;lt;GradleProject&amp;gt; builder = connection.model(GradleProject.class);
 
-    //if you use a different than usual build file name:
+    &lt;em class='comment'&gt;//if you use a different than usual build file name:&lt;/em&gt;
     builder.withArguments("--build-file", "theBuild.gradle");
 
-    //configure the standard input in case your build is interactive:
+    &lt;em class='comment'&gt;//configure the standard input in case your build is interactive:&lt;/em&gt;
     builder.setStandardInput(new ByteArrayInputStream("consume this!".getBytes()));
 
-    //if you want to listen to the progress events:
-    ProgressListener listener = null; // use your implementation
+    &lt;em class='comment'&gt;//if you want to listen to the progress events:&lt;/em&gt;
+    ProgressListener listener = null; &lt;em class='comment'&gt;// use your implementation&lt;/em&gt;
     builder.addProgressListener(listener);
 
-    //get the model:
+    &lt;em class='comment'&gt;//get the model:&lt;/em&gt;
     GradleProject project = builder.get();
 
-    //query the model for information:
+    &lt;em class='comment'&gt;//query the model for information:&lt;/em&gt;
     System.out.println("Available tasks: " + project.getTasks());
  } finally {
     connection.close();

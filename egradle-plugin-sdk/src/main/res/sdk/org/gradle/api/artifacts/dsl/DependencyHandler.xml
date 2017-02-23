@@ -14,21 +14,21 @@
  &lt;p&gt;Example shows a basic way of declaring dependencies.
  &lt;pre autoTested=''&gt;
  apply plugin: 'java'
- //so that we can use 'compile', 'testCompile' for dependencies
+ &lt;em class='comment'&gt;//so that we can use 'compile', 'testCompile' for dependencies&lt;/em&gt;
 
  dependencies {
-   //for dependencies found in artifact repositories you can use
-   //the group:name:version notation
+   &lt;em class='comment'&gt;//for dependencies found in artifact repositories you can use&lt;/em&gt;
+   &lt;em class='comment'&gt;//the group:name:version notation&lt;/em&gt;
    compile 'commons-lang:commons-lang:2.6'
    testCompile 'org.mockito:mockito:1.9.0-rc1'
 
-   //map-style notation:
+   &lt;em class='comment'&gt;//map-style notation:&lt;/em&gt;
    compile group: 'com.google.code.guice', name: 'guice', version: '1.0'
 
-   //declaring arbitrary files as dependencies
+   &lt;em class='comment'&gt;//declaring arbitrary files as dependencies&lt;/em&gt;
    compile files('hibernate.jar', 'libs/spring.jar')
 
-   //putting all jars from 'libs' onto compile classpath
+   &lt;em class='comment'&gt;//putting all jars from 'libs' onto compile classpath&lt;/em&gt;
    compile fileTree('libs')
  }
  &lt;/pre&gt;
@@ -38,6 +38,7 @@
 
  &lt;pre&gt;
  dependencies {
+     &lt;i&gt;configurationName&lt;/i&gt;(&lt;i&gt;dependencyNotation&lt;/i&gt;){
          &lt;i&gt;configStatement1&lt;/i&gt;
          &lt;i&gt;configStatement2&lt;/i&gt;
      }
@@ -54,18 +55,19 @@
  &lt;/ul&gt;
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that I can declare 'compile' dependencies
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that I can declare 'compile' dependencies&lt;/em&gt;
 
  dependencies {
-     //in case of versions conflict '3.1' version of hibernate wins:
+   compile('org.hibernate:hibernate:3.1') {
+     &lt;em class='comment'&gt;//in case of versions conflict '3.1' version of hibernate wins:&lt;/em&gt;
      force = true
 
-     //excluding a particular transitive dependency:
-     exclude module: 'cglib' //by artifact name
-     exclude group: 'org.jmock' //by group
-     exclude group: 'org.unwanted', module: 'iAmBuggy' //by both name and group
+     &lt;em class='comment'&gt;//excluding a particular transitive dependency:&lt;/em&gt;
+     exclude module: 'cglib' &lt;em class='comment'&gt;//by artifact name&lt;/em&gt;
+     exclude group: 'org.jmock' &lt;em class='comment'&gt;//by group&lt;/em&gt;
+     exclude group: 'org.unwanted', module: 'iAmBuggy' &lt;em class='comment'&gt;//by both name and group&lt;/em&gt;
 
-     //disabling all transitive dependencies of this dependency
+     &lt;em class='comment'&gt;//disabling all transitive dependencies of this dependency&lt;/em&gt;
      transitive = false
    }
  }
@@ -78,11 +80,18 @@
  &lt;/ul&gt;
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that I can declare 'compile' dependencies
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that I can declare 'compile' dependencies&lt;/em&gt;
 
  dependencies {
-       //useful when some artifact properties unconventional
-       name = 'someArtifact' //artifact name different than module name
+   &lt;em class='comment'&gt;//configuring dependency to specific configuration of the module&lt;/em&gt;
+   compile configuration: 'someConf', group: 'org.someOrg', name: 'someModule', version: '1.0'
+
+   &lt;em class='comment'&gt;//configuring dependency on 'someLib' module&lt;/em&gt;
+   compile(group: 'org.myorg', name: 'someLib', version:'1.0') {
+     &lt;em class='comment'&gt;//explicitly adding the dependency artifact:&lt;/em&gt;
+     artifact {
+       &lt;em class='comment'&gt;//useful when some artifact properties unconventional&lt;/em&gt;
+       name = 'someArtifact' &lt;em class='comment'&gt;//artifact name different than module name&lt;/em&gt;
        extension = 'someExt'
        type = 'someType'
        classifier = 'someClassifier'
@@ -120,15 +129,15 @@
 
  &lt;pre autoTested=''&gt;
  apply plugin: 'java'
- //so that we can use 'compile', 'testCompile' for dependencies
+ &lt;em class='comment'&gt;//so that we can use 'compile', 'testCompile' for dependencies&lt;/em&gt;
 
  dependencies {
-   //for dependencies found in artifact repositories you can use
-   //the string notation, e.g. group:name:version
+   &lt;em class='comment'&gt;//for dependencies found in artifact repositories you can use&lt;/em&gt;
+   &lt;em class='comment'&gt;//the string notation, e.g. group:name:version&lt;/em&gt;
    compile 'commons-lang:commons-lang:2.6'
    testCompile 'org.mockito:mockito:1.9.0-rc1'
 
-   //map notation:
+   &lt;em class='comment'&gt;//map notation:&lt;/em&gt;
    compile group: 'com.google.code.guice', name: 'guice', version: '1.0'
  }
  &lt;/pre&gt;
@@ -154,13 +163,13 @@
 
  &lt;pre autoTested=''&gt;
  apply plugin: 'java'
- //so that we can use 'compile', 'testCompile' for dependencies
+ &lt;em class='comment'&gt;//so that we can use 'compile', 'testCompile' for dependencies&lt;/em&gt;
 
  dependencies {
-   //declaring arbitrary files as dependencies
+   &lt;em class='comment'&gt;//declaring arbitrary files as dependencies&lt;/em&gt;
    compile files('hibernate.jar', 'libs/spring.jar')
 
-   //putting all jars from 'libs' onto compile classpath
+   &lt;em class='comment'&gt;//putting all jars from 'libs' onto compile classpath&lt;/em&gt;
    compile fileTree('libs')
  }
  &lt;/pre&gt;
@@ -182,18 +191,18 @@
  It is particularly useful for Gradle plugin development. Example:&lt;/p&gt;
 
  &lt;pre autoTested=''&gt;
- //Our Gradle plugin is written in groovy
+ &lt;em class='comment'&gt;//Our Gradle plugin is written in groovy&lt;/em&gt;
  apply plugin: 'groovy'
- //now we can use the 'compile' configuration for declaring dependencies
+ &lt;em class='comment'&gt;//now we can use the 'compile' configuration for declaring dependencies&lt;/em&gt;
 
  dependencies {
-   //we will use the Groovy version that ships with Gradle:
+   &lt;em class='comment'&gt;//we will use the Groovy version that ships with Gradle:&lt;/em&gt;
    compile localGroovy()
 
-   //our plugin requires Gradle API interfaces and classes to compile:
+   &lt;em class='comment'&gt;//our plugin requires Gradle API interfaces and classes to compile:&lt;/em&gt;
    compile gradleApi()
 
-   //we will use the Gradle test-kit to test build logic:
+   &lt;em class='comment'&gt;//we will use the Gradle test-kit to test build logic:&lt;/em&gt;
    testCompile gradleTestKit()
  }
  &lt;/pre&gt;

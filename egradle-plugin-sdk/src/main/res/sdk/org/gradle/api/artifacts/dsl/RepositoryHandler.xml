@@ -78,7 +78,7 @@
     <method name="jcenter" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository" documented="true">
         <description> Adds a repository which looks in Bintray's JCenter repository for dependencies.
  &lt;p&gt;
- The URL used to access this repository is {@literal "https://jcenter.bintray.com/"}.
+ The URL used to access this repository is {@literal "https:&lt;em class='comment'&gt;//jcenter.bintray.com/"}.&lt;/em&gt;
  The behavior of this repository is otherwise the same as those added by &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)'&gt;#maven(org.gradle.api.Action)&lt;/a&gt;.
  &lt;p&gt;
  Examples:
@@ -96,17 +96,18 @@
     <method name="jcenter" returnType="org.gradle.api.artifacts.repositories.MavenArtifactRepository" documented="true">
         <description> Adds a repository which looks in Bintray's JCenter repository for dependencies.
  &lt;p&gt;
- The URL used to access this repository is {@literal "https://jcenter.bintray.com/"}.
+ The URL used to access this repository is {@literal "https:&lt;em class='comment'&gt;//jcenter.bintray.com/"}.&lt;/em&gt;
  The behavior of this repository is otherwise the same as those added by &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#maven(org.gradle.api.Action)'&gt;#maven(org.gradle.api.Action)&lt;/a&gt;.
  &lt;p&gt;
  Examples:
  &lt;pre autoTested=""&gt;
  repositories {
-     artifactUrls = ["http://www.mycompany.com/artifacts1", "http://www.mycompany.com/artifacts2"]
+   jcenter {
+     artifactUrls = ["http:&lt;em class='comment'&gt;//www.mycompany.com/artifacts1", "http://www.mycompany.com/artifacts2"]&lt;/em&gt;
    }
    jcenter {
      name = "nonDefaultName"
-     artifactUrls = ["http://www.mycompany.com/artifacts1"]
+     artifactUrls = ["http:&lt;em class='comment'&gt;//www.mycompany.com/artifacts1"]&lt;/em&gt;
    }
  }
  &lt;/pre&gt;
@@ -176,8 +177,8 @@
  &lt;p&gt;Examples:
  &lt;pre autoTested=""&gt;
  repositories {
-     mavenCentral artifactUrls: ["http://www.mycompany.com/artifacts1", "http://www.mycompany.com/artifacts2"]
-     mavenCentral name: "nonDefaultName", artifactUrls: ["http://www.mycompany.com/artifacts1"]
+     mavenCentral artifactUrls: ["http:&lt;em class='comment'&gt;//www.mycompany.com/artifacts1", "http://www.mycompany.com/artifacts2"]&lt;/em&gt;
+     mavenCentral name: "nonDefaultName", artifactUrls: ["http:&lt;em class='comment'&gt;//www.mycompany.com/artifacts1"]&lt;/em&gt;
  }
  &lt;/pre&gt;
  &lt;/p&gt;

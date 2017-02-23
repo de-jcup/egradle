@@ -53,7 +53,7 @@
  Properties that are themselves of a managed type are also supported.
  &lt;p&gt;
  Currently, the only collection types that are supported are &lt;a href='type://ModelSet'&gt;ModelSet&lt;/a&gt; and &lt;a href='type://ModelMap'&gt;ModelMap&lt;/a&gt;, as well as &lt;a href='type://java.util.Set'&gt;java.util.Set&lt;/a&gt; or &lt;a href='type://java.util.List'&gt;java.util.List&lt;/a&gt;
- of &lt;a href='type://org.gradle.model.internal.manage.schema.extract.ScalarTypes scalar types'&gt;org.gradle.model.internal.manage.schema.extract.ScalarTypes scalar types&lt;/a&gt;, where scalar types is either one of the supported immutable JDK types above or an enumeration.
+ of &lt;a href='type://org.gradle.model.internal.manage.schema.extract.ScalarTypes'&gt;scalar types&lt;/a&gt;, where scalar types is either one of the supported immutable JDK types above or an enumeration.
  &lt;p&gt;
  Properties of any other type must have their getter annotated with &lt;a href='type://Unmanaged'&gt;Unmanaged&lt;/a&gt;.
  An unmanaged property is not transparent to the model infrastructure and is guaranteed to be immutable when realized.

@@ -14,11 +14,11 @@
  GradleConnection connection = builder.build();
 
  try {
-    // obtain some information from the build
+    &lt;em class='comment'&gt;// obtain some information from the build&lt;/em&gt;
     ModelResults&lt;BuildInvocations&gt; invocations = connection.models(BuildInvocations.class)
       .get();
 
-    // run some tasks
+    &lt;em class='comment'&gt;// run some tasks&lt;/em&gt;
     BuildInvocations firstBuild = invocations.iterator().next().getModel();
     TaskSelector taskToRun = firstBuild.getTaskSelectors().getAt(0);
 

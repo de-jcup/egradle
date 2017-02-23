@@ -71,7 +71,7 @@
  &lt;a name="properties"/&gt; &lt;h4&gt;Dynamic Properties&lt;/h4&gt;
 
  &lt;p&gt;A &lt;a href='type://Task'&gt;Task&lt;/a&gt; has 4 'scopes' for properties. You can access these properties by name from the build file or by
- calling the &lt;a href='type://org.gradle.api.Task#property(String)'&gt;#property(String)&lt;/a&gt; method. You can change the value of these properties by calling the &lt;a href='type://org.gradle.api.Task#setProperty(String, Object)'&gt;#setProperty(String, Object)&lt;/a&gt; method.&lt;/p&gt;
+ calling the &lt;a href='type://org.gradle.api.Task#property(String)'&gt;#property(String)&lt;/a&gt; method. You can change the value of these properties by calling the &lt;a href='type://org.gradle.api.Task#setProperty(String,'&gt;Object)&lt;/a&gt; method.&lt;/p&gt;
 
  &lt;ul&gt;
 
@@ -152,7 +152,7 @@
         <parameter type="java.lang.Object" name="paths"/>
     </method>
     <method name="dependsOnTaskDidWork" returnType="boolean">
-        <description> &lt;p&gt;Checks if any of the tasks that this task depends on &lt;a href='type://Task#getDidWork() didWork'&gt;Task#getDidWork() didWork&lt;/a&gt;.&lt;/p&gt;
+        <description> &lt;p&gt;Checks if any of the tasks that this task depends on &lt;a href='type://Task#getDidWork()'&gt;didWork&lt;/a&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if any task this task depends on did work.
 
@@ -438,6 +438,7 @@
 
  &lt;p&gt;Typical usage (from Java):&lt;/p&gt;
  &lt;pre&gt;myTask.onlyIf(new Spec&amp;lt;Task&gt;() {
+    boolean isSatisfiedBy(Task task) {
        return task.dependsOnTaskDidWork();
     }
  });

@@ -6,15 +6,21 @@
  &lt;pre autoTested=''&gt;
  apply plugin: 'java'
  apply plugin: 'eclipse'
- apply plugin: 'eclipse-wtp' //for web projects only
+ apply plugin: 'eclipse-wtp' &lt;em class='comment'&gt;//for web projects only&lt;/em&gt;
 
- eclipse &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+ eclipse {
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   project {
+     &lt;em class='comment'&gt;//see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;&lt;/em&gt;
    }
 
-   classpath &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt;
+   classpath {
+     &lt;em class='comment'&gt;//see docs for &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt;&lt;/em&gt;
    }
 
-   wtp &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+   wtp {
+     &lt;em class='comment'&gt;//see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;&lt;/em&gt;
    }
  }
  &lt;/pre&gt;

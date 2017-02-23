@@ -51,7 +51,7 @@
 
  &lt;p&gt;
  Plugins can be used to modularise and reuse project configuration.
- Plugins can be applied using the &lt;a href='type://PluginAware#apply(java.util.Map)'&gt;PluginAware#apply(java.util.Map)&lt;/a&gt; method, or by using the &lt;a href='type://org.gradle.plugin.use.PluginDependenciesSpec plugins script block'&gt;org.gradle.plugin.use.PluginDependenciesSpec plugins script block&lt;/a&gt;.
+ Plugins can be applied using the &lt;a href='type://PluginAware#apply(java.util.Map)'&gt;PluginAware#apply(java.util.Map)&lt;/a&gt; method, or by using the &lt;a href='type://org.gradle.plugin.use.PluginDependenciesSpec'&gt;plugins script block&lt;/a&gt;.
  &lt;/p&gt;
 
  &lt;a name="properties"/&gt; &lt;h3&gt;Properties&lt;/h3&gt;
@@ -61,8 +61,8 @@
  means, that you can use any of the methods and properties on the &lt;code&gt;Project&lt;/code&gt; interface directly in your script.
  &lt;/p&gt;&lt;p&gt;For example:
  &lt;pre&gt;
- defaultTasks('some-task')  // Delegates to Project.defaultTasks()
- reportsDir = file('reports') // Delegates to Project.file() and the Java Plugin
+ defaultTasks('some-task')  &lt;em class='comment'&gt;// Delegates to Project.defaultTasks()&lt;/em&gt;
+ reportsDir = file('reports') &lt;em class='comment'&gt;// Delegates to Project.file() and the Java Plugin&lt;/em&gt;
  &lt;/pre&gt;
  &lt;p&gt;You can also access the &lt;code&gt;Project&lt;/code&gt; instance using the &lt;code&gt;project&lt;/code&gt; property. This can make the
  script clearer in some cases. For example, you could use &lt;code&gt;project.name&lt;/code&gt; rather than &lt;code&gt;name&lt;/code&gt; to
@@ -100,7 +100,7 @@
  scope it finds the property in. If not found, an exception is thrown. See &lt;a href='type://org.gradle.api.Project#property(String)'&gt;#property(String)&lt;/a&gt; for more details.&lt;/p&gt;
 
  &lt;p&gt;When writing a property, the project searches the above scopes in order, and sets the property in the first scope
- it finds the property in. If not found, an exception is thrown. See &lt;a href='type://org.gradle.api.Project#setProperty(String, Object)'&gt;#setProperty(String, Object)&lt;/a&gt; for more details.&lt;/p&gt;
+ it finds the property in. If not found, an exception is thrown. See &lt;a href='type://org.gradle.api.Project#setProperty(String,'&gt;Object)&lt;/a&gt; for more details.&lt;/p&gt;
 
  &lt;a name="extraproperties"/&gt; &lt;h4&gt;Extra Properties&lt;/h4&gt;
 
@@ -113,7 +113,7 @@
  task doStuff {
      ext.prop2 = "bar"
  }
- subprojects {prop3} = false }
+ subprojects { ext.${prop3} = false }
  &lt;/pre&gt;
 
  Reading extra properties is done through the &amp;quot;ext&amp;quot; or through the owning object.
@@ -121,7 +121,7 @@
  &lt;pre&gt;
  ext.isSnapshot = version.endsWith("-SNAPSHOT")
  if (isSnapshot) {
-     // do snapshot stuff
+     &lt;em class='comment'&gt;// do snapshot stuff&lt;/em&gt;
  }
  &lt;/pre&gt;
 
@@ -229,17 +229,17 @@ Default is "src/main/application".
  &lt;p&gt;Example:
  &lt;pre autoTested=''&gt;
  configurations {
-   //declaring new configuration that will be used to associate with artifacts
+   &lt;em class='comment'&gt;//declaring new configuration that will be used to associate with artifacts&lt;/em&gt;
    schema
  }
 
  task schemaJar(type: Jar) {
-   //some imaginary task that creates a jar artifact with the schema
+   &lt;em class='comment'&gt;//some imaginary task that creates a jar artifact with the schema&lt;/em&gt;
  }
 
- //associating the task that produces the artifact with the configuration
+ &lt;em class='comment'&gt;//associating the task that produces the artifact with the configuration&lt;/em&gt;
  artifacts {
-   //configuration name and the task:
+   &lt;em class='comment'&gt;//configuration name and the task:&lt;/em&gt;
    schema schemaJar
  }
  &lt;/pre&gt;
@@ -292,9 +292,7 @@ Default is "src/main/application".
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="configure" returnType="java.lang.Iterable" documented="true">
-        <description> Configures a collection of objects via a closure. This is equivalent to calling &lt;a href='type://org.gradle.api.Project#configure(Object,
- groovy.lang.Closure)'&gt;#configure(Object,
- groovy.lang.Closure)&lt;/a&gt; for each of the given objects.
+        <description> Configures a collection of objects via a closure. This is equivalent to calling &lt;a href='type://org.gradle.api.Project#configure(Object,'&gt;groovy.lang.Closure)&lt;/a&gt; for each of the given objects.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;objects The objects to configure
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure with configure statements
@@ -398,6 +396,9 @@ Default is "src/main/application".
  Note that CopySpecs can be nested:
  &lt;pre&gt;
  copy {
+    into 'build/webroot'
+    exclude '**&amp;#47;.svn/**'
+    from('src/main/webapp') {
        include '**&amp;#47;*.jsp'
        filter(ReplaceTokens, tokens:[copyright:'2009', version:'2.3.1'])
     }
@@ -823,14 +824,16 @@ The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; i
  tasks. See example below.&lt;/p&gt;
  &lt;pre autoTested=''&gt;
  task printChecksum {
-       //using ant checksum task to store the file checksum in the checksumOut ant property
+   doLast {
+     ant {
+       &lt;em class='comment'&gt;//using ant checksum task to store the file checksum in the checksumOut ant property&lt;/em&gt;
        checksum(property: 'checksumOut', file: 'someFile.txt')
 
-       //we can refer to the ant property created by checksum task:
+       &lt;em class='comment'&gt;//we can refer to the ant property created by checksum task:&lt;/em&gt;
        println "The checksum is: " + checksumOut
      }
 
-     //we can refer to the ant property later as well:
+     &lt;em class='comment'&gt;//we can refer to the ant property later as well:&lt;/em&gt;
      println "I just love to print checksums: " + ant.checksumOut
    }
  }
@@ -851,6 +854,10 @@ The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; i
  Here's how it would look like in gradle. Observe how the ant XML is represented in groovy by the ant builder
  &lt;pre autoTested=''&gt;
  task printChecksum {
+   doLast {
+     ant {
+       checksum(property: 'checksumOut') {
+         fileset(dir: '.') {
            include name: 'agile1.txt'
          }
        }
@@ -1623,6 +1630,8 @@ is configured to exclude some package from compilation.
 &lt;pre autoTested=''&gt;
 apply plugin: 'java'
 sourceSets {
+main {
+java {
 exclude 'some/unwanted/package/**'
 }
 }
@@ -1673,13 +1682,13 @@ exclude 'some/unwanted/package/**'
  task untar(type: Copy) {
    from tarTree('someCompressedTar.gzip')
 
-   //tar tree attempts to guess the compression based on the file extension
-   //however if you must specify the compression explicitly you can:
+   &lt;em class='comment'&gt;//tar tree attempts to guess the compression based on the file extension&lt;/em&gt;
+   &lt;em class='comment'&gt;//however if you must specify the compression explicitly you can:&lt;/em&gt;
    from tarTree(resources.gzip('someTar.ext'))
 
-   //in case you work with unconventionally compressed tars
-   //you can provide your own implementation of a ReadableResource:
-   //from tarTree(yourOwnResource as ReadableResource)
+   &lt;em class='comment'&gt;//in case you work with unconventionally compressed tars&lt;/em&gt;
+   &lt;em class='comment'&gt;//you can provide your own implementation of a ReadableResource:&lt;/em&gt;
+   &lt;em class='comment'&gt;//from tarTree(yourOwnResource as ReadableResource)&lt;/em&gt;
 
    into 'dest'
  }
@@ -1693,7 +1702,7 @@ exclude 'some/unwanted/package/**'
     </method>
     <method name="task" returnType="org.gradle.api.Task" documented="true">
         <description> &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. Calling this method is equivalent to
- calling &lt;a href='type://org.gradle.api.Project#task(java.util.Map, String)'&gt;#task(java.util.Map, String)&lt;/a&gt; with an empty options map.&lt;/p&gt;
+ calling &lt;a href='type://org.gradle.api.Project#task(java.util.Map,'&gt;String)&lt;/a&gt; with an empty options map.&lt;/p&gt;
 
  &lt;p&gt;After the task is added to the project, it is made available as a property of the project, so that you can
  reference the task by name in your build file.  See &lt;a href="#properties"&gt;here&lt;/a&gt; for more details&lt;/p&gt;
@@ -1769,7 +1778,7 @@ exclude 'some/unwanted/package/**'
     <method name="task" returnType="org.gradle.api.Task" delegationTarget="Task" documented="true">
         <description> &lt;p&gt;Creates a &lt;a href='type://Task'&gt;Task&lt;/a&gt; with the given name and adds it to this project. Before the task is returned, the given
  closure is executed to configure the task. A map of creation options can be passed to this method to control how
- the task is created. See &lt;a href='type://org.gradle.api.Project#task(java.util.Map, String)'&gt;#task(java.util.Map, String)&lt;/a&gt; for the available options.&lt;/p&gt;
+ the task is created. See &lt;a href='type://org.gradle.api.Project#task(java.util.Map,'&gt;String)&lt;/a&gt; for the available options.&lt;/p&gt;
 
  &lt;p&gt;After the task is added to the project, it is made available as a property of the project, so that you can
  reference the task by name in your build file.  See &lt;a href="#properties"&gt;here&lt;/a&gt; for more details&lt;/p&gt;
@@ -1838,14 +1847,16 @@ exclude 'some/unwanted/package/**'
  tasks. See example below.&lt;/p&gt;
  &lt;pre autoTested=''&gt;
  task printChecksum {
-       //using ant checksum task to store the file checksum in the checksumOut ant property
+   doLast {
+     ant {
+       &lt;em class='comment'&gt;//using ant checksum task to store the file checksum in the checksumOut ant property&lt;/em&gt;
        checksum(property: 'checksumOut', file: 'someFile.txt')
 
-       //we can refer to the ant property created by checksum task:
+       &lt;em class='comment'&gt;//we can refer to the ant property created by checksum task:&lt;/em&gt;
        println "The checksum is: " + checksumOut
      }
 
-     //we can refer to the ant property later as well:
+     &lt;em class='comment'&gt;//we can refer to the ant property later as well:&lt;/em&gt;
      println "I just love to print checksums: " + ant.checksumOut
    }
  }
@@ -1866,6 +1877,10 @@ exclude 'some/unwanted/package/**'
  Here's how it would look like in gradle. Observe how the ant XML is represented in groovy by the ant builder
  &lt;pre autoTested=''&gt;
  task printChecksum {
+   doLast {
+     ant {
+       checksum(property: 'checksumOut') {
+         fileset(dir: '.') {
            include name: 'agile1.txt'
          }
        }

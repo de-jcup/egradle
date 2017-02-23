@@ -186,12 +186,14 @@
  &lt;p&gt;
  An example of hooking into the projectsLoaded to configure buildscript classpath from the init script.
  &lt;pre autoTested=''&gt;
- //init.gradle
+ &lt;em class='comment'&gt;//init.gradle&lt;/em&gt;
  gradle.projectsLoaded {
-       //...
+   rootProject.buildscript {
+     repositories {
+       &lt;em class='comment'&gt;//...&lt;/em&gt;
      }
      dependencies {
-       //...
+       &lt;em class='comment'&gt;//...&lt;/em&gt;
      }
    }
  }

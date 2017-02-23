@@ -11,13 +11,15 @@ public class LazyLanguageElementHTMLDescriptionBuilder {
 	private String fgColor;
 	private String bgColor;
 	private LanguageElementMetaData metaData;
+	private String commentColorWeb;
 	
-	public LazyLanguageElementHTMLDescriptionBuilder(String fgColor, String bgColor, LanguageElement element, LanguageElementMetaData metaData,  HTMLDescriptionBuilder builder){
+	public LazyLanguageElementHTMLDescriptionBuilder(String fgColor, String bgColor, String commentColor, LanguageElement element, LanguageElementMetaData metaData,  HTMLDescriptionBuilder builder){
 		this.element=element;
 		this.metaData=metaData;
 		this.builder=builder;
 		this.fgColor = fgColor;
 		this.bgColor = bgColor;
+		this.commentColorWeb=commentColor;
 	}
 	public String getFgColor() {
 		return fgColor;
@@ -30,6 +32,10 @@ public class LazyLanguageElementHTMLDescriptionBuilder {
 	public String getBgColor() {
 		return bgColor;
 	}
+
+	public String getCommentColor() {
+		return commentColorWeb;
+	}
 	
 	public String createHTML(){
 		if (element==null){
@@ -38,6 +44,6 @@ public class LazyLanguageElementHTMLDescriptionBuilder {
 		if (builder==null){
 			return "";
 		}
-		return builder.buildHTMLDescription(fgColor, bgColor, metaData, element);
+		return builder.buildHTMLDescription(fgColor, bgColor,commentColorWeb, metaData, element,null);
 	}
 }

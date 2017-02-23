@@ -11,6 +11,8 @@
  apply plugin: "distribution"
 
  distributions {
+     main {
+         contents {
              from "src/readme"
          }
      }

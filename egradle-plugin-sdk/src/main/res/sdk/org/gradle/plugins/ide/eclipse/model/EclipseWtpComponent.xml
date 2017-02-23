@@ -6,7 +6,7 @@
  Bear in mind that usually you don't have to configure them directly because Gradle configures it for free!
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'war' //or 'ear' or 'java'
+ apply plugin: 'war' &lt;em class='comment'&gt;//or 'ear' or 'java'&lt;/em&gt;
  apply plugin: 'eclipse-wtp'
 
  configurations {
@@ -15,30 +15,36 @@
  }
 
  eclipse {
-       //you can configure the context path:
+
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting file(s) to be replaced by variables (files):&lt;/em&gt;
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   wtp {
+     component {
+       &lt;em class='comment'&gt;//you can configure the context path:&lt;/em&gt;
        contextPath = 'someContextPath'
 
-       //you can configure the deployName:
+       &lt;em class='comment'&gt;//you can configure the deployName:&lt;/em&gt;
        deployName = 'killerApp'
 
-       //you can alter the wb-resource elements. sourceDirs is a ConventionProperty.
-       //non-existing source dirs won't be added to the component file.
+       &lt;em class='comment'&gt;//you can alter the wb-resource elements. sourceDirs is a ConventionProperty.&lt;/em&gt;
+       &lt;em class='comment'&gt;//non-existing source dirs won't be added to the component file.&lt;/em&gt;
        sourceDirs += file('someExtraFolder')
 
-       // dependencies to mark as deployable with lib folder deploy path
+       &lt;em class='comment'&gt;// dependencies to mark as deployable with lib folder deploy path&lt;/em&gt;
        libConfigurations += [ configurations.someInterestingConfiguration ]
 
-       // dependencies to mark as deployable with root folder deploy path
+       &lt;em class='comment'&gt;// dependencies to mark as deployable with root folder deploy path&lt;/em&gt;
        rootConfigurations += [ configurations.someInterestingConfiguration ]
 
-       // dependencies to exclude from wtp deployment
+       &lt;em class='comment'&gt;// dependencies to exclude from wtp deployment&lt;/em&gt;
        minusConfigurations &lt;&lt; configurations.anotherConfiguration
 
-       //you can add a wb-resource elements; mandatory keys: 'sourcePath', 'deployPath':
-       //if sourcePath points to non-existing folder it will *not* be added.
+       &lt;em class='comment'&gt;//you can add a wb-resource elements; mandatory keys: 'sourcePath', 'deployPath':&lt;/em&gt;
+       &lt;em class='comment'&gt;//if sourcePath points to non-existing folder it will *not* be added.&lt;/em&gt;
        resource sourcePath: 'extra/resource', deployPath: 'deployment/resource'
 
-       //you can add a wb-property elements; mandatory keys: 'name', 'value':
+       &lt;em class='comment'&gt;//you can add a wb-property elements; mandatory keys: 'name', 'value':&lt;/em&gt;
        property name: 'moodOfTheDay', value: ':-D'
      }
    }
@@ -58,18 +64,26 @@
  apply plugin: 'eclipse-wtp'
 
  eclipse {
+
+   wtp {
+     component {
+       file {
+         &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+         withXml {
            def node = it.asNode()
            node.appendNode('xml', 'is what I love')
          }
 
-         //closure executed after wtp component file content is loaded from existing file
-         //but before gradle build information is merged
-         beforeMerged &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here
+         &lt;em class='comment'&gt;//closure executed after wtp component file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+         beforeMerged { wtpComponent -&gt;
+           &lt;em class='comment'&gt;//tinker with &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here&lt;/em&gt;
          }
 
-         //closure executed after wtp component file content is loaded from existing file
-         //and after gradle build information is merged
-         whenMerged &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here
+         &lt;em class='comment'&gt;//closure executed after wtp component file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+         whenMerged { wtpComponent -&gt;
+           &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here&lt;/em&gt;
          }
        }
      }

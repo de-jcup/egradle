@@ -5,16 +5,29 @@
  &lt;p&gt;
  Examples:
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that there are some configurations
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that there are some configurations&lt;/em&gt;
 
  configurations.all {
+   resolutionStrategy {
+     &lt;em class='comment'&gt;// fail eagerly on version conflict (includes transitive dependencies)&lt;/em&gt;
+     &lt;em class='comment'&gt;// e.g. multiple different versions of the same dependency (group and name are equal)&lt;/em&gt;
+     failOnVersionConflict()
+
+     &lt;em class='comment'&gt;// force certain versions of dependencies (including transitive)&lt;/em&gt;
+     &lt;em class='comment'&gt;//  *append new forced modules:&lt;/em&gt;
+     force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4'
+     &lt;em class='comment'&gt;//  *replace existing forced modules with new ones:&lt;/em&gt;
+     forcedModules = ['asm:asm-all:3.3.1']
+
+     &lt;em class='comment'&gt;// add dependency substitution rules&lt;/em&gt;
+     dependencySubstitution {
        substitute module('org.gradle:api') with project(':api')
        substitute project(':util') with module('org.gradle:util:3.0')
      }
 
-     // cache dynamic versions for 10 minutes
+     &lt;em class='comment'&gt;// cache dynamic versions for 10 minutes&lt;/em&gt;
      cacheDynamicVersionsFor 10*60, 'seconds'
-     // don't cache changing modules at all
+     &lt;em class='comment'&gt;// don't cache changing modules at all&lt;/em&gt;
      cacheChangingModulesFor 0, 'seconds'
    }
  }
@@ -26,7 +39,7 @@
     <method name="cacheChangingModulesFor" returnType="void" documented="true">
         <description> Sets the length of time that changing modules will be cached, with units expressed as a String.
 
- &lt;p&gt;A convenience method for &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheChangingModulesFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String.
+ &lt;p&gt;A convenience method for &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#cacheChangingModulesFor(int,'&gt;java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String.
  Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
@@ -53,7 +66,7 @@
     <method name="cacheDynamicVersionsFor" returnType="void" documented="true">
         <description> Sets the length of time that dynamic versions will be cached, with units expressed as a String.
 
- &lt;p&gt;A convenience method for &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)'&gt;#cacheDynamicVersionsFor(int, java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String.
+ &lt;p&gt;A convenience method for &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#cacheDynamicVersionsFor(int,'&gt;java.util.concurrent.TimeUnit)&lt;/a&gt; with units expressed as a String.
  Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
@@ -93,13 +106,14 @@
  &lt;p/&gt;
  Examples:
  &lt;pre autoTested=''&gt;
- // add dependency substitution rules
+ &lt;em class='comment'&gt;// add dependency substitution rules&lt;/em&gt;
  configurations.all {
-     // Substitute project and module dependencies
+   resolutionStrategy.dependencySubstitution {
+     &lt;em class='comment'&gt;// Substitute project and module dependencies&lt;/em&gt;
      substitute module('org.gradle:api') with project(':api')
      substitute project(':util') with module('org.gradle:util:3.0')
 
-     // Substitute one module dependency for another
+     &lt;em class='comment'&gt;// Substitute one module dependency for another&lt;/em&gt;
      substitute module('org.gradle:api:2.0') with module('org.gradle:api:2.1')
    }
  }
@@ -119,11 +133,17 @@
  Example:
  &lt;pre autoTested=''&gt;
  configurations {
+   compile.resolutionStrategy {
+     eachDependency { DependencyResolveDetails details -&gt;
+       &lt;em class='comment'&gt;//specifying a fixed version for all libraries with 'org.gradle' group&lt;/em&gt;
+       if (details.requested.group == 'org.gradle') {
          details.useVersion '1.4'
        }
      }
-     eachDependency {
-          //changing the name:
+     eachDependency { details -&gt;
+       &lt;em class='comment'&gt;//multiple actions can be specified&lt;/em&gt;
+       if (details.requested.name == 'groovy-all') {
+          &lt;em class='comment'&gt;//changing the name:&lt;/em&gt;
           details.useTarget group: details.requested.group, name: 'groovy', version: details.requested.version
        }
      }
@@ -146,7 +166,7 @@
  The check includes both first level and transitive dependencies. See example below:
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that there are some configurations
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that there are some configurations&lt;/em&gt;
 
  configurations.all {
    resolutionStrategy.failOnVersionConflict()
@@ -170,7 +190,7 @@
  &lt;/ul&gt;
  Example:
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that there are some configurations
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that there are some configurations&lt;/em&gt;
 
  configurations.all {
    resolutionStrategy.force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4'
@@ -215,7 +235,7 @@
  &lt;p&gt;
  Example:
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that there are some configurations
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that there are some configurations&lt;/em&gt;
 
  configurations.all {
    resolutionStrategy.forcedModules = ['asm:asm-all:3.3.1', 'commons-io:commons-io:1.4']

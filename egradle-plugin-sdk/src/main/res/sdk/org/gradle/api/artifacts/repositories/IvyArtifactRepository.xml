@@ -57,7 +57,7 @@
     </method>
     <method name="layout" returnType="void" documented="true">
         <description> Specifies the layout to use with this repository, based on the root url.
- See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, Closure)'&gt;#layout(String, Closure)&lt;/a&gt;.
+ See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String,'&gt;Closure)&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
 
@@ -65,7 +65,7 @@
         <parameter type="java.lang.String" name="layoutName"/>
     </method>
     <method name="layout" returnType="void" delegationTarget="RepositoryLayout" documented="true">
-        <description> Specifies how the items of the repository are organized. See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, org.gradle.api.Action)'&gt;#layout(String, org.gradle.api.Action)&lt;/a&gt;
+        <description> Specifies how the items of the repository are organized. See &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String,'&gt;org.gradle.api.Action)&lt;/a&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The closure used to configure the layout.
@@ -109,12 +109,14 @@
      &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/p&gt;
- &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this pattern is currently &lt;a href='type://org.gradle.api.Incubating incubating'&gt;org.gradle.api.Incubating incubating&lt;/a&gt;.&lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this pattern is currently &lt;a href='type://org.gradle.api.Incubating'&gt;incubating&lt;/a&gt;.&lt;/p&gt;
  &lt;h4&gt;'pattern'&lt;/h4&gt;
  &lt;p&gt;
  A repository layout that allows custom patterns to be defined. eg:
  &lt;pre autoTested=""&gt;
  repositories {
+     ivy {
+         layout 'pattern' , {
              artifact '[module]/[revision]/[artifact](.[ext])'
              ivy '[module]/[revision]/ivy.xml'
          }
@@ -136,7 +138,7 @@
         <description> Sets the base URL of this repository. The provided value is evaluated as per &lt;a href='type://org.gradle.api.Project#uri(Object)'&gt;org.gradle.api.Project#uri(Object)&lt;/a&gt;. This means,
  for example, you can pass in a File object or a relative path which is evaluated relative to the project directory.
 
- File are resolved based on the supplied URL and the configured &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String, Closure)'&gt;#layout(String, Closure)&lt;/a&gt; for this repository.
+ File are resolved based on the supplied URL and the configured &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String,'&gt;Closure)&lt;/a&gt; for this repository.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;url The base URL.
 

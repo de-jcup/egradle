@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.signing.SignOperation" version="3.0">
-    <description> A sign operation creates digital signatures for one or more files or &lt;a href='type://PublishArtifact publish artifacts'&gt;PublishArtifact publish artifacts&lt;/a&gt;.
+    <description> A sign operation creates digital signatures for one or more files or &lt;a href='type://PublishArtifact'&gt;publish artifacts&lt;/a&gt;.
 
- &lt;p&gt;The external representation of the signature is specified by the &lt;a href='type://org.gradle.plugins.signing.SignOperation#getSignatureType() signature type property'&gt;#getSignatureType() signature type property&lt;/a&gt;, while the &lt;a href='type://org.gradle.plugins.signing.SignOperation#signatory'&gt;#signatory&lt;/a&gt; property specifies who is to sign. &lt;p&gt; A sign
+ &lt;p&gt;The external representation of the signature is specified by the &lt;a href='type://org.gradle.plugins.signing.SignOperation#getSignatureType()'&gt;signature type property&lt;/a&gt;, while the &lt;a href='type://org.gradle.plugins.signing.SignOperation#signatory'&gt;#signatory&lt;/a&gt; property specifies who is to sign. &lt;p&gt; A sign
  operation manages one or more &lt;a href='type://Signature'&gt;Signature&lt;/a&gt; objects. The &lt;a href='type://sign'&gt;sign&lt;/a&gt; methods are used to register things to generate signatures for. The &lt;a href='type://org.gradle.plugins.signing.SignOperation#execute()'&gt;#execute()&lt;/a&gt; method generates the signatures for
  all of the registered items at that time.
 

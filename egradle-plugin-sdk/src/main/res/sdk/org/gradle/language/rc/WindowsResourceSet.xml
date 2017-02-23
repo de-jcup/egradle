@@ -7,7 +7,14 @@
  &lt;pre autoTested="true"&gt;
  apply plugin: "windows-resources"
 
- model {@literal /}*.rc"
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 rc {
+                     source {
+                         srcDirs "src/main/rc"
+                         include "**{@literal /}*.rc"
                      }
                      exportedHeaders {
                          srcDirs "src/main/include"

@@ -27,6 +27,8 @@
 
  &lt;pre&gt;
  jdependTask {
+   reports {
+     xml {
        destination "build/jdepend.xml"
      }
    }
@@ -46,6 +48,8 @@
 
  &lt;pre&gt;
  jdependTask {
+   reports {
+     xml {
        destination "build/jdepend.xml"
      }
    }

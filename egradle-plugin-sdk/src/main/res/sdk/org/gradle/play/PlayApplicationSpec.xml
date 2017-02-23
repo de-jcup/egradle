@@ -17,6 +17,8 @@
  representation of the desired play platform.
  &lt;pre&gt;
      model {
+          components {
+              play {
                   platform 'play-2.3.9'
                   platform play: '2.3.2'
                   platform play: '2.3.6', scala: '2.10'

@@ -5,6 +5,8 @@
 
  &lt;pre&gt;
      model {
+         platforms {
+             windows_x86 {
                  architecture "i386"
                  operatingSystem "windows"
              }

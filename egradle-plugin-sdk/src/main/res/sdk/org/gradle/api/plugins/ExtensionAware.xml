@@ -3,37 +3,40 @@
     <description> Objects that can be extended at runtime with other objects.
 
  &lt;pre autoTested=""&gt;
- // Extensions are just plain objects, there is no interface/type
+ &lt;em class='comment'&gt;// Extensions are just plain objects, there is no interface/type&lt;/em&gt;
  class MyExtension {
+   String foo
+
+   MyExtension(String foo) {
      this.foo = foo
    }
  }
 
- // Add new extensions via the extension container
+ &lt;em class='comment'&gt;// Add new extensions via the extension container&lt;/em&gt;
  project.extensions.create('custom', MyExtension, "bar")
- //                       («name»,   «type»,       «constructor args», …)
+ &lt;em class='comment'&gt;//                       («name»,   «type»,       «constructor args», …)&lt;/em&gt;
 
- // extensions appear as properties on the target object by the given name
+ &lt;em class='comment'&gt;// extensions appear as properties on the target object by the given name&lt;/em&gt;
  assert project.custom instanceof MyExtension
  assert project.custom.foo == "bar"
 
- // also via a namespace method
+ &lt;em class='comment'&gt;// also via a namespace method&lt;/em&gt;
  project.custom {
    assert foo == "bar"
    foo = "other"
  }
  assert project.custom.foo == "other"
 
- // Extensions added with the extension container's create method are themselves extensible
+ &lt;em class='comment'&gt;// Extensions added with the extension container's create method are themselves extensible&lt;/em&gt;
  assert project.custom instanceof ExtensionAware
  project.custom.extensions.create("nested", MyExtension, "baz")
  assert project.custom.nested.foo == "baz"
 
- // All extension aware objects have a special “ext” extension of type ExtraPropertiesExtension
+ &lt;em class='comment'&gt;// All extension aware objects have a special “ext” extension of type ExtraPropertiesExtension&lt;/em&gt;
  assert project.hasProperty("myProperty") == false
  project.ext.myProperty = "myValue"
 
- // Properties added to the “ext” extension are promoted to the owning object
+ &lt;em class='comment'&gt;// Properties added to the “ext” extension are promoted to the owning object&lt;/em&gt;
  assert project.myProperty == "myValue"
  &lt;/pre&gt;
 

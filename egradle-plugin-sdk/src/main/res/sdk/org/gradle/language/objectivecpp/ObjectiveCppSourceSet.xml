@@ -7,7 +7,14 @@
  &lt;pre autoTested="true"&gt;
  apply plugin: "objective-cpp"
 
- model {@literal /}*.mm"
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 objcpp {
+                     source {
+                         srcDirs "src/main/objectiveCpp", "src/shared/objectiveCpp"
+                         include "**{@literal /}*.mm"
                      }
                      exportedHeaders {
                          srcDirs "src/main/include"

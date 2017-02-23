@@ -26,12 +26,14 @@
  }
 
  class CustomUnixStartScriptGenerator implements ScriptGenerator {
-     // implementation
+   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
+     &lt;em class='comment'&gt;// implementation&lt;/em&gt;
    }
  }
 
  class CustomWindowsStartScriptGenerator implements ScriptGenerator {
-     // implementation
+   void generateScript(JavaAppStartScriptGenerationDetails details, Writer destination) {
+     &lt;em class='comment'&gt;// implementation&lt;/em&gt;
    }
  }
  &lt;/pre&gt;

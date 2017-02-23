@@ -6,16 +6,28 @@
  apply plugin: 'java'
  apply plugin: 'eclipse'
 
- eclipse &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt;
+ eclipse {
+   jdt {
+     &lt;em class='comment'&gt;//if you want to alter the java versions (by default they are configured with gradle java plugin settings):&lt;/em&gt;
+     sourceCompatibility = 1.6
+     targetCompatibility = 1.5
+     javaRuntimeName = "J2SE-1.5"
 
-       //closure executed after jdt file content is loaded from existing file
-       //and after gradle build information is merged
-       whenMerged &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt; here
+     file {
+       &lt;em class='comment'&gt;//whenMerged closure is the highest voodoo&lt;/em&gt;
+       &lt;em class='comment'&gt;//and probably should be used only to solve tricky edge cases.&lt;/em&gt;
+       &lt;em class='comment'&gt;//the type passed to the closure is &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt;&lt;/em&gt;
+
+       &lt;em class='comment'&gt;//closure executed after jdt file content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { jdt
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Jdt'&gt;Jdt&lt;/a&gt; here&lt;/em&gt;
        }
 
-       //withProperties allows addition of properties not currently
-       //modeled by Gradle
-       withProperties &lt;a href='type://java.util.Properties'&gt;java.util.Properties&lt;/a&gt; here
+       &lt;em class='comment'&gt;//withProperties allows addition of properties not currently&lt;/em&gt;
+       &lt;em class='comment'&gt;//modeled by Gradle&lt;/em&gt;
+       withProperties { properties -&gt;
+           &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://java.util.Properties'&gt;java.util.Properties&lt;/a&gt; here&lt;/em&gt;
        }
      }
    }

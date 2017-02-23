@@ -5,10 +5,10 @@
  &lt;pre autoTested=''&gt;
      apply plugin: 'java'
      compileJava {
-         //enable compilation in a separate daemon process
+         &lt;em class='comment'&gt;//enable compilation in a separate daemon process&lt;/em&gt;
          options.fork = true
 
-         //enable incremental compilation
+         &lt;em class='comment'&gt;//enable incremental compilation&lt;/em&gt;
          options.incremental = true
      }
  &lt;/pre&gt;

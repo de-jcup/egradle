@@ -52,13 +52,14 @@
  then consider using forced versions' feature: &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;ResolutionStrategy#force(Object...)&lt;/a&gt;.
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that I can declare 'compile' dependencies
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that I can declare 'compile' dependencies&lt;/em&gt;
 
  dependencies {
-     //excluding a particular transitive dependency:
-     exclude module: 'cglib' //by artifact name
-     exclude group: 'org.jmock' //by group
-     exclude group: 'org.unwanted', module: 'iAmBuggy' //by both name and group
+   compile('org.hibernate:hibernate:3.1') {
+     &lt;em class='comment'&gt;//excluding a particular transitive dependency:&lt;/em&gt;
+     exclude module: 'cglib' &lt;em class='comment'&gt;//by artifact name&lt;/em&gt;
+     exclude group: 'org.jmock' &lt;em class='comment'&gt;//by group&lt;/em&gt;
+     exclude group: 'org.unwanted', module: 'iAmBuggy' &lt;em class='comment'&gt;//by both name and group&lt;/em&gt;
    }
  }
 

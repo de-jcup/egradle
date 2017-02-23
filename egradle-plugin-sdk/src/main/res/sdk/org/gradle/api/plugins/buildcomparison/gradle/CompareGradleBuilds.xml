@@ -29,7 +29,7 @@
     <method name="getSourceBuild" returnType="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
         <description> The specification of how to invoke the source build.
 
- Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir() project.rootDir'&gt;org.gradle.api.Project#getRootDir() project.rootDir&lt;/a&gt; with the current Gradle version
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
  and the tasks “clean assemble”.
 
  The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
@@ -41,7 +41,7 @@
     <method name="getTargetBuild" returnType="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
         <description> The specification of how to invoke the target build.
 
- Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir() project.rootDir'&gt;org.gradle.api.Project#getRootDir() project.rootDir&lt;/a&gt; with the current Gradle version
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
  and the tasks “clean assemble”.
 
  The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
@@ -64,7 +64,7 @@
     <method name="setReportDir" returnType="void">
         <description> Sets the directory that will contain the HTML comparison report and any other report files.
 
- The value will be evaluated by &lt;a href='type://org.gradle.api.Project#file(Object) project.file()'&gt;org.gradle.api.Project#file(Object) project.file()&lt;/a&gt;.
+ The value will be evaluated by &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;project.file()&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;reportDir The directory that will contain the HTML comparison report and any other report files.
 
@@ -123,7 +123,7 @@
     <property name="sourceBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
         <description> The specification of how to invoke the source build.
 
- Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir() project.rootDir'&gt;org.gradle.api.Project#getRootDir() project.rootDir&lt;/a&gt; with the current Gradle version
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
  and the tasks “clean assemble”.
 
  The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
@@ -135,7 +135,7 @@
     <property name="targetBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
         <description> The specification of how to invoke the target build.
 
- Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir() project.rootDir'&gt;org.gradle.api.Project#getRootDir() project.rootDir&lt;/a&gt; with the current Gradle version
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
  and the tasks “clean assemble”.
 
  The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.

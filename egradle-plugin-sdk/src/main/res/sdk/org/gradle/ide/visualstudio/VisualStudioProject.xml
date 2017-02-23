@@ -8,8 +8,13 @@
 
  &lt;pre autoTested="true"&gt;
   apply plugin: "visual-studio"
-  model {name}.vcxproj"
-              projectFile.withXml {project.name}")
+  model {
+      visualStudio {
+          projects.all {
+              projectFile.location = "vs/${name}.vcxproj"
+              projectFile.withXml {
+                  asNode().appendNode('PropertyGroup', [Label: 'Custom'])
+                          .appendNode('ProjectDetails', "Project is named ${project.name}")
               }
           }
       }

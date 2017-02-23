@@ -20,26 +20,26 @@
  try {
     BuildLauncher build = connection.newBuild();
 
-    //select tasks to run:
+    &lt;em class='comment'&gt;//select tasks to run:&lt;/em&gt;
     build.forTasks("clean", "test");
 
-    //include some build arguments:
+    &lt;em class='comment'&gt;//include some build arguments:&lt;/em&gt;
     build.withArguments("--no-search-upward", "-i", "--project-dir", "someProjectDir");
 
-    //configure the standard input:
+    &lt;em class='comment'&gt;//configure the standard input:&lt;/em&gt;
     build.setStandardInput(new ByteArrayInputStream("consume this!".getBytes()));
 
-    //in case you want the build to use java different than default:
+    &lt;em class='comment'&gt;//in case you want the build to use java different than default:&lt;/em&gt;
     build.setJavaHome(new File("/path/to/java"));
 
-    //if your build needs crazy amounts of memory:
+    &lt;em class='comment'&gt;//if your build needs crazy amounts of memory:&lt;/em&gt;
     build.setJvmArguments("-Xmx2048m", "-XX:MaxPermSize=512m");
 
-    //if you want to listen to the progress events:
-    ProgressListener listener = null; // use your implementation
+    &lt;em class='comment'&gt;//if you want to listen to the progress events:&lt;/em&gt;
+    ProgressListener listener = null; &lt;em class='comment'&gt;// use your implementation&lt;/em&gt;
     build.addProgressListener(listener);
 
-    //kick the build off:
+    &lt;em class='comment'&gt;//kick the build off:&lt;/em&gt;
     build.run();
  } finally {
     connection.close();

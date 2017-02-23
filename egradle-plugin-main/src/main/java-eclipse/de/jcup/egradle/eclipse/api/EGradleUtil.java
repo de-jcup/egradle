@@ -805,6 +805,11 @@ public class EGradleUtil {
 		}
 	}
 
+	/**
+	 * Returns a web color in format "#RRGGBB"
+	 * @param color
+	 * @return web color as string
+	 */
 	public static String convertToHexColor(Color color) {
 		if (color==null){
 			return null;

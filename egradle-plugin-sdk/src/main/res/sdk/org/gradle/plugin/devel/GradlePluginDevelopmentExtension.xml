@@ -9,6 +9,10 @@
      apply plugin: "java-gradle-plugin"
 
      gradlePlugin {
+         pluginSourceSet project.sourceSets.customMain
+         testSourceSets project.sourceSets.functionalTest
+         plugins {
+             helloPlugin {
                  id  = 'org.example.hello'
                  implementationClass = 'org.example.HelloPlugin'
              }

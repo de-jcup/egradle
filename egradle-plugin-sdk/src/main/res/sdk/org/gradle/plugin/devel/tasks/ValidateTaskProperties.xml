@@ -29,8 +29,8 @@
          &lt;b&gt;Properties ignored during up-to-date checks:&lt;/b&gt;
          &lt;ul&gt;
              &lt;li&gt;{@literal @}&lt;a href='type://javax.inject.Inject'&gt;javax.inject.Inject&lt;/a&gt; marks a Gradle service used by the task.&lt;/li&gt;
-             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Console Console'&gt;org.gradle.api.tasks.Console Console&lt;/a&gt; marks a property that only influences the console output of the task.&lt;/li&gt;
-             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Internal Internal'&gt;org.gradle.api.tasks.Internal Internal&lt;/a&gt; mark an internal property of the task.&lt;/li&gt;
+             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Console'&gt;Console&lt;/a&gt; marks a property that only influences the console output of the task.&lt;/li&gt;
+             &lt;li&gt;{@literal @}&lt;a href='type://org.gradle.api.tasks.Internal'&gt;Internal&lt;/a&gt; mark an internal property of the task.&lt;/li&gt;
          &lt;/ul&gt;
      &lt;/li&gt;
  &lt;/ul&gt;

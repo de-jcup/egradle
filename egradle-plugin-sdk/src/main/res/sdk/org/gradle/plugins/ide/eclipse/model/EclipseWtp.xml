@@ -7,13 +7,21 @@
  More interesting examples you will find in docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt; and &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt;
 
  &lt;pre autoTested=''&gt;
- apply plugin: 'war' //or 'ear' or 'java'
+ apply plugin: 'war' &lt;em class='comment'&gt;//or 'ear' or 'java'&lt;/em&gt;
  apply plugin: 'eclipse-wtp'
 
- eclipse &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt;
+ eclipse {
+
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting file(s) to be replaced by variables (files):&lt;/em&gt;
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   wtp {
+     component {
+       &lt;em class='comment'&gt;//for examples see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt;&lt;/em&gt;
      }
 
-     facet &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt;
+     facet {
+       &lt;em class='comment'&gt;//for examples see docs for &lt;a href='type://EclipseWtpFacet'&gt;EclipseWtpFacet&lt;/a&gt;&lt;/em&gt;
      }
    }
  }

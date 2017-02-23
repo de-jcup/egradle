@@ -9,6 +9,8 @@
  }
 
  model {
+   components {
+     myLib(JvmLibrarySpec) {
        targetPlatform "java6"
      }
    }

@@ -20,7 +20,7 @@
     <method name="findModel" returnType="T">
         <description> Fetches a snapshot of the model of the given type, if available.
 
- &lt;p&gt;See &lt;a href='type://org.gradle.tooling.BuildController#getModel(Model, Class)'&gt;#getModel(Model, Class)&lt;/a&gt; for more details.&lt;/p&gt;
+ &lt;p&gt;See &lt;a href='type://org.gradle.tooling.BuildController#getModel(Model,'&gt;Class)&lt;/a&gt; for more details.&lt;/p&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.

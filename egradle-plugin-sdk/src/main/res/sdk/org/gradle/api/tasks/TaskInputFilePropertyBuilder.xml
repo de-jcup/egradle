@@ -86,7 +86,7 @@
     <method name="property" returnType="org.gradle.api.tasks.TaskInputs">
         <description> {@inheritDoc}
 
- @deprecated Use &lt;a href='type://TaskInputs#property(String, Object)'&gt;TaskInputs#property(String, Object)&lt;/a&gt; directly instead.
+ @deprecated Use &lt;a href='type://TaskInputs#property(String,'&gt;Object)&lt;/a&gt; directly instead.
 
 </description>
         <parameter type="java.lang.String" name="name"/>

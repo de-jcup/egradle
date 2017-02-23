@@ -7,7 +7,14 @@
  &lt;pre autoTested="true"&gt;
  apply plugin: "c"
 
- model {@literal /}*.c"
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 c {
+                     source {
+                         srcDirs "src/main/cpp", "src/shared/c++"
+                         include "**{@literal /}*.c"
                      }
                      exportedHeaders {
                          srcDirs "src/main/include"

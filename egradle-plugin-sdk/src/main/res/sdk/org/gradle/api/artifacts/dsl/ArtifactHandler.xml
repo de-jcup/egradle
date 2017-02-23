@@ -34,17 +34,17 @@
  This way the archive can be published or referred in other projects via the configuration.
  &lt;pre autoTested=''&gt;
  configurations {
-   //declaring new configuration that will be used to associate with artifacts
+   &lt;em class='comment'&gt;//declaring new configuration that will be used to associate with artifacts&lt;/em&gt;
    schema
  }
 
  task schemaJar(type: Jar) {
-   //some imaginary task that creates a jar artifact with some schema
+   &lt;em class='comment'&gt;//some imaginary task that creates a jar artifact with some schema&lt;/em&gt;
  }
 
- //associating the task that produces the artifact with the configuration
+ &lt;em class='comment'&gt;//associating the task that produces the artifact with the configuration&lt;/em&gt;
  artifacts {
-   //configuration name and the task:
+   &lt;em class='comment'&gt;//configuration name and the task:&lt;/em&gt;
    schema schemaJar
  }
  &lt;/pre&gt;

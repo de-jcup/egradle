@@ -11,7 +11,7 @@
     <method name="getDestination" returnType="java.io.File">
         <description> The location on the filesystem of the report when it is generated.
  &lt;p&gt;
- Depending on the &lt;a href='type://org.gradle.api.reporting.Report#getOutputType() output type'&gt;#getOutputType() output type&lt;/a&gt; of the report, this may point to
+ Depending on the &lt;a href='type://org.gradle.api.reporting.Report#getOutputType()'&gt;output type&lt;/a&gt; of the report, this may point to
  a file or a directory.
  &lt;p&gt;
  Subtypes may implement setters for the destination.
@@ -75,7 +75,7 @@
     <property name="destination" type="java.io.File" documented="true">
         <description> The location on the filesystem of the report when it is generated.
  &lt;p&gt;
- Depending on the &lt;a href='type://org.gradle.api.reporting.Report#getOutputType() output type'&gt;#getOutputType() output type&lt;/a&gt; of the report, this may point to
+ Depending on the &lt;a href='type://org.gradle.api.reporting.Report#getOutputType()'&gt;output type&lt;/a&gt; of the report, this may point to
  a file or a directory.
  &lt;p&gt;
  Subtypes may implement setters for the destination.

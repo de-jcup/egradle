@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.provider.model.ToolingModelBuilder" version="3.0">
     <description> Responsible for building tooling models to return to the tooling API client.
 
- &lt;p&gt;The &lt;a href='type://org.gradle.tooling.provider.model.ToolingModelBuilder#buildAll(String, Project)'&gt;#buildAll(String, Project)&lt;/a&gt; method is called to create a model for a given project. The model is serialized to the client process and passed
+ &lt;p&gt;The &lt;a href='type://org.gradle.tooling.provider.model.ToolingModelBuilder#buildAll(String,'&gt;Project)&lt;/a&gt; method is called to create a model for a given project. The model is serialized to the client process and passed
  to the client application.&lt;/p&gt;
 
  &lt;p&gt;The model object is adapted to the Java type that is used by the client by generating a view, or wrapper object, over the model object.

@@ -27,6 +27,8 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
@@ -40,6 +42,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	private String bgColor;
 	private RelevantCodeCutter codeCutter;
 	private HoverSupport hoverSupport;
+	private String commentColorWeb;
 	
 	public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer,
 			String contentType) {
@@ -117,12 +120,16 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			}
 			
 		}
+		if (commentColorWeb==null){
+			commentColorWeb = GradleEditorPreferences.EDITOR_PREFERENCES.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+		}
+		
 		String prefix = null;
 		double reliability = dataEstimationResult.getReliability();
 		if (reliability<80){
 			prefix="<div class='warnSmall'>This type estimation has a reliability of:"+reliability+"</div>";
 		}
-		return builder.buildHTMLDescription(fgColor, bgColor ,data, element, prefix);
+		return builder.buildHTMLDescription(fgColor, bgColor ,commentColorWeb, data, element, prefix);
 	}
 
 	private class HoverDataRegion implements IRegion {
@@ -194,7 +201,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public IInformationControl createInformationControl(Shell parent) {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(fgColor,bgColor,builder));
+				control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(fgColor,bgColor, commentColorWeb, builder));
 				return control;
 			} else {
 				return new DefaultInformationControl(parent, true);

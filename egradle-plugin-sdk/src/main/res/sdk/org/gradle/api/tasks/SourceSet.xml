@@ -9,6 +9,8 @@
  apply plugin: 'java'
 
  sourceSets {
+   main {
+     java {
        exclude 'some/unwanted/package/**'
      }
    }

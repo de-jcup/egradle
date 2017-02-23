@@ -14,7 +14,7 @@
  &lt;/pre&gt;
 
  &lt;p&gt;A dynamic method is added for each resolver which takes a configuration closure. This is equivalent to calling
- &lt;a href='type://org.gradle.api.artifacts.ArtifactRepositoryContainer#getByName(String, groovy.lang.Closure)'&gt;#getByName(String, groovy.lang.Closure)&lt;/a&gt;. For example:&lt;/p&gt;
+ &lt;a href='type://org.gradle.api.artifacts.ArtifactRepositoryContainer#getByName(String,'&gt;groovy.lang.Closure)&lt;/a&gt;. For example:&lt;/p&gt;
 
  &lt;pre autoTested=''&gt;
  repositories.maven { name 'myResolver' }

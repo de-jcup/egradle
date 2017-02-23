@@ -5,7 +5,7 @@
  This class provides also a builder for repository and snapshot-repository:
 
  &lt;pre&gt;
- mavenUploader.repository(url: 'file://repoDir') {
+ mavenUploader.repository(url: 'file:&lt;em class='comment'&gt;//repoDir') {&lt;/em&gt;
     authentication(userName: 'myName')
     releases(updatePolicy: 'never')
     snapshots(updatePolicy: 'always')

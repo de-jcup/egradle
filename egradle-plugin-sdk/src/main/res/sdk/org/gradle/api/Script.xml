@@ -59,6 +59,9 @@
  Note that CopySpecs can be nested:
  &lt;pre&gt;
  copy {
+    into 'build/webroot'
+    exclude '**&amp;#47;.svn/**'
+    from('src/main/webapp') {
        include '**&amp;#47;*.jsp'
        filter(ReplaceTokens, tokens:[copyright:'2009', version:'2.3.1'])
     }
@@ -198,7 +201,7 @@
     </method>
     <method name="files" returnType="org.gradle.api.file.ConfigurableFileCollection" delegationTarget="ConfigurableFileCollection" documented="true">
         <description> &lt;p&gt;Creates a new &lt;a href='type://ConfigurableFileCollection'&gt;ConfigurableFileCollection&lt;/a&gt; using the given paths. The file collection is configured
- using the given closure. This method works as described for &lt;a href='type://Project#files(Object, groovy.lang.Closure)'&gt;Project#files(Object, groovy.lang.Closure)&lt;/a&gt;.
+ using the given closure. This method works as described for &lt;a href='type://Project#files(Object,'&gt;groovy.lang.Closure)&lt;/a&gt;.
  Relative paths are resolved relative to the directory containing this script.&lt;/p&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The contents of the file collection. Evaluated as per &lt;a href='type://org.gradle.api.Script#files(Object...)'&gt;#files(Object...)&lt;/a&gt;.
@@ -298,13 +301,13 @@
  task untar(type: Copy) {
    from tarTree('someCompressedTar.gzip')
 
-   //tar tree attempts to guess the compression based on the file extension
-   //however if you must specify the compression explicitly you can:
+   &lt;em class='comment'&gt;//tar tree attempts to guess the compression based on the file extension&lt;/em&gt;
+   &lt;em class='comment'&gt;//however if you must specify the compression explicitly you can:&lt;/em&gt;
    from tarTree(resources.gzip('someTar.ext'))
 
-   //in case you work with unconventionally compressed tars
-   //you can provide your own implementation of a ReadableResource:
-   //from tarTree(yourOwnResource as ReadableResource)
+   &lt;em class='comment'&gt;//in case you work with unconventionally compressed tars&lt;/em&gt;
+   &lt;em class='comment'&gt;//you can provide your own implementation of a ReadableResource:&lt;/em&gt;
+   &lt;em class='comment'&gt;//from tarTree(yourOwnResource as ReadableResource)&lt;/em&gt;
 
    into 'dest'
  }

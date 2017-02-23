@@ -14,7 +14,7 @@
  &lt;/pre&gt;
 
  &lt;p&gt;A dynamic method is added for each configuration which takes a configuration closure. This is equivalent to
- calling &lt;a href='type://org.gradle.api.artifacts.ConfigurationContainer#getByName(String, groovy.lang.Closure)'&gt;#getByName(String, groovy.lang.Closure)&lt;/a&gt;. For example:&lt;/p&gt;
+ calling &lt;a href='type://org.gradle.api.artifacts.ConfigurationContainer#getByName(String,'&gt;groovy.lang.Closure)&lt;/a&gt;. For example:&lt;/p&gt;
 
  &lt;pre autoTested='true'&gt;
  configurations.create('myConfiguration')
@@ -28,11 +28,11 @@
  An example showing how to refer to a given configuration by name
  in order to get hold of all dependencies (e.g. jars, but only)
  &lt;pre autoTested='true'&gt;
-   apply plugin: 'java' //so that I can use 'compile' configuration
+   apply plugin: 'java' &lt;em class='comment'&gt;//so that I can use 'compile' configuration&lt;/em&gt;
 
-   //copying all dependencies attached to 'compile' into a specific folder
+   &lt;em class='comment'&gt;//copying all dependencies attached to 'compile' into a specific folder&lt;/em&gt;
    task copyAllDependencies(type: Copy) {
-     //referring to the 'compile' configuration
+     &lt;em class='comment'&gt;//referring to the 'compile' configuration&lt;/em&gt;
      from configurations.compile
      into 'allLibs'
    }
@@ -40,18 +40,18 @@
 
  An example showing how to declare and configure configurations
  &lt;pre autoTested=''&gt;
- apply plugin: 'java' //so that I can use 'compile', 'testCompile' configurations
+ apply plugin: 'java' &lt;em class='comment'&gt;//so that I can use 'compile', 'testCompile' configurations&lt;/em&gt;
 
  configurations {
-   //adding a configuration:
+   &lt;em class='comment'&gt;//adding a configuration:&lt;/em&gt;
    myConfiguration
 
-   //adding a configuration that extends existing configuration:
-   //(testCompile was added by the java plugin)
+   &lt;em class='comment'&gt;//adding a configuration that extends existing configuration:&lt;/em&gt;
+   &lt;em class='comment'&gt;//(testCompile was added by the java plugin)&lt;/em&gt;
    myIntegrationTestsCompile.extendsFrom(testCompile)
 
-   //configuring existing configurations not to put transitive dependencies on the compile classpath
-   //this way you can avoid issues with implicit dependencies to transitive libraries
+   &lt;em class='comment'&gt;//configuring existing configurations not to put transitive dependencies on the compile classpath&lt;/em&gt;
+   &lt;em class='comment'&gt;//this way you can avoid issues with implicit dependencies to transitive libraries&lt;/em&gt;
    compile.transitive = false
    testCompile.transitive = false
  }

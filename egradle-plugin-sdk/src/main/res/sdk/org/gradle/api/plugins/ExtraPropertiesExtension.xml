@@ -20,7 +20,7 @@
 
  Extra properties extension objects support Groovy property syntax. That is, a property can be read via &lt;a href='type://extension.«name»'&gt;extension.«name»&lt;/a&gt; and set via
  &lt;a href='type://extension.«name» = "value"'&gt;extension.«name» = "value"&lt;/a&gt;. &lt;b&gt;Wherever possible, the Groovy property syntax should be preferred over the
- &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#get(String)'&gt;#get(String)&lt;/a&gt; and &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#set(String, Object)'&gt;#set(String, Object)&lt;/a&gt; methods.&lt;/b&gt;
+ &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#get(String)'&gt;#get(String)&lt;/a&gt; and &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#set(String,'&gt;Object)&lt;/a&gt; methods.&lt;/b&gt;
 
  &lt;pre autoTested=""&gt;
  project.ext {
@@ -130,7 +130,7 @@
  project.ext.foo = "bar"
  project.ext["foo"] = "bar"
 
- // Once the property has been created via the extension, it can be changed by the owner.
+ &lt;em class='comment'&gt;// Once the property has been created via the extension, it can be changed by the owner.&lt;/em&gt;
  project.foo = "bar"
  project["foo"] = "bar"
  &lt;/pre&gt;

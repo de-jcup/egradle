@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
@@ -21,10 +22,126 @@ public class ReplaceJavaDocPartsActionTest {
 		actionToTest = new ReplaceJavaDocPartsAction();
 	}
 
+	
+	@Test
+	public void testJavaDocParts_empty_lines_are_not_removed(){
+		String line="abc\n\nxyz\n";
+		assertEquals("abc\n\nxyz\n",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_empty_lines_are_not_removed_also_when_comments(){
+		String line="abc//comment\n\nxyz//comment\n";
+		assertEquals("abc<em class='comment'>//comment</em>\n\nxyz<em class='comment'>//comment</em>\n",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_code_before__replaces_multiple_lines(){
+		String line="xyz // comment1\nabc // comment2\n";
+		assertEquals("xyz <em class='comment'>// comment1</em>\nabc <em class='comment'>// comment2</em>\n",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_full_line_but_but_opening_tagidentifier_before(){
+		String line="<// my comment";
+		assertEquals("<// my comment",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_full_line_but_but_opening_and_closing_tag_identifierbefore(){
+		String line="<>// my comment";
+		assertEquals("<><em class='comment'>// my comment</em>",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_full_line_but_but_opening_and_closing_tag_identifierbefore_and_opening_agin(){
+		String line="<><// my comment";
+		assertEquals("<><// my comment",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_full_line(){
+		String line="// my comment";
+		assertEquals("<em class='comment'>// my comment</em>",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_line_has_some_chars_before(){
+		String line="xyz // my comment";
+		assertEquals("xyz <em class='comment'>// my comment</em>",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_comment_line_has_some_whitespaces_before(){
+		String line= "              // my comment";
+		assertEquals("              <em class='comment'>// my comment</em>",actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavaDocParts_full_code_block() {
+		StringBuilder lines = new StringBuilder();
+
+		lines.append("   wtp {\n");
+		lines.append("     component {\n");
+		lines.append("       //for examples see docs for {@link EclipseWtpComponent}\n");
+		lines.append("     }\n");
+		lines.append("\n");
+		lines.append("     facet {\n");
+		lines.append("       //for examples see docs for {@link EclipseWtpFacet}\n");
+		lines.append("     }\n");
+		lines.append("   }\n");
+		
+		StringBuilder expectedLines = new StringBuilder();
+
+		expectedLines.append("   wtp {\n");
+		expectedLines.append("     component {\n");
+		expectedLines.append("       <em class='comment'>//for examples see docs for <a href='type://EclipseWtpComponent'>EclipseWtpComponent</a></em>\n");
+		expectedLines.append("     }\n");
+		expectedLines.append("\n");
+		expectedLines.append("     facet {\n");
+		expectedLines.append("       <em class='comment'>//for examples see docs for <a href='type://EclipseWtpFacet'>EclipseWtpFacet</a></em>\n");
+		expectedLines.append("     }\n");
+		expectedLines.append("   }\n");
+		
+		/* execute */
+		String result = actionToTest.replaceJavaDocParts(lines.toString());
+		
+		/* test */
+		assertEquals(expectedLines.toString(),result);
+	}
+
+	@Test
+	public void testjavaDocParts_links_with_multiple_text(){
+		String linkText="{@link org.gradle.plugin.use.PluginDependenciesSpec plugins script block}";
+		String expectedText="<a href='type://org.gradle.plugin.use.PluginDependenciesSpec'>plugins script block</a>";
+		assertEquals(expectedText, actionToTest.replaceJavaDocParts(linkText));
+	}
+	
 	@Test
 	public void testJavadocLinkConversion_simple_link_with_full_path_name() {
 		String line = "{@link org.gradle.api.invocation.Gradle}";
 		String expected = "<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
+		assertEquals(expected, actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavadocLinkConversion_additional_curlyBracketBefore_simple_link_with_full_path_name() {
+		String line = "{{@link org.gradle.api.invocation.Gradle}";
+		String expected = "{<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
+		assertEquals(expected, actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavadocLinkConversion_additional_curlyBracketAfter_simple_link_with_full_path_name() {
+		String line = "{@link org.gradle.api.invocation.Gradle}}";
+		String expected = "<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>}";
+		assertEquals(expected, actionToTest.replaceJavaDocParts(line));
+	}
+	
+	@Test
+	public void testJavadocLinkConversion_additional_curlyBracketOpening_a_curlyBracketClosing_Before_simple_link_with_full_path_name() {
+		String line = "{a}{@link org.gradle.api.invocation.Gradle}";
+		String expected = "{a}<a href='type://org.gradle.api.invocation.Gradle'>org.gradle.api.invocation.Gradle</a>";
 		assertEquals(expected, actionToTest.replaceJavaDocParts(line));
 	}
 
@@ -89,7 +206,7 @@ public class ReplaceJavaDocPartsActionTest {
 		list.add("    </method>");
 
 		StringBuilder fullDescription = new StringBuilder();
-		for (String line: list){
+		for (String line : list) {
 			fullDescription.append(line).append("\n");
 		}
 		String transformed = actionToTest.replaceJavaDocParts(fullDescription.toString());
@@ -115,12 +232,12 @@ public class ReplaceJavaDocPartsActionTest {
 		assertTrue(transformed.indexOf("@code") == -1);
 
 	}
-	
+
 	@Test
 	public void testJavadocParamConversion_param_replaced() throws Exception {
 		/* prepare */
 		String fullDescription = "@param xyz bla bla";
-		
+
 		/* execute */
 		String transformed = actionToTest.replaceJavaDocParts(fullDescription);
 

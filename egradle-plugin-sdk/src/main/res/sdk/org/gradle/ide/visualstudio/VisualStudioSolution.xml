@@ -8,7 +8,10 @@
 
  &lt;pre autoTested="true"&gt;
   apply plugin: "visual-studio"
-  model {name}.sln"
+  model {
+      visualStudio {
+          solutions.all {
+              solutionFile.location = "vs/${name}.sln"
               solutionFile.withContent { TextProvider content -&gt;
                   content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n")
                   content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE")

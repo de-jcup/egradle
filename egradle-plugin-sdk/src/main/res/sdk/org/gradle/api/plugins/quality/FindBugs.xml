@@ -129,6 +129,8 @@
 
  &lt;pre&gt;
  findbugsTask {
+   reports {
+     xml {
        destination "build/findbugs.xml"
      }
    }
@@ -148,6 +150,8 @@
 
  &lt;pre&gt;
  findbugsTask {
+   reports {
+     xml {
        destination "build/findbugs.xml"
      }
    }

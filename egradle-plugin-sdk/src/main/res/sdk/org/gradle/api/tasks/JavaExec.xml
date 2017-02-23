@@ -12,7 +12,7 @@
 
    main = 'package.Main'
 
-   // arguments to pass to the application
+   &lt;em class='comment'&gt;// arguments to pass to the application&lt;/em&gt;
    args 'appArg1'
  }
  &lt;/pre&gt;

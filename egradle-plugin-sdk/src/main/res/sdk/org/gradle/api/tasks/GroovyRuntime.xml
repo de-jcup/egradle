@@ -17,8 +17,8 @@
      }
 
      def groovyClasspath = groovyRuntime.inferGroovyClasspath(configurations.compile)
-     // The returned class path can be used to configure the 'groovyClasspath' property of tasks
-     // such as 'GroovyCompile' or 'Groovydoc', or to execute these and other Groovy tools directly.
+     &lt;em class='comment'&gt;// The returned class path can be used to configure the 'groovyClasspath' property of tasks&lt;/em&gt;
+     &lt;em class='comment'&gt;// such as 'GroovyCompile' or 'Groovydoc', or to execute these and other Groovy tools directly.&lt;/em&gt;
  &lt;/pre&gt;
 
 </description>
