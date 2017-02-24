@@ -16,7 +16,7 @@ public class IntegrationTestTextProvider implements TextProvider {
 	@Override
 	public String getText(int offset, int length) throws TextProviderException {
 		try {
-			return text.substring(offset, length);
+			return text.substring(offset, offset+length);
 		} catch (RuntimeException e) {
 			throw new TextProviderException("cannot get text", e);
 		}

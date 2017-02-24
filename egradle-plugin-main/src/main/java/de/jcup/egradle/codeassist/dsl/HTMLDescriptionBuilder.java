@@ -132,10 +132,20 @@ public class HTMLDescriptionBuilder {
 		description.append("<a href='#appendix'>Go to appendix</a><br>");
 		
 		description.append(type.getDescription());
-		appendLinkToGradleOriginDoc(type, description);
 		
+		appendLinkToGradleOriginDoc(type, description);
+
+		appendAppendix(type, description);
+	}
+
+	private void appendAppendix(Type type, StringBuilder description) {
 		description.append("<h4 id='appendix'>Appendix:</h4>");
 		description.append("Contains list of <a href='#appendix_methods'>methods</a> and <a href='#appendix_properties'>properties</a> of "+type.getName());
+		appendAppendixMethods(type, description);
+		appendAppendixProperties(type, description);
+	}
+
+	private void appendAppendixMethods(Type type, StringBuilder description) {
 		description.append("<h5 id='appendix_methods'>Methods:</h5>");
 		Set<Method> methods = type.getMethods();
 		SortedSet<String> sortedLinkReferences =new TreeSet<>();
@@ -155,10 +165,14 @@ public class HTMLDescriptionBuilder {
 			description.append(referenceLink);
 		}
 		description.append("</ul>");
+	}
+
+	private void appendAppendixProperties(Type type, StringBuilder description) {
+		SortedSet<String> sortedLinkReferences;
 		description.append("<h5 id='appendix_properties'>Properties:</h5>");
 		Set<Property> properties= type.getProperties();
 		sortedLinkReferences =new TreeSet<>();
-		/* FIXME ATR, 07.02.2017: properties must be resolveable by type url also! */
+		
 		for (Property p: properties){
 			String propertySignature = p.getName();
 			StringBuilder referenceLink = new StringBuilder();
@@ -196,6 +210,10 @@ public class HTMLDescriptionBuilder {
 			type=child.getParent();
 		}
 		if (type==null){
+			return;
+		}
+		if (! type.isDocumented()){
+			/* not documented  - so no link available...*/
 			return;
 		}
 		/* FIXME ATR, 02.02.2017: make the origin doc url parts configurable in prefs or in sdk! And write a dedicated class to create link*/

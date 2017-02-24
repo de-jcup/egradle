@@ -1,0 +1,30 @@
+buildscript{
+	repositories {
+		maven { url "${repositoryUrl}" }
+	}
+
+	dependencies{
+        classpath gradleApi()
+		classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
+		classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+		classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
+    }
+
+	configurations.all {
+		resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+			/*
+			 * asciidoctorj-pdf:1.5.0-alpha.11 has a transitive dependency to asciidoctorj:1.5.4.0
+			 * Unfortunately this version crashes under linux when building a PDF with:
+			 *    (NotImplementedError) fstat unimplemented unsupported or native support failed to load
+			 *
+			 * Therefore we force the version to 1.5.4.1 as a workaround
+			 */
+			if (details.requested.group == 'org.asciidoctor' && details.requested.name == 'asciidoctorj') {
+				details.useVersion '1.5.4.1'
+			}
+		}
+	}
+	
+	//test tag
+	
+}

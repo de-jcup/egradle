@@ -311,6 +311,10 @@ public class GradleLanguageElementEstimater {
 			return mode;
 		}
 
+		/**
+		 * Returns element type used for next action (e.g. proposal)
+		 * @return element type for next asistant action
+		 */
 		public Type getElementType() {
 			if (element instanceof Type) {
 				Type type = (Type) element;

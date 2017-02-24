@@ -20,6 +20,28 @@ public class ProposalIntegrationTest {
 
 
 	@Test
+	public void buildfile__12_buildscript__before_teset_tag_comment() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-12-repositories-in-buildscript-asciidoctor-example.gradle");
+		int offset = calculateIndexBefore(text, "//test tag");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+				whichHasReasonType("org.gradle.api.initialization.dsl.ScriptHandler").
+		and().
+			containsProposalWithLabel("repositories(Closure configureClosure)").
+				whichHasReasonType("org.gradle.api.initialization.dsl.ScriptHandler").
+				whichHasDescription().
+		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
 	public void buildfile__with_dependencies_in_root__when_cursor_is_after_dependencies_bracket() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test1-dependencies-block-inside-root.gradle");
@@ -40,7 +62,6 @@ public class ProposalIntegrationTest {
 		and();
 		/* @formatter:on*/
 	}
-	
 	@Test
 	public void buildfile__with_task_in_root__when_cursor_is_after_task_bracket() {
 		/* prepare */

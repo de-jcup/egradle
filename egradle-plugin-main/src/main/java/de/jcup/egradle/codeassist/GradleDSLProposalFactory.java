@@ -15,7 +15,6 @@ import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.TypeContext;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
@@ -65,6 +64,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
 		Type identifiedType = result.getElementType();
+		/* when this is a documented type we show only documented methods etc. otherwise we support
+		 * all methods
+		 */
+		boolean filterUndocumented = identifiedType.isDocumented();
 		Set<Proposal> proposals = new TreeSet<>();
 		
 		Map<String, Type> extensions = identifiedType.getExtensions();
@@ -99,7 +102,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
-			if (! property.isDocumented()){
+			if (filterUndocumented && ! property.isDocumented()){
 				continue;
 			}
 			/*
@@ -119,7 +122,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Method method : identifiedType.getMethods()) {
-			if (! method.isDocumented()){
+			if (filterUndocumented && ! method.isDocumented()){
 				continue;
 			}
 			if (isIgnoreGetterOrSetter()){

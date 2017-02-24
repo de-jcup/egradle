@@ -103,4 +103,26 @@ public class TestUtil {
 		index=index+searchString.length();
 		return index;
 	}
+	
+	/**
+	 * Calculates index of search string in given text. E.g. a search string "alpha" in text "alpha beta gamma" returns 5 because it is the end position of "alpha"  
+	 * @param text
+	 * @param searchString
+	 * @return index end
+	 * @throws IllegalArgumentException when text is <code>null</code> or searchstring is <code>null</code> or when search string is not found
+	 */
+	public static int calculateIndexBefore(String text, String searchString) {
+		if (text==null){
+			throw new IllegalArgumentException("test case corrupt, argument 'text' may not be null!");
+		}
+		if (searchString==null){
+			throw new IllegalArgumentException("test case corrupt, argument 'searchString' may not be null!");
+		}
+		int index = text.indexOf(searchString);
+		if (index==-1){
+			throw new IllegalArgumentException("test case corrupt - did not found searchString:'"+searchString+"' inside text:"+text);
+		}
+		index=index-1;
+		return index;
+	}
 }

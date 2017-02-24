@@ -46,6 +46,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		this.fileLoader = loader;
 		nameToTypeMapping = new TreeMap<>();
 		unresolveableNames = new TreeSet<>();
+		unresolveableNames.add("void");
 	}
 
 	@Override
