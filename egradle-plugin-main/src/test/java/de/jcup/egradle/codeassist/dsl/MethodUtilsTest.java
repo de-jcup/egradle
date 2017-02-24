@@ -22,6 +22,162 @@ public class MethodUtilsTest {
 	}
 	
 	@Test
+	public void has_signature_method_with_methodName_no_params__methodName_null__true__with_shortening(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", null,true));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_no_params__methodName_null__true(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", null,false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_no_params__otherMethodName_null__false(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "otherMethodName", null,false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_string_param__methodName_String__true(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", new String[]{"String"},false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_string_param__methodName_String__true__with_shortening(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", new String[]{"String"},true));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_java_util_string_param__methodName_String__true__with_shortening(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("java.util.String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", new String[]{"String"},true));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_java_util_string_param__methodName_String__false__without_shortening(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("java.util.String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "methodName", new String[]{"String"},false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_string_param__methodName_Integer__false(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "methodName", new String[]{"Integer"},false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_string_param__otherMethodName_String_false(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "otherMethodName", new String[]{"String"},false));
+	}
+	
+	@Test
+	public void has_signature_method_with_methodName_string_param__methodName_String_String_false(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "methodName", new String[]{"String","String"},false));
+	}
+	
+	
+	@Test
+	public void has_signature_method_with_methodName_string_string_param__methodName_String_String_true(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		Parameter param2 = mock(Parameter.class);
+		when(param2.getTypeAsString()).thenReturn("String");
+		when(param2.getName()).thenReturn("other");
+		parameters.add(param2);
+		
+		/* execute + test */
+		assertTrue(MethodUtils.hasSignature(method, "methodName", new String[]{"String","String"},false));
+	}
+	
+
+	@Test
+	public void has_signature_method_with_methodName_string_string_param__methodName_String_false(){
+		/* prepare */
+		when(method.getName()).thenReturn("methodName");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		Parameter param2 = mock(Parameter.class);
+		when(param2.getTypeAsString()).thenReturn("String");
+		when(param2.getName()).thenReturn("other");
+		parameters.add(param2);
+		
+		/* execute + test */
+		assertFalse(MethodUtils.hasSignature(method, "methodName", new String[]{"String"},false));
+	}
+	
+	@Test
 	public void has_same_signature__true__for_same() {
 		/* prepare */
 		when(method.getName()).thenReturn("myMethod");

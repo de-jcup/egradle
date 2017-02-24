@@ -4,6 +4,7 @@ import static java.nio.charset.StandardCharsets.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,33 +13,44 @@ public class LinkToTypeConverter {
 
 	public static class LinkData {
 
-		private String typeName;
-		private String[] parameters;
-		private String methodName;
+		@Override
+		public String toString() {
+			return "LinkData [mainName=" + mainName + ", subName=" + subName + ", parameterTypes="
+					+ Arrays.toString(parameterTypes) + "]";
+		}
+
+		private String mainName;
+		private String[] parameterTypes;
+		private String subName;
+		private String[] parameterNames;
 
 		/**
 		 * Returns type name or <code>null</code>
 		 * 
 		 * @return type name or <code>null</code>
 		 */
-		public String getTypeName() {
-			return typeName;
+		public String getMainName() {
+			return mainName;
 		}
 
 		/**
-		 * Returns parameters as string array ,never <code>null</code>
+		 * Returns parameter typess as string array ,never <code>null</code>
 		 * 
-		 * @return parameters, or empty array, never <code>null</code>
+		 * @return parameter types, or empty array, never <code>null</code>
 		 */
-		public String[] getParameters() {
-			if (parameters == null) {
+		public String[] getParameterTypes() {
+			if (parameterTypes == null) {
 				return new String[] {};
 			}
-			return parameters;
+			return parameterTypes;
+		}
+		
+		public String[] getParameterNames() {
+			return parameterNames;
 		}
 
-		public String getMethodName() {
-			return methodName;
+		public String getSubName() {
+			return subName;
 		}
 
 	}
@@ -59,7 +71,7 @@ public class LinkToTypeConverter {
 		if (data==null){
 			return;
 		}
-		String typeName = data.typeName;
+		String typeName = data.mainName;
 		if (typeName==null){
 			return;
 		}
@@ -69,7 +81,7 @@ public class LinkToTypeConverter {
 		while (typeName.startsWith("/")) {
 			typeName = StringUtils.removeStart(typeName, "/");
 		}
-		data.typeName=typeName;
+		data.mainName=typeName;
 	}
 
 	private LinkData internalConvertLink(String link) {
@@ -94,20 +106,20 @@ public class LinkToTypeConverter {
 		LinkData data = new LinkData();
 		int index = typeName.indexOf("#");
 		if (index==-1){
-			data.typeName = typeName;
+			data.mainName = typeName;
 			return data;
 		}
 		String[] splitted = StringUtils.split(typeName, "#");
 		if (splitted == null || splitted.length ==0 ) {
-			data.typeName = typeName;
+			data.mainName = typeName;
 			return data;
 		}
 		String methodPart=null;
 		if (splitted.length==1){
-			data.typeName=null;
+			data.mainName=null;
 			methodPart = splitted[0];
 		}else{
-			data.typeName = splitted[0];
+			data.mainName = splitted[0];
 			methodPart = splitted[1];
 		}
 
@@ -116,6 +128,7 @@ public class LinkToTypeConverter {
 			return data;
 		}
 		if (methodPart.indexOf("(") == -1) {
+			data.subName=methodPart; // property...
 			return data;
 		}
 		String[] methodPartArray = StringUtils.split(methodPart, "()");
@@ -126,15 +139,28 @@ public class LinkToTypeConverter {
 		if (methodName==null){
 			return data;
 		}
-		data.methodName=methodName;
+		data.subName=methodName;
 		
 		String methodParams= methodPartArray[1];
 		if (methodParams==null){
 			return data;
 		}
-		methodParams = StringUtils.deleteWhitespace(methodParams);
 		String[] params = StringUtils.split(methodParams, ",");
-		data.parameters = params;
+		data.parameterNames=new String[params.length];
+		for (int i=0;i<params.length;i++){
+			String param = params[i];
+			
+			param = param.trim(); // " String" will be transformed to "String"
+			String[] paramSplited = StringUtils.split(param);
+			param = paramSplited[0]; //"String text" will be transformed to "String"
+			if (paramSplited.length>1){
+				data.parameterNames[i]=paramSplited[1];
+			}else{
+				data.parameterNames[i]="param"+i;
+			}
+			params[i]=param;
+		}
+		data.parameterTypes = params;
 		return data;
 	}
 

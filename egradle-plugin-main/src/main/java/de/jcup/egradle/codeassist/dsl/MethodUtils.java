@@ -234,5 +234,53 @@ public class MethodUtils {
 		return true;
 		
 	}
+	
+	public static boolean hasSignature(Method method, String dataMethodName, String[] dataParameters, boolean shrinkToSimpleTypes) {
+		/* validate parameters */
+		if (method==null){
+			return false;
+		}
+		if (dataMethodName==null){
+			return false;
+		}
+		if (dataParameters==null){
+			dataParameters=new String[]{};
+		}
+		
+		/* check */
+		String methodNameOfType = method.getName();
+		if (!methodNameOfType.equals(dataMethodName)){
+			return false;
+		}
+		List<Parameter> mParams = method.getParameters();
+		if (mParams.size()!=dataParameters.length){
+			return false;
+		}
+		int i=0;
+		for(Parameter mParam: mParams){
+			String mParamType = mParam.getTypeAsString();
+			String dataParamType = dataParameters[i++];
+			if (mParamType== null ){
+				return false;
+			}
+			if (!mParamType.equals(dataParamType)){
+				if (!shrinkToSimpleTypes){
+					return false;
+				}
+				/* try shorting names*/
+				int index = mParamType.lastIndexOf(".");
+				if (index==-1 || index==mParamType.length()-1){
+					return false;
+				}
+				String shortendMParamType = StringUtils.substring(mParamType, index+1);
+				if (!shortendMParamType.equals(dataParamType)){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	
 
 }

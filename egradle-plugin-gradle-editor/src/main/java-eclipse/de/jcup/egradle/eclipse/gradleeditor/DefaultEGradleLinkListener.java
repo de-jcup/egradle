@@ -1,12 +1,11 @@
 package de.jcup.egradle.eclipse.gradleeditor;
 
-import java.util.List;
-
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
-import de.jcup.egradle.codeassist.dsl.Parameter;
+import de.jcup.egradle.codeassist.dsl.MethodUtils;
+import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.LinkToTypeConverter;
@@ -22,24 +21,22 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 	private String commentColor;
 	private HTMLDescriptionBuilder builder;
 
-	public DefaultEGradleLinkListener(String fgColor, String bgColor, String commentColor, HTMLDescriptionBuilder builder) {
+	public DefaultEGradleLinkListener(String fgColor, String bgColor, String commentColor,
+			HTMLDescriptionBuilder builder) {
 		this.linkToTypeConverter = new LinkToTypeConverter();
 		this.fgColor = fgColor;
 		this.bgColor = bgColor;
 		this.commentColor = commentColor;
-		this.builder=builder;
+		this.builder = builder;
 	}
 
 	@Override
 	public void onEGradleHyperlinkClicked(SimpleBrowserInformationControl control, String target) {
-		LinkData data = linkToTypeConverter.convertLink(target);
-		if (data==null){
+		/* validate parameters */
+		if (control==null){
 			return;
 		}
-		String convertedName = data.getTypeName();
-		String[] dataParameters = data.getParameters();
-		String dataMethodName = data.getMethodName();
-		if (convertedName == null) {
+		if (target==null){
 			return;
 		}
 		CodeCompletionRegistry registry = Activator.getDefault().getCodeCompletionRegistry();
@@ -50,65 +47,86 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		if (provider == null) {
 			return;
 		}
-
-		/* FIXME ATR, 06.02.2017: move link parameter resolving into own class!! and create testcases! 
-		 * maybe it could be used for generation /link building as well
-		 * */
+		
+		/* fetch data + validate */
+		LinkData data = linkToTypeConverter.convertLink(target);
+		if (data == null) {
+			return;
+		}
+		String convertedName = data.getMainName();
+		if (convertedName == null) {
+			return;
+		}
 		
 		Type type = provider.getType(convertedName);
 		if (type == null) {
 			return;
 		}
-		LanguageElement elementTarget = type;
-		/* check if link data has parameters inside */
-		if (dataParameters.length>0){
-			
-			/* scan for method */
-			for (Method methodOfType: type.getMethods()){
-				String methodNameOfType = methodOfType.getName();
-				if (!methodNameOfType.equals(dataMethodName)){
-					continue;
-				}
-				List<Parameter> mParams = methodOfType.getParameters();
-				if (mParams.size()!=dataParameters.length){
-					continue;
-				}
-				boolean allParametersSame=true;
-				int i=0;
-				for(Parameter mParam: mParams){
-					String mParamType = mParam.getTypeAsString();
-					String dataParamType = dataParameters[i++];
-					if (mParamType== null ){
-						allParametersSame=false;
-						break;
-					}
-					if (!mParamType.equals(dataParamType)){
-						/* try shorting names*/
-						int index = mParamType.lastIndexOf(".");
-						if (index==-1 || index==mParamType.length()-1){
-							allParametersSame=false;
-							break;
-						}
-						String shortendMParamType = mParamType.substring(index);
-						if (!shortendMParamType.equals(dataParamType)){
-							allParametersSame=false;
-							break;
-						}
-					}
-				}
-				if (allParametersSame){
-					elementTarget=methodOfType;
-					break;
-				}
-			}
+		/* execute */
+		LanguageElement elementTarget = null;
+		
+		if (elementTarget==null){
+			elementTarget = scanForPropertyElement(type,data);
 		}
-		control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, commentColor, null, elementTarget,null));
+		if (elementTarget==null){
+			elementTarget = scanForMethodElement(type,data);
+		}
+		if (elementTarget==null){
+			elementTarget=type;
+		}
+		
+		control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, commentColor, null, elementTarget, null));
 
 	}
 
 	@Override
 	public boolean isAcceptingHyperlink(String target) {
 		return linkToTypeConverter.isLinkSchemaConvertable(target);
+	}
+	
+	private LanguageElement scanForPropertyElement(Type type, LinkData data) {
+		String[] dataParameters = data.getParameterTypes();
+		String propertyName = data.getSubName();
+		
+		if (propertyName == null) {
+			return null;
+		}
+		if (dataParameters != null && dataParameters.length > 0) {
+			/* properties have no params */
+			return null;
+		}
+		/* scan for property */
+		for (Property property: type.getProperties()) {
+			if (property.getName().equals(propertyName)){
+				return property;
+			}
+		}
+		return null;
+	}
+
+	private LanguageElement scanForMethodElement(Type type, LinkData data) {
+		String[] dataParameters = data.getParameterTypes();
+		String dataMethodName = data.getSubName();
+		
+		if (dataMethodName == null) {
+			return null;
+		}
+		if (dataParameters == null || dataParameters.length == 0) {
+			return null;
+		}
+		/* scan for method */
+		for (Method methodOfType : type.getMethods()) {
+			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters,false)) {
+				return methodOfType;
+			}
+		}
+		/* second way - with shortening...*/
+		for (Method methodOfType : type.getMethods()) {
+			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters,true)) {
+				return methodOfType;
+			}
+		}
+		return null;
 	}
 
 }

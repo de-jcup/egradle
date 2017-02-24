@@ -129,13 +129,14 @@ public class HTMLDescriptionBuilder {
 		description.append("<div class='fullName'>");
 		description.append(type.getName());
 		description.append("</div>");
-		description.append("<a href='#appendix'>Go to appendix</a>");
+		description.append("<a href='#appendix'>Go to appendix</a><br>");
 		
 		description.append(type.getDescription());
 		appendLinkToGradleOriginDoc(type, description);
 		
 		description.append("<h4 id='appendix'>Appendix:</h4>");
-		description.append("<h5>Methods:</h5>");
+		description.append("Contains list of <a href='#appendix_methods'>methods</a> and <a href='#appendix_properties'>properties</a> of "+type.getName());
+		description.append("<h5 id='appendix_methods'>Methods:</h5>");
 		Set<Method> methods = type.getMethods();
 		SortedSet<String> sortedLinkReferences =new TreeSet<>();
 		for (Method m: methods){
@@ -154,7 +155,7 @@ public class HTMLDescriptionBuilder {
 			description.append(referenceLink);
 		}
 		description.append("</ul>");
-		description.append("<h5>Properties:</h5>");
+		description.append("<h5 id='appendix_properties'>Properties:</h5>");
 		Set<Property> properties= type.getProperties();
 		sortedLinkReferences =new TreeSet<>();
 		/* FIXME ATR, 07.02.2017: properties must be resolveable by type url also! */
