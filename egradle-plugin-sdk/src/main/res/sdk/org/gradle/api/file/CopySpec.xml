@@ -54,8 +54,8 @@
  }
  &lt;/pre&gt;
 
- @see org.gradle.api.tasks.Copy Copy Task
- @see org.gradle.api.Project#copy(groovy.lang.Closure) Project.copy()
+ (see &lt;a href='type://org.gradle.api.tasks.Copy'&gt;Copy Task&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.api.Project#copy(groovy.lang.Closure)'&gt;Project.copy()&lt;/a&gt;)
 
 </description>
     <method name="eachFile" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileCopyDetails">
@@ -70,10 +70,10 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileTreeElement">
+    <method name="exclude" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.tasks.util.PatternFilterable">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="excludeSpec"/>
@@ -81,7 +81,7 @@
     <method name="exclude" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -89,7 +89,7 @@
     <method name="exclude" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="excludes"/>
@@ -97,7 +97,7 @@
     <method name="exclude" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/>
@@ -187,7 +187,7 @@
  This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String,'&gt;org.gradle.api.Action)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for files included by this copy spec.
- @see DuplicatesStrategy
+ (see &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt;)
 
 </description>
     </method>
@@ -196,7 +196,7 @@
  By default, the JVM default charset is used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the charset used to read and write files when filtering
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -207,10 +207,10 @@
 
 </description>
     </method>
-    <method name="include" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.FileTreeElement">
+    <method name="include" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.tasks.util.PatternFilterable">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="includeSpec"/>
@@ -218,7 +218,7 @@
     <method name="include" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
@@ -226,7 +226,7 @@
     <method name="include" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="includes"/>
@@ -234,7 +234,7 @@
     <method name="include" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="includeSpec"/>
@@ -320,7 +320,7 @@
     <method name="setExcludes" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -329,7 +329,7 @@
         <description> Specifies the charset used to read and write files when filtering.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset the name of the charset to use when filtering files
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
         <parameter type="java.lang.String" name="charset"/>
@@ -345,7 +345,7 @@
     <method name="setIncludes" returnType="org.gradle.api.file.CopySpec">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
@@ -390,14 +390,14 @@
  This strategy can be overridden for individual files by using &lt;a href='type://org.gradle.api.file.CopySpec#eachFile(org.gradle.api.Action)'&gt;#eachFile(org.gradle.api.Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.file.CopySpec#filesMatching(String,'&gt;org.gradle.api.Action)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for files included by this copy spec.
- @see DuplicatesStrategy
+ (see &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt;)
 
 </description>
     </property>
     <property name="excludes" type="java.lang.Iterable">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
     </property>
@@ -406,7 +406,7 @@
  By default, the JVM default charset is used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the charset used to read and write files when filtering
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>
@@ -420,7 +420,7 @@
     <property name="includes" type="java.lang.Iterable">
         <description> {@inheritDoc}
 
- @see org.gradle.api.tasks.util.PatternFilterable Pattern Format
+ (see &lt;a href='type://org.gradle.api.tasks.util.PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
     </property>

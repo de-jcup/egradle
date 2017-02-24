@@ -2,13 +2,13 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaModule" version="3.0">
     <description> Represents information about the IDEA module.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getCompilerOutput" returnType="org.gradle.tooling.model.idea.IdeaCompilerOutput">
         <description> Returns information about idea compiler output (output dirs, inheritance of output dir, etc.)
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -16,7 +16,7 @@
         <description> All content roots. Most idea modules have a single content root.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;content roots
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -24,7 +24,7 @@
         <description> dependencies of this module (i.e. module dependencies, library dependencies, etc.)
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependencies
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -35,7 +35,7 @@
  See &lt;a href='type://HasGradleProject'&gt;HasGradleProject&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;associated gradle project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -43,7 +43,7 @@
         <description> The unique identifier for this IDEA module.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The unique identifier for this IDEA module.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -52,7 +52,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java language settings.
  @throws UnsupportedMethodException For Gradle versions older than 2.11, where this method is not supported.
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     </method>
@@ -61,7 +61,7 @@
  Alias to &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule#getProject()'&gt;#getProject()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;idea project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -70,7 +70,7 @@
  Alias to &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule#getParent()'&gt;#getParent()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;idea project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -79,7 +79,7 @@
     <property name="compilerOutput" type="org.gradle.tooling.model.idea.IdeaCompilerOutput">
         <description> Returns information about idea compiler output (output dirs, inheritance of output dir, etc.)
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -87,7 +87,7 @@
         <description> All content roots. Most idea modules have a single content root.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;content roots
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -95,7 +95,7 @@
         <description> dependencies of this module (i.e. module dependencies, library dependencies, etc.)
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;dependencies
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -106,7 +106,7 @@
  See &lt;a href='type://HasGradleProject'&gt;HasGradleProject&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;associated gradle project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -114,7 +114,7 @@
         <description> The unique identifier for this IDEA module.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The unique identifier for this IDEA module.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>
@@ -123,7 +123,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java language settings.
  @throws UnsupportedMethodException For Gradle versions older than 2.11, where this method is not supported.
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     </property>
@@ -132,7 +132,7 @@
  Alias to &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule#getProject()'&gt;#getProject()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;idea project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -141,7 +141,7 @@
  Alias to &lt;a href='type://org.gradle.tooling.model.idea.IdeaModule#getParent()'&gt;#getParent()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;idea project
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>

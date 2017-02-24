@@ -11,7 +11,7 @@
  Enabling this report will also cause the XML report to be generated, as the HTML is derived from the XML.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle HTML report
- @since 2.10
+ &lt;br&gt;(since 2.10)
 
 </description>
     </method>
@@ -33,7 +33,7 @@
  Enabling this report will also cause the XML report to be generated, as the HTML is derived from the XML.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle HTML report
- @since 2.10
+ &lt;br&gt;(since 2.10)
 
 </description>
     </property>

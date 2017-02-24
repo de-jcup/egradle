@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskProgressEvent" version="3.0">
     <description> Root interface for all events that signal progress while executing a task.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     <method name="getDescriptor" returnType="org.gradle.tooling.events.task.TaskOperationDescriptor">

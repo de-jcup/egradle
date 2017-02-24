@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ComponentArtifactsResult" version="3.0">
     <description> The result of successfully resolving a component with a set of artifacts.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
     <method name="getArtifacts" returnType="java.util.Set">

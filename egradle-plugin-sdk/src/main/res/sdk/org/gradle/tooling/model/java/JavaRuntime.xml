@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.java.JavaRuntime" version="3.0">
     <description> Represents a Java virtual machine installation.
 
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     <method name="getJavaHome" returnType="java.io.File">

@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin" version="3.0">
     <description> Adds the ability to publish in the Maven format to Maven repositories.
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="apply" returnType="void">

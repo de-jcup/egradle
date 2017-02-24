@@ -33,7 +33,7 @@
  }
  &lt;/pre&gt;
 
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
     <method name="cacheChangingModulesFor" returnType="void" documented="true">
@@ -43,7 +43,7 @@
  Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
         <parameter type="int" name="value"/>
@@ -57,7 +57,7 @@
  &lt;p&gt;Use this method to provide a custom expiry time after which the cached entries for any changing module will be expired.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
         <parameter type="int" name="value"/>
@@ -70,7 +70,7 @@
  Units are resolved by calling the &lt;a href='type://valueOf(String)'&gt;valueOf(String)&lt;/a&gt; method of &lt;a href='type://java.util.concurrent.TimeUnit'&gt;java.util.concurrent.TimeUnit&lt;/a&gt; with the upper-cased string value.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
         <parameter type="int" name="value"/>
@@ -84,7 +84,7 @@
  &lt;p&gt;Use this method to provide a custom expiry time after which the cached value for any dynamic version will be expired.&lt;/p&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The number of time units
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;units The units
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
         <parameter type="int" name="value"/>
@@ -95,7 +95,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action Action to be applied to the &lt;a href='type://ComponentSelectionRules'&gt;ComponentSelectionRules&lt;/a&gt;
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
@@ -120,8 +120,8 @@
  &lt;/pre&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance
- @see DependencySubstitutions
- @since 2.5
+ (see &lt;a href='type://DependencySubstitutions'&gt;DependencySubstitutions&lt;/a&gt;)
+ &lt;br&gt;(since 2.5)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
@@ -154,7 +154,7 @@
  The rules are evaluated in order they are declared. Rules are evaluated after forced modules are applied (see &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#force(Object...)'&gt;#force(Object...)&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
         <parameter type="org.gradle.api.Action" name="rule"/>
@@ -174,7 +174,7 @@
  &lt;/pre&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this resolution strategy instance
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
     </method>
@@ -199,7 +199,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleVersionSelectorNotations typically group:name:version notations to append
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance
- @since 1.0-milestone-7
+ &lt;br&gt;(since 1.0-milestone-7)
 
 </description>
         <parameter type="java.lang.Object" name="moduleVersionSelectorNotations"/>
@@ -208,14 +208,14 @@
         <description> Returns the currently configured version selection rules object.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version selection rules
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
     <method name="getDependencySubstitution" returnType="org.gradle.api.artifacts.DependencySubstitutions">
         <description> Returns the set of dependency substitution rules that are set for this configuration.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </method>
@@ -223,7 +223,7 @@
         <description> Returns currently configured forced modules. For more information on forcing versions see &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#force(Object...)'&gt;#force(Object...)&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;forced modules
- @since 1.0-milestone-7
+ &lt;br&gt;(since 1.0-milestone-7)
 
 </description>
     </method>
@@ -244,7 +244,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleVersionSelectorNotations typically group:name:version notations to set
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this ResolutionStrategy instance
- @since 1.0-milestone-7
+ &lt;br&gt;(since 1.0-milestone-7)
 
 </description>
         <parameter type="java.lang.Object" name="moduleVersionSelectorNotations"/>
@@ -253,14 +253,14 @@
         <description> Returns the currently configured version selection rules object.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the version selection rules
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>
     <property name="dependencySubstitution" type="org.gradle.api.artifacts.DependencySubstitutions" documented="true">
         <description> Returns the set of dependency substitution rules that are set for this configuration.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </property>
@@ -268,7 +268,7 @@
         <description> Returns currently configured forced modules. For more information on forcing versions see &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#force(Object...)'&gt;#force(Object...)&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;forced modules
- @since 1.0-milestone-7
+ &lt;br&gt;(since 1.0-milestone-7)
 
 </description>
     </property>

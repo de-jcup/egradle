@@ -13,7 +13,7 @@
 
  &lt;p&gt;All implementations of this interface are required to be thread safe.&lt;/p&gt;
 
- @since 2.1
+ &lt;br&gt;(since 2.1)
 
 </description>
     <method name="cancel" returnType="void">

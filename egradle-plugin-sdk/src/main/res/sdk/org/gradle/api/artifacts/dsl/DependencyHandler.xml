@@ -253,7 +253,7 @@
  &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentMetadataHandler&lt;/a&gt; for this project.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
@@ -282,7 +282,7 @@
     <method name="createArtifactResolutionQuery" returnType="org.gradle.api.artifacts.query.ArtifactResolutionQuery" documented="true">
         <description> Creates an artifact resolution query.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
     </method>
@@ -291,7 +291,7 @@
  that modify the metadata of depended-on software components.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     </method>
@@ -300,7 +300,7 @@
  that modify the metadata of depended-on software components.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -315,7 +315,7 @@
         <description> Creates a dependency on the &lt;a href="http://docs.gradle.org/current/userguide/test_kit.html"&gt;Gradle test-kit&lt;/a&gt; API.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependency.
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     </method>
@@ -353,7 +353,7 @@
  &lt;p&gt;This method executes the given action against the &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler&lt;/a&gt; for this project.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureAction the action to use to configure module metadata
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
         <parameter type="org.gradle.api.Action" name="configureAction"/>
@@ -372,7 +372,7 @@
  that modify the metadata of depended-on software components.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component metadata handler for this project
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     </property>
@@ -381,7 +381,7 @@
  that modify the metadata of depended-on software components.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the component module metadata handler for this project
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

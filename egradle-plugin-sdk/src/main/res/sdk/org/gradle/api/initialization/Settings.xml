@@ -2,8 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.initialization.Settings" version="3.0" documented="true">
     <description> &lt;p&gt;Declares the configuration required to instantiate and configure the hierarchy of &lt;a href='type://org.gradle.api.Project'&gt;org.gradle.api.Project&lt;/a&gt; instances which are to participate in a build.&lt;/p&gt;
 
- &lt;p&gt;There is a one-to-one correspondence between a &lt;code&gt;Settings&lt;/code&gt; instance and a &lt;code&gt;{@value
- #DEFAULT_SETTINGS_FILE}&lt;/code&gt; settings file. Before Gradle assembles the projects for a build, it creates a
+ &lt;p&gt;There is a one-to-one correspondence between a &lt;code&gt;Settings&lt;/code&gt; instance and a &lt;code&gt;&lt;em class='value'&gt;#DEFAULT_SETTINGS_FILE&lt;/em&gt;&lt;/code&gt; settings file. Before Gradle assembles the projects for a build, it creates a
  &lt;code&gt;Settings&lt;/code&gt; instance and executes the settings file against it.&lt;/p&gt;
 
  &lt;h3&gt;Assembling a Multi-Project Build&lt;/h3&gt;
@@ -26,10 +25,10 @@
 
  &lt;ul&gt;
 
- &lt;li&gt;Defined in the {@value org.gradle.api.Project#GRADLE_PROPERTIES} file located in the settings directory of the
+ &lt;li&gt;Defined in the &lt;em class='value'&gt;org.gradle.api.Project#GRADLE_PROPERTIES&lt;/em&gt; file located in the settings directory of the
  build.&lt;/li&gt;
 
- &lt;li&gt;Defined the {@value org.gradle.api.Project#GRADLE_PROPERTIES} file located in the user's &lt;a href='type://.gradle'&gt;.gradle&lt;/a&gt;
+ &lt;li&gt;Defined the &lt;em class='value'&gt;org.gradle.api.Project#GRADLE_PROPERTIES&lt;/em&gt; file located in the user's &lt;a href='type://.gradle'&gt;.gradle&lt;/a&gt;
  directory.&lt;/li&gt;
 
  &lt;li&gt;Provided on the command-line using the -P option.&lt;/li&gt;

@@ -4,7 +4,7 @@
  &lt;p&gt;
  The exception extends &lt;a href='type://UnsupportedVersionException'&gt;UnsupportedVersionException&lt;/a&gt; only for backwards compatibility reasons.
 
- @since 1.0-milestone-8
+ &lt;br&gt;(since 1.0-milestone-8)
 
 </description>
 </type>

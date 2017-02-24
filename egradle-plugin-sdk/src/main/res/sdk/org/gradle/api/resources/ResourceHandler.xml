@@ -16,7 +16,7 @@
         <description> Returns a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s from various sources such as
  strings, files, and archive entries.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s
 
@@ -35,7 +35,7 @@
         <description> Returns a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s from various sources such as
  strings, files, and archive entries.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a factory for creating &lt;a href='type://TextResource'&gt;TextResource&lt;/a&gt;s
 

@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.plugins.quality.JDependExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension" documented="true">
     <description> Configuration options for the JDepend plugin.
 
- @see JDependPlugin
+ (see &lt;a href='type://JDependPlugin'&gt;JDependPlugin&lt;/a&gt;)
 
 </description>
 </type>

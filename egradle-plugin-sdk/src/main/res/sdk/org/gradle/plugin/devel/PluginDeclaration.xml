@@ -2,8 +2,8 @@
 <type language="gradle" name="org.gradle.plugin.devel.PluginDeclaration" version="3.0">
     <description> Describes a Gradle plugin under development.
 
- @see org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin
- @since 2.14
+ (see &lt;a href='type://org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin'&gt;org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin&lt;/a&gt;)
+ &lt;br&gt;(since 2.14)
 
 </description>
     <method name="equals" returnType="boolean">

@@ -16,7 +16,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not
  originate from a remote repository.
- @since 1.1
+ &lt;br&gt;(since 1.1)
 
 </description>
     </method>
@@ -38,7 +38,7 @@
         <description> Marks this dependency as exported.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported.
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </method>
@@ -47,7 +47,7 @@
         <description> Marks this dependency as exported.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported.
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </property>
@@ -64,7 +64,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Gradle module information for this dependency, or &lt;a href='type://null'&gt;null&lt;/a&gt; if the dependency does not
  originate from a remote repository.
- @since 1.1
+ &lt;br&gt;(since 1.1)
 
 </description>
     </property>

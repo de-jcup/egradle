@@ -84,7 +84,7 @@
         <description> Returns the name of the compile classpath configuration for this source set.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile classpath configuration
 
- @since 2.12
+ &lt;br&gt;(since 2.12)
 
 </description>
     </method>
@@ -105,7 +105,7 @@
         <description> Returns the name of the compile only configuration for this source set.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile only configuration name
 
- @since 2.12
+ &lt;br&gt;(since 2.12)
 
 </description>
     </method>
@@ -284,7 +284,7 @@ source files.
         <description> Returns the name of the compile classpath configuration for this source set.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile classpath configuration
 
- @since 2.12
+ &lt;br&gt;(since 2.12)
 
 </description>
     </property>
@@ -305,7 +305,7 @@ source files.
         <description> Returns the name of the compile only configuration for this source set.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The compile only configuration name
 
- @since 2.12
+ &lt;br&gt;(since 2.12)
 
 </description>
     </property>

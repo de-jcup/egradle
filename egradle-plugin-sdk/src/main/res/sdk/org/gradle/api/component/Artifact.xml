@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.component.Artifact" version="3.0">
     <description> An artifact of a software component that may be requested in the result of an artifact query.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
 </type>

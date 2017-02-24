@@ -2,9 +2,9 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.ProgressListener" version="3.0">
     <description> A listener which is notified when operations that are executed as part of running a build make progress.
 
- @see org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener)
- @see org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener, java.util.Set)
- @since 2.5
+ (see &lt;a href='type://org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener)'&gt;org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener,'&gt;java.util.Set)&lt;/a&gt;)
+ &lt;br&gt;(since 2.5)
 
 </description>
     <method name="statusChanged" returnType="void">
@@ -28,9 +28,9 @@
  by querying the descriptor using &lt;a href='type://org.gradle.tooling.events.ProgressEvent#getDescriptor()'&gt;org.gradle.tooling.events.ProgressEvent#getDescriptor()&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;event An event describing the operation progress.
- @see org.gradle.tooling.events.test.TestProgressEvent
- @see org.gradle.tooling.events.task.TaskProgressEvent
- @see org.gradle.tooling.events.ProgressEvent
+ (see &lt;a href='type://org.gradle.tooling.events.test.TestProgressEvent'&gt;org.gradle.tooling.events.test.TestProgressEvent&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.events.task.TaskProgressEvent'&gt;org.gradle.tooling.events.task.TaskProgressEvent&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.events.ProgressEvent'&gt;org.gradle.tooling.events.ProgressEvent&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.tooling.events.ProgressEvent" name="event"/>

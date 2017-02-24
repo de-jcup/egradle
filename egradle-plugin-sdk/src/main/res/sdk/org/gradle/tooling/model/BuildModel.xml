@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.BuildModel" version="3.0">
     <description> Represents a model that is associated with or represents some Gradle build.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">

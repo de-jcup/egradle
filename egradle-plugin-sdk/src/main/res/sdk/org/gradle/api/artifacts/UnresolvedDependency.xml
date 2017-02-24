@@ -11,7 +11,7 @@
     <method name="getSelector" returnType="org.gradle.api.artifacts.ModuleVersionSelector">
         <description> The module selector of the dependency.
 
- @since 1.1-rc-1
+ &lt;br&gt;(since 1.1-rc-1)
 
 </description>
     </method>
@@ -23,7 +23,7 @@
     <property name="selector" type="org.gradle.api.artifacts.ModuleVersionSelector">
         <description> The module selector of the dependency.
 
- @since 1.1-rc-1
+ &lt;br&gt;(since 1.1-rc-1)
 
 </description>
     </property>

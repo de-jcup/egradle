@@ -6,7 +6,7 @@
     <method name="combinedExtension" returnType="java.lang.String">
         <description> Combines the extension of the given file with the expected signature extension.
 
- @see #getExtension()
+ (see &lt;a href='type://org.gradle.plugins.signing.type.SignatureType#getExtension()'&gt;#getExtension()&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;toSign The file to be signed
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The combined file extension (without the leading dot)
 

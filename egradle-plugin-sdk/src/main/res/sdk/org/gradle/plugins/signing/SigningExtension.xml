@@ -79,7 +79,7 @@
 
  &lt;p&gt;Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.&lt;/p&gt;
 
- @see #setRequired(Object)
+ (see &lt;a href='type://org.gradle.plugins.signing.SigningExtension#setRequired(Object)'&gt;#setRequired(Object)&lt;/a&gt;)
 
 </description>
     </method>
@@ -242,7 +242,7 @@
 
  &lt;p&gt;Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.&lt;/p&gt;
 
- @see #setRequired(Object)
+ (see &lt;a href='type://org.gradle.plugins.signing.SigningExtension#setRequired(Object)'&gt;#setRequired(Object)&lt;/a&gt;)
 
 </description>
     </property>

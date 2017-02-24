@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ArtifactResolutionResult" version="3.0">
     <description> The result of executing an artifact resolution query.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
     <method name="getComponents" returnType="java.util.Set">

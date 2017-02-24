@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.BasicGradleProject" version="3.0">
     <description> Provides some basic details about a Gradle project.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet">
@@ -43,7 +43,7 @@
     <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for this Gradle project.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -87,7 +87,7 @@
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for this Gradle project.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </property>

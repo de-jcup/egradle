@@ -2,9 +2,9 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.ClasspathAttribute" version="3.0">
     <description> Optional description associated with Eclipse classpath entries.
 
- @see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IClasspathAttribute.html"&gt;IClassAttribute Javadoc&lt;/a&gt;
+ (see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IClasspathAttribute.html"&gt;IClassAttribute Javadoc&lt;/a&gt;)
 
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     <method name="getName" returnType="java.lang.String">

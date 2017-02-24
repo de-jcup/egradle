@@ -23,7 +23,7 @@
  You can change this property but it is not recommended as JVMs expect manifests content to be encoded using UTF-8.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to encode the manifest content
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -34,7 +34,7 @@
  You can change this property but it is not recommended as JVMs expect JAR metadata to be encoded using UTF-8
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to encode JAR metadata like file names
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -72,8 +72,8 @@
         <description> The character set used to encode the manifest content.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;manifestContentCharset the character set used to encode the manifest content
- @since 2.14
- @see #getManifestContentCharset()
+ &lt;br&gt;(since 2.14)
+ (see &lt;a href='type://org.gradle.jvm.tasks.Jar#getManifestContentCharset()'&gt;#getManifestContentCharset()&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="manifestContentCharset"/>
@@ -84,7 +84,7 @@
  You can change this property but it is not recommended as JVMs expect JAR metadata to be encoded using UTF-8
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;metadataCharset the character set used to encode JAR metadata like file names
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
         <parameter type="java.lang.String" name="metadataCharset"/>
@@ -102,7 +102,7 @@
  You can change this property but it is not recommended as JVMs expect manifests content to be encoded using UTF-8.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to encode the manifest content
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>
@@ -113,7 +113,7 @@
  You can change this property but it is not recommended as JVMs expect JAR metadata to be encoded using UTF-8
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the character set used to encode JAR metadata like file names
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>

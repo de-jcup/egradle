@@ -84,7 +84,7 @@
  Defaults to the number of processors available to the Java virtual machine.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;maximum number of concurrent workers, always &gt;= 1.
- @see java.lang.Runtime#availableProcessors()
+ (see &lt;a href='type://java.lang.Runtime#availableProcessors()'&gt;java.lang.Runtime#availableProcessors()&lt;/a&gt;)
 
 </description>
     </method>
@@ -111,7 +111,7 @@
  Will return null if the default settings file is to be used. However, if &lt;a href='type://org.gradle.StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt; returns true, then no settings file at all will be used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings file. May be null.
- @see #isUseEmptySettings()
+ (see &lt;a href='type://org.gradle.StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt;)
 
 </description>
     </method>
@@ -162,7 +162,7 @@
     <method name="isParallelProjectExecutionEnabled" returnType="boolean">
         <description> Returns true if parallel project execution is enabled.
 
- @see #getMaxWorkerCount()
+ (see &lt;a href='type://org.gradle.StartParameter#getMaxWorkerCount()'&gt;#getMaxWorkerCount()&lt;/a&gt;)
 
 </description>
     </method>
@@ -300,7 +300,7 @@
         <description> Specifies the maximum number of concurrent workers used for underlying build operations.
 
  @throws IllegalArgumentException if &lt;a href='type://maxWorkerCount'&gt;maxWorkerCount&lt;/a&gt; is &amp;lt; 1
- @see #getMaxWorkerCount()
+ (see &lt;a href='type://org.gradle.StartParameter#getMaxWorkerCount()'&gt;#getMaxWorkerCount()&lt;/a&gt;)
 
 </description>
         <parameter type="int" name="maxWorkerCount"/>
@@ -314,7 +314,7 @@
     <method name="setParallelProjectExecutionEnabled" returnType="void">
         <description> Enables/disables parallel project execution.
 
- @see #isParallelProjectExecutionEnabled()
+ (see &lt;a href='type://org.gradle.StartParameter#isParallelProjectExecutionEnabled()'&gt;#isParallelProjectExecutionEnabled()&lt;/a&gt;)
 
 </description>
         <parameter type="boolean" name="parallelProjectExecution"/>
@@ -503,7 +503,7 @@
  Defaults to the number of processors available to the Java virtual machine.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;maximum number of concurrent workers, always &gt;= 1.
- @see java.lang.Runtime#availableProcessors()
+ (see &lt;a href='type://java.lang.Runtime#availableProcessors()'&gt;java.lang.Runtime#availableProcessors()&lt;/a&gt;)
 
 </description>
     </property>
@@ -515,7 +515,7 @@
     <property name="parallelProjectExecutionEnabled" type="boolean">
         <description> Returns true if parallel project execution is enabled.
 
- @see #getMaxWorkerCount()
+ (see &lt;a href='type://org.gradle.StartParameter#getMaxWorkerCount()'&gt;#getMaxWorkerCount()&lt;/a&gt;)
 
 </description>
     </property>
@@ -563,7 +563,7 @@
  Will return null if the default settings file is to be used. However, if &lt;a href='type://org.gradle.StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt; returns true, then no settings file at all will be used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The settings file. May be null.
- @see #isUseEmptySettings()
+ (see &lt;a href='type://org.gradle.StartParameter#isUseEmptySettings()'&gt;#isUseEmptySettings()&lt;/a&gt;)
 
 </description>
     </property>

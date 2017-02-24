@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.plugins.quality.PmdExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension" documented="true">
     <description> Configuration options for the PMD plugin.
 
- @see PmdPlugin
+ (see &lt;a href='type://PmdPlugin'&gt;PmdPlugin&lt;/a&gt;)
 
 </description>
     <method name="getRulePriority" returnType="int">
@@ -23,7 +23,7 @@
 
  Example: ruleSetConfig = resources.text.fromFile("config/pmd/myRuleSet.xml")
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -120,7 +120,7 @@
 
  Example: ruleSetConfig = resources.text.fromFile("config/pmd/myRuleSet.xml")
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

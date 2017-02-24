@@ -17,7 +17,7 @@
  }
  &lt;/pre&gt;
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     <method name="module" returnType="void" documented="true">
@@ -33,7 +33,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;moduleNotation an identifier of the module. String "group:name", e.g. 'org.gradle:gradle-core'
  or an instance of &lt;a href='type://org.gradle.api.artifacts.ModuleIdentifier'&gt;org.gradle.api.artifacts.ModuleIdentifier&lt;/a&gt;
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rule a rule that applies to the components of the specified module
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
         <parameter type="java.lang.Object" name="moduleNotation"/>

@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaModuleDependency" version="3.0">
     <description> Dependency on a module in a project.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getDependencyModule" returnType="org.gradle.tooling.model.idea.IdeaModule">
@@ -16,7 +16,7 @@
         <description> Returns the identifier of the target Idea module.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -32,7 +32,7 @@
         <description> Returns the identifier of the target Idea module.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>

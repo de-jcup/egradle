@@ -40,7 +40,7 @@
         <description> Returns the path where the gradle distributions needed by the wrapper are unzipped. The path is relative to the
  distribution base directory
 
- @see #setDistributionPath(String)
+ (see &lt;a href='type://org.gradle.api.tasks.wrapper.Wrapper#setDistributionPath(String)'&gt;#setDistributionPath(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -62,7 +62,7 @@
     <method name="getGradleVersion" returnType="java.lang.String">
         <description> Returns the gradle version for the wrapper.
 
- @see #setGradleVersion(String)
+ (see &lt;a href='type://org.gradle.api.tasks.wrapper.Wrapper#setGradleVersion(String)'&gt;#setGradleVersion(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -106,7 +106,7 @@
         <description> Sets the path where the gradle distributions needed by the wrapper are unzipped. The path is relative to the
  distribution base directory
 
- @see #setDistributionPath(String)
+ (see &lt;a href='type://org.gradle.api.tasks.wrapper.Wrapper#setDistributionPath(String)'&gt;#setDistributionPath(String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="distributionPath"/>
@@ -175,7 +175,7 @@
         <description> Returns the path where the gradle distributions needed by the wrapper are unzipped. The path is relative to the
  distribution base directory
 
- @see #setDistributionPath(String)
+ (see &lt;a href='type://org.gradle.api.tasks.wrapper.Wrapper#setDistributionPath(String)'&gt;#setDistributionPath(String)&lt;/a&gt;)
 
 </description>
     </property>
@@ -197,7 +197,7 @@
     <property name="gradleVersion" type="java.lang.String" documented="true">
         <description> Returns the gradle version for the wrapper.
 
- @see #setGradleVersion(String)
+ (see &lt;a href='type://org.gradle.api.tasks.wrapper.Wrapper#setGradleVersion(String)'&gt;#setGradleVersion(String)&lt;/a&gt;)
 
 </description>
     </property>

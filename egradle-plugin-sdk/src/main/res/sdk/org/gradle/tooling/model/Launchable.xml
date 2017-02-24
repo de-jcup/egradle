@@ -5,14 +5,14 @@
  &lt;p&gt;To launch a build, you pass one or more &lt;a href='type://org.gradle.tooling.model.Launchable'&gt;org.gradle.tooling.model.Launchable&lt;/a&gt; instances
  to either &lt;a href='type://org.gradle.tooling.BuildLauncher#forTasks(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forTasks(Iterable)&lt;/a&gt; or &lt;a href='type://org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)&lt;/a&gt;.&lt;/p&gt;
 
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     <method name="getDescription" returnType="java.lang.String">
         <description> Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </method>
@@ -20,14 +20,14 @@
         <description> Returns a human-consumable display name for this launchable.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </method>
     <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for the Gradle project that this model originated from.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -36,7 +36,7 @@
  an end user of the build to run.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Public property.
- @since 2.1
+ &lt;br&gt;(since 2.1)
 
 </description>
     </method>
@@ -45,7 +45,7 @@
         <description> Returns the description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The description of this launchable, or &lt;a href='type://null'&gt;null&lt;/a&gt; if it has no description.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </property>
@@ -53,14 +53,14 @@
         <description> Returns a human-consumable display name for this launchable.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name of this launchable.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </property>
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for the Gradle project that this model originated from.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </property>
@@ -69,7 +69,7 @@
  an end user of the build to run.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Public property.
- @since 2.1
+ &lt;br&gt;(since 2.1)
 
 </description>
     </property>

@@ -87,6 +87,12 @@ public class HTMLDescriptionBuilder {
 
 	private String createHTMLBody(String fgColor, String bgColor,String commentColor, String title, StringBuilder descSb) {
 		
+		String style = createStyles(fgColor, bgColor, commentColor);
+		
+		return "<html><head><title>"+title+"</title><style>"+style+"</style></head><body>" + descSb + "</body></html>";
+	}
+
+	private String createStyles(String fgColor, String bgColor, String commentColor) {
 		StringBuilder style = new StringBuilder();
 		style.append("body{");
 		if (fgColor!=null ){
@@ -106,11 +112,12 @@ public class HTMLDescriptionBuilder {
 		style.append(".fullName{font-weight: bold;white-space: nowrap;font-family:'Courier New', Courier, monospace}\n");
 		style.append(".param {color: #229922;}\n");
 		style.append(".return {color: #229922;}\n");
+		style.append(".value {color: #999999;}\n");
 		style.append(".warnSmall {color: #ff0000;font-size:small}\n");
 		style.append(".comment {color: "+commentColor+";}\n");
 		style.append(".originLinkURL {font-size:x-small;color: #999999;font-family:'Courier New', Courier, monospace}\n");
 		
-		return "<html><head><title>"+title+"</title><style>"+style.toString()+"</style></head><body>" + descSb + "</body></html>";
+		return style.toString();
 	}
 
 	private void appendTypeDescription(LanguageElementMetaData data, Type type, StringBuilder description) {

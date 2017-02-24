@@ -2,8 +2,8 @@
 <type interface="true" language="gradle" name="org.gradle.api.plugins.PluginManager" version="3.0" documented="true">
     <description> Facilitates applying plugins and determining which plugins have been applied to a &lt;a href='type://PluginAware'&gt;PluginAware&lt;/a&gt; object.
 
- @see PluginAware
- @since 2.3
+ (see &lt;a href='type://PluginAware'&gt;PluginAware&lt;/a&gt;)
+ &lt;br&gt;(since 2.3)
 
 </description>
     <method name="apply" returnType="void" documented="true">
@@ -18,7 +18,7 @@
  &lt;/pre&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type the plugin class to apply
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
         <parameter type="java.lang.Class" name="type"/>
@@ -34,7 +34,7 @@
  &lt;/pre&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pluginId the ID of the plugin to apply
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
         <parameter type="java.lang.String" name="pluginId"/>
@@ -50,7 +50,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;information about the applied plugin, or &lt;a href='type://null'&gt;null&lt;/a&gt; if no plugin has been applied with the given ID
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
         <parameter type="java.lang.String" name="id"/>
@@ -60,7 +60,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID. See &lt;a href='type://org.gradle.api.plugins.PluginManager#findPlugin(String)'&gt;#findPlugin(String)&lt;/a&gt; for details about this parameter.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if the plugin has been applied
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
         <parameter type="java.lang.String" name="id"/>
@@ -75,7 +75,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;id the plugin ID. See &lt;a href='type://org.gradle.api.plugins.PluginManager#findPlugin(String)'&gt;#findPlugin(String)&lt;/a&gt; for details about this parameter.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to execute if/when the plugin is applied
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
         <parameter type="java.lang.String" name="id"/>

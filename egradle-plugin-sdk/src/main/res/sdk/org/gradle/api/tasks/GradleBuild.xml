@@ -5,8 +5,7 @@
 </description>
     <method name="build" returnType="void"/>
     <method name="getBuildFile" returnType="java.io.File">
-        <description> Returns the build file that should be used for this build. Defaults to {@value
- org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
+        <description> Returns the build file that should be used for this build. Defaults to &lt;em class='value'&gt;org.gradle.api.Project#DEFAULT_BUILD_FILE&lt;/em&gt; in the project directory.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null.
 
@@ -66,8 +65,7 @@
         <parameter type="java.util.Collection" name="tasks"/>
     </method>
     <property name="buildFile" type="java.io.File" documented="true">
-        <description> Returns the build file that should be used for this build. Defaults to {@value
- org.gradle.api.Project#DEFAULT_BUILD_FILE} in the project directory.
+        <description> Returns the build file that should be used for this build. Defaults to &lt;em class='value'&gt;org.gradle.api.Project#DEFAULT_BUILD_FILE&lt;/em&gt; in the project directory.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build file. May be null.
 

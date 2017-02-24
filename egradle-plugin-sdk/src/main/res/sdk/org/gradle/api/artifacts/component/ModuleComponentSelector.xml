@@ -2,14 +2,14 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ModuleComponentSelector" version="3.0">
     <description> Criteria for selecting a component instance that is available as a module version.
 
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     <method name="getGroup" returnType="java.lang.String">
         <description> The group of the module to select the component from.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module group
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     </method>
@@ -32,7 +32,7 @@
         <description> The group of the module to select the component from.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Module group
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     </property>

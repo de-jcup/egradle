@@ -2,13 +2,13 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.GradleBuild" version="3.0">
     <description> Provides information about the structure of a Gradle build.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">
         <description> Returns the identifier for this Gradle build.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -31,7 +31,7 @@
     <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
         <description> Returns the identifier for this Gradle build.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </property>

@@ -2,8 +2,8 @@
 <type language="gradle" name="org.gradle.testkit.runner.TaskOutcome" version="3.0">
     <description> The outcome of executing a task during a build.
 
- @since 2.6
- @see BuildTask#getOutcome()
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://BuildTask#getOutcome()'&gt;BuildTask#getOutcome()&lt;/a&gt;)
 
 </description>
 </type>

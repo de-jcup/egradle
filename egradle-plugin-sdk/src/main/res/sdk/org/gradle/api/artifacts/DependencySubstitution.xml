@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.DependencySubstitution" version="3.0">
     <description> Provides means to substitute a different dependency during resolution.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     <method name="getRequested" returnType="org.gradle.api.artifacts.component.ComponentSelector">

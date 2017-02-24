@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
     <description> Publishes an IvyPublication to an IvyArtifactRepository.
 
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     <method name="call" returnType="org.gradle.api.file.FileCollection"/>

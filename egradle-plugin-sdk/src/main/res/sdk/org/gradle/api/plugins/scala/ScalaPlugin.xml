@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.plugins.scala.ScalaPlugin" version="3.0">
     <description> &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; which sets up a Scala project.&lt;/p&gt;
 
- @see ScalaBasePlugin
+ (see &lt;a href='type://ScalaBasePlugin'&gt;ScalaBasePlugin&lt;/a&gt;)
 
 </description>
     <method name="apply" returnType="void">

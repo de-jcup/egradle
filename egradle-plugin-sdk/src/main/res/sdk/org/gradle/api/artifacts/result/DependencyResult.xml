@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.DependencyResult" version="3.0">
     <description> An edge in the dependency graph. Provides information about the origin of the dependency and the requested component.
 
- @see ResolutionResult
+ (see &lt;a href='type://ResolutionResult'&gt;ResolutionResult&lt;/a&gt;)
 
 </description>
     <method name="getFrom" returnType="org.gradle.api.artifacts.result.ResolvedComponentResult">

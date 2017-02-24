@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.BuildController" version="3.0">
     <description> Provides a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; various ways to control a Gradle build and access information about the build.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="findModel" returnType="T">
@@ -64,7 +64,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model.
  @throws UnknownModelException When the default project does not support the requested model.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
         <parameter type="java.lang.Class" name="modelType"/>

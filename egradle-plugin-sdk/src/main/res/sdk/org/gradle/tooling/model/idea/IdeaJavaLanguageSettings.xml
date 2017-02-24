@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaJavaLanguageSettings" version="3.0">
     <description> Describes Java language settings for an IDEA module.
 
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     <method name="getJdk" returnType="org.gradle.tooling.model.java.InstalledJdk">

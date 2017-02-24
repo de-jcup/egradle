@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.jvm.application.scripts.ScriptGenerator" version="3.0">
     <description> Generates a script to start a JVM application.
 
- @see TemplateBasedScriptGenerator
+ (see &lt;a href='type://TemplateBasedScriptGenerator'&gt;TemplateBasedScriptGenerator&lt;/a&gt;)
 
 </description>
     <method name="generateScript" returnType="void">

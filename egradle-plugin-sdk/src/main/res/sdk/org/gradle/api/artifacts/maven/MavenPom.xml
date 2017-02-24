@@ -7,7 +7,7 @@
     <method name="getArtifactId" returnType="java.lang.String">
         <description> Returns the artifact id for this POM.
  
- @see org.apache.maven.model.Model#getArtifactId()
+ (see &lt;a href='type://org.apache.maven.model.Model#getArtifactId()'&gt;org.apache.maven.model.Model#getArtifactId()&lt;/a&gt;)
 
 </description>
     </method>
@@ -19,7 +19,7 @@
     <method name="getDependencies" returnType="java.util.List">
         <description> Returns the dependencies for this POM.
  
- @see org.apache.maven.model.Model#getDependencies()
+ (see &lt;a href='type://org.apache.maven.model.Model#getDependencies()'&gt;org.apache.maven.model.Model#getDependencies()&lt;/a&gt;)
 
 </description>
     </method>
@@ -33,7 +33,7 @@
     <method name="getGroupId" returnType="java.lang.String">
         <description> Returns the group id for this POM.
 
- @see org.apache.maven.model.Model#setGroupId(String)
+ (see &lt;a href='type://org.apache.maven.model.Model#setGroupId(String)'&gt;org.apache.maven.model.Model#setGroupId(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -50,7 +50,7 @@
     <method name="getPackaging" returnType="java.lang.String">
         <description> Returns the packaging for this POM.
 
- @see org.apache.maven.model.Model#getPackaging()
+ (see &lt;a href='type://org.apache.maven.model.Model#getPackaging()'&gt;org.apache.maven.model.Model#getPackaging()&lt;/a&gt;)
 
 </description>
     </method>
@@ -62,7 +62,7 @@
     <method name="getVersion" returnType="java.lang.String">
         <description> Returns the version for this POM.
 
- @see org.apache.maven.model.Model#getVersion()
+ (see &lt;a href='type://org.apache.maven.model.Model#getVersion()'&gt;org.apache.maven.model.Model#getVersion()&lt;/a&gt;)
 
 </description>
     </method>
@@ -92,7 +92,7 @@
     <method name="setArtifactId" returnType="org.gradle.api.artifacts.maven.MavenPom">
         <description> Sets the artifact id for this POM.
 
- @see org.apache.maven.model.Model#setArtifactId(String)
+ (see &lt;a href='type://org.apache.maven.model.Model#setArtifactId(String)'&gt;org.apache.maven.model.Model#setArtifactId(String)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
 
 </description>
@@ -108,7 +108,7 @@
     <method name="setDependencies" returnType="org.gradle.api.artifacts.maven.MavenPom">
         <description> Sets the dependencies for this POM.
 
- @see org.apache.maven.model.Model#setDependencies(java.util.List)
+ (see &lt;a href='type://org.apache.maven.model.Model#setDependencies(java.util.List)'&gt;org.apache.maven.model.Model#setDependencies(java.util.List)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
 
 </description>
@@ -117,7 +117,7 @@
     <method name="setGroupId" returnType="org.gradle.api.artifacts.maven.MavenPom">
         <description> Sets the group id for this POM.
 
- @see org.apache.maven.model.Model#getGroupId
+ (see &lt;a href='type://org.apache.maven.model.Model#getGroupId'&gt;org.apache.maven.model.Model#getGroupId&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
 
 </description>
@@ -128,7 +128,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;model
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #getModel() 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.MavenPom#getModel() '&gt;#getModel() &lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Object" name="model"/>
@@ -136,7 +136,7 @@
     <method name="setPackaging" returnType="org.gradle.api.artifacts.maven.MavenPom">
         <description> Sets the packaging for this POM.
 
- @see org.apache.maven.model.Model#setPackaging(String)
+ (see &lt;a href='type://org.apache.maven.model.Model#setPackaging(String)'&gt;org.apache.maven.model.Model#setPackaging(String)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
 
 </description>
@@ -145,7 +145,7 @@
     <method name="setVersion" returnType="org.gradle.api.artifacts.maven.MavenPom">
         <description> Sets the version for this POM.
 
- @see org.apache.maven.model.Model#setVersion(String)
+ (see &lt;a href='type://org.apache.maven.model.Model#setVersion(String)'&gt;org.apache.maven.model.Model#setVersion(String)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
 
 </description>
@@ -215,7 +215,7 @@
     <property name="artifactId" type="java.lang.String">
         <description> Returns the artifact id for this POM.
  
- @see org.apache.maven.model.Model#getArtifactId()
+ (see &lt;a href='type://org.apache.maven.model.Model#getArtifactId()'&gt;org.apache.maven.model.Model#getArtifactId()&lt;/a&gt;)
 
 </description>
     </property>
@@ -227,7 +227,7 @@
     <property name="dependencies" type="java.util.List">
         <description> Returns the dependencies for this POM.
  
- @see org.apache.maven.model.Model#getDependencies()
+ (see &lt;a href='type://org.apache.maven.model.Model#getDependencies()'&gt;org.apache.maven.model.Model#getDependencies()&lt;/a&gt;)
 
 </description>
     </property>
@@ -241,7 +241,7 @@
     <property name="groupId" type="java.lang.String">
         <description> Returns the group id for this POM.
 
- @see org.apache.maven.model.Model#setGroupId(String)
+ (see &lt;a href='type://org.apache.maven.model.Model#setGroupId(String)'&gt;org.apache.maven.model.Model#setGroupId(String)&lt;/a&gt;)
 
 </description>
     </property>
@@ -258,7 +258,7 @@
     <property name="packaging" type="java.lang.String">
         <description> Returns the packaging for this POM.
 
- @see org.apache.maven.model.Model#getPackaging()
+ (see &lt;a href='type://org.apache.maven.model.Model#getPackaging()'&gt;org.apache.maven.model.Model#getPackaging()&lt;/a&gt;)
 
 </description>
     </property>
@@ -270,7 +270,7 @@
     <property name="version" type="java.lang.String">
         <description> Returns the version for this POM.
 
- @see org.apache.maven.model.Model#getVersion()
+ (see &lt;a href='type://org.apache.maven.model.Model#getVersion()'&gt;org.apache.maven.model.Model#getVersion()&lt;/a&gt;)
 
 </description>
     </property>

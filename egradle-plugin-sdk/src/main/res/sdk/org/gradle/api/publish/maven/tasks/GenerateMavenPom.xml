@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.maven.tasks.GenerateMavenPom" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
     <description> Generates a Maven module descriptor (POM) file.
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="doGenerate" returnType="void"/>

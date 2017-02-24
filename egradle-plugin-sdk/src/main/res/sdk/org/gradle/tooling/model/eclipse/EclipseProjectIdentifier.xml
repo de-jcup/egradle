@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseProjectIdentifier" version="3.0">
     <description> Identifies an Eclipse project.
 
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
 </type>

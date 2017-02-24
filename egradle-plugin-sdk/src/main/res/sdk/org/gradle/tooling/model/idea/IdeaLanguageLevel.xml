@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaLanguageLevel" version="3.0">
     <description> Language level setting for IDEA.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getLevel" returnType="java.lang.String">

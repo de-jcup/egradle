@@ -8,7 +8,7 @@
  It is not necessary to manually add a task of this type to your project,
  as every project automatically has a task of this type by the name &lt;a href='type://"buildEnvironment"'&gt;"buildEnvironment"&lt;/a&gt;.
 
- @since 2.10
+ &lt;br&gt;(since 2.10)
 
 </description>
     <method name="generate" returnType="void"/>

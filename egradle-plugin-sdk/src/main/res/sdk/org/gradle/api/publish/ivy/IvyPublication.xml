@@ -63,7 +63,7 @@
  }
  &lt;/pre&gt;
 
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" documented="true">

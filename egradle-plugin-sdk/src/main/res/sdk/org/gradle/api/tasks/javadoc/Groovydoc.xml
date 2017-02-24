@@ -149,7 +149,7 @@
         <description> Sets links to groovydoc/javadoc output at the given URL.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;links The links to set
- @see #link(String, String...)
+ (see &lt;a href='type://org.gradle.api.tasks.javadoc.Groovydoc#link(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.util.Set" name="links"/>

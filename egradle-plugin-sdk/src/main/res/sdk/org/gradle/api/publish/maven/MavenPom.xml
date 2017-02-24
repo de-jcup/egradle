@@ -4,7 +4,7 @@
 
  The &lt;a href='type://org.gradle.api.publish.maven.MavenPom#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; method can be used to modify the descriptor after it has been generated according to the publication data.
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="getPackaging" returnType="java.lang.String">
@@ -44,8 +44,8 @@
  For details on the structure of the XML to be modified, see &lt;a href="http://maven.apache.org/pom.html"&gt;the POM reference&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The configuration action.
- @see MavenPublication
- @see XmlProvider
+ (see &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;)
+ (see &lt;a href='type://XmlProvider'&gt;XmlProvider&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>

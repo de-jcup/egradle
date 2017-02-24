@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.publish.Publication" version="3.0">
     <description> A publication is a description of a consumable representation of one or more artifacts, and possibly associated metadata.
 
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     <interface name="org.gradle.api.Named"/>

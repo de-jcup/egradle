@@ -4,7 +4,7 @@
  the build completed like it should, but that one of the listeners failed with an
  exception.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     <method name="getCauses" returnType="java.util.List"/>

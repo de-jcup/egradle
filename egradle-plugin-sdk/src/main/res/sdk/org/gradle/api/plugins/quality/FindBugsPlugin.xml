@@ -10,8 +10,8 @@
  For projects that have the Java (base) plugin applied, a &lt;a href='type://FindBugs'&gt;FindBugs&lt;/a&gt; task is
  created for each source set.
 
- @see FindBugs
- @see FindBugsExtension
+ (see &lt;a href='type://FindBugs'&gt;FindBugs&lt;/a&gt;)
+ (see &lt;a href='type://FindBugsExtension'&gt;FindBugsExtension&lt;/a&gt;)
 
 </description>
     <method name="beforeApply" returnType="void"/>

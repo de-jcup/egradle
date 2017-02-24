@@ -3,7 +3,7 @@
     <description> Used to execute a &lt;a href='type://BuildAction'&gt;BuildAction&lt;/a&gt; in the build process.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of result produced by this executer.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="run" returnType="T">
@@ -18,7 +18,7 @@
  @throws BuildException On some failure executing the Gradle build.
  @throws GradleConnectionException On some other failure using the connection.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     </method>
@@ -30,7 +30,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>

@@ -9,7 +9,7 @@
  to only contain elements with unique names within this container. Furthermore, items are ordered by their name.&lt;/p&gt;
  
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of domain objects in this container.
- @see NamedDomainObjectSet
+ (see &lt;a href='type://NamedDomainObjectSet'&gt;NamedDomainObjectSet&lt;/a&gt;)
 
 </description>
     <method name="configure" returnType="org.gradle.api.NamedDomainObjectContainer">

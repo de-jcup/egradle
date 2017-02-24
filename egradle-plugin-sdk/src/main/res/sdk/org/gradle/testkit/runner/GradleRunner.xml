@@ -23,7 +23,7 @@
  &lt;p&gt;
  Please see &lt;a href="https://docs.gradle.org/current/userguide/test_kit.html"&gt;the Gradle TestKit User Guide chapter&lt;/a&gt; for more information.
 
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     <method name="build" returnType="org.gradle.testkit.runner.BuildResult">
@@ -74,9 +74,9 @@
  Calling this method will negate the effect of previously calling &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt; and/or &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #forwardStdOutput(Writer)
- @see #forwardStdError(Writer)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;)
 
 </description>
     </method>
@@ -92,9 +92,9 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;writer the writer that build standard error output should be forwarded to
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #forwardOutput()
- @see #forwardStdOutput(Writer)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.Writer" name="writer"/>
@@ -115,9 +115,9 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;writer the writer that build standard output should be forwarded to
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #forwardOutput()
- @see #forwardStdError(Writer)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.Writer" name="writer"/>
@@ -141,7 +141,7 @@
  Returns an empty list if no classpath was provided with &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath of plugins to make available to the build under test
- @since 2.8
+ &lt;br&gt;(since 2.8)
 
 </description>
     </method>
@@ -166,7 +166,7 @@
  or by using the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withDebug(boolean)'&gt;#withDebug(boolean)&lt;/a&gt; method.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether the build should be executed in the same process
- @since 2.9
+ &lt;br&gt;(since 2.9)
 
 </description>
     </method>
@@ -175,7 +175,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments the build arguments
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #getArguments()
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getArguments()'&gt;#getArguments()&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="arguments"/>
@@ -185,7 +185,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments the build arguments
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #getArguments()
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getArguments()'&gt;#getArguments()&lt;/a&gt;)
 
 </description>
         <parameter type="java.util.List" name="arguments"/>
@@ -193,10 +193,10 @@
     <method name="withDebug" returnType="org.gradle.testkit.runner.GradleRunner">
         <description> Sets whether debugging support is enabled.
 
- @see #isDebug()
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#isDebug()'&gt;#isDebug()&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;flag the debug flag
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
+ &lt;br&gt;(since 2.9)
 
 </description>
         <parameter type="boolean" name="flag"/>
@@ -220,9 +220,9 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;distribution a URI pointing at a valid Gradle distribution zip file
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #withGradleVersion(String)
- @see #withGradleInstallation(File)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleInstallation(File)'&gt;#withGradleInstallation(File)&lt;/a&gt;)
 
 </description>
         <parameter type="java.net.URI" name="distribution"/>
@@ -236,9 +236,9 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;installation a valid Gradle installation
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #withGradleVersion(String)
- @see #withGradleDistribution(URI)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleDistribution(URI)'&gt;#withGradleDistribution(URI)&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.File" name="installation"/>
@@ -263,9 +263,9 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;versionNumber the version number (e.g. "2.9")
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.9
- @see #withGradleInstallation(File)
- @see #withGradleDistribution(URI)
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleInstallation(File)'&gt;#withGradleInstallation(File)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleDistribution(URI)'&gt;#withGradleDistribution(URI)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="versionNumber"/>
@@ -291,9 +291,9 @@
  Please consult the TestKit Gradle User Guide chapter alternative strategies that can be used for older Gradle versions.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #withPluginClasspath(Iterable)
- @see #getPluginClasspath()
- @since 2.13
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getPluginClasspath()'&gt;#getPluginClasspath()&lt;/a&gt;)
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -309,8 +309,8 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath the classpath of plugins to make available to the build under test
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #getPluginClasspath()
- @since 2.8
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getPluginClasspath()'&gt;#getPluginClasspath()&lt;/a&gt;)
+ &lt;br&gt;(since 2.8)
 
 </description>
         <parameter type="java.lang.Iterable" name="classpath"/>
@@ -331,7 +331,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir the project directory
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://this'&gt;this&lt;/a&gt;
- @see #getProjectDir()
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getProjectDir()'&gt;#getProjectDir()&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.File" name="projectDir"/>
@@ -353,7 +353,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testKitDir the TestKit directory
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://this'&gt;this&lt;/a&gt;
- @since 2.7
+ &lt;br&gt;(since 2.7)
 
 </description>
         <parameter type="java.io.File" name="testKitDir"/>
@@ -382,7 +382,7 @@
  or by using the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withDebug(boolean)'&gt;#withDebug(boolean)&lt;/a&gt; method.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether the build should be executed in the same process
- @since 2.9
+ &lt;br&gt;(since 2.9)
 
 </description>
     </property>
@@ -393,7 +393,7 @@
  Returns an empty list if no classpath was provided with &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath of plugins to make available to the build under test
- @since 2.8
+ &lt;br&gt;(since 2.8)
 
 </description>
     </property>

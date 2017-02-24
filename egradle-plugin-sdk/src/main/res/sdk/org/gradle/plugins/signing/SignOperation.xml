@@ -26,7 +26,7 @@
  multiple times, with the signatures being generated with their current configuration each time.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see Signature#generate()
+ (see &lt;a href='type://Signature#generate()'&gt;Signature#generate()&lt;/a&gt;)
 
 </description>
     </method>
@@ -73,7 +73,7 @@
         <description> Registers signatures for the given files.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see Signature#Signature(File, SignatureSpec, Object...)
+ (see &lt;a href='type://Signature#Signature(File,'&gt;SignatureSpec, Object...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.File" name="files"/>
@@ -82,7 +82,7 @@
         <description> Registers signatures for the given artifacts.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see Signature#Signature(File, SignatureSpec, Object...)
+ (see &lt;a href='type://Signature#Signature(File,'&gt;SignatureSpec, Object...)&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.artifacts.PublishArtifact" name="artifacts"/>
@@ -91,7 +91,7 @@
         <description> Registers signatures (with the given classifier) for the given files
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see Signature#Signature(PublishArtifact, SignatureSpec, Object...)
+ (see &lt;a href='type://Signature#Signature(PublishArtifact,'&gt;SignatureSpec, Object...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="classifier"/>

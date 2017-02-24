@@ -32,7 +32,7 @@
  }
  &lt;/pre&gt;
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     <method name="close" returnType="void">

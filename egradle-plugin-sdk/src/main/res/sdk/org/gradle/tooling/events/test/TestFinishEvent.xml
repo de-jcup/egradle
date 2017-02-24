@@ -3,7 +3,7 @@
     <description> An event that informs about a test having finished its execution. You can query the result of the
  test using &lt;a href='type://org.gradle.tooling.events.test.TestFinishEvent#getResult()'&gt;#getResult()&lt;/a&gt;.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getResult" returnType="org.gradle.tooling.events.test.TestOperationResult">

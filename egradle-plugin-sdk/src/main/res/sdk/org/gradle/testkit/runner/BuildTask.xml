@@ -2,8 +2,8 @@
 <type interface="true" language="gradle" name="org.gradle.testkit.runner.BuildTask" version="3.0">
     <description> A task that was executed when running a specific build.
 
- @since 2.6
- @see BuildResult
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://BuildResult'&gt;BuildResult&lt;/a&gt;)
 
 </description>
     <method name="getOutcome" returnType="org.gradle.testkit.runner.TaskOutcome">

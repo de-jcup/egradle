@@ -95,7 +95,7 @@
     <method name="isVerbose" returnType="boolean">
         <description> Returns whether Javadoc generation is accompanied by verbose output.
 
- @see #setVerbose(boolean)
+ (see &lt;a href='type://org.gradle.api.tasks.javadoc.Javadoc#setVerbose(boolean)'&gt;#setVerbose(boolean)&lt;/a&gt;)
 
 </description>
     </method>
@@ -222,7 +222,7 @@
     <property name="verbose" type="boolean">
         <description> Returns whether Javadoc generation is accompanied by verbose output.
 
- @see #setVerbose(boolean)
+ (see &lt;a href='type://org.gradle.api.tasks.javadoc.Javadoc#setVerbose(boolean)'&gt;#setVerbose(boolean)&lt;/a&gt;)
 
 </description>
     </property>

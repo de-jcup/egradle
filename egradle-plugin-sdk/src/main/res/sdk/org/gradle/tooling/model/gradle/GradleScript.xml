@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.gradle.GradleScript" version="3.0">
     <description> Represents a Gradle script. A Gradle script may be a build script, settings script or initialization script.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="getSourceFile" returnType="java.io.File">
@@ -10,7 +10,7 @@
  If this method returns a non-null value, the given source file will exist.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null if the script has no associated source file.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     </method>
@@ -19,7 +19,7 @@
  If this method returns a non-null value, the given source file will exist.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The source file. Returns null if the script has no associated source file.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     </property>

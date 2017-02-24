@@ -17,7 +17,7 @@
     <method name="setWithMessages" returnType="void">
         <description> Whether or not FindBugs should generate XML augmented with human-readable messages.
 
- @see #isWithMessages()
+ (see &lt;a href='type://org.gradle.api.plugins.quality.FindBugsXmlReport#isWithMessages()'&gt;#isWithMessages()&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;withMessages Whether or not FindBugs should generate XML augmented with human-readable messages.
 
 </description>

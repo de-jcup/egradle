@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.GradleProject" version="3.0">
     <description> Represents a Gradle project.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="findByPath" returnType="org.gradle.tooling.model.GradleProject">
@@ -17,7 +17,7 @@
         <description> Returns the build directory for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build directory.
- @since 2.0
+ &lt;br&gt;(since 2.0)
  @throws UnsupportedMethodException For Gradle versions older than 2.0, where this method is not supported.
 
 </description>
@@ -26,7 +26,7 @@
         <description> Returns the build script for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build script.
- @since 1.8
+ &lt;br&gt;(since 1.8)
  @throws UnsupportedMethodException For Gradle versions older than 1.8, where this method is not supported.
 
 </description>
@@ -52,7 +52,7 @@
         <description> Returns the project directory for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory.
- @since 2.4
+ &lt;br&gt;(since 2.4)
  @throws UnsupportedMethodException For Gradle versions older than 2.4, where this method is not supported.
 
 </description>
@@ -60,7 +60,7 @@
     <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for this Gradle project.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -76,7 +76,7 @@
         <description> Returns the build directory for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build directory.
- @since 2.0
+ &lt;br&gt;(since 2.0)
  @throws UnsupportedMethodException For Gradle versions older than 2.0, where this method is not supported.
 
 </description>
@@ -85,7 +85,7 @@
         <description> Returns the build script for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The build script.
- @since 1.8
+ &lt;br&gt;(since 1.8)
  @throws UnsupportedMethodException For Gradle versions older than 1.8, where this method is not supported.
 
 </description>
@@ -111,7 +111,7 @@
         <description> Returns the project directory for this project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project directory.
- @since 2.4
+ &lt;br&gt;(since 2.4)
  @throws UnsupportedMethodException For Gradle versions older than 2.4, where this method is not supported.
 
 </description>
@@ -119,7 +119,7 @@
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for this Gradle project.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </property>

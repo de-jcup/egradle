@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.jvm.test.JUnitTestSuiteSpec" version="3.0">
     <description> Represents a JUnit test suite.
 
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     <method name="getjUnitVersion" returnType="java.lang.String"/>

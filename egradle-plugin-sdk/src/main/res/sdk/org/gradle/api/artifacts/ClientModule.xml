@@ -11,7 +11,7 @@
  project that has a dependency on the client module.
   
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependency The dependency to add to the client module.
- @see #getDependencies() 
+ (see &lt;a href='type://org.gradle.api.artifacts.ClientModule#getDependencies() '&gt;#getDependencies() &lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.artifacts.ModuleDependency" name="dependency"/>
@@ -24,7 +24,7 @@
     <method name="getDependencies" returnType="java.util.Set">
         <description> Returns all the dependencies added to the client module.
 
- @see #addDependency(ModuleDependency)
+ (see &lt;a href='type://org.gradle.api.artifacts.ClientModule#addDependency(ModuleDependency)'&gt;#addDependency(ModuleDependency)&lt;/a&gt;)
 
 </description>
     </method>
@@ -40,7 +40,7 @@
     <property name="dependencies" type="java.util.Set">
         <description> Returns all the dependencies added to the client module.
 
- @see #addDependency(ModuleDependency)
+ (see &lt;a href='type://org.gradle.api.artifacts.ClientModule#addDependency(ModuleDependency)'&gt;#addDependency(ModuleDependency)&lt;/a&gt;)
 
 </description>
     </property>

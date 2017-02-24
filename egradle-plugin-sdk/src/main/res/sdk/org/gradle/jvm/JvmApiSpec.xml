@@ -4,7 +4,7 @@
  API and implementation binaries for that library. Backing object for the
  {}} DSL.
 
- @since 2.10
+ &lt;br&gt;(since 2.10)
 
 </description>
     <method name="dependencies" returnType="void" delegationTarget="org.gradle.platform.base.DependencySpecContainer">

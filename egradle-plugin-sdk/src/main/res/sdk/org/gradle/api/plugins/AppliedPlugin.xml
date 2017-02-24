@@ -4,8 +4,8 @@
  &lt;p&gt;
  Currently just provides information about the ID of the plugin.
 
- @see org.gradle.api.plugins.PluginAware
- @since 2.3
+ (see &lt;a href='type://org.gradle.api.plugins.PluginAware'&gt;org.gradle.api.plugins.PluginAware&lt;/a&gt;)
+ &lt;br&gt;(since 2.3)
 
 </description>
     <method name="getId" returnType="java.lang.String">

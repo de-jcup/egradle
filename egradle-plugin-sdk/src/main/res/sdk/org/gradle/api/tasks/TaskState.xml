@@ -46,7 +46,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been considered up-to-date
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </method>
@@ -97,7 +97,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task has been considered up-to-date
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </property>

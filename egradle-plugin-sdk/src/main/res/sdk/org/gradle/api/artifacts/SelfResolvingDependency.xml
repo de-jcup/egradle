@@ -9,7 +9,7 @@
  by this method. 
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files which make up this dependency.
- @see #resolve(boolean) 
+ (see &lt;a href='type://org.gradle.api.artifacts.SelfResolvingDependency#resolve(boolean) '&gt;#resolve(boolean) &lt;/a&gt;)
 
 </description>
     </method>

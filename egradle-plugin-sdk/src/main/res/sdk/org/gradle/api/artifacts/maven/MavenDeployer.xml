@@ -24,14 +24,14 @@
     <method name="getRepository" returnType="java.lang.Object">
         <description> Returns the repository to be used for uploading artifacts.
 
- @see #setRepository(Object)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.MavenDeployer#setRepository(Object)'&gt;#setRepository(Object)&lt;/a&gt;)
 
 </description>
     </method>
     <method name="getSnapshotRepository" returnType="java.lang.Object">
         <description> Returns the repository to be used for uploading snapshot artifacts.
 
- @see #setSnapshotRepository(Object)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.MavenDeployer#setSnapshotRepository(Object)'&gt;#setSnapshotRepository(Object)&lt;/a&gt;)
 
 </description>
     </method>
@@ -70,14 +70,14 @@
     <property name="repository" type="java.lang.Object">
         <description> Returns the repository to be used for uploading artifacts.
 
- @see #setRepository(Object)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.MavenDeployer#setRepository(Object)'&gt;#setRepository(Object)&lt;/a&gt;)
 
 </description>
     </property>
     <property name="snapshotRepository" type="java.lang.Object">
         <description> Returns the repository to be used for uploading snapshot artifacts.
 
- @see #setSnapshotRepository(Object)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.MavenDeployer#setSnapshotRepository(Object)'&gt;#setSnapshotRepository(Object)&lt;/a&gt;)
 
 </description>
     </property>

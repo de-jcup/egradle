@@ -5,7 +5,7 @@
  &lt;p&gt;
  Useful for 'previewing' the output model of IdeaProject because it is supposed to be fast (e.g. does not download dependencies from the web).
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <interface name="org.gradle.tooling.model.idea.IdeaProject"/>

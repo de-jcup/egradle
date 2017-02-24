@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.task.TaskSuccessResult" version="3.0">
     <description> Describes how a task operation finished successfully.
 
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     <method name="isUpToDate" returnType="boolean">

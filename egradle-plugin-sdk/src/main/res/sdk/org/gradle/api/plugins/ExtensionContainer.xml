@@ -32,7 +32,7 @@
  A new instance of the given &lt;a href='type://type'&gt;type&lt;/a&gt; will be created using the given &lt;a href='type://constructionArguments'&gt;constructionArguments&lt;/a&gt;. The new
  instance will have been dynamically which means that you can cast the object to &lt;a href='type://ExtensionAware'&gt;ExtensionAware&lt;/a&gt;.
 
- @see #add(String, Object)
+ (see &lt;a href='type://org.gradle.api.plugins.ExtensionContainer#add(String,'&gt;Object)&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name for the extension
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the extension
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;constructionArguments The arguments to be used to construct the extension instance

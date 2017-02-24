@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseLinkedResource" version="3.0">
     <description> Linked resources are files and folders that are stored in locations in the file system outside of the project's location.
 
- @since 1.0-milestone-4
+ &lt;br&gt;(since 1.0-milestone-4)
 
 </description>
     <method name="getLocation" returnType="java.lang.String">

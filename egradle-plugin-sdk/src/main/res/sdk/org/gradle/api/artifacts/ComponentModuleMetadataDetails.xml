@@ -3,7 +3,7 @@
     <description> Contains and allows configuring component module metadata information.
  For information and examples please see &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentModuleMetadataHandler&lt;/a&gt;
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     <method name="replacedBy" returnType="void">

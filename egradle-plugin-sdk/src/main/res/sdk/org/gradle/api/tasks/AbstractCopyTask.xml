@@ -18,7 +18,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" delegationTarget="org.gradle.api.file.FileTreeElement" documented="true">
+    <method name="exclude" returnType="org.gradle.api.tasks.AbstractCopyTask" delegationTarget="org.gradle.api.tasks.util.PatternFilterable" documented="true">
         <description> {@inheritDoc}
 
 </description>
@@ -155,7 +155,7 @@
 
 </description>
     </method>
-    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" delegationTarget="org.gradle.api.file.FileTreeElement" documented="true">
+    <method name="include" returnType="org.gradle.api.tasks.AbstractCopyTask" delegationTarget="org.gradle.api.tasks.util.PatternFilterable" documented="true">
         <description> {@inheritDoc}
 
 </description>

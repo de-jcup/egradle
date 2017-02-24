@@ -7,14 +7,14 @@
     <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description>Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies.
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenDeployer(java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenDeployer(java.util.Map,'&gt;groovy.lang.Closure)&lt;/a&gt;)
 </description>
     </method>
     <method name="mavenDeployer" returnType="org.gradle.api.artifacts.maven.GroovyMavenDeployer" documented="true">
         <description>Adds a repository for publishing to a Maven repository. This repository can not be used for resolving dependencies.
 &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository.
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenDeployer(java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenDeployer(java.util.Map,'&gt;groovy.lang.Closure)&lt;/a&gt;)
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
@@ -32,7 +32,7 @@ to point to information related to a particular repository. A name must be uniqu
 &lt;/table&gt;
 &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenDeployer(java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenDeployer(java.util.Map,'&gt;groovy.lang.Closure)&lt;/a&gt;)
 </description>
         <parameter type="java.util.Map" name="args"/>
     </method>
@@ -48,14 +48,14 @@ to point to information related to a particular repository. A name must be uniqu
     <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description>Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies.
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenInstaller(java.util.Map,'&gt;groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)&lt;/a&gt;)
 </description>
     </method>
     <method name="mavenInstaller" returnType="org.gradle.api.artifacts.maven.MavenResolver" documented="true">
         <description>Adds a repository for installing to a local Maven cache. This repository can not be used for resolving dependencies.
 &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure A closure to use to configure the repository.
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenInstaller(java.util.Map,'&gt;groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)&lt;/a&gt;)
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
@@ -73,7 +73,7 @@ to point to information related to a particular repository. A name must be uniqu
 &lt;/table&gt;
 &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args The argument to create the repository
 &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The added repository
-@see #mavenInstaller(java.util.Map, groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)
+(see &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenInstaller(java.util.Map,'&gt;groovy.lang.Closure) (java.util.Map, groovy.lang.Closure)&lt;/a&gt;)
 </description>
         <parameter type="java.util.Map" name="args"/>
     </method>

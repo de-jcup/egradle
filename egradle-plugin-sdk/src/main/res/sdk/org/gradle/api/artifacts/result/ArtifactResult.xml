@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ArtifactResult" version="3.0">
     <description> The result of resolving an artifact.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
     <method name="getType" returnType="java.lang.Class"/>

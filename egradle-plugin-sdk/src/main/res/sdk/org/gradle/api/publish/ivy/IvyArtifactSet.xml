@@ -17,7 +17,7 @@
  })
  &lt;/pre&gt;
 
- @see DomainObjectSet
+ (see &lt;a href='type://DomainObjectSet'&gt;DomainObjectSet&lt;/a&gt;)
 
 </description>
     <method name="artifact" returnType="org.gradle.api.publish.ivy.IvyArtifact" documented="true">

@@ -9,7 +9,7 @@
  &lt;p&gt;Adds the extension &lt;a href='type://SigningExtension'&gt;SigningExtension&lt;/a&gt; with the name “signing”.&lt;/p&gt;
  &lt;p&gt;Also adds conventions to all &lt;a href='type://Sign'&gt;sign tasks&lt;/a&gt; to use the signing extension setting defaults.&lt;/p&gt;
 
- @see SigningExtension
+ (see &lt;a href='type://SigningExtension'&gt;SigningExtension&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.Project" name="project"/>

@@ -29,7 +29,7 @@
 
  &lt;p&gt;All notifications from a given &lt;a href='type://ProjectConnection'&gt;ProjectConnection&lt;/a&gt; instance are delivered by a single thread at a time. Note, however, that the delivery thread may change over time.&lt;/p&gt;
 
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     <method name="action" returnType="org.gradle.tooling.BuildActionExecuter">
@@ -41,14 +41,14 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildAction The action to run.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The result type.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder.
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
         <parameter type="org.gradle.tooling.BuildAction" name="buildAction"/>
     </method>
     <method name="close" returnType="void">
         <description> Closes this connection. Blocks until any pending operations are complete. Once this method has returned, no more notifications will be delivered by any threads.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </method>
@@ -65,7 +65,7 @@
  @throws BuildException On some failure executing the Gradle build, in order to build the model.
  @throws GradleConnectionException On some other failure using the connection.
  @throws IllegalStateException When this connection has been closed or is closing.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.lang.Class" name="modelType"/>
@@ -83,7 +83,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
  @throws IllegalStateException When this connection has been closed or is closing.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.lang.Class" name="modelType"/>
@@ -114,7 +114,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;modelType The model type
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The builder.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.lang.Class" name="modelType"/>
@@ -125,7 +125,7 @@
  &lt;p&gt;Requires Gradle 1.0-milestone-8 or later.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </method>
@@ -135,7 +135,7 @@
  &lt;p&gt;Requires Gradle 2.6 or later.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The launcher.
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     </method>
@@ -152,7 +152,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to pass the result to.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The model type.
  @throws IllegalStateException When this connection has been closed or is closing.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </property>

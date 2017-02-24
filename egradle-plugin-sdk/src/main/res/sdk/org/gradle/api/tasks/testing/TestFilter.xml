@@ -35,7 +35,7 @@
 
  &lt;/pre&gt;
 
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     <method name="getIncludePatterns" returnType="java.util.Set">

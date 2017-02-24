@@ -31,7 +31,7 @@
         <description> Whether or not it is required that this signature be generated.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;required Whether or not it is required that this signature be generated.
- @see #isRequired
+ (see &lt;a href='type://org.gradle.plugins.signing.SignatureSpec#isRequired'&gt;#isRequired&lt;/a&gt;)
 
 </description>
         <parameter type="boolean" name="required"/>

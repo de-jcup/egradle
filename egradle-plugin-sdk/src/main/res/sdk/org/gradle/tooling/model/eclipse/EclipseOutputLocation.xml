@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseOutputLocation" version="3.0">
     <description> The output location of an Eclipse project.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     <method name="getPath" returnType="java.lang.String">

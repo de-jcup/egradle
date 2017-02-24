@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.StartEvent" version="3.0">
     <description> An event that informs about an operation having started its execution.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <interface name="org.gradle.tooling.events.ProgressEvent"/>

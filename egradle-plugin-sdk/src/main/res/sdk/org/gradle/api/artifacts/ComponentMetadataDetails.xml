@@ -4,7 +4,7 @@
  a component descriptor (Ivy file, Maven POM). Some parts of the metadata can be changed
  via metadata rules (see &lt;a href='type://org.gradle.api.artifacts.dsl.ComponentMetadataHandler'&gt;org.gradle.api.artifacts.dsl.ComponentMetadataHandler&lt;/a&gt;.
 
- @since 1.8
+ &lt;br&gt;(since 1.8)
 
 </description>
     <method name="setChanging" returnType="void">

@@ -361,8 +361,12 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser.addOpenWindowListener(windowListener);
 		browser.addLocationListener(locationListener);
 
-		/* disable browser menu */
-		browser.setMenu(new Menu(getShell(), SWT.NONE));
+		/* disable browser menu - except when development set*/
+		boolean disableBrowserMenu = !EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS;
+
+		if (disableBrowserMenu){
+			browser.setMenu(new Menu(getShell(), SWT.NONE));
+		}
 
 	}
 

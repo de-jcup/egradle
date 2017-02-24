@@ -2,9 +2,9 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.AccessRule" version="3.0">
     <description> Access rule associated with an Eclipse classpath entry.
 
- @see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IAccessRule.html"&gt;IAccessRule Javadoc&lt;/a&gt;
+ (see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IAccessRule.html"&gt;IAccessRule Javadoc&lt;/a&gt;)
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     <method name="getKind" returnType="int">

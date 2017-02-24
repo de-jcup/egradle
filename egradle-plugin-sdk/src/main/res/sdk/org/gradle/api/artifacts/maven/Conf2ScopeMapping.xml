@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.artifacts.maven.Conf2ScopeMapping" version="3.0">
     <description> An immutable mapping to map a dependency configuration to a Maven scope. This class has implemented equality and
  hashcode based on its values not on object identity.
- @see org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer'&gt;org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer&lt;/a&gt;)
 
 </description>
     <method name="equals" returnType="boolean">

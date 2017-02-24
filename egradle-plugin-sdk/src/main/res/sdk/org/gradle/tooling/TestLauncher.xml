@@ -3,7 +3,7 @@
     <description>
  A &lt;a href='type://TestLauncher'&gt;TestLauncher&lt;/a&gt; allows you to execute tests in a Gradle build.
 
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     <method name="run" returnType="void">
@@ -18,7 +18,7 @@
  @throws BuildCancelledException When the operation was cancelled before it completed successfully.
  @throws GradleConnectionException On some other failure using the connection.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     </method>
@@ -30,7 +30,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
@@ -40,7 +40,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testClasses The class names of the tests to be executed.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="java.lang.Iterable" name="testClasses"/>
@@ -50,7 +50,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testClasses The class names of the tests to be executed.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="java.lang.String" name="testClasses"/>
@@ -61,7 +61,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testClass The name of the class containing the methods to execute.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;methods The names of the test methods to be executed.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.7
+ &lt;br&gt;(since 2.7)
 
 </description>
         <parameter type="java.lang.String" name="testClass"/>
@@ -73,7 +73,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testClass The name of the class containing the methods to execute.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;methods The names of the test methods to be executed.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.7
+ &lt;br&gt;(since 2.7)
 
 </description>
         <parameter type="java.lang.String" name="testClass"/>
@@ -84,7 +84,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;descriptors The OperationDescriptor defining one or more tests.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="java.lang.Iterable" name="descriptors"/>
@@ -94,7 +94,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;descriptors The OperationDescriptor defining one or more tests.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="org.gradle.tooling.events.test.TestOperationDescriptor" name="descriptors"/>

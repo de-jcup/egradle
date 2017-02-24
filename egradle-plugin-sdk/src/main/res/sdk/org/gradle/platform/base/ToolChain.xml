@@ -6,7 +6,7 @@
     <method name="getDisplayName" returnType="java.lang.String">
         <description> Returns a human consumable name for this tool chain.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </method>
@@ -14,7 +14,7 @@
     <property name="displayName" type="java.lang.String" documented="true">
         <description> Returns a human consumable name for this tool chain.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </property>

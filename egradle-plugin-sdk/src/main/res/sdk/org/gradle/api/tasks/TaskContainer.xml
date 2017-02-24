@@ -27,25 +27,25 @@
 
  &lt;tr&gt;&lt;th&gt;Option&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_NAME}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The name of the task to create.&lt;/td&gt;&lt;td&gt;None.
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_NAME&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The name of the task to create.&lt;/td&gt;&lt;td&gt;None.
  Must be specified.&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_TYPE}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The class of the task to
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_TYPE&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The class of the task to
  create.&lt;/td&gt;&lt;td&gt;&lt;a href='type://org.gradle.api.DefaultTask'&gt;org.gradle.api.DefaultTask&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_ACTION}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The closure or &lt;a href='type://Action'&gt;Action&lt;/a&gt; to
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_ACTION&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The closure or &lt;a href='type://Action'&gt;Action&lt;/a&gt; to
  execute when the task executes. See &lt;a href='type://Task#doFirst(Action)'&gt;Task#doFirst(Action)&lt;/a&gt;.&lt;/td&gt;&lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_OVERWRITE}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Replace an existing
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_OVERWRITE&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Replace an existing
  task?&lt;/td&gt;&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_DEPENDS_ON}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The dependencies of the task. See &lt;a
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_DEPENDS_ON&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The dependencies of the task. See &lt;a
  href="../Task.html#dependencies"&gt;here&lt;/a&gt; for more details.&lt;/td&gt;&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_GROUP}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The group of the task.&lt;/td&gt;&lt;td&gt;&lt;code&gt;null
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_GROUP&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The group of the task.&lt;/td&gt;&lt;td&gt;&lt;code&gt;null
  &lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_DESCRIPTION}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The description of the task.&lt;/td&gt;&lt;td&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_DESCRIPTION&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The description of the task.&lt;/td&gt;&lt;td&gt;
  &lt;code&gt;null&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
  &lt;/table&gt;
@@ -53,7 +53,7 @@
  &lt;p&gt;After the task is added, it is made available as a property of the project, so that you can reference the task
  by name in your build file.  See &lt;a href="../Project.html#properties"&gt;here&lt;/a&gt; for more details.&lt;/p&gt;
 
- &lt;p&gt;If a task with the given name already exists in this container and the &lt;code&gt;{@value org.gradle.api.Task#TASK_OVERWRITE}&lt;/code&gt;
+ &lt;p&gt;If a task with the given name already exists in this container and the &lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_OVERWRITE&lt;/em&gt;&lt;/code&gt;
  option is not set to true, an exception is thrown.&lt;/p&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options The task creation options.

@@ -6,7 +6,7 @@
      A Gradle Project is a project in a multi-project Gradle build or a single "standalone" project.
  &lt;/p&gt;
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">

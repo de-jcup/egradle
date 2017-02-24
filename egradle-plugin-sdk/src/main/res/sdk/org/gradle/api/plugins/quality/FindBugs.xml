@@ -51,7 +51,7 @@
     <method name="getExcludeFilterConfig" returnType="org.gradle.api.resources.TextResource">
         <description> A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -61,7 +61,7 @@
  the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
  TextUICommandLine source&lt;/a&gt; for available options.
 
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     </method>
@@ -83,7 +83,7 @@
     <method name="getIncludeFilterConfig" returnType="org.gradle.api.resources.TextResource">
         <description> A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -262,7 +262,7 @@
     <property name="excludeFilterConfig" type="org.gradle.api.resources.TextResource" documented="true">
         <description> A filter specifying bugs to exclude from being reported. Replaces the &lt;a href='type://excludeFilter'&gt;excludeFilter&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>
@@ -272,7 +272,7 @@
  the arguments before passing them to FindBugs. &lt;p&gt; See the &lt;a href="https://code.google.com/p/findbugs/source/browse/findbugs/src/java/edu/umd/cs/findbugs/TextUICommandLine.java"&gt;FindBugs
  TextUICommandLine source&lt;/a&gt; for available options.
 
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
     </property>
@@ -294,7 +294,7 @@
     <property name="includeFilterConfig" type="org.gradle.api.resources.TextResource" documented="true">
         <description> A filter specifying which bugs are reported. Replaces the &lt;a href='type://includeFilter'&gt;includeFilter&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

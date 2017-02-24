@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaProject" version="3.0">
     <description> Represents the information about the IDEA project.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getChildren" returnType="org.gradle.tooling.model.DomainObjectSet">
@@ -10,7 +10,7 @@
  Alias for &lt;a href='type://org.gradle.tooling.model.idea.IdeaProject#getModules()'&gt;#getModules()&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -19,7 +19,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java language settings for the current project, never null.
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-8, where this method is not supported.
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     </method>
@@ -27,7 +27,7 @@
         <description> Returns the name of the JDK.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the JDK.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -38,7 +38,7 @@
  should be preferred.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The language level to use within the current project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -47,7 +47,7 @@
  Alias for &lt;a href='type://org.gradle.tooling.model.idea.IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -57,7 +57,7 @@
  Alias for &lt;a href='type://org.gradle.tooling.model.idea.IdeaProject#getModules()'&gt;#getModules()&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -66,7 +66,7 @@
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the Java language settings for the current project, never null.
  @throws UnsupportedMethodException For Gradle versions older than 1.0-milestone-8, where this method is not supported.
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     </property>
@@ -74,7 +74,7 @@
         <description> Returns the name of the JDK.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the JDK.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -85,7 +85,7 @@
  should be preferred.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The language level to use within the current project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>
@@ -94,7 +94,7 @@
  Alias for &lt;a href='type://org.gradle.tooling.model.idea.IdeaProject#getChildren()'&gt;#getChildren()&lt;/a&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The modules of this IDEA project.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>

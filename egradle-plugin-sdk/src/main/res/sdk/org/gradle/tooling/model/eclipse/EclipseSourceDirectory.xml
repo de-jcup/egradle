@@ -8,7 +8,7 @@
 
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </method>
@@ -18,7 +18,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to exclude. Does not return null.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </method>
@@ -28,7 +28,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to include. Does not return null.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </method>
@@ -38,7 +38,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output location of this source directory.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </method>
@@ -56,7 +56,7 @@
 
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </property>
@@ -66,7 +66,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to exclude. Does not return null.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </property>
@@ -76,7 +76,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to include. Does not return null.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </property>
@@ -86,7 +86,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output location of this source directory.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </property>

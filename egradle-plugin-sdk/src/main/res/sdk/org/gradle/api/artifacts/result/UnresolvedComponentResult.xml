@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.UnresolvedComponentResult" version="3.0">
     <description> A component that could not be resolved.
 
- @since 2.0
+ &lt;br&gt;(since 2.0)
 
 </description>
     <method name="getFailure" returnType="java.lang.Throwable">

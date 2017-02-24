@@ -20,7 +20,7 @@
  &lt;p&gt;
  The architecture is provided as a string name, which is translated into one of the supported architecture types.
  &lt;/p&gt;
- @see Architecture Supported notations.
+ (see &lt;a href='type://Architecture'&gt;Supported notations.&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -41,7 +41,7 @@
  &lt;p&gt;
  The operating system is provided as a string name, which is translated into one of the supported operating system types.
  &lt;/p&gt;
- @see OperatingSystem Supported notations.
+ (see &lt;a href='type://OperatingSystem'&gt;Supported notations.&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>

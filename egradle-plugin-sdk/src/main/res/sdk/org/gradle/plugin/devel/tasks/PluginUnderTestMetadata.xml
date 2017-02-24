@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.plugin.devel.tasks.PluginUnderTestMetadata" version="3.0" superType="org.gradle.api.DefaultTask">
     <description> Custom task for generating the metadata for a plugin user test.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     <method name="generate" returnType="void"/>

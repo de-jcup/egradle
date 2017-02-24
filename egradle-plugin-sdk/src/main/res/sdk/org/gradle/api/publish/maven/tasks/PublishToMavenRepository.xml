@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.maven.tasks.PublishToMavenRepository" version="3.0" superType="org.gradle.api.publish.maven.tasks.AbstractPublishToMaven" documented="true">
     <description> Publishes a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; to a &lt;a href='type://MavenArtifactRepository'&gt;MavenArtifactRepository&lt;/a&gt;.
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="doPublish" returnType="void">

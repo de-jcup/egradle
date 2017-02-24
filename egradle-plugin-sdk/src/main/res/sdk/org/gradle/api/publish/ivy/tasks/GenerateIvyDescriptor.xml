@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
     <description> Generates an Ivy XML Module Descriptor file.
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="doGenerate" returnType="void"/>

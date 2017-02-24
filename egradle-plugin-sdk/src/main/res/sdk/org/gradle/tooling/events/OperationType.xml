@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.tooling.events.OperationType" version="3.0">
     <description> Enumerates the different types of operations for which progress events can be received.
 
- @see org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener, java.util.Set)
+ (see &lt;a href='type://org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener,'&gt;java.util.Set)&lt;/a&gt;)
 
 </description>
 </type>

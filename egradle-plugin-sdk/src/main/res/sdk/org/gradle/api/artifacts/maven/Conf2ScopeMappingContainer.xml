@@ -15,7 +15,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configuration a Gradle configuration name (must not be null).
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;scope A Maven scope name (must not be null)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #getMapping(java.util.Collection) 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#getMapping(java.util.Collection) '&gt;#getMapping(java.util.Collection) &lt;/a&gt;)
 
 </description>
         <parameter type="int" name="priority"/>
@@ -36,7 +36,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configuration
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The scope corresponding to the given configurations. Returns null if no such scope can be found.
- @see #addMapping(int, Configuration, String)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.util.Collection" name="configurations"/>
@@ -45,13 +45,13 @@
         <description> Returns a map with all the configuration to scope mappings. If no such mapping has been defined,
  an empty map is returned.
 
- @see #addMapping(int, Configuration, String) 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;)
 
 </description>
     </method>
     <method name="isSkipUnmappedConfs" returnType="boolean">
         <description> Returns whether unmapped configuration should be skipped or not. Defaults to true.
- @see #setSkipUnmappedConfs(boolean) 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#setSkipUnmappedConfs(boolean) '&gt;#setSkipUnmappedConfs(boolean) &lt;/a&gt;)
 
 </description>
     </method>
@@ -77,7 +77,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configuration
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The scope corresponding to the given configurations. Returns null if no such scope can be found.
- @see #addMapping(int, Configuration, String)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;)
 
 </description>
     </property>
@@ -85,13 +85,13 @@
         <description> Returns a map with all the configuration to scope mappings. If no such mapping has been defined,
  an empty map is returned.
 
- @see #addMapping(int, Configuration, String) 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#addMapping(int,'&gt;Configuration, String)&lt;/a&gt;)
 
 </description>
     </property>
     <property name="skipUnmappedConfs" type="boolean">
         <description> Returns whether unmapped configuration should be skipped or not. Defaults to true.
- @see #setSkipUnmappedConfs(boolean) 
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer#setSkipUnmappedConfs(boolean) '&gt;#setSkipUnmappedConfs(boolean) &lt;/a&gt;)
 
 </description>
     </property>

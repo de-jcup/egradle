@@ -15,7 +15,7 @@
 
  &lt;p&gt;Each task has a name, which can be used to refer to the task within its owning project, and a fully qualified
  path, which is unique across all tasks in all projects. The path is the concatenation of the owning project's path
- and the task's name. Path elements are separated using the {@value org.gradle.api.Project#PATH_SEPARATOR}
+ and the task's name. Path elements are separated using the &lt;em class='value'&gt;org.gradle.api.Project#PATH_SEPARATOR&lt;/em&gt;
  character.&lt;/p&gt;
 
  &lt;h3&gt;Task Actions&lt;/h3&gt;
@@ -33,7 +33,7 @@
  next task by throwing a &lt;a href='type://org.gradle.api.tasks.StopExecutionException'&gt;org.gradle.api.tasks.StopExecutionException&lt;/a&gt;. Using these exceptions allows you to
  have precondition actions which skip execution of the task, or part of the task, if not true.&lt;/p&gt;
 
- &lt;a name="dependencies"/&gt;&lt;h3&gt;Task Dependencies and Task Ordering&lt;/h3&gt;
+ &lt;h3&gt;Task Dependencies and Task Ordering&lt;/h3&gt;
 
  &lt;p&gt;A task may have dependencies on other tasks or might be scheduled to always run after another task.
  Gradle ensures that all task dependencies and ordering rules are honored when executing tasks, so that the task is executed after
@@ -68,7 +68,7 @@
 
  &lt;h3&gt;Using a Task in a Build File&lt;/h3&gt;
 
- &lt;a name="properties"/&gt; &lt;h4&gt;Dynamic Properties&lt;/h4&gt;
+  &lt;h4&gt;Dynamic Properties&lt;/h4&gt;
 
  &lt;p&gt;A &lt;a href='type://Task'&gt;Task&lt;/a&gt; has 4 'scopes' for properties. You can access these properties by name from the build file or by
  calling the &lt;a href='type://org.gradle.api.Task#property(String)'&gt;#property(String)&lt;/a&gt; method. You can change the value of these properties by calling the &lt;a href='type://org.gradle.api.Task#setProperty(String,'&gt;Object)&lt;/a&gt; method.&lt;/p&gt;
@@ -265,7 +265,7 @@
     <method name="getEnabled" returnType="boolean">
         <description> &lt;p&gt;Returns if this task is enabled or not.&lt;/p&gt;
 
- @see #setEnabled(boolean)
+ (see &lt;a href='type://org.gradle.api.Task#setEnabled(boolean)'&gt;#setEnabled(boolean)&lt;/a&gt;)
 
 </description>
     </method>
@@ -703,7 +703,7 @@
     <property name="enabled" type="boolean" documented="true">
         <description> &lt;p&gt;Returns if this task is enabled or not.&lt;/p&gt;
 
- @see #setEnabled(boolean)
+ (see &lt;a href='type://org.gradle.api.Task#setEnabled(boolean)'&gt;#setEnabled(boolean)&lt;/a&gt;)
 
 </description>
     </property>

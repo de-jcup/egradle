@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.jvm.plugins.JUnitTestSuitePlugin" version="3.0">
     <description> This plugin adds support for execution of JUnit test suites to the Java software model.
 
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     <method name="apply" returnType="void">

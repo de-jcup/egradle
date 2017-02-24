@@ -6,8 +6,8 @@
 
  See &lt;a href="http://www.clarkware.com/software/JDepend.html"&gt;JDepend&lt;/a&gt; for more information.
 
- @see JDependExtension
- @see JDepend
+ (see &lt;a href='type://JDependExtension'&gt;JDependExtension&lt;/a&gt;)
+ (see &lt;a href='type://JDepend'&gt;JDepend&lt;/a&gt;)
 
 </description>
     <method name="call" returnType="java.io.File"/>

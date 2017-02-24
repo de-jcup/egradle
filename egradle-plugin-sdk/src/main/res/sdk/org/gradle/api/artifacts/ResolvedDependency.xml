@@ -15,7 +15,7 @@
     <method name="getAllModuleArtifacts" returnType="java.util.Set">
         <description> Returns the module artifacts belonging to this ResolvedDependency and recursively to its children. Returns never null.
 
- @see #getModuleArtifacts()
+ (see &lt;a href='type://org.gradle.api.artifacts.ResolvedDependency#getModuleArtifacts()'&gt;#getModuleArtifacts()&lt;/a&gt;)
 
 </description>
     </method>
@@ -96,7 +96,7 @@
     <property name="allModuleArtifacts" type="java.util.Set">
         <description> Returns the module artifacts belonging to this ResolvedDependency and recursively to its children. Returns never null.
 
- @see #getModuleArtifacts()
+ (see &lt;a href='type://org.gradle.api.artifacts.ResolvedDependency#getModuleArtifacts()'&gt;#getModuleArtifacts()&lt;/a&gt;)
 
 </description>
     </property>

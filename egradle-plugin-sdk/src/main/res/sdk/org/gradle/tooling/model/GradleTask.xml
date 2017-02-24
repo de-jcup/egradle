@@ -2,14 +2,14 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.GradleTask" version="3.0">
     <description> Represents a task which is executable by Gradle.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getProject" returnType="org.gradle.tooling.model.GradleProject">
         <description> Returns the Gradle project this task is defined in.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The element.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </method>
@@ -18,7 +18,7 @@
         <description> Returns the Gradle project this task is defined in.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The element.
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     </property>

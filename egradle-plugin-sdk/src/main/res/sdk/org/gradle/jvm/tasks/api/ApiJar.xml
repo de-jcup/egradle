@@ -27,8 +27,8 @@
  &lt;p&gt;The inputs to this task are Java class files which must be provided via
  &lt;a href='type://org.gradle.api.tasks.TaskInputs'&gt;org.gradle.api.tasks.TaskInputs&lt;/a&gt;.&lt;/p&gt;
 
- @since 2.10
- @see org.gradle.jvm.plugins.JvmComponentPlugin
+ &lt;br&gt;(since 2.10)
+ (see &lt;a href='type://org.gradle.jvm.plugins.JvmComponentPlugin'&gt;org.gradle.jvm.plugins.JvmComponentPlugin&lt;/a&gt;)
 
 </description>
     <method name="createApiJar" returnType="void"/>

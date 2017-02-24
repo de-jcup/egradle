@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.test.TestSkippedResult" version="3.0">
     <description> Describes how a test operation was skipped.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <interface name="org.gradle.tooling.events.SkippedResult"/>

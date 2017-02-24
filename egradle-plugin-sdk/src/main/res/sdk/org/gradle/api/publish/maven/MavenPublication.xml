@@ -54,7 +54,7 @@
  }
  &lt;/pre&gt;
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     <method name="artifact" returnType="org.gradle.api.publish.maven.MavenArtifact" documented="true">

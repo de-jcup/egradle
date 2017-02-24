@@ -8,8 +8,8 @@
  &lt;p&gt;
  All PMD tasks (including user-defined ones) are added to the &lt;tt&gt;check&lt;/tt&gt; lifecycle task.
 
- @see PmdExtension
- @see Pmd
+ (see &lt;a href='type://PmdExtension'&gt;PmdExtension&lt;/a&gt;)
+ (see &lt;a href='type://Pmd'&gt;Pmd&lt;/a&gt;)
 
 </description>
     <method name="calculateDefaultDependencyNotation" returnType="java.lang.String">

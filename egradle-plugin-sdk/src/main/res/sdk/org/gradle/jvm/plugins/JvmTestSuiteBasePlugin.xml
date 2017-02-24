@@ -3,7 +3,7 @@
     <description> The base plugin that needs to be applied by all plugins which provide testing support
  for the Java software model.
 
- @since 2.12
+ &lt;br&gt;(since 2.12)
 
 </description>
     <method name="addSourceSetSpecificDependencies" returnType="void">

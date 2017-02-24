@@ -11,14 +11,14 @@
     <method name="getGeneratedSourceDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
         <description> The set of generated source directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getSourceDirectories()'&gt;#getSourceDirectories()&lt;/a&gt;.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
     <method name="getGeneratedTestDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
         <description> The set of generated test directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getTestDirectories()'&gt;#getTestDirectories()&lt;/a&gt;.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -45,14 +45,14 @@
     <property name="generatedSourceDirectories" type="org.gradle.tooling.model.DomainObjectSet">
         <description> The set of generated source directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getSourceDirectories()'&gt;#getSourceDirectories()&lt;/a&gt;.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>
     <property name="generatedTestDirectories" type="org.gradle.tooling.model.DomainObjectSet">
         <description> The set of generated test directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getTestDirectories()'&gt;#getTestDirectories()&lt;/a&gt;.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

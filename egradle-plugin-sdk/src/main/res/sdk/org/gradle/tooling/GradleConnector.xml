@@ -50,7 +50,7 @@
 
  &lt;p&gt;The Tooling API requires Java 7 or later. The Gradle version used by builds may have additional Java version requirements.&lt;/p&gt;
 
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     <method name="connect" returnType="org.gradle.tooling.ProjectConnection">
@@ -59,7 +59,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The connection. Never return null.
  @throws UnsupportedVersionException When the target Gradle version does not support this version of the tooling API.
  @throws GradleConnectionException On failure to establish a connection with the target Gradle version.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </method>
@@ -68,7 +68,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir The working directory.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.io.File" name="projectDir"/>
@@ -77,7 +77,7 @@
         <description> Creates a new &lt;a href='type://CancellationTokenSource'&gt;CancellationTokenSource&lt;/a&gt; that can be used to cancel one or more &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; executions.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns &lt;a href='type://null'&gt;null&lt;/a&gt;.
- @since 2.1
+ &lt;br&gt;(since 2.1)
 
 </description>
     </method>
@@ -85,7 +85,7 @@
         <description> Creates a new connector instance.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns null.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </method>
@@ -93,7 +93,7 @@
         <description> Creates a new connection builder instance for creating Gradle composite builds.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The instance. Never returns null.
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -103,7 +103,7 @@
  specified using &lt;a href='type://org.gradle.tooling.GradleConnector#useInstallation(File)'&gt;#useInstallation(File)&lt;/a&gt;, &lt;a href='type://org.gradle.tooling.GradleConnector#useDistribution(URI)'&gt;#useDistribution(URI)&lt;/a&gt;, or &lt;a href='type://org.gradle.tooling.GradleConnector#useGradleVersion(String)'&gt;#useGradleVersion(String)&lt;/a&gt;. Acts as the default behavior.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
     </method>
@@ -112,7 +112,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleDistribution The distribution to use.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.net.URI" name="gradleDistribution"/>
@@ -122,7 +122,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleUserHomeDir The user's Gradle home directory to use.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.io.File" name="gradleUserHomeDir"/>
@@ -132,7 +132,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleVersion The version to use.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.lang.String" name="gradleVersion"/>
@@ -143,7 +143,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;gradleHome The Gradle installation directory.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="java.io.File" name="gradleHome"/>

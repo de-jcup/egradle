@@ -6,7 +6,7 @@
 
  For examples see the reference for &lt;a href='type://org.gradle.api.artifacts.repositories.IvyArtifactRepository#layout(String,'&gt;org.gradle.api.Action)&lt;/a&gt;.
 
- @since 2.3 (feature was already present in Groovy DSL, this type introduced in 2.3)
+ &lt;br&gt;(since 2.3 (feature was already present in Groovy DSL, this type introduced in 2.3))
 
 </description>
     <method name="artifact" returnType="void">

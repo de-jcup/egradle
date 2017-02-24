@@ -7,7 +7,7 @@
  This annotation must be set on a getter. The return type of the getter must either be
  a &lt;a href='type://String'&gt;String&lt;/a&gt; or a class implementing &lt;a href='type://org.gradle.api.Named'&gt;org.gradle.api.Named&lt;/a&gt;.
 
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
 </type>

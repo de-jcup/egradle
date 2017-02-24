@@ -21,7 +21,7 @@
  &lt;p&gt;
  The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
 
- @see DuplicatesStrategy
+ (see &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for this file.
 
 </description>
@@ -119,7 +119,7 @@
  &lt;p&gt;
  The value can be set with a case insensitive string of the enum value (e.g. &lt;a href='type://'exclude''&gt;'exclude'&lt;/a&gt; for &lt;a href='type://DuplicatesStrategy#EXCLUDE'&gt;DuplicatesStrategy#EXCLUDE&lt;/a&gt;).
 
- @see DuplicatesStrategy
+ (see &lt;a href='type://DuplicatesStrategy'&gt;DuplicatesStrategy&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the strategy to use for this file.
 
 </description>

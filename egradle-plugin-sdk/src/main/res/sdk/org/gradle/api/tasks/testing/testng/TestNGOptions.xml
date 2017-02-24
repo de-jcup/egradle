@@ -37,7 +37,7 @@
     <method name="getOutputDirectory" returnType="java.io.File">
         <description> The location to write TestNG's output. &lt;p&gt; Defaults to the owning test task's location for writing the HTML report.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </method>
@@ -225,7 +225,7 @@
     <property name="outputDirectory" type="java.io.File">
         <description> The location to write TestNG's output. &lt;p&gt; Defaults to the owning test task's location for writing the HTML report.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </property>

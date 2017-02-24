@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.maven.tasks.AbstractPublishToMaven" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
     <description> Base class for tasks that publish a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt;.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="call" returnType="org.gradle.api.file.FileCollection"/>

@@ -92,7 +92,7 @@
  If you wish to use any source path, it must be explicitly set.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source path
- @see #setSourcepath(FileCollection)
+ (see &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setSourcepath(FileCollection)'&gt;#setSourcepath(FileCollection)&lt;/a&gt;)
 
 </description>
     </method>
@@ -353,7 +353,7 @@
  If you wish to use any source path, it must be explicitly set.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source path
- @see #setSourcepath(FileCollection)
+ (see &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setSourcepath(FileCollection)'&gt;#setSourcepath(FileCollection)&lt;/a&gt;)
 
 </description>
     </property>

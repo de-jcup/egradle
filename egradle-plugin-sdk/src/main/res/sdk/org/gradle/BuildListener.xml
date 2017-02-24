@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.BuildListener" version="3.0">
     <description> &lt;p&gt;A &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; is notified of the major lifecycle events as a build is executed.&lt;/p&gt;
 
- @see org.gradle.api.invocation.Gradle#addListener(Object)
+ (see &lt;a href='type://org.gradle.api.invocation.Gradle#addListener(Object)'&gt;org.gradle.api.invocation.Gradle#addListener(Object)&lt;/a&gt;)
 
 </description>
     <method name="buildFinished" returnType="void">

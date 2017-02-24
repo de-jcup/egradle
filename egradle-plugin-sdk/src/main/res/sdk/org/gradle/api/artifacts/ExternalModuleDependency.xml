@@ -11,7 +11,7 @@
     <method name="isChanging" returnType="boolean">
         <description> Returns whether or not Gradle should always check for a change in the remote repository.
 
- @see #setChanging(boolean)
+ (see &lt;a href='type://org.gradle.api.artifacts.ExternalModuleDependency#setChanging(boolean)'&gt;#setChanging(boolean)&lt;/a&gt;)
 
 </description>
     </method>
@@ -30,7 +30,7 @@
     <property name="changing" type="boolean">
         <description> Returns whether or not Gradle should always check for a change in the remote repository.
 
- @see #setChanging(boolean)
+ (see &lt;a href='type://org.gradle.api.artifacts.ExternalModuleDependency#setChanging(boolean)'&gt;#setChanging(boolean)&lt;/a&gt;)
 
 </description>
     </property>

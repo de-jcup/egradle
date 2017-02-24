@@ -4,7 +4,7 @@
  the execution of a build, of a task, of a test, etc. A progress event can, for example, signal that a test has started, a
  task has finished, etc.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getDescriptor" returnType="org.gradle.tooling.events.OperationDescriptor">

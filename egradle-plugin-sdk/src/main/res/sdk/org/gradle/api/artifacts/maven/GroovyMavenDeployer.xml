@@ -14,7 +14,7 @@
 
  This call set the repository object and also returns an instance of this object. If you use 'snapshotRepository'
  instead of repository, the snapshot repository is build.
- @see MavenDeployer
+ (see &lt;a href='type://MavenDeployer'&gt;MavenDeployer&lt;/a&gt;)
 
 </description>
     <interface name="org.gradle.api.artifacts.maven.MavenDeployer"/>

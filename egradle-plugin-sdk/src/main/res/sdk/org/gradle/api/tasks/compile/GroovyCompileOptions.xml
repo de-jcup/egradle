@@ -47,8 +47,8 @@
  &lt;p&gt;
  &lt;b&gt;This feature is only available if compiling with Groovy 2.1 or later.&lt;/b&gt;
  &lt;/p&gt;
- @see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/CompilerConfiguration.html"&gt;CompilerConfiguration&lt;/a&gt;
- @see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/customizers/builder/CompilerCustomizationBuilder.html"&gt;CompilerCustomizationBuilder&lt;/a&gt;
+ (see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/CompilerConfiguration.html"&gt;CompilerConfiguration&lt;/a&gt;)
+ (see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/customizers/builder/CompilerCustomizationBuilder.html"&gt;CompilerCustomizationBuilder&lt;/a&gt;)
 
 </description>
     </method>
@@ -141,7 +141,7 @@
     <method name="setConfigurationScript" returnType="void">
         <description> Sets the path to the groovy configuration file.
 
- @see #getConfigurationScript()
+ (see &lt;a href='type://org.gradle.api.tasks.compile.GroovyCompileOptions#getConfigurationScript()'&gt;#getConfigurationScript()&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.File" name="configurationFile"/>
@@ -254,8 +254,8 @@
  &lt;p&gt;
  &lt;b&gt;This feature is only available if compiling with Groovy 2.1 or later.&lt;/b&gt;
  &lt;/p&gt;
- @see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/CompilerConfiguration.html"&gt;CompilerConfiguration&lt;/a&gt;
- @see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/customizers/builder/CompilerCustomizationBuilder.html"&gt;CompilerCustomizationBuilder&lt;/a&gt;
+ (see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/CompilerConfiguration.html"&gt;CompilerConfiguration&lt;/a&gt;)
+ (see &lt;a href="http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/control/customizers/builder/CompilerCustomizationBuilder.html"&gt;CompilerCustomizationBuilder&lt;/a&gt;)
 
 </description>
     </property>

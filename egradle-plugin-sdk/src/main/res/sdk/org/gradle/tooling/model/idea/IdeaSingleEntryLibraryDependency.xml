@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency" version="3.0">
     <description> "Single-Entry Module Library" as IDEA calls it. For example a single Jar file with sources Jar.
 
- @since 1.0-milestone-5
+ &lt;br&gt;(since 1.0-milestone-5)
 
 </description>
     <method name="getFile" returnType="java.io.File">

@@ -20,7 +20,7 @@
  Defaults to the platform's default character set.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;null if using the platform's default character set for ZIP metadata
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -51,7 +51,7 @@
  Defaults to the platform's default character set.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;metadataCharset the character set used to encode ZIP metadata like file names
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
         <parameter type="java.lang.String" name="metadataCharset"/>
@@ -59,7 +59,7 @@
     <method name="setZip64" returnType="void">
         <description> Enables building zips with more than 65535 files or bigger than 4GB.
 
- @see #isZip64()
+ (see &lt;a href='type://org.gradle.api.tasks.bundling.Zip#isZip64()'&gt;#isZip64()&lt;/a&gt;)
 
 </description>
         <parameter type="boolean" name="allowZip64"/>
@@ -78,7 +78,7 @@
  Defaults to the platform's default character set.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;null if using the platform's default character set for ZIP metadata
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>

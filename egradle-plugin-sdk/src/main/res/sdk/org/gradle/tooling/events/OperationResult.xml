@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.OperationResult" version="3.0">
     <description> Describes the result of running an operation.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getEndTime" returnType="long">

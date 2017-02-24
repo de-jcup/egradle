@@ -5,7 +5,7 @@
 
  &lt;h3&gt;Lifecycle&lt;/h3&gt;
 
- &lt;p&gt;There is a one-to-one relationship between a &lt;code&gt;Project&lt;/code&gt; and a &lt;code&gt;{@value #DEFAULT_BUILD_FILE}&lt;/code&gt;
+ &lt;p&gt;There is a one-to-one relationship between a &lt;code&gt;Project&lt;/code&gt; and a &lt;code&gt;&lt;em class='value'&gt;#DEFAULT_BUILD_FILE&lt;/em&gt;&lt;/code&gt;
  file. During build initialisation, Gradle assembles a &lt;code&gt;Project&lt;/code&gt; object for each project which is to
  participate in the build, as follows:&lt;/p&gt;
 
@@ -13,13 +13,13 @@
 
  &lt;li&gt;Create a &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; instance for the build.&lt;/li&gt;
 
- &lt;li&gt;Evaluate the &lt;code&gt;{@value org.gradle.api.initialization.Settings#DEFAULT_SETTINGS_FILE}&lt;/code&gt; script, if
+ &lt;li&gt;Evaluate the &lt;code&gt;&lt;em class='value'&gt;org.gradle.api.initialization.Settings#DEFAULT_SETTINGS_FILE&lt;/em&gt;&lt;/code&gt; script, if
  present, against the &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object to configure it.&lt;/li&gt;
 
  &lt;li&gt;Use the configured &lt;a href='type://org.gradle.api.initialization.Settings'&gt;org.gradle.api.initialization.Settings&lt;/a&gt; object to create the hierarchy of
  &lt;code&gt;Project&lt;/code&gt; instances.&lt;/li&gt;
 
- &lt;li&gt;Finally, evaluate each &lt;code&gt;Project&lt;/code&gt; by executing its &lt;code&gt;{@value #DEFAULT_BUILD_FILE}&lt;/code&gt; file, if
+ &lt;li&gt;Finally, evaluate each &lt;code&gt;Project&lt;/code&gt; by executing its &lt;code&gt;&lt;em class='value'&gt;#DEFAULT_BUILD_FILE&lt;/em&gt;&lt;/code&gt; file, if
  present, against the project. The projects are evaluated in breadth-wise order, such that a project is evaluated
  before its child projects. This order can be overridden by calling &lt;code&gt;&lt;a href='type://org.gradle.api.Project#evaluationDependsOnChildren()'&gt;#evaluationDependsOnChildren()&lt;/a&gt;&lt;/code&gt; or by adding an
  explicit evaluation dependency using &lt;code&gt;&lt;a href='type://org.gradle.api.Project#evaluationDependsOn(String)'&gt;#evaluationDependsOn(String)&lt;/a&gt;&lt;/code&gt;.&lt;/li&gt;
@@ -54,7 +54,7 @@
  Plugins can be applied using the &lt;a href='type://PluginAware#apply(java.util.Map)'&gt;PluginAware#apply(java.util.Map)&lt;/a&gt; method, or by using the &lt;a href='type://org.gradle.plugin.use.PluginDependenciesSpec'&gt;plugins script block&lt;/a&gt;.
  &lt;/p&gt;
 
- &lt;a name="properties"/&gt; &lt;h3&gt;Properties&lt;/h3&gt;
+  &lt;h3&gt;Properties&lt;/h3&gt;
 
  &lt;p&gt;Gradle executes the project's build file against the &lt;code&gt;Project&lt;/code&gt; instance to configure the project. Any
  property or method which your script uses is delegated through to the associated &lt;code&gt;Project&lt;/code&gt; object.  This
@@ -102,7 +102,7 @@
  &lt;p&gt;When writing a property, the project searches the above scopes in order, and sets the property in the first scope
  it finds the property in. If not found, an exception is thrown. See &lt;a href='type://org.gradle.api.Project#setProperty(String,'&gt;Object)&lt;/a&gt; for more details.&lt;/p&gt;
 
- &lt;a name="extraproperties"/&gt; &lt;h4&gt;Extra Properties&lt;/h4&gt;
+  &lt;h4&gt;Extra Properties&lt;/h4&gt;
 
  All extra properties must be defined through the &amp;quot;ext&amp;quot; namespace. Once an extra property has been defined,
  it is available directly on the owning object (in the below case the Project, Task, and sub-projects respectively) and can
@@ -417,7 +417,7 @@ Default is "src/main/application".
     <method name="copy" returnType="org.gradle.api.tasks.WorkResult" documented="true">
         <description> Copies the specified files.  The given action is used to configure a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;, which is then used to
  copy the files.
- @see #copy(Closure)
+ (see &lt;a href='type://org.gradle.api.Project#copy(Closure)'&gt;#copy(Closure)&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action Action to configure the CopySpec
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://WorkResult'&gt;WorkResult&lt;/a&gt; that can be used to check if the copy did any work.
 
@@ -457,7 +457,7 @@ Default is "src/main/application".
         <description> Creates a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; which can later be used to copy files or create an archive. The given action is used
  to configure the &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; before it is returned by this method.
 
- @see #copySpec(Closure)
+ (see &lt;a href='type://org.gradle.api.Project#copySpec(Closure)'&gt;#copySpec(Closure)&lt;/a&gt;)
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action Action to configure the CopySpec
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The CopySpec
 
@@ -469,7 +469,7 @@ Default is "src/main/application".
  ant tasks.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Creates an &lt;code&gt;AntBuilder&lt;/code&gt; for this project. Never returns null.
- @see #getAnt()
+ (see &lt;a href='type://org.gradle.api.Project#getAnt()'&gt;#getAnt()&lt;/a&gt;)
 
 </description>
     </method>
@@ -541,7 +541,7 @@ The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; i
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;otherProject The project to compare the nesting level with.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a negative integer, zero, or a positive integer as this project has a nesting level less than, equal to,
          or greater than the specified object.
- @see #getDepth()
+ (see &lt;a href='type://org.gradle.api.Project#getDepth()'&gt;#getDepth()&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.Project" name="otherProject"/>
@@ -797,7 +797,7 @@ The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; i
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;propertyName The name of the property.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of the property, possibly null or null if not found.
- @see Project#property(String)
+ (see &lt;a href='type://Project#property(String)'&gt;Project#property(String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
@@ -919,8 +919,7 @@ into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory.
 </description>
     </method>
     <method name="getBuildFile" returnType="java.io.File">
-        <description> &lt;p&gt;Returns the build file Gradle will evaluate against this project object. The default is &lt;code&gt; {@value
- #DEFAULT_BUILD_FILE}&lt;/code&gt;. If an embedded script is provided the build file will be null. &lt;/p&gt;
+        <description> &lt;p&gt;Returns the build file Gradle will evaluate against this project object. The default is &lt;code&gt; &lt;em class='value'&gt;#DEFAULT_BUILD_FILE&lt;/em&gt;&lt;/code&gt;. If an embedded script is provided the build file will be null. &lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Current build file. May return null.
 
@@ -988,7 +987,7 @@ into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory.
  See docs for &lt;a href='type://DependencyHandler'&gt;DependencyHandler&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
- @see #getConfigurations()
+ (see &lt;a href='type://org.gradle.api.Project#getConfigurations()'&gt;#getConfigurations()&lt;/a&gt;)
 
 </description>
     </method>
@@ -1202,7 +1201,7 @@ Default is "lib".
     </method>
     <method name="getStatus" returnType="java.lang.Object">
         <description> &lt;p&gt;Returns the status of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the status. The status
- defaults to {@value #DEFAULT_STATUS}.&lt;/p&gt;
+ defaults to &lt;em class='value'&gt;#DEFAULT_STATUS&lt;/em&gt;.&lt;/p&gt;
 
  &lt;p&gt;The status of the project is only relevant, if you upload libraries together with a module descriptor. The
  status specified here, will be part of this module descriptor.&lt;/p&gt;
@@ -1267,7 +1266,7 @@ Default is "lib".
     </method>
     <method name="getVersion" returnType="java.lang.Object">
         <description> &lt;p&gt;Returns the version of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the version. The
- version defaults to {@value #DEFAULT_VERSION}.&lt;/p&gt;
+ version defaults to &lt;em class='value'&gt;#DEFAULT_VERSION&lt;/em&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of this project. Never returns null.
 
@@ -1424,7 +1423,7 @@ the new manifest instance before it is returned.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;propertyName The name of the property.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of the property, possibly null.
  @throws MissingPropertyException When the given property is unknown.
- @see Project#findProperty(String)
+ (see &lt;a href='type://Project#findProperty(String)'&gt;Project#findProperty(String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="propertyName"/>
@@ -1739,23 +1738,23 @@ exclude 'some/unwanted/package/**'
 
  &lt;tr&gt;&lt;th&gt;Option&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_TYPE}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The class of the task to
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_TYPE&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;The class of the task to
  create.&lt;/td&gt;&lt;td&gt;&lt;a href='type://org.gradle.api.DefaultTask'&gt;org.gradle.api.DefaultTask&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_OVERWRITE}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Replace an existing
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_OVERWRITE&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Replace an existing
  task?&lt;/td&gt;&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_DEPENDS_ON}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A task name or set of task names which
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_DEPENDS_ON&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A task name or set of task names which
  this task depends on&lt;/td&gt;&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_ACTION}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A closure or &lt;a href='type://Action'&gt;Action&lt;/a&gt; to add to the
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_ACTION&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A closure or &lt;a href='type://Action'&gt;Action&lt;/a&gt; to add to the
  task.&lt;/td&gt;&lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_DESCRIPTION}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A description of the task.
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_DESCRIPTION&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A description of the task.
  &lt;/td&gt;&lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
- &lt;tr&gt;&lt;td&gt;&lt;code&gt;{@value org.gradle.api.Task#TASK_GROUP}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A task group which this task belongs to.
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;&lt;em class='value'&gt;org.gradle.api.Task#TASK_GROUP&lt;/em&gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;A task group which this task belongs to.
  &lt;/td&gt;&lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
 
  &lt;/table&gt;
@@ -1909,8 +1908,7 @@ exclude 'some/unwanted/package/**'
 </description>
     </property>
     <property name="buildFile" type="java.io.File" documented="true">
-        <description> &lt;p&gt;Returns the build file Gradle will evaluate against this project object. The default is &lt;code&gt; {@value
- #DEFAULT_BUILD_FILE}&lt;/code&gt;. If an embedded script is provided the build file will be null. &lt;/p&gt;
+        <description> &lt;p&gt;Returns the build file Gradle will evaluate against this project object. The default is &lt;code&gt; &lt;em class='value'&gt;#DEFAULT_BUILD_FILE&lt;/em&gt;&lt;/code&gt;. If an embedded script is provided the build file will be null. &lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Current build file. May return null.
 
@@ -1973,7 +1971,7 @@ exclude 'some/unwanted/package/**'
  See docs for &lt;a href='type://DependencyHandler'&gt;DependencyHandler&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
- @see #getConfigurations()
+ (see &lt;a href='type://org.gradle.api.Project#getConfigurations()'&gt;#getConfigurations()&lt;/a&gt;)
 
 </description>
     </property>
@@ -2116,7 +2114,7 @@ exclude 'some/unwanted/package/**'
     </property>
     <property name="status" type="java.lang.Object" documented="true">
         <description> &lt;p&gt;Returns the status of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the status. The status
- defaults to {@value #DEFAULT_STATUS}.&lt;/p&gt;
+ defaults to &lt;em class='value'&gt;#DEFAULT_STATUS&lt;/em&gt;.&lt;/p&gt;
 
  &lt;p&gt;The status of the project is only relevant, if you upload libraries together with a module descriptor. The
  status specified here, will be part of this module descriptor.&lt;/p&gt;
@@ -2151,7 +2149,7 @@ exclude 'some/unwanted/package/**'
     </property>
     <property name="version" type="java.lang.Object" documented="true">
         <description> &lt;p&gt;Returns the version of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the version. The
- version defaults to {@value #DEFAULT_VERSION}.&lt;/p&gt;
+ version defaults to &lt;em class='value'&gt;#DEFAULT_VERSION&lt;/em&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of this project. Never returns null.
 

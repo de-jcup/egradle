@@ -6,28 +6,28 @@
     <method name="getClassesDir" returnType="java.io.File">
         <description> Returns the classes dir.
 
- @see #setClassesDir(java.io.File) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setClassesDir(java.io.File) '&gt;#setClassesDir(java.io.File) &lt;/a&gt;)
 
 </description>
     </method>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath.
 
- @see #setClasspath(org.gradle.api.file.FileCollection) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setClasspath(org.gradle.api.file.FileCollection) '&gt;#setClasspath(org.gradle.api.file.FileCollection) &lt;/a&gt;)
 
 </description>
     </method>
     <method name="getDescription" returnType="java.lang.String">
         <description> Returns the description.
 
- @see #setDescription(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setDescription(String) '&gt;#setDescription(String) &lt;/a&gt;)
 
 </description>
     </method>
     <method name="getDocURL" returnType="java.lang.String">
         <description> Returns the docURL value.
 
- @see #setDocURL(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setDocURL(String)'&gt;#setDocURL(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -40,21 +40,21 @@
     </method>
     <method name="getLicense" returnType="java.lang.String">
         <description> Returns the license.
- @see #setLicense(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setLicense(String) '&gt;#setLicense(String) &lt;/a&gt;)
 
 </description>
     </method>
     <method name="getName" returnType="java.lang.String">
         <description> Returns the name.
 
- @see #setName(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setName(String)'&gt;#setName(String)&lt;/a&gt;)
 
 </description>
     </method>
     <method name="getSymbolicName" returnType="java.lang.String">
         <description> Returns the symbolic name.
 
- @see #setSymbolicName(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setSymbolicName(String)'&gt;#setSymbolicName(String)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the symbolic name.
 
 </description>
@@ -62,14 +62,14 @@
     <method name="getVendor" returnType="java.lang.String">
         <description> Returns the vendor.
 
- @see #setVendor(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setVendor(String) '&gt;#setVendor(String) &lt;/a&gt;)
 
 </description>
     </method>
     <method name="getVersion" returnType="java.lang.String">
         <description> Returns the version.
 
- @see #setVersion(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setVersion(String) '&gt;#setVersion(String) &lt;/a&gt;)
 
 </description>
     </method>
@@ -80,8 +80,8 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;values
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #instructionFirst(String, String...)
- @see #instructionReplace(String, String...)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instructionFirst(String,'&gt;String...)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instructionReplace(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -94,8 +94,8 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name Name of the instruction.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;values The values for the instruction.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #instruction(String, String...)
- @see #instructionReplace(String, String...)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instruction(String,'&gt;String...)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instructionReplace(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -108,8 +108,8 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name Name of the instruction.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;values The values for the instruction.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see #instruction(String, String...)
- @see #instructionFirst(String, String...)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instruction(String,'&gt;String...)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instructionFirst(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -120,7 +120,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;instructionName
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of arguments
- @see #instruction(String, String...)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instruction(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="instructionName"/>
@@ -132,7 +132,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classesDir
  
- @see #instruction(String, String...)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#instruction(String,'&gt;String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.io.File" name="classesDir"/>
@@ -207,28 +207,28 @@
     <property name="classesDir" type="java.io.File">
         <description> Returns the classes dir.
 
- @see #setClassesDir(java.io.File) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setClassesDir(java.io.File) '&gt;#setClassesDir(java.io.File) &lt;/a&gt;)
 
 </description>
     </property>
     <property name="classpath" type="org.gradle.api.file.FileCollection">
         <description> Returns the classpath.
 
- @see #setClasspath(org.gradle.api.file.FileCollection) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setClasspath(org.gradle.api.file.FileCollection) '&gt;#setClasspath(org.gradle.api.file.FileCollection) &lt;/a&gt;)
 
 </description>
     </property>
     <property name="description" type="java.lang.String">
         <description> Returns the description.
 
- @see #setDescription(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setDescription(String) '&gt;#setDescription(String) &lt;/a&gt;)
 
 </description>
     </property>
     <property name="docURL" type="java.lang.String">
         <description> Returns the docURL value.
 
- @see #setDocURL(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setDocURL(String)'&gt;#setDocURL(String)&lt;/a&gt;)
 
 </description>
     </property>
@@ -241,21 +241,21 @@
     </property>
     <property name="license" type="java.lang.String">
         <description> Returns the license.
- @see #setLicense(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setLicense(String) '&gt;#setLicense(String) &lt;/a&gt;)
 
 </description>
     </property>
     <property name="name" type="java.lang.String">
         <description> Returns the name.
 
- @see #setName(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setName(String)'&gt;#setName(String)&lt;/a&gt;)
 
 </description>
     </property>
     <property name="symbolicName" type="java.lang.String">
         <description> Returns the symbolic name.
 
- @see #setSymbolicName(String)
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setSymbolicName(String)'&gt;#setSymbolicName(String)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the symbolic name.
 
 </description>
@@ -263,14 +263,14 @@
     <property name="vendor" type="java.lang.String">
         <description> Returns the vendor.
 
- @see #setVendor(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setVendor(String) '&gt;#setVendor(String) &lt;/a&gt;)
 
 </description>
     </property>
     <property name="version" type="java.lang.String">
         <description> Returns the version.
 
- @see #setVersion(String) 
+ (see &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest#setVersion(String) '&gt;#setVersion(String) &lt;/a&gt;)
 
 </description>
     </property>

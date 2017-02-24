@@ -61,7 +61,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeSpec the spec to add
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see FileTreeElement
+ (see &lt;a href='type://FileTreeElement'&gt;FileTreeElement&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="excludeSpec"/>
@@ -75,7 +75,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes a Iterable providing new exclude patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -89,7 +89,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes a vararg list of exclude patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="excludes"/>
@@ -102,7 +102,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeSpec the spec to add
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="excludeSpec"/>
@@ -130,7 +130,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="includeSpec"/>
@@ -144,7 +144,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes a Iterable providing more include patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
@@ -158,7 +158,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes a vararg list of include patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="includes"/>
@@ -171,7 +171,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includeSpec the spec to add
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.specs.Spec" name="includeSpec"/>
@@ -182,7 +182,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes an Iterable providing new exclude patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -193,7 +193,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes an Iterable providing new include patterns
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @see PatternFilterable Pattern Format
+ (see &lt;a href='type://PatternFilterable'&gt;Pattern Format&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>

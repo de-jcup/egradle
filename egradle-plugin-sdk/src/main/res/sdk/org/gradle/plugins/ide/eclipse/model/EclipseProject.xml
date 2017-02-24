@@ -85,7 +85,7 @@
         <description> Adds a build command to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command
- @see #buildCommand(Map, String)
+ (see &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#buildCommand(Map,'&gt;String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="buildCommand"/>
@@ -95,7 +95,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map with arguments, where the key is the name of the argument and the value the value.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command.
- @see #buildCommand(String)
+ (see &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#buildCommand(String)'&gt;#buildCommand(String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.util.Map" name="args"/>

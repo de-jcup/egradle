@@ -2,8 +2,8 @@
 <type language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildFailure" version="3.0" superType="org.gradle.testkit.runner.UnexpectedBuildResultException">
     <description> Thrown when executing a build that was expected to succeed, but failed.
 
- @since 2.6
- @see GradleRunner#build()
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://GradleRunner#build()'&gt;GradleRunner#build()&lt;/a&gt;)
 
 </description>
 </type>

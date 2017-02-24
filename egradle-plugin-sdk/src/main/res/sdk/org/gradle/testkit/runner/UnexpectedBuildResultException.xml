@@ -2,8 +2,8 @@
 <type language="gradle" name="org.gradle.testkit.runner.UnexpectedBuildResultException" version="3.0">
     <description> Base class for &lt;a href='type://UnexpectedBuildFailure'&gt;UnexpectedBuildFailure&lt;/a&gt; and &lt;a href='type://UnexpectedBuildSuccess'&gt;UnexpectedBuildSuccess&lt;/a&gt;.
 
- @since 2.9
- @see BuildResult
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://BuildResult'&gt;BuildResult&lt;/a&gt;)
 
 </description>
     <method name="getBuildResult" returnType="org.gradle.testkit.runner.BuildResult">

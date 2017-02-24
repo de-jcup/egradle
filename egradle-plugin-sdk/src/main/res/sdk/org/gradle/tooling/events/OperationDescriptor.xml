@@ -6,7 +6,7 @@
 
  &lt;p&gt;The subtypes of this interface define specific types of operations, such as task execution.&lt;/p&gt;
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getDisplayName" returnType="java.lang.String">

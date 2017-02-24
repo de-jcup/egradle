@@ -2,9 +2,9 @@
 <type interface="true" language="gradle" name="org.gradle.testkit.runner.BuildResult" version="3.0">
     <description> The result of executing a build, via the &lt;a href='type://GradleRunner'&gt;GradleRunner&lt;/a&gt;.
 
- @since 2.6
- @see GradleRunner#build()
- @see GradleRunner#buildAndFail()
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://GradleRunner#build()'&gt;GradleRunner#build()&lt;/a&gt;)
+ (see &lt;a href='type://GradleRunner#buildAndFail()'&gt;GradleRunner#buildAndFail()&lt;/a&gt;)
 
 </description>
     <method name="getOutput" returnType="java.lang.String">
@@ -14,7 +14,7 @@
  It contains both the standard output, and standard error output, of the build.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build output, or an empty string if there was no build output (e.g. ran with &lt;a href='type://-q'&gt;-q&lt;/a&gt;)
- @since 2.9
+ &lt;br&gt;(since 2.9)
 
 </description>
     </method>
@@ -72,7 +72,7 @@
  It contains both the standard output, and standard error output, of the build.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build output, or an empty string if there was no build output (e.g. ran with &lt;a href='type://-q'&gt;-q&lt;/a&gt;)
- @since 2.9
+ &lt;br&gt;(since 2.9)
 
 </description>
     </property>

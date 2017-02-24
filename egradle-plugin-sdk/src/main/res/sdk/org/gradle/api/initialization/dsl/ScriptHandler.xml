@@ -7,7 +7,7 @@
  &lt;p&gt;You can obtain a &lt;a href='type://ScriptHandler'&gt;ScriptHandler&lt;/a&gt; instance using &lt;a href='type://org.gradle.api.Project#getBuildscript()'&gt;org.gradle.api.Project#getBuildscript()&lt;/a&gt; or &lt;a href='type://org.gradle.api.Script#getBuildscript()'&gt;org.gradle.api.Script#getBuildscript()&lt;/a&gt;.&lt;/p&gt;
 
  &lt;p&gt;To declare the script classpath, you use the &lt;a href='type://org.gradle.api.artifacts.dsl.DependencyHandler'&gt;org.gradle.api.artifacts.dsl.DependencyHandler&lt;/a&gt; provided by
- &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getDependencies()'&gt;#getDependencies()&lt;/a&gt; to attach dependencies to the {@value #CLASSPATH_CONFIGURATION} configuration. These
+ &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getDependencies()'&gt;#getDependencies()&lt;/a&gt; to attach dependencies to the &lt;em class='value'&gt;#CLASSPATH_CONFIGURATION&lt;/em&gt; configuration. These
  dependencies are resolved just prior to script compilation, and assembled into the classpath for the script.&lt;/p&gt;
 
  &lt;p&gt;For most external dependencies you will also need to declare one or more repositories where the dependencies can
@@ -31,8 +31,7 @@
 </description>
     </method>
     <method name="getConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer">
-        <description> Returns the configurations of this handler. This usually contains a single configuration, called {@value
- #CLASSPATH_CONFIGURATION}.
+        <description> Returns the configurations of this handler. This usually contains a single configuration, called &lt;em class='value'&gt;#CLASSPATH_CONFIGURATION&lt;/em&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration of this handler.
 
@@ -43,7 +42,7 @@
  dependencies. For accessing already declared dependencies, the configurations can be used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
- @see #getConfigurations()
+ (see &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getConfigurations()'&gt;#getConfigurations()&lt;/a&gt;)
 
 </description>
     </method>
@@ -85,8 +84,7 @@
 </description>
     </property>
     <property name="configurations" type="org.gradle.api.artifacts.ConfigurationContainer">
-        <description> Returns the configurations of this handler. This usually contains a single configuration, called {@value
- #CLASSPATH_CONFIGURATION}.
+        <description> Returns the configurations of this handler. This usually contains a single configuration, called &lt;em class='value'&gt;#CLASSPATH_CONFIGURATION&lt;/em&gt;.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration of this handler.
 
@@ -97,7 +95,7 @@
  dependencies. For accessing already declared dependencies, the configurations can be used.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the dependency handler. Never returns null.
- @see #getConfigurations()
+ (see &lt;a href='type://org.gradle.api.initialization.dsl.ScriptHandler#getConfigurations()'&gt;#getConfigurations()&lt;/a&gt;)
 
 </description>
     </property>

@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseExternalDependency" version="3.0">
     <description> Represents an Eclipse-specific external artifact dependency.
 
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     <interface name="org.gradle.tooling.model.ExternalDependency"/>

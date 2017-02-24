@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.jvm.test.JvmTestSuiteBinarySpec" version="3.0">
     <description> Base type of JVM test suite binaries.
 
- @since 2.11
+ &lt;br&gt;(since 2.11)
 
 </description>
     <method name="getRuntimeClasspath" returnType="org.gradle.jvm.internal.DependencyResolvingClasspath"/>

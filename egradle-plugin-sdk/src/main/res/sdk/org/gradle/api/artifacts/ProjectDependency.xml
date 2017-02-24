@@ -17,7 +17,7 @@
         <description> Returns the configuration associated with this project dependency. The configuration belongs to the project
  associated with this project dependency.
 
- @see #getDependencyProject()
+ (see &lt;a href='type://org.gradle.api.artifacts.ProjectDependency#getDependencyProject()'&gt;#getDependencyProject()&lt;/a&gt;)
 
 </description>
     </method>
@@ -32,7 +32,7 @@
         <description> Returns the configuration associated with this project dependency. The configuration belongs to the project
  associated with this project dependency.
 
- @see #getDependencyProject()
+ (see &lt;a href='type://org.gradle.api.artifacts.ProjectDependency#getDependencyProject()'&gt;#getDependencyProject()&lt;/a&gt;)
 
 </description>
     </property>

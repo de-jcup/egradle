@@ -86,16 +86,16 @@
  &lt;p&gt;
  A Repository Layout that applies the following patterns:
  &lt;ul&gt;
-     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #GRADLE_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #GRADLE_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#GRADLE_ARTIFACT_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#GRADLE_IVY_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/p&gt;
  &lt;h4&gt;'maven'&lt;/h4&gt;
  &lt;p&gt;
  A Repository Layout that applies the following patterns:
  &lt;ul&gt;
-     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #MAVEN_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #MAVEN_IVY_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#MAVEN_ARTIFACT_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#MAVEN_IVY_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/p&gt;
  &lt;p&gt;
@@ -105,8 +105,8 @@
  &lt;p&gt;
  A Repository Layout that applies the following patterns:
  &lt;ul&gt;
-     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
-     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/{@value #IVY_ARTIFACT_PATTERN}&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Artifacts: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#IVY_ARTIFACT_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
+     &lt;li&gt;Ivy: &lt;code&gt;$baseUri/&lt;em class='value'&gt;#IVY_ARTIFACT_PATTERN&lt;/em&gt;&lt;/code&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/p&gt;
  &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this pattern is currently &lt;a href='type://org.gradle.api.Incubating'&gt;incubating&lt;/a&gt;.&lt;/p&gt;
@@ -128,7 +128,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;layoutName The name of the layout to use.
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The action used to configure the layout.
- @since 2.3 (feature was already present in Groovy DSL, this particular method introduced in 2.3)
+ &lt;br&gt;(since 2.3 (feature was already present in Groovy DSL, this particular method introduced in 2.3))
 
 </description>
         <parameter type="java.lang.String" name="layoutName"/>

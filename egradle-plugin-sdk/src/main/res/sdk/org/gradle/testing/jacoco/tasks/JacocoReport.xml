@@ -91,7 +91,7 @@
         <description> Gets the source directories for the classes that will be reported on. Source will be obtained from these directories only for the classes included in the report.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;source directories for the classes reported on
- @see #getAllClassDirs()
+ (see &lt;a href='type://org.gradle.testing.jacoco.tasks.JacocoReport#getAllClassDirs()'&gt;#getAllClassDirs()&lt;/a&gt;)
 
 </description>
     </method>
@@ -178,7 +178,7 @@
         <description> Gets the source directories for the classes that will be reported on. Source will be obtained from these directories only for the classes included in the report.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;source directories for the classes reported on
- @see #getAllClassDirs()
+ (see &lt;a href='type://org.gradle.testing.jacoco.tasks.JacocoReport#getAllClassDirs()'&gt;#getAllClassDirs()&lt;/a&gt;)
 
 </description>
     </property>

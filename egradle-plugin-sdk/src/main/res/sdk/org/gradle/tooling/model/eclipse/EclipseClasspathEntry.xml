@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry" version="3.0">
     <description> An element that can have classpath attributes.
 
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     <method name="getAccessRules" returnType="org.gradle.tooling.model.DomainObjectSet">
@@ -11,7 +11,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The access rules.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </method>
@@ -29,7 +29,7 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The access rules.
  @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
 
- @since 3.0
+ &lt;br&gt;(since 3.0)
 
 </description>
     </property>

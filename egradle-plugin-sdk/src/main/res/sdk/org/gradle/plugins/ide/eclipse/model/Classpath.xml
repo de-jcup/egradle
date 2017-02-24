@@ -18,8 +18,8 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;reference The object to transform into a new file reference. Can be instance of File or String.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new file reference.
- @see AbstractLibrary#setJavadocPath(FileReference)
- @see AbstractLibrary#setSourcePath(FileReference)
+ (see &lt;a href='type://AbstractLibrary#setJavadocPath(FileReference)'&gt;AbstractLibrary#setJavadocPath(FileReference)&lt;/a&gt;)
+ (see &lt;a href='type://AbstractLibrary#setSourcePath(FileReference)'&gt;AbstractLibrary#setSourcePath(FileReference)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Object" name="reference"/>

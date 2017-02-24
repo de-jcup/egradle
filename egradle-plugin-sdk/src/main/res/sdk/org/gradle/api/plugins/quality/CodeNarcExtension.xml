@@ -2,13 +2,13 @@
 <type language="gradle" name="org.gradle.api.plugins.quality.CodeNarcExtension" version="3.0" superType="org.gradle.api.plugins.quality.CodeQualityExtension" documented="true">
     <description> Configuration options for the CodeNarc plugin.
 
- @see CodeNarc
+ (see &lt;a href='type://CodeNarc'&gt;CodeNarc&lt;/a&gt;)
 
 </description>
     <method name="getConfig" returnType="org.gradle.api.resources.TextResource">
         <description> The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -61,7 +61,7 @@
     <property name="config" type="org.gradle.api.resources.TextResource" documented="true">
         <description> The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

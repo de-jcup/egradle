@@ -6,7 +6,7 @@
  &lt;p&gt;
  The &lt;a href='type://org.gradle.api.publish.ivy.IvyModuleDescriptorSpec#withXml(org.gradle.api.Action)'&gt;#withXml(org.gradle.api.Action)&lt;/a&gt; method can be used to modify the descriptor after it has been generated according to the publication data.
 
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     <method name="extraInfo" returnType="void" documented="true">
@@ -74,8 +74,8 @@
 
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The configuration action.
- @see IvyPublication
- @see XmlProvider
+ (see &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;)
+ (see &lt;a href='type://XmlProvider'&gt;XmlProvider&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>

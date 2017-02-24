@@ -4,7 +4,7 @@
  To create a text resource, use one of the factory methods in &lt;a href='type://TextResourceFactory'&gt;TextResourceFactory&lt;/a&gt;
  (e.g. &lt;a href='type://project.resources.text.fromFile(myFile)'&gt;project.resources.text.fromFile(myFile)&lt;/a&gt;).
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     <method name="asFile" returnType="java.io.File" documented="true">

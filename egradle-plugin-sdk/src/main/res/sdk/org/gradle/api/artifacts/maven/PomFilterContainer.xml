@@ -3,14 +3,14 @@
     <description> Manages a set of &lt;a href='type://MavenPom'&gt;MavenPom&lt;/a&gt; instances and their associated &lt;a href='type://PublishFilter'&gt;PublishFilter&lt;/a&gt; instances.
 
 </description>
-    <method name="addFilter" returnType="org.gradle.api.artifacts.maven.MavenPom">
+    <method name="addFilter" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="PublishFilter">
         <description> Adds a publish filter.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name   The name of the filter
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;filter The filter
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Maven POM associated with the closure
- @see PublishFilter
- @see PomFilterContainer#addFilter(String, org.gradle.api.artifacts.maven.PublishFilter)
+ (see &lt;a href='type://PublishFilter'&gt;PublishFilter&lt;/a&gt;)
+ (see &lt;a href='type://PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -33,8 +33,8 @@
         <description> Sets the default publish filter.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;filter The filter to be set
- @see PublishFilter
- @see PomFilterContainer#setFilter(org.gradle.api.artifacts.maven.PublishFilter)
+ (see &lt;a href='type://PublishFilter'&gt;PublishFilter&lt;/a&gt;)
+ (see &lt;a href='type://PomFilterContainer#setFilter(org.gradle.api.artifacts.maven.PublishFilter)'&gt;PomFilterContainer#setFilter(org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="filter"/>
@@ -51,7 +51,7 @@
     <method name="getFilter" returnType="org.gradle.api.artifacts.maven.PublishFilter">
         <description> Returns the default filter being used. .
 
- @see #setFilter(org.gradle.api.artifacts.maven.PublishFilter)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#setFilter(org.gradle.api.artifacts.maven.PublishFilter)'&gt;#setFilter(org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;)
 
 </description>
     </method>
@@ -70,7 +70,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The default POM.
- @see PomFilterContainer#getPom()
+ (see &lt;a href='type://PomFilterContainer#getPom()'&gt;PomFilterContainer#getPom()&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
@@ -89,7 +89,7 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM object associated with the given name.
- @see PomFilterContainer#pom(String)
+ (see &lt;a href='type://PomFilterContainer#pom(String)'&gt;PomFilterContainer#pom(String)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="name"/>
@@ -104,7 +104,7 @@
  to use the (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#addFilter(String,'&gt;org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt; method.&lt;/p&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultFilter
- @see #getFilter()
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#getFilter()'&gt;#getFilter()&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.artifacts.maven.PublishFilter" name="defaultFilter"/>
@@ -126,7 +126,7 @@
     <property name="filter" type="org.gradle.api.artifacts.maven.PublishFilter">
         <description> Returns the default filter being used. .
 
- @see #setFilter(org.gradle.api.artifacts.maven.PublishFilter)
+ (see &lt;a href='type://org.gradle.api.artifacts.maven.PomFilterContainer#setFilter(org.gradle.api.artifacts.maven.PublishFilter)'&gt;#setFilter(org.gradle.api.artifacts.maven.PublishFilter)&lt;/a&gt;)
 
 </description>
     </property>

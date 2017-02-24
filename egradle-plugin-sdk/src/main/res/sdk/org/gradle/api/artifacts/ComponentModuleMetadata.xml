@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.ComponentModuleMetadata" version="3.0">
     <description> Contains immutable component module metadata information.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     <method name="getId" returnType="org.gradle.api.artifacts.ModuleIdentifier">

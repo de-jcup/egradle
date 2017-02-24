@@ -143,7 +143,7 @@
     <method name="exclude" returnType="org.gradle.api.tasks.testing.Test" documented="true">
         <description> Adds exclude patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')).
 
- @see #setExcludes(Iterable)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#setExcludes(Iterable)'&gt;#setExcludes(Iterable)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -151,7 +151,7 @@
     <method name="exclude" returnType="org.gradle.api.tasks.testing.Test" documented="true">
         <description> Adds exclude patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')).
 
- @see #setExcludes(Iterable)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#setExcludes(Iterable)'&gt;#setExcludes(Iterable)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="excludes"/>
@@ -173,7 +173,7 @@
         <description> Executes the action against the &lt;a href='type://org.gradle.api.tasks.testing.Test#getFilter()'&gt;#getFilter()&lt;/a&gt;.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action configuration of the test filter
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
@@ -236,7 +236,7 @@
     <method name="getExcludes" returnType="java.util.Set">
         <description> Returns the exclude patterns for test execution.
 
- @see #exclude(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#exclude(String...)'&gt;#exclude(String...)&lt;/a&gt;)
 
 </description>
     </method>
@@ -250,7 +250,7 @@
         <description> Allows filtering tests for execution.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;filter object
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     </method>
@@ -269,7 +269,7 @@
     <method name="getIncludes" returnType="java.util.Set">
         <description> Returns the include patterns for test execution.
 
- @see #include(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#include(String...)'&gt;#include(String...)&lt;/a&gt;)
 
 </description>
     </method>
@@ -359,7 +359,7 @@
     <method name="include" returnType="org.gradle.api.tasks.testing.Test" documented="true">
         <description> Adds include patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')).
 
- @see #setIncludes(Iterable)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#setIncludes(Iterable)'&gt;#setIncludes(Iterable)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
@@ -367,7 +367,7 @@
     <method name="include" returnType="org.gradle.api.tasks.testing.Test" documented="true">
         <description> Adds include patterns for the files in the test classes directory (e.g. '**&amp;#2F;*Test.class')).
 
- @see #setIncludes(Iterable)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#setIncludes(Iterable)'&gt;#setIncludes(Iterable)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.String" name="includes"/>
@@ -503,7 +503,7 @@
         <description> Sets the exclude patterns for test execution.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludes The patterns list
- @see #exclude(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#exclude(String...)'&gt;#exclude(String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="excludes"/>
@@ -532,7 +532,7 @@
         <description> Sets the include patterns for test execution.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;includes The patterns list
- @see #include(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#include(String...)'&gt;#include(String...)&lt;/a&gt;)
 
 </description>
         <parameter type="java.lang.Iterable" name="includes"/>
@@ -733,7 +733,7 @@
     <property name="excludes" type="java.util.Set" documented="true">
         <description> Returns the exclude patterns for test execution.
 
- @see #exclude(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#exclude(String...)'&gt;#exclude(String...)&lt;/a&gt;)
 
 </description>
     </property>
@@ -747,7 +747,7 @@
         <description> Allows filtering tests for execution.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;filter object
- @since 1.10
+ &lt;br&gt;(since 1.10)
 
 </description>
     </property>
@@ -766,7 +766,7 @@
     <property name="includes" type="java.util.Set" documented="true">
         <description> Returns the include patterns for test execution.
 
- @see #include(String...)
+ (see &lt;a href='type://org.gradle.api.tasks.testing.Test#include(String...)'&gt;#include(String...)&lt;/a&gt;)
 
 </description>
     </property>

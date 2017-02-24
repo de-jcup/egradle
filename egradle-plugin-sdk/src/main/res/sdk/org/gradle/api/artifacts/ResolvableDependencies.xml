@@ -69,7 +69,7 @@
  that gives access to the graph of the resolved dependencies.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the resolution result
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     </method>
@@ -107,7 +107,7 @@
  that gives access to the graph of the resolved dependencies.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the resolution result
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     </property>

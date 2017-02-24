@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.test.TestProgressEvent" version="3.0">
     <description> Root interface for all events that signal progress while executing a test or test suite.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getDescriptor" returnType="org.gradle.tooling.events.test.TestOperationDescriptor">

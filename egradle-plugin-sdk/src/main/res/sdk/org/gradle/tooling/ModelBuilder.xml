@@ -42,7 +42,7 @@
  &lt;/pre&gt;
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of model to build
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     <method name="forTasks" returnType="org.gradle.tooling.ModelBuilder">
@@ -52,7 +52,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The paths of the tasks to be executed. Relative paths are evaluated relative to the project for which this launcher was created.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 2.6
+ &lt;br&gt;(since 2.6)
 
 </description>
         <parameter type="java.lang.Iterable" name="tasks"/>
@@ -64,7 +64,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The paths of the tasks to be executed. Relative paths are evaluated relative to the project for which this launcher was created.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
- @since 1.2
+ &lt;br&gt;(since 1.2)
 
 </description>
         <parameter type="java.lang.String" name="tasks"/>
@@ -82,7 +82,7 @@
  @throws BuildCancelledException When the operation was cancelled before it completed successfully.
  @throws GradleConnectionException On some other failure using the connection.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
     </method>
@@ -95,7 +95,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to.
  @throws IllegalStateException When the connection has been closed or is closing.
- @since 1.0-milestone-3
+ &lt;br&gt;(since 1.0-milestone-3)
 
 </description>
         <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>

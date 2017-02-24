@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.tooling.events.test.JvmTestKind" version="3.0">
     <description> Enumerates the different kinds of JVM tests. This allows to differentiate between test suites, atomic tests, etc.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getLabel" returnType="java.lang.String">

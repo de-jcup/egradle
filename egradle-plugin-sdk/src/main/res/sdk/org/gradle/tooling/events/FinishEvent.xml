@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.events.FinishEvent" version="3.0">
     <description> An event that informs about an operation having finished its execution.
 
- @since 2.4
+ &lt;br&gt;(since 2.4)
 
 </description>
     <method name="getResult" returnType="org.gradle.tooling.events.OperationResult">

@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.file.FileVisitDetails" version="3.0">
     <description> Provides access to details about a file or directory being visited by a &lt;a href='type://FileVisitor'&gt;FileVisitor&lt;/a&gt;.
 
- @see FileTree#visit(groovy.lang.Closure)
+ (see &lt;a href='type://FileTree#visit(groovy.lang.Closure)'&gt;FileTree#visit(groovy.lang.Closure)&lt;/a&gt;)
 
 </description>
     <method name="stopVisiting" returnType="void">

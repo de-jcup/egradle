@@ -12,7 +12,7 @@
     <method name="getConfig" returnType="org.gradle.api.resources.TextResource">
         <description> The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </method>
@@ -96,7 +96,7 @@
     <property name="config" type="org.gradle.api.resources.TextResource" documented="true">
         <description> The CodeNarc configuration to use. Replaces the &lt;a href='type://configFile'&gt;configFile&lt;/a&gt; property.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     </property>

@@ -4,7 +4,7 @@
  with unsupported settings. For example &lt;a href='type://org.gradle.tooling.LongRunningOperation#setJavaHome(java.io.File)'&gt;org.gradle.tooling.LongRunningOperation#setJavaHome(java.io.File)&lt;/a&gt;
  might not be supported by the target Gradle version.
 
- @since 1.0
+ &lt;br&gt;(since 1.0)
 
 </description>
 </type>

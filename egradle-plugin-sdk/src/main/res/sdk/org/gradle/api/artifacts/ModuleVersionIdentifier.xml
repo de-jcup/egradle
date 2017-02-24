@@ -15,7 +15,7 @@
  Contains the same information as &lt;a href='type://org.gradle.api.artifacts.ModuleVersionIdentifier#getGroup()'&gt;#getGroup()&lt;/a&gt; and &lt;a href='type://org.gradle.api.artifacts.ModuleVersionIdentifier#getVersion()'&gt;#getVersion()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module identifier
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     </method>
@@ -46,7 +46,7 @@
  Contains the same information as &lt;a href='type://org.gradle.api.artifacts.ModuleVersionIdentifier#getGroup()'&gt;#getGroup()&lt;/a&gt; and &lt;a href='type://org.gradle.api.artifacts.ModuleVersionIdentifier#getVersion()'&gt;#getVersion()&lt;/a&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module identifier
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     </property>

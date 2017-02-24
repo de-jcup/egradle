@@ -3,7 +3,7 @@
     <description> The result of a failed model request.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; Type of model in the result
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">

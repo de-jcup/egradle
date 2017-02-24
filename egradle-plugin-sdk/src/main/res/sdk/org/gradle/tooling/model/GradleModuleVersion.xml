@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.tooling.model.GradleModuleVersion" version="3.0">
     <description> Informs about a module version, i.e. group, name, version.
 
- @since 1.1
+ &lt;br&gt;(since 1.1)
 
 </description>
     <method name="getGroup" returnType="java.lang.String">

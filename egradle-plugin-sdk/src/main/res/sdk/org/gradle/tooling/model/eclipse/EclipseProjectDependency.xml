@@ -12,7 +12,7 @@
         <description> Returns the identifier of the target eclipse project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </method>
@@ -27,7 +27,7 @@
         <description> Marks this dependency as exported.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported.
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </method>
@@ -37,7 +37,7 @@
         <description> Marks this dependency as exported.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this dependency needs to be exported.
- @since 2.5
+ &lt;br&gt;(since 2.5)
 
 </description>
     </property>
@@ -50,7 +50,7 @@
         <description> Returns the identifier of the target eclipse project.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The target identifier, never null.
- @since 2.14
+ &lt;br&gt;(since 2.14)
 
 </description>
     </property>

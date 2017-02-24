@@ -7,8 +7,8 @@
         <description> whether current module should inherit project's output directory.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;inherit output dirs flag
- @see #getOutputDir()
- @see #getTestOutputDir()
+ (see &lt;a href='type://org.gradle.tooling.model.idea.IdeaCompilerOutput#getOutputDir()'&gt;#getOutputDir()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.model.idea.IdeaCompilerOutput#getTestOutputDir()'&gt;#getTestOutputDir()&lt;/a&gt;)
 
 </description>
     </method>
@@ -32,8 +32,8 @@
         <description> whether current module should inherit project's output directory.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;inherit output dirs flag
- @see #getOutputDir()
- @see #getTestOutputDir()
+ (see &lt;a href='type://org.gradle.tooling.model.idea.IdeaCompilerOutput#getOutputDir()'&gt;#getOutputDir()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.model.idea.IdeaCompilerOutput#getTestOutputDir()'&gt;#getTestOutputDir()&lt;/a&gt;)
 
 </description>
     </property>

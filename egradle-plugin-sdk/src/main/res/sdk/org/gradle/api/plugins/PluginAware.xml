@@ -15,7 +15,7 @@
  This method differs from &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt; in that it allows methods of the configuration action to be invoked more than once.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure the closure to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; with before “executing” it
- @see #apply(java.util.Map)
+ (see &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt;)
 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
@@ -47,7 +47,7 @@
  This method differs from &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt; in that it allows methods of the configuration action to be invoked more than once.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to configure an &lt;a href='type://ObjectConfigurationAction'&gt;ObjectConfigurationAction&lt;/a&gt; with before “executing” it
- @see #apply(java.util.Map)
+ (see &lt;a href='type://org.gradle.api.plugins.PluginAware#apply(java.util.Map)'&gt;#apply(java.util.Map)&lt;/a&gt;)
 
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
@@ -56,7 +56,7 @@
         <description> The plugin manager for this plugin aware object.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin manager
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
     </method>
@@ -70,8 +70,8 @@
  Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin container
- @see #apply
- @see PluginManager#hasPlugin(String)
+ (see &lt;a href='type://org.gradle.api.plugins.PluginAware#apply'&gt;#apply&lt;/a&gt;)
+ (see &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -79,7 +79,7 @@
         <description> The plugin manager for this plugin aware object.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin manager
- @since 2.3
+ &lt;br&gt;(since 2.3)
 
 </description>
     </property>
@@ -93,8 +93,8 @@
  Use &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt; or similar to query for the application of plugins instead of doing so via the plugin container.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the plugin container
- @see #apply
- @see PluginManager#hasPlugin(String)
+ (see &lt;a href='type://org.gradle.api.plugins.PluginAware#apply'&gt;#apply&lt;/a&gt;)
+ (see &lt;a href='type://PluginManager#hasPlugin(String)'&gt;PluginManager#hasPlugin(String)&lt;/a&gt;)
 
 </description>
     </property>

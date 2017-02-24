@@ -2,7 +2,7 @@
 <type language="gradle" name="org.gradle.api.publish.ivy.InvalidIvyPublicationException" version="3.0" superType="org.gradle.api.InvalidUserDataException">
     <description> Thrown when attempting to publish with an invalid &lt;a href='type://IvyPublication'&gt;IvyPublication&lt;/a&gt;.
 
- @since 1.5
+ &lt;br&gt;(since 1.5)
 
 </description>
     <method name="formatMessage" returnType="java.lang.String">

@@ -23,7 +23,7 @@
  File based factory methods optionally accept a character encoding. If no encoding is specified,
  the platform's default encoding is used.
 
- @since 2.2
+ &lt;br&gt;(since 2.2)
 
 </description>
     <method name="fromArchiveEntry" returnType="org.gradle.api.resources.TextResource" documented="true">

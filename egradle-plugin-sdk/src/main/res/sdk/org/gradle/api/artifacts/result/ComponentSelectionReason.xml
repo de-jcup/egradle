@@ -2,7 +2,7 @@
 <type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ComponentSelectionReason" version="3.0">
     <description> Answers the question why a component was selected during the dependency resolution.
 
- @since 1.3
+ &lt;br&gt;(since 1.3)
 
 </description>
     <method name="getDescription" returnType="java.lang.String">
@@ -21,7 +21,7 @@
     <method name="isExpected" returnType="boolean">
         <description> Informs whether the component is the requested selection of all dependency declarations, and was not replaced for some reason, such as conflict resolution.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </method>
@@ -36,7 +36,7 @@
         <description> Informs whether the component was selected by the dependency substitution rule.
  Users can configure dependency substitution rules via &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#getDependencySubstitution()'&gt;org.gradle.api.artifacts.ResolutionStrategy#getDependencySubstitution()&lt;/a&gt;
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     </method>
@@ -56,7 +56,7 @@
     <property name="expected" type="boolean">
         <description> Informs whether the component is the requested selection of all dependency declarations, and was not replaced for some reason, such as conflict resolution.
 
- @since 1.11
+ &lt;br&gt;(since 1.11)
 
 </description>
     </property>
@@ -71,7 +71,7 @@
         <description> Informs whether the component was selected by the dependency substitution rule.
  Users can configure dependency substitution rules via &lt;a href='type://org.gradle.api.artifacts.ResolutionStrategy#getDependencySubstitution()'&gt;org.gradle.api.artifacts.ResolutionStrategy#getDependencySubstitution()&lt;/a&gt;
 
- @since 1.4
+ &lt;br&gt;(since 1.4)
 
 </description>
     </property>

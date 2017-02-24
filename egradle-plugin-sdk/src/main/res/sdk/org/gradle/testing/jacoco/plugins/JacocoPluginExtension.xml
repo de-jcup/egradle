@@ -9,7 +9,7 @@
  Jacoco will be run as an agent during the execution of the task.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;task the task to apply Jacoco to.
- @see JacocoPluginExtension#TASK_EXTENSION_NAME
+ (see &lt;a href='type://JacocoPluginExtension#TASK_EXTENSION_NAME'&gt;JacocoPluginExtension#TASK_EXTENSION_NAME&lt;/a&gt;)
 
 </description>
         <parameter type="T" name="task"/>

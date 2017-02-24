@@ -8,7 +8,7 @@
     <method name="getStopKey" returnType="java.lang.String">
         <description> Returns the stop key.
 
- @see #setStopKey(String)
+ (see &lt;a href='type://org.gradle.api.plugins.jetty.JettyStop#setStopKey(String)'&gt;#setStopKey(String)&lt;/a&gt;)
 
 </description>
     </method>
@@ -33,7 +33,7 @@
     <property name="stopKey" type="java.lang.String" documented="true">
         <description> Returns the stop key.
 
- @see #setStopKey(String)
+ (see &lt;a href='type://org.gradle.api.plugins.jetty.JettyStop#setStopKey(String)'&gt;#setStopKey(String)&lt;/a&gt;)
 
 </description>
     </property>

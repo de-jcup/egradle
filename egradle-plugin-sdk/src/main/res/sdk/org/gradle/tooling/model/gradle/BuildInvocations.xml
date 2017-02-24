@@ -6,13 +6,13 @@
  &lt;p&gt;To launch a build, you pass one or more &lt;a href='type://org.gradle.tooling.model.Launchable'&gt;org.gradle.tooling.model.Launchable&lt;/a&gt; instances
  to either &lt;a href='type://org.gradle.tooling.BuildLauncher#forTasks(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forTasks(Iterable)&lt;/a&gt; or &lt;a href='type://org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)'&gt;org.gradle.tooling.BuildLauncher#forLaunchables(Iterable)&lt;/a&gt;.&lt;/p&gt;
 
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for the Gradle project that these invocations originate from.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </method>
@@ -21,7 +21,7 @@
 
  Selector is a &lt;a href='type://org.gradle.tooling.model.Launchable'&gt;org.gradle.tooling.model.Launchable&lt;/a&gt; that requests to build all tasks with a given name in context of some project and all its subprojects.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task selectors.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </method>
@@ -29,7 +29,7 @@
         <description> Returns the tasks that can be used to execute a build.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </method>
@@ -38,7 +38,7 @@
     <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
         <description> Returns the identifier for the Gradle project that these invocations originate from.
 
- @since 2.13
+ &lt;br&gt;(since 2.13)
 
 </description>
     </property>
@@ -47,7 +47,7 @@
 
  Selector is a &lt;a href='type://org.gradle.tooling.model.Launchable'&gt;org.gradle.tooling.model.Launchable&lt;/a&gt; that requests to build all tasks with a given name in context of some project and all its subprojects.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task selectors.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </property>
@@ -55,7 +55,7 @@
         <description> Returns the tasks that can be used to execute a build.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks.
- @since 1.12
+ &lt;br&gt;(since 1.12)
 
 </description>
     </property>

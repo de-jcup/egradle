@@ -237,7 +237,7 @@
     <method name="getExcludeRules" returnType="java.util.Set">
         <description> Returns the exclude rules applied for resolving any dependency of this configuration.
 
- @see #exclude(java.util.Map)
+ (see &lt;a href='type://org.gradle.api.artifacts.Configuration#exclude(java.util.Map)'&gt;#exclude(java.util.Map)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude rules
 
 </description>
@@ -277,7 +277,7 @@
  See docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; for more info and examples.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolution strategy
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
     </method>
@@ -323,7 +323,7 @@
  declared by the user.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the associated upload task
- @see org.gradle.api.tasks.Upload
+ (see &lt;a href='type://org.gradle.api.tasks.Upload'&gt;org.gradle.api.tasks.Upload&lt;/a&gt;)
 
 </description>
     </method>
@@ -350,7 +350,7 @@
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure closure applied to the &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt;
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration instance
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
@@ -458,7 +458,7 @@
     <property name="excludeRules" type="java.util.Set" documented="true">
         <description> Returns the exclude rules applied for resolving any dependency of this configuration.
 
- @see #exclude(java.util.Map)
+ (see &lt;a href='type://org.gradle.api.artifacts.Configuration#exclude(java.util.Map)'&gt;#exclude(java.util.Map)&lt;/a&gt;)
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude rules
 
 </description>
@@ -498,7 +498,7 @@
  See docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; for more info and examples.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolution strategy
- @since 1.0-milestone-6
+ &lt;br&gt;(since 1.0-milestone-6)
 
 </description>
     </property>
@@ -551,7 +551,7 @@
  declared by the user.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the associated upload task
- @see org.gradle.api.tasks.Upload
+ (see &lt;a href='type://org.gradle.api.tasks.Upload'&gt;org.gradle.api.tasks.Upload&lt;/a&gt;)
 
 </description>
     </property>
