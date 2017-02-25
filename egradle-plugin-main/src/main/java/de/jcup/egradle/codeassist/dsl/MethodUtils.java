@@ -20,7 +20,7 @@ public class MethodUtils {
 	}
 
 	/**
-	 * Create a method signature string
+	 * Create a method signature string (with parameter names)
 	 * 
 	 * @param method
 	 *            - if <code>null</code> - result will be "null"
@@ -28,6 +28,18 @@ public class MethodUtils {
 	 * @return string, never <code>null</code>
 	 */
 	public static String createSignature(Method method, boolean longTypeNames) {
+		return createSignature(method,longTypeNames, true);
+	}
+	/**
+	 * Create a method signature string
+	 * 
+	 * @param method
+	 *            - if <code>null</code> - result will be "null"
+	 * @param longTypeNames
+	 * @param withParameterNames - when true signature contains parameter names
+	 * @return string, never <code>null</code>
+	 */
+	public static String createSignature(Method method, boolean longTypeNames, boolean withParameterNames) {
 		if (method == null) {
 			return "null";
 		}
@@ -56,6 +68,9 @@ public class MethodUtils {
 			} else {
 				typeAsString = param.getTypeAsString();
 			}
+			if (typeAsString == null) {
+				typeAsString="<UNKNOWN>";
+			}
 			if (typeAsString != null) {
 				if (!longTypeNames) {
 					int index = typeAsString.lastIndexOf('.');
@@ -64,9 +79,13 @@ public class MethodUtils {
 					}
 				}
 				signatureSb.append(typeAsString);
-				signatureSb.append(" ");
+				if (withParameterNames){
+					signatureSb.append(" ");
+				}
 			}
-			signatureSb.append(pname);
+			if (withParameterNames){
+				signatureSb.append(pname);
+			}
 			pos++;
 		}
 		signatureSb.append(')');
