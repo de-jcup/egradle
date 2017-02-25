@@ -24,6 +24,7 @@ import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.FilterableProposalFactory;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
+import de.jcup.egradle.codeassist.GradleDSLProposalFactory.TemplateProposal;
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.ProposalFactory;
 import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
@@ -102,10 +103,6 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
 
 		estimator = new GradleLanguageElementEstimater(typeProvider);
-		/*
-		 * FIXME ATR, 19.01.2017: what about sharing the factories between
-		 * processors? check amount of created processor instances!
-		 */
 		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeTemplateBuilder(), estimator));
 		proposalFactories.add(new VariableNameProposalFactory());
 	}
@@ -205,6 +202,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				} else if (mp.isProperty()) {
 					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", Activator.PLUGIN_ID);
 				}
+			} else if (p instanceof TemplateProposal) {
+				image = EGradleUtil.getImage("/icons/codecompletion/source.png", Activator.PLUGIN_ID);
 			}
 			if (image == null) {
 				image = EGradleUtil.getImage("/icons/gradle-og.png", Activator.PLUGIN_ID);
@@ -216,7 +215,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			int cursorOffset = offset - alreadyEnteredChars;
 
 			int replacementLength = alreadyEnteredChars;
-			
+			String additionalProposalInfo = null;
 			LazyLanguageElementHTMLDescriptionBuilder lazyBuilder = null;
 			if (p instanceof ModelProposal) {
 				ModelProposal mp = (ModelProposal) p;
@@ -224,9 +223,12 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				if (element != null) {
 					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb, element,mp, descriptionBuilder);
 				}
+			}else if (p instanceof TemplateProposal){
+				/* do nothing - description currently not supported*/
 			}
+			/* create eclipse completion proposal */
 			GradleCompletionProposal proposal = new GradleCompletionProposal(p,cursorOffset,
-					replacementLength, image, contextInformation, null,lazyBuilder);
+					replacementLength, image, contextInformation, additionalProposalInfo, lazyBuilder);
 			list.add(proposal);
 
 		}

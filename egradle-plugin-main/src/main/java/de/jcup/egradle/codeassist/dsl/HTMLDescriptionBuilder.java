@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
+
 	/**
 	 * Builds HTML description for given language element
 	 * 
@@ -287,6 +288,5 @@ public class HTMLDescriptionBuilder {
 		
 		return style.toString();
 	}
-	
-	
+
 }

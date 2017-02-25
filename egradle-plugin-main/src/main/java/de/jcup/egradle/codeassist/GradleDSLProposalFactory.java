@@ -1,5 +1,7 @@
 package de.jcup.egradle.codeassist;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -24,6 +26,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	private CodeTemplateBuilder codeTemplateBuilder;
 
 	private GradleLanguageElementEstimater typeEstimator;
+	private DefaultTypeTemplatesProvider defaultTemplatesProvider = new DefaultTypeTemplatesProvider();
 	
 	/**
 	 * Creates new gradle dsl proposal factory
@@ -64,6 +67,9 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
 		Type identifiedType = result.getElementType();
+		if (identifiedType==null){
+			return Collections.emptySet();
+		}
 		/* when this is a documented type we show only documented methods etc. otherwise we support
 		 * all methods
 		 */
@@ -169,6 +175,18 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			proposals.add(proposal);
 		}
+		
+		/* apply defined templates as proposals */
+		List<Template> templates = defaultTemplatesProvider.getTemplatesForType(identifiedType.getName());
+		for (Template template: templates){
+			TemplateProposal proposal = new TemplateProposal();
+			proposal.setName(template.getName());
+			proposal.setLazyCodeBuilder(new TemplateCodeBuilder(template));
+			proposal.setTextBefore(textBeforeColumn);
+			proposal.setDescription(template.getContent());
+
+			proposals.add(proposal);
+		}
 		return proposals;
 	}
 
@@ -199,6 +217,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	public enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
+	}
+	
+	public class TemplateProposal extends AbstractProposalImpl{
+		
 	}
 
 	public class ModelProposal extends AbstractProposalImpl implements LanguageElementMetaData {
