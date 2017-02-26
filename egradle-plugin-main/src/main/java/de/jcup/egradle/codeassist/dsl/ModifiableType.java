@@ -22,7 +22,13 @@ public interface ModifiableType extends Type {
 	 * 
 	 * @param superType
 	 */
-	public void inheritFrom(Type superType);
+	public void extendFromSuperClass(Type superType);
+	
+	/**
+	 * Inherit methods and properties from other interface type, can be called multiple times
+	 * @param interfaceType
+	 */
+	public void extendFromInterface(Type interfaceType);
 	
 	/**
 	 * Set <code>true</code> when this type is part of official gradle DSL documentation

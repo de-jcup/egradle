@@ -120,12 +120,28 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		
 		/* inheritance */
 		String superTypeAsString = type.getSuperTypeAsString();
-		if (StringUtils.isNotBlank(superTypeAsString)) {
-			Type superType = getType(superTypeAsString);
-			if (superType != null) {
-				modifiableType.inheritFrom(superType);
+		if (type.isInterface()){
+			/* interface logic */
+			Set<TypeReference> interfaces = type.getInterfaces();
+			for(TypeReference ref: interfaces){
+				String interfaceAsString = ref.getTypeAsString();
+				Type interfaceType = getType(interfaceAsString);
+				if (interfaceType !=null){
+					modifiableType.extendFromInterface(interfaceType);
+				}
+			}
+			
+		}else{
+			/* class */
+			if (StringUtils.isNotBlank(superTypeAsString)) {
+				Type superType = getType(superTypeAsString);
+				if (superType != null) {
+					modifiableType.extendFromSuperClass(superType);
+				}
 			}
 		}
+		
+		
 		
 		/* adopt extensions and mixins */
 		getPluginMerger().merge(type, plugins);

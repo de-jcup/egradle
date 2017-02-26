@@ -138,5 +138,10 @@ public class TypeAssert {
 		}
 		return this;
 	}
+	
+	public TypeAssert isInterface() {
+		assertTrue(type.isInterface());
+		return this;
+	}
 
 }

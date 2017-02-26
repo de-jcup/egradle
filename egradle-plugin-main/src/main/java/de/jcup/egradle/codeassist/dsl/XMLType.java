@@ -1,6 +1,9 @@
 package de.jcup.egradle.codeassist.dsl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -52,6 +55,8 @@ public class XMLType implements ModifiableType {
 	private String superTypeAsString;
 
 	private Type superType;
+	
+	private List<Type> superInterfaceTypes;
 
 	private Set<Method> mergedMethods;
 	private Set<Property> mergedProperties;
@@ -95,7 +100,7 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Method> getMethods() {
-		if (superType==null){
+		if (superType==null  && superInterfaceTypes==null){
 			return methods;
 		}
 		return mergedMethods;
@@ -166,26 +171,23 @@ public class XMLType implements ModifiableType {
 	public Type getSuperType() {
 		return superType;
 	}
-
-	@Override
-	public void inheritFrom(Type superType) {
-		if (this.superType!=null){
-			/* unregister former reasons*/
-			Set<Method> formerSuperMethods = this.superType.getMethods();
-			for (Method sm : formerSuperMethods){
-				elementReasons.remove(sm);
-			}
-			
-			Set<Property> formerSuperProperties = this.superType.getProperties();
-			for (Property sm : formerSuperProperties){
-				elementReasons.remove(sm);
-			}
+	
+	public void extendFromInterface(Type interfaceType){
+		if (interfaceType==null){
+			return;
 		}
+		if (superInterfaceTypes==null){
+			superInterfaceTypes=new ArrayList<>();
+		}
+		superInterfaceTypes.add(interfaceType);
+		mergeMethodsAndProperties(interfaceType);
+	}
+	
+	@Override
+	public void extendFromSuperClass(Type superType) {
+		
 		this.superType=superType;
 		if (superType==null){
-			mergedMethods=null;
-			mergedProperties=null;
-			mergedInterfaces=null;
 			return;
 		}
 		
@@ -197,8 +199,13 @@ public class XMLType implements ModifiableType {
 			reference.setType(superType);
 			this.mergedInterfaces.add(reference);
 		}
-		
-		this.mergedMethods=new TreeSet<>(methods);
+		mergeMethodsAndProperties(superType);
+	}
+
+	private void mergeMethodsAndProperties(Type superType) {
+		if (mergedMethods==null){
+			this.mergedMethods=new TreeSet<>(methods);
+		}
 		Set<Method> superMethods = superType.getMethods();
 		this.mergedMethods.addAll(superMethods);
 		/* register super methods and reason*/
@@ -208,8 +215,10 @@ public class XMLType implements ModifiableType {
 			elementReasons.put(sm,superTypeReason);
 		}
 		
-		Set<Property> superProperties = this.superType.getProperties();
-		this.mergedProperties=new TreeSet<>(properties);
+		Set<Property> superProperties = superType.getProperties();
+		if (mergedProperties==null){
+			this.mergedProperties=new TreeSet<>(properties);
+		}
 		this.mergedProperties.addAll(superProperties);
 		/* register super properties and reason*/
 		for (Property sm : superProperties){
