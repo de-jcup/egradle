@@ -141,15 +141,15 @@ public class ProposalIntegrationTest {
 		assertThat(proposals).
 			containsAtLeastOneProposal().
 		and().
+			containsProposalWithLabel("apply(Closure closure)").
+		and().
 			containsProposalWithLabel("dependencies(Closure configureClosure)").
 				whichHasDescription().
 				hasTemplate("dependencies {\n    $cursor\n}").
 		and();
 		/* @formatter:on*/
 	}
-
 	
-
 	private Set<Proposal> createProposals(String text, int offset) {
 		ProposalFactoryContentProvider contentProvider = components.buildContentProvider(text,offset);
 		GradleDSLProposalFactory gradleDSLProposalFactory = components.getGradleDSLProposalFactory();
