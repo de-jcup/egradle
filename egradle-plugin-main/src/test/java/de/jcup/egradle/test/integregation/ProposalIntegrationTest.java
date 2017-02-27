@@ -18,9 +18,27 @@ public class ProposalIntegrationTest {
 	@Rule
 	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
+	
+	@Test
+	public void buildfile__13_buildscript__before_myCopyTask_comment() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-13-task-definition-inheriting-from-existing-task.gradle");
+		int offset = calculateIndexBefore(text, "//test myCopyTask");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().and().
+			containsProposalWithLabel("into(Object destDir)").
+		and();
+		/* @formatter:on*/
+	}
 
 	@Test
-	public void buildfile__12_buildscript__before_teset_tag_comment() {
+	public void buildfile__12_buildscript__before_test_tag_comment() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test-12-repositories-in-buildscript-asciidoctor-example.gradle");
 		int offset = calculateIndexBefore(text, "//test tag");

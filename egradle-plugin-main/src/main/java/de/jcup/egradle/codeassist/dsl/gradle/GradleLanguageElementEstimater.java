@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
@@ -13,6 +15,7 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemType;
 
 /**
  * Estimates language elements by given items from model
@@ -95,6 +98,9 @@ public class GradleLanguageElementEstimater {
 			}
 			InternalEstimationData found = null;
 			if (found == null) {
+				found = findByTaskType(currentPathItem, found);
+			}
+			if (found == null) {
 				found = findByExtensions(current.type, currentPathItem);
 				if (found != null) {
 					extensionName = currentPathItemName;
@@ -124,10 +130,11 @@ public class GradleLanguageElementEstimater {
 			averagePercentage /= 2;
 			if (current.type == null) {
 				/*
-				 * jar{ manifest {} } - when manifest is missing delegation target so
-				 * current type is null! so just do a break except when element is also not null
+				 * jar{ manifest {} } - when manifest is missing delegation
+				 * target so current type is null! so just do a break except
+				 * when element is also not null
 				 */
-				if (current.element==null){
+				if (current.element == null) {
 					return null;
 				}
 				break;
@@ -138,6 +145,36 @@ public class GradleLanguageElementEstimater {
 		result.reliability = averagePercentage;
 
 		return result;
+	}
+
+	private InternalEstimationData findByTaskType(Item currentPathItem, InternalEstimationData found) {
+		if (ItemType.TASK.equals(currentPathItem.getItemType())) {
+			/*
+			 * Special handling for tasks , if the type is given inside we use
+			 * this one . e.g "task myCopytask(type:Copy)" shall use DSL from
+			 * copy task...
+			 */
+			String taskType = currentPathItem.getType();
+			if (StringUtils.isNotBlank(taskType)) {
+				Type potentialTask = typeProvider.getType(taskType);
+				if (potentialTask != null) {
+					/*
+					 * TODO ATR, 27.02.2017: should be improved as in
+					 * outcommented parts, but inheritance information inside
+					 * generated xml is not complete currently
+					 */
+					// /* check its really a task...*/
+					// if (potentialTask.isDescendantOf("org.gradle.api.Task")){
+					found = new InternalEstimationData();
+					found.element = potentialTask;
+					found.type = potentialTask;
+					found.percent = 100;
+					// }
+				}
+			}
+
+		}
+		return found;
 	}
 
 	private InternalEstimationData findByProperties(Type currentType, Item item) {
@@ -313,6 +350,7 @@ public class GradleLanguageElementEstimater {
 
 		/**
 		 * Returns element type used for next action (e.g. proposal)
+		 * 
 		 * @return element type for next asistant action
 		 */
 		public Type getElementType() {

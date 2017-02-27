@@ -140,7 +140,36 @@ public class TypeAssert {
 	}
 	
 	public TypeAssert isInterface() {
-		assertTrue(type.isInterface());
+		return isInterface(true);
+	}
+	
+	public TypeAssert isNotInterface() {
+		return isInterface(false);
+	}
+	
+	
+	private TypeAssert isInterface(boolean expected) {
+		boolean isInterface = type.isInterface();
+		if (isInterface == expected){
+			return this;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("Type: ").append(type.getName()).append(" is ");
+		if (expected){
+			sb.append("not an interface!");
+		}else{
+			sb.append("an interface!");
+		}
+		fail(sb.toString());
+		return this;
+	}
+
+	public TypeAssert isDecendantOf(String parentType) {
+		if (!(type.isDescendantOf(parentType))){
+			StringBuilder sb = new StringBuilder();
+			sb.append("Type:").append(type.getName()).append("is not a descendant of:").append(parentType);
+			fail(sb.toString());
+		}
 		return this;
 	}
 
