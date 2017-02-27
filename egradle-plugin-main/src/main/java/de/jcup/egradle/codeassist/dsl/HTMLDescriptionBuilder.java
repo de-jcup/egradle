@@ -4,9 +4,14 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
 
 public class HTMLDescriptionBuilder {
+
+	private DescriptionFinder descriptionFinder = new DescriptionFinder();
+
 
 	/**
 	 * Builds HTML description for given language element
@@ -219,16 +224,16 @@ public class HTMLDescriptionBuilder {
 			appendLinkToType(descSb, false, method.getDelegationTarget(), null);
 			descSb.append("<br");
 		}
-		descSb.append(method.getDescription());
+		appendDescriptionPart(method,descSb);
 	}
-
+	
 	private void appendPropertyDescription(LanguageElement element, StringBuilder descSb, Property property) {
 		descSb.append("<div class='fullName'>");
 		appendLinkToParentType(element, descSb,true);
 		descSb.append(property.getName());
 		descSb.append("</div>");
 		appendAppendixLink(descSb);
-		descSb.append(property.getDescription());
+		appendDescriptionPart(property,descSb);
 	}
 
 	private void appendTypeDescription(LanguageElementMetaData data, Type type, StringBuilder description) {
@@ -249,8 +254,26 @@ public class HTMLDescriptionBuilder {
 		description.append("</div>");
 		appendAppendixLink(description);
 		
-		description.append(type.getDescription());
+		appendDescriptionPart(type,description);
 		
+	}
+
+	private void appendDescriptionPart(LanguageElement element,StringBuilder descSb){
+		if (element==null){
+			return;
+		}
+		String description = element.getDescription();
+		if (StringUtils.isEmpty(description)){
+			descSb.append("No description available.");
+			return;
+		}
+		if (description.indexOf("@inheritDoc")!=-1){
+			String inheritedDescription = descriptionFinder.findDescription(element);
+			if (StringUtils.isNotBlank(inheritedDescription)){
+				description=inheritedDescription;
+			}
+		}
+		descSb.append(description);
 	}
 
 	private String createHTMLBody(String fgColor, String bgColor,String commentColor, String title, StringBuilder descSb) {

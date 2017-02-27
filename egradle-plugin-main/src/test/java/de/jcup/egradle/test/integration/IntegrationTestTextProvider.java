@@ -1,4 +1,4 @@
-package de.jcup.egradle.test.integregation;
+package de.jcup.egradle.test.integration;
 
 import org.apache.commons.lang3.StringUtils;
 

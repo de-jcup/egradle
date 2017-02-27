@@ -1,4 +1,4 @@
-package de.jcup.egradle.test.integregation;
+package de.jcup.egradle.test.integration;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

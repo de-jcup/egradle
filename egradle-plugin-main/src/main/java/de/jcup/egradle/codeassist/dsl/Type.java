@@ -34,6 +34,10 @@ public interface Type extends LanguageElement, GradleDocumentationInfo, Comparab
 	 */
 	public Set<Method> getDefinedMethods();
 
+	/**
+	 * Return interfaces as type reference set, never <code>null</code>
+	 * @return set, never <code>null</code>
+	 */
 	public Set<TypeReference> getInterfaces();
 
 	/**

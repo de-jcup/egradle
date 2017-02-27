@@ -1,6 +1,6 @@
-package de.jcup.egradle.test.integregation;
+package de.jcup.egradle.test.integration;
 
-import static de.jcup.egradle.test.integregation.HoverDataAssert.assertThat;
+import static de.jcup.egradle.test.integration.HoverDataAssert.*;
 import static org.junit.Assert.*;
 
 import org.junit.Rule;

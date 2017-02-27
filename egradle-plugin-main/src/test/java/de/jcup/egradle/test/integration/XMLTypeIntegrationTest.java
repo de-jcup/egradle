@@ -1,11 +1,11 @@
-package de.jcup.egradle.test.integregation;
+package de.jcup.egradle.test.integration;
+
+import static de.jcup.egradle.test.integration.TypeAssert.*;
 
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.Type;
-
-import static de.jcup.egradle.test.integregation.TypeAssert.*;
 
 public class XMLTypeIntegrationTest {
 
