@@ -275,6 +275,27 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.TASK, classDef.getItemType());
 
 	}
+	
+	@Test
+	public void tasks_with_type_Jar__returns_name_clean() throws ModelBuilderException {
+		String text = "tasks.withType(Jar) {}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals("tasks.withType(Jar)", classDef.getName());
+		assertEquals(ItemType.TASKS, classDef.getItemType());
+
+	}
 
 	@Test
 	public void class_definition_returns_class_item() throws ModelBuilderException {

@@ -13,8 +13,10 @@ import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
+
 public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
-	
+
+	private static final String GRADLE_JAVA_VERSION = "org.gradle.api.JavaVersion";
 
 	@Override
 	public String createClosure(LanguageElement element) {
@@ -56,6 +58,24 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 			sb.append("file('");
 			sb.append(CURSOR_VARIABLE);
 			sb.append("')");
+		} else if (JAVA_FILE.equals(typeAsString)) {
+			sb.append("file('");
+			sb.append(CURSOR_VARIABLE);
+			sb.append("')");
+		} else if (JAVA_MAP.equals(typeAsString)) { // no generic info, so simply do a key
+			sb.append("[ id: 1");
+			sb.append(CURSOR_VARIABLE);
+			sb.append("]");
+		} else if (JAVA_COLLECTION.equals(typeAsString)) {
+			sb.append("[ 1");
+			sb.append(CURSOR_VARIABLE);
+			sb.append(", 2]");
+		} else if (JAVA_SIMPLE_BOOLEAN.equals(typeAsString)) {
+			sb.append("true");
+			sb.append(CURSOR_VARIABLE);
+		}else if (GRADLE_JAVA_VERSION.equals(typeAsString)){
+			sb.append("JavaVersion.java8");
+			sb.append(CURSOR_VARIABLE);
 		} else {
 			sb.append(CURSOR_VARIABLE);
 		}
@@ -106,6 +126,44 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 				}
 				sb.append("')");
 				if (pit.hasNext()) {
+					sb.append(" ");// groovy way, no commata, but space to
+									// separate arguments
+				}
+			} else if (JAVA_SIMPLE_BOOLEAN.equals(typeAsString)) {
+				sb.append(" true");
+				if (pos == 0) {
+					sb.append(CURSOR_VARIABLE);
+				}
+				if (pit.hasNext()) {
+					sb.append(" ");// groovy way, no commata, but space to
+									// separate arguments
+				}
+			} else if (JAVA_COLLECTION.equals(typeAsString)) {
+				sb.append(" [1");
+				if (pos == 0) {
+					sb.append(CURSOR_VARIABLE);
+				}
+				sb.append(",2 ]");
+				if (pit.hasNext()) {
+					sb.append(" ");// groovy way, no commata, but space to
+									// separate arguments
+				}
+			} else if (JAVA_MAP.equals(typeAsString)) {
+				sb.append(" [id:");
+				if (pos == 0) {
+					sb.append(CURSOR_VARIABLE);
+				}
+				sb.append("1 ]");
+				if (pit.hasNext()) {
+					sb.append(" ");// groovy way, no commata, but space to
+									// separate arguments
+				}
+			}else if (GRADLE_JAVA_VERSION.equals(typeAsString)){
+				sb.append("JavaVersion.java8");
+				if (pos == 0) {
+					sb.append(CURSOR_VARIABLE);
+				}
+				if (pit.hasNext()) {	
 					sb.append(" ");// groovy way, no commata, but space to
 									// separate arguments
 				}

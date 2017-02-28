@@ -3,6 +3,7 @@ package de.jcup.egradle.test.integration;
 import static de.jcup.egradle.test.integration.HoverDataAssert.*;
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -20,61 +21,60 @@ public class HoverIntegrationTest {
 
 	@Test
 	public void buildfile_17__checkstyle_extension(){
-		fail("impl me!");
 		/* prepare */
-		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
-		int offset = text.indexOf("html");
+		String text = loadTextFromIntegrationTestFile("test-17-checkstyle-extension.gradle");
+		int offset = text.indexOf("checkstyle");
 
 		/* execute */
 		HoverData hoverData = calculateHoverData(text, offset);
 
 		/* test */
-		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
-	
+		assertThat(hoverData).isForExtension("checkstyle", "org.gradle.api.plugins.quality.CheckstyleExtension");
+		
 	}
 	
 	@Test
+	@Ignore
+	/* FIXME ATR, 01.03.2017: tasks must be generated ( + override in sdk bulder) + be available in model. so this test can be made active */
 	public void buildfile_16__reports_delegates_toCheckStyleReports(){
-		fail("impl me!");
 		/* prepare */
-		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
+		String text = loadTextFromIntegrationTestFile("test-16-checkstyle-tasks.checkstyle.gradle");
 		int offset = text.indexOf("html");
 
 		/* execute */
 		HoverData hoverData = calculateHoverData(text, offset);
 
 		/* test */
-		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
-	
+		assertThat(hoverData).isForMethod("org.gradle.api.plugins.quality.Checkstyle.reports", "groovy.lang.Closure");
+		
 	}
 	
 	@Test
 	public void buildfile_15__my_task_with_type_checkstyle_reports_delegates_toCheckStyleReports(){
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test-15-checkstyle-task_myCheckStyleTask_type_CheckStyle.gradle");
-		int offset = text.indexOf("html");
+		int offset = text.indexOf("reports");
 
 		/* execute */
 		HoverData hoverData = calculateHoverData(text, offset);
 
 		/* test */
-		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+		assertThat(hoverData).isForMethod("org.gradle.api.plugins.quality.Checkstyle.reports", "groovy.lang.Closure");
 	
 	}
 	
 	
 	@Test
-	public void buildfile_14__reports_delegates_toCheckStyleReports(){
-		fail("impl me!");
+	public void buildfile_14__tasks_withType_CheckStyle_reports_delegates_toCheckStyleReports(){
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
-		int offset = text.indexOf("html");
+		int offset = text.indexOf("reports");
 
 		/* execute */
 		HoverData hoverData = calculateHoverData(text, offset);
 
 		/* test */
-		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+		assertThat(hoverData).isForMethod("org.gradle.api.plugins.quality.Checkstyle.reports", "groovy.lang.Closure");
 	
 	}
 	

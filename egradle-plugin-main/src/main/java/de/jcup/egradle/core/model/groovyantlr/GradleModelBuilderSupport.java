@@ -170,6 +170,37 @@ class GradleModelBuilderSupport {
 		item.setTarget(target);
 	}
 
+	AST handleTasksWithTypeClosure(String enameString, Item item, AST lastAst) {
+		AST newLastAst = lastAst;
+		if (enameString.startsWith("tasks.withType")){
+			String type = StringUtils.substringAfterLast(enameString," ");
+			item.setType(type);
+			
+			if (lastAst == null) {
+				return null;
+			}
+			if (lastAst.getType() == ELIST) {
+				AST elist = lastAst;
+				AST methodCall2 = elist.getFirstChild();
+				if (methodCall2 != null) {
+					if (GroovyTokenTypes.SL == methodCall2.getType()) {
+						/* << */
+						methodCall2 = methodCall2.getFirstChild();
+					}
+					AST taskType = methodCall2.getFirstChild();
+					item.setName("tasks.withType("+taskType+")");
+					AST other = elist.getNextSibling();
+					newLastAst=other;
+				}
+			}
+			return newLastAst;
+			
+		}
+		return newLastAst;
+	}
+	
+	
+	
 	AST handleTaskClosure(String enameString, Item item, AST lastAst) {
 		if (lastAst == null) {
 			return null;
@@ -609,4 +640,6 @@ class GradleModelBuilderSupport {
 
 		}
 	}
+
+	
 }

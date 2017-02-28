@@ -155,24 +155,32 @@ public class GradleLanguageElementEstimater {
 			 * copy task...
 			 */
 			String taskType = currentPathItem.getType();
-			if (StringUtils.isNotBlank(taskType)) {
-				Type potentialTask = typeProvider.getType(taskType);
-				if (potentialTask != null) {
-					/*
-					 * TODO ATR, 27.02.2017: should be improved as in
-					 * outcommented parts, but inheritance information inside
-					 * generated xml is not complete currently
-					 */
-					// /* check its really a task...*/
-					// if (potentialTask.isDescendantOf("org.gradle.api.Task")){
-					found = new InternalEstimationData();
-					found.element = potentialTask;
-					found.type = potentialTask;
-					found.percent = 100;
-					// }
-				}
-			}
+			found = buildEstimationDataByTaskType(found, taskType);
 
+		}else if (ItemType.TASKS.equals(currentPathItem.getItemType())){
+			String taskType = currentPathItem.getType();
+			found = buildEstimationDataByTaskType(found, taskType);
+		}
+		return found;
+	}
+
+	private InternalEstimationData buildEstimationDataByTaskType(InternalEstimationData found, String taskType) {
+		if (StringUtils.isNotBlank(taskType)) {
+			Type potentialTask = typeProvider.getType(taskType);
+			if (potentialTask != null) {
+				/*
+				 * TODO ATR, 27.02.2017: should be improved as in
+				 * outcommented parts, but inheritance information inside
+				 * generated xml is not complete currently
+				 */
+				// /* check its really a task...*/
+				// if (potentialTask.isDescendantOf("org.gradle.api.Task")){
+				found = new InternalEstimationData();
+				found.element = potentialTask;
+				found.type = potentialTask;
+				found.percent = 100;
+				// }
+			}
 		}
 		return found;
 	}

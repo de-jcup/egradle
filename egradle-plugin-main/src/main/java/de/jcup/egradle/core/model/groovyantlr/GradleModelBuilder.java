@@ -488,6 +488,9 @@ public class GradleModelBuilder implements ModelBuilder {
 			lastAst = support.handleTaskClosure(enameString, item, lastAst);
 		} else if (enameString.startsWith("tasks.")) {
 			item.setItemType(ItemType.TASKS);
+			if (enameString.startsWith("tasks.withType")){
+				lastAst = support.handleTasksWithTypeClosure(enameString, item,lastAst);
+			}
 		} else if (enameString.startsWith("apply ")) {
 			item.setItemType(ItemType.APPLY_SETUP);
 			support.handleApplyType(item, lastAst);
