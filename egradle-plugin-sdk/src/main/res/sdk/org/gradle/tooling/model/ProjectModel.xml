@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.ProjectModel" version="3.0">
+    <description> Represents a model that is associated with some Gradle project.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
+        <description> Returns the identifier for the project that this model is associated with.
+
+</description>
+    </method>
+    <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
+        <description> Returns the identifier for the project that this model is associated with.
+
+</description>
+    </property>
+</type>

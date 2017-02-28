@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.CircularReferenceException" version="3.0" superType="org.gradle.api.GradleException">
+    <description> &lt;p&gt;A &lt;code&gt;CircularReferenceException&lt;/code&gt; is thrown if circular references exists between tasks, the project
+ evaluation order or the project dependsOn order.&lt;/p&gt;
+
+</description>
+</type>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec" version="3.0" documented="true">
+    <description> An executable which runs a suite of tests.
+
+</description>
+    <method name="getComponent" returnType="org.gradle.nativeplatform.test.NativeTestSuiteSpec"/>
+    <method name="getExecutable" returnType="org.gradle.nativeplatform.NativeExecutableFileSpec"/>
+    <method name="getExecutableFile" returnType="java.io.File">
+        <description> The executable file.
+
+</description>
+    </method>
+    <method name="getInstallation" returnType="org.gradle.nativeplatform.NativeInstallationSpec"/>
+    <method name="getTasks" returnType="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec.TasksCollection">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getTestSuite" returnType="org.gradle.nativeplatform.test.NativeTestSuiteSpec">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getTestedBinary" returnType="org.gradle.nativeplatform.NativeBinarySpec">
+        <description> The tested binary.
+
+</description>
+    </method>
+    <interface name="org.gradle.nativeplatform.NativeBinarySpec"/>
+    <interface name="org.gradle.testing.base.TestSuiteBinarySpec"/>
+    <property name="component" type="org.gradle.nativeplatform.test.NativeTestSuiteSpec"/>
+    <property name="executable" type="org.gradle.nativeplatform.NativeExecutableFileSpec"/>
+    <property name="executableFile" type="java.io.File">
+        <description> The executable file.
+
+</description>
+    </property>
+    <property name="installation" type="org.gradle.nativeplatform.NativeInstallationSpec"/>
+    <property name="tasks" type="org.gradle.nativeplatform.test.NativeTestSuiteBinarySpec.TasksCollection">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="testSuite" type="org.gradle.nativeplatform.test.NativeTestSuiteSpec">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="testedBinary" type="org.gradle.nativeplatform.NativeBinarySpec">
+        <description> The tested binary.
+
+</description>
+    </property>
+</type>

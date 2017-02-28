@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.ExtensionContainer" version="3.0">
+    <description> Allows adding 'namespaced' DSL extensions to a target object.
+
+</description>
+    <method name="add" returnType="void">
+        <description> Adding an extension of name 'foo' will:
+ &lt;li&gt; add 'foo' dynamic property
+ &lt;li&gt; add 'foo' dynamic method that accepts a closure that is a configuration script block
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name Will be used as a sort of namespace of properties/methods.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension Any object whose methods and properties will extend the target object
+ @throws IllegalArgumentException When an extension with the given name already exists.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="extension"/>
+    </method>
+    <method name="configure" returnType="void">
+        <description> Looks for the extension of the specified type and configures it with the supplied action.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type extension type
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the configure action
+ @throws UnknownDomainObjectException if no extension is found.
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="create" returnType="T">
+        <description> Adds a new extension to this container, that itself is dynamically made &lt;a href='type://ExtensionAware'&gt;ExtensionAware&lt;/a&gt;.
+
+ A new instance of the given &lt;a href='type://type'&gt;type&lt;/a&gt; will be created using the given &lt;a href='type://constructionArguments'&gt;constructionArguments&lt;/a&gt;. The new
+ instance will have been dynamically which means that you can cast the object to &lt;a href='type://ExtensionAware'&gt;ExtensionAware&lt;/a&gt;.
+
+ (see &lt;a href='type://org.gradle.api.plugins.ExtensionContainer#add(String,'&gt;Object)&lt;/a&gt;)
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name for the extension
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type of the extension
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;constructionArguments The arguments to be used to construct the extension instance
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The created instance
+ @throws IllegalArgumentException When an extension with the given name already exists.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="java.lang.Object" name="constructionArguments"/>
+    </method>
+    <method name="findByName" returnType="java.lang.Object">
+        <description> Looks for the extension of a given name. If none found null is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name extension name
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension or null
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="findByType" returnType="T">
+        <description> Looks for the extension of a given type (useful to avoid casting). If none found null is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type extension type
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension or null
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="getByName" returnType="java.lang.Object">
+        <description> Looks for the extension of a given name. If none found it will throw an exception.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name extension name
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension, never null
+ @throws UnknownDomainObjectException When the given extension is not found.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="getByType" returnType="T">
+        <description> Looks for the extension of a given type (useful to avoid casting). If none found it will throw an exception.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type extension type
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension, never null
+ @throws UnknownDomainObjectException When the given extension is not found.
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="getExtraProperties" returnType="org.gradle.api.plugins.ExtraPropertiesExtension">
+        <description> The extra properties extension in this extension container.
+
+ This extension is always present in the container, with the name “ext”.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extra properties extension in this extension container.
+
+</description>
+    </method>
+    <property name="byName" type="java.lang.Object">
+        <description> Looks for the extension of a given name. If none found it will throw an exception.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name extension name
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension, never null
+ @throws UnknownDomainObjectException When the given extension is not found.
+
+</description>
+    </property>
+    <property name="byType" type="T">
+        <description> Looks for the extension of a given type (useful to avoid casting). If none found it will throw an exception.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type extension type
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;extension, never null
+ @throws UnknownDomainObjectException When the given extension is not found.
+
+</description>
+    </property>
+    <property name="extraProperties" type="org.gradle.api.plugins.ExtraPropertiesExtension">
+        <description> The extra properties extension in this extension container.
+
+ This extension is always present in the container, with the name “ext”.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The extra properties extension in this extension container.
+
+</description>
+    </property>
+</type>

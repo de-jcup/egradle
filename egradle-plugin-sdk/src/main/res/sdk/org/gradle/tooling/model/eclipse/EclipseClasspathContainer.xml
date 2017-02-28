@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseClasspathContainer" version="3.0">
+    <description> Eclipse classpath entry used by third-party plugins to contribute to the project's classpath.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    <method name="getPath" returnType="java.lang.String">
+        <description> Returns the path of this container.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this container. Does not return null.
+
+</description>
+    </method>
+    <method name="isExported" returnType="boolean">
+        <description> Marks this container as exported.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported.
+
+</description>
+    </method>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
+    <property name="exported" type="boolean">
+        <description> Marks this container as exported.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether this container needs to be exported.
+
+</description>
+    </property>
+    <property name="path" type="java.lang.String">
+        <description> Returns the path of this container.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path of this container. Does not return null.
+
+</description>
+    </property>
+</type>

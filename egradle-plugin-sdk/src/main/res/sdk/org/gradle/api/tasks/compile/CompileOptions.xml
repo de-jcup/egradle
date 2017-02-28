@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.compile.CompileOptions" version="3.0" superType="org.gradle.api.tasks.compile.AbstractOptions" documented="true">
+    <description> Main options for Java compilation.
+
+</description>
+    <method name="debug" returnType="org.gradle.api.tasks.compile.CompileOptions" documented="true">
+        <description> Convenience method to set &lt;a href='type://DebugOptions'&gt;DebugOptions&lt;/a&gt; with named parameter syntax.
+ Calling this method will set &lt;a href='type://debug'&gt;debug&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.Map" name="debugArgs"/>
+    </method>
+    <method name="depend" returnType="org.gradle.api.tasks.compile.CompileOptions" documented="true">
+        <description> Convenience method to set &lt;a href='type://DependOptions'&gt;DependOptions&lt;/a&gt; with named parameter syntax.
+ Calling this method will set &lt;a href='type://useDepend'&gt;useDepend&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.Map" name="dependArgs"/>
+    </method>
+    <method name="excludeFromAntProperties" returnType="boolean">
+        <parameter type="java.lang.String" name="fieldName"/>
+    </method>
+    <method name="fork" returnType="org.gradle.api.tasks.compile.CompileOptions" documented="true">
+        <description> Convenience method to set &lt;a href='type://ForkOptions'&gt;ForkOptions&lt;/a&gt; with named parameter syntax.
+ Calling this method will set &lt;a href='type://fork'&gt;fork&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.Map" name="forkArgs"/>
+    </method>
+    <method name="getAntPropertyName" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="fieldName"/>
+    </method>
+    <method name="getAntPropertyValue" returnType="java.lang.Object">
+        <parameter type="java.lang.String" name="fieldName"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="getBootClasspath" returnType="java.lang.String">
+        <description> Returns the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="getCompilerArgs" returnType="java.util.List">
+        <description> Returns any additional arguments to be passed to the compiler.
+ Defaults to the empty list.
+
+ Compiler arguments not supported by the DSL can be added here. For example, it is possible
+ to pass the &lt;a href='type://-release'&gt;-release&lt;/a&gt; option of JDK 9:
+ &lt;pre&gt;&lt;code&gt;compilerArgs.addAll(['-release', '7'])&lt;/code&gt;&lt;/pre&gt;
+
+ Note that if &lt;a href='type://-release'&gt;-release&lt;/a&gt; is added then &lt;a href='type://-target'&gt;-target&lt;/a&gt; and &lt;a href='type://-source'&gt;-source&lt;/a&gt;
+ are ignored.
+
+</description>
+    </method>
+    <method name="getDebugOptions" returnType="org.gradle.api.tasks.compile.DebugOptions">
+        <description> Returns options for generating debugging information.
+
+</description>
+    </method>
+    <method name="getDependOptions" returnType="org.gradle.api.tasks.compile.DependOptions">
+        <description> Returns options for using the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+
+</description>
+    </method>
+    <method name="getEncoding" returnType="java.lang.String">
+        <description> Returns the character encoding to be used when reading source files. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which
+ case the platform default encoding will be used.
+
+</description>
+    </method>
+    <method name="getExtensionDirs" returnType="java.lang.String">
+        <description> Returns the extension dirs to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="getForkOptions" returnType="org.gradle.api.tasks.compile.ForkOptions">
+        <description> Returns options for running the compiler in a child process.
+
+</description>
+    </method>
+    <method name="getSourcepath" returnType="org.gradle.api.file.FileCollection">
+        <description> The source path to use for the compilation.
+ &lt;p&gt;
+ The source path indicates the location of source files that &lt;i&gt;may&lt;/i&gt; be compiled if necessary.
+ It is effectively a complement to the class path, where the classes to be compiled against are in source form.
+ It does &lt;b&gt;not&lt;/b&gt; indicate the actual primary source being compiled.
+ &lt;p&gt;
+ The source path feature of the Java compiler is rarely needed for modern builds that use dependency management.
+ &lt;p&gt;
+ The default value for the source path is &lt;a href='type://null'&gt;null&lt;/a&gt;, which indicates an &lt;i&gt;empty&lt;/i&gt; source path.
+ Note that this is different to the default value for the &lt;a href='type://-sourcepath'&gt;-sourcepath&lt;/a&gt; option for &lt;a href='type://javac'&gt;javac&lt;/a&gt;, which is to use the value specified by &lt;a href='type://-classpath'&gt;-classpath&lt;/a&gt;.
+ If you wish to use any source path, it must be explicitly set.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source path
+ (see &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setSourcepath(FileCollection)'&gt;#setSourcepath(FileCollection)&lt;/a&gt;)
+
+</description>
+    </method>
+    <method name="isDebug" returnType="boolean">
+        <description> Tells whether to include debugging information in the generated class files. Defaults
+ to &lt;a href='type://true'&gt;true&lt;/a&gt;. See &lt;a href='type://DebugOptions#getDebugLevel()'&gt;DebugOptions#getDebugLevel()&lt;/a&gt; for which debugging information will be generated.
+
+</description>
+    </method>
+    <method name="isDeprecation" returnType="boolean">
+        <description> Tells whether to log details of usage of deprecated members or classes. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isFailOnError" returnType="boolean">
+        <description> Tells whether to fail the build when compilation fails. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isFork" returnType="boolean">
+        <description> Tells whether to run the compiler in its own process. Note that this does
+ not necessarily mean that a new process will be created for each compile task.
+ Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isIncremental" returnType="boolean">
+        <description> informs whether to use experimental incremental compilation feature. See &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setIncremental(boolean)'&gt;#setIncremental(boolean)&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="isListFiles" returnType="boolean">
+        <description> Tells whether to log the files to be compiled. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isUseDepend" returnType="boolean">
+        <description> Tells whether to use the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+ Only takes effect if &lt;a href='type://useAnt'&gt;useAnt&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. Defaults to
+ &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isVerbose" returnType="boolean">
+        <description> Tells whether to produce verbose output. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="isWarnings" returnType="boolean">
+        <description> Tells whether to log warning messages. The default is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="optionMap" returnType="java.util.Map">
+        <description> Configure the java compilation to be incremental (e.g. compiles only those java classes that were changed or that are dependencies to the changed classes).
+ The feature is incubating and does not yet satisfies all compilation scenarios.
+
+</description>
+    </method>
+    <method name="setBootClasspath" returnType="void">
+        <description> Sets the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+        <parameter type="java.lang.String" name="bootClasspath"/>
+    </method>
+    <method name="setCompilerArgs" returnType="void">
+        <description> Sets any additional arguments to be passed to the compiler.
+ Defaults to the empty list.
+
+</description>
+        <parameter type="java.util.List" name="compilerArgs"/>
+    </method>
+    <method name="setDebug" returnType="void">
+        <description> Sets whether to include debugging information in the generated class files. Defaults
+ to &lt;a href='type://true'&gt;true&lt;/a&gt;. See &lt;a href='type://DebugOptions#getDebugLevel()'&gt;DebugOptions#getDebugLevel()&lt;/a&gt; for which debugging information will be generated.
+
+</description>
+        <parameter type="boolean" name="debug"/>
+    </method>
+    <method name="setDebugOptions" returnType="void">
+        <description> Sets options for generating debugging information.
+
+</description>
+        <parameter type="org.gradle.api.tasks.compile.DebugOptions" name="debugOptions"/>
+    </method>
+    <method name="setDependOptions" returnType="void">
+        <description> Sets options for using the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+
+</description>
+        <parameter type="org.gradle.api.tasks.compile.DependOptions" name="dependOptions"/>
+    </method>
+    <method name="setDeprecation" returnType="void">
+        <description> Sets whether to log details of usage of deprecated members or classes. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="deprecation"/>
+    </method>
+    <method name="setEncoding" returnType="void">
+        <description> Sets the character encoding to be used when reading source files. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which
+ case the platform default encoding will be used.
+
+</description>
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+    <method name="setExtensionDirs" returnType="void">
+        <description> Sets the extension dirs to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+        <parameter type="java.lang.String" name="extensionDirs"/>
+    </method>
+    <method name="setFailOnError" returnType="void">
+        <description> Sets whether to fail the build when compilation fails. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="failOnError"/>
+    </method>
+    <method name="setFork" returnType="void">
+        <description> Sets whether to run the compiler in its own process. Note that this does
+ not necessarily mean that a new process will be created for each compile task.
+ Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="fork"/>
+    </method>
+    <method name="setForkOptions" returnType="void">
+        <description> Sets options for running the compiler in a child process.
+
+</description>
+        <parameter type="org.gradle.api.tasks.compile.ForkOptions" name="forkOptions"/>
+    </method>
+    <method name="setIncremental" returnType="org.gradle.api.tasks.compile.CompileOptions">
+        <parameter type="boolean" name="incremental"/>
+    </method>
+    <method name="setListFiles" returnType="void">
+        <description> Sets whether to log the files to be compiled. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="listFiles"/>
+    </method>
+    <method name="setSourcepath" returnType="void">
+        <description> Sets the source path to use for the compilation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;sourcepath the source path
+
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="sourcepath"/>
+    </method>
+    <method name="setUseDepend" returnType="void">
+        <description> Sets whether to use the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+ Only takes effect if &lt;a href='type://useAnt'&gt;useAnt&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. Defaults to
+ &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="useDepend"/>
+    </method>
+    <method name="setVerbose" returnType="void">
+        <description> Sets whether to produce verbose output. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="verbose"/>
+    </method>
+    <method name="setWarnings" returnType="void">
+        <description> Sets whether to log warning messages. The default is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+        <parameter type="boolean" name="warnings"/>
+    </method>
+    <property name="antPropertyName" type="java.lang.String"/>
+    <property name="antPropertyValue" type="java.lang.Object"/>
+    <property name="bootClasspath" type="java.lang.String" documented="true">
+        <description> Returns the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="compilerArgs" type="java.util.List" documented="true">
+        <description> Returns any additional arguments to be passed to the compiler.
+ Defaults to the empty list.
+
+ Compiler arguments not supported by the DSL can be added here. For example, it is possible
+ to pass the &lt;a href='type://-release'&gt;-release&lt;/a&gt; option of JDK 9:
+ &lt;pre&gt;&lt;code&gt;compilerArgs.addAll(['-release', '7'])&lt;/code&gt;&lt;/pre&gt;
+
+ Note that if &lt;a href='type://-release'&gt;-release&lt;/a&gt; is added then &lt;a href='type://-target'&gt;-target&lt;/a&gt; and &lt;a href='type://-source'&gt;-source&lt;/a&gt;
+ are ignored.
+
+</description>
+    </property>
+    <property name="debug" type="boolean" documented="true">
+        <description> Tells whether to include debugging information in the generated class files. Defaults
+ to &lt;a href='type://true'&gt;true&lt;/a&gt;. See &lt;a href='type://DebugOptions#getDebugLevel()'&gt;DebugOptions#getDebugLevel()&lt;/a&gt; for which debugging information will be generated.
+
+</description>
+    </property>
+    <property name="debugOptions" type="org.gradle.api.tasks.compile.DebugOptions" documented="true">
+        <description> Returns options for generating debugging information.
+
+</description>
+    </property>
+    <property name="dependOptions" type="org.gradle.api.tasks.compile.DependOptions" documented="true">
+        <description> Returns options for using the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+
+</description>
+    </property>
+    <property name="deprecation" type="boolean" documented="true">
+        <description> Tells whether to log details of usage of deprecated members or classes. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="encoding" type="java.lang.String" documented="true">
+        <description> Returns the character encoding to be used when reading source files. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;, in which
+ case the platform default encoding will be used.
+
+</description>
+    </property>
+    <property name="extensionDirs" type="java.lang.String" documented="true">
+        <description> Returns the extension dirs to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="failOnError" type="boolean" documented="true">
+        <description> Tells whether to fail the build when compilation fails. Defaults to &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="fork" type="boolean" documented="true">
+        <description> Tells whether to run the compiler in its own process. Note that this does
+ not necessarily mean that a new process will be created for each compile task.
+ Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="forkOptions" type="org.gradle.api.tasks.compile.ForkOptions" documented="true">
+        <description> Returns options for running the compiler in a child process.
+
+</description>
+    </property>
+    <property name="incremental" type="boolean" documented="true">
+        <description> informs whether to use experimental incremental compilation feature. See &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setIncremental(boolean)'&gt;#setIncremental(boolean)&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="listFiles" type="boolean" documented="true">
+        <description> Tells whether to log the files to be compiled. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="sourcepath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> The source path to use for the compilation.
+ &lt;p&gt;
+ The source path indicates the location of source files that &lt;i&gt;may&lt;/i&gt; be compiled if necessary.
+ It is effectively a complement to the class path, where the classes to be compiled against are in source form.
+ It does &lt;b&gt;not&lt;/b&gt; indicate the actual primary source being compiled.
+ &lt;p&gt;
+ The source path feature of the Java compiler is rarely needed for modern builds that use dependency management.
+ &lt;p&gt;
+ The default value for the source path is &lt;a href='type://null'&gt;null&lt;/a&gt;, which indicates an &lt;i&gt;empty&lt;/i&gt; source path.
+ Note that this is different to the default value for the &lt;a href='type://-sourcepath'&gt;-sourcepath&lt;/a&gt; option for &lt;a href='type://javac'&gt;javac&lt;/a&gt;, which is to use the value specified by &lt;a href='type://-classpath'&gt;-classpath&lt;/a&gt;.
+ If you wish to use any source path, it must be explicitly set.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the source path
+ (see &lt;a href='type://org.gradle.api.tasks.compile.CompileOptions#setSourcepath(FileCollection)'&gt;#setSourcepath(FileCollection)&lt;/a&gt;)
+
+</description>
+    </property>
+    <property name="useDepend" type="boolean" documented="true">
+        <description> Tells whether to use the Ant &lt;a href='type://&lt;depend&gt;'&gt;&lt;depend&gt;&lt;/a&gt; task.
+ Only takes effect if &lt;a href='type://useAnt'&gt;useAnt&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;. Defaults to
+ &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="verbose" type="boolean" documented="true">
+        <description> Tells whether to produce verbose output. Defaults to &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="warnings" type="boolean" documented="true">
+        <description> Tells whether to log warning messages. The default is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+    </property>
+</type>

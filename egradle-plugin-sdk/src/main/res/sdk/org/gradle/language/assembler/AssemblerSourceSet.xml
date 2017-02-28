@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.assembler.AssemblerSourceSet" version="3.0" documented="true">
+    <description> A set of assembly language sources.
+
+ &lt;pre autoTested="true"&gt;
+ apply plugin: "assembler"
+
+ model {
+     components {
+         main(NativeLibrarySpec) {
+             sources {
+                 asm {
+                     source {
+                         srcDirs "src/main/i386", "src/shared/asm"
+                         include "**{@literal /}*.s"
+                     }
+                 }
+             }
+         }
+     }
+ }
+ &lt;/pre&gt;
+
+</description>
+    <interface name="org.gradle.language.base.LanguageSourceSet"/>
+</type>

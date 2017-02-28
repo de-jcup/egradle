@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.language.java.tasks.PlatformJavaCompile" version="3.0" superType="org.gradle.api.tasks.compile.JavaCompile">
+    <description> A platform-aware Java compile task.
+
+</description>
+    <method name="getPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"/>
+    <method name="setPlatform" returnType="void">
+        <parameter type="org.gradle.jvm.platform.JavaPlatform" name="platform"/>
+    </method>
+    <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
+</type>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.play.plugins.PlayJavaScriptPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="createJavascriptSourceSets" returnType="void">
+        <parameter type="org.gradle.play.PlayApplicationSpec" name="playComponent"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.language.javascript.JavaScriptSourceSet" name="javaScriptSourceSet"/>
+    </method>
+    <method name="registerJavascript" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerLanguageTransform" returnType="void">
+        <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languages"/>
+    </method>
+</type>

@@ -33,7 +33,142 @@ public class ModelImplTest {
 	public void before() {
 		modelToTest = new ModelImpl();
 	}
-
+	
+	@Test
+	public void root_is_always_a_possible_parent(){
+		assertTrue(modelToTest.getRoot().isAPossibleParent());
+	}
+	
+	@Test
+	public void model_parent_child1_child2__between_child1_and_child2_returns_parent_item_as_parent(){
+		Item parent= new Item();
+		parent.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		// gap between child1(10-14) and child2(18-20)
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		
+		parent.setLength(21);
+		parent.add(child1);
+		parent.add(child2);
+		modelToTest.getRoot().add(parent);
+		
+		assertEquals(parent, modelToTest.getParentItemOf(15));
+	}
+	
+	@Test
+	public void model_parent_child1_child2__after_child2__returns_root_item_as_parent(){
+		Item parent= new Item();
+		parent.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		// gap between child1(10-14) and child2(18-20)
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		
+		parent.setLength(21);
+		parent.add(child1);
+		parent.add(child2);
+		modelToTest.getRoot().add(parent);
+		
+		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemOf(22));
+	}
+	
+	@Test
+	public void model_parent1_child1_child2__parent2_child3_before_parent2__returns_root_item_as_parent(){
+		Item parent1= new Item();
+		parent1.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		// gap between child1(10-14) and child2(18-20)
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		
+		parent1.setLength(21);
+		parent1.add(child1);
+		parent1.add(child2);
+		
+		Item parent2= new Item();
+		parent2.setOffset(24);
+		Item child3 = new Item();
+		child3.setOffset(30);
+		child3.setLength(5); // 30+5=35-24=11
+		parent2.setLength(11);
+		parent2.add(child3);
+		modelToTest.getRoot().add(parent1);
+		modelToTest.getRoot().add(parent2);
+		
+		assertEquals(modelToTest.getRoot(), modelToTest.getParentItemOf(22));
+	}
+	
+	@Test
+	public void model_parent1_child1_child2__parent2_child3_at_child3__returns_parent2_item_as_parent(){
+		Item parent1= new Item();
+		parent1.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		// gap between child1(10-14) and child2(18-20)
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		
+		parent1.setLength(21);
+		parent1.add(child1);
+		parent1.add(child2);
+		
+		Item parent2= new Item();
+		parent2.setName("parent2");
+		parent2.setOffset(24);
+		Item child3 = new Item();
+		child3.setOffset(30);
+		child3.setLength(5); // 30+5=35-24=11
+		parent2.setLength(11);
+		parent2.add(child3);
+		modelToTest.getRoot().add(parent1);
+		modelToTest.getRoot().add(parent2);
+		
+		assertEquals(parent2, modelToTest.getParentItemOf(30));
+	}
+	
+	@Test
+	public void model_parent1_child1_child2__parent2_child3_before_child3__returns_parent2_item_as_parent(){
+		Item parent1= new Item();
+		parent1.setOffset(0);
+		Item child1 = new Item();
+		child1.setOffset(10);
+		child1.setLength(4);
+		// gap between child1(10-14) and child2(18-20)
+		Item child2 = new Item();
+		child2.setOffset(18);
+		child2.setLength(2);
+		
+		parent1.setLength(21);
+		parent1.add(child1);
+		parent1.add(child2);
+		
+		Item parent2= new Item();
+		parent2.setName("parent2");
+		parent2.setOffset(24);
+		Item child3 = new Item();
+		child3.setOffset(30);
+		child3.setLength(5); // 30+5=35-24=11
+		parent2.setLength(11);
+		parent2.add(child3);
+		
+		modelToTest.getRoot().add(parent1);
+		modelToTest.getRoot().add(parent2);
+		
+		assertEquals(parent2, modelToTest.getParentItemOf(29));
+	}
+	
 	@Test
 	public void empty_model_returns_not_null_on_getRoot() {
 		assertNotNull(modelToTest.getRoot());

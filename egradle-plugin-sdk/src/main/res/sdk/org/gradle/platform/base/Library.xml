@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.Library" version="3.0" documented="true">
+    <description> A library that can be linked into or depended on by another software element.
+
+</description>
+    <interface name="org.gradle.api.component.Component"/>
+</type>

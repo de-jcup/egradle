@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.publish.maven.MavenArtifact" version="3.0" documented="true">
+    <description> An artifact published as part of a &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;.
+
+</description>
+    <method name="builtBy" returnType="void" documented="true">
+        <description> Registers some tasks which build this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;.
+
+</description>
+        <parameter type="java.lang.Object" name="tasks"/>
+    </method>
+    <method name="getClassifier" returnType="java.lang.String">
+        <description> The classifier used to publish the artifact file.
+ A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier.
+
+</description>
+    </method>
+    <method name="getExtension" returnType="java.lang.String">
+        <description> The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;.
+ For an artifact without an extension, this value will be an empty String.
+
+</description>
+    </method>
+    <method name="getFile" returnType="java.io.File">
+        <description> The actual file contents to publish.
+
+</description>
+    </method>
+    <method name="setClassifier" returnType="void">
+        <description> Sets the classifier used to publish the artifact file.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier.
+
+</description>
+        <parameter type="java.lang.String" name="classifier"/>
+    </method>
+    <method name="setExtension" returnType="void">
+        <description> Sets the extension used to publish the artifact file.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension The extension.
+
+</description>
+        <parameter type="java.lang.String" name="extension"/>
+    </method>
+    <interface name="org.gradle.api.Buildable"/>
+    <property name="classifier" type="java.lang.String" documented="true">
+        <description> The classifier used to publish the artifact file.
+ A &lt;code&gt;null&lt;/code&gt; value (the default) indicates that this artifact will be published without a classifier.
+
+</description>
+    </property>
+    <property name="extension" type="java.lang.String" documented="true">
+        <description> The extension used to publish the artifact file, never &lt;code&gt;null&lt;/code&gt;.
+ For an artifact without an extension, this value will be an empty String.
+
+</description>
+    </property>
+    <property name="file" type="java.io.File" documented="true">
+        <description> The actual file contents to publish.
+
+</description>
+    </property>
+</type>

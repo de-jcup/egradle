@@ -55,10 +55,12 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.api.GradleStringTransformer;
 import de.jcup.egradle.core.api.SimpleMapStringTransformer;
 import de.jcup.egradle.core.api.TextUtil;
 import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
@@ -90,11 +92,12 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private int lastCaretPosition;
 
-	private boolean dirty;
+	private boolean refreshOutlineInProgress;
 
 	private GradleBracketsSupport bracketMatcher = new GradleBracketsSupport();
 
 	private boolean ignoreNextCaretMove;
+	private GradleFileType cachedGradleFileType;
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
@@ -146,13 +149,60 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			bracketMatcher.dispose();
 			bracketMatcher = null;
 		}
+		if (documentListener != null) {
+			documentListener.dispose();
+		}
 	}
+
+	public String getBackGroundColorAsWeb() {
+		ensureColorsFetched();
+		return bgColor;
+	}
+
+	public String getForeGroundColorAsWeb() {
+		ensureColorsFetched();
+		return fgColor;
+	}
+
+	private void ensureColorsFetched() {
+		if (bgColor == null || fgColor == null) {
+
+			ISourceViewer sourceViewer = getSourceViewer();
+			if (sourceViewer == null) {
+				return;
+			}
+			StyledText textWidget = sourceViewer.getTextWidget();
+			if (textWidget == null) {
+				return;
+			}
+
+			/*
+			 * TODO ATR, 03.02.2017: there should be an easier approach to get
+			 * editors back and foreground, without syncexec
+			 */
+			EGradleUtil.getSafeDisplay().syncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					bgColor = EGradleUtil.convertToHexColor(textWidget.getBackground());
+					fgColor = EGradleUtil.convertToHexColor(textWidget.getForeground());
+				}
+			});
+		}
+
+	}
+
+	private String bgColor;
+	private String fgColor;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
 		if (GradleEditor.class.equals(adapter)) {
 			return (T) this;
+		}
+		if (GradleFileType.class.equals(adapter)) {
+			return (T) getGradleFileType();
 		}
 		if (GradleStringTransformer.class.equals(adapter)) {
 			return (T) getGradleStringTransformer();
@@ -174,6 +224,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (ITreeContentProvider.class.equals(adapter) || GradleEditorOutlineContentProvider.class.equals(adapter)) {
 			return (T) contentProvider;
 		}
+		if (Model.class.equals(adapter)) {
+			return (T) contentProvider.getModel();
+		}
 		if (ISourceViewer.class.equals(adapter)) {
 			return (T) getSourceViewer();
 		}
@@ -183,11 +236,51 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		return super.getAdapter(adapter);
 	}
 
+	private GradleFileType getGradleFileType() {
+		if (cachedGradleFileType != null) {
+			return cachedGradleFileType;
+		}
+		IEditorInput editorInput = getEditorInput();
+		if (editorInput == null) {
+			return null;
+		}
+		String name = editorInput.getName();
+		if (name == null) {
+			return null;
+		}
+		if (!name.endsWith(".gradle")) {
+			cachedGradleFileType = GradleFileType.UNKNOWN;
+			return cachedGradleFileType;
+		}
+		/* It is a gradle file... */
+		if (name.equals("settings.gradle")) {
+			cachedGradleFileType = GradleFileType.GRADLE_SETTINGS_SCRIPT;
+		} else if (name.equals("init.gradle")) {
+			/*
+			 * We do not check if USER_HOME/.gradle/init.d/ or for
+			 * GRADLE_HOME/init.d/... The files are inside workspace and so we
+			 * only support init.gradle - for 100% correct variant description
+			 * see https://docs.gradle.org/current/userguide/init_scripts.html
+			 */
+			cachedGradleFileType = GradleFileType.GRADLE_INIT_SCRIPT;
+		} else {
+			/* nothing special - must be init script */
+			cachedGradleFileType = GradleFileType.GRADLE_BUILD_SCRIPT;
+		}
+		return cachedGradleFileType;
+	}
+
+	@Override
+	protected void handleEditorInputChanged() {
+		cachedGradleFileType = null;
+		super.handleEditorInputChanged();
+	}
+
 	private GradleStringTransformer transformer;
 
 	private GradleStringTransformer getGradleStringTransformer() {
 		/*
-		 * TODO ATR, 28.11.2016: with EGradle 1.2 this must be done via
+		 * TODO ATR, 28.11.2016: with EGradle 2.0 this must be done via
 		 * extension points, so other plugins are able to implement and register
 		 * own implementations:
 		 */
@@ -209,10 +302,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	}
 
 	public Item getItemAtCarretPosition() {
+		return getItemAt(lastCaretPosition);
+	}
+
+	public Item getItemAt(int offset) {
 		if (contentProvider == null) {
 			return null;
 		}
-		Item item = contentProvider.tryToFindByOffset(lastCaretPosition);
+		Item item = contentProvider.tryToFindByOffset(offset);
 		return item;
 	}
 
@@ -362,24 +459,94 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private class DelayedDocumentListener implements IDocumentListener {
 
+		private WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable r = new WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable();
+		private long lastDocumentChangeTimeStamp;
+
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
+		}
+
+		public void dispose() {
+
+			if (r != null) {
+				r.dispose();
+			}
 		}
 
 		@Override
 		public void documentChanged(DocumentEvent event) {
 			synchronized (monitor) {
-				if (dirty) {
-					/* already marked as dirty, nothing to do */
+				lastDocumentChangeTimeStamp = System.currentTimeMillis();
+				if (refreshOutlineInProgress) {
+					/*
+					 * already marked as refreshOutlineInProgress, nothing to do
+					 */
 					return;
 				}
-				dirty = true;
+			}
+			if (!r.isListeningToFurtherDocumentChanges()) {
+				Thread t = new Thread(r, "waiting-for-keyboard-events");
+				t.start();
+			}
+		}
+
+		private class WaitForNoMoreDocumentChangesAndUpdateOutlineRunnable implements Runnable {
+			private boolean waitingForFurtherDocumentChanges;
+			private boolean disposed;
+
+			@Override
+			public void run() {
+				waitingForFurtherDocumentChanges = true;
+
+				while (!disposed) {
+					try {
+						Thread.sleep(100);
+						long timeBetweenDocumentChanges = System.currentTimeMillis() - lastDocumentChangeTimeStamp;
+						if (timeBetweenDocumentChanges > 300) {
+							break;
+						}
+
+					} catch (InterruptedException e) {
+						/* ignore */
+					}
+				}
+				/* no longer waiting - do refresh */
+
+				if (!disposed) {
+					refreshOutline();
+				}
+				waitingForFurtherDocumentChanges = false;
+			}
+
+			public void dispose() {
+				disposed = true;
+
+			}
+
+			public boolean isListeningToFurtherDocumentChanges() {
+				synchronized (monitor) {
+					return waitingForFurtherDocumentChanges;
+				}
+			}
+
+		}
+
+		void refreshOutline() {
+			synchronized (monitor) {
+				refreshOutlineInProgress = true;
+			}
+			internalRebuildOutline();
+		}
+
+		void refreshOutlineDelayed(int delay) {
+			synchronized (monitor) {
+				refreshOutlineInProgress = true;
 			}
 			/*
 			 * we use a job to refresh the outline delayed and only when still
-			 * dirty. This is to avoid too many updates inside the outline -
-			 * otherwise every char entered at keyboard will reload complete AST
-			 * ...
+			 * refreshOutlineInProgress. This is to avoid too many updates
+			 * inside the outline - otherwise every char entered at keyboard
+			 * will reload complete AST ...
 			 */
 			/*
 			 * TODO ATR, 12.11.2016: while caret changes the update may not
@@ -391,26 +558,39 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					synchronized (monitor) {
-						if (!dirty) {
+						if (!refreshOutlineInProgress) {
 							/* already cleaned up by another job */
 							return Status.CANCEL_STATUS;
 						}
-						dirty = false;
 					}
-					EGradleUtil.safeAsyncExec(new Runnable() {
-						public void run() {
-							IDocument document = getDocument();
-							outlinePage.inputChanged(document);
-						}
-					});
+					internalRebuildOutline();
+
 					return Status.OK_STATUS;
 				}
 			};
-			job.schedule(1500);
+			job.schedule(delay);
 		}
 
 	}
+	/**
+	 * Rebuilds outline to current document model
+	 */
+	public void rebuildOutline() {
+		refreshOutlineInProgress = true;
+		internalRebuildOutline();
+	}
 
+	private void internalRebuildOutline() {
+		EGradleUtil.safeAsyncExec(new Runnable() {
+			public void run() {
+				IDocument document = getDocument();
+				outlinePage.inputChanged(document);
+				refreshOutlineInProgress = false;
+			}
+
+		});
+	}
+	
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override

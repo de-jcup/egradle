@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description> Publishes an IvyPublication to an IvyArtifactRepository.
+
+ &lt;br&gt;(since 1.3)
+
+</description>
+    <method name="call" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="doPublish" returnType="void">
+        <parameter type="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal" name="publication"/>
+        <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repository"/>
+    </method>
+    <method name="getIvyPublisher" returnType="org.gradle.api.publish.ivy.internal.publisher.IvyPublisher"/>
+    <method name="getPublication" returnType="org.gradle.api.publish.ivy.IvyPublication">
+        <description> The publication to be published.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publication to be published
+
+</description>
+    </method>
+    <method name="getPublicationInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal"/>
+    <method name="getRepository" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository">
+        <description> The repository to publish to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to
+
+</description>
+    </method>
+    <method name="publish" returnType="void"/>
+    <method name="setPublication" returnType="void">
+        <description> Sets the publication to be published.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;publication The publication to be published
+
+</description>
+        <parameter type="org.gradle.api.publish.ivy.IvyPublication" name="publication"/>
+    </method>
+    <method name="setRepository" returnType="void">
+        <description> Sets the repository to publish to.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;repository The repository to publish to
+
+</description>
+        <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repository"/>
+    </method>
+    <method name="toPublicationInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal">
+        <parameter type="org.gradle.api.publish.ivy.IvyPublication" name="publication"/>
+    </method>
+    <property name="ivyPublisher" type="org.gradle.api.publish.ivy.internal.publisher.IvyPublisher"/>
+    <property name="publication" type="org.gradle.api.publish.ivy.IvyPublication" documented="true">
+        <description> The publication to be published.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publication to be published
+
+</description>
+    </property>
+    <property name="publicationInternal" type="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal"/>
+    <property name="repository" type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" documented="true">
+        <description> The repository to publish to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The repository to publish to
+
+</description>
+    </property>
+</type>

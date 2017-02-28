@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.Task" version="3.0" documented="true">
+    <description> &lt;p&gt;A &lt;code&gt;Task&lt;/code&gt; represents a single atomic piece of work for a build, such as compiling classes or generating
+ javadoc.&lt;/p&gt;
+
+ &lt;p&gt;Each task belongs to a &lt;a href='type://Project'&gt;Project&lt;/a&gt;. You can use the various methods on &lt;a href='type://org.gradle.api.tasks.TaskContainer'&gt;org.gradle.api.tasks.TaskContainer&lt;/a&gt; to create and lookup task instances. For example, &lt;a href='type://org.gradle.api.tasks.TaskContainer#create(String)'&gt;org.gradle.api.tasks.TaskContainer#create(String)&lt;/a&gt; creates an empty task with the given name. You can also use the
+ &lt;a href='type://task'&gt;task&lt;/a&gt; keyword in your build file: &lt;/p&gt;
+ &lt;pre&gt;
+ task myTask
+ task myTask { configure closure }
+ task myType &amp;lt;&amp;lt; { task action }
+ task myTask(type: SomeType)
+ task myTask(type: SomeType) { configure closure }
+ &lt;/pre&gt;
+
+ &lt;p&gt;Each task has a name, which can be used to refer to the task within its owning project, and a fully qualified
+ path, which is unique across all tasks in all projects. The path is the concatenation of the owning project's path
+ and the task's name. Path elements are separated using the &lt;em class='value'&gt;org.gradle.api.Project#PATH_SEPARATOR&lt;/em&gt;
+ character.&lt;/p&gt;
+
+ &lt;h3&gt;Task Actions&lt;/h3&gt;
+
+ &lt;p&gt;A &lt;code&gt;Task&lt;/code&gt; is made up of a sequence of &lt;a href='type://Action'&gt;Action&lt;/a&gt; objects. When the task is executed, each of the
+ actions is executed in turn, by calling &lt;a href='type://Action#execute'&gt;Action#execute&lt;/a&gt;.  You can add actions to a task by calling &lt;a href='type://org.gradle.api.Task#doFirst(Action)'&gt;#doFirst(Action)&lt;/a&gt; or &lt;a href='type://org.gradle.api.Task#doLast(Action)'&gt;#doLast(Action)&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;Groovy closures can also be used to provide a task action. When the action is executed, the closure is called with
+ the task as parameter.  You can add action closures to a task by calling &lt;a href='type://org.gradle.api.Task#doFirst(groovy.lang.Closure)'&gt;#doFirst(groovy.lang.Closure)&lt;/a&gt; or
+ &lt;a href='type://org.gradle.api.Task#doLast(groovy.lang.Closure)'&gt;#doLast(groovy.lang.Closure)&lt;/a&gt;  or using the left-shift &lt;a href='type://&lt;&lt;'&gt;&lt;&lt;&lt;/a&gt; operator.&lt;/p&gt;
+
+ &lt;p&gt;There are 2 special exceptions which a task action can throw to abort execution and continue without failing the
+ build. A task action can abort execution of the action and continue to the next action of the task by throwing a
+ &lt;a href='type://org.gradle.api.tasks.StopActionException'&gt;org.gradle.api.tasks.StopActionException&lt;/a&gt;. A task action can abort execution of the task and continue to the
+ next task by throwing a &lt;a href='type://org.gradle.api.tasks.StopExecutionException'&gt;org.gradle.api.tasks.StopExecutionException&lt;/a&gt;. Using these exceptions allows you to
+ have precondition actions which skip execution of the task, or part of the task, if not true.&lt;/p&gt;
+
+ &lt;h3&gt;Task Dependencies and Task Ordering&lt;/h3&gt;
+
+ &lt;p&gt;A task may have dependencies on other tasks or might be scheduled to always run after another task.
+ Gradle ensures that all task dependencies and ordering rules are honored when executing tasks, so that the task is executed after
+ all of its dependencies and any "must run after" tasks have been executed.&lt;/p&gt;
+
+ &lt;p&gt;Dependencies to a task are controlled using &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;#dependsOn(Object...)&lt;/a&gt; or &lt;a href='type://org.gradle.api.Task#setDependsOn(Iterable)'&gt;#setDependsOn(Iterable)&lt;/a&gt;,
+ and &lt;a href='type://org.gradle.api.Task#mustRunAfter(Object...)'&gt;#mustRunAfter(Object...)&lt;/a&gt;, &lt;a href='type://org.gradle.api.Task#setMustRunAfter(Iterable)'&gt;#setMustRunAfter(Iterable)&lt;/a&gt;, &lt;a href='type://org.gradle.api.Task#shouldRunAfter(Object...)'&gt;#shouldRunAfter(Object...)&lt;/a&gt; and
+ &lt;a href='type://org.gradle.api.Task#setShouldRunAfter(Iterable)'&gt;#setShouldRunAfter(Iterable)&lt;/a&gt; are used to specify ordering between tasks. You can use objects of any of
+ the following types to specify dependencies and ordering:&lt;/p&gt;
+
+ &lt;ul&gt;
+
+ &lt;li&gt;A &lt;a href='type://String'&gt;String&lt;/a&gt;, &lt;a href='type://CharSequence'&gt;CharSequence&lt;/a&gt; or &lt;a href='type://groovy.lang.GString'&gt;groovy.lang.GString&lt;/a&gt; task path or name. A relative path is interpreted relative to the task's &lt;a href='type://Project'&gt;Project&lt;/a&gt;. This
+ allows you to refer to tasks in other projects.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Task'&gt;Task&lt;/a&gt;.&lt;/li&gt;
+
+ &lt;li&gt;A closure. The closure may take a &lt;a href='type://Task'&gt;Task&lt;/a&gt; as parameter. It may return any of the types listed here. Its
+ return value is recursively converted to tasks. A &lt;a href='type://null'&gt;null&lt;/a&gt; return value is treated as an empty collection.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; object.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Buildable'&gt;Buildable&lt;/a&gt; object.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Iterable'&gt;Iterable&lt;/a&gt;, &lt;a href='type://Collection'&gt;Collection&lt;/a&gt;, &lt;a href='type://Map'&gt;Map&lt;/a&gt; or array. May contain any of the types listed here. The elements of the
+ iterable/collection/map/array are recursively converted to tasks.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Callable'&gt;Callable&lt;/a&gt;. The &lt;a href='type://call()'&gt;call()&lt;/a&gt; method may return any of the types listed here. Its return value is
+ recursively converted to tasks. A &lt;a href='type://null'&gt;null&lt;/a&gt; return value is treated as an empty collection.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Using a Task in a Build File&lt;/h3&gt;
+
+  &lt;h4&gt;Dynamic Properties&lt;/h4&gt;
+
+ &lt;p&gt;A &lt;a href='type://Task'&gt;Task&lt;/a&gt; has 4 'scopes' for properties. You can access these properties by name from the build file or by
+ calling the &lt;a href='type://org.gradle.api.Task#property(String)'&gt;#property(String)&lt;/a&gt; method. You can change the value of these properties by calling the &lt;a href='type://org.gradle.api.Task#setProperty(String,'&gt;Object)&lt;/a&gt; method.&lt;/p&gt;
+
+ &lt;ul&gt;
+
+ &lt;li&gt;The &lt;a href='type://Task'&gt;Task&lt;/a&gt; object itself. This includes any property getters and setters declared by the &lt;a href='type://Task'&gt;Task&lt;/a&gt;
+ implementation class.  The properties of this scope are readable or writable based on the presence of the
+ corresponding getter and setter methods.&lt;/li&gt;
+
+ &lt;li&gt;The &lt;em&gt;extensions&lt;/em&gt; added to the task by plugins. Each extension is available as a read-only property with the same
+ name as the extension.&lt;/li&gt;
+
+ &lt;li&gt;The &lt;em&gt;convention&lt;/em&gt; properties added to the task by plugins. A plugin can add properties and methods to a task through
+ the task's &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; object.  The properties of this scope may be readable or writable, depending on the convention objects.&lt;/li&gt;
+
+ &lt;li&gt;The &lt;em&gt;extra properties&lt;/em&gt; of the task. Each task object maintains a map of additional properties. These
+ are arbitrary name -&gt; value pairs which you can use to dynamically add properties to a task object.  Once defined, the properties
+ of this scope are readable and writable.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;h4&gt;Dynamic Methods&lt;/h4&gt;
+
+ &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; may add methods to a &lt;a href='type://Task'&gt;Task&lt;/a&gt; using its &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; object.&lt;/p&gt;
+
+ &lt;h4&gt;Parallel Execution&lt;/h4&gt;
+ &lt;p&gt;
+ By default, tasks are not executed in parallel.
+ Parallel execution can be enabled by the &lt;code&gt;--parallel&lt;/code&gt; flag when the build is initiated.
+ In parallel mode, the tasks of different projects (i.e. in a multi project build) are able to be executed in parallel.
+ If a task is annotated with &lt;a href='type://org.gradle.api.tasks.ParallelizableTask'&gt;org.gradle.api.tasks.ParallelizableTask&lt;/a&gt;, it may also be executed in parallel with other tasks of the same project.
+ See &lt;a href='type://org.gradle.api.tasks.ParallelizableTask'&gt;org.gradle.api.tasks.ParallelizableTask&lt;/a&gt; for more details on writing parallelizable tasks.
+
+</description>
+    <method name="configure" returnType="org.gradle.api.Task">
+        <description> &lt;p&gt;Applies the statements of the closure against this task object. The delegate object for the closure is set to
+ this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to be applied (can be null).
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This task
+
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="deleteAllActions" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Removes all the actions of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+    </method>
+    <method name="dependsOn" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given dependencies to this task. See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types
+ of objects which can be used as task dependencies.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The dependencies to add to this task. The path can be defined by:
+ &lt;li&gt;A &lt;a href='type://String'&gt;String&lt;/a&gt;, &lt;a href='type://CharSequence'&gt;CharSequence&lt;/a&gt; or &lt;a href='type://groovy.lang.GString'&gt;groovy.lang.GString&lt;/a&gt; task path or name. A relative path is interpreted relative to the task's &lt;a href='type://Project'&gt;Project&lt;/a&gt;. This
+ allows you to refer to tasks in other projects.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Task'&gt;Task&lt;/a&gt;.&lt;/li&gt;
+
+ &lt;li&gt;A closure. The closure may take a &lt;a href='type://Task'&gt;Task&lt;/a&gt; as parameter. It may return any of the types listed here. Its
+ return value is recursively converted to tasks. A &lt;a href='type://null'&gt;null&lt;/a&gt; return value is treated as an empty collection.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; object.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Buildable'&gt;Buildable&lt;/a&gt; object.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Iterable'&gt;Iterable&lt;/a&gt;, &lt;a href='type://Collection'&gt;Collection&lt;/a&gt;, &lt;a href='type://Map'&gt;Map&lt;/a&gt; or array. May contain any of the types listed here. The elements of the
+ iterable/collection/map/array are recursively converted to tasks.&lt;/li&gt;
+
+ &lt;li&gt;A &lt;a href='type://Callable'&gt;Callable&lt;/a&gt;. The &lt;a href='type://call()'&gt;call()&lt;/a&gt; method may return any of the types listed here. Its return value is
+ recursively converted to tasks. A &lt;a href='type://null'&gt;null&lt;/a&gt; return value is treated as an empty collection.&lt;/li&gt;
+
+ &lt;li&gt;Anything else is treated as a failure.&lt;/li&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="dependsOnTaskDidWork" returnType="boolean">
+        <description> &lt;p&gt;Checks if any of the tasks that this task depends on &lt;a href='type://Task#getDidWork()'&gt;didWork&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if any task this task depends on did work.
+
+</description>
+    </method>
+    <method name="doFirst" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given closure to the beginning of this task's action list. The closure is passed this task as a
+ parameter when executed.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action closure to execute.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This task.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="doFirst" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given &lt;a href='type://Action'&gt;Action&lt;/a&gt; to the beginning of this task's action list.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to add
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="doLast" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given closure to the end of this task's action list.  The closure is passed this task as a parameter
+ when executed.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action closure to execute.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This task.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="doLast" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given &lt;a href='type://Action'&gt;Action&lt;/a&gt; to the end of this task's action list.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action to add.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="finalizedBy" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given finalizer tasks for this task.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     finalizedBy "taskX"
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ a finalizer task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The tasks that finalize this task.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="getActions" returnType="java.util.List">
+        <description> &lt;p&gt;Returns the sequence of &lt;a href='type://Action'&gt;Action&lt;/a&gt; objects which will be executed by this task, in the order of
+ execution.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task actions in the order they are executed. Returns an empty list if this task has no actions.
+
+</description>
+    </method>
+    <method name="getAnt" returnType="org.gradle.api.AntBuilder">
+        <description> &lt;p&gt;Returns the &lt;code&gt;AntBuilder&lt;/code&gt; for this task.  You can use this in your build file to execute ant
+ tasks.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;AntBuilder&lt;/code&gt;
+
+</description>
+    </method>
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention">
+        <description> &lt;p&gt;Returns the &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; object for this task. A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; can use the convention object to
+ contribute properties and methods to this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The convention object. Never returns null.
+
+</description>
+    </method>
+    <method name="getDependsOn" returnType="java.util.Set">
+        <description> &lt;p&gt;Returns the dependencies of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependencies of this task. Returns an empty set if this task has no dependencies.
+
+</description>
+    </method>
+    <method name="getDescription" returnType="java.lang.String">
+        <description> Returns the description of this task.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May return null.
+
+</description>
+    </method>
+    <method name="getDidWork" returnType="boolean">
+        <description> &lt;p&gt;Checks if the task actually did any work.  Even if a Task executes, it may determine that it has nothing to
+ do.  For example, a compilation task may determine that source files have not changed since the last time a the
+ task was run.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task did any work
+
+</description>
+    </method>
+    <method name="getEnabled" returnType="boolean">
+        <description> &lt;p&gt;Returns if this task is enabled or not.&lt;/p&gt;
+
+ (see &lt;a href='type://org.gradle.api.Task#setEnabled(boolean)'&gt;#setEnabled(boolean)&lt;/a&gt;)
+
+</description>
+    </method>
+    <method name="getFinalizedBy" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Returns tasks that finalize this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that finalize this task. Returns an empty set if there are no finalising tasks for this task.
+
+</description>
+    </method>
+    <method name="getGroup" returnType="java.lang.String">
+        <description> Returns the task group which this task belongs to. The task group is used in reports and user interfaces to
+ group related tasks together when presenting a list of tasks to the user.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task group for this task. Might be null.
+
+</description>
+    </method>
+    <method name="getInputs" returnType="org.gradle.api.tasks.TaskInputs">
+        <description> &lt;p&gt;Returns the inputs of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The inputs. Never returns null.
+
+</description>
+    </method>
+    <method name="getLogger" returnType="org.gradle.api.logging.Logger">
+        <description> &lt;p&gt;Returns the logger for this task. You can use this in your build file to write log messages.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null.
+
+</description>
+    </method>
+    <method name="getLogging" returnType="org.gradle.api.logging.LoggingManager">
+        <description> Returns the &lt;a href='type://org.gradle.api.logging.LoggingManager'&gt;org.gradle.api.logging.LoggingManager&lt;/a&gt; which can be used to control the logging level and
+ standard output/error capture for this task. By default, System.out is redirected to the Gradle logging system at
+ the QUIET log level, and System.err is redirected at the ERROR log level.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the LoggingManager. Never returns null.
+
+</description>
+    </method>
+    <method name="getMustRunAfter" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Returns tasks that this task must run after.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that this task must run after. Returns an empty set if this task has no tasks it must run after.
+
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> &lt;p&gt;Returns the name of this task. The name uniquely identifies the task within its &lt;a href='type://Project'&gt;Project&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the task. Never returns null.
+
+</description>
+    </method>
+    <method name="getOutputs" returnType="org.gradle.api.tasks.TaskOutputs">
+        <description> &lt;p&gt;Returns the outputs of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The outputs. Never returns null.
+
+</description>
+    </method>
+    <method name="getPath" returnType="java.lang.String">
+        <description> &lt;p&gt;Returns the path of the task, which is a fully qualified name for the task. The path of a task is the path of
+ its &lt;a href='type://Project'&gt;Project&lt;/a&gt; plus the name of the task, separated by &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the path of the task, which is equal to the path of the project plus the name of the task.
+
+</description>
+    </method>
+    <method name="getProject" returnType="org.gradle.api.Project">
+        <description> &lt;p&gt;Returns the &lt;a href='type://Project'&gt;Project&lt;/a&gt; which this task belongs to.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project this task belongs to. Never returns null.
+
+</description>
+    </method>
+    <method name="getShouldRunAfter" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Returns tasks that this task should run after.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that this task should run after. Returns an empty set if this task has no tasks it must run after.
+
+</description>
+    </method>
+    <method name="getState" returnType="org.gradle.api.tasks.TaskState">
+        <description> Returns the execution state of this task. This provides information about the execution of this task, such as
+ whether it has executed, been skipped, has failed, etc.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The execution state of this task. Never returns null.
+
+</description>
+    </method>
+    <method name="getTaskDependencies" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Returns a &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; which contains all the tasks that this task depends on.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependencies of this task. Never returns null.
+
+</description>
+    </method>
+    <method name="getTemporaryDir" returnType="java.io.File">
+        <description> &lt;p&gt;Returns a directory which this task can use to write temporary files to. Each task instance is provided with a
+ separate temporary directory. There are no guarantees that the contents of this directory will be kept beyond the
+ execution of the task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. The directory will already exist.
+
+</description>
+    </method>
+    <method name="hasProperty" returnType="boolean" documented="true">
+        <description> &lt;p&gt;Determines if this task has the given property. See &lt;a href="#properties"&gt;here&lt;/a&gt; for details of the
+ properties which are available for a task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;propertyName The name of the property to locate.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;True if this project has the given property, false otherwise.
+
+</description>
+        <parameter type="java.lang.String" name="propertyName"/>
+    </method>
+    <method name="leftShift" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Adds the given closure to the end of this task's action list.  The closure is passed this task as a parameter
+ when executed. You can call this method from your build script using the &amp;lt;&amp;lt; left shift operator.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action The action closure to execute.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This task.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="mustRunAfter" returnType="org.gradle.api.Task" documented="true">
+        <description> &lt;p&gt;Specifies that this task must run after all of the supplied tasks.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     mustRunAfter "taskX"
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;For each supplied task, this action adds a task 'ordering', and does not specify a 'dependency' between the tasks.
+ As such, it is still possible to execute 'taskY' without first executing the 'taskX' in the example.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ an ordering relationship.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The tasks this task must run after.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="onlyIf" returnType="void" delegationTarget="groovy.lang.Closure" documented="true">
+        <description> &lt;p&gt;Execute the task only if the given closure returns true.  The closure will be evaluated at task execution
+ time, not during configuration.  The closure will be passed a single parameter, this task. If the closure returns
+ false, the task will be skipped.&lt;/p&gt;
+
+ &lt;p&gt;You may add multiple such predicates. The task is skipped if any of the predicates return false.&lt;/p&gt;
+
+ &lt;p&gt;Typical usage:&lt;code&gt;myTask.onlyIf{ dependsOnTaskDidWork() } &lt;/code&gt;&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;onlyIfClosure code to execute to determine if task should be run
+
+</description>
+        <parameter type="groovy.lang.Closure" name="onlyIfClosure"/>
+    </method>
+    <method name="onlyIf" returnType="void" documented="true">
+        <description> &lt;p&gt;Execute the task only if the given spec is satisfied. The spec will be evaluated at task execution time, not
+ during configuration. If the Spec is not satisfied, the task will be skipped.&lt;/p&gt;
+
+ &lt;p&gt;You may add multiple such predicates. The task is skipped if any of the predicates return false.&lt;/p&gt;
+
+ &lt;p&gt;Typical usage (from Java):&lt;/p&gt;
+ &lt;pre&gt;myTask.onlyIf(new Spec&amp;lt;Task&gt;() {
+    boolean isSatisfiedBy(Task task) {
+       return task.dependsOnTaskDidWork();
+    }
+ });
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;onlyIfSpec specifies if a task should be run
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="onlyIfSpec"/>
+    </method>
+    <method name="property" returnType="java.lang.Object" documented="true">
+        <description> &lt;p&gt;Returns the value of the given property of this task.  This method locates a property as follows:&lt;/p&gt;
+
+ &lt;ol&gt;
+
+ &lt;li&gt;If this task object has a property with the given name, return the value of the property.&lt;/li&gt;
+
+ &lt;li&gt;If this task has an extension with the given name, return the extension. &lt;/li&gt;
+
+ &lt;li&gt;If this task's convention object has a property with the given name, return the value of the property.&lt;/li&gt;
+
+ &lt;li&gt;If this task has an extra property with the given name, return the value of the property.&lt;/li&gt;
+
+ &lt;li&gt;If not found, throw &lt;a href='type://MissingPropertyException'&gt;MissingPropertyException&lt;/a&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;propertyName The name of the property.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of the property, possibly null.
+ @throws MissingPropertyException When the given property is unknown.
+
+</description>
+        <parameter type="java.lang.String" name="propertyName"/>
+    </method>
+    <method name="setActions" returnType="void">
+        <description> &lt;p&gt;Sets the sequence of &lt;a href='type://Action'&gt;Action&lt;/a&gt; objects which will be executed by this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;actions The actions.
+
+</description>
+        <parameter type="java.util.List" name="actions"/>
+    </method>
+    <method name="setDependsOn" returnType="void">
+        <description> &lt;p&gt;Sets the dependencies of this task. See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of
+ objects which can be used as task dependencies.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependsOnTasks The set of task paths.
+
+</description>
+        <parameter type="java.lang.Iterable" name="dependsOnTasks"/>
+    </method>
+    <method name="setDescription" returnType="void">
+        <description> Sets a description for this task. This should describe what the task does to the user of the build. The
+ description will be displayed when &lt;code&gt;gradle tasks&lt;/code&gt; is called.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;description The description of the task. Might be null.
+
+</description>
+        <parameter type="java.lang.String" name="description"/>
+    </method>
+    <method name="setDidWork" returnType="void">
+        <description> Sets whether the task actually did any work.  Most built-in tasks will set this automatically, but
+ it may be useful to manually indicate this for custom user tasks.
+ &lt;p&gt;This is useful when combined with onlyIf { dependsOnTaskDidWork() }.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;didWork indicates if the task did any work
+
+</description>
+        <parameter type="boolean" name="didWork"/>
+    </method>
+    <method name="setEnabled" returnType="void">
+        <description> &lt;p&gt;Set the enabled state of a task. If a task is disabled none of the its actions are executed. Note that
+ disabling a task does not prevent the execution of the tasks which this task depends on.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;enabled The enabled state of this task (true or false)
+
+</description>
+        <parameter type="boolean" name="enabled"/>
+    </method>
+    <method name="setFinalizedBy" returnType="void">
+        <description> &lt;p&gt;Specifies the set of finalizer tasks for this task.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     finalizedBy = ["taskX1", "taskX2"]
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ a finalizer task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;finalizedBy The tasks that finalize this task.
+
+</description>
+        <parameter type="java.lang.Iterable" name="finalizedBy"/>
+    </method>
+    <method name="setGroup" returnType="void">
+        <description> Sets the task group which this task belongs to. The task group is used in reports and user interfaces to
+ group related tasks together when presenting a list of tasks to the user.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;group The task group for this task. Can be null.
+
+</description>
+        <parameter type="java.lang.String" name="group"/>
+    </method>
+    <method name="setMustRunAfter" returnType="void">
+        <description> &lt;p&gt;Specifies the set of tasks that this task must run after.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     mustRunAfter = ["taskX1", "taskX2"]
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;For each supplied task, this action adds a task 'ordering', and does not specify a 'dependency' between the tasks.
+ As such, it is still possible to execute 'taskY' without first executing the 'taskX' in the example.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ an ordering relationship.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;mustRunAfter The set of task paths this task must run after.
+
+</description>
+        <parameter type="java.lang.Iterable" name="mustRunAfter"/>
+    </method>
+    <method name="setOnlyIf" returnType="void">
+        <description> &lt;p&gt;Execute the task only if the given closure returns true.  The closure will be evaluated at task execution
+ time, not during configuration.  The closure will be passed a single parameter, this task. If the closure returns
+ false, the task will be skipped.&lt;/p&gt;
+
+ &lt;p&gt;The given predicate replaces all such predicates for this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;onlyIfClosure code to execute to determine if task should be run
+
+</description>
+        <parameter type="groovy.lang.Closure" name="onlyIfClosure"/>
+    </method>
+    <method name="setOnlyIf" returnType="void">
+        <description> &lt;p&gt;Execute the task only if the given spec is satisfied. The spec will be evaluated at task execution time, not
+ during configuration. If the Spec is not satisfied, the task will be skipped.&lt;/p&gt;
+
+ &lt;p&gt;The given predicate replaces all such predicates for this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;onlyIfSpec specifies if a task should be run
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="onlyIfSpec"/>
+    </method>
+    <method name="setProperty" returnType="void" documented="true">
+        <description> &lt;p&gt;Sets a property of this task.  This method searches for a property with the given name in the following
+ locations, and sets the property on the first location where it finds the property.&lt;/p&gt;
+
+ &lt;ol&gt;
+
+ &lt;li&gt;The task object itself.  For example, the &lt;code&gt;enabled&lt;/code&gt; project property.&lt;/li&gt;
+
+ &lt;li&gt;The task's convention object.&lt;/li&gt;
+
+ &lt;li&gt;The task's extra properties.&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ If the property is not found, a &lt;a href='type://groovy.lang.MissingPropertyException'&gt;groovy.lang.MissingPropertyException&lt;/a&gt; is thrown.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The value of the property
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="setShouldRunAfter" returnType="void">
+        <description> &lt;p&gt;Specifies the set of tasks that this task should run after.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     shouldRunAfter = ["taskX1", "taskX2"]
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;For each supplied task, this action adds a task 'ordering', and does not specify a 'dependency' between the tasks.
+ As such, it is still possible to execute 'taskY' without first executing the 'taskX' in the example.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ an ordering relationship.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;shouldRunAfter The set of task paths this task should run after.
+
+</description>
+        <parameter type="java.lang.Iterable" name="shouldRunAfter"/>
+    </method>
+    <method name="shouldRunAfter" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Specifies that this task should run after all of the supplied tasks.&lt;/p&gt;
+
+ &lt;pre autoTested="true"&gt;
+ task taskY {
+     shouldRunAfter "taskX"
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;For each supplied task, this action adds a task 'ordering', and does not specify a 'dependency' between the tasks.
+ As such, it is still possible to execute 'taskY' without first executing the 'taskX' in the example.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href="#dependencies"&gt;here&lt;/a&gt; for a description of the types of objects which can be used to specify
+ an ordering relationship.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The tasks this task should run after.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the task object this method is applied to
+
+</description>
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <interface name="java.lang.Comparable"/>
+    <interface name="org.gradle.api.plugins.ExtensionAware"/>
+    <property name="actions" type="java.util.List" documented="true">
+        <description> &lt;p&gt;Returns the sequence of &lt;a href='type://Action'&gt;Action&lt;/a&gt; objects which will be executed by this task, in the order of
+ execution.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task actions in the order they are executed. Returns an empty list if this task has no actions.
+
+</description>
+    </property>
+    <property name="ant" type="org.gradle.api.AntBuilder" documented="true">
+        <description> &lt;p&gt;Returns the &lt;code&gt;AntBuilder&lt;/code&gt; for this task.  You can use this in your build file to execute ant
+ tasks.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;code&gt;AntBuilder&lt;/code&gt;
+
+</description>
+    </property>
+    <property name="convention" type="org.gradle.api.plugins.Convention" documented="true">
+        <description> &lt;p&gt;Returns the &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; object for this task. A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; can use the convention object to
+ contribute properties and methods to this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The convention object. Never returns null.
+
+</description>
+    </property>
+    <property name="dependsOn" type="java.util.Set" documented="true">
+        <description> &lt;p&gt;Returns the dependencies of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependencies of this task. Returns an empty set if this task has no dependencies.
+
+</description>
+    </property>
+    <property name="description" type="java.lang.String" documented="true">
+        <description> Returns the description of this task.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May return null.
+
+</description>
+    </property>
+    <property name="didWork" type="boolean" documented="true">
+        <description> &lt;p&gt;Checks if the task actually did any work.  Even if a Task executes, it may determine that it has nothing to
+ do.  For example, a compilation task may determine that source files have not changed since the last time a the
+ task was run.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this task did any work
+
+</description>
+    </property>
+    <property name="enabled" type="boolean" documented="true">
+        <description> &lt;p&gt;Returns if this task is enabled or not.&lt;/p&gt;
+
+ (see &lt;a href='type://org.gradle.api.Task#setEnabled(boolean)'&gt;#setEnabled(boolean)&lt;/a&gt;)
+
+</description>
+    </property>
+    <property name="finalizedBy" type="org.gradle.api.tasks.TaskDependency" documented="true">
+        <description> &lt;p&gt;Returns tasks that finalize this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that finalize this task. Returns an empty set if there are no finalising tasks for this task.
+
+</description>
+    </property>
+    <property name="group" type="java.lang.String" documented="true">
+        <description> Returns the task group which this task belongs to. The task group is used in reports and user interfaces to
+ group related tasks together when presenting a list of tasks to the user.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The task group for this task. Might be null.
+
+</description>
+    </property>
+    <property name="inputs" type="org.gradle.api.tasks.TaskInputs" documented="true">
+        <description> &lt;p&gt;Returns the inputs of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The inputs. Never returns null.
+
+</description>
+    </property>
+    <property name="logger" type="org.gradle.api.logging.Logger" documented="true">
+        <description> &lt;p&gt;Returns the logger for this task. You can use this in your build file to write log messages.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The logger. Never returns null.
+
+</description>
+    </property>
+    <property name="logging" type="org.gradle.api.logging.LoggingManager" documented="true">
+        <description> Returns the &lt;a href='type://org.gradle.api.logging.LoggingManager'&gt;org.gradle.api.logging.LoggingManager&lt;/a&gt; which can be used to control the logging level and
+ standard output/error capture for this task. By default, System.out is redirected to the Gradle logging system at
+ the QUIET log level, and System.err is redirected at the ERROR log level.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the LoggingManager. Never returns null.
+
+</description>
+    </property>
+    <property name="mustRunAfter" type="org.gradle.api.tasks.TaskDependency" documented="true">
+        <description> &lt;p&gt;Returns tasks that this task must run after.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that this task must run after. Returns an empty set if this task has no tasks it must run after.
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String" documented="true">
+        <description> &lt;p&gt;Returns the name of this task. The name uniquely identifies the task within its &lt;a href='type://Project'&gt;Project&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the task. Never returns null.
+
+</description>
+    </property>
+    <property name="onlyIf" type="groovy.lang.Closure">
+        <description> &lt;p&gt;Execute the task only if the given closure returns true.  The closure will be evaluated at task execution
+ time, not during configuration.  The closure will be passed a single parameter, this task. If the closure returns
+ false, the task will be skipped.&lt;/p&gt;
+
+ &lt;p&gt;The given predicate replaces all such predicates for this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;onlyIfClosure code to execute to determine if task should be run
+
+</description>
+    </property>
+    <property name="outputs" type="org.gradle.api.tasks.TaskOutputs" documented="true">
+        <description> &lt;p&gt;Returns the outputs of this task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The outputs. Never returns null.
+
+</description>
+    </property>
+    <property name="path" type="java.lang.String" documented="true">
+        <description> &lt;p&gt;Returns the path of the task, which is a fully qualified name for the task. The path of a task is the path of
+ its &lt;a href='type://Project'&gt;Project&lt;/a&gt; plus the name of the task, separated by &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the path of the task, which is equal to the path of the project plus the name of the task.
+
+</description>
+    </property>
+    <property name="project" type="org.gradle.api.Project" documented="true">
+        <description> &lt;p&gt;Returns the &lt;a href='type://Project'&gt;Project&lt;/a&gt; which this task belongs to.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The project this task belongs to. Never returns null.
+
+</description>
+    </property>
+    <property name="shouldRunAfter" type="org.gradle.api.tasks.TaskDependency">
+        <description> &lt;p&gt;Returns tasks that this task should run after.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tasks that this task should run after. Returns an empty set if this task has no tasks it must run after.
+
+</description>
+    </property>
+    <property name="state" type="org.gradle.api.tasks.TaskState" documented="true">
+        <description> Returns the execution state of this task. This provides information about the execution of this task, such as
+ whether it has executed, been skipped, has failed, etc.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The execution state of this task. Never returns null.
+
+</description>
+    </property>
+    <property name="taskDependencies" type="org.gradle.api.tasks.TaskDependency" documented="true">
+        <description> &lt;p&gt;Returns a &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; which contains all the tasks that this task depends on.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dependencies of this task. Never returns null.
+
+</description>
+    </property>
+    <property name="temporaryDir" type="java.io.File" documented="true">
+        <description> &lt;p&gt;Returns a directory which this task can use to write temporary files to. Each task instance is provided with a
+ separate temporary directory. There are no guarantees that the contents of this directory will be kept beyond the
+ execution of the task.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null. The directory will already exist.
+
+</description>
+    </property>
+</type>

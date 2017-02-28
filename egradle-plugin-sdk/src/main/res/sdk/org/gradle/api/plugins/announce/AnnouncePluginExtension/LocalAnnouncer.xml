@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.announce.AnnouncePluginExtension.LocalAnnouncer" version="3.0">
+    <method name="getExtension" returnType="org.gradle.api.plugins.announce.AnnouncePluginExtension"/>
+    <method name="getLocal" returnType="org.gradle.api.plugins.announce.Announcer"/>
+    <method name="send" returnType="void">
+        <parameter type="java.lang.String" name="title"/>
+        <parameter type="java.lang.String" name="message"/>
+    </method>
+    <method name="setExtension" returnType="void">
+        <parameter type="org.gradle.api.plugins.announce.AnnouncePluginExtension" name="extension"/>
+    </method>
+    <method name="setLocal" returnType="void">
+        <parameter type="org.gradle.api.plugins.announce.Announcer" name="local"/>
+    </method>
+    <interface name="org.gradle.api.plugins.announce.Announcer"/>
+    <property name="extension" type="org.gradle.api.plugins.announce.AnnouncePluginExtension"/>
+    <property name="local" type="org.gradle.api.plugins.announce.Announcer"/>
+</type>

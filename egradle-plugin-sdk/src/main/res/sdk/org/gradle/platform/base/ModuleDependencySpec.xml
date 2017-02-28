@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ModuleDependencySpec" version="3.0">
+    <description> A dependency onto a module.
+
+</description>
+    <method name="getGroup" returnType="java.lang.String">
+        <description> The group of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module group name
+
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> The name of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module name
+
+</description>
+    </method>
+    <method name="getVersion" returnType="java.lang.String">
+        <description> The version range of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version range
+
+</description>
+    </method>
+    <interface name="org.gradle.platform.base.DependencySpec"/>
+    <property name="group" type="java.lang.String">
+        <description> The group of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module group name
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> The name of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module name
+
+</description>
+    </property>
+    <property name="version" type="java.lang.String">
+        <description> The version range of the module this dependency specification refers to.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the module version range
+
+</description>
+    </property>
+</type>

@@ -216,10 +216,22 @@ public class FileHelper {
 		}
 	}
 
+	/**
+	 * Read file to string buffer
+	 * @param fileName
+	 * @return string buffer, never <code>null</code>
+	 * @throws IOException
+	 */
 	public StringBuffer read(String fileName) throws IOException {
 		return read(new FileReader(fileName));
 	}
 
+	/**
+	 * Read by reader to string buffer
+	 * @param reader
+	 * @return string buffer never <code>null</code>
+	 * @throws IOException
+	 */
 	public StringBuffer read(Reader reader) throws IOException {
 		StringBuffer s = new StringBuffer();
 		try {
@@ -279,5 +291,20 @@ public class FileHelper {
 				throw new IOException("cannot delete file:" + file);
 			}
 		}
+	}
+
+	public File getEGradleUserHomeFolder() {
+		return getEGradleUserHomeFolder(null);
+	}
+
+	public File getEGradleUserHomeFolder(String folder) {
+		String userHome = System.getProperty("user.home");
+		File egradleFolder = new File(userHome,".egradle");
+		File target = egradleFolder;
+		if (! StringUtils.isBlank(folder)){
+			target = new File(egradleFolder, folder);
+		}
+		target.mkdirs();
+		return target;
 	}
 }

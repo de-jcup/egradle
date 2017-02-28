@@ -23,6 +23,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.codeassist.dsl.DSLConstants;
 import de.jcup.egradle.core.Constants;
 
 public class GradleOutputValidatorTest {
@@ -261,7 +262,7 @@ public class GradleOutputValidatorTest {
 	 * <br><br>
 	 * This is not optimal and tests another component part, but it tests that each output created by this tests, does not exceed the current shrink limit.
 	 * Otherwise the tests will not fail but it will not work in EGradle, because the console line handler shrinks the output to the limit given in 
-	 * {@link Constants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So everything what is tested here, has to work in EGradle too
+	 * {@link DSLConstants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So everything what is tested here, has to work in EGradle too
 	 */
 	protected void assertTestOutputDoesNotExceedLimits() {
 		int size = output.size();

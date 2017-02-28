@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.idea.GenerateIdeaModule" version="3.0" superType="org.gradle.plugins.ide.api.XmlGeneratorTask" documented="true">
+    <description> Generates an IDEA module file. If you want to fine tune the idea configuration
+ &lt;p&gt;
+ Please refer to interesting examples on idea configuration in &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;.
+ &lt;p&gt;
+ At this moment nearly all configuration is done via &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;.
+
+</description>
+    <method name="configure" returnType="void">
+        <parameter type="org.gradle.plugins.ide.idea.model.Module" name="xmlModule"/>
+    </method>
+    <method name="create" returnType="org.gradle.plugins.ide.idea.model.Module"/>
+    <method name="getModule" returnType="org.gradle.plugins.ide.idea.model.IdeaModule">
+        <description> The Idea module model containing the details required to generate the module file.
+
+</description>
+    </method>
+    <method name="getOutputFile" returnType="java.io.File">
+        <description> Configures output *.iml file. It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you (including making sure it is unique in the multi-module build). If you really need to
+ change the output file name it is much easier to do it via the &lt;b&gt;idea.module.name&lt;/b&gt; property. &lt;p&gt; Please refer to documentation in &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; &lt;b&gt;name&lt;/b&gt; property. In IntelliJ IDEA
+ the module name is the same as the name of the *.iml file.
+
+</description>
+    </method>
+    <method name="setModule" returnType="void">
+        <parameter type="org.gradle.plugins.ide.idea.model.IdeaModule" name="module"/>
+    </method>
+    <method name="setOutputFile" returnType="void">
+        <parameter type="java.io.File" name="newOutputFile"/>
+    </method>
+    <property name="module" type="org.gradle.plugins.ide.idea.model.IdeaModule" documented="true">
+        <description> The Idea module model containing the details required to generate the module file.
+
+</description>
+    </property>
+    <property name="outputFile" type="java.io.File" documented="true">
+        <description> Configures output *.iml file. It's &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you (including making sure it is unique in the multi-module build). If you really need to
+ change the output file name it is much easier to do it via the &lt;b&gt;idea.module.name&lt;/b&gt; property. &lt;p&gt; Please refer to documentation in &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt; &lt;b&gt;name&lt;/b&gt; property. In IntelliJ IDEA
+ the module name is the same as the name of the *.iml file.
+
+</description>
+    </property>
+</type>

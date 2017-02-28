@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.model.Validate" version="3.0">
+    <description> Denotes that the &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; method rule carrying this annotation validates the rule subject.
+ &lt;p&gt;
+ Validate rules execute after &lt;a href='type://Finalize'&gt;Finalize&lt;/a&gt; rules, but before rule subject is used as an input.
+ The first parameter of the rule is the rule subject, which is &lt;b&gt;immutable&lt;/b&gt;.
+ &lt;p&gt;
+ Please see &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt; for more information on method rules.
+
+</description>
+</type>

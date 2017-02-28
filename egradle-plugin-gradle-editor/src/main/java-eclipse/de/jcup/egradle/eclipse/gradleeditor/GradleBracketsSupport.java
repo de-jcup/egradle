@@ -113,7 +113,7 @@ public final class GradleBracketsSupport extends DefaultCharacterPairMatcher {
 		}
 
 		if (!visible) {
-			statusMessageSupport.setErrorMessage("Matching bracket outside selected element");
+			statusMessageSupport.setErrorMessage("Matching bracket outside selected type");
 			sourceViewer.getTextWidget().getDisplay().beep();
 			return;
 		}

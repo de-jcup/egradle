@@ -39,6 +39,16 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		store.setDefault(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), false);
 		store.setDefault(P_EDITOR_ENCLOSING_BRACKETS.getId(), false);
 		store.setDefault(P_EDITOR_AUTO_CREATE_END_BRACKETSY.getId(), true);
+		
+		store.setDefault(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(), true);
+		store.setDefault(P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), true);
+		store.setDefault(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(), true);
+		
+		
+		store.setDefault(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(), true);
+		store.setDefault(P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), true);
+		store.setDefault(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(), true);
+		
 		/* bracket color */
 		EDITOR_PREFERENCES.setDefaultColor(P_EDITOR_MATCHING_BRACKETS_COLOR, GradleEditorColorConstants.GRAY_JAVA);
 		

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description> Provides information about the build environment for the project that the task is associated with.
+ &lt;p&gt;
+ Currently, this information is limited to the project's declared build script dependencies
+ visualised in a similar manner as provided by &lt;a href='type://DependencyReportTask'&gt;DependencyReportTask&lt;/a&gt;.
+ &lt;p&gt;
+ It is not necessary to manually add a task of this type to your project,
+ as every project automatically has a task of this type by the name &lt;a href='type://"buildEnvironment"'&gt;"buildEnvironment"&lt;/a&gt;.
+
+ &lt;br&gt;(since 2.10)
+
+</description>
+    <method name="generate" returnType="void"/>
+    <method name="generateReport" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="getClientMetaData" returnType="org.gradle.initialization.BuildClientMetaData"/>
+    <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="org.gradle.api.Task" name="element"/>
+    </method>
+    <method name="setRenderer" returnType="void">
+        <parameter type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer" name="dependencyReportRenderer"/>
+    </method>
+    <property name="clientMetaData" type="org.gradle.initialization.BuildClientMetaData"/>
+    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer"/>
+    <property name="satisfiedBy" type="boolean"/>
+    <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
+</type>

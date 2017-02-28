@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.quality.CheckstyleReports" version="3.0">
+    <description> The reporting configuration for the &lt;a href='type://Checkstyle'&gt;Checkstyle&lt;/a&gt; task.
+
+</description>
+    <method name="getHtml" returnType="org.gradle.api.reporting.SingleFileReport">
+        <description> The checkstyle HTML report.
+ &lt;p&gt;
+ This report IS enabled by default.
+ &lt;p&gt;
+ Enabling this report will also cause the XML report to be generated, as the HTML is derived from the XML.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle HTML report
+ &lt;br&gt;(since 2.10)
+
+</description>
+    </method>
+    <method name="getXml" returnType="org.gradle.api.reporting.SingleFileReport">
+        <description> The checkstyle XML report
+ &lt;p&gt;
+ This report IS enabled by default.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle XML report
+
+</description>
+    </method>
+    <interface name="org.gradle.api.reporting.ReportContainer"/>
+    <property name="html" type="org.gradle.api.reporting.SingleFileReport">
+        <description> The checkstyle HTML report.
+ &lt;p&gt;
+ This report IS enabled by default.
+ &lt;p&gt;
+ Enabling this report will also cause the XML report to be generated, as the HTML is derived from the XML.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle HTML report
+ &lt;br&gt;(since 2.10)
+
+</description>
+    </property>
+    <property name="xml" type="org.gradle.api.reporting.SingleFileReport">
+        <description> The checkstyle XML report
+ &lt;p&gt;
+ This report IS enabled by default.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The checkstyle XML report
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.ModelBuilder" version="3.0">
+    <description> A &lt;a href='type://ModelBuilder'&gt;ModelBuilder&lt;/a&gt; allows you to fetch a snapshot of some model for a project or a build.
+ Instances of &lt;a href='type://ModelBuilder'&gt;ModelBuilder&lt;/a&gt; are not thread-safe.
+ &lt;p&gt;
+ You use a &lt;a href='type://ModelBuilder'&gt;ModelBuilder&lt;/a&gt; as follows:
+
+ &lt;ul&gt;
+ &lt;li&gt;Create an instance of &lt;a href='type://ModelBuilder'&gt;ModelBuilder&lt;/a&gt; by calling &lt;a href='type://org.gradle.tooling.ProjectConnection#model(Class)'&gt;org.gradle.tooling.ProjectConnection#model(Class)&lt;/a&gt;.
+ &lt;li&gt;Configure the builder as appropriate.
+ &lt;li&gt;Call either &lt;a href='type://org.gradle.tooling.ModelBuilder#get()'&gt;#get()&lt;/a&gt; or &lt;a href='type://org.gradle.tooling.ModelBuilder#get(ResultHandler)'&gt;#get(ResultHandler)&lt;/a&gt; to build the model.
+ &lt;li&gt;Optionally, you can reuse the builder to build the model multiple times.
+ &lt;/ul&gt;
+
+ Example:
+ &lt;pre autoTested=''&gt;
+ ProjectConnection connection = GradleConnector.newConnector()
+    .forProjectDirectory(new File("someFolder"))
+    .connect();
+
+ try {
+    ModelBuilder&amp;lt;GradleProject&amp;gt; builder = connection.model(GradleProject.class);
+
+    &lt;em class='comment'&gt;//if you use a different than usual build file name:&lt;/em&gt;
+    builder.withArguments("--build-file", "theBuild.gradle");
+
+    &lt;em class='comment'&gt;//configure the standard input in case your build is interactive:&lt;/em&gt;
+    builder.setStandardInput(new ByteArrayInputStream("consume this!".getBytes()));
+
+    &lt;em class='comment'&gt;//if you want to listen to the progress events:&lt;/em&gt;
+    ProgressListener listener = null; &lt;em class='comment'&gt;// use your implementation&lt;/em&gt;
+    builder.addProgressListener(listener);
+
+    &lt;em class='comment'&gt;//get the model:&lt;/em&gt;
+    GradleProject project = builder.get();
+
+    &lt;em class='comment'&gt;//query the model for information:&lt;/em&gt;
+    System.out.println("Available tasks: " + project.getTasks());
+ } finally {
+    connection.close();
+ }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of model to build
+ &lt;br&gt;(since 1.0-milestone-3)
+
+</description>
+    <method name="forTasks" returnType="org.gradle.tooling.ModelBuilder">
+        <description> Specifies the tasks to execute before building the model.
+
+ If not configured, null, or an empty array is passed, then no tasks will be executed.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The paths of the tasks to be executed. Relative paths are evaluated relative to the project for which this launcher was created.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.6)
+
+</description>
+        <parameter type="java.lang.Iterable" name="tasks"/>
+    </method>
+    <method name="forTasks" returnType="org.gradle.tooling.ModelBuilder">
+        <description> Specifies the tasks to execute before building the model.
+
+ If not configured, null, or an empty array is passed, then no tasks will be executed.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The paths of the tasks to be executed. Relative paths are evaluated relative to the project for which this launcher was created.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 1.2)
+
+</description>
+        <parameter type="java.lang.String" name="tasks"/>
+    </method>
+    <method name="get" returnType="T">
+        <description> Fetch the model, blocking until it is available.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The model.
+ @throws UnsupportedVersionException When the target Gradle version does not support building models.
+ @throws UnknownModelException When the target Gradle version or build does not support the requested model.
+ @throws org.gradle.tooling.exceptions.UnsupportedOperationConfigurationException
+          When the target Gradle version does not support some requested configuration option such as &lt;a href='type://org.gradle.tooling.ModelBuilder#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt;.
+ @throws org.gradle.tooling.exceptions.UnsupportedBuildArgumentException When there is a problem with build arguments provided by &lt;a href='type://org.gradle.tooling.ModelBuilder#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt;.
+ @throws BuildException On some failure executing the Gradle build.
+ @throws BuildCancelledException When the operation was cancelled before it completed successfully.
+ @throws GradleConnectionException On some other failure using the connection.
+ @throws IllegalStateException When the connection has been closed or is closing.
+ &lt;br&gt;(since 1.0-milestone-3)
+
+</description>
+    </method>
+    <method name="get" returnType="void">
+        <description> Starts fetching the model, passing the result to the given handler when complete. This method returns immediately, and the result is later passed to the given
+ handler's &lt;a href='type://ResultHandler#onComplete(Object)'&gt;ResultHandler#onComplete(Object)&lt;/a&gt; method.
+
+ &lt;p&gt;If the operation fails, the handler's &lt;a href='type://ResultHandler#onFailure(GradleConnectionException)'&gt;ResultHandler#onFailure(GradleConnectionException)&lt;/a&gt;
+ method is called with the appropriate exception. See &lt;a href='type://org.gradle.tooling.ModelBuilder#get()'&gt;#get()&lt;/a&gt; for a description of the various exceptions that the operation may fail with.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;handler The handler to supply the result to.
+ @throws IllegalStateException When the connection has been closed or is closing.
+ &lt;br&gt;(since 1.0-milestone-3)
+
+</description>
+        <parameter type="org.gradle.tooling.ResultHandler" name="handler"/>
+    </method>
+    <interface name="org.gradle.tooling.ConfigurableLauncher"/>
+</type>

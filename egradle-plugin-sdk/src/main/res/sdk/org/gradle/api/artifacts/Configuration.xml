@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.Configuration" version="3.0" documented="true">
+    <description> A &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; represents a group of artifacts and their dependencies.
+ Find more information about declaring dependencies to a configuration
+ or about managing configurations in docs for &lt;a href='type://ConfigurationContainer'&gt;ConfigurationContainer&lt;/a&gt;
+ &lt;p&gt;
+ Configuration is an instance of a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt;
+ that contains all dependencies (see also &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllDependencies()'&gt;#getAllDependencies()&lt;/a&gt;) but not artifacts.
+ If you want to refer to the artifacts declared in this configuration
+ please use &lt;a href='type://org.gradle.api.artifacts.Configuration#getArtifacts()'&gt;#getArtifacts()&lt;/a&gt; or &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllArtifacts()'&gt;#getAllArtifacts()&lt;/a&gt;.
+ Read more about declaring artifacts in the configuration in docs for &lt;a href='type://org.gradle.api.artifacts.dsl.ArtifactHandler'&gt;org.gradle.api.artifacts.dsl.ArtifactHandler&lt;/a&gt;
+ &lt;p&gt;
+
+</description>
+    <method name="copy" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Creates a copy of this configuration that only contains the dependencies directly in this configuration
+ (without contributions from superconfigurations).  The new configuration will be in the
+ UNRESOLVED state, but will retain all other attributes of this configuration except superconfigurations.
+ &lt;a href='type://org.gradle.api.artifacts.Configuration#getHierarchy()'&gt;#getHierarchy()&lt;/a&gt; for the copy will not include any superconfigurations.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+    </method>
+    <method name="copy" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Takes a closure which gets coerced into a Spec. Behaves otherwise in the same way as &lt;a href='type://org.gradle.api.artifacts.Configuration#copy(org.gradle.api.specs.Spec)'&gt;#copy(org.gradle.api.specs.Spec)&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec filtering requirements
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+        <parameter type="groovy.lang.Closure" name="dependencySpec"/>
+    </method>
+    <method name="copy" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Creates a copy of this configuration ignoring superconfigurations (see &lt;a href='type://org.gradle.api.artifacts.Configuration#copy()'&gt;#copy()&lt;/a&gt; but filtering
+ the dependencies using the specified dependency spec.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec filtering requirements
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="copyRecursive" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Creates a copy of this configuration that contains the dependencies directly in this configuration
+ and those derived from superconfigurations.  The new configuration will be in the
+ UNRESOLVED state, but will retain all other attributes of this configuration except superconfigurations.
+ &lt;a href='type://org.gradle.api.artifacts.Configuration#getHierarchy()'&gt;#getHierarchy()&lt;/a&gt; for the copy will not include any superconfigurations.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+    </method>
+    <method name="copyRecursive" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Takes a closure which gets coerced into a Spec. Behaves otherwise in the same way as &lt;a href='type://org.gradle.api.artifacts.Configuration#copyRecursive(org.gradle.api.specs.Spec)'&gt;#copyRecursive(org.gradle.api.specs.Spec)&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec filtering requirements
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+        <parameter type="groovy.lang.Closure" name="dependencySpec"/>
+    </method>
+    <method name="copyRecursive" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Creates a copy of this configuration with dependencies from superconfigurations (see &lt;a href='type://org.gradle.api.artifacts.Configuration#copyRecursive()'&gt;#copyRecursive()&lt;/a&gt;)
+ but filtering the dependencies using the dependencySpec.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec filtering requirements
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;copy of this configuration
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="defaultDependencies" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Execute the given action if the configuration has no defined dependencies when it first participates in
+ dependency resolution. A &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; will participate in dependency resolution
+ when:
+ &lt;ul&gt;
+     &lt;li&gt;The &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; itself is resolved&lt;/li&gt;
+     &lt;li&gt;Another &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; that extends this one is resolved&lt;/li&gt;
+     &lt;li&gt;Another &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; that references this one as a project dependency is resolved&lt;/li&gt;
+ &lt;/ul&gt;
+
+
+ This method is useful for specifying default dependencies for a configuration:
+ &lt;pre autoTested='true'&gt;
+ configurations { conf }
+ configurations['conf'].defaultDependencies { dependencies -&gt;
+      dependencies.add(owner.project.dependencies.create("org.gradle:my-util:1.0"))
+ }
+ &lt;/pre&gt;
+
+ A &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; is considered empty even if it extends another, non-empty &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt;.
+
+ If multiple actions are supplied, each action will be executed until the set of dependencies is no longer empty.
+ Remaining actions will be ignored.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to execute when the configuration has no defined dependencies.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="exclude" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Adds an exclude rule to exclude transitive dependencies for all dependencies of this configuration.
+ You can also add exclude rules per-dependency. See &lt;a href='type://ModuleDependency#exclude(java.util.Map)'&gt;ModuleDependency#exclude(java.util.Map)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;excludeProperties the properties to define the exclude rule.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.util.Map" name="excludeProperties"/>
+    </method>
+    <method name="extendsFrom" returnType="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Adds the given configurations to the set of configuration which this configuration extends from.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;superConfigs The super configurations.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration
+
+</description>
+        <parameter type="org.gradle.api.artifacts.Configuration" name="superConfigs"/>
+    </method>
+    <method name="fileCollection" returnType="org.gradle.api.file.FileCollection" documented="true">
+        <description> Takes a closure which gets coerced into a Spec. Behaves otherwise in the same way as
+ &lt;a href='type://org.gradle.api.artifacts.Configuration#fileCollection(org.gradle.api.specs.Spec)'&gt;#fileCollection(org.gradle.api.specs.Spec)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpecClosure The closure describing a filter applied to the all the dependencies of this configuration (including dependencies from extended configurations).
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The FileCollection with a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="dependencySpecClosure"/>
+    </method>
+    <method name="fileCollection" returnType="org.gradle.api.file.FileCollection" documented="true">
+        <description> Resolves this configuration lazily. The resolve happens when the elements of the returned FileCollection get accessed the first time.
+ This locates and downloads the files which make up this configuration. Only the resulting set of files belonging to specified
+ dependencies is contained in the FileCollection.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencies The dependencies for which the FileCollection should contain the files.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The FileCollection with a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="org.gradle.api.artifacts.Dependency" name="dependencies"/>
+    </method>
+    <method name="fileCollection" returnType="org.gradle.api.file.FileCollection" documented="true">
+        <description> Resolves this configuration lazily. The resolve happens when the elements of the returned FileCollection get accessed the first time.
+ This locates and downloads the files which make up this configuration. Only the resulting set of files belonging to the subset
+ of dependencies specified by the dependencySpec is contained in the FileCollection.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec The spec describing a filter applied to the all the dependencies of this configuration (including dependencies from extended configurations).
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The FileCollection with a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="files" returnType="java.util.Set" documented="true">
+        <description> Takes a closure which gets coerced into a Spec. Behaves otherwise in the same way as
+ &lt;a href='type://org.gradle.api.artifacts.Configuration#files(org.gradle.api.specs.Spec)'&gt;#files(org.gradle.api.specs.Spec)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpecClosure The closure describing a filter applied to the all the dependencies of this configuration (including dependencies from extended configurations).
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files of a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="dependencySpecClosure"/>
+    </method>
+    <method name="files" returnType="java.util.Set" documented="true">
+        <description> Resolves this configuration. This locates and downloads the files which make up this configuration.
+ But only the resulting set of files belonging to the specified dependencies
+ is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencies The dependences to be resolved
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files of a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="org.gradle.api.artifacts.Dependency" name="dependencies"/>
+    </method>
+    <method name="files" returnType="java.util.Set" documented="true">
+        <description> Resolves this configuration. This locates and downloads the files which make up this configuration.
+ But only the resulting set of files belonging to the subset of dependencies specified by the dependencySpec
+ is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec The spec describing a filter applied to the all the dependencies of this configuration (including dependencies from extended configurations).
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files of a subset of dependencies of this configuration.
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="getAll" returnType="java.util.Set">
+        <description> Returns all the configurations belonging to the same configuration container as this
+ configuration (including this configuration).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the configurations belong to the configuration container that this set belongs to.
+
+</description>
+    </method>
+    <method name="getAllArtifacts" returnType="org.gradle.api.artifacts.PublishArtifactSet">
+        <description> Returns the artifacts of this configuration including the artifacts of extended configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The (read-only) set.
+
+</description>
+    </method>
+    <method name="getAllDependencies" returnType="org.gradle.api.artifacts.DependencySet">
+        <description> &lt;p&gt;Gets the complete set of dependencies including those contributed by
+ superconfigurations.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the (read-only) set of dependencies
+
+</description>
+    </method>
+    <method name="getArtifacts" returnType="org.gradle.api.artifacts.PublishArtifactSet">
+        <description> Returns the artifacts of this configuration excluding the artifacts of extended configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set.
+
+</description>
+    </method>
+    <method name="getBuildDependencies" returnType="org.gradle.api.tasks.TaskDependency">
+        <description> Returns a &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; object containing all required dependencies to build the internal dependencies
+ (e.g.&lt;!-- --&gt; project dependencies) belonging to this configuration or to one of its super configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a TaskDependency object
+
+</description>
+    </method>
+    <method name="getDependencies" returnType="org.gradle.api.artifacts.DependencySet">
+        <description> Gets the set of dependencies directly contained in this configuration
+ (ignoring superconfigurations).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of dependencies
+
+</description>
+    </method>
+    <method name="getDescription" returnType="java.lang.String">
+        <description> Returns the description for this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May be null.
+
+</description>
+    </method>
+    <method name="getExcludeRules" returnType="java.util.Set">
+        <description> Returns the exclude rules applied for resolving any dependency of this configuration.
+
+ (see &lt;a href='type://org.gradle.api.artifacts.Configuration#exclude(java.util.Map)'&gt;#exclude(java.util.Map)&lt;/a&gt;)
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude rules
+
+</description>
+    </method>
+    <method name="getExtendsFrom" returnType="java.util.Set">
+        <description> Returns the names of the configurations which this configuration extends from. The artifacts of the super
+ configurations are also available in this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The super configurations. Returns an empty set when this configuration does not extend any others.
+
+</description>
+    </method>
+    <method name="getHierarchy" returnType="java.util.Set">
+        <description> Gets a ordered set including this configuration and all superconfigurations
+ recursively.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the list of all configurations
+
+</description>
+    </method>
+    <method name="getIncoming" returnType="org.gradle.api.artifacts.ResolvableDependencies">
+        <description> Returns the incoming dependencies of this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The incoming dependencies of this configuration. Never &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> Returns the name of this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration name, never null.
+
+</description>
+    </method>
+    <method name="getResolutionStrategy" returnType="org.gradle.api.artifacts.ResolutionStrategy">
+        <description> Returns the resolution strategy used by this configuration.
+ The resolution strategy provides extra details on how to resolve this configuration.
+ See docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; for more info and examples.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolution strategy
+ &lt;br&gt;(since 1.0-milestone-6)
+
+</description>
+    </method>
+    <method name="getResolvedConfiguration" returnType="org.gradle.api.artifacts.ResolvedConfiguration">
+        <description> Resolves this configuration. This locates and downloads the files which make up this configuration, and returns
+ a ResolvedConfiguration that may be used to determine information about the resolve (including errors).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The ResolvedConfiguration object
+
+</description>
+    </method>
+    <method name="getState" returnType="org.gradle.api.artifacts.Configuration.State">
+        <description> A &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; represents a group of artifacts and their dependencies.
+ Find more information about declaring dependencies to a configuration
+ or about managing configurations in docs for &lt;a href='type://ConfigurationContainer'&gt;ConfigurationContainer&lt;/a&gt;
+ &lt;p&gt;
+ Configuration is an instance of a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt;
+ that contains all dependencies (see also &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllDependencies()'&gt;#getAllDependencies()&lt;/a&gt;) but not artifacts.
+ If you want to refer to the artifacts declared in this configuration
+ please use &lt;a href='type://org.gradle.api.artifacts.Configuration#getArtifacts()'&gt;#getArtifacts()&lt;/a&gt; or &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllArtifacts()'&gt;#getAllArtifacts()&lt;/a&gt;.
+ Read more about declaring artifacts in the configuration in docs for &lt;a href='type://org.gradle.api.artifacts.dsl.ArtifactHandler'&gt;org.gradle.api.artifacts.dsl.ArtifactHandler&lt;/a&gt;
+ &lt;p&gt;
+
+</description>
+    </method>
+    <method name="getTaskDependencyFromProjectDependency" returnType="org.gradle.api.tasks.TaskDependency" documented="true">
+        <description> Returns a TaskDependency object containing dependencies on all tasks with the specified name from project
+ dependencies related to this configuration or one of its super configurations.  These other projects may be
+ projects this configuration depends on or projects with a similarly named configuration that depend on this one
+ based on the useDependOn argument.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useDependedOn if true, add tasks from project dependencies in this configuration, otherwise use projects
+                      from configurations with the same name that depend on this one.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskName name of task to depend on
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the populated TaskDependency object
+
+</description>
+        <parameter type="boolean" name="useDependedOn"/>
+        <parameter type="java.lang.String" name="taskName"/>
+    </method>
+    <method name="getUploadTaskName" returnType="java.lang.String">
+        <description> Returns the name of the task that upload the artifacts of this configuration to repositories
+ declared by the user.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the associated upload task
+ (see &lt;a href='type://org.gradle.api.tasks.Upload'&gt;org.gradle.api.tasks.Upload&lt;/a&gt;)
+
+</description>
+    </method>
+    <method name="isTransitive" returnType="boolean">
+        <description> Returns the transitivity of this configuration. A transitive configuration contains the transitive closure of its
+ direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
+ dependencies. The default value is true.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this is a transitive configuration, false otherwise.
+
+</description>
+    </method>
+    <method name="isVisible" returnType="boolean">
+        <description> Returns true if this is a visible configuration. A visible configuration is usable outside the project it belongs
+ to. The default value is true.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this is a visible configuration.
+
+</description>
+    </method>
+    <method name="resolutionStrategy" returnType="org.gradle.api.artifacts.Configuration" delegationTarget="org.gradle.api.artifacts.ResolutionStrategy">
+        <description> The resolution strategy provides extra details on how to resolve this configuration.
+ See docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; for more info and examples.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure closure applied to the &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt;
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration instance
+ &lt;br&gt;(since 1.0-milestone-6)
+
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="resolve" returnType="java.util.Set">
+        <description> Resolves this configuration. This locates and downloads the files which make up this configuration, and returns
+ the resulting set of files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The files of this configuration.
+
+</description>
+    </method>
+    <method name="setDescription" returnType="org.gradle.api.artifacts.Configuration">
+        <description> Sets the description for this configuration.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;description the description. May be null
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration
+
+</description>
+        <parameter type="java.lang.String" name="description"/>
+    </method>
+    <method name="setExtendsFrom" returnType="org.gradle.api.artifacts.Configuration">
+        <description> Sets the configurations which this configuration extends from.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;superConfigs The super configuration. Should not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration
+
+</description>
+        <parameter type="java.lang.Iterable" name="superConfigs"/>
+    </method>
+    <method name="setTransitive" returnType="org.gradle.api.artifacts.Configuration">
+        <description> Sets the transitivity of this configuration. When set to true, this configuration will contain the transitive
+ closure of its dependencies and their dependencies. The default value is true.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;t true if this is a transitive configuration.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration
+
+</description>
+        <parameter type="boolean" name="t"/>
+    </method>
+    <method name="setVisible" returnType="org.gradle.api.artifacts.Configuration">
+        <description> Sets the visibility of this configuration. When visible is set to true, this configuration is visible outside
+ the project it belongs to. The default value is true.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;visible true if this is a visible configuration
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this configuration
+
+</description>
+        <parameter type="boolean" name="visible"/>
+    </method>
+    <interface name="org.gradle.api.file.FileCollection"/>
+    <property name="all" type="java.util.Set">
+        <description> Returns all the configurations belonging to the same configuration container as this
+ configuration (including this configuration).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the configurations belong to the configuration container that this set belongs to.
+
+</description>
+    </property>
+    <property name="allArtifacts" type="org.gradle.api.artifacts.PublishArtifactSet" documented="true">
+        <description> Returns the artifacts of this configuration including the artifacts of extended configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The (read-only) set.
+
+</description>
+    </property>
+    <property name="allDependencies" type="org.gradle.api.artifacts.DependencySet" documented="true">
+        <description> &lt;p&gt;Gets the complete set of dependencies including those contributed by
+ superconfigurations.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the (read-only) set of dependencies
+
+</description>
+    </property>
+    <property name="artifacts" type="org.gradle.api.artifacts.PublishArtifactSet" documented="true">
+        <description> Returns the artifacts of this configuration excluding the artifacts of extended configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set.
+
+</description>
+    </property>
+    <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency" documented="true">
+        <description> Returns a &lt;a href='type://TaskDependency'&gt;TaskDependency&lt;/a&gt; object containing all required dependencies to build the internal dependencies
+ (e.g.&lt;!-- --&gt; project dependencies) belonging to this configuration or to one of its super configurations.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a TaskDependency object
+
+</description>
+    </property>
+    <property name="dependencies" type="org.gradle.api.artifacts.DependencySet" documented="true">
+        <description> Gets the set of dependencies directly contained in this configuration
+ (ignoring superconfigurations).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of dependencies
+
+</description>
+    </property>
+    <property name="description" type="java.lang.String" documented="true">
+        <description> Returns the description for this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May be null.
+
+</description>
+    </property>
+    <property name="excludeRules" type="java.util.Set" documented="true">
+        <description> Returns the exclude rules applied for resolving any dependency of this configuration.
+
+ (see &lt;a href='type://org.gradle.api.artifacts.Configuration#exclude(java.util.Map)'&gt;#exclude(java.util.Map)&lt;/a&gt;)
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exclude rules
+
+</description>
+    </property>
+    <property name="extendsFrom" type="java.util.Set" documented="true">
+        <description> Returns the names of the configurations which this configuration extends from. The artifacts of the super
+ configurations are also available in this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The super configurations. Returns an empty set when this configuration does not extend any others.
+
+</description>
+    </property>
+    <property name="hierarchy" type="java.util.Set" documented="true">
+        <description> Gets a ordered set including this configuration and all superconfigurations
+ recursively.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the list of all configurations
+
+</description>
+    </property>
+    <property name="incoming" type="org.gradle.api.artifacts.ResolvableDependencies" documented="true">
+        <description> Returns the incoming dependencies of this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The incoming dependencies of this configuration. Never &lt;a href='type://null'&gt;null&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String" documented="true">
+        <description> Returns the name of this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The configuration name, never null.
+
+</description>
+    </property>
+    <property name="resolutionStrategy" type="org.gradle.api.artifacts.ResolutionStrategy" documented="true">
+        <description> Returns the resolution strategy used by this configuration.
+ The resolution strategy provides extra details on how to resolve this configuration.
+ See docs for &lt;a href='type://ResolutionStrategy'&gt;ResolutionStrategy&lt;/a&gt; for more info and examples.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;resolution strategy
+ &lt;br&gt;(since 1.0-milestone-6)
+
+</description>
+    </property>
+    <property name="resolvedConfiguration" type="org.gradle.api.artifacts.ResolvedConfiguration" documented="true">
+        <description> Resolves this configuration. This locates and downloads the files which make up this configuration, and returns
+ a ResolvedConfiguration that may be used to determine information about the resolve (including errors).
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The ResolvedConfiguration object
+
+</description>
+    </property>
+    <property name="state" type="org.gradle.api.artifacts.Configuration.State" documented="true">
+        <description> A &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; represents a group of artifacts and their dependencies.
+ Find more information about declaring dependencies to a configuration
+ or about managing configurations in docs for &lt;a href='type://ConfigurationContainer'&gt;ConfigurationContainer&lt;/a&gt;
+ &lt;p&gt;
+ Configuration is an instance of a &lt;a href='type://FileCollection'&gt;FileCollection&lt;/a&gt;
+ that contains all dependencies (see also &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllDependencies()'&gt;#getAllDependencies()&lt;/a&gt;) but not artifacts.
+ If you want to refer to the artifacts declared in this configuration
+ please use &lt;a href='type://org.gradle.api.artifacts.Configuration#getArtifacts()'&gt;#getArtifacts()&lt;/a&gt; or &lt;a href='type://org.gradle.api.artifacts.Configuration#getAllArtifacts()'&gt;#getAllArtifacts()&lt;/a&gt;.
+ Read more about declaring artifacts in the configuration in docs for &lt;a href='type://org.gradle.api.artifacts.dsl.ArtifactHandler'&gt;org.gradle.api.artifacts.dsl.ArtifactHandler&lt;/a&gt;
+ &lt;p&gt;
+
+</description>
+    </property>
+    <property name="taskDependencyFromProjectDependency" type="org.gradle.api.tasks.TaskDependency">
+        <description> Returns a TaskDependency object containing dependencies on all tasks with the specified name from project
+ dependencies related to this configuration or one of its super configurations.  These other projects may be
+ projects this configuration depends on or projects with a similarly named configuration that depend on this one
+ based on the useDependOn argument.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;useDependedOn if true, add tasks from project dependencies in this configuration, otherwise use projects
+                      from configurations with the same name that depend on this one.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;taskName name of task to depend on
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the populated TaskDependency object
+
+</description>
+    </property>
+    <property name="transitive" type="boolean" documented="true">
+        <description> Returns the transitivity of this configuration. A transitive configuration contains the transitive closure of its
+ direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
+ dependencies. The default value is true.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this is a transitive configuration, false otherwise.
+
+</description>
+    </property>
+    <property name="uploadTaskName" type="java.lang.String">
+        <description> Returns the name of the task that upload the artifacts of this configuration to repositories
+ declared by the user.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name of the associated upload task
+ (see &lt;a href='type://org.gradle.api.tasks.Upload'&gt;org.gradle.api.tasks.Upload&lt;/a&gt;)
+
+</description>
+    </property>
+    <property name="visible" type="boolean" documented="true">
+        <description> Returns true if this is a visible configuration. A visible configuration is usable outside the project it belongs
+ to. The default value is true.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this is a visible configuration.
+
+</description>
+    </property>
+</type>

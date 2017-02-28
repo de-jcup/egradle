@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.StaticLibraryBinarySpec.TasksCollection" version="3.0">
+    <description> Provides access to key tasks used for building the binary.
+
+</description>
+    <method name="getCreateStaticLib" returnType="org.gradle.api.Task">
+        <description> The create static library task.
+
+</description>
+    </method>
+    <interface name="org.gradle.platform.base.BinaryTasksCollection"/>
+    <property name="createStaticLib" type="org.gradle.api.Task">
+        <description> The create static library task.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.plugins.NativeComponentModelPlugin.ArtifactRepositoryNamer" version="3.0">
+    <method name="determineName" returnType="java.lang.String">
+        <parameter type="org.gradle.api.artifacts.repositories.ArtifactRepository" name="object"/>
+    </method>
+    <interface name="org.gradle.api.Namer"/>
+</type>

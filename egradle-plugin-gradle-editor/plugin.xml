@@ -171,7 +171,13 @@
                id="egradle.preferences.keyword.egradle">
          </keywordReference>
       </page>
-   </extension>
+      <page
+         id="egradle.eclipse.gradleeditor.preferences.EGradleEditorCodeCompletionPreferencePage"
+         class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorCodeCompletionPreferencePage"
+         name="Code assist"
+         category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage">
+      </page>
+    </extension>
     <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.Nullable" version="3.0">
+    <description> Indicates that the value of an element can be null.
+
+</description>
+</type>

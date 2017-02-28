@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.toolchain.plugins.ClangCompilerPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="addToolChain" returnType="void">
+        <parameter type="org.gradle.nativeplatform.toolchain.internal.NativeToolChainRegistryInternal" name="toolChainRegistry"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
+    </method>
+    <method name="create" returnType="org.gradle.nativeplatform.toolchain.Clang">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+</type>

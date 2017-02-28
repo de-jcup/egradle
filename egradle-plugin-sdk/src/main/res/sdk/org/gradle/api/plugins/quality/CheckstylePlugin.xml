@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.quality.CheckstylePlugin" version="3.0">
+    <description> Checkstyle Plugin.
+
+</description>
+    <method name="call" returnType="java.io.File"/>
+    <method name="configureDefaultDependencies" returnType="void">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
+    </method>
+    <method name="configureForSourceSet" returnType="void">
+        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
+        <parameter type="org.gradle.api.plugins.quality.Checkstyle" name="task"/>
+    </method>
+    <method name="configureReportsConventionMapping" returnType="void">
+        <parameter type="org.gradle.api.plugins.quality.Checkstyle" name="task"/>
+        <parameter type="java.lang.String" name="baseName"/>
+    </method>
+    <method name="configureTaskConventionMapping" returnType="void">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
+        <parameter type="org.gradle.api.plugins.quality.Checkstyle" name="task"/>
+    </method>
+    <method name="configureTaskDefaults" returnType="void">
+        <parameter type="org.gradle.api.plugins.quality.Checkstyle" name="task"/>
+        <parameter type="java.lang.String" name="baseName"/>
+    </method>
+    <method name="createExtension" returnType="org.gradle.api.plugins.quality.CodeQualityExtension"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.DependencySet" name="dependencies"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.reporting.SingleFileReport" name="report"/>
+    </method>
+    <method name="getTaskType" returnType="java.lang.Class"/>
+    <method name="getToolName" returnType="java.lang.String"/>
+    <property name="taskType" type="java.lang.Class"/>
+    <property name="toolName" type="java.lang.String"/>
+</type>

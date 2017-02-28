@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.testkit.runner.InvalidRunnerConfigurationException" version="3.0">
+    <description> Thrown when a build cannot be executed due to the runner being in an invalid state.
+
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://GradleRunner#build()'&gt;GradleRunner#build()&lt;/a&gt;)
+ (see &lt;a href='type://GradleRunner#buildAndFail()'&gt;GradleRunner#buildAndFail()&lt;/a&gt;)
+
+</description>
+</type>

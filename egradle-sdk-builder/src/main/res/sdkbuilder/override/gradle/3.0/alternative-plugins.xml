@@ -1,0 +1,8 @@
+<plugins>
+    <plugin id="core" description="Gradle API parts">
+    	<extends id="war" extensionClass="org.gradle.api.tasks.bundling.War" targetClass="org.gradle.api.Project" />
+        <extends id="jar" extensionClass="org.gradle.api.tasks.bundling.Jar" targetClass="org.gradle.api.Project" />
+        <extends id="zip" extensionClass="org.gradle.api.tasks.bundling.Zip" targetClass="org.gradle.api.Project" />
+        <extends id="tar" extensionClass="org.gradle.api.tasks.bundling.Tar" targetClass="org.gradle.api.Project" />
+    </plugin>
+</plugins>

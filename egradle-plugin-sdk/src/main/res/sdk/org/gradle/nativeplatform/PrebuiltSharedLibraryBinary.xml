@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.PrebuiltSharedLibraryBinary" version="3.0" documented="true">
+    <description> A shared library that exists at a known location on the filesystem.
+
+</description>
+    <method name="setSharedLibraryFile" returnType="void">
+        <description> The shared library file.
+
+</description>
+        <parameter type="java.io.File" name="sharedLibraryFile"/>
+    </method>
+    <method name="setSharedLibraryLinkFile" returnType="void">
+        <description> The shared library link file.
+
+</description>
+        <parameter type="java.io.File" name="sharedLibraryLinkFile"/>
+    </method>
+    <interface name="org.gradle.nativeplatform.SharedLibraryBinary"/>
+    <property name="sharedLibraryFile" type="java.io.File">
+        <description> The shared library file.
+
+</description>
+    </property>
+    <property name="sharedLibraryLinkFile" type="java.io.File">
+        <description> The shared library link file.
+
+</description>
+    </property>
+</type>

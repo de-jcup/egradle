@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ivy.IvyExtraInfo" version="3.0">
+    <description> Represents the set of "extra" info elements in the Ivy descriptor.  These elements
+ are children of the "ivy" element, but are not defined in the Ivy schema and come
+ from other namespaces.
+
+</description>
+    <method name="asMap" returnType="java.util.Map">
+        <description> Returns a map view of the 'extra' info elements such that each key is a javax.xml.namespace.QName
+ representing the namespace and name of the element and each value is the content of the element.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The map view of the extra info elements. Returns an empty map if there are no elements.
+
+</description>
+    </method>
+    <method name="get" returnType="java.lang.String">
+        <description> Returns the value of the element with the unique element name.  If there are multiple elements with the same element name,
+ in different namespaces, a &lt;a href='type://org.gradle.api.InvalidUserDataException'&gt;org.gradle.api.InvalidUserDataException&lt;/a&gt; will be thrown.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The unique name of the element whose value should be returned
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of the element, or null if there is no such element.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="get" returnType="java.lang.String">
+        <description> Returns the value of the element with the name and namespace provided.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;namespace The namespace of the element whose value should be returned
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the element whose value should be returned
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value of the element, or null if there is no such element.
+
+</description>
+        <parameter type="java.lang.String" name="namespace"/>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+</type>

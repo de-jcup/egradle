@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.Namer" version="3.0">
+    <description> A namer is capable of providing a name based on some inherent characteristic of an object.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of object that the namer can name
+
+</description>
+    <method name="determineName" returnType="java.lang.String">
+        <description> Determines the name of the given object.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;object The object to determine the name of
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object's inherent name. Never null.
+ @throws RuntimeException If the name cannot be determined or is null
+
+</description>
+        <parameter type="T" name="object"/>
+    </method>
+</type>

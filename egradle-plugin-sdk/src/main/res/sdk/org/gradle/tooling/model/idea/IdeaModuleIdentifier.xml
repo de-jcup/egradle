@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaModuleIdentifier" version="3.0">
+    <description> Identifies an Idea module.
+
+ &lt;br&gt;(since 2.14)
+
+</description>
+</type>

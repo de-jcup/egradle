@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Item {
 
 	@Override
@@ -48,8 +50,26 @@ public class Item {
 
 	private String type;
 
+	private boolean aPossibleParent;
+
+	private boolean isClosureBlock;
+
+	private String identifier;
+
+	public boolean isClosureBlock() {
+		return isClosureBlock;
+	}
+
+	public void setClosureBlock(boolean isClosure) {
+		this.isClosureBlock = isClosure;
+	}
+
 	public void setItemType(ItemType type) {
 		this.itemType = type;
+	}
+
+	public boolean isRoot() {
+		return parent == null;
 	}
 
 	/**
@@ -118,12 +138,52 @@ public class Item {
 		this.length = length;
 	}
 
+	/**
+	 * Set name and calculate identifier - if you want to explicit set identifer you must it after calling this method via
+	 * {@link #setIdentifier(String)}
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
+		if (name == null) {
+			name = "";
+		}
 		this.name = name;
+		String[] splitted = StringUtils.split(name.trim());
+		if (splitted == null || splitted.length == 0) {
+			this.identifier = "";
+		} else {
+			this.identifier = splitted[0];
+		}
 	}
 
+	/**
+	 * Get the name of the item. Can contain additional parts - e.g. "task
+	 * myTask"
+	 * 
+	 * @return name
+	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Be aware: {@link #setName(String)} does change identifier too! Calling this method
+	 * should only be necessary in some special cases!
+	 * @param identifier
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
+	 * Get the identifier of the item, means name without additional parts -
+	 * e.g. name="task myTask", identifier="task"
+	 * 
+	 * @return identifier
+	 */
+	public String getIdentifier() {
+		return identifier;
 	}
 
 	public void print(PrintStream out) {
@@ -303,7 +363,9 @@ public class Item {
 	}
 
 	/**
-	 * Creates a string containing all information of this item, separated by space, parameters with comma
+	 * Creates a string containing all information of this item, separated by
+	 * space, parameters with comma
+	 * 
 	 * @return full string
 	 */
 	String buildSearchString() {
@@ -339,6 +401,23 @@ public class Item {
 		}
 		String itemText = sb.toString();
 		return itemText;
+	}
+
+	/**
+	 * Set item to be a possible parent or not
+	 * 
+	 * @param canBeParent
+	 */
+	public void setAPossibleParent(boolean canBeParent) {
+		this.aPossibleParent = canBeParent;
+	}
+
+	/**
+	 * 
+	 * @return <code>true</code> when this item can be a parent
+	 */
+	public boolean isAPossibleParent() {
+		return aPossibleParent;
 	}
 
 }

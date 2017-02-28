@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeLibraryBinary" version="3.0" documented="true">
+    <description> A physical representation of a &lt;a href='type://NativeLibrary'&gt;NativeLibrary&lt;/a&gt; component.
+
+</description>
+    <method name="getHeaderDirs" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="getLinkFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="getRuntimeFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <interface name="org.gradle.nativeplatform.NativeBinary"/>
+    <property name="headerDirs" type="org.gradle.api.file.FileCollection"/>
+    <property name="linkFiles" type="org.gradle.api.file.FileCollection"/>
+    <property name="runtimeFiles" type="org.gradle.api.file.FileCollection"/>
+</type>

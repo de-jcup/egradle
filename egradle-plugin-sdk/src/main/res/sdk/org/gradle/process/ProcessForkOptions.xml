@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.process.ProcessForkOptions" version="3.0">
+    <description> &lt;p&gt;Specifies the options to use to fork a process.&lt;/p&gt;
+
+</description>
+    <method name="copyTo" returnType="org.gradle.process.ProcessForkOptions">
+        <description> Copies these options to the given target options.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;options The target options
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="org.gradle.process.ProcessForkOptions" name="options"/>
+    </method>
+    <method name="environment" returnType="org.gradle.process.ProcessForkOptions">
+        <description> Adds some environment variables to the environment for this process.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;environmentVariables The environment variables. Must not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="environment" returnType="org.gradle.process.ProcessForkOptions">
+        <description> Adds an environment variable to the environment for this process.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the variable.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The value for the variable. Must not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="executable" returnType="org.gradle.process.ProcessForkOptions">
+        <description> Sets the name of the executable to use.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;executable The executable. Must not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="getEnvironment" returnType="java.util.Map">
+        <description> The environment variables to use for the process. Defaults to the environment of this process.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The environment. Returns an empty map when there are no environment variables.
+
+</description>
+    </method>
+    <method name="getExecutable" returnType="java.lang.String">
+        <description> Returns the name of the executable to use.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executable.
+
+</description>
+    </method>
+    <method name="getWorkingDir" returnType="java.io.File">
+        <description> Returns the working directory for the process. Defaults to the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The working directory. Never returns null.
+
+</description>
+    </method>
+    <method name="setEnvironment" returnType="void">
+        <description> Sets the environment variable to use for the process.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;environmentVariables The environment variables. Must not be null.
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="setExecutable" returnType="void">
+        <description> Sets the name of the executable to use.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;executable The executable. Must not be null.
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="setWorkingDir" returnType="void">
+        <description> Sets the working directory for the process. The supplied argument is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The working directory. Must not be null.
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <method name="workingDir" returnType="org.gradle.process.ProcessForkOptions">
+        <description> Sets the working directory for the process. The supplied argument is evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir The working directory. Must not be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <property name="environment" type="java.util.Map">
+        <description> The environment variables to use for the process. Defaults to the environment of this process.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The environment. Returns an empty map when there are no environment variables.
+
+</description>
+    </property>
+    <property name="executable" type="java.lang.String">
+        <description> Returns the name of the executable to use.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The executable.
+
+</description>
+    </property>
+    <property name="workingDir" type="java.io.File">
+        <description> Returns the working directory for the process. Defaults to the project directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The working directory. Never returns null.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.distribution.plugins.DistributionPlugin" version="3.0">
+    <description> &lt;p&gt;A &lt;a href='type://Plugin'&gt;Plugin&lt;/a&gt; to package project as a distribution.&lt;/p&gt;
+
+</description>
+    <method name="addAssembleTask" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.distribution.Distribution" name="distribution"/>
+        <parameter type="org.gradle.api.Task" name="tasks"/>
+    </method>
+    <method name="addInstallTask" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="org.gradle.api.distribution.Distribution" name="distribution"/>
+    </method>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+    </method>
+    <method name="call" returnType="java.io.File"/>
+    <method name="configureArchiveTask" returnType="org.gradle.api.Task">
+        <parameter type="org.gradle.api.Project" name="project"/>
+        <parameter type="java.lang.String" name="taskName"/>
+        <parameter type="org.gradle.api.distribution.Distribution" name="distribution"/>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.distribution.Distribution" name="dist"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

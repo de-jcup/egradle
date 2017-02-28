@@ -1,0 +1,9 @@
+subprojects{ 
+
+	dependencies {
+		compile library.commons_lang
+		//compile library.groovy
+		compile library.antlr
+	}
+}
+

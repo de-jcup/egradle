@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.Upload" version="3.0" documented="true">
+    <description> Uploads the artifacts of a &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; to a set of repositories.
+
+</description>
+    <method name="getArtifacts" returnType="org.gradle.api.file.FileCollection">
+        <description> Returns the artifacts which will be uploaded.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts.
+
+</description>
+    </method>
+    <method name="getConfiguration" returnType="org.gradle.api.artifacts.Configuration">
+        <description> Returns the configuration to upload.
+
+</description>
+    </method>
+    <method name="getDescriptorDestination" returnType="java.io.File">
+        <description> Returns the path to generate the dependency descriptor to.
+
+</description>
+    </method>
+    <method name="getPublicationServices" returnType="org.gradle.api.internal.artifacts.ArtifactPublicationServices"/>
+    <method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
+        <description> Returns the repositories to upload to.
+
+</description>
+    </method>
+    <method name="isUploadDescriptor" returnType="boolean">
+        <description> Specifies whether the dependency descriptor should be uploaded.
+
+</description>
+    </method>
+    <method name="repositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler" delegationTarget="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
+        <description> Configures the set of repositories to upload to.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="setConfiguration" returnType="void">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
+    </method>
+    <method name="setDescriptorDestination" returnType="void">
+        <parameter type="java.io.File" name="descriptorDestination"/>
+    </method>
+    <method name="setUploadDescriptor" returnType="void">
+        <parameter type="boolean" name="uploadDescriptor"/>
+    </method>
+    <method name="upload" returnType="void"/>
+    <property name="artifacts" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> Returns the artifacts which will be uploaded.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the artifacts.
+
+</description>
+    </property>
+    <property name="configuration" type="org.gradle.api.artifacts.Configuration" documented="true">
+        <description> Returns the configuration to upload.
+
+</description>
+    </property>
+    <property name="descriptorDestination" type="java.io.File">
+        <description> Returns the path to generate the dependency descriptor to.
+
+</description>
+    </property>
+    <property name="publicationServices" type="org.gradle.api.internal.artifacts.ArtifactPublicationServices"/>
+    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
+        <description> Returns the repositories to upload to.
+
+</description>
+    </property>
+    <property name="uploadDescriptor" type="boolean" documented="true">
+        <description> Specifies whether the dependency descriptor should be uploaded.
+
+</description>
+    </property>
+</type>

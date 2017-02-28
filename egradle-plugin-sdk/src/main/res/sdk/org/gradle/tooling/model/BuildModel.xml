@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.BuildModel" version="3.0">
+    <description> Represents a model that is associated with or represents some Gradle build.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">
+        <description> Returns the identifier for the build that this model is associated with.
+
+</description>
+    </method>
+    <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
+        <description> Returns the identifier for the build that this model is associated with.
+
+</description>
+    </property>
+</type>

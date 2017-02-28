@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent" version="3.0" documented="true">
+    <description> Enables fine-tuning wtp component details of the Eclipse plugin
+ &lt;p&gt;
+ Example of use with a blend of all possible properties.
+ Bear in mind that usually you don't have to configure them directly because Gradle configures it for free!
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'war' &lt;em class='comment'&gt;//or 'ear' or 'java'&lt;/em&gt;
+ apply plugin: 'eclipse-wtp'
+
+ configurations {
+   someInterestingConfiguration
+   anotherConfiguration
+ }
+
+ eclipse {
+
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting file(s) to be replaced by variables (files):&lt;/em&gt;
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   wtp {
+     component {
+       &lt;em class='comment'&gt;//you can configure the context path:&lt;/em&gt;
+       contextPath = 'someContextPath'
+
+       &lt;em class='comment'&gt;//you can configure the deployName:&lt;/em&gt;
+       deployName = 'killerApp'
+
+       &lt;em class='comment'&gt;//you can alter the wb-resource elements. sourceDirs is a ConventionProperty.&lt;/em&gt;
+       &lt;em class='comment'&gt;//non-existing source dirs won't be added to the component file.&lt;/em&gt;
+       sourceDirs += file('someExtraFolder')
+
+       &lt;em class='comment'&gt;// dependencies to mark as deployable with lib folder deploy path&lt;/em&gt;
+       libConfigurations += [ configurations.someInterestingConfiguration ]
+
+       &lt;em class='comment'&gt;// dependencies to mark as deployable with root folder deploy path&lt;/em&gt;
+       rootConfigurations += [ configurations.someInterestingConfiguration ]
+
+       &lt;em class='comment'&gt;// dependencies to exclude from wtp deployment&lt;/em&gt;
+       minusConfigurations &lt;&lt; configurations.anotherConfiguration
+
+       &lt;em class='comment'&gt;//you can add a wb-resource elements; mandatory keys: 'sourcePath', 'deployPath':&lt;/em&gt;
+       &lt;em class='comment'&gt;//if sourcePath points to non-existing folder it will *not* be added.&lt;/em&gt;
+       resource sourcePath: 'extra/resource', deployPath: 'deployment/resource'
+
+       &lt;em class='comment'&gt;//you can add a wb-property elements; mandatory keys: 'name', 'value':&lt;/em&gt;
+       property name: 'moodOfTheDay', value: ':-D'
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+ For tackling edge cases users can perform advanced configuration on resulting XML file.
+ It is also possible to affect the way eclipse plugin merges the existing configuration
+ via beforeMerged and whenMerged closures.
+ &lt;p&gt;
+ beforeMerged and whenMerged closures receive &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; object
+ &lt;p&gt;
+ Examples of advanced configuration:
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'war'
+ apply plugin: 'eclipse-wtp'
+
+ eclipse {
+
+   wtp {
+     component {
+       file {
+         &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+         withXml {
+           def node = it.asNode()
+           node.appendNode('xml', 'is what I love')
+         }
+
+         &lt;em class='comment'&gt;//closure executed after wtp component file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+         beforeMerged { wtpComponent -&gt;
+           &lt;em class='comment'&gt;//tinker with &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here&lt;/em&gt;
+         }
+
+         &lt;em class='comment'&gt;//closure executed after wtp component file content is loaded from existing file&lt;/em&gt;
+         &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+         whenMerged { wtpComponent -&gt;
+           &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt; here&lt;/em&gt;
+         }
+       }
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+</description>
+    <method name="file" returnType="void" delegationTarget="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> Enables advanced configuration like tinkering with the output XML
+ or affecting the way existing wtp component file content is merged with gradle build information
+ &lt;p&gt;
+ The object passed to whenMerged{} and beforeMerged{} closures is of type &lt;a href='type://WtpComponent'&gt;WtpComponent&lt;/a&gt;
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseWtpComponent'&gt;EclipseWtpComponent&lt;/a&gt;
+
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="getClassesDeployPath" returnType="java.lang.String">
+        <description> The deploy path for classes.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getContextPath" returnType="java.lang.String">
+        <description> The context path for the web application
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getDeployName" returnType="java.lang.String">
+        <description> The deploy name to be used.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#file(Closure)'&gt;#file(Closure)&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getFileReferenceFactory" returnType="org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory"/>
+    <method name="getLibConfigurations" returnType="java.util.Set">
+        <description> The configurations whose files are to be marked to be deployed with a deploy path of &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#getLibDeployPath()'&gt;#getLibDeployPath()&lt;/a&gt;.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getLibDeployPath" returnType="java.lang.String">
+        <description> The deploy path for libraries.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getMinusConfigurations" returnType="java.util.Set">
+        <description> The configurations whose files are to be excluded from wtp deployment.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getPathVariables" returnType="java.util.Map">
+        <description> The variables to be used for replacing absolute path in dependent-module elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseModel'&gt;EclipseModel&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getPlusConfigurations" returnType="java.util.Set">
+        <description> Synonym for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#getLibConfigurations()'&gt;#getLibConfigurations()&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="getProject" returnType="org.gradle.api.Project"/>
+    <method name="getProperties" returnType="java.util.List">
+        <description> Additional property elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getResources" returnType="java.util.List">
+        <description> &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for additional wb-resource elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+ &lt;p&gt;
+ Only resources that link to an existing directory (&lt;a href='type://WbResource#getSourcePath()'&gt;WbResource#getSourcePath()&lt;/a&gt;)
+ will be added to the wtp component file.
+ The reason is that non-existing resource directory declarations
+ lead to errors when project is imported into Eclipse.
+
+</description>
+    </method>
+    <method name="getRootConfigurations" returnType="java.util.Set">
+        <description> The configurations whose files are to be marked to be deployed with a deploy path of '/'.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getSourceDirs" returnType="java.util.Set">
+        <description> &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for the source directories to be transformed into wb-resource elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+ &lt;p&gt;
+ Only source dirs that exist will be added to the wtp component file.
+ Non-existing resource directory declarations lead to errors when project is imported into Eclipse.
+
+</description>
+    </method>
+    <method name="mergeXmlComponent" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.WtpComponent" name="xmlComponent"/>
+    </method>
+    <method name="property" returnType="void" documented="true">
+        <description> Adds a property.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map that must contain a 'name' and 'value' key with corresponding values.
+
+</description>
+        <parameter type="java.util.Map" name="args"/>
+    </method>
+    <method name="resource" returnType="void" documented="true">
+        <description> Adds a wb-resource.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map that must contain a deployPath and sourcePath key with corresponding values.
+
+</description>
+        <parameter type="java.util.Map" name="args"/>
+    </method>
+    <method name="setClassesDeployPath" returnType="void">
+        <parameter type="java.lang.String" name="classesDeployPath"/>
+    </method>
+    <method name="setContextPath" returnType="void">
+        <parameter type="java.lang.String" name="contextPath"/>
+    </method>
+    <method name="setDeployName" returnType="void">
+        <parameter type="java.lang.String" name="deployName"/>
+    </method>
+    <method name="setLibConfigurations" returnType="void">
+        <parameter type="java.util.Set" name="libConfigurations"/>
+    </method>
+    <method name="setLibDeployPath" returnType="void">
+        <parameter type="java.lang.String" name="libDeployPath"/>
+    </method>
+    <method name="setMinusConfigurations" returnType="void">
+        <parameter type="java.util.Set" name="minusConfigurations"/>
+    </method>
+    <method name="setPathVariables" returnType="void">
+        <parameter type="java.util.Map" name="pathVariables"/>
+    </method>
+    <method name="setPlusConfigurations" returnType="void">
+        <description> Synonym for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#setLibConfigurations(Set)'&gt;#setLibConfigurations(Set)&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.Set" name="plusConfigurations"/>
+    </method>
+    <method name="setProperties" returnType="void">
+        <parameter type="java.util.List" name="properties"/>
+    </method>
+    <method name="setResources" returnType="void">
+        <parameter type="java.util.List" name="resources"/>
+    </method>
+    <method name="setRootConfigurations" returnType="void">
+        <parameter type="java.util.Set" name="rootConfigurations"/>
+    </method>
+    <method name="setSourceDirs" returnType="void">
+        <parameter type="java.util.Set" name="sourceDirs"/>
+    </method>
+    <property name="classesDeployPath" type="java.lang.String" documented="true">
+        <description> The deploy path for classes.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="contextPath" type="java.lang.String" documented="true">
+        <description> The context path for the web application
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="deployName" type="java.lang.String" documented="true">
+        <description> The deploy name to be used.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#file(Closure)'&gt;#file(Closure)&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="fileReferenceFactory" type="org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory"/>
+    <property name="libConfigurations" type="java.util.Set" documented="true">
+        <description> The configurations whose files are to be marked to be deployed with a deploy path of &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#getLibDeployPath()'&gt;#getLibDeployPath()&lt;/a&gt;.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="libDeployPath" type="java.lang.String" documented="true">
+        <description> The deploy path for libraries.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="minusConfigurations" type="java.util.Set" documented="true">
+        <description> The configurations whose files are to be excluded from wtp deployment.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="pathVariables" type="java.util.Map">
+        <description> The variables to be used for replacing absolute path in dependent-module elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseModel'&gt;EclipseModel&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="plusConfigurations" type="java.util.Set">
+        <description> Synonym for &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseWtpComponent#getLibConfigurations()'&gt;#getLibConfigurations()&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="project" type="org.gradle.api.Project"/>
+    <property name="properties" type="java.util.List" documented="true">
+        <description> Additional property elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="resources" type="java.util.List" documented="true">
+        <description> &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for additional wb-resource elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+ &lt;p&gt;
+ Only resources that link to an existing directory (&lt;a href='type://WbResource#getSourcePath()'&gt;WbResource#getSourcePath()&lt;/a&gt;)
+ will be added to the wtp component file.
+ The reason is that non-existing resource directory declarations
+ lead to errors when project is imported into Eclipse.
+
+</description>
+    </property>
+    <property name="rootConfigurations" type="java.util.Set" documented="true">
+        <description> The configurations whose files are to be marked to be deployed with a deploy path of '/'.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="sourceDirs" type="java.util.Set" documented="true">
+        <description> &lt;a href='type://org.gradle.api.dsl.ConventionProperty'&gt;org.gradle.api.dsl.ConventionProperty&lt;/a&gt; for the source directories to be transformed into wb-resource elements.
+ &lt;p&gt;
+ For examples see docs for &lt;a href='type://EclipseWtp'&gt;EclipseWtp&lt;/a&gt;
+ &lt;p&gt;
+ Only source dirs that exist will be added to the wtp component file.
+ Non-existing resource directory declarations lead to errors when project is imported into Eclipse.
+
+</description>
+    </property>
+</type>

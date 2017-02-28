@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.publish.maven.MavenDependency" version="3.0">
+    <description> A dependency declared as part of an &lt;a href='type://MavenPublication'&gt;MavenPublication&lt;/a&gt;.
+
+</description>
+    <method name="getArtifactId" returnType="java.lang.String">
+        <description> The artifactId value for this dependency.
+
+</description>
+    </method>
+    <method name="getGroupId" returnType="java.lang.String">
+        <description> The groupId value for this dependency.
+
+</description>
+    </method>
+    <method name="getVersion" returnType="java.lang.String">
+        <description> The version value for this dependency.
+
+</description>
+    </method>
+    <property name="artifactId" type="java.lang.String">
+        <description> The artifactId value for this dependency.
+
+</description>
+    </property>
+    <property name="groupId" type="java.lang.String">
+        <description> The groupId value for this dependency.
+
+</description>
+    </property>
+    <property name="version" type="java.lang.String">
+        <description> The version value for this dependency.
+
+</description>
+    </property>
+</type>

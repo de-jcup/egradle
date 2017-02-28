@@ -19,6 +19,9 @@ import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
@@ -519,6 +522,9 @@ public class GradleModelBuilder implements ModelBuilder {
 		if (GroovyTokenTypes.METHOD_CALL != next.getType()) {
 			return null;
 		}
+		/* ------------------------------------------------------------- */
+		/* ------------------------ METHOD_CALL ------------------------ */
+		/* ------------------------------------------------------------- */
 		AST methodCall = expression.getFirstChild();
 		if (methodCall == null) {
 			return null;
@@ -560,12 +566,18 @@ public class GradleModelBuilder implements ModelBuilder {
 		item.setClosed(true);
 
 		AST lastAst = ename.getNextSibling();
+		if (lastAst.getType() == ELIST) {
+			lastAst = appendMethodCallParameters(context, lastAst, item);
+		}
 
 		if ("task".equals(enameString) || enameString.startsWith("task ")) {
 			item.setItemType(ItemType.TASK);
 			lastAst = support.handleTaskClosure(enameString, item, lastAst);
 		} else if (enameString.startsWith("tasks.")) {
 			item.setItemType(ItemType.TASKS);
+			if (enameString.startsWith("tasks.withType")){
+				lastAst = support.handleTasksWithTypeClosure(enameString, item,lastAst);
+			}
 		} else if (enameString.startsWith("apply ")) {
 			item.setItemType(ItemType.APPLY_SETUP);
 			support.handleApplyType(item, lastAst);
@@ -588,60 +600,119 @@ public class GradleModelBuilder implements ModelBuilder {
 				lastAst = m1;
 
 			}
+			String[] params = item.getParameters();
+			if (params != null) {
+				for (int i = 0; i < params.length; i++) {
+					String param = params[i];
+					if ("groovy.lang.Closure".equals(param)) {
+						item.setClosureBlock(true);
+						break;
+					}
+				}
+			}
 		}
+
 
 		if (lastAst != null) {
 			int type = lastAst.getType();
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
-				String name = item.getName();
-				if (name == null) {
-					return item;
-				}
-				if ("repositories".equals(name)) {
-					item.setItemType(ItemType.REPOSITORIES);
-				} else if ("allprojects".equals(name)) {
-					item.setItemType(ItemType.ALL_PROJECTS);
-				} else if ("subprojects".equals(name)) {
-					item.setItemType(ItemType.SUB_PROJECTS);
-				} else if ("dependencies".equals(name)) {
-					item.setItemType(ItemType.DEPENDENCIES);
-				} else if ("sourceSets".equals(name)) {
-					item.setItemType(ItemType.SOURCESETS);
-				} else if ("main".equals(name)) {
-					item.setItemType(ItemType.MAIN);
-				} else if ("jar".equals(name)) {
-					item.setItemType(ItemType.JAR);
-				} else if ("test".equals(name)) {
-					item.setItemType(ItemType.TEST);
-				} else if ("clean".equals(name)) {
-					item.setItemType(ItemType.CLEAN);
-				} else if ("buildscript".equals(name) || name.startsWith("buildscript.")) {
-					item.setItemType(ItemType.BUILDSCRIPT);
-				} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
-					item.setItemType(ItemType.CONFIGURATIONS);
-				} else if ("doFirst".equals(name)) {
-					item.setItemType(ItemType.DO_FIRST);
-				} else if ("doLast".equals(name)) {
-					item.setItemType(ItemType.DO_LAST);
-				} else if ("eclipse".equals(name)) {
-					item.setItemType(ItemType.ECLIPSE);
-				} else if (name.startsWith("task ") || name.startsWith("task.")) {
-					item.setItemType(ItemType.TASK);
-				} else if (name.startsWith("tasks.")) {
-					item.setItemType(ItemType.TASKS);
-				} else if (name.startsWith("apply ")) {
-					item.setItemType(ItemType.APPLY_SETUP);
-				} else if (name.startsWith("project ") || name.equals("project") || name.startsWith("project.")) {
-					item.setItemType(ItemType.PROJECT);
+				item.setClosureBlock(true);
+				String[] params = item.getParameters();
+				if (params == null || params.length == 0) {
+					item.setParameters("groovy.lang.Closure");
 				} else {
-					item.setItemType(ItemType.CLOSURE);
+					/* last parameter should be a closure!*/
+					String lastParam = params[params.length-1];
+					if (! "groovy.lang.Closure".equals(lastParam)){
+						/* missing - must change */
+						List<String> paramList = new ArrayList<>(Arrays.asList(params));
+						paramList.add("groovy.lang.Closure");
+						item.setParameters(paramList.toArray(new String[paramList.size()]));
+					}
 				}
-				/* inspect children... */
-				walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
 			}
 		}
-
+		if (item.isClosureBlock()) {
+			String name = item.getName();
+			if (name == null) {
+				return item;
+			}
+			if ("repositories".equals(name)) {
+				item.setItemType(ItemType.REPOSITORIES);
+			} else if ("allprojects".equals(name)) {
+				item.setItemType(ItemType.ALL_PROJECTS);
+			} else if ("subprojects".equals(name)) {
+				item.setItemType(ItemType.SUB_PROJECTS);
+			} else if ("dependencies".equals(name)) {
+				item.setItemType(ItemType.DEPENDENCIES);
+			} else if ("sourceSets".equals(name)) {
+				item.setItemType(ItemType.SOURCESETS);
+			} else if ("main".equals(name)) {
+				item.setItemType(ItemType.MAIN);
+			} else if ("jar".equals(name)) {
+				item.setItemType(ItemType.JAR);
+			} else if ("test".equals(name)) {
+				item.setItemType(ItemType.TEST);
+			} else if ("clean".equals(name)) {
+				item.setItemType(ItemType.CLEAN);
+			} else if ("buildscript".equals(name) || name.startsWith("buildscript.")) {
+				item.setItemType(ItemType.BUILDSCRIPT);
+			} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
+				item.setItemType(ItemType.CONFIGURATIONS);
+			} else if ("doFirst".equals(name)) {
+				item.setItemType(ItemType.DO_FIRST);
+			} else if ("doLast".equals(name)) {
+				item.setItemType(ItemType.DO_LAST);
+			} else if ("eclipse".equals(name)) {
+				item.setItemType(ItemType.ECLIPSE);
+			} else if (name.startsWith("task ") || name.startsWith("task.")) {
+				item.setItemType(ItemType.TASK);
+			} else if (name.startsWith("tasks.")) {
+				item.setItemType(ItemType.TASKS);
+			} else if (name.startsWith("apply ")) {
+				item.setItemType(ItemType.APPLY_SETUP);
+			} else if (name.startsWith("project ") || name.equals("project") || name.startsWith("project.")) {
+				item.setItemType(ItemType.PROJECT);
+			} else {
+				item.setItemType(ItemType.CLOSURE);
+			}
+		}
+		if (lastAst != null) {
+			item.setAPossibleParent(true);
+			/* inspect children... */
+			walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
+		}
 		return item;
+	}
+
+	/**
+	 * <pre>
+	 * fileTree baseDir {                                       fileTree {      
+	 * 
+	 * }                                                        }
+	 * </pre>
+	 * 
+	 * becomes in antlr model:
+	 * 
+	 * <pre>
+	 * EXPR1                                                    EXPR2
+	 *  x <command> METHOD_CALL                                  x { METHOD_CALL   
+	 *   x  fileTree - IDENT                                      x fileTree - IDENT   
+	 *   x  ELIST                                                 x { CLOSEABLE_BLOCK
+	 *    x    { METHOD_CALL                                       x IMPLICIT_PARAMETERS
+	 *      x    baseDir IDENT
+	 *      x    { CLOSEABLE_BLOCK
+	 *       x   IMPLICIT_PARAMETERS
+	 * </pre>
+	 * 
+	 * @param context
+	 * @throws ModelBuilderException
+	 */
+	private AST appendMethodCallParameters(Context context, AST elist, Item methodCallItem)
+			throws ModelBuilderException {
+		List<String> parameterList = support.resolveParameterList(elist);
+		methodCallItem.setParameters(parameterList.toArray(new String[parameterList.size()]));
+		return elist;
 	}
 
 	private Filter getPreCreationFilter() {

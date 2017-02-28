@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.antlr.AntlrPlugin" version="3.0">
+    <description> A plugin for adding Antlr support to &lt;a href='type://JavaPlugin'&gt;java projects&lt;/a&gt;.
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="java.lang.Object"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.artifacts.DependencySet" name="dependencies"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.antlr.AntlrTask" name="antlrTask"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

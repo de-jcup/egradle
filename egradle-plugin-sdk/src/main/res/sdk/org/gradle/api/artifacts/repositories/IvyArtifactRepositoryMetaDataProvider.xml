@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.IvyArtifactRepositoryMetaDataProvider" version="3.0" documented="true">
+    <description> The meta-data provider for an Ivy repository. Uses the Ivy module descriptor (&lt;a href='type://ivy.xml'&gt;ivy.xml&lt;/a&gt;) to determine the meta-data for module versions and artifacts.
+
+</description>
+    <method name="isDynamicMode" returnType="boolean">
+        <description> Returns true if dynamic resolve mode should be used for Ivy modules. When enabled, the &lt;a href='type://revConstraint'&gt;revConstraint&lt;/a&gt; attribute for each dependency declaration
+ is used in preference to the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute. When disabled (the default), the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute is always used.
+
+</description>
+    </method>
+    <method name="setDynamicMode" returnType="void">
+        <description> Specifies whether dynamic resolve mode should be used for Ivy modules. When enabled, the &lt;a href='type://revConstraint'&gt;revConstraint&lt;/a&gt; attribute for each dependency declaration
+ is used in preference to the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute. When disabled (the default), the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute is always used.
+
+</description>
+        <parameter type="boolean" name="mode"/>
+    </method>
+    <property name="dynamicMode" type="boolean" documented="true">
+        <description> Returns true if dynamic resolve mode should be used for Ivy modules. When enabled, the &lt;a href='type://revConstraint'&gt;revConstraint&lt;/a&gt; attribute for each dependency declaration
+ is used in preference to the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute. When disabled (the default), the &lt;a href='type://rev'&gt;rev&lt;/a&gt; attribute is always used.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.testing.testng.TestNGOptions" version="3.0" superType="org.gradle.api.tasks.testing.TestFrameworkOptions">
+    <description> The TestNG specific test options.
+
+</description>
+    <method name="doExecute" returnType="void">
+        <parameter type="java.io.BufferedWriter" name="writer"/>
+    </method>
+    <method name="excludeGroups" returnType="org.gradle.api.tasks.testing.testng.TestNGOptions">
+        <parameter type="java.lang.String" name="excludeGroups"/>
+    </method>
+    <method name="getConfigFailurePolicy" returnType="java.lang.String">
+        <description> Option for what to do for other tests that use a configuration step when that step fails. Can be "skip" or "continue", defaults to "skip".
+
+</description>
+    </method>
+    <method name="getExcludeGroups" returnType="java.util.Set">
+        <description> The set of groups to exclude.
+
+</description>
+    </method>
+    <method name="getGroupByInstances" returnType="boolean"/>
+    <method name="getIncludeGroups" returnType="java.util.Set">
+        <description> The set of groups to run.
+
+</description>
+    </method>
+    <method name="getListeners" returnType="java.util.Set">
+        <description> Fully qualified classes that are TestNG listeners (instances of org.testng.ITestListener or org.testng.IReporter). By default, the listeners set is empty.
+
+ Configuring extra listener: &lt;pre autoTested=''&gt; apply plugin: 'java'
+
+ test { useTestNG() { &lt;em class='comment'&gt;//creates emailable HTML file //this reporter typically ships with TestNG library listeners &lt;&lt; 'org.testng.reporters.EmailableReporter' } } &lt;/pre&gt;&lt;/em&gt;
+
+</description>
+    </method>
+    <method name="getOutputDirectory" returnType="java.io.File">
+        <description> The location to write TestNG's output. &lt;p&gt; Defaults to the owning test task's location for writing the HTML report.
+
+ &lt;br&gt;(since 1.11)
+
+</description>
+    </method>
+    <method name="getParallel" returnType="java.lang.String">
+        <description> The parallel mode to use for running the tests - one of the following modes: methods, tests, classes or instances.
+
+ Not required.
+
+ If not present, parallel mode will not be selected
+
+</description>
+    </method>
+    <method name="getPreserveOrder" returnType="boolean"/>
+    <method name="getProjectDir" returnType="java.io.File"/>
+    <method name="getSuiteName" returnType="java.lang.String">
+        <description> Sets the default name of the test suite, if one is not specified in a suite XML file or in the source code.
+
+</description>
+    </method>
+    <method name="getSuiteXmlBuilder" returnType="groovy.xml.MarkupBuilder"/>
+    <method name="getSuiteXmlFiles" returnType="java.util.List">
+        <description> The suiteXmlFiles to use for running TestNG.
+
+ Note: The suiteXmlFiles can be used in conjunction with the suiteXmlBuilder.
+
+</description>
+    </method>
+    <method name="getSuiteXmlWriter" returnType="java.io.StringWriter"/>
+    <method name="getSuites" returnType="java.util.List">
+        <parameter type="java.io.File" name="testSuitesDir"/>
+    </method>
+    <method name="getTestName" returnType="java.lang.String">
+        <description> Sets the default name of the test, if one is not specified in a suite XML file or in the source code.
+
+</description>
+    </method>
+    <method name="getThreadCount" returnType="int">
+        <description> The number of threads to use for this run. Ignored unless the parallel mode is also specified
+
+</description>
+    </method>
+    <method name="getUseDefaultListeners" returnType="boolean"/>
+    <method name="includeGroups" returnType="org.gradle.api.tasks.testing.testng.TestNGOptions">
+        <parameter type="java.lang.String" name="includeGroups"/>
+    </method>
+    <method name="isGroupByInstances" returnType="boolean">
+        <description> Indicates whether the tests should be grouped by instances. Grouping by instances will result in resolving test method dependencies for each instance instead of running the dependees of all
+ instances before running the dependants.
+
+ Not required.
+
+ If not present, the tests will not be grouped by instances.
+
+</description>
+    </method>
+    <method name="isPreserveOrder" returnType="boolean">
+        <description> Indicates whether the tests should be run in deterministic order. Preserving the order guarantees that the complete test
+ (including @BeforeXXX and @AfterXXX) is run in a test thread before the next test is run.
+
+ Not required.
+
+ If not present, the order will not be preserved.
+
+</description>
+    </method>
+    <method name="isUseDefaultListeners" returnType="boolean">
+        <description> Whether the default listeners and reporters should be used. Since Gradle 1.4 it defaults to 'false' so that Gradle can own the reports generation and provide various improvements. This option
+ might be useful for advanced TestNG users who prefer the reports generated by the TestNG library. If you cannot live without some specific TestNG reporter please use &lt;a href='type://org.gradle.api.tasks.testing.testng.TestNGOptions#listeners'&gt;#listeners&lt;/a&gt;
+ property. If you really want to use all default TestNG reporters (e.g. generate the old reports):
+
+ &lt;pre autoTested=''&gt; apply plugin: 'java'
+
+ test { useTestNG() { &lt;em class='comment'&gt;//report generation delegated to TestNG library: useDefaultListeners = true }&lt;/em&gt;
+
+ &lt;em class='comment'&gt;//turn off Gradle's HTML report to avoid replacing the //reports generated by TestNG library: reports.html.enabled = false } &lt;/pre&gt;&lt;/em&gt;
+
+ Please refer to the documentation of your version of TestNG what are the default listeners. At the moment of writing this documentation, the default listeners are a set of reporters that
+ generate: TestNG variant of HTML results, TestNG variant of XML results in JUnit format, emailable HTML test report, XML results in TestNG format.
+
+</description>
+    </method>
+    <method name="methodMissing" returnType="java.lang.Object">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="args"/>
+    </method>
+    <method name="propertyMissing" returnType="java.lang.Object">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setConfigFailurePolicy" returnType="void">
+        <parameter type="java.lang.String" name="configFailurePolicy"/>
+    </method>
+    <method name="setExcludeGroups" returnType="void">
+        <parameter type="java.util.Set" name="excludeGroups"/>
+    </method>
+    <method name="setGroupByInstances" returnType="void">
+        <parameter type="boolean" name="groupByInstances"/>
+    </method>
+    <method name="setIncludeGroups" returnType="void">
+        <parameter type="java.util.Set" name="includeGroups"/>
+    </method>
+    <method name="setListeners" returnType="void">
+        <parameter type="java.util.Set" name="listeners"/>
+    </method>
+    <method name="setOutputDirectory" returnType="void">
+        <parameter type="java.io.File" name="outputDirectory"/>
+    </method>
+    <method name="setParallel" returnType="void">
+        <parameter type="java.lang.String" name="parallel"/>
+    </method>
+    <method name="setPreserveOrder" returnType="void">
+        <parameter type="boolean" name="preserveOrder"/>
+    </method>
+    <method name="setSuiteName" returnType="void">
+        <parameter type="java.lang.String" name="suiteName"/>
+    </method>
+    <method name="setSuiteXmlBuilder" returnType="void">
+        <parameter type="groovy.xml.MarkupBuilder" name="suiteXmlBuilder"/>
+    </method>
+    <method name="setSuiteXmlFiles" returnType="void">
+        <parameter type="java.util.List" name="suiteXmlFiles"/>
+    </method>
+    <method name="setSuiteXmlWriter" returnType="void">
+        <parameter type="java.io.StringWriter" name="suiteXmlWriter"/>
+    </method>
+    <method name="setTestName" returnType="void">
+        <parameter type="java.lang.String" name="testName"/>
+    </method>
+    <method name="setThreadCount" returnType="void">
+        <parameter type="int" name="threadCount"/>
+    </method>
+    <method name="setUseDefaultListeners" returnType="void">
+        <parameter type="boolean" name="useDefaultListeners"/>
+    </method>
+    <method name="suiteXmlBuilder" returnType="groovy.xml.MarkupBuilder"/>
+    <method name="suites" returnType="void">
+        <description> Add suite files by File objects.
+
+</description>
+        <parameter type="java.io.File" name="suiteFiles"/>
+    </method>
+    <method name="suites" returnType="void">
+        <description> Add suite files by Strings. Each suiteFile String should be a path relative to the project root.
+
+</description>
+        <parameter type="java.lang.String" name="suiteFiles"/>
+    </method>
+    <method name="useDefaultListeners" returnType="org.gradle.api.tasks.testing.testng.TestNGOptions"/>
+    <method name="useDefaultListeners" returnType="org.gradle.api.tasks.testing.testng.TestNGOptions">
+        <parameter type="boolean" name="useDefaultListeners"/>
+    </method>
+    <property name="configFailurePolicy" type="java.lang.String">
+        <description> Option for what to do for other tests that use a configuration step when that step fails. Can be "skip" or "continue", defaults to "skip".
+
+</description>
+    </property>
+    <property name="excludeGroups" type="java.util.Set">
+        <description> The set of groups to exclude.
+
+</description>
+    </property>
+    <property name="groupByInstances" type="boolean">
+        <description> Indicates whether the tests should be grouped by instances. Grouping by instances will result in resolving test method dependencies for each instance instead of running the dependees of all
+ instances before running the dependants.
+
+ Not required.
+
+ If not present, the tests will not be grouped by instances.
+
+</description>
+    </property>
+    <property name="includeGroups" type="java.util.Set">
+        <description> The set of groups to run.
+
+</description>
+    </property>
+    <property name="listeners" type="java.util.Set">
+        <description> Fully qualified classes that are TestNG listeners (instances of org.testng.ITestListener or org.testng.IReporter). By default, the listeners set is empty.
+
+ Configuring extra listener: &lt;pre autoTested=''&gt; apply plugin: 'java'
+
+ test { useTestNG() { &lt;em class='comment'&gt;//creates emailable HTML file //this reporter typically ships with TestNG library listeners &lt;&lt; 'org.testng.reporters.EmailableReporter' } } &lt;/pre&gt;&lt;/em&gt;
+
+</description>
+    </property>
+    <property name="outputDirectory" type="java.io.File">
+        <description> The location to write TestNG's output. &lt;p&gt; Defaults to the owning test task's location for writing the HTML report.
+
+ &lt;br&gt;(since 1.11)
+
+</description>
+    </property>
+    <property name="parallel" type="java.lang.String">
+        <description> The parallel mode to use for running the tests - one of the following modes: methods, tests, classes or instances.
+
+ Not required.
+
+ If not present, parallel mode will not be selected
+
+</description>
+    </property>
+    <property name="preserveOrder" type="boolean">
+        <description> Indicates whether the tests should be run in deterministic order. Preserving the order guarantees that the complete test
+ (including @BeforeXXX and @AfterXXX) is run in a test thread before the next test is run.
+
+ Not required.
+
+ If not present, the order will not be preserved.
+
+</description>
+    </property>
+    <property name="projectDir" type="java.io.File"/>
+    <property name="suiteName" type="java.lang.String">
+        <description> Sets the default name of the test suite, if one is not specified in a suite XML file or in the source code.
+
+</description>
+    </property>
+    <property name="suiteXmlBuilder" type="groovy.xml.MarkupBuilder"/>
+    <property name="suiteXmlFiles" type="java.util.List">
+        <description> The suiteXmlFiles to use for running TestNG.
+
+ Note: The suiteXmlFiles can be used in conjunction with the suiteXmlBuilder.
+
+</description>
+    </property>
+    <property name="suiteXmlWriter" type="java.io.StringWriter"/>
+    <property name="suites" type="java.util.List"/>
+    <property name="testName" type="java.lang.String">
+        <description> Sets the default name of the test, if one is not specified in a suite XML file or in the source code.
+
+</description>
+    </property>
+    <property name="threadCount" type="int">
+        <description> The number of threads to use for this run. Ignored unless the parallel mode is also specified
+
+</description>
+    </property>
+    <property name="useDefaultListeners" type="boolean">
+        <description> Whether the default listeners and reporters should be used. Since Gradle 1.4 it defaults to 'false' so that Gradle can own the reports generation and provide various improvements. This option
+ might be useful for advanced TestNG users who prefer the reports generated by the TestNG library. If you cannot live without some specific TestNG reporter please use &lt;a href='type://org.gradle.api.tasks.testing.testng.TestNGOptions#listeners'&gt;#listeners&lt;/a&gt;
+ property. If you really want to use all default TestNG reporters (e.g. generate the old reports):
+
+ &lt;pre autoTested=''&gt; apply plugin: 'java'
+
+ test { useTestNG() { &lt;em class='comment'&gt;//report generation delegated to TestNG library: useDefaultListeners = true }&lt;/em&gt;
+
+ &lt;em class='comment'&gt;//turn off Gradle's HTML report to avoid replacing the //reports generated by TestNG library: reports.html.enabled = false } &lt;/pre&gt;&lt;/em&gt;
+
+ Please refer to the documentation of your version of TestNG what are the default listeners. At the moment of writing this documentation, the default listeners are a set of reporters that
+ generate: TestNG variant of HTML results, TestNG variant of XML results in JUnit format, emailable HTML test report, XML results in TestNG format.
+
+</description>
+    </property>
+</type>

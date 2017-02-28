@@ -64,7 +64,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		}
 		this.gradleEditor = adaptable.getAdapter(GradleEditor.class);
 		this.contentProvider = adaptable.getAdapter(ITreeContentProvider.class);
-		if (contentProvider==null){
+		if (contentProvider == null) {
 			contentProvider = new FallbackOutlineContentProvider();
 		}
 	}

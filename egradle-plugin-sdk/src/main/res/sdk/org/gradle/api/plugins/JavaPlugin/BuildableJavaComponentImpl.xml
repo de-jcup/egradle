@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.JavaPlugin.BuildableJavaComponentImpl" version="3.0">
+    <method name="getBuildTasks" returnType="java.util.Collection"/>
+    <method name="getCompileDependencies" returnType="org.gradle.api.artifacts.Configuration"/>
+    <method name="getRebuildTasks" returnType="java.util.Collection"/>
+    <method name="getRuntimeClasspath" returnType="org.gradle.api.file.FileCollection"/>
+    <interface name="org.gradle.api.internal.component.BuildableJavaComponent"/>
+    <property name="buildTasks" type="java.util.Collection"/>
+    <property name="compileDependencies" type="org.gradle.api.artifacts.Configuration"/>
+    <property name="rebuildTasks" type="java.util.Collection"/>
+    <property name="runtimeClasspath" type="org.gradle.api.file.FileCollection"/>
+</type>

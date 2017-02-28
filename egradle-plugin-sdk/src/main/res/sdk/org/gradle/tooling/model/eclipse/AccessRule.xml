@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.AccessRule" version="3.0">
+    <description> Access rule associated with an Eclipse classpath entry.
+
+ (see &lt;a href="http://help.eclipse.org/mars/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IAccessRule.html"&gt;IAccessRule Javadoc&lt;/a&gt;)
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    <method name="getKind" returnType="int">
+        <description> Returns the encoded type of the access rule. The meaning of the values:
+ &lt;ul&gt;
+     &lt;li&gt;0: the rule defines accessible paths&lt;/li&gt;
+     &lt;li&gt;1: the rule defines inaccessible paths&lt;/li&gt;
+     &lt;li&gt;2: the rule defines discouraged paths&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type of this access rule.
+
+</description>
+    </method>
+    <method name="getPattern" returnType="java.lang.String">
+        <description> Returns the file pattern of this access rule.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file pattern of this access rule.
+
+</description>
+    </method>
+    <property name="kind" type="int">
+        <description> Returns the encoded type of the access rule. The meaning of the values:
+ &lt;ul&gt;
+     &lt;li&gt;0: the rule defines accessible paths&lt;/li&gt;
+     &lt;li&gt;1: the rule defines inaccessible paths&lt;/li&gt;
+     &lt;li&gt;2: the rule defines discouraged paths&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The type of this access rule.
+
+</description>
+    </property>
+    <property name="pattern" type="java.lang.String">
+        <description> Returns the file pattern of this access rule.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file pattern of this access rule.
+
+</description>
+    </property>
+</type>

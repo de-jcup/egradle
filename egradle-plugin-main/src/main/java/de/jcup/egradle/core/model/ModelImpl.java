@@ -21,25 +21,85 @@ import java.util.TreeMap;
 public class ModelImpl implements Model {
 
 	protected SortedMap<Integer, Item> map = new TreeMap<>();
-	private Item root = new Item();
+	private Item root;
 	private boolean offsetRegistrationDone;
 
 	public ModelImpl() {
-		super();
+		root = new Item();
+		root.setName("root");
+		root.setAPossibleParent(true);
 	}
 
 	@Override
 	public Item getItemAt(int offset) {
+		return getItemInternal(offset,true);
+	}
+	
+	@Override
+	public Item getItemOnlyAt(int offset) {
+		return getItemInternal(offset,false);
+	}
+
+	private Item getItemInternal(int offset, boolean fallbackEnabled) {
 		if (!offsetRegistrationDone) {
 			startOffsetRegistration();
 		}
 		synchronized(map){
 			Item item = map.get(offset);
-			if (item == null) {
+			if (item == null && fallbackEnabled) {
 				item = findApplyableItem(offset);
 			}
 			return item;
 		}
+	}
+
+	/**
+	 * Example:
+	 * <pre>
+	 * a{
+	 * 	b{
+	 * 	  x-bla1
+	 *  }(p1)
+	 * }
+	 * (p4)
+	 * c{
+	 * 	(p3)	
+	 * }
+	 * 
+	 * x-bla2
+	 * (p4)
+	 * </pre>
+	 * p1- 
+	 */
+	@Override
+	public Item getParentItemOf(int offset) {
+		Item nextItem = getItemAt(offset);
+		if (nextItem==null){
+			/* should never happen but...*/
+			return getRoot();
+		}
+		Item potentialParent = nextItem;
+		while (potentialParent!=null && !canBeParentOf(offset, potentialParent)){
+			potentialParent=potentialParent.getParent();
+		}
+		if (potentialParent==null){
+			return getRoot();
+		}
+		return potentialParent;
+	}
+	
+	private boolean canBeParentOf(int offset, Item item){
+		/* must be already a parent or must be a possible one, otherwise guard close...*/
+		if (! item.hasChildren() && !item.isAPossibleParent()){
+			return false;
+		}
+		/* check offset position is between this type */
+		int itemStartPos = item.getOffset();
+		int itemEndPos = itemStartPos+ item.getLength();
+		if (offset>itemStartPos && offset<itemEndPos){
+			return true;
+		}
+		return false;
 	}
 
 	/**

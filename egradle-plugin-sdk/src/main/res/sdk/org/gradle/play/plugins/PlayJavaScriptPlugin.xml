@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.play.plugins.PlayJavaScriptPlugin" version="3.0">
+    <description> Plugin for adding javascript processing to a Play application.  Registers "javascript" language support with the &lt;a href='type://org.gradle.language.javascript.JavaScriptSourceSet'&gt;org.gradle.language.javascript.JavaScriptSourceSet&lt;/a&gt;.
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

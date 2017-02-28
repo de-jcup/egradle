@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.HelpTasksPlugin.HelpAction" version="3.0">
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.configuration.Help" name="task"/>
+    </method>
+    <interface name="org.gradle.api.Action"/>
+</type>

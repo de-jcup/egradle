@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.quality.TargetJdk" version="3.0">
+    <description> Represents the PMD targetjdk property available for PMD &lt; 5.0
+
+</description>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="toString" returnType="java.lang.String"/>
+    <method name="toVersion" returnType="org.gradle.api.plugins.quality.TargetJdk">
+        <description> Represents the PMD targetjdk property available for PMD &lt; 5.0
+
+</description>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <property name="name" type="java.lang.String"/>
+</type>

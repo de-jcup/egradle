@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.publish.PublishingExtension" version="3.0" documented="true">
+    <description> The configuration of how to “publish” the different components of a project.
+ &lt;p&gt;
+ This new publishing mechanism will eventually replace the current mechanism of upload tasks and configurations. At this time, it is an
+ incubating feature and under development.
+
+ &lt;p&gt;
+ The PublishingExtension is a &lt;a href='type://org.gradle.api.plugins.DeferredConfigurable'&gt;org.gradle.api.plugins.DeferredConfigurable&lt;/a&gt; model element, meaning that extension will be configured as late as possible in the build.
+ So any 'publishing' configuration blocks are not evaluated until either:
+ &lt;ol&gt;
+     &lt;li&gt;The project is about to execute, or&lt;/li&gt;
+     &lt;li&gt;he publishing extension is referenced as an instance, as opposed to via a configuration closure.&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;
+ A 'publishing' configuration block does not need to dereference the publishing extension, and so will be evaluated late. eg:
+ &lt;pre&gt;
+     publishing {
+         publications { ... }
+         repositories.maven { ... }
+     }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Any use that accesses the publishing extension as an instance does require the publishing extension to be realised, forcing all configuration blocks to be evaluated. eg:
+ &lt;pre&gt;
+     publishing.publications { ... }
+     publishing.repositories.maven { ... }
+ &lt;/pre&gt;
+
+ &lt;br&gt;(since 1.3)
+
+</description>
+    <method name="getPublications" returnType="org.gradle.api.publish.PublicationContainer">
+        <description> The publications of the project.
+ &lt;p&gt;
+ See &lt;a href='type://org.gradle.api.publish.PublishingExtension#publications(org.gradle.api.Action)'&gt;#publications(org.gradle.api.Action)&lt;/a&gt; for more information.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publications of this project.
+
+</description>
+    </method>
+    <method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
+        <description> The container of possible repositories to publish to.
+ &lt;p&gt;
+ See &lt;a href='type://org.gradle.api.publish.PublishingExtension#repositories(org.gradle.api.Action)'&gt;#repositories(org.gradle.api.Action)&lt;/a&gt; for more information.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to.
+
+</description>
+    </method>
+    <method name="publications" returnType="void" documented="true">
+        <description> Configures the publications of this project.
+ &lt;p&gt;
+ The publications container defines the outgoing publications of the project. That is, the consumable representations of things produced
+ by building the project. An example of a publication would be an Ivy Module (i.e. &lt;a href='type://ivy.xml'&gt;ivy.xml&lt;/a&gt; and artifacts), or
+ Maven Project (i.e. &lt;a href='type://pom.xml'&gt;pom.xml&lt;/a&gt; and artifacts).
+ &lt;p&gt;
+ Actual publication implementations and the ability to create them are provided by different plugins. The “publishing” plugin itself does not provide any publication types.
+ For example, given that the 'maven-publish' plugin provides a &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; type, you can create a publication like:
+ &lt;pre autoTested="true"&gt;
+ apply plugin: 'maven-publish'
+
+ publishing {
+   publications {
+     myPublicationName(MavenPublication) {
+       &lt;em class='comment'&gt;// Configure the publication here&lt;/em&gt;
+     }
+   }
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Please see &lt;a href='type://org.gradle.api.publish.ivy.IvyPublication'&gt;org.gradle.api.publish.ivy.IvyPublication&lt;/a&gt; and &lt;a href='type://org.gradle.api.publish.maven.MavenPublication'&gt;org.gradle.api.publish.maven.MavenPublication&lt;/a&gt; for more information on publishing in these specific formats.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The action or closure to configure the publications with.
+
+</description>
+        <parameter type="org.gradle.api.Action" name="configure"/>
+    </method>
+    <method name="repositories" returnType="void" documented="true">
+        <description> Configures the container of possible repositories to publish to.
+
+ &lt;pre autoTested="true"&gt;
+ apply plugin: 'publishing'
+
+ publishing {
+   repositories {
+     &lt;em class='comment'&gt;// Create an ivy publication destination named “releases”&lt;/em&gt;
+     ivy {
+       name "releases"
+       url "http:&lt;em class='comment'&gt;//my.org/ivy-repos/releases"&lt;/em&gt;
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+ The &lt;a href='type://repositories'&gt;repositories&lt;/a&gt; block is backed by a &lt;a href='type://RepositoryHandler'&gt;RepositoryHandler&lt;/a&gt;, which is the same DSL as that that is used for declaring repositories to consume dependencies from. However,
+ certain types of repositories that can be created by the repository handler are not valid for publishing, such as &lt;a href='type://org.gradle.api.artifacts.dsl.RepositoryHandler#mavenCentral()'&gt;org.gradle.api.artifacts.dsl.RepositoryHandler#mavenCentral()&lt;/a&gt;.
+ &lt;p&gt;
+ At this time, only repositories created by the &lt;a href='type://ivy()'&gt;ivy()&lt;/a&gt; factory method have any effect. Please see &lt;a href='type://org.gradle.api.publish.ivy.IvyPublication'&gt;org.gradle.api.publish.ivy.IvyPublication&lt;/a&gt;
+ for information on how this can be used for publishing to Ivy repositories.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configure The action to configure the container of repositories with.
+
+</description>
+        <parameter type="org.gradle.api.Action" name="configure"/>
+    </method>
+    <property name="publications" type="org.gradle.api.publish.PublicationContainer" documented="true">
+        <description> The publications of the project.
+ &lt;p&gt;
+ See &lt;a href='type://org.gradle.api.publish.PublishingExtension#publications(org.gradle.api.Action)'&gt;#publications(org.gradle.api.Action)&lt;/a&gt; for more information.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The publications of this project.
+
+</description>
+    </property>
+    <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
+        <description> The container of possible repositories to publish to.
+ &lt;p&gt;
+ See &lt;a href='type://org.gradle.api.publish.PublishingExtension#repositories(org.gradle.api.Action)'&gt;#repositories(org.gradle.api.Action)&lt;/a&gt; for more information.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The container of possible repositories to publish to.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.tooling.exceptions.UnsupportedOperationConfigurationException" version="3.0" superType="org.gradle.tooling.UnsupportedVersionException">
+    <description> Thrown when a &lt;a href='type://org.gradle.tooling.LongRunningOperation'&gt;org.gradle.tooling.LongRunningOperation&lt;/a&gt; has been configured
+ with unsupported settings. For example &lt;a href='type://org.gradle.tooling.LongRunningOperation#setJavaHome(java.io.File)'&gt;org.gradle.tooling.LongRunningOperation#setJavaHome(java.io.File)&lt;/a&gt;
+ might not be supported by the target Gradle version.
+
+ &lt;br&gt;(since 1.0)
+
+</description>
+</type>

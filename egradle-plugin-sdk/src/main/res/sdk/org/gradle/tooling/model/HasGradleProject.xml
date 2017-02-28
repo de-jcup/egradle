@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.HasGradleProject" version="3.0">
+    <description> An element that is associated with a Gradle project. Via the Gradle project you can access (list, run, etc.) Gradle tasks.
+
+</description>
+    <method name="getGradleProject" returnType="org.gradle.tooling.model.GradleProject">
+        <description> The associated Gradle project. Via the gradle project you can access (list, run, etc.) Gradle tasks.
+
+</description>
+    </method>
+    <property name="gradleProject" type="org.gradle.tooling.model.GradleProject">
+        <description> The associated Gradle project. Via the gradle project you can access (list, run, etc.) Gradle tasks.
+
+</description>
+    </property>
+</type>

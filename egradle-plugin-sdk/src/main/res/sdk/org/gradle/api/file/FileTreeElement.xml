@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.file.FileTreeElement" version="3.0">
+    <description> Information about a file in a &lt;a href='type://FileTree'&gt;FileTree&lt;/a&gt;.
+
+</description>
+    <method name="copyTo" returnType="boolean">
+        <description> Copies this file to the given target file. Does not copy the file if the target is already a copy of this file.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;target the target file.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this file was copied, false if it was up-to-date
+
+</description>
+        <parameter type="java.io.File" name="target"/>
+    </method>
+    <method name="copyTo" returnType="void">
+        <description> Copies the content of this file to an output stream. Generally, calling this method is more performant than
+ calling &lt;a href='type://new FileInputStream(getFile())'&gt;new FileInputStream(getFile())&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;output The output stream to write to. The caller is responsible for closing this stream.
+
+</description>
+        <parameter type="java.io.OutputStream" name="output"/>
+    </method>
+    <method name="getFile" returnType="java.io.File">
+        <description> Returns the file being visited.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file. Never returns null.
+
+</description>
+    </method>
+    <method name="getLastModified" returnType="long">
+        <description> Returns the last modified time of this file at the time of file traversal.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The last modified time.
+
+</description>
+    </method>
+    <method name="getMode" returnType="int">
+        <description> Returns the Unix permissions of this file, e.g. &lt;a href='type://0644'&gt;0644&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Unix file permissions.
+
+</description>
+    </method>
+    <method name="getName" returnType="java.lang.String">
+        <description> Returns the base name of this file.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never returns null.
+
+</description>
+    </method>
+    <method name="getPath" returnType="java.lang.String">
+        <description> Returns the path of this file, relative to the root of the containing file tree. Always uses '/' as the hierarchy
+ separator, regardless of platform file separator. Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path. Never returns null.
+
+</description>
+    </method>
+    <method name="getRelativePath" returnType="org.gradle.api.file.RelativePath">
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path. Never returns null.
+
+</description>
+    </method>
+    <method name="getSize" returnType="long">
+        <description> Returns the size of this file at the time of file traversal.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The size, in bytes.
+
+</description>
+    </method>
+    <method name="isDirectory" returnType="boolean">
+        <description> Returns true if this element is a directory, or false if this element is a regular file.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this element is a directory.
+
+</description>
+    </method>
+    <method name="open" returnType="java.io.InputStream">
+        <description> Opens this file as an input stream. Generally, calling this method is more performant than calling &lt;a href='type://new
+ FileInputStream(getFile())'&gt;new
+ FileInputStream(getFile())&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The input stream. Never returns null. The caller is responsible for closing this stream.
+
+</description>
+    </method>
+    <property name="directory" type="boolean">
+        <description> Returns true if this element is a directory, or false if this element is a regular file.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this element is a directory.
+
+</description>
+    </property>
+    <property name="file" type="java.io.File">
+        <description> Returns the file being visited.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The file. Never returns null.
+
+</description>
+    </property>
+    <property name="lastModified" type="long">
+        <description> Returns the last modified time of this file at the time of file traversal.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The last modified time.
+
+</description>
+    </property>
+    <property name="mode" type="int">
+        <description> Returns the Unix permissions of this file, e.g. &lt;a href='type://0644'&gt;0644&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Unix file permissions.
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> Returns the base name of this file.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The name. Never returns null.
+
+</description>
+    </property>
+    <property name="path" type="java.lang.String">
+        <description> Returns the path of this file, relative to the root of the containing file tree. Always uses '/' as the hierarchy
+ separator, regardless of platform file separator. Same as calling &lt;code&gt;getRelativePath().getPathString()&lt;/code&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path. Never returns null.
+
+</description>
+    </property>
+    <property name="relativePath" type="org.gradle.api.file.RelativePath">
+        <description> Returns the path of this file, relative to the root of the containing file tree.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path. Never returns null.
+
+</description>
+    </property>
+    <property name="size" type="long">
+        <description> Returns the size of this file at the time of file traversal.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The size, in bytes.
+
+</description>
+    </property>
+</type>

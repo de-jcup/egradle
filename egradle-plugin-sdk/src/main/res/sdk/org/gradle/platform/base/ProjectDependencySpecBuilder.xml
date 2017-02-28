@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ProjectDependencySpecBuilder" version="3.0">
+    <description> A builder of a &lt;a href='type://ProjectDependencySpec'&gt;ProjectDependencySpec&lt;/a&gt;.
+
+</description>
+    <method name="library" returnType="org.gradle.platform.base.ProjectDependencySpecBuilder">
+        <description> Narrows this dependency specification down to a specific library.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name the library name
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this instance
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="project" returnType="org.gradle.platform.base.ProjectDependencySpecBuilder">
+        <description> Narrows this dependency specification down to a specific project.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;path the project path
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this instance
+
+</description>
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <interface name="org.gradle.platform.base.DependencySpecBuilder"/>
+</type>

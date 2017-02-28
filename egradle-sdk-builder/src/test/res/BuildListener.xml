@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<type interface="true" language="gradle" name="org.gradle.BuildListener" version="3.0">
+    <property name="tingsEvaluated" type="org.gradle.api.initialization.Settings">
+        <description><![CDATA[
+     * <p>Called when the build settings have been loaded and evaluated. The settings object is fully configured and is
+     * ready to use to load the build projects.</p>
+     *
+     * @param settings The settings. Never null.
+     ]]></description>
+    </property>
+    <method name="projectsLoaded" returnType="void">
+        <parameter name="gradle" type="org.gradle.api.invocation.Gradle"/>
+        <description><![CDATA[
+     * <p>Called when the projects for the build have been created from the settings. None of the projects have been
+     * evaluated.</p>
+     *
+     * @param gradle The build which has been loaded. Never null.
+     ]]></description>
+    </method>
+    <method name="buildStarted" returnType="void">
+        <parameter name="gradle" type="org.gradle.api.invocation.Gradle"/>
+        <description><![CDATA[
+     * <p>Called when the build is started.</p>
+     *
+     * @param gradle The build which is being started. Never null.
+     ]]></description>
+    </method>
+    <method name="settingsEvaluated" returnType="void">
+        <parameter name="settings" type="org.gradle.api.initialization.Settings"/>
+        <description><![CDATA[
+     * <p>Called when the build settings have been loaded and evaluated. The settings object is fully configured and is
+     * ready to use to load the build projects.</p>
+     *
+     * @param settings The settings. Never null.
+     ]]></description>
+    </method>
+    <method name="projectsEvaluated" returnType="void">
+        <parameter name="gradle" type="org.gradle.api.invocation.Gradle"/>
+        <description><![CDATA[
+     * <p>Called when all projects for the build have been evaluated. The project objects are fully configured and are
+     * ready to use to populate the task graph.</p>
+     *
+     * @param gradle The build which has been evaluated. Never null.
+     ]]></description>
+    </method>
+    <method name="buildFinished" returnType="void">
+        <parameter name="result" type="org.gradle.BuildResult"/>
+        <description><![CDATA[
+     * <p>Called when the build is completed. All selected tasks have been executed.</p>
+     *
+     * @param result The result of the build. Never null.
+     ]]></description>
+    </method>
+    <description><![CDATA[
+ * <p>A {@code BuildListener} is notified of the major lifecycle events as a build is executed.</p>
+ * {@code BuildListener}
+ * @see org.gradle.api.invocation.Gradle#addListener(Object)
+ ]]></description>
+</type>

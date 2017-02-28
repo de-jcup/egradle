@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.signing.type.AbstractSignatureTypeProvider" version="3.0">
+    <description> Convenience base class for &lt;a href='type://SignatureTypeProvider'&gt;SignatureTypeProvider&lt;/a&gt; implementations.
+
+</description>
+    <method name="assertHasTypeForExtension" returnType="void">
+        <parameter type="java.lang.String" name="extension"/>
+    </method>
+    <method name="getDefaultType" returnType="org.gradle.plugins.signing.type.SignatureType"/>
+    <method name="getTypeForExtension" returnType="org.gradle.plugins.signing.type.SignatureType">
+        <parameter type="java.lang.String" name="extension"/>
+    </method>
+    <method name="hasTypeForExtension" returnType="boolean">
+        <parameter type="java.lang.String" name="extension"/>
+    </method>
+    <method name="register" returnType="void">
+        <parameter type="org.gradle.plugins.signing.type.SignatureType" name="type"/>
+    </method>
+    <method name="setDefaultType" returnType="void">
+        <parameter type="java.lang.String" name="defaultTypeExtension"/>
+    </method>
+    <interface name="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
+    <property name="defaultType" type="org.gradle.plugins.signing.type.SignatureType"/>
+    <property name="typeForExtension" type="org.gradle.plugins.signing.type.SignatureType"/>
+</type>

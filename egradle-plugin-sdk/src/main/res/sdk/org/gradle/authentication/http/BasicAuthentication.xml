@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.authentication.http.BasicAuthentication" version="3.0" documented="true">
+    <description> Authentication scheme for basic access authentication over HTTP. When using this scheme, credentials are sent preemptively.
+
+</description>
+    <interface name="org.gradle.authentication.Authentication"/>
+</type>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugin.devel.PluginDeclaration" version="3.0">
+    <description> Describes a Gradle plugin under development.
+
+ (see &lt;a href='type://org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin'&gt;org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin&lt;/a&gt;)
+ &lt;br&gt;(since 2.14)
+
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="obj"/>
+    </method>
+    <method name="getId" returnType="java.lang.String"/>
+    <method name="getImplementationClass" returnType="java.lang.String"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setId" returnType="void">
+        <parameter type="java.lang.String" name="id"/>
+    </method>
+    <method name="setImplementationClass" returnType="void">
+        <parameter type="java.lang.String" name="implementationClass"/>
+    </method>
+    <interface name="java.io.Serializable"/>
+    <interface name="org.gradle.api.Named"/>
+    <property name="id" type="java.lang.String"/>
+    <property name="implementationClass" type="java.lang.String"/>
+    <property name="name" type="java.lang.String"/>
+</type>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.StopExecutionException" version="3.0">
+    <description> &lt;p&gt;A &lt;code&gt;StopExecutionException&lt;/code&gt; is thrown by a &lt;a href='type://org.gradle.api.Action'&gt;org.gradle.api.Action&lt;/a&gt; or task action closure to
+ stop execution of the current task and start execution of the next task. This allows, for example, precondition
+ actions to be added to a task which abort execution of the task if the preconditions are not met.&lt;/p&gt;
+
+ &lt;p&gt;Note that throwing this exception does not fail the execution of the task or the build.&lt;/p&gt;
+
+</description>
+</type>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugin.devel.plugins.JavaGradlePluginPlugin.ClassManifestCollectorAction" version="3.0">
+    <description> A file copy action that collects class file paths as they are added to the jar.
+
+</description>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.file.FileCopyDetails" name="fileCopyDetails"/>
+    </method>
+    <interface name="org.gradle.api.Action"/>
+</type>

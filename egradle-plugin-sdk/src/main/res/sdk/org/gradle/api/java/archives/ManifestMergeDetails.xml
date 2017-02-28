@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.java.archives.ManifestMergeDetails" version="3.0">
+    <description> Details of a value being merged from two different manifests.
+
+</description>
+    <method name="exclude" returnType="void">
+        <description> Excludes this key from being in the manifest after the merge.
+
+</description>
+    </method>
+    <method name="getBaseValue" returnType="java.lang.String">
+        <description> Returns the value for the key of the manifest that is the target of the merge.
+
+</description>
+    </method>
+    <method name="getKey" returnType="java.lang.String">
+        <description> Returns the key that is to be merged.
+
+</description>
+    </method>
+    <method name="getMergeValue" returnType="java.lang.String">
+        <description> Returns the value for the key of the manifest that is the source for the merge.
+
+</description>
+    </method>
+    <method name="getSection" returnType="java.lang.String">
+        <description> Returns the section this merge details belongs to.
+
+</description>
+    </method>
+    <method name="getValue" returnType="java.lang.String">
+        <description> Returns the value for the key of the manifest after the merge takes place. By default this is the value
+ of the source for the merge.
+
+</description>
+    </method>
+    <method name="setValue" returnType="void">
+        <description> Set's the value for the key of the manifest after the merge takes place.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value
+
+</description>
+        <parameter type="java.lang.String" name="value"/>
+    </method>
+    <property name="baseValue" type="java.lang.String">
+        <description> Returns the value for the key of the manifest that is the target of the merge.
+
+</description>
+    </property>
+    <property name="key" type="java.lang.String">
+        <description> Returns the key that is to be merged.
+
+</description>
+    </property>
+    <property name="mergeValue" type="java.lang.String">
+        <description> Returns the value for the key of the manifest that is the source for the merge.
+
+</description>
+    </property>
+    <property name="section" type="java.lang.String">
+        <description> Returns the section this merge details belongs to.
+
+</description>
+    </property>
+    <property name="value" type="java.lang.String">
+        <description> Returns the value for the key of the manifest after the merge takes place. By default this is the value
+ of the source for the merge.
+
+</description>
+    </property>
+</type>

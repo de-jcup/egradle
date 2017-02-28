@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.plugins.ear.descriptor.EarWebModule" version="3.0">
+    <description> A module element in a deployment descriptor like application.xml that has a web child element.
+
+</description>
+    <method name="getContextRoot" returnType="java.lang.String">
+        <description> The context-root element specifies the context root of a web application.
+
+</description>
+    </method>
+    <method name="setContextRoot" returnType="void">
+        <parameter type="java.lang.String" name="contextRoot"/>
+    </method>
+    <interface name="org.gradle.plugins.ear.descriptor.EarModule"/>
+    <property name="contextRoot" type="java.lang.String">
+        <description> The context-root element specifies the context root of a web application.
+
+</description>
+    </property>
+</type>

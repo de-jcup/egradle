@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model id="core">
+    <proposal>
+        <context/>
+        <element name="allprojects">
+            <description><![CDATA[Define for <b>all projects</b> inside your gradle build.]]></description>
+        </element>
+        <element name="subprojects">
+            <description>
+            <![CDATA[Define for <b>subprojects</b> inside your gradle build.]]>
+            </description>
+             <element name="artifacts" >
+                <description>Define your artifact parts which belongs to your build!</description>
+                 <element name="blubber" >
+                      <description>Nothing</description>
+                 </element>
+            </element>
+        </element>
+       
+    </proposal>
+    <proposal>
+        <context>
+        	<rootPathEntry></rootPathEntry>
+        	<rootPathEntry>allprojects</rootPathEntry>
+        	<rootPathEntry>subprojects</rootPathEntry>
+        </context>
+        <value name="apply plugin:" code="apply plugin: '$cursor'">
+        	<description>
+           		 <![CDATA[Apply a gradle plugin to current build script.]]>
+            </description>
+        </value>
+        <value name="apply from:" code="apply from: '$cursor'">
+        	<description>
+           		 <![CDATA[Apply a gradle subscript to current build script - like an include]]>
+            </description>
+        </value>
+    </proposal>
+</model>

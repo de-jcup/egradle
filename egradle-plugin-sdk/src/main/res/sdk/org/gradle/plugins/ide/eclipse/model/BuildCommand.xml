@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.BuildCommand" version="3.0">
+    <description> A build command.
+
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getArguments" returnType="java.util.Map"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setArguments" returnType="void">
+        <parameter type="java.util.Map" name="arguments"/>
+    </method>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <interface name="java.io.Serializable"/>
+    <property name="arguments" type="java.util.Map"/>
+    <property name="name" type="java.lang.String"/>
+</type>

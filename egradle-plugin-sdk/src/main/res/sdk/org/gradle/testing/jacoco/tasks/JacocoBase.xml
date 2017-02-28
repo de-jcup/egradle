@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.testing.jacoco.tasks.JacocoBase" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description> Base class for Jacoco tasks.
+
+</description>
+    <method name="getJacocoClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> Classpath containing Jacoco classes for use by the task.
+
+</description>
+    </method>
+    <method name="setJacocoClasspath" returnType="void">
+        <parameter type="org.gradle.api.file.FileCollection" name="jacocoClasspath"/>
+    </method>
+    <property name="jacocoClasspath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> Classpath containing Jacoco classes for use by the task.
+
+</description>
+    </property>
+</type>

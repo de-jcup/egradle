@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyRun" version="3.0" superType="org.gradle.api.plugins.jetty.AbstractJettyRunTask" documented="true">
+    <description> &lt;p&gt;Deploys an exploded web application to an embedded Jetty web container. Does not require that the web application
+ be assembled into a war, saving time during the development cycle.&lt;/p&gt;
+
+ &lt;p&gt;Once started, the web container can be configured to run continuously, scanning for changes in the project and
+ automatically performing a hot redeploy when necessary. This allows the developer to concentrate on coding changes to
+ the project using their IDE of choice and have those changes immediately and transparently reflected in the running
+ web container, eliminating development time that is wasted on rebuilding, reassembling and redeploying. &lt;/p&gt;
+
+ @deprecated The Jetty plugin has been deprecated
+
+</description>
+    <method name="applyJettyXml" returnType="void"/>
+    <method name="configureScanner" returnType="void"/>
+    <method name="configureWebApplication" returnType="void"/>
+    <method name="createServer" returnType="org.gradle.api.plugins.jetty.internal.JettyPluginServer"/>
+    <method name="filesChanged" returnType="void">
+        <parameter type="java.util.List" name="changes"/>
+    </method>
+    <method name="finishConfigurationBeforeStart" returnType="void"/>
+    <method name="getClassPathFiles" returnType="java.util.List"/>
+    <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> Returns the classpath for the web application.
+
+</description>
+    </method>
+    <method name="getConfiguredContextHandlers" returnType="org.mortbay.jetty.handler.ContextHandler"/>
+    <method name="getDependencyFiles" returnType="java.util.Set"/>
+    <method name="getExtraScanTargets" returnType="java.util.Set"/>
+    <method name="getJettyEnvXml" returnType="java.io.File"/>
+    <method name="getJettyEnvXmlFile" returnType="java.io.File"/>
+    <method name="getScanTargetPatterns" returnType="org.gradle.api.plugins.jetty.ScanTargetPattern"/>
+    <method name="getScanTargets" returnType="java.io.File"/>
+    <method name="getWebAppSourceDirectory" returnType="java.io.File">
+        <description> Returns the directory containing the web application source files.
+
+</description>
+    </method>
+    <method name="getWebXml" returnType="java.io.File">
+        <description> Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is used.
+
+</description>
+    </method>
+    <method name="getWebXmlIfExists" returnType="java.io.File"/>
+    <method name="restartWebApp" returnType="void">
+        <parameter type="boolean" name="reconfigureScanner"/>
+    </method>
+    <method name="setClassPathFiles" returnType="void">
+        <parameter type="java.util.List" name="classPathFiles"/>
+    </method>
+    <method name="setClasspath" returnType="void">
+        <description> Set the classpath for the web application.
+
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
+    </method>
+    <method name="setContextHandlers" returnType="void">
+        <parameter type="org.mortbay.jetty.handler.ContextHandler" name="contextHandlers"/>
+    </method>
+    <method name="setExtraScanTargets" returnType="void">
+        <parameter type="java.lang.Iterable" name="extraScanTargets"/>
+    </method>
+    <method name="setJettyEnvXml" returnType="void">
+        <parameter type="java.io.File" name="jettyEnvXml"/>
+    </method>
+    <method name="setJettyEnvXmlFile" returnType="void">
+        <parameter type="java.io.File" name="jettyEnvXmlFile"/>
+    </method>
+    <method name="setScanTargetPatterns" returnType="void">
+        <parameter type="org.gradle.api.plugins.jetty.ScanTargetPattern" name="scanTargetPatterns"/>
+    </method>
+    <method name="setScanTargets" returnType="void">
+        <parameter type="java.io.File" name="scanTargets"/>
+    </method>
+    <method name="setUpClassPath" returnType="java.util.List"/>
+    <method name="setWebAppSourceDirectory" returnType="void">
+        <parameter type="java.io.File" name="webAppSourceDirectory"/>
+    </method>
+    <method name="setWebXml" returnType="void">
+        <parameter type="java.io.File" name="webXml"/>
+    </method>
+    <method name="validateConfiguration" returnType="void"/>
+    <property name="classPathFiles" type="java.util.List"/>
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> Returns the classpath for the web application.
+
+</description>
+    </property>
+    <property name="configuredContextHandlers" type="org.mortbay.jetty.handler.ContextHandler"/>
+    <property name="contextHandlers" type="org.mortbay.jetty.handler.ContextHandler"/>
+    <property name="dependencyFiles" type="java.util.Set"/>
+    <property name="extraScanTargets" type="java.util.Set"/>
+    <property name="jettyEnvXml" type="java.io.File"/>
+    <property name="jettyEnvXmlFile" type="java.io.File"/>
+    <property name="scanTargetPatterns" type="org.gradle.api.plugins.jetty.ScanTargetPattern"/>
+    <property name="scanTargets" type="java.io.File"/>
+    <property name="webAppSourceDirectory" type="java.io.File" documented="true">
+        <description> Returns the directory containing the web application source files.
+
+</description>
+    </property>
+    <property name="webXml" type="java.io.File" documented="true">
+        <description> Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to use. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is used.
+
+</description>
+    </property>
+    <property name="webXmlIfExists" type="java.io.File"/>
+</type>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.file.RelativePath" version="3.0">
+    <description> &lt;p&gt;Represents a relative path from some base directory to a file.  Used in file copying to represent both a source
+ and target file path when copying files.&lt;/p&gt;
+
+ &lt;p&gt;&lt;a href='type://RelativePath'&gt;RelativePath&lt;/a&gt; instances are immutable.&lt;/p&gt;
+
+</description>
+    <method name="append" returnType="org.gradle.api.file.RelativePath">
+        <description> &lt;p&gt;Appends the given path to the end of this path.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;other The path to append
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new path
+
+</description>
+        <parameter type="org.gradle.api.file.RelativePath" name="other"/>
+    </method>
+    <method name="append" returnType="org.gradle.api.file.RelativePath">
+        <description> Appends the given names to the end of this path.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;segments The names to append.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;endsWithFile when true, the new path refers to a file.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new path.
+
+</description>
+        <parameter type="boolean" name="endsWithFile"/>
+        <parameter type="java.lang.String" name="segments"/>
+    </method>
+    <method name="compareTo" returnType="int">
+        <parameter type="org.gradle.api.file.RelativePath" name="o"/>
+    </method>
+    <method name="copyAndInternSegments" returnType="void">
+        <parameter type="java.lang.String" name="target"/>
+        <parameter type="int" name="targetOffset"/>
+        <parameter type="java.lang.String" name="source"/>
+    </method>
+    <method name="copySegments" returnType="void">
+        <parameter type="java.lang.String" name="target"/>
+        <parameter type="java.lang.String" name="source"/>
+    </method>
+    <method name="copySegments" returnType="void">
+        <parameter type="java.lang.String" name="target"/>
+        <parameter type="java.lang.String" name="source"/>
+        <parameter type="int" name="length"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getFile" returnType="java.io.File">
+        <parameter type="java.io.File" name="baseDir"/>
+    </method>
+    <method name="getLastName" returnType="java.lang.String"/>
+    <method name="getParent" returnType="org.gradle.api.file.RelativePath">
+        <description> Returns the parent of this path.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this path, or null if this is the root path.
+
+</description>
+    </method>
+    <method name="getPathString" returnType="java.lang.String"/>
+    <method name="getSegments" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="internPathSegment" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="sample"/>
+    </method>
+    <method name="isFile" returnType="boolean"/>
+    <method name="parse" returnType="org.gradle.api.file.RelativePath">
+        <parameter type="boolean" name="isFile"/>
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="parse" returnType="org.gradle.api.file.RelativePath">
+        <parameter type="boolean" name="isFile"/>
+        <parameter type="org.gradle.api.file.RelativePath" name="parent"/>
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="plus" returnType="org.gradle.api.file.RelativePath">
+        <description> &lt;p&gt;Appends the given path to the end of this path.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;other The path to append
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new path
+
+</description>
+        <parameter type="org.gradle.api.file.RelativePath" name="other"/>
+    </method>
+    <method name="prepend" returnType="org.gradle.api.file.RelativePath">
+        <description> Prepends the given names to the start of this path.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;segments The names to prepend
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The new path.
+
+</description>
+        <parameter type="java.lang.String" name="segments"/>
+    </method>
+    <method name="replaceLastName" returnType="org.gradle.api.file.RelativePath">
+        <description> &lt;p&gt;Returns a copy of this path, with the last name replaced with the given name.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="segmentIterator" returnType="java.util.ListIterator"/>
+    <method name="toString" returnType="java.lang.String"/>
+    <interface name="java.io.Serializable"/>
+    <interface name="java.lang.Comparable"/>
+    <property name="file" type="java.io.File"/>
+    <property name="lastName" type="java.lang.String"/>
+    <property name="parent" type="org.gradle.api.file.RelativePath">
+        <description> Returns the parent of this path.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The parent of this path, or null if this is the root path.
+
+</description>
+    </property>
+    <property name="pathString" type="java.lang.String"/>
+    <property name="segments" type="java.lang.String"/>
+</type>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.model.RuleSource" version="3.0">
+    <description> A marker type for a class that is a collection of rules.
+ &lt;p&gt;
+ A rule source is not used like a regular Java object.
+ It is a stateless container of methods and possibly constants.
+ &lt;p&gt;
+ Please consult the “Rule based model configuration” chapter of the Gradle User Guide for general information about “rules”.
+
+ &lt;h3&gt;Rule methods&lt;/h3&gt;
+ &lt;p&gt;
+ Each method that is annotated with one of the following is considered a rule:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href='type://Model'&gt;Model&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://Defaults'&gt;Defaults&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://Mutate'&gt;Mutate&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://Finalize'&gt;Finalize&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://Validate'&gt;Validate&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://Rules'&gt;Rules&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://org.gradle.platform.base.ComponentType'&gt;org.gradle.platform.base.ComponentType&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://org.gradle.platform.base.ComponentBinaries'&gt;org.gradle.platform.base.ComponentBinaries&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href='type://org.gradle.platform.base.BinaryTasks'&gt;org.gradle.platform.base.BinaryTasks&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Each annotation specifies the type of the rule, which affects when it will be executed.
+ &lt;p&gt;
+ The following constraints apply to all rule methods:
+ &lt;ul&gt;
+ &lt;li&gt;A method may only be annotated by at most one of the above annotations.&lt;/li&gt;
+ &lt;li&gt;A rule method may be &lt;a href='type://static'&gt;static&lt;/a&gt; or not; it makes no difference.&lt;/li&gt;
+ &lt;li&gt;A rule method cannot be generic (i.e. cannot have type parameters).&lt;/li&gt;
+ &lt;li&gt;With the exception of &lt;a href='type://Model'&gt;Model&lt;/a&gt; methods, all methods must have at least one parameter.&lt;/li&gt;
+ &lt;li&gt;With the exception of &lt;a href='type://Model'&gt;Model&lt;/a&gt; methods, all methods must have a &lt;a href='type://void'&gt;void&lt;/a&gt; return type.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ See &lt;a href='type://Model'&gt;Model&lt;/a&gt; for information on the significance of the return type of a &lt;a href='type://Model'&gt;Model&lt;/a&gt; method.
+
+ &lt;h4&gt;Subjects and inputs&lt;/h4&gt;
+ &lt;p&gt;
+ Method rules declare the subject and any inputs as parameters to the method.
+ With the exception of &lt;a href='type://Model'&gt;Model&lt;/a&gt; methods, the subject of the rule is the, required, first parameter and all subsequent parameters are inputs.
+ For a non-void &lt;a href='type://Model'&gt;Model&lt;/a&gt; method, the subject (i.e. model element being created) is the return object.
+ For a void &lt;a href='type://Model'&gt;Model&lt;/a&gt; method, the subject is the first method parameter.
+ &lt;p&gt;
+ The &lt;a href='type://Path'&gt;Path&lt;/a&gt; annotation can be placed on any parameter (except the subject of &lt;a href='type://Model'&gt;Model&lt;/a&gt; rules) to indicate the model element to bind to.
+ If there is no &lt;a href='type://Path'&gt;Path&lt;/a&gt; annotation, a “by-type” binding will be attempted.
+ The binding scope is determined by how the rule source is applied.
+
+ &lt;h3&gt;General class constraints&lt;/h3&gt;
+ &lt;p&gt;
+ Along with the constraints on individual rule methods by their associated annotation, the following are general constraints of rule source implementations:
+ &lt;ul&gt;
+ &lt;li&gt;Constructors are not allowed.&lt;/li&gt;
+ &lt;li&gt;Inheritance hierarchies are not allowed (i.e. all rules sources must directly extend &lt;a href='type://RuleSource'&gt;RuleSource&lt;/a&gt;).&lt;/li&gt;
+ &lt;li&gt;Instance variables are not allowed.&lt;/li&gt;
+ &lt;li&gt;Non-final static variables are not allowed (i.e. constants are allowed).&lt;/li&gt;
+ &lt;li&gt;Methods cannot be overloaded.&lt;/li&gt;
+ &lt;li&gt;Implementations cannot be generic (i.e. cannot use type parameters).&lt;/li&gt;
+ &lt;/ul&gt;
+
+</description>
+</type>

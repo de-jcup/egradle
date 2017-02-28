@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.play.plugins.PlayJavaScriptPlugin.JavaScript" version="3.0">
+    <method name="applyToBinary" returnType="boolean">
+        <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
+    </method>
+    <method name="configureTask" returnType="void">
+        <parameter type="org.gradle.api.Task" name="task"/>
+        <parameter type="org.gradle.platform.base.BinarySpec" name="binarySpec"/>
+        <parameter type="org.gradle.language.base.LanguageSourceSet" name="sourceSet"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
+    </method>
+    <method name="getBinaryTools" returnType="java.util.Map"/>
+    <method name="getLanguageName" returnType="java.lang.String"/>
+    <method name="getOutputType" returnType="java.lang.Class"/>
+    <method name="getSourceSetType" returnType="java.lang.Class"/>
+    <method name="getTaskPrefix" returnType="java.lang.String"/>
+    <method name="getTaskType" returnType="java.lang.Class"/>
+    <method name="getTransformTask" returnType="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+    <interface name="org.gradle.language.base.internal.registry.LanguageTransform"/>
+    <property name="binaryTools" type="java.util.Map"/>
+    <property name="languageName" type="java.lang.String"/>
+    <property name="outputType" type="java.lang.Class"/>
+    <property name="sourceSetType" type="java.lang.Class"/>
+    <property name="taskPrefix" type="java.lang.String"/>
+    <property name="taskType" type="java.lang.Class"/>
+    <property name="transformTask" type="org.gradle.language.base.internal.SourceTransformTaskConfig"/>
+</type>

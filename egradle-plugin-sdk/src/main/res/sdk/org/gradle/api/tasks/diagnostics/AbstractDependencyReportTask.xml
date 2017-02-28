@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractDependencyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask" documented="true">
+    <description> Displays the dependency tree for a configuration.
+
+</description>
+    <method name="compare" returnType="int">
+        <parameter type="org.gradle.api.artifacts.Configuration" name="conf1"/>
+        <parameter type="org.gradle.api.artifacts.Configuration" name="conf2"/>
+    </method>
+    <method name="generate" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="getConfigurations" returnType="java.util.Set">
+        <description> Returns the configurations to generate the report for. Defaults to all configurations of this task's containing
+ project.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations.
+
+</description>
+    </method>
+    <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
+    <method name="getReportConfigurations" returnType="java.util.Set"/>
+    <method name="getTaskConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer"/>
+    <method name="setConfiguration" returnType="void">
+        <description> Sets the single configuration (by name) to generate the report for.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName name of the configuration to generate the report for
+
+</description>
+        <parameter type="java.lang.String" name="configurationName"/>
+    </method>
+    <method name="setConfigurations" returnType="void">
+        <description> Sets the configurations to generate the report for.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurations The configuration. Must not be null.
+
+</description>
+        <parameter type="java.util.Set" name="configurations"/>
+    </method>
+    <method name="setRenderer" returnType="void">
+        <description> Set the renderer to use to build a report. If unset, AsciiGraphRenderer will be used.
+
+</description>
+        <parameter type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer" name="renderer"/>
+    </method>
+    <property name="configuration" type="java.lang.String">
+        <description> Sets the single configuration (by name) to generate the report for.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configurationName name of the configuration to generate the report for
+
+</description>
+    </property>
+    <property name="configurations" type="java.util.Set" documented="true">
+        <description> Returns the configurations to generate the report for. Defaults to all configurations of this task's containing
+ project.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the configurations.
+
+</description>
+    </property>
+    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer">
+        <description> Set the renderer to use to build a report. If unset, AsciiGraphRenderer will be used.
+
+</description>
+    </property>
+    <property name="reportConfigurations" type="java.util.Set"/>
+    <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
+</type>

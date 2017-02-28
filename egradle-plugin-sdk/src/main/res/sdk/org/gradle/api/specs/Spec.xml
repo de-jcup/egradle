@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.specs.Spec" version="3.0">
+    <description> Represents some predicate against objects of type T.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The target type for this Spec
+
+</description>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="T" name="element"/>
+    </method>
+    <property name="satisfiedBy" type="boolean"/>
+</type>

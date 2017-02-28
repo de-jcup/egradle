@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Jdt" version="3.0">
+    <description> Represents the Eclipse JDT settings.
+
+</description>
+    <method name="getDefaultResourceName" returnType="java.lang.String"/>
+    <method name="load" returnType="void">
+        <parameter type="java.util.Properties" name="properties"/>
+    </method>
+    <method name="setSourceCompatibility" returnType="void">
+        <description> Sets the source compatibility for the compiler.
+
+</description>
+        <parameter type="org.gradle.api.JavaVersion" name="sourceCompatibility"/>
+    </method>
+    <method name="setTargetCompatibility" returnType="void">
+        <description> Sets the target compatibility for the compiler.
+
+</description>
+        <parameter type="org.gradle.api.JavaVersion" name="targetCompatibility"/>
+    </method>
+    <method name="store" returnType="void">
+        <parameter type="java.util.Properties" name="properties"/>
+    </method>
+    <property name="defaultResourceName" type="java.lang.String"/>
+    <property name="sourceCompatibility" type="org.gradle.api.JavaVersion">
+        <description> Sets the source compatibility for the compiler.
+
+</description>
+    </property>
+    <property name="targetCompatibility" type="org.gradle.api.JavaVersion">
+        <description> Sets the target compatibility for the compiler.
+
+</description>
+    </property>
+</type>

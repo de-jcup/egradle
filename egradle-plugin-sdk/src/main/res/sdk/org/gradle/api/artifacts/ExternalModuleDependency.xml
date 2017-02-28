@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ExternalModuleDependency" version="3.0">
+    <description> &lt;p&gt;A &lt;a href='type://ModuleDependency'&gt;ModuleDependency&lt;/a&gt; is a &lt;a href='type://Dependency'&gt;Dependency&lt;/a&gt; on a module outside the current project hierarchy.&lt;/p&gt;
+
+</description>
+    <method name="copy" returnType="org.gradle.api.artifacts.ExternalModuleDependency">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="isChanging" returnType="boolean">
+        <description> Returns whether or not Gradle should always check for a change in the remote repository.
+
+ (see &lt;a href='type://org.gradle.api.artifacts.ExternalModuleDependency#setChanging(boolean)'&gt;#setChanging(boolean)&lt;/a&gt;)
+
+</description>
+    </method>
+    <method name="setChanging" returnType="org.gradle.api.artifacts.ExternalModuleDependency">
+        <description> Sets whether or not Gradle should always check for a change in the remote repository. If set to true, Gradle will
+ check the remote repository even if a dependency with the same version is already in the local cache. Defaults to
+ false.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;changing Whether or not Gradle should always check for a change in the remote repository
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="boolean" name="changing"/>
+    </method>
+    <interface name="org.gradle.api.artifacts.ExternalDependency"/>
+    <property name="changing" type="boolean">
+        <description> Returns whether or not Gradle should always check for a change in the remote repository.
+
+ (see &lt;a href='type://org.gradle.api.artifacts.ExternalModuleDependency#setChanging(boolean)'&gt;#setChanging(boolean)&lt;/a&gt;)
+
+</description>
+    </property>
+</type>

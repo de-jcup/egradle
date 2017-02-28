@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.resources.TextResource" version="3.0" documented="true">
+    <description> A read-only body of text backed by a string, file, archive entry, or other source.
+ To create a text resource, use one of the factory methods in &lt;a href='type://TextResourceFactory'&gt;TextResourceFactory&lt;/a&gt;
+ (e.g. &lt;a href='type://project.resources.text.fromFile(myFile)'&gt;project.resources.text.fromFile(myFile)&lt;/a&gt;).
+
+ &lt;br&gt;(since 2.2)
+
+</description>
+    <method name="asFile" returnType="java.io.File" documented="true">
+        <description> Same as &lt;a href='type://asFile(Charset.defaultCharset().name())'&gt;asFile(Charset.defaultCharset().name())&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="asFile" returnType="java.io.File" documented="true">
+        <description> Returns a file containing the resource's text and using the given character encoding.
+ If this resource is backed by a file with a matching encoding, that file may be
+ returned. Otherwise, a temporary file will be created and returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;charset a character encoding (e.g. &lt;a href='type://"utf-8"'&gt;"utf-8"&lt;/a&gt;)
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a file containing the resource's text and using the given character encoding
+
+</description>
+        <parameter type="java.lang.String" name="charset"/>
+    </method>
+    <method name="asReader" returnType="java.io.Reader" documented="true">
+        <description> Returns an unbuffered &lt;a href='type://Reader'&gt;Reader&lt;/a&gt; that allows the resource's text to be read. The caller is responsible for closing the reader.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a reader that allows the resource's text to be read.
+
+</description>
+    </method>
+    <method name="asString" returnType="java.lang.String" documented="true">
+        <description> Returns a string containing the resource's text
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a string containing the resource's text
+
+</description>
+    </method>
+    <method name="getBuildDependencies" returnType="org.gradle.api.tasks.TaskDependency"/>
+    <method name="getInputFiles" returnType="org.gradle.api.file.FileCollection">
+        <description> Returns the input files registered when this resource is used as task input.
+ Not typically used directly.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input files registered when this resource is used as task input
+
+</description>
+    </method>
+    <method name="getInputProperties" returnType="java.lang.Object">
+        <description> Returns the input properties registered when this resource is used as task input.
+ Not typically used directly.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input properties registered when this resource is used as task input
+
+</description>
+    </method>
+    <interface name="org.gradle.api.Buildable"/>
+    <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency"/>
+    <property name="inputFiles" type="org.gradle.api.file.FileCollection">
+        <description> Returns the input files registered when this resource is used as task input.
+ Not typically used directly.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input files registered when this resource is used as task input
+
+</description>
+    </property>
+    <property name="inputProperties" type="java.lang.Object">
+        <description> Returns the input properties registered when this resource is used as task input.
+ Not typically used directly.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the input properties registered when this resource is used as task input
+
+</description>
+    </property>
+</type>

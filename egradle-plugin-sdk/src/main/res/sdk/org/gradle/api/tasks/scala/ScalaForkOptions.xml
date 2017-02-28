@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.scala.ScalaForkOptions" version="3.0" superType="org.gradle.api.tasks.compile.BaseForkOptions">
+    <description> Fork options for Scala compilation. Only take effect if &lt;a href='type://BaseScalaCompileOptions.fork'&gt;BaseScalaCompileOptions.fork&lt;/a&gt;
+ is &lt;a href='type://true'&gt;true&lt;/a&gt;.
+
+</description>
+</type>

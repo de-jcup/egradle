@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.ExtraPropertiesExtension" version="3.0" documented="true">
+    <description> Additional, ad-hoc, properties for Gradle domain objects.
+ &lt;p&gt;
+ Extra properties extensions allow new properties to be added to existing domain objects. They act like maps,
+ allowing the storage of arbitrary key/value pairs. All &lt;a href='type://ExtensionAware'&gt;ExtensionAware&lt;/a&gt; Gradle domain objects intrinsically have an extension
+ named “&lt;em class='value'&gt;#EXTENSION_NAME&lt;/em&gt;” of this type.
+ &lt;p&gt;
+ An important feature of extra properties extensions is that all of its properties are exposed for reading and writing via the &lt;a href='type://ExtensionAware'&gt;ExtensionAware&lt;/a&gt;
+ object that owns the extension.
+
+ &lt;pre autoTested=""&gt;
+ project.ext.set("myProp", "myValue")
+ assert project.myProp == "myValue"
+
+ project.myProp = "anotherValue"
+ assert project.myProp == "anotherValue"
+ assert project.ext.get("myProp") == "anotherValue"
+ &lt;/pre&gt;
+
+ Extra properties extension objects support Groovy property syntax. That is, a property can be read via &lt;a href='type://extension.«name»'&gt;extension.«name»&lt;/a&gt; and set via
+ &lt;a href='type://extension.«name» = "value"'&gt;extension.«name» = "value"&lt;/a&gt;. &lt;b&gt;Wherever possible, the Groovy property syntax should be preferred over the
+ &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#get(String)'&gt;#get(String)&lt;/a&gt; and &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#set(String,'&gt;Object)&lt;/a&gt; methods.&lt;/b&gt;
+
+ &lt;pre autoTested=""&gt;
+ project.ext {
+   myprop = "a"
+ }
+ assert project.myprop == "a"
+ assert project.ext.myprop == "a"
+
+ project.myprop = "b"
+ assert project.myprop == "b"
+ assert project.ext.myprop == "b"
+ &lt;/pre&gt;
+
+ You can also use the Groovy accessor syntax to get and set properties on an extra properties extension.
+
+ &lt;pre autoTested=""&gt;
+ project.ext["otherProp"] = "a"
+ assert project.otherProp == "a"
+ assert project.ext["otherProp"] == "a"
+ &lt;/pre&gt;
+
+ The exception that is thrown when an attempt is made to get the value of a property that does not exist is different depending on whether the
+ Groovy syntax is used or not. If Groovy property syntax is used, the Groovy &lt;a href='type://groovy.lang.MissingPropertyException'&gt;groovy.lang.MissingPropertyException&lt;/a&gt; will be thrown.
+ When the &lt;a href='type://org.gradle.api.plugins.ExtraPropertiesExtension#get(String)'&gt;#get(String)&lt;/a&gt; method is used, an &lt;a href='type://UnknownPropertyException'&gt;UnknownPropertyException&lt;/a&gt; will be thrown.
+
+
+</description>
+    <method name="get" returnType="java.lang.Object" documented="true">
+        <description> Returns the value for the registered property with the given name.
+
+ When using an extra properties extension from Groovy, you can also get properties via Groovy's property syntax.
+ All of the following lines of code are equivalent.
+
+ &lt;pre autoTested=""&gt;
+ project.ext { foo = "bar" }
+
+ assert project.ext.get("foo") == "bar"
+ assert project.ext.foo == "bar"
+ assert project.ext["foo"] == "bar"
+
+ assert project.foo == "bar"
+ assert project["foo"] == "bar"
+ &lt;/pre&gt;
+
+ When using the first form, an &lt;a href='type://UnknownPropertyException'&gt;UnknownPropertyException&lt;/a&gt; exception will be thrown if the
+ extension does not have a property called “&lt;a href='type://foo'&gt;foo&lt;/a&gt;”. When using the second forms (i.e. Groovy notation),
+ Groovy's &lt;a href='type://groovy.lang.MissingPropertyException'&gt;groovy.lang.MissingPropertyException&lt;/a&gt; will be thrown instead.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to get the value of
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The value for the property with the given name.
+ @throws UnknownPropertyException if there is no property registered with the given name
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="getProperties" returnType="java.util.Map">
+        <description> Returns all of the registered properties and their current values as a map.
+
+ The returned map is detached from the extension. That is, any changes made to the map do not
+ change the extension from which it originated.
+
+ &lt;pre autoTested="true"&gt;
+ project.version = "1.0"
+
+ assert project.hasProperty("version")
+ assert project.ext.properties.containsKey("version") == false
+
+ project.ext.foo = "bar"
+
+ assert project.ext.properties.containsKey("foo")
+ assert project.ext.properties.foo == project.ext.foo
+
+ assert project.ext.properties.every { key, value -&gt; project.properties[key] == value }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map.
+
+</description>
+    </method>
+    <method name="has" returnType="boolean" documented="true">
+        <description> Returns whether or not the extension has a property registered via the given name.
+
+ &lt;pre autoTested=""&gt;
+ assert project.ext.has("foo") == false
+ assert project.hasProperty("foo") == false
+
+ project.ext.foo = "bar"
+
+ assert project.ext.has("foo")
+ assert project.hasProperty("foo")
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to check for
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://true'&gt;true&lt;/a&gt; if a property has been registered with this name, otherwise &lt;a href='type://false'&gt;false&lt;/a&gt;.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="set" returnType="void" documented="true">
+        <description> Updates the value for, or creates, the registered property with the given name to the given value.
+
+ When using an extra properties extension from Groovy, you can also set properties via Groovy's property syntax.
+ All of the following lines of code are equivalent.
+
+ &lt;pre autoTested=""&gt;
+ project.ext.set("foo", "bar")
+ project.ext.foo = "bar"
+ project.ext["foo"] = "bar"
+
+ &lt;em class='comment'&gt;// Once the property has been created via the extension, it can be changed by the owner.&lt;/em&gt;
+ project.foo = "bar"
+ project["foo"] = "bar"
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name of the property to update the value of or create
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;value The value to set for the property
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <property name="properties" type="java.util.Map" documented="true">
+        <description> Returns all of the registered properties and their current values as a map.
+
+ The returned map is detached from the extension. That is, any changes made to the map do not
+ change the extension from which it originated.
+
+ &lt;pre autoTested="true"&gt;
+ project.version = "1.0"
+
+ assert project.hasProperty("version")
+ assert project.ext.properties.containsKey("version") == false
+
+ project.ext.foo = "bar"
+
+ assert project.ext.properties.containsKey("foo")
+ assert project.ext.properties.foo == project.ext.foo
+
+ assert project.ext.properties.every { key, value -&gt; project.properties[key] == value }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;All of the registered properties and their current values as a map.
+
+</description>
+    </property>
+</type>

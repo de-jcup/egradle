@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils" version="3.0">
+    <description> This should have originally been an internal API.
+
+</description>
+    <method name="childScope" returnType="R">
+        <parameter type="org.mozilla.javascript.Scriptable" name="parentScope"/>
+        <parameter type="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils.ScopeOperation" name="operation"/>
+    </method>
+    <method name="parse" returnType="org.mozilla.javascript.Scriptable">
+        <parameter type="java.io.File" name="source"/>
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+    <method name="parse" returnType="org.mozilla.javascript.Scriptable">
+        <parameter type="java.io.File" name="source"/>
+        <parameter type="java.lang.String" name="encoding"/>
+        <parameter type="org.gradle.api.Action" name="contextConfig"/>
+    </method>
+    <method name="parseRhino" returnType="T">
+        <parameter type="java.io.File" name="rhinoScript"/>
+        <parameter type="org.gradle.plugins.javascript.rhino.worker.RhinoWorkerUtils.ScopeOperation" name="operation"/>
+    </method>
+    <method name="readFile" returnType="java.lang.String">
+        <parameter type="java.io.File" name="file"/>
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+    <method name="toJavaValue" returnType="java.lang.Object">
+        <parameter type="java.lang.Object" name="object"/>
+    </method>
+    <method name="toMap" returnType="java.util.Map">
+        <parameter type="org.mozilla.javascript.Scriptable" name="obj"/>
+    </method>
+    <method name="writeFile" returnType="void">
+        <parameter type="java.lang.String" name="content"/>
+        <parameter type="java.io.File" name="destination"/>
+        <parameter type="java.lang.String" name="encoding"/>
+    </method>
+</type>

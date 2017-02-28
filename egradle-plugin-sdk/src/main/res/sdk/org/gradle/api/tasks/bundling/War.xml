@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.bundling.War" version="3.0" superType="org.gradle.api.tasks.bundling.Jar" documented="true">
+    <description> Assembles a WAR archive.
+
+</description>
+    <method name="apply" returnType="boolean">
+        <parameter type="java.io.File" name="input"/>
+    </method>
+    <method name="call" returnType="java.lang.Iterable"/>
+    <method name="classpath" returnType="void" documented="true">
+        <description> Adds files to the classpath to include in the WAR archive.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The files to add. These are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;
+
+</description>
+        <parameter type="java.lang.Object" name="classpath"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.file.CopySpec" name="it"/>
+    </method>
+    <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> Returns the classpath to include in the WAR archive. Any JAR or ZIP files in this classpath are included in the &lt;a href='type://WEB-INF/lib'&gt;WEB-INF/lib&lt;/a&gt; directory. Any directories in this classpath are included in
+ the &lt;a href='type://WEB-INF/classes'&gt;WEB-INF/classes&lt;/a&gt; directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Returns an empty collection when there is no classpath to include in the WAR.
+
+</description>
+    </method>
+    <method name="getWebInf" returnType="org.gradle.api.file.CopySpec"/>
+    <method name="getWebXml" returnType="java.io.File">
+        <description> Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to include in the WAR archive. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is included in the WAR.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file.
+
+</description>
+    </method>
+    <method name="setClasspath" returnType="void">
+        <description> Sets the classpath to include in the WAR archive.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath The classpath. Must not be null.
+
+</description>
+        <parameter type="java.lang.Object" name="classpath"/>
+    </method>
+    <method name="setWebXml" returnType="void">
+        <description> Sets the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to include in the WAR archive. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is included in the WAR.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;webXml The &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file. Maybe null.
+
+</description>
+        <parameter type="java.io.File" name="webXml"/>
+    </method>
+    <method name="transform" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="it"/>
+    </method>
+    <method name="webInf" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec" documented="true">
+        <description> Adds some content to the &lt;a href='type://WEB-INF'&gt;WEB-INF&lt;/a&gt; directory for this WAR archive.
+
+ &lt;p&gt;The given closure is executed to configure a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. The &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; is passed to the closure as its delegate.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to execute
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The newly created &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> Returns the classpath to include in the WAR archive. Any JAR or ZIP files in this classpath are included in the &lt;a href='type://WEB-INF/lib'&gt;WEB-INF/lib&lt;/a&gt; directory. Any directories in this classpath are included in
+ the &lt;a href='type://WEB-INF/classes'&gt;WEB-INF/classes&lt;/a&gt; directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath. Returns an empty collection when there is no classpath to include in the WAR.
+
+</description>
+    </property>
+    <property name="webInf" type="org.gradle.api.file.CopySpec"/>
+    <property name="webXml" type="java.io.File" documented="true">
+        <description> Returns the &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file to include in the WAR archive. When &lt;a href='type://null'&gt;null&lt;/a&gt;, no &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file is included in the WAR.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The &lt;a href='type://web.xml'&gt;web.xml&lt;/a&gt; file.
+
+</description>
+    </property>
+</type>

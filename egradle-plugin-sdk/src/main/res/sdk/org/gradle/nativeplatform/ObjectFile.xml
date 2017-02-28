@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.ObjectFile" version="3.0">
+    <description> LanguageOutputType marking object file output type.
+ 
+</description>
+    <interface name="org.gradle.platform.base.TransformationFileType"/>
+</type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.connection.FailedModelResult" version="3.0">
+    <description> The result of a failed model request.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; Type of model in the result
+ &lt;br&gt;(since 2.13)
+
+</description>
+    <method name="getBuildIdentifier" returnType="org.gradle.tooling.model.BuildIdentifier">
+        <description> Identifier of the build that originated this failure.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build identifier, never null.
+
+</description>
+    </method>
+    <method name="getProjectIdentifier" returnType="org.gradle.tooling.model.ProjectIdentifier">
+        <description> Identifier of the project that originated this failure, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project.
+
+</description>
+    </method>
+    <interface name="org.gradle.tooling.connection.ModelResult"/>
+    <property name="buildIdentifier" type="org.gradle.tooling.model.BuildIdentifier">
+        <description> Identifier of the build that originated this failure.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build identifier, never null.
+
+</description>
+    </property>
+    <property name="projectIdentifier" type="org.gradle.tooling.model.ProjectIdentifier">
+        <description> Identifier of the project that originated this failure, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the project identifier, or null if this failure did not originate from a particular project.
+
+</description>
+    </property>
+</type>

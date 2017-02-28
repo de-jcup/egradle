@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.tooling.events.test.JvmTestKind" version="3.0">
+    <description> Enumerates the different kinds of JVM tests. This allows to differentiate between test suites, atomic tests, etc.
+
+ &lt;br&gt;(since 2.4)
+
+</description>
+    <method name="getLabel" returnType="java.lang.String">
+        <description> Returns a label for the test kind. The label can be used to generate a prettified version of the test descriptor.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a label corresponding to the test kind
+
+</description>
+    </method>
+    <property name="label" type="java.lang.String">
+        <description> Returns a label for the test kind. The label can be used to generate a prettified version of the test descriptor.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a label corresponding to the test kind
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.specs.OrSpec" version="3.0" superType="org.gradle.api.specs.CompositeSpec">
+    <description> A &lt;a href='type://CompositeSpec'&gt;CompositeSpec&lt;/a&gt; which requires any one of its specs to be true in order to evaluate to
+ true. Uses lazy evaluation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The target type for this Spec
+
+</description>
+    <method name="hashCode" returnType="int"/>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="T" name="object"/>
+    </method>
+    <property name="satisfiedBy" type="boolean"/>
+</type>

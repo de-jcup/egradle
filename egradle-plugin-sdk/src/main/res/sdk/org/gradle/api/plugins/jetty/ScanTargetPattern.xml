@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.jetty.ScanTargetPattern" version="3.0">
+    <description> Patterns for scanning for file changes.
+
+ @deprecated The Jetty plugin has been deprecated
+
+</description>
+    <method name="getDirectory" returnType="java.io.File"/>
+    <method name="getExcludes" returnType="java.util.List"/>
+    <method name="getIncludes" returnType="java.util.List"/>
+    <method name="setDirectory" returnType="void">
+        <parameter type="java.io.File" name="directory"/>
+    </method>
+    <method name="setExcludes" returnType="void">
+        <parameter type="java.util.List" name="excludes"/>
+    </method>
+    <method name="setIncludes" returnType="void">
+        <parameter type="java.util.List" name="includes"/>
+    </method>
+    <property name="directory" type="java.io.File"/>
+    <property name="excludes" type="java.util.List"/>
+    <property name="includes" type="java.util.List"/>
+</type>

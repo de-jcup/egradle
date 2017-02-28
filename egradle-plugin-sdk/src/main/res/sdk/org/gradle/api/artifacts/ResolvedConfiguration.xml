@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ResolvedConfiguration" version="3.0">
+    <description> A &lt;a href='type://ResolvedConfiguration'&gt;ResolvedConfiguration&lt;/a&gt; represents the result of resolving a &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt;, and provides access
+ to both the artifacts and the meta-data of the result.
+
+</description>
+    <method name="getFiles" returnType="java.util.Set">
+        <description> Returns the files for the specified subset of configuration dependencies.
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec The filter for the configuration dependencies.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact files of the specified dependencies.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="getFirstLevelModuleDependencies" returnType="java.util.Set">
+        <description> Returns the &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances for each direct dependency of the configuration. Via those
+ you have access to all &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances, including the transitive dependencies of the
+ configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instance for each direct dependency.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </method>
+    <method name="getFirstLevelModuleDependencies" returnType="java.util.Set">
+        <description> Returns the &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances for each direct dependency of the configuration that matches
+ the given spec. Via those you have access to all &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances, including the transitive
+ dependencies of the configuration.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec A filter for the dependencies to be resolved.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instance for each direct dependency.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+        <parameter type="org.gradle.api.specs.Spec" name="dependencySpec"/>
+    </method>
+    <method name="getLenientConfiguration" returnType="org.gradle.api.artifacts.LenientConfiguration">
+        <description> Provides configuration that does not fail eagerly when some dependencies are not resolved.
+
+</description>
+    </method>
+    <method name="getResolvedArtifacts" returnType="java.util.Set">
+        <description> Returns the set of artifact meta-data for this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of artifacts.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </method>
+    <method name="hasError" returnType="boolean">
+        <description> Returns whether all dependencies were successfully retrieved or not.
+
+</description>
+    </method>
+    <method name="rethrowFailure" returnType="void">
+        <description> A resolve of a configuration that is not successful does not automatically throws an exception.
+ Such a exception is only thrown if the result of a resolve is accessed. You can force the throwing
+ of such an exception by calling this method.  
+
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </method>
+    <property name="files" type="java.util.Set">
+        <description> Returns the files for the specified subset of configuration dependencies.
+ 
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec The filter for the configuration dependencies.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The artifact files of the specified dependencies.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </property>
+    <property name="firstLevelModuleDependencies" type="java.util.Set">
+        <description> Returns the &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances for each direct dependency of the configuration that matches
+ the given spec. Via those you have access to all &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instances, including the transitive
+ dependencies of the configuration.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dependencySpec A filter for the dependencies to be resolved.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;A &lt;a href='type://ResolvedDependency'&gt;ResolvedDependency&lt;/a&gt; instance for each direct dependency.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </property>
+    <property name="lenientConfiguration" type="org.gradle.api.artifacts.LenientConfiguration">
+        <description> Provides configuration that does not fail eagerly when some dependencies are not resolved.
+
+</description>
+    </property>
+    <property name="resolvedArtifacts" type="java.util.Set">
+        <description> Returns the set of artifact meta-data for this configuration.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of artifacts.
+ @throws ResolveException when the resolve was not successful.
+
+</description>
+    </property>
+</type>

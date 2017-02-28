@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ear.Ear" version="3.0" superType="org.gradle.api.tasks.bundling.Jar" documented="true">
+    <description> Assembles an EAR archive.
+
+</description>
+    <method name="call" returnType="org.gradle.api.internal.file.collections.FileTreeAdapter"/>
+    <method name="checkIfShouldGenerateDeploymentDescriptor" returnType="void">
+        <parameter type="org.gradle.api.file.FileCopyDetails" name="details"/>
+    </method>
+    <method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.Ear" delegationTarget="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
+        <description> Configures the deployment descriptor for this EAR archive.
+
+ &lt;p&gt;The given closure is executed to configure the deployment descriptor. The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; is passed to the closure as its delegate.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="java.io.OutputStream" name="outputStream"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.file.FileCopyDetails" name="details"/>
+    </method>
+    <method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
+        <description> The deployment descriptor configuration.
+
+</description>
+    </method>
+    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
+    <method name="getLib" returnType="org.gradle.api.file.CopySpec">
+        <description> A location for dependency libraries to include in the 'lib' directory of the EAR archive.
+
+</description>
+    </method>
+    <method name="getLibDirName" returnType="java.lang.String">
+        <description> The name of the library directory in the EAR file. Default is "lib".
+
+</description>
+    </method>
+    <method name="lib" returnType="org.gradle.api.file.CopySpec" delegationTarget="org.gradle.api.file.CopySpec" documented="true">
+        <description> Adds dependency libraries to include in the 'lib' directory of the EAR archive.
+
+ &lt;p&gt;The given closure is executed to configure a &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;. The &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt; is passed to the closure as its delegate.&lt;/p&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The created &lt;a href='type://CopySpec'&gt;CopySpec&lt;/a&gt;
+
+</description>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="recordTopLevelModules" returnType="void">
+        <parameter type="org.gradle.api.file.FileCopyDetails" name="details"/>
+    </method>
+    <method name="setDeploymentDescriptor" returnType="void">
+        <parameter type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor"/>
+    </method>
+    <method name="setLibDirName" returnType="void">
+        <parameter type="java.lang.String" name="libDirName"/>
+    </method>
+    <property name="deploymentDescriptor" type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
+        <description> The deployment descriptor configuration.
+
+</description>
+    </property>
+    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
+    <property name="lib" type="org.gradle.api.file.CopySpec">
+        <description> A location for dependency libraries to include in the 'lib' directory of the EAR archive.
+
+</description>
+    </property>
+    <property name="libDirName" type="java.lang.String">
+        <description> The name of the library directory in the EAR file. Default is "lib".
+
+</description>
+    </property>
+</type>

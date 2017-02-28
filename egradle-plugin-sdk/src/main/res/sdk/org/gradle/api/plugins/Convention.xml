@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.plugins.Convention" version="3.0">
+    <description> &lt;p&gt;A &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; manages a set of &lt;i&gt;convention objects&lt;/i&gt;. When you add a convention object to a &lt;a href='type://Convention'&gt;Convention&lt;/a&gt;, and the properties and methods of the convention object become available as properties and methods of
+ the object which the convention is associated to. A convention object is simply a POJO or POGO. Usually, a &lt;a href='type://Convention'&gt;Convention&lt;/a&gt; is used by plugins to extend a &lt;a href='type://org.gradle.api.Project'&gt;org.gradle.api.Project&lt;/a&gt; or a &lt;a href='type://org.gradle.api.Task'&gt;org.gradle.api.Task&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+    <method name="findPlugin" returnType="T">
+        <description> Locates the plugin convention object with the given type.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The convention object type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Returns null if there is no such object.
+ @throws IllegalStateException When there are multiple matching objects.
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="getExtensionsAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this
+ convention.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object
+
+</description>
+    </method>
+    <method name="getPlugin" returnType="T">
+        <description> Locates the plugin convention object with the given type.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The convention object type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Never returns null.
+ @throws IllegalStateException When there is no such object contained in this convention, or when there are
+ multiple such objects.
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="getPlugins" returnType="java.util.Map">
+        <description> Returns the plugin convention objects contained in this convention.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects.
+
+</description>
+    </method>
+    <interface name="org.gradle.api.plugins.ExtensionContainer"/>
+    <property name="extensionsAsDynamicObject" type="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a dynamic object which represents the properties and methods contributed by the extensions and convention objects contained in this
+ convention.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object
+
+</description>
+    </property>
+    <property name="plugin" type="T">
+        <description> Locates the plugin convention object with the given type.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The convention object type.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The object. Never returns null.
+ @throws IllegalStateException When there is no such object contained in this convention, or when there are
+ multiple such objects.
+
+</description>
+    </property>
+    <property name="plugins" type="java.util.Map">
+        <description> Returns the plugin convention objects contained in this convention.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The plugins. Returns an empty map when this convention does not contain any convention objects.
+
+</description>
+    </property>
+</type>

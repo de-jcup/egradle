@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.jvm.test.JUnitTestSuiteBinarySpec" version="3.0">
+    <description> Represents a JUnit test suite binary.
+
+ &lt;br&gt;(since 2.11)
+
+</description>
+    <method name="getTestSuite" returnType="org.gradle.jvm.test.JUnitTestSuiteSpec"/>
+    <method name="getjUnitVersion" returnType="java.lang.String"/>
+    <method name="setjUnitVersion" returnType="void">
+        <parameter type="java.lang.String" name="version"/>
+    </method>
+    <interface name="org.gradle.jvm.test.JvmTestSuiteBinarySpec"/>
+    <property name="jUnitVersion" type="java.lang.String"/>
+    <property name="testSuite" type="org.gradle.jvm.test.JUnitTestSuiteSpec"/>
+</type>

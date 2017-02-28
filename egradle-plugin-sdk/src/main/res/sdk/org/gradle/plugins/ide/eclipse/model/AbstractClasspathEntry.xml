@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry" version="3.0">
+    <description> Common superclass for all &lt;a href='type://ClasspathEntry'&gt;ClasspathEntry&lt;/a&gt; instances.
+
+</description>
+    <method name="addClasspathEntry" returnType="groovy.util.Node">
+        <parameter type="groovy.util.Node" name="node"/>
+        <parameter type="java.util.Map" name="attributes"/>
+    </method>
+    <method name="appendNode" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getAccessRules" returnType="java.util.Set"/>
+    <method name="getEntryAttributes" returnType="java.util.Map"/>
+    <method name="getNativeLibraryLocation" returnType="java.lang.String"/>
+    <method name="getPath" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="isExported" returnType="boolean"/>
+    <method name="isNodeExported" returnType="boolean">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="normalizePath" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="readAccessRules" returnType="java.util.Set">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="readEntryAttributes" returnType="java.util.Map">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="setAccessRules" returnType="void">
+        <parameter type="java.util.Set" name="accessRules"/>
+    </method>
+    <method name="setExported" returnType="void">
+        <parameter type="boolean" name="exported"/>
+    </method>
+    <method name="setNativeLibraryLocation" returnType="void">
+        <parameter type="java.lang.String" name="location"/>
+    </method>
+    <method name="setPath" returnType="void">
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <method name="writeAccessRules" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <method name="writeEntryAttributes" returnType="void">
+        <parameter type="groovy.util.Node" name="node"/>
+    </method>
+    <interface name="org.gradle.plugins.ide.eclipse.model.ClasspathEntry"/>
+    <property name="accessRules" type="java.util.Set"/>
+    <property name="entryAttributes" type="java.util.Map"/>
+    <property name="exported" type="boolean"/>
+    <property name="nativeLibraryLocation" type="java.lang.String"/>
+    <property name="nodeExported" type="boolean"/>
+    <property name="path" type="java.lang.String"/>
+</type>

@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.JavaExec" version="3.0" documented="true">
+    <description> Executes a Java application in a child process.
+ &lt;p&gt;
+ Similar to &lt;a href='type://org.gradle.api.tasks.Exec'&gt;org.gradle.api.tasks.Exec&lt;/a&gt;, but starts a JVM with the given classpath and application class.
+ &lt;/p&gt;
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+
+ task runApp(type: JavaExec) {
+   classpath = sourceSets.main.runtimeClasspath
+
+   main = 'package.Main'
+
+   &lt;em class='comment'&gt;// arguments to pass to the application&lt;/em&gt;
+   args 'appArg1'
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The process can be started in debug mode (see &lt;a href='type://org.gradle.api.tasks.JavaExec#getDebug()'&gt;#getDebug()&lt;/a&gt;) in an ad-hoc manner by supplying the `--debug-jvm` switch when invoking the build.
+ &lt;pre&gt;
+ gradle someJavaExecTask --debug-jvm
+ &lt;/pre&gt;
+
+</description>
+    <method name="args" returnType="org.gradle.process.JavaExecSpec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="args"/>
+    </method>
+    <method name="args" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="args"/>
+    </method>
+    <method name="bootstrapClasspath" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="classpath"/>
+    </method>
+    <method name="classpath" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="org.gradle.process.JavaForkOptions" name="options"/>
+    </method>
+    <method name="copyTo" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="org.gradle.process.ProcessForkOptions" name="target"/>
+    </method>
+    <method name="environment" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="environment" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="exec" returnType="void"/>
+    <method name="executable" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="getAllJvmArgs" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getArgs" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getBootstrapClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getCommandLine" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getDebug" returnType="boolean">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getDefaultCharacterEncoding" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getEnableAssertions" returnType="boolean">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getEnvironment" returnType="java.util.Map">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getErrorOutput" returnType="java.io.OutputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getExecActionFactory" returnType="org.gradle.process.internal.ExecActionFactory"/>
+    <method name="getExecutable" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getJvmArgs" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getMain" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getMaxHeapSize" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getMinHeapSize" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getStandardInput" returnType="java.io.InputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getStandardOutput" returnType="java.io.OutputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getSystemProperties" returnType="java.util.Map">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getWorkingDir" returnType="java.io.File">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="isIgnoreExitValue" returnType="boolean">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="arguments"/>
+    </method>
+    <method name="jvmArgs" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="arguments"/>
+    </method>
+    <method name="setAllJvmArgs" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="arguments"/>
+    </method>
+    <method name="setArgs" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="applicationArgs"/>
+    </method>
+    <method name="setBootstrapClasspath" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
+    </method>
+    <method name="setClasspath" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="classpath"/>
+    </method>
+    <method name="setDebug" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="boolean" name="enabled"/>
+    </method>
+    <method name="setDefaultCharacterEncoding" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="defaultCharacterEncoding"/>
+    </method>
+    <method name="setEnableAssertions" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="boolean" name="enabled"/>
+    </method>
+    <method name="setEnvironment" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="setErrorOutput" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.OutputStream" name="outputStream"/>
+    </method>
+    <method name="setExecutable" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="setIgnoreExitValue" returnType="org.gradle.process.JavaExecSpec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="boolean" name="ignoreExitValue"/>
+    </method>
+    <method name="setJvmArgs" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="arguments"/>
+    </method>
+    <method name="setMain" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="mainClassName"/>
+    </method>
+    <method name="setMaxHeapSize" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="heapSize"/>
+    </method>
+    <method name="setMinHeapSize" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="heapSize"/>
+    </method>
+    <method name="setStandardInput" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.InputStream" name="inputStream"/>
+    </method>
+    <method name="setStandardOutput" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.OutputStream" name="outputStream"/>
+    </method>
+    <method name="setSystemProperties" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="properties"/>
+    </method>
+    <method name="setWorkingDir" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <method name="systemProperties" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="properties"/>
+    </method>
+    <method name="systemProperty" returnType="org.gradle.api.tasks.JavaExec">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="workingDir" returnType="org.gradle.api.tasks.JavaExec" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <interface name="org.gradle.process.JavaExecSpec"/>
+    <property name="allJvmArgs" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="args" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="bootstrapClasspath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="commandLine" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="debug" type="boolean" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="defaultCharacterEncoding" type="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="enableAssertions" type="boolean" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="environment" type="java.util.Map" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="errorOutput" type="java.io.OutputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="execActionFactory" type="org.gradle.process.internal.ExecActionFactory"/>
+    <property name="executable" type="java.lang.String" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="ignoreExitValue" type="boolean" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="jvmArgs" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="main" type="java.lang.String" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="maxHeapSize" type="java.lang.String" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="minHeapSize" type="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="standardInput" type="java.io.InputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="standardOutput" type="java.io.OutputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="systemProperties" type="java.util.Map" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="workingDir" type="java.io.File" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+</type>

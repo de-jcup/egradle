@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuildsPlugin" version="3.0">
+    <description> Preconfigures the project to run a gradle build comparison.
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="java.io.File"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" name="task"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

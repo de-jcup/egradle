@@ -1,3 +1,8 @@
 
-include 'egradle-other','egradle-plugin-main','egradle-plugin-junit-contribution'
+include 'egradle-other',
+'egradle-plugin-main',
+'egradle-plugin-junit-contribution', 
+'egradle-draft', 
+'egradle-plugin-sdk',
+'egradle-sdk-builder'
 		

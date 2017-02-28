@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestFilter" version="3.0">
+    <description> Allows filtering tests for execution. Some examples:
+
+ &lt;pre autoTested=''&gt;
+   apply plugin: 'java'
+
+   test {
+       filter {
+          &lt;em class='comment'&gt;//specific test method&lt;/em&gt;
+          includeTestsMatching "org.gradle.SomeTest.someSpecificFeature"
+
+          &lt;em class='comment'&gt;//specific test method, use wildcard for packages&lt;/em&gt;
+          includeTestsMatching "*SomeTest.someSpecificFeature"
+
+          &lt;em class='comment'&gt;//specific test class&lt;/em&gt;
+          includeTestsMatching "org.gradle.SomeTest"
+
+          &lt;em class='comment'&gt;//specific test class, wildcard for packages&lt;/em&gt;
+          includeTestsMatching "*.SomeTest"
+
+          &lt;em class='comment'&gt;//all classes in package, recursively&lt;/em&gt;
+          includeTestsMatching "com.gradle.tooling.*"
+
+          &lt;em class='comment'&gt;//all integration tests, by naming convention&lt;/em&gt;
+          includeTestsMatching "*IntegTest"
+
+          &lt;em class='comment'&gt;//only ui tests from integration tests, by some naming convention&lt;/em&gt;
+          includeTestsMatching "*IntegTest*ui"
+
+          &lt;em class='comment'&gt;//specific test class and test method&lt;/em&gt;
+          includeTest "org.gradle.SomeTest", "someTestMethod"
+       }
+   }
+
+ &lt;/pre&gt;
+
+ &lt;br&gt;(since 1.10)
+
+</description>
+    <method name="getIncludePatterns" returnType="java.util.Set">
+        <description> Returns the included test name patterns. They can be class or method names and may contain wildcard '*'. Test name patterns can be appended via &lt;a href='type://org.gradle.api.tasks.testing.TestFilter#includeTestsMatching(String)'&gt;#includeTestsMatching(String)&lt;/a&gt; or set via
+ &lt;a href='type://org.gradle.api.tasks.testing.TestFilter#setIncludePatterns(String...)'&gt;#setIncludePatterns(String...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;included test name patterns
+
+</description>
+    </method>
+    <method name="includeTest" returnType="org.gradle.api.tasks.testing.TestFilter">
+        <description> Add a test method specified by test class name and method name.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;className the class name of the test to execute
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;methodName the method name of the test to execute. Can be null.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this filter object
+
+</description>
+        <parameter type="java.lang.String" name="className"/>
+        <parameter type="java.lang.String" name="methodName"/>
+    </method>
+    <method name="includeTestsMatching" returnType="org.gradle.api.tasks.testing.TestFilter">
+        <description> Appends a test name pattern to the filter. Wildcard '*' is supported, either test method name or class name is supported. Examples of test names: "com.foo.FooTest.someMethod",
+ "com.foo.FooTest", "*FooTest*", "com.foo*". See examples in the docs for &lt;a href='type://TestFilter'&gt;TestFilter&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testNamePattern test name pattern to include, can be class or method name, can contain wildcard '*'
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this filter object
+
+</description>
+        <parameter type="java.lang.String" name="testNamePattern"/>
+    </method>
+    <method name="isFailOnNoMatchingTests" returnType="boolean">
+        <description> Returns whether the task should fail if no matching tests where found.
+ The default is true.
+
+</description>
+    </method>
+    <method name="setFailOnNoMatchingTests" returnType="void">
+        <description> Let the test task fail if a filter configuration was provided but no test matched the given configuration.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;failOnNoMatchingTests whether a test task should fail if no test is matching the filter configuration.
+ 
+</description>
+        <parameter type="boolean" name="failOnNoMatchingTests"/>
+    </method>
+    <method name="setIncludePatterns" returnType="org.gradle.api.tasks.testing.TestFilter">
+        <description> Sets the test name patterns to be included in the filter. Wildcard '*' is supported. Replaces any existing test name patterns.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testNamePatterns class or method name patterns to set, may contain wildcard '*'
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this filter object
+
+</description>
+        <parameter type="java.lang.String" name="testNamePatterns"/>
+    </method>
+    <property name="failOnNoMatchingTests" type="boolean">
+        <description> Returns whether the task should fail if no matching tests where found.
+ The default is true.
+
+</description>
+    </property>
+    <property name="includePatterns" type="java.util.Set">
+        <description> Returns the included test name patterns. They can be class or method names and may contain wildcard '*'. Test name patterns can be appended via &lt;a href='type://org.gradle.api.tasks.testing.TestFilter#includeTestsMatching(String)'&gt;#includeTestsMatching(String)&lt;/a&gt; or set via
+ &lt;a href='type://org.gradle.api.tasks.testing.TestFilter#setIncludePatterns(String...)'&gt;#setIncludePatterns(String...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;included test name patterns
+
+</description>
+    </property>
+</type>

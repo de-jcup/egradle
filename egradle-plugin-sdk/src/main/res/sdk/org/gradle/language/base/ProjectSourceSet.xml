@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.base.ProjectSourceSet" version="3.0" documented="true">
+    <description> A container of &lt;a href='type://org.gradle.language.base.LanguageSourceSet'&gt;org.gradle.language.base.LanguageSourceSet&lt;/a&gt;s. Added to a project by the &lt;a href='type://org.gradle.language.base.plugins.LanguageBasePlugin'&gt;org.gradle.language.base.plugins.LanguageBasePlugin&lt;/a&gt;.
+
+</description>
+    <interface name="org.gradle.api.DomainObjectSet"/>
+</type>

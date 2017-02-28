@@ -83,7 +83,7 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="EGradle update site" url="https://dl.bintray.com/de-jcup/egradle/ "/>
+      <update label="EGradle update site" url="https://dl.bintray.com/de-jcup/egradle/"/>
    </url>
 
    <includes
@@ -107,6 +107,13 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="de.jcup.egradle.eclipse.plugin.editor.gradle"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.jcup.egradle.eclipse.plugin.sdk"
          download-size="0"
          install-size="0"
          version="0.0.0"

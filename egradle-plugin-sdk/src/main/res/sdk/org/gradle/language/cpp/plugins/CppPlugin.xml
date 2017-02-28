@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.language.cpp.plugins.CppPlugin" version="3.0" documented="true">
+    <description> A plugin for projects wishing to build native binary components from C++ sources.
+
+ &lt;p&gt;Automatically includes the &lt;a href='type://CppLangPlugin'&gt;CppLangPlugin&lt;/a&gt; for core C++ support and the &lt;a href='type://NativeComponentPlugin'&gt;NativeComponentPlugin&lt;/a&gt; for native component support.&lt;/p&gt;
+
+ &lt;li&gt;Creates a &lt;a href='type://org.gradle.language.cpp.tasks.CppCompile'&gt;org.gradle.language.cpp.tasks.CppCompile&lt;/a&gt; task for each &lt;a href='type://org.gradle.language.cpp.CppSourceSet'&gt;org.gradle.language.cpp.CppSourceSet&lt;/a&gt; to compile the C++ sources.&lt;/li&gt;
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

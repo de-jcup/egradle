@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.jvm.toolchain.JavaToolChainRegistry" version="3.0">
+    <description> A container for &lt;a href='type://JavaToolChain'&gt;JavaToolChain&lt;/a&gt;s.
+
+</description>
+    <interface name="org.gradle.platform.base.ToolChainRegistry"/>
+</type>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.ProjectState" version="3.0">
+    <description> &lt;a href='type://ProjectState'&gt;ProjectState&lt;/a&gt; provides information about the execution state of a project.
+
+</description>
+    <method name="getExecuted" returnType="boolean">
+        <description> &lt;p&gt;Returns true if this project has been evaluated.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this project has been evaluated.
+
+</description>
+    </method>
+    <method name="getFailure" returnType="java.lang.Throwable">
+        <description> Returns the exception describing the project failure, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exception, or null if project evaluation did not fail.
+
+</description>
+    </method>
+    <method name="rethrowFailure" returnType="void">
+        <description> Throws the project failure, if any. Does nothing if the project did not fail.
+
+</description>
+    </method>
+    <property name="executed" type="boolean">
+        <description> &lt;p&gt;Returns true if this project has been evaluated.&lt;/p&gt;
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;true if this project has been evaluated.
+
+</description>
+    </property>
+    <property name="failure" type="java.lang.Throwable">
+        <description> Returns the exception describing the project failure, if any.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The exception, or null if project evaluation did not fail.
+
+</description>
+    </property>
+</type>

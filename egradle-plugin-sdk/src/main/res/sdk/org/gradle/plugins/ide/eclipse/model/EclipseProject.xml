@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseProject" version="3.0" documented="true">
+    <description> Enables fine-tuning project details (.project file) of the Eclipse plugin
+ &lt;p&gt;
+ Example of use with a blend of all possible properties.
+ Bear in mind that usually you don't have configure eclipse project directly because Gradle configures it for free!
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+ apply plugin: 'eclipse'
+
+ eclipse {
+   project {
+     &lt;em class='comment'&gt;//if you don't like the name Gradle has chosen&lt;/em&gt;
+     name = 'someBetterName'
+
+     &lt;em class='comment'&gt;//if you want to specify the Eclipse project's comment&lt;/em&gt;
+     comment = 'Very interesting top secret project'
+
+     &lt;em class='comment'&gt;//if you want to append some extra referenced projects in a declarative fashion:&lt;/em&gt;
+     referencedProjects 'someProject', 'someOtherProject'
+     &lt;em class='comment'&gt;//if you want to assign referenced projects&lt;/em&gt;
+     referencedProjects = ['someProject'] as Set
+
+     &lt;em class='comment'&gt;//if you want to append some extra natures in a declarative fashion:&lt;/em&gt;
+     natures 'some.extra.eclipse.nature', 'some.another.interesting.nature'
+     &lt;em class='comment'&gt;//if you want to assign natures in a groovy fashion:&lt;/em&gt;
+     natures = ['some.extra.eclipse.nature', 'some.another.interesting.nature']
+
+     &lt;em class='comment'&gt;//if you want to append some extra build command:&lt;/em&gt;
+     buildCommand 'buildThisLovelyProject'
+     &lt;em class='comment'&gt;//if you want to append a build command with parameters:&lt;/em&gt;
+     buildCommand 'buildItWithTheArguments', argumentOne: "I'm first", argumentTwo: "I'm second"
+
+     &lt;em class='comment'&gt;//if you want to create an extra link in the eclipse project,&lt;/em&gt;
+     &lt;em class='comment'&gt;//by location uri:&lt;/em&gt;
+     linkedResource name: 'someLinkByLocationUri', type: 'someLinkType', locationUri: 'file:&lt;em class='comment'&gt;//someUri'&lt;/em&gt;
+     &lt;em class='comment'&gt;//by location:&lt;/em&gt;
+     linkedResource name: 'someLinkByLocation', type: 'someLinkType', location: '/some/location'
+   }
+ }
+ &lt;/pre&gt;
+
+ For tackling edge cases users can perform advanced configuration on resulting XML file.
+ It is also possible to affect the way eclipse plugin merges the existing configuration
+ via beforeMerged and whenMerged closures.
+ &lt;p&gt;
+ beforeMerged and whenMerged closures receive &lt;a href='type://Project'&gt;Project&lt;/a&gt; object
+ &lt;p&gt;
+ Examples of advanced configuration:
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+ apply plugin: 'eclipse'
+
+ eclipse {
+   project {
+
+     file {
+       &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+       withXml {
+         def node = it.asNode()
+         node.appendNode('xml', 'is what I love')
+       }
+
+       &lt;em class='comment'&gt;//closure executed after .project content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+       beforeMerged { project -&gt;
+         &lt;em class='comment'&gt;//if you want skip merging natures... (a very abstract example)&lt;/em&gt;
+         project.natures.clear()
+       }
+
+       &lt;em class='comment'&gt;//closure executed after .project content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { project -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Project'&gt;Project&lt;/a&gt; here&lt;/em&gt;
+       }
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+</description>
+    <method name="buildCommand" returnType="void" documented="true">
+        <description> Adds a build command to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command
+ (see &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#buildCommand(Map,'&gt;String)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.lang.String" name="buildCommand"/>
+    </method>
+    <method name="buildCommand" returnType="void" documented="true">
+        <description> Adds a build command with arguments to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A map with arguments, where the key is the name of the argument and the value the value.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;buildCommand The name of the build command.
+ (see &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#buildCommand(String)'&gt;#buildCommand(String)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.util.Map" name="args"/>
+        <parameter type="java.lang.String" name="buildCommand"/>
+    </method>
+    <method name="file" returnType="void" delegationTarget="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> Enables advanced configuration like tinkering with the output XML or affecting the way existing .project content is merged with gradle build information &lt;p&gt; The object passed to whenMerged{}
+ and beforeMerged{} closures is of type &lt;a href='type://Project'&gt;Project&lt;/a&gt; &lt;p&gt;
+
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="getBuildCommands" returnType="java.util.List"/>
+    <method name="getComment" returnType="java.lang.String"/>
+    <method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="getLinkedResources" returnType="java.util.Set"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getNatures" returnType="java.util.List"/>
+    <method name="getReferencedProjects" returnType="java.util.Set"/>
+    <method name="linkedResource" returnType="void" documented="true">
+        <description> Adds a resource link (aka 'source link') to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;args A maps with the args for the link. Legal keys for the map are name, type, location and locationUri.
+
+</description>
+        <parameter type="java.util.Map" name="args"/>
+    </method>
+    <method name="mergeXmlProject" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.Project" name="xmlProject"/>
+    </method>
+    <method name="natures" returnType="void" documented="true">
+        <description> Appends natures entries to the eclipse project. &lt;p&gt; For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;natures the nature names
+
+</description>
+        <parameter type="java.lang.String" name="natures"/>
+    </method>
+    <method name="referencedProjects" returnType="void" documented="true">
+        <description> The referenced projects of this Eclipse project (*not*: java build path project references). &lt;p&gt; Referencing projects does not mean adding a build path dependencies between them! If you need to
+ configure a build path dependency use Gradle's dependencies section or eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;referencedProjects The name of the project references.
+
+</description>
+        <parameter type="java.lang.String" name="referencedProjects"/>
+    </method>
+    <method name="setBuildCommands" returnType="void">
+        <description> The build commands to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.util.List" name="buildCommands"/>
+    </method>
+    <method name="setComment" returnType="void">
+        <description> A comment used for the eclipse project. By default it will be configured to &lt;b&gt;project.description&lt;/b&gt;
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.lang.String" name="comment"/>
+    </method>
+    <method name="setLinkedResources" returnType="void">
+        <description> The linked resources to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.util.Set" name="linkedResources"/>
+    </method>
+    <method name="setName" returnType="void">
+        <description> Configures eclipse project name. It is &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you.
+ By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt;
+ to make sure the moduleName is unique in the scope of a multi-module build.
+ The 'uniqueness' of a module name is required for correct import
+ into Eclipse and the task will make sure the name is unique.
+ &lt;p&gt;
+ The logic that makes sure project names are unique is available &lt;b&gt;since&lt;/b&gt; 1.0-milestone-2
+ &lt;p&gt;
+ If your project has problems with unique names it is recommended to always run gradle eclipse from the root, e.g. for all subprojects, including generation of .classpath.
+ If you run the generation of the eclipse project only for a single subproject then you may have different results
+ because the unique names are calculated based on eclipse projects that are involved in the specific build run.
+ &lt;p&gt;
+ If you update the project names then make sure you run gradle eclipse from the root, e.g. for all subprojects.
+ The reason is that there may be subprojects that depend on the subproject with amended eclipse project name.
+ So you want them to be generated as well because the project dependencies in .classpath need to refer to the amended project name.
+ Basically, for non-trivial projects it is recommended to always run gradle eclipse from the root.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setNatures" returnType="void">
+        <description> The natures to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.util.List" name="natures"/>
+    </method>
+    <method name="setReferencedProjects" returnType="void">
+        <description> The referenced projects of this Eclipse project (*not*: java build path project references).
+ &lt;p&gt;
+ Referencing projects does not mean adding a build path dependencies between them!
+ If you need to configure a build path dependency use Gradle's dependencies section or
+ eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+        <parameter type="java.util.Set" name="referencedProjects"/>
+    </method>
+    <property name="buildCommands" type="java.util.List" documented="true">
+        <description> The build commands to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="comment" type="java.lang.String" documented="true">
+        <description> A comment used for the eclipse project. By default it will be configured to &lt;b&gt;project.description&lt;/b&gt;
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseProject#file(Closure)'&gt;#file(Closure)&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="linkedResources" type="java.util.Set" documented="true">
+        <description> The linked resources to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String" documented="true">
+        <description> Configures eclipse project name. It is &lt;b&gt;optional&lt;/b&gt; because the task should configure it correctly for you.
+ By default it will try to use the &lt;b&gt;project.name&lt;/b&gt; or prefix it with a part of a &lt;b&gt;project.path&lt;/b&gt;
+ to make sure the moduleName is unique in the scope of a multi-module build.
+ The 'uniqueness' of a module name is required for correct import
+ into Eclipse and the task will make sure the name is unique.
+ &lt;p&gt;
+ The logic that makes sure project names are unique is available &lt;b&gt;since&lt;/b&gt; 1.0-milestone-2
+ &lt;p&gt;
+ If your project has problems with unique names it is recommended to always run gradle eclipse from the root, e.g. for all subprojects, including generation of .classpath.
+ If you run the generation of the eclipse project only for a single subproject then you may have different results
+ because the unique names are calculated based on eclipse projects that are involved in the specific build run.
+ &lt;p&gt;
+ If you update the project names then make sure you run gradle eclipse from the root, e.g. for all subprojects.
+ The reason is that there may be subprojects that depend on the subproject with amended eclipse project name.
+ So you want them to be generated as well because the project dependencies in .classpath need to refer to the amended project name.
+ Basically, for non-trivial projects it is recommended to always run gradle eclipse from the root.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="natures" type="java.util.List" documented="true">
+        <description> The natures to be added to this Eclipse project.
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+    <property name="referencedProjects" type="java.util.Set" documented="true">
+        <description> The referenced projects of this Eclipse project (*not*: java build path project references).
+ &lt;p&gt;
+ Referencing projects does not mean adding a build path dependencies between them!
+ If you need to configure a build path dependency use Gradle's dependencies section or
+ eclipse.classpath.whenMerged { classpath -&gt; ... to manipulate the classpath entries
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;
+
+</description>
+    </property>
+</type>

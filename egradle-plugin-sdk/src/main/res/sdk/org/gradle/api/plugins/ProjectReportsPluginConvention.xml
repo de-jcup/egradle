@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.ProjectReportsPluginConvention" version="3.0" documented="true">
+    <description> The conventional configuration for the `ProjectReportsPlugin`.
+
+</description>
+    <method name="getProjectReportDir" returnType="java.io.File">
+        <description>Returns the directory to generate the project reports into.
+</description>
+    </method>
+    <method name="getProjectReportDirName" returnType="java.lang.String">
+        <description>The name of the directory to generate the project reports into, relative to the project's reports dir.
+</description>
+    </method>
+    <method name="getProjects" returnType="java.util.Set"/>
+    <method name="setProjectReportDirName" returnType="void">
+        <parameter type="java.lang.String" name="projectReportDirName"/>
+    </method>
+    <property name="projectReportDir" type="java.io.File" documented="true">
+        <description> Returns the directory to generate the project reports into.
+
+</description>
+    </property>
+    <property name="projectReportDirName" type="java.lang.String" documented="true">
+        <description> The name of the directory to generate the project reports into, relative to the project's reports dir.
+
+</description>
+    </property>
+    <property name="projects" type="java.util.Set"/>
+</type>

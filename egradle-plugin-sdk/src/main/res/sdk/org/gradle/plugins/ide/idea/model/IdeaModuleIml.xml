@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.IdeaModuleIml" version="3.0" superType="org.gradle.plugins.ide.api.XmlFileContentMerger">
+    <description> Models the generation/parsing/merging capabilities of an IDEA module.
+ &lt;p&gt;
+ For examples, see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;.
+
+</description>
+    <method name="getGenerateTo" returnType="java.io.File">
+        <description> Folder where the *.iml file will be generated to
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;
+
+</description>
+    </method>
+    <method name="setGenerateTo" returnType="void">
+        <parameter type="java.io.File" name="generateTo"/>
+    </method>
+    <property name="generateTo" type="java.io.File">
+        <description> Folder where the *.iml file will be generated to
+ &lt;p&gt;
+ For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;
+
+</description>
+    </property>
+</type>

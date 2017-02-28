@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.language.objectivec.tasks.ObjectiveCPreCompiledHeaderCompile" version="3.0" superType="org.gradle.language.nativeplatform.tasks.AbstractNativePCHCompileTask">
+    <description> Compiles Objective C header source files into object files.
+
+</description>
+    <method name="createCompileSpec" returnType="org.gradle.nativeplatform.toolchain.internal.NativeCompileSpec"/>
+</type>

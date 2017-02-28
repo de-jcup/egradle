@@ -291,6 +291,10 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		clearErrorMarkers();
 		model = newModel;
 	}
+	
+	public Model getModel() {
+		return model;
+	}
 
 	private Item[] getRootChildren() {
 		if (model == null) {

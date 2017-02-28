@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.scala.IncrementalCompileOptions" version="3.0">
+    <description> Options for incremental compilation of Scala code. Only used for compilation with Zinc.
+
+</description>
+    <method name="getAnalysisFile" returnType="java.io.File">
+        <description> Returns the file path where results of code analysis are to be stored.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the file path where which results of code analysis are to be stored
+
+</description>
+    </method>
+    <method name="getPublishedCode" returnType="java.io.File">
+        <description> Returns the directory or archive path by which the code produced by this task
+ is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory or archive path by which the code produced by this task
+ is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks
+
+</description>
+    </method>
+    <method name="setAnalysisFile" returnType="void">
+        <description> Sets the file path where results of code analysis are to be stored.
+
+</description>
+        <parameter type="java.io.File" name="analysisFile"/>
+    </method>
+    <method name="setPublishedCode" returnType="void">
+        <description> Sets the directory or archive path by which the code produced by this task
+ is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks.
+
+</description>
+        <parameter type="java.io.File" name="publishedCode"/>
+    </method>
+    <interface name="java.io.Serializable"/>
+    <property name="analysisFile" type="java.io.File">
+        <description> Returns the file path where results of code analysis are to be stored.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the file path where which results of code analysis are to be stored
+
+</description>
+    </property>
+    <property name="publishedCode" type="java.io.File">
+        <description> Returns the directory or archive path by which the code produced by this task
+ is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory or archive path by which the code produced by this task
+ is published to other &lt;a href='type://ScalaCompile'&gt;ScalaCompile&lt;/a&gt; tasks
+
+</description>
+    </property>
+</type>

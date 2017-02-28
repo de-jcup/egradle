@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.repositories.FlatDirectoryArtifactRepository" version="3.0">
+    <description> A repository that looks into a number of directories for artifacts. The artifacts are expected to be located in the root of the specified directories.
+ The repository ignores any group/organization information specified in the dependency section of your build script. If you only use this kind of
+ resolver you can specify your dependencies like &lt;code&gt;:junit:4.8.1&lt;/code&gt; instead of &lt;code&gt;junit:junit:4.8.1&lt;/code&gt;.
+
+ &lt;p&gt;To resolve a dependency, this resolver looks for one of the following files. It will return the first match it finds:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;[artifact]-[version].[ext]
+ &lt;li&gt;[artifact]-[version]-[classifier].[ext]
+ &lt;li&gt;[artifact].[ext]
+ &lt;li&gt;[artifact]-[classifier].[ext]
+
+ &lt;/ul&gt;
+
+ So, for example, to resolve &lt;code&gt;:junit:junit:4.8.1&lt;/code&gt;, this repository will look for &lt;code&gt;junit-4.8.1.jar&lt;/code&gt; and then &lt;code&gt;junit.jar&lt;/code&gt;.
+
+</description>
+    <method name="dir" returnType="void">
+        <description> Adds a directory where this repository will look for artifacts.
+
+ &lt;p&gt;The provided value are evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dir the directory
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <method name="dirs" returnType="void">
+        <description> Adds some directories where this repository will look for artifacts.
+
+ &lt;p&gt;The provided values are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dirs the directories.
+
+</description>
+        <parameter type="java.lang.Object" name="dirs"/>
+    </method>
+    <method name="getDirs" returnType="java.util.Set">
+        <description> Returns the directories where this repository will look for artifacts.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directories. Never null.
+
+</description>
+    </method>
+    <method name="setDirs" returnType="void">
+        <description> Sets the directories where this repository will look for artifacts.
+
+ &lt;p&gt;The provided values are evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;dirs the directories.
+
+</description>
+        <parameter type="java.lang.Iterable" name="dirs"/>
+    </method>
+    <interface name="org.gradle.api.artifacts.repositories.ArtifactRepository"/>
+    <property name="dirs" type="java.util.Set">
+        <description> Returns the directories where this repository will look for artifacts.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directories. Never null.
+
+</description>
+    </property>
+</type>

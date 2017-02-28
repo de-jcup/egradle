@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.jvm.application.scripts.JavaAppStartScriptGenerationDetails" version="3.0">
+    <description> Details for generating Java-based application start scripts.
+
+</description>
+    <method name="getAppNameSystemProperty" returnType="java.lang.String">
+        <description> This system property to use to pass the script name to the application. May be null.
+
+</description>
+    </method>
+    <method name="getApplicationName" returnType="java.lang.String">
+        <description> The display name of the application
+
+</description>
+    </method>
+    <method name="getClasspath" returnType="java.util.List">
+        <description> The classpath, relative to the application home directory.
+
+</description>
+    </method>
+    <method name="getDefaultJvmOpts" returnType="java.util.List"/>
+    <method name="getExitEnvironmentVar" returnType="java.lang.String">
+        <description> The environment variable to use to control exit value (windows only)
+
+</description>
+    </method>
+    <method name="getMainClassName" returnType="java.lang.String"/>
+    <method name="getOptsEnvironmentVar" returnType="java.lang.String">
+        <description> The environment variable to use to provide additional options to the JVM
+
+</description>
+    </method>
+    <method name="getScriptRelPath" returnType="java.lang.String">
+        <description> The path of the script, relative to the application home directory.
+
+</description>
+    </method>
+    <property name="appNameSystemProperty" type="java.lang.String">
+        <description> This system property to use to pass the script name to the application. May be null.
+
+</description>
+    </property>
+    <property name="applicationName" type="java.lang.String">
+        <description> The display name of the application
+
+</description>
+    </property>
+    <property name="classpath" type="java.util.List">
+        <description> The classpath, relative to the application home directory.
+
+</description>
+    </property>
+    <property name="defaultJvmOpts" type="java.util.List"/>
+    <property name="exitEnvironmentVar" type="java.lang.String">
+        <description> The environment variable to use to control exit value (windows only)
+
+</description>
+    </property>
+    <property name="mainClassName" type="java.lang.String"/>
+    <property name="optsEnvironmentVar" type="java.lang.String">
+        <description> The environment variable to use to provide additional options to the JVM
+
+</description>
+    </property>
+    <property name="scriptRelPath" type="java.lang.String">
+        <description> The path of the script, relative to the application home directory.
+
+</description>
+    </property>
+</type>

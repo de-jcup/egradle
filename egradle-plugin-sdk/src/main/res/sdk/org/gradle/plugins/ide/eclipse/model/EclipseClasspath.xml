@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.EclipseClasspath" version="3.0" documented="true">
+    <description> The build path settings for the generated Eclipse project. Used by the
+ &lt;a href='type://org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath'&gt;org.gradle.plugins.ide.eclipse.GenerateEclipseClasspath&lt;/a&gt; task to generate an Eclipse .classpath file.
+ &lt;p&gt;
+ The following example demonstrates the various configuration options.
+ Keep in mind that all properties have sensible defaults; only configure them explicitly
+ if the defaults don't match your needs.
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+ apply plugin: 'eclipse'
+
+ configurations {
+   provided
+   someBoringConfig
+ }
+
+ eclipse {
+   &lt;em class='comment'&gt;//if you want parts of paths in resulting file to be replaced by variables (files):&lt;/em&gt;
+   pathVariables 'GRADLE_HOME': file('/best/software/gradle'), 'TOMCAT_HOME': file('../tomcat')
+
+   classpath {
+     &lt;em class='comment'&gt;//you can tweak the classpath of the Eclipse project by adding extra configurations:&lt;/em&gt;
+     plusConfigurations += [ configurations.provided ]
+
+     &lt;em class='comment'&gt;//you can also remove configurations from the classpath:&lt;/em&gt;
+     minusConfigurations += [ configurations.someBoringConfig ]
+
+     &lt;em class='comment'&gt;//if you want to append extra containers:&lt;/em&gt;
+     containers 'someFriendlyContainer', 'andYetAnotherContainer'
+
+     &lt;em class='comment'&gt;//customizing the classes output directory:&lt;/em&gt;
+     defaultOutputDir = file('build-eclipse')
+
+     &lt;em class='comment'&gt;//default settings for downloading sources and Javadoc:&lt;/em&gt;
+     downloadSources = true
+     downloadJavadoc = false
+   }
+ }
+ &lt;/pre&gt;
+
+ For tackling edge cases, users can perform advanced configuration on the resulting XML file.
+ It is also possible to affect the way that the Eclipse plugin merges the existing configuration
+ via beforeMerged and whenMerged closures.
+ &lt;p&gt;
+ The beforeMerged and whenMerged closures receive a &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; object.
+ &lt;p&gt;
+ Examples of advanced configuration:
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+ apply plugin: 'eclipse'
+
+ eclipse {
+   classpath {
+     file {
+       &lt;em class='comment'&gt;//if you want to mess with the resulting XML in whatever way you fancy&lt;/em&gt;
+       withXml {
+         def node = it.asNode()
+         node.appendNode('xml', 'is what I love')
+       }
+
+       &lt;em class='comment'&gt;//closure executed after .classpath content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//but before gradle build information is merged&lt;/em&gt;
+       beforeMerged { classpath -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here&lt;/em&gt;
+       }
+
+       &lt;em class='comment'&gt;//closure executed after .classpath content is loaded from existing file&lt;/em&gt;
+       &lt;em class='comment'&gt;//and after gradle build information is merged&lt;/em&gt;
+       whenMerged { classpath -&gt;
+         &lt;em class='comment'&gt;//you can tinker with the &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt; here&lt;/em&gt;
+       }
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+</description>
+    <method name="containers" returnType="void" documented="true">
+        <description> Further classpath containers to be added.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;containers the classpath containers to be added
+
+</description>
+        <parameter type="java.lang.String" name="containers"/>
+    </method>
+    <method name="file" returnType="void" delegationTarget="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> Enables advanced configuration like tinkering with the output XML or affecting the way
+ that the contents of an existing .classpath file is merged with Gradle build information.
+ The object passed to the whenMerged{} and beforeMerged{} closures is of type &lt;a href='type://Classpath'&gt;Classpath&lt;/a&gt;.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt; for an example.
+
+</description>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="getClassFolders" returnType="java.util.List"/>
+    <method name="getContainers" returnType="java.util.Set">
+        <description> The classpath containers to be added.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="getDefaultOutputDir" returnType="java.io.File">
+        <description> The default output directory where Eclipse puts compiled classes.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="getFile" returnType="org.gradle.plugins.ide.api.XmlFileContentMerger">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseClasspath#file(Closure)'&gt;#file(Closure)&lt;/a&gt;.
+
+</description>
+    </method>
+    <method name="getFileReferenceFactory" returnType="org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory"/>
+    <method name="getMinusConfigurations" returnType="java.util.Collection">
+        <description> The configurations whose files are to be excluded from the classpath entries.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="getPathVariables" returnType="java.util.Map"/>
+    <method name="getPlusConfigurations" returnType="java.util.Collection">
+        <description> The configurations whose files are to be added as classpath entries.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="getProject" returnType="org.gradle.api.Project"/>
+    <method name="getSourceSets" returnType="java.lang.Iterable">
+        <description> The source sets to be added.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="isDownloadJavadoc" returnType="boolean">
+        <description> Whether to download and associate Javadoc Jars with the dependency Jars. Defaults to false.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="isDownloadSources" returnType="boolean">
+        <description> Whether to download and associate source Jars with the dependency Jars. Defaults to true.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </method>
+    <method name="isProjectDependenciesOnly" returnType="boolean"/>
+    <method name="mergeXmlClasspath" returnType="void">
+        <parameter type="org.gradle.plugins.ide.eclipse.model.Classpath" name="xmlClasspath"/>
+    </method>
+    <method name="resolveDependencies" returnType="java.util.List">
+        <description> Calculates, resolves and returns dependency entries of this classpath.
+
+</description>
+    </method>
+    <method name="setClassFolders" returnType="void">
+        <parameter type="java.util.List" name="classFolders"/>
+    </method>
+    <method name="setContainers" returnType="void">
+        <parameter type="java.util.Set" name="containers"/>
+    </method>
+    <method name="setDefaultOutputDir" returnType="void">
+        <parameter type="java.io.File" name="defaultOutputDir"/>
+    </method>
+    <method name="setDownloadJavadoc" returnType="void">
+        <parameter type="boolean" name="downloadJavadoc"/>
+    </method>
+    <method name="setDownloadSources" returnType="void">
+        <parameter type="boolean" name="downloadSources"/>
+    </method>
+    <method name="setFile" returnType="void">
+        <parameter type="org.gradle.plugins.ide.api.XmlFileContentMerger" name="file"/>
+    </method>
+    <method name="setMinusConfigurations" returnType="void">
+        <parameter type="java.util.Collection" name="minusConfigurations"/>
+    </method>
+    <method name="setPathVariables" returnType="void">
+        <parameter type="java.util.Map" name="pathVariables"/>
+    </method>
+    <method name="setPlusConfigurations" returnType="void">
+        <parameter type="java.util.Collection" name="plusConfigurations"/>
+    </method>
+    <method name="setProjectDependenciesOnly" returnType="void">
+        <parameter type="boolean" name="projectDependenciesOnly"/>
+    </method>
+    <method name="setSourceSets" returnType="void">
+        <parameter type="java.lang.Iterable" name="sourceSets"/>
+    </method>
+    <property name="classFolders" type="java.util.List"/>
+    <property name="containers" type="java.util.Set" documented="true">
+        <description> The classpath containers to be added.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="defaultOutputDir" type="java.io.File" documented="true">
+        <description> The default output directory where Eclipse puts compiled classes.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="downloadJavadoc" type="boolean" documented="true">
+        <description> Whether to download and associate Javadoc Jars with the dependency Jars. Defaults to false.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="downloadSources" type="boolean" documented="true">
+        <description> Whether to download and associate source Jars with the dependency Jars. Defaults to true.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="file" type="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
+        <description> See &lt;a href='type://org.gradle.plugins.ide.eclipse.model.EclipseClasspath#file(Closure)'&gt;#file(Closure)&lt;/a&gt;.
+
+</description>
+    </property>
+    <property name="fileReferenceFactory" type="org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory"/>
+    <property name="minusConfigurations" type="java.util.Collection" documented="true">
+        <description> The configurations whose files are to be excluded from the classpath entries.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="pathVariables" type="java.util.Map"/>
+    <property name="plusConfigurations" type="java.util.Collection" documented="true">
+        <description> The configurations whose files are to be added as classpath entries.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+    <property name="project" type="org.gradle.api.Project"/>
+    <property name="projectDependenciesOnly" type="boolean"/>
+    <property name="sourceSets" type="java.lang.Iterable">
+        <description> The source sets to be added.
+ &lt;p&gt;
+ See &lt;a href='type://EclipseClasspath'&gt;EclipseClasspath&lt;/a&gt; for an example.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <description> Executes two Gradle builds (that can be the same build) with specified versions and compares the outcomes.
+
+ Please see the “Comparing Builds” chapter of the Gradle User Guide for more information.
+
+</description>
+    <method name="communicateResult" returnType="void">
+        <parameter type="org.gradle.api.plugins.buildcomparison.compare.internal.BuildComparisonResult" name="result"/>
+    </method>
+    <method name="compare" returnType="void"/>
+    <method name="getFileResolver" returnType="org.gradle.internal.file.PathToFileResolver"/>
+    <method name="getIgnoreFailures" returnType="boolean">
+        <description> Whether a comparison between non identical builds will fail the task execution.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;True if a comparison between non identical builds will fail the task execution, otherwise false.
+
+</description>
+    </method>
+    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
+    <method name="getProgressLoggerFactory" returnType="org.gradle.internal.logging.progress.ProgressLoggerFactory"/>
+    <method name="getReportDir" returnType="java.io.File">
+        <description> The directory that will contain the HTML comparison report and any other report files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory that will contain the HTML comparison report and any other report files.
+
+</description>
+    </method>
+    <method name="getSourceBuild" returnType="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
+        <description> The specification of how to invoke the source build.
+
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
+ and the tasks “clean assemble”.
+
+ The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the source build.
+
+</description>
+    </method>
+    <method name="getTargetBuild" returnType="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec">
+        <description> The specification of how to invoke the target build.
+
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
+ and the tasks “clean assemble”.
+
+ The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the target build.
+
+</description>
+    </method>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="org.gradle.api.Task" name="element"/>
+    </method>
+    <method name="setIgnoreFailures" returnType="void">
+        <description> Sets whether a comparison between non identical builds will fail the task execution.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;ignoreFailures false to fail the task on non identical builds, true to not fail the task. The default is false.
+
+</description>
+        <parameter type="boolean" name="ignoreFailures"/>
+    </method>
+    <method name="setReportDir" returnType="void">
+        <description> Sets the directory that will contain the HTML comparison report and any other report files.
+
+ The value will be evaluated by &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;project.file()&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;reportDir The directory that will contain the HTML comparison report and any other report files.
+
+</description>
+        <parameter type="java.lang.Object" name="reportDir"/>
+    </method>
+    <method name="sourceBuild" returnType="void" documented="true">
+        <description> Configures the source build.
+
+ A Groovy closure can be used as the action.
+ &lt;pre&gt;
+ sourceBuild {
+   gradleVersion = "1.1"
+ }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The configuration action.
+
+</description>
+        <parameter type="org.gradle.api.Action" name="config"/>
+    </method>
+    <method name="targetBuild" returnType="void" documented="true">
+        <description> Configures the target build.
+
+ A Groovy closure can be used as the action.
+ &lt;pre&gt;
+ targetBuild {
+   gradleVersion = "1.1"
+ }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;config The configuration action.
+
+</description>
+        <parameter type="org.gradle.api.Action" name="config"/>
+    </method>
+    <interface name="org.gradle.api.tasks.VerificationTask"/>
+    <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
+    <property name="ignoreFailures" type="boolean" documented="true">
+        <description> Whether a comparison between non identical builds will fail the task execution.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;True if a comparison between non identical builds will fail the task execution, otherwise false.
+
+</description>
+    </property>
+    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
+    <property name="progressLoggerFactory" type="org.gradle.internal.logging.progress.ProgressLoggerFactory"/>
+    <property name="reportDir" type="java.io.File" documented="true">
+        <description> The directory that will contain the HTML comparison report and any other report files.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory that will contain the HTML comparison report and any other report files.
+
+</description>
+    </property>
+    <property name="satisfiedBy" type="boolean"/>
+    <property name="sourceBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
+        <description> The specification of how to invoke the source build.
+
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
+ and the tasks “clean assemble”.
+
+ The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the source build.
+
+</description>
+    </property>
+    <property name="targetBuild" type="org.gradle.api.plugins.buildcomparison.gradle.GradleBuildInvocationSpec" documented="true">
+        <description> The specification of how to invoke the target build.
+
+ Defaults to &lt;a href='type://org.gradle.api.Project#getRootDir()'&gt;project.rootDir&lt;/a&gt; with the current Gradle version
+ and the tasks “clean assemble”.
+
+ The &lt;a href='type://projectDir'&gt;projectDir&lt;/a&gt; must be the project directory of the root project if this is a multi project build.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The specification of how to invoke the target build.
+
+</description>
+    </property>
+</type>

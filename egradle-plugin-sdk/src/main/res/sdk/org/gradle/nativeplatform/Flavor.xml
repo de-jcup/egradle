@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.Flavor" version="3.0" documented="true">
+    <description> Defines a custom variant that differentiate a &lt;a href='type://NativeBinary'&gt;NativeBinary&lt;/a&gt;.
+
+</description>
+    <method name="getDisplayName" returnType="java.lang.String">
+        <description> Returns a human-consumable display name for this flavor.
+
+</description>
+    </method>
+    <interface name="org.gradle.api.Named"/>
+    <property name="displayName" type="java.lang.String">
+        <description> Returns a human-consumable display name for this flavor.
+
+</description>
+    </property>
+</type>

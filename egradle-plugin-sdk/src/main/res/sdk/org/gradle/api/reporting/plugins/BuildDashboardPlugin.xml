@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.reporting.plugins.BuildDashboardPlugin" version="3.0">
+    <description> Adds a task, "buildDashboard", that aggregates the output of all tasks that produce reports.
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="call" returnType="java.lang.Object"/>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.api.Task" name="task"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

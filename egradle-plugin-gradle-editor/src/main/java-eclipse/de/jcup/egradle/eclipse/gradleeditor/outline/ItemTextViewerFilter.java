@@ -57,15 +57,15 @@ class ItemTextViewerFilter extends ViewerFilter {
 	}
 
 	/**
-	 * Returns whether the given element makes it through this filter.
+	 * Returns whether the given type makes it through this filter.
 	 *
 	 * @param viewer
 	 *            the viewer
 	 * @param parentPath
-	 *            the parent element path
+	 *            the parent type path
 	 * @param element
-	 *            the element
-	 * @return <code>true</code> if element is included in the filtered set, and
+	 *            the type
+	 * @return <code>true</code> if type is included in the filtered set, and
 	 *         <code>false</code> if excluded
 	 */
 	public boolean selectTreePath(Viewer viewer, TreePath parentPath, Object element) {

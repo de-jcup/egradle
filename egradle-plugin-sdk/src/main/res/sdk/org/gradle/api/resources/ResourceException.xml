@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.resources.ResourceException" version="3.0" superType="org.gradle.api.GradleException">
+    <description> Generic resource exception that all other resource-related exceptions inherit from.
+
+</description>
+    <method name="getLocation" returnType="java.net.URI">
+        <description> Returns the location of the resource, if known.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The location, or null if not known.
+
+</description>
+    </method>
+    <property name="location" type="java.net.URI">
+        <description> Returns the location of the resource, if known.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The location, or null if not known.
+
+</description>
+    </property>
+</type>

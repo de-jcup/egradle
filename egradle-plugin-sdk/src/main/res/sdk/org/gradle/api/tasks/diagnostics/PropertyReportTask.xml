@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.PropertyReportTask" version="3.0" superType="org.gradle.api.tasks.diagnostics.AbstractReportTask" documented="true">
+    <description> Displays the properties of a project. An instance of this type is used when you execute the &lt;a href='type://properties'&gt;properties&lt;/a&gt; task
+ from the command-line.
+
+</description>
+    <method name="generate" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
+    <method name="setRenderer" returnType="void">
+        <parameter type="org.gradle.api.tasks.diagnostics.internal.PropertyReportRenderer" name="renderer"/>
+    </method>
+    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
+</type>

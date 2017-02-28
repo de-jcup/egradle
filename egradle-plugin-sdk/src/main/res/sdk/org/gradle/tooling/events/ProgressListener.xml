@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.ProgressListener" version="3.0">
+    <description> A listener which is notified when operations that are executed as part of running a build make progress.
+
+ (see &lt;a href='type://org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener)'&gt;org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.LongRunningOperation#addProgressListener(ProgressListener,'&gt;java.util.Set)&lt;/a&gt;)
+ &lt;br&gt;(since 2.5)
+
+</description>
+    <method name="statusChanged" returnType="void">
+        <description> Called when the execution of an operation progresses.
+
+ The following operation-specific events are currently issued:
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.events.test.TestStartEvent'&gt;org.gradle.tooling.events.test.TestStartEvent&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.events.test.TestFinishEvent'&gt;org.gradle.tooling.events.test.TestFinishEvent&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.events.task.TaskStartEvent'&gt;org.gradle.tooling.events.task.TaskStartEvent&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.tooling.events.task.TaskFinishEvent'&gt;org.gradle.tooling.events.task.TaskFinishEvent&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ For all other operations, the following generic events are currently issued :
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://StartEvent'&gt;StartEvent&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://FinishEvent'&gt;FinishEvent&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ You can find out more about the operation for which progress is reported
+ by querying the descriptor using &lt;a href='type://org.gradle.tooling.events.ProgressEvent#getDescriptor()'&gt;org.gradle.tooling.events.ProgressEvent#getDescriptor()&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;event An event describing the operation progress.
+ (see &lt;a href='type://org.gradle.tooling.events.test.TestProgressEvent'&gt;org.gradle.tooling.events.test.TestProgressEvent&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.events.task.TaskProgressEvent'&gt;org.gradle.tooling.events.task.TaskProgressEvent&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.tooling.events.ProgressEvent'&gt;org.gradle.tooling.events.ProgressEvent&lt;/a&gt;)
+
+</description>
+        <parameter type="org.gradle.tooling.events.ProgressEvent" name="event"/>
+    </method>
+</type>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.testing.logging.TestLogEvent" version="3.0">
+    <description> Test events that can be logged.
+
+</description>
+</type>

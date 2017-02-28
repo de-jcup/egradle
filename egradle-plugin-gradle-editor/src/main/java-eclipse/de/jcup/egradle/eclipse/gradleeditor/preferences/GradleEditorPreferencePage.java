@@ -59,6 +59,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 	private Button matchingBracketRadioButton;
 
 	private BooleanFieldEditor linkEditorWithOutline;
+	
 	private ColorFieldEditor matchingBracketsColor;
 
 	private ArrayList<MasterButtonSlaveSelectionListener> masterSlaveListeners = new ArrayList<>();

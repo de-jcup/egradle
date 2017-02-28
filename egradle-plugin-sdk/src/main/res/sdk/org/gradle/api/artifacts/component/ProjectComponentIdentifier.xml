@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ProjectComponentIdentifier" version="3.0">
+    <description> An identifier for a component instance that is built as part of the current build.
+
+ &lt;br&gt;(since 1.10)
+
+</description>
+    <method name="getProjectPath" returnType="java.lang.String">
+        <description> Returns the path of the project which the component belongs to.
+
+ &lt;br&gt;(since 1.10)
+
+</description>
+    </method>
+    <interface name="org.gradle.api.artifacts.component.ComponentIdentifier"/>
+    <property name="projectPath" type="java.lang.String">
+        <description> Returns the path of the project which the component belongs to.
+
+ &lt;br&gt;(since 1.10)
+
+</description>
+    </property>
+</type>

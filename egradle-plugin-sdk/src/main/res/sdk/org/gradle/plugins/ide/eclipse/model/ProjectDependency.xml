@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.ProjectDependency" version="3.0" superType="org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry">
+    <description> A classpath entry representing a project dependency.
+
+</description>
+    <method name="assertPathIsValid" returnType="void"/>
+    <method name="getGradlePath" returnType="java.lang.String"/>
+    <method name="getKind" returnType="java.lang.String"/>
+    <method name="setGradlePath" returnType="void">
+        <parameter type="java.lang.String" name="gradlePath"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="gradlePath" type="java.lang.String"/>
+    <property name="kind" type="java.lang.String"/>
+</type>

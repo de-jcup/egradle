@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.idea.IdeaContentRoot" version="3.0">
+    <description> Contains content root information.
+
+</description>
+    <method name="getExcludeDirectories" returnType="java.util.Set">
+        <description> The set of excluded directories.
+
+</description>
+    </method>
+    <method name="getGeneratedSourceDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of generated source directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getSourceDirectories()'&gt;#getSourceDirectories()&lt;/a&gt;.
+
+ &lt;br&gt;(since 2.2)
+
+</description>
+    </method>
+    <method name="getGeneratedTestDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of generated test directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getTestDirectories()'&gt;#getTestDirectories()&lt;/a&gt;.
+
+ &lt;br&gt;(since 2.2)
+
+</description>
+    </method>
+    <method name="getRootDirectory" returnType="java.io.File">
+        <description> The content root directory.
+
+</description>
+    </method>
+    <method name="getSourceDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of source directories.
+
+</description>
+    </method>
+    <method name="getTestDirectories" returnType="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of test source directories.
+
+</description>
+    </method>
+    <property name="excludeDirectories" type="java.util.Set">
+        <description> The set of excluded directories.
+
+</description>
+    </property>
+    <property name="generatedSourceDirectories" type="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of generated source directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getSourceDirectories()'&gt;#getSourceDirectories()&lt;/a&gt;.
+
+ &lt;br&gt;(since 2.2)
+
+</description>
+    </property>
+    <property name="generatedTestDirectories" type="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of generated test directories. This is a subset of those directories returned by &lt;a href='type://org.gradle.tooling.model.idea.IdeaContentRoot#getTestDirectories()'&gt;#getTestDirectories()&lt;/a&gt;.
+
+ &lt;br&gt;(since 2.2)
+
+</description>
+    </property>
+    <property name="rootDirectory" type="java.io.File">
+        <description> The content root directory.
+
+</description>
+    </property>
+    <property name="sourceDirectories" type="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of source directories.
+
+</description>
+    </property>
+    <property name="testDirectories" type="org.gradle.tooling.model.DomainObjectSet">
+        <description> The set of test source directories.
+
+</description>
+    </property>
+</type>

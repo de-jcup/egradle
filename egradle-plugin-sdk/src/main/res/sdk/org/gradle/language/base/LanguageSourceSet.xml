@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.language.base.LanguageSourceSet" version="3.0" documented="true">
+    <description> A set of sources for a programming language.
+
+</description>
+    <method name="generatedBy" returnType="void">
+        <parameter type="org.gradle.api.Task" name="generatorTask"/>
+    </method>
+    <method name="getParentName" returnType="java.lang.String"/>
+    <method name="getSource" returnType="org.gradle.api.file.SourceDirectorySet">
+        <description> The source files.
+
+</description>
+    </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
+    <property name="parentName" type="java.lang.String"/>
+    <property name="source" type="org.gradle.api.file.SourceDirectorySet" documented="true">
+        <description> The source files.
+
+</description>
+    </property>
+</type>

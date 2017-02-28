@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.result.ArtifactResolutionResult" version="3.0">
+    <description> The result of executing an artifact resolution query.
+
+ &lt;br&gt;(since 2.0)
+
+</description>
+    <method name="getComponents" returnType="java.util.Set">
+        <description> &lt;p&gt;Return a set of ComponentResults representing all requested components.
+
+ &lt;p&gt;Each element in the returned set is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.result.ComponentResult'&gt;org.gradle.api.artifacts.result.ComponentResult&lt;/a&gt;.
+    However each element in the result will also implement one of the following interfaces:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt; for any component whose ID could be resolved in the set of repositories.&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.result.UnresolvedComponentResult'&gt;org.gradle.api.artifacts.result.UnresolvedComponentResult&lt;/a&gt; for any component whose ID could not be resolved from the set of repositories.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of results for all requested components
+
+</description>
+    </method>
+    <method name="getResolvedComponents" returnType="java.util.Set">
+        <description> &lt;p&gt;Return a set of ComponentResults representing all successfully resolved components.
+
+ &lt;p&gt;Calling this method is the same as calling &lt;a href='type://org.gradle.api.artifacts.result.ArtifactResolutionResult#getComponents()'&gt;#getComponents()&lt;/a&gt; and filtering the resulting set for elements of type &lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of all successfully resolved components
+
+</description>
+    </method>
+    <property name="components" type="java.util.Set">
+        <description> &lt;p&gt;Return a set of ComponentResults representing all requested components.
+
+ &lt;p&gt;Each element in the returned set is declared as an opaque &lt;a href='type://org.gradle.api.artifacts.result.ComponentResult'&gt;org.gradle.api.artifacts.result.ComponentResult&lt;/a&gt;.
+    However each element in the result will also implement one of the following interfaces:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt; for any component whose ID could be resolved in the set of repositories.&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://org.gradle.api.artifacts.result.UnresolvedComponentResult'&gt;org.gradle.api.artifacts.result.UnresolvedComponentResult&lt;/a&gt; for any component whose ID could not be resolved from the set of repositories.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of results for all requested components
+
+</description>
+    </property>
+    <property name="resolvedComponents" type="java.util.Set">
+        <description> &lt;p&gt;Return a set of ComponentResults representing all successfully resolved components.
+
+ &lt;p&gt;Calling this method is the same as calling &lt;a href='type://org.gradle.api.artifacts.result.ArtifactResolutionResult#getComponents()'&gt;#getComponents()&lt;/a&gt; and filtering the resulting set for elements of type &lt;a href='type://ComponentArtifactsResult'&gt;ComponentArtifactsResult&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the set of all successfully resolved components
+
+</description>
+    </property>
+</type>

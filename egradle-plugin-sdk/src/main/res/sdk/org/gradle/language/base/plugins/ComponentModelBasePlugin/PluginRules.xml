@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.language.base.plugins.ComponentModelBasePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
+    <method name="addComponentSourcesSetsToProjectSourceSet" returnType="void">
+        <parameter type="org.gradle.platform.base.SourceComponentSpec" name="component"/>
+        <parameter type="org.gradle.language.base.ProjectSourceSet" name="projectSourceSet"/>
+    </method>
+    <method name="applyFallbackSourceConventions" returnType="void">
+        <parameter type="org.gradle.language.base.LanguageSourceSet" name="languageSourceSet"/>
+        <parameter type="org.gradle.api.internal.project.ProjectIdentifier" name="projectIdentifier"/>
+    </method>
+    <method name="attachBinariesToAssembleLifecycle" returnType="void">
+        <parameter type="org.gradle.api.Task" name="assemble"/>
+        <parameter type="org.gradle.platform.base.ComponentSpecContainer" name="components"/>
+    </method>
+    <method name="collectBinaries" returnType="void">
+        <parameter type="org.gradle.platform.base.BinaryContainer" name="binaries"/>
+        <parameter type="org.gradle.platform.base.ComponentSpecContainer" name="componentSpecs"/>
+    </method>
+    <method name="createSourceTransformTasks" returnType="void">
+        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
+        <parameter type="org.gradle.model.ModelMap" name="binaries"/>
+        <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languageTransforms"/>
+        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="org.gradle.language.base.LanguageSourceSet" name="languageSourceSet"/>
+    </method>
+    <method name="initializeComponentSourceSets" returnType="void">
+        <parameter type="HasIntermediateOutputsComponentSpec" name="component"/>
+        <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languageTransforms"/>
+    </method>
+    <method name="inputRules" returnType="void">
+        <parameter type="org.gradle.language.base.plugins.ComponentModelBasePlugin.PluginRules.AttachInputs" name="attachInputs"/>
+        <parameter type="org.gradle.platform.base.GeneralComponentSpec" name="component"/>
+    </method>
+    <method name="languageTransforms" returnType="org.gradle.language.base.internal.registry.LanguageTransformContainer"/>
+    <method name="platformResolver" returnType="PlatformResolvers">
+        <parameter type="org.gradle.platform.base.PlatformContainer" name="platforms"/>
+    </method>
+    <method name="platforms" returnType="org.gradle.platform.base.PlatformContainer">
+        <parameter type="org.gradle.internal.reflect.Instantiator" name="instantiator"/>
+    </method>
+    <method name="registerApplicationSpec" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerGeneralComponentSpec" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerLibrarySpec" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerPlatformAwareComponent" returnType="void">
+        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
+    </method>
+    <method name="registerPlatformExtension" returnType="void">
+        <parameter type="org.gradle.api.plugins.ExtensionContainer" name="extensions"/>
+        <parameter type="org.gradle.platform.base.PlatformContainer" name="platforms"/>
+    </method>
+</type>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.Exec" version="3.0" superType="org.gradle.api.tasks.AbstractExecTask" documented="true">
+    <description> Executes a command line process. Example:
+ &lt;pre autoTested=''&gt;
+ task stopTomcat(type:Exec) {
+   workingDir '../tomcat/bin'
+
+   &lt;em class='comment'&gt;//on windows:&lt;/em&gt;
+   commandLine 'cmd', '/c', 'stop.bat'
+
+   &lt;em class='comment'&gt;//on linux&lt;/em&gt;
+   commandLine './stop.sh'
+
+   &lt;em class='comment'&gt;//store the output instead of printing to the console:&lt;/em&gt;
+   standardOutput = new ByteArrayOutputStream()
+
+   &lt;em class='comment'&gt;//extension method stopTomcat.output() can be used to obtain the output:&lt;/em&gt;
+   ext.output = {
+     return standardOutput.toString()
+   }
+ }
+ &lt;/pre&gt;
+
+</description>
+</type>

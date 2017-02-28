@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.Jdk" version="3.0">
+    <description> Represents information for the project Java SDK.
+ This translates to attributes of the ProjectRootManager element in the ipr.
+
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getLanguageLevel" returnType="java.lang.String"/>
+    <method name="getProjectJdkName" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="isAssertKeyword" returnType="boolean"/>
+    <method name="isJdk15" returnType="boolean"/>
+    <method name="setAssertKeyword" returnType="void">
+        <parameter type="boolean" name="assertKeyword"/>
+    </method>
+    <method name="setJdk15" returnType="void">
+        <parameter type="boolean" name="jdk15"/>
+    </method>
+    <method name="setLanguageLevel" returnType="void">
+        <parameter type="java.lang.String" name="languageLevel"/>
+    </method>
+    <method name="setProjectJdkName" returnType="void">
+        <parameter type="java.lang.String" name="projectJdkName"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="assertKeyword" type="boolean"/>
+    <property name="jdk15" type="boolean"/>
+    <property name="languageLevel" type="java.lang.String"/>
+    <property name="projectJdkName" type="java.lang.String"/>
+</type>

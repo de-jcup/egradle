@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.platform.base.ToolChain" version="3.0" documented="true">
+    <description> A set of compilers that are used together to construct binaries.
+
+</description>
+    <method name="getDisplayName" returnType="java.lang.String">
+        <description> Returns a human consumable name for this tool chain.
+
+ &lt;br&gt;(since 1.11)
+
+</description>
+    </method>
+    <interface name="org.gradle.api.Named"/>
+    <property name="displayName" type="java.lang.String" documented="true">
+        <description> Returns a human consumable name for this tool chain.
+
+ &lt;br&gt;(since 1.11)
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.testing.junit.JUnitOptions" version="3.0" superType="org.gradle.api.tasks.testing.TestFrameworkOptions">
+    <description> The JUnit specific test options.
+
+</description>
+    <method name="excludeCategories" returnType="org.gradle.api.tasks.testing.junit.JUnitOptions">
+        <parameter type="java.lang.String" name="excludeCategories"/>
+    </method>
+    <method name="getExcludeCategories" returnType="java.util.Set">
+        <description> The set of categories to exclude.
+
+</description>
+    </method>
+    <method name="getIncludeCategories" returnType="java.util.Set">
+        <description> The set of categories to run.
+
+</description>
+    </method>
+    <method name="includeCategories" returnType="org.gradle.api.tasks.testing.junit.JUnitOptions">
+        <parameter type="java.lang.String" name="includeCategories"/>
+    </method>
+    <method name="setExcludeCategories" returnType="void">
+        <parameter type="java.util.Set" name="excludeCategories"/>
+    </method>
+    <method name="setIncludeCategories" returnType="void">
+        <parameter type="java.util.Set" name="includeCategories"/>
+    </method>
+    <property name="excludeCategories" type="java.util.Set">
+        <description> The set of categories to exclude.
+
+</description>
+    </property>
+    <property name="includeCategories" type="java.util.Set">
+        <description> The set of categories to run.
+
+</description>
+    </property>
+</type>

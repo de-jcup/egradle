@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.signing.signatory.SignatorySupport" version="3.0">
+    <description> Convenience base class for &lt;a href='type://Signatory'&gt;Signatory&lt;/a&gt; implementations.
+
+</description>
+    <method name="sign" returnType="byte">
+        <parameter type="java.io.InputStream" name="toSign"/>
+    </method>
+    <interface name="org.gradle.plugins.signing.signatory.Signatory"/>
+</type>

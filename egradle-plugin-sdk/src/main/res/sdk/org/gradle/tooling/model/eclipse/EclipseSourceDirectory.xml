@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.eclipse.EclipseSourceDirectory" version="3.0">
+    <description> A source directory in an Eclipse project.
+
+</description>
+    <method name="getClasspathAttributes" returnType="org.gradle.tooling.model.DomainObjectSet">
+        <description> {@inheritDoc}
+
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </method>
+    <method name="getExcludes" returnType="java.util.List">
+        <description> Returns the exclude patterns for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to exclude. Does not return null.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </method>
+    <method name="getIncludes" returnType="java.util.List">
+        <description> Returns the include patterns for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to include. Does not return null.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </method>
+    <method name="getOutput" returnType="java.lang.String">
+        <description> Returns the output location of this source directory. If &lt;a href='type://null'&gt;null&lt;/a&gt;, then the compiled classes are placed in the project's default output location.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output location of this source directory.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </method>
+    <method name="getPath" returnType="java.lang.String">
+        <description> Returns the relative path for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path for this source directory. Does not return null.
+
+</description>
+    </method>
+    <interface name="org.gradle.tooling.model.SourceDirectory"/>
+    <interface name="org.gradle.tooling.model.eclipse.EclipseClasspathEntry"/>
+    <property name="classpathAttributes" type="org.gradle.tooling.model.DomainObjectSet">
+        <description> {@inheritDoc}
+
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </property>
+    <property name="excludes" type="java.util.List">
+        <description> Returns the exclude patterns for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to exclude. Does not return null.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </property>
+    <property name="includes" type="java.util.List">
+        <description> Returns the include patterns for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The list of patterns to include. Does not return null.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </property>
+    <property name="output" type="java.lang.String">
+        <description> Returns the output location of this source directory. If &lt;a href='type://null'&gt;null&lt;/a&gt;, then the compiled classes are placed in the project's default output location.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The output location of this source directory.
+ @throws UnsupportedMethodException For Gradle versions older than 3.0, where this method is not supported.
+
+ &lt;br&gt;(since 3.0)
+
+</description>
+    </property>
+    <property name="path" type="java.lang.String">
+        <description> Returns the relative path for this source directory.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The path for this source directory. Does not return null.
+
+</description>
+    </property>
+</type>

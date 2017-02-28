@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.WtpComponent" version="3.0">
+    <description> Creates the .settings/org.eclipse.wst.common.component file for WTP projects.
+
+</description>
+    <method name="configure" returnType="void">
+        <parameter type="java.lang.String" name="deployName"/>
+        <parameter type="java.lang.String" name="contextPath"/>
+        <parameter type="java.util.List" name="newEntries"/>
+    </method>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getContextPath" returnType="java.lang.String"/>
+    <method name="getDefaultResourceName" returnType="java.lang.String"/>
+    <method name="getDeployName" returnType="java.lang.String"/>
+    <method name="getWbModuleEntries" returnType="java.util.List"/>
+    <method name="getWbModuleNode" returnType="groovy.util.Node">
+        <parameter type="groovy.util.Node" name="xml"/>
+    </method>
+    <method name="hashCode" returnType="int"/>
+    <method name="load" returnType="void">
+        <parameter type="groovy.util.Node" name="xml"/>
+    </method>
+    <method name="removeConfigurableDataFromXml" returnType="void"/>
+    <method name="setContextPath" returnType="void">
+        <parameter type="java.lang.String" name="contextPath"/>
+    </method>
+    <method name="setDeployName" returnType="void">
+        <parameter type="java.lang.String" name="deployName"/>
+    </method>
+    <method name="setWbModuleEntries" returnType="void">
+        <parameter type="java.util.List" name="wbModuleEntries"/>
+    </method>
+    <method name="store" returnType="void">
+        <parameter type="groovy.util.Node" name="xml"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="contextPath" type="java.lang.String"/>
+    <property name="defaultResourceName" type="java.lang.String"/>
+    <property name="deployName" type="java.lang.String"/>
+    <property name="wbModuleEntries" type="java.util.List"/>
+    <property name="wbModuleNode" type="groovy.util.Node"/>
+</type>

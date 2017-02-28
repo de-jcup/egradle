@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.component.ComponentSelector" version="3.0">
+    <description> Represents some opaque criteria used to select a component instance during dependency resolution. Various sub-interfaces
+ expose specific details about the criteria.
+
+ &lt;br&gt;(since 1.10)
+
+</description>
+    <method name="getDisplayName" returnType="java.lang.String">
+        <description> Returns a human-consumable display name for this selector.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name
+ &lt;br&gt;(since 1.10)
+
+</description>
+    </method>
+    <method name="matchesStrictly" returnType="boolean">
+        <description> Checks if selector matches component identifier.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;identifier Component identifier
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;if this selector matches exactly the given component identifier.
+ &lt;br&gt;(since 1.10)
+
+</description>
+        <parameter type="org.gradle.api.artifacts.component.ComponentIdentifier" name="identifier"/>
+    </method>
+    <property name="displayName" type="java.lang.String">
+        <description> Returns a human-consumable display name for this selector.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;Display name
+ &lt;br&gt;(since 1.10)
+
+</description>
+    </property>
+</type>

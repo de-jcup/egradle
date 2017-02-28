@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.events.SkippedResult" version="3.0">
+    <description> Describes how an operation was skipped.
+
+ &lt;br&gt;(since 2.4)
+
+</description>
+    <interface name="org.gradle.tooling.events.OperationResult"/>
+</type>

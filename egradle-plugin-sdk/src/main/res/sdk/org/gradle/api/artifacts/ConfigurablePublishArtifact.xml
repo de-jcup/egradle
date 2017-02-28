@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.ConfigurablePublishArtifact" version="3.0">
+    <description> A &lt;a href='type://PublishArtifact'&gt;PublishArtifact&lt;/a&gt; whose properties can be modified.
+
+</description>
+    <method name="builtBy" returnType="org.gradle.api.artifacts.ConfigurablePublishArtifact">
+        <description> Registers some tasks which build this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;tasks The tasks. These are evaluated as per &lt;a href='type://org.gradle.api.Task#dependsOn(Object...)'&gt;org.gradle.api.Task#dependsOn(Object...)&lt;/a&gt;.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+
+</description>
+        <parameter type="java.lang.Object" name="tasks"/>
+    </method>
+    <method name="setClassifier" returnType="void">
+        <description> Sets the classifier of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier. May be null.
+
+</description>
+        <parameter type="java.lang.String" name="classifier"/>
+    </method>
+    <method name="setExtension" returnType="void">
+        <description> Sets the extension of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension The extension. Should not be null.
+
+</description>
+        <parameter type="java.lang.String" name="extension"/>
+    </method>
+    <method name="setName" returnType="void">
+        <description> Sets the name of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. Should not be null.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setType" returnType="void">
+        <description> Sets the type of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. Should not be null.
+
+</description>
+        <parameter type="java.lang.String" name="type"/>
+    </method>
+    <interface name="org.gradle.api.artifacts.PublishArtifact"/>
+    <property name="classifier" type="java.lang.String">
+        <description> Sets the classifier of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classifier The classifier. May be null.
+
+</description>
+    </property>
+    <property name="extension" type="java.lang.String">
+        <description> Sets the extension of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;extension The extension. Should not be null.
+
+</description>
+    </property>
+    <property name="name" type="java.lang.String">
+        <description> Sets the name of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;name The name. Should not be null.
+
+</description>
+    </property>
+    <property name="type" type="java.lang.String">
+        <description> Sets the type of this artifact.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;type The type. Should not be null.
+
+</description>
+    </property>
+</type>

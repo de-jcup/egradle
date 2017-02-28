@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.AbstractExecTask" version="3.0" documented="true">
+    <description> &lt;a href='type://AbstractExecTask'&gt;AbstractExecTask&lt;/a&gt; is the base class for all exec tasks.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The concrete type of the class.
+
+</description>
+    <method name="args" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="args"/>
+    </method>
+    <method name="args" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="args"/>
+    </method>
+    <method name="commandLine" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="args"/>
+    </method>
+    <method name="commandLine" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="arguments"/>
+    </method>
+    <method name="copyTo" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="org.gradle.process.ProcessForkOptions" name="target"/>
+    </method>
+    <method name="environment" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="environment" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="exec" returnType="void"/>
+    <method name="executable" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="getArgs" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getCommandLine" returnType="java.util.List">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getEnvironment" returnType="java.util.Map">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getErrorOutput" returnType="java.io.OutputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getExecActionFactory" returnType="org.gradle.process.internal.ExecActionFactory"/>
+    <method name="getExecResult" returnType="org.gradle.process.ExecResult">
+        <description> Returns the result for the command run by this task. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The result. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
+
+</description>
+    </method>
+    <method name="getExecutable" returnType="java.lang.String">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getStandardInput" returnType="java.io.InputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getStandardOutput" returnType="java.io.OutputStream">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getWorkingDir" returnType="java.io.File">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="isIgnoreExitValue" returnType="boolean">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="setArgs" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="arguments"/>
+    </method>
+    <method name="setCommandLine" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Iterable" name="args"/>
+    </method>
+    <method name="setCommandLine" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="args"/>
+    </method>
+    <method name="setEnvironment" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.util.Map" name="environmentVariables"/>
+    </method>
+    <method name="setErrorOutput" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.OutputStream" name="outputStream"/>
+    </method>
+    <method name="setExecAction" returnType="void">
+        <parameter type="org.gradle.process.internal.ExecAction" name="execAction"/>
+    </method>
+    <method name="setExecutable" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="executable"/>
+    </method>
+    <method name="setIgnoreExitValue" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="boolean" name="ignoreExitValue"/>
+    </method>
+    <method name="setStandardInput" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.InputStream" name="inputStream"/>
+    </method>
+    <method name="setStandardOutput" returnType="T">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.io.OutputStream" name="outputStream"/>
+    </method>
+    <method name="setWorkingDir" returnType="void">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <method name="workingDir" returnType="T" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+        <parameter type="java.lang.Object" name="dir"/>
+    </method>
+    <interface name="org.gradle.process.ExecSpec"/>
+    <property name="args" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="commandLine" type="java.util.List" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="environment" type="java.util.Map" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="errorOutput" type="java.io.OutputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="execAction" type="org.gradle.process.internal.ExecAction"/>
+    <property name="execActionFactory" type="org.gradle.process.internal.ExecActionFactory"/>
+    <property name="execResult" type="org.gradle.process.ExecResult" documented="true">
+        <description> Returns the result for the command run by this task. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The result. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
+
+</description>
+    </property>
+    <property name="executable" type="java.lang.String" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="ignoreExitValue" type="boolean" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="standardInput" type="java.io.InputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="standardOutput" type="java.io.OutputStream" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="workingDir" type="java.io.File" documented="true">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+</type>

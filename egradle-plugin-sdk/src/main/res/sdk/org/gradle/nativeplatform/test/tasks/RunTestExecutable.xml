@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.test.tasks.RunTestExecutable" version="3.0" superType="org.gradle.api.tasks.AbstractExecTask" documented="true">
+    <description> Runs a compiled and installed test executable.
+
+</description>
+    <method name="exec" returnType="void"/>
+    <method name="getIgnoreFailures" returnType="boolean"/>
+    <method name="getOutputDir" returnType="java.io.File"/>
+    <method name="handleTestFailures" returnType="void">
+        <parameter type="java.lang.Exception" name="e"/>
+    </method>
+    <method name="isIgnoreFailures" returnType="boolean"/>
+    <method name="setIgnoreFailures" returnType="void">
+        <parameter type="boolean" name="ignoreFailures"/>
+    </method>
+    <method name="setOutputDir" returnType="void">
+        <parameter type="java.io.File" name="outputDir"/>
+    </method>
+    <property name="ignoreFailures" type="boolean"/>
+    <property name="outputDir" type="java.io.File"/>
+</type>

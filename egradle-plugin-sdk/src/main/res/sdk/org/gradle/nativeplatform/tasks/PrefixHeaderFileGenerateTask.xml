@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.tasks.PrefixHeaderFileGenerateTask" version="3.0" superType="org.gradle.api.DefaultTask">
+    <description> Generates a prefix header file from a list of headers to be precompiled.
+
+</description>
+    <method name="generatePrefixHeaderFile" returnType="void"/>
+    <method name="getHeader" returnType="java.lang.String"/>
+    <method name="getPrefixHeaderFile" returnType="java.io.File"/>
+    <method name="setHeader" returnType="void">
+        <parameter type="java.lang.String" name="header"/>
+    </method>
+    <method name="setPrefixHeaderFile" returnType="void">
+        <parameter type="java.io.File" name="prefixHeaderFile"/>
+    </method>
+    <property name="header" type="java.lang.String"/>
+    <property name="prefixHeaderFile" type="java.io.File"/>
+</type>

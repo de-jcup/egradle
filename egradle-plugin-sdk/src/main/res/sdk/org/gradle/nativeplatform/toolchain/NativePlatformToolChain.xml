@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.toolchain.NativePlatformToolChain" version="3.0">
+    <description> A platform specific configurable tool chain.
+
+</description>
+    <method name="getPlatform" returnType="org.gradle.nativeplatform.platform.NativePlatform">
+        <description> Returns the platform which this tool chain builds for.
+
+</description>
+    </method>
+    <property name="platform" type="org.gradle.nativeplatform.platform.NativePlatform">
+        <description> Returns the platform which this tool chain builds for.
+
+</description>
+    </property>
+</type>

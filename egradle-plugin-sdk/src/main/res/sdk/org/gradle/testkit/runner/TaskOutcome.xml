@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.testkit.runner.TaskOutcome" version="3.0">
+    <description> The outcome of executing a task during a build.
+
+ &lt;br&gt;(since 2.6)
+ (see &lt;a href='type://BuildTask#getOutcome()'&gt;BuildTask#getOutcome()&lt;/a&gt;)
+
+</description>
+</type>

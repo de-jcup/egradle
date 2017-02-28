@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.javascript.envjs.http.simple.SimpleHttpFileServer" version="3.0">
+    <method name="getContentRoot" returnType="java.io.File"/>
+    <method name="getPort" returnType="int"/>
+    <method name="getResourceUrl" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="path"/>
+    </method>
+    <method name="stop" returnType="void"/>
+    <interface name="org.gradle.plugins.javascript.envjs.http.HttpFileServer"/>
+    <property name="contentRoot" type="java.io.File"/>
+    <property name="port" type="int"/>
+    <property name="resourceUrl" type="java.lang.String"/>
+</type>

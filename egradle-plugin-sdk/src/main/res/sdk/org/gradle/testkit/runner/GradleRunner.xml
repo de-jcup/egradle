@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.testkit.runner.GradleRunner" version="3.0">
+    <description> Executes a Gradle build, allowing inspection of the outcome.
+ &lt;p&gt;
+ A Gradle runner can be used to functionally test build logic, by executing a contrived build.
+ Assertions can then be made on the outcome of the build, such as the state of files created by the build,
+ or what tasks were actually executed during the build.
+ &lt;p&gt;
+ A runner can be created via the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#create()'&gt;#create()&lt;/a&gt; method.
+ &lt;p&gt;
+ Typically, the test code using the runner will programmatically create a build (e.g. by writing Gradle build files to a temporary space) to execute.
+ The build to execute is effectively specified by the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withProjectDir(File)'&gt;#withProjectDir(File)&lt;/a&gt;} method.
+ It is a requirement that a project directory be set.
+ &lt;p&gt;
+ The &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withArguments(String...)'&gt;#withArguments(String...)&lt;/a&gt; method allows the build arguments to be specified,
+ just as they would be on the command line.
+ &lt;p&gt;
+ The &lt;a href='type://org.gradle.testkit.runner.GradleRunner#build()'&gt;#build()&lt;/a&gt; method can be used to invoke the build when it is expected to succeed,
+ while the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#buildAndFail()'&gt;#buildAndFail()&lt;/a&gt; method can be used when the build is expected to fail.
+ &lt;p&gt;
+ GradleRunner instances are not thread safe and cannot be used concurrently.
+ However, multiple instances are able to be used concurrently.
+ &lt;p&gt;
+ Please see &lt;a href="https://docs.gradle.org/current/userguide/test_kit.html"&gt;the Gradle TestKit User Guide chapter&lt;/a&gt; for more information.
+
+ &lt;br&gt;(since 2.6)
+
+</description>
+    <method name="build" returnType="org.gradle.testkit.runner.BuildResult">
+        <description> Executes a build, expecting it to complete without failure.
+
+ @throws InvalidRunnerConfigurationException if the configuration of this runner is invalid (e.g. project directory not set)
+ @throws UnexpectedBuildFailure if the build does not succeed
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build result
+
+</description>
+    </method>
+    <method name="buildAndFail" returnType="org.gradle.testkit.runner.BuildResult">
+        <description> Executes a build, expecting it to complete with failure.
+
+ @throws InvalidRunnerConfigurationException if the configuration of this runner is invalid (e.g. project directory not set)
+ @throws UnexpectedBuildSuccess if the build succeeds
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build result
+
+</description>
+    </method>
+    <method name="create" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Creates a new Gradle runner.
+ &lt;p&gt;
+ The runner requires a Gradle distribution (and therefore a specific version of Gradle) in order to execute builds.
+ This method will find a Gradle distribution, based on the filesystem location of this class.
+ That is, it is expected that this class is loaded from a Gradle distribution.
+ &lt;p&gt;
+ When using the runner as part of tests &lt;i&gt;being executed by Gradle&lt;/i&gt; (i.e. a build using the &lt;a href='type://gradleTestKit()'&gt;gradleTestKit()&lt;/a&gt; dependency),
+ this means that the same distribution of Gradle that is executing the tests will be used by runner returned by this method.
+ &lt;p&gt;
+ When using the runner as part of tests &lt;i&gt;being executed by an IDE&lt;/i&gt;,
+ this means that the same distribution of Gradle that was used when importing the project will be used.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;a new Gradle runner
+
+</description>
+    </method>
+    <method name="forwardOutput" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Forwards the output of executed builds to the &lt;a href='type://System#out'&gt;System.out&lt;/a&gt; stream.
+ &lt;p&gt;
+ The output of the build is always available via &lt;a href='type://BuildResult#getOutput()'&gt;BuildResult#getOutput()&lt;/a&gt;.
+ This method can be used to additionally forward the output to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt; of the process using the runner.
+ &lt;p&gt;
+ This method does not separate the standard output and error output.
+ The two streams will be merged as they typically are when using Gradle from a command line interface.
+ If you require separation of the streams, you can use &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt; and &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt; directly.
+ &lt;p&gt;
+ Calling this method will negate the effect of previously calling &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt; and/or &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;)
+
+</description>
+    </method>
+    <method name="forwardStdError" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Configures the runner to forward standard error output from builds to the given writer.
+ &lt;p&gt;
+ The output of the build is always available via &lt;a href='type://BuildResult#getOutput()'&gt;BuildResult#getOutput()&lt;/a&gt;.
+ This method can be used to additionally capture the error output.
+ &lt;p&gt;
+ Calling this method will negate the effect of previously calling &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;.
+ &lt;p&gt;
+ The given writer will not be closed by the runner.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;writer the writer that build standard error output should be forwarded to
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdOutput(Writer)'&gt;#forwardStdOutput(Writer)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.io.Writer" name="writer"/>
+    </method>
+    <method name="forwardStdOutput" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Configures the runner to forward standard output from builds to the given writer.
+ &lt;p&gt;
+ The output of the build is always available via &lt;a href='type://BuildResult#getOutput()'&gt;BuildResult#getOutput()&lt;/a&gt;.
+ This method can be used to additionally capture the output.
+ &lt;p&gt;
+ Calling this method will negate the effect of previously calling &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;.
+ &lt;p&gt;
+ The given writer will not be closed by the runner.
+ &lt;p&gt;
+ When executing builds with Gradle versions earlier than 2.9 &lt;b&gt;in debug mode&lt;/b&gt;, any output produced by the build that
+ was written directly to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt; or &lt;a href='type://System.err'&gt;System.err&lt;/a&gt; will not be represented in &lt;a href='type://BuildResult#getOutput()'&gt;BuildResult#getOutput()&lt;/a&gt;.
+ This is due to a defect that was fixed in Gradle 2.9.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;writer the writer that build standard output should be forwarded to
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardOutput()'&gt;#forwardOutput()&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#forwardStdError(Writer)'&gt;#forwardStdError(Writer)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.io.Writer" name="writer"/>
+    </method>
+    <method name="getArguments" returnType="java.util.List">
+        <description> The build arguments.
+ &lt;p&gt;
+ Effectively, the command line arguments to Gradle.
+ This includes all tasks, flags, properties etc.
+ &lt;p&gt;
+ The returned list is immutable.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build arguments
+
+</description>
+    </method>
+    <method name="getPluginClasspath" returnType="java.util.List">
+        <description> The injected plugin classpath for the build.
+ &lt;p&gt;
+ The returned list is immutable.
+ Returns an empty list if no classpath was provided with &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath of plugins to make available to the build under test
+ &lt;br&gt;(since 2.8)
+
+</description>
+    </method>
+    <method name="getProjectDir" returnType="java.io.File">
+        <description> The directory that the build will be executed in.
+ &lt;p&gt;
+ This is analogous to the current directory when executing Gradle from the command line.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory to execute the build in
+
+</description>
+    </method>
+    <method name="isDebug" returnType="boolean">
+        <description> Indicates whether the build should be executed “in process” so that it is debuggable.
+ &lt;p&gt;
+ If debug support is not enabled, the build will be executed in an entirely separate process.
+ This means that any debugger that is attached to the test execution process will not be attached to the build process.
+ When debug support is enabled, the build is executed in the same process that is using the Gradle Runner, allowing the build to be debugged.
+ &lt;p&gt;
+ Debug support is off (i.e. &lt;a href='type://false'&gt;false&lt;/a&gt;) by default.
+ It can be enabled by setting the system property &lt;a href='type://org.gradle.testkit.debug'&gt;org.gradle.testkit.debug&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt; for the test process,
+ or by using the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withDebug(boolean)'&gt;#withDebug(boolean)&lt;/a&gt; method.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether the build should be executed in the same process
+ &lt;br&gt;(since 2.9)
+
+</description>
+    </method>
+    <method name="withArguments" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the build arguments.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments the build arguments
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getArguments()'&gt;#getArguments()&lt;/a&gt;)
+
+</description>
+        <parameter type="java.lang.String" name="arguments"/>
+    </method>
+    <method name="withArguments" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the build arguments.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;arguments the build arguments
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getArguments()'&gt;#getArguments()&lt;/a&gt;)
+
+</description>
+        <parameter type="java.util.List" name="arguments"/>
+    </method>
+    <method name="withDebug" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets whether debugging support is enabled.
+
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#isDebug()'&gt;#isDebug()&lt;/a&gt;)
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;flag the debug flag
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+
+</description>
+        <parameter type="boolean" name="flag"/>
+    </method>
+    <method name="withGradleDistribution" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Configures the runner to execute the build using the distribution of Gradle specified.
+ &lt;p&gt;
+ The given URI must point to a valid Gradle distribution ZIP file.
+ This method is typically used as an alternative to &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt;,
+ where it is preferable to obtain the Gradle runtime from “local” servers.
+ &lt;p&gt;
+ Unless previously downloaded, this method will cause the Gradle runtime at the given URI to be downloaded.
+ The download will be cached beneath the Gradle User Home directory, the location of which is determined by the following in order of precedence:
+ &lt;ol&gt;
+ &lt;li&gt;The system property &lt;a href='type://"gradle.user.home"'&gt;"gradle.user.home"&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;The environment variable &lt;a href='type://"GRADLE_USER_HOME"'&gt;"GRADLE_USER_HOME"&lt;/a&gt;&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;
+ If neither are present, &lt;a href='type://"~/.gradle"'&gt;"~/.gradle"&lt;/a&gt; will be used, where &lt;a href='type://"~"'&gt;"~"&lt;/a&gt; is the value advertised by the JVM's &lt;a href='type://"user.dir"'&gt;"user.dir"&lt;/a&gt; system property.
+ The system property and environment variable are read in the process using the runner, not the build process.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;distribution a URI pointing at a valid Gradle distribution zip file
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleInstallation(File)'&gt;#withGradleInstallation(File)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.net.URI" name="distribution"/>
+    </method>
+    <method name="withGradleInstallation" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Configures the runner to execute the build using the installation of Gradle specified.
+ &lt;p&gt;
+ The given file must be a directory containing a valid Gradle installation.
+ &lt;p&gt;
+ Alternatively, you may use &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt; to use an automatically installed Gradle version.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;installation a valid Gradle installation
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleVersion(String)'&gt;#withGradleVersion(String)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleDistribution(URI)'&gt;#withGradleDistribution(URI)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.io.File" name="installation"/>
+    </method>
+    <method name="withGradleVersion" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Configures the runner to execute the build with the version of Gradle specified.
+ &lt;p&gt;
+ Unless previously downloaded, this method will cause the Gradle runtime for the version specified
+ to be downloaded over the Internet from Gradle's distribution servers.
+ The download will be cached beneath the Gradle User Home directory, the location of which is determined by the following in order of precedence:
+ &lt;ol&gt;
+ &lt;li&gt;The system property &lt;a href='type://"gradle.user.home"'&gt;"gradle.user.home"&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;The environment variable &lt;a href='type://"GRADLE_USER_HOME"'&gt;"GRADLE_USER_HOME"&lt;/a&gt;&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;
+ If neither are present, &lt;a href='type://"~/.gradle"'&gt;"~/.gradle"&lt;/a&gt; will be used, where &lt;a href='type://"~"'&gt;"~"&lt;/a&gt; is the value advertised by the JVM's &lt;a href='type://"user.dir"'&gt;"user.dir"&lt;/a&gt; system property.
+ The system property and environment variable are read in the process using the runner, not the build process.
+ &lt;p&gt;
+ Alternatively, you may use &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleInstallation(File)'&gt;#withGradleInstallation(File)&lt;/a&gt; to use an installation already on the filesystem.
+ &lt;p&gt;
+ To use a non standard Gradle runtime, or to obtain the runtime from an alternative location, use &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleDistribution(URI)'&gt;#withGradleDistribution(URI)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;versionNumber the version number (e.g. "2.9")
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ &lt;br&gt;(since 2.9)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleInstallation(File)'&gt;#withGradleInstallation(File)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withGradleDistribution(URI)'&gt;#withGradleDistribution(URI)&lt;/a&gt;)
+
+</description>
+        <parameter type="java.lang.String" name="versionNumber"/>
+    </method>
+    <method name="withPluginClasspath" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the plugin classpath based on the Gradle plugin development plugin conventions.
+ &lt;p&gt;
+ The 'java-gradle-plugin' generates a file describing the plugin under test and makes it available to the test runtime.
+ This method configures the runner to use this file.
+ Please consult the Gradle documentation of this plugin for more information.
+ &lt;p&gt;
+ This method looks for a file named &lt;a href='type://plugin-under-test-metadata.properties'&gt;plugin-under-test-metadata.properties&lt;/a&gt; on the runtime classpath,
+ and uses the &lt;a href='type://implementation-classpath'&gt;implementation-classpath&lt;/a&gt; as the classpath, which is expected to a &lt;a href='type://File#pathSeparatorChar'&gt;File#pathSeparatorChar&lt;/a&gt; joined string.
+ If the plugin metadata file cannot be resolved an &lt;a href='type://InvalidPluginMetadataException'&gt;InvalidPluginMetadataException&lt;/a&gt; is thrown.
+ &lt;p&gt;
+ Plugins from classpath are able to be resolved using the &lt;code&gt;plugins { }&lt;/code&gt; syntax in the build under test.
+ Please consult the TestKit Gradle User Guide chapter for more information and usage examples.
+ &lt;p&gt;
+ Calling this method will replace any previous classpath specified via &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt; and vice versa.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; this method will cause an &lt;a href='type://InvalidRunnerConfigurationException'&gt;InvalidRunnerConfigurationException&lt;/a&gt; to be emitted when the build is executed,
+ if the version of Gradle executing the build (i.e. not the version of the runner) is earlier than Gradle 2.8 as those versions do not support this feature.
+ Please consult the TestKit Gradle User Guide chapter alternative strategies that can be used for older Gradle versions.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;)
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getPluginClasspath()'&gt;#getPluginClasspath()&lt;/a&gt;)
+ &lt;br&gt;(since 2.13)
+
+</description>
+    </method>
+    <method name="withPluginClasspath" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the injected plugin classpath for the build.
+ &lt;p&gt;
+ Plugins from the given classpath are able to be resolved using the &lt;code&gt;plugins { }&lt;/code&gt; syntax in the build under test.
+ Please consult the TestKit Gradle User Guide chapter for more information and usage examples.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; this method will cause an &lt;a href='type://InvalidRunnerConfigurationException'&gt;InvalidRunnerConfigurationException&lt;/a&gt; to be emitted when the build is executed,
+ if the version of Gradle executing the build (i.e. not the version of the runner) is earlier than Gradle 2.8 as those versions do not support this feature.
+ Please consult the TestKit Gradle User Guide chapter alternative strategies that can be used for older Gradle versions.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;classpath the classpath of plugins to make available to the build under test
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;this
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getPluginClasspath()'&gt;#getPluginClasspath()&lt;/a&gt;)
+ &lt;br&gt;(since 2.8)
+
+</description>
+        <parameter type="java.lang.Iterable" name="classpath"/>
+    </method>
+    <method name="withProjectDir" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the directory that the Gradle will be executed in.
+ &lt;p&gt;
+ This is typically set to the root project of the build under test.
+ &lt;p&gt;
+ A project directory must be set.
+ This method must be called before &lt;a href='type://org.gradle.testkit.runner.GradleRunner#build()'&gt;#build()&lt;/a&gt; or &lt;a href='type://org.gradle.testkit.runner.GradleRunner#buildAndFail()'&gt;#buildAndFail()&lt;/a&gt;.
+ &lt;p&gt;
+ All builds executed with the runner effectively implicitly add the &lt;a href='type://--no-search-upwards'&gt;--no-search-upwards&lt;/a&gt; argument.
+ This suppresses Gradle's default behaviour of searching upwards through the file system in order to find the root of the current project tree.
+ This default behaviour is often utilised when focusing on a particular build within a multi-project build.
+ This behaviour is suppressed due to test builds being executed potentially being created within a “real build”
+ (e.g. under the &lt;a href='type:///build'&gt;/build&lt;/a&gt; directory of the plugin's project directory).
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;projectDir the project directory
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://this'&gt;this&lt;/a&gt;
+ (see &lt;a href='type://org.gradle.testkit.runner.GradleRunner#getProjectDir()'&gt;#getProjectDir()&lt;/a&gt;)
+
+</description>
+        <parameter type="java.io.File" name="projectDir"/>
+    </method>
+    <method name="withTestKitDir" returnType="org.gradle.testkit.runner.GradleRunner">
+        <description> Sets the directory to use for TestKit's working storage needs.
+ &lt;p&gt;
+ This directory is used internally to store various files required by the runner.
+ If no explicit Gradle user home is specified via the build arguments (i.e. the &lt;a href='type://-g «dir»'&gt;-g «dir»&lt;/a&gt; option}),
+ this directory will also be used for the Gradle user home for the test build.
+ &lt;p&gt;
+ If no value has been specified when the build is initiated, a directory unique to the current operating system
+ user will be created and used within the JVM's temporary directory as advertised by the &lt;a href='type://java.io.tmpdir'&gt;java.io.tmpdir&lt;/a&gt; system property.
+ This directory is not deleted by the runner after the test build.
+ &lt;p&gt;
+ You may wish to specify a location that is within your project and regularly cleaned, such as the project's build directory.
+ &lt;p&gt;
+ The actual contents of this directory are an internal implementation detail and may change at any time.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testKitDir the TestKit directory
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;&lt;a href='type://this'&gt;this&lt;/a&gt;
+ &lt;br&gt;(since 2.7)
+
+</description>
+        <parameter type="java.io.File" name="testKitDir"/>
+    </method>
+    <property name="arguments" type="java.util.List">
+        <description> The build arguments.
+ &lt;p&gt;
+ Effectively, the command line arguments to Gradle.
+ This includes all tasks, flags, properties etc.
+ &lt;p&gt;
+ The returned list is immutable.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the build arguments
+
+</description>
+    </property>
+    <property name="debug" type="boolean">
+        <description> Indicates whether the build should be executed “in process” so that it is debuggable.
+ &lt;p&gt;
+ If debug support is not enabled, the build will be executed in an entirely separate process.
+ This means that any debugger that is attached to the test execution process will not be attached to the build process.
+ When debug support is enabled, the build is executed in the same process that is using the Gradle Runner, allowing the build to be debugged.
+ &lt;p&gt;
+ Debug support is off (i.e. &lt;a href='type://false'&gt;false&lt;/a&gt;) by default.
+ It can be enabled by setting the system property &lt;a href='type://org.gradle.testkit.debug'&gt;org.gradle.testkit.debug&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt; for the test process,
+ or by using the &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withDebug(boolean)'&gt;#withDebug(boolean)&lt;/a&gt; method.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;whether the build should be executed in the same process
+ &lt;br&gt;(since 2.9)
+
+</description>
+    </property>
+    <property name="pluginClasspath" type="java.util.List">
+        <description> The injected plugin classpath for the build.
+ &lt;p&gt;
+ The returned list is immutable.
+ Returns an empty list if no classpath was provided with &lt;a href='type://org.gradle.testkit.runner.GradleRunner#withPluginClasspath(Iterable)'&gt;#withPluginClasspath(Iterable)&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the classpath of plugins to make available to the build under test
+ &lt;br&gt;(since 2.8)
+
+</description>
+    </property>
+    <property name="projectDir" type="java.io.File">
+        <description> The directory that the build will be executed in.
+ &lt;p&gt;
+ This is analogous to the current directory when executing Gradle from the command line.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the directory to execute the build in
+
+</description>
+    </property>
+</type>

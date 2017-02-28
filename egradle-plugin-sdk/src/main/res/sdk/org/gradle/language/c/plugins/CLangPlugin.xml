@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.language.c.plugins.CLangPlugin" version="3.0">
+    <description> Adds core C language support.
+
+</description>
+    <method name="apply" returnType="void">
+        <parameter type="org.gradle.api.Project" name="project"/>
+    </method>
+    <interface name="org.gradle.api.Plugin"/>
+</type>

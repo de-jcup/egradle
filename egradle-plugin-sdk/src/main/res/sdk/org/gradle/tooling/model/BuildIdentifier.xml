@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.BuildIdentifier" version="3.0">
+    <description> Identifies a Gradle build.
+ &lt;p&gt;
+     A Gradle Build is a collection of one or more projects.
+ &lt;/p&gt;
+
+ &lt;br&gt;(since 2.13)
+
+</description>
+</type>

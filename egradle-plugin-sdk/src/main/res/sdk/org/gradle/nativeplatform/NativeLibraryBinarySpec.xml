@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.nativeplatform.NativeLibraryBinarySpec" version="3.0" documented="true">
+    <description> Represents a binary artifact that is the result of building a native library component.
+
+</description>
+    <method name="getComponent" returnType="org.gradle.nativeplatform.NativeLibrarySpec">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getLibrary" returnType="org.gradle.nativeplatform.NativeLibrarySpec">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <interface name="org.gradle.nativeplatform.NativeBinarySpec"/>
+    <interface name="org.gradle.platform.base.LibraryBinarySpec"/>
+    <property name="component" type="org.gradle.nativeplatform.NativeLibrarySpec">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="library" type="org.gradle.nativeplatform.NativeLibrarySpec">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+</type>

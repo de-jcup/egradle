@@ -32,8 +32,141 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 public class GradleModelBuilderTest {
 
 	@Test
+	public void test_dependencies_item_has_closure_as_parameter() throws Exception {
+		/* @formatter:off*/
+		String text = 
+		"		dependencies{\n"+
+		"			compile project(':myproject')\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item dependencies = items[0];
+
+		assertEquals(ItemType.DEPENDENCIES, dependencies.getItemType());
+		String[] parameters = dependencies.getParameters();
+		assertNotNull(parameters);
+		assertEquals(1,parameters.length);
+		assertEquals("groovy.lang.Closure",parameters[0]);
+		
+	}
+	
+	@Test
+	public void test_name_resolved_filetree_only_closure() throws Exception {
+		/* @formatter:off*/
+		String text = 
+		"		fileTree{\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item fileTree = items[0];
+
+		assertEquals("fileTree", fileTree.getIdentifier());
+		
+	}
+	
+	@Test
+	public void test_name_resolved_filetree_with_baseDir_and_closure() throws Exception {
+		/* @formatter:off*/
+		String text = 
+		"		fileTree 'asDir' {\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item fileTree = items[0];
+
+		assertEquals("fileTree", fileTree.getIdentifier());
+		String[] params = fileTree.getParameters();
+		assertNotNull(params);
+		assertEquals(2, params.length);
+		assertEquals("java.lang.String",params[0]);
+		assertEquals("groovy.lang.Closure",params[1]);
+		assertTrue(fileTree.isClosureBlock()); // necessary to be shown in outline view!
+		
+	}
+	
+	@Test
+	public void test_parameters_resolved_filetree_with_baseDir_and_closure() throws Exception {
+		/* @formatter:off*/
+		String text = 
+		"		fileTree baseDir {\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item fileTree = items[0];
+
+		String[] parameters = fileTree.getParameters();
+		assertNotNull(parameters);
+		assertEquals(2,parameters.length);
+		assertEquals("Object:baseDir", parameters[0]); // not resolveable so returns Object:name of parameter
+		assertEquals("groovy.lang.Closure", parameters[1]); 
+		
+	}
+	
+	@Test
+	public void test_parameters_resolved_something_with_string_and_closure() throws Exception {
+		/* @formatter:off*/
+		String text = 
+		"		something 'test' {\n"+
+		"		}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item fileTree = items[0];
+
+		String[] parameters = fileTree.getParameters();
+		assertNotNull(parameters);
+		assertEquals(2,parameters.length);
+		assertEquals("java.lang.String", parameters[0]);
+		assertEquals("groovy.lang.Closure", parameters[1]);
+		
+	}
+	
+	@Test
 	public void test_compile_my_project_contains_my_project_in_model_item_text() throws Exception {
-		// @formatter:off
 		/* @formatter:off*/
 		String text = 
 		"		dependencies{\n"+
@@ -140,6 +273,27 @@ public class GradleModelBuilderTest {
 
 		assertEquals("task clean <<", classDef.getName());
 		assertEquals(ItemType.TASK, classDef.getItemType());
+
+	}
+	
+	@Test
+	public void tasks_with_type_Jar__returns_name_clean() throws ModelBuilderException {
+		String text = "tasks.withType(Jar) {}";
+
+		InputStream is = new ByteArrayInputStream(text.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item classDef = items[0];
+
+		assertEquals("tasks.withType(Jar)", classDef.getName());
+		assertEquals(ItemType.TASKS, classDef.getItemType());
 
 	}
 

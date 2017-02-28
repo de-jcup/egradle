@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.tasks.testing.TestOutputListener" version="3.0">
+    <description> Listens to the output events like printing to standard output or error
+
+</description>
+    <method name="onOutput" returnType="void">
+        <description> Fired when during test execution anything is printed to standard output or error
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;testDescriptor describes the test
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;outputEvent the event that contains the output message and the destination (standard output or error, etc.)
+
+</description>
+        <parameter type="org.gradle.api.tasks.testing.TestDescriptor" name="testDescriptor"/>
+        <parameter type="org.gradle.api.tasks.testing.TestOutputEvent" name="outputEvent"/>
+    </method>
+</type>

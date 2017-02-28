@@ -432,7 +432,7 @@ public class GroovyRecognizer extends antlr.LLkParser       implements GroovyTok
 
     // Scratch variable for last 'sep' token.
     // Written by the 'sep' rule, read only by immediate callers of 'sep'.
-    // (Not entirely clean, but better than a million xx=sep occurrences.)
+    // (Not entirely clean, but better than a million element=sep occurrences.)
     private int sepToken = EOF;
 
     // Scratch variable for last argument list; tells whether there was a label.
@@ -876,7 +876,7 @@ inputState.guessing--;
 		returnAST = packageDefinition_AST;
 	}
 	
-/** A statement is an element of a block.
+/** A statement is an type of a block.
  *  Typical statements are declarations (which are scoped to the block)
  *  and expressions.
  */
@@ -11098,7 +11098,7 @@ inputState.guessing--;
 		returnAST = finallyClause_AST;
 	}
 	
-/** A member name (x.y) or element name (x[y]) can serve as a command name,
+/** A member name (x.y) or type name (x[y]) can serve as a command name,
  *  which may be followed by a list of arguments.
  *  Unlike parenthesized arguments, these must be plain expressions,
  *  without labels or spread operators.
@@ -12168,7 +12168,7 @@ inputState.guessing--;
 	
 /** An expression may be followed by [...].
  *  Unlike Java, these brackets may contain a general argument list,
- *  which is passed to the array element operator, which can make of it what it wants.
+ *  which is passed to the array type operator, which can make of it what it wants.
  *  The brackets may also be empty, as in T[].  This is how Groovy names array types.
  *  <p>Returned AST is [INDEX_OP, indexee, ELIST].
  */

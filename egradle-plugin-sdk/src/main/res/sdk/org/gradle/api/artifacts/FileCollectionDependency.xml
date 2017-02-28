@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.FileCollectionDependency" version="3.0">
+    <description> A &lt;a href='type://FileCollectionDependency'&gt;FileCollectionDependency&lt;/a&gt; is a &lt;a href='type://Dependency'&gt;Dependency&lt;/a&gt; on a collection of local files which are not stored in a
+ repository.
+
+</description>
+    <method name="registerWatchPoints" returnType="void">
+        <parameter type="FileSystemSubset.Builder" name="builder"/>
+    </method>
+    <interface name="org.gradle.api.artifacts.SelfResolvingDependency"/>
+</type>

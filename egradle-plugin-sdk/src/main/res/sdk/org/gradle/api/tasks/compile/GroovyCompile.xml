@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.tasks.compile.GroovyCompile" version="3.0" superType="org.gradle.api.tasks.compile.AbstractCompile" documented="true">
+    <description> Compiles Groovy source files, and optionally, Java source files.
+
+</description>
+    <method name="checkGroovyClasspathIsNonEmpty" returnType="void"/>
+    <method name="compile" returnType="void"/>
+    <method name="createSpec" returnType="org.gradle.api.internal.tasks.compile.DefaultGroovyJavaJointCompileSpec"/>
+    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/>
+    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler">
+        <parameter type="org.gradle.api.internal.tasks.compile.GroovyJavaJointCompileSpec" name="spec"/>
+    </method>
+    <method name="getGroovyClasspath" returnType="org.gradle.api.file.FileCollection">
+        <description> Returns the classpath containing the version of Groovy to use for compilation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath.
+
+</description>
+    </method>
+    <method name="getGroovyOptions" returnType="org.gradle.api.tasks.compile.GroovyCompileOptions">
+        <description> Gets the options for the Groovy compilation. To set specific options for the nested Java compilation, use &lt;a href='type://org.gradle.api.tasks.compile.GroovyCompile#getOptions()'&gt;#getOptions()&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy compile options. Never returns null.
+
+</description>
+    </method>
+    <method name="getOptions" returnType="org.gradle.api.tasks.compile.CompileOptions">
+        <description> Returns the options for Java compilation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java compile options. Never returns null.
+
+</description>
+    </method>
+    <method name="setCompiler" returnType="void">
+        <parameter type="org.gradle.language.base.internal.compile.Compiler" name="compiler"/>
+    </method>
+    <method name="setGroovyClasspath" returnType="void">
+        <description> Sets the classpath containing the version of Groovy to use for compilation.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;groovyClasspath The classpath. Must not be null.
+
+</description>
+        <parameter type="org.gradle.api.file.FileCollection" name="groovyClasspath"/>
+    </method>
+    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
+    <property name="groovyClasspath" type="org.gradle.api.file.FileCollection" documented="true">
+        <description> Returns the classpath containing the version of Groovy to use for compilation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The classpath.
+
+</description>
+    </property>
+    <property name="groovyOptions" type="org.gradle.api.tasks.compile.GroovyCompileOptions" documented="true">
+        <description> Gets the options for the Groovy compilation. To set specific options for the nested Java compilation, use &lt;a href='type://org.gradle.api.tasks.compile.GroovyCompile#getOptions()'&gt;#getOptions()&lt;/a&gt;.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Groovy compile options. Never returns null.
+
+</description>
+    </property>
+    <property name="options" type="org.gradle.api.tasks.compile.CompileOptions" documented="true">
+        <description> Returns the options for Java compilation.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The Java compile options. Never returns null.
+
+</description>
+    </property>
+</type>

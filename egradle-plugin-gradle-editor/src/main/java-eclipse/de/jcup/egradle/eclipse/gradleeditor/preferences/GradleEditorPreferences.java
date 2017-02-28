@@ -116,8 +116,36 @@ public class GradleEditorPreferences {
 		RGB color = PreferenceConverter.getColor(getPreferenceStore(), identifiable.getId());
 		return color;
 	}
+	
+	/**
+	 * Returns color as a web color in format "#RRGGBB"
+	 * @param identifiable
+	 * @return web color string
+	 */
+	public String getWebColor(PreferenceIdentifiable identifiable) {
+		RGB color = getColor(identifiable);
+		if (color==null){
+			return null;
+		}
+		String webColor= EGradleUtil.convertToHexColor(color);
+		return webColor;
+	}
 
 	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color) {
 		PreferenceConverter.setDefault(getPreferenceStore(), identifiable.getId(), color);
 	}
+
+	public boolean isCodeAssistProposalsEnabled() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_PROPOSALS_ENABLED);
+	}
+	
+	public boolean isCodeAssistNoProposalsForGetterOrSetter() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
+	}
+	
+	public boolean isCodeAssistTooltipsEnabled() {
+		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
+	}
+
+	
 }

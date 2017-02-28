@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.tooling.UnknownModelException" version="3.0" superType="org.gradle.tooling.UnsupportedVersionException">
+    <description> Thrown when the client is trying to acquire a model that is unknown to the Tooling API.
+ &lt;p&gt;
+ The exception extends &lt;a href='type://UnsupportedVersionException'&gt;UnsupportedVersionException&lt;/a&gt; only for backwards compatibility reasons.
+
+ &lt;br&gt;(since 1.0-milestone-8)
+
+</description>
+</type>

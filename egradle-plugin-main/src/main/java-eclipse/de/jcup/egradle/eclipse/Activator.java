@@ -36,6 +36,7 @@ public class Activator extends AbstractUIPlugin {
 
 	private ColorManager colorManager;
 
+
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.main"; //$NON-NLS-1$
 
@@ -51,7 +52,7 @@ public class Activator extends AbstractUIPlugin {
 	public ColorManager getColorManager() {
 		return colorManager;
 	}
-
+	
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;

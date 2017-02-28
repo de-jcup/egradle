@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.tooling.model.idea.BasicIdeaProject" version="3.0">
+    <description> IdeaProject that does not provide/resolve any external dependencies.
+ Only project dependencies and local file dependencies are included on the modules' classpath.
+ &lt;p&gt;
+ Useful for 'previewing' the output model of IdeaProject because it is supposed to be fast (e.g. does not download dependencies from the web).
+
+ &lt;br&gt;(since 1.0-milestone-5)
+
+</description>
+    <interface name="org.gradle.tooling.model.idea.IdeaProject"/>
+</type>

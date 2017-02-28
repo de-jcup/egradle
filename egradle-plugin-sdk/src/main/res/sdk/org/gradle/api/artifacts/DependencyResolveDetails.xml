@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.artifacts.DependencyResolveDetails" version="3.0">
+    <description> Provides details about a dependency when it is resolved.
+ Provides means to manipulate dependency metadata when it is resolved.
+
+ &lt;br&gt;(since 1.4)
+
+</description>
+    <method name="getRequested" returnType="org.gradle.api.artifacts.ModuleVersionSelector">
+        <description> The module, before it is resolved.
+ The requested module does not change even if there are multiple dependency resolve rules
+ that manipulate the dependency metadata.
+
+</description>
+    </method>
+    <method name="getTarget" returnType="org.gradle.api.artifacts.ModuleVersionSelector">
+        <description> The target module selector used to resolve the dependency.
+ Never returns null. Target module is updated when methods like &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used.
+
+</description>
+    </method>
+    <method name="useTarget" returnType="void">
+        <description> Allows to override the details of the dependency (see &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt;)
+ when it is resolved (see &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt;).
+ This method can be used to change the dependency before it is resolved,
+ e.g. change group, name or version (or all three of them).
+ In many cases users are interested in changing the version.
+ For such scenario you can use the &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; method.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;notation the notation that gets parsed into an instance of &lt;a href='type://ModuleVersionSelector'&gt;ModuleVersionSelector&lt;/a&gt;.
+ You can pass Strings like 'org.gradle:gradle-core:1.4',
+ Maps like [group: 'org.gradle', name: 'gradle-core', version: '1.4'],
+ or instances of ModuleVersionSelector.
+
+ &lt;br&gt;(since 1.5)
+
+</description>
+        <parameter type="java.lang.Object" name="notation"/>
+    </method>
+    <method name="useVersion" returnType="void">
+        <description> Allows to override the version when the dependency &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#getRequested()'&gt;#getRequested()&lt;/a&gt; is resolved.
+ Can be used to select a version that is different than requested.
+ Forcing modules via &lt;a href='type://ResolutionStrategy#force(Object...)'&gt;ResolutionStrategy#force(Object...)&lt;/a&gt; uses this capability.
+ Configuring a version different than requested will cause &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#getTarget()'&gt;#getTarget()&lt;/a&gt; method
+ return a target module with updated target version.
+ &lt;p&gt;
+ If you need to change not only the version but also group or name please use the &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#useTarget(Object)'&gt;#useTarget(Object)&lt;/a&gt; method.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;version to use when resolving this dependency, cannot be null.
+ It is valid to configure the same version as requested.
+
+</description>
+        <parameter type="java.lang.String" name="version"/>
+    </method>
+    <property name="requested" type="org.gradle.api.artifacts.ModuleVersionSelector">
+        <description> The module, before it is resolved.
+ The requested module does not change even if there are multiple dependency resolve rules
+ that manipulate the dependency metadata.
+
+</description>
+    </property>
+    <property name="target" type="org.gradle.api.artifacts.ModuleVersionSelector">
+        <description> The target module selector used to resolve the dependency.
+ Never returns null. Target module is updated when methods like &lt;a href='type://org.gradle.api.artifacts.DependencyResolveDetails#useVersion(String)'&gt;#useVersion(String)&lt;/a&gt; are used.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Link" version="3.0">
+    <description> Link.
+
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="getLocation" returnType="java.lang.String"/>
+    <method name="getLocationUri" returnType="java.lang.String"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getType" returnType="java.lang.String"/>
+    <method name="hashCode" returnType="int"/>
+    <method name="setLocation" returnType="void">
+        <parameter type="java.lang.String" name="location"/>
+    </method>
+    <method name="setLocationUri" returnType="void">
+        <parameter type="java.lang.String" name="locationUri"/>
+    </method>
+    <method name="setName" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="setType" returnType="void">
+        <parameter type="java.lang.String" name="type"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <property name="location" type="java.lang.String"/>
+    <property name="locationUri" type="java.lang.String"/>
+    <property name="name" type="java.lang.String"/>
+    <property name="type" type="java.lang.String"/>
+</type>

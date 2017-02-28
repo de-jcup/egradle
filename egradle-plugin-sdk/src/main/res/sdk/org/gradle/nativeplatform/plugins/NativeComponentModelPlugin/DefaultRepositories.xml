@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.nativeplatform.plugins.NativeComponentModelPlugin.DefaultRepositories" version="3.0">
+    <method name="create" returnType="org.gradle.nativeplatform.PrebuiltLibraries">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <interface name="org.gradle.nativeplatform.Repositories"/>
+</type>

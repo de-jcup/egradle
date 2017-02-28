@@ -34,6 +34,11 @@ public enum GradleEditorPreferenceConstants implements PreferenceIdentifiable{
 	P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
 	P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor"),
 	P_EDITOR_AUTO_CREATE_END_BRACKETSY("autoCreateEndBrackets"),
+	
+	P_EDITOR_CODEASSIST_PROPOSALS_ENABLED("codeAssistProposalsEnabled"),
+	P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS("codeAssistNoProposalsForGetterOrSetter"),
+	P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED("codeAssistTooltipsEnabled"),
+	
 	;
 
 	private String id;
