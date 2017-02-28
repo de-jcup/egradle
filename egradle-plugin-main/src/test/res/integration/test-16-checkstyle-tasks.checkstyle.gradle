@@ -1,0 +1,7 @@
+tasks.checkstyle{
+	reports {
+	    html {
+	      destination "build/codenarc.html"
+	    }
+	}
+}

@@ -19,6 +19,68 @@ public class HoverIntegrationTest {
 	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
 	@Test
+	public void buildfile_17__checkstyle_extension(){
+		fail("impl me!");
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
+		int offset = text.indexOf("html");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+	
+	}
+	
+	@Test
+	public void buildfile_16__reports_delegates_toCheckStyleReports(){
+		fail("impl me!");
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
+		int offset = text.indexOf("html");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+	
+	}
+	
+	@Test
+	public void buildfile_15__my_task_with_type_checkstyle_reports_delegates_toCheckStyleReports(){
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-15-checkstyle-task_myCheckStyleTask_type_CheckStyle.gradle");
+		int offset = text.indexOf("html");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+	
+	}
+	
+	
+	@Test
+	public void buildfile_14__reports_delegates_toCheckStyleReports(){
+		fail("impl me!");
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-14-checkstyle-tasks.withTypeCheckstyle.gradle");
+		int offset = text.indexOf("html");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForMethod("org/gradle/api/plugins/quality/CheckstyleReports", "groovy.lang.Closure");
+	
+	}
+	
+	
+	
+	@Test
 	public void buildfile__with_dependencies_in_root__when_cursor_is_at_dependencies_offset_exactly__has_correct_hoverdata() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test1-dependencies-block-inside-root.gradle");
