@@ -232,11 +232,12 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		return filter;
 	}
 
+	/**
+	 * Clears error markers for THIS editor
+	 */
 	private void clearErrorMarkers() {
 		IFile file = resolveEditorFile();
 		outlineErrorMarker.removeAllMarkers(file);
-
-		EGradleUtil.removeAllValidationErrorsOfConsoleOutput();
 	}
 
 	private void appendError(BuildContext context) {
@@ -244,7 +245,6 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 		if (!context.hasErrors()) {
 			return;
 		}
-
 		IFile file = resolveEditorFile();
 		if (file == null) {
 			return;

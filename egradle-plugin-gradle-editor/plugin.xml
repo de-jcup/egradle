@@ -18,7 +18,7 @@
       <editor
       		name="EGradle Editor"
             extensions="gradle"
-            icon="icons/gradle-og.png"
+            icon="icons/gradle-editor.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"
             id="egradle.editors.GradleEditor">

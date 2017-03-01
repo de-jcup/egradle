@@ -22,7 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -43,10 +50,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.FileStoreEditorInput;
+import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -67,7 +78,7 @@ import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentPr
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 
-public class GradleEditor extends TextEditor implements StatusMessageSupport {
+public class GradleEditor extends TextEditor implements StatusMessageSupport, IResourceChangeListener {
 
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
 	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
@@ -102,7 +113,58 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
-		
+
+	}
+
+	public void resourceChanged(IResourceChangeEvent event) {
+		if (isMarkerChangeForThisEditor(event)) {
+			int severity = getSeverity();
+
+			if (severity == IMarker.SEVERITY_ERROR) {
+				setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", Activator.PLUGIN_ID));
+			} else {
+				setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", Activator.PLUGIN_ID));
+			}
+		}
+	}
+
+	private int getSeverity() {
+		IEditorInput editorInput = getEditorInput();
+		if (editorInput == null) {
+			return IMarker.SEVERITY_INFO;
+		}
+		try {
+			final IResource resource = ResourceUtil.getResource(editorInput);
+			if (resource == null) {
+				return IMarker.SEVERITY_INFO;
+			}
+			int severity = resource.findMaxProblemSeverity(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+			return severity;
+		} catch (CoreException e) {
+			// Might be a project that is not open
+		}
+		return IMarker.SEVERITY_INFO;
+	}
+
+	private boolean isMarkerChangeForThisEditor(IResourceChangeEvent event) {
+		IResource resource = ResourceUtil.getResource(getEditorInput());
+		if (resource == null) {
+			return false;
+		}
+		IPath path = resource.getFullPath();
+		if (path == null) {
+			return false;
+		}
+		IResourceDelta eventDelta = event.getDelta();
+		if (eventDelta == null) {
+			return false;
+		}
+		IResourceDelta delta = eventDelta.findMember(path);
+		if (delta == null) {
+			return false;
+		}
+		boolean isMarkerChangeForThisResource = (delta.getFlags() & IResourceDelta.MARKERS) != 0;
+		return isMarkerChangeForThisResource;
 	}
 
 	public void setErrorMessage(String message) {
@@ -131,24 +193,30 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 		StyledText styledText = getSourceViewer().getTextWidget();
 		styledText.addKeyListener(new GradleBracketInsertionCompleter(this));
+
+		/*
+		 * register as resource change listener to provide marker change
+		 * listening
+		 */
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 	}
 
 	/**
-	 * Installs an additional source viewer support which uses editor preferences instead of standard
-	 * text preferences. If standard source viewer support would be set with editor preferences all standard 
-	 * preferences would be lost or had to be reimplmented. To avoid this another source viewer support is 
-	 * installed... 
+	 * Installs an additional source viewer support which uses editor
+	 * preferences instead of standard text preferences. If standard source
+	 * viewer support would be set with editor preferences all standard
+	 * preferences would be lost or had to be reimplmented. To avoid this
+	 * another source viewer support is installed...
 	 */
 	private void installAdditionalSourceViewerSupport() {
-		
-		additionalSourceViewerSupport = new SourceViewerDecorationSupport(getSourceViewer(), getOverviewRuler(),getAnnotationAccess(), getSharedColors());
+
+		additionalSourceViewerSupport = new SourceViewerDecorationSupport(getSourceViewer(), getOverviewRuler(),
+				getAnnotationAccess(), getSharedColors());
 		additionalSourceViewerSupport.setCharacterPairMatcher(bracketMatcher);
 		additionalSourceViewerSupport.setMatchingCharacterPainterPreferenceKeys(
-				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), 
-				P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
-				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), 
-				P_EDITOR_ENCLOSING_BRACKETS.getId());
-		
+				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
+				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), P_EDITOR_ENCLOSING_BRACKETS.getId());
+
 		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
 				.getPreferenceStore();
 		additionalSourceViewerSupport.install(preferenceStoreForDecorationSupport);
@@ -157,7 +225,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	@Override
 	public void dispose() {
 		super.dispose();
-		if (additionalSourceViewerSupport!=null){
+
+		if (additionalSourceViewerSupport != null) {
 			additionalSourceViewerSupport.dispose();
 		}
 		if (bracketMatcher != null) {
@@ -167,6 +236,8 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		if (documentListener != null) {
 			documentListener.dispose();
 		}
+
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 	}
 
 	public String getBackGroundColorAsWeb() {
@@ -362,6 +433,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	/**
 	 * Get document text - safe way.
+	 * 
 	 * @return string, never <code>null</code>
 	 */
 	String getDocumentText() {
@@ -371,10 +443,11 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 		return doc.get();
 	}
-	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus){
-		openSelectedTreeItemInEditor(selection, grabFocus,false);
+
+	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus) {
+		openSelectedTreeItemInEditor(selection, grabFocus, false);
 	}
-	
+
 	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus, boolean fullSelection) {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
@@ -382,20 +455,20 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 			if (firstElement instanceof Item) {
 				Item item = (Item) firstElement;
 				int offset = item.getOffset();
-				int length=0;
-				if (fullSelection){
+				int length = 0;
+				if (fullSelection) {
 					length = item.getLength();
-				}else{
+				} else {
 					/*
 					 * Why not using item.getLength() ? Because would makes full
-					 * selection. Why not using item.getName().getLength() ? Because
-					 * can differ to editor part! so... get first word at item
-					 * position
+					 * selection. Why not using item.getName().getLength() ?
+					 * Because can differ to editor part! so... get first word
+					 * at item position
 					 */
 					length = TextUtil.getLettersOrDigitsAt(offset, getDocumentText()).length();
 				}
 				if (length == 0) {
-					/* absolute fall back variant - but should never happen*/
+					/* absolute fall back variant - but should never happen */
 					length = 1;
 				}
 				ignoreNextCaretMove = true;
@@ -445,6 +518,23 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	public IDocument getDocument() {
 		return getDocumentProvider().getDocument(getEditorInput());
+	}
+
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		super.init(site, input);
+		if (site == null) {
+			return;
+		}
+		IWorkbenchPage page = site.getPage();
+		if (page == null) {
+			return;
+		}
+
+		// workaround to show action set for block mode etc.
+		// https://www.eclipse.org/forums/index.php/t/366630/
+		page.showActionSet("org.eclipse.ui.edit.text.actionSet.presentation");
+
 	}
 
 	@Override
@@ -547,6 +637,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		}
 
 	}
+
 	/**
 	 * Rebuilds outline to current document model
 	 */
@@ -565,7 +656,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 		});
 	}
-	
+
 	private class GradleEditorCaretListener implements CaretListener {
 
 		@Override

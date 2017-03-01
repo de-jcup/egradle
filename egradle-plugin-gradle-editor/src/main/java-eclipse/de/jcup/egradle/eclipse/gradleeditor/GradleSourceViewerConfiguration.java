@@ -67,7 +67,6 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 	private ContentAssistant contentAssistant;
 	private GradleContentAssistProcessor gradleContentAssistProcessor;
 	private Map<String, GradleTextHover> gradleTextHoverMap = new HashMap<String, GradleTextHover>();
-
 	/**
 	 * Creates configuration by given adaptable
 	 * 
