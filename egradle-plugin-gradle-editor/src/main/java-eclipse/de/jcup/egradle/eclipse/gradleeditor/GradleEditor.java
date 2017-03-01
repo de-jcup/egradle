@@ -23,10 +23,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -98,6 +94,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 	private boolean ignoreNextCaretMove;
 	private GradleFileType cachedGradleFileType;
+	private SourceViewerDecorationSupport additionalSourceViewerSupport;
 
 	public GradleEditor() {
 		setSourceViewerConfiguration(new GradleSourceViewerConfiguration(this));
@@ -105,7 +102,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 		contentProvider = new GradleEditorOutlineContentProvider(this);
 		outlinePage = new GradleEditorContentOutlinePage(this);
 		documentListener = new DelayedDocumentListener();
-
+		
 	}
 
 	public void setErrorMessage(String message) {
@@ -130,21 +127,39 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 
 		contentProvider.clearModelCache();
 
-		/*
-		 * we must install the EGradle editor preference store here instead of
-		 * setting for complete editor - prevents bug #149!
-		 */
-		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
-				.getPreferenceStore();
-		getSourceViewerDecorationSupport(getSourceViewer()).install(preferenceStoreForDecorationSupport);
+		installAdditionalSourceViewerSupport();
 
 		StyledText styledText = getSourceViewer().getTextWidget();
 		styledText.addKeyListener(new GradleBracketInsertionCompleter(this));
 	}
 
+	/**
+	 * Installs an additional source viewer support which uses editor preferences instead of standard
+	 * text preferences. If standard source viewer support would be set with editor preferences all standard 
+	 * preferences would be lost or had to be reimplmented. To avoid this another source viewer support is 
+	 * installed... 
+	 */
+	private void installAdditionalSourceViewerSupport() {
+		
+		additionalSourceViewerSupport = new SourceViewerDecorationSupport(getSourceViewer(), getOverviewRuler(),getAnnotationAccess(), getSharedColors());
+		additionalSourceViewerSupport.setCharacterPairMatcher(bracketMatcher);
+		additionalSourceViewerSupport.setMatchingCharacterPainterPreferenceKeys(
+				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), 
+				P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
+				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), 
+				P_EDITOR_ENCLOSING_BRACKETS.getId());
+		
+		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
+				.getPreferenceStore();
+		additionalSourceViewerSupport.install(preferenceStoreForDecorationSupport);
+	}
+
 	@Override
 	public void dispose() {
 		super.dispose();
+		if (additionalSourceViewerSupport!=null){
+			additionalSourceViewerSupport.dispose();
+		}
 		if (bracketMatcher != null) {
 			bracketMatcher.dispose();
 			bracketMatcher = null;
@@ -403,13 +418,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 	@Override
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		// @formatter:off
-		support.setCharacterPairMatcher(bracketMatcher);
-		support.setMatchingCharacterPainterPreferenceKeys(
-				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), 
-				P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
-				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), 
-				P_EDITOR_ENCLOSING_BRACKETS.getId());
-		
 		super.configureSourceViewerDecorationSupport(support);
 		// @formatter:on
 	}
@@ -536,39 +544,6 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport {
 				refreshOutlineInProgress = true;
 			}
 			internalRebuildOutline();
-		}
-
-		void refreshOutlineDelayed(int delay) {
-			synchronized (monitor) {
-				refreshOutlineInProgress = true;
-			}
-			/*
-			 * we use a job to refresh the outline delayed and only when still
-			 * refreshOutlineInProgress. This is to avoid too many updates
-			 * inside the outline - otherwise every char entered at keyboard
-			 * will reload complete AST ...
-			 */
-			/*
-			 * TODO ATR, 12.11.2016: while caret changes the update may not
-			 * proceed, only when caret position no longer moves the update of
-			 * the document has to be done
-			 */
-			Job job = new Job("update gradle editor outline") {
-
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					synchronized (monitor) {
-						if (!refreshOutlineInProgress) {
-							/* already cleaned up by another job */
-							return Status.CANCEL_STATUS;
-						}
-					}
-					internalRebuildOutline();
-
-					return Status.OK_STATUS;
-				}
-			};
-			job.schedule(delay);
 		}
 
 	}
