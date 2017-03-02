@@ -23,12 +23,6 @@ import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 
-/**
- * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
- */
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
 	public static final String COMMAND_ID = "egradle.commands.refreshEclipse";

@@ -20,6 +20,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
@@ -31,19 +32,37 @@ import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
+import de.jcup.egradle.eclipse.ui.SelectConfigurationDialog;
 
-/**
- * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
- */
+
 public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCommandHandler {
 
-	public static final String COMMAND_ID = "egradle.commands.refreshEclipse";
 	private IProject projectToUse;
+	private String configuration;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		Shell activeWorkbenchShell = EGradleUtil.getActiveWorkbenchShell();
+		if (activeWorkbenchShell==null){
+			return null;
+		}
+		IProject project = findSelectedProject();
+		if (project==null){
+			return null;
+		}
+		SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
+		dialog.setTitleImage(EGradleUtil.getImage("icons/gradle-og.png"));
+		dialog.setInput(configuration);
+		String config = dialog.open();
+		if (config==null){
+			/* cancel ...*/
+			return null;
+		}
+		configuration=config;
+		projectToUse=project;
+		return super.execute(event);
+	}
+
+	private IProject findSelectedProject() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window == null) {
 			return null;
@@ -60,23 +79,26 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 		}
 
 		IProject project = (IProject) ((IAdaptable) firstElement).getAdapter(IProject.class);
-		if (project == null){
-			return null;
-		}
-		projectToUse=project;
-		return super.execute(event);
+		return project;
 	}
 
 	@Override
 	public void prepare(GradleContext context) {
+		if (projectToUse==null){
+			return;
+		}
 		context.setAmountOfWorkToDo(2);
 		StringBuilder sb = new StringBuilder();
-		if (projectToUse!=null && !EGradleUtil.isRootProject(projectToUse)){
+		if (!EGradleUtil.hasVirtualRootProjectNature(projectToUse) && !EGradleUtil.isRootProject(projectToUse)){
 			sb.append(":");
 			sb.append(projectToUse.getName()); /* FIXME ATR, 02.03.2017: check if getName() is correct here - should be foldername.. */
 			sb.append(":");
 		}
-		sb.append("dependencies --configuration compile");
+		sb.append("dependencies");
+		if (configuration!=null && configuration.length()>0){
+			sb.append(" --configuration ");
+			sb.append(configuration);
+		}
 		context.setCommands(GradleCommand.build(sb.toString()));
 	}
 

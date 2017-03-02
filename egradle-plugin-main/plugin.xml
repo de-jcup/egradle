@@ -342,7 +342,7 @@
                 <command commandId="egradle.commands.showDependenciesForProject"
                     label="Show dependencies" 
                 	tooltip="Shows dependencies of selected project"
-                    icon="icons/module_view.png"
+                    icon="icons/showDependencies.png"
                     style="push">
                     <visibleWhen 
                               checkEnabled="false">

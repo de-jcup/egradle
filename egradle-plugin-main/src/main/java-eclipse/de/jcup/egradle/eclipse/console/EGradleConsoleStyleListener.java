@@ -46,12 +46,21 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		addParseDataByIndex("WARNING", BRIGHT_RED);
 		addParseDataByIndex("warning", BRIGHT_RED);
 		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
+		
+		/* dependencies output */
+		addParseDataByIndex("+---", BRIGHT_BLUE);
+		addParseDataByIndex("\\---", BRIGHT_BLUE);
+		addParseDataByIndex("|", BRIGHT_BLUE);
 	}
 
 	static final void addParseDataByIndex(String substring, RGB color) {
+		addParseDataByIndex(substring, color,false);
+	}
+	static final void addParseDataByIndex(String substring, RGB color, boolean bold) {
 		ParseData data = new ParseData();
 		data.subString = substring;
 		data.color = color;
+		data.bold=bold;
 		SHARED_PARSE_DATA.add(data);
 	}
 
@@ -150,7 +159,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 			fromIndex = pos + 1;
 
 			if (pos != -1) {
-				addRange(ranges, event.lineOffset + pos, data.subString.length(), getColor(data.color), false);
+				addRange(ranges, event.lineOffset + pos, data.subString.length(), getColor(data.color), data.bold);
 			}
 		} while (pos != -1);
 	}
@@ -160,6 +169,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 	}
 
 	private static class ParseData {
+		public boolean bold;
 		private String subString;
 		private RGB color;
 

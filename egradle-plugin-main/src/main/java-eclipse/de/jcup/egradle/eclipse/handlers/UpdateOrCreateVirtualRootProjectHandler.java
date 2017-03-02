@@ -23,6 +23,7 @@ import org.eclipse.core.commands.ExecutionException;
 
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
+
 public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
 	public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
 	

@@ -199,6 +199,10 @@ public class EGradleUtil {
 		return window.getActivePage();
 	}
 
+	/**
+	 * Returns active workbench shell - or <code>null</code>
+	 * @return  active workbench shell - or <code>null</code>
+	 */
 	public static Shell getActiveWorkbenchShell() {
 		IWorkbench workbench = getWorkbench();
 		if (workbench==null){
