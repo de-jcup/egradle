@@ -365,14 +365,16 @@ public class Item {
 	/**
 	 * Creates a string containing all information of this item, separated by
 	 * space, parameters with comma
-	 * 
+	 * @param withType - when <code>true</code> the type (if set) is inside search string, otherwise not
 	 * @return full string
 	 */
-	String buildSearchString() {
+	String buildSearchString(boolean withType) {
 		StringBuilder sb = new StringBuilder();
-		if (type != null) {
-			sb.append(type);
-			sb.append(" ");
+		if (withType){
+			if (type != null) {
+				sb.append(type);
+				sb.append(" ");
+			}
 		}
 		if (configuration != null) {
 			sb.append(configuration);

@@ -30,7 +30,28 @@ public class ItemTextMatcherTest {
 		matcherToTest = new ItemTextMatcher();
 		item = new Item();
 	}
+	
+	@Test
+	public void a_method_getName_with_no_return_type_is_found_by_simple_get_asterisk__when_item_has_type(){
+		item.setName("getName");
+		item.setType(null); // not necessary, only to explain
+		matcherToTest.setFilterText("get*");
 
+		/* execute + test */
+		assertTrue(matcherToTest.matches(item));	
+	}
+
+	@Test
+	public void a_method_getName_with_return_type_String_is_found_by_simple_get_asterisk__when_item_has_type(){
+		item.setName("getName");
+		item.setType("String");
+		matcherToTest.setFilterText("get*");
+		
+
+		/* execute + test */
+		assertTrue(matcherToTest.matches(item));	
+	}
+	
 	@Test
 	public void item_with_name_abc_is_matched_by_unset_filter_text() {
 		/* prepare */
