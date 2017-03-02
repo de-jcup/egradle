@@ -560,7 +560,18 @@ public class EGradleUtil {
 		log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
 	}
 
+	/**
+	 * Open system console and disables scroll lock if set
+	 */
 	public static void openSystemConsole() {
+		openSystemConsole(true);
+	}
+	
+	/**
+	 * Open system console
+	 * @param ensureNoScrollLock - if <code>true</code> scroll lock will be disabled
+	 */
+	public static void openSystemConsole(boolean ensureNoScrollLock) {
 		EGradleUtil.safeAsyncExec(new Runnable() {
 
 			@Override
@@ -572,6 +583,11 @@ public class EGradleUtil {
 				try {
 					view = (IConsoleView) page.showView(id);
 					view.display(eGradleSystemConsole);
+					
+					if (ensureNoScrollLock){
+						view.setScrollLock(false);
+					}
+					
 				} catch (PartInitException e) {
 					EGradleUtil.log(e);
 				}

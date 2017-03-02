@@ -144,6 +144,12 @@
       		id="egradle.commands.detectNewRootProject"
       >
       </command>
+      <command
+      		 name="Show dependencies"
+            categoryId="egradle.commands.category"
+      		id="egradle.commands.showDependenciesForProject"
+      >
+      </command>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          HANDLER                                     -->
@@ -169,6 +175,10 @@
       <handler
             commandId="egradle.commands.detectNewRootProject"
             class="de.jcup.egradle.eclipse.handlers.DetectNewRootProjectHandler">
+      </handler>
+      <handler
+            commandId="egradle.commands.showDependenciesForProject"
+            class="de.jcup.egradle.eclipse.handlers.ShowDependenciesOfSelectecProjectHandler">
       </handler>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -328,6 +338,29 @@
                               </with>
                         </visibleWhen>
                 </command>
+                
+                <command commandId="egradle.commands.showDependenciesForProject"
+                    label="Show dependencies" 
+                	tooltip="Shows dependencies of selected project"
+                    icon="icons/module_view.png"
+                    style="push">
+                    <visibleWhen 
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <and>
+				         				<count value="1"/>
+	                                    <iterate ifEmpty="false">
+	                                    	 <adapt type="org.eclipse.core.resources.IProject">
+			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="true"/>
+				         					</adapt>
+				         				</iterate>
+                                    </and>
+                              </with>
+                        </visibleWhen>
+					                
+                </command>
+                
         </menuContribution>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
