@@ -9,6 +9,26 @@
    		id="egradle.preferences.keyword.egradle"
    		label="egradle">
      </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.gradle"
+   		label="gradle">
+     </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.color"
+   		label="color">
+     </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.codeassist"
+   		label="code assist">
+     </keyword>
+     <keyword
+   		id="egradle.preferences.keyword.codecompletion"
+   		label="code completion">
+     </keyword>
+     <keyword
+   		id="egradle.preferences.keyword.editor"
+   		label="editor">
+     </keyword>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          EDITOR                                      -->
@@ -161,6 +181,12 @@
          <keywordReference
                id="egradle.preferences.keyword.egradle">
          </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.editor">
+         </keywordReference>
       </page>
       <page
          id="egradle.eclipse.gradleeditor.preferences.EGradleEditorSyntaxColorPreferencePage"
@@ -170,12 +196,30 @@
          <keywordReference
                id="egradle.preferences.keyword.egradle">
          </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.color">
+         </keywordReference>
       </page>
       <page
          id="egradle.eclipse.gradleeditor.preferences.EGradleEditorCodeCompletionPreferencePage"
          class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorCodeCompletionPreferencePage"
          name="Code assist"
          category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.codeassist">
+         </keywordReference>
+           <keywordReference
+               id="egradle.preferences.keyword.codecompletion">
+         </keywordReference>
       </page>
     </extension>
     <extension

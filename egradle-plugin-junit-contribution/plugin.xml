@@ -9,6 +9,14 @@
    		id="egradle.preferences.keyword.egradle"
    		label="egradle">
      </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.gradle"
+   		label="gradle">
+     </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.junit"
+   		label="junit">
+     </keyword>
    </extension>
 
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -23,6 +31,12 @@
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
                id="egradle.preferences.keyword.egradle">
+         </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.junit">
          </keywordReference>
       </page>
    </extension>

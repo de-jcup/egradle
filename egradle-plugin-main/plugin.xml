@@ -9,6 +9,10 @@
    		id="egradle.preferences.keyword.egradle"
    		label="egradle">
      </keyword>
+      <keyword
+   		id="egradle.preferences.keyword.gradle"
+   		label="gradle">
+     </keyword>
    </extension>
    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -338,6 +342,9 @@
             <keywordReference
                   id="egradle.preferences.keyword.egradle">
             </keywordReference>
+             <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         	</keywordReference>
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
@@ -346,6 +353,9 @@
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
                id="egradle.preferences.keyword.egradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.gradle">
          </keywordReference>
       </page>
       <page
@@ -356,6 +366,9 @@
          <keywordReference
                id="egradle.preferences.keyword.egradle">
          </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
       </page>
        <page
          id="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
@@ -364,6 +377,9 @@
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
                id="egradle.preferences.keyword.egradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.gradle">
          </keywordReference>
       </page>
    </extension>
