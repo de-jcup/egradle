@@ -32,11 +32,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.OpenFileAction;
 import org.eclipse.ui.actions.OpenWithMenu;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+
+import de.jcup.egradle.eclipse.api.EGradleUtil;
 
 public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
@@ -64,6 +64,7 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 		setHelpAvailable(false);
 		setMessage("Please select an estimated type:");
 		setTitle("Open potential groovy/gradle/java resource");
+		
 	}
 
 	@Override
@@ -90,6 +91,10 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 		getPatternControl().setEnabled(false);
 		return control;
 	}
+	
+	
+	
+
 
 	private class GroovyGradleAndJavaTypeFilter extends ViewerFilter {
 
@@ -234,7 +239,7 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 	}
 
 	private IWorkbenchPage getActivePage() {
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchWindow activeWorkbenchWindow = EGradleUtil.getActiveWorkbenchWindow();
 		if (activeWorkbenchWindow == null) {
 			return null;
 		}

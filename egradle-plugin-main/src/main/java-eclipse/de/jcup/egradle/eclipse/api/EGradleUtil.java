@@ -838,6 +838,14 @@ public class EGradleUtil {
 		}
 	}
 
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		IWorkbench workbench = getWorkbench();
+		if (workbench==null){
+			return null;
+		}
+		return workbench.getActiveWorkbenchWindow();
+	}
+
 	/**
 	 * Returns a web color in format "#RRGGBB"
 	 * @param color

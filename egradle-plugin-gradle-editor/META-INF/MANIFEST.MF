@@ -7,14 +7,16 @@ Bundle-Activator: de.jcup.egradle.eclipse.gradleeditor.Activator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.ui.editors,
+ org.eclipse.core.resources,
+ org.eclipse.core.filesystem,
  org.eclipse.text,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
  org.eclipse.jface.text,
  org.eclipse.ui.views,
  org.eclipse.ui.workbench,
- org.eclipse.core.resources,
+ org.eclipse.ui.editors,
  org.eclipse.ui.ide,
- org.eclipse.core.filesystem,
  de.jcup.egradle.eclipse.plugin.main;bundle-version="1.2.1",
  de.jcup.egradle.eclipse.plugin.sdk;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
