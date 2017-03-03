@@ -17,7 +17,14 @@ public class JDTDataAccess {
 
 	public static JDTDataAccess SHARED = new JDTDataAccess();
 
-	public List<String> scanForJavaType(String type, String packageName, IJavaSearchScope scope ){
+	/**
+	 * Scan for package  names
+	 * @param type
+	 * @param scope
+	 * @param packageNames - can be <code>null</code>
+	 * @return list with java types
+	 */
+	public List<String> scanForJavaType(String type, IJavaSearchScope scope, String ...packageNames ){
 			SearchEngine engine = new SearchEngine();
 			List<String> foundList = new ArrayList<>();
 			try {
@@ -43,8 +50,12 @@ public class JDTDataAccess {
 					addImport(groovyAutomaticImports, "java.util");
 					addImport(groovyAutomaticImports, "java.net");
 					addImport(groovyAutomaticImports, "java.io");
-					if (packageName!=null && !packageName.isEmpty()){
-						addImport(groovyAutomaticImports, packageName);
+					if (packageNames!=null && packageNames.length>0){
+						for (String packageName: packageNames){
+							if (packageName!=null && !packageName.isEmpty()){
+								addImport(groovyAutomaticImports, packageName);
+							}
+						}
 					}
 				}
 				char[][] qualifications = new char[groovyAutomaticImports.size()][];

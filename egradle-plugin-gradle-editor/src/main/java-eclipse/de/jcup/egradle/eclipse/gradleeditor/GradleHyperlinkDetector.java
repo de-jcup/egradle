@@ -103,16 +103,21 @@ public class GradleHyperlinkDetector extends AbstractHyperlinkDetector {
 		GradleResourceLinkCalculator resCalculator = new GradleResourceLinkCalculator();
 		result = resCalculator.createResourceLinkString(line, offsetInLine);
 		if (result!=null){
-			return handlerResourceLink(lineInfo, result);
+			return handlerResourceLink(textViewer, lineInfo, result);
 		}
 		return null;
 
 	}
 
-	private IHyperlink[] handlerResourceLink(IRegion lineInfo, GradleHyperLinkResult result) {
+	private IHyperlink[] handlerResourceLink(ITextViewer textViewer, IRegion lineInfo, GradleHyperLinkResult result) {
 		try {
 			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
-			GradleResourceHyperlink	gradleResourceLink = new GradleResourceHyperlink(urlRegion, result.linkContent);
+			IDocument document = textViewer.getDocument();
+			String fullText = null;
+			if (document!=null){
+				fullText= document.get();
+			}
+			GradleResourceHyperlink	gradleResourceLink = new GradleResourceHyperlink(urlRegion, result.linkContent, fullText);
 			return new IHyperlink[] { gradleResourceLink };
 		} catch (RuntimeException e) {
 			return null;

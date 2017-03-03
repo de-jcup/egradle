@@ -13,13 +13,14 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import static org.eclipse.core.runtime.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -39,6 +40,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.dialogs.SelectionDialog;
 import org.eclipse.ui.ide.IDE;
 
+import de.jcup.egradle.core.text.JavaImportFinder;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;
 
@@ -46,13 +48,18 @@ public class GradleResourceHyperlink implements IHyperlink {
 
 	private IRegion region;
 	private String resourceName;
+	
+	private String fullText;
 
-	public GradleResourceHyperlink(IRegion region, String resourceName) {
+	public GradleResourceHyperlink(IRegion region, String resourceName, String fullText) {
 		isNotNull(region, "Gradle hyperlink region may not be null!");
 		isNotNull(resourceName, "resourceName may not be null!");
 		this.region = region;
 		this.resourceName = resourceName;
+		
+		this.fullText=fullText;
 	}
+
 
 	@Override
 	public IRegion getHyperlinkRegion() {
@@ -71,18 +78,21 @@ public class GradleResourceHyperlink implements IHyperlink {
 
 	@Override
 	public void open() {
+		String[] packageNames= fetchImportedPackages(fullText);
 		
 		Shell shell = EGradleUtil.getActiveWorkbenchShell();
 		if (shell==null){
 			return;
 		}
 		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
-		List<String> typesFound = JDTDataAccess.SHARED.scanForJavaType(resourceName, "",scope);
+		List<String> typesFound = JDTDataAccess.SHARED.scanForJavaType(resourceName, scope, packageNames);
 		SelectionDialog dialog = null;
 		if (! typesFound.isEmpty()){
 			int style=IJavaElementSearchConstants.CONSIDER_ALL_TYPES;
 			try {
-				dialog = JavaUI.createTypeDialog(EGradleUtil.getActiveWorkbenchShell(), EGradleUtil.getActiveWorkbenchWindow(), scope, style, false,typesFound.get(0));
+				String found = typesFound.get(0);
+				dialog = JavaUI.createTypeDialog(EGradleUtil.getActiveWorkbenchShell(), EGradleUtil.getActiveWorkbenchWindow(), scope, style, false,found);
+				dialog.setTitle("Potential Java types found:");
 			} catch (JavaModelException e) {
 				EGradleUtil.log("Cannot create java type dialog", e);
 			}
@@ -137,6 +147,12 @@ public class GradleResourceHyperlink implements IHyperlink {
 			}
 		}
 
+	}
+	
+	private String[] fetchImportedPackages(String fullText) {
+		JavaImportFinder javaImportFinder = new JavaImportFinder();
+		Set<String> set = javaImportFinder.findImportedPackages(fullText);
+		return set.toArray(new String[set.size()]);
 	}
 
 }
