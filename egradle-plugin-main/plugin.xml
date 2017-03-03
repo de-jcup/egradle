@@ -267,60 +267,10 @@
     <extension point="org.eclipse.ui.menus">
         <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
         <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-                <command commandId="egradle.commands.updateOrCreateVirtualRootProject"
-                        label="Recreate Virtual Root Project" 
-                        tooltip="Recreates the complete virtual root project"
-                        icon="icons/updateOrCreateVirtualRootProject.png"
-                        style="push">
-                        <visibleWhen
-                              checkEnabled="false">
-                              <with
-                                    variable="activeMenuSelection">
-                                    <iterate ifEmpty="false">
-			         					<adapt type="org.eclipse.core.resources.IProject">
-			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
-			         					</adapt>
-			         				</iterate>
-                              </with>
-                        </visibleWhen>
-                </command>
-                <command commandId="egradle.commands.refreshEclipse"
-                        label="Refresh eclipse dependencies" 
-                        tooltip="Refreshes all eclipse dependencies"
-                        icon="icons/refreshAllEclipseDependencies.png"
-                        style="push">
-                        <visibleWhen
-                              checkEnabled="false">
-                              <with
-                                    variable="activeMenuSelection">
-                                    <iterate ifEmpty="false">
-			         					<adapt type="org.eclipse.core.resources.IProject">
-			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
-			         					</adapt>
-			         				</iterate>
-                              </with>
-                        </visibleWhen>
-                </command>
-                 <command commandId="org.eclipse.ui.file.import" >
-		            		<parameter name="importWizardId" value="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard" />
-		            		 <visibleWhen 
-                              checkEnabled="false">
-                              <with
-                                    variable="activeMenuSelection">
-                                    <and>
-	                                    <iterate ifEmpty="false">
-	                                    	 <adapt type="org.eclipse.core.resources.IResource">
-			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="true"/>
-				         					</adapt>
-				         				</iterate>
-                                    </and>
-                              </with>
-                        </visibleWhen>
-         		</command>
                 <!-- Detect new root project -->
                 <command commandId="egradle.commands.detectNewRootProject"
                         label="Change EGradle root project" 
-                        tooltip="Tries to detect new EGradle root project folder by this resource. Will change preferences to new root project and automatically rebuild virtual root project if formerly active"
+                        tooltip="Tries to detect new EGradle root project folder by this resource. Will change preferences to new root project and automatically connect an existing virtual root project to new root folder"
                         icon="icons/detectNewRootProject.png"
                         style="push">
                         <visibleWhen 
@@ -339,27 +289,110 @@
                         </visibleWhen>
                 </command>
                 
-                <command commandId="egradle.commands.showDependenciesForProject"
-                    label="Show dependencies" 
-                	tooltip="Shows dependencies of selected project"
-                    icon="icons/showDependencies.png"
-                    style="push">
-                    <visibleWhen 
-                              checkEnabled="false">
-                              <with
-                                    variable="activeMenuSelection">
-                                    <and>
-				         				<count value="1"/>
-	                                    <iterate ifEmpty="false">
-	                                    	 <adapt type="org.eclipse.core.resources.IProject">
-			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="true"/>
-				         					</adapt>
-				         				</iterate>
-                                    </and>
-                              </with>
-                        </visibleWhen>
-					                
-                </command>
+                <menu
+                      icon="icons/gradle-og.png"
+                      id="egradle.popup.any"
+                      label="EGradle">
+                   <command
+                         commandId="egradle.commands.showDependenciesForProject"
+                         icon="icons/showDependencies.png"
+                         label="Show dependencies"
+                         style="push"
+                         tooltip="Shows dependencies of selected project">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <and>
+                               <count
+                                     value="1">
+                               </count>
+                               <iterate
+                                     ifEmpty="false">
+                                  <adapt
+                                        type="org.eclipse.core.resources.IProject">
+                                     <test
+                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           value="true">
+                                     </test>
+                                  </adapt>
+                               </iterate>
+                            </and>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <command
+                         commandId="egradle.commands.updateOrCreateVirtualRootProject"
+                         icon="icons/updateOrCreateVirtualRootProject.png"
+                         label="Recreate Virtual Root Project"
+                         style="push"
+                         tooltip="Recreates the complete virtual root project">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <iterate
+                                  ifEmpty="false">
+                               <adapt
+                                     type="org.eclipse.core.resources.IProject">
+                                  <test
+                                        property="org.eclipse.core.resources.projectNature"
+                                        value="de.jcup.egradle.eclipse.virtualRootProjectNature">
+                                  </test>
+                               </adapt>
+                            </iterate>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <command
+                         commandId="org.eclipse.ui.file.import">
+                      <parameter
+                            name="importWizardId"
+                            value="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
+                      </parameter>
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <and>
+                               <iterate
+                                     ifEmpty="false">
+                                  <adapt
+                                        type="org.eclipse.core.resources.IResource">
+                                     <test
+                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           value="true">
+                                     </test>
+                                  </adapt>
+                               </iterate>
+                            </and>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <command
+                         commandId="egradle.commands.refreshEclipse"
+                         icon="icons/refreshAllEclipseDependencies.png"
+                         label="Refresh eclipse dependencies"
+                         style="push"
+                         tooltip="Refreshes all eclipse dependencies">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <iterate
+                                  ifEmpty="false">
+                               <adapt
+                                     type="org.eclipse.core.resources.IProject">
+                                  <test
+                                        property="org.eclipse.core.resources.projectNature"
+                                        value="de.jcup.egradle.eclipse.virtualRootProjectNature">
+                                  </test>
+                               </adapt>
+                            </iterate>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                </menu>
                 
         </menuContribution>
    </extension>

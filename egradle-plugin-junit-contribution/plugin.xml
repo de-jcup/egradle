@@ -69,7 +69,7 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <extension point="org.eclipse.ui.menus">
         <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
-        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <menuContribution locationURI="popup:egradle.popup.any">
                 <command commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
                         label="Import all Junit Test results" 
                         icon="icons/importGradleTestsToEclipseView.png"
