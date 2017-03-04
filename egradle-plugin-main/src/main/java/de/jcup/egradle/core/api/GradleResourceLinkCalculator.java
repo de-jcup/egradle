@@ -15,11 +15,13 @@
  */
 package de.jcup.egradle.core.api;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GradleResourceLinkCalculator {
-
+	
 	/**
 	 * Creates a link result or <code>null</code>
 	 * 
@@ -38,6 +40,10 @@ public class GradleResourceLinkCalculator {
 		if (offsetInLine >= lineLength) {
 			return null;
 		}
+		return xyz(line, offsetInLine);
+	}
+
+	private GradleHyperLinkResult xyz(String line, int offsetInLine) {
 		/* e.g. abc defg Test abc */
 		/* ^-- Test must be identified */
 		String rightSubString = line.substring(offsetInLine);
@@ -46,13 +52,18 @@ public class GradleResourceLinkCalculator {
 			if (Character.isWhitespace(c)) {
 				break;
 			}
+			if (c=='{'){
+				break;
+			}
 			if (c=='('){
 				break;
 			}
 			if (c==')'){
 				break;
 			}
-			
+			if (c=='['){
+				break;
+			}
 			if (c=='<'){
 				break;
 			}
