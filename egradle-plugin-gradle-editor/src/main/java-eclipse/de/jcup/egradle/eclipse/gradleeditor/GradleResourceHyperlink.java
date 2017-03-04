@@ -25,12 +25,15 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.ui.IJavaElementSearchConstants;
 import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.window.Window;
@@ -85,22 +88,40 @@ public class GradleResourceHyperlink implements IHyperlink {
 			return;
 		}
 		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
-		List<String> typesFound = JDTDataAccess.SHARED.scanForJavaType(resourceName, scope, packageNames);
+		JDTDataAccess access = JDTDataAccess.SHARED;
+		
+		List<String> typesFound = access.scanForJavaType(resourceName, scope, packageNames);
+		
 		SelectionDialog dialog = null;
 		if (! typesFound.isEmpty()){
+			
+			if (typesFound.size()==1){	
+				/* exact macht possible */
+				String found = typesFound.get(0);
+				IType type = access.findType(found, new NullProgressMonitor());
+				if (type instanceof IJavaElement){
+					IJavaElement javaElement=type;
+					openInEditor(javaElement);
+					return;
+				}else{
+					/* keep on going - use type dialog as fallback...*/
+				}
+				
+			}
+			
 			int style=IJavaElementSearchConstants.CONSIDER_ALL_TYPES;
 			try {
 				String found = typesFound.get(0);
-				dialog = JavaUI.createTypeDialog(EGradleUtil.getActiveWorkbenchShell(), EGradleUtil.getActiveWorkbenchWindow(), scope, style, false,found);
+				
+				IRunnableContext runnableContext = EGradleUtil.getActiveWorkbenchWindow();
+				
+				dialog = JavaUI.createTypeDialog(shell, runnableContext, scope, style, false,found);
 				dialog.setTitle("Potential Java types found:");
 			} catch (JavaModelException e) {
 				EGradleUtil.log("Cannot create java type dialog", e);
 			}
 		}else{
-			IWorkspaceRoot container = ResourcesPlugin.getWorkspace().getRoot();
-			OpenGradleResourceDialog opengradleResourceDialog = new OpenGradleResourceDialog(shell, container, IFile.FILE);
-			opengradleResourceDialog.setInitialPattern(resourceName);
-			dialog = opengradleResourceDialog;
+			dialog = createResourceDialog(shell);
 		}
 		
 		final int resultCode = dialog.open();
@@ -140,13 +161,25 @@ public class GradleResourceHyperlink implements IHyperlink {
 			}
 		}else if (javaElements.size()>0){
 			IJavaElement javaElement = javaElements.get(0);
-			try {
-				JavaUI.openInEditor(javaElement);
-			} catch (PartInitException | JavaModelException e) {
-				EGradleUtil.log("Cannot open java editor with:"+javaElement,e);
-			}
+			openInEditor(javaElement);
 		}
 
+	}
+
+
+	private void openInEditor(IJavaElement javaElement) {
+		try {
+			JavaUI.openInEditor(javaElement);
+		} catch (PartInitException | JavaModelException e) {
+			EGradleUtil.log("Cannot open java editor with:"+javaElement,e);
+		}
+	}
+
+	private SelectionDialog createResourceDialog(Shell shell) {
+		IWorkspaceRoot container = ResourcesPlugin.getWorkspace().getRoot();
+		OpenGradleResourceDialog opengradleResourceDialog = new OpenGradleResourceDialog(shell, container, IFile.FILE);
+		opengradleResourceDialog.setInitialPattern(resourceName);
+		return opengradleResourceDialog;
 	}
 	
 	private String[] fetchImportedPackages(String fullText) {
