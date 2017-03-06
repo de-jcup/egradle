@@ -34,6 +34,16 @@ public class GradleResourceLinkCalculatorTest {
 		assertNotNull(calculator.createResourceLinkString("Test", 0));
 	}
 	
+	
+	@Test
+	public void Test_commata_0_returns_NOT_null__text_contains_only_Test() {
+		GradleHyperLinkResult result = calculator.createResourceLinkString("Test,", 0);
+		assertNotNull(result);
+		assertEquals("Test", result.linkContent);
+		assertEquals(0, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
 	@Test
 	public void TestBracketOpen_0_returns_NOT_null__text_contains_only_Test() {
 		GradleHyperLinkResult result = calculator.createResourceLinkString("Test(", 0);
@@ -94,6 +104,24 @@ public class GradleResourceLinkCalculatorTest {
 		assertNotNull(result);
 		assertEquals("Test", result.linkContent);
 		assertEquals(0, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
+	public void dot_Test_newline_returns_NOT_null__text_contains_only_Test() {
+		GradleHyperLinkResult result = calculator.createResourceLinkString(".Test\n", 1);
+		assertNotNull(result);
+		assertEquals("Test", result.linkContent);
+		assertEquals(1, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
+	public void dot_Test_end_returns_NOT_null__text_contains_only_Test() {
+		GradleHyperLinkResult result = calculator.createResourceLinkString(".Test", 1);
+		assertNotNull(result);
+		assertEquals("Test", result.linkContent);
+		assertEquals(1, result.linkOffsetInLine);
 		assertEquals(4, result.linkLength);
 	}
 	
