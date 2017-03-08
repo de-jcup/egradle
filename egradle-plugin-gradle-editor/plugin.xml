@@ -37,7 +37,7 @@
          point="org.eclipse.ui.editors">
       <editor
       		name="EGradle Editor"
-            extensions="gradle"
+            extensions="gradle,groovy"
             icon="icons/gradle-editor.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="de.jcup.egradle.eclipse.gradleeditor.GradleEditor"
