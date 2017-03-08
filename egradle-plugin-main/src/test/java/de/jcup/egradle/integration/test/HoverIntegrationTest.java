@@ -1,6 +1,6 @@
-package de.jcup.egradle.test.integration;
+package de.jcup.egradle.integration.test;
 
-import static de.jcup.egradle.test.integration.HoverDataAssert.*;
+import static de.jcup.egradle.integration.HoverDataAssert.*;
 import static org.junit.Assert.*;
 
 import org.junit.Ignore;
@@ -13,6 +13,7 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.hover.HoverData;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.integration.IntegrationTestComponents;
 
 public class HoverIntegrationTest {
 

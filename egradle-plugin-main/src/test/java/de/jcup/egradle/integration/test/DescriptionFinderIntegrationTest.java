@@ -1,4 +1,4 @@
-package de.jcup.egradle.test.integration;
+package de.jcup.egradle.integration.test;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.integration.IntegrationTestComponents;
 
 public class DescriptionFinderIntegrationTest {
 

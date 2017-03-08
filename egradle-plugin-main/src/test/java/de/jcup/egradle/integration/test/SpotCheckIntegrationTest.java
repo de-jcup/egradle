@@ -1,11 +1,12 @@
-package de.jcup.egradle.test.integration;
+package de.jcup.egradle.integration.test;
 
-import static de.jcup.egradle.test.integration.TypeAssert.*;
+import static de.jcup.egradle.integration.TypeAssert.*;
 
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.Type;
+import de.jcup.egradle.integration.IntegrationTestComponents;
 
 /**
  * Does some spot check to data

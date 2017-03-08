@@ -1,7 +1,7 @@
-package de.jcup.egradle.test.integration;
+package de.jcup.egradle.integration.test;
 
 import static de.jcup.egradle.core.TestUtil.*;
-import static de.jcup.egradle.test.integration.ProposalsAssert.*;
+import static de.jcup.egradle.integration.ProposalsAssert.*;
 import static org.junit.Assert.*;
 
 import java.util.Set;
@@ -12,6 +12,7 @@ import org.junit.Test;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory;
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.ProposalFactoryContentProvider;
+import de.jcup.egradle.integration.IntegrationTestComponents;
 public class ProposalIntegrationTest {
 
 

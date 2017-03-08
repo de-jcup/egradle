@@ -10,7 +10,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.test.integration.DescriptionFinderIntegrationTest;
+import de.jcup.egradle.integration.test.DescriptionFinderIntegrationTest;
 
 public class DescriptionFinderTest {
 	private DescriptionFinder finderToTest;

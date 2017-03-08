@@ -1,4 +1,4 @@
-package de.jcup.egradle.test.integration;
+package de.jcup.egradle.integration;
 
 import static org.junit.Assert.*;
 
