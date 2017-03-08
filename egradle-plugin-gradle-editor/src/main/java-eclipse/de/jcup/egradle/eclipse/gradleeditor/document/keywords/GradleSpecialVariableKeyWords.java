@@ -39,6 +39,8 @@ public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 	
 	SYSTEM("System"),
 	
+	EXT("ext"),
+	
 	;
 
 	private String text;
