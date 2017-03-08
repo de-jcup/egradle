@@ -55,6 +55,11 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
 
+/**
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
 	// private GradleEditorDoubleClickStrategy doubleClickStrategy;
@@ -184,6 +189,7 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		
 		addPresentation(reconciler, GradleDocumentIdentifiers.COMMENT.getId(), EDITOR_PREFERENCES.getColor(COLOR_COMMENT),SWT.NONE);
 		addPresentation(reconciler, GradleDocumentIdentifiers.ANNOTATION.getId(), EDITOR_PREFERENCES.getColor(COLOR_ANNOTATION),SWT.NONE);
+		addPresentation(reconciler, GradleDocumentIdentifiers.GROOVY_DOC.getId(), EDITOR_PREFERENCES.getColor(COLOR_GROOVY_DOC),SWT.NONE);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_APPLY_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_APPLY_KEYWORD),SWT.BOLD);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_OTHER_KEYWORD),SWT.BOLD);
 		addPresentation(reconciler, GradleDocumentIdentifiers.GRADLE_TASK_KEYWORD.getId(), EDITOR_PREFERENCES.getColor(COLOR_GRADLE_TASK_KEYWORD),SWT.BOLD|SWT.ITALIC);

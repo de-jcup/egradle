@@ -67,6 +67,7 @@ public class GradleEditorSyntaxColorPreferencePage extends FieldEditorPreference
 				changeColor(editorMap, COLOR_ANNOTATION, GradleEditorColorConstants.DARK_THEME_GRAY);
 				
 				changeColor(editorMap, COLOR_GROOVY_KEYWORD, GradleEditorColorConstants.MIDDLE_GREEN);
+				changeColor(editorMap, COLOR_GROOVY_DOC, GradleEditorColorConstants.MEDIUM_CYAN);
 				changeColor(editorMap, COLOR_NORMAL_STRING, GradleEditorColorConstants.MIDDLE_GRAY);
 				changeColor(editorMap, COLOR_GSTRING, GradleEditorColorConstants.MIDDLE_ORANGE);
 				changeColor(editorMap, COLOR_COMMENT, GradleEditorColorConstants.GREEN_JAVA);

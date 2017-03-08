@@ -82,6 +82,7 @@ public interface GradleEditorColorConstants {
 	public static final RGB YELLOW = rgb(255, 255, 85);
 	public static final RGB ORANGE = rgb(255, 165, 0); // http://www.rapidtables.com/web/color/orange-color.htm
 	public static final RGB BRIGHT_BLUE = rgb(85, 85, 255);
+	public static final RGB MEDIUM_CYAN = rgb(0, 128, 192);
 	public static final RGB BRIGHT_MAGENTA = rgb(255, 85, 255);
 
 	public static final RGB BRIGHT_CYAN = rgb(85, 255, 255);

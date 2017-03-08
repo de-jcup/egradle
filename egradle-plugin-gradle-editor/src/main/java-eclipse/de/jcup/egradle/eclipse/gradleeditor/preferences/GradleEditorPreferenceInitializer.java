@@ -57,8 +57,10 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_JAVA_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GROOVY_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
+		EDITOR_PREFERENCES.setDefaultColor(COLOR_GROOVY_DOC, GradleEditorColorConstants.MEDIUM_CYAN);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_NORMAL_STRING, GradleEditorColorConstants.STRING_DEFAULT_BLUE);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_ANNOTATION, GradleEditorColorConstants.MIDDLE_GRAY);
+		
 		
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_GSTRING, GradleEditorColorConstants.ROYALBLUE);
 		EDITOR_PREFERENCES.setDefaultColor(COLOR_COMMENT, GradleEditorColorConstants.GREEN_JAVA);

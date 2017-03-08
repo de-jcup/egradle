@@ -27,6 +27,8 @@ public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	
 	COMMENT,
 	
+	GROOVY_DOC,
+	
 	STRING,
 	
 	GSTRING,

@@ -28,6 +28,7 @@ public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIden
 	COLOR_JAVA_KEYWORD("colorJavaKeywords", "Java keywords"),
 	COLOR_JAVA_LITERAL("colorJavaLiteralKeywords", "Java literal keywords"),
 	COLOR_GROOVY_KEYWORD("colorGroovyKeywords", "Groovy keywords"),
+	COLOR_GROOVY_DOC("colorGroovyDoc", "Groovy doc"),
 	COLOR_NORMAL_STRING("colorNormalStrings", "Normal strings"),
 	COLOR_GSTRING("colorGStrings", "GStrings"),
 	COLOR_COMMENT("colorComments", "Comment"),
