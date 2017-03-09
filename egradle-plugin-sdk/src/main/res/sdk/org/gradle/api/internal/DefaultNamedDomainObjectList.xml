@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DefaultNamedDomainObjectList" version="3.0" superType="org.gradle.api.internal.DefaultNamedDomainObjectCollection">
+    <method name="add" returnType="void">
+        <parameter type="int" name="index"/>
+        <parameter type="T" name="element"/>
+    </method>
+    <method name="addAll" returnType="boolean">
+        <parameter type="int" name="index"/>
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="findAll" returnType="java.util.List">
+        <parameter type="groovy.lang.Closure" name="cl"/>
+    </method>
+    <method name="get" returnType="T">
+        <parameter type="int" name="index"/>
+    </method>
+    <method name="indexOf" returnType="int">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="lastIndexOf" returnType="int">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="listIterator" returnType="java.util.ListIterator"/>
+    <method name="listIterator" returnType="java.util.ListIterator">
+        <parameter type="int" name="index"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.NamedDomainObjectList">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.NamedDomainObjectList">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="remove" returnType="T">
+        <parameter type="int" name="index"/>
+    </method>
+    <method name="set" returnType="T">
+        <parameter type="int" name="index"/>
+        <parameter type="T" name="element"/>
+    </method>
+    <method name="subList" returnType="java.util.List">
+        <parameter type="int" name="fromIndex"/>
+        <parameter type="int" name="toIndex"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.NamedDomainObjectList">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <interface name="org.gradle.api.NamedDomainObjectList"/>
+</type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.AbstractExecTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.AbstractExecTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> &lt;a href='type://AbstractExecTask'&gt;AbstractExecTask&lt;/a&gt; is the base class for all exec tasks.
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The concrete type of the class.
@@ -48,7 +48,6 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="value"/>
     </method>
-    <method name="exec" returnType="void"/>
     <method name="executable" returnType="T" documented="true">
         <description> {@inheritDoc}
 
@@ -75,7 +74,6 @@
 
 </description>
     </method>
-    <method name="getExecActionFactory" returnType="org.gradle.process.internal.ExecActionFactory"/>
     <method name="getExecResult" returnType="org.gradle.process.ExecResult">
         <description> Returns the result for the command run by this task. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
 
@@ -138,9 +136,6 @@
 </description>
         <parameter type="java.io.OutputStream" name="outputStream"/>
     </method>
-    <method name="setExecAction" returnType="void">
-        <parameter type="org.gradle.process.internal.ExecAction" name="execAction"/>
-    </method>
     <method name="setExecutable" returnType="void">
         <description> {@inheritDoc}
 
@@ -198,8 +193,6 @@
 
 </description>
     </property>
-    <property name="execAction" type="org.gradle.process.internal.ExecAction"/>
-    <property name="execActionFactory" type="org.gradle.process.internal.ExecActionFactory"/>
     <property name="execResult" type="org.gradle.process.ExecResult" documented="true">
         <description> Returns the result for the command run by this task. Returns &lt;a href='type://null'&gt;null&lt;/a&gt; if this task has not been executed yet.
 

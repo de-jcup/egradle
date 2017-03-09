@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.IConventionAware" version="3.0">
+    <description> &lt;p&gt;Allows default values for the properties of this object to be declared. Most implementations are generated at
+ run-time from existing classes, by a &lt;a href='type://org.gradle.api.internal.ClassGenerator'&gt;org.gradle.api.internal.ClassGenerator&lt;/a&gt; implementation.&lt;/p&gt;
+
+ &lt;p&gt;Each getter of an &lt;a href='type://IConventionAware'&gt;IConventionAware&lt;/a&gt; object should use the mappings to determine the value for the property,
+ when no value has been explicitly set for the property.&lt;/p&gt;
+
+</description>
+    <method name="getConventionMapping" returnType="org.gradle.api.internal.ConventionMapping">
+        <description> Returns the convention mapping for the properties of this object. The returned mapping object can be used to
+ manage the mapping for individual properties.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The mapping. Never returns null.
+
+</description>
+    </method>
+    <property name="conventionMapping" type="org.gradle.api.internal.ConventionMapping">
+        <description> Returns the convention mapping for the properties of this object. The returned mapping object can be used to
+ manage the mapping for individual properties.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The mapping. Never returns null.
+
+</description>
+    </property>
+</type>

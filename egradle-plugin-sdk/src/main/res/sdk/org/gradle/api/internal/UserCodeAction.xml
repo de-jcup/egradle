@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.UserCodeAction" version="3.0">
+    <description> A delegating &lt;a href='type://Action'&gt;Action&lt;/a&gt; implementation that wraps exceptions in InvalidUserCodeException.
+ Used to wrap a closure or action parameter that contains user-provided executable code.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt;
+
+</description>
+    <method name="execute" returnType="void">
+        <parameter type="T" name="target"/>
+    </method>
+    <interface name="org.gradle.api.Action"/>
+</type>

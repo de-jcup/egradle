@@ -6,13 +6,6 @@
  tasks signatory and signature type.
 
 </description>
-    <method name="addSignature" returnType="boolean">
-        <parameter type="org.gradle.plugins.signing.Signature" name="signature"/>
-    </method>
-    <method name="addSignatures" returnType="void">
-        <parameter type="java.lang.String" name="classifier"/>
-        <parameter type="java.io.File" name="files"/>
-    </method>
     <method name="apply" returnType="java.io.File">
         <parameter type="org.gradle.plugins.signing.Signature" name="input"/>
     </method>
@@ -25,7 +18,6 @@
 
 </description>
     </method>
-    <method name="getFileCollectionFactory" returnType="org.gradle.api.internal.file.FileCollectionFactory"/>
     <method name="getFilesToSign" returnType="org.gradle.api.file.FileCollection">
         <description> All of the files that will be signed by this task.
 
@@ -114,12 +106,6 @@
         <parameter type="java.lang.String" name="classifier"/>
         <parameter type="java.io.File" name="files"/>
     </method>
-    <method name="signArtifact" returnType="void">
-        <parameter type="org.gradle.api.artifacts.PublishArtifact" name="publishArtifact"/>
-    </method>
-    <method name="signTask" returnType="void">
-        <parameter type="org.gradle.api.tasks.bundling.AbstractArchiveTask" name="archiveTask"/>
-    </method>
     <method name="signatory" returnType="void" documented="true">
         <description> Changes the signatory of the signatures.
 
@@ -133,7 +119,6 @@
         <parameter type="org.gradle.plugins.signing.type.SignatureType" name="type"/>
     </method>
     <interface name="org.gradle.plugins.signing.SignatureSpec"/>
-    <property name="fileCollectionFactory" type="org.gradle.api.internal.file.FileCollectionFactory"/>
     <property name="filesToSign" type="org.gradle.api.file.FileCollection">
         <description> All of the files that will be signed by this task.
 

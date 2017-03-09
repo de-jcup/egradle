@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ConventionAwareHelper" version="3.0">
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention"/>
+    <method name="getConventionValue" returnType="T">
+        <parameter type="T" name="actualValue"/>
+        <parameter type="java.lang.String" name="propertyName"/>
+        <parameter type="boolean" name="isExplicitValue"/>
+    </method>
+    <method name="getValue" returnType="java.lang.Object">
+        <parameter type="org.gradle.api.plugins.Convention" name="convention"/>
+        <parameter type="org.gradle.api.internal.IConventionAware" name="conventionAwareObject"/>
+    </method>
+    <method name="map" returnType="MappedProperty">
+        <parameter type="java.lang.String" name="propertyName"/>
+        <parameter type="groovy.lang.Closure" name="value"/>
+    </method>
+    <method name="map" returnType="MappedProperty">
+        <parameter type="java.lang.String" name="propertyName"/>
+        <parameter type="java.util.concurrent.Callable" name="value"/>
+    </method>
+    <method name="propertyMissing" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <interface name="org.gradle.api.internal.ConventionMapping"/>
+    <interface name="org.gradle.api.internal.HasConvention"/>
+    <property name="convention" type="org.gradle.api.plugins.Convention"/>
+    <property name="conventionValue" type="T"/>
+    <property name="value" type="java.lang.Object"/>
+</type>

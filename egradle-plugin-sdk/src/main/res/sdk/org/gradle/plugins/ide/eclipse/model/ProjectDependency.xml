@@ -3,7 +3,6 @@
     <description> A classpath entry representing a project dependency.
 
 </description>
-    <method name="assertPathIsValid" returnType="void"/>
     <method name="getGradlePath" returnType="java.lang.String"/>
     <method name="getKind" returnType="java.lang.String"/>
     <method name="setGradlePath" returnType="void">

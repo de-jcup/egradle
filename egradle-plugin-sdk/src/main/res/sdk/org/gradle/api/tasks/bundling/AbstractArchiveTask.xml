@@ -95,10 +95,6 @@
         <parameter type="java.lang.Object" name="destPath"/>
         <parameter type="org.gradle.api.Action" name="copySpec"/>
     </method>
-    <method name="maybe" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="prefix"/>
-        <parameter type="java.lang.String" name="value"/>
-    </method>
     <method name="setAppendix" returnType="void">
         <parameter type="java.lang.String" name="appendix"/>
     </method>

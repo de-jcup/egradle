@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.java.plugins.JavaLanguagePlugin.Java.JavaSourceTransformTaskConfig" version="3.0">
-    <method name="apiDependenciesOf" returnType="java.lang.Iterable">
-        <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
-    </method>
-    <method name="classpathFor" returnType="SourceSetDependencyResolvingClasspath">
-        <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
-        <parameter type="org.gradle.language.java.JavaSourceSet" name="javaSourceSet"/>
-        <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
-        <parameter type="org.gradle.model.internal.manage.schema.ModelSchemaStore" name="schemaStore"/>
-    </method>
-    <method name="compileDependencies" returnType="java.lang.Iterable">
-        <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
-        <parameter type="org.gradle.language.base.DependentSourceSet" name="sourceSet"/>
-    </method>
-    <method name="componentDependenciesOf" returnType="java.lang.Iterable">
-        <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
-    </method>
     <method name="configureTask" returnType="void">
         <parameter type="org.gradle.api.Task" name="task"/>
         <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
         <parameter type="org.gradle.language.base.LanguageSourceSet" name="sourceSet"/>
         <parameter type="org.gradle.internal.service.ServiceRegistry" name="serviceRegistry"/>
-    </method>
-    <method name="conventionalCompilationOutputDirFor" returnType="java.io.File">
-        <parameter type="JvmAssembly" name="assembly"/>
     </method>
     <method name="getTaskPrefix" returnType="java.lang.String"/>
     <method name="getTaskType" returnType="java.lang.Class"/>

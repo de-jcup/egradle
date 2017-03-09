@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DefaultPolymorphicNamedEntityInstantiator" version="3.0">
+    <method name="copyFactoriesFrom" returnType="void">
+        <parameter type="org.gradle.api.internal.DefaultPolymorphicNamedEntityInstantiator" name="source"/>
+    </method>
+    <method name="create" returnType="S">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="getCreatableTypes" returnType="java.util.Set"/>
+    <method name="getSupportedTypeNames" returnType="java.lang.String"/>
+    <method name="registerFactory" returnType="void">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.NamedDomainObjectFactory" name="factory"/>
+    </method>
+    <interface name="org.gradle.api.internal.PolymorphicNamedEntityInstantiator"/>
+    <property name="creatableTypes" type="java.util.Set"/>
+    <property name="supportedTypeNames" type="java.lang.String"/>
+</type>

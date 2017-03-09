@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.PolymorphicDomainObjectContainerInternal" version="3.0">
+    <method name="getCreateableTypes" returnType="java.util.Set"/>
+    <method name="getEntityInstantiator" returnType="org.gradle.model.internal.core.NamedEntityInstantiator"/>
+    <interface name="org.gradle.api.PolymorphicDomainObjectContainer"/>
+    <property name="createableTypes" type="java.util.Set"/>
+    <property name="entityInstantiator" type="org.gradle.model.internal.core.NamedEntityInstantiator"/>
+</type>

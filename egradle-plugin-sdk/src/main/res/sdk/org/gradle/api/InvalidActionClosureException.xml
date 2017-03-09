@@ -17,10 +17,6 @@
 
 </description>
     </method>
-    <method name="toMessage" returnType="java.lang.String">
-        <parameter type="groovy.lang.Closure" name="closure"/>
-        <parameter type="java.lang.Object" name="argument"/>
-    </method>
     <method name="transform" returnType="java.lang.Object">
         <parameter type="java.lang.Class" name="clazz"/>
     </method>

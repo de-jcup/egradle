@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.TaskOutputsInternal" version="3.0">
+    <method name="getFileProperties" returnType="java.util.SortedSet"/>
+    <method name="getPreviousFiles" returnType="org.gradle.api.file.FileCollection"/>
+    <method name="getUpToDateSpec" returnType="org.gradle.api.specs.Spec"/>
+    <method name="isCacheAllowed" returnType="boolean">
+        <description> Checks if caching is allowed based on the output properties.
+
+</description>
+    </method>
+    <method name="isCacheEnabled" returnType="boolean">
+        <description> Check if caching is explicitly enabled for the task outputs.
+
+</description>
+    </method>
+    <method name="namedFiles" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder">
+        <description> Register some named outputs for this task.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths The output files. The keys of the map should not be &lt;a href='type://null'&gt;null&lt;/a&gt;, and they must be
+ &lt;a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8"&gt;valid Java identifiers&lt;/a&gt;}.
+ The values will be evaluated to individual files as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.Map" name="paths"/>
+    </method>
+    <method name="namedFiles" returnType="org.gradle.api.tasks.TaskOutputFilePropertyBuilder">
+        <description> Register some named outputs for this task.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;paths A &lt;a href='type://Callable'&gt;Callable&lt;/a&gt; returning the actual output files. The keys of the returned map should not
+ be &lt;a href='type://null'&gt;null&lt;/a&gt;, and they must be
+ &lt;a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8"&gt;valid Java identifiers&lt;/a&gt;}.
+ The values will be evaluated to individual files as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
+
+</description>
+        <parameter type="java.util.concurrent.Callable" name="paths"/>
+    </method>
+    <method name="setHistory" returnType="void">
+        <parameter type="org.gradle.api.internal.TaskExecutionHistory" name="history"/>
+    </method>
+    <interface name="org.gradle.api.tasks.TaskOutputs"/>
+    <property name="cacheAllowed" type="boolean">
+        <description> Checks if caching is allowed based on the output properties.
+
+</description>
+    </property>
+    <property name="cacheEnabled" type="boolean">
+        <description> Check if caching is explicitly enabled for the task outputs.
+
+</description>
+    </property>
+    <property name="fileProperties" type="java.util.SortedSet"/>
+    <property name="history" type="org.gradle.api.internal.TaskExecutionHistory"/>
+    <property name="previousFiles" type="org.gradle.api.file.FileCollection"/>
+    <property name="upToDateSpec" type="org.gradle.api.specs.Spec"/>
+</type>

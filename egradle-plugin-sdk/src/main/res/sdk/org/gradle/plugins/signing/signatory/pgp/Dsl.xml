@@ -7,8 +7,4 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="args"/>
     </method>
-    <method name="signatoryFor" returnType="org.gradle.plugins.signing.signatory.pgp.PgpSignatory">
-        <parameter type="java.lang.String" name="name"/>
-        <parameter type="java.lang.Object" name="args"/>
-    </method>
 </type>

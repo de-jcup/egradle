@@ -48,6 +48,12 @@ public class IntegrationTestComponents extends ExternalResource{
 	private GradleLanguageElementEstimater estimator;
 	private GradleDSLCodeTemplateBuilder gradleDslCodeBuilder;
 	private GradleDSLProposalFactory gradleDSLProposalFactory;
+	private static boolean showFullStacktraces;
+	static{
+		String property = System.getProperty("egradle.integration.test.stacktrace");
+		showFullStacktraces=Boolean.parseBoolean(property);
+		
+	}
 
 	private IntegrationTestComponents() {
 		startSDKParts();
@@ -82,7 +88,11 @@ public class IntegrationTestComponents extends ExternalResource{
 
 			@Override
 			public void handleError(Throwable t) {
-				t.printStackTrace();
+				if (showFullStacktraces){
+					t.printStackTrace();
+				}else{
+					System.err.println(t.getMessage());
+				}
 
 			}
 
@@ -94,8 +104,12 @@ public class IntegrationTestComponents extends ExternalResource{
 
 			@Override
 			public void handleError(String message, Throwable t) {
-				handleError(message);
-				handleError(t);
+				if (showFullStacktraces){
+					handleError(message);
+					handleError(t);
+				}else{
+					System.err.println(message+" - "+t.getMessage());
+				}
 			}
 
 		};

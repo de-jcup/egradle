@@ -5,11 +5,6 @@
  Please see the “Comparing Builds” chapter of the Gradle User Guide for more information.
 
 </description>
-    <method name="communicateResult" returnType="void">
-        <parameter type="org.gradle.api.plugins.buildcomparison.compare.internal.BuildComparisonResult" name="result"/>
-    </method>
-    <method name="compare" returnType="void"/>
-    <method name="getFileResolver" returnType="org.gradle.internal.file.PathToFileResolver"/>
     <method name="getIgnoreFailures" returnType="boolean">
         <description> Whether a comparison between non identical builds will fail the task execution.
 
@@ -17,8 +12,6 @@
 
 </description>
     </method>
-    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
-    <method name="getProgressLoggerFactory" returnType="org.gradle.internal.logging.progress.ProgressLoggerFactory"/>
     <method name="getReportDir" returnType="java.io.File">
         <description> The directory that will contain the HTML comparison report and any other report files.
 
@@ -102,7 +95,6 @@
         <parameter type="org.gradle.api.Action" name="config"/>
     </method>
     <interface name="org.gradle.api.tasks.VerificationTask"/>
-    <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
     <property name="ignoreFailures" type="boolean" documented="true">
         <description> Whether a comparison between non identical builds will fail the task execution.
 
@@ -110,8 +102,6 @@
 
 </description>
     </property>
-    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
-    <property name="progressLoggerFactory" type="org.gradle.internal.logging.progress.ProgressLoggerFactory"/>
     <property name="reportDir" type="java.io.File" documented="true">
         <description> The directory that will contain the HTML comparison report and any other report files.
 

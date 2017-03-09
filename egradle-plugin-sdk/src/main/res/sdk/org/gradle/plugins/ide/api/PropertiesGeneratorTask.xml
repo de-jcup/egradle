@@ -9,6 +9,4 @@
         <parameter type="T" name="object"/>
     </method>
     <method name="create" returnType="T"/>
-    <method name="getTransformer" returnType="org.gradle.api.internal.PropertiesTransformer"/>
-    <property name="transformer" type="org.gradle.api.internal.PropertiesTransformer"/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateSolutionFileTask.ConfigurationObjectGenerator" version="3.0">
+<type language="gradle" name="org.gradle.ide.visualstudio.tasks.GenerateSolutionFileTask.ConfigurationObjectGenerator" version="3.0" superType="org.gradle.plugins.ide.internal.generator.generator.PersistableConfigurationObjectGenerator">
     <method name="configure" returnType="void">
         <parameter type="org.gradle.ide.visualstudio.tasks.internal.VisualStudioSolutionFile" name="solutionFile"/>
     </method>

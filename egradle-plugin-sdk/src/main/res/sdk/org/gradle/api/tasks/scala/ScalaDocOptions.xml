@@ -9,13 +9,6 @@
 
 </description>
     </method>
-    <method name="getAntPropertyName" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
-    <method name="getAntPropertyValue" returnType="java.lang.Object">
-        <parameter type="java.lang.String" name="fieldName"/>
-        <parameter type="java.lang.Object" name="value"/>
-    </method>
     <method name="getBottom" returnType="java.lang.String">
         <description> Returns the HTML text to appear in the bottom text for each page.
 
@@ -122,17 +115,12 @@
 </description>
         <parameter type="java.lang.String" name="windowTitle"/>
     </method>
-    <method name="toOnOffString" returnType="java.lang.String">
-        <parameter type="boolean" name="value"/>
-    </method>
     <property name="additionalParameters" type="java.util.List">
         <description> Returns the additional parameters passed to the compiler.
  Each parameter starts with '-'.
 
 </description>
     </property>
-    <property name="antPropertyName" type="java.lang.String"/>
-    <property name="antPropertyValue" type="java.lang.Object"/>
     <property name="bottom" type="java.lang.String">
         <description> Returns the HTML text to appear in the bottom text for each page.
 

@@ -9,7 +9,6 @@
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
-    <method name="getAttributeMapForScopeAndExported" returnType="java.util.Map"/>
     <method name="getClasses" returnType="java.util.Set">
         <description> A set of Jar files or directories containing compiled code.
 
@@ -30,7 +29,6 @@
 
 </description>
     </method>
-    <method name="getScopeHash" returnType="int"/>
     <method name="getSources" returnType="java.util.Set">
         <description> A set of Jar files or directories containing source code.
 
@@ -41,10 +39,6 @@
         <description> Whether the library is exported to dependent modules.
 
 </description>
-    </method>
-    <method name="scopeEquals" returnType="boolean">
-        <parameter type="java.lang.String" name="lhs"/>
-        <parameter type="java.lang.String" name="rhs"/>
     </method>
     <method name="setClasses" returnType="void">
         <parameter type="java.util.Set" name="classes"/>
@@ -66,7 +60,6 @@
     </method>
     <method name="toString" returnType="java.lang.String"/>
     <interface name="org.gradle.plugins.ide.idea.model.Dependency"/>
-    <property name="attributeMapForScopeAndExported" type="java.util.Map"/>
     <property name="classes" type="java.util.Set">
         <description> A set of Jar files or directories containing compiled code.
 
@@ -92,7 +85,6 @@
 
 </description>
     </property>
-    <property name="scopeHash" type="int"/>
     <property name="sources" type="java.util.Set">
         <description> A set of Jar files or directories containing source code.
 

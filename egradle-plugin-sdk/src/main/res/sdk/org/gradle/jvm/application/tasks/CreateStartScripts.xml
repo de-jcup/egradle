@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.jvm.application.tasks.CreateStartScripts" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.jvm.application.tasks.CreateStartScripts" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Creates start scripts for launching JVM applications.
  &lt;p&gt;
  Example:
@@ -103,7 +103,6 @@
 
 </description>
     </method>
-    <method name="getRelativeClasspath" returnType="java.lang.Iterable"/>
     <method name="getUnixScript" returnType="java.io.File">
         <description> Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
 
@@ -190,7 +189,6 @@
 
 </description>
     </property>
-    <property name="relativeClasspath" type="java.lang.Iterable"/>
     <property name="unixScript" type="java.io.File">
         <description> Returns the full path to the Unix script. The target directory is represented by the output directory, the file name is the application name without a file extension.
 

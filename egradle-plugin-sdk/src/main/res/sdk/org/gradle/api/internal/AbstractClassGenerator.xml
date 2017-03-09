@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.AbstractClassGenerator" version="3.0">
+    <description> Generates a subclass of the target class to mix-in some DSL behaviour.
+
+ &lt;ul&gt;
+     &lt;li&gt;For each property, a convention mapping is applied. These properties may have a setter method.&lt;/li&gt;
+     &lt;li&gt;For each property whose getter is annotated with &lt;a href='type://Inject'&gt;Inject&lt;/a&gt;, a service instance will be injected instead. These properties may have a setter method.&lt;/li&gt;
+     &lt;li&gt;For each mutable property as set method is generated.&lt;/li&gt;
+     &lt;li&gt;For each method whose last parameter is an &lt;a href='type://org.gradle.api.Action'&gt;org.gradle.api.Action&lt;/a&gt;, an override is generated that accepts a &lt;a href='type://groovy.lang.Closure'&gt;groovy.lang.Closure&lt;/a&gt; instead.&lt;/li&gt;
+     &lt;li&gt;Coercion from string to enum property is mixed in.&lt;/li&gt;
+     &lt;li&gt;&lt;a href='type://groovy.lang.GroovyObject'&gt;groovy.lang.GroovyObject&lt;/a&gt; is mixed in to the class.&lt;/li&gt;
+ &lt;/ul&gt;
+
+</description>
+    <method name="generate" returnType="java.lang.Class">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="newInstance" returnType="T">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="java.lang.Object" name="parameters"/>
+    </method>
+    <interface name="org.gradle.api.internal.ClassGenerator"/>
+</type>

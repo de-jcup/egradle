@@ -3,13 +3,6 @@
     <description> Compiles Scala source files, and optionally, Java source files.
 
 </description>
-    <method name="assertScalaClasspathIsNonEmpty" returnType="void"/>
-    <method name="configureIncrementalCompilation" returnType="void">
-        <parameter type="org.gradle.api.internal.tasks.scala.ScalaCompileSpec" name="spec"/>
-    </method>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler">
-        <parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/>
-    </method>
     <method name="getScalaClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath to use to load the Scala compiler.
 
@@ -33,7 +26,11 @@
     <method name="setZincClasspath" returnType="void">
         <parameter type="org.gradle.api.file.FileCollection" name="zincClasspath"/>
     </method>
-    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
+    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler">
+        <description> For testing only.
+
+</description>
+    </property>
     <property name="scalaClasspath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> Returns the classpath to use to load the Scala compiler.
 

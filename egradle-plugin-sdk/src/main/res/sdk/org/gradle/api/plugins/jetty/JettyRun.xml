@@ -26,7 +26,6 @@
 </description>
     </method>
     <method name="getConfiguredContextHandlers" returnType="org.mortbay.jetty.handler.ContextHandler"/>
-    <method name="getDependencyFiles" returnType="java.util.Set"/>
     <method name="getExtraScanTargets" returnType="java.util.Set"/>
     <method name="getJettyEnvXml" returnType="java.io.File"/>
     <method name="getJettyEnvXmlFile" returnType="java.io.File"/>
@@ -42,7 +41,6 @@
 
 </description>
     </method>
-    <method name="getWebXmlIfExists" returnType="java.io.File"/>
     <method name="restartWebApp" returnType="void">
         <parameter type="boolean" name="reconfigureScanner"/>
     </method>
@@ -73,7 +71,6 @@
     <method name="setScanTargets" returnType="void">
         <parameter type="java.io.File" name="scanTargets"/>
     </method>
-    <method name="setUpClassPath" returnType="java.util.List"/>
     <method name="setWebAppSourceDirectory" returnType="void">
         <parameter type="java.io.File" name="webAppSourceDirectory"/>
     </method>
@@ -89,7 +86,6 @@
     </property>
     <property name="configuredContextHandlers" type="org.mortbay.jetty.handler.ContextHandler"/>
     <property name="contextHandlers" type="org.mortbay.jetty.handler.ContextHandler"/>
-    <property name="dependencyFiles" type="java.util.Set"/>
     <property name="extraScanTargets" type="java.util.Set"/>
     <property name="jettyEnvXml" type="java.io.File"/>
     <property name="jettyEnvXmlFile" type="java.io.File"/>
@@ -105,5 +101,4 @@
 
 </description>
     </property>
-    <property name="webXmlIfExists" type="java.io.File"/>
 </type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.play.tasks.PlayRun" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.play.tasks.PlayRun" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Task to run a Play application.
 
 </description>
@@ -33,9 +33,6 @@
 
 </description>
     </method>
-    <method name="registerOrFindDeploymentHandle" returnType="org.gradle.play.internal.run.PlayApplicationDeploymentHandle">
-        <parameter type="java.lang.String" name="deploymentId"/>
-    </method>
     <method name="run" returnType="void"/>
     <method name="setApplicationJar" returnType="void">
         <parameter type="java.io.File" name="applicationJar"/>
@@ -58,7 +55,6 @@
     <method name="setRuntimeClasspath" returnType="void">
         <parameter type="org.gradle.api.file.FileCollection" name="runtimeClasspath"/>
     </method>
-    <method name="waitForCtrlD" returnType="void"/>
     <property name="applicationJar" type="java.io.File" documented="true">
         <description> The Play application jar to run.
 

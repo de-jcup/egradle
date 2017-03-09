@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.DefaultTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.DefaultTask" version="3.0" superType="org.gradle.api.internal.AbstractTask" documented="true">
     <description> &lt;a href='type://DefaultTask'&gt;DefaultTask&lt;/a&gt; is the standard &lt;a href='type://Task'&gt;Task&lt;/a&gt; implementation. You can extend this to implement your own task types.
 
 </description>

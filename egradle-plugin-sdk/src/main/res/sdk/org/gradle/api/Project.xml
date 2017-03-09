@@ -215,12 +215,6 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="appDirName" returnType="void" documented="true">
-        <description>Allows changing the application directory.
-Default is "src/main/application".
-</description>
-        <parameter type="java.lang.String" name="appDirName"/>
-    </method>
     <method name="artifacts" returnType="void" delegationTarget="org.gradle.api.artifacts.dsl.ArtifactHandler" documented="true">
         <description> &lt;p&gt;Configures the published artifacts for this project.
 
@@ -277,7 +271,6 @@ Default is "src/main/application".
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="call" returnType="java.lang.Object"/>
     <method name="configurations" returnType="void" delegationTarget="org.gradle.api.artifacts.ConfigurationContainer" documented="true">
         <description> &lt;p&gt;Configures the dependency configurations for this project.
 
@@ -473,9 +466,6 @@ Default is "src/main/application".
 
 </description>
     </method>
-    <method name="createDefaultOsgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
     <method name="defaultTasks" returnType="void">
         <description> &lt;p&gt;Sets the names of the default tasks of this project. These are used when no tasks names are provided when
  starting the build.&lt;/p&gt;
@@ -523,15 +513,6 @@ Default is "src/main/application".
 
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure the closure to use to configure the dependencies.
 
-</description>
-        <parameter type="groovy.lang.Closure" name="configureClosure"/>
-    </method>
-    <method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.EarPluginConvention" delegationTarget="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" documented="true">
-        <description>Configures the deployment descriptor for this EAR archive.
-&lt;p&gt;The given closure is executed to configure the deployment descriptor.
-The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; is passed to the closure as its delegate.&lt;/p&gt;
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;This.
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
@@ -871,39 +852,6 @@ The &lt;a href='type://DeploymentDescriptor'&gt;DeploymentDescriptor&lt;/a&gt; i
 
 </description>
     </method>
-    <method name="getAppDirName" returnType="java.lang.String">
-        <description>The name of the application directory, relative to the project directory.
-Default is "src/main/application".
-</description>
-    </method>
-    <method name="getApplicationDefaultJvmArgs" returnType="java.lang.Iterable">
-        <description>Array of string arguments to pass to the JVM when running the application
-</description>
-    </method>
-    <method name="getApplicationDistribution" returnType="org.gradle.api.file.CopySpec">
-        <description>&lt;p&gt;The specification of the contents of the distribution.&lt;/p&gt;
-&lt;p&gt;
-Use this &lt;a href='type://org.gradle.api.file.CopySpec'&gt;org.gradle.api.file.CopySpec&lt;/a&gt; to include extra files/resource in the application distribution.
-&lt;pre autoTested=''&gt;
-apply plugin: 'application'
-applicationDistribution.from("some/dir") {
-include "*.txt"
-}
-&lt;/pre&gt;
-&lt;p&gt;
-Note that the application plugin pre configures this spec to; include the contents of "&lt;a href='type://src/dist'&gt;src/dist&lt;/a&gt;",
-copy the application start scripts into the "&lt;a href='type://bin'&gt;bin&lt;/a&gt;" directory, and copy the built jar and its dependencies
-into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory.
-</description>
-    </method>
-    <method name="getApplicationName" returnType="java.lang.String">
-        <description>The name of the application.
-</description>
-    </method>
-    <method name="getArchivesBaseName" returnType="java.lang.String">
-        <description>The base name to use for archive files.
-</description>
-    </method>
     <method name="getArtifacts" returnType="org.gradle.api.artifacts.dsl.ArtifactHandler">
         <description> Returns a handler for assigning artifacts produced by the project to configurations.
  &lt;h3&gt;Examples:&lt;/h3&gt;See docs for &lt;a href='type://ArtifactHandler'&gt;ArtifactHandler&lt;/a&gt;
@@ -948,11 +896,6 @@ into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory.
 
 </description>
     </method>
-    <method name="getConf2ScopeMappings" returnType="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer">
-        <description>Returns the set of rules for how to map Gradle dependencies to Maven scopes.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The mapping rules.
-</description>
-    </method>
     <method name="getConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer">
         <description> Returns the configurations of this project.
 
@@ -991,16 +934,6 @@ into the "&lt;a href='type://lib'&gt;lib&lt;/a&gt;" directory.
 
 </description>
     </method>
-    <method name="getDependencyCacheDir" returnType="java.io.File"/>
-    <method name="getDependencyCacheDirName" returnType="java.lang.String">
-        <description>The name of the dependency cache dir.
-</description>
-    </method>
-    <method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
-        <description>A custom deployment descriptor configuration.
-Default is an "application.xml" with sensible defaults.
-</description>
-    </method>
     <method name="getDepth" returnType="int">
         <description> &lt;p&gt;Returns the nesting level of a project in a multi-project hierarchy. For single project builds this is always
  0. In a multi-project hierarchy 0 is returned for the root project.&lt;/p&gt;
@@ -1012,23 +945,6 @@ Default is an "application.xml" with sensible defaults.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the description. May return null.
 
-</description>
-    </method>
-    <method name="getDistsDir" returnType="java.io.File">
-        <description>Returns the directory to generate TAR and ZIP archives into.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null.
-</description>
-    </method>
-    <method name="getDistsDirName" returnType="java.lang.String">
-        <description>The name for the distributions directory. This in interpreted relative to the project' build directory.
-</description>
-    </method>
-    <method name="getDocsDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory supposed to be used for all docs.
-</description>
-    </method>
-    <method name="getDocsDirName" returnType="java.lang.String">
-        <description>The name of the docs directory. Can be a name or a path relative to the build dir.
 </description>
     </method>
     <method name="getExtensions" returnType="org.gradle.api.plugins.ExtensionContainer">
@@ -1053,24 +969,6 @@ Default is an "application.xml" with sensible defaults.
 
 </description>
     </method>
-    <method name="getHttpPort" returnType="java.lang.Integer">
-        <description>Returns the TCP port for Jetty to listen on for incoming HTTP requests.
-</description>
-    </method>
-    <method name="getLibDirName" returnType="java.lang.String">
-        <description>The name of the library directory in the EAR file.
-Default is "lib".
-</description>
-    </method>
-    <method name="getLibsDir" returnType="java.io.File">
-        <description>Returns the directory to generate JAR and WAR archives into.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The directory. Never returns null.
-</description>
-    </method>
-    <method name="getLibsDirName" returnType="java.lang.String">
-        <description>The name for the libs directory. This in interpreted relative to the project' build directory.
-</description>
-    </method>
     <method name="getLogger" returnType="org.gradle.api.logging.Logger">
         <description> &lt;p&gt;Returns the logger for this project. You can use this in your build file to write log messages.&lt;/p&gt;
 
@@ -1085,14 +983,6 @@ Default is "lib".
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the LoggingManager. Never returns null.
 
-</description>
-    </method>
-    <method name="getMainClassName" returnType="java.lang.String">
-        <description>The fully qualified name of the application's main class.
-</description>
-    </method>
-    <method name="getMavenPomDir" returnType="java.io.File">
-        <description>Returns the directory to generate Maven POMs into.
 </description>
     </method>
     <method name="getName" returnType="java.lang.String">
@@ -1134,15 +1024,6 @@ Default is "lib".
 
 </description>
     </method>
-    <method name="getProjectReportDir" returnType="java.io.File">
-        <description>Returns the directory to generate the project reports into.
-</description>
-    </method>
-    <method name="getProjectReportDirName" returnType="java.lang.String">
-        <description>The name of the directory to generate the project reports into, relative to the project's reports dir.
-</description>
-    </method>
-    <method name="getProjects" returnType="java.util.Set"/>
     <method name="getProperties" returnType="java.util.Map">
         <description> &lt;p&gt;Returns the properties of this project. See &lt;a href="#properties"&gt;here&lt;/a&gt; for details of the properties which
  are available for a project.&lt;/p&gt;
@@ -1151,7 +1032,6 @@ Default is "lib".
 
 </description>
     </method>
-    <method name="getReportsDir" returnType="java.io.File"/>
     <method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
         <description> Returns a handler to create repositories which are used for retrieving dependencies and uploading artifacts
  produced by the project.
@@ -1183,14 +1063,6 @@ Default is "lib".
 
 </description>
     </method>
-    <method name="getSourceCompatibility" returnType="org.gradle.api.JavaVersion">
-        <description>Returns the source compatibility used for compiling Java sources.
-</description>
-    </method>
-    <method name="getSourceSets" returnType="org.gradle.api.tasks.SourceSetContainer">
-        <description>The source sets container.
-</description>
-    </method>
     <method name="getState" returnType="org.gradle.api.ProjectState">
         <description> Returns the evaluation state of this project. You can use this to access information about the evaluation of this
  project, such as whether it has failed.
@@ -1210,23 +1082,11 @@ Default is "lib".
 
 </description>
     </method>
-    <method name="getStopKey" returnType="java.lang.String">
-        <description>Returns the key to use to stop Jetty.
-</description>
-    </method>
-    <method name="getStopPort" returnType="java.lang.Integer">
-        <description>Returns the TCP port for Jetty to listen on for stop requests.
-</description>
-    </method>
     <method name="getSubprojects" returnType="java.util.Set">
         <description> &lt;p&gt;Returns the set containing the subprojects of this project.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The set of projects.  Returns an empty set if this project has no subprojects.
 
-</description>
-    </method>
-    <method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion">
-        <description>Returns the target compatibility used for compiling Java sources.
 </description>
     </method>
     <method name="getTasks" returnType="org.gradle.api.tasks.TaskContainer">
@@ -1248,36 +1108,12 @@ Default is "lib".
         <parameter type="java.lang.String" name="name"/>
         <parameter type="boolean" name="recursive"/>
     </method>
-    <method name="getTestReportDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory to be used for reports.
-</description>
-    </method>
-    <method name="getTestReportDirName" returnType="java.lang.String">
-        <description>The name of the test reports directory. Can be a name or a path relative to &lt;a href='type://org.gradle.api.reporting.ReportingExtension#getBaseDir'&gt;org.gradle.api.reporting.ReportingExtension#getBaseDir&lt;/a&gt;.
-</description>
-    </method>
-    <method name="getTestResultsDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory of the test results.
-</description>
-    </method>
-    <method name="getTestResultsDirName" returnType="java.lang.String">
-        <description>The name of the test results directory. Can be a name or a path relative to the build dir.
-</description>
-    </method>
     <method name="getVersion" returnType="java.lang.Object">
         <description> &lt;p&gt;Returns the version of this project. Gradle always uses the &lt;a href='type://toString()'&gt;toString()&lt;/a&gt; value of the version. The
  version defaults to &lt;em class='value'&gt;#DEFAULT_VERSION&lt;/em&gt;.&lt;/p&gt;
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The version of this project. Never returns null.
 
-</description>
-    </method>
-    <method name="getWebAppDir" returnType="java.io.File">
-        <description>Returns the web application directory.
-</description>
-    </method>
-    <method name="getWebAppDirName" returnType="java.lang.String">
-        <description>The name of the web application directory, relative to the project directory.
 </description>
     </method>
     <method name="hasProperty" returnType="boolean" documented="true">
@@ -1311,22 +1147,6 @@ Default is "lib".
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="libDirName" returnType="void" documented="true">
-        <description>Allows changing the library directory in the EAR file. Default is "lib".
-</description>
-        <parameter type="java.lang.String" name="libDirName"/>
-    </method>
-    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" documented="true">
-        <description>Creates a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;.
-</description>
-    </method>
-    <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest" documented="true">
-        <description>Creates and configures a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;. The given closure configures
-the new manifest instance before it is returned.
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the manifest.
-</description>
-        <parameter type="groovy.lang.Closure" name="closure"/>
-    </method>
     <method name="mkdir" returnType="java.io.File" documented="true">
         <description> Creates a directory and returns a file pointing to it.
 
@@ -1336,43 +1156,6 @@ the new manifest instance before it is returned.
 
 </description>
         <parameter type="java.lang.Object" name="path"/>
-    </method>
-    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" documented="true">
-        <description>Creates a new instance of &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt;. The returned object is preconfigured with:
-&lt;pre&gt;
-version: project.version
-name: project.archivesBaseName
-symbolicName: project.group + "." + project.archivesBaseName (see below for exceptions to this rule)
-&lt;/pre&gt;
-The symbolic name is usually the group + "." + archivesBaseName, with the following exceptions
-&lt;ul&gt;
-&lt;li&gt;if group has only one section (no dots) and archivesBaseName is not null then the
-first package name with classes is returned. eg. commons-logging:commons-logging -&gt;
-org.apache.commons.logging&lt;/li&gt;
-&lt;li&gt;if archivesBaseName is equal to last section of group then group is returned. eg.
-org.gradle:gradle -&gt; org.gradle&lt;/li&gt;
-&lt;li&gt;if archivesBaseName starts with last section of group that portion is removed. eg.
-org.gradle:gradle-core -&gt; org.gradle.core&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </method>
-    <method name="osgiManifest" returnType="org.gradle.api.plugins.osgi.OsgiManifest" delegationTarget="org.gradle.api.plugins.osgi.OsgiManifest" documented="true">
-        <description>Creates and configures a new instance of an  &lt;a href='type://org.gradle.api.plugins.osgi.OsgiManifest'&gt;org.gradle.api.plugins.osgi.OsgiManifest&lt;/a&gt; . The closure configures
-the new manifest instance before it is returned.
-</description>
-        <parameter type="groovy.lang.Closure" name="closure"/>
-    </method>
-    <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom" documented="true">
-        <description>Creates a new &lt;a href='type://MavenPom'&gt;MavenPom&lt;/a&gt;.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM instance.
-</description>
-    </method>
-    <method name="pom" returnType="org.gradle.api.artifacts.maven.MavenPom" delegationTarget="MavenPom" documented="true">
-        <description>Creates and configures a new &lt;a href='type://MavenPom'&gt;MavenPom&lt;/a&gt;. The given closure is executed to configure the new POM instance.
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;configureClosure The closure to use to configure the POM instance.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The POM instance.
-</description>
-        <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
     <method name="project" returnType="org.gradle.api.Project" documented="true">
         <description> &lt;p&gt;Locates a project by path. If the path is relative, it is interpreted relative to this project.&lt;/p&gt;
@@ -1457,25 +1240,6 @@ the new manifest instance before it is returned.
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="setAppDirName" returnType="void">
-        <parameter type="java.lang.String" name="appDirName"/>
-    </method>
-    <method name="setApplicationDefaultJvmArgs" returnType="void">
-        <description>Array of string arguments to pass to the JVM when running the application
-</description>
-        <parameter type="java.lang.Iterable" name="applicationDefaultJvmArgs"/>
-    </method>
-    <method name="setApplicationDistribution" returnType="void">
-        <parameter type="org.gradle.api.file.CopySpec" name="applicationDistribution"/>
-    </method>
-    <method name="setApplicationName" returnType="void">
-        <description>The name of the application.
-</description>
-        <parameter type="java.lang.String" name="applicationName"/>
-    </method>
-    <method name="setArchivesBaseName" returnType="void">
-        <parameter type="java.lang.String" name="archivesBaseName"/>
-    </method>
     <method name="setBuildDir" returnType="void">
         <description> &lt;p&gt;Sets the build directory of this project. The build directory is the directory which all artifacts are
  generated into. The path parameter is evaluated as described for &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;#file(Object)&lt;/a&gt;. This mean you can use,
@@ -1486,9 +1250,6 @@ the new manifest instance before it is returned.
 </description>
         <parameter type="java.lang.Object" name="path"/>
     </method>
-    <method name="setConf2ScopeMappings" returnType="void">
-        <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="conf2ScopeMappings"/>
-    </method>
     <method name="setDefaultTasks" returnType="void">
         <description> &lt;p&gt;Sets the names of the default tasks of this project. These are used when no tasks names are provided when
  starting the build.&lt;/p&gt;
@@ -1498,12 +1259,6 @@ the new manifest instance before it is returned.
 </description>
         <parameter type="java.util.List" name="defaultTasks"/>
     </method>
-    <method name="setDependencyCacheDirName" returnType="void">
-        <parameter type="java.lang.String" name="dependencyCacheDirName"/>
-    </method>
-    <method name="setDeploymentDescriptor" returnType="void">
-        <parameter type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor"/>
-    </method>
     <method name="setDescription" returnType="void">
         <description> Sets a description for this project.
 
@@ -1512,12 +1267,6 @@ the new manifest instance before it is returned.
 </description>
         <parameter type="java.lang.String" name="description"/>
     </method>
-    <method name="setDistsDirName" returnType="void">
-        <parameter type="java.lang.String" name="distsDirName"/>
-    </method>
-    <method name="setDocsDirName" returnType="void">
-        <parameter type="java.lang.String" name="docsDirName"/>
-    </method>
     <method name="setGroup" returnType="void">
         <description> &lt;p&gt;Sets the group of this project.&lt;/p&gt;
 
@@ -1525,32 +1274,6 @@ the new manifest instance before it is returned.
 
 </description>
         <parameter type="java.lang.Object" name="group"/>
-    </method>
-    <method name="setHttpPort" returnType="void">
-        <parameter type="java.lang.Integer" name="httpPort"/>
-    </method>
-    <method name="setLibDirName" returnType="void">
-        <parameter type="java.lang.String" name="libDirName"/>
-    </method>
-    <method name="setLibsDirName" returnType="void">
-        <parameter type="java.lang.String" name="libsDirName"/>
-    </method>
-    <method name="setMainClassName" returnType="void">
-        <description>The fully qualified name of the application's main class.
-</description>
-        <parameter type="java.lang.String" name="mainClassName"/>
-    </method>
-    <method name="setMavenPomDir" returnType="void">
-        <description>Sets the directory to generate Maven POMs into.
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;pomDir The new POM directory. Evaluated as per &lt;a href='type://org.gradle.api.Project#file(Object)'&gt;org.gradle.api.Project#file(Object)&lt;/a&gt;.
-</description>
-        <parameter type="java.lang.Object" name="pomDir"/>
-    </method>
-    <method name="setProject" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="setProjectReportDirName" returnType="void">
-        <parameter type="java.lang.String" name="projectReportDirName"/>
     </method>
     <method name="setProperty" returnType="void" documented="true">
         <description> &lt;p&gt;Sets a property of this project.  This method searches for a property with the given name in the following
@@ -1576,12 +1299,6 @@ the new manifest instance before it is returned.
         <parameter type="java.lang.String" name="name"/>
         <parameter type="java.lang.Object" name="value"/>
     </method>
-    <method name="setSourceCompatibility" returnType="void">
-        <description>Sets the source compatibility used for compiling Java sources.
-@value The value for the source compatibility as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
-</description>
-        <parameter type="java.lang.Object" name="value"/>
-    </method>
     <method name="setStatus" returnType="void">
         <description> Sets the status of this project.
 
@@ -1590,24 +1307,6 @@ the new manifest instance before it is returned.
 </description>
         <parameter type="java.lang.Object" name="status"/>
     </method>
-    <method name="setStopKey" returnType="void">
-        <parameter type="java.lang.String" name="stopKey"/>
-    </method>
-    <method name="setStopPort" returnType="void">
-        <parameter type="java.lang.Integer" name="stopPort"/>
-    </method>
-    <method name="setTargetCompatibility" returnType="void">
-        <description>Sets the target compatibility used for compiling Java sources.
-@value The value for the target compatibilty as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
-</description>
-        <parameter type="java.lang.Object" name="value"/>
-    </method>
-    <method name="setTestReportDirName" returnType="void">
-        <parameter type="java.lang.String" name="testReportDirName"/>
-    </method>
-    <method name="setTestResultsDirName" returnType="void">
-        <parameter type="java.lang.String" name="testResultsDirName"/>
-    </method>
     <method name="setVersion" returnType="void">
         <description> &lt;p&gt;Sets the version of this project.&lt;/p&gt;
 
@@ -1615,31 +1314,6 @@ the new manifest instance before it is returned.
 
 </description>
         <parameter type="java.lang.Object" name="version"/>
-    </method>
-    <method name="setWebAppDirName" returnType="void">
-        <parameter type="java.lang.String" name="webAppDirName"/>
-    </method>
-    <method name="sourceSets" returnType="java.lang.Object" delegationTarget="org.gradle.api.tasks.SourceSetContainer" documented="true">
-        <description>Configures the source sets of this project.
-&lt;p&gt;The given closure is executed to configure the &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;. The &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;
-is passed to the closure as its delegate.
-&lt;p&gt;
-See the example below how &lt;a href='type://org.gradle.api.tasks.SourceSet'&gt;org.gradle.api.tasks.SourceSet&lt;/a&gt; 'main' is accessed and how the &lt;a href='type://org.gradle.api.file.SourceDirectorySet'&gt;org.gradle.api.file.SourceDirectorySet&lt;/a&gt; 'java'
-is configured to exclude some package from compilation.
-&lt;pre autoTested=''&gt;
-apply plugin: 'java'
-sourceSets {
-main {
-java {
-exclude 'some/unwanted/package/**'
-}
-}
-}
-&lt;/pre&gt;
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;NamedDomainObjectContainer&lt;org.gradle.api.tasks.SourceSet&gt;
-</description>
-        <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
     <method name="subprojects" returnType="void" delegationTarget="org.gradle.api.Project" documented="true">
         <description> &lt;p&gt;Configures the sub-projects of this project.&lt;/p&gt;

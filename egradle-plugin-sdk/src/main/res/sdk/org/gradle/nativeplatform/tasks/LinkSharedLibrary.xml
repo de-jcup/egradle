@@ -3,7 +3,6 @@
     <description> Links a binary shared library from object files and imported libraries.
 
 </description>
-    <method name="createLinkerSpec" returnType="org.gradle.nativeplatform.internal.LinkerSpec"/>
     <method name="getInstallName" returnType="java.lang.String"/>
     <method name="setInstallName" returnType="void">
         <parameter type="java.lang.String" name="installName"/>

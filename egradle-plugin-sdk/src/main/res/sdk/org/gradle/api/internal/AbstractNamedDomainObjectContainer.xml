@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.AbstractNamedDomainObjectContainer" version="3.0" superType="org.gradle.api.internal.DefaultNamedDomainObjectSet">
+    <method name="configure" returnType="org.gradle.api.internal.AbstractNamedDomainObjectContainer">
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="create" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="create" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="create" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <method name="getDisplayName" returnType="java.lang.String"/>
+    <method name="maybeCreate" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <interface name="org.gradle.api.NamedDomainObjectContainer"/>
+    <property name="displayName" type="java.lang.String"/>
+</type>

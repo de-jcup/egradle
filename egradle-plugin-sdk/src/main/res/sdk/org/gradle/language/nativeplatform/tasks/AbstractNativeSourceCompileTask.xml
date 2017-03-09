@@ -3,9 +3,6 @@
     <description> Compiles native source files into object files.
 
 </description>
-    <method name="configureSpec" returnType="void">
-        <parameter type="org.gradle.nativeplatform.toolchain.internal.NativeCompileSpec" name="spec"/>
-    </method>
     <method name="getPreCompiledHeader" returnType="org.gradle.nativeplatform.toolchain.internal.PreCompiledHeader">
         <description> Returns the pre-compiled header to be used during compilation
 

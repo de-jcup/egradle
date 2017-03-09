@@ -5,8 +5,4 @@
  &lt;br&gt;(since 1.5)
 
 </description>
-    <method name="formatMessage" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="publicationName"/>
-        <parameter type="java.lang.String" name="error"/>
-    </method>
 </type>

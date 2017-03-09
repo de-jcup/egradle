@@ -3,17 +3,7 @@
     <description> Plugin for compiling Play routes sources in a Play application.
 
 </description>
-    <method name="createGeneratedScalaSourceSets" returnType="void">
-        <parameter type="org.gradle.model.ModelMap" name="binaries"/>
-        <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.play.internal.PlayApplicationBinarySpecInternal" name="playApplicationBinarySpec"/>
-    </method>
-    <method name="registerLanguageTransform" returnType="void">
-        <parameter type="org.gradle.language.base.internal.registry.LanguageTransformContainer" name="languages"/>
-    </method>
-    <method name="registerRoutesLanguageType" returnType="void">
-        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>
 </type>

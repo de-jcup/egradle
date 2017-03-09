@@ -3,30 +3,10 @@
     <description> Base class for compilation-related options.
 
 </description>
-    <method name="addValueToMapIfNotNull" returnType="void">
-        <parameter type="java.util.Map" name="map"/>
-        <parameter type="java.lang.reflect.Field" name="field"/>
-    </method>
     <method name="define" returnType="void">
         <parameter type="java.util.Map" name="args"/>
-    </method>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
-    <method name="getAntPropertyName" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
-    <method name="getAntPropertyValue" returnType="java.lang.Object">
-        <parameter type="java.lang.String" name="fieldName"/>
-        <parameter type="java.lang.Object" name="value"/>
-    </method>
-    <method name="isOptionField" returnType="boolean">
-        <parameter type="java.lang.reflect.Field" name="field"/>
     </method>
     <method name="optionMap" returnType="java.util.Map"/>
     <method name="run" returnType="void"/>
     <interface name="java.io.Serializable"/>
-    <property name="antPropertyName" type="java.lang.String"/>
-    <property name="antPropertyValue" type="java.lang.Object"/>
-    <property name="optionField" type="boolean"/>
 </type>

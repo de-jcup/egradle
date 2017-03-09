@@ -18,9 +18,6 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.language.c.CSourceSet" name="launcherSources"/>
     </method>
-    <method name="findLauncherSources" returnType="org.gradle.language.c.CSourceSet">
-        <parameter type="org.gradle.nativeplatform.test.cunit.CUnitTestSuiteSpec" name="suite"/>
-    </method>
     <method name="registerCUnitTestBinaryType" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
     </method>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.reporting.dependencies.HtmlDependencyReportTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.reporting.dependencies.HtmlDependencyReportTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Generates an HTML dependency report. This report
  combines the features of the ASCII dependency report and those of the ASCII
  dependency insight report. For a given project, it generates a tree of the dependencies
@@ -22,7 +22,6 @@
 
 </description>
     <method name="generate" returnType="void"/>
-    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="getProjects" returnType="java.util.Set">
         <description> Returns the set of projects to generate a report for. By default, the report is generated for the task's
  containing project.
@@ -32,8 +31,6 @@
 </description>
     </method>
     <method name="getReports" returnType="org.gradle.api.reporting.dependencies.DependencyReportContainer"/>
-    <method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
-    <method name="getVersionSelectorScheme" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
     <method name="isSatisfiedBy" returnType="boolean">
         <parameter type="org.gradle.api.Task" name="element"/>
     </method>
@@ -52,7 +49,6 @@
         <parameter type="java.util.Set" name="projects"/>
     </method>
     <interface name="org.gradle.api.reporting.Reporting"/>
-    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="projects" type="java.util.Set" documented="true">
         <description> Returns the set of projects to generate a report for. By default, the report is generated for the task's
  containing project.
@@ -63,6 +59,4 @@
     </property>
     <property name="reports" type="org.gradle.api.reporting.dependencies.DependencyReportContainer"/>
     <property name="satisfiedBy" type="boolean"/>
-    <property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
-    <property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
 </type>

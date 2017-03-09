@@ -2,11 +2,17 @@
 <tasks>
     <task name="defaulttask" type="org.gradle.api.DefaultTask"/>
     <task name="task" type="org.gradle.api.Task"/>
+    <task name="conventiontask" type="org.gradle.api.internal.ConventionTask"/>
     <task name="antlrtask" type="org.gradle.api.plugins.antlr.AntlrTask"/>
     <task name="comparegradlebuilds" type="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds"/>
     <task name="jettyrun" type="org.gradle.api.plugins.jetty.JettyRun"/>
     <task name="jettyrunwar" type="org.gradle.api.plugins.jetty.JettyRunWar"/>
+    <task name="jettystop" type="org.gradle.api.plugins.jetty.JettyStop"/>
+    <task name="checkstyle" type="org.gradle.api.plugins.quality.Checkstyle"/>
+    <task name="codenarc" type="org.gradle.api.plugins.quality.CodeNarc"/>
+    <task name="findbugs" type="org.gradle.api.plugins.quality.FindBugs"/>
     <task name="jdepend" type="org.gradle.api.plugins.quality.JDepend"/>
+    <task name="pmd" type="org.gradle.api.plugins.quality.Pmd"/>
     <task name="generateivydescriptor" type="org.gradle.api.publish.ivy.tasks.GenerateIvyDescriptor"/>
     <task name="publishtoivyrepository" type="org.gradle.api.publish.ivy.tasks.PublishToIvyRepository"/>
     <task name="generatemavenpom" type="org.gradle.api.publish.maven.tasks.GenerateMavenPom"/>
@@ -18,11 +24,17 @@
     <task name="modelreport" type="org.gradle.api.reporting.model.ModelReport"/>
     <task name="cacheabletask" type="org.gradle.api.tasks.CacheableTask"/>
     <task name="copy" type="org.gradle.api.tasks.Copy"/>
+    <task name="delete" type="org.gradle.api.tasks.Delete"/>
     <task name="exec" type="org.gradle.api.tasks.Exec"/>
+    <task name="gradlebuild" type="org.gradle.api.tasks.GradleBuild"/>
+    <task name="javaexec" type="org.gradle.api.tasks.JavaExec"/>
     <task name="parallelizabletask" type="org.gradle.api.tasks.ParallelizableTask"/>
     <task name="sourcetask" type="org.gradle.api.tasks.SourceTask"/>
     <task name="sync" type="org.gradle.api.tasks.Sync"/>
+    <task name="upload" type="org.gradle.api.tasks.Upload"/>
     <task name="verificationtask" type="org.gradle.api.tasks.VerificationTask"/>
+    <task name="anttarget" type="org.gradle.api.tasks.ant.AntTarget"/>
+    <task name="createstartscripts" type="org.gradle.api.tasks.application.CreateStartScripts"/>
     <task name="jar" type="org.gradle.api.tasks.bundling.Jar"/>
     <task name="tar" type="org.gradle.api.tasks.bundling.Tar"/>
     <task name="war" type="org.gradle.api.tasks.bundling.War"/>
@@ -39,6 +51,7 @@
     <task name="javadoc" type="org.gradle.api.tasks.javadoc.Javadoc"/>
     <task name="scalacompile" type="org.gradle.api.tasks.scala.ScalaCompile"/>
     <task name="scaladoc" type="org.gradle.api.tasks.scala.ScalaDoc"/>
+    <task name="test" type="org.gradle.api.tasks.testing.Test"/>
     <task name="testreport" type="org.gradle.api.tasks.testing.TestReport"/>
     <task name="wrapper" type="org.gradle.api.tasks.wrapper.Wrapper"/>
 </tasks>

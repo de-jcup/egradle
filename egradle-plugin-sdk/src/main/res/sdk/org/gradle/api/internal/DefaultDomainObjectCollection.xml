@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DefaultDomainObjectCollection" version="3.0">
+    <method name="add" returnType="boolean">
+        <parameter type="T" name="toAdd"/>
+    </method>
+    <method name="addAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="all" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="all" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="beforeChange" returnType="void">
+        <description> Adds an action which is executed before this collection is mutated. Any exception thrown by the action will veto the mutation.
+
+</description>
+        <parameter type="java.lang.Runnable" name="action"/>
+    </method>
+    <method name="clear" returnType="void"/>
+    <method name="contains" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="containsAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="findAll" returnType="java.util.Collection">
+        <parameter type="groovy.lang.Closure" name="cl"/>
+    </method>
+    <method name="getType" returnType="java.lang.Class"/>
+    <method name="isEmpty" returnType="boolean"/>
+    <method name="iterator" returnType="java.util.Iterator"/>
+    <method name="matching" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="remove" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="removeAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="retainAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="target"/>
+    </method>
+    <method name="size" returnType="int"/>
+    <method name="whenObjectAdded" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="whenObjectAdded" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="whenObjectRemoved" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="whenObjectRemoved" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectCollection" delegationTarget="withType">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <interface name="org.gradle.api.DomainObjectCollection"/>
+    <property name="empty" type="boolean"/>
+    <property name="type" type="java.lang.Class"/>
+</type>

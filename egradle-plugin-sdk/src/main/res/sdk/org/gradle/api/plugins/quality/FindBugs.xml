@@ -7,16 +7,12 @@
     <method name="apply" returnType="java.lang.String">
         <parameter type="java.io.File" name="input"/>
     </method>
-    <method name="evaluateResult" returnType="void">
-        <parameter type="org.gradle.api.plugins.quality.internal.findbugs.FindBugsResult" name="result"/>
-    </method>
     <method name="extraArgs" returnType="org.gradle.api.plugins.quality.FindBugs">
         <parameter type="java.lang.Iterable" name="arguments"/>
     </method>
     <method name="extraArgs" returnType="org.gradle.api.plugins.quality.FindBugs">
         <parameter type="java.lang.String" name="arguments"/>
     </method>
-    <method name="generateSpec" returnType="org.gradle.api.plugins.quality.internal.findbugs.FindBugsSpec"/>
     <method name="getClasses" returnType="org.gradle.api.file.FileCollection">
         <description> The classes to be analyzed.
 

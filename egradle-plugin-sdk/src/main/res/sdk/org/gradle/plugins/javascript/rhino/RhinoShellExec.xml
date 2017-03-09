@@ -6,7 +6,6 @@
     <method name="args" returnType="org.gradle.api.tasks.JavaExec">
         <parameter type="java.lang.Object" name="args"/>
     </method>
-    <method name="argsUnsupportOperationException" returnType="java.lang.UnsupportedOperationException"/>
     <method name="exec" returnType="void"/>
     <method name="getArgs" returnType="java.util.List"/>
     <method name="getRhinoOptions" returnType="java.util.List"/>

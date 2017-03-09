@@ -17,22 +17,12 @@
 </description>
         <parameter type="java.util.Map" name="dependArgs"/>
     </method>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
     <method name="fork" returnType="org.gradle.api.tasks.compile.CompileOptions" documented="true">
         <description> Convenience method to set &lt;a href='type://ForkOptions'&gt;ForkOptions&lt;/a&gt; with named parameter syntax.
  Calling this method will set &lt;a href='type://fork'&gt;fork&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;.
 
 </description>
         <parameter type="java.util.Map" name="forkArgs"/>
-    </method>
-    <method name="getAntPropertyName" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
-    <method name="getAntPropertyValue" returnType="java.lang.Object">
-        <parameter type="java.lang.String" name="fieldName"/>
-        <parameter type="java.lang.Object" name="value"/>
     </method>
     <method name="getBootClasspath" returnType="java.lang.String">
         <description> Returns the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
@@ -260,8 +250,6 @@
 </description>
         <parameter type="boolean" name="warnings"/>
     </method>
-    <property name="antPropertyName" type="java.lang.String"/>
-    <property name="antPropertyValue" type="java.lang.Object"/>
     <property name="bootClasspath" type="java.lang.String" documented="true">
         <description> Returns the bootstrap classpath to be used for the compiler process. Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
 

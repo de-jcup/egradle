@@ -13,9 +13,6 @@
  dependency information.
 
 </description>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
     <method name="getClasspath" returnType="java.lang.String">
         <description> Returns the compile classpath for which dependencies should also be checked.
  Defaults to the empty string.

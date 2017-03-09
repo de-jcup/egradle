@@ -5,10 +5,6 @@
  At this moment nearly all configuration is done via &lt;a href='type://EclipseJdt'&gt;EclipseJdt&lt;/a&gt;.
 
 </description>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.plugins.ide.eclipse.model.Jdt" name="jdtContent"/>
-    </method>
-    <method name="create" returnType="org.gradle.plugins.ide.eclipse.model.Jdt"/>
     <method name="getJdt" returnType="org.gradle.plugins.ide.eclipse.model.EclipseJdt">
         <description> Eclipse JDT model that contains information needed to generate the JDT file.
 

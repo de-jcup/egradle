@@ -5,7 +5,6 @@
     <method name="getJsHint" returnType="org.gradle.api.file.FileCollection"/>
     <method name="getJsonReport" returnType="java.io.File"/>
     <method name="getRhinoClasspath" returnType="org.gradle.api.file.FileCollection"/>
-    <method name="getWorkerProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/>
     <method name="setEncoding" returnType="void">
         <parameter type="java.lang.String" name="encoding"/>
     </method>
@@ -22,5 +21,4 @@
     <property name="jsHint" type="org.gradle.api.file.FileCollection"/>
     <property name="jsonReport" type="java.io.File"/>
     <property name="rhinoClasspath" type="org.gradle.api.file.FileCollection"/>
-    <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
 </type>

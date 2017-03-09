@@ -8,12 +8,6 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="call" returnType="java.lang.Object"/>
-    <method name="configureCompileDefaults" returnType="void"/>
-    <method name="configureGroovyRuntimeExtension" returnType="void"/>
-    <method name="configureGroovydoc" returnType="void"/>
-    <method name="configureSourceSetDefaults" returnType="void">
-        <parameter type="org.gradle.api.plugins.JavaBasePlugin" name="javaBasePlugin"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
     </method>
@@ -25,9 +19,6 @@
     </method>
     <method name="isSatisfiedBy" returnType="boolean">
         <parameter type="org.gradle.api.file.FileTreeElement" name="element"/>
-    </method>
-    <method name="java" returnType="org.gradle.api.plugins.JavaPluginConvention">
-        <parameter type="org.gradle.api.plugins.Convention" name="convention"/>
     </method>
     <interface name="org.gradle.api.Plugin"/>
     <property name="satisfiedBy" type="boolean"/>

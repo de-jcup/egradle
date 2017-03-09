@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ConventionTask" version="3.0" superType="org.gradle.api.DefaultTask" documented="true">
+    <method name="conventionMapping" returnType="org.gradle.api.Task">
+        <parameter type="java.lang.String" name="property"/>
+        <parameter type="groovy.lang.Closure" name="mapping"/>
+    </method>
+    <method name="conventionMapping" returnType="org.gradle.api.Task">
+        <parameter type="java.lang.String" name="property"/>
+        <parameter type="java.util.concurrent.Callable" name="mapping"/>
+    </method>
+    <method name="getConventionMapping" returnType="org.gradle.api.internal.ConventionMapping"/>
+    <interface name="org.gradle.api.internal.IConventionAware"/>
+    <property name="conventionMapping" type="org.gradle.api.internal.ConventionMapping"/>
+</type>

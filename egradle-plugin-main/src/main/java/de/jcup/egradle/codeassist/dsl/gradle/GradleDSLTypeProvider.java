@@ -38,7 +38,6 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 	private Set<Plugin> plugins;
 	private Map<String, String> apiMapping;
 	PluginMerger merger;
-
 	public GradleDSLTypeProvider(DSLFileLoader loader) {
 		if (loader == null) {
 			throw new IllegalArgumentException("loader may never be null!");
@@ -46,7 +45,17 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		this.fileLoader = loader;
 		nameToTypeMapping = new TreeMap<>();
 		unresolveableNames = new TreeSet<>();
+		
+		/* add primitives */
 		unresolveableNames.add("void");
+		unresolveableNames.add("int");
+		unresolveableNames.add("short");
+		unresolveableNames.add("char");
+		unresolveableNames.add("long");
+		unresolveableNames.add("double");
+		unresolveableNames.add("byte");
+		unresolveableNames.add("float");
+		unresolveableNames.add("boolean");
 	}
 
 	@Override
@@ -85,6 +94,14 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		Type type = nameToTypeMapping.get(name);
 		if (type != null) {
 			return type;
+		}
+		/* currently no support for java types */
+		if (StringUtils.startsWith(name, "java.")){
+			return null;
+		}
+		/* no support for sun parts too */
+		if (StringUtils.startsWith(name, "sun.")){
+			return null;
 		}
 		if (unresolveableNames.contains(name)) {
 			/* already tried to load */

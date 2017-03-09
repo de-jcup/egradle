@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.diagnostics.AbstractReportTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> The base class for all project report tasks.
 
 </description>
     <method name="generate" returnType="void"/>
-    <method name="generate" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
     <method name="generateReport" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="getClientMetaData" returnType="org.gradle.initialization.BuildClientMetaData"/>
     <method name="getOutputFile" returnType="java.io.File">
         <description> Returns the file which the report will be written to. When set to &lt;a href='type://null'&gt;null&lt;/a&gt;, the report is written to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;.
  Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
@@ -27,8 +23,6 @@
 
 </description>
     </method>
-    <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
-    <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
     <method name="isSatisfiedBy" returnType="boolean">
         <parameter type="org.gradle.api.Task" name="element"/>
     </method>
@@ -48,7 +42,6 @@
 </description>
         <parameter type="java.util.Set" name="projects"/>
     </method>
-    <property name="clientMetaData" type="org.gradle.initialization.BuildClientMetaData"/>
     <property name="outputFile" type="java.io.File" documented="true">
         <description> Returns the file which the report will be written to. When set to &lt;a href='type://null'&gt;null&lt;/a&gt;, the report is written to &lt;a href='type://System.out'&gt;System.out&lt;/a&gt;.
  Defaults to &lt;a href='type://null'&gt;null&lt;/a&gt;.
@@ -65,7 +58,5 @@
 
 </description>
     </property>
-    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>
-    <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
 </type>

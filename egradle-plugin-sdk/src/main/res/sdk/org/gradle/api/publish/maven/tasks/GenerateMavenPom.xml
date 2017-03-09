@@ -13,7 +13,6 @@
 
 </description>
     </method>
-    <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
     <method name="getPom" returnType="org.gradle.api.publish.maven.MavenPom">
         <description> The Maven POM.
 
@@ -21,7 +20,6 @@
 
 </description>
     </method>
-    <method name="getVersionRangeMapper" returnType="org.gradle.api.publication.maven.internal.VersionRangeMapper"/>
     <method name="setDestination" returnType="void">
         <description> Sets the destination the descriptor will be written to.
 
@@ -42,7 +40,6 @@
 
 </description>
     </property>
-    <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
     <property name="pom" type="org.gradle.api.publish.maven.MavenPom" documented="true">
         <description> The Maven POM.
 
@@ -50,5 +47,4 @@
 
 </description>
     </property>
-    <property name="versionRangeMapper" type="org.gradle.api.publication.maven.internal.VersionRangeMapper"/>
 </type>

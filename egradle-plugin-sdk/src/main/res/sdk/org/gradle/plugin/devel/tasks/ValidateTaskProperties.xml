@@ -39,11 +39,6 @@
     <method name="apply" returnType="org.gradle.api.InvalidUserDataException">
         <parameter type="java.lang.String" name="problemMessage"/>
     </method>
-    <method name="communicateResult" returnType="void">
-        <parameter type="java.util.List" name="problemMessages"/>
-        <parameter type="boolean" name="hasErrors"/>
-    </method>
-    <method name="getClassLoaderFactory" returnType="org.gradle.internal.classloader.ClassLoaderFactory"/>
     <method name="getClassesDir" returnType="java.io.File">
         <description> The directory containing the classes to validate.
 
@@ -101,23 +96,7 @@
 </description>
         <parameter type="java.lang.Object" name="outputFile"/>
     </method>
-    <method name="storeResults" returnType="void">
-        <parameter type="java.util.List" name="problemMessages"/>
-        <parameter type="java.io.File" name="outputFile"/>
-    </method>
-    <method name="toExceptionList" returnType="java.util.List">
-        <parameter type="java.util.List" name="problemMessages"/>
-    </method>
-    <method name="toMessageList" returnType="java.lang.CharSequence">
-        <parameter type="java.util.List" name="problemMessages"/>
-    </method>
-    <method name="toProblemMessages" returnType="java.util.List">
-        <parameter type="java.util.Map" name="problems"/>
-    </method>
     <method name="validateTaskClasses" returnType="void"/>
-    <method name="validateTaskClasses" returnType="void">
-        <parameter type="java.lang.ClassLoader" name="classLoader"/>
-    </method>
     <method name="visitDir" returnType="void">
         <parameter type="org.gradle.api.file.FileVisitDetails" name="dirDetails"/>
     </method>
@@ -125,7 +104,6 @@
         <parameter type="org.gradle.api.file.FileVisitDetails" name="fileDetails"/>
     </method>
     <interface name="org.gradle.api.tasks.VerificationTask"/>
-    <property name="classLoaderFactory" type="org.gradle.internal.classloader.ClassLoaderFactory"/>
     <property name="classesDir" type="java.io.File">
         <description> The directory containing the classes to validate.
 

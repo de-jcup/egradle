@@ -32,33 +32,14 @@
 
 </description>
     <method name="createApiJar" returnType="void"/>
-    <method name="doExecute" returnType="void">
-        <parameter type="java.util.jar.JarOutputStream" name="jos"/>
-    </method>
     <method name="getExportedPackages" returnType="java.util.Set"/>
     <method name="getOutputFile" returnType="java.io.File"/>
-    <method name="isClassFile" returnType="boolean">
-        <parameter type="java.io.File" name="file"/>
-    </method>
     <method name="setExportedPackages" returnType="void">
         <parameter type="java.util.Set" name="exportedPackages"/>
     </method>
     <method name="setOutputFile" returnType="void">
         <parameter type="java.io.File" name="outputFile"/>
     </method>
-    <method name="sortedSourceFiles" returnType="java.io.File"/>
-    <method name="writeClasses" returnType="void">
-        <parameter type="java.util.jar.JarOutputStream" name="jos"/>
-    </method>
-    <method name="writeEntry" returnType="void">
-        <parameter type="java.util.jar.JarOutputStream" name="jos"/>
-        <parameter type="java.lang.String" name="name"/>
-        <parameter type="byte" name="bytes"/>
-    </method>
-    <method name="writeManifest" returnType="void">
-        <parameter type="java.util.jar.JarOutputStream" name="jos"/>
-    </method>
-    <property name="classFile" type="boolean"/>
     <property name="exportedPackages" type="java.util.Set"/>
     <property name="outputFile" type="java.io.File"/>
 </type>

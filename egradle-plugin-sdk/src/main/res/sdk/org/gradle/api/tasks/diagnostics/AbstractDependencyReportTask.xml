@@ -19,7 +19,6 @@
 </description>
     </method>
     <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.ReportRenderer"/>
-    <method name="getReportConfigurations" returnType="java.util.Set"/>
     <method name="getTaskConfigurations" returnType="org.gradle.api.artifacts.ConfigurationContainer"/>
     <method name="setConfiguration" returnType="void">
         <description> Sets the single configuration (by name) to generate the report for.
@@ -63,6 +62,5 @@
 
 </description>
     </property>
-    <property name="reportConfigurations" type="java.util.Set"/>
     <property name="taskConfigurations" type="org.gradle.api.artifacts.ConfigurationContainer"/>
 </type>

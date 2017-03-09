@@ -8,9 +8,5 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="target"/>
     </method>
-    <method name="getDefaultCoffeeScriptDependencyNotation" returnType="java.lang.String"/>
-    <method name="getDefaultRhinoDependencyNotation" returnType="java.lang.String"/>
     <interface name="org.gradle.api.Plugin"/>
-    <property name="defaultCoffeeScriptDependencyNotation" type="java.lang.String"/>
-    <property name="defaultRhinoDependencyNotation" type="java.lang.String"/>
 </type>

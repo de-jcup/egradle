@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DependencyInjectingServiceLoader" version="3.0">
+    <description> Service loader that applies JSR-330 style dependency injection.
+
+</description>
+    <method name="apply" returnType="T">
+        <parameter type="java.lang.Class" name="serviceImplementation"/>
+    </method>
+    <method name="load" returnType="java.lang.Iterable">
+        <description> Lazily instantiates the available service type providers.
+
+</description>
+        <parameter type="java.lang.Class" name="serviceType"/>
+        <parameter type="java.lang.ClassLoader" name="classLoader"/>
+    </method>
+</type>

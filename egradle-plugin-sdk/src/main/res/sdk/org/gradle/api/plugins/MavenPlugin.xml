@@ -4,27 +4,8 @@
  to the local Maven cache.&lt;/p&gt;
 
 </description>
-    <method name="addConventionObject" returnType="org.gradle.api.plugins.MavenPluginConvention">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-        <parameter type="org.gradle.api.publication.maven.internal.MavenFactory" name="mavenFactory"/>
-    </method>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="configureInstall" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureJavaScopeMappings" returnType="void">
-        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
-        <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="mavenScopeMappings"/>
-    </method>
-    <method name="configureUploadArchivesTask" returnType="void"/>
-    <method name="configureUploadTasks" returnType="void">
-        <parameter type="org.gradle.api.publication.maven.internal.DefaultDeployerFactory" name="deployerFactory"/>
-    </method>
-    <method name="configureWarScopeMappings" returnType="void">
-        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
-        <parameter type="org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer" name="mavenScopeMappings"/>
     </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>

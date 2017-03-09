@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.ClassGenerator" version="3.0">
+    <method name="generate" returnType="java.lang.Class">
+        <description> Generates a proxy class for the given class. May decorate the given class or may generate a subclass.
+
+</description>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+</type>

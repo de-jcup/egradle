@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.ClassPathRegistry" version="3.0">
+    <method name="getClassPath" returnType="org.gradle.internal.classpath.ClassPath">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <property name="classPath" type="org.gradle.internal.classpath.ClassPath"/>
+</type>

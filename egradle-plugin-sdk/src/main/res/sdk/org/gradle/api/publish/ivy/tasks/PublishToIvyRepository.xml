@@ -6,11 +6,6 @@
 
 </description>
     <method name="call" returnType="org.gradle.api.file.FileCollection"/>
-    <method name="doPublish" returnType="void">
-        <parameter type="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal" name="publication"/>
-        <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repository"/>
-    </method>
-    <method name="getIvyPublisher" returnType="org.gradle.api.publish.ivy.internal.publisher.IvyPublisher"/>
     <method name="getPublication" returnType="org.gradle.api.publish.ivy.IvyPublication">
         <description> The publication to be published.
 
@@ -18,7 +13,6 @@
 
 </description>
     </method>
-    <method name="getPublicationInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal"/>
     <method name="getRepository" returnType="org.gradle.api.artifacts.repositories.IvyArtifactRepository">
         <description> The repository to publish to.
 
@@ -43,10 +37,6 @@
 </description>
         <parameter type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" name="repository"/>
     </method>
-    <method name="toPublicationInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal">
-        <parameter type="org.gradle.api.publish.ivy.IvyPublication" name="publication"/>
-    </method>
-    <property name="ivyPublisher" type="org.gradle.api.publish.ivy.internal.publisher.IvyPublisher"/>
     <property name="publication" type="org.gradle.api.publish.ivy.IvyPublication" documented="true">
         <description> The publication to be published.
 
@@ -54,7 +44,6 @@
 
 </description>
     </property>
-    <property name="publicationInternal" type="org.gradle.api.publish.ivy.internal.publication.IvyPublicationInternal"/>
     <property name="repository" type="org.gradle.api.artifacts.repositories.IvyArtifactRepository" documented="true">
         <description> The repository to publish to.
 

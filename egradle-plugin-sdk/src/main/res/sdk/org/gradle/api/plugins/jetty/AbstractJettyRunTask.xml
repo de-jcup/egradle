@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.plugins.jetty.AbstractJettyRunTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.plugins.jetty.AbstractJettyRunTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Base class for all tasks which deploy a web application to an embedded Jetty web container.
 
  @deprecated The Jetty plugin has been deprecated
@@ -163,19 +163,8 @@
     <method name="setWebDefaultXml" returnType="void">
         <parameter type="java.io.File" name="webDefaultXml"/>
     </method>
-    <method name="start" returnType="void"/>
-    <method name="startConsoleScanner" returnType="void">
-        <description> Run a thread that monitors the console input to detect ENTER hits.
-
-</description>
-    </method>
     <method name="startJetty" returnType="void"/>
     <method name="startJettyInternal" returnType="void"/>
-    <method name="startScanner" returnType="void">
-        <description> Run a scanner thread on the given list of files and directories, calling stop/start on the given list of LifeCycle objects if any of the watched files change.
-
-</description>
-    </method>
     <method name="validateConfiguration" returnType="void"/>
     <property name="additionalRuntimeJars" type="java.lang.Iterable" documented="true">
         <description> Returns the classpath to make available to the web application.

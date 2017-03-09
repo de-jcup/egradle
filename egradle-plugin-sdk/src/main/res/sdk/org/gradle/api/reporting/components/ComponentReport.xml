@@ -3,21 +3,5 @@
     <description> Displays some details about the software components produced by the project.
 
 </description>
-    <method name="getBinaryRenderer" returnType="org.gradle.api.reporting.components.internal.TypeAwareBinaryRenderer"/>
-    <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
-    <method name="getModelRegistry" returnType="org.gradle.model.internal.registry.ModelRegistry"/>
-    <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <method name="modelElement" returnType="T">
-        <parameter type="java.lang.String" name="path"/>
-        <parameter type="java.lang.Class" name="clazz"/>
-    </method>
-    <method name="modelElement" returnType="T">
-        <parameter type="java.lang.String" name="path"/>
-        <parameter type="org.gradle.model.internal.type.ModelType" name="modelType"/>
-    </method>
     <method name="report" returnType="void"/>
-    <property name="binaryRenderer" type="org.gradle.api.reporting.components.internal.TypeAwareBinaryRenderer"/>
-    <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
-    <property name="modelRegistry" type="org.gradle.model.internal.registry.ModelRegistry"/>
-    <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
 </type>

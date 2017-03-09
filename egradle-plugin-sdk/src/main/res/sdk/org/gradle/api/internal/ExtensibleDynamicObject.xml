@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ExtensibleDynamicObject" version="3.0">
+    <description> A &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; implementation that provides extensibility.
+
+ This is the dynamic object implementation that “enhanced” objects expose.
+
+ (see &lt;a href='type://org.gradle.api.internal.AsmBackedClassGenerator.MixInExtensibleDynamicObject'&gt;org.gradle.api.internal.AsmBackedClassGenerator.MixInExtensibleDynamicObject&lt;/a&gt;)
+
+</description>
+    <method name="addObject" returnType="void">
+        <parameter type="org.gradle.internal.metaobject.DynamicObject" name="object"/>
+        <parameter type="org.gradle.api.internal.ExtensibleDynamicObject.Location" name="location"/>
+    </method>
+    <method name="addProperties" returnType="void">
+        <parameter type="java.util.Map" name="properties"/>
+    </method>
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention"/>
+    <method name="getDisplayName" returnType="java.lang.String"/>
+    <method name="getDynamicProperties" returnType="org.gradle.api.plugins.ExtraPropertiesExtension"/>
+    <method name="getInheritable" returnType="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns the inheritable properties and methods of this object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an object containing the inheritable properties and methods of this object.
+
+</description>
+    </method>
+    <method name="getParent" returnType="org.gradle.internal.metaobject.DynamicObject"/>
+    <method name="getPublicType" returnType="java.lang.Class"/>
+    <method name="hasUsefulDisplayName" returnType="boolean"/>
+    <method name="setParent" returnType="void">
+        <parameter type="org.gradle.internal.metaobject.DynamicObject" name="parent"/>
+    </method>
+    <interface name="org.gradle.api.internal.HasConvention"/>
+    <property name="convention" type="org.gradle.api.plugins.Convention"/>
+    <property name="displayName" type="java.lang.String"/>
+    <property name="dynamicProperties" type="org.gradle.api.plugins.ExtraPropertiesExtension"/>
+    <property name="inheritable" type="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns the inheritable properties and methods of this object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;an object containing the inheritable properties and methods of this object.
+
+</description>
+    </property>
+    <property name="parent" type="org.gradle.internal.metaobject.DynamicObject"/>
+    <property name="publicType" type="java.lang.Class"/>
+</type>

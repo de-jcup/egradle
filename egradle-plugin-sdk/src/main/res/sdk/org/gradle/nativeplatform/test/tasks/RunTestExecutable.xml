@@ -3,12 +3,8 @@
     <description> Runs a compiled and installed test executable.
 
 </description>
-    <method name="exec" returnType="void"/>
     <method name="getIgnoreFailures" returnType="boolean"/>
     <method name="getOutputDir" returnType="java.io.File"/>
-    <method name="handleTestFailures" returnType="void">
-        <parameter type="java.lang.Exception" name="e"/>
-    </method>
     <method name="isIgnoreFailures" returnType="boolean"/>
     <method name="setIgnoreFailures" returnType="void">
         <parameter type="boolean" name="ignoreFailures"/>

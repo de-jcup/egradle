@@ -23,9 +23,6 @@
 
 </description>
     <method name="createDelegate" returnType="org.gradle.api.file.FileCollection"/>
-    <method name="findGroovyJarFile" returnType="org.gradle.api.internal.plugins.GroovyJarFile">
-        <parameter type="java.lang.Iterable" name="classpath"/>
-    </method>
     <method name="getDisplayName" returnType="java.lang.String"/>
     <method name="inferGroovyClasspath" returnType="org.gradle.api.file.FileCollection" documented="true">
         <description> Searches the specified class path for Groovy Jars (&lt;a href='type://groovy(-indy)'&gt;groovy(-indy)&lt;/a&gt;, &lt;a href='type://groovy-all(-indy)'&gt;groovy-all(-indy)&lt;/a&gt;) and returns a corresponding class path for executing Groovy tools such as the Groovy

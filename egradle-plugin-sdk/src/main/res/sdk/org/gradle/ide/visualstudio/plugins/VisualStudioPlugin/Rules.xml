@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.ide.visualstudio.plugins.VisualStudioPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
-    <method name="addCleanTask" returnType="void">
-        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
-    </method>
-    <method name="createFiltersFileTask" returnType="org.gradle.api.Task">
-        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
-        <parameter type="org.gradle.ide.visualstudio.VisualStudioProject" name="vsProject"/>
-    </method>
-    <method name="createProjectsFileTask" returnType="org.gradle.api.Task">
-        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
-        <parameter type="org.gradle.ide.visualstudio.VisualStudioProject" name="vsProject"/>
-    </method>
-    <method name="createSolutionTask" returnType="org.gradle.api.Task">
-        <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
-        <parameter type="org.gradle.ide.visualstudio.VisualStudioSolution" name="solution"/>
-    </method>
     <method name="createTasksForVisualStudio" returnType="void">
         <parameter type="org.gradle.api.tasks.TaskContainer" name="tasks"/>
         <parameter type="org.gradle.ide.visualstudio.internal.VisualStudioExtensionInternal" name="visualStudioExtension"/>

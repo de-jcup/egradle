@@ -3,9 +3,6 @@
     <description> Compilation options to be passed to the Groovy compiler.
 
 </description>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
     <method name="fork" returnType="org.gradle.api.tasks.compile.GroovyCompileOptions" documented="true">
         <description> Convenience method to set &lt;a href='type://GroovyForkOptions'&gt;GroovyForkOptions&lt;/a&gt; with named parameter syntax.
  Calling this method will set &lt;a href='type://fork'&gt;fork&lt;/a&gt; to &lt;a href='type://true'&gt;true&lt;/a&gt;.

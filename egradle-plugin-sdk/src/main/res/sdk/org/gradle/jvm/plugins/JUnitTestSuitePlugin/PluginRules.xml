@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.jvm.plugins.JUnitTestSuitePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
-    <method name="configureBinaryJUnitVersion" returnType="void">
-        <parameter type="org.gradle.jvm.test.JUnitTestSuiteBinarySpec" name="testSuiteBinary"/>
-    </method>
     <method name="createJvmTestSuiteBinaries" returnType="void">
         <parameter type="org.gradle.model.ModelMap" name="testBinaries"/>
         <parameter type="org.gradle.platform.base.internal.PlatformResolvers" name="platformResolver"/>
@@ -14,8 +11,5 @@
     </method>
     <method name="registerJUnitBinary" returnType="void">
         <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
-    </method>
-    <method name="validateJUnitVersion" returnType="void">
-        <parameter type="org.gradle.jvm.test.JUnitTestSuiteSpec" name="jUnitTestSuiteSpec"/>
     </method>
 </type>

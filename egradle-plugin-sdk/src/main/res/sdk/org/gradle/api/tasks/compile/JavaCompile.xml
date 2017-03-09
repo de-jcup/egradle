@@ -14,20 +14,8 @@
  &lt;/pre&gt;
 
 </description>
-    <method name="compile" returnType="void"/>
-    <method name="compile" returnType="void">
-        <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
-    </method>
-    <method name="createCompiler" returnType="org.gradle.api.internal.tasks.compile.CleaningJavaCompiler">
-        <parameter type="org.gradle.api.internal.tasks.compile.JavaCompileSpec" name="spec"/>
-    </method>
-    <method name="createSpec" returnType="org.gradle.api.internal.tasks.compile.DefaultJavaCompileSpec"/>
-    <method name="getAntBuilderFactory" returnType="org.gradle.internal.Factory"/>
-    <method name="getCacheRepository" returnType="org.gradle.cache.CacheRepository"/>
     <method name="getClassAnalysisCache" returnType="org.gradle.api.internal.tasks.compile.incremental.analyzer.ClassAnalysisCache"/>
     <method name="getDependencyCacheDir" returnType="java.io.File"/>
-    <method name="getFileOperations" returnType="org.gradle.api.internal.file.FileOperations"/>
-    <method name="getGeneralCompileCaches" returnType="org.gradle.api.internal.tasks.compile.incremental.cache.GeneralCompileCaches"/>
     <method name="getJarSnapshotCache" returnType="org.gradle.api.internal.tasks.compile.incremental.jar.JarSnapshotCache"/>
     <method name="getLocalClassSetAnalysisStore" returnType="org.gradle.api.internal.tasks.compile.incremental.deps.LocalClassSetAnalysisStore"/>
     <method name="getLocalJarClasspathSnapshotStore" returnType="org.gradle.api.internal.tasks.compile.incremental.jar.LocalJarClasspathSnapshotStore"/>
@@ -38,17 +26,12 @@
 
 </description>
     </method>
-    <method name="getPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"/>
     <method name="getToolChain" returnType="org.gradle.jvm.toolchain.JavaToolChain">
         <description> Returns the tool chain that will be used to compile the Java source.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain.
 
 </description>
-    </method>
-    <method name="performCompilation" returnType="void">
-        <parameter type="org.gradle.api.internal.tasks.compile.JavaCompileSpec" name="spec"/>
-        <parameter type="org.gradle.language.base.internal.compile.Compiler" name="compiler"/>
     </method>
     <method name="setDependencyCacheDir" returnType="void">
         <parameter type="java.io.File" name="dependencyCacheDir"/>
@@ -61,12 +44,8 @@
 </description>
         <parameter type="org.gradle.jvm.toolchain.JavaToolChain" name="toolChain"/>
     </method>
-    <property name="antBuilderFactory" type="org.gradle.internal.Factory"/>
-    <property name="cacheRepository" type="org.gradle.cache.CacheRepository"/>
     <property name="classAnalysisCache" type="org.gradle.api.internal.tasks.compile.incremental.analyzer.ClassAnalysisCache"/>
     <property name="dependencyCacheDir" type="java.io.File"/>
-    <property name="fileOperations" type="org.gradle.api.internal.file.FileOperations"/>
-    <property name="generalCompileCaches" type="org.gradle.api.internal.tasks.compile.incremental.cache.GeneralCompileCaches"/>
     <property name="jarSnapshotCache" type="org.gradle.api.internal.tasks.compile.incremental.jar.JarSnapshotCache"/>
     <property name="localClassSetAnalysisStore" type="org.gradle.api.internal.tasks.compile.incremental.deps.LocalClassSetAnalysisStore"/>
     <property name="localJarClasspathSnapshotStore" type="org.gradle.api.internal.tasks.compile.incremental.jar.LocalJarClasspathSnapshotStore"/>
@@ -77,7 +56,6 @@
 
 </description>
     </property>
-    <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
     <property name="toolChain" type="org.gradle.jvm.toolchain.JavaToolChain" documented="true">
         <description> Returns the tool chain that will be used to compile the Java source.
 

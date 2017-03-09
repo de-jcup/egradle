@@ -5,10 +5,6 @@
  At this moment nearly all configuration is done via &lt;a href='type://EclipseProject'&gt;EclipseProject&lt;/a&gt;.
 
 </description>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.plugins.ide.eclipse.model.Project" name="project"/>
-    </method>
-    <method name="create" returnType="org.gradle.plugins.ide.eclipse.model.Project"/>
     <method name="getProjectModel" returnType="org.gradle.plugins.ide.eclipse.model.EclipseProject">
         <description> The Eclipse project model that contains the details required to generate the project file.
 

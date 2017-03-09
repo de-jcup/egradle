@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.plugins.jetty.JettyStop" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Stops the embedded Jetty web container, if it is running.
 
  @deprecated The Jetty plugin has been deprecated

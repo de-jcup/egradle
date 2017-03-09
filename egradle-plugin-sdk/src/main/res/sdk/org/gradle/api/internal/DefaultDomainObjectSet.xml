@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DefaultDomainObjectSet" version="3.0" superType="org.gradle.api.internal.DefaultDomainObjectCollection">
+    <method name="findAll" returnType="java.util.Set">
+        <parameter type="groovy.lang.Closure" name="cl"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <interface name="org.gradle.api.DomainObjectSet"/>
+</type>

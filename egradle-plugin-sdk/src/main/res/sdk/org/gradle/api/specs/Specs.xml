@@ -6,12 +6,6 @@
     <method name="convertClosureToSpec" returnType="org.gradle.api.specs.Spec">
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
-    <method name="doIntersect" returnType="org.gradle.api.specs.Spec">
-        <parameter type="java.util.Collection" name="specs"/>
-    </method>
-    <method name="doUnion" returnType="org.gradle.api.specs.Spec">
-        <parameter type="java.util.Collection" name="specs"/>
-    </method>
     <method name="intersect" returnType="org.gradle.api.specs.Spec">
         <description> Returns a spec that selects the intersection of those items selected by the given specs. Returns a spec that selects everything when no specs provided.
 

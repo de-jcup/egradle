@@ -43,9 +43,6 @@
 
 </description>
     </method>
-    <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <method name="getVersionComparator" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
-    <method name="getVersionSelectorScheme" returnType="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
     <method name="renderNode" returnType="void">
         <parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="target"/>
         <parameter type="org.gradle.api.tasks.diagnostics.internal.graph.nodes.RenderableDependency" name="node"/>
@@ -97,7 +94,4 @@
 
 </description>
     </property>
-    <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
-    <property name="versionComparator" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionComparator"/>
-    <property name="versionSelectorScheme" type="org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionSelectorScheme"/>
 </type>

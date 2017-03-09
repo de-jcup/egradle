@@ -30,7 +30,6 @@
 </description>
         <parameter type="org.gradle.api.tasks.TaskCollection" name="tasks"/>
     </method>
-    <method name="getAntBuilder" returnType="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <method name="getDestinationFile" returnType="java.io.File">
         <description> File to write merged execution data to.
 
@@ -48,7 +47,6 @@
     <method name="setExecutionData" returnType="void">
         <parameter type="org.gradle.api.file.FileCollection" name="executionData"/>
     </method>
-    <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="destinationFile" type="java.io.File" documented="true">
         <description> File to write merged execution data to.
 

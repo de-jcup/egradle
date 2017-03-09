@@ -5,11 +5,13 @@
 </description>
     <method name="getProject" returnType="org.gradle.api.Project"/>
     <method name="getWebAppDir" returnType="java.io.File">
-        <description>Returns the web application directory.
+        <description> Returns the web application directory.
+
 </description>
     </method>
     <method name="getWebAppDirName" returnType="java.lang.String">
-        <description>The name of the web application directory, relative to the project directory.
+        <description> The name of the web application directory, relative to the project directory.
+
 </description>
     </method>
     <method name="setWebAppDirName" returnType="void">

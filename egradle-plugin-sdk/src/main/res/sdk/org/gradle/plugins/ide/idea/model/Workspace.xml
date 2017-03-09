@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ide.idea.model.Workspace" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.idea.model.Workspace" version="3.0" superType="org.gradle.plugins.ide.internal.generator.XmlPersistableConfigurationObject">
     <description> Represents the customizable elements of an ipr (via XML hooks everything of the ipr is customizable).
 
 </description>
-    <method name="getDefaultResourceName" returnType="java.lang.String"/>
-    <method name="load" returnType="void">
-        <parameter type="groovy.util.Node" name="xml"/>
-    </method>
-    <method name="store" returnType="void">
-        <parameter type="groovy.util.Node" name="xml"/>
-    </method>
-    <property name="defaultResourceName" type="java.lang.String"/>
 </type>

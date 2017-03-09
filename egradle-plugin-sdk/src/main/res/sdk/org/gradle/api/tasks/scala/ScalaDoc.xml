@@ -3,8 +3,6 @@
     <description> Generates HTML API documentation for Scala source files.
 
 </description>
-    <method name="generate" returnType="void"/>
-    <method name="getAntBuilder" returnType="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> &lt;p&gt;Returns the classpath to use to locate classes referenced by the documented source.&lt;/p&gt;
 
@@ -47,7 +45,6 @@
     <method name="setTitle" returnType="void">
         <parameter type="java.lang.String" name="title"/>
     </method>
-    <property name="antBuilder" type="org.gradle.api.internal.project.IsolatedAntBuilder"/>
     <property name="classpath" type="org.gradle.api.file.FileCollection" documented="true">
         <description> &lt;p&gt;Returns the classpath to use to locate classes referenced by the documented source.&lt;/p&gt;
 

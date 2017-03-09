@@ -15,16 +15,8 @@
     <method name="generateReport" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="getClientMetaData" returnType="org.gradle.initialization.BuildClientMetaData"/>
-    <method name="getTextOutputFactory" returnType="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
     <method name="isSatisfiedBy" returnType="boolean">
         <parameter type="org.gradle.api.Task" name="element"/>
     </method>
-    <method name="setRenderer" returnType="void">
-        <parameter type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer" name="dependencyReportRenderer"/>
-    </method>
-    <property name="clientMetaData" type="org.gradle.initialization.BuildClientMetaData"/>
-    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.DependencyReportRenderer"/>
     <property name="satisfiedBy" type="boolean"/>
-    <property name="textOutputFactory" type="org.gradle.internal.logging.text.StyledTextOutputFactory"/>
 </type>

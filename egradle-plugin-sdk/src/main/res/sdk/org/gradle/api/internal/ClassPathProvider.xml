@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.ClassPathProvider" version="3.0">
+    <method name="findClassPath" returnType="org.gradle.internal.classpath.ClassPath">
+        <description> Returns the files for the given classpath, if known. Returns null for unknown classpath.
+
+</description>
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+</type>

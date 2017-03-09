@@ -4,11 +4,13 @@
 
 </description>
     <method name="getProjectReportDir" returnType="java.io.File">
-        <description>Returns the directory to generate the project reports into.
+        <description> Returns the directory to generate the project reports into.
+
 </description>
     </method>
     <method name="getProjectReportDirName" returnType="java.lang.String">
-        <description>The name of the directory to generate the project reports into, relative to the project's reports dir.
+        <description> The name of the directory to generate the project reports into, relative to the project's reports dir.
+
 </description>
     </method>
     <method name="getProjects" returnType="java.util.Set"/>

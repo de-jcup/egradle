@@ -4,7 +4,6 @@
 
 </description>
     <method name="call" returnType="java.lang.String"/>
-    <method name="createLinkerSpec" returnType="org.gradle.nativeplatform.internal.LinkerSpec"/>
     <method name="getDestinationDir" returnType="java.io.File">
         <description> Include the destination directory as an output, to pick up auxiliary files produced alongside the main output file
 

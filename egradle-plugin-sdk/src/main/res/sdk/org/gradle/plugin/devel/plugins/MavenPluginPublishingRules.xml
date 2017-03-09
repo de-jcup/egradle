@@ -9,15 +9,6 @@
         <parameter type="org.gradle.api.publish.PublishingExtension" name="publishing"/>
         <parameter type="org.gradle.plugin.devel.GradlePluginDevelopmentExtension" name="pluginDevelopment"/>
     </method>
-    <method name="createMavenMarkerPublication" returnType="void">
-        <parameter type="org.gradle.plugin.devel.PluginDeclaration" name="declaration"/>
-        <parameter type="org.gradle.api.publish.maven.MavenPublication" name="coordinates"/>
-        <parameter type="org.gradle.api.publish.PublicationContainer" name="publications"/>
-    </method>
-    <method name="createMavenPluginPublication" returnType="void">
-        <parameter type="org.gradle.api.component.SoftwareComponent" name="component"/>
-        <parameter type="org.gradle.api.publish.PublicationContainer" name="publications"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.XmlProvider" name="xmlProvider"/>
     </method>

@@ -3,10 +3,6 @@
     <description> Task for generating a filters file.
 
 </description>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.ide.visualstudio.tasks.internal.VisualStudioFiltersFile" name="filtersFile"/>
-    </method>
-    <method name="create" returnType="org.gradle.ide.visualstudio.tasks.internal.VisualStudioFiltersFile"/>
     <method name="getInputFile" returnType="java.io.File"/>
     <method name="getOutputFile" returnType="java.io.File"/>
     <method name="getVisualStudioProject" returnType="org.gradle.ide.visualstudio.VisualStudioProject"/>

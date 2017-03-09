@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.PolymorphicNamedEntityInstantiator" version="3.0">
+    <method name="getCreatableTypes" returnType="java.util.Set"/>
+    <interface name="org.gradle.api.internal.rules.NamedDomainObjectFactoryRegistry"/>
+    <interface name="org.gradle.model.internal.core.NamedEntityInstantiator"/>
+    <property name="creatableTypes" type="java.util.Set"/>
+</type>

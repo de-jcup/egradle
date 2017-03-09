@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.ant.AntTarget" version="3.0">
+<type language="gradle" name="org.gradle.api.tasks.ant.AntTarget" version="3.0" superType="org.gradle.api.internal.ConventionTask">
     <description> A task which executes an Ant target.
 
 </description>
-    <method name="executeAntTarget" returnType="void"/>
     <method name="getBaseDir" returnType="java.io.File">
         <description> Returns the Ant project base directory to use when executing the target.
 

@@ -3,15 +3,9 @@
     <description> A platform-aware Scala compile task.
 
 </description>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler">
-        <parameter type="org.gradle.api.internal.tasks.scala.ScalaJavaJointCompileSpec" name="spec"/>
-    </method>
     <method name="getPlatform" returnType="org.gradle.language.scala.ScalaPlatform"/>
-    <method name="getToolChain" returnType="org.gradle.language.scala.internal.toolchain.ScalaToolChainInternal"/>
     <method name="setPlatform" returnType="void">
         <parameter type="org.gradle.language.scala.ScalaPlatform" name="platform"/>
     </method>
-    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="platform" type="org.gradle.language.scala.ScalaPlatform"/>
-    <property name="toolChain" type="org.gradle.language.scala.internal.toolchain.ScalaToolChainInternal"/>
 </type>

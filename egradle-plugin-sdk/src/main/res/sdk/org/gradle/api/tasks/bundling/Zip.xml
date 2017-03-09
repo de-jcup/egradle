@@ -5,8 +5,6 @@
  The default is to compress the contents of the zip.
 
 </description>
-    <method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/>
-    <method name="getCompressor" returnType="org.gradle.api.internal.file.copy.ZipCompressor"/>
     <method name="getEntryCompression" returnType="org.gradle.api.tasks.bundling.ZipEntryCompression">
         <description> Returns the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is
  compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed.
@@ -64,7 +62,6 @@
 </description>
         <parameter type="boolean" name="allowZip64"/>
     </method>
-    <property name="compressor" type="org.gradle.api.internal.file.copy.ZipCompressor"/>
     <property name="entryCompression" type="org.gradle.api.tasks.bundling.ZipEntryCompression" documented="true">
         <description> Returns the compression level of the entries of the archive. If set to &lt;a href='type://ZipEntryCompression#DEFLATED'&gt;ZipEntryCompression#DEFLATED&lt;/a&gt; (the default), each entry is
  compressed using the DEFLATE algorithm. If set to &lt;a href='type://ZipEntryCompression#STORED'&gt;ZipEntryCompression#STORED&lt;/a&gt; the entries of the archive are left uncompressed.

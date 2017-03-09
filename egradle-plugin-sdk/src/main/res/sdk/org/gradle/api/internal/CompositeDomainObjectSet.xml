@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.CompositeDomainObjectSet" version="3.0" superType="org.gradle.api.internal.DelegatingDomainObjectSet">
+    <description> A domain object collection that presents a combined view of one or more collections.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The type of domain objects in the component collections of this collection.
+
+</description>
+    <method name="addCollection" returnType="void">
+        <parameter type="org.gradle.api.DomainObjectCollection" name="collection"/>
+    </method>
+    <method name="all" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="create" returnType="org.gradle.api.internal.CompositeDomainObjectSet">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.DomainObjectCollection" name="collections"/>
+    </method>
+    <method name="iterator" returnType="java.util.Iterator"/>
+    <method name="removeCollection" returnType="void">
+        <parameter type="org.gradle.api.DomainObjectCollection" name="collection"/>
+    </method>
+    <method name="size" returnType="int"/>
+    <method name="whenObjectAdded" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="whenObjectRemoved" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+</type>

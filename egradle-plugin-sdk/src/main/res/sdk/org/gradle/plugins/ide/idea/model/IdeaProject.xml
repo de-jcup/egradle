@@ -156,9 +156,6 @@
 
 </description>
     </method>
-    <method name="includeModulesFromComposite" returnType="void">
-        <parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlProject"/>
-    </method>
     <method name="ipr" returnType="void" delegationTarget="org.gradle.plugins.ide.api.XmlFileContentMerger" documented="true">
         <description> Enables advanced configuration like tinkering with the output XML
  or affecting the way existing *.ipr content is merged with Gradle build information.

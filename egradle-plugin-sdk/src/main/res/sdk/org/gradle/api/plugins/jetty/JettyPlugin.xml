@@ -10,25 +10,6 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="call" returnType="java.lang.Object"/>
-    <method name="configureAbstractJettyTask" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.jetty.JettyPluginConvention" name="jettyConvention"/>
-        <parameter type="org.gradle.api.plugins.jetty.AbstractJettyRunTask" name="jettyTask"/>
-    </method>
-    <method name="configureJettyRun" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureJettyRunWar" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureJettyStop" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.jetty.JettyPluginConvention" name="jettyConvention"/>
-    </method>
-    <method name="configureMappingRules" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.jetty.JettyPluginConvention" name="jettyConvention"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.plugins.jetty.AbstractJettyRunTask" name="abstractJettyRunTask"/>
     </method>
@@ -44,11 +25,7 @@
     <method name="getWarConvention" returnType="org.gradle.api.plugins.WarPluginConvention">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="getWebXml" returnType="java.lang.Object">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
     <interface name="org.gradle.api.Plugin"/>
     <property name="javaConvention" type="org.gradle.api.plugins.JavaPluginConvention"/>
     <property name="warConvention" type="org.gradle.api.plugins.WarPluginConvention"/>
-    <property name="webXml" type="java.lang.Object"/>
 </type>

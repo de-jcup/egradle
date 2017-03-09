@@ -17,10 +17,6 @@
     <method name="getName" returnType="java.lang.String"/>
     <method name="getOutput" returnType="java.lang.String"/>
     <method name="hashCode" returnType="int"/>
-    <method name="parseNodeListAttribute" returnType="java.util.List">
-        <parameter type="groovy.util.Node" name="node"/>
-        <parameter type="java.lang.String" name="attributeName"/>
-    </method>
     <method name="setDir" returnType="void">
         <parameter type="java.io.File" name="dir"/>
     </method>

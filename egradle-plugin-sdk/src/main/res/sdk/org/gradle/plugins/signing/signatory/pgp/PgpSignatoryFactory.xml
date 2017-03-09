@@ -41,48 +41,8 @@
         <parameter type="java.lang.String" name="name"/>
         <parameter type="boolean" name="required"/>
     </method>
-    <method name="findSecretKey" returnType="org.bouncycastle.openpgp.PGPSecretKey">
-        <parameter type="org.bouncycastle.openpgp.PGPSecretKeyRingCollection" name="keyRings"/>
-        <parameter type="org.gradle.plugins.signing.signatory.pgp.PgpKeyId" name="keyId"/>
-    </method>
-    <method name="getQualifiedPropertyName" returnType="java.lang.Object">
-        <parameter type="java.lang.String" name="propertyPrefix"/>
-        <parameter type="java.lang.String" name="name"/>
-    </method>
-    <method name="hasId" returnType="boolean">
-        <parameter type="org.gradle.plugins.signing.signatory.pgp.PgpKeyId" name="keyId"/>
-        <parameter type="org.bouncycastle.openpgp.PGPSecretKey" name="secretKey"/>
-    </method>
-    <method name="normalizeKeyId" returnType="org.gradle.plugins.signing.signatory.pgp.PgpKeyId">
-        <parameter type="java.lang.String" name="keyId"/>
-    </method>
-    <method name="openSecretKeyFile" returnType="java.io.InputStream">
-        <parameter type="java.io.File" name="file"/>
-    </method>
-    <method name="readProperties" returnType="org.gradle.plugins.signing.signatory.pgp.PgpSignatory">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="java.lang.String" name="prefix"/>
-        <parameter type="java.lang.String" name="name"/>
-    </method>
-    <method name="readProperties" returnType="org.gradle.plugins.signing.signatory.pgp.PgpSignatory">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="java.lang.String" name="prefix"/>
-        <parameter type="java.lang.String" name="name"/>
-        <parameter type="boolean" name="required"/>
-    </method>
     <method name="readSecretKey" returnType="org.bouncycastle.openpgp.PGPSecretKey">
         <parameter type="java.lang.String" name="keyId"/>
         <parameter type="java.io.File" name="file"/>
     </method>
-    <method name="readSecretKey" returnType="org.bouncycastle.openpgp.PGPSecretKey">
-        <parameter type="java.io.InputStream" name="input"/>
-        <parameter type="java.lang.String" name="keyId"/>
-        <parameter type="java.lang.String" name="sourceDescription"/>
-    </method>
-    <method name="readSecretKey" returnType="org.bouncycastle.openpgp.PGPSecretKey">
-        <parameter type="org.bouncycastle.openpgp.PGPSecretKeyRingCollection" name="keyRings"/>
-        <parameter type="org.gradle.plugins.signing.signatory.pgp.PgpKeyId" name="keyId"/>
-        <parameter type="java.lang.String" name="sourceDescription"/>
-    </method>
-    <property name="qualifiedPropertyName" type="java.lang.Object"/>
 </type>

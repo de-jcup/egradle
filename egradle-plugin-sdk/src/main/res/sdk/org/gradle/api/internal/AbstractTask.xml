@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.AbstractTask" version="3.0" documented="true">
+    <method name="addValidator" returnType="void">
+        <parameter type="org.gradle.api.internal.tasks.execution.TaskValidator" name="validator"/>
+    </method>
+    <method name="appendParallelSafeAction" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="compareTo" returnType="int">
+        <parameter type="org.gradle.api.Task" name="otherTask"/>
+    </method>
+    <method name="configure" returnType="org.gradle.api.Task">
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="create" returnType="java.io.File"/>
+    <method name="deleteAllActions" returnType="org.gradle.api.Task"/>
+    <method name="dependsOn" returnType="org.gradle.api.Task">
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="dependsOnTaskDidWork" returnType="boolean"/>
+    <method name="doFirst" returnType="org.gradle.api.Task">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="doFirst" returnType="org.gradle.api.Task">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="doLast" returnType="org.gradle.api.Task">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="doLast" returnType="org.gradle.api.Task">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="execute" returnType="void"/>
+    <method name="finalizedBy" returnType="org.gradle.api.Task">
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="getActionClassLoaders" returnType="java.util.Set"/>
+    <method name="getActions" returnType="java.util.List"/>
+    <method name="getAnt" returnType="org.gradle.api.AntBuilder"/>
+    <method name="getAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject"/>
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention"/>
+    <method name="getDependsOn" returnType="java.util.Set"/>
+    <method name="getDescription" returnType="java.lang.String"/>
+    <method name="getDidWork" returnType="boolean"/>
+    <method name="getEnabled" returnType="boolean"/>
+    <method name="getExecuter" returnType="org.gradle.api.internal.tasks.TaskExecuter"/>
+    <method name="getExtensions" returnType="org.gradle.api.plugins.ExtensionContainer"/>
+    <method name="getFinalizedBy" returnType="org.gradle.api.tasks.TaskDependency"/>
+    <method name="getGroup" returnType="java.lang.String"/>
+    <method name="getImpliesSubProjects" returnType="boolean"/>
+    <method name="getInputs" returnType="org.gradle.api.internal.TaskInputsInternal"/>
+    <method name="getLogger" returnType="org.gradle.api.logging.Logger"/>
+    <method name="getLogging" returnType="org.gradle.logging.LoggingManagerInternal"/>
+    <method name="getMustRunAfter" returnType="org.gradle.api.tasks.TaskDependency"/>
+    <method name="getName" returnType="java.lang.String"/>
+    <method name="getOnlyIf" returnType="org.gradle.api.specs.Spec"/>
+    <method name="getOutputs" returnType="org.gradle.api.internal.TaskOutputsInternal"/>
+    <method name="getPath" returnType="java.lang.String"/>
+    <method name="getProject" returnType="org.gradle.api.Project"/>
+    <method name="getShouldRunAfter" returnType="org.gradle.api.tasks.TaskDependency"/>
+    <method name="getStandardOutputCapture" returnType="org.gradle.logging.StandardOutputCapture"/>
+    <method name="getState" returnType="org.gradle.api.internal.tasks.TaskStateInternal"/>
+    <method name="getTaskActions" returnType="java.util.List"/>
+    <method name="getTaskDependencies" returnType="org.gradle.api.internal.tasks.TaskDependencyInternal"/>
+    <method name="getTemporaryDir" returnType="java.io.File"/>
+    <method name="getTemporaryDirFactory" returnType="org.gradle.internal.Factory"/>
+    <method name="getValidators" returnType="java.util.List"/>
+    <method name="hasProperty" returnType="boolean">
+        <parameter type="java.lang.String" name="propertyName"/>
+    </method>
+    <method name="injectIntoNewInstance" returnType="T">
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="publicType"/>
+        <parameter type="java.util.concurrent.Callable" name="factory"/>
+    </method>
+    <method name="isEnabled" returnType="boolean"/>
+    <method name="isHasCustomActions" returnType="boolean"/>
+    <method name="isSatisfiedBy" returnType="boolean">
+        <parameter type="org.gradle.api.Task" name="element"/>
+    </method>
+    <method name="leftShift" returnType="org.gradle.api.Task">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="mustRunAfter" returnType="org.gradle.api.Task">
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="onlyIf" returnType="void" delegationTarget="org.gradle.api.specs.Spec">
+        <parameter type="groovy.lang.Closure" name="onlyIfClosure"/>
+    </method>
+    <method name="onlyIf" returnType="void">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="prependParallelSafeAction" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="property" returnType="java.lang.Object">
+        <parameter type="java.lang.String" name="propertyName"/>
+    </method>
+    <method name="propertyChange" returnType="void">
+        <parameter type="java.beans.PropertyChangeEvent" name="evt"/>
+    </method>
+    <method name="run" returnType="void"/>
+    <method name="setActions" returnType="void">
+        <parameter type="java.util.List" name="replacements"/>
+    </method>
+    <method name="setDependsOn" returnType="void">
+        <parameter type="java.lang.Iterable" name="dependsOn"/>
+    </method>
+    <method name="setDescription" returnType="void">
+        <parameter type="java.lang.String" name="description"/>
+    </method>
+    <method name="setDidWork" returnType="void">
+        <parameter type="boolean" name="didWork"/>
+    </method>
+    <method name="setEnabled" returnType="void">
+        <parameter type="boolean" name="enabled"/>
+    </method>
+    <method name="setExecuter" returnType="void">
+        <parameter type="org.gradle.api.internal.tasks.TaskExecuter" name="executer"/>
+    </method>
+    <method name="setFinalizedBy" returnType="void">
+        <parameter type="java.lang.Iterable" name="finalizedByTasks"/>
+    </method>
+    <method name="setGroup" returnType="void">
+        <parameter type="java.lang.String" name="group"/>
+    </method>
+    <method name="setImpliesSubProjects" returnType="void">
+        <parameter type="boolean" name="impliesSubProjects"/>
+    </method>
+    <method name="setMustRunAfter" returnType="void">
+        <parameter type="java.lang.Iterable" name="mustRunAfterTasks"/>
+    </method>
+    <method name="setOnlyIf" returnType="void">
+        <parameter type="groovy.lang.Closure" name="onlyIfClosure"/>
+    </method>
+    <method name="setOnlyIf" returnType="void">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="setProperty" returnType="void">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Object" name="value"/>
+    </method>
+    <method name="setShouldRunAfter" returnType="void">
+        <parameter type="java.lang.Iterable" name="shouldRunAfterTasks"/>
+    </method>
+    <method name="shouldRunAfter" returnType="org.gradle.api.tasks.TaskDependency">
+        <parameter type="java.lang.Object" name="paths"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <interface name="org.gradle.api.internal.DynamicObjectAware"/>
+    <interface name="org.gradle.api.internal.TaskInternal"/>
+    <property name="actionClassLoaders" type="java.util.Set"/>
+    <property name="actions" type="java.util.List"/>
+    <property name="ant" type="org.gradle.api.AntBuilder"/>
+    <property name="asDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"/>
+    <property name="convention" type="org.gradle.api.plugins.Convention"/>
+    <property name="dependsOn" type="java.util.Set"/>
+    <property name="description" type="java.lang.String"/>
+    <property name="didWork" type="boolean"/>
+    <property name="enabled" type="boolean"/>
+    <property name="executer" type="org.gradle.api.internal.tasks.TaskExecuter"/>
+    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer"/>
+    <property name="finalizedBy" type="org.gradle.api.tasks.TaskDependency"/>
+    <property name="group" type="java.lang.String"/>
+    <property name="hasCustomActions" type="boolean"/>
+    <property name="impliesSubProjects" type="boolean"/>
+    <property name="inputs" type="org.gradle.api.internal.TaskInputsInternal"/>
+    <property name="logger" type="org.gradle.api.logging.Logger"/>
+    <property name="logging" type="org.gradle.logging.LoggingManagerInternal"/>
+    <property name="mustRunAfter" type="org.gradle.api.tasks.TaskDependency"/>
+    <property name="name" type="java.lang.String"/>
+    <property name="onlyIf" type="org.gradle.api.specs.Spec"/>
+    <property name="outputs" type="org.gradle.api.internal.TaskOutputsInternal"/>
+    <property name="path" type="java.lang.String"/>
+    <property name="project" type="org.gradle.api.Project"/>
+    <property name="satisfiedBy" type="boolean"/>
+    <property name="shouldRunAfter" type="org.gradle.api.tasks.TaskDependency"/>
+    <property name="standardOutputCapture" type="org.gradle.logging.StandardOutputCapture"/>
+    <property name="state" type="org.gradle.api.internal.tasks.TaskStateInternal"/>
+    <property name="taskActions" type="java.util.List"/>
+    <property name="taskDependencies" type="org.gradle.api.internal.tasks.TaskDependencyInternal"/>
+    <property name="temporaryDir" type="java.io.File"/>
+    <property name="temporaryDirFactory" type="org.gradle.internal.Factory"/>
+    <property name="validators" type="java.util.List"/>
+</type>

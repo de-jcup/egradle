@@ -8,10 +8,6 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="call" returnType="java.lang.Object"/>
-    <method name="configureComponent" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.artifacts.PublishArtifact" name="warArtifact"/>
-    </method>
     <method name="configureConfigurations" returnType="void">
         <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurationContainer"/>
     </method>

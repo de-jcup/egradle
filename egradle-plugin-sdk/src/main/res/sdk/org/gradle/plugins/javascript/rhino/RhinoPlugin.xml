@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.plugins.javascript.rhino.RhinoPlugin" version="3.0">
-    <method name="addClasspathConfiguration" returnType="org.gradle.api.artifacts.Configuration">
-        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
-    </method>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="java.lang.String"/>
+    <method name="call" returnType="org.gradle.api.artifacts.Configuration"/>
     <method name="configureDefaultRhinoDependency" returnType="void">
         <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
         <parameter type="org.gradle.api.artifacts.dsl.DependencyHandler" name="dependencyHandler"/>

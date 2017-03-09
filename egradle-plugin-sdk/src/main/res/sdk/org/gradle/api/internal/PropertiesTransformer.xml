@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.PropertiesTransformer" version="3.0">
+    <description> Transformer implementation to support modification of Properties objects.
+
+</description>
+    <method name="addAction" returnType="void">
+        <description> Adds an action to be executed when properties are transformed.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;action the action to add
+
+</description>
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="transform" returnType="java.util.Properties">
+        <description> Transforms a properties object.  This will modify the
+ original.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;original the properties to transform
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;the transformed properties
+
+</description>
+        <parameter type="java.util.Properties" name="original"/>
+    </method>
+    <method name="transform" returnType="void">
+        <description> Transforms a properties object and write them out to a stream.
+ This will modify the original properties.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;original the properties to transform
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;destination the stream to write the properties to
+
+</description>
+        <parameter type="java.util.Properties" name="original"/>
+        <parameter type="java.io.OutputStream" name="destination"/>
+    </method>
+    <interface name="org.gradle.api.Transformer"/>
+</type>

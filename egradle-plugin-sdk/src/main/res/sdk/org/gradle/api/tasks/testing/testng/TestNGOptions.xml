@@ -3,9 +3,6 @@
     <description> The TestNG specific test options.
 
 </description>
-    <method name="doExecute" returnType="void">
-        <parameter type="java.io.BufferedWriter" name="writer"/>
-    </method>
     <method name="excludeGroups" returnType="org.gradle.api.tasks.testing.testng.TestNGOptions">
         <parameter type="java.lang.String" name="excludeGroups"/>
     </method>
@@ -51,7 +48,6 @@
 </description>
     </method>
     <method name="getPreserveOrder" returnType="boolean"/>
-    <method name="getProjectDir" returnType="java.io.File"/>
     <method name="getSuiteName" returnType="java.lang.String">
         <description> Sets the default name of the test suite, if one is not specified in a suite XML file or in the source code.
 
@@ -248,7 +244,6 @@
 
 </description>
     </property>
-    <property name="projectDir" type="java.io.File"/>
     <property name="suiteName" type="java.lang.String">
         <description> Sets the default name of the test suite, if one is not specified in a suite XML file or in the source code.
 

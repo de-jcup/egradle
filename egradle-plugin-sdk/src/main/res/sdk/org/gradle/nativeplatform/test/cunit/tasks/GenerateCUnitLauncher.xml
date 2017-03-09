@@ -12,10 +12,6 @@
     <method name="setSourceDir" returnType="void">
         <parameter type="java.io.File" name="sourceDir"/>
     </method>
-    <method name="writeToFile" returnType="void">
-        <parameter type="java.io.File" name="directory"/>
-        <parameter type="java.lang.String" name="fileName"/>
-    </method>
     <property name="headerDir" type="java.io.File"/>
     <property name="sourceDir" type="java.io.File"/>
 </type>

@@ -10,9 +10,6 @@
     <method name="apply" returnType="java.io.File">
         <parameter type="org.gradle.plugins.signing.Signature" name="input"/>
     </method>
-    <method name="collectSignatureFiles" returnType="java.util.ArrayList">
-        <parameter type="com.google.common.base.Function" name="getFile"/>
-    </method>
     <method name="configure" returnType="org.gradle.plugins.signing.SignOperation">
         <description> Executes the given closure against this object.
 
@@ -57,9 +54,6 @@
 </description>
     </method>
     <method name="isRequired" returnType="boolean"/>
-    <method name="newSignatureFileCollection" returnType="org.gradle.api.file.FileCollection">
-        <parameter type="com.google.common.base.Function" name="getFile"/>
-    </method>
     <method name="setRequired" returnType="void">
         <parameter type="boolean" name="required"/>
     </method>

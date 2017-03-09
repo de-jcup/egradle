@@ -4,9 +4,6 @@
 
 </description>
     <method name="call" returnType="org.gradle.api.internal.file.collections.FileTreeAdapter"/>
-    <method name="checkIfShouldGenerateDeploymentDescriptor" returnType="void">
-        <parameter type="org.gradle.api.file.FileCopyDetails" name="details"/>
-    </method>
     <method name="deploymentDescriptor" returnType="org.gradle.plugins.ear.Ear" delegationTarget="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
         <description> Configures the deployment descriptor for this EAR archive.
 
@@ -29,7 +26,6 @@
 
 </description>
     </method>
-    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="getLib" returnType="org.gradle.api.file.CopySpec">
         <description> A location for dependency libraries to include in the 'lib' directory of the EAR archive.
 
@@ -51,9 +47,6 @@
 </description>
         <parameter type="groovy.lang.Closure" name="configureClosure"/>
     </method>
-    <method name="recordTopLevelModules" returnType="void">
-        <parameter type="org.gradle.api.file.FileCopyDetails" name="details"/>
-    </method>
     <method name="setDeploymentDescriptor" returnType="void">
         <parameter type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor"/>
     </method>
@@ -65,7 +58,6 @@
 
 </description>
     </property>
-    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="lib" type="org.gradle.api.file.CopySpec">
         <description> A location for dependency libraries to include in the 'lib' directory of the EAR archive.
 

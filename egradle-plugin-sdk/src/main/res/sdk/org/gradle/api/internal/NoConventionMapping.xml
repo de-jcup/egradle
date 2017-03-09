@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.NoConventionMapping" version="3.0">
+    <description> Disables the application of convention mapping for the class it is attached to, and all superclasses.
+
+ (see &lt;a href='type://org.gradle.api.internal.IConventionAware'&gt;org.gradle.api.internal.IConventionAware&lt;/a&gt;)
+
+</description>
+</type>

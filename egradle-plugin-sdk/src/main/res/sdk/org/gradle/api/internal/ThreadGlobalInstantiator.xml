@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ThreadGlobalInstantiator" version="3.0">
+    <description> (see &lt;a href='type://org.gradle.api.internal.AsmBackedClassGenerator.MixInExtensibleDynamicObject#MixInExtensibleDynamicObject(Object,'&gt;Class, org.gradle.internal.metaobject.DynamicObject)&lt;/a&gt;)
+ (see &lt;a href='type://ClassGeneratorBackedInstantiator#newInstance(Class,'&gt;Object...)&lt;/a&gt;)
+
+</description>
+    <method name="get" returnType="org.gradle.internal.reflect.Instantiator"/>
+    <method name="getOrCreate" returnType="org.gradle.internal.reflect.Instantiator"/>
+    <method name="set" returnType="void">
+        <parameter type="org.gradle.internal.reflect.Instantiator" name="instantiator"/>
+    </method>
+    <property name="orCreate" type="org.gradle.internal.reflect.Instantiator"/>
+</type>

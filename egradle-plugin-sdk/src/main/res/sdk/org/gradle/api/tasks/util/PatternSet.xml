@@ -10,9 +10,6 @@
     <method name="copyFrom" returnType="org.gradle.api.tasks.util.PatternSet">
         <parameter type="org.gradle.api.tasks.util.PatternFilterable" name="sourcePattern"/>
     </method>
-    <method name="doCopyFrom" returnType="org.gradle.api.tasks.util.PatternSet">
-        <parameter type="org.gradle.api.tasks.util.PatternSet" name="from"/>
-    </method>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>

@@ -3,9 +3,6 @@
     <description> Generates parsers from Antlr grammars.
 
 </description>
-    <method name="evaluate" returnType="void">
-        <parameter type="org.gradle.api.plugins.antlr.internal.AntlrResult" name="result"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
     </method>
@@ -45,7 +42,6 @@
 
 </description>
     </method>
-    <method name="getWorkerProcessBuilderFactory" returnType="org.gradle.process.internal.worker.WorkerProcessFactory"/>
     <method name="isTrace" returnType="boolean">
         <description> Specifies that all rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;.
 
@@ -65,14 +61,6 @@
         <description> Specifies that all tree walker rules call &lt;a href='type://traceIn'&gt;traceIn&lt;/a&gt;/&lt;a href='type://traceOut'&gt;traceOut&lt;/a&gt;.
 
 </description>
-    </method>
-    <method name="setAntlrClasspath" returnType="void">
-        <description> Specifies the classpath containing the Ant ANTLR task implementation.
-
- &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;antlrClasspath The Ant task implementation classpath. Must not be null.
-
-</description>
-        <parameter type="org.gradle.api.file.FileCollection" name="antlrClasspath"/>
     </method>
     <method name="setArguments" returnType="void">
         <parameter type="java.util.List" name="arguments"/>
@@ -166,5 +154,4 @@
 
 </description>
     </property>
-    <property name="workerProcessBuilderFactory" type="org.gradle.process.internal.worker.WorkerProcessFactory"/>
 </type>

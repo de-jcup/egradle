@@ -12,9 +12,6 @@
     <method name="getAsHex" returnType="java.lang.String"/>
     <method name="getAsLong" returnType="long"/>
     <method name="hashCode" returnType="int"/>
-    <method name="normaliseKeyId" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="keyId"/>
-    </method>
     <method name="toHex" returnType="java.lang.String">
         <parameter type="long" name="keyId"/>
     </method>

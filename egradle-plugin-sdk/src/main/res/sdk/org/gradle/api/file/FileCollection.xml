@@ -58,7 +58,7 @@ nodeName,AntType.ResourceCollection)&lt;/a&gt;.
 </description>
         <parameter type="java.io.File" name="file"/>
     </method>
-    <method name="filter" returnType="org.gradle.api.file.FileCollection">
+    <method name="filter" returnType="org.gradle.api.file.FileCollection" delegationTarget="org.gradle.api.tasks.util.PatternFilterable">
         <description> &lt;p&gt;Restricts the contents of this collection to those files which match the given criteria. The filtered
  collection is live, so that it reflects any changes to this collection.&lt;/p&gt;
 

@@ -9,9 +9,6 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="call" returnType="org.gradle.api.file.FileCollection"/>
-    <method name="configureScaladoc" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.scala.ScalaDoc" name="scalaDoc"/>
     </method>

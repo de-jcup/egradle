@@ -3,56 +3,18 @@
     <description> The global signing configuration for a project.
 
 </description>
-    <method name="addSignatureSpecConventions" returnType="void">
-        <description> Adds conventions to the given spec, using this settings object's default signatory and signature type as the default signatory and signature type for the spec.
-
-</description>
-        <parameter type="org.gradle.plugins.signing.SignatureSpec" name="spec"/>
-    </method>
-    <method name="addSignaturesToConfiguration" returnType="java.lang.Object">
-        <parameter type="org.gradle.plugins.signing.Sign" name="task"/>
-        <parameter type="org.gradle.api.artifacts.Configuration" name="configuration"/>
-    </method>
-    <method name="call" returnType="java.lang.Boolean"/>
-    <method name="createSignTaskFor" returnType="org.gradle.plugins.signing.Sign">
-        <parameter type="java.lang.CharSequence" name="name"/>
-        <parameter type="org.gradle.api.Action" name="taskConfiguration"/>
-    </method>
-    <method name="createSignatoryProvider" returnType="org.gradle.plugins.signing.signatory.SignatoryProvider">
-        <description> Provides the signatory provider. Called once during construction.
-
-</description>
-    </method>
-    <method name="createSignatureTypeProvider" returnType="org.gradle.plugins.signing.type.SignatureTypeProvider">
-        <description> Provides the signature type provider. Called once during construction.
-
-</description>
-    </method>
-    <method name="doSignOperation" returnType="org.gradle.plugins.signing.SignOperation">
-        <parameter type="groovy.lang.Closure" name="setup"/>
-    </method>
-    <method name="doSignOperation" returnType="org.gradle.plugins.signing.SignOperation">
-        <parameter type="org.gradle.api.Action" name="setup"/>
-    </method>
+    <method name="call" returnType="org.gradle.plugins.signing.signatory.Signatory"/>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.plugins.signing.Sign" name="task"/>
     </method>
     <method name="execute" returnType="void">
-        <parameter type="org.gradle.plugins.signing.SignOperation" name="operation"/>
+        <parameter type="org.gradle.plugins.signing.SignOperation" name="so"/>
     </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.plugins.signing.Signature" name="sig"/>
     </method>
-    <method name="force" returnType="java.lang.Object">
-        <parameter type="java.lang.Object" name="maybeCallable"/>
-    </method>
     <method name="getConfiguration" returnType="org.gradle.api.artifacts.Configuration">
         <description> The configuration that signature artifacts are added to.
-
-</description>
-    </method>
-    <method name="getDefaultConfiguration" returnType="org.gradle.api.artifacts.Configuration">
-        <description> Provides the configuration that signature artifacts are added to. Called once during construction.
 
 </description>
     </method>
@@ -73,7 +35,6 @@
 </description>
     </method>
     <method name="getSignatureTypes" returnType="org.gradle.plugins.signing.type.SignatureTypeProvider"/>
-    <method name="instantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="isRequired" returnType="boolean">
         <description> Whether or not this task should fail if no signatory or signature type are configured at generation time.
 
@@ -228,11 +189,6 @@
     </method>
     <property name="configuration" type="org.gradle.api.artifacts.Configuration">
         <description> The configuration that signature artifacts are added to.
-
-</description>
-    </property>
-    <property name="defaultConfiguration" type="org.gradle.api.artifacts.Configuration">
-        <description> Provides the configuration that signature artifacts are added to. Called once during construction.
 
 </description>
     </property>

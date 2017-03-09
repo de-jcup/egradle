@@ -7,10 +7,6 @@
     <method name="compile" returnType="void">
         <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
     </method>
-    <method name="doCompile" returnType="org.gradle.api.tasks.WorkResult">
-        <parameter type="T" name="spec"/>
-        <parameter type="org.gradle.nativeplatform.toolchain.internal.PlatformToolProvider" name="platformToolProvider"/>
-    </method>
     <method name="getCompilerArgs" returnType="java.util.List">
         <description> Additional arguments to provide to the compiler.
 

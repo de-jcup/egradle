@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.DynamicObjectAware" version="3.0">
+    <description> An object that can present a dynamic view of itself.
+
+ The exposed dynamic object &lt;i&gt;may&lt;/i&gt; provide functionality over and above what the type implementing
+ this interface can do. For example, the &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; may provide the ability to register new
+ properties or implement methods that this object does not provide in a concrete way.
+
+</description>
+    <method name="getAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; for this object. This should include all static and dynamic properties and methods for this object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object.
+
+</description>
+    </method>
+    <property name="asDynamicObject" type="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; for this object. This should include all static and dynamic properties and methods for this object.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object.
+
+</description>
+    </property>
+</type>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DependencyInjectingInstantiator" version="3.0">
+    <description> An &lt;a href='type://Instantiator'&gt;Instantiator&lt;/a&gt; that applies JSR-330 style dependency injection.
+
+</description>
+    <method name="newInstance" returnType="T">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="java.lang.Object" name="parameters"/>
+    </method>
+    <interface name="org.gradle.internal.reflect.Instantiator"/>
+</type>

@@ -8,7 +8,6 @@
  &lt;/p&gt;
 
 </description>
-    <method name="compile" returnType="void"/>
     <method name="getAdditionalImports" returnType="java.util.List">
         <description> Returns the additional imports of the Play Routes compiler.
 
@@ -16,7 +15,6 @@
 
 </description>
     </method>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/>
     <method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions">
         <description> The fork options to be applied to the Routes compiler.
 
@@ -103,7 +101,6 @@
 
 </description>
     </property>
-    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions" documented="true">
         <description> The fork options to be applied to the Routes compiler.
 

@@ -16,8 +16,6 @@
 
 </description>
     </method>
-    <method name="getFileOperations" returnType="org.gradle.api.internal.file.FileOperations"/>
-    <method name="getFileSystem" returnType="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
     <method name="getLibs" returnType="org.gradle.api.file.FileCollection">
         <description> The library files that should be installed.
 
@@ -39,11 +37,6 @@
 </description>
     </method>
     <method name="install" returnType="void"/>
-    <method name="installToDir" returnType="void">
-        <parameter type="java.io.File" name="binaryDir"/>
-    </method>
-    <method name="installUnix" returnType="void"/>
-    <method name="installWindows" returnType="void"/>
     <method name="lib" returnType="void" documented="true">
         <description> Adds a set of library files to be installed. The provided libs object is evaluated as per &lt;a href='type://org.gradle.api.Project#files(Object...)'&gt;org.gradle.api.Project#files(Object...)&lt;/a&gt;.
 
@@ -75,8 +68,6 @@
 
 </description>
     </property>
-    <property name="fileOperations" type="org.gradle.api.internal.file.FileOperations"/>
-    <property name="fileSystem" type="org.gradle.internal.nativeintegration.filesystem.FileSystem"/>
     <property name="libs" type="org.gradle.api.file.FileCollection" documented="true">
         <description> The library files that should be installed.
 

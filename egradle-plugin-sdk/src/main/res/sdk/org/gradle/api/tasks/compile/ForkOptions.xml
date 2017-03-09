@@ -3,9 +3,6 @@
     <description> Fork options for Java compilation. Only take effect if &lt;a href='type://CompileOptions.fork'&gt;CompileOptions.fork&lt;/a&gt; is &lt;a href='type://true'&gt;true&lt;/a&gt;.
 
 </description>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
     <method name="getExecutable" returnType="java.lang.String">
         <description> Returns the compiler executable to be used. If set,
  a new compiler process will be forked for every compile task.

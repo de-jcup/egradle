@@ -1,23 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.platform.base.plugins.ComponentBasePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource">
-    <method name="componentSpecFactory" returnType="org.gradle.platform.base.component.internal.ComponentSpecFactory">
-        <parameter type="org.gradle.api.internal.project.ProjectIdentifier" name="projectIdentifier"/>
-        <parameter type="org.gradle.internal.reflect.Instantiator" name="instantiator"/>
-        <parameter type="org.gradle.api.internal.project.taskfactory.ITaskFactory" name="taskFactory"/>
-        <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
-    </method>
-    <method name="components" returnType="void">
-        <parameter type="org.gradle.platform.base.ComponentSpecContainer" name="componentSpecs"/>
-    </method>
-    <method name="registerComponentSpec" returnType="void">
-        <parameter type="org.gradle.platform.base.TypeBuilder" name="builder"/>
-    </method>
-    <method name="registerNodeInitializerExtractors" returnType="void">
-        <parameter type="org.gradle.model.internal.core.NodeInitializerRegistry" name="nodeInitializerRegistry"/>
-        <parameter type="org.gradle.platform.base.component.internal.ComponentSpecFactory" name="componentSpecFactory"/>
-        <parameter type="org.gradle.model.internal.manage.binding.StructBindingsStore" name="bindingsStore"/>
-    </method>
-    <method name="validateComponentSpecRegistrations" returnType="void">
-        <parameter type="org.gradle.platform.base.component.internal.ComponentSpecFactory" name="instanceFactory"/>
-    </method>
-</type>
+<type language="gradle" name="org.gradle.platform.base.plugins.ComponentBasePlugin.PluginRules" version="3.0" superType="org.gradle.model.RuleSource"/>

@@ -6,15 +6,18 @@
 
 </description>
     <method name="getHttpPort" returnType="java.lang.Integer">
-        <description>Returns the TCP port for Jetty to listen on for incoming HTTP requests.
+        <description> Returns the TCP port for Jetty to listen on for incoming HTTP requests.
+
 </description>
     </method>
     <method name="getStopKey" returnType="java.lang.String">
-        <description>Returns the key to use to stop Jetty.
+        <description> Returns the key to use to stop Jetty.
+
 </description>
     </method>
     <method name="getStopPort" returnType="java.lang.Integer">
-        <description>Returns the TCP port for Jetty to listen on for stop requests.
+        <description> Returns the TCP port for Jetty to listen on for stop requests.
+
 </description>
     </method>
     <method name="setHttpPort" returnType="void">

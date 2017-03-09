@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ChainingTransformer" version="3.0">
+    <method name="add" returnType="void">
+        <parameter type="groovy.lang.Closure" name="transformer"/>
+    </method>
+    <method name="add" returnType="void">
+        <parameter type="org.gradle.api.Transformer" name="transformer"/>
+    </method>
+    <method name="hasTransformers" returnType="boolean"/>
+    <method name="transform" returnType="T">
+        <parameter type="T" name="original"/>
+    </method>
+    <interface name="org.gradle.api.Transformer"/>
+</type>

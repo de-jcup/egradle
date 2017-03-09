@@ -110,9 +110,6 @@
     <method name="apply" returnType="org.gradle.plugins.ide.idea.model.Path">
         <parameter type="java.io.File" name="file"/>
     </method>
-    <method name="existing" returnType="java.util.Set">
-        <parameter type="java.util.Set" name="files"/>
-    </method>
     <method name="getContentRoot" returnType="java.io.File">
         <description> The content root directory of the module. &lt;p&gt; For example see docs for &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;
 
@@ -310,9 +307,6 @@
     </method>
     <method name="mergeXmlModule" returnType="void">
         <parameter type="org.gradle.plugins.ide.idea.model.Module" name="xmlModule"/>
-    </method>
-    <method name="pathsOf" returnType="java.util.Set">
-        <parameter type="java.util.Set" name="files"/>
     </method>
     <method name="resolveDependencies" returnType="java.util.Set">
         <description> Resolves and returns the module's dependencies.

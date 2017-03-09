@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DocumentationRegistry" version="3.0">
+    <description> Locates documentation for various features.
+
+</description>
+    <method name="getDocumentationFor" returnType="java.lang.String">
+        <description> Returns the location the documentation for the given feature, referenced by id. The location may be local or remote.
+
+</description>
+        <parameter type="java.lang.String" name="id"/>
+    </method>
+    <method name="getDocumentationFor" returnType="java.lang.String">
+        <parameter type="java.lang.String" name="id"/>
+        <parameter type="java.lang.String" name="section"/>
+    </method>
+    <method name="getDslRefForProperty" returnType="java.lang.String">
+        <parameter type="java.lang.Class" name="clazz"/>
+        <parameter type="java.lang.String" name="property"/>
+    </method>
+    <property name="documentationFor" type="java.lang.String"/>
+    <property name="dslRefForProperty" type="java.lang.String"/>
+</type>

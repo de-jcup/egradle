@@ -27,6 +27,11 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	private GradleLanguageElementEstimater typeEstimator;
 	private DefaultTypeTemplatesProvider defaultTemplatesProvider = new DefaultTypeTemplatesProvider();
+
+	/**
+	 * Currently no longer used because generation does only provide public methods now
+	 */
+	boolean filterUndocumentedEnabled;
 	
 	/**
 	 * Creates new gradle dsl proposal factory
@@ -73,7 +78,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		/* when this is a documented type we show only documented methods etc. otherwise we support
 		 * all methods
 		 */
-		boolean filterUndocumented = identifiedType.isDocumented();
+		boolean filterUndocumented = filterUndocumentedEnabled && identifiedType.isDocumented();
 		Set<Proposal> proposals = new TreeSet<>();
 		
 		Map<String, Type> extensions = identifiedType.getExtensions();

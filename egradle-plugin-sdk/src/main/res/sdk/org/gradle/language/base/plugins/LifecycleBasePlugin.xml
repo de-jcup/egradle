@@ -3,30 +3,6 @@
     <description> &lt;p&gt;A &lt;a href='type://org.gradle.api.Plugin'&gt;org.gradle.api.Plugin&lt;/a&gt; which defines a basic project lifecycle.&lt;/p&gt;
 
 </description>
-    <method name="addAssemble" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="addBuild" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="addCheck" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="addClean" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="addCleanRule" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="addDeprecationWarningsAboutCustomLifecycleTasks" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="addPlaceholderAction" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-        <parameter type="java.lang.String" name="placeholderName"/>
-        <parameter type="java.lang.Class" name="type"/>
-        <parameter type="org.gradle.api.Action" name="configure"/>
-    </method>
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>
@@ -41,7 +17,7 @@
         <parameter type="org.gradle.api.Task" name="task"/>
     </method>
     <method name="execute" returnType="void">
-        <parameter type="org.gradle.api.internal.TaskInternal" name="assembleTask"/>
+        <parameter type="org.gradle.api.internal.TaskInternal" name="checkTask"/>
     </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.Delete" name="clean"/>

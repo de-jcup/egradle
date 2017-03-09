@@ -3,13 +3,7 @@
     <description> Compiles Groovy source files, and optionally, Java source files.
 
 </description>
-    <method name="checkGroovyClasspathIsNonEmpty" returnType="void"/>
-    <method name="compile" returnType="void"/>
-    <method name="createSpec" returnType="org.gradle.api.internal.tasks.compile.DefaultGroovyJavaJointCompileSpec"/>
     <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler">
-        <parameter type="org.gradle.api.internal.tasks.compile.GroovyJavaJointCompileSpec" name="spec"/>
-    </method>
     <method name="getGroovyClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath containing the version of Groovy to use for compilation.
 

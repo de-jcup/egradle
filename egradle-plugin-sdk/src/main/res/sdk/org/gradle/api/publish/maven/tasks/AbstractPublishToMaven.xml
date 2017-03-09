@@ -6,8 +6,6 @@
 
 </description>
     <method name="call" returnType="org.gradle.api.file.FileCollection"/>
-    <method name="getLoggingManagerFactory" returnType="org.gradle.internal.Factory"/>
-    <method name="getMavenRepositoryLocator" returnType="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/>
     <method name="getPublication" returnType="org.gradle.api.publish.maven.MavenPublication">
         <description> The publication to be published.
 
@@ -15,7 +13,6 @@
 
 </description>
     </method>
-    <method name="getPublicationInternal" returnType="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"/>
     <method name="setPublication" returnType="void">
         <description> Sets the publication to be published.
 
@@ -24,11 +21,6 @@
 </description>
         <parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/>
     </method>
-    <method name="toPublicationInternal" returnType="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal">
-        <parameter type="org.gradle.api.publish.maven.MavenPublication" name="publication"/>
-    </method>
-    <property name="loggingManagerFactory" type="org.gradle.internal.Factory"/>
-    <property name="mavenRepositoryLocator" type="org.gradle.api.internal.artifacts.mvnsettings.LocalMavenRepositoryLocator"/>
     <property name="publication" type="org.gradle.api.publish.maven.MavenPublication" documented="true">
         <description> The publication to be published.
 
@@ -36,5 +28,4 @@
 
 </description>
     </property>
-    <property name="publicationInternal" type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal"/>
 </type>

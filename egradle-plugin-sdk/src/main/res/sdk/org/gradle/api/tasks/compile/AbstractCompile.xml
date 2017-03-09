@@ -3,7 +3,6 @@
     <description> The base class for all JVM-based language compilation tasks.
 
 </description>
-    <method name="compile" returnType="void"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath to use to compile the source files.
 

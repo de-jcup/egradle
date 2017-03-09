@@ -7,10 +7,6 @@
  that is used, is the one from the Groovy dependency defined in the build script.
 
 </description>
-    <method name="checkGroovyClasspathNonEmpty" returnType="void">
-        <parameter type="java.util.Collection" name="classpath"/>
-    </method>
-    <method name="generate" returnType="void"/>
     <method name="getAntGroovydoc" returnType="org.gradle.api.internal.tasks.AntGroovydoc"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath used to locate classes referenced by the documented sources.
@@ -58,7 +54,6 @@
 
 </description>
     </method>
-    <method name="getPathToOverview" returnType="java.lang.String"/>
     <method name="getWindowTitle" returnType="java.lang.String">
         <description> Returns the browser window title for the documentation. Set to &lt;a href='type://null'&gt;null&lt;/a&gt; when there is no window title.
 
@@ -250,7 +245,6 @@
 
 </description>
     </property>
-    <property name="pathToOverview" type="java.lang.String"/>
     <property name="use" type="boolean" documented="true">
         <description> Returns whether to create class and package usage pages.
 

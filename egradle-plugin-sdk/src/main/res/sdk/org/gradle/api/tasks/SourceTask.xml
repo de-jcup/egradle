@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.SourceTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.SourceTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> A &lt;a href='type://SourceTask'&gt;SourceTask&lt;/a&gt; performs some operation on source files.
 
 </description>
@@ -37,7 +37,6 @@
 
 </description>
     </method>
-    <method name="getPatternSetFactory" returnType="org.gradle.internal.Factory"/>
     <method name="getSource" returnType="org.gradle.api.file.FileTree">
         <description> Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
 
@@ -109,7 +108,6 @@
 
 </description>
     </property>
-    <property name="patternSetFactory" type="org.gradle.internal.Factory"/>
     <property name="source" type="org.gradle.api.file.FileTree" documented="true">
         <description> Returns the source for this task, after the include and exclude patterns have been applied. Ignores source files which do not exist.
 

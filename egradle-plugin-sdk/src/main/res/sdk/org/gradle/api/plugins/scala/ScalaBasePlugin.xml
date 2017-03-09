@@ -6,30 +6,7 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
-    <method name="call" returnType="java.io.File"/>
-    <method name="configureCompileDefaults" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.tasks.ScalaRuntime" name="scalaRuntime"/>
-    </method>
-    <method name="configureConfigurations" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureScalaCompile" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.JavaBasePlugin" name="javaPlugin"/>
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-    </method>
-    <method name="configureScalaRuntimeExtension" returnType="org.gradle.api.tasks.ScalaRuntime">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureScaladoc" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.tasks.ScalaRuntime" name="scalaRuntime"/>
-    </method>
-    <method name="configureSourceSetDefaults" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.internal.file.SourceDirectorySetFactory" name="sourceDirectorySetFactory"/>
-    </method>
+    <method name="call" returnType="org.gradle.api.artifacts.Configuration"/>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
     </method>

@@ -4,9 +4,6 @@
 
 </description>
     <method name="doCompile" returnType="void"/>
-    <method name="getDetachedConfiguration" returnType="org.gradle.api.artifacts.Configuration">
-        <parameter type="java.lang.String" name="notation"/>
-    </method>
     <method name="setCoffeeScriptJs" returnType="void">
         <parameter type="java.lang.Object" name="coffeeScriptJs"/>
     </method>
@@ -18,6 +15,5 @@
     </method>
     <property name="coffeeScriptJs" type="java.lang.Object"/>
     <property name="coffeeScriptJsNotation" type="java.lang.String"/>
-    <property name="detachedConfiguration" type="org.gradle.api.artifacts.Configuration"/>
     <property name="rhinoClasspathNotation" type="java.lang.String"/>
 </type>

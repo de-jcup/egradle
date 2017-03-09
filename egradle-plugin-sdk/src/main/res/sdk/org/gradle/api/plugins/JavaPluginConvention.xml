@@ -6,55 +6,67 @@
 </description>
     <method name="getDependencyCacheDir" returnType="java.io.File"/>
     <method name="getDependencyCacheDirName" returnType="java.lang.String">
-        <description>The name of the dependency cache dir.
+        <description> The name of the dependency cache dir.
+
 </description>
     </method>
     <method name="getDocsDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory supposed to be used for all docs.
+        <description> Returns a file pointing to the root directory supposed to be used for all docs.
+
 </description>
     </method>
     <method name="getDocsDirName" returnType="java.lang.String">
-        <description>The name of the docs directory. Can be a name or a path relative to the build dir.
+        <description> The name of the docs directory. Can be a name or a path relative to the build dir.
+
 </description>
     </method>
     <method name="getProject" returnType="org.gradle.api.internal.project.ProjectInternal"/>
-    <method name="getReportsDir" returnType="java.io.File"/>
     <method name="getSourceCompatibility" returnType="org.gradle.api.JavaVersion">
-        <description>Returns the source compatibility used for compiling Java sources.
+        <description> Returns the source compatibility used for compiling Java sources.
+
 </description>
     </method>
     <method name="getSourceSets" returnType="org.gradle.api.tasks.SourceSetContainer">
-        <description>The source sets container.
+        <description> The source sets container.
+
 </description>
     </method>
     <method name="getTargetCompatibility" returnType="org.gradle.api.JavaVersion">
-        <description>Returns the target compatibility used for compiling Java sources.
+        <description> Returns the target compatibility used for compiling Java sources.
+
 </description>
     </method>
     <method name="getTestReportDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory to be used for reports.
+        <description> Returns a file pointing to the root directory to be used for reports.
+
 </description>
     </method>
     <method name="getTestReportDirName" returnType="java.lang.String">
-        <description>The name of the test reports directory. Can be a name or a path relative to &lt;a href='type://org.gradle.api.reporting.ReportingExtension#getBaseDir'&gt;org.gradle.api.reporting.ReportingExtension#getBaseDir&lt;/a&gt;.
+        <description> The name of the test reports directory. Can be a name or a path relative to &lt;a href='type://org.gradle.api.reporting.ReportingExtension#getBaseDir'&gt;org.gradle.api.reporting.ReportingExtension#getBaseDir&lt;/a&gt;.
+
 </description>
     </method>
     <method name="getTestResultsDir" returnType="java.io.File">
-        <description>Returns a file pointing to the root directory of the test results.
+        <description> Returns a file pointing to the root directory of the test results.
+
 </description>
     </method>
     <method name="getTestResultsDirName" returnType="java.lang.String">
-        <description>The name of the test results directory. Can be a name or a path relative to the build dir.
+        <description> The name of the test results directory. Can be a name or a path relative to the build dir.
+
 </description>
     </method>
     <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" documented="true">
-        <description>Creates a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;.
+        <description> Creates a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;.
+
 </description>
     </method>
     <method name="manifest" returnType="org.gradle.api.java.archives.Manifest" delegationTarget="Manifest" documented="true">
-        <description>Creates and configures a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;. The given closure configures
-the new manifest instance before it is returned.
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the manifest.
+        <description> Creates and configures a new instance of a &lt;a href='type://Manifest'&gt;Manifest&lt;/a&gt;. The given closure configures
+ the new manifest instance before it is returned.
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to use to configure the manifest.
+
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
@@ -72,14 +84,18 @@ the new manifest instance before it is returned.
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>
     <method name="setSourceCompatibility" returnType="void">
-        <description>Sets the source compatibility used for compiling Java sources.
-@value The value for the source compatibility as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
+        <description> Sets the source compatibility used for compiling Java sources.
+
+ @value The value for the source compatibility as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
+
 </description>
         <parameter type="java.lang.Object" name="value"/>
     </method>
     <method name="setTargetCompatibility" returnType="void">
-        <description>Sets the target compatibility used for compiling Java sources.
-@value The value for the target compatibilty as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
+        <description> Sets the target compatibility used for compiling Java sources.
+
+ @value The value for the target compatibilty as defined by &lt;a href='type://JavaVersion#toVersion(Object)'&gt;JavaVersion#toVersion(Object)&lt;/a&gt;
+
 </description>
         <parameter type="java.lang.Object" name="value"/>
     </method>
@@ -90,24 +106,29 @@ the new manifest instance before it is returned.
         <parameter type="java.lang.String" name="testResultsDirName"/>
     </method>
     <method name="sourceSets" returnType="java.lang.Object" delegationTarget="org.gradle.api.tasks.SourceSetContainer" documented="true">
-        <description>Configures the source sets of this project.
-&lt;p&gt;The given closure is executed to configure the &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;. The &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;
-is passed to the closure as its delegate.
-&lt;p&gt;
-See the example below how &lt;a href='type://org.gradle.api.tasks.SourceSet'&gt;org.gradle.api.tasks.SourceSet&lt;/a&gt; 'main' is accessed and how the &lt;a href='type://org.gradle.api.file.SourceDirectorySet'&gt;org.gradle.api.file.SourceDirectorySet&lt;/a&gt; 'java'
-is configured to exclude some package from compilation.
-&lt;pre autoTested=''&gt;
-apply plugin: 'java'
-sourceSets {
-main {
-java {
-exclude 'some/unwanted/package/**'
-}
-}
-}
-&lt;/pre&gt;
-&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute.
-&lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;NamedDomainObjectContainer&lt;org.gradle.api.tasks.SourceSet&gt;
+        <description> Configures the source sets of this project.
+
+ &lt;p&gt;The given closure is executed to configure the &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;. The &lt;a href='type://SourceSetContainer'&gt;SourceSetContainer&lt;/a&gt;
+ is passed to the closure as its delegate.
+ &lt;p&gt;
+ See the example below how &lt;a href='type://org.gradle.api.tasks.SourceSet'&gt;org.gradle.api.tasks.SourceSet&lt;/a&gt; 'main' is accessed and how the &lt;a href='type://org.gradle.api.file.SourceDirectorySet'&gt;org.gradle.api.file.SourceDirectorySet&lt;/a&gt; 'java'
+ is configured to exclude some package from compilation.
+
+ &lt;pre autoTested=''&gt;
+ apply plugin: 'java'
+
+ sourceSets {
+   main {
+     java {
+       exclude 'some/unwanted/package/**'
+     }
+   }
+ }
+ &lt;/pre&gt;
+
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;closure The closure to execute.
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;NamedDomainObjectContainer&lt;org.gradle.api.tasks.SourceSet&gt;
+
 </description>
         <parameter type="groovy.lang.Closure" name="closure"/>
     </method>
@@ -133,7 +154,6 @@ exclude 'some/unwanted/package/**'
 
 </description>
     </property>
-    <property name="reportsDir" type="java.io.File"/>
     <property name="sourceCompatibility" type="org.gradle.api.JavaVersion" documented="true">
         <description> Returns the source compatibility used for compiling Java sources.
 

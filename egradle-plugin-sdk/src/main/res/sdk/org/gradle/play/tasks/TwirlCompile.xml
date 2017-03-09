@@ -3,13 +3,9 @@
     <description> Task for compiling Twirl templates into Scala code.
 
 </description>
-    <method name="compile" returnType="void">
-        <parameter type="org.gradle.api.tasks.incremental.IncrementalTaskInputs" name="inputs"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.incremental.InputFileDetails" name="inputFileDetails"/>
     </method>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/>
     <method name="getDefaultImports" returnType="org.gradle.language.twirl.TwirlImports">
         <description> Returns the default imports that will be used when compiling templates.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used.
@@ -35,9 +31,6 @@
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The tool chain.
 
 </description>
-    </method>
-    <method name="setCleaner" returnType="void">
-        <parameter type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner" name="cleaner"/>
     </method>
     <method name="setDefaultImports" returnType="void">
         <description> Sets the default imports to be used when compiling templates.
@@ -65,8 +58,6 @@
 </description>
         <parameter type="org.gradle.play.toolchain.PlayToolChain" name="toolChain"/>
     </method>
-    <property name="cleaner" type="org.gradle.play.tasks.TwirlCompile.TwirlStaleOutputCleaner"/>
-    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="defaultImports" type="org.gradle.language.twirl.TwirlImports" documented="true">
         <description> Returns the default imports that will be used when compiling templates.
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The imports that will be used.

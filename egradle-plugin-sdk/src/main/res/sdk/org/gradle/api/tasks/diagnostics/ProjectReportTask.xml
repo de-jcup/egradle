@@ -7,19 +7,4 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="styledTextOutput"/>
     </method>
-    <method name="generate" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="getChildren" returnType="java.util.List">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="getRenderer" returnType="org.gradle.api.tasks.diagnostics.internal.TextReportRenderer"/>
-    <method name="render" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.internal.graph.GraphRenderer" name="renderer"/>
-        <parameter type="boolean" name="lastChild"/>
-        <parameter type="org.gradle.internal.logging.text.StyledTextOutput" name="textOutput"/>
-    </method>
-    <property name="children" type="java.util.List"/>
-    <property name="renderer" type="org.gradle.api.tasks.diagnostics.internal.TextReportRenderer"/>
 </type>

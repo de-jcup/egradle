@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.Upload" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.Upload" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Uploads the artifacts of a &lt;a href='type://Configuration'&gt;Configuration&lt;/a&gt; to a set of repositories.
 
 </description>
@@ -20,7 +20,6 @@
 
 </description>
     </method>
-    <method name="getPublicationServices" returnType="org.gradle.api.internal.artifacts.ArtifactPublicationServices"/>
     <method name="getRepositories" returnType="org.gradle.api.artifacts.dsl.RepositoryHandler">
         <description> Returns the repositories to upload to.
 
@@ -46,7 +45,6 @@
     <method name="setUploadDescriptor" returnType="void">
         <parameter type="boolean" name="uploadDescriptor"/>
     </method>
-    <method name="upload" returnType="void"/>
     <property name="artifacts" type="org.gradle.api.file.FileCollection" documented="true">
         <description> Returns the artifacts which will be uploaded.
 
@@ -64,7 +62,6 @@
 
 </description>
     </property>
-    <property name="publicationServices" type="org.gradle.api.internal.artifacts.ArtifactPublicationServices"/>
     <property name="repositories" type="org.gradle.api.artifacts.dsl.RepositoryHandler" documented="true">
         <description> Returns the repositories to upload to.
 

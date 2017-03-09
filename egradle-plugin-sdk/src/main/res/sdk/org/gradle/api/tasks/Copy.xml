@@ -41,8 +41,6 @@
  &lt;/pre&gt;
 
 </description>
-    <method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/>
-    <method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <method name="getDestinationDir" returnType="java.io.File">
         <description> Returns the directory to copy files into.
 

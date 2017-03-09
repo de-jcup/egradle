@@ -29,20 +29,6 @@
     <method name="compareTo" returnType="int">
         <parameter type="org.gradle.api.file.RelativePath" name="o"/>
     </method>
-    <method name="copyAndInternSegments" returnType="void">
-        <parameter type="java.lang.String" name="target"/>
-        <parameter type="int" name="targetOffset"/>
-        <parameter type="java.lang.String" name="source"/>
-    </method>
-    <method name="copySegments" returnType="void">
-        <parameter type="java.lang.String" name="target"/>
-        <parameter type="java.lang.String" name="source"/>
-    </method>
-    <method name="copySegments" returnType="void">
-        <parameter type="java.lang.String" name="target"/>
-        <parameter type="java.lang.String" name="source"/>
-        <parameter type="int" name="length"/>
-    </method>
     <method name="equals" returnType="boolean">
         <parameter type="java.lang.Object" name="o"/>
     </method>
@@ -60,9 +46,6 @@
     <method name="getPathString" returnType="java.lang.String"/>
     <method name="getSegments" returnType="java.lang.String"/>
     <method name="hashCode" returnType="int"/>
-    <method name="internPathSegment" returnType="java.lang.String">
-        <parameter type="java.lang.String" name="sample"/>
-    </method>
     <method name="isFile" returnType="boolean"/>
     <method name="parse" returnType="org.gradle.api.file.RelativePath">
         <parameter type="boolean" name="isFile"/>

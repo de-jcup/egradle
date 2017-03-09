@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.language.scala.plugins.ScalaLanguagePlugin.Scala" version="3.0">
-    <method name="addSourceSetClasspath" returnType="void">
-        <parameter type="org.gradle.language.scala.tasks.PlatformScalaCompile" name="compile"/>
-        <parameter type="org.gradle.language.scala.ScalaLanguageSourceSet" name="scalaLanguageSourceSet"/>
-    </method>
-    <method name="addSourceSetToCompile" returnType="void">
-        <parameter type="org.gradle.language.scala.tasks.PlatformScalaCompile" name="compile"/>
-        <parameter type="org.gradle.language.base.LanguageSourceSet" name="sourceSet"/>
-    </method>
     <method name="applyToBinary" returnType="boolean">
         <parameter type="org.gradle.platform.base.BinarySpec" name="binary"/>
     </method>
@@ -17,11 +9,6 @@
     <method name="configureAdditionalTransform" returnType="void">
         <parameter type="org.gradle.api.Task" name="task"/>
         <parameter type="org.gradle.language.base.LanguageSourceSet" name="sourceSet"/>
-    </method>
-    <method name="configureScalaTask" returnType="void">
-        <parameter type="org.gradle.language.scala.tasks.PlatformScalaCompile" name="compile"/>
-        <parameter type="org.gradle.jvm.internal.JvmAssembly" name="assembly"/>
-        <parameter type="java.lang.String" name="description"/>
     </method>
     <method name="configureTask" returnType="void">
         <parameter type="org.gradle.api.Task" name="task"/>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.AbstractPolymorphicDomainObjectContainer" version="3.0" superType="org.gradle.api.internal.AbstractNamedDomainObjectContainer">
+    <method name="containerWithType" returnType="org.gradle.api.NamedDomainObjectContainer">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="create" returnType="U">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="create" returnType="U">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configuration"/>
+    </method>
+    <method name="getAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject"/>
+    <method name="maybeCreate" returnType="U">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <interface name="org.gradle.api.internal.PolymorphicDomainObjectContainerInternal"/>
+    <property name="asDynamicObject" type="org.gradle.internal.metaobject.DynamicObject"/>
+</type>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.GradleBuild" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.GradleBuild" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> Executes a Gradle build.
 
 </description>
-    <method name="build" returnType="void"/>
     <method name="getBuildFile" returnType="java.io.File">
         <description> Returns the build file that should be used for this build. Defaults to &lt;em class='value'&gt;org.gradle.api.Project#DEFAULT_BUILD_FILE&lt;/em&gt; in the project directory.
 

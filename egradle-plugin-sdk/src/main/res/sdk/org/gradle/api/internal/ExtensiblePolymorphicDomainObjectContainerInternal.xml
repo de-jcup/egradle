@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.ExtensiblePolymorphicDomainObjectContainerInternal" version="3.0">
+    <interface name="org.gradle.api.ExtensiblePolymorphicDomainObjectContainer"/>
+    <interface name="org.gradle.api.internal.PolymorphicDomainObjectContainerInternal"/>
+</type>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.ClosureBackedAction" version="3.0">
+    <description> NOTE: You should use &lt;a href='type://ConfigureUtil'&gt;ConfigureUtil&lt;/a&gt; instead of this class when adding a closure backed method to the DSL, whether statically or dynamically added. &lt;a href='type://ConfigureUtil'&gt;ConfigureUtil&lt;/a&gt; is much more efficient and takes care of applying consistent DSL behaviour when closures are nested.
+
+</description>
+    <method name="equals" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="T" name="delegate"/>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter type="T" name="delegate"/>
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <method name="hashCode" returnType="int"/>
+    <method name="of" returnType="org.gradle.api.internal.ClosureBackedAction">
+        <parameter type="groovy.lang.Closure" name="closure"/>
+    </method>
+    <interface name="org.gradle.api.Action"/>
+</type>

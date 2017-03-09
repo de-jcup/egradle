@@ -4,8 +4,5 @@
 
 </description>
     <method name="getFile" returnType="java.io.File"/>
-    <method name="toMessage" returnType="java.lang.String">
-        <parameter type="java.io.File" name="file"/>
-    </method>
     <property name="file" type="java.io.File"/>
 </type>

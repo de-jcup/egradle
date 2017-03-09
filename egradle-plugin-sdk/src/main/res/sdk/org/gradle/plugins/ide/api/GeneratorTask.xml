@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ide.api.GeneratorTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.plugins.ide.api.GeneratorTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> &lt;p&gt;A &lt;a href='type://GeneratorTask'&gt;GeneratorTask&lt;/a&gt; generates a configuration file based on a domain object of type T.
  When executed the task:
  &lt;ul&gt;
@@ -19,7 +19,6 @@
  &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;&lt;T&gt; The domain object for the configuration file.
 
 </description>
-    <method name="generate" returnType="void"/>
     <method name="getInputFile" returnType="java.io.File">
         <description> The input file to load the initial configuration from. Defaults to the output file. If the specified input file
  does not exist, this task uses some default initial configuration.
@@ -28,8 +27,6 @@
 
 </description>
     </method>
-    <method name="getInputFileIfExists" returnType="java.io.File"/>
-    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
     <method name="getOutputFile" returnType="java.io.File">
         <description> The output file to write the final configuration to.
 
@@ -61,8 +58,6 @@
 
 </description>
     </property>
-    <property name="inputFileIfExists" type="java.io.File"/>
-    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
     <property name="outputFile" type="java.io.File" documented="true">
         <description> The output file to write the final configuration to.
 

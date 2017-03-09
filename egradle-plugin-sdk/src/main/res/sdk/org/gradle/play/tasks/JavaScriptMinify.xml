@@ -3,8 +3,6 @@
     <description> Task to minify JavaScript assets.
 
 </description>
-    <method name="compileJavaScriptSources" returnType="void"/>
-    <method name="getCompiler" returnType="org.gradle.language.base.internal.compile.Compiler"/>
     <method name="getDestinationDir" returnType="java.io.File">
         <description> Returns the output directory that processed JavaScript is written to.
 
@@ -12,7 +10,6 @@
 
 </description>
     </method>
-    <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
     <method name="getForkOptions" returnType="org.gradle.api.tasks.compile.BaseForkOptions">
         <description> The fork options to be applied to the JavaScript compiler.
 
@@ -43,7 +40,6 @@
 </description>
         <parameter type="org.gradle.play.platform.PlayPlatform" name="playPlatform"/>
     </method>
-    <property name="compiler" type="org.gradle.language.base.internal.compile.Compiler"/>
     <property name="destinationDir" type="java.io.File" documented="true">
         <description> Returns the output directory that processed JavaScript is written to.
 
@@ -51,7 +47,6 @@
 
 </description>
     </property>
-    <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
     <property name="forkOptions" type="org.gradle.api.tasks.compile.BaseForkOptions" documented="true">
         <description> The fork options to be applied to the JavaScript compiler.
 

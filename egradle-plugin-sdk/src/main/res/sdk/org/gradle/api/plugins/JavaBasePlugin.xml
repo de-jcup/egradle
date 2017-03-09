@@ -6,67 +6,10 @@
     <method name="apply" returnType="void">
         <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
     </method>
-    <method name="attachTasksToBinary" returnType="void">
-        <parameter type="org.gradle.api.internal.jvm.ClassDirectoryBinarySpecInternal" name="binary"/>
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.Project" name="target"/>
-    </method>
-    <method name="call" returnType="java.lang.Object"/>
-    <method name="configureBasedOnSingleProperty" returnType="void">
-        <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
-    </method>
-    <method name="configureBuildDependents" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureBuildNeeded" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureCompileDefaults" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.JavaPluginConvention" name="javaConvention"/>
-    </method>
+    <method name="call" returnType="java.io.File"/>
     <method name="configureForSourceSet" returnType="void">
         <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
         <parameter type="org.gradle.api.tasks.compile.AbstractCompile" name="compile"/>
-    </method>
-    <method name="configureJavaDoc" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.JavaPluginConvention" name="convention"/>
-    </method>
-    <method name="configureSourceSetDefaults" returnType="org.gradle.api.plugins.JavaBasePlugin.BridgedBinaries">
-        <parameter type="org.gradle.api.plugins.JavaPluginConvention" name="pluginConvention"/>
-    </method>
-    <method name="configureTest" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.JavaPluginConvention" name="convention"/>
-    </method>
-    <method name="configureTestDefaults" returnType="void">
-        <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.JavaPluginConvention" name="convention"/>
-    </method>
-    <method name="createBinaryLifecycleTask" returnType="void">
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.Project" name="target"/>
-    </method>
-    <method name="createCompileJavaTaskForBinary" returnType="void">
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.file.SourceDirectorySet" name="javaSourceSet"/>
-        <parameter type="org.gradle.api.Project" name="target"/>
-    </method>
-    <method name="createProcessResourcesTaskForBinary" returnType="void">
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.file.SourceDirectorySet" name="resourceSet"/>
-        <parameter type="org.gradle.api.Project" name="target"/>
-    </method>
-    <method name="defineConfigurationsForSourceSet" returnType="void">
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.artifacts.ConfigurationContainer" name="configurations"/>
-    </method>
-    <method name="definePathsForSourceSet" returnType="void">
-        <parameter type="org.gradle.api.tasks.SourceSet" name="sourceSet"/>
-        <parameter type="org.gradle.api.internal.ConventionMapping" name="outputConventionMapping"/>
-        <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
@@ -89,13 +32,5 @@
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
     </method>
-    <method name="getTaskPrefixedProperty" returnType="java.lang.String">
-        <parameter type="org.gradle.api.Task" name="task"/>
-        <parameter type="java.lang.String" name="propertyName"/>
-    </method>
-    <method name="overwriteDebugIfDebugPropertyIsSet" returnType="void">
-        <parameter type="org.gradle.api.tasks.testing.Test" name="test"/>
-    </method>
     <interface name="org.gradle.api.Plugin"/>
-    <property name="taskPrefixedProperty" type="java.lang.String"/>
 </type>

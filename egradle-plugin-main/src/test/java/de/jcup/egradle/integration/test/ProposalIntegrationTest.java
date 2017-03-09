@@ -21,7 +21,7 @@ public class ProposalIntegrationTest {
 
 	
 	@Test
-	public void buildfile__13_buildscript__before_myCopyTask_comment() {
+	public void buildfile__13_buildscript__before_myCopyTask_comment__proposes_into_dest_dir() {
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test-13-task-definition-inheriting-from-existing-task.gradle");
 		int offset = calculateIndexBefore(text, "//test myCopyTask");
@@ -34,6 +34,24 @@ public class ProposalIntegrationTest {
 		assertThat(proposals).
 			containsAtLeastOneProposal().and().
 			containsProposalWithLabel("into(Object destDir)").
+		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void buildfile__13_buildscript__before_myCopyTask_comment__proposes_doFirst_with_closure() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-13-task-definition-inheriting-from-existing-task.gradle");
+		int offset = calculateIndexBefore(text, "//test myCopyTask");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().and().
+			containsProposalWithLabel("doFirst(Closure action)").
 		and();
 		/* @formatter:on*/
 	}

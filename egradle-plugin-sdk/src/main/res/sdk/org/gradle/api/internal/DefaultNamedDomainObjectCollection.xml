@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DefaultNamedDomainObjectCollection" version="3.0" superType="org.gradle.api.internal.DefaultDomainObjectCollection">
+    <method name="add" returnType="boolean">
+        <description> Subclasses that can guarantee that the backing store enforces name uniqueness should override this to simply call super.add(T) (avoiding an unnecessary lookup)
+
+</description>
+        <parameter type="T" name="o"/>
+    </method>
+    <method name="addRule" returnType="org.gradle.api.Rule">
+        <parameter type="org.gradle.api.Rule" name="rule"/>
+    </method>
+    <method name="addRule" returnType="org.gradle.api.Rule">
+        <parameter type="java.lang.String" name="description"/>
+        <parameter type="groovy.lang.Closure" name="ruleAction"/>
+    </method>
+    <method name="apply" returnType="void">
+        <parameter type="java.lang.String" name="taskName"/>
+    </method>
+    <method name="clear" returnType="void"/>
+    <method name="findByName" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="getAsDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; which can be used to access the domain objects as dynamic properties and methods.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object
+
+</description>
+    </method>
+    <method name="getAsMap" returnType="java.util.SortedMap"/>
+    <method name="getAt" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="getByName" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+    </method>
+    <method name="getByName" returnType="T">
+        <parameter type="java.lang.String" name="name"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention"/>
+    <method name="getDescription" returnType="java.lang.String"/>
+    <method name="getDisplayName" returnType="java.lang.String"/>
+    <method name="getExtensions" returnType="org.gradle.api.plugins.ExtensionContainer"/>
+    <method name="getNamer" returnType="org.gradle.api.Namer"/>
+    <method name="getNames" returnType="java.util.SortedSet"/>
+    <method name="getRules" returnType="java.util.List"/>
+    <method name="matching" returnType="org.gradle.api.NamedDomainObjectCollection">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.NamedDomainObjectCollection">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="toString" returnType="java.lang.String"/>
+    <method name="withType" returnType="org.gradle.api.NamedDomainObjectCollection">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <interface name="org.gradle.api.NamedDomainObjectCollection"/>
+    <interface name="org.gradle.api.internal.DynamicObjectAware"/>
+    <property name="asDynamicObject" type="org.gradle.internal.metaobject.DynamicObject">
+        <description> Returns a &lt;a href='type://DynamicObject'&gt;DynamicObject&lt;/a&gt; which can be used to access the domain objects as dynamic properties and methods.
+
+ &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The dynamic object
+
+</description>
+    </property>
+    <property name="asMap" type="java.util.SortedMap"/>
+    <property name="at" type="T"/>
+    <property name="byName" type="T"/>
+    <property name="convention" type="org.gradle.api.plugins.Convention"/>
+    <property name="description" type="java.lang.String"/>
+    <property name="displayName" type="java.lang.String"/>
+    <property name="extensions" type="org.gradle.api.plugins.ExtensionContainer"/>
+    <property name="namer" type="org.gradle.api.Namer"/>
+    <property name="names" type="java.util.SortedSet"/>
+    <property name="rules" type="java.util.List"/>
+</type>

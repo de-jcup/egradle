@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Classpath" version="3.0">
+<type language="gradle" name="org.gradle.plugins.ide.eclipse.model.Classpath" version="3.0" superType="org.gradle.plugins.ide.internal.generator.XmlPersistableConfigurationObject">
     <description> Represents the customizable elements of an eclipse classpath file. (via XML hooks everything is customizable).
 
 </description>
@@ -24,27 +24,11 @@
 </description>
         <parameter type="java.lang.Object" name="reference"/>
     </method>
-    <method name="getDefaultResourceName" returnType="java.lang.String"/>
     <method name="getEntries" returnType="java.util.List"/>
     <method name="hashCode" returnType="int"/>
-    <method name="isDependency" returnType="boolean">
-        <parameter type="org.gradle.plugins.ide.eclipse.model.ClasspathEntry" name="entry"/>
-    </method>
-    <method name="isJreContainer" returnType="boolean">
-        <parameter type="org.gradle.plugins.ide.eclipse.model.ClasspathEntry" name="entry"/>
-    </method>
-    <method name="load" returnType="void">
-        <parameter type="groovy.util.Node" name="xml"/>
-    </method>
     <method name="setEntries" returnType="void">
         <parameter type="java.util.List" name="entries"/>
     </method>
-    <method name="store" returnType="void">
-        <parameter type="groovy.util.Node" name="xml"/>
-    </method>
     <method name="toString" returnType="java.lang.String"/>
-    <property name="defaultResourceName" type="java.lang.String"/>
-    <property name="dependency" type="boolean"/>
     <property name="entries" type="java.util.List"/>
-    <property name="jreContainer" type="boolean"/>
 </type>

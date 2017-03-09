@@ -209,12 +209,6 @@
 
 </description>
     </method>
-    <method name="prepareNewBuild" returnType="org.gradle.StartParameter">
-        <parameter type="org.gradle.StartParameter" name="p"/>
-    </method>
-    <method name="prepareNewInstance" returnType="org.gradle.StartParameter">
-        <parameter type="org.gradle.StartParameter" name="p"/>
-    </method>
     <method name="setBuildFile" returnType="void">
         <description> Sets the build file to use to select the default project. Use null to disable selecting the default project using the build file.
 
@@ -267,12 +261,6 @@
 
 </description>
         <parameter type="java.lang.Iterable" name="excludedTaskNames"/>
-    </method>
-    <method name="setGradleHomeDir" returnType="void">
-        <description> Package scope for testing purposes.
-
-</description>
-        <parameter type="java.io.File" name="gradleHomeDir"/>
     </method>
     <method name="setGradleUserHomeDir" returnType="void">
         <description> Sets the directory to use as the user home directory. Set to null to use the default directory.
@@ -461,11 +449,6 @@
         <description> Returns the names of the tasks to be excluded from this build. When empty, no tasks are excluded from the build.
 
  &lt;br&gt;&lt;br&gt;&lt;b class='return'&gt;returns:&lt;/b&gt;The names of the excluded tasks. Returns an empty set if there are no such tasks.
-
-</description>
-    </property>
-    <property name="gradleHomeDir" type="java.io.File">
-        <description> Package scope for testing purposes.
 
 </description>
     </property>

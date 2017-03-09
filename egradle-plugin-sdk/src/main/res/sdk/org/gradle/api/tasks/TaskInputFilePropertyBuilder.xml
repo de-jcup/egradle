@@ -108,10 +108,10 @@
     <method name="source" returnType="org.gradle.api.tasks.TaskInputs">
         <description> {@inheritDoc}
 
- @deprecated Use &lt;a href='type://TaskInputs#source(Object...)'&gt;TaskInputs#source(Object...)&lt;/a&gt; directly instead.
+ @deprecated Use &lt;a href='type://TaskInputs#source(Object)'&gt;TaskInputs#source(Object)&lt;/a&gt; directly instead.
 
 </description>
-        <parameter type="java.lang.Object" name="paths"/>
+        <parameter type="java.lang.Object" name="path"/>
     </method>
     <method name="sourceDir" returnType="org.gradle.api.tasks.TaskInputs">
         <description> {@inheritDoc}

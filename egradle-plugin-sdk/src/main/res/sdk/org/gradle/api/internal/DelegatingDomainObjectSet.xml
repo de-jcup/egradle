@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DelegatingDomainObjectSet" version="3.0">
+    <method name="add" returnType="boolean">
+        <parameter type="T" name="o"/>
+    </method>
+    <method name="addAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="all" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="all" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="clear" returnType="void"/>
+    <method name="contains" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="containsAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="findAll" returnType="java.util.Set">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="isEmpty" returnType="boolean"/>
+    <method name="iterator" returnType="java.util.Iterator"/>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="groovy.lang.Closure" name="spec"/>
+    </method>
+    <method name="matching" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="org.gradle.api.specs.Spec" name="spec"/>
+    </method>
+    <method name="remove" returnType="boolean">
+        <parameter type="java.lang.Object" name="o"/>
+    </method>
+    <method name="removeAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="retainAll" returnType="boolean">
+        <parameter type="java.util.Collection" name="c"/>
+    </method>
+    <method name="size" returnType="int"/>
+    <method name="toArray" returnType="java.lang.Object"/>
+    <method name="toArray" returnType="T">
+        <parameter type="T" name="a"/>
+    </method>
+    <method name="whenObjectAdded" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="whenObjectAdded" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="whenObjectRemoved" returnType="void">
+        <parameter type="groovy.lang.Closure" name="action"/>
+    </method>
+    <method name="whenObjectRemoved" returnType="org.gradle.api.Action">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectSet">
+        <parameter type="java.lang.Class" name="type"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectCollection" delegationTarget="withType">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="groovy.lang.Closure" name="configureClosure"/>
+    </method>
+    <method name="withType" returnType="org.gradle.api.DomainObjectCollection">
+        <parameter type="java.lang.Class" name="type"/>
+        <parameter type="org.gradle.api.Action" name="configureAction"/>
+    </method>
+    <interface name="org.gradle.api.DomainObjectSet"/>
+    <property name="empty" type="boolean"/>
+</type>

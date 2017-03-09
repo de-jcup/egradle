@@ -65,12 +65,19 @@ public class SpotCheckIntegrationTest {
 	}
 
 	@Test
-	public void jar_has_manifest_method_itself__and_also_inherited_method_createCopyAction() {
+	public void jar_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory() {
 		/* execute */
 		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
 		/* test */
-		assertType(jarType).hasMethod("manifest", "groovy.lang.Closure").hasMethod("createCopyAction");
+		/* @formatter:off */
+		assertType(jarType).
+			hasMethod("manifest", "groovy.lang.Closure").
+			/* FIXME ATR, 09.03.2017: fails in gradle, or when all tests run in plugin-main in eclipse too, 
+			 * but not when standalone execute - must be fixed */
+			 */
+			hasMethod("getTemporaryDirFactory");
+		/* @formatter:on */
 	}
 
 	@Test

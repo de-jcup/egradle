@@ -3,8 +3,6 @@
     <description> Synchronises the contents of a destination directory with some source directories and files.
 
 </description>
-    <method name="createCopyAction" returnType="CopyAction"/>
-    <method name="createRootSpec" returnType="CopySpecInternal"/>
     <method name="getDestinationDir" returnType="java.io.File">
         <description> Returns the directory to copy files into.
 
@@ -12,7 +10,7 @@
 
 </description>
     </method>
-    <method name="getRootSpec" returnType="DestinationRootCopySpec"/>
+    <method name="getRootSpec" returnType="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/>
     <method name="setDestinationDir" returnType="void">
         <description> Sets the directory to copy files into. This is the same as calling &lt;a href='type://org.gradle.api.tasks.Sync#into(Object)'&gt;#into(Object)&lt;/a&gt; on this task.
 
@@ -28,5 +26,5 @@
 
 </description>
     </property>
-    <property name="rootSpec" type="DestinationRootCopySpec"/>
+    <property name="rootSpec" type="org.gradle.api.internal.file.copy.DestinationRootCopySpec"/>
 </type>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.GradleInternal" version="3.0">
+    <description> An internal interface for Gradle that exposed objects and concepts that are not intended for public
+ consumption.  
+
+</description>
+    <method name="getBuildListenerBroadcaster" returnType="org.gradle.BuildListener">
+        <description> Returns the broadcaster for &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; events
+
+</description>
+    </method>
+    <method name="getClassLoaderScope" returnType="org.gradle.api.internal.initialization.ClassLoaderScope"/>
+    <method name="getDefaultProject" returnType="org.gradle.api.internal.project.ProjectInternal">
+        <description> Returns the default project. This is used to resolve relative names and paths provided on the UI.
+
+</description>
+    </method>
+    <method name="getProjectEvaluationBroadcaster" returnType="org.gradle.api.ProjectEvaluationListener">
+        <description> Returns the broadcaster for &lt;a href='type://ProjectEvaluationListener'&gt;ProjectEvaluationListener&lt;/a&gt; events for this build
+
+</description>
+    </method>
+    <method name="getRootProject" returnType="org.gradle.api.internal.project.ProjectInternal">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="getServiceRegistryFactory" returnType="org.gradle.internal.service.scopes.ServiceRegistryFactory"/>
+    <method name="getServices" returnType="org.gradle.internal.service.ServiceRegistry"/>
+    <method name="getTaskGraph" returnType="org.gradle.execution.TaskGraphExecuter">
+        <description> {@inheritDoc}
+
+</description>
+    </method>
+    <method name="setDefaultProject" returnType="void">
+        <description> Called by the BuildLoader after the default project is determined.  Until the BuildLoader
+ is executed, &lt;a href='type://org.gradle.api.internal.GradleInternal#getDefaultProject()'&gt;#getDefaultProject()&lt;/a&gt; will return null.
+ &lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;defaultProject The default project for this build.
+
+</description>
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="defaultProject"/>
+    </method>
+    <method name="setRootProject" returnType="void">
+        <description> Called by the BuildLoader after the root project is determined.  Until the BuildLoader
+ is executed, &lt;a href='type://org.gradle.api.internal.GradleInternal#getRootProject()'&gt;#getRootProject()&lt;/a&gt; will return null.
+&lt;br&gt;&lt;b class='param'&gt;param:&lt;/b&gt;rootProject The root project for this build.
+
+</description>
+        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="rootProject"/>
+    </method>
+    <interface name="org.gradle.api.invocation.Gradle"/>
+    <property name="buildListenerBroadcaster" type="org.gradle.BuildListener">
+        <description> Returns the broadcaster for &lt;a href='type://BuildListener'&gt;BuildListener&lt;/a&gt; events
+
+</description>
+    </property>
+    <property name="classLoaderScope" type="org.gradle.api.internal.initialization.ClassLoaderScope"/>
+    <property name="defaultProject" type="org.gradle.api.internal.project.ProjectInternal">
+        <description> Returns the default project. This is used to resolve relative names and paths provided on the UI.
+
+</description>
+    </property>
+    <property name="projectEvaluationBroadcaster" type="org.gradle.api.ProjectEvaluationListener">
+        <description> Returns the broadcaster for &lt;a href='type://ProjectEvaluationListener'&gt;ProjectEvaluationListener&lt;/a&gt; events for this build
+
+</description>
+    </property>
+    <property name="rootProject" type="org.gradle.api.internal.project.ProjectInternal">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+    <property name="serviceRegistryFactory" type="org.gradle.internal.service.scopes.ServiceRegistryFactory"/>
+    <property name="services" type="org.gradle.internal.service.ServiceRegistry"/>
+    <property name="taskGraph" type="org.gradle.execution.TaskGraphExecuter">
+        <description> {@inheritDoc}
+
+</description>
+    </property>
+</type>

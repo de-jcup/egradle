@@ -7,23 +7,6 @@
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>
     <method name="call" returnType="java.lang.String"/>
-    <method name="configureArchiveDefaults" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-        <parameter type="org.gradle.api.plugins.BasePluginConvention" name="pluginConvention"/>
-    </method>
-    <method name="configureAssemble" returnType="void">
-        <parameter type="org.gradle.api.internal.project.ProjectInternal" name="project"/>
-    </method>
-    <method name="configureBuildConfigurationRule" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureConfigurations" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
-    <method name="configureUploadArchivesTask" returnType="void"/>
-    <method name="configureUploadRules" returnType="void">
-        <parameter type="org.gradle.api.Project" name="project"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.Project" name="project"/>
     </method>

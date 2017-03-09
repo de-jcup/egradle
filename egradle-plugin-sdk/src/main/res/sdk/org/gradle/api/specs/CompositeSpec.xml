@@ -9,14 +9,9 @@
         <parameter type="java.lang.Object" name="o"/>
     </method>
     <method name="getSpecs" returnType="java.util.List"/>
-    <method name="getSpecsArray" returnType="org.gradle.api.specs.Spec"/>
     <method name="hashCode" returnType="int"/>
     <method name="isEmpty" returnType="boolean"/>
-    <method name="uncheckedCast" returnType="T">
-        <parameter type="java.lang.Object" name="object"/>
-    </method>
     <interface name="org.gradle.api.specs.Spec"/>
     <property name="empty" type="boolean"/>
     <property name="specs" type="java.util.List"/>
-    <property name="specsArray" type="org.gradle.api.specs.Spec"/>
 </type>

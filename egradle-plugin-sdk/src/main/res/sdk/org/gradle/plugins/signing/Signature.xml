@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugins.signing.Signature" version="3.0">
+<type language="gradle" name="org.gradle.plugins.signing.Signature" version="3.0" superType="org.gradle.api.internal.artifacts.publish.AbstractPublishArtifact">
     <description> A digital signature file artifact.
 
  &lt;p&gt;A signature file is always generated from another file, which may be a &lt;a href='type://PublishArtifact'&gt;PublishArtifact&lt;/a&gt;.&lt;/p&gt;
 
 </description>
     <method name="call" returnType="java.lang.String"/>
-    <method name="defaultDate" returnType="java.util.Date"/>
-    <method name="defaultFile" returnType="java.io.File"/>
-    <method name="defaultName" returnType="java.lang.String"/>
-    <method name="defaultType" returnType="java.lang.String"/>
-    <method name="fileName" returnType="java.lang.String"/>
     <method name="generate" returnType="void">
         <description> Generates the signature file.
 
@@ -98,11 +93,6 @@
 
 </description>
     </method>
-    <method name="init" returnType="void">
-        <parameter type="java.util.concurrent.Callable" name="toSign"/>
-        <parameter type="java.util.concurrent.Callable" name="classifier"/>
-        <parameter type="org.gradle.plugins.signing.SignatureSpec" name="signatureSpec"/>
-    </method>
     <method name="setClassifier" returnType="void">
         <parameter type="java.lang.String" name="classifier"/>
     </method>
@@ -124,7 +114,6 @@
     <method name="setType" returnType="void">
         <parameter type="java.lang.String" name="type"/>
     </method>
-    <method name="signatureTypeExtension" returnType="java.lang.String"/>
     <property name="classifier" type="java.lang.String">
         <description> The classifier of the signature artifact.
 

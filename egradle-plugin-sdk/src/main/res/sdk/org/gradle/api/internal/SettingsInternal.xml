@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.SettingsInternal" version="3.0">
+    <method name="getClassLoaderScope" returnType="org.gradle.api.internal.initialization.ClassLoaderScope">
+        <description> Returns the scope into which the main settings script should define classes, and from which plugins applied to this settings object should be resolved.
+
+</description>
+    </method>
+    <method name="getDefaultProject" returnType="org.gradle.api.initialization.ProjectDescriptor"/>
+    <method name="getProjectRegistry" returnType="org.gradle.api.internal.project.ProjectRegistry"/>
+    <method name="getRootClassLoaderScope" returnType="org.gradle.api.internal.initialization.ClassLoaderScope">
+        <description> Returns the scope containing classes that should be visible to all settings and build scripts invoked by this build.
+
+</description>
+    </method>
+    <method name="getSettingsScript" returnType="org.gradle.groovy.scripts.ScriptSource"/>
+    <method name="getStartParameter" returnType="org.gradle.StartParameter"/>
+    <method name="setDefaultProject" returnType="void">
+        <parameter type="org.gradle.api.initialization.ProjectDescriptor" name="defaultProject"/>
+    </method>
+    <interface name="org.gradle.api.initialization.Settings"/>
+    <property name="classLoaderScope" type="org.gradle.api.internal.initialization.ClassLoaderScope">
+        <description> Returns the scope into which the main settings script should define classes, and from which plugins applied to this settings object should be resolved.
+
+</description>
+    </property>
+    <property name="defaultProject" type="org.gradle.api.initialization.ProjectDescriptor"/>
+    <property name="projectRegistry" type="org.gradle.api.internal.project.ProjectRegistry"/>
+    <property name="rootClassLoaderScope" type="org.gradle.api.internal.initialization.ClassLoaderScope">
+        <description> Returns the scope containing classes that should be visible to all settings and build scripts invoked by this build.
+
+</description>
+    </property>
+    <property name="settingsScript" type="org.gradle.groovy.scripts.ScriptSource"/>
+    <property name="startParameter" type="org.gradle.StartParameter"/>
+</type>

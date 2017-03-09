@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.AbstractBuildableComponentSpec" version="3.0" superType="org.gradle.platform.base.component.internal.AbstractComponentSpec">
+    <method name="builtBy" returnType="void">
+        <parameter type="java.lang.Object" name="tasks"/>
+    </method>
+    <method name="getBuildDependencies" returnType="org.gradle.api.tasks.TaskDependency"/>
+    <method name="getBuildTask" returnType="org.gradle.api.Task"/>
+    <method name="getDependencies" returnType="java.util.Set">
+        <parameter type="org.gradle.api.Task" name="other"/>
+    </method>
+    <method name="hasBuildDependencies" returnType="boolean"/>
+    <method name="setBuildTask" returnType="void">
+        <parameter type="org.gradle.api.Task" name="buildTask"/>
+    </method>
+    <interface name="org.gradle.api.BuildableComponentSpec"/>
+    <property name="buildDependencies" type="org.gradle.api.tasks.TaskDependency"/>
+    <property name="buildTask" type="org.gradle.api.Task"/>
+    <property name="dependencies" type="java.util.Set"/>
+</type>

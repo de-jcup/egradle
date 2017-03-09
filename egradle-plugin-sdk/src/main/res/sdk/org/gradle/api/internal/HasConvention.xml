@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.HasConvention" version="3.0">
+    <description> Demarcates objects that expose a convention.
+
+ Convention objects aren't going to be around forever, so this is a temporary interface.
+
+</description>
+    <method name="getConvention" returnType="org.gradle.api.plugins.Convention"/>
+    <property name="convention" type="org.gradle.api.plugins.Convention"/>
+</type>

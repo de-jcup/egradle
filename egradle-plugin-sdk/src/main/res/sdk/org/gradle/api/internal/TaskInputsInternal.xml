@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.TaskInputsInternal" version="3.0">
+    <method name="getFileProperties" returnType="java.util.SortedSet"/>
+    <interface name="org.gradle.api.tasks.TaskInputs"/>
+    <property name="fileProperties" type="java.util.SortedSet"/>
+</type>

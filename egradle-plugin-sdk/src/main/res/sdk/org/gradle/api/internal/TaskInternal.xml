@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type interface="true" language="gradle" name="org.gradle.api.internal.TaskInternal" version="3.0">
+    <method name="addValidator" returnType="void">
+        <parameter type="org.gradle.api.internal.tasks.execution.TaskValidator" name="validator"/>
+    </method>
+    <method name="appendParallelSafeAction" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="execute" returnType="void"/>
+    <method name="getActionClassLoaders" returnType="java.util.Set"/>
+    <method name="getExecuter" returnType="org.gradle.api.internal.tasks.TaskExecuter"/>
+    <method name="getImpliesSubProjects" returnType="boolean"/>
+    <method name="getInputs" returnType="org.gradle.api.internal.TaskInputsInternal"/>
+    <method name="getOnlyIf" returnType="org.gradle.api.specs.Spec"/>
+    <method name="getOutputs" returnType="org.gradle.api.internal.TaskOutputsInternal"/>
+    <method name="getStandardOutputCapture" returnType="org.gradle.logging.StandardOutputCapture"/>
+    <method name="getState" returnType="org.gradle.api.internal.tasks.TaskStateInternal"/>
+    <method name="getTaskActions" returnType="java.util.List"/>
+    <method name="getTemporaryDirFactory" returnType="org.gradle.internal.Factory">
+        <description> The returned factory is expected to return the same file each time.
+ &lt;p&gt;
+ The getTemporaryDir() method creates the directory which can be problematic. Use this to delay that creation.
+
+</description>
+    </method>
+    <method name="getValidators" returnType="java.util.List"/>
+    <method name="isHasCustomActions" returnType="boolean"/>
+    <method name="prependParallelSafeAction" returnType="void">
+        <parameter type="org.gradle.api.Action" name="action"/>
+    </method>
+    <method name="setExecuter" returnType="void">
+        <parameter type="org.gradle.api.internal.tasks.TaskExecuter" name="executer"/>
+    </method>
+    <method name="setImpliesSubProjects" returnType="void">
+        <parameter type="boolean" name="impliesSubProjects"/>
+    </method>
+    <interface name="org.gradle.api.Task"/>
+    <interface name="org.gradle.util.Configurable"/>
+    <property name="actionClassLoaders" type="java.util.Set"/>
+    <property name="executer" type="org.gradle.api.internal.tasks.TaskExecuter"/>
+    <property name="hasCustomActions" type="boolean"/>
+    <property name="impliesSubProjects" type="boolean"/>
+    <property name="inputs" type="org.gradle.api.internal.TaskInputsInternal"/>
+    <property name="onlyIf" type="org.gradle.api.specs.Spec"/>
+    <property name="outputs" type="org.gradle.api.internal.TaskOutputsInternal"/>
+    <property name="standardOutputCapture" type="org.gradle.logging.StandardOutputCapture"/>
+    <property name="state" type="org.gradle.api.internal.tasks.TaskStateInternal"/>
+    <property name="taskActions" type="java.util.List"/>
+    <property name="temporaryDirFactory" type="org.gradle.internal.Factory">
+        <description> The returned factory is expected to return the same file each time.
+ &lt;p&gt;
+ The getTemporaryDir() method creates the directory which can be problematic. Use this to delay that creation.
+
+</description>
+    </property>
+    <property name="validators" type="java.util.List"/>
+</type>

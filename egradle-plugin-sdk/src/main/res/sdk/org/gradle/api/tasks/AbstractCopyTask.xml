@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.api.tasks.AbstractCopyTask" version="3.0" documented="true">
+<type language="gradle" name="org.gradle.api.tasks.AbstractCopyTask" version="3.0" superType="org.gradle.api.internal.ConventionTask" documented="true">
     <description> &lt;a href='type://AbstractCopyTask'&gt;AbstractCopyTask&lt;/a&gt; is the base class for all copy tasks.
 
 </description>
-    <method name="copy" returnType="void"/>
-    <method name="createCopyAction" returnType="org.gradle.api.internal.file.copy.CopyAction"/>
-    <method name="createRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <method name="eachFile" returnType="org.gradle.api.tasks.AbstractCopyTask" delegationTarget="org.gradle.api.file.FileCopyDetails" documented="true">
         <description> {@inheritDoc}
 
@@ -123,14 +120,11 @@
 
 </description>
     </method>
-    <method name="getFileLookup" returnType="org.gradle.api.internal.file.FileLookup"/>
     <method name="getFileMode" returnType="java.lang.Integer">
         <description> {@inheritDoc}
 
 </description>
     </method>
-    <method name="getFileResolver" returnType="org.gradle.api.internal.file.FileResolver"/>
-    <method name="getFileSystem" returnType="org.gradle.internal.nativeplatform.filesystem.FileSystem"/>
     <method name="getFilteringCharset" returnType="java.lang.String">
         <description> {@inheritDoc}
 
@@ -146,8 +140,6 @@
 
 </description>
     </method>
-    <method name="getInstantiator" returnType="org.gradle.internal.reflect.Instantiator"/>
-    <method name="getMainSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <method name="getRootSpec" returnType="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <method name="getSource" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the source files for this task.
@@ -307,14 +299,11 @@
 
 </description>
     </property>
-    <property name="fileLookup" type="org.gradle.api.internal.file.FileLookup"/>
     <property name="fileMode" type="java.lang.Integer" documented="true">
         <description> {@inheritDoc}
 
 </description>
     </property>
-    <property name="fileResolver" type="org.gradle.api.internal.file.FileResolver"/>
-    <property name="fileSystem" type="org.gradle.internal.nativeplatform.filesystem.FileSystem"/>
     <property name="filteringCharset" type="java.lang.String">
         <description> {@inheritDoc}
 
@@ -330,8 +319,6 @@
 
 </description>
     </property>
-    <property name="instantiator" type="org.gradle.internal.reflect.Instantiator"/>
-    <property name="mainSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <property name="rootSpec" type="org.gradle.api.internal.file.copy.CopySpecInternal"/>
     <property name="source" type="org.gradle.api.file.FileCollection" documented="true">
         <description> Returns the source files for this task.

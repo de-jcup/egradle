@@ -7,10 +7,6 @@
  At this moment nearly all configuration is done via &lt;a href='type://IdeaModule'&gt;IdeaModule&lt;/a&gt;.
 
 </description>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.plugins.ide.idea.model.Module" name="xmlModule"/>
-    </method>
-    <method name="create" returnType="org.gradle.plugins.ide.idea.model.Module"/>
     <method name="getModule" returnType="org.gradle.plugins.ide.idea.model.IdeaModule">
         <description> The Idea module model containing the details required to generate the module file.
 

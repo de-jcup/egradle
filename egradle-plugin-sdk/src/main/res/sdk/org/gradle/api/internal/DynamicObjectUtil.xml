@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<type language="gradle" name="org.gradle.api.internal.DynamicObjectUtil" version="3.0">
+    <method name="asDynamicObject" returnType="org.gradle.internal.metaobject.DynamicObject">
+        <parameter type="java.lang.Object" name="object"/>
+    </method>
+</type>

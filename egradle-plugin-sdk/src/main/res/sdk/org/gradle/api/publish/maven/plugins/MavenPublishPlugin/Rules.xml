@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <type language="gradle" name="org.gradle.api.publish.maven.plugins.MavenPublishPlugin.Rules" version="3.0" superType="org.gradle.model.RuleSource">
-    <method name="createGeneratePomTask" returnType="void">
-        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
-        <parameter type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal" name="publication"/>
-        <parameter type="java.lang.String" name="publicationName"/>
-        <parameter type="java.io.File" name="buildDir"/>
-    </method>
-    <method name="createLocalInstallTask" returnType="void">
-        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
-        <parameter type="org.gradle.api.Task" name="publishLocalLifecycleTask"/>
-        <parameter type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal" name="publication"/>
-        <parameter type="java.lang.String" name="publicationName"/>
-    </method>
-    <method name="createPublishTasksForEachMavenRepo" returnType="void">
-        <parameter type="org.gradle.model.ModelMap" name="tasks"/>
-        <parameter type="org.gradle.api.publish.PublishingExtension" name="extension"/>
-        <parameter type="org.gradle.api.Task" name="publishLifecycleTask"/>
-        <parameter type="org.gradle.api.publish.maven.internal.publication.MavenPublicationInternal" name="publication"/>
-        <parameter type="java.lang.String" name="publicationName"/>
-    </method>
     <method name="execute" returnType="void">
         <parameter type="org.gradle.api.publish.maven.tasks.GenerateMavenPom" name="generatePomTask"/>
     </method>

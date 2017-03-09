@@ -3,12 +3,7 @@
     <description> Task for generating a project file.
 
 </description>
-    <method name="buildGradleCommand" returnType="java.lang.String"/>
     <method name="call" returnType="java.lang.Object"/>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.ide.visualstudio.tasks.internal.VisualStudioProjectFile" name="projectFile"/>
-    </method>
-    <method name="create" returnType="org.gradle.ide.visualstudio.tasks.internal.VisualStudioProjectFile"/>
     <method name="getGradleArgs" returnType="java.lang.String"/>
     <method name="getGradleExe" returnType="java.lang.String"/>
     <method name="getInputFile" returnType="java.io.File"/>

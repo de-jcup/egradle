@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<type language="gradle" name="org.gradle.plugin.devel.tasks.GeneratePluginDescriptors" version="3.0">
+<type language="gradle" name="org.gradle.plugin.devel.tasks.GeneratePluginDescriptors" version="3.0" superType="org.gradle.api.internal.ConventionTask">
     <description> Generates plugin descriptors from plugin declarations.
 
 </description>
-    <method name="clearOutputDirectory" returnType="void"/>
     <method name="generatePluginDescriptors" returnType="void"/>
     <method name="getDeclarations" returnType="java.util.List"/>
     <method name="getOutputDirectory" returnType="java.io.File"/>
@@ -12,10 +11,6 @@
     </method>
     <method name="setOutputDirectory" returnType="void">
         <parameter type="java.lang.Object" name="outputDirectory"/>
-    </method>
-    <method name="writePropertiesTo" returnType="void">
-        <parameter type="java.util.Properties" name="properties"/>
-        <parameter type="java.io.File" name="descriptorFile"/>
     </method>
     <property name="declarations" type="java.util.List"/>
     <property name="outputDirectory" type="java.io.File"/>

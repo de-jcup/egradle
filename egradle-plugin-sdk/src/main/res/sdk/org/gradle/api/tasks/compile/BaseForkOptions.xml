@@ -4,9 +4,6 @@
  is &lt;a href='type://true'&gt;true&lt;/a&gt;.
 
 </description>
-    <method name="excludeFromAntProperties" returnType="boolean">
-        <parameter type="java.lang.String" name="fieldName"/>
-    </method>
     <method name="getJvmArgs" returnType="java.util.List">
         <description> Returns any additional JVM arguments for the compiler process.
  Defaults to the empty list.

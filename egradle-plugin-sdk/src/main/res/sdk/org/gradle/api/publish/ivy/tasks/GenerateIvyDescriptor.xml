@@ -20,7 +20,6 @@
 
 </description>
     </method>
-    <method name="getFileResolver" returnType="org.gradle.internal.file.PathToFileResolver"/>
     <method name="setDescriptor" returnType="void">
         <parameter type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" name="descriptor"/>
     </method>
@@ -33,9 +32,6 @@
 
 </description>
         <parameter type="java.lang.Object" name="destination"/>
-    </method>
-    <method name="toIvyModuleDescriptorInternal" returnType="org.gradle.api.publish.ivy.internal.publication.IvyModuleDescriptorSpecInternal">
-        <parameter type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" name="ivyModuleDescriptorSpec"/>
     </method>
     <property name="descriptor" type="org.gradle.api.publish.ivy.IvyModuleDescriptorSpec" documented="true">
         <description> The module descriptor metadata.
@@ -51,5 +47,4 @@
 
 </description>
     </property>
-    <property name="fileResolver" type="org.gradle.internal.file.PathToFileResolver"/>
 </type>

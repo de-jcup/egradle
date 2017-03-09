@@ -3,9 +3,6 @@
     <description> Generates an IDEA project file for root project *only*. If you want to fine tune the idea configuration &lt;p&gt; At this moment nearly all configuration is done via &lt;a href='type://IdeaProject'&gt;IdeaProject&lt;/a&gt;.
 
 </description>
-    <method name="configure" returnType="void">
-        <parameter type="org.gradle.plugins.ide.idea.model.Project" name="xmlModule"/>
-    </method>
     <method name="create" returnType="org.gradle.plugins.ide.idea.model.Project"/>
     <method name="getIdeaProject" returnType="org.gradle.plugins.ide.idea.model.IdeaProject">
         <description> The Idea project model containing the details required to generate the project file.

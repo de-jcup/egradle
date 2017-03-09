@@ -35,8 +35,6 @@
  &lt;/pre&gt;
 
 </description>
-    <method name="executeExternalJavadoc" returnType="void"/>
-    <method name="generate" returnType="void"/>
     <method name="getClasspath" returnType="org.gradle.api.file.FileCollection">
         <description> Returns the classpath to use to resolve type references in the source code.
 
@@ -72,8 +70,6 @@
 </description>
     </method>
     <method name="getOptionsFile" returnType="java.io.File"/>
-    <method name="getOutputDirectory" returnType="java.io.File"/>
-    <method name="getPlatform" returnType="org.gradle.jvm.platform.JavaPlatform"/>
     <method name="getTitle" returnType="java.lang.String">
         <description> &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt;
 
@@ -205,8 +201,6 @@
 </description>
     </property>
     <property name="optionsFile" type="java.io.File"/>
-    <property name="outputDirectory" type="java.io.File"/>
-    <property name="platform" type="org.gradle.jvm.platform.JavaPlatform"/>
     <property name="title" type="java.lang.String" documented="true">
         <description> &lt;p&gt;Returns the title for the generated documentation.&lt;/p&gt;
 

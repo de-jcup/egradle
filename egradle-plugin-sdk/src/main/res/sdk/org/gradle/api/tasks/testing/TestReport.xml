@@ -3,13 +3,6 @@
     <description> Generates an HTML test report from the results of one or more &lt;a href='type://Test'&gt;Test&lt;/a&gt; tasks.
 
 </description>
-    <method name="addTo" returnType="void">
-        <parameter type="java.lang.Object" name="result"/>
-        <parameter type="org.gradle.api.internal.file.UnionFileCollection" name="dirs"/>
-    </method>
-    <method name="createAggregateProvider" returnType="org.gradle.api.internal.tasks.testing.junit.result.TestResultsProvider"/>
-    <method name="generateReport" returnType="void"/>
-    <method name="getBuildOperationProcessor" returnType="org.gradle.internal.operations.BuildOperationProcessor"/>
     <method name="getDestinationDir" returnType="java.io.File">
         <description> Returns the directory to write the HTML report to.
 
@@ -58,7 +51,6 @@
     <method name="transform" returnType="org.gradle.api.internal.tasks.testing.junit.result.TestResultsProvider">
         <parameter type="java.io.File" name="dir"/>
     </method>
-    <property name="buildOperationProcessor" type="org.gradle.internal.operations.BuildOperationProcessor"/>
     <property name="destinationDir" type="java.io.File" documented="true">
         <description> Returns the directory to write the HTML report to.
 
