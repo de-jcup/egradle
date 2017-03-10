@@ -83,7 +83,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				if (registry == null) {
 					return;
 				}
-				registry.rebuild();
+				registry.init();
 				;
 			}
 		});

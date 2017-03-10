@@ -2,7 +2,6 @@ package de.jcup.egradle.codeassist.dsl.gradle;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -10,9 +9,10 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEvent;
-import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 import de.jcup.egradle.codeassist.CodeCompletionService;
+import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEvent;
+import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEventType;
+import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
@@ -21,23 +21,20 @@ import de.jcup.egradle.codeassist.dsl.ModifiableProperty;
 import de.jcup.egradle.codeassist.dsl.ModifiableType;
 import de.jcup.egradle.codeassist.dsl.ModifiableTypeReference;
 import de.jcup.egradle.codeassist.dsl.Parameter;
-import de.jcup.egradle.codeassist.dsl.Plugin;
-import de.jcup.egradle.codeassist.dsl.PluginMerger;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.core.api.ErrorHandler;
 
-public class GradleDSLTypeProvider implements CodeCompletionService, RegistryListener, TypeProvider {
+public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,CodeCompletionService {
 
 	protected DSLFileLoader fileLoader;
 	protected Map<String, Type> nameToTypeMapping;
 	protected Set<String> unresolveableNames;
 	private ErrorHandler errorHandler;
-	private Set<Plugin> plugins;
 	private Map<String, String> apiMapping;
-	PluginMerger merger;
+
 	public GradleDSLTypeProvider(DSLFileLoader loader) {
 		if (loader == null) {
 			throw new IllegalArgumentException("loader may never be null!");
@@ -45,7 +42,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		this.fileLoader = loader;
 		nameToTypeMapping = new TreeMap<>();
 		unresolveableNames = new TreeSet<>();
-		
+
 		/* add primitives */
 		unresolveableNames.add("void");
 		unresolveableNames.add("int");
@@ -59,10 +56,12 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 	}
 
 	@Override
-	public void onRebuild(RegistryEvent event) {
+	public void onCodeCompletionEvent(RegistryEvent event) {
+		if (event.getType() != RegistryEventType.DESTROY) {
+			return;
+		}
 		nameToTypeMapping.clear();
 		unresolveableNames.clear();
-		plugins = null;
 		apiMapping = null;
 	}
 
@@ -77,16 +76,8 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		return errorHandler;
 	}
 
-	protected PluginMerger getPluginMerger() {
-		if (merger == null) {
-			merger = new PluginMerger(this, getErrorHandler());
-		}
-		return merger;
-	}
-
 	@Override
 	public Type getType(String name) {
-		ensurePluginsLoaded();
 		ensureApiMappingLoaded();
 		if (StringUtils.isBlank(name)) {
 			return null;
@@ -96,11 +87,11 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			return type;
 		}
 		/* currently no support for java types */
-		if (StringUtils.startsWith(name, "java.")){
+		if (StringUtils.startsWith(name, "java.")) {
 			return null;
 		}
 		/* no support for sun parts too */
-		if (StringUtils.startsWith(name, "sun.")){
+		if (StringUtils.startsWith(name, "sun.")) {
 			return null;
 		}
 		if (unresolveableNames.contains(name)) {
@@ -112,8 +103,19 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		String longName = apiMapping.get(name);
 
 		if (longName != null) {
-			nameToUseForLoading = longName;
+			/* long name wellknown - so load with this one and register short name as well*/
+		
+			type = getType(longName);
+			if (type==null){
+				unresolveableNames.add(name);
+				return null;
+			}
+			/* found by long name - so register short name too:*/
+			nameToTypeMapping.put(name, type);
+			return type;
 		}
+		
+		
 		try {
 			type = fileLoader.loadType(nameToUseForLoading);
 		} catch (IOException e) {
@@ -121,34 +123,37 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		}
 		if (type == null) {
 			unresolveableNames.add(name);
-			if (longName != null) {
-				unresolveableNames.add(longName);
-			}
 			return null;
 		}
 
-		/* put uninitialized type - so avoiding endless loops ... */
+		/*
+		 * Put uninitialized type - so avoiding endless loops while collecting.
+		 * This means: no inherited methods etc. But when doing this and a loop
+		 * exists, at this time not all information is available and inheritance
+		 * will not work
+		 */
 		nameToTypeMapping.put(name, type);
-
+		System.err.println(hashCode() + ":loaded:" + name + ", nameToUseForLoading=" + nameToUseForLoading + ", type="
+				+ type.getName());
 		if (!(type instanceof ModifiableType)) {
 			return type;
 		}
 		ModifiableType modifiableType = (ModifiableType) type;
-		
+
 		/* inheritance */
-		String superTypeAsString = type.getSuperTypeAsString();
-		if (type.isInterface()){
+		if (type.isInterface()) {
 			/* interface logic */
 			Set<TypeReference> interfaces = type.getInterfaces();
-			for(TypeReference ref: interfaces){
+			for (TypeReference ref : interfaces) {
 				String interfaceAsString = ref.getTypeAsString();
 				Type interfaceType = getType(interfaceAsString);
-				if (interfaceType !=null){
+				if (interfaceType != null) {
 					modifiableType.extendFromInterface(interfaceType);
 				}
 			}
-			
-		}else{
+
+		} else {
+			String superTypeAsString = type.getSuperTypeAsString();
 			/* class */
 			if (StringUtils.isNotBlank(superTypeAsString)) {
 				Type superType = getType(superTypeAsString);
@@ -157,11 +162,6 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 				}
 			}
 		}
-		
-		
-		
-		/* adopt extensions and mixins */
-		getPluginMerger().merge(type, plugins);
 
 		/* initialize type */
 		initInterfaceReferences(modifiableType);
@@ -169,17 +169,17 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		initProperties(type);
 		return type;
 	}
-	
+
 	/* resolve interface references and setup types */
 	private void initInterfaceReferences(ModifiableType modifiableType) {
-		for (TypeReference interfaceRef: modifiableType.getInterfaces()){
-			if (! (interfaceRef instanceof ModifiableTypeReference)){
+		for (TypeReference interfaceRef : modifiableType.getInterfaces()) {
+			if (!(interfaceRef instanceof ModifiableTypeReference)) {
 				continue;
 			}
 			ModifiableTypeReference modInterfaceRef = (ModifiableTypeReference) interfaceRef;
 			String interfaceTypeAsString = interfaceRef.getTypeAsString();
-			
-			if (StringUtils.isBlank(interfaceTypeAsString)){
+
+			if (StringUtils.isBlank(interfaceTypeAsString)) {
 				continue;
 			}
 			Type resolvedInterfaceRefType = getType(interfaceTypeAsString);
@@ -204,7 +204,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 			}
 
 			for (Parameter p : m.getParameters()) {
-				if (!(p instanceof ModifiableParameter)){
+				if (!(p instanceof ModifiableParameter)) {
 					continue;
 				}
 				ModifiableParameter modifiableParam = (ModifiableParameter) p;
@@ -216,7 +216,7 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 
 	private void initProperties(Type type) {
 		for (Property p : type.getDefinedProperties()) {
-			if ( !(p instanceof ModifiableProperty)){
+			if (!(p instanceof ModifiableProperty)) {
 				continue;
 			}
 			ModifiableProperty modifiableProperty = (ModifiableProperty) p;
@@ -240,18 +240,4 @@ public class GradleDSLTypeProvider implements CodeCompletionService, RegistryLis
 		}
 	}
 
-	private void ensurePluginsLoaded() {
-		if (plugins != null) {
-			return;
-		}
-		/* load plugins.xml */
-		try {
-			plugins = fileLoader.loadPlugins();
-		} catch (IOException e) {
-			if (errorHandler != null) {
-				errorHandler.handleError("Cannot load plugins.xml", e);
-			}
-			plugins = new LinkedHashSet<>();
-		}
-	}
 }

@@ -34,7 +34,7 @@ public class SpotCheckIntegrationTest {
 		Type sourceSetType = components.getGradleDslProvider().getType("org.gradle.api.tasks.SourceSet");
 
 		/* test */
-		assertType(sourceSetType).hasMethod("scala", "groovy.lang.Closure");
+		assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class SpotCheckIntegrationTest {
 	}
 
 	@Test
-	public void jar_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory() {
+	public void jar_1_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
 		/* execute */
 		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
@@ -74,8 +74,72 @@ public class SpotCheckIntegrationTest {
 		assertType(jarType).
 			hasMethod("manifest", "groovy.lang.Closure").
 			/* FIXME ATR, 09.03.2017: fails in gradle, or when all tests run in plugin-main in eclipse too, 
-			 * but not when standalone execute - must be fixed */
-			 */
+			 * but not when standalone execute - must be fixed .
+			 * 
+			 * Idea: maybe the problem comes up with ordering.
+			 * getType(type1)
+			 * getType(type2)
+			 * ->1,2
+			 * getType(type2)
+			 * getType(type1)
+			 * ->,1
+			 * ??
+			 * */
+			hasMethod("getTemporaryDirFactory");
+		/* @formatter:on */
+	}
+	
+	/**
+	 * Special test case which did produce a loop inheratance problem. An example
+	 * <pre>
+	 * 	Class A                             Class B
+	 *  
+	 *    methodA:ClassB					  methodB: ClassA
+	 *    
+	 *  -> extends Class C					-> extends Class C
+	 *  
+	 *  Class C
+	 *  
+	 *    methodC: String
+	 * <pre>
+	 * 
+	 * Now it depends which of the classes will be first initialized:
+	 * 
+	 * 1. Class A: will resolve Class B which will resolve
+	 * 
+	 */
+	@Test
+	public void jar_2_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory__failed_always_alone_and_also_when_all() {
+		/* execute */
+		Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
+		// jar type seems to be already loaded by former call */
+		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+
+		/* test */
+		/* @formatter:off */
+		assertType(copyType).
+			hasMethod("getTemporaryDirFactory");
+		assertType(jarType).
+			hasMethod("manifest", "groovy.lang.Closure").
+			hasMethod("getTemporaryDirFactory");
+		/* @formatter:on */
+	}
+	
+
+	@Test
+	public void jar_3_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
+		/* execute */
+		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+
+		Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
+
+
+		/* test */
+		/* @formatter:off */
+		assertType(jarType).
+			hasMethod("manifest", "groovy.lang.Closure").
+			hasMethod("getTemporaryDirFactory");
+		assertType(copyType).
 			hasMethod("getTemporaryDirFactory");
 		/* @formatter:on */
 	}

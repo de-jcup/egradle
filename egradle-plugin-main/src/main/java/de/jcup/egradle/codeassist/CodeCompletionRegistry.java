@@ -39,11 +39,17 @@ public class CodeCompletionRegistry {
 	}
 
 	/**
-	 * Rebuilds repository. Will inform all registry listeners about rebuild
+	 * (Re-)Initialize registry and the code completion parts inside. Will inform all registry listeners about rebuild in correct ordered types
 	 */
-	public void rebuild() {
+	public void init() {
+		/* do not change ordering!*/
+		fireRegistryEvent(RegistryEventType.DESTROY);
+		fireRegistryEvent(RegistryEventType.LOAD_PLUGINS);
+	}
+
+	private void fireRegistryEvent(RegistryEventType type) {
 		for (RegistryListener listener : listeners) {
-			listener.onRebuild(new RegistryEventImpl());
+			listener.onCodeCompletionEvent(new RegistryEventImpl(type));
 		}
 	}
 
@@ -52,18 +58,50 @@ public class CodeCompletionRegistry {
 	}
 
 	public interface RegistryListener {
-		public void onRebuild(RegistryEvent event);
+		public void onCodeCompletionEvent(RegistryEvent event);
 	}
 
 	public interface RegistryEvent {
+		public CodeCompletionRegistry getRegistry();
+		
 		public ErrorHandler getErrorHandler();
+		
+		public RegistryEventType getType();
+	}
+	
+	public enum RegistryEventType{
+		/**
+		 * Destroys existing data
+		 */
+		DESTROY,
+		
+		/**
+		 * Load plugins and apply
+		 */
+		LOAD_PLUGINS
 	}
 
 	private class RegistryEventImpl implements RegistryEvent {
 
+		private RegistryEventType type;
+		
+		private RegistryEventImpl(RegistryEventType type){
+			this.type=type;
+		}
+		
 		@Override
 		public ErrorHandler getErrorHandler() {
 			return safeGetErrorHandler();
+		}
+
+		@Override
+		public RegistryEventType getType() {
+			return type;
+		}
+
+		@Override
+		public CodeCompletionRegistry getRegistry() {
+			return CodeCompletionRegistry.this;
 		}
 
 	}
@@ -87,7 +125,7 @@ public class CodeCompletionRegistry {
 	 * @param serviceClazz
 	 * @param service
 	 */
-	public <T extends CodeCompletionService> void registerService(Class<T > serviceClazz, T service) {
+	public <T extends CodeCompletionService> void registerService(Class<T> serviceClazz, T service) {
 		Object previous = services.put(serviceClazz, service);
 		if (service instanceof RegistryListener) {
 			RegistryListener l = (RegistryListener) service;
@@ -100,7 +138,8 @@ public class CodeCompletionRegistry {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T getService(Class<T> serviceClazz) {
+	public <T extends CodeCompletionService> T getService(Class<T> serviceClazz) {
 		return (T) services.get(serviceClazz);
 	}
+
 }

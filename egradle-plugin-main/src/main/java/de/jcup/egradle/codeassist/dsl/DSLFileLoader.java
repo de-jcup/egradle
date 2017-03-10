@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-public interface DSLFileLoader {
+import de.jcup.egradle.codeassist.CodeCompletionService;
+
+public interface DSLFileLoader extends CodeCompletionService{
 
 	/**
 	 * Loads DSL type for given full type name

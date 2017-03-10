@@ -73,26 +73,6 @@ public class GradleDSLTypeProviderTest {
 	}
 	
 	@Test
-	public void type_provider_calls_plugin_merger_with_loaded_type_and_all_plugins() throws Exception{
-		/* prepare */
-		Set<Plugin> plugins = new LinkedHashSet<>();
-		XMLType type = mock(XMLType.class);
-		
-		PluginMerger mockedPluginMerger = mock(PluginMerger.class);
-		typeProviderToTest.merger=mockedPluginMerger;
-		
-		when(mockedDSLFileLoader.loadPlugins()).thenReturn(plugins);
-		when(mockedDSLFileLoader.loadApiMappings()).thenReturn(Collections.emptyMap());
-		when(mockedDSLFileLoader.loadType("typename")).thenReturn(type);
-		
-		/* execute */
-		typeProviderToTest.getType("typename");
-		
-		/* test */
-		verify(mockedPluginMerger).merge(type, plugins);
-	}
-	
-	@Test
 	public void type_provider_loads_mappings_by_apimapping_importer_only_one_time_next_type_resolving_for_other_type_does_not_load() throws Exception{
 		/* prepare */
 		Map<String, String> map = new TreeMap<>();

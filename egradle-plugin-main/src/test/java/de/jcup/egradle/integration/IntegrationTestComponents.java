@@ -20,6 +20,7 @@ import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeTemplateBuilder;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLPluginLoader;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
@@ -121,15 +122,21 @@ public class IntegrationTestComponents extends ExternalResource{
 		loader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk")); 
 		gradleDslProvider = new GradleDSLTypeProvider(loader);
 		gradleDslProvider.setErrorHandler(errorHandler);
+		
+		GradleDSLPluginLoader pluginLoader = new GradleDSLPluginLoader(loader);
+		
 		/*
 		 * install dsl type provider as service, so it must be definitely used
 		 * shared...
 		 */
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
-
+		codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, pluginLoader);
+		
 		estimator=new GradleLanguageElementEstimater(gradleDslProvider);
 		gradleDslCodeBuilder = new GradleDSLCodeTemplateBuilder();
 		gradleDSLProposalFactory = new GradleDSLProposalFactory(gradleDslCodeBuilder,estimator);
+		
+		codeCompletionRegistry.init();
 		
 	}
 	

@@ -26,8 +26,10 @@ import org.osgi.framework.BundleContext;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
+import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
+import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLPluginLoader;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.eclipse.api.ColorManager;
@@ -127,8 +129,13 @@ public class Activator extends AbstractUIPlugin {
 		loader.setDSLFolder(dslFolder);
 		
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
+		GradleDSLPluginLoader gradleDslPluginLoader = new GradleDSLPluginLoader(loader);
 		
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
+		codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, gradleDslPluginLoader);
+		
+		codeCompletionRegistry.init();
+		
 		return gradleDslProvider;
 	}
 

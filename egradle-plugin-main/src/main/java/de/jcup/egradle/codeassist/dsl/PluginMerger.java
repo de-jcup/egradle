@@ -22,8 +22,13 @@ public class PluginMerger{
 		this.errorHandler = errorHandler;
 	}
 	
-	public void merge(Type type, Set<Plugin> plugins) {
-		if (type==null){
+	/**
+	 * Merges mixin types from plugins into target type if necessary
+	 * @param potentialTargetType
+	 * @param plugins
+	 */
+	public void merge(Type potentialTargetType, Set<Plugin> plugins) {
+		if (potentialTargetType==null){
 			return;
 		}
 
@@ -35,11 +40,11 @@ public class PluginMerger{
 			return;
 		}
 		
-		if (! (type instanceof ModifiableType)){
+		if (! (potentialTargetType instanceof ModifiableType)){
 			return;
 		}
 	
-		ModifiableType modifiableType = (ModifiableType) type;
+		ModifiableType modifiableType = (ModifiableType) potentialTargetType;
 		String typeAsString = modifiableType.getName();
 		
 		for (Plugin plugin: plugins){
@@ -51,12 +56,17 @@ public class PluginMerger{
 				if (!typeAsString.equals(typeExtension.getTargetTypeAsString())){
 					continue;
 				}
-				handleMixin(plugin, modifiableType, typeExtension);
-				handleExtension(plugin, modifiableType, typeExtension);
+				/* ok, is target type so do mixin and extension */
+				merge(modifiableType, plugin, typeExtension);
 				
 			}
 		
 		}
+	}
+
+	public void merge(ModifiableType modifiableType, Plugin plugin, TypeExtension typeExtension) {
+		handleMixin(plugin, modifiableType, typeExtension);
+		handleExtension(plugin, modifiableType, typeExtension);
 	}
 
 	private String handleMixin(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {

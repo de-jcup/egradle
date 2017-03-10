@@ -5,7 +5,7 @@ package de.jcup.egradle.codeassist.dsl;
  * @author Albert Tregnaghi
  *
  */
-public interface TypeProvider{
+public interface TypeProvider {
 
 	/**
 	 * Try to get a type for given name.

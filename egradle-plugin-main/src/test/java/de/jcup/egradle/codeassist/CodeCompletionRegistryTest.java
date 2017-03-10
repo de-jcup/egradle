@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 
@@ -25,10 +26,12 @@ public class CodeCompletionRegistryTest {
 		registryToTest.addListener(mockedRegistryListener);
 
 		/* execute */
-		registryToTest.rebuild();
+		registryToTest.init();
 		
 		/* test */
-		verify(mockedRegistryListener).onRebuild(any());
+		// 2 times because of DESTROY and LOAD_PLUGINS event type
+		verify(mockedRegistryListener,times(2)).onCodeCompletionEvent(any());
+		
 		
 		
 		
@@ -42,10 +45,10 @@ public class CodeCompletionRegistryTest {
 		registryToTest.removeListener(mockedRegistryListener);
 
 		/* execute */
-		registryToTest.rebuild();
+		registryToTest.init();
 		
 		/* test */
-		verify(mockedRegistryListener,times(0)).onRebuild(any());
+		verify(mockedRegistryListener,times(0)).onCodeCompletionEvent(any());
 		
 		
 		
