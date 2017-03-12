@@ -28,15 +28,17 @@ public class MethodUtils {
 	 * @return string, never <code>null</code>
 	 */
 	public static String createSignature(Method method, boolean longTypeNames) {
-		return createSignature(method,longTypeNames, true);
+		return createSignature(method, longTypeNames, true);
 	}
+
 	/**
 	 * Create a method signature string
 	 * 
 	 * @param method
 	 *            - if <code>null</code> - result will be "null"
 	 * @param longTypeNames
-	 * @param withParameterNames - when true signature contains parameter names
+	 * @param withParameterNames
+	 *            - when true signature contains parameter names
 	 * @return string, never <code>null</code>
 	 */
 	public static String createSignature(Method method, boolean longTypeNames, boolean withParameterNames) {
@@ -69,7 +71,7 @@ public class MethodUtils {
 				typeAsString = param.getTypeAsString();
 			}
 			if (typeAsString == null) {
-				typeAsString="<UNKNOWN>";
+				typeAsString = "<UNKNOWN>";
 			}
 			if (typeAsString != null) {
 				if (!longTypeNames) {
@@ -79,11 +81,11 @@ public class MethodUtils {
 					}
 				}
 				signatureSb.append(typeAsString);
-				if (withParameterNames){
+				if (withParameterNames) {
 					signatureSb.append(" ");
 				}
 			}
-			if (withParameterNames){
+			if (withParameterNames) {
 				signatureSb.append(pname);
 			}
 			pos++;
@@ -123,13 +125,29 @@ public class MethodUtils {
 		if (itemParameters == null) {
 			itemParameters = new String[] {};
 		}
-		if (!itemIdentifier.equals(methodName)) {
-			return 0;
+		int percentage;
+		if (itemIdentifier.equals(methodName)) {
+			percentage = 50;// 50% reached because name is equal
+		} else {
+			if (!methodName.startsWith("get") && !methodName.startsWith("set")) {
+				return 0;
+			}
+			if (methodName.length() == 3) {
+				return 0;
+			}
+			String methodPartName = StringUtils.substring(methodName, 3);
+			String buildMethodPartName = StringUtils.capitalize(itemIdentifier);
+			if (!methodPartName.equals(buildMethodPartName)) {
+				return 0;
+			}
+			percentage = 49;// 49% reached because name is not equal but it
+							// seems groovy magic for get/set,
+							// 49% because if there would exists a method with
+							// absolute same name this should matter more!
 		}
 		/* -------------------------------- */
 		/* - start percentage calculation - */
 		/* -------------------------------- */
-		int percentage = 50; // 50% reached because name is equal
 
 		/* name okay, could be ... */
 
@@ -142,7 +160,7 @@ public class MethodUtils {
 
 		if (paramSize == 0) {
 			/* speed up and avoid failures on percentage calculation */
-			return 100;
+			return percentage + 50;
 		}
 
 		/* okay at least same size */
@@ -204,102 +222,103 @@ public class MethodUtils {
 	}
 
 	/**
-	 * Check if methods have same signature. Having any null values will result in <code>false</code> as result!
+	 * Check if methods have same signature. Having any null values will result
+	 * in <code>false</code> as result!
+	 * 
 	 * @param method1
 	 * @param method2
 	 * @return result
 	 */
 	public static boolean haveSameSignatures(Method method1, Method method2) {
-		if (method1==null){
+		if (method1 == null) {
 			return false;
 		}
-		if (method2==null){
+		if (method2 == null) {
 			return false;
 		}
 		String name1 = method1.getName();
 		String name2 = method2.getName();
-		
-		if (name1==null){
-			name1="";
+
+		if (name1 == null) {
+			name1 = "";
 		}
-		if (name2==null){
-			name2="";
+		if (name2 == null) {
+			name2 = "";
 		}
-		
-		if (! name1.equals(name2)){
+
+		if (!name1.equals(name2)) {
 			return false;
 		}
 		List<Parameter> parameters1 = method1.getParameters();
 		List<Parameter> parameters2 = method2.getParameters();
-		
-		if (parameters1.size()!=parameters2.size()){
+
+		if (parameters1.size() != parameters2.size()) {
 			return false;
 		}
 		Iterator<Parameter> p2iterator = parameters2.iterator();
-		for (Parameter p1: parameters1){
+		for (Parameter p1 : parameters1) {
 			Parameter p2 = p2iterator.next();
 			String p1t = p1.getTypeAsString();
 			String p2t = p2.getTypeAsString();
-			if (p1t==null){
+			if (p1t == null) {
 				return false;
 			}
-			if (p2t==null){
+			if (p2t == null) {
 				return false;
 			}
-			if (!p1t.equals(p2t)){
+			if (!p1t.equals(p2t)) {
 				return false;
 			}
 		}
 		return true;
-		
+
 	}
-	
-	public static boolean hasSignature(Method method, String dataMethodName, String[] dataParameters, boolean shrinkToSimpleTypes) {
+
+	public static boolean hasSignature(Method method, String dataMethodName, String[] dataParameters,
+			boolean shrinkToSimpleTypes) {
 		/* validate parameters */
-		if (method==null){
+		if (method == null) {
 			return false;
 		}
-		if (dataMethodName==null){
+		if (dataMethodName == null) {
 			return false;
 		}
-		if (dataParameters==null){
-			dataParameters=new String[]{};
+		if (dataParameters == null) {
+			dataParameters = new String[] {};
 		}
-		
+
 		/* check */
 		String methodNameOfType = method.getName();
-		if (!methodNameOfType.equals(dataMethodName)){
+		if (!methodNameOfType.equals(dataMethodName)) {
 			return false;
 		}
 		List<Parameter> mParams = method.getParameters();
-		if (mParams.size()!=dataParameters.length){
+		if (mParams.size() != dataParameters.length) {
 			return false;
 		}
-		int i=0;
-		for(Parameter mParam: mParams){
+		int i = 0;
+		for (Parameter mParam : mParams) {
 			String mParamType = mParam.getTypeAsString();
 			String dataParamType = dataParameters[i++];
-			if (mParamType== null ){
+			if (mParamType == null) {
 				return false;
 			}
-			if (!mParamType.equals(dataParamType)){
-				if (!shrinkToSimpleTypes){
+			if (!mParamType.equals(dataParamType)) {
+				if (!shrinkToSimpleTypes) {
 					return false;
 				}
-				/* try shorting names*/
+				/* try shorting names */
 				int index = mParamType.lastIndexOf(".");
-				if (index==-1 || index==mParamType.length()-1){
+				if (index == -1 || index == mParamType.length() - 1) {
 					return false;
 				}
-				String shortendMParamType = StringUtils.substring(mParamType, index+1);
-				if (!shortendMParamType.equals(dataParamType)){
+				String shortendMParamType = StringUtils.substring(mParamType, index + 1);
+				if (!shortendMParamType.equals(dataParamType)) {
 					return false;
 				}
 			}
 		}
 		return true;
 	}
-
-	
 
 }

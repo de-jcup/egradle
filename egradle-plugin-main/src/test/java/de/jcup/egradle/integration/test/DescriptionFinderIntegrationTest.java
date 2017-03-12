@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,6 +25,35 @@ public class DescriptionFinderIntegrationTest {
 	@Before
 	public void before() {
 		finderToTest = new DescriptionFinder();
+	}
+	
+	@Test
+	public void abstract_task_do_first_description_not_empty_but_with_description_from_interface_task() throws Exception {
+		/* prepare + check preconditions */
+		Type abstractTask = components.getGradleDslProvider().getType("org.gradle.api.internal.AbstractTask");
+		assertNotNull(abstractTask);
+		
+		Set<Method> methods = abstractTask.getMethods();
+		Method methodFrom = null;
+		for (Method method: methods){
+			if (MethodUtils.hasSignature(method, "doFirst", new String[]{"Closure"}, true)){
+				methodFrom=method;
+				break;
+			}
+		}
+		// check description would not be found by normal way:
+		assertNotNull("doFirst(Closure ..) not found?!?!?" , methodFrom);
+		String description = methodFrom.getDescription();
+		assertTrue(StringUtils.isBlank(description));
+		
+		/* execute */
+		String foundDescription = finderToTest.findDescription(methodFrom);
+		
+		/* test */
+		assertNotNull(foundDescription);
+		if (foundDescription.indexOf("to the beginning of this task's action")==-1){
+			fail("Did not found expected description but:\n"+foundDescription);
+		}
 	}
 	
 	@Test

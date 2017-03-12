@@ -64,7 +64,7 @@ public class DescriptionFinderTest {
 		/* ---- */
 		/* test */
 		/* ---- */
-		assertEquals("Description from interface", found);
+		assertTrue(found.contains("Description from interface"));
 	}
 	
 	@Test

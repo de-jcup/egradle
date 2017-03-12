@@ -37,6 +37,8 @@ public class SpotCheckIntegrationTest {
 		assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
 	}
 
+	/* FIXME ATR, 10.03.2017: fix link output :This is equivalent to calling &lt;a href='type://org.gradle.api.Project#configure(Object,'&gt;groovy.lang.Closure)&lt;/a&gt; for each of th */
+	
 	@Test
 	public void sourceset_shortname_has_mixin_parts_from_scala() {
 		/* execute */

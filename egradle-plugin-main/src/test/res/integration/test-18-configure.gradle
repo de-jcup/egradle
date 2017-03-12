@@ -1,0 +1,31 @@
+configure(projectType.javaProjects) {
+    apply plugin: 'java'
+    
+	/* Setup UTF-8 for compile AND test compilation*/
+	[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+
+	/* Break the build if there are compiler warnings */
+	tasks.withType(JavaCompile) {
+	   if (!project.hasProperty("ALLOW_COMPILE_WARNINGS") || ! Boolean.parseBoolean(ALLOW_COMPILE_WARNINGS)) {
+	      options.compilerArgs << "-Xlint:all" << "-Xlint:-processing" << "-Xlint:-serial" << "-Xlint:unchecked" << "-Werror"
+	   }
+	}
+	/* inject */
+	sourceCompatibility = JavaVersion.VERSION_1_6
+
+	clean {
+		delete fileTree(dir: project.projectDir.absolutePath, include: "*.log")
+	}
+
+    // gradle stops the build if a test fails by default
+    test { 
+        ignoreFailures = true 
+    }
+
+    dependencies {
+		testCompile library.mockito_all
+		testCompile library.junit
+		testCompile library.hamcrest_core
+		testCompile library.hamcrest_library
+    }
+}

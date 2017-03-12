@@ -57,6 +57,15 @@ public class DescriptionFinder {
 		}
 		return null;
 	}
+	
+	private String createInheritedDescriptionWithLink(Type refType, String descriptionFromInterface) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<i>Inherited description from:");
+		HTMLLinkUtil.appendLinkToType(sb, false, refType, null);
+		sb.append(" :</i><br>");
+		sb.append(descriptionFromInterface);
+		return sb.toString();
+	}
 
 	private abstract class RefTypeVisitor {
 		/**
@@ -84,7 +93,8 @@ public class DescriptionFinder {
 					String descriptionFromInterface = interfaceMethod.getDescription();
 					if (StringUtils.isNotBlank(descriptionFromInterface)) {
 						if (descriptionFromInterface.indexOf("@inheritDoc") == -1) {
-							return descriptionFromInterface;
+							/* enrich with interface link */
+							return createInheritedDescriptionWithLink(refType, descriptionFromInterface);
 						}
 					}
 					break;// break this type - means description was blank for
@@ -98,6 +108,8 @@ public class DescriptionFinder {
 			}
 			return null;
 		}
+
+		
 
 	}
 
@@ -115,7 +127,7 @@ public class DescriptionFinder {
 					String descriptionFromInterface = interfaceProperty.getDescription();
 					if (StringUtils.isNotBlank(descriptionFromInterface)) {
 						if (descriptionFromInterface.indexOf("@inheritDoc") == -1) {
-							return descriptionFromInterface;
+							return createInheritedDescriptionWithLink(refType, descriptionFromInterface);
 						}
 					}
 					break;// break this type - means description was blank for

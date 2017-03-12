@@ -1,5 +1,7 @@
 package de.jcup.egradle.codeassist.dsl;
 
+import static de.jcup.egradle.codeassist.dsl.HTMLLinkUtil.*;
+
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -204,34 +206,7 @@ public class HTMLDescriptionBuilder {
 		}
 	}
 
-	/**
-	 * Appends link to type
-	 * 
-	 * @param descSb
-	 * @param withEndingDot
-	 *            - when true at the end of string a dot will be placed - e.g.
-	 *            "java.util.String."
-	 * @param type
-	 * @param linkPostfix
-	 *            - can be null
-	 */
-	private void appendLinkToType(StringBuilder descSb, boolean withEndingDot, Type type, String linkPostfix) {
-		if (type == null) {
-			descSb.append("void");
-			return;
-		}
-		descSb.append("<a href='type://");
-		descSb.append(type.getName());
-		if (linkPostfix != null) {
-			descSb.append(linkPostfix);
-		}
-		descSb.append("'>");
-		descSb.append(type.getName());
-		descSb.append("</a>");
-		if (withEndingDot) {
-			descSb.append('.');
-		}
-	}
+	
 
 	private void appendMethodDescription(LanguageElement element, StringBuilder descSb, Method method) {
 		descSb.append("<div class='fullName'>");
@@ -287,16 +262,10 @@ public class HTMLDescriptionBuilder {
 		if (element == null) {
 			return;
 		}
-		String description = element.getDescription();
-		if (StringUtils.isEmpty(description)) {
+		String description = descriptionFinder.findDescription(element);
+		if (StringUtils.isBlank(description)) {
 			descSb.append("No description available.");
 			return;
-		}
-		if (description.indexOf("@inheritDoc") != -1) {
-			String inheritedDescription = descriptionFinder.findDescription(element);
-			if (StringUtils.isNotBlank(inheritedDescription)) {
-				description = inheritedDescription;
-			}
 		}
 		descSb.append(description);
 	}

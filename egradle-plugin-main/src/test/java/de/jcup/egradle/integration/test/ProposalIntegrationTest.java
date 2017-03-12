@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -37,6 +38,36 @@ public class ProposalIntegrationTest {
 		and();
 		/* @formatter:on*/
 	}
+	
+	@Test
+	@Ignore // currently ignored, because paremter object type dependent and currently not implemented
+	/**
+	 * Test 18 has a "configure(projectType.javaProjects) {" inside. So this will be currently not provided.
+	 * Maybe as an first approach an ugly approach ala "if (parameter name contains project) could do it but of
+	 * course a comple type check mechansim would better but time intensive to develop
+	 */
+	public void buildfile__18_configure_has_dependencies_proposal() {
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-18-configure.gradle");
+		int offset = calculateIndexBefore(text, "/* inject */");
+
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("apply(Closure closure)").
+		and().
+			containsProposalWithLabel("dependencies(Closure configureClosure)").
+				whichHasDescription().
+				hasTemplate("dependencies {\n    $cursor\n}").
+		and();
+		
+		/* @formatter:on*/
+	}
+	
 	
 	@Test
 	public void buildfile__13_buildscript__before_myCopyTask_comment__proposes_doFirst_with_closure() {

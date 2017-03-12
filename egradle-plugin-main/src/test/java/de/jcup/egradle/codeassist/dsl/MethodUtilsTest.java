@@ -388,6 +388,50 @@ public class MethodUtilsTest {
 		/* execute + test */
 		assertNoPercent(MethodUtils.calculateMethodIdentificationPercentage(method,"otherMethod"));
 	}
+	
+	@Test
+	public void isMethodIdentified_method_getSomething__no_param_is_found_for_something__no_parameters_but_percentage_is_only_99_percent() {
+		/* prepare */
+		when(method.getName()).thenReturn("getSomething");
+
+		/* execute + test */
+		assertPercent(99,MethodUtils.calculateMethodIdentificationPercentage(method,"something"));
+	}
+	
+	@Test
+	public void isMethodIdentified_method_getSomething__no_param_is_NOT_found_for_something__with_parameters() {
+		/* prepare */
+		when(method.getName()).thenReturn("getSomething");
+
+		/* execute + test */
+		assertPercent(49, MethodUtils.calculateMethodIdentificationPercentage(method,"something","String"));
+	}
+	
+	@Test
+	public void isMethodIdentified_method_setSomething__String_is_found_for_something__String_parameters_but_percentage_is_only_99_percent() {
+		/* prepare */
+		when(method.getName()).thenReturn("setSomething");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+		
+		/* execute + test */
+		assertPercent(99,MethodUtils.calculateMethodIdentificationPercentage(method,"something","String"));
+	}
+	
+	@Test
+	public void isMethodIdentified_method_setSomething__String_is_NOT_found_for_something__without_parameters__means_only_49_percent() {
+		/* prepare */
+		when(method.getName()).thenReturn("setSomething");
+		Parameter param1 = mock(Parameter.class);
+		when(param1.getTypeAsString()).thenReturn("String");
+		when(param1.getName()).thenReturn("name");
+		parameters.add(param1);
+
+		/* execute + test */
+		assertPercent(49, MethodUtils.calculateMethodIdentificationPercentage(method,"something"));
+	}
 
 	@Test
 	public void isMethodIdentified_method_myMethod_with_param_String_name_for_same_name_and_paramType_but_param_name_other() {

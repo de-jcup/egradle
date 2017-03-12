@@ -36,10 +36,11 @@ public class HoverIntegrationTest {
 	
 	@Test
 	@Ignore
-	/* FIXME ATR, 01.03.2017: tasks must be generated ( + override in sdk bulder) + be available in model. so this test can be made active */
-	public void buildfile_16__reports_delegates_toCheckStyleReports(){
+	/* FIXME ATR, 12.03.2017: strange: CheckStyleReports, to which is delegated has a html method but this method is a simple getter without Parameter.
+	 * So how does the example - visible in javadoc /egradle sdk works (see test-15 file) ? */
+	public void buildfile_15__reports_delegates_toCheckStyleReports(){
 		/* prepare */
-		String text = loadTextFromIntegrationTestFile("test-16-checkstyle-tasks.checkstyle.gradle");
+		String text = loadTextFromIntegrationTestFile("test-15-checkstyle-task_myCheckStyleTask_type_CheckStyle.gradle");
 		int offset = text.indexOf("html");
 
 		/* execute */
