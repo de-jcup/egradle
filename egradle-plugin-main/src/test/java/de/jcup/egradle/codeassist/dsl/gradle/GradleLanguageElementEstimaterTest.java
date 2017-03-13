@@ -14,7 +14,8 @@ import org.junit.Test;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 public class GradleLanguageElementEstimaterTest {
 

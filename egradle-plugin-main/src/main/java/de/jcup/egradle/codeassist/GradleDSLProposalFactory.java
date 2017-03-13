@@ -15,9 +15,9 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Reason;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 

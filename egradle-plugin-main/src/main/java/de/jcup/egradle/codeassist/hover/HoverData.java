@@ -1,7 +1,7 @@
 package de.jcup.egradle.codeassist.hover;
 
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.codeassist.dsl.gradle.LanguageElementMetaData;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater.EstimationResult;
 import de.jcup.egradle.core.model.Item;
 
 public class HoverData implements LanguageElementMetaData {

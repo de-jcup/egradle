@@ -10,7 +10,7 @@ import de.jcup.egradle.codeassist.AbstractProposalImpl;
 import de.jcup.egradle.codeassist.GradleDSLProposalFactory.ModelProposal;
 import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater.EstimationResult;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater.EstimationResult;
 
 public class ProposalsAssert {
 

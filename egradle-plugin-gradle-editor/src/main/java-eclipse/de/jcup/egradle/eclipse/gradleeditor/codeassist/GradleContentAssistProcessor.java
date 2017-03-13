@@ -38,7 +38,7 @@ import de.jcup.egradle.codeassist.dsl.LanguageElement;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLCodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater;
 import de.jcup.egradle.core.ModelProvider;
 import de.jcup.egradle.core.TextProvider;
 import de.jcup.egradle.core.model.Item;

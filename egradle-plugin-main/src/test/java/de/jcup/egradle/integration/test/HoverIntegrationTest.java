@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
-import de.jcup.egradle.codeassist.dsl.gradle.GradleLanguageElementEstimater;
+import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.hover.HoverData;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.model.Model;
