@@ -321,4 +321,43 @@ public class MethodUtils {
 		return true;
 	}
 
+	public static boolean isGetterOrSetter(Method method) {
+		if (isGetter(method)){
+			return true;
+		}
+		if (isSetter(method)){
+			return true;
+		}
+		
+		return false;
+	}
+
+	private static boolean isSetter(Method method) {
+		int params = method.getParameters().size();
+		if (params!=1){
+			return false;
+		}
+		String methodName = method.getName();
+		if (methodName.startsWith("set")) {
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isGetter(Method method) {
+		int params = method.getParameters().size();
+		if (params!=0){
+			return false;
+		}
+		String methodName = method.getName();
+		
+		if (methodName.startsWith("is")) {
+			return true;
+		}
+		if (methodName.startsWith("get")) {
+			return true;
+		}
+		return false;
+	}
+
 }

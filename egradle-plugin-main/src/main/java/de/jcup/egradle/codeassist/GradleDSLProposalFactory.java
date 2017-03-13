@@ -137,12 +137,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 				continue;
 			}
 			if (isIgnoreGetterOrSetter()){
-				if (method.getName().startsWith("get")) {
+				if (MethodUtils.isGetterOrSetter(method)){
 					continue;
 				}
-				if (method.getName().startsWith("set")) {
-					continue;
-				}
+				
 			}
 			/* TODO ATR, 09.02.2017: what about marking properties as read or write only?
 			 * could be done here, or by xml generation so in xml as attribute available...

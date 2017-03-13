@@ -22,6 +22,63 @@ public class MethodUtilsTest {
 	}
 	
 	@Test
+	public void is_getter_or_setter__getName__no_parameters_returns_true(){
+		/* prepare */
+		when(method.getName()).thenReturn("getName");
+		
+		/* execute + test */
+		assertTrue(MethodUtils.isGetterOrSetter(method));
+	}
+	
+	@Test
+	public void is_getter_or_setter__getName__with_parameters_returns_false(){
+		/* prepare */
+		when(method.getName()).thenReturn("getName");
+		parameters.add(mock(Parameter.class));
+		
+		/* execute + test */
+		assertFalse(MethodUtils.isGetterOrSetter(method));
+	}
+	
+	@Test
+	public void is_getter_or_setter__isCool_no_parameter_returns_true(){
+		/* prepare */
+		when(method.getName()).thenReturn("isCool");
+		
+		/* execute + test */
+		assertTrue(MethodUtils.isGetterOrSetter(method));
+	}
+	
+	@Test
+	public void is_getter_or_setter__setName__no_parameter_returns_false(){
+		/* prepare */
+		when(method.getName()).thenReturn("setName");
+		
+		/* execute + test */
+		assertFalse(MethodUtils.isGetterOrSetter(method));
+	}
+	
+	@Test
+	public void is_getter_or_setter__setName__one_parameter_returns_true(){
+		/* prepare */
+		when(method.getName()).thenReturn("setName");
+		parameters.add(mock(Parameter.class));
+		
+		/* execute + test */
+		assertTrue(MethodUtils.isGetterOrSetter(method));
+	}
+	
+	@Test
+	public void is_getter_or_setter__setName__two_parameter_returns_true(){
+		/* prepare */
+		when(method.getName()).thenReturn("setName");
+		
+		/* execute + test */
+		assertFalse(MethodUtils.isGetterOrSetter(method));
+	}
+
+	
+	@Test
 	public void has_signature_method_with_methodName_no_params__methodName_null__true__with_shortening(){
 		/* prepare */
 		when(method.getName()).thenReturn("methodName");

@@ -209,12 +209,17 @@ public class HTMLDescriptionBuilder {
 	
 
 	private void appendMethodDescription(LanguageElement element, StringBuilder descSb, Method method) {
+		descSb.append("<div class='tooltipHeadline'> Method '").append(method.getName()).append("'</div>");
 		descSb.append("<div class='fullName'>");
 		appendLinkToParentType(element, descSb, true);
 		String signature = MethodUtils.createSignature(method);
 		descSb.append(signature);
 		descSb.append(':');
-		appendLinkToType(descSb, false, method.getReturnType(), null);
+		if (method.getReturnType()!=null){
+			appendLinkToType(descSb, false, method.getReturnType(), null);
+		}else{
+			descSb.append(method.getReturnTypeAsString());
+		}
 		descSb.append("</div>");
 		appendAppendixLink(descSb);
 		if (method.getDelegationTarget() != null) {
@@ -226,11 +231,16 @@ public class HTMLDescriptionBuilder {
 	}
 
 	private void appendPropertyDescription(LanguageElement element, StringBuilder descSb, Property property) {
+		descSb.append("<div class='tooltipHeadline'> Property '").append(property.getName()).append("'</div>");
 		descSb.append("<div class='fullName'>");
 		appendLinkToParentType(element, descSb, true);
 		descSb.append(property.getName());
 		descSb.append(':');
-		appendLinkToType(descSb, false, property.getType(), null);
+		if (property.getType()!=null){
+			appendLinkToType(descSb, false, property.getType(), null);
+		}else {
+			descSb.append(property.getTypeAsString());
+		}
 		descSb.append("</div>");
 		appendAppendixLink(descSb);
 		appendDescriptionPart(property, descSb);
@@ -243,12 +253,14 @@ public class HTMLDescriptionBuilder {
 		if (description == null) {
 			return;
 		}
+		description.append("<div class='tooltipHeadline'>Type '").append(type.getShortName()).append("'");
+		
 		if (data != null) {
 			if (data.isTypeFromExtensionConfigurationPoint()) {
-				description.append("<div class='fullName'>Extension:" + data.getExtensionName());
-				description.append("</div>");
+				description.append(" by extension '").append(data.getExtensionName()).append("'");
 			}
 		}
+		description.append("</div>");
 		description.append("<div class='fullName'>");
 		description.append(type.getName());
 		description.append("</div>");
@@ -299,7 +311,8 @@ public class HTMLDescriptionBuilder {
 		style.append("tr {background-color: black;color: #999999;border:solid #999999 2px; }\n");
 		style.append("a {color: #229922;}\n");
 		style.append(
-				".fullName{font-weight: bold;white-space: nowrap;font-family:'Courier New', Courier, monospace}\n");
+				".fullName{font-weight: bold;font-size:small;white-space: nowrap;font-family:'Courier New', Courier, monospace}\n");
+		style.append(".tooltipHeadline {font-weight: bold;}\n");
 		style.append(".param {color: #229922;}\n");
 		style.append(".return {color: #229922;}\n");
 		style.append(".value {color: #999999;}\n");
