@@ -158,7 +158,7 @@
 
 </description>
     </method>
-    <method name="doFirst" returnType="org.gradle.api.Task" documented="true">
+    <method name="doFirst" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task" documented="true">
         <description> &lt;p&gt;Adds the given closure to the beginning of this task's action list. The closure is passed this task as a
  parameter when executed.&lt;/p&gt;
 
@@ -177,7 +177,7 @@
 </description>
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="doLast" returnType="org.gradle.api.Task" documented="true">
+    <method name="doLast" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task" documented="true">
         <description> &lt;p&gt;Adds the given closure to the end of this task's action list.  The closure is passed this task as a parameter
  when executed.&lt;/p&gt;
 

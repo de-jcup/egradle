@@ -368,7 +368,6 @@ public class HoverIntegrationTest {
 		String text = loadTextFromIntegrationTestFile("test-10-jar-task-configuration-in-root.gradle");
 		int offset = text.indexOf("manifest");
 
-		/* FIXME ATR, 16.02.2017: test fails, because delegation target not available */
 		/* execute */
 		HoverData hoverData = calculateHoverData(text, offset+2);
 
@@ -376,8 +375,6 @@ public class HoverIntegrationTest {
 		assertThat(hoverData).isForElementType("org.gradle.api.java.archives.Manifest");
 		
 	}
-	/* FIXME ATR, 16.02.2017: override all which is annotated by @DelegatesTo(value=...trategy=1) 
-	 */
 	
 	@Test
 	public void buildfile_10_with_dependencies_in_root__when_cursor_is_at_eachFile_offset__has_correct_hoverdata() {

@@ -35,7 +35,8 @@ public interface Type extends LanguageElement, GradleDocumentationInfo, Comparab
 	public Set<Method> getDefinedMethods();
 
 	/**
-	 * Return interfaces as type reference set, never <code>null</code>
+	 * Return interfaces as type reference set, never <code>null</code>.
+	 * Only direct inherited interface types will be returned. Not full hierarchy!
 	 * @return set, never <code>null</code>
 	 */
 	public Set<TypeReference> getInterfaces();
@@ -77,6 +78,8 @@ public interface Type extends LanguageElement, GradleDocumentationInfo, Comparab
 	
 	public Type getSuperType();
 
+	public boolean isImplementingInterface(String type);
+	
 	public boolean isDescendantOf(String type);
 	
 	public boolean isInterface();

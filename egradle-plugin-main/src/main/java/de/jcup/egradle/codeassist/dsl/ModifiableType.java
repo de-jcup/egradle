@@ -16,19 +16,15 @@ public interface ModifiableType extends Type {
 	 * @param reason
 	 */
 	public void addExtension(String extensionId, Type extensionType, Reason reason);
-
+	
 	/**
-	 * Inherit methdods and properties from super type
+	 * Inherit methods and properties from super type. If this type is an interface it can only extend
+	 * interface types, otherwise it can only extend from (one) super type. The method  
+	 * does not throw any error when trying to do a wrong extension but does nothing
 	 * 
 	 * @param superType
 	 */
-	public void extendFromSuperClass(Type superType);
-	
-	/**
-	 * Inherit methods and properties from other interface type, can be called multiple times
-	 * @param interfaceType
-	 */
-	public void extendFromInterface(Type interfaceType);
+	public void extendFrom(Type superType);
 	
 	/**
 	 * Set <code>true</code> when this type is part of official gradle DSL documentation

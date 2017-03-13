@@ -72,7 +72,7 @@ public class HTMLDescriptionBuilder {
 		appendAppendixProperties(type, description);
 	}
 
-	private void appendAppendixLink(StringBuilder description) {
+	private void appendAppendixLinkWithNewLine(StringBuilder description) {
 		description.append("<a href='#appendix'>Go to appendix</a><br>");
 	}
 
@@ -221,12 +221,12 @@ public class HTMLDescriptionBuilder {
 			descSb.append(method.getReturnTypeAsString());
 		}
 		descSb.append("</div>");
-		appendAppendixLink(descSb);
 		if (method.getDelegationTarget() != null) {
-			descSb.append("<br>Delegates to:");
+			descSb.append("Delegates to:");
 			appendLinkToType(descSb, false, method.getDelegationTarget(), null);
-			descSb.append("<br");
+			descSb.append("<br>");
 		}
+		appendAppendixLinkWithNewLine(descSb);
 		appendDescriptionPart(method, descSb);
 	}
 
@@ -242,7 +242,7 @@ public class HTMLDescriptionBuilder {
 			descSb.append(property.getTypeAsString());
 		}
 		descSb.append("</div>");
-		appendAppendixLink(descSb);
+		appendAppendixLinkWithNewLine(descSb);
 		appendDescriptionPart(property, descSb);
 	}
 
@@ -264,7 +264,7 @@ public class HTMLDescriptionBuilder {
 		description.append("<div class='fullName'>");
 		description.append(type.getName());
 		description.append("</div>");
-		appendAppendixLink(description);
+		appendAppendixLinkWithNewLine(description);
 
 		appendDescriptionPart(type, description);
 

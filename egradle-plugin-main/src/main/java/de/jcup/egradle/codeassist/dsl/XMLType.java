@@ -1,9 +1,7 @@
 package de.jcup.egradle.codeassist.dsl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -23,7 +21,7 @@ public class XMLType implements ModifiableType {
 
 	@XmlAttribute(name = "interface")
 	Boolean isInterface;
-	
+
 	@XmlElement(name = "description")
 	private String description;
 
@@ -38,10 +36,10 @@ public class XMLType implements ModifiableType {
 
 	@XmlElement(name = "method", type = XMLMethod.class)
 	Set<Method> methods = new TreeSet<>();
-	
+
 	@XmlElement(name = "interface", type = XMLTypeReference.class)
 	Set<TypeReference> interfaces = new TreeSet<>();
-	
+
 	@XmlAttribute(name = "name")
 	String name;
 
@@ -55,15 +53,15 @@ public class XMLType implements ModifiableType {
 	private String superTypeAsString;
 
 	private Type superType;
-	
-	private List<Type> superInterfaceTypes;
+
+	private Set<Type> superInterfaceTypes;
 
 	private Set<Method> mergedMethods;
 	private Set<Property> mergedProperties;
 
 	private Set<TypeReference> mergedInterfaces;
 
-	@XmlAttribute(name = "documented", required=false)
+	@XmlAttribute(name = "documented", required = false)
 	private Boolean partOfGradleDSLDocumentation = null;
 
 	@Override
@@ -84,10 +82,10 @@ public class XMLType implements ModifiableType {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@Override
 	public void setDescription(String description) {
-		this.description=description;
+		this.description = description;
 	}
 
 	public Map<String, Type> getExtensions() {
@@ -100,7 +98,7 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Method> getMethods() {
-		if (superType==null  && superInterfaceTypes==null){
+		if (superType == null && superInterfaceTypes == null) {
 			return methods;
 		}
 		return mergedMethods;
@@ -113,7 +111,7 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Property> getProperties() {
-		if (superType==null){
+		if (superType == null) {
 			return properties;
 		}
 		return mergedProperties;
@@ -139,7 +137,7 @@ public class XMLType implements ModifiableType {
 	}
 
 	public String getVersion() {
-		if (version==null || version.length()==0){
+		if (version == null || version.length() == 0) {
 			return "current";
 		}
 		return version;
@@ -167,74 +165,125 @@ public class XMLType implements ModifiableType {
 	public String getSuperTypeAsString() {
 		return superTypeAsString;
 	}
-	
+
 	public Type getSuperType() {
 		return superType;
 	}
-	
-	public void extendFromInterface(Type interfaceType){
-		if (interfaceType==null){
+
+	@Override
+	public void extendFrom(Type superType) {
+		if (superType == null) {
 			return;
 		}
-		if (superInterfaceTypes==null){
-			superInterfaceTypes=new ArrayList<>();
+		if (superType.isInterface()) {
+			extendFromInterface(superType);
+		} else {
+			extendFromSuperClass(superType);
+		}
+
+	}
+
+	private void extendFromInterface(Type interfaceType) {
+		if (interfaceType == null) {
+			return;
+		}
+		if (!interfaceType.isInterface()) {
+			return;
+		}
+		if (superInterfaceTypes == null) {
+			superInterfaceTypes = new LinkedHashSet<>();
 		}
 		superInterfaceTypes.add(interfaceType);
 		mergeMethodsAndProperties(interfaceType);
+
+		addSuperTypeAsInterfaceIfNecessary(interfaceType);
+
 	}
-	
-	@Override
-	public void extendFromSuperClass(Type superType) {
-		
-		this.superType=superType;
-		if (superType==null){
+
+	private void extendFromSuperClass(Type superType) {
+		if (superType == null) {
 			return;
 		}
-		
-		this.mergedInterfaces=new TreeSet<>(interfaces);
-		Set<TypeReference> superInterfaceReferrences = superType.getInterfaces();
-		this.mergedInterfaces.addAll(superInterfaceReferrences);
-		if (superType.isInterface()){
-			XMLTypeReference reference = new XMLTypeReference();
-			reference.setType(superType);
-			this.mergedInterfaces.add(reference);
+		if (superType.isInterface()) {
+			return;
 		}
+		this.superType = superType;
+
+		mergedInterfaces = new TreeSet<>(interfaces);
+		Set<TypeReference> superInterfaceReferrences = superType.getInterfaces();
+
+		mergedInterfaces.addAll(superInterfaceReferrences);
 		mergeMethodsAndProperties(superType);
 	}
 
+	private void addSuperTypeAsInterfaceIfNecessary(Type superType) {
+		if (superType.isInterface()) {
+			XMLTypeReference reference = new XMLTypeReference();
+			reference.setType(superType);
+			if (mergedInterfaces == null) {
+				mergedInterfaces = new TreeSet<>();
+			}
+			mergedInterfaces.add(reference);
+		}
+	}
+
 	private void mergeMethodsAndProperties(Type superType) {
-		if (mergedMethods==null){
-			this.mergedMethods=new TreeSet<>(methods);
+		if (mergedMethods == null) {
+			this.mergedMethods = new TreeSet<>(methods);
 		}
 		Set<Method> superMethods = superType.getMethods();
 		this.mergedMethods.addAll(superMethods);
-		/* register super methods and reason*/
+		/* register super methods and reason */
 		ReasonImpl superTypeReason = new ReasonImpl();
 		superTypeReason.setSuperType(superType);
-		for (Method sm : superMethods){
-			elementReasons.put(sm,superTypeReason);
+		for (Method sm : superMethods) {
+			elementReasons.put(sm, superTypeReason);
 		}
-		
+
 		Set<Property> superProperties = superType.getProperties();
-		if (mergedProperties==null){
-			this.mergedProperties=new TreeSet<>(properties);
+		if (mergedProperties == null) {
+			this.mergedProperties = new TreeSet<>(properties);
 		}
 		this.mergedProperties.addAll(superProperties);
-		/* register super properties and reason*/
-		for (Property sm : superProperties){
-			elementReasons.put(sm,superTypeReason);
+		/* register super properties and reason */
+		for (Property sm : superProperties) {
+			elementReasons.put(sm, superTypeReason);
 		}
+	}
+
+	@Override
+	public boolean isImplementingInterface(String type) {
+		if (type == null) {
+			return false;
+		}
+		Set<TypeReference> interfacesToInspect = getInterfaces();
+		for (TypeReference ref : interfacesToInspect) {
+			Type interfaceType = ref.getType();
+			if (interfaceType == null) {
+				/* should not happen, but... */
+				continue;
+			}
+			String name = interfaceType.getName();
+			if (type.equals(name)) {
+				return true;
+			}
+			boolean subtypeDoesImplement = interfaceType.isImplementingInterface(type);
+			if (subtypeDoesImplement){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isDescendantOf(String type) {
-		if (type==null){
+		if (type == null) {
 			return false;
 		}
-		if (superType==null){
+		if (superType == null) {
 			return false;
 		}
-		if (type.equals(superType.getName())){
+		if (type.equals(superType.getName())) {
 			return true;
 		}
 		return superType.isDescendantOf(type);
@@ -253,32 +302,32 @@ public class XMLType implements ModifiableType {
 	@Override
 	public boolean isInterface() {
 		/* jaxb hack to suppress xyz="false" attributes */
-		if (isInterface==null){
+		if (isInterface == null) {
 			return false;
 		}
 		return isInterface.booleanValue();
 	}
-	
+
 	public Set<TypeReference> getInterfaces() {
-		if (superType==null){
-			return interfaces;
+		if (mergedInterfaces != null) {
+			return mergedInterfaces;
 		}
-		return mergedInterfaces;
+		return interfaces;
 	}
 
 	@Override
 	public int compareTo(Type o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
 		String otherName = o.getName();
-		if (otherName==null){
-			if (this.name==null){
+		if (otherName == null) {
+			if (this.name == null) {
 				return 0;
 			}
 			return 1;
 		}
-		if (this.name==null){
+		if (this.name == null) {
 			return 1;
 		}
 		int compare = this.name.compareTo(otherName);
@@ -289,7 +338,7 @@ public class XMLType implements ModifiableType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((isInterface!=null && isInterface.booleanValue()) ? 1231 : 1237);
+		result = prime * result + ((isInterface != null && isInterface.booleanValue()) ? 1231 : 1237);
 		result = prime * result + ((interfaces == null) ? 0 : interfaces.hashCode());
 		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + ((methods == null) ? 0 : methods.hashCode());
@@ -352,15 +401,15 @@ public class XMLType implements ModifiableType {
 	@Override
 	public boolean isDocumented() {
 		/* workaround for JAXM preventing to: atribute="false" */
-		return partOfGradleDSLDocumentation!=null && partOfGradleDSLDocumentation.booleanValue();
+		return partOfGradleDSLDocumentation != null && partOfGradleDSLDocumentation.booleanValue();
 	}
-	
+
 	public void setDocumented(boolean partOfGradleDSLDocumentation) {
-		if (!partOfGradleDSLDocumentation){
+		if (!partOfGradleDSLDocumentation) {
 			this.partOfGradleDSLDocumentation = null;
-		}else{
+		} else {
 			this.partOfGradleDSLDocumentation = Boolean.TRUE;
 		}
 	}
-	
+
 }

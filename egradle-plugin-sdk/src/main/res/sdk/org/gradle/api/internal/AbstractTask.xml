@@ -18,13 +18,13 @@
         <parameter type="java.lang.Object" name="paths"/>
     </method>
     <method name="dependsOnTaskDidWork" returnType="boolean"/>
-    <method name="doFirst" returnType="org.gradle.api.Task">
+    <method name="doFirst" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task">
         <parameter type="groovy.lang.Closure" name="action"/>
     </method>
     <method name="doFirst" returnType="org.gradle.api.Task">
         <parameter type="org.gradle.api.Action" name="action"/>
     </method>
-    <method name="doLast" returnType="org.gradle.api.Task">
+    <method name="doLast" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task">
         <parameter type="groovy.lang.Closure" name="action"/>
     </method>
     <method name="doLast" returnType="org.gradle.api.Task">

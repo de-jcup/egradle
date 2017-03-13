@@ -14,6 +14,15 @@ public class XMLTypeIntegrationTest {
 	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
 	@Test
+	public void copytask__is_implementing_org_gradle_api_task() {
+		Type copy = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
+		/* @formatter:off*/
+		assertType(copy).
+			hasInterface("org.gradle.api.Task"); 
+		/* @formatter:on*/
+	}
+	
+	@Test
 	public void org_gradle_project__is_interface__and__extends_PluginAware_and_Extension_Aware() {
 		Type project = components.getGradleDslProvider().getType("org.gradle.api.Project");
 		/* @formatter:off*/

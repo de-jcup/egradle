@@ -39,42 +39,14 @@ public class CreateTasksSDKFileAction implements SDKBuilderAction {
 		if (type == null) {
 			throw new IllegalArgumentException("typeAsString:" + typeName + ", type:" + type + " is null!!?");
 		}
-		String typeAsString = type.getName();
-
-		/*
-		 * FIXME ATR, 12.02.2017: problematic, not all data avialbel - e.g.
-		 * AbstractTAsk not inside, no interfaces like org.gradle.api.Task
-		 * available etc.
-		 */
-		boolean isTask = false;
-		isTask = type.isDescendantOf("org.gradle.api.DefaultTask)");
-		// isTask=isTask ||
-		// type.isDescendantOf("org.gradle.api.tasks.AbstractCopyTask");
-		// isTask=isTask ||
-		// type.isDescendantOf("org.gradle.api.tasks.AbstractExecTask");
-		/*
-		 * FIXME ATR, 13.02.2017: change this!!! this is ultra ugly implemented
-		 * Either use ASM or do it by reflection on runtime, but every task
-		 * (everything implementing the interface )must be fetched!
-		 */
-		// isTask=isTask
-		// type.isDescendantOf("org.gradle.api.tasks.AbstractExecTask");
-		if (!isTask) {
-			if (typeAsString.startsWith("org.gradle") && typeAsString.endsWith("Task")) {
-				isTask = true;
-			}
+		/* filter internal parts */
+		if (type.getName().indexOf(".internal.")!=-1){
+			return;
 		}
-		if (!isTask) {
-			for (String acceptedAsTask : context.tasks.keySet()) {
-				if (type.isDescendantOf(acceptedAsTask)) {
-					isTask = true;
-					break;
-				}
-			}
-		}
+		boolean isTask = ! type.isInterface() && type.isImplementingInterface("org.gradle.api.Task");
 		if (isTask) {
 			/*
-			 * FIXME ATR, 12.02.2017: determine reason for type - means plugin.
+			 * TODO ATR, 12.02.2017: determine reason for type - means plugin.
 			 * necessary for future
 			 */
 			context.tasks.put(type.getName(), type);

@@ -148,7 +148,7 @@ public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,Cod
 				String interfaceAsString = ref.getTypeAsString();
 				Type interfaceType = getType(interfaceAsString);
 				if (interfaceType != null) {
-					modifiableType.extendFromInterface(interfaceType);
+					modifiableType.extendFrom(interfaceType);
 				}
 			}
 
@@ -158,7 +158,7 @@ public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,Cod
 			if (StringUtils.isNotBlank(superTypeAsString)) {
 				Type superType = getType(superTypeAsString);
 				if (superType != null) {
-					modifiableType.extendFromSuperClass(superType);
+					modifiableType.extendFrom(superType);
 				}
 			}
 		}

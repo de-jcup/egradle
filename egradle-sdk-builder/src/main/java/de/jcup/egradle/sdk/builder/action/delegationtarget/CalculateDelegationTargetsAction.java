@@ -15,6 +15,8 @@ import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.sdk.builder.SDKBuilderContext;
 import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
+/* TODO ATR, 16.02.2017: override (manage inside alternative-delegatesTo.xml) all which is annotated by @DelegatesTo(value=...trategy=1) 
+ */
 public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 
 	@Override

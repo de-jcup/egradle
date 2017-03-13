@@ -2,6 +2,7 @@ package de.jcup.egradle.codeassist.dsl;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XMLTasks{
 	
 	@XmlElement(name = "task", type=XMLTask.class)
-	private Set<Task> tasks = new LinkedHashSet<>();
+	private Set<Task> tasks = new TreeSet<>();
 
 	public Set<Task> getTasks() {
 		return tasks;
@@ -23,9 +24,5 @@ public class XMLTasks{
 	public String toString() {
 		return "XMLTasks [ tasks=" + tasks + "]";
 	}
-
-	
-
-	
 	
 }

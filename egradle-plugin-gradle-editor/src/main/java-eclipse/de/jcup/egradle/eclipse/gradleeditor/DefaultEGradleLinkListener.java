@@ -111,7 +111,7 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		if (dataMethodName == null) {
 			return null;
 		}
-		if (dataParameters == null || dataParameters.length == 0) {
+		if (dataParameters == null) {
 			return null;
 		}
 		/* scan for method */

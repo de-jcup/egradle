@@ -35,6 +35,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.sdk.SDK;
@@ -72,21 +73,23 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				"Code tooltips enabled", parent);
 		addField(codeAssistTooltipsEnabled);
 
-		Button reloadButton = new Button(parent, SWT.PUSH);
-		reloadButton.setText("Clean cache");
-		reloadButton.setToolTipText("Clean cache of code completion ");
-		reloadButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				Activator activator = Activator.getDefault();
-				CodeCompletionRegistry registry = activator.getCodeCompletionRegistry();
-				if (registry == null) {
-					return;
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS){
+			Button reloadButton = new Button(parent, SWT.PUSH);
+			reloadButton.setText("Clean cache");
+			reloadButton.setToolTipText("Clean cache of code completion ");
+			reloadButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					Activator activator = Activator.getDefault();
+					CodeCompletionRegistry registry = activator.getCodeCompletionRegistry();
+					if (registry == null) {
+						return;
+					}
+					registry.init();
+					;
 				}
-				registry.init();
-				;
-			}
-		});
+			});
+		}
 		
 		/* sdk info group*/
 		GridData groupLayoutData = new GridData();

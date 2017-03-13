@@ -117,7 +117,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 				continue;
 			}
 			/*
-			 * FIXME ATR, 28.01.2017: check if mixin does copy properties as
+			 * TODO ATR, 28.01.2017: check if mixin does copy properties as
 			 * well. If so implementation is needed
 			 */
 			ModelProposal proposal = createModelProposal(result);

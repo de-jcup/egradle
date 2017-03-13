@@ -11,9 +11,23 @@
 		to markup missing parts.
 		
 	 -->
-	<type name="org.gradle.api.file.CopyProcessingSpec" version="3.0">
+	<type name="org.gradle.api.file.CopyProcessingSpec">
 		 <method name="eachFile" returnType="org.gradle.api.file.CopyProcessingSpec" delegationTarget="org.gradle.api.file.FileCopyDetails">
-		        <parameter type="groovy.lang.Closure" name="closure"/>
+		       <parameter type="groovy.lang.Closure" name="closure"/>
 		 </method>
+	 </type>
+	 <type name="org.gradle.api.Project" version="3.0">
+	 	 <method name="afterEvaluate" returnType="void" delegationTarget="org.gradle.api.Project">
+        	<parameter type="groovy.lang.Closure" name="closure"/>
+   		 </method>
+	 </type>
+	 <type name="org.gradle.api.Task">
+	 	<!-- TODO ATR, 2017-13-03: delegationTargert in future something like "egradle:currentTask" + history function inside estimator -->
+	 	<method name="doFirst" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task">
+        	<parameter type="groovy.lang.Closure" name="action"/>
+    	</method>
+    	<method name="doLast" returnType="org.gradle.api.Task" delegationTarget="org.gradle.api.Task">
+        	<parameter type="groovy.lang.Closure" name="action"/>
+    	</method>
 	 </type>
 </overrides>

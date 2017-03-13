@@ -13,10 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.api;
+package de.jcup.egradle.eclipse.api;
 
 /**
- * Provides states of debug features to enable. Only interesting for egradle development itself.
+ * Provides states of debug features to enable. Only interesting for egradle
+ * development itself.
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -24,15 +26,20 @@ public interface EclipseDevelopmentSettings {
 	/**
 	 * Feature toggle - shows more information on some points
 	 */
-	public static final boolean DEBUG_ADD_SPECIAL_TEXTS = Boolean.parseBoolean(System.getProperty("egradle.debug.texts"));
+	public static final boolean DEBUG_ADD_SPECIAL_TEXTS = Boolean
+			.parseBoolean(System.getProperty("egradle.debug.texts"));
 	/**
-	 * Feature toggle - allows outline reloading as full antlr parts also. interesting for debug purpose only. For normal usage uninteresting
+	 * Feature toggle - adds some extra menues, buttons, commands etc. E.g.
+	 * allows outline reloading as full antlr parts also. interesting for debug
+	 * purpose only. For normal usage uninteresting
 	 */
-	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean.parseBoolean(System.getProperty("egradle.debug.menus"));
-	
+	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean
+			.parseBoolean(System.getProperty("egradle.debug.menus"));
+
 	/**
 	 * Feature toggle - enables special logging information
 	 */
-	public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean.parseBoolean(System.getProperty("egradle.debug.logging"));
-	
+	public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean
+			.parseBoolean(System.getProperty("egradle.debug.logging"));
+
 }

@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class DefaultTypeTemplatesProvider implements TypeTemplatesProvider {
 
 	/*
-	 * FIXME ATR, 27.02.2017: THINK ABOUT: maybe getTemplateFor(Type type) would
+	 * TODO ATR, 27.02.2017: THINK ABOUT: maybe getTemplateFor(Type type) would
 	 * be better! This would make inheritance possible - e.g. for Project and
 	 * plugin aware!
 	 */

@@ -23,6 +23,46 @@ public class XMLTypeTest {
 	}
 
 	@Test
+	public void is_interface_of_one_of_its_interfaces_returns_true() {
+		/* prepare */
+		Type interface2 = mock(Type.class, "interface2");
+		when(interface2.isInterface()).thenReturn(true);
+		when(interface2.getName()).thenReturn("de.jcup.test.Interface2");
+		
+		Type interface3 = mock(Type.class, "interface3");
+		when(interface3.isInterface()).thenReturn(true);
+		when(interface3.getName()).thenReturn("de.jcup.test.Interface3");
+
+		/* execute */
+		typeToTest.extendFrom(interface2);
+		typeToTest.extendFrom(interface3);
+
+		/* test */
+		assertTrue(typeToTest.isImplementingInterface("de.jcup.test.Interface2"));
+		assertTrue(typeToTest.isImplementingInterface("de.jcup.test.Interface3"));
+		assertFalse(typeToTest.isImplementingInterface("de.jcup.test.somewhere.else.Interface2"));
+	}
+	
+	@Test
+	public void is_interface_of_one_of_its_interfaces_which_is_in_deper_hierarchy__returns_true() {
+		/* prepare */
+		Type superType1 = mock(Type.class);
+		Type interfaceType = mock(Type.class);
+		when(interfaceType.getName()).thenReturn("interfacename");
+
+		TypeReference interfaceTypeRef = mock(TypeReference.class);
+		when(interfaceTypeRef.getType()).thenReturn(interfaceType);
+
+		when(superType1.getInterfaces()).thenReturn(Collections.singleton(interfaceTypeRef));
+
+		/* execute */
+		typeToTest.extendFrom(superType1);
+
+		/* test */
+		assertTrue(typeToTest.isImplementingInterface("interfacename"));
+	}
+	
+	@Test
 	public void extend_from_interface__merges_methods() {
 		/* prepare */
 		Type interface2 = mock(Type.class, "interface2");
@@ -49,8 +89,8 @@ public class XMLTypeTest {
 		when(method3.compareTo(method2)).thenReturn(-1);
 
 		/* execute */
-		typeToTest.extendFromInterface(interface2);
-		typeToTest.extendFromInterface(interface3);
+		typeToTest.extendFrom(interface2);
+		typeToTest.extendFrom(interface3);
 
 		/* test */
 		Set<Method> methods = typeToTest.getMethods();
@@ -66,7 +106,7 @@ public class XMLTypeTest {
 		when(superType1.getInterfaces()).thenReturn(Collections.emptySet());
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertTrue(typeToTest.getInterfaces().isEmpty());
@@ -84,7 +124,7 @@ public class XMLTypeTest {
 		typeToTest.interfaces.add(ref);
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertTrue(typeToTest.getInterfaces().contains(superType3));
@@ -102,7 +142,7 @@ public class XMLTypeTest {
 		when(superType1.getInterfaces()).thenReturn(Collections.singleton(referenceType3));
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertTrue(typeToTest.getInterfaces().contains(superType3));
@@ -129,7 +169,7 @@ public class XMLTypeTest {
 		when(superType3.getInterfaces()).thenReturn(new HashSet<>(Arrays.asList(referenceType4, referenceType5)));
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		Set<TypeReference> interfaces = typeToTest.getInterfaces();
@@ -147,7 +187,7 @@ public class XMLTypeTest {
 
 		/* execute */
 		typeToTest.isInterface = true;
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		Set<TypeReference> interfaces = typeToTest.getInterfaces();
@@ -164,7 +204,7 @@ public class XMLTypeTest {
 		/* prepare */
 		Type superType1 = mock(Type.class);
 		when(superType1.getName()).thenReturn("test.Super1");
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertTrue(typeToTest.isDescendantOf("test.Super1"));
@@ -175,7 +215,7 @@ public class XMLTypeTest {
 		/* prepare */
 		Type superType1 = mock(Type.class);
 		when(superType1.getName()).thenReturn("test.Super1");
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertFalse(typeToTest.isDescendantOf("test.SuperX"));
@@ -191,7 +231,7 @@ public class XMLTypeTest {
 		when(superType2.getName()).thenReturn("test.Super2");
 		when(superType1.isDescendantOf("test.Super2")).thenReturn(true);
 
-		typeToTest.extendFromSuperClass(superType1);
+		typeToTest.extendFrom(superType1);
 
 		/* test */
 		assertTrue(typeToTest.isDescendantOf("test.Super1"));
@@ -211,7 +251,7 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.getMethods().isEmpty());
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType);
+		typeToTest.extendFrom(superType);
 
 		/* test */
 		assertFalse(typeToTest.getMethods().isEmpty());
@@ -235,7 +275,7 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.getMethods().isEmpty());
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType);
+		typeToTest.extendFrom(superType);
 
 		/* test */
 		assertFalse(typeToTest.getProperties().isEmpty());
@@ -266,7 +306,7 @@ public class XMLTypeTest {
 		assertEquals(1, typeToTest.getMethods().size());
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType);
+		typeToTest.extendFrom(superType);
 
 		/* test */
 		assertEquals(2, typeToTest.getMethods().size());
@@ -300,7 +340,7 @@ public class XMLTypeTest {
 		assertEquals(1, typeToTest.getProperties().size());
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType);
+		typeToTest.extendFrom(superType);
 
 		/* test */
 		assertEquals(2, typeToTest.getProperties().size());
@@ -316,31 +356,29 @@ public class XMLTypeTest {
 	}
 
 	@Test
-	public void extendByNull_accepted_getmethods_returns_own_methods() {
+	public void extendByNull_accepted_getmethods_returns_only_own_methods() {
 		/* prepare */
 		Type superType = mock(Type.class);
 		Method method1 = mock(Method.class);
+		Method method0 = mock(Method.class);
 		Set<Method> methodSet = new LinkedHashSet<>();
 		methodSet.add(method1);
 		when(superType.getMethods()).thenReturn(methodSet);
 
 		/* check preconditions */
 		Set<Method> methods = typeToTest.getMethods();
-		assertTrue(methods.isEmpty());
+		typeToTest.methods.add(method0);
 
 		/* execute */
-		typeToTest.extendFromSuperClass(superType);
-		methods = typeToTest.getMethods();
-		assertFalse(methods.isEmpty());
-
-		/* now reset */
-		typeToTest.extendFromSuperClass(null);
+		typeToTest.extendFrom(null);
 
 		/* test */
 		methods = typeToTest.getMethods();
-		assertTrue(methods.isEmpty());
+		assertFalse(methods.isEmpty());
+		assertTrue(methods.contains(method0));
 	}
 
+	
 	@Test
 	public void addExtension_without_reson_adds_extension_without_reason() {
 		/* prepare */

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
     <task name="defaulttask" type="org.gradle.api.DefaultTask"/>
-    <task name="task" type="org.gradle.api.Task"/>
-    <task name="conventiontask" type="org.gradle.api.internal.ConventionTask"/>
     <task name="antlrtask" type="org.gradle.api.plugins.antlr.AntlrTask"/>
     <task name="comparegradlebuilds" type="org.gradle.api.plugins.buildcomparison.gradle.CompareGradleBuilds"/>
     <task name="jettyrun" type="org.gradle.api.plugins.jetty.JettyRun"/>
@@ -22,17 +20,14 @@
     <task name="componentreport" type="org.gradle.api.reporting.components.ComponentReport"/>
     <task name="htmldependencyreporttask" type="org.gradle.api.reporting.dependencies.HtmlDependencyReportTask"/>
     <task name="modelreport" type="org.gradle.api.reporting.model.ModelReport"/>
-    <task name="cacheabletask" type="org.gradle.api.tasks.CacheableTask"/>
     <task name="copy" type="org.gradle.api.tasks.Copy"/>
     <task name="delete" type="org.gradle.api.tasks.Delete"/>
     <task name="exec" type="org.gradle.api.tasks.Exec"/>
     <task name="gradlebuild" type="org.gradle.api.tasks.GradleBuild"/>
     <task name="javaexec" type="org.gradle.api.tasks.JavaExec"/>
-    <task name="parallelizabletask" type="org.gradle.api.tasks.ParallelizableTask"/>
     <task name="sourcetask" type="org.gradle.api.tasks.SourceTask"/>
     <task name="sync" type="org.gradle.api.tasks.Sync"/>
     <task name="upload" type="org.gradle.api.tasks.Upload"/>
-    <task name="verificationtask" type="org.gradle.api.tasks.VerificationTask"/>
     <task name="anttarget" type="org.gradle.api.tasks.ant.AntTarget"/>
     <task name="createstartscripts" type="org.gradle.api.tasks.application.CreateStartScripts"/>
     <task name="jar" type="org.gradle.api.tasks.bundling.Jar"/>

@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "method")
 public class XMLTask implements Task{
 	
-	
-	
 	@XmlAttribute(name = "name")
 	private String name;
 	
@@ -50,6 +48,21 @@ public class XMLTask implements Task{
 	
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	@Override
+	public int compareTo(Task other) {
+		if (other==null){
+			return 1;
+		}
+		String otherTypeAsString = other.getTypeAsString();
+		if (otherTypeAsString==null){
+			return 1;
+		}
+		if (typeAsString==null){
+			return -1;
+		}
+		return typeAsString.compareTo(otherTypeAsString);
 	}
 
 

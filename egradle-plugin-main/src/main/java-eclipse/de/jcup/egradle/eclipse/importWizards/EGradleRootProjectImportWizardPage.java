@@ -88,7 +88,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	IPath getSelectedPath() {
 		String text = getGradleRootProjectPath();
 		boolean empty = StringUtils.isEmpty(text);
-		setPageComplete(!empty);// FIXME ATR, 28.10.2016 - needs to be integrated in listener to enable finish button correct...
+		setPageComplete(!empty);
 		if (empty){
 			return null;
 		}else{

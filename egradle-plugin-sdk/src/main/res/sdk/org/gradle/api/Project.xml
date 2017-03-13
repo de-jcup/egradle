@@ -163,7 +163,7 @@
 </description>
         <parameter type="java.lang.String" name="path"/>
     </method>
-    <method name="afterEvaluate" returnType="void" documented="true">
+    <method name="afterEvaluate" returnType="void" delegationTarget="org.gradle.api.Project" documented="true">
         <description> &lt;p&gt;Adds a closure to be called immediately after this project has been evaluated. The project is passed to the
  closure as a parameter. Such a listener gets notified when the build file belonging to this project has been
  executed. A parent project may for example add such a listener to its child project. Such a listener can further

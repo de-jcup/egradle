@@ -1,6 +1,6 @@
 package de.jcup.egradle.codeassist.dsl;
 
-public interface Task {
+public interface Task extends Comparable<Task>{
 
 	public String getName();
 	

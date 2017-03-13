@@ -85,8 +85,6 @@ public class LinkToTypeConverter {
 	}
 
 	private LinkData internalConvertLink(String link) {
-		/* FIXME ATR, 06.02.2017:  logic about link resolving (method) should be used in
-		 * language element estimator also! currently the first potential matching method is used! */
 		if (link == null) {
 			return null;
 		}
@@ -106,33 +104,43 @@ public class LinkToTypeConverter {
 		LinkData data = new LinkData();
 		int index = typeName.indexOf("#");
 		if (index==-1){
+			/* no property or method - just plain type, so guard close */
 			data.mainName = typeName;
 			return data;
 		}
+		return handleMethodOrProperty(typeName, data);
+	}
+
+
+	private LinkData handleMethodOrProperty(String typeName, LinkData data) {
 		String[] splitted = StringUtils.split(typeName, "#");
 		if (splitted == null || splitted.length ==0 ) {
+			/* should never happen, but...*/
 			data.mainName = typeName;
 			return data;
 		}
-		String methodPart=null;
+		String methodOrPropertyPart=null;
 		if (splitted.length==1){
 			data.mainName=null;
-			methodPart = splitted[0];
+			methodOrPropertyPart = splitted[0];
 		}else{
 			data.mainName = splitted[0];
-			methodPart = splitted[1];
+			methodOrPropertyPart = splitted[1];
 		}
-
 		
-		if (methodPart == null) {
+		if (methodOrPropertyPart == null) {
 			return data;
 		}
-		if (methodPart.indexOf("(") == -1) {
-			data.subName=methodPart; // property...
+		if (methodOrPropertyPart.indexOf("(") == -1) {
+			data.subName=methodOrPropertyPart; // property...
 			return data;
 		}
-		String[] methodPartArray = StringUtils.split(methodPart, "()");
-		if (methodPartArray == null || methodPartArray.length != 2) {
+		return handleMethod(data, methodOrPropertyPart);
+	}
+
+	private LinkData handleMethod(LinkData data, String methodOrPropertyPart) {
+		String[] methodPartArray = StringUtils.split(methodOrPropertyPart, "()");
+		if (methodPartArray == null || methodPartArray.length ==0) {
 			return data;
 		}
 		String methodName = methodPartArray[0];
@@ -140,11 +148,24 @@ public class LinkToTypeConverter {
 			return data;
 		}
 		data.subName=methodName;
-		
+		return handleMethodParameters(data, methodPartArray);
+	}
+
+	private LinkData handleMethodParameters(LinkData data, String[] methodPartArray) {
+		if (methodPartArray.length==1){
+			/* no parameters set*/
+			data.parameterTypes=new String[]{};
+			return data;
+		}
 		String methodParams= methodPartArray[1];
 		if (methodParams==null){
 			return data;
 		}
+		addParameters(data, methodParams);
+		return data;
+	}
+
+	private void addParameters(LinkData data, String methodParams) {
 		String[] params = StringUtils.split(methodParams, ",");
 		data.parameterNames=new String[params.length];
 		for (int i=0;i<params.length;i++){
@@ -161,7 +182,6 @@ public class LinkToTypeConverter {
 			params[i]=param;
 		}
 		data.parameterTypes = params;
-		return data;
 	}
 
 	public boolean isLinkSchemaConvertable(String target) {

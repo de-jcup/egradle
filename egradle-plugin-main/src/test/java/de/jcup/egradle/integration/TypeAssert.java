@@ -125,14 +125,8 @@ public class TypeAssert {
 		if (interfaceName==null){
 			throw new IllegalArgumentException("Testcase corrupt: interface name may not be null");
 		}
-		boolean found = false;
-		for (TypeReference ref: type.getInterfaces()){
-			if (interfaceName.equals(ref.getTypeAsString())){
-				found=true;
-				/* check type is set...*/
-				assertNotNull("Did found interface reference, but references does not contain type but null!",ref.getType());
-			}
-		}
+		boolean found = type.isImplementingInterface(interfaceName);
+		
 		if (!found){
 			fail("Did not found interface :"+interfaceName+" in type:"+type.getName());
 		}
