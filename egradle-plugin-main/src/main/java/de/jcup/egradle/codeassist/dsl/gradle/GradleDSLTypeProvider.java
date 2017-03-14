@@ -9,10 +9,10 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.codeassist.CodeCompletionService;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEvent;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryEventType;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
+import de.jcup.egradle.codeassist.CodeCompletionService;
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
@@ -133,8 +133,6 @@ public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,Cod
 		 * will not work
 		 */
 		nameToTypeMapping.put(name, type);
-		System.err.println(hashCode() + ":loaded:" + name + ", nameToUseForLoading=" + nameToUseForLoading + ", type="
-				+ type.getName());
 		if (!(type instanceof ModifiableType)) {
 			return type;
 		}

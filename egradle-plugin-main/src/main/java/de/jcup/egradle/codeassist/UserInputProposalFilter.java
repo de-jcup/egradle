@@ -38,10 +38,6 @@ public class UserInputProposalFilter {
 			/* no relavant code entered */
 			return new LinkedHashSet<>(proposals);
 		}
-		/*
-		 * FIXME ATR, 10.1.2017 : there was a problem with \r inside code
-		 * completions - so its not empty but we got no proposals here
-		 */
 		String enteredLowerCased = entered.toLowerCase();
 		Set<Proposal> filteredResult = new LinkedHashSet<>();
 		for (Proposal proposal : proposals) {

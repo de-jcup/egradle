@@ -1,6 +1,6 @@
 package de.jcup.egradle.integration.test;
 
-import static de.jcup.egradle.integration.HoverDataAssert.*;
+import static de.jcup.egradle.integration.HoverDataAssert.assertThat;
 import static org.junit.Assert.*;
 
 import org.junit.Ignore;
@@ -36,7 +36,7 @@ public class HoverIntegrationTest {
 	
 	@Test
 	@Ignore
-	/* FIXME ATR, 12.03.2017: strange: CheckStyleReports, to which is delegated has a html method but this method is a simple getter without Parameter.
+	/* TODO ATR, 12.03.2017: strange: CheckStyleReports, to which is delegated has a html method but this method is a simple getter without Parameter.
 	 * So how does the example - visible in javadoc /egradle sdk works (see test-15 file) ? */
 	public void buildfile_15__reports_delegates_toCheckStyleReports(){
 		/* prepare */

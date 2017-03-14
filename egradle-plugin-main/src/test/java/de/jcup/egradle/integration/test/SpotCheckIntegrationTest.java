@@ -37,8 +37,6 @@ public class SpotCheckIntegrationTest {
 		assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
 	}
 
-	/* FIXME ATR, 10.03.2017: fix link output :This is equivalent to calling &lt;a href='type://org.gradle.api.Project#configure(Object,'&gt;groovy.lang.Closure)&lt;/a&gt; for each of th */
-	
 	@Test
 	public void sourceset_shortname_has_mixin_parts_from_scala() {
 		/* execute */
@@ -75,18 +73,6 @@ public class SpotCheckIntegrationTest {
 		/* @formatter:off */
 		assertType(jarType).
 			hasMethod("manifest", "groovy.lang.Closure").
-			/* FIXME ATR, 09.03.2017: fails in gradle, or when all tests run in plugin-main in eclipse too, 
-			 * but not when standalone execute - must be fixed .
-			 * 
-			 * Idea: maybe the problem comes up with ordering.
-			 * getType(type1)
-			 * getType(type2)
-			 * ->1,2
-			 * getType(type2)
-			 * getType(type1)
-			 * ->,1
-			 * ??
-			 * */
 			hasMethod("getTemporaryDirFactory");
 		/* @formatter:on */
 	}

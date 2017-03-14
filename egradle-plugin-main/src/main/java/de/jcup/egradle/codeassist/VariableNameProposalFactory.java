@@ -42,8 +42,6 @@ public class VariableNameProposalFactory extends AbstractProposalFactory {
 		for (Item definedTaskItem: allDefinedTasks){
 			proposals.add(new ItemProposalImpl(definedTaskItem));
 		}
-		
-		/* FIXME albert,02.01.2017: Types are not handled correct. "java.lang.String" is not correct parsed in outline! */
 		return proposals;
 	}
 

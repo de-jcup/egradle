@@ -26,7 +26,6 @@ import org.osgi.framework.BundleContext;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
-import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLPluginLoader;

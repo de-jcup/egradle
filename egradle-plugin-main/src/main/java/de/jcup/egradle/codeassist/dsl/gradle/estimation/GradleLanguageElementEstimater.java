@@ -93,8 +93,7 @@ public class GradleLanguageElementEstimater {
 			Item currentPathItem = pathIterator.next();
 			String currentPathItemName = currentPathItem.getIdentifier();
 			if (currentPathItemName == null) {
-				continue; // FIXME ATR, 06.02.2017: is this correct to continue
-							// here ?!?!
+				continue; 
 			}
 			EstimationTypeContext currentMode = EstimationTypeContext.UNKNOWN;
 			if (currentPathItem.isClosureBlock()) {

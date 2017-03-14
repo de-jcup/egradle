@@ -15,8 +15,6 @@
  */
 package de.jcup.egradle.core.api;
 
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 

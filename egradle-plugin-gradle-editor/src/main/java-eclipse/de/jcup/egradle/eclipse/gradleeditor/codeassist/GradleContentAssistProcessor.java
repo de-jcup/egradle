@@ -238,7 +238,6 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 
 	@Override
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		/* TODO ATR, 07.02.2017: currently not implemented - maybe necessary in future */
 		return null;
 	}
 

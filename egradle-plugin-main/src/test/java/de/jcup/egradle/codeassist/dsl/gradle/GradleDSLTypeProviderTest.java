@@ -3,10 +3,7 @@ package de.jcup.egradle.codeassist.dsl.gradle;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.junit.Before;
@@ -14,10 +11,7 @@ import org.junit.Test;
 
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.ModifiableType;
-import de.jcup.egradle.codeassist.dsl.Plugin;
-import de.jcup.egradle.codeassist.dsl.PluginMerger;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLType;
 
 public class GradleDSLTypeProviderTest {
 

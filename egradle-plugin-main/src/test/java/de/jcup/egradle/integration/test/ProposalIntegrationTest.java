@@ -1,7 +1,7 @@
 package de.jcup.egradle.integration.test;
 
 import static de.jcup.egradle.core.TestUtil.*;
-import static de.jcup.egradle.integration.ProposalsAssert.*;
+import static de.jcup.egradle.integration.ProposalsAssert.assertThat;
 import static org.junit.Assert.*;
 
 import java.util.Set;

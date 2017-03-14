@@ -8,7 +8,6 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Parameter;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.TypeReference;
 
 public class TypeAssert {
 

@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry.RegistryListener;
 

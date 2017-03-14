@@ -1,6 +1,5 @@
 package de.jcup.egradle.codeassist.dsl;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 

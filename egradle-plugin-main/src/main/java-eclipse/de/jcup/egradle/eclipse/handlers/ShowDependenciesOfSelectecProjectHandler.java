@@ -91,7 +91,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 		StringBuilder sb = new StringBuilder();
 		if (!EGradleUtil.hasVirtualRootProjectNature(projectToUse) && !EGradleUtil.isRootProject(projectToUse)){
 			sb.append(":");
-			sb.append(projectToUse.getName()); /* FIXME ATR, 02.03.2017: check if getName() is correct here - should be foldername.. */
+			sb.append(projectToUse.getName()); /* TODO ATR, 02.03.2017: check if getName() is correct here - should be foldername.. */
 			sb.append(":");
 		}
 		sb.append("dependencies");
