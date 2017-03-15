@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
@@ -46,6 +47,7 @@ public class GradleExecutorTest {
 	private GradleRootProject mockedRootProject;
 	private GradleCommand mockedCommand2;
 	private GradleConfiguration mockedConfiguration;
+	private CancelStateProvider mockedCancelStateProvider;
 
 	@Before
 	public void before() {
@@ -55,13 +57,15 @@ public class GradleExecutorTest {
 		mockedRootProject = mock(GradleRootProject.class);
 		mockedContext = mock(GradleContext.class);
 		mockedConfiguration = mock(GradleConfiguration.class);
-
+		mockedCancelStateProvider=mock(CancelStateProvider.class);
+		
 		when(mockedContext.getOptions()).thenReturn(new String[] {});
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
 		when(mockedContext.getEnvironment()).thenReturn(EMPTY_ENV);
 		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn("gradleCommand");
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn("");
+		when(mockedContext.getCancelStateProvider()).thenReturn(mockedCancelStateProvider);
 
 		mockedCommand1 = mock(GradleCommand.class);
 		mockedCommand2 = mock(GradleCommand.class);

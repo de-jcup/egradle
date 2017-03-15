@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.EGradleShellType;
@@ -65,7 +66,8 @@ public class GradleExecutor {
 		} catch (IOException e) {
 			processExecutionResult.setException(e);
 		}
-		if (context.getCancelStateProvider().isCanceled()){
+		CancelStateProvider cancelStateProvider = context.getCancelStateProvider();
+		if (cancelStateProvider.isCanceled()){
 			processExecutionResult.setCanceledByuser(true);
 		}
 		return processExecutionResult;
