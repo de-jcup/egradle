@@ -1,30 +1,32 @@
 package de.jcup.egradle.core.process;
 
 public class ProcessTimeoutTerminator {
-	
+
 	/**
 	 * Wait for check in milliseconds
 	 */
 	static final int WAIT_FOR_CHECK = 200;
-	
+
 	private Process process;
 	private long timeStarted;
 	private OutputHandler outputHandler;
 	private long timeOutInSeconds;
+
+	private Thread timeoutCheckThread;
 
 	public ProcessTimeoutTerminator(Process process, OutputHandler outputHandler, long timeOutInSeconds) {
 		this.timeOutInSeconds = timeOutInSeconds;
 		this.process = process;
 		this.outputHandler = outputHandler;
 	}
-	
+
 	/**
 	 * Does a restart of terminator timeout
 	 */
 	public void reset() {
 		resetTimeStarted();
 	}
-	
+
 	private void resetTimeStarted() {
 		timeStarted = System.currentTimeMillis();
 	}
@@ -40,12 +42,19 @@ public class ProcessTimeoutTerminator {
 			 */
 			return;
 		}
-		Thread timeoutCheckThread = new Thread(new TimeOutTerminatorRunnable(), "process-timeout-terminator");
+		if (isRunning()){
+			reset();
+			return;
+		}
+		timeoutCheckThread = new Thread(new TimeOutTerminatorRunnable(), "process-timeout-terminator");
 		timeoutCheckThread.start();
 	}
 
+	public boolean isRunning() {
+		return timeoutCheckThread!=null && timeoutCheckThread.isAlive();
+	}
 
-	private class TimeOutTerminatorRunnable implements Runnable{
+	private class TimeOutTerminatorRunnable implements Runnable {
 
 		@Override
 		public void run() {
@@ -62,8 +71,10 @@ public class ProcessTimeoutTerminator {
 				}
 				long timeAlive = System.currentTimeMillis() - timeStarted;
 				if (timeAlive > timeOutInMillis) {
-					if (! process.isAlive()){
-						/* no termination necessary, process already terminated */
+					if (!process.isAlive()) {
+						/*
+						 * no termination necessary, process already terminated
+						 */
 						break;
 					}
 					outputHandler.output("Timeout reached (" + timeOutInSeconds + " seconds) - destroy process");
@@ -71,10 +82,7 @@ public class ProcessTimeoutTerminator {
 					break;
 				}
 			}
-
 		}
 	}
-	
 
-	
 }
