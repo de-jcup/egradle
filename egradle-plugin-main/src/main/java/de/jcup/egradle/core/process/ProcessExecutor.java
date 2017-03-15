@@ -20,6 +20,8 @@ import java.io.IOException;
 public interface ProcessExecutor {
 
 	public static final Integer PROCESS_RESULT_OK = Integer.valueOf(0);
+	
+	public static final int ENDLESS_RUNNING=0;
 
 	/**
 	 * Execute commands in given working directory. Is done in same thread. Will wait until execution result is available (process terminates...)

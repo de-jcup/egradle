@@ -34,7 +34,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 
 	
 	public static final String MESSAGE__EXECUTION_CANCELED_BY_USER = "[Execution CANCELED by user]";
-	public static final int ENDLESS_RUNNING=0;
+	
 	protected OutputHandler handler;
 	private boolean handleProcessOutputStream;
 	private long timeOutInSeconds=ENDLESS_RUNNING;
@@ -86,15 +86,15 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		Process p = startProcess(pb);
 		ProcessTimeoutTerminator timeoutTerminator = null;
 		if (timeOutInSeconds!=ENDLESS_RUNNING){
-			timeoutTerminator = new ProcessTimeoutTerminator(p);
-			Thread timeoutCheckThread = new Thread(timeoutTerminator, "process-timeout-terminator");
-			timeoutCheckThread.start();
+			timeoutTerminator = new ProcessTimeoutTerminator(p,handler,timeOutInSeconds);
+			timeoutTerminator.start();
 		}
 		ProcessCancelTerminator cancelTerminator = new ProcessCancelTerminator(p, processContext.getCancelStateProvider());
 		Thread cancelCheckThread = new Thread(cancelTerminator,"process-cancel-terminator");
 		cancelCheckThread.start();
 		
 		handleProcessStarted(envProvider, p, started, workingDirectory, commands);
+		
 		handleOutputStreams(p, timeoutTerminator, processContext.getCancelStateProvider());
 		
 		/* wait for execution */
@@ -150,51 +150,6 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		}
 	}
 	
-	private class ProcessTimeoutTerminator implements Runnable{
-		private Process process;
-		private long timeStarted;
-
-		public ProcessTimeoutTerminator(Process p){
-			this.process=p;
-		}
-		
-		/**
-		 * Does a restart of terminator timeout
-		 */
-		public void restart(){
-			resetTimeStarted();
-		}
-		
-		
-
-		@Override
-		public void run() {
-			resetTimeStarted();
-			while (process.isAlive()) {
-				long timeOutInMillis= timeOutInSeconds*1000;
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					/* ignore */
-				}
-				if (timeOutInSeconds!=ENDLESS_RUNNING){
-					long timeAlive = System.currentTimeMillis()-timeStarted;
-					if (timeAlive>timeOutInMillis){
-						handler.output("Timeout reached ("+timeOutInSeconds+" seconds) - destroy process");
-						process.destroy();
-						break;
-					}
-				}
-			}
-			
-		}
-		
-		private void resetTimeStarted(){
-			timeStarted = System.currentTimeMillis();
-		}
-		
-	}
-	
 	/**
 	 * @return <code>true</code> when ongoing output restarts timeout
 	 */
@@ -202,6 +157,14 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		return true;
 	}
 	
+	/**
+	 * If process output handling is enabled this method handles output as long as the process is running and returning output.
+	 * If process output handling is NOT enabled it just returns
+	 * @param p
+	 * @param timeoutTerminator
+	 * @param cancelStateProvider
+	 * @throws IOException
+	 */
 	protected void handleOutputStreams(Process p, ProcessTimeoutTerminator timeoutTerminator, CancelStateProvider cancelStateProvider) throws IOException {
 		if (!handleProcessOutputStream){
 			return;
@@ -215,7 +178,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 			handler.output(line);
 			if (timeoutTerminator!=null){
 				if (isOutputRestartingTimeout()){
-					timeoutTerminator.restart();
+					timeoutTerminator.reset();
 				}
 			}
 		}
