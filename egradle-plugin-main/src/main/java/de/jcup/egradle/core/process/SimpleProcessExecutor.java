@@ -172,16 +172,17 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		if (cancelStateProvider.isCanceled()){
 			return;
 		}
-		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String line = null;
-		while ((!cancelStateProvider.isCanceled()) && (line = reader.readLine()) != null) {
-			handler.output(line);
-			if (timeoutTerminator!=null){
-				if (isOutputRestartingTimeout()){
-					timeoutTerminator.reset();
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))){
+			String line = null;
+			while ((!cancelStateProvider.isCanceled()) && (line = reader.readLine()) != null) {
+				handler.output(line);
+				if (timeoutTerminator!=null){
+					if (isOutputRestartingTimeout()){
+						timeoutTerminator.reset();
+					}
 				}
 			}
-		}
+		};
 		
 	}
 

@@ -45,6 +45,7 @@ import org.eclipse.ui.progress.UIJob;
 
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemTextMatcher;
+import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractQuickDialog;
@@ -120,7 +121,9 @@ public class QuickOutlineDialog extends AbstractQuickDialog implements IDoubleCl
 			return;
 		}
 		if (gradleEditor == null) {
-			System.out.println("No editor available, would select:" + selection);
+			if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
+				System.out.println("No editor available, would select:" + selection);
+			}
 			return;
 		}
 		/*
