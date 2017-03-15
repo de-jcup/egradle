@@ -293,7 +293,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	private ProcessExecutionResult executeGradleEclipse(GradleRootProject rootProject, IProgressMonitor progressMonitor)
 			throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
-		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, 30);
+		/* we do process executor create now in endless running variant because cancel state is provided now for this wizard*/
+		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, ProcessExecutor.ENDLESS_RUNNING);
 
 		GradleExecutionDelegate delegate = new GradleExecutionDelegate(outputHandler, processExecutor, context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject){
 			@Override
