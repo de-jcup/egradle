@@ -2,7 +2,7 @@ ext {
 	
 	library = [
 		
-		junit:							"junit:junit:4.9",
+		junit:							"junit:junit:4.12",
 		slf4j_api:						"org.slf4j:slf4j-api:1.7.10",
 		slf4j_jdk:						"org.slf4j:slf4j-jdk14:1.7.10",
 		slf4j_simple:					"org.slf4j:slf4j-simple:1.7.10",
