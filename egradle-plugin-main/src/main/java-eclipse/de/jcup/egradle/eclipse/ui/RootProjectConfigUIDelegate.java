@@ -19,6 +19,7 @@ import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -35,16 +36,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.IProgressService;
 
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
+import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.Activator;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.execution.validation.RootProjectValidation;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationObserver;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationProgressRunnable;
 import de.jcup.egradle.eclipse.preferences.ChangeableComboFieldEditor;
@@ -62,16 +62,16 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	private DirectoryFieldEditor defaultJavaHomeDirectoryEditor;
 	private Button validationButton;
 
-	private RootProjectValidation validation;
+	private RootProjectValidationHandler validation;
 
-	public RootProjectConfigUIDelegate(RootProjectValidation validation) {
+	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation) {
 		this.validation = validation;
 	}
 
 	/**
-	 * Creates the configuration UI containing field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
+	 * Creates the configuration UI containing field editors. Field editors are
+	 * abstractions of the common GUI blocks needed to manipulate various types
+	 * of preferences. Each field editor knows how to save and restore itself.
 	 * 
 	 * @param parent
 	 *            parent composite to add to
@@ -130,7 +130,6 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 				handleValidationRunning(true);
 				validationOutputField.setText("Start validation...\n");
 
-				IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
 
 				OutputHandler validationOutputHandler = new OutputHandler() {
 
@@ -154,11 +153,25 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 				configuration.setWorkingDirectory(getWorkingDirectory());
 				configuration.setJavaHome(getGlobalJavaHomePath());
 
+				startValidation(validationOutputHandler, configuration);
+			}
+
+			private void startValidation(OutputHandler validationOutputHandler,
+					MutableGradleConfiguration configuration) {
 				try {
 					RootProjectConfigUIDelegate observer = RootProjectConfigUIDelegate.this;
-					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(configuration, observer,
-							validationOutputHandler);
-					progressService.busyCursorWhile(runnable);
+					ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(EGradleUtil.getActiveWorkbenchShell());
+
+					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(new CancelStateProvider(){
+
+						@Override
+						public boolean isCanceled() {
+							return progressMonitorDialog.getProgressMonitor().isCanceled();
+						}
+						
+					},	configuration, observer, validationOutputHandler);
+					/* use own progress monitor dialog here - progress service did not work well because this is in model state */
+					progressMonitorDialog.run(true, true, runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
 					EGradleUtil.log(e1);
 				}
@@ -175,27 +188,26 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		groupLayoutData.verticalSpan = 3;
 		groupLayoutData.horizontalSpan = 3;
 
-		
 		GridData labelGridData = new GridData();
 		labelGridData.horizontalAlignment = GridData.FILL;
 		labelGridData.verticalAlignment = GridData.BEGINNING;
 		labelGridData.grabExcessHorizontalSpace = false;
 		labelGridData.grabExcessVerticalSpace = false;
-		
+
 		GridData gridDataLastColumn = new GridData();
 		gridDataLastColumn.horizontalAlignment = GridData.FILL;
 		gridDataLastColumn.verticalAlignment = GridData.FILL;
 		gridDataLastColumn.grabExcessHorizontalSpace = true;
 		gridDataLastColumn.grabExcessVerticalSpace = false;
 		gridDataLastColumn.horizontalSpan = 2;
-		
+
 		GridData labelGridData2 = new GridData();
 		labelGridData2.horizontalAlignment = GridData.FILL;
 		labelGridData2.verticalAlignment = GridData.BEGINNING;
 		labelGridData2.grabExcessHorizontalSpace = false;
 		labelGridData2.grabExcessVerticalSpace = false;
-		labelGridData2.grabExcessHorizontalSpace=true;
-		
+		labelGridData2.grabExcessHorizontalSpace = true;
+
 		gradleCallGroup = SWTFactory.createGroup(parent, "Gradle call", 1, 10, SWT.FILL);
 		if (debug) {
 			gradleCallGroup.setBackground(getColorManager().getColor(new RGB(0, 255, 0)));
@@ -250,7 +262,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 	private ColorManager getColorManager() {
 		Activator activator = Activator.getDefault();
-		if (activator==null){
+		if (activator == null) {
 			return ColorManager.getStandalone();
 		}
 		return activator.getColorManager();
@@ -387,7 +399,6 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	public String getRootPathDirectory() {
 		return rootPathDirectoryEditor.getStringValue();
 	}
-
 
 	public void setGradleCallTypeId(String gradleCallTypeID) {
 		gradleCallTypeRadioButton.setStringValue(gradleCallTypeID);

@@ -21,9 +21,17 @@
   *
   */
 public interface RootProjectValidationObserver{
-	
+
+	/**
+	 * Handle valdiation is running or not
+	 * @param running
+	 */
 	public void handleValidationRunning(boolean running);
 
-	public void handleValidationResult(boolean b);
+	/**
+	 * Handle validation result
+	 * @param valid - validation result
+	 */
+	public void handleValidationResult(boolean valid);
 	
 }

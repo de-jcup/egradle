@@ -22,7 +22,7 @@ import org.eclipse.jface.preference.FieldEditor;
  * @author Albert Tregnaghi
  *
  */
-public interface RootProjectValidation extends RootProjectValidationObserver {
+public interface RootProjectValidationHandler extends RootProjectValidationObserver {
 
 	/**
 	 * When validation state changes this method is called

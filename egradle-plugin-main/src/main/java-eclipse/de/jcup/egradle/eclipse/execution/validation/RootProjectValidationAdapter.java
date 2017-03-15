@@ -21,7 +21,7 @@ import org.eclipse.jface.preference.FieldEditor;
  * @author Albert Tregnaghi
  *
  */
-public abstract class RootProjectValidationAdapter implements RootProjectValidation{
+public abstract class RootProjectValidationAdapter implements RootProjectValidationHandler{
 
 		@Override
 		public void addFieldEditor(FieldEditor field) {

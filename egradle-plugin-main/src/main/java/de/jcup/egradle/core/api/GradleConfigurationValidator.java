@@ -49,6 +49,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 	
 	private ProcessExecutor executor;
 	private OutputHandler outputHandler;
+	private CancelStateProvider cancelStateProvider;
 
 	public GradleConfigurationValidator(ProcessExecutor executor){
 		notNull(executor, "'executor' may not be null");
@@ -57,8 +58,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 
 	@Override
 	public void validate(GradleConfiguration configuration) throws ValidationException {
-		/* TODO ATR, 28.10.2016: hmm.. special way only for validation . normal way, validation way and import way should have same base! */
-		
+		handleCanceled();
 		/* validate gradle call not empty*/
 		String gradleCommand = configuration.getGradleCommandFullPath();
 		if (StringUtils.isBlank(gradleCommand)){
@@ -101,11 +101,12 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 			shell = EGradleShellType.NONE;
 		}
 		List<String> shellStandaloneCommands = shell.createCheckStandaloneCommands();
+		handleCanceled();
 		ProcessContext context = new ProcessContext() {
 			
 			@Override
 			public CancelStateProvider getCancelStateProvider() {
-				return CancelStateProvider.NEVER_CANCELED;
+				return GradleConfigurationValidator.this.getCancelStateProvider();
 			}
 		};
 		if (! shellStandaloneCommands.isEmpty()){
@@ -127,6 +128,7 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 		commands.add(gradleCommandWithPathIfNecessary);
 		commands.add("--version");
 		output("  Executing:"+commands);
+		handleCanceled();
 		try {
 			int result = executor.execute(configuration, environmentProvider, context, commands.toArray(new String[commands.size()]));
 			if (result!=ProcessExecutor.PROCESS_RESULT_OK){
@@ -141,6 +143,12 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 	}
 	
 
+	private void handleCanceled() throws ValidationException {
+		if (getCancelStateProvider().isCanceled()){
+			throw new ValidationException("Canceled by user");
+		}
+	}
+
 	public void setOutputHandler(OutputHandler outputHandler) {
 		this.outputHandler=outputHandler;
 	}
@@ -150,6 +158,17 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 			return;
 		}
 		outputHandler.output(message);
+	}
+
+	public void setCancelStateProvider(CancelStateProvider cancelStateProvider) {
+		this.cancelStateProvider=cancelStateProvider;
+	}
+	
+	public CancelStateProvider getCancelStateProvider() {
+		if (cancelStateProvider==null){
+			return CancelStateProvider.NEVER_CANCELED;
+		}
+		return cancelStateProvider;
 	}
 
 }

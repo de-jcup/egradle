@@ -26,11 +26,11 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.execution.validation.RootProjectValidation;
+import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.ui.RootProjectConfigUIDelegate;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage 
-	implements IWorkbenchPreferencePage, RootProjectValidation {
+	implements IWorkbenchPreferencePage, RootProjectValidationHandler {
 
 	private String originRootProject;
 	private RootProjectConfigUIDelegate uiDelegate;
