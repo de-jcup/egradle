@@ -19,5 +19,8 @@ import de.jcup.egradle.core.domain.CancelStateProvider;
 
 public interface ProcessContext {
 	
+	/**
+	 * @return cancel state provider ,never <code>null</code>
+	 */
 	public CancelStateProvider getCancelStateProvider();
 }

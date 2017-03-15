@@ -33,8 +33,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.GradleImportScanner;
+import de.jcup.egradle.core.ProcessExecutionResult;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
@@ -42,6 +42,7 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
@@ -78,7 +79,6 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		// this.selection = currentSelection;
 		setWindowTitle("EGradle Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
-
 		setDefaultPageImageDescriptor(desc);
 	}
 
@@ -97,8 +97,11 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		shell=mainPage.getShellCommand();
 		gradleCommand=mainPage.getGradleCommand();
 		callTypeId=mainPage.getCallTypeId();
+		
+		EGradleUtil.openSystemConsole(true);
+		
 		try {
-			getContainer().run(true, false, new IRunnableWithProgress() {
+			getContainer().run(true, true, new IRunnableWithProgress() {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
@@ -154,43 +157,16 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			importProgressMessage(monitor, "collect infos about existing eclipse projects");
 			monitor.worked(++worked);
 
-			/* close the projects which will be deleted/reimported */
-			for (IProject projectToClose : projectsToClose) {
-				importProgressMessage(monitor, "close already existing project:" + projectToClose.getName());
-				if (EGradleUtil.isRootProject(projectToClose)){
-					/* ignore on close*/
-				}else{
-					projectToClose.close(monitor);
-				}
-				monitor.worked(++worked);
+			worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
+			if (monitor.isCanceled()){
+				return;
 			}
-
-			Result result = executeGradleEclipse(rootProject, monitor);
-			if (!result.isOkay()) {
-				
-				EGradleUtil.openSystemConsole();
-				
-				/*
-				 * UNDO !
-				 */
-				getDialogSupport()
-						.showError("Was not able to execute 'gradle eclipse'. Look into opened gradle system console for more details.\n\n"
-								+ "Will now UNDO former actions!\n\n"
-								+ "Please check your settings are correct in egradle preferences.\n"
-								+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"
-								+ "Also your projects have to apply eclipse plugin inside build.gradle.");
-				importProgressMessage(monitor, "import failed - undo former project closing");
-				/*
-				 * reopen former project parts because import was not successful
-				 */
-				for (IProject projectToClose : projectsToClose) {
-					importProgressMessage(monitor, "reopen already existing project:" + projectToClose.getName());
-					projectToClose.open(monitor);
-					monitor.worked(++worked); // also count to show progress
-				}
-				if (virtualRootExistedBefore){
-					createOrRecreateVirtualRootProject();
-				}
+			
+			ProcessExecutionResult processExecutionResult = executeGradleEclipse(rootProject, monitor);
+			
+			if (processExecutionResult.isNotOkay()) {
+				worked = undoFormerClosedProjects(monitor, worked, virtualRootExistedBefore, projectsToClose,
+						processExecutionResult);
 				return;
 			}
 			/* result is okay, so use this setup in preferences now */
@@ -202,20 +178,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			preferences.setGradleShellType(shell);
 			preferences.setGradleCallTypeID(callTypeId);
 			
-			/* delete the projects */
-			for (IProject projectToClose : projectsToClose) {
-				importProgressMessage(monitor, "delete already existing project:" + projectToClose.getName());
-				projectToClose.delete(false, true, monitor);
-				monitor.worked(++worked);
-			}
-			/* start import of all eclipse projects inside multiproject */
-			for (File folder : foldersToImport) {
-				importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
-				IProject project = getResourceHelper().importProject(folder, monitor);
-				project.open(monitor);
-				automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
-				monitor.worked(++worked);
-			}
+			worked = deleteProjects(monitor, worked, projectsToClose);
+			worked = importProjects(monitor, worked, foldersToImport);
 
 			/* recreate virtual root project */
 			if (createVirtualRoot) {
@@ -225,6 +189,77 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			monitor.done();
 		}
 
+	}
+
+	private int undoFormerClosedProjects(IProgressMonitor monitor, int worked, boolean virtualRootExistedBefore,
+			List<IProject> projectsToClose, ProcessExecutionResult processExecutionResult)
+			throws CoreException, VirtualRootProjectException {
+		/*
+		 * UNDO !
+		 */
+		EGradleUtil.openSystemConsole(true);
+		
+		if (processExecutionResult.isCanceledByuser()){
+			importProgressMessage(monitor, "import canceled - undo former project closing");
+		}else{
+			getDialogSupport()
+			.showError("Was not able to execute 'gradle eclipse'. Look into opened gradle system console for more details.\n\n"
+					+ "Will now UNDO former actions!\n\n"
+					+ "Please check your settings are correct in egradle preferences.\n"
+					+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"
+					+ "Also your projects have to apply eclipse plugin inside build.gradle.");
+			importProgressMessage(monitor, "import failed - undo former project closing");
+		}
+		/*
+		 * reopen former project parts because import was not successful
+		 */
+		for (IProject projectToClose : projectsToClose) {
+			importProgressMessage(monitor, "reopen already existing project:" + projectToClose.getName());
+			projectToClose.open(monitor);
+			monitor.worked(++worked); // also count to show progress
+		}
+		if (virtualRootExistedBefore){
+			createOrRecreateVirtualRootProject();
+		}
+		return worked;
+	}
+
+	private int importProjects(IProgressMonitor monitor, int worked, List<File> foldersToImport) throws CoreException {
+		/* start import of all eclipse projects inside multiproject */
+		for (File folder : foldersToImport) {
+			importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
+			IProject project = getResourceHelper().importProject(folder, monitor);
+			project.open(monitor);
+			automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
+			monitor.worked(++worked);
+		}
+		return worked;
+	}
+
+	private int deleteProjects(IProgressMonitor monitor, int worked, List<IProject> projectsToClose)
+			throws CoreException {
+		/* delete the projects */
+		for (IProject projectToClose : projectsToClose) {
+			importProgressMessage(monitor, "delete already existing project:" + projectToClose.getName());
+			projectToClose.delete(false, true, monitor);
+			monitor.worked(++worked);
+		}
+		return worked;
+	}
+
+	private int closeProjectsWhichWillBeDeletedOrReimported(IProgressMonitor monitor, int worked,
+			List<IProject> projectsToClose) throws CoreException {
+		/* close the projects which will be deleted/reimported */
+		for (IProject projectToClose : projectsToClose) {
+			importProgressMessage(monitor, "close already existing project:" + projectToClose.getName());
+			if (EGradleUtil.isRootProject(projectToClose)){
+				/* ignore on close*/
+			}else{
+				projectToClose.close(monitor);
+			}
+			monitor.worked(++worked);
+		}
+		return worked;
 	}
 
 	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder) throws CoreException {
@@ -255,7 +290,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		getSystemConsoleOutputHandler().output(">>" + message);
 	}
 
-	private Result executeGradleEclipse(GradleRootProject rootProject, IProgressMonitor progressMonitor)
+	private ProcessExecutionResult executeGradleEclipse(GradleRootProject rootProject, IProgressMonitor progressMonitor)
 			throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
 		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, 30);
@@ -273,8 +308,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		};
 		delegate.execute(progressMonitor);
 
-		Result result = delegate.getResult();
-		return result;
+		ProcessExecutionResult processExecutionResult = delegate.getResult();
+		return processExecutionResult;
 	}
 
 	public void addPages() {

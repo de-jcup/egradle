@@ -565,13 +565,6 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Open system console and disables scroll lock if set
-	 */
-	public static void openSystemConsole() {
-		openSystemConsole(true);
-	}
-	
-	/**
 	 * Open system console
 	 * @param ensureNoScrollLock - if <code>true</code> scroll lock will be disabled
 	 */
@@ -826,6 +819,9 @@ public class EGradleUtil {
 		return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(id);
 	}
 
+	/**
+	 * Shows console view
+	 */
 	public static void showConsoleView() {
 		IWorkbenchPage activePage = getActivePage();
 		if (activePage!=null){

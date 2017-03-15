@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
@@ -52,8 +51,8 @@ public class GradleExecutor {
 	 * @param context
 	 * @return result
 	 */
-	public Result execute(GradleContext context) {
-		Result result = new Result();
+	public ProcessExecutionResult execute(GradleContext context) {
+		ProcessExecutionResult processExecutionResult = new ProcessExecutionResult();
 
 		String[] commandStrings = createExecutionCommand(context);
 
@@ -61,13 +60,15 @@ public class GradleExecutor {
 		int processResult;
 		try {
 			processResult = processExecutor.execute(context.getConfiguration(), context, context, commandStrings);
-			result.setCommands(context.getCommandString());
-			result.setProcessResult(processResult);
+			processExecutionResult.setCommands(context.getCommandString());
+			processExecutionResult.setProcessResult(processResult);
 		} catch (IOException e) {
-			result.setException(e);
+			processExecutionResult.setException(e);
 		}
-
-		return result;
+		if (context.getCancelStateProvider().isCanceled()){
+			processExecutionResult.setCanceledByuser(true);
+		}
+		return processExecutionResult;
 	}
 
 	String[] createExecutionCommand(GradleContext context) {
@@ -134,62 +135,5 @@ public class GradleExecutor {
 			
 		}
 		return commandStrings;
-	}
-
-	public class Result {
-
-		private Integer processResult;
-		private Exception exception;
-		private String[] commands;
-
-		public boolean isOkay() {
-			return ProcessExecutor.PROCESS_RESULT_OK.equals(processResult);
-		}
-
-		public void setCommands(String... commands) {
-			this.commands = commands;
-		}
-
-		public void setException(Exception e) {
-			this.exception = e;
-
-		}
-
-		public void setProcessResult(int processResult) {
-			this.processResult = processResult;
-		}
-
-		@Override
-		public String toString() {
-			return "Result [processResult=" + processResult + ", exception=" + exception + "]";
-		}
-
-		public int getResultCode() {
-			if (processResult == null) {
-				return -1;
-			}
-			return processResult;
-		}
-
-		public String createDescription() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Executed: ");
-			if (ArrayUtils.isNotEmpty(commands)) {
-				for (String command : commands) {
-					sb.append(command);
-					sb.append(" ");
-				}
-			}
-			sb.append("\n\n");
-			if (!isOkay()) {
-				if (processResult == null) {
-					sb.append("Process was terminated by unknown reason, no exit code available");
-				} else {
-					sb.append("Build failed with exit code " + getResultCode());
-				}
-			}
-			return sb.toString();
-		}
-
 	}
 }

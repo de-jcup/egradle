@@ -44,7 +44,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
 		super.beforeExecutionDone(monitor);
 		if (showEGradleSystemConsole) {
-			EGradleUtil.openSystemConsole();
+			EGradleUtil.openSystemConsole(true);
 		}
 	}
 

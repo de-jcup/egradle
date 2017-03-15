@@ -28,7 +28,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.GradleExecutor.Result;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -96,17 +95,17 @@ public class GradleExecutorTest {
 	public void executing_returns_result_not_null() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
-		Result result = executorToTest.execute(mockedContext);
-		assertNotNull(result);
+		ProcessExecutionResult processExecutionResult = executorToTest.execute(mockedContext);
+		assertNotNull(processExecutionResult);
 	}
 
 	@Test
 	public void executing_returns_result_being_ok() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
-		Result result = executorToTest.execute(mockedContext);
-		assertNotNull(result);
-		assertTrue(result.isOkay());
+		ProcessExecutionResult processExecutionResult = executorToTest.execute(mockedContext);
+		assertNotNull(processExecutionResult);
+		assertTrue(processExecutionResult.isOkay());
 	}
 	
 	@Test

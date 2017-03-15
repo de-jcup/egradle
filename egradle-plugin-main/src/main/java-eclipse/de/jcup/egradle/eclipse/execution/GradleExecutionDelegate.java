@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.jcup.egradle.core.GradleExecutor;
-import de.jcup.egradle.core.GradleExecutor.Result;
+import de.jcup.egradle.core.ProcessExecutionResult;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -51,11 +51,11 @@ public class GradleExecutionDelegate {
 
 	private GradleContext context;
 	private OutputHandler outputHandler;
-	private Result result;
+	private ProcessExecutionResult processExecutionResult;
 	protected GradleExecutor executor;
 
-	public Result getResult() {
-		return result;
+	public ProcessExecutionResult getResult() {
+		return processExecutionResult;
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class GradleExecutionDelegate {
 	 * @throws Exception
 	 */
 	public void execute(IProgressMonitor monitor) throws Exception {
-
+		processExecutionResult = new ProcessExecutionResult();
 		try {
 			GradleRootProject rootProject = context.getRootProject();
 			String commandString = context.getCommandString();
@@ -166,12 +166,15 @@ public class GradleExecutionDelegate {
 					.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
 			if (monitor.isCanceled()) {
+				outputHandler.output("[CANCELED]");
+				processExecutionResult.setCanceledByuser(true);
 				return;
 			}
 			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
 			context.register(cancelStateProvider);
-			result = executor.execute(context);
-			if (result.isOkay()) {
+			
+			processExecutionResult = executor.execute(context);
+			if (processExecutionResult.isOkay()) {
 				outputHandler.output("[OK]");
 			} else {
 				outputHandler.output("[FAILED]");

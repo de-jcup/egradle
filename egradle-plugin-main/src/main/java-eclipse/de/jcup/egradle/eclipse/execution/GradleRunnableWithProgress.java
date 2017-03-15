@@ -23,6 +23,8 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
+import de.jcup.egradle.core.ProcessExecutionResult;
+
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
 	private GradleExecutionDelegate execution;
 
@@ -36,8 +38,12 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 
 		try {
 			execution.execute(monitor);
-			if (!execution.getResult().isOkay()) {
-				getDialogSupport().showWarning("Result was not okay:" + execution.getResult().getResultCode());
+			ProcessExecutionResult result = execution.getResult();
+			if (result.isCanceledByuser()){
+				return;
+			}
+			if (!result.isOkay()) {
+				getDialogSupport().showWarning("Result was not okay:" + result.getResultCode());
 			}
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);
