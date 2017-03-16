@@ -17,6 +17,8 @@
 		<li><a href="#quick_outline">Quick Outline</a></li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
 		<li><a href="#bracket_switching">Bracket switching</a></li>	
+		<li><a href="#bracket_auto_create_ending_bracket">Auto create ending bracket</a></li>	
+		<li><a href="#block_commenting">Block commenting /uncommenting</a></li>	
 		<li><a href="#link_to_urls">Open URL by text links</a></li>	
 		<li><a href="#link_to_gradle_files">Open other gradle files by text links</a></li>	
 		<li><a href="#syntax_highlighting">Syntax highlighting</a>
@@ -133,7 +135,7 @@
 	
 	<h2 id="bracket_switching">Bracket switching</h2>
 	<p>
-		EGradle editor supports curly bracket switching and rendering. In next picture the cursor is behind curly bracket in line 7
+		EGradle editor supports bracket switching and rendering. In next picture the cursor is behind curly bracket in line 7
 		so its corresponding part in line 11 is rendered.
 	</p>
 	<img src="images/egradle-bracket-switching-1.png" />
@@ -154,10 +156,57 @@
 	
 	<br />
 	<br />
+	
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h2 id="link_to_urls">Open other gradle files by text links</h2>
+	
+	<h2 id="bracket_auto_create_ending_bracket">Auto create ending bracket</h2>
+	<p>
+		EGradle editor supports automatic bracket closing for curly brackets. In next picture the cursor is behind entered
+		text "dependencies":
+	</p>
+	<img src="images/egradle-editor-auto-create-ending-brackets-1.png" />
+	<p>
+		When pressing { the closing curly bracket will be automatically added. The cursor remains after opening bracket: 
+	</p>
+	<img src="images/egradle-editor-auto-create-ending-brackets-2.png" />
+	<h3>Bracket closing preferences</h3>
+	<p>
+		Inside editor preferences you are able to enable/disable auto creation of ending brackets:
+	</p>
+	<img src="images/egradle-editor-preferences-auto-create-ending-brackets.png" />
+	
+	<br />
+	<br />
+	
+	
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	
+	<h2 id="block_commenting">Block commenting</h2>
+	<p>
+		EGradle editor supports block commenting. In next picture parts of two lines (3-4) are selected:
+	</p>
+	<img src="images/egradle-editor-toggle-comments-1.png" />
+	<p>
+		When pressing CTRL + 7 both lines are transformed to single line comments:
+	</p>
+	<img src="images/egradle-editor-toggle-comments-2.png" />
+	<p>
+		When pressing CTRL + 7 again lines will loose their comments:
+		
+	</p>
+	<img src="images/egradle-editor-toggle-comments-3.png" />
+	<br />
+	<br />
+	
+	
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h2 id="link_to_urls">Open URL by text links</h2>
 	<p>
 		URLs can be opened by pressing CTRL and hoover over a text part inside gradle editor where a URL is available. Works
 		same way as described for <a href="#link_to_gradle_files">linking gradle files</a> but will open the URL with system browser.
