@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EGradle show project dependencies</title>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner_128x128.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>Show project dependencies</h1>
+	<p>When you want to know which dependencies a project has (with all inherited dependencies) 
+	simply select a gradle root or subproject in Navigator or Package explorer and do following context action:
+		</p>
+	<img src="images/egradle-project-show-dependencies-1.png" />
+	<p>After executing "show dependencies" you will get a dialog appearing on your screen:</p>
+	<img src="images/egradle-project-show-dependencies-2.png" />
+	<p>You can choose one of the predefined default entries or type a custom one. When you have already opened this dialog before
+	the former selected configuration will reappear at combobox.</p>
+	<img src="images/egradle-project-show-dependencies-3.png" />
+	<p>This will
+	<ul>
+		<li>Call "cleanEclipse eclipse" task inside your configured
+			gradle root project.</li>
+		<li>Refresh all eclipse projects</li>
+		<li>Gradle build folders are automatically derived if <a href="filehandling.html#automatically_derive_buildfolders">derive
+				feature</a> is enabled in preferences
+	</ul>
+	</p>
+
+	<br>
+	<br>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>

@@ -1,21 +1,30 @@
 package de.jcup.egradle.eclipse.ui;
 //Send questions, comments, bug reports, etc. to the authors:
 
+import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.util.Geometry;
 //Rob Warner (rwarner@interspatial.com)
 //Robert Harris (rbrt_harris@yahoo.com)
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+
+import de.jcup.egradle.eclipse.Activator;
 
 /**
  * This class demonstrates how to create your own dialog classes. It allows
@@ -25,6 +34,17 @@ public class SelectConfigurationDialog extends Dialog {
 	private String message;
 	private String input;
 	private Image titleImage;
+	private Shell shell;
+	private boolean okPressed;
+	/**
+	 * The dialog settings key name for stored dialog x location.
+	 */
+	private static final String DIALOG_ORIGIN_X = "DIALOG_X_ORIGIN"; //$NON-NLS-1$
+
+	/**
+	 * The dialog settings key name for stored dialog y location.
+	 */
+	private static final String DIALOG_ORIGIN_Y = "DIALOG_Y_ORIGIN"; //$NON-NLS-1$
 
 	/**
 	 * InputDialog constructor
@@ -101,7 +121,7 @@ public class SelectConfigurationDialog extends Dialog {
 	 */
 	public String open() {
 		// Create the dialog window
-		Shell shell = new Shell(getParent(), getStyle());
+		shell = new Shell(getParent(), getStyle());
 		shell.setText(getText());
 		if (titleImage != null) {
 			shell.setImage(titleImage);
@@ -112,22 +132,47 @@ public class SelectConfigurationDialog extends Dialog {
 
 		Display display = shell.getDisplay();
 
-		Rectangle bounds = display.getClientArea();
-		Rectangle rect = shell.getBounds();
+		shell.setLocation(getInitialLocation(shell.getSize()));
 
-		int x = bounds.x + (bounds.width - rect.width) / 2;
-		int y = bounds.y + (bounds.height - rect.height) / 2;
+		shell.addListener(SWT.Close, new Listener() {
+			public void handleEvent(Event event) {
+				persistLocation();
+			}
 
-		shell.setLocation(x, y);
+		});
 
 		shell.open();
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
 		// Return the entered value, or null
+		if (! okPressed){
+			return null;
+		}
+		
 		return input;
+	}
+	
+	private void persistLocation() {
+		if (shell==null || shell.isDisposed()){
+			return;
+		}
+		IDialogSettings settings = getDialogSettings();
+		if (settings != null) {
+			Point shellLocation = shell.getLocation();
+			Shell parent = getParent();
+			if (parent != null) {
+				Point parentLocation = parent.getLocation();
+				shellLocation.x -= parentLocation.x;
+				shellLocation.y -= parentLocation.y;
+			}
+			String prefix = getClass().getName();
+			settings.put(prefix + DIALOG_ORIGIN_X, shellLocation.x);
+			settings.put(prefix + DIALOG_ORIGIN_Y, shellLocation.y);
+		}
 	}
 
 	/**
@@ -150,7 +195,7 @@ public class SelectConfigurationDialog extends Dialog {
 		combo.setBounds(50, 50, 150, 65);
 		String items[] = { "", "compile", "testCompile", "runtime", "testRuntime" };
 		combo.setItems(items);
-		
+
 		if (input != null) {
 			for (int i = 0; i < items.length; i++) {
 				if (input.equals(items[i])) {
@@ -171,8 +216,10 @@ public class SelectConfigurationDialog extends Dialog {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		ok.setLayoutData(data);
 		ok.addSelectionListener(new SelectionAdapter() {
+
 			public void widgetSelected(SelectionEvent event) {
 				input = combo.getText();
+				okPressed=true;
 				shell.close();
 			}
 		});
@@ -195,4 +242,86 @@ public class SelectConfigurationDialog extends Dialog {
 		// to dismiss
 		shell.setDefaultButton(ok);
 	}
+
+	/**
+	 * Returns the initial location to use for the shell. The default
+	 * implementation centers the shell horizontally (1/2 of the difference to
+	 * the left and 1/2 to the right) and vertically (1/3 above and 2/3 below)
+	 * relative to the parent shell, or display bounds if there is no parent
+	 * shell.
+	 *
+	 * @param initialSize
+	 *            the initial size of the shell, as returned by
+	 *            <code>getInitialSize</code>.
+	 * @return the initial location of the shell
+	 */
+	protected Point getInitialLocation(Point initialSize) {
+		Point result = getPersistedLocation();
+		if (result != null) {
+			return result;
+		}
+		return calculateCenterOnCurrentDisplay(initialSize);
+	}
+
+	private Point calculateCenterOnCurrentDisplay(Point initialSize) {
+		if (shell==null || shell.isDisposed()){
+			return new Point(0,0);
+		}
+		/* fall back implemenrtation for unpersisted location */
+		Composite parent = getParent();
+		Monitor monitor = null;
+
+		if (parent == null) {
+			monitor = shell.getDisplay().getPrimaryMonitor();
+		} else {
+			monitor = parent.getMonitor();
+		}
+
+		Rectangle monitorBounds = monitor.getClientArea();
+		Point centerPoint;
+		if (parent != null) {
+			centerPoint = Geometry.centerPoint(parent.getBounds());
+		} else {
+			centerPoint = Geometry.centerPoint(monitorBounds);
+		}
+
+		return new Point(centerPoint.x - (initialSize.x / 2), Math.max(monitorBounds.y, Math
+				.min(centerPoint.y - (initialSize.y * 2 / 3), monitorBounds.y + monitorBounds.height - initialSize.y)));
+	}
+
+	private Point getPersistedLocation() {
+		if (shell==null || shell.isDisposed()){
+			return null;
+		}
+		Point result = null;
+		IDialogSettings dialogSettings = getDialogSettings();
+		if (dialogSettings == null) {
+			return null;
+		}
+		try {
+			int x = dialogSettings.getInt(getClass().getName() + DIALOG_ORIGIN_X);
+			int y = dialogSettings.getInt(getClass().getName() + DIALOG_ORIGIN_Y);
+			result = new Point(x, y);
+			// The coordinates were stored relative to the parent shell.
+			// Convert to display coordinates.
+			Shell parentShell = getParent();
+			if (parentShell != null) {
+				Point parentLocation = parentShell.getLocation();
+				result.x += parentLocation.x;
+				result.y += parentLocation.y;
+			}
+		} catch (NumberFormatException e) {
+		}
+		return result;
+	}
+
+	private IDialogSettings getDialogSettings() {
+		Activator activator = Activator.getDefault();
+		if (activator == null) {
+			return null;
+		}
+		IDialogSettings dialogSettings = activator.getDialogSettings();
+		return dialogSettings;
+	}
+
 }

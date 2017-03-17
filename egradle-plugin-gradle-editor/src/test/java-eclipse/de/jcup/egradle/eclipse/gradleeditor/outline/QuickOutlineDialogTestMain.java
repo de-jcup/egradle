@@ -50,10 +50,9 @@ public class QuickOutlineDialogTestMain {
 				return null;
 			}
 		};
-		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell);
+		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell,"Test quick outline dialog...");
 		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
 		dialog.open();
-
 		display.dispose();
 
 	}

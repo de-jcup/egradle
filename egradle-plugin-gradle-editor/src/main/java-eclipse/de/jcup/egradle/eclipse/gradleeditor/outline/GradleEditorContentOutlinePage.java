@@ -43,6 +43,7 @@ import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.Activator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
+import de.jcup.egradle.eclipse.ui.FallbackOutlineContentProvider;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 	
 	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",Activator.PLUGIN_ID);

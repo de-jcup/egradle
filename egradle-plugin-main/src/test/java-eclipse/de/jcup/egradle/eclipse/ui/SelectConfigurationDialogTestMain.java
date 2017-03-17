@@ -15,7 +15,8 @@ public class SelectConfigurationDialogTestMain {
 		s.setSize(250, 250);
 		s.setText("A select configuration dialog test");
 		
-		String configuration = new SelectConfigurationDialog(s).open();
+		SelectConfigurationDialog selectConfigurationDialog = new SelectConfigurationDialog(s);
+		String configuration = selectConfigurationDialog.open();
 		System.out.println("configuration selected:"+configuration);
 		d.dispose();
 	}

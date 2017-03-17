@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+ package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 

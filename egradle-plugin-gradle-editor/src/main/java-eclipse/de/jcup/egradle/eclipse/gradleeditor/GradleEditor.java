@@ -422,7 +422,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 			quickOutlineOpened = true;
 		}
 		Shell shell = getEditorSite().getShell();
-		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell);
+		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell,"Quick outline");
 		IDocument document = getDocumentProvider().getDocument(getEditorInput());
 		dialog.setInput(document);
 		dialog.open();
