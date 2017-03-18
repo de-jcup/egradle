@@ -14,7 +14,13 @@
 	EGradle has an integrated editor with following features: 
 	<ul>
 		<li><a href="#outline">Outline View</a></li>
-		<li><a href="#quick_outline">Quick Outline</a></li>		
+		<li><a href="#quick_outline">Quick Outline</a></li>
+		<li><a href="#code_assistance">Code assistance</a>
+			<ul>
+			<li><a href="#code_completion">Code completion</a></li>
+			<li><a href="#code_tooltips">Code tooltips</a></li>
+			</ul>
+		</li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
 		<li><a href="#bracket_switching">Bracket switching</a></li>	
 		<li><a href="#bracket_auto_create_ending_bracket">Auto create ending bracket</a></li>	
@@ -116,7 +122,44 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
+	<h2 id="code_assistance">Code assistence</h2>
+	<p>
+		The editor contains a basic code completion and tooltip support. Basic, because 
+		<ul>
+		<li>there are still many things to improve</li>
+		<li>many features known from Java editor code completion are still missing.</li>
+		<li>dynamic delegation targets like 	
+<pre>
+	configure(something){
+		/* at this time EGradle editor does not know what something is...*/
+	}
+</pre>
+		cannot be resolved currently.</li>
+		<li>The included EGradle SDK is for Gradle 3.0</li>
+		</ul>
+	</p>
+	<h3 id="code_completion">Code completion</h3>
+	<p>In next picture cursor is at line 2 and <pre>CTRL + SPACE</pre> is pressed.
+	The code completion appears:</p>
+	<img src="images/egradle-code-assist-1.png" />
+	<p>As you can see there are many suggestions. Because its very difficult to handle
+	the correct applied plugin in every context egradle will always suggest any known
+	action from all potential plugins (even when you not have applied one).	
+	</p>
+	<p>
+		When you have entered already parts or you start typing while proposals
+		are shown, the content will be filtered:
+	</p>
+	<img src="images/egradle-code-assist-2.png" />
+	<p>
+		Your entered code must not be the start of the proposals - at the next image "project" is entered and user gets also "allProjects" for example:
+	</p>
+	<img src="images/egradle-code-assist-3.png" />
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
 	
 	<h2 id="parse_failures">Show parse failures</h2>
 	<p>
