@@ -17,8 +17,9 @@
 		<li><a href="#quick_outline">Quick Outline</a></li>
 		<li><a href="#code_assistance">Code assistance</a>
 			<ul>
-			<li><a href="#code_completion">Code completion</a></li>
-			<li><a href="#code_tooltips">Code tooltips</a></li>
+				<li><a href="#code_completion">Code completion</a></li>
+				<li><a href="#code_tooltips">Code tooltips</a></li>
+				<li><a href="#codeassist_preferences">Code assistance preferences</a></li>
 			</ul>
 		</li>		
 		<li><a href="#parse_failures">Show parse failures</a></li>	
@@ -122,7 +123,7 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h2 id="code_assistance">Code assistence</h2>
+	<h2 id="code_assistance">Code assistance</h2>
 	<p>
 		The editor contains a basic code completion and tooltip support. Basic, because 
 		<ul>
@@ -135,16 +136,18 @@
 	}
 </pre>
 		cannot be resolved currently.</li>
-		<li>The included EGradle SDK is for Gradle 3.0</li>
 		</ul>
+		The included EGradle SDK plugin supports always only one version. You find more information about SDK and its content at <a href='#codeassist_preferences'>code assistant preferences</a>.  
 	</p>
 	<h3 id="code_completion">Code completion</h3>
 	<p>In next picture cursor is at line 2 and <pre>CTRL + SPACE</pre> is pressed.
 	The code completion appears:</p>
 	<img src="images/egradle-code-assist-1.png" />
-	<p>As you can see there are many suggestions. Because its very difficult to handle
-	the correct applied plugin in every context egradle will always suggest any known
-	action from all potential plugins (even when you not have applied one).	
+	<p>As you can see there are many suggestions. <br>
+	Because its very difficult to handle the correct applied plugin in every context,
+	EGradle will always suggest any known action from all potential plugins.
+	So even when you not have applied one.<br><br> 
+	Simply look at the	tooltips and proposal texts when you got problems - there is normally always an information there when you need a plugin to apply before. 	
 	</p>
 	<p>
 		When you have entered already parts or you start typing while proposals
@@ -161,6 +164,55 @@
 		<a href="#top">Top</a>
 	</p>
 	
+	<h2 id="code_tooltips">Code tooltips</h2>
+	<p>
+		When you hoover in editor at parts which are visible in outline view you
+		got a tooltip appearing describing the current method call property etc.<br><br>
+		
+		The next image shows the tooltip which appears when your mouse is at line 32 over "task":
+		
+	</p>
+	<img src="images/egradle-code-assist-tooltip-1.png" />
+	<p>
+		As you can see the new defined task "myJavaDoc", which is of type JavaDoc, is
+		described in tooltip.<br><br>
+		
+		When you click on the green "Go to appendix" link you will see following:
+	</p>
+	<img src="images/egradle-code-assist-tooltip-2.png" />
+	<p>In the picture above the tooltip window has scrolled to Appendix which contains estimated Links to 
+	gradle DSL and gradle API.<br>When you press now the "Link to online gradle DSL documentation" link
+	the gradle DSL documentation page is rendered inside the tooltip window:</p>
+	<img src="images/egradle-code-assist-tooltip-3.png" />
+	<p>If its too small to read, or you want to search etc. you can simple press the red marked button
+	and the site will be opened inside your system web browser:
+	</p>
+	<img src="images/egradle-code-assist-tooltip-4.png" />
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
+		
+	<h2 id="codeassist_preferences">Code assistance preferences</h2>
+	<p>
+		Code assistance has following preferences:
+	</p>
+	<img src="images/egradle-preferences-codeassist.png" />
+	<p>
+		You can turn off/on code proposals and tooltips here. <br><br>Also a "SDK information"
+		group is visible: <br>
+		It shows the version of SDK plugin and some extra informatio like supported gradle version and local SDK installation time.
+		The SDK version numbering is bound with supported gradle version. So a "<b>3.0</b>.0" means, that
+		the SDK contains support for gradle <b>3.0</b> and has its internal version "0".<br>
+		<br> When SDK support additional plugins - e.g. ""android" you will find this information also here.
+		
+	</p>
+	<br />
+	<br />
+	<p>
+		<a href="#top">Top</a>
+	</p>
 	<h2 id="parse_failures">Show parse failures</h2>
 	<p>
 		EGradle editor will automatically parse the opened gradle file and mark all parse errors. 
