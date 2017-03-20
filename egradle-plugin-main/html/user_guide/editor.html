@@ -9,9 +9,16 @@
 <body>
 	<img src="./../images/egradle-banner_128x128.png" />
 	<a href="../user_guide.html">User guide</a>
-	<h1>Editor</h1>
+	<h1>EGradle editor</h1>
 	<p>
-	EGradle has an integrated editor with following features: 
+		With version 1.3.0 the EGradle editor icon changed from original gradle icon <img
+			src="images/gradle-og.png" /> to <img src="images/gradle-editor.png" />. <br>
+			This was done to differ from gradle execution parts and also from other editors. 
+			Some older documentation parts still showing the old image still as editor icon, so please be not confused.
+			New screenshots will always contain the new icon. 
+
+	</p>
+	<p>The editor has following features:
 	<ul>
 		<li><a href="#outline">Outline View</a></li>
 		<li><a href="#quick_outline">Quick Outline</a></li>
@@ -19,26 +26,31 @@
 			<ul>
 				<li><a href="#code_completion">Code completion</a></li>
 				<li><a href="#code_tooltips">Code tooltips</a></li>
-				<li><a href="#codeassist_preferences">Code assistance preferences</a></li>
-			</ul>
-		</li>		
-		<li><a href="#parse_failures">Show parse failures</a></li>	
-		<li><a href="#bracket_switching">Bracket switching</a></li>	
-		<li><a href="#bracket_auto_create_ending_bracket">Auto create ending bracket</a></li>	
-		<li><a href="#block_commenting">Block commenting /uncommenting</a></li>	
-		<li><a href="#link_to_urls">Open URL by text links</a></li>	
-		<li><a href="#link_to_gradle_files">Open other gradle files by text links</a></li>	
+				<li><a href="#codeassist_preferences">Code assistance
+						preferences</a></li>
+			</ul></li>
+		<li><a href="#parse_failures">Show parse failures</a></li>
+		<li><a href="#bracket_switching">Bracket switching</a></li>
+		<li><a href="#bracket_auto_create_ending_bracket">Auto create
+				ending bracket</a></li>
+		<li><a href="#block_commenting">Block commenting
+				/uncommenting</a></li>
+		<li><a href="#link_to_urls">Open URL by text links</a></li>
+		<li><a href="#link_to_gradle_files">Open other gradle files
+				by text links</a></li>
 		<li><a href="#syntax_highlighting">Syntax highlighting</a>
 			<ul>
-			<li><a href="#syntax_highlight_standard_theme_defaults">Standard Theme</a></li>
-			<li><a href="#syntax_highlight_dark_theme_defaults">Dark Theme</a></li>
-			</ul>
-		</li>
-		
+				<li><a href="#syntax_highlight_standard_theme_defaults">Standard
+						Theme</a></li>
+				<li><a href="#syntax_highlight_dark_theme_defaults">Dark
+						Theme</a></li>
+			</ul></li>
+
 	</ul>
 	<p>
 		<img src="images/egradle-editor.png" />
 	</p>
+
 	<br />
 	<br />
 	<p>
@@ -46,77 +58,75 @@
 	</p>
 	<h2 id="outline">Outline view</h2>
 	<h3>Open outline view</h3>
-	<p>
-		Open a gradle build file with the EGradle editor. If the outline view is already active it will appear automatically, otherwise activate the view:
-	</p>
+	<p>Open a gradle build file with the EGradle editor. If the outline
+		view is already active it will appear automatically, otherwise
+		activate the view:</p>
 	<img src="images/eclipse-show-outline-view.png" />
 	<br />
 	<br />
 	<h3>Content</h3>
-	<p>
-		The outline view will give you a reduced view of your current gradle build file.
-	</p>
+	<p>The outline view will give you a reduced view of your current
+		gradle build file.</p>
 	<img src="images/egradle-editor-outline.png" />
 	<h4>Link with Editor</h4>
-	<p>
-		The outline view can be linked with Editor. In the left picture you see a linked outline. When you
-		click on the red circled button it will change to the purple circled version and the editor is no more linked with 
-		the outline. 
-	</p>
-	<p>
-		A linked outline will correspond on editor caret changes and also set caret and selection if user selects a 
-		position inside outline view by one single click.
-	</p>
-	<p>
-		An unlinked outline has still the ability to select parts of editor - a double click to outline item will do the selection too.
-	</p>
+	<p>The outline view can be linked with Editor. In the left picture
+		you see a linked outline. When you click on the red circled button it
+		will change to the purple circled version and the editor is no more
+		linked with the outline.</p>
+	<p>A linked outline will correspond on editor caret changes and
+		also set caret and selection if user selects a position inside outline
+		view by one single click.</p>
+	<p>An unlinked outline has still the ability to select parts of
+		editor - a double click to outline item will do the selection too.</p>
 	<table border='0'>
 		<tr>
 			<td><img src="images/egradle-editor-outline-linked.png" /></td>
 			<td><img src="images/egradle-editor-outline-unlinked.png" /></td>
 		</tr>
 	</table>
-	
+
 	<h5>Link preferences</h5>
 	<p>
-		Inside editor preferences you are able to setup the default link behavior of new opened outlines.<br/>
-		Enable or disable the checkbox labeled with "New opened editors are linked with outline"
+		Inside editor preferences you are able to setup the default link
+		behavior of new opened outlines.<br /> Enable or disable the checkbox
+		labeled with "New opened editors are linked with outline"
 	</p>
 	<img src="images/egradle-editor-preferences-outline-link-default.png" />
-	<p/>
+	<p />
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
-	
+
+
 	<h2 id="quick_outline">Quick Outline</h2>
 	<h3>Open quick outline</h3>
-	<p>
-		Press CTRL + O when you are inside EGradle editor and the quick outline dialog appears. Selected is
-		tree item next to your cursor position inside editor:
-	</p>
+	<p>Press CTRL + O when you are inside EGradle editor and the quick
+		outline dialog appears. Selected is tree item next to your cursor
+		position inside editor:</p>
 	<img src="images/egradle-quick-outline-1.png" />
 	<br />
 	<br />
 	<h3>Keyboard usage</h3>
-	<p>When you press CURSOR DOWN inside input field, you will switch to current selected outline tree item. 
-	Now you can move around with cursor keys inside outline tree. When you press ENTER the dialog closes and 
-	your former selection is selected in editor. When you press ESC the dialog will close without any further 
-	action. 
-	</p>
+	<p>When you press CURSOR DOWN inside input field, you will switch
+		to current selected outline tree item. Now you can move around with
+		cursor keys inside outline tree. When you press ENTER the dialog
+		closes and your former selection is selected in editor. When you press
+		ESC the dialog will close without any further action.</p>
 	<h3>Content</h3>
 	<p>
-	Content is same as described in <a href="#outline">Outline View</a>. But the quick outline does not 
-	need a view to be visible, you can also filter for wanted parts. <br><br>
-	An example: you want to show all parts starting with "lib", so you simply type "lib" and the tree shows only leaves starting with lib.
+		Content is same as described in <a href="#outline">Outline View</a>.
+		But the quick outline does not need a view to be visible, you can also
+		filter for wanted parts. <br>
+		<br> An example: you want to show all parts starting with "lib",
+		so you simply type "lib" and the tree shows only leaves starting with
+		lib.
 	</p>
 	<img src="images/egradle-quick-outline-2.png" />
-	<p>
-	You can also use wildcards for filtering. The location of the quick outline dialog can be moved, resized and 
-	remembered. To change the behaviour open the menu as described in next picture.
-	</p>
+	<p>You can also use wildcards for filtering. The location of the
+		quick outline dialog can be moved, resized and remembered. To change
+		the behaviour open the menu as described in next picture.</p>
 	<img src="images/egradle-quick-outline-3.png" />
 	<br />
 	<br />
@@ -124,89 +134,98 @@
 		<a href="#top">Top</a>
 	</p>
 	<h2 id="code_assistance">Code assistance</h2>
-	<p>
-		The editor contains a basic code completion and tooltip support. Basic, because 
-		<ul>
+	<p>The editor contains a basic code completion and tooltip support.
+		Basic, because
+	<ul>
 		<li>there are still many things to improve</li>
-		<li>many features known from Java editor code completion are still missing.</li>
-		<li>dynamic delegation targets like 	
-<pre>
+		<li>many features known from Java editor code completion are
+			still missing.</li>
+		<li>dynamic delegation targets like <pre>
 	configure(something){
 		/* at this time EGradle editor does not know what something is...*/
 	}
-</pre>
-		cannot be resolved currently.</li>
-		</ul>
-		The included EGradle SDK plugin supports always only one version. You find more information about SDK and its content at <a href='#codeassist_preferences'>code assistant preferences</a>.  
+</pre> cannot be resolved currently.
+		</li>
+	</ul>
+	The included EGradle SDK plugin supports always only one version. You
+	find more information about SDK and its content at
+	<a href='#codeassist_preferences'>code assistant preferences</a>.
 	</p>
 	<h3 id="code_completion">Code completion</h3>
-	<p>In next picture cursor is at line 2 and <pre>CTRL + SPACE</pre> is pressed.
-	The code completion appears:</p>
+	<p>In next picture cursor is at line 2 and
+	<pre>CTRL + SPACE</pre>
+	is pressed. The code completion appears:
+	</p>
 	<img src="images/egradle-code-assist-1.png" />
-	<p>As you can see there are many suggestions. <br>
-	Because its very difficult to handle the correct applied plugin in every context,
-	EGradle will always suggest any known action from all potential plugins.
-	So even when you not have applied one.<br><br> 
-	Simply look at the	tooltips and proposal texts when you got problems - there is normally always an information there when you need a plugin to apply before. 	
-	</p>
 	<p>
-		When you have entered already parts or you start typing while proposals
-		are shown, the content will be filtered:
+		As you can see there are many suggestions. <br> Because its very
+		difficult to handle the correct applied plugin in every context,
+		EGradle will always suggest any known action from all potential
+		plugins. So even when you not have applied one.<br>
+		<br> Simply look at the tooltips and proposal texts when you got
+		problems - there is normally always an information there when you need
+		a plugin to apply before.
 	</p>
+	<p>When you have entered already parts or you start typing while
+		proposals are shown, the content will be filtered:</p>
 	<img src="images/egradle-code-assist-2.png" />
-	<p>
-		Your entered code must not be the start of the proposals - at the next image "project" is entered and user gets also "allProjects" for example:
-	</p>
+	<p>Your entered code must not be the start of the proposals - at
+		the next image "project" is entered and user gets also "allProjects"
+		for example:</p>
 	<img src="images/egradle-code-assist-3.png" />
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
+
 	<h2 id="code_tooltips">Code tooltips</h2>
 	<p>
-		When you hoover in editor at parts which are visible in outline view you
-		got a tooltip appearing describing the current method call property etc.<br><br>
-		
-		The next image shows the tooltip which appears when your mouse is at line 32 over "task":
-		
+		When you hoover in editor at parts which are visible in outline view
+		you got a tooltip appearing describing the current method call
+		property etc.<br>
+		<br> The next image shows the tooltip which appears when your
+		mouse is at line 32 over "task":
+
 	</p>
 	<img src="images/egradle-code-assist-tooltip-1.png" />
 	<p>
-		As you can see the new defined task "myJavaDoc", which is of type JavaDoc, is
-		described in tooltip.<br><br>
-		
-		When you click on the green "Go to appendix" link you will see following:
+		As you can see the new defined task "myJavaDoc", which is of type
+		JavaDoc, is described in tooltip.<br>
+		<br> When you click on the green "Go to appendix" link you will
+		see following:
 	</p>
 	<img src="images/egradle-code-assist-tooltip-2.png" />
-	<p>In the picture above the tooltip window has scrolled to Appendix which contains estimated Links to 
-	gradle DSL and gradle API.<br>When you press now the "Link to online gradle DSL documentation" link
-	the gradle DSL documentation page is rendered inside the tooltip window:</p>
-	<img src="images/egradle-code-assist-tooltip-3.png" />
-	<p>If its too small to read, or you want to search etc. you can simple press the red marked button
-	and the site will be opened inside your system web browser:
+	<p>
+		In the picture above the tooltip window has scrolled to Appendix which
+		contains estimated Links to gradle DSL and gradle API.<br>When
+		you press now the "Link to online gradle DSL documentation" link the
+		gradle DSL documentation page is rendered inside the tooltip window:
 	</p>
+	<img src="images/egradle-code-assist-tooltip-3.png" />
+	<p>If its too small to read, or you want to search etc. you can
+		simple press the red marked button and the site will be opened inside
+		your system web browser:</p>
 	<img src="images/egradle-code-assist-tooltip-4.png" />
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
-		
+
 	<h2 id="codeassist_preferences">Code assistance preferences</h2>
-	<p>
-		Code assistance has following preferences:
-	</p>
+	<p>Code assistance has following preferences:</p>
 	<img src="images/egradle-preferences-codeassist.png" />
 	<p>
-		You can turn off/on code proposals and tooltips here. <br><br>Also a "SDK information"
-		group is visible: <br>
-		It shows the version of SDK plugin and some extra informatio like supported gradle version and local SDK installation time.
-		The SDK version numbering is bound with supported gradle version. So a "<b>3.0</b>.0" means, that
-		the SDK contains support for gradle <b>3.0</b> and has its internal version "0".<br>
-		<br> When SDK support additional plugins - e.g. ""android" you will find this information also here.
-		
+		You can turn off/on code proposals and tooltips here. <br>
+		<br>Also a "SDK information" group is visible: <br> It shows
+		the version of SDK plugin and some extra informatio like supported
+		gradle version and local SDK installation time. The SDK version
+		numbering is bound with supported gradle version. So a "<b>3.0</b>.0"
+		means, that the SDK contains support for gradle <b>3.0</b> and has its
+		internal version "0".<br> <br> When SDK support additional
+		plugins - e.g. ""android" you will find this information also here.
+
 	</p>
 	<br />
 	<br />
@@ -214,120 +233,110 @@
 		<a href="#top">Top</a>
 	</p>
 	<h2 id="parse_failures">Show parse failures</h2>
-	<p>
-		EGradle editor will automatically parse the opened gradle file and mark all parse errors. 
-		In next image a closing bracket is missing:
+	<p>EGradle editor will automatically parse the opened gradle file
+		and mark all parse errors. In next image a closing bracket is missing:
 	</p>
 	<img src="images/egradle-editor-parser-error.png" />
-	<p>
-		The errors will be persisted and remain until parse errors are resolved.
-	</p>
+	<p>The errors will be persisted and remain until parse errors are
+		resolved.</p>
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
+
 	<h2 id="bracket_switching">Bracket switching</h2>
-	<p>
-		EGradle editor supports bracket switching and rendering. In next picture the cursor is behind curly bracket in line 7
-		so its corresponding part in line 11 is rendered.
-	</p>
+	<p>EGradle editor supports bracket switching and rendering. In next
+		picture the cursor is behind curly bracket in line 7 so its
+		corresponding part in line 11 is rendered.</p>
 	<img src="images/egradle-bracket-switching-1.png" />
-	<p>
-		When pressing CTRL + SHIFT + P the cursor moves to corresponding curly bracket in
-		line 11 and line 7 is rendered as corresponding part: 
+	<p>When pressing CTRL + SHIFT + P the cursor moves to corresponding
+		curly bracket in line 11 and line 7 is rendered as corresponding part:
 	</p>
 	<img src="images/egradle-bracket-switching-2.png" />
-	<p>
-		When pressing CTRL + SHIFT + P again the cursor moves back to line 7.
-		
-	</p>
+	<p>When pressing CTRL + SHIFT + P again the cursor moves back to
+		line 7.</p>
 	<h3>Bracket switching preferences</h3>
-	<p>
-		Inside editor preferences you are able to setup the bracket switching behaviour:
-	</p>
+	<p>Inside editor preferences you are able to setup the bracket
+		switching behaviour:</p>
 	<img src="images/egradle-editor-preferences-bracket-highlighting.png" />
-	
+
 	<br />
 	<br />
-	
+
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
-	<h2 id="bracket_auto_create_ending_bracket">Auto create ending bracket</h2>
-	<p>
-		EGradle editor supports automatic bracket closing for curly brackets. In next picture the cursor is behind entered
-		text "dependencies":
-	</p>
+
+	<h2 id="bracket_auto_create_ending_bracket">Auto create ending
+		bracket</h2>
+	<p>EGradle editor supports automatic bracket closing for curly
+		brackets. In next picture the cursor is behind entered text
+		"dependencies":</p>
 	<img src="images/egradle-editor-auto-create-ending-brackets-1.png" />
-	<p>
-		When pressing { the closing curly bracket will be automatically added. The cursor remains after opening bracket: 
-	</p>
+	<p>When pressing { the closing curly bracket will be automatically
+		added. The cursor remains after opening bracket:</p>
 	<img src="images/egradle-editor-auto-create-ending-brackets-2.png" />
 	<h3>Bracket closing preferences</h3>
-	<p>
-		Inside editor preferences you are able to enable/disable auto creation of ending brackets:
-	</p>
-	<img src="images/egradle-editor-preferences-auto-create-ending-brackets.png" />
-	
+	<p>Inside editor preferences you are able to enable/disable auto
+		creation of ending brackets:</p>
+	<img
+		src="images/egradle-editor-preferences-auto-create-ending-brackets.png" />
+
 	<br />
 	<br />
-	
-	
+
+
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	
+
 	<h2 id="block_commenting">Block commenting</h2>
-	<p>
-		EGradle editor supports block commenting. In next picture parts of two lines (3-4) are selected:
-	</p>
+	<p>EGradle editor supports block commenting. In next picture parts
+		of two lines (3-4) are selected:</p>
 	<img src="images/egradle-editor-toggle-comments-1.png" />
-	<p>
-		When pressing CTRL + 7 both lines are transformed to single line comments:
-	</p>
+	<p>When pressing CTRL + 7 both lines are transformed to single line
+		comments:</p>
 	<img src="images/egradle-editor-toggle-comments-2.png" />
-	<p>
-		When pressing CTRL + 7 again lines will loose their comments:
-		
-	</p>
+	<p>When pressing CTRL + 7 again lines will loose their comments:</p>
 	<img src="images/egradle-editor-toggle-comments-3.png" />
 	<br />
 	<br />
-	
-	
+
+
 	<p>
 		<a href="#top">Top</a>
 	</p>
 	<h2 id="link_to_urls">Open URL by text links</h2>
 	<p>
-		URLs can be opened by pressing CTRL and hoover over a text part inside gradle editor where a URL is available. Works
-		same way as described for <a href="#link_to_gradle_files">linking gradle files</a> but will open the URL with system browser.
+		URLs can be opened by pressing CTRL and hoover over a text part inside
+		gradle editor where a URL is available. Works same way as described
+		for <a href="#link_to_gradle_files">linking gradle files</a> but will
+		open the URL with system browser.
 	</p>
-	
+
 	<br />
 	<br />
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h2 id="link_to_gradle_files">Open other gradle files by text links</h2>
-	<p>
-		EGradle editor is able to open other gradle files by supporting hyperlink mechanism:
-		Simply press CTRL and hoover over a text where a gradle file is mentioned: 
-	</p>
+	<h2 id="link_to_gradle_files">Open other gradle files by text
+		links</h2>
+	<p>EGradle editor is able to open other gradle files by supporting
+		hyperlink mechanism: Simply press CTRL and hoover over a text where a
+		gradle file is mentioned:</p>
 	<img src="images/egradle-link-to-gradle-files-1.png" />
-	<p>
-		On clicking to given hyperlink the other gradle file is opened - the example file contains a 
-		comment which links to "build.gradle" back so it can also be used as an hyperlink:
-	</p>
+	<p>On clicking to given hyperlink the other gradle file is opened -
+		the example file contains a comment which links to "build.gradle" back
+		so it can also be used as an hyperlink:</p>
 	<img src="images/egradle-link-to-gradle-files-2.png" />
-	<h3 >Variable resolving</h3>
+	<h3>Variable resolving</h3>
 	<p>
-		As seen in first picture above the variable <code>${rootProject.projectDir}</code> is automatically resolved. Currently
-		the EGradle IDE only supports this variable. <br>
-		If the file is not available given inside "link" there is no hyperlinking.
+		As seen in first picture above the variable
+		<code>${rootProject.projectDir}</code>
+		is automatically resolved. Currently the EGradle IDE only supports
+		this variable. <br> If the file is not available given inside
+		"link" there is no hyperlinking.
 	</p>
 	<br />
 	<br />
@@ -336,24 +345,26 @@
 	</p>
 	<h2 id="syntax_highlighting">Syntax highlighting</h2>
 	<p>
-		EGradle editor supports syntax highlighting. Colors can be customized in preferences. There are defaults defined 
-		for <a href="#syntax_highlight_standard_theme_defaults">Standard Theme</a> and 
-		 <a href="#syntax_highlight_dark_theme_defaults">Dark Theme</a> 
-		<ul>
-			<li>All Java keywords</li>
-			<li>Strings</li>
-			<li>Comments</li>
-			<li>Some Groovy keywords</li>
-			<li>Some Gradle well known closures</li>
-			<li>Some Gradle predefined variables</li>
-		</ul>
+		EGradle editor supports syntax highlighting. Colors can be customized
+		in preferences. There are defaults defined for <a
+			href="#syntax_highlight_standard_theme_defaults">Standard Theme</a>
+		and <a href="#syntax_highlight_dark_theme_defaults">Dark Theme</a>
+	<ul>
+		<li>All Java keywords</li>
+		<li>Strings</li>
+		<li>Comments</li>
+		<li>Some Groovy keywords</li>
+		<li>Some Gradle well known closures</li>
+		<li>Some Gradle predefined variables</li>
+	</ul>
 	</p>
-	<h3 id="syntax_highlight_standard_theme_defaults">Default colors for Standard Theme</h3>
+	<h3 id="syntax_highlight_standard_theme_defaults">Default colors
+		for Standard Theme</h3>
 	<img src="images/egradle-syntax-coloring-standard-theme-defaults.png" />
-	<h3 id="syntax_highlight_dark_theme_defaults">Default colors for Dark Theme</h3>
-	<p>
-		EGradle supports own default colors for dark theme too. Simply press "Restore Defaults for Dark Theme" and press apply button.
-	</p>
+	<h3 id="syntax_highlight_dark_theme_defaults">Default colors for
+		Dark Theme</h3>
+	<p>EGradle supports own default colors for dark theme too. Simply
+		press "Restore Defaults for Dark Theme" and press apply button.</p>
 	<img src="images/egradle-syntax-coloring-dark-theme-defaults.png" />
 	<br />
 	<br />
