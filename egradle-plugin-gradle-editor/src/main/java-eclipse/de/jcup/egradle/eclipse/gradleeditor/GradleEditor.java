@@ -120,11 +120,15 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		if (isMarkerChangeForThisEditor(event)) {
 			int severity = getSeverity();
 
-			if (severity == IMarker.SEVERITY_ERROR) {
-				setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", Activator.PLUGIN_ID));
-			} else {
-				setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", Activator.PLUGIN_ID));
-			}
+			setTitleImageDependingOnSeverity(severity);
+		}
+	}
+
+	void setTitleImageDependingOnSeverity(int severity) {
+		if (severity == IMarker.SEVERITY_ERROR) {
+			setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", Activator.PLUGIN_ID));
+		} else {
+			setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", Activator.PLUGIN_ID));
 		}
 	}
 
@@ -199,6 +203,38 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		 * listening
 		 */
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+
+		setTitleImageInitial();
+	}
+
+	/**
+	 * Set initial title image dependent on current marker severity. This will
+	 * mark error icon on startup time which is not handled by resource change
+	 * handling, because having no change...
+	 */
+	private void setTitleImageInitial() {
+		IResource resource = resolveResource();
+		if (resource != null) {
+			try {
+				int maxSeverity = resource.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE);
+				setTitleImageDependingOnSeverity(maxSeverity);
+			} catch (CoreException e) {
+				/* ignore */
+			}
+		}
+	}
+
+	/**
+	 * Resolves resource from current editor input.
+	 * 
+	 * @return file resource or <code>null</code>
+	 */
+	private IResource resolveResource() {
+		IEditorInput input = getEditorInput();
+		if (!(input instanceof IFileEditorInput)) {
+			return null;
+		}
+		return ((IFileEditorInput) input).getFile();
 	}
 
 	/**
@@ -422,7 +458,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 			quickOutlineOpened = true;
 		}
 		Shell shell = getEditorSite().getShell();
-		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell,"Quick outline");
+		QuickOutlineDialog dialog = new QuickOutlineDialog(this, shell, "Quick outline");
 		IDocument document = getDocumentProvider().getDocument(getEditorInput());
 		dialog.setInput(document);
 		dialog.open();
