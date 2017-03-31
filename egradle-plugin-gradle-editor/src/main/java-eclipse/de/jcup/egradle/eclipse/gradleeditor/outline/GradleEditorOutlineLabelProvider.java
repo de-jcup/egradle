@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
+
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.IColorProvider;
@@ -125,7 +126,15 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	public Image getImage(Object element) {
 		if (element instanceof Item) {
 			Item item = (Item) element;
-			ItemType type = item.getItemType();
+			ItemType type = item.getLastChainedItemType();
+			
+			if (type==null){
+				type = item.getItemType();
+			}
+			if (type==null){
+				return null;
+			}
+			
 			Modifier modifier = item.getModifier();
 			String path = null;
 			switch (type) {

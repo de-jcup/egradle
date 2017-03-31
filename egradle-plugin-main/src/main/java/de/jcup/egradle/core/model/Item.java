@@ -209,6 +209,8 @@ public class Item {
 
 	private String[] parameters;
 
+	private ItemType lastChainedItemType;
+
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
@@ -422,4 +424,12 @@ public class Item {
 		return aPossibleParent;
 	}
 
+	public ItemType getLastChainedItemType() {
+		return lastChainedItemType;
+	}
+	
+	public void setLastChainedItemType(ItemType lastItemType) {
+		this.lastChainedItemType = lastItemType;
+	}
+	
 }

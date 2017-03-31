@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.parser.GroovyLexer;
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
@@ -54,6 +55,9 @@ public class GradleModelBuilder implements ModelBuilder {
 	private Filter preCreationFilter;
 	private GradleModelBuilderSupport support = new GradleModelBuilderSupport();
 
+	private FirstItemTypeUpdater firstItemTypeUpdater = new FirstItemTypeUpdater();
+	private LastItemTypeUpdater lastItemTypeUpdater = new LastItemTypeUpdater();
+	
 	public GradleModelBuilder(InputStream is) {
 		this.is = is;
 	}
@@ -637,45 +641,7 @@ public class GradleModelBuilder implements ModelBuilder {
 			if (name == null) {
 				return item;
 			}
-			if ("repositories".equals(name)) {
-				item.setItemType(ItemType.REPOSITORIES);
-			} else if ("allprojects".equals(name)) {
-				item.setItemType(ItemType.ALL_PROJECTS);
-			} else if ("subprojects".equals(name)) {
-				item.setItemType(ItemType.SUB_PROJECTS);
-			} else if ("dependencies".equals(name)) {
-				item.setItemType(ItemType.DEPENDENCIES);
-			} else if ("sourceSets".equals(name)) {
-				item.setItemType(ItemType.SOURCESETS);
-			} else if ("main".equals(name)) {
-				item.setItemType(ItemType.MAIN);
-			} else if ("jar".equals(name)) {
-				item.setItemType(ItemType.JAR);
-			} else if ("test".equals(name)) {
-				item.setItemType(ItemType.TEST);
-			} else if ("clean".equals(name)) {
-				item.setItemType(ItemType.CLEAN);
-			} else if ("buildscript".equals(name) || name.startsWith("buildscript.")) {
-				item.setItemType(ItemType.BUILDSCRIPT);
-			} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
-				item.setItemType(ItemType.CONFIGURATIONS);
-			} else if ("doFirst".equals(name)) {
-				item.setItemType(ItemType.DO_FIRST);
-			} else if ("doLast".equals(name)) {
-				item.setItemType(ItemType.DO_LAST);
-			} else if ("eclipse".equals(name)) {
-				item.setItemType(ItemType.ECLIPSE);
-			} else if (name.startsWith("task ") || name.startsWith("task.")) {
-				item.setItemType(ItemType.TASK);
-			} else if (name.startsWith("tasks.")) {
-				item.setItemType(ItemType.TASKS);
-			} else if (name.startsWith("apply ")) {
-				item.setItemType(ItemType.APPLY_SETUP);
-			} else if (name.startsWith("project ") || name.equals("project") || name.startsWith("project.")) {
-				item.setItemType(ItemType.PROJECT);
-			} else {
-				item.setItemType(ItemType.CLOSURE);
-			}
+			handleItemNames(item, name);
 		}
 		if (lastAst != null) {
 			item.setAPossibleParent(true);
@@ -684,7 +650,93 @@ public class GradleModelBuilder implements ModelBuilder {
 		}
 		return item;
 	}
-
+	
+	private void handleItemNames(Item item, String name) {
+		handleItemNames(item, name,firstItemTypeUpdater);
+		String lastMethodChainPartLastMethodChainPart = resolveLastMethodChainPart(name);
+		if (lastMethodChainPartLastMethodChainPart!=null){
+			handleItemNames(item, lastMethodChainPartLastMethodChainPart,lastItemTypeUpdater);
+		}
+	}
+	
+	private void handleItemNames(Item item, String name, ItemTypeUpdater updater) {
+		if ("repositories".equals(name)) {
+			updater.setItemType(item,ItemType.REPOSITORIES);
+		} else if ("allprojects".equals(name)) {
+			updater.setItemType(item,ItemType.ALL_PROJECTS);
+		} else if ("subprojects".equals(name)) {
+			updater.setItemType(item,ItemType.SUB_PROJECTS);
+		} else if ("dependencies".equals(name)) {
+			updater.setItemType(item,ItemType.DEPENDENCIES);
+		} else if ("sourceSets".equals(name)) {
+			updater.setItemType(item,ItemType.SOURCESETS);
+		} else if ("main".equals(name)) {
+			updater.setItemType(item,ItemType.MAIN);
+		} else if ("jar".equals(name)) {
+			updater.setItemType(item,ItemType.JAR);
+		} else if ("test".equals(name)) {
+			updater.setItemType(item,ItemType.TEST);
+		} else if ("clean".equals(name)) {
+			updater.setItemType(item,ItemType.CLEAN);
+		} else if ("buildscript".equals(name) || name.startsWith("buildscript.")) {
+			updater.setItemType(item,ItemType.BUILDSCRIPT);
+		} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
+			updater.setItemType(item,ItemType.CONFIGURATIONS);
+		} else if ("doFirst".equals(name)) {
+			updater.setItemType(item,ItemType.DO_FIRST);
+		} else if ("doLast".equals(name)) {
+			updater.setItemType(item,ItemType.DO_LAST);
+		} else if ("eclipse".equals(name)) {
+			updater.setItemType(item,ItemType.ECLIPSE);
+		} else if (name.startsWith("task ") || name.startsWith("task.")) {
+			updater.setItemType(item,ItemType.TASK);
+		} else if (name.startsWith("tasks.")) {
+			updater.setItemType(item,ItemType.TASKS);
+		} else if (name.startsWith("apply ")) {
+			updater.setItemType(item,ItemType.APPLY_SETUP);
+		} else if (name.startsWith("project ") || name.equals("project") || name.startsWith("project.")) {
+			updater.setItemType(item,ItemType.PROJECT);
+		} else {
+			updater.setItemType(item,ItemType.CLOSURE);
+		}
+	}
+	
+	private abstract class ItemTypeUpdater{
+		abstract void setItemType(Item item, ItemType type);
+	}
+	
+	private class FirstItemTypeUpdater extends ItemTypeUpdater{
+		void setItemType(Item item, ItemType type){
+			item.setItemType(type);
+		}
+	}
+	
+	private class LastItemTypeUpdater extends ItemTypeUpdater{
+		void setItemType(Item item, ItemType type){
+			if (type==ItemType.CLOSURE){
+				/* no dedicated type found so set null*/
+				return;
+			}
+			item.setLastChainedItemType(type);
+		}
+	}
+	
+	
+	/**
+	 * Resolves method chain last part after . ("e.g. a "xyz.doLast" will return "doLast" - a "xyz" returns <code>null</code>)
+	 * @param item
+	 * @return last part after dot, otherwise <code>null</code>
+	 */
+	private String resolveLastMethodChainPart(String name) {
+		if (name==null){
+			return null;
+		}
+		if (name.indexOf('.')==-1){
+			return null;
+		}
+		String lastCall = StringUtils.substringAfterLast(name, ".");
+		return lastCall;
+	}
 	/**
 	 * <pre>
 	 * fileTree baseDir {                                       fileTree {      
