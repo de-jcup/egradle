@@ -715,6 +715,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		void setItemType(Item item, ItemType type){
 			if (type==ItemType.CLOSURE){
 				/* no dedicated type found so set null*/
+				item.setLastChainedItemType(null);
 				return;
 			}
 			item.setLastChainedItemType(type);
