@@ -76,6 +76,14 @@ public enum ItemType {
 
 	JAR, 
 	
+	WAR, 
+	
+	EAR, 
+	
+	ZIP,
+	
+	CONFIGURE,
+	
 	PACKAGE, 
 	
 	IMPORT, 
@@ -83,6 +91,8 @@ public enum ItemType {
 	DO_FIRST, 
 	
 	DO_LAST, 
+	
+	AFTER_EVALUATE,
 	
 	/**
 	 * A method (defintion)

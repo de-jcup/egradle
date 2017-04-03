@@ -674,6 +674,12 @@ public class GradleModelBuilder implements ModelBuilder {
 			updater.setItemType(item,ItemType.MAIN);
 		} else if ("jar".equals(name)) {
 			updater.setItemType(item,ItemType.JAR);
+		} else if ("war".equals(name)) {
+			updater.setItemType(item,ItemType.WAR);
+		} else if ("ear".equals(name)) {
+			updater.setItemType(item,ItemType.EAR);
+		} else if ("zip".equals(name)) {
+			updater.setItemType(item,ItemType.ZIP);
 		} else if ("test".equals(name)) {
 			updater.setItemType(item,ItemType.TEST);
 		} else if ("clean".equals(name)) {
@@ -682,10 +688,14 @@ public class GradleModelBuilder implements ModelBuilder {
 			updater.setItemType(item,ItemType.BUILDSCRIPT);
 		} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
 			updater.setItemType(item,ItemType.CONFIGURATIONS);
+		} else if ("configure".equals(name) || name.startsWith("configure ")) {
+			updater.setItemType(item,ItemType.CONFIGURE);
 		} else if ("doFirst".equals(name)) {
 			updater.setItemType(item,ItemType.DO_FIRST);
 		} else if ("doLast".equals(name)) {
 			updater.setItemType(item,ItemType.DO_LAST);
+		} else if ("afterEvaluate".equals(name)) {
+			updater.setItemType(item,ItemType.AFTER_EVALUATE);
 		} else if ("eclipse".equals(name)) {
 			updater.setItemType(item,ItemType.ECLIPSE);
 		} else if (name.startsWith("task ") || name.startsWith("task.")) {

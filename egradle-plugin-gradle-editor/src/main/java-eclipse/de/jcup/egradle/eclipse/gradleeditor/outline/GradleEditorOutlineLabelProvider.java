@@ -39,7 +39,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 	private static final String ICON_ALL_PROJECTS = "prj_mode.png";
 	private static final String ICON_PROJECT = "prj_obj.png";
+	private static final String ICON_ZIP= "zip.png";
 	private static final String ICON_ECLIPSE = "eclipse16.png";
+	private static final String ICON_CONFIGURE="externalize.png";
 	private static final String ICON_APPLY_FROM_PNG = "apply_from.png";
 	private static final String ICON_APPLY_PLUGIN_PNG = "plugins.png";
 	private static final String ICON_BUILDSCRIPT = "cheatsheet_item_obj.png";
@@ -76,6 +78,9 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_TEST = "test.png";
 	private static final String ICON_MAIN = "runtime_obj.png";
 	private static final String ICON_JAR = "jar_obj.png";
+	private static final String ICON_WAR = "warFile_obj.gif";
+	private static final String ICON_EAR = "ear.gif";
+	private static final String ICON_AFTER_EVALUATE = "afterEvaluate.png";
 	private static final String ICON_UNKNOWN = "unknown_obj.png";
 
 	
@@ -192,6 +197,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return getOutlineImage(ICON_REPOSITORIES);
 			case JAR:
 				return getOutlineImage(ICON_JAR);
+			case WAR:
+				return getOutlineImage(ICON_WAR);
+			case EAR:
+				return getOutlineImage(ICON_EAR);
+			case AFTER_EVALUATE:
+				return getOutlineImage(ICON_AFTER_EVALUATE);
 			case ALL_PROJECTS:
 				return getOutlineImage(ICON_ALL_PROJECTS);
 			case SUB_PROJECTS:
@@ -200,6 +211,10 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return getOutlineImage(ICON_PROJECT);
 			case ECLIPSE:
 				return getOutlineImage(ICON_ECLIPSE);
+			case CONFIGURE:
+				return getOutlineImage(ICON_CONFIGURE);
+			case ZIP:
+				return getOutlineImage(ICON_ZIP);
 			case DEPENDENCIES:
 				return getOutlineImage(ICON_DEPENDENCIES);
 			case DEPENDENCY:
