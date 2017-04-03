@@ -27,7 +27,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -55,10 +57,12 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.GlobalBuildAction;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.progress.IProgressConstants2;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
@@ -121,8 +125,6 @@ public class EGradleUtil {
 		return EGradleMessageDialogSupport.INSTANCE;
 	}
 
-	
-
 	/**
 	 * Creates or recreates virtual project - this is done asynchronous. If
 	 * there exists already a virtual root project it will be deleted full
@@ -158,10 +160,11 @@ public class EGradleUtil {
 				}
 			}
 		};
-		job.schedule(1000L); // 1 second delay to give IDE the chance to delete old parts
+		job.schedule(1000L); // 1 second delay to give IDE the chance to delete
+								// old parts
 
 	}
-	
+
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -189,7 +192,7 @@ public class EGradleUtil {
 	 * @return active page or <code>null</code>
 	 */
 	public static IWorkbenchPage getActivePage() {
-		if (! PlatformUI.isWorkbenchRunning()){
+		if (!PlatformUI.isWorkbenchRunning()) {
 			return null;
 		}
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
@@ -201,15 +204,16 @@ public class EGradleUtil {
 
 	/**
 	 * Returns active workbench shell - or <code>null</code>
-	 * @return  active workbench shell - or <code>null</code>
+	 * 
+	 * @return active workbench shell - or <code>null</code>
 	 */
 	public static Shell getActiveWorkbenchShell() {
 		IWorkbench workbench = getWorkbench();
-		if (workbench==null){
+		if (workbench == null) {
 			return null;
 		}
 		IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-		if (window==null){
+		if (window == null) {
 			return null;
 		}
 		Shell shell = window.getShell();
@@ -218,10 +222,11 @@ public class EGradleUtil {
 
 	/**
 	 * Returns workbench or <code>null</code>
+	 * 
 	 * @return workbench or <code>null</code>
 	 */
 	public static IWorkbench getWorkbench() {
-		if (! PlatformUI.isWorkbenchRunning()){
+		if (!PlatformUI.isWorkbenchRunning()) {
 			return null;
 		}
 		IWorkbench workbench = PlatformUI.getWorkbench();
@@ -257,7 +262,7 @@ public class EGradleUtil {
 	 */
 	public static Image getImage(String path, String pluginId) {
 		ImageRegistry imageRegistry = getImageRegistry();
-		if (imageRegistry==null){
+		if (imageRegistry == null) {
 			return null;
 		}
 		Image image = imageRegistry.get(path);
@@ -274,7 +279,7 @@ public class EGradleUtil {
 
 	private static ImageRegistry getImageRegistry() {
 		Activator activator = Activator.getDefault();
-		if (activator==null){
+		if (activator == null) {
 			return null;
 		}
 		return activator.getImageRegistry();
@@ -391,8 +396,9 @@ public class EGradleUtil {
 	 * existing the folder will be created
 	 * 
 	 * @param subFolder
-	 *            subfolder inside egradle temporary folder. If <code>null</code> the
-	 *            egradle temporary folder will be returned
+	 *            subfolder inside egradle temporary folder. If
+	 *            <code>null</code> the egradle temporary folder will be
+	 *            returned
 	 * @return temp folder never <code>null</code> and always existing
 	 */
 	public static File getTempFolder(String subFolder) {
@@ -449,25 +455,28 @@ public class EGradleUtil {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Calculates if given project is a sub project for current root. If no root project is setup, this method will always return false.
+	 * Calculates if given project is a sub project for current root. If no root
+	 * project is setup, this method will always return false.
+	 * 
 	 * @param p
-	 * @return <code>true</code> when project is sub project of current root project
+	 * @return <code>true</code> when project is sub project of current root
+	 *         project
 	 * @throws CoreException
 	 */
 	public static boolean isSubprojectOfCurrentRootProject(IProject p) throws CoreException {
-		if (p==null){
+		if (p == null) {
 			return false;
 		}
-		if (! p.exists()){
+		if (!p.exists()) {
 			return false;
 		}
 		File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
-		if (rootFolder==null){
+		if (rootFolder == null) {
 			return false;
 		}
-		
+
 		IPath path = p.getLocation();
 		File parentFolder = getResourceHelper().toFile(path);
 		if (parentFolder == null) {
@@ -566,7 +575,9 @@ public class EGradleUtil {
 
 	/**
 	 * Open system console
-	 * @param ensureNoScrollLock - if <code>true</code> scroll lock will be disabled
+	 * 
+	 * @param ensureNoScrollLock
+	 *            - if <code>true</code> scroll lock will be disabled
 	 */
 	public static void openSystemConsole(boolean ensureNoScrollLock) {
 		EGradleUtil.safeAsyncExec(new Runnable() {
@@ -580,11 +591,11 @@ public class EGradleUtil {
 				try {
 					view = (IConsoleView) page.showView(id);
 					view.display(eGradleSystemConsole);
-					
-					if (ensureNoScrollLock){
+
+					if (ensureNoScrollLock) {
 						view.setScrollLock(false);
 					}
-					
+
 				} catch (PartInitException e) {
 					EGradleUtil.log(e);
 				}
@@ -614,29 +625,31 @@ public class EGradleUtil {
 
 	/**
 	 * Set new root project folder by given file
+	 * 
 	 * @param folder
-	 * @throws CoreException 
-	 * @throws IllegalArgumentException when folder is not a directory or is <code>null</code>
+	 * @throws CoreException
+	 * @throws IllegalArgumentException
+	 *             when folder is not a directory or is <code>null</code>
 	 */
-	public static void setNewRootProjectFolder(File folder) throws CoreException{
-		if (folder==null){
+	public static void setNewRootProjectFolder(File folder) throws CoreException {
+		if (folder == null) {
 			throwCoreException("new root folder may not be null!");
 		}
-		if (! folder.isDirectory()){
-			throwCoreException("new root folder must be a directory, but is not :\n"+folder.getAbsolutePath());
+		if (!folder.isDirectory()) {
+			throwCoreException("new root folder must be a directory, but is not :\n" + folder.getAbsolutePath());
 		}
 		EGradlePreferences.EGRADLE_IDE_PREFERENCES.setRootProjectPath(folder.getAbsolutePath());
 		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 		try {
-			if (virtualRootExistedBefore){
+			if (virtualRootExistedBefore) {
 				createOrRecreateVirtualRootProject();
 			}
 		} catch (VirtualRootProjectException e) {
-			throwCoreException("Cannot create virtual root project!",e);
+			throwCoreException("Cannot create virtual root project!", e);
 		}
 	}
-	
+
 	public static void refreshAllProjectDecorations() {
 		getSafeDisplay().asyncExec(new Runnable() {
 
@@ -676,7 +689,9 @@ public class EGradleUtil {
 	}
 
 	/**
-	 * Does a refresh to projects. If enabled build folders are automatically derived
+	 * Does a refresh to projects. If enabled build folders are automatically
+	 * derived
+	 * 
 	 * @param monitor
 	 */
 	public static void refreshAllProjects(IProgressMonitor monitor) {
@@ -694,9 +709,9 @@ public class EGradleUtil {
 				String text = "refreshing project " + project.getName();
 				monitor.subTask(text);
 				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-				
+
 				automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
-				
+
 			} catch (CoreException e) {
 				log(e);
 				outputToSystemConsole(Constants.CONSOLE_FAILED + " to refresh project " + project.getName());
@@ -704,6 +719,65 @@ public class EGradleUtil {
 		}
 		outputToSystemConsole(Constants.CONSOLE_OK);
 
+	}
+
+	public static void cleanAllProjects(boolean buildAfterClean, IWorkbenchWindow window, IProgressMonitor monitor) {
+		if (monitor == null) {
+			monitor = NULL_PROGESS;
+		}
+		outputToSystemConsole("start cleaning all projects inside eclipse");
+		if (monitor.isCanceled()) {
+			return;
+		}
+		// see org.eclipse.ui.internal.ide.dialogs.CleanDialog#buttonPressed
+		WorkspaceJob cleanJob = new WorkspaceJob("Clean all projects") {
+			@Override
+			public boolean belongsTo(Object family) {
+				return ResourcesPlugin.FAMILY_MANUAL_BUILD.equals(family);
+			}
+
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				doCleanAll(monitor);
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				if (buildAfterClean){
+					if (window==null){
+						logWarning("Not able to do global build because no active workbench window found!");;
+					}else{
+						GlobalBuildAction build = new GlobalBuildAction(window,IncrementalProjectBuilder.INCREMENTAL_BUILD);
+						build.doBuild();
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		};
+
+		cleanJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
+		cleanJob.setUser(true);
+		cleanJob.setProperty(IProgressConstants2.SHOW_IN_TASKBAR_ICON_PROPERTY, Boolean.TRUE);
+		cleanJob.schedule();
+
+		outputToSystemConsole(Constants.CONSOLE_OK);
+
+	}
+
+	/**
+	 * Performs the actual clean operation.
+	 * 
+	 * @param cleanAll
+	 *            if <code>true</true> clean all projects
+	 * @param monitor
+	 *            The monitor that the build will report to
+	 * @throws CoreException
+	 *             thrown if there is a problem from the core builder.
+	 */
+	protected static void doCleanAll(IProgressMonitor monitor) throws CoreException {
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
 	}
 
 	public static void removeAllValidationErrorsOfConsoleOutput() {
@@ -824,19 +898,19 @@ public class EGradleUtil {
 	 */
 	public static void showConsoleView() {
 		IWorkbenchPage activePage = getActivePage();
-		if (activePage!=null){
+		if (activePage != null) {
 			try {
 				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
 			} catch (PartInitException e) {
 				logWarning("Was not able to show console");
 			}
-			
+
 		}
 	}
 
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		IWorkbench workbench = getWorkbench();
-		if (workbench==null){
+		if (workbench == null) {
 			return null;
 		}
 		return workbench.getActiveWorkbenchWindow();
@@ -844,23 +918,23 @@ public class EGradleUtil {
 
 	/**
 	 * Returns a web color in format "#RRGGBB"
+	 * 
 	 * @param color
 	 * @return web color as string
 	 */
 	public static String convertToHexColor(Color color) {
-		if (color==null){
+		if (color == null) {
 			return null;
 		}
 		return convertToHexColor(color.getRGB());
 	}
 
-	public static String convertToHexColor(RGB rgb){
-		if (rgb==null){
+	public static String convertToHexColor(RGB rgb) {
+		if (rgb == null) {
 			return null;
 		}
-		String hex = String.format("#%02x%02x%02x", rgb.red, rgb.green,rgb.blue);
+		String hex = String.format("#%02x%02x%02x", rgb.red, rgb.green, rgb.blue);
 		return hex;
 	}
-
 
 }

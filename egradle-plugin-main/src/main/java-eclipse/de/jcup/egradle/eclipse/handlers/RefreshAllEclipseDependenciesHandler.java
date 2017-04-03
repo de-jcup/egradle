@@ -26,7 +26,7 @@ import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
 	public static final String COMMAND_ID = "egradle.commands.refreshEclipse";
-	
+
 	@Override
 	public void prepare(GradleContext context) {
 		context.setAmountOfWorkToDo(2);
@@ -34,12 +34,14 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 	}
 
 	@Override
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
-		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,new SimpleProcessExecutor(outputHandler,true,SimpleProcessExecutor.ENDLESS_RUNNING),this);
+	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
+			throws GradleExecutionException {
+		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
+				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
 		ui.setRefreshAllProjects(true);
+		ui.setCleanAllProjects(true, false);
 		ui.setShowEGradleSystemConsole(true);
 		return ui;
 	}
-	
 
 }

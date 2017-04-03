@@ -33,6 +33,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
+import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.ProcessExecutionResult;
 import de.jcup.egradle.core.domain.GradleCommand;
@@ -46,6 +47,7 @@ import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
+import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
@@ -185,6 +187,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			if (createVirtualRoot) {
 				createOrRecreateVirtualRootProject();
 			}
+			outputToSystemConsole(Constants.CONSOLE_OK);
 		} finally {
 			monitor.done();
 		}
@@ -296,7 +299,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		/* we do process executor create now in endless running variant because cancel state is provided now for this wizard*/
 		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, ProcessExecutor.ENDLESS_RUNNING);
 
-		GradleExecutionDelegate delegate = new GradleExecutionDelegate(outputHandler, processExecutor, context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject){
+		UIGradleExecutionDelegate delegate = new UIGradleExecutionDelegate(outputHandler, processExecutor, context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject){
 			@Override
 			protected GradleContext createContext(GradleRootProject rootProject)
 					throws GradleExecutionException {
@@ -307,6 +310,10 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
 			}
 		};
+		delegate.setCleanAllProjects(true,true);
+		delegate.setRefreshAllProjects(true);
+		delegate.setShowEGradleSystemConsole(false); // already done in wizard before
+		
 		delegate.execute(progressMonitor);
 
 		ProcessExecutionResult processExecutionResult = delegate.getResult();

@@ -16,8 +16,10 @@
 package de.jcup.egradle.eclipse.execution;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.ui.IWorkbenchWindow;
 
 import de.jcup.egradle.core.api.GradleContextPreparator;
+import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
@@ -26,18 +28,32 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
 	private boolean refreshAllProjects = true;
 	private boolean showEGradleSystemConsole = true;
+	private boolean cleanAllProjects;
+	private boolean buildAfterClean;
+
+	
+	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
+			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
+		this(outputHandler, processExecutor, additionalContextPreparator,null);
+	}
+
+	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
+			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject) throws GradleExecutionException {
+		super(outputHandler, processExecutor, additionalContextPreparator,rootProject);
+	}
 
 	public void setRefreshAllProjects(boolean refreshAllProjects) {
 		this.refreshAllProjects = refreshAllProjects;
 	}
-
+	
 	public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
 		this.showEGradleSystemConsole = showEGradleSystemConsole;
 	}
-
-	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
-		super(outputHandler, processExecutor, additionalContextPreparator,null);
+	
+	
+	public void setCleanAllProjects(boolean cleanAllProjects, boolean buildAfterClean) {
+		this.cleanAllProjects=cleanAllProjects;
+		this.buildAfterClean=buildAfterClean;
 	}
 
 	@Override
@@ -53,7 +69,13 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		if (refreshAllProjects) {
 			EGradleUtil.refreshAllProjects(monitor);
 		}
+		if (cleanAllProjects) {
+			IWorkbenchWindow window = EGradleUtil.getActiveWorkbenchWindow();
+			EGradleUtil.cleanAllProjects(buildAfterClean, window, monitor);
+		}
 		super.afterExecutionDone(monitor);
 		monitor.worked(2);
 	}
+
+	
 }
