@@ -71,6 +71,9 @@ public class GradleResourceLinkCalculator {
 			if (c=='>'){
 				break;
 			}
+			if (c=='.'){
+				break;
+			}
 			if (!Character.isJavaIdentifierPart(c)) {
 				return null;
 			}

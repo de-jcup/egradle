@@ -30,6 +30,21 @@ public class GradleResourceLinkCalculatorTest {
 	}
 
 	@Test
+	public void static_methodcall_from_javaclass_link_to_class_possible(){
+		/* prepare */
+		String text = "System.println(\"hello world\");";
+	
+		/* execute */
+		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 0);
+
+		/* test */
+		assertNotNull(result);
+		assertEquals("System", result.linkContent);
+		assertEquals(0, result.linkOffsetInLine);
+		assertEquals(6, result.linkLength);
+	}
+	
+	@Test
 	public void file_with_variables_works_at_first_pos(){
 		String text = "File f = new File(rootProject.projectDir,'custom_allprojects.gradle');";
 		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 0);
