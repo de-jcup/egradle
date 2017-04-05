@@ -64,7 +64,7 @@ public class MethodCallsGradleModelBuilderTest {
 
 		assertEquals(1, items.length);
 		Item configure = items[0];
-		assertEquals(ItemType.CLOSURE, configure.getItemType());
+		assertEquals(ItemType.CONFIGURE, configure.getItemType());
 		assertEquals("configure subprojects.findAll(IS_PLUGIN)", configure.getName());
 
 		Item[] configChildren = configure.getChildren();
@@ -78,7 +78,7 @@ public class MethodCallsGradleModelBuilderTest {
 	public void closures_without_parameters_have_no_brackets() throws Exception{
 		// @formatter:off
 		String code = 
-		"configure{                \n"+
+		"unknown{                \n"+
 		"	def PROJECT_NAME = it.name                              \n"+
 		"}                                                          \n"+
 		"                                                           \n";
@@ -95,7 +95,7 @@ public class MethodCallsGradleModelBuilderTest {
 		assertEquals(1, items.length);
 		Item configure = items[0];
 		assertEquals(ItemType.CLOSURE, configure.getItemType());
-		assertEquals("configure", configure.getName());
+		assertEquals("unknown", configure.getName());
 
 		Item[] configChildren = configure.getChildren();
 		assertEquals(1, configChildren.length);
