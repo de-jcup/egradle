@@ -98,8 +98,13 @@ public class GradleHyperlinkDetector extends AbstractHyperlinkDetector {
 		linkCalculator.setTransformer(transformer);
 		GradleHyperLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
 		if (result!=null){
-			return handleFileLink(lineInfo, result);
+			IHyperlink[] fileLink = handleFileLink(lineInfo, result);
+			if (fileLink!=null){
+				/* was resolveable as file link - so return*/
+				return fileLink;
+			}
 		}
+		/* not a file link so try as resource */
 		GradleResourceLinkCalculator resCalculator = new GradleResourceLinkCalculator();
 		result = resCalculator.createResourceLinkString(line, offsetInLine);
 		if (result!=null){

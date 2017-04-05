@@ -30,6 +30,46 @@ public class GradleResourceLinkCalculatorTest {
 	}
 
 	@Test
+	public void file_with_variables_works_at_first_pos(){
+		String text = "File f = new File(rootProject.projectDir,'custom_allprojects.gradle');";
+		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 0);
+		assertNotNull(result);
+		assertEquals("File", result.linkContent);
+		assertEquals(0, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
+	public void file_with_variables_works_after_new(){
+		String text = "File f = new File(rootProject.projectDir,'custom_allprojects.gradle');";
+		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 15);
+		assertNotNull(result);
+		assertEquals("File", result.linkContent);
+		assertEquals(13, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
+	public void indented_by_tabs_file_with_variables_works_after_new(){
+		String text = "\t\t\tFile f = new File(rootProject.projectDir,'custom_allprojects.gradle');";
+		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 18);
+		assertNotNull(result);
+		assertEquals("File", result.linkContent);
+		assertEquals(16, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
+	public void indented_by_spaces_file_with_variables_works_after_new(){
+		String text = "   File f = new File(rootProject.projectDir,'custom_allprojects.gradle');";
+		GradleHyperLinkResult result = calculator.createResourceLinkString(text, 18);
+		assertNotNull(result);
+		assertEquals("File", result.linkContent);
+		assertEquals(16, result.linkOffsetInLine);
+		assertEquals(4, result.linkLength);
+	}
+	
+	@Test
 	public void null_0_returns_null() {
 		assertNull(calculator.createResourceLinkString(null, 0));
 	}
