@@ -132,15 +132,15 @@ class GradleModelBuilderSupport {
 		return item;
 	}
 
-	void handleApplyType(Item item, AST lastAst) {
-		if (lastAst == null) {
+	void handleApplyType(Item item, AST nextAST) {
+		if (nextAST == null) {
 			return;
 		}
-		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
+		if (GroovyTokenTypes.ELIST != nextAST.getType()) {
 			return;
 		}
 		/* parameter -e.g. apply from/plugin 'bla' */
-		AST elist = lastAst;
+		AST elist = nextAST;
 
 		AST applyKind = elist.getFirstChild();
 
@@ -170,17 +170,17 @@ class GradleModelBuilderSupport {
 		item.setTarget(target);
 	}
 
-	AST handleTasksWithTypeClosure(String enameString, Item item, AST lastAst) {
-		AST newLastAst = lastAst;
+	AST handleTasksWithTypeClosure(String enameString, Item item, AST nextAST) {
+		AST newLastAst = nextAST;
 		if (enameString.startsWith("tasks.withType")){
 			String type = StringUtils.substringAfterLast(enameString," ");
 			item.setType(type);
 			
-			if (lastAst == null) {
+			if (nextAST == null) {
 				return null;
 			}
-			if (lastAst.getType() == ELIST) {
-				AST elist = lastAst;
+			if (nextAST.getType() == ELIST) {
+				AST elist = nextAST;
 				AST methodCall2 = elist.getFirstChild();
 				if (methodCall2 != null) {
 					if (GroovyTokenTypes.SL == methodCall2.getType()) {
@@ -200,25 +200,42 @@ class GradleModelBuilderSupport {
 	}
 	
 	
-	
-	AST handleTaskClosure(String enameString, Item item, AST lastAst) {
-		if (lastAst == null) {
+	/**
+	 * @param enameString
+	 * @param item
+	 * @param nextAST
+	 * @return next AST to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 */
+	AST handleTaskClosure(String enameString, Item item, AST nextAST) {
+		if (nextAST == null) {
 			return null;
 		}
-		lastAst = handleTaskNameResolving(enameString, item, lastAst);
-		lastAst = handleTaskTypeResolving(item, lastAst);
-		return lastAst;
+		ASTResultInfo nextASTData = handleTaskNameResolving(enameString, item, nextAST);
+		if (nextASTData==null){
+			return null;
+		}
+		if (nextASTData.terminated){
+			return nextASTData.nextAST;
+		}
+		nextAST=nextASTData.nextAST;
+		nextAST = handleTaskTypeResolving(item, nextAST);
+		return nextAST;
 	}
 
-	AST handleTaskTypeResolving(Item item, AST lastAst) {
-		if (lastAst == null) {
+	/**
+	 * @param item
+	 * @param nextAST
+	 * @return next AST to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 */
+	AST handleTaskTypeResolving(Item item, AST nextAST) {
+		if (nextAST == null) {
 			return null;
 		}
-		if (GroovyTokenTypes.ELIST != lastAst.getType()) {
-			return lastAst;
+		if (GroovyTokenTypes.ELIST != nextAST.getType()) {
+			return nextAST;
 		}
 		/* parameter -e.g. task mytask (type: xyz) */
-		AST elist = lastAst;
+		AST elist = nextAST;
 		AST nextSibling = elist.getNextSibling();
 
 		AST labeledArg = elist.getFirstChild();
@@ -251,27 +268,53 @@ class GradleModelBuilderSupport {
 
 	}
 
-	AST handleTaskNameResolving(String enameString, Item item, AST lastAst) {
-		if (lastAst == null) {
+	/**
+	 * Returns next ast to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 * @param enameString
+	 * @param item
+	 * @param nextAST
+	 * @return
+	 */
+	ASTResultInfo handleTaskNameResolving(String enameString, Item item, AST nextAST) {
+		if (nextAST == null) {
 			return null;
 		}
-		if (lastAst.getType() == ELIST) {
-			AST elist = lastAst;
+		ASTResultInfo result = new ASTResultInfo();
+		result.nextAST=nextAST;
+		if (nextAST.getType() == ELIST) {
+			AST elist = nextAST;
 			AST methodCall2 = elist.getFirstChild();
 			if (methodCall2 != null) {
 				if (GroovyTokenTypes.SL == methodCall2.getType()) {
 					/* << */
-					methodCall2 = methodCall2.getFirstChild();
+					AST slChild = methodCall2.getFirstChild();
+					if (slChild!=null){
+						result.nextAST=slChild.getNextSibling();
+						/* handle type in another way */
+						AST bracketChild = slChild.getFirstChild();
+						if (bracketChild!=null){
+							AST elistOfBracket = bracketChild.getNextSibling();
+							handleTaskTypeResolving(item,elistOfBracket);
+						}
+					}
+					result.terminated=true;
+					
+					return result;
 				}
 				AST name2 = methodCall2.getFirstChild();
 				if (name2 != null) {
 					enameString = enameString + name2.getText();
 					item.setName(enameString);
-					lastAst = name2.getNextSibling();
+					result.nextAST = name2.getNextSibling();
 				}
 			}
 		}
-		return lastAst;
+		return result;
+	}
+	
+	class ASTResultInfo{
+		AST nextAST;
+		boolean terminated;
 	}
 
 	/**

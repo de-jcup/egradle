@@ -32,7 +32,94 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 public class GradleModelBuilderTest {
 	
 	
+	@Test
+	public void task_clean_with_two_slides_has_child() throws Exception{
+		/* @formatter:off*/
+		String code = 
+		"task clean << {\n"+
+		"	delete {\n"+
+		"		delete file(\"build-release/generated\")\n"+
+		"	}\n"+
+		"}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
 
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item task = items[0];
+
+		assertEquals(ItemType.TASK, task.getItemType());
+		Item[] children = task.getChildren();
+		assertNotNull(children);
+		assertEquals(1, children.length);
+	}
+
+	@Test
+	public void task_xyz_with_parameter_two_slides_has_child_and_type_is_detected() throws Exception{
+		/* @formatter:off*/  
+		String code = 
+		"task xyz(type:Jar) << {\n"+
+		"	delete {\n"+
+		"		delete file(\"build-release/generated\")\n"+
+		"	}\n"+
+		"}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item task = items[0];
+
+		assertEquals(ItemType.TASK, task.getItemType());
+		Item[] children = task.getChildren();
+		assertNotNull(children);
+		assertEquals(1, children.length);
+		assertEquals("Jar",task.getType());
+	}
+	
+	@Test
+	public void task_xyz_with_parameter_no_slides_has_child_and_type_is_detected() throws Exception{
+		/* @formatter:off*/  
+		String code = 
+		"task xyz(type:Jar) {\n"+
+		"	delete {\n"+
+		"		delete file(\"build-release/generated\")\n"+
+		"	}\n"+
+		"}\n";
+		/* @formatter:on*/
+		InputStream is = new ByteArrayInputStream(code.getBytes());
+		GradleModelBuilder b = new GradleModelBuilder(is);
+
+		/* execute */
+		Model model = b.build(null);
+
+		/* test */
+		Item[] items = model.getRoot().getChildren();
+
+		assertEquals(1, items.length);
+		Item task = items[0];
+
+		assertEquals(ItemType.TASK, task.getItemType());
+		Item[] children = task.getChildren();
+		assertNotNull(children);
+		assertEquals(1, children.length);
+		assertEquals("Jar",task.getType());
+	}
+
+	
+	
 	@Test
 	public void test_task_dot_do_last_has_task_as_first_type_but_do_last_as_last_one() throws Exception {
 		/* @formatter:off*/
@@ -734,7 +821,7 @@ public class GradleModelBuilderTest {
 		assertEquals(1, items.length);
 		Item taskClosure = items[0];
 
-		assertEquals("task jacocoRemoteDump() <<jacocoRemoteDump", taskClosure.getName());
+		assertEquals("task jacocoRemoteDump() <<", taskClosure.getName());
 		assertEquals(ItemType.TASK, taskClosure.getItemType());
 
 	}
