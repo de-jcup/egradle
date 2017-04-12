@@ -15,18 +15,10 @@
  */
  package de.jcup.egradle.codeassist.dsl;
 
-public interface Reason {
-	/**
-	 * Returns the plugin reason
-	 * @return plugin or <code>null</code> if not from plugin
-	 */
-	public Plugin getPlugin();
-	
-	public Type getSuperType();
-	
-	/**
-	 * Identifier from mixin or <code>null</code> when not done by mixin
-	 * @return mixin id
-	 */
-	public String getMixinId();
+public interface TypeConvention extends Comparable<TypeConvention> {
+
+	public String getId();
+
+	public String getConventionTypeAsString();
+
 }

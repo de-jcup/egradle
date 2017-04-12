@@ -106,8 +106,7 @@ public class HoverDataAssert {
 		
 		return this;
 	}
-
-
+	
 	private String buildFullName(LanguageElement element) {
 		StringBuilder sb = new StringBuilder();
 		if (element instanceof TypeChild){

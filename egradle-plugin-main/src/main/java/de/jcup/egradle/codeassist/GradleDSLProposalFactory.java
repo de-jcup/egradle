@@ -45,6 +45,8 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	/**
 	 * Currently no longer used because generation does only provide public methods now
+	 * @deprecated because no longer used. Should be removed in future
+	 * TODO ATR, 19.04.2017: remove this in future!
 	 */
 	boolean filterUndocumentedEnabled;
 	

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.util.Set;
 
@@ -21,92 +21,162 @@ import org.apache.commons.lang3.StringUtils;
 
 import de.jcup.egradle.core.api.ErrorHandler;
 
-public class PluginMerger{
+/**
+ * The plugin merger integrates plugin meta information into types provided by
+ * type provider. So e.g. plugin "alpha" which has an extension for
+ * "org.gradle.api.Project" with "de.jcup.gradle.plugin1.ExtensionClass" and
+ * extension id "beta", will add methods and properties from "ExtensionClass" to
+ * "Project" for extension "beta", so its available in code assistance.<br>
+ * <br>
+ * The older concept of "conventions" is also done by this merger.
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
+public class PluginMerger {
 
 	private TypeProvider provider;
 	private ErrorHandler errorHandler;
 
 	public PluginMerger(TypeProvider provider, ErrorHandler errorHandler) {
-		if (provider==null){
+		if (provider == null) {
 			throw new IllegalArgumentException("provider must not be null!");
 		}
-		if (errorHandler==null){
+		if (errorHandler == null) {
 			throw new IllegalArgumentException("error handler must not be null!");
 		}
-		this.provider=provider;
+		this.provider = provider;
 		this.errorHandler = errorHandler;
 	}
-	
+
 	/**
 	 * Merges mixin types from plugins into target type if necessary
+	 * 
 	 * @param potentialTargetType
 	 * @param plugins
 	 */
 	public void merge(Type potentialTargetType, Set<Plugin> plugins) {
-		if (potentialTargetType==null){
+		if (potentialTargetType == null) {
 			return;
 		}
 
-		if (plugins==null){
+		if (plugins == null) {
 			return;
 		}
-		
-		if (plugins.isEmpty()){
+
+		if (plugins.isEmpty()) {
 			return;
 		}
-		
-		if (! (potentialTargetType instanceof ModifiableType)){
+
+		if (!(potentialTargetType instanceof ModifiableType)) {
 			return;
 		}
-	
+
 		ModifiableType modifiableType = (ModifiableType) potentialTargetType;
 		String typeAsString = modifiableType.getName();
-		
-		for (Plugin plugin: plugins){
+
+		for (Plugin plugin : plugins) {
 			Set<TypeExtension> extensions = plugin.getExtensions();
-			if (extensions.isEmpty()){
+			if (extensions.isEmpty()) {
 				continue;
 			}
-			for (TypeExtension typeExtension: extensions){
-				if (!typeAsString.equals(typeExtension.getTargetTypeAsString())){
+			for (TypeExtension typeExtension : extensions) {
+				if (!typeAsString.equals(typeExtension.getTargetTypeAsString())) {
 					continue;
 				}
 				/* ok, is target type so do mixin and extension */
 				merge(modifiableType, plugin, typeExtension);
-				
+
 			}
-		
+
 		}
 	}
 
 	public void merge(ModifiableType modifiableType, Plugin plugin, TypeExtension typeExtension) {
-		handleMixin(plugin, modifiableType, typeExtension);
+		handleConvention(plugin, modifiableType, typeExtension);
 		handleExtension(plugin, modifiableType, typeExtension);
 	}
 
-	private String handleMixin(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {
+	/* FIXME ATR, 19.04.2017: implement convention hanlding correct! */
+
+	/**
+	 * Handle convention parts. <br>
+	 * <br>
+	 * A can look <a href=
+	 * "http://hamletdarcy.blogspot.de/2010/03/gradle-plugin-conventions-groovy-magic.html">here</a>
+	 * for a good explanation about conventions and usage. Conventions are an
+	 * older feature of gradle - newer implementations do normally use
+	 * extensions. <br>
+	 * <br>
+	 * Here is an example:
+	 * <pre>
+	 apply plugin: GreetingPlugin
+
+		greet {
+		  message = 'Hi from Gradle'
+		}
+		
+		class GreetingPlugin implements Plugin<Project> {
+		  def void apply(Project project) {
+		
+		      project.convention.plugins.greeting = new GreetingPluginConvention()
+		      project.task('hello') << {
+		          println project.convention.plugins.greeting.message
+		      }
+		  }
+		}
+		
+		class GreetingPluginConvention {
+		  String message
+		
+		  def greet(Closure closure) {
+		      closure.delegate = this
+		      closure()
+		  }
+		}
+	 * </pre>
+	 * So what is different to extensions? It is directly added to the target class and not 
+	 * as new property like extensions! 
+	 * 
+	 * Example in DSL for <a href="https://docs.gradle.org/3.0/dsl/org.gradle.api.Project.html#org.gradle.api.Project:allprojects(groovy.lang.Closure)">allProjects</a>.
+	 * Look at "Methods added by the ear plugin" has "appDirName(..). which is directly added to projects.
+	 * 
+	 * 
+	 * @param plugin
+	 * @param type
+	 * @param typeExtension
+	 * @return
+	 */
+	private String handleConvention(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {
 		String mixinTypeAsString = typeExtension.getMixinTypeAsString();
-		if (! StringUtils.isBlank(mixinTypeAsString)){
-			/* resolve type by provider*/
+		if (!StringUtils.isBlank(mixinTypeAsString)) {
+			/* resolve type by provider */
 			Type mixinType = provider.getType(mixinTypeAsString);
-			if (mixinType==null){
-				errorHandler.handleError("mixin type not found by provider:"+mixinTypeAsString);
-			}else{
-				type.mixin(mixinType, new ReasonImpl().setPlugin(plugin));
+			if (mixinType == null) {
+				errorHandler.handleError("mixin type not found by provider:" + mixinTypeAsString);
+			} else {
+				ReasonImpl reason = new ReasonImpl().setPlugin(plugin);
+				String mixinId = typeExtension.getId();
+				if (mixinId == null) {
+					/* fallback to plugin id */
+					mixinId = plugin.getId();
+				}
+				reason.setMixinId(mixinId);
+				type.mixin(mixinType, reason);
 			}
 		}
 		return mixinTypeAsString;
 	}
-	
+
 	private String handleExtension(Plugin plugin, ModifiableType type, TypeExtension typeExtension) {
 		String extensionTypeAsString = typeExtension.getExtensionTypeAsString();
-		if (! StringUtils.isBlank(extensionTypeAsString)){
-			/* resolve type by provider*/
+		if (!StringUtils.isBlank(extensionTypeAsString)) {
+			/* resolve type by provider */
 			Type extensionType = provider.getType(extensionTypeAsString);
-			if (extensionType==null){
-				errorHandler.handleError("extension type not found by provider:"+extensionTypeAsString);
-			}else{
-				String extensionId= typeExtension.getId();
+			if (extensionType == null) {
+				errorHandler.handleError("extension type not found by provider:" + extensionTypeAsString);
+			} else {
+				String extensionId = typeExtension.getId();
 				type.addExtension(extensionId, extensionType, new ReasonImpl().setPlugin(plugin));
 			}
 		}

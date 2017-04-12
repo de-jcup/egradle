@@ -25,6 +25,7 @@
         <extends id="distributions" targetClass="org.gradle.api.Project" extensionClass="org.gradle.api.distribution.DistributionContainer"/>
     </plugin>
     <plugin id="ear" description="Ear Plugin">
+        <extends id="ear" targetClass="org.gradle.api.Project" extensionClass="org.gradle.plugins.ear.Ear"/>
         <extends targetClass="org.gradle.api.Project" mixinClass="org.gradle.plugins.ear.EarPluginConvention"/>
     </plugin>
     <plugin id="eclipse" description="Eclipse Plugin">

@@ -64,6 +64,8 @@ public class IntegrationTestComponents extends ExternalResource{
 	private GradleLanguageElementEstimater estimator;
 	private GradleDSLCodeTemplateBuilder gradleDslCodeBuilder;
 	private GradleDSLProposalFactory gradleDSLProposalFactory;
+	private XMLPluginsImporter pluginsImporter;
+	private FilesystemFileLoader fileLoader;
 	private static boolean showFullStacktraces;
 	static{
 		String property = System.getProperty("egradle.integration.test.stacktrace");
@@ -131,14 +133,14 @@ public class IntegrationTestComponents extends ExternalResource{
 		};
 		codeCompletionRegistry = new CodeCompletionRegistry();
 		XMLTypeImporter typeImporter = new XMLTypeImporter();
-		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+		pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		loader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk")); 
-		gradleDslProvider = new GradleDSLTypeProvider(loader);
+		fileLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+		fileLoader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk")); 
+		gradleDslProvider = new GradleDSLTypeProvider(fileLoader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 		
-		GradleDSLPluginLoader pluginLoader = new GradleDSLPluginLoader(loader);
+		GradleDSLPluginLoader pluginLoader = new GradleDSLPluginLoader(fileLoader);
 		
 		/*
 		 * install dsl type provider as service, so it must be definitely used
@@ -153,6 +155,14 @@ public class IntegrationTestComponents extends ExternalResource{
 		
 		codeCompletionRegistry.init();
 		
+	}
+	
+	public XMLPluginsImporter getPluginsImporter() {
+		return pluginsImporter;
+	}
+	
+	public FilesystemFileLoader getFileLoader() {
+		return fileLoader;
 	}
 	
 	public GradleDSLProposalFactory getGradleDSLProposalFactory() {

@@ -138,6 +138,26 @@ public class XMLType implements ModifiableType {
 		}
 		return extensionReasonMap.get(extensionId);
 	}
+	
+	public LanguageElement getElementForMixin(String mixinId){
+		if (mixinId == null) {
+			return null;
+		}
+		for (LanguageElement element: elementReasons.keySet()){
+			Reason reason = elementReasons.get(element);
+			if (reason==null){
+				continue;
+			}
+			String id = reason.getMixinId();
+			if (id==null){
+				continue;
+			}
+			if (mixinId.equals(id)){
+				return element;
+			}
+		}
+		return null;
+	}
 
 	public Reason getReasonFor(LanguageElement element) {
 		if (element == null) {
@@ -167,6 +187,13 @@ public class XMLType implements ModifiableType {
 			methods.add(method);
 			if (reason != null) {
 				elementReasons.put(method, reason);
+			}
+		}
+		
+		for (Property property: mixinType.getProperties()) {
+			properties.add(property);
+			if (reason != null) {
+				elementReasons.put(property, reason);
 			}
 		}
 	}

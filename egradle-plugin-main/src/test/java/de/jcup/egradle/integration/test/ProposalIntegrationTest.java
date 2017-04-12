@@ -212,7 +212,22 @@ public class ProposalIntegrationTest {
 	}
 	
 	@Test
-	public void buildfile__empty_offset_is_0() {
+	public void buildfile__empty_offset_is_0__has_ear_convention_method_appDirName() {
+		/* prepare */
+		String text = "";
+		int offset = 0;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsProposalWithLabel("appDirName");
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void buildfile__empty_offset_is_0__has_apply_and_dependencies() {
 		/* prepare */
 		String text = "";
 		int offset = 0;

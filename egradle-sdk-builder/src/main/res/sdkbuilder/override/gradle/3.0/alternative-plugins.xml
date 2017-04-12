@@ -5,4 +5,7 @@
         <extends id="zip" extensionClass="org.gradle.api.tasks.bundling.Zip" targetClass="org.gradle.api.Project" />
         <extends id="tar" extensionClass="org.gradle.api.tasks.bundling.Tar" targetClass="org.gradle.api.Project" />
     </plugin>
+    <plugin id="ear">
+    	<extends id="ear" extensionClass="org.gradle.plugins.ear.Ear" targetClass="org.gradle.api.Project" />
+    </plugin>
 </plugins>

@@ -36,6 +36,20 @@ public class HoverIntegrationTest {
 	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
 	@Test
+	public void buildfile_18__ear_plugin_by_convention(){
+		/* prepare */
+		String text = loadTextFromIntegrationTestFile("test-19-ear-plugin-by-convention.gradle");
+		int offset = text.indexOf("ear {");
+
+		/* execute */
+		HoverData hoverData = calculateHoverData(text, offset);
+
+		/* test */
+		assertThat(hoverData).isForElementType("org.gradle.plugins.ear.Ear");
+		
+	}
+	
+	@Test
 	public void buildfile_17__checkstyle_extension(){
 		/* prepare */
 		String text = loadTextFromIntegrationTestFile("test-17-checkstyle-extension.gradle");

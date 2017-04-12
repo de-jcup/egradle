@@ -422,7 +422,54 @@ public class XMLTypeTest {
 		assertEquals(extensionType, extensionTypeFound);
 		assertEquals(mockedReason, typeToTest.getReasonForExtension("id1"));
 	}
+	
+	@Test
+	public void mixin_a_type_with_property1_reason1_returns__property1__for_mixin_id() {
+		/* prepare */
+		Type mixinType = mock(Type.class);
+		Property property1 = mock(Property.class);
+		Set<Property> propertySet = new LinkedHashSet<>();
+		propertySet.add(property1);
+		when(mixinType.getProperties()).thenReturn(propertySet);
 
+		XMLType type = new XMLType();
+
+		/* check preconditions */
+		assertTrue(type.getProperties().isEmpty());
+		Reason reason1 = mock(Reason.class);
+		when(reason1.getMixinId()).thenReturn("braveMixinId");
+
+		/* execute */
+		type.mixin(mixinType, reason1);
+
+		/* test */
+		assertEquals(property1, type.getElementForMixin("braveMixinId"));
+	}
+	
+	@Test
+	public void mixin_a_type_with_method1_reason1_returns__method1__for_mixin_id() {
+		/* prepare */
+		Type mixinType = mock(Type.class);
+		Method method1 = mock(Method.class);
+		Set<Method> methodSet = new LinkedHashSet<>();
+		methodSet.add(method1);
+		when(mixinType.getMethods()).thenReturn(methodSet);
+
+		XMLType type = new XMLType();
+
+		/* check preconditions */
+		assertTrue(type.getMethods().isEmpty());
+		Reason reason1 = mock(Reason.class);
+		when(reason1.getMixinId()).thenReturn("braveMixinId");
+
+		/* execute */
+		type.mixin(mixinType, reason1);
+
+		/* test */
+		assertEquals(method1, type.getElementForMixin("braveMixinId"));
+	}
+
+	
 	@Test
 	public void mixin_a_type_with_method1_reason_null_adds_method1_to_targettype_without_reason() {
 		/* prepare */

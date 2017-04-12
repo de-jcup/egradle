@@ -13,12 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 public class ReasonImpl implements Reason {
 
 	private Plugin plugin;
 	private Type superType;
+	private String mixinId;
 
 	public ReasonImpl() {
 	}
@@ -28,7 +29,6 @@ public class ReasonImpl implements Reason {
 		return this;
 	}
 
-	
 	public Plugin getPlugin() {
 		return plugin;
 	}
@@ -66,4 +66,13 @@ public class ReasonImpl implements Reason {
 	public void setSuperType(Type superType) {
 		this.superType = superType;
 	}
+
+	public void setMixinId(String id) {
+		this.mixinId = id;
+	}
+
+	public String getMixinId() {
+		return mixinId;
+	}
+	
 }

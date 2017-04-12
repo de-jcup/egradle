@@ -52,12 +52,27 @@ public class ApplyOverridesToPluginsAction implements SDKBuilderAction {
 					throw new IllegalStateException("found alternative plugin with id NULL");
 				}
 				XMLPlugin alternativeXmlPlugin = (XMLPlugin) alternativePlugin;
-				String description = alternativeXmlPlugin.getDescription();
-				if (description == null) {
-					description += "";
+				
+				/* check if plugin already exists*/
+				Plugin mergeTargetPlugin = null;
+				for (Plugin standardPlugin: standardPlugins){
+					if (standardPlugin.getId().equals(alternativeId)){
+						mergeTargetPlugin=standardPlugin;
+						break;
+					}
 				}
-				alternativeXmlPlugin.setDescription(description + "(alternative)");
-				standardPlugins.add(alternativePlugin);
+				/* when not exisiting create new one, otherwise merge extensions*/
+				if (mergeTargetPlugin==null){
+					String description = alternativeXmlPlugin.getDescription();
+					if (description == null) {
+						description += "";
+					}
+					alternativeXmlPlugin.setDescription(description + "(alternative)");
+					standardPlugins.add(alternativePlugin);
+				}else{
+					/* merge alternative parts to existing */
+					mergeTargetPlugin.getExtensions().addAll(alternativeXmlPlugin.getExtensions());
+				}
 			}
 
 		}

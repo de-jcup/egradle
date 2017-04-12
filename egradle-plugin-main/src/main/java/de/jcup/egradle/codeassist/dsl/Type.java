@@ -98,5 +98,6 @@ public interface Type extends LanguageElement, GradleDocumentationInfo, Comparab
 	public boolean isDescendantOf(String type);
 	
 	public boolean isInterface();
-	
+
+
 }
