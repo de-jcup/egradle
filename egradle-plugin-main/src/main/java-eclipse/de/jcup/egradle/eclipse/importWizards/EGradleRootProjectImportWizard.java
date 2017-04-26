@@ -26,6 +26,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -33,7 +37,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.ProcessExecutionResult;
 import de.jcup.egradle.core.domain.GradleCommand;
@@ -44,8 +47,9 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
+import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
@@ -93,15 +97,15 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			return false;
 		}
 		/* fetch data inside SWT thread */
-		globalJavaHome=mainPage.getGlobalJavaHomePath();
-		
-		gradleInstallPath=mainPage.getGradleBinDirectory();
-		shell=mainPage.getShellCommand();
-		gradleCommand=mainPage.getGradleCommand();
-		callTypeId=mainPage.getCallTypeId();
-		
+		globalJavaHome = mainPage.getGlobalJavaHomePath();
+
+		gradleInstallPath = mainPage.getGradleBinDirectory();
+		shell = mainPage.getShellCommand();
+		gradleCommand = mainPage.getGradleCommand();
+		callTypeId = mainPage.getCallTypeId();
+
 		EGradleUtil.openSystemConsole(true);
-		
+
 		try {
 			getContainer().run(true, true, new IRunnableWithProgress() {
 
@@ -123,75 +127,141 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 	}
 
-	private void doImport(IPath path, IProgressMonitor monitor) throws Exception {
-		int worked = 0;
-		try {
-			File newRootFolder = getResourceHelper().toFile(path);
-			if (newRootFolder == null) {
-				return;
+	private class UpdateRunnable implements IRunnableWithProgress {
+		private boolean autoBuildEnabled;
+		private IPath path;
+		private int worked;
+
+		@Override
+		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+			try {
+				autoBuildEnabled = EGradleUtil.isWorkspaceAutoBuildEnabled();
+				if (autoBuildEnabled) {
+					/* we disable auto build while import running */
+					EGradleUtil.setWorkspaceAutoBuild(false);
+				}
+				File newRootFolder = getResourceHelper().toFile(path);
+				if (newRootFolder == null) {
+					return;
+				}
+				boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator
+						.deleteVirtualRootProjectFull(monitor);
+
+				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
+
+				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
+				GradleImportScanner importer = new GradleImportScanner();
+				List<File> foldersToImport = importer.scanEclipseProjectFolders(newRootFolder);
+
+				/* check if virtual root should be created */
+				boolean createVirtualRoot1 = false;
+				createVirtualRoot1 = createVirtualRoot1 || foldersToImport.isEmpty();
+				createVirtualRoot1 = createVirtualRoot1 || !foldersToImport.contains(newRootFolder);
+
+				final boolean createVirtualRoot = createVirtualRoot1;
+				int importSize = foldersToImport.size();
+				int closeSize = projectsToClose.size();
+				int workToDo = 0;
+
+				workToDo += closeSize;// close projects (virtual root is
+										// contained)
+				workToDo += closeSize;// delete projects
+				workToDo += importSize;// import projects
+				workToDo++; // recreate virtual root project
+
+				String message = "Importing gradle project(s) from:" + newRootFolder.getAbsolutePath();
+				monitor.beginTask(message, workToDo);
+				getSystemConsoleOutputHandler().output(message);
+
+				importProgressMessage(monitor, "collect infos about existing eclipse projects");
+				monitor.worked(++worked);
+
+				worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
+				if (monitor.isCanceled()) {
+					return;
+				}
+
+				ProcessExecutionResult processExecutionResult = executeGradleEclipse(rootProject, monitor);
+
+				if (processExecutionResult.isNotOkay()) {
+					worked = undoFormerClosedProjects(monitor, worked, virtualRootExistedBefore, projectsToClose,
+							processExecutionResult);
+					return;
+				}
+				/* result is okay, so use this setup in preferences now */
+				EGradlePreferences preferences = getPreferences();
+				preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
+				preferences.setGlobalJavaHomePath(globalJavaHome);
+				preferences.setGradleBinInstallFolder(gradleInstallPath);
+				preferences.setGradleCallCommand(gradleCommand);
+				preferences.setGradleShellType(shell);
+				preferences.setGradleCallTypeID(callTypeId);
+
+				worked = deleteProjects(monitor, worked, projectsToClose);
+				worked = importProjects(monitor, worked, foldersToImport);
+				importProgressMessage(monitor, "Imports done. Start eclipse refresh operations");
+
+				/* ---------------- */
+				/* update workspace */
+				/* ---------------- */
+
+				processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(rootProject, monitor);
+				if (processExecutionResult.isNotOkay()) {
+					throw new InvocationTargetException(
+							new GradleExecutionException("Assemble task result was no okay"));
+				}
+				/* recreate virtual root project */
+				if (createVirtualRoot) {
+					createOrRecreateVirtualRootProject();
+				}
+
+			} catch (Exception e) {
+				throw new InvocationTargetException(e);
+			} finally {
+				monitor.done();
+
+				if (autoBuildEnabled) {
+					try {
+						EGradleUtil.setWorkspaceAutoBuild(true);
+					} catch (CoreException e) {
+						EGradleUtil.log("Reenabling workspace auto build failed!", e);
+					}
+				}
 			}
-			boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(monitor);
-			
-			List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
-
-			GradleRootProject rootProject = new GradleRootProject(newRootFolder);
-			GradleImportScanner importer = new GradleImportScanner();
-			List<File> foldersToImport = importer.scanEclipseProjectFolders(newRootFolder);
-
-			/* check if virtual root should be created */
-			boolean createVirtualRoot = false;
-			createVirtualRoot = createVirtualRoot || foldersToImport.isEmpty();
-			createVirtualRoot = createVirtualRoot || !foldersToImport.contains(newRootFolder);
-
-			int importSize = foldersToImport.size();
-			int closeSize = projectsToClose.size();
-			int workToDo = 0;
-
-			workToDo += closeSize;// close projects (virtual root is contained)
-			workToDo += closeSize;// delete projects
-			workToDo += importSize;// import projects
-			workToDo++; // recreate virtual root project
-
-			String message = "Importing gradle project(s) from:" + newRootFolder.getAbsolutePath();
-			monitor.beginTask(message, workToDo);
-			getSystemConsoleOutputHandler().output(message);
-
-			importProgressMessage(monitor, "collect infos about existing eclipse projects");
-			monitor.worked(++worked);
-
-			worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
-			if (monitor.isCanceled()){
-				return;
-			}
-			
-			ProcessExecutionResult processExecutionResult = executeGradleEclipse(rootProject, monitor);
-			
-			if (processExecutionResult.isNotOkay()) {
-				worked = undoFormerClosedProjects(monitor, worked, virtualRootExistedBefore, projectsToClose,
-						processExecutionResult);
-				return;
-			}
-			/* result is okay, so use this setup in preferences now */
-			EGradlePreferences preferences = getPreferences();
-			preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
-			preferences.setGlobalJavaHomePath(globalJavaHome);
-			preferences.setGradleBinInstallFolder(gradleInstallPath);
-			preferences.setGradleCallCommand(gradleCommand);
-			preferences.setGradleShellType(shell);
-			preferences.setGradleCallTypeID(callTypeId);
-			
-			worked = deleteProjects(monitor, worked, projectsToClose);
-			worked = importProjects(monitor, worked, foldersToImport);
-
-			/* recreate virtual root project */
-			if (createVirtualRoot) {
-				createOrRecreateVirtualRootProject();
-			}
-			outputToSystemConsole(Constants.CONSOLE_OK);
-		} finally {
-			monitor.done();
 		}
+	}
 
+	private void doImport(IPath path, IProgressMonitor monitor) throws Exception {
+		UpdateRunnable op = new UpdateRunnable();
+		op.path=path;
+
+		Job job = new Job("Finalize egradle import") {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+
+				EGradleUtil.getSafeDisplay().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							new ProgressMonitorDialog(EGradleUtil.getActiveWorkbenchShell()).run(true, true, op);
+
+						} catch (InvocationTargetException e) {
+
+							EGradleUtil.log(new Status(Status.ERROR, Activator.PLUGIN_ID, "Assemble task failed", e));
+							EGradleMessageDialogSupport.INSTANCE.showBuildFailed("Assemble task failed");
+
+						} catch (InterruptedException e) {
+							/* ignore - user interrupted */
+						}
+					}
+				});
+
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
 	}
 
 	private int undoFormerClosedProjects(IProgressMonitor monitor, int worked, boolean virtualRootExistedBefore,
@@ -201,16 +271,16 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		 * UNDO !
 		 */
 		EGradleUtil.openSystemConsole(true);
-		
-		if (processExecutionResult.isCanceledByuser()){
+
+		if (processExecutionResult.isCanceledByuser()) {
 			importProgressMessage(monitor, "import canceled - undo former project closing");
-		}else{
-			getDialogSupport()
-			.showError("Was not able to execute 'gradle eclipse'. Look into opened gradle system console for more details.\n\n"
-					+ "Will now UNDO former actions!\n\n"
-					+ "Please check your settings are correct in egradle preferences.\n"
-					+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"
-					+ "Also your projects have to apply eclipse plugin inside build.gradle.");
+		} else {
+			getDialogSupport().showError(
+					"Was not able to execute 'gradle eclipse'. Look into opened gradle system console for more details.\n\n"
+							+ "Will now UNDO former actions!\n\n"
+							+ "Please check your settings are correct in egradle preferences.\n"
+							+ "Be aware importing with gradle wrapper needs a wrapper inside your imported root project!\n"
+							+ "Also your projects have to apply eclipse plugin inside build.gradle.");
 			importProgressMessage(monitor, "import failed - undo former project closing");
 		}
 		/*
@@ -221,7 +291,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			projectToClose.open(monitor);
 			monitor.worked(++worked); // also count to show progress
 		}
-		if (virtualRootExistedBefore){
+		if (virtualRootExistedBefore) {
 			createOrRecreateVirtualRootProject();
 		}
 		return worked;
@@ -255,9 +325,9 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		/* close the projects which will be deleted/reimported */
 		for (IProject projectToClose : projectsToClose) {
 			importProgressMessage(monitor, "close already existing project:" + projectToClose.getName());
-			if (EGradleUtil.isRootProject(projectToClose)){
-				/* ignore on close*/
-			}else{
+			if (EGradleUtil.isRootProject(projectToClose)) {
+				/* ignore on close */
+			} else {
 				projectToClose.close(monitor);
 			}
 			monitor.worked(++worked);
@@ -296,24 +366,61 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	private ProcessExecutionResult executeGradleEclipse(GradleRootProject rootProject, IProgressMonitor progressMonitor)
 			throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
-		/* we do process executor create now in endless running variant because cancel state is provided now for this wizard*/
-		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true, ProcessExecutor.ENDLESS_RUNNING);
+		/*
+		 * we do process executor create now in endless running variant because
+		 * cancel state is provided now for this wizard
+		 */
+		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true,
+				ProcessExecutor.ENDLESS_RUNNING);
 
-		UIGradleExecutionDelegate delegate = new UIGradleExecutionDelegate(outputHandler, processExecutor, context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject){
+		UIGradleExecutionDelegate delegate = new UIGradleExecutionDelegate(outputHandler, processExecutor,
+				context -> context.setCommands(GradleCommand.build("cleanEclipse eclipse")), rootProject) {
 			@Override
-			protected GradleContext createContext(GradleRootProject rootProject)
-					throws GradleExecutionException {
-				String shellId=null;
-				if(shell!=null){
-					shellId=shell.getId();
+			protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+				String shellId = null;
+				if (shell != null) {
+					shellId = shell.getId();
 				}
 				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
 			}
 		};
-		delegate.setCleanAllProjects(true,true);
+		delegate.setCleanAllProjects(false, false); // do NOT make clean
+													// projects here or do a
+													// refresh! this must be
+													// done later!
+		delegate.setRefreshAllProjects(false); //
+		delegate.setShowEGradleSystemConsole(true);
+		delegate.execute(progressMonitor);
+
+		ProcessExecutionResult processExecutionResult = delegate.getResult();
+		return processExecutionResult;
+	}
+
+	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(GradleRootProject rootProject,
+			IProgressMonitor progressMonitor) throws GradleExecutionException, Exception {
+		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
+		/*
+		 * we do process executor create now in endless running variant because
+		 * cancel state is provided now for this wizard
+		 */
+		ProcessExecutor processExecutor = new SimpleProcessExecutor(outputHandler, true,
+				ProcessExecutor.ENDLESS_RUNNING);
+
+		UIGradleExecutionDelegate delegate = new UIGradleExecutionDelegate(outputHandler, processExecutor,
+				context -> context.setCommands(GradleCommand.build("assemble")), rootProject) {
+			@Override
+			protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+				String shellId = null;
+				if (shell != null) {
+					shellId = shell.getId();
+				}
+				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
+			}
+		};
 		delegate.setRefreshAllProjects(true);
-		delegate.setShowEGradleSystemConsole(false); // already done in wizard before
-		
+		delegate.setCleanAllProjects(true, true);
+		delegate.setShowEGradleSystemConsole(true);
+
 		delegate.execute(progressMonitor);
 
 		ProcessExecutionResult processExecutionResult = delegate.getResult();

@@ -27,6 +27,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
@@ -234,7 +235,7 @@ public class EGradleUtil {
 	}
 
 	public static IProject[] getAllProjects() {
-		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		IProject[] projects = getWorkspace().getRoot().getProjects();
 		return projects;
 	}
 
@@ -745,11 +746,13 @@ public class EGradleUtil {
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
-				if (buildAfterClean){
-					if (window==null){
-						logWarning("Not able to do global build because no active workbench window found!");;
-					}else{
-						GlobalBuildAction build = new GlobalBuildAction(window,IncrementalProjectBuilder.INCREMENTAL_BUILD);
+				if (buildAfterClean) {
+					if (window == null) {
+						logWarning("Not able to do global build because no active workbench window found!");
+						;
+					} else {
+						GlobalBuildAction build = new GlobalBuildAction(window,
+								IncrementalProjectBuilder.INCREMENTAL_BUILD);
 						build.doBuild();
 					}
 				}
@@ -757,7 +760,7 @@ public class EGradleUtil {
 			}
 		};
 
-		cleanJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
+		cleanJob.setRule(getWorkspace().getRuleFactory().buildRule());
 		cleanJob.setUser(true);
 		cleanJob.setProperty(IProgressConstants2.SHOW_IN_TASKBAR_ICON_PROPERTY, Boolean.TRUE);
 		cleanJob.schedule();
@@ -777,7 +780,7 @@ public class EGradleUtil {
 	 *             thrown if there is a problem from the core builder.
 	 */
 	protected static void doCleanAll(IProgressMonitor monitor) throws CoreException {
-		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+		getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
 	}
 
 	public static void removeAllValidationErrorsOfConsoleOutput() {
@@ -823,12 +826,12 @@ public class EGradleUtil {
 				String rootFolderPath = rootFolder.getAbsolutePath();
 				File file = new File(scriptPath);
 				if (!file.exists()) {
-					resource = ResourcesPlugin.getWorkspace().getRoot();
+					resource = getWorkspace().getRoot();
 					buildScriptProblemMarkerHelper.createErrorMarker(resource,
 							"Build file which prodocues error does not exist:" + file.getAbsolutePath(), 0);
 					return;
 				}
-				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				IWorkspace workspace = getWorkspace();
 				resource = workspace.getRoot().getFileForLocation(Path.fromOSString(scriptPath));
 				if (resource == null) {
 					if (scriptPath.startsWith(rootFolderPath)) {
@@ -844,7 +847,7 @@ public class EGradleUtil {
 					// fall back to workspace root - so at least we can create
 					// an
 					// error marker...
-					resource = ResourcesPlugin.getWorkspace().getRoot();
+					resource = getWorkspace().getRoot();
 				}
 				buildScriptProblemMarkerHelper.createErrorMarker(resource, result.getErrorMessage(), result.getLine());
 
@@ -913,7 +916,28 @@ public class EGradleUtil {
 		if (workbench == null) {
 			return null;
 		}
-		return workbench.getActiveWorkbenchWindow();
+		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+
+		if (workbenchWindow != null) {
+			return workbenchWindow;
+		}
+		/* fall back - try to execute in UI */
+		WorkbenchWindowRunnable wwr = new WorkbenchWindowRunnable();
+		getSafeDisplay().syncExec(wwr);
+		return wwr.workbenchWindowFromUI;
+	}
+	
+	private static class WorkbenchWindowRunnable implements Runnable{
+		IWorkbenchWindow workbenchWindowFromUI;
+		@Override
+		public void run() {
+			IWorkbench workbench = getWorkbench();
+			if (workbench == null) {
+				return;
+			}
+			workbenchWindowFromUI=workbench.getActiveWorkbenchWindow();
+		}
+		
 	}
 
 	/**
@@ -937,4 +961,20 @@ public class EGradleUtil {
 		return hex;
 	}
 
+	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		description.setAutoBuilding(flag);
+		workspace.setDescription(description);
+	}
+
+	public static boolean isWorkspaceAutoBuildEnabled() throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		return description.isAutoBuilding();
+	}
+
+	private static IWorkspace getWorkspace() {
+		return ResourcesPlugin.getWorkspace();
+	}
 }
