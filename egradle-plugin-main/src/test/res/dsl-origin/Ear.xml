@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+
+	This file is an origin output from gradle subproject documentation.
+	
+	It's not build by SDK builder! There was a bug in output by SDK builder - the lib method seems to be 
+	overriden by lib property - so method was not written in output.
+
+ -->
+<type language="gradle" name="org.gradle.plugins.ear.Ear" superType="org.gradle.api.tasks.bundling.Jar" version="3.0">
+    <property name="libDirName" type="java.lang.String">
+        <description><![CDATA[
+     * The name of the library directory in the EAR file. Default is "lib".
+     ]]></description>
+    </property>
+    <property name="deploymentDescriptor" type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
+        <description><![CDATA[
+     * The deployment descriptor configuration.
+     ]]></description>
+    </property>
+    <property name="lib" type="org.gradle.api.file.CopySpec">
+        <description><![CDATA[
+     * A location for dependency libraries to include in the 'lib' directory of the EAR archive.
+     ]]></description>
+    </property>
+    <method name="execute" returnType="void">
+        <parameter name="details" type="org.gradle.api.file.FileCopyDetails"/>
+    </method>
+    <method name="call" returnType="org.gradle.api.internal.file.collections.FileTreeAdapter"/>
+    <method name="setDeploymentDescriptor" returnType="void">
+        <parameter name="deploymentDescriptor" type="org.gradle.plugins.ear.descriptor.DeploymentDescriptor"/>
+    </method>
+    <method delegationTarget="org.gradle.api.file.CopySpec" name="lib" returnType="org.gradle.api.file.CopySpec">
+        <parameter name="configureClosure" type="groovy.lang.Closure"/>
+        <description><![CDATA[
+     * Adds dependency libraries to include in the 'lib' directory of the EAR archive.
+     *
+     * <p>The given closure is executed to configure a {@code CopySpec}. The {@link CopySpec} is passed to the closure as its delegate.</p>
+     *
+     * @param configureClosure The closure.
+     * @return The created {@code CopySpec}
+     ]]></description>
+    </method>
+    <method name="getLib" returnType="org.gradle.api.file.CopySpec">
+        <description><![CDATA[
+     * A location for dependency libraries to include in the 'lib' directory of the EAR archive.
+     ]]></description>
+    </method>
+    <method name="call" returnType="java.lang.String"/>
+    <method name="getLibDirName" returnType="java.lang.String">
+        <description><![CDATA[
+     * The name of the library directory in the EAR file. Default is "lib".
+     ]]></description>
+    </method>
+    <method name="getDeploymentDescriptor" returnType="org.gradle.plugins.ear.descriptor.DeploymentDescriptor">
+        <description><![CDATA[
+     * The deployment descriptor configuration.
+     ]]></description>
+    </method>
+    <method name="execute" returnType="void">
+        <parameter name="outputStream" type="java.io.OutputStream"/>
+    </method>
+    <method delegationTarget="org.gradle.plugins.ear.descriptor.DeploymentDescriptor" name="deploymentDescriptor" returnType="org.gradle.plugins.ear.Ear">
+        <parameter name="configureClosure" type="groovy.lang.Closure"/>
+        <description><![CDATA[
+     * Configures the deployment descriptor for this EAR archive.
+     *
+     * <p>The given closure is executed to configure the deployment descriptor. The {@link DeploymentDescriptor} is passed to the closure as its delegate.</p>
+     *
+     * @param configureClosure The closure.
+     * @return This.
+     ]]></description>
+    </method>
+    <method name="setLibDirName" returnType="void">
+        <parameter name="libDirName" type="java.lang.String"/>
+    </method>
+    <description><![CDATA[
+ * Assembles an EAR archive.
+ ]]></description>
+</type>

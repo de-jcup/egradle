@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.codeassist.dsl;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -49,13 +50,31 @@ public class PluginMerger {
 		this.errorHandler = errorHandler;
 	}
 
+	public void merge(Set<Plugin> plugins){
+		Set<Type> set = new LinkedHashSet<>();
+		
+		/* collect all target types */
+		for (Plugin plugin: plugins){
+			for (TypeExtension extension: plugin.getExtensions()){
+				String targetTypeAsString = extension.getTargetTypeAsString();
+				Type targetType = provider.getType(targetTypeAsString);
+				set.add(targetType);
+			}
+		}
+		
+		/* now for each type we do the merge*/
+		for (Type type: set){
+			merge(type, plugins);
+		}
+	}
+	
 	/**
 	 * Merges mixin types from plugins into target type if necessary
 	 * 
 	 * @param potentialTargetType
 	 * @param plugins
 	 */
-	public void merge(Type potentialTargetType, Set<Plugin> plugins) {
+	void merge(Type potentialTargetType, Set<Plugin> plugins) {
 		if (potentialTargetType == null) {
 			return;
 		}
@@ -96,8 +115,6 @@ public class PluginMerger {
 		handleConvention(plugin, modifiableType, typeExtension);
 		handleExtension(plugin, modifiableType, typeExtension);
 	}
-
-	/* FIXME ATR, 19.04.2017: implement convention hanlding correct! */
 
 	/**
 	 * Handle convention parts. <br>

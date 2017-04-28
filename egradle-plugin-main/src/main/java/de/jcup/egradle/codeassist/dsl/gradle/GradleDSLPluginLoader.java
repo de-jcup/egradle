@@ -64,24 +64,9 @@ public class GradleDSLPluginLoader implements CodeCompletionService, RegistryLis
 			plugins = new LinkedHashSet<>();
 		}
 		
-		for (Plugin plugin: plugins){
-			for (TypeExtension extension: plugin.getExtensions()){
-				String targetTypeAsString = extension.getTargetTypeAsString();
-				Type targetType = typeProvider.getType(targetTypeAsString);
-				if (targetType==null){
-					getErrorHandler().handleError("Plugin loader:Target type:"+targetTypeAsString+" for plugin:"+plugin.getId()+" not found");
-					continue;
-				}
-				if (!( targetType instanceof ModifiableType)){
-					getErrorHandler().handleError("Plugin loader:Target type:"+targetTypeAsString+" for plugin:"+plugin.getId()+" is not modifiable!");
-					continue;
-				}
-				ModifiableType modifiableType = (ModifiableType) targetType;
-				
-				merger.merge(modifiableType, plugin, extension);
-				
-			}
-		}
+		merger.merge(plugins);
+		
+		
 	}
 
 	

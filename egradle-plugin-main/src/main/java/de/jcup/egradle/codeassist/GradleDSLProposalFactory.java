@@ -149,7 +149,8 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			proposals.add(proposal);
 		}
-		for (Method method : identifiedType.getMethods()) {
+		Set<Method> identifiedTypeMethods = identifiedType.getMethods();
+		for (Method method : identifiedTypeMethods) {
 			if (filterUndocumented && ! method.isDocumented()){
 				continue;
 			}

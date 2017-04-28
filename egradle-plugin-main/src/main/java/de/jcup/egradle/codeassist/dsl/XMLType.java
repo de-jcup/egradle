@@ -50,7 +50,7 @@ public class XMLType implements ModifiableType {
 	private Map<LanguageElement, Reason> elementReasons = new HashMap<>();
 
 	@XmlElement(name = "method", type = XMLMethod.class)
-	Set<Method> methods = new TreeSet<>();
+	private Set<Method> methods = new TreeSet<>();
 
 	@XmlElement(name = "interface", type = XMLTypeReference.class)
 	Set<TypeReference> interfaces = new TreeSet<>();
@@ -59,7 +59,7 @@ public class XMLType implements ModifiableType {
 	String name;
 
 	@XmlElement(name = "property", type = XMLProperty.class)
-	Set<Property> properties = new TreeSet<>();
+	private Set<Property> properties = new TreeSet<>();
 
 	@XmlAttribute(name = "version")
 	private String version;
@@ -113,8 +113,11 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Method> getMethods() {
-		if (superType == null && superInterfaceTypes == null) {
-			return methods;
+		/* we use always merged variant - so it does not matter when inheritance is called - in point of
+		 * mixins etc.
+		 */
+		if (mergedMethods==null){
+			mergeMethodsAndProperties(null);
 		}
 		return mergedMethods;
 	}
@@ -126,8 +129,8 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Property> getProperties() {
-		if (superType == null) {
-			return properties;
+		if (mergedProperties==null){
+			mergeMethodsAndProperties(null);
 		}
 		return mergedProperties;
 	}
@@ -183,15 +186,16 @@ public class XMLType implements ModifiableType {
 		if (mixinType == null) {
 			return;
 		}
-		for (Method method : mixinType.getMethods()) {
-			methods.add(method);
+		Set<Method> mixinMethods = mixinType.getMethods();
+		for (Method method : mixinMethods) {
+			getMethods().add(method);
 			if (reason != null) {
 				elementReasons.put(method, reason);
 			}
 		}
 		
 		for (Property property: mixinType.getProperties()) {
-			properties.add(property);
+			getProperties().add(property);
 			if (reason != null) {
 				elementReasons.put(property, reason);
 			}
@@ -273,6 +277,12 @@ public class XMLType implements ModifiableType {
 		if (mergedMethods == null) {
 			this.mergedMethods = new TreeSet<>(methods);
 		}
+		if (mergedProperties == null) {
+			this.mergedProperties = new TreeSet<>(properties);
+		}
+		if (superType==null){
+			return;
+		}
 		Set<Method> superMethods = superType.getMethods();
 		this.mergedMethods.addAll(superMethods);
 		/* register super methods and reason */
@@ -283,9 +293,6 @@ public class XMLType implements ModifiableType {
 		}
 
 		Set<Property> superProperties = superType.getProperties();
-		if (mergedProperties == null) {
-			this.mergedProperties = new TreeSet<>(properties);
-		}
 		this.mergedProperties.addAll(superProperties);
 		/* register super properties and reason */
 		for (Property sm : superProperties) {

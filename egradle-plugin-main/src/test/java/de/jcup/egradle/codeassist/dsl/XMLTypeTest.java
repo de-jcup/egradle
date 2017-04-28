@@ -36,7 +36,71 @@ public class XMLTypeTest {
 	public void before() {
 		typeToTest = new XMLType();
 	}
+	
+	@Test
+	public void type_b_inherits_type_a__after_mixin_is_done__getmethods_contains_mixin_method(){
+		/* prepare */
+		Type superType = mock(Type.class);
+		Method method1 = mock(Method.class,"method1");
+		Set<Method> methodSet = new LinkedHashSet<>();
+		methodSet.add(method1);
+		when(superType.getMethods()).thenReturn(methodSet);
+		
+		Type mixinType = mock(Type.class);
+		Method method2 = mock(Method.class,"method2");
+		Set<Method> methodSet2 = new LinkedHashSet<>();
+		methodSet2.add(method2);
+		when(mixinType.getMethods()).thenReturn(methodSet2);
 
+		/* mockito workaround for tree set */
+		when(method1.compareTo(method2)).thenReturn(1);
+		when(method2.compareTo(method1)).thenReturn(-1);
+		
+		/* check preconditions */
+		assertTrue(typeToTest.getMethods().isEmpty());
+
+		/* execute */
+		typeToTest.mixin(mixinType, null);
+		typeToTest.extendFrom(superType);
+
+		/* test */
+		assertFalse(typeToTest.getMethods().isEmpty());
+		assertTrue(typeToTest.getMethods().contains(method1));
+		assertTrue(typeToTest.getMethods().contains(method2));
+	}
+
+	@Test
+	public void type_b_inherits_type_a__before_mixin_is_done__getmethods_contains_mixin_method(){
+		/* prepare */
+		Type superType = mock(Type.class);
+		Method method1 = mock(Method.class,"method1");
+		Set<Method> methodSet = new LinkedHashSet<>();
+		methodSet.add(method1);
+		when(superType.getMethods()).thenReturn(methodSet);
+		
+		Type mixinType = mock(Type.class);
+		Method method2 = mock(Method.class,"method2");
+		Set<Method> methodSet2 = new LinkedHashSet<>();
+		methodSet2.add(method2);
+		when(mixinType.getMethods()).thenReturn(methodSet2);
+
+		/* mockito workaround for tree set */
+		when(method1.compareTo(method2)).thenReturn(1);
+		when(method2.compareTo(method1)).thenReturn(-1);
+		
+		/* check preconditions */
+		assertTrue(typeToTest.getMethods().isEmpty());
+
+		/* execute */
+		typeToTest.extendFrom(superType);
+		typeToTest.mixin(mixinType, null);
+
+		/* test */
+		assertFalse(typeToTest.getMethods().isEmpty());
+		assertTrue(typeToTest.getMethods().contains(method1));
+		assertTrue(typeToTest.getMethods().contains(method2));
+	}
+	
 	@Test
 	public void is_interface_of_one_of_its_interfaces_returns_true() {
 		/* prepare */
@@ -305,7 +369,7 @@ public class XMLTypeTest {
 	public void extendBySuperType_own_method0_and_method1_from_super_type1_returned_in_getMethods() {
 		/* prepare */
 		Method method0 = mock(Method.class);
-		typeToTest.methods.add(method0);
+		typeToTest.getMethods().add(method0);
 
 		Type superType = mock(Type.class);
 		Method method1 = mock(Method.class);
@@ -340,7 +404,7 @@ public class XMLTypeTest {
 	public void extendBySuperType_own_property0_and_property1_from_super_type1_returned_in_getProperties() {
 		/* prepare */
 		Property property0 = mock(Property.class);
-		typeToTest.properties.add(property0);
+		typeToTest.getProperties().add(property0);
 
 		Type superType = mock(Type.class);
 		Property property1 = mock(Property.class);
@@ -382,7 +446,7 @@ public class XMLTypeTest {
 
 		/* check preconditions */
 		Set<Method> methods = typeToTest.getMethods();
-		typeToTest.methods.add(method0);
+		typeToTest.getMethods().add(method0);
 
 		/* execute */
 		typeToTest.extendFrom(null);

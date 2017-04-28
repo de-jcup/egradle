@@ -44,10 +44,25 @@ public class TypeAssert {
 		return this;
 	}
 	public TypeAssert hasMethod(String name, String ...paramTypes){
+		return hasMethodOrNot(true, name, paramTypes);
+	}
+	
+	public TypeAssert hasNotMethod(String name, String ...paramTypes){
+		return hasMethodOrNot(false, name, paramTypes);
+	}
+	
+	private TypeAssert hasMethodOrNot(boolean expected ,String name, String ...paramTypes){
 		if (name==null){
 			throw new IllegalArgumentException("wrong usage in test case, name may never be null!");
 		}
-		hasMethods();
+		if (expected){
+			hasMethods();
+		}else {
+			if (type.getMethods().isEmpty()){
+				/* no method so not also this one*/
+				return this;
+			}
+		}
 		for (Method m: type.getMethods()){
 			if (!name.equals(m.getName())){
 				continue;
@@ -75,13 +90,30 @@ public class TypeAssert {
 				}
 			}
 			if (same){
-				/* all params same - ok found */
-				return this;
+				if (expected){
+					/* all params same - ok found */
+					return this;
+				}
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("In type ").append(type.getName());
+				sb.append(" exists a method like ");
+				failOnMethod(name, sb, paramTypes);
+				return null;
+				
 			}
+		}
+		if (!expected){
+			return this;
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("In type ").append(type.getName());
 		sb.append(" exists no method like ");
+		failOnMethod(name, sb, paramTypes);
+		return null;
+	}
+	
+	private void failOnMethod(String name, StringBuilder sb, String... paramTypes) {
 		sb.append(name);
 		sb.append("(");
 		if (paramTypes!=null){
@@ -96,7 +128,6 @@ public class TypeAssert {
 		}
 		sb.append(")");
 		fail(sb.toString());
-		return null;
 	}
 	public TypeAssert hasName(String name) {
 		if (name==null){

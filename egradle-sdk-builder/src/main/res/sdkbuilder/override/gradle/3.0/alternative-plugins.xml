@@ -1,4 +1,9 @@
 <plugins>
+	<!-- 
+		Inside this file alternative plugin meta information is added.
+		There is stuff which is not available in plugins.xml 
+		because its added programmatically and not listed in plugins.xml from gradle origin project
+	 -->
     <plugin id="core" description="Gradle API parts">
     	<extends id="war" extensionClass="org.gradle.api.tasks.bundling.War" targetClass="org.gradle.api.Project" />
         <extends id="jar" extensionClass="org.gradle.api.tasks.bundling.Jar" targetClass="org.gradle.api.Project" />
@@ -6,6 +11,32 @@
         <extends id="tar" extensionClass="org.gradle.api.tasks.bundling.Tar" targetClass="org.gradle.api.Project" />
     </plugin>
     <plugin id="ear">
+    	<!-- ear extension is added from Ear.java. -->
     	<extends id="ear" extensionClass="org.gradle.plugins.ear.Ear" targetClass="org.gradle.api.Project" />
     </plugin>
+    <plugin id="scala">
+    	<!-- scala runtime extension, added by ScalaBasePlugin.java -->
+    	<extends id="scalaRuntime" extensionClass="org.gradle.api.tasks.ScalaRuntime" targetClass="org.gradle.api.Project"/>
+    </plugin>
+    <!-- 
+    	Checked from plugins.xml:
+    	
+    	- java: JavaPlugin.java
+    	    - nothing more found
+    	- groovy: GroovyPlugin.java
+    		- nothing more found 
+    	- publishing: PublishingPlugin.java 
+    		- found "publishing" but already done in plugins.xml
+    	- scala: 
+    	    - found "scalaRuntime" see above
+    	- antlr: ANTLRPlugin.java
+    		- nothing found
+    	- maven: MavenPlugin.java 
+    		- defines MavenPluginConvention 
+    	- 
+    	*********** STOPPED - more to inspect following: *****************
+    	- 
+    	
+    
+     -->
 </plugins>

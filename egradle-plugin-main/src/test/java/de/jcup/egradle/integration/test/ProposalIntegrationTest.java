@@ -211,6 +211,9 @@ public class ProposalIntegrationTest {
 		/* @formatter:on*/
 	}
 	
+	/**
+	 * Tests, EarPluginConvention.java#getAppDirName() is added to project methods
+	 */
 	@Test
 	public void buildfile__empty_offset_is_0__has_ear_convention_method_appDirName() {
 		/* prepare */
@@ -223,6 +226,25 @@ public class ProposalIntegrationTest {
 		/* @formatter:off*/
 		assertThat(proposals).
 			containsProposalWithLabel("appDirName");
+		/* @formatter:on*/
+	}
+	
+	
+	/**
+	 * Tests, EarPluginConvention.java#getAppDirName() is added to project methods
+	 */
+	@Test
+	public void buildfile__empty_ear_extension_block__offset_is_5__has_ear_extension_lib_closure() {
+		/* prepare */
+		String text = "ear{   }";
+		int offset = 5;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsProposalWithLabel("lib(Closure configureClosure)");
 		/* @formatter:on*/
 	}
 	
@@ -245,6 +267,87 @@ public class ProposalIntegrationTest {
 				whichHasDescription().
 				hasTemplate("dependencies {\n    $cursor\n}").
 		and();
+		/* @formatter:on*/
+	}
+	
+	@Test
+	public void buildfile__empty_offset_is_0__has_scalaRuntime_from_scala_plugin() {
+		/* prepare */
+		String text = "";
+		int offset = 0;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("scalaRuntime-scala");
+		/* @formatter:on*/
+	}
+	
+	/**
+	 * Test MavenPluginConvention.java method pom(Closure configureClosure) is in proposals
+	 */
+	@Test
+	public void buildfile__empty_offset_is_0__has_method_pom_closure__from_maven_mixing_of_mavenpluginconvention() {
+		/* prepare */
+		String text = "";
+		int offset = 0;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("pom(Closure configureClosure)-maven");
+		/* @formatter:on*/
+	}
+	
+	/**
+	 * 
+	 * <extends targetClass="org.gradle.api.artifacts.dsl.RepositoryHandler" mixinClass="org.gradle.api.plugins.MavenRepositoryHandlerConvention"/>
+	 */
+	@Test
+	public void buildfile__empty_offset_is_0__has_method_mavenDeployer_closure__from_maven_mixin_of_MavenRepositoryHandlerConventionTorepositoryHandler() {
+		/* prepare */
+		String text = "repositories{                            }";
+		int offset = 16;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("flatDir(Closure configureClosure)").// origin from RepositoryHandler.xml, must be kept
+		and().
+			containsProposalWithLabel("mavenDeployer(Closure configureClosure)-maven")
+			;
+		/* @formatter:on*/
+	}
+
+	/**
+	 * Test MavenPluginConvetion.java method getMavenPomDir() is in proposals as property
+	 */
+	@Test
+	public void buildfile__empty_offset_is_0__has_property_mavenPomDir() {
+		/* prepare */
+		String text = "";
+		int offset = 0;
+	
+		/* execute */
+		Set<Proposal> proposals = createProposals(text, offset);
+		/* test */
+		/* @formatter:off*/
+		assertThat(proposals).
+			containsAtLeastOneProposal().
+		and().
+			containsProposalWithLabel("mavenPomDir");
 		/* @formatter:on*/
 	}
 	
