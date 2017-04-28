@@ -13,6 +13,10 @@
    		id="egradle.preferences.keyword.gradle"
    		label="gradle">
      </keyword>
+       <keyword
+   		id="egradle.preferences.keyword.import"
+   		label="import">
+     </keyword>
    </extension>
    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -446,6 +450,21 @@
          </keywordReference>
           <keywordReference
                id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+      </page>
+      <page
+         id="de.jcup.egradle.eclipse.preferences.EGradleImporterPreferencePage"
+         class="de.jcup.egradle.eclipse.preferences.EGradleImporterPreferencePage"
+         name="Import"
+         category="egradle.preferences.EGradlePreferencePage">
+         <keywordReference
+               id="egradle.preferences.keyword.egradle">
+         </keywordReference>
+          <keywordReference
+               id="egradle.preferences.keyword.gradle">
+         </keywordReference>
+         <keywordReference
+               id="egradle.preferences.keyword.import">
          </keywordReference>
       </page>
    </extension>

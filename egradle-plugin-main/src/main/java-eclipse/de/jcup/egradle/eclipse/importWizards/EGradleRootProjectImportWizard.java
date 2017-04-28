@@ -36,6 +36,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
 
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.ProcessExecutionResult;
@@ -55,7 +56,7 @@ import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
-
+import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 
 	private static ImageDescriptor desc = EGradleUtil
@@ -134,7 +135,12 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 		@Override
 		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+			boolean cleanProjects = EGRADLE_IDE_PREFERENCES.isCleanProjectsOnImportEnabled();
+			boolean executeAssemble = EGRADLE_IDE_PREFERENCES.isExecuteAssembleTaskOnImportEnabled();
+			
 			try {
+				
+				
 				autoBuildEnabled = EGradleUtil.isWorkspaceAutoBuildEnabled();
 				if (autoBuildEnabled) {
 					/* we disable auto build while import running */
@@ -204,11 +210,19 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 				/* ---------------- */
 				/* update workspace */
 				/* ---------------- */
-
-				processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(rootProject, monitor);
-				if (processExecutionResult.isNotOkay()) {
-					throw new InvocationTargetException(
-							new GradleExecutionException("Assemble task result was no okay"));
+				if (executeAssemble){
+					/* execute assemble task and - if enabled - after execution the 'clean projects' operation */
+					processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(rootProject, monitor, cleanProjects);
+					if (processExecutionResult.isNotOkay()) {
+						throw new InvocationTargetException(
+								new GradleExecutionException("Assemble task result was no okay"));
+					}
+				}else{
+					/* if assemble is turned off but user wants to have cleanProjects, this must be done here too*/
+					if (cleanProjects){
+						IWorkbenchWindow window = EGradleUtil.getActiveWorkbenchWindow();
+						EGradleUtil.cleanAllProjects(true, window, monitor);
+					}
 				}
 				/* recreate virtual root project */
 				if (createVirtualRoot) {
@@ -397,7 +411,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	}
 
 	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(GradleRootProject rootProject,
-			IProgressMonitor progressMonitor) throws GradleExecutionException, Exception {
+			IProgressMonitor progressMonitor, boolean clean) throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = EGradleUtil.getSystemConsoleOutputHandler();
 		/*
 		 * we do process executor create now in endless running variant because
@@ -418,7 +432,9 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			}
 		};
 		delegate.setRefreshAllProjects(true);
-		delegate.setCleanAllProjects(true, true);
+		if (clean){
+			delegate.setCleanAllProjects(true, true);
+		}
 		delegate.setShowEGradleSystemConsole(true);
 
 		delegate.execute(progressMonitor);

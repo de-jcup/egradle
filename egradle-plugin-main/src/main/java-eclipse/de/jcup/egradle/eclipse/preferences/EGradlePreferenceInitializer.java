@@ -36,7 +36,12 @@ public class EGradlePreferenceInitializer extends AbstractPreferenceInitializer 
 			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
 		}
 		store.setDefault(P_OUTPUT_VALIDATION_ENABLED.getId(), true);
+		
 		store.setDefault(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), false);
+		
+		store.setDefault(P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(), true);
+		store.setDefault(P_IMPORT__DO_CLEAN_PROJECTS.getId(),true);
+		
 		store.setDefault(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(), true);
 		store.setDefault(P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(), true);
 

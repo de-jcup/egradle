@@ -56,6 +56,16 @@ public class EGradlePreferences {
 		return validationEnabled;
 	}
 	
+	public boolean isCleanProjectsOnImportEnabled(){
+		boolean cleanProjectsEnabled = getPreferenceStore().getBoolean(P_IMPORT__DO_CLEAN_PROJECTS.getId());
+		return cleanProjectsEnabled;
+	}
+	
+	public boolean isExecuteAssembleTaskOnImportEnabled(){
+		boolean executeAssembleTaskEnabled = getPreferenceStore().getBoolean(P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId());
+		return executeAssembleTaskEnabled;
+	}
+	
 	public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
 		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore().getBoolean(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
 		return automaticallyDeriveBuildFoldersEnabled;

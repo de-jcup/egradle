@@ -26,7 +26,14 @@ public enum EGradlePreferenceConstants {
 	P_GRADLE_CALL_COMMAND("commandGradle"),
 	P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
 	P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
+	
+	/* file handling parts*/
 	P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
+	
+	/* import */
+	P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
+	P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
+	
 	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
 
 	private String id;

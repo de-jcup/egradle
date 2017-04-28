@@ -16,7 +16,9 @@
 		<li><a href="#import_by_importer">Import gradle root and all subprojects by EGradle importer</a>
 		<ul>
 			<li><a href="#import_by_importer_what_happens">What happens?</a></li>	
-			<li><a href="#import_by_importer_reimport">Reimporting current root project</a></li>	
+			<li><a href="#import_by_importer_reimport">Reimporting current root project</a></li>
+			<li><a href="#import_preferences">Import preferences</a></li>
+			
 		</ul>
 		</li>
 		<li><a href="#import_by_default">Import by standard way</a></li>
@@ -25,6 +27,9 @@
 	 EGradle does no magic to your build files. You have to apply the 'eclipse' plugin inside your build.gradle file.
 	 <p>
 		<img src="images/egradle-import-preconditions.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
 	</p>
 	<h2 id="import_by_importer">Import gradle root and all subprojects by EGradle importer</h2>
 	<p>EGradle contains an importer - simply call "File->Import..." and enter "gradle"</p>
@@ -41,14 +46,19 @@
 	What happens when you call finish button?
 	<ol>
 		<li>All eclipse projects which are representatives of the new gradle root project location are closed</li>
-		<li>A gradle call "cleanEclipse elcipse" is executed</li>
+		<li>A gradle call "cleanEclipse eclipse" is executed</li>
 		<li>If the gradle call is sucessful:
 			<ol>
+				<li>Auto build will be temporary deactivated if enabled</li>
 				<li>Old subprojects are deleted (without content)</li>
-				<li>Old <a href="virtual_root_project.html">Virtual root project</a> is removed</li>
+				<li>Old <a href="virtual_root_project.html">Virtual root project</a> (if existing) is removed</li>
 				<li>The new generated eclipse sub projects are imported into workspace</li>
+				<li>Assemble task will be executed - so build folders do exist <i>(except when deactivated in preferences)</i>i></li>
+				<li>Eclipse projects are refreshed</li>
+				<li>Full clean build is executed for all projects inside eclipse<i>(except when deactivated in preferences)</i>i></li>
 				<li>Gradle build folders are automatically derived if <a href="filehandling.html#automatically_derive_buildfolders">derive
 				feature</a> is enabled in preferences
+				<li>When auto build was enabled before import, auto build will be reactivated</li>
 		</li>
 				<li>
 				If the root project is a multi project, 
@@ -64,6 +74,9 @@
 			</ol>
 		</li>
 	</ol>
+	<p>
+		<a href="#top">Top</a>
+	</p>
 	<h3 id="import_by_importer_reimport">Reimporting current root project</h3>
 	<p>
 	What happens when you keep the settings of current preferences?<br><br>	
@@ -77,6 +90,27 @@
 	context menu you got the import action:  
 	</p>
 	<img src="images/egradle-import-context-menu.png" />
+	<p>
+		<a href="#top">Top</a>
+	</p>	
+	<h3 id="import_preferences">Import preferences</h3>
+	<p>
+	The importer has got it's own preferences page where you can setup
+	some behaviour:
+	</p>
+	<img src="images/egradle-preferences-importer.png" />
+	<p>
+	<h4>Execute assemble task</h4>
+	When this option is enabled, the <b>assemble</b> task will be called after 
+	EGradle has imported the projects into eclipse. This will build
+	main output and build folders but no test outputs.<br><br>
+	If you deactivate this option you will not have <a href="filehandling.html#automatically_derive_buildfolders">auto derived build folders</a> after import, because no build folders will be created. 
+	 
+	<h4>Clean eclipse projects</h4>
+	<p>
+	When enabled a full <b>"clean all projects"</b> will be executed after import is done, so eclipse 
+	bin folders will be recreated and eclipse and gradle outputs are in sync.
+	</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>	
