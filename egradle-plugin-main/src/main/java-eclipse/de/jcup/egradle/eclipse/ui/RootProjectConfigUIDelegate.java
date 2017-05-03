@@ -88,7 +88,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		/* ------------------------------------ */
 		GridData groupLayoutData = new GridData();
 		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
+		groupLayoutData.verticalAlignment = GridData.FILL;
 		groupLayoutData.grabExcessHorizontalSpace = true;
 		groupLayoutData.grabExcessVerticalSpace = true;
 		groupLayoutData.verticalSpan = 2;
@@ -107,7 +107,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		gridDataLastColumn.horizontalAlignment = GridData.FILL;
 		gridDataLastColumn.verticalAlignment = GridData.FILL;
 		gridDataLastColumn.grabExcessHorizontalSpace = true;
-		gridDataLastColumn.grabExcessVerticalSpace = false;
+		gridDataLastColumn.grabExcessVerticalSpace = true;
 		gridDataLastColumn.verticalSpan = 2;
 		gridDataLastColumn.horizontalSpan = 2;
 		gridDataLastColumn.minimumHeight = 50;
