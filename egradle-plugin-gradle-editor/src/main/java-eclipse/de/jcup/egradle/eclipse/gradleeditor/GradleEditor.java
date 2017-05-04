@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +76,8 @@ import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePa
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+import de.jcup.egradle.eclipse.openapi.BuildVariablesProvider;
+import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
 
 public class GradleEditor extends TextEditor implements StatusMessageSupport, IResourceChangeListener {
 
@@ -126,9 +127,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 
 	void setTitleImageDependingOnSeverity(int severity) {
 		if (severity == IMarker.SEVERITY_ERROR) {
-			setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", Activator.PLUGIN_ID));
+			setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", EditorActivator.PLUGIN_ID));
 		} else {
-			setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", Activator.PLUGIN_ID));
+			setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", EditorActivator.PLUGIN_ID));
 		}
 	}
 
@@ -407,16 +408,14 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		 * own implementations:
 		 */
 		if (transformer == null) {
-			Map<String, String> map = new HashMap<>();
-			/*
-			 * TODO ATR, 28.11.2016: what about check if current file is inside
-			 * current root project? Otherwise the link makes not really sense
-			 * !?!?
-			 */
-			File rootFolder = EGradleUtil.getRootProjectFolderWithoutErrorHandling();
-			if (rootFolder != null) {
-				String rootProjectDir = rootFolder.getAbsolutePath().replace('\\', '/');
-				map.put("rootProject.projectDir", rootProjectDir);
+			BuildVariablesProvider provider = BuildVariablesProviderRegistry.getProvider();
+
+			Map<String, String> map = null;
+			if (provider != null) {
+				map = provider.getVariables();
+			}
+			if (map == null) {
+				map = new HashMap<>();
 			}
 			transformer = new SimpleMapStringTransformer(map);
 		}
@@ -588,7 +587,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 	}
 
 	private ColorManager getColorManager() {
-		return Activator.getDefault().getColorManager();
+		return EditorActivator.getDefault().getColorManager();
 	}
 
 	private class DelayedDocumentListener implements IDocumentListener {

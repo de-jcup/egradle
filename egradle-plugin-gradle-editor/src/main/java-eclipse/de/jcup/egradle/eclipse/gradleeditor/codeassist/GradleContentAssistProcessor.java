@@ -62,7 +62,7 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.DocumentTextProvider;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
@@ -114,7 +114,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private void addFactories() {
-		CodeCompletionRegistry codeCompletionRegistry = Activator.getDefault().getCodeCompletionRegistry();
+		CodeCompletionRegistry codeCompletionRegistry = EditorActivator.getDefault().getCodeCompletionRegistry();
 		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
 
 		estimator = new GradleLanguageElementEstimater(typeProvider);
@@ -213,15 +213,15 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			} else if (p instanceof ModelProposal) {
 				ModelProposal mp = (ModelProposal) p;
 				if (mp.isMethod()) {
-					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png", Activator.PLUGIN_ID);
+					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
 				} else if (mp.isProperty()) {
-					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", Activator.PLUGIN_ID);
+					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", EditorActivator.PLUGIN_ID);
 				}
 			} else if (p instanceof TemplateProposal) {
-				image = EGradleUtil.getImage("/icons/codecompletion/source.png", Activator.PLUGIN_ID);
+				image = EGradleUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
 			}
 			if (image == null) {
-				image = EGradleUtil.getImage("/icons/gradle-og.png", Activator.PLUGIN_ID);
+				image = EGradleUtil.getImage("/icons/gradle-og.png", EditorActivator.PLUGIN_ID);
 			}
 			IContextInformation contextInformation = null;
 			String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();

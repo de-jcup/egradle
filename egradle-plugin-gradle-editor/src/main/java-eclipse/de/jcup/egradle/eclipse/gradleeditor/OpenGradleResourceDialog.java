@@ -83,8 +83,8 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		Activator activator = Activator.getDefault();
-		IDialogSettings dialogSettings = activator.getDialogSettings();
+		EditorActivator editorActivator = EditorActivator.getDefault();
+		IDialogSettings dialogSettings = editorActivator.getDialogSettings();
 		IDialogSettings settings = dialogSettings.getSection(GRADLE_RESOURCE_DIALOG_SETTINGS);
 
 		if (settings == null) {

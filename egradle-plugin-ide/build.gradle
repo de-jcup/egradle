@@ -1,0 +1,10 @@
+/* special build.gradle variant for eclipse-plugin 
+ * 
+ * Divided sources into src/main/java and src/main/java-eclipse - so simple junit tests can be done inside src/test/java without any eclipse dependencies
+ *
+ */
+dependencies {
+	compile library.commons_lang
+	//compile library.groovy
+	compile library.antlr
+}

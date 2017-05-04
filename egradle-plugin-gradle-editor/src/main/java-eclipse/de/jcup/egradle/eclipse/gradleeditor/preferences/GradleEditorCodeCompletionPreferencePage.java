@@ -36,7 +36,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
@@ -80,8 +80,8 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 			reloadButton.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					Activator activator = Activator.getDefault();
-					CodeCompletionRegistry registry = activator.getCodeCompletionRegistry();
+					EditorActivator editorActivator = EditorActivator.getDefault();
+					CodeCompletionRegistry registry = editorActivator.getCodeCompletionRegistry();
 					if (registry == null) {
 						return;
 					}

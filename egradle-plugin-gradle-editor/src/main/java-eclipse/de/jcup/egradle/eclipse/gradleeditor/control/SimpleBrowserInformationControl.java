@@ -44,7 +44,7 @@ import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.StringUtilsAccess;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 
 /**
  * EGradles own simple browser information control, inspired by
@@ -219,7 +219,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		if (linksEnabled) {
 
 			openInBrowserAction = new OpenInExternalBrowserAction();
-			openInBrowserAction.setImageDescriptor(EGradleUtil.createImageDescriptor("icons/codecompletion/external_browser.png", Activator.PLUGIN_ID));
+			openInBrowserAction.setImageDescriptor(EGradleUtil.createImageDescriptor("icons/codecompletion/external_browser.png", EditorActivator.PLUGIN_ID));
 			openInBrowserAction.setToolTipText("Open this page in external browser");
 			
 			browsBackitem = new Action() {

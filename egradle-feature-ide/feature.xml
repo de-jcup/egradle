@@ -100,4 +100,11 @@ END OF TERMS AND CONDITIONS
          id="de.jcup.egradle.eclipse.feature.core"
          version="0.0.0"/>
 
+   <plugin
+         id="de.jcup.egradle.eclipse.plugin.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

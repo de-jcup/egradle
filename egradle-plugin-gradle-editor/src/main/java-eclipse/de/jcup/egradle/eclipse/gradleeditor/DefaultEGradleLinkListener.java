@@ -54,7 +54,7 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		if (target==null){
 			return;
 		}
-		CodeCompletionRegistry registry = Activator.getDefault().getCodeCompletionRegistry();
+		CodeCompletionRegistry registry = EditorActivator.getDefault().getCodeCompletionRegistry();
 		if (registry == null) {
 			return;
 		}

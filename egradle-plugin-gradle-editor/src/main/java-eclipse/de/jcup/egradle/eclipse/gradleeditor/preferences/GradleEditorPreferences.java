@@ -28,7 +28,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
 public class GradleEditorPreferences {
@@ -37,7 +37,7 @@ public class GradleEditorPreferences {
 	private IPreferenceStore store;
 
 	GradleEditorPreferences() {
-		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
+		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, EditorActivator.PLUGIN_ID);
 		store.addPropertyChangeListener(new IPropertyChangeListener() {
 			
 			@Override

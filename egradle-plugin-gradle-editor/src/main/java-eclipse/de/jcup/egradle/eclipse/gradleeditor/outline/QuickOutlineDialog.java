@@ -27,7 +27,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemTextMatcher;
 import de.jcup.egradle.core.text.FilterPatternMatcher;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractFilterableTreeQuickDialog;
 import de.jcup.egradle.eclipse.ui.AbstractTreeViewerFilter;
@@ -89,8 +89,8 @@ public class QuickOutlineDialog extends AbstractFilterableTreeQuickDialog<Item> 
 
 	@Override
 	protected AbstractUIPlugin getUIPlugin() {
-		Activator activator = Activator.getDefault();
-		return activator;
+		EditorActivator editorActivator = EditorActivator.getDefault();
+		return editorActivator;
 	}
 
 	@Override

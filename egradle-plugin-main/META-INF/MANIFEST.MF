@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EGradle
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.main;singleton:=true
 Bundle-Version: 1.3.1
-Bundle-Activator: de.jcup.egradle.eclipse.Activator
+Bundle-Activator: de.jcup.egradle.eclipse.MainActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -32,13 +32,20 @@ Export-Package: de.jcup.egradle.codeassist,
  de.jcup.egradle.codeassist.hover,
  de.jcup.egradle.core,
  de.jcup.egradle.core.api,
+ de.jcup.egradle.core.config,
  de.jcup.egradle.core.domain,
  de.jcup.egradle.core.model,
  de.jcup.egradle.core.model.groovyantlr,
+ de.jcup.egradle.core.process,
  de.jcup.egradle.core.text,
+ de.jcup.egradle.core.validation,
+ de.jcup.egradle.core.virtualroot,
  de.jcup.egradle.eclipse.api,
- de.jcup.egradle.eclipse.launch,
+ de.jcup.egradle.eclipse.openapi,
+ de.jcup.egradle.eclipse.preferences,
  de.jcup.egradle.eclipse.ui,
+ org.apache.commons.lang3,
+ org.apache.commons.lang3.exception,
  org.codehaus.groovy,
  org.codehaus.groovy.antlr,
  org.codehaus.groovy.antlr.java,

@@ -25,7 +25,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.eclipse.api.EGradleUtil;
-import de.jcup.egradle.eclipse.junit.contribution.Activator;
+import de.jcup.egradle.eclipse.junit.contribution.JUnitActivator;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
@@ -48,7 +48,7 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 
 	@Override
 	public Image getImage() {
-		return EGradleUtil.getImage("icons/gradle-og-junit.gif",Activator.PLUGIN_ID);
+		return EGradleUtil.getImage("icons/gradle-og-junit.gif",JUnitActivator.PLUGIN_ID);
 	}
 
 	@Override

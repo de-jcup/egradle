@@ -39,7 +39,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.MainActivator;
 
 /**
  * This class demonstrates how to create your own dialog classes. It allows
@@ -331,11 +331,11 @@ public class SelectConfigurationDialog extends Dialog {
 	}
 
 	private IDialogSettings getDialogSettings() {
-		Activator activator = Activator.getDefault();
-		if (activator == null) {
+		MainActivator mainActivator = MainActivator.getDefault();
+		if (mainActivator == null) {
 			return null;
 		}
-		IDialogSettings dialogSettings = activator.getDialogSettings();
+		IDialogSettings dialogSettings = mainActivator.getDialogSettings();
 		return dialogSettings;
 	}
 

@@ -15,6 +15,9 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution;
 
+import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +37,6 @@ import org.w3c.dom.Document;
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.api.XMLWriter;
 import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.junit.JUnitResultFilesFinder;
 import de.jcup.egradle.junit.JUnitResultsCompressor;
 
@@ -55,13 +57,13 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 	@Override
 	protected IStatus run(IProgressMonitor _monitor) {
 		if (ignoreOnValdationErrors){
-			if (EGradleUtil.existsValidationErrors()){
+			if (existsValidationErrors()){
 				return Status.CANCEL_STATUS;
 			}
 		}
 		SubMonitor monitor = SubMonitor.convert(_monitor);
 		monitor.beginTask("Import junit results from gradle", 100);
-		File tempFile=new File(EGradleUtil.getTempFolder(),"TEST-egradle-all-testresults.tmp.xml");
+		File tempFile=new File(getTempFolder(),"TEST-egradle-all-testresults.tmp.xml");
 		try {
 			/* remove old temp file if existing */
 			if (tempFile.exists()) {
@@ -73,9 +75,9 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			String projectNameToShow=buildProjectNameToUse();
 			/* fetch files*/
 			String taskName = "Fetching gradle junit result files from '" +projectNameToShow+"'";
-			EGradleUtil.outputToSystemConsole(taskName);
+			outputToSystemConsole(taskName);
 			monitor.setTaskName(taskName);
-			File rootFolder = EGradleUtil.getRootProjectFolder();
+			File rootFolder = getRootProjectFolder();
 
 			Collection<File> files = finder.findTestFilesInFolder(rootFolder,projectname);
 			if (files.isEmpty()){
@@ -89,12 +91,12 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 						return Status.CANCEL_STATUS;
 					}
 				}
-				EGradleUtil.safeAsyncExec(new Runnable() {
+				safeAsyncExec(new Runnable() {
 
 					@Override
 					public void run() {
 						monitor.worked(100);
-						MessageDialog.openInformation(EGradleUtil.getActiveWorkbenchShell(), 
+						MessageDialog.openInformation(getActiveWorkbenchShell(), 
 								"No test results found",
 								"There are no test results to import from "+projectNameToShow+" at:\n'"+rootFolder.getAbsolutePath()+"'\n\nEither there are no tests or tests are not executed");
 					}
@@ -130,7 +132,7 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			monitor.worked(90);
 			
 			monitor.setTaskName("Open test results in view");
-			EGradleUtil.safeAsyncExec(new Runnable() {
+			safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {
@@ -139,13 +141,13 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 				}
 			});
 		} catch (Exception e) {
-			EGradleUtil.outputToSystemConsole(Constants.CONSOLE_FAILED);
+			outputToSystemConsole(Constants.CONSOLE_FAILED);
 //			return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot import junit results", e);
 			return Status.CANCEL_STATUS;
 		} finally{
 			monitor.done();
 		}
-		EGradleUtil.outputToSystemConsole(Constants.CONSOLE_OK);
+		outputToSystemConsole(Constants.CONSOLE_OK);
 		return Status.OK_STATUS;
 	}
 

@@ -1,11 +1,30 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle IDE
-Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.ide
+Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.ide;singleton:=true
 Bundle-Version: 1.3.1
-Bundle-Activator: de.jcup.egradle.eclipse.ide.Activator
+Bundle-Activator: de.jcup.egradle.eclipse.ide.IDEActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.console,
+ org.junit,
+ org.eclipse.jdt.launching,
+ org.eclipse.debug.ui,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.ui.forms,
+ org.eclipse.core.variables,
+ org.eclipse.core.filesystem,
+ org.eclipse.core.expressions,
+ de.jcup.egradle.eclipse.plugin.branding;bundle-version="1.3.1",
+ de.jcup.egradle.eclipse.plugin.editor.gradle;bundle-version="1.3.1",
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="1.3.1",
+ de.jcup.egradle.eclipse.plugin.sdk;bundle-version="3.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Export-Package: de.jcup.egradle.eclipse.ide,
+ de.jcup.egradle.eclipse.launch

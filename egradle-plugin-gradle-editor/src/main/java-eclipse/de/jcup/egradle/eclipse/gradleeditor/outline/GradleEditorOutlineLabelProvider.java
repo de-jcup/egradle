@@ -31,7 +31,7 @@ import de.jcup.egradle.core.model.Modifier;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
@@ -365,17 +365,17 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	}
 
 	public ColorManager getColorManager() {
-		Activator activator = Activator.getDefault();
-		if (activator == null) {
+		EditorActivator editorActivator = EditorActivator.getDefault();
+		if (editorActivator == null) {
 			return ColorManager.getStandalone();
 		}
-		return activator.getColorManager();
+		return editorActivator.getColorManager();
 	}
 
 	
 	
 	private Image getOutlineImage(String name) {
-		return EGradleUtil.getImage("/icons/outline/" + name, Activator.PLUGIN_ID);
+		return EGradleUtil.getImage("/icons/outline/" + name, EditorActivator.PLUGIN_ID);
 	}
 
 }

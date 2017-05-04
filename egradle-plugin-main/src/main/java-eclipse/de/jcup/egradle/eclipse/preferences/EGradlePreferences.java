@@ -22,7 +22,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.eclipse.Activator;
+import de.jcup.egradle.eclipse.MainActivator;
 
 public class EGradlePreferences {
 	
@@ -31,7 +31,7 @@ public class EGradlePreferences {
 	private IPreferenceStore store;
 
 	EGradlePreferences() {
-		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);
+		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
 	}
 
 	public String getStringPreference(EGradlePreferenceConstants id) {

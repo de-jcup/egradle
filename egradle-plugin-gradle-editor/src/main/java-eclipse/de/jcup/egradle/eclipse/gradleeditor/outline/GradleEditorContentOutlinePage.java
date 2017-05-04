@@ -40,14 +40,14 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.EGradleUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.gradleeditor.Activator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 import de.jcup.egradle.eclipse.ui.FallbackOutlineContentProvider;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 	
-	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",Activator.PLUGIN_ID);
-	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/sync_broken.png",Activator.PLUGIN_ID);
+	private static ImageDescriptor IMG_DESC_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/synced.png",EditorActivator.PLUGIN_ID);
+	private static ImageDescriptor IMG_DESC_NOT_LINKED = EGradleUtil.createImageDescriptor("/icons/outline/sync_broken.png",EditorActivator.PLUGIN_ID);
 	
 	private ITreeContentProvider contentProvider;
 	
@@ -203,7 +203,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 
 		private CollapseAllAction() {
 			setImageDescriptor(
-					EGradleUtil.createImageDescriptor("/icons/outline/collapseall.png", Activator.PLUGIN_ID));
+					EGradleUtil.createImageDescriptor("/icons/outline/collapseall.png", EditorActivator.PLUGIN_ID));
 			setText("Collapse all");
 		}
 
@@ -218,7 +218,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	private class ExpandAllAction extends Action {
 
 		private ExpandAllAction() {
-			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/expandall.png", Activator.PLUGIN_ID));
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/expandall.png", EditorActivator.PLUGIN_ID));
 			setText("Expand all");
 		}
 
@@ -231,7 +231,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 	private class BlockSelectionAction extends Action {
 
 		private BlockSelectionAction() {
-			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/mark_occurrences.png", Activator.PLUGIN_ID));
+			setImageDescriptor(EGradleUtil.createImageDescriptor("/icons/outline/mark_occurrences.png", EditorActivator.PLUGIN_ID));
 			setText("Mark selected item full");
 		}
 
