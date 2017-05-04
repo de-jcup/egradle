@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.jcup.egradle.eclipse.feature"
-      label="EGradle"
+      id="de.jcup.egradle.eclipse.feature.editor"
+      label="EGradle Editor"
       version="1.3.1"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 
-   <description url="https://github.com/de-jcup/egradle/wiki">
+     <description url="https://github.com/de-jcup/egradle/wiki">
       EGradle is a lightweight gradle integration for eclipse
    </description>
 
@@ -85,24 +85,10 @@ END OF TERMS AND CONDITIONS
    <url>
       <update label="EGradle update site" url="https://dl.bintray.com/de-jcup/egradle/"/>
    </url>
+  
 
    <includes
-         id="de.jcup.egradle.eclipse.feature.junit"
-         version="0.0.0"
-         name="EGradle JUnit Integration (optional)"
-         optional="true"/>
-
-   <plugin
-         id="de.jcup.egradle.eclipse.plugin.main"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.jcup.egradle.eclipse.plugin.branding"
-         download-size="0"
-         install-size="0"
+         id="de.jcup.egradle.eclipse.feature.core"
          version="0.0.0"/>
 
    <plugin

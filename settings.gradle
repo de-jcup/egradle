@@ -1,5 +1,6 @@
 
 include 'egradle-other',
+'egradle-plugin-ide',
 'egradle-plugin-main',
 'egradle-plugin-junit-contribution', 
 'egradle-draft', 
