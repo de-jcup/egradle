@@ -21,23 +21,15 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
-public class PathStatus extends Status implements IResourceStatus {
-	IPath path;
+class PathStatus extends Status implements IResourceStatus {
+	private IPath path;
 
-	public PathStatus(int type, int code, IPath path, String message, Throwable exception) {
+	private PathStatus(int type, int code, IPath path, String message, Throwable exception) {
 		super(type, ResourcesPlugin.PI_RESOURCES, code, message, exception);
 		this.path = path;
 	}
 
-	public PathStatus(int code, String message) {
-		this(getSeverity(code), code, null, message, null);
-	}
-
-	public PathStatus(int code, IPath path, String message) {
-		this(getSeverity(code), code, path, message, null);
-	}
-
-	public PathStatus(int code, IPath path, String message, Throwable exception) {
+	PathStatus(int code, IPath path, String message, Throwable exception) {
 		this(getSeverity(code), code, path, message, exception);
 	}
 
@@ -46,7 +38,7 @@ public class PathStatus extends Status implements IResourceStatus {
 		return path;
 	}
 
-	protected static int getSeverity(int code) {
+	private static int getSeverity(int code) {
 		return code == 0 ? 0 : 1 << (code % 100 / 33);
 	}
 

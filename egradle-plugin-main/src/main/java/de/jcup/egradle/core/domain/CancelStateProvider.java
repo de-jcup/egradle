@@ -25,7 +25,7 @@ public interface CancelStateProvider {
 	
 	public boolean isCanceled();
 	
-	public static class NeverCanceled implements CancelStateProvider{
+	static class NeverCanceled implements CancelStateProvider{
 
 		private NeverCanceled() {
 		}

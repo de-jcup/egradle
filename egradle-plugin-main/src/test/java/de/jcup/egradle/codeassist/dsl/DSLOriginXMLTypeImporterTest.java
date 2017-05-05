@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.codeassist.dsl;
 
+import static de.jcup.egradle.integration.TypeAssert.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -23,10 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.codeassist.dsl.Type;
-import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.core.TestUtil;
-import static de.jcup.egradle.integration.TypeAssert.*;
 public class DSLOriginXMLTypeImporterTest {
 
 	@Rule

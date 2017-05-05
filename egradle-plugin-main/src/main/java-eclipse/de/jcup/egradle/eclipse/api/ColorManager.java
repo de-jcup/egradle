@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Display;
 
 public class ColorManager {
 	private static ColorManager standalone;
-	protected Map<RGB, Color> fColorTable = new HashMap<>(10);
+	private Map<RGB, Color> fColorTable = new HashMap<>(10);
 
 	public ColorManager() {
 
@@ -46,7 +46,7 @@ public class ColorManager {
 	 * Set color manager for standalone SWT programs
 	 * @param standalone
 	 */
-	public static void setStandalone(ColorManager standalone) {
+	public static void setStandalone(ColorManager standalone) { // NO_UCD (test only)
 		ColorManager.standalone = standalone;
 	}
 

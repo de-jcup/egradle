@@ -21,7 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradleImporterPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -31,7 +31,7 @@ public class EGradleImporterPreferencePage extends FieldEditorPreferencePage imp
 
 	public EGradleImporterPreferencePage() {
 		super(GRID);
-		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
+		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
 	}
 
 	/**

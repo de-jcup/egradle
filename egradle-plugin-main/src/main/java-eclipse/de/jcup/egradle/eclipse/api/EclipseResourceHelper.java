@@ -209,7 +209,7 @@ public class EclipseResourceHelper {
 		try {
 			getFileHelper().delete(file);
 		} catch (IOException e) {
-			EGradleUtil.throwCoreException("Was not able to delete path:"+path, e);
+			EclipseUtil.throwCoreException("Was not able to delete path:"+path, e);
 		}
 	}
 
@@ -225,7 +225,7 @@ public class EclipseResourceHelper {
 				i = MAX_RETRY;
 			} catch (CoreException x) {
 				if (i == MAX_RETRY - 1) {
-					EGradleUtil.log(x.getStatus());
+					EclipseUtil.log(x.getStatus());
 				}
 				try {
 					Thread.sleep(1000); // sleep a second

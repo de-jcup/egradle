@@ -33,17 +33,17 @@ public class SourceCodeInsertionSupportTest {
 
 	@Test
 	public void string_to_prepare_is_null_returns_insertion_data_object() {
-		assertNotNull("",supportToTest.prepareInsertionString(null));
+		assertNotNull("",supportToTest.prepareInsertionString(null,null));
 	}
 	
 	@Test
 	public void string_to_prepare_is_null_returns_emtpy_string_as_sourcecode() {
-		assertEquals("",supportToTest.prepareInsertionString(null).sourceCode);
+		assertEquals("",supportToTest.prepareInsertionString(null,null).sourceCode);
 	}
 	
 	@Test
 	public void string_to_prepare_is_null_returns_n1_as_cursoroffset() {
-		assertEquals(-1,supportToTest.prepareInsertionString(null).cursorOffset);
+		assertEquals(-1,supportToTest.prepareInsertionString(null,null).cursorOffset);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class SourceCodeInsertionSupportTest {
 		sb.append("012345 $cursor bla");
 
 		/* execute */
-		InsertionData result = supportToTest.prepareInsertionString(sb.toString());
+		InsertionData result = supportToTest.prepareInsertionString(sb.toString(),null);
 		
 		/* test */
 		assertEquals("012345  bla",result.sourceCode);

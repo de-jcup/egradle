@@ -15,14 +15,14 @@
  */
  package de.jcup.egradle.codeassist;
 
-public class Template {
+class Template {
 
 	private String name;
 	private String content;
 	
 	
 	
-	public Template(String name, String content) {
+	Template(String name, String content) {
 		this.name = name;
 		this.content = content;
 	}

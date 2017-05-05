@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.virtualroot;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
@@ -43,7 +43,7 @@ import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.ProjectDescriptionCreator;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
@@ -86,7 +86,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 				try {
 					getFileHelper().delete(folder);
 				} catch (IOException e) {
-					EGradleUtil.throwCoreException("Cannot delete old virtual root project on filesystem!", e);
+					EclipseUtil.throwCoreException("Cannot delete old virtual root project on filesystem!", e);
 				}
 			}
 			return false;
@@ -136,7 +136,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			/* setup folder creation */
 			foldersToIgnore = new ArrayList<>();
 			/* check if already an eclipse project */
-			IProject[] projects = EGradleUtil.getAllProjects();
+			IProject[] projects = EclipseUtil.getAllProjects();
 			for (IProject p : projects) {
 				try {
 					File projectPath = getResourceHelper().toFile(p.getLocation());
@@ -249,7 +249,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
 		if (targetFolder == null) {
 			String message = "Cannot create link for file " + file + ", because target folder is null!";
-			EGradleUtil.log(new Status(IStatus.WARNING, IDEActivator.PLUGIN_ID, message));
+			EclipseUtil.log(new Status(IStatus.WARNING, IDEActivator.PLUGIN_ID, message));
 			return false;
 		}
 		notNull(file, "'file' may not be null");
@@ -354,7 +354,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
-			EGradleUtil.log(
+			EclipseUtil.log(
 					new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, "Was not able to create link to file:" + file, e));
 		}
 

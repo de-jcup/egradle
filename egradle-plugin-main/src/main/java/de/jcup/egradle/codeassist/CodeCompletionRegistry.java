@@ -39,14 +39,14 @@ public class CodeCompletionRegistry {
 		return errorHandler;
 	}
 
-	public void addListener(RegistryListener listener) {
+	void addListener(RegistryListener listener) {
 		if (listener == null) {
 			return;
 		}
 		listeners.add(listener);
 	}
 
-	public void removeListener(RegistryListener listener) {
+	void removeListener(RegistryListener listener) {
 		if (listener == null) {
 			return;
 		}
@@ -119,15 +119,6 @@ public class CodeCompletionRegistry {
 			return CodeCompletionRegistry.this;
 		}
 
-	}
-
-	/**
-	 * Unregisters a service if existing
-	 * 
-	 * @param serviceClazz
-	 */
-	public <T extends CodeCompletionService> void unregisterService(Class<T> serviceClazz) {
-		registerService(serviceClazz, null);
 	}
 
 	/**

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DefaultTypeTemplatesProvider implements TypeTemplatesProvider {
+class DefaultTypeTemplatesProvider implements TypeTemplatesProvider {
 
 	/*
 	 * TODO ATR, 27.02.2017: THINK ABOUT: maybe getTemplateFor(Type type) would

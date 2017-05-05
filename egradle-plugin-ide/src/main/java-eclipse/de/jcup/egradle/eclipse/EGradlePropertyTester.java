@@ -22,7 +22,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 public class EGradlePropertyTester extends PropertyTester{
@@ -76,7 +76,7 @@ public class EGradlePropertyTester extends PropertyTester{
 					return evalResult(expectedToBeRootPartOfRootProject,true);
 				}
 			} catch (CoreException e) {
-				EGradleUtil.log(e);
+				EclipseUtil.log(e);
 				return evalResult(expectedToBeRootPartOfRootProject,false);
 			}
 			return evalResult(expectedToBeRootPartOfRootProject,false);

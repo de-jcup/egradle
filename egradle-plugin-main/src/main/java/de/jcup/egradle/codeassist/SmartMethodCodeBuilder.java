@@ -18,7 +18,7 @@
 import de.jcup.egradle.codeassist.dsl.CodeTemplateBuilder;
 import de.jcup.egradle.codeassist.dsl.Method;
 
-public class SmartMethodCodeBuilder extends  AbstractLazyCodeBuilder{
+class SmartMethodCodeBuilder extends  AbstractLazyCodeBuilder{
 	
 	private Method method;
 	private CodeTemplateBuilder builder;

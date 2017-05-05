@@ -26,7 +26,8 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.ColorUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -65,7 +66,7 @@ public class GradleEditorPreferences {
 
 			private void updateColorsInEGradleEditors() {
 				/* inform all EGradle editors about color changes*/
-				IWorkbenchPage activePage = EGradleUtil.getActivePage();
+				IWorkbenchPage activePage = EclipseUtil.getActivePage();
 				if (activePage==null){
 					return;
 				}
@@ -127,7 +128,7 @@ public class GradleEditorPreferences {
 		if (color==null){
 			return null;
 		}
-		String webColor= EGradleUtil.convertToHexColor(color);
+		String webColor= ColorUtil.convertToHexColor(color);
 		return webColor;
 	}
 

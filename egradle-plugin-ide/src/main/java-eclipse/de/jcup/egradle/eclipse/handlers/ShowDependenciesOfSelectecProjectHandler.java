@@ -30,7 +30,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
@@ -44,7 +44,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 	private String configuration;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell activeWorkbenchShell = EGradleUtil.getActiveWorkbenchShell();
+		Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
 		if (activeWorkbenchShell==null){
 			return null;
 		}

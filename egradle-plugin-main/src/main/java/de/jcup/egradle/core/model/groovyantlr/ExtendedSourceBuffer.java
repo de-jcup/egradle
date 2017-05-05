@@ -29,7 +29,7 @@ import de.jcup.egradle.core.text.OffsetCalculator;
  * @author Albert Tregnaghi
  *
  */
-public class ExtendedSourceBuffer extends SourceBuffer {
+class ExtendedSourceBuffer extends SourceBuffer {
 
 	 	private final List<StringBuilder> lines = new ArrayList<>();
 	    private StringBuilder current;

@@ -42,7 +42,7 @@ import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationObserver;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationProgressRunnable;
@@ -136,7 +136,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 					@Override
 					public void output(String line) {
-						EGradleUtil.safeAsyncExec(new Runnable() {
+						EclipseUtil.safeAsyncExec(new Runnable() {
 
 							@Override
 							public void run() {
@@ -161,7 +161,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 					MutableGradleConfiguration configuration) {
 				try {
 					RootProjectConfigUIDelegate observer = RootProjectConfigUIDelegate.this;
-					ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(EGradleUtil.getActiveWorkbenchShell());
+					ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(EclipseUtil.getActiveWorkbenchShell());
 
 					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(new CancelStateProvider(){
 
@@ -174,7 +174,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 					/* use own progress monitor dialog here - progress service did not work well because this is in model state */
 					progressMonitorDialog.run(true, true, runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
-					EGradleUtil.log(e1);
+					EclipseUtil.log(e1);
 				}
 			}
 		});

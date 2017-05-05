@@ -24,7 +24,7 @@ import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
@@ -72,7 +72,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 			refreshAllProjects(monitor);
 		}
 		if (cleanAllProjects) {
-			IWorkbenchWindow window = EGradleUtil.getActiveWorkbenchWindow();
+			IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
 			cleanAllProjects(buildAfterClean, window, monitor);
 		}
 		super.afterExecutionDone(monitor);

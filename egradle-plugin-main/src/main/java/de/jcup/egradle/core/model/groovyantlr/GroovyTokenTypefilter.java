@@ -18,11 +18,11 @@
 import antlr.collections.AST;
 import de.jcup.egradle.core.api.Filter;
 
-public class GroovyTokenTypefilter implements Filter{
+class GroovyTokenTypefilter implements Filter{
 
 		private int filteredType;
 
-		public GroovyTokenTypefilter(int type){
+		GroovyTokenTypefilter(int type){
 			this.filteredType=type;
 		}
 	

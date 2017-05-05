@@ -51,7 +51,7 @@ import org.eclipse.ui.actions.OpenFileAction;
 import org.eclipse.ui.actions.OpenWithMenu;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
@@ -253,7 +253,7 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 	}
 
 	private IWorkbenchPage getActivePage() {
-		IWorkbenchWindow activeWorkbenchWindow = EGradleUtil.getActiveWorkbenchWindow();
+		IWorkbenchWindow activeWorkbenchWindow = EclipseUtil.getActiveWorkbenchWindow();
 		if (activeWorkbenchWindow == null) {
 			return null;
 		}

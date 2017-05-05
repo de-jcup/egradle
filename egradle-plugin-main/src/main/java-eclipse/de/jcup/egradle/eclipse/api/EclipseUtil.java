@@ -19,8 +19,6 @@ import java.io.File;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
@@ -34,9 +32,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
@@ -47,7 +43,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IConsoleConstants;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
@@ -56,7 +51,7 @@ import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.eclipse.MainActivator;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 
-public class EGradleUtil {
+public class EclipseUtil {
 
 	public static ImageDescriptor createImageDescriptor(String path, String pluginId) {
 		Bundle bundle = Platform.getBundle(pluginId);
@@ -67,17 +62,7 @@ public class EGradleUtil {
 		return imageDesc;
 	}
 
-	/**
-	 * Returns egradle preferences, never <code>null</code>
-	 * 
-	 * @return egradle preferences, never <code>null</code>
-	 */
-	public static EGradlePreferences getPreferences() {
-		return EGradlePreferences.EGRADLE_IDE_PREFERENCES;
-	}
-
 	
-
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -88,7 +73,6 @@ public class EGradleUtil {
 		return new RememberLastLinesOutputHandler(max);
 	}
 
-	
 	public static IEditorPart getActiveEditor() {
 		IWorkbenchPage page = getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
@@ -129,22 +113,29 @@ public class EGradleUtil {
 		return shell;
 	}
 
-	/**
-	 * Returns workbench or <code>null</code>
-	 * 
-	 * @return workbench or <code>null</code>
-	 */
-	public static IWorkbench getWorkbench() {
-		if (!PlatformUI.isWorkbenchRunning()) {
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		IWorkbench workbench = getWorkbench();
+		if (workbench == null) {
 			return null;
 		}
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		return workbench;
+		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+
+		if (workbenchWindow != null) {
+			return workbenchWindow;
+		}
+		/* fall back - try to execute in UI */
+		WorkbenchWindowRunnable wwr = new WorkbenchWindowRunnable();
+		getSafeDisplay().syncExec(wwr);
+		return wwr.workbenchWindowFromUI;
 	}
 
 	public static IProject[] getAllProjects() {
 		IProject[] projects = getWorkspace().getRoot().getProjects();
 		return projects;
+	}
+
+	public static FileHelper getFileHelper() {
+		return FileHelper.DEFAULT;
 	}
 
 	/**
@@ -173,28 +164,20 @@ public class EGradleUtil {
 		}
 		return image;
 	}
-
-	private static ImageRegistry getImageRegistry() {
-		MainActivator mainActivator = MainActivator.getDefault();
-		if (mainActivator == null) {
-			return null;
-		}
-		return mainActivator.getImageRegistry();
-	}
-
-	/**
-	 * Get image by path from shared images, see {@link ISharedImages}
-	 * 
-	 * @param path
-	 * @return image or <code>null</code>
-	 */
-	public static Image getSharedImage(String path) {
-		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
-		Image image = sharedImages.getImage(path);
-		return image;
-	}
-
 	
+	
+	/**
+	 * Returns egradle preferences, never <code>null</code>
+	 * 
+	 * @return egradle preferences, never <code>null</code>
+	 */
+	public static EGradlePreferences getPreferences() {
+		return EGradlePreferences.EGRADLE_IDE_PREFERENCES;
+	}
+
+	public static EclipseResourceHelper getResourceHelper() {
+		return EclipseResourceHelper.DEFAULT;
+	}
 
 	public static Display getSafeDisplay() {
 		Display display = Display.getCurrent();
@@ -203,8 +186,7 @@ public class EGradleUtil {
 		}
 		return display;
 	}
-	
-	
+
 	/**
 	 * Gets the egradle temp folder (user.home/.egradle). If not existing the
 	 * folder will be created
@@ -213,6 +195,107 @@ public class EGradleUtil {
 	 */
 	public static File getTempFolder() {
 		return getTempFolder(null);
+	}
+
+	public static IWorkspace getWorkspace() {
+		return ResourcesPlugin.getWorkspace();
+	}
+
+	public static boolean isWorkspaceAutoBuildEnabled() throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		return description.isAutoBuilding();
+	}
+
+	public static void log(IStatus status) {
+		MainActivator.getDefault().getLog().log(status);
+	}
+
+	public static void log(String message, Throwable t) {
+
+		if (t instanceof CoreException) {
+			Throwable cause = getRootCause(t);
+			message = resolveMessageIfNotSet(message, cause);
+			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), cause));
+		} else {
+			message = resolveMessageIfNotSet(message, t);
+			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message, t));
+		}
+
+	}
+
+	public static void log(Throwable t) {
+		log(null, t);
+	}
+
+	public static void logInfo(String message) {
+		log(new Status(IStatus.INFO, MainActivator.PLUGIN_ID, message));
+	}
+
+	
+
+	
+
+
+	public static void logWarning(String message) {
+		log(new Status(IStatus.WARNING, MainActivator.PLUGIN_ID, message));
+	}
+
+	
+
+	public static void safeAsyncExec(Runnable runnable) {
+		getSafeDisplay().asyncExec(runnable);
+	}
+
+	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		description.setAutoBuilding(flag);
+		workspace.setDescription(description);
+	}
+
+	/**
+	 * Shows console view
+	 */
+	public static void showConsoleView() {
+		IWorkbenchPage activePage = getActivePage();
+		if (activePage != null) {
+			try {
+				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
+			} catch (PartInitException e) {
+				logWarning("Was not able to show console");
+			}
+
+		}
+	}
+
+	public static void throwCoreException(String message) throws CoreException {
+		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message));
+
+	}
+
+	public static void throwCoreException(String message, Exception e) throws CoreException {
+		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message, e));
+
+	}
+
+	private static ImageRegistry getImageRegistry() {
+		MainActivator mainActivator = MainActivator.getDefault();
+		if (mainActivator == null) {
+			return null;
+		}
+		return mainActivator.getImageRegistry();
+	}
+	
+	private static Throwable getRootCause(Throwable t) {
+		if (t == null) {
+			return null;
+		}
+		Throwable rootCause = t;
+		while (t.getCause() != null) {
+			rootCause = t.getCause();
+		}
+		return rootCause;
 	}
 
 	/**
@@ -225,7 +308,7 @@ public class EGradleUtil {
 	 *            returned
 	 * @return temp folder never <code>null</code> and always existing
 	 */
-	public static File getTempFolder(String subFolder) {
+	private static File getTempFolder(String subFolder) {
 		String userHome = System.getProperty("user.home");
 
 		StringBuilder sb = new StringBuilder();
@@ -252,41 +335,17 @@ public class EGradleUtil {
 		return "EGradle";
 	}
 
-	public static IWorkbenchWindow getWorkbenchWindowChecked(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		return window;
-	}
-
-	
-
-	static boolean isUIThread() {
-		if (Display.getCurrent() == null) {
-			return false;
+	/**
+	 * Returns workbench or <code>null</code>
+	 * 
+	 * @return workbench or <code>null</code>
+	 */
+	private static IWorkbench getWorkbench() {
+		if (!PlatformUI.isWorkbenchRunning()) {
+			return null;
 		}
-		return true;
-	}
-
-	
-
-	public static void log(IStatus status) {
-		MainActivator.getDefault().getLog().log(status);
-	}
-
-	public static void log(Throwable t) {
-		log(null, t);
-	}
-
-	public static void log(String message, Throwable t) {
-
-		if (t instanceof CoreException) {
-			Throwable cause = getRootCause(t);
-			message = resolveMessageIfNotSet(message, cause);
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), cause));
-		} else {
-			message = resolveMessageIfNotSet(message, t);
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message, t));
-		}
-
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		return workbench;
 	}
 
 	private static String resolveMessageIfNotSet(String message, Throwable cause) {
@@ -300,89 +359,6 @@ public class EGradleUtil {
 		return message;
 	}
 
-	public static Throwable getRootCause(Throwable t) {
-		if (t == null) {
-			return null;
-		}
-		Throwable rootCause = t;
-		while (t.getCause() != null) {
-			rootCause = t.getCause();
-		}
-		return rootCause;
-	}
-
-	public static void logInfo(String message) {
-		log(new Status(IStatus.INFO, MainActivator.PLUGIN_ID, message));
-	}
-
-	public static void logWarning(String message) {
-		log(new Status(IStatus.WARNING, MainActivator.PLUGIN_ID, message));
-	}
-
-	
-
-	
-
-
-	public static void safeAsyncExec(Runnable runnable) {
-		getSafeDisplay().asyncExec(runnable);
-	}
-
-	
-
-	public static void throwCoreException(String message) throws CoreException {
-		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message));
-
-	}
-
-	public static void throwCoreException(String message, Exception e) throws CoreException {
-		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message, e));
-
-	}
-
-	public static EclipseResourceHelper getResourceHelper() {
-		return EclipseResourceHelper.DEFAULT;
-	}
-
-	public static FileHelper getFileHelper() {
-		return FileHelper.DEFAULT;
-	}
-
-	public static ImageDescriptor createSharedImageDescriptor(String id) {
-		return PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(id);
-	}
-
-	/**
-	 * Shows console view
-	 */
-	public static void showConsoleView() {
-		IWorkbenchPage activePage = getActivePage();
-		if (activePage != null) {
-			try {
-				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
-			} catch (PartInitException e) {
-				logWarning("Was not able to show console");
-			}
-
-		}
-	}
-
-	public static IWorkbenchWindow getActiveWorkbenchWindow() {
-		IWorkbench workbench = getWorkbench();
-		if (workbench == null) {
-			return null;
-		}
-		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-
-		if (workbenchWindow != null) {
-			return workbenchWindow;
-		}
-		/* fall back - try to execute in UI */
-		WorkbenchWindowRunnable wwr = new WorkbenchWindowRunnable();
-		getSafeDisplay().syncExec(wwr);
-		return wwr.workbenchWindowFromUI;
-	}
-	
 	private static class WorkbenchWindowRunnable implements Runnable{
 		IWorkbenchWindow workbenchWindowFromUI;
 		@Override
@@ -394,43 +370,5 @@ public class EGradleUtil {
 			workbenchWindowFromUI=workbench.getActiveWorkbenchWindow();
 		}
 		
-	}
-
-	/**
-	 * Returns a web color in format "#RRGGBB"
-	 * 
-	 * @param color
-	 * @return web color as string
-	 */
-	public static String convertToHexColor(Color color) {
-		if (color == null) {
-			return null;
-		}
-		return convertToHexColor(color.getRGB());
-	}
-
-	public static String convertToHexColor(RGB rgb) {
-		if (rgb == null) {
-			return null;
-		}
-		String hex = String.format("#%02x%02x%02x", rgb.red, rgb.green, rgb.blue);
-		return hex;
-	}
-
-	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
-		IWorkspace workspace = getWorkspace();
-		IWorkspaceDescription description = workspace.getDescription();
-		description.setAutoBuilding(flag);
-		workspace.setDescription(description);
-	}
-
-	public static boolean isWorkspaceAutoBuildEnabled() throws CoreException {
-		IWorkspace workspace = getWorkspace();
-		IWorkspaceDescription description = workspace.getDescription();
-		return description.isAutoBuilding();
-	}
-
-	public static IWorkspace getWorkspace() {
-		return ResourcesPlugin.getWorkspace();
 	}
 }

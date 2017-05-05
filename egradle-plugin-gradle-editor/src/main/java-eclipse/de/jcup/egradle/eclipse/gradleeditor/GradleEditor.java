@@ -68,7 +68,8 @@ import de.jcup.egradle.core.api.TextUtil;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.ColorUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvider;
@@ -127,9 +128,9 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 
 	void setTitleImageDependingOnSeverity(int severity) {
 		if (severity == IMarker.SEVERITY_ERROR) {
-			setTitleImage(EGradleUtil.getImage("icons/gradle-editor-with-error.png", EditorActivator.PLUGIN_ID));
+			setTitleImage(EclipseUtil.getImage("icons/gradle-editor-with-error.png", EditorActivator.PLUGIN_ID));
 		} else {
-			setTitleImage(EGradleUtil.getImage("icons/gradle-editor.png", EditorActivator.PLUGIN_ID));
+			setTitleImage(EclipseUtil.getImage("icons/gradle-editor.png", EditorActivator.PLUGIN_ID));
 		}
 	}
 
@@ -303,12 +304,12 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 			 * TODO ATR, 03.02.2017: there should be an easier approach to get
 			 * editors back and foreground, without syncexec
 			 */
-			EGradleUtil.getSafeDisplay().syncExec(new Runnable() {
+			EclipseUtil.getSafeDisplay().syncExec(new Runnable() {
 
 				@Override
 				public void run() {
-					bgColor = EGradleUtil.convertToHexColor(textWidget.getBackground());
-					fgColor = EGradleUtil.convertToHexColor(textWidget.getForeground());
+					bgColor = ColorUtil.convertToHexColor(textWidget.getBackground());
+					fgColor = ColorUtil.convertToHexColor(textWidget.getForeground());
 				}
 			});
 		}
@@ -536,7 +537,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		super.doSetInput(input);
 		IDocument document = getDocument();
 		if (document == null) {
-			EGradleUtil.logWarning("No document available for given input:" + input);
+			EclipseUtil.logWarning("No document available for given input:" + input);
 			return;
 		}
 		document.addDocumentListener(documentListener);
@@ -682,7 +683,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 	}
 
 	private void internalRebuildOutline() {
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 			public void run() {
 				IDocument document = getDocument();
 				outlinePage.inputChanged(document);

@@ -57,7 +57,7 @@ public abstract class AbstractTreeViewerFilter<T> extends ViewerFilter {
 		return selectTreePath(viewer, new TreePath(new Object[] { parentElement }), element);
 	}
 
-	public boolean selectTreePath(Viewer viewer, TreePath parentPath, Object element) {
+	private boolean selectTreePath(Viewer viewer, TreePath parentPath, Object element) {
 		// Cut off children of elements that are shown repeatedly.
 		for (int i = 0; i < parentPath.getSegmentCount() - 1; i++) {
 			if (element.equals(parentPath.getSegment(i))) {
@@ -79,8 +79,8 @@ public abstract class AbstractTreeViewerFilter<T> extends ViewerFilter {
 		return hasUnfilteredChild(treeViewer, parentPath, element);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Boolean isMatching(Object element) {
+	@SuppressWarnings("unchecked") 
+	Boolean isMatching(Object element) {
 		T item =null; 
 		try{
 			item = (T) element;

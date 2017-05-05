@@ -19,13 +19,13 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public EGradlePreferencePage() {
 		super(GRID);
-		setPreferenceStore(EGradleUtil.getPreferences().getPreferenceStore());
+		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
 		setDescription("Preferences for EGradle");
 	}
 

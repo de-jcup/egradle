@@ -44,13 +44,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	private DefaultTypeTemplatesProvider defaultTemplatesProvider = new DefaultTypeTemplatesProvider();
 
 	/**
-	 * Currently no longer used because generation does only provide public methods now
-	 * @deprecated because no longer used. Should be removed in future
-	 * TODO ATR, 19.04.2017: remove this in future!
-	 */
-	boolean filterUndocumentedEnabled;
-	
-	/**
 	 * Creates new gradle dsl proposal factory
 	 * 
 	 * @param codeTemplateBuilder
@@ -87,7 +80,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		return proposals;
 	}
 
-	Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
+	private Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
 		Type identifiedType = result.getElementType();
 		if (identifiedType==null){
 			return Collections.emptySet();
@@ -95,7 +88,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		/* when this is a documented type we show only documented methods etc. otherwise we support
 		 * all methods
 		 */
-		boolean filterUndocumented = filterUndocumentedEnabled && identifiedType.isDocumented();
 		Set<Proposal> proposals = new TreeSet<>();
 		
 		Map<String, Type> extensions = identifiedType.getExtensions();
@@ -130,9 +122,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
-			if (filterUndocumented && ! property.isDocumented()){
-				continue;
-			}
 			/*
 			 * TODO ATR, 28.01.2017: check if mixin does copy properties as
 			 * well. If so implementation is needed
@@ -151,9 +140,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		}
 		Set<Method> identifiedTypeMethods = identifiedType.getMethods();
 		for (Method method : identifiedTypeMethods) {
-			if (filterUndocumented && ! method.isDocumented()){
-				continue;
-			}
 			if (isIgnoreGetterOrSetter()){
 				if (MethodUtils.isGetterOrSetter(method)){
 					continue;
@@ -236,7 +222,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	}
 
-	public enum ModelProposalType {
+	private enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
 	}
 	

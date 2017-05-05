@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration;
+package de.jcup.egradle.integration;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -50,11 +50,12 @@ import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 
 /**
  * IntegrationTestComponents is the central point for integration tests
+ * 
  * @author Albert Tregnaghi
  *
  */
-public class IntegrationTestComponents extends ExternalResource{
-	
+public class IntegrationTestComponents extends ExternalResource {
+
 	private static IntegrationTestComponents INSTANCE = new IntegrationTestComponents();
 	private CodeCompletionRegistry codeCompletionRegistry;
 	private ErrorHandler errorHandler;
@@ -67,20 +68,20 @@ public class IntegrationTestComponents extends ExternalResource{
 	private XMLPluginsImporter pluginsImporter;
 	private FilesystemFileLoader fileLoader;
 	private static boolean showFullStacktraces;
-	static{
+	static {
 		String property = System.getProperty("egradle.integration.test.stacktrace");
-		showFullStacktraces=Boolean.parseBoolean(property);
-		
+		showFullStacktraces = Boolean.parseBoolean(property);
+
 	}
 
 	private IntegrationTestComponents() {
 		startSDKParts();
 	}
-	
-	public static IntegrationTestComponents initialize(){
+
+	public static IntegrationTestComponents initialize() {
 		return INSTANCE;
 	}
-	
+
 	public RelevantCodeCutter getRelevantCodeCutter() {
 		return relevantCodeCutter;
 	}
@@ -96,23 +97,12 @@ public class IntegrationTestComponents extends ExternalResource{
 	public GradleDSLTypeProvider getGradleDslProvider() {
 		return gradleDslProvider;
 	}
-	
 
 	private void startSDKParts() {
-		
+
 		relevantCodeCutter = new RelevantCodeCutter();
 		hoverSupport = new HoverSupport();
 		errorHandler = new ErrorHandler() {
-
-			@Override
-			public void handleError(Throwable t) {
-				if (showFullStacktraces){
-					t.printStackTrace();
-				}else{
-					System.err.println(t.getMessage());
-				}
-
-			}
 
 			@Override
 			public void handleError(String message) {
@@ -122,11 +112,10 @@ public class IntegrationTestComponents extends ExternalResource{
 
 			@Override
 			public void handleError(String message, Throwable t) {
-				if (showFullStacktraces){
+				if (showFullStacktraces) {
 					handleError(message);
-					handleError(t);
-				}else{
-					System.err.println(message+" - "+t.getMessage());
+					t.printStackTrace();
+					System.err.println(message + " - " + t.getMessage());
 				}
 			}
 
@@ -136,39 +125,39 @@ public class IntegrationTestComponents extends ExternalResource{
 		pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		fileLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		fileLoader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER,"sdk")); 
+		fileLoader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER, "sdk"));
 		gradleDslProvider = new GradleDSLTypeProvider(fileLoader);
 		gradleDslProvider.setErrorHandler(errorHandler);
-		
+
 		GradleDSLPluginLoader pluginLoader = new GradleDSLPluginLoader(fileLoader);
-		
+
 		/*
 		 * install dsl type provider as service, so it must be definitely used
 		 * shared...
 		 */
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
 		codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, pluginLoader);
-		
-		estimator=new GradleLanguageElementEstimater(gradleDslProvider);
+
+		estimator = new GradleLanguageElementEstimater(gradleDslProvider);
 		gradleDslCodeBuilder = new GradleDSLCodeTemplateBuilder();
-		gradleDSLProposalFactory = new GradleDSLProposalFactory(gradleDslCodeBuilder,estimator);
-		
+		gradleDSLProposalFactory = new GradleDSLProposalFactory(gradleDslCodeBuilder, estimator);
+
 		codeCompletionRegistry.init();
-		
+
 	}
-	
+
 	public XMLPluginsImporter getPluginsImporter() {
 		return pluginsImporter;
 	}
-	
+
 	public FilesystemFileLoader getFileLoader() {
 		return fileLoader;
 	}
-	
+
 	public GradleDSLProposalFactory getGradleDSLProposalFactory() {
 		return gradleDSLProposalFactory;
 	}
-	
+
 	public GradleDSLCodeTemplateBuilder getGradleDslCodeBuilder() {
 		return gradleDslCodeBuilder;
 	}
@@ -179,7 +168,7 @@ public class IntegrationTestComponents extends ExternalResource{
 		try {
 			return builder.build(null);
 		} catch (ModelBuilderException e) {
-			throw new IllegalStateException("Cannot build test model:\nReason:"+e.getMessage()+"\nText="+text,e);
+			throw new IllegalStateException("Cannot build test model:\nReason:" + e.getMessage() + "\nText=" + text, e);
 		}
 	}
 
@@ -188,32 +177,32 @@ public class IntegrationTestComponents extends ExternalResource{
 	}
 
 	public String loadTestFile(String path) {
-		File file = new File(TestUtil.SRC_TEST_RES_FOLDER,path);
-		if (!file.exists()){
-			throw new IllegalStateException("Testfile does not exist:"+file.getAbsolutePath());
+		File file = new File(TestUtil.SRC_TEST_RES_FOLDER, path);
+		if (!file.exists()) {
+			throw new IllegalStateException("Testfile does not exist:" + file.getAbsolutePath());
 		}
-		try(BufferedReader br = new BufferedReader(new FileReader(file))){
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line = "";
 			boolean firstLine = true;
 			StringBuilder sb = new StringBuilder();
-			while ((line=br.readLine())!=null){
-				if (!firstLine){
+			while ((line = br.readLine()) != null) {
+				if (!firstLine) {
 					sb.append("\n");
 				}
-				firstLine=false;
+				firstLine = false;
 				sb.append(line);
 			}
 			return sb.toString();
-		}catch(IOException e){
-			throw new IllegalStateException("Testfile reading failed:"+file.getAbsolutePath(),e);
+		} catch (IOException e) {
+			throw new IllegalStateException("Testfile reading failed:" + file.getAbsolutePath(), e);
 		}
 	}
 
 	public ProposalFactoryContentProvider buildContentProvider(String text, int offset) {
 		Model model = buildModel(text);
-		
+
 		ModelProvider modelProvider = new ModelProvider() {
-			
+
 			@Override
 			public Model getModel() {
 				return model;
@@ -221,10 +210,11 @@ public class IntegrationTestComponents extends ExternalResource{
 		};
 		TextProvider textProvider = new IntegrationTestTextProvider(text);
 		try {
-			StaticOffsetProposalFactoryContentProvider provider = new StaticOffsetProposalFactoryContentProvider(GradleFileType.GRADLE_BUILD_SCRIPT, modelProvider, textProvider, relevantCodeCutter, offset);
+			StaticOffsetProposalFactoryContentProvider provider = new StaticOffsetProposalFactoryContentProvider(
+					GradleFileType.GRADLE_BUILD_SCRIPT, modelProvider, textProvider, relevantCodeCutter, offset);
 			return provider;
 		} catch (ProposalFactoryContentProviderException e) {
-			throw new IllegalStateException("Should not happen",e);
+			throw new IllegalStateException("Should not happen", e);
 		}
 	}
 }

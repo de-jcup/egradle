@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.launch;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
@@ -49,7 +49,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 /**
  * Short cut launcher for EGradle
  * 
@@ -168,7 +168,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 			config = wc.doSave();
 		} catch (CoreException exception) {
-			MessageDialog.openError(EGradleUtil.getActiveWorkbenchShell(), "EGradle create configuration failed",
+			MessageDialog.openError(EclipseUtil.getActiveWorkbenchShell(), "EGradle create configuration failed",
 					exception.getStatus().getMessage());
 		}
 		return config;
@@ -320,7 +320,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 				}
 			}
 		} catch (CoreException e) {
-			EGradleUtil.log(e);
+			EclipseUtil.log(e);
 		}
 		return candidateConfigs;
 	}
@@ -375,7 +375,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	 * @return active workbench window shell
 	 */
 	protected Shell getShell() {
-		return EGradleUtil.getActiveWorkbenchShell();
+		return EclipseUtil.getActiveWorkbenchShell();
 	}
 
 	/**

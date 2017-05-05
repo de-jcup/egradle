@@ -106,10 +106,6 @@ public abstract class AbstractFilterableTreeQuickDialog<T> extends AbstractQuick
 		}
 	}
 
-	protected Object getInput() {
-		return input;
-	}
-
 	protected abstract ITreeContentProvider createTreeContentProvider(IAdaptable adaptable);
 
 	@Override
@@ -118,12 +114,12 @@ public abstract class AbstractFilterableTreeQuickDialog<T> extends AbstractQuick
 		openSelectionAndCloseDialog(selection);
 	}
 
-	protected final void openSelectionAndCloseDialog(ISelection selection) {
+	private final void openSelectionAndCloseDialog(ISelection selection) {
 		openSelection(selection);
 		close();
 	}
 
-	protected final void openSelection(ISelection selection) {
+	private final void openSelection(ISelection selection) {
 		String filterText = null;
 		if (text != null && !text.isDisposed()) {
 			filterText = text.getText();
@@ -286,7 +282,7 @@ public abstract class AbstractFilterableTreeQuickDialog<T> extends AbstractQuick
 		return super.hasInfoArea();
 	}
 
-	protected void rebuildFilterTextPattern() {
+	private void rebuildFilterTextPattern() {
 		if (text == null) {
 			return;
 		}

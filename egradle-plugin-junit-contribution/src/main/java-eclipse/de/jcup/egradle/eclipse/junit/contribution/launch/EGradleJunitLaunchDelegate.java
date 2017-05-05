@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
 import de.jcup.egradle.eclipse.launch.LaunchParameterValues;
@@ -50,7 +50,7 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 			launchParameterValues.setPostJob(new ImportGradleJunitResultsJob("Import gradle junit results",projectName,true));
 			launchParameterValues.setOverriddenTasks(tasksToExecute);
 		} catch (CoreException e) {
-			EGradleUtil.log(e);
+			EclipseUtil.log(e);
 		}
 	}
 	

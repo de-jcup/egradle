@@ -39,7 +39,8 @@ import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEst
 import de.jcup.egradle.codeassist.hover.HoverData;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.ColorUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
@@ -124,12 +125,12 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 			if (textWidget!=null){
 				
 				/* TODO ATR, 03.02.2017: there should be an easier approach to get editors back and foreground, without syncexec */
-				EGradleUtil.getSafeDisplay().syncExec(new Runnable() {
+				EclipseUtil.getSafeDisplay().syncExec(new Runnable() {
 					
 					@Override
 					public void run() {
-						bgColor = EGradleUtil.convertToHexColor(textWidget.getBackground());
-						fgColor = EGradleUtil.convertToHexColor(textWidget.getForeground());
+						bgColor = ColorUtil.convertToHexColor(textWidget.getBackground());
+						fgColor = ColorUtil.convertToHexColor(textWidget.getForeground());
 					}
 				});
 			}

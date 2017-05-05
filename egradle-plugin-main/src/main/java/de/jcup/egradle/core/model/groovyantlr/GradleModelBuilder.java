@@ -153,7 +153,7 @@ public class GradleModelBuilder implements ModelBuilder {
 	 * @param current
 	 * @throws ModelBuilderException
 	 */
-	protected void walkThroughASTandSiblings(Context context, Item parent, AST current) throws ModelBuilderException {
+	private void walkThroughASTandSiblings(Context context, Item parent, AST current) throws ModelBuilderException {
 		while (current != null) {
 			Item item = buildItem(context, parent, current);
 			if (item != null) {
@@ -175,7 +175,7 @@ public class GradleModelBuilder implements ModelBuilder {
 	 * @return new item or <code>null</code>
 	 * @throws ModelBuilderException
 	 */
-	protected Item buildItem(Context context, Item parent, AST current) throws ModelBuilderException {
+	private Item buildItem(Context context, Item parent, AST current) throws ModelBuilderException {
 		if (getPreCreationFilter().isFiltered(current)) {
 			return null;
 		}
@@ -232,18 +232,18 @@ public class GradleModelBuilder implements ModelBuilder {
 
 	}
 
-	Item buildList(Context context, Item parent, AST list) throws ModelBuilderException {
+	private Item buildList(Context context, Item parent, AST list) throws ModelBuilderException {
 		AST firstListElement = list.getFirstChild();
 		walkThroughASTandSiblings(context, parent, firstListElement);
 		/* the list itself is not added */
 		return null;
 	}
 
-	Item buildMap(Context context, Item parent, AST map) throws ModelBuilderException {
+	private Item buildMap(Context context, Item parent, AST map) throws ModelBuilderException {
 		return buildItem(context, parent, map.getFirstChild());
 	}
 
-	Item buildAssign(Context context, AST assign) throws ModelBuilderException {
+	private Item buildAssign(Context context, AST assign) throws ModelBuilderException {
 		/* library = [...] */
 		/* public library = [...] */
 
@@ -272,7 +272,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildImport(Context context, AST current) {
+	private Item buildImport(Context context, AST current) {
 		Item item = null;
 
 		AST modifiers = current.getFirstChild();
@@ -290,7 +290,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildPackageDef(Context context, AST current) {
+	private Item buildPackageDef(Context context, AST current) {
 		Item item = null;
 
 		AST modifiers = current.getFirstChild();
@@ -308,7 +308,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildVariableDef(Context context, AST current) throws ModelBuilderException {
+	private Item buildVariableDef(Context context, AST current) throws ModelBuilderException {
 		/* def variable = "" */
 		/* variable = "" */
 		/* def String variable = "" */
@@ -357,7 +357,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildEnumConstantDef(Context context, AST current) throws ModelBuilderException {
+	private Item buildEnumConstantDef(Context context, AST current) throws ModelBuilderException {
 		/* def variable = "" */
 		/* variable = "" */
 		/* def String variable = "" */
@@ -388,7 +388,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildMethodDef(Context context, AST current) throws ModelBuilderException {
+	private Item buildMethodDef(Context context, AST current) throws ModelBuilderException {
 		/* def method(params) */
 		Item item = null;
 
@@ -449,7 +449,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildConstructorDef(String parentItemName, Context context, AST current) throws ModelBuilderException {
+	private Item buildConstructorDef(String parentItemName, Context context, AST current) throws ModelBuilderException {
 		/* def method(params) */
 		Item item = null;
 		
@@ -484,7 +484,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildClass(Context context, AST current, ItemType classType) throws ModelBuilderException {
+	private Item buildClass(Context context, AST current, ItemType classType) throws ModelBuilderException {
 		Item item = null;
 		AST classDefModifiers = current.getFirstChild();
 		if (classDefModifiers == null) {
@@ -508,7 +508,7 @@ public class GradleModelBuilder implements ModelBuilder {
 		return item;
 	}
 
-	Item buildExpression(Context context, Item parent, AST expression) throws ModelBuilderException {
+	private Item buildExpression(Context context, Item parent, AST expression) throws ModelBuilderException {
 		AST next = expression.getFirstChild();
 		if (next == null) {
 			return null;
@@ -788,7 +788,7 @@ public class GradleModelBuilder implements ModelBuilder {
 	class Context {
 		ExtendedSourceBuffer buffer;
 
-		protected void init(ExtendedSourceBuffer sourceBuffer) {
+		private void init(ExtendedSourceBuffer sourceBuffer) {
 			this.buffer = sourceBuffer;
 			this.buffer.appendLineEndToLastLineIfMissing();
 		}

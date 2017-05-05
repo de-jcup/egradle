@@ -37,7 +37,7 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelFilters;
 import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
 
@@ -115,7 +115,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				try {
 					charset = file.getCharset();
 				} catch (CoreException e) {
-					EGradleUtil.log(e);
+					EclipseUtil.log(e);
 				}
 			}
 		}else if (inputElement instanceof String){
@@ -156,7 +156,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			}
 			return elements;
 		} catch (Exception e) {
-			EGradleUtil.log("Problems on outline building", e);
+			EclipseUtil.log("Problems on outline building", e);
 			return null;
 		}
 	}
@@ -256,7 +256,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 						error.getCharStart(), error.getCharEnd());
 			}
 		} catch (CoreException e) {
-			EGradleUtil.log(e);
+			EclipseUtil.log(e);
 		}
 	}
 

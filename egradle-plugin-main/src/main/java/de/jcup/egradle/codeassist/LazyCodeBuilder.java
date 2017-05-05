@@ -23,7 +23,7 @@ public interface LazyCodeBuilder {
 	
 	/**
 	 * 
-	 * @return tempalte, never <code>null</code>
+	 * @return template, never <code>null</code>
 	 */
 	String getTemplate();
 

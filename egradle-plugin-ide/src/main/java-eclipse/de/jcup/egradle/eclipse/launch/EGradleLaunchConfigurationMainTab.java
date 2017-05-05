@@ -46,7 +46,7 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
@@ -164,7 +164,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 					// Open default external browser
 					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
 				} catch (Exception ex) {
-					EGradleUtil.log(ex);
+					EclipseUtil.log(ex);
 				}
 			}
 		});

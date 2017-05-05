@@ -19,14 +19,14 @@ import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 /**
  * Abstract implementation for quick dialogs. Clicking out of quick dialog will close the dialog
  * @author Albert Tregnaghi
  *
  */
-public abstract class AbstractQuickDialog extends PopupDialog {
+abstract class AbstractQuickDialog extends PopupDialog {
 
 	protected static final boolean GRAB_FOCUS = true;
 	protected static final boolean PERSIST_NO_SIZE = false;
@@ -41,7 +41,7 @@ public abstract class AbstractQuickDialog extends PopupDialog {
 	protected static final boolean SHOW_NO_PERSIST_ACTIONS = false;
 	protected static final boolean SHOW_PERSIST_ACTIONS = true;
 
-	public AbstractQuickDialog(Shell parent, int shellStyle, boolean takeFocusOnOpen, boolean persistSize,
+	AbstractQuickDialog(Shell parent, int shellStyle, boolean takeFocusOnOpen, boolean persistSize,
 			boolean persistLocation, boolean showDialogMenu, boolean showPersistActions, String titleText,
 			String infoText) {
 		super(parent, shellStyle, takeFocusOnOpen, persistSize, persistLocation, showDialogMenu, showPersistActions,
@@ -74,7 +74,7 @@ public abstract class AbstractQuickDialog extends PopupDialog {
 					display.sleep();
 				}
 			} catch (Throwable e) {
-				EGradleUtil.log(e);
+				EclipseUtil.log(e);
 			}
 		}
 		if (!display.isDisposed()) {

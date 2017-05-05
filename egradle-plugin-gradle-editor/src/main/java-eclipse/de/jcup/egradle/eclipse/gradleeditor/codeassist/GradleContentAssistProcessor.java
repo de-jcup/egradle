@@ -60,7 +60,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.eclipse.api.DocumentTextProvider;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
@@ -213,15 +213,15 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			} else if (p instanceof ModelProposal) {
 				ModelProposal mp = (ModelProposal) p;
 				if (mp.isMethod()) {
-					image = EGradleUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
+					image = EclipseUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
 				} else if (mp.isProperty()) {
-					image = EGradleUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", EditorActivator.PLUGIN_ID);
+					image = EclipseUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", EditorActivator.PLUGIN_ID);
 				}
 			} else if (p instanceof TemplateProposal) {
-				image = EGradleUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
+				image = EclipseUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
 			}
 			if (image == null) {
-				image = EGradleUtil.getImage("/icons/gradle-og.png", EditorActivator.PLUGIN_ID);
+				image = EclipseUtil.getImage("/icons/gradle-og.png", EditorActivator.PLUGIN_ID);
 			}
 			IContextInformation contextInformation = null;
 			String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();
@@ -323,7 +323,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			 * after apply the model must be changed and cursor position
 			 * normally changes as well! This often made problems
 			 */
-			IEditorPart activeEditor = EGradleUtil.getActiveEditor();
+			IEditorPart activeEditor = EclipseUtil.getActiveEditor();
 			if (activeEditor instanceof GradleEditor) {
 				GradleEditor ge = (GradleEditor) activeEditor;
 				if (DEBUG) {
@@ -340,7 +340,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private void debugCacheState(String message) {
-		EGradleUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
+		EclipseUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
 				+ useCacheBecauseCodeAssistSessionOngoing);
 	}
 }

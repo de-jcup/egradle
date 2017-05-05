@@ -21,7 +21,7 @@ public interface Filter {
 	
 	public static final NothingFiltered NOTHING_FILTERED = new NothingFiltered();
 	
-	public static class NothingFiltered implements Filter{
+	static class NothingFiltered implements Filter{
 
 		private NothingFiltered(){
 		}

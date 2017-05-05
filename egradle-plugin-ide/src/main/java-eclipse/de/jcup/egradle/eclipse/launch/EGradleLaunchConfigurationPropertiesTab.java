@@ -59,7 +59,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ui.MultipleInputDialog;
@@ -99,7 +99,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 			try {
 				m = config.getAttribute(launchConfigurationPropertyMapAttributeName, (Map<String, String>) null);
 			} catch (CoreException e) {
-				EGradleUtil.log(new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, IStatus.ERROR,
+				EclipseUtil.log(new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, IStatus.ERROR,
 						"Error reading configuration", e)); 
 				return elements;
 			}

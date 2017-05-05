@@ -25,7 +25,7 @@ import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class RootProjectValidationProgressRunnable implements IRunnableWithProgress {
 	private GradleConfigurationValidator validator;
@@ -51,7 +51,7 @@ public class RootProjectValidationProgressRunnable implements IRunnableWithProgr
 		/* check more... */
 		try {
 			validator.validate(configuration);
-			EGradleUtil.safeAsyncExec(new Runnable() {
+			EclipseUtil.safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {
@@ -61,7 +61,7 @@ public class RootProjectValidationProgressRunnable implements IRunnableWithProgr
 				}
 			});
 		} catch (ValidationException e) {
-			EGradleUtil.safeAsyncExec(new Runnable() {
+			EclipseUtil.safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {
@@ -79,7 +79,7 @@ public class RootProjectValidationProgressRunnable implements IRunnableWithProgr
 			});
 
 		} finally {
-			EGradleUtil.safeAsyncExec(new Runnable() {
+			EclipseUtil.safeAsyncExec(new Runnable() {
 
 				@Override
 				public void run() {

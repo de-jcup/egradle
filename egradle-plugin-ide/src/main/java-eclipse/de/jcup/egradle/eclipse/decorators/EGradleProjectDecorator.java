@@ -29,7 +29,7 @@ import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 /**
@@ -42,9 +42,9 @@ import de.jcup.egradle.eclipse.ide.IDEActivator;
 public class EGradleProjectDecorator extends LabelProvider implements ILightweightLabelDecorator {
 
 	private static ImageDescriptor egradleProjectDescriptor = new LazyImageDescriptor(
-			EGradleUtil.createImageDescriptor("icons/gradle-project-decorator.gif",IDEActivator.PLUGIN_ID));
+			EclipseUtil.createImageDescriptor("icons/gradle-project-decorator.gif",IDEActivator.PLUGIN_ID));
 
-	private static ImageDescriptor emptyDecoratorDescriptor = new LazyImageDescriptor(EGradleUtil.createImageDescriptor("icons/empty-4x4-decorator.gif",IDEActivator.PLUGIN_ID));
+	private static ImageDescriptor emptyDecoratorDescriptor = new LazyImageDescriptor(EclipseUtil.createImageDescriptor("icons/empty-4x4-decorator.gif",IDEActivator.PLUGIN_ID));
 	
 	@Override
 	public void decorate(Object element, IDecoration decoration) {
@@ -86,11 +86,11 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			if (!isSubprojectOfCurrentRootProject(p)){
 				return;
 			}
-			if (EGradleUtil.getPreferences().isSubProjectIconDecorationEnabled()){
+			if (EclipseUtil.getPreferences().isSubProjectIconDecorationEnabled()){
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {
-			EGradleUtil.log(e);
+			EclipseUtil.log(e);
 		}
 
 	}

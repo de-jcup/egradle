@@ -43,18 +43,18 @@ import org.eclipse.swt.widgets.Text;
 
 public class MultipleInputDialog extends Dialog {
 	private static final String EMPTY_STRING = "";
-	protected static final String FIELD_NAME = "FIELD_NAME"; //$NON-NLS-1$
-	protected static final int TEXT = 100;
-	protected static final int BROWSE = 101;
-	protected static final int VARIABLE = 102;
-	protected static final int MULTILINE_VARIABLE = 103;
+	private static final String FIELD_NAME = "FIELD_NAME"; //$NON-NLS-1$
+	private static final int TEXT = 100;
+	private static final int BROWSE = 101;
+	private static final int VARIABLE = 102;
+	private static final int MULTILINE_VARIABLE = 103;
 
-	protected Composite panel;
+	private Composite panel;
 
-	protected List<FieldSummary> fieldList = new ArrayList<FieldSummary>();
-	protected List<Text> controlList = new ArrayList<Text>();
-	protected List<Validator> validators = new ArrayList<Validator>();
-	protected Map<Object, String> valueMap = new HashMap<Object, String>();
+	private List<FieldSummary> fieldList = new ArrayList<FieldSummary>();
+	private List<Text> controlList = new ArrayList<Text>();
+	private List<Validator> validators = new ArrayList<Validator>();
+	private Map<Object, String> valueMap = new HashMap<Object, String>();
 
 	private String title;
 
@@ -230,7 +230,7 @@ public class MultipleInputDialog extends Dialog {
 
 	}
 
-	public void createVariablesField(String labelText, String initialValue, boolean allowEmpty) {
+	protected void createVariablesField(String labelText, String initialValue, boolean allowEmpty) {
 		Label label = new Label(panel, SWT.NONE);
 		label.setText(labelText);
 		label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING));
@@ -290,7 +290,7 @@ public class MultipleInputDialog extends Dialog {
 
 	}
 
-	public void createMultilineVariablesField(String labelText, String initialValue, boolean allowEmpty) {
+	protected void createMultilineVariablesField(String labelText, String initialValue, boolean allowEmpty) {
 		Label label = new Label(panel, SWT.NONE);
 		label.setText(labelText);
 		GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
@@ -403,13 +403,13 @@ public class MultipleInputDialog extends Dialog {
 		getButton(IDialogConstants.OK_ID).setEnabled(true);
 	}
 
-	protected class FieldSummary {
-		int type;
-		String name;
-		String initialValue;
-		boolean allowsEmpty;
+	private class FieldSummary {
+		private int type;
+		private String name;
+		private String initialValue;
+		private boolean allowsEmpty;
 
-		public FieldSummary(int type, String name, String initialValue, boolean allowsEmpty) {
+		private FieldSummary(int type, String name, String initialValue, boolean allowsEmpty) {
 			this.type = type;
 			this.name = name;
 			this.initialValue = initialValue;
@@ -417,7 +417,7 @@ public class MultipleInputDialog extends Dialog {
 		}
 	}
 
-	protected class Validator {
+	private class Validator {
 		boolean validate() {
 			return true;
 		}

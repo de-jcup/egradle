@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 /**
  * Factory class to create some SWT resources.
@@ -801,7 +801,7 @@ public class SWTFactory {
 	 *            the id of preference page to show
 	 */
 	public static void showPreferencePage(String id) {
-		PreferencesUtil.createPreferenceDialogOn(EGradleUtil.getActiveWorkbenchShell(), id, new String[] { id }, null).open();
+		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), id, new String[] { id }, null).open();
 	}
 
 	/**
@@ -818,6 +818,6 @@ public class SWTFactory {
 	 *            the listing of pages to be shown in the dialog
 	 */
 	public static void showPreferencePage(String page_id, String[] page_filters) {
-		PreferencesUtil.createPreferenceDialogOn(EGradleUtil.getActiveWorkbenchShell(), page_id, page_filters, null).open();
+		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), page_id, page_filters, null).open();
 	}
 }

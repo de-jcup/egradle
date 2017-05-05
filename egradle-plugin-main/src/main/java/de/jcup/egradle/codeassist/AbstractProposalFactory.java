@@ -25,7 +25,7 @@ import java.util.Set;
  * @author albert
  *
  */
-public abstract class AbstractProposalFactory implements FilterableProposalFactory{
+abstract class AbstractProposalFactory implements FilterableProposalFactory{
 	
 	private boolean ignoreGetterOrSetter;
 

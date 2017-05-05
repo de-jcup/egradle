@@ -26,7 +26,7 @@ import org.eclipse.ui.progress.IProgressService;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.GradleJob;
@@ -63,7 +63,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = null;
 		try{
-			RememberLastLinesOutputHandler validationOutputHandler = EGradleUtil.createOutputHandlerForValidationErrorsOnConsole();
+			RememberLastLinesOutputHandler validationOutputHandler = EclipseUtil.createOutputHandlerForValidationErrorsOnConsole();
 			validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
 			execution = createGradleExecution(validationOutputHandler);
 		}catch(GradleExecutionException e){

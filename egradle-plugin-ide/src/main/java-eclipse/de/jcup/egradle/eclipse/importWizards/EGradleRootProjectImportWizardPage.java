@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.importWizards;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IPath;

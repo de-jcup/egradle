@@ -43,7 +43,7 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
 	}
 
-	String inputText;
+	private String inputText;
 
 	@Override
 	protected Control createDialogArea(Composite parent) {

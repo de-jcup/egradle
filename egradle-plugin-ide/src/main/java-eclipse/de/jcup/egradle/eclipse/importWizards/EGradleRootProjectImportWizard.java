@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.importWizards;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
 import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 
@@ -51,7 +51,7 @@ import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
@@ -60,7 +60,7 @@ import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 
-	private static ImageDescriptor desc = EGradleUtil
+	private static ImageDescriptor desc = EclipseUtil
 			.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png",IDEActivator.PLUGIN_ID);//$NON-NLS-1$
 	EGradleRootProjectImportWizardPage mainPage;
 	private String globalJavaHome;

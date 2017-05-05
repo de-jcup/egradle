@@ -25,15 +25,11 @@ public class SourceCodeInsertionSupport {
 	
 	private static Pattern REPLACE_CURSOR_POS= Pattern.compile("\\"+CURSOR_VARIABLE);
 	
-	public InsertionData prepareInsertionString(String oiriginInsertion) {
-		return prepareInsertionString(oiriginInsertion,null);
-	}
-	
-	public InsertionData prepareInsertionString(String oiriginInsertion, String textBeforeColumn) {
+	InsertionData prepareInsertionString(String oiriginInsertion, String textBeforeColumn) {
 		return prepareInsertionString(oiriginInsertion,textBeforeColumn,true);
 	}
 	
-	public InsertionData prepareInsertionString(String originInsertion, String textBeforeColumn, boolean ignoreIndentOnFirstLine) {
+	private InsertionData prepareInsertionString(String originInsertion, String textBeforeColumn, boolean ignoreIndentOnFirstLine) {
 		InsertionData result = new InsertionData();
 		if (StringUtils.isEmpty(originInsertion)){
 			return result;
@@ -115,9 +111,9 @@ public class SourceCodeInsertionSupport {
 	}
 	
 	
-	public class InsertionData{
-		public String sourceCode="";
-		public int cursorOffset=-1;
+	class InsertionData{
+		String sourceCode="";
+		int cursorOffset=-1;
 	}
 
 }

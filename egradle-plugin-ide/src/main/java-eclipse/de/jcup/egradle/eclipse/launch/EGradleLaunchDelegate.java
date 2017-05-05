@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.launch;
 
 import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
@@ -36,10 +35,9 @@ import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.services.IServiceLocator;
 
-import de.jcup.egradle.core.api.ForgetMe;
-import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler;
+import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
@@ -53,8 +51,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
 	}
 
-	private void executeByHandler(ILaunch launch, String projectName, String options)
-			throws CoreException {
+	private void executeByHandler(ILaunch launch, String projectName, String options) throws CoreException {
 
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
 		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
@@ -70,35 +67,32 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 					try {
 						IParameter parameter = command.getParameter(LaunchGradleCommandHandler.PARAMETER_LAUNCHCONFIG);
 						IParameterValues values = parameter.getValues();
-						
-						if (values instanceof LaunchParameterValues){
+
+						if (values instanceof LaunchParameterValues) {
 							LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
 							/* Bugfix #79 - reset always launch data */
 							launchParameterValues.resetLaunchData();
 							launchParameterValues.setLaunch(launch);
-							
+
 							appendAdditionalLaunchParameters(launchParameterValues);
-							Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
+							Parameterization[] params = new Parameterization[] {
+									new Parameterization(parameter, "true") };
 							ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
 							/*
-							 * execute launch command with parameters - will show
-							 * progress etc. as well
+							 * execute launch command with parameters - will
+							 * show progress etc. as well
 							 */
 							handlerService.executeCommand(parametrizedCommand, null);
-							
-						}else{
-							EGradleUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
+
+						} else {
+							EclipseUtil.logWarning(getClass().getSimpleName()
+									+ ":parameter values without being a launch parameter value was used !??! :"
+									+ values);
 						}
-						
-						
 
 					} catch (Exception e) {
-						if (ExceptionUtils.getRootCause(e) instanceof ForgetMe) {
-							/* do nothing, already handled */
-						} else {
-							throw new IllegalStateException("EGradle launch command execution failed", e);
-						}
+						throw new IllegalStateException("EGradle launch command execution failed", e);
 					} finally {
 						/*
 						 * TODO ATR, 23.09.2016: when exceptions are occurring
@@ -113,7 +107,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 							try {
 								launch.terminate();
 							} catch (DebugException e) {
-								EGradleUtil.log(e);
+								EclipseUtil.log(e);
 							}
 						}
 					}

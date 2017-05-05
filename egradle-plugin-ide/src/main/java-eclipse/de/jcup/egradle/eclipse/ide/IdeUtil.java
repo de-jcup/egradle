@@ -1,6 +1,6 @@
 package de.jcup.egradle.eclipse.ide;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +44,7 @@ import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
@@ -85,7 +85,7 @@ public class IdeUtil {
 	 * @return image
 	 */
 	public static Image getImage(String path) {
-		return EGradleUtil.getImage(path, IDEActivator.PLUGIN_ID);
+		return EclipseUtil.getImage(path, IDEActivator.PLUGIN_ID);
 	}
 	
 	/**
@@ -95,12 +95,12 @@ public class IdeUtil {
 	 *            - if <code>true</code> scroll lock will be disabled
 	 */
 	public static void openSystemConsole(boolean ensureNoScrollLock) {
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
 				IConsole eGradleSystemConsole = EGradleSystemConsoleFactory.INSTANCE.getConsole();
-				IWorkbenchPage page = EGradleUtil.getActivePage();
+				IWorkbenchPage page = EclipseUtil.getActivePage();
 				String id = IConsoleConstants.ID_CONSOLE_VIEW;
 				IConsoleView view;
 				try {
@@ -112,7 +112,7 @@ public class IdeUtil {
 					}
 
 				} catch (PartInitException e) {
-					EGradleUtil.log(e);
+					EclipseUtil.log(e);
 				}
 			}
 
@@ -127,7 +127,7 @@ public class IdeUtil {
 	 * @param message
 	 */
 	public static void outputToSystemConsole(String message) {
-		EGradleUtil.getSafeDisplay().asyncExec(new Runnable() {
+		EclipseUtil.getSafeDisplay().asyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -334,7 +334,7 @@ public class IdeUtil {
 					 * actions does check this normally before. as a fallback
 					 * simply do nothing
 					 */
-					EGradleUtil.logInfo("Was not able to validate, because no root folder set!");
+					EclipseUtil.logInfo("Was not able to validate, because no root folder set!");
 					return;
 				}
 				String rootFolderPath = rootFolder.getAbsolutePath();
@@ -573,7 +573,7 @@ public class IdeUtil {
 					return Status.OK_STATUS;
 				} catch (VirtualRootProjectException e) {
 					getDialogSupport().showError(e.getMessage());
-					EGradleUtil.log(e);
+					EclipseUtil.log(e);
 					return Status.CANCEL_STATUS;
 				}
 			}

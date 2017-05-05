@@ -19,7 +19,7 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 
 public class JunitContributionUtil {
@@ -28,7 +28,7 @@ public class JunitContributionUtil {
 
 	public static void showTestRunnerViewPartInActivePage() {
 		try {
-			IWorkbenchPage page= EGradleUtil.getActivePage();
+			IWorkbenchPage page= EclipseUtil.getActivePage();
 			if (page == null){
 				return;
 			}
@@ -38,7 +38,7 @@ public class JunitContributionUtil {
 				page.showView(ECLIPSE_JDT_JUNIT_RESULT_VIEW, null, IWorkbenchPage.VIEW_VISIBLE);
 			} 
 		} catch (PartInitException pie) {
-			EGradleUtil.log(pie);
+			EclipseUtil.log(pie);
 		}
 	}
 }

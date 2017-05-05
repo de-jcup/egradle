@@ -37,7 +37,7 @@ import de.jcup.egradle.core.process.ProcessConfiguration;
 import de.jcup.egradle.core.process.ProcessContext;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.launch.EGradleRuntimeProcess;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
@@ -56,7 +56,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		try{
 			return super.execute(wdProvider, envprovider, processContext, commands);
 		}catch(IOException | RuntimeException e){
-				EGradleUtil.log(e);
+				EclipseUtil.log(e);
 				/* problem occured - we have to cleanup launch otherwise launches will be kept in UI and not removeable!*/
 				if (!launch.isTerminated()){
 					try {
@@ -64,7 +64,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 							launch.terminate();
 						}
 					} catch (DebugException de) {
-						EGradleUtil.log(de);
+						EclipseUtil.log(de);
 					}
 				}
 				throw e;

@@ -26,18 +26,13 @@ public class EGradleErrorHandler implements ErrorHandler{
 	}
 	
 	@Override
-	public void handleError(Throwable t) {
-		EGradleUtil.log(t);
-	}
-
-	@Override
 	public void handleError(String message, Throwable t) {
-		EGradleUtil.log(message, t);
+		EclipseUtil.log(message, t);
 	}
 
 	@Override
 	public void handleError(String message) {
-		EGradleUtil.log(message, null);		
+		EclipseUtil.log(message, null);		
 	}
 
 }

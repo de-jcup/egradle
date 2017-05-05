@@ -22,7 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class OpenInExternalBrowserAction extends Action {
 	
@@ -45,7 +45,7 @@ public class OpenInExternalBrowserAction extends Action {
 			externalBrowser.openURL(url);
 			
 		} catch (Exception ex) {
-			EGradleUtil.log(ex);
+			EclipseUtil.log(ex);
 		}
 	}
 }

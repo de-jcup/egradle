@@ -15,6 +15,6 @@
  */
 package de.jcup.egradle.core.domain;
 
-public abstract class AbstractGradleProject implements GradleProject {
+abstract class AbstractGradleProject implements GradleProject {
 
 }

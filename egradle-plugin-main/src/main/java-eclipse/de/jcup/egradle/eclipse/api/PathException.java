@@ -23,10 +23,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 
-public class PathException extends CoreException {
+class PathException extends CoreException {
 	private static final long serialVersionUID = 1L;
 
-	public PathException(int statusCode, IPath path, String message, Throwable exception) {
+	PathException(int statusCode, IPath path, String message, Throwable exception) {
 		super(new PathStatus(statusCode, path, message, exception));
 	}
 

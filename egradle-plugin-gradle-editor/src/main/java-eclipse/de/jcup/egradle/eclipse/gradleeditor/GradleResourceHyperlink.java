@@ -44,7 +44,7 @@ import org.eclipse.ui.dialogs.SelectionDialog;
 import org.eclipse.ui.ide.IDE;
 
 import de.jcup.egradle.core.text.JavaImportFinder;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;
 
 public class GradleResourceHyperlink implements IHyperlink {
@@ -83,7 +83,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 	public void open() {
 		String[] packageNames= fetchImportedPackages(fullText);
 		
-		Shell shell = EGradleUtil.getActiveWorkbenchShell();
+		Shell shell = EclipseUtil.getActiveWorkbenchShell();
 		if (shell==null){
 			return;
 		}
@@ -113,12 +113,12 @@ public class GradleResourceHyperlink implements IHyperlink {
 			try {
 				String found = typesFound.get(0);
 				
-				IRunnableContext runnableContext = EGradleUtil.getActiveWorkbenchWindow();
+				IRunnableContext runnableContext = EclipseUtil.getActiveWorkbenchWindow();
 				
 				dialog = JavaUI.createTypeDialog(shell, runnableContext, scope, style, false,found);
 				dialog.setTitle("Potential Java types found:");
 			} catch (JavaModelException e) {
-				EGradleUtil.log("Cannot create java type dialog", e);
+				EclipseUtil.log("Cannot create java type dialog", e);
 			}
 		}else{
 			dialog = createResourceDialog(shell);
@@ -146,7 +146,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 		
 		if (files.size() > 0) {
 
-			final IWorkbenchPage page = EGradleUtil.getActivePage();
+			final IWorkbenchPage page = EclipseUtil.getActivePage();
 			if (page==null){
 				return;
 			}
@@ -157,7 +157,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 					IDE.openEditor(page, currentFile, true);
 				}
 			} catch (final PartInitException e) {
-				EGradleUtil.log("Cannot open file:"+currentFile,e);
+				EclipseUtil.log("Cannot open file:"+currentFile,e);
 			}
 		}else if (javaElements.size()>0){
 			IJavaElement javaElement = javaElements.get(0);
@@ -171,7 +171,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 		try {
 			JavaUI.openInEditor(javaElement);
 		} catch (PartInitException | JavaModelException e) {
-			EGradleUtil.log("Cannot open java editor with:"+javaElement,e);
+			EclipseUtil.log("Cannot open java editor with:"+javaElement,e);
 		}
 	}
 

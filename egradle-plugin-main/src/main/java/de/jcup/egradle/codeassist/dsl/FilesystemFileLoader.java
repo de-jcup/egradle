@@ -131,9 +131,9 @@ public class FilesystemFileLoader implements DSLFileLoader {
 
 	}
 
-	public class DSLFolderNotValidException extends IOException {
+	private class DSLFolderNotValidException extends IOException {
 
-		public DSLFolderNotValidException(String message) {
+		private DSLFolderNotValidException(String message) {
 			super(message);
 		}
 

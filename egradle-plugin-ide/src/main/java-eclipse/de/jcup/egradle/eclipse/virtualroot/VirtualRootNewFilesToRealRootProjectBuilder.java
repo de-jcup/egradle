@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.virtualroot;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 /**
  * Special project builder to support new files added on virtual root inside
@@ -72,7 +72,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 		try {
 			getFileHelper().copy(sourceFile, targetFile);
 		} catch (IOException e) {
-			EGradleUtil.throwCoreException("Cannot handle root folder add action, copy of source file failed", e);
+			EclipseUtil.throwCoreException("Cannot handle root folder add action, copy of source file failed", e);
 		}
 		/*
 		 * after copy we delete the entry - be aware about infinite loops when

@@ -43,7 +43,7 @@ class GradleModelBuilderSupport {
 		item.setParameters(paramArray);
 	}
 
-	void appendParameterDef(AST paramDef, List<String> paramDefList) {
+	private void appendParameterDef(AST paramDef, List<String> paramDefList) {
 		if (paramDef == null) {
 			return;
 		}
@@ -60,7 +60,7 @@ class GradleModelBuilderSupport {
 
 	}
 
-	void appendParameterDefChilren(AST paramDef, List<String> paramDefList) {
+	private void appendParameterDefChilren(AST paramDef, List<String> paramDefList) {
 		AST modifiers = paramDef.getFirstChild();
 		if (modifiers == null) {
 			return;
@@ -227,7 +227,7 @@ class GradleModelBuilderSupport {
 	 * @param nextAST
 	 * @return next AST to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
 	 */
-	AST handleTaskTypeResolving(Item item, AST nextAST) {
+	private AST handleTaskTypeResolving(Item item, AST nextAST) {
 		if (nextAST == null) {
 			return null;
 		}
@@ -275,7 +275,7 @@ class GradleModelBuilderSupport {
 	 * @param nextAST
 	 * @return
 	 */
-	ASTResultInfo handleTaskNameResolving(String enameString, Item item, AST nextAST) {
+	private ASTResultInfo handleTaskNameResolving(String enameString, Item item, AST nextAST) {
 		if (nextAST == null) {
 			return null;
 		}
@@ -312,9 +312,9 @@ class GradleModelBuilderSupport {
 		return result;
 	}
 	
-	class ASTResultInfo{
-		AST nextAST;
-		boolean terminated;
+	private class ASTResultInfo{
+		private AST nextAST;
+		private boolean terminated;
 	}
 
 	/**
@@ -322,7 +322,7 @@ class GradleModelBuilderSupport {
 	 * 
 	 * . ->. ->. ->xyz abc bla tests
 	 */
-	String resolveName(AST ast) {
+	private String resolveName(AST ast) {
 		StringBuilder sb = new StringBuilder();
 		resolveName(sb, ast);
 		return sb.toString();
@@ -341,7 +341,7 @@ class GradleModelBuilderSupport {
 	 * @param greedy - if true, even method call's etc. are resolved!
 	 * @return string
 	 */
-	String resolveAsSimpleString(AST ast, boolean greedy) {
+	private String resolveAsSimpleString(AST ast, boolean greedy) {
 		if (ast == null) {
 			return "";
 		}
@@ -628,7 +628,7 @@ class GradleModelBuilderSupport {
 		return "Object:" + resolveAsSimpleString(ast);
 	}
 
-	void resolveParameterList(List<String> list, AST ast) {
+	private void resolveParameterList(List<String> list, AST ast) {
 		if (ast == null) {
 			return;
 		}

@@ -33,7 +33,7 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.api.EGradleErrorHandler;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKManager;
@@ -77,7 +77,7 @@ public class EditorActivator extends AbstractUIPlugin {
 				sdk.install();
 				sdkInstalled=true;
 			}catch(IOException e){
-				EGradleUtil.log("Was not able install SDK:"+sdk.getVersion(),e);
+				EclipseUtil.log("Was not able install SDK:"+sdk.getVersion(),e);
 			}
 		}
 		

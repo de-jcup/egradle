@@ -24,7 +24,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class JavaHelper {
 	
@@ -52,7 +52,7 @@ public class JavaHelper {
 			try {
 				selected = ((ICompilationUnit) elem).getElementAt(sel.getOffset());
 			} catch (JavaModelException e) {
-				EGradleUtil.log(e);
+				EclipseUtil.log(e);
 				return null;
 			}
 			if (selected==null){

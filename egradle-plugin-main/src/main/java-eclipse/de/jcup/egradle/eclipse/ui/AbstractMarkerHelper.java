@@ -28,12 +28,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 
-public abstract class AbstractMarkerHelper {
+abstract class AbstractMarkerHelper {
 	protected String markerType;
 
-	IMarker findMarker(IResource resource, String message, int lineNumber, String type) throws CoreException {
+	private IMarker findMarker(IResource resource, String message, int lineNumber, String type) throws CoreException {
 		IMarker[] marker = resource.findMarkers(type, true, IResource.DEPTH_ZERO);
 		for (int i = 0; i < marker.length; i++) {
 			IMarker currentMarker = marker[i];
@@ -68,7 +68,7 @@ public abstract class AbstractMarkerHelper {
 		createMarker(resource, message, lineNumber, markerType, IMarker.SEVERITY_ERROR, charStart, charEnd);
 	}
 
-	protected void createMarker(IResource resource, String message, int lineNumber, String markerType, int severity,
+	private void createMarker(IResource resource, String message, int lineNumber, String markerType, int severity,
 			int charStart, int charEnd) throws CoreException {
 		if (lineNumber <= 0)
 			lineNumber = 1;
@@ -106,7 +106,7 @@ public abstract class AbstractMarkerHelper {
 	 *             if this method fails
 	 * @see IResource#createMarker(java.lang.String)
 	 */
-	protected void internalCreateMarker(final IResource resource, final Map<String, Object> attributes,
+	private void internalCreateMarker(final IResource resource, final Map<String, Object> attributes,
 			final String markerType) throws CoreException {
 
 		IWorkspaceRunnable r = new IWorkspaceRunnable() {
@@ -153,7 +153,7 @@ public abstract class AbstractMarkerHelper {
 				}
 
 			} catch (CoreException e) {
-				EGradleUtil.log(e);
+				EclipseUtil.log(e);
 			}
 		}
 		if (tasks == null) {
@@ -161,11 +161,5 @@ public abstract class AbstractMarkerHelper {
 		}
 		return tasks;
 	}
-	
-	public void createTodoMarker(IFile resource, String message, int lineNumber) throws CoreException {
-		createMarker(resource, message, lineNumber, IMarker.TASK, IMarker.SEVERITY_INFO, -1, -1);
-	}
-
-	
 
 }

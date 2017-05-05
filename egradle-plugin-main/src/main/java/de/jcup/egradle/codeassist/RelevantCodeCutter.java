@@ -48,7 +48,7 @@ public class RelevantCodeCutter {
 	 * @param offset when negative always an empty string will be returned
 	 * @return relevant code or empty
 	 */
-	public String getRelevantCode(String code, int offset) {
+	String getRelevantCode(String code, int offset) {
 		if (code==null){
 			return StringUtils.EMPTY;
 		}

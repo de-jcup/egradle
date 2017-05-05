@@ -15,13 +15,13 @@
  */
 package de.jcup.egradle.eclipse;
 
-import static de.jcup.egradle.eclipse.api.EGradleUtil.*;
+import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.BuildFailedDialog;
@@ -31,7 +31,7 @@ public class EGradleMessageDialogSupport {
 	public static final EGradleMessageDialogSupport INSTANCE = new EGradleMessageDialogSupport();
 
 	public void showWarning(String message) {
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -44,7 +44,7 @@ public class EGradleMessageDialogSupport {
 	}
 
 	public void showError(String message) {
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -57,13 +57,13 @@ public class EGradleMessageDialogSupport {
 	}
 
 	public void showBuildFailed(String detail) {
-		EGradleUtil.safeAsyncExec(new Runnable() {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
 				
 				if (EGradlePreferences.EGRADLE_IDE_PREFERENCES.isShowingConsoleOnBuildFailed()){
-					EGradleUtil.showConsoleView();
+					EclipseUtil.showConsoleView();
 				}
 			
 				String text = detail;

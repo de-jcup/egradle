@@ -15,11 +15,11 @@
  */
  package de.jcup.egradle.codeassist;
 
-public class SimpleStringCodeBuilder implements LazyCodeBuilder{
+class SimpleStringCodeBuilder implements LazyCodeBuilder{
 
 	private String code;
 	
-	public SimpleStringCodeBuilder(String code){
+	SimpleStringCodeBuilder(String code){
 		this.code=code;
 	}
 

@@ -29,7 +29,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Modifier;
 import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EGradleUtil;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
@@ -375,7 +375,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	
 	
 	private Image getOutlineImage(String name) {
-		return EGradleUtil.getImage("/icons/outline/" + name, EditorActivator.PLUGIN_ID);
+		return EclipseUtil.getImage("/icons/outline/" + name, EditorActivator.PLUGIN_ID);
 	}
 
 }

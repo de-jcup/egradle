@@ -17,7 +17,7 @@
 
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 
-public abstract class AbstractLazyCodeBuilder implements LazyCodeBuilder {
+abstract class AbstractLazyCodeBuilder implements LazyCodeBuilder {
 
 	private static SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
 	private String code;
