@@ -39,9 +39,9 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 	public EGradleSetupGradlePreferencePage() {
 		super(GRID);
 		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
-		setDescription("Preferences for EGradle");
+		setDescription("Define how EGradle calls gradle.");
 		uiDelegate = new RootProjectConfigUIDelegate(this);
-		originRootProject=getPreferenceStore().getString(EGradlePreferenceConstants.P_ROOTPROJECT_PATH.getId());
+		originRootProject=getPreferenceStore().getString(P_ROOTPROJECT_PATH.getId());
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 	protected void performDefaults() {
 		super.performDefaults(); // set defaults and store them, so can now be
 									// loaded:
-		String storedCallTypeId = getPreferenceStore().getDefaultString(EGradlePreferenceConstants.P_GRADLE_CALL_TYPE.getId());
+		String storedCallTypeId = getPreferenceStore().getDefaultString(P_GRADLE_CALL_TYPE.getId());
 		uiDelegate.updateCallTypeFields(storedCallTypeId);
 	}
 

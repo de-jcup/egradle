@@ -19,6 +19,7 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import de.jcup.egradle.eclipse.MainActivator;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -26,7 +27,18 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	public EGradlePreferencePage() {
 		super(GRID);
 		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
-		setDescription("Preferences for EGradle");
+		setDescription(createDescription());
+		setImageDescriptor(EclipseUtil.createImageDescriptor("icons/gradle-og.png", MainActivator.PLUGIN_ID));
+	}
+	
+	private String createDescription(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Main page of EGradle preferences.\n");
+		sb.append("\n");
+		sb.append("Setup is done in sub pages. If you have only installed\n");
+		sb.append("EGradle Editor but not IDE parts you will have only editor\n");
+		sb.append("preference pages.");
+		return sb.toString();
 	}
 
 	/**
