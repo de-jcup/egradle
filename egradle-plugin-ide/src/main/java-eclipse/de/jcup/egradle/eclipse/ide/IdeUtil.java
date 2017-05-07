@@ -39,6 +39,7 @@ import org.eclipse.ui.progress.IProgressConstants2;
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.core.validation.GradleOutputValidator;
 import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
@@ -74,6 +75,16 @@ public class IdeUtil {
 			systemConsoleOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
 		}
 		return systemConsoleOutputHandler;
+	}
+	
+	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
+		int max;
+		if (getPreferences().isOutputValidationEnabled()) {
+			max = Constants.VALIDATION_OUTPUT_SHRINK_LIMIT;
+		} else {
+			max = 0;
+		}
+		return new RememberLastLinesOutputHandler(max);
 	}
 
 	/**
@@ -278,6 +289,10 @@ public class IdeUtil {
 		}
 	}
 	
+	public static EGradlePreferences getPreferences(){
+		return EGradlePreferences.IDE_PREFERENCES;
+	}
+	
 	/**
 	 * Set new root project folder by given file
 	 * @param folder
@@ -292,7 +307,7 @@ public class IdeUtil {
 		if (!folder.isDirectory()) {
 			throwCoreException("new root folder must be a directory, but is not :\n" + folder.getAbsolutePath());
 		}
-		EGradlePreferences.EGRADLE_IDE_PREFERENCES.setRootProjectPath(folder.getAbsolutePath());
+		IdeUtil.getPreferences().setRootProjectPath(folder.getAbsolutePath());
 		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 		try {

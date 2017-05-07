@@ -45,11 +45,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.osgi.framework.Bundle;
 
-import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.api.FileHelper;
-import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.eclipse.MainActivator;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 
 public class EclipseUtil {
 
@@ -63,16 +60,6 @@ public class EclipseUtil {
 	}
 
 	
-	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
-		int max;
-		if (getPreferences().isOutputValidationEnabled()) {
-			max = Constants.VALIDATION_OUTPUT_SHRINK_LIMIT;
-		} else {
-			max = 0;
-		}
-		return new RememberLastLinesOutputHandler(max);
-	}
-
 	public static IEditorPart getActiveEditor() {
 		IWorkbenchPage page = getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
@@ -166,15 +153,6 @@ public class EclipseUtil {
 	}
 	
 	
-	/**
-	 * Returns egradle preferences, never <code>null</code>
-	 * 
-	 * @return egradle preferences, never <code>null</code>
-	 */
-	public static EGradlePreferences getPreferences() {
-		return EGradlePreferences.EGRADLE_IDE_PREFERENCES;
-	}
-
 	public static EclipseResourceHelper getResourceHelper() {
 		return EclipseResourceHelper.DEFAULT;
 	}

@@ -30,8 +30,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.jcup.egradle.core.GradleRootProjectParentScanner;
 import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 /**

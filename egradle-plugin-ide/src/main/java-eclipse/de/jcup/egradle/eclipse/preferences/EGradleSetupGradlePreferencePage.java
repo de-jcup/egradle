@@ -25,7 +25,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ui.RootProjectConfigUIDelegate;
@@ -38,7 +37,7 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 
 	public EGradleSetupGradlePreferencePage() {
 		super(GRID);
-		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
+		setPreferenceStore(IdeUtil.getPreferences().getPreferenceStore());
 		setDescription("Define how EGradle calls gradle.");
 		uiDelegate = new RootProjectConfigUIDelegate(this);
 		originRootProject=getPreferenceStore().getString(P_ROOTPROJECT_PATH.getId());
@@ -99,7 +98,7 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 	 * @return stored call type id
 	 */
 	private String updateCallGroupEnabledStateByStoredCallTypeId() {
-		String callTypeId = EclipseUtil.getPreferences().getStringPreference(P_GRADLE_CALL_TYPE);
+		String callTypeId = IdeUtil.getPreferences().getStringPreference(P_GRADLE_CALL_TYPE);
 		uiDelegate.updateCallTypeGroupEnabledState(callTypeId);
 		return callTypeId;
 	}

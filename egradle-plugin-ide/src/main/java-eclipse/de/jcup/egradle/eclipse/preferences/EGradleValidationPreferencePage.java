@@ -21,7 +21,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 public class EGradleValidationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -32,7 +31,7 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 
 	public EGradleValidationPreferencePage() {
 		super(GRID);
-		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
+		setPreferenceStore(IdeUtil.getPreferences().getPreferenceStore());
 	}
 
 	/**

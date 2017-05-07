@@ -36,7 +36,6 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
@@ -92,7 +91,7 @@ public class GradleExecutionDelegate {
 	}
 
 	protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
-		EGradlePreferences preferences = EclipseUtil.getPreferences();
+		EGradlePreferences preferences = IdeUtil.getPreferences();
 		/* Default JAVA_HOME */
 		String globalJavaHome = preferences.getGlobalJavaHomePath();
 		/* Call gradle settings */

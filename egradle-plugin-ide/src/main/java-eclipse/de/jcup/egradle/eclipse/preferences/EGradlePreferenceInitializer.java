@@ -21,14 +21,14 @@ import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 /**
  * Class used to initialize default preference values.
  */
 public class EGradlePreferenceInitializer extends AbstractPreferenceInitializer {
 
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = EclipseUtil.getPreferences().getPreferenceStore();
+		IPreferenceStore store = IdeUtil.getPreferences().getPreferenceStore();
 		EGradleCallType defaultCallType = null; 
 		if (SystemUtils.IS_OS_WINDOWS){
 			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	

@@ -38,8 +38,8 @@ import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;

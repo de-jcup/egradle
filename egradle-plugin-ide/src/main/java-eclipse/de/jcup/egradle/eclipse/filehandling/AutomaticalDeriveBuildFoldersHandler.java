@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 public class AutomaticalDeriveBuildFoldersHandler {
 
@@ -37,7 +37,7 @@ public class AutomaticalDeriveBuildFoldersHandler {
 	 *             - if derive fails
 	 */
 	public void deriveBuildFolders(IProject project, IProgressMonitor monitor) throws CoreException {
-		if (!EGradlePreferences.EGRADLE_IDE_PREFERENCES.isAutomaticallyDeriveBuildFoldersEnabled()) {
+		if (!IdeUtil.getPreferences().isAutomaticallyDeriveBuildFoldersEnabled()) {
 			return;
 		}
 		if (!project.exists()) {

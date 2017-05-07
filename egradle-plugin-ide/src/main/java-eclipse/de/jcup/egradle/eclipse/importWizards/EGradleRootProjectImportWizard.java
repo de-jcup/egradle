@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.importWizards;
 
 import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferences.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -56,6 +55,7 @@ import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
@@ -136,8 +136,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 		@Override
 		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-			boolean cleanProjects = EGRADLE_IDE_PREFERENCES.isCleanProjectsOnImportEnabled();
-			boolean executeAssemble = EGRADLE_IDE_PREFERENCES.isExecuteAssembleTaskOnImportEnabled();
+			boolean cleanProjects = IdeUtil.getPreferences().isCleanProjectsOnImportEnabled();
+			boolean executeAssemble = IdeUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
 			
 			try {
 				

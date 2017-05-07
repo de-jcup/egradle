@@ -26,7 +26,6 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 
 	public EGradlePreferencePage() {
 		super(GRID);
-		setPreferenceStore(EclipseUtil.getPreferences().getPreferenceStore());
 		setDescription(createDescription());
 		setImageDescriptor(EclipseUtil.createImageDescriptor("icons/gradle-og.png", MainActivator.PLUGIN_ID));
 	}

@@ -26,7 +26,7 @@ import de.jcup.egradle.eclipse.MainActivator;
 
 public class EGradlePreferences {
 	
-	public static EGradlePreferences EGRADLE_IDE_PREFERENCES = new EGradlePreferences();
+	public static EGradlePreferences IDE_PREFERENCES = new EGradlePreferences();
 	
 	private IPreferenceStore store;
 

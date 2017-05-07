@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.BuildFailedDialog;
 
 public class EGradleMessageDialogSupport {
@@ -62,7 +61,7 @@ public class EGradleMessageDialogSupport {
 			@Override
 			public void run() {
 				
-				if (EGradlePreferences.EGRADLE_IDE_PREFERENCES.isShowingConsoleOnBuildFailed()){
+				if (IdeUtil.getPreferences().isShowingConsoleOnBuildFailed()){
 					EclipseUtil.showConsoleView();
 				}
 			

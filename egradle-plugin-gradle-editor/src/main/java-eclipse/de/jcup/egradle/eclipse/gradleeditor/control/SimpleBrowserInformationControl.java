@@ -42,8 +42,8 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.core.api.History;
 import de.jcup.egradle.core.api.StringUtilsAccess;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 
 /**

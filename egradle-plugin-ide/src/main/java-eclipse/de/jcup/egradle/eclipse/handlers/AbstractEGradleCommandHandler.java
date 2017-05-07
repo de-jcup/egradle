@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.eclipse.handlers;
 
+import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -26,12 +28,11 @@ import org.eclipse.ui.progress.IProgressService;
 import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.execution.GradleJob;
 import de.jcup.egradle.eclipse.execution.GradleRunnableWithProgress;
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 /**
  * Abstract base handler for egradle command executions
  * 
@@ -63,7 +64,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = null;
 		try{
-			RememberLastLinesOutputHandler validationOutputHandler = EclipseUtil.createOutputHandlerForValidationErrorsOnConsole();
+			RememberLastLinesOutputHandler validationOutputHandler = IdeUtil.createOutputHandlerForValidationErrorsOnConsole();
 			validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
 			execution = createGradleExecution(validationOutputHandler);
 		}catch(GradleExecutionException e){

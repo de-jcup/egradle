@@ -15,8 +15,6 @@
  */
 package de.jcup.egradle.eclipse.importWizards;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -27,6 +25,8 @@ import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.execution.validation.RootProjectValidationAdapter;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
 import de.jcup.egradle.eclipse.ui.RootProjectConfigUIDelegate;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
@@ -55,13 +55,14 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 		configComposite.createConfigUI(folderSelectionArea);
 		
+		EGradlePreferences preferences = IdeUtil.getPreferences();
 		/* adopt import setting from current existing preferences value*/
-		String globalJavaHomePath = getPreferences().getGlobalJavaHomePath();
-		String gradleBinInstallFolder = getPreferences().getGradleBinInstallFolder();
-		String gradleCallCommand = getPreferences().getGradleCallCommand();
-		String gradleCallTypeID = getPreferences().getGradleCallTypeID();
-		String shellId = getPreferences().getGradleShellId();
-		String rootProjectPath = getPreferences().getRootProjectPath();
+		String globalJavaHomePath = preferences.getGlobalJavaHomePath();
+		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
+		String gradleCallCommand = preferences.getGradleCallCommand();
+		String gradleCallTypeID = preferences.getGradleCallTypeID();
+		String shellId = preferences.getGradleShellId();
+		String rootProjectPath = preferences.getRootProjectPath();
 		
 		configComposite.setGradleBinInstallFolder(gradleBinInstallFolder);
 		configComposite.setGradleCallTypeId(gradleCallTypeID);

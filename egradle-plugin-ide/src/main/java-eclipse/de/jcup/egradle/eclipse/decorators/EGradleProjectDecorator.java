@@ -31,6 +31,7 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 /**
  * Dedicated decorator for projects only. Will only decorate subprojects inside
@@ -86,7 +87,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			if (!isSubprojectOfCurrentRootProject(p)){
 				return;
 			}
-			if (EclipseUtil.getPreferences().isSubProjectIconDecorationEnabled()){
+			if (IdeUtil.getPreferences().isSubProjectIconDecorationEnabled()){
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {

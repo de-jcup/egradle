@@ -44,9 +44,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 

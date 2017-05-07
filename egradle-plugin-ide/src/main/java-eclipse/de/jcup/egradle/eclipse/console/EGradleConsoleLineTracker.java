@@ -24,7 +24,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 public class EGradleConsoleLineTracker implements IConsoleLineTracker {
@@ -39,7 +38,7 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 	public void init(IConsole console) {
 		IdeUtil.removeAllValidationErrorsOfConsoleOutput();
 		
-		rememberOutputHandler = EclipseUtil.createOutputHandlerForValidationErrorsOnConsole();
+		rememberOutputHandler = IdeUtil.createOutputHandlerForValidationErrorsOnConsole();
 		document = console.getDocument();
 	}
 
