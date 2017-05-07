@@ -44,17 +44,16 @@ import de.jcup.egradle.core.validation.GradleOutputValidator;
 import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
-import de.jcup.egradle.eclipse.console.EGradleSystemConsole;
-import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
-import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
-import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
-import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
-import de.jcup.egradle.eclipse.preferences.EGradleIdePreferences;
+import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsole;
+import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleFactory;
+import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleProcessOutputHandler;
+import de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator;
+import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
+import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
+import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
+import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
-import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
-import de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature;
 
 public class IdeUtil {
 	
@@ -161,7 +160,7 @@ public class IdeUtil {
 				IDecoratorManager manager = workbench.getDecoratorManager();
 
 				EGradleProjectDecorator decorator = (EGradleProjectDecorator) manager
-						.getBaseLabelProvider("de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator");
+						.getBaseLabelProvider("de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator");
 				IProject[] projects = getAllProjects();
 				/* test if virtual root project is visible */
 				for (IProject project : projects) {

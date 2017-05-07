@@ -23,7 +23,7 @@ import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 
 public class ImportAllGradleJunitResultsHandler extends AbstractHandler {
 
-	public static final String COMMAND_ID="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand";
+	public static final String COMMAND_ID="de.jcup.egradle.eclipse.ide.junit.contribution.commands.importTestResultCommand";
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

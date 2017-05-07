@@ -15,17 +15,17 @@
  */
  package de.jcup.egradle.eclipse.junit.contribution.launch;
 
+import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchDelegate;
+import de.jcup.egradle.eclipse.ide.launch.LaunchParameterValues;
 import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate;
-import de.jcup.egradle.eclipse.launch.LaunchParameterValues;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{

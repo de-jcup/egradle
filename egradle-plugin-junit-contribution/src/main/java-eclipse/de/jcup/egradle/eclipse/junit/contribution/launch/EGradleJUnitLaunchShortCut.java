@@ -16,7 +16,7 @@
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
 import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -35,8 +35,8 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 import de.jcup.egradle.eclipse.JavaHelper;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchShortCut;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {

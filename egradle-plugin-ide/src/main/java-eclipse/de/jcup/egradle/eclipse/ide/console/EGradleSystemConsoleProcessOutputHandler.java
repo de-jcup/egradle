@@ -13,19 +13,25 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.launch;
+package de.jcup.egradle.eclipse.ide.console;
 
-import java.util.Collection;
+import org.eclipse.ui.console.MessageConsoleStream;
 
-import org.eclipse.debug.ui.ILaunchConfigurationTab;
+import de.jcup.egradle.core.process.OutputHandler;
 
-import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
+public class EGradleSystemConsoleProcessOutputHandler implements OutputHandler {
 
-public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
+	private MessageConsoleStream messageStream;
 
-	
-	@Override
-	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
-		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
+	public EGradleSystemConsoleProcessOutputHandler() {
+		this.messageStream = EGradleSystemConsoleFactory.INSTANCE.getConsole().newMessageStream();
+		/* always UTF-8 encoding */
+		messageStream.setEncoding("UTF-8");
 	}
+
+	@Override
+	public void output(String line) {
+		messageStream.println(line);
+	}
+
 }

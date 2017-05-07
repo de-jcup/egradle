@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import static de.jcup.egradle.eclipse.launch.EGradleLauncherConstants.*;
+import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -25,8 +25,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.junit.contribution.JUnitActivator;
-import de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
 

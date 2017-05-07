@@ -13,19 +13,25 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.launch;
+ package de.jcup.egradle.eclipse.ide.execution.validation;
 
-import java.util.Collection;
+ /**
+  * Observes validation running on EGradle root project validation
+  * @author Albert Tregnaghi
+  *
+  */
+public interface RootProjectValidationObserver{
 
-import org.eclipse.debug.ui.ILaunchConfigurationTab;
+	/**
+	 * Handle valdiation is running or not
+	 * @param running
+	 */
+	public void handleValidationRunning(boolean running);
 
-import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
-
-public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
-
+	/**
+	 * Handle validation result
+	 * @param valid - validation result
+	 */
+	public void handleValidationResult(boolean valid);
 	
-	@Override
-	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
-		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
-	}
 }

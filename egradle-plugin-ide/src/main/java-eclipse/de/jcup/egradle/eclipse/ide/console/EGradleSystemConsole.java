@@ -13,19 +13,21 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.launch;
+package de.jcup.egradle.eclipse.ide.console;
 
-import java.util.Collection;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 
-import org.eclipse.debug.ui.ILaunchConfigurationTab;
+public class EGradleSystemConsole extends MessageConsole {
 
-import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
-
-public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
-
-	
-	@Override
-	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
-		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
+	public EGradleSystemConsole(String name, ImageDescriptor imageDescriptor) {
+		super(name, imageDescriptor);
 	}
+
+	@Override
+	public MessageConsoleStream newMessageStream() {
+		return super.newMessageStream();
+	}
+
 }

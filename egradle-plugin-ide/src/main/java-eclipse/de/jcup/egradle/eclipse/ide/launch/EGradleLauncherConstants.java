@@ -13,19 +13,18 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.launch;
+ package de.jcup.egradle.eclipse.ide.launch;
 
-import java.util.Collection;
+import de.jcup.egradle.eclipse.ide.IDEActivator;
 
-import org.eclipse.debug.ui.ILaunchConfigurationTab;
+public interface EGradleLauncherConstants {
 
-import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
-
-public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
-
+	public static final String PROPERTY_TASKS = "tasks";
+	public static final String PROPERTY_PROJECTNAME = "projectName";
+	public static final String PROPERTY_OPTIONS = "options";
 	
-	@Override
-	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
-		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
-	}
+	
+	public static final String GRADLE_PROPERTIES = IDEActivator.PLUGIN_ID+".gradleProperties";
+	public static final String SYSTEM_PROPERTIES = IDEActivator.PLUGIN_ID+".systemProperties";
+	public static final String ENVIRONMENT_PROPERTIES = IDEActivator.PLUGIN_ID+".environmentProperties";
 }

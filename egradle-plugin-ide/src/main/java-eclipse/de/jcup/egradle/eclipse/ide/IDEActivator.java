@@ -21,7 +21,7 @@ public class IDEActivator extends AbstractUIPlugin {
 	private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.ide"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.ide.plugin.ide"; //$NON-NLS-1$
 
 	// The shared instance
 	private static IDEActivator plugin;

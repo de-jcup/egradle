@@ -41,7 +41,7 @@
          point="org.eclipse.core.resources.builders">
       <builder hasNature="true">
          <run
-               class="de.jcup.egradle.eclipse.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
+               class="de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
          </run>
       </builder>
    </extension>
@@ -55,11 +55,11 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature">
+               class="de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature">
          </run>
       </runtime>
       <builder
-            id="de.jcup.egradle.eclipse.plugin.main.virtualRootProjectBuilder">
+            id="de.jcup.egradle.eclipse.plugin.ide.virtualRootProjectBuilder">
       </builder>
    </extension>
 
@@ -79,7 +79,7 @@
   	  <!-- see http://help.eclipse.org/neon/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_cmd_expressions.htm -->
   	  <!-- see http://www.robertwloch.net/2011/01/eclipse-tips-tricks-property-testers-with-command-core-expressions/ -->
       <propertyTester
-          class="de.jcup.egradle.eclipse.EGradlePropertyTester"
+          class="de.jcup.egradle.eclipse.ide.EGradlePropertyTester"
           id="de.jcup.egradle.eclipse.EGradlePropertyTester"
           namespace="de.jcup.egradle"
           properties="isProjectPartOfRootProject"
@@ -96,7 +96,7 @@
             lightweight="true"
             adaptable="true"
             label="EGradle project decorator"
-            class="de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator"
+            class="de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator"
             state="true"
             location="BOTTOM_LEFT"
             id="de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator">
@@ -131,7 +131,7 @@
                name="launchConfig"
                optional="true">
             <values
-                  class="de.jcup.egradle.eclipse.launch.LaunchParameterValues">
+                  class="de.jcup.egradle.eclipse.ide.launch.LaunchParameterValues">
             </values>
          </commandParameter>
       </command>
@@ -165,27 +165,27 @@
          point="org.eclipse.ui.handlers">
       <handler
             commandId="egradle.commands.refreshEclipse"
-            class="de.jcup.egradle.eclipse.handlers.RefreshAllEclipseDependenciesHandler">
+            class="de.jcup.egradle.eclipse.ide.handlers.RefreshAllEclipseDependenciesHandler">
       </handler>
       <handler
-            class="de.jcup.egradle.eclipse.handlers.LaunchGradleCommandHandler"
+            class="de.jcup.egradle.eclipse.ide.handlers.LaunchGradleCommandHandler"
             commandId="egradle.commands.launch">
       </handler>
       <handler
-            class="de.jcup.egradle.eclipse.handlers.UpdateOrCreateVirtualRootProjectHandler"
+            class="de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler"
             commandId="egradle.commands.updateOrCreateVirtualRootProject">
       </handler>
        <handler
-            class="de.jcup.egradle.eclipse.handlers.QuickTaskExecutionHandler"
+            class="de.jcup.egradle.eclipse.ide.handlers.QuickTaskExecutionHandler"
             commandId="egradle.commands.quickTaskExecution">
       </handler>
       <handler
             commandId="egradle.commands.detectNewRootProject"
-            class="de.jcup.egradle.eclipse.handlers.DetectNewRootProjectHandler">
+            class="de.jcup.egradle.eclipse.ide.handlers.DetectNewRootProjectHandler">
       </handler>
       <handler
             commandId="egradle.commands.showDependenciesForProject"
-            class="de.jcup.egradle.eclipse.handlers.ShowDependenciesOfSelectecProjectHandler">
+            class="de.jcup.egradle.eclipse.ide.handlers.ShowDependenciesOfSelectecProjectHandler">
       </handler>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -248,7 +248,7 @@
             name="Import gradle root project with all subprojects"
             icon="icons/import_egradle.png"
             category="egradle.importWizards.category"
-            class="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard"
+            class="de.jcup.egradle.eclipse.ide.importWizards.EGradleRootProjectImportWizard"
             id="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
          <description>
             Import gradle root project with all sub projects
@@ -399,7 +399,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="egradle.preferences.EGradlePreferencePage"
-            class="de.jcup.egradle.eclipse.preferences.EGradleSetupGradlePreferencePage"
+            class="de.jcup.egradle.eclipse.ide.preferences.EGradleSetupGradlePreferencePage"
             id="egradle.preferences.EGradleSetupGradlePreferencePage"
             name="Gradle Setup">
             <keywordReference
@@ -411,7 +411,7 @@
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
-         class="de.jcup.egradle.eclipse.preferences.EGradleValidationPreferencePage"
+         class="de.jcup.egradle.eclipse.ide.preferences.EGradleValidationPreferencePage"
          name="Validation"
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
@@ -423,7 +423,7 @@
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
-         class="de.jcup.egradle.eclipse.preferences.EGradleDecorationPreferencePage"
+         class="de.jcup.egradle.eclipse.ide.preferences.EGradleDecorationPreferencePage"
          name="Decoration"
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
@@ -435,7 +435,7 @@
       </page>
        <page
          id="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
-         class="de.jcup.egradle.eclipse.preferences.EGradleFileHandlingPreferencePage"
+         class="de.jcup.egradle.eclipse.ide.preferences.EGradleFileHandlingPreferencePage"
          name="File handling"
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
@@ -447,7 +447,7 @@
       </page>
       <page
          id="de.jcup.egradle.eclipse.preferences.EGradleImporterPreferencePage"
-         class="de.jcup.egradle.eclipse.preferences.EGradleImporterPreferencePage"
+         class="de.jcup.egradle.eclipse.ide.preferences.EGradleImporterPreferencePage"
          name="Import"
          category="egradle.preferences.EGradlePreferencePage">
          <keywordReference
@@ -464,7 +464,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="de.jcup.egradle.eclipse.preferences.EGradlePreferenceInitializer">
+            class="de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceInitializer">
       </initializer>
    </extension>
    
@@ -474,13 +474,13 @@
    <!-- http://stackoverflow.com/questions/29783017/add-custom-console-to-eclipse-console-list -->
    <extension point="org.eclipse.ui.console.consoleFactories">
 	   <consoleFactory
-	         class="de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory"
+	         class="de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleFactory"
 	         icon="icons/gradle-og.png"
 	         label="EGradle System Console">
 	   </consoleFactory>
    </extension>
   <extension point="org.eclipse.ui.console.consolePageParticipants">
-	<consolePageParticipant class="de.jcup.egradle.eclipse.console.EGradleConsolePageParticipant" id="de.jcup.egradle.eclipse.console.AnsiConsolePageParticipant">
+	<consolePageParticipant class="de.jcup.egradle.eclipse.ide.console.EGradleConsolePageParticipant" id="de.jcup.egradle.eclipse.console.AnsiConsolePageParticipant">
 		<enablement>
 			<instanceof value="org.eclipse.ui.console.IConsole" />
 		</enablement>
@@ -489,7 +489,7 @@
   <extension point="org.eclipse.debug.ui.consoleLineTrackers">
 	   <consoleLineTracker 
 	      id="de.jcup.egradle.EGradleConnsoleLineTracker"
-	      class="de.jcup.egradle.eclipse.console.EGradleConsoleLineTracker"
+	      class="de.jcup.egradle.eclipse.ide.console.EGradleConsoleLineTracker"
 	      processType="EGradleRuntimeProcess">
 	   </consoleLineTracker>
    </extension>
@@ -500,7 +500,7 @@
    
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
-        delegate="de.jcup.egradle.eclipse.launch.EGradleLaunchDelegate"
+        delegate="de.jcup.egradle.eclipse.ide.launch.EGradleLaunchDelegate"
         delegateDescription="Launches the gradle project by given arguments"
         id="de.jcup.egradle.launchConfigurationType"
         modes="run"
@@ -510,7 +510,7 @@
 	</extension>
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup 
-			class="de.jcup.egradle.eclipse.launch.EGradleLaunchConfigurationTabGroup"
+			class="de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup"
 			description="Define your launch configurations for EGradle"
 			id="de.jcup.egradle.launchConfigurationTabGroup"
 			type="de.jcup.egradle.launchConfigurationType">
@@ -527,7 +527,7 @@
  	<extension point="org.eclipse.debug.ui.launchShortcuts">
     	<shortcut
         id="de.jcup.egradle.eGradleLaunchShortcut"
-        class="de.jcup.egradle.eclipse.launch.EGradleLaunchShortCut"
+        class="de.jcup.egradle.eclipse.ide.launch.EGradleLaunchShortCut"
         label="EGradle"
         icon="icons/gradle-og.png"
         modes="run">
