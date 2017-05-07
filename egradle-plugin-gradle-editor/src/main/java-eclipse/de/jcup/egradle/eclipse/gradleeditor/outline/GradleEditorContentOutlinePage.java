@@ -16,7 +16,6 @@
  package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
@@ -41,6 +40,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 import de.jcup.egradle.eclipse.ui.FallbackOutlineContentProvider;
@@ -254,7 +254,7 @@ public class GradleEditorContentOutlinePage extends ContentOutlinePage implement
 		
 	
 		private ToggleLinkingAction() {
-			linkingWithEditorEnabled = EDITOR_PREFERENCES.getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
+			linkingWithEditorEnabled = EditorUtil.getPreferences().getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
 			setDescription("link with editor");
 			initImage();
 			initText();

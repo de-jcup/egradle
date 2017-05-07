@@ -56,7 +56,7 @@ import de.jcup.egradle.eclipse.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
+import de.jcup.egradle.eclipse.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 
@@ -196,7 +196,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 					return;
 				}
 				/* result is okay, so use this setup in preferences now */
-				EGradlePreferences preferences = getPreferences();
+				EGradleIdePreferences preferences = getPreferences();
 				preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
 				preferences.setGlobalJavaHomePath(globalJavaHome);
 				preferences.setGradleBinInstallFolder(gradleInstallPath);

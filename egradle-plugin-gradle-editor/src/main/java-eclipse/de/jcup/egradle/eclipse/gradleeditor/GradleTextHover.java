@@ -13,9 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
-
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
@@ -43,7 +41,6 @@ import de.jcup.egradle.eclipse.api.ColorUtil;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
@@ -53,19 +50,19 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	private ISourceViewer sourceViewer;
 	private String contentType;
 	private GradleTextHoverControlCreator creator;
-	
+
 	private String fgColor;
 	private String bgColor;
 	private RelevantCodeCutter codeCutter;
 	private HoverSupport hoverSupport;
 	private String commentColorWeb;
-	
+
 	public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer,
 			String contentType) {
 		this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
 		this.sourceViewer = sourceViewer;
 		this.contentType = contentType;
-		
+
 		builder = new HTMLDescriptionBuilder();
 		codeCutter = new RelevantCodeCutter();
 		hoverSupport = new HoverSupport();
@@ -73,7 +70,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		HoverDataRegion region = getLanguageElementAt(offset,textViewer);
+		HoverDataRegion region = getLanguageElementAt(offset, textViewer);
 		if (region != null) {
 			return region;
 		}
@@ -90,18 +87,18 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
 	@Override
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-		if (!EDITOR_PREFERENCES.isCodeAssistTooltipsEnabled()){
+		if (!EditorUtil.getPreferences().isCodeAssistTooltipsEnabled()) {
 			return null;
 		}
-		
+
 		HoverData data = null;
 		if (hoverRegion instanceof HoverDataRegion) {
 			HoverDataRegion hdr = (HoverDataRegion) hoverRegion;
 			data = hdr.getData();
 		}
 		if (data == null) {
-			HoverDataRegion hdr = getLanguageElementAt(hoverRegion.getOffset(),textViewer);
-			if (hdr!=null){
+			HoverDataRegion hdr = getLanguageElementAt(hoverRegion.getOffset(), textViewer);
+			if (hdr != null) {
 				data = hdr.getData();
 			}
 		}
@@ -119,14 +116,17 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		if (element == null) {
 			return null;
 		}
-		if (bgColor==null || fgColor==null){
-			
+		if (bgColor == null || fgColor == null) {
+
 			StyledText textWidget = textViewer.getTextWidget();
-			if (textWidget!=null){
-				
-				/* TODO ATR, 03.02.2017: there should be an easier approach to get editors back and foreground, without syncexec */
+			if (textWidget != null) {
+
+				/*
+				 * TODO ATR, 03.02.2017: there should be an easier approach to
+				 * get editors back and foreground, without syncexec
+				 */
 				EclipseUtil.getSafeDisplay().syncExec(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						bgColor = ColorUtil.convertToHexColor(textWidget.getBackground());
@@ -134,18 +134,19 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 					}
 				});
 			}
-			
+
 		}
-		if (commentColorWeb==null){
-			commentColorWeb = GradleEditorPreferences.EDITOR_PREFERENCES.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+		if (commentColorWeb == null) {
+			commentColorWeb = EditorUtil.getPreferences()
+					.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
 		}
-		
+
 		String prefix = null;
 		double reliability = dataEstimationResult.getReliability();
-		if (reliability<80){
-			prefix="<div class='warnSmall'>This type estimation has a reliability of:"+reliability+"</div>";
+		if (reliability < 80) {
+			prefix = "<div class='warnSmall'>This type estimation has a reliability of:" + reliability + "</div>";
 		}
-		return builder.buildHTMLDescription(fgColor, bgColor ,commentColorWeb, data, element, prefix);
+		return builder.buildHTMLDescription(fgColor, bgColor, commentColorWeb, data, element, prefix);
 	}
 
 	private class HoverDataRegion implements IRegion {
@@ -153,12 +154,12 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		private HoverData data;
 
 		private HoverDataRegion(HoverData data) {
-			if (data==null){
+			if (data == null) {
 				throw new IllegalArgumentException("hover data may not be null");
 			}
-			this.data= data;
+			this.data = data;
 		}
-		
+
 		@Override
 		public int getLength() {
 			return data.getLength();
@@ -168,16 +169,17 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public int getOffset() {
 			return data.getOffset();
 		}
-		
+
 		public HoverData getData() {
 			return data;
 		}
 	}
-	
+
 	/**
 	 * Get language at given offset
+	 * 
 	 * @param offset
-	 * @param textViewer 
+	 * @param textViewer
 	 * @return language element or <code>null</code>
 	 */
 	protected HoverDataRegion getLanguageElementAt(int offset, ITextViewer textViewer) {
@@ -195,21 +197,13 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		Model model = gprocessor.getModel();
 		GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
 		GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
-		
+
 		HoverData data = hoverSupport.caclulateHoverData(allText, offset, codeCutter, model, fileType, estimator);
-		if (data==null){
+		if (data == null) {
 			return null;
 		}
 		return new HoverDataRegion(data);
 	}
-	
-	
-	
-	
-
-	
-
-	
 
 	private class GradleTextHoverControlCreator implements IInformationControlCreator {
 
@@ -217,7 +211,8 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 		public IInformationControl createInformationControl(Shell parent) {
 			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
 				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(fgColor,bgColor, commentColorWeb, builder));
+				control.setBrowserEGradleLinkListener(
+						new DefaultEGradleLinkListener(fgColor, bgColor, commentColorWeb, builder));
 				return control;
 			} else {
 				return new DefaultInformationControl(parent, true);

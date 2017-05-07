@@ -22,16 +22,20 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.eclipse.MainActivator;
+import de.jcup.egradle.eclipse.ide.IDEActivator;
 
-public class EGradlePreferences {
+public class EGradleIdePreferences {
 	
-	public static EGradlePreferences IDE_PREFERENCES = new EGradlePreferences();
+	private static EGradleIdePreferences INSTANCE = new EGradleIdePreferences();
 	
 	private IPreferenceStore store;
 
-	EGradlePreferences() {
-		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
+	public static EGradleIdePreferences getInstance(){
+		return INSTANCE;
+	}
+	
+	EGradleIdePreferences() {
+		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, IDEActivator.PLUGIN_ID);
 	}
 
 	public String getStringPreference(EGradlePreferenceConstants id) {

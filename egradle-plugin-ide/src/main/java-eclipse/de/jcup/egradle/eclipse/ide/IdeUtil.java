@@ -51,7 +51,7 @@ import de.jcup.egradle.eclipse.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator;
 import de.jcup.egradle.eclipse.filehandling.AutomaticalDeriveBuildFoldersHandler;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferences;
+import de.jcup.egradle.eclipse.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.virtualroot.VirtualRootProjectNature;
@@ -289,8 +289,12 @@ public class IdeUtil {
 		}
 	}
 	
-	public static EGradlePreferences getPreferences(){
-		return EGradlePreferences.IDE_PREFERENCES;
+	/**
+	 * Returns preferences for IDE
+	 * @return preferences
+	 */
+	public static EGradleIdePreferences getPreferences(){
+		return EGradleIdePreferences.getInstance();
 	}
 	
 	/**

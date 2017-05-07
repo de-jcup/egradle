@@ -76,7 +76,6 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvi
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.openapi.BuildVariablesProvider;
 import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
 
@@ -255,8 +254,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 				P_EDITOR_MATCHING_BRACKETS_ENABLED.getId(), P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
 				P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION.getId(), P_EDITOR_ENCLOSING_BRACKETS.getId());
 
-		IPreferenceStore preferenceStoreForDecorationSupport = GradleEditorPreferences.EDITOR_PREFERENCES
-				.getPreferenceStore();
+		IPreferenceStore preferenceStoreForDecorationSupport = EditorUtil.getPreferences().getPreferenceStore();
 		additionalSourceViewerSupport.install(preferenceStoreForDecorationSupport);
 	}
 

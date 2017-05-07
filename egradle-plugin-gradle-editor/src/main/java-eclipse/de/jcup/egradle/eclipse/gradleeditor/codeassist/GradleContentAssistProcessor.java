@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor.codeassist;
 
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
+import static de.jcup.egradle.eclipse.gradleeditor.EditorUtil.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,6 @@ import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
-import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
 
 public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
@@ -158,7 +157,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				debugCacheState("proposal computing-2");
 			}
 			cachedProposals.clear();
-			boolean filterGetterAndSetter = EDITOR_PREFERENCES.isCodeAssistNoProposalsForGetterOrSetter();
+			boolean filterGetterAndSetter = getPreferences().isCodeAssistNoProposalsForGetterOrSetter();
 			for (ProposalFactory proposalFactory : proposalFactories) {
 				if (proposalFactory instanceof FilterableProposalFactory){
 					FilterableProposalFactory fpropFactory = (FilterableProposalFactory) proposalFactory;
@@ -185,7 +184,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private boolean isCodeCompletionEnabled() {
-		return EDITOR_PREFERENCES.isCodeAssistProposalsEnabled();
+		return getPreferences().isCodeAssistProposalsEnabled();
 	}
 
 	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,
@@ -199,7 +198,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			bgColor = editor.getBackGroundColorAsWeb();
 			fgColor = editor.getForeGroundColorAsWeb();
 		}
-		String commentColorWeb = GradleEditorPreferences.EDITOR_PREFERENCES.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+		String commentColorWeb = getPreferences().getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
 		
 		List<ICompletionProposal> list = new ArrayList<>();
 		for (Proposal p : allProposals) {

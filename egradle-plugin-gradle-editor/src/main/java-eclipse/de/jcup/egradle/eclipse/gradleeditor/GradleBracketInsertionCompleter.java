@@ -15,8 +15,8 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.gradleeditor.EditorUtil.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -55,7 +55,7 @@ class GradleBracketInsertionCompleter extends KeyAdapter {
 		if (! (selection instanceof ITextSelection)) {
 			return;
 		}
-		boolean enabled = EDITOR_PREFERENCES.getBooleanPreference(P_EDITOR_AUTO_CREATE_END_BRACKETSY);
+		boolean enabled = getPreferences().getBooleanPreference(P_EDITOR_AUTO_CREATE_END_BRACKETSY);
 		if (!enabled){
 			return;
 		}

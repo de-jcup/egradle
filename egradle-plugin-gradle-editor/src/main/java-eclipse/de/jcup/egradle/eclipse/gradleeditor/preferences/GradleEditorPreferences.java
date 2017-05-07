@@ -34,10 +34,10 @@ import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
 public class GradleEditorPreferences {
 
-	public static GradleEditorPreferences EDITOR_PREFERENCES = new GradleEditorPreferences();
+	private static GradleEditorPreferences INSTANCE = new GradleEditorPreferences();
 	private IPreferenceStore store;
 
-	GradleEditorPreferences() {
+	private GradleEditorPreferences() {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, EditorActivator.PLUGIN_ID);
 		store.addPropertyChangeListener(new IPropertyChangeListener() {
 			
@@ -146,6 +146,10 @@ public class GradleEditorPreferences {
 	
 	public boolean isCodeAssistTooltipsEnabled() {
 		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
+	}
+
+	public static GradleEditorPreferences getInstance() {
+		return INSTANCE;
 	}
 
 	

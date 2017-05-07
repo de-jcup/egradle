@@ -15,8 +15,8 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  *
  */
 
+import static de.jcup.egradle.eclipse.gradleeditor.EditorUtil.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 import java.util.ArrayList;
 
@@ -71,7 +71,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 
 	public GradleEditorPreferencePage() {
 		super(GRID);
-		setPreferenceStore(EDITOR_PREFERENCES.getPreferenceStore());
+		setPreferenceStore(getPreferences().getPreferenceStore());
 	}
 
 	@Override
@@ -222,15 +222,15 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 	}
 
 	private void setBoolean(GradleEditorPreferenceConstants id, boolean value) {
-		EDITOR_PREFERENCES.setBooleanPreference(id, value);
+		getPreferences().setBooleanPreference(id, value);
 	}
 
 	private boolean getBoolean(GradleEditorPreferenceConstants id) {
-		return EDITOR_PREFERENCES.getBooleanPreference(id);
+		return getPreferences().getBooleanPreference(id);
 	}
 
 	private boolean getDefaultBoolean(GradleEditorPreferenceConstants id) {
-		return EDITOR_PREFERENCES.getDefaultBooleanPreference(id);
+		return getPreferences().getDefaultBooleanPreference(id);
 	}
 
 	private void initializeBracketHighlightingPreferences() {

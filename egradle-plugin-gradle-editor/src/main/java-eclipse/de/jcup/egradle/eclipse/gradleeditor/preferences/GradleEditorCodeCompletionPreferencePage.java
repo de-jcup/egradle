@@ -16,7 +16,6 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  */
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -37,6 +36,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
+import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
@@ -49,7 +49,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 	private BooleanFieldEditor codeAssistTooltipsEnabled;
 
 	public GradleEditorCodeCompletionPreferencePage() {
-		setPreferenceStore(EDITOR_PREFERENCES.getPreferenceStore());
+		setPreferenceStore(EditorUtil.getPreferences().getPreferenceStore());
 	}
 
 	@Override

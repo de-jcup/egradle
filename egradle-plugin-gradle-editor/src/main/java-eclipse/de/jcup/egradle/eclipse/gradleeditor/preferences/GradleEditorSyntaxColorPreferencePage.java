@@ -15,7 +15,6 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  *
  */
 
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants.*;
 
 import java.util.HashMap;
@@ -32,12 +31,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
 
 public class GradleEditorSyntaxColorPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public GradleEditorSyntaxColorPreferencePage() {
-		setPreferenceStore(EDITOR_PREFERENCES.getPreferenceStore());
+		setPreferenceStore(EditorUtil.getPreferences().getPreferenceStore());
 	}
 	
 	@Override
