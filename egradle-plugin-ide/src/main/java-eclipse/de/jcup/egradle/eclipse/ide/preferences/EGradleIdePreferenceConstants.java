@@ -13,9 +13,11 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+ package de.jcup.egradle.eclipse.ide.preferences;
 
-public enum EGradlePreferenceConstants {
+public enum EGradleIdePreferenceConstants {
+	P_MIGRATE_IDE_STATE("migrateIdeState"),
+	
 	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
 	
 	P_JAVA_HOME_PATH("pathJavaHome"),
@@ -38,7 +40,7 @@ public enum EGradlePreferenceConstants {
 
 	private String id;
 
-	private EGradlePreferenceConstants(String id) {
+	private EGradleIdePreferenceConstants(String id) {
 		this.id = id;
 	}
 

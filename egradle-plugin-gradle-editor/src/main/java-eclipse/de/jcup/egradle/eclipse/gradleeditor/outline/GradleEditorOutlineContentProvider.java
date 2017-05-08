@@ -37,7 +37,7 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelFilters;
 import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
 
@@ -115,7 +115,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 				try {
 					charset = file.getCharset();
 				} catch (CoreException e) {
-					EclipseUtil.log(e);
+					EditorUtil.logError("Was not able to get charset of file:"+file,e);
 				}
 			}
 		}else if (inputElement instanceof String){
@@ -156,7 +156,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 			}
 			return elements;
 		} catch (Exception e) {
-			EclipseUtil.log("Problems on outline building", e);
+			EditorUtil.logError("Problems on outline building",e);
 			return null;
 		}
 	}
@@ -256,7 +256,7 @@ public class GradleEditorOutlineContentProvider implements ITreeContentProvider 
 						error.getCharStart(), error.getCharEnd());
 			}
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			EditorUtil.logError("Was not able to create error marker at file:"+file,e);
 		}
 	}
 

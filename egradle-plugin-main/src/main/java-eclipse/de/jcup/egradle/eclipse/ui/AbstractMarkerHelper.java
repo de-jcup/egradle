@@ -153,7 +153,7 @@ abstract class AbstractMarkerHelper {
 				}
 
 			} catch (CoreException e) {
-				EclipseUtil.log(e);
+				EclipseUtil.logError("Was not able to delete markers", e);
 			}
 		}
 		if (tasks == null) {

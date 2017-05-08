@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAdapter;
-import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 
 public class RootProjectConfigUIDelegateTestMain {

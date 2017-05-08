@@ -15,15 +15,15 @@
  */
 package de.jcup.egradle.eclipse.ide.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
+import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
+import de.jcup.egradle.core.migration.MigrationState;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
 
 public class EGradleIdePreferences {
 	
@@ -36,11 +36,10 @@ public class EGradleIdePreferences {
 	}
 	
 	EGradleIdePreferences() {
-		/* TODO ATR, 07.04.2017 use own preference store, and do auto migration - #257 will fix this */
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, IDEActivator.PLUGIN_ID);
 	}
 
-	public String getStringPreference(EGradlePreferenceConstants id) {
+	public String getStringPreference(EGradleIdePreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
 		if (data==null){
 			data="";
@@ -97,6 +96,19 @@ public class EGradleIdePreferences {
 	public String getGradleShellId() {
 		return getStringPreference(P_GRADLE_SHELL);
 	}
+	
+	public MigrationState getMigrationState() {
+		String migrationStateAsString = getStringPreference(P_MIGRATE_IDE_STATE);
+		MigrationState migrationState = MigrationState.fromName(migrationStateAsString);
+		return migrationState;
+	}
+	
+	public void setMigrationState(MigrationState migrationState){
+		if (migrationState==null){
+			migrationState=MigrationState.NOT_MIGRATED;
+		}
+		getPreferenceStore().setValue(P_MIGRATE_IDE_STATE.getId(), migrationState.name());
+	}
 
 	public String getGradleCallTypeID(){
 		return getStringPreference(P_GRADLE_CALL_TYPE);
@@ -132,6 +144,8 @@ public class EGradleIdePreferences {
 	public void setGradleCallTypeID(String callTypeId) {
 		getPreferenceStore().setValue(P_GRADLE_CALL_TYPE.getId(), callTypeId);
 	}
+
+	
 
 	
 

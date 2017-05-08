@@ -22,8 +22,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
-
 public class EGradlePropertyTester extends PropertyTester{
 
 	public static final String PROPERTY_NAMESPACE = "de.jcup.egradle";
@@ -75,7 +73,7 @@ public class EGradlePropertyTester extends PropertyTester{
 					return evalResult(expectedToBeRootPartOfRootProject,true);
 				}
 			} catch (CoreException e) {
-				EclipseUtil.log(e);
+				IdeUtil.logError("Was not able to evaluate project:"+project,e);
 				return evalResult(expectedToBeRootPartOfRootProject,false);
 			}
 			return evalResult(expectedToBeRootPartOfRootProject,false);

@@ -51,6 +51,7 @@ import org.eclipse.core.runtime.Plugin;
 
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.api.FileHelper;
+import de.jcup.egradle.eclipse.MainActivator;
 
 public class EclipseResourceHelper {
 	public static EclipseResourceHelper DEFAULT = new EclipseResourceHelper();
@@ -225,7 +226,7 @@ public class EclipseResourceHelper {
 				i = MAX_RETRY;
 			} catch (CoreException x) {
 				if (i == MAX_RETRY - 1) {
-					EclipseUtil.log(x.getStatus());
+					MainActivator.getDefault().getLog().log(x.getStatus());
 				}
 				try {
 					Thread.sleep(1000); // sleep a second

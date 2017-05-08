@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 /**
  * Special project builder to support new files added on virtual root inside
@@ -117,7 +118,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 					try {
 						getFileHelper().delete(linkTargetFile);
 					} catch (IOException e) {
-						log(e);
+						IdeUtil.logError("Was not able to delete link target file:"+linkTargetFile,e);
 					}
 				}
 			}

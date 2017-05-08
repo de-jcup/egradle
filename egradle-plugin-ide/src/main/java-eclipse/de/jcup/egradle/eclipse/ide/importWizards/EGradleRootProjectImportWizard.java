@@ -123,7 +123,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			});
 			return true;
 		} catch (Exception e) {
-			log(e);
+			IdeUtil.logError("EGradle Import execution failed", e);
 			return false;
 		}
 
@@ -239,7 +239,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 					try {
 						setWorkspaceAutoBuild(true);
 					} catch (CoreException e) {
-						log("Reenabling workspace auto build failed!", e);
+						IdeUtil.logError("Reenabling workspace auto build failed!", e);
 					}
 				}
 			}
@@ -264,7 +264,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 						} catch (InvocationTargetException e) {
 
-							log(new Status(Status.ERROR, IDEActivator.PLUGIN_ID, "Assemble task failed", e));
+							IdeUtil.logError("Assemble task failed", e);
 							EGradleMessageDialogSupport.INSTANCE.showBuildFailed("Assemble task failed");
 
 						} catch (InterruptedException e) {

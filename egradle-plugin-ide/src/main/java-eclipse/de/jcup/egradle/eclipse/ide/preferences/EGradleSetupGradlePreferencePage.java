@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
+import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jface.preference.FieldEditor;

@@ -34,10 +34,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 
 import de.jcup.egradle.core.Constants;
@@ -46,7 +44,7 @@ import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.api.ProjectDescriptionCreator;
-import de.jcup.egradle.eclipse.ide.IDEActivator;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 
 public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreator {
 	private IProject newProject;
@@ -248,7 +246,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
 		if (targetFolder == null) {
 			String message = "Cannot create link for file " + file + ", because target folder is null!";
-			EclipseUtil.log(new Status(IStatus.WARNING, IDEActivator.PLUGIN_ID, message));
+			IdeUtil.logWarning(message);
 			return false;
 		}
 		notNull(file, "'file' may not be null");
@@ -353,8 +351,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
-			EclipseUtil.log(
-					new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, "Was not able to create link to file:" + file, e));
+			IdeUtil.logError("Was not able to create link to file:" + file, e);
 		}
 
 	}

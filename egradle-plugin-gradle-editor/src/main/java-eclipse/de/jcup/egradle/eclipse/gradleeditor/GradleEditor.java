@@ -535,7 +535,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		super.doSetInput(input);
 		IDocument document = getDocument();
 		if (document == null) {
-			EclipseUtil.logWarning("No document available for given input:" + input);
+			EditorUtil.logWarning("No document available for given input:" + input);
 			return;
 		}
 		document.addDocumentListener(documentListener);

@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
 
 public class EGradleValidationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -50,13 +49,13 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 		groupLayoutData.horizontalSpan = 3;
 
 		outputValidationEnabled=		new BooleanFieldEditor(
-					EGradlePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(),
+					EGradleIdePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(),
 					"Output validation enabled",
 					getFieldEditorParent());
 		addField(outputValidationEnabled);
 		
 		showConsoleViewOnBuildFailed=		new BooleanFieldEditor(
-				EGradlePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(),
+				EGradleIdePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(),
 				"Show console view on build failure",
 				getFieldEditorParent());
 		addField(showConsoleViewOnBuildFailed);

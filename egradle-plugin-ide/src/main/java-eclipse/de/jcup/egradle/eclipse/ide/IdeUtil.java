@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -56,12 +57,10 @@ import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 
 public class IdeUtil {
-	
+
 	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
-
-
 
 	private static VirtualProjectCreator virtualProjectCreator = new VirtualProjectCreator();
 
@@ -75,7 +74,7 @@ public class IdeUtil {
 		}
 		return systemConsoleOutputHandler;
 	}
-	
+
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -97,7 +96,7 @@ public class IdeUtil {
 	public static Image getImage(String path) {
 		return EclipseUtil.getImage(path, IDEActivator.PLUGIN_ID);
 	}
-	
+
 	/**
 	 * Open system console
 	 * 
@@ -122,14 +121,14 @@ public class IdeUtil {
 					}
 
 				} catch (PartInitException e) {
-					EclipseUtil.log(e);
+					logError("Was not able to show system console", e);
 				}
 			}
 
 		});
 
 	}
-	
+
 	/**
 	 * Does output on {@link EGradleSystemConsole} instance - asynchronous
 	 * inside SWT thread
@@ -147,7 +146,7 @@ public class IdeUtil {
 
 		});
 	}
-	
+
 	public static void refreshAllProjectDecorations() {
 		getSafeDisplay().asyncExec(new Runnable() {
 
@@ -170,7 +169,7 @@ public class IdeUtil {
 						try {
 							createOrRecreateVirtualRootProject();
 						} catch (VirtualRootProjectException e) {
-							log(e);
+							logError("Cannot (re)create virtual root project",e);
 						}
 						break;
 					}
@@ -211,7 +210,7 @@ public class IdeUtil {
 				automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
 
 			} catch (CoreException e) {
-				log(e);
+				logError("Was not able to refresh all projects", e);
 				outputToSystemConsole(Constants.CONSOLE_FAILED + " to refresh project " + project.getName());
 			}
 		}
@@ -284,22 +283,39 @@ public class IdeUtil {
 		try {
 			buildScriptProblemMarkerHelper.removeAllRegisteredMarkers();
 		} catch (CoreException e) {
-			log(e);
+			logError("Was not able to remove all valdiation errors of console output", e);
 		}
 	}
-	
+
+	/**
+	 * Shows console view
+	 */
+	public static void showConsoleView() {
+		IWorkbenchPage activePage = getActivePage();
+		if (activePage != null) {
+			try {
+				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
+			} catch (PartInitException e) {
+				logWarning("Was not able to show console");
+			}
+
+		}
+	}
+
 	/**
 	 * Returns preferences for IDE
+	 * 
 	 * @return preferences
 	 */
-	public static EGradleIdePreferences getPreferences(){
+	public static EGradleIdePreferences getPreferences() {
 		return EGradleIdePreferences.getInstance();
 	}
-	
+
 	/**
 	 * Set new root project folder by given file
+	 * 
 	 * @param folder
-	 * @throws CoreException 
+	 * @throws CoreException
 	 * @throws IllegalArgumentException
 	 *             when folder is not a directory or is <code>null</code>
 	 */
@@ -321,12 +337,12 @@ public class IdeUtil {
 			throwCoreException("Cannot create virtual root project!", e);
 		}
 	}
-	
+
 	public static boolean existsValidationErrors() {
 		/* Not very smart integrated, because static but it works... */
 		return buildScriptProblemMarkerHelper.hasRegisteredMarkers();
 	}
-	
+
 	/**
 	 * If given list of console output contains error messages error markers for
 	 * files will be created
@@ -352,7 +368,7 @@ public class IdeUtil {
 					 * actions does check this normally before. as a fallback
 					 * simply do nothing
 					 */
-					EclipseUtil.logInfo("Was not able to validate, because no root folder set!");
+					logInfo("Was not able to validate, because no root folder set!");
 					return;
 				}
 				String rootFolderPath = rootFolder.getAbsolutePath();
@@ -384,7 +400,7 @@ public class IdeUtil {
 				buildScriptProblemMarkerHelper.createErrorMarker(resource, result.getErrorMessage(), result.getLine());
 
 			} catch (Exception e) {
-				log(e);
+				logError("Was not able to show validation errors", e);
 			}
 		}
 		return;
@@ -458,7 +474,7 @@ public class IdeUtil {
 		}
 		return rootProject.getFolder();
 	}
-	
+
 	/**
 	 * If a virtual root project exists, it will be returned, otherwise
 	 * <code>null</code>
@@ -474,7 +490,7 @@ public class IdeUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns true when given project has virtual root project nature
 	 * 
@@ -495,7 +511,7 @@ public class IdeUtil {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Returns true when given project is configured as root project
 	 * 
@@ -556,7 +572,7 @@ public class IdeUtil {
 		}
 		return true;
 	}
-	
+
 	public static EGradleMessageDialogSupport getDialogSupport() {
 		return EGradleMessageDialogSupport.INSTANCE;
 	}
@@ -591,7 +607,7 @@ public class IdeUtil {
 					return Status.OK_STATUS;
 				} catch (VirtualRootProjectException e) {
 					getDialogSupport().showError(e.getMessage());
-					EclipseUtil.log(e);
+					logError("Was not able to update virtual root project", e);
 					return Status.CANCEL_STATUS;
 				}
 			}
@@ -600,4 +616,23 @@ public class IdeUtil {
 								// old parts
 
 	}
+
+	public static void logInfo(String info) {
+		getLog().log(new Status(IStatus.INFO, IDEActivator.PLUGIN_ID, info));
+	}
+
+	public static void logWarning(String warning) {
+		getLog().log(new Status(IStatus.WARNING, IDEActivator.PLUGIN_ID, warning));
+	}
+
+	public static void logError(String error, Throwable t) {
+		getLog().log(new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, error, t));
+	}
+
+	private static ILog getLog() {
+		ILog log = IDEActivator.getDefault().getLog();
+		return log;
+	}
+
+
 }

@@ -91,7 +91,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			IdeUtil.logError("Was not able to decorate sub project:"+p, e);
 		}
 
 	}

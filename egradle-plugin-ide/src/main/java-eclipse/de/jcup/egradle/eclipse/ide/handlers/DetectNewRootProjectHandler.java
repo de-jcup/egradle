@@ -30,7 +30,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.jcup.egradle.core.GradleRootProjectParentScanner;
 import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
@@ -75,7 +74,7 @@ public class DetectNewRootProjectHandler extends AbstractHandler {
 		try {
 			start = EclipseResourceHelper.DEFAULT.toFile(project);
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			IdeUtil.logError("Was not able to convert to file - project:"+project, e);
 			EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project conversion problems");
 			return null;
 		}
@@ -95,7 +94,7 @@ public class DetectNewRootProjectHandler extends AbstractHandler {
 		try {
 			IdeUtil.setNewRootProjectFolder(newRootFolder);
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			IdeUtil.logError("Was not able to set new root project folder:"+newRootFolder, e);
 			EGradleMessageDialogSupport.INSTANCE.showError(e.getMessage());
 			return null;
 		}

@@ -30,7 +30,7 @@ import org.eclipse.jdt.core.search.TypeNameMatch;
 import org.eclipse.jdt.core.search.TypeNameMatchRequestor;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 
 public class JDTDataAccess {
 
@@ -61,7 +61,7 @@ public class JDTDataAccess {
 					SearchEngine.createWorkspaceScope(), nameMatchRequestor,
 					IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, monitor);
 		} catch (JavaModelException e) {
-			EclipseUtil.log(e);
+			EditorUtil.logError("Was not able to search all type names",e);
 		}
 		return result[0];
 	}
@@ -134,8 +134,7 @@ public class JDTDataAccess {
 			engine.searchAllTypeNames(qualifications, typeNames, scope, nameRequestor, policiy, progressMonitor);
 
 		} catch (JavaModelException e) {
-			EclipseUtil.log(e);
-			;
+			EditorUtil.logError("Was not able to search all type names",e);
 		}
 		return foundList;
 

@@ -38,7 +38,7 @@ public class JunitContributionUtil {
 				page.showView(ECLIPSE_JDT_JUNIT_RESULT_VIEW, null, IWorkbenchPage.VIEW_VISIBLE);
 			} 
 		} catch (PartInitException pie) {
-			EclipseUtil.log(pie);
+			JunitUtil.logError("Was not able to show junit view", pie);
 		}
 	}
 }

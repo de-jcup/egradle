@@ -34,9 +34,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 import de.jcup.egradle.eclipse.JavaHelper;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchShortCut;
 import de.jcup.egradle.eclipse.junit.contribution.JunitIntegrationConstants;
+import de.jcup.egradle.eclipse.junit.contribution.JunitUtil;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
@@ -78,7 +78,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 					}
 				}
 			} catch (JavaModelException e) {
-				EclipseUtil.log(e);
+				JunitUtil.logError("Was not able to get full class name",e);
 				return;
 			}
 		} else if (javaElement instanceof IType) {

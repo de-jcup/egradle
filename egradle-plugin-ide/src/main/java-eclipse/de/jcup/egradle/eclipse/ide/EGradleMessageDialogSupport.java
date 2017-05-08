@@ -61,7 +61,7 @@ public class EGradleMessageDialogSupport {
 			public void run() {
 				
 				if (IdeUtil.getPreferences().isShowingConsoleOnBuildFailed()){
-					EclipseUtil.showConsoleView();
+					IdeUtil.showConsoleView();
 				}
 			
 				String text = detail;

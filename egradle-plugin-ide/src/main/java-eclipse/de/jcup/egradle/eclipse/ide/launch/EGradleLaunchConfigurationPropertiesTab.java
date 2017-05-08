@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
@@ -59,8 +57,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
-import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ui.MultipleInputDialog;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
@@ -99,8 +95,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 			try {
 				m = config.getAttribute(launchConfigurationPropertyMapAttributeName, (Map<String, String>) null);
 			} catch (CoreException e) {
-				EclipseUtil.log(new Status(IStatus.ERROR, IDEActivator.PLUGIN_ID, IStatus.ERROR,
-						"Error reading configuration", e)); 
+				IdeUtil.logError("Error reading configuration", e); 
 				return elements;
 			}
 			if (m != null && !m.isEmpty()) {

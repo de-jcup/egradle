@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradleImporterPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -50,7 +49,7 @@ public class EGradleImporterPreferencePage extends FieldEditorPreferencePage imp
 		groupLayoutData.horizontalSpan = 3;
 
 		executeAssembleTask = new BooleanFieldEditor(
-				EGradlePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(),
+				EGradleIdePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(),
 				"Execute assemble task", getFieldEditorParent());
 		String executeAssembleTaskInfo = "(main build folders and generated resources will exist after import)";
 
@@ -58,7 +57,7 @@ public class EGradleImporterPreferencePage extends FieldEditorPreferencePage imp
 		SWTFactory.createLabel(getFieldEditorParent(), executeAssembleTaskInfo, 2);
 
 		/* clean eclipse projects */
-		cleanEclipseProjects = new BooleanFieldEditor(EGradlePreferenceConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId(),
+		cleanEclipseProjects = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId(),
 				"Clean eclipse projects", getFieldEditorParent());
 		String cleanEclipseProjectsInfo = "(after import 'clean all projects' is executed inside eclipse )";
 

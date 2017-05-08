@@ -74,7 +74,7 @@ abstract class AbstractQuickDialog extends PopupDialog {
 					display.sleep();
 				}
 			} catch (Throwable e) {
-				EclipseUtil.log(e);
+				EclipseUtil.logError("UI problems on dispatch",e);
 			}
 		}
 		if (!display.isDisposed()) {

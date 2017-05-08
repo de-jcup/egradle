@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.ui;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
+import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -175,7 +175,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 					/* use own progress monitor dialog here - progress service did not work well because this is in model state */
 					progressMonitorDialog.run(true, true, runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
-					EclipseUtil.log(e1);
+					IdeUtil.logError("Was not able to execute validation", e1);
 				}
 			}
 		});

@@ -15,12 +15,13 @@
  */
 package de.jcup.egradle.eclipse.ide.preferences;
 
-import static de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants.*;
+import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
+import de.jcup.egradle.core.migration.MigrationState;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 /**
@@ -51,6 +52,7 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 		store.setDefault(P_GRADLE_INSTALL_BIN_FOLDER.getId(), defaultCallType.getDefaultGradleBinFolder());
 		store.setDefault(P_GRADLE_CALL_COMMAND.getId(), defaultCallType.getDefaultGradleCommand());
 		
+		store.setDefault(P_MIGRATE_IDE_STATE.getId(), MigrationState.NOT_MIGRATED.name());
 	}
 	
 

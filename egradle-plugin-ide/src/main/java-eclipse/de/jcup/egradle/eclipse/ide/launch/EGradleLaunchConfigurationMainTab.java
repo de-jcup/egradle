@@ -44,7 +44,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 
@@ -164,7 +163,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 					// Open default external browser
 					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
 				} catch (Exception ex) {
-					EclipseUtil.log(ex);
+					IdeUtil.logError("Was not able to open url in external browser", ex);
 				}
 			}
 		});

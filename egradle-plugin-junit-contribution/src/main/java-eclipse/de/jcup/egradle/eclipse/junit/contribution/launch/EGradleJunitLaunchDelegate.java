@@ -22,10 +22,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchDelegate;
 import de.jcup.egradle.eclipse.ide.launch.LaunchParameterValues;
 import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
+import de.jcup.egradle.eclipse.junit.contribution.JunitUtil;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
@@ -50,7 +50,7 @@ public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate{
 			launchParameterValues.setPostJob(new ImportGradleJunitResultsJob("Import gradle junit results",projectName,true));
 			launchParameterValues.setOverriddenTasks(tasksToExecute);
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			JunitUtil.logError("Was not able to add additional launch parameters", e);
 		}
 	}
 	

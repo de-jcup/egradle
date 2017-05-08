@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.ide.IdeUtil;
-import de.jcup.egradle.eclipse.preferences.EGradlePreferenceConstants;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -50,7 +49,7 @@ public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage
 		groupLayoutData.horizontalSpan = 3;
 
 		automaticalDeriveBuildFolders=		new BooleanFieldEditor(
-					EGradlePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(),
+					EGradleIdePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(),
 					"Automatically derive build folders",
 					getFieldEditorParent());
 		String info = "(Importer and 'refresh eclipse' action will automatically derive build folders)";

@@ -25,11 +25,11 @@ import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
@@ -40,9 +40,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.console.IConsoleConstants;
 import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.api.FileHelper;
@@ -59,7 +57,6 @@ public class EclipseUtil {
 		return imageDesc;
 	}
 
-	
 	public static IEditorPart getActiveEditor() {
 		IWorkbenchPage page = getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
@@ -151,8 +148,7 @@ public class EclipseUtil {
 		}
 		return image;
 	}
-	
-	
+
 	public static EclipseResourceHelper getResourceHelper() {
 		return EclipseResourceHelper.DEFAULT;
 	}
@@ -185,42 +181,6 @@ public class EclipseUtil {
 		return description.isAutoBuilding();
 	}
 
-	public static void log(IStatus status) {
-		MainActivator.getDefault().getLog().log(status);
-	}
-
-	public static void log(String message, Throwable t) {
-
-		if (t instanceof CoreException) {
-			Throwable cause = getRootCause(t);
-			message = resolveMessageIfNotSet(message, cause);
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, t.getMessage(), cause));
-		} else {
-			message = resolveMessageIfNotSet(message, t);
-			log(new Status(IStatus.ERROR, getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, message, t));
-		}
-
-	}
-
-	public static void log(Throwable t) {
-		log(null, t);
-	}
-
-	public static void logInfo(String message) {
-		log(new Status(IStatus.INFO, MainActivator.PLUGIN_ID, message));
-	}
-
-	
-
-	
-
-
-	public static void logWarning(String message) {
-		log(new Status(IStatus.WARNING, MainActivator.PLUGIN_ID, message));
-	}
-
-	
-
 	public static void safeAsyncExec(Runnable runnable) {
 		getSafeDisplay().asyncExec(runnable);
 	}
@@ -230,21 +190,6 @@ public class EclipseUtil {
 		IWorkspaceDescription description = workspace.getDescription();
 		description.setAutoBuilding(flag);
 		workspace.setDescription(description);
-	}
-
-	/**
-	 * Shows console view
-	 */
-	public static void showConsoleView() {
-		IWorkbenchPage activePage = getActivePage();
-		if (activePage != null) {
-			try {
-				activePage.showView(IConsoleConstants.ID_CONSOLE_VIEW);
-			} catch (PartInitException e) {
-				logWarning("Was not able to show console");
-			}
-
-		}
 	}
 
 	public static void throwCoreException(String message) throws CoreException {
@@ -264,8 +209,8 @@ public class EclipseUtil {
 		}
 		return mainActivator.getImageRegistry();
 	}
-	
-	private static Throwable getRootCause(Throwable t) {
+
+	public static Throwable getRootCause(Throwable t) {
 		if (t == null) {
 			return null;
 		}
@@ -337,16 +282,26 @@ public class EclipseUtil {
 		return message;
 	}
 
-	private static class WorkbenchWindowRunnable implements Runnable{
+	private static class WorkbenchWindowRunnable implements Runnable {
 		IWorkbenchWindow workbenchWindowFromUI;
+
 		@Override
 		public void run() {
 			IWorkbench workbench = getWorkbench();
 			if (workbench == null) {
 				return;
 			}
-			workbenchWindowFromUI=workbench.getActiveWorkbenchWindow();
+			workbenchWindowFromUI = workbench.getActiveWorkbenchWindow();
 		}
-		
+
+	}
+
+	public static void logError(String error, Throwable t) {
+		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, error, t));
+	}
+
+	private static ILog getLog() {
+		ILog log = MainActivator.getDefault().getLog();
+		return log;
 	}
 }

@@ -12,6 +12,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.ide.migration.EGradle1_3ToEGradle2_0Migration;
 import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
 
 /**
@@ -21,7 +22,7 @@ public class IDEActivator extends AbstractUIPlugin {
 	private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.ide.plugin.ide"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.ide"; //$NON-NLS-1$
 
 	// The shared instance
 	private static IDEActivator plugin;
@@ -33,6 +34,14 @@ public class IDEActivator extends AbstractUIPlugin {
 		plugin = this;
 		
 		BuildVariablesProviderRegistry.setProvider(new EGradleBuildVariableProvider());
+	
+		startMigrationsWhereNecessary();
+	}
+
+	private void startMigrationsWhereNecessary() {
+	   /* Keep ordering here */
+	   new EGradle1_3ToEGradle2_0Migration().migrate();
+		
 	}
 
 	public void stop(BundleContext context) throws Exception {

@@ -50,6 +50,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.ide.IdeUtil;
 /**
  * Short cut launcher for EGradle
  * 
@@ -320,7 +321,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 				}
 			}
 		} catch (CoreException e) {
-			EclipseUtil.log(e);
+			IdeUtil.logError("Was not able to get launch candidates", e);
 		}
 		return candidateConfigs;
 	}

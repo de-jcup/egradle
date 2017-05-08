@@ -23,8 +23,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchShortCut;
-import de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants;
 
 public class EGradleLaunchShortCutTest {
 

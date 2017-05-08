@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.api;
+ package de.jcup.egradle.eclipse.gradleeditor;
 
 import de.jcup.egradle.core.api.ErrorHandler;
 
@@ -27,12 +27,12 @@ public class EGradleErrorHandler implements ErrorHandler{
 	
 	@Override
 	public void handleError(String message, Throwable t) {
-		EclipseUtil.log(message, t);
+		EditorUtil.logError(message, t);
 	}
 
 	@Override
 	public void handleError(String message) {
-		EclipseUtil.log(message, null);		
+		EditorUtil.logError(message, null);		
 	}
 
 }
