@@ -19,6 +19,14 @@
      </keyword>
    </extension>
    
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="EGradle"
+            id="egradle.commands.category"
+            name="EGradle">
+      </category>
+   </extension>
    
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          HELP                                         -->
@@ -51,13 +59,5 @@
          	</keywordReference>
       </page>
    </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="de.jcup.egradle.eclipse.preferences.EGradlePreferenceInitializer">
-      </initializer>
-   </extension>
-	
-   	
 	
 </plugin>

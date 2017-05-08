@@ -113,11 +113,6 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.commands">
-      <category
-            description="EGradle"
-            id="egradle.commands.category"
-            name="EGradle">
-      </category>
       <command
             name="Refresh all eclipse dependencies"
             categoryId="egradle.commands.category"

@@ -254,10 +254,6 @@ public class EclipseUtil {
 		return egradleTempFolder;
 	}
 
-	private static String getUniqueIdentifier() {
-		return "EGradle";
-	}
-
 	/**
 	 * Returns workbench or <code>null</code>
 	 * 
@@ -271,7 +267,7 @@ public class EclipseUtil {
 		return workbench;
 	}
 
-	private static String resolveMessageIfNotSet(String message, Throwable cause) {
+	public static String resolveMessageIfNotSet(String message, Throwable cause) {
 		if (message == null) {
 			if (cause == null) {
 				message = "Unknown";
