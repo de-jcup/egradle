@@ -26,7 +26,7 @@ public enum EGradleIdePreferenceConstants {
 	P_GRADLE_SHELL("commandShell"),
 	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
 	P_GRADLE_CALL_COMMAND("commandGradle"),
-	P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
+	P_OUTPUT_VALIDATION_ENABLED("outputValidationEnabled"),
 	P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 	
 	/* file handling parts*/
@@ -36,7 +36,7 @@ public enum EGradleIdePreferenceConstants {
 	P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
 	P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
 	
-	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
+	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled");
 
 	private String id;
 

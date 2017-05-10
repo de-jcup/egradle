@@ -23,8 +23,9 @@ import de.jcup.egradle.eclipse.MainActivator;
 
 /**
  * This class is only a workaround to migrate old settings from main plugin to
- * IDE plugin! Should be removed when migrations no longer needed (means multiple 2.x deployments happend so its clear
- * the main plugin parts are no longer needed)
+ * IDE plugin! Should be removed when migrations no longer needed (means
+ * multiple 2.x deployments happend so its clear the main plugin parts are no
+ * longer needed)
  * 
  * @author Albert Tregnaghi
  *
@@ -35,16 +36,25 @@ public class EGradleOldMainPreferenceProvider {
 
 		P_JAVA_HOME_PATH("pathJavaHome"),
 
-		P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER(
-				"pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"), P_OUTPUT_VALIDATION_ENABLED(
-						"validatEnabled"), P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
+		P_GRADLE_CALL_TYPE("gradleCallType"),
+
+		P_GRADLE_SHELL("commandShell"),
+
+		P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
+
+		P_GRADLE_CALL_COMMAND("commandGradle"),
+
+		P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
+
+		P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 
 		/* file handling parts */
 		P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
 
 		/* import */
-		P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), P_IMPORT__DO_CLEAN_PROJECTS(
-				"onImportDoCleanProjects"),
+		P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
+
+		P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
 
 		P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
 
@@ -89,15 +99,27 @@ public class EGradleOldMainPreferenceProvider {
 		return showConsoleOnBuildFailed;
 	}
 
+	public boolean hasValueForShowingConsoleOnBuildFailed() {
+		return hasValue(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED);
+	}
+	
 	public boolean isOutputValidationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(OldConstants.P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
+	}
+	
+	public boolean hasValueForOutputValidationEnabled() {
+		return hasValue(OldConstants.P_OUTPUT_VALIDATION_ENABLED);
 	}
 
 	public boolean isCleanProjectsOnImportEnabled() {
 		boolean cleanProjectsEnabled = getPreferenceStore()
 				.getBoolean(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId());
 		return cleanProjectsEnabled;
+	}
+	
+	public boolean hasValueForCleanProjectsOnImportEnabled() {
+		return hasValue(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS);
 	}
 
 	public boolean isExecuteAssembleTaskOnImportEnabled() {
@@ -106,10 +128,18 @@ public class EGradleOldMainPreferenceProvider {
 		return executeAssembleTaskEnabled;
 	}
 
+	public boolean hasValueForExecuteAssembleTaskOnImportEnabled() {
+		return hasValue(OldConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK);
+	}
+
 	public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
 		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore()
 				.getBoolean(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
 		return automaticallyDeriveBuildFoldersEnabled;
+	}
+	
+	public boolean hasValueForAutomaticallyDeriveBuildFoldersEnabled() {
+		return hasValue(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS);
 	}
 
 	public boolean isSubProjectIconDecorationEnabled() {
@@ -118,6 +148,10 @@ public class EGradleOldMainPreferenceProvider {
 		return validationEnabled;
 	}
 
+	public boolean hasValueForSubProjectIconDecorationEnabled() {
+		return hasValue(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED);
+	}
+	
 	public String getGlobalJavaHomePath() {
 		return getStringPreference(OldConstants.P_JAVA_HOME_PATH);
 	}
@@ -140,6 +174,12 @@ public class EGradleOldMainPreferenceProvider {
 
 	public String getRootProjectPath() {
 		return getStringPreference(OldConstants.P_ROOTPROJECT_PATH);
+	}
+
+	
+	private boolean hasValue(OldConstants constant){
+		return getPreferenceStore().contains(constant.getId());
+		
 	}
 
 }
