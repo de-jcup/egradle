@@ -37,11 +37,11 @@ import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEst
 import de.jcup.egradle.codeassist.hover.HoverData;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.eclipse.api.ColorUtil;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
+import de.jcup.egradle.eclipse.util.ColorUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
 

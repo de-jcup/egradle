@@ -16,7 +16,7 @@
  package de.jcup.egradle.core.model.groovyantlr;
 
 import antlr.collections.AST;
-import de.jcup.egradle.core.api.Filter;
+import de.jcup.egradle.core.util.Filter;
 
 class GroovyTokenTypefilter implements Filter{
 

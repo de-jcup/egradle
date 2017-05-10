@@ -26,8 +26,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 
-import de.jcup.egradle.core.api.Filter;
-import de.jcup.egradle.core.api.MultiFilter;
 import de.jcup.egradle.core.model.BuildContext;
 import de.jcup.egradle.core.model.Error;
 import de.jcup.egradle.core.model.Item;
@@ -37,6 +35,8 @@ import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelFilters;
 import de.jcup.egradle.core.model.groovyantlr.GroovyASTModelBuilder;
+import de.jcup.egradle.core.util.Filter;
+import de.jcup.egradle.core.util.MultiFilter;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;

@@ -24,9 +24,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAdapter;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
+import de.jcup.egradle.eclipse.util.ColorManager;
 
 public class RootProjectConfigUIDelegateTestMain {
 

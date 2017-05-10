@@ -28,11 +28,11 @@ import org.eclipse.swt.graphics.TextStyle;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Modifier;
-import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditorColorConstants;
+import de.jcup.egradle.eclipse.util.ColorManager;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		implements IStyledLabelProvider, IColorProvider {

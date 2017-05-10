@@ -59,14 +59,14 @@ import de.jcup.egradle.core.TextProvider;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 import de.jcup.egradle.core.model.Model;
-import de.jcup.egradle.eclipse.api.DocumentTextProvider;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
+import de.jcup.egradle.eclipse.util.DocumentTextProvider;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
 	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];

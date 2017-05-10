@@ -26,11 +26,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemTextMatcher;
 import de.jcup.egradle.core.text.FilterPatternMatcher;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.ui.AbstractFilterableTreeQuickDialog;
 import de.jcup.egradle.eclipse.ui.AbstractTreeViewerFilter;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 
 /**
  * This dialog is inspired by: <a href=

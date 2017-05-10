@@ -24,9 +24,9 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.junit.contribution.JUnitActivator;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
 

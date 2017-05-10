@@ -19,7 +19,7 @@ import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
-import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.util.ColorManager;
 
 
 public class GradleDefaultTextScanner extends RuleBasedScanner {

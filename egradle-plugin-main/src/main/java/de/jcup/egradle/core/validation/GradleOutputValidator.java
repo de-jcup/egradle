@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
-import de.jcup.egradle.core.api.FormatConverter;
+import de.jcup.egradle.core.util.FormatConverter;
 
 public class GradleOutputValidator {
 	private static final String COLUMN_IDENTIFIER = ", column";

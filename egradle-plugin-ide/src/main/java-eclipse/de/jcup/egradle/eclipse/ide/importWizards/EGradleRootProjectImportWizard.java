@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.ide.importWizards;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -49,7 +49,6 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
@@ -58,6 +57,7 @@ import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 
 	private static ImageDescriptor desc = EclipseUtil

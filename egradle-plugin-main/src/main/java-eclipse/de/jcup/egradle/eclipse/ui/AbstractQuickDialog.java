@@ -19,7 +19,7 @@ import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
  * Abstract implementation for quick dialogs. Clicking out of quick dialog will close the dialog

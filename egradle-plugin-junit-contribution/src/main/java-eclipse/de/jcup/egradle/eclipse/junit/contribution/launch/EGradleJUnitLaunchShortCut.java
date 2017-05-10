@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution.launch;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;

@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.ide.virtualroot;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
@@ -42,9 +42,9 @@ import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
-import de.jcup.egradle.eclipse.api.ProjectDescriptionCreator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
+import de.jcup.egradle.eclipse.util.ProjectDescriptionCreator;
 
 public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreator {
 	private IProject newProject;

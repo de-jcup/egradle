@@ -26,11 +26,11 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
-import de.jcup.egradle.eclipse.api.ColorUtil;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
-import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
+import de.jcup.egradle.eclipse.util.ColorUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
+import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
 public class GradleEditorPreferences {
 

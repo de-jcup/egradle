@@ -18,14 +18,14 @@ package de.jcup.egradle.eclipse.ide.execution.validation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
-import de.jcup.egradle.core.api.GradleConfigurationValidator;
-import de.jcup.egradle.core.api.ValidationException;
 import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.core.util.GradleConfigurationValidator;
+import de.jcup.egradle.core.util.ValidationException;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class RootProjectValidationProgressRunnable implements IRunnableWithProgress {
 	private GradleConfigurationValidator validator;

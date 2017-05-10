@@ -34,10 +34,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
 import de.jcup.egradle.sdk.SDKManager;

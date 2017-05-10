@@ -27,7 +27,7 @@ import de.jcup.egradle.codeassist.CodeCompletionService;
 import de.jcup.egradle.codeassist.dsl.DSLFileLoader;
 import de.jcup.egradle.codeassist.dsl.Plugin;
 import de.jcup.egradle.codeassist.dsl.PluginMerger;
-import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 public class GradleDSLPluginLoader implements CodeCompletionService, RegistryListener {
 

@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor;
 
-import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 public class EGradleErrorHandler implements ErrorHandler{
 

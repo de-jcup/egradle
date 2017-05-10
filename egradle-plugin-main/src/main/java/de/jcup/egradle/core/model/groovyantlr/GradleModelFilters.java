@@ -17,7 +17,7 @@
 
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 
-import de.jcup.egradle.core.api.Filter;
+import de.jcup.egradle.core.util.Filter;
 
 public class GradleModelFilters {
 

@@ -1,6 +1,6 @@
 package de.jcup.egradle.eclipse.ide;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +45,6 @@ import de.jcup.egradle.core.validation.GradleOutputValidator;
 import de.jcup.egradle.core.validation.ValidationResult;
 import de.jcup.egradle.core.virtualroot.VirtualProjectCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsole;
 import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleProcessOutputHandler;
@@ -55,6 +54,7 @@ import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class IdeUtil {
 

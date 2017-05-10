@@ -37,13 +37,13 @@ import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider.ModelType;
 import de.jcup.egradle.eclipse.ui.FallbackOutlineContentProvider;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 public class GradleEditorContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 	
 	private static ImageDescriptor IMG_DESC_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/synced.png",EditorActivator.PLUGIN_ID);

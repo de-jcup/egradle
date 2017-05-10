@@ -21,5 +21,5 @@ Require-Bundle: org.eclipse.ui,
  de.jcup.egradle.eclipse.plugin.sdk;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Import-Package: de.jcup.egradle.eclipse.api,
+Import-Package: de.jcup.egradle.eclipse.util,
  org.eclipse.ui

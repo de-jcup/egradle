@@ -50,10 +50,10 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
-import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.GradleDefaultTextScanner;
 import de.jcup.egradle.eclipse.gradleeditor.presentation.PresentationSupport;
+import de.jcup.egradle.eclipse.util.ColorManager;
 /**
  * 
  * @author Albert Tregnaghi

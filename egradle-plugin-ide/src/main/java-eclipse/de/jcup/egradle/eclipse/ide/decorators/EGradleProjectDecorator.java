@@ -29,9 +29,9 @@ import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
  * Dedicated decorator for projects only. Will only decorate subprojects inside

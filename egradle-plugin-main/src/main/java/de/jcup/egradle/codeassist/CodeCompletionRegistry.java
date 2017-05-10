@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 public class CodeCompletionRegistry {
 

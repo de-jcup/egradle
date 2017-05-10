@@ -29,9 +29,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.jcup.egradle.core.GradleRootProjectParentScanner;
-import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
 
 /**
  * Detects new root project

@@ -41,8 +41,6 @@ import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
-import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationHandler;
@@ -51,6 +49,8 @@ import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationPro
 import de.jcup.egradle.eclipse.preferences.ChangeableComboFieldEditor;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
+import de.jcup.egradle.eclipse.util.ColorManager;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class RootProjectConfigUIDelegate implements RootProjectValidationObserver, IPropertyChangeListener {
 

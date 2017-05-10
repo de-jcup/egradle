@@ -15,8 +15,8 @@
  */
  package de.jcup.egradle.core.config;
 
-import de.jcup.egradle.core.api.FileHelper;
 import de.jcup.egradle.core.process.EGradleShellType;
+import de.jcup.egradle.core.util.FileHelper;
 
 public class MutableGradleConfiguration implements GradleConfiguration{
 	

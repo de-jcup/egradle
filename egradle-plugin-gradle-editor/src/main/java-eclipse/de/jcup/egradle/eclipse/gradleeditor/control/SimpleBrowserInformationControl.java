@@ -40,11 +40,11 @@ import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.core.api.History;
-import de.jcup.egradle.core.api.StringUtilsAccess;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.core.util.History;
+import de.jcup.egradle.core.util.StringUtilsAccess;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
  * EGradles own simple browser information control, inspired by

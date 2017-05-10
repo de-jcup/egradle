@@ -20,7 +20,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.ColorManager;
+import de.jcup.egradle.eclipse.util.ColorManager;
 
 public class QuickOutlineDialogTestMain {
 

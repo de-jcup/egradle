@@ -11,9 +11,9 @@ import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.jcup.egradle.eclipse.api.ColorManager;
 import de.jcup.egradle.eclipse.ide.migration.EGradle1_3ToEGradle2_0Migration;
 import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
+import de.jcup.egradle.eclipse.util.ColorManager;
 
 /**
  * The activator class controls the plug-in life cycle

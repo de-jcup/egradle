@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 /**
  * The plugin merger integrates plugin meta information into types provided by

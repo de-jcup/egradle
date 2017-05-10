@@ -44,8 +44,8 @@ import org.eclipse.ui.dialogs.SelectionDialog;
 import org.eclipse.ui.ide.IDE;
 
 import de.jcup.egradle.core.text.JavaImportFinder;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleResourceHyperlink implements IHyperlink {
 

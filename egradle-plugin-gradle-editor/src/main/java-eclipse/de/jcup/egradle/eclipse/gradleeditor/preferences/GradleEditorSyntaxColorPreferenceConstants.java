@@ -17,8 +17,8 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
 import org.eclipse.swt.graphics.RGB;
 
-import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
-import de.jcup.egradle.eclipse.api.PreferenceLabeled;
+import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
+import de.jcup.egradle.eclipse.util.PreferenceLabeled;
 
 /**
  * Constant definitions for plug-in preferences

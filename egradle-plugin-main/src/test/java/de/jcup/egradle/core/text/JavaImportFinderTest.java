@@ -116,7 +116,7 @@ public class JavaImportFinderTest {
 		sb.append("import org.eclipse.ui.dialogs.SelectionDialog;\n");//12
 		sb.append("import org.eclipse.ui.ide.IDE;\n");//13
 		sb.append("\n");
-		sb.append("import de.jcup.egradle.eclipse.api.EGradleUtil;\n");//14
+		sb.append("import de.jcup.egradle.eclipse.util.EGradleUtil;\n");//14
 		sb.append("import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;\n"); // 15. import
 		sb.append("\n");
 		sb.append(";public class GradleResourceHyperlink implements IHyperlink {\n");

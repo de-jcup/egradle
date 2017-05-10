@@ -15,8 +15,8 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
 import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,8 +35,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.w3c.dom.Document;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.core.api.XMLWriter;
-import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
+import de.jcup.egradle.core.util.XMLWriter;
+import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 import de.jcup.egradle.junit.JUnitResultFilesFinder;
 import de.jcup.egradle.junit.JUnitResultsCompressor;
 

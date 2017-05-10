@@ -15,14 +15,14 @@
  */
 package de.jcup.egradle.eclipse.ide;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ui.BuildFailedDialog;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class EGradleMessageDialogSupport {
 

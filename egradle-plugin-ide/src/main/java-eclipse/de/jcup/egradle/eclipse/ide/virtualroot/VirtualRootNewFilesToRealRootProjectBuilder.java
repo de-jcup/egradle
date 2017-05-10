@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.ide.virtualroot;
 
-import static de.jcup.egradle.eclipse.api.EclipseUtil.*;
+import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,8 +35,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
  * Special project builder to support new files added on virtual root inside

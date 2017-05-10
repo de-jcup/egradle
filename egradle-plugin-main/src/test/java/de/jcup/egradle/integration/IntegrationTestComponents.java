@@ -43,10 +43,10 @@ import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.ModelProvider;
 import de.jcup.egradle.core.TestUtil;
 import de.jcup.egradle.core.TextProvider;
-import de.jcup.egradle.core.api.ErrorHandler;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 /**
  * IntegrationTestComponents is the central point for integration tests

@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.core.text;
 
-import de.jcup.egradle.core.api.Matcher;
+import de.jcup.egradle.core.util.Matcher;
 
 public interface FilterPatternMatcher<T> extends Matcher<T>{
 

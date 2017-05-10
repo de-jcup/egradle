@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.jcup.egradle.core.GradleExecutor;
 import de.jcup.egradle.core.ProcessExecutionResult;
-import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleRootProject;
@@ -36,6 +35,7 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
+import de.jcup.egradle.core.util.GradleContextPreparator;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;

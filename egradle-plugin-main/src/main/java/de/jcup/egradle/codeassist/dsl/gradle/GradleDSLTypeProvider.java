@@ -40,7 +40,7 @@ import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
-import de.jcup.egradle.core.api.ErrorHandler;
+import de.jcup.egradle.core.util.ErrorHandler;
 
 public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,CodeCompletionService {
 

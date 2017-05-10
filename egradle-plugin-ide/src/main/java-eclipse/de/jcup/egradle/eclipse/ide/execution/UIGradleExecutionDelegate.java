@@ -20,11 +20,11 @@ import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import de.jcup.egradle.core.api.GradleContextPreparator;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.core.util.GradleContextPreparator;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 

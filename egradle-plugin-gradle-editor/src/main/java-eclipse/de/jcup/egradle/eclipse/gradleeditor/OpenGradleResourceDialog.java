@@ -51,7 +51,7 @@ import org.eclipse.ui.actions.OpenFileAction;
 import org.eclipse.ui.actions.OpenWithMenu;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
 
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 

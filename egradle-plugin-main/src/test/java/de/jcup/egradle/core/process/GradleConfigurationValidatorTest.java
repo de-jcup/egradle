@@ -28,9 +28,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.api.GradleConfigurationValidator;
-import de.jcup.egradle.core.api.ValidationException;
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.util.GradleConfigurationValidator;
+import de.jcup.egradle.core.util.ValidationException;
 
 public class GradleConfigurationValidatorTest {
 

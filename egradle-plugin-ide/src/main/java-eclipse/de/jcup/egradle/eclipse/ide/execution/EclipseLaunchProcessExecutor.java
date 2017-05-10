@@ -29,16 +29,16 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 
-import de.jcup.egradle.core.api.BuildInfo;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessConfiguration;
 import de.jcup.egradle.core.process.ProcessContext;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
+import de.jcup.egradle.core.util.BuildInfo;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ide.launch.EGradleRuntimeProcess;
+import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	private ILaunch launch;

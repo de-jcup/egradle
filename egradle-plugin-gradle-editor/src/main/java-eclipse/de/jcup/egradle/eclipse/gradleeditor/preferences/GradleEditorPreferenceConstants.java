@@ -1,6 +1,6 @@
 package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
-import de.jcup.egradle.eclipse.api.PreferenceIdentifiable;
+import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
 /*
  * Copyright 2016 Albert Tregnaghi

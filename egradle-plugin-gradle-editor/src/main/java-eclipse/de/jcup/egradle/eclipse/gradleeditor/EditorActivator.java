@@ -30,9 +30,9 @@ import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLPluginLoader;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.core.api.ErrorHandler;
-import de.jcup.egradle.eclipse.api.ColorManager;
-import de.jcup.egradle.eclipse.api.EclipseDevelopmentSettings;
+import de.jcup.egradle.core.util.ErrorHandler;
+import de.jcup.egradle.eclipse.util.ColorManager;
+import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKManager;
 

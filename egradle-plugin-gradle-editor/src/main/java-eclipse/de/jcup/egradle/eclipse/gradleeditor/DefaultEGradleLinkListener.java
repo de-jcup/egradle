@@ -23,8 +23,8 @@ import de.jcup.egradle.codeassist.dsl.MethodUtils;
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
-import de.jcup.egradle.core.api.LinkToTypeConverter;
-import de.jcup.egradle.core.api.LinkToTypeConverter.LinkData;
+import de.jcup.egradle.core.util.LinkToTypeConverter;
+import de.jcup.egradle.core.util.LinkToTypeConverter.LinkData;
 import de.jcup.egradle.eclipse.gradleeditor.control.BrowserEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 

@@ -37,12 +37,12 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.OutputHandler;
-import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ide.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.launch.LaunchParameterValues;
+import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 
 /**
  * This handler is only for launching. So complete mechanism is same as on

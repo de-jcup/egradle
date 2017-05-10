@@ -20,7 +20,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.eclipse.MainActivator;
-import de.jcup.egradle.eclipse.api.EclipseUtil;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 

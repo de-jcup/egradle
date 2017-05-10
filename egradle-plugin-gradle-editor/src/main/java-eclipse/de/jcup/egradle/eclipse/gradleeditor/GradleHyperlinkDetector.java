@@ -31,11 +31,11 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
-import de.jcup.egradle.core.api.GradleFileLinkCalculator;
-import de.jcup.egradle.core.api.GradleHyperLinkResult;
-import de.jcup.egradle.core.api.GradleResourceLinkCalculator;
-import de.jcup.egradle.core.api.GradleStringTransformer;
-import de.jcup.egradle.eclipse.api.EclipseResourceHelper;
+import de.jcup.egradle.core.util.GradleFileLinkCalculator;
+import de.jcup.egradle.core.util.GradleHyperLinkResult;
+import de.jcup.egradle.core.util.GradleResourceLinkCalculator;
+import de.jcup.egradle.core.util.GradleStringTransformer;
+import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
 
 /* TODO ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
 

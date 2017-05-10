@@ -21,7 +21,7 @@ import java.util.Map;
 import org.eclipse.core.commands.IParameterValues;
 import org.eclipse.debug.core.ILaunch;
 
-import de.jcup.egradle.eclipse.api.EGradlePostBuildJob;
+import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 
 public class LaunchParameterValues implements IParameterValues {
 
