@@ -61,7 +61,6 @@ import de.jcup.egradle.eclipse.util.ColorManager;
  */
 public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 
-	// private GradleEditorDoubleClickStrategy doubleClickStrategy;
 	private GradleDefaultTextScanner gradleScanner;
 	private ColorManager colorManager;
 
@@ -136,15 +135,6 @@ public class GradleSourceViewerConfiguration extends SourceViewerConfiguration {
 		return allIdsToStringArray( 
 				IDocument.DEFAULT_CONTENT_TYPE);
 		/* @formatter:on */
-	}
-
-	@Override
-	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
-		// if (doubleClickStrategy == null){
-		// doubleClickStrategy = new GradleEditorDoubleClickStrategy();
-		// }
-		// return doubleClickStrategy;
-		return super.getDoubleClickStrategy(sourceViewer, contentType);
 	}
 
 	@Override

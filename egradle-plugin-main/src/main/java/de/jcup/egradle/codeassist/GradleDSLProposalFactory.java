@@ -122,10 +122,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			proposals.add(proposal);
 		}
 		for (Property property : identifiedType.getProperties()) {
-			/*
-			 * TODO ATR, 28.01.2017: check if mixin does copy properties as
-			 * well. If so implementation is needed
-			 */
+
 			ModelProposal proposal = createModelProposal(result);
 			proposal.type = ModelProposalType.PROPERTY;
 			proposal.setName(property.getName());

@@ -58,7 +58,6 @@ import de.jcup.egradle.sdk.builder.action.type.SaveTypesToSDKTargetFolder;
  */
 public class SDKBuilder {
 
-	/* TODO ATR, 22.02.2017: change code to: SDKBuilder.executeActions() */
 	public static void main(String[] args) throws IOException {
 		SDKBuilder builder = new SDKBuilder("./../../gradle");
 		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");

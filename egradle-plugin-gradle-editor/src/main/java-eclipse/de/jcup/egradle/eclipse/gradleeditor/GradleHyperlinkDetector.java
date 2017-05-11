@@ -37,8 +37,6 @@ import de.jcup.egradle.core.util.GradleResourceLinkCalculator;
 import de.jcup.egradle.core.util.GradleStringTransformer;
 import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
 
-/* TODO ATR: The xml definition in plugin.xml makes no sense, because Source config returns fixed array of hyperlink detectors and this one was added extra to work!*/
-
 /**
  * Hyperlink detector for all kind of hyperlinks in egradle editor.
  * @author Albert Tregnaghi
