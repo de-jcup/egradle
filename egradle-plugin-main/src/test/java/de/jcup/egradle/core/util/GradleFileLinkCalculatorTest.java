@@ -22,10 +22,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.GradleFileLinkCalculator;
-import de.jcup.egradle.core.util.GradleHyperLinkResult;
-import de.jcup.egradle.core.util.GradleStringTransformer;
-
 public class GradleFileLinkCalculatorTest {
 
 	private GradleFileLinkCalculator calcToTest;

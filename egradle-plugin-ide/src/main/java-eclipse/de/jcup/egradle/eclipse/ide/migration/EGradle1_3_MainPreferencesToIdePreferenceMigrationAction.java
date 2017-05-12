@@ -1,8 +1,8 @@
 package de.jcup.egradle.eclipse.ide.migration;
 
 import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.jcup.egradle.core.migration.MigrationAction;
@@ -10,9 +10,6 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.ide.IdeUtil;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.migration.EGradleOldMainPreferenceProvider;
-import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
-
-import static org.apache.commons.lang3.StringUtils.*;
 
 public class EGradle1_3_MainPreferencesToIdePreferenceMigrationAction implements MigrationAction{
 

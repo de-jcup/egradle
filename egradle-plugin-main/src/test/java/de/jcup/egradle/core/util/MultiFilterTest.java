@@ -22,9 +22,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.Filter;
-import de.jcup.egradle.core.util.MultiFilter;
-
 public class MultiFilterTest {
 
 	private MultiFilter filterToTest;

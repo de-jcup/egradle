@@ -12,7 +12,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.jcup.egradle.eclipse.ide.migration.EGradle1_3ToEGradle2_0Migration;
-import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
 import de.jcup.egradle.eclipse.util.ColorManager;
 
 /**
@@ -33,8 +32,6 @@ public class IDEActivator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		
-		BuildVariablesProviderRegistry.setProvider(new EGradleBuildVariableProvider());
-	
 		startMigrationsWhereNecessary();
 	}
 

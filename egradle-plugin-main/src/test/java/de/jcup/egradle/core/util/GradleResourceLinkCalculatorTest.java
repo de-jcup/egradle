@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.GradleHyperLinkResult;
-import de.jcup.egradle.core.util.GradleResourceLinkCalculator;
-
 public class GradleResourceLinkCalculatorTest {
 
 	private GradleResourceLinkCalculator calculator;

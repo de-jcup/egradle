@@ -22,8 +22,6 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.FileHelper;
-
 public class FileHelperTest {
 	
 	private FileHelper fileHelpertoTest;

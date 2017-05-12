@@ -22,9 +22,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.GradleStringTransformer;
-import de.jcup.egradle.core.util.SimpleMapStringTransformer;
-
 public class SimpleMapStringTransformerTest {
 	
 	@Test

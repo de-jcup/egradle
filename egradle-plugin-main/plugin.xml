@@ -2,6 +2,13 @@
 <?eclipse version="3.4"?>
 <plugin>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          VARIABLE PROVIDER                           -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension-point id="de.jcup.egradle.eclipse.extension.variableprovider" 
+   		name="Variable provider" 
+   		schema="schema/de.jcup.egradle.eclipse.extension.variableprovider.exsd"/>
+   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          KEYWORDS                                    -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension point="org.eclipse.ui.keywords">

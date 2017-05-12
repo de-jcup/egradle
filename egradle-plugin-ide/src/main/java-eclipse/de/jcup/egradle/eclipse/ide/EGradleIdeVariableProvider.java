@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.jcup.egradle.eclipse.openapi.BuildVariablesProvider;
+import de.jcup.egradle.eclipse.api.VariableProvider;
 
-public class EGradleBuildVariableProvider implements BuildVariablesProvider{
+public class EGradleIdeVariableProvider implements VariableProvider{
 
 	@Override
 	public Map<String, String> getVariables() {

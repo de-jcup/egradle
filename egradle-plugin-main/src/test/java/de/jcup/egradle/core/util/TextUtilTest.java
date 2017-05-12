@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.TextUtil;
-
 public class TextUtilTest {
 
 	@Test

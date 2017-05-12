@@ -17,7 +17,8 @@ package de.jcup.egradle.eclipse.gradleeditor;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -65,19 +66,19 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.util.GradleStringTransformer;
-import de.jcup.egradle.core.util.SimpleMapStringTransformer;
+import de.jcup.egradle.core.util.MultiMapStringTransformer;
 import de.jcup.egradle.core.util.TextUtil;
+import de.jcup.egradle.eclipse.api.VariableProvider;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.QuickOutlineDialog;
-import de.jcup.egradle.eclipse.openapi.BuildVariablesProvider;
-import de.jcup.egradle.eclipse.openapi.BuildVariablesProviderRegistry;
 import de.jcup.egradle.eclipse.util.ColorManager;
 import de.jcup.egradle.eclipse.util.ColorUtil;
 import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
+import de.jcup.egradle.eclipse.util.VariablesProviderRegistry;
 
 public class GradleEditor extends TextEditor implements StatusMessageSupport, IResourceChangeListener {
 
@@ -327,7 +328,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 			return (T) getGradleFileType();
 		}
 		if (GradleStringTransformer.class.equals(adapter)) {
-			return (T) getGradleStringTransformer();
+			return (T) createGradleStringTransformer();
 		}
 		if (ColorManager.class.equals(adapter)) {
 			return (T) getColorManager();
@@ -357,6 +358,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		}
 		return super.getAdapter(adapter);
 	}
+
 
 	private GradleFileType getGradleFileType() {
 		if (cachedGradleFileType != null) {
@@ -398,22 +400,23 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 		super.handleEditorInputChanged();
 	}
 
-	private GradleStringTransformer transformer;
-
-	private GradleStringTransformer getGradleStringTransformer() {
-		if (transformer == null) {
-			BuildVariablesProvider provider = BuildVariablesProviderRegistry.getProvider();
-
+	private GradleStringTransformer createGradleStringTransformer() {
+		
+		List<Map<String, String>> maps = new ArrayList<>();
+		
+		List<VariableProvider> providers = VariablesProviderRegistry.INSTANCE.getProviders();
+		
+		for (VariableProvider provider : providers) {
+			
 			Map<String, String> map = null;
 			if (provider != null) {
 				map = provider.getVariables();
 			}
-			if (map == null) {
-				map = new HashMap<>();
+			if (map != null) {
+				maps.add(map);
 			}
-			transformer = new SimpleMapStringTransformer(map);
 		}
-		return transformer;
+		return new MultiMapStringTransformer(maps);
 	}
 
 	public Item getItemAtCarretPosition() {

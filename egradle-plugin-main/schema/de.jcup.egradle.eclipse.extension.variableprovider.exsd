@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="de.jcup.egradle.eclipse.plugin.main" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="de.jcup.egradle.eclipse.plugin.main" id="de.jcup.egradle.eclipse.extension.variableprovider" name="EGradle variable provider"/>
+      </appinfo>
+      <documentation>
+         This extension point is for IDE&apos;s to contribute gradle variables to EGradle editor instance.
+So editor hyperlinking can resolve variables too. An Example:&lt;br&gt;&lt;code&gt;&quot;${rootProject.projectDir}/libraries.gradle&quot;&lt;/code&gt;
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <choice minOccurs="1" maxOccurs="unbounded">
+            <element ref="provider"/>
+         </choice>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="provider">
+      <annotation>
+         <documentation>
+            Define a variable provider - used be EGradle editor - e.g. for file hyperlinking containing an &lt;br&gt;
+&lt;code&gt;apply from : &quot;${rootProject.projectDir}/libraries.gradle&quot;&lt;/code&gt;
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string">
+            <annotation>
+               <documentation>
+                  this attribute must be a full classpath to an implementation of &lt;code&gt;de.jcup.egradle.eclipse.api.VariableProvider&lt;/code&gt;, which is exported by plugin &lt;code&gt;de.jcup.egradle.eclipse.plugin.main&lt;/code&gt;
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":de.jcup.egradle.eclipse.api.VariableProvider"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         2.0
+      </documentation>
+   </annotation>
+
+
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         &lt;p&gt;Copyright: Albert Tregnaghi&lt;/p&gt;
+&lt;p&gt;License: &lt;a href=&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;&gt;Apache 2.0&lt;/a&gt;&lt;p&gt;
+  
+&lt;p&gt;Visit:  &lt;a href=&quot;https://github.com/de-jcup/egradle&quot;&gt;EGradle at GitHub&lt;/a&gt;&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+</schema>

@@ -559,5 +559,11 @@
 		</launchGroup>
 		
 	</extension>
+ <extension
+       point="de.jcup.egradle.eclipse.extension.variableprovider">
+    <provider
+          class="de.jcup.egradle.eclipse.ide.EGradleIdeVariableProvider">
+    </provider>
+ </extension>
 
 </plugin>

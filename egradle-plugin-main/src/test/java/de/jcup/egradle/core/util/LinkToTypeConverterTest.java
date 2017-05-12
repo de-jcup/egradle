@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.util.LinkToTypeConverter;
 import de.jcup.egradle.core.util.LinkToTypeConverter.LinkData;
 
 public class LinkToTypeConverterTest {
