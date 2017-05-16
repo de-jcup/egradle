@@ -60,18 +60,18 @@ public class EGradleMessageDialogSupport {
 			@Override
 			public void run() {
 				
-				if (IdeUtil.getPreferences().isShowingConsoleOnBuildFailed()){
-					IdeUtil.showConsoleView();
+				if (IDEUtil.getPreferences().isShowingConsoleOnBuildFailed()){
+					IDEUtil.showConsoleView();
 				}
 			
 				String text = detail;
 				String path = "icons/gradle-build-failed.png";
-				if (IdeUtil.existsValidationErrors()){
+				if (IDEUtil.existsValidationErrors()){
 					text = text+"\n(Please look into problems view for details about compile/evaluation failures)";
 					path="icons/gradle-script-failure.png";
 				}
-				Image backgroundImage = IdeUtil.getImage(path);
-				Image titleImage = IdeUtil.getImage("icons/gradle-og.png");
+				Image backgroundImage = IDEUtil.getImage(path);
+				Image titleImage = IDEUtil.getImage("icons/gradle-og.png");
 				
 				Shell shell = getActiveWorkbenchShell();
 				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);

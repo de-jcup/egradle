@@ -24,7 +24,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAdapter;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
@@ -55,7 +55,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 		configComposite.createConfigUI(folderSelectionArea);
 		
-		EGradleIdePreferences preferences = IdeUtil.getPreferences();
+		EGradleIdePreferences preferences = IDEUtil.getPreferences();
 		/* adopt import setting from current existing preferences value*/
 		String globalJavaHomePath = preferences.getGlobalJavaHomePath();
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();

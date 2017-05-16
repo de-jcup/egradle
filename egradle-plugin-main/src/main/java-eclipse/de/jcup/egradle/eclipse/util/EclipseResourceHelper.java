@@ -49,7 +49,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 
-import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.util.FileHelper;
 import de.jcup.egradle.eclipse.MainActivator;
 
@@ -81,6 +80,15 @@ public class EclipseResourceHelper {
 		return createFolder(path, null);
 	}
 
+	public IFolder createFolder(String portableFolderPath) throws CoreException {
+		return createFolder(portableFolderPath, null);
+	}
+	
+	public IFolder createFolder(String portableFolderPath, IProgressMonitor monitor) throws CoreException {
+		Path fullPath = new Path(portableFolderPath);
+		return createFolder(fullPath, monitor);
+	}
+	
 	public IFolder createFolder(IPath path, IProgressMonitor monitor) throws CoreException {
 		if (monitor == null) {
 			monitor = NULL_MONITOR;
@@ -94,14 +102,6 @@ public class EclipseResourceHelper {
 	}
 
 
-	public IFolder createFolder(String portableFolderPath) throws CoreException {
-		return createFolder(portableFolderPath, null);
-	}
-
-	public IFolder createFolder(String portableFolderPath, IProgressMonitor monitor) throws CoreException {
-		Path fullPath = new Path(portableFolderPath);
-		return createFolder(fullPath, monitor);
-	}
 
 	public IFile createLinkedFile(IContainer container, IPath linkPath, File linkedFileTarget) throws CoreException {
 		IFile iFile = container.getFile(linkPath);
@@ -146,53 +146,6 @@ public class EclipseResourceHelper {
 		if (!project.isOpen())
 			project.open(NULL_MONITOR);
 
-		return project;
-	}
-
-	/**
-	 * Creates or refreshes virtual root project. If project exists but isn't opened it will
-	 * be automatically opened
-	 * 
-	 * @param projectName
-	 * @param monitor
-	 * @param projectDescriptionCreator 
-	 * @param natureIds
-	 * @return project
-	 * @throws CoreException
-	 */
-	public IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, ProjectDescriptionCreator projectDescriptionCreator,
-			String... natureIds) throws CoreException {
-		if (monitor == null) {
-			monitor = NULL_MONITOR;
-		}
-		IProject project = getProject(projectName);
-		if (!project.exists()) {
-			IProjectDescription initialDescription = projectDescriptionCreator.createNewProjectDescription(projectName);
-			project.create(initialDescription, monitor);
-
-		} else {
-			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		}
-
-		if (!project.isOpen()) {
-			project.open(monitor);
-		}
-		/*
-		 * the next lines are important: only when we do set description on
-		 * project again the nature will be created AND configured as wished -
-		 * necessary to get builder running
-		 * 
-		 */
-		IProjectDescription descriptionCopy = project.getDescription();
-		descriptionCopy.setNatureIds(natureIds);
-		project.setDescription(descriptionCopy, monitor);
-		return project;
-	}
-
-	private IProject getProject(String projectName) {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		IProject project = root.getProject(projectName);
 		return project;
 	}
 
@@ -358,29 +311,7 @@ public class EclipseResourceHelper {
 		return fileHelper;
 	}
 
-	/**
-	 * Imports a project by given description file (.project). If a project already exists in workspace with same name
-	 * it will be automatically deleted (without content delete)
-	 * @param projectFileOrFolder file (.project) or the folder containing it
-	 * @param monitor
-	 * @return project, never <code>null</code>
-	 * @throws CoreException
-	 */
-	public IProject importProject(File projectFileOrFolder, IProgressMonitor monitor) throws CoreException {
-		File projectFile = null;
-		if (projectFileOrFolder.isDirectory()){
-			projectFile=new File(projectFileOrFolder,GradleImportScanner.ECLIPSE_PROJECTFILE_NAME);
-		}else{
-			projectFile=projectFileOrFolder;
-		}
-		Path path = new Path(projectFile.getAbsolutePath());
-		IProjectDescription description = ResourcesPlugin.getWorkspace().loadProjectDescription(path);
-		IProject project = getProject(description.getName());
-		/* always delete project if already existing - but without content delete */
-		project.delete(false, true,monitor);
-		project.create(description, monitor);
-		return project;
-	}
+	
 
 
 }

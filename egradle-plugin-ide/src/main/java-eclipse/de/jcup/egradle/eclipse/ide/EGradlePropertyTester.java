@@ -33,7 +33,7 @@ public class EGradlePropertyTester extends PropertyTester{
 			/* not supported */
 			return false;
 		}
-		File rootFolder = IdeUtil.getRootProjectFolderWithoutErrorHandling();
+		File rootFolder = IDEUtil.getRootProjectFolderWithoutErrorHandling();
 		if (rootFolder==null){
 			return false;
 		}
@@ -58,22 +58,22 @@ public class EGradlePropertyTester extends PropertyTester{
 			}
 			boolean expectedToBeRootPartOfRootProject = (Boolean)expectedValue;
 			/* root project itself */
-			if (IdeUtil.isRootProject(project)){
+			if (IDEUtil.isRootProject(project)){
 				/* project itself is root project - normally only for single projects */
 				return evalResult(expectedToBeRootPartOfRootProject,true);
 			}
 			/* virtual root project */
-			if (IdeUtil.hasVirtualRootProjectNature(project)){
+			if (IDEUtil.hasVirtualRootProjectNature(project)){
 				return evalResult(expectedToBeRootPartOfRootProject,true);
 			}
 			
 			/* sub project detection */
 			try {
-				if (IdeUtil.isSubprojectOfCurrentRootProject(project)){
+				if (IDEUtil.isSubprojectOfCurrentRootProject(project)){
 					return evalResult(expectedToBeRootPartOfRootProject,true);
 				}
 			} catch (CoreException e) {
-				IdeUtil.logError("Was not able to evaluate project:"+project,e);
+				IDEUtil.logError("Was not able to evaluate project:"+project,e);
 				return evalResult(expectedToBeRootPartOfRootProject,false);
 			}
 			return evalResult(expectedToBeRootPartOfRootProject,false);

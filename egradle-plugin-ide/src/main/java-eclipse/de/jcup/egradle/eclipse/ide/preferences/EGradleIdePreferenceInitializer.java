@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.jcup.egradle.core.migration.MigrationState;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 /**
  * Class used to initialize default preference values.
@@ -30,7 +30,7 @@ import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializer {
 
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = IdeUtil.getPreferences().getPreferenceStore();
+		IPreferenceStore store = IDEUtil.getPreferences().getPreferenceStore();
 		EGradleCallType defaultCallType = null; 
 		if (SystemUtils.IS_OS_WINDOWS){
 			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	

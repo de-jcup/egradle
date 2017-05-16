@@ -37,7 +37,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.OutputHandler;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
@@ -77,7 +77,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				postJob = launchParameterValues.getPostJob();
 				
 			}else{
-				IdeUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
+				IDEUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
 			}
 
 		} catch (NotDefinedException | ParameterValuesException e) {
@@ -134,7 +134,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				extractVariables(context.getEnvironment());
 
 			} catch (CoreException e) {
-				IdeUtil.logError("Was not able to prepare launchconfiguration", e);
+				IDEUtil.logError("Was not able to prepare launchconfiguration", e);
 			}
 		}
 	}

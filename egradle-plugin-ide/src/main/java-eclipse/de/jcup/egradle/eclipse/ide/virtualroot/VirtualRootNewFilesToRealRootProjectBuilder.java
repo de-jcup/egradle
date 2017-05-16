@@ -35,7 +35,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
@@ -118,7 +118,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 					try {
 						getFileHelper().delete(linkTargetFile);
 					} catch (IOException e) {
-						IdeUtil.logError("Was not able to delete link target file:"+linkTargetFile,e);
+						IDEUtil.logError("Was not able to delete link target file:"+linkTargetFile,e);
 					}
 				}
 			}

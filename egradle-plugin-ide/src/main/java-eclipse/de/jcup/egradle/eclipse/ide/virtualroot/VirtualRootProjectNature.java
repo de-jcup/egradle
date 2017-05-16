@@ -32,8 +32,7 @@ public class VirtualRootProjectNature implements IProjectNature {
 	/**
 	 * ID of this project nature
 	 */
-	public static final String NATURE_ID = "de.jcup.egradle.eclipse.ide.virtualRootProjectNature";
-
+	public static final String NATURE_ID = "de.jcup.egradle.eclipse.virtualRootProjectNature";
 	private IProject project;
 
 	@Override

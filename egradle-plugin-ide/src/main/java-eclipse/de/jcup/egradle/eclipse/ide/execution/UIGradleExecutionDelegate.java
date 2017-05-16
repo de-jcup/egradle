@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.execution;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.IWorkbenchWindow;

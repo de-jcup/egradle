@@ -57,7 +57,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.PlatformUI;
 
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ui.MultipleInputDialog;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 
@@ -95,7 +95,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 			try {
 				m = config.getAttribute(launchConfigurationPropertyMapAttributeName, (Map<String, String>) null);
 			} catch (CoreException e) {
-				IdeUtil.logError("Error reading configuration", e); 
+				IDEUtil.logError("Error reading configuration", e); 
 				return elements;
 			}
 			if (m != null && !m.isEmpty()) {
@@ -159,7 +159,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 
 		public Image getColumnImage(Object element, int columnIndex) {
 			if (columnIndex == 0) {
-				return IdeUtil.getImage("/icons/launch-propertytable-column0.gif");
+				return IDEUtil.getImage("/icons/launch-propertytable-column0.gif");
 			}
 			return null;
 		}
@@ -423,7 +423,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	}
 
 	public Image getImage() {
-		return IdeUtil.getImage(imagePath);
+		return IDEUtil.getImage(imagePath);
 	}
 
 	public void activated(ILaunchConfigurationWorkingCopy workingCopy) {

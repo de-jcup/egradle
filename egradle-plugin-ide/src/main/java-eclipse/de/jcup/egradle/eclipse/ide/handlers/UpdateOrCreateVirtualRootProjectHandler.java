@@ -15,14 +15,14 @@
  */
  package de.jcup.egradle.eclipse.ide.handlers;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
 	public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
@@ -48,7 +48,7 @@ public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler {
 				try {
 					createOrRecreateVirtualRootProject();
 				} catch (VirtualRootProjectException e) {
-					IdeUtil.logError("Was not able to (re)create virtual root project",e);
+					IDEUtil.logError("Was not able to (re)create virtual root project",e);
 					getDialogSupport().showError("Virtual root project not (re)createable. Please try again");
 				}finally{
 					running=false;

@@ -45,7 +45,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
@@ -163,7 +163,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 					// Open default external browser
 					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
 				} catch (Exception ex) {
-					IdeUtil.logError("Was not able to open url in external browser", ex);
+					IDEUtil.logError("Was not able to open url in external browser", ex);
 				}
 			}
 		});
@@ -273,7 +273,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 
 	@Override
 	public Image getImage() {
-		return IdeUtil.getImage("icons/gradle-og.png");
+		return IDEUtil.getImage("icons/gradle-og.png");
 	}
 
 	@Override

@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.junit.contribution;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;

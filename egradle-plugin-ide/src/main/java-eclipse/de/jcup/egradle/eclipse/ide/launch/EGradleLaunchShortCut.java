@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.launch;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
@@ -49,7 +49,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.core.Constants;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 /**
  * Short cut launcher for EGradle
@@ -321,7 +321,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 				}
 			}
 		} catch (CoreException e) {
-			IdeUtil.logError("Was not able to get launch candidates", e);
+			IDEUtil.logError("Was not able to get launch candidates", e);
 		}
 		return candidateConfigs;
 	}

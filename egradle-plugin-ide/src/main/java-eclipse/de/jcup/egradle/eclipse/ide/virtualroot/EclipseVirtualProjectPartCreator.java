@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.virtualroot;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
@@ -39,10 +39,11 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 
 import de.jcup.egradle.core.Constants;
+import de.jcup.egradle.core.ExceptionUtils;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.virtualroot.VirtualProjectPartCreator;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.eclipse.util.ProjectDescriptionCreator;
 
@@ -174,7 +175,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 					}
 
 				};
-				newProject = getResourceHelper().createOrRefreshProject(projectName, monitor, projectDescriptionCreator,
+				newProject = IDEUtil.createOrRefreshProject(projectName, monitor, projectDescriptionCreator,
 						VirtualRootProjectNature.NATURE_ID);
 
 				newProjectFile = newProject.getLocation().toFile();
@@ -204,7 +205,8 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 				 * links etc.
 				 */
 			} catch (CoreException e) {
-				new VirtualRootProjectException("Cannot (re)create newProject:" + projectName, e);
+				Throwable rootCause =  ExceptionUtils.getRootCause(e);
+				throw new VirtualRootProjectException("Cannot (re)create newProject:" + projectName, rootCause);
 			}
 
 			monitor.worked(3);
@@ -246,7 +248,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	public boolean isLinkCreationNeeded(Object targetFolder, File file) throws VirtualRootProjectException {
 		if (targetFolder == null) {
 			String message = "Cannot create link for file " + file + ", because target folder is null!";
-			IdeUtil.logWarning(message);
+			IDEUtil.logWarning(message);
 			return false;
 		}
 		notNull(file, "'file' may not be null");
@@ -351,7 +353,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			}
 			getCreationMonitor().worked(++createdLinks);
 		} catch (CoreException e) {
-			IdeUtil.logError("Was not able to create link to file:" + file, e);
+			IDEUtil.logError("Was not able to create link to file:" + file, e);
 		}
 
 	}

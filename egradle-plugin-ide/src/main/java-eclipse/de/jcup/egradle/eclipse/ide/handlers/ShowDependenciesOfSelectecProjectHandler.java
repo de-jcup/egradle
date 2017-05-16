@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.handlers;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -30,7 +30,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
@@ -53,7 +53,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 			return null;
 		}
 		SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
-		dialog.setTitleImage(IdeUtil.getImage("icons/gradle-og.png"));
+		dialog.setTitleImage(IDEUtil.getImage("icons/gradle-og.png"));
 		dialog.setInput(configuration);
 		String config = dialog.open();
 		if (config==null){

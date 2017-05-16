@@ -2,7 +2,7 @@ package de.jcup.egradle.eclipse.ide.migration;
 
 import de.jcup.egradle.core.migration.AbstractMigration;
 import de.jcup.egradle.core.migration.MigrationState;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.migration.EGradleOldMainPreferenceProvider;
 
 public class EGradle1_3ToEGradle2_0Migration extends AbstractMigration{
@@ -17,7 +17,7 @@ public class EGradle1_3ToEGradle2_0Migration extends AbstractMigration{
 	
 	@Override
 	protected boolean isMigrationNecessary() {
-		MigrationState migrationState = IdeUtil.getPreferences().getMigrationState();
+		MigrationState migrationState = IDEUtil.getPreferences().getMigrationState();
 		if (MigrationState.NOT_MIGRATED.equals(migrationState)){
 			return true;
 		}
@@ -27,8 +27,8 @@ public class EGradle1_3ToEGradle2_0Migration extends AbstractMigration{
 
 	@Override
 	protected void finalizeMigration() {
-		IdeUtil.getPreferences().setMigrationState(MigrationState.MIGRATED_FROM_1_3);
-		IdeUtil.logInfo("Migration of data of EGradle <2.0 to EGradle2.0 is done");
+		IDEUtil.getPreferences().setMigrationState(MigrationState.MIGRATED_FROM_1_3);
+		IDEUtil.logInfo("Migration of data of EGradle <2.0 to EGradle2.0 is done");
 	}
 
 }

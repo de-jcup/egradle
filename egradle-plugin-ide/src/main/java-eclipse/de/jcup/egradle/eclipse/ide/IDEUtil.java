@@ -9,8 +9,11 @@ import java.util.List;
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
@@ -38,6 +41,7 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.progress.IProgressConstants2;
 
 import de.jcup.egradle.core.Constants;
+import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
@@ -55,8 +59,9 @@ import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
+import de.jcup.egradle.eclipse.util.ProjectDescriptionCreator;
 
-public class IdeUtil {
+public class IDEUtil {
 
 	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
@@ -84,7 +89,92 @@ public class IdeUtil {
 		}
 		return new RememberLastLinesOutputHandler(max);
 	}
+	
+	/**
+	 * Creates or refreshes virtual root project. If project exists but isn't opened it will
+	 * be automatically opened
+	 * 
+	 * @param projectName
+	 * @param monitor
+	 * @param projectDescriptionCreator 
+	 * @param natureIds
+	 * @return project
+	 * @throws CoreException
+	 */
+	public static IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, ProjectDescriptionCreator projectDescriptionCreator,
+			String... natureIds) throws CoreException {
+		if (monitor == null) {
+			monitor = NULL_PROGESS;
+		}
+		IProject project = getProject(projectName);
+		if (!project.exists()) {
+			IProjectDescription initialDescription = projectDescriptionCreator.createNewProjectDescription(projectName);
+			project.create(initialDescription, monitor);
 
+		} else {
+			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		}
+
+		if (!project.isOpen()) {
+			project.open(monitor);
+		}
+		/*
+		 * the next lines are important: only when we do set description on
+		 * project again the nature will be created AND configured as wished -
+		 * necessary to get builder running
+		 * 
+		 */
+		IProjectDescription descriptionCopy = project.getDescription();
+		descriptionCopy.setNatureIds(natureIds);
+		project.setDescription(descriptionCopy, monitor);
+		return project;
+	}
+	
+	/**
+	 * Imports a project by given description file (.project). If a project already exists in workspace with same name
+	 * it will be automatically deleted (without content delete)
+	 * @param projectFileOrFolder file (.project) or the folder containing it
+	 * @param monitor
+	 * @return project, never <code>null</code>
+	 * @throws CoreException
+	 */
+	public static IProject importProject(File projectFileOrFolder, IProgressMonitor monitor) throws CoreException {
+		File projectFile = null;
+		if (projectFileOrFolder.isDirectory()){
+			projectFile=new File(projectFileOrFolder,GradleImportScanner.ECLIPSE_PROJECTFILE_NAME);
+		}else{
+			projectFile=projectFileOrFolder;
+		}
+		Path path = new Path(projectFile.getAbsolutePath());
+		IProjectDescription description = ResourcesPlugin.getWorkspace().loadProjectDescription(path);
+		IProject project = getProject(description.getName());
+		/* always delete project if already existing - but without content delete */
+		project.delete(false, true,monitor);
+		project.create(description, monitor);
+		return project;
+	}
+	
+	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		description.setAutoBuilding(flag);
+		workspace.setDescription(description);
+	}
+
+	public static boolean isWorkspaceAutoBuildEnabled() throws CoreException {
+		IWorkspace workspace = getWorkspace();
+		IWorkspaceDescription description = workspace.getDescription();
+		return description.isAutoBuilding();
+	}
+	
+	private static IProject getProject(String projectName) {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot root = workspace.getRoot();
+		IProject project = root.getProject(projectName);
+		return project;
+	}
+
+	
 	/**
 	 * Get image by path from image registry. If not already registered a new
 	 * image will be created and registered. If not createable a fallback image
@@ -326,7 +416,7 @@ public class IdeUtil {
 		if (!folder.isDirectory()) {
 			throwCoreException("new root folder must be a directory, but is not :\n" + folder.getAbsolutePath());
 		}
-		IdeUtil.getPreferences().setRootProjectPath(folder.getAbsolutePath());
+		IDEUtil.getPreferences().setRootProjectPath(folder.getAbsolutePath());
 		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 		try {

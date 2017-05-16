@@ -15,7 +15,7 @@
  */
  package de.jcup.egradle.eclipse.ide.decorators;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 
 import java.io.File;
 
@@ -30,7 +30,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 /**
@@ -87,11 +87,11 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 			if (!isSubprojectOfCurrentRootProject(p)){
 				return;
 			}
-			if (IdeUtil.getPreferences().isSubProjectIconDecorationEnabled()){
+			if (IDEUtil.getPreferences().isSubProjectIconDecorationEnabled()){
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {
-			IdeUtil.logError("Was not able to decorate sub project:"+p, e);
+			IDEUtil.logError("Was not able to decorate sub project:"+p, e);
 		}
 
 	}

@@ -21,7 +21,6 @@ import java.net.URL;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -175,21 +174,8 @@ public class EclipseUtil {
 		return ResourcesPlugin.getWorkspace();
 	}
 
-	public static boolean isWorkspaceAutoBuildEnabled() throws CoreException {
-		IWorkspace workspace = getWorkspace();
-		IWorkspaceDescription description = workspace.getDescription();
-		return description.isAutoBuilding();
-	}
-
 	public static void safeAsyncExec(Runnable runnable) {
 		getSafeDisplay().asyncExec(runnable);
-	}
-
-	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
-		IWorkspace workspace = getWorkspace();
-		IWorkspaceDescription description = workspace.getDescription();
-		description.setAutoBuilding(flag);
-		workspace.setDescription(description);
 	}
 
 	public static void throwCoreException(String message) throws CoreException {
@@ -208,17 +194,6 @@ public class EclipseUtil {
 			return null;
 		}
 		return mainActivator.getImageRegistry();
-	}
-
-	public static Throwable getRootCause(Throwable t) {
-		if (t == null) {
-			return null;
-		}
-		Throwable rootCause = t;
-		while (t.getCause() != null) {
-			rootCause = t.getCause();
-		}
-		return rootCause;
 	}
 
 	/**

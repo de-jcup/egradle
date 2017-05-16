@@ -36,7 +36,7 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.services.IServiceLocator;
 
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.handlers.LaunchGradleCommandHandler;
 
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
@@ -86,7 +86,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 							handlerService.executeCommand(parametrizedCommand, null);
 
 						} else {
-							IdeUtil.logWarning(getClass().getSimpleName()
+							IDEUtil.logWarning(getClass().getSimpleName()
 									+ ":parameter values without being a launch parameter value was used !??! :"
 									+ values);
 						}
@@ -107,7 +107,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 							try {
 								launch.terminate();
 							} catch (DebugException e) {
-								IdeUtil.logError("Was not able to terminate launch", e);
+								IDEUtil.logError("Was not able to terminate launch", e);
 							}
 						}
 					}

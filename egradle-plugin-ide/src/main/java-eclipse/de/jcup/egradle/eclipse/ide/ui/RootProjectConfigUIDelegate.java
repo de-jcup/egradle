@@ -42,7 +42,7 @@ import de.jcup.egradle.core.domain.CancelStateProvider;
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationObserver;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationProgressRunnable;
@@ -175,7 +175,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 					/* use own progress monitor dialog here - progress service did not work well because this is in model state */
 					progressMonitorDialog.run(true, true, runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
-					IdeUtil.logError("Was not able to execute validation", e1);
+					IDEUtil.logError("Was not able to execute validation", e1);
 				}
 			}
 		});
@@ -302,7 +302,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	}
 
 	Image getValidationButtonImage() {
-		return IdeUtil.getImage("icons/gradle-og.png");
+		return IDEUtil.getImage("icons/gradle-og.png");
 	}
 
 	private void setValid(boolean valid) {

@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.importWizards;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
@@ -51,7 +51,7 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
@@ -123,7 +123,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 			});
 			return true;
 		} catch (Exception e) {
-			IdeUtil.logError("EGradle Import execution failed", e);
+			IDEUtil.logError("EGradle Import execution failed", e);
 			return false;
 		}
 
@@ -136,8 +136,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 		@Override
 		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-			boolean cleanProjects = IdeUtil.getPreferences().isCleanProjectsOnImportEnabled();
-			boolean executeAssemble = IdeUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
+			boolean cleanProjects = IDEUtil.getPreferences().isCleanProjectsOnImportEnabled();
+			boolean executeAssemble = IDEUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
 			
 			try {
 				
@@ -239,7 +239,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 					try {
 						setWorkspaceAutoBuild(true);
 					} catch (CoreException e) {
-						IdeUtil.logError("Reenabling workspace auto build failed!", e);
+						IDEUtil.logError("Reenabling workspace auto build failed!", e);
 					}
 				}
 			}
@@ -264,7 +264,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 						} catch (InvocationTargetException e) {
 
-							IdeUtil.logError("Assemble task failed", e);
+							IDEUtil.logError("Assemble task failed", e);
 							EGradleMessageDialogSupport.INSTANCE.showBuildFailed("Assemble task failed");
 
 						} catch (InterruptedException e) {
@@ -316,7 +316,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		/* start import of all eclipse projects inside multiproject */
 		for (File folder : foldersToImport) {
 			importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
-			IProject project = getResourceHelper().importProject(folder, monitor);
+			IProject project = IDEUtil.importProject(folder, monitor);
 			project.open(monitor);
 			automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
 			monitor.worked(++worked);

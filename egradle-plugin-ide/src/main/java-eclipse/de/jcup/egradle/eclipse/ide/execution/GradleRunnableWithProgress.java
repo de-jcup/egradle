@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.eclipse.ide.execution;
 
-import static de.jcup.egradle.eclipse.ide.IdeUtil.*;
+import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.lang.reflect.InvocationTargetException;

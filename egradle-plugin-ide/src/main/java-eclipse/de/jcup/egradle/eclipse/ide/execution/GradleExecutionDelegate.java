@@ -36,7 +36,7 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.process.RememberLastLinesOutputHandler;
 import de.jcup.egradle.core.util.GradleContextPreparator;
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
 
@@ -72,12 +72,12 @@ public class GradleExecutionDelegate {
 		notNull(processExecutor, "'processExecutor' may not be null");
 
 		if (rootProject==null){
-			rootProject = IdeUtil.getRootProject(false);
+			rootProject = IDEUtil.getRootProject(false);
 		}
 		if (rootProject == null) {
 			/*
 			 * we handle the error on creation time by own exception thrown -
-			 * without IdeUtil error dialog
+			 * without IDEUtil error dialog
 			 */
 			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
 		}
@@ -91,7 +91,7 @@ public class GradleExecutionDelegate {
 	}
 
 	protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
-		EGradleIdePreferences preferences = IdeUtil.getPreferences();
+		EGradleIdePreferences preferences = IDEUtil.getPreferences();
 		/* Default JAVA_HOME */
 		String globalJavaHome = preferences.getGlobalJavaHomePath();
 		/* Call gradle settings */
@@ -190,7 +190,7 @@ public class GradleExecutionDelegate {
 
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
 		if (outputHandler instanceof RememberLastLinesOutputHandler){
-			IdeUtil.removeAllValidationErrorsOfConsoleOutput();
+			IDEUtil.removeAllValidationErrorsOfConsoleOutput();
 		}
 	}
 
@@ -198,7 +198,7 @@ public class GradleExecutionDelegate {
 		if (outputHandler instanceof RememberLastLinesOutputHandler){
 			RememberLastLinesOutputHandler validationOutputHandler = (RememberLastLinesOutputHandler) outputHandler;
 			List<String> list = validationOutputHandler.createOutputToValidate();
-			IdeUtil.showValidationErrorsOfConsoleOutput(list);
+			IDEUtil.showValidationErrorsOfConsoleOutput(list);
 		}
 	}
 

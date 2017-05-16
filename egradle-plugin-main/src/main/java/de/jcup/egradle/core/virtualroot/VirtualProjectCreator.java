@@ -44,7 +44,7 @@ public class VirtualProjectCreator {
 		
 		Object project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
 		if (project==null){
-			throw new VirtualRootProjectException("Was not able create or recreate "+VIRTUAL_ROOTPROJECT_NAME);
+			throw new VirtualRootProjectException("Was not able create or recreate '"+VIRTUAL_ROOTPROJECT_NAME+"'");
 		}
 		addLinksAndMissingFolders(project, partCreator, rootFolder, rootProject);
 

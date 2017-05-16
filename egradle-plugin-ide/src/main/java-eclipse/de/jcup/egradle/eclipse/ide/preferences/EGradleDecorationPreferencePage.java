@@ -21,7 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.jcup.egradle.eclipse.ide.IdeUtil;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -30,7 +30,7 @@ public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage i
 
 	public EGradleDecorationPreferencePage() {
 		super(GRID);
-		setPreferenceStore(IdeUtil.getPreferences().getPreferenceStore());
+		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage i
 
 	public boolean performOk() {
 		boolean done =  super.performOk();
-		IdeUtil.refreshAllProjectDecorations();
+		IDEUtil.refreshAllProjectDecorations();
 		return done;
 	}
 	
