@@ -79,7 +79,7 @@
          point="org.eclipse.core.resources.builders">
       <builder hasNature="true">
          <run
-               class="de.jcup.egradle.eclipse.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
+               class="de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
          </run>
       </builder>
    </extension>
@@ -125,6 +125,11 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.commands">
+      <command 
+         	id="egradle.commands.newGradleProject"
+          	name="Refresh all eclipse dependencies"
+         	categoryId="egradle.commands.category">
+         </command>
       <command
             name="Refresh all eclipse dependencies"
             categoryId="egradle.commands.category"
@@ -170,6 +175,11 @@
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.handlers">
+         
+      <handler
+            commandId="egradle.commands.newGradleProject"
+            class="de.jcup.egradle.eclipse.ide.handlers.NewGradleProjectHandler">
+      </handler>
       <handler
             commandId="egradle.commands.refreshEclipse"
             class="de.jcup.egradle.eclipse.ide.handlers.RefreshAllEclipseDependenciesHandler">
@@ -238,30 +248,56 @@
                   label="EGradle quick launch"
                   tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
             </command>
+            <command
+            	  commandId="egradle.commands.newGradleProject"
+                  icon="icons/create_gradle_project.png"
+                  id="egradle.toolbars.createGradleProject"
+                  label="Create new gradle project"
+                  tooltip="Createa new gradle project.">
+            </command>
          </toolbar>
       </menuContribution>
    </extension>
 
-	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          IMPORT                                      -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          WIZARDS                                     -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension
          point="org.eclipse.ui.importWizards">
       <category
             name="EGradle"
-            id="egradle.importWizards.category">
+            id="egradle.wizards.category">
       </category>
       <wizard
             name="Import gradle root project with all subprojects"
             icon="icons/import_egradle.png"
-            category="egradle.importWizards.category"
-            class="de.jcup.egradle.eclipse.ide.importWizards.EGradleRootProjectImportWizard"
+            category="egradle.wizards.category"
+            class="de.jcup.egradle.eclipse.ide.wizards.EGradleRootProjectImportWizard"
             id="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
          <description>
             Import gradle root project with all sub projects
          </description>
       </wizard>
    </extension>
+   <extension
+       point="org.eclipse.ui.newWizards">
+      <category
+            name="EGradle"
+            id="egradle.wizards.category">
+      </category>
+      <wizard
+            name="Gradle Project"
+            project="true"
+            icon="icons/create_gradle_project.png"
+            category="egradle.wizards.category"
+            class="de.jcup.egradle.eclipse.ide.wizards.EGradleNewProjectWizard"
+            id="de.jcup.egradle.eclipse.ide.wizards.EGradleNewProjectWizard">
+         <description>
+            Create a new gradle project
+         </description>
+      </wizard>
+   </extension>
+   
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--        POPUP                                                         -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

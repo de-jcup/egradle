@@ -19,8 +19,14 @@ import static org.apache.commons.lang3.Validate.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +54,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
+import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.util.FileHelper;
 import de.jcup.egradle.eclipse.MainActivator;
@@ -258,6 +265,38 @@ public class EclipseResourceHelper {
 			return toFile((IPath)null);
 		}
 		return toFile(resource.getLocation());
+	}
+	
+	public File getFileInPlugin(String path, String pluginId) throws IOException {
+		Bundle bundle = Platform.getBundle(pluginId);
+		URL url = bundle.getEntry(path);
+		if (url == null) {
+			/* PDE workaround */
+			String path2 = "bin/" + path;
+			url = bundle.getEntry(path2);
+			if (url == null) {
+				return null;
+			}
+				
+		}
+		URL resolvedFileURL = FileLocator.toFileURL(url);
+		if (resolvedFileURL == null) {
+			throw new FileNotFoundException("Cannot convert URL to file:"+resolvedFileURL);
+		}
+	
+		// We need to use the 3-arg constructor of URI in order to properly
+		// escape file system chars
+		URI resolvedURI;
+		try {
+			resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
+			File file = new File(resolvedURI);
+			if (! file.exists()){
+				throw new FileNotFoundException("Cannot convert URL to file:"+resolvedFileURL);
+			}
+			return file;
+		} catch (URISyntaxException e) {
+			throw new IOException("Cannot find file at resolvedFileURL:"+resolvedFileURL,e);
+		}
 	}
 
 	/**

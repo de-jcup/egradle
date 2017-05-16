@@ -123,8 +123,7 @@ public class SDKActivator extends AbstractUIPlugin implements LogAdapter, RootFo
 			resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
 			File file = new File(resolvedURI);
 			if (! file.exists()){
-				getLog().log(new Status(IStatus.WARNING, ID,
-						"Resolved file does not exist::" + file));
+				logWarn("Resolved file does not exist::" + file);
 				return null;
 			}
 			return file;
