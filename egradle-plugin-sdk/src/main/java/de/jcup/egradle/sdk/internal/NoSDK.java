@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -16,13 +16,16 @@
  package de.jcup.egradle.sdk.internal;
 
 import java.io.File;
+import java.io.IOException;
+
+import de.jcup.egradle.core.VersionData;
 
 public class NoSDK extends AbstractSDK{
 		
 		public static NoSDK INSTANCE = new NoSDK();
 		
 		private NoSDK() {
-			super("0.0.0");
+			super(new VersionData("0.0.0"));
 		}
 
 		@Override
@@ -30,14 +33,15 @@ public class NoSDK extends AbstractSDK{
 			return false;
 		}
 
-		@Override
-		public void install() {
-			
-		}
 
 		@Override
 		public File getSDKInstallationFolder() {
 			return null;
+		}
+
+		@Override
+		public void install() throws IOException {
+			
 		}
 		
 	}

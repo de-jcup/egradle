@@ -5,4 +5,5 @@
  *
  */
 dependencies {
+	compile project(':egradle-plugin-main')
 }

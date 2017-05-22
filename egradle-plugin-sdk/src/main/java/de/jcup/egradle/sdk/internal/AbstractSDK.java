@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -19,24 +19,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
 
 public abstract class AbstractSDK implements SDK{
 
-	protected String version;
+	protected VersionData version;
 	private SDKInfo info;
 	private Object monitor = new Object();
 
-	public AbstractSDK(String sdkVersion) {
-		if (sdkVersion==null || sdkVersion.trim().length()==0){
-			sdkVersion="unknown";
+	public AbstractSDK(VersionData sdkVersion) {
+		if (sdkVersion==null){
+			sdkVersion=VersionData.UNKNOWN;
 		}
 		this.version=sdkVersion;
 	}
 	
 	@Override
-	public final String getVersion() {
+	public final VersionData getVersion() {
 		return version;
 	}
 	

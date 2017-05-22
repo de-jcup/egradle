@@ -4,14 +4,10 @@ import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.internal.utils.FileUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
@@ -22,14 +18,12 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -46,7 +40,6 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.progress.IProgressConstants2;
-import org.osgi.framework.Bundle;
 
 import de.jcup.egradle.core.Constants;
 import de.jcup.egradle.core.GradleImportScanner;
@@ -68,6 +61,8 @@ import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.eclipse.util.ProjectDescriptionCreator;
+import de.jcup.egradle.template.FileStructureTemplate;
+import de.jcup.egradle.template.FileStructureTemplateManager;
 
 public class IDEUtil {
 
@@ -89,12 +84,6 @@ public class IDEUtil {
 		return systemConsoleOutputHandler;
 	}
 	
-	public static void copyFromPluginToFolder(String path, File targetFolder) throws IOException{
-		
-	}
-	
-	
-
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -743,5 +732,9 @@ public class IDEUtil {
 		return log;
 	}
 
+	public static List<FileStructureTemplate> getNewProjectTemplates() {
+		FileStructureTemplateManager manager = IDEActivator.getDefault().getNewProjectTemplateManager();
+		return manager.getTemplates();
+	}
 
 }

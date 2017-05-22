@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -41,7 +41,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.Version;
 
+import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.core.util.FileHelper;
 import de.jcup.egradle.eclipse.MainActivator;
 
@@ -188,6 +190,28 @@ public class EclipseUtil {
 
 	}
 
+	public static VersionData createVersionData(Bundle bundle) {
+		if (bundle == null) {
+			return VersionData.UNKNOWN;
+		}
+		Version osgiVersion = bundle.getVersion();
+		if (osgiVersion==null){
+			return VersionData.UNKNOWN;
+		}
+		return new VersionData(osgiVersion.toString());
+	}
+
+	public static String resolveMessageIfNotSet(String message, Throwable cause) {
+		if (message == null) {
+			if (cause == null) {
+				message = "Unknown";
+			} else {
+				message = cause.getMessage();
+			}
+		}
+		return message;
+	}
+
 	private static ImageRegistry getImageRegistry() {
 		MainActivator mainActivator = MainActivator.getDefault();
 		if (mainActivator == null) {
@@ -242,17 +266,6 @@ public class EclipseUtil {
 		return workbench;
 	}
 
-	public static String resolveMessageIfNotSet(String message, Throwable cause) {
-		if (message == null) {
-			if (cause == null) {
-				message = "Unknown";
-			} else {
-				message = cause.getMessage();
-			}
-		}
-		return message;
-	}
-
 	private static class WorkbenchWindowRunnable implements Runnable {
 		IWorkbenchWindow workbenchWindowFromUI;
 
@@ -275,4 +288,5 @@ public class EclipseUtil {
 		ILog log = MainActivator.getDefault().getLog();
 		return log;
 	}
+
 }

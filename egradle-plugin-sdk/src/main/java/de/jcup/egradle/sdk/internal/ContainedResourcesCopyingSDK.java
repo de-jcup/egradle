@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -17,17 +17,23 @@
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
 
+import de.jcup.egradle.core.CopySupport;
+import de.jcup.egradle.core.RootFolderProvider;
+import de.jcup.egradle.core.VersionData;
+import de.jcup.egradle.core.VersionedFolderToUserHomeCopySupport;
+import de.jcup.egradle.core.util.LogAdapter;
+
 public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
 	private File targetFolder;
-	private RootFolderProvider rootFolderProvider;
 	private LogAdapter logAdapter;
+	private CopySupport copySupport;
+	private RootFolderProvider rootFolderProvider;
 
 	/**
 	 * Creates internal file based sdk
@@ -36,7 +42,7 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 	 * @param logAdapter can be <code>null</code>
 	 * @throws IllegalArgumentException when rootFolderProvider is <code>null</code>
 	 */
-	public ContainedResourcesCopyingSDK(String sdkVersion, RootFolderProvider rootFolderProvider, LogAdapter logAdapter) {
+	public ContainedResourcesCopyingSDK(VersionData sdkVersion, RootFolderProvider rootFolderProvider, LogAdapter logAdapter) {
 		super(sdkVersion);
 		if (rootFolderProvider==null){
 			throw new IllegalArgumentException("root folder provider may not be null!");
@@ -44,28 +50,20 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 		this.rootFolderProvider=rootFolderProvider;
 		this.logAdapter=logAdapter;
 		
-		String userHome = System.getProperty("user.home");
-		File egradleRoot = new File(userHome,".egradle");
-		targetFolder=new File(egradleRoot,"sdk/"+sdkVersion);
+		copySupport = new VersionedFolderToUserHomeCopySupport("sdk",getVersion(), logAdapter);
 	}
 
 	@Override
 	public boolean isInstalled() {
-		return targetFolder.exists();
+		return copySupport.isTargetFolderExisting();
 	}
 	
 
 	@Override
 	public void install() throws IOException {
-		File internalFolder = rootFolderProvider.getRootFolder();
-		if (internalFolder==null){
-			/* has to be already logged by root folder provider*/
+		if (! copySupport.copyFrom(rootFolderProvider)){
 			return;
 		}
-		if (!internalFolder.exists()){
-			throw new FileNotFoundException("Did not find:"+internalFolder.toString());
-		}
-		FileUtil.copyDirectories(internalFolder,targetFolder);
 		
 		File sdkInfoFile = new File(targetFolder,"sdk.xml");
 		XMLSDKInfo sdkInfo = null;
@@ -79,13 +77,15 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 			sdkInfoFile.createNewFile();
 		}
 		sdkInfo.setInstallationDate(new Date());
-		sdkInfo.setSdkVersion(version);
+		sdkInfo.setSdkVersion(version.getAsText());
+		
 		try(OutputStream out = new FileOutputStream(sdkInfoFile)){
 			XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
 			exporter.exportSDKInfo(sdkInfo, out);
 		}
+		
 		if (logAdapter!=null){
-			logAdapter.logInfo("Successfully installed SDK "+getVersion());
+			logAdapter.logInfo("Successfully installed SDK for "+getVersion());
 		}
 				
 	}
@@ -97,7 +97,7 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
 	@Override
 	public String toString() {
-		return "ContainedResourcesCopyingSDK [version=" + version + "]";
+		return "ContainedResourcesCopyingSDK [" + version + "]";
 	}
 
 }

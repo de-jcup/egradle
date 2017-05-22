@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -13,11 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+ package de.jcup.egradle.core.util;
 
 public interface LogAdapter {
 
 	public void logInfo(String message);
 	
 	public void logWarn(String message);
+
+	public void logError(String string, Throwable t);
 }

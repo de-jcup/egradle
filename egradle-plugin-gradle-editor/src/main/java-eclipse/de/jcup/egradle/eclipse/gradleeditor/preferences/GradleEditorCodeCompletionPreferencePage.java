@@ -2,7 +2,7 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -109,7 +109,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 		SDKInfo sdkInfo = sdk.getInfo();
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
+		sb.append("VersionData ").append(sdkInfo.getSdkVersion()).append(" contains\n");
 		sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
 		Date installationDate = sdkInfo.getInstallationDate();
 		if (installationDate!=null){

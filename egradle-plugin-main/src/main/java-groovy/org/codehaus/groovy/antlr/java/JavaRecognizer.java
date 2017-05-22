@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -59,28 +59,28 @@ import antlr.collections.impl.BitSet;
  *		Steve Messick		messick@redhills.com
  *		John Pybus		john@pybus.org
  *
- * Version 1.00 December 9, 1997 -- initial release
- * Version 1.01 December 10, 1997
+ * VersionData 1.00 December 9, 1997 -- initial release
+ * VersionData 1.01 December 10, 1997
  *		fixed bug in octal def (0..7 not 0..8)
- * Version 1.10 August 1998 (parrt)
+ * VersionData 1.10 August 1998 (parrt)
  *		added tree construction
  *		fixed definition of WS,comments for mac,pc,unix newlines
  *		added unary plus
- * Version 1.11 (Nov 20, 1998)
+ * VersionData 1.11 (Nov 20, 1998)
  *		Added "shutup" option to turn off last ambig warning.
  *		Fixed inner class def to allow named class defs as statements
  *		synchronized requires compound not simple statement
  *		add [] after builtInType DOT class in primaryExpression
  *		"const" is reserved but not valid..removed from modifiers
- * Version 1.12 (Feb 2, 1999)
+ * VersionData 1.12 (Feb 2, 1999)
  *		Changed LITERAL_xxx to xxx in tree grammar.
  *		Updated java.g to use tokens {...} now for 2.6.0 (new feature).
  *
- * Version 1.13 (Apr 23, 1999)
+ * VersionData 1.13 (Apr 23, 1999)
  *		Didn't have (stat)? for else clause in tree parser.
  *		Didn't gen ASTs for interface extends.  Updated tree parser too.
  *		Updated to 2.6.0.
- * Version 1.14 (Jun 20, 1999)
+ * VersionData 1.14 (Jun 20, 1999)
  *		Allowed final/abstract on local classes.
  *		Removed local interfaces from methods
  *		Put instanceof precedence where it belongs...in relationalExpr
@@ -88,20 +88,20 @@ import antlr.collections.impl.BitSet;
  *		Missing ! on SEMI in classBlock
  *		fixed: (expr) + "string" was parsed incorrectly (+ as unary plus).
  *		fixed: didn't like Object[].class in parser or tree parser
- * Version 1.15 (Jun 26, 1999)
+ * VersionData 1.15 (Jun 26, 1999)
  *		Screwed up rule with instanceof in it. :(  Fixed.
  *		Tree parser didn't like (expr).something; fixed.
  *		Allowed multiple inheritance in tree grammar. oops.
- * Version 1.16 (August 22, 1999)
+ * VersionData 1.16 (August 22, 1999)
  *		Extending an interface built a wacky tree: had extra EXTENDS.
  *		Tree grammar didn't allow multiple superinterfaces.
  *		Tree grammar didn't allow empty var initializer: {}
- * Version 1.17 (October 12, 1999)
+ * VersionData 1.17 (October 12, 1999)
  *		ESC lexer rule allowed 399 max not 377 max.
  *		java.tree.g didn't handle the expression of synchronized
  *		statements.
- * Version 1.18 (August 12, 2001)
- *	  	Terence updated to Java 2 Version 1.3 by
+ * VersionData 1.18 (August 12, 2001)
+ *	  	Terence updated to Java 2 VersionData 1.3 by
  *		observing/combining work of Allan Jacobs and Steve
  *		Messick.  Handles 1.3 src.  Summary:
  *		o  primary didn't include boolean.class kind of thing
@@ -120,7 +120,7 @@ import antlr.collections.impl.BitSet;
  *		   Using Unicode charVocabulay makes code file big, but only
  *		   in the bitsets at the end. I need to make ANTLR generate
  *		   unicode bitsets more efficiently.
- * Version 1.19 (April 25, 2002)
+ * VersionData 1.19 (April 25, 2002)
  *		Terence added in nice fixes by John Pybus concerning floating
  *		constants and problems with super() calls.  John did a nice
  *		reorg of the primary/postfix expression stuff to read better
@@ -131,7 +131,7 @@ import antlr.collections.impl.BitSet;
  *		o  Added stuff for asserts too for Java 1.4, but *commented out*
  *		   as it is not backward compatible.
  *
- * Version 1.20 (October 27, 2002)
+ * VersionData 1.20 (October 27, 2002)
  *
  *	  Terence ended up reorging John Pybus' stuff to
  *	  remove some nondeterminisms and some syntactic predicates.
@@ -145,7 +145,7 @@ import antlr.collections.impl.BitSet;
  *		  Resin-2.0.5, jive-2.1.1, jdk 1.3.1, Lucene, antlr 2.7.2a4,
  *		and the 110k-line jGuru server source.
  *
- * Version 1.21 (October 17, 2003)
+ * VersionData 1.21 (October 17, 2003)
  *  Fixed lots of problems including:
  *  Ray Waldin: add typeDefinition to interfaceBlock in java.tree.g
  *  He found a problem/fix with floating point that start with 0
@@ -153,7 +153,7 @@ import antlr.collections.impl.BitSet;
  *  Thorsten van Ellen noticed that \n are allowed incorrectly in strings.
  *  TJP fixed CHAR_LITERAL analogously.
  *
- * Version 1.21.2 (March, 2003)
+ * VersionData 1.21.2 (March, 2003)
  *	  Changes by Matt Quail to support generics (as per JDK1.5/JSR14)
  *	  Notes:
  *	  o We only allow the "extends" keyword and not the "implements"
@@ -163,7 +163,7 @@ import antlr.collections.impl.BitSet;
  *	  o Thanks to Alan Eliasen for testing the grammar over his
  *		Fink source base
  *
- * Version 1.22 (July, 2004)
+ * VersionData 1.22 (July, 2004)
  *	  Changes by Michael Studman to support Java 1.5 language extensions
  *	  Notes:
  *	  o Added support for annotations types
@@ -174,7 +174,7 @@ import antlr.collections.impl.BitSet;
  *	  o Tested against JDK 1.5 source base and source base of jdigraph project
  *	  o Thanks to Matt Quail for doing the hard part by doing most of the generics work
  *
- * Version 1.22.1 (July 28, 2004)
+ * VersionData 1.22.1 (July 28, 2004)
  *	  Bug/omission fixes for Java 1.5 language support
  *	  o Fixed tree structure bug with classOrInterface - thanks to Pieter Vangorpto for
  *		spotting this
@@ -184,13 +184,13 @@ import antlr.collections.impl.BitSet;
  *		and package definitions
  *	  o Fixed problems when parsing if ((char.class.equals(c))) {} - solution by Matt Quail at Cenqua
  *
- * Version 1.22.2 (July 28, 2004)
+ * VersionData 1.22.2 (July 28, 2004)
  *	  Slight refactoring of Java 1.5 language support
  *	  o Refactored for/"foreach" productions so that original literal "for" literal
  *	    is still used but the for sub-clauses vary by token type
  *	  o Fixed bug where type parameter was not included in generic constructor's branch of AST
  *
- * Version 1.22.3 (August 26, 2004)
+ * VersionData 1.22.3 (August 26, 2004)
  *	  Bug fixes as identified by Michael Stahl; clean up of tabs/spaces
  *        and other refactorings
  *	  o Fixed typeParameters omission in identPrimary and newStatement
@@ -198,14 +198,14 @@ import antlr.collections.impl.BitSet;
  *	  o Adapted enum/assert keyword checking support from Michael Stahl's java15 grammar
  *	  o Refactored typeDefinition production and field productions to reduce duplication
  *
- * Version 1.22.4 (October 21, 2004)
+ * VersionData 1.22.4 (October 21, 2004)
  *    Small bux fixes
  *    o Added typeArguments to explicitConstructorInvocation, e.g. new <String>MyParameterised()
  *    o Added typeArguments to postfixExpression productions for anonymous inner class super
  *      constructor invocation, e.g. new Outer().<String>super()
  *    o Fixed bug in array declarations identified by Geoff Roy
  *
- * Version 1.22.4.j.1
+ * VersionData 1.22.4.j.1
  *	  Changes by Jeremy Rayner to support java2groovy tool
  *    o I have taken java.g for Java1.5 from Michael Studman (1.22.4)
  *      and have made some changes to enable use by java2groovy tool (Jan 2007)

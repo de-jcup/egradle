@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -13,9 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+ package de.jcup.egradle.core.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,6 +32,17 @@ import java.io.OutputStream;
  */
 public class FileUtil {
 
+	public static final FileFilter ONLY_DIRECTORIES = new FileFilter() {
+		
+		@Override
+		public boolean accept(File file) {
+			if (file==null){
+				return false;
+			}
+			return file.isDirectory();
+		}
+	};
+
 	/**
 	 * Copy given src folder itself into dest folder<br>
 	 * e.g. copy "testfolder" into "targetfolder", resuls in "targetfolder/testfolder/..."
@@ -39,6 +51,18 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public static void copyDirectories(File sourceFolder, File destinationFolder) throws IOException {
+		copyDirectories(sourceFolder, destinationFolder,null);
+	}
+	
+	/**
+	 * Copy given src folder itself into dest folder<br>
+	 * e.g. copy "testfolder" into "targetfolder", resuls in "targetfolder/testfolder/..."
+	 * @param sourceFolder
+	 * @param destinationFolder
+	 * @param targetFileNameTransformer 
+	 * @throws IOException
+	 */
+	public static void copyDirectories(File sourceFolder, File destinationFolder, Transformer<String> targetFileNameTransformer) throws IOException {
 		if (sourceFolder == null) {
 			throw new IllegalArgumentException("src may not be null!");
 		}
@@ -51,10 +75,10 @@ public class FileUtil {
 		if (destinationFolder.exists()){
 			throw new IOException("destination already exists:"+destinationFolder);
 		}
-		copyRecursive(sourceFolder, destinationFolder);
+		copyRecursive(sourceFolder, destinationFolder, targetFileNameTransformer);
 	}
 		
-	private static void copyRecursive(File src, File dest) throws IOException {
+	private static void copyRecursive(File src, File dest, Transformer<String> targetFileNameTransformer) throws IOException {
 		
 		if (src.isDirectory()) {
 			if (!dest.exists()) {
@@ -64,9 +88,13 @@ public class FileUtil {
 			File srcDirChildren[] = sourceDirectory.listFiles();
 
 			for (File srcFile : srcDirChildren) {
-				File destFile = new File(dest, srcFile.getName());
+				String name = srcFile.getName();
+				if (targetFileNameTransformer!=null){
+					name = targetFileNameTransformer.transform(name);
+				}
+				File destFile = new File(dest, name);
 				
-				copyRecursive(srcFile, destFile);
+				copyRecursive(srcFile, destFile, targetFileNameTransformer);
 			}
 		} else {
 			copyFile(src, dest);

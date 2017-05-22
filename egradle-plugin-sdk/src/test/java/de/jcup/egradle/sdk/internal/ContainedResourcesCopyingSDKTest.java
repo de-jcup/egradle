@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 Albert Tregnaghi
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, VersionData 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *		http://www.apache.org/licenses/LICENSE-2.0
@@ -22,6 +22,8 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.core.RootFolderProvider;
+import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.sdk.SDK;
 
 public class ContainedResourcesCopyingSDKTest {
@@ -40,24 +42,24 @@ public class ContainedResourcesCopyingSDKTest {
 
 	@Before
 	public void before() {
-		sdkToTest = new ContainedResourcesCopyingSDK("1.0.0", createRootFolderProvider(),null);
+		sdkToTest = new ContainedResourcesCopyingSDK(new VersionData("1.0.0"), createRootFolderProvider(),null);
 	}
 	
 	@Test
 	public void get_version_returns_set_version() {
-		assertEquals("1.0.0",sdkToTest.getVersion());
+		assertEquals(new VersionData("1.0.0"),sdkToTest.getVersion());
 	}
 	
 	@Test
 	public void get_version_returns_unknown_for_manager_called_with_null() {
 		sdkToTest = new ContainedResourcesCopyingSDK(null,createRootFolderProvider(),null);
-		assertEquals("unknown",sdkToTest.getVersion());
+		assertEquals(VersionData.UNKNOWN, sdkToTest.getVersion());
 	}
 	
 	@Test
 	public void get_version_returns_unknown_for_manager_called_with_blank_string() {
-		sdkToTest = new ContainedResourcesCopyingSDK(" ",createRootFolderProvider(),null);
-		assertEquals("unknown",sdkToTest.getVersion());
+		sdkToTest = new ContainedResourcesCopyingSDK(new VersionData(" "),createRootFolderProvider(),null);
+		assertEquals(VersionData.UNKNOWN,sdkToTest.getVersion());
 	}
 	
 }
