@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Properties;
 
 import de.jcup.egradle.core.RootFolderProvider;
-import de.jcup.egradle.core.util.FileUtil;
 import de.jcup.egradle.core.util.LogAdapter;
 
 public class FileStructureTemplateManager {
@@ -31,7 +30,6 @@ public class FileStructureTemplateManager {
 		this.logAdapter = logAdapter;
 	}
 
-	/* FIXME ATR, 18.05.2017: implement + use */
 	public List<FileStructureTemplate> getTemplates() {
 		if (useCache) {
 			return fileStructureTemplates;
@@ -53,7 +51,7 @@ public class FileStructureTemplateManager {
 			return;
 		}
 		/* inside root folder the template folders exist */
-		File[] templateFolders = rootFolder.listFiles(FileUtil.ONLY_DIRECTORIES);
+		File[] templateFolders = rootFolder.listFiles(FileStructureTemplate.ONLY_DIRECTORIES);
 		if (templateFolders == null) {
 			return;
 		}
@@ -67,7 +65,7 @@ public class FileStructureTemplateManager {
 
 	private void addTemplateFolder(File templateFolder) {
 		Properties p = getSafeProperties(templateFolder);
-		FileStructureTemplate template = new FileStructureTemplate(templateFolder, p);
+		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME),templateFolder,p.getProperty(PROP_DESCRIPTION));
 		fileStructureTemplates.add(template);
 	}
 
@@ -75,12 +73,6 @@ public class FileStructureTemplateManager {
 	private Properties getSafeProperties(File templateFolder){
 		 Properties p = new Properties();
 		 tryToLoadProperties(p, templateFolder);
-		 if (p.get(PROP_NAME)==null){
-			 p.setProperty(PROP_NAME,templateFolder.getName());
-		 }
-		 if (p.get(PROP_DESCRIPTION)==null){
-			 p.setProperty(PROP_DESCRIPTION, "No description");
-		 }
 		 return p;
 
 	}

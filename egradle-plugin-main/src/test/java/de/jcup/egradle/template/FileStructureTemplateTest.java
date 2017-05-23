@@ -1,85 +1,130 @@
 package de.jcup.egradle.template;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.util.Properties;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+import org.junit.rules.ExpectedException;
+
+import de.jcup.egradle.core.util.DirectoryCopySupport;
+import de.jcup.egradle.core.util.FileSupport;
+import de.jcup.egradle.template.FileStructureTemplate.TemplateContentTransformerFactory;
 
 public class FileStructureTemplateTest {
 
 	private Properties properties;
 	private File contentRootFolder;
 	private FileStructureTemplate templateToTest;
-	private String time;
 
+	@Rule
+	public ExpectedException expected = ExpectedException.none();
+	private FileSupport mockedFileSupport;
+	private DirectoryCopySupport mockedCopySupport;
+	private TemplateContentTransformer mockedContentTransformer;
+	private TemplateContentTransformerFactory mockedContentTransformerFactory;
+	
 	@Before
 	public void before() throws Exception{
-		time = Long.toString(System.nanoTime());
 		
-		contentRootFolder = File.createTempFile("test-file-structure-", time);
-		contentRootFolder.delete();// was a file...
-		contentRootFolder.mkdirs();
-		contentRootFolder.deleteOnExit();
-		
+		contentRootFolder = mock(File.class);
 		properties = mock(Properties.class);
+		mockedContentTransformer = mock(TemplateContentTransformer.class);
 		
-		templateToTest = new FileStructureTemplate(contentRootFolder, properties);
+		mockedContentTransformerFactory = mock(TemplateContentTransformerFactory.class);
+		when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class))).thenReturn(mockedContentTransformer);
+
+		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
+		
+		mockedCopySupport = mock(DirectoryCopySupport.class);
+		mockedFileSupport = mock(FileSupport.class);
+		
+		templateToTest.copySupport=mockedCopySupport;
+		templateToTest.fileSupport=mockedFileSupport;
+		templateToTest.contentTransformerFactory=mockedContentTransformerFactory;
 	}
 
 	@Test
-	public void apply_from_to_target_copies_textfile1() throws Exception {
-		/* prepare */
-		String content = "textfile content -  "+time;
-
-		File textFile1 = new File(contentRootFolder, "textfile1.txt");
-		textFile1.createNewFile();
-		try(FileWriter fw = new FileWriter(textFile1)){
-			fw.write(content);
-		}
-		
-		File targetFolder = File.createTempFile("test-file-structure-target", Long.toString(System.nanoTime()));
-		targetFolder.delete();// was a file...
+	public void apply_from__null_throws_IllegalArgument() throws Exception{
+		expected.expect(IllegalArgumentException.class);
 		
 		/* execute */
-		templateToTest.applyTo(targetFolder);
+		templateToTest.applyTo(null,properties);
+		
+	}
+	@Test
+	public void a_template_does_create_per_default_a_content_transformer_factory_which_does_create_a_transformer(){
+		/* prepare */
+		Properties p = new Properties();
+		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
+
+		/* check preconditions */
+		assertNotNull(templateToTest.contentTransformerFactory);
+		
+		/* execute */
+		TemplateContentTransformer transformer = templateToTest.contentTransformerFactory.createTemplateContentTransformer(p);
 		
 		/* test */
-		File[] files = targetFolder.listFiles();
-		assertNotNull(files);
-		assertEquals(1,files.length);
-		assertEquals(new File(targetFolder,"textfile1.txt"),files[0]);
-		
-		
+		assertNotNull(transformer);
 	}
 	
 	@Test
-	public void apply_from_to_target_copies_underscore_textfile1_to_textfile1() throws Exception {
+	public void a_template_does_call_the_content_transformer_factory_with_given_properties() throws Exception{
 		/* prepare */
-		String content = "textfile content -  "+time;
-
-		File textFile1 = new File(contentRootFolder, "_textfile1.txt");
-		textFile1.createNewFile();
-		try(FileWriter fw = new FileWriter(textFile1)){
-			fw.write(content);
-		}
-		
-		File targetFolder = File.createTempFile("test-file-structure-target", Long.toString(System.nanoTime()));
-		targetFolder.delete();// was a file...
+		File mockedTargetFolder = buildDirectoryMock();
+		Properties p = new Properties();
 		
 		/* execute */
-		templateToTest.applyTo(targetFolder);
+		templateToTest.applyTo(mockedTargetFolder, p);
 		
 		/* test */
-		File[] files = targetFolder.listFiles();
-		assertNotNull(files);
-		assertEquals(1,files.length);
-		assertEquals(new File(targetFolder,"textfile1.txt"),files[0]);
+		verify(mockedContentTransformerFactory).createTemplateContentTransformer(p);
+	}
+	
+	@Test
+	public void apply_from__new_target_file_calls_copy_support_with_an_template_file_name_transformer() throws Exception{
+		/* prepare */
+		File mockedTargetFolder = buildDirectoryMock();
 		
+		/* execute */
+		templateToTest.applyTo(mockedTargetFolder,properties);
+		
+		/* test */
+		verify(mockedCopySupport).copyDirectories(eq(contentRootFolder), eq(mockedTargetFolder), any(TemplateFileNameTransformer.class), eq(Boolean.TRUE));
 		
 	}
+
+	private File buildDirectoryMock() {
+		File mockedTargetFolder= mock(File.class);
+		when(mockedTargetFolder.isDirectory()).thenReturn(true);
+		when(mockedTargetFolder.listFiles()).thenReturn(new File[]{});
+		return mockedTargetFolder;
+	}
+	
+	@Test
+	public void apply_from__new_target_file_calls_file_support_to_write_file() throws Exception{
+		/* prepare */
+		File mockedTargetFile= mock(File.class);
+		File mockedTargetFolder = mock(File.class);
+		
+		when(mockedTargetFolder.listFiles()).thenReturn(new File[]{mockedTargetFile});
+		when(mockedTargetFolder.isDirectory()).thenReturn(true);
+
+		when(mockedTargetFile.isFile()).thenReturn(true);
+
+		when(mockedContentTransformer.transform(any())).thenReturn("");
+		
+		/* execute */
+		templateToTest.applyTo(mockedTargetFolder,properties);
+		
+		/* test */
+		verify(mockedFileSupport).writeTextFile(eq(mockedTargetFile),any(String.class)); 
+		
+	}
+	
 }

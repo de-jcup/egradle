@@ -15,6 +15,8 @@
  */
 package de.jcup.egradle.core.util;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,21 +26,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class FileHelper {
+public class FileSupport {
 
 	private static final int TIME_TO_SLEEP__BEFORE_RETRY = 1000;
 
-	public static final FileHelper DEFAULT= new FileHelper();
+	public static final FileSupport DEFAULT = new FileSupport();
 
 	private static final int MAX_RETRY = 5;
+	
+	private static final String LINE_SEP = System.getProperty("line.separator");
 
 	private byte[] buffer = new byte[8192];
 
@@ -129,7 +131,7 @@ public class FileHelper {
 						}
 					}
 					if (src != null) {
-							src.close();
+						src.close();
 					}
 				}
 			}
@@ -158,17 +160,17 @@ public class FileHelper {
 		return path.replace(oldSeparator, newSeparator);
 	}
 
-	
 	public void createTextFile(File parentFolder, String fileName, String content) throws IOException {
-		File gitIgnore = new File(parentFolder, fileName);
-		try (FileOutputStream fileOutputStram = new FileOutputStream(gitIgnore);
+		File textFile = new File(parentFolder, fileName);
+		try (FileOutputStream fileOutputStram = new FileOutputStream(textFile);
 				OutputStreamWriter w = new OutputStreamWriter(fileOutputStram, "UTF-8")) {
-			gitIgnore.createNewFile();
+			textFile.createNewFile();
 			w.write(content);
 		} catch (Exception e) {
-			throw new IOException("Cannot create "+fileName, e);
+			throw new IOException("Cannot create " + fileName, e);
 		}
 	}
+
 	/**
 	 * Copies all bytes in the given source file to the given destination file.
 	 *
@@ -216,80 +218,65 @@ public class FileHelper {
 		}
 	}
 
-	/**
-	 * Read file to string buffer
-	 * @param fileName
-	 * @return string buffer, never <code>null</code>
-	 * @throws IOException
-	 */
-	public StringBuffer read(String fileName) throws IOException {
-		return read(new FileReader(fileName));
-	}
-
-	/**
-	 * Read by reader to string buffer
-	 * @param reader
-	 * @return string buffer never <code>null</code>
-	 * @throws IOException
-	 */
-	public StringBuffer read(Reader reader) throws IOException {
-		StringBuffer s = new StringBuffer();
-		try {
-			char[] charBuffer = new char[8196];
-			int chars = reader.read(charBuffer);
-			while (chars != -1) {
-				s.append(charBuffer, 0, chars);
-				chars = reader.read(charBuffer);
-			}
-		} finally {
-			try {
-				reader.close();
-			} catch (IOException e) {
+	public String readTextFile(File file) throws IOException {
+		StringBuilder s = new StringBuilder();
+		try (BufferedReader br=new BufferedReader(new FileReader(file))){
+			String line = "";
+			while ((line=br.readLine())!=null){
+				if (s.length()>0){
+					/* had content so do add line separtion too */
+					s.append(LINE_SEP);
+				}
+				s.append(line);
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
-	public void write(String fileName, StringBuffer content) throws IOException {
-		Writer writer = new FileWriter(fileName);
-		try {
-			writer.write(content.toString());
-		} finally {
-			try {
-				writer.close();
-			} catch (IOException e) {
-			}
+	public void writeTextFile(File file, String content) throws IOException {
+		if (file.isDirectory()) {
+			throw new IOException("Cannot write content to an existing directory:" + file);
+		}
+		delete(file);
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+			bw.write(content);
 		}
 	}
 
 	/**
 	 * Delete given file. If it is a folder delete is done recursive
+	 * 
 	 * @param file
 	 * @throws IOException
+	 * @throws IllegalArgumentException when file is <code>null</code>
 	 */
 	public void delete(File file) throws IOException {
-		if (file.exists()) {
-			if (file.isDirectory()) {
-				File[] children = file.listFiles();
-				for (File child : children) {
-					delete(child);
+		if (file == null) {
+			throw new IllegalArgumentException("file may not be null!");
+		}
+		if (!file.exists()) {
+			return;
+		}
+		if (file.isDirectory()) {
+			File[] children = file.listFiles();
+			for (File child : children) {
+				delete(child);
+			}
+		}
+		boolean deleted = false;
+		for (int i = 0; i < MAX_RETRY; i++) {
+			if (file.delete()) {
+				deleted = true;
+				break;
+			} else {
+				try {
+					Thread.sleep(TIME_TO_SLEEP__BEFORE_RETRY);
+				} catch (InterruptedException e) {
 				}
 			}
-			boolean deleted = false;
-			for (int i = 0; i < MAX_RETRY; i++) {
-				if (file.delete()) {
-					deleted = true;
-					break;
-				} else {
-					try {
-						Thread.sleep(TIME_TO_SLEEP__BEFORE_RETRY); 
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-			if (!deleted) {
-				throw new IOException("cannot delete file:" + file);
-			}
+		}
+		if (!deleted) {
+			throw new IOException("cannot delete file:" + file);
 		}
 	}
 
@@ -299,9 +286,9 @@ public class FileHelper {
 
 	public File getEGradleUserHomeFolder(String folder) {
 		String userHome = System.getProperty("user.home");
-		File egradleFolder = new File(userHome,".egradle");
+		File egradleFolder = new File(userHome, ".egradle");
 		File target = egradleFolder;
-		if (! StringUtils.isBlank(folder)){
+		if (!StringUtils.isBlank(folder)) {
 			target = new File(egradleFolder, folder);
 		}
 		target.mkdirs();

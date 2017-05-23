@@ -3,7 +3,7 @@ package de.jcup.egradle.core;
 import java.io.File;
 import java.io.IOException;
 
-public interface CopySupport {
+public interface RootFolderCopySupport {
 
 	/**
 	 * Copies defined folder with defined version to given 

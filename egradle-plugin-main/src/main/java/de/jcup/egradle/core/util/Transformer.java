@@ -5,7 +5,7 @@ public interface Transformer<T> {
 	/**
 	 * Returns transformed source or source again
 	 * @param source
-	 * @return transformed source or source again never <code>null</code>
+	 * @return transformation result
 	 */
 	public T transform(T source);
 }

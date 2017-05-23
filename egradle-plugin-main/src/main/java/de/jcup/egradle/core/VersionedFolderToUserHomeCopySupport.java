@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import de.jcup.egradle.core.util.FileUtil;
+import de.jcup.egradle.core.util.DirectoryCopySupport;
 import de.jcup.egradle.core.util.LogAdapter;
 
 /**
@@ -15,23 +15,27 @@ import de.jcup.egradle.core.util.LogAdapter;
  * @author Albert Tregnaghi
  *
  */
-public class VersionedFolderToUserHomeCopySupport implements CopySupport {
+public class VersionedFolderToUserHomeCopySupport implements RootFolderCopySupport {
 
 	private File targetFolder;
+	private DirectoryCopySupport copySupport;
 
 	public VersionedFolderToUserHomeCopySupport(String path, VersionData versionData, LogAdapter logAdapter) {
 		notNull(path, "'pathFromEGradleUserHome' may not be null");
 		notNull(versionData, "'version' may not be null");
 		
+		copySupport = new DirectoryCopySupport();
+
 		String userHome = System.getProperty("user.home");
 		File egradleRoot = new File(userHome,".egradle");
 		File mainPath = new File(egradleRoot,path);
 		
 		targetFolder = new File(mainPath,versionData.getAsText());
+		
 	}
 
 	/* (non-Javadoc)
-	 * @see de.jcup.egradle.core.CopySupport#copyFrom(de.jcup.egradle.template.RootFolderProvider)
+	 * @see de.jcup.egradle.core.RootFolderCopySupport#copyFrom(de.jcup.egradle.template.RootFolderProvider)
 	 */
 	@Override
 	public boolean copyFrom(RootFolderProvider rootFolderProvider) throws IOException {
@@ -43,12 +47,12 @@ public class VersionedFolderToUserHomeCopySupport implements CopySupport {
 		if (!internalFolder.exists()){
 			throw new FileNotFoundException("Did not find:"+internalFolder.toString());
 		}
-		FileUtil.copyDirectories(internalFolder,targetFolder);
+		copySupport.copyDirectories(internalFolder,targetFolder,true);
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see de.jcup.egradle.core.CopySupport#isTargetFolderExisting()
+	 * @see de.jcup.egradle.core.RootFolderCopySupport#isTargetFolderExisting()
 	 */
 	@Override
 	public boolean isTargetFolderExisting() {
@@ -56,7 +60,7 @@ public class VersionedFolderToUserHomeCopySupport implements CopySupport {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.jcup.egradle.core.CopySupport#getTargetFolder()
+	 * @see de.jcup.egradle.core.RootFolderCopySupport#getTargetFolder()
 	 */
 	@Override
 	public File getTargetFolder() {

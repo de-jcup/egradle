@@ -13,7 +13,7 @@ import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.jcup.egradle.core.CopySupport;
+import de.jcup.egradle.core.RootFolderCopySupport;
 import de.jcup.egradle.core.RootFolderProvider;
 import de.jcup.egradle.core.SimpleRootFolderProvider;
 import de.jcup.egradle.core.VersionData;
@@ -41,7 +41,7 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 
 	private FileStructureTemplateManager newProjectTemplateManager;
 
-	private CopySupport templatesCopySupport;
+	private RootFolderCopySupport templatesCopySupport;
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);

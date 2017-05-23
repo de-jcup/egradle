@@ -56,7 +56,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 
-import de.jcup.egradle.core.util.FileHelper;
+import de.jcup.egradle.core.util.FileSupport;
 import de.jcup.egradle.eclipse.MainActivator;
 
 public class EclipseResourceHelper {
@@ -66,7 +66,7 @@ public class EclipseResourceHelper {
 	private final int MAX_RETRY = 5;
 	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
 	
-	private FileHelper fileHelper = new FileHelper();
+	private FileSupport fileSupport = new FileSupport();
 
 	public void addFileFilter(IProject newProject, String pattern, IProgressMonitor monitor) throws CoreException {
 		FileInfoMatcherDescription matcherDescription = new FileInfoMatcherDescription(FILE_FILTER_ID, pattern);
@@ -346,8 +346,8 @@ public class EclipseResourceHelper {
 		}
 	}
 
-	private FileHelper getFileHelper(){
-		return fileHelper;
+	private FileSupport getFileHelper(){
+		return fileSupport;
 	}
 
 	

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
 
-import de.jcup.egradle.core.CopySupport;
+import de.jcup.egradle.core.RootFolderCopySupport;
 import de.jcup.egradle.core.RootFolderProvider;
 import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.core.VersionedFolderToUserHomeCopySupport;
@@ -32,7 +32,7 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
 	private File targetFolder;
 	private LogAdapter logAdapter;
-	private CopySupport copySupport;
+	private RootFolderCopySupport rootFolderCopySupport;
 	private RootFolderProvider rootFolderProvider;
 
 	/**
@@ -50,18 +50,18 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 		this.rootFolderProvider=rootFolderProvider;
 		this.logAdapter=logAdapter;
 		
-		copySupport = new VersionedFolderToUserHomeCopySupport("sdk",getVersion(), logAdapter);
+		rootFolderCopySupport = new VersionedFolderToUserHomeCopySupport("sdk",getVersion(), logAdapter);
 	}
 
 	@Override
 	public boolean isInstalled() {
-		return copySupport.isTargetFolderExisting();
+		return rootFolderCopySupport.isTargetFolderExisting();
 	}
 	
 
 	@Override
 	public void install() throws IOException {
-		if (! copySupport.copyFrom(rootFolderProvider)){
+		if (! rootFolderCopySupport.copyFrom(rootFolderProvider)){
 			return;
 		}
 		

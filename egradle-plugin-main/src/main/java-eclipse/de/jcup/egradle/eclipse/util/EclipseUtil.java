@@ -44,7 +44,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;
 
 import de.jcup.egradle.core.VersionData;
-import de.jcup.egradle.core.util.FileHelper;
+import de.jcup.egradle.core.util.FileSupport;
 import de.jcup.egradle.eclipse.MainActivator;
 
 public class EclipseUtil {
@@ -119,8 +119,8 @@ public class EclipseUtil {
 		return projects;
 	}
 
-	public static FileHelper getFileHelper() {
-		return FileHelper.DEFAULT;
+	public static FileSupport getFileHelper() {
+		return FileSupport.DEFAULT;
 	}
 
 	/**

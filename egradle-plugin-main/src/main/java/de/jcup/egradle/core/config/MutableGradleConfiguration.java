@@ -16,15 +16,15 @@
  package de.jcup.egradle.core.config;
 
 import de.jcup.egradle.core.process.EGradleShellType;
-import de.jcup.egradle.core.util.FileHelper;
+import de.jcup.egradle.core.util.FileSupport;
 
 public class MutableGradleConfiguration implements GradleConfiguration{
 	
-	private FileHelper fileHelper = FileHelper.DEFAULT;
+	private FileSupport fileSupport = FileSupport.DEFAULT;
 	
 	@Override
 	public String getGradleCommandFullPath() {
-		return fileHelper.createCorrectFilePath(gradleBinDirectory, gradleCommand);
+		return fileSupport.createCorrectFilePath(gradleBinDirectory, gradleCommand);
 	}
 	
 	@Override
