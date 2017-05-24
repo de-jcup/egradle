@@ -30,7 +30,6 @@ import de.jcup.egradle.core.util.LogAdapter;
 
 public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
-	private File targetFolder;
 	private LogAdapter logAdapter;
 	private RootFolderCopySupport rootFolderCopySupport;
 	private RootFolderProvider rootFolderProvider;
@@ -65,7 +64,7 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 			return;
 		}
 		
-		File sdkInfoFile = new File(targetFolder,"sdk.xml");
+		File sdkInfoFile = new File(rootFolderCopySupport.getTargetFolder(),"sdk.xml");
 		XMLSDKInfo sdkInfo = null;
 		if (sdkInfoFile.exists()){
 			XMLSDKInfoImporter importer = new XMLSDKInfoImporter();
@@ -92,7 +91,7 @@ public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
 	@Override
 	public File getSDKInstallationFolder() {
-		return targetFolder;
+		return rootFolderCopySupport.getTargetFolder();
 	}
 
 	@Override

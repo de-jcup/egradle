@@ -5,7 +5,10 @@ import static org.apache.commons.lang3.Validate.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,9 +40,9 @@ public class FileStructureTemplate {
 		this.fileSupport = new FileSupport();
 		this.name = name;
 		this.description = description;
-		
+
 		/* own internal factory so easier to test */
-		this.contentTransformerFactory=new TemplateContentTransformerFactory(); 
+		this.contentTransformerFactory = new TemplateContentTransformerFactory();
 	}
 
 	public String getName() {
@@ -70,16 +73,16 @@ public class FileStructureTemplate {
 	 * @throws IOException
 	 */
 	public void applyTo(File targetFolder, Properties properties) throws IOException {
-		if (targetFolder==null){
+		if (targetFolder == null) {
 			throw new IllegalArgumentException("target folder may not be null!");
 		}
-		if (! targetFolder.isDirectory()){
-			throw new IOException("Given file is no folder:"+targetFolder);
+		if (!targetFolder.isDirectory()) {
+			throw new IOException("Given file is no folder:" + targetFolder);
 		}
 		if (properties == null) {
 			properties = new Properties();
 		}
-		
+
 		copyFiles(targetFolder, properties);
 
 		transformFiles(targetFolder, properties);
@@ -93,24 +96,26 @@ public class FileStructureTemplate {
 	}
 
 	private void transformFiles(File targetFolder, Properties properties) throws IOException {
-		TemplateContentTransformer templateContentTransformer = contentTransformerFactory.createTemplateContentTransformer(properties);
+		TemplateContentTransformer templateContentTransformer = contentTransformerFactory
+				.createTemplateContentTransformer(properties);
 
-		if (templateContentTransformer==null){
-			throw new IllegalStateException("Factory wrong implemented, returns null for transformer:"+contentTransformerFactory.getClass());
+		if (templateContentTransformer == null) {
+			throw new IllegalStateException(
+					"Factory wrong implemented, returns null for transformer:" + contentTransformerFactory.getClass());
 		}
-		
+
 		transformContentRecursive(targetFolder, templateContentTransformer);
 	}
 
 	private void transformContentRecursive(File file, TemplateContentTransformer transformer) throws IOException {
 		if (file.isFile()) {
-				String source = fileSupport.readTextFile(file);
-				String transformed = transformer.transform(source);
-				if (StringUtils.equals(source,transformed)){
-					// ignore - same content as before
-					return;
-				}
-				fileSupport.writeTextFile(file, transformed);
+			String source = fileSupport.readTextFile(file);
+			String transformed = transformer.transform(source);
+			if (StringUtils.equals(source, transformed)) {
+				// ignore - same content as before
+				return;
+			}
+			fileSupport.writeTextFile(file, transformed);
 		} else if (file.isDirectory()) {
 			for (File subFile : file.listFiles()) {
 				transformContentRecursive(subFile, transformer);
@@ -129,13 +134,29 @@ public class FileStructureTemplate {
 			return file.isDirectory();
 		}
 	};
-	
+
 	static class TemplateContentTransformerFactory {
 
-		public TemplateContentTransformer createTemplateContentTransformer(Properties properties){
+		public TemplateContentTransformer createTemplateContentTransformer(Properties properties) {
 			return new TemplateContentTransformer(properties);
 		}
 	}
 
+	private Set<Feature> enabledFeatures = new HashSet<>();
+	
+	
+	public void enableFeature(Feature f) {
+		if (f==null){
+			return;
+		}
+		enabledFeatures.add(f);
+	}
+
+	public boolean hasFeature(Feature feature) {
+		if (feature==null){
+			return false;
+		}
+		return enabledFeatures.contains(feature);
+	}
 
 }

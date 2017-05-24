@@ -109,7 +109,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 		SDKInfo sdkInfo = sdk.getInfo();
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("VersionData ").append(sdkInfo.getSdkVersion()).append(" contains\n");
+		sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
 		sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
 		Date installationDate = sdkInfo.getInstallationDate();
 		if (installationDate!=null){

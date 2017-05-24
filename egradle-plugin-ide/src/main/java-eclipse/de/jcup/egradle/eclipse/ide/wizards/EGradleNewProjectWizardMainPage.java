@@ -7,9 +7,11 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPage {
 
-	public EGradleNewProjectWizardMainPage() {
-		super("main");
+	private NewProjectContext context;
 
+	public EGradleNewProjectWizardMainPage(NewProjectContext context) {
+		super("main");
+		this.context=context;
 		setTitle("Create a Gradle Project");
 		setImageDescriptor(IDEUtil.createImageDescriptor("icons/egradle-banner_64x64.png"));
 		setDescription("Enter project name and location.");

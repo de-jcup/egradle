@@ -66,6 +66,14 @@ public class FileStructureTemplateManager {
 	private void addTemplateFolder(File templateFolder) {
 		Properties p = getSafeProperties(templateFolder);
 		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME),templateFolder,p.getProperty(PROP_DESCRIPTION));
+		for (Feature f: Features.values()){
+			String value = p.getProperty(f.getId());
+			if (Boolean.valueOf(value)){
+				template.enableFeature(f);
+			}
+			
+		}
+		
 		fileStructureTemplates.add(template);
 	}
 
