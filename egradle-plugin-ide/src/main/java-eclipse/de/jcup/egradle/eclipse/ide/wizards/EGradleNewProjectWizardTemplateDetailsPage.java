@@ -9,7 +9,6 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import de.jcup.egradle.eclipse.ide.IDEUtil;
@@ -23,6 +22,8 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private Group multiProjectGroup;
 	private Composite composite;
 	private Text multiProjectNamesText;
+	private Group javaGroup;
+	private Text javaSourceCompatibility;
 
 	public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
 		super("templateDetails");
@@ -47,23 +48,43 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		initMultiProjectParts(composite);
+		initJavaParts(composite);
+		
 		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// Show description on opening
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(composite);
+		
 		Dialog.applyDialogFont(composite);
 
 		updateUI();
 	}
 
 	private void initMultiProjectParts(Composite composite) {
-		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project definition", 1, SWT.FILL, SWT.FILL);
+		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
 
-		Label label = SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
+		SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
 		multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
 	
 		multiProjectNamesText.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				setPageComplete(validatePage());
+			}
+		});
+	
+	}
+	
+	private void initJavaParts(Composite composite) {
+		javaGroup = SWTFactory.createGroup(composite, "Java", 1, SWT.FILL, SWT.FILL);
+
+		SWTFactory.createLabel(javaGroup, "Please enter source compatibility level (e.g. 1.8)", SWT.FILL);
+		javaSourceCompatibility = SWTFactory.createSingleText(javaGroup, 1);
+		javaSourceCompatibility.setText("1.8");
+	
+		javaSourceCompatibility.addModifyListener(new ModifyListener() {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -78,8 +99,13 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		if (selectedTemplate==null){
 			return false;
 		}
-		if (selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT)){
+		if (isMultiProject(selectedTemplate)){
 			if (StringUtils.isBlank(multiProjectNamesText.getText())){
+				return false;
+			}
+		}
+		if (isSupportingJava(selectedTemplate)){
+			if (StringUtils.isBlank(javaSourceCompatibility.getText())){
 				return false;
 			}
 		}
@@ -104,10 +130,19 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		}
 		composite.setVisible(true);
 		setDescription("Define details for " + selectedTemplate.getName());
-		boolean isMultiProject = selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
-		multiProjectGroup.setVisible(isMultiProject);
+		multiProjectGroup.setVisible(isMultiProject(selectedTemplate));
+		javaGroup.setVisible(isSupportingJava(selectedTemplate));
+		
 		setPageComplete(validatePage());
 
+	}
+
+	private boolean isSupportingJava(FileStructureTemplate selectedTemplate) {
+		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA);
+	}
+
+	private boolean isMultiProject(FileStructureTemplate selectedTemplate) {
+		return selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
 	}
 
 }

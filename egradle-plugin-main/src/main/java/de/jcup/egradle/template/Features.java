@@ -4,7 +4,7 @@ public enum Features implements Feature{
 
 	NEW_PROJECT__TYPE_MULTI_PROJECT("feature.newproject.type.multiproject"),
 	NEW_PROJECT__TYPE_SINGLE_PROJECT("feature.newproject.type.singleproject"),
-	
+	NEW_PROJECT__SUPPORTS_JAVA("feature.newproject.supports.java"),
 	;
 	
 	private String id;

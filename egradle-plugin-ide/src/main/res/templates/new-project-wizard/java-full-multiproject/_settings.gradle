@@ -1,3 +1,3 @@
 
-include $egradle.template.includedSubprojcts
+include #{$egradle.template.subprojects.include}
 		
