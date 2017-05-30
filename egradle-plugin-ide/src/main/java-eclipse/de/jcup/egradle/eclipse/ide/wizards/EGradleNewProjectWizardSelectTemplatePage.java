@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Text;
 
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
+import de.jcup.egradle.ide.NewProjectContext;
 import de.jcup.egradle.template.FileStructureTemplate;
 
 public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {

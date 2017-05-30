@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.ide.NewProjectContext;
 
 public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPage {
 
@@ -21,6 +22,12 @@ public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPag
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
+	}
+	
+	@Override
+	protected boolean validatePage() {
+		context.setProjectName(getProjectName());
+		return super.validatePage();
 	}
 
 }

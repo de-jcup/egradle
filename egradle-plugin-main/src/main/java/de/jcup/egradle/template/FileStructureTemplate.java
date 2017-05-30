@@ -83,9 +83,17 @@ public class FileStructureTemplate {
 			properties = new Properties();
 		}
 
-		copyFiles(targetFolder, properties);
+		try{
+			copyFiles(targetFolder, properties);
+		}catch(IOException e){
+			throw new IOException("Cannot copy files from:"+pathToContent+" to "+targetFolder,e);
+		}
+		try{
+			transformFiles(targetFolder, properties);
+		}catch(IOException e){
+			throw new IOException("Cannot transform files from:"+pathToContent+" to "+targetFolder,e);
+		}
 
-		transformFiles(targetFolder, properties);
 
 	}
 	/* FIXME ATR, 22.05.2017: integrate into wizard! */

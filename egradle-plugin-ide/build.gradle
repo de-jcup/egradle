@@ -7,4 +7,6 @@ dependencies {
 	compile library.commons_lang
 	//compile library.groovy
 	compile library.antlr
+	
+	compile project(':egradle-plugin-main')
 }

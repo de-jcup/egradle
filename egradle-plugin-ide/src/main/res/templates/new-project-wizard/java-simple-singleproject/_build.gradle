@@ -28,7 +28,7 @@ repositories {
 
 [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 
-sourceCompatibility = "#{egradle.template.java.version}"
+sourceCompatibility = '#{egradle.template.java.version}'
 		
 /* Default dependencies for all sub projects. */
 dependencies{

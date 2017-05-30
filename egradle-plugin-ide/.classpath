@@ -5,6 +5,8 @@
 	<classpathentry kind="src" path="src/main/java-eclipse"/>
 	<classpathentry kind="src" path="src/main/res"/>
 	<classpathentry kind="src" path="src/test/java-eclipse"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="lib" path="/egradle-plugin-main/lib/hamcrest-core-1.1.jar" sourcepath="/egradle-plugin-main/lib/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry kind="lib" path="/egradle-plugin-main/lib/mockito-all-1.8.5.jar" sourcepath="/egradle-plugin-main/lib/mockito-all-1.8.5-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
