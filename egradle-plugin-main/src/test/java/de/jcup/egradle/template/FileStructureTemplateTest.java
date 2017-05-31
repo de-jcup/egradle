@@ -51,25 +51,6 @@ public class FileStructureTemplateTest {
 	}
 	
 	@Test
-	public void test_new_singleproject_template_is_false_when_not_enabled(){
-		/* prepare */
-		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
-		templateToTest.enableFeature(Features.NEW_PROJECT__TYPE_SINGLE_PROJECT);
-		
-		/* test */
-		assertTrue(templateToTest.hasFeature(Features.NEW_PROJECT__TYPE_SINGLE_PROJECT));
-	}
-	
-	@Test
-	public void test_new_singleproject_template_is_true_when_enabled(){
-		/* prepare */
-		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
-		
-		/* test */
-		assertFalse(templateToTest.hasFeature(Features.NEW_PROJECT__TYPE_SINGLE_PROJECT));
-	}
-	
-	@Test
 	public void apply_from__null_throws_IllegalArgument() throws Exception{
 		expected.expect(IllegalArgumentException.class);
 		

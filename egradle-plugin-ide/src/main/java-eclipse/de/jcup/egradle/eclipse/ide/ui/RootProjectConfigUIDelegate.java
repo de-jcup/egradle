@@ -65,9 +65,19 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	private Button validationButton;
 
 	private RootProjectValidationHandler validation;
+	private RootProjectConfigMode mode;
 
 	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation) {
+		this(validation, null);
+	}
+	
+	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation, RootProjectConfigMode rootProjectConfigMode) {
 		this.validation = validation;
+		if (rootProjectConfigMode==null){
+			this.mode=RootProjectConfigMode.USER;
+		}else{
+			this.mode=rootProjectConfigMode;
+		}
 	}
 
 	/**
@@ -85,6 +95,10 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	}
 
 	private void createValidationGroup(Composite parent) {
+		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
+			/* no validation group*/
+			return;
+		}
 		/* ------------------------------------ */
 		/* - Check output - */
 		/* ------------------------------------ */
@@ -290,6 +304,10 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
+		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
+			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
+		}
+		
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME (optional)",
 				defaultGroup);

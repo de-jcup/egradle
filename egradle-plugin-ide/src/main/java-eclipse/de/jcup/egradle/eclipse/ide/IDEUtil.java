@@ -77,6 +77,9 @@ public class IDEUtil {
 	private static UnpersistedMarkerHelper buildScriptProblemMarkerHelper = new UnpersistedMarkerHelper(
 			"de.jcup.egradle.script.problem");
 
+	/**
+	 * @return system console output handler, never <code>null</code>
+	 */
 	public static OutputHandler getSystemConsoleOutputHandler() {
 		if (systemConsoleOutputHandler == null) {
 			systemConsoleOutputHandler = new EGradleSystemConsoleProcessOutputHandler();
@@ -732,9 +735,26 @@ public class IDEUtil {
 		return log;
 	}
 
+	/**
+	 * @return list of all new-project templates, never <code>null</code>
+	 */
 	public static List<FileStructureTemplate> getNewProjectTemplates() {
 		FileStructureTemplateManager manager = IDEActivator.getDefault().getNewProjectTemplateManager();
 		return manager.getTemplates();
+	}
+	
+	/**
+	 * 
+	 * @return gradle wrapper template or <code>null</code>
+	 */
+	public static FileStructureTemplate getGradleWrapperTemplate() {
+		FileStructureTemplateManager manager = IDEActivator.getDefault().getGradlWrappertTemplateManager();
+		List<FileStructureTemplate> templates = manager.getTemplates();
+		if (templates.isEmpty()){
+			return null;
+		}
+		return templates.get(0);
+		
 	}
 
 }

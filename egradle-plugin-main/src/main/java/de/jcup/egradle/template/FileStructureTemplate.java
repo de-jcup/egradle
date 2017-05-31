@@ -6,12 +6,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import de.jcup.egradle.codeassist.GradleDSLProposalFactory.TemplateProposal;
 import de.jcup.egradle.core.util.DirectoryCopySupport;
 import de.jcup.egradle.core.util.FileSupport;
 
@@ -83,20 +83,23 @@ public class FileStructureTemplate {
 			properties = new Properties();
 		}
 
-		try{
+		try {
 			copyFiles(targetFolder, properties);
-		}catch(IOException e){
-			throw new IOException("Cannot copy files from:"+pathToContent+" to "+targetFolder,e);
+		} catch (IOException e) {
+			throw new IOException("Cannot copy files from:" + pathToContent + " to " + targetFolder, e);
 		}
-		try{
+		try {
 			transformFiles(targetFolder, properties);
-		}catch(IOException e){
-			throw new IOException("Cannot transform files from:"+pathToContent+" to "+targetFolder,e);
+		} catch (IOException e) {
+			throw new IOException("Cannot transform files from:" + pathToContent + " to " + targetFolder, e);
 		}
-
+		/* cleanup */
+		File templatePropertyFile = new File(targetFolder, "template.properties");
+		if (templatePropertyFile.exists()) {
+			templatePropertyFile.delete();
+		}
 
 	}
-	/* FIXME ATR, 22.05.2017: integrate into wizard! */
 
 	private void copyFiles(File targetFolder, Properties properties) throws IOException {
 		TemplateFileNameTransformer targetFileNameTransformer = new TemplateFileNameTransformer(properties);
@@ -151,17 +154,16 @@ public class FileStructureTemplate {
 	}
 
 	private Set<Feature> enabledFeatures = new HashSet<>();
-	
-	
+
 	public void enableFeature(Feature f) {
-		if (f==null){
+		if (f == null) {
 			return;
 		}
 		enabledFeatures.add(f);
 	}
 
 	public boolean hasFeature(Feature feature) {
-		if (feature==null){
+		if (feature == null) {
 			return false;
 		}
 		return enabledFeatures.contains(feature);

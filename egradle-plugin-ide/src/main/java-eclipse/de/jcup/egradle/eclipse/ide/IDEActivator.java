@@ -43,6 +43,8 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 
 	private RootFolderCopySupport templatesCopySupport;
 
+	private FileStructureTemplateManager gradleWrapperTemplateManager;
+
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
@@ -57,8 +59,12 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 
 		File templateFolder = getTemplatesFolder(context);
 		File newProjectTemplatesFolder = new File(templateFolder, "new-project-wizard");
+		File gradleWrapperTemplatesFolder = new File(templateFolder, "gradle-wrapper");
 
 		newProjectTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(newProjectTemplatesFolder), this);
+		gradleWrapperTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(gradleWrapperTemplatesFolder), this);
+		
+		
 
 	}
 
@@ -142,6 +148,11 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 	public FileStructureTemplateManager getNewProjectTemplateManager() {
 		return newProjectTemplateManager;
 	}
+	
+
+	public FileStructureTemplateManager getGradlWrappertTemplateManager() {
+		return gradleWrapperTemplateManager;
+	}	
 
 	@Override
 	public File getRootFolder() throws IOException {
@@ -163,4 +174,5 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 	public void logError(String message, Throwable t) {
 		IDEUtil.logError(message, t);
 	}
+
 }

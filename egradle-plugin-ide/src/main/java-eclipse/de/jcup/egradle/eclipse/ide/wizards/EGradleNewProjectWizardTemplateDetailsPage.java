@@ -15,6 +15,8 @@ import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.ide.NewProjectContext;
 import de.jcup.egradle.template.FileStructureTemplate;
 
+import static de.jcup.egradle.eclipse.ui.SWTUtil.*;
+
 public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 
 	private NewProjectContext context;
@@ -38,18 +40,13 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 
 		initializeDialogUnits(parent);
 
-		/* FIXME ATR, 24.05.2017: check implementation and ui parts */
-		// PlatformUI.getWorkbench().getHelpSystem().setHelp(composite,
-		// IIDEHelpContextIds.NEW_PROJECT_WIZARD_PAGE);
-
-		initializeDialogUnits(parent);
-
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		initMultiProjectParts(composite);
 		initJavaParts(composite);
 
 		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// Show description on opening
 		setErrorMessage(null);
 		setMessage(null);
@@ -61,8 +58,8 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	}
 
 	private void initMultiProjectParts(Composite composite) {
-		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
-
+		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL , SWT.FILL);
+		
 		SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
 		multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
 
@@ -118,6 +115,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 		if (visible) {
+			/* only when become visible again do the ui update */
 			updateUI();
 		}
 	}
@@ -132,11 +130,11 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		composite.setVisible(true);
 		setDescription("Define details for " + selectedTemplate.getName());
 
-		multiProjectGroup.setVisible(context.isMultiProject());
-		javaGroup.setVisible(context.isSupportingJava());
-
+		showControl(multiProjectGroup,context.isMultiProject());
+		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());
-
 	}
+	
+	
 
 }

@@ -28,23 +28,30 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAdapter;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
+import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 	private RootProjectConfigUIDelegate configComposite;
 
-	public EGradleRootProjectImportWizardPage(String pageName) {
+	/**
+	 * If set the wizard will use this as path
+	 */
+	private String customRootProjectpath;
+
+	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath,
+			RootProjectConfigMode mode) {
 		super(pageName);
 		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
-		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter());
-		
+		this.customRootProjectpath = customRootProjectpath;
+		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter(), mode);
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
-			
+
 		Composite folderSelectionArea = new Composite(parent, SWT.NONE);
 		GridLayout folderSelectionLayout = new GridLayout();
 		folderSelectionLayout.numColumns = 3;
@@ -54,16 +61,20 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		folderSelectionArea.setLayout(folderSelectionLayout);
 
 		configComposite.createConfigUI(folderSelectionArea);
-		
+
 		EGradleIdePreferences preferences = IDEUtil.getPreferences();
-		/* adopt import setting from current existing preferences value*/
+		/* adopt import setting from current existing preferences value */
 		String globalJavaHomePath = preferences.getGlobalJavaHomePath();
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
 		String gradleCallCommand = preferences.getGradleCallCommand();
 		String gradleCallTypeID = preferences.getGradleCallTypeID();
 		String shellId = preferences.getGradleShellId();
-		String rootProjectPath = preferences.getRootProjectPath();
-		
+		String rootProjectPath = null;
+		if (StringUtils.isBlank(customRootProjectpath)) {
+			rootProjectPath = preferences.getRootProjectPath();
+		} else {
+			rootProjectPath = customRootProjectpath;
+		}
 		configComposite.setGradleBinInstallFolder(gradleBinInstallFolder);
 		configComposite.setGradleCallTypeId(gradleCallTypeID);
 		configComposite.setGlobalJavaHomePath(globalJavaHomePath);
@@ -73,16 +84,16 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 		setControl(folderSelectionArea);
 	}
-	
-	public String getGlobalJavaHomePath(){
+
+	public String getGlobalJavaHomePath() {
 		return configComposite.getGlobalJavaHomePath();
 	}
-	
-	public String getGradleRootProjectPath(){
-		return  configComposite.getGradleRootPathText();
+
+	public String getGradleRootProjectPath() {
+		return configComposite.getGradleRootPathText();
 	}
-	
-	public EGradleShellType getShellCommand(){
+
+	public EGradleShellType getShellCommand() {
 		return configComposite.getShellCommand();
 	}
 
@@ -90,20 +101,21 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		String text = getGradleRootProjectPath();
 		boolean empty = StringUtils.isEmpty(text);
 		setPageComplete(!empty);
-		if (empty){
+		if (empty) {
 			return null;
-		}else{
+		} else {
 			return new Path(text);
 		}
 	}
 
 	/**
 	 * Does nothing special
+	 * 
 	 * @author Albert Tregnaghi
 	 *
 	 */
-	private class RootProjectImportValidationAdapter extends RootProjectValidationAdapter{
-		
+	private class RootProjectImportValidationAdapter extends RootProjectValidationAdapter {
+
 	}
 
 	public String getGradleBinDirectory() {
