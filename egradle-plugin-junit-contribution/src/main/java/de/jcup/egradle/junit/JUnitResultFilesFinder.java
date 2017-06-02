@@ -61,7 +61,13 @@ public class JUnitResultFilesFinder {
 		}
 		
 	}
+	private static final String FILE_SEP = System.getProperty("file.separator");
+	private static final String BUILD_FOLDER_PART = FILE_SEP+"build"+FILE_SEP;
+	private static final String TEST_RESULTS_FOLDER_PART = FILE_SEP+"test-results"+FILE_SEP;
+	
 	private class JUnitFileFilter implements FileFilter{
+
+		
 
 		@Override
 		public boolean accept(File file) {
@@ -89,25 +95,27 @@ public class JUnitResultFilesFinder {
 				if (name.equals("classes")){ // we ignore gradle bin output folder
 					return false;
 				}
+				if (name.equals("binary")){ // we ignore gradle binary parts inside test output folder
+					return false;
+				}
 				return true;
 			}
 			/* file found*/
-			File parentFile = file.getParentFile();
-			String parent = parentFile.getName();
-			if (!"test-results".equals(parent)){
+			if (!name.startsWith("TEST-")){
 				return false;
 			}
-			parentFile = parentFile.getParentFile();
-			parent = parentFile.getName();
-			if (!"build".equals(parent)){
+			if (!name.endsWith(".xml")){
 				return false;
 			}
-			if (name.startsWith("TEST-")){
-				if (name.endsWith(".xml")){
-					return true;
-				}
+			/* test file. but check if its really a test result and not something else:*/
+			String path = file.getPath();
+			if (path.indexOf(TEST_RESULTS_FOLDER_PART)==-1){
+				return false;
 			}
-			return false;
+			if (path.indexOf(BUILD_FOLDER_PART)==-1){
+				return false;
+			}
+			return true;
 		}
 		
 	}

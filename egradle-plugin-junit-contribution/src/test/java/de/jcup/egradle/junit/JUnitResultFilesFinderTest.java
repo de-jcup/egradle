@@ -34,6 +34,11 @@ public class JUnitResultFilesFinderTest {
 		}
 	}
 	private static final File ROOTFOLDER_1 = new File(PARENT_OF_TEST,"rootproject1");
+	/**
+	 * Gradle 3.5 new default output folders integrated
+	 */
+	private static final File ROOTFOLDER_2 = new File(PARENT_OF_TEST,"rootproject2");
+	
 	private static final File ROOTFOLDER_EMPTY = new File(PARENT_OF_TEST,"rootproject-empty");
 	private JUnitResultFilesFinder collectorToTest;
 
@@ -55,8 +60,17 @@ public class JUnitResultFilesFinderTest {
 	}
 	
 	@Test
-	public void test_all_three_testfiles_are_collected()  throws IOException {
+	public void test_all_three_testfiles_are_collected_from_rootproject1()  throws IOException {
 		Collection<File> result = collectorToTest.findTestFilesInFolder(ROOTFOLDER_1,null);
+		assertNotNull(result);
+		
+		assertEquals("Expected 3 results but got:"+result.size(), 3, result.size());
+		
+	}
+	
+	@Test
+	public void test_all_three_testfiles_are_collected_from_rootproject2()  throws IOException {
+		Collection<File> result = collectorToTest.findTestFilesInFolder(ROOTFOLDER_2,null);
 		assertNotNull(result);
 		
 		assertEquals("Expected 3 results but got:"+result.size(), 3, result.size());

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="bla2" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-09-19T12:00:55" hostname="blubb" time="2.131">
+  <properties/>
+  <testcase name="test3works" classname="de.jcup.test.Class1Test" time="0.0030"/>
+  <testcase name="test4works" classname="de.jcup.test.Class1Test" time="0.0030"/>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

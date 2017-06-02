@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="bla2" tests="2" skipped="0" failures="1" errors="0" timestamp="2016-09-19T12:00:55" hostname="blubb" time="2.131">
+  <properties/>
+  <testcase name="test1works" classname="de.jcup.test.Class1Test" time="0.0030"/>
+  <testcase name="test2works_not" classname="de.jcup.test.Class2Test" time="0.05">
+    <failure message="java.lang.IllegalStateException: org.hibernate.exception.SQLGrammarException: could not execute query" type="java.lang.IllegalStateException">java.lang.IllegalStateException: org.hibernate.exception.SQLGrammarException: could not execute query
+	at bla.x.y.Assignment.handleException(Assignment.java:601)
+	... 62 more
+</failure>
+  </testcase>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

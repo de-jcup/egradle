@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.jcup.egradle.codeassist.GradleDSLProposalFactory.TemplateProposal;
 import de.jcup.egradle.core.util.DirectoryCopySupport;
 import de.jcup.egradle.core.util.FileSupport;
 
@@ -93,17 +92,13 @@ public class FileStructureTemplate {
 		} catch (IOException e) {
 			throw new IOException("Cannot transform files from:" + pathToContent + " to " + targetFolder, e);
 		}
-		/* cleanup */
-		File templatePropertyFile = new File(targetFolder, "template.properties");
-		if (templatePropertyFile.exists()) {
-			templatePropertyFile.delete();
-		}
 
 	}
 
 	private void copyFiles(File targetFolder, Properties properties) throws IOException {
 		TemplateFileNameTransformer targetFileNameTransformer = new TemplateFileNameTransformer(properties);
-		copySupport.copyDirectories(pathToContent, targetFolder, targetFileNameTransformer, true);
+		copySupport.copyDirectories(pathToContent, targetFolder, targetFileNameTransformer, true,
+				"template.properties");
 	}
 
 	private void transformFiles(File targetFolder, Properties properties) throws IOException {

@@ -62,7 +62,6 @@ public class FileStructureTemplateTest {
 	public void a_template_does_create_per_default_a_content_transformer_factory_which_does_create_a_transformer(){
 		/* prepare */
 		Properties p = new Properties();
-		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
 
 		/* check preconditions */
 		assertNotNull(templateToTest.contentTransformerFactory);
@@ -96,7 +95,7 @@ public class FileStructureTemplateTest {
 		templateToTest.applyTo(mockedTargetFolder,properties);
 		
 		/* test */
-		verify(mockedCopySupport).copyDirectories(eq(contentRootFolder), eq(mockedTargetFolder), any(TemplateFileNameTransformer.class), eq(Boolean.TRUE));
+		verify(mockedCopySupport).copyDirectories(eq(contentRootFolder), eq(mockedTargetFolder), any(TemplateFileNameTransformer.class), eq(Boolean.TRUE),eq("template.properties"));
 		
 	}
 
@@ -110,6 +109,7 @@ public class FileStructureTemplateTest {
 	@Test
 	public void apply_from__new_target_file_calls_file_support_to_write_file() throws Exception{
 		/* prepare */
+		
 		File mockedTargetFile= mock(File.class);
 		File mockedTargetFolder = mock(File.class);
 		
