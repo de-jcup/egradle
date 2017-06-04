@@ -24,7 +24,9 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private Composite composite;
 	private Text multiProjectNamesText;
 	private Group javaGroup;
-	private Text javaSourceCompatibility;
+	private Text javaSourceCompatibilityText;
+	private Group commonGroup;
+	private Text gradleGroupNameText;
 
 	public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
 		super("templateDetails");
@@ -42,11 +44,10 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
+		initCommonParts(composite);
 		initMultiProjectParts(composite);
 		initJavaParts(composite);
-
-		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
 		// Show description on opening
 		setErrorMessage(null);
 		setMessage(null);
@@ -57,8 +58,24 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		updateUI();
 	}
 
+	private void initCommonParts(Composite composite) {
+		commonGroup = SWTFactory.createGroup(composite, "Common", 1, SWT.FILL, SWT.FILL);
+		commonGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
+		SWTFactory.createLabel(commonGroup, "Please enter group name - if empty project name will be used", SWT.FILL);
+		gradleGroupNameText = SWTFactory.createSingleText(commonGroup, 1);
+		gradleGroupNameText.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				setPageComplete(validatePage());
+			}
+		});
+	}
+
 	private void initMultiProjectParts(Composite composite) {
-		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL , SWT.FILL);
+		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
+		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
 		multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
@@ -75,12 +92,13 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 
 	private void initJavaParts(Composite composite) {
 		javaGroup = SWTFactory.createGroup(composite, "Java", 1, SWT.FILL, SWT.FILL);
-
+		javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
 		SWTFactory.createLabel(javaGroup, "Please enter source compatibility level", SWT.FILL);
-		javaSourceCompatibility = SWTFactory.createSingleText(javaGroup, 1);
-		javaSourceCompatibility.setText("1.8");
+		javaSourceCompatibilityText = SWTFactory.createSingleText(javaGroup, 1);
+		javaSourceCompatibilityText.setText("1.8");
 
-		javaSourceCompatibility.addModifyListener(new ModifyListener() {
+		javaSourceCompatibilityText.addModifyListener(new ModifyListener() {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -89,7 +107,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		});
 
 	}
-
+	
 	private boolean validatePage() {
 		FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
 		if (selectedTemplate == null) {
@@ -99,13 +117,18 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		 * set context with current values - no matter if valid or not, or
 		 * feature is enabled.
 		 */
-		context.setMultiProjects(multiProjectNamesText.getText());
-		context.setJavaSourceCompatibility(javaSourceCompatibility.getText());
+		String groupName = gradleGroupNameText.getText();
+		String multiProjects = multiProjectNamesText.getText();
+		String javaSourceCompatibility = javaSourceCompatibilityText.getText();
 
-		if (!context.validateMultiProject()){
+		context.setGroupName(groupName);
+		context.setMultiProjects(multiProjects);
+		context.setJavaSourceCompatibility(javaSourceCompatibility);
+
+		if (!context.validateMultiProject()) {
 			return false;
 		}
-		if (!context.validateJavaSupport()){
+		if (!context.validateJavaSupport()) {
 			return false;
 		}
 		return true;
@@ -130,11 +153,9 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		composite.setVisible(true);
 		setDescription("Define details for " + selectedTemplate.getName());
 
-		showControl(multiProjectGroup,context.isMultiProject());
+		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());
 	}
-	
-	
 
 }

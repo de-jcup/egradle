@@ -4,6 +4,7 @@ import static de.jcup.egradle.ide.NewProjectTemplateVariables.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,6 +21,9 @@ public class NewProjectContext {
 	private List<String> multiProjectsList;
 	private String projectName;
 	private FileStructureTemplate selectedTemplate;
+	private String multiProjectsAsIncludeString;
+
+	private String groupName;
 
 
 	public String getJavaSourceCompatibility() {
@@ -34,6 +38,10 @@ public class NewProjectContext {
 		return multiProjectsList;
 	}
 
+	public String getMultiProjectsAsIncludeString() {
+		return multiProjectsAsIncludeString;
+	}
+	
 	public String getProjectName() {
 		return projectName;
 	}
@@ -69,6 +77,38 @@ public class NewProjectContext {
 
 	public void setMultiProjects(String multiProjects) {
 		this.multiProjectsList = createMultiProjects(multiProjects);
+		this.multiProjectsAsIncludeString=createMultiProjectsAsIncludeString(multiProjectsList);
+	}
+	
+	private String createMultiProjectsAsIncludeString(List<String> list) {
+		if (list==null){
+			return "";
+		}
+		if (list.isEmpty()){
+			return "";
+		}
+		StringBuilder sb  = new StringBuilder();
+		for (Iterator<String> it = list.iterator();it.hasNext();){
+			String data = it.next();
+			sb.append('\'');
+			sb.append(data);
+			sb.append('\'');
+			if (it.hasNext()){
+				sb.append(",\n");
+			}
+		}
+		return sb.toString();
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	
+	public String getGroupName(){
+		if (groupName==null || groupName.trim().length()==0){
+			return projectName;
+		}
+		return groupName;
 	}
 
 	public void setProjectName(String projectName) {
@@ -81,9 +121,10 @@ public class NewProjectContext {
 
 	public Properties toProperties() {
 		Properties p = new Properties();
-		set(p, VAR__JAVA__VERSION, javaSourceCompatibility);
-		set(p, VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS, createIncludeSubProjects());
-		set(p, VAR__NAME_OF_PROJECT, projectName);
+		set(p, VAR__JAVA__VERSION, getJavaSourceCompatibility());
+		set(p, VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS, getMultiProjectsAsIncludeString());
+		set(p, VAR__NAME_OF_PROJECT, getProjectName());
+		set(p, VAR__NAME_OF_GROUP, getGroupName());
 		String templateName = null;
 		if (selectedTemplate!=null){
 			templateName=selectedTemplate.getName();
@@ -141,13 +182,6 @@ public class NewProjectContext {
 		return true;
 	}
 
-	private String createIncludeSubProjects() {
-		if (multiProjectsList==null || multiProjectsList.isEmpty()){
-			return "";
-		}
-		return StringUtils.join(multiProjectsList, ", ");
-	}
-
 	private List<String> createMultiProjects(String multiProjectsText) {
 		String[] splitted = StringUtils.split(multiProjectsText, ",");
 		if (splitted==null){
@@ -160,6 +194,8 @@ public class NewProjectContext {
 			}
 			list.add(split.trim());
 		}
+		Collections.sort(list);
+		
 		return list;
 	}
 

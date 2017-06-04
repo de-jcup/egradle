@@ -14,6 +14,7 @@ import de.jcup.egradle.template.FileStructureTemplate;
 
 public class NewProjectContextTest {
 
+	private static final String PROJECT_NAME = "project1";
 	private NewProjectContext contextToTest;
 	private FileStructureTemplate mockedTemplate;
 	@Before
@@ -22,7 +23,7 @@ public class NewProjectContextTest {
 
 		contextToTest = new NewProjectContext();
 		contextToTest.setSelectedTemplate(mockedTemplate);
-		contextToTest.setProjectName("project1");
+		contextToTest.setProjectName(PROJECT_NAME);
 		
 	}
 	
@@ -143,7 +144,7 @@ public class NewProjectContextTest {
 		/* test */
 		Properties properties = contextToTest.toProperties();
 		assertNotNull(properties);
-		assertTrue(properties.contains("JavaVersion.VERSION_1_8"));
+		assertEquals("JavaVersion.VERSION_1_8", properties.get(NewProjectTemplateVariables.VAR__JAVA__VERSION.getVariableName()));
 	}
 	
 	@Test
@@ -154,7 +155,18 @@ public class NewProjectContextTest {
 		/* test */
 		Properties properties = contextToTest.toProperties();
 		assertNotNull(properties);
-		assertTrue(properties.contains("ui, core, server"));
+		assertEquals("'core',\n'server',\n'ui'", properties.get(NewProjectTemplateVariables.VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS.getVariableName()));
+	}
+	
+	@Test
+	public void to_properties_contains_group_name_set_in_context() {
+		/* prepare */
+		contextToTest.setGroupName("groupName1");
+
+		/* test */
+		Properties properties = contextToTest.toProperties();
+		assertNotNull(properties);
+		assertEquals("groupName1", properties.get(NewProjectTemplateVariables.VAR__NAME_OF_GROUP.getVariableName()));
 	}
 	
 	@Test
@@ -164,10 +176,21 @@ public class NewProjectContextTest {
 
 		/* test */
 		List<String> list = contextToTest.getMultiProjectsAsList();
-		assertTrue(list.contains("ui"));
 		assertTrue(list.contains("core"));
 		assertTrue(list.contains("server"));
+		assertTrue(list.contains("ui"));
 	}
+	
+	@Test
+	public void get_multiProjectsAsIncludeString_for_ui_core_server_contains_separated_by_comma_returns_ui_core_server_in_list() {
+		/* prepare */
+		contextToTest.setMultiProjects("ui, core, server");
+
+		/* test */
+		String include = contextToTest.getMultiProjectsAsIncludeString();
+		assertEquals("'core',\n'server',\n'ui'", include);
+	}
+	
 	
 	@Test
 	public void get_multiProjectsAsList_is_never_null() {
@@ -177,6 +200,43 @@ public class NewProjectContextTest {
 		/* test */
 		List<String> list = contextToTest.getMultiProjectsAsList();
 		assertNotNull(list);
+	}
+	
+	@Test
+	public void get_multiProjectsAsIncludeString_is_never_null() {
+		/* prepare */
+		contextToTest.setMultiProjects(null);
+
+		/* test */
+		String include = contextToTest.getMultiProjectsAsIncludeString();
+		assertNotNull(include);
+	}
+	
+	@Test
+	public void get_groupName_returns_project_when_groupname_is_null() {
+		/* prepare */
+		contextToTest.setGroupName(null);
+
+		/* test */
+		assertEquals(PROJECT_NAME, contextToTest.getGroupName());
+	}
+	
+	@Test
+	public void get_groupName_returns_project_when_groupname_is_empty() {
+		/* prepare */
+		contextToTest.setGroupName("  ");
+
+		/* test */
+		assertEquals(PROJECT_NAME, contextToTest.getGroupName());
+	}
+	
+	@Test
+	public void get_groupName_returns_groupName_when_groupname_is_set() {
+		/* prepare */
+		contextToTest.setGroupName("de.jcup.group");
+
+		/* test */
+		assertEquals("de.jcup.group", contextToTest.getGroupName());
 	}
 
 }
