@@ -51,7 +51,7 @@ subprojects {
 		apply plugin: 'eclipse'
 	} 
 		
-	group = "#{egradle.template.projectname}"
+	group = "#{egradle.template.groupname}"
 	version = "0.0.1"
 	
 	/* Continous integration part - use build number in version when 'ci.buildNumber' is set*/

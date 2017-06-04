@@ -15,7 +15,7 @@ if (JavaVersion.current().isJava8Compatible()) {
     }
 }
 
-group = "#{egradle.template.projectname}"
+group = "#{egradle.template.groupname}"
 version = "0.0.1"
 	
 /* define repositories*/

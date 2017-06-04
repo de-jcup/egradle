@@ -1,0 +1,2 @@
+# Empty .gitignore file - GIT does ignore empty folders. So with
+# this file GIT will not ignore the template folder, even when empty 
