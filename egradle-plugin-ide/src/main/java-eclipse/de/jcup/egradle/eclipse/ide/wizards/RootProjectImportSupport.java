@@ -110,23 +110,14 @@ public class RootProjectImportSupport {
 				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
 
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
-				GradleImportScanner importer = new GradleImportScanner();
-				List<File> foldersToImport = importer.scanEclipseProjectFolders(newRootFolder);
 
-				/* check if virtual root should be created */
-				boolean createVirtualRoot1 = false;
-				createVirtualRoot1 = createVirtualRoot1 || foldersToImport.isEmpty();
-				createVirtualRoot1 = createVirtualRoot1 || !foldersToImport.contains(newRootFolder);
-
-				final boolean createVirtualRoot = createVirtualRoot1;
-				int importSize = foldersToImport.size();
 				int closeSize = projectsToClose.size();
 				int workToDo = 0;
 
 				workToDo += closeSize;// close projects (virtual root is
 										// contained)
 				workToDo += closeSize;// delete projects
-				workToDo += importSize;// import projects
+				workToDo += 1;// import projects
 				workToDo++; // recreate virtual root project
 
 				String message = "Importing gradle project(s) from:" + newRootFolder.getAbsolutePath();
@@ -148,6 +139,23 @@ public class RootProjectImportSupport {
 							processExecutionResult);
 					return;
 				}
+				worked = deleteProjects(monitor, worked, projectsToClose);
+				importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
+
+				/* -------------------------- */
+				/* - Rescan eclipse parts   - */
+				/* -------------------------- */
+				GradleImportScanner importScanner = new GradleImportScanner();
+				List<File> existingEclipseFoldersAfterImport = importScanner.scanEclipseProjectFolders(newRootFolder);
+
+				/* check if virtual root should be created */
+				boolean hasNoEclipseFoldersAtAll = existingEclipseFoldersAfterImport.isEmpty();
+
+				boolean createVirtualRoot = false;
+				createVirtualRoot = createVirtualRoot || hasNoEclipseFoldersAtAll;
+				createVirtualRoot = createVirtualRoot || !existingEclipseFoldersAfterImport.contains(newRootFolder);
+
+				
 				/* result is okay, so use this setup in preferences now */
 				EGradleIdePreferences preferences = getPreferences();
 				preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
@@ -157,8 +165,7 @@ public class RootProjectImportSupport {
 				preferences.setGradleShellType(shell);
 				preferences.setGradleCallTypeID(callTypeId);
 
-				worked = deleteProjects(monitor, worked, projectsToClose);
-				worked = importProjects(monitor, worked, foldersToImport);
+				worked = importProjects(monitor, worked, existingEclipseFoldersAfterImport);
 				importProgressMessage(monitor, "Imports done. Start eclipse refresh operations");
 
 				/* ---------------- */
@@ -185,6 +192,7 @@ public class RootProjectImportSupport {
 						cleanAllProjects(true, window, monitor);
 					}
 				}
+				
 				/* recreate virtual root project */
 				if (createVirtualRoot) {
 					createOrRecreateVirtualRootProject();

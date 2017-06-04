@@ -98,6 +98,8 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		 * FIXME ATR, 30.05.2017: multi projects needs subproject name + loop
 		 * for calling!
 		 */
+		/* FIXME ATR, 04.06.2017: when new imported single project files, only virtual root
+		 * project is imported! but not the real one. Is only at creation wizard happening! */
 		FileStructureTemplate template = context.getSelectedTemplate();
 		FileStructureTemplate gradleWrapperTemplate = getGradleWrapperTemplate();
 
