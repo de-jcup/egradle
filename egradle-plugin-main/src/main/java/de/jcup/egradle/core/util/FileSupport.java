@@ -294,4 +294,36 @@ public class FileSupport {
 		target.mkdirs();
 		return target;
 	}
+
+	/**
+	 * Checks if given file is inside given folder
+	 * @param file
+	 * @param expectedFolder
+	 * @return <code>true</code> when inside folder or one of its sub folders
+	 */
+	public boolean isInside(File file, File expectedFolder) {
+		if (file==null){
+			return false;
+		}
+		if (expectedFolder==null){
+			return false;
+		}
+		boolean isInside = false;
+		File parent = file;
+		
+		while (!isInside && parent!=null){
+			parent = parent.getParentFile();
+			
+			if (parent==null){
+				continue;
+			}
+			
+			if (expectedFolder.equals(parent)){
+				isInside=true;
+			}
+			
+		}
+		
+		return isInside;
+	}
 }

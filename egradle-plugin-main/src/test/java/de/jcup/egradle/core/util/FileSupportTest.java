@@ -91,5 +91,26 @@ public class FileSupportTest {
 	public void parent__is_NOT_subfolder_of_parent_childfolder() {
 		assertFalse(supportToTest.isDirectSubFolder(new File("parent"), new File("parent/childfolder")));
 	}
+	
+	@Test
+	public void testfile_inside_subfolder_deepness_2_is_inside() {
+		assertTrue(supportToTest.isInside(new File("parent/xyz/abc/testfile.txt"), new File("parent")));
+	}
+	
+	@Test
+	public void testfile_inside_subfolder_deepness_1_is_inside() {
+		assertTrue(supportToTest.isInside(new File("parent/xyz/testfile.txt"), new File("parent")));
+	}
+	
+	@Test
+	public void testfile_inside_mainfolder__is_inside() {
+		assertTrue(supportToTest.isInside(new File("parent/testfile.txt"), new File("parent")));
+	}
+	
+	@Test
+	public void testfile_outside_mainfolder__is_NOT_inside() {
+		assertFalse(supportToTest.isInside(new File("testfile.txt"), new File("parent")));
+	}
+	
 
 }

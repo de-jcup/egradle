@@ -410,7 +410,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 			
 			Map<String, String> map = null;
 			if (provider != null) {
-				map = provider.getVariables();
+				map = provider.getVariables(getEditorInput());
 			}
 			if (map != null) {
 				maps.add(map);
