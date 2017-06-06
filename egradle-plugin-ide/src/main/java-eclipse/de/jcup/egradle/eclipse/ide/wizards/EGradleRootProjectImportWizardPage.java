@@ -27,8 +27,8 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAdapter;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
-import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
+import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 

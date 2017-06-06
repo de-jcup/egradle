@@ -108,6 +108,10 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		 * FIXME ATR, 04.06.2017: src/main/res and src/test/res is not part of
 		 * classpath for java templates ?!?!?
 		 */
+		
+		/* FIXME ATR, 06.06.2017: integrate java home from context, 
+		 * when gradle wrapper supported by template no need to open other wizard, just do
+		 * import */
 		FileStructureTemplate template = context.getSelectedTemplate();
 		FileStructureTemplate gradleWrapperTemplate = getGradleWrapperTemplate();
 

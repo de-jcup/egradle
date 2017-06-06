@@ -3,6 +3,8 @@ package de.jcup.egradle.ide;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -96,6 +98,42 @@ public class NewProjectContextTest {
 		assertTrue(contextToTest.validate());
 	}
 	
+	@Test
+	public void valid_when_java_support_enabled_and_java_version_set__AND_JAVA_HOME_set() {
+		/* prepare */
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA)).thenReturn(true);
+		contextToTest.setJavaSourceCompatibility("JavaVersion.VERSION_1_8");
+		contextToTest.setJavaHome(System.getProperty("java.home"));
+
+		/* test */
+		assertTrue(contextToTest.validate());
+	}
+	
+	@Test
+	public void valid_when_java_support_enabled_and_java_version_set__AND_JAVA_HOME_set_to_non_existing_folder() {
+		/* prepare */
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA)).thenReturn(true);
+		contextToTest.setJavaSourceCompatibility("JavaVersion.VERSION_1_8");
+		contextToTest.setJavaHome(new File("xyz/xyz/xyz/non-existing").getAbsolutePath());
+
+		/* test */
+		assertFalse(contextToTest.validate());
+	}
+	
+	@Test
+	public void invalid_when_java_support_enabled_and_java_version_set__AND_JAVA_HOME_set_to_an_existing_file() throws IOException {
+		/* prepare */
+		File file = File.createTempFile("xyz", "txt");
+		assertTrue(file.exists());
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA)).thenReturn(true);
+		contextToTest.setJavaSourceCompatibility("JavaVersion.VERSION_1_8");
+		contextToTest.setJavaHome(file.getAbsolutePath());
+
+		/* test */
+		assertFalse(contextToTest.validate());
+	}
+
+
 	@Test
 	public void not_valid_when_java_support_enabled_but_java_version_only_spaces() {
 		/* prepare */

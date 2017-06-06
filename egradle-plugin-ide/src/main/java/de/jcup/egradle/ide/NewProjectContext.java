@@ -2,6 +2,7 @@ package de.jcup.egradle.ide;
 
 import static de.jcup.egradle.ide.NewProjectTemplateVariables.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import de.jcup.egradle.template.Features;
 import de.jcup.egradle.template.FileStructureTemplate;
 
 public class NewProjectContext {
-	
+
 	String lastValidationProblem;
 
 	private String javaSourceCompatibility;
@@ -22,9 +23,9 @@ public class NewProjectContext {
 	private String projectName;
 	private FileStructureTemplate selectedTemplate;
 	private String multiProjectsAsIncludeString;
+	private String javaHome;
 
 	private String groupName;
-
 
 	public String getJavaSourceCompatibility() {
 		return javaSourceCompatibility;
@@ -41,7 +42,7 @@ public class NewProjectContext {
 	public String getMultiProjectsAsIncludeString() {
 		return multiProjectsAsIncludeString;
 	}
-	
+
 	public String getProjectName() {
 		return projectName;
 	}
@@ -77,35 +78,43 @@ public class NewProjectContext {
 
 	public void setMultiProjects(String multiProjects) {
 		this.multiProjectsList = createMultiProjects(multiProjects);
-		this.multiProjectsAsIncludeString=createMultiProjectsAsIncludeString(multiProjectsList);
+		this.multiProjectsAsIncludeString = createMultiProjectsAsIncludeString(multiProjectsList);
 	}
-	
+
 	private String createMultiProjectsAsIncludeString(List<String> list) {
-		if (list==null){
+		if (list == null) {
 			return "";
 		}
-		if (list.isEmpty()){
+		if (list.isEmpty()) {
 			return "";
 		}
-		StringBuilder sb  = new StringBuilder();
-		for (Iterator<String> it = list.iterator();it.hasNext();){
+		StringBuilder sb = new StringBuilder();
+		for (Iterator<String> it = list.iterator(); it.hasNext();) {
 			String data = it.next();
 			sb.append('\'');
 			sb.append(data);
 			sb.append('\'');
-			if (it.hasNext()){
+			if (it.hasNext()) {
 				sb.append(",\n");
 			}
 		}
 		return sb.toString();
 	}
 
+	public void setJavaHome(String javaHome) {
+		this.javaHome = javaHome;
+	}
+
+	public String getJavaHome() {
+		return javaHome;
+	}
+
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	
-	public String getGroupName(){
-		if (groupName==null || groupName.trim().length()==0){
+
+	public String getGroupName() {
+		if (groupName == null || groupName.trim().length() == 0) {
 			return projectName;
 		}
 		return groupName;
@@ -126,11 +135,11 @@ public class NewProjectContext {
 		set(p, VAR__NAME_OF_PROJECT, getProjectName());
 		set(p, VAR__NAME_OF_GROUP, getGroupName());
 		String templateName = null;
-		if (selectedTemplate!=null){
-			templateName=selectedTemplate.getName();
+		if (selectedTemplate != null) {
+			templateName = selectedTemplate.getName();
 		}
 		set(p, VAR__NAME_OF_TEMPLATE, templateName);
-		
+
 		return p;
 	}
 
@@ -143,20 +152,20 @@ public class NewProjectContext {
 	 */
 	public boolean validate() {
 		/* reset validation problem */
-		lastValidationProblem=null;
-		
+		lastValidationProblem = null;
+
 		if (selectedTemplate == null) {
 			lastValidationProblem = "No template selected";
 			return false;
 		}
-		if (StringUtils.isBlank(projectName)){
+		if (StringUtils.isBlank(projectName)) {
 			lastValidationProblem = "No project name set";
 			return false;
 		}
-		if (!validateMultiProject()){
+		if (!validateMultiProject()) {
 			return false;
 		}
-		if (!validateJavaSupport()){
+		if (!validateJavaSupport()) {
 			return false;
 		}
 		return true;
@@ -168,13 +177,24 @@ public class NewProjectContext {
 				lastValidationProblem = "Java source compatibility not set";
 				return false;
 			}
+			if (StringUtils.isNotBlank(javaHome)) {
+				File file = new File(javaHome);
+				if (!file.exists()){
+					lastValidationProblem = javaHome+" does not exist!";
+					return false;
+				}
+				if (!file.isDirectory()){
+					lastValidationProblem = javaHome+" is not a directory!";
+					return false;
+				}
+			}
 		}
 		return true;
 	}
 
 	public boolean validateMultiProject() {
 		if (isMultiProject()) {
-			if (multiProjectsList==null || multiProjectsList.isEmpty()) {
+			if (multiProjectsList == null || multiProjectsList.isEmpty()) {
 				lastValidationProblem = "No multiprojects given";
 				return false;
 			}
@@ -184,25 +204,26 @@ public class NewProjectContext {
 
 	private List<String> createMultiProjects(String multiProjectsText) {
 		String[] splitted = StringUtils.split(multiProjectsText, ",");
-		if (splitted==null){
+		if (splitted == null) {
 			return Collections.emptyList();
 		}
 		List<String> list = new ArrayList<>();
-		for (String split: splitted){
-			if (StringUtils.isBlank(split)){
+		for (String split : splitted) {
+			if (StringUtils.isBlank(split)) {
 				continue;
 			}
 			list.add(split.trim());
 		}
 		Collections.sort(list);
-		
+
 		return list;
 	}
 
 	private void set(Properties p, TemplateVariable var, String value) {
-		if (value==null){
-			value="";
+		if (value == null) {
+			value = "";
 		}
 		p.setProperty(var.getVariableName(), value);
 	}
+
 }
