@@ -1,6 +1,3 @@
-# customization file for allprojects - automatically applied
-custom_allprojects.gradle
-
 # eclipse parts
 bin/
 gen/
