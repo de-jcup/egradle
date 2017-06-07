@@ -38,13 +38,16 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	 * If set the wizard will use this as path
 	 */
 	private String customRootProjectpath;
+	
+	private String customJavaHome;
 
 	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath,
-			RootProjectConfigMode mode) {
+			RootProjectConfigMode mode, String customJavaHome) {
 		super(pageName);
 		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
 		this.customRootProjectpath = customRootProjectpath;
+		this.customJavaHome=customJavaHome;
 		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter(), mode);
 	}
 
@@ -64,7 +67,12 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 		EGradleIdePreferences preferences = IDEUtil.getPreferences();
 		/* adopt import setting from current existing preferences value */
-		String globalJavaHomePath = preferences.getGlobalJavaHomePath();
+		String globalJavaHomePath = null;
+		if (StringUtils.isBlank(customJavaHome)) {
+			globalJavaHomePath = preferences.getGlobalJavaHomePath();
+		} else {
+			globalJavaHomePath = customRootProjectpath;
+		}
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
 		String gradleCallCommand = preferences.getGradleCallCommand();
 		String gradleCallTypeID = preferences.getGradleCallTypeID();

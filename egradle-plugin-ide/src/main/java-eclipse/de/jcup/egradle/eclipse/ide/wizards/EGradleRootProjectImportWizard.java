@@ -44,10 +44,16 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 	private RootProjectConfigMode importMode;
 	
+	private String customJavaHome;
+	
 	public EGradleRootProjectImportWizard() {
 		importSupport = new RootProjectImportSupport();
 	}
-
+	
+	public void setCustomJavaHome(String customJavaHome) {
+		this.customJavaHome = customJavaHome;
+	}
+	
 	public void setCustomRootProjectpath(String customRootProjectpath) {
 		this.customRootProjectpath = customRootProjectpath;
 	}
@@ -114,7 +120,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 
 	public void addPages() {
-		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1",customRootProjectpath,importMode);
+		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1",customRootProjectpath,importMode, customJavaHome);
 		addPage(mainPage);
 	}
 

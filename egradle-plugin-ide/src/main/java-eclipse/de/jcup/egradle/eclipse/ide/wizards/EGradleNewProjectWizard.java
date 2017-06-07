@@ -21,6 +21,7 @@ import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -104,10 +105,12 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		 * FIXME ATR, 04.06.2017: src/main/res and src/test/res is not part of
 		 * classpath for java templates ?!?!?
 		 */
-		
-		/* FIXME ATR, 06.06.2017: integrate java home from context, 
-		 * when gradle wrapper supported by template no need to open other wizard, just do
-		 * import */
+
+		/*
+		 * FIXME ATR, 06.06.2017: integrate java home from context, when gradle
+		 * wrapper supported by template no need to open other wizard, just do
+		 * import
+		 */
 		FileStructureTemplate template = context.getSelectedTemplate();
 		FileStructureTemplate gradleWrapperTemplate = getGradleWrapperTemplate();
 
@@ -163,10 +166,10 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			properties.putAll(additionalProperties);
 		}
 		String projectName = null;
-		if (context.isMultiProject()){
+		if (context.isMultiProject()) {
 			projectName = properties.getProperty(NewProjectTemplateVariables.VAR__NAME_OF_SUBPROJECT.getVariableName());
-		}else{
-			projectName=context.getProjectName();
+		} else {
+			projectName = context.getProjectName();
 		}
 		outputToSystemConsole("- creating project '" + projectName + "' at:" + targetFolder.getAbsolutePath());
 		template.applyTo(targetFolder, properties);
@@ -192,7 +195,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			throw new IllegalStateException("Not a root project wizard but:" + wizard);
 		}
 
-		outputToSystemConsole("- start import wizard for generated project");
+		outputToSystemConsole("- start import for generated project");
 
 		EGradleRootProjectImportWizard piw = (EGradleRootProjectImportWizard) wizard;
 		piw.setCustomRootProjectpath(targetFolder.getAbsolutePath());
@@ -205,8 +208,30 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 
 			@Override
 			public void run() {
-				int result = wd.open();
-				if (MessageDialog.OK == result) {
+				boolean resultOkay = false;
+				if (context.isSupportingGradleWrapper()) {
+					/* headless usage of import wizard:*/
+					piw.addPages();
+					piw.createPageControls(new Shell());
+					piw.setContainer(getContainer());
+					
+					resultOkay = piw.performFinish();
+					if (resultOkay) {
+						outputToSystemConsole("[DONE]");
+					} else {
+						outputToSystemConsole("[CANCELED]");
+					}
+					return;
+
+				}else{
+					int result = wd.open();
+					if (MessageDialog.OK == result) {
+						resultOkay = true;
+					}
+				}
+
+
+				if (resultOkay) {
 					outputToSystemConsole("[DONE]");
 				} else {
 					outputToSystemConsole("[CANCELED]");

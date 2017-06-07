@@ -1,9 +1,13 @@
 package de.jcup.egradle.eclipse.ide.wizards;
 
+import java.io.File;
+
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
 import de.jcup.egradle.ide.NewProjectContext;
 
 public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPage {
@@ -26,7 +30,26 @@ public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPag
 	
 	@Override
 	protected boolean validatePage() {
+		try{
+			File parentFolder = EclipseResourceHelper.DEFAULT.toFile(getLocationPath());
+			File target= new File(parentFolder,getProjectName());
+			if (target.exists()){
+				if (! target.isDirectory()){
+					setErrorMessage("There exists already a file at this location! So project cannot be created");
+					return false;
+				}
+				if (target.listFiles().length>1){
+					setErrorMessage("There exists already a folder containing files at this location! So project cannot be created");
+					return false;
+				}
+			}
+		}catch(CoreException e){
+			IDEUtil.logError("Was not able to get location path for create project", e);
+			setErrorMessage("Location path problem:"+e.getMessage());
+			return false;
+		}
 		context.setProjectName(getProjectName());
+		
 		return super.validatePage();
 	}
 
