@@ -71,7 +71,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		if (StringUtils.isBlank(customJavaHome)) {
 			globalJavaHomePath = preferences.getGlobalJavaHomePath();
 		} else {
-			globalJavaHomePath = customRootProjectpath;
+			globalJavaHomePath = customJavaHome;
 		}
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
 		String gradleCallCommand = preferences.getGradleCallCommand();

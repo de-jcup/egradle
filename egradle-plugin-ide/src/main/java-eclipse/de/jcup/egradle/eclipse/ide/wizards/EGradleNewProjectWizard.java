@@ -101,16 +101,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 	}
 
 	protected void createNewProjectAndImport(File targetFolder, IProgressMonitor monitor) {
-		/*
-		 * FIXME ATR, 04.06.2017: src/main/res and src/test/res is not part of
-		 * classpath for java templates ?!?!?
-		 */
 
-		/*
-		 * FIXME ATR, 06.06.2017: integrate java home from context, when gradle
-		 * wrapper supported by template no need to open other wizard, just do
-		 * import
-		 */
 		FileStructureTemplate template = context.getSelectedTemplate();
 		FileStructureTemplate gradleWrapperTemplate = getGradleWrapperTemplate();
 
@@ -199,6 +190,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 
 		EGradleRootProjectImportWizard piw = (EGradleRootProjectImportWizard) wizard;
 		piw.setCustomRootProjectpath(targetFolder.getAbsolutePath());
+		piw.setCustomJavaHome(context.getJavaHome());
 		piw.setImportMode(RootProjectConfigMode.PREDEFINED_VALUES);
 
 		WizardDialog wd = new WizardDialog(getShell(), piw);
@@ -209,7 +201,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			@Override
 			public void run() {
 				boolean resultOkay = false;
-				if (context.isSupportingGradleWrapper()) {
+				if (context.isSupportingHeadlessImport()) {
 					/* headless usage of import wizard:*/
 					piw.addPages();
 					piw.createPageControls(new Shell());

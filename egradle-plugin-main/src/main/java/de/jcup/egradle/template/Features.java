@@ -7,6 +7,8 @@ public enum Features implements Feature{
 	NEW_PROJECT__SUPPORTS_JAVA("feature.newproject.supports.java"),
 	
 	NEW_PROJECT__SUPPORTS_GRADLEWRAPPER("feature.newproject.supports.gradlewrapper"),
+	
+	NEW_PROJECT__SUPPORTS_HEADLESS_IMPORT("feature.newproject.supports.headlessimport")
 	;
 	
 	private String id;

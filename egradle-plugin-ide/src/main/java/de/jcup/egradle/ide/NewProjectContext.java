@@ -51,6 +51,13 @@ public class NewProjectContext {
 		return selectedTemplate;
 	}
 
+	public boolean isSupportingHeadlessImport() {
+		if (selectedTemplate == null) {
+			return false;
+		}
+		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_HEADLESS_IMPORT);
+	}
+	
 	public boolean isMultiProject() {
 		if (selectedTemplate == null) {
 			return false;
