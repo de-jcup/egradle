@@ -1,6 +1,8 @@
-/* ===========================================
- * Subproject '#{egradle.template.subprojectname}'
- * ===========================================
+ /*============================================================================
+ * Build file for subproject '#{egradle.template.subprojectname}'
+ *
+ * Root build file: "${rootProject.projectDir}/build.gradle"
+ * ============================================================================
  */
 dependencies {
 

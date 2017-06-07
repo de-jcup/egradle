@@ -101,10 +101,6 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 
 	protected void createNewProjectAndImport(File targetFolder, IProgressMonitor monitor) {
 		/*
-		 * FIXME ATR, 30.05.2017: multi projects needs subproject name + loop
-		 * for calling!
-		 */
-		/*
 		 * FIXME ATR, 04.06.2017: src/main/res and src/test/res is not part of
 		 * classpath for java templates ?!?!?
 		 */

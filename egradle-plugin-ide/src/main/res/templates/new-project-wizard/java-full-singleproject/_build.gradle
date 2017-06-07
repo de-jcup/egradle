@@ -5,9 +5,7 @@
  * using '#{egradle.template.name}' template
  * ============================================================================
  */
-allprojects{
-	apply from: "${rootProject.projectDir}/libraries.gradle"
-}
+apply from: "${rootProject.projectDir}/libraries.gradle"
 /* -------------------------------- */
 /* - Include other gradle scripts - */
 /* -------------------------------- */

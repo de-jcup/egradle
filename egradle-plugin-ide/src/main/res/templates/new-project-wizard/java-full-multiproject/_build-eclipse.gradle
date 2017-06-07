@@ -1,8 +1,11 @@
-/* ======================================================
+/* ============================================================================
    This file contains the configurations for 
    Eclipse settings
-   ====================================================== */
-
+   ============================================================================
+   
+   Included from: "${rootProject.projectDir}/build.gradle"
+   ============================================================================
+ */
 def projectsNotInEclipse = [/*'no-eclipse-project1','no-eclipse-project2'*/]; 
 
 subprojects {
@@ -21,7 +24,7 @@ subprojects {
 	  }
 	}
 	
-	// setup eclipse with project encoding as UTF-8 (for editors)
+	/* setup eclipse with project encoding as UTF-8 (for editors) */
 	eclipseJdt.doLast {
 		File f = file('.settings/org.eclipse.core.resources.prefs')
 		f.write('eclipse.preferences.version=1\n')

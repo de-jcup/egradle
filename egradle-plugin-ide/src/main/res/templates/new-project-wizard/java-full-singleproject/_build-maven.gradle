@@ -1,0 +1,28 @@
+/* ============================================================================
+   This file contains the configurations for 
+   Maven settings
+   ============================================================================
+   
+   Included from: "${rootProject.projectDir}/build.gradle"
+   ============================================================================
+ */   
+
+/* define repositories*/
+repositories {
+	/* add your local maven repo - so you can deploy there */
+	mavenLocal() 
+	/* add maven central */
+	mavenCentral()
+}
+
+apply plugin: 'maven'
+
+group = "#{egradle.template.groupname}"
+version = "0.0.1"
+
+/* Continous integration part - use build number in version when 'ci.buildNumber' is set*/
+def buildNr = System.getenv('ci.buildNumber')
+  	if (buildNr != null && ! buildNr.isEmpty()){
+	version= version + "_"+buildNr
+}
+		
