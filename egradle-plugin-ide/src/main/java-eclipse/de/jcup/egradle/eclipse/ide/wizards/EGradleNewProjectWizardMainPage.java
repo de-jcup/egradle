@@ -30,12 +30,16 @@ public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPag
 	
 	@Override
 	protected boolean validatePage() {
+		if (!super.validatePage()){
+			return false;
+		}
+		String projectName = getProjectName();
 		try{
 			File parentFolder = EclipseResourceHelper.DEFAULT.toFile(getLocationPath());
-			File target= new File(parentFolder,getProjectName());
+			File target= new File(parentFolder,projectName);
 			if (target.exists()){
 				if (! target.isDirectory()){
-					setErrorMessage("There exists already a file at this location! So project cannot be created");
+					setErrorMessage("The wanted project folder exists already as a file at this location! So project cannot be created");
 					return false;
 				}
 				if (target.listFiles().length>1){
@@ -48,9 +52,9 @@ public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPag
 			setErrorMessage("Location path problem:"+e.getMessage());
 			return false;
 		}
-		context.setProjectName(getProjectName());
+		context.setProjectName(projectName);
 		
-		return super.validatePage();
+		return true;
 	}
 
 }

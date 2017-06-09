@@ -31,7 +31,7 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 		this.context = context;
 		setTitle("Gradle project template");
 		setImageDescriptor(IDEUtil.createImageDescriptor("icons/egradle-banner_64x64.png"));
-		setDescription("Select new project FileStructureTemplateto use");
+		setDescription("Select new project template use");
 		templates = IDEUtil.getNewProjectTemplates();
 	}
 

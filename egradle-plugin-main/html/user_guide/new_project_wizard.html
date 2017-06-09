@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>New gradle project wizard</title>
+<style>
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid;
+}
+</style>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner_128x128.png" />
+	<a href="../user_guide.html">User guide</a>
+	<h1>New gradle project wizard</h1>
+	<p>With EGradle user can create single - and multi gradle projects
+		out of the box, with full eclipse support.</p>
+	<ul>
+		<li><a href="#create_by_wizard">Create projects by EGradle
+				wizard</a>
+			<ul>
+				<li><a href="#open_wizard">Open wizard</a></li>
+				<li><a href="#setup_location">Setup location</a>
+				<li><a href="#select_template">Select template</a>
+				<li><a href="#template_details">Gradle template details</a>
+					<ul>
+						<li><a href="#full_gradle_multiproject_java">Full multi
+								project (Java)</a></li>
+						<li><a href="#full_gradle_singleproject_java">Full single
+								project (Java)</a></li>
+					</ul></li>
+			</ul>
+		<li><a href="#custom_templates">Custom templates</a>
+			<ul>
+				<li><a href="#template_location">Template location</a></li>
+				<li><a href="#template_variables_and_rules">Template variables and rules</a></li>
+				<li><a href="#template_example">An Example for a custom template</a>
+					<ul>
+						<li><a href="#custom_template_example_copy">Copy an existing template</a></li>
+						<li><a href="#custom_template_example_metainfo">Change meta data</a></li>
+						<li><a href="#custom_template_example_change_content">Change content</a></li>
+						<li><a href="#custom_template_example_use_it">Use the new template</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+
+
+	<h2 id="create_by_wizard">Create projects by EGradle wizard</h2>
+	This section describes how to use the EGradle wizard to create new
+	projects.
+	<h3 id="open_wizard">Open wizard</h3>
+	<p>
+		There are two ways to open the
+		<code>New project wizard</code>
+		:
+	</p>
+	<ol>
+		<li>Use toolbar action:
+			<p>
+				<img src="images/egradle-new-project-wizard-icon.png" />
+			</p>
+		</li>
+		<li>Default way by selecting <code>File -> New ->
+				Project...</code>:
+			<p>
+				<img
+					src="images/egradle-new-project-wizard-by-new-project-action.png" />
+			</p> select <code>EGradle -> Gradle Project</code> and click on <code>Next</code>.
+		</li>
+	</ol>
+	<p>This will show up wizard:</p>
+	<p>
+		<img src="images/egradle-new-project-wizard-initial.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h3 id="setup_location">Setup location</h3>
+	<p>Enter your wanted (root) project name and the location (or use
+		default):</p>
+	<p>
+		<img src="images/egradle-new-project-wizard-page-location.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h3 id="select_template">Select template</h3>
+	<p>Select your wanted template. Currently EGradle has following
+		templates included:</p>
+	<p>
+		<img src="images/egradle-new-project-wizard-page-templates.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h3 id="template_details">Gradle template details</h3>
+	<p>At next wizard page - depending on which template was selected -
+		details can be configured.</p>
+	<h4 id="full_gradle_multiproject_java">Full gradle multi project
+		(Java)</h4>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-multiproject-java.png" />
+	</p>
+	<p>At a multi project you must specify at least one sub project. In
+		the next example there were 3 sub projects defined:
+	<ul>
+		<li>core</li>
+		<li>client</li>
+		<li>server</li>
+	</ul>
+	You just have to enter the names comma separated as shown in next
+	picture. The other input fields are filled with defaults or being
+	optional.
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-multiproject-java2.png" />
+	</p>
+	<p>
+		After click on
+		<code>Finish</code>
+		project structure is generated and imported. The result will look like
+		next image:
+	</p>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-multiproject-java-result.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h4 id="full_gradle_singleproject_java">Full gradle single project
+		(Java)</h4>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-singleproject-java.png" />
+	</p>
+	<p>At a single project you must specify nothing more - all input
+		fields are filled with defaults or being optional:</p>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-singleproject-java2.png" />
+	</p>
+	<p>
+		After click on
+		<code>Finish</code>
+		project structure is generated and imported. The result will look like
+		next image:
+	</p>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-singleproject-java-result.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h2 id="custom_templates">Custom templates</h2>
+	Currently EGradle comes up with two default templates for java (see
+	above). It's planned to have other templates as well in future - e.g.
+	for android development. But if you are curious or have the need for
+	other templates you can create custom templates (and maybe give to
+	community...).
+	<br>
+	<br> This section describes how to create custom templates for
+	egradle new project wizard
+	
+	<h3 id="template_location">Template location</h3>
+	Each template for EGradle <code>New project wizard</code> is located in file structure at
+	<code>$user.home/.egradle/templates/$egradle.version/new-project-wizard</code> inside an template folder.
+	For example: The template for the <code>Full gradle multi project (Java)</code> is located at:
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-custom-templates-multiproject-folder-user-home.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h3 id="template_variables_and_rules">Template variables and rules</h3>
+	<p>Following rules are given:
+	<ol>
+		<li>Each file or folder name starting with an "_" will have this
+			leading character removed in output. So e.g. "_settings.gradle" will
+			be converted to "settings.gradle".<br><br></li>
+			
+		<li>Variables in file names and inside - e.g.
+			"$egradle.template.subprojectname" folder - will be replaced by
+			project setup values (see table below for possibilities):
+			<table>
+				<tr>
+					<th width="300px">Variable</th>
+					<th>Replaced by</th>
+				</tr>
+				<tr>
+					<td>egradle.template.name</td>
+					<td>Name of template</td>
+				</tr>
+				<tr>
+					<td>egradle.template.projectname</td>
+					<td>Name of project</td>
+				</tr>
+				<tr>
+					<td>egradle.template.groupname</td>
+					<td>Name of group defined in gradle build files. This will be
+						used for uploads into a maven repository</td>
+				</tr>
+				<tr>
+					<td>egradle.template.subprojectname</td>
+					<td>Current subproject name</td>
+				</tr>
+				<tr>
+					<td>egradle.template.subprojects.include</td>
+					<td>Include string for gradle.settings. Is a comma separated
+						list of all sub projects</td>
+				</tr>
+				<tr>
+					<td>egradle.template.java.version</td>
+					<td>Contains a string defining the java version - e.g. "1.8"
+						for Java 8</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+		</li>
+		<li>The file <code>template.properties</code> will not be copied
+			but evaluated and defines the meta information about the template
+			features:
+			<table>
+				<tr>
+					<th width="300px">Key</th>
+					<th>Value</th>
+				</tr>
+				<tr>
+					<td>name</td>
+					<td>The name for the template</td>
+				</tr>
+				<tr>
+					<td>description</td>
+					<td>The description for the template</td>
+				</tr>
+				<tr>
+					<td>feature.newproject.type.multiproject</td>
+					<td>when "true" then this template generates multi projects</td>
+				</tr>
+				<tr>
+					<td>feature.newproject.supports.java</td>
+					<td>when "true" java questions the template supports java</td>
+				</tr>
+				<tr>
+					<td>feature.newproject.supports.gradlewrapper</td>
+					<td>when "true" this template wants to have gradle wrapper
+						copied to the target destination before input is done</td>
+				</tr>
+				<tr>
+					<td>feature.newproject.supports.headlessimport</td>
+					<td>when "true" the wizard will automatically import the
+						generated projects. Otherwise the import dialog will be shown to
+						user where some selections - e.g. not to use the gradle wrapper
+						etc. - can be set. This is normally only necessary on creating new
+						templates , for debugging etc.</td>
+				</tr>
+			</table>
+			<br>
+		</li>
+	</ol>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+	<h3 id="template_example">An example for a custom template</h3>
+	
+	<h4 id="custom_template_example_copy">Copy an existing template</h4>
+	We copy<br>
+	<code>$user.home/.egradle/templates/$egradle.version/new-project-wizard/<b>java-full-singleproject</b></code> <br>to<br>
+	<code>$user.home/.egradle/templates/$egradle.version/new-project-wizard/<b>custom-template-1</b></code><br> as shown below:
+
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-custom-templates-example-custom-template-copied.png" />
+	</p>
+	
+	<h4 id="custom_template_example_metainfo">Define meta information</h4>
+	<p>
+		Change the <code>template.properties</code> inside folder <code>custom-template-1</code>:
+	</p>
+	<p><img src="images/egradle-new-project-wizard-custom-templates-example-custom-template-properties.png"/></p>
+	
+	<h4 id="custom_template_example_change_content">Change the content</h4>
+	<p>Change the content of the template files like you want. The content is just applied to rules, variables and then copied to target destination.</p>
+	
+	<h4 id="custom_template_example_use_it">Use the template</h4>
+	<p>You must restart your eclipse instance and open EGradle new project wizard. Enter project location and go to template selection. Now you will find your
+	custom template appearing.</p>
+	<p><img src="images/egradle-new-project-wizard-custom-templates-example-custom-template-wizard.png"/></p>
+	<p><img src="images/egradle-new-project-wizard-custom-templates-example-custom-template-wizard-details.png"/></p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>

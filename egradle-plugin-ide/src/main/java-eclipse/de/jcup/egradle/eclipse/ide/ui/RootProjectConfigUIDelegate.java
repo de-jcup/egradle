@@ -303,8 +303,11 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		
 		String rootPathTooltipText = "Default root path. Can be overriden in launch configurations";
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
-		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
-		rootPathDirectoryEditor.getTextControl(defaultGroup).setLayoutData(directoryTextLayout);
+		
+		Text rootPathTextControl = rootPathDirectoryEditor.getTextControl(defaultGroup);
+		rootPathTextControl.setToolTipText(rootPathTooltipText);
+		rootPathTextControl.setLayoutData(directoryTextLayout);
+
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
 		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
@@ -318,8 +321,10 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		String defaultJavaHomeDirectoryTooltipText = "A default global JAVA_HOME path. Can be overriden in launch configurations";
 		defaultJavaHomeDirectoryEditor.getLabelControl(defaultGroup)
 				.setToolTipText(defaultJavaHomeDirectoryTooltipText);
-		defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup).setToolTipText(defaultJavaHomeDirectoryTooltipText);
-		defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup).setLayoutData(directoryTextLayout);
+		
+		Text javaHomeTextControl = defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup);
+		javaHomeTextControl.setToolTipText(defaultJavaHomeDirectoryTooltipText);
+		javaHomeTextControl.setLayoutData(directoryTextLayout);
 		
 		addField(defaultJavaHomeDirectoryEditor);
 	}

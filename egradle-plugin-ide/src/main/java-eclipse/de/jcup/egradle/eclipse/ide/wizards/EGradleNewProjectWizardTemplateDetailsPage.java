@@ -165,7 +165,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 			return;
 		}
 		composite.setVisible(true);
-		setDescription("Define details for " + selectedTemplate.getName());
+		setDescription("Define details for template '" + selectedTemplate.getName()+"'");
 
 		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());

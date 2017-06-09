@@ -5,7 +5,6 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
-import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
