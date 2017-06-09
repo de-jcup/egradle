@@ -299,9 +299,12 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path",
 				defaultGroup);
 		addField(rootPathDirectoryEditor);
+		GridData directoryTextLayout = new GridData(SWT.FILL,SWT.TOP,true,false);
+		
 		String rootPathTooltipText = "Default root path. Can be overriden in launch configurations";
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
 		rootPathDirectoryEditor.getTextControl(defaultGroup).setToolTipText(rootPathTooltipText);
+		rootPathDirectoryEditor.getTextControl(defaultGroup).setLayoutData(directoryTextLayout);
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
 		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
@@ -316,6 +319,8 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		defaultJavaHomeDirectoryEditor.getLabelControl(defaultGroup)
 				.setToolTipText(defaultJavaHomeDirectoryTooltipText);
 		defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup).setToolTipText(defaultJavaHomeDirectoryTooltipText);
+		defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup).setLayoutData(directoryTextLayout);
+		
 		addField(defaultJavaHomeDirectoryEditor);
 	}
 
