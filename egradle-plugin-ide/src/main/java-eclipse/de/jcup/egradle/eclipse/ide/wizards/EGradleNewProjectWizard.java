@@ -4,6 +4,7 @@ import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.ide.NewProjectTemplateVariables.*;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -168,6 +169,16 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		if (context.isSupportingGradleWrapper()) {
 			gradleWrapperTemplate.applyTo(targetFolder, properties);
 			outputToSystemConsole("  + added gradle wrapper parts");
+			
+			File[] files = targetFolder.listFiles(new GradleWrapperScriptFilter());
+			if (files!=null && files.length>0){
+				File gradleWrapperFile = files[0];
+				gradleWrapperFile.setExecutable(true);
+				outputToSystemConsole("  + made gradle wrapper executable");
+			}else{
+				outputToSystemConsole("  + !!!CANNOT!!! made gradlewrapper executable, because not found!");
+			}
+			
 		}
 
 	}
@@ -241,4 +252,24 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		}
 	}
 
+	private class GradleWrapperScriptFilter implements FileFilter{
+		
+		private static final String GRADLEW = "gradlew";
+
+		@Override
+		public boolean accept(File file) {
+			if (file==null){
+				return false;
+			}
+			if (!file.isFile()){
+				return false;
+			}
+			String name = file.getName();
+			if (GRADLEW.equals(name)){
+				return true;
+			}
+			return false;
+		}
+		
+	}
 }
