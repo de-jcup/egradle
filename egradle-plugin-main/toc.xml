@@ -3,30 +3,40 @@
 
 <toc label="EGradle table of content" topic="html/toc.html">
 
-	<topic label="EGradle User Guide" href="html/user_guide.html">
+  <topic label="EGradle User Guide" href="html/user_guide.html">
 		<topic href="html/user_guide/setup.html" label="Setup">
 		</topic>
 		<topic href="html/user_guide/import.html" label="Import gradle projects to eclipse">
 		</topic>
+  		<topic href="html/user_guide/new_project_wizard.html" label="New gradle projects by wizard">
+  		</topic>
 		<topic href="html/user_guide/virtual_root_project.html" label="Virtual root project">
 		</topic>
 		<topic href="html/user_guide/junit-integration.html" label="JUnit-Integration">
 		</topic>
 		<topic href="html/user_guide/launch_gradle.html" label="Launch gradle">
 		</topic>
-		<topic href="html/user_guide/refresh_complete_workspace.html"
-			label="Refresh complete eclipse workspace">
-		</topic>
-		<topic href="html/user_guide/show_project_dependencies.html"
-			label="Show project dependencies">
-		</topic>
-		<topic href="html/user_guide/project-decoration.html" label="Project decoration">
-		</topic>
 		<topic href="html/user_guide/editor.html" label="Editor">
 		</topic>
-		<topic href="html/user_guide/validation.html" label="Validation">
-		</topic>
-		<topic href="html/user_guide/filehandling.html" label="File handling">
-		</topic>
+		
+  		<topic href="html/user_guide.html" label="Actions">
+
+			<topic href="html/user_guide/refresh_complete_workspace.html"
+				label="Refresh complete eclipse workspace">
+			</topic>
+			<topic href="html/user_guide/show_project_dependencies.html"
+				label="Show project dependencies">
+			</topic>
+			  <topic href="html/user_guide/launch_gradle.html#quick_launch" label="Quick launch">
+			  </topic>
+    	</topic>
+  		<topic href="html/user_guide.html" label="Other">
+			<topic href="html/user_guide/validation.html" label="Validation">
+			</topic>
+			<topic href="html/user_guide/filehandling.html" label="File handling">
+			</topic>
+			<topic href="html/user_guide/project-decoration.html" label="Project decoration">
+			</topic>
+  		</topic>
 	</topic>
 </toc>
