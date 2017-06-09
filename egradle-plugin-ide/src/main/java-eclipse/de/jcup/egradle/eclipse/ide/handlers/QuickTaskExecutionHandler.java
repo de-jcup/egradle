@@ -25,6 +25,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.core.util.History;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
@@ -33,12 +34,18 @@ import de.jcup.egradle.eclipse.ui.QuickLaunchDialog;
 public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 
 	private String lastInput;
+	
+	private History<String> history;
+	
+	public QuickTaskExecutionHandler(){
+		history  = new History<>(20);
+	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		lastInput = null;
 		Shell shell = HandlerUtil.getActiveShellChecked(event);
-		QuickLaunchDialog dialog = new QuickLaunchDialog(shell);
+		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history);
 		dialog.open();
 		lastInput=dialog.getValue();
 		if (StringUtils.isBlank(lastInput)){

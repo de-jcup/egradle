@@ -16,6 +16,7 @@
  package de.jcup.egradle.core.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -116,5 +117,15 @@ public class History<T>{
 				sb.append("\n");
 			}
 			return sb.toString();
+		}
+		
+		/**
+		 * Returns list of current items inside history. The list is ordered from last to first
+		 * @return a list of all items. 
+		 */
+		public List<T> toList() {
+			List<T> toList = new ArrayList<>(list);
+			Collections.reverse(toList);
+			return toList;
 		}
 	}

@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.eclipse.ui;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -25,22 +27,27 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
+import de.jcup.egradle.core.util.History;
 import de.jcup.egradle.eclipse.MainActivator;
 
 public class QuickLaunchDialog extends AbstractQuickDialog {
 
 	private static final String TITLE = "EGradle quick launch";
 	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
+	private History<String> history;
 
-	public QuickLaunchDialog(Shell parent) {
+	public QuickLaunchDialog(Shell parent, History<String> history)  {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
 				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
+		if (history==null){
+			history= new History<>(10);
+		}
+		this.history=history;
 	}
 
 	private String inputText;
@@ -51,9 +58,12 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 		boolean isWin32 = Util.isWindows();
 		GridLayoutFactory.fillDefaults().extendedMargins(isWin32 ? 0 : 3, 3, 2, 2).applyTo(composite);
 
-		Text text = new Text(composite, SWT.NONE);
+		List<String> list = history.toList();
+		String[] items = list.toArray(new String[list.size()]);
+		
+		Combo comboBox = SWTFactory.createCombo(composite, SWT.NONE, 2, items);
 		Font terminalFont = JFaceResources.getTextFont();
-		text.setFont(terminalFont);
+		comboBox.setFont(terminalFont);
 		
 		GridData textLayoutData = new GridData();
 		textLayoutData.horizontalAlignment = GridData.FILL;
@@ -62,14 +72,20 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 		textLayoutData.grabExcessVerticalSpace = false;
 		textLayoutData.horizontalSpan = 2;
 		
-		text.setLayoutData(textLayoutData);
+		comboBox.setLayoutData(textLayoutData);
 		
-		text.addKeyListener(new KeyAdapter() {
+		comboBox.addKeyListener(new KeyAdapter() {
 			
 			@Override
 			public void keyReleased(KeyEvent event) {
 				if (event.character == '\r' ){
-					inputText = text.getText();
+					inputText = comboBox.getText();
+					if (inputText!=null){
+						if (! inputText.equals(history.current())){
+							/* when not same as current history entry, add it to history*/
+							history.add(inputText);
+						}
+					}
 					close();
 				}
 			}
@@ -89,23 +105,5 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 	public String getValue() {
 		return inputText;
 	}
-	/**
-	 * Just for direct simple UI testing
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Display display = new Display();
-		Shell shell = new Shell(display);
-		shell.setText("Shell");
-		shell.setSize(200, 200);
-		shell.open();
-
-		QuickLaunchDialog dialog = new QuickLaunchDialog(shell);
-		dialog.open();
-		String input = dialog.getValue();
-		System.out.println("input was:"+input);
-		display.dispose();
-
-	}
+	
 }

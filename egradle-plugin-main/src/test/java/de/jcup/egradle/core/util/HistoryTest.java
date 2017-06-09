@@ -17,6 +17,8 @@
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class HistoryTest {
@@ -57,6 +59,47 @@ public class HistoryTest {
 		
 		/* execute + test */
 		assertEquals(1, historyToTest.getCount());
+	}
+	
+	@Test
+	public void one_entry_in_history__toList_returns_list_with_this_entry() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		historyToTest.add("content");
+		
+		/* execute + test */
+		List<String> list = historyToTest.toList();
+		assertNotNull(list);
+		assertEquals(1, list.size());
+		assertEquals("content", list.iterator().next());
+	}
+	
+	@Test
+	public void two_entries_in_history__toList_returns_list_with_entries_last_entry_on_pos_0() {
+		/* prepare */
+		History<String> historyToTest = new History<>(4);
+		historyToTest.add("content-first");
+		historyToTest.add("content-last");
+		
+		/* execute + test */
+		List<String> list = historyToTest.toList();
+		assertNotNull(list);
+		assertEquals(2, list.size());
+		assertEquals("content-last", list.get(0));
+		assertEquals("content-first", list.get(1));
+	}
+	
+	
+	
+	@Test
+	public void nothing_in_history__toList_returns_list_with_this_entry() {
+		/* prepare */
+		History<String> historyToTest = new History<>(1);
+		
+		/* execute + test */
+		List<String> list = historyToTest.toList();
+		assertNotNull(list);
+		assertEquals(0, list.size());
 	}
 	
 	@Test
