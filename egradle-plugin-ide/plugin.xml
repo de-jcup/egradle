@@ -213,7 +213,7 @@
       <key
             commandId="egradle.commands.quickTaskExecution"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+M2+#"
+            sequence="M1+M2+M3+END"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
@@ -603,7 +603,7 @@
 			mode = "run"
 			label = "EGradle"
 			image = "icons/gradle-og.png"
-			bannerImage = "icons/egradle-banner_128x128.png">
+			bannerImage = "icons/egradle-banner_64x64.png">
 		</launchGroup>
 		
 	</extension>
