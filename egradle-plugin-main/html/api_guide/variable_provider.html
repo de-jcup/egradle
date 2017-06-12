@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Import gradle projects</title>
+</head>
+
+<body>
+	<img src="./../images/egradle-banner_128x128.png" />
+	<a href="../api_guide.html">API guide</a>
+	<h1>Variable Provider API</h1>
+	<p>With EGradle 2.0 the editor can be installed without EGradle
+		IDE, so users can decide to use it together with alternative IDEs.</p>
+	<p>To provide hyper linking with variables the editor uses a
+		provider interface which can be implemented by IDE to support variable
+		content.</p>
+	<pre>
+	<code>
+    public <b>interface</b> de.jcup.egradle.eclipse.api.VariableProvider {
+	
+        Map&lt;String, String&gt; getVariables(IEditorInput editorInput);
+		
+    }
+	</code></pre>
+	The provider can be added by extension point
+	<b>de.jcup.egradle.eclipse.extension.variableprovider</b>. Here an example:
+	<pre>
+	
+    &lt;!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --&gt;
+    &lt;!--                          VARIABLE PROVIDER                           --&gt;
+    &lt;!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --&gt;
+    &lt;extension point id="de.jcup.egradle.eclipse.extension.variableprovider" &gt;
+	
+        &lt;provider class="de.jcup.egradle.eclipse.ide.EGradleIdeVariableProvider"/&gt;
+     
+    &lt;/extension&gt;
+	
+	</pre>
+
+	<p>EGradle supports e.g. "rootproject.projectDir".</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+</body>
+</html>

@@ -155,3 +155,10 @@ find -iname site.xml | while read file ; do
 done
 
 cd $EGRADLE_MAINFOLDER/egradle-other
+
+echo
+echo "###############################"
+echo "# MANUAL WORK TO DO:"
+echo "###############################"
+echo "- check if SDK is build in expected version (SDK has dependency to main and can be changed )"
+echo "- check if editor exists also in category for editor is also in new version set"

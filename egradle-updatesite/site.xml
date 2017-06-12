@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <description name="EGradle update site">
-      Official update site for egradle
+      Official update site for EGradle
    </description>
-   <feature url="features/de.jcup.egradle.eclipse.feature_1.2.1.jar" id="de.jcup.egradle.eclipse.feature" version="1.2.1">
-      <category name="site.egradle.category.stable"/>
-   </feature>
-   <feature url="features/de.jcup.egradle.eclipse.feature_1.3.0.jar" id="de.jcup.egradle.eclipse.feature" version="1.3.0">
-      <category name="site.egradle.category.stable"/>
-   </feature>
-   <feature url="features/de.jcup.egradle.eclipse.feature_1.3.1.jar" id="de.jcup.egradle.eclipse.feature" version="1.3.1">
+   <feature url="features/de.jcup.egradle.eclipse.feature_2.0.0.jar" id="de.jcup.egradle.eclipse.feature" version="2.0.0">
       <category name="site.egradle.category.stable"/>
    </feature>
    <category-def name="site.egradle.category.beta" label="EGradle Beta Versions">
@@ -19,7 +13,7 @@
    </category-def>
    <category-def name="site.egradle.category.stable" label="EGradle Stable Versions">
       <description>
-         Stable Versions of EGradle
+         Stable versions of EGradle
       </description>
    </category-def>
 </site>
