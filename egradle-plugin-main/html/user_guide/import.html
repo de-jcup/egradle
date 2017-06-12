@@ -12,18 +12,30 @@
 	<h1>Import gradle projects</h1>
 	<p>You can import projects in different ways, all are working:</p>
 	<ul>
-		<li><a href="#import_preconditions">Preconditions</a></li>
-		<li><a href="#import_by_importer">Import gradle root and all subprojects by EGradle importer</a>
-		<ul>
-			<li><a href="#import_by_importer_what_happens">What happens?</a></li>	
-			<li><a href="#import_by_importer_reimport">Reimporting current root project</a></li>
-			<li><a href="#import_preferences">Import preferences</a></li>
-			
-		</ul>
+		<li><a href="#new_projects">New projects</a></li>
+		
+		<li><a href="#import_existing">Import existing gradle projects</a>
+			<ul>
+				<li><a href="#import_preconditions">Preconditions</a></li>
+				<li><a href="#import_by_importer">Import gradle root and all subprojects by EGradle importer</a>
+				<ul>
+					<li><a href="#import_by_importer_what_happens">What happens?</a></li>	
+					<li><a href="#import_by_importer_reimport">Reimporting current root project</a></li>
+					<li><a href="#import_preferences">Import preferences</a></li>
+					
+				</ul>
+				</li>
+				<li><a href="#import_by_default">Import by standard way</a></li>
+			</ul>
 		</li>
-		<li><a href="#import_by_default">Import by standard way</a></li>
 	</ul>
-	<h2 id="import_preconditions">Preconditions</h2>
+	<h2 id="new_projects">New projects</h2>
+	When you want to start a new gradle project you should use the <code>EGradle New Project Wizard</code>
+	which is described <a href="new_project_wizard.html">here</a>. It is the easiest way to 
+	create new gradle projects out of the box in eclipse and automatically import them. Of course you are able to create file structure and build files etc. manually and import as existing project(s) as described
+	in the next steps.</>
+	<h2 id="import_by_importer">Import existing gradle projects</h2>
+	<h3 id="import_preconditions">Preconditions</h3>
 	 EGradle does no magic to your build files. You have to apply the 'eclipse' plugin inside your build.gradle file.
 	 <p>
 		<img src="images/egradle-import-preconditions.png" />
@@ -31,7 +43,7 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h2 id="import_by_importer">Import gradle root and all subprojects by EGradle importer</h2>
+	<h3 id="import_by_importer">Import gradle root and all subprojects by EGradle importer</h3>
 	<p>EGradle contains an importer - simply call "File->Import..." and enter "gradle"</p>
 	<p>
 		<img src="images/egradle-import-rootproject.png" />
@@ -42,7 +54,7 @@
 	<p>The settings for gradle root project path, global java home
 		settings and gradle call type are initially copied from current
 		preferences - if there exists a setup.</p>
-	<h3 id="import_by_importer_what_happens">What happens?</h3>
+	<h4 id="import_by_importer_what_happens">What happens?</h4>
 	What happens when you call finish button?
 	<ol>
 		<li>All eclipse projects which are representatives of the new gradle root project location are closed</li>
@@ -77,7 +89,7 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>
-	<h3 id="import_by_importer_reimport">Reimporting current root project</h3>
+	<h4 id="import_by_importer_reimport">Reimporting current root project</h4>
 	<p>
 	What happens when you keep the settings of current preferences?<br><br>	
 	The same as described above. But when do you need this? When you switch between branches
@@ -93,20 +105,20 @@
 	<p>
 		<a href="#top">Top</a>
 	</p>	
-	<h3 id="import_preferences">Import preferences</h3>
+	<h4 id="import_preferences">Import preferences</h4>
 	<p>
 	The importer has got it's own preferences page where you can setup
 	some behaviour:
 	</p>
 	<img src="images/egradle-preferences-importer.png" />
 	<p>
-	<h4>Execute assemble task</h4>
+	<h5>Execute assemble task</h5>
 	When this option is enabled, the <b>assemble</b> task will be called after 
 	EGradle has imported the projects into eclipse. This will build
 	main output and build folders but no test outputs.<br><br>
 	If you deactivate this option you will not have <a href="filehandling.html#automatically_derive_buildfolders">auto derived build folders</a> after import, because no build folders will be created. 
 	 
-	<h4>Clean eclipse projects</h4>
+	<h5>Clean eclipse projects</h5>
 	<p>
 	When enabled a full <b>"clean all projects"</b> will be executed after import is done, so eclipse 
 	bin folders will be recreated and eclipse and gradle outputs are in sync.
@@ -116,7 +128,7 @@
 	</p>	
 	<br>
 	<br>	
-	<h2 id="import_by_default">Import by standard eclipse way</h2>
+	<h3 id="import_by_default">Import by standard eclipse way</h3>
 	<p>
 		This is the classic way if you do not want to use the EGradle importer mechanism.
 	</p>
