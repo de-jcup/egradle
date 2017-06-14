@@ -140,11 +140,11 @@ find -iname site.xml | while read file ; do
 	# when beta is contained we use beta category...
 	if [[ $NEW_VERSION == *"beta"* ]]
 	then
-	  CONTENT='<feature url=\"features/de.jcup.egradle.eclipse.feature_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.beta\"/></feature>'
+	  CONTENT='<feature url=\"features/de.jcup.egradle.eclipse.feature_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.beta\"/></feature><feature url=\"features/de.jcup.egradle.eclipse.feature.editor_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature.editor\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.beta\"/></feature>'
 	 else 
-	  CONTENT='<feature url=\"features/de.jcup.egradle.eclipse.feature_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.stable\"/></feature>'
+	  CONTENT='<feature url=\"features/de.jcup.egradle.eclipse.feature_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.stable\"/></feature><feature url=\"features/de.jcup.egradle.eclipse.feature.editor_'$NEW_VERSION'.jar\" id=\"de.jcup.egradle.eclipse.feature.editor\" version=\"'$NEW_VERSION'\"><category name=\"site.egradle.category.stable\"/></feature>'
 	 fi
-	echo "Content variable=$CONTENT"
+	echo "Update site content=$CONTENT"
 	# <?xml version="1.0" will not be influcenced because we have always minor.major.patch version numbers...
 	UPC=$(echo $CONTENT | sed 's/\//\\\//g')
 	sed -i "/<\/site>/ s/.*/${UPC}\n&/" $file
@@ -161,4 +161,3 @@ echo "###############################"
 echo "# MANUAL WORK TO DO:"
 echo "###############################"
 echo "- check if SDK is build in expected version (SDK has dependency to main and can be changed )"
-echo "- check if editor exists also in category for editor is also in new version set"
