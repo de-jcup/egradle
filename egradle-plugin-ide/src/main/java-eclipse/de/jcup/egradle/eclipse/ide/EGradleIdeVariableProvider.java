@@ -34,7 +34,7 @@ public class EGradleIdeVariableProvider implements VariableProvider {
 	@Override
 	public Map<String, String> getVariables(IEditorInput editorInput) {
 		Map<String, String> map = new HashMap<>();
-		File rootFolder = IDEUtil.getRootProjectFolderWithoutErrorHandling();
+		File rootFolder = IDEUtil.getGlobalRootProjectFolderWithoutErrorHandling();
 		if (rootFolder == null) {
 			return map;
 		}

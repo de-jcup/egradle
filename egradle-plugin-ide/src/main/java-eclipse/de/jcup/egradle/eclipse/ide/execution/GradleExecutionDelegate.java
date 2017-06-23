@@ -72,7 +72,7 @@ public class GradleExecutionDelegate {
 		notNull(processExecutor, "'processExecutor' may not be null");
 
 		if (rootProject==null){
-			rootProject = IDEUtil.getRootProject(false);
+			rootProject = IDEUtil.getGlobalRootProject(false);
 		}
 		if (rootProject == null) {
 			/*

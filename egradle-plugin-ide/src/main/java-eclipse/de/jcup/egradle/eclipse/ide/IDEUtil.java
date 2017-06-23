@@ -477,7 +477,7 @@ public class IDEUtil {
 				IResource resource = null;
 
 				String scriptPath = result.getScriptPath();
-				File rootFolder = getRootProjectFolderWithoutErrorHandling();
+				File rootFolder = getGlobalRootProjectFolderWithoutErrorHandling();
 				if (rootFolder == null) {
 					/*
 					 * this problem should not occure, because other gradle
@@ -528,8 +528,8 @@ public class IDEUtil {
 	 * 
 	 * @return root project or <code>null</code>
 	 */
-	public static GradleRootProject getRootProject() {
-		return getRootProject(true);
+	public static GradleRootProject getGlobalRootProject() {
+		return getGlobalRootProject(true);
 	}
 
 	/**
@@ -541,7 +541,7 @@ public class IDEUtil {
 	 *            is shown
 	 * @return root project or <code>null</code>
 	 */
-	public static GradleRootProject getRootProject(boolean showErrorDialog) {
+	public static GradleRootProject getGlobalRootProject(boolean showErrorDialog) {
 		String path = getPreferences().getRootProjectPath();
 		if (StringUtils.isEmpty(path)) {
 			if (showErrorDialog) {
@@ -569,10 +569,10 @@ public class IDEUtil {
 	 * @throws IOException
 	 *             - if root folder would be <code>null</code>
 	 */
-	public static File getRootProjectFolder() throws IOException {
-		GradleRootProject rootProject = getRootProject();
+	public static File getGlobalRootProjectFolder() throws IOException {
+		GradleRootProject rootProject = getGlobalRootProject();
 		if (rootProject == null) {
-			throw new IOException("No gradle root project available");
+			throw new IOException("No gradle global root project available");
 		}
 		return rootProject.getFolder();
 	}
@@ -583,8 +583,8 @@ public class IDEUtil {
 	 * 
 	 * @return root project folder or <code>null</code>
 	 */
-	public static File getRootProjectFolderWithoutErrorHandling() {
-		GradleRootProject rootProject = getRootProject(false);
+	public static File getGlobalRootProjectFolderWithoutErrorHandling() {
+		GradleRootProject rootProject = getGlobalRootProject(false);
 		if (rootProject == null) {
 			return null;
 		}
@@ -597,7 +597,7 @@ public class IDEUtil {
 	 * 
 	 * @return vr project or <code>null</code>
 	 */
-	public static IProject getVirtualRootProject() {
+	public static IProject getGlobalVirtualRootProject() {
 		IProject[] projects = getAllProjects();
 		for (IProject project : projects) {
 			if (hasVirtualRootProjectNature(project)) {
@@ -638,7 +638,7 @@ public class IDEUtil {
 		if (project == null) {
 			return false;
 		}
-		File rootFolder = getRootProjectFolderWithoutErrorHandling();
+		File rootFolder = getGlobalRootProjectFolderWithoutErrorHandling();
 		if (rootFolder == null) {
 			return false;
 		}
@@ -660,14 +660,14 @@ public class IDEUtil {
 	 *         project
 	 * @throws CoreException
 	 */
-	public static boolean isSubprojectOfCurrentRootProject(IProject p) throws CoreException {
+	public static boolean isSubprojectOfCurrentGlobalRootProject(IProject p) throws CoreException {
 		if (p == null) {
 			return false;
 		}
 		if (!p.exists()) {
 			return false;
 		}
-		File rootFolder = getRootProjectFolderWithoutErrorHandling();
+		File rootFolder = getGlobalRootProjectFolderWithoutErrorHandling();
 		if (rootFolder == null) {
 			return false;
 		}
@@ -701,7 +701,7 @@ public class IDEUtil {
 	 * @throws VirtualRootProjectException
 	 */
 	public static void createOrRecreateVirtualRootProject() throws VirtualRootProjectException {
-		GradleRootProject rootProject = getRootProject();
+		GradleRootProject rootProject = getGlobalRootProject();
 		if (rootProject == null) {
 			return;
 		}

@@ -65,7 +65,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		}
 
 		IProject p = (IProject) element;
-		File rootFolder = getRootProjectFolderWithoutErrorHandling();
+		File rootFolder = getGlobalRootProjectFolderWithoutErrorHandling();
 		if (rootFolder == null) {
 			return;
 		}
@@ -84,7 +84,7 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 
 		/* we simply check if the project is inside root project */
 		try {
-			if (!isSubprojectOfCurrentRootProject(p)){
+			if (!isSubprojectOfCurrentGlobalRootProject(p)){
 				return;
 			}
 			if (IDEUtil.getPreferences().isSubProjectIconDecorationEnabled()){

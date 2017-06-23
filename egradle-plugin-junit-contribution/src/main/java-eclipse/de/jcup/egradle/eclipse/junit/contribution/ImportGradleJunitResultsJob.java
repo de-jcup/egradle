@@ -77,7 +77,7 @@ public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 			String taskName = "Fetching gradle junit result files from '" +projectNameToShow+"'";
 			outputToSystemConsole(taskName);
 			monitor.setTaskName(taskName);
-			File rootFolder = getRootProjectFolder();
+			File rootFolder = getGlobalRootProjectFolder();
 
 			Collection<File> files = finder.findTestFilesInFolder(rootFolder,projectname);
 			if (files.isEmpty()){

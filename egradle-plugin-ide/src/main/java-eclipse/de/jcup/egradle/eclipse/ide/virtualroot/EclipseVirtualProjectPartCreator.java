@@ -73,7 +73,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	 * @return <code>true</code> when a virtual root was existing
 	 */
 	public static boolean deleteVirtualRootProjectFull(IProgressMonitor monitor) throws CoreException {
-		IProject virtualRootProject = getVirtualRootProject();
+		IProject virtualRootProject = getGlobalVirtualRootProject();
 		if (virtualRootProject == null) {
 			/*
 			 * okay, not in workspace, but what's about sleeping around in file
@@ -90,7 +90,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 			return false;
 		}
 		deleteVirtualRootProjectFull(monitor, virtualRootProject);
-		virtualRootProject = getVirtualRootProject();
+		virtualRootProject = getGlobalVirtualRootProject();
 		if (virtualRootProject != null) {
 			throwCoreException("virtual root project should be full deleted, but was still found in workspace!");
 		}
@@ -125,7 +125,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	public Object createOrRecreateProject(String projectName) throws VirtualRootProjectException {
 		notNull(projectName, "'projectName' may not be null");
 		monitor.beginTask("virtual root project (re)creation", 3);
-		File rootprojectFolder = getRootProjectFolderWithoutErrorHandling();
+		File rootprojectFolder = getGlobalRootProjectFolderWithoutErrorHandling();
 		if (rootprojectFolder == null) {
 			throw new VirtualRootProjectException(
 					"Cannot create virtual root project, because root folder is not configured");
@@ -227,7 +227,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 	 * @return root folder or <code>null</code>
 	 */
 	public static File createVirtualRootFolderFile() {
-		return createVirtualRootFolderFile(getRootProjectFolderWithoutErrorHandling());
+		return createVirtualRootFolderFile(getGlobalRootProjectFolderWithoutErrorHandling());
 	}
 
 	/**

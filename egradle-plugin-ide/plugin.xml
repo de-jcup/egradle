@@ -83,7 +83,23 @@
          </run>
       </builder>
    </extension>
-	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <!--                          PROPERTY PAGES                              -->
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.ui.propertyPages">
+    <page id="de.jcup.egradle.eclipse.ide.EGradleProjectPropertyPage"
+          name="EGradle project setting"
+          class="de.jcup.egradle.eclipse.ide.EGradleProjectPropertyPage">
+      <enabledWhen>
+    	 <adapt type="org.eclipse.core.resources.IProject">
+        	<test property="de.jcup.egradle.isProjectAGradleRootProject" value="true"/>
+    	</adapt>
+	  </enabledWhen>
+    </page>
+  </extension>
+   
+   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PROPERTY TESTERS                            -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <extension point="org.eclipse.core.expressions.propertyTesters">
@@ -91,11 +107,21 @@
   	  <!-- see http://help.eclipse.org/neon/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_cmd_expressions.htm -->
   	  <!-- see http://www.robertwloch.net/2011/01/eclipse-tips-tricks-property-testers-with-command-core-expressions/ -->
       <propertyTester
-          class="de.jcup.egradle.eclipse.ide.EGradlePropertyTester"
-          id="de.jcup.egradle.eclipse.EGradlePropertyTester"
+          class="de.jcup.egradle.eclipse.ide.EGradleIsPartOfGlobalRootProjectPropertyTester"
+          id="de.jcup.egradle.eclipse.ide.EGradleIsPartOfGlobalRootProjectPropertyTester"
           namespace="de.jcup.egradle"
-          properties="isProjectPartOfRootProject"
+          properties="isProjectPartOfGlobalRootProject"
           type="org.eclipse.core.resources.IResource">
+      </propertyTester>
+   </extension>
+   
+    <extension point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+          class="de.jcup.egradle.eclipse.ide.EGradleIsProjectAGradleRootProjectPropertyTester"
+          id="de.jcup.egradle.eclipse.ide.EGradleIsProjectAGradleRootProjectPropertyTester"
+          namespace="de.jcup.egradle"
+          properties="isProjectAGradleRootProject"
+          type="org.eclipse.core.resources.IProject">
       </propertyTester>
    </extension>
 
@@ -319,7 +345,7 @@
 				         				<count value="1"/>
 	                                    <iterate ifEmpty="false">
 	                                    	 <adapt type="org.eclipse.core.resources.IResource">
-			         							<test property="de.jcup.egradle.isProjectPartOfRootProject" value="false"/>
+			         							<test property="de.jcup.egradle.isProjectPartOfGlobalRootProject" value="false"/>
 				         					</adapt>
 				         				</iterate>
                                     </and>
@@ -350,7 +376,7 @@
                                   <adapt
                                         type="org.eclipse.core.resources.IProject">
                                      <test
-                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           property="de.jcup.egradle.isProjectPartOfGlobalRootProject"
                                            value="true">
                                      </test>
                                   </adapt>
@@ -398,7 +424,7 @@
                                   <adapt
                                         type="org.eclipse.core.resources.IResource">
                                      <test
-                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           property="de.jcup.egradle.isProjectPartOfGlobalRootProject"
                                            value="true">
                                      </test>
                                   </adapt>
