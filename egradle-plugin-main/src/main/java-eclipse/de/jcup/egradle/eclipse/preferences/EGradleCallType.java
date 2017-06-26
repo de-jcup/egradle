@@ -17,6 +17,8 @@
 
 import static org.apache.commons.lang3.Validate.*;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import de.jcup.egradle.core.process.EGradleShellType;
 
 public enum EGradleCallType{
@@ -76,5 +78,13 @@ public enum EGradleCallType{
 			}
 		}
 		return null;
+	}
+
+	public static EGradleCallType getOSDependentDefaultCallType() {
+		if (SystemUtils.IS_OS_WINDOWS){
+			return EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
+		}else{
+			return EGradleCallType.LINUX_GRADLE_WRAPPER;			
+		}
 	}
 }

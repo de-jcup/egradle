@@ -3,15 +3,36 @@ package de.jcup.egradle.core.util;
 import java.io.File;
 
 public class GradleInfoSupport {
-
+	
+	public static GradleInfoSupport DEFAULT = new GradleInfoSupport();
+	
 	public boolean isGradleRootProjectFolder(File folder){
 		if (folder==null){
 			return false;
 		}
+		File rootFolder = resolveGradleRootProjectFolder(folder);
+		if (rootFolder==null){
+			return false;
+		}
+		if (! rootFolder.equals(folder)){
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Resolves gradle root project folder or <code>null</code>
+	 * @param folder
+	 * @return root project folder or <code>null</code>
+	 */
+	public File resolveGradleRootProjectFolder(File folder){
+		if (folder==null){
+			return null;
+		}
 		boolean multiProjectRoot = isMultiProjectRoot(folder);
 		if (multiProjectRoot){
 			/* is a root of multi project */
-			return true;
+			return folder;
 		}
 		
 		/* check if at least a build.gadle file is available */
@@ -19,7 +40,7 @@ public class GradleInfoSupport {
 			/*
 			 * cannot be a a single project - missing build file
 			 */
-			return false;
+			return null;
 		}
 		
 		/* ------------------------ */
@@ -36,11 +57,11 @@ public class GradleInfoSupport {
 			}
 			if (isMultiProjectRoot(parent)){
 				/* found a multi project directory, so this is a sub project */
-				return false;
+				return parent;
 			}
 		}
 		/* seems to be a single project - build.gradle exists and not in multi project */
-		return true;
+		return folder;
 	}
 
 	private boolean isMultiProjectRoot(File folder) {

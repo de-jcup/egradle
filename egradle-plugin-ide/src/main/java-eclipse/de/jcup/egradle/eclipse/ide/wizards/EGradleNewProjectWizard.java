@@ -217,7 +217,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		EGradleRootProjectImportWizard piw = (EGradleRootProjectImportWizard) wizard;
 		piw.setCustomRootProjectpath(targetFolder.getAbsolutePath());
 		piw.setCustomJavaHome(context.getJavaHome());
-		piw.setImportMode(RootProjectConfigMode.PREDEFINED_VALUES);
+		piw.setImportMode(RootProjectConfigMode.PREDEFINED_ALL);
 
 		WizardDialog wd = new WizardDialog(getShell(), piw);
 		wd.setTitle("Import generated gradle project");

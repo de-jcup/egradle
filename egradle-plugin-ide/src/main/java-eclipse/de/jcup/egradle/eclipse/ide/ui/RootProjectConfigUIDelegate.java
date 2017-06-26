@@ -95,7 +95,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	}
 
 	private void createValidationGroup(Composite parent) {
-		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
+		if (RootProjectConfigMode.PREDEFINED_ALL.equals(mode)){
 			/* no validation group*/
 			return;
 		}
@@ -310,7 +310,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
-		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
+		if (RootProjectConfigMode.PREDEFINED_ALL.equals(mode) || RootProjectConfigMode.PREDEFINED_ROOTPROJECT_ONLY.equals(mode)){
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
 		}
 		

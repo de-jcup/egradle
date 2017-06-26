@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.ide.preferences;
 
 import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
@@ -31,12 +30,8 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = IDEUtil.getPreferences().getPreferenceStore();
-		EGradleCallType defaultCallType = null; 
-		if (SystemUtils.IS_OS_WINDOWS){
-			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
-		}else{
-			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
-		}
+		EGradleCallType defaultCallType = EGradleCallType.getOSDependentDefaultCallType(); 
+		
 		store.setDefault(P_OUTPUT_VALIDATION_ENABLED.getId(), true);
 		
 		store.setDefault(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), false);

@@ -17,5 +17,6 @@
 
 public enum RootProjectConfigMode{
 	USER,
-	PREDEFINED_VALUES
+	PREDEFINED_ROOTPROJECT_ONLY,
+	PREDEFINED_ALL,
 }
