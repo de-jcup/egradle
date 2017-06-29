@@ -50,8 +50,22 @@ import de.jcup.egradle.eclipse.MainActivator;
 public class EclipseUtil {
 
 	public static ImageDescriptor createImageDescriptor(String path, String pluginId) {
+		if (path == null) {
+			/* fall back if path null , so avoid NPE in eclipse framework */
+			return ImageDescriptor.getMissingImageDescriptor();
+		}
+		if (pluginId == null) {
+			/* fall back if pluginId null , so avoid NPE in eclipse framework */
+			return ImageDescriptor.getMissingImageDescriptor();
+		}
 		Bundle bundle = Platform.getBundle(pluginId);
-
+		if (bundle == null) {
+			/*
+			 * fall back if bundle not available, so avoid NPE in eclipse
+			 * framework
+			 */
+			return ImageDescriptor.getMissingImageDescriptor();
+		}
 		URL url = FileLocator.find(bundle, new Path(path), null);
 
 		ImageDescriptor imageDesc = ImageDescriptor.createFromURL(url);
@@ -195,7 +209,7 @@ public class EclipseUtil {
 			return VersionData.UNKNOWN;
 		}
 		Version osgiVersion = bundle.getVersion();
-		if (osgiVersion==null){
+		if (osgiVersion == null) {
 			return VersionData.UNKNOWN;
 		}
 		return new VersionData(osgiVersion.toString());
