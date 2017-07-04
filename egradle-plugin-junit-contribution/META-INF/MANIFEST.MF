@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle JUnit contribution
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.junit.contribution;singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.0.1
 Bundle-Activator: de.jcup.egradle.eclipse.junit.contribution.JUnitActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
