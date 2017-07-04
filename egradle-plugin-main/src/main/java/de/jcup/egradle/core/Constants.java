@@ -25,5 +25,5 @@ public class Constants {
 	/**
 	 * Validation output is shrinked to optimize validation performance. The value marks what is the limit of lines necessary to validate
 	 */
-	public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 25;
+	public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 50;
 }
