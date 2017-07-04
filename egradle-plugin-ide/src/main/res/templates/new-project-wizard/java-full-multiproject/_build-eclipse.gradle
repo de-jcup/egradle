@@ -6,13 +6,34 @@
    Included from: "${rootProject.projectDir}/build.gradle"
    ============================================================================
  */
+ 
+/* ensure eclipse source folders are always created, even when not inside GIT */
+def eclipseSourceFolders=[
+	'src/main/java',
+	'src/main/resources',
+	'src/test/java',
+	'src/test/resources'
+];
+
 def projectsNotInEclipse = [/*'no-eclipse-project1','no-eclipse-project2'*/]; 
 
 subprojects {
 
-	if (! projectsNotInEclipse.contains(project.name)){
-		apply plugin: 'eclipse'
+	if (projectsNotInEclipse.contains(project.name)){
+		return;		
 	} 
+	apply plugin: 'eclipse'
+	
+	tasks.eclipse.dependsOn << {
+		
+	for (String sourceFolder: eclipseSourceFolders){ 
+		def resourceDir = new File(project.projectDir, sourceFolder)
+		if( !resourceDir.exists() && ! resourceDir.mkdirs() ) {
+    		logger.info("Not able to create eclipse resource dir: %1",resourceDir);
+    	}
+	}
+}
+	
 	
 	/* To have javadocs in eclipse added - where no source are available - we need these lines:
 	 * see https://docs.gradle.org/current/dsl/org.gradle.plugins.ide.eclipse.model.EclipseClasspath.html
@@ -30,5 +51,5 @@ subprojects {
 		f.write('eclipse.preferences.version=1\n')
 		f.append('encoding/<project>=utf-8')
 	}
-    
+	
 }
