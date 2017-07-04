@@ -38,6 +38,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		addParseDataByIndex("BUILD SUCCESSFUL", GREEN);
 		addParseDataByIndex("BUILD FAILED", RED);
 		addParseDataByIndex("SKIPPED", GRAY);
+		addParseDataByIndex("NO-SOURCE", GRAY);
 		addParseDataByIndex("UP-TO-DATE", ORANGE);
 		addParseDataByIndex("FAILURE:", BRIGHT_RED);
 		addParseDataByIndex("test FAILED", RED);
@@ -107,6 +108,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
 		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);
 		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED,false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Downloading", BLUE, false, BRIGHT_BLUE,false);
 		handled = handled || markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE,false);
 		/* index parts and other*/
 		if (!handled) {
