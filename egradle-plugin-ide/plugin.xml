@@ -152,6 +152,12 @@
             categoryId="egradle.commands.category"
             id="egradle.commands.updateOrCreateVirtualRootProject">
       </command>
+      <command 
+      		name="Reimport project(s)"
+      		categoryId="egradle.commands.category"
+      		id="egradle.commands.reimportGradleProject"
+      		>
+      </command>
       <command
             name="Quick gradle task execution"
             categoryId="egradle.commands.category"
@@ -199,6 +205,10 @@
       <handler
             commandId="egradle.commands.detectNewRootProject"
             class="de.jcup.egradle.eclipse.ide.handlers.DetectNewRootProjectHandler">
+      </handler>
+      <handler
+      		commandId="egradle.commands.reimportGradleProject"
+      		class="de.jcup.egradle.eclipse.ide.handlers.ReimportGradleProjectHandler">
       </handler>
       <handler
             commandId="egradle.commands.showDependenciesForProject"
@@ -383,11 +393,11 @@
                       </visibleWhen>
                    </command>
                    <command
-                         commandId="org.eclipse.ui.file.import">
-                      <parameter
-                            name="importWizardId"
-                            value="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard">
-                      </parameter>
+                         commandId="egradle.commands.reimportGradleProject"
+                         icon="icons/import_egradle.png"
+                         label="Reimport project(s)"
+                         style="push"
+                         tooltip="Does open the import wizard to execute a full reimport of current project. Interesting when switching between branches where sub projects added/removed etc.">
                       <visibleWhen
                             checkEnabled="false">
                          <with
