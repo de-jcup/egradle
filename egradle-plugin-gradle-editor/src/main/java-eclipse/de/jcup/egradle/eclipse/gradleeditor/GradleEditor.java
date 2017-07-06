@@ -579,7 +579,7 @@ public class GradleEditor extends TextEditor implements StatusMessageSupport, IR
 	private void activateGradleEditorContext() {
 		IContextService contextService = getSite().getService(IContextService.class);
 		if (contextService != null) {
-			contextService.activateContext("org.egradle.editors.GradleEditor.context");
+			contextService.activateContext(EDITOR_CONTEXT_MENU_ID);
 		}
 	}
 
