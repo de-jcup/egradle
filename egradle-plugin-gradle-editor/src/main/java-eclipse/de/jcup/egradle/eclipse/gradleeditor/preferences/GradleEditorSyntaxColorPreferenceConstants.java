@@ -15,8 +15,6 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
  *
  */
 
-import org.eclipse.swt.graphics.RGB;
-
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 import de.jcup.egradle.eclipse.util.PreferenceLabeled;
 
@@ -56,8 +54,4 @@ public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIden
 		return id;
 	}
 
-	public RGB getDefaultThemeRGB() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
