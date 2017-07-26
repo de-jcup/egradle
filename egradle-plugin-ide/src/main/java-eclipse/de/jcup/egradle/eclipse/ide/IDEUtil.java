@@ -274,22 +274,11 @@ public class IDEUtil {
 				}
 				IDecoratorManager manager = workbench.getDecoratorManager();
 
+				IProject[] projects = getAllProjects();
+				
 				EGradleProjectDecorator decorator = (EGradleProjectDecorator) manager
 						.getBaseLabelProvider("de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator");
-				IProject[] projects = getAllProjects();
-				/* test if virtual root project is visible */
-				for (IProject project : projects) {
-					String name = project.getName();
-					if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(name)) {
-						/* ok found - so recreate ... */
-						try {
-							createOrRecreateVirtualRootProject();
-						} catch (VirtualRootProjectException e) {
-							logError("Cannot (re)create virtual root project",e);
-						}
-						break;
-					}
-				}
+				/* decorate */
 				if (decorator != null) { // decorator is enabled
 
 					LabelProviderChangedEvent event = new LabelProviderChangedEvent(decorator, projects);

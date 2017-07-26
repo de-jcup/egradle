@@ -111,7 +111,7 @@
             class="de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator"
             state="true"
             location="BOTTOM_LEFT"
-            id="de.jcup.egradle.eclipse.decorators.EGradleProjectDecorator">
+            id="de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator">
             <enablement>
               <objectClass name="org.eclipse.core.resources.IProject"/>
             </enablement>

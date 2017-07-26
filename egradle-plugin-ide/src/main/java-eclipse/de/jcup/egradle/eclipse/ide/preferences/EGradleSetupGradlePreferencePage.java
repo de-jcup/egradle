@@ -17,7 +17,10 @@ package de.jcup.egradle.eclipse.ide.preferences;
 
 import static de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceConstants.*;
 
+import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -60,7 +63,14 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 			String newRootProject=uiDelegate.getRootPathDirectory();
 			if (! StringUtils.equals(newRootProject, originRootProject)){
 				/* root project has changed - refresh decoration of all projects */ 
-				IDEUtil.refreshAllProjectDecorations();
+				File newRootProjectFolder = new File(newRootProject);
+				try {
+					IDEUtil.setNewRootProjectFolder(newRootProjectFolder);
+				} catch (CoreException e) {
+					IDEUtil.logError("Was not able to set new root project folder:"+newRootProject, e);
+					/* not done...*/
+					return false;
+				}
 			}
 		}
 		return done;
