@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.gradleeditor.document;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 
 /**
@@ -32,9 +31,9 @@ public class GradleFileDocumentProvider extends FileDocumentProvider {
 		IDocument document = super.createDocument(element);
 		if (document != null) {
 			/* installation necessary */
-			IDocumentPartitioner partitioner = GradlePartionerFactory.create();
+			GradlePartitioner partitioner = GradlePartionerFactory.create();
 
-			partitioner.connect(document);
+			partitioner.connect(document,true);
 			document.setDocumentPartitioner(partitioner);
 		}
 		return document;

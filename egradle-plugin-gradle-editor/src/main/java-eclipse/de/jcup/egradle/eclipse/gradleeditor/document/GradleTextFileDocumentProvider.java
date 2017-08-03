@@ -38,8 +38,8 @@ public class GradleTextFileDocumentProvider extends TextFileDocumentProvider {
 			return document;
 		}
 		/* installation necessary */
-		IDocumentPartitioner partitioner = GradlePartionerFactory.create();
-		partitioner.connect(document);
+		GradlePartitioner partitioner = GradlePartionerFactory.create();
+		partitioner.connect(document,true);
 		document.setDocumentPartitioner(partitioner);
 		
 		return document;
