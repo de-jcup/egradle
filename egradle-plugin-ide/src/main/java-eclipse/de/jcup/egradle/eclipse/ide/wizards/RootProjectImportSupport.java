@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.wizards;
+package de.jcup.egradle.eclipse.ide.wizards;
 
 import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
@@ -21,9 +21,11 @@ import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -46,6 +48,8 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.eclipse.ide.WorkingSetSupport;
+import de.jcup.egradle.eclipse.ide.WorkingSetSupport.WorkingSetData;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
@@ -107,7 +111,8 @@ public class RootProjectImportSupport {
 		public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 			boolean cleanProjects = IDEUtil.getPreferences().isCleanProjectsOnImportEnabled();
 			boolean executeAssemble = IDEUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
-
+			WorkingSetSupport workingSetSupport = null;
+			List<WorkingSetData> closedProjectWorksetData = null;
 			try {
 
 				autoBuildEnabled = isWorkspaceAutoBuildEnabled();
@@ -123,6 +128,10 @@ public class RootProjectImportSupport {
 						.deleteVirtualRootProjectFull(monitor);
 
 				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
+
+				/* store working set information */
+				workingSetSupport = new WorkingSetSupport();
+				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
 
@@ -158,7 +167,7 @@ public class RootProjectImportSupport {
 				importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
 
 				/* -------------------------- */
-				/* - Rescan eclipse parts   - */
+				/* - Rescan eclipse parts - */
 				/* -------------------------- */
 				GradleImportScanner importScanner = new GradleImportScanner();
 				List<File> existingEclipseFoldersAfterImport = importScanner.scanEclipseProjectFolders(newRootFolder);
@@ -170,7 +179,6 @@ public class RootProjectImportSupport {
 				createVirtualRoot = createVirtualRoot || hasNoEclipseFoldersAtAll;
 				createVirtualRoot = createVirtualRoot || !existingEclipseFoldersAfterImport.contains(newRootFolder);
 
-				
 				/* result is okay, so use this setup in preferences now */
 				EGradleIdePreferences preferences = getPreferences();
 				preferences.setRootProjectPath(newRootFolder.getAbsolutePath());
@@ -207,7 +215,7 @@ public class RootProjectImportSupport {
 						cleanAllProjects(true, window, monitor);
 					}
 				}
-				
+
 				/* recreate virtual root project */
 				if (createVirtualRoot) {
 					createOrRecreateVirtualRootProject();
@@ -223,6 +231,15 @@ public class RootProjectImportSupport {
 						setWorkspaceAutoBuild(true);
 					} catch (CoreException e) {
 						IDEUtil.logError("Reenabling workspace auto build failed!", e);
+					}
+				}
+
+				/* do restore working sets */
+				if (workingSetSupport != null && closedProjectWorksetData != null) {
+					IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+					if (allProjects != null) {
+						List<IProject> projectsList = Arrays.asList(allProjects);
+						workingSetSupport.restoreWorkingSetsForProjects(closedProjectWorksetData, projectsList);
 					}
 				}
 			}
