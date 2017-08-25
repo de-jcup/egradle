@@ -63,8 +63,9 @@ public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 		rules.add(new MultiLineRule("/**", "*/", javaDocComment));
 		rules.add(new MultiLineRule("/*", "*/", groovyComment));
 		rules.add(new SingleLineRule("//", "", groovyComment));
-		rules.add(new MultiLineRule("\"", "\"", groovyGString));
-		rules.add(new MultiLineRule("\'", "\'", groovySimpleString));
+		
+		rules.add(new MultiLineRule("\"", "\"", groovyGString,'\\'));
+		rules.add(new MultiLineRule("\'", "\'", groovySimpleString,'\\'));
 		
 		buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, gradleApplyKeyWord, GradleApplyKeyWords.values(),onlyLettersWordDetector);
