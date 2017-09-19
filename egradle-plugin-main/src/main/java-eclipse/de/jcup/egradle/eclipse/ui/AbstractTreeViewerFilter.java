@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ import de.jcup.egradle.core.util.Matcher;
 public abstract class AbstractTreeViewerFilter<T> extends ViewerFilter {
 
 	private Matcher<T> matcher;
-	
+
 	public AbstractTreeViewerFilter() {
 		super();
 	}
@@ -64,33 +64,33 @@ public abstract class AbstractTreeViewerFilter<T> extends ViewerFilter {
 				return false;
 			}
 		}
-	
+
 		if (!(viewer instanceof TreeViewer)) {
 			return true;
 		}
-		if (matcher == null){
+		if (matcher == null) {
 			return true;
 		}
 		TreeViewer treeViewer = (TreeViewer) viewer;
 		Boolean matchingResult = isMatching(element);
-		if (matchingResult!=null){
+		if (matchingResult != null) {
 			return matchingResult;
 		}
 		return hasUnfilteredChild(treeViewer, parentPath, element);
 	}
 
-	@SuppressWarnings("unchecked") 
+	@SuppressWarnings("unchecked")
 	Boolean isMatching(Object element) {
-		T item =null; 
-		try{
+		T item = null;
+		try {
 			item = (T) element;
-		}catch(ClassCastException e){
+		} catch (ClassCastException e) {
 			return Boolean.FALSE;
 		}
-		if (matcher.matches(item)){
+		if (matcher.matches(item)) {
 			return Boolean.TRUE;
 		}
-		/* maybe children are matching*/
+		/* maybe children are matching */
 		return null;
 	}
 
@@ -100,6 +100,12 @@ public abstract class AbstractTreeViewerFilter<T> extends ViewerFilter {
 		Object[] children = contentProvider instanceof ITreePathContentProvider
 				? ((ITreePathContentProvider) contentProvider).getChildren(elementPath)
 				: ((ITreeContentProvider) contentProvider).getChildren(element);
+
+		/* avoid NPE + guard close */
+		if (children == null || children.length == 0) {
+			return false;
+		}
+
 		for (int i = 0; i < children.length; i++) {
 			if (selectTreePath(viewer, elementPath, children[i])) {
 				return true;
