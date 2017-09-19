@@ -70,19 +70,6 @@
 	    icon="icons/virtualRootProjectNature.png">
 	  </image>
 	 </extension>
-   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-   <!--                          BUILDER                          			 -->
-   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    
-   <extension
-         id="virtualRootProjectBuilder"
-         name="Virtual Root Project Builder"
-         point="org.eclipse.core.resources.builders">
-      <builder hasNature="true">
-         <run
-               class="de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootNewFilesToRealRootProjectBuilder">
-         </run>
-      </builder>
-   </extension>
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <!--                          PROPERTY TESTERS                            -->
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
