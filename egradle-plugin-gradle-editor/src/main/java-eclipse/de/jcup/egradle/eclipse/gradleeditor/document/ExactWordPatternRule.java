@@ -75,11 +75,12 @@ public class ExactWordPatternRule extends WordPatternRule{
 				return counter.cleanupAndReturn(scanner,false);
 			}
 		}
-		char charAfter = (char)scannerRead(scanner, counter);
+		int read = scannerRead(scanner, counter);
+		char charAfter = (char)read;
 		scannerUnread(scanner, counter);
 		
 		/* when not a whitespace and not end reached - do cleanup*/
-		if (! Character.isWhitespace(charAfter) && ICharacterScanner.EOF!=charAfter){
+		if (! Character.isWhitespace(charAfter) && ICharacterScanner.EOF!=read){
 			/* the word is more than the exact one - e.g. instead of 'test' 'testx' ... so not correct*/
 			return counter.cleanupAndReturn(scanner,false);
 		}
