@@ -75,7 +75,7 @@ public class EditorActivator extends AbstractUIPlugin {
 				sdk.install();
 				sdkInstalled=true;
 			}catch(IOException e){
-				EditorUtil.logError("Was not able install SDK:"+sdk.getVersion(),e);
+				EditorUtil.INSTANCE.logError("Was not able install SDK:"+sdk.getVersion(),e);
 			}
 		}
 		

@@ -45,7 +45,7 @@ public class OpenInExternalBrowserAction extends Action {
 			externalBrowser.openURL(url);
 			
 		} catch (Exception ex) {
-			EditorUtil.logError("Was not able to open url in external browser", ex);
+			EditorUtil.INSTANCE.logError("Was not able to open url in external browser", ex);
 		}
 	}
 }

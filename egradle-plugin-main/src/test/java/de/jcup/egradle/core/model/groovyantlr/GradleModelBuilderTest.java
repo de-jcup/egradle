@@ -43,7 +43,7 @@ public class GradleModelBuilderTest {
 		"}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -71,7 +71,7 @@ public class GradleModelBuilderTest {
 		"}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -100,7 +100,7 @@ public class GradleModelBuilderTest {
 		"}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -128,7 +128,7 @@ public class GradleModelBuilderTest {
 		" }\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -152,7 +152,7 @@ public class GradleModelBuilderTest {
 		" }\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -177,7 +177,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -204,7 +204,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -227,7 +227,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -256,7 +256,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -283,7 +283,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -311,7 +311,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -340,7 +340,7 @@ public class GradleModelBuilderTest {
 		"}";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -369,7 +369,7 @@ public class GradleModelBuilderTest {
 		"}";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -397,7 +397,7 @@ public class GradleModelBuilderTest {
 		String text = "task clean << {}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -418,7 +418,7 @@ public class GradleModelBuilderTest {
 		String text = "tasks.withType(Jar) {}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -439,7 +439,7 @@ public class GradleModelBuilderTest {
 		String text = "class MyAdminTask extends DefaultTask {}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -464,7 +464,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -499,7 +499,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -532,7 +532,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -565,7 +565,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -620,7 +620,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -663,7 +663,7 @@ public class GradleModelBuilderTest {
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -699,7 +699,7 @@ public class GradleModelBuilderTest {
 		String text = "package de.jcup.egradle.examples";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -720,7 +720,7 @@ public class GradleModelBuilderTest {
 		String text = "import org.gradle.api.DefaultTask";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -745,7 +745,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -777,7 +777,7 @@ public class GradleModelBuilderTest {
 		// @formatter:on
 		System.out.println(text);
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		BuildContext context = new BuildContext();
 		/* execute */
@@ -810,7 +810,7 @@ public class GradleModelBuilderTest {
 		"		}\n";
 		/* @formatter:on*/
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -831,7 +831,7 @@ public class GradleModelBuilderTest {
 		String text = "task jacocoRemoteDump() {}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -853,7 +853,7 @@ public class GradleModelBuilderTest {
 				+ "compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.7'\n" + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -882,7 +882,7 @@ public class GradleModelBuilderTest {
 		String text = "dependencies {\ntestCompile library.junit}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -911,7 +911,7 @@ public class GradleModelBuilderTest {
 		String text = "String cp = ''";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -931,7 +931,7 @@ public class GradleModelBuilderTest {
 		String text = "String cp = \"\"";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -951,7 +951,7 @@ public class GradleModelBuilderTest {
 		String text = "def String cp = \"\"";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -971,7 +971,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "def variable1='Hello world'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -997,7 +997,7 @@ public class GradleModelBuilderTest {
 		text += "def variable2='Hello world... from groovy'";
 		System.out.println("length2=" + text.length());
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1028,7 +1028,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "test1234{\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1056,7 +1056,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "task doit{\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1084,7 +1084,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "task doit(type: compile){\n\ndef variable1='Hello world'\n}";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1113,7 +1113,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "xyz.sonarrunner.dependson check";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1134,7 +1134,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "tasks.sonarrunner.dependson check";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1165,7 +1165,7 @@ public class GradleModelBuilderTest {
 		"}                                                                        \n";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1203,7 +1203,7 @@ public class GradleModelBuilderTest {
 		"}                                                                        \n";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1238,7 +1238,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "apply plugin: 'java'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1260,7 +1260,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "apply from: 'bla'";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -1282,7 +1282,7 @@ public class GradleModelBuilderTest {
 		/* prepare */
 		String text = "apply from: \"${rootProject.projectDir}/libraries.gradle\"";
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);

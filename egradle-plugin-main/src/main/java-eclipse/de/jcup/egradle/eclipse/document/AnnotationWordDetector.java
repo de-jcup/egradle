@@ -13,14 +13,30 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor.presentation;
+ package de.jcup.egradle.eclipse.document;
+import org.eclipse.jface.text.rules.IWordDetector;
 
-import org.eclipse.jface.text.rules.IWhitespaceDetector;
-
-public class GradleWhitespaceDetector implements IWhitespaceDetector {
+public class AnnotationWordDetector implements IWordDetector{
+	
+	@Override
+	public boolean isWordStart(char c) {
+		if (c==64){
+			return true;
+		}
+		return false;
+	}
 
 	@Override
-	public boolean isWhitespace(char c) {
-		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+	public boolean isWordPart(char c) {
+		if (c==64){
+			return true;
+		}
+		if (Character.isWhitespace(c)){
+			return false;
+		}
+		if (! Character.isLetter(c)){
+			return false;
+		}
+		return true;
 	}
 }

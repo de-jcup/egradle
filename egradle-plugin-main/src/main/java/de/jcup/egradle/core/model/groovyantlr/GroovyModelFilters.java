@@ -13,10 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+ package de.jcup.egradle.core.model.groovyantlr;
 
-public interface DocumentKeyWord{
+import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 
-	String getText();
+import de.jcup.egradle.core.util.Filter;
 
+public class GroovyModelFilters {
+
+	public static final Filter FILTER_IMPORTS = new GroovyTokenTypefilter(GroovyTokenTypes.IMPORT);
 }

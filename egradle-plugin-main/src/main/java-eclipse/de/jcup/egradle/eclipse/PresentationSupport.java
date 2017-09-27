@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor.presentation;
+package de.jcup.egradle.eclipse;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.BadLocationException;

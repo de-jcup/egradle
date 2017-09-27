@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+ package de.jcup.egradle.eclipse.document;
 
 public enum GroovyKeyWords implements DocumentKeyWord {
 

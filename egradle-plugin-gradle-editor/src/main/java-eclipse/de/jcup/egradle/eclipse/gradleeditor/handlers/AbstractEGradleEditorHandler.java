@@ -25,6 +25,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
+import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditor;
 
 public abstract class AbstractEGradleEditorHandler extends AbstractHandler {
 
@@ -54,7 +55,7 @@ public abstract class AbstractEGradleEditorHandler extends AbstractHandler {
 		}
 		IEditorPart editor = activePage.getActiveEditor();
 		
-		if (editor instanceof GradleEditor){
+		if (editor instanceof AbstractGroovyBasedEditor){
 			executeOnGradleEditor((GradleEditor) editor);
 		}
 		return null;

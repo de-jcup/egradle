@@ -64,6 +64,7 @@ import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineLabelProvider;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants;
+import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditor;
 import de.jcup.egradle.eclipse.util.DocumentTextProvider;
 import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
@@ -324,7 +325,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			 * normally changes as well! This often made problems
 			 */
 			IEditorPart activeEditor = EclipseUtil.getActiveEditor();
-			if (activeEditor instanceof GradleEditor) {
+			if (activeEditor instanceof AbstractGroovyBasedEditor) {
 				GradleEditor ge = (GradleEditor) activeEditor;
 				if (DEBUG) {
 					debugCacheState("applied proposal-2");
@@ -340,7 +341,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private void debugCacheState(String message) {
-		EditorUtil.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
+		EditorUtil.INSTANCE.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
 				+ useCacheBecauseCodeAssistSessionOngoing);
 	}
 }

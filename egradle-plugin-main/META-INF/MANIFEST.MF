@@ -19,13 +19,15 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.forms,
  org.eclipse.core.variables,
  org.eclipse.core.filesystem,
- org.eclipse.core.expressions
+ org.eclipse.core.expressions,
+ org.eclipse.ui.views;bundle-version="3.8.101"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/commons-lang3-3.4.jar,
  lib/antlr-2.7.7.jar
-Export-Package: de.jcup.egradle.codeassist,
+Export-Package: antlr.collections,
+ de.jcup.egradle.codeassist,
  de.jcup.egradle.codeassist.dsl,
  de.jcup.egradle.codeassist.dsl.gradle,
  de.jcup.egradle.codeassist.dsl.gradle.estimation,
@@ -43,6 +45,7 @@ Export-Package: de.jcup.egradle.codeassist,
  de.jcup.egradle.core.virtualroot,
  de.jcup.egradle.eclipse,
  de.jcup.egradle.eclipse.api,
+ de.jcup.egradle.eclipse.document,
  de.jcup.egradle.eclipse.migration,
  de.jcup.egradle.eclipse.preferences,
  de.jcup.egradle.eclipse.ui,

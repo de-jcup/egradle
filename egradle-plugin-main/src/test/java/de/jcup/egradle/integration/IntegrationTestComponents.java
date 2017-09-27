@@ -45,6 +45,7 @@ import de.jcup.egradle.core.TestUtil;
 import de.jcup.egradle.core.TextProvider;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
+import de.jcup.egradle.core.model.groovyantlr.AbstractGroovyModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.util.ErrorHandler;
 
@@ -164,7 +165,7 @@ public class IntegrationTestComponents extends ExternalResource {
 
 	public Model buildModel(String text) {
 		InputStream is = new ByteArrayInputStream(text.getBytes());
-		GradleModelBuilder builder = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder builder = new GradleModelBuilder(is);
 		try {
 			return builder.build(null);
 		} catch (ModelBuilderException e) {

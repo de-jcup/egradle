@@ -29,14 +29,17 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WordPatternRule;
 
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.DocumentKeyWord;
+import de.jcup.egradle.eclipse.document.AnnotationWordDetector;
+import de.jcup.egradle.eclipse.document.DocumentKeyWord;
+import de.jcup.egradle.eclipse.document.GroovyKeyWords;
+import de.jcup.egradle.eclipse.document.JavaKeyWords;
+import de.jcup.egradle.eclipse.document.JavaLiteralKeyWords;
+import de.jcup.egradle.eclipse.document.JavaWordDetector;
+import de.jcup.egradle.eclipse.document.OnlyLettersKeyWordDetector;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleSpecialVariableKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleTaskKeyWords;
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GroovyKeyWords;
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.JavaKeyWords;
-import de.jcup.egradle.eclipse.gradleeditor.document.keywords.JavaLiteralKeyWords;
 public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
 
 	private OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();

@@ -26,7 +26,7 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
  * @author Albert Tregnaghi
  *
  */
-abstract class AbstractQuickDialog extends PopupDialog {
+public abstract class AbstractQuickDialog extends PopupDialog {
 
 	protected static final boolean GRAB_FOCUS = true;
 	protected static final boolean PERSIST_NO_SIZE = false;

@@ -61,7 +61,7 @@ public class JDTDataAccess {
 					SearchEngine.createWorkspaceScope(), nameMatchRequestor,
 					IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, monitor);
 		} catch (JavaModelException e) {
-			EditorUtil.logError("Was not able to search all type names",e);
+			EditorUtil.INSTANCE.logError("Was not able to search all type names",e);
 		}
 		return result[0];
 	}
@@ -134,7 +134,7 @@ public class JDTDataAccess {
 			engine.searchAllTypeNames(qualifications, typeNames, scope, nameRequestor, policiy, progressMonitor);
 
 		} catch (JavaModelException e) {
-			EditorUtil.logError("Was not able to search all type names",e);
+			EditorUtil.INSTANCE.logError("Was not able to search all type names",e);
 		}
 		return foundList;
 

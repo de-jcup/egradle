@@ -13,18 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document;
-import org.eclipse.jface.text.rules.IWordDetector;
+ package de.jcup.egradle.eclipse.document;
 
-public class JavaWordDetector implements IWordDetector{
-	
-	@Override
-	public boolean isWordStart(char c) {
-		return Character.isJavaIdentifierStart(c);
-	}
+public interface DocumentKeyWord{
 
-	@Override
-	public boolean isWordPart(char c) {
-		return Character.isJavaIdentifierPart(c);
-	}
+	String getText();
+
 }

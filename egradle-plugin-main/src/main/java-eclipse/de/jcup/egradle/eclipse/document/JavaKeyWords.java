@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+ package de.jcup.egradle.eclipse.document;
 
 // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
 public enum JavaKeyWords implements DocumentKeyWord {

@@ -15,6 +15,8 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
+import de.jcup.egradle.eclipse.document.DocumentKeyWord;
+
 public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 
 	LOGGER("logger"), 

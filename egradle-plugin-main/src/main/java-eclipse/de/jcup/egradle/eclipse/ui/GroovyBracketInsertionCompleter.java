@@ -13,10 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
-
-import static de.jcup.egradle.eclipse.gradleeditor.EditorUtil.*;
-import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
+ package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -27,15 +24,16 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
-class GradleBracketInsertionCompleter extends KeyAdapter {
+import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 
-	private final GradleEditor gradleEditor;
+public class GroovyBracketInsertionCompleter extends KeyAdapter {
 
-	/**
-	 * @param gradleEditor
-	 */
-	GradleBracketInsertionCompleter(GradleEditor gradleEditor) {
+	private final IExtendedEditor gradleEditor;
+	private IEditorPreferences preferences;
+
+	public GroovyBracketInsertionCompleter(IExtendedEditor gradleEditor, IEditorPreferences preferences) {
 		this.gradleEditor = gradleEditor;
+		this.preferences=preferences;
 	}
 
 	@Override
@@ -55,7 +53,7 @@ class GradleBracketInsertionCompleter extends KeyAdapter {
 		if (! (selection instanceof ITextSelection)) {
 			return;
 		}
-		boolean enabled = getPreferences().getBooleanPreference(P_EDITOR_AUTO_CREATE_END_BRACKETSY);
+		boolean enabled = preferences.isEditorAutoCreateEndBracketsEnabled();
 		if (!enabled){
 			return;
 		}

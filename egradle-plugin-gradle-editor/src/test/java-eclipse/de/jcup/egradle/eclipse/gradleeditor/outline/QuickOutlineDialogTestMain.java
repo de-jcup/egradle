@@ -20,6 +20,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditorOutlineContentProvider;
+import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedQuickOutline;
 import de.jcup.egradle.eclipse.util.ColorManager;
 
 public class QuickOutlineDialogTestMain {
@@ -37,7 +39,7 @@ public class QuickOutlineDialogTestMain {
 		shell.setSize(200, 200);
 		shell.open();
 
-		GradleEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
+		AbstractGroovyBasedEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
 
 		IAdaptable adapter = new IAdaptable() {
 
@@ -50,7 +52,7 @@ public class QuickOutlineDialogTestMain {
 				return null;
 			}
 		};
-		QuickOutlineDialog dialog = new QuickOutlineDialog(adapter, shell,"Test quick outline dialog...");
+		AbstractGroovyBasedQuickOutline dialog = new GradleQuickOutlineDialog(adapter, shell,"Test quick outline dialog...");
 		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
 		dialog.open();
 		display.dispose();

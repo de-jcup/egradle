@@ -13,13 +13,21 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.eclipse.document;
 
-import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
+import org.eclipse.jface.text.rules.IRule;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
+import org.eclipse.jface.text.rules.WhitespaceRule;
 
-import de.jcup.egradle.core.util.Filter;
+import de.jcup.egradle.eclipse.util.ColorManager;
 
-public class GradleModelFilters {
 
-	public static final Filter FILTER_IMPORTS = new GroovyTokenTypefilter(GroovyTokenTypes.IMPORT);
+public class GroovyDefaultTextScanner extends RuleBasedScanner {
+
+	public GroovyDefaultTextScanner(ColorManager manager) {
+		IRule[] rules = new IRule[1];
+		rules[0] = new WhitespaceRule(new GroovyWhitespaceDetector());
+
+		setRules(rules);
+	}
 }

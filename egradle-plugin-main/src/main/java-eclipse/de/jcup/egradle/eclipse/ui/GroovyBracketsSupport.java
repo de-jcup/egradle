@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+ package de.jcup.egradle.eclipse.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +31,13 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 
-public final class GradleBracketsSupport extends DefaultCharacterPairMatcher {
+import de.jcup.egradle.core.text.StatusMessageSupport;
+
+public final class GroovyBracketsSupport extends DefaultCharacterPairMatcher {
 	protected final static char[] BRACKETS = { '{', '}', '(', ')', '[', ']', '<', '>' };
 	private List<IRegion> previousSelections;
 
-	public GradleBracketsSupport() {
+	public GroovyBracketsSupport() {
 		super(BRACKETS, IDocumentExtension3.DEFAULT_PARTITIONING, true);
 	}
 

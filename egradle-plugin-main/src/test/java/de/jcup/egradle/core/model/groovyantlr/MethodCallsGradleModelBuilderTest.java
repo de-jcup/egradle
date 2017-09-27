@@ -54,7 +54,7 @@ public class MethodCallsGradleModelBuilderTest {
 		"                                                           \n";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -84,7 +84,7 @@ public class MethodCallsGradleModelBuilderTest {
 		"                                                           \n";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);
@@ -115,7 +115,7 @@ public class MethodCallsGradleModelBuilderTest {
 		"                                                           \n";
 		// @formatter:on
 		InputStream is = new ByteArrayInputStream(code.getBytes());
-		GradleModelBuilder b = new GradleModelBuilder(is);
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
 
 		/* execute */
 		Model model = b.build(null);

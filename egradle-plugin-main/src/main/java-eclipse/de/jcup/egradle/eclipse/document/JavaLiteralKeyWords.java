@@ -13,11 +13,29 @@
  * and limitations under the License.
  *
  */
-package de.jcup.egradle.eclipse.gradleeditor.outline;
+ package de.jcup.egradle.eclipse.document;
 
-import de.jcup.egradle.core.model.Item;
-import de.jcup.egradle.eclipse.ui.AbstractTreeViewerFilter;
+// see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+public enum JavaLiteralKeyWords implements DocumentKeyWord {
 
-class ItemTextViewerFilter extends AbstractTreeViewerFilter<Item> {
 	
+	NULL("null"),
+	
+	TRUE("true"),
+	
+	FALSE("false")
+
+	;
+
+	private String text;
+
+	private JavaLiteralKeyWords(String text) {
+		this.text = text;
+	}
+
+
+	@Override
+	public String getText() {
+		return text;
+	}
 }

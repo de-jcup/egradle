@@ -23,6 +23,8 @@ import org.eclipse.jface.text.rules.Token;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.jcup.egradle.eclipse.document.JavaWordDetector;
+
 /**
  * Sorrowly not executable by gradle because of eclipse dependencies. But
  * at least executable in eclipse environment. Tests exact word pattern rule works

@@ -27,12 +27,12 @@ public class EGradleErrorHandler implements ErrorHandler{
 	
 	@Override
 	public void handleError(String message, Throwable t) {
-		EditorUtil.logError(message, t);
+		EditorUtil.INSTANCE.logError(message, t);
 	}
 
 	@Override
 	public void handleError(String message) {
-		EditorUtil.logError(message, null);		
+		EditorUtil.INSTANCE.logError(message, null);		
 	}
 
 }

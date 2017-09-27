@@ -13,30 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document;
-import org.eclipse.jface.text.rules.IWordDetector;
+package de.jcup.egradle.eclipse.ui;
 
-public class AnnotationWordDetector implements IWordDetector{
+import de.jcup.egradle.core.model.Item;
+
+public class ItemTextViewerFilter extends AbstractTreeViewerFilter<Item> {
 	
-	@Override
-	public boolean isWordStart(char c) {
-		if (c==64){
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isWordPart(char c) {
-		if (c==64){
-			return true;
-		}
-		if (Character.isWhitespace(c)){
-			return false;
-		}
-		if (! Character.isLetter(c)){
-			return false;
-		}
-		return true;
-	}
 }

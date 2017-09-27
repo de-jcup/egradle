@@ -19,27 +19,34 @@ import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
+import de.jcup.egradle.core.util.ILogSupport;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
+import de.jcup.egradle.eclipse.preferences.AbstractEditorPreferences;
 
-public class EditorUtil {
+public class EditorUtil implements ILogSupport{
 
-	public static GradleEditorPreferences getPreferences() {
+	public static final ILogSupport INSTANCE = new EditorUtil();
+	
+	public static AbstractEditorPreferences getPreferences() {
 		return GradleEditorPreferences.getInstance();
 	}
 
-	public static void logInfo(String info) {
+	@Override
+	public void logInfo(String info) {
 		getLog().log(new Status(IStatus.INFO, EditorActivator.PLUGIN_ID, info));
 	}
 
-	public static void logWarning(String warning) {
+	@Override
+	public void logWarning(String warning) {
 		getLog().log(new Status(IStatus.WARNING, EditorActivator.PLUGIN_ID, warning));
 	}
 	
-	public static void logError(String error, Throwable t) {
+	@Override
+	public void logError(String error, Throwable t) {
 		getLog().log(new Status(IStatus.ERROR, EditorActivator.PLUGIN_ID, error,t));
 	}
 
-	private static ILog getLog() {
+	protected ILog getLog() {
 		ILog log = EditorActivator.getDefault().getLog();
 		return log;
 	}

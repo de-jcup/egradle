@@ -118,7 +118,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 				dialog = JavaUI.createTypeDialog(shell, runnableContext, scope, style, false,found);
 				dialog.setTitle("Potential Java types found:");
 			} catch (JavaModelException e) {
-				EditorUtil.logError("Cannot create java type dialog", e);
+				EditorUtil.INSTANCE.logError("Cannot create java type dialog", e);
 			}
 		}else{
 			dialog = createResourceDialog(shell);
@@ -157,7 +157,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 					IDE.openEditor(page, currentFile, true);
 				}
 			} catch (final PartInitException e) {
-				EditorUtil.logError("Cannot open file:"+currentFile,e);
+				EditorUtil.INSTANCE.logError("Cannot open file:"+currentFile,e);
 			}
 		}else if (javaElements.size()>0){
 			IJavaElement javaElement = javaElements.get(0);
@@ -171,7 +171,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 		try {
 			JavaUI.openInEditor(javaElement);
 		} catch (PartInitException | JavaModelException e) {
-			EditorUtil.logError("Cannot open java editor with:"+javaElement,e);
+			EditorUtil.INSTANCE.logError("Cannot open java editor with:"+javaElement,e);
 		}
 	}
 

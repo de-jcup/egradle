@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.core.model.groovyantlr.AbstractGroovyModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 
 public class VariableNameProposalFactoryTest {
@@ -46,7 +47,7 @@ public class VariableNameProposalFactoryTest {
 		// a little bit ugly- test depends on gradle model builder, but too much
 		// to test otherwise and this is also a good cross
 		// check - so we do this this way...
-		GradleModelBuilder b = new GradleModelBuilder(new ByteArrayInputStream(code.getBytes()));
+		AbstractGroovyModelBuilder b = new GradleModelBuilder(new ByteArrayInputStream(code.getBytes()));
 		Model model = b.build(null);
 		when(mockedContentProvider.getModel()).thenReturn(model);
 

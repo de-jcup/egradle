@@ -13,15 +13,24 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+ package de.jcup.egradle.eclipse.document;
+import org.eclipse.jface.text.rules.IWordDetector;
 
-/**
- * Adapter interface to provide status messaging
- * @author Albert Tregnaghi
- *
- */
-public interface StatusMessageSupport {
+public class OnlyLettersKeyWordDetector implements IWordDetector{
+	
+	@Override
+	public boolean isWordStart(char c) {
+		if (! Character.isLetter(c)){
+			return false;
+		}
+		return true;
+	}
 
-	void setErrorMessage(String message);
-
+	@Override
+	public boolean isWordPart(char c) {
+		if (! Character.isLetter(c)){
+			return false;
+		}
+		return true;
+	}
 }

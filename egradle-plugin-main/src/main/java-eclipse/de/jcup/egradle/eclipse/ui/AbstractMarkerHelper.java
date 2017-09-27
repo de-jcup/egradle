@@ -30,7 +30,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
-abstract class AbstractMarkerHelper {
+public abstract class AbstractMarkerHelper {
 	protected String markerType;
 
 	private IMarker findMarker(IResource resource, String message, int lineNumber, String type) throws CoreException {

@@ -13,29 +13,15 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+ package de.jcup.egradle.core.text;
 
-// see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
-public enum JavaLiteralKeyWords implements DocumentKeyWord {
+/**
+ * Adapter interface to provide status messaging
+ * @author Albert Tregnaghi
+ *
+ */
+public interface StatusMessageSupport {
 
-	
-	NULL("null"),
-	
-	TRUE("true"),
-	
-	FALSE("false")
+	void setErrorMessage(String message);
 
-	;
-
-	private String text;
-
-	private JavaLiteralKeyWords(String text) {
-		this.text = text;
-	}
-
-
-	@Override
-	public String getText() {
-		return text;
-	}
 }
