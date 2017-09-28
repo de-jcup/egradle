@@ -415,9 +415,9 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 
 	protected abstract ColorManager getColorManager() ;
 
-	protected abstract String getEditorInstanceContextMenuId();
+	protected abstract String getEditorInstanceRulerContextId();
 
-	protected abstract String getEditorInstanceMenuId();
+	protected abstract String getEditorInstanceContextId();
 
 	protected abstract String getPluginId();
 
@@ -429,8 +429,8 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 	@Override
 	protected void initializeEditor() {
 		super.initializeEditor();
-		setEditorContextMenuId(getEditorInstanceMenuId());
-		setRulerContextMenuId(getEditorInstanceContextMenuId());
+		setEditorContextMenuId(getEditorInstanceContextId());
+		setRulerContextMenuId(getEditorInstanceRulerContextId());
 	}
 
 	protected void internalRebuildOutline() {
@@ -459,16 +459,20 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 
 	void setTitleImageDependingOnSeverity(int severity) {
 		if (severity == IMarker.SEVERITY_ERROR) {
-			setTitleImage(EclipseUtil.getImage("icons/gradle-editor-with-error.png", getPluginId()));
+			setTitleImage(EclipseUtil.getImage(getEditorIconPathOnError(), getPluginId()));
 		} else {
-			setTitleImage(EclipseUtil.getImage("icons/gradle-editor.png", getPluginId()));
+			setTitleImage(EclipseUtil.getImage(getEditorIconPath(), getPluginId()));
 		}
 	}
+
+	protected abstract String getEditorIconPath();
+
+	protected abstract String getEditorIconPathOnError();
 
 	private void activateEditorContext() {
 		IContextService contextService = getSite().getService(IContextService.class);
 		if (contextService != null) {
-			contextService.activateContext(getEditorInstanceMenuId());
+			contextService.activateContext(getEditorInstanceContextId());
 		}
 	}
 

@@ -13,9 +13,32 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document;
+package de.jcup.egradle.eclipse.document;
 
-public interface GradleDocumentIdentifier {
+import de.jcup.egradle.core.text.DocumentIdentifier;
 
-	public String getId();
+public enum GroovyDocumentIdentifiers implements DocumentIdentifier {
+
+	JAVA_KEYWORD,
+
+	JAVA_LITERAL,
+
+	GROOVY_KEYWORD,
+
+	ANNOTATION,
+
+	COMMENT,
+
+	GROOVY_DOC,
+
+	STRING,
+
+	GSTRING,
+
+	;
+
+	public String getId() {
+		return name();
+	}
+
 }

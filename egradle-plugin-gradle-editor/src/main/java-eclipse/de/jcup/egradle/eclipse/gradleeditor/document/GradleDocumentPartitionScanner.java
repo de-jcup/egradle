@@ -17,89 +17,28 @@ package de.jcup.egradle.eclipse.gradleeditor.document;
 
 import static de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.IWordDetector;
-import org.eclipse.jface.text.rules.MultiLineRule;
-import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
-import org.eclipse.jface.text.rules.SingleLineRule;
-import org.eclipse.jface.text.rules.Token;
-import org.eclipse.jface.text.rules.WordPatternRule;
 
-import de.jcup.egradle.eclipse.document.AnnotationWordDetector;
-import de.jcup.egradle.eclipse.document.DocumentKeyWord;
-import de.jcup.egradle.eclipse.document.GroovyKeyWords;
-import de.jcup.egradle.eclipse.document.JavaKeyWords;
-import de.jcup.egradle.eclipse.document.JavaLiteralKeyWords;
-import de.jcup.egradle.eclipse.document.JavaWordDetector;
-import de.jcup.egradle.eclipse.document.OnlyLettersKeyWordDetector;
+import de.jcup.egradle.eclipse.document.AbstractGroovyBasedDocumentPartitionScanner;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleSpecialVariableKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleTaskKeyWords;
-public class GradleDocumentPartitionScanner extends RuleBasedPartitionScanner {
+public class GradleDocumentPartitionScanner extends AbstractGroovyBasedDocumentPartitionScanner {
 
-	private OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();
-	private AnnotationWordDetector onlyAnnotationWordDetector = new AnnotationWordDetector();
-	private JavaWordDetector javaWordDetector = new JavaWordDetector();
-	
-	public GradleDocumentPartitionScanner() {
-		
-		IToken groovyAnnotation = createToken(ANNOTATION);
-		IToken javaDocComment = createToken(GROOVY_DOC);
-		IToken groovyComment = createToken(COMMENT);
-		IToken groovySimpleString = createToken(STRING);
-		IToken groovyGString = createToken(GSTRING);
-		IToken groovyKeyWord = createToken(GROOVY_KEYWORD);
-		IToken javaKeyWord = createToken(JAVA_KEYWORD);
-		IToken javaLiteral = createToken(JAVA_LITERAL);
-
+	protected void addOtherRules(List<IPredicateRule> rules) {
 		IToken gradleClosureKeywords = createToken(GRADLE_KEYWORD);
 		IToken gradleVariable = createToken(GRADLE_VARIABLE);
 		IToken gradleApplyKeyWord = createToken(GRADLE_APPLY_KEYWORD);
 		IToken gradleTaskKeyWord = createToken(GRADLE_TASK_KEYWORD);
 
-		List<IPredicateRule> rules = new ArrayList<>();
-		rules.add(new MultiLineRule("/**", "*/", javaDocComment));
-		rules.add(new MultiLineRule("/*", "*/", groovyComment));
-		rules.add(new SingleLineRule("//", "", groovyComment));
-		
-		rules.add(new MultiLineRule("\"", "\"", groovyGString,'\\'));
-		rules.add(new MultiLineRule("\'", "\'", groovySimpleString,'\\'));
 		
 		buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, gradleApplyKeyWord, GradleApplyKeyWords.values(),onlyLettersWordDetector);
 		buildWordRules(rules, gradleTaskKeyWord, GradleTaskKeyWords.values(),onlyLettersWordDetector);
-		buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(),javaWordDetector);
-		buildWordRules(rules, javaKeyWord, JavaKeyWords.values(),javaWordDetector);
-		buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(),javaWordDetector);
 		buildWordRules(rules, gradleVariable, GradleSpecialVariableKeyWords.values(),onlyLettersWordDetector);
-
-		buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
-		
-		setPredicateRules(rules.toArray(new IPredicateRule[rules.size()]));
-	}
-
-	private void buildAnnotationRules(List<IPredicateRule> rules, IToken token,
-			IWordDetector wordDetector) {
-		rules.add(new WordPatternRule(wordDetector,"@","", token));
-		
-	}
-	private void buildWordRules(List<IPredicateRule> rules, IToken token,
-			DocumentKeyWord[] values, IWordDetector wordDetector) {
-		for (DocumentKeyWord keyWord: values){
-			rules.add(new ExactWordPatternRule(wordDetector, createWordStart(keyWord),token));
-		}
-	}
-	
-	private String createWordStart(DocumentKeyWord keyWord) {
-		return keyWord.getText();
-	}
-
-	private IToken createToken(GradleDocumentIdentifier identifier) {
-		return new Token(identifier.getId());
 	}
 }

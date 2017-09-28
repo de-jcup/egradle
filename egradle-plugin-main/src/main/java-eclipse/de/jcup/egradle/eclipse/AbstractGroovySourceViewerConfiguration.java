@@ -29,6 +29,7 @@ public abstract class AbstractGroovySourceViewerConfiguration extends SourceView
 	protected IAnnotationHover annotationHoover;
 	protected IAdaptable adaptable;
 	protected ContentAssistant contentAssistant;
+	private String[] contentTypes;
 	
 	public AbstractGroovySourceViewerConfiguration(IAdaptable adaptable, PreferenceIdentifiable colorNormalText) {
 		this.adaptable = adaptable;
@@ -45,11 +46,21 @@ public abstract class AbstractGroovySourceViewerConfiguration extends SourceView
 	protected abstract IEditorPreferences getPreferences();
 	
 	@Override
+	public final String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
+		if (contentTypes!=null){
+			return contentTypes;
+		}
+		contentTypes= createDefaultConfiguredContentTypes();
+		return contentTypes;
+	}
+
+	protected abstract String[] createDefaultConfiguredContentTypes();
+	
+	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		return annotationHoover;
 	}
-
-
+	
 	protected void addDefaultPresentation(PresentationReconciler reconciler) {
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getGroovyDefaultTextScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);

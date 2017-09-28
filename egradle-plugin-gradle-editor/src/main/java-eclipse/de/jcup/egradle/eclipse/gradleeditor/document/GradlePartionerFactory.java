@@ -13,16 +13,21 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document;
+package de.jcup.egradle.eclipse.gradleeditor.document;
+
+import de.jcup.egradle.core.text.DocumentIdentifier;
+import de.jcup.egradle.eclipse.document.AbstractGroovyBasedDocumentPartitionScanner;
+import de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers;
 
 public class GradlePartionerFactory {
 
-	public static GradlePartitioner create(){
-		String[] legalContentTypes = GradleDocumentIdentifiers.allIdsToStringArray();
+	public static GradlePartitioner create() {
+		String[] legalContentTypes = DocumentIdentifier.createStringIdBuilder()
+				.addAll(GroovyDocumentIdentifiers.values()).addAll(GradleDocumentIdentifiers.values()).build();
 
-		GradleDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
+		AbstractGroovyBasedDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
 		GradlePartitioner partitioner = new GradlePartitioner(scanner, legalContentTypes);
-		
+
 		return partitioner;
 	}
 }

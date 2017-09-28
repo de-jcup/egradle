@@ -46,9 +46,9 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
 	/** The COMMAND_ID of this editor as defined in plugin.xml */
 	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
 	/** The COMMAND_ID of the editor context menu */
-	public static final String EDITOR_CONTEXT_MENU_ID = EDITOR_ID + ".context";
+	public static final String EDITOR_CONTEXT_ID = EDITOR_ID + ".context";
 	/** The COMMAND_ID of the editor ruler context menu */
-	public static final String EDITOR_RULER_CONTEXT_MENU_ID = EDITOR_CONTEXT_MENU_ID + ".ruler";
+	public static final String EDITOR_CONTEXT_RULER_ID = EDITOR_CONTEXT_ID + ".ruler";
 
 	private GradleFileType cachedGradleFileType;
 
@@ -96,12 +96,12 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
 		return new GradleSourceViewerConfiguration(this);
 	}
 
-	protected String getEditorInstanceContextMenuId() {
-		return EDITOR_RULER_CONTEXT_MENU_ID;
+	protected String getEditorInstanceRulerContextId() {
+		return EDITOR_CONTEXT_RULER_ID;
 	}
 
-	protected String getEditorInstanceMenuId() {
-		return EDITOR_CONTEXT_MENU_ID;
+	protected String getEditorInstanceContextId() {
+		return EDITOR_CONTEXT_ID;
 	}
 
 	GradleStringTransformer createGradleStringTransformer() {
@@ -183,4 +183,11 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
 		return EditorActivator.getDefault().getColorManager();
 	}
 
+	protected String getEditorIconPath() {
+		return "icons/gradle-editor.png";
+	}
+
+	protected String getEditorIconPathOnError() {
+		return "icons/gradle-editor-with-error.png";
+	}
 }

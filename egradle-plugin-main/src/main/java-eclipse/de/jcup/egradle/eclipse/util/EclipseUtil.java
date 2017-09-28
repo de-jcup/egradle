@@ -150,6 +150,7 @@ public class EclipseUtil {
 	public static Image getImage(String path, String pluginId) {
 		ImageRegistry imageRegistry = getImageRegistry();
 		if (imageRegistry == null) {
+			logWarning("No image registry found!");
 			return null;
 		}
 		Image image = imageRegistry.get(path);
@@ -296,6 +297,10 @@ public class EclipseUtil {
 
 	public static void logError(String error, Throwable t) {
 		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, error, t));
+	}
+	
+	public static void logWarning(String warning) {
+		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID,warning));
 	}
 
 	private static ILog getLog() {

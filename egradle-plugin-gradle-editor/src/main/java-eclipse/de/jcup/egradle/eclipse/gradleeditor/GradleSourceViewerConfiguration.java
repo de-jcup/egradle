@@ -15,6 +15,7 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor;
 
+import static de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers.*;
 import static de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers.*;
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorSyntaxColorPreferenceConstants.*;
 
@@ -39,8 +40,11 @@ import org.eclipse.swt.graphics.RGB;
 
 import de.jcup.egradle.codeassist.RelevantCodeCutter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
+import de.jcup.egradle.core.text.DocumentIdentifier;
 import de.jcup.egradle.eclipse.AbstractGroovySourceViewerConfiguration;
+import de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers;
 import de.jcup.egradle.eclipse.gradleeditor.codeassist.GradleContentAssistProcessor;
+import de.jcup.egradle.eclipse.gradleeditor.document.GradleDocumentIdentifiers;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 import de.jcup.egradle.eclipse.util.ColorManager;
@@ -133,11 +137,14 @@ public class GradleSourceViewerConfiguration extends AbstractGroovySourceViewerC
 		return super.getHyperlinkPresenter(sourceViewer);
 	}
 
-	@Override
-	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
+	protected String[] createDefaultConfiguredContentTypes() {
 		/* @formatter:off */
-		return allIdsToStringArray( 
-				IDocument.DEFAULT_CONTENT_TYPE);
+		return DocumentIdentifier.createStringIdBuilder().
+				add(IDocument.DEFAULT_CONTENT_TYPE). 
+				addAll(GroovyDocumentIdentifiers.values()).
+				addAll(GradleDocumentIdentifiers.values()).
+				
+				build();
 		/* @formatter:on */
 	}
 

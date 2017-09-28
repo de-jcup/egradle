@@ -114,4 +114,9 @@ public class GradleEditorContentOutlinePage extends AbstractGroovyBasedContentOu
 
 	}
 
+	@Override
+	protected String getOutlineImageRootPath() {
+		return "/icons/outline/";
+	}
+
 }

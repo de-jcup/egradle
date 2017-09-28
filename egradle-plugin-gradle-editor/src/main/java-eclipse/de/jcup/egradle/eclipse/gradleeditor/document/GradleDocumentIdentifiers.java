@@ -15,23 +15,9 @@
  */
  package de.jcup.egradle.eclipse.gradleeditor.document;
 
-public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
-	
-	JAVA_KEYWORD,
-	
-	JAVA_LITERAL,
-	
-	GROOVY_KEYWORD ,
-	
-	ANNOTATION,
-	
-	COMMENT,
-	
-	GROOVY_DOC,
-	
-	STRING,
-	
-	GSTRING,
+import de.jcup.egradle.core.text.DocumentIdentifier;
+
+public enum GradleDocumentIdentifiers implements DocumentIdentifier {
 	
 	GRADLE_KEYWORD,
 	
@@ -46,25 +32,6 @@ public enum GradleDocumentIdentifiers implements GradleDocumentIdentifier {
 	@Override
 	public String getId() {
 		return name();
-	}
-	public static String[] allIdsToStringArray(){
-		return allIdsToStringArray(null);
-	}
-	public static String[] allIdsToStringArray(String additionalDefaultId){
-		GradleDocumentIdentifiers[] values = values();
-		int size = values.length;
-		if (additionalDefaultId!=null){
-			size+=1;
-		}
-		String[] data = new String[size];
-		int pos=0;
-		if (additionalDefaultId!=null){
-			data[pos++]=additionalDefaultId;
-		}
-		for (GradleDocumentIdentifiers d: values){
-			data[pos++]=d.getId();
-		}
-		return data;
 	}
 
 }

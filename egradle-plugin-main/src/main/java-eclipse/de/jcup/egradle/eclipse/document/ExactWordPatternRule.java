@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
 import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IToken;
@@ -27,13 +27,8 @@ public class ExactWordPatternRule extends WordPatternRule{
 	boolean trace = false;
 	
 	public ExactWordPatternRule(IWordDetector detector, String exactWord, IToken token) {
-		this(detector,exactWord,token,true);
-	}
-	
-	public ExactWordPatternRule(IWordDetector detector, String exactWord, IToken token, boolean breaksOnEOF) {
 		super(detector, exactWord, null, token);
 		toStringValue=getClass().getSimpleName()+":"+exactWord;
-		this.fBreaksOnEOF=breaksOnEOF;
 	}
 	
 	protected boolean sequenceDetected(ICharacterScanner scanner, char[] sequence, boolean eofAllowed) {
@@ -58,7 +53,7 @@ public class ExactWordPatternRule extends WordPatternRule{
 			scannerUnread(scanner, counter);
 			char charBefore =(char)scannerRead(scanner, counter);
 			scannerRead(scanner, counter);
-			wordHasPrefix = isPrefixCharacter(charBefore);
+			wordHasPrefix =fDetector.isWordPart(charBefore);
 		}
 		if (wordHasPrefix){
 			scannerRead(scanner, counter);
@@ -84,8 +79,7 @@ public class ExactWordPatternRule extends WordPatternRule{
 		char charAfter = (char)read;
 		scannerUnread(scanner, counter);
 		
-		/* when not a whitespace and not end reached - do cleanup*/
-		if (! Character.isWhitespace(charAfter) && ICharacterScanner.EOF!=read){
+		if (ICharacterScanner.EOF!=read && fDetector.isWordPart(charAfter)){
 			/* the word is more than the exact one - e.g. instead of 'test' 'testx' ... so not correct*/
 			return counter.cleanupAndReturn(scanner,false);
 		}
@@ -93,19 +87,13 @@ public class ExactWordPatternRule extends WordPatternRule{
 	}
 
 	
-	private boolean isPrefixCharacter(char charBefore) {
-		boolean isPrefix = ! Character.isWhitespace(charBefore);
-		return isPrefix;
-	}
-
 	private int scannerRead(ICharacterScanner scanner, Counter counter) {
 		int c = scanner.read();
-		if (c==ICharacterScanner.EOF){
-			return c;
-		}
-		counter.count++;
-		if (trace){
-			traceSb.append((char)c);
+		if (c!=ICharacterScanner.EOF){
+			counter.count++;
+			if (trace){
+				traceSb.append((char)c);
+			}
 		}
 		return c;
 		
