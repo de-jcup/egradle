@@ -19,4 +19,6 @@
          Stable versions of EGradle
       </description>
    </category-def>
+<feature url="features/de.jcup.egradle.eclipse.feature_2.2.0.pre.jar" id="de.jcup.egradle.eclipse.feature" version="2.2.0.pre"><category name="site.egradle.category.stable"/></feature><feature url="features/de.jcup.egradle.eclipse.feature.editor_2.2.0.pre.jar" id="de.jcup.egradle.eclipse.feature.editor" version="2.2.0.pre"><category name="site.egradle.category.stable"/></feature>
+<feature url="features/de.jcup.egradle.eclipse.feature_2.2.0.jar" id="de.jcup.egradle.eclipse.feature" version="2.2.0"><category name="site.egradle.category.stable"/></feature><feature url="features/de.jcup.egradle.eclipse.feature.editor_2.2.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="2.2.0"><category name="site.egradle.category.stable"/></feature>
 </site>
