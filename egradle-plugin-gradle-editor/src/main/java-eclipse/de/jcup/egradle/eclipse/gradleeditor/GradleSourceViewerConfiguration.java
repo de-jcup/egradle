@@ -126,9 +126,9 @@ public class GradleSourceViewerConfiguration extends AbstractGroovySourceViewerC
 
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
-		if (sourceViewer == null)
+		if (sourceViewer == null){
 			return null;
-
+		}
 		return new IHyperlinkDetector[] { new URLHyperlinkDetector(), new GradleHyperlinkDetector(adaptable) };
 	}
 

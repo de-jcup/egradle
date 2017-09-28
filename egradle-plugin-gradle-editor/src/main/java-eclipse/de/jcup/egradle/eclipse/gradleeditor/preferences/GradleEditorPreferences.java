@@ -26,7 +26,6 @@ import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 import de.jcup.egradle.eclipse.preferences.AbstractEditorPreferences;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
-import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditor;
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
 public class GradleEditorPreferences extends AbstractEditorPreferences implements IEditorPreferences{
@@ -36,7 +35,7 @@ public class GradleEditorPreferences extends AbstractEditorPreferences implement
 	}
 	
 	protected void updateEditorColors(IEditorPart editor) {
-		if (! (editor instanceof AbstractGroovyBasedEditor)){
+		if (! (editor instanceof GradleEditor)){
 			return;
 		}
 		GradleEditor geditor = (GradleEditor) editor;
