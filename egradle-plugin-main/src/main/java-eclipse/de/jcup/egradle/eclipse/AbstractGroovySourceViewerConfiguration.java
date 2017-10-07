@@ -13,21 +13,26 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse;
+package de.jcup.egradle.eclipse;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
+import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 
 import de.jcup.egradle.eclipse.document.GroovyDefaultTextScanner;
 import de.jcup.egradle.eclipse.document.GroovyEditorAnnotationHoover;
@@ -36,7 +41,8 @@ import de.jcup.egradle.eclipse.ui.ExtendedSourceViewerConfiguration;
 import de.jcup.egradle.eclipse.util.ColorManager;
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
-public abstract class AbstractGroovySourceViewerConfiguration extends SourceViewerConfiguration implements ExtendedSourceViewerConfiguration{
+public abstract class AbstractGroovySourceViewerConfiguration extends TextSourceViewerConfiguration
+		implements ExtendedSourceViewerConfiguration {
 
 	protected GroovyDefaultTextScanner gradleScanner;
 	protected ColorManager colorManager;
@@ -45,35 +51,57 @@ public abstract class AbstractGroovySourceViewerConfiguration extends SourceView
 	protected IAdaptable adaptable;
 	protected ContentAssistant contentAssistant;
 	private String[] contentTypes;
-	
+
 	public AbstractGroovySourceViewerConfiguration(IAdaptable adaptable, PreferenceIdentifiable colorNormalText) {
+		IPreferenceStore generalTextStore = EditorsUI.getPreferenceStore();
+
+		this.fPreferenceStore = new ChainedPreferenceStore(
+				new IPreferenceStore[] { getPreferences().getPreferenceStore(), generalTextStore });
+
 		this.adaptable = adaptable;
 		this.colorManager = adaptable.getAdapter(ColorManager.class);
 		Assert.isNotNull(colorManager, " adaptable must support color manager");
-		
+
 		this.annotationHoover = new GroovyEditorAnnotationHoover();
-		
+
 		this.defaultTextAttribute = new TextAttribute(
 				colorManager.getColor(getPreferences().getColor(colorNormalText)));
 
 	}
 
+	/**
+	 * Returns preferences  laber with its preference store. The returned store is
+	 * containing only preferences for this editor - but has no relation to
+	 * standard text editor setup.
+	 * 
+	 * @return
+	 */
 	protected abstract IEditorPreferences getPreferences();
-	
+
 	@Override
 	public final String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
-		if (contentTypes!=null){
+		if (contentTypes != null) {
 			return contentTypes;
 		}
-		contentTypes= createDefaultConfiguredContentTypes();
+		contentTypes = createDefaultConfiguredContentTypes();
 		return contentTypes;
 	}
 
 	protected abstract String[] createDefaultConfiguredContentTypes();
-	
+
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		return annotationHoover;
+	}
+
+	@Override
+	public IQuickAssistAssistant getQuickAssistAssistant(ISourceViewer sourceViewer) {
+		/* currently we avoid the default quick assitence parts (spell checking etc.)*/
+		return null;
+	}
+	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		/* currently we avoid the default reconciler mechanism parts (spell checking etc.)*/
+		return null;
 	}
 	
 	protected void addDefaultPresentation(PresentationReconciler reconciler) {
@@ -102,7 +130,5 @@ public abstract class AbstractGroovySourceViewerConfiguration extends SourceView
 		}
 		return gradleScanner;
 	}
-
-	
 
 }
