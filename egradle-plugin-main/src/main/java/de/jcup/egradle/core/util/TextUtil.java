@@ -61,4 +61,12 @@ public class TextUtil {
 		}
 		return sb.toString();
 	}
+
+	public static String createSpaceString(int length) {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0;i<length;i++){
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
 }

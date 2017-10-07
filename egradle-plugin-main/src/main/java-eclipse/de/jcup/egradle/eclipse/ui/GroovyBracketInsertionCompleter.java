@@ -13,10 +13,11 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -24,16 +25,22 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
+import de.jcup.egradle.codeassist.SourceCodeInsertionSupport;
+import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
+import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GroovyBracketInsertionCompleter extends KeyAdapter {
+
+	private SourceCodeInsertionSupport support;
 
 	private final IExtendedEditor gradleEditor;
 	private IEditorPreferences preferences;
 
 	public GroovyBracketInsertionCompleter(IExtendedEditor gradleEditor, IEditorPreferences preferences) {
 		this.gradleEditor = gradleEditor;
-		this.preferences=preferences;
+		this.preferences = preferences;
+		this.support = new SourceCodeInsertionSupport();
 	}
 
 	@Override
@@ -41,37 +48,76 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 		if (e.character != '{') {
 			return;
 		}
+		/* FIXME ATR, 08.10.2017: not 100% "alpha{" works now but "alpha {" is not okay.*/
+		/* FIXME ATR, 08.10.2017: decide if the online/multiline can be setup by preferences or not.*/
 		/*
-		 * do not use last caret position - because the listener ordering
-		 * could be different
+		 * do not use last caret position - because the listener ordering could
+		 * be different
 		 */
 		ISelectionProvider selectionProvider = this.gradleEditor.getSelectionProvider();
-		if (selectionProvider==null){
+		if (selectionProvider == null) {
 			return;
 		}
 		ISelection selection = selectionProvider.getSelection();
-		if (! (selection instanceof ITextSelection)) {
+		if (!(selection instanceof ITextSelection)) {
 			return;
 		}
 		boolean enabled = preferences.isEditorAutoCreateEndBracketsEnabled();
-		if (!enabled){
+		if (!enabled) {
 			return;
 		}
 		ITextSelection textSelection = (ITextSelection) selection;
 		int offset = textSelection.getOffset();
-		
-		
-		try {
-			IDocument document = this.gradleEditor.getDocument();
-			if (document==null){
-				return;
-			}
-			document.replace(offset-1, 1, "{ }");
-			selectionProvider.setSelection(new TextSelection(offset+1, 0));
-		} catch (BadLocationException e1) {
-			/* ignore*/
+		if (offset == -1) {
 			return;
 		}
-		
+		IDocument document = gradleEditor.getDocument();
+		if (document == null) {
+			return;
+		}
+		EclipseUtil.safeAsyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					boolean useOneLiner = false;
+					if (useOneLiner) {
+						insertOneLiner(selectionProvider, offset, document);
+					} else {
+						insertMultiLiner(selectionProvider, offset, document);
+					}
+				} catch (BadLocationException e1) {
+					/* ignore */
+					EclipseUtil.logError("Cannot set content", e1);
+					return;
+				}
+			}
+
+		});
+
+	}
+
+	private void insertOneLiner(ISelectionProvider selectionProvider, int offset, IDocument document)
+			throws BadLocationException {
+		document.replace(offset - 1, 1, "{ }");
+		selectionProvider.setSelection(new TextSelection(offset + 1, 0));
+	}
+
+	private void insertMultiLiner(ISelectionProvider selectionProvider, int offset, IDocument document)
+			throws BadLocationException {
+		IRegion region = document.getLineInformationOfOffset(offset);
+		if (region == null) {
+			return;
+		}
+		int length = region.getLength();
+
+		String textBeforeColumn = document.get(offset - length, length);
+
+		InsertionData result = support.prepareInsertionString(
+				"{\n    " + SourceCodeInsertionSupport.CURSOR_VARIABLE + "\n}", textBeforeColumn);
+
+		document.replace(offset - 1, 1, result.getSourceCode());
+		selectionProvider.setSelection(new TextSelection(offset + result.getCursorOffset() - 1, 0));
+
 	}
 }

@@ -25,7 +25,7 @@ public class SourceCodeInsertionSupport {
 	
 	private static Pattern REPLACE_CURSOR_POS= Pattern.compile("\\"+CURSOR_VARIABLE);
 	
-	InsertionData prepareInsertionString(String oiriginInsertion, String textBeforeColumn) {
+	public InsertionData prepareInsertionString(String oiriginInsertion, String textBeforeColumn) {
 		return prepareInsertionString(oiriginInsertion,textBeforeColumn,true);
 	}
 	
@@ -111,9 +111,16 @@ public class SourceCodeInsertionSupport {
 	}
 	
 	
-	class InsertionData{
+	public class InsertionData{
 		String sourceCode="";
 		int cursorOffset=-1;
+		
+		public String getSourceCode() {
+			return sourceCode;
+		}
+		public int getCursorOffset() {
+			return cursorOffset;
+		}
 	}
 
 }
