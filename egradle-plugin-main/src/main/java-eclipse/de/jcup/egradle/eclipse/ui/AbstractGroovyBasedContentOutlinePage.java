@@ -119,10 +119,6 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 		editor.openSelectedTreeItemInEditor(selection, true, false);
 	}
 
-	public void ignoreNextSelectionEvents(boolean ignore) {
-	
-	}
-
 	public void inputChanged(Object input) {
 		this.input = input;
 		if (contentProvider instanceof AbstractGroovyBasedEditorOutlineContentProvider) {
