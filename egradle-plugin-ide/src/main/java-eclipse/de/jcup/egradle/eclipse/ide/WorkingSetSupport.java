@@ -18,6 +18,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -29,6 +30,20 @@ import org.eclipse.ui.IWorkingSetManager;
 import org.eclipse.ui.PlatformUI;
 
 public class WorkingSetSupport {
+	
+	/**
+	 * Resolve working sets for given projects
+	 * 
+	 * @param project
+	 *            project to scan for
+	 * @return list of working set data - never <code>null</code>
+	 */
+	public List<WorkingSetData> resolveWorkingSetsForProject(IProject project) {
+		if (project==null){
+			return Collections.emptyList();
+		}
+		return resolveWorkingSetsForProjects(Collections.singletonList(project), getWorkingSetManager());
+	}
 
 	/**
 	 * Resolve working sets for given projects
@@ -94,6 +109,22 @@ public class WorkingSetSupport {
 	public static class WorkingSetData {
 		IWorkingSet workingSet;
 		Set<String> projectNamesContainedBefore = new TreeSet<>();
+		
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			
+			sb.append("WorkingSetData for:");
+			if (workingSet==null){
+				sb.append("null");
+			}else{
+				sb.append(workingSet.getName());
+			}
+			sb.append(", contains:");
+			sb.append(projectNamesContainedBefore);
+			
+			return sb.toString();
+		}
 	}
 
 	public void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects){

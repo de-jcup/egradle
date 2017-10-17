@@ -22,6 +22,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -124,13 +125,20 @@ public class RootProjectImportSupport {
 				if (newRootFolder == null) {
 					return;
 				}
+				workingSetSupport = new WorkingSetSupport();
+				
+				
+				IProject virtualRootProject = getVirtualRootProject();
+				List<WorkingSetData> virtualRootWorkingSets = workingSetSupport
+						.resolveWorkingSetsForProject(virtualRootProject);
+				
 				boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator
 						.deleteVirtualRootProjectFull(monitor);
-
-				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder);
+				
+				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder,
+						virtualRootProject);
 
 				/* store working set information */
-				workingSetSupport = new WorkingSetSupport();
 				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
@@ -218,7 +226,7 @@ public class RootProjectImportSupport {
 
 				/* recreate virtual root project */
 				if (createVirtualRoot) {
-					createOrRecreateVirtualRootProject();
+					restoreVirtualRootWithWorkingSets(workingSetSupport, virtualRootWorkingSets);
 				}
 
 			} catch (Exception e) {
@@ -233,15 +241,37 @@ public class RootProjectImportSupport {
 						IDEUtil.logError("Reenabling workspace auto build failed!", e);
 					}
 				}
+				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
+			}
 
-				/* do restore working sets */
-				if (workingSetSupport != null && closedProjectWorksetData != null) {
-					IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-					if (allProjects != null) {
-						List<IProject> projectsList = Arrays.asList(allProjects);
-						workingSetSupport.restoreWorkingSetsForProjects(closedProjectWorksetData, projectsList);
-					}
+		}
+
+		public void restoreVirtualRootWithWorkingSets(WorkingSetSupport workingSetSupport,
+				List<WorkingSetData> virtualRootWorkingSets) throws VirtualRootProjectException {
+			createOrRecreateVirtualRootProject(new Runnable() {
+
+				@Override
+				public void run() {
+					restoreWorkingSets(workingSetSupport, virtualRootWorkingSets);
 				}
+
+			});
+
+		}
+
+		protected void restoreWorkingSets(WorkingSetSupport workingSetSupport,
+				List<WorkingSetData> closedProjectWorksetData) {
+			if (workingSetSupport==null){
+				return;
+			}
+			if (closedProjectWorksetData==null){
+				return;
+			}
+
+			IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+			if (allProjects != null) {
+				List<IProject> projectsList = Arrays.asList(allProjects);
+				workingSetSupport.restoreWorkingSetsForProjects(closedProjectWorksetData, projectsList);
 			}
 		}
 	}
@@ -317,9 +347,22 @@ public class RootProjectImportSupport {
 		return worked;
 	}
 
-	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder) throws CoreException {
+	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder, IProject... projectsToIgnore)
+			throws CoreException {
 		List<IProject> projectsToClose = new ArrayList<>();
+		List<IProject> projectsToIgnoreList;
+		if (projectsToIgnore != null) {
+			projectsToIgnoreList = Arrays.asList(projectsToIgnore);
+		} else {
+			projectsToIgnoreList = Collections.emptyList();
+		}
+
 		for (IProject project : getAllProjects()) {
+			/* filter ignored projects: */
+			if (projectsToIgnoreList.contains(project)) {
+				continue;
+			}
+
 			IPath projectPath = project.getLocation();
 			if (projectPath == null) {
 				/* project no more valid */

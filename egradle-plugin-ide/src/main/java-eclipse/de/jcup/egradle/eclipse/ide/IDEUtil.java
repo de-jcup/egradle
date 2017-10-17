@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
@@ -81,7 +81,6 @@ import de.jcup.egradle.template.FileStructureTemplateManager;
 
 public class IDEUtil {
 
-	
 	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
@@ -101,7 +100,7 @@ public class IDEUtil {
 		}
 		return systemConsoleOutputHandler;
 	}
-	
+
 	public static RememberLastLinesOutputHandler createOutputHandlerForValidationErrorsOnConsole() {
 		int max;
 		if (getPreferences().isOutputValidationEnabled()) {
@@ -111,20 +110,20 @@ public class IDEUtil {
 		}
 		return new RememberLastLinesOutputHandler(max);
 	}
-	
+
 	/**
-	 * Creates or refreshes virtual root project. If project exists but isn't opened it will
-	 * be automatically opened
+	 * Creates or refreshes virtual root project. If project exists but isn't
+	 * opened it will be automatically opened
 	 * 
 	 * @param projectName
 	 * @param monitor
-	 * @param projectDescriptionCreator 
+	 * @param projectDescriptionCreator
 	 * @param natureIds
 	 * @return project
 	 * @throws CoreException
 	 */
-	public static IProject createOrRefreshProject(String projectName, IProgressMonitor monitor, ProjectDescriptionCreator projectDescriptionCreator,
-			String... natureIds) throws CoreException {
+	public static IProject createOrRefreshProject(String projectName, IProgressMonitor monitor,
+			ProjectDescriptionCreator projectDescriptionCreator, String... natureIds) throws CoreException {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
@@ -151,31 +150,37 @@ public class IDEUtil {
 		project.setDescription(descriptionCopy, monitor);
 		return project;
 	}
-	
+
 	/**
-	 * Imports a project by given description file (.project). If a project already exists in workspace with same name
-	 * it will be automatically deleted (without content delete)
-	 * @param projectFileOrFolder file (.project) or the folder containing it
+	 * Imports a project by given description file (.project). If a project
+	 * already exists in workspace with same name it will be automatically
+	 * deleted (without content delete)
+	 * 
+	 * @param projectFileOrFolder
+	 *            file (.project) or the folder containing it
 	 * @param monitor
 	 * @return project, never <code>null</code>
 	 * @throws CoreException
 	 */
 	public static IProject importProject(File projectFileOrFolder, IProgressMonitor monitor) throws CoreException {
 		File projectFile = null;
-		if (projectFileOrFolder.isDirectory()){
-			projectFile=new File(projectFileOrFolder,GradleImportScanner.ECLIPSE_PROJECTFILE_NAME);
-		}else{
-			projectFile=projectFileOrFolder;
+		if (projectFileOrFolder.isDirectory()) {
+			projectFile = new File(projectFileOrFolder, GradleImportScanner.ECLIPSE_PROJECTFILE_NAME);
+		} else {
+			projectFile = projectFileOrFolder;
 		}
 		Path path = new Path(projectFile.getAbsolutePath());
 		IProjectDescription description = ResourcesPlugin.getWorkspace().loadProjectDescription(path);
 		IProject project = getProject(description.getName());
-		/* always delete project if already existing - but without content delete */
-		project.delete(false, true,monitor);
+		/*
+		 * always delete project if already existing - but without content
+		 * delete
+		 */
+		project.delete(false, true, monitor);
 		project.create(description, monitor);
 		return project;
 	}
-	
+
 	public static void setWorkspaceAutoBuild(boolean flag) throws CoreException {
 		IWorkspace workspace = getWorkspace();
 		IWorkspaceDescription description = workspace.getDescription();
@@ -188,7 +193,7 @@ public class IDEUtil {
 		IWorkspaceDescription description = workspace.getDescription();
 		return description.isAutoBuilding();
 	}
-	
+
 	private static IProject getProject(String projectName) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot root = workspace.getRoot();
@@ -196,7 +201,6 @@ public class IDEUtil {
 		return project;
 	}
 
-	
 	/**
 	 * Get image by path from image registry. If not already registered a new
 	 * image will be created and registered. If not createable a fallback image
@@ -208,7 +212,7 @@ public class IDEUtil {
 	public static Image getImage(String path) {
 		return EclipseUtil.getImage(path, IDEActivator.PLUGIN_ID);
 	}
-	
+
 	public static ImageDescriptor createImageDescriptor(String path) {
 		return EclipseUtil.createImageDescriptor(path, IDEActivator.PLUGIN_ID);
 	}
@@ -275,7 +279,7 @@ public class IDEUtil {
 				IDecoratorManager manager = workbench.getDecoratorManager();
 
 				IProject[] projects = getAllProjects();
-				
+
 				EGradleProjectDecorator decorator = (EGradleProjectDecorator) manager
 						.getBaseLabelProvider("de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator");
 				/* decorate */
@@ -690,6 +694,21 @@ public class IDEUtil {
 	 * @throws VirtualRootProjectException
 	 */
 	public static void createOrRecreateVirtualRootProject() throws VirtualRootProjectException {
+		createOrRecreateVirtualRootProject(null);
+	}
+
+	/**
+	 * Creates or recreates virtual project - this is done asynchronous. If
+	 * there exists already a virtual root project it will be deleted full
+	 * before the asynchronous creation process starts!
+	 * 
+	 * @param postProcessing
+	 *            - a runnable which will be executed after virtual root project
+	 *            is (sucessfully) created, can be <code>null</code>
+	 * 
+	 * @throws VirtualRootProjectException
+	 */
+	public static void createOrRecreateVirtualRootProject(Runnable postProcessing) throws VirtualRootProjectException {
 		GradleRootProject rootProject = getRootProject();
 		if (rootProject == null) {
 			return;
@@ -709,6 +728,11 @@ public class IDEUtil {
 						monitor);
 				try {
 					virtualProjectCreator.createOrUpdate(rootProject, partCreator);
+
+					if (postProcessing != null) {
+						postProcessing.run();
+					}
+
 					return Status.OK_STATUS;
 				} catch (VirtualRootProjectException e) {
 					getDialogSupport().showError(e.getMessage());
@@ -746,7 +770,7 @@ public class IDEUtil {
 		FileStructureTemplateManager manager = IDEActivator.getDefault().getNewProjectTemplateManager();
 		return manager.getTemplates();
 	}
-	
+
 	/**
 	 * 
 	 * @return gradle wrapper template or <code>null</code>
@@ -754,11 +778,11 @@ public class IDEUtil {
 	public static FileStructureTemplate getGradleWrapperTemplate() {
 		FileStructureTemplateManager manager = IDEActivator.getDefault().getGradlWrappertTemplateManager();
 		List<FileStructureTemplate> templates = manager.getTemplates();
-		if (templates.isEmpty()){
+		if (templates.isEmpty()) {
 			return null;
 		}
 		return templates.get(0);
-		
+
 	}
 
 }
