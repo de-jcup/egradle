@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import java.util.regex.Pattern;
 
@@ -25,6 +25,12 @@ public class SourceCodeInsertionSupport {
 	
 	private static Pattern REPLACE_CURSOR_POS= Pattern.compile("\\"+CURSOR_VARIABLE);
 	
+	/**
+	 * Calculates insertion data
+	 * @param oiriginInsertion - what shall be inserted (the "template")
+	 * @param textBeforeColumn - what is before?
+	 * @return insertion data
+	 */
 	public InsertionData prepareInsertionString(String oiriginInsertion, String textBeforeColumn) {
 		return prepareInsertionString(oiriginInsertion,textBeforeColumn,true);
 	}

@@ -20,7 +20,68 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TextUtilTest {
-
+	@Test
+	public void trim_right_whitespaces_at_null__returns_null() {
+		assertEquals(null,TextUtil.trimRightWhitespaces(null));
+	}
+	@Test
+	public void trim_right_whitespaces_at_empty__returns_empty() {
+		assertEquals("",TextUtil.trimRightWhitespaces(""));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_two_spaces__returns_empty() {
+		assertEquals("",TextUtil.trimRightWhitespaces("  "));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_space__returns_empty() {
+		assertEquals("",TextUtil.trimRightWhitespaces(" "));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_abc__returns_abc() {
+		assertEquals("abc",TextUtil.trimRightWhitespaces("abc"));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_a__returns_a() {
+		assertEquals("a",TextUtil.trimRightWhitespaces("a"));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_a_space_returns_a() {
+		assertEquals("a",TextUtil.trimRightWhitespaces("a "));
+	}
+	@Test
+	public void trim_right_whitespaces_at_ab_space_returns_ab() {
+		assertEquals("ab",TextUtil.trimRightWhitespaces("ab "));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_space_a_space__returns_space_a() {
+		assertEquals(" a",TextUtil.trimRightWhitespaces(" a "));
+	}
+	@Test
+	public void trim_right_whitespaces_at_3space_a__returns_3space_a() {
+		assertEquals("   a",TextUtil.trimRightWhitespaces("   a"));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_2space_a_space__returns_2space_a() {
+		assertEquals("  a",TextUtil.trimRightWhitespaces("  a "));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_2space_a_space_b_space_returns_2space_a_space_b() {
+		assertEquals("  a b",TextUtil.trimRightWhitespaces("  a b "));
+	}
+	
+	@Test
+	public void trim_right_whitespaces_at_2space_a_space_b_2space_returns_2space_a_space_b() {
+		assertEquals("  a b",TextUtil.trimRightWhitespaces("  a b  "));
+	}
+	
 	@Test
 	public void alpha123_index0__returns_alpha123() {
 		String text="alpha123";

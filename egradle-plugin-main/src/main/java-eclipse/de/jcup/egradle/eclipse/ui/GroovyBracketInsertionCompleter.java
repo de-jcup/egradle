@@ -25,8 +25,10 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
+import de.jcup.egradle.codeassist.BracketInsertion;
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport;
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
+import de.jcup.egradle.core.util.TextUtil;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
@@ -45,11 +47,14 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.character != '{') {
+		final BracketInsertion data = BracketInsertion.valueOfStartChar(e.character);
+		if (data == null) {
 			return;
 		}
-		/* FIXME ATR, 08.10.2017: not 100% "alpha{" works now but "alpha {" is not okay.*/
-		/* FIXME ATR, 08.10.2017: decide if the online/multiline can be setup by preferences or not.*/
+		/*
+		 * FIXME ATR, 08.10.2017: not 100% "alpha{" works now but "alpha {" is
+		 * not okay.
+		 */
 		/*
 		 * do not use last caret position - because the listener ordering could
 		 * be different
@@ -80,11 +85,11 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 			@Override
 			public void run() {
 				try {
-					boolean useOneLiner = false;
-					if (useOneLiner) {
-						insertOneLiner(selectionProvider, offset, document);
+
+					if (data.isMultiLine()) {
+						insertMultiLiner(data, selectionProvider, offset, document);
 					} else {
-						insertMultiLiner(selectionProvider, offset, document);
+						insertOneLiner(data, selectionProvider, offset, document);
 					}
 				} catch (BadLocationException e1) {
 					/* ignore */
@@ -97,24 +102,24 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 
 	}
 
-	private void insertOneLiner(ISelectionProvider selectionProvider, int offset, IDocument document)
-			throws BadLocationException {
-		document.replace(offset - 1, 1, "{ }");
-		selectionProvider.setSelection(new TextSelection(offset + 1, 0));
+	private void insertOneLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset,
+			IDocument document) throws BadLocationException {
+		document.replace(offset - 1, 1, data.createOneLineTemplate());
+		selectionProvider.setSelection(new TextSelection(data.createOneLineNewOffset(offset), 0));
 	}
 
-	private void insertMultiLiner(ISelectionProvider selectionProvider, int offset, IDocument document)
-			throws BadLocationException {
+	private void insertMultiLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset,
+			IDocument document) throws BadLocationException {
 		IRegion region = document.getLineInformationOfOffset(offset);
 		if (region == null) {
 			return;
 		}
 		int length = region.getLength();
 
-		String textBeforeColumn = document.get(offset - length, length);
-
+		String textBeforeColumn = document.get(offset - length, length-1); //-1 to get not he bracket itself
+		String relevantColumnsBefore = TextUtil.trimRightWhitespaces(textBeforeColumn);
 		InsertionData result = support.prepareInsertionString(
-				"{\n    " + SourceCodeInsertionSupport.CURSOR_VARIABLE + "\n}", textBeforeColumn);
+				data.createMultiLineTemplate(SourceCodeInsertionSupport.CURSOR_VARIABLE), relevantColumnsBefore);
 
 		document.replace(offset - 1, 1, result.getSourceCode());
 		selectionProvider.setSelection(new TextSelection(offset + result.getCursorOffset() - 1, 0));

@@ -141,6 +141,4 @@ public class SourceCodeInsertionSupportTest {
 		assertEquals(expectedPos,result.cursorOffset);
 	}
 	
-	
-
 }
