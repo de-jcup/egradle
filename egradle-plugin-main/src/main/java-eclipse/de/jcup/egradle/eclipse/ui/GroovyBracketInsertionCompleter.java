@@ -51,14 +51,6 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 		if (data == null) {
 			return;
 		}
-		/*
-		 * FIXME ATR, 08.10.2017: not 100% "alpha{" works now but "alpha {" is
-		 * not okay.
-		 */
-		/*
-		 * do not use last caret position - because the listener ordering could
-		 * be different
-		 */
 		ISelectionProvider selectionProvider = this.gradleEditor.getSelectionProvider();
 		if (selectionProvider == null) {
 			return;
