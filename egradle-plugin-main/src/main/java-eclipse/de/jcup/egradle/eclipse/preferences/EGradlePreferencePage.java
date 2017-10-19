@@ -15,9 +15,19 @@
  */
 package de.jcup.egradle.eclipse.preferences;
 
+import java.net.URL;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.eclipse.MainActivator;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
@@ -46,6 +56,27 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
+		
+		Composite composite = getFieldEditorParent();
+		
+		String message = "You can visit the project site at <a href=\"https://github.com/de-jcup/egradle/wiki\">GitHub</a>.";
+
+		Link link = new Link(composite, SWT.NONE);
+		link.setText(message);
+		link.setSize(400, 100);
+		link.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					// Open default external browser
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
+				} catch (Exception ex) {
+					MainActivator.getDefault().getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, "Was not able to open url in external browser", ex));
+				}
+			}
+		});
+		
+		
 	}
 
 	public void init(IWorkbench workbench) {
