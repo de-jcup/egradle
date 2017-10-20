@@ -13,7 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -58,7 +61,9 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
+import de.jcup.egradle.core.text.CommentBlockToggler;
 import de.jcup.egradle.core.text.StatusMessageSupport;
+import de.jcup.egradle.core.text.TextLine;
 import de.jcup.egradle.core.util.TextUtil;
 import de.jcup.egradle.eclipse.util.ColorManager;
 import de.jcup.egradle.eclipse.util.ColorUtil;
@@ -343,42 +348,28 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 		int startLine = ts.getStartLine();
 		int endLine = ts.getEndLine();
 
-		/* do comment /uncomment */
-		for (int i = startLine; i <= endLine; i++) {
-			IRegion info;
-			try {
+		CommentBlockToggler toggler = new CommentBlockToggler();
+		List<TextLine> originLines = new ArrayList<>();
+		try {
+			/* do comment /uncomment */
+			for (int i = startLine; i <= endLine; i++) {
+				IRegion info;
 				info = doc.getLineInformation(i);
 				int offset = info.getOffset();
+
 				String line = doc.get(info.getOffset(), info.getLength());
-				StringBuilder foundCode = new StringBuilder();
-				StringBuilder whitespaces = new StringBuilder();
-				for (int j = 0; j < line.length(); j++) {
-					char ch = line.charAt(j);
-					if (Character.isWhitespace(ch)) {
-						if (foundCode.length() == 0) {
-							whitespaces.append(ch);
-						}
-					} else {
-						foundCode.append(ch);
-					}
-					if (foundCode.length() > 1) {
-						break;
-					}
-				}
-				int whitespaceOffsetAdd = whitespaces.length();
-				if ("//".equals(foundCode.toString())) {
-					/* comment before */
-					doc.replace(offset + whitespaceOffsetAdd, 2, "");
-				} else {
-					/* not commented */
-					doc.replace(offset, 0, "//");
-				}
+				originLines.add(new TextLine(offset, line));
 
-			} catch (BadLocationException e) {
-				/* ignore and continue */
-				continue;
 			}
-
+			List<TextLine> convertedLines = toggler.toggle(originLines);
+			for (int i=0;i<originLines.size();i++){
+				TextLine origin = originLines.get(i);
+				TextLine converted = convertedLines.get(i);
+				doc.replace(converted.getOffset(), origin.getLength(), converted.getContent());
+				
+			}
+		} catch (BadLocationException e) {
+			/* ignore and do nothing */
 		}
 		/* reselect */
 		int selectionStartOffset;
@@ -428,7 +419,7 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 		outlinePage.inputChanged(document);
 	}
 
-	protected abstract ColorManager getColorManager() ;
+	protected abstract ColorManager getColorManager();
 
 	protected abstract String getEditorInstanceRulerContextId();
 
@@ -544,6 +535,7 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 		}
 		return IMarker.SEVERITY_INFO;
 	}
+
 	/**
 	 * Installs an additional source viewer support which uses editor
 	 * preferences instead of standard text preferences. If standard source
