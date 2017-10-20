@@ -78,7 +78,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		commonGroup = SWTFactory.createGroup(composite, "Common", 1, SWT.FILL, SWT.FILL);
 		commonGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
-		SWTFactory.createLabel(commonGroup, "Please enter group name - if empty project name will be used", SWT.FILL);
+		SWTFactory.createLabel(commonGroup, "Please enter group name", SWT.FILL);
 		gradleGroupNameText = SWTFactory.createSingleText(commonGroup, 1);
 		gradleGroupNameText.addModifyListener(new ModifyListener() {
 
@@ -185,6 +185,9 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());
+		// Use message to show default value, will always return when user
+		// user has no content there. The "" is to ensure message can never be null...
+		gradleGroupNameText.setMessage(""+context.getProjectName());
 	}
 
 }
