@@ -2,6 +2,7 @@ package de.jcup.egradle.core.text;
 
 import static de.jcup.egradle.core.text.AssertTextLines.*;
 import static java.util.Collections.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,51 @@ public class CommentBlockTogglerTest {
 	@Before
 	public void before(){
 		togglerToTest = new CommentBlockToggler();
+	}
+	
+	@Test
+	public void sameBlock__a_b_c__is_true(){
+		List<TextLine> list = new ArrayList<>();
+		list.add(new TextLine(-1,"a"));
+		list.add(new TextLine(-1,"b"));
+		list.add(new TextLine(-1,"c"));
+		
+		/* execute */
+		assertTrue(togglerToTest.isSameCommentBlockStart(list));
+	}
+	
+	@Test
+	public void sameBlock__a_comment_b_c__is_false(){
+		List<TextLine> list = new ArrayList<>();
+		list.add(new TextLine(-1,"a"));
+		list.add(new TextLine(-1,"//b"));
+		list.add(new TextLine(-1,"c"));
+		
+		/* execute */
+		assertFalse(togglerToTest.isSameCommentBlockStart(list));
+	}
+	
+	/**
+	 * <pre>
+	 * 0123        =>    012345 
+	 * //a\n             ////a\n
+	 * 456               678910
+	 * xy\n              //xy\n
+	 * 78                11 12 13 14
+	 * z\n               /  /  z  \n
+	 * </pre>
+	 */
+	@Test
+	public void comment_a_xy_z__converted_correct() {
+		List<TextLine> list = new ArrayList<>();
+		list.add(new TextLine(0,"//a\n"));
+		list.add(new TextLine(4,"xy\n"));
+		list.add(new TextLine(7,"z\n"));
+		/* execute */
+		List<TextLine> lines = togglerToTest.toggle(list);
+		
+		/* test */
+		assertLines(lines).containsOnly(new TextLine(0, "////a\n"),new TextLine(6,"//xy\n"),new TextLine(11,"//z\n"));
 	}
 	
 	/**
