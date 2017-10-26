@@ -19,6 +19,8 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 
+	COMPILE_ONLY("compileOnly"),
+
 	COMPILE("compile"),
 	
 	TEST_COMPILE("testCompile"),
