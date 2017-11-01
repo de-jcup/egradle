@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Properties;
 
 import de.jcup.egradle.core.RootFolderProvider;
+import de.jcup.egradle.core.util.FormatConverter;
 import de.jcup.egradle.core.util.LogAdapter;
 
 public class FileStructureTemplateManager {
@@ -35,12 +36,14 @@ public class FileStructureTemplateManager {
 	private List<FileStructureTemplate> fileStructureTemplates;
 	private RootFolderProvider provider;
 	private LogAdapter logAdapter;
-
+	private FormatConverter formatConverter;
 	public FileStructureTemplateManager(RootFolderProvider provider, LogAdapter logAdapter) {
 		notNull(provider, "'provider' may not be null");
 		notNull(logAdapter, "'logAdapter' may not be null");
 
 		fileStructureTemplates = new ArrayList<>();
+		formatConverter = new FormatConverter();
+		
 		this.provider = provider;
 		this.logAdapter = logAdapter;
 	}
@@ -76,11 +79,14 @@ public class FileStructureTemplateManager {
 			}
 			addTemplateFolder(templateFolder);
 		}
+		fileStructureTemplates.sort(new FileStructureTemplatePriorityComparator());
 	}
 
 	private void addTemplateFolder(File templateFolder) {
 		Properties p = getSafeProperties(templateFolder);
-		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME),templateFolder,p.getProperty(PROP_DESCRIPTION));
+		int priority = formatConverter.convertToInt(p.getProperty(PROP_PRIORITY, "100"));
+		
+		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME),templateFolder,p.getProperty(PROP_DESCRIPTION),priority);
 		for (Feature f: Features.values()){
 			String value = p.getProperty(f.getId());
 			if (Boolean.valueOf(value)){

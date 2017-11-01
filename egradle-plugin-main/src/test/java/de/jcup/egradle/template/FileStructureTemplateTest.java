@@ -54,7 +54,7 @@ public class FileStructureTemplateTest {
 		mockedContentTransformerFactory = mock(TemplateContentTransformerFactory.class);
 		when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class))).thenReturn(mockedContentTransformer);
 
-		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description");
+		templateToTest = new FileStructureTemplate("name", contentRootFolder,"description",0);
 		
 		mockedCopySupport = mock(DirectoryCopySupport.class);
 		mockedFileSupport = mock(FileSupport.class);

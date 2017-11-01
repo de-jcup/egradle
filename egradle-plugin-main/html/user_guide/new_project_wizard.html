@@ -163,6 +163,19 @@ table, th, td {
 	<p>
 		<a href="#top">Top</a>
 	</p>
+	
+	<h4 id="basic_gradle_singleproject_java">Basic gradle single project
+		(Java)</h4>
+	<p>
+		<img
+			src="images/egradle-new-project-basic-single-template.png" />
+	</p>
+	<p>d
+		Nearly the same as <a href="#full_gradle_singleproject_java">Full single project (Java)</a> but adresses gradle beginners.
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>	
 	<h2 id="custom_templates">Custom templates</h2>
 	Currently EGradle comes up with two default templates for java (see
 	above). It's planned to have other templates as well in future - e.g.
@@ -245,6 +258,11 @@ table, th, td {
 				<tr>
 					<td>description</td>
 					<td>The description for the template</td>
+				</tr>
+				<tr>
+					<td>priority</td>
+					<td>The priority for the template. The template with the lowest value will be on first position at the wizard dialog and automatically selected. <br>
+					When not defined the priority is set to 100</td>
 				</tr>
 				<tr>
 					<td>feature.newproject.type.multiproject</td>

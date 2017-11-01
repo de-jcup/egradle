@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.template;
+package de.jcup.egradle.template;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -33,6 +33,7 @@ public class FileStructureTemplate {
 
 	static final String PROP_NAME = "name";
 	static final String PROP_DESCRIPTION = "description";
+	static final String PROP_PRIORITY = "priority";
 
 	private File pathToContent;
 	DirectoryCopySupport copySupport;
@@ -41,7 +42,7 @@ public class FileStructureTemplate {
 	FileSupport fileSupport;
 	TemplateContentTransformerFactory contentTransformerFactory;
 
-	public FileStructureTemplate(String name, File contentRootFolder, String description) {
+	public FileStructureTemplate(String name, File contentRootFolder, String description, int priority) {
 		notNull(contentRootFolder, "'pathToContent' may not be null");
 		if (name == null) {
 			name = contentRootFolder.getName();
@@ -54,6 +55,7 @@ public class FileStructureTemplate {
 		this.fileSupport = new FileSupport();
 		this.name = name;
 		this.description = description;
+		this.priority = priority;
 
 		/* own internal factory so easier to test */
 		this.contentTransformerFactory = new TemplateContentTransformerFactory();
@@ -164,6 +166,7 @@ public class FileStructureTemplate {
 	}
 
 	private Set<Feature> enabledFeatures = new HashSet<>();
+	private int priority;
 
 	public void enableFeature(Feature f) {
 		if (f == null) {
@@ -177,6 +180,10 @@ public class FileStructureTemplate {
 			return false;
 		}
 		return enabledFeatures.contains(feature);
+	}
+
+	public int getPriority() {
+		return priority;
 	}
 
 }
