@@ -49,6 +49,8 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.eclipse.ide.ProjectShareSupport;
+import de.jcup.egradle.eclipse.ide.ProjectShareSupport.ProjectShareData;
 import de.jcup.egradle.eclipse.ide.WorkingSetSupport;
 import de.jcup.egradle.eclipse.ide.WorkingSetSupport.WorkingSetData;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
@@ -113,6 +115,8 @@ public class RootProjectImportSupport {
 			boolean cleanProjects = IDEUtil.getPreferences().isCleanProjectsOnImportEnabled();
 			boolean executeAssemble = IDEUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
 			WorkingSetSupport workingSetSupport = null;
+			ProjectShareSupport projectShareSupport = null;
+			ProjectShareData closedProjectShareData =null;
 			List<WorkingSetData> closedProjectWorksetData = null;
 			try {
 
@@ -126,6 +130,7 @@ public class RootProjectImportSupport {
 					return;
 				}
 				workingSetSupport = new WorkingSetSupport();
+				projectShareSupport = new ProjectShareSupport();
 				
 				
 				IProject virtualRootProject = getVirtualRootProject();
@@ -141,6 +146,8 @@ public class RootProjectImportSupport {
 				/* store working set information */
 				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
+				closedProjectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
+				
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
 
 				int closeSize = projectsToClose.size();
@@ -241,9 +248,24 @@ public class RootProjectImportSupport {
 						IDEUtil.logError("Reenabling workspace auto build failed!", e);
 					}
 				}
+				/* working sets*/
 				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
+				
+				/* team share again...*/
+				restoreTeamProviderConnections(projectShareSupport, closedProjectShareData);
 			}
 
+		}
+
+		private void restoreTeamProviderConnections(ProjectShareSupport projectShareSupport,
+				ProjectShareData closedProjectShareData) {
+			
+			
+			IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+			if (allProjects != null) {
+				List<IProject> projectsList = Arrays.asList(allProjects);
+				projectShareSupport.reconnectToTeamProviders(closedProjectShareData,projectsList);
+			}
 		}
 
 		public void restoreVirtualRootWithWorkingSets(WorkingSetSupport workingSetSupport,
