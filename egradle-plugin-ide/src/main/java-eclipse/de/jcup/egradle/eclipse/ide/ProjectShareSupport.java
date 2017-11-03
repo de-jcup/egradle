@@ -6,14 +6,12 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.team.core.RepositoryProvider;
 import org.eclipse.team.core.TeamException;
-import org.junit.FixMethodOrder;
 
 public class ProjectShareSupport {
 	
-	private static boolean TURNED_OFF=true;
-
 
 	public ProjectShareData resolveProjectShareDataForProjects(List<IProject> projects) {
 		ProjectShareData data = new ProjectShareData();
@@ -31,18 +29,12 @@ public class ProjectShareSupport {
 	/**
 	 * Will try to reconnect team provicers - but only for projects not being
 	 * shared already!
+	 * @param monitor 
 	 * 
 	 * @param data
 	 * @param projectsList
 	 */
-	public void reconnectToTeamProviders(ProjectShareData data, List<IProject> projectsList) {
-		if (TURNED_OFF){
-			/* FIXME ATR, 02.11.2017: this is currently only for debugging. maybe this could be a configuration in
-			 * reimport in future - but currently we can simulate the old behaviour, because it seems the reconnect
-			 * does appear normally automatically (being correct).
-			 */
-			return;
-		}
+	public void reconnectToTeamProviders(IProgressMonitor monitor, ProjectShareData data, List<IProject> projectsList) {
 		if (data == null) {
 			return;
 		}
@@ -55,6 +47,8 @@ public class ProjectShareSupport {
 				/* already shared - so ignore! */
 				continue;
 			}
+			String projectName = project.getName();
+
 			IPath path = project.getFullPath();
 			String providerId = data.getProviderId(path);
 			if (providerId == null) {
@@ -62,10 +56,21 @@ public class ProjectShareSupport {
 			}
 			try {
 				RepositoryProvider.map(project, providerId);
+				progressMessage(monitor, "Reconnected team provider for project: "+projectName);
 			} catch (TeamException e) {
-				IDEUtil.logError("Was not able to reconnect team provider on project:"+project.getName(), e);
+				IDEUtil.logError("Was not able to reconnect team provider on project:"+projectName, e);
 			}
 		}
+	}
+	
+	private void progressMessage(IProgressMonitor monitor, String message) {
+		if (monitor == null){
+			return;
+		}
+		if (message==null){
+			return;
+		}
+		monitor.subTask(message);
 	}
 
 	public class ProjectShareData {

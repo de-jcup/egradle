@@ -19,6 +19,7 @@ import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,8 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.eclipse.ide.ProjectMetaDataCacheSupport;
+import de.jcup.egradle.eclipse.ide.ProjectMetaDataCacheSupport.ProjectCacheData;
 import de.jcup.egradle.eclipse.ide.ProjectShareSupport;
 import de.jcup.egradle.eclipse.ide.ProjectShareSupport.ProjectShareData;
 import de.jcup.egradle.eclipse.ide.WorkingSetSupport;
@@ -115,9 +118,16 @@ public class RootProjectImportSupport {
 			boolean cleanProjects = IDEUtil.getPreferences().isCleanProjectsOnImportEnabled();
 			boolean executeAssemble = IDEUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
 			WorkingSetSupport workingSetSupport = null;
+			ProjectMetaDataCacheSupport projectMetaDataCacheSupport = null;
+			ProjectCacheData closedProjectCacheData = null;
+
 			ProjectShareSupport projectShareSupport = null;
-			ProjectShareData closedProjectShareData =null;
+			ProjectShareData projectShareData = null;
+			
 			List<WorkingSetData> closedProjectWorksetData = null;
+			
+			boolean oldProjectsDeleted = false;
+			
 			try {
 
 				autoBuildEnabled = isWorkspaceAutoBuildEnabled();
@@ -130,24 +140,30 @@ public class RootProjectImportSupport {
 					return;
 				}
 				workingSetSupport = new WorkingSetSupport();
+				
+				projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
 				projectShareSupport = new ProjectShareSupport();
-				
-				
+
 				IProject virtualRootProject = getVirtualRootProject();
 				List<WorkingSetData> virtualRootWorkingSets = workingSetSupport
 						.resolveWorkingSetsForProject(virtualRootProject);
-				
+
 				boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator
 						.deleteVirtualRootProjectFull(monitor);
-				
+
 				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder,
 						virtualRootProject);
 
 				/* store working set information */
 				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
-				closedProjectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
-				
+				try {
+					closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
+				} catch (Exception e) {
+					IDEUtil.logError("Cannot create meta data cache!", e);
+				}
+				projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
+
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
 
 				int closeSize = projectsToClose.size();
@@ -163,14 +179,14 @@ public class RootProjectImportSupport {
 				monitor.beginTask(message, workToDo);
 				getSystemConsoleOutputHandler().output(message);
 
-				importProgressMessage(monitor, "collect infos about existing eclipse projects");
+				importProgressMessage(monitor, "Collect information about existing eclipse projects");
 				monitor.worked(++worked);
 
 				worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
 				if (monitor.isCanceled()) {
 					return;
 				}
-
+				importProgressMessage(monitor, "Rebuild project definitions for eclipse");
 				ProcessExecutionResult processExecutionResult = executeGradleEclipse(rootProject, monitor);
 
 				if (processExecutionResult.isNotOkay()) {
@@ -179,6 +195,7 @@ public class RootProjectImportSupport {
 					return;
 				}
 				worked = deleteProjects(monitor, worked, projectsToClose);
+				oldProjectsDeleted=true;
 				importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
 
 				/* -------------------------- */
@@ -210,6 +227,7 @@ public class RootProjectImportSupport {
 				/* update workspace */
 				/* ---------------- */
 				if (executeAssemble) {
+					importProgressMessage(monitor, "Execute gradle task 'assemble'");
 					/*
 					 * execute assemble task and - if enabled - after execution
 					 * the 'clean projects' operation
@@ -226,6 +244,7 @@ public class RootProjectImportSupport {
 					 * cleanProjects, this must be done here too
 					 */
 					if (cleanProjects) {
+						importProgressMessage(monitor, "Clean all projects");
 						IWorkbenchWindow window = getActiveWorkbenchWindow();
 						cleanAllProjects(true, window, monitor);
 					}
@@ -241,32 +260,69 @@ public class RootProjectImportSupport {
 			} finally {
 				monitor.done();
 
+				/* working sets */
+				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
+				
+				if (oldProjectsDeleted){
+					/* restore project metadata. */
+					try {
+						importProgressMessage(monitor, "Rebuilding meta data of formerly closed projects");
+						restoreMetaDataCache(projectMetaDataCacheSupport, closedProjectCacheData);
+
+						importProgressMessage(monitor, "Reconnecting team providers + build if necessary");
+						reconnectTeamProviderData(monitor, projectShareSupport, projectShareData);
+					} catch (Exception e) {
+						IDEUtil.logError("restore former project metadata + team provider from cache failed", e);
+					}
+				}
+				/* always drop cache */
+				if (closedProjectCacheData!=null){
+					importProgressMessage(monitor, "Drop meta data cache");
+					closedProjectCacheData.drop();
+				}
+
 				if (autoBuildEnabled) {
 					try {
 						setWorkspaceAutoBuild(true);
 					} catch (CoreException e) {
-						IDEUtil.logError("Reenabling workspace auto build failed!", e);
+						IDEUtil.logError("Re-Enabling workspace auto build failed!", e);
 					}
 				}
-				/* working sets*/
-				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
-				
-				/* team share again...*/
-				restoreTeamProviderConnections(projectShareSupport, closedProjectShareData);
 			}
 
 		}
 
-		private void restoreTeamProviderConnections(ProjectShareSupport projectShareSupport,
-				ProjectShareData closedProjectShareData) {
-			
-			
+		protected void reconnectTeamProviderData(IProgressMonitor monitor, ProjectShareSupport projectShareSupport,
+				ProjectShareData projectShareData) {
+			if (projectShareSupport==null){
+				return;
+			}
+			if (projectShareData==null){
+				return;
+			}
 			IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 			if (allProjects != null) {
 				List<IProject> projectsList = Arrays.asList(allProjects);
-				projectShareSupport.reconnectToTeamProviders(closedProjectShareData,projectsList);
+				projectShareSupport.reconnectToTeamProviders(monitor, projectShareData, projectsList);
 			}
 		}
+
+		private void restoreMetaDataCache(ProjectMetaDataCacheSupport cacheSupport,
+				ProjectCacheData closedProjectCacheData) throws IOException {
+			if (cacheSupport==null){
+				return;
+			}
+			if (closedProjectCacheData==null){
+				return;
+			}
+
+			IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+			if (allProjects != null) {
+				List<IProject> projectsList = Arrays.asList(allProjects);
+				cacheSupport.restoreMetaData(closedProjectCacheData, projectsList);
+			}
+		}
+		
 
 		public void restoreVirtualRootWithWorkingSets(WorkingSetSupport workingSetSupport,
 				List<WorkingSetData> virtualRootWorkingSets) throws VirtualRootProjectException {
@@ -283,10 +339,10 @@ public class RootProjectImportSupport {
 
 		protected void restoreWorkingSets(WorkingSetSupport workingSetSupport,
 				List<WorkingSetData> closedProjectWorksetData) {
-			if (workingSetSupport==null){
+			if (workingSetSupport == null) {
 				return;
 			}
-			if (closedProjectWorksetData==null){
+			if (closedProjectWorksetData == null) {
 				return;
 			}
 
@@ -406,6 +462,12 @@ public class RootProjectImportSupport {
 	}
 
 	private void importProgressMessage(IProgressMonitor monitor, String message) {
+		if (monitor == null){
+			return;
+		}
+		if (message==null){
+			return;
+		}
 		monitor.subTask(message);
 		getSystemConsoleOutputHandler().output(">>" + message);
 	}

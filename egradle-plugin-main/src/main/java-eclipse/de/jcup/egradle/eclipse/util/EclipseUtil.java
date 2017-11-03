@@ -195,6 +195,11 @@ public class EclipseUtil {
 		getSafeDisplay().asyncExec(runnable);
 	}
 
+	public static void safeSyncExec(Runnable runnable) {
+		getSafeDisplay().asyncExec(runnable);
+	}
+	
+
 	public static void throwCoreException(String message) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message));
 
