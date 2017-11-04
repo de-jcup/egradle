@@ -15,7 +15,6 @@
  */
  package de.jcup.egradle.eclipse.preferences;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.RGB;
 
