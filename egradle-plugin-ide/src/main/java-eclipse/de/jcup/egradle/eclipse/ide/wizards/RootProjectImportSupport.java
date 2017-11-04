@@ -68,6 +68,7 @@ public class RootProjectImportSupport {
 	String gradleInstallPath;
 	EGradleShellType shell;
 	String callTypeId;
+	boolean restoreMetadata;
 
 	private AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler;
 
@@ -141,8 +142,10 @@ public class RootProjectImportSupport {
 				}
 				workingSetSupport = new WorkingSetSupport();
 				
-				projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
-				projectShareSupport = new ProjectShareSupport();
+				if (restoreMetadata){
+					projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
+					projectShareSupport = new ProjectShareSupport();
+				}
 
 				IProject virtualRootProject = getVirtualRootProject();
 				List<WorkingSetData> virtualRootWorkingSets = workingSetSupport
@@ -157,12 +160,14 @@ public class RootProjectImportSupport {
 				/* store working set information */
 				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
-				try {
-					closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
-				} catch (Exception e) {
-					IDEUtil.logError("Cannot create meta data cache!", e);
+				if (restoreMetadata){
+					try {
+						closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
+						projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
+					} catch (Exception e) {
+						IDEUtil.logError("Cannot create meta data cache!", e);
+					}
 				}
-				projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
 
 				GradleRootProject rootProject = new GradleRootProject(newRootFolder);
 
@@ -263,8 +268,8 @@ public class RootProjectImportSupport {
 				/* working sets */
 				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
 				
-				if (oldProjectsDeleted){
-					/* restore project metadata. */
+				if (restoreMetadata && oldProjectsDeleted){
+					/* restore project meta data. */
 					try {
 						importProgressMessage(monitor, "Rebuilding meta data of formerly closed projects");
 						restoreMetaDataCache(projectMetaDataCacheSupport, closedProjectCacheData);

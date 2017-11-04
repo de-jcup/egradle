@@ -21,22 +21,28 @@ public enum RootProjectConfigMode {
 	/* @formatter:off*/
 	IMPORT_PROJECTS(
 			VALIDATION_GROUP_NEEDED, 
-			ROOTPATH_EDITABLE),
+			ROOTPATH_EDITABLE,
+			RESTORE_METADATA_CHECKBOX_NOT_NEEDED),
 	
 	REIMPORT_PROJECTS(
 			NO_VALIDATION_GROUP_NEEDED,
-			ROOTPATH_NOT_EDITABLE),
+			ROOTPATH_NOT_EDITABLE,
+			RESTORE_METADATA_CHECKBOX_NEEDED),
 	
 	NEW_PROJECT_WIZARD(
 			NO_VALIDATION_GROUP_NEEDED,
-			ROOTPATH_NOT_EDITABLE)
+			ROOTPATH_NOT_EDITABLE,
+			RESTORE_METADATA_CHECKBOX_NOT_NEEDED)
 	;
 	/* @formatter:on*/
 	private boolean validationGroupNeeded;
 	private boolean rootPathDirectoryEditable;
+	private boolean restoreMetaDataCheckboxNeeded;
 
-	private RootProjectConfigMode(boolean validationGroupNeeded, boolean rootPathDirectoryEditable) {
+	private RootProjectConfigMode(boolean validationGroupNeeded, boolean rootPathDirectoryEditable, boolean restoreMetaDataCheckboxNeeded) {
 		this.validationGroupNeeded = validationGroupNeeded;
+		this.rootPathDirectoryEditable=rootPathDirectoryEditable;
+		this.restoreMetaDataCheckboxNeeded=restoreMetaDataCheckboxNeeded;
 	}
 
 	public boolean isValidationGroupNeeded() {
@@ -45,5 +51,9 @@ public enum RootProjectConfigMode {
 
 	public boolean isRootPathDirectoryEditable() {
 		return rootPathDirectoryEditable;
+	}
+
+	public boolean isRestoreMetaDataCheckBoxNeeded() {
+		return restoreMetaDataCheckboxNeeded;
 	}
 }

@@ -87,6 +87,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 		}
 		/* fetch data inside SWT thread */
 		importSupport.globalJavaHome = mainPage.getGlobalJavaHomePath();
+		importSupport.restoreMetadata = mainPage.isRestoringMetaData();
 
 		importSupport.gradleInstallPath = mainPage.getGradleBinDirectory();
 		importSupport.shell = mainPage.getShellCommand();

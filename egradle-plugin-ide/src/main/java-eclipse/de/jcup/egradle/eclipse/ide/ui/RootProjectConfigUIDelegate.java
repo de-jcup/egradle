@@ -66,6 +66,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 	private RootProjectValidationHandler validation;
 	private RootProjectConfigMode mode;
+	private Button restoreMetaDataCheckbox;
 
 	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation) {
 		this(validation, null);
@@ -93,7 +94,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		createGradleCallTypeGroup(parent);
 		createValidationGroup(parent);
 	}
-
+	
 	private void createValidationGroup(Composite parent) {
 		if (! mode.isValidationGroupNeeded()){
 			return;
@@ -309,10 +310,9 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
-		if (mode.isRootPathDirectoryEditable()){
+		if (! mode.isRootPathDirectoryEditable()){
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
 		}
-		
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME (optional)",
 				defaultGroup);
@@ -326,6 +326,11 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		javaHomeTextControl.setLayoutData(directoryTextLayout);
 		
 		addField(defaultJavaHomeDirectoryEditor);
+		
+		/* restore meta data */
+		if (mode.isRestoreMetaDataCheckBoxNeeded()) {
+			restoreMetaDataCheckbox = SWTFactory.createCheckButton(defaultGroup, "Restore former meta data (e.g. Team provider data)", null, true, SWT.LEFT);
+		}
 	}
 
 	Image getValidationButtonImage() {
@@ -448,6 +453,13 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 	public String getGlobalJavaHomePath() {
 		return defaultJavaHomeDirectoryEditor.getStringValue();
+	}
+	
+	public boolean isRestoringMetaData(){
+		if (restoreMetaDataCheckbox==null){
+			return false;
+		}
+		return restoreMetaDataCheckbox.getSelection();
 	}
 
 	private String getShellId() {

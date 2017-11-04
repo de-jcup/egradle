@@ -96,6 +96,10 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	public String getGlobalJavaHomePath() {
 		return configComposite.getGlobalJavaHomePath();
 	}
+	
+	public boolean isRestoringMetaData(){
+		return configComposite.isRestoringMetaData();
+	}
 
 	public String getGradleRootProjectPath() {
 		return configComposite.getGradleRootPathText();
