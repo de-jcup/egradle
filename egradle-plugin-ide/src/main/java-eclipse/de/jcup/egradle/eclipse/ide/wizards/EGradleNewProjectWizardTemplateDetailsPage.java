@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.wizards;
+package de.jcup.egradle.eclipse.ide.wizards;
 
 import static de.jcup.egradle.eclipse.ui.SWTUtil.*;
 
@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Text;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.ide.NewProjectContext;
+import de.jcup.egradle.ide.NewProjectTemplateVariables;
 import de.jcup.egradle.template.FileStructureTemplate;
 
 public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
@@ -43,6 +44,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private Text javaHomeText;
 	private Group commonGroup;
 	private Text gradleGroupNameText;
+	private Text gradleVersionText;
 
 	public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
 		super("templateDetails");
@@ -63,7 +65,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		initCommonParts(composite);
 		initMultiProjectParts(composite);
 		initJavaParts(composite);
-		
+
 		// Show description on opening
 		setErrorMessage(null);
 		setMessage(null);
@@ -77,10 +79,21 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private void initCommonParts(Composite composite) {
 		commonGroup = SWTFactory.createGroup(composite, "Common", 1, SWT.FILL, SWT.FILL);
 		commonGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		SWTFactory.createLabel(commonGroup, "Please enter group name", SWT.FILL);
 		gradleGroupNameText = SWTFactory.createSingleText(commonGroup, 1);
 		gradleGroupNameText.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				setPageComplete(validatePage());
+			}
+		});
+
+		SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
+		gradleVersionText = SWTFactory.createSingleText(commonGroup, 1);
+		gradleVersionText.setMessage(NewProjectTemplateVariables.VAR__GRADLE__VERSION.getDefaultValue());
+		gradleVersionText.addModifyListener(new ModifyListener() {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -92,7 +105,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private void initMultiProjectParts(Composite composite) {
 		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
 		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
 		multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
 
@@ -109,9 +122,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private void initJavaParts(Composite composite) {
 		javaGroup = SWTFactory.createGroup(composite, "Java", 1, SWT.FILL, SWT.FILL);
 		javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		
-		
+
 		SWTFactory.createLabel(javaGroup, "Please enter source compatibility level", SWT.FILL);
 		javaSourceCompatibilityText = SWTFactory.createSingleText(javaGroup, 1);
 		javaSourceCompatibilityText.setText("1.8");
@@ -121,7 +132,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 				setPageComplete(validatePage());
 			}
 		});
-		
+
 		SWTFactory.createLabel(javaGroup, "JAVA_HOME for gradle (optional)", SWT.FILL);
 		javaHomeText = SWTFactory.createSingleText(javaGroup, 1);
 		javaHomeText.setText(IDEUtil.getPreferences().getGlobalJavaHomePath());
@@ -134,7 +145,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		});
 
 	}
-	
+
 	private boolean validatePage() {
 		FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
 		if (selectedTemplate == null) {
@@ -145,11 +156,13 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		 * feature is enabled.
 		 */
 		String groupName = gradleGroupNameText.getText();
+		String gradleVersion = gradleVersionText.getText();
 		String multiProjects = multiProjectNamesText.getText();
 		String javaSourceCompatibility = javaSourceCompatibilityText.getText();
 		String javaHome = javaHomeText.getText();
-		
+
 		context.setJavaHome(javaHome);
+		context.setGradleVersion(gradleVersion);
 		context.setGroupName(groupName);
 		context.setMultiProjects(multiProjects);
 		context.setJavaSourceCompatibility(javaSourceCompatibility);
@@ -180,14 +193,15 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 			return;
 		}
 		composite.setVisible(true);
-		setDescription("Define details for template '" + selectedTemplate.getName()+"'");
+		setDescription("Define details for template '" + selectedTemplate.getName() + "'");
 
 		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());
 		// Use message to show default value, will always return when user
-		// user has no content there. The "" is to ensure message can never be null...
-		gradleGroupNameText.setMessage(""+context.getProjectName());
+		// user has no content there. The "" is to ensure message can never be
+		// null...
+		gradleGroupNameText.setMessage("" + context.getProjectName());
 	}
 
 }

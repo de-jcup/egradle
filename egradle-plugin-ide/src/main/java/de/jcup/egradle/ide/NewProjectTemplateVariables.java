@@ -13,25 +13,46 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.ide;
+package de.jcup.egradle.ide;
 
-public enum NewProjectTemplateVariables implements TemplateVariable{
-	
-	VAR__NAME_OF_TEMPLATE ("egradle.template.name"),
-	VAR__NAME_OF_PROJECT ("egradle.template.projectname"),
-	VAR__NAME_OF_GROUP ("egradle.template.groupname"),
-	VAR__NAME_OF_SUBPROJECT ("egradle.template.subprojectname"),
-	VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS ("egradle.template.subprojects.include"),
+public enum NewProjectTemplateVariables implements TemplateVariable {
+
+	VAR__NAME_OF_TEMPLATE("egradle.template.name"),
+
+	VAR__NAME_OF_PROJECT("egradle.template.projectname"),
+
+	VAR__NAME_OF_GROUP("egradle.template.groupname"),
+
+	VAR__NAME_OF_SUBPROJECT("egradle.template.subprojectname"),
+
+	VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS("egradle.template.subprojects.include"),
+
 	VAR__JAVA__VERSION("egradle.template.java.version"),
-	;
-	
-	private String variableName;
 
-	private NewProjectTemplateVariables(String variableName){
-		this.variableName=variableName;
+	VAR__GRADLE__VERSION("egradle.template.gradle.version","4.3"),;
+
+	private String variableName;
+	private String defaultValue;
+
+	private NewProjectTemplateVariables(String variableName) {
+		this(variableName, null);
 	}
-	
+
+	private NewProjectTemplateVariables(String variableName, String defaultValue) {
+		this.variableName = variableName;
+		this.defaultValue = defaultValue;
+	}
+
 	public String getVariableName() {
 		return variableName;
 	}
+
+	public boolean hasDefaultValue() {
+		return defaultValue != null;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
 }

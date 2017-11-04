@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.ide;
+package de.jcup.egradle.ide;
 
 import static de.jcup.egradle.ide.NewProjectTemplateVariables.*;
 
@@ -41,6 +41,8 @@ public class NewProjectContext {
 	private String javaHome;
 
 	private String groupName;
+
+	private String gradleVersion;
 
 	public String getJavaSourceCompatibility() {
 		return javaSourceCompatibility;
@@ -72,7 +74,7 @@ public class NewProjectContext {
 		}
 		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_HEADLESS_IMPORT);
 	}
-	
+
 	public boolean isMultiProject() {
 		if (selectedTemplate == null) {
 			return false;
@@ -150,12 +152,24 @@ public class NewProjectContext {
 		this.selectedTemplate = selectedTemplate;
 	}
 
+	public void setGradleVersion(String version) {
+		this.gradleVersion = version;
+	}
+
+	public String getGradleVersion() {
+		if (gradleVersion == null || gradleVersion.trim().length() == 0) {
+			gradleVersion = VAR__GRADLE__VERSION.getDefaultValue();
+		}
+		return gradleVersion;
+	}
+
 	public Properties toProperties() {
 		Properties p = new Properties();
 		set(p, VAR__JAVA__VERSION, getJavaSourceCompatibility());
 		set(p, VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS, getMultiProjectsAsIncludeString());
 		set(p, VAR__NAME_OF_PROJECT, getProjectName());
 		set(p, VAR__NAME_OF_GROUP, getGroupName());
+		set(p, VAR__GRADLE__VERSION, getGradleVersion());
 		String templateName = null;
 		if (selectedTemplate != null) {
 			templateName = selectedTemplate.getName();
@@ -201,12 +215,12 @@ public class NewProjectContext {
 			}
 			if (StringUtils.isNotBlank(javaHome)) {
 				File file = new File(javaHome);
-				if (!file.exists()){
-					lastValidationProblem = javaHome+" does not exist!";
+				if (!file.exists()) {
+					lastValidationProblem = javaHome + " does not exist!";
 					return false;
 				}
-				if (!file.isDirectory()){
-					lastValidationProblem = javaHome+" is not a directory!";
+				if (!file.isDirectory()) {
+					lastValidationProblem = javaHome + " is not a directory!";
 					return false;
 				}
 			}

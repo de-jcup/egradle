@@ -13,8 +13,19 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.ide;
+package de.jcup.egradle.ide;
 
 public interface TemplateVariable {
 	public String getVariableName();
+
+	/**
+	 * 
+	 * @return <code>true</code> when this variable supports default values
+	 */
+	public boolean hasDefaultValue();
+
+	/**
+	 * @return default value or <code>null</code> when having no default value
+	 */
+	public String getDefaultValue();
 }
