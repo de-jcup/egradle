@@ -13,9 +13,37 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.ui;
+package de.jcup.egradle.eclipse.ide.ui;
 
-public enum RootProjectConfigMode{
-	USER,
-	PREDEFINED_VALUES
+import static de.jcup.egradle.eclipse.ide.ui.RootProjectConfigModeConstants.*;
+
+public enum RootProjectConfigMode {
+	/* @formatter:off*/
+	IMPORT_PROJECTS(
+			VALIDATION_GROUP_NEEDED, 
+			ROOTPATH_EDITABLE),
+	
+	REIMPORT_PROJECTS(
+			NO_VALIDATION_GROUP_NEEDED,
+			ROOTPATH_NOT_EDITABLE),
+	
+	NEW_PROJECT_WIZARD(
+			NO_VALIDATION_GROUP_NEEDED,
+			ROOTPATH_NOT_EDITABLE)
+	;
+	/* @formatter:on*/
+	private boolean validationGroupNeeded;
+	private boolean rootPathDirectoryEditable;
+
+	private RootProjectConfigMode(boolean validationGroupNeeded, boolean rootPathDirectoryEditable) {
+		this.validationGroupNeeded = validationGroupNeeded;
+	}
+
+	public boolean isValidationGroupNeeded() {
+		return validationGroupNeeded;
+	}
+
+	public boolean isRootPathDirectoryEditable() {
+		return rootPathDirectoryEditable;
+	}
 }

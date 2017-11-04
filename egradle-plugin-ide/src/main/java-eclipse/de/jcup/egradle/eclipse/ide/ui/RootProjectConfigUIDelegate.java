@@ -74,7 +74,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation, RootProjectConfigMode rootProjectConfigMode) {
 		this.validation = validation;
 		if (rootProjectConfigMode==null){
-			this.mode=RootProjectConfigMode.USER;
+			this.mode=RootProjectConfigMode.IMPORT_PROJECTS;
 		}else{
 			this.mode=rootProjectConfigMode;
 		}
@@ -95,8 +95,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	}
 
 	private void createValidationGroup(Composite parent) {
-		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
-			/* no validation group*/
+		if (! mode.isValidationGroupNeeded()){
 			return;
 		}
 		/* ------------------------------------ */
@@ -310,7 +309,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
-		if (RootProjectConfigMode.PREDEFINED_VALUES.equals(mode)){
+		if (mode.isRootPathDirectoryEditable()){
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
 		}
 		

@@ -33,7 +33,7 @@ public class ReimportGradleProjectHandler extends AbstractHandler {
 		Shell activeShell = HandlerUtil.getActiveShell(event);
 
 		EGradleRootProjectImportWizard wizard = new EGradleRootProjectImportWizard();
-		wizard.setImportMode(RootProjectConfigMode.PREDEFINED_VALUES);
+		wizard.setImportMode(RootProjectConfigMode.REIMPORT_PROJECTS);
 		wizard.setWindowTitle("Reimport project(s)");
 		
 		WizardDialog dialog = new WizardDialog(activeShell, wizard);
