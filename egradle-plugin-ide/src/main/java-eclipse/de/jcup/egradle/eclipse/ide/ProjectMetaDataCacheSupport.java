@@ -2,6 +2,8 @@ package de.jcup.egradle.eclipse.ide;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,18 +160,8 @@ public class ProjectMetaDataCacheSupport {
 
 		private File getCacheFolder() throws IOException {
 			if (cacheFolder == null) {
-				final File temp;
-
-				temp = File.createTempFile("egradle_project_metacache", Long.toString(System.nanoTime()));
-
-				if (!(temp.delete())) {
-					throw new IOException("Could not delete cache temp file: " + temp.getAbsolutePath());
-				}
-
-				if (!(temp.mkdirs())) {
-					throw new IOException("Could not create cachetemp directory: " + temp.getAbsolutePath());
-				}
-				cacheFolder = temp;
+				Path tempPath = Files.createTempDirectory("egradle_project_metacache");
+				cacheFolder = tempPath.toFile();
 				if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING) {
 					IDEUtil.logInfo("Created cache folder:" + cacheFolder);
 				}
