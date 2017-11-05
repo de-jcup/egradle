@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature.core"
       label="EGradle Core"
-      version="2.2.1"
+      version="2.3.0"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 
