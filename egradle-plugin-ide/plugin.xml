@@ -225,6 +225,13 @@
                id="egradle.toolbars.mainToolbar"
                label="EGradle Toolbar">
             <command
+            	  commandId="egradle.commands.newGradleProject"
+                  icon="icons/create_gradle_project.png"
+                  id="egradle.toolbars.createGradleProject"
+                  label="Create new gradle project"
+                  tooltip="Createa new gradle project.">
+            </command>
+            <command
                   commandId="egradle.commands.refreshEclipse"
                   icon="icons/refreshAllEclipseDependencies.png"
                   id="egradle.toolbars.refreshEclipseCommand"
@@ -244,13 +251,6 @@
                   id="egradle.toolbars.quickTaskExecution"
                   label="EGradle quick launch"
                   tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
-            </command>
-            <command
-            	  commandId="egradle.commands.newGradleProject"
-                  icon="icons/create_gradle_project.png"
-                  id="egradle.toolbars.createGradleProject"
-                  label="Create new gradle project"
-                  tooltip="Createa new gradle project.">
             </command>
          </toolbar>
       </menuContribution>
