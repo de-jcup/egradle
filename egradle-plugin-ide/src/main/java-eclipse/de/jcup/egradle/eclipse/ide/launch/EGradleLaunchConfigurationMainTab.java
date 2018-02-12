@@ -49,6 +49,7 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
+	private Text rootProjectPathField;
 	private Text projectNameField;
 	private Text optionsField;
 	private TaskUIPartsDelegate taskUIPartsDelegate;
@@ -103,6 +104,25 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		gridDataLastColumn.minimumHeight = 50;
 		gridDataLastColumn.heightHint = 100;
 
+		/* ------------------------------------ */
+		/* - Root path - */
+		/* ------------------------------------ */
+		Label rootPathLabel = new Label(composite, SWT.NULL);
+		rootPathLabel.setText("Root path:");
+		rootPathLabel.setLayoutData(labelGridData);
+
+		rootProjectPathField = new Text(composite, SWT.BORDER);
+		rootProjectPathField.setLayoutData(gridDataSingleLine);
+		rootProjectPathField.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
+		rootProjectPathField.setToolTipText(
+				"When empty the root path from preferences is used.");
 		/* ------------------------------------ */
 		/* - Project - */
 		/* ------------------------------------ */
@@ -179,6 +199,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			taskUIPartsDelegate.setTaskFieldText(configuration);
+			rootProjectPathField.setText(configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH, ""));
 			projectNameField.setText(configuration.getAttribute(PROPERTY_PROJECTNAME, ""));
 			optionsField.setText(configuration.getAttribute(PROPERTY_OPTIONS, ""));
 		} catch (CoreException e) {
@@ -226,6 +247,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		taskUIPartsDelegate.applyTasks(configuration);
+		configuration.setAttribute(PROPERTY_ROOT_PROJECT_PATH, rootProjectPathField.getText());
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
 		configuration.setAttribute(PROPERTY_OPTIONS, optionsField.getText());
 	}

@@ -70,6 +70,7 @@ public class TestUtil {
 	
 	public static final File ROOTFOLDER_2_NO_ECLIPSE_PROJECT1 = new File(ROOTFOLDER_2, "no-eclipse-project1");
 	public static final File ROOTFOLDER_2_NO_ECLIPSE_PROJECT2 = new File(ROOTFOLDER_2, "no-eclipse-project1");
+	public static final File ROOTFOLDER_2_NO_ECLIPSE_PROJECT2_README = new File(ROOTFOLDER_2_NO_ECLIPSE_PROJECT2, "readme.txt");
 	
 	/**
 	 * Rootfolder 4 - contains only gradle test files used by parser tests

@@ -253,7 +253,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 						}
 						if (browserEGradleLinkListener.isAcceptingHyperlink(backContent)) {
 							if (isDebugEnabled()) {
-								debug("history detected for type, so use link handler");
+								debug("history detected for type, so use link outputHandler");
 							}
 							browserEGradleLinkListener.onEGradleHyperlinkClicked(SimpleBrowserInformationControl.this,
 									backContent);

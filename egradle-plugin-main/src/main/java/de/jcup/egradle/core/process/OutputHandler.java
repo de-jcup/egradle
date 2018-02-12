@@ -18,7 +18,7 @@ package de.jcup.egradle.core.process;
 public interface OutputHandler {
 	
 	/**
-	 * Output handler does nothing
+	 * Output outputHandler does nothing
 	 */
 	public static final NoOutputHandler NO_OUTPUT = new NoOutputHandler();
 	

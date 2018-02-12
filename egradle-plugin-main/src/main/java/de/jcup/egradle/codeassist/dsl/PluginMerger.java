@@ -44,7 +44,7 @@ public class PluginMerger {
 			throw new IllegalArgumentException("provider must not be null!");
 		}
 		if (errorHandler == null) {
-			throw new IllegalArgumentException("error handler must not be null!");
+			throw new IllegalArgumentException("error outputHandler must not be null!");
 		}
 		this.provider = provider;
 		this.errorHandler = errorHandler;

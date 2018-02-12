@@ -49,8 +49,10 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import de.jcup.egradle.core.Constants;
+import de.jcup.egradle.core.util.RootProjectFinder;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
+
 /**
  * Short cut launcher for EGradle
  * 
@@ -58,7 +60,8 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
  *
  */
 public class EGradleLaunchShortCut implements ILaunchShortcut2 {
-	
+
+	RootProjectFinder rootProjectFinder = new RootProjectFinder();
 
 	public IResource getLaunchableResource(IEditorPart editorpart) {
 		return getLaunchableResource(editorpart.getEditorInput());
@@ -150,7 +153,8 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	/**
 	 * Creates and returns a new configuration based on the specified type.
 	 * 
-	 * @param additionalScope additional scope which can be given
+	 * @param additionalScope
+	 *            additional scope which can be given
 	 * @param type
 	 *            type to create a launch configuration for
 	 * 
@@ -177,7 +181,7 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
 			Object additionalScope) {
-		if (StringUtils.isBlank(projectName)){
+		if (StringUtils.isBlank(projectName)) {
 			return "RootProject";
 		}
 		return projectName;
@@ -185,10 +189,30 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 
 	protected void createCustomConfiguration(IResource resource, Object additionalScope,
 			ILaunchConfigurationWorkingCopy wc, String projectName) {
+		createRootPathConfiguration(wc, resource);
 		createProjectNameConfiguration(wc, projectName);
 		createTaskConfiguration(wc);
-
 		wc.setMappedResources(new IResource[] { getResourceToMap(resource) });
+	}
+
+	private void createRootPathConfiguration(ILaunchConfigurationWorkingCopy wc, IResource resource) {
+		if (resource == null) {
+			return;
+		}
+		try {
+			File file = getResourceHelper().toFile(resource);
+
+			File rootProjectFolder = rootProjectFinder.findRootProjectFolder(file);
+			if (rootProjectFolder == null) {
+				wc.setAttribute(PROPERTY_ROOT_PROJECT_PATH, "");
+			} else {
+				String absolutePath = rootProjectFolder.getAbsolutePath();
+				wc.setAttribute(PROPERTY_ROOT_PROJECT_PATH, absolutePath);
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException("Was not able to create a root path configuration", e);
+		}
 	}
 
 	protected IResource getResourceToMap(IResource resource) {
@@ -239,13 +263,18 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	}
 
 	protected void createProjectNameConfiguration(ILaunchConfigurationWorkingCopy wc, String projectName) {
+		/*
+		 * FIXME ATR, 12.02.2018: other root folder detection makes problems
+		 * currently!
+		 */
 		setProjectNameIgnoreVirtualRootProjectNames(wc, projectName);
 	}
 
-	public static void setProjectNameIgnoreVirtualRootProjectNames(ILaunchConfigurationWorkingCopy wc, String projectName) {
-		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(projectName)){
-			wc.setAttribute(PROPERTY_PROJECTNAME,"");
-		}else{
+	public static void setProjectNameIgnoreVirtualRootProjectNames(ILaunchConfigurationWorkingCopy wc,
+			String projectName) {
+		if (Constants.VIRTUAL_ROOTPROJECT_NAME.equals(projectName)) {
+			wc.setAttribute(PROPERTY_PROJECTNAME, "");
+		} else {
 			wc.setAttribute(PROPERTY_PROJECTNAME, projectName);
 		}
 	}
@@ -255,17 +284,33 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 	}
 
 	private String createGradleProjectName(IResource resource) {
+		if (resource == null) {
+			throw new IllegalArgumentException("Resource may not be null!");
+		}
 		IProject project = resource.getProject();
+		if (project == null) {
+			throw new IllegalStateException("Cannot determine project for resource:" + resource.getName());
+		}
 		if (hasVirtualRootProjectNature(project)) {
 			return "";
 		}
-		/* when the project itself is the root - leave project name empty!*/
-		if (isRootProject(project)){
+		/* when the project itself is the root - leave project name empty! */
+		if (isRootProject(project)) {
 			return "";
 		}
+
 		try {
-			File projectRealFolderName = getResourceHelper().toFile(project);
-			return projectRealFolderName.getName();
+			File projectRealFolder = getResourceHelper().toFile(project);
+			if (projectRealFolder == null) {
+				throw new IllegalStateException("Cannot determine real project folder for" + project.getName());
+			}
+			File rootFolder = rootProjectFinder.findRootProjectFolder(projectRealFolder);
+			if (projectRealFolder.equals(rootFolder)) {
+				// is a root folder!
+				return "";
+			}
+
+			return projectRealFolder.getName();
 		} catch (CoreException e) {
 			throw new IllegalStateException(e);
 		}
@@ -305,8 +350,8 @@ public class EGradleLaunchShortCut implements ILaunchShortcut2 {
 		 * decides. E.g. standard way is that only project is the marked
 		 * identifier, so files and folders selected will result in their
 		 * project. A junit integration could support selected test files also,
-		 * Reason for this beahviour: We would get too much launch
-		 * configuration for selections doing exact same stuff
+		 * Reason for this beahviour: We would get too much launch configuration
+		 * for selections doing exact same stuff
 		 */
 		IResource resource = getResourceToMap(selectedResource);
 		List<ILaunchConfiguration> candidateConfigs = Collections.emptyList();

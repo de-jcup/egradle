@@ -34,7 +34,7 @@ import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.GradleJob;
 import de.jcup.egradle.eclipse.ide.execution.GradleRunnableWithProgress;
 /**
- * Abstract base handler for egradle command executions
+ * Abstract base outputHandler for egradle command executions
  * 
  * @author Albert Tregnaghi
  *

@@ -35,7 +35,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 	
 	public static final String MESSAGE__EXECUTION_CANCELED_BY_USER = "[Execution CANCELED by user]";
 	
-	protected OutputHandler handler;
+	protected OutputHandler outputHandler;
 	private boolean handleProcessOutputStream;
 	private long timeOutInSeconds=ENDLESS_RUNNING;
 	/**
@@ -48,7 +48,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		if (outputHandler==null){
 			outputHandler= OutputHandler.NO_OUTPUT;
 		}
-		this.handler = outputHandler;
+		this.outputHandler = outputHandler;
 		this.handleProcessOutputStream=handleProcessOutputStream;
 		this.timeOutInSeconds = timeOutInSeconds;
 	}
@@ -86,7 +86,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		Process p = startProcess(pb);
 		ProcessTimeoutTerminator timeoutTerminator = null;
 		if (timeOutInSeconds!=ENDLESS_RUNNING){
-			timeoutTerminator = new ProcessTimeoutTerminator(p,handler,timeOutInSeconds);
+			timeoutTerminator = new ProcessTimeoutTerminator(p,outputHandler,timeOutInSeconds);
 			timeoutTerminator.start();
 		}
 		ProcessCancelTerminator cancelTerminator = new ProcessCancelTerminator(p, processContext.getCancelStateProvider());
@@ -137,7 +137,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		public void run() {
 			while (isAlive(process)) {
 				if (cancelStateProvider.isCanceled()){
-					handler.output(MESSAGE__EXECUTION_CANCELED_BY_USER);
+					outputHandler.output(MESSAGE__EXECUTION_CANCELED_BY_USER);
 					process.destroy();
 					break;
 				}
@@ -175,7 +175,7 @@ public class SimpleProcessExecutor implements ProcessExecutor {
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))){
 			String line = null;
 			while ((!cancelStateProvider.isCanceled()) && (line = reader.readLine()) != null) {
-				handler.output(line);
+				outputHandler.output(line);
 				if (timeoutTerminator!=null){
 					if (isOutputRestartingTimeout()){
 						timeoutTerminator.reset();

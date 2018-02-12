@@ -115,9 +115,9 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		EGradleRuntimeProcess rp = EGradleRuntimeProcess.create(launch, process, label, attributes);
 		// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
 
-		handler.output("Launch started - for details see output of " + label);
+		outputHandler.output("Launch started - for details see output of " + label);
 		if (!rp.canTerminate()) {
-			handler.output("Started process cannot terminate");
+			outputHandler.output("Started process cannot terminate");
 		}
 	}
 	

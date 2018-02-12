@@ -92,7 +92,7 @@ public class IDEUtil {
 			"de.jcup.egradle.script.problem");
 
 	/**
-	 * @return system console output handler, never <code>null</code>
+	 * @return system console output outputHandler, never <code>null</code>
 	 */
 	public static OutputHandler getSystemConsoleOutputHandler() {
 		if (systemConsoleOutputHandler == null) {

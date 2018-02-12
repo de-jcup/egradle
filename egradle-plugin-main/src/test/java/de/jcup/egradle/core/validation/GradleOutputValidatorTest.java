@@ -261,7 +261,7 @@ public class GradleOutputValidatorTest {
 	 * Assert output in test is not larger than in real world
 	 * <br><br>
 	 * This is not optimal and tests another component part, but it tests that each output created by this tests, does not exceed the current shrink limit.
-	 * Otherwise the tests will not fail but it will not work in EGradle, because the console line handler shrinks the output to the limit given in 
+	 * Otherwise the tests will not fail but it will not work in EGradle, because the console line outputHandler shrinks the output to the limit given in 
 	 * {@link DSLConstants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So everything what is tested here, has to work in EGradle too
 	 */
 	protected void assertTestOutputDoesNotExceedLimits() {

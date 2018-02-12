@@ -33,10 +33,13 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.domain.GradleSubproject;
 import de.jcup.egradle.core.process.OutputHandler;
+import de.jcup.egradle.core.util.StringUtilsAccess;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.EclipseLaunchProcessExecutor;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
@@ -45,12 +48,12 @@ import de.jcup.egradle.eclipse.ide.launch.LaunchParameterValues;
 import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 
 /**
- * This handler is only for launching. So complete mechanism is same as on
+ * This outputHandler is only for launching. So complete mechanism is same as on
  * normal handlers but it supports (and needs) a launch object as parameter as
  * well! <br>
  * </br>
- * The handler does produce a RuntimeProcess object which consumes console
- * output to handler
+ * The outputHandler does produce a RuntimeProcess object which consumes console
+ * output to outputHandler
  * 
  * @author Albert Tregnaghi
  *
@@ -92,6 +95,11 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
 				/* commands */
+				String rootProjectPath = configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH,(String)null);
+				if (! StringUtilsAccess.isBlank(rootProjectPath)){
+					context.switchRootProjectPath(rootProjectPath);
+				}
+				
 				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME,
 						"");
 				String commandString = null;
@@ -133,7 +141,7 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				extractVariables(context.getSystemProperties());
 				extractVariables(context.getEnvironment());
 
-			} catch (CoreException e) {
+			} catch (Exception e) {
 				IDEUtil.logError("Was not able to prepare launchconfiguration", e);
 			}
 		}

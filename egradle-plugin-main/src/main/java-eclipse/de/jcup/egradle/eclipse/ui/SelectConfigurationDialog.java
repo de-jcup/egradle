@@ -223,7 +223,7 @@ public class SelectConfigurationDialog extends Dialog {
 		data.horizontalSpan = 2;
 		combo.setLayoutData(data);
 
-		// Create the OK button and add a handler
+		// Create the OK button and add a outputHandler
 		// so that pressing it will set input
 		// to the entered value
 		Button ok = new Button(shell, SWT.PUSH);
@@ -239,7 +239,7 @@ public class SelectConfigurationDialog extends Dialog {
 			}
 		});
 
-		// Create the cancel button and add a handler
+		// Create the cancel button and add a outputHandler
 		// so that pressing it will set input to null
 		Button cancel = new Button(shell, SWT.PUSH);
 		cancel.setText("Cancel");

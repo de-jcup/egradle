@@ -17,10 +17,13 @@ package de.jcup.egradle.core.domain;
 
 import static org.apache.commons.lang3.Validate.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.ProcessContext;
 
@@ -44,7 +47,7 @@ public class GradleContext implements EnvironmentProvider, ProcessContext{
 	private Map<String, String> gradleProperties = new TreeMap<>();
 
 	private GradleCommand[] commands;
-	private GradleConfiguration configuration;
+	private MutableGradleConfiguration configuration;
 
 	public int amountOfWorkToDo = 1;
 
@@ -52,7 +55,7 @@ public class GradleContext implements EnvironmentProvider, ProcessContext{
 
 	private CancelStateProvider cancelStateProvider;
 
-	public GradleContext(GradleRootProject rootProject, GradleConfiguration configuration) {
+	public GradleContext(GradleRootProject rootProject, MutableGradleConfiguration configuration) {
 		notNull(rootProject, "root project may not be null!");
 		notNull(configuration, "'configuration' may not be null");
 		this.rootProject = rootProject;
@@ -163,4 +166,10 @@ public class GradleContext implements EnvironmentProvider, ProcessContext{
 		}
 		return cancelStateProvider;
 	}
+
+	public void switchRootProjectPath(String rootProjectPath) throws IOException {
+		configuration.setWorkingDirectory(rootProjectPath);
+		rootProject=new GradleRootProject(new File(rootProjectPath));
+	}
+
 }

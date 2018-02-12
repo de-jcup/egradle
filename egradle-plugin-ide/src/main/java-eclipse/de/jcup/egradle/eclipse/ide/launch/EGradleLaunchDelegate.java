@@ -15,8 +15,6 @@
  */
 package de.jcup.egradle.eclipse.ide.launch;
 
-import static de.jcup.egradle.eclipse.ide.launch.EGradleLauncherConstants.*;
-
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IParameter;
 import org.eclipse.core.commands.IParameterValues;
@@ -44,14 +42,6 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
-		String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
-		String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
-
-		executeByHandler(launch, projectName, options);
-
-	}
-
-	private void executeByHandler(ILaunch launch, String projectName, String options) throws CoreException {
 
 		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
 		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
@@ -121,7 +111,7 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	}
 
 	/**
-	 * Append additional launch parameters for gradle command handler. This is
+	 * Append additional launch parameters for gradle command outputHandler. This is
 	 * done inside UI Thread
 	 * 
 	 * @param launchParameterValues

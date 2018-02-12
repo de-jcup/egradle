@@ -26,7 +26,7 @@ public class RememberLastLinesOutputHandler implements OutputHandler {
 	OutputHandler chainedOutputHandler;
 	
 	/**
-	 * Creates an output handler which remembers maximum entries
+	 * Creates an output outputHandler which remembers maximum entries
 	 * max maximum entry amount to remember. When output exceeds amount of entries only the newest will remain
 	 * @param max 
 	 */

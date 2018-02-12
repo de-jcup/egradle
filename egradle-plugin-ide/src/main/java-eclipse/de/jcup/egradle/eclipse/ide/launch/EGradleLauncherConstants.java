@@ -19,6 +19,12 @@ import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public interface EGradleLauncherConstants {
 
+	/**
+	 * The path to the gradle root project. If set not the default root path from preferences shall be 
+	 * used but this one... So launch configurations can created not only for current root project.
+	 */
+	public static final String PROPERTY_ROOT_PROJECT_PATH = "rootProjectPath";
+
 	public static final String PROPERTY_TASKS = "tasks";
 	public static final String PROPERTY_PROJECTNAME = "projectName";
 	public static final String PROPERTY_OPTIONS = "options";

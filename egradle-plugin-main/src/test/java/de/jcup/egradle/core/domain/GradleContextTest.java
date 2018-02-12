@@ -22,11 +22,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.jcup.egradle.core.config.GradleConfiguration;
+import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.CancelStateProvider.NeverCanceled;
 
 public class GradleContextTest {
 
-	private GradleConfiguration configuration;
+	private MutableGradleConfiguration configuration;
 	private GradleRootProject rootProject;
 	private GradleContext contextToTest;
 	private CancelStateProvider mockedCancelStateProvider;
@@ -34,7 +35,7 @@ public class GradleContextTest {
 	@Before
 	public void before() {
 		rootProject = mock(GradleRootProject.class);
-		configuration = mock(GradleConfiguration.class);
+		configuration = mock(MutableGradleConfiguration.class);
 		contextToTest = new GradleContext(rootProject, configuration);
 		mockedCancelStateProvider = mock(CancelStateProvider.class);
 	}
