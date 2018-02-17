@@ -1,1 +1,1 @@
-// dummy for scannnig
+// include as a comment - should not lead to a multiproject detection in GradleRootProject class!

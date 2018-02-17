@@ -34,6 +34,7 @@ import de.jcup.egradle.core.SimpleRootFolderProvider;
 import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.core.VersionedFolderToUserHomeCopySupport;
 import de.jcup.egradle.core.util.LogAdapter;
+import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler;
 import de.jcup.egradle.eclipse.ide.migration.EGradle1_3ToEGradle2_0Migration;
 import de.jcup.egradle.eclipse.util.ColorManager;
 import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
@@ -67,6 +68,9 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 		startMigrationsWhereNecessary();
 
 		installTemplateManagers(context);
+		
+		/* initial refresh update command to current state */
+		UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 
 	}
 

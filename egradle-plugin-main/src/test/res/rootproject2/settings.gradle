@@ -1,1 +1,2 @@
-// dummy for scannnig
+include 'eclipse-project1',
+'eclipse-project2','no-eclipse-projec1','no-eclipse-projec2'

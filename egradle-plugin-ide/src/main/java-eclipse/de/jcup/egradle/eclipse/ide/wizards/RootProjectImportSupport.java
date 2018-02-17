@@ -59,6 +59,7 @@ import de.jcup.egradle.eclipse.ide.WorkingSetSupport.WorkingSetData;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
+import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 
@@ -293,6 +294,8 @@ public class RootProjectImportSupport {
 						IDEUtil.logError("Re-Enabling workspace auto build failed!", e);
 					}
 				}
+				
+				UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 			}
 
 		}

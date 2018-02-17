@@ -70,6 +70,7 @@ import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleFactory;
 import de.jcup.egradle.eclipse.ide.console.EGradleSystemConsoleProcessOutputHandler;
 import de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
+import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
@@ -288,6 +289,8 @@ public class IDEUtil {
 					LabelProviderChangedEvent event = new LabelProviderChangedEvent(decorator, projects);
 					decorator.fireLabelProviderChanged(event);
 				}
+				
+				UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 			}
 
 		});
@@ -436,10 +439,11 @@ public class IDEUtil {
 			throwCoreException("new root folder must be a directory, but is not :\n" + folder.getAbsolutePath());
 		}
 		IDEUtil.getPreferences().setRootProjectPath(folder.getAbsolutePath());
-		boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
+		EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 		try {
-			if (virtualRootExistedBefore) {
+			GradleRootProject rootProject = getRootProject();
+			if (rootProject !=null && rootProject.isMultiProject()) {
 				createOrRecreateVirtualRootProject();
 			}
 		} catch (VirtualRootProjectException e) {

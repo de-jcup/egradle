@@ -112,6 +112,9 @@ public class EclipseUtil {
 		return shell;
 	}
 
+	/**
+	 * @return active workbench window or <code>null</code>
+	 */
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		IWorkbench workbench = getWorkbench();
 		if (workbench == null) {
