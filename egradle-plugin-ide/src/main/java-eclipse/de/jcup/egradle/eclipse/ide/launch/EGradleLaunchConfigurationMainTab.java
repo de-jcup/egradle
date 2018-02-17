@@ -122,7 +122,8 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 			}
 		});
 		rootProjectPathField.setToolTipText(
-				"When empty the root path from preferences is used.");
+				"When not explicit defined, the root path from current EGradle Root Project is used.\n\nBut if defined you can execute also gradle tasks in other projects!");
+		rootProjectPathField.setMessage("EGradle Root Project: "+IDEUtil.getRootProject().getFolder().getAbsolutePath());
 		/* ------------------------------------ */
 		/* - Project - */
 		/* ------------------------------------ */
