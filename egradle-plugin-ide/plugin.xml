@@ -404,6 +404,32 @@
                          </with>
                       </visibleWhen>
                    </command>
+                    <command
+                         commandId=" egradle.commands.quickTaskExecution"
+                         icon="icons/quickTaskExecution.png"
+                         label="Quick launch"
+                  		 tooltip="Directly execute gradle tasks."
+                         style="push"
+                         >
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <and>
+                               <iterate
+                                     ifEmpty="false">
+                                  <adapt
+                                        type="org.eclipse.core.resources.IResource">
+                                     <test
+                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           value="true">
+                                     </test>
+                                  </adapt>
+                               </iterate>
+                            </and>
+                         </with>
+                      </visibleWhen>
+                   </command>
                    <command
                          commandId="egradle.commands.refreshEclipse"
                          icon="icons/refreshAllEclipseDependencies.png"
