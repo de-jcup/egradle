@@ -660,6 +660,8 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 	private void handleItemNames(Item item, String name, ItemTypeUpdater updater) {
 		if ("repositories".equals(name)) {
 			updater.setItemType(item,ItemType.REPOSITORIES);
+		} else if ("plugins".equals(name)) {
+			updater.setItemType(item,ItemType.PLUGINS);
 		} else if ("allprojects".equals(name)) {
 			updater.setItemType(item,ItemType.ALL_PROJECTS);
 		} else if ("subprojects".equals(name)) {

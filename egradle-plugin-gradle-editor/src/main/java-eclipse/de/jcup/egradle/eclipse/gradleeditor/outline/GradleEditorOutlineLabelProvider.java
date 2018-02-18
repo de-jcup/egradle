@@ -44,6 +44,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_CONFIGURE="externalize.png";
 	private static final String ICON_APPLY_FROM_PNG = "apply_from.png";
 	private static final String ICON_APPLY_PLUGIN_PNG = "plugins.png";
+	private static final String ICON_PLUGINS ="plugin_depend.png";
 	private static final String ICON_BUILDSCRIPT = "cheatsheet_item_obj.png";
 	private static final String ICON_CLASS = "class_obj.png";
 	private static final String ICON_INTERFACE = "int_obj.png";
@@ -193,6 +194,8 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				return getOutlineImage(ICON_APPLY_FROM_PNG);
 			case APPLY_PLUGIN:
 				return getOutlineImage(ICON_APPLY_PLUGIN_PNG);
+			case PLUGINS:
+				return getOutlineImage(ICON_PLUGINS);
 			case REPOSITORIES:
 				return getOutlineImage(ICON_REPOSITORIES);
 			case JAR:

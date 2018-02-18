@@ -101,7 +101,7 @@ public enum ItemType {
 	
 	CONSTRUCTOR, 
 	
-	 
+	PLUGINS, 
 	
 	
 	
