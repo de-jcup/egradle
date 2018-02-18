@@ -232,6 +232,13 @@
                   tooltip="Createa new gradle project.">
             </command>
             <command
+            	  commandId="egradle.commands.quickTaskExecution"
+                  icon="icons/quickTaskExecution.png"
+                  id="egradle.toolbars.quickTaskExecution"
+                  label="EGradle quick launch"
+                  tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
+            </command>
+            <command
                   commandId="egradle.commands.refreshEclipse"
                   icon="icons/refreshAllEclipseDependencies.png"
                   id="egradle.toolbars.refreshEclipseCommand"
@@ -244,13 +251,6 @@
                   id="egradle.toolbars.updateOrCreateVirtualRootProject"
                   label="Update or create virtual root project"
                   tooltip="Update or create virtual root project">
-            </command>
-            <command
-            	  commandId="egradle.commands.quickTaskExecution"
-                  icon="icons/quickTaskExecution.png"
-                  id="egradle.toolbars.quickTaskExecution"
-                  label="EGradle quick launch"
-                  tooltip="Directly execute gradle tasks by EGradle quick launch dialog.">
             </command>
          </toolbar>
       </menuContribution>
