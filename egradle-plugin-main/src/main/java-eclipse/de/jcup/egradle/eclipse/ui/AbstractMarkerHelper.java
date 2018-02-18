@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,34 +57,74 @@ public abstract class AbstractMarkerHelper {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Creates an error marker without character start/end
+	 * 
+	 * @param resource
+	 * @param message
+	 * @param lineNumber
+	 * @throws CoreException
+	 */
 	public void createErrorMarker(IResource resource, String message, int lineNumber) throws CoreException {
 		createErrorMarker(resource, message, lineNumber, -1, -1);
 	}
 
+	/**
+	 * Create an error marker
+	 * 
+	 * @param resource
+	 * @param message
+	 * @param lineNumber
+	 * @param charStart
+	 *            if not needed use -1
+	 * @param charEnd
+	 *            if not needed use -1
+	 * @throws CoreException
+	 */
 	public void createErrorMarker(IResource resource, String message, int lineNumber, int charStart, int charEnd)
 			throws CoreException {
 		createMarker(resource, message, lineNumber, markerType, IMarker.SEVERITY_ERROR, charStart, charEnd);
 	}
 
-	private void createMarker(IResource resource, String message, int lineNumber, String markerType, int severity,
+	/**
+	 * Creates a marker
+	 * 
+	 * @param resource
+	 * @param message
+	 * @param lineNumber
+	 *            numbers maller than 1 will be transformed to 1
+	 * @param markerType
+	 * @param severity
+	 *            e.g. {@link IMarker#SEVERITY_ERROR}
+	 * @param charStart
+	 *            if not needed use -1
+	 * @param charEnd
+	 *            if not needed use -1
+	 * @throws CoreException
+	 */
+	public void createMarker(IResource resource, String message, int lineNumber, String markerType, int severity,
 			int charStart, int charEnd) throws CoreException {
-		if (lineNumber <= 0)
+		if (lineNumber <= 0) {
 			lineNumber = 1;
-		IMarker marker = findMarker(resource, message, lineNumber, markerType);
-		if (marker == null) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put(IMarker.SEVERITY, new Integer(severity));
-			map.put(IMarker.LOCATION, resource.getFullPath().toOSString());
-			map.put(IMarker.MESSAGE, message);
-			MarkerUtilities.setLineNumber(map, lineNumber);
-			MarkerUtilities.setMessage(map, message);
-			if (charStart != -1) {
-				MarkerUtilities.setCharStart(map, charStart);
-				MarkerUtilities.setCharEnd(map, charEnd);
-			}
-			internalCreateMarker(resource, map, markerType);
 		}
+		IMarker marker = findMarker(resource, message, lineNumber, markerType);
+		if (marker != null) {
+			/* already existing */
+			return;
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put(IMarker.SEVERITY, new Integer(severity));
+		map.put(IMarker.LOCATION, resource.getFullPath().toOSString());
+		map.put(IMarker.MESSAGE, message);
+
+		MarkerUtilities.setLineNumber(map, lineNumber);
+		MarkerUtilities.setMessage(map, message);
+		if (charStart != -1) {
+			MarkerUtilities.setCharStart(map, charStart);
+			MarkerUtilities.setCharEnd(map, charEnd);
+		}
+		internalCreateMarker(resource, map, markerType);
 	}
 
 	/**
@@ -121,8 +161,8 @@ public abstract class AbstractMarkerHelper {
 		resource.getWorkspace().run(r, null, IWorkspace.AVOID_UPDATE, null);
 	}
 
-	protected void handleMarkerAdded(IMarker marker){
-		/* do nothing per default*/
+	protected void handleMarkerAdded(IMarker marker) {
+		/* do nothing per default */
 	}
 
 	/**
