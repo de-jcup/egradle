@@ -362,6 +362,34 @@
                       </visibleWhen>
                    </command>
                    <command
+                         commandId="egradle.commands.newGradleSubProject"
+                         icon="icons/new-sub-project.png"
+                         label="Add new sub project"
+                         style="push"
+                         tooltip="Add a new subproject to current multiproject">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <and>
+                               <count
+                                     value="1">
+                               </count>
+                               <iterate
+                                     ifEmpty="false">
+                                  <adapt
+                                        type="org.eclipse.core.resources.IProject">
+                                     <test
+                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           value="true">
+                                     </test>
+                                  </adapt>
+                               </iterate>
+                            </and>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <command
                          commandId="egradle.commands.updateOrCreateVirtualRootProject"
                          icon="icons/updateOrCreateVirtualRootProject.png"
                          label="Recreate Virtual Root Project"

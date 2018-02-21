@@ -35,6 +35,7 @@ public class GradleRootProject extends AbstractGradleProject {
 	private boolean multiProject;
 	private Model settingsModel;
 	private Item includeItem;
+
 	/**
 	 * Creates a gradle root project
 	 * 
@@ -54,23 +55,35 @@ public class GradleRootProject extends AbstractGradleProject {
 		multiProject = gradleSettingsFileContainsAnIncludeItem();
 	}
 
-	public String getName(){
+	public String getName() {
 		return file.getName();
 	}
-	
-	/* check there is a settings.gradle file. Check content having an item "include".
-	 * If "include" is contained it is a gradle mutli project.
+
+	/*
+	 * check there is a settings.gradle file. Check content having an item
+	 * "include". If "include" is contained it is a gradle mutli project.
 	 */
 	private boolean gradleSettingsFileContainsAnIncludeItem() {
 		tryToLoadIncludeItemInGradleSettings();
-		
-		return (includeItem!=null);
+
+		return (includeItem != null);
 	}
-	
+
 	public void createNewSubProject(String subProjectName) throws GradleProjectException{
 		File folder = getFolder();
-		if (!isMultiProject()){
+		if (includeItem==null){
 			throw new GradleProjectException("Project is not a multi project, so cannot add sub project:"+subProjectName+" at "+folder);
+		}
+		
+		String name = includeItem.getName();
+		String[] words = name.split("\\s");// split by whitespaces
+		for (int i=0;i<words.length;i++){
+			String includePart = words[i];
+			if (subProjectName.equals(includePart)){
+				throw new GradleProjectException("Sub project with name:"+subProjectName+" does already exist!");
+			}else if (subProjectName.equalsIgnoreCase(includePart)){
+				throw new GradleProjectException("Sub project with name:"+subProjectName+" would exist on a windows system duplicated (windows file system ignores case...)");
+			} 
 		}
 		
 		File subProjectFolder = new File(folder,subProjectName);
@@ -79,18 +92,21 @@ public class GradleRootProject extends AbstractGradleProject {
 				throw new GradleProjectException("Was not able to create sub project folder:"+subProjectFolder);
 			}
 		}
-		
+		FileSupport fileSupport = FileSupport.DEFAULT;
 		File settingsGradle = new File(folder,"settings.gradle");
 		if (! settingsGradle.exists()){
 			throw new GradleProjectException("did not found settings.gradle any more at:"+settingsGradle);
 		}
 		
 		try{
-			String content = FileSupport.DEFAULT.readTextFile(settingsGradle);
+			fileSupport.createTextFile(subProjectFolder, "build.gradle","");
+			
+			String content = fileSupport.readTextFile(settingsGradle);
 			int offset = includeItem.getOffset()+includeItem.getLength();
 			
 			String start = StringUtilsAccess.substring(content, 0, offset);
 			String end = StringUtilsAccess.substring(content, offset);
+			
 			StringBuilder sb = new StringBuilder();
 			sb.append(start);
 			sb.append(", '");
@@ -98,46 +114,46 @@ public class GradleRootProject extends AbstractGradleProject {
 			sb.append("'");
 			sb.append(end);
 		
-			FileSupport.DEFAULT.createTextFile(settingsGradle, sb.toString());
+			fileSupport.createTextFile(settingsGradle, sb.toString());
 		
 		}catch(IOException e){
 			throw new GradleProjectException("Problems occurred on addding subproject infromation to setttings.gradle",e);
 		}
 		
 	}
-	
-	private void tryToLoadIncludeItemInGradleSettings(){
+
+	private void tryToLoadIncludeItemInGradleSettings() {
 		/* reset include item if reload */
-		includeItem=null;
-		
+		includeItem = null;
+
 		File[] files = file.listFiles(FILTER);
 		if (files == null || files.length != 1) {
 			return;
 		}
 		File gradleSettings = files[0];
-		if (gradleSettings==null || ! gradleSettings.exists() || ! gradleSettings.isFile()){
+		if (gradleSettings == null || !gradleSettings.exists() || !gradleSettings.isFile()) {
 			return;
 		}
-		
-		try(FileInputStream fis = new FileInputStream(gradleSettings)){
+
+		try (FileInputStream fis = new FileInputStream(gradleSettings)) {
 			GradleModelBuilder builder = new GradleModelBuilder(fis);
 			settingsModel = builder.build(null);
 			Item root = settingsModel.getRoot();
-			if (root==null){
+			if (root == null) {
 				return;
 			}
 			Item[] children = root.getChildren();
-			for (Item item: children){
-				if (item==null){
+			for (Item item : children) {
+				if (item == null) {
 					continue;
 				}
 				String identifier = item.getIdentifier();
-				if ("include".equals(identifier)){
+				if ("include".equals(identifier)) {
 					includeItem = item;
 					break;
 				}
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			/* ignore */
 		}
 	}

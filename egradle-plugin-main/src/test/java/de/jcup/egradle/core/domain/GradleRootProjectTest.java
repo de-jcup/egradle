@@ -4,12 +4,18 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import de.jcup.egradle.core.TestUtil;
 import de.jcup.egradle.core.util.FileSupport;
 
 public class GradleRootProjectTest {
+	
+	@Rule
+	public ExpectedException expected = ExpectedException.none();
+	
 	@Test
 	public void rootproject1_has_no_gradle_settings_and_so_identified_as_single_project__as_fallback() throws Exception {
 		GradleRootProject root1 = new GradleRootProject(TestUtil.ROOTFOLDER_1);
@@ -34,7 +40,7 @@ public class GradleRootProjectTest {
 	}
 	
 	@Test
-	public void add_subproject_to_gradle_multiproject_creates_subfolder() throws Exception{
+	public void add_subproject_to_gradle_multiproject_creates_subfolder_with_empty_build_gradle() throws Exception{
 		/* prepare */
 		File rootFolder = TestUtil.createTempTestFolder();
 		
@@ -49,8 +55,12 @@ public class GradleRootProjectTest {
 		rootProject.createNewSubProject("mySubProject");
 	
 		/* test */
-		assertTrue(new File(rootFolder,"mySubProject").exists());
+		File subrpojectFolder = new File(rootFolder,"mySubProject");
+		assertTrue(subrpojectFolder.exists());
+		File subprojecBuildFile = new File(subrpojectFolder,"build.gradle");
+		assertTrue(subprojecBuildFile.exists());
 		
+		assertEquals("", fileSupport.readTextFile(subprojecBuildFile));
 	}
 
 	@Test
@@ -73,6 +83,28 @@ public class GradleRootProjectTest {
 		assertEquals("include 'core', 'mySubProject'", content);
 		
 	}
+
+	
+	@Test
+	public void add_subproject_to_gradle_multiproject_throws_exception_when_subproject_already_exists_inside_settings() throws Exception{
+		/* prepare */
+		File rootFolder = TestUtil.createTempTestFolder();
+		
+		FileSupport fileSupport = FileSupport.DEFAULT;
+		fileSupport.createTextFile(rootFolder, "settings.gradle","include 'duplicated'");
+		GradleRootProject rootProject = new GradleRootProject(rootFolder);
+		
+		/* check precondition fulfilled*/
+		assertTrue("precondition failed: not a multiproject?!", rootProject.isMultiProject());
+		
+		/* test */
+		expected.expect(GradleProjectException.class);
+
+		/* execute */
+		rootProject.createNewSubProject("duplicated");
+		
+	}
+
 	
 	@Test
 	public void add_subproject_to_gradle_multiproject_creates_include_part_and_parts_around() throws Exception{

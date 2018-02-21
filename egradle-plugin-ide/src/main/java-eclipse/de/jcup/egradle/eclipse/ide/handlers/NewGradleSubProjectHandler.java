@@ -1,7 +1,5 @@
 package de.jcup.egradle.eclipse.ide.handlers;
 
-import java.io.File;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -32,6 +30,9 @@ public class NewGradleSubProjectHandler extends AbstractHandler {
 			throw new ExecutionException("Was not able to create sub project:"+nameOfNewSubProject, e);
 		}
 		
+		/* trigger reimport*/
+		ReimportGradleProjectHandler handler = new ReimportGradleProjectHandler();
+		handler.execute(event);
 		return null;
 	}
 
