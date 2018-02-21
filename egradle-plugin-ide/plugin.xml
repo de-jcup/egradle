@@ -174,6 +174,11 @@
             class="de.jcup.egradle.eclipse.ide.handlers.NewGradleProjectHandler">
       </handler>
       <handler
+            commandId="egradle.commands.newGradleSubProject"
+            class="de.jcup.egradle.eclipse.ide.handlers.NewGradleSubProjectHandler">
+      </handler>
+      
+      <handler
             commandId="egradle.commands.refreshEclipse"
             class="de.jcup.egradle.eclipse.ide.handlers.RefreshAllEclipseDependenciesHandler">
       </handler>

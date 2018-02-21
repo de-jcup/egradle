@@ -2,9 +2,12 @@ package de.jcup.egradle.core.domain;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.core.util.FileSupport;
 
 public class GradleRootProjectTest {
 	@Test
@@ -29,5 +32,66 @@ public class GradleRootProjectTest {
 		GradleRootProject root4 = new GradleRootProject(TestUtil.ROOTFOLDER_4);
 		assertFalse(root4.isMultiProject());
 	}
+	
+	@Test
+	public void add_subproject_to_gradle_multiproject_creates_subfolder() throws Exception{
+		/* prepare */
+		File rootFolder = TestUtil.createTempTestFolder();
+		
+		FileSupport fileSupport = FileSupport.DEFAULT;
+		fileSupport.createTextFile(rootFolder, "settings.gradle","include 'core'");
+		GradleRootProject rootProject = new GradleRootProject(rootFolder);
 
+		/* check precondition fulfilled*/
+		assertTrue("precondition failed: not a multiproject?!", rootProject.isMultiProject());
+		
+		/* execute */
+		rootProject.createNewSubProject("mySubProject");
+	
+		/* test */
+		assertTrue(new File(rootFolder,"mySubProject").exists());
+		
+	}
+
+	@Test
+	public void add_subproject_to_gradle_multiproject_creates_include_part() throws Exception{
+		/* prepare */
+		File rootFolder = TestUtil.createTempTestFolder();
+		
+		FileSupport fileSupport = FileSupport.DEFAULT;
+		fileSupport.createTextFile(rootFolder, "settings.gradle","include 'core'");
+		GradleRootProject rootProject = new GradleRootProject(rootFolder);
+		
+		/* check precondition fulfilled*/
+		assertTrue("precondition failed: not a multiproject?!", rootProject.isMultiProject());
+		
+		/* execute */
+		rootProject.createNewSubProject("mySubProject");
+		
+		/* test */
+		String content = fileSupport.readTextFile(new File(rootFolder,"settings.gradle"));
+		assertEquals("include 'core', 'mySubProject'", content);
+		
+	}
+	
+	@Test
+	public void add_subproject_to_gradle_multiproject_creates_include_part_and_parts_around() throws Exception{
+		/* prepare */
+		File rootFolder = TestUtil.createTempTestFolder();
+		
+		FileSupport fileSupport = FileSupport.DEFAULT;
+		fileSupport.createTextFile(rootFolder, "settings.gradle","/* a comment before */\ninclude 'core'\n/* a comment after */\n");
+		GradleRootProject rootProject = new GradleRootProject(rootFolder);
+		
+		/* check precondition fulfilled*/
+		assertTrue("precondition failed: not a multiproject?!", rootProject.isMultiProject());
+		
+		/* execute */
+		rootProject.createNewSubProject("mySubProject");
+		
+		/* test */
+		String content = fileSupport.readTextFile(new File(rootFolder,"settings.gradle"));
+		assertEquals("/* a comment before */\ninclude 'core', 'mySubProject'\n/* a comment after */", content);
+		
+	}
 }

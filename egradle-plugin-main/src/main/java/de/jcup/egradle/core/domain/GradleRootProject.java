@@ -25,12 +25,16 @@ import java.io.IOException;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
+import de.jcup.egradle.core.util.FileSupport;
+import de.jcup.egradle.core.util.StringUtilsAccess;
 
 public class GradleRootProject extends AbstractGradleProject {
 
 	private final static FileFilter FILTER = new GradleSettingsFileFilter();
 	private File file;
 	private boolean multiProject;
+	private Model settingsModel;
+	private Item includeItem;
 	/**
 	 * Creates a gradle root project
 	 * 
@@ -58,21 +62,69 @@ public class GradleRootProject extends AbstractGradleProject {
 	 * If "include" is contained it is a gradle mutli project.
 	 */
 	private boolean gradleSettingsFileContainsAnIncludeItem() {
+		tryToLoadIncludeItemInGradleSettings();
+		
+		return (includeItem!=null);
+	}
+	
+	public void createNewSubProject(String subProjectName) throws GradleProjectException{
+		File folder = getFolder();
+		if (!isMultiProject()){
+			throw new GradleProjectException("Project is not a multi project, so cannot add sub project:"+subProjectName+" at "+folder);
+		}
+		
+		File subProjectFolder = new File(folder,subProjectName);
+		if (! subProjectFolder.exists()){
+			if (!subProjectFolder.mkdirs()){
+				throw new GradleProjectException("Was not able to create sub project folder:"+subProjectFolder);
+			}
+		}
+		
+		File settingsGradle = new File(folder,"settings.gradle");
+		if (! settingsGradle.exists()){
+			throw new GradleProjectException("did not found settings.gradle any more at:"+settingsGradle);
+		}
+		
+		try{
+			String content = FileSupport.DEFAULT.readTextFile(settingsGradle);
+			int offset = includeItem.getOffset()+includeItem.getLength();
+			
+			String start = StringUtilsAccess.substring(content, 0, offset);
+			String end = StringUtilsAccess.substring(content, offset);
+			StringBuilder sb = new StringBuilder();
+			sb.append(start);
+			sb.append(", '");
+			sb.append(subProjectName);
+			sb.append("'");
+			sb.append(end);
+		
+			FileSupport.DEFAULT.createTextFile(settingsGradle, sb.toString());
+		
+		}catch(IOException e){
+			throw new GradleProjectException("Problems occurred on addding subproject infromation to setttings.gradle",e);
+		}
+		
+	}
+	
+	private void tryToLoadIncludeItemInGradleSettings(){
+		/* reset include item if reload */
+		includeItem=null;
 		
 		File[] files = file.listFiles(FILTER);
 		if (files == null || files.length != 1) {
-			return false;
+			return;
 		}
 		File gradleSettings = files[0];
 		if (gradleSettings==null || ! gradleSettings.exists() || ! gradleSettings.isFile()){
-			return false;
+			return;
 		}
+		
 		try(FileInputStream fis = new FileInputStream(gradleSettings)){
 			GradleModelBuilder builder = new GradleModelBuilder(fis);
-			Model settingsModel = builder.build(null);
+			settingsModel = builder.build(null);
 			Item root = settingsModel.getRoot();
 			if (root==null){
-				return false;
+				return;
 			}
 			Item[] children = root.getChildren();
 			for (Item item: children){
@@ -81,12 +133,12 @@ public class GradleRootProject extends AbstractGradleProject {
 				}
 				String identifier = item.getIdentifier();
 				if ("include".equals(identifier)){
-					return true;
+					includeItem = item;
+					break;
 				}
 			}
-			return false;
 		}catch(Exception e){
-			return false;
+			/* ignore */
 		}
 	}
 

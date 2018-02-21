@@ -17,6 +17,7 @@ package de.jcup.egradle.eclipse.ide;
 
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
@@ -27,6 +28,23 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 public class EGradleMessageDialogSupport {
 
 	public static final EGradleMessageDialogSupport INSTANCE = new EGradleMessageDialogSupport();
+
+	/**
+	 * Shows an input dialog
+	 * @param message
+	 * @param title
+	 * @return given input string or <code>null</code> when canceled
+	 */
+	public final String showInputDialog(String message, String title) {
+		Shell shell = getActiveWorkbenchShell();
+		InputDialog dialog = new InputDialog(shell, title, message, null, null);
+		int result = dialog.open();
+		if (result == InputDialog.CANCEL) {
+			return null;
+		}
+
+		return dialog.getValue();
+	}
 
 	public void showWarning(String message) {
 		EclipseUtil.safeAsyncExec(new Runnable() {
@@ -59,30 +77,28 @@ public class EGradleMessageDialogSupport {
 
 			@Override
 			public void run() {
-				
-				if (IDEUtil.getPreferences().isShowingConsoleOnBuildFailed()){
+
+				if (IDEUtil.getPreferences().isShowingConsoleOnBuildFailed()) {
 					IDEUtil.showConsoleView();
 				}
-			
+
 				String text = detail;
 				String path = "icons/gradle-build-failed.png";
-				if (IDEUtil.existsValidationErrors()){
-					text = text+"\n(Please look into problems view for details about compile/evaluation failures)";
-					path="icons/gradle-script-failure.png";
+				if (IDEUtil.existsValidationErrors()) {
+					text = text + "\n(Please look into problems view for details about compile/evaluation failures)";
+					path = "icons/gradle-script-failure.png";
 				}
 				Image backgroundImage = IDEUtil.getImage(path);
 				Image titleImage = IDEUtil.getImage("icons/gradle-og.png");
-				
+
 				Shell shell = getActiveWorkbenchShell();
 				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);
 				bfdialog.open();
-				
+
 			}
 
 		});
-	
-	}
 
-		
+	}
 
 }

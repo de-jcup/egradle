@@ -162,12 +162,22 @@ public class FileSupport {
 
 	public void createTextFile(File parentFolder, String fileName, String content) throws IOException {
 		File textFile = new File(parentFolder, fileName);
+		createTextFile(textFile, content);
+	}
+
+	public void createTextFile(File textFile, String content) throws IOException {
+		if (textFile==null) {
+			throw new IllegalArgumentException("text file may not be null");
+		}
+		if (content==null) {
+			throw new IllegalArgumentException("content may not be null");
+		}
 		try (FileOutputStream fileOutputStram = new FileOutputStream(textFile);
 				OutputStreamWriter w = new OutputStreamWriter(fileOutputStram, "UTF-8")) {
 			textFile.createNewFile();
 			w.write(content);
 		} catch (Exception e) {
-			throw new IOException("Cannot create " + fileName, e);
+			throw new IOException("Cannot create " + textFile, e);
 		}
 	}
 

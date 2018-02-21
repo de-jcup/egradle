@@ -15,10 +15,12 @@
  */
  package de.jcup.egradle.core;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 
 public class TestUtil {
-
+	
 	public static File SRC_TEST_RES_FOLDER = new File("egradle-plugin-main/src/test/res/");
 	static {
 		if (!SRC_TEST_RES_FOLDER.exists()) {
@@ -125,5 +127,17 @@ public class TestUtil {
 		}
 		index=index-1;
 		return index;
+	}
+	
+	/**
+	 * Creates an temporary test folder, will be deleted on JVM end
+	 * @return tempory folder
+	 */
+	public static File createTempTestFolder() {
+		String tempDir = System.getProperty("java.io.tmpdir");
+		File tempFolder = new File(tempDir, "egradle-testroot-"+System.currentTimeMillis());
+		assertTrue(tempFolder.mkdirs());
+		tempFolder.deleteOnExit();
+		return tempFolder;
 	}
 }
