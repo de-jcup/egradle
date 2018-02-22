@@ -227,20 +227,26 @@ public class FileSupport {
 			}
 		}
 	}
-
+	
 	public String readTextFile(File file) throws IOException {
-		StringBuilder s = new StringBuilder();
+		return readTextFile(file,LINE_SEP);
+	}
+
+	public String readTextFile(File file, String lineSep) throws IOException {
+		int lineNr =0;
+		StringBuilder sb = new StringBuilder();
 		try (BufferedReader br=new BufferedReader(new FileReader(file))){
 			String line = "";
 			while ((line=br.readLine())!=null){
-				if (s.length()>0){
-					/* had content so do add line separtion too */
-					s.append(LINE_SEP);
+				if (lineNr>0){
+					/* not first line so add line sep*/
+					sb.append(lineSep);
 				}
-				s.append(line);
+				sb.append(line);
+				lineNr++;
 			}
 		}
-		return s.toString();
+		return sb.toString();
 	}
 
 	public void writeTextFile(File file, String content) throws IOException {

@@ -20,7 +20,7 @@ public class NewGradleSubProjectHandler extends AbstractHandler {
 			dialogSupport.showError("Cannot add a subproject to a single project!");
 			return null;
 		}
-		String nameOfNewSubProject = dialogSupport.showInputDialog("Enter name of new subproject", "New gralde sub project");
+		String nameOfNewSubProject = dialogSupport.showInputDialog("Enter name of new sub project inside '"+rootProject.getName()+"'", "New Gradle sub project");
 		if (StringUtilsAccess.isBlank(nameOfNewSubProject)){
 			return null;
 		}

@@ -100,9 +100,14 @@ public class GradleRootProject extends AbstractGradleProject {
 		
 		try{
 			fileSupport.createTextFile(subProjectFolder, "build.gradle","");
-			
-			String content = fileSupport.readTextFile(settingsGradle);
-			int offset = includeItem.getOffset()+includeItem.getLength();
+
+			/* problematic: 
+			 * Code which has line endings etc. inside, must be loaded by filesupport with a dedicated one
+			 * to have correct calculated offsets (we use single line end characters always).
+			 * So we load with "\n" - otherweise offset calc would break
+			 */
+			String content = fileSupport.readTextFile(settingsGradle,"\n");
+			int offset = includeItem.getOffset()+ includeItem.getLength();
 			
 			String start = StringUtilsAccess.substring(content, 0, offset);
 			String end = StringUtilsAccess.substring(content, offset);

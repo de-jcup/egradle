@@ -37,7 +37,7 @@ public class QuickLaunchDialogTestUI {
 		history.add("tasks");
 		history.add("--version");
 		history.add("--stop");
-		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history);
+		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history,"test");
 		dialog.open();
 		String input = dialog.getValue();
 		System.out.println("input was:"+input);

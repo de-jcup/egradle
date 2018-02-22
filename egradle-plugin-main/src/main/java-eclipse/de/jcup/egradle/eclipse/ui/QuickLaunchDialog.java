@@ -41,9 +41,9 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
 	private History<String> history;
 
-	public QuickLaunchDialog(Shell parent, History<String> history)  {
+	public QuickLaunchDialog(Shell parent, History<String> history, String titlePostFix)  {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
-				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE, INFOTEXT);
+				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE +titlePostFix, INFOTEXT);
 		if (history==null){
 			history= new History<>(10);
 		}

@@ -81,9 +81,10 @@
           class="de.jcup.egradle.eclipse.ide.EGradlePropertyTester"
           id="de.jcup.egradle.eclipse.EGradlePropertyTester"
           namespace="de.jcup.egradle"
-          properties="isProjectPartOfRootProject"
+          properties="isProjectPartOfRootProject,isProjectPartOfRootMultiProject"
           type="org.eclipse.core.resources.IResource">
       </propertyTester>
+      
    </extension>
 
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -378,9 +379,9 @@
                                <iterate
                                      ifEmpty="false">
                                   <adapt
-                                        type="org.eclipse.core.resources.IProject">
+                                        type="org.eclipse.core.resources.IResource">
                                      <test
-                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           property="de.jcup.egradle.isProjectPartOfRootMultiProject"
                                            value="true">
                                      </test>
                                   </adapt>
