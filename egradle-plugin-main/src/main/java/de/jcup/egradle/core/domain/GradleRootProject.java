@@ -20,6 +20,7 @@ import static org.apache.commons.lang3.Validate.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import de.jcup.egradle.core.model.Item;
@@ -32,7 +33,6 @@ public class GradleRootProject extends AbstractGradleProject {
 
 	private final static FileFilter FILTER = new GradleSettingsFileFilter();
 	private File file;
-	private boolean multiProject;
 	private Model settingsModel;
 	private Item includeItem;
 
@@ -52,79 +52,80 @@ public class GradleRootProject extends AbstractGradleProject {
 			throw new IOException("Given root project folder is not a directory:" + file);
 		}
 		this.file = file;
-		multiProject = gradleSettingsFileContainsAnIncludeItem();
+		tryToLoadIncludeItemInGradleSettings();
 	}
 
 	public String getName() {
 		return file.getName();
 	}
 
-	/*
-	 * check there is a settings.gradle file. Check content having an item
-	 * "include". If "include" is contained it is a gradle mutli project.
-	 */
-	private boolean gradleSettingsFileContainsAnIncludeItem() {
-		tryToLoadIncludeItemInGradleSettings();
 
+	private boolean hasAtLeastOneInclude() {
 		return (includeItem != null);
 	}
 
 	public void createNewSubProject(String subProjectName) throws GradleProjectException{
 		File folder = getFolder();
-		if (includeItem==null){
+		if (! isMultiProject()){
 			throw new GradleProjectException("Project is not a multi project, so cannot add sub project:"+subProjectName+" at "+folder);
 		}
+		assertEveryIncludeDoesNotContainNewSubprojectAlready(subProjectName);
+		FileSupport fileSupport = FileSupport.DEFAULT;
 		
-		String name = includeItem.getName();
-		String[] words = name.split("\\s");// split by whitespaces
-		for (int i=0;i<words.length;i++){
-			String includePart = words[i];
-			if (subProjectName.equals(includePart)){
-				throw new GradleProjectException("Sub project with name:"+subProjectName+" does already exist!");
-			}else if (subProjectName.equalsIgnoreCase(includePart)){
-				throw new GradleProjectException("Sub project with name:"+subProjectName+" would exist on a windows system duplicated (windows file system ignores case...)");
-			} 
+		File subProjectFolder = createSubProjectFolderOrFail(subProjectName, folder);
+		File settingsGradle = getExistingSettingsFileOrFail(folder);
+		
+		try{
+			try(FileWriter writer= new FileWriter(settingsGradle,true)){
+				/* the moste simple variant to add subproject - just add another include to the EOF
+				 * will always work...
+				 */
+				writer.append("\ninclude '"+subProjectName+"'");
+			}
+			fileSupport.createTextFile(subProjectFolder, "build.gradle","");
+					
+		}catch(IOException e){
+			throw new GradleProjectException("Problems occurred on addding subproject infromation to setttings.gradle",e);
 		}
 		
+	}
+
+	private File getExistingSettingsFileOrFail(File folder) throws GradleProjectException {
+		File settingsGradle = new File(folder,"settings.gradle");
+		if (! settingsGradle.exists()){
+			throw new GradleProjectException("did not found settings.gradle any more at:"+settingsGradle);
+		}
+		return settingsGradle;
+	}
+
+	private File createSubProjectFolderOrFail(String subProjectName, File folder) throws GradleProjectException {
 		File subProjectFolder = new File(folder,subProjectName);
 		if (! subProjectFolder.exists()){
 			if (!subProjectFolder.mkdirs()){
 				throw new GradleProjectException("Was not able to create sub project folder:"+subProjectFolder);
 			}
 		}
-		FileSupport fileSupport = FileSupport.DEFAULT;
-		File settingsGradle = new File(folder,"settings.gradle");
-		if (! settingsGradle.exists()){
-			throw new GradleProjectException("did not found settings.gradle any more at:"+settingsGradle);
-		}
-		
-		try{
-			fileSupport.createTextFile(subProjectFolder, "build.gradle","");
+		return subProjectFolder;
+	}
 
-			/* problematic: 
-			 * Code which has line endings etc. inside, must be loaded by filesupport with a dedicated one
-			 * to have correct calculated offsets (we use single line end characters always).
-			 * So we load with "\n" - otherweise offset calc would break
-			 */
-			String content = fileSupport.readTextFile(settingsGradle,"\n");
-			int offset = includeItem.getOffset()+ includeItem.getLength();
-			
-			String start = StringUtilsAccess.substring(content, 0, offset);
-			String end = StringUtilsAccess.substring(content, offset);
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(start);
-			sb.append(", '");
-			sb.append(subProjectName);
-			sb.append("'");
-			sb.append(end);
-		
-			fileSupport.createTextFile(settingsGradle, sb.toString());
-		
-		}catch(IOException e){
-			throw new GradleProjectException("Problems occurred on addding subproject infromation to setttings.gradle",e);
+	private void assertEveryIncludeDoesNotContainNewSubprojectAlready(String subProjectName)
+			throws GradleProjectException {
+		Item[] children = settingsModel.getRoot().getChildren();
+		for (Item item: children){
+			if (! isInclude(item)){
+				continue;
+			}
+			String name = includeItem.getName();
+			String[] words = name.split("\\s");// split by whitespaces
+			for (int i=0;i<words.length;i++){
+				String includePart = words[i];
+				if (subProjectName.equals(includePart)){
+					throw new GradleProjectException("Sub project with name:"+subProjectName+" does already exist!");
+				}else if (subProjectName.equalsIgnoreCase(includePart)){
+					throw new GradleProjectException("Sub project with name:"+subProjectName+" would exist on a windows system duplicated (windows file system ignores case...)");
+				} 
+			}
 		}
-		
 	}
 
 	private void tryToLoadIncludeItemInGradleSettings() {
@@ -152,8 +153,7 @@ public class GradleRootProject extends AbstractGradleProject {
 				if (item == null) {
 					continue;
 				}
-				String identifier = item.getIdentifier();
-				if ("include".equals(identifier)) {
+				if (isInclude(item))  {
 					includeItem = item;
 					break;
 				}
@@ -162,13 +162,18 @@ public class GradleRootProject extends AbstractGradleProject {
 			/* ignore */
 		}
 	}
+	
+	private boolean isInclude(Item item){
+		String identifier = item.getIdentifier();
+		return "include".equals(identifier);
+	}
 
 	public File getFolder() {
 		return file;
 	}
 
 	public boolean isMultiProject() {
-		return multiProject;
+		return hasAtLeastOneInclude();
 	}
 
 	private static class GradleSettingsFileFilter implements FileFilter {
