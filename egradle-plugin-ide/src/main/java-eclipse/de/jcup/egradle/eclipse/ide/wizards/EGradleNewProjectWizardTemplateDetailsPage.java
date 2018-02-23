@@ -22,9 +22,13 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import de.jcup.egradle.eclipse.ide.IDEUtil;
@@ -45,6 +49,8 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 	private Group commonGroup;
 	private Text gradleGroupNameText;
 	private Text gradleVersionText;
+	private Button gradleWrapperEnabledRadioButton;
+	private Label gradleVersionLabel;
 
 	public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
 		super("templateDetails");
@@ -90,7 +96,22 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 			}
 		});
 
-		SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
+		gradleWrapperEnabledRadioButton = SWTFactory.createCheckButton(commonGroup,"Use gradle wrapper",null,context.isxSupportingGradleWrapper(),SWT.FILL);
+		gradleWrapperEnabledRadioButton.setEnabled(context.isxSupportingGradleWrapper());
+		gradleWrapperEnabledRadioButton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				context.setGradleWrapperEnabled(gradleWrapperEnabledRadioButton.getSelection());
+				updateUI();
+				setPageComplete(validatePage());
+			}
+			
+		});
+		
+		gradleVersionLabel = SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
+		gradleVersionLabel.setEnabled(context.isxSupportingGradleWrapper());
+		
 		gradleVersionText = SWTFactory.createSingleText(commonGroup, 1);
 		gradleVersionText.setMessage(NewProjectTemplateVariables.VAR__GRADLE__VERSION.getDefaultValue());
 		gradleVersionText.addModifyListener(new ModifyListener() {
@@ -100,6 +121,7 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 				setPageComplete(validatePage());
 			}
 		});
+		gradleVersionText.setEnabled(context.isxSupportingGradleWrapper());
 	}
 
 	private void initMultiProjectParts(Composite composite) {
@@ -195,6 +217,10 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		composite.setVisible(true);
 		setDescription("Define details for template '" + selectedTemplate.getName() + "'");
 
+		showControl(gradleWrapperEnabledRadioButton,context.isxSupportingGradleWrapper());
+		showControl(gradleVersionLabel,context.isGradleWrapperSupportedAndEnabled());
+		showControl(gradleVersionText,context.isGradleWrapperSupportedAndEnabled());
+		
 		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());

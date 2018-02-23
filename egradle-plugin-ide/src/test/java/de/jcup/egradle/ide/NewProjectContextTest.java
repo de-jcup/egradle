@@ -46,6 +46,50 @@ public class NewProjectContextTest {
 	}
 
 	@Test
+	public void when_template_supports_gradlew_wrapper_wrapper_is_enabled(){
+		/* prepare */
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER)).thenReturn(true);
+		
+		// prepare again, so changed template loaded...
+		contextToTest = new NewProjectContext();
+		contextToTest.setSelectedTemplate(mockedTemplate);
+		contextToTest.setProjectName(PROJECT_NAME);
+		
+		/* test */
+		assertTrue(contextToTest.isGradleWrapperSupportedAndEnabled());
+	}
+	
+	@Test
+	public void when_template_supports_NOT_gradlew_wrapper_wrapper_is_NOT_enabled(){
+		/* prepare */
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER)).thenReturn(false);
+		
+		// prepare again, so changed template loaded...
+		contextToTest = new NewProjectContext();
+		contextToTest.setSelectedTemplate(mockedTemplate);
+		contextToTest.setProjectName(PROJECT_NAME);
+		
+		/* test */
+		assertFalse(contextToTest.isGradleWrapperSupportedAndEnabled());
+	}
+	
+	@Test
+	public void when_template_supports_gradlew_wrapper__but_turned_off_manual_wrapper_is_NOT_enabled(){
+		/* prepare */
+		when(mockedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER)).thenReturn(true);
+		
+		// prepare again, so changed template loaded...
+		contextToTest = new NewProjectContext();
+		contextToTest.setSelectedTemplate(mockedTemplate);
+		contextToTest.setProjectName(PROJECT_NAME);
+		
+		contextToTest.setGradleWrapperEnabled(false);
+		
+		/* test */
+		assertFalse(contextToTest.isGradleWrapperSupportedAndEnabled());
+	}
+	
+	@Test
 	public void when_validation_ok_an_old_problem_message_is_replaced_by_null() {
 		/* prepare */
 		contextToTest.lastValidationProblem = "error";

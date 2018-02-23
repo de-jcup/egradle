@@ -79,7 +79,7 @@ public class GradleRootProjectTest {
 		rootProject.createNewSubProject("mySubProject");
 		
 		/* test */
-		String content = fileSupport.readTextFile(new File(rootFolder,"settings.gradle"));
+		String content = fileSupport.readTextFile(new File(rootFolder,"settings.gradle"),"\n");
 		assertEquals("/*now we do an include...*/\ninclude 'core'\n/*fantastic...*/\ninclude 'mySubProject'", content);
 		
 	}

@@ -44,7 +44,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
+import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferenceInitializer;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
+import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.ide.NewProjectContext;
@@ -159,7 +161,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 
 	private void createProject(File targetFolder, FileStructureTemplate template,
 			FileStructureTemplate gradleWrapperTemplate, Map<Object, Object> additionalProperties) throws IOException {
-		if (context.isSupportingGradleWrapper()) {
+		if (context.isGradleWrapperSupportedAndEnabled()) {
 			if (gradleWrapperTemplate == null) {
 				throw new IllegalStateException(
 						"Not able to provide template - gradle wrapper necessary, but not available from IDE");
@@ -181,7 +183,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		outputToSystemConsole("- creating project '" + projectName + "' at:" + targetFolder.getAbsolutePath());
 		template.applyTo(targetFolder, properties);
 		outputToSystemConsole("  + added project content");
-		if (context.isSupportingGradleWrapper()) {
+		if (context.isGradleWrapperSupportedAndEnabled()) {
 			gradleWrapperTemplate.applyTo(targetFolder, properties);
 			outputToSystemConsole("  + added gradle wrapper parts");
 			
@@ -227,7 +229,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			@Override
 			public void run() {
 				boolean resultOkay = false;
-				if (context.isSupportingHeadlessImport()) {
+				if (isHeadlessModeSupported()) {
 					/* headless usage of import wizard:*/
 					piw.addPages();
 					piw.createPageControls(new Shell());
@@ -242,6 +244,11 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 					return;
 
 				}else{
+					if (! context.isGradleWrapperSupportedAndEnabled()){
+						// setup local gradle call depending for OS 
+						EGradleCallType initialCallType = EGradleIdePreferenceInitializer.calculateDefaultCallType();
+						piw.setInitialCallType(initialCallType);
+					}
 					int result = wd.open();
 					if (MessageDialog.OK == result) {
 						resultOkay = true;
@@ -254,6 +261,14 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 				} else {
 					outputToSystemConsole("[CANCELED]");
 				}
+			}
+
+			protected boolean isHeadlessModeSupported() {
+				// when gradlewrapper is used the execution is clear... for local instances
+				// maybe the path is not set etc.
+				boolean gradleCommandSelectionUnnessary = context.isGradleWrapperSupportedAndEnabled();
+				boolean headlessPossibleByTemplate = context.isSupportingHeadlessImport();
+				return gradleCommandSelectionUnnessary && headlessPossibleByTemplate;
 			}
 		});
 	}

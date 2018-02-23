@@ -29,6 +29,7 @@ import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationAda
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
+import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
@@ -40,6 +41,8 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	private String customRootProjectpath;
 	
 	private String customJavaHome;
+
+	private EGradleCallType initialCallType;
 
 	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath,
 			RootProjectConfigMode mode, String customJavaHome) {
@@ -75,7 +78,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		}
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
 		String gradleCallCommand = preferences.getGradleCallCommand();
-		String gradleCallTypeID = preferences.getGradleCallTypeID();
+		String gradleCallTypeID = initialCallType == null ? preferences.getGradleCallTypeID(): initialCallType.getId();
 		String shellId = preferences.getGradleShellId();
 		String rootProjectPath = null;
 		if (StringUtils.isBlank(customRootProjectpath)) {
@@ -140,5 +143,9 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 
 	public String getCallTypeId() {
 		return configComposite.getCallTypeId();
+	}
+
+	public void setInitialCallType(EGradleCallType callType) {
+		this.initialCallType=callType;
 	}
 }

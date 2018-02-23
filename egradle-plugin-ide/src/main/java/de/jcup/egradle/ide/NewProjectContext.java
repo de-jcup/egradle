@@ -44,6 +44,8 @@ public class NewProjectContext {
 
 	private String gradleVersion;
 
+	private boolean gradleWrapperEnabled;
+
 	public String getJavaSourceCompatibility() {
 		return javaSourceCompatibility;
 	}
@@ -82,7 +84,18 @@ public class NewProjectContext {
 		return selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
 	}
 
-	public boolean isSupportingGradleWrapper() {
+	public void setGradleWrapperEnabled(boolean gradleWrapperEnabled) {
+		this.gradleWrapperEnabled = gradleWrapperEnabled;
+	}
+	
+	/**
+	 * @return <code>true</code> when wrapper is enabled AND wrapper is supported by template
+	 */
+	public boolean isGradleWrapperSupportedAndEnabled() {
+		return isxSupportingGradleWrapper() && gradleWrapperEnabled;
+	}
+	
+	public boolean isxSupportingGradleWrapper() {
 		if (selectedTemplate == null) {
 			return false;
 		}
@@ -150,6 +163,7 @@ public class NewProjectContext {
 
 	public void setSelectedTemplate(FileStructureTemplate selectedTemplate) {
 		this.selectedTemplate = selectedTemplate;
+		this.gradleWrapperEnabled=isxSupportingGradleWrapper(); // per default enabled when gradlewrapper is supported
 	}
 
 	public void setGradleVersion(String version) {

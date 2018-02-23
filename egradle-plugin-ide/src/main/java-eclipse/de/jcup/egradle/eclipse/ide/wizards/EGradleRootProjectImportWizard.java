@@ -31,6 +31,7 @@ import org.eclipse.ui.IWorkbench;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
+import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
 	public static final String ID="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard";
@@ -45,6 +46,8 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	private RootProjectConfigMode importMode;
 	
 	private String customJavaHome;
+
+	private EGradleCallType initialCallType;
 	
 	public EGradleRootProjectImportWizard() {
 		importSupport = new RootProjectImportSupport();
@@ -123,6 +126,13 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	public void addPages() {
 		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1",customRootProjectpath,importMode, customJavaHome);
 		addPage(mainPage);
+		if (initialCallType!=null){
+			mainPage.setInitialCallType(initialCallType);
+		}
+	}
+
+	public void setInitialCallType(EGradleCallType callType) {
+		this.initialCallType=callType;
 	}
 
 }

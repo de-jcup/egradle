@@ -31,12 +31,7 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = IDEUtil.getPreferences().getPreferenceStore();
-		EGradleCallType defaultCallType = null; 
-		if (SystemUtils.IS_OS_WINDOWS){
-			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
-		}else{
-			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
-		}
+		EGradleCallType defaultCallType = calculateDefaultCallType();
 		store.setDefault(P_OUTPUT_VALIDATION_ENABLED.getId(), true);
 		
 		store.setDefault(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), false);
@@ -53,6 +48,20 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 		store.setDefault(P_GRADLE_CALL_COMMAND.getId(), defaultCallType.getDefaultGradleCommand());
 		
 		store.setDefault(P_MIGRATE_IDE_STATE.getId(), MigrationState.NOT_MIGRATED.name());
+	}
+
+	/**
+	 * Calculate default gradle call type depending on OS
+	 * @return default type
+	 */
+	public static EGradleCallType calculateDefaultCallType() {
+		EGradleCallType defaultCallType = null; 
+		if (SystemUtils.IS_OS_WINDOWS){
+			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
+		}else{
+			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
+		}
+		return defaultCallType;
 	}
 	
 
