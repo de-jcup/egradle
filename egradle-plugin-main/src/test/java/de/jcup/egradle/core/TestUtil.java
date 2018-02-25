@@ -86,6 +86,20 @@ public class TestUtil {
 	public static final File ROOTFOLDER_4_TEST5_GRADLE = new File(ROOTFOLDER_4, "test5.gradle");
 
 	/**
+	 * Rootfolder5 - is a multi project which contains a 3 level eclipse project structure
+	 */
+	public static final File ROOTFOLDER_5 = new File(SRC_TEST_RES_FOLDER, "rootproject5");
+
+	public static final File ROOTFOLDER_5_JAVA = new File(ROOTFOLDER_5, "java");
+	public static final File ROOTFOLDER_5_NATIVE = new File(ROOTFOLDER_5, "native");
+	public static final File ROOTFOLDER_5_NATIVE_GCC = new File(ROOTFOLDER_5_NATIVE, "gcc");
+
+	public static final File ROOTFOLDER_5_PROJECT_5_A = new File(ROOTFOLDER_5_JAVA, "eclipse-project-5-a");
+	public static final File ROOTFOLDER_5_PROJECT_5_B = new File(ROOTFOLDER_5_JAVA, "eclipse-project-5-b");
+	public static final File ROOTFOLDER_5_NATIVE_GCC_PROJECT_5C = new File(ROOTFOLDER_5_NATIVE_GCC, "eclipse-project-5-c");
+	
+	
+	/**
 	 * Calculates index of search string in given text. E.g. a search string "alpha" in text "alpha beta gamma" returns 5 because it is the end position of "alpha"  
 	 * @param text
 	 * @param searchString
