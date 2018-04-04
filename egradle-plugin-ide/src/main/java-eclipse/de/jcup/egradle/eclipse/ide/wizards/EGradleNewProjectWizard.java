@@ -246,7 +246,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 				}else{
 					if (! context.isGradleWrapperSupportedAndEnabled()){
 						// setup local gradle call depending for OS 
-						EGradleCallType initialCallType = EGradleIdePreferenceInitializer.calculateDefaultCallType();
+						EGradleCallType initialCallType = EGradleIdePreferenceInitializer.calculateOSInstalledType();
 						piw.setInitialCallType(initialCallType);
 					}
 					int result = wd.open();

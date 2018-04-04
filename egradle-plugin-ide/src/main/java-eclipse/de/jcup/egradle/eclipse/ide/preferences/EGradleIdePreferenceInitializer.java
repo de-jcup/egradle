@@ -51,7 +51,7 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 	}
 
 	/**
-	 * Calculate default gradle call type depending on OS
+	 * Calculate default GRADLE call type depending on OS
 	 * @return default type
 	 */
 	public static EGradleCallType calculateDefaultCallType() {
@@ -62,6 +62,20 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
 		}
 		return defaultCallType;
+	}
+	
+	/**
+	 * Calculate GRADLE call type (installed variant) depending on OS
+	 * @return type
+	 */
+	public static EGradleCallType calculateOSInstalledType() {
+		EGradleCallType installedType = null; 
+		if (SystemUtils.IS_OS_WINDOWS){
+			installedType = EGradleCallType.WINDOWS_GRADLE_INSTALLED;	
+		}else{
+			installedType = EGradleCallType.LINUX_GRADLE_INSTALLED;			
+		}
+		return installedType;
 	}
 	
 
