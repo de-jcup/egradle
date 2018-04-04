@@ -25,11 +25,14 @@
 	</ol>
 
 	<h2 id="launch_build_failed_dialog">Build failed</h2>
-	<p>When your gradle execution failed (e.g. you executed "unknown-task" ) the build
-		failed dialog will apear:</p>
+	<p>When your gradle execution failed (e.g. you executed
+		"unknown-task" ) the build failed dialog will apear:</p>
 	<img src="images/egradle-build-failed-dialog.png" />
-	<p>If your build script has compile or evaluation failures and <a href="validation.html">output validation</a> is enabled, another dialog 
-	will appear and errors are shown.</p>
+	<p>
+		If your build script has compile or evaluation failures and <a
+			href="validation.html">output validation</a> is enabled, another
+		dialog will appear and errors are shown.
+	</p>
 
 
 	<h2 id="launch_per_right_click">Launch a project by right click</h2>
@@ -63,11 +66,16 @@
 	<img src="images/egradle-launch-configuration.png" />
 	<p></p>
 	<ul>
-		<li>Project - if empty the tasks are executed in root project</li>
-		<li>Tasks - a space separated list of gradle tasks to execute</li>
-		<li>Raw options - here you can add <a
+		<li>Root path</li>When empty the current root project is used (you
+		will see then a hint entry as shown in picture about "EGradle Root
+		Project:..."). <br>If not empty the given path is used for gradle root project
+		detection!
+
+		<li>Project</li> If empty the tasks are executed in root project
+		<li>Tasks</li>A space separated list of gradle tasks to execute
+		<li>Raw options</li> here you can add <a
 			href="https://docs.gradle.org/current/userguide/gradle_command_line.html"
-			target="#blank">Gradle command line options</a></li>
+			target="#blank">Gradle command line options</a>
 	</ul>
 	<p>Your are able to configure
 	<ul>
@@ -103,21 +111,23 @@
 	<p>
 		When you just want to execute some simple tasks which need no special
 		configurations you can press
-		<code>
-			CTRL+SHIFT+ALT+END
-		</code>
+		<code> CTRL+SHIFT+ALT+END </code>
 		and a small dialog appears where you can type your wanted tasks and
 		press
 		<code>ENTER</code>
-		to execute. The dialog contains a history about your last (max 20) entered commands and you can select previous commands by cursor keys or select by combobox list. The last
-		entered command is always automatically selected when dialog appears. The history is not persisted and always cleared when you restart your eclipse.
-		<br>
-		<br>
-		You got no possibility to setup parameters, system
+		to execute. The dialog contains a history about your last (max 20)
+		entered commands and you can select previous commands by cursor keys
+		or select by combobox list. The last entered command is always
+		automatically selected when dialog appears. The history is not
+		persisted and always cleared when you restart your eclipse. <br>
+		<br> You got no possibility to setup parameters, system
 		properties or environment entries, but your able to execute some
-		standard calls - e.g. "tasks" or "--version".
-		<i>(Remark: Before EGradle 2.0 <code><strike>CTRL+SHIFT+#</strike></code> was used as shortcut, but was
-		replaced in 2.0 because of handling problems with US keyboard layout)</i>
+		standard calls - e.g. "tasks" or "--version". <i>(Remark: Before
+			EGradle 2.0 <code>
+				<strike>CTRL+SHIFT+#</strike>
+			</code> was used as shortcut, but was replaced in 2.0 because of handling
+			problems with US keyboard layout)
+		</i>
 	</p>
 	<p>Instead of using the keyboard shortcut you can also press the
 		corresponding toolbar button to open the dialog:</p>

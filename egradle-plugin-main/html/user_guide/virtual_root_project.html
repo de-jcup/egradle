@@ -72,11 +72,12 @@
 	<p>
 		<img src="images/egradle-virtualrootproject-example-explorer.png" />
 	</p>
-	Inside a simple build file we apply the gradle eclipse plugin to all sub projects:
+	Inside a simple build file we apply the gradle eclipse plugin to all
+	sub projects:
 	<p>
 		<img src="images/egradle-virtualrootproject-example-buildfile.png" />
 	</p>
-	
+
 	The both projects were already imported into eclipse workspace:
 	<p>
 		<img src="images/egradle-virtualrootproject-example-before-click.png" />
@@ -100,11 +101,12 @@
 	<p>When you add a new file or folder to the base folder of the
 		virtual root project - as shown in next image - the folder/file will
 		NOT be created to the virtual project but inside the original gradle
-		root project folder (this ensures you do not accidently add/commit something from virtual root project)</p>
+		root project folder (this ensures you do not accidently add/commit
+		something from virtual root project)</p>
 	<img src="images/egradle-virual-rootproject-create_new_folder.png" />
 	<p>The virtual root project contains only a link to origin
-		file/folder. Inside the linked folders new created files/folders will be
-		simply created in link target and shown as normal files.e</p>
+		file/folder. Inside the linked folders new created files/folders will
+		be simply created in link target and shown as normal files.e</p>
 	<p>
 		<img src="images/egradle-virtual-rootproject_new_file_as_link.png" />
 	</p>
@@ -114,19 +116,24 @@
 	<br />
 	<br />
 	<h2 id="removing_files">Removing files or folders</h2>
-	When you delete one of the linked files/folders in virtual root project, eclipse will warn
-	you that only the link will be deleted but origin still exists:
+	When you delete one of the linked files/folders in virtual root
+	project, eclipse will warn you that only the link will be deleted but
+	origin still exists:
 	<p>
 		<img src="images/egradle-virtual-rootproject_delete_linked_folder.png" />
 	</p>
+	<p>EGradle is aware of your delete attempt and will support you to
+		delete the file in real root folder too. A dialog ask you about the
+		deletion:</p>
 	<p>
-		EGradle is aware of your delete attempt and will support you to delete the file in real root folder too. 
-		A dialog ask you about the deletion:
+		<img
+			src="images/egradle-virtual-rootproject_delete_origin_file_not_only_link.png" />
 	</p>
 	<p>
-		<img src="images/egradle-virtual-rootproject_delete_origin_file_not_only_link.png"/>
+		Just press
+		<code>Yes</code>
+		button and the file is deleted
 	</p>
-	<p>Just press <code>Yes</code> button and the file is deleted</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>
@@ -139,14 +146,16 @@
 	Like a normal project, you can use F5 to refresh the project.
 	<h3 id="recreated">Full recreate</h3>
 	<p>
+		<img src="images/egradle-virtualrootproject-recreate.png" />
+	<p>A simple click to the button does recreate it again from
+		scratch. At doing this current already opened/imported gradle projects
+		are recognized again. <br>The button is only enabled when the current gradle root project is a multi project.</p>
+	<p>
+		<i>(If there occurs an errror on virtual root project creation -
+			e.g. "cannot create link to ..." please simply press the button
+			again. The problem is well known but currently not fixed)</i>
+	</p>
 	<table border='0'>
-		<tr>
-			<td><img src="images/egradle-virtualrootproject-recreate.png" /></td>
-			<td><p>
-			A simple click to the button does recreate it again from
-				scratch. At doing this current already opened/imported gradle
-				projects are recognized again.</p><p><i>(If there occurs an errror on virtual root project creation - e.g. "cannot create link to ..." please simply press the button again. The problem is well known but currently not fixed)</i></p></td>
-		</tr>
 		<tr>
 			<td><img src="images/info.png" /></td>
 			<td>If your team provider does not automatically connect the
@@ -155,7 +164,6 @@
 			</td>
 		</tr>
 	</table>
-	</p>
 	<p>
 		<a href="#top">Top</a>
 	</p>
@@ -187,8 +195,8 @@
 	<b>connect it with your GIT repository</b> like any other eclipse
 	project
 	<br> The GIT team provider decorations and the GIT staging is done
-	as usual. Normally the virtual root project should be automatically connected to your GIT repository when 
-	it is created.
+	as usual. Normally the virtual root project should be automatically
+	connected to your GIT repository when it is created.
 	<h3>Other</h3>
 	<p>Simply exclude folder ".egradle" from your source versioning</p>
 	<p>
@@ -197,7 +205,8 @@
 	<br />
 	<br />
 	<h2 id="popup-actions">Popup actions</h2>
-	<p>On virtual root project you got popup actions. Contains same as on toolbar and some additionals.</p>
+	<p>On virtual root project you got popup actions. Contains same as
+		on toolbar and some additionals.</p>
 	<img src="images/egradle-virual-rootproject-popup-menu.png" />
 	<p>
 		<a href="#top">Top</a>
@@ -208,10 +217,10 @@
 	The files
 	<i>.gitignore</i> and
 	<i>.project</i> are NOT from root folder but from virtual root project
-	itself! If you want to change /commit the original two root folder files you
-	must do the changes outside eclipse.
+	itself! If you want to change /commit the original two root folder
+	files you must do the changes outside eclipse.
 	<p>
-	Note: <i>.gitignore</i> is not visible at all in virtual root project
+		Note: <i>.gitignore</i> is not visible at all in virtual root project
 	</p>
 	<p>
 		<a href="#top">Top</a>
