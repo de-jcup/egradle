@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
@@ -329,11 +330,17 @@ public class IDEUtil {
 		outputToSystemConsole(Constants.CONSOLE_OK);
 
 	}
-
+	
 	public static void cleanAllProjects(boolean buildAfterClean, IWorkbenchWindow window, IProgressMonitor monitor) {
+		cleanProjects(null, buildAfterClean, window, monitor);
+	}
+	/* FIXME ATR, 04.04.2018: use this directly for #337 */
+	public static void cleanProjects(IBuildConfiguration[] buildConfigurations, boolean buildAfterClean, IWorkbenchWindow window, IProgressMonitor monitor) {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
+		boolean cleanAll = buildConfigurations==null;
+		
 		outputToSystemConsole("start cleaning all projects inside eclipse");
 		if (monitor.isCanceled()) {
 			return;
@@ -350,7 +357,11 @@ public class IDEUtil {
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
-				doCleanAll(monitor);
+				if (cleanAll){
+					doCleanAll(monitor);
+				}else{
+					doClean(buildConfigurations, monitor);
+				}
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
@@ -380,8 +391,6 @@ public class IDEUtil {
 	/**
 	 * Performs the actual clean operation.
 	 * 
-	 * @param cleanAll
-	 *            if <code>true</true> clean all projects
 	 * @param monitor
 	 *            The monitor that the build will report to
 	 * @throws CoreException
@@ -389,6 +398,20 @@ public class IDEUtil {
 	 */
 	protected static void doCleanAll(IProgressMonitor monitor) throws CoreException {
 		getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+	}
+	
+	/**
+	 * Performs the actual clean operation.
+	 * 
+	 * @param buildConfigurations the build configurations
+	 * @param monitor
+	 *            The monitor that the build will report to
+	 * @param buildConfigs 
+	 * @throws CoreException
+	 *             thrown if there is a problem from the core builder.
+	 */
+	protected static void doClean(IBuildConfiguration[] buildConfigurations, IProgressMonitor monitor) throws CoreException {
+		getWorkspace().build(buildConfigurations, IncrementalProjectBuilder.CLEAN_BUILD, true, monitor);
 	}
 
 	public static void removeAllValidationErrorsOfConsoleOutput() {

@@ -252,6 +252,7 @@ public class RootProjectImportSupport {
 					if (cleanProjects) {
 						importProgressMessage(monitor, "Clean all projects");
 						IWorkbenchWindow window = getActiveWorkbenchWindow();
+						/* FIXME ATR, 04.04.2018: collect the projects to clean and change this for #337 */
 						cleanAllProjects(true, window, monitor);
 					}
 				}

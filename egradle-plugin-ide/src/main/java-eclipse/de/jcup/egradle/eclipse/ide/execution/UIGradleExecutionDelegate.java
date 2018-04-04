@@ -73,6 +73,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		}
 		if (cleanAllProjects) {
 			IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
+			/* FIXME ATR, 04.04.2018: collect the projects to clean and change this for #337 */
 			cleanAllProjects(buildAfterClean, window, monitor);
 		}
 		super.afterExecutionDone(monitor);
