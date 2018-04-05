@@ -37,6 +37,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.ide.dialogs.ImportTypeDialog;
 
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.ProcessExecutionResult;
@@ -50,6 +51,7 @@ import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.virtualroot.VirtualRootProjectException;
 import de.jcup.egradle.eclipse.ide.EGradleMessageDialogSupport;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
+import de.jcup.egradle.eclipse.ide.ProjectContext;
 import de.jcup.egradle.eclipse.ide.ProjectMetaDataCacheSupport;
 import de.jcup.egradle.eclipse.ide.ProjectMetaDataCacheSupport.ProjectCacheData;
 import de.jcup.egradle.eclipse.ide.ProjectShareSupport;
@@ -70,7 +72,7 @@ public class RootProjectImportSupport {
 	EGradleShellType shell;
 	String callTypeId;
 	boolean restoreMetadata;
-
+	
 	private AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler;
 
 	public RootProjectImportSupport() {
@@ -155,7 +157,7 @@ public class RootProjectImportSupport {
 				boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator
 						.deleteVirtualRootProjectFull(monitor);
 
-				List<IProject> projectsToClose = fetchEclipseProjectsAlreadyInNewRootProject(newRootFolder,
+				List<IProject> projectsToClose = fetchEclipseProjectsInRootProject(newRootFolder,
 						virtualRootProject);
 
 				/* store working set information */
@@ -226,8 +228,14 @@ public class RootProjectImportSupport {
 				preferences.setGradleShellType(shell);
 				preferences.setGradleCallTypeID(callTypeId);
 
-				worked = importProjects(monitor, worked, existingEclipseFoldersAfterImport);
-				importProgressMessage(monitor, "Imports done. Start eclipse refresh operations");
+				/* ----------------*/
+				/* import projects */
+				/* ----------------*/
+				ProjectContext importResult = importProjects(monitor, worked, existingEclipseFoldersAfterImport);
+				int projectAmount = importResult.getProjects().size();
+				worked=worked+projectAmount;
+				
+				importProgressMessage(monitor, "Imported projects:"+projectAmount);
 
 				/* ---------------- */
 				/* update workspace */
@@ -238,7 +246,7 @@ public class RootProjectImportSupport {
 					 * execute assemble task and - if enabled - after execution
 					 * the 'clean projects' operation
 					 */
-					processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(rootProject, monitor,
+					processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(importResult, rootProject, monitor,
 							cleanProjects);
 					if (processExecutionResult.isNotOkay()) {
 						throw new InvocationTargetException(
@@ -252,8 +260,7 @@ public class RootProjectImportSupport {
 					if (cleanProjects) {
 						importProgressMessage(monitor, "Clean all projects");
 						IWorkbenchWindow window = getActiveWorkbenchWindow();
-						/* FIXME ATR, 04.04.2018: collect the projects to clean and change this for #337 */
-						cleanAllProjects(true, window, monitor);
+						cleanProjects(importResult, true, window, monitor);
 					}
 				}
 
@@ -396,16 +403,20 @@ public class RootProjectImportSupport {
 		return worked;
 	}
 
-	private int importProjects(IProgressMonitor monitor, int worked, List<File> foldersToImport) throws CoreException {
+	
+	
+	private ProjectContext importProjects(IProgressMonitor monitor, int worked, List<File> foldersToImport) throws CoreException {
+		ProjectContext importResult = new ProjectContext();
 		/* start import of all eclipse projects inside multiproject */
 		for (File folder : foldersToImport) {
 			importProgressMessage(monitor, "importing: " + folder.getAbsolutePath());
 			IProject project = IDEUtil.importProject(folder, monitor);
 			project.open(monitor);
 			automaticalDeriveBuildFoldersHandler.deriveBuildFolders(project, monitor);
+			importResult.getProjects().add(project);
 			monitor.worked(++worked);
 		}
-		return worked;
+		return importResult;
 	}
 
 	private int deleteProjects(IProgressMonitor monitor, int worked, List<IProject> projectsToClose)
@@ -434,7 +445,8 @@ public class RootProjectImportSupport {
 		return worked;
 	}
 
-	private List<IProject> fetchEclipseProjectsAlreadyInNewRootProject(File newRootFolder, IProject... projectsToIgnore)
+	
+	public List<IProject> fetchEclipseProjectsInRootProject(File newRootFolder, IProject... projectsToIgnore)
 			throws CoreException {
 		List<IProject> projectsToClose = new ArrayList<>();
 		List<IProject> projectsToIgnoreList;
@@ -502,11 +514,11 @@ public class RootProjectImportSupport {
 				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
 			}
 		};
-		delegate.setCleanAllProjects(false, false); // do NOT make clean
+		delegate.setCleanProjects(false, false); // do NOT make clean
 													// projects here or do a
 													// refresh! this must be
 													// done later!
-		delegate.setRefreshAllProjects(false); //
+		delegate.setRefreshProjects(false); //
 		delegate.setShowEGradleSystemConsole(true);
 		delegate.execute(progressMonitor);
 
@@ -514,7 +526,7 @@ public class RootProjectImportSupport {
 		return processExecutionResult;
 	}
 
-	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(GradleRootProject rootProject,
+	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(ProjectContext projectContext, GradleRootProject rootProject,
 			IProgressMonitor progressMonitor, boolean clean) throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = getSystemConsoleOutputHandler();
 		/*
@@ -535,9 +547,10 @@ public class RootProjectImportSupport {
 				return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
 			}
 		};
-		delegate.setRefreshAllProjects(true);
+		delegate.setProjectContext(projectContext);
+		delegate.setRefreshProjects(true);
 		if (clean) {
-			delegate.setCleanAllProjects(true, true);
+			delegate.setCleanProjects(true, true);
 		}
 		delegate.setShowEGradleSystemConsole(true);
 

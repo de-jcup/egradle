@@ -24,14 +24,16 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessExecutor;
 import de.jcup.egradle.core.util.GradleContextPreparator;
+import de.jcup.egradle.eclipse.ide.ProjectContext;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
-	private boolean refreshAllProjects = true;
+	private boolean refreshProjects = true;
 	private boolean showEGradleSystemConsole = true;
-	private boolean cleanAllProjects;
+	private boolean cleanProjects;
 	private boolean buildAfterClean;
+	private ProjectContext projectContext; 
 
 	
 	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
@@ -44,8 +46,16 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		super(outputHandler, processExecutor, additionalContextPreparator,rootProject);
 	}
 
-	public void setRefreshAllProjects(boolean refreshAllProjects) {
-		this.refreshAllProjects = refreshAllProjects;
+	/**
+	 * Set project context
+	 * @param projectContext - if null every project in workspace is targeted on multi project operations (e.g. clean/build etc.)
+	 */
+	public void setProjectContext(ProjectContext projectContext) {
+		this.projectContext = projectContext;
+	}
+	
+	public void setRefreshProjects(boolean refreshAllProjects) {
+		this.refreshProjects = refreshAllProjects;
 	}
 	
 	public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
@@ -53,8 +63,8 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	}
 	
 	
-	public void setCleanAllProjects(boolean cleanAllProjects, boolean buildAfterClean) {
-		this.cleanAllProjects=cleanAllProjects;
+	public void setCleanProjects(boolean cleanProjects, boolean buildAfterClean) {
+		this.cleanProjects=cleanProjects;
 		this.buildAfterClean=buildAfterClean;
 	}
 
@@ -68,13 +78,12 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
 		monitor.worked(1);
-		if (refreshAllProjects) {
-			refreshAllProjects(monitor);
+		if (refreshProjects) {
+			refreshProjects(projectContext, monitor);
 		}
-		if (cleanAllProjects) {
+		if (cleanProjects) {
 			IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
-			/* FIXME ATR, 04.04.2018: collect the projects to clean and change this for #337 */
-			cleanAllProjects(buildAfterClean, window, monitor);
+			cleanProjects(projectContext, buildAfterClean, window, monitor);
 		}
 		super.afterExecutionDone(monitor);
 		monitor.worked(2);

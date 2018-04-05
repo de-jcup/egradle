@@ -27,7 +27,6 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
 import de.jcup.egradle.core.util.History;
-import de.jcup.egradle.core.util.TextUtil;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
@@ -69,7 +68,7 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 			throws GradleExecutionException {
 		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
 				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshAllProjects(false);
+		ui.setRefreshProjects(false);
 		ui.setShowEGradleSystemConsole(true);
 		return ui;
 	}

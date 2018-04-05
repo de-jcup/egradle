@@ -19,6 +19,7 @@ import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
@@ -41,6 +42,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
@@ -75,6 +77,7 @@ import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHand
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
+import de.jcup.egradle.eclipse.ide.wizards.RootProjectImportSupport;
 import de.jcup.egradle.eclipse.ui.UnpersistedMarkerHelper;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.eclipse.util.ProjectDescriptionCreator;
@@ -113,6 +116,24 @@ public class IDEUtil {
 		return new RememberLastLinesOutputHandler(max);
 	}
 
+	public static ProjectContext getAllEclipseProjectsInCurrentGradleRootProject(){
+		ProjectContext context = new ProjectContext();
+		RootProjectImportSupport support = new RootProjectImportSupport();
+		GradleRootProject gradleRootProject = IDEUtil.getRootProject(true);
+		if (gradleRootProject==null){
+			return context; // context is empty - okay. 
+		}
+		List<IProject> projects;
+		File rootFolder = gradleRootProject.getFolder();
+		try {
+			projects = support.fetchEclipseProjectsInRootProject(rootFolder);
+			context.getProjects().addAll(projects);
+		} catch (CoreException e) {
+			logError("Was not able to fetch eclipse projects from current root project:"+rootFolder, e);
+		}
+		return context;
+	}
+	
 	/**
 	 * Creates or refreshes virtual root project. If project exists but isn't
 	 * opened it will be automatically opened
@@ -290,7 +311,7 @@ public class IDEUtil {
 					LabelProviderChangedEvent event = new LabelProviderChangedEvent(decorator, projects);
 					decorator.fireLabelProviderChanged(event);
 				}
-				
+
 				UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 			}
 
@@ -302,19 +323,31 @@ public class IDEUtil {
 	 * Does a refresh to projects. If enabled build folders are automatically
 	 * derived
 	 * 
+	 * @param context
+	 * 
 	 * @param monitor
 	 */
-	public static void refreshAllProjects(IProgressMonitor monitor) {
+	public static void refreshProjects(ProjectContext context, IProgressMonitor monitor) {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
 		AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler = new AutomaticalDeriveBuildFoldersHandler();
-		outputToSystemConsole("start refreshing all projects");
+		if (context == null) {
+			outputToSystemConsole("start refreshing all projects");
+		} else {
+			outputToSystemConsole("start refreshing " + context.getProjects().size() + " projects");
+		}
 		IProject[] projects = getAllProjects();
 		for (IProject project : projects) {
 			try {
 				if (monitor.isCanceled()) {
 					break;
+				}
+				if (context != null) {
+					if (!context.getProjects().contains(project)) {
+						// this project is not inside context - so skip
+						continue;
+					}
 				}
 				String text = "refreshing project " + project.getName();
 				monitor.subTask(text);
@@ -330,23 +363,21 @@ public class IDEUtil {
 		outputToSystemConsole(Constants.CONSOLE_OK);
 
 	}
-	
-	public static void cleanAllProjects(boolean buildAfterClean, IWorkbenchWindow window, IProgressMonitor monitor) {
-		cleanProjects(null, buildAfterClean, window, monitor);
-	}
-	/* FIXME ATR, 04.04.2018: use this directly for #337 */
-	public static void cleanProjects(IBuildConfiguration[] buildConfigurations, boolean buildAfterClean, IWorkbenchWindow window, IProgressMonitor monitor) {
+
+	public static void cleanProjects(ProjectContext context, boolean buildAfterClean, IWorkbenchWindow window,
+			IProgressMonitor monitor) {
 		if (monitor == null) {
 			monitor = NULL_PROGESS;
 		}
-		boolean cleanAll = buildConfigurations==null;
-		
-		outputToSystemConsole("start cleaning all projects inside eclipse");
+		final IBuildConfiguration[] buildConfigurations = extractBuildConfigurations(context);
 		if (monitor.isCanceled()) {
 			return;
 		}
+		String message = createBuildInfoMessage(buildAfterClean, buildConfigurations);
+
+		outputToSystemConsole(message);
 		// see org.eclipse.ui.internal.ide.dialogs.CleanDialog#buttonPressed
-		WorkspaceJob cleanJob = new WorkspaceJob("Clean all projects") {
+		WorkspaceJob cleanJob = new WorkspaceJob(message) {
 			@Override
 			public boolean belongsTo(Object family) {
 				return ResourcesPlugin.FAMILY_MANUAL_BUILD.equals(family);
@@ -357,9 +388,9 @@ public class IDEUtil {
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
-				if (cleanAll){
+				if (buildConfigurations == null) {
 					doCleanAll(monitor);
-				}else{
+				} else {
 					doClean(buildConfigurations, monitor);
 				}
 				if (monitor.isCanceled()) {
@@ -367,18 +398,29 @@ public class IDEUtil {
 				}
 				if (buildAfterClean) {
 					if (window == null) {
-						logWarning("Not able to do global build because no active workbench window found!");
-						;
+						logWarning("Not able to build after clean because no active workbench window found!");
 					} else {
-						GlobalBuildAction build = new GlobalBuildAction(window,
-								IncrementalProjectBuilder.INCREMENTAL_BUILD);
-						build.doBuild();
+						if (buildConfigurations==null){
+							GlobalBuildAction build = new GlobalBuildAction(window,
+									IncrementalProjectBuilder.INCREMENTAL_BUILD);
+							build.doBuild();
+						}else{
+							IStatus status = null;
+							SubMonitor progress = SubMonitor.convert(monitor, 1);
+							progress.setTaskName("build cleaned gradle projects in eclipse");
+							try {
+								ResourcesPlugin.getWorkspace().build(buildConfigurations,
+										IncrementalProjectBuilder.INCREMENTAL_BUILD, true, progress.split(1));
+							} catch (CoreException e) {
+								status = e.getStatus();
+							}
+							return status == null ? Status.OK_STATUS : status;
+						}
 					}
 				}
 				return Status.OK_STATUS;
 			}
 		};
-
 		cleanJob.setRule(getWorkspace().getRuleFactory().buildRule());
 		cleanJob.setUser(true);
 		cleanJob.setProperty(IProgressConstants2.SHOW_IN_TASKBAR_ICON_PROPERTY, Boolean.TRUE);
@@ -386,6 +428,52 @@ public class IDEUtil {
 
 		outputToSystemConsole(Constants.CONSOLE_OK);
 
+	}
+
+
+	protected static String createBuildInfoMessage(boolean buildAfterClean,
+			final IBuildConfiguration[] buildConfigurations) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("trigger cleaning ");
+		if (buildAfterClean) {
+			sb.append("and build ");
+		}
+		sb.append("of ");
+		if (buildConfigurations == null) {
+			sb.append("all ");
+		} else {
+			sb.append(buildConfigurations.length);
+		}
+		sb.append("build configurations in eclipse");
+		String message = sb.toString();
+		return message;
+	}
+
+	protected static IBuildConfiguration[] extractBuildConfigurations(ProjectContext context) {
+		final IBuildConfiguration[] buildConfigurations;
+		if (context == null) {
+			buildConfigurations = null;
+		} else {
+			List<IBuildConfiguration> bcList = new ArrayList<>();
+			for (IProject project : context.getProjects()) {
+				try {
+					IBuildConfiguration[] confisgs = project.getBuildConfigs();
+					if (confisgs == null) {
+						continue;
+					}
+					for (IBuildConfiguration bc : confisgs) {
+						if (bc == null) {
+							continue;
+						}
+						bcList.add(bc);
+					}
+				} catch (CoreException e) {
+					logError("Was not able to get build config for project:" + project, e);
+				}
+			}
+			buildConfigurations = bcList.toArray(new IBuildConfiguration[bcList.size()]);
+		}
+		return buildConfigurations;
 	}
 
 	/**
@@ -399,18 +487,20 @@ public class IDEUtil {
 	protected static void doCleanAll(IProgressMonitor monitor) throws CoreException {
 		getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
 	}
-	
+
 	/**
 	 * Performs the actual clean operation.
 	 * 
-	 * @param buildConfigurations the build configurations
+	 * @param buildConfigurations
+	 *            the build configurations
 	 * @param monitor
 	 *            The monitor that the build will report to
-	 * @param buildConfigs 
+	 * @param buildConfigs
 	 * @throws CoreException
 	 *             thrown if there is a problem from the core builder.
 	 */
-	protected static void doClean(IBuildConfiguration[] buildConfigurations, IProgressMonitor monitor) throws CoreException {
+	protected static void doClean(IBuildConfiguration[] buildConfigurations, IProgressMonitor monitor)
+			throws CoreException {
 		getWorkspace().build(buildConfigurations, IncrementalProjectBuilder.CLEAN_BUILD, true, monitor);
 	}
 
@@ -466,7 +556,7 @@ public class IDEUtil {
 		refreshAllProjectDecorations();
 		try {
 			GradleRootProject rootProject = getRootProject();
-			if (rootProject !=null && rootProject.isMultiProject()) {
+			if (rootProject != null && rootProject.isMultiProject()) {
 				createOrRecreateVirtualRootProject();
 			}
 		} catch (VirtualRootProjectException e) {

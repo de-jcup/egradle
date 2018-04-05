@@ -110,7 +110,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 			throws GradleExecutionException {
 		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
 				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshAllProjects(false);
+		ui.setRefreshProjects(false);
 		ui.setShowEGradleSystemConsole(true);
 		return ui;
 	}

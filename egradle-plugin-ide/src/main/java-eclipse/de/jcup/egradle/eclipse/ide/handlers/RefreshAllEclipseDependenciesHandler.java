@@ -19,6 +19,7 @@ import de.jcup.egradle.core.domain.GradleCommand;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.SimpleProcessExecutor;
+import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
@@ -38,8 +39,9 @@ public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommand
 			throws GradleExecutionException {
 		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
 				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshAllProjects(true);
-		ui.setCleanAllProjects(true, false);
+		ui.setRefreshProjects(true);
+		ui.setProjectContext(IDEUtil.getAllEclipseProjectsInCurrentGradleRootProject());
+		ui.setCleanProjects(true, false);
 		ui.setShowEGradleSystemConsole(true);
 		return ui;
 	}
