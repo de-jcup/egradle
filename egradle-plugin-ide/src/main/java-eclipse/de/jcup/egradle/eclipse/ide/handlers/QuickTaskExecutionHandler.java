@@ -48,6 +48,9 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 		lastInput = null;
 		Shell shell = HandlerUtil.getActiveShellChecked(event);
 		GradleRootProject rootProject = IDEUtil.getRootProject();
+		if (rootProject == null){
+			return null;
+		}
 		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history, " (" + rootProject.getName() + ")");
 		dialog.open();
 		lastInput = dialog.getValue();

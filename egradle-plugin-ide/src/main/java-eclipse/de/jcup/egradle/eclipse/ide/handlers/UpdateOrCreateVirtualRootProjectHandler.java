@@ -71,21 +71,23 @@ public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler imp
 
 	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
-		GradleRootProject rootProject = IDEUtil.getRootProject();
+		GradleRootProject rootProject = IDEUtil.getRootProject(false);
 		if (rootProject == null) {
 			element.setTooltip("Disabled because currently no egradle root project set!");
 			this.setBaseEnabled(false);
-		} else
+			return;
+		}
 
-		if (!rootProject.isMultiProject()) {
-			element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '"
-					+ rootProject.getName() + "'");
-			this.setBaseEnabled(false);
-		} else {
+		if (rootProject.isMultiProject()) {
 			element.setTooltip("Creates or updates virtual root project for your gradle multi project '"
 					+ rootProject.getName() + "'");
 			this.setBaseEnabled(true);
+			return;
 		}
+
+		element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '"
+				+ rootProject.getName() + "'");
+		this.setBaseEnabled(false);
 	}
 
 	public static void requestRefresh() {
