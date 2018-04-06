@@ -116,12 +116,12 @@ public class IDEUtil {
 		return new RememberLastLinesOutputHandler(max);
 	}
 
-	public static ProjectContext getAllEclipseProjectsInCurrentGradleRootProject(){
+	public static ProjectContext getAllEclipseProjectsInCurrentGradleRootProject() {
 		ProjectContext context = new ProjectContext();
 		RootProjectImportSupport support = new RootProjectImportSupport();
 		GradleRootProject gradleRootProject = IDEUtil.getRootProject(true);
-		if (gradleRootProject==null){
-			return context; // context is empty - okay. 
+		if (gradleRootProject == null) {
+			return context; // context is empty - okay.
 		}
 		List<IProject> projects;
 		File rootFolder = gradleRootProject.getFolder();
@@ -129,11 +129,11 @@ public class IDEUtil {
 			projects = support.fetchEclipseProjectsInRootProject(rootFolder);
 			context.getProjects().addAll(projects);
 		} catch (CoreException e) {
-			logError("Was not able to fetch eclipse projects from current root project:"+rootFolder, e);
+			logError("Was not able to fetch eclipse projects from current root project:" + rootFolder, e);
 		}
 		return context;
 	}
-	
+
 	/**
 	 * Creates or refreshes virtual root project. If project exists but isn't
 	 * opened it will be automatically opened
@@ -393,32 +393,41 @@ public class IDEUtil {
 				} else {
 					doClean(buildConfigurations, monitor);
 				}
+				
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
-				if (buildAfterClean) {
-					if (window == null) {
-						logWarning("Not able to build after clean because no active workbench window found!");
-					} else {
-						if (buildConfigurations==null){
-							GlobalBuildAction build = new GlobalBuildAction(window,
-									IncrementalProjectBuilder.INCREMENTAL_BUILD);
-							build.doBuild();
-						}else{
-							IStatus status = null;
-							SubMonitor progress = SubMonitor.convert(monitor, 1);
-							progress.setTaskName("build cleaned gradle projects in eclipse");
-							try {
-								ResourcesPlugin.getWorkspace().build(buildConfigurations,
-										IncrementalProjectBuilder.INCREMENTAL_BUILD, true, progress.split(1));
-							} catch (CoreException e) {
-								status = e.getStatus();
-							}
-							return status == null ? Status.OK_STATUS : status;
-						}
-					}
+				if (!buildAfterClean) {
+					return Status.OK_STATUS;
 				}
+				
+				if (buildConfigurations != null) {
+					SubMonitor progress = SubMonitor.convert(monitor, 1);
+					progress.setTaskName("build cleaned gradle projects in eclipse");
+					try {
+						ResourcesPlugin.getWorkspace().build(buildConfigurations,
+								IncrementalProjectBuilder.INCREMENTAL_BUILD, true, progress.split(1));
+						return Status.OK_STATUS;
+					} catch (CoreException e) {
+						logError("Was not able to build eclipse projects after clean", e);
+						return e.getStatus();
+					}
+					
+				}
+				
+				/* no build configurations set - use global variant...*/
+				if (window == null) {
+					logWarning("Not able to trigger global build after clean because no active workbench window found!");
+					return Status.OK_STATUS;
+				}
+				
+				GlobalBuildAction build = new GlobalBuildAction(window,
+						IncrementalProjectBuilder.INCREMENTAL_BUILD);
+				build.doBuild();
+				
 				return Status.OK_STATUS;
+				
+
 			}
 		};
 		cleanJob.setRule(getWorkspace().getRuleFactory().buildRule());
@@ -429,7 +438,6 @@ public class IDEUtil {
 		outputToSystemConsole(Constants.CONSOLE_OK);
 
 	}
-
 
 	protected static String createBuildInfoMessage(boolean buildAfterClean,
 			final IBuildConfiguration[] buildConfigurations) {
@@ -450,30 +458,30 @@ public class IDEUtil {
 	}
 
 	protected static IBuildConfiguration[] extractBuildConfigurations(ProjectContext context) {
-		final IBuildConfiguration[] buildConfigurations;
+		final IBuildConfiguration[] result;
 		if (context == null) {
-			buildConfigurations = null;
+			result = null;
 		} else {
-			List<IBuildConfiguration> bcList = new ArrayList<>();
+			List<IBuildConfiguration> list = new ArrayList<>();
 			for (IProject project : context.getProjects()) {
 				try {
-					IBuildConfiguration[] confisgs = project.getBuildConfigs();
-					if (confisgs == null) {
+					IBuildConfiguration[] projectBuildConfigurations = project.getBuildConfigs();
+					if (projectBuildConfigurations == null) {
 						continue;
 					}
-					for (IBuildConfiguration bc : confisgs) {
-						if (bc == null) {
+					for (IBuildConfiguration buildConfiguration : projectBuildConfigurations) {
+						if (buildConfiguration == null) {
 							continue;
 						}
-						bcList.add(bc);
+						list.add(buildConfiguration);
 					}
 				} catch (CoreException e) {
 					logError("Was not able to get build config for project:" + project, e);
 				}
 			}
-			buildConfigurations = bcList.toArray(new IBuildConfiguration[bcList.size()]);
+			result = list.toArray(new IBuildConfiguration[list.size()]);
 		}
-		return buildConfigurations;
+		return result;
 	}
 
 	/**
