@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 //Send questions, comments, bug reports, etc. to the authors:
 
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -164,15 +164,15 @@ public class SelectConfigurationDialog extends Dialog {
 			}
 		}
 		// Return the entered value, or null
-		if (! okPressed){
+		if (!okPressed) {
 			return null;
 		}
-		
+
 		return input;
 	}
-	
+
 	private void persistLocation() {
-		if (shell==null || shell.isDisposed()){
+		if (shell == null || shell.isDisposed()) {
 			return;
 		}
 		IDialogSettings settings = getDialogSettings();
@@ -234,7 +234,7 @@ public class SelectConfigurationDialog extends Dialog {
 
 			public void widgetSelected(SelectionEvent event) {
 				input = combo.getText();
-				okPressed=true;
+				okPressed = true;
 				shell.close();
 			}
 		});
@@ -279,8 +279,8 @@ public class SelectConfigurationDialog extends Dialog {
 	}
 
 	private Point calculateCenterOnCurrentDisplay(Point initialSize) {
-		if (shell==null || shell.isDisposed()){
-			return new Point(0,0);
+		if (shell == null || shell.isDisposed()) {
+			return new Point(0, 0);
 		}
 		/* fall back implemenrtation for unpersisted location */
 		Composite parent = getParent();
@@ -305,7 +305,7 @@ public class SelectConfigurationDialog extends Dialog {
 	}
 
 	private Point getPersistedLocation() {
-		if (shell==null || shell.isDisposed()){
+		if (shell == null || shell.isDisposed()) {
 			return null;
 		}
 		Point result = null;

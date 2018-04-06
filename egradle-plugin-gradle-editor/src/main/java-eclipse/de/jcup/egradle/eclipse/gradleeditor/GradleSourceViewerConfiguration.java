@@ -67,8 +67,7 @@ public class GradleSourceViewerConfiguration extends AbstractGroovySourceViewerC
 	public GradleSourceViewerConfiguration(IAdaptable adaptable) {
 		super(adaptable, COLOR_NORMAL_TEXT);
 		Assert.isNotNull(adaptable, "adaptable may not be null!");
-		
-		
+
 		/* code completion */
 		this.contentAssistant = new ContentAssistant();
 		this.gradleContentAssistProcessor = new GradleContentAssistProcessor(adaptable, new RelevantCodeCutter());
@@ -126,7 +125,7 @@ public class GradleSourceViewerConfiguration extends AbstractGroovySourceViewerC
 
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
-		if (sourceViewer == null){
+		if (sourceViewer == null) {
 			return null;
 		}
 		return new IHyperlinkDetector[] { new URLHyperlinkDetector(), new GradleHyperlinkDetector(adaptable) };

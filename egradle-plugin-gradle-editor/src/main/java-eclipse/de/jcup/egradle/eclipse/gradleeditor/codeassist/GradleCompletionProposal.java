@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.codeassist;
+package de.jcup.egradle.eclipse.gradleeditor.codeassist;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
@@ -33,7 +33,8 @@ import de.jcup.egradle.codeassist.Proposal;
 import de.jcup.egradle.eclipse.gradleeditor.DefaultEGradleLinkListener;
 import de.jcup.egradle.eclipse.gradleeditor.control.SimpleBrowserInformationControl;
 
-public class GradleCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 /*, ICompletionProposalExtension6*/ {
+public class GradleCompletionProposal
+		implements ICompletionProposal, ICompletionProposalExtension3 /* , ICompletionProposalExtension6 */ {
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String fDisplayString;
@@ -41,7 +42,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	private int fReplacementOffset;
 	/** The replacement length. */
 	private int fReplacementLength;
-	
+
 	/** The image to be displayed in the completion proposal popup. */
 	private Image fImage;
 	/** The context information of this proposal. */
@@ -57,7 +58,8 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	/**
 	 * Creates a new completion proposal. All fields are initialized based on
 	 * the provided information.
-	 * @param proposal 
+	 * 
+	 * @param proposal
 	 *
 	 * @param replacementOffset
 	 *            the offset of the text to be replaced
@@ -69,13 +71,16 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	 *            the context information associated with this proposal
 	 * @param additionalProposalInfo
 	 *            the additional information associated with this proposal
-	 * @param lazyHtmlBuilder lazy builder or <code>null</code>
+	 * @param lazyHtmlBuilder
+	 *            lazy builder or <code>null</code>
 	 */
-	public GradleCompletionProposal(Proposal proposal, int replacementOffset, int replacementLength, Image image, IContextInformation contextInformation, String additionalProposalInfo, LazyLanguageElementHTMLDescriptionBuilder lazyHtmlBuilder) {
+	public GradleCompletionProposal(Proposal proposal, int replacementOffset, int replacementLength, Image image,
+			IContextInformation contextInformation, String additionalProposalInfo,
+			LazyLanguageElementHTMLDescriptionBuilder lazyHtmlBuilder) {
 		Assert.isTrue(replacementOffset >= 0);
 		Assert.isTrue(replacementLength >= 0);
 		Assert.isNotNull(proposal);
-		this.proposal=proposal;
+		this.proposal = proposal;
 		this.movement = new LazyCursorMovement(proposal);
 		fReplacementOffset = replacementOffset;
 		fReplacementLength = replacementLength;
@@ -83,8 +88,8 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 		fDisplayString = proposal.getLabel();
 		fContextInformation = contextInformation;
 		fAdditionalProposalInfo = additionalProposalInfo;
-		
-		this.lazyBuilder=lazyHtmlBuilder;
+
+		this.lazyBuilder = lazyHtmlBuilder;
 	}
 
 	@Override
@@ -113,15 +118,15 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 
 	@Override
 	public String getDisplayString() {
-		if (fDisplayString != null){
+		if (fDisplayString != null) {
 			return fDisplayString;
 		}
 		return "";
 	}
-	
+
 	@Override
 	public String getAdditionalProposalInfo() {
-		if (lazyBuilder!=null){
+		if (lazyBuilder != null) {
 			return lazyBuilder.createHTML();
 		}
 		return fAdditionalProposalInfo;
@@ -133,7 +138,7 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	@Override
 	public IInformationControlCreator getInformationControlCreator() {
 		if (informationControlCreator == null) {
-			informationControlCreator=new EGradleInformationControlCreator();
+			informationControlCreator = new EGradleInformationControlCreator();
 		}
 		return informationControlCreator;
 	}
@@ -147,20 +152,20 @@ public class GradleCompletionProposal implements ICompletionProposal, ICompletio
 	public int getPrefixCompletionStart(IDocument document, int completionOffset) {
 		return 0;
 	}
-	
+
 	protected class EGradleInformationControlCreator extends AbstractReusableInformationControlCreator {
 		@Override
 		public IInformationControl doCreateInformationControl(Shell shell) {
-			if (SimpleBrowserInformationControl.isAvailableFor(shell)){
-				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(shell,20);
-				if (lazyBuilder!=null){
-					control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(lazyBuilder.getFgColor(), lazyBuilder.getBgColor(), lazyBuilder.getCommentColor(), lazyBuilder.getBuilder()));
+			if (SimpleBrowserInformationControl.isAvailableFor(shell)) {
+				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(shell, 20);
+				if (lazyBuilder != null) {
+					control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(lazyBuilder.getFgColor(),
+							lazyBuilder.getBgColor(), lazyBuilder.getCommentColor(), lazyBuilder.getBuilder()));
 				}
 				return control;
 			}
 			return new DefaultInformationControl(shell, true);
 		}
 	}
-
 
 }

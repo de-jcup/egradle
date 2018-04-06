@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -36,12 +36,12 @@ public class GradleFileLinkCalculatorTest {
 		/* prepare */
 		GradleStringTransformer transformer = mock(GradleStringTransformer.class);
 		calcToTest.setTransformer(transformer);
-		
+
 		/* execute */
 		calcToTest.createFileLinkString("apply from: ' '", 0);
 
 		/* test */
-		verify(transformer,never()).transform(any());
+		verify(transformer, never()).transform(any());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class GradleFileLinkCalculatorTest {
 		/* prepare */
 		GradleStringTransformer transformer = mock(GradleStringTransformer.class);
 		calcToTest.setTransformer(transformer);
-		
+
 		/* execute */
 		calcToTest.createFileLinkString("apply from: 'bla.gradle'", 0);
 
@@ -69,10 +69,10 @@ public class GradleFileLinkCalculatorTest {
 
 		/* test */
 		assertNotNull(result);
-		assertEquals("blub.gradle",result.linkContent);
+		assertEquals("blub.gradle", result.linkContent);
 
 	}
-	
+
 	@Test
 	public void transformer_not_null_when_calculator_link_content_is_set_but_transformer_result_is_null_origin_text_is_returned() {
 		/* prepare */
@@ -86,7 +86,7 @@ public class GradleFileLinkCalculatorTest {
 		/* test */
 		assertNotNull(result);
 		verify(transformer).transform("bla.gradle");
-		assertEquals("bla.gradle",result.linkContent);
+		assertEquals("bla.gradle", result.linkContent);
 
 	}
 

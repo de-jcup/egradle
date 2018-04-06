@@ -39,7 +39,7 @@ public class FileSupport {
 	public static final FileSupport DEFAULT = new FileSupport();
 
 	private static final int MAX_RETRY = 5;
-	
+
 	private static final String LINE_SEP = System.getProperty("line.separator");
 
 	private byte[] buffer = new byte[8192];
@@ -166,10 +166,10 @@ public class FileSupport {
 	}
 
 	public void createTextFile(File textFile, String content) throws IOException {
-		if (textFile==null) {
+		if (textFile == null) {
 			throw new IllegalArgumentException("text file may not be null");
 		}
-		if (content==null) {
+		if (content == null) {
 			throw new IllegalArgumentException("content may not be null");
 		}
 		try (FileOutputStream fileOutputStram = new FileOutputStream(textFile);
@@ -227,19 +227,19 @@ public class FileSupport {
 			}
 		}
 	}
-	
+
 	public String readTextFile(File file) throws IOException {
-		return readTextFile(file,LINE_SEP);
+		return readTextFile(file, LINE_SEP);
 	}
 
 	public String readTextFile(File file, String lineSep) throws IOException {
-		int lineNr =0;
+		int lineNr = 0;
 		StringBuilder sb = new StringBuilder();
-		try (BufferedReader br=new BufferedReader(new FileReader(file))){
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line = "";
-			while ((line=br.readLine())!=null){
-				if (lineNr>0){
-					/* not first line so add line sep*/
+			while ((line = br.readLine()) != null) {
+				if (lineNr > 0) {
+					/* not first line so add line sep */
 					sb.append(lineSep);
 				}
 				sb.append(line);
@@ -264,7 +264,8 @@ public class FileSupport {
 	 * 
 	 * @param file
 	 * @throws IOException
-	 * @throws IllegalArgumentException when file is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             when file is <code>null</code>
 	 */
 	public void delete(File file) throws IOException {
 		if (file == null) {
@@ -313,33 +314,34 @@ public class FileSupport {
 
 	/**
 	 * Checks if given file is inside given folder
+	 * 
 	 * @param file
 	 * @param expectedFolder
 	 * @return <code>true</code> when inside folder or one of its sub folders
 	 */
 	public boolean isInside(File file, File expectedFolder) {
-		if (file==null){
+		if (file == null) {
 			return false;
 		}
-		if (expectedFolder==null){
+		if (expectedFolder == null) {
 			return false;
 		}
 		boolean isInside = false;
 		File parent = file;
-		
-		while (!isInside && parent!=null){
+
+		while (!isInside && parent != null) {
 			parent = parent.getParentFile();
-			
-			if (parent==null){
+
+			if (parent == null) {
 				continue;
 			}
-			
-			if (expectedFolder.equals(parent)){
-				isInside=true;
+
+			if (expectedFolder.equals(parent)) {
+				isInside = true;
 			}
-			
+
 		}
-		
+
 		return isInside;
 	}
 }

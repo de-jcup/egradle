@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,15 +39,15 @@ public class XMLTypeExtension implements TypeExtension {
 	public void setMixinTypeAsString(String mixinTypeAsString) {
 		this.mixinTypeAsString = mixinTypeAsString;
 	}
-	
+
 	public void setExtensionTypeAsString(String extensionTypeAsString) {
 		this.extensionTypeAsString = extensionTypeAsString;
 	}
-	
+
 	public void setTargetTypeAsString(String targetTypeAsString) {
 		this.targetTypeAsString = targetTypeAsString;
 	}
-	
+
 	public String getExtensionTypeAsString() {
 		return extensionTypeAsString;
 	}
@@ -59,7 +59,7 @@ public class XMLTypeExtension implements TypeExtension {
 	public String getMixinTypeAsString() {
 		return mixinTypeAsString;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -119,34 +119,34 @@ public class XMLTypeExtension implements TypeExtension {
 	}
 
 	private String compareString;
-	
+
 	private String getCompareString() {
-		if (compareString==null){
-			compareString=createCompareString(this);
+		if (compareString == null) {
+			compareString = createCompareString(this);
 		}
 		return compareString;
 	}
-	
+
 	@Override
 	public int compareTo(TypeExtension o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
-		if (o==this){
+		if (o == this) {
 			return 0;
 		}
 		String otherCompareString = null;
-		if (o instanceof XMLTypeExtension){
+		if (o instanceof XMLTypeExtension) {
 			XMLTypeExtension ote = (XMLTypeExtension) o;
-			otherCompareString=ote.getCompareString();
-		}else{
+			otherCompareString = ote.getCompareString();
+		} else {
 			otherCompareString = createCompareString(o);
 		}
 		int compared = getCompareString().compareTo(otherCompareString);
 		return compared;
 	}
-	
-	private String createCompareString(TypeExtension extension){
+
+	private String createCompareString(TypeExtension extension) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(extension.getId());
 		sb.append('#');

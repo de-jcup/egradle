@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.virtualroot;
+package de.jcup.egradle.eclipse.ide.virtualroot;
 
 import static de.jcup.egradle.eclipse.util.EclipseUtil.*;
 
@@ -51,19 +51,23 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 	public static final String BUILDER_ID = "de.jcup.egradle.eclipse.ide.plugin.main.virtualRootProjectBuilder";
 
 	protected void handleAddedInRootFolder(File rootFolder, IResource resource) throws CoreException {
-		
-		/* check we got no .gitignore or the .project here! This are the only two files, to complete ignore!*/
+
+		/*
+		 * check we got no .gitignore or the .project here! This are the only
+		 * two files, to complete ignore!
+		 */
 		File sourceFile = getResourceHelper().toFile(resource);
 		String name = sourceFile.getName();
-		if (".gitignore".equals(name)){
+		if (".gitignore".equals(name)) {
 			return;
 		}
-		
-		if (".project".equals(name)){
+
+		if (".project".equals(name)) {
 			return;
 		}
-		
-//		System.out.println("handle added in root folder:" + resource.getLocation());
+
+		// System.out.println("handle added in root folder:" +
+		// resource.getLocation());
 
 		File targetFile = new File(rootFolder, sourceFile.getName());
 		IPath targetPathInProject = Path.fromPortableString(sourceFile.getName());
@@ -85,10 +89,10 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 		 * create new linked file - infinite loop may not happen because a link.
 		 * Links are filtered in pre event handling
 		 */
-		if (targetFile.isDirectory()){
+		if (targetFile.isDirectory()) {
 			getResourceHelper().createLinkedFolder(project, targetPathInProject, targetFile);
 			project.refreshLocal(2, null);
-		}else{
+		} else {
 			getResourceHelper().createLinkedFile(project, targetPathInProject, targetFile);
 		}
 	}
@@ -118,7 +122,7 @@ public class VirtualRootNewFilesToRealRootProjectBuilder extends IncrementalProj
 					try {
 						getFileHelper().delete(linkTargetFile);
 					} catch (IOException e) {
-						IDEUtil.logError("Was not able to delete link target file:"+linkTargetFile,e);
+						IDEUtil.logError("Was not able to delete link target file:" + linkTargetFile, e);
 					}
 				}
 			}

@@ -39,8 +39,8 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 		setDescription(createDescription());
 		setImageDescriptor(EclipseUtil.createImageDescriptor("icons/gradle-og.png", MainActivator.PLUGIN_ID));
 	}
-	
-	private String createDescription(){
+
+	private String createDescription() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Main page of EGradle preferences.\n");
 		sb.append("\n");
@@ -56,9 +56,9 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		
+
 		Composite composite = getFieldEditorParent();
-		
+
 		String message = "You can visit the project site at <a href=\"https://github.com/de-jcup/egradle/wiki\">GitHub</a>.";
 
 		Link link = new Link(composite, SWT.NONE);
@@ -71,12 +71,12 @@ public class EGradlePreferencePage extends FieldEditorPreferencePage implements 
 					// Open default external browser
 					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
 				} catch (Exception ex) {
-					MainActivator.getDefault().getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, "Was not able to open url in external browser", ex));
+					MainActivator.getDefault().getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID,
+							"Was not able to open url in external browser", ex));
 				}
 			}
 		});
-		
-		
+
 	}
 
 	public void init(IWorkbench workbench) {

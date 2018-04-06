@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -26,9 +26,9 @@ import de.jcup.egradle.core.util.LogAdapter;
 
 /**
  * Support class which is able to copy files from given root folder to a path
- * inside EGradle user home. It handles also different versions and does
- * check if the target folder already exists - so caller can decide to override
- * or to ignore
+ * inside EGradle user home. It handles also different versions and does check
+ * if the target folder already exists - so caller can decide to override or to
+ * ignore
  * 
  * @author Albert Tregnaghi
  *

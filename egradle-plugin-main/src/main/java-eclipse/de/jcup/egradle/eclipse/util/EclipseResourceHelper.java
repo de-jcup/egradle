@@ -58,28 +58,31 @@ import de.jcup.egradle.eclipse.MainActivator;
 
 public class EclipseResourceHelper {
 	public static EclipseResourceHelper DEFAULT = new EclipseResourceHelper();
-	private static String FILE_FILTER_ID = "org.eclipse.ui.ide.patternFilterMatcher"; 
+	private static String FILE_FILTER_ID = "org.eclipse.ui.ide.patternFilterMatcher";
 
 	private final int MAX_RETRY = 5;
 	private final IProgressMonitor NULL_MONITOR = new NullProgressMonitor();
-	
+
 	private FileSupport fileSupport = new FileSupport();
 
 	public void addFileFilter(IProject newProject, String pattern, IProgressMonitor monitor) throws CoreException {
 		FileInfoMatcherDescription matcherDescription = new FileInfoMatcherDescription(FILE_FILTER_ID, pattern);
-		/* ignore the generated files - .project and .gitignore at navigator etc. */
-		newProject.createFilter(IResourceFilterDescription.EXCLUDE_ALL | IResourceFilterDescription.FILES, matcherDescription, IResource.BACKGROUND_REFRESH, monitor);
+		/*
+		 * ignore the generated files - .project and .gitignore at navigator
+		 * etc.
+		 */
+		newProject.createFilter(IResourceFilterDescription.EXCLUDE_ALL | IResourceFilterDescription.FILES,
+				matcherDescription, IResource.BACKGROUND_REFRESH, monitor);
 	}
 
 	public IFile createFile(IFolder folder, String name, String contents) throws CoreException {
 		return createFile(folder.getFile(name), name, contents);
 	}
 
-	
 	public IFile createFile(IProject project, String name, String contents) throws CoreException {
 		return createFile(project.getFile(name), name, contents);
 	}
-	
+
 	public IFolder createFolder(IPath path) throws CoreException {
 		return createFolder(path, null);
 	}
@@ -87,12 +90,12 @@ public class EclipseResourceHelper {
 	public IFolder createFolder(String portableFolderPath) throws CoreException {
 		return createFolder(portableFolderPath, null);
 	}
-	
+
 	public IFolder createFolder(String portableFolderPath, IProgressMonitor monitor) throws CoreException {
 		Path fullPath = new Path(portableFolderPath);
 		return createFolder(fullPath, monitor);
 	}
-	
+
 	public IFolder createFolder(IPath path, IProgressMonitor monitor) throws CoreException {
 		if (monitor == null) {
 			monitor = NULL_MONITOR;
@@ -104,8 +107,6 @@ public class EclipseResourceHelper {
 		}
 		return null;
 	}
-
-
 
 	public IFile createLinkedFile(IContainer container, IPath linkPath, File linkedFileTarget) throws CoreException {
 		IFile iFile = container.getFile(linkPath);
@@ -135,6 +136,7 @@ public class EclipseResourceHelper {
 		iFolder.createLink(new Path(file.getAbsolutePath()), IResource.ALLOW_MISSING_LOCAL, NULL_MONITOR);
 		return iFolder;
 	}
+
 	public IProject createLinkedProject(String projectName, Plugin plugin, IPath linkPath) throws CoreException {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(projectName);
@@ -167,7 +169,7 @@ public class EclipseResourceHelper {
 		try {
 			getFileHelper().delete(file);
 		} catch (IOException e) {
-			EclipseUtil.throwCoreException("Was not able to delete path:"+path, e);
+			EclipseUtil.throwCoreException("Was not able to delete path:" + path, e);
 		}
 	}
 
@@ -222,32 +224,34 @@ public class EclipseResourceHelper {
 
 	/**
 	 * Gets simple file name without extension
+	 * 
 	 * @param resource
 	 * @return file name, no extension
 	 */
 	public String getFileName(IResource resource) {
 		String extension = resource.getFileExtension();
 		String name = resource.getName();
-		if (StringUtils.isBlank(name)){
+		if (StringUtils.isBlank(name)) {
 			return "";
 		}
-		if (StringUtils.isNotEmpty(extension)){
-			int length = extension.length()+1;/* +1 because of dot*/
-			String result= name.substring(0,name.length()-length);
+		if (StringUtils.isNotEmpty(extension)) {
+			int length = extension.length() + 1;/* +1 because of dot */
+			String result = name.substring(0, name.length() - length);
 			return result;
-		}else{
+		} else {
 			return name;
 		}
 	}
 
 	/**
 	 * Returns the file or <code>null</code>
+	 * 
 	 * @param path
 	 * @return file or <code>null</code>
 	 * @throws CoreException
 	 */
 	public File toFile(IPath path) throws CoreException {
-		if (path==null){
+		if (path == null) {
 			return null;
 		}
 		IFileStore fileStore = FileBuffers.getFileStoreAtLocation(path);
@@ -258,12 +262,12 @@ public class EclipseResourceHelper {
 	}
 
 	public File toFile(IResource resource) throws CoreException {
-		if (resource==null){
-			return toFile((IPath)null);
+		if (resource == null) {
+			return toFile((IPath) null);
 		}
 		return toFile(resource.getLocation());
 	}
-	
+
 	public File getFileInPlugin(String path, String pluginId) throws IOException {
 		Bundle bundle = Platform.getBundle(pluginId);
 		URL url = bundle.getEntry(path);
@@ -274,36 +278,39 @@ public class EclipseResourceHelper {
 			if (url == null) {
 				return null;
 			}
-				
+
 		}
 		URL resolvedFileURL = FileLocator.toFileURL(url);
 		if (resolvedFileURL == null) {
-			throw new FileNotFoundException("Cannot convert URL to file:"+resolvedFileURL);
+			throw new FileNotFoundException("Cannot convert URL to file:" + resolvedFileURL);
 		}
-	
+
 		// We need to use the 3-arg constructor of URI in order to properly
 		// escape file system chars
 		URI resolvedURI;
 		try {
 			resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
 			File file = new File(resolvedURI);
-			if (! file.exists()){
-				throw new FileNotFoundException("Cannot convert URL to file:"+resolvedFileURL);
+			if (!file.exists()) {
+				throw new FileNotFoundException("Cannot convert URL to file:" + resolvedFileURL);
 			}
 			return file;
 		} catch (URISyntaxException e) {
-			throw new IOException("Cannot find file at resolvedFileURL:"+resolvedFileURL,e);
+			throw new IOException("Cannot find file at resolvedFileURL:" + resolvedFileURL, e);
 		}
 	}
 
 	/**
-	 * Returns the IFile representation for given file or <code>null</code> if file not in workspace
+	 * Returns the IFile representation for given file or <code>null</code> if
+	 * file not in workspace
+	 * 
 	 * @param file
 	 * @return file or null
-	 * @deprecated does not work correctly. Better: IFileStore fileStore = EFS.getLocalFileSystem().getStore(localFile.toURI());
+	 * @deprecated does not work correctly. Better: IFileStore fileStore =
+	 *             EFS.getLocalFileSystem().getStore(localFile.toURI());
 	 */
 	public IFile toIFile(File file) {
-		IPath path = Path.fromOSString(file.getAbsolutePath()); 
+		IPath path = Path.fromOSString(file.getAbsolutePath());
 		return toIFile(path);
 	}
 
@@ -343,11 +350,8 @@ public class EclipseResourceHelper {
 		}
 	}
 
-	private FileSupport getFileHelper(){
+	private FileSupport getFileHelper() {
 		return fileSupport;
 	}
-
-	
-
 
 }

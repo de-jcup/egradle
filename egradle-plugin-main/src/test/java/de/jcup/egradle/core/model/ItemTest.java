@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 import static org.junit.Assert.*;
 
@@ -28,43 +28,42 @@ public class ItemTest {
 		Item item3 = new Item();
 		Item item4 = new Item();
 		Item item5 = new Item();
-		
+
 		/* execute */
 		item1.add(item2);
 		item1.add(item3);
 		item3.add(item4);
 		item3.add(item5);
-		
+
 		/* test */
-		assertEquals(2,item1.getChildren().length);
+		assertEquals(2, item1.getChildren().length);
 		assertEquals(item2, item1.getChildren()[0]);
 		assertEquals(item3, item1.getChildren()[1]);
-		
-		assertEquals(2,item3.getChildren().length);
+
+		assertEquals(2, item3.getChildren().length);
 	}
-	
-	
+
 	@Test
-	public void item_set_name_a_b__has_identifier_a_only__but_a_b_as_name(){
+	public void item_set_name_a_b__has_identifier_a_only__but_a_b_as_name() {
 		Item item = new Item();
 		item.setName("a b");
-		assertEquals("a b",item.getName());
-		assertEquals("a",item.getIdentifier());
+		assertEquals("a b", item.getName());
+		assertEquals("a", item.getIdentifier());
 	}
-	
+
 	@Test
-	public void item_set_name_null_has_identifier_and_name_as_empty_string(){
+	public void item_set_name_null_has_identifier_and_name_as_empty_string() {
 		Item item = new Item();
 		item.setName(null);
-		assertEquals("",item.getName());
-		assertEquals("",item.getIdentifier());
+		assertEquals("", item.getName());
+		assertEquals("", item.getIdentifier());
 	}
-	
+
 	@Test
-	public void item_set_name_a_has_identifier_and_name_as_a(){
+	public void item_set_name_a_has_identifier_and_name_as_a() {
 		Item item = new Item();
 		item.setName("a");
-		assertEquals("a",item.getName());
-		assertEquals("a",item.getIdentifier());
+		assertEquals("a", item.getName());
+		assertEquals("a", item.getIdentifier());
 	}
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.migration;
+package de.jcup.egradle.core.migration;
 
 public interface MigrationAction {
 

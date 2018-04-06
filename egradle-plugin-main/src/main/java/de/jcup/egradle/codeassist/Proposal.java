@@ -13,9 +13,9 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
-public interface Proposal extends Comparable<Proposal>{
+public interface Proposal extends Comparable<Proposal> {
 
 	/**
 	 * 
@@ -27,13 +27,14 @@ public interface Proposal extends Comparable<Proposal>{
 	 * @return code, never <code>null</code>
 	 */
 	String getCode();
-	
+
 	/**
 	 * Returns tempalte used on apply
+	 * 
 	 * @return template, never <code>null</code>
 	 */
 	String getTemplate();
-	
+
 	/**
 	 * 
 	 * @return description or <code>null</code>
@@ -42,6 +43,7 @@ public interface Proposal extends Comparable<Proposal>{
 
 	/**
 	 * Returns cursor position or -1
+	 * 
 	 * @return cursor position or -1
 	 */
 	int getCursorPos();

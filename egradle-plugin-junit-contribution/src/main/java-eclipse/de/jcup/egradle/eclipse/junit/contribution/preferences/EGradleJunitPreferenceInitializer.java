@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.preferences;
+package de.jcup.egradle.eclipse.junit.contribution.preferences;
 
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 
@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
+
 /**
  * Class used to initialize default preference values.
  */
@@ -28,7 +29,8 @@ public class EGradleJunitPreferenceInitializer extends AbstractPreferenceInitial
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = JUNIT_PREFERENCES.getPreferenceStore();
-		store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(), EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId());
+		store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(),
+				EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId());
 	}
 
 }

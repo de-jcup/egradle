@@ -37,7 +37,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.ide.dialogs.ImportTypeDialog;
 
 import de.jcup.egradle.core.GradleImportScanner;
 import de.jcup.egradle.core.ProcessExecutionResult;
@@ -72,7 +71,7 @@ public class RootProjectImportSupport {
 	EGradleShellType shell;
 	String callTypeId;
 	boolean restoreMetadata;
-	
+
 	private AutomaticalDeriveBuildFoldersHandler automaticalDeriveBuildFoldersHandler;
 
 	public RootProjectImportSupport() {
@@ -127,11 +126,11 @@ public class RootProjectImportSupport {
 
 			ProjectShareSupport projectShareSupport = null;
 			ProjectShareData projectShareData = null;
-			
+
 			List<WorkingSetData> closedProjectWorksetData = null;
-			
+
 			boolean oldProjectsDeleted = false;
-			
+
 			try {
 
 				autoBuildEnabled = isWorkspaceAutoBuildEnabled();
@@ -144,8 +143,8 @@ public class RootProjectImportSupport {
 					return;
 				}
 				workingSetSupport = new WorkingSetSupport();
-				
-				if (restoreMetadata){
+
+				if (restoreMetadata) {
 					projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
 					projectShareSupport = new ProjectShareSupport();
 				}
@@ -157,13 +156,12 @@ public class RootProjectImportSupport {
 				boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator
 						.deleteVirtualRootProjectFull(monitor);
 
-				List<IProject> projectsToClose = fetchEclipseProjectsInRootProject(newRootFolder,
-						virtualRootProject);
+				List<IProject> projectsToClose = fetchEclipseProjectsInRootProject(newRootFolder, virtualRootProject);
 
 				/* store working set information */
 				closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
 
-				if (restoreMetadata){
+				if (restoreMetadata) {
 					try {
 						closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
 						projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
@@ -203,7 +201,7 @@ public class RootProjectImportSupport {
 					return;
 				}
 				worked = deleteProjects(monitor, worked, projectsToClose);
-				oldProjectsDeleted=true;
+				oldProjectsDeleted = true;
 				importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
 
 				/* -------------------------- */
@@ -228,14 +226,14 @@ public class RootProjectImportSupport {
 				preferences.setGradleShellType(shell);
 				preferences.setGradleCallTypeID(callTypeId);
 
-				/* ----------------*/
+				/* ---------------- */
 				/* import projects */
-				/* ----------------*/
+				/* ---------------- */
 				ProjectContext importResult = importProjects(monitor, worked, existingEclipseFoldersAfterImport);
 				int projectAmount = importResult.getProjects().size();
-				worked=worked+projectAmount;
-				
-				importProgressMessage(monitor, "Imported projects:"+projectAmount);
+				worked = worked + projectAmount;
+
+				importProgressMessage(monitor, "Imported projects:" + projectAmount);
 
 				/* ---------------- */
 				/* update workspace */
@@ -246,8 +244,8 @@ public class RootProjectImportSupport {
 					 * execute assemble task and - if enabled - after execution
 					 * the 'clean projects' operation
 					 */
-					processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(importResult, rootProject, monitor,
-							cleanProjects);
+					processExecutionResult = executeGradleAssembleAndDoFullCleanBuild(importResult, rootProject,
+							monitor, cleanProjects);
 					if (processExecutionResult.isNotOkay()) {
 						throw new InvocationTargetException(
 								new GradleExecutionException("Assemble task result was no okay"));
@@ -276,8 +274,8 @@ public class RootProjectImportSupport {
 
 				/* working sets */
 				restoreWorkingSets(workingSetSupport, closedProjectWorksetData);
-				
-				if (restoreMetadata && oldProjectsDeleted){
+
+				if (restoreMetadata && oldProjectsDeleted) {
 					/* restore project meta data. */
 					try {
 						importProgressMessage(monitor, "Rebuilding meta data of formerly closed projects");
@@ -290,7 +288,7 @@ public class RootProjectImportSupport {
 					}
 				}
 				/* always drop cache */
-				if (closedProjectCacheData!=null){
+				if (closedProjectCacheData != null) {
 					importProgressMessage(monitor, "Drop meta data cache");
 					closedProjectCacheData.drop();
 				}
@@ -302,7 +300,7 @@ public class RootProjectImportSupport {
 						IDEUtil.logError("Re-Enabling workspace auto build failed!", e);
 					}
 				}
-				
+
 				UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 			}
 
@@ -310,10 +308,10 @@ public class RootProjectImportSupport {
 
 		protected void reconnectTeamProviderData(IProgressMonitor monitor, ProjectShareSupport projectShareSupport,
 				ProjectShareData projectShareData) {
-			if (projectShareSupport==null){
+			if (projectShareSupport == null) {
 				return;
 			}
-			if (projectShareData==null){
+			if (projectShareData == null) {
 				return;
 			}
 			IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
@@ -325,10 +323,10 @@ public class RootProjectImportSupport {
 
 		private void restoreMetaDataCache(ProjectMetaDataCacheSupport cacheSupport,
 				ProjectCacheData closedProjectCacheData) throws IOException {
-			if (cacheSupport==null){
+			if (cacheSupport == null) {
 				return;
 			}
-			if (closedProjectCacheData==null){
+			if (closedProjectCacheData == null) {
 				return;
 			}
 
@@ -338,7 +336,6 @@ public class RootProjectImportSupport {
 				cacheSupport.restoreMetaData(closedProjectCacheData, projectsList);
 			}
 		}
-		
 
 		public void restoreVirtualRootWithWorkingSets(WorkingSetSupport workingSetSupport,
 				List<WorkingSetData> virtualRootWorkingSets) throws VirtualRootProjectException {
@@ -403,9 +400,8 @@ public class RootProjectImportSupport {
 		return worked;
 	}
 
-	
-	
-	private ProjectContext importProjects(IProgressMonitor monitor, int worked, List<File> foldersToImport) throws CoreException {
+	private ProjectContext importProjects(IProgressMonitor monitor, int worked, List<File> foldersToImport)
+			throws CoreException {
 		ProjectContext importResult = new ProjectContext();
 		/* start import of all eclipse projects inside multiproject */
 		for (File folder : foldersToImport) {
@@ -445,7 +441,6 @@ public class RootProjectImportSupport {
 		return worked;
 	}
 
-	
 	public List<IProject> fetchEclipseProjectsInRootProject(File newRootFolder, IProject... projectsToIgnore)
 			throws CoreException {
 		List<IProject> projectsToClose = new ArrayList<>();
@@ -483,10 +478,10 @@ public class RootProjectImportSupport {
 	}
 
 	private void importProgressMessage(IProgressMonitor monitor, String message) {
-		if (monitor == null){
+		if (monitor == null) {
 			return;
 		}
-		if (message==null){
+		if (message == null) {
 			return;
 		}
 		monitor.subTask(message);
@@ -526,8 +521,9 @@ public class RootProjectImportSupport {
 		return processExecutionResult;
 	}
 
-	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(ProjectContext projectContext, GradleRootProject rootProject,
-			IProgressMonitor progressMonitor, boolean clean) throws GradleExecutionException, Exception {
+	private ProcessExecutionResult executeGradleAssembleAndDoFullCleanBuild(ProjectContext projectContext,
+			GradleRootProject rootProject, IProgressMonitor progressMonitor, boolean clean)
+			throws GradleExecutionException, Exception {
 		OutputHandler outputHandler = getSystemConsoleOutputHandler();
 		/*
 		 * we do process executor create now in endless running variant because

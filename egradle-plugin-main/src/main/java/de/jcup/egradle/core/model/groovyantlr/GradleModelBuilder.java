@@ -33,6 +33,4 @@ public class GradleModelBuilder extends AbstractGroovyModelBuilder {
 		return new GradleModelBuilderSupport();
 	}
 
-	
-
 }

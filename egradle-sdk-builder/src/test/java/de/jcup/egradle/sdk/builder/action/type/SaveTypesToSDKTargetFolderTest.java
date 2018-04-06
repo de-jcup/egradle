@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.type;
+package de.jcup.egradle.sdk.builder.action.type;
 
 import static org.junit.Assert.*;
 
@@ -30,38 +30,38 @@ public class SaveTypesToSDKTargetFolderTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
-	
+
 	@Before
-	public void before(){
+	public void before() {
 		actionToTest = new SaveTypesToSDKTargetFolder();
 	}
-	
+
 	@Test
-	public void subpath_is_reduced_without_parent__when_parent_in_subpath() throws Exception{
+	public void subpath_is_reduced_without_parent__when_parent_in_subpath() throws Exception {
 		/* prepare */
 		File parent = new File("parent");
 		File file = new File("parent/child1/child2/child3/Test.xml");
-		
+
 		/* execute */
 		String subPath = actionToTest.extractSubPathFromFile(file, parent);
-		
+
 		/* test */
-		assertEquals("child1/child2/child3/Test.xml",subPath);
-		
+		assertEquals("child1/child2/child3/Test.xml", subPath);
+
 	}
-	
+
 	@Test
-	public void when_parent_is_not_parent_of_file__illegal_argument_exception_is_thrown() throws Exception{
+	public void when_parent_is_not_parent_of_file__illegal_argument_exception_is_thrown() throws Exception {
 		/* prepare */
 		File parent = new File("wrongParent");
 		File file = new File("parent/child1/child2/child3/Test.xml");
-		
-		/* test on next execute*/
+
+		/* test on next execute */
 		expectedException.expect(IllegalArgumentException.class);
-		
+
 		/* execute */
 		actionToTest.extractSubPathFromFile(file, parent);
-		
+
 	}
 
 }

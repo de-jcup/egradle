@@ -21,11 +21,12 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 
 /**
  * Document provider for files inside workspace
+ * 
  * @author albert
  *
  */
 public class GradleFileDocumentProvider extends FileDocumentProvider {
-	
+
 	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
@@ -33,10 +34,10 @@ public class GradleFileDocumentProvider extends FileDocumentProvider {
 			/* installation necessary */
 			GradlePartitioner partitioner = GradlePartionerFactory.create();
 
-			partitioner.connect(document,true);
+			partitioner.connect(document, true);
 			document.setDocumentPartitioner(partitioner);
 		}
 		return document;
 	}
-	
+
 }

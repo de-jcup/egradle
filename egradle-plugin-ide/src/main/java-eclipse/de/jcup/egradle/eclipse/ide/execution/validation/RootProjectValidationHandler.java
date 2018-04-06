@@ -19,6 +19,7 @@ import org.eclipse.jface.preference.FieldEditor;
 
 /**
  * Interface for root project validation
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -40,7 +41,8 @@ public interface RootProjectValidationHandler extends RootProjectValidationObser
 
 	/**
 	 * @return <code>true</code> property changes are handled by this component
-	 *         standalone, <code>false</code> when handling is done by caller side
+	 *         standalone, <code>false</code> when handling is done by caller
+	 *         side
 	 */
 	boolean isHandlingPropertyChanges();
 

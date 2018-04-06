@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.virtualroot;
+package de.jcup.egradle.eclipse.ide.virtualroot;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
@@ -21,9 +21,9 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
-
 /**
  * Nature for virtual root projects
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -63,8 +63,7 @@ public class VirtualRootProjectNature implements IProjectNature {
 			if (commands[i].getBuilderName().equals(VirtualRootNewFilesToRealRootProjectBuilder.BUILDER_ID)) {
 				ICommand[] newCommands = new ICommand[commands.length - 1];
 				System.arraycopy(commands, 0, newCommands, 0, i);
-				System.arraycopy(commands, i + 1, newCommands, i,
-						commands.length - i - 1);
+				System.arraycopy(commands, i + 1, newCommands, i, commands.length - i - 1);
 				description.setBuildSpec(newCommands);
 				project.setDescription(description, null);
 				return;

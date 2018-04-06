@@ -96,22 +96,23 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 			}
 		});
 
-		gradleWrapperEnabledRadioButton = SWTFactory.createCheckButton(commonGroup,"Use gradle wrapper",null,context.isxSupportingGradleWrapper(),SWT.FILL);
+		gradleWrapperEnabledRadioButton = SWTFactory.createCheckButton(commonGroup, "Use gradle wrapper", null,
+				context.isxSupportingGradleWrapper(), SWT.FILL);
 		gradleWrapperEnabledRadioButton.setEnabled(context.isxSupportingGradleWrapper());
 		gradleWrapperEnabledRadioButton.addSelectionListener(new SelectionAdapter() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				context.setGradleWrapperEnabled(gradleWrapperEnabledRadioButton.getSelection());
 				updateUI();
 				setPageComplete(validatePage());
 			}
-			
+
 		});
-		
+
 		gradleVersionLabel = SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
 		gradleVersionLabel.setEnabled(context.isxSupportingGradleWrapper());
-		
+
 		gradleVersionText = SWTFactory.createSingleText(commonGroup, 1);
 		gradleVersionText.setMessage(NewProjectTemplateVariables.VAR__GRADLE__VERSION.getDefaultValue());
 		gradleVersionText.addModifyListener(new ModifyListener() {
@@ -217,10 +218,10 @@ public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 		composite.setVisible(true);
 		setDescription("Define details for template '" + selectedTemplate.getName() + "'");
 
-		showControl(gradleWrapperEnabledRadioButton,context.isxSupportingGradleWrapper());
-		showControl(gradleVersionLabel,context.isGradleWrapperSupportedAndEnabled());
-		showControl(gradleVersionText,context.isGradleWrapperSupportedAndEnabled());
-		
+		showControl(gradleWrapperEnabledRadioButton, context.isxSupportingGradleWrapper());
+		showControl(gradleVersionLabel, context.isGradleWrapperSupportedAndEnabled());
+		showControl(gradleVersionText, context.isGradleWrapperSupportedAndEnabled());
+
 		showControl(multiProjectGroup, context.isMultiProject());
 		showControl(javaGroup, context.isSupportingJava());
 		setPageComplete(validatePage());

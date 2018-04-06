@@ -13,25 +13,29 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.execution.validation;
+package de.jcup.egradle.eclipse.ide.execution.validation;
 
- /**
-  * Observes validation running on EGradle root project validation
-  * @author Albert Tregnaghi
-  *
-  */
-public interface RootProjectValidationObserver{
+/**
+ * Observes validation running on EGradle root project validation
+ * 
+ * @author Albert Tregnaghi
+ *
+ */
+public interface RootProjectValidationObserver {
 
 	/**
 	 * Handle valdiation is running or not
+	 * 
 	 * @param running
 	 */
 	public void handleValidationRunning(boolean running);
 
 	/**
 	 * Handle validation result
-	 * @param valid - validation result
+	 * 
+	 * @param valid
+	 *            - validation result
 	 */
 	public void handleValidationResult(boolean valid);
-	
+
 }

@@ -21,7 +21,6 @@ import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import de.jcup.egradle.eclipse.util.ColorManager;
 
-
 public class GroovyDefaultTextScanner extends RuleBasedScanner {
 
 	public GroovyDefaultTextScanner(ColorManager manager) {

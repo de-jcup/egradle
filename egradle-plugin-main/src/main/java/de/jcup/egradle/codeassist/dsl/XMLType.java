@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -113,10 +113,11 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Method> getMethods() {
-		/* we use always merged variant - so it does not matter when inheritance is called - in point of
-		 * mixins etc.
+		/*
+		 * we use always merged variant - so it does not matter when inheritance
+		 * is called - in point of mixins etc.
 		 */
-		if (mergedMethods==null){
+		if (mergedMethods == null) {
 			mergeMethodsAndProperties(null);
 		}
 		return mergedMethods;
@@ -129,7 +130,7 @@ public class XMLType implements ModifiableType {
 
 	@Override
 	public Set<Property> getProperties() {
-		if (mergedProperties==null){
+		if (mergedProperties == null) {
 			mergeMethodsAndProperties(null);
 		}
 		return mergedProperties;
@@ -141,21 +142,21 @@ public class XMLType implements ModifiableType {
 		}
 		return extensionReasonMap.get(extensionId);
 	}
-	
-	public LanguageElement getElementForMixin(String mixinId){
+
+	public LanguageElement getElementForMixin(String mixinId) {
 		if (mixinId == null) {
 			return null;
 		}
-		for (LanguageElement element: elementReasons.keySet()){
+		for (LanguageElement element : elementReasons.keySet()) {
 			Reason reason = elementReasons.get(element);
-			if (reason==null){
+			if (reason == null) {
 				continue;
 			}
 			String id = reason.getMixinId();
-			if (id==null){
+			if (id == null) {
 				continue;
 			}
-			if (mixinId.equals(id)){
+			if (mixinId.equals(id)) {
 				return element;
 			}
 		}
@@ -193,8 +194,8 @@ public class XMLType implements ModifiableType {
 				elementReasons.put(method, reason);
 			}
 		}
-		
-		for (Property property: mixinType.getProperties()) {
+
+		for (Property property : mixinType.getProperties()) {
 			getProperties().add(property);
 			if (reason != null) {
 				elementReasons.put(property, reason);
@@ -280,7 +281,7 @@ public class XMLType implements ModifiableType {
 		if (mergedProperties == null) {
 			this.mergedProperties = new TreeSet<>(properties);
 		}
-		if (superType==null){
+		if (superType == null) {
 			return;
 		}
 		Set<Method> superMethods = superType.getMethods();
@@ -317,7 +318,7 @@ public class XMLType implements ModifiableType {
 				return true;
 			}
 			boolean subtypeDoesImplement = interfaceType.isImplementingInterface(type);
-			if (subtypeDoesImplement){
+			if (subtypeDoesImplement) {
 				return true;
 			}
 		}

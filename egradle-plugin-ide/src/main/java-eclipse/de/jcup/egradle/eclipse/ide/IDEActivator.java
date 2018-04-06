@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 		startMigrationsWhereNecessary();
 
 		installTemplateManagers(context);
-		
+
 		/* initial refresh update command to current state */
 		UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 
@@ -80,10 +80,10 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 		File newProjectTemplatesFolder = new File(templateFolder, "new-project-wizard");
 		File gradleWrapperTemplatesFolder = new File(templateFolder, "gradle-wrapper");
 
-		newProjectTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(newProjectTemplatesFolder), this);
-		gradleWrapperTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(gradleWrapperTemplatesFolder), this);
-		
-		
+		newProjectTemplateManager = new FileStructureTemplateManager(
+				new SimpleRootFolderProvider(newProjectTemplatesFolder), this);
+		gradleWrapperTemplateManager = new FileStructureTemplateManager(
+				new SimpleRootFolderProvider(gradleWrapperTemplatesFolder), this);
 
 	}
 
@@ -167,11 +167,10 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 	public FileStructureTemplateManager getNewProjectTemplateManager() {
 		return newProjectTemplateManager;
 	}
-	
 
 	public FileStructureTemplateManager getGradlWrappertTemplateManager() {
 		return gradleWrapperTemplateManager;
-	}	
+	}
 
 	@Override
 	public File getRootFolder() throws IOException {

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -23,10 +23,10 @@ import de.jcup.egradle.core.util.ILogSupport;
 import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.preferences.AbstractEditorPreferences;
 
-public class EditorUtil implements ILogSupport{
+public class EditorUtil implements ILogSupport {
 
 	public static final ILogSupport INSTANCE = new EditorUtil();
-	
+
 	public static AbstractEditorPreferences getPreferences() {
 		return GradleEditorPreferences.getInstance();
 	}
@@ -40,10 +40,10 @@ public class EditorUtil implements ILogSupport{
 	public void logWarning(String warning) {
 		getLog().log(new Status(IStatus.WARNING, EditorActivator.PLUGIN_ID, warning));
 	}
-	
+
 	@Override
 	public void logError(String error, Throwable t) {
-		getLog().log(new Status(IStatus.ERROR, EditorActivator.PLUGIN_ID, error,t));
+		getLog().log(new Status(IStatus.ERROR, EditorActivator.PLUGIN_ID, error, t));
 	}
 
 	protected ILog getLog() {

@@ -51,7 +51,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 
 	private IRegion region;
 	private String resourceName;
-	
+
 	private String fullText;
 
 	public GradleResourceHyperlink(IRegion region, String resourceName, String fullText) {
@@ -59,10 +59,9 @@ public class GradleResourceHyperlink implements IHyperlink {
 		isNotNull(resourceName, "resourceName may not be null!");
 		this.region = region;
 		this.resourceName = resourceName;
-		
-		this.fullText=fullText;
-	}
 
+		this.fullText = fullText;
+	}
 
 	@Override
 	public IRegion getHyperlinkRegion() {
@@ -76,56 +75,56 @@ public class GradleResourceHyperlink implements IHyperlink {
 
 	@Override
 	public String getHyperlinkText() {
-		return "Opens "+resourceName+" by resource dialog";
+		return "Opens " + resourceName + " by resource dialog";
 	}
 
 	@Override
 	public void open() {
-		String[] packageNames= fetchImportedPackages(fullText);
-		
+		String[] packageNames = fetchImportedPackages(fullText);
+
 		Shell shell = EclipseUtil.getActiveWorkbenchShell();
-		if (shell==null){
+		if (shell == null) {
 			return;
 		}
 		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
 		JDTDataAccess access = JDTDataAccess.SHARED;
-		
+
 		List<String> typesFound = access.scanForJavaType(resourceName, scope, packageNames);
-		
+
 		SelectionDialog dialog = null;
-		if (! typesFound.isEmpty()){
-			
-			if (typesFound.size()==1){	
+		if (!typesFound.isEmpty()) {
+
+			if (typesFound.size() == 1) {
 				/* exact macht possible */
 				String found = typesFound.get(0);
 				IType type = access.findType(found, new NullProgressMonitor());
-				if (type instanceof IJavaElement){
-					IJavaElement javaElement=type;
+				if (type instanceof IJavaElement) {
+					IJavaElement javaElement = type;
 					openInEditor(javaElement);
 					return;
-				}else{
-					/* keep on going - use type dialog as fallback...*/
+				} else {
+					/* keep on going - use type dialog as fallback... */
 				}
-				
+
 			}
-			
-			int style=IJavaElementSearchConstants.CONSIDER_ALL_TYPES;
+
+			int style = IJavaElementSearchConstants.CONSIDER_ALL_TYPES;
 			try {
 				String found = typesFound.get(0);
-				
+
 				IRunnableContext runnableContext = EclipseUtil.getActiveWorkbenchWindow();
-				
-				dialog = JavaUI.createTypeDialog(shell, runnableContext, scope, style, false,found);
+
+				dialog = JavaUI.createTypeDialog(shell, runnableContext, scope, style, false, found);
 				dialog.setTitle("Potential Java types found:");
 			} catch (JavaModelException e) {
 				EditorUtil.INSTANCE.logError("Cannot create java type dialog", e);
 			}
-		}else{
+		} else {
 			dialog = createResourceDialog(shell);
 		}
-		
+
 		final int resultCode = dialog.open();
-		
+
 		if (resultCode != Window.OK) {
 			return;
 		}
@@ -137,41 +136,40 @@ public class GradleResourceHyperlink implements IHyperlink {
 				Object object = result[i];
 				if (object instanceof IFile) {
 					files.add((IFile) object);
-				}else if (object instanceof IJavaElement){
+				} else if (object instanceof IJavaElement) {
 					IJavaElement javaElement = (IJavaElement) object;
 					javaElements.add(javaElement);
 				}
 			}
 		}
-		
+
 		if (files.size() > 0) {
 
 			final IWorkbenchPage page = EclipseUtil.getActivePage();
-			if (page==null){
+			if (page == null) {
 				return;
 			}
 			IFile currentFile = null;
 			try {
 				for (Iterator<IFile> it = files.iterator(); it.hasNext();) {
-					currentFile= it.next();
+					currentFile = it.next();
 					IDE.openEditor(page, currentFile, true);
 				}
 			} catch (final PartInitException e) {
-				EditorUtil.INSTANCE.logError("Cannot open file:"+currentFile,e);
+				EditorUtil.INSTANCE.logError("Cannot open file:" + currentFile, e);
 			}
-		}else if (javaElements.size()>0){
+		} else if (javaElements.size() > 0) {
 			IJavaElement javaElement = javaElements.get(0);
 			openInEditor(javaElement);
 		}
 
 	}
 
-
 	private void openInEditor(IJavaElement javaElement) {
 		try {
 			JavaUI.openInEditor(javaElement);
 		} catch (PartInitException | JavaModelException e) {
-			EditorUtil.INSTANCE.logError("Cannot open java editor with:"+javaElement,e);
+			EditorUtil.INSTANCE.logError("Cannot open java editor with:" + javaElement, e);
 		}
 	}
 
@@ -181,7 +179,7 @@ public class GradleResourceHyperlink implements IHyperlink {
 		opengradleResourceDialog.setInitialPattern(resourceName);
 		return opengradleResourceDialog;
 	}
-	
+
 	private String[] fetchImportedPackages(String fullText) {
 		JavaImportFinder javaImportFinder = new JavaImportFinder();
 		Set<String> set = javaImportFinder.findImportedPackages(fullText);

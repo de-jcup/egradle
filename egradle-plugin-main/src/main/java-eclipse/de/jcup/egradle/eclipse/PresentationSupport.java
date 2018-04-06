@@ -63,7 +63,7 @@ public class PresentationSupport implements IPresentationDamager, IPresentationR
 	protected int endOfLineOf(int offset) throws BadLocationException {
 
 		IRegion info = fDocument.getLineInformationOfOffset(offset);
-		if (offset <= info.getOffset() + info.getLength()){
+		if (offset <= info.getOffset() + info.getLength()) {
 			return info.getOffset() + info.getLength();
 		}
 
@@ -89,7 +89,7 @@ public class PresentationSupport implements IPresentationDamager, IPresentationR
 				if (info.getOffset() <= end && end <= info.getOffset() + info.getLength()) {
 					// optimize the case of the same line
 					end = info.getOffset() + info.getLength();
-				} else{
+				} else {
 					end = endOfLineOf(end);
 				}
 

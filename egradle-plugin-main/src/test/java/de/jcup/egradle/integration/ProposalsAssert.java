@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration;
+package de.jcup.egradle.integration;
 
 import static org.junit.Assert.*;
 

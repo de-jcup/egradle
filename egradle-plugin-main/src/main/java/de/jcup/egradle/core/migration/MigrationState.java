@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.migration;
+package de.jcup.egradle.core.migration;
 
 public enum MigrationState {
 
@@ -21,19 +21,19 @@ public enum MigrationState {
 	 * Means no migration was started. This was introduced with EGradle 2.0
 	 */
 	NOT_MIGRATED,
-	
+
 	/**
 	 * Migration from 1.3 was done
 	 */
 	MIGRATED_FROM_1_3;
 
 	public static MigrationState fromName(String name) {
-		if (name==null){
+		if (name == null) {
 			return MigrationState.NOT_MIGRATED;
 		}
-		
-		for (MigrationState state: MigrationState.values()){
-			if (state.name().equals(name)){
+
+		for (MigrationState state : MigrationState.values()) {
+			if (state.name().equals(name)) {
 				return state;
 			}
 		}

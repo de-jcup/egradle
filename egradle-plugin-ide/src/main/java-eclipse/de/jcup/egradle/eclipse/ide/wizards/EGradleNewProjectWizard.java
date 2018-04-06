@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.wizards;
+package de.jcup.egradle.eclipse.ide.wizards;
 
 import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 import static de.jcup.egradle.ide.NewProjectTemplateVariables.*;
@@ -186,16 +186,16 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		if (context.isGradleWrapperSupportedAndEnabled()) {
 			gradleWrapperTemplate.applyTo(targetFolder, properties);
 			outputToSystemConsole("  + added gradle wrapper parts");
-			
+
 			File[] files = targetFolder.listFiles(new GradleWrapperScriptFilter());
-			if (files!=null && files.length>0){
+			if (files != null && files.length > 0) {
 				File gradleWrapperFile = files[0];
 				gradleWrapperFile.setExecutable(true);
 				outputToSystemConsole("  + made gradle wrapper executable");
-			}else{
+			} else {
 				outputToSystemConsole("  + !!!CANNOT!!! made gradlewrapper executable, because not found!");
 			}
-			
+
 		}
 
 	}
@@ -230,11 +230,11 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			public void run() {
 				boolean resultOkay = false;
 				if (isHeadlessModeSupported()) {
-					/* headless usage of import wizard:*/
+					/* headless usage of import wizard: */
 					piw.addPages();
 					piw.createPageControls(new Shell());
 					piw.setContainer(getContainer());
-					
+
 					resultOkay = piw.performFinish();
 					if (resultOkay) {
 						outputToSystemConsole("[DONE]");
@@ -243,9 +243,9 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 					}
 					return;
 
-				}else{
-					if (! context.isGradleWrapperSupportedAndEnabled()){
-						// setup local gradle call depending for OS 
+				} else {
+					if (!context.isGradleWrapperSupportedAndEnabled()) {
+						// setup local gradle call depending for OS
 						EGradleCallType initialCallType = EGradleIdePreferenceInitializer.calculateOSInstalledType();
 						piw.setInitialCallType(initialCallType);
 					}
@@ -255,7 +255,6 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 					}
 				}
 
-
 				if (resultOkay) {
 					outputToSystemConsole("[DONE]");
 				} else {
@@ -264,7 +263,8 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			}
 
 			protected boolean isHeadlessModeSupported() {
-				// when gradlewrapper is used the execution is clear... for local instances
+				// when gradlewrapper is used the execution is clear... for
+				// local instances
 				// maybe the path is not set etc.
 				boolean gradleCommandSelectionUnnessary = context.isGradleWrapperSupportedAndEnabled();
 				boolean headlessPossibleByTemplate = context.isSupportingHeadlessImport();
@@ -282,24 +282,24 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 		}
 	}
 
-	private class GradleWrapperScriptFilter implements FileFilter{
-		
+	private class GradleWrapperScriptFilter implements FileFilter {
+
 		private static final String GRADLEW = "gradlew";
 
 		@Override
 		public boolean accept(File file) {
-			if (file==null){
+			if (file == null) {
 				return false;
 			}
-			if (!file.isFile()){
+			if (!file.isFile()) {
 				return false;
 			}
 			String name = file.getName();
-			if (GRADLEW.equals(name)){
+			if (GRADLEW.equals(name)) {
 				return true;
 			}
 			return false;
 		}
-		
+
 	}
 }

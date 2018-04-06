@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.preferences;
+package de.jcup.egradle.eclipse.junit.contribution.preferences;
 
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJUnitPreferences.*;
 import static de.jcup.egradle.eclipse.junit.contribution.preferences.EGradleJunitPreferenceConstants.*;
@@ -37,14 +37,14 @@ public class EGradleJUnitPreferencePage extends FieldEditorPreferencePage implem
 
 	@Override
 	protected void createFieldEditors() {
-		
+
 		String[][] entryNamesAndValues = new String[][] {
 				new String[] { "clean all", EGradleJUnitTestTasksType.CLEAN_ALL.getId() },
 				new String[] { "clean tests only", EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId() },
 				new String[] { "do nothing", EGradleJUnitTestTasksType.CLEAN_NOTHING.getId() } };
 		/* @formatter:on */
-		gradleCallTypeRadioButton = new ComboFieldEditor(P_TEST_TASKS.getId(), "Before test execution", entryNamesAndValues,
-				getFieldEditorParent());
+		gradleCallTypeRadioButton = new ComboFieldEditor(P_TEST_TASKS.getId(), "Before test execution",
+				entryNamesAndValues, getFieldEditorParent());
 
 		addField(gradleCallTypeRadioButton);
 		SWTFactory.createLabel(getFieldEditorParent(), "(This will be used by all test launch configurations)", 2);

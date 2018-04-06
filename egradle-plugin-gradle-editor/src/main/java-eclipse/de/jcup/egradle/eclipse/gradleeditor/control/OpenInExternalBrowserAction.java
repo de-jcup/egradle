@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.control;
+package de.jcup.egradle.eclipse.gradleeditor.control;
 
 import java.net.URL;
 
@@ -25,16 +25,16 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 
 public class OpenInExternalBrowserAction extends Action {
-	
+
 	private String target;
-	
+
 	public void setTarget(String target) {
 		this.target = target;
 	}
-	
+
 	@Override
 	public void run() {
-		if (target==null){
+		if (target == null) {
 			return;
 		}
 		try {
@@ -43,7 +43,7 @@ public class OpenInExternalBrowserAction extends Action {
 			IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
 			IWebBrowser externalBrowser = browserSupport.getExternalBrowser();
 			externalBrowser.openURL(url);
-			
+
 		} catch (Exception ex) {
 			EditorUtil.INSTANCE.logError("Was not able to open url in external browser", ex);
 		}

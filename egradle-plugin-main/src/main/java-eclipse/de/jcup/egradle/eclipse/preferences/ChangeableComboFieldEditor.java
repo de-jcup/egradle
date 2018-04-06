@@ -13,8 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
-
+package de.jcup.egradle.eclipse.preferences;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.preference.FieldEditor;
@@ -40,24 +39,30 @@ public class ChangeableComboFieldEditor extends FieldEditor {
 	private Combo fCombo;
 
 	/**
-	 * The value (not the name) of the currently selected item in the Combo widget.
+	 * The value (not the name) of the currently selected item in the Combo
+	 * widget.
 	 */
 	private String fValue;
 
 	/**
-	 * The names (labels) and underlying values to populate the combo widget.  These should be
-	 * arranged as: { {name1, value1}, {name2, value2}, ...}
+	 * The names (labels) and underlying values to populate the combo widget.
+	 * These should be arranged as: { {name1, value1}, {name2, value2}, ...}
 	 */
 	private String[][] fEntryNamesAndValues;
 
 	/**
 	 * Create the combo box field editor.
 	 *
-     * @param name the name of the preference this field editor works on
-     * @param labelText the label text of the field editor
-	 * @param entryNamesAndValues the names (labels) and underlying values to populate the combo widget.  These should be
-	 * arranged as: { {name1, value1}, {name2, value2}, ...}
-	 * @param parent the parent composite
+	 * @param name
+	 *            the name of the preference this field editor works on
+	 * @param labelText
+	 *            the label text of the field editor
+	 * @param entryNamesAndValues
+	 *            the names (labels) and underlying values to populate the combo
+	 *            widget. These should be arranged as: { {name1, value1},
+	 *            {name2, value2}, ...}
+	 * @param parent
+	 *            the parent composite
 	 */
 	public ChangeableComboFieldEditor(String name, String labelText, String[][] entryNamesAndValues, Composite parent) {
 		init(name, labelText);
@@ -91,16 +96,16 @@ public class ChangeableComboFieldEditor extends FieldEditor {
 			Control control = getLabelControl();
 			int left = numColumns;
 			if (control != null) {
-				((GridData)control.getLayoutData()).horizontalSpan = 1;
+				((GridData) control.getLayoutData()).horizontalSpan = 1;
 				left = left - 1;
 			}
-			((GridData)fCombo.getLayoutData()).horizontalSpan = left;
+			((GridData) fCombo.getLayoutData()).horizontalSpan = left;
 		} else {
 			Control control = getLabelControl();
 			if (control != null) {
-				((GridData)control.getLayoutData()).horizontalSpan = 1;
+				((GridData) control.getLayoutData()).horizontalSpan = 1;
 			}
-			((GridData)fCombo.getLayoutData()).horizontalSpan = 1;
+			((GridData) fCombo.getLayoutData()).horizontalSpan = 1;
 		}
 	}
 
@@ -205,23 +210,26 @@ public class ChangeableComboFieldEditor extends FieldEditor {
 	}
 
 	/**
-	 * Returns the value of the current selected entry (not the label) 
+	 * Returns the value of the current selected entry (not the label)
+	 * 
 	 * @return value
 	 */
 	public String getStringValue() {
 		return fValue;
 	}
-	
+
 	/**
 	 * Returns label of current selected entry
+	 * 
 	 * @return value
 	 */
-	public String getLabel(){
+	public String getLabel() {
 		return getValueForName(fValue);
 	}
 
 	/**
 	 * Set the value (not the label) of wanted new current value
+	 * 
 	 * @param value
 	 */
 	public void setStringValue(String value) {

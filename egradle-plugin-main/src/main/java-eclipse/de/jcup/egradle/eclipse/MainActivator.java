@@ -28,8 +28,7 @@ public class MainActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static MainActivator plugin;
-	
-	
+
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;

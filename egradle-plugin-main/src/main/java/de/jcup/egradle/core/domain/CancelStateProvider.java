@@ -13,28 +13,29 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.domain;
+package de.jcup.egradle.core.domain;
 
 /**
  * A state provider for information about an action is canceled or not
+ * 
  * @author Albert Tregnaghi
  *
  */
 public interface CancelStateProvider {
 	public static final NeverCanceled NEVER_CANCELED = new NeverCanceled();
-	
+
 	public boolean isCanceled();
-	
-	static class NeverCanceled implements CancelStateProvider{
+
+	static class NeverCanceled implements CancelStateProvider {
 
 		private NeverCanceled() {
 		}
-		
+
 		@Override
 		public boolean isCanceled() {
 			return false;
 		}
-		
+
 	}
-	
+
 }

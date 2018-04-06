@@ -57,14 +57,14 @@ public class UnpersistedMarkerHelper extends AbstractMarkerHelper {
 		for (IMarker marker : workingCopy) {
 			String type = null;
 			boolean markerExists = marker.exists();
-					
-			if (markerExists){
+
+			if (markerExists) {
 				try {
 					type = marker.getType();
 				} catch (CoreException e) {
-					markerExists=false;
+					markerExists = false;
 				}
-				
+
 				if (IMarker.TASK.equals(type)) {
 					/* tasks are not deleted */
 					continue;
@@ -74,7 +74,8 @@ public class UnpersistedMarkerHelper extends AbstractMarkerHelper {
 			if (!markerExists) {
 				/*
 				 * means marker.getType() failed, because marker does not exist
-				 * any more. This can happen when a marker is removed manually on ui.
+				 * any more. This can happen when a marker is removed manually
+				 * on ui.
 				 */
 				continue;
 			}

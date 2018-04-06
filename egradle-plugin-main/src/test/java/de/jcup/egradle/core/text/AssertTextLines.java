@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 import static org.junit.Assert.*;
 
@@ -46,21 +46,21 @@ public class AssertTextLines {
 		}
 		String failureMessage = null;
 		for (TextLine line : expectedLines) {
-			if (!this.lines.contains(line)){
+			if (!this.lines.contains(line)) {
 				StringBuilder sb = new StringBuilder();
 				sb.append("Did not found:");
 				sb.append(line.toString());
 				sb.append(" but only:\n");
-				
-				for (TextLine existingLine: lines){
+
+				for (TextLine existingLine : lines) {
 					sb.append(existingLine.toString());
 					sb.append("\n");
 				}
-				failureMessage=sb.toString();
+				failureMessage = sb.toString();
 				break;
 			}
 		}
-		if (failureMessage!=null){
+		if (failureMessage != null) {
 			fail(failureMessage);
 		}
 		return this;

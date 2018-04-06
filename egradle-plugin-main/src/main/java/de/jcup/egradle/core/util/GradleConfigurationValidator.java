@@ -13,8 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
-
+package de.jcup.egradle.core.util;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -36,84 +35,86 @@ import de.jcup.egradle.core.process.OutputHandler;
 import de.jcup.egradle.core.process.ProcessContext;
 import de.jcup.egradle.core.process.ProcessExecutor;
 
-public class GradleConfigurationValidator implements Validator<GradleConfiguration>{
-	
+public class GradleConfigurationValidator implements Validator<GradleConfiguration> {
+
 	public static final String GRADLE_INSTALLATION_DIR_NOT_EXISTING = "gradle installation directory not existing";
 	public static final String GRADLE_INSTALLATION_DIR_IS_NOT_A_DIRECTORY = "gradle installation directory is not a directory";
-	public static final String GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE="gradle installation directory does NOT contain the defined gradle command";
+	public static final String GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE = "gradle installation directory does NOT contain the defined gradle command";
 
 	public static final String SHELL_NOT_EXECUTABLE_STANDALONE = "configured shell cannot be executed";
 	public static final String GRADLE_COMMAND_MISSING = "gradle command missing";
 	public static final String GRADLE_VERSON_NOT_CALLABLE = "gradle cannot be called to fetch at least version";
-	public static final String GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE = "called --version. But did not return "+ProcessExecutor.PROCESS_RESULT_OK;
-	
+	public static final String GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE = "called --version. But did not return "
+			+ ProcessExecutor.PROCESS_RESULT_OK;
+
 	private ProcessExecutor executor;
 	private OutputHandler outputHandler;
 	private CancelStateProvider cancelStateProvider;
 
-	public GradleConfigurationValidator(ProcessExecutor executor){
+	public GradleConfigurationValidator(ProcessExecutor executor) {
 		notNull(executor, "'executor' may not be null");
-		this.executor=executor;
+		this.executor = executor;
 	}
 
 	@Override
 	public void validate(GradleConfiguration configuration) throws ValidationException {
 		handleCanceled();
-		/* validate gradle call not empty*/
+		/* validate gradle call not empty */
 		String gradleCommand = configuration.getGradleCommandFullPath();
-		if (StringUtils.isBlank(gradleCommand)){
+		if (StringUtils.isBlank(gradleCommand)) {
 			throw new ValidationException(GRADLE_COMMAND_MISSING);
 		}
-		/* validate gradle installation dir*/
+		/* validate gradle installation dir */
 		String gradleInstallDir = configuration.getGradleBinDirectory();
-		if (! StringUtils.isEmpty(gradleInstallDir)){
+		if (!StringUtils.isEmpty(gradleInstallDir)) {
 			output("+ Test gradle bin folder");
-			/* validate directory exists*/
+			/* validate directory exists */
 			File file = new File(gradleInstallDir);
-			if (! file.exists()){
+			if (!file.exists()) {
 				throw new ValidationException(GRADLE_INSTALLATION_DIR_NOT_EXISTING);
 			}
-			if (!file.isDirectory()){
+			if (!file.isDirectory()) {
 				throw new ValidationException(GRADLE_INSTALLATION_DIR_IS_NOT_A_DIRECTORY);
 			}
 			List<String> subFiles = Arrays.asList(file.list());
-			if (!subFiles.contains(gradleCommand)){
-				throw new ValidationException(GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE);	
+			if (!subFiles.contains(gradleCommand)) {
+				throw new ValidationException(GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE);
 			}
 		}
 		EnvironmentProvider environmentProvider = new EnvironmentProvider() {
-			
+
 			@Override
 			public Map<String, String> getEnvironment() {
-				Map<String,String> map = new HashMap<>();
+				Map<String, String> map = new HashMap<>();
 				String javaHome = configuration.getJavaHome();
-				if (StringUtils.isNotBlank(javaHome)){
-					map.put("JAVA_HOME",javaHome);
+				if (StringUtils.isNotBlank(javaHome)) {
+					map.put("JAVA_HOME", javaHome);
 				}
 				return map;
 			}
 
 		};
-		
-		/* validate shell call*/
+
+		/* validate shell call */
 		EGradleShellType shell = configuration.getShellType();
-		if (shell==null){
+		if (shell == null) {
 			shell = EGradleShellType.NONE;
 		}
 		List<String> shellStandaloneCommands = shell.createCheckStandaloneCommands();
 		handleCanceled();
 		ProcessContext context = new ProcessContext() {
-			
+
 			@Override
 			public CancelStateProvider getCancelStateProvider() {
 				return GradleConfigurationValidator.this.getCancelStateProvider();
 			}
 		};
-		if (! shellStandaloneCommands.isEmpty()){
-			output("  Starting shell standalone with "+ shellStandaloneCommands);
+		if (!shellStandaloneCommands.isEmpty()) {
+			output("  Starting shell standalone with " + shellStandaloneCommands);
 			/* try to execute shell standalone */
 			try {
-				executor.execute(configuration, environmentProvider , context, shellStandaloneCommands.toArray(new String[shellStandaloneCommands.size()]));
+				executor.execute(configuration, environmentProvider, context,
+						shellStandaloneCommands.toArray(new String[shellStandaloneCommands.size()]));
 				output("  [OK]");
 			} catch (IOException e) {
 				output("  [FAILED]");
@@ -121,19 +122,23 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 			}
 		}
 		output("+ Test gradle is working");
-		/* validate gradle call  with --version ( does not validate projects but returns 0)*/
+		/*
+		 * validate gradle call with --version ( does not validate projects but
+		 * returns 0)
+		 */
 		List<String> commands = new ArrayList<>();
 		commands.addAll(shell.createCommands());
 		String gradleCommandWithPathIfNecessary = configuration.getGradleCommandFullPath();
 		commands.add(gradleCommandWithPathIfNecessary);
 		commands.add("--version");
-		output("  Executing:"+commands);
+		output("  Executing:" + commands);
 		handleCanceled();
 		try {
-			int result = executor.execute(configuration, environmentProvider, context, commands.toArray(new String[commands.size()]));
-			if (result!=ProcessExecutor.PROCESS_RESULT_OK){
+			int result = executor.execute(configuration, environmentProvider, context,
+					commands.toArray(new String[commands.size()]));
+			if (result != ProcessExecutor.PROCESS_RESULT_OK) {
 				output("  [FAILED]");
-				throw new ValidationException(GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE, "Result was:"+result);
+				throw new ValidationException(GRADLE_VERSON_CALLABLE_BUT_DID_RETURN_FAILURE, "Result was:" + result);
 			}
 			output("  [OK]");
 		} catch (IOException e) {
@@ -141,31 +146,30 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 			throw new ValidationException(GRADLE_VERSON_NOT_CALLABLE);
 		}
 	}
-	
 
 	private void handleCanceled() throws ValidationException {
-		if (getCancelStateProvider().isCanceled()){
+		if (getCancelStateProvider().isCanceled()) {
 			throw new ValidationException("Canceled by user");
 		}
 	}
 
 	public void setOutputHandler(OutputHandler outputHandler) {
-		this.outputHandler=outputHandler;
+		this.outputHandler = outputHandler;
 	}
-	
-	private void output(String message){
-		if (outputHandler==null){
+
+	private void output(String message) {
+		if (outputHandler == null) {
 			return;
 		}
 		outputHandler.output(message);
 	}
 
 	public void setCancelStateProvider(CancelStateProvider cancelStateProvider) {
-		this.cancelStateProvider=cancelStateProvider;
+		this.cancelStateProvider = cancelStateProvider;
 	}
-	
+
 	public CancelStateProvider getCancelStateProvider() {
-		if (cancelStateProvider==null){
+		if (cancelStateProvider == null) {
 			return CancelStateProvider.NEVER_CANCELED;
 		}
 		return cancelStateProvider;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -37,10 +37,10 @@ public class QuickLaunchDialogTestUI {
 		history.add("tasks");
 		history.add("--version");
 		history.add("--stop");
-		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history,"test");
+		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history, "test");
 		dialog.open();
 		String input = dialog.getValue();
-		System.out.println("input was:"+input);
+		System.out.println("input was:" + input);
 		display.dispose();
 
 	}

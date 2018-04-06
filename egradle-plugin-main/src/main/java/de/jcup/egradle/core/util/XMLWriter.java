@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 
 public class XMLWriter {
-	
+
 	public void writeDocumentToFile(Document document, File file) throws IOException {
 
 		try {

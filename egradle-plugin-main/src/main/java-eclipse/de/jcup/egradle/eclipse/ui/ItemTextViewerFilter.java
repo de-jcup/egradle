@@ -18,5 +18,5 @@ package de.jcup.egradle.eclipse.ui;
 import de.jcup.egradle.core.model.Item;
 
 public class ItemTextViewerFilter extends AbstractTreeViewerFilter<Item> {
-	
+
 }

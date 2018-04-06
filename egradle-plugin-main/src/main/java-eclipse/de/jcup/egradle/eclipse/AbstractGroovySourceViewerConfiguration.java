@@ -70,8 +70,8 @@ public abstract class AbstractGroovySourceViewerConfiguration extends TextSource
 	}
 
 	/**
-	 * Returns preferences  laber with its preference store. The returned store is
-	 * containing only preferences for this editor - but has no relation to
+	 * Returns preferences laber with its preference store. The returned store
+	 * is containing only preferences for this editor - but has no relation to
 	 * standard text editor setup.
 	 * 
 	 * @return
@@ -96,14 +96,21 @@ public abstract class AbstractGroovySourceViewerConfiguration extends TextSource
 
 	@Override
 	public IQuickAssistAssistant getQuickAssistAssistant(ISourceViewer sourceViewer) {
-		/* currently we avoid the default quick assitence parts (spell checking etc.)*/
+		/*
+		 * currently we avoid the default quick assitence parts (spell checking
+		 * etc.)
+		 */
 		return null;
 	}
+
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		/* currently we avoid the default reconciler mechanism parts (spell checking etc.)*/
+		/*
+		 * currently we avoid the default reconciler mechanism parts (spell
+		 * checking etc.)
+		 */
 		return null;
 	}
-	
+
 	protected void addDefaultPresentation(PresentationReconciler reconciler) {
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getGroovyDefaultTextScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);

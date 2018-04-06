@@ -29,7 +29,7 @@ public enum NewProjectTemplateVariables implements TemplateVariable {
 
 	VAR__JAVA__VERSION("egradle.template.java.version"),
 
-	VAR__GRADLE__VERSION("egradle.template.gradle.version","4.3"),;
+	VAR__GRADLE__VERSION("egradle.template.gradle.version", "4.3"),;
 
 	private String variableName;
 	private String defaultValue;

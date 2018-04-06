@@ -32,22 +32,25 @@ public class GradleCommand {
 	public static GradleCommand[] build(GradleSubproject gradleSubproject, String commandString) {
 		notNull(commandString);
 		String[] commands = commandString.split(" ");
-		if (ArrayUtils.isEmpty(commands)){
-			return new GradleCommand[]{};
+		if (ArrayUtils.isEmpty(commands)) {
+			return new GradleCommand[] {};
 		}
 		List<GradleCommand> list = new ArrayList<>();
 		for (int i = 0; i < commands.length; i++) {
 			String command = commands[i];
 			List<String> param = null;
-			/* check if following is an argument (e.g. test --tests de.jcup.MyTestClass*/
-			if (i+2<commands.length){
-				String potentialArg = commands[i+1];
+			/*
+			 * check if following is an argument (e.g. test --tests
+			 * de.jcup.MyTestClass
+			 */
+			if (i + 2 < commands.length) {
+				String potentialArg = commands[i + 1];
 				if (potentialArg.startsWith("--")) {
 					/* argument detected */
-					param=new ArrayList<>();
+					param = new ArrayList<>();
 					param.add(potentialArg);
-					param.add(commands[i+2]);
-					i=i+2;
+					param.add(commands[i + 2]);
+					i = i + 2;
 				}
 			}
 			list.add(new GradleCommand(gradleSubproject, command, param));
@@ -75,11 +78,11 @@ public class GradleCommand {
 		}
 		sb.append(command);
 		this.command = sb.toString();
-		
-		if (commandArguments==null){
-			this.commandArguments=Collections.emptyList();
-		}else{
-			this.commandArguments=Collections.unmodifiableList(commandArguments);
+
+		if (commandArguments == null) {
+			this.commandArguments = Collections.emptyList();
+		} else {
+			this.commandArguments = Collections.unmodifiableList(commandArguments);
 		}
 	}
 
@@ -96,9 +99,10 @@ public class GradleCommand {
 	public String getCommand() {
 		return command;
 	}
-	
+
 	/**
 	 * Returns an unmodifiable list of command arguments
+	 * 
 	 * @return command arguments
 	 */
 	public List<String> getCommandArguments() {

@@ -13,18 +13,18 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import de.jcup.egradle.core.util.ErrorHandler;
 
-public class EGradleErrorHandler implements ErrorHandler{
+public class EGradleErrorHandler implements ErrorHandler {
 
 	public static EGradleErrorHandler INSTANCE = new EGradleErrorHandler();
-	
-	EGradleErrorHandler(){
-		
+
+	EGradleErrorHandler() {
+
 	}
-	
+
 	@Override
 	public void handleError(String message, Throwable t) {
 		EditorUtil.INSTANCE.logError(message, t);
@@ -32,7 +32,7 @@ public class EGradleErrorHandler implements ErrorHandler{
 
 	@Override
 	public void handleError(String message) {
-		EditorUtil.INSTANCE.logError(message, null);		
+		EditorUtil.INSTANCE.logError(message, null);
 	}
 
 }

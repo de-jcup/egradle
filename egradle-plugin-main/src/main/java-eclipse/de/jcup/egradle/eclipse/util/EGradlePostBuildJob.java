@@ -13,40 +13,41 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.util;
+package de.jcup.egradle.eclipse.util;
 
 import org.eclipse.core.runtime.jobs.Job;
 
 import de.jcup.egradle.core.util.BuildInfo;
 
-public abstract class EGradlePostBuildJob extends Job{
-
+public abstract class EGradlePostBuildJob extends Job {
 
 	private BuildInfo buildInfo;
 
 	public EGradlePostBuildJob(String name) {
 		super(name);
 	}
-	
+
 	/**
 	 * Set build information about former build
-	 * @param info information to set
+	 * 
+	 * @param info
+	 *            information to set
 	 */
 	public void setBuildInfo(BuildInfo info) {
-		this.buildInfo=info;
+		this.buildInfo = info;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> when build info about former build is available
+	 * 
 	 * @return <code>true</code> when build info about former build is available
 	 */
-	public boolean hasBuildInfo(){
-		return buildInfo!=null;
+	public boolean hasBuildInfo() {
+		return buildInfo != null;
 	}
-	
+
 	public BuildInfo getBuildInfo() {
 		return buildInfo;
 	}
 
 }
-	

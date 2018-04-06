@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 public interface TypeConstants {
 
@@ -23,5 +23,5 @@ public interface TypeConstants {
 	public static final String JAVA_SIMPLE_BOOLEAN = "boolean";
 	public static final String JAVA_MAP = "java.util.Map";
 	public static final String JAVA_COLLECTION = "java.util.Collection";
-	
+
 }

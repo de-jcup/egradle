@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
@@ -22,46 +22,44 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 	COMPILE_ONLY("compileOnly"),
 
 	COMPILE("compile"),
-	
+
 	TEST_COMPILE("testCompile"),
-	
+
 	FROM("from"),
-	
+
 	INTO("into"),
-	
+
 	INCLUDE("include"),
-	
+
 	EXCLUDE("exclude"),
-	
+
 	DEPENDENCIES("dependencies"),
-	
+
 	REPOSITORIES("repositories"),
 
 	ALL_PROJECTS("allprojects"),
 
 	SUB_PROJECTS("subprojects"),
-	
+
 	ARTIFACTS("artifacts"),
-	
+
 	TEST("test"),
-	
+
 	CLEAN("clean"),
-	
+
 	BUILDSCRIPT("buildscript"),
-	
+
 	FILES("files"),
-	
+
 	FILETREE("fileTree"),
-	
-	CONFIGURATIONS("configurations")
-	;
+
+	CONFIGURATIONS("configurations");
 
 	private String text;
 
 	private GradleDefaultClosureKeyWords(String text) {
 		this.text = text;
 	}
-
 
 	@Override
 	public String getText() {

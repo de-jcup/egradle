@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import de.jcup.egradle.codeassist.dsl.Method;
 

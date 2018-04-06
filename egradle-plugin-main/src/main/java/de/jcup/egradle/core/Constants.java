@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 public class Constants {
 
@@ -23,7 +23,8 @@ public class Constants {
 	public static final String CONSOLE_OK = "[OK]";
 	public static final String CONSOLE_WARNING = "[WARNING]";
 	/**
-	 * Validation output is shrinked to optimize validation performance. The value marks what is the limit of lines necessary to validate
+	 * Validation output is shrinked to optimize validation performance. The
+	 * value marks what is the limit of lines necessary to validate
 	 */
 	public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 50;
 }

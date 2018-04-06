@@ -18,16 +18,16 @@ package de.jcup.egradle.eclipse.gradleeditor;
 import org.eclipse.swt.graphics.RGB;
 
 public interface GradleEditorColorConstants {
-	
-	public static final RGB GRAY_JAVA = rgb(192,192,192);//grey as in java
-	
+
+	public static final RGB GRAY_JAVA = rgb(192, 192, 192);// grey as in java
+
 	public static final RGB GREEN_JAVA = rgb(63, 127, 95); // green
-																		// as
-																		// java
-																		// eclipse
-																		// default
-																		// for
-																		// comments
+															// as
+															// java
+															// eclipse
+															// default
+															// for
+															// comments
 	public static final RGB LINK_DEFAULT_BLUE = rgb(63, 63, 191); // blue as
 																	// java
 																	// eclipse
@@ -58,11 +58,11 @@ public interface GradleEditorColorConstants {
 																	// java
 																	// outline
 																	// string
-	public static final RGB MIDDLE_GRAY = rgb(128,128,128);
+	public static final RGB MIDDLE_GRAY = rgb(128, 128, 128);
 	public static final RGB MIDDLE_GREEN = rgb(0, 128, 0);
 	public static final RGB MIDDLE_BROWN = rgb(128, 128, 0);
 	public static final RGB MIDDLE_RED = rgb(128, 0, 0);
-	public static final RGB MIDDLE_ORANGE = rgb(255,128,64);
+	public static final RGB MIDDLE_ORANGE = rgb(255, 128, 64);
 
 	public static final RGB DARK_GREEN = rgb(0, 64, 0);
 	public static final RGB TASK_DEFAULT_RED = rgb(128, 0, 0);
@@ -89,7 +89,7 @@ public interface GradleEditorColorConstants {
 	public static final RGB BRIGHT_CYAN = rgb(85, 255, 255);
 	public static final RGB WHITE = rgb(255, 255, 255);
 
-	public static final RGB TASK_CYAN = rgb(0,128,128);
+	public static final RGB TASK_CYAN = rgb(0, 128, 128);
 
 	public static RGB rgb(int r, int g, int b) {
 		return new RGB(r, g, b);

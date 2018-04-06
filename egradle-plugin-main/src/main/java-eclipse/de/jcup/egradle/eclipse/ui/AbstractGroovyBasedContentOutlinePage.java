@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
@@ -38,7 +38,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
-public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutlinePage  implements IDoubleClickListener{
+public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutlinePage implements IDoubleClickListener {
 
 	protected ITreeContentProvider contentProvider;
 	private IExtendedEditor editor;
@@ -66,15 +66,15 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 
 	public void createControl(Composite parent) {
 		super.createControl(parent);
-	
+
 		labelProvider = createStyledLabelProvider();
-	
+
 		TreeViewer viewer = getTreeViewer();
 		viewer.setContentProvider(contentProvider);
 		viewer.addDoubleClickListener(this);
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		viewer.addSelectionChangedListener(this);
-	
+
 		/* it can happen that input is already updated before control created */
 		if (input != null) {
 			viewer.setInput(input);
@@ -85,17 +85,17 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 		toggleLinkingAction = new ToggleLinkingAction();
 		toggleLinkingAction.setActionDefinitionId(IWorkbenchCommandConstants.NAVIGATE_TOGGLE_LINK_WITH_EDITOR);
 		IActionBars actionBars = getSite().getActionBars();
-	
+
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		toolBarManager.add(expandAllAction);
 		toolBarManager.add(collapseAllAction);
 		toolBarManager.add(toggleLinkingAction);
 		toolBarManager.add(new Separator("selectionGroup1"));//$NON-NLS-1$
 		toolBarManager.add(blockSelectionAction);
-	
+
 		IMenuManager viewMenuManager = actionBars.getMenuManager();
 		viewMenuManager.add(new Separator("EndFilterGroup")); //$NON-NLS-1$
-	
+
 		handleDebugOptions(viewMenuManager);
 		viewMenuManager.add(new Separator("treeGroup")); //$NON-NLS-1$
 		viewMenuManager.add(expandAllAction);
@@ -153,7 +153,7 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 		if (!linkingWithEditorEnabled) {
 			return;
 		}
-	
+
 		if (ignoreNextSelectionEvents) {
 			return;
 		}
@@ -164,16 +164,18 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 	protected abstract IStyledLabelProvider createStyledLabelProvider();
 
 	protected abstract ImageDescriptor getImageDescriptionForLinked();
-	
+
 	protected abstract ImageDescriptor getImageDescriptionNotLinked();
+
 	protected abstract String getPluginId();
 
 	protected abstract void handleDebugOptions(IMenuManager viewMenuManager);
-	
+
 	class BlockSelectionAction extends Action {
 
 		private BlockSelectionAction() {
-			setImageDescriptor(EclipseUtil.createImageDescriptor(getOutlineImageRootPath()+"mark_occurrences.png", getPluginId()));
+			setImageDescriptor(EclipseUtil.createImageDescriptor(getOutlineImageRootPath() + "mark_occurrences.png",
+					getPluginId()));
 			setText("Mark selected item full");
 		}
 
@@ -194,7 +196,8 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 	class CollapseAllAction extends Action {
 
 		private CollapseAllAction() {
-			setImageDescriptor(EclipseUtil.createImageDescriptor(getOutlineImageRootPath()+"collapseall.png", getPluginId()));
+			setImageDescriptor(
+					EclipseUtil.createImageDescriptor(getOutlineImageRootPath() + "collapseall.png", getPluginId()));
 			setText("Collapse all");
 		}
 
@@ -207,7 +210,8 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 	class ExpandAllAction extends Action {
 
 		private ExpandAllAction() {
-			setImageDescriptor(EclipseUtil.createImageDescriptor(getOutlineImageRootPath()+"expandall.png", getPluginId()));
+			setImageDescriptor(
+					EclipseUtil.createImageDescriptor(getOutlineImageRootPath() + "expandall.png", getPluginId()));
 			setText("Expand all");
 		}
 
@@ -248,10 +252,11 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
 	}
 
 	/**
-	 * Returns outline image root path - e.g. /icons/outline/ or /icons/jenkinseditor/outline/ - be aware it <b>MUST</b> end with a slash!
+	 * Returns outline image root path - e.g. /icons/outline/ or
+	 * /icons/jenkinseditor/outline/ - be aware it <b>MUST</b> end with a slash!
+	 * 
 	 * @return
 	 */
 	protected abstract String getOutlineImageRootPath();
-
 
 }

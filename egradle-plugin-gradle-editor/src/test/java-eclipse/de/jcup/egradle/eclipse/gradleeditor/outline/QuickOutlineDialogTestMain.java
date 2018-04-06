@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -52,7 +52,8 @@ public class QuickOutlineDialogTestMain {
 				return null;
 			}
 		};
-		AbstractGroovyBasedQuickOutline dialog = new GradleQuickOutlineDialog(adapter, shell,"Test quick outline dialog...");
+		AbstractGroovyBasedQuickOutline dialog = new GradleQuickOutlineDialog(adapter, shell,
+				"Test quick outline dialog...");
 		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
 		dialog.open();
 		display.dispose();

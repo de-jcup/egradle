@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration.test;
+package de.jcup.egradle.integration.test;
 
 import static de.jcup.egradle.integration.TypeAssert.*;
 
@@ -25,6 +25,7 @@ import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.integration.IntegrationTestComponents;
+
 public class TypeImporterIntegrationTest {
 
 	@Rule
@@ -32,15 +33,15 @@ public class TypeImporterIntegrationTest {
 	private FilesystemFileLoader fileLoader;
 
 	@Before
-	public void before(){
+	public void before() {
 		fileLoader = components.getFileLoader();
 	}
-	
+
 	@Test
-	public void load_project_and_repository_handler_not_mixed_in__do_mixin_and_check_correct() throws Exception{
+	public void load_project_and_repository_handler_not_mixed_in__do_mixin_and_check_correct() throws Exception {
 		Type projectType = fileLoader.loadType("org.gradle.api.Project");
 		Type repositoryHandlerType = fileLoader.loadType("org.gradle.api.artifacts.dsl.RepositoryHandler");
-		
+
 		/* check preconditions */
 		assertType(projectType).hasName("org.gradle.api.Project");
 		assertType(projectType).hasNotMethod("flatDir", "groovy.lang.Closure");
@@ -50,12 +51,10 @@ public class TypeImporterIntegrationTest {
 		/* execute */
 		XMLType projectXMLType = (XMLType) projectType;
 		projectXMLType.mixin(repositoryHandlerType, null);
-		
+
 		/* test */
 		assertType(projectType).hasMethod("flatDir", "groovy.lang.Closure");
-		
+
 	}
-	
-	
 
 }

@@ -32,8 +32,8 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.execution.validation.RootProjectValidationHandler;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigUIDelegate;
 
-public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage 
-	implements IWorkbenchPreferencePage, RootProjectValidationHandler {
+public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
+		implements IWorkbenchPreferencePage, RootProjectValidationHandler {
 
 	private String originRootProject;
 	private RootProjectConfigUIDelegate uiDelegate;
@@ -43,7 +43,7 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
 		setDescription("Define how EGradle calls gradle.");
 		uiDelegate = new RootProjectConfigUIDelegate(this);
-		originRootProject=getPreferenceStore().getString(P_ROOTPROJECT_PATH.getId());
+		originRootProject = getPreferenceStore().getString(P_ROOTPROJECT_PATH.getId());
 	}
 
 	/**
@@ -58,25 +58,26 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 
 	@Override
 	public boolean performOk() {
-		boolean done =  super.performOk();
-		if (done){
-			String newRootProject=uiDelegate.getRootPathDirectory();
-			if (! StringUtils.equals(newRootProject, originRootProject)){
-				/* root project has changed - refresh decoration of all projects */ 
+		boolean done = super.performOk();
+		if (done) {
+			String newRootProject = uiDelegate.getRootPathDirectory();
+			if (!StringUtils.equals(newRootProject, originRootProject)) {
+				/*
+				 * root project has changed - refresh decoration of all projects
+				 */
 				File newRootProjectFolder = new File(newRootProject);
 				try {
 					IDEUtil.setNewRootProjectFolder(newRootProjectFolder);
 				} catch (CoreException e) {
-					IDEUtil.logError("Was not able to set new root project folder:"+newRootProject, e);
-					/* not done...*/
+					IDEUtil.logError("Was not able to set new root project folder:" + newRootProject, e);
+					/* not done... */
 					return false;
 				}
 			}
 		}
 		return done;
 	}
-	
-	
+
 	@Override
 	protected void performDefaults() {
 		super.performDefaults(); // set defaults and store them, so can now be
@@ -87,12 +88,12 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 
 	@Override
 	public void handleValidationResult(boolean valid) {
-		if (valid){
+		if (valid) {
 			checkState(); // we say its valid - but the others...
-		}else{
+		} else {
 			setValid(false);
 		}
-		
+
 	}
 
 	@Override
@@ -100,7 +101,6 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 		super.initialize();
 		updateCallGroupEnabledStateByStoredCallTypeId();
 	}
-	
 
 	/**
 	 * Updates group enabled state and returns stored call type id
@@ -124,7 +124,7 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 	public void init(IWorkbench workbench) {
 
 	}
-	
+
 	@Override
 	public void setValid(boolean valid) {
 		super.setValid(valid);
@@ -147,11 +147,11 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 
 	@Override
 	public boolean isHandlingPropertyChanges() {
-		/* the field editor keeps care of the fields,
-		 * so we must handle property events here standalone
+		/*
+		 * the field editor keeps care of the fields, so we must handle property
+		 * events here standalone
 		 */
 		return true;
 	}
-
 
 }

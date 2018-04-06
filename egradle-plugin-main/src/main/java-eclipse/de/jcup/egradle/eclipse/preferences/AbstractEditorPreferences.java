@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -28,54 +28,54 @@ import de.jcup.egradle.eclipse.util.ColorUtil;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
-public abstract class AbstractEditorPreferences implements IEditorPreferences{
+public abstract class AbstractEditorPreferences implements IEditorPreferences {
 
 	private IPreferenceStore store;
 
 	public AbstractEditorPreferences() {
 		store = createStore();
 		store.addPropertyChangeListener(new IPropertyChangeListener() {
-			
+
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
-				if (event==null){
+				if (event == null) {
 					return;
 				}
 				String property = event.getProperty();
-				if (property==null){
+				if (property == null) {
 					return;
 				}
 				boolean colorChanged = checkPropertyMeansEditorColorsChanged(property);
-				if (colorChanged){
+				if (colorChanged) {
 					updateColorsInEditors();
 				}
-				
-				
+
 			}
-			
+
 		});
 	}
 
 	protected abstract boolean checkPropertyMeansEditorColorsChanged(String property);
-	protected abstract IPreferenceStore createStore() ;
+
+	protected abstract IPreferenceStore createStore();
+
 	protected abstract void updateEditorColors(IEditorPart editor);
 
 	private void updateColorsInEditors() {
-		/* inform all EGradle editors about color changes*/
+		/* inform all EGradle editors about color changes */
 		IWorkbenchPage activePage = EclipseUtil.getActivePage();
-		if (activePage==null){
+		if (activePage == null) {
 			return;
 		}
 		IEditorReference[] references = activePage.getEditorReferences();
-		for (IEditorReference ref: references){
+		for (IEditorReference ref : references) {
 			IEditorPart editor = ref.getEditor(false);
-			if (editor==null){
+			if (editor == null) {
 				continue;
 			}
 			updateEditorColors(editor);
 		}
 	}
-
 
 	public String getStringPreference(PreferenceIdentifiable id) {
 		String data = getPreferenceStore().getString(id.getId());
@@ -110,22 +110,21 @@ public abstract class AbstractEditorPreferences implements IEditorPreferences{
 
 	/**
 	 * Returns color as a web color in format "#RRGGBB"
+	 * 
 	 * @param identifiable
 	 * @return web color string
 	 */
 	public String getWebColor(PreferenceIdentifiable identifiable) {
 		RGB color = getColor(identifiable);
-		if (color==null){
+		if (color == null) {
 			return null;
 		}
-		String webColor= ColorUtil.convertToHexColor(color);
+		String webColor = ColorUtil.convertToHexColor(color);
 		return webColor;
 	}
 
 	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color) {
 		PreferenceConverter.setDefault(getPreferenceStore(), identifiable.getId(), color);
 	}
-
-	
 
 }

@@ -13,14 +13,15 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
+
 import org.eclipse.jface.text.rules.IWordDetector;
 
-public class AnnotationWordDetector implements IWordDetector{
-	
+public class AnnotationWordDetector implements IWordDetector {
+
 	@Override
 	public boolean isWordStart(char c) {
-		if (c==64){
+		if (c == 64) {
 			return true;
 		}
 		return false;
@@ -28,13 +29,13 @@ public class AnnotationWordDetector implements IWordDetector{
 
 	@Override
 	public boolean isWordPart(char c) {
-		if (c==64){
+		if (c == 64) {
 			return true;
 		}
-		if (Character.isWhitespace(c)){
+		if (Character.isWhitespace(c)) {
 			return false;
 		}
-		if (! Character.isLetter(c)){
+		if (!Character.isLetter(c)) {
 			return false;
 		}
 		return true;

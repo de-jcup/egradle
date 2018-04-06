@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static de.jcup.egradle.codeassist.dsl.HTMLLinkUtil.*;
 
@@ -221,8 +221,6 @@ public class HTMLDescriptionBuilder {
 		}
 	}
 
-	
-
 	private void appendMethodDescription(LanguageElement element, StringBuilder descSb, Method method) {
 		descSb.append("<div class='tooltipHeadline'> Method '").append(method.getName()).append("'</div>");
 		descSb.append("<div class='fullName'>");
@@ -230,9 +228,9 @@ public class HTMLDescriptionBuilder {
 		String signature = MethodUtils.createSignature(method);
 		descSb.append(signature);
 		descSb.append(':');
-		if (method.getReturnType()!=null){
+		if (method.getReturnType() != null) {
 			appendLinkToType(descSb, false, method.getReturnType(), null);
-		}else{
+		} else {
 			descSb.append(method.getReturnTypeAsString());
 		}
 		descSb.append("</div>");
@@ -251,9 +249,9 @@ public class HTMLDescriptionBuilder {
 		appendLinkToParentType(element, descSb, true);
 		descSb.append(property.getName());
 		descSb.append(':');
-		if (property.getType()!=null){
+		if (property.getType() != null) {
 			appendLinkToType(descSb, false, property.getType(), null);
-		}else {
+		} else {
 			descSb.append(property.getTypeAsString());
 		}
 		descSb.append("</div>");
@@ -269,7 +267,7 @@ public class HTMLDescriptionBuilder {
 			return;
 		}
 		description.append("<div class='tooltipHeadline'>Type '").append(type.getShortName()).append("'");
-		
+
 		if (data != null) {
 			if (data.isTypeFromExtensionConfigurationPoint()) {
 				description.append(" by extension '").append(data.getExtensionName()).append("'");

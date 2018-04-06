@@ -28,7 +28,6 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 	private BooleanFieldEditor outputValidationEnabled;
 	private BooleanFieldEditor showConsoleViewOnBuildFailed;
 
-
 	public EGradleValidationPreferencePage() {
 		super(GRID);
 		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
@@ -48,30 +47,27 @@ public class EGradleValidationPreferencePage extends FieldEditorPreferencePage i
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
 
-		outputValidationEnabled=		new BooleanFieldEditor(
-					EGradleIdePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(),
-					"Output validation enabled",
-					getFieldEditorParent());
-		addField(outputValidationEnabled);
-		
-		showConsoleViewOnBuildFailed=		new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(),
-				"Show console view on build failure",
+		outputValidationEnabled = new BooleanFieldEditor(
+				EGradleIdePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(), "Output validation enabled",
 				getFieldEditorParent());
+		addField(outputValidationEnabled);
+
+		showConsoleViewOnBuildFailed = new BooleanFieldEditor(
+				EGradleIdePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(),
+				"Show console view on build failure", getFieldEditorParent());
 		addField(showConsoleViewOnBuildFailed);
 	}
 
 	public boolean performOk() {
-		boolean done =  super.performOk();
-		if (done){
-			if (!outputValidationEnabled.getBooleanValue()){
+		boolean done = super.performOk();
+		if (done) {
+			if (!outputValidationEnabled.getBooleanValue()) {
 				IDEUtil.removeAllValidationErrorsOfConsoleOutput();
 			}
 		}
 		return done;
 	}
-	
-	
+
 	public void init(IWorkbench workbench) {
 
 	}

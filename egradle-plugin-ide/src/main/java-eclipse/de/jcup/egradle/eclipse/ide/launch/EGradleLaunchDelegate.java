@@ -111,8 +111,8 @@ public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 	}
 
 	/**
-	 * Append additional launch parameters for gradle command outputHandler. This is
-	 * done inside UI Thread
+	 * Append additional launch parameters for gradle command outputHandler.
+	 * This is done inside UI Thread
 	 * 
 	 * @param launchParameterValues
 	 */

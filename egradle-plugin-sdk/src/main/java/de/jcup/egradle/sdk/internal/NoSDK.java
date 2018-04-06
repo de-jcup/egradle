@@ -13,35 +13,34 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import java.io.File;
 import java.io.IOException;
 
 import de.jcup.egradle.core.VersionData;
 
-public class NoSDK extends AbstractSDK{
-		
-		public static NoSDK INSTANCE = new NoSDK();
-		
-		private NoSDK() {
-			super(new VersionData("0.0.0"));
-		}
+public class NoSDK extends AbstractSDK {
 
-		@Override
-		public boolean isInstalled() {
-			return false;
-		}
+	public static NoSDK INSTANCE = new NoSDK();
 
-
-		@Override
-		public File getSDKInstallationFolder() {
-			return null;
-		}
-
-		@Override
-		public void install() throws IOException {
-			
-		}
-		
+	private NoSDK() {
+		super(new VersionData("0.0.0"));
 	}
+
+	@Override
+	public boolean isInstalled() {
+		return false;
+	}
+
+	@Override
+	public File getSDKInstallationFolder() {
+		return null;
+	}
+
+	@Override
+	public void install() throws IOException {
+
+	}
+
+}

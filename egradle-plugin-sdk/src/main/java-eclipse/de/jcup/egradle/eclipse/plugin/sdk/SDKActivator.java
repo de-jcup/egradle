@@ -70,9 +70,6 @@ public class SDKActivator extends AbstractUIPlugin implements LogAdapter, RootFo
 		return file;
 	}
 
-	
-	
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -96,7 +93,7 @@ public class SDKActivator extends AbstractUIPlugin implements LogAdapter, RootFo
 
 	@Override
 	public void logError(String message, Throwable t) {
-		getLog().log(new Status(IStatus.ERROR, ID, message,t));
+		getLog().log(new Status(IStatus.ERROR, ID, message, t));
 	}
 
 }

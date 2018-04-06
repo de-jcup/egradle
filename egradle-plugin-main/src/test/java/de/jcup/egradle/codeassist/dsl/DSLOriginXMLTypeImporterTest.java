@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static de.jcup.egradle.integration.TypeAssert.*;
 
@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import de.jcup.egradle.core.TestUtil;
+
 public class DSLOriginXMLTypeImporterTest {
 
 	@Rule
@@ -33,20 +34,20 @@ public class DSLOriginXMLTypeImporterTest {
 	private File dslFolder;
 	private XMLTypeImporter importerToTest;
 	private File xmlFile;
-	
+
 	@Before
-	public void before(){
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl-origin/");
-		xmlFile = new File(dslFolder,"Ear.xml");
-		importerToTest=new XMLTypeImporter();
+	public void before() {
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl-origin/");
+		xmlFile = new File(dslFolder, "Ear.xml");
+		importerToTest = new XMLTypeImporter();
 	}
-	
+
 	@Test
 	public void ear_xml_file_has_property_lib_and_method_lib_after_import() throws Exception {
-		
+
 		/* execute */
-		Type type = importerToTest.importType(new FileInputStream(xmlFile));		
-		
+		Type type = importerToTest.importType(new FileInputStream(xmlFile));
+
 		/* test */
 		/* @formatter:off*/
 		assertType(type).
@@ -55,6 +56,5 @@ public class DSLOriginXMLTypeImporterTest {
 			hasMethod("lib", "groovy.lang.Closure");
 		/* @formatter:on*/
 	}
-	
 
 }

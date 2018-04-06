@@ -13,21 +13,21 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 public enum BracketInsertion {
 	/**
 	 * Will result in multined curly braces indented as before
 	 */
-	CURLY_BRACES('{', '}', true), 
-	
+	CURLY_BRACES('{', '}', true),
+
 	/**
-	 * Will result in simple "[  ]" and cursor will be after first space
+	 * Will result in simple "[ ]" and cursor will be after first space
 	 */
 	EDGED_BRACES('[', ']', false),
-	
+
 	;
-	
+
 	private char start;
 	private char end;
 	private boolean multiLine;
@@ -52,7 +52,7 @@ public enum BracketInsertion {
 
 	public static BracketInsertion valueOfStartChar(char c) {
 		for (BracketInsertion data : BracketInsertion.values()) {
-			if (data.start==c){
+			if (data.start == c) {
 				return data;
 			}
 		}
@@ -68,7 +68,7 @@ public enum BracketInsertion {
 	}
 
 	public int createOneLineNewOffset(int offset) {
-		return offset+1;
+		return offset + 1;
 	}
 
 	public String createMultiLineTemplate(String cursorVariable) {
@@ -78,9 +78,7 @@ public enum BracketInsertion {
 		sb.append(cursorVariable);
 		sb.append("\n");
 		sb.append(end);
-		return  sb.toString();
+		return sb.toString();
 	}
-
-
 
 }

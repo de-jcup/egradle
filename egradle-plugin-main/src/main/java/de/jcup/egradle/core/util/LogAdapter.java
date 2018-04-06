@@ -13,12 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 public interface LogAdapter {
 
 	public void logInfo(String message);
-	
+
 	public void logWarn(String message);
 
 	public void logError(String string, Throwable t);

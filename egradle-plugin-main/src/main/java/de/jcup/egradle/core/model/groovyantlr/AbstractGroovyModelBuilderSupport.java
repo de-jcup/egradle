@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 
@@ -35,18 +35,21 @@ public abstract class AbstractGroovyModelBuilderSupport {
 	public AbstractGroovyModelBuilderSupport() {
 		super();
 	}
-	
+
 	public abstract Item handleDependencyAndReturnItem(AST methodCall, Item item);
+
 	public abstract void handleApplyType(Item item, AST nextAST);
-	public abstract AST handleTasksWithTypeClosure(String enameString, Item item, AST nextAST); 
+
+	public abstract AST handleTasksWithTypeClosure(String enameString, Item item, AST nextAST);
+
 	public abstract AST handleTaskClosure(String enameString, Item item, AST nextAST);
-		
+
 	public void appendParameters(Item item, AST parameters) {
 		AST paramDef = parameters.getFirstChild();
-	
+
 		List<String> paramDefList = new ArrayList<>();
 		appendParameterDef(paramDef, paramDefList);
-	
+
 		String[] paramArray = paramDefList.toArray(new String[paramDefList.size()]);
 		item.setParameters(paramArray);
 	}
@@ -59,13 +62,13 @@ public abstract class AbstractGroovyModelBuilderSupport {
 			return;
 		}
 		appendParameterDefChilren(paramDef, paramDefList);
-	
+
 		AST nextParamDef = paramDef.getNextSibling();
 		if (nextParamDef == null) {
 			return;
 		}
 		appendParameterDef(nextParamDef, paramDefList);
-	
+
 	}
 
 	private void appendParameterDefChilren(AST paramDef, List<String> paramDefList) {
@@ -124,7 +127,9 @@ public abstract class AbstractGroovyModelBuilderSupport {
 	/**
 	 * @param item
 	 * @param nextAST
-	 * @return next AST to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 * @return next AST to inspect for further details. If the next hierarchy
+	 *         part is a closure the closure element (CLOSABLE_BLOCK=50) must be
+	 *         returned!
 	 */
 	protected AST handleTaskTypeResolving(Item item, AST nextAST) {
 		if (nextAST == null) {
@@ -136,9 +141,9 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		/* parameter -e.g. task mytask (type: xyz) */
 		AST elist = nextAST;
 		AST nextSibling = elist.getNextSibling();
-	
+
 		AST labeledArg = elist.getFirstChild();
-	
+
 		if (labeledArg == null) {
 			return nextSibling;
 		}
@@ -164,11 +169,14 @@ public abstract class AbstractGroovyModelBuilderSupport {
 			item.setType(ident.getText());
 		}
 		return nextSibling;
-	
+
 	}
 
 	/**
-	 * Returns next ast to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 * Returns next ast to inspect for further details. If the next hierarchy
+	 * part is a closure the closure element (CLOSABLE_BLOCK=50) must be
+	 * returned!
+	 * 
 	 * @param enameString
 	 * @param item
 	 * @param nextAST
@@ -179,7 +187,7 @@ public abstract class AbstractGroovyModelBuilderSupport {
 			return null;
 		}
 		ASTResultInfo result = new ASTResultInfo();
-		result.nextAST=nextAST;
+		result.nextAST = nextAST;
 		if (nextAST.getType() == ELIST) {
 			AST elist = nextAST;
 			AST methodCall2 = elist.getFirstChild();
@@ -187,17 +195,17 @@ public abstract class AbstractGroovyModelBuilderSupport {
 				if (GroovyTokenTypes.SL == methodCall2.getType()) {
 					/* << */
 					AST slChild = methodCall2.getFirstChild();
-					if (slChild!=null){
-						result.nextAST=slChild.getNextSibling();
+					if (slChild != null) {
+						result.nextAST = slChild.getNextSibling();
 						/* handle type in another way */
 						AST bracketChild = slChild.getFirstChild();
-						if (bracketChild!=null){
+						if (bracketChild != null) {
 							AST elistOfBracket = bracketChild.getNextSibling();
-							handleTaskTypeResolving(item,elistOfBracket);
+							handleTaskTypeResolving(item, elistOfBracket);
 						}
 					}
-					result.terminated=true;
-					
+					result.terminated = true;
+
 					return result;
 				}
 				AST name2 = methodCall2.getFirstChild();
@@ -224,17 +232,20 @@ public abstract class AbstractGroovyModelBuilderSupport {
 
 	/**
 	 * Will NOT resolve method call names! (does it not greedy...)
+	 * 
 	 * @param ast
 	 * @return simple string
 	 */
 	public String resolveAsSimpleString(AST ast) {
-		return resolveAsSimpleString(ast,false);
+		return resolveAsSimpleString(ast, false);
 	}
 
 	/**
-	 * Resolve AST parts as simple string 
+	 * Resolve AST parts as simple string
+	 * 
 	 * @param ast
-	 * @param greedy - if true, even method call's etc. are resolved!
+	 * @param greedy
+	 *            - if true, even method call's etc. are resolved!
 	 * @return string
 	 */
 	protected String resolveAsSimpleString(AST ast, boolean greedy) {
@@ -247,12 +258,12 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		} else if (GroovyTokenTypes.STRING_CONSTRUCTOR == type) {
 			return resolveStringOfFirstChildAndSiblings(ast);
 		} else if (GroovyTokenTypes.METHOD_CALL == type) {
-			if (greedy){
+			if (greedy) {
 				return resolveStringOfFirstChildAndSiblings(ast);
 			}
 			return "";
 		} else {
-	
+
 			AST firstChild = ast.getFirstChild();
 			if (GroovyTokenTypes.EXPR == type) {
 				return resolveExpressionName(ast);
@@ -302,14 +313,14 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		item.setColumn(column);
 		item.setLine(line);
 		item.setOffset(context.buffer.getOffset(line, column));
-	
+
 		if (ast instanceof GroovySourceAST) {
 			GroovySourceAST gast = (GroovySourceAST) ast;
 			int offset1 = item.getOffset();
 			int lineLast = gast.getLineLast();
 			int columnLast = gast.getColumnLast();
 			int offset2 = context.buffer.getOffset(lineLast, columnLast);
-	
+
 			int length = offset2 - offset1;
 			if (length < 0) {
 				/* fall back */
@@ -339,7 +350,7 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		if (GroovyTokenTypes.METHOD_CALL != methodCall.getType()) {
 			return "--no method call--";
 		}
-	
+
 		AST firstChild = methodCall.getFirstChild();
 		if (firstChild == null) {
 			return "--no method child--";
@@ -358,7 +369,7 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		if (ast.getType() == GroovyTokenTypes.ELIST) {
 			appendELISTParts(sb, ast);
 		} else if (ast.getType() == GroovyTokenTypes.SL) {
-	
+
 		} else if (ast.getType() == GroovyTokenTypes.DOT) {
 			/* is dot */
 			AST content = ast.getFirstChild();
@@ -390,9 +401,9 @@ public abstract class AbstractGroovyModelBuilderSupport {
 					}
 				}
 			}
-	
+
 		}
-	
+
 	}
 
 	private void appendELIST(StringBuilder sb, AST next) {
@@ -463,12 +474,12 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		if (elist == null) {
 			return list;
 		}
-	
+
 		if (elist.getType() != ELIST) {
 			return list;
 		}
 		resolveParameterList(list, elist);
-	
+
 		return list;
 	}
 
@@ -520,7 +531,11 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		case SPREAD_MAP_ARG:
 			return "java.util.Map";
 		}
-		/* unknown, so return object : name - so after build of model maybe by variable reference check its possible to determine the correct type (in future)*/
+		/*
+		 * unknown, so return object : name - so after build of model maybe by
+		 * variable reference check its possible to determine the correct type
+		 * (in future)
+		 */
 		return "Object:" + resolveAsSimpleString(ast);
 	}
 
@@ -534,7 +549,7 @@ public abstract class AbstractGroovyModelBuilderSupport {
 		} else if (ast.getType() == GroovyTokenTypes.METHOD_CALL) {
 			resolveParameterList(list, firstChild);
 		} else if (ast.getType() == GroovyTokenTypes.SL) {
-	
+
 		} else if (ast.getType() == GroovyTokenTypes.DOT) {
 			/* is dot */
 			AST content = firstChild;
@@ -552,7 +567,7 @@ public abstract class AbstractGroovyModelBuilderSupport {
 					}
 				} else if (type == ELIST) {
 					resolveParameterList(list, next);
-				}else if (type == GroovyTokenTypes.CLOSABLE_BLOCK) {
+				} else if (type == GroovyTokenTypes.CLOSABLE_BLOCK) {
 					list.add("groovy.lang.Closure");
 				}
 			}
@@ -576,12 +591,11 @@ public abstract class AbstractGroovyModelBuilderSupport {
 					}
 				}
 			}
-	
+
 		}
 	}
-	
 
-	public class ASTResultInfo{
+	public class ASTResultInfo {
 		public AST nextAST;
 		public boolean terminated;
 	}

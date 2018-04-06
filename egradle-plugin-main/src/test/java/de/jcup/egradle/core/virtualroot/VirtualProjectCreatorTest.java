@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.virtualroot;
+package de.jcup.egradle.core.virtualroot;
 
 import static de.jcup.egradle.core.TestUtil.*;
 import static org.mockito.Matchers.*;
@@ -29,15 +29,14 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 
 public class VirtualProjectCreatorTest {
 
-	
-	private static final File TEST2_TXT_FILE = new File(ROOTFOLDER_1,"test2.txt");
-	private static final File TEST1_TXT_FILE = new File(ROOTFOLDER_1,"test1.txt");
-	
-	private static final File SUBFOLDER1 = new File(ROOTFOLDER_1,"subfolder1");
-	private static final File SUBFOLDER2 = new File(ROOTFOLDER_1,"subfolder2");
-	
-	private static final File SUBFOLDER2_1 = new File(SUBFOLDER2,"subfolder2-1");
-	
+	private static final File TEST2_TXT_FILE = new File(ROOTFOLDER_1, "test2.txt");
+	private static final File TEST1_TXT_FILE = new File(ROOTFOLDER_1, "test1.txt");
+
+	private static final File SUBFOLDER1 = new File(ROOTFOLDER_1, "subfolder1");
+	private static final File SUBFOLDER2 = new File(ROOTFOLDER_1, "subfolder2");
+
+	private static final File SUBFOLDER2_1 = new File(SUBFOLDER2, "subfolder2-1");
+
 	private VirtualProjectCreator creatorToTest;
 	private VirtualProjectPartCreator mockedPartCreator;
 	private GradleRootProject mockedRootProject;
@@ -60,31 +59,33 @@ public class VirtualProjectCreatorTest {
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedPartCreator,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+		verify(mockedPartCreator, never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
 	}
 
 	@Test
-	public void visitor_is_NOT_called_to_createOrUpdateProject_when_root_project_folder_is_not_null_but_does_not_exist() throws Exception {
+	public void visitor_is_NOT_called_to_createOrUpdateProject_when_root_project_folder_is_not_null_but_does_not_exist()
+			throws Exception {
 		/* prepare */
 		File mockRootFolder = mock(File.class);
 		when(mockRootFolder.exists()).thenReturn(false);
-		
+
 		when(mockedRootProject.getFolder()).thenReturn(mockRootFolder);
 
 		/* execute */
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedPartCreator,never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
+		verify(mockedPartCreator, never()).createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME);
 
 	}
-	
+
 	@Test
-	public void visitor_is_called_to_createOrUpdateProject_when_root_project_folder_is_not_null_and_exists() throws Exception {
+	public void visitor_is_called_to_createOrUpdateProject_when_root_project_folder_is_not_null_and_exists()
+			throws Exception {
 		/* prepare */
 		File mockRootFolder = mock(File.class);
 		when(mockRootFolder.exists()).thenReturn(true);
-		
+
 		when(mockedRootProject.getFolder()).thenReturn(mockRootFolder);
 		when(mockRootFolder.exists()).thenReturn(true);
 		when(mockedPartCreator.createOrRecreateProject(Constants.VIRTUAL_ROOTPROJECT_NAME)).thenReturn(new Object());
@@ -113,7 +114,8 @@ public class VirtualProjectCreatorTest {
 	}
 
 	@Test
-	public void creator_creates_all_direct_subfolders_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_all() throws Exception {
+	public void creator_creates_all_direct_subfolders_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_all()
+			throws Exception {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), any())).thenReturn(true);
@@ -126,7 +128,7 @@ public class VirtualProjectCreatorTest {
 		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER1));
 		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER2));
 	}
-	
+
 	@Test
 	public void creator_creates_not_subsubfolders_when_visitor_accepts_all() throws Exception {
 		/* prepare */
@@ -138,11 +140,12 @@ public class VirtualProjectCreatorTest {
 		creatorToTest.createOrUpdate(mockedRootProject, mockedPartCreator);
 
 		/* test */
-		verify(mockedPartCreator,never()).createLink(any(), eq(SUBFOLDER2_1));
+		verify(mockedPartCreator, never()).createLink(any(), eq(SUBFOLDER2_1));
 	}
-	
+
 	@Test
-	public void creator_creates_only_subfolder1_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_subfolder1_only() throws Exception {
+	public void creator_creates_only_subfolder1_of_rootfolder_but_not_subsubfolders_when_visitor_accepts_subfolder1_only()
+			throws Exception {
 		/* prepare */
 		when(mockedRootProject.getFolder()).thenReturn(ROOTFOLDER_1);
 		when(mockedPartCreator.isLinkCreationNeeded(any(), eq(SUBFOLDER1))).thenReturn(true);
@@ -154,6 +157,6 @@ public class VirtualProjectCreatorTest {
 
 		/* test */
 		verify(mockedPartCreator).createLink(any(), eq(SUBFOLDER1));
-		verify(mockedPartCreator,never()).createLink(any(), eq(SUBFOLDER2));
+		verify(mockedPartCreator, never()).createLink(any(), eq(SUBFOLDER2));
 	}
 }

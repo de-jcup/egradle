@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -36,10 +36,10 @@ public class DescriptionFinderTest {
 	}
 
 	@Test
-	public void find_with_null_returns_null(){
+	public void find_with_null_returns_null() {
 		assertNull(finderToTest.findDescription(null));
 	}
-	
+
 	/**
 	 * Simple test case for methods. More dedicated tests can be found in
 	 * {@linkplain DescriptionFinderIntegrationTest}I
@@ -53,10 +53,10 @@ public class DescriptionFinderTest {
 		when(methodX.getName()).thenReturn("methodX");
 		when(methodX.getDescription()).thenReturn("@inheritDoc");
 
-		/* create type1 and add method*/
+		/* create type1 and add method */
 		Type type1 = mock(Type.class);
 		when(methodX.getParent()).thenReturn(type1);
-		
+
 		/* create interface with methods */
 		Type interface1 = mock(Type.class);
 		Method methodIX = mock(Method.class);
@@ -64,24 +64,24 @@ public class DescriptionFinderTest {
 		when(methodIX.getDescription()).thenReturn("Description from interface");
 		when(interface1.getDefinedMethods()).thenReturn(Collections.singleton(methodIX));
 
-		/* add interface as reference to type1*/
+		/* add interface as reference to type1 */
 		Set<TypeReference> interfaceSet = new LinkedHashSet<>();
 		TypeReference ref = mock(TypeReference.class);
 		interfaceSet.add(ref);
 		when(type1.getInterfaces()).thenReturn(interfaceSet);
 		when(ref.getType()).thenReturn(interface1);
-		
+
 		/* ------- */
 		/* execute */
 		/* ------- */
 		String found = finderToTest.findDescription(methodX);
-		
+
 		/* ---- */
 		/* test */
 		/* ---- */
 		assertTrue(found.contains("Description from interface"));
 	}
-	
+
 	@Test
 	public void methodX__in_typeA_has_description_itself_so_finder_returns_this_description() {
 		/* ------- */
@@ -91,21 +91,21 @@ public class DescriptionFinderTest {
 		when(methodX.getName()).thenReturn("methodX");
 		when(methodX.getDescription()).thenReturn("self described");
 
-		/* create type1 and add method*/
+		/* create type1 and add method */
 		Type type1 = mock(Type.class);
 		when(methodX.getParent()).thenReturn(type1);
-		
+
 		/* ------- */
 		/* execute */
 		/* ------- */
 		String found = finderToTest.findDescription(methodX);
-		
+
 		/* ---- */
 		/* test */
 		/* ---- */
 		assertEquals("self described", found);
 	}
-	
+
 	@Test
 	public void propertyX__in_typeA_has_description_itself_so_finder_returns_this_description() {
 		/* ------- */
@@ -115,15 +115,15 @@ public class DescriptionFinderTest {
 		when(propertyX.getName()).thenReturn("propertyX");
 		when(propertyX.getDescription()).thenReturn("self described");
 
-		/* create type1 and add property*/
+		/* create type1 and add property */
 		Type type1 = mock(Type.class);
 		when(propertyX.getParent()).thenReturn(type1);
-		
+
 		/* ------- */
 		/* execute */
 		/* ------- */
 		String found = finderToTest.findDescription(propertyX);
-		
+
 		/* ---- */
 		/* test */
 		/* ---- */

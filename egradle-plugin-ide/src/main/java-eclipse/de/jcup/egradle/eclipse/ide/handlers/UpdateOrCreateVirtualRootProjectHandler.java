@@ -75,13 +75,15 @@ public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler imp
 		if (rootProject == null) {
 			element.setTooltip("Disabled because currently no egradle root project set!");
 			this.setBaseEnabled(false);
-		} else 
-			
-			if (!rootProject.isMultiProject()) {
-			element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '"+rootProject.getName()+"'");
+		} else
+
+		if (!rootProject.isMultiProject()) {
+			element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '"
+					+ rootProject.getName() + "'");
 			this.setBaseEnabled(false);
 		} else {
-			element.setTooltip("Creates or updates virtual root project for your gradle multi project '"+rootProject.getName()+"'");
+			element.setTooltip("Creates or updates virtual root project for your gradle multi project '"
+					+ rootProject.getName() + "'");
 			this.setBaseEnabled(true);
 		}
 	}

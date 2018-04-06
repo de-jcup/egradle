@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,18 +26,19 @@ public class XMLSDKInfoImporter {
 
 	/**
 	 * Import sdk info by given stream
-	 * @param stream - may not be <code>null</code>
+	 * 
+	 * @param stream
+	 *            - may not be <code>null</code>
 	 * @return type
 	 * @throws IOException
 	 * 
 	 */
-	public XMLSDKInfo importSDKInfo(InputStream stream) throws IOException{
+	public XMLSDKInfo importSDKInfo(InputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLSDKInfo.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLSDKInfo loadedModel = (XMLSDKInfo) unmarshaller
-					.unmarshal(stream);
+			XMLSDKInfo loadedModel = (XMLSDKInfo) unmarshaller.unmarshal(stream);
 			return loadedModel;
 		} catch (JAXBException e) {
 			throw new IOException("Was not able to create unmarshaller", e);

@@ -15,7 +15,6 @@
  */
 package de.jcup.egradle.eclipse.gradleeditor.outline;
 
-
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.IColorProvider;
@@ -39,12 +38,12 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 	private static final String ICON_ALL_PROJECTS = "prj_mode.png";
 	private static final String ICON_PROJECT = "prj_obj.png";
-	private static final String ICON_ZIP= "zip.png";
+	private static final String ICON_ZIP = "zip.png";
 	private static final String ICON_ECLIPSE = "eclipse16.png";
-	private static final String ICON_CONFIGURE="externalize.png";
+	private static final String ICON_CONFIGURE = "externalize.png";
 	private static final String ICON_APPLY_FROM_PNG = "apply_from.png";
 	private static final String ICON_APPLY_PLUGIN_PNG = "plugins.png";
-	private static final String ICON_PLUGINS ="plugin_depend.png";
+	private static final String ICON_PLUGINS = "plugin_depend.png";
 	private static final String ICON_BUILDSCRIPT = "cheatsheet_item_obj.png";
 	private static final String ICON_CLASS = "class_obj.png";
 	private static final String ICON_INTERFACE = "int_obj.png";
@@ -61,15 +60,16 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_PACKAGE = "package_obj.png";
 	private static final String ICON_PRIVATE_CO_PNG = "private_co.png";
 	private static final String ICON_PROTECTED_CO_PNG = "protected_co.png";
-//	private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
+	// private static final String ICON_DEFAULT_CO_PNG = "default_co.png";
 	private static final String ICON_PUBLIC_CO_PNG = "public_co.png";
-	
+
 	/* fields */
 	private static final String ICON_PRIVATE_FIELD_PNG = "field_private_obj.png";
 	private static final String ICON_PROTECTED_FIELD_PNG = "field_protected_obj.png";
-	// private static final String ICON_DEFAULT_FIELD_PNG = "field_default_obj.png";
+	// private static final String ICON_DEFAULT_FIELD_PNG =
+	// "field_default_obj.png";
 	private static final String ICON_PUBLIC_FIELD_PNG = "field_public_obj.png";
-	
+
 	/* other */
 	private static final String ICON_REPOSITORIES = "memory_view.png";
 	private static final String ICON_REPOSITORY = "imp_obj.png";
@@ -84,8 +84,6 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 	private static final String ICON_AFTER_EVALUATE = "afterEvaluate.png";
 	private static final String ICON_UNKNOWN = "unknown_obj.png";
 
-	
-	
 	private Styler outlineItemConfigurationStyler = new Styler() {
 
 		@Override
@@ -133,19 +131,19 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		if (element instanceof Item) {
 			Item item = (Item) element;
 			ItemType type = item.getLastChainedItemType();
-			
-			if (type==null){
+
+			if (type == null) {
 				type = item.getItemType();
 			}
-			if (type==null){
+			if (type == null) {
 				return null;
 			}
-			
+
 			Modifier modifier = item.getModifier();
 			String path = null;
 			switch (type) {
 			case ASSIGNMENT:
-				path =  ICON_ASSIGNMENT;
+				path = ICON_ASSIGNMENT;
 				return getOutlineImage(path);
 			case VARIABLE:
 				switch (modifier) {
@@ -160,7 +158,7 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 					break;
 				case DEFAULT:
 					path = ICON_PUBLIC_FIELD_PNG;// default in groovy IS PUBLIC!
-												// ICON_DEFAULT_CO_PNG;
+													// ICON_DEFAULT_CO_PNG;
 					break;
 				default:
 					return null;
@@ -311,14 +309,14 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 				sb.append(" --[");
 				sb.append(item.getItemType());
 				String[] parameters = item.getParameters();
-				if (parameters!=null && parameters.length>0){
+				if (parameters != null && parameters.length > 0) {
 					sb.append(", params={");
-					boolean first=true;
-					for (String param: parameters){
-						if (!first){
+					boolean first = true;
+					for (String param : parameters) {
+						if (!first) {
 							sb.append(", ");
 						}
-						first=false;
+						first = false;
 						sb.append(param);
 					}
 					sb.append('}');
@@ -336,13 +334,13 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 
 	private void handleParameters(StyledString styled, Item item) {
 		/* show add parameters if existing */
-		boolean paramsMustBeShown=false;
-		
+		boolean paramsMustBeShown = false;
+
 		ItemType itemType = item.getItemType();
-		paramsMustBeShown=paramsMustBeShown || ItemType.METHOD.equals(itemType);
-		paramsMustBeShown=paramsMustBeShown || ItemType.CONSTRUCTOR.equals(itemType);
-		
-		if (!paramsMustBeShown){
+		paramsMustBeShown = paramsMustBeShown || ItemType.METHOD.equals(itemType);
+		paramsMustBeShown = paramsMustBeShown || ItemType.CONSTRUCTOR.equals(itemType);
+
+		if (!paramsMustBeShown) {
 			return;
 		}
 		String[] parameters = item.getParameters();
@@ -375,8 +373,6 @@ public class GradleEditorOutlineLabelProvider extends BaseLabelProvider
 		return editorActivator.getColorManager();
 	}
 
-	
-	
 	private Image getOutlineImage(String name) {
 		return EclipseUtil.getImage("/icons/outline/" + name, EditorActivator.PLUGIN_ID);
 	}

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.javadoc;
+package de.jcup.egradle.sdk.builder.action.javadoc;
 
 import java.io.IOException;
 
@@ -32,55 +32,53 @@ public class RemoveWhitespacesAndStarsFromJavadocAction implements SDKBuilderAct
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		if (context.originTypeNameToOriginFileMapping.isEmpty()){
+		if (context.originTypeNameToOriginFileMapping.isEmpty()) {
 			throw new IllegalStateException("all types is empty!");
 		}
-		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()){
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
 			Type type = context.originGradleFilesProvider.getType(typeName);
-			handleTypeAndContentInside(type,context);
+			handleTypeAndContentInside(type, context);
 		}
 	}
-	
-	private void handleTypeAndContentInside(Type type,SDKBuilderContext context) throws IOException{
+
+	private void handleTypeAndContentInside(Type type, SDKBuilderContext context) throws IOException {
 		if (type instanceof ModifiableType) {
 			ModifiableType modifiableType = (ModifiableType) type;
-			String description = buildNewDescription(type,type.getDescription(),context);
+			String description = buildNewDescription(type, type.getDescription(), context);
 			modifiableType.setDescription(description);
 		}
-		
-		for (Method method: type.getDefinedMethods()){
+
+		for (Method method : type.getDefinedMethods()) {
 			if (method instanceof ModifiableMethod) {
 				ModifiableMethod modifiableMethod = (ModifiableMethod) method;
 				String description = buildNewDescription(type, method.getDescription(), context);
 				modifiableMethod.setDescription(description);
 			}
 		}
-		
-		for (Property property: type.getDefinedProperties()){
+
+		for (Property property : type.getDefinedProperties()) {
 			if (property instanceof ModifiableProperty) {
-				ModifiableProperty modifiableProperty= (ModifiableProperty) property;
+				ModifiableProperty modifiableProperty = (ModifiableProperty) property;
 				String description = buildNewDescription(type, property.getDescription(), context);
 				modifiableProperty.setDescription(description);
 			}
 		}
 	}
-	
-	
 
-	private String buildNewDescription(Type parentType, String description,SDKBuilderContext context) throws IOException {
-		if (description==null){
+	private String buildNewDescription(Type parentType, String description, SDKBuilderContext context)
+			throws IOException {
+		if (description == null) {
 			return null;
 		}
 		StringBuilder fullDescription = new StringBuilder();
 		String[] lines = StringUtils.split(description, System.getProperty("line.separator"));
-		for (String line: lines){
+		for (String line : lines) {
 			String newLine = removeWhitespacesAndStars(line);
 			fullDescription.append(newLine);
 			fullDescription.append("\n");
 		}
 		return fullDescription.toString();
 	}
-	
 
 	String removeWhitespacesAndStars(String line) {
 		StringBuilder sb = new StringBuilder();

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +39,7 @@ public class LinkToTypeConverterTest {
 		/* test */
 		assertEquals("org.gradle.api.Project", convertLink.getMainName());
 		assertEquals("getAnt", convertLink.getSubName());
-		
+
 		String[] parameters = convertLink.getParameterTypes();
 
 		assertEquals(0, parameters.length);

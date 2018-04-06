@@ -13,13 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.preferences;
+package de.jcup.egradle.eclipse.junit.contribution.preferences;
 
 /**
  * Constant definitions for plug-in preferences
  */
 public enum EGradleJunitPreferenceConstants {
-	
+
 	/**
 	 * Tasks which are executed on test
 	 */

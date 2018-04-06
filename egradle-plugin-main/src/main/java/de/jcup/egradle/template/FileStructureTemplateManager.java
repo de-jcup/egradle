@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.template;
+package de.jcup.egradle.template;
 
 import static de.jcup.egradle.template.FileStructureTemplate.*;
 import static org.apache.commons.lang3.Validate.*;
@@ -37,13 +37,14 @@ public class FileStructureTemplateManager {
 	private RootFolderProvider provider;
 	private LogAdapter logAdapter;
 	private FormatConverter formatConverter;
+
 	public FileStructureTemplateManager(RootFolderProvider provider, LogAdapter logAdapter) {
 		notNull(provider, "'provider' may not be null");
 		notNull(logAdapter, "'logAdapter' may not be null");
 
 		fileStructureTemplates = new ArrayList<>();
 		formatConverter = new FormatConverter();
-		
+
 		this.provider = provider;
 		this.logAdapter = logAdapter;
 	}
@@ -65,7 +66,7 @@ public class FileStructureTemplateManager {
 	private void loadFileStructureTemplates() throws IOException {
 		fileStructureTemplates.clear();
 		File rootFolder = provider.getRootFolder();
-		if (rootFolder==null){
+		if (rootFolder == null) {
 			return;
 		}
 		/* inside root folder the template folders exist */
@@ -85,37 +86,37 @@ public class FileStructureTemplateManager {
 	private void addTemplateFolder(File templateFolder) {
 		Properties p = getSafeProperties(templateFolder);
 		int priority = formatConverter.convertToInt(p.getProperty(PROP_PRIORITY, "100"));
-		
-		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME),templateFolder,p.getProperty(PROP_DESCRIPTION),priority);
-		for (Feature f: Features.values()){
+
+		FileStructureTemplate template = new FileStructureTemplate(p.getProperty(PROP_NAME), templateFolder,
+				p.getProperty(PROP_DESCRIPTION), priority);
+		for (Feature f : Features.values()) {
 			String value = p.getProperty(f.getId());
-			if (Boolean.valueOf(value)){
+			if (Boolean.valueOf(value)) {
 				template.enableFeature(f);
 			}
-			
+
 		}
-		
+
 		fileStructureTemplates.add(template);
 	}
 
-	
-	private Properties getSafeProperties(File templateFolder){
-		 Properties p = new Properties();
-		 tryToLoadProperties(p, templateFolder);
-		 return p;
+	private Properties getSafeProperties(File templateFolder) {
+		Properties p = new Properties();
+		tryToLoadProperties(p, templateFolder);
+		return p;
 
 	}
-	
-	private Properties tryToLoadProperties( Properties p, File templateFolder) {
-		
-		 File templatePropertyFile = new File(templateFolder,"template.properties");
-		 if (! templatePropertyFile.exists()){
-			 return p;
-		 }
-		 try (InputStream is = new FileInputStream(templatePropertyFile)){
-			 p.load(is);
-		 } catch (RuntimeException | IOException e) {
-			logAdapter.logError("Was not able to load template properties for:"+templateFolder, e);
+
+	private Properties tryToLoadProperties(Properties p, File templateFolder) {
+
+		File templatePropertyFile = new File(templateFolder, "template.properties");
+		if (!templatePropertyFile.exists()) {
+			return p;
+		}
+		try (InputStream is = new FileInputStream(templatePropertyFile)) {
+			p.load(is);
+		} catch (RuntimeException | IOException e) {
+			logAdapter.logError("Was not able to load template properties for:" + templateFolder, e);
 		}
 		return p;
 	}

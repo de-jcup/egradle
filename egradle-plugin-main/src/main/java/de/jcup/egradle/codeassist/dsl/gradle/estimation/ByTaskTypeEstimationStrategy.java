@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,7 +40,7 @@ class ByTaskTypeEstimationStrategy extends AbstractEstimationStrategy {
 		EstimationData found = findByTaskType(item);
 		return found;
 	}
-	
+
 	private EstimationData findByTaskType(Item currentPathItem) {
 		if (ItemType.TASK.equals(currentPathItem.getItemType())) {
 			/*
@@ -57,7 +57,7 @@ class ByTaskTypeEstimationStrategy extends AbstractEstimationStrategy {
 		}
 		return null;
 	}
-	
+
 	private EstimationData buildEstimationDataByTaskType(String taskType) {
 		if (StringUtils.isNotBlank(taskType)) {
 			Type potentialTask = estimator.typeProvider.getType(taskType);
@@ -68,14 +68,14 @@ class ByTaskTypeEstimationStrategy extends AbstractEstimationStrategy {
 				 * not complete currently
 				 */
 				// /* check its really a task...*/
-//				if (potentialTask.isDescendantOf("org.gradle.api.Task")){
-					EstimationData found = new EstimationData();
-					found.element = potentialTask;
-					found.type = potentialTask;
-					found.percent = 100;
-					
-					return found;
-//				}
+				// if (potentialTask.isDescendantOf("org.gradle.api.Task")){
+				EstimationData found = new EstimationData();
+				found.element = potentialTask;
+				found.type = potentialTask;
+				found.percent = 100;
+
+				return found;
+				// }
 			}
 		}
 		return null;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 import static org.junit.Assert.*;
 
@@ -95,29 +95,30 @@ public class JavaImportFinderTest {
 		sb.append("package de.jcup.egradle.eclipse.gradleeditor;\n");
 		sb.append("import java.util.ArraySet;\n");
 		sb.append("import java.util.Iterator;\n");
-		sb.append("import java.util.Set;\n");             // 1
+		sb.append("import java.util.Set;\n"); // 1
 		sb.append("import java.util.regex.Pattern;\n"); // 2
 		sb.append("\n");
 		sb.append("import org.eclipse.core.resources.IFile;\n");
 		sb.append("import org.eclipse.core.resources.IWorkspaceRoot;\n");
 		sb.append("import org.eclipse.core.resources.ResourcesPlugin;\n"); // 3
 		sb.append("import org.eclipse.jdt.core.IJavaElement;\n");
-		sb.append("import org.eclipse.jdt.core.JavaModelException;\n"); //4
-		sb.append("import org.eclipse.jdt.core.search.IJavaSearchScope;\n"); 
-		sb.append("import org.eclipse.jdt.core.search.SearchEngine;\n"); //5
+		sb.append("import org.eclipse.jdt.core.JavaModelException;\n"); // 4
+		sb.append("import org.eclipse.jdt.core.search.IJavaSearchScope;\n");
+		sb.append("import org.eclipse.jdt.core.search.SearchEngine;\n"); // 5
 		sb.append("import org.eclipse.jdt.ui.IJavaElementSearchConstants;\n");
-		sb.append("import org.eclipse.jdt.ui.JavaUI;\n");//6
-		sb.append("import org.eclipse.jface.text.IRegion;\n");//7
-		sb.append("import org.eclipse.jface.text.hyperlink.IHyperlink;\n"); //8
-		sb.append("import org.eclipse.jface.window.Window;\n");//9
-		sb.append("import org.eclipse.swt.widgets.Shell;\n");//10
+		sb.append("import org.eclipse.jdt.ui.JavaUI;\n");// 6
+		sb.append("import org.eclipse.jface.text.IRegion;\n");// 7
+		sb.append("import org.eclipse.jface.text.hyperlink.IHyperlink;\n"); // 8
+		sb.append("import org.eclipse.jface.window.Window;\n");// 9
+		sb.append("import org.eclipse.swt.widgets.Shell;\n");// 10
 		sb.append("import org.eclipse.ui.IWorkbenchPage;\n");
-		sb.append("import org.eclipse.ui.PartInitException;\n");//11
-		sb.append("import org.eclipse.ui.dialogs.SelectionDialog;\n");//12
-		sb.append("import org.eclipse.ui.ide.IDE;\n");//13
+		sb.append("import org.eclipse.ui.PartInitException;\n");// 11
+		sb.append("import org.eclipse.ui.dialogs.SelectionDialog;\n");// 12
+		sb.append("import org.eclipse.ui.ide.IDE;\n");// 13
 		sb.append("\n");
-		sb.append("import de.jcup.egradle.eclipse.util.EGradleUtil;\n");//14
-		sb.append("import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;\n"); // 15. import
+		sb.append("import de.jcup.egradle.eclipse.util.EGradleUtil;\n");// 14
+		sb.append("import de.jcup.egradle.eclipse.gradleeditor.jdt.JDTDataAccess;\n"); // 15.
+																						// import
 		sb.append("\n");
 		sb.append(";public class GradleResourceHyperlink implements IHyperlink {\n");
 		String code = sb.toString();

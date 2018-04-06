@@ -22,28 +22,30 @@ public interface GradleConfiguration extends ProcessConfiguration {
 
 	/**
 	 * Returns the shell to use - if wanted
+	 * 
 	 * @return shell or <code>null</code>
 	 */
 	public EGradleShellType getShellType();
 
 	/**
 	 * Returns gradle installation bin directory - if available
+	 * 
 	 * @return gradle installation bin directory or <code>null</code>
 	 */
 	public String getGradleBinDirectory();
-	
-	
+
 	/**
 	 * Return special java home - if available
+	 * 
 	 * @return special jave home to set into enviro
 	 */
 	public String getJavaHome();
-	
+
 	/**
 	 * Returns the gradle command - with full path if necesary
+	 * 
 	 * @return full path featured gradle command
 	 */
 	public String getGradleCommandFullPath();
-	
 
 }

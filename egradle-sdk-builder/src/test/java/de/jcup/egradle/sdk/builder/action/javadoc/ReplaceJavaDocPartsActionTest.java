@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.javadoc;
+package de.jcup.egradle.sdk.builder.action.javadoc;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -43,39 +43,54 @@ public class ReplaceJavaDocPartsActionTest {
 	public void before() {
 		actionToTest = new ReplaceJavaDocPartsAction();
 	}
-	
+
 	@Test
-	public void ankers_without_content_are_removed(){
-		/* at least chrome and IE browsers have problems with this: its done in org.gradle.api.Project*/
+	public void ankers_without_content_are_removed() {
+		/*
+		 * at least chrome and IE browsers have problems with this: its done in
+		 * org.gradle.api.Project
+		 */
 		String text = "xyz <a name=\"properties\"/> bla";
 		assertEquals("xyz  bla", actionToTest.replaceJavaDocParts(text));
 	}
-	
+
 	@Test
-	public void ankers_with_empty_content_but_start_and_end_tag_are_NOT_removed(){
-		/* at least chrome and IE browsers have problems with this: its done in org.gradle.api.Project*/
+	public void ankers_with_empty_content_but_start_and_end_tag_are_NOT_removed() {
+		/*
+		 * at least chrome and IE browsers have problems with this: its done in
+		 * org.gradle.api.Project
+		 */
 		String text = "xyz <a name=\"properties\"></a> bla";
 		assertEquals("xyz <a name=\"properties\"></a> bla", actionToTest.replaceJavaDocParts(text));
 	}
+
 	@Test
-	public void ankers_with_contentare_NOT_removed_name(){
-		/* at least chrome and IE browsers have problems with this: its done in org.gradle.api.Project*/
+	public void ankers_with_contentare_NOT_removed_name() {
+		/*
+		 * at least chrome and IE browsers have problems with this: its done in
+		 * org.gradle.api.Project
+		 */
 		String text = "xyz <a name=\"properties\">test</a> bla";
 		assertEquals("xyz <a name=\"properties\">test</a> bla", actionToTest.replaceJavaDocParts(text));
 	}
-	
+
 	@Test
-	public void ankers_with_contentare_NOT_removed_href(){
-		/* at least chrome and IE browsers have problems with this: its done in org.gradle.api.Project*/
+	public void ankers_with_contentare_NOT_removed_href() {
+		/*
+		 * at least chrome and IE browsers have problems with this: its done in
+		 * org.gradle.api.Project
+		 */
 		String text = "xyz <a href=\"properties\">test</a> bla";
 		assertEquals("xyz <a href=\"properties\">test</a> bla", actionToTest.replaceJavaDocParts(text));
 	}
+
 	@Test
-	public void value_replaced_with_text(){
+	public void value_replaced_with_text() {
 		String text = "{@value org.gradle.api.initialization.Settings#DEFAULT_SETTINGS_FILE}";
-		assertEquals("<em class='value'>org.gradle.api.initialization.Settings#DEFAULT_SETTINGS_FILE</em>", actionToTest.replaceJavaDocParts(text));
+		assertEquals("<em class='value'>org.gradle.api.initialization.Settings#DEFAULT_SETTINGS_FILE</em>",
+				actionToTest.replaceJavaDocParts(text));
 	}
-	
+
 	@Test
 	public void empty_lines_are_not_removed() {
 		/* prepare */
@@ -90,7 +105,7 @@ public class ReplaceJavaDocPartsActionTest {
 		/* execute +test */
 		assertEquals("<br>(since 3.0)\n", actionToTest.replaceJavaDocParts(line));
 	}
-	
+
 	@Test
 	public void since_with_more_text_replaced_by_text() {
 		String line = "@since 3.0 garbage\n";

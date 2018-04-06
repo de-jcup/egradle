@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 import static org.junit.Assert.*;
 
@@ -23,12 +23,12 @@ import org.junit.Test;
 public class BuildContextTest {
 
 	private BuildContext contextToTest;
-	
+
 	@Before
-	public void before(){
+	public void before() {
 		contextToTest = new BuildContext();
 	}
-	
+
 	@Test
 	public void test_nothing_added__has_errors_returns_false() {
 		assertFalse(contextToTest.hasErrors());

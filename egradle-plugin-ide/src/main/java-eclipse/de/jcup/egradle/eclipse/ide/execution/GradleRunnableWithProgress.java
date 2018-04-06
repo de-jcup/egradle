@@ -39,7 +39,7 @@ public class GradleRunnableWithProgress implements IRunnableWithProgress {
 		try {
 			execution.execute(monitor);
 			ProcessExecutionResult result = execution.getResult();
-			if (result.isCanceledByuser()){
+			if (result.isCanceledByuser()) {
 				return;
 			}
 			if (!result.isOkay()) {

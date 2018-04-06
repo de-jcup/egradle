@@ -17,4 +17,3 @@ if ! grep -q Copyright $file
 fi
 
 done
-cd egradle-other

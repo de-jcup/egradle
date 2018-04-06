@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static org.junit.Assert.*;
 
@@ -29,35 +29,34 @@ import de.jcup.egradle.core.TestUtil;
 
 public class ApiMappingImporterTest {
 
-
 	private ApiMappingImporter importerToTest;
 	private File dslFolder;
 	private File mappingsFile;
 
 	@Before
-	public void before(){
+	public void before() {
 		importerToTest = new ApiMappingImporter();
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER,"dsl/3.0");
-		mappingsFile = new File(dslFolder,"api-mapping.txt");
+		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
+		mappingsFile = new File(dslFolder, "api-mapping.txt");
 	}
-	
+
 	@Test
-	public void all_two_mappings_are_loaded() throws Exception{
-		
-		 /* execute */
-		 Map<String,String> map = importerToTest.importMapping(new FileInputStream(mappingsFile));
-		 
-		 /* test */
-		 assertNotNull(map);
-		 
-		 Set<String> keys = map.keySet();
-		 assertEquals(2, keys.size());
-		 
-		 assertTrue(keys.contains("Delete"));
-		 assertTrue(keys.contains("ShortNameTestAction"));
-		 
-		 assertEquals("org.gradle.api.tasks.Delete", map.get("Delete"));
-		 assertEquals("org.gradle.api.TestAction", map.get("ShortNameTestAction"));
+	public void all_two_mappings_are_loaded() throws Exception {
+
+		/* execute */
+		Map<String, String> map = importerToTest.importMapping(new FileInputStream(mappingsFile));
+
+		/* test */
+		assertNotNull(map);
+
+		Set<String> keys = map.keySet();
+		assertEquals(2, keys.size());
+
+		assertTrue(keys.contains("Delete"));
+		assertTrue(keys.contains("ShortNameTestAction"));
+
+		assertEquals("org.gradle.api.tasks.Delete", map.get("Delete"));
+		assertEquals("org.gradle.api.TestAction", map.get("ShortNameTestAction"));
 	}
 
 }

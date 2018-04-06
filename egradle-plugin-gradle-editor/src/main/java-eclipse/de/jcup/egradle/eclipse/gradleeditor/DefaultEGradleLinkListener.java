@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.HTMLDescriptionBuilder;
@@ -48,10 +48,10 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 	@Override
 	public void onEGradleHyperlinkClicked(SimpleBrowserInformationControl control, String target) {
 		/* validate parameters */
-		if (control==null){
+		if (control == null) {
 			return;
 		}
-		if (target==null){
+		if (target == null) {
 			return;
 		}
 		CodeCompletionRegistry registry = EditorActivator.getDefault().getCodeCompletionRegistry();
@@ -62,7 +62,7 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		if (provider == null) {
 			return;
 		}
-		
+
 		/* fetch data + validate */
 		LinkData data = linkToTypeConverter.convertLink(target);
 		if (data == null) {
@@ -72,24 +72,24 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		if (convertedName == null) {
 			return;
 		}
-		
+
 		Type type = provider.getType(convertedName);
 		if (type == null) {
 			return;
 		}
 		/* execute */
 		LanguageElement elementTarget = null;
-		
-		if (elementTarget==null){
-			elementTarget = scanForPropertyElement(type,data);
+
+		if (elementTarget == null) {
+			elementTarget = scanForPropertyElement(type, data);
 		}
-		if (elementTarget==null){
-			elementTarget = scanForMethodElement(type,data);
+		if (elementTarget == null) {
+			elementTarget = scanForMethodElement(type, data);
 		}
-		if (elementTarget==null){
-			elementTarget=type;
+		if (elementTarget == null) {
+			elementTarget = type;
 		}
-		
+
 		control.setInformation(builder.buildHTMLDescription(fgColor, bgColor, commentColor, null, elementTarget, null));
 
 	}
@@ -98,11 +98,11 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 	public boolean isAcceptingHyperlink(String target) {
 		return linkToTypeConverter.isLinkSchemaConvertable(target);
 	}
-	
+
 	private LanguageElement scanForPropertyElement(Type type, LinkData data) {
 		String[] dataParameters = data.getParameterTypes();
 		String propertyName = data.getSubName();
-		
+
 		if (propertyName == null) {
 			return null;
 		}
@@ -111,8 +111,8 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 			return null;
 		}
 		/* scan for property */
-		for (Property property: type.getProperties()) {
-			if (property.getName().equals(propertyName)){
+		for (Property property : type.getProperties()) {
+			if (property.getName().equals(propertyName)) {
 				return property;
 			}
 		}
@@ -122,7 +122,7 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 	private LanguageElement scanForMethodElement(Type type, LinkData data) {
 		String[] dataParameters = data.getParameterTypes();
 		String dataMethodName = data.getSubName();
-		
+
 		if (dataMethodName == null) {
 			return null;
 		}
@@ -131,13 +131,13 @@ public class DefaultEGradleLinkListener implements BrowserEGradleLinkListener {
 		}
 		/* scan for method */
 		for (Method methodOfType : type.getMethods()) {
-			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters,false)) {
+			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters, false)) {
 				return methodOfType;
 			}
 		}
-		/* second way - with shortening...*/
+		/* second way - with shortening... */
 		for (Method methodOfType : type.getMethods()) {
-			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters,true)) {
+			if (MethodUtils.hasSignature(methodOfType, dataMethodName, dataParameters, true)) {
 				return methodOfType;
 			}
 		}

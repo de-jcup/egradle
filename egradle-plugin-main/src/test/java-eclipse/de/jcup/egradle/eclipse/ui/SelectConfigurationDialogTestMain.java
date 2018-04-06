@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -29,10 +29,10 @@ public class SelectConfigurationDialogTestMain {
 		s = new Shell(d);
 		s.setSize(250, 250);
 		s.setText("A select configuration dialog test");
-		
+
 		SelectConfigurationDialog selectConfigurationDialog = new SelectConfigurationDialog(s);
 		String configuration = selectConfigurationDialog.open();
-		System.out.println("configuration selected:"+configuration);
+		System.out.println("configuration selected:" + configuration);
 		d.dispose();
 	}
 

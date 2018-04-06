@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,18 +26,19 @@ public class XMLTypeImporter {
 
 	/**
 	 * Import type by given stream
-	 * @param stream - may not be <code>null</code>
+	 * 
+	 * @param stream
+	 *            - may not be <code>null</code>
 	 * @return type
 	 * @throws IOException
 	 * 
 	 */
-	public XMLType importType(InputStream stream) throws IOException{
+	public XMLType importType(InputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLType.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLType loadedModel = (XMLType) unmarshaller
-					.unmarshal(stream);
+			XMLType loadedModel = (XMLType) unmarshaller.unmarshal(stream);
 			return loadedModel;
 		} catch (JAXBException e) {
 			throw new IOException("Was not able to create unmarshaller", e);

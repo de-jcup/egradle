@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.junit.Assert.*;
 
@@ -27,14 +27,15 @@ import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.core.model.Model;
 
 public class MethodCallsGradleModelBuilderTest {
-	
+
 	/**
 	 * Test bug 171 - configure was not showing in outline view
 	 * <a href="https://github.com/de-jcup/egradle/issues/171">Bug 171</a>
+	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void configure_must_be_inside_model__bugfix171() throws Exception{
+	public void configure_must_be_inside_model__bugfix171() throws Exception {
 		// @formatter:off
 		String code = 
 		"configure(subprojects.findAll(IS_PLUGIN)) {                \n"+
@@ -73,9 +74,9 @@ public class MethodCallsGradleModelBuilderTest {
 		assertNotNull(variableDef);
 		assertEquals("PROJECT_NAME", variableDef.getName());
 	}
-	
+
 	@Test
-	public void closures_without_parameters_have_no_brackets() throws Exception{
+	public void closures_without_parameters_have_no_brackets() throws Exception {
 		// @formatter:off
 		String code = 
 		"unknown{                \n"+
@@ -103,10 +104,9 @@ public class MethodCallsGradleModelBuilderTest {
 		assertNotNull(variableDef);
 		assertEquals("PROJECT_NAME", variableDef.getName());
 	}
-	
-	
+
 	@Test
-	public void methodcall_with_dots__without_arguments__contains_fullname() throws Exception{
+	public void methodcall_with_dots__without_arguments__contains_fullname() throws Exception {
 		// @formatter:off
 		String code =
 		"configurations.all{                \n"+
@@ -134,5 +134,5 @@ public class MethodCallsGradleModelBuilderTest {
 		assertNotNull(variableDef);
 		assertEquals("PROJECT_NAME", variableDef.getName());
 	}
-	
+
 }

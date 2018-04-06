@@ -13,24 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
-public enum GradleTaskKeyWords implements DocumentKeyWord{
+public enum GradleTaskKeyWords implements DocumentKeyWord {
 
 	TASKDEFINITION("task"),
-	
+
 	DO_FIRST_SHORT("<<"),
-	
+
 	DO_FIRST("doFirst"),
-	
+
 	DO_LAST("doLast"),
-	
+
 	TYPE("type:"),
-	
-	DEPENDS_ON("dependsOn:"),
-	;
+
+	DEPENDS_ON("dependsOn:"),;
 
 	private String text;
 

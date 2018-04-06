@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -36,18 +36,18 @@ public class XMLTypeTest {
 	public void before() {
 		typeToTest = new XMLType();
 	}
-	
+
 	@Test
-	public void type_b_inherits_type_a__after_mixin_is_done__getmethods_contains_mixin_method(){
+	public void type_b_inherits_type_a__after_mixin_is_done__getmethods_contains_mixin_method() {
 		/* prepare */
 		Type superType = mock(Type.class);
-		Method method1 = mock(Method.class,"method1");
+		Method method1 = mock(Method.class, "method1");
 		Set<Method> methodSet = new LinkedHashSet<>();
 		methodSet.add(method1);
 		when(superType.getMethods()).thenReturn(methodSet);
-		
+
 		Type mixinType = mock(Type.class);
-		Method method2 = mock(Method.class,"method2");
+		Method method2 = mock(Method.class, "method2");
 		Set<Method> methodSet2 = new LinkedHashSet<>();
 		methodSet2.add(method2);
 		when(mixinType.getMethods()).thenReturn(methodSet2);
@@ -55,7 +55,7 @@ public class XMLTypeTest {
 		/* mockito workaround for tree set */
 		when(method1.compareTo(method2)).thenReturn(1);
 		when(method2.compareTo(method1)).thenReturn(-1);
-		
+
 		/* check preconditions */
 		assertTrue(typeToTest.getMethods().isEmpty());
 
@@ -70,16 +70,16 @@ public class XMLTypeTest {
 	}
 
 	@Test
-	public void type_b_inherits_type_a__before_mixin_is_done__getmethods_contains_mixin_method(){
+	public void type_b_inherits_type_a__before_mixin_is_done__getmethods_contains_mixin_method() {
 		/* prepare */
 		Type superType = mock(Type.class);
-		Method method1 = mock(Method.class,"method1");
+		Method method1 = mock(Method.class, "method1");
 		Set<Method> methodSet = new LinkedHashSet<>();
 		methodSet.add(method1);
 		when(superType.getMethods()).thenReturn(methodSet);
-		
+
 		Type mixinType = mock(Type.class);
-		Method method2 = mock(Method.class,"method2");
+		Method method2 = mock(Method.class, "method2");
 		Set<Method> methodSet2 = new LinkedHashSet<>();
 		methodSet2.add(method2);
 		when(mixinType.getMethods()).thenReturn(methodSet2);
@@ -87,7 +87,7 @@ public class XMLTypeTest {
 		/* mockito workaround for tree set */
 		when(method1.compareTo(method2)).thenReturn(1);
 		when(method2.compareTo(method1)).thenReturn(-1);
-		
+
 		/* check preconditions */
 		assertTrue(typeToTest.getMethods().isEmpty());
 
@@ -100,14 +100,14 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.getMethods().contains(method1));
 		assertTrue(typeToTest.getMethods().contains(method2));
 	}
-	
+
 	@Test
 	public void is_interface_of_one_of_its_interfaces_returns_true() {
 		/* prepare */
 		Type interface2 = mock(Type.class, "interface2");
 		when(interface2.isInterface()).thenReturn(true);
 		when(interface2.getName()).thenReturn("de.jcup.test.Interface2");
-		
+
 		Type interface3 = mock(Type.class, "interface3");
 		when(interface3.isInterface()).thenReturn(true);
 		when(interface3.getName()).thenReturn("de.jcup.test.Interface3");
@@ -121,7 +121,7 @@ public class XMLTypeTest {
 		assertTrue(typeToTest.isImplementingInterface("de.jcup.test.Interface3"));
 		assertFalse(typeToTest.isImplementingInterface("de.jcup.test.somewhere.else.Interface2"));
 	}
-	
+
 	@Test
 	public void is_interface_of_one_of_its_interfaces_which_is_in_deper_hierarchy__returns_true() {
 		/* prepare */
@@ -140,7 +140,7 @@ public class XMLTypeTest {
 		/* test */
 		assertTrue(typeToTest.isImplementingInterface("interfacename"));
 	}
-	
+
 	@Test
 	public void extend_from_interface__merges_methods() {
 		/* prepare */
@@ -457,7 +457,6 @@ public class XMLTypeTest {
 		assertTrue(methods.contains(method0));
 	}
 
-	
 	@Test
 	public void addExtension_without_reson_adds_extension_without_reason() {
 		/* prepare */
@@ -486,7 +485,7 @@ public class XMLTypeTest {
 		assertEquals(extensionType, extensionTypeFound);
 		assertEquals(mockedReason, typeToTest.getReasonForExtension("id1"));
 	}
-	
+
 	@Test
 	public void mixin_a_type_with_property1_reason1_returns__property1__for_mixin_id() {
 		/* prepare */
@@ -509,7 +508,7 @@ public class XMLTypeTest {
 		/* test */
 		assertEquals(property1, type.getElementForMixin("braveMixinId"));
 	}
-	
+
 	@Test
 	public void mixin_a_type_with_method1_reason1_returns__method1__for_mixin_id() {
 		/* prepare */
@@ -533,7 +532,6 @@ public class XMLTypeTest {
 		assertEquals(method1, type.getElementForMixin("braveMixinId"));
 	}
 
-	
 	@Test
 	public void mixin_a_type_with_method1_reason_null_adds_method1_to_targettype_without_reason() {
 		/* prepare */

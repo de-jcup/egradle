@@ -13,23 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.validation;
+package de.jcup.egradle.core.validation;
 
 public class ValidationResult {
 	boolean whereFound;
 	boolean whatWentWrongFound;
 	ProblemType problemType;
 	String problemMessage;
-	int line=-1;
+	int line = -1;
 	String problemScriptPath;
-	int column=-1;
+	int column = -1;
 
-	public boolean hasProblem(){
-		boolean hasProblem = problemType!=null;
+	public boolean hasProblem() {
+		boolean hasProblem = problemType != null;
 		return hasProblem;
-		
+
 	}
-	
+
 	public int getLine() {
 		return line;
 	}
@@ -51,5 +51,5 @@ public class ValidationResult {
 		return "ValidationResult [problemType=" + problemType + ", problemMessage=" + problemMessage
 				+ ", problemScriptPath=" + problemScriptPath + ", line=" + line + ", column=" + column + "]";
 	}
-	
+
 }

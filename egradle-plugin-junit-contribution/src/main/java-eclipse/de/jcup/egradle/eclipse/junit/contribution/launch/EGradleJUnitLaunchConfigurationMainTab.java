@@ -28,6 +28,7 @@ import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationMainTab;
 import de.jcup.egradle.eclipse.junit.contribution.JUnitActivator;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
+
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
 
 	@Override
@@ -35,12 +36,12 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 		super.setDefaults(configuration);
 		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
 	}
-	
+
 	@Override
 	protected TaskUIPartsDelegate createTaskUIPartsDelegate() {
 		return new IgnoreTaskUIPartsDelegate();
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -48,31 +49,31 @@ public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigu
 
 	@Override
 	public Image getImage() {
-		return EclipseUtil.getImage("icons/gradle-og-junit.gif",JUnitActivator.PLUGIN_ID);
+		return EclipseUtil.getImage("icons/gradle-og-junit.gif", JUnitActivator.PLUGIN_ID);
 	}
 
 	@Override
 	public String getName() {
 		return "Gradle JUnit";
 	}
-	
-	protected class IgnoreTaskUIPartsDelegate extends TaskUIPartsDelegate{
+
+	protected class IgnoreTaskUIPartsDelegate extends TaskUIPartsDelegate {
 
 		@Override
 		protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
-			
+
 		}
 
 		@Override
 		protected void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) {
-			
+
 		}
 
 		@Override
 		protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
-			
+
 		}
-		
+
 	}
 
 }

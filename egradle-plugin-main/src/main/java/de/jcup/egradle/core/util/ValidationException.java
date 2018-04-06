@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 /**
  * Something did go wrong on validation...
@@ -28,17 +28,18 @@ public class ValidationException extends Exception {
 	private String _details;
 
 	public ValidationException(String message) {
-		this(message,null);
+		this(message, null);
 	}
-	
+
 	public ValidationException(String message, String details) {
 		super(message);
 		this._message = message;
 		this._details = details;
 	}
-	
+
 	/**
 	 * Returns details or <code>null</code>
+	 * 
 	 * @return details
 	 */
 	public String getDetails() {
@@ -74,7 +75,5 @@ public class ValidationException extends Exception {
 			return false;
 		return true;
 	}
-	
-
 
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.model;
+package de.jcup.egradle.sdk.builder.model;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,11 +26,12 @@ public class XMLDSLTypeInfoExporter {
 
 	/**
 	 * Export XMLDSLTypeInfo
+	 * 
 	 * @param dslTypeInfo
 	 * @param stream
 	 * @throws IOException
 	 */
-	public void exportTasks(XMLDSLTypeDocumentation dslTypeInfo , OutputStream stream) throws IOException{
+	public void exportTasks(XMLDSLTypeDocumentation dslTypeInfo, OutputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLDSLTypeDocumentation.class);

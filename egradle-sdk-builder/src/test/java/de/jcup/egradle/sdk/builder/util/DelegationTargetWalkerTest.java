@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.util;
+package de.jcup.egradle.sdk.builder.util;
 
 import static java.util.Collections.*;
 import static org.mockito.Matchers.*;
@@ -26,6 +26,7 @@ import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.ModifiableMethod;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
+
 public class DelegationTargetWalkerTest {
 
 	private DelegationTargetWalker walkerToTest;
@@ -45,7 +46,7 @@ public class DelegationTargetWalkerTest {
 		/* prepare */
 		DelegationTargetMethodVisitor visitor = mock(DelegationTargetMethodVisitor.class);
 		when(visitor.getDelegationTargetAsString(any(Method.class))).thenReturn(null);
-		
+
 		/* execute */
 		walkerToTest.visitAllMethodInHierarchy(type, visitor, null, false);
 
@@ -55,17 +56,17 @@ public class DelegationTargetWalkerTest {
 		verify(visitor).getDelegationTargetAsString(superClassInterface1Method);
 		verify(visitor).getDelegationTargetAsString(superClassInterface1exendedInterface0Method);
 		verify(visitor).getDelegationTargetAsString(typeImplementedInterface2Method);
-		
-		verify(typeMethod,never()).setDelegationTargetAsString(any(String.class));
+
+		verify(typeMethod, never()).setDelegationTargetAsString(any(String.class));
 	}
-	
+
 	@Test
 	public void when_visitor_for_typeImplementedInterface2Method_returns_value_value_is_returned_but_all_other_parts_are_visited() {
 		/* prepare */
 		DelegationTargetMethodVisitor visitor = mock(DelegationTargetMethodVisitor.class);
 		when(visitor.getDelegationTargetAsString(any(Method.class))).thenReturn(null);
 		when(visitor.getDelegationTargetAsString(typeImplementedInterface2Method)).thenReturn("done");
-		
+
 		/* execute */
 		walkerToTest.visitAllMethodInHierarchy(type, visitor, null, false);
 
@@ -75,65 +76,67 @@ public class DelegationTargetWalkerTest {
 		verify(visitor).getDelegationTargetAsString(superClassInterface1Method);
 		verify(visitor).getDelegationTargetAsString(superClassInterface1exendedInterface0Method);
 		verify(visitor).getDelegationTargetAsString(typeImplementedInterface2Method);
-		
+
 		verify(typeMethod).setDelegationTargetAsString("done");
 	}
-	
+
 	@Test
 	public void when_visitor_for_superclassMethod_returns_value_other_are_no_more_visited() {
 		/* prepare */
 		DelegationTargetMethodVisitor visitor = mock(DelegationTargetMethodVisitor.class);
 		when(visitor.getDelegationTargetAsString(any(Method.class))).thenReturn(null);
 		when(visitor.getDelegationTargetAsString(superClassMethod)).thenReturn("done");
-		
+
 		/* execute */
 		walkerToTest.visitAllMethodInHierarchy(type, visitor, null, false);
 
 		/* test */
 		verify(visitor).getDelegationTargetAsString(typeMethod);
 		verify(visitor).getDelegationTargetAsString(superClassMethod);
-		verify(visitor,never()).getDelegationTargetAsString(superClassInterface1Method);
-		verify(visitor,never()).getDelegationTargetAsString(superClassInterface1exendedInterface0Method);
-		verify(visitor,never()).getDelegationTargetAsString(typeImplementedInterface2Method);
-		
+		verify(visitor, never()).getDelegationTargetAsString(superClassInterface1Method);
+		verify(visitor, never()).getDelegationTargetAsString(superClassInterface1exendedInterface0Method);
+		verify(visitor, never()).getDelegationTargetAsString(typeImplementedInterface2Method);
+
 		verify(typeMethod).setDelegationTargetAsString("done");
 	}
 
 	@Before
 	public void before() {
 		walkerToTest = new DelegationTargetWalker();
-		
-		type = mock(Type.class,"type");
-		superClass = mock(Type.class,"superclass");
-		superClassInterface1 = mock(Type.class,"superClassInterface1");
-		superClassInterface1exendedInterface0 = mock(Type.class,"superClassInterface1exendedInterface0");
-		typeImplementedInterface2 = mock(Type.class,"typeImplementedInterface2");
-		
-		typeMethod = mock(ModifiableMethod.class,"typeMethod");
-		superClassMethod = mock(ModifiableMethod.class,"superClassMethod");
-		superClassInterface1Method = mock(ModifiableMethod.class,"superClassInterface1Method");
-		superClassInterface1exendedInterface0Method = mock(ModifiableMethod.class,"superClassInterface1exendedInterface0Method");
-		typeImplementedInterface2Method = mock(ModifiableMethod.class,"typeImplementedInterface2Method");
-		
+
+		type = mock(Type.class, "type");
+		superClass = mock(Type.class, "superclass");
+		superClassInterface1 = mock(Type.class, "superClassInterface1");
+		superClassInterface1exendedInterface0 = mock(Type.class, "superClassInterface1exendedInterface0");
+		typeImplementedInterface2 = mock(Type.class, "typeImplementedInterface2");
+
+		typeMethod = mock(ModifiableMethod.class, "typeMethod");
+		superClassMethod = mock(ModifiableMethod.class, "superClassMethod");
+		superClassInterface1Method = mock(ModifiableMethod.class, "superClassInterface1Method");
+		superClassInterface1exendedInterface0Method = mock(ModifiableMethod.class,
+				"superClassInterface1exendedInterface0Method");
+		typeImplementedInterface2Method = mock(ModifiableMethod.class, "typeImplementedInterface2Method");
+
 		when(type.getDefinedMethods()).thenReturn(singleton(typeMethod));
 		when(superClass.getDefinedMethods()).thenReturn(singleton(superClassMethod));
 		when(superClassInterface1.getDefinedMethods()).thenReturn(singleton(superClassInterface1Method));
-		when(superClassInterface1exendedInterface0.getDefinedMethods()).thenReturn(singleton(superClassInterface1exendedInterface0Method));
+		when(superClassInterface1exendedInterface0.getDefinedMethods())
+				.thenReturn(singleton(superClassInterface1exendedInterface0Method));
 		when(typeImplementedInterface2.getDefinedMethods()).thenReturn(singleton(typeImplementedInterface2Method));
-	
-		/* type extends superclass*/
+
+		/* type extends superclass */
 		when(type.getSuperType()).thenReturn(superClass);
-		
-		/* super class implements interface1*/
+
+		/* super class implements interface1 */
 		TypeReference superClassInterface1Ref = mock(TypeReference.class);
 		when(superClassInterface1Ref.getType()).thenReturn(superClassInterface1);
 		when(superClass.getInterfaces()).thenReturn(singleton(superClassInterface1Ref));
-		
-		/* interface1 extends/implements interface0*/
+
+		/* interface1 extends/implements interface0 */
 		TypeReference interface1extendsInterface0Ref = mock(TypeReference.class);
 		when(interface1extendsInterface0Ref.getType()).thenReturn(superClassInterface1exendedInterface0);
 		when(superClassInterface1.getInterfaces()).thenReturn(singleton(interface1extendsInterface0Ref));
-		
+
 		/* type implements interface2 */
 		TypeReference typeInterface2Ref = mock(TypeReference.class);
 		when(typeInterface2Ref.getType()).thenReturn(typeImplementedInterface2);

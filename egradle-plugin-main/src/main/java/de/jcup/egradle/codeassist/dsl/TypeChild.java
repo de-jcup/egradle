@@ -13,11 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
-public interface TypeChild extends LanguageElement{
+public interface TypeChild extends LanguageElement {
 	/**
 	 * Returns the declaring parent type
+	 * 
 	 * @return parent type
 	 */
 	public Type getParent();

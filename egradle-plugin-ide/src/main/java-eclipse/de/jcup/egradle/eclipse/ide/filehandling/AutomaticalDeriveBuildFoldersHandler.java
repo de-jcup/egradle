@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.filehandling;
+package de.jcup.egradle.eclipse.ide.filehandling;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -53,8 +53,8 @@ public class AutomaticalDeriveBuildFoldersHandler {
 			/* no build folder so ignore */
 			return;
 		}
-		if (folder.isDerived()){
-			/* already derived... so ignore */ 
+		if (folder.isDerived()) {
+			/* already derived... so ignore */
 			return;
 		}
 		if (monitor == null) {

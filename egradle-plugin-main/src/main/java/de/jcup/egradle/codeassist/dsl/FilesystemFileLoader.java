@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,8 @@ public class FilesystemFileLoader implements DSLFileLoader {
 	private ApiMappingImporter apiMappingImporter;
 	private static final Pattern PATTERN_EVERY_DOT = Pattern.compile("\\.");
 
-	public FilesystemFileLoader(XMLTypeImporter typeImporter, XMLPluginsImporter pluginsImporter, ApiMappingImporter apiMappingImporter) {
+	public FilesystemFileLoader(XMLTypeImporter typeImporter, XMLPluginsImporter pluginsImporter,
+			ApiMappingImporter apiMappingImporter) {
 		if (typeImporter == null) {
 			throw new IllegalArgumentException("typeImporter must not be null!");
 		}
@@ -45,7 +46,7 @@ public class FilesystemFileLoader implements DSLFileLoader {
 		}
 		this.typeImporter = typeImporter;
 		this.pluginsImporter = pluginsImporter;
-		this.apiMappingImporter=apiMappingImporter;
+		this.apiMappingImporter = apiMappingImporter;
 	}
 
 	public void setDSLFolder(File folder) {
@@ -94,11 +95,11 @@ public class FilesystemFileLoader implements DSLFileLoader {
 		if (!sourceFile.exists()) {
 			throw new FileNotFoundException("Did not found:" + sourceFile);
 		}
-		try(InputStream stream = new FileInputStream(sourceFile)){
+		try (InputStream stream = new FileInputStream(sourceFile)) {
 			XMLPlugins xmlPlugins = pluginsImporter.importPlugins(stream);
 			Set<Plugin> plugins = xmlPlugins.getPlugins();
 			return plugins;
-			
+
 		}
 
 	}
@@ -108,19 +109,19 @@ public class FilesystemFileLoader implements DSLFileLoader {
 		Map<String, String> alternative;
 		Map<String, String> origin;
 		/* first load alternate origin mapping */
-		File apiMappingFile = new File(dslFolder,"api-mapping.txt");
-		try(InputStream stream = new FileInputStream(apiMappingFile)){
+		File apiMappingFile = new File(dslFolder, "api-mapping.txt");
+		try (InputStream stream = new FileInputStream(apiMappingFile)) {
 			origin = apiMappingImporter.importMapping(stream);
 		}
-		File alternativeApiMappingFile = new File(dslFolder,"alternative-api-mapping.txt");
-		if (! alternativeApiMappingFile.exists()){
-			return origin; 
+		File alternativeApiMappingFile = new File(dslFolder, "alternative-api-mapping.txt");
+		if (!alternativeApiMappingFile.exists()) {
+			return origin;
 		}
-		try(InputStream stream = new FileInputStream(alternativeApiMappingFile)){
+		try (InputStream stream = new FileInputStream(alternativeApiMappingFile)) {
 			alternative = apiMappingImporter.importMapping(stream);
 		}
 		/* merge results, origin api wins, if there are conflicts */
-		Map<String, String> result= alternative;
+		Map<String, String> result = alternative;
 		result.putAll(origin);
 		return result;
 	}

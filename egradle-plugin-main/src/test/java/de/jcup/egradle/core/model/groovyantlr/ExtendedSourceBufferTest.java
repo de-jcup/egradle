@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -36,61 +36,61 @@ public class ExtendedSourceBufferTest {
 	}
 
 	@Test
-	public void appendMissingLineEndingToLastLine_appends_newline_when_no_content(){
+	public void appendMissingLineEndingToLastLine_appends_newline_when_no_content() {
 		write("", bufferToTest);
 		bufferToTest.ensureFrozen();
 		/* check */
 		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("",bufferToTest.frozenLinesAsArray[0].toString());
+		assertEquals("", bufferToTest.frozenLinesAsArray[0].toString());
 		/* execute */
 		bufferToTest.appendLineEndToLastLineIfMissing();
 		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
-		
+		assertEquals("\n", bufferToTest.frozenLinesAsArray[0].toString());
+
 	}
-	
+
 	@Test
-	public void appendMissingLineEndingToLastLine_appends_newline_when_content_but_newlinew_is_missing(){
+	public void appendMissingLineEndingToLastLine_appends_newline_when_content_but_newlinew_is_missing() {
 		write("abc", bufferToTest);
 		bufferToTest.ensureFrozen();
 		/* check */
 		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("abc",bufferToTest.frozenLinesAsArray[0].toString());
+		assertEquals("abc", bufferToTest.frozenLinesAsArray[0].toString());
 		/* execute */
 		bufferToTest.appendLineEndToLastLineIfMissing();
 		assertEquals(1, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
-		
+		assertEquals("abc\n", bufferToTest.frozenLinesAsArray[0].toString());
+
 	}
-	
+
 	@Test
-	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_exists(){
+	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_exists() {
 		write("\n", bufferToTest);
 		/* check */
 		bufferToTest.ensureFrozen();
 		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
+		assertEquals("\n", bufferToTest.frozenLinesAsArray[0].toString());
 		/* execute */
 		bufferToTest.appendLineEndToLastLineIfMissing();
 		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("\n",bufferToTest.frozenLinesAsArray[0].toString());
-		
+		assertEquals("\n", bufferToTest.frozenLinesAsArray[0].toString());
+
 	}
-	
+
 	@Test
-	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_with_content_exists(){
+	public void appendMissingLineEndingToLastLine_appends_no_additional_newline_when_newline_with_content_exists() {
 		write("abc\n", bufferToTest);
 		/* check */
 		bufferToTest.ensureFrozen();
 		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
+		assertEquals("abc\n", bufferToTest.frozenLinesAsArray[0].toString());
 		/* execute */
 		bufferToTest.appendLineEndToLastLineIfMissing();
 		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
-		assertEquals("abc\n",bufferToTest.frozenLinesAsArray[0].toString());
-		
+		assertEquals("abc\n", bufferToTest.frozenLinesAsArray[0].toString());
+
 	}
-	
+
 	@Test
 	public void getOffset_for_text_EMPTY_line_10_column_20__calculator_is_called_with_frozenLinesAsArray__and_line_10_column_20() {
 		/* prepare */
@@ -119,7 +119,7 @@ public class ExtendedSourceBufferTest {
 
 		/* execute */
 		bufferToTest.ensureFrozen();
-		
+
 		/* test */
 		assertEquals(2, bufferToTest.frozenLinesAsArray.length);
 	}
@@ -128,10 +128,10 @@ public class ExtendedSourceBufferTest {
 	public void unix_writing_text_12345_lf_NEWLINE_results_in_frozenLinesArray_first_line_has_length_of_6() {
 		/* prepare */
 		write("12345\nNEWLINE", bufferToTest);
-		
+
 		/* execute */
 		bufferToTest.ensureFrozen();
-		
+
 		/* test */
 		assertEquals(6, bufferToTest.frozenLinesAsArray[0].length());
 	}
@@ -159,21 +159,21 @@ public class ExtendedSourceBufferTest {
 		/* test */
 		assertEquals(7, bufferToTest.frozenLinesAsArray[0].length());
 	}
-	
+
 	@Test
-	public void write4LinesSeparatedByLf_results_in_4_frozen_lines(){
+	public void write4LinesSeparatedByLf_results_in_4_frozen_lines() {
 		/* prepare */
 		String text = "def variable1='value1'\n\n\ndef variable2='value2'";
 
 		/* execute */
-		write(text,bufferToTest);
+		write(text, bufferToTest);
 		bufferToTest.ensureFrozen();
-		
+
 		/* test */
 		assertEquals(4, bufferToTest.frozenLinesAsArray.length);
-		
+
 	}
-	
+
 	private void write(String string, ExtendedSourceBuffer bufferToTest) {
 		for (char c : string.toCharArray()) {
 			bufferToTest.write(c);

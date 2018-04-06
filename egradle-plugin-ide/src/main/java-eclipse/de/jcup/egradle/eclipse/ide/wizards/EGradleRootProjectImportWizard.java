@@ -33,30 +33,31 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
+
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
-	public static final String ID="de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard";
-	
+	public static final String ID = "de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard";
+
 	private static ImageDescriptor desc = EclipseUtil
-			.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png",IDEActivator.PLUGIN_ID);//$NON-NLS-1$
+			.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png", IDEActivator.PLUGIN_ID);//$NON-NLS-1$
 	EGradleRootProjectImportWizardPage mainPage;
 	RootProjectImportSupport importSupport;
 
 	private String customRootProjectpath;
 
 	private RootProjectConfigMode importMode;
-	
+
 	private String customJavaHome;
 
 	private EGradleCallType initialCallType;
-	
+
 	public EGradleRootProjectImportWizard() {
 		importSupport = new RootProjectImportSupport();
 	}
-	
+
 	public void setCustomJavaHome(String customJavaHome) {
 		this.customJavaHome = customJavaHome;
 	}
-	
+
 	public void setCustomRootProjectpath(String customRootProjectpath) {
 		this.customRootProjectpath = customRootProjectpath;
 	}
@@ -64,6 +65,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 	public void setImportMode(RootProjectConfigMode importMode) {
 		this.importMode = importMode;
 	}
+
 	/**
 	 * The <code>BasicNewResourceWizard</code> implementation of this
 	 * <code>IWorkbenchWizard</code> method records the given workbench and
@@ -120,19 +122,17 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
 
 	}
 
-	
-
-
 	public void addPages() {
-		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1",customRootProjectpath,importMode, customJavaHome);
+		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1", customRootProjectpath,
+				importMode, customJavaHome);
 		addPage(mainPage);
-		if (initialCallType!=null){
+		if (initialCallType != null) {
 			mainPage.setInitialCallType(initialCallType);
 		}
 	}
 
 	public void setInitialCallType(EGradleCallType callType) {
-		this.initialCallType=callType;
+		this.initialCallType = callType;
 	}
 
 }

@@ -13,12 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public abstract class AbstractTextMatcher<T>  implements FilterPatternMatcher<T> {
+public abstract class AbstractTextMatcher<T> implements FilterPatternMatcher<T> {
 
 	private Pattern PATTERN_DEREGEX_ASTERISK = Pattern.compile("\\*");
 	private Pattern PATTERN_DEREGEX_DOT = Pattern.compile("\\.");
@@ -30,7 +30,7 @@ public abstract class AbstractTextMatcher<T>  implements FilterPatternMatcher<T>
 			return false;
 		}
 
-		if (! hasFilterPattern()) {
+		if (!hasFilterPattern()) {
 			/* no filter matches all... */
 			return true;
 		}
@@ -58,7 +58,7 @@ public abstract class AbstractTextMatcher<T>  implements FilterPatternMatcher<T>
 		if (itemText.length() == 0) {
 			return false;
 		}
-		if (! hasFilterPattern()) {
+		if (!hasFilterPattern()) {
 			/* no filter matches all... */
 			return true;
 		}

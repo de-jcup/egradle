@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle;
+package de.jcup.egradle.codeassist.dsl.gradle;
 
 import static de.jcup.egradle.codeassist.SourceCodeInsertionSupport.*;
 import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
@@ -77,7 +77,8 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 			sb.append("file('");
 			sb.append(CURSOR_VARIABLE);
 			sb.append("')");
-		} else if (JAVA_MAP.equals(typeAsString)) { // no generic info, so simply do a key
+		} else if (JAVA_MAP.equals(typeAsString)) { // no generic info, so
+													// simply do a key
 			sb.append("[ id: 1");
 			sb.append(CURSOR_VARIABLE);
 			sb.append("]");
@@ -88,7 +89,7 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 		} else if (JAVA_SIMPLE_BOOLEAN.equals(typeAsString)) {
 			sb.append("true");
 			sb.append(CURSOR_VARIABLE);
-		}else if (GRADLE_JAVA_VERSION.equals(typeAsString)){
+		} else if (GRADLE_JAVA_VERSION.equals(typeAsString)) {
 			sb.append("JavaVersion.java8");
 			sb.append(CURSOR_VARIABLE);
 		} else {
@@ -173,12 +174,12 @@ public class GradleDSLCodeTemplateBuilder implements CodeTemplateBuilder {
 					sb.append(" ");// groovy way, no commata, but space to
 									// separate arguments
 				}
-			}else if (GRADLE_JAVA_VERSION.equals(typeAsString)){
+			} else if (GRADLE_JAVA_VERSION.equals(typeAsString)) {
 				sb.append("JavaVersion.java8");
 				if (pos == 0) {
 					sb.append(CURSOR_VARIABLE);
 				}
-				if (pit.hasNext()) {	
+				if (pit.hasNext()) {
 					sb.append(" ");// groovy way, no commata, but space to
 									// separate arguments
 				}

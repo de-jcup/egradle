@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import org.codehaus.groovy.antlr.parser.GroovyTokenTypes;
 

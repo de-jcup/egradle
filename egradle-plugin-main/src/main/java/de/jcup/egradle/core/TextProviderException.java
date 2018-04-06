@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 public class TextProviderException extends Exception {
 

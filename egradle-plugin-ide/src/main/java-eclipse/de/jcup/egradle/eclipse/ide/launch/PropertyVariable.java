@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.launch;
+package de.jcup.egradle.eclipse.ide.launch;
 
 /**
  * A key/value pair for property tables

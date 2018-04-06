@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.init;
+package de.jcup.egradle.sdk.builder.action.init;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration;
+package de.jcup.egradle.integration;
 
 import static org.junit.Assert.*;
 
@@ -30,56 +30,60 @@ import de.jcup.egradle.codeassist.hover.HoverData;
 
 public class HoverDataAssert {
 
-	public static HoverDataAssert assertThat(HoverData data){
-		if (data==null){
+	public static HoverDataAssert assertThat(HoverData data) {
+		if (data == null) {
 			fail("hover data is null!");
 		}
 		return new HoverDataAssert(data);
 	}
 
 	private HoverData data;
-	
-	private HoverDataAssert(HoverData data){
-		this.data=data;
+
+	private HoverDataAssert(HoverData data) {
+		this.data = data;
 	}
-	
-	public HoverDataAssert isForElementType(String name){
+
+	public HoverDataAssert isForElementType(String name) {
 		Type type = ensuredElementType();
-		assertEquals(name,type.getName());
+		assertEquals(name, type.getName());
 		return this;
 	}
-	
-	public HoverDataAssert hasElementName(String name){
+
+	public HoverDataAssert hasElementName(String name) {
 		LanguageElement element = ensuredElement();
-		assertEquals("Element has not wanted name!", name,element.getName());
+		assertEquals("Element has not wanted name!", name, element.getName());
 		return this;
 	}
-	
+
 	/**
 	 * Assert element at hover data is a method with defined parameters
-	 * @param fullMethodName - e.g. "org.groovy.Project.allproject"
+	 * 
+	 * @param fullMethodName
+	 *            - e.g. "org.groovy.Project.allproject"
 	 * @param expectedParamTypes
 	 * @return assert object
 	 */
-	public HoverDataAssert isForMethod(String fullMethodName, String ... expectedParamTypes) {
+	public HoverDataAssert isForMethod(String fullMethodName, String... expectedParamTypes) {
 		/* check name correct */
 		LanguageElement element = ensuredElement();
 		String foundFullName = buildFullName(element);
-		
+
 		assertEquals("Method has not wanted name!", fullMethodName, foundFullName);
 		assertTrue(element instanceof Method);
-		
+
 		Method method = (Method) element;
 		List<Parameter> methodParams = method.getParameters();
-		
-		assertEquals("Method "+method.getName()+" found, but parameter size differs!", expectedParamTypes.length, methodParams.size());
-		if (expectedParamTypes.length>0){
-			int pos =0;
-			for (String expectedParamType: expectedParamTypes){
+
+		assertEquals("Method " + method.getName() + " found, but parameter size differs!", expectedParamTypes.length,
+				methodParams.size());
+		if (expectedParamTypes.length > 0) {
+			int pos = 0;
+			for (String expectedParamType : expectedParamTypes) {
 				Parameter methodParam = methodParams.get(pos);
 				String methodParamTypeAsString = methodParam.getTypeAsString();
-				if (!expectedParamType.equals(methodParamTypeAsString)){
-					String message = MessageFormat.format("Method parameter {0} is of type:{1}, but expected:{2}", pos, methodParamTypeAsString, expectedParamType);
+				if (!expectedParamType.equals(methodParamTypeAsString)) {
+					String message = MessageFormat.format("Method parameter {0} is of type:{1}, but expected:{2}", pos,
+							methodParamTypeAsString, expectedParamType);
 					fail(message);
 				}
 				pos++;
@@ -87,30 +91,30 @@ public class HoverDataAssert {
 		}
 		return this;
 	}
-	
+
 	public HoverDataAssert isForExtension(String extensionName, String typeNameAsString) {
 		/* check name correct */
-		if (!ensuredResult().isTypeFromExtensionConfigurationPoint()){
-			fail("This is not an extension:"+ensuredResult().getElement());
+		if (!ensuredResult().isTypeFromExtensionConfigurationPoint()) {
+			fail("This is not an extension:" + ensuredResult().getElement());
 		}
 		String foundExtensionName = ensuredResult().getExtensionName();
 		assertEquals("Name of extension differs!", extensionName, foundExtensionName);
 		LanguageElement element = ensuredElement();
-		if (!(element instanceof Type)){
-			fail("Element is not a type:"+element);
+		if (!(element instanceof Type)) {
+			fail("Element is not a type:" + element);
 		}
 		Type type = (Type) element;
 		String foundFullName = buildFullName(type);
-		
+
 		assertEquals("Extension has not wanted type:", typeNameAsString, foundFullName);
-		
+
 		return this;
 	}
-	
+
 	private String buildFullName(LanguageElement element) {
 		StringBuilder sb = new StringBuilder();
-		if (element instanceof TypeChild){
-			TypeChild child  = (TypeChild)element;
+		if (element instanceof TypeChild) {
+			TypeChild child = (TypeChild) element;
 			Type parent = child.getParent();
 			assertNotNull("parent may not be null", parent);
 			sb.append(parent.getName());
@@ -139,5 +143,5 @@ public class HoverDataAssert {
 		assertNotNull("estimation result in data is null!!", result);
 		return result;
 	}
-	
+
 }

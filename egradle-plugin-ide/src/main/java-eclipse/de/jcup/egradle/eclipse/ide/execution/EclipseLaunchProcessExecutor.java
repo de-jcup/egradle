@@ -46,37 +46,50 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 	private String cmdLine;
 
 	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch, EGradlePostBuildJob postJob) {
-		super(streamHandler,false,SimpleProcessExecutor.ENDLESS_RUNNING); // not output handled - done by launch mechanism in console!
+		super(streamHandler, false, SimpleProcessExecutor.ENDLESS_RUNNING); // not
+																			// output
+																			// handled
+																			// -
+																			// done
+																			// by
+																			// launch
+																			// mechanism
+																			// in
+																			// console!
 		this.launch = launch;
-		this.postJob=postJob;
+		this.postJob = postJob;
 	}
 
 	@Override
-	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envprovider, ProcessContext processContext, String... commands) throws IOException {
-		try{
+	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envprovider, ProcessContext processContext,
+			String... commands) throws IOException {
+		try {
 			return super.execute(wdProvider, envprovider, processContext, commands);
-		}catch(IOException | RuntimeException e){
-				IDEUtil.logError("Was not able to execute launch process", e);
-				/* problem occured - we have to cleanup launch otherwise launches will be kept in UI and not removeable!*/
-				if (!launch.isTerminated()){
-					try {
-						if (launch.canTerminate()){
-							launch.terminate();
-						}
-					} catch (DebugException de) {
-						IDEUtil.logError("Was not able to terminate launch process", e);
+		} catch (IOException | RuntimeException e) {
+			IDEUtil.logError("Was not able to execute launch process", e);
+			/*
+			 * problem occured - we have to cleanup launch otherwise launches
+			 * will be kept in UI and not removeable!
+			 */
+			if (!launch.isTerminated()) {
+				try {
+					if (launch.canTerminate()) {
+						launch.terminate();
 					}
+				} catch (DebugException de) {
+					IDEUtil.logError("Was not able to terminate launch process", e);
 				}
-				throw e;
+			}
+			throw e;
 		}
 	}
 
 	@Override
-	protected void handleProcessStarted(EnvironmentProvider provider, Process process, Date started, File workingDirectory,
-			String[] commands) {
+	protected void handleProcessStarted(EnvironmentProvider provider, Process process, Date started,
+			File workingDirectory, String[] commands) {
 		String label = "<none>";
-		if (provider instanceof GradleContext){
-			label = ((GradleContext)provider).getCommandString();
+		if (provider instanceof GradleContext) {
+			label = ((GradleContext) provider).getCommandString();
 		}
 		String path = "inside root project";
 
@@ -107,7 +120,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 		cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
 
 		attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
-		
+
 		/*
 		 * bind process to runtime process, so visible and correct handled in
 		 * debug UI
@@ -120,10 +133,10 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
 			outputHandler.output("Started process cannot terminate");
 		}
 	}
-	
+
 	@Override
 	protected void handleProcessEnd(Process p) {
-		if (postJob!=null){
+		if (postJob != null) {
 			postJob.setBuildInfo(new BuildInfo(cmdLine, p.exitValue()));
 			postJob.schedule();
 		}

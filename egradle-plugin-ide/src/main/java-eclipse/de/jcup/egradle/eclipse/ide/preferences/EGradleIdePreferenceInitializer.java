@@ -24,6 +24,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import de.jcup.egradle.core.migration.MigrationState;
 import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.preferences.EGradleCallType;
+
 /**
  * Class used to initialize default preference values.
  */
@@ -33,50 +34,51 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
 		IPreferenceStore store = IDEUtil.getPreferences().getPreferenceStore();
 		EGradleCallType defaultCallType = calculateDefaultCallType();
 		store.setDefault(P_OUTPUT_VALIDATION_ENABLED.getId(), true);
-		
+
 		store.setDefault(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), false);
-		
+
 		store.setDefault(P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(), true);
-		store.setDefault(P_IMPORT__DO_CLEAN_PROJECTS.getId(),true);
-		
+		store.setDefault(P_IMPORT__DO_CLEAN_PROJECTS.getId(), true);
+
 		store.setDefault(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(), true);
 		store.setDefault(P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(), true);
 
-		store.setDefault(P_GRADLE_CALL_TYPE.getId(),defaultCallType.getId());
+		store.setDefault(P_GRADLE_CALL_TYPE.getId(), defaultCallType.getId());
 		store.setDefault(P_GRADLE_SHELL.getId(), defaultCallType.getDefaultShell().getId());
 		store.setDefault(P_GRADLE_INSTALL_BIN_FOLDER.getId(), defaultCallType.getDefaultGradleBinFolder());
 		store.setDefault(P_GRADLE_CALL_COMMAND.getId(), defaultCallType.getDefaultGradleCommand());
-		
+
 		store.setDefault(P_MIGRATE_IDE_STATE.getId(), MigrationState.NOT_MIGRATED.name());
 	}
 
 	/**
 	 * Calculate default GRADLE call type depending on OS
+	 * 
 	 * @return default type
 	 */
 	public static EGradleCallType calculateDefaultCallType() {
-		EGradleCallType defaultCallType = null; 
-		if (SystemUtils.IS_OS_WINDOWS){
-			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;	
-		}else{
-			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;			
+		EGradleCallType defaultCallType = null;
+		if (SystemUtils.IS_OS_WINDOWS) {
+			defaultCallType = EGradleCallType.WINDOWS_GRADLE_WRAPPER;
+		} else {
+			defaultCallType = EGradleCallType.LINUX_GRADLE_WRAPPER;
 		}
 		return defaultCallType;
 	}
-	
+
 	/**
 	 * Calculate GRADLE call type (installed variant) depending on OS
+	 * 
 	 * @return type
 	 */
 	public static EGradleCallType calculateOSInstalledType() {
-		EGradleCallType installedType = null; 
-		if (SystemUtils.IS_OS_WINDOWS){
-			installedType = EGradleCallType.WINDOWS_GRADLE_INSTALLED;	
-		}else{
-			installedType = EGradleCallType.LINUX_GRADLE_INSTALLED;			
+		EGradleCallType installedType = null;
+		if (SystemUtils.IS_OS_WINDOWS) {
+			installedType = EGradleCallType.WINDOWS_GRADLE_INSTALLED;
+		} else {
+			installedType = EGradleCallType.LINUX_GRADLE_INSTALLED;
 		}
 		return installedType;
 	}
-	
 
 }

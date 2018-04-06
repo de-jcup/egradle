@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -32,19 +32,19 @@ public class ModelImpl implements Model {
 
 	@Override
 	public Item getItemAt(int offset) {
-		return getItemInternal(offset,true);
+		return getItemInternal(offset, true);
 	}
-	
+
 	@Override
 	public Item getItemOnlyAt(int offset) {
-		return getItemInternal(offset,false);
+		return getItemInternal(offset, false);
 	}
 
 	private Item getItemInternal(int offset, boolean fallbackEnabled) {
 		if (!offsetRegistrationDone) {
 			startOffsetRegistration();
 		}
-		synchronized(map){
+		synchronized (map) {
 			Item item = map.get(offset);
 			if (item == null && fallbackEnabled) {
 				item = findApplyableItem(offset);
@@ -55,6 +55,7 @@ public class ModelImpl implements Model {
 
 	/**
 	 * Example:
+	 * 
 	 * <pre>
 	 * a{
 	 * 	b{
@@ -69,34 +70,38 @@ public class ModelImpl implements Model {
 	 * x-bla2
 	 * (p4)
 	 * </pre>
-	 * p1- 
+	 * 
+	 * p1-
 	 */
 	@Override
 	public Item getParentItemOf(int offset) {
 		Item nextItem = getItemAt(offset);
-		if (nextItem==null){
-			/* should never happen but...*/
+		if (nextItem == null) {
+			/* should never happen but... */
 			return getRoot();
 		}
 		Item potentialParent = nextItem;
-		while (potentialParent!=null && !canBeParentOf(offset, potentialParent)){
-			potentialParent=potentialParent.getParent();
+		while (potentialParent != null && !canBeParentOf(offset, potentialParent)) {
+			potentialParent = potentialParent.getParent();
 		}
-		if (potentialParent==null){
+		if (potentialParent == null) {
 			return getRoot();
 		}
 		return potentialParent;
 	}
-	
-	private boolean canBeParentOf(int offset, Item item){
-		/* must be already a parent or must be a possible one, otherwise guard close...*/
-		if (! item.hasChildren() && !item.isAPossibleParent()){
+
+	private boolean canBeParentOf(int offset, Item item) {
+		/*
+		 * must be already a parent or must be a possible one, otherwise guard
+		 * close...
+		 */
+		if (!item.hasChildren() && !item.isAPossibleParent()) {
 			return false;
 		}
 		/* check offset position is between this type */
 		int itemStartPos = item.getOffset();
-		int itemEndPos = itemStartPos+ item.getLength();
-		if (offset>itemStartPos && offset<itemEndPos){
+		int itemEndPos = itemStartPos + item.getLength();
+		if (offset > itemStartPos && offset < itemEndPos) {
 			return true;
 		}
 		return false;
@@ -104,6 +109,7 @@ public class ModelImpl implements Model {
 
 	/**
 	 * Example:
+	 * 
 	 * <pre>
 	 * 
 	 * offset1a
@@ -113,21 +119,24 @@ public class ModelImpl implements Model {
 	 *   y-->given offset
 	 * offset1b
 	 * </pre>
+	 * 
 	 * The result should be item having offset1a/b
-	 * @param offset offset to scan for
+	 * 
+	 * @param offset
+	 *            offset to scan for
 	 * @return item most appliable to given offset
 	 */
 	private Item findApplyableItem(int offset) {
-	
-		int scanStart=offset;
-		while (scanStart>0){
+
+		int scanStart = offset;
+		while (scanStart > 0) {
 			Item item = map.get(--scanStart);
-			if (item==null){
+			if (item == null) {
 				continue;
 			}
 			int start = item.getOffset();
-			int end = start+item.getLength();
-			if (offset>start && offset<end){
+			int end = start + item.getLength();
+			if (offset > start && offset < end) {
 				return item;
 			}
 		}
@@ -139,7 +148,7 @@ public class ModelImpl implements Model {
 		Item simpleFallback = null;
 		/* fall back - select part before */
 		int scanStart = offset;
-		while (scanStart>0 && simpleFallback==null){
+		while (scanStart > 0 && simpleFallback == null) {
 			simpleFallback = map.get(--scanStart);
 		}
 		return simpleFallback;
@@ -151,20 +160,20 @@ public class ModelImpl implements Model {
 	}
 
 	private void startOffsetRegistration() {
-		offsetRegistrationDone=true;
-		synchronized(map){
+		offsetRegistrationDone = true;
+		synchronized (map) {
 			map.clear();
-			register(root,true);
+			register(root, true);
 		}
 	}
 
 	private void register(Item item, boolean registerOnlyChildren) {
-		if (!registerOnlyChildren){
+		if (!registerOnlyChildren) {
 			map.put(item.getOffset(), item);
 		}
-		for (Item child: item.getChildren()){
-			if (child!=null){
-				register(child,false);
+		for (Item child : item.getChildren()) {
+			if (child != null) {
+				register(child, false);
 			}
 		}
 	}

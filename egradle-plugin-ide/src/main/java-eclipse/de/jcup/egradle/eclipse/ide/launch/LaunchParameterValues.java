@@ -37,17 +37,21 @@ public class LaunchParameterValues implements IParameterValues {
 
 	/**
 	 * Set launch to use in command
-	 * @param launch launch instance to use in command
+	 * 
+	 * @param launch
+	 *            launch instance to use in command
 	 */
 	public void setLaunch(ILaunch launch) {
-		this.launch=launch;
+		this.launch = launch;
 	}
+
 	public ILaunch getLaunch() {
 		return launch;
 	}
-	
+
 	/**
 	 * Set tasks to be overridden (optional)
+	 * 
 	 * @param tasks
 	 */
 	public void setOverriddenTasks(String tasks) {
@@ -61,7 +65,7 @@ public class LaunchParameterValues implements IParameterValues {
 	public void setPostJob(EGradlePostBuildJob postJob) {
 		this.postJob = postJob;
 	}
-	
+
 	public EGradlePostBuildJob getPostJob() {
 		return postJob;
 	}
@@ -70,12 +74,9 @@ public class LaunchParameterValues implements IParameterValues {
 	 * Reset launch data. Does NOT change parameter values!
 	 */
 	public void resetLaunchData() {
-		this.launch=null;
-		this.postJob=null;
-		this.overriddenTasks=null;
+		this.launch = null;
+		this.postJob = null;
+		this.overriddenTasks = null;
 	}
-
-	
-	
 
 }

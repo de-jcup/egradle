@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.util;
+package de.jcup.egradle.eclipse.util;
 
 public interface PreferenceIdentifiable {
 

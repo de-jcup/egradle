@@ -13,110 +13,112 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
 // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
 public enum JavaKeyWords implements DocumentKeyWord {
 
 	ABSTRACT("abstract"),
-	
-	INTERFACE("interface"), /* must be at this position to not be overwhelmed with "int" */
-	
+
+	INTERFACE("interface"), /*
+							 * must be at this position to not be overwhelmed
+							 * with "int"
+							 */
+
 	CONTINUE("continue"),
-	
+
 	FOR("for"),
 
 	NEW("new"),
-	
+
 	SWITCH("switch"),
-	
+
 	ASSERT("assert"),
-	
+
 	DEFAULT("default"),
-	
+
 	GOTO("goto"),
-	
+
 	PACKAGE("package"),
-	
+
 	SYNCHRONIZED("synchronized"),
-	
+
 	BOOLEAN("boolean"),
-	
+
 	DO("do"),
-	
+
 	IF("if"),
-	
+
 	PRIVATE("private"),
-	
+
 	THIS("this"),
-	
+
 	BREAK("break"),
-	
+
 	DOUBLE("double"),
-	
+
 	IMPLEMENTS("implements"),
-	
+
 	PROTECTED("protected"),
-	
+
 	THROW("throw"),
-	
+
 	BYTE("byte"),
-	
+
 	ELSE("else"),
-	
+
 	IMPORT("import"),
-	
+
 	PUBLIC("public"),
-	
+
 	THROWS("throws"),
-	
+
 	CASE("case"),
-	
-	ENUM("enum"), 
-	
+
+	ENUM("enum"),
+
 	INSTANCE_OF("instanceof"),
-			
+
 	RETURN("return"),
-	
+
 	TRANSIENT("transient"),
-	
+
 	CATCH("catch"),
-	
+
 	EXTENDS("extends"),
-	
+
 	INT("int"),
-	
+
 	SHORT("short"),
-	
+
 	TRY("try"),
-	
+
 	CHAR("char"),
-	
+
 	FINAL("final"),
-	
-	
+
 	STATIC("static"),
-	
+
 	VOID("void"),
-	
+
 	CLASS("class"),
-	
+
 	FINALLY("finally"),
-	
+
 	LONG("long"),
-			
+
 	STRICTFP("strictfp"),
-	
+
 	VOLATILE("volatile"),
-	
+
 	CONST("const"),
-	
+
 	FLOAT("float"),
-	
+
 	NATIVE("native"),
-	
+
 	SUPER("super"),
-	
+
 	WHILE("while")
 
 	;
@@ -126,7 +128,6 @@ public enum JavaKeyWords implements DocumentKeyWord {
 	private JavaKeyWords(String text) {
 		this.text = text;
 	}
-
 
 	@Override
 	public String getText() {

@@ -362,11 +362,11 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 
 			}
 			List<TextLine> convertedLines = toggler.toggle(originLines);
-			for (int i=0;i<originLines.size();i++){
+			for (int i = 0; i < originLines.size(); i++) {
 				TextLine origin = originLines.get(i);
 				TextLine converted = convertedLines.get(i);
 				doc.replace(converted.getOffset(), origin.getLength(), converted.getContent());
-				
+
 			}
 		} catch (BadLocationException e) {
 			/* ignore and do nothing */

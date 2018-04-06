@@ -13,39 +13,42 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.execution.validation;
+package de.jcup.egradle.eclipse.ide.execution.validation;
 
 import org.eclipse.jface.preference.FieldEditor;
+
 /**
- * Abstract base implementation which does nothing per default and handles no property changes
+ * Abstract base implementation which does nothing per default and handles no
+ * property changes
+ * 
  * @author Albert Tregnaghi
  *
  */
-public abstract class RootProjectValidationAdapter implements RootProjectValidationHandler{
+public abstract class RootProjectValidationAdapter implements RootProjectValidationHandler {
 
-		@Override
-		public void addFieldEditor(FieldEditor field) {
-			
-		}
+	@Override
+	public void addFieldEditor(FieldEditor field) {
 
-		@Override
-		public void handleValidationResult(boolean b) {
-			
-		}
-
-		@Override
-		public void handleValidationRunning(boolean running) {
-			
-		}
-
-		@Override
-		public void onValidationStateChanged(boolean valid) {
-			
-		}
-
-		@Override
-		public boolean isHandlingPropertyChanges() {
-			return false;
-		}
-		
 	}
+
+	@Override
+	public void handleValidationResult(boolean b) {
+
+	}
+
+	@Override
+	public void handleValidationRunning(boolean running) {
+
+	}
+
+	@Override
+	public void onValidationStateChanged(boolean valid) {
+
+	}
+
+	@Override
+	public boolean isHandlingPropertyChanges() {
+		return false;
+	}
+
+}

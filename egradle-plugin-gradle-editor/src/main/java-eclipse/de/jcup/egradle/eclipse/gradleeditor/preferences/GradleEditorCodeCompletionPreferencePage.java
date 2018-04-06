@@ -73,7 +73,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				"Code tooltips enabled", parent);
 		addField(codeAssistTooltipsEnabled);
 
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS){
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
 			Button reloadButton = new Button(parent, SWT.PUSH);
 			reloadButton.setText("Clean cache");
 			reloadButton.setToolTipText("Clean cache of code completion ");
@@ -90,8 +90,8 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 				}
 			});
 		}
-		
-		/* sdk info group*/
+
+		/* sdk info group */
 		GridData groupLayoutData = new GridData();
 		groupLayoutData.horizontalAlignment = GridData.FILL;
 		groupLayoutData.verticalAlignment = GridData.BEGINNING;
@@ -102,20 +102,20 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
 
 		Group validationGroup = SWTFactory.createGroup(parent, "SDK information", 1, 10, SWT.FILL);
 		validationGroup.setLayoutData(groupLayoutData);
-		
-		/* SDK info*/
+
+		/* SDK info */
 		SDK sdk = SDKManager.get().getCurrentSDK();
-		
+
 		SDKInfo sdkInfo = sdk.getInfo();
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
 		sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
 		Date installationDate = sdkInfo.getInstallationDate();
-		if (installationDate!=null){
+		if (installationDate != null) {
 			sb.append("- Was installed at ").append(DateFormat.getDateTimeInstance().format(installationDate));
 		}
-		
+
 		Text text = new Text(validationGroup, SWT.MULTI);
 		text.setBackground(parent.getBackground());
 		text.setText(sb.toString());

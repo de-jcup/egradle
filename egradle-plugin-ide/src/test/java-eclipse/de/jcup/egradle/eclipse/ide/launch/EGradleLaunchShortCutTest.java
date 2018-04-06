@@ -39,7 +39,7 @@ public class EGradleLaunchShortCutTest {
 	@Before
 	public void before() {
 		shortCutToTest = new EGradleLaunchShortCut();
-		
+
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class EGradleLaunchShortCutTest {
 		/* test */
 		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "project1");
 	}
-	
+
 	@Test
 	public void configuration_contains_rootpath_rootpath_finder_returns_as_path() {
 		/* prepare */
@@ -80,13 +80,13 @@ public class EGradleLaunchShortCutTest {
 		IResource resource = mock(IResource.class);
 		File dummyRootfolder = new File("/a/b");
 		RootProjectFinder mockedFinder = mock(RootProjectFinder.class);
-		shortCutToTest.rootProjectFinder= mockedFinder;
-		
+		shortCutToTest.rootProjectFinder = mockedFinder;
+
 		when(mockedFinder.findRootProjectFolder(any())).thenReturn(dummyRootfolder);
-		
+
 		/* execute */
 		shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, "anyProjectName");
-		
+
 		/* test */
 		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_ROOT_PROJECT_PATH, dummyRootfolder.getAbsolutePath());
 	}

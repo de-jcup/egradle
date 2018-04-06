@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
@@ -23,7 +23,7 @@ import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.util.ILogSupport;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 
-public interface IExtendedEditor extends ITextEditor{
+public interface IExtendedEditor extends ITextEditor {
 	public IDocument getDocument();
 
 	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus, boolean fullSelection);

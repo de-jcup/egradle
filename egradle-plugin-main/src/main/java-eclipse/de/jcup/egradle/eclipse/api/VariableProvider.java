@@ -32,8 +32,9 @@ public interface VariableProvider {
 	 * E.g. "rootProject.projectDir" is the key and
 	 * "/usr/home/dev/projects/myGradleProject" is the value
 	 * 
-	 * @param editorInput input so provider can determine for which file the 
-	 * parameters shall be supported.
+	 * @param editorInput
+	 *            input so provider can determine for which file the parameters
+	 *            shall be supported.
 	 * 
 	 * @return unmodifiable map or <code>null</code>
 	 */

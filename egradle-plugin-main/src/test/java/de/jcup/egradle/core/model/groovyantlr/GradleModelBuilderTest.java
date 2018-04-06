@@ -30,10 +30,9 @@ import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 
 public class GradleModelBuilderTest {
-	
-	
+
 	@Test
-	public void task_clean_with_two_slides_has_child() throws Exception{
+	public void task_clean_with_two_slides_has_child() throws Exception {
 		/* @formatter:off*/
 		String code = 
 		"task clean << {\n"+
@@ -61,7 +60,7 @@ public class GradleModelBuilderTest {
 	}
 
 	@Test
-	public void task_xyz_with_parameter_two_slides_has_child_and_type_is_detected() throws Exception{
+	public void task_xyz_with_parameter_two_slides_has_child_and_type_is_detected() throws Exception {
 		/* @formatter:off*/  
 		String code = 
 		"task xyz(type:Jar) << {\n"+
@@ -86,11 +85,11 @@ public class GradleModelBuilderTest {
 		Item[] children = task.getChildren();
 		assertNotNull(children);
 		assertEquals(1, children.length);
-		assertEquals("Jar",task.getType());
+		assertEquals("Jar", task.getType());
 	}
-	
+
 	@Test
-	public void task_xyz_with_parameter_no_slides_has_child_and_type_is_detected() throws Exception{
+	public void task_xyz_with_parameter_no_slides_has_child_and_type_is_detected() throws Exception {
 		/* @formatter:off*/  
 		String code = 
 		"task xyz(type:Jar) {\n"+
@@ -115,11 +114,9 @@ public class GradleModelBuilderTest {
 		Item[] children = task.getChildren();
 		assertNotNull(children);
 		assertEquals(1, children.length);
-		assertEquals("Jar",task.getType());
+		assertEquals("Jar", task.getType());
 	}
 
-	
-	
 	@Test
 	public void test_task_dot_do_last_has_task_as_first_type_but_do_last_as_last_one() throws Exception {
 		/* @formatter:off*/
@@ -141,9 +138,9 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.TASK, tasks.getItemType());
 		assertEquals(ItemType.DO_LAST, tasks.getLastChainedItemType());
-		
+
 	}
-	
+
 	@Test
 	public void test_task_dot_gargamel_has_task_as_first_type_but_null_as_last_one() throws Exception {
 		/* @formatter:off*/
@@ -165,9 +162,9 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.TASK, tasks.getItemType());
 		assertEquals(null, tasks.getLastChainedItemType());
-		
+
 	}
-	
+
 	@Test
 	public void test_dependencies_item_has_closure_as_parameter() throws Exception {
 		/* @formatter:off*/
@@ -191,11 +188,11 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.DEPENDENCIES, dependencies.getItemType());
 		String[] parameters = dependencies.getParameters();
 		assertNotNull(parameters);
-		assertEquals(1,parameters.length);
-		assertEquals("groovy.lang.Closure",parameters[0]);
-		
+		assertEquals(1, parameters.length);
+		assertEquals("groovy.lang.Closure", parameters[0]);
+
 	}
-	
+
 	@Test
 	public void test_name_resolved_filetree_only_closure() throws Exception {
 		/* @formatter:off*/
@@ -216,9 +213,9 @@ public class GradleModelBuilderTest {
 		Item fileTree = items[0];
 
 		assertEquals("fileTree", fileTree.getIdentifier());
-		
+
 	}
-	
+
 	@Test
 	public void test_name_resolved_filetree_with_baseDir_and_closure() throws Exception {
 		/* @formatter:off*/
@@ -242,12 +239,13 @@ public class GradleModelBuilderTest {
 		String[] params = fileTree.getParameters();
 		assertNotNull(params);
 		assertEquals(2, params.length);
-		assertEquals("java.lang.String",params[0]);
-		assertEquals("groovy.lang.Closure",params[1]);
-		assertTrue(fileTree.isClosureBlock()); // necessary to be shown in outline view!
-		
+		assertEquals("java.lang.String", params[0]);
+		assertEquals("groovy.lang.Closure", params[1]);
+		assertTrue(fileTree.isClosureBlock()); // necessary to be shown in
+												// outline view!
+
 	}
-	
+
 	@Test
 	public void test_parameters_resolved_filetree_with_baseDir_and_closure() throws Exception {
 		/* @formatter:off*/
@@ -269,12 +267,14 @@ public class GradleModelBuilderTest {
 
 		String[] parameters = fileTree.getParameters();
 		assertNotNull(parameters);
-		assertEquals(2,parameters.length);
-		assertEquals("Object:baseDir", parameters[0]); // not resolveable so returns Object:name of parameter
-		assertEquals("groovy.lang.Closure", parameters[1]); 
-		
+		assertEquals(2, parameters.length);
+		assertEquals("Object:baseDir", parameters[0]); // not resolveable so
+														// returns Object:name
+														// of parameter
+		assertEquals("groovy.lang.Closure", parameters[1]);
+
 	}
-	
+
 	@Test
 	public void test_parameters_resolved_something_with_string_and_closure() throws Exception {
 		/* @formatter:off*/
@@ -296,12 +296,12 @@ public class GradleModelBuilderTest {
 
 		String[] parameters = fileTree.getParameters();
 		assertNotNull(parameters);
-		assertEquals(2,parameters.length);
+		assertEquals(2, parameters.length);
 		assertEquals("java.lang.String", parameters[0]);
 		assertEquals("groovy.lang.Closure", parameters[1]);
-		
+
 	}
-	
+
 	@Test
 	public void test_compile_my_project_contains_my_project_in_model_item_text() throws Exception {
 		/* @formatter:off*/
@@ -328,7 +328,7 @@ public class GradleModelBuilderTest {
 
 		Item compileDependency = dependenciesChildren[0];
 		assertEquals("project(:myproject)", compileDependency.getName());
-		
+
 	}
 
 	@Test
@@ -412,7 +412,7 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.TASK, classDef.getItemType());
 
 	}
-	
+
 	@Test
 	public void tasks_with_type_Jar__returns_name_clean() throws ModelBuilderException {
 		String text = "tasks.withType(Jar) {}";
@@ -454,14 +454,10 @@ public class GradleModelBuilderTest {
 		assertEquals("MyAdminTask", classDef.getName());
 
 	}
-	
-	
+
 	@Test
 	public void class_constructor_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
-		String text = "class MyAdminTask extends DefaultTask {\n"
-				+ "MyAdminTask(){\n"
-				+ "}\n"
-				+ "}";
+		String text = "class MyAdminTask extends DefaultTask {\n" + "MyAdminTask(){\n" + "}\n" + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
@@ -477,25 +473,23 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.CLASS, classDef.getItemType());
 		assertEquals("MyAdminTask", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(1,children.length);
-		
+		assertEquals(1, children.length);
+
 		Item child = children[0];
 		assertNotNull(child);
 		assertEquals(ItemType.CONSTRUCTOR, child.getItemType());
-		
+
 		assertEquals("MyAdminTask", child.getName());
 	}
-	
+
 	@Test
-	public void class_public_method1_with_annotations_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
-		String text = "class MyAdminTask extends DefaultTask {\n"
-				+ "@Deprecated\n"
-				+ "public void method1(){\n"
-				+ "}\n"
+	public void class_public_method1_with_annotations_definitions_are_contained_as_chilren_of_class_item()
+			throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n" + "@Deprecated\n" + "public void method1(){\n" + "}\n"
 				+ "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -512,24 +506,23 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.CLASS, classDef.getItemType());
 		assertEquals("MyAdminTask", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(1,children.length);
-		
+		assertEquals(1, children.length);
+
 		Item child = children[0];
 		assertNotNull(child);
 		assertEquals(ItemType.METHOD, child.getItemType());
-		
+
 		assertEquals("method1", child.getName());
 	}
-	
+
 	@Test
-	public void interface_public_method1_definitions_are_contained_as_chilren_of_interface_item() throws ModelBuilderException {
-		String text = "interface People {\n"
-				+ "public String talk() "
-				+ "}";
+	public void interface_public_method1_definitions_are_contained_as_chilren_of_interface_item()
+			throws ModelBuilderException {
+		String text = "interface People {\n" + "public String talk() " + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
@@ -545,24 +538,22 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.INTERFACE, classDef.getItemType());
 		assertEquals("People", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(1,children.length);
-		
+		assertEquals(1, children.length);
+
 		Item child = children[0];
 		assertNotNull(child);
 		assertEquals(ItemType.METHOD, child.getItemType());
-		
+
 		assertEquals("talk", child.getName());
 	}
-	
+
 	@Test
 	public void enum_defintion_contains_also_entries() throws ModelBuilderException {
-		String text = "enum Directions {\n"
-				+ "NORTH, SOUTH, WEST, EAST "
-				+ "}";
+		String text = "enum Directions {\n" + "NORTH, SOUTH, WEST, EAST " + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
@@ -578,46 +569,42 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.ENUM, classDef.getItemType());
 		assertEquals("Directions", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(4,children.length);
-		
+		assertEquals(4, children.length);
+
 		Item child = children[0];
 		assertNotNull(child);
 		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
-		
+
 		assertEquals("NORTH", child.getName());
-		
+
 		child = children[1];
 		assertNotNull(child);
 		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
-		
+
 		assertEquals("SOUTH", child.getName());
-		
+
 		child = children[2];
 		assertNotNull(child);
 		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
-		
+
 		assertEquals("WEST", child.getName());
-		
+
 		child = children[3];
 		assertNotNull(child);
 		assertEquals(ItemType.ENUM_CONSTANT, child.getItemType());
-		
+
 		assertEquals("EAST", child.getName());
 	}
-	
+
 	@Test
-	public void class_public_method1_and_method2_definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
-		String text = "class MyAdminTask extends DefaultTask {\n"
-				+ "public void method1(){\n"
-				+ "}\n"
-				+ "public String method2(){\n"
-				+ " return 'test';\n"
-				+ "}\n"
-				+ "}";
+	public void class_public_method1_and_method2_definitions_are_contained_as_chilren_of_class_item()
+			throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n" + "public void method1(){\n" + "}\n"
+				+ "public String method2(){\n" + " return 'test';\n" + "}\n" + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
@@ -633,34 +620,30 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.CLASS, classDef.getItemType());
 		assertEquals("MyAdminTask", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(2,children.length);
-		
+		assertEquals(2, children.length);
+
 		Item child1 = children[0];
 		assertNotNull(child1);
-		
+
 		assertEquals("method1", child1.getName());
 		assertEquals(ItemType.METHOD, child1.getItemType());
-		
+
 		Item child2 = children[1];
 		assertNotNull(child2);
-		
+
 		assertEquals("method2", child2.getName());
 		assertEquals(ItemType.METHOD, child2.getItemType());
 	}
-	
+
 	@Test
-	public void class_public_variable1_method1__definitions_are_contained_as_chilren_of_class_item() throws ModelBuilderException {
-		String text = "class MyAdminTask extends DefaultTask {\n"
-				+ "private String data='test';\n"
-				+ "\n"
-				+ "public String method2(){\n"
-				+ " return data;\n"
-				+ "}\n"
-				+ "}";
+	public void class_public_variable1_method1__definitions_are_contained_as_chilren_of_class_item()
+			throws ModelBuilderException {
+		String text = "class MyAdminTask extends DefaultTask {\n" + "private String data='test';\n" + "\n"
+				+ "public String method2(){\n" + " return data;\n" + "}\n" + "}";
 
 		InputStream is = new ByteArrayInputStream(text.getBytes());
 		AbstractGroovyModelBuilder b = new GradleModelBuilder(is);
@@ -676,20 +659,20 @@ public class GradleModelBuilderTest {
 
 		assertEquals(ItemType.CLASS, classDef.getItemType());
 		assertEquals("MyAdminTask", classDef.getName());
-		
+
 		assertTrue(classDef.hasChildren());
 		Item[] children = classDef.getChildren();
 		assertNotNull(children);
-		assertEquals(2,children.length);
-		
+		assertEquals(2, children.length);
+
 		Item child1 = children[0];
 		assertNotNull(child1);
-		
+
 		assertEquals("data", child1.getName());
 		assertEquals(ItemType.VARIABLE, child1.getItemType());
 		Item child2 = children[1];
 		assertNotNull(child2);
-		
+
 		assertEquals("method2", child2.getName());
 		assertEquals(ItemType.METHOD, child2.getItemType());
 	}
@@ -1149,9 +1132,9 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.TASKS, taskSetupItem.getItemType());
 
 	}
-	
+
 	@Test
-	public void assign_map() throws Exception{
+	public void assign_map() throws Exception {
 		// @formatter:off
 		String code = 
 		"ext {                                                                    \n"+
@@ -1184,9 +1167,9 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.ASSIGNMENT, libraryItem.getItemType());
 		assertEquals("library", libraryItem.getName());
 	}
-	
+
 	@Test
-	public void assign_map_with_map_inside() throws Exception{
+	public void assign_map_with_map_inside() throws Exception {
 		// @formatter:off
 		String code = 
 		"ext {                                                                    \n"+
@@ -1211,10 +1194,10 @@ public class GradleModelBuilderTest {
 		/* test */
 		Item[] items = model.getRoot().getChildren();
 
-		/* level 0*/
+		/* level 0 */
 		assertEquals(1, items.length);
-		
-		/* level 1*/
+
+		/* level 1 */
 		Item extItem = items[0];
 		assertEquals(ItemType.CLOSURE, extItem.getItemType());
 		assertTrue(extItem.hasChildren());
@@ -1223,8 +1206,8 @@ public class GradleModelBuilderTest {
 		Item libraryItem = children[0];
 		assertEquals(ItemType.ASSIGNMENT, libraryItem.getItemType());
 		assertEquals("library", libraryItem.getName());
-		
-		/* level 2*/
+
+		/* level 2 */
 		assertTrue(libraryItem.hasChildren());
 		Item[] children2 = libraryItem.getChildren();
 		assertEquals(1, children2.length);
@@ -1232,7 +1215,7 @@ public class GradleModelBuilderTest {
 		assertEquals(ItemType.ASSIGNMENT, entriesItem.getItemType());
 		assertEquals("entries", entriesItem.getName());
 	}
-	
+
 	@Test
 	public void apply_plugin_java() throws Exception {
 		/* prepare */

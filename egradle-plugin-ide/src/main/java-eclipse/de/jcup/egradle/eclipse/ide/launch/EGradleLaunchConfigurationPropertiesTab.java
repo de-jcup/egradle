@@ -67,8 +67,8 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	protected String[] propertyTableColumnHeaders = { "Key", "Value", };
 	private static final String NAME_LABEL = "Name";
 	private static final String VALUE_LABEL = "Value";
-	protected static final String P_VARIABLE = "variable"; 
-	protected static final String P_VALUE = "value"; 
+	protected static final String P_VARIABLE = "variable";
+	protected static final String P_VALUE = "value";
 	protected Button propertyAddButton;
 	protected Button propertyEditButton;
 	protected Button propertyRemoveButton;
@@ -77,11 +77,12 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	private String imagePath;
 	private String tabId;
 
-	public EGradleLaunchConfigurationPropertiesTab(String title, String tabId, String imagePath,String launchConfigurationPropertyMapAttributeName) {
+	public EGradleLaunchConfigurationPropertiesTab(String title, String tabId, String imagePath,
+			String launchConfigurationPropertyMapAttributeName) {
 		this.title = title;
-		this.imagePath=imagePath;
+		this.imagePath = imagePath;
 		this.launchConfigurationPropertyMapAttributeName = launchConfigurationPropertyMapAttributeName;
-		this.tabId=tabId;
+		this.tabId = tabId;
 	}
 
 	/**
@@ -95,7 +96,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 			try {
 				m = config.getAttribute(launchConfigurationPropertyMapAttributeName, (Map<String, String>) null);
 			} catch (CoreException e) {
-				IDEUtil.logError("Error reading configuration", e); 
+				IDEUtil.logError("Error reading configuration", e);
 				return elements;
 			}
 			if (m != null && !m.isEmpty()) {
@@ -325,8 +326,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 		for (int i = 0; i < items.length; i++) {
 			PropertyVariable existingVariable = (PropertyVariable) items[i].getData();
 			if (existingVariable.getName().equals(name)) {
-				boolean overWrite = MessageDialog.openQuestion(getShell(),
-						"Overwrite variable?",
+				boolean overWrite = MessageDialog.openQuestion(getShell(), "Overwrite variable?",
 						MessageFormat.format("A variable named {0} already exists. Overwrite?", new Object[] { name })); //
 				if (!overWrite) {
 					return false;
@@ -340,7 +340,6 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 		return true;
 	}
 
-
 	private void handlePropertiesEditButtonSelected() {
 		IStructuredSelection sel = (IStructuredSelection) propertiesTable.getSelection();
 		PropertyVariable var = (PropertyVariable) sel.getFirstElement();
@@ -349,10 +348,9 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 		}
 		String originalName = var.getName();
 		String value = var.getValue();
-		MultipleInputDialog dialog = new MultipleInputDialog(getShell(),
-				"Edit Property Variable");
+		MultipleInputDialog dialog = new MultipleInputDialog(getShell(), "Edit Property Variable");
 		dialog.addTextField(NAME_LABEL, originalName, false);
-		if (value != null && value.indexOf(System.getProperty("line.separator")) > -1) { 
+		if (value != null && value.indexOf(System.getProperty("line.separator")) > -1) {
 			dialog.addMultilinedVariablesField(VALUE_LABEL, value, true);
 		} else {
 			dialog.addVariablesField(VALUE_LABEL, value, true);
@@ -401,13 +399,13 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 		// Convert the table's items into a Map so that this can be saved in the
 		// configuration's attributes.
 		TableItem[] items = propertiesTable.getTable().getItems();
-		Map<String,String> map = new HashMap<>(items.length);
+		Map<String, String> map = new HashMap<>(items.length);
 		for (int i = 0; i < items.length; i++) {
 			PropertyVariable var = (PropertyVariable) items[i].getData();
 			map.put(var.getName(), var.getValue());
 		}
 		if (map.size() == 0) {
-			configuration.setAttribute(launchConfigurationPropertyMapAttributeName, (Map<String,String>) null);
+			configuration.setAttribute(launchConfigurationPropertyMapAttributeName, (Map<String, String>) null);
 		} else {
 			configuration.setAttribute(launchConfigurationPropertyMapAttributeName, map);
 		}
@@ -419,7 +417,7 @@ public class EGradleLaunchConfigurationPropertiesTab extends AbstractLaunchConfi
 	}
 
 	public String getId() {
-		return "de.jcup.egradle.eclipse.ide.launchtab.properties."+tabId; 
+		return "de.jcup.egradle.eclipse.ide.launchtab.properties." + tabId;
 	}
 
 	public Image getImage() {

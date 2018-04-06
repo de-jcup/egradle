@@ -45,7 +45,7 @@ public class GradleOutputValidator {
 	}
 
 	void nextLine(String line) {
-		/* do NOT reorder!*/
+		/* do NOT reorder! */
 		inspectLine_1_whereFound(line);
 		inspectLine_2_whatWentWrongFound(line);
 		inspectLine_3_scriptPathAndLineInformation(line);

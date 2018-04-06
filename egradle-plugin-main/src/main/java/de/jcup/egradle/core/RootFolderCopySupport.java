@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +21,10 @@ import java.io.IOException;
 public interface RootFolderCopySupport {
 
 	/**
-	 * Copies defined folder with defined version to given 
-	 * @param rootFolderProvider provides root folder where source data exists
+	 * Copies defined folder with defined version to given
+	 * 
+	 * @param rootFolderProvider
+	 *            provides root folder where source data exists
 	 * @return <code>true</code> when copying was possible
 	 * @throws IOException
 	 */

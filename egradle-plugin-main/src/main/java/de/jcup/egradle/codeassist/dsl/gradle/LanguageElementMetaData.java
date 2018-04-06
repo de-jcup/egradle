@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle;
+package de.jcup.egradle.codeassist.dsl.gradle;
 
 public interface LanguageElementMetaData {
 

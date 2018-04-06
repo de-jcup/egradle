@@ -13,16 +13,16 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 public enum Modifier {
-	
+
 	DEFAULT,
-	
+
 	PRIVATE,
-	
+
 	PROTECTED,
-	
+
 	PUBLIC,
-	
+
 }

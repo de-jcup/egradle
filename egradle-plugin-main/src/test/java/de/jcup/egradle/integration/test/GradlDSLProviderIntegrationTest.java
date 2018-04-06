@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration.test;
+package de.jcup.egradle.integration.test;
 
 import static de.jcup.egradle.integration.TypeAssert.*;
 
@@ -32,10 +32,10 @@ public class GradlDSLProviderIntegrationTest {
 	private GradleDSLTypeProvider dslProvider;
 
 	@Before
-	public void before(){
+	public void before() {
 		dslProvider = components.getGradleDslProvider();
 	}
-	
+
 	@Test
 	public void copytask__is_implementing_org_gradle_api_task() {
 		Type copy = dslProvider.getType("org.gradle.api.tasks.Copy");
@@ -44,7 +44,7 @@ public class GradlDSLProviderIntegrationTest {
 			hasInterface("org.gradle.api.Task"); 
 		/* @formatter:on*/
 	}
-	
+
 	@Test
 	public void org_gradle_project__is_interface__and__extends_PluginAware_and_Extension_Aware() {
 		Type project = dslProvider.getType("org.gradle.api.Project");

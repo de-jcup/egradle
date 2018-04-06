@@ -67,7 +67,7 @@ public class GradleExecutor {
 			processExecutionResult.setException(e);
 		}
 		CancelStateProvider cancelStateProvider = context.getCancelStateProvider();
-		if (cancelStateProvider.isCanceled()){
+		if (cancelStateProvider.isCanceled()) {
 			processExecutionResult.setCanceledByuser(true);
 		}
 		return processExecutionResult;
@@ -78,7 +78,7 @@ public class GradleExecutor {
 		int pos = 0;
 		GradleCommand[] commands = context.getCommands();
 		int arraySize = commands.length + 1;
-		/* expand arraysize for command arguments too*/
+		/* expand arraysize for command arguments too */
 		for (GradleCommand c : commands) {
 			arraySize += c.getCommandArguments().size();
 		}
@@ -130,11 +130,11 @@ public class GradleExecutor {
 			GradleCommand gradleCommand = commands[i];
 			commandStrings[pos++] = gradleCommand.getCommand();
 			List<String> commandArguments = gradleCommand.getCommandArguments();
-			if (commandArguments.size()>1){
+			if (commandArguments.size() > 1) {
 				commandStrings[pos++] = commandArguments.get(0);
 				commandStrings[pos++] = commandArguments.get(1);
 			}
-			
+
 		}
 		return commandStrings;
 	}

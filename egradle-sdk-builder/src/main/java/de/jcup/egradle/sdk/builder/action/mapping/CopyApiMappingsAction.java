@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.mapping;
+package de.jcup.egradle.sdk.builder.action.mapping;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +25,7 @@ import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 /**
  * Copies API mappings from gradle source folders to res/main
+ * 
  * @author Albert Tregnaghi
  *
  */

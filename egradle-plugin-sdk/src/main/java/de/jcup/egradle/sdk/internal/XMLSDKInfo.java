@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import java.text.DateFormat;
 import java.text.ParseException;

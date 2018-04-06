@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import java.util.ArrayList;
 import java.util.Collections;

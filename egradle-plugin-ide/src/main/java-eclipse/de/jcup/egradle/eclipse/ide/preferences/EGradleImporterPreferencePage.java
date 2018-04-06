@@ -49,8 +49,8 @@ public class EGradleImporterPreferencePage extends FieldEditorPreferencePage imp
 		groupLayoutData.horizontalSpan = 3;
 
 		executeAssembleTask = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(),
-				"Execute assemble task", getFieldEditorParent());
+				EGradleIdePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(), "Execute assemble task",
+				getFieldEditorParent());
 		String executeAssembleTaskInfo = "(main build folders and generated resources will exist after import)";
 
 		addField(executeAssembleTask);

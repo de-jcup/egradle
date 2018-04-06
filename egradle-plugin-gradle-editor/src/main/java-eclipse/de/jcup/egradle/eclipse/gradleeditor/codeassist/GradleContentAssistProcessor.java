@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.codeassist;
+package de.jcup.egradle.eclipse.gradleeditor.codeassist;
 
 import static de.jcup.egradle.eclipse.gradleeditor.EditorUtil.*;
 
@@ -94,7 +94,6 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 
 	private GradleLanguageElementEstimater estimator;
 
-
 	private HTMLDescriptionBuilder descriptionBuilder;
 
 	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
@@ -109,8 +108,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 		this.proposalFactories = new ArrayList<>();
 		this.cachedProposals = new TreeSet<>();
 		this.completionListener = new CacheValidListener();
-		
-		this.descriptionBuilder=new HTMLDescriptionBuilder();
+
+		this.descriptionBuilder = new HTMLDescriptionBuilder();
 		addFactories();
 	}
 
@@ -137,7 +136,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 		errorMessage = null;
 
 		IDocument document = viewer.getDocument();
-		if (document==null){
+		if (document == null) {
 			return NO_COMPLETION_PROPOSALS;
 		}
 		ProposalFactoryContentProvider contentProvider = null;
@@ -145,7 +144,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			GradleFileType fileType = adaptable.getAdapter(GradleFileType.class);
 			TextProvider textProvider = new DocumentTextProvider(document);
 			ModelProvider modelProvider = GradleContentAssistProcessor.this;
-			contentProvider = new StaticOffsetProposalFactoryContentProvider(fileType, modelProvider, textProvider, codeCutter, offset);
+			contentProvider = new StaticOffsetProposalFactoryContentProvider(fileType, modelProvider, textProvider,
+					codeCutter, offset);
 
 		} catch (ProposalFactoryContentProviderException e) {
 			return NO_COMPLETION_PROPOSALS;
@@ -161,7 +161,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			cachedProposals.clear();
 			boolean filterGetterAndSetter = getPreferences().isCodeAssistNoProposalsForGetterOrSetter();
 			for (ProposalFactory proposalFactory : proposalFactories) {
-				if (proposalFactory instanceof FilterableProposalFactory){
+				if (proposalFactory instanceof FilterableProposalFactory) {
 					FilterableProposalFactory fpropFactory = (FilterableProposalFactory) proposalFactory;
 					fpropFactory.setFilterGetterAndSetter(filterGetterAndSetter);
 				}
@@ -191,9 +191,9 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 
 	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,
 			ProposalFactoryContentProvider contentProvider) {
-		
+
 		GradleEditor editor = adaptable.getAdapter(GradleEditor.class);
-		
+
 		String bgColor = null;
 		String fgColor = null;
 		if (editor != null) {
@@ -201,7 +201,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 			fgColor = editor.getForeGroundColorAsWeb();
 		}
 		String commentColorWeb = getPreferences().getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
-		
+
 		List<ICompletionProposal> list = new ArrayList<>();
 		for (Proposal p : allProposals) {
 			Image image = null;
@@ -216,7 +216,8 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				if (mp.isMethod()) {
 					image = EclipseUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
 				} else if (mp.isProperty()) {
-					image = EclipseUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", EditorActivator.PLUGIN_ID);
+					image = EclipseUtil.getImage("/icons/codecompletion/hierarchicalLayout.png",
+							EditorActivator.PLUGIN_ID);
 				}
 			} else if (p instanceof TemplateProposal) {
 				image = EclipseUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
@@ -237,14 +238,15 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 				ModelProposal mp = (ModelProposal) p;
 				LanguageElement element = mp.getElement();
 				if (element != null) {
-					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb, element,mp, descriptionBuilder);
+					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb,
+							element, mp, descriptionBuilder);
 				}
-			}else if (p instanceof TemplateProposal){
-				/* do nothing - description currently not supported*/
+			} else if (p instanceof TemplateProposal) {
+				/* do nothing - description currently not supported */
 			}
 			/* create eclipse completion proposal */
-			GradleCompletionProposal proposal = new GradleCompletionProposal(p,cursorOffset,
-					replacementLength, image, contextInformation, additionalProposalInfo, lazyBuilder);
+			GradleCompletionProposal proposal = new GradleCompletionProposal(p, cursorOffset, replacementLength, image,
+					contextInformation, additionalProposalInfo, lazyBuilder);
 			list.add(proposal);
 
 		}
@@ -341,7 +343,7 @@ public class GradleContentAssistProcessor implements IContentAssistProcessor, Mo
 	}
 
 	private void debugCacheState(String message) {
-		EditorUtil.INSTANCE.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing="
-				+ useCacheBecauseCodeAssistSessionOngoing);
+		EditorUtil.INSTANCE.logInfo(getClass().getSimpleName() + ":" + message
+				+ ", useCacheBecauseCodeAssistSessionOngoing=" + useCacheBecauseCodeAssistSessionOngoing);
 	}
 }

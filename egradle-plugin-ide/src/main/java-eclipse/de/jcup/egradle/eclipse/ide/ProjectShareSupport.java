@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +26,11 @@ import org.eclipse.team.core.RepositoryProvider;
 import org.eclipse.team.core.TeamException;
 
 public class ProjectShareSupport {
-	
 
 	public ProjectShareData resolveProjectShareDataForProjects(List<IProject> projects) {
 		ProjectShareData data = new ProjectShareData();
-		
-		for (IProject project: projects){
+
+		for (IProject project : projects) {
 			RepositoryProvider provider = RepositoryProvider.getProvider(project);
 			if (provider == null) {
 				continue;
@@ -44,7 +43,8 @@ public class ProjectShareSupport {
 	/**
 	 * Will try to reconnect team provicers - but only for projects not being
 	 * shared already!
-	 * @param monitor 
+	 * 
+	 * @param monitor
 	 * 
 	 * @param data
 	 * @param projectsList
@@ -71,18 +71,18 @@ public class ProjectShareSupport {
 			}
 			try {
 				RepositoryProvider.map(project, providerId);
-				progressMessage(monitor, "Reconnected team provider for project: "+projectName);
+				progressMessage(monitor, "Reconnected team provider for project: " + projectName);
 			} catch (TeamException e) {
-				IDEUtil.logError("Was not able to reconnect team provider on project:"+projectName, e);
+				IDEUtil.logError("Was not able to reconnect team provider on project:" + projectName, e);
 			}
 		}
 	}
-	
+
 	private void progressMessage(IProgressMonitor monitor, String message) {
-		if (monitor == null){
+		if (monitor == null) {
 			return;
 		}
-		if (message==null){
+		if (message == null) {
 			return;
 		}
 		monitor.subTask(message);
@@ -95,7 +95,7 @@ public class ProjectShareSupport {
 			if (provider == null) {
 				return;
 			}
-			if (project==null){
+			if (project == null) {
 				return;
 			}
 			IPath fullPath = project.getFullPath();

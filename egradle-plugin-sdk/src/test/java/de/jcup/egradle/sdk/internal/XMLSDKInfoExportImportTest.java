@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import static org.junit.Assert.*;
 
@@ -32,8 +32,8 @@ public class XMLSDKInfoExportImportTest {
 	private XMLSDKInfoImporter importer;
 
 	@Before
-	public void before(){
-		exporter= new XMLSDKInfoExporter();
+	public void before() {
+		exporter = new XMLSDKInfoExporter();
 		importer = new XMLSDKInfoImporter();
 	}
 
@@ -43,32 +43,32 @@ public class XMLSDKInfoExportImportTest {
 		Date creationDate = new Date(1000);
 		Date installDate = new Date(2000);
 		String gradleVersion = "a.b";
-		String sdkVersion="x.y.z";
-		
+		String sdkVersion = "x.y.z";
+
 		XMLSDKInfo exportedInfo = new XMLSDKInfo();
 		exportedInfo.setCreationDate(creationDate);
 		exportedInfo.setInstallationDate(installDate);
 		exportedInfo.setGradleVersion(gradleVersion);
 		exportedInfo.setSdkVersion(sdkVersion);
-		
+
 		File testFile = File.createTempFile(getClass().getSimpleName(), "importExport.xml");
 
 		XMLSDKInfo importedInfo = null;
 
 		/* execute */
-		try(FileOutputStream stream = new FileOutputStream(testFile)){
+		try (FileOutputStream stream = new FileOutputStream(testFile)) {
 			exporter.exportSDKInfo(exportedInfo, stream);
 		}
-		try(FileInputStream stream = new FileInputStream(testFile)){
+		try (FileInputStream stream = new FileInputStream(testFile)) {
 			importedInfo = importer.importSDKInfo(stream);
 		}
-		
+
 		/* test */
 		assertEquals(creationDate, importedInfo.getCreationDate());
 		assertEquals(installDate, importedInfo.getInstallationDate());
 		assertEquals(gradleVersion, importedInfo.getGradleVersion());
 		assertEquals(sdkVersion, importedInfo.getSdkVersion());
-		
+
 	}
 
 }

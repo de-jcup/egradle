@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,20 +23,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "property")
-public class XMLProperty implements ModifiableProperty{
-	
+public class XMLProperty implements ModifiableProperty {
+
 	@XmlAttribute(name = "name")
 	String name;
-	
+
 	@XmlAttribute(name = "type")
 	private String typeAsString;
-	
+
 	@XmlElement(name = "description")
 	private String description;
 
 	private Type type;
 
-	@XmlAttribute(name = "documented", required=false)
+	@XmlAttribute(name = "documented", required = false)
 	private Boolean partOfGradleDSLDocumentation = null;
 
 	private Type parent;
@@ -50,26 +50,26 @@ public class XMLProperty implements ModifiableProperty{
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@Override
 	public void setDescription(String description) {
-		this.description=description;
+		this.description = description;
 	}
 
-	public String getTypeAsString(){
+	public String getTypeAsString() {
 		return typeAsString;
 	}
-	
+
 	@Override
 	public Type getType() {
 		return type;
 	}
-	
+
 	@Override
 	public void setType(Type returnType) {
 		this.type = returnType;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "XMLProperty [name=" + name + ", type=" + typeAsString + "]";
@@ -79,39 +79,39 @@ public class XMLProperty implements ModifiableProperty{
 	public Type getParent() {
 		return parent;
 	}
-	
+
 	@Override
 	public void setParent(Type parent) {
 		this.parent = parent;
 	}
-	
+
 	@Override
 	public boolean isDocumented() {
 		/* workaround for JAXM preventing to: atribute="false" */
-		return partOfGradleDSLDocumentation!=null && partOfGradleDSLDocumentation.booleanValue();
+		return partOfGradleDSLDocumentation != null && partOfGradleDSLDocumentation.booleanValue();
 	}
-	
+
 	public void setDocumented(boolean partOfGradleDSLDocumentation) {
-		if (!partOfGradleDSLDocumentation){
+		if (!partOfGradleDSLDocumentation) {
 			this.partOfGradleDSLDocumentation = null;
-		}else{
+		} else {
 			this.partOfGradleDSLDocumentation = Boolean.TRUE;
 		}
 	}
 
 	@Override
 	public int compareTo(Property o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
 		String otherName = o.getName();
-		if (otherName==null){
+		if (otherName == null) {
 			return 1;
 		}
-		if (name==null){
+		if (name == null) {
 			return -1;
 		}
-		int comparedName= name.compareTo(otherName);
+		int comparedName = name.compareTo(otherName);
 		return comparedName;
 	}
 
@@ -146,6 +146,4 @@ public class XMLProperty implements ModifiableProperty{
 		return true;
 	}
 
-	
-	
 }

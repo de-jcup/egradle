@@ -28,7 +28,6 @@ public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage
 
 	private BooleanFieldEditor automaticalDeriveBuildFolders;
 
-
 	public EGradleFileHandlingPreferencePage() {
 		super(GRID);
 		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
@@ -48,22 +47,20 @@ public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
 
-		automaticalDeriveBuildFolders=		new BooleanFieldEditor(
-					EGradleIdePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(),
-					"Automatically derive build folders",
-					getFieldEditorParent());
+		automaticalDeriveBuildFolders = new BooleanFieldEditor(
+				EGradleIdePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(),
+				"Automatically derive build folders", getFieldEditorParent());
 		String info = "(Importer and 'refresh eclipse' action will automatically derive build folders)";
-		
+
 		addField(automaticalDeriveBuildFolders);
 		SWTFactory.createLabel(getFieldEditorParent(), info, 2);
 	}
 
 	public boolean performOk() {
-		boolean done =  super.performOk();
+		boolean done = super.performOk();
 		return done;
 	}
-	
-	
+
 	public void init(IWorkbench workbench) {
 
 	}

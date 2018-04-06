@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.template;
+package de.jcup.egradle.template;
 
 public interface Feature {
 

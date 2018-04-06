@@ -78,7 +78,7 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 					}
 				}
 			} catch (JavaModelException e) {
-				JunitUtil.logError("Was not able to get full class name",e);
+				JunitUtil.logError("Was not able to get full class name", e);
 				return;
 			}
 		} else if (javaElement instanceof IType) {
@@ -86,8 +86,8 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName = type.getFullyQualifiedName();
 		}
 		/*
-		 * Fallback when having not a java type with correct full classname
-		 * set. Can happen when calls are done from a virtual root project path
+		 * Fallback when having not a java type with correct full classname set.
+		 * Can happen when calls are done from a virtual root project path
 		 */
 		if (fullClassName.indexOf('.') == -1) {
 			/* not a real classpath... */
@@ -102,10 +102,10 @@ public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 			fullClassName += "." + methodName;
 			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
 		}
-		wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
+		wc.setAttribute(PROPERTY_TASKS,
+				EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
 
 	}
-
 
 	@Override
 	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,

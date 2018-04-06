@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import static org.junit.Assert.*;
 
@@ -23,19 +23,19 @@ import java.util.Map;
 import org.junit.Test;
 
 public class SimpleMapStringTransformerTest {
-	
+
 	@Test
 	public void transform_rootproject_dir__is_transformed() {
-		/* prepare*/
+		/* prepare */
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(GradleStringTransformer.ROOTPROJECT_PROJECTDIR, "iAmRoot");
-		
+
 		/* execute */
 		SimpleMapStringTransformer transformerToTest = new SimpleMapStringTransformer(map);
 		String result = transformerToTest.transform("${rootProject.projectDir}/libraries.gradle");
-		
+
 		/* test */
-		assertEquals("iAmRoot/libraries.gradle",result);
+		assertEquals("iAmRoot/libraries.gradle", result);
 	}
 
 }

@@ -38,11 +38,12 @@ public class DirectoryCopySupport {
 	 *            - when <code>true</code> existing files will be replaced by
 	 *            new ones (but additional file will NOT be deleted!), if
 	 *            <code>false</code> the origin file will be kept
-	 * @param fileNamesToIgnore names for files and folders which will not be copied
+	 * @param fileNamesToIgnore
+	 *            names for files and folders which will not be copied
 	 * @throws IOException
 	 */
-	public void copyDirectories(File sourceFolder, File destinationFolder, boolean overwriteExistingFiles, String ...fileNamesToIgnore)
-			throws IOException {
+	public void copyDirectories(File sourceFolder, File destinationFolder, boolean overwriteExistingFiles,
+			String... fileNamesToIgnore) throws IOException {
 		copyDirectories(sourceFolder, destinationFolder, null, overwriteExistingFiles, fileNamesToIgnore);
 	}
 
@@ -58,11 +59,13 @@ public class DirectoryCopySupport {
 	 *            - when <code>true</code> existing files will be replaced by
 	 *            new ones (but additional file will NOT be deleted!), if
 	 *            <code>false</code> the origin file will be kept
-	 * @param fileNamesToIgnore names for files and folders which will not be copied
+	 * @param fileNamesToIgnore
+	 *            names for files and folders which will not be copied
 	 * @throws IOException
 	 */
 	public void copyDirectories(File sourceFolder, File destinationFolder,
-			Transformer<String> targetFileNameTransformer, boolean overwriteExistingFiles, String ...fileNamesToIgnore) throws IOException {
+			Transformer<String> targetFileNameTransformer, boolean overwriteExistingFiles, String... fileNamesToIgnore)
+			throws IOException {
 		if (sourceFolder == null) {
 			throw new IllegalArgumentException("src may not be null!");
 		}
@@ -73,20 +76,21 @@ public class DirectoryCopySupport {
 			throw new IllegalArgumentException("dest may not be null!");
 		}
 		Set<String> fileNamesToIgnoreSet = new HashSet<>();
-		if (fileNamesToIgnore!=null){
-			for (String fileNameToIgnore: fileNamesToIgnore){
-				if (fileNamesToIgnore==null){
+		if (fileNamesToIgnore != null) {
+			for (String fileNameToIgnore : fileNamesToIgnore) {
+				if (fileNamesToIgnore == null) {
 					continue;
 				}
 				fileNamesToIgnoreSet.add(fileNameToIgnore);
 			}
 		}
-		copyRecursive(sourceFolder, destinationFolder, targetFileNameTransformer, overwriteExistingFiles,fileNamesToIgnoreSet);
+		copyRecursive(sourceFolder, destinationFolder, targetFileNameTransformer, overwriteExistingFiles,
+				fileNamesToIgnoreSet);
 	}
 
 	private void copyRecursive(File src, File dest, Transformer<String> targetFileNameTransformer,
 			boolean overwriteExistingFiles, Set<String> fileNamesToIgnoreSet) throws IOException {
-		if (fileNamesToIgnoreSet.contains(src.getName())){
+		if (fileNamesToIgnoreSet.contains(src.getName())) {
 			return;
 		}
 		if (src.isDirectory()) {
@@ -101,12 +105,13 @@ public class DirectoryCopySupport {
 				if (targetFileNameTransformer != null) {
 					String transformed = targetFileNameTransformer.transform(name);
 					if (transformed != null) {
-						name=transformed;
+						name = transformed;
 					}
 				}
 				File destFile = new File(dest, name);
 
-				copyRecursive(srcFile, destFile, targetFileNameTransformer, overwriteExistingFiles,fileNamesToIgnoreSet);
+				copyRecursive(srcFile, destFile, targetFileNameTransformer, overwriteExistingFiles,
+						fileNamesToIgnoreSet);
 			}
 		} else {
 			copyFile(src, dest, overwriteExistingFiles);

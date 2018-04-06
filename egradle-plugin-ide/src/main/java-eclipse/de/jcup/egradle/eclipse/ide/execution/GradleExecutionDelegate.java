@@ -60,18 +60,21 @@ public class GradleExecutionDelegate {
 
 	/**
 	 * Creates a new gradle execution delegate
+	 * 
 	 * @param outputHandler
 	 * @param processExecutor
 	 * @param additionalContextPreparator
-	 * @param rootProject if null rootProject will be resolved by preferences
+	 * @param rootProject
+	 *            if null rootProject will be resolved by preferences
 	 * @throws GradleExecutionException
 	 */
 	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject) throws GradleExecutionException {
+			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
+			throws GradleExecutionException {
 		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
 		notNull(processExecutor, "'processExecutor' may not be null");
 
-		if (rootProject==null){
+		if (rootProject == null) {
 			rootProject = IDEUtil.getRootProject(false);
 		}
 		if (rootProject == null) {
@@ -97,19 +100,19 @@ public class GradleExecutionDelegate {
 		/* Call gradle settings */
 		String gradleCommand = preferences.getGradleCallCommand();
 		String gradleInstallPath = preferences.getGradleBinInstallFolder();
-		
+
 		String shellId = preferences.getGradleShellId();
-		
+
 		return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
 	}
 
-	protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome, String gradleCommand,
-			String gradleInstallPath, String shellId) throws GradleExecutionException {
+	protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome,
+			String gradleCommand, String gradleInstallPath, String shellId) throws GradleExecutionException {
 		/* build configuration for gradle run */
 		MutableGradleConfiguration config = new MutableGradleConfiguration();
 		/* build context */
 		GradleContext context = new GradleContext(rootProject, config);
-		
+
 		if (!StringUtils.isEmpty(globalJavaHome)) {
 			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME
 																	// still can
@@ -162,8 +165,7 @@ public class GradleExecutionDelegate {
 				return;
 			}
 			outputHandler.output("\n" + executionStartTime + " " + progressDescription);
-			outputHandler
-					.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
+			outputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
 			if (monitor.isCanceled()) {
 				outputHandler.output("[CANCELED]");
@@ -172,7 +174,7 @@ public class GradleExecutionDelegate {
 			}
 			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
 			context.register(cancelStateProvider);
-			
+
 			processExecutionResult = executor.execute(context);
 			if (processExecutionResult.isOkay()) {
 				outputHandler.output("[OK]");
@@ -189,13 +191,13 @@ public class GradleExecutionDelegate {
 	}
 
 	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
-		if (outputHandler instanceof RememberLastLinesOutputHandler){
+		if (outputHandler instanceof RememberLastLinesOutputHandler) {
 			IDEUtil.removeAllValidationErrorsOfConsoleOutput();
 		}
 	}
 
 	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
-		if (outputHandler instanceof RememberLastLinesOutputHandler){
+		if (outputHandler instanceof RememberLastLinesOutputHandler) {
 			RememberLastLinesOutputHandler validationOutputHandler = (RememberLastLinesOutputHandler) outputHandler;
 			List<String> list = validationOutputHandler.createOutputToValidate();
 			IDEUtil.showValidationErrorsOfConsoleOutput(list);

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
@@ -51,14 +51,13 @@ public abstract class AbstractGroovyBasedQuickOutline extends AbstractFilterable
 		 * select part in editor - grab focus not necessary, because this will
 		 * close quick outline dialog as well, so editor will get focus back
 		 */
-		editor.openSelectedTreeItemInEditor(selection, false,false);
+		editor.openSelectedTreeItemInEditor(selection, false, false);
 	}
-	
+
 	@Override
 	protected ITreeContentProvider createTreeContentProvider(IAdaptable adaptable) {
 		return adaptable.getAdapter(ITreeContentProvider.class);
 	}
-
 
 	@Override
 	protected Item getInitialSelectedItem() {
@@ -80,7 +79,7 @@ public abstract class AbstractGroovyBasedQuickOutline extends AbstractFilterable
 		return new DelegatingStyledCellLabelProvider(labelProvider);
 	}
 
-	protected abstract IStyledLabelProvider createdStyledLabelProvider() ;
+	protected abstract IStyledLabelProvider createdStyledLabelProvider();
 
 	@Override
 	protected AbstractTreeViewerFilter<Item> createFilter() {

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.ui;
+package de.jcup.egradle.eclipse.ide.ui;
 
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.graphics.Color;
@@ -43,11 +43,12 @@ public class RootProjectConfigUIDelegateTestMain {
 		shell.setSize(200, 200);
 		shell.open();
 
-		RootProjectConfigUIDelegate configComposite = new RootProjectConfigUIDelegate(new RootProjectValidationAdapter() {
-			@Override
-			public void addFieldEditor(FieldEditor field) {
-			}
-		}) {
+		RootProjectConfigUIDelegate configComposite = new RootProjectConfigUIDelegate(
+				new RootProjectValidationAdapter() {
+					@Override
+					public void addFieldEditor(FieldEditor field) {
+					}
+				}) {
 			@Override
 			protected Image getValidationButtonImage() {
 				return null;

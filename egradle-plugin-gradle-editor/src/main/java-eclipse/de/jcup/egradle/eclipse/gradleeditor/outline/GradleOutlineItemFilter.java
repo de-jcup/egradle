@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.outline;
+package de.jcup.egradle.eclipse.gradleeditor.outline;
 
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.ItemFilter;
@@ -24,14 +24,14 @@ class GradleOutlineItemFilter implements ItemFilter {
 	@Override
 	public boolean isFiltered(Item item) {
 		/*
-		 * we do not show item which are remaining as METHOD_CALL will not
-		 * be shown in outline
+		 * we do not show item which are remaining as METHOD_CALL will not be
+		 * shown in outline
 		 */
 		if (ItemType.METHOD_CALL == item.getItemType()) {
-			if (item.hasChildren()){
+			if (item.hasChildren()) {
 				return false;
 			}
-			/* no children... so only a normal call and be filtered*/
+			/* no children... so only a normal call and be filtered */
 			return true;
 		}
 		return false;

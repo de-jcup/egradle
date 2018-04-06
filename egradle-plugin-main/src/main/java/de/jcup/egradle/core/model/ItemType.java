@@ -13,96 +13,94 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 public enum ItemType {
 	UNKNOWN,
 
-	VARIABLE, 
-	
+	VARIABLE,
+
 	ENUM_CONSTANT,
 
-	/* nearly same as a variable but has no modifiers*/
-	ASSIGNMENT, 
-	
-	CLOSURE, 
-	
-	METHOD_CALL, 
+	/* nearly same as a variable but has no modifiers */
+	ASSIGNMENT,
+
+	CLOSURE,
+
+	METHOD_CALL,
 
 	/* gradle special for parts created */
-	TASKS, 
+	TASKS,
 
-	TASK, 
-	
+	TASK,
+
 	APPLY_SETUP,
 
 	APPLY_FROM,
-	
-	APPLY_PLUGIN, 
-	
-	REPOSITORIES, 
-	
-	ALL_PROJECTS, 
-	
-	SUB_PROJECTS, 
-	
+
+	APPLY_PLUGIN,
+
+	REPOSITORIES,
+
+	ALL_PROJECTS,
+
+	SUB_PROJECTS,
+
 	PROJECT,
-	
-	DEPENDENCIES, 
-	
-	DEPENDENCY, 
 
-	MAIN, 
-	
-	TEST, 
-	
-	CLEAN, 
-	
-	BUILDSCRIPT, 
+	DEPENDENCIES,
 
-	SOURCESETS, 
-	
-	CONFIGURATIONS, 
-	
-	REPOSITORY, 
-	
-	ECLIPSE, 
+	DEPENDENCY,
+
+	MAIN,
+
+	TEST,
+
+	CLEAN,
+
+	BUILDSCRIPT,
+
+	SOURCESETS,
+
+	CONFIGURATIONS,
+
+	REPOSITORY,
+
+	ECLIPSE,
 
 	ENUM,
-	
-	INTERFACE,
-	
-	CLASS, 
 
-	JAR, 
-	
-	WAR, 
-	
-	EAR, 
-	
+	INTERFACE,
+
+	CLASS,
+
+	JAR,
+
+	WAR,
+
+	EAR,
+
 	ZIP,
-	
+
 	CONFIGURE,
-	
-	PACKAGE, 
-	
-	IMPORT, 
-	
-	DO_FIRST, 
-	
-	DO_LAST, 
-	
+
+	PACKAGE,
+
+	IMPORT,
+
+	DO_FIRST,
+
+	DO_LAST,
+
 	AFTER_EVALUATE,
-	
+
 	/**
 	 * A method (defintion)
 	 */
-	METHOD, 
-	
-	CONSTRUCTOR, 
-	
-	PLUGINS, 
-	
-	
-	
+	METHOD,
+
+	CONSTRUCTOR,
+
+	PLUGINS,
+
 }

@@ -13,13 +13,14 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.model.Model;
 
 /**
  * Provides content necessary for proposal factories
+ * 
  * @author albert
  *
  */
@@ -31,7 +32,8 @@ public interface ProposalFactoryContentProvider {
 	public Model getModel();
 
 	/**
-	 * @return relevant editor source code at given cursor position or <code>null</code>
+	 * @return relevant editor source code at given cursor position or
+	 *         <code>null</code>
 	 */
 	public String getEditorSourceEnteredAtCursorPosition();
 

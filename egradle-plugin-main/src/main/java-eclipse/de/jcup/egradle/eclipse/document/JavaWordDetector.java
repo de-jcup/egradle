@@ -13,11 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
+
 import org.eclipse.jface.text.rules.IWordDetector;
 
-public class JavaWordDetector implements IWordDetector{
-	
+public class JavaWordDetector implements IWordDetector {
+
 	@Override
 	public boolean isWordStart(char c) {
 		return Character.isJavaIdentifierStart(c);

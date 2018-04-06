@@ -62,7 +62,7 @@ public class DetectNewRootProjectHandler extends AbstractHandler {
 			project = (IProject) element;
 		} else if (element instanceof IResource) {
 			project = ((IResource) element).getProject();
-		} else if (element instanceof IAdaptable){
+		} else if (element instanceof IAdaptable) {
 			IAdaptable adaptable = (IAdaptable) element;
 			project = adaptable.getAdapter(IProject.class);
 		}
@@ -74,7 +74,7 @@ public class DetectNewRootProjectHandler extends AbstractHandler {
 		try {
 			start = EclipseResourceHelper.DEFAULT.toFile(project);
 		} catch (CoreException e) {
-			IDEUtil.logError("Was not able to convert to file - project:"+project, e);
+			IDEUtil.logError("Was not able to convert to file - project:" + project, e);
 			EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project conversion problems");
 			return null;
 		}
@@ -94,7 +94,7 @@ public class DetectNewRootProjectHandler extends AbstractHandler {
 		try {
 			IDEUtil.setNewRootProjectFolder(newRootFolder);
 		} catch (CoreException e) {
-			IDEUtil.logError("Was not able to set new root project folder:"+newRootFolder, e);
+			IDEUtil.logError("Was not able to set new root project folder:" + newRootFolder, e);
 			EGradleMessageDialogSupport.INSTANCE.showError(e.getMessage());
 			return null;
 		}

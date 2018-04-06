@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -54,10 +54,11 @@ public class CodeCompletionRegistry {
 	}
 
 	/**
-	 * (Re-)Initialize registry and the code completion parts inside. Will inform all registry listeners about rebuild in correct ordered types
+	 * (Re-)Initialize registry and the code completion parts inside. Will
+	 * inform all registry listeners about rebuild in correct ordered types
 	 */
 	public void init() {
-		/* do not change ordering!*/
+		/* do not change ordering! */
 		fireRegistryEvent(RegistryEventType.DESTROY);
 		fireRegistryEvent(RegistryEventType.LOAD_PLUGINS);
 	}
@@ -78,18 +79,18 @@ public class CodeCompletionRegistry {
 
 	public interface RegistryEvent {
 		public CodeCompletionRegistry getRegistry();
-		
+
 		public ErrorHandler getErrorHandler();
-		
+
 		public RegistryEventType getType();
 	}
-	
-	public enum RegistryEventType{
+
+	public enum RegistryEventType {
 		/**
 		 * Destroys existing data
 		 */
 		DESTROY,
-		
+
 		/**
 		 * Load plugins and apply
 		 */
@@ -99,11 +100,11 @@ public class CodeCompletionRegistry {
 	private class RegistryEventImpl implements RegistryEvent {
 
 		private RegistryEventType type;
-		
-		private RegistryEventImpl(RegistryEventType type){
-			this.type=type;
+
+		private RegistryEventImpl(RegistryEventType type) {
+			this.type = type;
 		}
-		
+
 		@Override
 		public ErrorHandler getErrorHandler() {
 			return safeGetErrorHandler();

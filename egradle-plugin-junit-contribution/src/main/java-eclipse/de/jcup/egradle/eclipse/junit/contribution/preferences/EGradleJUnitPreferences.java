@@ -23,7 +23,6 @@ import de.jcup.egradle.eclipse.MainActivator;
 import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
 
 public class EGradleJUnitPreferences {
-	
 
 	public static EGradleJUnitPreferences JUNIT_PREFERENCES = new EGradleJUnitPreferences();
 	private IPreferenceStore store;
@@ -34,12 +33,12 @@ public class EGradleJUnitPreferences {
 
 	public String getStringPreference(EGradleJunitPreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
-		if (data==null){
-			data="";
+		if (data == null) {
+			data = "";
 		}
 		return data;
 	}
-	
+
 	/**
 	 * Returns default test task type configured in preferences
 	 * 

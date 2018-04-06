@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.MethodUtils;
@@ -26,7 +26,7 @@ class MethodEstimationStrategy extends AbstractEstimationStrategy {
 	EstimationData visitImpl(Type current, Item item) {
 		return findByMethods(current, item);
 	}
-	
+
 	private EstimationData findByMethods(Type currentType, Item item) {
 		if (currentType == null) {
 			return null;

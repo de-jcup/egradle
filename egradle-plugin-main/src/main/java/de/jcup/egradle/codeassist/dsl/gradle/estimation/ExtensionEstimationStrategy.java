@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import java.util.Map;
 
@@ -31,7 +31,7 @@ class ExtensionEstimationStrategy extends AbstractEstimationStrategy {
 		found.extensionName = item.getIdentifier();
 		return found;
 	}
-	
+
 	private EstimationData findByExtensions(Type currentType, Item item) {
 		if (currentType == null) {
 			return null;

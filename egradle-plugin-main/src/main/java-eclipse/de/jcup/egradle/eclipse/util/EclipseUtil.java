@@ -201,7 +201,6 @@ public class EclipseUtil {
 	public static void safeSyncExec(Runnable runnable) {
 		getSafeDisplay().asyncExec(runnable);
 	}
-	
 
 	public static void throwCoreException(String message) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, message));
@@ -306,9 +305,9 @@ public class EclipseUtil {
 	public static void logError(String error, Throwable t) {
 		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, error, t));
 	}
-	
+
 	public static void logWarning(String warning) {
-		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID,warning));
+		getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, warning));
 	}
 
 	private static ILog getLog() {

@@ -13,27 +13,24 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 class Template {
 
 	private String name;
 	private String content;
-	
-	
-	
+
 	Template(String name, String content) {
 		this.name = name;
 		this.content = content;
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}
-	
 
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.virtualroot;
+package de.jcup.egradle.core.virtualroot;
 
 import static de.jcup.egradle.core.Constants.*;
 
@@ -24,7 +24,9 @@ import de.jcup.egradle.core.domain.GradleRootProject;
 public class VirtualProjectCreator {
 
 	/**
-	 * Creates or update a virtual root project. If a former root project exists, it will be removed!
+	 * Creates or update a virtual root project. If a former root project
+	 * exists, it will be removed!
+	 * 
 	 * @param rootProject
 	 * @param partCreator
 	 * @throws VirtualRootProjectException
@@ -38,22 +40,23 @@ public class VirtualProjectCreator {
 		if (rootFolder == null) {
 			return;
 		}
-		if (!rootFolder.exists()){
+		if (!rootFolder.exists()) {
 			return;
 		}
-		
+
 		Object project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
-		if (project==null){
-			throw new VirtualRootProjectException("Was not able create or recreate '"+VIRTUAL_ROOTPROJECT_NAME+"'");
+		if (project == null) {
+			throw new VirtualRootProjectException("Was not able create or recreate '" + VIRTUAL_ROOTPROJECT_NAME + "'");
 		}
 		addLinksAndMissingFolders(project, partCreator, rootFolder, rootProject);
 
 	}
 
-	private void addLinksAndMissingFolders(Object targetParentFolder, VirtualProjectPartCreator v, File folderToScan, GradleRootProject rootProject) throws VirtualRootProjectException {
+	private void addLinksAndMissingFolders(Object targetParentFolder, VirtualProjectPartCreator v, File folderToScan,
+			GradleRootProject rootProject) throws VirtualRootProjectException {
 		File[] buildFiles = folderToScan.listFiles();
 		if (buildFiles == null) {
-			return ;
+			return;
 		}
 		v.setMaximumLinksToCreate(buildFiles.length);
 		for (File file : buildFiles) {
@@ -73,11 +76,11 @@ public class VirtualProjectCreator {
 				 * 
 				 * </pre>
 				 */
-				if (v.isLinkCreationNeeded(targetParentFolder, file)){
+				if (v.isLinkCreationNeeded(targetParentFolder, file)) {
 					v.createLink(targetParentFolder, file);
 				}
 			} else {
-				if (v.isLinkCreationNeeded(targetParentFolder, file)){
+				if (v.isLinkCreationNeeded(targetParentFolder, file)) {
 					v.createLink(targetParentFolder, file);
 				}
 			}

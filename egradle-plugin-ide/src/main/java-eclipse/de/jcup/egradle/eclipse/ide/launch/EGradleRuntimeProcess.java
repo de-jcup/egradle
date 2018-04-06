@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.launch;
+package de.jcup.egradle.eclipse.ide.launch;
 
 import java.util.Map;
 
@@ -26,7 +26,6 @@ import org.eclipse.debug.core.model.RuntimeProcess;
 
 public class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener {
 
-	
 	private EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
 		super(launch, process, name, attributes);
 	}
@@ -43,8 +42,9 @@ public class EGradleRuntimeProcess extends RuntimeProcess implements IStreamList
 	public static EGradleRuntimeProcess create(ILaunch launch, Process process, String name,
 			Map<String, String> attributes) {
 		// workaround, because attribute must be set before constructor call
-		// DEFINE EGRADLE AS PROCESS TYPE - so console line tracker is able to track
-				attributes.put(IProcess.ATTR_PROCESS_TYPE, "EGradleRuntimeProcess");
+		// DEFINE EGRADLE AS PROCESS TYPE - so console line tracker is able to
+		// track
+		attributes.put(IProcess.ATTR_PROCESS_TYPE, "EGradleRuntimeProcess");
 		return new EGradleRuntimeProcess(launch, process, name, attributes);
 	}
 

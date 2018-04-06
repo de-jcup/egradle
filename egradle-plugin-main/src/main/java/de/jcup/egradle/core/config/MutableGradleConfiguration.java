@@ -13,20 +13,20 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.config;
+package de.jcup.egradle.core.config;
 
 import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.core.util.FileSupport;
 
-public class MutableGradleConfiguration implements GradleConfiguration{
-	
+public class MutableGradleConfiguration implements GradleConfiguration {
+
 	private FileSupport fileSupport = FileSupport.DEFAULT;
-	
+
 	@Override
 	public String getGradleCommandFullPath() {
 		return fileSupport.createCorrectFilePath(gradleBinDirectory, gradleCommand);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MutableGradleConfiguration [shellCommand=" + shellCommand + ", gradleCommand=" + gradleCommand
@@ -93,7 +93,7 @@ public class MutableGradleConfiguration implements GradleConfiguration{
 	public EGradleShellType getShellType() {
 		return shellCommand;
 	}
-	
+
 	public void setShellCommand(EGradleShellType shell) {
 		this.shellCommand = shell;
 	}
@@ -104,28 +104,28 @@ public class MutableGradleConfiguration implements GradleConfiguration{
 
 	@Override
 	public String getGradleBinDirectory() {
-		if (gradleBinDirectory==null){
-			gradleBinDirectory="";
+		if (gradleBinDirectory == null) {
+			gradleBinDirectory = "";
 		}
 		return gradleBinDirectory;
 	}
-	
+
 	public void setGradleBinDirectory(String gradleInstallDirectory) {
 		this.gradleBinDirectory = gradleInstallDirectory;
 	}
 
 	public void setWorkingDirectory(String workingDirectory) {
-		this.workingDirectory=workingDirectory;
+		this.workingDirectory = workingDirectory;
 	}
-	
+
 	public String getWorkingDirectory() {
 		return workingDirectory;
 	}
-	
+
 	public void setJavaHome(String javaHome) {
 		this.javaHome = javaHome;
 	}
-	
+
 	@Override
 	public String getJavaHome() {
 		return javaHome;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.javadoc;
+package de.jcup.egradle.sdk.builder.action.javadoc;
 
 import static org.junit.Assert.*;
 
@@ -55,5 +55,4 @@ public class BeautifyJavaDocActionTest {
 		assertEquals(expected, actionToTest.removeWhitespacesAndStars(line));
 	}
 
-	
 }

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,18 +27,19 @@ public class XMLTasksImporter {
 
 	/**
 	 * Import set of tasks by given stream
-	 * @param stream - may not be <code>null</code>
+	 * 
+	 * @param stream
+	 *            - may not be <code>null</code>
 	 * @return task set
 	 * @throws IOException
 	 * 
 	 */
-	public Set<Task> importTasks(InputStream stream) throws IOException{
+	public Set<Task> importTasks(InputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLTasks.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLTasks loadedModel = (XMLTasks) unmarshaller
-					.unmarshal(stream);
+			XMLTasks loadedModel = (XMLTasks) unmarshaller.unmarshal(stream);
 			return loadedModel.getTasks();
 		} catch (JAXBException e) {
 			throw new IOException("Was not able to create unmarshaller", e);

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import de.jcup.egradle.codeassist.dsl.Property;
 import de.jcup.egradle.codeassist.dsl.Type;
@@ -25,7 +25,7 @@ class PropertyEstimationStrategy extends AbstractEstimationStrategy {
 	EstimationData visitImpl(Type current, Item item) {
 		return findByProperties(current, item);
 	}
-	
+
 	private EstimationData findByProperties(Type currentType, Item item) {
 		if (currentType == null) {
 			return null;

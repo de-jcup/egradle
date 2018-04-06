@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle;
+package de.jcup.egradle.codeassist.dsl.gradle;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,7 +42,7 @@ import de.jcup.egradle.codeassist.dsl.TypeProvider;
 import de.jcup.egradle.codeassist.dsl.TypeReference;
 import de.jcup.egradle.core.util.ErrorHandler;
 
-public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,CodeCompletionService {
+public class GradleDSLTypeProvider implements TypeProvider, RegistryListener, CodeCompletionService {
 
 	protected DSLFileLoader fileLoader;
 	protected Map<String, Type> nameToTypeMapping;
@@ -118,19 +118,21 @@ public class GradleDSLTypeProvider implements TypeProvider, RegistryListener,Cod
 		String longName = apiMapping.get(name);
 
 		if (longName != null) {
-			/* long name wellknown - so load with this one and register short name as well*/
-		
+			/*
+			 * long name wellknown - so load with this one and register short
+			 * name as well
+			 */
+
 			type = getType(longName);
-			if (type==null){
+			if (type == null) {
 				unresolveableNames.add(name);
 				return null;
 			}
-			/* found by long name - so register short name too:*/
+			/* found by long name - so register short name too: */
 			nameToTypeMapping.put(name, type);
 			return type;
 		}
-		
-		
+
 		try {
 			type = fileLoader.loadType(nameToUseForLoading);
 		} catch (IOException e) {

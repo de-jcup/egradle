@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder;
+package de.jcup.egradle.sdk.builder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,28 +38,28 @@ import de.jcup.egradle.sdk.builder.model.OriginXMLDSlTypeInfoImporter;
 import de.jcup.egradle.sdk.internal.XMLSDKInfo;
 
 public class SDKBuilderContext {
-	
+
 	public File PARENT_OF_RES = new File("egradle-other/src/main/res/");
-		
+
 	public Map<String, String> alternativeApiMapping = new TreeMap<>();
 	public File sdkInfoFile;
 	public XMLSDKInfo sdkInfo = new XMLSDKInfo();
-	
+
 	public File gradleEGradleDSLRootFolder;
 	public File gradleOriginPluginsFile;
 	public File gradleOriginMappingFile;
 	public File gradleProjectFolder;
 	public File gradleSubProjectDocsFolder;
-	
+
 	/**
-	 * Source directory where 
+	 * Source directory where
 	 */
 	public File sourceParentDirectory;
 	public File targetPathDirectory;
 	public Map<String, Type> tasks = new TreeMap<>();
 	public int methodAllCount;
 
-	public Map<String,File> originTypeNameToOriginFileMapping = new TreeMap<>();
+	public Map<String, File> originTypeNameToOriginFileMapping = new TreeMap<>();
 	public File alternativeAPiMappingFile;
 
 	public XMLTypeImporter typeImporter = new XMLTypeImporter();
@@ -71,14 +71,13 @@ public class SDKBuilderContext {
 
 	public OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
 
-	
 	public XMLPlugins xmlPlugins;
 	public XMLPlugins alternativeXMLPugins;
 	public FilesystemFileLoader beforeGenerationLoader;
 	public GradleDSLTypeProvider originGradleFilesProvider;
-	
-	
-	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
+
+	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion)
+			throws IOException {
 		if (!PARENT_OF_RES.exists()) {
 			/*
 			 * fall back - so sdk builder could be run from gradle root project
@@ -86,33 +85,33 @@ public class SDKBuilderContext {
 			 */
 			PARENT_OF_RES = new File("src/main/res/");
 		}
-		
+
 		beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
 		originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
 
-		
 		gradleProjectFolder = new File(pathToradleProjectFolder);
-		targetPathDirectory =createTargetFile(targetRootDirectory);
-		
-		if (! this.gradleProjectFolder.exists()){
-			throw new IllegalArgumentException("gradle project folder does not exist:"+gradleProjectFolder);
+		targetPathDirectory = createTargetFile(targetRootDirectory);
+
+		if (!this.gradleProjectFolder.exists()) {
+			throw new IllegalArgumentException("gradle project folder does not exist:" + gradleProjectFolder);
 		}
-		if (! this.gradleProjectFolder.isDirectory()){
-			throw new IllegalArgumentException("gradle project folder is not a directory ?!?!?:"+gradleProjectFolder);
+		if (!this.gradleProjectFolder.isDirectory()) {
+			throw new IllegalArgumentException("gradle project folder is not a directory ?!?!?:" + gradleProjectFolder);
 		}
-		gradleSubProjectDocsFolder= new File(gradleProjectFolder,"subprojects/docs");
-		
+		gradleSubProjectDocsFolder = new File(gradleProjectFolder, "subprojects/docs");
+
 		gradleEGradleDSLRootFolder = new File(gradleSubProjectDocsFolder, "/build/src-egradle/egradle-dsl");
 		gradleOriginPluginsFile = new File(gradleSubProjectDocsFolder, "/src/docs/dsl/plugins.xml");
-		gradleOriginMappingFile = new File(gradleSubProjectDocsFolder, "/build/generated-resources/main/api-mapping.txt");
+		gradleOriginMappingFile = new File(gradleSubProjectDocsFolder,
+				"/build/generated-resources/main/api-mapping.txt");
 
 		assertFileExists(gradleOriginPluginsFile);
 		assertFileExists(gradleOriginMappingFile);
 		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
-		
+
 		sdkInfo.setCreationDate(new Date());
 		sdkInfo.setGradleVersion(gradleVersion);
-		
+
 		sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
 		assertDirectoryAndExists(sourceParentDirectory);
 
@@ -123,34 +122,33 @@ public class SDKBuilderContext {
 					+ healthCheck.getCanonicalPath()
 					+ "\nEither your path or version is incorrect or you forgot to generate...");
 		}
-		
-		
+
 		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
-		
-		sdkInfoFile=new File(targetPathDirectory,SDKInfo.FILENAME);
-		alternativeAPiMappingFile=new File(targetPathDirectory, "alternative-api-mapping.txt");
-		
+
+		sdkInfoFile = new File(targetPathDirectory, SDKInfo.FILENAME);
+		alternativeAPiMappingFile = new File(targetPathDirectory, "alternative-api-mapping.txt");
+
 		beforeGenerationLoader.setDSLFolder(sourceParentDirectory);
-		
+
 	}
 
 	private List<String> warnings = new ArrayList<>();
-	
+
 	public String getInfo() {
 		StringBuilder sb = new StringBuilder();
-		
-		for (String warning: warnings){
-			sb.append("warn:"+warning);
+
+		for (String warning : warnings) {
+			sb.append("warn:" + warning);
 			sb.append("\n");
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 	private File createTargetFile(File targetRootDirectory) {
 		return new File(targetRootDirectory, "sdk/");
 	}
-	
+
 	private void assertDirectoryAndExists(File folder) throws IOException {
 		if (!folder.exists()) {
 			throw new FileNotFoundException(folder.getCanonicalPath() + " does not exist!");

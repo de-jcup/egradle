@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,25 +27,27 @@ import org.apache.commons.lang3.StringUtils;
 public class ApiMappingImporter {
 
 	/**
-	 * Imports mapping 
+	 * Imports mapping
+	 * 
 	 * @param stream
-	 * @return map never <code>null</code>. Map keys are shortnames, values are long names
-	 * @throws IOException 
+	 * @return map never <code>null</code>. Map keys are shortnames, values are
+	 *         long names
+	 * @throws IOException
 	 */
-	public Map<String,String> importMapping(InputStream stream) throws IOException{
-		Map<String,String> map = new TreeMap<>();
-		try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream))){
+	public Map<String, String> importMapping(InputStream stream) throws IOException {
+		Map<String, String> map = new TreeMap<>();
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
 			String line = "";
-			while ((line=reader.readLine())!=null){
+			while ((line = reader.readLine()) != null) {
 				/* file contains as following "shortName:longName;" */
 				String[] parts = StringUtils.split(line, ":;");
-				if (parts==null){
+				if (parts == null) {
 					continue;
 				}
-				if (parts.length<2){
+				if (parts.length < 2) {
 					continue;
 				}
-				map.put(parts[0],parts[1]);
+				map.put(parts[0], parts[1]);
 			}
 			return map;
 		}

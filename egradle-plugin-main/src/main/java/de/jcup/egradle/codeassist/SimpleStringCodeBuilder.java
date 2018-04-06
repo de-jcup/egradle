@@ -13,19 +13,19 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
-class SimpleStringCodeBuilder implements LazyCodeBuilder{
+class SimpleStringCodeBuilder implements LazyCodeBuilder {
 
 	private String code;
-	
-	SimpleStringCodeBuilder(String code){
-		this.code=code;
+
+	SimpleStringCodeBuilder(String code) {
+		this.code = code;
 	}
 
 	@Override
 	public String getCode(AbstractProposalImpl proposal, String leadingText) {
-		if (code==null){
+		if (code == null) {
 			return "";
 		}
 		return code;

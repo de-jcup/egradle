@@ -13,22 +13,22 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import de.jcup.egradle.core.model.Item;
 import de.jcup.egradle.core.model.Itemable;
 
-public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
+public class ItemProposalImpl extends AbstractProposalImpl implements Itemable {
 
 	private Item item;
 
 	public ItemProposalImpl(Item item) {
-		if (item==null){
+		if (item == null) {
 			return;
 		}
 		String name = item.getName();
-		if (name.startsWith("task ")){
-			name=name.substring(5);
+		if (name.startsWith("task ")) {
+			name = name.substring(5);
 		}
 		setName(name);
 		setLazyCodeBuilder(new SimpleStringCodeBuilder(item.getName()));
@@ -41,13 +41,13 @@ public class ItemProposalImpl extends AbstractProposalImpl implements Itemable{
 		sb.append("<i>Line:</i>");
 		sb.append(item.getLine());
 		sb.append("<br>");
-		if (type!=null){
+		if (type != null) {
 			sb.append("<i>Type:</i>");
 			sb.append(type);
 			sb.append("<br>");
 		}
 		setDescription(sb.toString());
-		this.item=item;
+		this.item = item;
 	}
 
 	@Override

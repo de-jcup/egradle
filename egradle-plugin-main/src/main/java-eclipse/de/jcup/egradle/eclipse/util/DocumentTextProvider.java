@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.util;
+package de.jcup.egradle.eclipse.util;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -25,6 +25,7 @@ import de.jcup.egradle.core.TextProviderException;
 
 /**
  * Document text provider uses eclipse document
+ * 
  * @author Albert Tregnaghi
  *
  */

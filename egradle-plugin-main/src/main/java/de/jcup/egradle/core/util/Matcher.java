@@ -13,15 +13,16 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 public interface Matcher<T> {
 
 	/**
 	 * Returns true when matcher matches
+	 * 
 	 * @param toMatch
 	 * @return <code>true</code> when matching
 	 */
-	public boolean matches(T toMatch) ;
+	public boolean matches(T toMatch);
 
 }

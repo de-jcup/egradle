@@ -13,36 +13,39 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 /**
  * A model for outline views.
+ * 
  * @author Albert Tregnaghi
  *
  */
 public interface Model {
 
 	/**
-	 * Finds item, starting at given offset. In contrast to {@link #getItemOnlyAt(int)} when no item found at given start
-	 * offset algorithm tries to resolve next possible items. If no item found
+	 * Finds item, starting at given offset. In contrast to
+	 * {@link #getItemOnlyAt(int)} when no item found at given start offset
+	 * algorithm tries to resolve next possible items. If no item found
 	 * <code>null</code> is returned
 	 * 
 	 * @param offset
 	 * @return item or <code>null</code>
 	 */
 	Item getItemAt(int offset);
-	
+
 	/**
-	 * Finds item, starting at given offset. No additional fallback strategy as in {@link #getItemAt(int)}. If no item found
-	 * <code>null</code> is returned
+	 * Finds item, starting at given offset. No additional fallback strategy as
+	 * in {@link #getItemAt(int)}. If no item found <code>null</code> is
+	 * returned
 	 * 
 	 * @param offset
 	 * @return item or <code>null</code>
 	 */
 	Item getItemOnlyAt(int offset);
-	
+
 	/**
-	 * Finds parent item, starting at given offset. 
+	 * Finds parent item, starting at given offset.
 	 * 
 	 * @param offset
 	 * @return parent item, never <code>null</code>
@@ -55,6 +58,5 @@ public interface Model {
 	 * @return root item, never <code>null</code>
 	 */
 	Item getRoot();
-	
 
 }

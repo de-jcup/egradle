@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,11 +26,12 @@ public class XMLTasksExporter {
 
 	/**
 	 * Export XMLTasks
+	 * 
 	 * @param tasks
 	 * @param stream
 	 * @throws IOException
 	 */
-	public void exportTasks(XMLTasks tasks , OutputStream stream) throws IOException{
+	public void exportTasks(XMLTasks tasks, OutputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLTasks.class);

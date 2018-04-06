@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -41,8 +41,8 @@ public class XMLTypeReference implements ModifiableTypeReference {
 	@Override
 	public void setType(Type returnType) {
 		this.type = returnType;
-		if (type!=null){
-			this.typeAsString=type.getName();
+		if (type != null) {
+			this.typeAsString = type.getName();
 		}
 	}
 
@@ -93,5 +93,4 @@ public class XMLTypeReference implements ModifiableTypeReference {
 		return true;
 	}
 
-	
 }

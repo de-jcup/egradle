@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import static org.junit.Assert.*;
 
@@ -46,12 +46,12 @@ public class FormatConverterTest {
 
 	@Test
 	public void convert_null_to_double_results_in_zero() {
-		assertEquals(0, converterToTest.convertToDouble(null),0.0);
+		assertEquals(0, converterToTest.convertToDouble(null), 0.0);
 	}
 
 	@Test
 	public void convert_empty_string_to_double_results_in_zero() {
-		assertEquals(0, converterToTest.convertToDouble(""),0.0);
+		assertEquals(0, converterToTest.convertToDouble(""), 0.0);
 	}
 
 	@Test

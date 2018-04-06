@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration;
+package de.jcup.egradle.integration;
 
 import static org.junit.Assert.*;
 
@@ -69,12 +69,12 @@ public class PluginsAssert {
 			assertEquals(amount, extensions.size());
 			return this;
 		}
-		
-		public PluginAssert withExtensionType(String targetClass, String extensionType){
+
+		public PluginAssert withExtensionType(String targetClass, String extensionType) {
 			return hasMixinOrExtension(CheckType.EXTENSION, null, extensionType, targetClass);
 		}
-		
-		public PluginAssert withMixinType(String targetClass, String mixinType){
+
+		public PluginAssert withMixinType(String targetClass, String mixinType) {
 			return hasMixinOrExtension(CheckType.MIXIN, mixinType, null, targetClass);
 		}
 
@@ -89,12 +89,12 @@ public class PluginsAssert {
 				throw new IllegalArgumentException("test case corrupt");
 			}
 			if (type == CheckType.MIXIN) {
-				if (mixinType==null){
+				if (mixinType == null) {
 					throw new IllegalArgumentException("mixin type not set in test - tescase corrupt?");
 				}
 			}
 			if (type == CheckType.EXTENSION) {
-				if (extensionType==null){
+				if (extensionType == null) {
 					throw new IllegalArgumentException("mixin type not set in test - tescase corrupt?");
 				}
 			}
@@ -111,11 +111,11 @@ public class PluginsAssert {
 				}
 			}
 			if (type == CheckType.MIXIN) {
-				fail("Plugin '"+plugin.getId()+"' has not mixin type:"+mixinType);
+				fail("Plugin '" + plugin.getId() + "' has not mixin type:" + mixinType);
 			}
 			if (type == CheckType.EXTENSION) {
 				/* ok */
-				fail("Plugin '"+plugin.getId()+"' has not extension type:"+extensionType);
+				fail("Plugin '" + plugin.getId() + "' has not extension type:" + extensionType);
 			}
 			throw new IllegalStateException("This point should be never reached!");
 		}

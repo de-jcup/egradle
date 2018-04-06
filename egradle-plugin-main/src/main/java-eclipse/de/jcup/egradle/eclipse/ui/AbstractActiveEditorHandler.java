@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -33,25 +33,27 @@ public abstract class AbstractActiveEditorHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbench workbench = PlatformUI.getWorkbench();
-		if (workbench==null){
+		if (workbench == null) {
 			return null;
 		}
 		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		if (activeWorkbenchWindow==null){
+		if (activeWorkbenchWindow == null) {
 			return null;
 		}
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		if (activePage==null){
+		if (activePage == null) {
 			return null;
 		}
 		IEditorPart editor = activePage.getActiveEditor();
-		
+
 		executeOnActiveEditor(editor);
 		return null;
 	}
 
 	/**
-	 * Executes on a editor part. Execution implementation should inspect by instanceof... before doing execution 
+	 * Executes on a editor part. Execution implementation should inspect by
+	 * instanceof... before doing execution
+	 * 
 	 * @param editor
 	 */
 	protected abstract void executeOnActiveEditor(IEditorPart editor);

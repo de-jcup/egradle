@@ -13,12 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 public interface Transformer<T> {
 
 	/**
 	 * Returns transformed source or source again
+	 * 
 	 * @param source
 	 * @return transformation result
 	 */

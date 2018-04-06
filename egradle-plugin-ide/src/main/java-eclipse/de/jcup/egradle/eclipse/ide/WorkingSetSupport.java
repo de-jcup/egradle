@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import org.eclipse.ui.IWorkingSetManager;
 import org.eclipse.ui.PlatformUI;
 
 public class WorkingSetSupport {
-	
+
 	/**
 	 * Resolve working sets for given projects
 	 * 
@@ -39,7 +39,7 @@ public class WorkingSetSupport {
 	 * @return list of working set data - never <code>null</code>
 	 */
 	public List<WorkingSetData> resolveWorkingSetsForProject(IProject project) {
-		if (project==null){
+		if (project == null) {
 			return Collections.emptyList();
 		}
 		return resolveWorkingSetsForProjects(Collections.singletonList(project), getWorkingSetManager());
@@ -109,33 +109,32 @@ public class WorkingSetSupport {
 	public static class WorkingSetData {
 		IWorkingSet workingSet;
 		Set<String> projectNamesContainedBefore = new TreeSet<>();
-		
+
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
-			
+
 			sb.append("WorkingSetData for:");
-			if (workingSet==null){
+			if (workingSet == null) {
 				sb.append("null");
-			}else{
+			} else {
 				sb.append(workingSet.getName());
 			}
 			sb.append(", contains:");
 			sb.append(projectNamesContainedBefore);
-			
+
 			return sb.toString();
 		}
 	}
 
-	public void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects){
+	public void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects) {
 		restoreWorkingSetsForProjects(workingSetDataList, projects, getWorkingSetManager());
 	}
 
 	private IWorkingSetManager getWorkingSetManager() {
 		return PlatformUI.getWorkbench().getWorkingSetManager();
 	}
-			
-	
+
 	void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects,
 			IWorkingSetManager mockedManager) {
 		if (workingSetDataList == null || workingSetDataList.isEmpty()) {
@@ -160,7 +159,6 @@ public class WorkingSetSupport {
 			elementsBefore = new IAdaptable[] {};
 		}
 		/* add existings */
-		
 
 		/* remove all still assigned projects from projectsToAdd */
 		List<IProject> projectsToAdd = removeProjectWhenAlreadyInWorkingSet(data, elementsBefore, projects);
@@ -169,11 +167,11 @@ public class WorkingSetSupport {
 		data.workingSet.setElements(newElements);
 	}
 
-	private IAdaptable[] buildNewElements(WorkingSetData data, List<IProject> projectsToAdd,IAdaptable[] elementsBefore
-			) {
+	private IAdaptable[] buildNewElements(WorkingSetData data, List<IProject> projectsToAdd,
+			IAdaptable[] elementsBefore) {
 		List<IAdaptable> workingSetAdaptables = new ArrayList<>();
 		workingSetAdaptables.addAll(Arrays.asList(elementsBefore));
-		
+
 		for (IProject projectToAdd : projectsToAdd) {
 			if (data.projectNamesContainedBefore.contains(projectToAdd.getName())) {
 				workingSetAdaptables.add(projectToAdd);
@@ -191,17 +189,17 @@ public class WorkingSetSupport {
 			for (IAdaptable elementBefore : elementsBefore) {
 				if (!(elementBefore instanceof IProject)) {
 					elementBefore = elementBefore.getAdapter(IProject.class);
-					if (elementBefore==null){
+					if (elementBefore == null) {
 						continue;
 					}
 				}
 				IProject projectBefore = (IProject) elementBefore;
-				
+
 				String projectBeforeName = projectBefore.getName();
-				if (! projectName.equals(projectBeforeName)){
+				if (!projectName.equals(projectBeforeName)) {
 					continue;
 				}
-				
+
 				if (data.projectNamesContainedBefore.contains(projectBeforeName)) {
 					projectsToAdd.remove(project);
 					break;

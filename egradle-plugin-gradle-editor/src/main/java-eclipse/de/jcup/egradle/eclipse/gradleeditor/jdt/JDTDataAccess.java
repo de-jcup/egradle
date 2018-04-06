@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.jdt;
+package de.jcup.egradle.eclipse.gradleeditor.jdt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +57,11 @@ public class JDTDataAccess {
 		SearchEngine engine = new SearchEngine();
 		int packageMatchRule = SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE;
 		try {
-			engine.searchAllTypeNames(packageName, packageMatchRule, typeName, packageMatchRule, IJavaSearchConstants.TYPE,
-					SearchEngine.createWorkspaceScope(), nameMatchRequestor,
+			engine.searchAllTypeNames(packageName, packageMatchRule, typeName, packageMatchRule,
+					IJavaSearchConstants.TYPE, SearchEngine.createWorkspaceScope(), nameMatchRequestor,
 					IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, monitor);
 		} catch (JavaModelException e) {
-			EditorUtil.INSTANCE.logError("Was not able to search all type names",e);
+			EditorUtil.INSTANCE.logError("Was not able to search all type names", e);
 		}
 		return result[0];
 	}
@@ -134,7 +134,7 @@ public class JDTDataAccess {
 			engine.searchAllTypeNames(qualifications, typeNames, scope, nameRequestor, policiy, progressMonitor);
 
 		} catch (JavaModelException e) {
-			EditorUtil.INSTANCE.logError("Was not able to search all type names",e);
+			EditorUtil.INSTANCE.logError("Was not able to search all type names", e);
 		}
 		return foundList;
 

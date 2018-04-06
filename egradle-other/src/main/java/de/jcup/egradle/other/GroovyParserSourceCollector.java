@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.other;
+package de.jcup.egradle.other;
 
 import java.io.File;
 import java.io.IOException;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,10 +39,9 @@ import de.jcup.egradle.core.model.ModelImpl;
  *
  */
 public class GroovyASTModelBuilder implements ModelBuilder {
-	
+
 	private static final GroovyTokenTypeDebugInfoInspector INSPECTOR = new GroovyTokenTypeDebugInfoInspector();
 
-	
 	private InputStream is;
 
 	public GroovyASTModelBuilder(InputStream is) {
@@ -77,7 +76,8 @@ public class GroovyASTModelBuilder implements ModelBuilder {
 		return model;
 	}
 
-	private void addGivenElementAndItsSiblingsToItem(ExtendedSourceBuffer sourceBuffer, ModelImpl model, Item parentItem, AST current) {
+	private void addGivenElementAndItsSiblingsToItem(ExtendedSourceBuffer sourceBuffer, ModelImpl model,
+			Item parentItem, AST current) {
 		Item item = createItem(sourceBuffer, current);
 		parentItem.add(item);
 
@@ -104,13 +104,13 @@ public class GroovyASTModelBuilder implements ModelBuilder {
 			item.setLength(0);
 		}
 
-		item.setOffset( sourceBuffer.getOffset(ast.getLine(), ast.getColumn()));
+		item.setOffset(sourceBuffer.getOffset(ast.getLine(), ast.getColumn()));
 		item.setName(ast.toString());
 		int type = ast.getType();
 		String typeStr = INSPECTOR.getGroovyTokenTypeName(type);
-		item.setInfo("type:" + type +"="+typeStr+", line:"+ast.getLine()+", column:"+ast.getColumn()+", offset="+item.getOffset());
+		item.setInfo("type:" + type + "=" + typeStr + ", line:" + ast.getLine() + ", column:" + ast.getColumn()
+				+ ", offset=" + item.getOffset());
 		return item;
 	}
-	
 
 }

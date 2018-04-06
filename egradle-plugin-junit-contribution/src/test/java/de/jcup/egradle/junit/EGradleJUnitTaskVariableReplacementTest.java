@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.junit;
+package de.jcup.egradle.junit;
 
 import static org.junit.Assert.*;
 
@@ -40,7 +40,7 @@ public class EGradleJUnitTaskVariableReplacementTest {
 		/* test */
 		assertEquals(tasksWithOutVariable, tasks);
 	}
-	
+
 	@Test
 	public void tasks_with_clean_test__means_old_default__will_be_replaced() {
 		/* prepare */
@@ -52,7 +52,7 @@ public class EGradleJUnitTaskVariableReplacementTest {
 		/* test */
 		assertEquals("REPLACEMENT", tasks);
 	}
-	
+
 	@Test
 	public void tasks_null__are_kept_as_null() {
 		/* prepare */
@@ -76,7 +76,7 @@ public class EGradleJUnitTaskVariableReplacementTest {
 		/* test */
 		assertEquals("REPLACEMENT", tasks);
 	}
-	
+
 	@Test
 	public void when_replacement_is_null__tasks_with_variable_is_kept_as_is() {
 		/* prepare */
@@ -88,11 +88,11 @@ public class EGradleJUnitTaskVariableReplacementTest {
 		/* test */
 		assertEquals(tasksWithVariable, tasks);
 	}
-	
+
 	@Test
 	public void tasks_with_variable_and_followed_arguments_are_replaced_but_argument_still_exists() {
 		/* prepare */
-		String tasksWithVariable = EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE+" --arguments";
+		String tasksWithVariable = EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --arguments";
 
 		/* execute */
 		String tasks = supportToTest.replace(tasksWithVariable, "REPLACEMENT");
@@ -112,6 +112,5 @@ public class EGradleJUnitTaskVariableReplacementTest {
 		/* test */
 		assertEquals("xxx REPLACEMENT --test xyz", tasks);
 	}
-
 
 }

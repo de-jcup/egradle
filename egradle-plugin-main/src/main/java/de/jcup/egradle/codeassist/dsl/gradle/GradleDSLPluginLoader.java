@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle;
+package de.jcup.egradle.codeassist.dsl.gradle;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
@@ -43,13 +43,13 @@ public class GradleDSLPluginLoader implements CodeCompletionService, RegistryLis
 
 	@Override
 	public void onCodeCompletionEvent(RegistryEvent event) {
-		if (event.getType()!=RegistryEventType.LOAD_PLUGINS){
+		if (event.getType() != RegistryEventType.LOAD_PLUGINS) {
 			return;
 		}
 		CodeCompletionRegistry registry = event.getRegistry();
 		GradleDSLTypeProvider typeProvider = registry.getService(GradleDSLTypeProvider.class);
 		PluginMerger merger = new PluginMerger(typeProvider, getErrorHandler());
-		
+
 		Set<Plugin> plugins;
 		/* load plugins.xml */
 		try {
@@ -60,13 +60,11 @@ public class GradleDSLPluginLoader implements CodeCompletionService, RegistryLis
 			}
 			plugins = new LinkedHashSet<>();
 		}
-		
+
 		merger.merge(plugins);
-		
-		
+
 	}
 
-	
 	public void setErrorHandler(ErrorHandler errorHandler) {
 		this.errorHandler = errorHandler;
 	}
@@ -77,7 +75,5 @@ public class GradleDSLPluginLoader implements CodeCompletionService, RegistryLis
 		}
 		return errorHandler;
 	}
-
-	
 
 }

@@ -13,16 +13,15 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
 // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
 public enum JavaLiteralKeyWords implements DocumentKeyWord {
 
-	
 	NULL("null"),
-	
+
 	TRUE("true"),
-	
+
 	FALSE("false")
 
 	;
@@ -32,7 +31,6 @@ public enum JavaLiteralKeyWords implements DocumentKeyWord {
 	private JavaLiteralKeyWords(String text) {
 		this.text = text;
 	}
-
 
 	@Override
 	public String getText() {

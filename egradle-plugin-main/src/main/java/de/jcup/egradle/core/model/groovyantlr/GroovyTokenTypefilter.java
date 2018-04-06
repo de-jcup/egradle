@@ -13,31 +13,31 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import antlr.collections.AST;
 import de.jcup.egradle.core.util.Filter;
 
-class GroovyTokenTypefilter implements Filter{
+class GroovyTokenTypefilter implements Filter {
 
-		private int filteredType;
+	private int filteredType;
 
-		GroovyTokenTypefilter(int type){
-			this.filteredType=type;
-		}
-	
-		@Override
-		public boolean isFiltered(Object obj) {
-			boolean isAst = obj instanceof AST;
-			if (!isAst){
-				return false;
-			}
-			AST ast = (AST) obj;
-			int type = ast.getType();
-			if (filteredType==type){
-				return true;
-			}
+	GroovyTokenTypefilter(int type) {
+		this.filteredType = type;
+	}
+
+	@Override
+	public boolean isFiltered(Object obj) {
+		boolean isAst = obj instanceof AST;
+		if (!isAst) {
 			return false;
 		}
-		
+		AST ast = (AST) obj;
+		int type = ast.getType();
+		if (filteredType == type) {
+			return true;
+		}
+		return false;
 	}
+
+}

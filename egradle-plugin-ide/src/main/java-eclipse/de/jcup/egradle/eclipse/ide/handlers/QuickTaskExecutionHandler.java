@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.handlers;
+package de.jcup.egradle.eclipse.ide.handlers;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -36,11 +36,11 @@ import de.jcup.egradle.eclipse.ui.QuickLaunchDialog;
 public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 
 	private String lastInput;
-	
+
 	private History<String> history;
-	
-	public QuickTaskExecutionHandler(){
-		history  = new History<>(20);
+
+	public QuickTaskExecutionHandler() {
+		history = new History<>(20);
 	}
 
 	@Override
@@ -48,10 +48,10 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 		lastInput = null;
 		Shell shell = HandlerUtil.getActiveShellChecked(event);
 		GradleRootProject rootProject = IDEUtil.getRootProject();
-		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history," ("+rootProject.getName()+")");
+		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history, " (" + rootProject.getName() + ")");
 		dialog.open();
-		lastInput=dialog.getValue();
-		if (StringUtils.isBlank(lastInput)){
+		lastInput = dialog.getValue();
+		if (StringUtils.isBlank(lastInput)) {
 			return null;
 		}
 		return super.execute(event);

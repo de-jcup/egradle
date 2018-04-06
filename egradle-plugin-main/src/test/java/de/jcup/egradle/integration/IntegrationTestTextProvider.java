@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.integration;
+package de.jcup.egradle.integration;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +31,7 @@ public class IntegrationTestTextProvider implements TextProvider {
 	@Override
 	public String getText(int offset, int length) throws TextProviderException {
 		try {
-			return text.substring(offset, offset+length);
+			return text.substring(offset, offset + length);
 		} catch (RuntimeException e) {
 			throw new TextProviderException("cannot get text", e);
 		}
@@ -46,7 +46,7 @@ public class IntegrationTestTextProvider implements TextProvider {
 	public int getLineOffset(int offset) throws TextProviderException {
 		/* lines in read textfiles will always contain \n... */
 		String[] lines = StringUtils.splitByWholeSeparator(text, "\n");
-		if (offset==0){
+		if (offset == 0) {
 			return 0;
 		}
 		int linePos = 0;

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 public class ProcessTimeoutTerminator {
 
@@ -57,7 +57,7 @@ public class ProcessTimeoutTerminator {
 			 */
 			return;
 		}
-		if (isRunning()){
+		if (isRunning()) {
 			reset();
 			return;
 		}
@@ -66,7 +66,7 @@ public class ProcessTimeoutTerminator {
 	}
 
 	public boolean isRunning() {
-		return timeoutCheckThread!=null && timeoutCheckThread.isAlive();
+		return timeoutCheckThread != null && timeoutCheckThread.isAlive();
 	}
 
 	private class TimeOutTerminatorRunnable implements Runnable {

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.junit.contribution.launch;
+package de.jcup.egradle.eclipse.junit.contribution.launch;
 
 import java.util.Collection;
 
@@ -21,9 +21,8 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
 
-public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup{
+public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup {
 
-	
 	@Override
 	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
 		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());

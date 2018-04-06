@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.control;
+package de.jcup.egradle.eclipse.gradleeditor.control;
 
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 
@@ -219,9 +219,10 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		if (linksEnabled) {
 
 			openInBrowserAction = new OpenInExternalBrowserAction();
-			openInBrowserAction.setImageDescriptor(EclipseUtil.createImageDescriptor("icons/codecompletion/external_browser.png", EditorActivator.PLUGIN_ID));
+			openInBrowserAction.setImageDescriptor(EclipseUtil
+					.createImageDescriptor("icons/codecompletion/external_browser.png", EditorActivator.PLUGIN_ID));
 			openInBrowserAction.setToolTipText("Open this page in external browser");
-			
+
 			browsBackitem = new Action() {
 				@Override
 				public void run() {
@@ -376,10 +377,10 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 		browser.addOpenWindowListener(windowListener);
 		browser.addLocationListener(locationListener);
 
-		/* disable browser menu - except when development set*/
+		/* disable browser menu - except when development set */
 		boolean disableBrowserMenu = !EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS;
 
-		if (disableBrowserMenu){
+		if (disableBrowserMenu) {
 			browser.setMenu(new Menu(getShell(), SWT.NONE));
 		}
 
@@ -387,10 +388,10 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 
 	protected void updateActions() {
 		String potentialtarget = history.current();
-		if (potentialtarget!=null && potentialtarget.startsWith("http")){
+		if (potentialtarget != null && potentialtarget.startsWith("http")) {
 			openInBrowserAction.setTarget(potentialtarget);
 			openInBrowserAction.setEnabled(true);
-		}else{
+		} else {
 			openInBrowserAction.setEnabled(false);
 			openInBrowserAction.setTarget(null);
 		}

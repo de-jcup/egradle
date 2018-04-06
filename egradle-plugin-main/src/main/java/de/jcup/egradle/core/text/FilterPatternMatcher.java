@@ -13,11 +13,11 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 import de.jcup.egradle.core.util.Matcher;
 
-public interface FilterPatternMatcher<T> extends Matcher<T>{
+public interface FilterPatternMatcher<T> extends Matcher<T> {
 
 	void setFilterText(String filterText);
 

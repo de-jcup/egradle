@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
 public enum GroovyKeyWords implements DocumentKeyWord {
 
@@ -55,21 +55,21 @@ public enum GroovyKeyWords implements DocumentKeyWord {
 	// true by java literal
 	// try by java
 	// while by java
-	
-	
-	/* special closure names:*/
-	
+
+	/* special closure names: */
+
 	IT("it"),
-	
+
 	DELEGATE("delegate"),
-	
+
 	OWNER("owner"),
-	
-	THREADSAFE("threadsafe"), // reserved, but not used : see http://www.groovy-lang.org/mailing-lists.html#nabble-td348443
-	
+
+	THREADSAFE("threadsafe"), // reserved, but not used : see
+								// http://www.groovy-lang.org/mailing-lists.html#nabble-td348443
+
 	/* special GDK methods */
 	USE("use"), // use method from GDK
-	
+
 	WITH("with"), // with(closure) method from GDK
 	;
 
@@ -78,7 +78,6 @@ public enum GroovyKeyWords implements DocumentKeyWord {
 	private GroovyKeyWords(String text) {
 		this.text = text;
 	}
-
 
 	@Override
 	public String getText() {

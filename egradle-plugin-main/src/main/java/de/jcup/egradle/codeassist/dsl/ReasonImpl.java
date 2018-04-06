@@ -74,5 +74,5 @@ public class ReasonImpl implements Reason {
 	public String getMixinId() {
 		return mixinId;
 	}
-	
+
 }

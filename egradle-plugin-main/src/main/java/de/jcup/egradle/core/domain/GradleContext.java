@@ -34,7 +34,7 @@ import de.jcup.egradle.core.process.ProcessContext;
  * @author Albert Tregnaghi
  *
  */
-public class GradleContext implements EnvironmentProvider, ProcessContext{
+public class GradleContext implements EnvironmentProvider, ProcessContext {
 
 	private GradleRootProject rootProject;
 
@@ -76,8 +76,8 @@ public class GradleContext implements EnvironmentProvider, ProcessContext{
 	public String getCommandString() {
 		StringBuilder sb = new StringBuilder();
 		GradleCommand[] x = getCommands();
-		for (GradleCommand c: x){
-			if (c==null){
+		for (GradleCommand c : x) {
+			if (c == null) {
 				continue;
 			}
 			sb.append(c.toString());
@@ -146,30 +146,31 @@ public class GradleContext implements EnvironmentProvider, ProcessContext{
 	 * @return options
 	 */
 	public String[] getOptions() {
-		if (options==null){
-			options=new String[]{};
+		if (options == null) {
+			options = new String[] {};
 		}
 		return options;
 	}
 
 	/**
-	 * Registers new  cancel state provider - old one will be replaced
+	 * Registers new cancel state provider - old one will be replaced
+	 * 
 	 * @param provider
 	 */
 	public void register(CancelStateProvider provider) {
 		this.cancelStateProvider = provider;
 	}
-	
+
 	public CancelStateProvider getCancelStateProvider() {
-		if (cancelStateProvider==null){
-			cancelStateProvider=CancelStateProvider.NEVER_CANCELED;
+		if (cancelStateProvider == null) {
+			cancelStateProvider = CancelStateProvider.NEVER_CANCELED;
 		}
 		return cancelStateProvider;
 	}
 
 	public void switchRootProjectPath(String rootProjectPath) throws IOException {
 		configuration.setWorkingDirectory(rootProjectPath);
-		rootProject=new GradleRootProject(new File(rootProjectPath));
+		rootProject = new GradleRootProject(new File(rootProjectPath));
 	}
 
 }

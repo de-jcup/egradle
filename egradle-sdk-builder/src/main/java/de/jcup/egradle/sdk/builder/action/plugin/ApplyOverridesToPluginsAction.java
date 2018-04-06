@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.plugin;
+package de.jcup.egradle.sdk.builder.action.plugin;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +30,7 @@ public class ApplyOverridesToPluginsAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		XMLPlugins alternativeXMLPugins= null;
+		XMLPlugins alternativeXMLPugins = null;
 		File alternativePluginsFile = new File(context.PARENT_OF_RES,
 				"sdkbuilder/override/gradle/" + context.sdkInfo.getGradleVersion() + "/alternative-plugins.xml");
 		if (!alternativePluginsFile.exists()) {
@@ -52,30 +52,32 @@ public class ApplyOverridesToPluginsAction implements SDKBuilderAction {
 					throw new IllegalStateException("found alternative plugin with id NULL");
 				}
 				XMLPlugin alternativeXmlPlugin = (XMLPlugin) alternativePlugin;
-				
-				/* check if plugin already exists*/
+
+				/* check if plugin already exists */
 				Plugin mergeTargetPlugin = null;
-				for (Plugin standardPlugin: standardPlugins){
-					if (standardPlugin.getId().equals(alternativeId)){
-						mergeTargetPlugin=standardPlugin;
+				for (Plugin standardPlugin : standardPlugins) {
+					if (standardPlugin.getId().equals(alternativeId)) {
+						mergeTargetPlugin = standardPlugin;
 						break;
 					}
 				}
-				/* when not exisiting create new one, otherwise merge extensions*/
-				if (mergeTargetPlugin==null){
+				/*
+				 * when not exisiting create new one, otherwise merge extensions
+				 */
+				if (mergeTargetPlugin == null) {
 					String description = alternativeXmlPlugin.getDescription();
 					if (description == null) {
 						description += "";
 					}
 					alternativeXmlPlugin.setDescription(description + "(alternative)");
 					standardPlugins.add(alternativePlugin);
-				}else{
+				} else {
 					/* merge alternative parts to existing */
 					mergeTargetPlugin.getExtensions().addAll(alternativeXmlPlugin.getExtensions());
 				}
 			}
 
 		}
-		
+
 	}
 }

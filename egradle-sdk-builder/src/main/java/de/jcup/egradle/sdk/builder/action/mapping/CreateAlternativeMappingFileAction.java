@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.mapping;
+package de.jcup.egradle.sdk.builder.action.mapping;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,7 +27,7 @@ public class CreateAlternativeMappingFileAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		if (context.alternativeApiMapping.isEmpty()){
+		if (context.alternativeApiMapping.isEmpty()) {
 			throw new IllegalStateException("alternative api mapping is empty - another action must fill this before!");
 		}
 		System.out.println("- generate alternative api mapping file");

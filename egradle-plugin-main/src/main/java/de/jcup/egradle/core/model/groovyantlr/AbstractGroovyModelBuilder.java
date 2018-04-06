@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model.groovyantlr;
+package de.jcup.egradle.core.model.groovyantlr;
 
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*;
 
@@ -42,7 +42,7 @@ import de.jcup.egradle.core.model.ModelBuilder;
 import de.jcup.egradle.core.model.ModelImpl;
 import de.jcup.egradle.core.util.Filter;
 
-public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
+public abstract class AbstractGroovyModelBuilder implements ModelBuilder {
 
 	protected InputStream is;
 	private ItemFilter postCreationFilter;
@@ -55,10 +55,8 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		super();
 		support = createModelBuilderSupport();
 	}
-	
 
 	protected abstract AbstractGroovyModelBuilderSupport createModelBuilderSupport();
-
 
 	/**
 	 * Set pre creation filter to filter AST parts not wanted to be source for
@@ -100,21 +98,21 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		UnicodeEscapingReader r2 = new UnicodeEscapingReader(reader, sourceBuffer);
 		GroovyLexer lexer = new GroovyLexer(r2);
 		r2.setLexer(lexer);
-	
+
 		GroovyRecognizer parser = GroovyRecognizer.make(lexer);
 		parser.setSourceBuffer(sourceBuffer);
 		try {
 			parser.compilationUnit();
 			AST first = parser.getAST();
-	
+
 			Context context = new Context();
 			context.init(sourceBuffer);
-	
+
 			Item rootItem = model.getRoot();
 			walkThroughASTandSiblings(context, rootItem, first);
-	
+
 		} catch (RecognitionException | TokenStreamException e) {
-	
+
 			RecognitionException re = RecognitionExceptionResolver.getSharedInstance().resolveRecognitionException(e);
 			Error error = new Error();
 			if (re == null) {
@@ -129,7 +127,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				error.setMessage(re.getMessage());
 				error.setCharStart(offset);
 				error.setCharEnd(offset + 1);
-	
+
 			}
 			if (builderContext != null) {
 				builderContext.add(error);
@@ -137,7 +135,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		} catch (RuntimeException e) {
 			throw new ModelBuilderException("Cannot build outline model because of AST parsing problems", e);
 		}
-	
+
 		return model;
 	}
 
@@ -225,9 +223,9 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		if (item != null) {
 			item.setClosed(true);
 		}
-	
+
 		return item;
-	
+
 	}
 
 	private Item buildList(Context context, Item parent, AST list) throws ModelBuilderException {
@@ -244,9 +242,9 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 	private Item buildAssign(Context context, AST assign) throws ModelBuilderException {
 		/* library = [...] */
 		/* public library = [...] */
-	
+
 		Item item = null;
-	
+
 		AST assignmentIdentifier = assign.getFirstChild();
 		if (assignmentIdentifier == null) {
 			return null;
@@ -256,23 +254,23 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 			return null;
 		}
 		AST assignedValue = assignmentIdentifier.getNextSibling();
-	
+
 		String name = support.resolveAsSimpleString(assignmentIdentifier);
-	
+
 		item = support.createItem(context, assignmentIdentifier);
 		item.setName(name);
 		item.setItemType(ItemType.ASSIGNMENT);
-	
+
 		if (assignedValue != null) {
 			walkThroughASTandSiblings(context, item, assignedValue);
 		}
-	
+
 		return item;
 	}
 
 	private Item buildImport(Context context, AST current) {
 		Item item = null;
-	
+
 		AST modifiers = current.getFirstChild();
 		if (modifiers == null) {
 			return null;
@@ -290,7 +288,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 
 	private Item buildPackageDef(Context context, AST current) {
 		Item item = null;
-	
+
 		AST modifiers = current.getFirstChild();
 		if (modifiers == null) {
 			return null;
@@ -312,7 +310,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		/* def String variable = "" */
 		/* String variable = "" <-- no modifiers! */
 		Item item = null;
-	
+
 		AST modifiers = null;
 		AST type = null;
 		AST first = current.getFirstChild();
@@ -332,7 +330,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 			if (type == null) {
 				return null;
 			}
-	
+
 		}
 		/* type */
 		String typeDefText = null;
@@ -361,7 +359,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		/* def String variable = "" */
 		/* String variable = "" <-- no modifiers! */
 		Item item = null;
-	
+
 		AST modifiers = null;
 		AST first = current.getFirstChild();
 		if (first == null) {
@@ -374,7 +372,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 			if (name == null) {
 				return null;
 			}
-	
+
 		} else {
 			return null;
 		}
@@ -389,7 +387,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 	private Item buildMethodDef(Context context, AST current) throws ModelBuilderException {
 		/* def method(params) */
 		Item item = null;
-	
+
 		AST modifiers = null;
 		AST type = null;
 		AST first = current.getFirstChild();
@@ -409,7 +407,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 			if (type == null) {
 				return null;
 			}
-	
+
 		}
 		/* type */
 		String typeDefText = null;
@@ -429,13 +427,13 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		support.appendModifiers(item, modifiers);
 		item.setType(typeDefText);
 		item.setItemType(ItemType.METHOD);
-	
+
 		AST parameters = name.getNextSibling();
 		if (parameters != null) {
 			if (parameters.getType() == GroovyTokenTypes.PARAMETERS) {
 				support.appendParameters(item, parameters);
 			}
-	
+
 			AST slist = parameters.getNextSibling();
 			if (slist != null) {
 				if (slist.getType() == GroovyTokenTypes.SLIST) {
@@ -443,14 +441,14 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				}
 			}
 		}
-	
+
 		return item;
 	}
 
 	private Item buildConstructorDef(String parentItemName, Context context, AST current) throws ModelBuilderException {
 		/* def method(params) */
 		Item item = null;
-		
+
 		AST modifiers = null;
 		AST first = current.getFirstChild();
 		if (first == null) {
@@ -478,7 +476,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				walkThroughASTandSiblings(context, item, slist.getFirstChild());
 			}
 		}
-	
+
 		return item;
 	}
 
@@ -502,7 +500,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		}
 		/* inspect children... */
 		walkThroughASTandSiblings(context, item, lastAst.getFirstChild());
-	
+
 		return item;
 	}
 
@@ -517,7 +515,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				return null;
 			}
 		}
-	
+
 		if (GroovyTokenTypes.ASSIGN == next.getType()) {
 			return buildAssign(context, next);
 		}
@@ -548,7 +546,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		}
 		ItemType outlineType = null;
 		if (methodCall.getType() == METHOD_CALL) {
-	
+
 			if (parent != null) {
 				if (ItemType.DEPENDENCIES == parent.getItemType()) {
 					outlineType = ItemType.DEPENDENCY;
@@ -566,19 +564,19 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		item.setItemType(outlineType);
 		item.setName(enameString);
 		item.setClosed(true);
-	
+
 		AST lastAst = ename.getNextSibling();
 		if (lastAst.getType() == ELIST) {
 			lastAst = appendMethodCallParameters(context, lastAst, item);
 		}
-	
+
 		if ("task".equals(enameString) || enameString.startsWith("task ")) {
 			item.setItemType(ItemType.TASK);
 			lastAst = support.handleTaskClosure(enameString, item, lastAst);
 		} else if (enameString.startsWith("tasks.")) {
 			item.setItemType(ItemType.TASKS);
-			if (enameString.startsWith("tasks.withType")){
-				lastAst = support.handleTasksWithTypeClosure(enameString, item,lastAst);
+			if (enameString.startsWith("tasks.withType")) {
+				lastAst = support.handleTasksWithTypeClosure(enameString, item, lastAst);
 			}
 		} else if (enameString.startsWith("apply ")) {
 			item.setItemType(ItemType.APPLY_SETUP);
@@ -600,7 +598,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				}
 				/* child ){ */
 				lastAst = m1;
-	
+
 			}
 			String[] params = item.getParameters();
 			if (params != null) {
@@ -613,8 +611,7 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				}
 			}
 		}
-	
-	
+
 		if (lastAst != null) {
 			int type = lastAst.getType();
 			if (GroovyTokenTypes.CLOSABLE_BLOCK == type) {
@@ -623,9 +620,9 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 				if (params == null || params.length == 0) {
 					item.setParameters("groovy.lang.Closure");
 				} else {
-					/* last parameter should be a closure!*/
-					String lastParam = params[params.length-1];
-					if (! "groovy.lang.Closure".equals(lastParam)){
+					/* last parameter should be a closure! */
+					String lastParam = params[params.length - 1];
+					if (!"groovy.lang.Closure".equals(lastParam)) {
 						/* missing - must change */
 						List<String> paramList = new ArrayList<>(Arrays.asList(params));
 						paramList.add("groovy.lang.Closure");
@@ -650,77 +647,79 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 	}
 
 	private void handleItemNames(Item item, String name) {
-		handleItemNames(item, name,firstItemTypeUpdater);
+		handleItemNames(item, name, firstItemTypeUpdater);
 		String lastMethodChainPartLastMethodChainPart = resolveLastMethodChainPart(name);
-		if (lastMethodChainPartLastMethodChainPart!=null){
-			handleItemNames(item, lastMethodChainPartLastMethodChainPart,lastItemTypeUpdater);
+		if (lastMethodChainPartLastMethodChainPart != null) {
+			handleItemNames(item, lastMethodChainPartLastMethodChainPart, lastItemTypeUpdater);
 		}
 	}
 
 	private void handleItemNames(Item item, String name, ItemTypeUpdater updater) {
 		if ("repositories".equals(name)) {
-			updater.setItemType(item,ItemType.REPOSITORIES);
+			updater.setItemType(item, ItemType.REPOSITORIES);
 		} else if ("plugins".equals(name)) {
-			updater.setItemType(item,ItemType.PLUGINS);
+			updater.setItemType(item, ItemType.PLUGINS);
 		} else if ("allprojects".equals(name)) {
-			updater.setItemType(item,ItemType.ALL_PROJECTS);
+			updater.setItemType(item, ItemType.ALL_PROJECTS);
 		} else if ("subprojects".equals(name)) {
-			updater.setItemType(item,ItemType.SUB_PROJECTS);
+			updater.setItemType(item, ItemType.SUB_PROJECTS);
 		} else if ("dependencies".equals(name)) {
-			updater.setItemType(item,ItemType.DEPENDENCIES);
+			updater.setItemType(item, ItemType.DEPENDENCIES);
 		} else if ("sourceSets".equals(name)) {
-			updater.setItemType(item,ItemType.SOURCESETS);
+			updater.setItemType(item, ItemType.SOURCESETS);
 		} else if ("main".equals(name)) {
-			updater.setItemType(item,ItemType.MAIN);
+			updater.setItemType(item, ItemType.MAIN);
 		} else if ("jar".equals(name)) {
-			updater.setItemType(item,ItemType.JAR);
+			updater.setItemType(item, ItemType.JAR);
 		} else if ("war".equals(name)) {
-			updater.setItemType(item,ItemType.WAR);
+			updater.setItemType(item, ItemType.WAR);
 		} else if ("ear".equals(name)) {
-			updater.setItemType(item,ItemType.EAR);
+			updater.setItemType(item, ItemType.EAR);
 		} else if ("zip".equals(name)) {
-			updater.setItemType(item,ItemType.ZIP);
+			updater.setItemType(item, ItemType.ZIP);
 		} else if ("test".equals(name)) {
-			updater.setItemType(item,ItemType.TEST);
+			updater.setItemType(item, ItemType.TEST);
 		} else if ("clean".equals(name)) {
-			updater.setItemType(item,ItemType.CLEAN);
+			updater.setItemType(item, ItemType.CLEAN);
 		} else if ("buildscript".equals(name) || name.startsWith("buildscript.")) {
-			updater.setItemType(item,ItemType.BUILDSCRIPT);
+			updater.setItemType(item, ItemType.BUILDSCRIPT);
 		} else if ("configurations".equals(name) || name.startsWith("configurations.")) {
-			updater.setItemType(item,ItemType.CONFIGURATIONS);
+			updater.setItemType(item, ItemType.CONFIGURATIONS);
 		} else if ("configure".equals(name) || name.startsWith("configure ")) {
-			updater.setItemType(item,ItemType.CONFIGURE);
+			updater.setItemType(item, ItemType.CONFIGURE);
 		} else if ("doFirst".equals(name)) {
-			updater.setItemType(item,ItemType.DO_FIRST);
+			updater.setItemType(item, ItemType.DO_FIRST);
 		} else if ("doLast".equals(name)) {
-			updater.setItemType(item,ItemType.DO_LAST);
+			updater.setItemType(item, ItemType.DO_LAST);
 		} else if ("afterEvaluate".equals(name)) {
-			updater.setItemType(item,ItemType.AFTER_EVALUATE);
+			updater.setItemType(item, ItemType.AFTER_EVALUATE);
 		} else if ("eclipse".equals(name)) {
-			updater.setItemType(item,ItemType.ECLIPSE);
+			updater.setItemType(item, ItemType.ECLIPSE);
 		} else if (name.startsWith("task ") || name.startsWith("task.")) {
-			updater.setItemType(item,ItemType.TASK);
+			updater.setItemType(item, ItemType.TASK);
 		} else if (name.startsWith("tasks.")) {
-			updater.setItemType(item,ItemType.TASKS);
+			updater.setItemType(item, ItemType.TASKS);
 		} else if (name.startsWith("apply ")) {
-			updater.setItemType(item,ItemType.APPLY_SETUP);
+			updater.setItemType(item, ItemType.APPLY_SETUP);
 		} else if (name.startsWith("project ") || name.equals("project") || name.startsWith("project.")) {
-			updater.setItemType(item,ItemType.PROJECT);
+			updater.setItemType(item, ItemType.PROJECT);
 		} else {
-			updater.setItemType(item,ItemType.CLOSURE);
+			updater.setItemType(item, ItemType.CLOSURE);
 		}
 	}
 
 	/**
-	 * Resolves method chain last part after . ("e.g. a "xyz.doLast" will return "doLast" - a "xyz" returns <code>null</code>)
+	 * Resolves method chain last part after . ("e.g. a "xyz.doLast" will return
+	 * "doLast" - a "xyz" returns <code>null</code>)
+	 * 
 	 * @param item
 	 * @return last part after dot, otherwise <code>null</code>
 	 */
 	private String resolveLastMethodChainPart(String name) {
-		if (name==null){
+		if (name == null) {
 			return null;
 		}
-		if (name.indexOf('.')==-1){
+		if (name.indexOf('.') == -1) {
 			return null;
 		}
 		String lastCall = StringUtils.substringAfterLast(name, ".");
@@ -750,7 +749,8 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 	 * @param context
 	 * @throws ModelBuilderException
 	 */
-	private AST appendMethodCallParameters(Context context, AST elist, Item methodCallItem) throws ModelBuilderException {
+	private AST appendMethodCallParameters(Context context, AST elist, Item methodCallItem)
+			throws ModelBuilderException {
 		List<String> parameterList = support.resolveParameterList(elist);
 		methodCallItem.setParameters(parameterList.toArray(new String[parameterList.size()]));
 		return elist;
@@ -762,29 +762,28 @@ public abstract class AbstractGroovyModelBuilder implements ModelBuilder{
 		}
 		return preCreationFilter;
 	}
-	
-	protected abstract class ItemTypeUpdater{
+
+	protected abstract class ItemTypeUpdater {
 		abstract void setItemType(Item item, ItemType type);
 	}
-	
-	protected class FirstItemTypeUpdater extends ItemTypeUpdater{
-		void setItemType(Item item, ItemType type){
+
+	protected class FirstItemTypeUpdater extends ItemTypeUpdater {
+		void setItemType(Item item, ItemType type) {
 			item.setItemType(type);
 		}
 	}
-	
-	protected class LastItemTypeUpdater extends ItemTypeUpdater{
-		void setItemType(Item item, ItemType type){
-			if (type==ItemType.CLOSURE){
-				/* no dedicated type found so set null*/
+
+	protected class LastItemTypeUpdater extends ItemTypeUpdater {
+		void setItemType(Item item, ItemType type) {
+			if (type == ItemType.CLOSURE) {
+				/* no dedicated type found so set null */
 				item.setLastChainedItemType(null);
 				return;
 			}
 			item.setLastChainedItemType(type);
 		}
 	}
-	
-	
+
 	protected class Context {
 		ExtendedSourceBuffer buffer;
 

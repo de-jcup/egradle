@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.handlers;
+package de.jcup.egradle.eclipse.gradleeditor.handlers;
 
 import org.eclipse.ui.IEditorPart;
 
@@ -25,12 +25,14 @@ public abstract class AbstractEGradleEditorHandler extends AbstractActiveEditorH
 
 	/**
 	 * Execute something by using gradle editor instance
-	 * @param gradleEditor - never <code>null</code>
+	 * 
+	 * @param gradleEditor
+	 *            - never <code>null</code>
 	 */
 	protected abstract void executeOnGradleEditor(GradleEditor gradleEditor);
 
 	protected void executeOnActiveEditor(IEditorPart editor) {
-		if (editor instanceof AbstractGroovyBasedEditor){
+		if (editor instanceof AbstractGroovyBasedEditor) {
 			executeOnGradleEditor((GradleEditor) editor);
 		}
 	}

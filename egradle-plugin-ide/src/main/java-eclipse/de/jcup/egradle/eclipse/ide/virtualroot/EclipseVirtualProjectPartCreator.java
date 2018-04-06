@@ -205,7 +205,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
 				 * links etc.
 				 */
 			} catch (CoreException e) {
-				Throwable rootCause =  ExceptionUtils.getRootCause(e);
+				Throwable rootCause = ExceptionUtils.getRootCause(e);
 				throw new VirtualRootProjectException("Cannot (re)create newProject:" + projectName, rootCause);
 			}
 

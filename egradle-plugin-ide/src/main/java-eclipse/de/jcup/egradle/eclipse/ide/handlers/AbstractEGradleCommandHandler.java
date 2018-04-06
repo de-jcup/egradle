@@ -33,6 +33,7 @@ import de.jcup.egradle.eclipse.ide.execution.GradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.execution.GradleExecutionException;
 import de.jcup.egradle.eclipse.ide.execution.GradleJob;
 import de.jcup.egradle.eclipse.ide.execution.GradleRunnableWithProgress;
+
 /**
  * Abstract base outputHandler for egradle command executions
  * 
@@ -63,11 +64,12 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 
 		/* create execution and fetch mode */
 		GradleExecutionDelegate execution = null;
-		try{
-			RememberLastLinesOutputHandler validationOutputHandler = IDEUtil.createOutputHandlerForValidationErrorsOnConsole();
+		try {
+			RememberLastLinesOutputHandler validationOutputHandler = IDEUtil
+					.createOutputHandlerForValidationErrorsOnConsole();
 			validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
 			execution = createGradleExecution(validationOutputHandler);
-		}catch(GradleExecutionException e){
+		} catch (GradleExecutionException e) {
 			getDialogSupport().showError(e.getMessage());
 			return null;
 		}
@@ -97,6 +99,7 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 		return null;
 	}
 
-	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException;
+	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
+			throws GradleExecutionException;
 
 }

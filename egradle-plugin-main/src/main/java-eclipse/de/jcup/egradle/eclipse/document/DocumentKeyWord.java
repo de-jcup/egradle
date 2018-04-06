@@ -13,9 +13,9 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
-public interface DocumentKeyWord{
+public interface DocumentKeyWord {
 
 	String getText();
 

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.delegationtarget;
+package de.jcup.egradle.sdk.builder.action.delegationtarget;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,24 +36,29 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		for (String typeName: context.originTypeNameToOriginFileMapping.keySet()){
-			XMLType originType = (XMLType)context.originGradleFilesProvider.getType(typeName);
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
+			XMLType originType = (XMLType) context.originGradleFilesProvider.getType(typeName);
 			calculateStillMissingDelegateTargets(originType, context);
 		}
 
 	}
+
 	/**
 	 * Very interesting how gradle internal works:
+	 * 
 	 * <pre>
 	 * 
 	 * private EclipseJdt jdt;
 	 * 
 	 * private EclipseJdt getJdt();
+	 * 
 	 * private void setJdt(EclipseJdt jdt);
 	 * 
 	 * private void jdt(Closure closure);
 	 * </pre>
+	 * 
 	 * So the closure type is simply always the property type!
+	 * 
 	 * <pre>
 	 * eclipse{
 	 * 	jdt{
@@ -61,13 +66,16 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 	 *  }
 	 * }
 	 * </pre>
+	 * 
 	 * Is pretty much like:
+	 * 
 	 * <pre>
 	 * 	project.callClosureWithDelegateTarget(getEclipse()).callClosureWithDelegateTarget(getJdt())...
 	 * </pre>
 	 * 
-	 * Normally typical delegatino targets are done by EGradleAssembleDslTask in gradle fork. But there are some special parts
-	 * which where now handled here.
+	 * Normally typical delegatino targets are done by EGradleAssembleDslTask in
+	 * gradle fork. But there are some special parts which where now handled
+	 * here.
 	 * 
 	 * @param type
 	 * @param context
@@ -85,16 +93,16 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 			}
 			String targetType = null;
 			List<Parameter> parameters = method.getParameters();
-			if (parameters.size()!=1){
+			if (parameters.size() != 1) {
 				continue;
 			}
 			Parameter firstParam = parameters.iterator().next();
-			if (! firstParam.getTypeAsString().equals("groovy.lang.Closure")){
+			if (!firstParam.getTypeAsString().equals("groovy.lang.Closure")) {
 				continue;
 			}
 			String methodName = m.getName();
-			targetType= scanProperties(type, methodName);
-			
+			targetType = scanProperties(type, methodName);
+
 			if (targetType != null) {
 				method.setDelegationTargetAsString(targetType);
 			}
@@ -103,13 +111,16 @@ public class CalculateDelegationTargetsAction implements SDKBuilderAction {
 	}
 
 	private String scanProperties(Type type, String methodName) {
-		/* try to find a property - in this class or subclass or interfaces etc..*/
+		/*
+		 * try to find a property - in this class or subclass or interfaces
+		 * etc..
+		 */
 		Set<Property> allProperties = type.getProperties();
-		for (Property p : allProperties){
+		for (Property p : allProperties) {
 			String propName = p.getName();
-			if (propName.equals(methodName)){
+			if (propName.equals(methodName)) {
 				String typeAsString = p.getTypeAsString();
-				if (typeAsString!=null && !typeAsString.isEmpty()){
+				if (typeAsString != null && !typeAsString.isEmpty()) {
 					return typeAsString;
 				}
 			}

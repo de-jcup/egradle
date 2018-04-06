@@ -50,24 +50,24 @@ public class PluginMerger {
 		this.errorHandler = errorHandler;
 	}
 
-	public void merge(Set<Plugin> plugins){
+	public void merge(Set<Plugin> plugins) {
 		Set<Type> set = new LinkedHashSet<>();
-		
+
 		/* collect all target types */
-		for (Plugin plugin: plugins){
-			for (TypeExtension extension: plugin.getExtensions()){
+		for (Plugin plugin : plugins) {
+			for (TypeExtension extension : plugin.getExtensions()) {
 				String targetTypeAsString = extension.getTargetTypeAsString();
 				Type targetType = provider.getType(targetTypeAsString);
 				set.add(targetType);
 			}
 		}
-		
-		/* now for each type we do the merge*/
-		for (Type type: set){
+
+		/* now for each type we do the merge */
+		for (Type type : set) {
 			merge(type, plugins);
 		}
 	}
-	
+
 	/**
 	 * Merges mixin types from plugins into target type if necessary
 	 * 
@@ -126,9 +126,10 @@ public class PluginMerger {
 	 * extensions. <br>
 	 * <br>
 	 * Here is an example:
+	 * 
 	 * <pre>
 	 apply plugin: GreetingPlugin
-
+	
 		greet {
 		  message = 'Hi from Gradle'
 		}
@@ -152,11 +153,14 @@ public class PluginMerger {
 		  }
 		}
 	 * </pre>
-	 * So what is different to extensions? It is directly added to the target class and not 
-	 * as new property like extensions! 
 	 * 
-	 * Example in DSL for <a href="https://docs.gradle.org/3.0/dsl/org.gradle.api.Project.html#org.gradle.api.Project:allprojects(groovy.lang.Closure)">allProjects</a>.
-	 * Look at "Methods added by the ear plugin" has "appDirName(..). which is directly added to projects.
+	 * So what is different to extensions? It is directly added to the target
+	 * class and not as new property like extensions!
+	 * 
+	 * Example in DSL for <a href=
+	 * "https://docs.gradle.org/3.0/dsl/org.gradle.api.Project.html#org.gradle.api.Project:allprojects(groovy.lang.Closure)">allProjects</a>.
+	 * Look at "Methods added by the ear plugin" has "appDirName(..). which is
+	 * directly added to projects.
 	 * 
 	 * 
 	 * @param plugin

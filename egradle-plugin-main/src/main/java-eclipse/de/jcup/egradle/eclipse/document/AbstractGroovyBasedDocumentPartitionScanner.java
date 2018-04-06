@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.document;
+package de.jcup.egradle.eclipse.document;
 
 import static de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers.*;
 
@@ -32,8 +32,9 @@ import org.eclipse.jface.text.rules.WordPatternRule;
 import de.jcup.egradle.core.text.DocumentIdentifier;
 
 /**
- * This abstract partition scanner handles groovy and java out of the box. Classes extending this 
- * scanner only have to handle other rules.
+ * This abstract partition scanner handles groovy and java out of the box.
+ * Classes extending this scanner only have to handle other rules.
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -77,7 +78,7 @@ public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBa
 
 		buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
 	}
-	
+
 	protected abstract void addOtherRules(List<IPredicateRule> rules);
 
 	private void buildAnnotationRules(List<IPredicateRule> rules, IToken token, IWordDetector wordDetector) {

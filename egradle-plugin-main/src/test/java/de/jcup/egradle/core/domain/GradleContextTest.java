@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.config.GradleConfiguration;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.CancelStateProvider.NeverCanceled;
 
@@ -63,14 +62,14 @@ public class GradleContextTest {
 		/* test */
 		assertEquals(mockedCancelStateProvider, contextToTest.getCancelStateProvider());
 	}
-	
+
 	@Test
-	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_not_null(){
+	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_not_null() {
 		assertNotNull(contextToTest.getCancelStateProvider());
 	}
-	
+
 	@Test
-	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_returns_a_never_canceld_instance(){
+	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_returns_a_never_canceld_instance() {
 		assertTrue(contextToTest.getCancelStateProvider() instanceof NeverCanceled);
 	}
 

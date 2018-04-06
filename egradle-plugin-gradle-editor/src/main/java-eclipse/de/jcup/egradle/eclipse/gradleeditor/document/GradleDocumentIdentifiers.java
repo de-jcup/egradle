@@ -13,21 +13,19 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document;
+package de.jcup.egradle.eclipse.gradleeditor.document;
 
 import de.jcup.egradle.core.text.DocumentIdentifier;
 
 public enum GradleDocumentIdentifiers implements DocumentIdentifier {
-	
-	GRADLE_KEYWORD,
-	
-	GRADLE_APPLY_KEYWORD,
-	
-	GRADLE_TASK_KEYWORD,
-	
-	GRADLE_VARIABLE,
-	;
 
+	GRADLE_KEYWORD,
+
+	GRADLE_APPLY_KEYWORD,
+
+	GRADLE_TASK_KEYWORD,
+
+	GRADLE_VARIABLE,;
 
 	@Override
 	public String getId() {

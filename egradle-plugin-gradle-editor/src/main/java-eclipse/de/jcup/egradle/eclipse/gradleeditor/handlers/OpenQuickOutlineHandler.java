@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.handlers;
+package de.jcup.egradle.eclipse.gradleeditor.handlers;
 
 import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
@@ -25,6 +25,5 @@ public class OpenQuickOutlineHandler extends AbstractEGradleEditorHandler {
 	protected void executeOnGradleEditor(GradleEditor gradleEditor) {
 		gradleEditor.openQuickOutline();
 	}
-
 
 }

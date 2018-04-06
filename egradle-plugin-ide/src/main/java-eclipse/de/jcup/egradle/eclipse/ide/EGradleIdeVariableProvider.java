@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import java.io.File;
 import java.util.HashMap;
@@ -47,19 +47,19 @@ public class EGradleIdeVariableProvider implements VariableProvider {
 		if (editorInput instanceof IFileEditorInput) {
 			IFileEditorInput feditorInput = (IFileEditorInput) editorInput;
 			IFile file = feditorInput.getFile();
-			
+
 			EclipseResourceHelper resHelper = EclipseUtil.getResourceHelper();
 			FileSupport fileHelper = EclipseUtil.getFileHelper();
-			
+
 			try {
 				File editorFile = resHelper.toFile(file);
 				isPartOfCurrentRootProject = fileHelper.isInside(editorFile, rootFolder);
 			} catch (CoreException e) {
-				IDEUtil.logError("Cannot convert to norm file:"+file, e);
+				IDEUtil.logError("Cannot convert to norm file:" + file, e);
 			}
 
 		}
-		
+
 		if (isPartOfCurrentRootProject) {
 			String rootProjectDir = rootFolder.getAbsolutePath().replace('\\', '/');
 			map.put("rootProject.projectDir", rootProjectDir);

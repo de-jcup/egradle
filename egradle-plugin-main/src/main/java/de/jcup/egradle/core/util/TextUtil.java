@@ -70,7 +70,9 @@ public class TextUtil {
 	}
 
 	/**
-	 * Trims only right whitespaces<br><br>
+	 * Trims only right whitespaces<br>
+	 * <br>
+	 * 
 	 * <pre>
 	 * "a "    -> "a"
 	 * " a"    -> " a"
@@ -78,6 +80,7 @@ public class TextUtil {
 	 * " a b " -> " a b"
 	 * "a b "  -> "a b"
 	 * </pre>
+	 * 
 	 * @param text
 	 * @return trimmed text (right whitespaces removed)
 	 */
@@ -88,28 +91,28 @@ public class TextUtil {
 		if (text.length() == 0) {
 			return text;
 		}
-		if (text.trim().length()==0){
+		if (text.trim().length() == 0) {
 			return EMPTY_STRING;
 		}
 		char[] charArray = text.toCharArray();
-		
+
 		boolean whitespaceFound = false;
-		boolean normalCharFound=false;
+		boolean normalCharFound = false;
 		for (int i = charArray.length - 1; i >= 0; i--) {
 			char c = charArray[i];
 			if (Character.isWhitespace(c)) {
 				whitespaceFound = true;
 			} else {
-				normalCharFound=true;
+				normalCharFound = true;
 				/* normal character found */
 				if (whitespaceFound) {
-					/* char before was a whitespace!*/
-					return text.substring(0, i+1);
+					/* char before was a whitespace! */
+					return text.substring(0, i + 1);
 				}
 			}
 		}
-		if (whitespaceFound && !normalCharFound){
-			/* means only whitespaces found*/
+		if (whitespaceFound && !normalCharFound) {
+			/* means only whitespaces found */
 			return EMPTY_STRING;
 		}
 		return text;

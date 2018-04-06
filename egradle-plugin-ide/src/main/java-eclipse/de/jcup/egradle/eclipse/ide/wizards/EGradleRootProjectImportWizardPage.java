@@ -39,18 +39,18 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	 * If set the wizard will use this as path
 	 */
 	private String customRootProjectpath;
-	
+
 	private String customJavaHome;
 
 	private EGradleCallType initialCallType;
 
-	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath,
-			RootProjectConfigMode mode, String customJavaHome) {
+	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath, RootProjectConfigMode mode,
+			String customJavaHome) {
 		super(pageName);
 		setTitle("Import gradle projects"); // NON-NLS-1
 		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
 		this.customRootProjectpath = customRootProjectpath;
-		this.customJavaHome=customJavaHome;
+		this.customJavaHome = customJavaHome;
 		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter(), mode);
 	}
 
@@ -78,7 +78,7 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 		}
 		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
 		String gradleCallCommand = preferences.getGradleCallCommand();
-		String gradleCallTypeID = initialCallType == null ? preferences.getGradleCallTypeID(): initialCallType.getId();
+		String gradleCallTypeID = initialCallType == null ? preferences.getGradleCallTypeID() : initialCallType.getId();
 		String shellId = preferences.getGradleShellId();
 		String rootProjectPath = null;
 		if (StringUtils.isBlank(customRootProjectpath)) {
@@ -99,8 +99,8 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	public String getGlobalJavaHomePath() {
 		return configComposite.getGlobalJavaHomePath();
 	}
-	
-	public boolean isRestoringMetaData(){
+
+	public boolean isRestoringMetaData() {
 		return configComposite.isRestoringMetaData();
 	}
 
@@ -146,6 +146,6 @@ public class EGradleRootProjectImportWizardPage extends WizardPage {
 	}
 
 	public void setInitialCallType(EGradleCallType callType) {
-		this.initialCallType=callType;
+		this.initialCallType = callType;
 	}
 }

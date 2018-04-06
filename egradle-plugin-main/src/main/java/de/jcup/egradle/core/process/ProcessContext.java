@@ -13,12 +13,12 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import de.jcup.egradle.core.domain.CancelStateProvider;
 
 public interface ProcessContext {
-	
+
 	/**
 	 * @return cancel state provider ,never <code>null</code>
 	 */

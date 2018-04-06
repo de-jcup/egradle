@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -36,9 +36,9 @@ import de.jcup.egradle.core.util.Filter;
 import de.jcup.egradle.core.util.ILogSupport;
 import de.jcup.egradle.eclipse.api.GroovyBasedModelType;
 
-public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements ITreeContentProvider{
+public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements ITreeContentProvider {
 
-	private static final Object[] NO_OBJECTS = new Object[]{};
+	private static final Object[] NO_OBJECTS = new Object[] {};
 
 	protected PersistedMarkerHelper outlineErrorMarkerHelper;
 	private static Object[] EMPTY = NO_OBJECTS;
@@ -53,7 +53,7 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 	public GroovyBasedModelType getModelType() {
 		if (groovyBasedModelType == null) {
 			groovyBasedModelType = createDefaultModelType();
-	
+
 		}
 		return groovyBasedModelType;
 	}
@@ -68,8 +68,8 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 	 * Clears model cache, so a model rebuild is tried
 	 */
 	public void clearModelCache() {
-		useCachedModel=false;
-		if (editor!=null){
+		useCachedModel = false;
+		if (editor != null) {
 			getElements(editor.getDocument());
 		}
 	}
@@ -82,18 +82,18 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 	public Object[] getElements(Object inputElement) {
 		String dataAsString = null;
 		String charset = null;
-		
+
 		if (inputElement instanceof IDocument) {
-			if (editor==null){
+			if (editor == null) {
 				return NO_OBJECTS;
 			}
-			if (useCachedModel && model!=null){
+			if (useCachedModel && model != null) {
 				return getRootChildren();
 			}
-			useCachedModel=true;
+			useCachedModel = true;
 			IDocument document = (IDocument) inputElement;
 			dataAsString = document.get();
-	
+
 			IEditorInput input = editor.getEditorInput();
 			if (input instanceof IFileEditorInput) {
 				IFileEditorInput fie = (IFileEditorInput) input;
@@ -101,17 +101,17 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 				try {
 					charset = file.getCharset();
 				} catch (CoreException e) {
-					logSupport.logError("Was not able to get charset of file:"+file,e);
+					logSupport.logError("Was not able to get charset of file:" + file, e);
 				}
 			}
-		}else if (inputElement instanceof String){
-			dataAsString=(String) inputElement;
-		}else{
+		} else if (inputElement instanceof String) {
+			dataAsString = (String) inputElement;
+		} else {
 			/* do not set dataAsString - so FALL BACK must do the job */
 		}
-		
+
 		synchronized (monitor) {
-			if (dataAsString!=null){
+			if (dataAsString != null) {
 				tryTolLoad(dataAsString, charset);
 			}
 			if (model != null) {
@@ -126,20 +126,22 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 		try (InputStream is = new ByteArrayInputStream(dataAsString.getBytes())) {
 			Object[] elements = null;
 			GroovyBasedModelType groovyBasedModelType = getModelType();
-			
+
 			elements = createElements(charset, is, groovyBasedModelType);
-			if (elements ==null){
+			if (elements == null) {
 				elements = new Object[] { groovyBasedModelType + " not supported as modeltype!" };
 			}
-			
+
 			return elements;
 		} catch (Exception e) {
-			logSupport.logError("Problems on outline building",e);
+			logSupport.logError("Problems on outline building", e);
 			return null;
 		}
 	}
-	protected abstract Object[] createElements(String charset, InputStream is, GroovyBasedModelType groovyBasedModelType) throws Exception;
-		
+
+	protected abstract Object[] createElements(String charset, InputStream is,
+			GroovyBasedModelType groovyBasedModelType) throws Exception;
+
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof Item) {
@@ -193,7 +195,7 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 	}
 
 	protected void appendError(BuildContext context) {
-	
+
 		if (!context.hasErrors()) {
 			return;
 		}
@@ -201,14 +203,14 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 		if (file == null) {
 			return;
 		}
-	
+
 		try {
 			for (Error error : context.getErrors()) {
 				outlineErrorMarkerHelper.createErrorMarker(file, error.getMessage(), error.getLineNumber(),
 						error.getCharStart(), error.getCharEnd());
 			}
 		} catch (CoreException e) {
-			logSupport.logError("Was not able to create error marker at file:"+file,e);
+			logSupport.logError("Was not able to create error marker at file:" + file, e);
 		}
 	}
 
@@ -228,7 +230,8 @@ public abstract class AbstractGroovyBasedEditorOutlineContentProvider implements
 		return file;
 	}
 
-	protected Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder) throws ModelBuilderException {
+	protected Object[] createModelAndGetRootElements(BuildContext context, ModelBuilder builder)
+			throws ModelBuilderException {
 		synchronized (monitor) {
 			Model newModel = builder.build(context);
 			if (context == null || !context.hasErrors()) {

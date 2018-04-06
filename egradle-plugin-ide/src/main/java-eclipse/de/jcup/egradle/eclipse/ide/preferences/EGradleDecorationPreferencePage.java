@@ -27,7 +27,6 @@ public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage i
 
 	private BooleanFieldEditor subProjectWithIconDecorationEnabled;
 
-
 	public EGradleDecorationPreferencePage() {
 		super(GRID);
 		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
@@ -47,20 +46,18 @@ public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage i
 		groupLayoutData.verticalSpan = 2;
 		groupLayoutData.horizontalSpan = 3;
 
-		subProjectWithIconDecorationEnabled=		new BooleanFieldEditor(
-					EGradleIdePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(),
-					"Subproject are decorated with gradle icon",
-					getFieldEditorParent());
+		subProjectWithIconDecorationEnabled = new BooleanFieldEditor(
+				EGradleIdePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(),
+				"Subproject are decorated with gradle icon", getFieldEditorParent());
 		addField(subProjectWithIconDecorationEnabled);
 	}
 
 	public boolean performOk() {
-		boolean done =  super.performOk();
+		boolean done = super.performOk();
 		IDEUtil.refreshAllProjectDecorations();
 		return done;
 	}
-	
-	
+
 	public void init(IWorkbench workbench) {
 
 	}

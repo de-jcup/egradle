@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DefaultTypeTemplatesProviderTest {
-	
+
 	private TypeTemplatesProvider providerToTest;
 
 	@Before
@@ -35,7 +35,7 @@ public class DefaultTypeTemplatesProviderTest {
 	public void test_contains_data_for_dependency_handler() {
 		List<Template> templates = providerToTest.getTemplatesForType("org.gradle.api.artifacts.dsl.DependencyHandler");
 		assertNotNull(templates);
-		assertTrue((templates.size()>1));
+		assertTrue((templates.size() > 1));
 	}
 
 }

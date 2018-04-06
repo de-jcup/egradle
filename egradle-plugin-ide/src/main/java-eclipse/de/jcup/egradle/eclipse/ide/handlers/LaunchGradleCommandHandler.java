@@ -61,7 +61,6 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 	public static final String COMMAND_ID = "egradle.commands.launch";
 	public static final String PARAMETER_LAUNCHCONFIG = "egradle.command.launch.config";
 
-	
 	private ILaunch launch;
 	private EGradlePostBuildJob postJob;
 	private String taskAttributeOverride;
@@ -71,14 +70,15 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		try {
 			IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
 			IParameterValues values = configparameter.getValues();
-			if (values instanceof LaunchParameterValues){
+			if (values instanceof LaunchParameterValues) {
 				LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
 				taskAttributeOverride = launchParameterValues.getOverriddenTasks();
 				launch = launchParameterValues.getLaunch();
 				postJob = launchParameterValues.getPostJob();
-				
-			}else{
-				IDEUtil.logWarning(getClass().getSimpleName()+":parameter values without being a launch parameter value was used !??! :"+ values);
+
+			} else {
+				IDEUtil.logWarning(getClass().getSimpleName()
+						+ ":parameter values without being a launch parameter value was used !??! :" + values);
 			}
 
 		} catch (NotDefinedException | ParameterValuesException e) {
@@ -93,18 +93,17 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 			try {
 				/* commands */
-				String rootProjectPath = configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH,(String)null);
-				if (! StringUtilsAccess.isBlank(rootProjectPath)){
+				String rootProjectPath = configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH, (String) null);
+				if (!StringUtilsAccess.isBlank(rootProjectPath)) {
 					context.switchRootProjectPath(rootProjectPath);
 				}
-				
-				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME,
-						"");
+
+				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
 				String commandString = null;
-				if (taskAttributeOverride==null){
-					commandString= configuration.getAttribute(PROPERTY_TASKS, "");
-				}else{
-					commandString=taskAttributeOverride;
+				if (taskAttributeOverride == null) {
+					commandString = configuration.getAttribute(PROPERTY_TASKS, "");
+				} else {
+					commandString = taskAttributeOverride;
 				}
 
 				GradleCommand[] commands = null;
@@ -123,12 +122,12 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 				/*
 				 * system properties, gradle project properties and enviroment
 				 */
-				Map<String, String> gradleProperties = configuration
-						.getAttribute(GRADLE_PROPERTIES, Collections.emptyMap());
-				Map<String, String> systemProperties = configuration
-						.getAttribute(SYSTEM_PROPERTIES, Collections.emptyMap());
-				Map<String, String> environment = configuration.getAttribute(
-						ENVIRONMENT_PROPERTIES, Collections.emptyMap());
+				Map<String, String> gradleProperties = configuration.getAttribute(GRADLE_PROPERTIES,
+						Collections.emptyMap());
+				Map<String, String> systemProperties = configuration.getAttribute(SYSTEM_PROPERTIES,
+						Collections.emptyMap());
+				Map<String, String> environment = configuration.getAttribute(ENVIRONMENT_PROPERTIES,
+						Collections.emptyMap());
 
 				context.getGradleProperties().putAll(gradleProperties);
 				context.getSystemProperties().putAll(systemProperties);
@@ -154,9 +153,10 @@ public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 		}
 	}
 
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
+	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
+			throws GradleExecutionException {
 		return new GradleExecutionDelegate(outputHandler,
-				new EclipseLaunchProcessExecutor(outputHandler, launch,postJob), this, null);
+				new EclipseLaunchProcessExecutor(outputHandler, launch, postJob), this, null);
 	}
 
 }

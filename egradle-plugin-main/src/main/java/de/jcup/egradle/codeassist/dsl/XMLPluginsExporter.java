@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,11 +26,12 @@ public class XMLPluginsExporter {
 
 	/**
 	 * Export XMLPlugins
+	 * 
 	 * @param plugins
 	 * @param stream
 	 * @throws IOException
 	 */
-	public void exportPlugins(XMLPlugins plugins , OutputStream stream) throws IOException{
+	public void exportPlugins(XMLPlugins plugins, OutputStream stream) throws IOException {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(XMLPlugins.class);

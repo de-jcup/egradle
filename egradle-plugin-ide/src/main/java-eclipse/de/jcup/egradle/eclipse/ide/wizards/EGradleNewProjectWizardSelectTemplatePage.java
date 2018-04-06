@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.wizards;
+package de.jcup.egradle.eclipse.ide.wizards;
 
 import java.util.List;
 
@@ -63,11 +63,11 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 		layoutData.heightHint = 200;
 
 		templateList = new org.eclipse.swt.widgets.List(parent, SWT.SINGLE | SWT.SCROLL_PAGE);
-		
+
 		templateList.setLayoutData(layoutData);
-		
-		descriptionText = SWTFactory.createText(parent, SWT.WRAP | SWT.MULTI | SWT.BORDER |  SWT.READ_ONLY, SWT.FILL);
-		
+
+		descriptionText = SWTFactory.createText(parent, SWT.WRAP | SWT.MULTI | SWT.BORDER | SWT.READ_ONLY, SWT.FILL);
+
 		layoutData = new GridData();
 		layoutData.horizontalAlignment = SWT.FILL;
 		layoutData.verticalAlignment = SWT.FILL;
@@ -76,10 +76,10 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 		layoutData.minimumHeight = 50;
 		layoutData.heightHint = 80;
 		descriptionText.setLayoutData(layoutData);
-		
+
 		infoText = SWTFactory.createText(parent, SWT.WRAP | SWT.MULTI | SWT.READ_ONLY, SWT.FILL);
-		SWTUtil.setFontDataStyle(infoText,SWT.ITALIC);
-		
+		SWTUtil.setFontDataStyle(infoText, SWT.ITALIC);
+
 		layoutData = new GridData();
 		layoutData.horizontalAlignment = SWT.FILL;
 		layoutData.verticalAlignment = SWT.FILL;
@@ -88,7 +88,7 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 		layoutData.minimumHeight = 10;
 		layoutData.heightHint = 30;
 		infoText.setLayoutData(layoutData);
-		
+
 		initTemplateComponent(parent);
 
 		// required to avoid an error in the system
@@ -108,7 +108,7 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 
 		templateList.setFont(parent.getFont());
 		templateList.setItems(items);
-		
+
 		if (context.getSelectedTemplate() == null) {
 			templateList.select(0);
 			handleTemplateSelection(0);
@@ -131,10 +131,10 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 		context.setSelectedTemplate(selectedTemplate);
 		descriptionText.setText(selectedTemplate.getDescription());
 		StringBuilder info = new StringBuilder();
-		if (selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER)){
+		if (selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER)) {
 			info.append("A gradle wrapper will be created. You can use the wrapper for import");
-		}else{
-			info.append("Comes without gradle wrapper - so you must import with a local gradle installation!" );
+		} else {
+			info.append("Comes without gradle wrapper - so you must import with a local gradle installation!");
 		}
 		infoText.setText(info.toString());
 	}

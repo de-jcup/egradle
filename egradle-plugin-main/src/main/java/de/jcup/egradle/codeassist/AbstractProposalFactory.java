@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,14 +25,14 @@ import java.util.Set;
  * @author albert
  *
  */
-abstract class AbstractProposalFactory implements FilterableProposalFactory{
-	
+abstract class AbstractProposalFactory implements FilterableProposalFactory {
+
 	private boolean ignoreGetterOrSetter;
 
 	public void setFilterGetterAndSetter(boolean ignoreGetterOrSetter) {
 		this.ignoreGetterOrSetter = ignoreGetterOrSetter;
 	}
-	
+
 	protected boolean isIgnoreGetterOrSetter() {
 		return ignoreGetterOrSetter;
 	}

@@ -139,8 +139,8 @@ public class Item {
 	}
 
 	/**
-	 * Set name and calculate identifier - if you want to explicit set identifer you must it after calling this method via
-	 * {@link #setIdentifier(String)}
+	 * Set name and calculate identifier - if you want to explicit set identifer
+	 * you must it after calling this method via {@link #setIdentifier(String)}
 	 * 
 	 * @param name
 	 */
@@ -168,8 +168,9 @@ public class Item {
 	}
 
 	/**
-	 * Be aware: {@link #setName(String)} does change identifier too! Calling this method
-	 * should only be necessary in some special cases!
+	 * Be aware: {@link #setName(String)} does change identifier too! Calling
+	 * this method should only be necessary in some special cases!
+	 * 
 	 * @param identifier
 	 */
 	public void setIdentifier(String identifier) {
@@ -367,12 +368,15 @@ public class Item {
 	/**
 	 * Creates a string containing all information of this item, separated by
 	 * space, parameters with comma
-	 * @param withType - when <code>true</code> the type (if set) is inside search string, otherwise not
+	 * 
+	 * @param withType
+	 *            - when <code>true</code> the type (if set) is inside search
+	 *            string, otherwise not
 	 * @return full string
 	 */
 	String buildSearchString(boolean withType) {
 		StringBuilder sb = new StringBuilder();
-		if (withType){
+		if (withType) {
 			if (type != null) {
 				sb.append(type);
 				sb.append(" ");
@@ -427,9 +431,9 @@ public class Item {
 	public ItemType getLastChainedItemType() {
 		return lastChainedItemType;
 	}
-	
+
 	public void setLastChainedItemType(ItemType lastItemType) {
 		this.lastChainedItemType = lastItemType;
 	}
-	
+
 }

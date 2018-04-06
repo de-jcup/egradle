@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.util;
+package de.jcup.egradle.eclipse.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,14 +29,14 @@ import de.jcup.egradle.eclipse.api.VariableProvider;
 public class VariablesProviderRegistry {
 
 	private static final String VARIABLE_PROVIDER_ID = "de.jcup.egradle.eclipse.extension.variableprovider";
-	public static VariablesProviderRegistry INSTANCE = new VariablesProviderRegistry(); 
-	
+	public static VariablesProviderRegistry INSTANCE = new VariablesProviderRegistry();
+
 	private List<VariableProvider> providers;
-	
+
 	public VariablesProviderRegistry() {
-	
-		List<VariableProvider> variableProviders=new ArrayList<>();
-		
+
+		List<VariableProvider> variableProviders = new ArrayList<>();
+
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] config = registry.getConfigurationElementsFor(VARIABLE_PROVIDER_ID);
 		try {
@@ -47,17 +47,18 @@ public class VariablesProviderRegistry {
 					variableProviders.add(provider);
 				}
 			}
-			
+
 		} catch (CoreException ex) {
 			EclipseUtil.logError("Was not able to initialize variable providers registry", ex);
 		}
-		
+
 		providers = Collections.unmodifiableList(variableProviders);
-		
+
 	}
 
 	/**
 	 * Returns registered providers as an immutable list
+	 * 
 	 * @return unmodifiable list of providers
 	 */
 	public List<VariableProvider> getProviders() {

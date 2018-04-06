@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.console;
+package de.jcup.egradle.eclipse.ide.console;
 
 import java.util.List;
 
@@ -37,14 +37,14 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 	@Override
 	public void init(IConsole console) {
 		IDEUtil.removeAllValidationErrorsOfConsoleOutput();
-		
+
 		rememberOutputHandler = IDEUtil.createOutputHandlerForValidationErrorsOnConsole();
 		document = console.getDocument();
 	}
 
 	@Override
 	public void lineAppended(IRegion lineRegion) {
-		if (rememberOutputHandler==null){
+		if (rememberOutputHandler == null) {
 			return;
 		}
 		if (document == null) {
@@ -56,8 +56,8 @@ public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 				/* ok . time to validate */
 				List<String> list = rememberOutputHandler.createOutputToValidate();
 				IDEUtil.showValidationErrorsOfConsoleOutput(list);
-				rememberOutputHandler=null;
-			}else{
+				rememberOutputHandler = null;
+			} else {
 				rememberOutputHandler.output(lineStr);
 			}
 		} catch (BadLocationException e) {

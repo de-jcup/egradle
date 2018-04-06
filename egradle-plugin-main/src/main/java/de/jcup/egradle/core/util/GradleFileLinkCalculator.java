@@ -13,14 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 public class GradleFileLinkCalculator {
 
 	private static final String IDENTIFIER = ".gradle";
 	private static final int IDENTIFIER_LENGTH = IDENTIFIER.length();
 	private GradleStringTransformer transformer;
-
 
 	public GradleHyperLinkResult createFileLinkString(String line, int offsetInLine) {
 		if (line == null) {
@@ -92,14 +91,14 @@ public class GradleFileLinkCalculator {
 		}
 
 		String linkContent = line.substring(urlOffsetInLine, urlOffsetInLine + urlLength);
-		 if (transformer!=null){
-			 String transformed = transformer.transform(linkContent);
-			 
-			 if (transformed!=null){
-				 linkContent=transformed;
-			 }
-			 
-		 }
+		if (transformer != null) {
+			String transformed = transformer.transform(linkContent);
+
+			if (transformed != null) {
+				linkContent = transformed;
+			}
+
+		}
 
 		GradleHyperLinkResult result = new GradleHyperLinkResult();
 		result.linkOffsetInLine = urlOffsetInLine;

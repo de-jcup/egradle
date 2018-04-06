@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -61,7 +61,8 @@ public class SWTFactory {
 	 * Sets width and height hint for the button control. <b>Note:</b> This is a
 	 * NOP if the button's layout data is not an instance of
 	 * <code>GridData</code>.
-	 * @param button 
+	 * 
+	 * @param button
 	 *            button for which to set the dimension hint
 	 */
 	public static void setButtonDimensionHint(Button button) {
@@ -792,7 +793,7 @@ public class SWTFactory {
 		c.select(0);
 		return c;
 	}
-	
+
 	/**
 	 * This method allows us to open the preference dialog on the specific page,
 	 * in this case the perspective page
@@ -801,7 +802,8 @@ public class SWTFactory {
 	 *            the id of preference page to show
 	 */
 	public static void showPreferencePage(String id) {
-		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), id, new String[] { id }, null).open();
+		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), id, new String[] { id }, null)
+				.open();
 	}
 
 	/**
@@ -818,6 +820,7 @@ public class SWTFactory {
 	 *            the listing of pages to be shown in the dialog
 	 */
 	public static void showPreferencePage(String page_id, String[] page_filters) {
-		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), page_id, page_filters, null).open();
+		PreferencesUtil.createPreferenceDialogOn(EclipseUtil.getActiveWorkbenchShell(), page_id, page_filters, null)
+				.open();
 	}
 }

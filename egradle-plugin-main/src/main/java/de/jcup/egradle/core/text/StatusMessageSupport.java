@@ -13,10 +13,11 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 /**
  * Adapter interface to provide status messaging
+ * 
  * @author Albert Tregnaghi
  *
  */

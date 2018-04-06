@@ -108,7 +108,13 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
 		}
 		int length = region.getLength();
 
-		String textBeforeColumn = document.get(offset - length, length-1); //-1 to get not he bracket itself
+		String textBeforeColumn = document.get(offset - length, length - 1); // -1
+																				// to
+																				// get
+																				// not
+																				// he
+																				// bracket
+																				// itself
 		String relevantColumnsBefore = TextUtil.trimRightWhitespaces(textBeforeColumn);
 		InsertionData result = support.prepareInsertionString(
 				data.createMultiLineTemplate(SourceCodeInsertionSupport.CURSOR_VARIABLE), relevantColumnsBefore);

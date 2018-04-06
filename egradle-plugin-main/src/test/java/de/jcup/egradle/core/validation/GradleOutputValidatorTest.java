@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.validation;
+package de.jcup.egradle.core.validation;
 
 import static org.junit.Assert.*;
 
@@ -37,9 +37,8 @@ public class GradleOutputValidatorTest {
 		output = new ArrayList<>();
 	}
 
-	
 	@Test
-	public void test_bugfix_157_works(){
+	public void test_bugfix_157_works() {
 		// @formatter:off
 		output.add("FAILURE: Build failed with an exception.                                                                                                                                    ");
 		output.add("                                                                                                                                                                            ");
@@ -64,7 +63,7 @@ public class GradleOutputValidatorTest {
 		output.add("                                                                                                                                                                            ");
 		output.add("Total time: 2.416 secs                                                                                                                                                      ");
 		// @formatter:on
-		
+
 		ValidationResult problem = validatorToTest.validate(output);
 		assertTestOutputDoesNotExceedLimits();
 		assertNotNull(problem);
@@ -75,7 +74,7 @@ public class GradleOutputValidatorTest {
 				problem.getScriptPath());
 
 	}
-	
+
 	@Test
 	public void convert_problem_is_recognized() {
 		output.add("* Where:");
@@ -258,11 +257,14 @@ public class GradleOutputValidatorTest {
 	}
 
 	/**
-	 * Assert output in test is not larger than in real world
-	 * <br><br>
-	 * This is not optimal and tests another component part, but it tests that each output created by this tests, does not exceed the current shrink limit.
-	 * Otherwise the tests will not fail but it will not work in EGradle, because the console line outputHandler shrinks the output to the limit given in 
-	 * {@link DSLConstants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So everything what is tested here, has to work in EGradle too
+	 * Assert output in test is not larger than in real world <br>
+	 * <br>
+	 * This is not optimal and tests another component part, but it tests that
+	 * each output created by this tests, does not exceed the current shrink
+	 * limit. Otherwise the tests will not fail but it will not work in EGradle,
+	 * because the console line outputHandler shrinks the output to the limit
+	 * given in {@link DSLConstants#VALIDATION_OUTPUT_SHRINK_LIMIT}. So
+	 * everything what is tested here, has to work in EGradle too
 	 */
 	protected void assertTestOutputDoesNotExceedLimits() {
 		int size = output.size();

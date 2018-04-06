@@ -16,25 +16,25 @@
 package de.jcup.egradle.core.process;
 
 public interface OutputHandler {
-	
+
 	/**
 	 * Output outputHandler does nothing
 	 */
 	public static final NoOutputHandler NO_OUTPUT = new NoOutputHandler();
-	
-	void output(String line);
-	
-	public static class NoOutputHandler implements OutputHandler{
 
-		private NoOutputHandler(){
-			
+	void output(String line);
+
+	public static class NoOutputHandler implements OutputHandler {
+
+		private NoOutputHandler() {
+
 		}
-		
+
 		@Override
 		public void output(String line) {
-			
+
 		}
-		
+
 	}
 
 }

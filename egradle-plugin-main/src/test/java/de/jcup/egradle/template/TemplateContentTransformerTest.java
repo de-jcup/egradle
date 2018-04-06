@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.template;
+package de.jcup.egradle.template;
 
 import static org.junit.Assert.*;
 
@@ -46,14 +46,14 @@ public class TemplateContentTransformerTest {
 	public void constructor_with_null_throws_illegal_argument() {
 		expected.expect(IllegalArgumentException.class);
 
-		 new TemplateContentTransformer(null);
+		new TemplateContentTransformer(null);
 	}
 
 	@Test
 	public void content_is_not_changed_when_properties_empty() {
 		/* prepare */
 		TemplateContentTransformer transformerToTest = new TemplateContentTransformer(properties);
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("// a simple comment line #{egradle.template.info} xxx");
 		String source = sb.toString();
@@ -69,9 +69,9 @@ public class TemplateContentTransformerTest {
 	public void content_is_changed_when_properties_has_value() {
 		/* prepare */
 		properties.put("egradle.template.info", "INFO");
-		
+
 		TemplateContentTransformer transformerToTest = new TemplateContentTransformer(properties);
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("// a simple comment line #{egradle.template.info} xxx");
 		String source = sb.toString();
@@ -88,7 +88,7 @@ public class TemplateContentTransformerTest {
 		/* prepare */
 		properties.put("egradle.template.info1", "INFO1");
 		properties.put("egradle.template.info3", "INFO3");
-		
+
 		TemplateContentTransformer transformerToTest = new TemplateContentTransformer(properties);
 
 		StringBuilder sb = new StringBuilder();

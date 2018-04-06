@@ -13,15 +13,17 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 public interface Validator<T> {
 
 	/**
 	 * Validate given object
+	 * 
 	 * @param object
-	 * @throws ValidationException when not valid
+	 * @throws ValidationException
+	 *             when not valid
 	 */
 	public void validate(T object) throws ValidationException;
-	
+
 }

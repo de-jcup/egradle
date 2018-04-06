@@ -13,16 +13,16 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleApplyKeyWords implements DocumentKeyWord {
 
 	APPLY_FROM("apply from"),
-	
+
 	APPLY_PLUGIN("apply plugin"),
-	
+
 	;
 
 	private String text;

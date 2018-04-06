@@ -28,25 +28,26 @@ import de.jcup.egradle.eclipse.preferences.AbstractEditorPreferences;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
-public class GradleEditorPreferences extends AbstractEditorPreferences implements IEditorPreferences{
+public class GradleEditorPreferences extends AbstractEditorPreferences implements IEditorPreferences {
 
 	private static GradleEditorPreferences INSTANCE = new GradleEditorPreferences();
+
 	private GradleEditorPreferences() {
 	}
-	
+
 	protected void updateEditorColors(IEditorPart editor) {
-		if (! (editor instanceof GradleEditor)){
+		if (!(editor instanceof GradleEditor)) {
 			return;
 		}
 		GradleEditor geditor = (GradleEditor) editor;
 		geditor.handleColorSettingsChanged();
 	}
-	
+
 	protected boolean checkPropertyMeansEditorColorsChanged(String property) {
 		boolean colorChanged = false;
-		for (GradleEditorSyntaxColorPreferenceConstants c: GradleEditorSyntaxColorPreferenceConstants.values()){
-			if (property.equals(c.getId())){
-				colorChanged=true;
+		for (GradleEditorSyntaxColorPreferenceConstants c : GradleEditorSyntaxColorPreferenceConstants.values()) {
+			if (property.equals(c.getId())) {
+				colorChanged = true;
 				break;
 			}
 		}
@@ -66,7 +67,8 @@ public class GradleEditorPreferences extends AbstractEditorPreferences implement
 	}
 
 	public boolean isCodeAssistNoProposalsForGetterOrSetter() {
-		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
+		return getBooleanPreference(
+				GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
 	}
 
 	public boolean isCodeAssistTooltipsEnabled() {
@@ -77,6 +79,7 @@ public class GradleEditorPreferences extends AbstractEditorPreferences implement
 	public boolean isEditorAutoCreateEndBracketsEnabled() {
 		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_AUTO_CREATE_END_BRACKETSY);
 	}
+
 	@Override
 	public boolean isLinkOutlineWithEditorEnabled() {
 		return getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
@@ -101,5 +104,5 @@ public class GradleEditorPreferences extends AbstractEditorPreferences implement
 	public PreferenceIdentifiable getP_EDITOR_ENCLOSING_BRACKETS() {
 		return P_EDITOR_ENCLOSING_BRACKETS;
 	}
-	
+
 }

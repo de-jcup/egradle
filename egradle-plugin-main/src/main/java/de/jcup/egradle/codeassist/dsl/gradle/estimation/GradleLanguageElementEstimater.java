@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +45,6 @@ public class GradleLanguageElementEstimater {
 	ByTaskTypeEstimationStrategy byItemTaskTypeVisitor = new ByTaskTypeEstimationStrategy(this);
 
 	EstimationDataFinder finder = new EstimationDataFinder();
-
 
 	public GradleLanguageElementEstimater(TypeProvider provider) {
 		if (provider == null) {
@@ -108,7 +107,7 @@ public class GradleLanguageElementEstimater {
 			Item currentPathItem = pathIterator.next();
 			String currentPathItemName = currentPathItem.getIdentifier();
 			if (currentPathItemName == null) {
-				continue; 
+				continue;
 			}
 			EstimationTypeContext currentMode = EstimationTypeContext.UNKNOWN;
 			if (currentPathItem.isClosureBlock()) {
@@ -120,10 +119,10 @@ public class GradleLanguageElementEstimater {
 			found = finder.findMostSuitable(found, current.type, currentPathItem, methodVisitor);
 			found = finder.findMostSuitable(found, current.type, currentPathItem, propertyVisitor);
 
-			if (found != null){
-				extensionName=found.extensionName;
+			if (found != null) {
+				extensionName = found.extensionName;
 			}
-			
+
 			int currentReliability;
 			if (found != null) {
 				current = found;
@@ -158,8 +157,6 @@ public class GradleLanguageElementEstimater {
 
 		return result;
 	}
-
-
 
 	public class EstimationResult implements LanguageElementMetaData {
 		private double reliability;

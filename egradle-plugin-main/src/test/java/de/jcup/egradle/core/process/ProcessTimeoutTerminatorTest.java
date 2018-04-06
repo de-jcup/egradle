@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import static org.mockito.Mockito.*;
 
@@ -23,8 +23,8 @@ import org.junit.rules.Timeout;
 
 public class ProcessTimeoutTerminatorTest {
 	@Rule
-	public Timeout globalTimeout = Timeout.seconds(10); 
-	
+	public Timeout globalTimeout = Timeout.seconds(10);
+
 	@Test
 	public void terminator_with_timeout_1_second_is_not_stopping_until_last_restart_call_is_reset_calling()
 			throws Exception {
@@ -49,12 +49,12 @@ public class ProcessTimeoutTerminatorTest {
 																// seconds
 
 		/* wait for terminator to end itself */
-		while (terminatorToTest.isRunning()){
+		while (terminatorToTest.isRunning()) {
 			Thread.sleep(200);
 		}
-		
+
 		/* now terminator must have tried to destroy the process */
-		verify(process, times(1)).destroy();  
+		verify(process, times(1)).destroy();
 
 	}
 

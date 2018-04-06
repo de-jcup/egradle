@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public enum EGradleShellType {
-	
-	
-	
+
 	NONE(null, null),
 
 	BASH("bash", "--version"),
@@ -90,7 +88,6 @@ public enum EGradleShellType {
 		List<String> shellExecParams = buildShellAndOptions();
 		return shellExecParams;
 	}
-
 
 	private List<String> buildShellAndOptions() {
 		List<String> shellExecParams = new ArrayList<>();

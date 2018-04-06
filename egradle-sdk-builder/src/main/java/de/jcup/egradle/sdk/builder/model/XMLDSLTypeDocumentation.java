@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.model;
+package de.jcup.egradle.sdk.builder.model;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -57,8 +57,8 @@ public class GradleExecutorTest {
 		mockedRootProject = mock(GradleRootProject.class);
 		mockedContext = mock(GradleContext.class);
 		mockedConfiguration = mock(GradleConfiguration.class);
-		mockedCancelStateProvider=mock(CancelStateProvider.class);
-		
+		mockedCancelStateProvider = mock(CancelStateProvider.class);
+
 		when(mockedContext.getOptions()).thenReturn(new String[] {});
 		when(mockedContext.getRootProject()).thenReturn(mockedRootProject);
 		when(mockedContext.getConfiguration()).thenReturn(mockedConfiguration);
@@ -71,30 +71,30 @@ public class GradleExecutorTest {
 		mockedCommand2 = mock(GradleCommand.class);
 
 	}
+
 	@Test
 	public void create_execution_command__test_with_arguments_is_correct_created() {
 		List<String> data = new ArrayList<>();
 		data.add("--tests");
 		data.add("MyTestClass");
-		
-		when(mockedCommand1.getCommand()).thenReturn("test"); 
+
+		when(mockedCommand1.getCommand()).thenReturn("test");
 		when(mockedCommand1.getCommandArguments()).thenReturn(data);
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
 
 		String[] result = executorToTest.createExecutionCommand(mockedContext);
 		assertNotNull(result);
-		
+
 		assertEquals(4, result.length);
-		
-		int i=0;
-		assertEquals("gradleCommand",result[i++]);
-		assertEquals("test",result[i++]);
-		assertEquals("--tests",result[i++]);
-		assertEquals("MyTestClass",result[i++]);
-		
+
+		int i = 0;
+		assertEquals("gradleCommand", result[i++]);
+		assertEquals("test", result[i++]);
+		assertEquals("--tests", result[i++]);
+		assertEquals("MyTestClass", result[i++]);
+
 	}
-	
-	
+
 	@Test
 	public void executing_returns_result_not_null() {
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
@@ -111,82 +111,92 @@ public class GradleExecutorTest {
 		assertNotNull(processExecutionResult);
 		assertTrue(processExecutionResult.isOkay());
 	}
-	
+
 	@Test
 	public void gradleInstallationDirectory_is_appended_before_gradle_command() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		File userHome = new  File(System.getProperty("user.home"));
+		File userHome = new File(System.getProperty("user.home"));
 		when(mockedConfiguration.getGradleBinDirectory()).thenReturn(userHome.getAbsolutePath());
 		when(mockedConfiguration.getGradleCommandFullPath()).thenReturn("fullpath");
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"fullpath", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "fullpath",
+				"mockedCommand1");
 	}
-	
+
 	@Test
 	public void when_gradle_context_gets_empty_string_array_for_options_the_no_option_is_added() throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedContext.getOptions()).thenReturn(new String[]{});
+		when(mockedContext.getOptions()).thenReturn(new String[] {});
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
-	
+
 	@Test
-	public void when_gradle_context_gets_filled_string_array_with_2_options_for_options_the_options_are_added() throws Exception {
+	public void when_gradle_context_gets_filled_string_array_with_2_options_for_options_the_options_are_added()
+			throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedContext.getOptions()).thenReturn(new String[]{"opt1","opt2"});
+		when(mockedContext.getOptions()).thenReturn(new String[] { "opt1", "opt2" });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand","opt1", "opt2", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"opt1", "opt2", "mockedCommand1");
 	}
-	
+
 	@Test
-	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_empty_string_the_options_are_NOT_added() throws Exception {
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_empty_string_the_options_are_NOT_added()
+			throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedContext.getOptions()).thenReturn(new String[]{""});
+		when(mockedContext.getOptions()).thenReturn(new String[] { "" });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
-	
+
 	@Test
-	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_blank_string_the_options_are_NOT_added() throws Exception {
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_only_single_blank_string_the_options_are_NOT_added()
+			throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedContext.getOptions()).thenReturn(new String[]{""});
+		when(mockedContext.getOptions()).thenReturn(new String[] { "" });
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
-	
+
 	@Test
-	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_a_filled_option_and_a_blank_string_the_blank_option_is_NOT_added() throws Exception {
+	public void when_gradle_context_gets_filled_string_array_for_options_but_contains_a_filled_option_and_a_blank_string_the_blank_option_is_NOT_added()
+			throws Exception {
 		/* prepare */
 		when(mockedCommand1.getCommand()).thenReturn("mockedCommand1");
 		when(mockedContext.getCommands()).thenReturn(new GradleCommand[] { mockedCommand1 });
-		when(mockedContext.getOptions()).thenReturn(new String[]{" ","opt1"});
+		when(mockedContext.getOptions()).thenReturn(new String[] { " ", "opt1" });
 		when(mockedConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "opt1", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"opt1", "mockedCommand1");
 	}
-	
+
 	@Test
 	public void when_shell_is_blank_the_shell_part_is_removed() throws Exception {
 		/* prepare */
@@ -196,9 +206,10 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
-	
+
 	@Test
 	public void when_shell_is_null_the_shell_part_is_removed() throws Exception {
 		/* prepare */
@@ -208,9 +219,10 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
-	
+
 	@Test
 	public void when_shell_is_set_the_shell_part_is_added() throws Exception {
 		/* prepare */
@@ -220,9 +232,9 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"cmd.exe", "/C", "gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "cmd.exe", "/C",
+				"gradleCommand", "mockedCommand1");
 	}
-	
 
 	@Test
 	public void executing_gives_command_string_to_process_executor_but_gradle_call_is_before() throws Exception {
@@ -232,7 +244,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
 
 	@Test
@@ -245,8 +258,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "-test1",
-				"-test2", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"-test1", "-test2", "mockedCommand1");
 	}
 
 	@Test
@@ -261,8 +274,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  mockedContext,
-				"gradleCommand", "-Pgradle.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"-Pgradle.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -277,8 +290,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, 
-				mockedContext, "gradleCommand", "-Dsystem.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -296,8 +309,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext,  mockedContext,
-				"gradleCommand", "-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
 	@Test
@@ -316,7 +329,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand",
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
 				"-option", "-Pgradle.test.property=test", "-Dsystem.test.property=test", "mockedCommand1");
 	}
 
@@ -330,7 +343,8 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1", "mockedCommand2");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1", "mockedCommand2");
 	}
 
 	@Test
@@ -345,6 +359,7 @@ public class GradleExecutorTest {
 		/* execute */
 		executorToTest.execute(mockedContext);
 		/* test */
-		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext,"gradleCommand", "mockedCommand1");
+		verify(mockedProcessExecutor).execute(mockedConfiguration, mockedContext, mockedContext, "gradleCommand",
+				"mockedCommand1");
 	}
 }

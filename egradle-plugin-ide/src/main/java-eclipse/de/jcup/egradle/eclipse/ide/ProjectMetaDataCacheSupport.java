@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide;
+package de.jcup.egradle.eclipse.ide;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +46,7 @@ public class ProjectMetaDataCacheSupport {
 
 	/**
 	 * Restores meta data from cache
+	 * 
 	 * @param cache
 	 * @param projects
 	 * @throws IOException

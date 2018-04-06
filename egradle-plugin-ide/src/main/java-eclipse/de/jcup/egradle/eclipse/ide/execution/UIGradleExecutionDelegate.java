@@ -33,39 +33,41 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	private boolean showEGradleSystemConsole = true;
 	private boolean cleanProjects;
 	private boolean buildAfterClean;
-	private ProjectContext projectContext; 
+	private ProjectContext projectContext;
 
-	
 	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
 			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
-		this(outputHandler, processExecutor, additionalContextPreparator,null);
+		this(outputHandler, processExecutor, additionalContextPreparator, null);
 	}
 
 	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject) throws GradleExecutionException {
-		super(outputHandler, processExecutor, additionalContextPreparator,rootProject);
+			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
+			throws GradleExecutionException {
+		super(outputHandler, processExecutor, additionalContextPreparator, rootProject);
 	}
 
 	/**
 	 * Set project context
-	 * @param projectContext - if null every project in workspace is targeted on multi project operations (e.g. clean/build etc.)
+	 * 
+	 * @param projectContext
+	 *            - if null every project in workspace is targeted on multi
+	 *            project operations (e.g. clean/build etc.)
 	 */
 	public void setProjectContext(ProjectContext projectContext) {
 		this.projectContext = projectContext;
 	}
-	
+
 	public void setRefreshProjects(boolean refreshAllProjects) {
 		this.refreshProjects = refreshAllProjects;
 	}
-	
+
 	public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
 		this.showEGradleSystemConsole = showEGradleSystemConsole;
 	}
-	
-	
+
 	public void setCleanProjects(boolean cleanProjects, boolean buildAfterClean) {
-		this.cleanProjects=cleanProjects;
-		this.buildAfterClean=buildAfterClean;
+		this.cleanProjects = cleanProjects;
+		this.buildAfterClean = buildAfterClean;
 	}
 
 	@Override
@@ -89,5 +91,4 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		monitor.worked(2);
 	}
 
-	
 }

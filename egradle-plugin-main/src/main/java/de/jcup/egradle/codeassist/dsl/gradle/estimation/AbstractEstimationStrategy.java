@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl.gradle.estimation;
+package de.jcup.egradle.codeassist.dsl.gradle.estimation;
 
 import de.jcup.egradle.codeassist.dsl.Method;
 import de.jcup.egradle.codeassist.dsl.Type;
@@ -33,7 +33,7 @@ abstract class AbstractEstimationStrategy implements EstimationStrategy {
 	}
 
 	abstract EstimationData visitImpl(Type current, Item item);
-	
+
 	EstimationData createEstimationData(Method m, boolean hasGroovyClosureAsParameter, int percent) {
 		EstimationData r = new EstimationData();
 		if (hasGroovyClosureAsParameter) {

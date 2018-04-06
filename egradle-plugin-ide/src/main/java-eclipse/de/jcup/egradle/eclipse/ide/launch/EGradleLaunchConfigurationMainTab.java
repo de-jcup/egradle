@@ -53,12 +53,12 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	private Text projectNameField;
 	private Text optionsField;
 	private TaskUIPartsDelegate taskUIPartsDelegate;
-	
-	public EGradleLaunchConfigurationMainTab(){
+
+	public EGradleLaunchConfigurationMainTab() {
 		this.taskUIPartsDelegate = createTaskUIPartsDelegate();
 	}
-	
-	protected TaskUIPartsDelegate createTaskUIPartsDelegate(){
+
+	protected TaskUIPartsDelegate createTaskUIPartsDelegate() {
 		return new DefaultTaskUIPartsDelegate();
 	}
 
@@ -123,7 +123,8 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		});
 		rootProjectPathField.setToolTipText(
 				"When not explicit defined, the root path from current EGradle Root Project is used.\n\nBut if defined you can execute also gradle tasks in other projects!");
-		rootProjectPathField.setMessage("EGradle Root Project: "+IDEUtil.getRootProject().getFolder().getAbsolutePath());
+		rootProjectPathField
+				.setMessage("EGradle Root Project: " + IDEUtil.getRootProject().getFolder().getAbsolutePath());
 		/* ------------------------------------ */
 		/* - Project - */
 		/* ------------------------------------ */
@@ -148,7 +149,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		/* ------------------------------------ */
 		taskUIPartsDelegate.addTaskComponents(composite, labelGridData, gridDataTwoLines);
 		/* ------------------------------------ */
-		/* - Separator                        - */
+		/* - Separator - */
 		/* ------------------------------------ */
 		Label label = new Label(composite, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
@@ -189,12 +190,10 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 			}
 		});
 		link.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
-		
-		
+
 		composite.pack();
 
 	}
-
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
@@ -213,7 +212,7 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		IProject project = getProject();
 		if (project != null) {
-			EGradleLaunchShortCut.setProjectNameIgnoreVirtualRootProjectNames(configuration,project.getName());
+			EGradleLaunchShortCut.setProjectNameIgnoreVirtualRootProjectNames(configuration, project.getName());
 		}
 	}
 
@@ -252,17 +251,20 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 		configuration.setAttribute(PROPERTY_PROJECTNAME, projectNameField.getText());
 		configuration.setAttribute(PROPERTY_OPTIONS, optionsField.getText());
 	}
-	
-	protected abstract class TaskUIPartsDelegate{
+
+	protected abstract class TaskUIPartsDelegate {
 		protected abstract void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException;
-		protected abstract void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) ;
+
+		protected abstract void addTaskComponents(Composite composite, GridData labelGridData,
+				GridData gridDataTwoLines);
+
 		protected abstract void applyTasks(ILaunchConfigurationWorkingCopy configuration);
 	}
-	
-	protected class DefaultTaskUIPartsDelegate extends TaskUIPartsDelegate{
-		
+
+	protected class DefaultTaskUIPartsDelegate extends TaskUIPartsDelegate {
+
 		protected Text tasksField;
-		
+
 		@Override
 		protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
 			tasksField.setText(configuration.getAttribute(PROPERTY_TASKS, ""));
@@ -286,13 +288,13 @@ public class EGradleLaunchConfigurationMainTab extends AbstractLaunchConfigurati
 			});
 			tasksField.setToolTipText("Enter gradle tasks here. Separate multiple tasks with a single space character");
 		}
+
 		@Override
 		protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
 			configuration.setAttribute(PROPERTY_TASKS, tasksField.getText());
 		}
-		
+
 	}
-	
 
 	@Override
 	public Image getImage() {

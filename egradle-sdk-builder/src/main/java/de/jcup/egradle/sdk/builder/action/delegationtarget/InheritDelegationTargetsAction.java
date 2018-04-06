@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.action.delegationtarget;
+package de.jcup.egradle.sdk.builder.action.delegationtarget;
 
 import java.io.IOException;
 
@@ -28,22 +28,22 @@ public class InheritDelegationTargetsAction implements SDKBuilderAction {
 
 	private DelegationTargetWalker walker = new DelegationTargetWalker();
 	private SimpleDelegationTargetMethodVisitor visitor = new SimpleDelegationTargetMethodVisitor();
-	
+
 	@Override
 	public void execute(SDKBuilderContext context) throws IOException {
-		for (String typeName: context.originTypeNameToOriginFileMapping.keySet()){
-			XMLType originType = (XMLType)context.originGradleFilesProvider.getType(typeName);
+		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
+			XMLType originType = (XMLType) context.originGradleFilesProvider.getType(typeName);
 			walker.visitAllMethodInHierarchy(originType, visitor, context, true);
 		}
 
 	}
-	
-	private class SimpleDelegationTargetMethodVisitor implements DelegationTargetMethodVisitor{
+
+	private class SimpleDelegationTargetMethodVisitor implements DelegationTargetMethodVisitor {
 
 		@Override
 		public String getDelegationTargetAsString(Method method) {
 			return method.getDelegationTargetAsString();
 		}
-		
+
 	}
 }

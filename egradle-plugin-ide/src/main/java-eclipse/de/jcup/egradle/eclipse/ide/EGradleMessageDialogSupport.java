@@ -31,6 +31,7 @@ public class EGradleMessageDialogSupport {
 
 	/**
 	 * Shows an input dialog
+	 * 
 	 * @param message
 	 * @param title
 	 * @return given input string or <code>null</code> when canceled

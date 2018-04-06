@@ -13,14 +13,14 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
-public class FallbackOutlineContentProvider implements ITreeContentProvider{
+public class FallbackOutlineContentProvider implements ITreeContentProvider {
 
-	private static final Object[] NO_CHILDREN = new Object[]{};
-	private static final Object[] ROOT_ELEMENTS = new Object[]{"No content available"};
+	private static final Object[] NO_CHILDREN = new Object[] {};
+	private static final Object[] ROOT_ELEMENTS = new Object[] { "No content available" };
 
 	@Override
 	public Object[] getElements(Object inputElement) {

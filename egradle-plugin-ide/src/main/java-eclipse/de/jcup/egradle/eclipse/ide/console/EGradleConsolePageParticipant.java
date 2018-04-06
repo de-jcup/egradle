@@ -67,7 +67,7 @@ public class EGradleConsolePageParticipant implements IConsolePageParticipant {
 			StyledText viewer = (StyledText) control;
 			EGradleConsoleStyleListener myListener = new EGradleConsoleStyleListener();
 			viewer.addLineStyleListener(myListener);
-			
+
 			IDEActivator.getDefault().addViewer(viewer, this);
 		}
 	}

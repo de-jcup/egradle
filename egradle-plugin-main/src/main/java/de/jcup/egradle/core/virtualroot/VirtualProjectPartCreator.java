@@ -13,12 +13,13 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.virtualroot;
+package de.jcup.egradle.core.virtualroot;
 
 import java.io.File;
 
 /**
  * Creates parts for virtual project
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -26,14 +27,16 @@ public interface VirtualProjectPartCreator {
 
 	/**
 	 * Creates the project representation itself
+	 * 
 	 * @param projectName
-	 * @return project 
+	 * @return project
 	 * @throws VirtualRootProjectException
 	 */
 	public Object createOrRecreateProject(String projectName) throws VirtualRootProjectException;
 
 	/**
 	 * Creates a link to a folder or a file
+	 * 
 	 * @param targetParentFolder
 	 * @param file
 	 * @throws VirtualRootProjectException
@@ -41,18 +44,21 @@ public interface VirtualProjectPartCreator {
 	public void createLink(Object targetParentFolder, File file) throws VirtualRootProjectException;
 
 	/**
-	 * Check if given file has to be linked or not inside root project 
+	 * Check if given file has to be linked or not inside root project
+	 * 
 	 * @param targetParentFolder
 	 * @param file
-	 * @return <code>true</code> when file shall be linked into virtual project, otherwise <code>false</code>
+	 * @return <code>true</code> when file shall be linked into virtual project,
+	 *         otherwise <code>false</code>
 	 * @throws VirtualRootProjectException
 	 */
 	public boolean isLinkCreationNeeded(Object targetParentFolder, File file) throws VirtualRootProjectException;
 
 	/**
 	 * Set maximum of work
+	 * 
 	 * @param max
 	 */
 	public void setMaximumLinksToCreate(int max);
-	
+
 }

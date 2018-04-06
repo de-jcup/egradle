@@ -13,36 +13,36 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
+package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 
-	LOGGER("logger"), 
-	
+	LOGGER("logger"),
+
 	TASKS("tasks"),
-	
+
 	PROJECT("project"), // method AND variable
-	
+
 	PRINTLN("println"), // method
-	
+
 	OPTIONS("options"),
-	
+
 	SOURCE_SETS("sourceSets"),
-	
+
 	SOURCE_DIR("srcDir"),
 
 	ROOTPROJECT("rootProject"),
-	
+
 	PROJECTDIR("projectDir"),
-	
+
 	JAVAVERSION("JavaVersion"),
-	
+
 	SYSTEM("System"),
-	
+
 	EXT("ext"),
-	
+
 	;
 
 	private String text;
@@ -50,7 +50,6 @@ public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 	private GradleSpecialVariableKeyWords(String text) {
 		this.text = text;
 	}
-
 
 	@Override
 	public String getText() {

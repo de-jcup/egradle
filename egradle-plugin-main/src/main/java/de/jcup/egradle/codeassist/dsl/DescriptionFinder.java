@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.util.Set;
 
@@ -22,8 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 public class DescriptionFinder {
 
 	/**
-	 * Find description for given element. If element has no description itself the contained
-	 * interfaces will be scanned for method/property descriptions
+	 * Find description for given element. If element has no description itself
+	 * the contained interfaces will be scanned for method/property descriptions
 	 * 
 	 * @param element
 	 * @return description or <code>null</code>
@@ -57,7 +57,7 @@ public class DescriptionFinder {
 		}
 		return null;
 	}
-	
+
 	private String invite(RefTypeVisitor visitor, Type parentType) {
 		Set<TypeReference> interfaceReferences = parentType.getInterfaces();
 		for (TypeReference ref : interfaceReferences) {
@@ -72,7 +72,7 @@ public class DescriptionFinder {
 		}
 		return null;
 	}
-	
+
 	private String createInheritedDescriptionWithLink(Type refType, String descriptionFromInterface) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<i>Inherited description from:");
@@ -124,8 +124,6 @@ public class DescriptionFinder {
 			return null;
 		}
 
-		
-
 	}
 
 	private class PropertyRefVisitor extends RefTypeVisitor {
@@ -158,7 +156,5 @@ public class DescriptionFinder {
 		}
 
 	}
-
-	
 
 }

@@ -177,7 +177,7 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
 	protected AbstractGroovyBasedQuickOutline createQuickOutlineDialog(Shell shell) {
 		return new GradleQuickOutlineDialog(this, shell, "Quick outline");
 	}
-	
+
 	@Override
 	protected ColorManager getColorManager() {
 		return EditorActivator.getDefault().getColorManager();

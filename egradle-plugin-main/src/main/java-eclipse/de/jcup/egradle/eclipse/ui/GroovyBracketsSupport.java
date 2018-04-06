@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,8 @@ public final class GroovyBracketsSupport extends DefaultCharacterPairMatcher {
 	 * Goto matching bracket
 	 * 
 	 * @param adaptable
-	 *            must support {@link StatusMessageSupport} and {@link ISourceViewer}
-	 *            otherwise method will do nothing
+	 *            must support {@link StatusMessageSupport} and
+	 *            {@link ISourceViewer} otherwise method will do nothing
 	 */
 	public void gotoMatchingBracket(IAdaptable adaptable) {
 		ISourceViewer sourceViewer = adaptable.getAdapter(ISourceViewer.class);

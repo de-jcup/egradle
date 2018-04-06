@@ -39,10 +39,11 @@ public enum RootProjectConfigMode {
 	private boolean rootPathDirectoryEditable;
 	private boolean restoreMetaDataCheckboxNeeded;
 
-	private RootProjectConfigMode(boolean validationGroupNeeded, boolean rootPathDirectoryEditable, boolean restoreMetaDataCheckboxNeeded) {
+	private RootProjectConfigMode(boolean validationGroupNeeded, boolean rootPathDirectoryEditable,
+			boolean restoreMetaDataCheckboxNeeded) {
 		this.validationGroupNeeded = validationGroupNeeded;
-		this.rootPathDirectoryEditable=rootPathDirectoryEditable;
-		this.restoreMetaDataCheckboxNeeded=restoreMetaDataCheckboxNeeded;
+		this.rootPathDirectoryEditable = rootPathDirectoryEditable;
+		this.restoreMetaDataCheckboxNeeded = restoreMetaDataCheckboxNeeded;
 	}
 
 	public boolean isValidationGroupNeeded() {

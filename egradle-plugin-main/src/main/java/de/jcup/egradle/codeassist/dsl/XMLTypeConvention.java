@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,14 +26,14 @@ public class XMLTypeConvention implements TypeConvention {
 
 	@XmlAttribute(name = "id")
 	private String id;
-	
+
 	@XmlAttribute(name = "conventionClass")
 	private String conventionTypeAsString;
 
 	public void setConventionTypeAsString(String extensionTypeAsString) {
 		this.conventionTypeAsString = extensionTypeAsString;
 	}
-	
+
 	public String getConventionTypeAsString() {
 		return conventionTypeAsString;
 	}
@@ -49,8 +49,7 @@ public class XMLTypeConvention implements TypeConvention {
 
 	@Override
 	public String toString() {
-		return "XMLTypeConvention [conventionTypeAsString="
-				+ conventionTypeAsString + ", id=" + id+ "]";
+		return "XMLTypeConvention [conventionTypeAsString=" + conventionTypeAsString + ", id=" + id + "]";
 	}
 
 	@Override
@@ -85,34 +84,34 @@ public class XMLTypeConvention implements TypeConvention {
 	}
 
 	private String compareString;
-	
+
 	private String getCompareString() {
-		if (compareString==null){
-			compareString=createCompareString(this);
+		if (compareString == null) {
+			compareString = createCompareString(this);
 		}
 		return compareString;
 	}
-	
+
 	@Override
 	public int compareTo(TypeConvention o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
-		if (o==this){
+		if (o == this) {
 			return 0;
 		}
 		String otherCompareString = null;
-		if (o instanceof XMLTypeConvention){
+		if (o instanceof XMLTypeConvention) {
 			XMLTypeConvention ote = (XMLTypeConvention) o;
-			otherCompareString=ote.getCompareString();
-		}else{
+			otherCompareString = ote.getCompareString();
+		} else {
 			otherCompareString = createCompareString(o);
 		}
 		int compared = getCompareString().compareTo(otherCompareString);
 		return compared;
 	}
-	
-	private String createCompareString(TypeConvention extension){
+
+	private String createCompareString(TypeConvention extension) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(extension.getId());
 		sb.append('|');

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.model;
+package de.jcup.egradle.sdk.builder.model;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,8 +24,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import de.jcup.egradle.codeassist.dsl.XMLType;
+
 /**
- * Files containing "virtual" types which do some override mechanism. Currently only used for manual delegationTarget overload
+ * Files containing "virtual" types which do some override mechanism. Currently
+ * only used for manual delegationTarget overload
+ * 
  * @author Albert Tregnaghi
  *
  */

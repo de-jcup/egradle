@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 
@@ -43,18 +43,17 @@ abstract class AbstractLazyCodeBuilder implements LazyCodeBuilder {
 		}
 
 	}
-	
 
 	public String getTemplate() {
 		ensureTemplate();
 		return template;
 	}
-	
+
 	private void ensureTemplate() {
-		if (template==null){
-			template=createTemplate();
-			if (template==null){
-				template="";
+		if (template == null) {
+			template = createTemplate();
+			if (template == null) {
+				template = "";
 			}
 		}
 	}

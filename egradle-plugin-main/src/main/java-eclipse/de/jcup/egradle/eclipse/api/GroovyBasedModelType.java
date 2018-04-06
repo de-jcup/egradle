@@ -13,9 +13,8 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.api;
+package de.jcup.egradle.eclipse.api;
 
 public interface GroovyBasedModelType {
-
 
 }

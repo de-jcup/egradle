@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.model;
+package de.jcup.egradle.core.model;
 
 import static org.junit.Assert.*;
 
@@ -30,28 +30,27 @@ public class ItemTextMatcherTest {
 		matcherToTest = new ItemTextMatcher();
 		item = new Item();
 	}
-	
+
 	@Test
-	public void a_method_getName_with_no_return_type_is_found_by_simple_get_asterisk__when_item_has_type(){
+	public void a_method_getName_with_no_return_type_is_found_by_simple_get_asterisk__when_item_has_type() {
 		item.setName("getName");
 		item.setType(null); // not necessary, only to explain
 		matcherToTest.setFilterText("get*");
 
 		/* execute + test */
-		assertTrue(matcherToTest.matches(item));	
+		assertTrue(matcherToTest.matches(item));
 	}
 
 	@Test
-	public void a_method_getName_with_return_type_String_is_found_by_simple_get_asterisk__when_item_has_type(){
+	public void a_method_getName_with_return_type_String_is_found_by_simple_get_asterisk__when_item_has_type() {
 		item.setName("getName");
 		item.setType("String");
 		matcherToTest.setFilterText("get*");
-		
 
 		/* execute + test */
-		assertTrue(matcherToTest.matches(item));	
+		assertTrue(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_name_abc_is_matched_by_unset_filter_text() {
 		/* prepare */
@@ -100,7 +99,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertFalse(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_name_abc_is_not_matched_by_b() {
 		/* prepare */
@@ -110,7 +109,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertFalse(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_name_abc_is_matched_by_asterisk_and_b() {
 		/* prepare */
@@ -140,7 +139,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertTrue(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_parameters_doDump_doReset_doAppend_is_matched_by_asterisk_and_do() {
 		/* prepare */
@@ -150,7 +149,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertTrue(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_name_having_brackets_and_doDump_doReset_doAppend_is_matched_by_asterisk_and_opening_bracket() {
 		/* prepare */
@@ -160,7 +159,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertTrue(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_configuration_testCompile_is_matched_by_asterisk_and_test() {
 		/* prepare */
@@ -170,7 +169,7 @@ public class ItemTextMatcherTest {
 		/* execute + test */
 		assertTrue(matcherToTest.matches(item));
 	}
-	
+
 	@Test
 	public void item_with_info_someThing_is_matched_by_asterisk_and_thing() {
 		/* prepare */

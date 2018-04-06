@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,29 +23,29 @@ import de.jcup.egradle.core.VersionData;
 import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
 
-public abstract class AbstractSDK implements SDK{
+public abstract class AbstractSDK implements SDK {
 
 	protected VersionData version;
 	private SDKInfo info;
 	private Object monitor = new Object();
 
 	public AbstractSDK(VersionData sdkVersion) {
-		if (sdkVersion==null){
-			sdkVersion=VersionData.UNKNOWN;
+		if (sdkVersion == null) {
+			sdkVersion = VersionData.UNKNOWN;
 		}
-		this.version=sdkVersion;
+		this.version = sdkVersion;
 	}
-	
+
 	@Override
 	public final VersionData getVersion() {
 		return version;
 	}
-	
+
 	@Override
 	public SDKInfo getInfo() {
 		synchronized (monitor) {
-			if (info==null){
-				info=loadInfo();
+			if (info == null) {
+				info = loadInfo();
 			}
 		}
 		return info;
@@ -53,16 +53,16 @@ public abstract class AbstractSDK implements SDK{
 
 	private SDKInfo loadInfo() {
 		File sdkInstallationFolder = getSDKInstallationFolder();
-		if (sdkInstallationFolder==null || !sdkInstallationFolder.exists()){
+		if (sdkInstallationFolder == null || !sdkInstallationFolder.exists()) {
 			return NoSDKInfo.INSTANCE;
 		}
 		XMLSDKInfoImporter importer = new XMLSDKInfoImporter();
-		
-		File file = new File(sdkInstallationFolder,SDKInfo.FILENAME);
-		try(FileInputStream stream = new FileInputStream(file)){
+
+		File file = new File(sdkInstallationFolder, SDKInfo.FILENAME);
+		try (FileInputStream stream = new FileInputStream(file)) {
 			XMLSDKInfo loaded = importer.importSDKInfo(stream);
 			return loaded;
-		}catch(IOException e){
+		} catch (IOException e) {
 			return NoSDKInfo.INSTANCE;
 		}
 	}

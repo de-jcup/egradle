@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import static org.junit.Assert.*;
 
@@ -26,54 +26,54 @@ public class RelevantCodeCutterTest {
 	private RelevantCodeCutter codeCutterToTest;
 
 	@Before
-	public void before(){
+	public void before() {
 		codeCutterToTest = new RelevantCodeCutter();
 	}
-	
+
 	@Test
 	public void test_0__pos0__returns_0() {
-		String code ="0";
+		String code = "0";
 		String relevant = codeCutterToTest.getRelevantCode(code, 0);
-		assertEquals("0",relevant);
+		assertEquals("0", relevant);
 	}
-	
+
 	@Test
 	public void test_01234_678_0123__pos5__returns_01234() {
-		String code =_01234_678_0123;
+		String code = _01234_678_0123;
 		String relevant = codeCutterToTest.getRelevantCode(code, 5);
-		assertEquals("01234",relevant);
+		assertEquals("01234", relevant);
 	}
-	
+
 	@Test
 	public void test_01234_678_0123__pos6__returns_6() {
-		String code =_01234_678_0123;
+		String code = _01234_678_0123;
 		int relevant = codeCutterToTest.getRelevantCodeStartOffset(code, 8);
-		assertEquals(6,relevant);
+		assertEquals(6, relevant);
 	}
-	
+
 	@Test
 	public void start_offset_test_01234_678_0123__pos6__returns_678() {
-		String code =_01234_678_0123;
+		String code = _01234_678_0123;
 		String relevant = codeCutterToTest.getRelevantCode(code, 6);
-		assertEquals("678",relevant);
+		assertEquals("678", relevant);
 	}
-	
+
 	@Test
 	public void test_01234_678_0123__pos7__returns_678() {
-		String code =_01234_678_0123;
+		String code = _01234_678_0123;
 		String relevant = codeCutterToTest.getRelevantCode(code, 7);
-		assertEquals("678",relevant);
+		assertEquals("678", relevant);
 	}
-	
+
 	@Test
 	public void test_01234_678_0123__pos8__returns_678() {
-		String code =_01234_678_0123;
+		String code = _01234_678_0123;
 		String relevant = codeCutterToTest.getRelevantCode(code, 8);
-		assertEquals("678",relevant);
+		assertEquals("678", relevant);
 	}
-	
+
 	@Test
-	public void test_gradle_example1(){  
+	public void test_gradle_example1() {
 		// @formatter:off
 		String code =
 		"dependencies{\n"+
@@ -92,10 +92,9 @@ public class RelevantCodeCutterTest {
 		"bla = \"xxxx\"\n"+
 		"java.lang.String gedoeons = \"hallo welt\n\";\n";
 		// @formatter:on
-		
-		String relevant = codeCutterToTest.getRelevantCode(code, index);
-		assertEquals("",relevant);
-	}
 
+		String relevant = codeCutterToTest.getRelevantCode(code, index);
+		assertEquals("", relevant);
+	}
 
 }

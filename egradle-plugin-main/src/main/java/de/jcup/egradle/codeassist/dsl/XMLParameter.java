@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,10 +25,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "parameter")
 public class XMLParameter implements Parameter, ModifiableParameter {
 
-
 	@XmlAttribute(name = "type")
 	String typeAsString;
-	
+
 	@XmlAttribute(name = "name")
 	private String name;
 
@@ -46,8 +45,11 @@ public class XMLParameter implements Parameter, ModifiableParameter {
 		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.jcup.egradle.codeassist.dsl.ModifiableParameter#setType(de.jcup.egradle.codeassist.dsl.Type)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableParameter#setType(de.jcup.
+	 * egradle.codeassist.dsl.Type)
 	 */
 	@Override
 	public void setType(Type type) {
@@ -58,29 +60,29 @@ public class XMLParameter implements Parameter, ModifiableParameter {
 	public Type getType() {
 		return type;
 	}
-	
+
 	public String getTypeAsString() {
 		return typeAsString;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "XMLType [name=" + name + ", type="+typeAsString+" ]";
+		return "XMLType [name=" + name + ", type=" + typeAsString + " ]";
 	}
 
 	@Override
 	public int compareTo(Parameter o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
 		String otherTypeAsString = o.getTypeAsString();
-		if (otherTypeAsString==null){
+		if (otherTypeAsString == null) {
 			return 1;
 		}
-		if (typeAsString==null){
+		if (typeAsString == null) {
 			return -1;
 		}
-		int comparedType= typeAsString.compareTo(otherTypeAsString);
+		int comparedType = typeAsString.compareTo(otherTypeAsString);
 		return comparedType;
 	}
 
@@ -108,6 +110,5 @@ public class XMLParameter implements Parameter, ModifiableParameter {
 			return false;
 		return true;
 	}
-	
-	
+
 }

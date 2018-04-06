@@ -32,11 +32,13 @@ public class ColorManager {
 	}
 
 	/**
-	 * @return color manager for standalone SWT programs, never <code>null</code>. 
-	 * @throws IllegalStateException when no standalone color manager set but used
+	 * @return color manager for standalone SWT programs, never
+	 *         <code>null</code>.
+	 * @throws IllegalStateException
+	 *             when no standalone color manager set but used
 	 */
 	public static ColorManager getStandalone() {
-		if (standalone==null){
+		if (standalone == null) {
 			throw new IllegalStateException("no standalone color manager set.");
 		}
 		return standalone;
@@ -44,9 +46,11 @@ public class ColorManager {
 
 	/**
 	 * Set color manager for standalone SWT programs
+	 * 
 	 * @param standalone
 	 */
-	public static void setStandalone(ColorManager standalone) { // NO_UCD (test only)
+	public static void setStandalone(ColorManager standalone) { // NO_UCD (test
+																// only)
 		ColorManager.standalone = standalone;
 	}
 

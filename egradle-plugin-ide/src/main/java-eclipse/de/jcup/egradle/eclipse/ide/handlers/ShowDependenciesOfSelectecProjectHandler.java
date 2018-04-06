@@ -37,7 +37,6 @@ import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ui.SelectConfigurationDialog;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
-
 public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCommandHandler {
 
 	private IProject projectToUse;
@@ -45,23 +44,23 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
-		if (activeWorkbenchShell==null){
+		if (activeWorkbenchShell == null) {
 			return null;
 		}
 		IProject project = findSelectedProject();
-		if (project==null){
+		if (project == null) {
 			return null;
 		}
 		SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
 		dialog.setTitleImage(IDEUtil.getImage("icons/gradle-og.png"));
 		dialog.setInput(configuration);
 		String config = dialog.open();
-		if (config==null){
-			/* cancel ...*/
+		if (config == null) {
+			/* cancel ... */
 			return null;
 		}
-		configuration=config;
-		projectToUse=project;
+		configuration = config;
+		projectToUse = project;
 		return super.execute(event);
 	}
 
@@ -70,12 +69,12 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 		if (window == null) {
 			return null;
 		}
-		
+
 		IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
-		if (selection ==null){
+		if (selection == null) {
 			return null;
 		}
-		
+
 		Object firstElement = selection.getFirstElement();
 		if (!(firstElement instanceof IAdaptable)) {
 			return null;
@@ -87,18 +86,22 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 
 	@Override
 	public void prepare(GradleContext context) {
-		if (projectToUse==null){
+		if (projectToUse == null) {
 			return;
 		}
 		context.setAmountOfWorkToDo(2);
 		StringBuilder sb = new StringBuilder();
-		if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)){
+		if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)) {
 			sb.append(":");
-			sb.append(projectToUse.getName()); /* TODO ATR, 02.03.2017: check if getName() is correct here - should be foldername.. */
+			sb.append(projectToUse
+					.getName()); /*
+									 * TODO ATR, 02.03.2017: check if getName() is
+									 * correct here - should be foldername..
+									 */
 			sb.append(":");
 		}
 		sb.append("dependencies");
-		if (configuration!=null && configuration.length()>0){
+		if (configuration != null && configuration.length() > 0) {
 			sb.append(" --configuration ");
 			sb.append(configuration);
 		}

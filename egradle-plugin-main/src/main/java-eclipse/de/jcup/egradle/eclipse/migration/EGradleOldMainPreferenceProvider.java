@@ -102,12 +102,12 @@ public class EGradleOldMainPreferenceProvider {
 	public boolean hasValueForShowingConsoleOnBuildFailed() {
 		return hasValue(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED);
 	}
-	
+
 	public boolean isOutputValidationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(OldConstants.P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
 	}
-	
+
 	public boolean hasValueForOutputValidationEnabled() {
 		return hasValue(OldConstants.P_OUTPUT_VALIDATION_ENABLED);
 	}
@@ -117,7 +117,7 @@ public class EGradleOldMainPreferenceProvider {
 				.getBoolean(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId());
 		return cleanProjectsEnabled;
 	}
-	
+
 	public boolean hasValueForCleanProjectsOnImportEnabled() {
 		return hasValue(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS);
 	}
@@ -137,7 +137,7 @@ public class EGradleOldMainPreferenceProvider {
 				.getBoolean(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
 		return automaticallyDeriveBuildFoldersEnabled;
 	}
-	
+
 	public boolean hasValueForAutomaticallyDeriveBuildFoldersEnabled() {
 		return hasValue(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS);
 	}
@@ -151,7 +151,7 @@ public class EGradleOldMainPreferenceProvider {
 	public boolean hasValueForSubProjectIconDecorationEnabled() {
 		return hasValue(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED);
 	}
-	
+
 	public String getGlobalJavaHomePath() {
 		return getStringPreference(OldConstants.P_JAVA_HOME_PATH);
 	}
@@ -176,10 +176,9 @@ public class EGradleOldMainPreferenceProvider {
 		return getStringPreference(OldConstants.P_ROOTPROJECT_PATH);
 	}
 
-	
-	private boolean hasValue(OldConstants constant){
+	private boolean hasValue(OldConstants constant) {
 		return getPreferenceStore().contains(constant.getId());
-		
+
 	}
 
 }

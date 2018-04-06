@@ -13,17 +13,16 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.codeassist;
-
+package de.jcup.egradle.eclipse.gradleeditor.codeassist;
 
 import de.jcup.egradle.codeassist.Proposal;
 
 public class LazyCursorMovement {
-	
+
 	private Proposal proposal;
 
-	public LazyCursorMovement(Proposal p){
-		this.proposal=p;
+	public LazyCursorMovement(Proposal p) {
+		this.proposal = p;
 	}
 
 	public int getCursorMove() {

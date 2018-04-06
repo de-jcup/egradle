@@ -48,7 +48,6 @@ public class BuildFailedDialog extends Dialog {
 		// turn off close icon at window - so user must use OK
 		setShellStyle(getShellStyle() & ~SWT.CLOSE);
 	}
-	
 
 	@Override
 	protected Control createDialogArea(Composite parent) {

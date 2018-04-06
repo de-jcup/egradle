@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.decorators;
+package de.jcup.egradle.eclipse.ide.decorators;
 
 import static de.jcup.egradle.eclipse.ide.IDEUtil.*;
 
@@ -43,10 +43,11 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 public class EGradleProjectDecorator extends LabelProvider implements ILightweightLabelDecorator {
 
 	private static ImageDescriptor egradleProjectDescriptor = new LazyImageDescriptor(
-			EclipseUtil.createImageDescriptor("icons/gradle-project-decorator.gif",IDEActivator.PLUGIN_ID));
+			EclipseUtil.createImageDescriptor("icons/gradle-project-decorator.gif", IDEActivator.PLUGIN_ID));
 
-	private static ImageDescriptor emptyDecoratorDescriptor = new LazyImageDescriptor(EclipseUtil.createImageDescriptor("icons/empty-4x4-decorator.gif",IDEActivator.PLUGIN_ID));
-	
+	private static ImageDescriptor emptyDecoratorDescriptor = new LazyImageDescriptor(
+			EclipseUtil.createImageDescriptor("icons/empty-4x4-decorator.gif", IDEActivator.PLUGIN_ID));
+
 	@Override
 	public void decorate(Object element, IDecoration decoration) {
 		/* no decoration when plugin is not running */
@@ -69,14 +70,16 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 		if (rootFolder == null) {
 			return;
 		}
-		if (hasVirtualRootProjectNature(p)){
+		if (hasVirtualRootProjectNature(p)) {
 			decoration.addPrefix("EGradle ");
-			decoration.addSuffix(" ("+rootFolder.getName()+")");
+			decoration.addSuffix(" (" + rootFolder.getName() + ")");
 			decorateImage(decoration);
-			/* Because the virtual root project is not hosted in SCM - at least with GIT, there is always an
-			 * ugly question icon at IDecoration.BOTTOM_RIGHT . To avoid this
-			 * we simply render an empty deocorator here. This is okay, because diff 
-			 * changes in project are rendered as usual
+			/*
+			 * Because the virtual root project is not hosted in SCM - at least
+			 * with GIT, there is always an ugly question icon at
+			 * IDecoration.BOTTOM_RIGHT . To avoid this we simply render an
+			 * empty deocorator here. This is okay, because diff changes in
+			 * project are rendered as usual
 			 */
 			decoration.addOverlay(emptyDecoratorDescriptor, IDecoration.BOTTOM_RIGHT);
 			return;
@@ -84,19 +87,17 @@ public class EGradleProjectDecorator extends LabelProvider implements ILightweig
 
 		/* we simply check if the project is inside root project */
 		try {
-			if (!isSubprojectOfCurrentRootProject(p)){
+			if (!isSubprojectOfCurrentRootProject(p)) {
 				return;
 			}
-			if (IDEUtil.getPreferences().isSubProjectIconDecorationEnabled()){
+			if (IDEUtil.getPreferences().isSubProjectIconDecorationEnabled()) {
 				decorateImage(decoration);
 			}
 		} catch (CoreException e) {
-			IDEUtil.logError("Was not able to decorate sub project:"+p, e);
+			IDEUtil.logError("Was not able to decorate sub project:" + p, e);
 		}
 
 	}
-
-	
 
 	private void decorateImage(IDecoration decoration) {
 		// TOP_LEFT

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import static org.apache.commons.lang3.Validate.*;
 
@@ -24,8 +24,10 @@ import de.jcup.egradle.core.TextProviderException;
 import de.jcup.egradle.core.model.Model;
 
 /**
- * This class represents a provider which does only support data for same offsets.
- * So on every start of a new proposal session a new provider must be created. 
+ * This class represents a provider which does only support data for same
+ * offsets. So on every start of a new proposal session a new provider must be
+ * created.
+ * 
  * @author Albert Tregnaghi
  *
  */
@@ -41,7 +43,8 @@ public class StaticOffsetProposalFactoryContentProvider implements ProposalFacto
 	private String lineTextBeforeCursorPosition;
 
 	public StaticOffsetProposalFactoryContentProvider(GradleFileType fileType, ModelProvider modelProvider,
-			TextProvider textProvider, RelevantCodeCutter codeCutter, int offset) throws ProposalFactoryContentProviderException {
+			TextProvider textProvider, RelevantCodeCutter codeCutter, int offset)
+			throws ProposalFactoryContentProviderException {
 		notNull(fileType, "'fileType' may not be null");
 		notNull(modelProvider, "'modelProvider' may not be null");
 		notNull(textProvider, "'textProvider' may not be null");
@@ -57,7 +60,7 @@ public class StaticOffsetProposalFactoryContentProvider implements ProposalFacto
 			this.length = offset - offsetOfFirstCharacterInLine;
 			this.lineTextBeforeCursorPosition = textProvider.getText(offsetOfFirstCharacterInLine, length);
 		} catch (TextProviderException e) {
-			throw new ProposalFactoryContentProviderException("Cannot get line text before cursor position",e);
+			throw new ProposalFactoryContentProviderException("Cannot get line text before cursor position", e);
 		}
 	}
 

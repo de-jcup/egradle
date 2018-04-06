@@ -71,13 +71,14 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation) {
 		this(validation, null);
 	}
-	
-	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation, RootProjectConfigMode rootProjectConfigMode) {
+
+	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation,
+			RootProjectConfigMode rootProjectConfigMode) {
 		this.validation = validation;
-		if (rootProjectConfigMode==null){
-			this.mode=RootProjectConfigMode.IMPORT_PROJECTS;
-		}else{
-			this.mode=rootProjectConfigMode;
+		if (rootProjectConfigMode == null) {
+			this.mode = RootProjectConfigMode.IMPORT_PROJECTS;
+		} else {
+			this.mode = rootProjectConfigMode;
 		}
 	}
 
@@ -94,9 +95,9 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		createGradleCallTypeGroup(parent);
 		createValidationGroup(parent);
 	}
-	
+
 	private void createValidationGroup(Composite parent) {
-		if (! mode.isValidationGroupNeeded()){
+		if (!mode.isValidationGroupNeeded()) {
 			return;
 		}
 		/* ------------------------------------ */
@@ -146,7 +147,6 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 				handleValidationRunning(true);
 				validationOutputField.setText("Start validation...\n");
 
-
 				OutputHandler validationOutputHandler = new OutputHandler() {
 
 					@Override
@@ -176,17 +176,22 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 					MutableGradleConfiguration configuration) {
 				try {
 					RootProjectConfigUIDelegate observer = RootProjectConfigUIDelegate.this;
-					ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(EclipseUtil.getActiveWorkbenchShell());
+					ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(
+							EclipseUtil.getActiveWorkbenchShell());
 
-					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(new CancelStateProvider(){
+					RootProjectValidationProgressRunnable runnable = new RootProjectValidationProgressRunnable(
+							new CancelStateProvider() {
 
-						@Override
-						public boolean isCanceled() {
-							return progressMonitorDialog.getProgressMonitor().isCanceled();
-						}
-						
-					},	configuration, observer, validationOutputHandler);
-					/* use own progress monitor dialog here - progress service did not work well because this is in model state */
+								@Override
+								public boolean isCanceled() {
+									return progressMonitorDialog.getProgressMonitor().isCanceled();
+								}
+
+							}, configuration, observer, validationOutputHandler);
+					/*
+					 * use own progress monitor dialog here - progress service
+					 * did not work well because this is in model state
+					 */
 					progressMonitorDialog.run(true, true, runnable);
 				} catch (InvocationTargetException | InterruptedException e1) {
 					IDEUtil.logError("Was not able to execute validation", e1);
@@ -299,18 +304,18 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		rootPathDirectoryEditor = new DirectoryFieldEditor(P_ROOTPROJECT_PATH.getId(), "&Gradle root project path",
 				defaultGroup);
 		addField(rootPathDirectoryEditor);
-		GridData directoryTextLayout = new GridData(SWT.FILL,SWT.TOP,true,false);
-		
+		GridData directoryTextLayout = new GridData(SWT.FILL, SWT.TOP, true, false);
+
 		String rootPathTooltipText = "Default root path. Can be overriden in launch configurations";
 		rootPathDirectoryEditor.getLabelControl(defaultGroup).setToolTipText(rootPathTooltipText);
-		
+
 		Text rootPathTextControl = rootPathDirectoryEditor.getTextControl(defaultGroup);
 		rootPathTextControl.setToolTipText(rootPathTooltipText);
 		rootPathTextControl.setLayoutData(directoryTextLayout);
 
 		rootPathDirectoryEditor.setEmptyStringAllowed(false);
 
-		if (! mode.isRootPathDirectoryEditable()){
+		if (!mode.isRootPathDirectoryEditable()) {
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
 		}
 		/* java home default */
@@ -320,16 +325,17 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		String defaultJavaHomeDirectoryTooltipText = "A default global JAVA_HOME path. Can be overriden in launch configurations";
 		defaultJavaHomeDirectoryEditor.getLabelControl(defaultGroup)
 				.setToolTipText(defaultJavaHomeDirectoryTooltipText);
-		
+
 		Text javaHomeTextControl = defaultJavaHomeDirectoryEditor.getTextControl(defaultGroup);
 		javaHomeTextControl.setToolTipText(defaultJavaHomeDirectoryTooltipText);
 		javaHomeTextControl.setLayoutData(directoryTextLayout);
-		
+
 		addField(defaultJavaHomeDirectoryEditor);
-		
+
 		/* restore meta data */
 		if (mode.isRestoreMetaDataCheckBoxNeeded()) {
-			restoreMetaDataCheckbox = SWTFactory.createCheckButton(defaultGroup, "Restore former meta data (e.g. Team provider data)", null, true, SWT.LEFT);
+			restoreMetaDataCheckbox = SWTFactory.createCheckButton(defaultGroup,
+					"Restore former meta data (e.g. Team provider data)", null, true, SWT.LEFT);
 		}
 	}
 
@@ -454,9 +460,9 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	public String getGlobalJavaHomePath() {
 		return defaultJavaHomeDirectoryEditor.getStringValue();
 	}
-	
-	public boolean isRestoringMetaData(){
-		if (restoreMetaDataCheckbox==null){
+
+	public boolean isRestoringMetaData() {
+		if (restoreMetaDataCheckbox == null) {
 			return false;
 		}
 		return restoreMetaDataCheckbox.getSelection();

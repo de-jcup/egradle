@@ -13,21 +13,24 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 import java.io.File;
 import java.io.IOException;
 
 /**
- * A root folder provider simply knows a root folder and is able to announce this info 
+ * A root folder provider simply knows a root folder and is able to announce
+ * this info
+ * 
  * @author Albert Tregnaghi
  *
  */
-public interface RootFolderProvider{
+public interface RootFolderProvider {
 
 	/**
 	 * Resolves root folder
-	 * @return root folder, <code>null</code> when root folder not found 
+	 * 
+	 * @return root folder, <code>null</code> when root folder not found
 	 * @throws IOException
 	 */
 	public File getRootFolder() throws IOException;

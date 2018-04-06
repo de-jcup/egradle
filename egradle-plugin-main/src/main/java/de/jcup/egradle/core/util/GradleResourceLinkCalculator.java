@@ -19,7 +19,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GradleResourceLinkCalculator {
-	
+
 	/**
 	 * Creates a link result or <code>null</code>
 	 * 
@@ -50,28 +50,28 @@ public class GradleResourceLinkCalculator {
 			if (Character.isWhitespace(c)) {
 				break;
 			}
-			if (c=='{'){
+			if (c == '{') {
 				break;
 			}
-			if (c==','){
+			if (c == ',') {
 				break;
 			}
-			if (c=='('){
+			if (c == '(') {
 				break;
 			}
-			if (c==')'){
+			if (c == ')') {
 				break;
 			}
-			if (c=='['){
+			if (c == '[') {
 				break;
 			}
-			if (c=='<'){
+			if (c == '<') {
 				break;
 			}
-			if (c=='>'){
+			if (c == '>') {
 				break;
 			}
-			if (c=='.'){
+			if (c == '.') {
 				break;
 			}
 			if (!Character.isJavaIdentifierPart(c)) {
@@ -88,13 +88,13 @@ public class GradleResourceLinkCalculator {
 		ArrayUtils.reverse(leftCharsArray);
 		int startPos = offsetInLine;
 		for (char c : leftCharsArray) {
-			if (c=='('){
+			if (c == '(') {
 				break;
 			}
-			if (c=='<'){
+			if (c == '<') {
 				break;
 			}
-			if (c=='.'){
+			if (c == '.') {
 				break;
 			}
 			if (Character.isWhitespace(c)) {
@@ -107,13 +107,16 @@ public class GradleResourceLinkCalculator {
 			content.insert(0, c);
 		}
 		String linkContent = content.toString();
-	
+
 		char firstChar = linkContent.charAt(0);
 		if (!Character.isJavaIdentifierStart(firstChar)) {
 			return null;
 		}
-		/* currently this calculator only supports correct Type syntax means first char MUST be upper cased*/
-		if (! Character.isUpperCase(firstChar)){
+		/*
+		 * currently this calculator only supports correct Type syntax means
+		 * first char MUST be upper cased
+		 */
+		if (!Character.isUpperCase(firstChar)) {
 			return null;
 		}
 		GradleHyperLinkResult result = new GradleHyperLinkResult();

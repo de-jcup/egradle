@@ -393,14 +393,14 @@ public class IDEUtil {
 				} else {
 					doClean(buildConfigurations, monitor);
 				}
-				
+
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
 				if (!buildAfterClean) {
 					return Status.OK_STATUS;
 				}
-				
+
 				if (buildConfigurations != null) {
 					SubMonitor progress = SubMonitor.convert(monitor, 1);
 					progress.setTaskName("build cleaned gradle projects in eclipse");
@@ -412,21 +412,20 @@ public class IDEUtil {
 						logError("Was not able to build eclipse projects after clean", e);
 						return e.getStatus();
 					}
-					
+
 				}
-				
-				/* no build configurations set - use global variant...*/
+
+				/* no build configurations set - use global variant... */
 				if (window == null) {
-					logWarning("Not able to trigger global build after clean because no active workbench window found!");
+					logWarning(
+							"Not able to trigger global build after clean because no active workbench window found!");
 					return Status.OK_STATUS;
 				}
-				
-				GlobalBuildAction build = new GlobalBuildAction(window,
-						IncrementalProjectBuilder.INCREMENTAL_BUILD);
+
+				GlobalBuildAction build = new GlobalBuildAction(window, IncrementalProjectBuilder.INCREMENTAL_BUILD);
 				build.doBuild();
-				
+
 				return Status.OK_STATUS;
-				
 
 			}
 		};

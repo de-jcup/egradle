@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -55,7 +55,7 @@ public class PluginMergerTest {
 		mockedProvider = mock(TypeProvider.class);
 		mockedErrorHandler = mock(ErrorHandler.class);
 
-		merger = new PluginMerger(mockedProvider,mockedErrorHandler);
+		merger = new PluginMerger(mockedProvider, mockedErrorHandler);
 		mockedPlugin1 = mock(Plugin.class);
 		mockedPlugin2 = mock(Plugin.class);
 
@@ -63,7 +63,7 @@ public class PluginMergerTest {
 		reason2 = new ReasonImpl();
 		reason1.setPlugin(mockedPlugin1);
 		reason2.setPlugin(mockedPlugin2);
-		
+
 		plugin1Extensions = new LinkedHashSet<>();
 		when(mockedPlugin1.getExtensions()).thenReturn(plugin1Extensions);
 
@@ -118,11 +118,10 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class),any(Reason.class));
+		verify(mockedTargetType, never()).addExtension(any(String.class), any(Type.class), any(Reason.class));
 		verify(mockedErrorHandler).handleError(any(String.class));
 	}
 
-	
 	@Test
 	public void targetType_addExtension_is_not_called_when_plugin_is_for_other_targettype_and_hasExtension_with_id_type1() {
 		/* prepare */
@@ -136,11 +135,10 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).addExtension(any(String.class), any(Type.class), any(Reason.class));
+		verify(mockedTargetType, never()).addExtension(any(String.class), any(Type.class), any(Reason.class));
 
 	}
 
-	
 	@Test
 	public void targetType_mixin_type1_called_when_plugin_is_for_targettype_and_mixesIn_type1() {
 		/* prepare */
@@ -156,7 +154,7 @@ public class PluginMergerTest {
 		verify(mockedTargetType).mixin(mockedType1, reason1);
 
 	}
-	
+
 	@Test
 	public void targetType_mixin_type1_is_not_called_when_plugin_is_for_other_targettype_and_mixesIn_type1() {
 		/* prepare */
@@ -169,12 +167,11 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).mixin(mockedType1, reason1);
-		verify(mockedErrorHandler,never()).handleError(any(String.class));
-
+		verify(mockedTargetType, never()).mixin(mockedType1, reason1);
+		verify(mockedErrorHandler, never()).handleError(any(String.class));
 
 	}
-	
+
 	@Test
 	public void targetType_mixin_type1_is_not_called_when_plugin_is_for_targettype_but_mixesIn_unprovided_type() {
 		/* prepare */
@@ -187,7 +184,7 @@ public class PluginMergerTest {
 		merger.merge(mockedTargetType, mockedPlugins);
 
 		/* test */
-		verify(mockedTargetType,never()).mixin(any(), any(Reason.class));
+		verify(mockedTargetType, never()).mixin(any(), any(Reason.class));
 		verify(mockedErrorHandler).handleError(any(String.class));
 
 	}

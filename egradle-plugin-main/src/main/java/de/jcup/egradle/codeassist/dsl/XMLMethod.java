@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,21 +29,21 @@ import org.apache.commons.lang3.StringUtils;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "method")
-public class XMLMethod implements ModifiableMethod{
-	
+public class XMLMethod implements ModifiableMethod {
+
 	@XmlAttribute(name = "name")
 	String name;
-	
+
 	@XmlAttribute(name = "returnType")
 	private String returnTypeAsString;
-	
-	@XmlAttribute(name = "delegationTarget", required=false)
+
+	@XmlAttribute(name = "delegationTarget", required = false)
 	private String delegationTargetAsString;
-	
+
 	@XmlElement(name = "description")
 	private String description;
 
-	@XmlElement(name = "parameter", type=XMLParameter.class)
+	@XmlElement(name = "parameter", type = XMLParameter.class)
 	List<Parameter> parameters = new ArrayList<>();
 
 	private Type returnType;
@@ -52,7 +52,7 @@ public class XMLMethod implements ModifiableMethod{
 
 	private Type delegationTarget;
 
-	@XmlAttribute(name = "documented", required=false)
+	@XmlAttribute(name = "documented", required = false)
 	private Boolean documented = null;
 
 	@Override
@@ -64,23 +64,27 @@ public class XMLMethod implements ModifiableMethod{
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@Override
 	public void setDescription(String description) {
-		this.description=description;
+		this.description = description;
 	}
 
-	public String getReturnTypeAsString(){
+	public String getReturnTypeAsString() {
 		return returnTypeAsString;
 	}
-	
+
 	@Override
 	public Type getReturnType() {
 		return returnType;
 	}
-	
-	/* (non-Javadoc)
-	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setReturnType(de.jcup.egradle.codeassist.dsl.Type)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.jcup.egradle.codeassist.dsl.ModifiableMethod#setReturnType(de.jcup.
+	 * egradle.codeassist.dsl.Type)
 	 */
 	@Override
 	public void setReturnType(Type returnType) {
@@ -94,16 +98,20 @@ public class XMLMethod implements ModifiableMethod{
 
 	@Override
 	public String toString() {
-		return "XMLMethod ["+MethodUtils.createSignature(this,true)+"]";
+		return "XMLMethod [" + MethodUtils.createSignature(this, true) + "]";
 	}
-	
+
 	@Override
 	public Type getParent() {
 		return parent;
 	}
-	
-	/* (non-Javadoc)
-	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setParent(de.jcup.egradle.codeassist.dsl.Type)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.jcup.egradle.codeassist.dsl.ModifiableMethod#setParent(de.jcup.egradle
+	 * .codeassist.dsl.Type)
 	 */
 	@Override
 	public void setParent(Type parent) {
@@ -112,84 +120,91 @@ public class XMLMethod implements ModifiableMethod{
 
 	@Override
 	public String getDelegationTargetAsString() {
-		if (StringUtils.isBlank(delegationTargetAsString)){
-			/* hack for JAXB not writing always "delegationTarget='false'"*/
+		if (StringUtils.isBlank(delegationTargetAsString)) {
+			/* hack for JAXB not writing always "delegationTarget='false'" */
 			return null;
 		}
 		return delegationTargetAsString;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setDelegationTargetAsString(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#
+	 * setDelegationTargetAsString(java.lang.String)
 	 */
 	@Override
 	public void setDelegationTargetAsString(String delegationTargetAsString) {
 		this.delegationTargetAsString = delegationTargetAsString;
 	}
-	
-	/* (non-Javadoc)
-	 * @see de.jcup.egradle.codeassist.dsl.ModifiableMethod#setDelegationTarget(de.jcup.egradle.codeassist.dsl.Type)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.jcup.egradle.codeassist.dsl.ModifiableMethod#setDelegationTarget(de.
+	 * jcup.egradle.codeassist.dsl.Type)
 	 */
 	@Override
 	public void setDelegationTarget(Type target) {
 		this.delegationTarget = target;
 	}
-	
+
 	@Override
 	public Type getDelegationTarget() {
 		return delegationTarget;
 	}
-	
+
 	@Override
 	public boolean isDocumented() {
 		/* workaround for JAXM preventing to: atribute="false" */
-		return documented!=null && documented.booleanValue();
+		return documented != null && documented.booleanValue();
 	}
-	
+
 	public void setDocumented(boolean partOfGradleDSLDocumentation) {
-		if (!partOfGradleDSLDocumentation){
+		if (!partOfGradleDSLDocumentation) {
 			this.documented = null;
-		}else{
+		} else {
 			this.documented = Boolean.TRUE;
 		}
 	}
 
 	@Override
 	public int compareTo(Method o) {
-		if (o==null){
+		if (o == null) {
 			return 1;
 		}
-		if (o==this){
+		if (o == this) {
 			return 0;
 		}
-		if (name==null){
+		if (name == null) {
 			return -1;
 		}
 		String otherName = o.getName();
-		if (otherName==null){
+		if (otherName == null) {
 			return 1;
 		}
 		int compared = name.compareTo(otherName);
-		if (compared!=0){
+		if (compared != 0) {
 			return compared;
 		}
 		/* okay - check parameters */
 		List<Parameter> otherParameters = o.getParameters();
-		if (otherParameters==null){
+		if (otherParameters == null) {
 			return 1;
 		}
-		int diff = parameters.size()-otherParameters.size();
-		if (diff !=0){
+		int diff = parameters.size() - otherParameters.size();
+		if (diff != 0) {
 			return diff;
 		}
-		/* same parameter length*/
-		Iterator<Parameter> paramIt=parameters.iterator();
-		Iterator<Parameter> otherParamIt=otherParameters.iterator();
-		while(paramIt.hasNext()){
+		/* same parameter length */
+		Iterator<Parameter> paramIt = parameters.iterator();
+		Iterator<Parameter> otherParamIt = otherParameters.iterator();
+		while (paramIt.hasNext()) {
 			Parameter p = paramIt.next();
 			Parameter op = otherParamIt.next();
 			int paramCompared = p.compareTo(op);
-			if (paramCompared!=0){
+			if (paramCompared != 0) {
 				return paramCompared;
 			}
 		}

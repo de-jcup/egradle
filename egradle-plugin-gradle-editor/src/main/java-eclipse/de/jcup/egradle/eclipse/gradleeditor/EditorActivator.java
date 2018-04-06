@@ -65,28 +65,28 @@ public class EditorActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		long timeStart=System.currentTimeMillis();
-		
-		
+		long timeStart = System.currentTimeMillis();
+
 		SDK sdk = SDKManager.get().getCurrentSDK();
-		boolean sdkInstalled=false;
-		if (! sdk.isInstalled()){
-			try{
+		boolean sdkInstalled = false;
+		if (!sdk.isInstalled()) {
+			try {
 				sdk.install();
-				sdkInstalled=true;
-			}catch(IOException e){
-				EditorUtil.INSTANCE.logError("Was not able install SDK:"+sdk.getVersion(),e);
+				sdkInstalled = true;
+			} catch (IOException e) {
+				EditorUtil.INSTANCE.logError("Was not able install SDK:" + sdk.getVersion(), e);
 			}
 		}
-		
+
 		GradleDSLTypeProvider gradleDslProvider = initTypeProvider(sdk);
 
 		/* load project per default so show up time for tooltips faster */
 		gradleDslProvider.getType("org.gradle.api.Project");
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING){
+		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING) {
 			long timeEnd = System.currentTimeMillis();
-			double seconds = (timeEnd-timeStart)/1000;
-			getLog().log(new Status(IStatus.INFO, PLUGIN_ID,"Gradle editor startup in :"+seconds+" seconds"+", sdk installed:"+sdkInstalled));
+			double seconds = (timeEnd - timeStart) / 1000;
+			getLog().log(new Status(IStatus.INFO, PLUGIN_ID,
+					"Gradle editor startup in :" + seconds + " seconds" + ", sdk installed:" + sdkInstalled));
 		}
 
 	}
@@ -114,7 +114,7 @@ public class EditorActivator extends AbstractUIPlugin {
 		File dslFolder = sdk.getSDKInstallationFolder();
 		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
 		codeCompletionRegistry.setErrorHandler(errorHandler);
-		
+
 		/*
 		 * init code completion parts - when dsl folder not correctly set it
 		 * will not work but it is robust will only do nothing
@@ -124,15 +124,15 @@ public class EditorActivator extends AbstractUIPlugin {
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
 		loader.setDSLFolder(dslFolder);
-		
+
 		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
 		GradleDSLPluginLoader gradleDslPluginLoader = new GradleDSLPluginLoader(loader);
-		
+
 		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
 		codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, gradleDslPluginLoader);
-		
+
 		codeCompletionRegistry.init();
-		
+
 		return gradleDslProvider;
 	}
 

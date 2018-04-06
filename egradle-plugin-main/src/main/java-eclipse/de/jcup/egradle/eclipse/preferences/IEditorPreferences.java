@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.preferences;
+package de.jcup.egradle.eclipse.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.RGB;
@@ -21,32 +21,33 @@ import org.eclipse.swt.graphics.RGB;
 import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
 public interface IEditorPreferences {
-	public String getStringPreference(PreferenceIdentifiable id) ;
+	public String getStringPreference(PreferenceIdentifiable id);
 
-	public boolean getBooleanPreference(PreferenceIdentifiable id) ;
+	public boolean getBooleanPreference(PreferenceIdentifiable id);
 
-	public void setBooleanPreference(PreferenceIdentifiable id, boolean value) ;
+	public void setBooleanPreference(PreferenceIdentifiable id, boolean value);
 
-	public IPreferenceStore getPreferenceStore() ;
+	public IPreferenceStore getPreferenceStore();
 
-	public boolean getDefaultBooleanPreference(PreferenceIdentifiable id) ;
+	public boolean getDefaultBooleanPreference(PreferenceIdentifiable id);
 
-	public RGB getColor(PreferenceIdentifiable identifiable) ;
-	
+	public RGB getColor(PreferenceIdentifiable identifiable);
+
 	/**
 	 * Returns color as a web color in format "#RRGGBB"
+	 * 
 	 * @param identifiable
 	 * @return web color string
 	 */
-	public String getWebColor(PreferenceIdentifiable identifiable) ;
+	public String getWebColor(PreferenceIdentifiable identifiable);
 
-	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color) ;
+	public void setDefaultColor(PreferenceIdentifiable identifiable, RGB color);
 
-	public boolean isCodeAssistProposalsEnabled() ;
-	
-	public boolean isCodeAssistNoProposalsForGetterOrSetter() ;
-	
-	public boolean isCodeAssistTooltipsEnabled() ;
+	public boolean isCodeAssistProposalsEnabled();
+
+	public boolean isCodeAssistNoProposalsForGetterOrSetter();
+
+	public boolean isCodeAssistTooltipsEnabled();
 
 	public boolean isEditorAutoCreateEndBracketsEnabled();
 

@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor;
+package de.jcup.egradle.eclipse.gradleeditor;
 
 import java.util.Collections;
 
@@ -59,7 +59,6 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
 	private static final int OPEN_WITH_ID = IDialogConstants.CLIENT_ID + 1;
 
-
 	private Button openWithButton;
 
 	/**
@@ -78,7 +77,7 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 		setHelpAvailable(false);
 		setMessage("Please select an estimated type:");
 		setTitle("Open potential groovy/gradle/java resource");
-		
+
 	}
 
 	@Override
@@ -93,7 +92,7 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
 		return settings;
 	}
-	
+
 	@Override
 	protected ItemsFilter createFilter() {
 		return super.createFilter();
@@ -105,10 +104,6 @@ public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 		getPatternControl().setEnabled(false);
 		return control;
 	}
-	
-	
-	
-
 
 	private class GroovyGradleAndJavaTypeFilter extends ViewerFilter {
 

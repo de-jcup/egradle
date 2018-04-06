@@ -130,7 +130,8 @@ public class JUnitResultsCompressor {
 	 * When <code>true</code> EGradle does always add a pseudo testuid with
 	 * EGradle information, because the Junit Test Viewer of eclipse show this
 	 * always as headline. So its clear that this test results cannot be rerun
-	 * by Junit-Plugin but only by EGradle again. When <code>false</code> no additional info is added
+	 * by Junit-Plugin but only by EGradle again. When <code>false</code> no
+	 * additional info is added
 	 * 
 	 * @param addEGradlePseudoTestSuite
 	 */
@@ -156,7 +157,7 @@ public class JUnitResultsCompressor {
 		int tests = 0;
 		double time = 0;
 
-		if (addEGradlePseudoTestSuite){
+		if (addEGradlePseudoTestSuite) {
 			appendEGradleInformation(rDocument, testSuites);
 		}
 
@@ -192,7 +193,8 @@ public class JUnitResultsCompressor {
 		Date date = new Date();
 		String dateStr = DATE_FORMAT.format(date);
 		Element egradlePseudoTestSuite = doc.createElement(TESTSUITE);
-		egradlePseudoTestSuite.setAttribute("name", "EGradle imported following JUnit test results on "+dateStr+" :");
+		egradlePseudoTestSuite.setAttribute("name",
+				"EGradle imported following JUnit test results on " + dateStr + " :");
 		egradlePseudoTestSuite.setAttribute("disabled", "true");
 		testSuites.appendChild(egradlePseudoTestSuite);
 	}

@@ -13,10 +13,10 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.builder.util;
+package de.jcup.egradle.sdk.builder.util;
 
 import java.io.IOException;
 
-public interface  LineResolver{
+public interface LineResolver {
 	String getNextLine() throws IOException;
 }

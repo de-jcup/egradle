@@ -13,23 +13,23 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 public class VersionData {
 
 	private static final String TEXT__UNKNOWN = "unknown";
 
 	public static final de.jcup.egradle.core.VersionData UNKNOWN = new VersionData(TEXT__UNKNOWN);
-	
+
 	private String asText;
-	
-	public VersionData(String version){
-		if (version==null){
-			version=TEXT__UNKNOWN;
-		}else if (version.trim().length()<1){
-			version=TEXT__UNKNOWN;
+
+	public VersionData(String version) {
+		if (version == null) {
+			version = TEXT__UNKNOWN;
+		} else if (version.trim().length() < 1) {
+			version = TEXT__UNKNOWN;
 		}
-		this.asText=version;
+		this.asText = version;
 	}
 
 	public String getAsText() {

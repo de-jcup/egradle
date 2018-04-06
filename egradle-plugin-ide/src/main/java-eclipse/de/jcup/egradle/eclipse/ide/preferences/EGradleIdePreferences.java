@@ -26,56 +26,58 @@ import de.jcup.egradle.core.process.EGradleShellType;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public class EGradleIdePreferences {
-	
+
 	private static EGradleIdePreferences INSTANCE = new EGradleIdePreferences();
-	
+
 	private IPreferenceStore store;
 
-	public static EGradleIdePreferences getInstance(){
+	public static EGradleIdePreferences getInstance() {
 		return INSTANCE;
 	}
-	
+
 	EGradleIdePreferences() {
 		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, IDEActivator.PLUGIN_ID);
 	}
 
 	public String getStringPreference(EGradleIdePreferenceConstants id) {
 		String data = getPreferenceStore().getString(id.getId());
-		if (data==null){
-			data="";
+		if (data == null) {
+			data = "";
 		}
 		return data;
 	}
-	
+
 	public IPreferenceStore getPreferenceStore() {
 		return store;
 	}
 
 	public boolean isShowingConsoleOnBuildFailed() {
-		boolean showConsoleOnBuildFailed = getPreferenceStore().getBoolean(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());
+		boolean showConsoleOnBuildFailed = getPreferenceStore()
+				.getBoolean(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());
 		return showConsoleOnBuildFailed;
 	}
-	
+
 	public boolean isOutputValidationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(P_OUTPUT_VALIDATION_ENABLED.getId());
 		return validationEnabled;
 	}
-	
-	public boolean isCleanProjectsOnImportEnabled(){
+
+	public boolean isCleanProjectsOnImportEnabled() {
 		boolean cleanProjectsEnabled = getPreferenceStore().getBoolean(P_IMPORT__DO_CLEAN_PROJECTS.getId());
 		return cleanProjectsEnabled;
 	}
-	
-	public boolean isExecuteAssembleTaskOnImportEnabled(){
+
+	public boolean isExecuteAssembleTaskOnImportEnabled() {
 		boolean executeAssembleTaskEnabled = getPreferenceStore().getBoolean(P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId());
 		return executeAssembleTaskEnabled;
 	}
-	
+
 	public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
-		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore().getBoolean(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
+		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore()
+				.getBoolean(P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
 		return automaticallyDeriveBuildFoldersEnabled;
 	}
-	
+
 	public boolean isSubProjectIconDecorationEnabled() {
 		boolean validationEnabled = getPreferenceStore().getBoolean(P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
 		return validationEnabled;
@@ -96,24 +98,24 @@ public class EGradleIdePreferences {
 	public String getGradleShellId() {
 		return getStringPreference(P_GRADLE_SHELL);
 	}
-	
+
 	public MigrationState getMigrationState() {
 		String migrationStateAsString = getStringPreference(P_MIGRATE_IDE_STATE);
 		MigrationState migrationState = MigrationState.fromName(migrationStateAsString);
 		return migrationState;
 	}
-	
-	public void setMigrationState(MigrationState migrationState){
-		if (migrationState==null){
-			migrationState=MigrationState.NOT_MIGRATED;
+
+	public void setMigrationState(MigrationState migrationState) {
+		if (migrationState == null) {
+			migrationState = MigrationState.NOT_MIGRATED;
 		}
 		getPreferenceStore().setValue(P_MIGRATE_IDE_STATE.getId(), migrationState.name());
 	}
 
-	public String getGradleCallTypeID(){
+	public String getGradleCallTypeID() {
 		return getStringPreference(P_GRADLE_CALL_TYPE);
 	}
-	
+
 	public String getRootProjectPath() {
 		return getStringPreference(P_ROOTPROJECT_PATH);
 	}
@@ -135,8 +137,8 @@ public class EGradleIdePreferences {
 	}
 
 	public void setGradleShellType(EGradleShellType shell) {
-		if (shell==null){
-			shell=EGradleShellType.NONE;
+		if (shell == null) {
+			shell = EGradleShellType.NONE;
 		}
 		getPreferenceStore().setValue(P_GRADLE_SHELL.getId(), shell.getId());
 	}
@@ -145,10 +147,4 @@ public class EGradleIdePreferences {
 		getPreferenceStore().setValue(P_GRADLE_CALL_TYPE.getId(), callTypeId);
 	}
 
-	
-
-	
-
-	
-	
 }

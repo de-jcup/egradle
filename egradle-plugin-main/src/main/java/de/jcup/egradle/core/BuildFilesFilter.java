@@ -13,43 +13,46 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 import java.io.File;
 import java.io.FileFilter;
 
 /**
  * Filter for all kind of build files (*.gradle) and gradle.properties
+ * 
  * @author Albert Tregnaghi
  *
  */
 public class BuildFilesFilter implements FileFilter {
-	
+
 	private boolean allowSubFolders;
 
 	/**
-	 * Creates new build files filter. 
-	 * @param allowSubFolders - when <code>true</code> sub folders of current directory are all accepted, otherwise not
+	 * Creates new build files filter.
+	 * 
+	 * @param allowSubFolders
+	 *            - when <code>true</code> sub folders of current directory are
+	 *            all accepted, otherwise not
 	 */
-	public BuildFilesFilter(boolean allowSubFolders){
-		this.allowSubFolders=allowSubFolders;
+	public BuildFilesFilter(boolean allowSubFolders) {
+		this.allowSubFolders = allowSubFolders;
 	}
-
 
 	@Override
 	public boolean accept(File file) {
-		if (file==null){
+		if (file == null) {
 			return false;
 		}
-		/* ----------- DIRECTORY ----------*/
-		if (file.isDirectory()){
-			if (allowSubFolders){
+		/* ----------- DIRECTORY ---------- */
+		if (file.isDirectory()) {
+			if (allowSubFolders) {
 				return true;
 			}
 			return false;
 		}
-		
-		/* ----------- FILE ---------------*/
+
+		/* ----------- FILE --------------- */
 		String name = file.getName();
 		if (name == null) {
 			return false;

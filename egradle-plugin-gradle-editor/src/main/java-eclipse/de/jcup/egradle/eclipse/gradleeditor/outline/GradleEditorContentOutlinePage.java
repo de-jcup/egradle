@@ -54,7 +54,6 @@ public class GradleEditorContentOutlinePage extends AbstractGroovyBasedContentOu
 		return EditorActivator.PLUGIN_ID;
 	}
 
-
 	protected void handleDebugOptions(IMenuManager viewMenuManager) {
 		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
 

@@ -47,7 +47,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 		addParseDataByIndex("WARNING", BRIGHT_RED);
 		addParseDataByIndex("warning", BRIGHT_RED);
 		addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
-		
+
 		/* dependencies output */
 		addParseDataByIndex("+---", BRIGHT_BLUE);
 		addParseDataByIndex("\\---", BRIGHT_BLUE);
@@ -55,13 +55,14 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 	}
 
 	static final void addParseDataByIndex(String substring, RGB color) {
-		addParseDataByIndex(substring, color,false);
+		addParseDataByIndex(substring, color, false);
 	}
+
 	static final void addParseDataByIndex(String substring, RGB color, boolean bold) {
 		ParseData data = new ParseData();
 		data.subString = substring;
 		data.color = color;
-		data.bold=bold;
+		data.bold = bold;
 		SHARED_PARSE_DATA.add(data);
 	}
 
@@ -73,7 +74,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 			return;
 		}
 		String lineText = event.lineText;
-		if (StringUtils.isBlank(lineText)){
+		if (StringUtils.isBlank(lineText)) {
 			return;
 		}
 		/* styling */
@@ -91,7 +92,6 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 
 		lastRangeEnd = 0;
 
-		
 		List<StyleRange> ranges = new ArrayList<StyleRange>();
 		boolean handled = false;
 		/* line text */
@@ -100,17 +100,21 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 				/* only a marker line from gradle */
 				addRange(ranges, event.lineOffset, lineText.length(),
 						getColor(EGradleConsoleColorsConstants.BRIGHT_BLUE), true);
-				handled=true;
+				handled = true;
 			}
 		}
-		handled = handled || markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER,  BRIGHT_BLUE, true, BLUE,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "Downloading", BLUE, false, BRIGHT_BLUE,false);
-		handled = handled || markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE,false);
-		/* index parts and other*/
+		handled = handled || markLine(event, lineText, ranges, handled,
+				SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER, BRIGHT_BLUE, true, BLUE, false);
+		handled = handled
+				|| markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED, false);
+		handled = handled || markLine(event, lineText, ranges, handled,
+				"Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED, false);
+		handled = handled
+				|| markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED, false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve", RED, false, RED, false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Downloading", BLUE, false, BRIGHT_BLUE, false);
+		handled = handled || markLine(event, lineText, ranges, handled, "Download", BLUE, false, BRIGHT_BLUE, false);
+		/* index parts and other */
 		if (!handled) {
 			for (ParseData data : SHARED_PARSE_DATA) {
 				parse(event, defStyle, lineText, ranges, data);
@@ -125,14 +129,15 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 	private boolean markLine(LineStyleEvent event, String lineText, List<StyleRange> ranges, boolean handled,
 			String searchText, RGB color1, boolean bold1, RGB color2, boolean bold2) {
 		if (!handled) {
-			
+
 			if (lineText.startsWith(searchText)) {
-				/* download itself is rendered by parsedata, here we only markup the remianing links*/
-				addRange(ranges, event.lineOffset, searchText.length(),
-						getColor(color1), bold1);
-				addRange(ranges, event.lineOffset+searchText.length(), lineText.length(),
-						getColor(color2), bold2);
-				handled=true;
+				/*
+				 * download itself is rendered by parsedata, here we only markup
+				 * the remianing links
+				 */
+				addRange(ranges, event.lineOffset, searchText.length(), getColor(color1), bold1);
+				addRange(ranges, event.lineOffset + searchText.length(), lineText.length(), getColor(color2), bold2);
+				handled = true;
 			}
 		}
 		return handled;
@@ -179,13 +184,16 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 			return subString != null;
 		}
 	}
+
 	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, boolean bold) {
 		addRange(ranges, start, length, foreground, null, bold);
 	}
-	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, Color background, boolean bold) {
+
+	private void addRange(List<StyleRange> ranges, int start, int length, Color foreground, Color background,
+			boolean bold) {
 		StyleRange range = new StyleRange(start, length, foreground, background);
-		if (bold){
-			range.fontStyle=SWT.BOLD;
+		if (bold) {
+			range.fontStyle = SWT.BOLD;
 		}
 		ranges.add(range);
 		lastRangeEnd = lastRangeEnd + range.length;

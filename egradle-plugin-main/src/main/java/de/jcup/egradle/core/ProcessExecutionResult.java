@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core;
+package de.jcup.egradle.core;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -27,23 +27,25 @@ public class ProcessExecutionResult {
 	private boolean canceledByuser;
 
 	/**
-	 * @return <code>true</code> when not canceled and process results is {@link ProcessExecutor#PROCESS_RESULT_OK}
+	 * @return <code>true</code> when not canceled and process results is
+	 *         {@link ProcessExecutor#PROCESS_RESULT_OK}
 	 */
 	public boolean isOkay() {
-		return !canceledByuser &&  ProcessExecutor.PROCESS_RESULT_OK.equals(processResult);
+		return !canceledByuser && ProcessExecutor.PROCESS_RESULT_OK.equals(processResult);
 	}
-	
+
 	/**
-	 * @return <code>true</code> when canceled or process results is something else than {@link ProcessExecutor#PROCESS_RESULT_OK}
+	 * @return <code>true</code> when canceled or process results is something
+	 *         else than {@link ProcessExecutor#PROCESS_RESULT_OK}
 	 */
-	public boolean isNotOkay(){
+	public boolean isNotOkay() {
 		return !isOkay();
 	}
-	
+
 	public void setCanceledByuser(boolean canceled) {
-		 this.canceledByuser=canceled;
+		this.canceledByuser = canceled;
 	}
-	
+
 	public boolean isCanceledByuser() {
 		return canceledByuser;
 	}
@@ -83,9 +85,9 @@ public class ProcessExecutionResult {
 			}
 		}
 		sb.append("\n\n");
-		if (isCanceledByuser()){
+		if (isCanceledByuser()) {
 			sb.append("Proccess was canceled by user");
-		}else if (!isOkay()) {
+		} else if (!isOkay()) {
 			if (processResult == null) {
 				sb.append("Process was terminated by unknown reason, no exit code available");
 			} else {
@@ -94,7 +96,5 @@ public class ProcessExecutionResult {
 		}
 		return sb.toString();
 	}
-
-	
 
 }

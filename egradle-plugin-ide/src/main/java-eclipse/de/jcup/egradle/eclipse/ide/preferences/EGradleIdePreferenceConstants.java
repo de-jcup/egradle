@@ -13,29 +13,27 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.preferences;
+package de.jcup.egradle.eclipse.ide.preferences;
 
 public enum EGradleIdePreferenceConstants {
 	P_MIGRATE_IDE_STATE("migrateIdeState"),
-	
-	P_ROOTPROJECT_PATH("pathGradleRootProject"), 
-	
+
+	P_ROOTPROJECT_PATH("pathGradleRootProject"),
+
 	P_JAVA_HOME_PATH("pathJavaHome"),
-	
-	P_GRADLE_CALL_TYPE("gradleCallType"),
-	P_GRADLE_SHELL("commandShell"),
-	P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
-	P_GRADLE_CALL_COMMAND("commandGradle"),
-	P_OUTPUT_VALIDATION_ENABLED("outputValidationEnabled"),
-	P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
-	
-	/* file handling parts*/
+
+	P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER(
+			"pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"), P_OUTPUT_VALIDATION_ENABLED(
+					"outputValidationEnabled"), P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED(
+							"showConsoleViewOnBuildfailed"),
+
+	/* file handling parts */
 	P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
-	
+
 	/* import */
-	P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
-	P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
-	
+	P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), P_IMPORT__DO_CLEAN_PROJECTS(
+			"onImportDoCleanProjects"),
+
 	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled");
 
 	private String id;

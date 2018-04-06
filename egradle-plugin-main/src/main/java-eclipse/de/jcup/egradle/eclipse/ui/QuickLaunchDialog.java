@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ui;
+package de.jcup.egradle.eclipse.ui;
 
 import java.util.List;
 
@@ -41,13 +41,13 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 	private static final String INFOTEXT = "Enter your gradle tasks (press enter to execute)";
 	private History<String> history;
 
-	public QuickLaunchDialog(Shell parent, History<String> history, String titlePostFix)  {
+	public QuickLaunchDialog(Shell parent, History<String> history, String titlePostFix) {
 		super(parent, PopupDialog.INFOPOPUPRESIZE_SHELLSTYLE, GRAB_FOCUS, PERSIST_SIZE, PERSIST_BOUNDS,
-				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE +titlePostFix, INFOTEXT);
-		if (history==null){
-			history= new History<>(10);
+				SHOW_DIALOG_MENU, SHOW_PERSIST_ACTIONS, TITLE + titlePostFix, INFOTEXT);
+		if (history == null) {
+			history = new History<>(10);
 		}
-		this.history=history;
+		this.history = history;
 	}
 
 	private String inputText;
@@ -60,29 +60,32 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 
 		List<String> list = history.toList();
 		String[] items = list.toArray(new String[list.size()]);
-		
+
 		Combo comboBox = SWTFactory.createCombo(composite, SWT.NONE, 2, items);
 		Font terminalFont = JFaceResources.getTextFont();
 		comboBox.setFont(terminalFont);
-		
+
 		GridData textLayoutData = new GridData();
 		textLayoutData.horizontalAlignment = GridData.FILL;
 		textLayoutData.verticalAlignment = GridData.FILL;
 		textLayoutData.grabExcessHorizontalSpace = true;
 		textLayoutData.grabExcessVerticalSpace = false;
 		textLayoutData.horizontalSpan = 2;
-		
+
 		comboBox.setLayoutData(textLayoutData);
-		
+
 		comboBox.addKeyListener(new KeyAdapter() {
-			
+
 			@Override
 			public void keyReleased(KeyEvent event) {
-				if (event.character == '\r' ){
+				if (event.character == '\r') {
 					inputText = comboBox.getText();
-					if (inputText!=null){
-						if (! inputText.equals(history.current())){
-							/* when not same as current history entry, add it to history*/
+					if (inputText != null) {
+						if (!inputText.equals(history.current())) {
+							/*
+							 * when not same as current history entry, add it to
+							 * history
+							 */
 							history.add(inputText);
 						}
 					}
@@ -92,7 +95,7 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 		});
 		return composite;
 	}
-	
+
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		MainActivator mainActivator = MainActivator.getDefault();
@@ -101,9 +104,9 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 		}
 		return mainActivator.getDialogSettings();
 	}
-	
+
 	public String getValue() {
 		return inputText;
 	}
-	
+
 }

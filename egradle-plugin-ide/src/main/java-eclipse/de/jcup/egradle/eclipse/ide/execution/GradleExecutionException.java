@@ -13,9 +13,9 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.execution;
+package de.jcup.egradle.eclipse.ide.execution;
 
-public class GradleExecutionException extends Exception{
+public class GradleExecutionException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public GradleExecutionException(String message, Throwable cause) {
@@ -25,6 +25,5 @@ public class GradleExecutionException extends Exception{
 	public GradleExecutionException(String message) {
 		super(message);
 	}
-
 
 }

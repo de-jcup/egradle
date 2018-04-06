@@ -13,24 +13,24 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.launch;
+package de.jcup.egradle.eclipse.ide.launch;
 
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public interface EGradleLauncherConstants {
 
 	/**
-	 * The path to the gradle root project. If set not the default root path from preferences shall be 
-	 * used but this one... So launch configurations can created not only for current root project.
+	 * The path to the gradle root project. If set not the default root path
+	 * from preferences shall be used but this one... So launch configurations
+	 * can created not only for current root project.
 	 */
 	public static final String PROPERTY_ROOT_PROJECT_PATH = "rootProjectPath";
 
 	public static final String PROPERTY_TASKS = "tasks";
 	public static final String PROPERTY_PROJECTNAME = "projectName";
 	public static final String PROPERTY_OPTIONS = "options";
-	
-	
-	public static final String GRADLE_PROPERTIES = IDEActivator.PLUGIN_ID+".gradleProperties";
-	public static final String SYSTEM_PROPERTIES = IDEActivator.PLUGIN_ID+".systemProperties";
-	public static final String ENVIRONMENT_PROPERTIES = IDEActivator.PLUGIN_ID+".environmentProperties";
+
+	public static final String GRADLE_PROPERTIES = IDEActivator.PLUGIN_ID + ".gradleProperties";
+	public static final String SYSTEM_PROPERTIES = IDEActivator.PLUGIN_ID + ".systemProperties";
+	public static final String ENVIRONMENT_PROPERTIES = IDEActivator.PLUGIN_ID + ".environmentProperties";
 }

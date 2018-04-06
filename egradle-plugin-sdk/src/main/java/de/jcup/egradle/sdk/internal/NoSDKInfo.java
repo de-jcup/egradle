@@ -13,19 +13,19 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk.internal;
+package de.jcup.egradle.sdk.internal;
 
 import java.util.Date;
 
 import de.jcup.egradle.sdk.SDKInfo;
 
-public class NoSDKInfo implements SDKInfo{
+public class NoSDKInfo implements SDKInfo {
 
 	public static final NoSDKInfo INSTANCE = new NoSDKInfo();
-	
+
 	private NoSDKInfo() {
 	}
-	
+
 	@Override
 	public String getGradleVersion() {
 		return "none";

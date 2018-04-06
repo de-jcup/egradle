@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- // $ANTLR 2.7.7 (20060906): "java.g" -> "JavaLexer.java"$
+// $ANTLR 2.7.7 (20060906): "java.g" -> "JavaLexer.java"$
 
 package org.codehaus.groovy.antlr.java;
 

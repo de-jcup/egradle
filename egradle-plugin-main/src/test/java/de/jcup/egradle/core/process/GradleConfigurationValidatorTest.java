@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.process;
+package de.jcup.egradle.core.process;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -129,12 +129,12 @@ public class GradleConfigurationValidatorTest {
 		/* prepare */
 		File userHome = new File(System.getProperty("user.home"));
 		File subFolder = new File(userHome, ".egradle-test-fakegradle-exists");
-		if (!subFolder.exists()){
+		if (!subFolder.exists()) {
 			assertTrue("Test execution corrupt?!?!", subFolder.mkdirs());
 		}
 		subFolder.deleteOnExit();
 		File gradleFake = new File(subFolder, "gradlewdeluxe.bat");
-		if (gradleFake.exists()){
+		if (gradleFake.exists()) {
 			assertTrue("Gradle fake file exists and cannot be created", gradleFake.delete());
 		}
 		assertTrue("Test execution corrupt?!?!", gradleFake.createNewFile());
@@ -174,14 +174,14 @@ public class GradleConfigurationValidatorTest {
 		thrown.expect(
 				new IsEqual<>(new ValidationException(GradleConfigurationValidator.SHELL_NOT_EXECUTABLE_STANDALONE)));
 		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
-		when(mockedProcessExecutor.execute(any(), any(), any(),eq("bash"), eq("--version")))
+		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("--version")))
 				.thenThrow(new IOException("bash call standalone does always fail inside this test"));
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
-		
-		/* only for debugging - if no exception occurred...*/
-		verify(mockedProcessExecutor).execute(any(), any(), any(),eq("bash"), eq("--version"));
+
+		/* only for debugging - if no exception occurred... */
+		verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("--version"));
 	}
 
 	@Test
@@ -192,7 +192,7 @@ public class GradleConfigurationValidatorTest {
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
 	}
-	
+
 	@Test
 	public void when_gradle_command_is_empty_a_validation_exception_is_thrown() throws Exception {
 		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
@@ -201,7 +201,7 @@ public class GradleConfigurationValidatorTest {
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
 	}
-	
+
 	@Test
 	public void when_gradle_command_contains_only_whitespace_a_validation_exception_is_thrown() throws Exception {
 		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
@@ -215,8 +215,7 @@ public class GradleConfigurationValidatorTest {
 	public void when_a_gradle_call_with_version_throws_an_ioexception_a_validation_exception_is_thrown()
 			throws Exception {
 		/* prepare */
-		thrown.expect(
-				new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_VERSON_NOT_CALLABLE)));
+		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_VERSON_NOT_CALLABLE)));
 		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
 		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
@@ -225,8 +224,11 @@ public class GradleConfigurationValidatorTest {
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);
-		
-		/* normally dead code, but when no validation exception occured this is googd for debuging:*/
+
+		/*
+		 * normally dead code, but when no validation exception occured this is
+		 * googd for debuging:
+		 */
 		verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"));
 	}
 
@@ -237,7 +239,8 @@ public class GradleConfigurationValidatorTest {
 		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
 		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
-		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"))).thenReturn(0);
+		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version")))
+				.thenReturn(0);
 
 		/* execute +test */
 		validatorToTest.validate(mockedGradleConfiguration);

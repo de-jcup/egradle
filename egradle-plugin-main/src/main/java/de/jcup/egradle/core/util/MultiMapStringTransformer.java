@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.util;
+package de.jcup.egradle.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +39,12 @@ public class MultiMapStringTransformer implements GradleStringTransformer {
 
 	@Override
 	public String transform(String text) {
-		if (text==null){
+		if (text == null) {
 			return "";
 		}
-		for (SimpleMapStringTransformer transformer: transformers){
+		for (SimpleMapStringTransformer transformer : transformers) {
 			String transformed = transformer.transform(text);
-			if (! text.equals(transformed)){
+			if (!text.equals(transformed)) {
 				return transformed;
 			}
 		}

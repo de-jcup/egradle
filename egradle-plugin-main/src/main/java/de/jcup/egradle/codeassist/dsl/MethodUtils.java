@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist.dsl;
+package de.jcup.egradle.codeassist.dsl;
 
 import static de.jcup.egradle.codeassist.dsl.TypeConstants.*;
 
@@ -337,19 +337,19 @@ public class MethodUtils {
 	}
 
 	public static boolean isGetterOrSetter(Method method) {
-		if (isGetter(method)){
+		if (isGetter(method)) {
 			return true;
 		}
-		if (isSetter(method)){
+		if (isSetter(method)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	private static boolean isSetter(Method method) {
 		int params = method.getParameters().size();
-		if (params!=1){
+		if (params != 1) {
 			return false;
 		}
 		String methodName = method.getName();
@@ -361,11 +361,11 @@ public class MethodUtils {
 
 	private static boolean isGetter(Method method) {
 		int params = method.getParameters().size();
-		if (params!=0){
+		if (params != 0) {
 			return false;
 		}
 		String methodName = method.getName();
-		
+
 		if (methodName.startsWith("is")) {
 			return true;
 		}

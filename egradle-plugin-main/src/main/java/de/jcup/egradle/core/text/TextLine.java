@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.core.text;
+package de.jcup.egradle.core.text;
 
 public class TextLine {
 	private int offset;
@@ -40,8 +40,8 @@ public class TextLine {
 	 *         string will be returned
 	 */
 	public String getContent() {
-		if (content==null){
-			content="";
+		if (content == null) {
+			content = "";
 		}
 		return content;
 	}

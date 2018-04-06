@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.sdk;
+package de.jcup.egradle.sdk;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,19 +23,21 @@ import de.jcup.egradle.core.VersionData;
 public interface SDK {
 
 	VersionData getVersion();
-	
+
 	boolean isInstalled();
 
 	void install() throws IOException;
 
 	/**
 	 * Returns dsl folder or <code>null</code>
+	 * 
 	 * @return dsl folder or <code>null</code>
 	 */
 	File getSDKInstallationFolder();
-	
+
 	/**
 	 * Returns sdk info object , never <code>null</code>
+	 * 
 	 * @return sdk info object , never <code>null</code>
 	 */
 	SDKInfo getInfo();

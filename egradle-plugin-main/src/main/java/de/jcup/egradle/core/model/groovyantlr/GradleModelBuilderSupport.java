@@ -37,11 +37,11 @@ class GradleModelBuilderSupport extends AbstractGroovyModelBuilderSupport {
 			return item;
 		}
 		String depencyName = resolveAsSimpleString(configurationParameter);
-		String methodName = resolveAsSimpleString(methodCall,true);
+		String methodName = resolveAsSimpleString(methodCall, true);
 		item.setConfiguration(configuration.getText());
 		item.setName(depencyName);
 		item.setIdentifier(methodName);
-		
+
 		return item;
 	}
 
@@ -85,10 +85,10 @@ class GradleModelBuilderSupport extends AbstractGroovyModelBuilderSupport {
 
 	public AST handleTasksWithTypeClosure(String enameString, Item item, AST nextAST) {
 		AST newLastAst = nextAST;
-		if (enameString.startsWith("tasks.withType")){
-			String type = StringUtils.substringAfterLast(enameString," ");
+		if (enameString.startsWith("tasks.withType")) {
+			String type = StringUtils.substringAfterLast(enameString, " ");
 			item.setType(type);
-			
+
 			if (nextAST == null) {
 				return null;
 			}
@@ -101,40 +101,39 @@ class GradleModelBuilderSupport extends AbstractGroovyModelBuilderSupport {
 						methodCall2 = methodCall2.getFirstChild();
 					}
 					AST taskType = methodCall2.getFirstChild();
-					item.setName("tasks.withType("+taskType+")");
+					item.setName("tasks.withType(" + taskType + ")");
 					AST other = elist.getNextSibling();
-					newLastAst=other;
+					newLastAst = other;
 				}
 			}
 			return newLastAst;
-			
+
 		}
 		return newLastAst;
 	}
-	
-	
+
 	/**
 	 * @param enameString
 	 * @param item
 	 * @param nextAST
-	 * @return next AST to inspect for further details. If the next hierarchy part is a closure the closure element (CLOSABLE_BLOCK=50) must be returned!
+	 * @return next AST to inspect for further details. If the next hierarchy
+	 *         part is a closure the closure element (CLOSABLE_BLOCK=50) must be
+	 *         returned!
 	 */
 	public AST handleTaskClosure(String enameString, Item item, AST nextAST) {
 		if (nextAST == null) {
 			return null;
 		}
 		ASTResultInfo nextASTData = handleTaskNameResolving(enameString, item, nextAST);
-		if (nextASTData==null){
+		if (nextASTData == null) {
 			return null;
 		}
-		if (nextASTData.terminated){
+		if (nextASTData.terminated) {
 			return nextASTData.nextAST;
 		}
-		nextAST=nextASTData.nextAST;
+		nextAST = nextASTData.nextAST;
 		nextAST = handleTaskTypeResolving(item, nextAST);
 		return nextAST;
 	}
 
-
-	
 }

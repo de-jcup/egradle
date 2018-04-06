@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.codeassist;
+package de.jcup.egradle.codeassist;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +49,8 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	 * @param codeTemplateBuilder
 	 * @param typeEstimator
 	 */
-	public GradleDSLProposalFactory(CodeTemplateBuilder codeTemplateBuilder, GradleLanguageElementEstimater typeEstimator) {
+	public GradleDSLProposalFactory(CodeTemplateBuilder codeTemplateBuilder,
+			GradleLanguageElementEstimater typeEstimator) {
 		if (codeTemplateBuilder == null) {
 			throw new IllegalArgumentException("code codeTemplateBuilder may not be null");
 		}
@@ -59,8 +60,6 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		}
 		this.typeEstimator = typeEstimator;
 	}
-	
-	
 
 	@Override
 	protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
@@ -82,14 +81,15 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	private Set<Proposal> createProposals(EstimationResult result, String textBeforeColumn) {
 		Type identifiedType = result.getElementType();
-		if (identifiedType==null){
+		if (identifiedType == null) {
 			return Collections.emptySet();
 		}
-		/* when this is a documented type we show only documented methods etc. otherwise we support
-		 * all methods
+		/*
+		 * when this is a documented type we show only documented methods etc.
+		 * otherwise we support all methods
 		 */
 		Set<Proposal> proposals = new TreeSet<>();
-		
+
 		Map<String, Type> extensions = identifiedType.getExtensions();
 		for (String extensionId : extensions.keySet()) {
 			if (extensionId == null) {
@@ -107,10 +107,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 			Reason reason = identifiedType.getReasonForExtension(extensionId);
 			StringBuilder name = new StringBuilder();
 			name.append(extensionId);
-			if (reason!=null){
+			if (reason != null) {
 				Plugin plugin = reason.getPlugin();
-				if (plugin!=null){
-					name.append("-"+plugin.getId());
+				if (plugin != null) {
+					name.append("-" + plugin.getId());
 				}
 			}
 			proposal.setName(name.toString());
@@ -137,14 +137,16 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		}
 		Set<Method> identifiedTypeMethods = identifiedType.getMethods();
 		for (Method method : identifiedTypeMethods) {
-			if (isIgnoreGetterOrSetter()){
-				if (MethodUtils.isGetterOrSetter(method)){
+			if (isIgnoreGetterOrSetter()) {
+				if (MethodUtils.isGetterOrSetter(method)) {
 					continue;
 				}
-				
+
 			}
-			/* TODO ATR, 09.02.2017: what about marking properties as read or write only?
-			 * could be done here, or by xml generation so in xml as attribute available...
+			/*
+			 * TODO ATR, 09.02.2017: what about marking properties as read or
+			 * write only? could be done here, or by xml generation so in xml as
+			 * attribute available...
 			 */
 			ModelProposal proposal = createModelProposal(result);
 
@@ -179,10 +181,10 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 			proposals.add(proposal);
 		}
-		
+
 		/* apply defined templates as proposals */
 		List<Template> templates = defaultTemplatesProvider.getTemplatesForType(identifiedType.getName());
-		for (Template template: templates){
+		for (Template template : templates) {
 			TemplateProposal proposal = new TemplateProposal();
 			proposal.setName(template.getName());
 			proposal.setLazyCodeBuilder(new TemplateCodeBuilder(template));
@@ -196,7 +198,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 
 	private ModelProposal createModelProposal(EstimationResult result) {
 		ModelProposal proposal = new ModelProposal();
-		proposal.reason=result;
+		proposal.reason = result;
 		return proposal;
 	}
 
@@ -222,9 +224,9 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 	private enum ModelProposalType {
 		METHOD, PROPERTY, EXTENSION,
 	}
-	
-	public class TemplateProposal extends AbstractProposalImpl{
-		
+
+	public class TemplateProposal extends AbstractProposalImpl {
+
 	}
 
 	public class ModelProposal extends AbstractProposalImpl implements LanguageElementMetaData {
@@ -233,21 +235,20 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		private LanguageElement element;
 		private String extensionId;
 		private EstimationResult reason;
-		
+
 		/**
 		 * Returns estimation result which was the reason for this proposal.
 		 * Only for test and debug purposes
+		 * 
 		 * @return estimation result or <code>null</code> if not set
 		 */
 		public EstimationResult getReason() {
 			return reason;
 		}
-		
+
 		public void setElement(LanguageElement element) {
 			this.element = element;
 		}
-
-		
 
 		public void setExtensionId(String extensionId) {
 			this.extensionId = extensionId;
@@ -274,7 +275,7 @@ public class GradleDSLProposalFactory extends AbstractProposalFactory {
 		public String getExtensionName() {
 			return extensionId;
 		}
-		
+
 	}
 
 }
