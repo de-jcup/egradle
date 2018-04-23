@@ -56,5 +56,3 @@ Export-Package: antlr.collections,
  org.codehaus.groovy.antlr,
  org.codehaus.groovy.antlr.java,
  org.codehaus.groovy.antlr.parser
-Import-Package: org.junit,
- org.junit.rules;version="4.12.0"
