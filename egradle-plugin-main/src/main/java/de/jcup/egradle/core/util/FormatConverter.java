@@ -15,6 +15,13 @@
  */
 package de.jcup.egradle.core.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 public class FormatConverter {
 
 	/**
@@ -71,6 +78,14 @@ public class FormatConverter {
 			handleException(e);
 		}
 		return result;
+	}
+
+	public List<String> convertToStringList(String string) {
+		if (string==null || string.trim().isEmpty()){
+			return Collections.emptyList();
+		}
+		String[] result = StringUtilsAccess.split(string,",");
+		return Arrays.asList(result);
 	}
 
 }

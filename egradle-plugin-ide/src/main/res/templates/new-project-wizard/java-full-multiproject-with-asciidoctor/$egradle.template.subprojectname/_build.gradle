@@ -1,0 +1,15 @@
+ /*============================================================================
+ * Build file for subproject '#{egradle.template.subprojectname}'
+ *
+ * Root build file: "${rootProject.projectDir}/build.gradle"
+ * ============================================================================
+ */
+dependencies {
+
+	compile library.commons_lang
+	compile library.commons_io
+	
+	compile library.slf4j_api
+	compile library.slf4j_jdk
+
+}

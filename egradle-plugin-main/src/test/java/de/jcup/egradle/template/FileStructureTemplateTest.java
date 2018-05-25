@@ -20,6 +20,8 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
@@ -43,6 +45,7 @@ public class FileStructureTemplateTest {
 	private DirectoryCopySupport mockedCopySupport;
 	private TemplateContentTransformer mockedContentTransformer;
 	private TemplateContentTransformerFactory mockedContentTransformerFactory;
+	private List<String> predefinedSubprojects;
 
 	@Before
 	public void before() throws Exception {
@@ -55,7 +58,8 @@ public class FileStructureTemplateTest {
 		when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class)))
 				.thenReturn(mockedContentTransformer);
 
-		templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0);
+		predefinedSubprojects=new ArrayList<>();
+		templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0,predefinedSubprojects);
 
 		mockedCopySupport = mock(DirectoryCopySupport.class);
 		mockedFileSupport = mock(FileSupport.class);
@@ -64,7 +68,13 @@ public class FileStructureTemplateTest {
 		templateToTest.fileSupport = mockedFileSupport;
 		templateToTest.contentTransformerFactory = mockedContentTransformerFactory;
 	}
-
+	
+	@Test
+	public void predefinedSubProjectsAreAvailableFromGetter(){
+		predefinedSubprojects.add("a");
+		
+		assertTrue(templateToTest.getPredefinedSubprojects().contains("a"));
+	}
 	@Test
 	public void apply_from__null_throws_IllegalArgument() throws Exception {
 		expected.expect(IllegalArgumentException.class);

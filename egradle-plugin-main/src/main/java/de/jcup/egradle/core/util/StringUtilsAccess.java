@@ -41,4 +41,8 @@ public class StringUtilsAccess {
 	public static String abbreviate(String currentHTML, int maxWidth) {
 		return StringUtils.abbreviate(currentHTML, maxWidth);
 	}
+
+	public static String[] split(String string, String separatorChars) {
+		return StringUtils.split(string,separatorChars);
+	}
 }

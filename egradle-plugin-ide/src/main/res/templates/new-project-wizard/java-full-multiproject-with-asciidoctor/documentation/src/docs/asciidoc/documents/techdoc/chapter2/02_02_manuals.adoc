@@ -1,0 +1,21 @@
+=== Manuals
+
+==== Documentation
+
+===== Why you should use asciidoc
+You should use a text base markup language like `asciidoc`
+to write your documentation - and have it inside same
+repository as rest of your code. 
+
+So you got documentation as code...
+
+TIP: Please look at 
+      http://asciidoctor.org/docs/asciidoc-syntax-quick-reference for quick introduction into asciidoctor syntax.
+
+===== Setup
+When using Egradle you just have to use the `New project wizard`and select
+the `full multi project with asciidoctor` template to have a full working setup.
+
+Otherwise please look at https://arc42.org where you can find very good templates in `asciidoc` format. 
+
+=====  

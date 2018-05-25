@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -34,6 +35,7 @@ public class FileStructureTemplate {
 	static final String PROP_NAME = "name";
 	static final String PROP_DESCRIPTION = "description";
 	static final String PROP_PRIORITY = "priority";
+	static final String PROP_PREDEFINED_SUBPROJECTS="predefined.subprojects";
 
 	private File pathToContent;
 	DirectoryCopySupport copySupport;
@@ -41,8 +43,9 @@ public class FileStructureTemplate {
 	private String description;
 	FileSupport fileSupport;
 	TemplateContentTransformerFactory contentTransformerFactory;
+	private List<String> predefinedSubprojects;
 
-	public FileStructureTemplate(String name, File contentRootFolder, String description, int priority) {
+	public FileStructureTemplate(String name, File contentRootFolder, String description, int priority,List<String>predefinedSubprojects) {
 		notNull(contentRootFolder, "'pathToContent' may not be null");
 		if (name == null) {
 			name = contentRootFolder.getName();
@@ -56,6 +59,7 @@ public class FileStructureTemplate {
 		this.name = name;
 		this.description = description;
 		this.priority = priority;
+		this.predefinedSubprojects=predefinedSubprojects;
 
 		/* own internal factory so easier to test */
 		this.contentTransformerFactory = new TemplateContentTransformerFactory();
@@ -112,6 +116,7 @@ public class FileStructureTemplate {
 
 	}
 
+	
 	private void copyFiles(File targetFolder, Properties properties) throws IOException {
 		TemplateFileNameTransformer targetFileNameTransformer = new TemplateFileNameTransformer(properties);
 		copySupport.copyDirectories(pathToContent, targetFolder, targetFileNameTransformer, true,
@@ -186,4 +191,15 @@ public class FileStructureTemplate {
 		return priority;
 	}
 
+	public List<String> getPredefinedSubprojects() {
+		return predefinedSubprojects;
+	}
+
+	public void copyPredefinedSubProjects(File targetRootFolder) throws IOException {
+		/* add predefined parts */
+		for(String predefinedProject: predefinedSubprojects){
+			copySupport.copyDirectories(new File(pathToContent,predefinedProject), new File(targetRootFolder,predefinedProject), null, true);
+		}
+		
+	}
 }

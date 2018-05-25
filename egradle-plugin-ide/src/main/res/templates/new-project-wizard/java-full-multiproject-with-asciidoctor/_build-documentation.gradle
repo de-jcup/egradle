@@ -1,0 +1,52 @@
+allprojects{
+    /* if you have multiple documentation projects: just extend the next if...*/ 
+    if (! project.name.equals("documentation")){
+		return;
+    }
+    
+	apply plugin: 'org.asciidoctor.convert'
+	
+	sourceSets {
+   		main {
+   			// we use jdt (java project) on documentation because setting UTF-8 by eclipseJDT but we do not want the source folders
+	        java {
+	            srcDirs -= ["src/main/java", "src/main/resources","src/test/java", "src/test/resources" ]
+	        }
+    	}
+	}
+	
+	asciidoctorj {
+	    // we do not want to have jcenter() added per default! 
+	    // see http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
+        noDefaultRepositories = true
+
+    	version = '1.5.6'
+	
+    }
+    
+    repositories {
+    	/* necessary to have access to  asciidoctorj-groovy-dsl*/
+		jcenter() // here we add jcenter again, but if you have company proxy (e.g. nexus) you should add here the repository containing the gradle-plugin
+		// example for company style:   maven { url "${nexusBaseUrl}/gradle-plugins" }
+	}
+    
+    asciidoctor {
+        
+        separateOutputDirs = false
+        
+        backends "html5", "pdf"
+        attributes 'build-gradle': file('build.gradle'),
+                'source-highlighter': 'coderay',
+                'toc': 'left',
+                'toclevels': '3',
+                'icons': 'font',
+                'setanchors': 'true',
+                'idprefix': '',
+                'idseparator': '-',
+                'docinfo1': 'true',
+                'sectnums': 'true',
+                'sectnumlevels': '5',
+                'version': rootProject.version
+    }
+    
+}

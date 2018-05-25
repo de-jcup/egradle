@@ -59,7 +59,17 @@ public class NewProjectContext {
 	}
 
 	public String getMultiProjectsAsIncludeString() {
-		return multiProjectsAsIncludeString;
+		StringBuilder sb = new StringBuilder();
+		sb.append(multiProjectsAsIncludeString);
+		List<String> predefined = selectedTemplate.getPredefinedSubprojects();
+		if (! predefined.isEmpty()){
+			for (String predefinedProject: predefined){
+				sb.append(",\n'");
+				sb.append(predefinedProject);
+				sb.append("'");
+			}
+		}
+		return sb.toString();
 	}
 
 	public String getProjectName() {
@@ -93,10 +103,10 @@ public class NewProjectContext {
 	 *         supported by template
 	 */
 	public boolean isGradleWrapperSupportedAndEnabled() {
-		return isxSupportingGradleWrapper() && gradleWrapperEnabled;
+		return isSupportingGradleWrapper() && gradleWrapperEnabled;
 	}
 
-	public boolean isxSupportingGradleWrapper() {
+	public boolean isSupportingGradleWrapper() {
 		if (selectedTemplate == null) {
 			return false;
 		}
@@ -164,7 +174,7 @@ public class NewProjectContext {
 
 	public void setSelectedTemplate(FileStructureTemplate selectedTemplate) {
 		this.selectedTemplate = selectedTemplate;
-		this.gradleWrapperEnabled = isxSupportingGradleWrapper(); // per default
+		this.gradleWrapperEnabled = isSupportingGradleWrapper(); // per default
 																	// enabled
 																	// when
 																	// gradlewrapper

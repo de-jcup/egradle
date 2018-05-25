@@ -1,0 +1,51 @@
+/* ============================================================================
+   This file contains the configurations for 
+   Java settings
+   ============================================================================
+   
+   Included from: "${rootProject.projectDir}/build.gradle"
+   ============================================================================
+ */
+subprojects {
+    apply plugin: 'java'
+		
+	/* Setup UTF-8 for compile AND test compilation*/
+	[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+
+	sourceCompatibility = '#{egradle.template.java.version}'
+		
+	/* Default dependencies for all sub projects. */
+	dependencies{
+		testCompile library.junit
+		testCompile library.mockito_all
+	}
+	
+	/* Per default GRADLE stops the build if one single test fails. We want to have all tests executed. */
+    test { 
+        ignoreFailures = true 
+    }
+	
+	/**
+	 * Task to create source jars
+	 */
+	task sourcesJar(type: Jar, dependsOn:classes) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+    /**
+	 * Task to create javadoc jars
+	 */
+	task javadocJar(type: Jar, dependsOn:javadoc) {
+		classifier = 'javadoc'
+		from javadoc.destinationDir
+	}
+
+	/**
+	 * Define artifacts
+	 */
+	artifacts {
+		archives sourcesJar
+		archives javadocJar
+	}
+}

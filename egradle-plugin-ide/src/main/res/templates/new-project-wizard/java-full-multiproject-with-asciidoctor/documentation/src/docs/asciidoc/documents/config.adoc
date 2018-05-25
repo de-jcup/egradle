@@ -1,0 +1,12 @@
+// asciidoc settings for EN (English)
+// ==================================
+:toc-title: table of contents
+
+// enable table-of-contents
+:toc:
+
+// we support 6 levels here
+:toclevels: 6
+
+// where are images located?
+:imagesdir: ./images

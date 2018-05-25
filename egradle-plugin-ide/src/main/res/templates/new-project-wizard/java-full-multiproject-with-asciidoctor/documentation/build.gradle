@@ -1,0 +1,38 @@
+asciidoctor.doFirst {
+    // pre-process
+    copy {
+        /* Why do we do this here ? Because PDF converter does read the images
+         * before the standard copy part from the gradle plugin for asciidoctor is done
+         * so generated images - e.g. plantuml are not available at pdf render time
+         * so this is ugly but necessary. We use target images folder because the images
+         * dir is referenced by the html5 output directly - so it works at html5 and pdf
+         */
+    
+        from file('src/docs/asciidoc/images')
+        into file("$buildDir/asciidoc/images")
+        include '*.*'
+    }
+       
+    copy {
+        from file('src/docs/asciidoc/diagrams')
+        into file("$buildDir/asciidoc/diagrams")
+        include '*.*'
+    }
+}
+
+asciidoctor {
+    requires = ['asciidoctor-diagram']
+
+    /* has to be defined inside this build script again, because 
+       asciidoctor pdf seems to have an problem with relational path 
+       definitions...*/
+
+    attributes \
+        'sourcedir': file('src/docs'),
+        'imagesdir': "$buildDir/asciidoc/images"
+    
+    sources {
+        include 'techdoc.adoc','operations.adoc'
+    }
+    
+}
