@@ -542,7 +542,12 @@ public class IDEUtil {
 	public static EGradleIdePreferences getPreferences() {
 		return EGradleIdePreferences.getInstance();
 	}
-
+	
+	public static void setNoRootProjectFolder() throws CoreException {
+		IDEUtil.getPreferences().setRootProjectPath("");
+		EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
+		refreshAllProjectDecorations();
+	}
 	/**
 	 * Set new root project folder by given file
 	 * 

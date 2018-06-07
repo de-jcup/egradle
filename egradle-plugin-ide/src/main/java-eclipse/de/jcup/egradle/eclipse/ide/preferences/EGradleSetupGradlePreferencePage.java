@@ -65,7 +65,16 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 		boolean done = super.performOk();
 		if (done) {
 			String newRootProject = uiDelegate.getRootPathDirectory();
-			if (!StringUtils.equals(newRootProject, originRootProject)) {
+			if (StringUtils.isEmpty(newRootProject)){
+				try {
+					IDEUtil.setNoRootProjectFolder();
+				} catch (CoreException e) {
+					IDEUtil.logError("Was not able to set no root project folder", e);
+					/* not done... */
+					return false;
+					
+				}
+			}else if (!StringUtils.equals(newRootProject, originRootProject)) {
 				/*
 				 * root project has changed - refresh decoration of all projects
 				 */
