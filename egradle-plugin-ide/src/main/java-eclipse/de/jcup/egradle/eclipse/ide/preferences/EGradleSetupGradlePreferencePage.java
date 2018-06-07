@@ -43,6 +43,10 @@ public class EGradleSetupGradlePreferencePage extends FieldEditorPreferencePage
 		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
 		setDescription("Define how EGradle calls gradle.");
 		uiDelegate = new RootProjectConfigUIDelegate(this);
+		uiDelegate.setRootPathMayBeEmpty(true);// was annoying user so on
+												// preference empty is okay, if
+												// not set the dialog will
+												// appear on actions
 		originRootProject = getPreferenceStore().getString(P_ROOTPROJECT_PATH.getId());
 	}
 

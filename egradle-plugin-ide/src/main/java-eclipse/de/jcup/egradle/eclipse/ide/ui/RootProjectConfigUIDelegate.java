@@ -67,6 +67,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	private RootProjectValidationHandler validation;
 	private RootProjectConfigMode mode;
 	private Button restoreMetaDataCheckbox;
+	private boolean rootPathMayBeEmpty;
 
 	public RootProjectConfigUIDelegate(RootProjectValidationHandler validation) {
 		this(validation, null);
@@ -313,7 +314,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		rootPathTextControl.setToolTipText(rootPathTooltipText);
 		rootPathTextControl.setLayoutData(directoryTextLayout);
 
-		rootPathDirectoryEditor.setEmptyStringAllowed(false);
+		rootPathDirectoryEditor.setEmptyStringAllowed(rootPathMayBeEmpty);
 
 		if (!mode.isRootPathDirectoryEditable()) {
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
@@ -445,6 +446,10 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		updateCallTypeFields(gradleCallTypeID);
 	}
 
+	public void setRootPathMayBeEmpty(boolean rootPathMayBeEmpty) {
+		this.rootPathMayBeEmpty = rootPathMayBeEmpty;
+	}
+	
 	public String getGradleRootPathText() {
 		return this.rootPathDirectoryEditor.getStringValue();
 	}
