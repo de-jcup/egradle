@@ -38,6 +38,11 @@ public class EGradlePropertyTester extends PropertyTester {
 		}
 		File rootFolder = IDEUtil.getRootProjectFolderWithoutErrorHandling();
 		if (rootFolder == null) {
+			if (Boolean.FALSE.equals(expectedValue)){
+				/* not expected to be, no root folder set, so just return true*/
+				return true;
+			}
+			/* expected to be root folder , so return false */
 			return false;
 		}
 		IResource resource = (IResource) receiver;
