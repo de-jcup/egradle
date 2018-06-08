@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature.junit"
       label="EGradle JUnit Integration"
-      version="2.4.0"
+      version="2.5.0"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 
@@ -89,7 +89,7 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.jdt.junit"/>
-      <import plugin="de.jcup.egradle.eclipse.plugin.main" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="de.jcup.egradle.eclipse.plugin.main" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.debug.ui"/>
