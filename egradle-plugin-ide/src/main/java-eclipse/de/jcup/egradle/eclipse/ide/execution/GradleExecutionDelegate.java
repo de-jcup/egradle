@@ -82,7 +82,7 @@ public class GradleExecutionDelegate {
 			 * we handle the error on creation time by own exception thrown -
 			 * without IDEUtil error dialog
 			 */
-			throw new GradleExecutionException("Execution not possible - undefined or unexisting root project!");
+			throw new RootProjectMissingExecutionException();
 		}
 		this.outputHandler = outputHandler;
 

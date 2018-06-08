@@ -44,9 +44,15 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.preference.IPreferenceNode;
+import org.eclipse.jface.preference.IPreferencePage;
+import org.eclipse.jface.preference.PreferenceDialog;
+import org.eclipse.jface.preference.PreferenceManager;
+import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IDecoratorManager;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -75,6 +81,7 @@ import de.jcup.egradle.eclipse.ide.decorators.EGradleProjectDecorator;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
+import de.jcup.egradle.eclipse.ide.preferences.EGradleSetupGradlePreferencePage;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 import de.jcup.egradle.eclipse.ide.virtualroot.VirtualRootProjectNature;
 import de.jcup.egradle.eclipse.ide.wizards.RootProjectImportSupport;
@@ -85,8 +92,6 @@ import de.jcup.egradle.template.FileStructureTemplate;
 import de.jcup.egradle.template.FileStructureTemplateManager;
 
 public class IDEUtil {
-
-	private static final String MESSAGE_MISSING_ROOTPROJECT = "No root project path set. Please setup in preferences!";
 
 	private static final IProgressMonitor NULL_PROGESS = new NullProgressMonitor();
 
@@ -511,6 +516,33 @@ public class IDEUtil {
 		getWorkspace().build(buildConfigurations, IncrementalProjectBuilder.CLEAN_BUILD, true, monitor);
 	}
 
+	public static void openGradleSetupPage(){
+		
+		IPreferencePage page = new EGradleSetupGradlePreferencePage();
+		page.setTitle("Gradle Setup");
+		showPreferencePage(page);
+	}
+	
+	private static void showPreferencePage(IPreferencePage page){
+		EclipseUtil.safeAsyncExec(new Runnable(){
+
+			@Override
+			public void run() {
+				Shell shell = getSafeDisplay().getActiveShell();
+				
+				PreferenceManager mgr = new PreferenceManager();
+				IPreferenceNode node = new PreferenceNode("1", page);
+				mgr.addToRoot(node);
+				PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
+				dialog.create();
+				dialog.setMessage(page.getTitle());
+				dialog.open();
+			}
+			
+		});
+
+	}
+	
 	public static void removeAllValidationErrorsOfConsoleOutput() {
 		try {
 			buildScriptProblemMarkerHelper.removeAllRegisteredMarkers();
@@ -667,7 +699,7 @@ public class IDEUtil {
 		String path = getPreferences().getRootProjectPath();
 		if (StringUtils.isEmpty(path)) {
 			if (showErrorDialog) {
-				getDialogSupport().showError(MESSAGE_MISSING_ROOTPROJECT);
+				getDialogSupport().showMissingRootProjectDialog("No EGradle root project defined.");
 			}
 			return null;
 		}
