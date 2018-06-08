@@ -30,10 +30,9 @@ table, th, td {
 				<li><a href="#select_template">Select template</a>
 				<li><a href="#template_details">Gradle template details</a>
 					<ul>
-						<li><a href="#full_gradle_multiproject_java">Full multi
-								project (Java)</a></li>
-						<li><a href="#full_gradle_singleproject_java">Full single
-								project (Java)</a></li>
+						<li><a href="#full_gradle_multiproject_java">Full multi project (Java)</a></li>
+						<li><a href="#full_gradle_multiproject_asciidoc_java">Full multi project (Java + Asciidoctor)</a></li>
+						<li><a href="#full_gradle_singleproject_java">Full single project (Java)</a></li>
 					</ul></li>
 			</ul>
 		<li><a href="#custom_templates">Custom templates</a>
@@ -138,6 +137,43 @@ table, th, td {
 	<p>
 		<a href="#top">Top</a>
 	</p>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Gralde multi project: JAVA + Asciidoc -->
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<h4 id="full_gradle_multiproject_asciidoc_java">Full gradle multi project
+		(Java + Asciidoctor)</h4>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-page-full-multiproject-asciidoc-and-java.png" />
+	</p>
+	<p>Its nearly the same as <a href="#full_gradle_multiproject_java">Full multi project (Java)</a> but it supports 
+		also a full working asciidoctor support.<br>
+		<br>
+		The setup is exactly the same, only the output changes a little bit: There will
+		be always a <b>documentation</b> subproject appearing as shown in next image:
+		<br><br>
+	</p>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-asciidoc-documentation-example.png" />
+	</p>
+	<p>
+		Just call the gradle task <b>asciidoctor</b> and your document is build in html and in pdf:
+	</p>
+	<p>
+		<img
+			src="images/egradle-new-project-wizard-asciidoc-documentation-example2.png" />
+	</p>
+	<p>
+		<a href="#top">Top</a>
+	</p>
+
+
+	
+	
+	
 	<h4 id="full_gradle_singleproject_java">Full gradle single project
 		(Java)</h4>
 	<p>
