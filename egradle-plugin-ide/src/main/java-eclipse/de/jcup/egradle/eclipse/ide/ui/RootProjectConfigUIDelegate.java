@@ -449,7 +449,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	public void setRootPathMayBeEmpty(boolean rootPathMayBeEmpty) {
 		this.rootPathMayBeEmpty = rootPathMayBeEmpty;
 	}
-	
+
 	public String getGradleRootPathText() {
 		return this.rootPathDirectoryEditor.getStringValue();
 	}

@@ -13,9 +13,9 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.execution;
+package de.jcup.egradle.eclipse.ide.execution;
 
-public class RootProjectMissingExecutionException extends GradleExecutionException{
+public class RootProjectMissingExecutionException extends GradleExecutionException {
 
 	public RootProjectMissingExecutionException() {
 		super("Execution not possible - undefined or unexisting root project!");

@@ -81,10 +81,10 @@ public class FormatConverter {
 	}
 
 	public List<String> convertToStringList(String string) {
-		if (string==null || string.trim().isEmpty()){
+		if (string == null || string.trim().isEmpty()) {
 			return Collections.emptyList();
 		}
-		String[] result = StringUtilsAccess.split(string,",");
+		String[] result = StringUtilsAccess.split(string, ",");
 		return Arrays.asList(result);
 	}
 

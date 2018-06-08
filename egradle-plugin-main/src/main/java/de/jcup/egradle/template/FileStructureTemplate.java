@@ -35,7 +35,7 @@ public class FileStructureTemplate {
 	static final String PROP_NAME = "name";
 	static final String PROP_DESCRIPTION = "description";
 	static final String PROP_PRIORITY = "priority";
-	static final String PROP_PREDEFINED_SUBPROJECTS="predefined.subprojects";
+	static final String PROP_PREDEFINED_SUBPROJECTS = "predefined.subprojects";
 
 	private File pathToContent;
 	DirectoryCopySupport copySupport;
@@ -45,7 +45,8 @@ public class FileStructureTemplate {
 	TemplateContentTransformerFactory contentTransformerFactory;
 	private List<String> predefinedSubprojects;
 
-	public FileStructureTemplate(String name, File contentRootFolder, String description, int priority,List<String>predefinedSubprojects) {
+	public FileStructureTemplate(String name, File contentRootFolder, String description, int priority,
+			List<String> predefinedSubprojects) {
 		notNull(contentRootFolder, "'pathToContent' may not be null");
 		if (name == null) {
 			name = contentRootFolder.getName();
@@ -59,7 +60,7 @@ public class FileStructureTemplate {
 		this.name = name;
 		this.description = description;
 		this.priority = priority;
-		this.predefinedSubprojects=predefinedSubprojects;
+		this.predefinedSubprojects = predefinedSubprojects;
 
 		/* own internal factory so easier to test */
 		this.contentTransformerFactory = new TemplateContentTransformerFactory();
@@ -116,7 +117,6 @@ public class FileStructureTemplate {
 
 	}
 
-	
 	private void copyFiles(File targetFolder, Properties properties) throws IOException {
 		TemplateFileNameTransformer targetFileNameTransformer = new TemplateFileNameTransformer(properties);
 		copySupport.copyDirectories(pathToContent, targetFolder, targetFileNameTransformer, true,
@@ -197,9 +197,10 @@ public class FileStructureTemplate {
 
 	public void copyPredefinedSubProjects(File targetRootFolder) throws IOException {
 		/* add predefined parts */
-		for(String predefinedProject: predefinedSubprojects){
-			copySupport.copyDirectories(new File(pathToContent,predefinedProject), new File(targetRootFolder,predefinedProject), null, true);
+		for (String predefinedProject : predefinedSubprojects) {
+			copySupport.copyDirectories(new File(pathToContent, predefinedProject),
+					new File(targetRootFolder, predefinedProject), null, true);
 		}
-		
+
 	}
 }

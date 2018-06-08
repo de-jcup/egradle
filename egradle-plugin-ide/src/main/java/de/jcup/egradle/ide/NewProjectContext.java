@@ -62,8 +62,8 @@ public class NewProjectContext {
 		StringBuilder sb = new StringBuilder();
 		sb.append(multiProjectsAsIncludeString);
 		List<String> predefined = selectedTemplate.getPredefinedSubprojects();
-		if (! predefined.isEmpty()){
-			for (String predefinedProject: predefined){
+		if (!predefined.isEmpty()) {
+			for (String predefinedProject : predefined) {
 				sb.append(",\n'");
 				sb.append(predefinedProject);
 				sb.append("'");

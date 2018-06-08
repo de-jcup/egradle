@@ -103,19 +103,20 @@ public class EGradleMessageDialogSupport {
 	}
 
 	public void showMissingRootProjectDialog(String detailMessage) {
-		
+
 		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
 
-				MissingRootProjectDialog missingRootProjectDialog = new MissingRootProjectDialog(getActiveWorkbenchShell(),detailMessage);
+				MissingRootProjectDialog missingRootProjectDialog = new MissingRootProjectDialog(
+						getActiveWorkbenchShell(), detailMessage);
 				missingRootProjectDialog.open();
 
 			}
 
 		});
-		
+
 	}
 
 }

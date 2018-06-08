@@ -123,7 +123,7 @@ public class ReplaceJavaDocPartsAction implements SDKBuilderAction {
 	 * @param fetchFullLineAsContent
 	 *            when <code>true</code> the full line is used as content on
 	 *            replacement:<br>
-	 * 			<br>
+	 *            <br>
 	 * 
 	 *            <pre>
 	 * "@myTag bla xyz\n" will be replaced by "$replacedContentFor(bla) xyz\n"

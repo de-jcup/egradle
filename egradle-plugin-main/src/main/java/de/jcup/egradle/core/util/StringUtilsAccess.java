@@ -43,6 +43,6 @@ public class StringUtilsAccess {
 	}
 
 	public static String[] split(String string, String separatorChars) {
-		return StringUtils.split(string,separatorChars);
+		return StringUtils.split(string, separatorChars);
 	}
 }

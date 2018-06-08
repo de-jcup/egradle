@@ -133,7 +133,7 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 			if (context.isMultiProject()) {
 				List<String> subProjectNames = context.getMultiProjectsAsList();
 				template.copyPredefinedSubProjects(targetFolder);
-				
+
 				String multiProjectsIncludeString = context.getMultiProjectsAsIncludeString();
 
 				Map<Object, Object> additionalProperties = new HashMap<>();

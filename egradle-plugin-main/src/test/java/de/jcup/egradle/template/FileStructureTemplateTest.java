@@ -58,8 +58,8 @@ public class FileStructureTemplateTest {
 		when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class)))
 				.thenReturn(mockedContentTransformer);
 
-		predefinedSubprojects=new ArrayList<>();
-		templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0,predefinedSubprojects);
+		predefinedSubprojects = new ArrayList<>();
+		templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0, predefinedSubprojects);
 
 		mockedCopySupport = mock(DirectoryCopySupport.class);
 		mockedFileSupport = mock(FileSupport.class);
@@ -68,13 +68,14 @@ public class FileStructureTemplateTest {
 		templateToTest.fileSupport = mockedFileSupport;
 		templateToTest.contentTransformerFactory = mockedContentTransformerFactory;
 	}
-	
+
 	@Test
-	public void predefinedSubProjectsAreAvailableFromGetter(){
+	public void predefinedSubProjectsAreAvailableFromGetter() {
 		predefinedSubprojects.add("a");
-		
+
 		assertTrue(templateToTest.getPredefinedSubprojects().contains("a"));
 	}
+
 	@Test
 	public void apply_from__null_throws_IllegalArgument() throws Exception {
 		expected.expect(IllegalArgumentException.class);

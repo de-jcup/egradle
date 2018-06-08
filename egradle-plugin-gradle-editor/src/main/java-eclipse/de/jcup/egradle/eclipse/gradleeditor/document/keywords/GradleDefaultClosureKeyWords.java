@@ -26,11 +26,11 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 	TEST_COMPILE("testCompile"),
 
 	IMPLEMENTATION("implementation"),
-	
+
 	TEST_IMPLEMENTATION("testImplementation"),
-	
+
 	API("api"),
-	
+
 	FROM("from"),
 
 	INTO("into"),

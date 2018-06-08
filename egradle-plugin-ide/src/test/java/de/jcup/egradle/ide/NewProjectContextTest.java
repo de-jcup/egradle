@@ -326,13 +326,13 @@ public class NewProjectContextTest {
 		assertTrue(list.contains("server"));
 		assertTrue(list.contains("ui"));
 	}
-	
+
 	@Test
 	public void get_multiProjectsAsIncludeString_for_predefined_projects_sub1_and_sub2_and_ui_core_server_contains_separated_by_comma_returns_ui_core_server_sub1_sub2_in_list() {
 		/* prepare */
 		contextToTest.setMultiProjects("ui, core, server");
-		when(mockedTemplate.getPredefinedSubprojects()).thenReturn(Arrays.asList("sub1","sub2"));
-		
+		when(mockedTemplate.getPredefinedSubprojects()).thenReturn(Arrays.asList("sub1", "sub2"));
+
 		/* test */
 		String include = contextToTest.getMultiProjectsAsIncludeString();
 		assertEquals("'core',\n'server',\n'ui',\n'sub1',\n'sub2'", include);

@@ -41,13 +41,13 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 
 	public QuickTaskExecutionHandler() {
 		history = new History<>(20);
-		
-		/* add defaults last added will be first to select..*/
+
+		/* add defaults last added will be first to select.. */
 		history.add("asciidoctor");
 		history.add("test");
 		history.add("build");
 		history.add("tasks");
-		
+
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
 		lastInput = null;
 		Shell shell = HandlerUtil.getActiveShellChecked(event);
 		GradleRootProject rootProject = IDEUtil.getRootProject();
-		if (rootProject == null){
+		if (rootProject == null) {
 			return null;
 		}
 		QuickLaunchDialog dialog = new QuickLaunchDialog(shell, history, " (" + rootProject.getName() + ")");

@@ -71,13 +71,13 @@ public abstract class AbstractEGradleCommandHandler extends AbstractHandler impl
 			validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
 			execution = createGradleExecution(validationOutputHandler);
 		} catch (GradleExecutionException e) {
-			
-			if (e instanceof RootProjectMissingExecutionException){
+
+			if (e instanceof RootProjectMissingExecutionException) {
 				getDialogSupport().showMissingRootProjectDialog(e.getMessage());
-			}else{
+			} else {
 				getDialogSupport().showError(e.getMessage());
 			}
-			
+
 			return null;
 		}
 		ExecutionMode mode = getExecutionMode();

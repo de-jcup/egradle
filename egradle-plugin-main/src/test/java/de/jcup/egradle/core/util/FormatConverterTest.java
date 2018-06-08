@@ -63,29 +63,29 @@ public class FormatConverterTest {
 	public void convert_100point71_to_double_results_in_100point71() {
 		assertEquals(100.71, converterToTest.convertToDouble("100.71"), 0.0);
 	}
-	
+
 	@Test
 	public void convert_null_string_to_array_list_returns_empty_list() {
-		assertEquals( new ArrayList<>(),converterToTest.convertToStringList(null));
+		assertEquals(new ArrayList<>(), converterToTest.convertToStringList(null));
 	}
-	
+
 	@Test
 	public void convert_empty_string_to_array_list_returns_empty_list() {
-		assertEquals( new ArrayList<>(),converterToTest.convertToStringList(""));
-		assertEquals( new ArrayList<>(),converterToTest.convertToStringList("   "));
+		assertEquals(new ArrayList<>(), converterToTest.convertToStringList(""));
+		assertEquals(new ArrayList<>(), converterToTest.convertToStringList("   "));
 	}
-	
+
 	@Test
 	public void convert_a_string_to_array_list_returns_list_with_a() {
-		assertEquals(Arrays.asList("a"),converterToTest.convertToStringList("a"));
+		assertEquals(Arrays.asList("a"), converterToTest.convertToStringList("a"));
 	}
-	
+
 	@Test
 	public void convert_a_comma_b_string_to_array_list_returns_list_with_a_and_b() {
 		List<String> expected = new ArrayList<>();
 		expected.add("a");
 		expected.add("b");
-		assertEquals(expected,converterToTest.convertToStringList("a,b"));
+		assertEquals(expected, converterToTest.convertToStringList("a,b"));
 	}
 
 }

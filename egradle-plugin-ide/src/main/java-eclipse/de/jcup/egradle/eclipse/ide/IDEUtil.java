@@ -516,20 +516,20 @@ public class IDEUtil {
 		getWorkspace().build(buildConfigurations, IncrementalProjectBuilder.CLEAN_BUILD, true, monitor);
 	}
 
-	public static void openGradleSetupPage(){
-		
+	public static void openGradleSetupPage() {
+
 		IPreferencePage page = new EGradleSetupGradlePreferencePage();
 		page.setTitle("Gradle Setup");
 		showPreferencePage(page);
 	}
-	
-	private static void showPreferencePage(IPreferencePage page){
-		EclipseUtil.safeAsyncExec(new Runnable(){
+
+	private static void showPreferencePage(IPreferencePage page) {
+		EclipseUtil.safeAsyncExec(new Runnable() {
 
 			@Override
 			public void run() {
 				Shell shell = getSafeDisplay().getActiveShell();
-				
+
 				PreferenceManager mgr = new PreferenceManager();
 				IPreferenceNode node = new PreferenceNode("1", page);
 				mgr.addToRoot(node);
@@ -538,11 +538,11 @@ public class IDEUtil {
 				dialog.setMessage(page.getTitle());
 				dialog.open();
 			}
-			
+
 		});
 
 	}
-	
+
 	public static void removeAllValidationErrorsOfConsoleOutput() {
 		try {
 			buildScriptProblemMarkerHelper.removeAllRegisteredMarkers();
@@ -574,12 +574,13 @@ public class IDEUtil {
 	public static EGradleIdePreferences getPreferences() {
 		return EGradleIdePreferences.getInstance();
 	}
-	
+
 	public static void setNoRootProjectFolder() throws CoreException {
 		IDEUtil.getPreferences().setRootProjectPath("");
 		EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(NULL_PROGESS);
 		refreshAllProjectDecorations();
 	}
+
 	/**
 	 * Set new root project folder by given file
 	 * 

@@ -66,7 +66,8 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 
 		templateList.setLayoutData(layoutData);
 
-		descriptionText = SWTFactory.createText(parent,SWT.V_SCROLL|  SWT.WRAP | SWT.MULTI | SWT.BORDER | SWT.READ_ONLY, SWT.FILL);
+		descriptionText = SWTFactory.createText(parent,
+				SWT.V_SCROLL | SWT.WRAP | SWT.MULTI | SWT.BORDER | SWT.READ_ONLY, SWT.FILL);
 
 		layoutData = new GridData();
 		layoutData.horizontalAlignment = SWT.FILL;

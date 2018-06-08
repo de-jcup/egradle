@@ -95,8 +95,8 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
 			sb.append(":");
 			sb.append(projectToUse
 					.getName()); /*
-									 * TODO ATR, 02.03.2017: check if getName() is
-									 * correct here - should be foldername..
+									 * TODO ATR, 02.03.2017: check if getName()
+									 * is correct here - should be foldername..
 									 */
 			sb.append(":");
 		}

@@ -88,14 +88,13 @@ public class FileStructureTemplateManager {
 		String priorityAsString = p.getProperty(PROP_PRIORITY, "100");
 		String description = p.getProperty(PROP_DESCRIPTION);
 		String name = p.getProperty(PROP_NAME);
-		String predefinedSubProjectsAsString = p.getProperty(PROP_PREDEFINED_SUBPROJECTS,"");
+		String predefinedSubProjectsAsString = p.getProperty(PROP_PREDEFINED_SUBPROJECTS, "");
 
 		int priority = formatConverter.convertToInt(priorityAsString);
 		List<String> predefinedSubprojects = formatConverter.convertToStringList(predefinedSubProjectsAsString);
 
-		
-		FileStructureTemplate template = new FileStructureTemplate(name, templateFolder,
-				description, priority,predefinedSubprojects);
+		FileStructureTemplate template = new FileStructureTemplate(name, templateFolder, description, priority,
+				predefinedSubprojects);
 		for (Feature f : Features.values()) {
 			String value = p.getProperty(f.getId());
 			if (Boolean.valueOf(value)) {
