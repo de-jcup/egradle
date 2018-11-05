@@ -34,6 +34,7 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 	private boolean cleanProjects;
 	private boolean buildAfterClean;
 	private ProjectContext projectContext;
+	private Runnable afterExecution;
 
 	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
 			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
@@ -89,6 +90,20 @@ public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 		}
 		super.afterExecutionDone(monitor);
 		monitor.worked(2);
+
+		if (afterExecution != null) {
+			afterExecution.run();
+		}
+	}
+
+	/**
+	 * When set, given runnable will executed after execution was successfully
+	 * done
+	 * 
+	 * @param runnable
+	 */
+	public void setAfterExecution(Runnable runnable) {
+		this.afterExecution = runnable;
 	}
 
 }

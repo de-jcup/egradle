@@ -156,12 +156,14 @@ public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider
 		Set<StyledText> toRemove = new HashSet<StyledText>();
 
 		for (StyledText viewer : viewers.keySet()) {
-			if (viewers.get(viewer) == participant)
+			if (viewers.get(viewer) == participant){
 				toRemove.add(viewer);
+			}
 		}
 
-		for (StyledText viewer : toRemove)
+		for (StyledText viewer : toRemove){
 			viewers.remove(viewer);
+		}
 	}
 
 	public FileStructureTemplateManager getNewProjectTemplateManager() {

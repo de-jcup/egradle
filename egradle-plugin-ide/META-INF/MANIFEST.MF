@@ -28,4 +28,6 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: de.jcup.egradle.eclipse.ide,
+ de.jcup.egradle.eclipse.ide.execution,
+ de.jcup.egradle.eclipse.ide.handlers,
  de.jcup.egradle.eclipse.ide.launch

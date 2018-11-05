@@ -9,12 +9,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.jdt.junit,
- de.jcup.egradle.eclipse.plugin.ide;bundle-version="1.3.1",
  org.eclipse.core.resources,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
  org.eclipse.jdt.ui,
- de.jcup.egradle.eclipse.plugin.main;bundle-version="2.5.0"
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="2.5.0",
+ de.jcup.egradle.eclipse.plugin.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.jface.text,

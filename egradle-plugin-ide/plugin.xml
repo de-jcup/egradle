@@ -251,6 +251,12 @@
                   label="Refresh"
                   tooltip="Refresh all eclipse dependencies of current root project">
             </command>
+	
+	
+			<separator
+         		name="egradle.commands.separator.other.before" visible="true">
+			</separator>
+
             <command
                   commandId="egradle.commands.updateOrCreateVirtualRootProject"
                   icon="icons/updateOrCreateVirtualRootProject.png"
@@ -258,6 +264,10 @@
                   label="Update or create virtual root project"
                   tooltip="Update or create virtual root project">
             </command>
+            
+            <separator
+         		name="egradle.commands.separator.other.after" visible="false">
+			</separator>
          </toolbar>
       </menuContribution>
    </extension>

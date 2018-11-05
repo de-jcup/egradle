@@ -16,8 +16,11 @@
 package de.jcup.egradle.junit;
 
 public enum EGradleJUnitTestTasksType {
-	CLEAN_ALL("egradle.junit.clean.all", "clean test"), CLEAN_ONLY_TESTS("egradle.junit.clean.onlytests",
-			"cleanTest test"), CLEAN_NOTHING("egradle.junit.clean.nothing", "test");
+	CLEAN_ALL("egradle.junit.clean.all", "clean test"),
+
+	CLEAN_ONLY_TESTS("egradle.junit.clean.onlytests", "cleanTest test"),
+
+	CLEAN_NOTHING("egradle.junit.clean.nothing", "test");
 
 	private String id;
 	private String testTasks;

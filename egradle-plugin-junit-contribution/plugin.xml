@@ -60,6 +60,10 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
+            commandId="de.jcup.egradle.eclipse.junit.contribution.commands.executeAllTestsAndImportTestResultCommand"
+            class="de.jcup.egradle.eclipse.junit.contribution.handlers.ExecuteGradleTestsAndImportAllJunitResultsHandler">
+      </handler>
+      <handler
             commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
             class="de.jcup.egradle.eclipse.junit.contribution.handlers.ImportAllGradleJunitResultsHandler">
       </handler>
@@ -70,10 +74,27 @@
     <extension point="org.eclipse.ui.menus">
         <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
         <menuContribution locationURI="popup:egradle.popup.any">
+                <command commandId="de.jcup.egradle.eclipse.junit.contribution.commands.executeAllTestsAndImportTestResultCommand"
+                        label="Execute tests and import results" 
+                        icon="icons/executeAllTestsAndImport.png"
+                        tooltip="Execute tests by gradle and import results into junit view"
+                        style="push">
+                        <visibleWhen
+                              checkEnabled="false">
+                              <with
+                                    variable="activeMenuSelection">
+                                    <iterate ifEmpty="false">
+			         					<adapt type="org.eclipse.core.resources.IProject">
+			         						<test property="org.eclipse.core.resources.projectNature" value="de.jcup.egradle.eclipse.virtualRootProjectNature"/>
+			         					</adapt>
+			         				</iterate>
+                              </with>
+                        </visibleWhen>
+                </command>
                 <command commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
-                        label="Import all Junit Test results" 
+                        label="Import existing test results" 
                         icon="icons/importGradleTestsToEclipseView.png"
-                        tooltip="Import all existing gradle test results into junit view"
+                        tooltip="Just import all existing gradle test results into junit view"
                         style="push">
                         <visibleWhen
                               checkEnabled="false">
@@ -106,10 +127,20 @@
             allPopups="false"
             locationURI="toolbar:egradle.toolbars.mainToolbar?after=egradle.toolbars.refreshEclipseCommand">
          <command
+               commandId="de.jcup.egradle.eclipse.junit.contribution.commands.executeAllTestsAndImportTestResultCommand"
+               icon="icons/executeAllTestsAndImport.png"
+               id="egradle.toolbars.executeAllTestsAndimportTestResultCommand"
+               tooltip="Execute all gradle tests and import results to junit view">
+         </command>
+      </menuContribution>
+       <menuContribution
+            allPopups="false"
+            locationURI="toolbar:egradle.toolbars.mainToolbar?after=egradle.commands.separator.other.after">
+         <command
                commandId="de.jcup.egradle.eclipse.junit.contribution.commands.importTestResultCommand"
                icon="icons/importGradleTestsToEclipseView.png"
                id="egradle.toolbars.importTestResultCommand"
-               tooltip="Import gradle test results to junit view">
+               tooltip="Just import existing gradle test results to junit view">
          </command>
       </menuContribution>
    </extension>
