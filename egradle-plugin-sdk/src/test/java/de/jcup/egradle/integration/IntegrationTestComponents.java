@@ -41,13 +41,13 @@ import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.codeassist.dsl.gradle.estimation.GradleLanguageElementEstimater;
 import de.jcup.egradle.codeassist.hover.HoverSupport;
 import de.jcup.egradle.core.ModelProvider;
-import de.jcup.egradle.core.TestUtil;
 import de.jcup.egradle.core.TextProvider;
 import de.jcup.egradle.core.model.Model;
 import de.jcup.egradle.core.model.ModelBuilder.ModelBuilderException;
 import de.jcup.egradle.core.model.groovyantlr.AbstractGroovyModelBuilder;
 import de.jcup.egradle.core.model.groovyantlr.GradleModelBuilder;
 import de.jcup.egradle.core.util.ErrorHandler;
+import de.jcup.egradle.sdk.SDKTestUtil;
 
 /**
  * IntegrationTestComponents is the central point for integration tests
@@ -126,7 +126,7 @@ public class IntegrationTestComponents extends ExternalResource {
 		pluginsImporter = new XMLPluginsImporter();
 		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 		fileLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		fileLoader.setDSLFolder(new File(TestUtil.SDK__SRC_MAIN_RES_FOLDER, "sdk"));
+		fileLoader.setDSLFolder(new File(SDKTestUtil.SDK__SRC_MAIN_RES_FOLDER, "sdk"));
 		gradleDslProvider = new GradleDSLTypeProvider(fileLoader);
 		gradleDslProvider.setErrorHandler(errorHandler);
 
@@ -178,7 +178,7 @@ public class IntegrationTestComponents extends ExternalResource {
 	}
 
 	public String loadTestFile(String path) {
-		File file = new File(TestUtil.SRC_TEST_RES_FOLDER, path);
+		File file = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, path);
 		if (!file.exists()) {
 			throw new IllegalStateException("Testfile does not exist:" + file.getAbsolutePath());
 		}

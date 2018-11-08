@@ -17,8 +17,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.workbench,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
- de.jcup.egradle.eclipse.plugin.main;bundle-version="2.5.0",
- de.jcup.egradle.eclipse.plugin.sdk;bundle-version="0.1.0"
+ de.jcup.egradle.eclipse.plugin.main,
+ de.jcup.egradle.eclipse.plugin.sdk
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: de.jcup.egradle.eclipse.util,

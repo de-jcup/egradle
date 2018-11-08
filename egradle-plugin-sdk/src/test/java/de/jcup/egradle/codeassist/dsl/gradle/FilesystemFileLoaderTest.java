@@ -32,12 +32,12 @@ import org.junit.rules.ExpectedException;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader.DSLFolderNotSetException;
+import de.jcup.egradle.sdk.SDKTestUtil;
 import de.jcup.egradle.codeassist.dsl.Type;
 import de.jcup.egradle.codeassist.dsl.XMLPlugins;
 import de.jcup.egradle.codeassist.dsl.XMLPluginsImporter;
 import de.jcup.egradle.codeassist.dsl.XMLType;
 import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
-import de.jcup.egradle.core.TestUtil;
 
 public class FilesystemFileLoaderTest {
 
@@ -50,7 +50,7 @@ public class FilesystemFileLoaderTest {
 
 	@Before
 	public void before() {
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
+		dslFolder = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
 		mockedTypeImporter = mock(XMLTypeImporter.class);
 		mockedPluginsImporter = mock(XMLPluginsImporter.class);
 		mockedApiMappingImporter = mock(ApiMappingImporter.class);

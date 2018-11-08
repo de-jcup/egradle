@@ -6,4 +6,9 @@
  */
 dependencies {
 	compile project(':egradle-plugin-main')
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
+	// xml binding- what a mess: jaxb-core must be added manually here - otherwise com.sun.xm.bind.jaxb-impl fails at runtime
+	compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+	
 }

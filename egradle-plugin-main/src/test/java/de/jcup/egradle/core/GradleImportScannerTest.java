@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core;
 
-import static de.jcup.egradle.core.TestUtil.*;
+import static de.jcup.egradle.core.CoreTestUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.File;

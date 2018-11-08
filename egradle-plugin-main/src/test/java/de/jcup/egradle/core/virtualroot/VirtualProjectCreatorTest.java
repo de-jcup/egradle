@@ -15,7 +15,7 @@
  */
 package de.jcup.egradle.core.virtualroot;
 
-import static de.jcup.egradle.core.TestUtil.*;
+import static de.jcup.egradle.core.CoreTestUtil.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 

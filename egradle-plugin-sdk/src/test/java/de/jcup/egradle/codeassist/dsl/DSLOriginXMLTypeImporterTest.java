@@ -25,7 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.sdk.SDKTestUtil;
 
 public class DSLOriginXMLTypeImporterTest {
 
@@ -37,7 +37,7 @@ public class DSLOriginXMLTypeImporterTest {
 
 	@Before
 	public void before() {
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl-origin/");
+		dslFolder = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, "dsl-origin/");
 		xmlFile = new File(dslFolder, "Ear.xml");
 		importerToTest = new XMLTypeImporter();
 	}

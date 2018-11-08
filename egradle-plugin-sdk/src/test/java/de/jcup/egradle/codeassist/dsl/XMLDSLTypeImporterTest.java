@@ -26,7 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.sdk.SDKTestUtil;
 
 public class XMLDSLTypeImporterTest {
 
@@ -38,7 +38,7 @@ public class XMLDSLTypeImporterTest {
 
 	@Before
 	public void before() {
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
+		dslFolder = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
 		actionXMLFile = new File(dslFolder, "org/gradle/api/TestAction.xml");
 		importerToTest = new XMLTypeImporter();
 	}

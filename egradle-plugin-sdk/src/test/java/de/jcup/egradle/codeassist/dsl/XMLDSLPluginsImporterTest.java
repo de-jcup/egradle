@@ -26,7 +26,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.sdk.SDKTestUtil;
 
 public class XMLDSLPluginsImporterTest {
 
@@ -37,7 +37,7 @@ public class XMLDSLPluginsImporterTest {
 	@Before
 	public void before() {
 		importerToTest = new XMLPluginsImporter();
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
+		dslFolder = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
 		pluginsXMLFile = new File(dslFolder, "plugins.xml");
 	}
 

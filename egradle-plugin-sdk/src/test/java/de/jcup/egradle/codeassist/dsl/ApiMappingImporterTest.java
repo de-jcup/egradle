@@ -15,7 +15,9 @@
  */
 package de.jcup.egradle.codeassist.dsl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +27,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.jcup.egradle.core.TestUtil;
+import de.jcup.egradle.sdk.SDKTestUtil;
 
 public class ApiMappingImporterTest {
 
@@ -36,7 +38,7 @@ public class ApiMappingImporterTest {
 	@Before
 	public void before() {
 		importerToTest = new ApiMappingImporter();
-		dslFolder = new File(TestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
+		dslFolder = new File(SDKTestUtil.SRC_TEST_RES_FOLDER, "dsl/3.0");
 		mappingsFile = new File(dslFolder, "api-mapping.txt");
 	}
 
