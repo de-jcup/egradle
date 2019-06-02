@@ -464,11 +464,13 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 	}
 
 	void setTitleImageDependingOnSeverity(int severity) {
-		if (severity == IMarker.SEVERITY_ERROR) {
-			setTitleImage(EclipseUtil.getImage(getEditorIconPathOnError(), getPluginId()));
-		} else {
-			setTitleImage(EclipseUtil.getImage(getEditorIconPath(), getPluginId()));
-		}
+	    EclipseUtil.getSafeDisplay().asyncExec(()->{
+	        if (severity == IMarker.SEVERITY_ERROR) {
+	            setTitleImage(EclipseUtil.getImage(getEditorIconPathOnError(), getPluginId()));
+	        } else {
+	            setTitleImage(EclipseUtil.getImage(getEditorIconPath(), getPluginId()));
+	        }
+	    });
 	}
 
 	protected abstract String getEditorIconPath();

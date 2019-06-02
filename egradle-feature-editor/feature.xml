@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature.editor"
       label="EGradle Editor"
-      version="2.5.0"
+      version="2.6.0"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 
@@ -101,7 +101,7 @@ END OF TERMS AND CONDITIONS
          id="de.jcup.egradle.eclipse.plugin.sdk"
          download-size="0"
          install-size="0"
-         version="3.0.2"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

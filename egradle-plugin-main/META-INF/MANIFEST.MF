@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.main;singleton:=true
-Bundle-Version: 2.5.0
+Bundle-Version: 2.6.0
 Bundle-Activator: de.jcup.egradle.eclipse.MainActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
@@ -24,7 +24,14 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/commons-lang3-3.4.jar,
- lib/antlr-2.7.7.jar
+ lib/antlr-2.7.7.jar,
+ lib/xml/javax.activation-api-1.2.0.jar,
+ lib/xml/jaxb-api-2.4.0-b180830.0359.jar,
+ lib/xml/runtime/FastInfoset-1.2.15.jar,
+ lib/xml/runtime/istack-commons-runtime-3.0.7.jar,
+ lib/xml/runtime/jaxb-runtime-2.3.1.jar,
+ lib/xml/runtime/stax-ex-1.8.jar,
+ lib/xml/runtime/txw2-2.3.1.jar
 Export-Package: antlr.collections,
  de.jcup.egradle.codeassist,
  de.jcup.egradle.codeassist.dsl,
@@ -50,6 +57,13 @@ Export-Package: antlr.collections,
  de.jcup.egradle.eclipse.ui,
  de.jcup.egradle.eclipse.util,
  de.jcup.egradle.template,
+ javax.activation,
+ javax.xml.bind,
+ javax.xml.bind.annotation,
+ javax.xml.bind.annotation.adapters,
+ javax.xml.bind.attachment,
+ javax.xml.bind.helpers,
+ javax.xml.bind.util,
  org.apache.commons.lang3,
  org.apache.commons.lang3.exception,
  org.codehaus.groovy,

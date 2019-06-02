@@ -27,7 +27,7 @@ public class MainActivator extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.main"; //$NON-NLS-1$
 
 	// The shared instance
-	private static MainActivator plugin;
+	private static AbstractUIPlugin plugin;
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -39,12 +39,17 @@ public class MainActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	/* Special variant, only for jenkins editor - so it can setup itself as providing part...*/
+	public static void delegate(AbstractUIPlugin other) {
+	    MainActivator.plugin=other;
+	}
+	
 	/**
 	 * Returns the shared instance
 	 *
 	 * @return the shared instance
 	 */
-	public static MainActivator getDefault() {
+	public static AbstractUIPlugin getDefault() {
 		return plugin;
 	}
 

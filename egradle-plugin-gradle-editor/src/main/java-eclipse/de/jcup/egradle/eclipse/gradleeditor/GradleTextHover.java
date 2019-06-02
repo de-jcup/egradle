@@ -49,7 +49,7 @@ public class GradleTextHover implements ITextHover, ITextHoverExtension {
 	private GradleSourceViewerConfiguration gradleSourceViewerConfiguration;
 	private ISourceViewer sourceViewer;
 	private String contentType;
-	private GradleTextHoverControlCreator creator;
+	private IInformationControlCreator creator;
 
 	private String fgColor;
 	private String bgColor;

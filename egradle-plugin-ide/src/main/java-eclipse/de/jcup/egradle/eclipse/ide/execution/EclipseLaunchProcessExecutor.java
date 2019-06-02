@@ -41,105 +41,103 @@ import de.jcup.egradle.eclipse.ide.launch.EGradleRuntimeProcess;
 import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
 
 public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
-	private ILaunch launch;
-	private EGradlePostBuildJob postJob;
-	private String cmdLine;
+    private ILaunch launch;
+    private EGradlePostBuildJob postJob;
+    private String cmdLine;
 
-	public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch, EGradlePostBuildJob postJob) {
-		super(streamHandler, false, SimpleProcessExecutor.ENDLESS_RUNNING); // not
-																			// output
-																			// handled
-																			// -
-																			// done
-																			// by
-																			// launch
-																			// mechanism
-																			// in
-																			// console!
-		this.launch = launch;
-		this.postJob = postJob;
-	}
+    public EclipseLaunchProcessExecutor(OutputHandler streamHandler, ILaunch launch, EGradlePostBuildJob postJob) {
+        super(streamHandler, false, SimpleProcessExecutor.ENDLESS_RUNNING); // not
+                                                                            // output
+                                                                            // handled
+                                                                            // -
+                                                                            // done
+                                                                            // by
+                                                                            // launch
+                                                                            // mechanism
+                                                                            // in
+                                                                            // console!
+        this.launch = launch;
+        this.postJob = postJob;
+    }
 
-	@Override
-	public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envprovider, ProcessContext processContext,
-			String... commands) throws IOException {
-		try {
-			return super.execute(wdProvider, envprovider, processContext, commands);
-		} catch (IOException | RuntimeException e) {
-			IDEUtil.logError("Was not able to execute launch process", e);
-			/*
-			 * problem occured - we have to cleanup launch otherwise launches
-			 * will be kept in UI and not removeable!
-			 */
-			if (!launch.isTerminated()) {
-				try {
-					if (launch.canTerminate()) {
-						launch.terminate();
-					}
-				} catch (DebugException de) {
-					IDEUtil.logError("Was not able to terminate launch process", e);
-				}
-			}
-			throw e;
-		}
-	}
+    @Override
+    public int execute(ProcessConfiguration wdProvider, EnvironmentProvider envprovider, ProcessContext processContext, String... commands) throws IOException {
+        try {
+            return super.execute(wdProvider, envprovider, processContext, commands);
+        } catch (IOException | RuntimeException e) {
+            IDEUtil.logError("Was not able to execute launch process", e);
+            
+            /* check if a process is assigned, if not we must provide fallback*/
+            IProcess[] processes = launch.getProcesses();
+            if (processes == null || processes.length == 0) {
+                FallbackProcess process = new FallbackProcess(launch);
+                process.setLabel(e.getMessage());
+                launch.addProcess(process);
+            }
 
-	@Override
-	protected void handleProcessStarted(EnvironmentProvider provider, Process process, Date started,
-			File workingDirectory, String[] commands) {
-		String label = "<none>";
-		if (provider instanceof GradleContext) {
-			label = ((GradleContext) provider).getCommandString();
-		}
-		String path = "inside root project";
+            try {
+                launch.terminate();
+            } catch (DebugException de) {
+                IDEUtil.logError("Was not able to terminate launch process",de);
+            }
+            throw e;
+        }
+    }
 
-		Map<String, String> attributes = new HashMap<>();
-		String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(started);
-		/*
-		 * Will be shown in process information dialog - see
-		 * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage
-		 */
-		StringBuilder sb = new StringBuilder();
-		for (String key : provider.getEnvironment().keySet()) {
-			String value = provider.getEnvironment().get(key);
-			sb.append(key);
-			sb.append('=');
-			sb.append(value);
-			sb.append(System.getProperty("line.separator"));
-		}
+    @Override
+    protected void handleProcessStarted(EnvironmentProvider provider, Process process, Date started, File workingDirectory, String[] commands) {
+        String label = "<none>";
+        if (provider instanceof GradleContext) {
+            label = ((GradleContext) provider).getCommandString();
+        }
+        String path = "inside root project";
 
-		attributes.put(DebugPlugin.ATTR_ENVIRONMENT, sb.toString());
-		attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
-		attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
-		attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
-		attributes.put(DebugPlugin.ATTR_PATH, path);
+        Map<String, String> attributes = new HashMap<>();
+        String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(started);
+        /*
+         * Will be shown in process information dialog - see
+         * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage
+         */
+        StringBuilder sb = new StringBuilder();
+        for (String key : provider.getEnvironment().keySet()) {
+            String value = provider.getEnvironment().get(key);
+            sb.append(key);
+            sb.append('=');
+            sb.append(value);
+            sb.append(System.getProperty("line.separator"));
+        }
 
-		/*
-		 * using an unbreakable space 00A0 to avoid unnecessary breaks in view
-		 */
-		cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
+        attributes.put(DebugPlugin.ATTR_ENVIRONMENT, sb.toString());
+        attributes.put(DebugPlugin.ATTR_CONSOLE_ENCODING, "UTF-8");
+        attributes.put(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectory.getAbsolutePath());
+        attributes.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, timestamp);
+        attributes.put(DebugPlugin.ATTR_PATH, path);
 
-		attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
+        /*
+         * using an unbreakable space 00A0 to avoid unnecessary breaks in view
+         */
+        cmdLine = StringUtils.join(Arrays.asList(commands), '\u00A0');
 
-		/*
-		 * bind process to runtime process, so visible and correct handled in
-		 * debug UI
-		 */
-		EGradleRuntimeProcess rp = EGradleRuntimeProcess.create(launch, process, label, attributes);
-		// rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
+        attributes.put(IProcess.ATTR_CMDLINE, cmdLine);
 
-		outputHandler.output("Launch started - for details see output of " + label);
-		if (!rp.canTerminate()) {
-			outputHandler.output("Started process cannot terminate");
-		}
-	}
+        /*
+         * bind process to runtime process, so visible and correct handled in debug UI
+         */
+        EGradleRuntimeProcess rp = EGradleRuntimeProcess.create(launch, process, label, attributes);
+        // rp.getStreamsProxy().getOutputStreamMonitor().addListener(rp);
 
-	@Override
-	protected void handleProcessEnd(Process p) {
-		if (postJob != null) {
-			postJob.setBuildInfo(new BuildInfo(cmdLine, p.exitValue()));
-			postJob.schedule();
-		}
-	}
+        outputHandler.output("Launch started - for details see output of " + label);
+        if (!rp.canTerminate()) {
+            outputHandler.output("Started process cannot terminate");
+        }
+    }
+
+    @Override
+    protected void handleProcessEnd(Process p) {
+        if (postJob != null) {
+            postJob.setBuildInfo(new BuildInfo(cmdLine, p.exitValue()));
+            postJob.schedule();
+        }
+    }
 
 }

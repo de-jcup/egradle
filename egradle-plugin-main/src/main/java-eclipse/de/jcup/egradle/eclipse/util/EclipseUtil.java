@@ -40,6 +40,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;
 
@@ -235,7 +236,7 @@ public class EclipseUtil {
 	}
 
 	private static ImageRegistry getImageRegistry() {
-		MainActivator mainActivator = MainActivator.getDefault();
+		AbstractUIPlugin mainActivator = MainActivator.getDefault();
 		if (mainActivator == null) {
 			return null;
 		}

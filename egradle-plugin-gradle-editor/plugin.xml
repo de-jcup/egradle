@@ -221,11 +221,21 @@
                id="egradle.preferences.keyword.codecompletion">
          </keywordReference>
       </page>
+      <page
+         id="egradle.eclipse.gradleeditor.preferences.GradleTaskTagsPreferencePage"
+         class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleTaskTagsPreferencePage"
+         name="TODOs"
+         category="egradle.eclipse.gradleeditor.preferences.EGradleEditorPreferencePage"
+         >
+      </page>
     </extension>
     <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
             class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceInitializer">
+      </initializer>
+       <initializer
+            class="de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorTaskTagsPreferenceInitializer">
       </initializer>
    </extension>
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -236,6 +246,14 @@
     	point="org.eclipse.core.resources.markers"
     	name="EGradle parse error">
         <super type="org.eclipse.core.resources.problemmarker"/>
+        <super type="org.eclipse.core.resources.textmarker"/>
+        <persistent value="true"/>
+    </extension>
+     <extension 
+        id="de.jcup.egradle.task"
+        point="org.eclipse.core.resources.markers"
+        name="EGradle todo tasks">
+        <super type="org.eclipse.core.resources.taskmarker"/>
         <super type="org.eclipse.core.resources.textmarker"/>
         <persistent value="true"/>
     </extension>

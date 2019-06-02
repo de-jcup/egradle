@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import de.jcup.egradle.eclipse.MainActivator;
 
@@ -334,7 +335,7 @@ public class SelectConfigurationDialog extends Dialog {
 	}
 
 	private IDialogSettings getDialogSettings() {
-		MainActivator mainActivator = MainActivator.getDefault();
+		AbstractUIPlugin mainActivator = MainActivator.getDefault();
 		if (mainActivator == null) {
 			return null;
 		}

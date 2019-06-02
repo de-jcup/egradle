@@ -23,6 +23,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.jcup.eclipse.commons.PluginContextProvider;
+import de.jcup.eclipse.commons.tasktags.AbstractConfigurableTaskTagsSupportProvider;
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
 import de.jcup.egradle.codeassist.dsl.ApiMappingImporter;
 import de.jcup.egradle.codeassist.dsl.FilesystemFileLoader;
@@ -31,6 +33,7 @@ import de.jcup.egradle.codeassist.dsl.XMLTypeImporter;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLPluginLoader;
 import de.jcup.egradle.codeassist.dsl.gradle.GradleDSLTypeProvider;
 import de.jcup.egradle.core.util.ErrorHandler;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleTaskTagsSupportProvider;
 import de.jcup.egradle.eclipse.util.ColorManager;
 import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.sdk.SDK;
@@ -39,7 +42,7 @@ import de.jcup.egradle.sdk.SDKManager;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class EditorActivator extends AbstractUIPlugin {
+public class EditorActivator extends AbstractUIPlugin implements PluginContextProvider {
 
 	// The plug-in COMMAND_ID
 	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.editor.gradle"; //$NON-NLS-1$
@@ -49,14 +52,20 @@ public class EditorActivator extends AbstractUIPlugin {
 	private ColorManager colorManager;
 
 	private CodeCompletionRegistry codeCompletionRegistry;
-
+	private AbstractConfigurableTaskTagsSupportProvider taskSupportProvider;
 	/**
 	 * The constructor
 	 */
 	public EditorActivator() {
 		colorManager = new ColorManager();
 		codeCompletionRegistry = new CodeCompletionRegistry();
+		taskSupportProvider = new GradleTaskTagsSupportProvider(this) ; 
 	}
+	
+	public AbstractConfigurableTaskTagsSupportProvider getTaskSupportProvider() {
+        return taskSupportProvider;
+    }
+
 
 	public ColorManager getColorManager() {
 		return colorManager;
@@ -77,6 +86,7 @@ public class EditorActivator extends AbstractUIPlugin {
 				EditorUtil.INSTANCE.logError("Was not able install SDK:" + sdk.getVersion(), e);
 			}
 		}
+		taskSupportProvider.getTodoTaskSupport().install();
 
 		GradleDSLTypeProvider gradleDslProvider = initTypeProvider(sdk);
 
@@ -94,6 +104,7 @@ public class EditorActivator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		colorManager.dispose();
+		taskSupportProvider.getTodoTaskSupport().uninstall();
 		super.stop(context);
 	}
 
@@ -135,5 +146,15 @@ public class EditorActivator extends AbstractUIPlugin {
 
 		return gradleDslProvider;
 	}
+
+    @Override
+    public AbstractUIPlugin getActivator() {
+        return this;
+    }
+
+    @Override
+    public String getPluginID() {
+        return PLUGIN_ID;
+    }
 
 }

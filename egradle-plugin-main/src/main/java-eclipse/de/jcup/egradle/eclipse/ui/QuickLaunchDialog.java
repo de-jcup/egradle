@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import de.jcup.egradle.core.util.History;
 import de.jcup.egradle.eclipse.MainActivator;
@@ -98,7 +99,7 @@ public class QuickLaunchDialog extends AbstractQuickDialog {
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		MainActivator mainActivator = MainActivator.getDefault();
+		AbstractUIPlugin mainActivator = MainActivator.getDefault();
 		if (mainActivator == null) {
 			return null;
 		}

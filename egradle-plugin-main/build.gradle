@@ -7,4 +7,10 @@ dependencies {
 	compile library.commons_lang
 	//compile library.groovy
 	compile library.antlr
+	
+	// https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
+//    compile group: 'org.eclipse.persistence.moxy', name: 'jaxb-api', version: '2.7.3'
+    compile group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.1'
+	
 }

@@ -321,7 +321,7 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
 				if (event.location == null) {
 					event.doit = false;
 				} else if (event.location == "about:blank") {
-					event.doit = false;
+					event.doit = true;
 				} else if (event.location.startsWith(HYPERLINK_TYPE_PREFIX)) {
 					event.doit = false;
 				}

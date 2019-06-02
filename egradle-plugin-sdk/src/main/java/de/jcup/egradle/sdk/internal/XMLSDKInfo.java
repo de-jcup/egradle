@@ -81,7 +81,7 @@ public class XMLSDKInfo implements SDKInfo {
 		try {
 			return DATE_FORMAT.parse(dateAsString);
 		} catch (ParseException e) {
-			return null;
+			return new Date(0);
 		}
 	}
 

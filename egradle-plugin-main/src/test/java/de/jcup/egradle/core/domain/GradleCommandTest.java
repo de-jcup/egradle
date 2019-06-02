@@ -34,6 +34,20 @@ public class GradleCommandTest {
 	}
 
 	@Test
+    public void empty_string_results_in_empty_array() {
+        GradleCommand[] commands = GradleCommand.build("");
+        assertNotNull(commands);
+        assertEquals(0, commands.length);
+    }
+	
+	@Test
+    public void just_four_spaces_string_results_in_empty_array() {
+        GradleCommand[] commands = GradleCommand.build("   ");
+        assertNotNull(commands);
+        assertEquals(0, commands.length);
+    }
+	
+	@Test
 	public void clean_test_results_in_two_different_commands() {
 		GradleCommand[] commands = GradleCommand.build("clean test");
 		assertNotNull(commands);

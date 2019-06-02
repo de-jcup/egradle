@@ -31,6 +31,9 @@ public class GradleCommand {
 
 	public static GradleCommand[] build(GradleSubproject gradleSubproject, String commandString) {
 		notNull(commandString);
+		if (commandString.isEmpty()) {
+		    return new GradleCommand[] {}; 
+		}
 		String[] commands = commandString.split(" ");
 		if (ArrayUtils.isEmpty(commands)) {
 			return new GradleCommand[] {};

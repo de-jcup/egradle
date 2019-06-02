@@ -174,7 +174,9 @@ public class GradleExecutionDelegate {
 			}
 			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
 			context.register(cancelStateProvider);
-
+			context.getEnvironment().put("GRADLE_USER_HOME", System.getProperty("user.home"));
+			
+			
 			processExecutionResult = executor.execute(context);
 			if (processExecutionResult.isOkay()) {
 				outputHandler.output("[OK]");
