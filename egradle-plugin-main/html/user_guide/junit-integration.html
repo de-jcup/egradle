@@ -12,13 +12,17 @@
 	<h1>JUnit-Integration</h1>
 	<ul>
 		<li><a href="#import_all">Import all existing test results</a></li>
-		<li><a href="#launch">Launch as EGradle Junit Test</a></li>
-		<li><a href="#runas">Run as ...EGradle Junit Test</a>
-			<ul>
-				<li><a href="#runOnProject">On a project</a></li>
-				<li><a href="#runOnTestFile">On a Junit Test File</a></li>
-				<li><a href="#runOnTestMethod">On a Junit Test Method</a></li>
-			</ul></li>
+		<li><a href="#launch">Launch EGradle Junit Tests</a></li>
+        <ul>
+    		<li><a href="#launch-by-toolbar">Launch all tests by toolbar action</a></li>
+    		<li><a href="#launch-with-config">Launch as EGradle Junit Test</a></li>
+    		<li><a href="#runas">Run as ...EGradle Junit Test</a>
+    			<ul>
+    				<li><a href="#runOnProject">On a project</a></li>
+    				<li><a href="#runOnTestFile">On a Junit Test File</a></li>
+    				<li><a href="#runOnTestMethod">On a Junit Test Method</a></li>
+    			</ul>
+         </ul>
 		<li><a href="#configuration">Configure gradle test execution</a></li>
 	</ul>
 
@@ -46,6 +50,18 @@
 	<img src="images/egradle-junit-import-all-results-output.png" />
 
 	<h2 id="launch">Launch EGradle Junit Tests</h2>
+    You have multiple possiblities
+    
+    <h3 id="launch-by-toolbar">1. Launch all tests by toolbar</h3>
+	<img src="images/eclipse-launch-all-junit-tests.png" /><br>
+    <p>
+    The marked toolbar action will start all tests in your current root project
+    </p>
+    <p>
+    Results are shown inside junit view. Execution output is seen in EGradle System Console
+    </p>
+    
+    <h3 id="launch-with-config">2. Launch with launch configuration</h3>
 	It's the same doing as in when you do a normal
 	<a href="launch_gradle.html"">Gradle call</a>, but with a predefined
 	command setup (clean test) + automatic loading of the junit test
@@ -60,14 +76,14 @@
 		<a href="#top">Top</a>
 	</p>
 
-	<h2 id="runas">"Run as ... EGradle Junit Test"</h2>
+	<h3 id="runas">3. ""Run as ... EGradle Junit Test"</h3>
 	<img src="images/egradle-junit-runas.png" />
 	<br> The junit results are shown after build.
 
-	<h3 id="runOnProject">On a project</h3>
+	<h4 id="runOnProject">On a project</h4>
 	When no launch configuration is already created for the project, a new
 	one will be created All tests inside the project are executed.
-	<h3 id="runOnTestFile">On a Junit Test File</h3>
+	<h4 id="runOnTestFile">On a Junit Test File</h4>
 	When a single Junit Test is selected in Navigator, Package Explorer or
 	inside a Java-Editor, only this testcase will be executed. If no
 	configuration exists, it will be created. This is done via the
