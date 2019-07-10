@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.main;singleton:=true
-Bundle-Version: 2.6.0
+Bundle-Version: 2.6.1
 Bundle-Activator: de.jcup.egradle.eclipse.MainActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,

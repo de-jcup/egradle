@@ -24,51 +24,42 @@ import org.eclipse.ui.part.IPageBookViewPage;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public class EGradleConsolePageParticipant implements IConsolePageParticipant {
-	@Override
-	public <T> T getAdapter(Class<T> adapter) {
-		return null;
-	}
+    @Override
+    public <T> T getAdapter(Class<T> adapter) {
+        return null;
+    }
 
-	@Override
-	public void activated() {
-	}
+    @Override
+    public void activated() {
+    }
 
-	@Override
-	public void deactivated() {
-	}
+    @Override
+    public void deactivated() {
+    }
 
-	@Override
-	public void dispose() {
-		IDEActivator.getDefault().removeViewerWithPageParticipant(this);
-	}
+    @Override
+    public void dispose() {
+        IDEActivator.getDefault().removeViewerWithPageParticipant(this);
+    }
 
-	@Override
-	public void init(IPageBookViewPage page, IConsole console) {
-		Control control = page.getControl();
-		if (control instanceof StyledText) {
-			/* connect only to EGRADLE consoles */
+    @Override
+    public void init(IPageBookViewPage page, IConsole console) {
+        /* connect only to EGRADLE consoles */
+        String name = console.getName();
 
-			/*
-			 * only process consoles with EGradle in name are handled or the
-			 * dedicated EGradle console
-			 */
-			String type = console.getType();
-			String name = console.getName();
+        boolean needsEGradleStyling = name.indexOf("EGradle") != -1;
 
-			boolean needsEGradleStyling = false;
-			needsEGradleStyling = needsEGradleStyling || console instanceof EGradleSystemConsole;
-			needsEGradleStyling = needsEGradleStyling
-					|| ("org.eclipse.debug.ui.ProcessConsoleType".equals(type) && name.indexOf("EGradle") != -1);
+        if (!needsEGradleStyling) {
+            return;
+        }
+        Control control = page.getControl();
+        if (control instanceof StyledText) {
+            /* Add EGradle process style listener to viewer */
+            StyledText viewer = (StyledText) control;
+            EGradleConsoleStyleListener myListener = new EGradleConsoleStyleListener();
+            viewer.addLineStyleListener(myListener);
 
-			if (!needsEGradleStyling) {
-				return;
-			}
-			/* Add EGradle process style listener to viewer */
-			StyledText viewer = (StyledText) control;
-			EGradleConsoleStyleListener myListener = new EGradleConsoleStyleListener();
-			viewer.addLineStyleListener(myListener);
-
-			IDEActivator.getDefault().addViewer(viewer, this);
-		}
-	}
+            IDEActivator.getDefault().addViewer(viewer, this);
+        }
+    }
 }
