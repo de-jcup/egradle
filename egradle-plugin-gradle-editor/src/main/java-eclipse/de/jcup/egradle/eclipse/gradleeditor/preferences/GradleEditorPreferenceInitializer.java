@@ -53,6 +53,7 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 		store.setDefault(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(), true);
 		store.setDefault(P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), true);
 		store.setDefault(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(), true);
+		store.setDefault(P_EDITOR_TITLE_CONTAINS_PROJECTNAME.getId(), true);
 
 		store.setDefault(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(), true);
 		store.setDefault(P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), true);

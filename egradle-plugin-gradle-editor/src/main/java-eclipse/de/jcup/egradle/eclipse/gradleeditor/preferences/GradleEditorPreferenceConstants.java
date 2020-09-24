@@ -23,30 +23,38 @@ import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
  */
 public enum GradleEditorPreferenceConstants implements PreferenceIdentifiable {
 
-	/**
-	 * Tasks which are executed on test
-	 */
-	P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor"),
+    /**
+     * Tasks which are executed on test
+     */
+    P_LINK_OUTLINE_WITH_EDITOR("linkOutlineWithEditor"),
 
-	P_EDITOR_MATCHING_BRACKETS_ENABLED("matchingBrackets"), P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION(
-			"highlightBracketAtCaretLocation"), P_EDITOR_ENCLOSING_BRACKETS(
-					"enclosingBrackets"), P_EDITOR_MATCHING_BRACKETS_COLOR(
-							"matchingBracketsColor"), P_EDITOR_AUTO_CREATE_END_BRACKETSY("autoCreateEndBrackets"),
+    P_EDITOR_MATCHING_BRACKETS_ENABLED("matchingBrackets"),
 
-	P_EDITOR_CODEASSIST_PROPOSALS_ENABLED(
-			"codeAssistProposalsEnabled"), P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS(
-					"codeAssistNoProposalsForGetterOrSetter"), P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED(
-							"codeAssistTooltipsEnabled"),
+    P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION("highlightBracketAtCaretLocation"),
 
-	;
+    P_EDITOR_ENCLOSING_BRACKETS("enclosingBrackets"),
 
-	private String id;
+    P_EDITOR_MATCHING_BRACKETS_COLOR("matchingBracketsColor"),
 
-	private GradleEditorPreferenceConstants(String id) {
-		this.id = id;
-	}
+    P_EDITOR_AUTO_CREATE_END_BRACKETSY("autoCreateEndBrackets"),
 
-	public String getId() {
-		return id;
-	}
+    P_EDITOR_CODEASSIST_PROPOSALS_ENABLED("codeAssistProposalsEnabled"),
+
+    P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS("codeAssistNoProposalsForGetterOrSetter"),
+
+    P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED("codeAssistTooltipsEnabled"),
+
+    P_EDITOR_TITLE_CONTAINS_PROJECTNAME("titleContainsProjectName"),
+
+    ;
+
+    private String id;
+
+    private GradleEditorPreferenceConstants(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

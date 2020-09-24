@@ -68,6 +68,7 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 	private boolean highlightBracketAtCaretLocation;
 	private boolean matchingBrackets;
 	private BooleanFieldEditor autoCreateEndBrackets;
+    private BooleanFieldEditor showProjectNameInEditorTitleEnabled;
 
 	public GradleEditorPreferencePage() {
 		super(GRID);
@@ -124,6 +125,11 @@ public class GradleEditorPreferencePage extends FieldEditorPreferencePage implem
 		linkEditorWithOutline.getDescriptionControl(otherComposite)
 				.setToolTipText("Via this setting the default behaviour for new opened outlines is set");
 		addField(linkEditorWithOutline);
+		
+		showProjectNameInEditorTitleEnabled = new BooleanFieldEditor(P_EDITOR_TITLE_CONTAINS_PROJECTNAME.getId(),
+	                "Editor title contains project name", otherComposite);
+	    addField(showProjectNameInEditorTitleEnabled);
+	    
 
 		/* BRACKETS */
 		/*

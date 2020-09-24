@@ -19,8 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 
 import de.jcup.egradle.codeassist.dsl.gradle.GradleFileType;
 import de.jcup.egradle.core.util.GradleStringTransformer;
@@ -33,6 +40,7 @@ import de.jcup.egradle.eclipse.gradleeditor.document.GradleTextFileDocumentProvi
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorContentOutlinePage;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleEditorOutlineContentProvider;
 import de.jcup.egradle.eclipse.gradleeditor.outline.GradleQuickOutlineDialog;
+import de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferences;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedContentOutlinePage;
 import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditor;
@@ -43,151 +51,176 @@ import de.jcup.egradle.eclipse.util.VariablesProviderRegistry;
 
 public class GradleEditor extends AbstractGroovyBasedEditor {
 
-	/** The COMMAND_ID of this editor as defined in plugin.xml */
-	public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
-	/** The COMMAND_ID of the editor context menu */
-	public static final String EDITOR_CONTEXT_ID = EDITOR_ID + ".context";
-	/** The COMMAND_ID of the editor ruler context menu */
-	public static final String EDITOR_CONTEXT_RULER_ID = EDITOR_CONTEXT_ID + ".ruler";
+    /** The COMMAND_ID of this editor as defined in plugin.xml */
+    public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
+    /** The COMMAND_ID of the editor context menu */
+    public static final String EDITOR_CONTEXT_ID = EDITOR_ID + ".context";
+    /** The COMMAND_ID of the editor ruler context menu */
+    public static final String EDITOR_CONTEXT_RULER_ID = EDITOR_CONTEXT_ID + ".ruler";
 
-	private GradleFileType cachedGradleFileType;
+    private GradleFileType cachedGradleFileType;
 
-	public GradleEditor() {
+    public GradleEditor() {
 
-	}
+    }
 
-	@Override
-	protected String getPluginId() {
-		return EditorActivator.PLUGIN_ID;
-	}
+    @Override
+    protected void doSetInput(IEditorInput input) throws CoreException {
+        super.doSetInput(input);
+        if (!GradleEditorPreferences.getInstance().isCodeAssistTooltipsEnabled()) {
+            return;
+        }
+        if (input instanceof IStorageEditorInput) {
+            IStorageEditorInput storageEditorInput = (IStorageEditorInput) input;
+            IStorage storage = storageEditorInput.getStorage();
+            if (storage==null) {
+                return;
+            }
+            IPath path = storage.getFullPath();
+            if (path==null) {
+                return;
+            }
+            IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
+            if (resource==null) {
+                return;
+            }
+            IProject project = resource.getProject();
+            setPartName(resource.getName()+" ("+project.getName()+")");
+        }
+    }
 
-	@Override
-	protected void handleEditorInputChanged() {
-		cachedGradleFileType = null;
-		super.handleEditorInputChanged();
-	}
+    @Override
+    protected String getPluginId() {
+        return EditorActivator.PLUGIN_ID;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getAdapter(Class<T> adapter) {
-		if (GradleFileType.class.equals(adapter)) {
-			return (T) getGradleFileType();
-		}
-		if (GradleStringTransformer.class.equals(adapter)) {
-			return (T) createGradleStringTransformer();
-		}
-		if (GradleEditor.class.equals(adapter)) {
-			return (T) this;
-		}
-		return super.getAdapter(adapter);
-	}
+    @Override
+    protected void handleEditorInputChanged() {
+        cachedGradleFileType = null;
+        super.handleEditorInputChanged();
+    }
 
-	@Override
-	public ILogSupport getLogSupport() {
-		return EditorUtil.INSTANCE;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getAdapter(Class<T> adapter) {
+        if (GradleFileType.class.equals(adapter)) {
+            return (T) getGradleFileType();
+        }
+        if (GradleStringTransformer.class.equals(adapter)) {
+            return (T) createGradleStringTransformer();
+        }
+        if (GradleEditor.class.equals(adapter)) {
+            return (T) this;
+        }
+        return super.getAdapter(adapter);
+    }
 
-	@Override
-	public IEditorPreferences getPreferences() {
-		return EditorUtil.getPreferences();
-	}
+    @Override
+    public ILogSupport getLogSupport() {
+        return EditorUtil.INSTANCE;
+    }
 
-	protected AbstractGroovySourceViewerConfiguration createSourceViewerConfiguration() {
-		return new GradleSourceViewerConfiguration(this);
-	}
+    @Override
+    public IEditorPreferences getPreferences() {
+        return EditorUtil.getPreferences();
+    }
 
-	protected String getEditorInstanceRulerContextId() {
-		return EDITOR_CONTEXT_RULER_ID;
-	}
+    protected AbstractGroovySourceViewerConfiguration createSourceViewerConfiguration() {
+        return new GradleSourceViewerConfiguration(this);
+    }
 
-	protected String getEditorInstanceContextId() {
-		return EDITOR_CONTEXT_ID;
-	}
+    protected String getEditorInstanceRulerContextId() {
+        return EDITOR_CONTEXT_RULER_ID;
+    }
 
-	GradleStringTransformer createGradleStringTransformer() {
+    protected String getEditorInstanceContextId() {
+        return EDITOR_CONTEXT_ID;
+    }
 
-		List<Map<String, String>> maps = new ArrayList<>();
+    GradleStringTransformer createGradleStringTransformer() {
 
-		List<VariableProvider> providers = VariablesProviderRegistry.INSTANCE.getProviders();
+        List<Map<String, String>> maps = new ArrayList<>();
 
-		for (VariableProvider provider : providers) {
+        List<VariableProvider> providers = VariablesProviderRegistry.INSTANCE.getProviders();
 
-			Map<String, String> map = null;
-			if (provider != null) {
-				map = provider.getVariables(getEditorInput());
-			}
-			if (map != null) {
-				maps.add(map);
-			}
-		}
-		return new MultiMapStringTransformer(maps);
-	}
+        for (VariableProvider provider : providers) {
 
-	protected GradleFileDocumentProvider createStandardEditorInputProvider() {
-		return new GradleFileDocumentProvider();
-	}
+            Map<String, String> map = null;
+            if (provider != null) {
+                map = provider.getVariables(getEditorInput());
+            }
+            if (map != null) {
+                maps.add(map);
+            }
+        }
+        return new MultiMapStringTransformer(maps);
+    }
 
-	protected GradleTextFileDocumentProvider createFileStoreEditorInputProvider() {
-		return new GradleTextFileDocumentProvider();
-	}
+    protected GradleFileDocumentProvider createStandardEditorInputProvider() {
+        return new GradleFileDocumentProvider();
+    }
 
-	private GradleFileType getGradleFileType() {
-		if (cachedGradleFileType != null) {
-			return cachedGradleFileType;
-		}
-		IEditorInput editorInput = getEditorInput();
-		if (editorInput == null) {
-			return null;
-		}
-		String name = editorInput.getName();
-		if (name == null) {
-			return null;
-		}
-		if (!name.endsWith(".gradle")) {
-			cachedGradleFileType = GradleFileType.UNKNOWN;
-			return cachedGradleFileType;
-		}
-		/* It is a gradle file... */
-		if (name.equals("settings.gradle")) {
-			cachedGradleFileType = GradleFileType.GRADLE_SETTINGS_SCRIPT;
-		} else if (name.equals("init.gradle")) {
-			/*
-			 * We do not check if USER_HOME/.gradle/init.d/ or for
-			 * GRADLE_HOME/init.d/... The files are inside workspace and so we
-			 * only support init.gradle - for 100% correct variant description
-			 * see https://docs.gradle.org/current/userguide/init_scripts.html
-			 */
-			cachedGradleFileType = GradleFileType.GRADLE_INIT_SCRIPT;
-		} else {
-			/* nothing special - must be init script */
-			cachedGradleFileType = GradleFileType.GRADLE_BUILD_SCRIPT;
-		}
-		return cachedGradleFileType;
-	}
+    protected GradleTextFileDocumentProvider createFileStoreEditorInputProvider() {
+        return new GradleTextFileDocumentProvider();
+    }
 
-	protected AbstractGroovyBasedEditorOutlineContentProvider createOutlineContentProvider() {
-		return new GradleEditorOutlineContentProvider(this);
-	}
+    private GradleFileType getGradleFileType() {
+        if (cachedGradleFileType != null) {
+            return cachedGradleFileType;
+        }
+        IEditorInput editorInput = getEditorInput();
+        if (editorInput == null) {
+            return null;
+        }
+        String name = editorInput.getName();
+        if (name == null) {
+            return null;
+        }
+        if (!name.endsWith(".gradle")) {
+            cachedGradleFileType = GradleFileType.UNKNOWN;
+            return cachedGradleFileType;
+        }
+        /* It is a gradle file... */
+        if (name.equals("settings.gradle")) {
+            cachedGradleFileType = GradleFileType.GRADLE_SETTINGS_SCRIPT;
+        } else if (name.equals("init.gradle")) {
+            /*
+             * We do not check if USER_HOME/.gradle/init.d/ or for GRADLE_HOME/init.d/...
+             * The files are inside workspace and so we only support init.gradle - for 100%
+             * correct variant description see
+             * https://docs.gradle.org/current/userguide/init_scripts.html
+             */
+            cachedGradleFileType = GradleFileType.GRADLE_INIT_SCRIPT;
+        } else {
+            /* nothing special - must be init script */
+            cachedGradleFileType = GradleFileType.GRADLE_BUILD_SCRIPT;
+        }
+        return cachedGradleFileType;
+    }
 
-	protected AbstractGroovyBasedContentOutlinePage createContentOutlinePage() {
-		return new GradleEditorContentOutlinePage(this);
-	}
+    protected AbstractGroovyBasedEditorOutlineContentProvider createOutlineContentProvider() {
+        return new GradleEditorOutlineContentProvider(this);
+    }
 
-	@Override
-	protected AbstractGroovyBasedQuickOutline createQuickOutlineDialog(Shell shell) {
-		return new GradleQuickOutlineDialog(this, shell, "Quick outline");
-	}
+    protected AbstractGroovyBasedContentOutlinePage createContentOutlinePage() {
+        return new GradleEditorContentOutlinePage(this);
+    }
 
-	@Override
-	protected ColorManager getColorManager() {
-		return EditorActivator.getDefault().getColorManager();
-	}
+    @Override
+    protected AbstractGroovyBasedQuickOutline createQuickOutlineDialog(Shell shell) {
+        return new GradleQuickOutlineDialog(this, shell, "Quick outline");
+    }
 
-	protected String getEditorIconPath() {
-		return "icons/gradle-editor.png";
-	}
+    @Override
+    protected ColorManager getColorManager() {
+        return EditorActivator.getDefault().getColorManager();
+    }
 
-	protected String getEditorIconPathOnError() {
-		return "icons/gradle-editor-with-error.png";
-	}
+    protected String getEditorIconPath() {
+        return "icons/gradle-editor.png";
+    }
+
+    protected String getEditorIconPathOnError() {
+        return "icons/gradle-editor-with-error.png";
+    }
 }

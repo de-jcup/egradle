@@ -71,9 +71,14 @@ public class GradleEditorPreferences extends AbstractEditorPreferences implement
 				GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
 	}
 
-	public boolean isCodeAssistTooltipsEnabled() {
+	public boolean isEditorTitleShowingProjectName() {
 		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
 	}
+	
+
+    public boolean isCodeAssistTooltipsEnabled() {
+        return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_TITLE_CONTAINS_PROJECTNAME);
+    }
 
 	@Override
 	public boolean isEditorAutoCreateEndBracketsEnabled() {
