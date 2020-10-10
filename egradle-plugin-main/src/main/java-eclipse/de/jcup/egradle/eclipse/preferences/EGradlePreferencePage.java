@@ -19,6 +19,7 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -34,57 +35,47 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class EGradlePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	public EGradlePreferencePage() {
-		super(GRID);
-		setDescription(createDescription());
-		setImageDescriptor(EclipseUtil.createImageDescriptor("icons/gradle-og.png", MainActivator.PLUGIN_ID));
-	}
+    public EGradlePreferencePage() {
+        super(GRID);
+//        setDescription(createDescription());
+        setImageDescriptor(EclipseUtil.createImageDescriptor("icons/gradle-og.png", MainActivator.PLUGIN_ID));
+    }
 
-	private String createDescription() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Main page of EGradle preferences.\n");
-		sb.append("\n");
-		sb.append("Setup is done in sub pages. If you have only installed\n");
-		sb.append("EGradle Editor but not IDE parts you will have only editor\n");
-		sb.append("preference pages.");
-		return sb.toString();
-	}
+    /**
+     * Creates the field editors. Field editors are abstractions of the common GUI
+     * blocks needed to manipulate various types of preferences. Each field editor
+     * knows how to save and restore itself.
+     */
+    public void createFieldEditors() {
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
-	public void createFieldEditors() {
+        Composite composite = getFieldEditorParent();
 
-		Composite composite = getFieldEditorParent();
+        String message = "Configure EGradle IDE at sub pages - if you installed only editor, there is only one page\n\nYou can visit the project site at <a href=\"https://github.com/de-jcup/egradle/wiki\">GitHub</a>.";
 
-		String message = "You can visit the project site at <a href=\"https://github.com/de-jcup/egradle/wiki\">GitHub</a>.";
+        Link link = new Link(composite, SWT.NONE);
+        link.setText(message);
+        link.setSize(400, 100);
+        link.setLayoutData(GridDataFactory.fillDefaults());
+        link.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                try {
+                    // Open default external browser
+                    PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
+                } catch (Exception ex) {
+                    MainActivator.getDefault().getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID, "Was not able to open url in external browser", ex));
+                }
+            }
+        });
 
-		Link link = new Link(composite, SWT.NONE);
-		link.setText(message);
-		link.setSize(400, 100);
-		link.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				try {
-					// Open default external browser
-					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(e.text));
-				} catch (Exception ex) {
-					MainActivator.getDefault().getLog().log(new Status(IStatus.ERROR, MainActivator.PLUGIN_ID,
-							"Was not able to open url in external browser", ex));
-				}
-			}
-		});
+    }
 
-	}
+    public void init(IWorkbench workbench) {
+    }
 
-	public void init(IWorkbench workbench) {
-	}
-
-	@Override
-	public void setValid(boolean valid) {
-		super.setValid(valid);
-	}
+    @Override
+    public void setValid(boolean valid) {
+        super.setValid(valid);
+    }
 
 }
