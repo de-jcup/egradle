@@ -48,4 +48,6 @@ public interface GradleConfiguration extends ProcessConfiguration {
 	 */
 	public String getGradleCommandFullPath();
 
+    public String getGradleUserHome();
+
 }

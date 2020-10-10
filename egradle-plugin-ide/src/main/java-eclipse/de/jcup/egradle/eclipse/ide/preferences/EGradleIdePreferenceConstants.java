@@ -21,6 +21,8 @@ public enum EGradleIdePreferenceConstants {
 	P_ROOTPROJECT_PATH("pathGradleRootProject"),
 
 	P_JAVA_HOME_PATH("pathJavaHome"),
+	
+	P_GRADLE_USER_HOME("gradleUserHome"),
 
 	P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER(
 			"pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"), P_OUTPUT_VALIDATION_ENABLED(

@@ -98,6 +98,10 @@ public class EGradleIdePreferences {
 	public String getGradleShellId() {
 		return getStringPreference(P_GRADLE_SHELL);
 	}
+	
+	public String getGradleUserHome() {
+	    return getStringPreference(P_GRADLE_USER_HOME);
+	}
 
 	public MigrationState getMigrationState() {
 		String migrationStateAsString = getStringPreference(P_MIGRATE_IDE_STATE);

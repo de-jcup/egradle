@@ -90,6 +90,10 @@ public class GradleConfigurationValidator implements Validator<GradleConfigurati
 				if (StringUtils.isNotBlank(javaHome)) {
 					map.put("JAVA_HOME", javaHome);
 				}
+				String gradleUserHOme = configuration.getGradleUserHome();
+				if (StringUtils.isNotBlank(gradleUserHOme)) {
+                    map.put("GRADLE_USER_HOME", gradleUserHOme);
+                }
 				return map;
 			}
 

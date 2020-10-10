@@ -62,6 +62,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 	private Text validationOutputField;
 	private DirectoryFieldEditor rootPathDirectoryEditor;
 	private DirectoryFieldEditor defaultJavaHomeDirectoryEditor;
+	private DirectoryFieldEditor gradleUserHOmeDirectoryEditor;
 	private Button validationButton;
 
 	private RootProjectValidationHandler validation;
@@ -169,6 +170,7 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 				configuration.setShellCommand(getShellCommand());
 				configuration.setWorkingDirectory(getWorkingDirectory());
 				configuration.setJavaHome(getGlobalJavaHomePath());
+				configuration.setGradleUserHome(getGradleUserHome());
 
 				startValidation(validationOutputHandler, configuration);
 			}
@@ -319,6 +321,13 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 		if (!mode.isRootPathDirectoryEditable()) {
 			rootPathDirectoryEditor.setEnabled(false, defaultGroup);
 		}
+		
+		/* gradle user home directory */
+		gradleUserHOmeDirectoryEditor = new DirectoryFieldEditor(P_GRADLE_USER_HOME.getId(), "GRADLE_USER_HOME (optional)", defaultGroup);
+		gradleUserHOmeDirectoryEditor.setEmptyStringAllowed(true);
+		gradleUserHOmeDirectoryEditor.getTextControl(defaultGroup).setMessage("per default: '{user.home}/.gradle'");
+		addField(gradleUserHOmeDirectoryEditor);
+		
 		/* java home default */
 		defaultJavaHomeDirectoryEditor = new DirectoryFieldEditor(P_JAVA_HOME_PATH.getId(), "&JAVA HOME (optional)",
 				defaultGroup);
@@ -485,6 +494,10 @@ public class RootProjectConfigUIDelegate implements RootProjectValidationObserve
 
 	public String getWorkingDirectory() {
 		return rootPathDirectoryEditor.getStringValue();
+	}
+	
+	public String getGradleUserHome() {
+	    return gradleUserHOmeDirectoryEditor.getStringValue();
 	}
 
 	public String getGradleBinDirectory() {

@@ -22,6 +22,16 @@ public class MutableGradleConfiguration implements GradleConfiguration {
 
 	private FileSupport fileSupport = FileSupport.DEFAULT;
 
+	private String gradleUserHome;
+	
+	public void setGradleUserHome(String gradleUserHome) {
+        this.gradleUserHome = gradleUserHome;
+    }
+
+	public String getGradleUserHome() {
+        return gradleUserHome;
+    }
+	
 	@Override
 	public String getGradleCommandFullPath() {
 		return fileSupport.createCorrectFilePath(gradleBinDirectory, gradleCommand);

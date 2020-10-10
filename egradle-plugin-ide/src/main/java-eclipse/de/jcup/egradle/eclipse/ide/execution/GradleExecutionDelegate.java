@@ -49,7 +49,7 @@ import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
  */
 public class GradleExecutionDelegate {
 
-	private GradleContext context;
+    private GradleContext context;
 	private OutputHandler outputHandler;
 	private ProcessExecutionResult processExecutionResult;
 	protected GradleExecutor executor;
@@ -132,6 +132,7 @@ public class GradleExecutionDelegate {
 		config.setShellCommand(EGradleShellType.findById(shellId));
 		config.setGradleBinDirectory(gradleInstallPath);
 		config.setGradleCommand(gradleCommand);
+		config.setGradleUserHome(EGradleIdePreferences.getInstance().getGradleUserHome());
 		config.setWorkingDirectory(rootProject.getFolder().getAbsolutePath());
 		return context;
 	}
@@ -174,9 +175,10 @@ public class GradleExecutionDelegate {
 			}
 			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
 			context.register(cancelStateProvider);
-			context.getEnvironment().put("GRADLE_USER_HOME", System.getProperty("user.home"));
-			
-			
+			String gradleUserHOme = EGradleIdePreferences.getInstance().getGradleUserHome();
+			if (StringUtils.isNotBlank(gradleUserHOme)) {
+                context.getEnvironment().put("GRADLE_USER_HOME", gradleUserHOme);
+            }
 			processExecutionResult = executor.execute(context);
 			if (processExecutionResult.isOkay()) {
 				outputHandler.output("[OK]");
