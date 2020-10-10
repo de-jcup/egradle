@@ -51,6 +51,8 @@ import de.jcup.egradle.eclipse.util.VariablesProviderRegistry;
 
 public class GradleEditor extends AbstractGroovyBasedEditor {
 
+    private static final GradleFileDocumentProvider SHARED_GRADLE_FILE_DOCUMENT_PROVIDER = new GradleFileDocumentProvider();
+    private static final GradleTextFileDocumentProvider SHARED_GRADLE_TEXT_FILE_DOCUMENT_PROVIDER = new GradleTextFileDocumentProvider();
     /** The COMMAND_ID of this editor as defined in plugin.xml */
     public static final String EDITOR_ID = "org.egradle.editors.GradleEditor";
     /** The COMMAND_ID of the editor context menu */
@@ -156,12 +158,12 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
         return new MultiMapStringTransformer(maps);
     }
 
-    protected GradleFileDocumentProvider createStandardEditorInputProvider() {
-        return new GradleFileDocumentProvider();
+    protected GradleFileDocumentProvider resolveStandardEditorInputProvider() {
+        return SHARED_GRADLE_FILE_DOCUMENT_PROVIDER;
     }
 
-    protected GradleTextFileDocumentProvider createFileStoreEditorInputProvider() {
-        return new GradleTextFileDocumentProvider();
+    protected GradleTextFileDocumentProvider resolveFileStoreEditorInputProvider() {
+        return SHARED_GRADLE_TEXT_FILE_DOCUMENT_PROVIDER;
     }
 
     private GradleFileType getGradleFileType() {

@@ -396,7 +396,7 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 
 	protected abstract AbstractGroovyBasedContentOutlinePage createContentOutlinePage();
 
-	protected abstract IDocumentProvider createFileStoreEditorInputProvider();
+	protected abstract IDocumentProvider resolveFileStoreEditorInputProvider();
 
 	protected abstract AbstractGroovyBasedEditorOutlineContentProvider createOutlineContentProvider();
 
@@ -404,11 +404,11 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 
 	protected abstract SourceViewerConfiguration createSourceViewerConfiguration();
 
-	protected abstract IDocumentProvider createStandardEditorInputProvider();
+	protected abstract IDocumentProvider resolveStandardEditorInputProvider();
 
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
-		setDocumentProvider(createDocumentProvider(input));
+		setDocumentProvider(resolveDocumentProvider(input));
 		super.doSetInput(input);
 		IDocument document = getDocument();
 		if (document == null) {
@@ -484,11 +484,11 @@ public abstract class AbstractGroovyBasedEditor extends TextEditor
 		}
 	}
 
-	private IDocumentProvider createDocumentProvider(IEditorInput input) {
+	private IDocumentProvider resolveDocumentProvider(IEditorInput input) {
 		if (input instanceof FileStoreEditorInput) {
-			return createFileStoreEditorInputProvider();
+			return resolveFileStoreEditorInputProvider();
 		} else {
-			return createStandardEditorInputProvider();
+			return resolveStandardEditorInputProvider();
 		}
 	}
 
