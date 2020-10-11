@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EGradle IDE
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.ide;singleton:=true
-Bundle-Version: 2.6.1
+Bundle-Version: 2.7.0
 Bundle-Activator: de.jcup.egradle.eclipse.ide.IDEActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions,
  de.jcup.egradle.eclipse.plugin.branding;bundle-version="1.3.1",
  de.jcup.egradle.eclipse.plugin.editor.gradle;bundle-version="1.3.1",
- de.jcup.egradle.eclipse.plugin.main;bundle-version="2.6.1",
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="2.7.0",
  de.jcup.egradle.eclipse.plugin.sdk;bundle-version="3.0.1",
  org.eclipse.team.core;bundle-version="3.8.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
