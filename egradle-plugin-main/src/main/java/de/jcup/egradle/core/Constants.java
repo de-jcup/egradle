@@ -17,7 +17,7 @@ package de.jcup.egradle.core;
 
 public class Constants {
 
-	public static final String VIRTUAL_ROOTPROJECT_NAME = "- virtual root project";
+	public static final String VIRTUAL_ROOTPROJECT_NAME = "__ Virtual Root __";
 	public static final String VIRTUAL_ROOTPROJECT_FOLDERNAME = ".egradle";
 	public static final String CONSOLE_FAILED = "[FAILED]";
 	public static final String CONSOLE_OK = "[OK]";

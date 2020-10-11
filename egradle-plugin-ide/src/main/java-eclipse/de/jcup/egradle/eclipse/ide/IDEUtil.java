@@ -799,7 +799,8 @@ public class IDEUtil {
 		}
 		try {
 			File projectLocation = getResourceHelper().toFile(project.getLocation());
-			return rootFolder.equals(projectLocation);
+			boolean isRootFolder= rootFolder.equals(projectLocation);
+			return isRootFolder;
 		} catch (CoreException e) {
 			/* ignore ... project not found anymore */
 			return false;
