@@ -64,12 +64,18 @@ public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBa
 		IToken javaKeyWord = createToken(JAVA_KEYWORD);
 		IToken javaLiteral = createToken(JAVA_LITERAL);
 
+		/* Groovy multiline String */
+		rules.add(new MultiLineRule("\"\"\"", "\"\"\"", groovyGString));
+		rules.add(new MultiLineRule("'''", "'''", groovySimpleString));
+		
+		/* Comments */
 		rules.add(new MultiLineRule("/**", "*/", javaDocComment));
 		rules.add(new MultiLineRule("/*", "*/", groovyComment));
 		rules.add(new SingleLineRule("//", "", groovyComment));
 
+		/* Groovy strings*/
 		rules.add(new MultiLineRule("\"", "\"", groovyGString, '\\'));
-		rules.add(new MultiLineRule("\'", "\'", groovySimpleString, '\\'));
+		rules.add(new MultiLineRule("'", "'", groovySimpleString, '\\'));
 
 		buildWordRules(rules, javaKeyWord, JavaKeyWords.values(), javaWordDetector);
 		buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(), javaWordDetector);
