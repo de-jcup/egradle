@@ -26,29 +26,29 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import de.jcup.egradle.core.ProcessExecutionResult;
 
 public class GradleRunnableWithProgress implements IRunnableWithProgress {
-	private GradleExecutionDelegate execution;
+    private GradleExecutionDelegate execution;
 
-	public GradleRunnableWithProgress(GradleExecutionDelegate execution) {
-		notNull(execution, "'execution' may not be null");
-		this.execution = execution;
-	}
+    public GradleRunnableWithProgress(GradleExecutionDelegate execution) {
+        notNull(execution, "'execution' may not be null");
+        this.execution = execution;
+    }
 
-	@Override
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+    @Override
+    public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 
-		try {
-			execution.execute(monitor);
-			ProcessExecutionResult result = execution.getResult();
-			if (result.isCanceledByuser()) {
-				return;
-			}
-			if (!result.isOkay()) {
-				getDialogSupport().showWarning("Result was not okay:" + result.getResultCode());
-			}
-		} catch (Exception e) {
-			throw new InvocationTargetException(e);
-		}
+        try {
+            execution.execute(monitor);
+            ProcessExecutionResult result = execution.getResult();
+            if (result.isCanceledByuser()) {
+                return;
+            }
+            if (!result.isOkay()) {
+                getDialogSupport().showWarning("Result was not okay:" + result.getResultCode());
+            }
+        } catch (Exception e) {
+            throw new InvocationTargetException(e);
+        }
 
-	}
+    }
 
 }

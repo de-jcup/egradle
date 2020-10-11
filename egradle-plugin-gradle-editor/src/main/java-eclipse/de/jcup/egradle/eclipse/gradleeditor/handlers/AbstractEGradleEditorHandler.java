@@ -23,18 +23,17 @@ import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedEditor;
 
 public abstract class AbstractEGradleEditorHandler extends AbstractActiveEditorHandler {
 
-	/**
-	 * Execute something by using gradle editor instance
-	 * 
-	 * @param gradleEditor
-	 *            - never <code>null</code>
-	 */
-	protected abstract void executeOnGradleEditor(GradleEditor gradleEditor);
+    /**
+     * Execute something by using gradle editor instance
+     * 
+     * @param gradleEditor - never <code>null</code>
+     */
+    protected abstract void executeOnGradleEditor(GradleEditor gradleEditor);
 
-	protected void executeOnActiveEditor(IEditorPart editor) {
-		if (editor instanceof AbstractGroovyBasedEditor) {
-			executeOnGradleEditor((GradleEditor) editor);
-		}
-	}
+    protected void executeOnActiveEditor(IEditorPart editor) {
+        if (editor instanceof AbstractGroovyBasedEditor) {
+            executeOnGradleEditor((GradleEditor) editor);
+        }
+    }
 
 }

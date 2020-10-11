@@ -30,23 +30,22 @@ import org.w3c.dom.Document;
 
 public class XMLWriter {
 
-	public void writeDocumentToFile(Document document, File file) throws IOException {
+    public void writeDocumentToFile(Document document, File file) throws IOException {
 
-		try {
-			transform(document, file);
-		} catch (TransformerFactoryConfigurationError | TransformerException e) {
-			throw new IOException("Cannot create file:" + file, e);
-		}
-	}
+        try {
+            transform(document, file);
+        } catch (TransformerFactoryConfigurationError | TransformerException e) {
+            throw new IOException("Cannot create file:" + file, e);
+        }
+    }
 
-	private static void transform(Document document, File file)
-			throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
-		TransformerFactory tFactory = TransformerFactory.newInstance();
-		Transformer transformer = tFactory.newTransformer();
+    private static void transform(Document document, File file) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Transformer transformer = tFactory.newTransformer();
 
-		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(file);
+        DOMSource source = new DOMSource(document);
+        StreamResult result = new StreamResult(file);
 
-		transformer.transform(source, result);
-	}
+        transformer.transform(source, result);
+    }
 }

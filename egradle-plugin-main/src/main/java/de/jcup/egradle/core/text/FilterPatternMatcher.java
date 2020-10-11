@@ -19,8 +19,8 @@ import de.jcup.egradle.core.util.Matcher;
 
 public interface FilterPatternMatcher<T> extends Matcher<T> {
 
-	void setFilterText(String filterText);
+    void setFilterText(String filterText);
 
-	boolean hasFilterPattern();
+    boolean hasFilterPattern();
 
 }

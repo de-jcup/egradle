@@ -30,84 +30,82 @@ import de.jcup.egradle.eclipse.util.PreferenceIdentifiable;
 
 public class GradleEditorPreferences extends AbstractEditorPreferences implements IEditorPreferences {
 
-	private static GradleEditorPreferences INSTANCE = new GradleEditorPreferences();
+    private static GradleEditorPreferences INSTANCE = new GradleEditorPreferences();
 
-	private GradleEditorPreferences() {
-	}
+    private GradleEditorPreferences() {
+    }
 
-	protected void updateEditorColors(IEditorPart editor) {
-		if (!(editor instanceof GradleEditor)) {
-			return;
-		}
-		GradleEditor geditor = (GradleEditor) editor;
-		geditor.handleColorSettingsChanged();
-	}
+    protected void updateEditorColors(IEditorPart editor) {
+        if (!(editor instanceof GradleEditor)) {
+            return;
+        }
+        GradleEditor geditor = (GradleEditor) editor;
+        geditor.handleColorSettingsChanged();
+    }
 
-	protected boolean checkPropertyMeansEditorColorsChanged(String property) {
-		boolean colorChanged = false;
-		for (GradleEditorSyntaxColorPreferenceConstants c : GradleEditorSyntaxColorPreferenceConstants.values()) {
-			if (property.equals(c.getId())) {
-				colorChanged = true;
-				break;
-			}
-		}
-		return colorChanged;
-	}
+    protected boolean checkPropertyMeansEditorColorsChanged(String property) {
+        boolean colorChanged = false;
+        for (GradleEditorSyntaxColorPreferenceConstants c : GradleEditorSyntaxColorPreferenceConstants.values()) {
+            if (property.equals(c.getId())) {
+                colorChanged = true;
+                break;
+            }
+        }
+        return colorChanged;
+    }
 
-	protected IPreferenceStore createStore() {
-		return new ScopedPreferenceStore(InstanceScope.INSTANCE, EditorActivator.PLUGIN_ID);
-	}
+    protected IPreferenceStore createStore() {
+        return new ScopedPreferenceStore(InstanceScope.INSTANCE, EditorActivator.PLUGIN_ID);
+    }
 
-	public static GradleEditorPreferences getInstance() {
-		return INSTANCE;
-	}
+    public static GradleEditorPreferences getInstance() {
+        return INSTANCE;
+    }
 
-	public boolean isCodeAssistProposalsEnabled() {
-		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_PROPOSALS_ENABLED);
-	}
+    public boolean isCodeAssistProposalsEnabled() {
+        return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_PROPOSALS_ENABLED);
+    }
 
-	public boolean isCodeAssistNoProposalsForGetterOrSetter() {
-		return getBooleanPreference(
-				GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
-	}
+    public boolean isCodeAssistNoProposalsForGetterOrSetter() {
+        return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS);
+    }
 
-	public boolean isEditorTitleShowingProjectName() {
-		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
-	}
-	
+    public boolean isEditorTitleShowingProjectName() {
+        return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED);
+    }
 
     public boolean isCodeAssistTooltipsEnabled() {
         return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_TITLE_CONTAINS_PROJECTNAME);
     }
 
-	@Override
-	public boolean isEditorAutoCreateEndBracketsEnabled() {
-		return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_AUTO_CREATE_END_BRACKETSY);
-	}
+    @Override
+    public boolean isEditorAutoCreateEndBracketsEnabled() {
+        return getBooleanPreference(GradleEditorPreferenceConstants.P_EDITOR_AUTO_CREATE_END_BRACKETSY);
+    }
 
-	@Override
-	public boolean isLinkOutlineWithEditorEnabled() {
-		return getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
-	}
+    @Override
+    public boolean isLinkOutlineWithEditorEnabled() {
+        return getBooleanPreference(P_LINK_OUTLINE_WITH_EDITOR);
+    }
 
-	@Override
-	public PreferenceIdentifiable getP_EDITOR_MATCHING_BRACKETS_ENABLED() {
-		return P_EDITOR_MATCHING_BRACKETS_ENABLED;
-	}
+    @Override
+    public PreferenceIdentifiable getP_EDITOR_MATCHING_BRACKETS_ENABLED() {
+        return P_EDITOR_MATCHING_BRACKETS_ENABLED;
+    }
 
-	@Override
-	public PreferenceIdentifiable getP_EDITOR_MATCHING_BRACKETS_COLOR() {
-		return P_EDITOR_MATCHING_BRACKETS_COLOR;
-	}
+    @Override
+    public PreferenceIdentifiable getP_EDITOR_MATCHING_BRACKETS_COLOR() {
+        return P_EDITOR_MATCHING_BRACKETS_COLOR;
+    }
 
-	@Override
-	public PreferenceIdentifiable getP_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION() {
-		return P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION;
-	}
+    @Override
+    public PreferenceIdentifiable getP_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION() {
+        return P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION;
+    }
 
-	@Override
-	public PreferenceIdentifiable getP_EDITOR_ENCLOSING_BRACKETS() {
-		return P_EDITOR_ENCLOSING_BRACKETS;
-	}
+    @Override
+    public PreferenceIdentifiable getP_EDITOR_ENCLOSING_BRACKETS() {
+        return P_EDITOR_ENCLOSING_BRACKETS;
+    }
 
 }

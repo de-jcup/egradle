@@ -28,41 +28,41 @@ import de.jcup.egradle.eclipse.junit.contribution.JunitUtil;
 
 public class JavaHelper {
 
-	public static final JavaHelper SHARED = new JavaHelper();
+    public static final JavaHelper SHARED = new JavaHelper();
 
-	/**
-	 * Returns currently selected method or <code>null</code>
-	 * 
-	 * @param editor
-	 * @return method or <code>null</code>
-	 * 
-	 */
-	public IMethod getCurrentSelectedJavaMethod(ITextEditor editor) {
-		if (editor == null) {
-			return null;
-		}
+    /**
+     * Returns currently selected method or <code>null</code>
+     * 
+     * @param editor
+     * @return method or <code>null</code>
+     * 
+     */
+    public IMethod getCurrentSelectedJavaMethod(ITextEditor editor) {
+        if (editor == null) {
+            return null;
+        }
 
-		IEditorInput editorInput = editor.getEditorInput();
-		if (editorInput == null) {
-			return null;
-		}
-		IJavaElement elem = JavaUI.getEditorInputJavaElement(editorInput);
-		if (elem instanceof ICompilationUnit) {
-			ITextSelection sel = (ITextSelection) editor.getSelectionProvider().getSelection();
-			IJavaElement selected;
-			try {
-				selected = ((ICompilationUnit) elem).getElementAt(sel.getOffset());
-			} catch (JavaModelException e) {
-				JunitUtil.logError("Was not able to get element at selection", e);
-				return null;
-			}
-			if (selected == null) {
-				return null;
-			}
-			if (selected.getElementType() == IJavaElement.METHOD) {
-				return (IMethod) selected;
-			}
-		}
-		return null;
-	}
+        IEditorInput editorInput = editor.getEditorInput();
+        if (editorInput == null) {
+            return null;
+        }
+        IJavaElement elem = JavaUI.getEditorInputJavaElement(editorInput);
+        if (elem instanceof ICompilationUnit) {
+            ITextSelection sel = (ITextSelection) editor.getSelectionProvider().getSelection();
+            IJavaElement selected;
+            try {
+                selected = ((ICompilationUnit) elem).getElementAt(sel.getOffset());
+            } catch (JavaModelException e) {
+                JunitUtil.logError("Was not able to get element at selection", e);
+                return null;
+            }
+            if (selected == null) {
+                return null;
+            }
+            if (selected.getElementType() == IJavaElement.METHOD) {
+                return (IMethod) selected;
+            }
+        }
+        return null;
+    }
 }

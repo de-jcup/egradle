@@ -22,21 +22,21 @@ import org.junit.Test;
 
 public class BuildContextTest {
 
-	private BuildContext contextToTest;
+    private BuildContext contextToTest;
 
-	@Before
-	public void before() {
-		contextToTest = new BuildContext();
-	}
+    @Before
+    public void before() {
+        contextToTest = new BuildContext();
+    }
 
-	@Test
-	public void test_nothing_added__has_errors_returns_false() {
-		assertFalse(contextToTest.hasErrors());
-	}
+    @Test
+    public void test_nothing_added__has_errors_returns_false() {
+        assertFalse(contextToTest.hasErrors());
+    }
 
-	@Test
-	public void test_one_error_added__has_errors_returns_true() {
-		contextToTest.add(new Error());
-		assertTrue(contextToTest.hasErrors());
-	}
+    @Test
+    public void test_one_error_added__has_errors_returns_true() {
+        contextToTest.add(new Error());
+        assertTrue(contextToTest.hasErrors());
+    }
 }

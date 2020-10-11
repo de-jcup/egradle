@@ -19,15 +19,15 @@ import static org.apache.commons.lang3.Validate.*;
 
 public class GradleSubproject extends AbstractGradleProject {
 
-	private String name;
+    private String name;
 
-	public GradleSubproject(String name) {
-		notNull(name);
-		this.name = name;
-	}
+    public GradleSubproject(String name) {
+        notNull(name);
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
 }

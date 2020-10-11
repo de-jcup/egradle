@@ -13,7 +13,7 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.ide.execution;
+package de.jcup.egradle.eclipse.ide.execution;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
@@ -25,14 +25,15 @@ public class FallbackProcess implements IProcess {
     private ILaunch launch;
     private int exitValue = -1;
     private String label;
-    
+
     public FallbackProcess(ILaunch launch) {
-        this.launch=launch;
+        this.launch = launch;
     }
-    
+
     public void setLabel(String label) {
         this.label = label;
     }
+
     public synchronized boolean isTerminated() {
         return terminated;
     }
@@ -51,7 +52,7 @@ public class FallbackProcess implements IProcess {
     }
 
     public String getLabel() {
-        if (label!=null) {
+        if (label != null) {
             return label;
         }
         return "EGradle fallback process";

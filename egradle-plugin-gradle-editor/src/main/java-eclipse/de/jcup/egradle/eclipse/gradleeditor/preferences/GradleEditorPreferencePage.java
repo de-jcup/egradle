@@ -47,255 +47,247 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  */
 public class GradleEditorPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	protected static final int INDENT = 20;
+    protected static final int INDENT = 20;
 
-	protected static void indent(Control control) {
-		((GridData) control.getLayoutData()).horizontalIndent += INDENT;
-	}
+    protected static void indent(Control control) {
+        ((GridData) control.getLayoutData()).horizontalIndent += INDENT;
+    }
 
-	private Button bracketHighlightingCheckbox;
-	private Button enclosingBracketsRadioButton;
-	private Button matchingBracketAndCaretLocationRadioButton;
-	private Button matchingBracketRadioButton;
+    private Button bracketHighlightingCheckbox;
+    private Button enclosingBracketsRadioButton;
+    private Button matchingBracketAndCaretLocationRadioButton;
+    private Button matchingBracketRadioButton;
 
-	private BooleanFieldEditor linkEditorWithOutline;
+    private BooleanFieldEditor linkEditorWithOutline;
 
-	private ColorFieldEditor matchingBracketsColor;
+    private ColorFieldEditor matchingBracketsColor;
 
-	private ArrayList<MasterButtonSlaveSelectionListener> masterSlaveListeners = new ArrayList<>();
+    private ArrayList<MasterButtonSlaveSelectionListener> masterSlaveListeners = new ArrayList<>();
 
-	private boolean enclosingBrackets;
-	private boolean highlightBracketAtCaretLocation;
-	private boolean matchingBrackets;
-	private BooleanFieldEditor autoCreateEndBrackets;
+    private boolean enclosingBrackets;
+    private boolean highlightBracketAtCaretLocation;
+    private boolean matchingBrackets;
+    private BooleanFieldEditor autoCreateEndBrackets;
     private BooleanFieldEditor showProjectNameInEditorTitleEnabled;
 
-	public GradleEditorPreferencePage() {
-		super(GRID);
-		setPreferenceStore(getPreferences().getPreferenceStore());
-	}
+    public GradleEditorPreferencePage() {
+        super(GRID);
+        setPreferenceStore(getPreferences().getPreferenceStore());
+    }
 
-	@Override
-	public void init(IWorkbench workbench) {
+    @Override
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
-	@Override
-	public void performDefaults() {
-		super.performDefaults();
-		reloadBracketHighlightingPreferenceDefaults();
-	}
+    @Override
+    public void performDefaults() {
+        super.performDefaults();
+        reloadBracketHighlightingPreferenceDefaults();
+    }
 
-	@Override
-	public boolean performOk() {
-		boolean ok = super.performOk();
-		if (ok) {
-			setBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED, matchingBrackets);
-			setBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION, highlightBracketAtCaretLocation);
-			setBoolean(P_EDITOR_ENCLOSING_BRACKETS, enclosingBrackets);
-		}
-		return ok;
-	}
+    @Override
+    public boolean performOk() {
+        boolean ok = super.performOk();
+        if (ok) {
+            setBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED, matchingBrackets);
+            setBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION, highlightBracketAtCaretLocation);
+            setBoolean(P_EDITOR_ENCLOSING_BRACKETS, enclosingBrackets);
+        }
+        return ok;
+    }
 
-	protected void createDependency(Button master, Control slave) {
-		Assert.isNotNull(slave);
-		indent(slave);
-		MasterButtonSlaveSelectionListener listener = new MasterButtonSlaveSelectionListener(master, slave);
-		master.addSelectionListener(listener);
-		this.masterSlaveListeners.add(listener);
-	}
+    protected void createDependency(Button master, Control slave) {
+        Assert.isNotNull(slave);
+        indent(slave);
+        MasterButtonSlaveSelectionListener listener = new MasterButtonSlaveSelectionListener(master, slave);
+        master.addSelectionListener(listener);
+        this.masterSlaveListeners.add(listener);
+    }
 
-	@Override
-	protected void createFieldEditors() {
-		Composite appearanceComposite = new Composite(getFieldEditorParent(), SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 2;
-		appearanceComposite.setLayout(layout);
+    @Override
+    protected void createFieldEditors() {
+        Composite appearanceComposite = new Composite(getFieldEditorParent(), SWT.NONE);
+        GridLayout layout = new GridLayout();
+        layout.numColumns = 2;
+        appearanceComposite.setLayout(layout);
 
-		/* OTHER */
-		Composite otherComposite = new Composite(appearanceComposite, SWT.NONE);
-		GridLayout otherLayout = new GridLayout();
-		otherLayout.marginWidth = 0;
-		otherLayout.marginHeight = 0;
-		otherComposite.setLayout(otherLayout);
+        /* OTHER */
+        Composite otherComposite = new Composite(appearanceComposite, SWT.NONE);
+        GridLayout otherLayout = new GridLayout();
+        otherLayout.marginWidth = 0;
+        otherLayout.marginHeight = 0;
+        otherComposite.setLayout(otherLayout);
 
-		/* linking with outline */
-		linkEditorWithOutline = new BooleanFieldEditor(P_LINK_OUTLINE_WITH_EDITOR.getId(),
-				"New opened editors are linked with outline", otherComposite);
-		linkEditorWithOutline.getDescriptionControl(otherComposite)
-				.setToolTipText("Via this setting the default behaviour for new opened outlines is set");
-		addField(linkEditorWithOutline);
-		
-		showProjectNameInEditorTitleEnabled = new BooleanFieldEditor(P_EDITOR_TITLE_CONTAINS_PROJECTNAME.getId(),
-	                "Editor title contains project name", otherComposite);
-	    addField(showProjectNameInEditorTitleEnabled);
-	    
+        /* linking with outline */
+        linkEditorWithOutline = new BooleanFieldEditor(P_LINK_OUTLINE_WITH_EDITOR.getId(), "New opened editors are linked with outline", otherComposite);
+        linkEditorWithOutline.getDescriptionControl(otherComposite).setToolTipText("Via this setting the default behaviour for new opened outlines is set");
+        addField(linkEditorWithOutline);
 
-		/* BRACKETS */
-		/*
-		 * Why so ugly implemented and not using field editors ? Because
-		 * SourceViewerDecorationSupport needs 3 different preference keys to do
-		 * its job, so this preference doing must be same as on Java editor
-		 * preferences.
-		 */
-		Label spacer = new Label(appearanceComposite, SWT.LEFT);
-		GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
-		gd.horizontalSpan = 2;
-		gd.heightHint = convertHeightInCharsToPixels(1) / 2;
-		spacer.setLayoutData(gd);
+        showProjectNameInEditorTitleEnabled = new BooleanFieldEditor(P_EDITOR_TITLE_CONTAINS_PROJECTNAME.getId(), "Editor title contains project name", otherComposite);
+        addField(showProjectNameInEditorTitleEnabled);
 
-		String label = "Bracket highlighting";
+        /* BRACKETS */
+        /*
+         * Why so ugly implemented and not using field editors ? Because
+         * SourceViewerDecorationSupport needs 3 different preference keys to do its
+         * job, so this preference doing must be same as on Java editor preferences.
+         */
+        Label spacer = new Label(appearanceComposite, SWT.LEFT);
+        GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+        gd.horizontalSpan = 2;
+        gd.heightHint = convertHeightInCharsToPixels(1) / 2;
+        spacer.setLayoutData(gd);
 
-		bracketHighlightingCheckbox = addButton(appearanceComposite, SWT.CHECK, label, 0, new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				matchingBrackets = bracketHighlightingCheckbox.getSelection();
-			}
-		});
+        String label = "Bracket highlighting";
 
-		Composite radioComposite = new Composite(appearanceComposite, SWT.NONE);
-		GridLayout radioLayout = new GridLayout();
-		radioLayout.marginWidth = 0;
-		radioLayout.marginHeight = 0;
-		radioComposite.setLayout(radioLayout);
+        bracketHighlightingCheckbox = addButton(appearanceComposite, SWT.CHECK, label, 0, new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                matchingBrackets = bracketHighlightingCheckbox.getSelection();
+            }
+        });
 
-		label = "highlight matching bracket";
-		matchingBracketRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if (matchingBracketRadioButton.getSelection()) {
-					highlightBracketAtCaretLocation = false;
-				}
-			}
-		});
-		createDependency(bracketHighlightingCheckbox, matchingBracketRadioButton);
+        Composite radioComposite = new Composite(appearanceComposite, SWT.NONE);
+        GridLayout radioLayout = new GridLayout();
+        radioLayout.marginWidth = 0;
+        radioLayout.marginHeight = 0;
+        radioComposite.setLayout(radioLayout);
 
-		label = "highlight matching bracket and caret location";
-		matchingBracketAndCaretLocationRadioButton = addButton(radioComposite, SWT.RADIO, label, 0,
-				new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						if (matchingBracketAndCaretLocationRadioButton.getSelection()) {
-							highlightBracketAtCaretLocation = true;
-						}
-					}
-				});
-		createDependency(bracketHighlightingCheckbox, matchingBracketAndCaretLocationRadioButton);
+        label = "highlight matching bracket";
+        matchingBracketRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                if (matchingBracketRadioButton.getSelection()) {
+                    highlightBracketAtCaretLocation = false;
+                }
+            }
+        });
+        createDependency(bracketHighlightingCheckbox, matchingBracketRadioButton);
 
-		label = "highlight enclosing brackets";
-		enclosingBracketsRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
+        label = "highlight matching bracket and caret location";
+        matchingBracketAndCaretLocationRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                if (matchingBracketAndCaretLocationRadioButton.getSelection()) {
+                    highlightBracketAtCaretLocation = true;
+                }
+            }
+        });
+        createDependency(bracketHighlightingCheckbox, matchingBracketAndCaretLocationRadioButton);
 
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				boolean selection = enclosingBracketsRadioButton.getSelection();
-				enclosingBrackets = selection;
-				if (selection) {
-					highlightBracketAtCaretLocation = true;
-				}
-			}
-		});
-		createDependency(bracketHighlightingCheckbox, enclosingBracketsRadioButton);
+        label = "highlight enclosing brackets";
+        enclosingBracketsRadioButton = addButton(radioComposite, SWT.RADIO, label, 0, new SelectionAdapter() {
 
-		matchingBracketsColor = new ColorFieldEditor(P_EDITOR_MATCHING_BRACKETS_COLOR.getId(),
-				"Matching brackets color", radioComposite);
-		addField(matchingBracketsColor);
-		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getLabelControl(radioComposite));
-		createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getColorSelector().getButton());
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                boolean selection = enclosingBracketsRadioButton.getSelection();
+                enclosingBrackets = selection;
+                if (selection) {
+                    highlightBracketAtCaretLocation = true;
+                }
+            }
+        });
+        createDependency(bracketHighlightingCheckbox, enclosingBracketsRadioButton);
 
-		autoCreateEndBrackets = new BooleanFieldEditor(P_EDITOR_AUTO_CREATE_END_BRACKETSY.getId(),
-				"Auto create ending brackets", getFieldEditorParent());
-		addField(autoCreateEndBrackets);
-	}
+        matchingBracketsColor = new ColorFieldEditor(P_EDITOR_MATCHING_BRACKETS_COLOR.getId(), "Matching brackets color", radioComposite);
+        addField(matchingBracketsColor);
+        createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getLabelControl(radioComposite));
+        createDependency(bracketHighlightingCheckbox, matchingBracketsColor.getColorSelector().getButton());
 
-	@Override
-	protected void initialize() {
-		initializeBracketHighlightingPreferences();
-		super.initialize();
-		updateSlaveComponents();
-	}
+        autoCreateEndBrackets = new BooleanFieldEditor(P_EDITOR_AUTO_CREATE_END_BRACKETSY.getId(), "Auto create ending brackets", getFieldEditorParent());
+        addField(autoCreateEndBrackets);
+    }
 
-	private Button addButton(Composite parent, int style, String label, int indentation, SelectionListener listener) {
-		Button button = new Button(parent, style);
-		button.setText(label);
+    @Override
+    protected void initialize() {
+        initializeBracketHighlightingPreferences();
+        super.initialize();
+        updateSlaveComponents();
+    }
 
-		GridData gd = new GridData(32);
-		gd.horizontalIndent = indentation;
-		gd.horizontalSpan = 2;
-		button.setLayoutData(gd);
-		button.addSelectionListener(listener);
+    private Button addButton(Composite parent, int style, String label, int indentation, SelectionListener listener) {
+        Button button = new Button(parent, style);
+        button.setText(label);
 
-		return button;
-	}
+        GridData gd = new GridData(32);
+        gd.horizontalIndent = indentation;
+        gd.horizontalSpan = 2;
+        button.setLayoutData(gd);
+        button.addSelectionListener(listener);
 
-	private void setBoolean(GradleEditorPreferenceConstants id, boolean value) {
-		getPreferences().setBooleanPreference(id, value);
-	}
+        return button;
+    }
 
-	private boolean getBoolean(GradleEditorPreferenceConstants id) {
-		return getPreferences().getBooleanPreference(id);
-	}
+    private void setBoolean(GradleEditorPreferenceConstants id, boolean value) {
+        getPreferences().setBooleanPreference(id, value);
+    }
 
-	private boolean getDefaultBoolean(GradleEditorPreferenceConstants id) {
-		return getPreferences().getDefaultBooleanPreference(id);
-	}
+    private boolean getBoolean(GradleEditorPreferenceConstants id) {
+        return getPreferences().getBooleanPreference(id);
+    }
 
-	private void initializeBracketHighlightingPreferences() {
-		matchingBrackets = getBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED);
-		highlightBracketAtCaretLocation = getBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION);
-		enclosingBrackets = getBoolean(P_EDITOR_ENCLOSING_BRACKETS);
+    private boolean getDefaultBoolean(GradleEditorPreferenceConstants id) {
+        return getPreferences().getDefaultBooleanPreference(id);
+    }
 
-		updateBracketUI();
-	}
+    private void initializeBracketHighlightingPreferences() {
+        matchingBrackets = getBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED);
+        highlightBracketAtCaretLocation = getBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION);
+        enclosingBrackets = getBoolean(P_EDITOR_ENCLOSING_BRACKETS);
 
-	private void reloadBracketHighlightingPreferenceDefaults() {
-		matchingBrackets = getDefaultBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED);
-		highlightBracketAtCaretLocation = getDefaultBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION);
-		enclosingBrackets = getDefaultBoolean(P_EDITOR_ENCLOSING_BRACKETS);
+        updateBracketUI();
+    }
 
-		updateBracketUI();
-	}
+    private void reloadBracketHighlightingPreferenceDefaults() {
+        matchingBrackets = getDefaultBoolean(P_EDITOR_MATCHING_BRACKETS_ENABLED);
+        highlightBracketAtCaretLocation = getDefaultBoolean(P_EDITOR_HIGHLIGHT_BRACKET_AT_CARET_LOCATION);
+        enclosingBrackets = getDefaultBoolean(P_EDITOR_ENCLOSING_BRACKETS);
 
-	private void updateBracketUI() {
-		this.bracketHighlightingCheckbox.setSelection(matchingBrackets);
+        updateBracketUI();
+    }
 
-		this.enclosingBracketsRadioButton.setSelection(enclosingBrackets);
-		if (!(enclosingBrackets)) {
-			this.matchingBracketRadioButton.setSelection(!(highlightBracketAtCaretLocation));
-			this.matchingBracketAndCaretLocationRadioButton.setSelection(highlightBracketAtCaretLocation);
-		}
-		updateSlaveComponents();
-	}
+    private void updateBracketUI() {
+        this.bracketHighlightingCheckbox.setSelection(matchingBrackets);
 
-	private void updateSlaveComponents() {
-		for (MasterButtonSlaveSelectionListener listener : masterSlaveListeners) {
-			listener.updateSlaveComponent();
-		}
-	}
+        this.enclosingBracketsRadioButton.setSelection(enclosingBrackets);
+        if (!(enclosingBrackets)) {
+            this.matchingBracketRadioButton.setSelection(!(highlightBracketAtCaretLocation));
+            this.matchingBracketAndCaretLocationRadioButton.setSelection(highlightBracketAtCaretLocation);
+        }
+        updateSlaveComponents();
+    }
 
-	private class MasterButtonSlaveSelectionListener implements SelectionListener {
-		private Button master;
-		private Control slave;
+    private void updateSlaveComponents() {
+        for (MasterButtonSlaveSelectionListener listener : masterSlaveListeners) {
+            listener.updateSlaveComponent();
+        }
+    }
 
-		public MasterButtonSlaveSelectionListener(Button master, Control slave) {
-			this.master = master;
-			this.slave = slave;
-		}
+    private class MasterButtonSlaveSelectionListener implements SelectionListener {
+        private Button master;
+        private Control slave;
 
-		@Override
-		public void widgetDefaultSelected(SelectionEvent e) {
+        public MasterButtonSlaveSelectionListener(Button master, Control slave) {
+            this.master = master;
+            this.slave = slave;
+        }
 
-		}
+        @Override
+        public void widgetDefaultSelected(SelectionEvent e) {
 
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			updateSlaveComponent();
-		}
+        }
 
-		private void updateSlaveComponent() {
-			boolean state = master.getSelection();
-			slave.setEnabled(state);
-		}
+        @Override
+        public void widgetSelected(SelectionEvent e) {
+            updateSlaveComponent();
+        }
 
-	}
+        private void updateSlaveComponent() {
+            boolean state = master.getSelection();
+            slave.setEnabled(state);
+        }
+
+    }
 
 }

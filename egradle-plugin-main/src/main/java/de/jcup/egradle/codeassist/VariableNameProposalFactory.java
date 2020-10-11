@@ -33,36 +33,36 @@ import de.jcup.egradle.core.model.ModelInspector;
  */
 public class VariableNameProposalFactory extends AbstractProposalFactory {
 
-	@Override
-	protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
-		Model model = contentProvider.getModel();
-		if (model == null) {
-			return null;
-		}
-		Item modelNode = model.getItemAt(offset);
-		if (modelNode == null) {
-			return null;
-		}
-		Set<Proposal> proposals = new LinkedHashSet<>();
+    @Override
+    protected Set<Proposal> createProposalsImpl(int offset, ProposalFactoryContentProvider contentProvider) {
+        Model model = contentProvider.getModel();
+        if (model == null) {
+            return null;
+        }
+        Item modelNode = model.getItemAt(offset);
+        if (modelNode == null) {
+            return null;
+        }
+        Set<Proposal> proposals = new LinkedHashSet<>();
 
-		/*
-		 * very easy (silly) first approach - just collect all variables without
-		 * handling visibility etc.
-		 */
-		ModelInspector inspector = new ModelInspector();
-		List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, modelNode);
-		for (Item variableItem : allVariables) {
-			proposals.add(new ItemProposalImpl(variableItem));
-		}
-		List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, modelNode);
-		for (Item assignmentItem : allAssignments) {
-			proposals.add(new ItemProposalImpl(assignmentItem));
-		}
-		List<Item> allDefinedTasks = inspector.findAllItemsOfType(ItemType.TASK, modelNode);
-		for (Item definedTaskItem : allDefinedTasks) {
-			proposals.add(new ItemProposalImpl(definedTaskItem));
-		}
-		return proposals;
-	}
+        /*
+         * very easy (silly) first approach - just collect all variables without
+         * handling visibility etc.
+         */
+        ModelInspector inspector = new ModelInspector();
+        List<Item> allVariables = inspector.findAllItemsOfType(ItemType.VARIABLE, modelNode);
+        for (Item variableItem : allVariables) {
+            proposals.add(new ItemProposalImpl(variableItem));
+        }
+        List<Item> allAssignments = inspector.findAllItemsOfType(ItemType.ASSIGNMENT, modelNode);
+        for (Item assignmentItem : allAssignments) {
+            proposals.add(new ItemProposalImpl(assignmentItem));
+        }
+        List<Item> allDefinedTasks = inspector.findAllItemsOfType(ItemType.TASK, modelNode);
+        for (Item definedTaskItem : allDefinedTasks) {
+            proposals.add(new ItemProposalImpl(definedTaskItem));
+        }
+        return proposals;
+    }
 
 }

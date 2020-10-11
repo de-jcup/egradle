@@ -19,26 +19,26 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleTaskKeyWords implements DocumentKeyWord {
 
-	TASKDEFINITION("task"),
+    TASKDEFINITION("task"),
 
-	DO_FIRST_SHORT("<<"),
+    DO_FIRST_SHORT("<<"),
 
-	DO_FIRST("doFirst"),
+    DO_FIRST("doFirst"),
 
-	DO_LAST("doLast"),
+    DO_LAST("doLast"),
 
-	TYPE("type:"),
+    TYPE("type:"),
 
-	DEPENDS_ON("dependsOn:"),;
+    DEPENDS_ON("dependsOn:"),;
 
-	private String text;
+    private String text;
 
-	private GradleTaskKeyWords(String text) {
-		this.text = text;
-	}
+    private GradleTaskKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

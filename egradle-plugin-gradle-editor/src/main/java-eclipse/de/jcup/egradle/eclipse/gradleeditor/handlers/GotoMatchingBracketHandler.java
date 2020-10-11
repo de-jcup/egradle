@@ -19,11 +19,11 @@ import de.jcup.egradle.eclipse.gradleeditor.GradleEditor;
 
 public class GotoMatchingBracketHandler extends AbstractEGradleEditorHandler {
 
-	public static final String COMMAND_ID = "egradle.editor.commands.gotomatchingbracket";
+    public static final String COMMAND_ID = "egradle.editor.commands.gotomatchingbracket";
 
-	@Override
-	protected void executeOnGradleEditor(GradleEditor gradleEditor) {
-		gradleEditor.gotoMatchingBracket();
-	}
+    @Override
+    protected void executeOnGradleEditor(GradleEditor gradleEditor) {
+        gradleEditor.gotoMatchingBracket();
+    }
 
 }

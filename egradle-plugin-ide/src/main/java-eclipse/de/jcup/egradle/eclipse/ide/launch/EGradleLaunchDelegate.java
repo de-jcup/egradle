@@ -39,85 +39,78 @@ import de.jcup.egradle.eclipse.ide.handlers.LaunchGradleCommandHandler;
 
 public class EGradleLaunchDelegate implements ILaunchConfigurationDelegate {
 
-	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
+    @Override
+    public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 
-		IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
-		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
-		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
+        IServiceLocator serviceLocator = (IServiceLocator) PlatformUI.getWorkbench();
+        IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
+        ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
 
-		Command command = commandService.getCommand(LaunchGradleCommandHandler.COMMAND_ID);
+        Command command = commandService.getCommand(LaunchGradleCommandHandler.COMMAND_ID);
 
-		try {
-			Display.getDefault().syncExec(new Runnable() {
+        try {
+            Display.getDefault().syncExec(new Runnable() {
 
-				@Override
-				public void run() {
-					try {
-						IParameter parameter = command.getParameter(LaunchGradleCommandHandler.PARAMETER_LAUNCHCONFIG);
-						IParameterValues values = parameter.getValues();
+                @Override
+                public void run() {
+                    try {
+                        IParameter parameter = command.getParameter(LaunchGradleCommandHandler.PARAMETER_LAUNCHCONFIG);
+                        IParameterValues values = parameter.getValues();
 
-						if (values instanceof LaunchParameterValues) {
-							LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
-							/* Bugfix #79 - reset always launch data */
-							launchParameterValues.resetLaunchData();
-							launchParameterValues.setLaunch(launch);
+                        if (values instanceof LaunchParameterValues) {
+                            LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
+                            /* Bugfix #79 - reset always launch data */
+                            launchParameterValues.resetLaunchData();
+                            launchParameterValues.setLaunch(launch);
 
-							appendAdditionalLaunchParameters(launchParameterValues);
-							Parameterization[] params = new Parameterization[] {
-									new Parameterization(parameter, "true") };
-							ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
+                            appendAdditionalLaunchParameters(launchParameterValues);
+                            Parameterization[] params = new Parameterization[] { new Parameterization(parameter, "true") };
+                            ParameterizedCommand parametrizedCommand = new ParameterizedCommand(command, params);
 
-							/*
-							 * execute launch command with parameters - will
-							 * show progress etc. as well
-							 */
-							handlerService.executeCommand(parametrizedCommand, null);
+                            /*
+                             * execute launch command with parameters - will show progress etc. as well
+                             */
+                            handlerService.executeCommand(parametrizedCommand, null);
 
-						} else {
-							IDEUtil.logWarning(getClass().getSimpleName()
-									+ ":parameter values without being a launch parameter value was used !??! :"
-									+ values);
-						}
+                        } else {
+                            IDEUtil.logWarning(getClass().getSimpleName() + ":parameter values without being a launch parameter value was used !??! :" + values);
+                        }
 
-					} catch (Exception e) {
-						throw new IllegalStateException("EGradle launch command execution failed", e);
-					} finally {
-						/*
-						 * TODO ATR, 23.09.2016: when exceptions are occurring
-						 * while launching the old launches are still existing
-						 * in debug view
-						 */
-						/*
-						 * the following workaround does really work, but it is
-						 * the correct place
-						 */
-						if (!launch.isTerminated()) {
-							try {
-								launch.terminate();
-							} catch (DebugException e) {
-								IDEUtil.logError("Was not able to terminate launch", e);
-							}
-						}
-					}
+                    } catch (Exception e) {
+                        throw new IllegalStateException("EGradle launch command execution failed", e);
+                    } finally {
+                        /*
+                         * TODO ATR, 23.09.2016: when exceptions are occurring while launching the old
+                         * launches are still existing in debug view
+                         */
+                        /*
+                         * the following workaround does really work, but it is the correct place
+                         */
+                        if (!launch.isTerminated()) {
+                            try {
+                                launch.terminate();
+                            } catch (DebugException e) {
+                                IDEUtil.logError("Was not able to terminate launch", e);
+                            }
+                        }
+                    }
 
-				}
+                }
 
-			});
-		} catch (Exception e) {
-			throw new CoreException(new Status(Status.ERROR, IDEActivator.PLUGIN_ID, "Not handled!", e));
-		}
-	}
+            });
+        } catch (Exception e) {
+            throw new CoreException(new Status(Status.ERROR, IDEActivator.PLUGIN_ID, "Not handled!", e));
+        }
+    }
 
-	/**
-	 * Append additional launch parameters for gradle command outputHandler.
-	 * This is done inside UI Thread
-	 * 
-	 * @param launchParameterValues
-	 */
-	protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
+    /**
+     * Append additional launch parameters for gradle command outputHandler. This is
+     * done inside UI Thread
+     * 
+     * @param launchParameterValues
+     */
+    protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
 
-	}
+    }
 
 }

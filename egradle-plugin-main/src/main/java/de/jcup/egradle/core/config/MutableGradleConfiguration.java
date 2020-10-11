@@ -20,125 +20,124 @@ import de.jcup.egradle.core.util.FileSupport;
 
 public class MutableGradleConfiguration implements GradleConfiguration {
 
-	private FileSupport fileSupport = FileSupport.DEFAULT;
+    private FileSupport fileSupport = FileSupport.DEFAULT;
 
-	private String gradleUserHome;
-	
-	public void setGradleUserHome(String gradleUserHome) {
+    private String gradleUserHome;
+
+    public void setGradleUserHome(String gradleUserHome) {
         this.gradleUserHome = gradleUserHome;
     }
 
-	public String getGradleUserHome() {
+    public String getGradleUserHome() {
         return gradleUserHome;
     }
-	
-	@Override
-	public String getGradleCommandFullPath() {
-		return fileSupport.createCorrectFilePath(gradleBinDirectory, gradleCommand);
-	}
 
-	@Override
-	public String toString() {
-		return "MutableGradleConfiguration [shellCommand=" + shellCommand + ", gradleCommand=" + gradleCommand
-				+ ", gradleBinDirectory=" + gradleBinDirectory + ", workingDirectory=" + workingDirectory
-				+ ", javaHome=" + javaHome + "]";
-	}
+    @Override
+    public String getGradleCommandFullPath() {
+        return fileSupport.createCorrectFilePath(gradleBinDirectory, gradleCommand);
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((gradleCommand == null) ? 0 : gradleCommand.hashCode());
-		result = prime * result + ((gradleBinDirectory == null) ? 0 : gradleBinDirectory.hashCode());
-		result = prime * result + ((javaHome == null) ? 0 : javaHome.hashCode());
-		result = prime * result + ((shellCommand == null) ? 0 : shellCommand.hashCode());
-		result = prime * result + ((workingDirectory == null) ? 0 : workingDirectory.hashCode());
-		return result;
-	}
+    @Override
+    public String toString() {
+        return "MutableGradleConfiguration [shellCommand=" + shellCommand + ", gradleCommand=" + gradleCommand + ", gradleBinDirectory=" + gradleBinDirectory + ", workingDirectory=" + workingDirectory
+                + ", javaHome=" + javaHome + "]";
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MutableGradleConfiguration other = (MutableGradleConfiguration) obj;
-		if (gradleCommand == null) {
-			if (other.gradleCommand != null)
-				return false;
-		} else if (!gradleCommand.equals(other.gradleCommand))
-			return false;
-		if (gradleBinDirectory == null) {
-			if (other.gradleBinDirectory != null)
-				return false;
-		} else if (!gradleBinDirectory.equals(other.gradleBinDirectory))
-			return false;
-		if (javaHome == null) {
-			if (other.javaHome != null)
-				return false;
-		} else if (!javaHome.equals(other.javaHome))
-			return false;
-		if (shellCommand == null) {
-			if (other.shellCommand != null)
-				return false;
-		} else if (!shellCommand.equals(other.shellCommand))
-			return false;
-		if (workingDirectory == null) {
-			if (other.workingDirectory != null)
-				return false;
-		} else if (!workingDirectory.equals(other.workingDirectory))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((gradleCommand == null) ? 0 : gradleCommand.hashCode());
+        result = prime * result + ((gradleBinDirectory == null) ? 0 : gradleBinDirectory.hashCode());
+        result = prime * result + ((javaHome == null) ? 0 : javaHome.hashCode());
+        result = prime * result + ((shellCommand == null) ? 0 : shellCommand.hashCode());
+        result = prime * result + ((workingDirectory == null) ? 0 : workingDirectory.hashCode());
+        return result;
+    }
 
-	private EGradleShellType shellCommand;
-	private String gradleCommand;
-	private String gradleBinDirectory;
-	private String workingDirectory;
-	private String javaHome;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MutableGradleConfiguration other = (MutableGradleConfiguration) obj;
+        if (gradleCommand == null) {
+            if (other.gradleCommand != null)
+                return false;
+        } else if (!gradleCommand.equals(other.gradleCommand))
+            return false;
+        if (gradleBinDirectory == null) {
+            if (other.gradleBinDirectory != null)
+                return false;
+        } else if (!gradleBinDirectory.equals(other.gradleBinDirectory))
+            return false;
+        if (javaHome == null) {
+            if (other.javaHome != null)
+                return false;
+        } else if (!javaHome.equals(other.javaHome))
+            return false;
+        if (shellCommand == null) {
+            if (other.shellCommand != null)
+                return false;
+        } else if (!shellCommand.equals(other.shellCommand))
+            return false;
+        if (workingDirectory == null) {
+            if (other.workingDirectory != null)
+                return false;
+        } else if (!workingDirectory.equals(other.workingDirectory))
+            return false;
+        return true;
+    }
 
-	@Override
-	public EGradleShellType getShellType() {
-		return shellCommand;
-	}
+    private EGradleShellType shellCommand;
+    private String gradleCommand;
+    private String gradleBinDirectory;
+    private String workingDirectory;
+    private String javaHome;
 
-	public void setShellCommand(EGradleShellType shell) {
-		this.shellCommand = shell;
-	}
+    @Override
+    public EGradleShellType getShellType() {
+        return shellCommand;
+    }
 
-	public void setGradleCommand(String gradleCommand) {
-		this.gradleCommand = gradleCommand;
-	}
+    public void setShellCommand(EGradleShellType shell) {
+        this.shellCommand = shell;
+    }
 
-	@Override
-	public String getGradleBinDirectory() {
-		if (gradleBinDirectory == null) {
-			gradleBinDirectory = "";
-		}
-		return gradleBinDirectory;
-	}
+    public void setGradleCommand(String gradleCommand) {
+        this.gradleCommand = gradleCommand;
+    }
 
-	public void setGradleBinDirectory(String gradleInstallDirectory) {
-		this.gradleBinDirectory = gradleInstallDirectory;
-	}
+    @Override
+    public String getGradleBinDirectory() {
+        if (gradleBinDirectory == null) {
+            gradleBinDirectory = "";
+        }
+        return gradleBinDirectory;
+    }
 
-	public void setWorkingDirectory(String workingDirectory) {
-		this.workingDirectory = workingDirectory;
-	}
+    public void setGradleBinDirectory(String gradleInstallDirectory) {
+        this.gradleBinDirectory = gradleInstallDirectory;
+    }
 
-	public String getWorkingDirectory() {
-		return workingDirectory;
-	}
+    public void setWorkingDirectory(String workingDirectory) {
+        this.workingDirectory = workingDirectory;
+    }
 
-	public void setJavaHome(String javaHome) {
-		this.javaHome = javaHome;
-	}
+    public String getWorkingDirectory() {
+        return workingDirectory;
+    }
 
-	@Override
-	public String getJavaHome() {
-		return javaHome;
-	}
+    public void setJavaHome(String javaHome) {
+        this.javaHome = javaHome;
+    }
+
+    @Override
+    public String getJavaHome() {
+        return javaHome;
+    }
 
 }

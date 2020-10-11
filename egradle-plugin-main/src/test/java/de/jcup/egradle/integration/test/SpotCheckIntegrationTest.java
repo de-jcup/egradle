@@ -31,130 +31,129 @@ import de.jcup.egradle.integration.IntegrationTestComponents;
  */
 public class SpotCheckIntegrationTest {
 
-	@Rule
-	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
+    @Rule
+    public IntegrationTestComponents components = IntegrationTestComponents.initialize();
 
-	@Test
-	public void jar_has_interface_copy_spec() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.api.tasks.bundling.Jar");
+    @Test
+    public void jar_has_interface_copy_spec() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.api.tasks.bundling.Jar");
 
-		/* test */
-		assertType(jarType).hasInterface("org.gradle.api.file.CopySpec");
-	}
+        /* test */
+        assertType(jarType).hasInterface("org.gradle.api.file.CopySpec");
+    }
 
-	@Test
-	public void sourceset_fullname_has_mixin_parts_from_scala() {
-		/* execute */
-		Type sourceSetType = components.getGradleDslProvider().getType("org.gradle.api.tasks.SourceSet");
+    @Test
+    public void sourceset_fullname_has_mixin_parts_from_scala() {
+        /* execute */
+        Type sourceSetType = components.getGradleDslProvider().getType("org.gradle.api.tasks.SourceSet");
 
-		/* test */
-		assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
-	}
+        /* test */
+        assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
+    }
 
-	@Test
-	public void sourceset_shortname_has_mixin_parts_from_scala() {
-		/* execute */
-		Type sourceSetType = components.getGradleDslProvider().getType("SourceSet");
+    @Test
+    public void sourceset_shortname_has_mixin_parts_from_scala() {
+        /* execute */
+        Type sourceSetType = components.getGradleDslProvider().getType("SourceSet");
 
-		/* test */
-		assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
-	}
+        /* test */
+        assertType(sourceSetType).hasName("org.gradle.api.tasks.SourceSet").hasMethod("scala", "groovy.lang.Closure");
+    }
 
-	@Test
-	public void jar_has_zip_as_super_class__this_information_must_be_available_in_data() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+    @Test
+    public void jar_has_zip_as_super_class__this_information_must_be_available_in_data() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
-		/* test */
-		assertType(jarType).hasSuperType("org.gradle.api.tasks.bundling.Zip");
-	}
+        /* test */
+        assertType(jarType).hasSuperType("org.gradle.api.tasks.bundling.Zip");
+    }
 
-	@Test
-	public void bundling_jar_has_jar_as_super_class__this_information_must_be_available_in_data() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.api.tasks.bundling.Jar");
+    @Test
+    public void bundling_jar_has_jar_as_super_class__this_information_must_be_available_in_data() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.api.tasks.bundling.Jar");
 
-		/* test */
-		assertType(jarType).hasSuperType("org.gradle.jvm.tasks.Jar");
-	}
+        /* test */
+        assertType(jarType).hasSuperType("org.gradle.jvm.tasks.Jar");
+    }
 
-	@Test
-	public void jar_1_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+    @Test
+    public void jar_1_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
-		/* test */
-		/* @formatter:off */
+        /* test */
+        /* @formatter:off */
 		assertType(jarType).
 			hasMethod("manifest", "groovy.lang.Closure").
 			hasMethod("getTemporaryDirFactory");
 		/* @formatter:on */
-	}
+    }
 
-	/**
-	 * Special test case which did produce a loop inheratance problem. An
-	 * example
-	 * 
-	 * <pre>
-	 * Class A Class B
-	 * 
-	 * methodA:ClassB methodB: ClassA
-	 * 
-	 * -> extends Class C -> extends Class C
-	 * 
-	 * Class C
-	 * 
-	 * methodC: String
-	 * 
-	 * <pre>
-	 * 
-	 * Now it depends which of the classes will be first initialized:
-	 * 
-	 * 1. Class A: will resolve Class B which will resolve
-	 * 
-	 */
-	@Test
-	public void jar_2_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory__failed_always_alone_and_also_when_all() {
-		/* execute */
-		Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
-		// jar type seems to be already loaded by former call */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+    /**
+     * Special test case which did produce a loop inheratance problem. An example
+     * 
+     * <pre>
+     * Class A Class B
+     * 
+     * methodA:ClassB methodB: ClassA
+     * 
+     * -> extends Class C -> extends Class C
+     * 
+     * Class C
+     * 
+     * methodC: String
+     * 
+     * <pre>
+     * 
+     * Now it depends which of the classes will be first initialized:
+     * 
+     * 1. Class A: will resolve Class B which will resolve
+     * 
+     */
+    @Test
+    public void jar_2_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory__failed_always_alone_and_also_when_all() {
+        /* execute */
+        Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
+        // jar type seems to be already loaded by former call */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
-		/* test */
-		/* @formatter:off */
+        /* test */
+        /* @formatter:off */
 		assertType(copyType).
 			hasMethod("getTemporaryDirFactory");
 		assertType(jarType).
 			hasMethod("manifest", "groovy.lang.Closure").
 			hasMethod("getTemporaryDirFactory");
 		/* @formatter:on */
-	}
+    }
 
-	@Test
-	public void jar_3_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+    @Test
+    public void jar_3_has_manifest_method_itself__and_also_inherited_method_getTemporaryDirFactory_did_not_fail_alone_but_when_all() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
-		Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
+        Type copyType = components.getGradleDslProvider().getType("org.gradle.api.tasks.Copy");
 
-		/* test */
-		/* @formatter:off */
+        /* test */
+        /* @formatter:off */
 		assertType(jarType).
 			hasMethod("manifest", "groovy.lang.Closure").
 			hasMethod("getTemporaryDirFactory");
 		assertType(copyType).
 			hasMethod("getTemporaryDirFactory");
 		/* @formatter:on */
-	}
+    }
 
-	@Test
-	public void jar_has_inherited_property_zip64() {
-		/* execute */
-		Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
+    @Test
+    public void jar_has_inherited_property_zip64() {
+        /* execute */
+        Type jarType = components.getGradleDslProvider().getType("org.gradle.jvm.tasks.Jar");
 
-		/* test */
-		assertType(jarType).hasSuperType().hasProperty("zip64");
+        /* test */
+        assertType(jarType).hasSuperType().hasProperty("zip64");
 
-	}
+    }
 }

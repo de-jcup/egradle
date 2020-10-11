@@ -31,265 +31,264 @@ import de.jcup.egradle.template.FileStructureTemplate;
 
 public class NewProjectContext {
 
-	String lastValidationProblem;
+    String lastValidationProblem;
 
-	private String javaSourceCompatibility;
-	private List<String> multiProjectsList;
-	private String projectName;
-	private FileStructureTemplate selectedTemplate;
-	private String multiProjectsAsIncludeString;
-	private String javaHome;
+    private String javaSourceCompatibility;
+    private List<String> multiProjectsList;
+    private String projectName;
+    private FileStructureTemplate selectedTemplate;
+    private String multiProjectsAsIncludeString;
+    private String javaHome;
 
-	private String groupName;
+    private String groupName;
 
-	private String gradleVersion;
+    private String gradleVersion;
 
-	private boolean gradleWrapperEnabled;
+    private boolean gradleWrapperEnabled;
 
-	public String getJavaSourceCompatibility() {
-		return javaSourceCompatibility;
-	}
+    public String getJavaSourceCompatibility() {
+        return javaSourceCompatibility;
+    }
 
-	public String getLastValidationProblem() {
-		return lastValidationProblem;
-	}
+    public String getLastValidationProblem() {
+        return lastValidationProblem;
+    }
 
-	public List<String> getMultiProjectsAsList() {
-		return multiProjectsList;
-	}
+    public List<String> getMultiProjectsAsList() {
+        return multiProjectsList;
+    }
 
-	public String getMultiProjectsAsIncludeString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(multiProjectsAsIncludeString);
-		List<String> predefined = selectedTemplate.getPredefinedSubprojects();
-		if (!predefined.isEmpty()) {
-			for (String predefinedProject : predefined) {
-				sb.append(",\n'");
-				sb.append(predefinedProject);
-				sb.append("'");
-			}
-		}
-		return sb.toString();
-	}
+    public String getMultiProjectsAsIncludeString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(multiProjectsAsIncludeString);
+        List<String> predefined = selectedTemplate.getPredefinedSubprojects();
+        if (!predefined.isEmpty()) {
+            for (String predefinedProject : predefined) {
+                sb.append(",\n'");
+                sb.append(predefinedProject);
+                sb.append("'");
+            }
+        }
+        return sb.toString();
+    }
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public FileStructureTemplate getSelectedTemplate() {
-		return selectedTemplate;
-	}
+    public FileStructureTemplate getSelectedTemplate() {
+        return selectedTemplate;
+    }
 
-	public boolean isSupportingHeadlessImport() {
-		if (selectedTemplate == null) {
-			return false;
-		}
-		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_HEADLESS_IMPORT);
-	}
+    public boolean isSupportingHeadlessImport() {
+        if (selectedTemplate == null) {
+            return false;
+        }
+        return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_HEADLESS_IMPORT);
+    }
 
-	public boolean isMultiProject() {
-		if (selectedTemplate == null) {
-			return false;
-		}
-		return selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
-	}
+    public boolean isMultiProject() {
+        if (selectedTemplate == null) {
+            return false;
+        }
+        return selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
+    }
 
-	public void setGradleWrapperEnabled(boolean gradleWrapperEnabled) {
-		this.gradleWrapperEnabled = gradleWrapperEnabled;
-	}
+    public void setGradleWrapperEnabled(boolean gradleWrapperEnabled) {
+        this.gradleWrapperEnabled = gradleWrapperEnabled;
+    }
 
-	/**
-	 * @return <code>true</code> when wrapper is enabled AND wrapper is
-	 *         supported by template
-	 */
-	public boolean isGradleWrapperSupportedAndEnabled() {
-		return isSupportingGradleWrapper() && gradleWrapperEnabled;
-	}
+    /**
+     * @return <code>true</code> when wrapper is enabled AND wrapper is supported by
+     *         template
+     */
+    public boolean isGradleWrapperSupportedAndEnabled() {
+        return isSupportingGradleWrapper() && gradleWrapperEnabled;
+    }
 
-	public boolean isSupportingGradleWrapper() {
-		if (selectedTemplate == null) {
-			return false;
-		}
-		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER);
-	}
+    public boolean isSupportingGradleWrapper() {
+        if (selectedTemplate == null) {
+            return false;
+        }
+        return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_GRADLEWRAPPER);
+    }
 
-	public boolean isSupportingJava() {
-		if (selectedTemplate == null) {
-			return false;
-		}
-		return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA);
-	}
+    public boolean isSupportingJava() {
+        if (selectedTemplate == null) {
+            return false;
+        }
+        return selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA);
+    }
 
-	public void setJavaSourceCompatibility(String javaSourceCompatibility) {
-		this.javaSourceCompatibility = javaSourceCompatibility;
-	}
+    public void setJavaSourceCompatibility(String javaSourceCompatibility) {
+        this.javaSourceCompatibility = javaSourceCompatibility;
+    }
 
-	public void setMultiProjects(String multiProjects) {
-		this.multiProjectsList = createMultiProjects(multiProjects);
-		this.multiProjectsAsIncludeString = createMultiProjectsAsIncludeString(multiProjectsList);
-	}
+    public void setMultiProjects(String multiProjects) {
+        this.multiProjectsList = createMultiProjects(multiProjects);
+        this.multiProjectsAsIncludeString = createMultiProjectsAsIncludeString(multiProjectsList);
+    }
 
-	private String createMultiProjectsAsIncludeString(List<String> list) {
-		if (list == null) {
-			return "";
-		}
-		if (list.isEmpty()) {
-			return "";
-		}
-		StringBuilder sb = new StringBuilder();
-		for (Iterator<String> it = list.iterator(); it.hasNext();) {
-			String data = it.next();
-			sb.append('\'');
-			sb.append(data);
-			sb.append('\'');
-			if (it.hasNext()) {
-				sb.append(",\n");
-			}
-		}
-		return sb.toString();
-	}
+    private String createMultiProjectsAsIncludeString(List<String> list) {
+        if (list == null) {
+            return "";
+        }
+        if (list.isEmpty()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Iterator<String> it = list.iterator(); it.hasNext();) {
+            String data = it.next();
+            sb.append('\'');
+            sb.append(data);
+            sb.append('\'');
+            if (it.hasNext()) {
+                sb.append(",\n");
+            }
+        }
+        return sb.toString();
+    }
 
-	public void setJavaHome(String javaHome) {
-		this.javaHome = javaHome;
-	}
+    public void setJavaHome(String javaHome) {
+        this.javaHome = javaHome;
+    }
 
-	public String getJavaHome() {
-		return javaHome;
-	}
+    public String getJavaHome() {
+        return javaHome;
+    }
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
-	public String getGroupName() {
-		if (groupName == null || groupName.trim().length() == 0) {
-			return projectName;
-		}
-		return groupName;
-	}
+    public String getGroupName() {
+        if (groupName == null || groupName.trim().length() == 0) {
+            return projectName;
+        }
+        return groupName;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public void setSelectedTemplate(FileStructureTemplate selectedTemplate) {
-		this.selectedTemplate = selectedTemplate;
-		this.gradleWrapperEnabled = isSupportingGradleWrapper(); // per default
-																	// enabled
-																	// when
-																	// gradlewrapper
-																	// is
-																	// supported
-	}
+    public void setSelectedTemplate(FileStructureTemplate selectedTemplate) {
+        this.selectedTemplate = selectedTemplate;
+        this.gradleWrapperEnabled = isSupportingGradleWrapper(); // per default
+                                                                 // enabled
+                                                                 // when
+                                                                 // gradlewrapper
+                                                                 // is
+                                                                 // supported
+    }
 
-	public void setGradleVersion(String version) {
-		this.gradleVersion = version;
-	}
+    public void setGradleVersion(String version) {
+        this.gradleVersion = version;
+    }
 
-	public String getGradleVersion() {
-		if (gradleVersion == null || gradleVersion.trim().length() == 0) {
-			gradleVersion = VAR__GRADLE__VERSION.getDefaultValue();
-		}
-		return gradleVersion;
-	}
+    public String getGradleVersion() {
+        if (gradleVersion == null || gradleVersion.trim().length() == 0) {
+            gradleVersion = VAR__GRADLE__VERSION.getDefaultValue();
+        }
+        return gradleVersion;
+    }
 
-	public Properties toProperties() {
-		Properties p = new Properties();
-		set(p, VAR__JAVA__VERSION, getJavaSourceCompatibility());
-		set(p, VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS, getMultiProjectsAsIncludeString());
-		set(p, VAR__NAME_OF_PROJECT, getProjectName());
-		set(p, VAR__NAME_OF_GROUP, getGroupName());
-		set(p, VAR__GRADLE__VERSION, getGradleVersion());
-		String templateName = null;
-		if (selectedTemplate != null) {
-			templateName = selectedTemplate.getName();
-		}
-		set(p, VAR__NAME_OF_TEMPLATE, templateName);
+    public Properties toProperties() {
+        Properties p = new Properties();
+        set(p, VAR__JAVA__VERSION, getJavaSourceCompatibility());
+        set(p, VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS, getMultiProjectsAsIncludeString());
+        set(p, VAR__NAME_OF_PROJECT, getProjectName());
+        set(p, VAR__NAME_OF_GROUP, getGroupName());
+        set(p, VAR__GRADLE__VERSION, getGradleVersion());
+        String templateName = null;
+        if (selectedTemplate != null) {
+            templateName = selectedTemplate.getName();
+        }
+        set(p, VAR__NAME_OF_TEMPLATE, templateName);
 
-		return p;
-	}
+        return p;
+    }
 
-	/**
-	 * Validates if context is currently valid. The template must be not null
-	 * and the template features must have all necessary data inside this
-	 * context
-	 * 
-	 * @return <code>true</code> when valid
-	 */
-	public boolean validate() {
-		/* reset validation problem */
-		lastValidationProblem = null;
+    /**
+     * Validates if context is currently valid. The template must be not null and
+     * the template features must have all necessary data inside this context
+     * 
+     * @return <code>true</code> when valid
+     */
+    public boolean validate() {
+        /* reset validation problem */
+        lastValidationProblem = null;
 
-		if (selectedTemplate == null) {
-			lastValidationProblem = "No template selected";
-			return false;
-		}
-		if (StringUtils.isBlank(projectName)) {
-			lastValidationProblem = "No project name set";
-			return false;
-		}
-		if (!validateMultiProject()) {
-			return false;
-		}
-		if (!validateJavaSupport()) {
-			return false;
-		}
-		return true;
-	}
+        if (selectedTemplate == null) {
+            lastValidationProblem = "No template selected";
+            return false;
+        }
+        if (StringUtils.isBlank(projectName)) {
+            lastValidationProblem = "No project name set";
+            return false;
+        }
+        if (!validateMultiProject()) {
+            return false;
+        }
+        if (!validateJavaSupport()) {
+            return false;
+        }
+        return true;
+    }
 
-	public boolean validateJavaSupport() {
-		if (isSupportingJava()) {
-			if (StringUtils.isBlank(javaSourceCompatibility)) {
-				lastValidationProblem = "Java source compatibility not set";
-				return false;
-			}
-			if (StringUtils.isNotBlank(javaHome)) {
-				File file = new File(javaHome);
-				if (!file.exists()) {
-					lastValidationProblem = javaHome + " does not exist!";
-					return false;
-				}
-				if (!file.isDirectory()) {
-					lastValidationProblem = javaHome + " is not a directory!";
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    public boolean validateJavaSupport() {
+        if (isSupportingJava()) {
+            if (StringUtils.isBlank(javaSourceCompatibility)) {
+                lastValidationProblem = "Java source compatibility not set";
+                return false;
+            }
+            if (StringUtils.isNotBlank(javaHome)) {
+                File file = new File(javaHome);
+                if (!file.exists()) {
+                    lastValidationProblem = javaHome + " does not exist!";
+                    return false;
+                }
+                if (!file.isDirectory()) {
+                    lastValidationProblem = javaHome + " is not a directory!";
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-	public boolean validateMultiProject() {
-		if (isMultiProject()) {
-			if (multiProjectsList == null || multiProjectsList.isEmpty()) {
-				lastValidationProblem = "No multiprojects given";
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean validateMultiProject() {
+        if (isMultiProject()) {
+            if (multiProjectsList == null || multiProjectsList.isEmpty()) {
+                lastValidationProblem = "No multiprojects given";
+                return false;
+            }
+        }
+        return true;
+    }
 
-	private List<String> createMultiProjects(String multiProjectsText) {
-		String[] splitted = StringUtils.split(multiProjectsText, ",");
-		if (splitted == null) {
-			return Collections.emptyList();
-		}
-		List<String> list = new ArrayList<>();
-		for (String split : splitted) {
-			if (StringUtils.isBlank(split)) {
-				continue;
-			}
-			list.add(split.trim());
-		}
-		Collections.sort(list);
+    private List<String> createMultiProjects(String multiProjectsText) {
+        String[] splitted = StringUtils.split(multiProjectsText, ",");
+        if (splitted == null) {
+            return Collections.emptyList();
+        }
+        List<String> list = new ArrayList<>();
+        for (String split : splitted) {
+            if (StringUtils.isBlank(split)) {
+                continue;
+            }
+            list.add(split.trim());
+        }
+        Collections.sort(list);
 
-		return list;
-	}
+        return list;
+    }
 
-	private void set(Properties p, TemplateVariable var, String value) {
-		if (value == null) {
-			value = "";
-		}
-		p.setProperty(var.getVariableName(), value);
-	}
+    private void set(Properties p, TemplateVariable var, String value) {
+        if (value == null) {
+            value = "";
+        }
+        p.setProperty(var.getVariableName(), value);
+    }
 
 }

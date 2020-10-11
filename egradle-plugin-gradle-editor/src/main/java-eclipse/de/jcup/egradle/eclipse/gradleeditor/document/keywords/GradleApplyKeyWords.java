@@ -19,20 +19,20 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleApplyKeyWords implements DocumentKeyWord {
 
-	APPLY_FROM("apply from"),
+    APPLY_FROM("apply from"),
 
-	APPLY_PLUGIN("apply plugin"),
+    APPLY_PLUGIN("apply plugin"),
 
-	;
+    ;
 
-	private String text;
+    private String text;
 
-	private GradleApplyKeyWords(String text) {
-		this.text = text;
-	}
+    private GradleApplyKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

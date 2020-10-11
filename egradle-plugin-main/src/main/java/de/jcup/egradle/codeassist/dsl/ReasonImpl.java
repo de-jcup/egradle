@@ -17,62 +17,62 @@ package de.jcup.egradle.codeassist.dsl;
 
 public class ReasonImpl implements Reason {
 
-	private Plugin plugin;
-	private Type superType;
-	private String mixinId;
+    private Plugin plugin;
+    private Type superType;
+    private String mixinId;
 
-	public ReasonImpl() {
-	}
+    public ReasonImpl() {
+    }
 
-	public ReasonImpl setPlugin(Plugin plugin) {
-		this.plugin = plugin;
-		return this;
-	}
+    public ReasonImpl setPlugin(Plugin plugin) {
+        this.plugin = plugin;
+        return this;
+    }
 
-	public Plugin getPlugin() {
-		return plugin;
-	}
+    public Plugin getPlugin() {
+        return plugin;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((plugin == null) ? 0 : plugin.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((plugin == null) ? 0 : plugin.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ReasonImpl other = (ReasonImpl) obj;
-		if (plugin == null) {
-			if (other.plugin != null)
-				return false;
-		} else if (!plugin.equals(other.plugin))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ReasonImpl other = (ReasonImpl) obj;
+        if (plugin == null) {
+            if (other.plugin != null)
+                return false;
+        } else if (!plugin.equals(other.plugin))
+            return false;
+        return true;
+    }
 
-	@Override
-	public Type getSuperType() {
-		return superType;
-	}
+    @Override
+    public Type getSuperType() {
+        return superType;
+    }
 
-	public void setSuperType(Type superType) {
-		this.superType = superType;
-	}
+    public void setSuperType(Type superType) {
+        this.superType = superType;
+    }
 
-	public void setMixinId(String id) {
-		this.mixinId = id;
-	}
+    public void setMixinId(String id) {
+        this.mixinId = id;
+    }
 
-	public String getMixinId() {
-		return mixinId;
-	}
+    public String getMixinId() {
+        return mixinId;
+    }
 
 }

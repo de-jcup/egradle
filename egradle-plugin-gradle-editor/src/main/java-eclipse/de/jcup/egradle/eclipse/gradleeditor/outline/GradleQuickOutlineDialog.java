@@ -35,34 +35,32 @@ import de.jcup.egradle.eclipse.ui.IExtendedEditor;
  */
 public class GradleQuickOutlineDialog extends AbstractGroovyBasedQuickOutline {
 
-	/**
-	 * Creates a quick outline dialog
-	 * 
-	 * @param adaptable
-	 *            an adapter which should be able to provide a tree content
-	 *            provider and gradle editor. If gradle editor is not set a
-	 *            selected item will only close the dialog but do not select
-	 *            editor parts..
-	 * @param parent
-	 *            shell to use is null the outline will have no content! If the
-	 *            gradle editor is null location setting etc. will not work.
-	 * @param infoText
-	 *            information to show at bottom of dialog
-	 */
-	public GradleQuickOutlineDialog(IAdaptable adaptable, Shell parent, String infoText) {
-		super(adaptable, parent, "EGradle quick outline", MIN_WIDTH, MIN_HEIGHT, infoText);
-		this.editor = adaptable.getAdapter(IExtendedEditor.class);
-	}
+    /**
+     * Creates a quick outline dialog
+     * 
+     * @param adaptable an adapter which should be able to provide a tree content
+     *                  provider and gradle editor. If gradle editor is not set a
+     *                  selected item will only close the dialog but do not select
+     *                  editor parts..
+     * @param parent    shell to use is null the outline will have no content! If
+     *                  the gradle editor is null location setting etc. will not
+     *                  work.
+     * @param infoText  information to show at bottom of dialog
+     */
+    public GradleQuickOutlineDialog(IAdaptable adaptable, Shell parent, String infoText) {
+        super(adaptable, parent, "EGradle quick outline", MIN_WIDTH, MIN_HEIGHT, infoText);
+        this.editor = adaptable.getAdapter(IExtendedEditor.class);
+    }
 
-	@Override
-	protected AbstractUIPlugin getUIPlugin() {
-		EditorActivator editorActivator = EditorActivator.getDefault();
-		return editorActivator;
-	}
+    @Override
+    protected AbstractUIPlugin getUIPlugin() {
+        EditorActivator editorActivator = EditorActivator.getDefault();
+        return editorActivator;
+    }
 
-	protected IStyledLabelProvider createdStyledLabelProvider() {
-		IStyledLabelProvider labelProvider = new GradleEditorOutlineLabelProvider();
-		return labelProvider;
-	}
+    protected IStyledLabelProvider createdStyledLabelProvider() {
+        IStyledLabelProvider labelProvider = new GradleEditorOutlineLabelProvider();
+        return labelProvider;
+    }
 
 }

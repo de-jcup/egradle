@@ -31,181 +31,174 @@ import org.eclipse.ui.PlatformUI;
 
 public class WorkingSetSupport {
 
-	/**
-	 * Resolve working sets for given projects
-	 * 
-	 * @param project
-	 *            project to scan for
-	 * @return list of working set data - never <code>null</code>
-	 */
-	public List<WorkingSetData> resolveWorkingSetsForProject(IProject project) {
-		if (project == null) {
-			return Collections.emptyList();
-		}
-		return resolveWorkingSetsForProjects(Collections.singletonList(project), getWorkingSetManager());
-	}
+    /**
+     * Resolve working sets for given projects
+     * 
+     * @param project project to scan for
+     * @return list of working set data - never <code>null</code>
+     */
+    public List<WorkingSetData> resolveWorkingSetsForProject(IProject project) {
+        if (project == null) {
+            return Collections.emptyList();
+        }
+        return resolveWorkingSetsForProjects(Collections.singletonList(project), getWorkingSetManager());
+    }
 
-	/**
-	 * Resolve working sets for given projects
-	 * 
-	 * @param projects
-	 *            projects to scan for
-	 * @return list of working set data - never <code>null</code>
-	 */
-	public List<WorkingSetData> resolveWorkingSetsForProjects(Collection<IProject> projects) {
-		return resolveWorkingSetsForProjects(projects, getWorkingSetManager());
-	}
+    /**
+     * Resolve working sets for given projects
+     * 
+     * @param projects projects to scan for
+     * @return list of working set data - never <code>null</code>
+     */
+    public List<WorkingSetData> resolveWorkingSetsForProjects(Collection<IProject> projects) {
+        return resolveWorkingSetsForProjects(projects, getWorkingSetManager());
+    }
 
-	/**
-	 * Resolve working sets for given projects
-	 * 
-	 * @param projects
-	 *            projects to scan for
-	 * @param manager
-	 *            working set manager
-	 * @return list of working set data - never <code>null</code>
-	 */
-	List<WorkingSetData> resolveWorkingSetsForProjects(Collection<IProject> projects, IWorkingSetManager manager) {
-		List<WorkingSetData> list = new ArrayList<>();
+    /**
+     * Resolve working sets for given projects
+     * 
+     * @param projects projects to scan for
+     * @param manager  working set manager
+     * @return list of working set data - never <code>null</code>
+     */
+    List<WorkingSetData> resolveWorkingSetsForProjects(Collection<IProject> projects, IWorkingSetManager manager) {
+        List<WorkingSetData> list = new ArrayList<>();
 
-		if (manager == null) {
-			return list;
-		}
-		IWorkingSet[] workingSets = manager.getAllWorkingSets();
+        if (manager == null) {
+            return list;
+        }
+        IWorkingSet[] workingSets = manager.getAllWorkingSets();
 
-		if (workingSets == null || workingSets.length == 0) {
-			return list;
-		}
-		for (IWorkingSet workingSet : workingSets) {
-			if (workingSet == null) {
-				continue;
-			}
-			try {
-				IAdaptable[] elements = workingSet.getElements();
-				if (elements == null || elements.length == 0) {
-					continue;
-				}
-				WorkingSetData data = new WorkingSetData();
-				data.workingSet = workingSet;
-				list.add(data);
+        if (workingSets == null || workingSets.length == 0) {
+            return list;
+        }
+        for (IWorkingSet workingSet : workingSets) {
+            if (workingSet == null) {
+                continue;
+            }
+            try {
+                IAdaptable[] elements = workingSet.getElements();
+                if (elements == null || elements.length == 0) {
+                    continue;
+                }
+                WorkingSetData data = new WorkingSetData();
+                data.workingSet = workingSet;
+                list.add(data);
 
-				for (IAdaptable adaptable : elements) {
-					IProject project = adaptable.getAdapter(IProject.class);
-					if (project == null) {
-						continue;
-					}
-					data.projectNamesContainedBefore.add(project.getName());
+                for (IAdaptable adaptable : elements) {
+                    IProject project = adaptable.getAdapter(IProject.class);
+                    if (project == null) {
+                        continue;
+                    }
+                    data.projectNamesContainedBefore.add(project.getName());
 
-				}
+                }
 
-			} catch (IllegalStateException e) {
-				/* ignore this working set */
-			}
-		}
-		return list;
+            } catch (IllegalStateException e) {
+                /* ignore this working set */
+            }
+        }
+        return list;
 
-	}
+    }
 
-	public static class WorkingSetData {
-		IWorkingSet workingSet;
-		Set<String> projectNamesContainedBefore = new TreeSet<>();
+    public static class WorkingSetData {
+        IWorkingSet workingSet;
+        Set<String> projectNamesContainedBefore = new TreeSet<>();
 
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
 
-			sb.append("WorkingSetData for:");
-			if (workingSet == null) {
-				sb.append("null");
-			} else {
-				sb.append(workingSet.getName());
-			}
-			sb.append(", contains:");
-			sb.append(projectNamesContainedBefore);
+            sb.append("WorkingSetData for:");
+            if (workingSet == null) {
+                sb.append("null");
+            } else {
+                sb.append(workingSet.getName());
+            }
+            sb.append(", contains:");
+            sb.append(projectNamesContainedBefore);
 
-			return sb.toString();
-		}
-	}
+            return sb.toString();
+        }
+    }
 
-	public void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects) {
-		restoreWorkingSetsForProjects(workingSetDataList, projects, getWorkingSetManager());
-	}
+    public void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects) {
+        restoreWorkingSetsForProjects(workingSetDataList, projects, getWorkingSetManager());
+    }
 
-	private IWorkingSetManager getWorkingSetManager() {
-		return PlatformUI.getWorkbench().getWorkingSetManager();
-	}
+    private IWorkingSetManager getWorkingSetManager() {
+        return PlatformUI.getWorkbench().getWorkingSetManager();
+    }
 
-	void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects,
-			IWorkingSetManager mockedManager) {
-		if (workingSetDataList == null || workingSetDataList.isEmpty()) {
-			return;
-		}
-		if (projects == null || projects.isEmpty()) {
-			return;
-		}
+    void restoreWorkingSetsForProjects(List<WorkingSetData> workingSetDataList, List<IProject> projects, IWorkingSetManager mockedManager) {
+        if (workingSetDataList == null || workingSetDataList.isEmpty()) {
+            return;
+        }
+        if (projects == null || projects.isEmpty()) {
+            return;
+        }
 
-		for (WorkingSetData data : workingSetDataList) {
-			if (data.projectNamesContainedBefore.isEmpty()) {
-				continue;
-			}
-			updateWorkingSet(data, projects);
-		}
+        for (WorkingSetData data : workingSetDataList) {
+            if (data.projectNamesContainedBefore.isEmpty()) {
+                continue;
+            }
+            updateWorkingSet(data, projects);
+        }
 
-	}
+    }
 
-	private void updateWorkingSet(WorkingSetData data, List<IProject> projects) {
-		IAdaptable[] elementsBefore = data.workingSet.getElements();
-		if (elementsBefore == null) {
-			elementsBefore = new IAdaptable[] {};
-		}
-		/* add existings */
+    private void updateWorkingSet(WorkingSetData data, List<IProject> projects) {
+        IAdaptable[] elementsBefore = data.workingSet.getElements();
+        if (elementsBefore == null) {
+            elementsBefore = new IAdaptable[] {};
+        }
+        /* add existings */
 
-		/* remove all still assigned projects from projectsToAdd */
-		List<IProject> projectsToAdd = removeProjectWhenAlreadyInWorkingSet(data, elementsBefore, projects);
-		IAdaptable[] newElements = buildNewElements(data, projectsToAdd, elementsBefore);
+        /* remove all still assigned projects from projectsToAdd */
+        List<IProject> projectsToAdd = removeProjectWhenAlreadyInWorkingSet(data, elementsBefore, projects);
+        IAdaptable[] newElements = buildNewElements(data, projectsToAdd, elementsBefore);
 
-		data.workingSet.setElements(newElements);
-	}
+        data.workingSet.setElements(newElements);
+    }
 
-	private IAdaptable[] buildNewElements(WorkingSetData data, List<IProject> projectsToAdd,
-			IAdaptable[] elementsBefore) {
-		List<IAdaptable> workingSetAdaptables = new ArrayList<>();
-		workingSetAdaptables.addAll(Arrays.asList(elementsBefore));
+    private IAdaptable[] buildNewElements(WorkingSetData data, List<IProject> projectsToAdd, IAdaptable[] elementsBefore) {
+        List<IAdaptable> workingSetAdaptables = new ArrayList<>();
+        workingSetAdaptables.addAll(Arrays.asList(elementsBefore));
 
-		for (IProject projectToAdd : projectsToAdd) {
-			if (data.projectNamesContainedBefore.contains(projectToAdd.getName())) {
-				workingSetAdaptables.add(projectToAdd);
-			}
-		}
-		return workingSetAdaptables.toArray(new IAdaptable[workingSetAdaptables.size()]);
-	}
+        for (IProject projectToAdd : projectsToAdd) {
+            if (data.projectNamesContainedBefore.contains(projectToAdd.getName())) {
+                workingSetAdaptables.add(projectToAdd);
+            }
+        }
+        return workingSetAdaptables.toArray(new IAdaptable[workingSetAdaptables.size()]);
+    }
 
-	private List<IProject> removeProjectWhenAlreadyInWorkingSet(WorkingSetData data, IAdaptable[] elementsBefore,
-			List<IProject> projects) {
-		List<IProject> projectsToAdd = new ArrayList<>(projects);
-		for (IProject project : projects) {
-			String projectName = project.getName();
+    private List<IProject> removeProjectWhenAlreadyInWorkingSet(WorkingSetData data, IAdaptable[] elementsBefore, List<IProject> projects) {
+        List<IProject> projectsToAdd = new ArrayList<>(projects);
+        for (IProject project : projects) {
+            String projectName = project.getName();
 
-			for (IAdaptable elementBefore : elementsBefore) {
-				if (!(elementBefore instanceof IProject)) {
-					elementBefore = elementBefore.getAdapter(IProject.class);
-					if (elementBefore == null) {
-						continue;
-					}
-				}
-				IProject projectBefore = (IProject) elementBefore;
+            for (IAdaptable elementBefore : elementsBefore) {
+                if (!(elementBefore instanceof IProject)) {
+                    elementBefore = elementBefore.getAdapter(IProject.class);
+                    if (elementBefore == null) {
+                        continue;
+                    }
+                }
+                IProject projectBefore = (IProject) elementBefore;
 
-				String projectBeforeName = projectBefore.getName();
-				if (!projectName.equals(projectBeforeName)) {
-					continue;
-				}
+                String projectBeforeName = projectBefore.getName();
+                if (!projectName.equals(projectBeforeName)) {
+                    continue;
+                }
 
-				if (data.projectNamesContainedBefore.contains(projectBeforeName)) {
-					projectsToAdd.remove(project);
-					break;
-				}
-			}
-		}
-		return projectsToAdd;
-	}
+                if (data.projectNamesContainedBefore.contains(projectBeforeName)) {
+                    projectsToAdd.remove(project);
+                    break;
+                }
+            }
+        }
+        return projectsToAdd;
+    }
 }

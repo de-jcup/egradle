@@ -20,8 +20,8 @@ import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 
 public class GradlePartitioner extends FastPartitioner {
 
-	public GradlePartitioner(IPartitionTokenScanner scanner, String[] legalContentTypes) {
-		super(scanner, legalContentTypes);
-	}
+    public GradlePartitioner(IPartitionTokenScanner scanner, String[] legalContentTypes) {
+        super(scanner, legalContentTypes);
+    }
 
 }

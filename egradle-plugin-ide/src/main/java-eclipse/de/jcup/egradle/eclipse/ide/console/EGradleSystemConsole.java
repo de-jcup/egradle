@@ -21,13 +21,13 @@ import org.eclipse.ui.console.MessageConsoleStream;
 
 public class EGradleSystemConsole extends MessageConsole {
 
-	public EGradleSystemConsole(String name, ImageDescriptor imageDescriptor) {
-		super(name, imageDescriptor);
-	}
+    public EGradleSystemConsole(String name, ImageDescriptor imageDescriptor) {
+        super(name, imageDescriptor);
+    }
 
-	@Override
-	public MessageConsoleStream newMessageStream() {
-		return super.newMessageStream();
-	}
+    @Override
+    public MessageConsoleStream newMessageStream() {
+        return super.newMessageStream();
+    }
 
 }

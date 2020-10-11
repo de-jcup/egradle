@@ -42,127 +42,124 @@ import de.jcup.egradle.junit.JUnitResultsCompressor;
 
 public class ImportGradleJunitResultsJob extends EGradlePostBuildJob {
 
-	XMLWriter writer = new XMLWriter();
-	JUnitResultsCompressor compressor = new JUnitResultsCompressor();
-	JUnitResultFilesFinder finder = new JUnitResultFilesFinder();
-	private String projectname;
-	private boolean ignoreOnValdationErrors;
+    XMLWriter writer = new XMLWriter();
+    JUnitResultsCompressor compressor = new JUnitResultsCompressor();
+    JUnitResultFilesFinder finder = new JUnitResultFilesFinder();
+    private String projectname;
+    private boolean ignoreOnValdationErrors;
 
-	public ImportGradleJunitResultsJob(String name, String projectname, boolean ignoreOnValidationErrors) {
-		super(name);
-		this.projectname = projectname;
-		this.ignoreOnValdationErrors = ignoreOnValidationErrors;
-	}
+    public ImportGradleJunitResultsJob(String name, String projectname, boolean ignoreOnValidationErrors) {
+        super(name);
+        this.projectname = projectname;
+        this.ignoreOnValdationErrors = ignoreOnValidationErrors;
+    }
 
-	@Override
-	protected IStatus run(IProgressMonitor _monitor) {
-		if (ignoreOnValdationErrors) {
-			if (existsValidationErrors()) {
-				return Status.CANCEL_STATUS;
-			}
-		}
-		SubMonitor monitor = SubMonitor.convert(_monitor);
-		monitor.beginTask("Import junit results from gradle", 100);
-		File tempFile = new File(getTempFolder(), "TEST-egradle-all-testresults.tmp.xml");
-		try {
-			/* remove old temp file if existing */
-			if (tempFile.exists()) {
-				if (!tempFile.delete()) {
-					throw new IOException("Cannot delete temporary file for gradle results!");
-				}
-			}
+    @Override
+    protected IStatus run(IProgressMonitor _monitor) {
+        if (ignoreOnValdationErrors) {
+            if (existsValidationErrors()) {
+                return Status.CANCEL_STATUS;
+            }
+        }
+        SubMonitor monitor = SubMonitor.convert(_monitor);
+        monitor.beginTask("Import junit results from gradle", 100);
+        File tempFile = new File(getTempFolder(), "TEST-egradle-all-testresults.tmp.xml");
+        try {
+            /* remove old temp file if existing */
+            if (tempFile.exists()) {
+                if (!tempFile.delete()) {
+                    throw new IOException("Cannot delete temporary file for gradle results!");
+                }
+            }
 
-			String projectNameToShow = buildProjectNameToUse();
-			/* fetch files */
-			String taskName = "Fetching gradle junit result files from '" + projectNameToShow + "'";
-			outputToSystemConsole(taskName);
-			monitor.setTaskName(taskName);
-			File rootFolder = getRootProjectFolder();
+            String projectNameToShow = buildProjectNameToUse();
+            /* fetch files */
+            String taskName = "Fetching gradle junit result files from '" + projectNameToShow + "'";
+            outputToSystemConsole(taskName);
+            monitor.setTaskName(taskName);
+            File rootFolder = getRootProjectFolder();
 
-			Collection<File> files = finder.findTestFilesInFolder(rootFolder, projectname);
-			if (files.isEmpty()) {
-				monitor.worked(100);
+            Collection<File> files = finder.findTestFilesInFolder(rootFolder, projectname);
+            if (files.isEmpty()) {
+                monitor.worked(100);
 
-				/*
-				 * we have not test files found - if former build failed and was
-				 * a "clean test" all fromer results were cleaned before. if
-				 * there is not at least one test, this means the compile task
-				 * was not successful
-				 */
-				if (hasBuildInfo()) {
-					if (getBuildInfo().hasBuildFailed()) {
-						return Status.CANCEL_STATUS;
-					}
-				}
-				safeAsyncExec(new Runnable() {
+                /*
+                 * we have not test files found - if former build failed and was a "clean test"
+                 * all fromer results were cleaned before. if there is not at least one test,
+                 * this means the compile task was not successful
+                 */
+                if (hasBuildInfo()) {
+                    if (getBuildInfo().hasBuildFailed()) {
+                        return Status.CANCEL_STATUS;
+                    }
+                }
+                safeAsyncExec(new Runnable() {
 
-					@Override
-					public void run() {
-						monitor.worked(100);
-						MessageDialog.openInformation(getActiveWorkbenchShell(), "No test results found",
-								"There are no test results to import from " + projectNameToShow + " at:\n'"
-										+ rootFolder.getAbsolutePath()
-										+ "'\n\nEither there are no tests or tests are not executed");
-					}
-				});
-				return Status.CANCEL_STATUS;
+                    @Override
+                    public void run() {
+                        monitor.worked(100);
+                        MessageDialog.openInformation(getActiveWorkbenchShell(), "No test results found", "There are no test results to import from " + projectNameToShow + " at:\n'"
+                                + rootFolder.getAbsolutePath() + "'\n\nEither there are no tests or tests are not executed");
+                    }
+                });
+                return Status.CANCEL_STATUS;
 
-			}
-			List<InputStream> streams = new ArrayList<>();
-			for (File file : files) {
-				streams.add(new FileInputStream(file));
-			}
-			monitor.worked(40);
+            }
+            List<InputStream> streams = new ArrayList<>();
+            for (File file : files) {
+                streams.add(new FileInputStream(file));
+            }
+            monitor.worked(40);
 
-			/* compress */
-			monitor.setTaskName("Compress results for import");
-			Document singleDoc = compressor.compress(streams);
-			monitor.worked(60);
+            /* compress */
+            monitor.setTaskName("Compress results for import");
+            Document singleDoc = compressor.compress(streams);
+            monitor.worked(60);
 
-			/* write to file */
-			monitor.setTaskName("Create temp file");
-			tempFile.getParentFile().mkdirs();
-			if (!tempFile.createNewFile()) {
-				throw new IOException("Cannot create empty temp file!");
-			}
-			writer.writeDocumentToFile(singleDoc, tempFile);
-			monitor.worked(80);
+            /* write to file */
+            monitor.setTaskName("Create temp file");
+            tempFile.getParentFile().mkdirs();
+            if (!tempFile.createNewFile()) {
+                throw new IOException("Cannot create empty temp file!");
+            }
+            writer.writeDocumentToFile(singleDoc, tempFile);
+            monitor.worked(80);
 
-			/* show inside junit viewer */
-			monitor.setTaskName("Load into junit view");
+            /* show inside junit viewer */
+            monitor.setTaskName("Load into junit view");
 
-			// JUnitCore.importTestRunSession(tempFile.toURI().toURL().toExternalForm(),
-			// monitor);
-			JUnitCore.importTestRunSession(tempFile);
-			monitor.worked(90);
+            // JUnitCore.importTestRunSession(tempFile.toURI().toURL().toExternalForm(),
+            // monitor);
+            JUnitCore.importTestRunSession(tempFile);
+            monitor.worked(90);
 
-			monitor.setTaskName("Open test results in view");
-			safeAsyncExec(new Runnable() {
+            monitor.setTaskName("Open test results in view");
+            safeAsyncExec(new Runnable() {
 
-				@Override
-				public void run() {
-					JunitContributionUtil.showTestRunnerViewPartInActivePage();
-					monitor.worked(100);
-				}
-			});
-		} catch (Exception e) {
-			outputToSystemConsole(Constants.CONSOLE_FAILED);
-			// return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot
-			// import junit results", e);
-			return Status.CANCEL_STATUS;
-		} finally {
-			monitor.done();
-		}
-		outputToSystemConsole(Constants.CONSOLE_OK);
-		return Status.OK_STATUS;
-	}
+                @Override
+                public void run() {
+                    JunitContributionUtil.showTestRunnerViewPartInActivePage();
+                    monitor.worked(100);
+                }
+            });
+        } catch (Exception e) {
+            outputToSystemConsole(Constants.CONSOLE_FAILED);
+            // return new Status(Status.ERROR, Activator.PLUGIN_ID, "Cannot
+            // import junit results", e);
+            return Status.CANCEL_STATUS;
+        } finally {
+            monitor.done();
+        }
+        outputToSystemConsole(Constants.CONSOLE_OK);
+        return Status.OK_STATUS;
+    }
 
-	private String buildProjectNameToUse() {
-		if (projectname == null) {
-			return "rootproject";
-		} else {
-			return "project '" + projectname + "'";
-		}
-	}
+    private String buildProjectNameToUse() {
+        if (projectname == null) {
+            return "rootproject";
+        } else {
+            return "project '" + projectname + "'";
+        }
+    }
 
 }

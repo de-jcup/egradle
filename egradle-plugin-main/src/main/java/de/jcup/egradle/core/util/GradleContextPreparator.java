@@ -19,5 +19,5 @@ import de.jcup.egradle.core.domain.GradleContext;
 
 public interface GradleContextPreparator {
 
-	public void prepare(GradleContext context);
+    public void prepare(GradleContext context);
 }

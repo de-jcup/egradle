@@ -18,22 +18,22 @@ package de.jcup.egradle.eclipse.document;
 // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
 public enum JavaLiteralKeyWords implements DocumentKeyWord {
 
-	NULL("null"),
+    NULL("null"),
 
-	TRUE("true"),
+    TRUE("true"),
 
-	FALSE("false")
+    FALSE("false")
 
-	;
+    ;
 
-	private String text;
+    private String text;
 
-	private JavaLiteralKeyWords(String text) {
-		this.text = text;
-	}
+    private JavaLiteralKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

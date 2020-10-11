@@ -41,64 +41,63 @@ import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
  */
 public class DetectNewRootProjectHandler extends AbstractHandler {
 
-	private GradleRootProjectParentScanner scanner;
+    private GradleRootProjectParentScanner scanner;
 
-	public DetectNewRootProjectHandler() {
-		scanner = new GradleRootProjectParentScanner();
-	}
+    public DetectNewRootProjectHandler() {
+        scanner = new GradleRootProjectParentScanner();
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		ISelection selection = HandlerUtil.getCurrentSelection(event);
-		if (!(selection instanceof IStructuredSelection)) {
-			return null;
-		}
-		/* get project from selection or do guard close */
-		IStructuredSelection ssel = (IStructuredSelection) selection;
-		Object element = ssel.getFirstElement();
-		IProject project = null;
-		if (element instanceof IProject) {
-			project = (IProject) element;
-		} else if (element instanceof IResource) {
-			project = ((IResource) element).getProject();
-		} else if (element instanceof IAdaptable) {
-			IAdaptable adaptable = (IAdaptable) element;
-			project = adaptable.getAdapter(IProject.class);
-		}
-		if (project == null) {
-			/* guard close */
-			return null;
-		}
-		File start = null;
-		try {
-			start = EclipseResourceHelper.DEFAULT.toFile(project);
-		} catch (CoreException e) {
-			IDEUtil.logError("Was not able to convert to file - project:" + project, e);
-			EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project conversion problems");
-			return null;
-		}
-		if (start == null) {
-			/* should never happen */
-			EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project file NULL");
-			return null;
-		}
-		/* resolve next root project path */
-		File newRootFolder = scanner.scanForParentRootProject(start, 3);
-		if (newRootFolder == null) {
-			EGradleMessageDialogSupport.INSTANCE
-					.showWarning("Was not able to locate a new rootproject from '" + project.getName() + "'");
-			return null;
-		}
-		/* okay - root folder available */
-		try {
-			IDEUtil.setNewRootProjectFolder(newRootFolder);
-		} catch (CoreException e) {
-			IDEUtil.logError("Was not able to set new root project folder:" + newRootFolder, e);
-			EGradleMessageDialogSupport.INSTANCE.showError(e.getMessage());
-			return null;
-		}
-		return null;
-	}
+        ISelection selection = HandlerUtil.getCurrentSelection(event);
+        if (!(selection instanceof IStructuredSelection)) {
+            return null;
+        }
+        /* get project from selection or do guard close */
+        IStructuredSelection ssel = (IStructuredSelection) selection;
+        Object element = ssel.getFirstElement();
+        IProject project = null;
+        if (element instanceof IProject) {
+            project = (IProject) element;
+        } else if (element instanceof IResource) {
+            project = ((IResource) element).getProject();
+        } else if (element instanceof IAdaptable) {
+            IAdaptable adaptable = (IAdaptable) element;
+            project = adaptable.getAdapter(IProject.class);
+        }
+        if (project == null) {
+            /* guard close */
+            return null;
+        }
+        File start = null;
+        try {
+            start = EclipseResourceHelper.DEFAULT.toFile(project);
+        } catch (CoreException e) {
+            IDEUtil.logError("Was not able to convert to file - project:" + project, e);
+            EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project conversion problems");
+            return null;
+        }
+        if (start == null) {
+            /* should never happen */
+            EGradleMessageDialogSupport.INSTANCE.showError("Cannot setup because project file NULL");
+            return null;
+        }
+        /* resolve next root project path */
+        File newRootFolder = scanner.scanForParentRootProject(start, 3);
+        if (newRootFolder == null) {
+            EGradleMessageDialogSupport.INSTANCE.showWarning("Was not able to locate a new rootproject from '" + project.getName() + "'");
+            return null;
+        }
+        /* okay - root folder available */
+        try {
+            IDEUtil.setNewRootProjectFolder(newRootFolder);
+        } catch (CoreException e) {
+            IDEUtil.logError("Was not able to set new root project folder:" + newRootFolder, e);
+            EGradleMessageDialogSupport.INSTANCE.showError(e.getMessage());
+            return null;
+        }
+        return null;
+    }
 
 }

@@ -17,11 +17,11 @@ package de.jcup.egradle.codeassist.dsl;
 
 public interface ModifiableProperty extends Property {
 
-	public void setType(Type returnType);
+    public void setType(Type returnType);
 
-	public void setParent(Type parentType);
+    public void setParent(Type parentType);
 
-	public void setDocumented(boolean partOfGradleDSLDocumentation);
+    public void setDocumented(boolean partOfGradleDSLDocumentation);
 
-	public void setDescription(String description);
+    public void setDescription(String description);
 }

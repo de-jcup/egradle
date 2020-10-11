@@ -27,10 +27,9 @@ import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
  */
 public class EGradleJunitPreferenceInitializer extends AbstractPreferenceInitializer {
 
-	public void initializeDefaultPreferences() {
-		IPreferenceStore store = JUNIT_PREFERENCES.getPreferenceStore();
-		store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(),
-				EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId());
-	}
+    public void initializeDefaultPreferences() {
+        IPreferenceStore store = JUNIT_PREFERENCES.getPreferenceStore();
+        store.setDefault(EGradleJunitPreferenceConstants.P_TEST_TASKS.getId(), EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId());
+    }
 
 }

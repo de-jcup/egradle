@@ -28,40 +28,40 @@ import de.jcup.egradle.eclipse.api.VariableProvider;
 
 public class VariablesProviderRegistry {
 
-	private static final String VARIABLE_PROVIDER_ID = "de.jcup.egradle.eclipse.extension.variableprovider";
-	public static VariablesProviderRegistry INSTANCE = new VariablesProviderRegistry();
+    private static final String VARIABLE_PROVIDER_ID = "de.jcup.egradle.eclipse.extension.variableprovider";
+    public static VariablesProviderRegistry INSTANCE = new VariablesProviderRegistry();
 
-	private List<VariableProvider> providers;
+    private List<VariableProvider> providers;
 
-	public VariablesProviderRegistry() {
+    public VariablesProviderRegistry() {
 
-		List<VariableProvider> variableProviders = new ArrayList<>();
+        List<VariableProvider> variableProviders = new ArrayList<>();
 
-		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		IConfigurationElement[] config = registry.getConfigurationElementsFor(VARIABLE_PROVIDER_ID);
-		try {
-			for (IConfigurationElement e : config) {
-				final Object o = e.createExecutableExtension("class");
-				if (o instanceof VariableProvider) {
-					VariableProvider provider = (VariableProvider) o;
-					variableProviders.add(provider);
-				}
-			}
+        IExtensionRegistry registry = Platform.getExtensionRegistry();
+        IConfigurationElement[] config = registry.getConfigurationElementsFor(VARIABLE_PROVIDER_ID);
+        try {
+            for (IConfigurationElement e : config) {
+                final Object o = e.createExecutableExtension("class");
+                if (o instanceof VariableProvider) {
+                    VariableProvider provider = (VariableProvider) o;
+                    variableProviders.add(provider);
+                }
+            }
 
-		} catch (CoreException ex) {
-			EclipseUtil.logError("Was not able to initialize variable providers registry", ex);
-		}
+        } catch (CoreException ex) {
+            EclipseUtil.logError("Was not able to initialize variable providers registry", ex);
+        }
 
-		providers = Collections.unmodifiableList(variableProviders);
+        providers = Collections.unmodifiableList(variableProviders);
 
-	}
+    }
 
-	/**
-	 * Returns registered providers as an immutable list
-	 * 
-	 * @return unmodifiable list of providers
-	 */
-	public List<VariableProvider> getProviders() {
-		return providers;
-	}
+    /**
+     * Returns registered providers as an immutable list
+     * 
+     * @return unmodifiable list of providers
+     */
+    public List<VariableProvider> getProviders() {
+        return providers;
+    }
 }

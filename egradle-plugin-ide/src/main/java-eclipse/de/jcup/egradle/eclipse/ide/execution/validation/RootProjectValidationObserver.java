@@ -23,19 +23,18 @@ package de.jcup.egradle.eclipse.ide.execution.validation;
  */
 public interface RootProjectValidationObserver {
 
-	/**
-	 * Handle valdiation is running or not
-	 * 
-	 * @param running
-	 */
-	public void handleValidationRunning(boolean running);
+    /**
+     * Handle valdiation is running or not
+     * 
+     * @param running
+     */
+    public void handleValidationRunning(boolean running);
 
-	/**
-	 * Handle validation result
-	 * 
-	 * @param valid
-	 *            - validation result
-	 */
-	public void handleValidationResult(boolean valid);
+    /**
+     * Handle validation result
+     * 
+     * @param valid - validation result
+     */
+    public void handleValidationResult(boolean valid);
 
 }

@@ -24,25 +24,25 @@ import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 
 public class XMLTypeSchemaGenerator {
-	public static void main(String[] args) throws Exception {
-		new XMLTypeSchemaGenerator().generate();
-	}
+    public static void main(String[] args) throws Exception {
+        new XMLTypeSchemaGenerator().generate();
+    }
 
-	private void generate() throws Exception {
-		JAXBContext jaxbContext = JAXBContext.newInstance(XMLType.class);
-		SchemaOutputResolver sor = new TypeSchemaOutputResolver();
-		jaxbContext.generateSchema(sor);
-	}
+    private void generate() throws Exception {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XMLType.class);
+        SchemaOutputResolver sor = new TypeSchemaOutputResolver();
+        jaxbContext.generateSchema(sor);
+    }
 
-	private class TypeSchemaOutputResolver extends SchemaOutputResolver {
+    private class TypeSchemaOutputResolver extends SchemaOutputResolver {
 
-		@Override
-		public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-			File file = new File(suggestedFileName);
-			StreamResult result = new StreamResult(file);
-			result.setSystemId(file.toURI().toURL().toString());
-			return result;
-		}
+        @Override
+        public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+            File file = new File(suggestedFileName);
+            StreamResult result = new StreamResult(file);
+            result.setSystemId(file.toURI().toURL().toString());
+            return result;
+        }
 
-	}
+    }
 }

@@ -23,10 +23,10 @@ import de.jcup.egradle.eclipse.util.ColorManager;
 
 public class GroovyDefaultTextScanner extends RuleBasedScanner {
 
-	public GroovyDefaultTextScanner(ColorManager manager) {
-		IRule[] rules = new IRule[1];
-		rules[0] = new WhitespaceRule(new GroovyWhitespaceDetector());
+    public GroovyDefaultTextScanner(ColorManager manager) {
+        IRule[] rules = new IRule[1];
+        rules[0] = new WhitespaceRule(new GroovyWhitespaceDetector());
 
-		setRules(rules);
-	}
+        setRules(rules);
+    }
 }

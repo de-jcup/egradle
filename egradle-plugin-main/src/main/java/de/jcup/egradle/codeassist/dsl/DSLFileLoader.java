@@ -23,18 +23,17 @@ import de.jcup.egradle.codeassist.CodeCompletionService;
 
 public interface DSLFileLoader extends CodeCompletionService {
 
-	/**
-	 * Loads DSL type for given full type name
-	 * 
-	 * @param name
-	 *            name of type
-	 * @return type
-	 * @throws IOException
-	 */
-	Type loadType(String name) throws IOException;
+    /**
+     * Loads DSL type for given full type name
+     * 
+     * @param name name of type
+     * @return type
+     * @throws IOException
+     */
+    Type loadType(String name) throws IOException;
 
-	Set<Plugin> loadPlugins() throws IOException;
+    Set<Plugin> loadPlugins() throws IOException;
 
-	Map<String, String> loadApiMappings() throws IOException;
+    Map<String, String> loadApiMappings() throws IOException;
 
 }

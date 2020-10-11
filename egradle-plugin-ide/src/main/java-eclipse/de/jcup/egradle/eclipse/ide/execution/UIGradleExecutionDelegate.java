@@ -29,81 +29,77 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class UIGradleExecutionDelegate extends GradleExecutionDelegate {
 
-	private boolean refreshProjects = true;
-	private boolean showEGradleSystemConsole = true;
-	private boolean cleanProjects;
-	private boolean buildAfterClean;
-	private ProjectContext projectContext;
-	private Runnable afterExecution;
+    private boolean refreshProjects = true;
+    private boolean showEGradleSystemConsole = true;
+    private boolean cleanProjects;
+    private boolean buildAfterClean;
+    private ProjectContext projectContext;
+    private Runnable afterExecution;
 
-	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
-		this(outputHandler, processExecutor, additionalContextPreparator, null);
-	}
+    public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator) throws GradleExecutionException {
+        this(outputHandler, processExecutor, additionalContextPreparator, null);
+    }
 
-	public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
-			throws GradleExecutionException {
-		super(outputHandler, processExecutor, additionalContextPreparator, rootProject);
-	}
+    public UIGradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
+            throws GradleExecutionException {
+        super(outputHandler, processExecutor, additionalContextPreparator, rootProject);
+    }
 
-	/**
-	 * Set project context
-	 * 
-	 * @param projectContext
-	 *            - if null every project in workspace is targeted on multi
-	 *            project operations (e.g. clean/build etc.)
-	 */
-	public void setProjectContext(ProjectContext projectContext) {
-		this.projectContext = projectContext;
-	}
+    /**
+     * Set project context
+     * 
+     * @param projectContext - if null every project in workspace is targeted on
+     *                       multi project operations (e.g. clean/build etc.)
+     */
+    public void setProjectContext(ProjectContext projectContext) {
+        this.projectContext = projectContext;
+    }
 
-	public void setRefreshProjects(boolean refreshAllProjects) {
-		this.refreshProjects = refreshAllProjects;
-	}
+    public void setRefreshProjects(boolean refreshAllProjects) {
+        this.refreshProjects = refreshAllProjects;
+    }
 
-	public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
-		this.showEGradleSystemConsole = showEGradleSystemConsole;
-	}
+    public void setShowEGradleSystemConsole(boolean showEGradleSystemConsole) {
+        this.showEGradleSystemConsole = showEGradleSystemConsole;
+    }
 
-	public void setCleanProjects(boolean cleanProjects, boolean buildAfterClean) {
-		this.cleanProjects = cleanProjects;
-		this.buildAfterClean = buildAfterClean;
-	}
+    public void setCleanProjects(boolean cleanProjects, boolean buildAfterClean) {
+        this.cleanProjects = cleanProjects;
+        this.buildAfterClean = buildAfterClean;
+    }
 
-	@Override
-	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
-		super.beforeExecutionDone(monitor);
-		if (showEGradleSystemConsole) {
-			openSystemConsole(true);
-		}
-	}
+    @Override
+    protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
+        super.beforeExecutionDone(monitor);
+        if (showEGradleSystemConsole) {
+            openSystemConsole(true);
+        }
+    }
 
-	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
-		monitor.worked(1);
-		if (refreshProjects) {
-			refreshProjects(projectContext, monitor);
-		}
-		if (cleanProjects) {
-			IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
-			cleanProjects(projectContext, buildAfterClean, window, monitor);
-		}
-		super.afterExecutionDone(monitor);
-		monitor.worked(2);
+    protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
+        monitor.worked(1);
+        if (refreshProjects) {
+            refreshProjects(projectContext, monitor);
+        }
+        if (cleanProjects) {
+            IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
+            cleanProjects(projectContext, buildAfterClean, window, monitor);
+        }
+        super.afterExecutionDone(monitor);
+        monitor.worked(2);
 
-		if (afterExecution != null) {
-			afterExecution.run();
-		}
-	}
+        if (afterExecution != null) {
+            afterExecution.run();
+        }
+    }
 
-	/**
-	 * When set, given runnable will executed after execution was successfully
-	 * done
-	 * 
-	 * @param runnable
-	 */
-	public void setAfterExecution(Runnable runnable) {
-		this.afterExecution = runnable;
-	}
+    /**
+     * When set, given runnable will executed after execution was successfully done
+     * 
+     * @param runnable
+     */
+    public void setAfterExecution(Runnable runnable) {
+        this.afterExecution = runnable;
+    }
 
 }

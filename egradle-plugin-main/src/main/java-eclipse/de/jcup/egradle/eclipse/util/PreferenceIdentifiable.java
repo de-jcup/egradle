@@ -17,5 +17,5 @@ package de.jcup.egradle.eclipse.util;
 
 public interface PreferenceIdentifiable {
 
-	public String getId();
+    public String getId();
 }

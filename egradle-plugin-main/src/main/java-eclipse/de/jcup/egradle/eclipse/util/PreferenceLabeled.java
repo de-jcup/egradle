@@ -17,5 +17,5 @@ package de.jcup.egradle.eclipse.util;
 
 public interface PreferenceLabeled {
 
-	public String getLabelText();
+    public String getLabelText();
 }

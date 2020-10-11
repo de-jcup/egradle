@@ -24,13 +24,13 @@ import java.io.InputStream;
  *
  */
 public class GradleModelBuilder extends AbstractGroovyModelBuilder {
-	public GradleModelBuilder(InputStream is) {
-		this.is = is;
-	}
+    public GradleModelBuilder(InputStream is) {
+        this.is = is;
+    }
 
-	@Override
-	protected AbstractGroovyModelBuilderSupport createModelBuilderSupport() {
-		return new GradleModelBuilderSupport();
-	}
+    @Override
+    protected AbstractGroovyModelBuilderSupport createModelBuilderSupport() {
+        return new GradleModelBuilderSupport();
+    }
 
 }

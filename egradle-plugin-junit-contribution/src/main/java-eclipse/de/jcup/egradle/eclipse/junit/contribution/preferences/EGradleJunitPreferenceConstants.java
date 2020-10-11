@@ -20,18 +20,18 @@ package de.jcup.egradle.eclipse.junit.contribution.preferences;
  */
 public enum EGradleJunitPreferenceConstants {
 
-	/**
-	 * Tasks which are executed on test
-	 */
-	P_TEST_TASKS("testTasks");
+    /**
+     * Tasks which are executed on test
+     */
+    P_TEST_TASKS("testTasks");
 
-	private String id;
+    private String id;
 
-	private EGradleJunitPreferenceConstants(String id) {
-		this.id = id;
-	}
+    private EGradleJunitPreferenceConstants(String id) {
+        this.id = id;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 }

@@ -26,51 +26,51 @@ import de.jcup.egradle.core.domain.CancelStateProvider.NeverCanceled;
 
 public class GradleContextTest {
 
-	private MutableGradleConfiguration configuration;
-	private GradleRootProject rootProject;
-	private GradleContext contextToTest;
-	private CancelStateProvider mockedCancelStateProvider;
+    private MutableGradleConfiguration configuration;
+    private GradleRootProject rootProject;
+    private GradleContext contextToTest;
+    private CancelStateProvider mockedCancelStateProvider;
 
-	@Before
-	public void before() {
-		rootProject = mock(GradleRootProject.class);
-		configuration = mock(MutableGradleConfiguration.class);
-		contextToTest = new GradleContext(rootProject, configuration);
-		mockedCancelStateProvider = mock(CancelStateProvider.class);
-	}
+    @Before
+    public void before() {
+        rootProject = mock(GradleRootProject.class);
+        configuration = mock(MutableGradleConfiguration.class);
+        contextToTest = new GradleContext(rootProject, configuration);
+        mockedCancelStateProvider = mock(CancelStateProvider.class);
+    }
 
-	@Test
-	public void environment_is_not_null() {
-		assertNotNull(contextToTest.getEnvironment());
-	}
+    @Test
+    public void environment_is_not_null() {
+        assertNotNull(contextToTest.getEnvironment());
+    }
 
-	@Test
-	public void gradleProperties_are_not_null() {
-		assertNotNull(contextToTest.getGradleProperties());
-	}
+    @Test
+    public void gradleProperties_are_not_null() {
+        assertNotNull(contextToTest.getGradleProperties());
+    }
 
-	@Test
-	public void systemProperties_are_not_null() {
-		assertNotNull(contextToTest.getSystemProperties());
-	}
+    @Test
+    public void systemProperties_are_not_null() {
+        assertNotNull(contextToTest.getSystemProperties());
+    }
 
-	@Test
-	public void registered_cancelstate_provicer_is_returned() {
+    @Test
+    public void registered_cancelstate_provicer_is_returned() {
 
-		contextToTest.register(mockedCancelStateProvider);
+        contextToTest.register(mockedCancelStateProvider);
 
-		/* test */
-		assertEquals(mockedCancelStateProvider, contextToTest.getCancelStateProvider());
-	}
+        /* test */
+        assertEquals(mockedCancelStateProvider, contextToTest.getCancelStateProvider());
+    }
 
-	@Test
-	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_not_null() {
-		assertNotNull(contextToTest.getCancelStateProvider());
-	}
+    @Test
+    public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_not_null() {
+        assertNotNull(contextToTest.getCancelStateProvider());
+    }
 
-	@Test
-	public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_returns_a_never_canceld_instance() {
-		assertTrue(contextToTest.getCancelStateProvider() instanceof NeverCanceled);
-	}
+    @Test
+    public void when_cancelStateProvider_not_set_a_getCancelStateProviderReturns_returns_a_never_canceld_instance() {
+        assertTrue(contextToTest.getCancelStateProvider() instanceof NeverCanceled);
+    }
 
 }

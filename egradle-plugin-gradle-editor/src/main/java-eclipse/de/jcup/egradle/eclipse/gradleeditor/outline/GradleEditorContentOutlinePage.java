@@ -29,93 +29,91 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleEditorContentOutlinePage extends AbstractGroovyBasedContentOutlinePage {
 
-	private static ImageDescriptor IMG_DESC_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/synced.png",
-			EditorActivator.PLUGIN_ID);
-	private static ImageDescriptor IMG_DESC_NOT_LINKED = EclipseUtil
-			.createImageDescriptor("/icons/outline/sync_broken.png", EditorActivator.PLUGIN_ID);
+    private static ImageDescriptor IMG_DESC_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/synced.png", EditorActivator.PLUGIN_ID);
+    private static ImageDescriptor IMG_DESC_NOT_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/sync_broken.png", EditorActivator.PLUGIN_ID);
 
-	public GradleEditorContentOutlinePage(IAdaptable adaptable) {
-		super(adaptable);
-	}
+    public GradleEditorContentOutlinePage(IAdaptable adaptable) {
+        super(adaptable);
+    }
 
-	protected GradleEditorOutlineLabelProvider createStyledLabelProvider() {
-		return new GradleEditorOutlineLabelProvider();
-	}
+    protected GradleEditorOutlineLabelProvider createStyledLabelProvider() {
+        return new GradleEditorOutlineLabelProvider();
+    }
 
-	protected ImageDescriptor getImageDescriptionForLinked() {
-		return IMG_DESC_LINKED;
-	}
+    protected ImageDescriptor getImageDescriptionForLinked() {
+        return IMG_DESC_LINKED;
+    }
 
-	protected ImageDescriptor getImageDescriptionNotLinked() {
-		return IMG_DESC_NOT_LINKED;
-	}
+    protected ImageDescriptor getImageDescriptionNotLinked() {
+        return IMG_DESC_NOT_LINKED;
+    }
 
-	protected String getPluginId() {
-		return EditorActivator.PLUGIN_ID;
-	}
+    protected String getPluginId() {
+        return EditorActivator.PLUGIN_ID;
+    }
 
-	protected void handleDebugOptions(IMenuManager viewMenuManager) {
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
+    protected void handleDebugOptions(IMenuManager viewMenuManager) {
+        if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
 
-			ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
-			ShowGradleOutlineUnfilteredAction showGradleOutlineUnfilteredAction = new ShowGradleOutlineUnfilteredAction();
-			ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
+            ShowGradleOutlineModelAction showGradleOutlineModelAction = new ShowGradleOutlineModelAction();
+            ShowGradleOutlineUnfilteredAction showGradleOutlineUnfilteredAction = new ShowGradleOutlineUnfilteredAction();
+            ShowGroovyFullAntlrModelAction showGroovyFullAntlrModelAction = new ShowGroovyFullAntlrModelAction();
 
-			viewMenuManager.add(showGroovyFullAntlrModelAction);
-			viewMenuManager.add(showGradleOutlineModelAction);
-			viewMenuManager.add(showGradleOutlineUnfilteredAction);
-		}
-	}
+            viewMenuManager.add(showGroovyFullAntlrModelAction);
+            viewMenuManager.add(showGradleOutlineModelAction);
+            viewMenuManager.add(showGradleOutlineUnfilteredAction);
+        }
+    }
 
-	private abstract class ChangeModelTypeAction extends Action {
+    private abstract class ChangeModelTypeAction extends Action {
 
-		protected ChangeModelTypeAction() {
-			setText("Reload as:" + changeTo());
-		}
+        protected ChangeModelTypeAction() {
+            setText("Reload as:" + changeTo());
+        }
 
-		@Override
-		public void run() {
-			if (contentProvider instanceof AbstractGroovyBasedEditorOutlineContentProvider) {
-				AbstractGroovyBasedEditorOutlineContentProvider gcp = (AbstractGroovyBasedEditorOutlineContentProvider) contentProvider;
-				gcp.setModelType(changeTo());
-				gcp.clearModelCache();
-				getTreeViewer().refresh();
-			}
-		}
+        @Override
+        public void run() {
+            if (contentProvider instanceof AbstractGroovyBasedEditorOutlineContentProvider) {
+                AbstractGroovyBasedEditorOutlineContentProvider gcp = (AbstractGroovyBasedEditorOutlineContentProvider) contentProvider;
+                gcp.setModelType(changeTo());
+                gcp.clearModelCache();
+                getTreeViewer().refresh();
+            }
+        }
 
-		protected abstract GroovyBasedModelType changeTo();
-	}
+        protected abstract GroovyBasedModelType changeTo();
+    }
 
-	private class ShowGradleOutlineModelAction extends ChangeModelTypeAction {
+    private class ShowGradleOutlineModelAction extends ChangeModelTypeAction {
 
-		@Override
-		protected GroovyBasedModelType changeTo() {
-			return GradleModelTypes.GRADLE;
-		}
+        @Override
+        protected GroovyBasedModelType changeTo() {
+            return GradleModelTypes.GRADLE;
+        }
 
-	}
+    }
 
-	private class ShowGradleOutlineUnfilteredAction extends ChangeModelTypeAction {
+    private class ShowGradleOutlineUnfilteredAction extends ChangeModelTypeAction {
 
-		@Override
-		protected GroovyBasedModelType changeTo() {
-			return GradleModelTypes.GRADLE__UNFILTERED;
-		}
+        @Override
+        protected GroovyBasedModelType changeTo() {
+            return GradleModelTypes.GRADLE__UNFILTERED;
+        }
 
-	}
+    }
 
-	private class ShowGroovyFullAntlrModelAction extends ChangeModelTypeAction {
+    private class ShowGroovyFullAntlrModelAction extends ChangeModelTypeAction {
 
-		@Override
-		protected GroovyBasedModelType changeTo() {
-			return GradleModelTypes.GROOVY_FULL_ANTLR;
-		}
+        @Override
+        protected GroovyBasedModelType changeTo() {
+            return GradleModelTypes.GROOVY_FULL_ANTLR;
+        }
 
-	}
+    }
 
-	@Override
-	protected String getOutlineImageRootPath() {
-		return "/icons/outline/";
-	}
+    @Override
+    protected String getOutlineImageRootPath() {
+        return "/icons/outline/";
+    }
 
 }

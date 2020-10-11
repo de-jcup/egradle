@@ -17,6 +17,6 @@ package de.jcup.egradle.eclipse.document;
 
 public interface DocumentKeyWord {
 
-	String getText();
+    String getText();
 
 }

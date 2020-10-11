@@ -28,36 +28,33 @@ import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
 
 public class EGradleJUnitPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private ComboFieldEditor gradleCallTypeRadioButton;
+    private ComboFieldEditor gradleCallTypeRadioButton;
 
-	public EGradleJUnitPreferencePage() {
-		super(GRID);
-		setPreferenceStore(JUNIT_PREFERENCES.getPreferenceStore());
-	}
+    public EGradleJUnitPreferencePage() {
+        super(GRID);
+        setPreferenceStore(JUNIT_PREFERENCES.getPreferenceStore());
+    }
 
-	@Override
-	protected void createFieldEditors() {
+    @Override
+    protected void createFieldEditors() {
 
-		String[][] entryNamesAndValues = new String[][] {
-				new String[] { "clean all", EGradleJUnitTestTasksType.CLEAN_ALL.getId() },
-				new String[] { "clean tests only", EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId() },
-				new String[] { "do nothing", EGradleJUnitTestTasksType.CLEAN_NOTHING.getId() } };
-		/* @formatter:on */
-		gradleCallTypeRadioButton = new ComboFieldEditor(P_TEST_TASKS.getId(), "Before test execution",
-				entryNamesAndValues, getFieldEditorParent());
+        String[][] entryNamesAndValues = new String[][] { new String[] { "clean all", EGradleJUnitTestTasksType.CLEAN_ALL.getId() },
+                new String[] { "clean tests only", EGradleJUnitTestTasksType.CLEAN_ONLY_TESTS.getId() }, new String[] { "do nothing", EGradleJUnitTestTasksType.CLEAN_NOTHING.getId() } };
+        /* @formatter:on */
+        gradleCallTypeRadioButton = new ComboFieldEditor(P_TEST_TASKS.getId(), "Before test execution", entryNamesAndValues, getFieldEditorParent());
 
-		addField(gradleCallTypeRadioButton);
-		SWTFactory.createLabel(getFieldEditorParent(), "(This will be used by all test launch configurations)", 2);
-	}
+        addField(gradleCallTypeRadioButton);
+        SWTFactory.createLabel(getFieldEditorParent(), "(This will be used by all test launch configurations)", 2);
+    }
 
-	@Override
-	public void init(IWorkbench workbench) {
+    @Override
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
-	@Override
-	protected void initialize() {
-		super.initialize();
-	}
+    @Override
+    protected void initialize() {
+        super.initialize();
+    }
 
 }

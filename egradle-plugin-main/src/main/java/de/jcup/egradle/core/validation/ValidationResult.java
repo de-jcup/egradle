@@ -16,40 +16,39 @@
 package de.jcup.egradle.core.validation;
 
 public class ValidationResult {
-	boolean whereFound;
-	boolean whatWentWrongFound;
-	ProblemType problemType;
-	String problemMessage;
-	int line = -1;
-	String problemScriptPath;
-	int column = -1;
+    boolean whereFound;
+    boolean whatWentWrongFound;
+    ProblemType problemType;
+    String problemMessage;
+    int line = -1;
+    String problemScriptPath;
+    int column = -1;
 
-	public boolean hasProblem() {
-		boolean hasProblem = problemType != null;
-		return hasProblem;
+    public boolean hasProblem() {
+        boolean hasProblem = problemType != null;
+        return hasProblem;
 
-	}
+    }
 
-	public int getLine() {
-		return line;
-	}
+    public int getLine() {
+        return line;
+    }
 
-	public String getScriptPath() {
-		return problemScriptPath;
-	}
+    public String getScriptPath() {
+        return problemScriptPath;
+    }
 
-	public String getErrorMessage() {
-		return problemMessage;
-	}
+    public String getErrorMessage() {
+        return problemMessage;
+    }
 
-	public int getColumn() {
-		return column;
-	}
+    public int getColumn() {
+        return column;
+    }
 
-	@Override
-	public String toString() {
-		return "ValidationResult [problemType=" + problemType + ", problemMessage=" + problemMessage
-				+ ", problemScriptPath=" + problemScriptPath + ", line=" + line + ", column=" + column + "]";
-	}
+    @Override
+    public String toString() {
+        return "ValidationResult [problemType=" + problemType + ", problemMessage=" + problemMessage + ", problemScriptPath=" + problemScriptPath + ", line=" + line + ", column=" + column + "]";
+    }
 
 }

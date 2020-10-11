@@ -21,38 +21,38 @@ import org.eclipse.ui.console.IConsoleFactory;
 import org.eclipse.ui.console.IConsoleManager;
 
 public class EGradleSystemConsoleFactory implements IConsoleFactory {
-	public static EGradleSystemConsoleFactory INSTANCE = new EGradleSystemConsoleFactory();
+    public static EGradleSystemConsoleFactory INSTANCE = new EGradleSystemConsoleFactory();
 
-	@Override
-	public void openConsole() {
-		IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
-		EGradleSystemConsole console = getConsole();
-		consoleManager.showConsoleView(console);
-	}
+    @Override
+    public void openConsole() {
+        IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+        EGradleSystemConsole console = getConsole();
+        consoleManager.showConsoleView(console);
+    }
 
-	public EGradleSystemConsole getConsole() {
-		return findConsole("EGradle System Console");
-	}
+    public EGradleSystemConsole getConsole() {
+        return findConsole("EGradle System Console");
+    }
 
-	private EGradleSystemConsole findConsole(String name) {
-		ConsolePlugin plugin = ConsolePlugin.getDefault();
-		IConsoleManager conMan = plugin.getConsoleManager();
-		IConsole[] existing = conMan.getConsoles();
-		for (int i = 0; i < existing.length; i++) {
-			if (name.equals(existing[i].getName())) {
-				return (EGradleSystemConsole) existing[i];
-			}
+    private EGradleSystemConsole findConsole(String name) {
+        ConsolePlugin plugin = ConsolePlugin.getDefault();
+        IConsoleManager conMan = plugin.getConsoleManager();
+        IConsole[] existing = conMan.getConsoles();
+        for (int i = 0; i < existing.length; i++) {
+            if (name.equals(existing[i].getName())) {
+                return (EGradleSystemConsole) existing[i];
+            }
 
-		}
-		// no console found, so create a new one
-		EGradleSystemConsole myConsole = createConsole(name, conMan);
-		return myConsole;
-	}
+        }
+        // no console found, so create a new one
+        EGradleSystemConsole myConsole = createConsole(name, conMan);
+        return myConsole;
+    }
 
-	private EGradleSystemConsole createConsole(String name, IConsoleManager conMan) {
-		EGradleSystemConsole myConsole = new EGradleSystemConsole(name, null);
-		conMan.addConsoles(new IConsole[] { myConsole });
-		return myConsole;
-	}
+    private EGradleSystemConsole createConsole(String name, IConsoleManager conMan) {
+        EGradleSystemConsole myConsole = new EGradleSystemConsole(name, null);
+        conMan.addConsoles(new IConsole[] { myConsole });
+        return myConsole;
+    }
 
 }

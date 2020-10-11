@@ -26,52 +26,49 @@ import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradleImporterPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor executeAssembleTask;
-	private BooleanFieldEditor cleanEclipseProjects;
+    private BooleanFieldEditor executeAssembleTask;
+    private BooleanFieldEditor cleanEclipseProjects;
 
-	public EGradleImporterPreferencePage() {
-		super(GRID);
-		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
-	}
+    public EGradleImporterPreferencePage() {
+        super(GRID);
+        setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
+    }
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
-	public void createFieldEditors() {
-		GridData groupLayoutData = new GridData();
-		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
-		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = false;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 3;
+    /**
+     * Creates the field editors. Field editors are abstractions of the common GUI
+     * blocks needed to manipulate various types of preferences. Each field editor
+     * knows how to save and restore itself.
+     */
+    public void createFieldEditors() {
+        GridData groupLayoutData = new GridData();
+        groupLayoutData.horizontalAlignment = GridData.FILL;
+        groupLayoutData.verticalAlignment = GridData.BEGINNING;
+        groupLayoutData.grabExcessHorizontalSpace = true;
+        groupLayoutData.grabExcessVerticalSpace = false;
+        groupLayoutData.verticalSpan = 2;
+        groupLayoutData.horizontalSpan = 3;
 
-		executeAssembleTask = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(), "Execute assemble task",
-				getFieldEditorParent());
-		String executeAssembleTaskInfo = "(main build folders and generated resources will exist after import)";
+        executeAssembleTask = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId(), "Execute assemble task", getFieldEditorParent());
+        String executeAssembleTaskInfo = "(main build folders and generated resources will exist after import)";
 
-		addField(executeAssembleTask);
-		SWTFactory.createLabel(getFieldEditorParent(), executeAssembleTaskInfo, 2);
+        addField(executeAssembleTask);
+        SWTFactory.createLabel(getFieldEditorParent(), executeAssembleTaskInfo, 2);
 
-		/* clean eclipse projects */
-		cleanEclipseProjects = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId(),
-				"Clean eclipse projects", getFieldEditorParent());
-		String cleanEclipseProjectsInfo = "(after import 'clean all projects' is executed inside eclipse )";
+        /* clean eclipse projects */
+        cleanEclipseProjects = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId(), "Clean eclipse projects", getFieldEditorParent());
+        String cleanEclipseProjectsInfo = "(after import 'clean all projects' is executed inside eclipse )";
 
-		addField(cleanEclipseProjects);
-		SWTFactory.createLabel(getFieldEditorParent(), cleanEclipseProjectsInfo, 2);
-	}
+        addField(cleanEclipseProjects);
+        SWTFactory.createLabel(getFieldEditorParent(), cleanEclipseProjectsInfo, 2);
+    }
 
-	public boolean performOk() {
-		boolean done = super.performOk();
-		return done;
-	}
+    public boolean performOk() {
+        boolean done = super.performOk();
+        return done;
+    }
 
-	public void init(IWorkbench workbench) {
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
 }

@@ -24,18 +24,17 @@ package de.jcup.egradle.codeassist.dsl.gradle;
  *
  */
 public enum GradleFileType {
-	GRADLE_BUILD_SCRIPT("org.gradle.api.Project"), GRADLE_INIT_SCRIPT(
-			"org.gradle.api.invocation.Gradle"), GRADLE_SETTINGS_SCRIPT("org.gradle.api.initialization.Settings"),
+    GRADLE_BUILD_SCRIPT("org.gradle.api.Project"), GRADLE_INIT_SCRIPT("org.gradle.api.invocation.Gradle"), GRADLE_SETTINGS_SCRIPT("org.gradle.api.initialization.Settings"),
 
-	UNKNOWN("unknown");
+    UNKNOWN("unknown");
 
-	private String rootType;
+    private String rootType;
 
-	GradleFileType(String rootType) {
-		this.rootType = rootType;
-	}
+    GradleFileType(String rootType) {
+        this.rootType = rootType;
+    }
 
-	public String getRootType() {
-		return rootType;
-	}
+    public String getRootType() {
+        return rootType;
+    }
 }

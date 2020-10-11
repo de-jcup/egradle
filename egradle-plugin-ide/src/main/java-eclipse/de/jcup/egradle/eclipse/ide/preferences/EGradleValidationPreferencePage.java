@@ -25,51 +25,48 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleValidationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor outputValidationEnabled;
-	private BooleanFieldEditor showConsoleViewOnBuildFailed;
+    private BooleanFieldEditor outputValidationEnabled;
+    private BooleanFieldEditor showConsoleViewOnBuildFailed;
 
-	public EGradleValidationPreferencePage() {
-		super(GRID);
-		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
-	}
+    public EGradleValidationPreferencePage() {
+        super(GRID);
+        setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
+    }
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
-	public void createFieldEditors() {
-		GridData groupLayoutData = new GridData();
-		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
-		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = false;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 3;
+    /**
+     * Creates the field editors. Field editors are abstractions of the common GUI
+     * blocks needed to manipulate various types of preferences. Each field editor
+     * knows how to save and restore itself.
+     */
+    public void createFieldEditors() {
+        GridData groupLayoutData = new GridData();
+        groupLayoutData.horizontalAlignment = GridData.FILL;
+        groupLayoutData.verticalAlignment = GridData.BEGINNING;
+        groupLayoutData.grabExcessHorizontalSpace = true;
+        groupLayoutData.grabExcessVerticalSpace = false;
+        groupLayoutData.verticalSpan = 2;
+        groupLayoutData.horizontalSpan = 3;
 
-		outputValidationEnabled = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(), "Output validation enabled",
-				getFieldEditorParent());
-		addField(outputValidationEnabled);
+        outputValidationEnabled = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_OUTPUT_VALIDATION_ENABLED.getId(), "Output validation enabled", getFieldEditorParent());
+        addField(outputValidationEnabled);
 
-		showConsoleViewOnBuildFailed = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(),
-				"Show console view on build failure", getFieldEditorParent());
-		addField(showConsoleViewOnBuildFailed);
-	}
+        showConsoleViewOnBuildFailed = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId(), "Show console view on build failure",
+                getFieldEditorParent());
+        addField(showConsoleViewOnBuildFailed);
+    }
 
-	public boolean performOk() {
-		boolean done = super.performOk();
-		if (done) {
-			if (!outputValidationEnabled.getBooleanValue()) {
-				IDEUtil.removeAllValidationErrorsOfConsoleOutput();
-			}
-		}
-		return done;
-	}
+    public boolean performOk() {
+        boolean done = super.performOk();
+        if (done) {
+            if (!outputValidationEnabled.getBooleanValue()) {
+                IDEUtil.removeAllValidationErrorsOfConsoleOutput();
+            }
+        }
+        return done;
+    }
 
-	public void init(IWorkbench workbench) {
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
 }

@@ -26,23 +26,23 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.jcup.egradle.eclipse.ide.wizards.EGradleNewProjectWizard;
 
 public class NewGradleProjectHandler extends AbstractHandler {
-	public static final String COMMAND_ID = "egradle.commands.newGradleProject";
+    public static final String COMMAND_ID = "egradle.commands.newGradleProject";
 
-	@Override
-	public boolean isEnabled() {
-		return super.isEnabled();
-	}
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled();
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell activeShell = HandlerUtil.getActiveShell(event);
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        Shell activeShell = HandlerUtil.getActiveShell(event);
 
-		IWizard wizard = new EGradleNewProjectWizard();
+        IWizard wizard = new EGradleNewProjectWizard();
 
-		WizardDialog dialog = new WizardDialog(activeShell, wizard);
+        WizardDialog dialog = new WizardDialog(activeShell, wizard);
 
-		dialog.open();
-		return null;
-	}
+        dialog.open();
+        return null;
+    }
 
 }

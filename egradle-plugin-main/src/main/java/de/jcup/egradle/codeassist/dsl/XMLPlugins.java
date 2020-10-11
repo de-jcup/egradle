@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "plugins")
 public class XMLPlugins {
 
-	@XmlElement(name = "plugin", type = XMLPlugin.class)
-	private Set<Plugin> plugins = new TreeSet<>();
+    @XmlElement(name = "plugin", type = XMLPlugin.class)
+    private Set<Plugin> plugins = new TreeSet<>();
 
-	public Set<Plugin> getPlugins() {
-		return plugins;
-	}
+    public Set<Plugin> getPlugins() {
+        return plugins;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLPlugins [ plugins=" + plugins + "]";
-	}
+    @Override
+    public String toString() {
+        return "XMLPlugins [ plugins=" + plugins + "]";
+    }
 
 }

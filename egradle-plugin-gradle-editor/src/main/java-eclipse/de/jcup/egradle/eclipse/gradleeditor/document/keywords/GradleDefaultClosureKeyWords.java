@@ -19,56 +19,56 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 
-	COMPILE_ONLY("compileOnly"),
+    COMPILE_ONLY("compileOnly"),
 
-	COMPILE("compile"),
+    COMPILE("compile"),
 
-	TEST_COMPILE("testCompile"),
+    TEST_COMPILE("testCompile"),
 
-	IMPLEMENTATION("implementation"),
+    IMPLEMENTATION("implementation"),
 
-	TEST_IMPLEMENTATION("testImplementation"),
+    TEST_IMPLEMENTATION("testImplementation"),
 
-	API("api"),
+    API("api"),
 
-	FROM("from"),
+    FROM("from"),
 
-	INTO("into"),
+    INTO("into"),
 
-	INCLUDE("include"),
+    INCLUDE("include"),
 
-	EXCLUDE("exclude"),
+    EXCLUDE("exclude"),
 
-	DEPENDENCIES("dependencies"),
+    DEPENDENCIES("dependencies"),
 
-	REPOSITORIES("repositories"),
+    REPOSITORIES("repositories"),
 
-	ALL_PROJECTS("allprojects"),
+    ALL_PROJECTS("allprojects"),
 
-	SUB_PROJECTS("subprojects"),
+    SUB_PROJECTS("subprojects"),
 
-	ARTIFACTS("artifacts"),
+    ARTIFACTS("artifacts"),
 
-	TEST("test"),
+    TEST("test"),
 
-	CLEAN("clean"),
+    CLEAN("clean"),
 
-	BUILDSCRIPT("buildscript"),
+    BUILDSCRIPT("buildscript"),
 
-	FILES("files"),
+    FILES("files"),
 
-	FILETREE("fileTree"),
+    FILETREE("fileTree"),
 
-	CONFIGURATIONS("configurations");
+    CONFIGURATIONS("configurations");
 
-	private String text;
+    private String text;
 
-	private GradleDefaultClosureKeyWords(String text) {
-		this.text = text;
-	}
+    private GradleDefaultClosureKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

@@ -17,9 +17,9 @@ package de.jcup.egradle.core.process;
 
 public class SystemOutOutputHandler implements OutputHandler {
 
-	@Override
-	public void output(String line) {
-		System.out.println(line);
-	}
+    @Override
+    public void output(String line) {
+        System.out.println(line);
+    }
 
 }

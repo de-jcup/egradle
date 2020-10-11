@@ -75,19 +75,19 @@ public class GradleEditor extends AbstractGroovyBasedEditor {
         if (input instanceof IStorageEditorInput) {
             IStorageEditorInput storageEditorInput = (IStorageEditorInput) input;
             IStorage storage = storageEditorInput.getStorage();
-            if (storage==null) {
+            if (storage == null) {
                 return;
             }
             IPath path = storage.getFullPath();
-            if (path==null) {
+            if (path == null) {
                 return;
             }
             IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
-            if (resource==null) {
+            if (resource == null) {
                 return;
             }
             IProject project = resource.getProject();
-            setPartName(resource.getName()+" ("+project.getName()+")");
+            setPartName(resource.getName() + " (" + project.getName() + ")");
         }
     }
 

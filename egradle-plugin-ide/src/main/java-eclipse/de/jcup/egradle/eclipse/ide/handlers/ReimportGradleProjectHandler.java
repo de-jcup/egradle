@@ -26,20 +26,20 @@ import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
 import de.jcup.egradle.eclipse.ide.wizards.EGradleRootProjectImportWizard;
 
 public class ReimportGradleProjectHandler extends AbstractHandler {
-	public static final String COMMAND_ID = "egradle.commands.reimportGradleProject";
+    public static final String COMMAND_ID = "egradle.commands.reimportGradleProject";
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell activeShell = HandlerUtil.getActiveShell(event);
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        Shell activeShell = HandlerUtil.getActiveShell(event);
 
-		EGradleRootProjectImportWizard wizard = new EGradleRootProjectImportWizard();
-		wizard.setImportMode(RootProjectConfigMode.REIMPORT_PROJECTS);
-		wizard.setWindowTitle("Reimport project(s)");
+        EGradleRootProjectImportWizard wizard = new EGradleRootProjectImportWizard();
+        wizard.setImportMode(RootProjectConfigMode.REIMPORT_PROJECTS);
+        wizard.setWindowTitle("Reimport project(s)");
 
-		WizardDialog dialog = new WizardDialog(activeShell, wizard);
+        WizardDialog dialog = new WizardDialog(activeShell, wizard);
 
-		dialog.open();
-		return null;
-	}
+        dialog.open();
+        return null;
+    }
 
 }

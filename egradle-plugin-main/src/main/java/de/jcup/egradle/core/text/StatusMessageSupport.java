@@ -23,6 +23,6 @@ package de.jcup.egradle.core.text;
  */
 public interface StatusMessageSupport {
 
-	void setErrorMessage(String message);
+    void setErrorMessage(String message);
 
 }

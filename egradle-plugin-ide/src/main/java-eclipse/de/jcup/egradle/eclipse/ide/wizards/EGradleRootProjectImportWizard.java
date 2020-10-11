@@ -35,104 +35,101 @@ import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class EGradleRootProjectImportWizard extends Wizard implements IImportWizard {
-	public static final String ID = "de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard";
+    public static final String ID = "de.jcup.egradle.eclipse.importWizards.EGradleRootProjectImportWizard";
 
-	private static ImageDescriptor desc = EclipseUtil
-			.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png", IDEActivator.PLUGIN_ID);//$NON-NLS-1$
-	EGradleRootProjectImportWizardPage mainPage;
-	RootProjectImportSupport importSupport;
+    private static ImageDescriptor desc = EclipseUtil.createImageDescriptor("icons/egradle-import-rootproject-wizard-banner.png", IDEActivator.PLUGIN_ID);//$NON-NLS-1$
+    EGradleRootProjectImportWizardPage mainPage;
+    RootProjectImportSupport importSupport;
 
-	private String customRootProjectpath;
+    private String customRootProjectpath;
 
-	private RootProjectConfigMode importMode;
+    private RootProjectConfigMode importMode;
 
-	private String customJavaHome;
+    private String customJavaHome;
 
-	private EGradleCallType initialCallType;
+    private EGradleCallType initialCallType;
 
-	public EGradleRootProjectImportWizard() {
-		importSupport = new RootProjectImportSupport();
-	}
+    public EGradleRootProjectImportWizard() {
+        importSupport = new RootProjectImportSupport();
+    }
 
-	public void setCustomJavaHome(String customJavaHome) {
-		this.customJavaHome = customJavaHome;
-	}
+    public void setCustomJavaHome(String customJavaHome) {
+        this.customJavaHome = customJavaHome;
+    }
 
-	public void setCustomRootProjectpath(String customRootProjectpath) {
-		this.customRootProjectpath = customRootProjectpath;
-	}
+    public void setCustomRootProjectpath(String customRootProjectpath) {
+        this.customRootProjectpath = customRootProjectpath;
+    }
 
-	public void setImportMode(RootProjectConfigMode importMode) {
-		this.importMode = importMode;
-	}
+    public void setImportMode(RootProjectConfigMode importMode) {
+        this.importMode = importMode;
+    }
 
-	/**
-	 * The <code>BasicNewResourceWizard</code> implementation of this
-	 * <code>IWorkbenchWizard</code> method records the given workbench and
-	 * selection, and initializes the default banner image for the pages by
-	 * calling <code>initializeDefaultPageImageDescriptor</code>. Subclasses may
-	 * extend.
-	 */
-	@Override
-	public void init(IWorkbench theWorkbench, IStructuredSelection currentSelection) {
-		// this.workbench = theWorkbench;
-		// this.selection = currentSelection;
-		setWindowTitle("EGradle Import Wizard"); // NON-NLS-1
-		setNeedsProgressMonitor(true);
-		setDefaultPageImageDescriptor(desc);
-	}
+    /**
+     * The <code>BasicNewResourceWizard</code> implementation of this
+     * <code>IWorkbenchWizard</code> method records the given workbench and
+     * selection, and initializes the default banner image for the pages by calling
+     * <code>initializeDefaultPageImageDescriptor</code>. Subclasses may extend.
+     */
+    @Override
+    public void init(IWorkbench theWorkbench, IStructuredSelection currentSelection) {
+        // this.workbench = theWorkbench;
+        // this.selection = currentSelection;
+        setWindowTitle("EGradle Import Wizard"); // NON-NLS-1
+        setNeedsProgressMonitor(true);
+        setDefaultPageImageDescriptor(desc);
+    }
 
-	public boolean performFinish() {
-		IPath path = mainPage.getSelectedPath();
-		if (path == null) {
+    public boolean performFinish() {
+        IPath path = mainPage.getSelectedPath();
+        if (path == null) {
 
-			getDialogSupport().showWarning("Was not able to finish, because path is empty!");
+            getDialogSupport().showWarning("Was not able to finish, because path is empty!");
 
-			return false;
-		}
-		/* fetch data inside SWT thread */
-		importSupport.globalJavaHome = mainPage.getGlobalJavaHomePath();
-		importSupport.restoreMetadata = mainPage.isRestoringMetaData();
+            return false;
+        }
+        /* fetch data inside SWT thread */
+        importSupport.globalJavaHome = mainPage.getGlobalJavaHomePath();
+        importSupport.restoreMetadata = mainPage.isRestoringMetaData();
 
-		importSupport.gradleInstallPath = mainPage.getGradleBinDirectory();
-		importSupport.shell = mainPage.getShellCommand();
-		importSupport.gradleCommand = mainPage.getGradleCommand();
-		importSupport.callTypeId = mainPage.getCallTypeId();
+        importSupport.gradleInstallPath = mainPage.getGradleBinDirectory();
+        importSupport.shell = mainPage.getShellCommand();
+        importSupport.gradleCommand = mainPage.getGradleCommand();
+        importSupport.callTypeId = mainPage.getCallTypeId();
 
-		openSystemConsole(true);
+        openSystemConsole(true);
 
-		try {
-			getContainer().run(true, true, new IRunnableWithProgress() {
+        try {
+            getContainer().run(true, true, new IRunnableWithProgress() {
 
-				@Override
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					try {
-						importSupport.doImport(path, monitor);
-					} catch (Exception e) {
-						throw new InvocationTargetException(e);
-					}
+                @Override
+                public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+                    try {
+                        importSupport.doImport(path, monitor);
+                    } catch (Exception e) {
+                        throw new InvocationTargetException(e);
+                    }
 
-				}
-			});
-			return true;
-		} catch (Exception e) {
-			IDEUtil.logError("EGradle Import execution failed", e);
-			return false;
-		}
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            IDEUtil.logError("EGradle Import execution failed", e);
+            return false;
+        }
 
-	}
+    }
 
-	public void addPages() {
-		mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1", customRootProjectpath,
-				importMode, customJavaHome);
-		addPage(mainPage);
-		if (initialCallType != null) {
-			mainPage.setInitialCallType(initialCallType);
-		}
-	}
+    public void addPages() {
+        mainPage = new EGradleRootProjectImportWizardPage("egradleRootProjectWizardPage1", customRootProjectpath, importMode, customJavaHome);
+        addPage(mainPage);
+        if (initialCallType != null) {
+            mainPage.setInitialCallType(initialCallType);
+        }
+    }
 
-	public void setInitialCallType(EGradleCallType callType) {
-		this.initialCallType = callType;
-	}
+    public void setInitialCallType(EGradleCallType callType) {
+        this.initialCallType = callType;
+    }
 
 }

@@ -39,103 +39,103 @@ import de.jcup.egradle.core.process.ProcessExecutor;
  */
 public class GradleExecutor {
 
-	private ProcessExecutor processExecutor;
+    private ProcessExecutor processExecutor;
 
-	public GradleExecutor(ProcessExecutor processExecutor) {
-		notNull(processExecutor, "Process executor may not be null!");
-		this.processExecutor = processExecutor;
-	}
+    public GradleExecutor(ProcessExecutor processExecutor) {
+        notNull(processExecutor, "Process executor may not be null!");
+        this.processExecutor = processExecutor;
+    }
 
-	/**
-	 * Executes gradle
-	 * 
-	 * @param context
-	 * @return result
-	 */
-	public ProcessExecutionResult execute(GradleContext context) {
-		ProcessExecutionResult processExecutionResult = new ProcessExecutionResult();
+    /**
+     * Executes gradle
+     * 
+     * @param context
+     * @return result
+     */
+    public ProcessExecutionResult execute(GradleContext context) {
+        ProcessExecutionResult processExecutionResult = new ProcessExecutionResult();
 
-		String[] commandStrings = createExecutionCommand(context);
+        String[] commandStrings = createExecutionCommand(context);
 
-		/* execute process */
-		int processResult;
-		try {
-			processResult = processExecutor.execute(context.getConfiguration(), context, context, commandStrings);
-			processExecutionResult.setCommands(context.getCommandString());
-			processExecutionResult.setProcessResult(processResult);
-		} catch (IOException e) {
-			processExecutionResult.setException(e);
-		}
-		CancelStateProvider cancelStateProvider = context.getCancelStateProvider();
-		if (cancelStateProvider.isCanceled()) {
-			processExecutionResult.setCanceledByuser(true);
-		}
-		return processExecutionResult;
-	}
+        /* execute process */
+        int processResult;
+        try {
+            processResult = processExecutor.execute(context.getConfiguration(), context, context, commandStrings);
+            processExecutionResult.setCommands(context.getCommandString());
+            processExecutionResult.setProcessResult(processResult);
+        } catch (IOException e) {
+            processExecutionResult.setException(e);
+        }
+        CancelStateProvider cancelStateProvider = context.getCancelStateProvider();
+        if (cancelStateProvider.isCanceled()) {
+            processExecutionResult.setCanceledByuser(true);
+        }
+        return processExecutionResult;
+    }
 
-	String[] createExecutionCommand(GradleContext context) {
-		/* build command string */
-		int pos = 0;
-		GradleCommand[] commands = context.getCommands();
-		int arraySize = commands.length + 1;
-		/* expand arraysize for command arguments too */
-		for (GradleCommand c : commands) {
-			arraySize += c.getCommandArguments().size();
-		}
-		GradleConfiguration config = context.getConfiguration();
-		EGradleShellType shell = config.getShellType();
-		if (shell == null) {
-			shell = EGradleShellType.NONE;
-		}
-		List<String> shellCommands = shell.createCommands();
-		arraySize += shellCommands.size();// we must call shell executor too
-		String[] options = context.getOptions();
-		if (options == null) {
-			options = new String[] {};
-		}
-		/* be aware of empty content */
-		List<String> safeOptions = new ArrayList<>();
-		for (String opt : options) {
-			if (StringUtils.isNotBlank(opt)) {
-				safeOptions.add(opt);
-			}
-		}
-		arraySize += safeOptions.size();
+    String[] createExecutionCommand(GradleContext context) {
+        /* build command string */
+        int pos = 0;
+        GradleCommand[] commands = context.getCommands();
+        int arraySize = commands.length + 1;
+        /* expand arraysize for command arguments too */
+        for (GradleCommand c : commands) {
+            arraySize += c.getCommandArguments().size();
+        }
+        GradleConfiguration config = context.getConfiguration();
+        EGradleShellType shell = config.getShellType();
+        if (shell == null) {
+            shell = EGradleShellType.NONE;
+        }
+        List<String> shellCommands = shell.createCommands();
+        arraySize += shellCommands.size();// we must call shell executor too
+        String[] options = context.getOptions();
+        if (options == null) {
+            options = new String[] {};
+        }
+        /* be aware of empty content */
+        List<String> safeOptions = new ArrayList<>();
+        for (String opt : options) {
+            if (StringUtils.isNotBlank(opt)) {
+                safeOptions.add(opt);
+            }
+        }
+        arraySize += safeOptions.size();
 
-		Map<String, String> gradleProperties = context.getGradleProperties();
-		Map<String, String> systemProperties = context.getSystemProperties();
+        Map<String, String> gradleProperties = context.getGradleProperties();
+        Map<String, String> systemProperties = context.getSystemProperties();
 
-		arraySize += gradleProperties.size();
-		arraySize += systemProperties.size();
+        arraySize += gradleProperties.size();
+        arraySize += systemProperties.size();
 
-		String[] commandStrings = new String[arraySize];
-		for (String shellCommand : shellCommands) {
-			commandStrings[pos++] = shellCommand;
-		}
-		commandStrings[pos++] = config.getGradleCommandFullPath();
-		/* raw options */
-		for (String rawOption : safeOptions) {
-			commandStrings[pos++] = rawOption;
-		}
-		/* gradle properties */
-		for (String key : gradleProperties.keySet()) {
-			commandStrings[pos++] = "-P" + key + "=" + gradleProperties.get(key);
-		}
-		/* system properties */
-		for (String key : systemProperties.keySet()) {
-			commandStrings[pos++] = "-D" + key + "=" + systemProperties.get(key);
-		}
-		/* commands */
-		for (int i = 0; i < commands.length; i++) {
-			GradleCommand gradleCommand = commands[i];
-			commandStrings[pos++] = gradleCommand.getCommand();
-			List<String> commandArguments = gradleCommand.getCommandArguments();
-			if (commandArguments.size() > 1) {
-				commandStrings[pos++] = commandArguments.get(0);
-				commandStrings[pos++] = commandArguments.get(1);
-			}
+        String[] commandStrings = new String[arraySize];
+        for (String shellCommand : shellCommands) {
+            commandStrings[pos++] = shellCommand;
+        }
+        commandStrings[pos++] = config.getGradleCommandFullPath();
+        /* raw options */
+        for (String rawOption : safeOptions) {
+            commandStrings[pos++] = rawOption;
+        }
+        /* gradle properties */
+        for (String key : gradleProperties.keySet()) {
+            commandStrings[pos++] = "-P" + key + "=" + gradleProperties.get(key);
+        }
+        /* system properties */
+        for (String key : systemProperties.keySet()) {
+            commandStrings[pos++] = "-D" + key + "=" + systemProperties.get(key);
+        }
+        /* commands */
+        for (int i = 0; i < commands.length; i++) {
+            GradleCommand gradleCommand = commands[i];
+            commandStrings[pos++] = gradleCommand.getCommand();
+            List<String> commandArguments = gradleCommand.getCommandArguments();
+            if (commandArguments.size() > 1) {
+                commandStrings[pos++] = commandArguments.get(0);
+                commandStrings[pos++] = commandArguments.get(1);
+            }
 
-		}
-		return commandStrings;
-	}
+        }
+        return commandStrings;
+    }
 }

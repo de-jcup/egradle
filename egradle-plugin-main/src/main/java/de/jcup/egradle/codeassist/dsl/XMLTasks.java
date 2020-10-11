@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "tasks")
 public class XMLTasks {
 
-	@XmlElement(name = "task", type = XMLTask.class)
-	private Set<Task> tasks = new TreeSet<>();
+    @XmlElement(name = "task", type = XMLTask.class)
+    private Set<Task> tasks = new TreeSet<>();
 
-	public Set<Task> getTasks() {
-		return tasks;
-	}
+    public Set<Task> getTasks() {
+        return tasks;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLTasks [ tasks=" + tasks + "]";
-	}
+    @Override
+    public String toString() {
+        return "XMLTasks [ tasks=" + tasks + "]";
+    }
 
 }

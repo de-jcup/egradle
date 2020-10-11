@@ -25,29 +25,29 @@ import de.jcup.egradle.eclipse.preferences.AbstractEditorPreferences;
 
 public class EditorUtil implements ILogSupport {
 
-	public static final ILogSupport INSTANCE = new EditorUtil();
+    public static final ILogSupport INSTANCE = new EditorUtil();
 
-	public static AbstractEditorPreferences getPreferences() {
-		return GradleEditorPreferences.getInstance();
-	}
+    public static AbstractEditorPreferences getPreferences() {
+        return GradleEditorPreferences.getInstance();
+    }
 
-	@Override
-	public void logInfo(String info) {
-		getLog().log(new Status(IStatus.INFO, EditorActivator.PLUGIN_ID, info));
-	}
+    @Override
+    public void logInfo(String info) {
+        getLog().log(new Status(IStatus.INFO, EditorActivator.PLUGIN_ID, info));
+    }
 
-	@Override
-	public void logWarning(String warning) {
-		getLog().log(new Status(IStatus.WARNING, EditorActivator.PLUGIN_ID, warning));
-	}
+    @Override
+    public void logWarning(String warning) {
+        getLog().log(new Status(IStatus.WARNING, EditorActivator.PLUGIN_ID, warning));
+    }
 
-	@Override
-	public void logError(String error, Throwable t) {
-		getLog().log(new Status(IStatus.ERROR, EditorActivator.PLUGIN_ID, error, t));
-	}
+    @Override
+    public void logError(String error, Throwable t) {
+        getLog().log(new Status(IStatus.ERROR, EditorActivator.PLUGIN_ID, error, t));
+    }
 
-	protected ILog getLog() {
-		ILog log = EditorActivator.getDefault().getLog();
-		return log;
-	}
+    protected ILog getLog() {
+        ILog log = EditorActivator.getDefault().getLog();
+        return log;
+    }
 }

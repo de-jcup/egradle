@@ -42,83 +42,78 @@ import de.jcup.egradle.sdk.SDK;
 import de.jcup.egradle.sdk.SDKInfo;
 import de.jcup.egradle.sdk.SDKManager;
 
-public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage
-		implements IWorkbenchPreferencePage {
-	private BooleanFieldEditor codeAssistProposalsEnabled;
-	private BooleanFieldEditor codeAssistNoProposalsForGetterOrSetter;
-	private BooleanFieldEditor codeAssistTooltipsEnabled;
+public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+    private BooleanFieldEditor codeAssistProposalsEnabled;
+    private BooleanFieldEditor codeAssistNoProposalsForGetterOrSetter;
+    private BooleanFieldEditor codeAssistTooltipsEnabled;
 
-	public GradleEditorCodeCompletionPreferencePage() {
-		setPreferenceStore(EditorUtil.getPreferences().getPreferenceStore());
-	}
+    public GradleEditorCodeCompletionPreferencePage() {
+        setPreferenceStore(EditorUtil.getPreferences().getPreferenceStore());
+    }
 
-	@Override
-	public void init(IWorkbench workbench) {
+    @Override
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
-	@Override
-	protected void createFieldEditors() {
-		Composite parent = getFieldEditorParent();
-		codeAssistProposalsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(),
-				"Code completion enabled", parent);
-		addField(codeAssistProposalsEnabled);
+    @Override
+    protected void createFieldEditors() {
+        Composite parent = getFieldEditorParent();
+        codeAssistProposalsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_PROPOSALS_ENABLED.getId(), "Code completion enabled", parent);
+        addField(codeAssistProposalsEnabled);
 
-		codeAssistNoProposalsForGetterOrSetter = new BooleanFieldEditor(
-				P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), "No proposals for getter or setter",
-				parent);
-		addField(codeAssistNoProposalsForGetterOrSetter);
+        codeAssistNoProposalsForGetterOrSetter = new BooleanFieldEditor(P_EDITOR_CODEASSIST_NO_PROPOSALS_FOR_GETTER_OR_SETTERS.getId(), "No proposals for getter or setter", parent);
+        addField(codeAssistNoProposalsForGetterOrSetter);
 
-		codeAssistTooltipsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(),
-				"Code tooltips enabled", parent);
-		addField(codeAssistTooltipsEnabled);
+        codeAssistTooltipsEnabled = new BooleanFieldEditor(P_EDITOR_CODEASSIST_TOOLTIPS_ENABLED.getId(), "Code tooltips enabled", parent);
+        addField(codeAssistTooltipsEnabled);
 
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
-			Button reloadButton = new Button(parent, SWT.PUSH);
-			reloadButton.setText("Clean cache");
-			reloadButton.setToolTipText("Clean cache of code completion ");
-			reloadButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					EditorActivator editorActivator = EditorActivator.getDefault();
-					CodeCompletionRegistry registry = editorActivator.getCodeCompletionRegistry();
-					if (registry == null) {
-						return;
-					}
-					registry.init();
-					;
-				}
-			});
-		}
+        if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_MENUS) {
+            Button reloadButton = new Button(parent, SWT.PUSH);
+            reloadButton.setText("Clean cache");
+            reloadButton.setToolTipText("Clean cache of code completion ");
+            reloadButton.addSelectionListener(new SelectionAdapter() {
+                @Override
+                public void widgetSelected(SelectionEvent e) {
+                    EditorActivator editorActivator = EditorActivator.getDefault();
+                    CodeCompletionRegistry registry = editorActivator.getCodeCompletionRegistry();
+                    if (registry == null) {
+                        return;
+                    }
+                    registry.init();
+                    ;
+                }
+            });
+        }
 
-		/* sdk info group */
-		GridData groupLayoutData = new GridData();
-		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
-		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = true;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 3;
+        /* sdk info group */
+        GridData groupLayoutData = new GridData();
+        groupLayoutData.horizontalAlignment = GridData.FILL;
+        groupLayoutData.verticalAlignment = GridData.BEGINNING;
+        groupLayoutData.grabExcessHorizontalSpace = true;
+        groupLayoutData.grabExcessVerticalSpace = true;
+        groupLayoutData.verticalSpan = 2;
+        groupLayoutData.horizontalSpan = 3;
 
-		Group validationGroup = SWTFactory.createGroup(parent, "SDK information", 1, 10, SWT.FILL);
-		validationGroup.setLayoutData(groupLayoutData);
+        Group validationGroup = SWTFactory.createGroup(parent, "SDK information", 1, 10, SWT.FILL);
+        validationGroup.setLayoutData(groupLayoutData);
 
-		/* SDK info */
-		SDK sdk = SDKManager.get().getCurrentSDK();
+        /* SDK info */
+        SDK sdk = SDKManager.get().getCurrentSDK();
 
-		SDKInfo sdkInfo = sdk.getInfo();
+        SDKInfo sdkInfo = sdk.getInfo();
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
-		sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
-		Date installationDate = sdkInfo.getInstallationDate();
-		if (installationDate != null) {
-			sb.append("- Was installed at ").append(DateFormat.getDateTimeInstance().format(installationDate));
-		}
+        StringBuilder sb = new StringBuilder();
+        sb.append("Version ").append(sdkInfo.getSdkVersion()).append(" contains\n");
+        sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
+        Date installationDate = sdkInfo.getInstallationDate();
+        if (installationDate != null) {
+            sb.append("- Was installed at ").append(DateFormat.getDateTimeInstance().format(installationDate));
+        }
 
-		Text text = new Text(validationGroup, SWT.MULTI);
-		text.setBackground(parent.getBackground());
-		text.setText(sb.toString());
-	}
+        Text text = new Text(validationGroup, SWT.MULTI);
+        text.setBackground(parent.getBackground());
+        text.setText(sb.toString());
+    }
 
 }

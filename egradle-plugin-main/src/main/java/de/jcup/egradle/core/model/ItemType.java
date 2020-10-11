@@ -16,91 +16,91 @@
 package de.jcup.egradle.core.model;
 
 public enum ItemType {
-	UNKNOWN,
+    UNKNOWN,
 
-	VARIABLE,
+    VARIABLE,
 
-	ENUM_CONSTANT,
+    ENUM_CONSTANT,
 
-	/* nearly same as a variable but has no modifiers */
-	ASSIGNMENT,
+    /* nearly same as a variable but has no modifiers */
+    ASSIGNMENT,
 
-	CLOSURE,
+    CLOSURE,
 
-	METHOD_CALL,
+    METHOD_CALL,
 
-	/* gradle special for parts created */
-	TASKS,
+    /* gradle special for parts created */
+    TASKS,
 
-	TASK,
+    TASK,
 
-	APPLY_SETUP,
+    APPLY_SETUP,
 
-	APPLY_FROM,
+    APPLY_FROM,
 
-	APPLY_PLUGIN,
+    APPLY_PLUGIN,
 
-	REPOSITORIES,
+    REPOSITORIES,
 
-	ALL_PROJECTS,
+    ALL_PROJECTS,
 
-	SUB_PROJECTS,
+    SUB_PROJECTS,
 
-	PROJECT,
+    PROJECT,
 
-	DEPENDENCIES,
+    DEPENDENCIES,
 
-	DEPENDENCY,
+    DEPENDENCY,
 
-	MAIN,
+    MAIN,
 
-	TEST,
+    TEST,
 
-	CLEAN,
+    CLEAN,
 
-	BUILDSCRIPT,
+    BUILDSCRIPT,
 
-	SOURCESETS,
+    SOURCESETS,
 
-	CONFIGURATIONS,
+    CONFIGURATIONS,
 
-	REPOSITORY,
+    REPOSITORY,
 
-	ECLIPSE,
+    ECLIPSE,
 
-	ENUM,
+    ENUM,
 
-	INTERFACE,
+    INTERFACE,
 
-	CLASS,
+    CLASS,
 
-	JAR,
+    JAR,
 
-	WAR,
+    WAR,
 
-	EAR,
+    EAR,
 
-	ZIP,
+    ZIP,
 
-	CONFIGURE,
+    CONFIGURE,
 
-	PACKAGE,
+    PACKAGE,
 
-	IMPORT,
+    IMPORT,
 
-	DO_FIRST,
+    DO_FIRST,
 
-	DO_LAST,
+    DO_LAST,
 
-	AFTER_EVALUATE,
+    AFTER_EVALUATE,
 
-	/**
-	 * A method (defintion)
-	 */
-	METHOD,
+    /**
+     * A method (defintion)
+     */
+    METHOD,
 
-	CONSTRUCTOR,
+    CONSTRUCTOR,
 
-	PLUGINS,
+    PLUGINS,
 
 }

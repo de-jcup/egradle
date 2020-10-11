@@ -17,87 +17,87 @@ package de.jcup.egradle.core.process;
 
 public class ProcessTimeoutTerminator {
 
-	/**
-	 * Wait for check in milliseconds
-	 */
-	static final int WAIT_FOR_CHECK = 200;
+    /**
+     * Wait for check in milliseconds
+     */
+    static final int WAIT_FOR_CHECK = 200;
 
-	private Process process;
-	private long timeStarted;
-	private OutputHandler outputHandler;
-	private long timeOutInSeconds;
+    private Process process;
+    private long timeStarted;
+    private OutputHandler outputHandler;
+    private long timeOutInSeconds;
 
-	private Thread timeoutCheckThread;
+    private Thread timeoutCheckThread;
 
-	public ProcessTimeoutTerminator(Process process, OutputHandler outputHandler, long timeOutInSeconds) {
-		this.timeOutInSeconds = timeOutInSeconds;
-		this.process = process;
-		this.outputHandler = outputHandler;
-	}
+    public ProcessTimeoutTerminator(Process process, OutputHandler outputHandler, long timeOutInSeconds) {
+        this.timeOutInSeconds = timeOutInSeconds;
+        this.process = process;
+        this.outputHandler = outputHandler;
+    }
 
-	/**
-	 * Does a restart of terminator timeout
-	 */
-	public void reset() {
-		resetTimeStarted();
-	}
+    /**
+     * Does a restart of terminator timeout
+     */
+    public void reset() {
+        resetTimeStarted();
+    }
 
-	private void resetTimeStarted() {
-		timeStarted = System.currentTimeMillis();
-	}
+    private void resetTimeStarted() {
+        timeStarted = System.currentTimeMillis();
+    }
 
-	/**
-	 * Starts time out terminator
-	 */
-	public void start() {
-		if (timeOutInSeconds == ProcessExecutor.ENDLESS_RUNNING) {
-			/*
-			 * when endless running is active the thread makes no sense, so just
-			 * do a guard close
-			 */
-			return;
-		}
-		if (isRunning()) {
-			reset();
-			return;
-		}
-		timeoutCheckThread = new Thread(new TimeOutTerminatorRunnable(), "process-timeout-terminator");
-		timeoutCheckThread.start();
-	}
+    /**
+     * Starts time out terminator
+     */
+    public void start() {
+        if (timeOutInSeconds == ProcessExecutor.ENDLESS_RUNNING) {
+            /*
+             * when endless running is active the thread makes no sense, so just do a guard
+             * close
+             */
+            return;
+        }
+        if (isRunning()) {
+            reset();
+            return;
+        }
+        timeoutCheckThread = new Thread(new TimeOutTerminatorRunnable(), "process-timeout-terminator");
+        timeoutCheckThread.start();
+    }
 
-	public boolean isRunning() {
-		return timeoutCheckThread != null && timeoutCheckThread.isAlive();
-	}
+    public boolean isRunning() {
+        return timeoutCheckThread != null && timeoutCheckThread.isAlive();
+    }
 
-	private class TimeOutTerminatorRunnable implements Runnable {
+    private class TimeOutTerminatorRunnable implements Runnable {
 
-		@Override
-		public void run() {
+        @Override
+        public void run() {
 
-			long timeOutInMillis = timeOutInSeconds * 1000;
+            long timeOutInMillis = timeOutInSeconds * 1000;
 
-			resetTimeStarted();
+            resetTimeStarted();
 
-			while (process.isAlive()) {
-				try {
-					Thread.sleep(WAIT_FOR_CHECK);
-				} catch (InterruptedException e) {
-					break;
-				}
-				long timeAlive = System.currentTimeMillis() - timeStarted;
-				if (timeAlive > timeOutInMillis) {
-					if (!process.isAlive()) {
-						/*
-						 * no termination necessary, process already terminated
-						 */
-						break;
-					}
-					outputHandler.output("Timeout reached (" + timeOutInSeconds + " seconds) - destroy process");
-					process.destroy();
-					break;
-				}
-			}
-		}
-	}
+            while (process.isAlive()) {
+                try {
+                    Thread.sleep(WAIT_FOR_CHECK);
+                } catch (InterruptedException e) {
+                    break;
+                }
+                long timeAlive = System.currentTimeMillis() - timeStarted;
+                if (timeAlive > timeOutInMillis) {
+                    if (!process.isAlive()) {
+                        /*
+                         * no termination necessary, process already terminated
+                         */
+                        break;
+                    }
+                    outputHandler.output("Timeout reached (" + timeOutInSeconds + " seconds) - destroy process");
+                    process.destroy();
+                    break;
+                }
+            }
+        }
+    }
 
 }

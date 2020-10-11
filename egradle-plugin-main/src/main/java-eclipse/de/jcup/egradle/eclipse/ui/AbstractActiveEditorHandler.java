@@ -26,36 +26,36 @@ import org.eclipse.ui.PlatformUI;
 
 public abstract class AbstractActiveEditorHandler extends AbstractHandler {
 
-	public AbstractActiveEditorHandler() {
-		super();
-	}
+    public AbstractActiveEditorHandler() {
+        super();
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		if (workbench == null) {
-			return null;
-		}
-		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		if (activeWorkbenchWindow == null) {
-			return null;
-		}
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		if (activePage == null) {
-			return null;
-		}
-		IEditorPart editor = activePage.getActiveEditor();
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IWorkbench workbench = PlatformUI.getWorkbench();
+        if (workbench == null) {
+            return null;
+        }
+        IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+        if (activeWorkbenchWindow == null) {
+            return null;
+        }
+        IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+        if (activePage == null) {
+            return null;
+        }
+        IEditorPart editor = activePage.getActiveEditor();
 
-		executeOnActiveEditor(editor);
-		return null;
-	}
+        executeOnActiveEditor(editor);
+        return null;
+    }
 
-	/**
-	 * Executes on a editor part. Execution implementation should inspect by
-	 * instanceof... before doing execution
-	 * 
-	 * @param editor
-	 */
-	protected abstract void executeOnActiveEditor(IEditorPart editor);
+    /**
+     * Executes on a editor part. Execution implementation should inspect by
+     * instanceof... before doing execution
+     * 
+     * @param editor
+     */
+    protected abstract void executeOnActiveEditor(IEditorPart editor);
 
 }

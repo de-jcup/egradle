@@ -26,43 +26,42 @@ import de.jcup.egradle.eclipse.ui.SWTFactory;
 
 public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor automaticalDeriveBuildFolders;
+    private BooleanFieldEditor automaticalDeriveBuildFolders;
 
-	public EGradleFileHandlingPreferencePage() {
-		super(GRID);
-		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
-	}
+    public EGradleFileHandlingPreferencePage() {
+        super(GRID);
+        setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
+    }
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
-	public void createFieldEditors() {
-		GridData groupLayoutData = new GridData();
-		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
-		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = false;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 3;
+    /**
+     * Creates the field editors. Field editors are abstractions of the common GUI
+     * blocks needed to manipulate various types of preferences. Each field editor
+     * knows how to save and restore itself.
+     */
+    public void createFieldEditors() {
+        GridData groupLayoutData = new GridData();
+        groupLayoutData.horizontalAlignment = GridData.FILL;
+        groupLayoutData.verticalAlignment = GridData.BEGINNING;
+        groupLayoutData.grabExcessHorizontalSpace = true;
+        groupLayoutData.grabExcessVerticalSpace = false;
+        groupLayoutData.verticalSpan = 2;
+        groupLayoutData.horizontalSpan = 3;
 
-		automaticalDeriveBuildFolders = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(),
-				"Automatically derive build folders", getFieldEditorParent());
-		String info = "(Importer and 'refresh eclipse' action will automatically derive build folders)";
+        automaticalDeriveBuildFolders = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId(), "Automatically derive build folders",
+                getFieldEditorParent());
+        String info = "(Importer and 'refresh eclipse' action will automatically derive build folders)";
 
-		addField(automaticalDeriveBuildFolders);
-		SWTFactory.createLabel(getFieldEditorParent(), info, 2);
-	}
+        addField(automaticalDeriveBuildFolders);
+        SWTFactory.createLabel(getFieldEditorParent(), info, 2);
+    }
 
-	public boolean performOk() {
-		boolean done = super.performOk();
-		return done;
-	}
+    public boolean performOk() {
+        boolean done = super.performOk();
+        return done;
+    }
 
-	public void init(IWorkbench workbench) {
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
 }

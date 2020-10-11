@@ -27,17 +27,17 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
  */
 public class GradleFileDocumentProvider extends FileDocumentProvider {
 
-	@Override
-	protected IDocument createDocument(Object element) throws CoreException {
-		IDocument document = super.createDocument(element);
-		if (document != null) {
-			/* installation necessary */
-			GradlePartitioner partitioner = GradlePartionerFactory.create();
+    @Override
+    protected IDocument createDocument(Object element) throws CoreException {
+        IDocument document = super.createDocument(element);
+        if (document != null) {
+            /* installation necessary */
+            GradlePartitioner partitioner = GradlePartionerFactory.create();
 
-			partitioner.connect(document, true);
-			document.setDocumentPartitioner(partitioner);
-		}
-		return document;
-	}
+            partitioner.connect(document, true);
+            document.setDocumentPartitioner(partitioner);
+        }
+        return document;
+    }
 
 }

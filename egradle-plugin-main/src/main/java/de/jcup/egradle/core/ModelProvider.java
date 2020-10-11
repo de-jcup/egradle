@@ -19,5 +19,5 @@ import de.jcup.egradle.core.model.Model;
 
 public interface ModelProvider {
 
-	public Model getModel();
+    public Model getModel();
 }

@@ -44,108 +44,107 @@ import de.jcup.egradle.sdk.SDKManager;
  */
 public class EditorActivator extends AbstractUIPlugin implements PluginContextProvider {
 
-	// The plug-in COMMAND_ID
-	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.editor.gradle"; //$NON-NLS-1$
+    // The plug-in COMMAND_ID
+    public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.editor.gradle"; //$NON-NLS-1$
 
-	// The shared instance
-	private static EditorActivator plugin;
-	private ColorManager colorManager;
+    // The shared instance
+    private static EditorActivator plugin;
+    private ColorManager colorManager;
 
-	private CodeCompletionRegistry codeCompletionRegistry;
-	private AbstractConfigurableTaskTagsSupportProvider taskSupportProvider;
-	/**
-	 * The constructor
-	 */
-	public EditorActivator() {
-		colorManager = new ColorManager();
-		codeCompletionRegistry = new CodeCompletionRegistry();
-		taskSupportProvider = new GradleTaskTagsSupportProvider(this) ; 
-	}
-	
-	public AbstractConfigurableTaskTagsSupportProvider getTaskSupportProvider() {
+    private CodeCompletionRegistry codeCompletionRegistry;
+    private AbstractConfigurableTaskTagsSupportProvider taskSupportProvider;
+
+    /**
+     * The constructor
+     */
+    public EditorActivator() {
+        colorManager = new ColorManager();
+        codeCompletionRegistry = new CodeCompletionRegistry();
+        taskSupportProvider = new GradleTaskTagsSupportProvider(this);
+    }
+
+    public AbstractConfigurableTaskTagsSupportProvider getTaskSupportProvider() {
         return taskSupportProvider;
     }
 
+    public ColorManager getColorManager() {
+        return colorManager;
+    }
 
-	public ColorManager getColorManager() {
-		return colorManager;
-	}
+    public void start(BundleContext context) throws Exception {
+        super.start(context);
+        plugin = this;
+        long timeStart = System.currentTimeMillis();
 
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-		long timeStart = System.currentTimeMillis();
+        SDK sdk = SDKManager.get().getCurrentSDK();
+        boolean sdkInstalled = false;
+        if (!sdk.isInstalled()) {
+            try {
+                sdk.install();
+                sdkInstalled = true;
+            } catch (IOException e) {
+                EditorUtil.INSTANCE.logError("Was not able install SDK:" + sdk.getVersion(), e);
+            }
+        }
+        taskSupportProvider.getTodoTaskSupport().install();
 
-		SDK sdk = SDKManager.get().getCurrentSDK();
-		boolean sdkInstalled = false;
-		if (!sdk.isInstalled()) {
-			try {
-				sdk.install();
-				sdkInstalled = true;
-			} catch (IOException e) {
-				EditorUtil.INSTANCE.logError("Was not able install SDK:" + sdk.getVersion(), e);
-			}
-		}
-		taskSupportProvider.getTodoTaskSupport().install();
+        GradleDSLTypeProvider gradleDslProvider = initTypeProvider(sdk);
 
-		GradleDSLTypeProvider gradleDslProvider = initTypeProvider(sdk);
+        /* load project per default so show up time for tooltips faster */
+        gradleDslProvider.getType("org.gradle.api.Project");
+        if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING) {
+            long timeEnd = System.currentTimeMillis();
+            double seconds = (timeEnd - timeStart) / 1000;
+            getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Gradle editor startup in :" + seconds + " seconds" + ", sdk installed:" + sdkInstalled));
+        }
 
-		/* load project per default so show up time for tooltips faster */
-		gradleDslProvider.getType("org.gradle.api.Project");
-		if (EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING) {
-			long timeEnd = System.currentTimeMillis();
-			double seconds = (timeEnd - timeStart) / 1000;
-			getLog().log(new Status(IStatus.INFO, PLUGIN_ID,
-					"Gradle editor startup in :" + seconds + " seconds" + ", sdk installed:" + sdkInstalled));
-		}
+    }
 
-	}
+    public void stop(BundleContext context) throws Exception {
+        plugin = null;
+        colorManager.dispose();
+        taskSupportProvider.getTodoTaskSupport().uninstall();
+        super.stop(context);
+    }
 
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		colorManager.dispose();
-		taskSupportProvider.getTodoTaskSupport().uninstall();
-		super.stop(context);
-	}
+    public CodeCompletionRegistry getCodeCompletionRegistry() {
+        return codeCompletionRegistry;
+    }
 
-	public CodeCompletionRegistry getCodeCompletionRegistry() {
-		return codeCompletionRegistry;
-	}
+    /**
+     * Returns the shared instance
+     *
+     * @return the shared instance
+     */
+    public static EditorActivator getDefault() {
+        return plugin;
+    }
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static EditorActivator getDefault() {
-		return plugin;
-	}
+    private GradleDSLTypeProvider initTypeProvider(SDK sdk) {
+        File dslFolder = sdk.getSDKInstallationFolder();
+        ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
+        codeCompletionRegistry.setErrorHandler(errorHandler);
 
-	private GradleDSLTypeProvider initTypeProvider(SDK sdk) {
-		File dslFolder = sdk.getSDKInstallationFolder();
-		ErrorHandler errorHandler = EGradleErrorHandler.INSTANCE;
-		codeCompletionRegistry.setErrorHandler(errorHandler);
+        /*
+         * init code completion parts - when dsl folder not correctly set it will not
+         * work but it is robust will only do nothing
+         */
+        XMLTypeImporter typeImporter = new XMLTypeImporter();
+        XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+        ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+        FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+        loader.setDSLFolder(dslFolder);
 
-		/*
-		 * init code completion parts - when dsl folder not correctly set it
-		 * will not work but it is robust will only do nothing
-		 */
-		XMLTypeImporter typeImporter = new XMLTypeImporter();
-		XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
-		ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
-		FilesystemFileLoader loader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		loader.setDSLFolder(dslFolder);
+        GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
+        GradleDSLPluginLoader gradleDslPluginLoader = new GradleDSLPluginLoader(loader);
 
-		GradleDSLTypeProvider gradleDslProvider = new GradleDSLTypeProvider(loader);
-		GradleDSLPluginLoader gradleDslPluginLoader = new GradleDSLPluginLoader(loader);
+        codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
+        codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, gradleDslPluginLoader);
 
-		codeCompletionRegistry.registerService(GradleDSLTypeProvider.class, gradleDslProvider);
-		codeCompletionRegistry.registerService(GradleDSLPluginLoader.class, gradleDslPluginLoader);
+        codeCompletionRegistry.init();
 
-		codeCompletionRegistry.init();
-
-		return gradleDslProvider;
-	}
+        return gradleDslProvider;
+    }
 
     @Override
     public AbstractUIPlugin getActivator() {

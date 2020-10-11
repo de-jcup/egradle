@@ -26,23 +26,23 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class StringUtilsAccess {
 
-	public static boolean isBlank(CharSequence cs) {
-		return StringUtils.isBlank(cs);
-	}
+    public static boolean isBlank(CharSequence cs) {
+        return StringUtils.isBlank(cs);
+    }
 
-	public static String substring(String str, int start) {
-		return StringUtils.substring(str, start);
-	}
+    public static String substring(String str, int start) {
+        return StringUtils.substring(str, start);
+    }
 
-	public static String substring(String str, int start, int end) {
-		return StringUtils.substring(str, start, end);
-	}
+    public static String substring(String str, int start, int end) {
+        return StringUtils.substring(str, start, end);
+    }
 
-	public static String abbreviate(String currentHTML, int maxWidth) {
-		return StringUtils.abbreviate(currentHTML, maxWidth);
-	}
+    public static String abbreviate(String currentHTML, int maxWidth) {
+        return StringUtils.abbreviate(currentHTML, maxWidth);
+    }
 
-	public static String[] split(String string, String separatorChars) {
-		return StringUtils.split(string, separatorChars);
-	}
+    public static String[] split(String string, String separatorChars) {
+        return StringUtils.split(string, separatorChars);
+    }
 }

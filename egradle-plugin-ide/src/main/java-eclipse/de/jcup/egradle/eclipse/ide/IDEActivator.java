@@ -45,154 +45,151 @@ import de.jcup.egradle.template.FileStructureTemplateManager;
  * The activator class controls the plug-in life cycle
  */
 public class IDEActivator extends AbstractUIPlugin implements RootFolderProvider, LogAdapter {
-	private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
+    private Map<StyledText, IConsolePageParticipant> viewers = new HashMap<StyledText, IConsolePageParticipant>();
 
-	// The plug-in ID
-	public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.ide"; //$NON-NLS-1$
+    // The plug-in ID
+    public static final String PLUGIN_ID = "de.jcup.egradle.eclipse.plugin.ide"; //$NON-NLS-1$
 
-	// The shared instance
-	private static IDEActivator plugin;
+    // The shared instance
+    private static IDEActivator plugin;
 
-	private ColorManager colorManager;
+    private ColorManager colorManager;
 
-	private FileStructureTemplateManager newProjectTemplateManager;
+    private FileStructureTemplateManager newProjectTemplateManager;
 
-	private RootFolderCopySupport templatesCopySupport;
+    private RootFolderCopySupport templatesCopySupport;
 
-	private FileStructureTemplateManager gradleWrapperTemplateManager;
+    private FileStructureTemplateManager gradleWrapperTemplateManager;
 
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
+    public void start(BundleContext context) throws Exception {
+        super.start(context);
+        plugin = this;
 
-		startMigrationsWhereNecessary();
+        startMigrationsWhereNecessary();
 
-		installTemplateManagers(context);
+        installTemplateManagers(context);
 
-		/* initial refresh update command to current state */
-		UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
+        /* initial refresh update command to current state */
+        UpdateOrCreateVirtualRootProjectHandler.requestRefresh();
 
-	}
+    }
 
-	private void installTemplateManagers(BundleContext context) {
+    private void installTemplateManagers(BundleContext context) {
 
-		File templateFolder = getTemplatesFolder(context);
-		File newProjectTemplatesFolder = new File(templateFolder, "new-project-wizard");
-		File gradleWrapperTemplatesFolder = new File(templateFolder, "gradle-wrapper");
+        File templateFolder = getTemplatesFolder(context);
+        File newProjectTemplatesFolder = new File(templateFolder, "new-project-wizard");
+        File gradleWrapperTemplatesFolder = new File(templateFolder, "gradle-wrapper");
 
-		newProjectTemplateManager = new FileStructureTemplateManager(
-				new SimpleRootFolderProvider(newProjectTemplatesFolder), this);
-		gradleWrapperTemplateManager = new FileStructureTemplateManager(
-				new SimpleRootFolderProvider(gradleWrapperTemplatesFolder), this);
+        newProjectTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(newProjectTemplatesFolder), this);
+        gradleWrapperTemplateManager = new FileStructureTemplateManager(new SimpleRootFolderProvider(gradleWrapperTemplatesFolder), this);
 
-	}
+    }
 
-	private File getTemplatesFolder(BundleContext context) {
-		VersionData ideVersion = EclipseUtil.createVersionData(context.getBundle());
-		templatesCopySupport = new VersionedFolderToUserHomeCopySupport("templates", ideVersion, this);
+    private File getTemplatesFolder(BundleContext context) {
+        VersionData ideVersion = EclipseUtil.createVersionData(context.getBundle());
+        templatesCopySupport = new VersionedFolderToUserHomeCopySupport("templates", ideVersion, this);
 
-		/* copy templates if not already installed */
-		if (!templatesCopySupport.isTargetFolderExisting()) {
-			try {
-				templatesCopySupport.copyFrom(this);
+        /* copy templates if not already installed */
+        if (!templatesCopySupport.isTargetFolderExisting()) {
+            try {
+                templatesCopySupport.copyFrom(this);
 
-			} catch (IOException e) {
-				IDEUtil.logError("Was not able to install templates to user home!", e);
-			}
-		}
-		return templatesCopySupport.getTargetFolder();
-	}
+            } catch (IOException e) {
+                IDEUtil.logError("Was not able to install templates to user home!", e);
+            }
+        }
+        return templatesCopySupport.getTargetFolder();
+    }
 
-	private void startMigrationsWhereNecessary() {
-		/* Keep ordering here */
-		new EGradle1_3ToEGradle2_0Migration().migrate();
+    private void startMigrationsWhereNecessary() {
+        /* Keep ordering here */
+        new EGradle1_3ToEGradle2_0Migration().migrate();
 
-	}
+    }
 
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		colorManager.dispose();
-		super.stop(context);
-	}
+    public void stop(BundleContext context) throws Exception {
+        plugin = null;
+        colorManager.dispose();
+        super.stop(context);
+    }
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static IDEActivator getDefault() {
-		return plugin;
-	}
+    /**
+     * Returns the shared instance
+     *
+     * @return the shared instance
+     */
+    public static IDEActivator getDefault() {
+        return plugin;
+    }
 
-	/**
-	 * The constructor
-	 */
-	public IDEActivator() {
-		colorManager = new ColorManager();
-	}
+    /**
+     * The constructor
+     */
+    public IDEActivator() {
+        colorManager = new ColorManager();
+    }
 
-	public ColorManager getColorManager() {
-		return colorManager;
+    public ColorManager getColorManager() {
+        return colorManager;
 
-	}
+    }
 
-	/**
-	 * Returns an image descriptor for the image file at the given plug-in
-	 * relative path
-	 *
-	 * @param path
-	 *            the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
+    /**
+     * Returns an image descriptor for the image file at the given plug-in relative
+     * path
+     *
+     * @param path the path
+     * @return the image descriptor
+     */
+    public static ImageDescriptor getImageDescriptor(String path) {
+        return imageDescriptorFromPlugin(PLUGIN_ID, path);
+    }
 
-	public void addViewer(StyledText viewer, IConsolePageParticipant participant) {
-		viewers.put(viewer, participant);
-	}
+    public void addViewer(StyledText viewer, IConsolePageParticipant participant) {
+        viewers.put(viewer, participant);
+    }
 
-	public void removeViewerWithPageParticipant(IConsolePageParticipant participant) {
-		Set<StyledText> toRemove = new HashSet<StyledText>();
+    public void removeViewerWithPageParticipant(IConsolePageParticipant participant) {
+        Set<StyledText> toRemove = new HashSet<StyledText>();
 
-		for (StyledText viewer : viewers.keySet()) {
-			if (viewers.get(viewer) == participant){
-				toRemove.add(viewer);
-			}
-		}
+        for (StyledText viewer : viewers.keySet()) {
+            if (viewers.get(viewer) == participant) {
+                toRemove.add(viewer);
+            }
+        }
 
-		for (StyledText viewer : toRemove){
-			viewers.remove(viewer);
-		}
-	}
+        for (StyledText viewer : toRemove) {
+            viewers.remove(viewer);
+        }
+    }
 
-	public FileStructureTemplateManager getNewProjectTemplateManager() {
-		return newProjectTemplateManager;
-	}
+    public FileStructureTemplateManager getNewProjectTemplateManager() {
+        return newProjectTemplateManager;
+    }
 
-	public FileStructureTemplateManager getGradlWrappertTemplateManager() {
-		return gradleWrapperTemplateManager;
-	}
+    public FileStructureTemplateManager getGradlWrappertTemplateManager() {
+        return gradleWrapperTemplateManager;
+    }
 
-	@Override
-	public File getRootFolder() throws IOException {
-		File file = EclipseResourceHelper.DEFAULT.getFileInPlugin("templates", PLUGIN_ID);
-		return file;
-	}
+    @Override
+    public File getRootFolder() throws IOException {
+        File file = EclipseResourceHelper.DEFAULT.getFileInPlugin("templates", PLUGIN_ID);
+        return file;
+    }
 
-	@Override
-	public void logInfo(String message) {
-		IDEUtil.logInfo(message);
-	}
+    @Override
+    public void logInfo(String message) {
+        IDEUtil.logInfo(message);
+    }
 
-	@Override
-	public void logWarn(String message) {
-		IDEUtil.logWarning(message);
-	}
+    @Override
+    public void logWarn(String message) {
+        IDEUtil.logWarning(message);
+    }
 
-	@Override
-	public void logError(String message, Throwable t) {
-		IDEUtil.logError(message, t);
-	}
+    @Override
+    public void logError(String message, Throwable t) {
+        IDEUtil.logError(message, t);
+    }
 
 }

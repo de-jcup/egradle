@@ -35,127 +35,123 @@ import de.jcup.egradle.template.FileStructureTemplate.TemplateContentTransformer
 
 public class FileStructureTemplateTest {
 
-	private Properties properties;
-	private File contentRootFolder;
-	private FileStructureTemplate templateToTest;
+    private Properties properties;
+    private File contentRootFolder;
+    private FileStructureTemplate templateToTest;
 
-	@Rule
-	public ExpectedException expected = ExpectedException.none();
-	private FileSupport mockedFileSupport;
-	private DirectoryCopySupport mockedCopySupport;
-	private TemplateContentTransformer mockedContentTransformer;
-	private TemplateContentTransformerFactory mockedContentTransformerFactory;
-	private List<String> predefinedSubprojects;
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+    private FileSupport mockedFileSupport;
+    private DirectoryCopySupport mockedCopySupport;
+    private TemplateContentTransformer mockedContentTransformer;
+    private TemplateContentTransformerFactory mockedContentTransformerFactory;
+    private List<String> predefinedSubprojects;
 
-	@Before
-	public void before() throws Exception {
+    @Before
+    public void before() throws Exception {
 
-		contentRootFolder = mock(File.class);
-		properties = mock(Properties.class);
-		mockedContentTransformer = mock(TemplateContentTransformer.class);
+        contentRootFolder = mock(File.class);
+        properties = mock(Properties.class);
+        mockedContentTransformer = mock(TemplateContentTransformer.class);
 
-		mockedContentTransformerFactory = mock(TemplateContentTransformerFactory.class);
-		when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class)))
-				.thenReturn(mockedContentTransformer);
+        mockedContentTransformerFactory = mock(TemplateContentTransformerFactory.class);
+        when(mockedContentTransformerFactory.createTemplateContentTransformer(any(Properties.class))).thenReturn(mockedContentTransformer);
 
-		predefinedSubprojects = new ArrayList<>();
-		templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0, predefinedSubprojects);
+        predefinedSubprojects = new ArrayList<>();
+        templateToTest = new FileStructureTemplate("name", contentRootFolder, "description", 0, predefinedSubprojects);
 
-		mockedCopySupport = mock(DirectoryCopySupport.class);
-		mockedFileSupport = mock(FileSupport.class);
+        mockedCopySupport = mock(DirectoryCopySupport.class);
+        mockedFileSupport = mock(FileSupport.class);
 
-		templateToTest.copySupport = mockedCopySupport;
-		templateToTest.fileSupport = mockedFileSupport;
-		templateToTest.contentTransformerFactory = mockedContentTransformerFactory;
-	}
+        templateToTest.copySupport = mockedCopySupport;
+        templateToTest.fileSupport = mockedFileSupport;
+        templateToTest.contentTransformerFactory = mockedContentTransformerFactory;
+    }
 
-	@Test
-	public void predefinedSubProjectsAreAvailableFromGetter() {
-		predefinedSubprojects.add("a");
+    @Test
+    public void predefinedSubProjectsAreAvailableFromGetter() {
+        predefinedSubprojects.add("a");
 
-		assertTrue(templateToTest.getPredefinedSubprojects().contains("a"));
-	}
+        assertTrue(templateToTest.getPredefinedSubprojects().contains("a"));
+    }
 
-	@Test
-	public void apply_from__null_throws_IllegalArgument() throws Exception {
-		expected.expect(IllegalArgumentException.class);
+    @Test
+    public void apply_from__null_throws_IllegalArgument() throws Exception {
+        expected.expect(IllegalArgumentException.class);
 
-		/* execute */
-		templateToTest.applyTo(null, properties);
+        /* execute */
+        templateToTest.applyTo(null, properties);
 
-	}
+    }
 
-	@Test
-	public void a_template_does_create_per_default_a_content_transformer_factory_which_does_create_a_transformer() {
-		/* prepare */
-		Properties p = new Properties();
+    @Test
+    public void a_template_does_create_per_default_a_content_transformer_factory_which_does_create_a_transformer() {
+        /* prepare */
+        Properties p = new Properties();
 
-		/* check preconditions */
-		assertNotNull(templateToTest.contentTransformerFactory);
+        /* check preconditions */
+        assertNotNull(templateToTest.contentTransformerFactory);
 
-		/* execute */
-		TemplateContentTransformer transformer = templateToTest.contentTransformerFactory
-				.createTemplateContentTransformer(p);
+        /* execute */
+        TemplateContentTransformer transformer = templateToTest.contentTransformerFactory.createTemplateContentTransformer(p);
 
-		/* test */
-		assertNotNull(transformer);
-	}
+        /* test */
+        assertNotNull(transformer);
+    }
 
-	@Test
-	public void a_template_does_call_the_content_transformer_factory_with_given_properties() throws Exception {
-		/* prepare */
-		File mockedTargetFolder = buildDirectoryMock();
-		Properties p = new Properties();
+    @Test
+    public void a_template_does_call_the_content_transformer_factory_with_given_properties() throws Exception {
+        /* prepare */
+        File mockedTargetFolder = buildDirectoryMock();
+        Properties p = new Properties();
 
-		/* execute */
-		templateToTest.applyTo(mockedTargetFolder, p);
+        /* execute */
+        templateToTest.applyTo(mockedTargetFolder, p);
 
-		/* test */
-		verify(mockedContentTransformerFactory).createTemplateContentTransformer(p);
-	}
+        /* test */
+        verify(mockedContentTransformerFactory).createTemplateContentTransformer(p);
+    }
 
-	@Test
-	public void apply_from__new_target_file_calls_copy_support_with_an_template_file_name_transformer()
-			throws Exception {
-		/* prepare */
-		File mockedTargetFolder = buildDirectoryMock();
+    @Test
+    public void apply_from__new_target_file_calls_copy_support_with_an_template_file_name_transformer() throws Exception {
+        /* prepare */
+        File mockedTargetFolder = buildDirectoryMock();
 
-		/* execute */
-		templateToTest.applyTo(mockedTargetFolder, properties);
+        /* execute */
+        templateToTest.applyTo(mockedTargetFolder, properties);
 
-		/* test */
-		verify(mockedCopySupport).copyDirectories(eq(contentRootFolder), eq(mockedTargetFolder),
-				any(TemplateFileNameTransformer.class), eq(Boolean.TRUE), eq("template.properties"));
+        /* test */
+        verify(mockedCopySupport).copyDirectories(eq(contentRootFolder), eq(mockedTargetFolder), any(TemplateFileNameTransformer.class), eq(Boolean.TRUE), eq("template.properties"));
 
-	}
+    }
 
-	private File buildDirectoryMock() {
-		File mockedTargetFolder = mock(File.class);
-		when(mockedTargetFolder.isDirectory()).thenReturn(true);
-		when(mockedTargetFolder.listFiles()).thenReturn(new File[] {});
-		return mockedTargetFolder;
-	}
+    private File buildDirectoryMock() {
+        File mockedTargetFolder = mock(File.class);
+        when(mockedTargetFolder.isDirectory()).thenReturn(true);
+        when(mockedTargetFolder.listFiles()).thenReturn(new File[] {});
+        return mockedTargetFolder;
+    }
 
-	@Test
-	public void apply_from__new_target_file_calls_file_support_to_write_file() throws Exception {
-		/* prepare */
+    @Test
+    public void apply_from__new_target_file_calls_file_support_to_write_file() throws Exception {
+        /* prepare */
 
-		File mockedTargetFile = mock(File.class);
-		File mockedTargetFolder = mock(File.class);
+        File mockedTargetFile = mock(File.class);
+        File mockedTargetFolder = mock(File.class);
 
-		when(mockedTargetFolder.listFiles()).thenReturn(new File[] { mockedTargetFile });
-		when(mockedTargetFolder.isDirectory()).thenReturn(true);
+        when(mockedTargetFolder.listFiles()).thenReturn(new File[] { mockedTargetFile });
+        when(mockedTargetFolder.isDirectory()).thenReturn(true);
 
-		when(mockedTargetFile.isFile()).thenReturn(true);
+        when(mockedTargetFile.isFile()).thenReturn(true);
 
-		when(mockedContentTransformer.transform(any())).thenReturn("");
+        when(mockedContentTransformer.transform(any())).thenReturn("");
 
-		/* execute */
-		templateToTest.applyTo(mockedTargetFolder, properties);
+        /* execute */
+        templateToTest.applyTo(mockedTargetFolder, properties);
 
-		/* test */
-		verify(mockedFileSupport).writeTextFile(eq(mockedTargetFile), any(String.class));
+        /* test */
+        verify(mockedFileSupport).writeTextFile(eq(mockedTargetFile), any(String.class));
 
-	}
+    }
 
 }

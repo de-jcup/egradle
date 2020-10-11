@@ -50,162 +50,157 @@ import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
 public class GradleExecutionDelegate {
 
     private GradleContext context;
-	private OutputHandler outputHandler;
-	private ProcessExecutionResult processExecutionResult;
-	protected GradleExecutor executor;
+    private OutputHandler outputHandler;
+    private ProcessExecutionResult processExecutionResult;
+    protected GradleExecutor executor;
 
-	public ProcessExecutionResult getResult() {
-		return processExecutionResult;
-	}
+    public ProcessExecutionResult getResult() {
+        return processExecutionResult;
+    }
 
-	/**
-	 * Creates a new gradle execution delegate
-	 * 
-	 * @param outputHandler
-	 * @param processExecutor
-	 * @param additionalContextPreparator
-	 * @param rootProject
-	 *            if null rootProject will be resolved by preferences
-	 * @throws GradleExecutionException
-	 */
-	public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor,
-			GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
-			throws GradleExecutionException {
-		notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
-		notNull(processExecutor, "'processExecutor' may not be null");
+    /**
+     * Creates a new gradle execution delegate
+     * 
+     * @param outputHandler
+     * @param processExecutor
+     * @param additionalContextPreparator
+     * @param rootProject                 if null rootProject will be resolved by
+     *                                    preferences
+     * @throws GradleExecutionException
+     */
+    public GradleExecutionDelegate(OutputHandler outputHandler, ProcessExecutor processExecutor, GradleContextPreparator additionalContextPreparator, GradleRootProject rootProject)
+            throws GradleExecutionException {
+        notNull(outputHandler, "'systemConsoleOutputHandler' may not be null");
+        notNull(processExecutor, "'processExecutor' may not be null");
 
-		if (rootProject == null) {
-			rootProject = IDEUtil.getRootProject(false);
-		}
-		if (rootProject == null) {
-			/*
-			 * we handle the error on creation time by own exception thrown -
-			 * without IDEUtil error dialog
-			 */
-			throw new RootProjectMissingExecutionException();
-		}
-		this.outputHandler = outputHandler;
+        if (rootProject == null) {
+            rootProject = IDEUtil.getRootProject(false);
+        }
+        if (rootProject == null) {
+            /*
+             * we handle the error on creation time by own exception thrown - without
+             * IDEUtil error dialog
+             */
+            throw new RootProjectMissingExecutionException();
+        }
+        this.outputHandler = outputHandler;
 
-		context = createContext(rootProject);
-		if (additionalContextPreparator != null) {
-			additionalContextPreparator.prepare(context);
-		}
-		executor = new GradleExecutor(processExecutor);
-	}
+        context = createContext(rootProject);
+        if (additionalContextPreparator != null) {
+            additionalContextPreparator.prepare(context);
+        }
+        executor = new GradleExecutor(processExecutor);
+    }
 
-	protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
-		EGradleIdePreferences preferences = IDEUtil.getPreferences();
-		/* Default JAVA_HOME */
-		String globalJavaHome = preferences.getGlobalJavaHomePath();
-		/* Call gradle settings */
-		String gradleCommand = preferences.getGradleCallCommand();
-		String gradleInstallPath = preferences.getGradleBinInstallFolder();
+    protected GradleContext createContext(GradleRootProject rootProject) throws GradleExecutionException {
+        EGradleIdePreferences preferences = IDEUtil.getPreferences();
+        /* Default JAVA_HOME */
+        String globalJavaHome = preferences.getGlobalJavaHomePath();
+        /* Call gradle settings */
+        String gradleCommand = preferences.getGradleCallCommand();
+        String gradleInstallPath = preferences.getGradleBinInstallFolder();
 
-		String shellId = preferences.getGradleShellId();
+        String shellId = preferences.getGradleShellId();
 
-		return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
-	}
+        return createContext(rootProject, globalJavaHome, gradleCommand, gradleInstallPath, shellId);
+    }
 
-	protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome,
-			String gradleCommand, String gradleInstallPath, String shellId) throws GradleExecutionException {
-		/* build configuration for gradle run */
-		MutableGradleConfiguration config = new MutableGradleConfiguration();
-		/* build context */
-		GradleContext context = new GradleContext(rootProject, config);
+    protected final GradleContext createContext(GradleRootProject rootProject, String globalJavaHome, String gradleCommand, String gradleInstallPath, String shellId) throws GradleExecutionException {
+        /* build configuration for gradle run */
+        MutableGradleConfiguration config = new MutableGradleConfiguration();
+        /* build context */
+        GradleContext context = new GradleContext(rootProject, config);
 
-		if (!StringUtils.isEmpty(globalJavaHome)) {
-			context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME
-																	// still can
-																	// be
-																	// overriden
-																	// by
-																	// context
-																	// preparator
-																	// see below
-		}
-		context.setAmountOfWorkToDo(1);
+        if (!StringUtils.isEmpty(globalJavaHome)) {
+            context.setEnvironment("JAVA_HOME", globalJavaHome); // JAVA_HOME
+                                                                 // still can
+                                                                 // be
+                                                                 // overriden
+                                                                 // by
+                                                                 // context
+                                                                 // preparator
+                                                                 // see below
+        }
+        context.setAmountOfWorkToDo(1);
 
-		if (StringUtils.isEmpty(gradleCommand)) {
-			throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");
-		}
+        if (StringUtils.isEmpty(gradleCommand)) {
+            throw new GradleExecutionException("Preferences have no gradle command set, cannot execute!");
+        }
 
-		config.setShellCommand(EGradleShellType.findById(shellId));
-		config.setGradleBinDirectory(gradleInstallPath);
-		config.setGradleCommand(gradleCommand);
-		config.setGradleUserHome(EGradleIdePreferences.getInstance().getGradleUserHome());
-		config.setWorkingDirectory(rootProject.getFolder().getAbsolutePath());
-		return context;
-	}
+        config.setShellCommand(EGradleShellType.findById(shellId));
+        config.setGradleBinDirectory(gradleInstallPath);
+        config.setGradleCommand(gradleCommand);
+        config.setGradleUserHome(EGradleIdePreferences.getInstance().getGradleUserHome());
+        config.setWorkingDirectory(rootProject.getFolder().getAbsolutePath());
+        return context;
+    }
 
-	/**
-	 * Execute and give output by given progress monitor
-	 * 
-	 * @param monitor
-	 *            - progress monitor
-	 * @throws Exception
-	 */
-	public void execute(IProgressMonitor monitor) throws Exception {
-		processExecutionResult = new ProcessExecutionResult();
-		try {
-			GradleRootProject rootProject = context.getRootProject();
-			String commandString = context.getCommandString();
-			String progressDescription = "Executing gradle commands:" + commandString + " in "
-					+ context.getRootProject().getFolder().getAbsolutePath();
+    /**
+     * Execute and give output by given progress monitor
+     * 
+     * @param monitor - progress monitor
+     * @throws Exception
+     */
+    public void execute(IProgressMonitor monitor) throws Exception {
+        processExecutionResult = new ProcessExecutionResult();
+        try {
+            GradleRootProject rootProject = context.getRootProject();
+            String commandString = context.getCommandString();
+            String progressDescription = "Executing gradle commands:" + commandString + " in " + context.getRootProject().getFolder().getAbsolutePath();
 
-			File folder = rootProject.getFolder();
-			String rootProjectFolderName = folder.getName();
-			String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
-					.format(new Date());
+            File folder = rootProject.getFolder();
+            String rootProjectFolderName = folder.getName();
+            String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(new Date());
 
-			monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
-			if (monitor.isCanceled()) {
-				return;
-			}
-			beforeExecutionDone(monitor);
-			if (monitor.isCanceled()) {
-				return;
-			}
-			outputHandler.output("\n" + executionStartTime + " " + progressDescription);
-			outputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
+            monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
+            if (monitor.isCanceled()) {
+                return;
+            }
+            beforeExecutionDone(monitor);
+            if (monitor.isCanceled()) {
+                return;
+            }
+            outputHandler.output("\n" + executionStartTime + " " + progressDescription);
+            outputHandler.output("Root project '" + rootProjectFolderName + "' executing " + commandString);
 
-			if (monitor.isCanceled()) {
-				outputHandler.output("[CANCELED]");
-				processExecutionResult.setCanceledByuser(true);
-				return;
-			}
-			ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
-			context.register(cancelStateProvider);
-			String gradleUserHOme = EGradleIdePreferences.getInstance().getGradleUserHome();
-			if (StringUtils.isNotBlank(gradleUserHOme)) {
+            if (monitor.isCanceled()) {
+                outputHandler.output("[CANCELED]");
+                processExecutionResult.setCanceledByuser(true);
+                return;
+            }
+            ProgressMonitorCancelStateProvider cancelStateProvider = new ProgressMonitorCancelStateProvider(monitor);
+            context.register(cancelStateProvider);
+            String gradleUserHOme = EGradleIdePreferences.getInstance().getGradleUserHome();
+            if (StringUtils.isNotBlank(gradleUserHOme)) {
                 context.getEnvironment().put("GRADLE_USER_HOME", gradleUserHOme);
             }
-			processExecutionResult = executor.execute(context);
-			if (processExecutionResult.isOkay()) {
-				outputHandler.output("[OK]");
-			} else {
-				outputHandler.output("[FAILED]");
-			}
-			afterExecutionDone(monitor);
-		} catch (Exception e) {
-			throw new InvocationTargetException(e);
-		} finally {
-			monitor.done();
-		}
+            processExecutionResult = executor.execute(context);
+            if (processExecutionResult.isOkay()) {
+                outputHandler.output("[OK]");
+            } else {
+                outputHandler.output("[FAILED]");
+            }
+            afterExecutionDone(monitor);
+        } catch (Exception e) {
+            throw new InvocationTargetException(e);
+        } finally {
+            monitor.done();
+        }
 
-	}
+    }
 
-	protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
-		if (outputHandler instanceof RememberLastLinesOutputHandler) {
-			IDEUtil.removeAllValidationErrorsOfConsoleOutput();
-		}
-	}
+    protected void beforeExecutionDone(IProgressMonitor monitor) throws Exception {
+        if (outputHandler instanceof RememberLastLinesOutputHandler) {
+            IDEUtil.removeAllValidationErrorsOfConsoleOutput();
+        }
+    }
 
-	protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
-		if (outputHandler instanceof RememberLastLinesOutputHandler) {
-			RememberLastLinesOutputHandler validationOutputHandler = (RememberLastLinesOutputHandler) outputHandler;
-			List<String> list = validationOutputHandler.createOutputToValidate();
-			IDEUtil.showValidationErrorsOfConsoleOutput(list);
-		}
-	}
+    protected void afterExecutionDone(IProgressMonitor monitor) throws Exception {
+        if (outputHandler instanceof RememberLastLinesOutputHandler) {
+            RememberLastLinesOutputHandler validationOutputHandler = (RememberLastLinesOutputHandler) outputHandler;
+            List<String> list = validationOutputHandler.createOutputToValidate();
+            IDEUtil.showValidationErrorsOfConsoleOutput(list);
+        }
+    }
 
 }

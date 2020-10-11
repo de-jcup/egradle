@@ -30,63 +30,61 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
  */
 public abstract class AbstractQuickDialog extends PopupDialog {
 
-	protected static final boolean GRAB_FOCUS = true;
-	protected static final boolean PERSIST_NO_SIZE = false;
-	protected static final boolean PERSIST_SIZE = true;
+    protected static final boolean GRAB_FOCUS = true;
+    protected static final boolean PERSIST_NO_SIZE = false;
+    protected static final boolean PERSIST_SIZE = true;
 
-	protected static final boolean PERSIST_NO_BOUNDS = false;
-	protected static final boolean PERSIST_BOUNDS = true;
+    protected static final boolean PERSIST_NO_BOUNDS = false;
+    protected static final boolean PERSIST_BOUNDS = true;
 
-	protected static final boolean SHOW_DIALOG_MENU = true;
-	protected static final boolean SHOW_NO_DIALOG_MENU = false;
+    protected static final boolean SHOW_DIALOG_MENU = true;
+    protected static final boolean SHOW_NO_DIALOG_MENU = false;
 
-	protected static final boolean SHOW_NO_PERSIST_ACTIONS = false;
-	protected static final boolean SHOW_PERSIST_ACTIONS = true;
+    protected static final boolean SHOW_NO_PERSIST_ACTIONS = false;
+    protected static final boolean SHOW_PERSIST_ACTIONS = true;
 
-	AbstractQuickDialog(Shell parent, int shellStyle, boolean takeFocusOnOpen, boolean persistSize,
-			boolean persistLocation, boolean showDialogMenu, boolean showPersistActions, String titleText,
-			String infoText) {
-		super(parent, shellStyle, takeFocusOnOpen, persistSize, persistLocation, showDialogMenu, showPersistActions,
-				titleText, infoText);
-	}
+    AbstractQuickDialog(Shell parent, int shellStyle, boolean takeFocusOnOpen, boolean persistSize, boolean persistLocation, boolean showDialogMenu, boolean showPersistActions, String titleText,
+            String infoText) {
+        super(parent, shellStyle, takeFocusOnOpen, persistSize, persistLocation, showDialogMenu, showPersistActions, titleText, infoText);
+    }
 
-	@Override
-	public final int open() {
-		int value = super.open();
-		beforeRunEventLoop();
-		runEventLoop(getShell());
-		return value;
-	}
+    @Override
+    public final int open() {
+        int value = super.open();
+        beforeRunEventLoop();
+        runEventLoop(getShell());
+        return value;
+    }
 
-	protected void beforeRunEventLoop() {
+    protected void beforeRunEventLoop() {
 
-	}
+    }
 
-	private void runEventLoop(Shell loopShell) {
-		Display display;
-		if (getShell() == null) {
-			display = Display.getCurrent();
-		} else {
-			display = loopShell.getDisplay();
-		}
+    private void runEventLoop(Shell loopShell) {
+        Display display;
+        if (getShell() == null) {
+            display = Display.getCurrent();
+        } else {
+            display = loopShell.getDisplay();
+        }
 
-		while (loopShell != null && !loopShell.isDisposed()) {
-			try {
-				if (!display.readAndDispatch()) {
-					display.sleep();
-				}
-			} catch (Throwable e) {
-				EclipseUtil.logError("UI problems on dispatch", e);
-			}
-		}
-		if (!display.isDisposed()) {
-			display.update();
-		}
-	}
+        while (loopShell != null && !loopShell.isDisposed()) {
+            try {
+                if (!display.readAndDispatch()) {
+                    display.sleep();
+                }
+            } catch (Throwable e) {
+                EclipseUtil.logError("UI problems on dispatch", e);
+            }
+        }
+        if (!display.isDisposed()) {
+            display.update();
+        }
+    }
 
-	@Override
-	protected boolean canHandleShellCloseEvent() {
-		return true;
-	}
+    @Override
+    protected boolean canHandleShellCloseEvent() {
+        return true;
+    }
 
 }

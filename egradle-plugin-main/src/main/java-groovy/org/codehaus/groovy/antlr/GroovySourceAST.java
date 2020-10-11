@@ -48,149 +48,149 @@ import antlr.collections.AST;
  * @author Jeremy Rayner <groovy@ross-rayner.com>
  */
 public class GroovySourceAST extends CommonAST implements Comparable, SourceInfo {
-	private int line;
-	private int col;
-	private int lineLast;
-	private int colLast;
-	private String snippet;
+    private int line;
+    private int col;
+    private int lineLast;
+    private int colLast;
+    private String snippet;
 
-	public GroovySourceAST() {
-	}
+    public GroovySourceAST() {
+    }
 
-	public GroovySourceAST(Token t) {
-		super(t);
-	}
+    public GroovySourceAST(Token t) {
+        super(t);
+    }
 
-	public void initialize(AST ast) {
-		super.initialize(ast);
-		line = ast.getLine();
-		col = ast.getColumn();
-		if (ast instanceof GroovySourceAST) {
-			GroovySourceAST node = (GroovySourceAST) ast;
-			lineLast = node.getLineLast();
-			colLast = node.getColumnLast();
-		}
-	}
+    public void initialize(AST ast) {
+        super.initialize(ast);
+        line = ast.getLine();
+        col = ast.getColumn();
+        if (ast instanceof GroovySourceAST) {
+            GroovySourceAST node = (GroovySourceAST) ast;
+            lineLast = node.getLineLast();
+            colLast = node.getColumnLast();
+        }
+    }
 
-	public void initialize(Token t) {
-		super.initialize(t);
-		line = t.getLine();
-		col = t.getColumn();
-		if (t instanceof SourceInfo) {
-			SourceInfo info = (SourceInfo) t;
-			lineLast = info.getLineLast();
-			colLast = info.getColumnLast();
-		}
-	}
+    public void initialize(Token t) {
+        super.initialize(t);
+        line = t.getLine();
+        col = t.getColumn();
+        if (t instanceof SourceInfo) {
+            SourceInfo info = (SourceInfo) t;
+            lineLast = info.getLineLast();
+            colLast = info.getColumnLast();
+        }
+    }
 
-	public void setLast(Token last) {
-		lineLast = last.getLine();
-		colLast = last.getColumn();
-	}
+    public void setLast(Token last) {
+        lineLast = last.getLine();
+        colLast = last.getColumn();
+    }
 
-	public int getLineLast() {
-		return lineLast;
-	}
+    public int getLineLast() {
+        return lineLast;
+    }
 
-	public void setLineLast(int lineLast) {
-		this.lineLast = lineLast;
-	}
+    public void setLineLast(int lineLast) {
+        this.lineLast = lineLast;
+    }
 
-	public int getColumnLast() {
-		return colLast;
-	}
+    public int getColumnLast() {
+        return colLast;
+    }
 
-	public void setColumnLast(int colLast) {
-		this.colLast = colLast;
-	}
+    public void setColumnLast(int colLast) {
+        this.colLast = colLast;
+    }
 
-	public void setLine(int line) {
-		this.line = line;
-	}
+    public void setLine(int line) {
+        this.line = line;
+    }
 
-	public int getLine() {
-		return (line);
-	}
+    public int getLine() {
+        return (line);
+    }
 
-	public void setColumn(int column) {
-		this.col = column;
-	}
+    public void setColumn(int column) {
+        this.col = column;
+    }
 
-	public int getColumn() {
-		return (col);
-	}
+    public int getColumn() {
+        return (col);
+    }
 
-	public void setSnippet(String snippet) {
-		this.snippet = snippet;
-	}
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
+    }
 
-	public String getSnippet() {
-		return snippet;
-	}
+    public String getSnippet() {
+        return snippet;
+    }
 
-	public int compareTo(Object object) {
-		if (object == null) {
-			return 0;
-		}
-		if (!(object instanceof AST)) {
-			return 0;
-		}
-		AST that = (AST) object;
+    public int compareTo(Object object) {
+        if (object == null) {
+            return 0;
+        }
+        if (!(object instanceof AST)) {
+            return 0;
+        }
+        AST that = (AST) object;
 
-		// todo - possibly check for line/col with values of 0 or less...
+        // todo - possibly check for line/col with values of 0 or less...
 
-		if (this.getLine() < that.getLine()) {
-			return -1;
-		}
-		if (this.getLine() > that.getLine()) {
-			return 1;
-		}
+        if (this.getLine() < that.getLine()) {
+            return -1;
+        }
+        if (this.getLine() > that.getLine()) {
+            return 1;
+        }
 
-		if (this.getColumn() < that.getColumn()) {
-			return -1;
-		}
-		if (this.getColumn() > that.getColumn()) {
-			return 1;
-		}
+        if (this.getColumn() < that.getColumn()) {
+            return -1;
+        }
+        if (this.getColumn() > that.getColumn()) {
+            return 1;
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
-	public GroovySourceAST childAt(int position) {
-		List list = new ArrayList();
-		AST child = this.getFirstChild();
-		while (child != null) {
-			list.add(child);
-			child = child.getNextSibling();
-		}
-		try {
-			return (GroovySourceAST) list.get(position);
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
+    public GroovySourceAST childAt(int position) {
+        List list = new ArrayList();
+        AST child = this.getFirstChild();
+        while (child != null) {
+            list.add(child);
+            child = child.getNextSibling();
+        }
+        try {
+            return (GroovySourceAST) list.get(position);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
 
-	public GroovySourceAST childOfType(int type) {
-		AST child = this.getFirstChild();
-		while (child != null) {
-			if (child.getType() == type) {
-				return (GroovySourceAST) child;
-			}
-			child = child.getNextSibling();
-		}
-		return null;
-	}
+    public GroovySourceAST childOfType(int type) {
+        AST child = this.getFirstChild();
+        while (child != null) {
+            if (child.getType() == type) {
+                return (GroovySourceAST) child;
+            }
+            child = child.getNextSibling();
+        }
+        return null;
+    }
 
-	public List<GroovySourceAST> childrenOfType(int type) {
-		List<GroovySourceAST> result = new ArrayList<GroovySourceAST>();
-		AST child = this.getFirstChild();
-		while (child != null) {
-			if (child.getType() == type) {
-				result.add((GroovySourceAST) child);
-			}
-			child = child.getNextSibling();
-		}
-		return result;
-	}
+    public List<GroovySourceAST> childrenOfType(int type) {
+        List<GroovySourceAST> result = new ArrayList<GroovySourceAST>();
+        AST child = this.getFirstChild();
+        while (child != null) {
+            if (child.getType() == type) {
+                result.add((GroovySourceAST) child);
+            }
+            child = child.getNextSibling();
+        }
+        return result;
+    }
 
 }

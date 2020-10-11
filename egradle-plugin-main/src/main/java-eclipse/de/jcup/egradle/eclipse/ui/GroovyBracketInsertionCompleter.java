@@ -34,93 +34,90 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GroovyBracketInsertionCompleter extends KeyAdapter {
 
-	private SourceCodeInsertionSupport support;
+    private SourceCodeInsertionSupport support;
 
-	private final IExtendedEditor gradleEditor;
-	private IEditorPreferences preferences;
+    private final IExtendedEditor gradleEditor;
+    private IEditorPreferences preferences;
 
-	public GroovyBracketInsertionCompleter(IExtendedEditor gradleEditor, IEditorPreferences preferences) {
-		this.gradleEditor = gradleEditor;
-		this.preferences = preferences;
-		this.support = new SourceCodeInsertionSupport();
-	}
+    public GroovyBracketInsertionCompleter(IExtendedEditor gradleEditor, IEditorPreferences preferences) {
+        this.gradleEditor = gradleEditor;
+        this.preferences = preferences;
+        this.support = new SourceCodeInsertionSupport();
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		final BracketInsertion data = BracketInsertion.valueOfStartChar(e.character);
-		if (data == null) {
-			return;
-		}
-		ISelectionProvider selectionProvider = this.gradleEditor.getSelectionProvider();
-		if (selectionProvider == null) {
-			return;
-		}
-		ISelection selection = selectionProvider.getSelection();
-		if (!(selection instanceof ITextSelection)) {
-			return;
-		}
-		boolean enabled = preferences.isEditorAutoCreateEndBracketsEnabled();
-		if (!enabled) {
-			return;
-		}
-		ITextSelection textSelection = (ITextSelection) selection;
-		int offset = textSelection.getOffset();
-		if (offset == -1) {
-			return;
-		}
-		IDocument document = gradleEditor.getDocument();
-		if (document == null) {
-			return;
-		}
-		EclipseUtil.safeAsyncExec(new Runnable() {
+    @Override
+    public void keyReleased(KeyEvent e) {
+        final BracketInsertion data = BracketInsertion.valueOfStartChar(e.character);
+        if (data == null) {
+            return;
+        }
+        ISelectionProvider selectionProvider = this.gradleEditor.getSelectionProvider();
+        if (selectionProvider == null) {
+            return;
+        }
+        ISelection selection = selectionProvider.getSelection();
+        if (!(selection instanceof ITextSelection)) {
+            return;
+        }
+        boolean enabled = preferences.isEditorAutoCreateEndBracketsEnabled();
+        if (!enabled) {
+            return;
+        }
+        ITextSelection textSelection = (ITextSelection) selection;
+        int offset = textSelection.getOffset();
+        if (offset == -1) {
+            return;
+        }
+        IDocument document = gradleEditor.getDocument();
+        if (document == null) {
+            return;
+        }
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-				try {
+            @Override
+            public void run() {
+                try {
 
-					if (data.isMultiLine()) {
-						insertMultiLiner(data, selectionProvider, offset, document);
-					} else {
-						insertOneLiner(data, selectionProvider, offset, document);
-					}
-				} catch (BadLocationException e1) {
-					/* ignore */
-					EclipseUtil.logError("Cannot set content", e1);
-					return;
-				}
-			}
+                    if (data.isMultiLine()) {
+                        insertMultiLiner(data, selectionProvider, offset, document);
+                    } else {
+                        insertOneLiner(data, selectionProvider, offset, document);
+                    }
+                } catch (BadLocationException e1) {
+                    /* ignore */
+                    EclipseUtil.logError("Cannot set content", e1);
+                    return;
+                }
+            }
 
-		});
+        });
 
-	}
+    }
 
-	private void insertOneLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset,
-			IDocument document) throws BadLocationException {
-		document.replace(offset - 1, 1, data.createOneLineTemplate());
-		selectionProvider.setSelection(new TextSelection(data.createOneLineNewOffset(offset), 0));
-	}
+    private void insertOneLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset, IDocument document) throws BadLocationException {
+        document.replace(offset - 1, 1, data.createOneLineTemplate());
+        selectionProvider.setSelection(new TextSelection(data.createOneLineNewOffset(offset), 0));
+    }
 
-	private void insertMultiLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset,
-			IDocument document) throws BadLocationException {
-		IRegion region = document.getLineInformationOfOffset(offset);
-		if (region == null) {
-			return;
-		}
-		int length = region.getLength();
+    private void insertMultiLiner(BracketInsertion data, ISelectionProvider selectionProvider, int offset, IDocument document) throws BadLocationException {
+        IRegion region = document.getLineInformationOfOffset(offset);
+        if (region == null) {
+            return;
+        }
+        int length = region.getLength();
 
-		String textBeforeColumn = document.get(offset - length, length - 1); // -1
-																				// to
-																				// get
-																				// not
-																				// he
-																				// bracket
-																				// itself
-		String relevantColumnsBefore = TextUtil.trimRightWhitespaces(textBeforeColumn);
-		InsertionData result = support.prepareInsertionString(
-				data.createMultiLineTemplate(SourceCodeInsertionSupport.CURSOR_VARIABLE), relevantColumnsBefore);
+        String textBeforeColumn = document.get(offset - length, length - 1); // -1
+                                                                             // to
+                                                                             // get
+                                                                             // not
+                                                                             // he
+                                                                             // bracket
+                                                                             // itself
+        String relevantColumnsBefore = TextUtil.trimRightWhitespaces(textBeforeColumn);
+        InsertionData result = support.prepareInsertionString(data.createMultiLineTemplate(SourceCodeInsertionSupport.CURSOR_VARIABLE), relevantColumnsBefore);
 
-		document.replace(offset - 1, 1, result.getSourceCode());
-		selectionProvider.setSelection(new TextSelection(offset + result.getCursorOffset() - 1, 0));
+        document.replace(offset - 1, 1, result.getSourceCode());
+        selectionProvider.setSelection(new TextSelection(offset + result.getCursorOffset() - 1, 0));
 
-	}
+    }
 }

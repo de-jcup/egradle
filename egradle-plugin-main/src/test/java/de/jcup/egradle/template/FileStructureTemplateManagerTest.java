@@ -30,76 +30,74 @@ import de.jcup.egradle.core.util.LogAdapter;
 
 public class FileStructureTemplateManagerTest {
 
-	private FileStructureTemplateManager managerToTest;
-	private RootFolderProvider mockedRootFolderProvider;
+    private FileStructureTemplateManager managerToTest;
+    private RootFolderProvider mockedRootFolderProvider;
 
-	@Before
-	public void before() {
-		mockedRootFolderProvider = mock(RootFolderProvider.class);
-		managerToTest = new FileStructureTemplateManager(mockedRootFolderProvider, mock(LogAdapter.class));
-	}
+    @Before
+    public void before() {
+        mockedRootFolderProvider = mock(RootFolderProvider.class);
+        managerToTest = new FileStructureTemplateManager(mockedRootFolderProvider, mock(LogAdapter.class));
+    }
 
-	@Test
-	public void when_rootfolder_provider_returns_null_an_empty_template_list_will_be_returned() throws Exception {
-		/* prepare */
-		when(mockedRootFolderProvider.getRootFolder()).thenReturn(null);
+    @Test
+    public void when_rootfolder_provider_returns_null_an_empty_template_list_will_be_returned() throws Exception {
+        /* prepare */
+        when(mockedRootFolderProvider.getRootFolder()).thenReturn(null);
 
-		/* execute */
-		List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
+        /* execute */
+        List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
 
-		/* test */
-		assertNotNull(fileStructureTemplates);
-		assertEquals(0, fileStructureTemplates.size());
+        /* test */
+        assertNotNull(fileStructureTemplates);
+        assertEquals(0, fileStructureTemplates.size());
 
-	}
+    }
 
-	@Test
-	public void when_rootfolder_provider_returns_folder_but_folder_does_not_exist_an_empty_template_list_will_be_returned()
-			throws Exception {
-		/* prepare */
-		when(mockedRootFolderProvider.getRootFolder()).thenReturn(new File("./i-am-not-existing-in-now-case"));
+    @Test
+    public void when_rootfolder_provider_returns_folder_but_folder_does_not_exist_an_empty_template_list_will_be_returned() throws Exception {
+        /* prepare */
+        when(mockedRootFolderProvider.getRootFolder()).thenReturn(new File("./i-am-not-existing-in-now-case"));
 
-		/* execute */
-		List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
+        /* execute */
+        List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
 
-		/* test */
-		assertNotNull(fileStructureTemplates);
-		assertEquals(0, fileStructureTemplates.size());
+        /* test */
+        assertNotNull(fileStructureTemplates);
+        assertEquals(0, fileStructureTemplates.size());
 
-	}
+    }
 
-	@Test
-	public void for_a_rootfolder_containing_two_empty_subfolders_the_manager_returns_two_templates_with_names_and_description_not_null()
-			throws Exception {
-		/* prepare */
-		File rootFolder = File.createTempFile("test-file-structure-", Long.toString(System.nanoTime()));
-		rootFolder.delete();// was a file...
-		rootFolder.mkdirs();
-		rootFolder.deleteOnExit();
+    @Test
+    public void for_a_rootfolder_containing_two_empty_subfolders_the_manager_returns_two_templates_with_names_and_description_not_null() throws Exception {
+        /* prepare */
+        File rootFolder = File.createTempFile("test-file-structure-", Long.toString(System.nanoTime()));
+        rootFolder.delete();// was a file...
+        rootFolder.mkdirs();
+        rootFolder.deleteOnExit();
 
-		File subFolder1 = new File(rootFolder, "template1");
-		File subFolder2 = new File(rootFolder, "template2");
+        File subFolder1 = new File(rootFolder, "template1");
+        File subFolder2 = new File(rootFolder, "template2");
 
-		subFolder1.mkdirs();
-		subFolder2.mkdirs();
+        subFolder1.mkdirs();
+        subFolder2.mkdirs();
 
-		when(mockedRootFolderProvider.getRootFolder()).thenReturn(rootFolder);
+        when(mockedRootFolderProvider.getRootFolder()).thenReturn(rootFolder);
 
-		/* execute */
-		List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
+        /* execute */
+        List<FileStructureTemplate> fileStructureTemplates = managerToTest.getTemplates();
 
-		/* test */
-		assertNotNull(fileStructureTemplates);
-		assertEquals(2, fileStructureTemplates.size());
-		List<File> templateFiles = new ArrayList<>();
-		for (FileStructureTemplate template : fileStructureTemplates) {
-			templateFiles.add(template.getPathToContent());
-			assertNotNull(template.getName());
-			assertNotNull(template.getDescription());
-		}
-		assertTrue(templateFiles.contains(subFolder1));
-		assertTrue(templateFiles.contains(subFolder2));
+        /* test */
+        assertNotNull(fileStructureTemplates);
+        assertEquals(2, fileStructureTemplates.size());
+        List<File> templateFiles = new ArrayList<>();
+        for (FileStructureTemplate template : fileStructureTemplates) {
+            templateFiles.add(template.getPathToContent());
+            assertNotNull(template.getName());
+            assertNotNull(template.getDescription());
+        }
+        assertTrue(templateFiles.contains(subFolder1));
+        assertTrue(templateFiles.contains(subFolder2));
 
-	}
+    }
 
 }

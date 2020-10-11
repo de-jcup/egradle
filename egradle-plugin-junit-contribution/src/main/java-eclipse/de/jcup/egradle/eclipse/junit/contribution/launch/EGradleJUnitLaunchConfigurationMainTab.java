@@ -31,49 +31,49 @@ import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJUnitLaunchConfigurationMainTab extends EGradleLaunchConfigurationMainTab {
 
-	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		super.setDefaults(configuration);
-		configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
-	}
+    @Override
+    public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+        super.setDefaults(configuration);
+        configuration.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
+    }
 
-	@Override
-	protected TaskUIPartsDelegate createTaskUIPartsDelegate() {
-		return new IgnoreTaskUIPartsDelegate();
-	}
+    @Override
+    protected TaskUIPartsDelegate createTaskUIPartsDelegate() {
+        return new IgnoreTaskUIPartsDelegate();
+    }
 
-	@Override
-	public void createControl(Composite parent) {
-		super.createControl(parent);
-	}
+    @Override
+    public void createControl(Composite parent) {
+        super.createControl(parent);
+    }
 
-	@Override
-	public Image getImage() {
-		return EclipseUtil.getImage("icons/gradle-og-junit.gif", JUnitActivator.PLUGIN_ID);
-	}
+    @Override
+    public Image getImage() {
+        return EclipseUtil.getImage("icons/gradle-og-junit.gif", JUnitActivator.PLUGIN_ID);
+    }
 
-	@Override
-	public String getName() {
-		return "Gradle JUnit";
-	}
+    @Override
+    public String getName() {
+        return "Gradle JUnit";
+    }
 
-	protected class IgnoreTaskUIPartsDelegate extends TaskUIPartsDelegate {
+    protected class IgnoreTaskUIPartsDelegate extends TaskUIPartsDelegate {
 
-		@Override
-		protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
+        @Override
+        protected void setTaskFieldText(ILaunchConfiguration configuration) throws CoreException {
 
-		}
+        }
 
-		@Override
-		protected void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) {
+        @Override
+        protected void addTaskComponents(Composite composite, GridData labelGridData, GridData gridDataTwoLines) {
 
-		}
+        }
 
-		@Override
-		protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
+        @Override
+        protected void applyTasks(ILaunchConfigurationWorkingCopy configuration) {
 
-		}
+        }
 
-	}
+    }
 
 }

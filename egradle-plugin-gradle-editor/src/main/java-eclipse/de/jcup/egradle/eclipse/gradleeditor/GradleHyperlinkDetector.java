@@ -44,115 +44,114 @@ import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
  *
  */
 public class GradleHyperlinkDetector extends AbstractHyperlinkDetector {
-	private GradleStringTransformer transformer;
-	private File editorFile;
+    private GradleStringTransformer transformer;
+    private File editorFile;
 
-	public GradleHyperlinkDetector(IAdaptable adaptable) {
-		Assert.isNotNull(adaptable, "Adaptable may not be null!");
-		IFile ifile = adaptable.getAdapter(IFile.class);
-		try {
-			editorFile = getResourceHelper().toFile(ifile);
-		} catch (CoreException e) {
-			/*
-			 * if not working - ignore, so hyper link detection will return null
-			 */
-		}
-		transformer = adaptable.getAdapter(GradleStringTransformer.class);
+    public GradleHyperlinkDetector(IAdaptable adaptable) {
+        Assert.isNotNull(adaptable, "Adaptable may not be null!");
+        IFile ifile = adaptable.getAdapter(IFile.class);
+        try {
+            editorFile = getResourceHelper().toFile(ifile);
+        } catch (CoreException e) {
+            /*
+             * if not working - ignore, so hyper link detection will return null
+             */
+        }
+        transformer = adaptable.getAdapter(GradleStringTransformer.class);
 
-	}
+    }
 
-	private EclipseResourceHelper getResourceHelper() {
-		return EclipseResourceHelper.DEFAULT;
-	}
+    private EclipseResourceHelper getResourceHelper() {
+        return EclipseResourceHelper.DEFAULT;
+    }
 
-	@Override
-	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
-		if (editorFile == null) {
-			return null;
-		}
-		if (region == null) {
-			return null;
-		}
-		if (textViewer == null) {
-			return null;
-		}
-		IDocument document = textViewer.getDocument();
-		if (document == null) {
-			return null;
-		}
+    @Override
+    public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
+        if (editorFile == null) {
+            return null;
+        }
+        if (region == null) {
+            return null;
+        }
+        if (textViewer == null) {
+            return null;
+        }
+        IDocument document = textViewer.getDocument();
+        if (document == null) {
+            return null;
+        }
 
-		int offset = region.getOffset();
+        int offset = region.getOffset();
 
-		IRegion lineInfo;
-		String line;
-		try {
-			lineInfo = document.getLineInformationOfOffset(offset);
-			line = document.get(lineInfo.getOffset(), lineInfo.getLength());
-		} catch (BadLocationException ex) {
-			return null;
-		}
+        IRegion lineInfo;
+        String line;
+        try {
+            lineInfo = document.getLineInformationOfOffset(offset);
+            line = document.get(lineInfo.getOffset(), lineInfo.getLength());
+        } catch (BadLocationException ex) {
+            return null;
+        }
 
-		int offsetInLine = offset - lineInfo.getOffset();
+        int offsetInLine = offset - lineInfo.getOffset();
 
-		GradleFileLinkCalculator linkCalculator = new GradleFileLinkCalculator();
-		linkCalculator.setTransformer(transformer);
-		GradleHyperLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
-		if (result != null) {
-			IHyperlink[] fileLink = handleFileLink(lineInfo, result);
-			if (fileLink != null) {
-				/* was resolveable as file link - so return */
-				return fileLink;
-			}
-		}
-		/* not a file link so try as resource */
-		GradleResourceLinkCalculator resCalculator = new GradleResourceLinkCalculator();
-		result = resCalculator.createResourceLinkString(line, offsetInLine);
-		if (result != null) {
-			return handlerResourceLink(textViewer, lineInfo, result);
-		}
-		return null;
+        GradleFileLinkCalculator linkCalculator = new GradleFileLinkCalculator();
+        linkCalculator.setTransformer(transformer);
+        GradleHyperLinkResult result = linkCalculator.createFileLinkString(line, offsetInLine);
+        if (result != null) {
+            IHyperlink[] fileLink = handleFileLink(lineInfo, result);
+            if (fileLink != null) {
+                /* was resolveable as file link - so return */
+                return fileLink;
+            }
+        }
+        /* not a file link so try as resource */
+        GradleResourceLinkCalculator resCalculator = new GradleResourceLinkCalculator();
+        result = resCalculator.createResourceLinkString(line, offsetInLine);
+        if (result != null) {
+            return handlerResourceLink(textViewer, lineInfo, result);
+        }
+        return null;
 
-	}
+    }
 
-	private IHyperlink[] handlerResourceLink(ITextViewer textViewer, IRegion lineInfo, GradleHyperLinkResult result) {
-		try {
-			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
-			IDocument document = textViewer.getDocument();
-			String fullText = null;
-			if (document != null) {
-				fullText = document.get();
-			}
-			GradleResourceHyperlink gradleResourceLink = new GradleResourceHyperlink(urlRegion, result.linkContent,
-					fullText);
-			return new IHyperlink[] { gradleResourceLink };
-		} catch (RuntimeException e) {
-			return null;
-		}
-	}
+    private IHyperlink[] handlerResourceLink(ITextViewer textViewer, IRegion lineInfo, GradleHyperLinkResult result) {
+        try {
+            IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
+            IDocument document = textViewer.getDocument();
+            String fullText = null;
+            if (document != null) {
+                fullText = document.get();
+            }
+            GradleResourceHyperlink gradleResourceLink = new GradleResourceHyperlink(urlRegion, result.linkContent, fullText);
+            return new IHyperlink[] { gradleResourceLink };
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
 
-	private IHyperlink[] handleFileLink(IRegion lineInfo, GradleHyperLinkResult result) {
-		try {
-			File folder = editorFile.getParentFile();
-			String fileName = result.linkContent;
+    private IHyperlink[] handleFileLink(IRegion lineInfo, GradleHyperLinkResult result) {
+        try {
+            File folder = editorFile.getParentFile();
+            String fileName = result.linkContent;
 
-			File target = new File(folder, fileName);
-			if (!target.exists()) {
-				target = new File(fileName);
-			}
-			if (!target.exists()) {
-				return null;
-			}
+            File target = new File(folder, fileName);
+            if (!target.exists()) {
+                target = new File(fileName);
+            }
+            if (!target.exists()) {
+                return null;
+            }
 
-			IFileStore fileStore = EFS.getLocalFileSystem().getStore(target.toURI());
-			if (fileStore == null) {
-				return null;
-			}
-			IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
-			GradleFileHyperlink gradleFileHyperlink = new GradleFileHyperlink(urlRegion, fileStore);
-			return new IHyperlink[] { gradleFileHyperlink };
-		} catch (RuntimeException e) {
-			return null;
-		}
-	}
+            IFileStore fileStore = EFS.getLocalFileSystem().getStore(target.toURI());
+            if (fileStore == null) {
+                return null;
+            }
+            IRegion urlRegion = new Region(lineInfo.getOffset() + result.linkOffsetInLine, result.linkLength);
+            GradleFileHyperlink gradleFileHyperlink = new GradleFileHyperlink(urlRegion, fileStore);
+            return new IHyperlink[] { gradleFileHyperlink };
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
 
 }

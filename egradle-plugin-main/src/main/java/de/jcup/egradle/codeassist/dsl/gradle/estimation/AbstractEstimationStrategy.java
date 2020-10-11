@@ -21,28 +21,28 @@ import de.jcup.egradle.core.model.Item;
 
 abstract class AbstractEstimationStrategy implements EstimationStrategy {
 
-	@Override
-	public EstimationData estimate(Type current, Item item) {
-		if (current == null) {
-			return null;
-		}
-		if (item == null) {
-			return null;
-		}
-		return visitImpl(current, item);
-	}
+    @Override
+    public EstimationData estimate(Type current, Item item) {
+        if (current == null) {
+            return null;
+        }
+        if (item == null) {
+            return null;
+        }
+        return visitImpl(current, item);
+    }
 
-	abstract EstimationData visitImpl(Type current, Item item);
+    abstract EstimationData visitImpl(Type current, Item item);
 
-	EstimationData createEstimationData(Method m, boolean hasGroovyClosureAsParameter, int percent) {
-		EstimationData r = new EstimationData();
-		if (hasGroovyClosureAsParameter) {
-			r.type = m.getDelegationTarget();
-		} else {
-			r.type = m.getReturnType();
-		}
-		r.element = m;
-		r.percent = percent;
-		return r;
-	}
+    EstimationData createEstimationData(Method m, boolean hasGroovyClosureAsParameter, int percent) {
+        EstimationData r = new EstimationData();
+        if (hasGroovyClosureAsParameter) {
+            r.type = m.getDelegationTarget();
+        } else {
+            r.type = m.getReturnType();
+        }
+        r.element = m;
+        r.percent = percent;
+        return r;
+    }
 }

@@ -39,83 +39,80 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCommandHandler {
 
-	private IProject projectToUse;
-	private String configuration;
+    private IProject projectToUse;
+    private String configuration;
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
-		if (activeWorkbenchShell == null) {
-			return null;
-		}
-		IProject project = findSelectedProject();
-		if (project == null) {
-			return null;
-		}
-		SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
-		dialog.setTitleImage(IDEUtil.getImage("icons/gradle-og.png"));
-		dialog.setInput(configuration);
-		String config = dialog.open();
-		if (config == null) {
-			/* cancel ... */
-			return null;
-		}
-		configuration = config;
-		projectToUse = project;
-		return super.execute(event);
-	}
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
+        if (activeWorkbenchShell == null) {
+            return null;
+        }
+        IProject project = findSelectedProject();
+        if (project == null) {
+            return null;
+        }
+        SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
+        dialog.setTitleImage(IDEUtil.getImage("icons/gradle-og.png"));
+        dialog.setInput(configuration);
+        String config = dialog.open();
+        if (config == null) {
+            /* cancel ... */
+            return null;
+        }
+        configuration = config;
+        projectToUse = project;
+        return super.execute(event);
+    }
 
-	private IProject findSelectedProject() {
-		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		if (window == null) {
-			return null;
-		}
+    private IProject findSelectedProject() {
+        IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+        if (window == null) {
+            return null;
+        }
 
-		IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
-		if (selection == null) {
-			return null;
-		}
+        IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
+        if (selection == null) {
+            return null;
+        }
 
-		Object firstElement = selection.getFirstElement();
-		if (!(firstElement instanceof IAdaptable)) {
-			return null;
-		}
+        Object firstElement = selection.getFirstElement();
+        if (!(firstElement instanceof IAdaptable)) {
+            return null;
+        }
 
-		IProject project = (IProject) ((IAdaptable) firstElement).getAdapter(IProject.class);
-		return project;
-	}
+        IProject project = (IProject) ((IAdaptable) firstElement).getAdapter(IProject.class);
+        return project;
+    }
 
-	@Override
-	public void prepare(GradleContext context) {
-		if (projectToUse == null) {
-			return;
-		}
-		context.setAmountOfWorkToDo(2);
-		StringBuilder sb = new StringBuilder();
-		if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)) {
-			sb.append(":");
-			sb.append(projectToUse
-					.getName()); /*
-									 * TODO ATR, 02.03.2017: check if getName()
-									 * is correct here - should be foldername..
-									 */
-			sb.append(":");
-		}
-		sb.append("dependencies");
-		if (configuration != null && configuration.length() > 0) {
-			sb.append(" --configuration ");
-			sb.append(configuration);
-		}
-		context.setCommands(GradleCommand.build(sb.toString()));
-	}
+    @Override
+    public void prepare(GradleContext context) {
+        if (projectToUse == null) {
+            return;
+        }
+        context.setAmountOfWorkToDo(2);
+        StringBuilder sb = new StringBuilder();
+        if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)) {
+            sb.append(":");
+            sb.append(projectToUse.getName()); /*
+                                                * TODO ATR, 02.03.2017: check if getName() is correct here - should be
+                                                * foldername..
+                                                */
+            sb.append(":");
+        }
+        sb.append("dependencies");
+        if (configuration != null && configuration.length() > 0) {
+            sb.append(" --configuration ");
+            sb.append(configuration);
+        }
+        context.setCommands(GradleCommand.build(sb.toString()));
+    }
 
-	@Override
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
-			throws GradleExecutionException {
-		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
-				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshProjects(false);
-		ui.setShowEGradleSystemConsole(true);
-		return ui;
-	}
+    @Override
+    protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
+        UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler, new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
+        ui.setRefreshProjects(false);
+        ui.setShowEGradleSystemConsole(true);
+        return ui;
+    }
 
 }

@@ -19,40 +19,40 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
 
-	LOGGER("logger"),
+    LOGGER("logger"),
 
-	TASKS("tasks"),
+    TASKS("tasks"),
 
-	PROJECT("project"), // method AND variable
+    PROJECT("project"), // method AND variable
 
-	PRINTLN("println"), // method
+    PRINTLN("println"), // method
 
-	OPTIONS("options"),
+    OPTIONS("options"),
 
-	SOURCE_SETS("sourceSets"),
+    SOURCE_SETS("sourceSets"),
 
-	SOURCE_DIR("srcDir"),
+    SOURCE_DIR("srcDir"),
 
-	ROOTPROJECT("rootProject"),
+    ROOTPROJECT("rootProject"),
 
-	PROJECTDIR("projectDir"),
+    PROJECTDIR("projectDir"),
 
-	JAVAVERSION("JavaVersion"),
+    JAVAVERSION("JavaVersion"),
 
-	SYSTEM("System"),
+    SYSTEM("System"),
 
-	EXT("ext"),
+    EXT("ext"),
 
-	;
+    ;
 
-	private String text;
+    private String text;
 
-	private GradleSpecialVariableKeyWords(String text) {
-		this.text = text;
-	}
+    private GradleSpecialVariableKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

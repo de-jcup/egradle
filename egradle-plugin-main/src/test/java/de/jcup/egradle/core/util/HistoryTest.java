@@ -23,197 +23,197 @@ import org.junit.Test;
 
 public class HistoryTest {
 
-	@Test
-	public void one_entry_in_history_1_is_empty_returns_false() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("content");
+    @Test
+    public void one_entry_in_history_1_is_empty_returns_false() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("content");
 
-		/* execute + test */
-		assertFalse(historyToTest.isEmpty());
-	}
+        /* execute + test */
+        assertFalse(historyToTest.isEmpty());
+    }
 
-	@Test
-	public void nothing_in_history_1_is_empty_returns_true() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history_1_is_empty_returns_true() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		assertTrue(historyToTest.isEmpty());
-	}
+        /* execute + test */
+        assertTrue(historyToTest.isEmpty());
+    }
 
-	@Test
-	public void nothing_in_history_1_current_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history_1_current_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		assertEquals(null, historyToTest.current());
-	}
+        /* execute + test */
+        assertEquals(null, historyToTest.current());
+    }
 
-	@Test
-	public void one_entry_in_history_1_getCount_returns_1() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("content");
+    @Test
+    public void one_entry_in_history_1_getCount_returns_1() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("content");
 
-		/* execute + test */
-		assertEquals(1, historyToTest.getCount());
-	}
+        /* execute + test */
+        assertEquals(1, historyToTest.getCount());
+    }
 
-	@Test
-	public void one_entry_in_history__toList_returns_list_with_this_entry() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("content");
+    @Test
+    public void one_entry_in_history__toList_returns_list_with_this_entry() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("content");
 
-		/* execute + test */
-		List<String> list = historyToTest.toList();
-		assertNotNull(list);
-		assertEquals(1, list.size());
-		assertEquals("content", list.iterator().next());
-	}
+        /* execute + test */
+        List<String> list = historyToTest.toList();
+        assertNotNull(list);
+        assertEquals(1, list.size());
+        assertEquals("content", list.iterator().next());
+    }
 
-	@Test
-	public void two_entries_in_history__toList_returns_list_with_entries_last_entry_on_pos_0() {
-		/* prepare */
-		History<String> historyToTest = new History<>(4);
-		historyToTest.add("content-first");
-		historyToTest.add("content-last");
+    @Test
+    public void two_entries_in_history__toList_returns_list_with_entries_last_entry_on_pos_0() {
+        /* prepare */
+        History<String> historyToTest = new History<>(4);
+        historyToTest.add("content-first");
+        historyToTest.add("content-last");
 
-		/* execute + test */
-		List<String> list = historyToTest.toList();
-		assertNotNull(list);
-		assertEquals(2, list.size());
-		assertEquals("content-last", list.get(0));
-		assertEquals("content-first", list.get(1));
-	}
+        /* execute + test */
+        List<String> list = historyToTest.toList();
+        assertNotNull(list);
+        assertEquals(2, list.size());
+        assertEquals("content-last", list.get(0));
+        assertEquals("content-first", list.get(1));
+    }
 
-	@Test
-	public void nothing_in_history__toList_returns_list_with_this_entry() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history__toList_returns_list_with_this_entry() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		List<String> list = historyToTest.toList();
-		assertNotNull(list);
-		assertEquals(0, list.size());
-	}
+        /* execute + test */
+        List<String> list = historyToTest.toList();
+        assertNotNull(list);
+        assertEquals(0, list.size());
+    }
 
-	@Test
-	public void one_entry_in_history_1_current_returns_value_size_keeps_1() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("content");
+    @Test
+    public void one_entry_in_history_1_current_returns_value_size_keeps_1() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("content");
 
-		/* execute + test */
-		assertEquals(1, historyToTest.getCount());
-		assertEquals("content", historyToTest.current());
-		assertEquals(1, historyToTest.getCount());
-	}
+        /* execute + test */
+        assertEquals(1, historyToTest.getCount());
+        assertEquals("content", historyToTest.current());
+        assertEquals(1, historyToTest.getCount());
+    }
 
-	@Test
-	public void nothing_in_history_1_getCount_returns_0() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history_1_getCount_returns_0() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		assertEquals(0, historyToTest.getCount());
-	}
+        /* execute + test */
+        assertEquals(0, historyToTest.getCount());
+    }
 
-	@Test
-	public void nothing_in_history_1_max_returns_1() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history_1_max_returns_1() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		assertEquals(1, historyToTest.getMax());
-	}
+        /* execute + test */
+        assertEquals(1, historyToTest.getMax());
+    }
 
-	@Test
-	public void nothing_in_history_0_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(0);
+    @Test
+    public void nothing_in_history_0_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(0);
 
-		/* execute + test */
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_to_history_0_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(0);
-		historyToTest.add("test1");
+    @Test
+    public void add_test1_to_history_0_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(0);
+        historyToTest.add("test1");
 
-		/* execute + test */
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void nothing_in_history_1_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
+    @Test
+    public void nothing_in_history_1_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
 
-		/* execute + test */
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_in_history1_go_back_returns_test1_another_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("test1");
+    @Test
+    public void add_test1_in_history1_go_back_returns_test1_another_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("test1");
 
-		/* execute + test */
-		assertEquals("test1", historyToTest.goBack());
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals("test1", historyToTest.goBack());
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_add_null_in_history2_go_back_returns_test1_another_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("test1");
-		historyToTest.add(null);
+    @Test
+    public void add_test1_add_null_in_history2_go_back_returns_test1_another_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("test1");
+        historyToTest.add(null);
 
-		/* execute + test */
-		assertEquals("test1", historyToTest.goBack());
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals("test1", historyToTest.goBack());
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_and_test2_in_history1_go_back_returns_test2_another_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(1);
-		historyToTest.add("test1");
-		historyToTest.add("test2");
+    @Test
+    public void add_test1_and_test2_in_history1_go_back_returns_test2_another_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(1);
+        historyToTest.add("test1");
+        historyToTest.add("test2");
 
-		/* execute + test */
-		assertEquals("test2", historyToTest.goBack());
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals("test2", historyToTest.goBack());
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_and_test2_in_history2_go_back_returns_test2_another_go_back_returns_test1_another_one_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(2);
-		historyToTest.add("test1");
-		historyToTest.add("test2");
+    @Test
+    public void add_test1_and_test2_in_history2_go_back_returns_test2_another_go_back_returns_test1_another_one_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(2);
+        historyToTest.add("test1");
+        historyToTest.add("test2");
 
-		/* execute + test */
-		assertEquals("test2", historyToTest.goBack());
-		assertEquals("test1", historyToTest.goBack());
-		assertEquals(null, historyToTest.goBack());
-	}
+        /* execute + test */
+        assertEquals("test2", historyToTest.goBack());
+        assertEquals("test1", historyToTest.goBack());
+        assertEquals(null, historyToTest.goBack());
+    }
 
-	@Test
-	public void add_test1_and_test2_in_history2_clear_go_back_returns_null() {
-		/* prepare */
-		History<String> historyToTest = new History<>(2);
-		historyToTest.add("test1");
-		historyToTest.add("test2");
-		historyToTest.clear();
-		/* execute + test */
-		assertEquals(null, historyToTest.goBack());
-	}
+    @Test
+    public void add_test1_and_test2_in_history2_clear_go_back_returns_null() {
+        /* prepare */
+        History<String> historyToTest = new History<>(2);
+        historyToTest.add("test1");
+        historyToTest.add("test2");
+        historyToTest.clear();
+        /* execute + test */
+        assertEquals(null, historyToTest.goBack());
+    }
 }

@@ -39,196 +39,195 @@ import de.jcup.egradle.template.FileStructureTemplate;
 
 public class EGradleNewProjectWizardTemplateDetailsPage extends WizardPage {
 
-	private NewProjectContext context;
-	private Group multiProjectGroup;
-	private Composite composite;
-	private Text multiProjectNamesText;
-	private Group javaGroup;
-	private Text javaSourceCompatibilityText;
-	private Text javaHomeText;
-	private Group commonGroup;
-	private Text gradleGroupNameText;
-	private Text gradleVersionText;
-	private Button gradleWrapperEnabledRadioButton;
-	private Label gradleVersionLabel;
+    private NewProjectContext context;
+    private Group multiProjectGroup;
+    private Composite composite;
+    private Text multiProjectNamesText;
+    private Group javaGroup;
+    private Text javaSourceCompatibilityText;
+    private Text javaHomeText;
+    private Group commonGroup;
+    private Text gradleGroupNameText;
+    private Text gradleVersionText;
+    private Button gradleWrapperEnabledRadioButton;
+    private Label gradleVersionLabel;
 
-	public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
-		super("templateDetails");
-		this.context = context;
-		setTitle("Gradle template details");
-		setImageDescriptor(IDEUtil.createImageDescriptor("icons/egradle-banner_64x64.png"));
-		setDescription("Setup details of used template");
-	}
+    public EGradleNewProjectWizardTemplateDetailsPage(NewProjectContext context) {
+        super("templateDetails");
+        this.context = context;
+        setTitle("Gradle template details");
+        setImageDescriptor(IDEUtil.createImageDescriptor("icons/egradle-banner_64x64.png"));
+        setDescription("Setup details of used template");
+    }
 
-	@Override
-	public void createControl(Composite parent) {
-		composite = SWTFactory.createComposite(parent, 1, SWT.FILL, SWT.FILL);
+    @Override
+    public void createControl(Composite parent) {
+        composite = SWTFactory.createComposite(parent, 1, SWT.FILL, SWT.FILL);
 
-		initializeDialogUnits(parent);
+        initializeDialogUnits(parent);
 
-		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
+        composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		initCommonParts(composite);
-		initMultiProjectParts(composite);
-		initJavaParts(composite);
+        initCommonParts(composite);
+        initMultiProjectParts(composite);
+        initJavaParts(composite);
 
-		// Show description on opening
-		setErrorMessage(null);
-		setMessage(null);
-		setControl(composite);
+        // Show description on opening
+        setErrorMessage(null);
+        setMessage(null);
+        setControl(composite);
 
-		Dialog.applyDialogFont(composite);
+        Dialog.applyDialogFont(composite);
 
-		updateUI();
-	}
+        updateUI();
+    }
 
-	private void initCommonParts(Composite composite) {
-		commonGroup = SWTFactory.createGroup(composite, "Common", 1, SWT.FILL, SWT.FILL);
-		commonGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    private void initCommonParts(Composite composite) {
+        commonGroup = SWTFactory.createGroup(composite, "Common", 1, SWT.FILL, SWT.FILL);
+        commonGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		SWTFactory.createLabel(commonGroup, "Please enter group name", SWT.FILL);
-		gradleGroupNameText = SWTFactory.createSingleText(commonGroup, 1);
-		gradleGroupNameText.addModifyListener(new ModifyListener() {
+        SWTFactory.createLabel(commonGroup, "Please enter group name", SWT.FILL);
+        gradleGroupNameText = SWTFactory.createSingleText(commonGroup, 1);
+        gradleGroupNameText.addModifyListener(new ModifyListener() {
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setPageComplete(validatePage());
-			}
-		});
+            @Override
+            public void modifyText(ModifyEvent e) {
+                setPageComplete(validatePage());
+            }
+        });
 
-		gradleWrapperEnabledRadioButton = SWTFactory.createCheckButton(commonGroup, "Use gradle wrapper", null,
-				context.isSupportingGradleWrapper(), SWT.FILL);
-		gradleWrapperEnabledRadioButton.setEnabled(context.isSupportingGradleWrapper());
-		gradleWrapperEnabledRadioButton.addSelectionListener(new SelectionAdapter() {
+        gradleWrapperEnabledRadioButton = SWTFactory.createCheckButton(commonGroup, "Use gradle wrapper", null, context.isSupportingGradleWrapper(), SWT.FILL);
+        gradleWrapperEnabledRadioButton.setEnabled(context.isSupportingGradleWrapper());
+        gradleWrapperEnabledRadioButton.addSelectionListener(new SelectionAdapter() {
 
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				context.setGradleWrapperEnabled(gradleWrapperEnabledRadioButton.getSelection());
-				updateUI();
-				setPageComplete(validatePage());
-			}
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                context.setGradleWrapperEnabled(gradleWrapperEnabledRadioButton.getSelection());
+                updateUI();
+                setPageComplete(validatePage());
+            }
 
-		});
+        });
 
-		gradleVersionLabel = SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
-		gradleVersionLabel.setEnabled(context.isSupportingGradleWrapper());
+        gradleVersionLabel = SWTFactory.createLabel(commonGroup, "Gradle Version", SWT.FILL);
+        gradleVersionLabel.setEnabled(context.isSupportingGradleWrapper());
 
-		gradleVersionText = SWTFactory.createSingleText(commonGroup, 1);
-		gradleVersionText.setMessage(NewProjectTemplateVariables.VAR__GRADLE__VERSION.getDefaultValue());
-		gradleVersionText.addModifyListener(new ModifyListener() {
+        gradleVersionText = SWTFactory.createSingleText(commonGroup, 1);
+        gradleVersionText.setMessage(NewProjectTemplateVariables.VAR__GRADLE__VERSION.getDefaultValue());
+        gradleVersionText.addModifyListener(new ModifyListener() {
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setPageComplete(validatePage());
-			}
-		});
-		gradleVersionText.setEnabled(context.isSupportingGradleWrapper());
-	}
+            @Override
+            public void modifyText(ModifyEvent e) {
+                setPageComplete(validatePage());
+            }
+        });
+        gradleVersionText.setEnabled(context.isSupportingGradleWrapper());
+    }
 
-	private void initMultiProjectParts(Composite composite) {
-		multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
-		multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    private void initMultiProjectParts(Composite composite) {
+        multiProjectGroup = SWTFactory.createGroup(composite, "Multi project", 1, SWT.FILL, SWT.FILL);
+        multiProjectGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
-		multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
+        SWTFactory.createLabel(multiProjectGroup, "Please enter sub project name(s). Use comma to separate", SWT.FILL);
+        multiProjectNamesText = SWTFactory.createSingleText(multiProjectGroup, 1);
 
-		multiProjectNamesText.addModifyListener(new ModifyListener() {
+        multiProjectNamesText.addModifyListener(new ModifyListener() {
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setPageComplete(validatePage());
-			}
-		});
+            @Override
+            public void modifyText(ModifyEvent e) {
+                setPageComplete(validatePage());
+            }
+        });
 
-	}
+    }
 
-	private void initJavaParts(Composite composite) {
-		javaGroup = SWTFactory.createGroup(composite, "Java", 1, SWT.FILL, SWT.FILL);
-		javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    private void initJavaParts(Composite composite) {
+        javaGroup = SWTFactory.createGroup(composite, "Java", 1, SWT.FILL, SWT.FILL);
+        javaGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		SWTFactory.createLabel(javaGroup, "Please enter source compatibility level", SWT.FILL);
-		javaSourceCompatibilityText = SWTFactory.createSingleText(javaGroup, 1);
-		javaSourceCompatibilityText.setText("1.8");
-		javaSourceCompatibilityText.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setPageComplete(validatePage());
-			}
-		});
+        SWTFactory.createLabel(javaGroup, "Please enter source compatibility level", SWT.FILL);
+        javaSourceCompatibilityText = SWTFactory.createSingleText(javaGroup, 1);
+        javaSourceCompatibilityText.setText("1.8");
+        javaSourceCompatibilityText.addModifyListener(new ModifyListener() {
+            @Override
+            public void modifyText(ModifyEvent e) {
+                setPageComplete(validatePage());
+            }
+        });
 
-		SWTFactory.createLabel(javaGroup, "JAVA_HOME for gradle (optional)", SWT.FILL);
-		javaHomeText = SWTFactory.createSingleText(javaGroup, 1);
-		javaHomeText.setText(IDEUtil.getPreferences().getGlobalJavaHomePath());
-		javaHomeText.addModifyListener(new ModifyListener() {
+        SWTFactory.createLabel(javaGroup, "JAVA_HOME for gradle (optional)", SWT.FILL);
+        javaHomeText = SWTFactory.createSingleText(javaGroup, 1);
+        javaHomeText.setText(IDEUtil.getPreferences().getGlobalJavaHomePath());
+        javaHomeText.addModifyListener(new ModifyListener() {
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setPageComplete(validatePage());
-			}
-		});
+            @Override
+            public void modifyText(ModifyEvent e) {
+                setPageComplete(validatePage());
+            }
+        });
 
-	}
+    }
 
-	private boolean validatePage() {
-		FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
-		if (selectedTemplate == null) {
-			return false;
-		}
-		/*
-		 * set context with current values - no matter if valid or not, or
-		 * feature is enabled.
-		 */
-		String groupName = gradleGroupNameText.getText();
-		String gradleVersion = gradleVersionText.getText();
-		String multiProjects = multiProjectNamesText.getText();
-		String javaSourceCompatibility = javaSourceCompatibilityText.getText();
-		String javaHome = javaHomeText.getText();
+    private boolean validatePage() {
+        FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
+        if (selectedTemplate == null) {
+            return false;
+        }
+        /*
+         * set context with current values - no matter if valid or not, or feature is
+         * enabled.
+         */
+        String groupName = gradleGroupNameText.getText();
+        String gradleVersion = gradleVersionText.getText();
+        String multiProjects = multiProjectNamesText.getText();
+        String javaSourceCompatibility = javaSourceCompatibilityText.getText();
+        String javaHome = javaHomeText.getText();
 
-		context.setJavaHome(javaHome);
-		context.setGradleVersion(gradleVersion);
-		context.setGroupName(groupName);
-		context.setMultiProjects(multiProjects);
-		context.setJavaSourceCompatibility(javaSourceCompatibility);
+        context.setJavaHome(javaHome);
+        context.setGradleVersion(gradleVersion);
+        context.setGroupName(groupName);
+        context.setMultiProjects(multiProjects);
+        context.setJavaSourceCompatibility(javaSourceCompatibility);
 
-		if (!context.validateMultiProject()) {
-			return false;
-		}
-		if (!context.validateJavaSupport()) {
-			return false;
-		}
-		return true;
-	}
+        if (!context.validateMultiProject()) {
+            return false;
+        }
+        if (!context.validateJavaSupport()) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public void setVisible(boolean visible) {
-		super.setVisible(visible);
-		if (visible) {
-			/* only when become visible again do the ui update */
-			updateUI();
-		}
-	}
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible) {
+            /* only when become visible again do the ui update */
+            updateUI();
+        }
+    }
 
-	private void updateUI() {
-		FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
-		if (selectedTemplate == null) {
-			composite.setVisible(false);
-			setDescription("No template selected");
-			return;
-		}
-		composite.setVisible(true);
-		setDescription("Define details for template '" + selectedTemplate.getName() + "'");
+    private void updateUI() {
+        FileStructureTemplate selectedTemplate = context.getSelectedTemplate();
+        if (selectedTemplate == null) {
+            composite.setVisible(false);
+            setDescription("No template selected");
+            return;
+        }
+        composite.setVisible(true);
+        setDescription("Define details for template '" + selectedTemplate.getName() + "'");
 
-		showControl(gradleWrapperEnabledRadioButton, context.isSupportingGradleWrapper());
-		showControl(gradleVersionLabel, context.isGradleWrapperSupportedAndEnabled());
-		showControl(gradleVersionText, context.isGradleWrapperSupportedAndEnabled());
+        showControl(gradleWrapperEnabledRadioButton, context.isSupportingGradleWrapper());
+        showControl(gradleVersionLabel, context.isGradleWrapperSupportedAndEnabled());
+        showControl(gradleVersionText, context.isGradleWrapperSupportedAndEnabled());
 
-		showControl(multiProjectGroup, context.isMultiProject());
-		showControl(javaGroup, context.isSupportingJava());
-		setPageComplete(validatePage());
-		// Use message to show default value, will always return when user
-		// user has no content there. The "" is to ensure message can never be
-		// null...
-		gradleGroupNameText.setMessage("" + context.getProjectName());
-	}
+        showControl(multiProjectGroup, context.isMultiProject());
+        showControl(javaGroup, context.isSupportingJava());
+        setPageComplete(validatePage());
+        // Use message to show default value, will always return when user
+        // user has no content there. The "" is to ensure message can never be
+        // null...
+        gradleGroupNameText.setMessage("" + context.getProjectName());
+    }
 
 }

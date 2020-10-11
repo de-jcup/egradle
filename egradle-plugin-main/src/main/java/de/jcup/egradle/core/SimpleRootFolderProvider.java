@@ -22,16 +22,16 @@ import java.io.IOException;
 
 public class SimpleRootFolderProvider implements RootFolderProvider {
 
-	private File rootFolder;
+    private File rootFolder;
 
-	public SimpleRootFolderProvider(File rootFolder) {
-		notNull(rootFolder, "'rootFolder' may not be null");
-		this.rootFolder = rootFolder;
-	}
+    public SimpleRootFolderProvider(File rootFolder) {
+        notNull(rootFolder, "'rootFolder' may not be null");
+        this.rootFolder = rootFolder;
+    }
 
-	@Override
-	public File getRootFolder() throws IOException {
-		return rootFolder;
-	}
+    @Override
+    public File getRootFolder() throws IOException {
+        return rootFolder;
+    }
 
 }

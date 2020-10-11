@@ -24,59 +24,59 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "method")
 public class XMLTask implements Task {
 
-	@XmlAttribute(name = "name")
-	private String name;
+    @XmlAttribute(name = "name")
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	private Type type;
+    private Type type;
 
-	@XmlAttribute(name = "type")
-	private String typeAsString;
+    @XmlAttribute(name = "type")
+    private String typeAsString;
 
-	public void setTypeAsString(String typeAsString) {
-		this.typeAsString = typeAsString;
-	}
+    public void setTypeAsString(String typeAsString) {
+        this.typeAsString = typeAsString;
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String getTypeAsString() {
-		return typeAsString;
-	}
+    @Override
+    public String getTypeAsString() {
+        return typeAsString;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLTask [name=" + name + ", typeAsString=" + typeAsString + ", type=" + type + "]";
-	}
+    @Override
+    public String toString() {
+        return "XMLTask [name=" + name + ", typeAsString=" + typeAsString + ", type=" + type + "]";
+    }
 
-	@Override
-	public Type getType() {
-		return type;
-	}
+    @Override
+    public Type getType() {
+        return type;
+    }
 
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public void setType(Type type) {
+        this.type = type;
+    }
 
-	@Override
-	public int compareTo(Task other) {
-		if (other == null) {
-			return 1;
-		}
-		String otherTypeAsString = other.getTypeAsString();
-		if (otherTypeAsString == null) {
-			return 1;
-		}
-		if (typeAsString == null) {
-			return -1;
-		}
-		return typeAsString.compareTo(otherTypeAsString);
-	}
+    @Override
+    public int compareTo(Task other) {
+        if (other == null) {
+            return 1;
+        }
+        String otherTypeAsString = other.getTypeAsString();
+        if (otherTypeAsString == null) {
+            return 1;
+        }
+        if (typeAsString == null) {
+            return -1;
+        }
+        return typeAsString.compareTo(otherTypeAsString);
+    }
 
 }

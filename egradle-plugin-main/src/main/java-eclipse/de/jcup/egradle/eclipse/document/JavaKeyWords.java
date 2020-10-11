@@ -18,119 +18,118 @@ package de.jcup.egradle.eclipse.document;
 // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
 public enum JavaKeyWords implements DocumentKeyWord {
 
-	ABSTRACT("abstract"),
+    ABSTRACT("abstract"),
 
-	INTERFACE("interface"), /*
-							 * must be at this position to not be overwhelmed
-							 * with "int"
-							 */
+    INTERFACE("interface"), /*
+                             * must be at this position to not be overwhelmed with "int"
+                             */
 
-	CONTINUE("continue"),
+    CONTINUE("continue"),
 
-	FOR("for"),
+    FOR("for"),
 
-	NEW("new"),
+    NEW("new"),
 
-	SWITCH("switch"),
+    SWITCH("switch"),
 
-	ASSERT("assert"),
+    ASSERT("assert"),
 
-	DEFAULT("default"),
+    DEFAULT("default"),
 
-	GOTO("goto"),
+    GOTO("goto"),
 
-	PACKAGE("package"),
+    PACKAGE("package"),
 
-	SYNCHRONIZED("synchronized"),
+    SYNCHRONIZED("synchronized"),
 
-	BOOLEAN("boolean"),
+    BOOLEAN("boolean"),
 
-	DO("do"),
+    DO("do"),
 
-	IF("if"),
+    IF("if"),
 
-	PRIVATE("private"),
+    PRIVATE("private"),
 
-	THIS("this"),
+    THIS("this"),
 
-	BREAK("break"),
+    BREAK("break"),
 
-	DOUBLE("double"),
+    DOUBLE("double"),
 
-	IMPLEMENTS("implements"),
+    IMPLEMENTS("implements"),
 
-	PROTECTED("protected"),
+    PROTECTED("protected"),
 
-	THROW("throw"),
+    THROW("throw"),
 
-	BYTE("byte"),
+    BYTE("byte"),
 
-	ELSE("else"),
+    ELSE("else"),
 
-	IMPORT("import"),
+    IMPORT("import"),
 
-	PUBLIC("public"),
+    PUBLIC("public"),
 
-	THROWS("throws"),
+    THROWS("throws"),
 
-	CASE("case"),
+    CASE("case"),
 
-	ENUM("enum"),
+    ENUM("enum"),
 
-	INSTANCE_OF("instanceof"),
+    INSTANCE_OF("instanceof"),
 
-	RETURN("return"),
+    RETURN("return"),
 
-	TRANSIENT("transient"),
+    TRANSIENT("transient"),
 
-	CATCH("catch"),
+    CATCH("catch"),
 
-	EXTENDS("extends"),
+    EXTENDS("extends"),
 
-	INT("int"),
+    INT("int"),
 
-	SHORT("short"),
+    SHORT("short"),
 
-	TRY("try"),
+    TRY("try"),
 
-	CHAR("char"),
+    CHAR("char"),
 
-	FINAL("final"),
+    FINAL("final"),
 
-	STATIC("static"),
+    STATIC("static"),
 
-	VOID("void"),
+    VOID("void"),
 
-	CLASS("class"),
+    CLASS("class"),
 
-	FINALLY("finally"),
+    FINALLY("finally"),
 
-	LONG("long"),
+    LONG("long"),
 
-	STRICTFP("strictfp"),
+    STRICTFP("strictfp"),
 
-	VOLATILE("volatile"),
+    VOLATILE("volatile"),
 
-	CONST("const"),
+    CONST("const"),
 
-	FLOAT("float"),
+    FLOAT("float"),
 
-	NATIVE("native"),
+    NATIVE("native"),
 
-	SUPER("super"),
+    SUPER("super"),
 
-	WHILE("while")
+    WHILE("while")
 
-	;
+    ;
 
-	private String text;
+    private String text;
 
-	private JavaKeyWords(String text) {
-		this.text = text;
-	}
+    private JavaKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

@@ -21,73 +21,73 @@ import org.junit.Test;
 
 public class XMLParameterTest {
 
-	@Test
-	public void compare_property_with_type1_is_lower_than_prop_with_type2() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "type1";
+    @Test
+    public void compare_property_with_type1_is_lower_than_prop_with_type2() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "type1";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "type2";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "type2";
 
-		assertTrue(param1.compareTo(param2) < 0);
-	}
+        assertTrue(param1.compareTo(param2) < 0);
+    }
 
-	@Test
-	public void compare_property_with_type2_is_higher_than_prop_with_type1() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "type1";
+    @Test
+    public void compare_property_with_type2_is_higher_than_prop_with_type1() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "type1";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "type2";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "type2";
 
-		assertTrue(param2.compareTo(param1) > 0);
-	}
+        assertTrue(param2.compareTo(param1) > 0);
+    }
 
-	@Test
-	public void compare_property_with_typeX_to_prop_with_same_type_is_0() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "typeX";
+    @Test
+    public void compare_property_with_typeX_to_prop_with_same_type_is_0() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "typeX";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "typeX";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "typeX";
 
-		assertTrue(param1.compareTo(param2) == 0);
-	}
+        assertTrue(param1.compareTo(param2) == 0);
+    }
 
-	/* ------------- */
+    /* ------------- */
 
-	@Test
-	public void equals_property_with_type1_to_prop_with_type2_is_false() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "type1";
+    @Test
+    public void equals_property_with_type1_to_prop_with_type2_is_false() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "type1";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "type2";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "type2";
 
-		assertFalse(param1.equals(param2));
-	}
+        assertFalse(param1.equals(param2));
+    }
 
-	@Test
-	public void equals_property_with_type2_to_prop_with_type1__is_false() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "type1";
+    @Test
+    public void equals_property_with_type2_to_prop_with_type1__is_false() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "type1";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "type2";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "type2";
 
-		assertFalse(param1.equals(param2));
-	}
+        assertFalse(param1.equals(param2));
+    }
 
-	@Test
-	public void equals_property_with_typeX_to_prop_with_same_type_is_true_both_ways() {
-		XMLParameter param1 = new XMLParameter();
-		param1.typeAsString = "typeX";
+    @Test
+    public void equals_property_with_typeX_to_prop_with_same_type_is_true_both_ways() {
+        XMLParameter param1 = new XMLParameter();
+        param1.typeAsString = "typeX";
 
-		XMLParameter param2 = new XMLParameter();
-		param2.typeAsString = "typeX";
+        XMLParameter param2 = new XMLParameter();
+        param2.typeAsString = "typeX";
 
-		assertTrue(param1.equals(param2));
-		assertTrue(param2.equals(param1));
-	}
+        assertTrue(param1.equals(param2));
+        assertTrue(param2.equals(param1));
+    }
 
 }

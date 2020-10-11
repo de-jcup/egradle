@@ -17,8 +17,8 @@ package de.jcup.egradle.codeassist.dsl;
 
 public interface TypeConvention extends Comparable<TypeConvention> {
 
-	public String getId();
+    public String getId();
 
-	public String getConventionTypeAsString();
+    public String getConventionTypeAsString();
 
 }

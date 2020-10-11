@@ -34,74 +34,72 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class UpdateOrCreateVirtualRootProjectHandler extends AbstractHandler implements IElementUpdater {
 
-	public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
+    public static final String COMMAND_ID = "egradle.commands.updateOrCreateVirtualRootProject";
 
-	private boolean running = false;
+    private boolean running = false;
 
-	@Override
-	public boolean isEnabled() {
-		return super.isEnabled();
-	}
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled();
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		if (running) {
-			getDialogSupport().showWarning("Virtual root project (re-)creation already running. Please wait");
-			return null;
-		}
-		running = true;
-		new Thread(new Runnable() {
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        if (running) {
+            getDialogSupport().showWarning("Virtual root project (re-)creation already running. Please wait");
+            return null;
+        }
+        running = true;
+        new Thread(new Runnable() {
 
-			@Override
-			public void run() {
-				try {
-					createOrRecreateVirtualRootProject();
-				} catch (VirtualRootProjectException e) {
-					IDEUtil.logError("Was not able to (re)create virtual root project", e);
-					getDialogSupport().showError("Virtual root project not (re)createable. Please try again");
-				} finally {
-					running = false;
-				}
-			}
-		}, "Update virtual root project").start();
-		;
+            @Override
+            public void run() {
+                try {
+                    createOrRecreateVirtualRootProject();
+                } catch (VirtualRootProjectException e) {
+                    IDEUtil.logError("Was not able to (re)create virtual root project", e);
+                    getDialogSupport().showError("Virtual root project not (re)createable. Please try again");
+                } finally {
+                    running = false;
+                }
+            }
+        }, "Update virtual root project").start();
+        ;
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
-		GradleRootProject rootProject = IDEUtil.getRootProject(false);
-		if (rootProject == null) {
-			element.setTooltip("Disabled because currently no egradle root project set!");
-			this.setBaseEnabled(false);
-			return;
-		}
+    @Override
+    public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
+        GradleRootProject rootProject = IDEUtil.getRootProject(false);
+        if (rootProject == null) {
+            element.setTooltip("Disabled because currently no egradle root project set!");
+            this.setBaseEnabled(false);
+            return;
+        }
 
-		if (rootProject.isMultiProject()) {
-			element.setTooltip("Creates or updates virtual root project for your gradle multi project '"
-					+ rootProject.getName() + "'");
-			this.setBaseEnabled(true);
-			return;
-		}
+        if (rootProject.isMultiProject()) {
+            element.setTooltip("Creates or updates virtual root project for your gradle multi project '" + rootProject.getName() + "'");
+            this.setBaseEnabled(true);
+            return;
+        }
 
-		element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '"
-				+ rootProject.getName() + "'");
-		this.setBaseEnabled(false);
-	}
+        element.setTooltip("Disabled because a virtual rooot project is not necessary for single project '" + rootProject.getName() + "'");
+        this.setBaseEnabled(false);
+    }
 
-	public static void requestRefresh() {
-		IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
-		if (window == null) {
-			IDEUtil.logWarning("Cannot handle refresh for update/create vroot project - no active window");
-			return;
-		}
-		ICommandService commandService = (ICommandService) window.getService(ICommandService.class);
-		if (commandService == null) {
-			IDEUtil.logWarning("Cannot handle refresh for update/create vroot project - no command service");
-			return;
-		}
-		commandService.refreshElements(COMMAND_ID, null);
-	}
+    public static void requestRefresh() {
+        IWorkbenchWindow window = EclipseUtil.getActiveWorkbenchWindow();
+        if (window == null) {
+            IDEUtil.logWarning("Cannot handle refresh for update/create vroot project - no active window");
+            return;
+        }
+        ICommandService commandService = (ICommandService) window.getService(ICommandService.class);
+        if (commandService == null) {
+            IDEUtil.logWarning("Cannot handle refresh for update/create vroot project - no command service");
+            return;
+        }
+        commandService.refreshElements(COMMAND_ID, null);
+    }
 
 }

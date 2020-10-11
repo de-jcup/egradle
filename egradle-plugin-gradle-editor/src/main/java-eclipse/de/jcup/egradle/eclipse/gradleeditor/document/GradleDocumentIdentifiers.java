@@ -19,17 +19,17 @@ import de.jcup.egradle.core.text.DocumentIdentifier;
 
 public enum GradleDocumentIdentifiers implements DocumentIdentifier {
 
-	GRADLE_KEYWORD,
+    GRADLE_KEYWORD,
 
-	GRADLE_APPLY_KEYWORD,
+    GRADLE_APPLY_KEYWORD,
 
-	GRADLE_TASK_KEYWORD,
+    GRADLE_TASK_KEYWORD,
 
-	GRADLE_VARIABLE,;
+    GRADLE_VARIABLE,;
 
-	@Override
-	public String getId() {
-		return name();
-	}
+    @Override
+    public String getId() {
+        return name();
+    }
 
 }

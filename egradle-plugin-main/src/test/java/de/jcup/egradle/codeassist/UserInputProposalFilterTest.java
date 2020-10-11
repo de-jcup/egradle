@@ -28,116 +28,116 @@ import org.junit.rules.ExpectedException;
 
 public class UserInputProposalFilterTest {
 
-	private ProposalFactoryContentProvider mockedContentProvider;
+    private ProposalFactoryContentProvider mockedContentProvider;
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
-	private UserInputProposalFilter filterToTest;
+    private UserInputProposalFilter filterToTest;
 
-	@Before
-	public void before() {
-		filterToTest = new UserInputProposalFilter();
-		mockedContentProvider = mock(ProposalFactoryContentProvider.class);
-	}
+    @Before
+    public void before() {
+        filterToTest = new UserInputProposalFilter();
+        mockedContentProvider = mock(ProposalFactoryContentProvider.class);
+    }
 
-	@Test
-	public void when_ile_was_already_entered_and_proposal_impl_says_file_xile__file_and_xile_are_returned() {
-		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("ile");
+    @Test
+    public void when_ile_was_already_entered_and_proposal_impl_says_file_xile__file_and_xile_are_returned() {
+        /* prepare */
+        when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("ile");
 
-		Set<Proposal> list = new LinkedHashSet<>();
-		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getLabel()).thenReturn("file");
+        Set<Proposal> list = new LinkedHashSet<>();
+        Proposal mockedProposal1 = mock(Proposal.class);
+        when(mockedProposal1.getLabel()).thenReturn("file");
 
-		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getLabel()).thenReturn("xile");
+        Proposal mockedProposal2 = mock(Proposal.class);
+        when(mockedProposal2.getLabel()).thenReturn("xile");
 
-		list.add(mockedProposal1);
-		list.add(mockedProposal2);
+        list.add(mockedProposal1);
+        list.add(mockedProposal2);
 
-		/* execute */
-		Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
+        /* execute */
+        Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
 
-		/* test */
-		assertNotNull(proposals);
-		assertEquals(2, proposals.size());
-	}
+        /* test */
+        assertNotNull(proposals);
+        assertEquals(2, proposals.size());
+    }
 
-	@Test
-	public void when_ole_was_already_entered_and_proposal_impl_says_file_xile_an_empty_list_is_returned() {
-		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("ole");
+    @Test
+    public void when_ole_was_already_entered_and_proposal_impl_says_file_xile_an_empty_list_is_returned() {
+        /* prepare */
+        when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("ole");
 
-		Set<Proposal> list = new LinkedHashSet<>();
-		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getLabel()).thenReturn("file");
+        Set<Proposal> list = new LinkedHashSet<>();
+        Proposal mockedProposal1 = mock(Proposal.class);
+        when(mockedProposal1.getLabel()).thenReturn("file");
 
-		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getLabel()).thenReturn("xile");
+        Proposal mockedProposal2 = mock(Proposal.class);
+        when(mockedProposal2.getLabel()).thenReturn("xile");
 
-		list.add(mockedProposal1);
-		list.add(mockedProposal2);
+        list.add(mockedProposal1);
+        list.add(mockedProposal2);
 
-		/* execute */
-		Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
+        /* execute */
+        Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
 
-		/* test */
-		assertNotNull(proposals);
-		assertEquals(0, proposals.size());
-	}
+        /* test */
+        assertNotNull(proposals);
+        assertEquals(0, proposals.size());
+    }
 
-	@Test
-	public void when_file_was_already_entered_and_proposal_impl_says_file_xile__only_file_is_returned() {
-		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("file");
+    @Test
+    public void when_file_was_already_entered_and_proposal_impl_says_file_xile__only_file_is_returned() {
+        /* prepare */
+        when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("file");
 
-		Set<Proposal> list = new LinkedHashSet<>();
-		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getLabel()).thenReturn("file");
+        Set<Proposal> list = new LinkedHashSet<>();
+        Proposal mockedProposal1 = mock(Proposal.class);
+        when(mockedProposal1.getLabel()).thenReturn("file");
 
-		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getLabel()).thenReturn("xile");
+        Proposal mockedProposal2 = mock(Proposal.class);
+        when(mockedProposal2.getLabel()).thenReturn("xile");
 
-		list.add(mockedProposal1);
-		list.add(mockedProposal2);
+        list.add(mockedProposal1);
+        list.add(mockedProposal2);
 
-		/* execute */
-		Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
+        /* execute */
+        Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
 
-		/* test */
-		assertNotNull(proposals);
-		assertEquals(1, proposals.size());
-	}
+        /* test */
+        assertNotNull(proposals);
+        assertEquals(1, proposals.size());
+    }
 
-	@Test
-	public void when_fi_was_already_entered_and_proposal_impl_says_file_xile_and_affiliate_only_file_and_affiliate_are_returned() {
-		/* prepare */
-		when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("fi");
+    @Test
+    public void when_fi_was_already_entered_and_proposal_impl_says_file_xile_and_affiliate_only_file_and_affiliate_are_returned() {
+        /* prepare */
+        when(mockedContentProvider.getEditorSourceEnteredAtCursorPosition()).thenReturn("fi");
 
-		Set<Proposal> list = new LinkedHashSet<>();
-		Proposal mockedProposal1 = mock(Proposal.class);
-		when(mockedProposal1.getLabel()).thenReturn("file");
+        Set<Proposal> list = new LinkedHashSet<>();
+        Proposal mockedProposal1 = mock(Proposal.class);
+        when(mockedProposal1.getLabel()).thenReturn("file");
 
-		Proposal mockedProposal2 = mock(Proposal.class);
-		when(mockedProposal2.getLabel()).thenReturn("xile");
+        Proposal mockedProposal2 = mock(Proposal.class);
+        when(mockedProposal2.getLabel()).thenReturn("xile");
 
-		Proposal mockedProposal3 = mock(Proposal.class);
-		when(mockedProposal3.getLabel()).thenReturn("affiliate");
+        Proposal mockedProposal3 = mock(Proposal.class);
+        when(mockedProposal3.getLabel()).thenReturn("affiliate");
 
-		list.add(mockedProposal1);
-		list.add(mockedProposal2);
-		list.add(mockedProposal3);
+        list.add(mockedProposal1);
+        list.add(mockedProposal2);
+        list.add(mockedProposal3);
 
-		/* execute */
-		Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
+        /* execute */
+        Set<Proposal> proposals = filterToTest.filter(list, mockedContentProvider);
 
-		/* test */
-		assertNotNull(proposals);
-		assertTrue(proposals.contains(mockedProposal1));
-		assertFalse(proposals.contains(mockedProposal2));
-		assertTrue(proposals.contains(mockedProposal3));
-		assertEquals(2, proposals.size());
-	}
+        /* test */
+        assertNotNull(proposals);
+        assertTrue(proposals.contains(mockedProposal1));
+        assertFalse(proposals.contains(mockedProposal2));
+        assertTrue(proposals.contains(mockedProposal3));
+        assertEquals(2, proposals.size());
+    }
 
 }

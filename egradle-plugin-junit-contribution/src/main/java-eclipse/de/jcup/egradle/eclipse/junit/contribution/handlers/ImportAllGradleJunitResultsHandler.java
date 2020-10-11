@@ -23,13 +23,13 @@ import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 
 public class ImportAllGradleJunitResultsHandler extends AbstractHandler {
 
-	public static final String COMMAND_ID = "de.jcup.egradle.eclipse.ide.junit.contribution.commands.importTestResultCommand";
+    public static final String COMMAND_ID = "de.jcup.egradle.eclipse.ide.junit.contribution.commands.importTestResultCommand";
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results", null, false);
-		job.schedule();
-		return null;
-	}
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results", null, false);
+        job.schedule();
+        return null;
+    }
 
 }

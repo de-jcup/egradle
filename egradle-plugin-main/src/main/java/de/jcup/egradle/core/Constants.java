@@ -17,14 +17,14 @@ package de.jcup.egradle.core;
 
 public class Constants {
 
-	public static final String VIRTUAL_ROOTPROJECT_NAME = "__ Virtual Root __";
-	public static final String VIRTUAL_ROOTPROJECT_FOLDERNAME = ".egradle";
-	public static final String CONSOLE_FAILED = "[FAILED]";
-	public static final String CONSOLE_OK = "[OK]";
-	public static final String CONSOLE_WARNING = "[WARNING]";
-	/**
-	 * Validation output is shrinked to optimize validation performance. The
-	 * value marks what is the limit of lines necessary to validate
-	 */
-	public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 50;
+    public static final String VIRTUAL_ROOTPROJECT_NAME = "__ Virtual Root __";
+    public static final String VIRTUAL_ROOTPROJECT_FOLDERNAME = ".egradle";
+    public static final String CONSOLE_FAILED = "[FAILED]";
+    public static final String CONSOLE_OK = "[OK]";
+    public static final String CONSOLE_WARNING = "[WARNING]";
+    /**
+     * Validation output is shrinked to optimize validation performance. The value
+     * marks what is the limit of lines necessary to validate
+     */
+    public static final int VALIDATION_OUTPUT_SHRINK_LIMIT = 50;
 }

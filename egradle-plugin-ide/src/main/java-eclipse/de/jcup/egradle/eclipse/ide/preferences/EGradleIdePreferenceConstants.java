@@ -16,36 +16,33 @@
 package de.jcup.egradle.eclipse.ide.preferences;
 
 public enum EGradleIdePreferenceConstants {
-	P_MIGRATE_IDE_STATE("migrateIdeState"),
+    P_MIGRATE_IDE_STATE("migrateIdeState"),
 
-	P_ROOTPROJECT_PATH("pathGradleRootProject"),
+    P_ROOTPROJECT_PATH("pathGradleRootProject"),
 
-	P_JAVA_HOME_PATH("pathJavaHome"),
-	
-	P_GRADLE_USER_HOME("gradleUserHome"),
+    P_JAVA_HOME_PATH("pathJavaHome"),
 
-	P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER(
-			"pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"), P_OUTPUT_VALIDATION_ENABLED(
-					"outputValidationEnabled"), P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED(
-							"showConsoleViewOnBuildfailed"),
+    P_GRADLE_USER_HOME("gradleUserHome"),
 
-	/* file handling parts */
-	P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
+    P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"),
+    P_OUTPUT_VALIDATION_ENABLED("outputValidationEnabled"), P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 
-	/* import */
-	P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), P_IMPORT__DO_CLEAN_PROJECTS(
-			"onImportDoCleanProjects"),
+    /* file handling parts */
+    P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
 
-	P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled");
+    /* import */
+    P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
 
-	private String id;
+    P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled");
 
-	private EGradleIdePreferenceConstants(String id) {
-		this.id = id;
-	}
+    private String id;
 
-	public String getId() {
-		return id;
-	}
+    private EGradleIdePreferenceConstants(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 
 }

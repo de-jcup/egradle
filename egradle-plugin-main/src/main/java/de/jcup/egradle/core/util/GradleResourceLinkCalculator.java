@@ -20,110 +20,110 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GradleResourceLinkCalculator {
 
-	/**
-	 * Creates a link result or <code>null</code>
-	 * 
-	 * @param line
-	 * @param offsetInLine
-	 * @return link result or <code>null</code>
-	 */
-	public GradleHyperLinkResult createResourceLinkString(String line, int offsetInLine) {
-		if (line == null) {
-			return null;
-		}
-		if (offsetInLine < 0) {
-			return null;
-		}
-		int lineLength = line.length();
-		if (offsetInLine >= lineLength) {
-			return null;
-		}
-		return internalCreateLink(line, offsetInLine);
-	}
+    /**
+     * Creates a link result or <code>null</code>
+     * 
+     * @param line
+     * @param offsetInLine
+     * @return link result or <code>null</code>
+     */
+    public GradleHyperLinkResult createResourceLinkString(String line, int offsetInLine) {
+        if (line == null) {
+            return null;
+        }
+        if (offsetInLine < 0) {
+            return null;
+        }
+        int lineLength = line.length();
+        if (offsetInLine >= lineLength) {
+            return null;
+        }
+        return internalCreateLink(line, offsetInLine);
+    }
 
-	private GradleHyperLinkResult internalCreateLink(String line, int offsetInLine) {
-		/* e.g. abc defg Test abc */
-		/* ^-- Test must be identified */
-		String rightSubString = line.substring(offsetInLine);
-		StringBuilder content = new StringBuilder();
-		for (char c : rightSubString.toCharArray()) {
-			if (Character.isWhitespace(c)) {
-				break;
-			}
-			if (c == '{') {
-				break;
-			}
-			if (c == ',') {
-				break;
-			}
-			if (c == '(') {
-				break;
-			}
-			if (c == ')') {
-				break;
-			}
-			if (c == '[') {
-				break;
-			}
-			if (c == '<') {
-				break;
-			}
-			if (c == '>') {
-				break;
-			}
-			if (c == '.') {
-				break;
-			}
-			if (!Character.isJavaIdentifierPart(c)) {
-				return null;
-			}
-			content.append(c);
-		}
-		if (StringUtils.isBlank(content)) {
-			return null;
-		}
-		String leftSubString = line.substring(0, offsetInLine);
-		char[] leftCharsArray = leftSubString.toCharArray();
+    private GradleHyperLinkResult internalCreateLink(String line, int offsetInLine) {
+        /* e.g. abc defg Test abc */
+        /* ^-- Test must be identified */
+        String rightSubString = line.substring(offsetInLine);
+        StringBuilder content = new StringBuilder();
+        for (char c : rightSubString.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                break;
+            }
+            if (c == '{') {
+                break;
+            }
+            if (c == ',') {
+                break;
+            }
+            if (c == '(') {
+                break;
+            }
+            if (c == ')') {
+                break;
+            }
+            if (c == '[') {
+                break;
+            }
+            if (c == '<') {
+                break;
+            }
+            if (c == '>') {
+                break;
+            }
+            if (c == '.') {
+                break;
+            }
+            if (!Character.isJavaIdentifierPart(c)) {
+                return null;
+            }
+            content.append(c);
+        }
+        if (StringUtils.isBlank(content)) {
+            return null;
+        }
+        String leftSubString = line.substring(0, offsetInLine);
+        char[] leftCharsArray = leftSubString.toCharArray();
 
-		ArrayUtils.reverse(leftCharsArray);
-		int startPos = offsetInLine;
-		for (char c : leftCharsArray) {
-			if (c == '(') {
-				break;
-			}
-			if (c == '<') {
-				break;
-			}
-			if (c == '.') {
-				break;
-			}
-			if (Character.isWhitespace(c)) {
-				break;
-			}
-			if (!Character.isJavaIdentifierPart(c)) {
-				return null;
-			}
-			startPos--;
-			content.insert(0, c);
-		}
-		String linkContent = content.toString();
+        ArrayUtils.reverse(leftCharsArray);
+        int startPos = offsetInLine;
+        for (char c : leftCharsArray) {
+            if (c == '(') {
+                break;
+            }
+            if (c == '<') {
+                break;
+            }
+            if (c == '.') {
+                break;
+            }
+            if (Character.isWhitespace(c)) {
+                break;
+            }
+            if (!Character.isJavaIdentifierPart(c)) {
+                return null;
+            }
+            startPos--;
+            content.insert(0, c);
+        }
+        String linkContent = content.toString();
 
-		char firstChar = linkContent.charAt(0);
-		if (!Character.isJavaIdentifierStart(firstChar)) {
-			return null;
-		}
-		/*
-		 * currently this calculator only supports correct Type syntax means
-		 * first char MUST be upper cased
-		 */
-		if (!Character.isUpperCase(firstChar)) {
-			return null;
-		}
-		GradleHyperLinkResult result = new GradleHyperLinkResult();
-		result.linkOffsetInLine = startPos;
-		result.linkContent = linkContent;
-		result.linkLength = linkContent.length();
-		return result;
-	}
+        char firstChar = linkContent.charAt(0);
+        if (!Character.isJavaIdentifierStart(firstChar)) {
+            return null;
+        }
+        /*
+         * currently this calculator only supports correct Type syntax means first char
+         * MUST be upper cased
+         */
+        if (!Character.isUpperCase(firstChar)) {
+            return null;
+        }
+        GradleHyperLinkResult result = new GradleHyperLinkResult();
+        result.linkOffsetInLine = startPos;
+        result.linkContent = linkContent;
+        result.linkLength = linkContent.length();
+        return result;
+    }
 
 }

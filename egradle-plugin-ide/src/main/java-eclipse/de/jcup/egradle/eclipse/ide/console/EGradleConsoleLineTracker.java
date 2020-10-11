@@ -28,46 +28,46 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleConsoleLineTracker implements IConsoleLineTracker {
 
-	private IDocument document;
-	private RememberLastLinesOutputHandler rememberOutputHandler;
+    private IDocument document;
+    private RememberLastLinesOutputHandler rememberOutputHandler;
 
-	public EGradleConsoleLineTracker() {
-	}
+    public EGradleConsoleLineTracker() {
+    }
 
-	@Override
-	public void init(IConsole console) {
-		IDEUtil.removeAllValidationErrorsOfConsoleOutput();
+    @Override
+    public void init(IConsole console) {
+        IDEUtil.removeAllValidationErrorsOfConsoleOutput();
 
-		rememberOutputHandler = IDEUtil.createOutputHandlerForValidationErrorsOnConsole();
-		document = console.getDocument();
-	}
+        rememberOutputHandler = IDEUtil.createOutputHandlerForValidationErrorsOnConsole();
+        document = console.getDocument();
+    }
 
-	@Override
-	public void lineAppended(IRegion lineRegion) {
-		if (rememberOutputHandler == null) {
-			return;
-		}
-		if (document == null) {
-			return;
-		}
-		try {
-			String lineStr = document.get(lineRegion.getOffset(), lineRegion.getLength());
-			if (lineStr.startsWith("Total time")) {
-				/* ok . time to validate */
-				List<String> list = rememberOutputHandler.createOutputToValidate();
-				IDEUtil.showValidationErrorsOfConsoleOutput(list);
-				rememberOutputHandler = null;
-			} else {
-				rememberOutputHandler.output(lineStr);
-			}
-		} catch (BadLocationException e) {
-			/* ignore */
-		}
-	}
+    @Override
+    public void lineAppended(IRegion lineRegion) {
+        if (rememberOutputHandler == null) {
+            return;
+        }
+        if (document == null) {
+            return;
+        }
+        try {
+            String lineStr = document.get(lineRegion.getOffset(), lineRegion.getLength());
+            if (lineStr.startsWith("Total time")) {
+                /* ok . time to validate */
+                List<String> list = rememberOutputHandler.createOutputToValidate();
+                IDEUtil.showValidationErrorsOfConsoleOutput(list);
+                rememberOutputHandler = null;
+            } else {
+                rememberOutputHandler.output(lineStr);
+            }
+        } catch (BadLocationException e) {
+            /* ignore */
+        }
+    }
 
-	@Override
-	public void dispose() {
-		document = null;
-	}
+    @Override
+    public void dispose() {
+        document = null;
+    }
 
 }

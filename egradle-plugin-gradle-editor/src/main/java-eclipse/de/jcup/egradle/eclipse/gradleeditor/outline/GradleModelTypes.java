@@ -18,11 +18,11 @@ package de.jcup.egradle.eclipse.gradleeditor.outline;
 import de.jcup.egradle.eclipse.api.GroovyBasedModelType;
 
 public enum GradleModelTypes implements GroovyBasedModelType {
-	GRADLE,
+    GRADLE,
 
-	/* debug variants: */
+    /* debug variants: */
 
-	GROOVY_FULL_ANTLR,
+    GROOVY_FULL_ANTLR,
 
-	GRADLE__UNFILTERED,
+    GRADLE__UNFILTERED,
 }

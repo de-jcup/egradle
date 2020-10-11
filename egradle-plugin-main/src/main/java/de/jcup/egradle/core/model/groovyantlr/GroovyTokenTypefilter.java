@@ -20,24 +20,24 @@ import de.jcup.egradle.core.util.Filter;
 
 class GroovyTokenTypefilter implements Filter {
 
-	private int filteredType;
+    private int filteredType;
 
-	GroovyTokenTypefilter(int type) {
-		this.filteredType = type;
-	}
+    GroovyTokenTypefilter(int type) {
+        this.filteredType = type;
+    }
 
-	@Override
-	public boolean isFiltered(Object obj) {
-		boolean isAst = obj instanceof AST;
-		if (!isAst) {
-			return false;
-		}
-		AST ast = (AST) obj;
-		int type = ast.getType();
-		if (filteredType == type) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean isFiltered(Object obj) {
+        boolean isAst = obj instanceof AST;
+        if (!isAst) {
+            return false;
+        }
+        AST ast = (AST) obj;
+        int type = ast.getType();
+        if (filteredType == type) {
+            return true;
+        }
+        return false;
+    }
 
 }

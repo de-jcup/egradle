@@ -55,242 +55,238 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class OpenGradleResourceDialog extends FilteredResourcesSelectionDialog {
 
-	private static final String GRADLE_RESOURCE_DIALOG_SETTINGS = "de.jcup.egradle.eclipse.gradleeditor.OpenGradleResourceDialog";
+    private static final String GRADLE_RESOURCE_DIALOG_SETTINGS = "de.jcup.egradle.eclipse.gradleeditor.OpenGradleResourceDialog";
 
-	private static final int OPEN_WITH_ID = IDialogConstants.CLIENT_ID + 1;
+    private static final int OPEN_WITH_ID = IDialogConstants.CLIENT_ID + 1;
 
-	private Button openWithButton;
+    private Button openWithButton;
 
-	/**
-	 * Creates a new instance of the class.
-	 *
-	 * @param parentShell
-	 *            the parent shell
-	 * @param container
-	 *            the container
-	 * @param typesMask
-	 *            the types mask
-	 */
-	public OpenGradleResourceDialog(Shell parentShell, IContainer container, int typesMask) {
-		super(parentShell, true, container, typesMask);
-		addListFilter(new GroovyGradleAndJavaTypeFilter());
-		setHelpAvailable(false);
-		setMessage("Please select an estimated type:");
-		setTitle("Open potential groovy/gradle/java resource");
+    /**
+     * Creates a new instance of the class.
+     *
+     * @param parentShell the parent shell
+     * @param container   the container
+     * @param typesMask   the types mask
+     */
+    public OpenGradleResourceDialog(Shell parentShell, IContainer container, int typesMask) {
+        super(parentShell, true, container, typesMask);
+        addListFilter(new GroovyGradleAndJavaTypeFilter());
+        setHelpAvailable(false);
+        setMessage("Please select an estimated type:");
+        setTitle("Open potential groovy/gradle/java resource");
 
-	}
+    }
 
-	@Override
-	protected IDialogSettings getDialogSettings() {
-		EditorActivator editorActivator = EditorActivator.getDefault();
-		IDialogSettings dialogSettings = editorActivator.getDialogSettings();
-		IDialogSettings settings = dialogSettings.getSection(GRADLE_RESOURCE_DIALOG_SETTINGS);
+    @Override
+    protected IDialogSettings getDialogSettings() {
+        EditorActivator editorActivator = EditorActivator.getDefault();
+        IDialogSettings dialogSettings = editorActivator.getDialogSettings();
+        IDialogSettings settings = dialogSettings.getSection(GRADLE_RESOURCE_DIALOG_SETTINGS);
 
-		if (settings == null) {
-			settings = dialogSettings.addNewSection(GRADLE_RESOURCE_DIALOG_SETTINGS);
-		}
+        if (settings == null) {
+            settings = dialogSettings.addNewSection(GRADLE_RESOURCE_DIALOG_SETTINGS);
+        }
 
-		return settings;
-	}
+        return settings;
+    }
 
-	@Override
-	protected ItemsFilter createFilter() {
-		return super.createFilter();
-	}
+    @Override
+    protected ItemsFilter createFilter() {
+        return super.createFilter();
+    }
 
-	@Override
-	protected Control createDialogArea(Composite parent) {
-		Control control = super.createDialogArea(parent);
-		getPatternControl().setEnabled(false);
-		return control;
-	}
+    @Override
+    protected Control createDialogArea(Composite parent) {
+        Control control = super.createDialogArea(parent);
+        getPatternControl().setEnabled(false);
+        return control;
+    }
 
-	private class GroovyGradleAndJavaTypeFilter extends ViewerFilter {
+    private class GroovyGradleAndJavaTypeFilter extends ViewerFilter {
 
-		@Override
-		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			if (!(element instanceof IFile)) {
-				return false;
-			}
-			IFile file = (IFile) element;
-			String extension = file.getFileExtension();
-			boolean supported = false;
-			supported = supported || "gradle".equals(extension);
-			supported = supported || "groovy".equals(extension);
-			supported = supported || "java".equals(extension);
-			// no class because this is not supported by resource dialog
-			if (!supported) {
-				return false;
-			}
-			String name = file.getName();
-			String initialPattern = getInitialPattern();
-			String pattern = initialPattern + "." + extension;
-			if (name.equals(pattern)) {
-				return true;
-			}
-			return false;
-		}
+        @Override
+        public boolean select(Viewer viewer, Object parentElement, Object element) {
+            if (!(element instanceof IFile)) {
+                return false;
+            }
+            IFile file = (IFile) element;
+            String extension = file.getFileExtension();
+            boolean supported = false;
+            supported = supported || "gradle".equals(extension);
+            supported = supported || "groovy".equals(extension);
+            supported = supported || "java".equals(extension);
+            // no class because this is not supported by resource dialog
+            if (!supported) {
+                return false;
+            }
+            String name = file.getName();
+            String initialPattern = getInitialPattern();
+            String pattern = initialPattern + "." + extension;
+            if (name.equals(pattern)) {
+                return true;
+            }
+            return false;
+        }
 
-	}
+    }
 
-	@Override
-	protected void fillContextMenu(IMenuManager menuManager) {
-		super.fillContextMenu(menuManager);
+    @Override
+    protected void fillContextMenu(IMenuManager menuManager) {
+        super.fillContextMenu(menuManager);
 
-		final IStructuredSelection selectedItems = getSelectedItems();
-		if (selectedItems.isEmpty()) {
-			return;
-		}
+        final IStructuredSelection selectedItems = getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            return;
+        }
 
-		IWorkbenchPage activePage = getActivePage();
-		if (activePage == null) {
-			return;
-		}
+        IWorkbenchPage activePage = getActivePage();
+        if (activePage == null) {
+            return;
+        }
 
-		menuManager.add(new Separator());
+        menuManager.add(new Separator());
 
-		// Add 'Open' menu item
-		OpenFileAction openFileAction = new OpenFileAction(activePage) {
-			@Override
-			public void run() {
-				okPressed();
-			}
-		};
-		openFileAction.selectionChanged(selectedItems);
-		if (openFileAction.isEnabled()) {
-			menuManager.add(openFileAction);
+        // Add 'Open' menu item
+        OpenFileAction openFileAction = new OpenFileAction(activePage) {
+            @Override
+            public void run() {
+                okPressed();
+            }
+        };
+        openFileAction.selectionChanged(selectedItems);
+        if (openFileAction.isEnabled()) {
+            menuManager.add(openFileAction);
 
-			IAdaptable selectedAdaptable = getSelectedAdaptable();
-			if (selectedAdaptable != null) {
+            IAdaptable selectedAdaptable = getSelectedAdaptable();
+            if (selectedAdaptable != null) {
 
-				// Add 'Open With' sub-menu
-				MenuManager subMenu = new MenuManager("Open with");
-				OpenWithMenu openWithMenu = new ResourceOpenWithMenu(activePage, selectedAdaptable);
-				subMenu.add(openWithMenu);
-				menuManager.add(subMenu);
-			}
-		}
+                // Add 'Open With' sub-menu
+                MenuManager subMenu = new MenuManager("Open with");
+                OpenWithMenu openWithMenu = new ResourceOpenWithMenu(activePage, selectedAdaptable);
+                subMenu.add(openWithMenu);
+                menuManager.add(subMenu);
+            }
+        }
 
-	}
+    }
 
-	@Override
-	protected void createButtonsForButtonBar(final Composite parent) {
-		GridLayout parentLayout = (GridLayout) parent.getLayout();
-		parentLayout.makeColumnsEqualWidth = false;
+    @Override
+    protected void createButtonsForButtonBar(final Composite parent) {
+        GridLayout parentLayout = (GridLayout) parent.getLayout();
+        parentLayout.makeColumnsEqualWidth = false;
 
-		openWithButton = createDropdownButton(parent, OPEN_WITH_ID, "Open with", new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				showOpenWithMenu();
-			}
-		});
-		setButtonLayoutData(openWithButton);
+        openWithButton = createDropdownButton(parent, OPEN_WITH_ID, "Open with", new MouseAdapter() {
+            @Override
+            public void mouseDown(MouseEvent e) {
+                showOpenWithMenu();
+            }
+        });
+        setButtonLayoutData(openWithButton);
 
-		new Label(parent, SWT.NONE).setLayoutData(new GridData(5, 0));
-		parentLayout.numColumns++;
+        new Label(parent, SWT.NONE).setLayoutData(new GridData(5, 0));
+        parentLayout.numColumns++;
 
-		Button okButton = createButton(parent, IDialogConstants.OK_ID, "Open", true);
-		Button cancelButton = createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+        Button okButton = createButton(parent, IDialogConstants.OK_ID, "Open", true);
+        Button cancelButton = createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 
-		GridData cancelLayoutData = (GridData) cancelButton.getLayoutData();
-		GridData okLayoutData = (GridData) okButton.getLayoutData();
-		int buttonWidth = Math.max(cancelLayoutData.widthHint, okLayoutData.widthHint);
-		cancelLayoutData.widthHint = buttonWidth;
-		okLayoutData.widthHint = buttonWidth;
-	}
+        GridData cancelLayoutData = (GridData) cancelButton.getLayoutData();
+        GridData okLayoutData = (GridData) okButton.getLayoutData();
+        int buttonWidth = Math.max(cancelLayoutData.widthHint, okLayoutData.widthHint);
+        cancelLayoutData.widthHint = buttonWidth;
+        okLayoutData.widthHint = buttonWidth;
+    }
 
-	private Button createDropdownButton(final Composite parent, int id, String label, MouseListener mouseListener) {
-		char textEmbedding = parent.getOrientation() == SWT.LEFT_TO_RIGHT ? '\u202a' : '\u202b';
-		Button button = createButton(parent, id, textEmbedding + label + '\u202c', false);
-		if (Util.isMac()) {
-			// Button#setOrientation(int) is a no-op on the Mac. Use a Unicode
-			// BLACK DOWN-POINTING SMALL TRIANGLE.
-			button.setText(button.getText() + " \u25BE"); //$NON-NLS-1$
-		} else {
-			int dropDownOrientation = parent.getOrientation() == SWT.LEFT_TO_RIGHT ? SWT.RIGHT_TO_LEFT
-					: SWT.LEFT_TO_RIGHT;
-			button.setOrientation(dropDownOrientation);
-			button.setText(button.getText() + " \u25BE"); //$NON-NLS-1$
-			button.addMouseListener(mouseListener);
-		}
-		return button;
-	}
+    private Button createDropdownButton(final Composite parent, int id, String label, MouseListener mouseListener) {
+        char textEmbedding = parent.getOrientation() == SWT.LEFT_TO_RIGHT ? '\u202a' : '\u202b';
+        Button button = createButton(parent, id, textEmbedding + label + '\u202c', false);
+        if (Util.isMac()) {
+            // Button#setOrientation(int) is a no-op on the Mac. Use a Unicode
+            // BLACK DOWN-POINTING SMALL TRIANGLE.
+            button.setText(button.getText() + " \u25BE"); //$NON-NLS-1$
+        } else {
+            int dropDownOrientation = parent.getOrientation() == SWT.LEFT_TO_RIGHT ? SWT.RIGHT_TO_LEFT : SWT.LEFT_TO_RIGHT;
+            button.setOrientation(dropDownOrientation);
+            button.setText(button.getText() + " \u25BE"); //$NON-NLS-1$
+            button.addMouseListener(mouseListener);
+        }
+        return button;
+    }
 
-	@Override
-	protected void buttonPressed(int buttonId) {
-		switch (buttonId) {
-		case OPEN_WITH_ID:
-			showOpenWithMenu();
-			break;
-		default:
-			super.buttonPressed(buttonId);
-		}
-	}
+    @Override
+    protected void buttonPressed(int buttonId) {
+        switch (buttonId) {
+        case OPEN_WITH_ID:
+            showOpenWithMenu();
+            break;
+        default:
+            super.buttonPressed(buttonId);
+        }
+    }
 
-	@Override
-	protected void updateButtonsEnableState(IStatus status) {
-		super.updateButtonsEnableState(status);
-		if (openWithButton != null && !openWithButton.isDisposed()) {
-			openWithButton.setEnabled(!status.matches(IStatus.ERROR) && getSelectedItems().size() == 1);
-		}
-	}
+    @Override
+    protected void updateButtonsEnableState(IStatus status) {
+        super.updateButtonsEnableState(status);
+        if (openWithButton != null && !openWithButton.isDisposed()) {
+            openWithButton.setEnabled(!status.matches(IStatus.ERROR) && getSelectedItems().size() == 1);
+        }
+    }
 
-	private IAdaptable getSelectedAdaptable() {
-		IStructuredSelection s = getSelectedItems();
-		if (s.size() != 1) {
-			return null;
-		}
-		Object selectedElement = s.getFirstElement();
-		if (selectedElement instanceof IAdaptable) {
-			return (IAdaptable) selectedElement;
-		}
-		return null;
-	}
+    private IAdaptable getSelectedAdaptable() {
+        IStructuredSelection s = getSelectedItems();
+        if (s.size() != 1) {
+            return null;
+        }
+        Object selectedElement = s.getFirstElement();
+        if (selectedElement instanceof IAdaptable) {
+            return (IAdaptable) selectedElement;
+        }
+        return null;
+    }
 
-	private IWorkbenchPage getActivePage() {
-		IWorkbenchWindow activeWorkbenchWindow = EclipseUtil.getActiveWorkbenchWindow();
-		if (activeWorkbenchWindow == null) {
-			return null;
-		}
-		return activeWorkbenchWindow.getActivePage();
-	}
+    private IWorkbenchPage getActivePage() {
+        IWorkbenchWindow activeWorkbenchWindow = EclipseUtil.getActiveWorkbenchWindow();
+        if (activeWorkbenchWindow == null) {
+            return null;
+        }
+        return activeWorkbenchWindow.getActivePage();
+    }
 
-	private void showOpenWithMenu() {
-		IWorkbenchPage activePage = getActivePage();
-		if (activePage == null) {
-			return;
-		}
-		IAdaptable selectedAdaptable = getSelectedAdaptable();
-		if (selectedAdaptable == null) {
-			return;
-		}
+    private void showOpenWithMenu() {
+        IWorkbenchPage activePage = getActivePage();
+        if (activePage == null) {
+            return;
+        }
+        IAdaptable selectedAdaptable = getSelectedAdaptable();
+        if (selectedAdaptable == null) {
+            return;
+        }
 
-		ResourceOpenWithMenu openWithMenu = new ResourceOpenWithMenu(activePage, selectedAdaptable);
-		showMenu(openWithButton, openWithMenu);
-	}
+        ResourceOpenWithMenu openWithMenu = new ResourceOpenWithMenu(activePage, selectedAdaptable);
+        showMenu(openWithButton, openWithMenu);
+    }
 
-	private void showMenu(Button button, IContributionItem menuContribution) {
-		Menu menu = new Menu(button);
-		Point p = button.getLocation();
-		p.y = p.y + button.getSize().y;
-		p = button.getParent().toDisplay(p);
+    private void showMenu(Button button, IContributionItem menuContribution) {
+        Menu menu = new Menu(button);
+        Point p = button.getLocation();
+        p.y = p.y + button.getSize().y;
+        p = button.getParent().toDisplay(p);
 
-		menu.setLocation(p);
-		menuContribution.fill(menu, 0);
-		menu.setVisible(true);
-	}
+        menu.setLocation(p);
+        menuContribution.fill(menu, 0);
+        menu.setVisible(true);
+    }
 
-	private final class ResourceOpenWithMenu extends OpenWithMenu {
-		private ResourceOpenWithMenu(IWorkbenchPage page, IAdaptable file) {
-			super(page, file);
-		}
+    private final class ResourceOpenWithMenu extends OpenWithMenu {
+        private ResourceOpenWithMenu(IWorkbenchPage page, IAdaptable file) {
+            super(page, file);
+        }
 
-		@Override
-		protected void openEditor(IEditorDescriptor editorDescriptor, boolean openUsingDescriptor) {
-			computeResult();
-			setResult(Collections.EMPTY_LIST);
-			close();
-			super.openEditor(editorDescriptor, openUsingDescriptor);
-		}
-	}
+        @Override
+        protected void openEditor(IEditorDescriptor editorDescriptor, boolean openUsingDescriptor) {
+            computeResult();
+            setResult(Collections.EMPTY_LIST);
+            close();
+            super.openEditor(editorDescriptor, openUsingDescriptor);
+        }
+    }
 }

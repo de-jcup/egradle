@@ -70,280 +70,274 @@ import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleContentAssistProcessor implements IContentAssistProcessor, ModelProvider {
-	private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
+    private static final ICompletionProposal[] NO_COMPLETION_PROPOSALS = new ICompletionProposal[0];
 
-	private String errorMessage;
+    private String errorMessage;
 
-	/**
-	 * Caching is only done while code assist sessions is alive!
-	 */
-	private boolean useCacheBecauseCodeAssistSessionOngoing;
+    /**
+     * Caching is only done while code assist sessions is alive!
+     */
+    private boolean useCacheBecauseCodeAssistSessionOngoing;
 
-	private IAdaptable adaptable;
+    private IAdaptable adaptable;
 
-	private List<ProposalFactory> proposalFactories;
-	private static GradleEditorOutlineLabelProvider labelProvider = new GradleEditorOutlineLabelProvider();
+    private List<ProposalFactory> proposalFactories;
+    private static GradleEditorOutlineLabelProvider labelProvider = new GradleEditorOutlineLabelProvider();
 
-	private RelevantCodeCutter codeCutter;
+    private RelevantCodeCutter codeCutter;
 
-	private TreeSet<Proposal> cachedProposals;
+    private TreeSet<Proposal> cachedProposals;
 
-	private UserInputProposalFilter filter = new UserInputProposalFilter();
+    private UserInputProposalFilter filter = new UserInputProposalFilter();
 
-	private ICompletionListener completionListener;
+    private ICompletionListener completionListener;
 
-	private GradleLanguageElementEstimater estimator;
+    private GradleLanguageElementEstimater estimator;
 
-	private HTMLDescriptionBuilder descriptionBuilder;
+    private HTMLDescriptionBuilder descriptionBuilder;
 
-	public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
-		if (adaptable == null) {
-			throw new IllegalArgumentException("adaptable may not be null!");
-		}
-		if (codeCutter == null) {
-			throw new IllegalArgumentException("codeCutter may not be null!");
-		}
-		this.adaptable = adaptable;
-		this.codeCutter = codeCutter;
-		this.proposalFactories = new ArrayList<>();
-		this.cachedProposals = new TreeSet<>();
-		this.completionListener = new CacheValidListener();
+    public GradleContentAssistProcessor(IAdaptable adaptable, RelevantCodeCutter codeCutter) {
+        if (adaptable == null) {
+            throw new IllegalArgumentException("adaptable may not be null!");
+        }
+        if (codeCutter == null) {
+            throw new IllegalArgumentException("codeCutter may not be null!");
+        }
+        this.adaptable = adaptable;
+        this.codeCutter = codeCutter;
+        this.proposalFactories = new ArrayList<>();
+        this.cachedProposals = new TreeSet<>();
+        this.completionListener = new CacheValidListener();
 
-		this.descriptionBuilder = new HTMLDescriptionBuilder();
-		addFactories();
-	}
+        this.descriptionBuilder = new HTMLDescriptionBuilder();
+        addFactories();
+    }
 
-	private void addFactories() {
-		CodeCompletionRegistry codeCompletionRegistry = EditorActivator.getDefault().getCodeCompletionRegistry();
-		GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
+    private void addFactories() {
+        CodeCompletionRegistry codeCompletionRegistry = EditorActivator.getDefault().getCodeCompletionRegistry();
+        GradleDSLTypeProvider typeProvider = codeCompletionRegistry.getService(GradleDSLTypeProvider.class);
 
-		estimator = new GradleLanguageElementEstimater(typeProvider);
-		proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeTemplateBuilder(), estimator));
-		proposalFactories.add(new VariableNameProposalFactory());
-	}
+        estimator = new GradleLanguageElementEstimater(typeProvider);
+        proposalFactories.add(new GradleDSLProposalFactory(new GradleDSLCodeTemplateBuilder(), estimator));
+        proposalFactories.add(new VariableNameProposalFactory());
+    }
 
-	public GradleLanguageElementEstimater getEstimator() {
-		return estimator;
-	}
+    public GradleLanguageElementEstimater getEstimator() {
+        return estimator;
+    }
 
-	@Override
-	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-		if (!isCodeCompletionEnabled()) {
-			errorMessage = "EGradle editor code completion is disabled. Change your preferences!";
-			return NO_COMPLETION_PROPOSALS;
-		}
-		// waitForOutlineModelRefreshed();
-		errorMessage = null;
+    @Override
+    public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
+        if (!isCodeCompletionEnabled()) {
+            errorMessage = "EGradle editor code completion is disabled. Change your preferences!";
+            return NO_COMPLETION_PROPOSALS;
+        }
+        // waitForOutlineModelRefreshed();
+        errorMessage = null;
 
-		IDocument document = viewer.getDocument();
-		if (document == null) {
-			return NO_COMPLETION_PROPOSALS;
-		}
-		ProposalFactoryContentProvider contentProvider = null;
-		try {
-			GradleFileType fileType = adaptable.getAdapter(GradleFileType.class);
-			TextProvider textProvider = new DocumentTextProvider(document);
-			ModelProvider modelProvider = GradleContentAssistProcessor.this;
-			contentProvider = new StaticOffsetProposalFactoryContentProvider(fileType, modelProvider, textProvider,
-					codeCutter, offset);
+        IDocument document = viewer.getDocument();
+        if (document == null) {
+            return NO_COMPLETION_PROPOSALS;
+        }
+        ProposalFactoryContentProvider contentProvider = null;
+        try {
+            GradleFileType fileType = adaptable.getAdapter(GradleFileType.class);
+            TextProvider textProvider = new DocumentTextProvider(document);
+            ModelProvider modelProvider = GradleContentAssistProcessor.this;
+            contentProvider = new StaticOffsetProposalFactoryContentProvider(fileType, modelProvider, textProvider, codeCutter, offset);
 
-		} catch (ProposalFactoryContentProviderException e) {
-			return NO_COMPLETION_PROPOSALS;
-		}
+        } catch (ProposalFactoryContentProviderException e) {
+            return NO_COMPLETION_PROPOSALS;
+        }
 
-		if (DEBUG) {
-			debugCacheState("proposal computing-1");
-		}
-		if (!useCacheBecauseCodeAssistSessionOngoing) {
-			if (DEBUG) {
-				debugCacheState("proposal computing-2");
-			}
-			cachedProposals.clear();
-			boolean filterGetterAndSetter = getPreferences().isCodeAssistNoProposalsForGetterOrSetter();
-			for (ProposalFactory proposalFactory : proposalFactories) {
-				if (proposalFactory instanceof FilterableProposalFactory) {
-					FilterableProposalFactory fpropFactory = (FilterableProposalFactory) proposalFactory;
-					fpropFactory.setFilterGetterAndSetter(filterGetterAndSetter);
-				}
-				Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
-				cachedProposals.addAll(proposalsOfCurrentFactory);
-			}
-			useCacheBecauseCodeAssistSessionOngoing = true;
-			if (DEBUG) {
-				debugCacheState("proposal computing-3");
-			}
-		}
-		if (DEBUG) {
-			debugCacheState("proposal computing-4");
-		}
-		Set<Proposal> filteredProposals = filter.filter(cachedProposals, contentProvider);
-		List<ICompletionProposal> list = createEclipseProposals(offset, filteredProposals, contentProvider);
-		return list.toArray(new ICompletionProposal[list.size()]);
-	}
+        if (DEBUG) {
+            debugCacheState("proposal computing-1");
+        }
+        if (!useCacheBecauseCodeAssistSessionOngoing) {
+            if (DEBUG) {
+                debugCacheState("proposal computing-2");
+            }
+            cachedProposals.clear();
+            boolean filterGetterAndSetter = getPreferences().isCodeAssistNoProposalsForGetterOrSetter();
+            for (ProposalFactory proposalFactory : proposalFactories) {
+                if (proposalFactory instanceof FilterableProposalFactory) {
+                    FilterableProposalFactory fpropFactory = (FilterableProposalFactory) proposalFactory;
+                    fpropFactory.setFilterGetterAndSetter(filterGetterAndSetter);
+                }
+                Set<Proposal> proposalsOfCurrentFactory = proposalFactory.createProposals(offset, contentProvider);
+                cachedProposals.addAll(proposalsOfCurrentFactory);
+            }
+            useCacheBecauseCodeAssistSessionOngoing = true;
+            if (DEBUG) {
+                debugCacheState("proposal computing-3");
+            }
+        }
+        if (DEBUG) {
+            debugCacheState("proposal computing-4");
+        }
+        Set<Proposal> filteredProposals = filter.filter(cachedProposals, contentProvider);
+        List<ICompletionProposal> list = createEclipseProposals(offset, filteredProposals, contentProvider);
+        return list.toArray(new ICompletionProposal[list.size()]);
+    }
 
-	public Model getModel() {
-		return adaptable.getAdapter(Model.class);
-	}
+    public Model getModel() {
+        return adaptable.getAdapter(Model.class);
+    }
 
-	private boolean isCodeCompletionEnabled() {
-		return getPreferences().isCodeAssistProposalsEnabled();
-	}
+    private boolean isCodeCompletionEnabled() {
+        return getPreferences().isCodeAssistProposalsEnabled();
+    }
 
-	private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals,
-			ProposalFactoryContentProvider contentProvider) {
+    private List<ICompletionProposal> createEclipseProposals(int offset, Set<Proposal> allProposals, ProposalFactoryContentProvider contentProvider) {
 
-		GradleEditor editor = adaptable.getAdapter(GradleEditor.class);
+        GradleEditor editor = adaptable.getAdapter(GradleEditor.class);
 
-		String bgColor = null;
-		String fgColor = null;
-		if (editor != null) {
-			bgColor = editor.getBackGroundColorAsWeb();
-			fgColor = editor.getForeGroundColorAsWeb();
-		}
-		String commentColorWeb = getPreferences().getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+        String bgColor = null;
+        String fgColor = null;
+        if (editor != null) {
+            bgColor = editor.getBackGroundColorAsWeb();
+            fgColor = editor.getForeGroundColorAsWeb();
+        }
+        String commentColorWeb = getPreferences().getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
 
-		List<ICompletionProposal> list = new ArrayList<>();
-		for (Proposal p : allProposals) {
-			Image image = null;
-			if (p instanceof Itemable) {
-				Itemable a = (Itemable) p;
-				Item item = a.getItem();
-				if (item != null) {
-					image = labelProvider.getImage(item);
-				}
-			} else if (p instanceof ModelProposal) {
-				ModelProposal mp = (ModelProposal) p;
-				if (mp.isMethod()) {
-					image = EclipseUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
-				} else if (mp.isProperty()) {
-					image = EclipseUtil.getImage("/icons/codecompletion/hierarchicalLayout.png",
-							EditorActivator.PLUGIN_ID);
-				}
-			} else if (p instanceof TemplateProposal) {
-				image = EclipseUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
-			}
-			if (image == null) {
-				image = EclipseUtil.getImage("/icons/gradle-og.png", EditorActivator.PLUGIN_ID);
-			}
-			IContextInformation contextInformation = null;
-			String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();
+        List<ICompletionProposal> list = new ArrayList<>();
+        for (Proposal p : allProposals) {
+            Image image = null;
+            if (p instanceof Itemable) {
+                Itemable a = (Itemable) p;
+                Item item = a.getItem();
+                if (item != null) {
+                    image = labelProvider.getImage(item);
+                }
+            } else if (p instanceof ModelProposal) {
+                ModelProposal mp = (ModelProposal) p;
+                if (mp.isMethod()) {
+                    image = EclipseUtil.getImage("/icons/codecompletion/public_co.png", EditorActivator.PLUGIN_ID);
+                } else if (mp.isProperty()) {
+                    image = EclipseUtil.getImage("/icons/codecompletion/hierarchicalLayout.png", EditorActivator.PLUGIN_ID);
+                }
+            } else if (p instanceof TemplateProposal) {
+                image = EclipseUtil.getImage("/icons/codecompletion/source.png", EditorActivator.PLUGIN_ID);
+            }
+            if (image == null) {
+                image = EclipseUtil.getImage("/icons/gradle-og.png", EditorActivator.PLUGIN_ID);
+            }
+            IContextInformation contextInformation = null;
+            String alreadyEntered = contentProvider.getEditorSourceEnteredAtCursorPosition();
 
-			int alreadyEnteredChars = alreadyEntered.length();
-			int cursorOffset = offset - alreadyEnteredChars;
+            int alreadyEnteredChars = alreadyEntered.length();
+            int cursorOffset = offset - alreadyEnteredChars;
 
-			int replacementLength = alreadyEnteredChars;
-			String additionalProposalInfo = null;
-			LazyLanguageElementHTMLDescriptionBuilder lazyBuilder = null;
-			if (p instanceof ModelProposal) {
-				ModelProposal mp = (ModelProposal) p;
-				LanguageElement element = mp.getElement();
-				if (element != null) {
-					lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb,
-							element, mp, descriptionBuilder);
-				}
-			} else if (p instanceof TemplateProposal) {
-				/* do nothing - description currently not supported */
-			}
-			/* create eclipse completion proposal */
-			GradleCompletionProposal proposal = new GradleCompletionProposal(p, cursorOffset, replacementLength, image,
-					contextInformation, additionalProposalInfo, lazyBuilder);
-			list.add(proposal);
+            int replacementLength = alreadyEnteredChars;
+            String additionalProposalInfo = null;
+            LazyLanguageElementHTMLDescriptionBuilder lazyBuilder = null;
+            if (p instanceof ModelProposal) {
+                ModelProposal mp = (ModelProposal) p;
+                LanguageElement element = mp.getElement();
+                if (element != null) {
+                    lazyBuilder = new LazyLanguageElementHTMLDescriptionBuilder(fgColor, bgColor, commentColorWeb, element, mp, descriptionBuilder);
+                }
+            } else if (p instanceof TemplateProposal) {
+                /* do nothing - description currently not supported */
+            }
+            /* create eclipse completion proposal */
+            GradleCompletionProposal proposal = new GradleCompletionProposal(p, cursorOffset, replacementLength, image, contextInformation, additionalProposalInfo, lazyBuilder);
+            list.add(proposal);
 
-		}
-		return list;
+        }
+        return list;
 
-	}
+    }
 
-	@Override
-	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		return null;
-	}
+    @Override
+    public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
+        return null;
+    }
 
-	@Override
-	public char[] getCompletionProposalAutoActivationCharacters() {
-		return null;
-	}
+    @Override
+    public char[] getCompletionProposalAutoActivationCharacters() {
+        return null;
+    }
 
-	@Override
-	public char[] getContextInformationAutoActivationCharacters() {
-		return null;
-	}
+    @Override
+    public char[] getContextInformationAutoActivationCharacters() {
+        return null;
+    }
 
-	@Override
-	public String getErrorMessage() {
-		return errorMessage;
-	}
+    @Override
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 
-	@Override
-	public IContextInformationValidator getContextInformationValidator() {
-		return null;
-	}
+    @Override
+    public IContextInformationValidator getContextInformationValidator() {
+        return null;
+    }
 
-	public ICompletionListener getCompletionListener() {
-		return completionListener;
-	}
+    public ICompletionListener getCompletionListener() {
+        return completionListener;
+    }
 
-	private static boolean DEBUG = EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING;
+    private static boolean DEBUG = EclipseDevelopmentSettings.DEBUG_ADD_SPECIAL_LOGGING;
 
-	/**
-	 * As long as the code assistent session is alive we do not bother about
-	 * outline model changes at all, we do not rebuild proposals by factory.
-	 * Filtering is done always.
-	 * 
-	 * @author Albert Tregnaghi
-	 *
-	 */
-	private class CacheValidListener implements ICompletionListener, ICompletionListenerExtension2 {
+    /**
+     * As long as the code assistent session is alive we do not bother about outline
+     * model changes at all, we do not rebuild proposals by factory. Filtering is
+     * done always.
+     * 
+     * @author Albert Tregnaghi
+     *
+     */
+    private class CacheValidListener implements ICompletionListener, ICompletionListenerExtension2 {
 
-		@Override
-		public void assistSessionStarted(ContentAssistEvent event) {
-			useCacheBecauseCodeAssistSessionOngoing = false;
-			if (DEBUG) {
-				debugCacheState("assistSessionStarted");
-			}
+        @Override
+        public void assistSessionStarted(ContentAssistEvent event) {
+            useCacheBecauseCodeAssistSessionOngoing = false;
+            if (DEBUG) {
+                debugCacheState("assistSessionStarted");
+            }
 
-		}
+        }
 
-		@Override
-		public void assistSessionEnded(ContentAssistEvent event) {
-			useCacheBecauseCodeAssistSessionOngoing = false;
-			if (DEBUG) {
-				debugCacheState("assistSessionEnded");
-			}
-		}
+        @Override
+        public void assistSessionEnded(ContentAssistEvent event) {
+            useCacheBecauseCodeAssistSessionOngoing = false;
+            if (DEBUG) {
+                debugCacheState("assistSessionEnded");
+            }
+        }
 
-		@Override
-		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
+        @Override
+        public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
 
-		}
+        }
 
-		@Override
-		public void applied(ICompletionProposal proposal) {
-			if (DEBUG) {
-				debugCacheState("applied proposal-1");
-			}
-			/*
-			 * after apply the model must be changed and cursor position
-			 * normally changes as well! This often made problems
-			 */
-			IEditorPart activeEditor = EclipseUtil.getActiveEditor();
-			if (activeEditor instanceof AbstractGroovyBasedEditor) {
-				GradleEditor ge = (GradleEditor) activeEditor;
-				if (DEBUG) {
-					debugCacheState("applied proposal-2");
-				}
-				ge.rebuildOutline();
-				if (DEBUG) {
-					debugCacheState("applied proposal-3");
-				}
-			}
+        @Override
+        public void applied(ICompletionProposal proposal) {
+            if (DEBUG) {
+                debugCacheState("applied proposal-1");
+            }
+            /*
+             * after apply the model must be changed and cursor position normally changes as
+             * well! This often made problems
+             */
+            IEditorPart activeEditor = EclipseUtil.getActiveEditor();
+            if (activeEditor instanceof AbstractGroovyBasedEditor) {
+                GradleEditor ge = (GradleEditor) activeEditor;
+                if (DEBUG) {
+                    debugCacheState("applied proposal-2");
+                }
+                ge.rebuildOutline();
+                if (DEBUG) {
+                    debugCacheState("applied proposal-3");
+                }
+            }
 
-		}
+        }
 
-	}
+    }
 
-	private void debugCacheState(String message) {
-		EditorUtil.INSTANCE.logInfo(getClass().getSimpleName() + ":" + message
-				+ ", useCacheBecauseCodeAssistSessionOngoing=" + useCacheBecauseCodeAssistSessionOngoing);
-	}
+    private void debugCacheState(String message) {
+        EditorUtil.INSTANCE.logInfo(getClass().getSimpleName() + ":" + message + ", useCacheBecauseCodeAssistSessionOngoing=" + useCacheBecauseCodeAssistSessionOngoing);
+    }
 }

@@ -13,17 +13,15 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.preferences;
+package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
 import de.jcup.eclipse.commons.tasktags.AbstractTaskTagsPreferenceInitializer;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 
-public class GradleEditorTaskTagsPreferenceInitializer extends AbstractTaskTagsPreferenceInitializer{
+public class GradleEditorTaskTagsPreferenceInitializer extends AbstractTaskTagsPreferenceInitializer {
 
-	public GradleEditorTaskTagsPreferenceInitializer() {
-		super(EditorActivator.PLUGIN_ID);
-	}
-
-	
+    public GradleEditorTaskTagsPreferenceInitializer() {
+        super(EditorActivator.PLUGIN_ID);
+    }
 
 }

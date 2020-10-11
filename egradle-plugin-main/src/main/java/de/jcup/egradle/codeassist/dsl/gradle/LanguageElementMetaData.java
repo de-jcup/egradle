@@ -17,8 +17,8 @@ package de.jcup.egradle.codeassist.dsl.gradle;
 
 public interface LanguageElementMetaData {
 
-	boolean isTypeFromExtensionConfigurationPoint();
+    boolean isTypeFromExtensionConfigurationPoint();
 
-	String getExtensionName();
+    String getExtensionName();
 
 }

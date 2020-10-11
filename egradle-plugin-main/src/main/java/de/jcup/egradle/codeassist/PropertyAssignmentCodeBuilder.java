@@ -20,16 +20,16 @@ import de.jcup.egradle.codeassist.dsl.Property;
 
 class PropertyAssignmentCodeBuilder extends AbstractLazyCodeBuilder {
 
-	private Property property;
-	private CodeTemplateBuilder builder;
+    private Property property;
+    private CodeTemplateBuilder builder;
 
-	PropertyAssignmentCodeBuilder(Property property, CodeTemplateBuilder builder) {
-		this.property = property;
-		this.builder = builder;
-	}
+    PropertyAssignmentCodeBuilder(Property property, CodeTemplateBuilder builder) {
+        this.property = property;
+        this.builder = builder;
+    }
 
-	protected String createTemplate() {
-		return builder.createPropertyAssignment(property);
-	}
+    protected String createTemplate() {
+        return builder.createPropertyAssignment(property);
+    }
 
 }

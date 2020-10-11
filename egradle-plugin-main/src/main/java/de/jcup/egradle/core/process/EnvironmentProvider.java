@@ -19,6 +19,6 @@ import java.util.Map;
 
 public interface EnvironmentProvider {
 
-	public Map<String, String> getEnvironment();
+    public Map<String, String> getEnvironment();
 
 }

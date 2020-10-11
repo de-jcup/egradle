@@ -21,33 +21,32 @@ import de.jcup.egradle.core.util.BuildInfo;
 
 public abstract class EGradlePostBuildJob extends Job {
 
-	private BuildInfo buildInfo;
+    private BuildInfo buildInfo;
 
-	public EGradlePostBuildJob(String name) {
-		super(name);
-	}
+    public EGradlePostBuildJob(String name) {
+        super(name);
+    }
 
-	/**
-	 * Set build information about former build
-	 * 
-	 * @param info
-	 *            information to set
-	 */
-	public void setBuildInfo(BuildInfo info) {
-		this.buildInfo = info;
-	}
+    /**
+     * Set build information about former build
+     * 
+     * @param info information to set
+     */
+    public void setBuildInfo(BuildInfo info) {
+        this.buildInfo = info;
+    }
 
-	/**
-	 * Returns <code>true</code> when build info about former build is available
-	 * 
-	 * @return <code>true</code> when build info about former build is available
-	 */
-	public boolean hasBuildInfo() {
-		return buildInfo != null;
-	}
+    /**
+     * Returns <code>true</code> when build info about former build is available
+     * 
+     * @return <code>true</code> when build info about former build is available
+     */
+    public boolean hasBuildInfo() {
+        return buildInfo != null;
+    }
 
-	public BuildInfo getBuildInfo() {
-		return buildInfo;
-	}
+    public BuildInfo getBuildInfo() {
+        return buildInfo;
+    }
 
 }

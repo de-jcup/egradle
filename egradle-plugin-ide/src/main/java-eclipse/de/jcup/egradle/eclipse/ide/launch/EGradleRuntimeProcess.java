@@ -26,26 +26,25 @@ import org.eclipse.debug.core.model.RuntimeProcess;
 
 public class EGradleRuntimeProcess extends RuntimeProcess implements IStreamListener {
 
-	private EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
-		super(launch, process, name, attributes);
-	}
+    private EGradleRuntimeProcess(ILaunch launch, Process process, String name, Map<String, String> attributes) {
+        super(launch, process, name, attributes);
+    }
 
-	@Override
-	protected IStreamsProxy createStreamsProxy() {
-		return super.createStreamsProxy();
-	}
+    @Override
+    protected IStreamsProxy createStreamsProxy() {
+        return super.createStreamsProxy();
+    }
 
-	@Override
-	public void streamAppended(String text, IStreamMonitor monitor) {
-	}
+    @Override
+    public void streamAppended(String text, IStreamMonitor monitor) {
+    }
 
-	public static EGradleRuntimeProcess create(ILaunch launch, Process process, String name,
-			Map<String, String> attributes) {
-		// workaround, because attribute must be set before constructor call
-		// DEFINE EGRADLE AS PROCESS TYPE - so console line tracker is able to
-		// track
-		attributes.put(IProcess.ATTR_PROCESS_TYPE, "EGradleRuntimeProcess");
-		return new EGradleRuntimeProcess(launch, process, name, attributes);
-	}
+    public static EGradleRuntimeProcess create(ILaunch launch, Process process, String name, Map<String, String> attributes) {
+        // workaround, because attribute must be set before constructor call
+        // DEFINE EGRADLE AS PROCESS TYPE - so console line tracker is able to
+        // track
+        attributes.put(IProcess.ATTR_PROCESS_TYPE, "EGradleRuntimeProcess");
+        return new EGradleRuntimeProcess(launch, process, name, attributes);
+    }
 
 }

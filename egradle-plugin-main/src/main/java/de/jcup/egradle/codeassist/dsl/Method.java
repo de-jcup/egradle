@@ -25,24 +25,24 @@ import java.util.List;
  */
 public interface Method extends LanguageElement, TypeChild, GradleDocumentationInfo, Comparable<Method> {
 
-	public Type getReturnType();
+    public Type getReturnType();
 
-	public String getReturnTypeAsString();
+    public String getReturnTypeAsString();
 
-	public Type getDelegationTarget();
+    public Type getDelegationTarget();
 
-	/**
-	 * Returns delegation target or <code>null</code>
-	 * 
-	 * @return delegation target or <code>null</code>
-	 */
-	public String getDelegationTargetAsString();
+    /**
+     * Returns delegation target or <code>null</code>
+     * 
+     * @return delegation target or <code>null</code>
+     */
+    public String getDelegationTargetAsString();
 
-	/**
-	 * Returns parameters never <code>null</code>
-	 * 
-	 * @return parameter list, never <code>null</code>
-	 */
-	public List<Parameter> getParameters();
+    /**
+     * Returns parameters never <code>null</code>
+     * 
+     * @return parameter list, never <code>null</code>
+     */
+    public List<Parameter> getParameters();
 
 }

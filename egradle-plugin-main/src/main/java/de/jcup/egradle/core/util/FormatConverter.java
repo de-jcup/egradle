@@ -21,68 +21,68 @@ import java.util.List;
 
 public class FormatConverter {
 
-	/**
-	 * Converts given string to integer. If not parseable the result will be 0
-	 * 
-	 * @param string
-	 * @return converted string or 0 if not parseable
-	 */
-	public int convertToInt(String string) {
-		return convertToInt(string, 0);
-	}
+    /**
+     * Converts given string to integer. If not parseable the result will be 0
+     * 
+     * @param string
+     * @return converted string or 0 if not parseable
+     */
+    public int convertToInt(String string) {
+        return convertToInt(string, 0);
+    }
 
-	/**
-	 * Converts given string to integer. If not parseable the result will be
-	 * given defaultValue
-	 * 
-	 * @param string
-	 * @param defaultValue
-	 * @return converted string or defaultvalue if not parseable
-	 */
-	public int convertToInt(String string, int defaultValue) {
-		int result = defaultValue;
-		if (string == null) {
-			return result;
-		}
-		string = string.trim();
-		try {
-			result = Integer.parseInt(string);
-		} catch (NumberFormatException e) {
-			handleException(e);
-		}
-		return result;
-	}
+    /**
+     * Converts given string to integer. If not parseable the result will be given
+     * defaultValue
+     * 
+     * @param string
+     * @param defaultValue
+     * @return converted string or defaultvalue if not parseable
+     */
+    public int convertToInt(String string, int defaultValue) {
+        int result = defaultValue;
+        if (string == null) {
+            return result;
+        }
+        string = string.trim();
+        try {
+            result = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            handleException(e);
+        }
+        return result;
+    }
 
-	void handleException(NumberFormatException e) {
-		/* do nothing per default */
-	}
+    void handleException(NumberFormatException e) {
+        /* do nothing per default */
+    }
 
-	/**
-	 * Converts given string to double. If not parseable the result will be 0
-	 * 
-	 * @param string
-	 * @return converted string or 0 if not parseable
-	 */
-	public double convertToDouble(String string) {
-		double result = 0;
-		if (string == null) {
-			return result;
-		}
-		string = string.trim();
-		try {
-			result = Double.parseDouble(string);
-		} catch (NumberFormatException e) {
-			handleException(e);
-		}
-		return result;
-	}
+    /**
+     * Converts given string to double. If not parseable the result will be 0
+     * 
+     * @param string
+     * @return converted string or 0 if not parseable
+     */
+    public double convertToDouble(String string) {
+        double result = 0;
+        if (string == null) {
+            return result;
+        }
+        string = string.trim();
+        try {
+            result = Double.parseDouble(string);
+        } catch (NumberFormatException e) {
+            handleException(e);
+        }
+        return result;
+    }
 
-	public List<String> convertToStringList(String string) {
-		if (string == null || string.trim().isEmpty()) {
-			return Collections.emptyList();
-		}
-		String[] result = StringUtilsAccess.split(string, ",");
-		return Arrays.asList(result);
-	}
+    public List<String> convertToStringList(String string) {
+        if (string == null || string.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        String[] result = StringUtilsAccess.split(string, ",");
+        return Arrays.asList(result);
+    }
 
 }

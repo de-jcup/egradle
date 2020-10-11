@@ -34,216 +34,198 @@ import de.jcup.egradle.core.util.ValidationException;
 
 public class GradleConfigurationValidatorTest {
 
-	private static final String GRADLE_COMMAND = "gradle";
-	private ProcessExecutor mockedProcessExecutor;
-	private GradleConfigurationValidator validatorToTest;
-	private GradleConfiguration mockedGradleConfiguration;
+    private static final String GRADLE_COMMAND = "gradle";
+    private ProcessExecutor mockedProcessExecutor;
+    private GradleConfigurationValidator validatorToTest;
+    private GradleConfiguration mockedGradleConfiguration;
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-	@Before
-	public void before() {
-		mockedGradleConfiguration = mock(GradleConfiguration.class);
-		mockedProcessExecutor = mock(ProcessExecutor.class);
-		validatorToTest = new GradleConfigurationValidator(mockedProcessExecutor);
+    @Before
+    public void before() {
+        mockedGradleConfiguration = mock(GradleConfiguration.class);
+        mockedProcessExecutor = mock(ProcessExecutor.class);
+        validatorToTest = new GradleConfigurationValidator(mockedProcessExecutor);
 
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn("");
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(GRADLE_COMMAND);
-		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn("");
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(GRADLE_COMMAND);
+        when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 
-	}
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_empty_string__and_process_is_executable_no_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn("");
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
+    @Test
+    public void when_gradle_installation_dir_is_empty_string__and_process_is_executable_no_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn("");
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
 
-	}
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_null__and_process_is_executable_no_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(null);
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+    @Test
+    public void when_gradle_installation_dir_is_null__and_process_is_executable_no_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(null);
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_set_but_directory_does_not_exists_a_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		File notExistingfile = new File("iam_not_existing__really.sh");
-		if (notExistingfile.exists()) {
-			fail("Test failes - but because of wrong conditiions - expected file to not exist:" + notExistingfile);
-		}
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(notExistingfile.getAbsolutePath());
-		thrown.expect(new IsEqual<>(
-				new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_NOT_EXISTING)));
+    @Test
+    public void when_gradle_installation_dir_is_set_but_directory_does_not_exists_a_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        File notExistingfile = new File("iam_not_existing__really.sh");
+        if (notExistingfile.exists()) {
+            fail("Test failes - but because of wrong conditiions - expected file to not exist:" + notExistingfile);
+        }
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(notExistingfile.getAbsolutePath());
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_NOT_EXISTING)));
 
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_set_but_its_file_not_a_directory_a_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		File file = File.createTempFile("test", ".txt"); // throws io exception
-															// when temp file
-															// cannot be created
+    @Test
+    public void when_gradle_installation_dir_is_set_but_its_file_not_a_directory_a_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        File file = File.createTempFile("test", ".txt"); // throws io exception
+                                                         // when temp file
+                                                         // cannot be created
 
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(file.getAbsolutePath());
-		thrown.expect(new IsEqual<>(
-				new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_IS_NOT_A_DIRECTORY)));
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(file.getAbsolutePath());
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_IS_NOT_A_DIRECTORY)));
 
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_set_but_it_contains_not_a_file_called_gradle_a_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		File userHome = new File(System.getProperty("user.home"));
-		File gradleFake = new File(userHome, "gradle");
-		assertFalse("Test execution not possible - in user home there is a gradle file existing!?!",
-				gradleFake.exists());
+    @Test
+    public void when_gradle_installation_dir_is_set_but_it_contains_not_a_file_called_gradle_a_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        File userHome = new File(System.getProperty("user.home"));
+        File gradleFake = new File(userHome, "gradle");
+        assertFalse("Test execution not possible - in user home there is a gradle file existing!?!", gradleFake.exists());
 
-		when(mockedGradleConfiguration.getGradleBinDirectory())
-				.thenReturn(gradleFake.getParentFile().getAbsolutePath());
-		thrown.expect(new IsEqual<>(
-				new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE)));
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(gradleFake.getParentFile().getAbsolutePath());
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_INSTALLATION_DIR_CONTAINS_NO_GRADLE)));
 
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_installation_dir_is_set_andt_it_contains_a_file_called_defined_gradlecommand_no_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		File userHome = new File(System.getProperty("user.home"));
-		File subFolder = new File(userHome, ".egradle-test-fakegradle-exists");
-		if (!subFolder.exists()) {
-			assertTrue("Test execution corrupt?!?!", subFolder.mkdirs());
-		}
-		subFolder.deleteOnExit();
-		File gradleFake = new File(subFolder, "gradlewdeluxe.bat");
-		if (gradleFake.exists()) {
-			assertTrue("Gradle fake file exists and cannot be created", gradleFake.delete());
-		}
-		assertTrue("Test execution corrupt?!?!", gradleFake.createNewFile());
-		gradleFake.deleteOnExit();
+    @Test
+    public void when_gradle_installation_dir_is_set_andt_it_contains_a_file_called_defined_gradlecommand_no_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        File userHome = new File(System.getProperty("user.home"));
+        File subFolder = new File(userHome, ".egradle-test-fakegradle-exists");
+        if (!subFolder.exists()) {
+            assertTrue("Test execution corrupt?!?!", subFolder.mkdirs());
+        }
+        subFolder.deleteOnExit();
+        File gradleFake = new File(subFolder, "gradlewdeluxe.bat");
+        if (gradleFake.exists()) {
+            assertTrue("Gradle fake file exists and cannot be created", gradleFake.delete());
+        }
+        assertTrue("Test execution corrupt?!?!", gradleFake.createNewFile());
+        gradleFake.deleteOnExit();
 
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlewdeluxe.bat");
-		when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(subFolder.getAbsolutePath());
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlewdeluxe.bat");
+        when(mockedGradleConfiguration.getGradleBinDirectory()).thenReturn(subFolder.getAbsolutePath());
 
-		/* test + execute */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* test + execute */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_shell_is_NONE_no_validation_exception_is_thrown() throws Exception {
-		/* prepare */
-		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
+    @Test
+    public void when_shell_is_NONE_no_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.NONE);
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
 
-	}
+    }
 
-	@Test
-	public void when_shell_command_is_null_no_validation_exception_is_thrown() throws Exception {
-		/* prepare */
-		when(mockedGradleConfiguration.getShellType()).thenReturn(null);
+    @Test
+    public void when_shell_command_is_null_no_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        when(mockedGradleConfiguration.getShellType()).thenReturn(null);
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
 
-	}
+    }
 
-	@Test
-	public void when_shell_command_is_set_but_cannot_be_executed_standalone_a_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		thrown.expect(
-				new IsEqual<>(new ValidationException(GradleConfigurationValidator.SHELL_NOT_EXECUTABLE_STANDALONE)));
-		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
-		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("--version")))
-				.thenThrow(new IOException("bash call standalone does always fail inside this test"));
+    @Test
+    public void when_shell_command_is_set_but_cannot_be_executed_standalone_a_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.SHELL_NOT_EXECUTABLE_STANDALONE)));
+        when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
+        when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("--version"))).thenThrow(new IOException("bash call standalone does always fail inside this test"));
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
 
-		/* only for debugging - if no exception occurred... */
-		verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("--version"));
-	}
+        /* only for debugging - if no exception occurred... */
+        verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("--version"));
+    }
 
-	@Test
-	public void when_gradle_command_is_null_a_validation_exception_is_thrown() throws Exception {
-		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(null);
+    @Test
+    public void when_gradle_command_is_null_a_validation_exception_is_thrown() throws Exception {
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn(null);
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_command_is_empty_a_validation_exception_is_thrown() throws Exception {
-		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("");
+    @Test
+    public void when_gradle_command_is_empty_a_validation_exception_is_thrown() throws Exception {
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("");
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_gradle_command_contains_only_whitespace_a_validation_exception_is_thrown() throws Exception {
-		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("   ");
+    @Test
+    public void when_gradle_command_contains_only_whitespace_a_validation_exception_is_thrown() throws Exception {
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_COMMAND_MISSING)));
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("   ");
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
-	@Test
-	public void when_a_gradle_call_with_version_throws_an_ioexception_a_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_VERSON_NOT_CALLABLE)));
-		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
+    @Test
+    public void when_a_gradle_call_with_version_throws_an_ioexception_a_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        thrown.expect(new IsEqual<>(new ValidationException(GradleConfigurationValidator.GRADLE_VERSON_NOT_CALLABLE)));
+        when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
-		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version")))
-				.thenThrow(new IOException("the simple --version call must fail inside this test"));
+        when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"))).thenThrow(new IOException("the simple --version call must fail inside this test"));
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
 
-		/*
-		 * normally dead code, but when no validation exception occured this is
-		 * googd for debuging:
-		 */
-		verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"));
-	}
+        /*
+         * normally dead code, but when no validation exception occured this is googd
+         * for debuging:
+         */
+        verify(mockedProcessExecutor).execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"));
+    }
 
-	@Test
-	public void when_a_gradle_call_with_version_throws_NO_ioexception_NO_validation_exception_is_thrown()
-			throws Exception {
-		/* prepare */
-		when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
-		when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
+    @Test
+    public void when_a_gradle_call_with_version_throws_NO_ioexception_NO_validation_exception_is_thrown() throws Exception {
+        /* prepare */
+        when(mockedGradleConfiguration.getShellType()).thenReturn(EGradleShellType.BASH);
+        when(mockedGradleConfiguration.getGradleCommandFullPath()).thenReturn("gradlew");
 
-		when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version")))
-				.thenReturn(0);
+        when(mockedProcessExecutor.execute(any(), any(), any(), eq("bash"), eq("gradlew"), eq("--version"))).thenReturn(0);
 
-		/* execute +test */
-		validatorToTest.validate(mockedGradleConfiguration);
-	}
+        /* execute +test */
+        validatorToTest.validate(mockedGradleConfiguration);
+    }
 
 }

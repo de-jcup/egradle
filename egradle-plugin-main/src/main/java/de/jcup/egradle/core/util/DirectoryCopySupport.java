@@ -27,112 +27,107 @@ import java.util.Set;
 
 public class DirectoryCopySupport {
 
-	/**
-	 * Copy given src folder itself into dest folder<br>
-	 * e.g. copy "testfolder" into "targetfolder", resuls in
-	 * "targetfolder/testfolder/..."
-	 * 
-	 * @param sourceFolder
-	 * @param destinationFolder
-	 * @param overwriteExistingFiles
-	 *            - when <code>true</code> existing files will be replaced by
-	 *            new ones (but additional file will NOT be deleted!), if
-	 *            <code>false</code> the origin file will be kept
-	 * @param fileNamesToIgnore
-	 *            names for files and folders which will not be copied
-	 * @throws IOException
-	 */
-	public void copyDirectories(File sourceFolder, File destinationFolder, boolean overwriteExistingFiles,
-			String... fileNamesToIgnore) throws IOException {
-		copyDirectories(sourceFolder, destinationFolder, null, overwriteExistingFiles, fileNamesToIgnore);
-	}
+    /**
+     * Copy given src folder itself into dest folder<br>
+     * e.g. copy "testfolder" into "targetfolder", resuls in
+     * "targetfolder/testfolder/..."
+     * 
+     * @param sourceFolder
+     * @param destinationFolder
+     * @param overwriteExistingFiles - when <code>true</code> existing files will be
+     *                               replaced by new ones (but additional file will
+     *                               NOT be deleted!), if <code>false</code> the
+     *                               origin file will be kept
+     * @param fileNamesToIgnore      names for files and folders which will not be
+     *                               copied
+     * @throws IOException
+     */
+    public void copyDirectories(File sourceFolder, File destinationFolder, boolean overwriteExistingFiles, String... fileNamesToIgnore) throws IOException {
+        copyDirectories(sourceFolder, destinationFolder, null, overwriteExistingFiles, fileNamesToIgnore);
+    }
 
-	/**
-	 * Copy given src folder itself into dest folder<br>
-	 * e.g. copy "testfolder" into "targetfolder", resuls in
-	 * "targetfolder/testfolder/..."
-	 * 
-	 * @param sourceFolder
-	 * @param destinationFolder
-	 * @param targetFileNameTransformer
-	 * @param overwriteExistingFiles
-	 *            - when <code>true</code> existing files will be replaced by
-	 *            new ones (but additional file will NOT be deleted!), if
-	 *            <code>false</code> the origin file will be kept
-	 * @param fileNamesToIgnore
-	 *            names for files and folders which will not be copied
-	 * @throws IOException
-	 */
-	public void copyDirectories(File sourceFolder, File destinationFolder,
-			Transformer<String> targetFileNameTransformer, boolean overwriteExistingFiles, String... fileNamesToIgnore)
-			throws IOException {
-		if (sourceFolder == null) {
-			throw new IllegalArgumentException("src may not be null!");
-		}
-		if (!sourceFolder.exists()) {
-			throw new FileNotFoundException("source folder does not exist:" + sourceFolder);
-		}
-		if (destinationFolder == null) {
-			throw new IllegalArgumentException("dest may not be null!");
-		}
-		Set<String> fileNamesToIgnoreSet = new HashSet<>();
-		if (fileNamesToIgnore != null) {
-			for (String fileNameToIgnore : fileNamesToIgnore) {
-				if (fileNamesToIgnore == null) {
-					continue;
-				}
-				fileNamesToIgnoreSet.add(fileNameToIgnore);
-			}
-		}
-		copyRecursive(sourceFolder, destinationFolder, targetFileNameTransformer, overwriteExistingFiles,
-				fileNamesToIgnoreSet);
-	}
+    /**
+     * Copy given src folder itself into dest folder<br>
+     * e.g. copy "testfolder" into "targetfolder", resuls in
+     * "targetfolder/testfolder/..."
+     * 
+     * @param sourceFolder
+     * @param destinationFolder
+     * @param targetFileNameTransformer
+     * @param overwriteExistingFiles    - when <code>true</code> existing files will
+     *                                  be replaced by new ones (but additional file
+     *                                  will NOT be deleted!), if <code>false</code>
+     *                                  the origin file will be kept
+     * @param fileNamesToIgnore         names for files and folders which will not
+     *                                  be copied
+     * @throws IOException
+     */
+    public void copyDirectories(File sourceFolder, File destinationFolder, Transformer<String> targetFileNameTransformer, boolean overwriteExistingFiles, String... fileNamesToIgnore)
+            throws IOException {
+        if (sourceFolder == null) {
+            throw new IllegalArgumentException("src may not be null!");
+        }
+        if (!sourceFolder.exists()) {
+            throw new FileNotFoundException("source folder does not exist:" + sourceFolder);
+        }
+        if (destinationFolder == null) {
+            throw new IllegalArgumentException("dest may not be null!");
+        }
+        Set<String> fileNamesToIgnoreSet = new HashSet<>();
+        if (fileNamesToIgnore != null) {
+            for (String fileNameToIgnore : fileNamesToIgnore) {
+                if (fileNamesToIgnore == null) {
+                    continue;
+                }
+                fileNamesToIgnoreSet.add(fileNameToIgnore);
+            }
+        }
+        copyRecursive(sourceFolder, destinationFolder, targetFileNameTransformer, overwriteExistingFiles, fileNamesToIgnoreSet);
+    }
 
-	private void copyRecursive(File src, File dest, Transformer<String> targetFileNameTransformer,
-			boolean overwriteExistingFiles, Set<String> fileNamesToIgnoreSet) throws IOException {
-		if (fileNamesToIgnoreSet.contains(src.getName())) {
-			return;
-		}
-		if (src.isDirectory()) {
-			if (!dest.exists()) {
-				dest.mkdirs();
-			}
-			File sourceDirectory = src;
-			File srcDirChildren[] = sourceDirectory.listFiles();
+    private void copyRecursive(File src, File dest, Transformer<String> targetFileNameTransformer, boolean overwriteExistingFiles, Set<String> fileNamesToIgnoreSet) throws IOException {
+        if (fileNamesToIgnoreSet.contains(src.getName())) {
+            return;
+        }
+        if (src.isDirectory()) {
+            if (!dest.exists()) {
+                dest.mkdirs();
+            }
+            File sourceDirectory = src;
+            File srcDirChildren[] = sourceDirectory.listFiles();
 
-			for (File srcFile : srcDirChildren) {
-				String name = srcFile.getName();
-				if (targetFileNameTransformer != null) {
-					String transformed = targetFileNameTransformer.transform(name);
-					if (transformed != null) {
-						name = transformed;
-					}
-				}
-				File destFile = new File(dest, name);
+            for (File srcFile : srcDirChildren) {
+                String name = srcFile.getName();
+                if (targetFileNameTransformer != null) {
+                    String transformed = targetFileNameTransformer.transform(name);
+                    if (transformed != null) {
+                        name = transformed;
+                    }
+                }
+                File destFile = new File(dest, name);
 
-				copyRecursive(srcFile, destFile, targetFileNameTransformer, overwriteExistingFiles,
-						fileNamesToIgnoreSet);
-			}
-		} else {
-			copyFile(src, dest, overwriteExistingFiles);
-		}
-	}
+                copyRecursive(srcFile, destFile, targetFileNameTransformer, overwriteExistingFiles, fileNamesToIgnoreSet);
+            }
+        } else {
+            copyFile(src, dest, overwriteExistingFiles);
+        }
+    }
 
-	private void copyFile(File src, File dest, boolean overwriteExistingFiles) throws IOException {
-		if (dest.exists()) {
-			if (!overwriteExistingFiles) {
-				return;
-			}
-			if (!dest.delete()) {
-				throw new IOException("Was not able to delete existing file:" + dest);
-			}
-		}
-		try (InputStream in = new FileInputStream(src); OutputStream out = new FileOutputStream(dest)) {
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = in.read(buffer)) > 0) {
-				out.write(buffer, 0, length);
-			}
-		}
-	}
+    private void copyFile(File src, File dest, boolean overwriteExistingFiles) throws IOException {
+        if (dest.exists()) {
+            if (!overwriteExistingFiles) {
+                return;
+            }
+            if (!dest.delete()) {
+                throw new IOException("Was not able to delete existing file:" + dest);
+            }
+        }
+        try (InputStream in = new FileInputStream(src); OutputStream out = new FileOutputStream(dest)) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+        }
+    }
 }

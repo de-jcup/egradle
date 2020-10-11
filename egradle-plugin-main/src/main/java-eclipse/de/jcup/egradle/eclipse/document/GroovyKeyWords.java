@@ -17,70 +17,70 @@ package de.jcup.egradle.eclipse.document;
 
 public enum GroovyKeyWords implements DocumentKeyWord {
 
-	// http://docs.groovy-lang.org/latest/html/documentation/#_keywords
-	AS("as"),
-	// assert by java
-	// break by java
-	// case by java
-	// catch by java
-	// class by java
-	// const by java
-	// continue by java
-	DEF("def"),
-	// default by java
-	// do by java
-	// else by java
-	// enum by java
-	// extends by java
-	// false by java
-	// finally by java
-	// for by java
-	// goto by java
-	// if by java
-	// implements by java
-	// import by java
-	IN("in"),
-	// instanceof by java
-	// interface by java
-	// new by java
-	// null by java literals
-	// package by java
-	// return by java
-	// super by java
-	// switch by java
-	// this by java
-	// throw by java
-	// throws by java
-	TRAIT("trait"),
-	// true by java literal
-	// try by java
-	// while by java
+    // http://docs.groovy-lang.org/latest/html/documentation/#_keywords
+    AS("as"),
+    // assert by java
+    // break by java
+    // case by java
+    // catch by java
+    // class by java
+    // const by java
+    // continue by java
+    DEF("def"),
+    // default by java
+    // do by java
+    // else by java
+    // enum by java
+    // extends by java
+    // false by java
+    // finally by java
+    // for by java
+    // goto by java
+    // if by java
+    // implements by java
+    // import by java
+    IN("in"),
+    // instanceof by java
+    // interface by java
+    // new by java
+    // null by java literals
+    // package by java
+    // return by java
+    // super by java
+    // switch by java
+    // this by java
+    // throw by java
+    // throws by java
+    TRAIT("trait"),
+    // true by java literal
+    // try by java
+    // while by java
 
-	/* special closure names: */
+    /* special closure names: */
 
-	IT("it"),
+    IT("it"),
 
-	DELEGATE("delegate"),
+    DELEGATE("delegate"),
 
-	OWNER("owner"),
+    OWNER("owner"),
 
-	THREADSAFE("threadsafe"), // reserved, but not used : see
-								// http://www.groovy-lang.org/mailing-lists.html#nabble-td348443
+    THREADSAFE("threadsafe"), // reserved, but not used : see
+                              // http://www.groovy-lang.org/mailing-lists.html#nabble-td348443
 
-	/* special GDK methods */
-	USE("use"), // use method from GDK
+    /* special GDK methods */
+    USE("use"), // use method from GDK
 
-	WITH("with"), // with(closure) method from GDK
-	;
+    WITH("with"), // with(closure) method from GDK
+    ;
 
-	private String text;
+    private String text;
 
-	private GroovyKeyWords(String text) {
-		this.text = text;
-	}
+    private GroovyKeyWords(String text) {
+        this.text = text;
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 }

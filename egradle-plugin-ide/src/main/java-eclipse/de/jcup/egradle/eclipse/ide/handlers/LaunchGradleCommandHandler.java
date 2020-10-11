@@ -58,105 +58,99 @@ import de.jcup.egradle.eclipse.util.EGradlePostBuildJob;
  */
 public class LaunchGradleCommandHandler extends AbstractEGradleCommandHandler {
 
-	public static final String COMMAND_ID = "egradle.commands.launch";
-	public static final String PARAMETER_LAUNCHCONFIG = "egradle.command.launch.config";
+    public static final String COMMAND_ID = "egradle.commands.launch";
+    public static final String PARAMETER_LAUNCHCONFIG = "egradle.command.launch.config";
 
-	private ILaunch launch;
-	private EGradlePostBuildJob postJob;
-	private String taskAttributeOverride;
+    private ILaunch launch;
+    private EGradlePostBuildJob postJob;
+    private String taskAttributeOverride;
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		try {
-			IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
-			IParameterValues values = configparameter.getValues();
-			if (values instanceof LaunchParameterValues) {
-				LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
-				taskAttributeOverride = launchParameterValues.getOverriddenTasks();
-				launch = launchParameterValues.getLaunch();
-				postJob = launchParameterValues.getPostJob();
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        try {
+            IParameter configparameter = event.getCommand().getParameter(PARAMETER_LAUNCHCONFIG);
+            IParameterValues values = configparameter.getValues();
+            if (values instanceof LaunchParameterValues) {
+                LaunchParameterValues launchParameterValues = (LaunchParameterValues) values;
+                taskAttributeOverride = launchParameterValues.getOverriddenTasks();
+                launch = launchParameterValues.getLaunch();
+                postJob = launchParameterValues.getPostJob();
 
-			} else {
-				IDEUtil.logWarning(getClass().getSimpleName()
-						+ ":parameter values without being a launch parameter value was used !??! :" + values);
-			}
+            } else {
+                IDEUtil.logWarning(getClass().getSimpleName() + ":parameter values without being a launch parameter value was used !??! :" + values);
+            }
 
-		} catch (NotDefinedException | ParameterValuesException e) {
-			throw new IllegalStateException("Cannot fetch command parameter!", e);
-		}
-		return super.execute(event);
-	}
+        } catch (NotDefinedException | ParameterValuesException e) {
+            throw new IllegalStateException("Cannot fetch command parameter!", e);
+        }
+        return super.execute(event);
+    }
 
-	@Override
-	public void prepare(GradleContext context) {
-		if (launch != null) {
-			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
-			try {
-				/* commands */
-				String rootProjectPath = configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH, (String) null);
-				if (!StringUtilsAccess.isBlank(rootProjectPath)) {
-					context.switchRootProjectPath(rootProjectPath);
-				}
+    @Override
+    public void prepare(GradleContext context) {
+        if (launch != null) {
+            ILaunchConfiguration configuration = launch.getLaunchConfiguration();
+            try {
+                /* commands */
+                String rootProjectPath = configuration.getAttribute(PROPERTY_ROOT_PROJECT_PATH, (String) null);
+                if (!StringUtilsAccess.isBlank(rootProjectPath)) {
+                    context.switchRootProjectPath(rootProjectPath);
+                }
 
-				String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
-				String commandString = null;
-				if (taskAttributeOverride == null) {
-					commandString = configuration.getAttribute(PROPERTY_TASKS, "");
-				} else {
-					commandString = taskAttributeOverride;
-				}
+                String projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, "");
+                String commandString = null;
+                if (taskAttributeOverride == null) {
+                    commandString = configuration.getAttribute(PROPERTY_TASKS, "");
+                } else {
+                    commandString = taskAttributeOverride;
+                }
 
-				GradleCommand[] commands = null;
-				if (StringUtils.isEmpty(projectName)) {
-					commands = GradleCommand.build(commandString);
-				} else {
-					commands = GradleCommand.build(new GradleSubproject(projectName), commandString);
-				}
-				context.setCommands(commands);
+                GradleCommand[] commands = null;
+                if (StringUtils.isEmpty(projectName)) {
+                    commands = GradleCommand.build(commandString);
+                } else {
+                    commands = GradleCommand.build(new GradleSubproject(projectName), commandString);
+                }
+                context.setCommands(commands);
 
-				/* raw options */
-				String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
-				String[] splittedOptions = options.split(" ");
-				context.setOptions(splittedOptions);
+                /* raw options */
+                String options = configuration.getAttribute(PROPERTY_OPTIONS, "");
+                String[] splittedOptions = options.split(" ");
+                context.setOptions(splittedOptions);
 
-				/*
-				 * system properties, gradle project properties and enviroment
-				 */
-				Map<String, String> gradleProperties = configuration.getAttribute(GRADLE_PROPERTIES,
-						Collections.emptyMap());
-				Map<String, String> systemProperties = configuration.getAttribute(SYSTEM_PROPERTIES,
-						Collections.emptyMap());
-				Map<String, String> environment = configuration.getAttribute(ENVIRONMENT_PROPERTIES,
-						Collections.emptyMap());
+                /*
+                 * system properties, gradle project properties and enviroment
+                 */
+                Map<String, String> gradleProperties = configuration.getAttribute(GRADLE_PROPERTIES, Collections.emptyMap());
+                Map<String, String> systemProperties = configuration.getAttribute(SYSTEM_PROPERTIES, Collections.emptyMap());
+                Map<String, String> environment = configuration.getAttribute(ENVIRONMENT_PROPERTIES, Collections.emptyMap());
 
-				context.getGradleProperties().putAll(gradleProperties);
-				context.getSystemProperties().putAll(systemProperties);
-				context.getEnvironment().putAll(environment);
+                context.getGradleProperties().putAll(gradleProperties);
+                context.getSystemProperties().putAll(systemProperties);
+                context.getEnvironment().putAll(environment);
 
-				/* replace variables with content */
-				extractVariables(context.getGradleProperties());
-				extractVariables(context.getSystemProperties());
-				extractVariables(context.getEnvironment());
+                /* replace variables with content */
+                extractVariables(context.getGradleProperties());
+                extractVariables(context.getSystemProperties());
+                extractVariables(context.getEnvironment());
 
-			} catch (Exception e) {
-				IDEUtil.logError("Was not able to prepare launchconfiguration", e);
-			}
-		}
-	}
+            } catch (Exception e) {
+                IDEUtil.logError("Was not able to prepare launchconfiguration", e);
+            }
+        }
+    }
 
-	private void extractVariables(Map<String, String> map) throws CoreException {
-		IStringVariableManager svManager = VariablesPlugin.getDefault().getStringVariableManager();
-		for (String key : map.keySet()) {
-			String value = map.get(key);
-			String newValue = svManager.performStringSubstitution(value);
-			map.put(key, newValue);
-		}
-	}
+    private void extractVariables(Map<String, String> map) throws CoreException {
+        IStringVariableManager svManager = VariablesPlugin.getDefault().getStringVariableManager();
+        for (String key : map.keySet()) {
+            String value = map.get(key);
+            String newValue = svManager.performStringSubstitution(value);
+            map.put(key, newValue);
+        }
+    }
 
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
-			throws GradleExecutionException {
-		return new GradleExecutionDelegate(outputHandler,
-				new EclipseLaunchProcessExecutor(outputHandler, launch, postJob), this, null);
-	}
+    protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
+        return new GradleExecutionDelegate(outputHandler, new EclipseLaunchProcessExecutor(outputHandler, launch, postJob), this, null);
+    }
 
 }

@@ -21,17 +21,17 @@ import de.jcup.egradle.core.process.OutputHandler;
 
 public class EGradleSystemConsoleProcessOutputHandler implements OutputHandler {
 
-	private MessageConsoleStream messageStream;
+    private MessageConsoleStream messageStream;
 
-	public EGradleSystemConsoleProcessOutputHandler() {
-		this.messageStream = EGradleSystemConsoleFactory.INSTANCE.getConsole().newMessageStream();
-		/* always UTF-8 encoding */
-		messageStream.setEncoding("UTF-8");
-	}
+    public EGradleSystemConsoleProcessOutputHandler() {
+        this.messageStream = EGradleSystemConsoleFactory.INSTANCE.getConsole().newMessageStream();
+        /* always UTF-8 encoding */
+        messageStream.setEncoding("UTF-8");
+    }
 
-	@Override
-	public void output(String line) {
-		messageStream.println(line);
-	}
+    @Override
+    public void output(String line) {
+        messageStream.println(line);
+    }
 
 }

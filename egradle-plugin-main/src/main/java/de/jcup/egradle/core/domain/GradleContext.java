@@ -36,141 +36,141 @@ import de.jcup.egradle.core.process.ProcessContext;
  */
 public class GradleContext implements EnvironmentProvider, ProcessContext {
 
-	private GradleRootProject rootProject;
+    private GradleRootProject rootProject;
 
-	/*
-	 * we use tree map to have keys always automatically sorted - easier to
-	 * debug and read
-	 */
-	private Map<String, String> environment = new TreeMap<>();
-	private Map<String, String> systemProperties = new TreeMap<>();
-	private Map<String, String> gradleProperties = new TreeMap<>();
+    /*
+     * we use tree map to have keys always automatically sorted - easier to debug
+     * and read
+     */
+    private Map<String, String> environment = new TreeMap<>();
+    private Map<String, String> systemProperties = new TreeMap<>();
+    private Map<String, String> gradleProperties = new TreeMap<>();
 
-	private GradleCommand[] commands;
-	private MutableGradleConfiguration configuration;
+    private GradleCommand[] commands;
+    private MutableGradleConfiguration configuration;
 
-	public int amountOfWorkToDo = 1;
+    public int amountOfWorkToDo = 1;
 
-	private String[] options;
+    private String[] options;
 
-	private CancelStateProvider cancelStateProvider;
+    private CancelStateProvider cancelStateProvider;
 
-	public GradleContext(GradleRootProject rootProject, MutableGradleConfiguration configuration) {
-		notNull(rootProject, "root project may not be null!");
-		notNull(configuration, "'configuration' may not be null");
-		this.rootProject = rootProject;
-		this.configuration = configuration;
-	}
+    public GradleContext(GradleRootProject rootProject, MutableGradleConfiguration configuration) {
+        notNull(rootProject, "root project may not be null!");
+        notNull(configuration, "'configuration' may not be null");
+        this.rootProject = rootProject;
+        this.configuration = configuration;
+    }
 
-	public int getAmountOfWorkToDo() {
-		return amountOfWorkToDo;
-	}
+    public int getAmountOfWorkToDo() {
+        return amountOfWorkToDo;
+    }
 
-	public GradleCommand[] getCommands() {
-		if (commands == null) {
-			commands = new GradleCommand[] {};
-		}
-		return commands;
-	}
+    public GradleCommand[] getCommands() {
+        if (commands == null) {
+            commands = new GradleCommand[] {};
+        }
+        return commands;
+    }
 
-	public String getCommandString() {
-		StringBuilder sb = new StringBuilder();
-		GradleCommand[] x = getCommands();
-		for (GradleCommand c : x) {
-			if (c == null) {
-				continue;
-			}
-			sb.append(c.toString());
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
+    public String getCommandString() {
+        StringBuilder sb = new StringBuilder();
+        GradleCommand[] x = getCommands();
+        for (GradleCommand c : x) {
+            if (c == null) {
+                continue;
+            }
+            sb.append(c.toString());
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
 
-	public GradleConfiguration getConfiguration() {
-		return configuration;
-	}
+    public GradleConfiguration getConfiguration() {
+        return configuration;
+    }
 
-	/**
-	 * Returns environment - e.g for setting a JAVA_HOME...
-	 * 
-	 * @return environment environment or <code>null</code> if not set
-	 */
-	public Map<String, String> getEnvironment() {
-		return environment;
-	}
+    /**
+     * Returns environment - e.g for setting a JAVA_HOME...
+     * 
+     * @return environment environment or <code>null</code> if not set
+     */
+    public Map<String, String> getEnvironment() {
+        return environment;
+    }
 
-	public GradleRootProject getRootProject() {
-		return rootProject;
-	}
+    public GradleRootProject getRootProject() {
+        return rootProject;
+    }
 
-	public void setAmountOfWorkToDo(int amountOfWorkToDo) {
-		this.amountOfWorkToDo = amountOfWorkToDo;
-	}
+    public void setAmountOfWorkToDo(int amountOfWorkToDo) {
+        this.amountOfWorkToDo = amountOfWorkToDo;
+    }
 
-	public void setCommands(GradleCommand[] commands) {
-		this.commands = commands;
-	}
+    public void setCommands(GradleCommand[] commands) {
+        this.commands = commands;
+    }
 
-	public void setEnvironment(String key, String value) {
-		environment.put(key, value);
-	}
+    public void setEnvironment(String key, String value) {
+        environment.put(key, value);
+    }
 
-	/**
-	 * Returns gradle parameters - will be used with -P option
-	 * 
-	 * @return gradle parameter map
-	 */
-	public Map<String, String> getGradleProperties() {
-		return gradleProperties;
-	}
+    /**
+     * Returns gradle parameters - will be used with -P option
+     * 
+     * @return gradle parameter map
+     */
+    public Map<String, String> getGradleProperties() {
+        return gradleProperties;
+    }
 
-	/**
-	 * Returns system parameters - will be used with -D option
-	 * 
-	 * @return system parameter map
-	 */
-	public Map<String, String> getSystemProperties() {
-		return systemProperties;
-	}
+    /**
+     * Returns system parameters - will be used with -D option
+     * 
+     * @return system parameter map
+     */
+    public Map<String, String> getSystemProperties() {
+        return systemProperties;
+    }
 
-	public void setOptions(String... options) {
-		if (options == null) {
-			options = new String[] {};
-		}
-		this.options = options;
-	}
+    public void setOptions(String... options) {
+        if (options == null) {
+            options = new String[] {};
+        }
+        this.options = options;
+    }
 
-	/**
-	 * Returns options string - never <code>null</code>
-	 * 
-	 * @return options
-	 */
-	public String[] getOptions() {
-		if (options == null) {
-			options = new String[] {};
-		}
-		return options;
-	}
+    /**
+     * Returns options string - never <code>null</code>
+     * 
+     * @return options
+     */
+    public String[] getOptions() {
+        if (options == null) {
+            options = new String[] {};
+        }
+        return options;
+    }
 
-	/**
-	 * Registers new cancel state provider - old one will be replaced
-	 * 
-	 * @param provider
-	 */
-	public void register(CancelStateProvider provider) {
-		this.cancelStateProvider = provider;
-	}
+    /**
+     * Registers new cancel state provider - old one will be replaced
+     * 
+     * @param provider
+     */
+    public void register(CancelStateProvider provider) {
+        this.cancelStateProvider = provider;
+    }
 
-	public CancelStateProvider getCancelStateProvider() {
-		if (cancelStateProvider == null) {
-			cancelStateProvider = CancelStateProvider.NEVER_CANCELED;
-		}
-		return cancelStateProvider;
-	}
+    public CancelStateProvider getCancelStateProvider() {
+        if (cancelStateProvider == null) {
+            cancelStateProvider = CancelStateProvider.NEVER_CANCELED;
+        }
+        return cancelStateProvider;
+    }
 
-	public void switchRootProjectPath(String rootProjectPath) throws IOException {
-		configuration.setWorkingDirectory(rootProjectPath);
-		rootProject = new GradleRootProject(new File(rootProjectPath));
-	}
+    public void switchRootProjectPath(String rootProjectPath) throws IOException {
+        configuration.setWorkingDirectory(rootProjectPath);
+        rootProject = new GradleRootProject(new File(rootProjectPath));
+    }
 
 }

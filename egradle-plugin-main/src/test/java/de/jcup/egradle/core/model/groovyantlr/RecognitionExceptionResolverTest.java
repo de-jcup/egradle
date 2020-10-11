@@ -25,29 +25,29 @@ import antlr.RecognitionException;
 import antlr.TokenStreamRecognitionException;
 
 public class RecognitionExceptionResolverTest {
-	RecognitionExceptionResolver resolverToTest;
+    RecognitionExceptionResolver resolverToTest;
 
-	@Before
-	public void before() {
-		resolverToTest = new RecognitionExceptionResolver();
-	}
+    @Before
+    public void before() {
+        resolverToTest = new RecognitionExceptionResolver();
+    }
 
-	@Test
-	public void call_with_null__returns_null() {
-		assertNull(resolverToTest.resolveRecognitionException(null));
-	}
+    @Test
+    public void call_with_null__returns_null() {
+        assertNull(resolverToTest.resolveRecognitionException(null));
+    }
 
-	@Test
-	public void call_with_recogntionException__returns_it_again() {
-		RecognitionException reco = mock(RecognitionException.class);
-		assertEquals(reco, resolverToTest.resolveRecognitionException(reco));
-	}
+    @Test
+    public void call_with_recogntionException__returns_it_again() {
+        RecognitionException reco = mock(RecognitionException.class);
+        assertEquals(reco, resolverToTest.resolveRecognitionException(reco));
+    }
 
-	@Test
-	public void call_with_tokenstream_with_recognitonException__returns_contained_recogition() {
-		RecognitionException reco = mock(RecognitionException.class);
-		TokenStreamRecognitionException ex = new TokenStreamRecognitionException(reco);
-		assertEquals(reco, resolverToTest.resolveRecognitionException(ex));
-	}
+    @Test
+    public void call_with_tokenstream_with_recognitonException__returns_contained_recogition() {
+        RecognitionException reco = mock(RecognitionException.class);
+        TokenStreamRecognitionException ex = new TokenStreamRecognitionException(reco);
+        assertEquals(reco, resolverToTest.resolveRecognitionException(ex));
+    }
 
 }

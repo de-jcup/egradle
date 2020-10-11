@@ -19,51 +19,51 @@ import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 
 abstract class AbstractLazyCodeBuilder implements LazyCodeBuilder {
 
-	private static SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
-	private String code;
-	private String template;
-	private int cursorPos;
+    private static SourceCodeInsertionSupport insertSupport = new SourceCodeInsertionSupport();
+    private String code;
+    private String template;
+    private int cursorPos;
 
-	public String getCode(AbstractProposalImpl proposal, String textBeforeColumn) {
-		ensureData(proposal, textBeforeColumn);
-		return code;
-	}
+    public String getCode(AbstractProposalImpl proposal, String textBeforeColumn) {
+        ensureData(proposal, textBeforeColumn);
+        return code;
+    }
 
-	private void ensureData(AbstractProposalImpl proposal, String textBeforeColumn) {
-		ensureTemplate();
-		if (code == null) {
-			InsertionData insertData = insertSupport.prepareInsertionString(template, textBeforeColumn);
+    private void ensureData(AbstractProposalImpl proposal, String textBeforeColumn) {
+        ensureTemplate();
+        if (code == null) {
+            InsertionData insertData = insertSupport.prepareInsertionString(template, textBeforeColumn);
 
-			this.cursorPos = insertData.cursorOffset;
-			this.code = insertData.sourceCode;
+            this.cursorPos = insertData.cursorOffset;
+            this.code = insertData.sourceCode;
 
-			if (code == null) {
-				code = "";
-			}
-		}
+            if (code == null) {
+                code = "";
+            }
+        }
 
-	}
+    }
 
-	public String getTemplate() {
-		ensureTemplate();
-		return template;
-	}
+    public String getTemplate() {
+        ensureTemplate();
+        return template;
+    }
 
-	private void ensureTemplate() {
-		if (template == null) {
-			template = createTemplate();
-			if (template == null) {
-				template = "";
-			}
-		}
-	}
+    private void ensureTemplate() {
+        if (template == null) {
+            template = createTemplate();
+            if (template == null) {
+                template = "";
+            }
+        }
+    }
 
-	protected abstract String createTemplate();
+    protected abstract String createTemplate();
 
-	@Override
-	public int getCursorPos(AbstractProposalImpl proposal, String textBeforeColumn) {
-		ensureData(proposal, textBeforeColumn);
-		return cursorPos;
-	}
+    @Override
+    public int getCursorPos(AbstractProposalImpl proposal, String textBeforeColumn) {
+        ensureData(proposal, textBeforeColumn);
+        return cursorPos;
+    }
 
 }

@@ -23,11 +23,11 @@ package de.jcup.egradle.codeassist.dsl;
  */
 public interface TypeProvider {
 
-	/**
-	 * Try to get a type for given name.
-	 * 
-	 * @param name
-	 * @return type or <code>null</code>
-	 */
-	public Type getType(String name);
+    /**
+     * Try to get a type for given name.
+     * 
+     * @param name
+     * @return type or <code>null</code>
+     */
+    public Type getType(String name);
 }

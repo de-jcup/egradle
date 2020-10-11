@@ -23,13 +23,13 @@ package de.jcup.egradle.codeassist.dsl;
  */
 public interface Property extends LanguageElement, GradleDocumentationInfo, TypeChild, Comparable<Property> {
 
-	/**
-	 * Returns type of property itself
-	 * 
-	 * @return type of property
-	 */
-	public Type getType();
+    /**
+     * Returns type of property itself
+     * 
+     * @return type of property
+     */
+    public Type getType();
 
-	public String getTypeAsString();
+    public String getTypeAsString();
 
 }

@@ -23,23 +23,20 @@ package de.jcup.egradle.eclipse.util;
  *
  */
 public interface EclipseDevelopmentSettings {
-	/**
-	 * Feature toggle - shows more information on some points
-	 */
-	public static final boolean DEBUG_ADD_SPECIAL_TEXTS = Boolean
-			.parseBoolean(System.getProperty("egradle.debug.texts"));
-	/**
-	 * Feature toggle - adds some extra menues, buttons, commands etc. E.g.
-	 * allows outline reloading as full antlr parts also. interesting for debug
-	 * purpose only. For normal usage uninteresting
-	 */
-	public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean
-			.parseBoolean(System.getProperty("egradle.debug.menus"));
+    /**
+     * Feature toggle - shows more information on some points
+     */
+    public static final boolean DEBUG_ADD_SPECIAL_TEXTS = Boolean.parseBoolean(System.getProperty("egradle.debug.texts"));
+    /**
+     * Feature toggle - adds some extra menues, buttons, commands etc. E.g. allows
+     * outline reloading as full antlr parts also. interesting for debug purpose
+     * only. For normal usage uninteresting
+     */
+    public static final boolean DEBUG_ADD_SPECIAL_MENUS = Boolean.parseBoolean(System.getProperty("egradle.debug.menus"));
 
-	/**
-	 * Feature toggle - enables special logging information
-	 */
-	public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean
-			.parseBoolean(System.getProperty("egradle.debug.logging"));
+    /**
+     * Feature toggle - enables special logging information
+     */
+    public static final boolean DEBUG_ADD_SPECIAL_LOGGING = Boolean.parseBoolean(System.getProperty("egradle.debug.logging"));
 
 }

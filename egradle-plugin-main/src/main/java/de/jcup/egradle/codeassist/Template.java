@@ -17,20 +17,20 @@ package de.jcup.egradle.codeassist;
 
 class Template {
 
-	private String name;
-	private String content;
+    private String name;
+    private String content;
 
-	Template(String name, String content) {
-		this.name = name;
-		this.content = content;
-	}
+    Template(String name, String content) {
+        this.name = name;
+        this.content = content;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
 }

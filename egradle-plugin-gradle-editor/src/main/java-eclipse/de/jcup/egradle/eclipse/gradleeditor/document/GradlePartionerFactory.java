@@ -21,13 +21,12 @@ import de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers;
 
 public class GradlePartionerFactory {
 
-	public static GradlePartitioner create() {
-		String[] legalContentTypes = DocumentIdentifier.createStringIdBuilder()
-				.addAll(GroovyDocumentIdentifiers.values()).addAll(GradleDocumentIdentifiers.values()).build();
+    public static GradlePartitioner create() {
+        String[] legalContentTypes = DocumentIdentifier.createStringIdBuilder().addAll(GroovyDocumentIdentifiers.values()).addAll(GradleDocumentIdentifiers.values()).build();
 
-		AbstractGroovyBasedDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
-		GradlePartitioner partitioner = new GradlePartitioner(scanner, legalContentTypes);
+        AbstractGroovyBasedDocumentPartitionScanner scanner = new GradleDocumentPartitionScanner();
+        GradlePartitioner partitioner = new GradlePartitioner(scanner, legalContentTypes);
 
-		return partitioner;
-	}
+        return partitioner;
+    }
 }

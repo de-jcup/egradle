@@ -25,41 +25,40 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class AutomaticalDeriveBuildFoldersHandler {
 
-	private static final IProgressMonitor NULL_PROGRESS = new NullProgressMonitor();
+    private static final IProgressMonitor NULL_PROGRESS = new NullProgressMonitor();
 
-	/**
-	 * Will derive build folders of given project automatically, if the feature
-	 * is enabled in preferences
-	 * 
-	 * @param project
-	 * @param monitor
-	 * @throws CoreException
-	 *             - if derive fails
-	 */
-	public void deriveBuildFolders(IProject project, IProgressMonitor monitor) throws CoreException {
-		if (!IDEUtil.getPreferences().isAutomaticallyDeriveBuildFoldersEnabled()) {
-			return;
-		}
-		if (!project.exists()) {
-			/* project not existing, so ignore */
-			return;
-		}
-		if (!project.isOpen()) {
-			/* project not opened , so ignore */
-			return;
-		}
-		IFolder folder = project.getFolder("build");
-		if (!folder.exists()) {
-			/* no build folder so ignore */
-			return;
-		}
-		if (folder.isDerived()) {
-			/* already derived... so ignore */
-			return;
-		}
-		if (monitor == null) {
-			monitor = NULL_PROGRESS;
-		}
-		folder.setDerived(true, monitor);
-	}
+    /**
+     * Will derive build folders of given project automatically, if the feature is
+     * enabled in preferences
+     * 
+     * @param project
+     * @param monitor
+     * @throws CoreException - if derive fails
+     */
+    public void deriveBuildFolders(IProject project, IProgressMonitor monitor) throws CoreException {
+        if (!IDEUtil.getPreferences().isAutomaticallyDeriveBuildFoldersEnabled()) {
+            return;
+        }
+        if (!project.exists()) {
+            /* project not existing, so ignore */
+            return;
+        }
+        if (!project.isOpen()) {
+            /* project not opened , so ignore */
+            return;
+        }
+        IFolder folder = project.getFolder("build");
+        if (!folder.exists()) {
+            /* no build folder so ignore */
+            return;
+        }
+        if (folder.isDerived()) {
+            /* already derived... so ignore */
+            return;
+        }
+        if (monitor == null) {
+            monitor = NULL_PROGRESS;
+        }
+        folder.setDerived(true, monitor);
+    }
 }

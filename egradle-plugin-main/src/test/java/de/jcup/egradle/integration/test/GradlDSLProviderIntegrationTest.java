@@ -27,43 +27,43 @@ import de.jcup.egradle.integration.IntegrationTestComponents;
 
 public class GradlDSLProviderIntegrationTest {
 
-	@Rule
-	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
-	private GradleDSLTypeProvider dslProvider;
+    @Rule
+    public IntegrationTestComponents components = IntegrationTestComponents.initialize();
+    private GradleDSLTypeProvider dslProvider;
 
-	@Before
-	public void before() {
-		dslProvider = components.getGradleDslProvider();
-	}
+    @Before
+    public void before() {
+        dslProvider = components.getGradleDslProvider();
+    }
 
-	@Test
-	public void copytask__is_implementing_org_gradle_api_task() {
-		Type copy = dslProvider.getType("org.gradle.api.tasks.Copy");
-		/* @formatter:off*/
+    @Test
+    public void copytask__is_implementing_org_gradle_api_task() {
+        Type copy = dslProvider.getType("org.gradle.api.tasks.Copy");
+        /* @formatter:off*/
 		assertType(copy).
 			hasInterface("org.gradle.api.Task"); 
 		/* @formatter:on*/
-	}
+    }
 
-	@Test
-	public void org_gradle_project__is_interface__and__extends_PluginAware_and_Extension_Aware() {
-		Type project = dslProvider.getType("org.gradle.api.Project");
-		/* @formatter:off*/
+    @Test
+    public void org_gradle_project__is_interface__and__extends_PluginAware_and_Extension_Aware() {
+        Type project = dslProvider.getType("org.gradle.api.Project");
+        /* @formatter:off*/
 		assertType(project).
 			isInterface().// is itself an interface 
 			hasInterface("org.gradle.api.plugins.PluginAware"). // is extending interface plugin aware and 
 			hasInterface("org.gradle.api.plugins.ExtensionAware");// extension aware
 		/* @formatter:on*/
-	}
+    }
 
-	@Test
-	public void org_gradle_copy_task__is_no_interface__and__has_extends_PluginAware_and_Extension_Aware() {
-		Type project = dslProvider.getType("org.gradle.api.tasks.Copy");
-		/* @formatter:off*/
+    @Test
+    public void org_gradle_copy_task__is_no_interface__and__has_extends_PluginAware_and_Extension_Aware() {
+        Type project = dslProvider.getType("org.gradle.api.tasks.Copy");
+        /* @formatter:off*/
 		assertType(project).
 			isNotInterface().// is itself not an interface
 			isDecendantOf("org.gradle.api.tasks.AbstractCopyTask");
 		/* @formatter:on*/
-	}
+    }
 
 }

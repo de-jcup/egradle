@@ -31,154 +31,149 @@ import de.jcup.egradle.eclipse.MainActivator;
  *
  */
 public class EGradleOldMainPreferenceProvider {
-	private enum OldConstants {
-		P_ROOTPROJECT_PATH("pathGradleRootProject"),
+    private enum OldConstants {
+        P_ROOTPROJECT_PATH("pathGradleRootProject"),
 
-		P_JAVA_HOME_PATH("pathJavaHome"),
+        P_JAVA_HOME_PATH("pathJavaHome"),
 
-		P_GRADLE_CALL_TYPE("gradleCallType"),
+        P_GRADLE_CALL_TYPE("gradleCallType"),
 
-		P_GRADLE_SHELL("commandShell"),
+        P_GRADLE_SHELL("commandShell"),
 
-		P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
+        P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"),
 
-		P_GRADLE_CALL_COMMAND("commandGradle"),
+        P_GRADLE_CALL_COMMAND("commandGradle"),
 
-		P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
+        P_OUTPUT_VALIDATION_ENABLED("validatEnabled"),
 
-		P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
+        P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 
-		/* file handling parts */
-		P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
+        /* file handling parts */
+        P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
 
-		/* import */
-		P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
+        /* import */
+        P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"),
 
-		P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
+        P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
 
-		P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
+        P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("validatEnabled");
 
-		private String id;
+        private String id;
 
-		private OldConstants(String id) {
-			this.id = id;
-		}
+        private OldConstants(String id) {
+            this.id = id;
+        }
 
-		public String getId() {
-			return id;
-		}
-	}
+        public String getId() {
+            return id;
+        }
+    }
 
-	private static EGradleOldMainPreferenceProvider INSTANCE = new EGradleOldMainPreferenceProvider();
+    private static EGradleOldMainPreferenceProvider INSTANCE = new EGradleOldMainPreferenceProvider();
 
-	private IPreferenceStore store;
+    private IPreferenceStore store;
 
-	public static EGradleOldMainPreferenceProvider getInstance() {
-		return INSTANCE;
-	}
+    public static EGradleOldMainPreferenceProvider getInstance() {
+        return INSTANCE;
+    }
 
-	public EGradleOldMainPreferenceProvider() {
-		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
-	}
+    public EGradleOldMainPreferenceProvider() {
+        store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
+    }
 
-	private String getStringPreference(OldConstants id) {
-		String data = getPreferenceStore().getString(id.getId());
-		if (data == null) {
-			data = "";
-		}
-		return data;
-	}
+    private String getStringPreference(OldConstants id) {
+        String data = getPreferenceStore().getString(id.getId());
+        if (data == null) {
+            data = "";
+        }
+        return data;
+    }
 
-	public IPreferenceStore getPreferenceStore() {
-		return store;
-	}
+    public IPreferenceStore getPreferenceStore() {
+        return store;
+    }
 
-	public boolean isShowingConsoleOnBuildFailed() {
-		boolean showConsoleOnBuildFailed = getPreferenceStore()
-				.getBoolean(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());
-		return showConsoleOnBuildFailed;
-	}
+    public boolean isShowingConsoleOnBuildFailed() {
+        boolean showConsoleOnBuildFailed = getPreferenceStore().getBoolean(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());
+        return showConsoleOnBuildFailed;
+    }
 
-	public boolean hasValueForShowingConsoleOnBuildFailed() {
-		return hasValue(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED);
-	}
+    public boolean hasValueForShowingConsoleOnBuildFailed() {
+        return hasValue(OldConstants.P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED);
+    }
 
-	public boolean isOutputValidationEnabled() {
-		boolean validationEnabled = getPreferenceStore().getBoolean(OldConstants.P_OUTPUT_VALIDATION_ENABLED.getId());
-		return validationEnabled;
-	}
+    public boolean isOutputValidationEnabled() {
+        boolean validationEnabled = getPreferenceStore().getBoolean(OldConstants.P_OUTPUT_VALIDATION_ENABLED.getId());
+        return validationEnabled;
+    }
 
-	public boolean hasValueForOutputValidationEnabled() {
-		return hasValue(OldConstants.P_OUTPUT_VALIDATION_ENABLED);
-	}
+    public boolean hasValueForOutputValidationEnabled() {
+        return hasValue(OldConstants.P_OUTPUT_VALIDATION_ENABLED);
+    }
 
-	public boolean isCleanProjectsOnImportEnabled() {
-		boolean cleanProjectsEnabled = getPreferenceStore()
-				.getBoolean(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId());
-		return cleanProjectsEnabled;
-	}
+    public boolean isCleanProjectsOnImportEnabled() {
+        boolean cleanProjectsEnabled = getPreferenceStore().getBoolean(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS.getId());
+        return cleanProjectsEnabled;
+    }
 
-	public boolean hasValueForCleanProjectsOnImportEnabled() {
-		return hasValue(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS);
-	}
+    public boolean hasValueForCleanProjectsOnImportEnabled() {
+        return hasValue(OldConstants.P_IMPORT__DO_CLEAN_PROJECTS);
+    }
 
-	public boolean isExecuteAssembleTaskOnImportEnabled() {
-		boolean executeAssembleTaskEnabled = getPreferenceStore()
-				.getBoolean(OldConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId());
-		return executeAssembleTaskEnabled;
-	}
+    public boolean isExecuteAssembleTaskOnImportEnabled() {
+        boolean executeAssembleTaskEnabled = getPreferenceStore().getBoolean(OldConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK.getId());
+        return executeAssembleTaskEnabled;
+    }
 
-	public boolean hasValueForExecuteAssembleTaskOnImportEnabled() {
-		return hasValue(OldConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK);
-	}
+    public boolean hasValueForExecuteAssembleTaskOnImportEnabled() {
+        return hasValue(OldConstants.P_IMPORT__EXECUTE_ASSEMBLE_TASK);
+    }
 
-	public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
-		boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore()
-				.getBoolean(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
-		return automaticallyDeriveBuildFoldersEnabled;
-	}
+    public boolean isAutomaticallyDeriveBuildFoldersEnabled() {
+        boolean automaticallyDeriveBuildFoldersEnabled = getPreferenceStore().getBoolean(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS.getId());
+        return automaticallyDeriveBuildFoldersEnabled;
+    }
 
-	public boolean hasValueForAutomaticallyDeriveBuildFoldersEnabled() {
-		return hasValue(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS);
-	}
+    public boolean hasValueForAutomaticallyDeriveBuildFoldersEnabled() {
+        return hasValue(OldConstants.P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS);
+    }
 
-	public boolean isSubProjectIconDecorationEnabled() {
-		boolean validationEnabled = getPreferenceStore()
-				.getBoolean(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
-		return validationEnabled;
-	}
+    public boolean isSubProjectIconDecorationEnabled() {
+        boolean validationEnabled = getPreferenceStore().getBoolean(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId());
+        return validationEnabled;
+    }
 
-	public boolean hasValueForSubProjectIconDecorationEnabled() {
-		return hasValue(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED);
-	}
+    public boolean hasValueForSubProjectIconDecorationEnabled() {
+        return hasValue(OldConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED);
+    }
 
-	public String getGlobalJavaHomePath() {
-		return getStringPreference(OldConstants.P_JAVA_HOME_PATH);
-	}
+    public String getGlobalJavaHomePath() {
+        return getStringPreference(OldConstants.P_JAVA_HOME_PATH);
+    }
 
-	public String getGradleCallCommand() {
-		return getStringPreference(OldConstants.P_GRADLE_CALL_COMMAND);
-	}
+    public String getGradleCallCommand() {
+        return getStringPreference(OldConstants.P_GRADLE_CALL_COMMAND);
+    }
 
-	public String getGradleBinInstallFolder() {
-		return getStringPreference(OldConstants.P_GRADLE_INSTALL_BIN_FOLDER);
-	}
+    public String getGradleBinInstallFolder() {
+        return getStringPreference(OldConstants.P_GRADLE_INSTALL_BIN_FOLDER);
+    }
 
-	public String getGradleShellId() {
-		return getStringPreference(OldConstants.P_GRADLE_SHELL);
-	}
+    public String getGradleShellId() {
+        return getStringPreference(OldConstants.P_GRADLE_SHELL);
+    }
 
-	public String getGradleCallTypeID() {
-		return getStringPreference(OldConstants.P_GRADLE_CALL_TYPE);
-	}
+    public String getGradleCallTypeID() {
+        return getStringPreference(OldConstants.P_GRADLE_CALL_TYPE);
+    }
 
-	public String getRootProjectPath() {
-		return getStringPreference(OldConstants.P_ROOTPROJECT_PATH);
-	}
+    public String getRootProjectPath() {
+        return getStringPreference(OldConstants.P_ROOTPROJECT_PATH);
+    }
 
-	private boolean hasValue(OldConstants constant) {
-		return getPreferenceStore().contains(constant.getId());
+    private boolean hasValue(OldConstants constant) {
+        return getPreferenceStore().contains(constant.getId());
 
-	}
+    }
 
 }

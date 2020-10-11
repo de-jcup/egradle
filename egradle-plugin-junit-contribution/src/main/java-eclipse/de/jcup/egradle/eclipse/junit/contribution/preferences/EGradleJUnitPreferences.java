@@ -24,37 +24,37 @@ import de.jcup.egradle.junit.EGradleJUnitTestTasksType;
 
 public class EGradleJUnitPreferences {
 
-	public static EGradleJUnitPreferences JUNIT_PREFERENCES = new EGradleJUnitPreferences();
-	private IPreferenceStore store;
+    public static EGradleJUnitPreferences JUNIT_PREFERENCES = new EGradleJUnitPreferences();
+    private IPreferenceStore store;
 
-	EGradleJUnitPreferences() {
-		store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
-	}
+    EGradleJUnitPreferences() {
+        store = new ScopedPreferenceStore(InstanceScope.INSTANCE, MainActivator.PLUGIN_ID);
+    }
 
-	public String getStringPreference(EGradleJunitPreferenceConstants id) {
-		String data = getPreferenceStore().getString(id.getId());
-		if (data == null) {
-			data = "";
-		}
-		return data;
-	}
+    public String getStringPreference(EGradleJunitPreferenceConstants id) {
+        String data = getPreferenceStore().getString(id.getId());
+        if (data == null) {
+            data = "";
+        }
+        return data;
+    }
 
-	/**
-	 * Returns default test task type configured in preferences
-	 * 
-	 * @return default test task type
-	 */
-	public EGradleJUnitTestTasksType getDefaultTestTaskType() {
-		String configuredTestTaskTypeId = getStringPreference(EGradleJunitPreferenceConstants.P_TEST_TASKS);
-		EGradleJUnitTestTasksType testTasksType = EGradleJUnitTestTasksType.findById(configuredTestTaskTypeId);
-		if (testTasksType == null) {
-			/* fall back */
-			testTasksType = EGradleJUnitTestTasksType.CLEAN_ALL;
-		}
-		return testTasksType;
-	}
+    /**
+     * Returns default test task type configured in preferences
+     * 
+     * @return default test task type
+     */
+    public EGradleJUnitTestTasksType getDefaultTestTaskType() {
+        String configuredTestTaskTypeId = getStringPreference(EGradleJunitPreferenceConstants.P_TEST_TASKS);
+        EGradleJUnitTestTasksType testTasksType = EGradleJUnitTestTasksType.findById(configuredTestTaskTypeId);
+        if (testTasksType == null) {
+            /* fall back */
+            testTasksType = EGradleJUnitTestTasksType.CLEAN_ALL;
+        }
+        return testTasksType;
+    }
 
-	public IPreferenceStore getPreferenceStore() {
-		return store;
-	}
+    public IPreferenceStore getPreferenceStore() {
+        return store;
+    }
 }

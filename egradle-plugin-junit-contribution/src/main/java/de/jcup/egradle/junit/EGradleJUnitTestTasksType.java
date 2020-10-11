@@ -16,34 +16,34 @@
 package de.jcup.egradle.junit;
 
 public enum EGradleJUnitTestTasksType {
-	CLEAN_ALL("egradle.junit.clean.all", "clean test"),
+    CLEAN_ALL("egradle.junit.clean.all", "clean test"),
 
-	CLEAN_ONLY_TESTS("egradle.junit.clean.onlytests", "cleanTest test"),
+    CLEAN_ONLY_TESTS("egradle.junit.clean.onlytests", "cleanTest test"),
 
-	CLEAN_NOTHING("egradle.junit.clean.nothing", "test");
+    CLEAN_NOTHING("egradle.junit.clean.nothing", "test");
 
-	private String id;
-	private String testTasks;
+    private String id;
+    private String testTasks;
 
-	EGradleJUnitTestTasksType(String id, String testTasks) {
-		this.id = id;
-		this.testTasks = testTasks;
-	}
+    EGradleJUnitTestTasksType(String id, String testTasks) {
+        this.id = id;
+        this.testTasks = testTasks;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getTestTasks() {
-		return testTasks;
-	}
+    public String getTestTasks() {
+        return testTasks;
+    }
 
-	public static EGradleJUnitTestTasksType findById(String id) {
-		for (EGradleJUnitTestTasksType c : values()) {
-			if (c.getId().equals(id)) {
-				return c;
-			}
-		}
-		return null;
-	}
+    public static EGradleJUnitTestTasksType findById(String id) {
+        for (EGradleJUnitTestTasksType c : values()) {
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

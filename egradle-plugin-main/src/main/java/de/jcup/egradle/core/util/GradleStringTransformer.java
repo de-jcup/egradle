@@ -30,14 +30,14 @@ package de.jcup.egradle.core.util;
  */
 public interface GradleStringTransformer {
 
-	public static final String ROOTPROJECT_PROJECTDIR = "rootProject.projectDir";
+    public static final String ROOTPROJECT_PROJECTDIR = "rootProject.projectDir";
 
-	/**
-	 * Transforms text
-	 * 
-	 * @param text
-	 * @return transformed text - parts not able to transform will still be
-	 *         contained as variables
-	 */
-	public String transform(String text);
+    /**
+     * Transforms text
+     * 
+     * @param text
+     * @return transformed text - parts not able to transform will still be
+     *         contained as variables
+     */
+    public String transform(String text);
 }

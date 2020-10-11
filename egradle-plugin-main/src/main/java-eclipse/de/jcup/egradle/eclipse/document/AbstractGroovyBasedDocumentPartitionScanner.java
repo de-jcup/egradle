@@ -40,71 +40,70 @@ import de.jcup.egradle.core.text.DocumentIdentifier;
  */
 public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBasedPartitionScanner {
 
-	protected OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();
-	private AnnotationWordDetector onlyAnnotationWordDetector = new AnnotationWordDetector();
-	private JavaWordDetector javaWordDetector = new JavaWordDetector();
+    protected OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();
+    private AnnotationWordDetector onlyAnnotationWordDetector = new AnnotationWordDetector();
+    private JavaWordDetector javaWordDetector = new JavaWordDetector();
 
-	public AbstractGroovyBasedDocumentPartitionScanner() {
-		List<IPredicateRule> rules = new ArrayList<>();
+    public AbstractGroovyBasedDocumentPartitionScanner() {
+        List<IPredicateRule> rules = new ArrayList<>();
 
-		addGroovyRules(rules);
+        addGroovyRules(rules);
 
-		addOtherRules(rules);
+        addOtherRules(rules);
 
-		setPredicateRules(rules.toArray(new IPredicateRule[rules.size()]));
-	}
+        setPredicateRules(rules.toArray(new IPredicateRule[rules.size()]));
+    }
 
-	protected void addGroovyRules(List<IPredicateRule> rules) {
-		IToken groovyAnnotation = createToken(ANNOTATION);
-		IToken javaDocComment = createToken(GROOVY_DOC);
-		IToken groovyComment = createToken(COMMENT);
-		IToken groovySimpleString = createToken(STRING);
-		IToken groovyGString = createToken(GSTRING);
-		IToken groovyKeyWord = createToken(GROOVY_KEYWORD);
-		IToken javaKeyWord = createToken(JAVA_KEYWORD);
-		IToken javaLiteral = createToken(JAVA_LITERAL);
+    protected void addGroovyRules(List<IPredicateRule> rules) {
+        IToken groovyAnnotation = createToken(ANNOTATION);
+        IToken javaDocComment = createToken(GROOVY_DOC);
+        IToken groovyComment = createToken(COMMENT);
+        IToken groovySimpleString = createToken(STRING);
+        IToken groovyGString = createToken(GSTRING);
+        IToken groovyKeyWord = createToken(GROOVY_KEYWORD);
+        IToken javaKeyWord = createToken(JAVA_KEYWORD);
+        IToken javaLiteral = createToken(JAVA_LITERAL);
 
-		/* Groovy multiline String */
-		rules.add(new MultiLineRule("\"\"\"", "\"\"\"", groovyGString));
-		rules.add(new MultiLineRule("'''", "'''", groovySimpleString));
-		
-		/* Comments */
-		rules.add(new MultiLineRule("/**", "*/", javaDocComment));
-		rules.add(new MultiLineRule("/*", "*/", groovyComment));
-		rules.add(new SingleLineRule("//", "", groovyComment));
+        /* Groovy multiline String */
+        rules.add(new MultiLineRule("\"\"\"", "\"\"\"", groovyGString));
+        rules.add(new MultiLineRule("'''", "'''", groovySimpleString));
 
-		/* Groovy strings*/
-		rules.add(new MultiLineRule("\"", "\"", groovyGString, '\\'));
-		rules.add(new MultiLineRule("'", "'", groovySimpleString, '\\'));
+        /* Comments */
+        rules.add(new MultiLineRule("/**", "*/", javaDocComment));
+        rules.add(new MultiLineRule("/*", "*/", groovyComment));
+        rules.add(new SingleLineRule("//", "", groovyComment));
 
-		buildWordRules(rules, javaKeyWord, JavaKeyWords.values(), javaWordDetector);
-		buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(), javaWordDetector);
+        /* Groovy strings */
+        rules.add(new MultiLineRule("\"", "\"", groovyGString, '\\'));
+        rules.add(new MultiLineRule("'", "'", groovySimpleString, '\\'));
 
-		buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(), javaWordDetector);
+        buildWordRules(rules, javaKeyWord, JavaKeyWords.values(), javaWordDetector);
+        buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(), javaWordDetector);
 
-		buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
-	}
+        buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(), javaWordDetector);
 
-	protected abstract void addOtherRules(List<IPredicateRule> rules);
+        buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
+    }
 
-	private void buildAnnotationRules(List<IPredicateRule> rules, IToken token, IWordDetector wordDetector) {
-		rules.add(new WordPatternRule(wordDetector, "@", "", token));
+    protected abstract void addOtherRules(List<IPredicateRule> rules);
 
-	}
+    private void buildAnnotationRules(List<IPredicateRule> rules, IToken token, IWordDetector wordDetector) {
+        rules.add(new WordPatternRule(wordDetector, "@", "", token));
 
-	protected void buildWordRules(List<IPredicateRule> rules, IToken token, DocumentKeyWord[] values,
-			IWordDetector wordDetector) {
-		for (DocumentKeyWord keyWord : values) {
-			rules.add(new ExactWordPatternRule(wordDetector, createWordStart(keyWord), token));
-		}
-	}
+    }
 
-	private String createWordStart(DocumentKeyWord keyWord) {
-		return keyWord.getText();
-	}
+    protected void buildWordRules(List<IPredicateRule> rules, IToken token, DocumentKeyWord[] values, IWordDetector wordDetector) {
+        for (DocumentKeyWord keyWord : values) {
+            rules.add(new ExactWordPatternRule(wordDetector, createWordStart(keyWord), token));
+        }
+    }
 
-	protected IToken createToken(DocumentIdentifier identifier) {
-		return new Token(identifier.getId());
-	}
+    private String createWordStart(DocumentKeyWord keyWord) {
+        return keyWord.getText();
+    }
+
+    protected IToken createToken(DocumentIdentifier identifier) {
+        return new Token(identifier.getId());
+    }
 
 }

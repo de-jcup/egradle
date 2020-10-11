@@ -31,37 +31,37 @@ import de.jcup.egradle.core.TextProviderException;
  */
 public class DocumentTextProvider implements TextProvider {
 
-	private IDocument document;
+    private IDocument document;
 
-	public DocumentTextProvider(IDocument document) {
-		notNull(document, "'document' may not be null");
-		this.document = document;
-	}
+    public DocumentTextProvider(IDocument document) {
+        notNull(document, "'document' may not be null");
+        this.document = document;
+    }
 
-	@Override
-	public String getText() {
-		return document.get();
-	}
+    @Override
+    public String getText() {
+        return document.get();
+    }
 
-	@Override
-	public String getText(int offset, int length) throws TextProviderException {
-		try {
-			return document.get(offset, length);
-		} catch (BadLocationException e) {
-			throw new TextProviderException("Cannot get document part for offset=" + offset + ", length=" + length, e);
-		}
-	}
+    @Override
+    public String getText(int offset, int length) throws TextProviderException {
+        try {
+            return document.get(offset, length);
+        } catch (BadLocationException e) {
+            throw new TextProviderException("Cannot get document part for offset=" + offset + ", length=" + length, e);
+        }
+    }
 
-	@Override
-	public int getLineOffset(int offset) throws TextProviderException {
-		int line;
-		try {
-			line = document.getLineOfOffset(offset);
-			int offsetOfFirstCharacterInLine = document.getLineOffset(line);
-			return offsetOfFirstCharacterInLine;
-		} catch (BadLocationException e) {
-			throw new TextProviderException("Cannot get line offset", e);
-		}
-	}
+    @Override
+    public int getLineOffset(int offset) throws TextProviderException {
+        int line;
+        try {
+            line = document.getLineOfOffset(offset);
+            int offsetOfFirstCharacterInLine = document.getLineOffset(line);
+            return offsetOfFirstCharacterInLine;
+        } catch (BadLocationException e) {
+            throw new TextProviderException("Cannot get line offset", e);
+        }
+    }
 
 }

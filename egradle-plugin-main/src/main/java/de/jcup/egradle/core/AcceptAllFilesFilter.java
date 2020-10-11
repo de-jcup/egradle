@@ -20,21 +20,21 @@ import java.io.FileFilter;
 
 public class AcceptAllFilesFilter implements FileFilter {
 
-	private boolean allowSubFolders;
+    private boolean allowSubFolders;
 
-	public AcceptAllFilesFilter(boolean allowSubFolders) {
-		this.allowSubFolders = allowSubFolders;
-	}
+    public AcceptAllFilesFilter(boolean allowSubFolders) {
+        this.allowSubFolders = allowSubFolders;
+    }
 
-	@Override
-	public boolean accept(File file) {
-		if (file.isDirectory()) {
-			if (allowSubFolders) {
-				return true;
-			}
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean accept(File file) {
+        if (file.isDirectory()) {
+            if (allowSubFolders) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
 
 }

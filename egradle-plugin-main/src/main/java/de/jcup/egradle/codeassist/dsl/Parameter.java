@@ -23,7 +23,7 @@ package de.jcup.egradle.codeassist.dsl;
  */
 public interface Parameter extends LanguageElement, Comparable<Parameter> {
 
-	public Type getType();
+    public Type getType();
 
-	public String getTypeAsString();
+    public String getTypeAsString();
 }

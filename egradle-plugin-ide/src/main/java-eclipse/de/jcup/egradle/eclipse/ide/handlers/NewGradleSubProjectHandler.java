@@ -27,29 +27,28 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class NewGradleSubProjectHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		EGradleMessageDialogSupport dialogSupport = EGradleMessageDialogSupport.INSTANCE;
-		GradleRootProject rootProject = IDEUtil.getRootProject(true);
-		if (!rootProject.isMultiProject()) {
-			dialogSupport.showError("Cannot add a subproject to a single project!");
-			return null;
-		}
-		String nameOfNewSubProject = dialogSupport.showInputDialog(
-				"Enter name of new sub project inside '" + rootProject.getName() + "'", "New Gradle sub project");
-		if (StringUtilsAccess.isBlank(nameOfNewSubProject)) {
-			return null;
-		}
-		try {
-			rootProject.createNewSubProject(nameOfNewSubProject);
-		} catch (GradleProjectException e) {
-			throw new ExecutionException("Was not able to create sub project:" + nameOfNewSubProject, e);
-		}
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        EGradleMessageDialogSupport dialogSupport = EGradleMessageDialogSupport.INSTANCE;
+        GradleRootProject rootProject = IDEUtil.getRootProject(true);
+        if (!rootProject.isMultiProject()) {
+            dialogSupport.showError("Cannot add a subproject to a single project!");
+            return null;
+        }
+        String nameOfNewSubProject = dialogSupport.showInputDialog("Enter name of new sub project inside '" + rootProject.getName() + "'", "New Gradle sub project");
+        if (StringUtilsAccess.isBlank(nameOfNewSubProject)) {
+            return null;
+        }
+        try {
+            rootProject.createNewSubProject(nameOfNewSubProject);
+        } catch (GradleProjectException e) {
+            throw new ExecutionException("Was not able to create sub project:" + nameOfNewSubProject, e);
+        }
 
-		/* trigger reimport */
-		ReimportGradleProjectHandler handler = new ReimportGradleProjectHandler();
-		handler.execute(event);
-		return null;
-	}
+        /* trigger reimport */
+        ReimportGradleProjectHandler handler = new ReimportGradleProjectHandler();
+        handler.execute(event);
+        return null;
+    }
 
 }

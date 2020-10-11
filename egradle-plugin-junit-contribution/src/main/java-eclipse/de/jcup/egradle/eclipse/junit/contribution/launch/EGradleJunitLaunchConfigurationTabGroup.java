@@ -23,8 +23,8 @@ import de.jcup.egradle.eclipse.ide.launch.EGradleLaunchConfigurationTabGroup;
 
 public class EGradleJunitLaunchConfigurationTabGroup extends EGradleLaunchConfigurationTabGroup {
 
-	@Override
-	protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
-		tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
-	}
+    @Override
+    protected void appendMainTab(Collection<ILaunchConfigurationTab> tabs) {
+        tabs.add(new EGradleJUnitLaunchConfigurationMainTab());
+    }
 }

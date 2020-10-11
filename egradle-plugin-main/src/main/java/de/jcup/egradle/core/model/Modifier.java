@@ -17,12 +17,12 @@ package de.jcup.egradle.core.model;
 
 public enum Modifier {
 
-	DEFAULT,
+    DEFAULT,
 
-	PRIVATE,
+    PRIVATE,
 
-	PROTECTED,
+    PROTECTED,
 
-	PUBLIC,
+    PUBLIC,
 
 }

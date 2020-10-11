@@ -19,17 +19,17 @@ import de.jcup.egradle.codeassist.dsl.CodeTemplateBuilder;
 
 class ClosureByStringCodeBuilder extends AbstractLazyCodeBuilder {
 
-	private String content;
-	private CodeTemplateBuilder builder;
+    private String content;
+    private CodeTemplateBuilder builder;
 
-	ClosureByStringCodeBuilder(String content, CodeTemplateBuilder builder) {
-		this.content = content;
-		this.builder = builder;
-	}
+    ClosureByStringCodeBuilder(String content, CodeTemplateBuilder builder) {
+        this.content = content;
+        this.builder = builder;
+    }
 
-	@Override
-	protected String createTemplate() {
-		return builder.createClosure(content);
-	}
+    @Override
+    protected String createTemplate() {
+        return builder.createClosure(content);
+    }
 
 }

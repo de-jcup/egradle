@@ -25,41 +25,40 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 
 public class EGradleDecorationPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private BooleanFieldEditor subProjectWithIconDecorationEnabled;
+    private BooleanFieldEditor subProjectWithIconDecorationEnabled;
 
-	public EGradleDecorationPreferencePage() {
-		super(GRID);
-		setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
-	}
+    public EGradleDecorationPreferencePage() {
+        super(GRID);
+        setPreferenceStore(IDEUtil.getPreferences().getPreferenceStore());
+    }
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
-	public void createFieldEditors() {
-		GridData groupLayoutData = new GridData();
-		groupLayoutData.horizontalAlignment = GridData.FILL;
-		groupLayoutData.verticalAlignment = GridData.BEGINNING;
-		groupLayoutData.grabExcessHorizontalSpace = true;
-		groupLayoutData.grabExcessVerticalSpace = false;
-		groupLayoutData.verticalSpan = 2;
-		groupLayoutData.horizontalSpan = 3;
+    /**
+     * Creates the field editors. Field editors are abstractions of the common GUI
+     * blocks needed to manipulate various types of preferences. Each field editor
+     * knows how to save and restore itself.
+     */
+    public void createFieldEditors() {
+        GridData groupLayoutData = new GridData();
+        groupLayoutData.horizontalAlignment = GridData.FILL;
+        groupLayoutData.verticalAlignment = GridData.BEGINNING;
+        groupLayoutData.grabExcessHorizontalSpace = true;
+        groupLayoutData.grabExcessVerticalSpace = false;
+        groupLayoutData.verticalSpan = 2;
+        groupLayoutData.horizontalSpan = 3;
 
-		subProjectWithIconDecorationEnabled = new BooleanFieldEditor(
-				EGradleIdePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(),
-				"Subproject are decorated with gradle icon", getFieldEditorParent());
-		addField(subProjectWithIconDecorationEnabled);
-	}
+        subProjectWithIconDecorationEnabled = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED.getId(), "Subproject are decorated with gradle icon",
+                getFieldEditorParent());
+        addField(subProjectWithIconDecorationEnabled);
+    }
 
-	public boolean performOk() {
-		boolean done = super.performOk();
-		IDEUtil.refreshAllProjectDecorations();
-		return done;
-	}
+    public boolean performOk() {
+        boolean done = super.performOk();
+        IDEUtil.refreshAllProjectDecorations();
+        return done;
+    }
 
-	public void init(IWorkbench workbench) {
+    public void init(IWorkbench workbench) {
 
-	}
+    }
 
 }

@@ -29,28 +29,26 @@ import de.jcup.egradle.eclipse.junit.contribution.ImportGradleJunitResultsJob;
 
 public class ExecuteGradleTestsAndImportAllJunitResultsHandler extends AbstractEGradleCommandHandler {
 
-	public static final String COMMAND_ID = "de.jcup.egradle.eclipse.ide.junit.contribution.commands.executeAllTestsAndimportTestResultCommand";
+    public static final String COMMAND_ID = "de.jcup.egradle.eclipse.ide.junit.contribution.commands.executeAllTestsAndimportTestResultCommand";
 
-	@Override
-	public void prepare(GradleContext context) {
-		String tasksToExecute =	JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks();
-		context.setCommands(GradleCommand.build(tasksToExecute));
-	}
+    @Override
+    public void prepare(GradleContext context) {
+        String tasksToExecute = JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks();
+        context.setCommands(GradleCommand.build(tasksToExecute));
+    }
 
-	@Override
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
-			throws GradleExecutionException {
-		/* execute tests*/
-		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
-				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshProjects(false);
-		ui.setShowEGradleSystemConsole(true);
-		/* when tests were executed do the import */
-		ui.setAfterExecution(() -> {
-			ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results", null, false);
-			job.schedule();
-		});
-		return ui;
-	}
+    @Override
+    protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
+        /* execute tests */
+        UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler, new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
+        ui.setRefreshProjects(false);
+        ui.setShowEGradleSystemConsole(true);
+        /* when tests were executed do the import */
+        ui.setAfterExecution(() -> {
+            ImportGradleJunitResultsJob job = new ImportGradleJunitResultsJob("Import gradle junit results", null, false);
+            job.schedule();
+        });
+        return ui;
+    }
 
 }

@@ -17,14 +17,14 @@ package de.jcup.egradle.codeassist;
 
 public interface LazyCodeBuilder {
 
-	String getCode(AbstractProposalImpl proposal, String leadingText);
+    String getCode(AbstractProposalImpl proposal, String leadingText);
 
-	int getCursorPos(AbstractProposalImpl proposal, String leadingText);
+    int getCursorPos(AbstractProposalImpl proposal, String leadingText);
 
-	/**
-	 * 
-	 * @return template, never <code>null</code>
-	 */
-	String getTemplate();
+    /**
+     * 
+     * @return template, never <code>null</code>
+     */
+    String getTemplate();
 
 }

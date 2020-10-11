@@ -41,157 +41,150 @@ import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJUnitLaunchShortCut extends EGradleLaunchShortCut {
 
-	/**
-	 * Returns the type of configuration this shortcut is applicable to.
-	 * 
-	 * @return the type of configuration this shortcut is applicable to
-	 */
-	protected ILaunchConfigurationType getConfigurationType() {
-		return getLaunchManager()
-				.getLaunchConfigurationType("de.jcup.egradle.junit.contribution.launchConfigurationType");
-	}
+    /**
+     * Returns the type of configuration this shortcut is applicable to.
+     * 
+     * @return the type of configuration this shortcut is applicable to
+     */
+    protected ILaunchConfigurationType getConfigurationType() {
+        return getLaunchManager().getLaunchConfigurationType("de.jcup.egradle.junit.contribution.launchConfigurationType");
+    }
 
-	@Override
-	protected void createCustomConfiguration(IResource resource, Object additionalScope,
-			ILaunchConfigurationWorkingCopy wc, String projectName) {
-		super.createCustomConfiguration(resource, additionalScope, wc, projectName);
+    @Override
+    protected void createCustomConfiguration(IResource resource, Object additionalScope, ILaunchConfigurationWorkingCopy wc, String projectName) {
+        super.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
-		if (!(resource instanceof IFile)) {
-			wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
-			return;
-		}
-		String fullClassName = null;
-		/* create package name for resource */
-		IFile file = (IFile) resource;
-		IJavaElement javaElement = JavaCore.create(file);
+        if (!(resource instanceof IFile)) {
+            wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE);
+            return;
+        }
+        String fullClassName = null;
+        /* create package name for resource */
+        IFile file = (IFile) resource;
+        IJavaElement javaElement = JavaCore.create(file);
 
-		if (javaElement instanceof ICompilationUnit) {
-			ICompilationUnit cu = (ICompilationUnit) javaElement;
-			try {
-				IType[] types = cu.getTypes();
-				if (types != null) {
-					for (IType type : types) {
-						fullClassName = type.getFullyQualifiedName();
-						if (fullClassName != null) {
-							break;
-						}
-					}
-				}
-			} catch (JavaModelException e) {
-				JunitUtil.logError("Was not able to get full class name", e);
-				return;
-			}
-		} else if (javaElement instanceof IType) {
-			IType type = (IType) javaElement;
-			fullClassName = type.getFullyQualifiedName();
-		}
-		/*
-		 * Fallback when having not a java type with correct full classname set.
-		 * Can happen when calls are done from a virtual root project path
-		 */
-		if (fullClassName.indexOf('.') == -1) {
-			/* not a real classpath... */
-			fullClassName = "*" + fullClassName + "*";
+        if (javaElement instanceof ICompilationUnit) {
+            ICompilationUnit cu = (ICompilationUnit) javaElement;
+            try {
+                IType[] types = cu.getTypes();
+                if (types != null) {
+                    for (IType type : types) {
+                        fullClassName = type.getFullyQualifiedName();
+                        if (fullClassName != null) {
+                            break;
+                        }
+                    }
+                }
+            } catch (JavaModelException e) {
+                JunitUtil.logError("Was not able to get full class name", e);
+                return;
+            }
+        } else if (javaElement instanceof IType) {
+            IType type = (IType) javaElement;
+            fullClassName = type.getFullyQualifiedName();
+        }
+        /*
+         * Fallback when having not a java type with correct full classname set. Can
+         * happen when calls are done from a virtual root project path
+         */
+        if (fullClassName.indexOf('.') == -1) {
+            /* not a real classpath... */
+            fullClassName = "*" + fullClassName + "*";
 
-		}
-		// for information about the gradle call
-		// see https://docs.gradle.org/1.10/release-notes
-		if (additionalScope instanceof IMethod) {
-			IMethod method = (IMethod) additionalScope;
-			String methodName = method.getElementName();
-			fullClassName += "." + methodName;
-			wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
-		}
-		wc.setAttribute(PROPERTY_TASKS,
-				EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
+        }
+        // for information about the gradle call
+        // see https://docs.gradle.org/1.10/release-notes
+        if (additionalScope instanceof IMethod) {
+            IMethod method = (IMethod) additionalScope;
+            String methodName = method.getElementName();
+            fullClassName += "." + methodName;
+            wc.setAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, methodName);
+        }
+        wc.setAttribute(PROPERTY_TASKS, EGradleJUnitTaskVariableReplacement.TASKS_VARIABLE + " --tests " + fullClassName);
 
-	}
+    }
 
-	@Override
-	protected String createLaunchConfigurationNameProposal(String projectName, IResource resource,
-			Object additionalScope) {
-		String name = super.createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
-		if (resource instanceof IFile) {
-			String fileName = getResourceHelper().getFileName(resource);
-			name = name + "#" + fileName;
-		}
-		if (additionalScope instanceof IMethod) {
-			IMethod method = (IMethod) additionalScope;
-			name = name + "." + method.getElementName();
-		}
-		return name;
-	}
+    @Override
+    protected String createLaunchConfigurationNameProposal(String projectName, IResource resource, Object additionalScope) {
+        String name = super.createLaunchConfigurationNameProposal(projectName, resource, additionalScope);
+        if (resource instanceof IFile) {
+            String fileName = getResourceHelper().getFileName(resource);
+            name = name + "#" + fileName;
+        }
+        if (additionalScope instanceof IMethod) {
+            IMethod method = (IMethod) additionalScope;
+            name = name + "." + method.getElementName();
+        }
+        return name;
+    }
 
-	protected void createTaskConfiguration(ILaunchConfigurationWorkingCopy wc) {
-		/* done ins custom confguration! */
-	}
+    protected void createTaskConfiguration(ILaunchConfigurationWorkingCopy wc) {
+        /* done ins custom confguration! */
+    }
 
-	protected String getChooseConfigurationTitle() {
-		return "Choose EGradle Junit Test config";
-	}
+    protected String getChooseConfigurationTitle() {
+        return "Choose EGradle Junit Test config";
+    }
 
-	@Override
-	protected Object resolveEditorAdditonalScope(IEditorPart editor) {
-		if (editor instanceof ITextEditor) {
-			ITextEditor textEditor = (ITextEditor) editor;
-			IMethod method = JavaHelper.SHARED.getCurrentSelectedJavaMethod(textEditor);
-			return method;
-		}
-		return null;
-	}
+    @Override
+    protected Object resolveEditorAdditonalScope(IEditorPart editor) {
+        if (editor instanceof ITextEditor) {
+            ITextEditor textEditor = (ITextEditor) editor;
+            IMethod method = JavaHelper.SHARED.getCurrentSelectedJavaMethod(textEditor);
+            return method;
+        }
+        return null;
+    }
 
-	@Override
-	protected boolean isResourceToMapFilesAllowed() {
-		/*
-		 * when launch configuration is used for a specific file this is okay
-		 * and the test will use the selected class file
-		 */
-		return true;
-	}
+    @Override
+    protected boolean isResourceToMapFilesAllowed() {
+        /*
+         * when launch configuration is used for a specific file this is okay and the
+         * test will use the selected class file
+         */
+        return true;
+    }
 
-	@Override
-	protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config)
-			throws CoreException {
+    @Override
+    protected boolean isConfigACandidate(IResource resource, Object additionalScope, ILaunchConfiguration config) throws CoreException {
 
-		boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
-		if (candidate) {
+        boolean candidate = super.isConfigACandidate(resource, additionalScope, config);
+        if (candidate) {
 
-			IResource[] resources = config.getMappedResources();
-			if (resources == null || resources.length == 0) {
-				return false;
-			}
-			IResource resourceToCheck = resources[0];
-			if (!resourceToCheck.exists()) {
-				return false;
-			}
-			if (resourceToCheck.getLocation().equals(resource.getLocation())) {
-				if (additionalScope instanceof IMethod) {
-					IMethod method = (IMethod) additionalScope;
-					String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
-							(String) null);
-					if (launchMethodName == null) {
-						/* method is wished... so not a candidate */
-						return false;
-					}
-					String selectedMethodName = method.getElementName();
-					if (launchMethodName.equals(selectedMethodName)) {
-						return true;
-					}
-					return false;
-				}
-				/*
-				 * without method selection - means all tests of class. So
-				 * filter launch configs with set method name...
-				 */
-				String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME,
-						(String) null);
-				if (launchMethodName == null) {
-					/* method is Not wished... so its a candidate */
-					return true;
-				}
-				return false;
-			}
-		}
-		return false;
-	}
+            IResource[] resources = config.getMappedResources();
+            if (resources == null || resources.length == 0) {
+                return false;
+            }
+            IResource resourceToCheck = resources[0];
+            if (!resourceToCheck.exists()) {
+                return false;
+            }
+            if (resourceToCheck.getLocation().equals(resource.getLocation())) {
+                if (additionalScope instanceof IMethod) {
+                    IMethod method = (IMethod) additionalScope;
+                    String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, (String) null);
+                    if (launchMethodName == null) {
+                        /* method is wished... so not a candidate */
+                        return false;
+                    }
+                    String selectedMethodName = method.getElementName();
+                    if (launchMethodName.equals(selectedMethodName)) {
+                        return true;
+                    }
+                    return false;
+                }
+                /*
+                 * without method selection - means all tests of class. So filter launch configs
+                 * with set method name...
+                 */
+                String launchMethodName = config.getAttribute(JunitIntegrationConstants.TEST_METHOD_NAME, (String) null);
+                if (launchMethodName == null) {
+                    /* method is Not wished... so its a candidate */
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
 }

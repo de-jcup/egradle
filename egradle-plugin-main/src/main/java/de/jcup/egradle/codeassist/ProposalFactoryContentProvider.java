@@ -26,28 +26,28 @@ import de.jcup.egradle.core.model.Model;
  */
 public interface ProposalFactoryContentProvider {
 
-	/**
-	 * @return model
-	 */
-	public Model getModel();
+    /**
+     * @return model
+     */
+    public Model getModel();
 
-	/**
-	 * @return relevant editor source code at given cursor position or
-	 *         <code>null</code>
-	 */
-	public String getEditorSourceEnteredAtCursorPosition();
+    /**
+     * @return relevant editor source code at given cursor position or
+     *         <code>null</code>
+     */
+    public String getEditorSourceEnteredAtCursorPosition();
 
-	/**
-	 * 
-	 * @return offset of first character in given line or -1
-	 */
-	public int getOffsetOfFirstCharacterInLine();
+    /**
+     * 
+     * @return offset of first character in given line or -1
+     */
+    public int getOffsetOfFirstCharacterInLine();
 
-	/**
-	 * @return column of given offset
-	 */
-	public String getLineTextBeforeCursorPosition();
+    /**
+     * @return column of given offset
+     */
+    public String getLineTextBeforeCursorPosition();
 
-	public GradleFileType getFileType();
+    public GradleFileType getFileType();
 
 }

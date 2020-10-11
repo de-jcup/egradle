@@ -43,70 +43,68 @@ import de.jcup.egradle.eclipse.ide.execution.RootProjectMissingExecutionExceptio
  */
 public abstract class AbstractEGradleCommandHandler extends AbstractHandler implements GradleContextPreparator {
 
-	public AbstractEGradleCommandHandler() {
-		init();
-	}
+    public AbstractEGradleCommandHandler() {
+        init();
+    }
 
-	protected void init() {
-	}
+    protected void init() {
+    }
 
-	protected enum ExecutionMode {
-		BLOCK_UI__CANCEABLE,
+    protected enum ExecutionMode {
+        BLOCK_UI__CANCEABLE,
 
-		RUN_IN_BACKGROUND__CANCEABLE
-	}
+        RUN_IN_BACKGROUND__CANCEABLE
+    }
 
-	protected ExecutionMode getExecutionMode() {
-		return ExecutionMode.RUN_IN_BACKGROUND__CANCEABLE;
-	}
+    protected ExecutionMode getExecutionMode() {
+        return ExecutionMode.RUN_IN_BACKGROUND__CANCEABLE;
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		/* create execution and fetch mode */
-		GradleExecutionDelegate execution = null;
-		try {
-			RememberLastLinesOutputHandler validationOutputHandler = IDEUtil
-					.createOutputHandlerForValidationErrorsOnConsole();
-			validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
-			execution = createGradleExecution(validationOutputHandler);
-		} catch (GradleExecutionException e) {
+        /* create execution and fetch mode */
+        GradleExecutionDelegate execution = null;
+        try {
+            RememberLastLinesOutputHandler validationOutputHandler = IDEUtil.createOutputHandlerForValidationErrorsOnConsole();
+            validationOutputHandler.setChainedOutputHandler(getSystemConsoleOutputHandler());
+            execution = createGradleExecution(validationOutputHandler);
+        } catch (GradleExecutionException e) {
 
-			if (e instanceof RootProjectMissingExecutionException) {
-				getDialogSupport().showMissingRootProjectDialog(e.getMessage());
-			} else {
-				getDialogSupport().showError(e.getMessage());
-			}
+            if (e instanceof RootProjectMissingExecutionException) {
+                getDialogSupport().showMissingRootProjectDialog(e.getMessage());
+            } else {
+                getDialogSupport().showError(e.getMessage());
+            }
 
-			return null;
-		}
-		ExecutionMode mode = getExecutionMode();
+            return null;
+        }
+        ExecutionMode mode = getExecutionMode();
 
-		/* execute */
-		switch (mode) {
-		case BLOCK_UI__CANCEABLE:
-			try {
-				GradleRunnableWithProgress runnable = new GradleRunnableWithProgress(execution);
-				IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
-				progressService.busyCursorWhile(runnable);
+        /* execute */
+        switch (mode) {
+        case BLOCK_UI__CANCEABLE:
+            try {
+                GradleRunnableWithProgress runnable = new GradleRunnableWithProgress(execution);
+                IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
+                progressService.busyCursorWhile(runnable);
 
-			} catch (InvocationTargetException | InterruptedException e) {
-				throw new ExecutionException("Cannot execute action...", e);
-			}
-			break;
-		case RUN_IN_BACKGROUND__CANCEABLE:
-			GradleJob job = new GradleJob("gradle execution", execution);
-			job.schedule();
-			break;
+            } catch (InvocationTargetException | InterruptedException e) {
+                throw new ExecutionException("Cannot execute action...", e);
+            }
+            break;
+        case RUN_IN_BACKGROUND__CANCEABLE:
+            GradleJob job = new GradleJob("gradle execution", execution);
+            job.schedule();
+            break;
 
-		default:
-			throw new IllegalArgumentException("Not implemented for mode:" + mode);
-		}
+        default:
+            throw new IllegalArgumentException("Not implemented for mode:" + mode);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
-			throws GradleExecutionException;
+    protected abstract GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException;
 
 }

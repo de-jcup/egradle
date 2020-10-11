@@ -32,70 +32,68 @@ import de.jcup.egradle.core.model.Model;
  *
  */
 public class StaticOffsetProposalFactoryContentProvider implements ProposalFactoryContentProvider {
-	private String relevant;
-	private ModelProvider modelProvider;
-	private TextProvider textProvider;
-	private RelevantCodeCutter codeCutter;
-	private int length;
-	private int offsetOfFirstCharacterInLine;
-	private int offset;
-	private GradleFileType fileType;
-	private String lineTextBeforeCursorPosition;
+    private String relevant;
+    private ModelProvider modelProvider;
+    private TextProvider textProvider;
+    private RelevantCodeCutter codeCutter;
+    private int length;
+    private int offsetOfFirstCharacterInLine;
+    private int offset;
+    private GradleFileType fileType;
+    private String lineTextBeforeCursorPosition;
 
-	public StaticOffsetProposalFactoryContentProvider(GradleFileType fileType, ModelProvider modelProvider,
-			TextProvider textProvider, RelevantCodeCutter codeCutter, int offset)
-			throws ProposalFactoryContentProviderException {
-		notNull(fileType, "'fileType' may not be null");
-		notNull(modelProvider, "'modelProvider' may not be null");
-		notNull(textProvider, "'textProvider' may not be null");
-		notNull(codeCutter, "'codeCutter' may not be null");
+    public StaticOffsetProposalFactoryContentProvider(GradleFileType fileType, ModelProvider modelProvider, TextProvider textProvider, RelevantCodeCutter codeCutter, int offset)
+            throws ProposalFactoryContentProviderException {
+        notNull(fileType, "'fileType' may not be null");
+        notNull(modelProvider, "'modelProvider' may not be null");
+        notNull(textProvider, "'textProvider' may not be null");
+        notNull(codeCutter, "'codeCutter' may not be null");
 
-		this.fileType = fileType;
-		this.offset = offset;
-		this.modelProvider = modelProvider;
-		this.textProvider = textProvider;
-		this.codeCutter = codeCutter;
-		try {
-			offsetOfFirstCharacterInLine = textProvider.getLineOffset(offset);
-			this.length = offset - offsetOfFirstCharacterInLine;
-			this.lineTextBeforeCursorPosition = textProvider.getText(offsetOfFirstCharacterInLine, length);
-		} catch (TextProviderException e) {
-			throw new ProposalFactoryContentProviderException("Cannot get line text before cursor position", e);
-		}
-	}
+        this.fileType = fileType;
+        this.offset = offset;
+        this.modelProvider = modelProvider;
+        this.textProvider = textProvider;
+        this.codeCutter = codeCutter;
+        try {
+            offsetOfFirstCharacterInLine = textProvider.getLineOffset(offset);
+            this.length = offset - offsetOfFirstCharacterInLine;
+            this.lineTextBeforeCursorPosition = textProvider.getText(offsetOfFirstCharacterInLine, length);
+        } catch (TextProviderException e) {
+            throw new ProposalFactoryContentProviderException("Cannot get line text before cursor position", e);
+        }
+    }
 
-	@Override
-	public Model getModel() {
-		return modelProvider.getModel();
-	}
+    @Override
+    public Model getModel() {
+        return modelProvider.getModel();
+    }
 
-	@Override
-	public String getEditorSourceEnteredAtCursorPosition() {
-		/*
-		 * the content provider is only used one time per cursor offset - so we
-		 * simply cache the relevant calculation iniside internal string to
-		 * speed up...
-		 */
-		if (relevant == null) {
-			String code = textProvider.getText();
-			relevant = codeCutter.getRelevantCode(code, offset);
-		}
-		return relevant;
+    @Override
+    public String getEditorSourceEnteredAtCursorPosition() {
+        /*
+         * the content provider is only used one time per cursor offset - so we simply
+         * cache the relevant calculation iniside internal string to speed up...
+         */
+        if (relevant == null) {
+            String code = textProvider.getText();
+            relevant = codeCutter.getRelevantCode(code, offset);
+        }
+        return relevant;
 
-	}
+    }
 
-	@Override
-	public int getOffsetOfFirstCharacterInLine() {
-		return offsetOfFirstCharacterInLine;
-	}
+    @Override
+    public int getOffsetOfFirstCharacterInLine() {
+        return offsetOfFirstCharacterInLine;
+    }
 
-	@Override
-	public String getLineTextBeforeCursorPosition() {
-		return lineTextBeforeCursorPosition;
-	}
+    @Override
+    public String getLineTextBeforeCursorPosition() {
+        return lineTextBeforeCursorPosition;
+    }
 
-	@Override
-	public GradleFileType getFileType() {
-		return fileType;
-	}
+    @Override
+    public GradleFileType getFileType() {
+        return fileType;
+    }
 }

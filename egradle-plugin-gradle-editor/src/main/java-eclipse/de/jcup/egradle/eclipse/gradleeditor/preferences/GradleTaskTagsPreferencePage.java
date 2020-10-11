@@ -13,15 +13,15 @@
  * and limitations under the License.
  *
  */
- package de.jcup.egradle.eclipse.gradleeditor.preferences;
+package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
 import de.jcup.eclipse.commons.tasktags.AbstractTaskTagsPreferencePage;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 
-public class GradleTaskTagsPreferencePage extends AbstractTaskTagsPreferencePage{
+public class GradleTaskTagsPreferencePage extends AbstractTaskTagsPreferencePage {
 
-	public GradleTaskTagsPreferencePage() {
-		super(EditorActivator.getDefault().getTaskSupportProvider(), "EGradle todos","Define your todos inside your gradle files");
-	}
+    public GradleTaskTagsPreferencePage() {
+        super(EditorActivator.getDefault().getTaskSupportProvider(), "EGradle todos", "Define your todos inside your gradle files");
+    }
 
 }

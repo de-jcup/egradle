@@ -17,26 +17,26 @@ package de.jcup.egradle.core.util;
 
 public interface ErrorHandler {
 
-	public static final ErrorHandler IGNORE_ERRORS = new IgnoreErrorHandler();
+    public static final ErrorHandler IGNORE_ERRORS = new IgnoreErrorHandler();
 
-	public void handleError(String message);
+    public void handleError(String message);
 
-	public void handleError(String message, Throwable t);
+    public void handleError(String message, Throwable t);
 
-	static class IgnoreErrorHandler implements ErrorHandler {
+    static class IgnoreErrorHandler implements ErrorHandler {
 
-		private IgnoreErrorHandler() {
+        private IgnoreErrorHandler() {
 
-		}
+        }
 
-		@Override
-		public void handleError(String message) {
+        @Override
+        public void handleError(String message) {
 
-		}
+        }
 
-		@Override
-		public void handleError(String message, Throwable t) {
+        @Override
+        public void handleError(String message, Throwable t) {
 
-		}
-	}
+        }
+    }
 }

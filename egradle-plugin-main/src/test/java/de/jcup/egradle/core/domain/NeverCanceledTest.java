@@ -21,9 +21,9 @@ import org.junit.Test;
 
 public class NeverCanceledTest {
 
-	@Test
-	public void never_canceld_returns_false_for_canceled() {
-		assertFalse(CancelStateProvider.NEVER_CANCELED.isCanceled());
-	}
+    @Test
+    public void never_canceld_returns_false_for_canceled() {
+        assertFalse(CancelStateProvider.NEVER_CANCELED.isCanceled());
+    }
 
 }

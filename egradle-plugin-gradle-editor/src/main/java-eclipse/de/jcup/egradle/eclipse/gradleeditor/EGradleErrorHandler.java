@@ -19,20 +19,20 @@ import de.jcup.egradle.core.util.ErrorHandler;
 
 public class EGradleErrorHandler implements ErrorHandler {
 
-	public static EGradleErrorHandler INSTANCE = new EGradleErrorHandler();
+    public static EGradleErrorHandler INSTANCE = new EGradleErrorHandler();
 
-	EGradleErrorHandler() {
+    EGradleErrorHandler() {
 
-	}
+    }
 
-	@Override
-	public void handleError(String message, Throwable t) {
-		EditorUtil.INSTANCE.logError(message, t);
-	}
+    @Override
+    public void handleError(String message, Throwable t) {
+        EditorUtil.INSTANCE.logError(message, t);
+    }
 
-	@Override
-	public void handleError(String message) {
-		EditorUtil.INSTANCE.logError(message, null);
-	}
+    @Override
+    public void handleError(String message) {
+        EditorUtil.INSTANCE.logError(message, null);
+    }
 
 }

@@ -22,56 +22,56 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 class PathStatus extends Status implements IResourceStatus {
-	private IPath path;
+    private IPath path;
 
-	private PathStatus(int type, int code, IPath path, String message, Throwable exception) {
-		super(type, ResourcesPlugin.PI_RESOURCES, code, message, exception);
-		this.path = path;
-	}
+    private PathStatus(int type, int code, IPath path, String message, Throwable exception) {
+        super(type, ResourcesPlugin.PI_RESOURCES, code, message, exception);
+        this.path = path;
+    }
 
-	PathStatus(int code, IPath path, String message, Throwable exception) {
-		this(getSeverity(code), code, path, message, exception);
-	}
+    PathStatus(int code, IPath path, String message, Throwable exception) {
+        this(getSeverity(code), code, path, message, exception);
+    }
 
-	@Override
-	public IPath getPath() {
-		return path;
-	}
+    @Override
+    public IPath getPath() {
+        return path;
+    }
 
-	private static int getSeverity(int code) {
-		return code == 0 ? 0 : 1 << (code % 100 / 33);
-	}
+    private static int getSeverity(int code) {
+        return code == 0 ? 0 : 1 << (code % 100 / 33);
+    }
 
-	private String getTypeName() {
-		switch (getSeverity()) {
-		case IStatus.OK:
-			return "OK"; //$NON-NLS-1$
-		case IStatus.ERROR:
-			return "ERROR"; //$NON-NLS-1$
-		case IStatus.INFO:
-			return "INFO"; //$NON-NLS-1$
-		case IStatus.WARNING:
-			return "WARNING"; //$NON-NLS-1$
-		default:
-			return String.valueOf(getSeverity());
-		}
-	}
+    private String getTypeName() {
+        switch (getSeverity()) {
+        case IStatus.OK:
+            return "OK"; //$NON-NLS-1$
+        case IStatus.ERROR:
+            return "ERROR"; //$NON-NLS-1$
+        case IStatus.INFO:
+            return "INFO"; //$NON-NLS-1$
+        case IStatus.WARNING:
+            return "WARNING"; //$NON-NLS-1$
+        default:
+            return String.valueOf(getSeverity());
+        }
+    }
 
-	// for debug only
-	@Override
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("[type: "); //$NON-NLS-1$
-		sb.append(getTypeName());
-		sb.append("], [path: "); //$NON-NLS-1$
-		sb.append(getPath());
-		sb.append("], [message: "); //$NON-NLS-1$
-		sb.append(getMessage());
-		sb.append("], [plugin: "); //$NON-NLS-1$
-		sb.append(getPlugin());
-		sb.append("], [exception: "); //$NON-NLS-1$
-		sb.append(getException());
-		sb.append("]\n"); //$NON-NLS-1$
-		return sb.toString();
-	}
+    // for debug only
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("[type: "); //$NON-NLS-1$
+        sb.append(getTypeName());
+        sb.append("], [path: "); //$NON-NLS-1$
+        sb.append(getPath());
+        sb.append("], [message: "); //$NON-NLS-1$
+        sb.append(getMessage());
+        sb.append("], [plugin: "); //$NON-NLS-1$
+        sb.append(getPlugin());
+        sb.append("], [exception: "); //$NON-NLS-1$
+        sb.append(getException());
+        sb.append("]\n"); //$NON-NLS-1$
+        return sb.toString();
+    }
 }

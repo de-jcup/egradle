@@ -21,5 +21,5 @@ import de.jcup.egradle.core.util.Filter;
 
 public class GroovyModelFilters {
 
-	public static final Filter FILTER_IMPORTS = new GroovyTokenTypefilter(GroovyTokenTypes.IMPORT);
+    public static final Filter FILTER_IMPORTS = new GroovyTokenTypefilter(GroovyTokenTypes.IMPORT);
 }

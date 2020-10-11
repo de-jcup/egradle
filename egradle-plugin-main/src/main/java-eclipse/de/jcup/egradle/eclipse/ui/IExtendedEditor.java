@@ -24,13 +24,13 @@ import de.jcup.egradle.core.util.ILogSupport;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 
 public interface IExtendedEditor extends ITextEditor {
-	public IDocument getDocument();
+    public IDocument getDocument();
 
-	public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus, boolean fullSelection);
+    public void openSelectedTreeItemInEditor(ISelection selection, boolean grabFocus, boolean fullSelection);
 
-	public ILogSupport getLogSupport();
+    public ILogSupport getLogSupport();
 
-	public IEditorPreferences getPreferences();
+    public IEditorPreferences getPreferences();
 
-	public Item getItemAtCarretPosition();
+    public Item getItemAtCarretPosition();
 }

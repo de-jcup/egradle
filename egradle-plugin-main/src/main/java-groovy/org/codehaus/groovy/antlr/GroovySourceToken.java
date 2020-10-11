@@ -41,75 +41,72 @@ import antlr.Token;
  * @author Jochen Theodorou
  */
 public class GroovySourceToken extends Token implements SourceInfo {
-	protected int line;
-	protected String text = "";
-	protected int col;
-	protected int lineLast;
-	protected int colLast;
+    protected int line;
+    protected String text = "";
+    protected int col;
+    protected int lineLast;
+    protected int colLast;
 
-	/**
-	 * Constructor using a token type
-	 * 
-	 * @param t
-	 *            the type
-	 */
-	public GroovySourceToken(int t) {
-		super(t);
-	}
+    /**
+     * Constructor using a token type
+     * 
+     * @param t the type
+     */
+    public GroovySourceToken(int t) {
+        super(t);
+    }
 
-	public int getLine() {
-		return line;
-	}
+    public int getLine() {
+        return line;
+    }
 
-	/**
-	 * get the source token text
-	 * 
-	 * @return the source token text
-	 */
-	public String getText() {
-		return text;
-	}
+    /**
+     * get the source token text
+     * 
+     * @return the source token text
+     */
+    public String getText() {
+        return text;
+    }
 
-	public void setLine(int l) {
-		line = l;
-	}
+    public void setLine(int l) {
+        line = l;
+    }
 
-	/**
-	 * set the source token text
-	 * 
-	 * @param s
-	 *            the text
-	 */
-	public void setText(String s) {
-		text = s;
-	}
+    /**
+     * set the source token text
+     * 
+     * @param s the text
+     */
+    public void setText(String s) {
+        text = s;
+    }
 
-	public String toString() {
-		return "[\"" + getText() + "\",<" + type + ">," + "line=" + line + ",col=" + col + ",lineLast=" + lineLast
-				+ ",colLast=" + colLast + "]";
-	}
+    public String toString() {
+        return "[\"" + getText() + "\",<" + type + ">," + "line=" + line + ",col=" + col + ",lineLast=" + lineLast + ",colLast=" + colLast + "]";
+    }
 
-	public int getColumn() {
-		return col;
-	}
+    public int getColumn() {
+        return col;
+    }
 
-	public void setColumn(int c) {
-		col = c;
-	}
+    public void setColumn(int c) {
+        col = c;
+    }
 
-	public int getLineLast() {
-		return lineLast;
-	}
+    public int getLineLast() {
+        return lineLast;
+    }
 
-	public void setLineLast(int lineLast) {
-		this.lineLast = lineLast;
-	}
+    public void setLineLast(int lineLast) {
+        this.lineLast = lineLast;
+    }
 
-	public int getColumnLast() {
-		return colLast;
-	}
+    public int getColumnLast() {
+        return colLast;
+    }
 
-	public void setColumnLast(int colLast) {
-		this.colLast = colLast;
-	}
+    public void setColumnLast(int colLast) {
+        this.colLast = colLast;
+    }
 }

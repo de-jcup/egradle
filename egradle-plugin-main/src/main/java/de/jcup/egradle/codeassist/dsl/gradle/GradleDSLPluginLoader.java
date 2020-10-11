@@ -31,49 +31,49 @@ import de.jcup.egradle.core.util.ErrorHandler;
 
 public class GradleDSLPluginLoader implements CodeCompletionService, RegistryListener {
 
-	protected DSLFileLoader fileLoader;
-	private ErrorHandler errorHandler;
+    protected DSLFileLoader fileLoader;
+    private ErrorHandler errorHandler;
 
-	public GradleDSLPluginLoader(DSLFileLoader loader) {
-		if (loader == null) {
-			throw new IllegalArgumentException("loader may never be null!");
-		}
-		this.fileLoader = loader;
-	}
+    public GradleDSLPluginLoader(DSLFileLoader loader) {
+        if (loader == null) {
+            throw new IllegalArgumentException("loader may never be null!");
+        }
+        this.fileLoader = loader;
+    }
 
-	@Override
-	public void onCodeCompletionEvent(RegistryEvent event) {
-		if (event.getType() != RegistryEventType.LOAD_PLUGINS) {
-			return;
-		}
-		CodeCompletionRegistry registry = event.getRegistry();
-		GradleDSLTypeProvider typeProvider = registry.getService(GradleDSLTypeProvider.class);
-		PluginMerger merger = new PluginMerger(typeProvider, getErrorHandler());
+    @Override
+    public void onCodeCompletionEvent(RegistryEvent event) {
+        if (event.getType() != RegistryEventType.LOAD_PLUGINS) {
+            return;
+        }
+        CodeCompletionRegistry registry = event.getRegistry();
+        GradleDSLTypeProvider typeProvider = registry.getService(GradleDSLTypeProvider.class);
+        PluginMerger merger = new PluginMerger(typeProvider, getErrorHandler());
 
-		Set<Plugin> plugins;
-		/* load plugins.xml */
-		try {
-			plugins = fileLoader.loadPlugins();
-		} catch (IOException e) {
-			if (errorHandler != null) {
-				errorHandler.handleError("Cannot load plugins.xml", e);
-			}
-			plugins = new LinkedHashSet<>();
-		}
+        Set<Plugin> plugins;
+        /* load plugins.xml */
+        try {
+            plugins = fileLoader.loadPlugins();
+        } catch (IOException e) {
+            if (errorHandler != null) {
+                errorHandler.handleError("Cannot load plugins.xml", e);
+            }
+            plugins = new LinkedHashSet<>();
+        }
 
-		merger.merge(plugins);
+        merger.merge(plugins);
 
-	}
+    }
 
-	public void setErrorHandler(ErrorHandler errorHandler) {
-		this.errorHandler = errorHandler;
-	}
+    public void setErrorHandler(ErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
 
-	protected ErrorHandler getErrorHandler() {
-		if (errorHandler == null) {
-			return ErrorHandler.IGNORE_ERRORS;
-		}
-		return errorHandler;
-	}
+    protected ErrorHandler getErrorHandler() {
+        if (errorHandler == null) {
+            return ErrorHandler.IGNORE_ERRORS;
+        }
+        return errorHandler;
+    }
 
 }

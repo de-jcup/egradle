@@ -31,66 +31,65 @@ import de.jcup.egradle.eclipse.ui.PersistedMarkerHelper;
 
 public class GradleEditorOutlineContentProvider extends AbstractGroovyBasedEditorOutlineContentProvider {
 
-	protected static final GradleOutlineItemFilter GRADLE_FILTER = new GradleOutlineItemFilter();
+    protected static final GradleOutlineItemFilter GRADLE_FILTER = new GradleOutlineItemFilter();
 
-	public GradleEditorOutlineContentProvider(IAdaptable adaptable) {
-		outlineErrorMarkerHelper = createOutlineErrorMarkerHelper();
-		if (adaptable == null) {
-			return;
-		}
-		this.editor = adaptable.getAdapter(IExtendedEditor.class);
-		this.logSupport = editor.getLogSupport();
-	}
+    public GradleEditorOutlineContentProvider(IAdaptable adaptable) {
+        outlineErrorMarkerHelper = createOutlineErrorMarkerHelper();
+        if (adaptable == null) {
+            return;
+        }
+        this.editor = adaptable.getAdapter(IExtendedEditor.class);
+        this.logSupport = editor.getLogSupport();
+    }
 
-	protected PersistedMarkerHelper createOutlineErrorMarkerHelper() {
-		return new PersistedMarkerHelper("de.jcup.egradle.parse.error");
-	}
+    protected PersistedMarkerHelper createOutlineErrorMarkerHelper() {
+        return new PersistedMarkerHelper("de.jcup.egradle.parse.error");
+    }
 
-	protected GroovyBasedModelType createDefaultModelType() {
-		return GradleModelTypes.GRADLE;
-	}
+    protected GroovyBasedModelType createDefaultModelType() {
+        return GradleModelTypes.GRADLE;
+    }
 
-	Object[] buildGradleModel(String charset, InputStream is, boolean filteringEnabled) throws Exception {
-		GradleModelBuilder builder = new GradleModelBuilder(is);
-		if (filteringEnabled) {
-			builder.setPreCreationFilter(getPreCreationFilterFilter());
-			builder.setPostCreationFilter(getPostCreationFilter());
-		}
+    Object[] buildGradleModel(String charset, InputStream is, boolean filteringEnabled) throws Exception {
+        GradleModelBuilder builder = new GradleModelBuilder(is);
+        if (filteringEnabled) {
+            builder.setPreCreationFilter(getPreCreationFilterFilter());
+            builder.setPostCreationFilter(getPostCreationFilter());
+        }
 
-		BuildContext context = new BuildContext();
-		Object[] elements = createModelAndGetRootElements(context, builder);
-		appendError(context);
-		return elements;
-	}
+        BuildContext context = new BuildContext();
+        Object[] elements = createModelAndGetRootElements(context, builder);
+        appendError(context);
+        return elements;
+    }
 
-	protected Object[] createElements(String charset, InputStream is, GroovyBasedModelType groovyBasedModelType)
-			throws Exception {
-		if (GradleModelTypes.GROOVY_FULL_ANTLR.equals(groovyBasedModelType)) {
-			return buildGroovyASTModel(charset, is);
-		} else if (GradleModelTypes.GRADLE.equals(groovyBasedModelType)) {
-			return buildGradleModel(charset, is, true);
-		} else if (GradleModelTypes.GRADLE__UNFILTERED.equals(groovyBasedModelType)) {
-			return buildGradleModel(charset, is, false);
-		}
-		return null;
-	}
+    protected Object[] createElements(String charset, InputStream is, GroovyBasedModelType groovyBasedModelType) throws Exception {
+        if (GradleModelTypes.GROOVY_FULL_ANTLR.equals(groovyBasedModelType)) {
+            return buildGroovyASTModel(charset, is);
+        } else if (GradleModelTypes.GRADLE.equals(groovyBasedModelType)) {
+            return buildGradleModel(charset, is, true);
+        } else if (GradleModelTypes.GRADLE__UNFILTERED.equals(groovyBasedModelType)) {
+            return buildGradleModel(charset, is, false);
+        }
+        return null;
+    }
 
-	protected GradleOutlineItemFilter getPostCreationFilter() {
-		return GRADLE_FILTER;
-	}
+    protected GradleOutlineItemFilter getPostCreationFilter() {
+        return GRADLE_FILTER;
+    }
 
-	protected Filter getPreCreationFilterFilter() {
-		if (filter == null) {
-			MultiFilter mfilter = new MultiFilter();
-			/*
-			 * TODO ATR, 18.11.2016 - make this settings configurable for user -
-			 * as done in java outline
-			 */
-			mfilter.add(GroovyModelFilters.FILTER_IMPORTS);
-			filter = mfilter;
+    protected Filter getPreCreationFilterFilter() {
+        if (filter == null) {
+            MultiFilter mfilter = new MultiFilter();
+            /*
+             * TODO ATR, 18.11.2016 - make this settings configurable for user - as done in
+             * java outline
+             */
+            mfilter.add(GroovyModelFilters.FILTER_IMPORTS);
+            filter = mfilter;
 
-		}
-		return filter;
-	}
+        }
+        return filter;
+    }
 
 }

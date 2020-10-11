@@ -20,23 +20,23 @@ import org.eclipse.swt.widgets.Shell;
 
 public class SelectConfigurationDialogTestMain {
 
-	Display d;
+    Display d;
 
-	Shell s;
+    Shell s;
 
-	SelectConfigurationDialogTestMain() {
-		d = new Display();
-		s = new Shell(d);
-		s.setSize(250, 250);
-		s.setText("A select configuration dialog test");
+    SelectConfigurationDialogTestMain() {
+        d = new Display();
+        s = new Shell(d);
+        s.setSize(250, 250);
+        s.setText("A select configuration dialog test");
 
-		SelectConfigurationDialog selectConfigurationDialog = new SelectConfigurationDialog(s);
-		String configuration = selectConfigurationDialog.open();
-		System.out.println("configuration selected:" + configuration);
-		d.dispose();
-	}
+        SelectConfigurationDialog selectConfigurationDialog = new SelectConfigurationDialog(s);
+        String configuration = selectConfigurationDialog.open();
+        System.out.println("configuration selected:" + configuration);
+        d.dispose();
+    }
 
-	public static void main(String[] argv) {
-		new SelectConfigurationDialogTestMain();
-	}
+    public static void main(String[] argv) {
+        new SelectConfigurationDialogTestMain();
+    }
 }

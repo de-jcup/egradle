@@ -45,179 +45,176 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class GradleTextHover implements ITextHover, ITextHoverExtension {
 
-	private HTMLDescriptionBuilder builder;
-	private GradleSourceViewerConfiguration gradleSourceViewerConfiguration;
-	private ISourceViewer sourceViewer;
-	private String contentType;
-	private IInformationControlCreator creator;
+    private HTMLDescriptionBuilder builder;
+    private GradleSourceViewerConfiguration gradleSourceViewerConfiguration;
+    private ISourceViewer sourceViewer;
+    private String contentType;
+    private IInformationControlCreator creator;
 
-	private String fgColor;
-	private String bgColor;
-	private RelevantCodeCutter codeCutter;
-	private HoverSupport hoverSupport;
-	private String commentColorWeb;
+    private String fgColor;
+    private String bgColor;
+    private RelevantCodeCutter codeCutter;
+    private HoverSupport hoverSupport;
+    private String commentColorWeb;
 
-	public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer,
-			String contentType) {
-		this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
-		this.sourceViewer = sourceViewer;
-		this.contentType = contentType;
+    public GradleTextHover(GradleSourceViewerConfiguration gradleSourceViewerConfiguration, ISourceViewer sourceViewer, String contentType) {
+        this.gradleSourceViewerConfiguration = gradleSourceViewerConfiguration;
+        this.sourceViewer = sourceViewer;
+        this.contentType = contentType;
 
-		builder = new HTMLDescriptionBuilder();
-		codeCutter = new RelevantCodeCutter();
-		hoverSupport = new HoverSupport();
-	}
+        builder = new HTMLDescriptionBuilder();
+        codeCutter = new RelevantCodeCutter();
+        hoverSupport = new HoverSupport();
+    }
 
-	@Override
-	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		HoverDataRegion region = getLanguageElementAt(offset, textViewer);
-		if (region != null) {
-			return region;
-		}
-		return null;// do not hover!
-	}
+    @Override
+    public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
+        HoverDataRegion region = getLanguageElementAt(offset, textViewer);
+        if (region != null) {
+            return region;
+        }
+        return null;// do not hover!
+    }
 
-	@Override
-	public IInformationControlCreator getHoverControlCreator() {
-		if (creator == null) {
-			creator = new GradleTextHoverControlCreator();
-		}
-		return creator;
-	}
+    @Override
+    public IInformationControlCreator getHoverControlCreator() {
+        if (creator == null) {
+            creator = new GradleTextHoverControlCreator();
+        }
+        return creator;
+    }
 
-	@Override
-	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-		if (!EditorUtil.getPreferences().isCodeAssistTooltipsEnabled()) {
-			return null;
-		}
+    @Override
+    public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+        if (!EditorUtil.getPreferences().isCodeAssistTooltipsEnabled()) {
+            return null;
+        }
 
-		HoverData data = null;
-		if (hoverRegion instanceof HoverDataRegion) {
-			HoverDataRegion hdr = (HoverDataRegion) hoverRegion;
-			data = hdr.getData();
-		}
-		if (data == null) {
-			HoverDataRegion hdr = getLanguageElementAt(hoverRegion.getOffset(), textViewer);
-			if (hdr != null) {
-				data = hdr.getData();
-			}
-		}
-		if (data == null) {
-			return null;
-		}
-		if (data.getItem() == null) {
-			return null;
-		}
-		EstimationResult dataEstimationResult = data.getResult();
-		if (dataEstimationResult == null) {
-			return null;
-		}
-		LanguageElement element = dataEstimationResult.getElement();
-		if (element == null) {
-			return null;
-		}
-		if (bgColor == null || fgColor == null) {
+        HoverData data = null;
+        if (hoverRegion instanceof HoverDataRegion) {
+            HoverDataRegion hdr = (HoverDataRegion) hoverRegion;
+            data = hdr.getData();
+        }
+        if (data == null) {
+            HoverDataRegion hdr = getLanguageElementAt(hoverRegion.getOffset(), textViewer);
+            if (hdr != null) {
+                data = hdr.getData();
+            }
+        }
+        if (data == null) {
+            return null;
+        }
+        if (data.getItem() == null) {
+            return null;
+        }
+        EstimationResult dataEstimationResult = data.getResult();
+        if (dataEstimationResult == null) {
+            return null;
+        }
+        LanguageElement element = dataEstimationResult.getElement();
+        if (element == null) {
+            return null;
+        }
+        if (bgColor == null || fgColor == null) {
 
-			StyledText textWidget = textViewer.getTextWidget();
-			if (textWidget != null) {
+            StyledText textWidget = textViewer.getTextWidget();
+            if (textWidget != null) {
 
-				/*
-				 * TODO ATR, 03.02.2017: there should be an easier approach to
-				 * get editors back and foreground, without syncexec
-				 */
-				EclipseUtil.getSafeDisplay().syncExec(new Runnable() {
+                /*
+                 * TODO ATR, 03.02.2017: there should be an easier approach to get editors back
+                 * and foreground, without syncexec
+                 */
+                EclipseUtil.getSafeDisplay().syncExec(new Runnable() {
 
-					@Override
-					public void run() {
-						bgColor = ColorUtil.convertToHexColor(textWidget.getBackground());
-						fgColor = ColorUtil.convertToHexColor(textWidget.getForeground());
-					}
-				});
-			}
+                    @Override
+                    public void run() {
+                        bgColor = ColorUtil.convertToHexColor(textWidget.getBackground());
+                        fgColor = ColorUtil.convertToHexColor(textWidget.getForeground());
+                    }
+                });
+            }
 
-		}
-		if (commentColorWeb == null) {
-			commentColorWeb = EditorUtil.getPreferences()
-					.getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
-		}
+        }
+        if (commentColorWeb == null) {
+            commentColorWeb = EditorUtil.getPreferences().getWebColor(GradleEditorSyntaxColorPreferenceConstants.COLOR_COMMENT);
+        }
 
-		String prefix = null;
-		double reliability = dataEstimationResult.getReliability();
-		if (reliability < 80) {
-			prefix = "<div class='warnSmall'>This type estimation has a reliability of:" + reliability + "</div>";
-		}
-		return builder.buildHTMLDescription(fgColor, bgColor, commentColorWeb, data, element, prefix);
-	}
+        String prefix = null;
+        double reliability = dataEstimationResult.getReliability();
+        if (reliability < 80) {
+            prefix = "<div class='warnSmall'>This type estimation has a reliability of:" + reliability + "</div>";
+        }
+        return builder.buildHTMLDescription(fgColor, bgColor, commentColorWeb, data, element, prefix);
+    }
 
-	private class HoverDataRegion implements IRegion {
+    private class HoverDataRegion implements IRegion {
 
-		private HoverData data;
+        private HoverData data;
 
-		private HoverDataRegion(HoverData data) {
-			if (data == null) {
-				throw new IllegalArgumentException("hover data may not be null");
-			}
-			this.data = data;
-		}
+        private HoverDataRegion(HoverData data) {
+            if (data == null) {
+                throw new IllegalArgumentException("hover data may not be null");
+            }
+            this.data = data;
+        }
 
-		@Override
-		public int getLength() {
-			return data.getLength();
-		}
+        @Override
+        public int getLength() {
+            return data.getLength();
+        }
 
-		@Override
-		public int getOffset() {
-			return data.getOffset();
-		}
+        @Override
+        public int getOffset() {
+            return data.getOffset();
+        }
 
-		public HoverData getData() {
-			return data;
-		}
-	}
+        public HoverData getData() {
+            return data;
+        }
+    }
 
-	/**
-	 * Get language at given offset
-	 * 
-	 * @param offset
-	 * @param textViewer
-	 * @return language element or <code>null</code>
-	 */
-	protected HoverDataRegion getLanguageElementAt(int offset, ITextViewer textViewer) {
-		IContentAssistant assist = gradleSourceViewerConfiguration.getContentAssistant(sourceViewer);
-		if (assist == null) {
-			return null;
-		}
-		IContentAssistProcessor processor = assist.getContentAssistProcessor(contentType);
-		if (!(processor instanceof GradleContentAssistProcessor)) {
-			return null;
-		}
-		GradleContentAssistProcessor gprocessor = (GradleContentAssistProcessor) processor;
-		String allText = textViewer.getDocument().get();
-		RelevantCodeCutter codeCutter = this.codeCutter;
-		Model model = gprocessor.getModel();
-		GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
-		GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
+    /**
+     * Get language at given offset
+     * 
+     * @param offset
+     * @param textViewer
+     * @return language element or <code>null</code>
+     */
+    protected HoverDataRegion getLanguageElementAt(int offset, ITextViewer textViewer) {
+        IContentAssistant assist = gradleSourceViewerConfiguration.getContentAssistant(sourceViewer);
+        if (assist == null) {
+            return null;
+        }
+        IContentAssistProcessor processor = assist.getContentAssistProcessor(contentType);
+        if (!(processor instanceof GradleContentAssistProcessor)) {
+            return null;
+        }
+        GradleContentAssistProcessor gprocessor = (GradleContentAssistProcessor) processor;
+        String allText = textViewer.getDocument().get();
+        RelevantCodeCutter codeCutter = this.codeCutter;
+        Model model = gprocessor.getModel();
+        GradleFileType fileType = gradleSourceViewerConfiguration.getFileType();
+        GradleLanguageElementEstimater estimator = gprocessor.getEstimator();
 
-		HoverData data = hoverSupport.caclulateHoverData(allText, offset, codeCutter, model, fileType, estimator);
-		if (data == null) {
-			return null;
-		}
-		return new HoverDataRegion(data);
-	}
+        HoverData data = hoverSupport.caclulateHoverData(allText, offset, codeCutter, model, fileType, estimator);
+        if (data == null) {
+            return null;
+        }
+        return new HoverDataRegion(data);
+    }
 
-	private class GradleTextHoverControlCreator implements IInformationControlCreator {
+    private class GradleTextHoverControlCreator implements IInformationControlCreator {
 
-		@Override
-		public IInformationControl createInformationControl(Shell parent) {
-			if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
-				SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
-				control.setBrowserEGradleLinkListener(
-						new DefaultEGradleLinkListener(fgColor, bgColor, commentColorWeb, builder));
-				return control;
-			} else {
-				return new DefaultInformationControl(parent, true);
-			}
-		}
-	}
+        @Override
+        public IInformationControl createInformationControl(Shell parent) {
+            if (SimpleBrowserInformationControl.isAvailableFor(parent)) {
+                SimpleBrowserInformationControl control = new SimpleBrowserInformationControl(parent);
+                control.setBrowserEGradleLinkListener(new DefaultEGradleLinkListener(fgColor, bgColor, commentColorWeb, builder));
+                return control;
+            } else {
+                return new DefaultInformationControl(parent, true);
+            }
+        }
+    }
 
 }

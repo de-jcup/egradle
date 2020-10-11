@@ -33,119 +33,118 @@ import de.jcup.egradle.eclipse.preferences.EGradleCallType;
 
 public class EGradleRootProjectImportWizardPage extends WizardPage {
 
-	private RootProjectConfigUIDelegate configComposite;
+    private RootProjectConfigUIDelegate configComposite;
 
-	/**
-	 * If set the wizard will use this as path
-	 */
-	private String customRootProjectpath;
+    /**
+     * If set the wizard will use this as path
+     */
+    private String customRootProjectpath;
 
-	private String customJavaHome;
+    private String customJavaHome;
 
-	private EGradleCallType initialCallType;
+    private EGradleCallType initialCallType;
 
-	public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath, RootProjectConfigMode mode,
-			String customJavaHome) {
-		super(pageName);
-		setTitle("Import gradle projects"); // NON-NLS-1
-		setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
-		this.customRootProjectpath = customRootProjectpath;
-		this.customJavaHome = customJavaHome;
-		configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter(), mode);
-	}
+    public EGradleRootProjectImportWizardPage(String pageName, String customRootProjectpath, RootProjectConfigMode mode, String customJavaHome) {
+        super(pageName);
+        setTitle("Import gradle projects"); // NON-NLS-1
+        setDescription("Import a gradle root project with all subprojects from given root folder"); // NON-NLS-1
+        this.customRootProjectpath = customRootProjectpath;
+        this.customJavaHome = customJavaHome;
+        configComposite = new RootProjectConfigUIDelegate(new RootProjectImportValidationAdapter(), mode);
+    }
 
-	@Override
-	public void createControl(Composite parent) {
-		initializeDialogUnits(parent);
+    @Override
+    public void createControl(Composite parent) {
+        initializeDialogUnits(parent);
 
-		Composite folderSelectionArea = new Composite(parent, SWT.NONE);
-		GridLayout folderSelectionLayout = new GridLayout();
-		folderSelectionLayout.numColumns = 3;
-		folderSelectionLayout.makeColumnsEqualWidth = false;
-		folderSelectionLayout.marginWidth = 0;
-		folderSelectionLayout.marginHeight = 0;
-		folderSelectionArea.setLayout(folderSelectionLayout);
+        Composite folderSelectionArea = new Composite(parent, SWT.NONE);
+        GridLayout folderSelectionLayout = new GridLayout();
+        folderSelectionLayout.numColumns = 3;
+        folderSelectionLayout.makeColumnsEqualWidth = false;
+        folderSelectionLayout.marginWidth = 0;
+        folderSelectionLayout.marginHeight = 0;
+        folderSelectionArea.setLayout(folderSelectionLayout);
 
-		configComposite.createConfigUI(folderSelectionArea);
+        configComposite.createConfigUI(folderSelectionArea);
 
-		EGradleIdePreferences preferences = IDEUtil.getPreferences();
-		/* adopt import setting from current existing preferences value */
-		String globalJavaHomePath = null;
-		if (StringUtils.isBlank(customJavaHome)) {
-			globalJavaHomePath = preferences.getGlobalJavaHomePath();
-		} else {
-			globalJavaHomePath = customJavaHome;
-		}
-		String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
-		String gradleCallCommand = preferences.getGradleCallCommand();
-		String gradleCallTypeID = initialCallType == null ? preferences.getGradleCallTypeID() : initialCallType.getId();
-		String shellId = preferences.getGradleShellId();
-		String rootProjectPath = null;
-		if (StringUtils.isBlank(customRootProjectpath)) {
-			rootProjectPath = preferences.getRootProjectPath();
-		} else {
-			rootProjectPath = customRootProjectpath;
-		}
-		configComposite.setGradleBinInstallFolder(gradleBinInstallFolder);
-		configComposite.setGradleCallTypeId(gradleCallTypeID);
-		configComposite.setGlobalJavaHomePath(globalJavaHomePath);
-		configComposite.setRootProjectPath(rootProjectPath);
-		configComposite.setGradleCallCommand(gradleCallCommand);
-		configComposite.setShellId(shellId);
+        EGradleIdePreferences preferences = IDEUtil.getPreferences();
+        /* adopt import setting from current existing preferences value */
+        String globalJavaHomePath = null;
+        if (StringUtils.isBlank(customJavaHome)) {
+            globalJavaHomePath = preferences.getGlobalJavaHomePath();
+        } else {
+            globalJavaHomePath = customJavaHome;
+        }
+        String gradleBinInstallFolder = preferences.getGradleBinInstallFolder();
+        String gradleCallCommand = preferences.getGradleCallCommand();
+        String gradleCallTypeID = initialCallType == null ? preferences.getGradleCallTypeID() : initialCallType.getId();
+        String shellId = preferences.getGradleShellId();
+        String rootProjectPath = null;
+        if (StringUtils.isBlank(customRootProjectpath)) {
+            rootProjectPath = preferences.getRootProjectPath();
+        } else {
+            rootProjectPath = customRootProjectpath;
+        }
+        configComposite.setGradleBinInstallFolder(gradleBinInstallFolder);
+        configComposite.setGradleCallTypeId(gradleCallTypeID);
+        configComposite.setGlobalJavaHomePath(globalJavaHomePath);
+        configComposite.setRootProjectPath(rootProjectPath);
+        configComposite.setGradleCallCommand(gradleCallCommand);
+        configComposite.setShellId(shellId);
 
-		setControl(folderSelectionArea);
-	}
+        setControl(folderSelectionArea);
+    }
 
-	public String getGlobalJavaHomePath() {
-		return configComposite.getGlobalJavaHomePath();
-	}
+    public String getGlobalJavaHomePath() {
+        return configComposite.getGlobalJavaHomePath();
+    }
 
-	public boolean isRestoringMetaData() {
-		return configComposite.isRestoringMetaData();
-	}
+    public boolean isRestoringMetaData() {
+        return configComposite.isRestoringMetaData();
+    }
 
-	public String getGradleRootProjectPath() {
-		return configComposite.getGradleRootPathText();
-	}
+    public String getGradleRootProjectPath() {
+        return configComposite.getGradleRootPathText();
+    }
 
-	public EGradleShellType getShellCommand() {
-		return configComposite.getShellCommand();
-	}
+    public EGradleShellType getShellCommand() {
+        return configComposite.getShellCommand();
+    }
 
-	IPath getSelectedPath() {
-		String text = getGradleRootProjectPath();
-		boolean empty = StringUtils.isEmpty(text);
-		setPageComplete(!empty);
-		if (empty) {
-			return null;
-		} else {
-			return new Path(text);
-		}
-	}
+    IPath getSelectedPath() {
+        String text = getGradleRootProjectPath();
+        boolean empty = StringUtils.isEmpty(text);
+        setPageComplete(!empty);
+        if (empty) {
+            return null;
+        } else {
+            return new Path(text);
+        }
+    }
 
-	/**
-	 * Does nothing special
-	 * 
-	 * @author Albert Tregnaghi
-	 *
-	 */
-	private class RootProjectImportValidationAdapter extends RootProjectValidationAdapter {
+    /**
+     * Does nothing special
+     * 
+     * @author Albert Tregnaghi
+     *
+     */
+    private class RootProjectImportValidationAdapter extends RootProjectValidationAdapter {
 
-	}
+    }
 
-	public String getGradleBinDirectory() {
-		return configComposite.getGradleBinDirectory();
-	}
+    public String getGradleBinDirectory() {
+        return configComposite.getGradleBinDirectory();
+    }
 
-	public String getGradleCommand() {
-		return configComposite.getGradleCommand();
-	}
+    public String getGradleCommand() {
+        return configComposite.getGradleCommand();
+    }
 
-	public String getCallTypeId() {
-		return configComposite.getCallTypeId();
-	}
+    public String getCallTypeId() {
+        return configComposite.getCallTypeId();
+    }
 
-	public void setInitialCallType(EGradleCallType callType) {
-		this.initialCallType = callType;
-	}
+    public void setInitialCallType(EGradleCallType callType) {
+        this.initialCallType = callType;
+    }
 }

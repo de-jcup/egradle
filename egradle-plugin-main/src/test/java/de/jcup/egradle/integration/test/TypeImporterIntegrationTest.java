@@ -28,33 +28,33 @@ import de.jcup.egradle.integration.IntegrationTestComponents;
 
 public class TypeImporterIntegrationTest {
 
-	@Rule
-	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
-	private FilesystemFileLoader fileLoader;
+    @Rule
+    public IntegrationTestComponents components = IntegrationTestComponents.initialize();
+    private FilesystemFileLoader fileLoader;
 
-	@Before
-	public void before() {
-		fileLoader = components.getFileLoader();
-	}
+    @Before
+    public void before() {
+        fileLoader = components.getFileLoader();
+    }
 
-	@Test
-	public void load_project_and_repository_handler_not_mixed_in__do_mixin_and_check_correct() throws Exception {
-		Type projectType = fileLoader.loadType("org.gradle.api.Project");
-		Type repositoryHandlerType = fileLoader.loadType("org.gradle.api.artifacts.dsl.RepositoryHandler");
+    @Test
+    public void load_project_and_repository_handler_not_mixed_in__do_mixin_and_check_correct() throws Exception {
+        Type projectType = fileLoader.loadType("org.gradle.api.Project");
+        Type repositoryHandlerType = fileLoader.loadType("org.gradle.api.artifacts.dsl.RepositoryHandler");
 
-		/* check preconditions */
-		assertType(projectType).hasName("org.gradle.api.Project");
-		assertType(projectType).hasNotMethod("flatDir", "groovy.lang.Closure");
-		assertType(repositoryHandlerType).hasName("org.gradle.api.artifacts.dsl.RepositoryHandler");
-		assertType(repositoryHandlerType).hasMethod("flatDir", "groovy.lang.Closure");
+        /* check preconditions */
+        assertType(projectType).hasName("org.gradle.api.Project");
+        assertType(projectType).hasNotMethod("flatDir", "groovy.lang.Closure");
+        assertType(repositoryHandlerType).hasName("org.gradle.api.artifacts.dsl.RepositoryHandler");
+        assertType(repositoryHandlerType).hasMethod("flatDir", "groovy.lang.Closure");
 
-		/* execute */
-		XMLType projectXMLType = (XMLType) projectType;
-		projectXMLType.mixin(repositoryHandlerType, null);
+        /* execute */
+        XMLType projectXMLType = (XMLType) projectType;
+        projectXMLType.mixin(repositoryHandlerType, null);
 
-		/* test */
-		assertType(projectType).hasMethod("flatDir", "groovy.lang.Closure");
+        /* test */
+        assertType(projectType).hasMethod("flatDir", "groovy.lang.Closure");
 
-	}
+    }
 
 }

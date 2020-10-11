@@ -22,20 +22,20 @@ package de.jcup.egradle.core.domain;
  *
  */
 public interface CancelStateProvider {
-	public static final NeverCanceled NEVER_CANCELED = new NeverCanceled();
+    public static final NeverCanceled NEVER_CANCELED = new NeverCanceled();
 
-	public boolean isCanceled();
+    public boolean isCanceled();
 
-	static class NeverCanceled implements CancelStateProvider {
+    static class NeverCanceled implements CancelStateProvider {
 
-		private NeverCanceled() {
-		}
+        private NeverCanceled() {
+        }
 
-		@Override
-		public boolean isCanceled() {
-			return false;
-		}
+        @Override
+        public boolean isCanceled() {
+            return false;
+        }
 
-	}
+    }
 
 }

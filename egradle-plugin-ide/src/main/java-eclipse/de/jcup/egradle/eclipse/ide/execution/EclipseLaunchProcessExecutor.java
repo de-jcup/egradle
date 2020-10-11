@@ -66,8 +66,8 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
             return super.execute(wdProvider, envprovider, processContext, commands);
         } catch (IOException | RuntimeException e) {
             IDEUtil.logError("Was not able to execute launch process", e);
-            
-            /* check if a process is assigned, if not we must provide fallback*/
+
+            /* check if a process is assigned, if not we must provide fallback */
             IProcess[] processes = launch.getProcesses();
             if (processes == null || processes.length == 0) {
                 FallbackProcess process = new FallbackProcess(launch);
@@ -78,7 +78,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
             try {
                 launch.terminate();
             } catch (DebugException de) {
-                IDEUtil.logError("Was not able to terminate launch process",de);
+                IDEUtil.logError("Was not able to terminate launch process", de);
             }
             throw e;
         }

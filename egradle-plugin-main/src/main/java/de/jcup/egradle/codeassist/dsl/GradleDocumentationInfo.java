@@ -24,16 +24,16 @@ package de.jcup.egradle.codeassist.dsl;
  */
 public interface GradleDocumentationInfo {
 
-	/**
-	 * @return <code>true</code> when part of gradle DSL documentation
-	 */
-	boolean isDocumented();
+    /**
+     * @return <code>true</code> when part of gradle DSL documentation
+     */
+    boolean isDocumented();
 
-	/**
-	 * Set <code>true</code> when this is a part documented at gradles official
-	 * website
-	 * 
-	 * @param documented
-	 */
-	void setDocumented(boolean documented);
+    /**
+     * Set <code>true</code> when this is a part documented at gradles official
+     * website
+     * 
+     * @param documented
+     */
+    void setDocumented(boolean documented);
 }

@@ -25,25 +25,24 @@ import org.eclipse.jface.preference.FieldEditor;
  */
 public interface RootProjectValidationHandler extends RootProjectValidationObserver {
 
-	/**
-	 * When validation state changes this method is called
-	 * 
-	 * @param valid
-	 */
-	void onValidationStateChanged(boolean valid);
+    /**
+     * When validation state changes this method is called
+     * 
+     * @param valid
+     */
+    void onValidationStateChanged(boolean valid);
 
-	/**
-	 * Add field editor
-	 * 
-	 * @param field
-	 */
-	void addFieldEditor(FieldEditor field);
+    /**
+     * Add field editor
+     * 
+     * @param field
+     */
+    void addFieldEditor(FieldEditor field);
 
-	/**
-	 * @return <code>true</code> property changes are handled by this component
-	 *         standalone, <code>false</code> when handling is done by caller
-	 *         side
-	 */
-	boolean isHandlingPropertyChanges();
+    /**
+     * @return <code>true</code> property changes are handled by this component
+     *         standalone, <code>false</code> when handling is done by caller side
+     */
+    boolean isHandlingPropertyChanges();
 
 }

@@ -28,66 +28,64 @@ import de.jcup.egradle.core.util.ValidationException;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class RootProjectValidationProgressRunnable implements IRunnableWithProgress {
-	private GradleConfigurationValidator validator;
-	private GradleConfiguration configuration;
-	private OutputHandler outputHandler;
-	private RootProjectValidationObserver observer;
+    private GradleConfigurationValidator validator;
+    private GradleConfiguration configuration;
+    private OutputHandler outputHandler;
+    private RootProjectValidationObserver observer;
 
-	public RootProjectValidationProgressRunnable(CancelStateProvider cancelStateProvider,
-			GradleConfiguration configuration, RootProjectValidationObserver observer, OutputHandler outputHandler) {
-		this.observer = observer;
-		this.outputHandler = outputHandler;
-		// is now canceable so endless running okay
-		validator = new GradleConfigurationValidator(
-				new SimpleProcessExecutor(outputHandler, true, ProcessExecutor.ENDLESS_RUNNING));
-		validator.setOutputHandler(outputHandler);
-		validator.setCancelStateProvider(cancelStateProvider);
-		this.configuration = configuration;
-	}
+    public RootProjectValidationProgressRunnable(CancelStateProvider cancelStateProvider, GradleConfiguration configuration, RootProjectValidationObserver observer, OutputHandler outputHandler) {
+        this.observer = observer;
+        this.outputHandler = outputHandler;
+        // is now canceable so endless running okay
+        validator = new GradleConfigurationValidator(new SimpleProcessExecutor(outputHandler, true, ProcessExecutor.ENDLESS_RUNNING));
+        validator.setOutputHandler(outputHandler);
+        validator.setCancelStateProvider(cancelStateProvider);
+        this.configuration = configuration;
+    }
 
-	@Override
-	public void run(IProgressMonitor monitor) {
-		monitor.beginTask("Start validation", IProgressMonitor.UNKNOWN);
-		/* check more... */
-		try {
-			validator.validate(configuration);
-			EclipseUtil.safeAsyncExec(new Runnable() {
+    @Override
+    public void run(IProgressMonitor monitor) {
+        monitor.beginTask("Start validation", IProgressMonitor.UNKNOWN);
+        /* check more... */
+        try {
+            validator.validate(configuration);
+            EclipseUtil.safeAsyncExec(new Runnable() {
 
-				@Override
-				public void run() {
-					observer.handleValidationResult(true);
-					outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
+                @Override
+                public void run() {
+                    observer.handleValidationResult(true);
+                    outputHandler.output("\n\n\n\nOK - your gradle settings are correct and working.");
 
-				}
-			});
-		} catch (ValidationException e) {
-			EclipseUtil.safeAsyncExec(new Runnable() {
+                }
+            });
+        } catch (ValidationException e) {
+            EclipseUtil.safeAsyncExec(new Runnable() {
 
-				@Override
-				public void run() {
-					observer.handleValidationResult(false);
-					StringBuilder sb = new StringBuilder();
-					sb.append(e.getMessage());
-					String details = e.getDetails();
-					if (details != null) {
-						sb.append("\n");
-						sb.append(details);
-					}
-					outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
+                @Override
+                public void run() {
+                    observer.handleValidationResult(false);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(e.getMessage());
+                    String details = e.getDetails();
+                    if (details != null) {
+                        sb.append("\n");
+                        sb.append(details);
+                    }
+                    outputHandler.output("\n\n\n\nFAILED - " + sb.toString());
 
-				}
-			});
+                }
+            });
 
-		} finally {
-			EclipseUtil.safeAsyncExec(new Runnable() {
+        } finally {
+            EclipseUtil.safeAsyncExec(new Runnable() {
 
-				@Override
-				public void run() {
-					monitor.done();
-					observer.handleValidationRunning(false);
-				}
-			});
-		}
-	}
+                @Override
+                public void run() {
+                    monitor.done();
+                    observer.handleValidationRunning(false);
+                }
+            });
+        }
+    }
 
 }

@@ -17,15 +17,15 @@ package de.jcup.egradle.codeassist.dsl;
 
 public interface ModifiableMethod extends Method {
 
-	void setReturnType(Type returnType);
+    void setReturnType(Type returnType);
 
-	void setParent(Type parent);
+    void setParent(Type parent);
 
-	void setDelegationTargetAsString(String delegationTargetAsString);
+    void setDelegationTargetAsString(String delegationTargetAsString);
 
-	void setDelegationTarget(Type target);
+    void setDelegationTarget(Type target);
 
-	public void setDocumented(boolean partOfGradleDSLDocumentation);
+    public void setDocumented(boolean partOfGradleDSLDocumentation);
 
-	void setDescription(String description);
+    void setDescription(String description);
 }

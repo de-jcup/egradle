@@ -26,29 +26,29 @@ import org.eclipse.jface.preference.FieldEditor;
  */
 public abstract class RootProjectValidationAdapter implements RootProjectValidationHandler {
 
-	@Override
-	public void addFieldEditor(FieldEditor field) {
+    @Override
+    public void addFieldEditor(FieldEditor field) {
 
-	}
+    }
 
-	@Override
-	public void handleValidationResult(boolean b) {
+    @Override
+    public void handleValidationResult(boolean b) {
 
-	}
+    }
 
-	@Override
-	public void handleValidationRunning(boolean running) {
+    @Override
+    public void handleValidationRunning(boolean running) {
 
-	}
+    }
 
-	@Override
-	public void onValidationStateChanged(boolean valid) {
+    @Override
+    public void onValidationStateChanged(boolean valid) {
 
-	}
+    }
 
-	@Override
-	public boolean isHandlingPropertyChanges() {
-		return false;
-	}
+    @Override
+    public boolean isHandlingPropertyChanges() {
+        return false;
+    }
 
 }

@@ -26,25 +26,25 @@ import org.eclipse.core.runtime.jobs.Job;
 import de.jcup.egradle.eclipse.ide.IDEActivator;
 
 public class GradleJob extends Job {
-	private GradleExecutionDelegate execution;
+    private GradleExecutionDelegate execution;
 
-	public GradleJob(String name, GradleExecutionDelegate execution) {
-		super(name);
-		notNull(execution, "Execution delegate may not be null!");
-		this.execution = execution;
-	}
+    public GradleJob(String name, GradleExecutionDelegate execution) {
+        super(name);
+        notNull(execution, "Execution delegate may not be null!");
+        this.execution = execution;
+    }
 
-	@Override
-	protected IStatus run(IProgressMonitor monitor) {
-		try {
-			execution.execute(monitor);
-			if (!execution.getResult().isOkay()) {
-				getDialogSupport().showBuildFailed(execution.getResult().createDescription());
-			}
-		} catch (Exception e) {
-			return new Status(Status.ERROR, IDEActivator.PLUGIN_ID, "Cannot execute " + getName(), e);
-		}
-		return Status.OK_STATUS;
-	}
+    @Override
+    protected IStatus run(IProgressMonitor monitor) {
+        try {
+            execution.execute(monitor);
+            if (!execution.getResult().isOkay()) {
+                getDialogSupport().showBuildFailed(execution.getResult().createDescription());
+            }
+        } catch (Exception e) {
+            return new Status(Status.ERROR, IDEActivator.PLUGIN_ID, "Cannot execute " + getName(), e);
+        }
+        return Status.OK_STATUS;
+    }
 
 }

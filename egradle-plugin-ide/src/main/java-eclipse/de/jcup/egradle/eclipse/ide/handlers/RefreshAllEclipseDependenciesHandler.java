@@ -26,24 +26,22 @@ import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 
 public class RefreshAllEclipseDependenciesHandler extends AbstractEGradleCommandHandler {
 
-	public static final String COMMAND_ID = "egradle.commands.refreshEclipse";
+    public static final String COMMAND_ID = "egradle.commands.refreshEclipse";
 
-	@Override
-	public void prepare(GradleContext context) {
-		context.setAmountOfWorkToDo(2);
-		context.setCommands(GradleCommand.build("cleanEclipse eclipse"));
-	}
+    @Override
+    public void prepare(GradleContext context) {
+        context.setAmountOfWorkToDo(2);
+        context.setCommands(GradleCommand.build("cleanEclipse eclipse"));
+    }
 
-	@Override
-	protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler)
-			throws GradleExecutionException {
-		UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler,
-				new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
-		ui.setRefreshProjects(true);
-		ui.setProjectContext(IDEUtil.getAllEclipseProjectsInCurrentGradleRootProject());
-		ui.setCleanProjects(true, false);
-		ui.setShowEGradleSystemConsole(true);
-		return ui;
-	}
+    @Override
+    protected GradleExecutionDelegate createGradleExecution(OutputHandler outputHandler) throws GradleExecutionException {
+        UIGradleExecutionDelegate ui = new UIGradleExecutionDelegate(outputHandler, new SimpleProcessExecutor(outputHandler, true, SimpleProcessExecutor.ENDLESS_RUNNING), this);
+        ui.setRefreshProjects(true);
+        ui.setProjectContext(IDEUtil.getAllEclipseProjectsInCurrentGradleRootProject());
+        ui.setCleanProjects(true, false);
+        ui.setShowEGradleSystemConsole(true);
+        return ui;
+    }
 
 }

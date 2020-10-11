@@ -34,61 +34,61 @@ import de.jcup.egradle.core.util.RootProjectFinder;
  */
 public class EGradleLaunchShortCutTest {
 
-	private EGradleLaunchShortCut shortCutToTest;
+    private EGradleLaunchShortCut shortCutToTest;
 
-	@Before
-	public void before() {
-		shortCutToTest = new EGradleLaunchShortCut();
+    @Before
+    public void before() {
+        shortCutToTest = new EGradleLaunchShortCut();
 
-	}
+    }
 
-	@Test
-	public void when_virtual_rootproject_name_is_given_the_configuration_contains_not_a_project_name() {
-		/* prepare */
-		String projectName = Constants.VIRTUAL_ROOTPROJECT_NAME;
-		ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
-		Object additionalScope = null;
-		IResource resource = mock(IResource.class);
+    @Test
+    public void when_virtual_rootproject_name_is_given_the_configuration_contains_not_a_project_name() {
+        /* prepare */
+        String projectName = Constants.VIRTUAL_ROOTPROJECT_NAME;
+        ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
+        Object additionalScope = null;
+        IResource resource = mock(IResource.class);
 
-		/* execute */
-		shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, projectName);
+        /* execute */
+        shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
-		/* test */
-		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "");
-	}
+        /* test */
+        verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "");
+    }
 
-	@Test
-	public void when_project1_is_given_the_configuration_contains_project1_as_name() {
-		/* prepare */
-		String projectName = "project1";
-		ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
-		Object additionalScope = null;
-		IResource resource = mock(IResource.class);
+    @Test
+    public void when_project1_is_given_the_configuration_contains_project1_as_name() {
+        /* prepare */
+        String projectName = "project1";
+        ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
+        Object additionalScope = null;
+        IResource resource = mock(IResource.class);
 
-		/* execute */
-		shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, projectName);
+        /* execute */
+        shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, projectName);
 
-		/* test */
-		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "project1");
-	}
+        /* test */
+        verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_PROJECTNAME, "project1");
+    }
 
-	@Test
-	public void configuration_contains_rootpath_rootpath_finder_returns_as_path() {
-		/* prepare */
-		ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
-		Object additionalScope = null;
-		IResource resource = mock(IResource.class);
-		File dummyRootfolder = new File("/a/b");
-		RootProjectFinder mockedFinder = mock(RootProjectFinder.class);
-		shortCutToTest.rootProjectFinder = mockedFinder;
+    @Test
+    public void configuration_contains_rootpath_rootpath_finder_returns_as_path() {
+        /* prepare */
+        ILaunchConfigurationWorkingCopy wc = mock(ILaunchConfigurationWorkingCopy.class);
+        Object additionalScope = null;
+        IResource resource = mock(IResource.class);
+        File dummyRootfolder = new File("/a/b");
+        RootProjectFinder mockedFinder = mock(RootProjectFinder.class);
+        shortCutToTest.rootProjectFinder = mockedFinder;
 
-		when(mockedFinder.findRootProjectFolder(any())).thenReturn(dummyRootfolder);
+        when(mockedFinder.findRootProjectFolder(any())).thenReturn(dummyRootfolder);
 
-		/* execute */
-		shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, "anyProjectName");
+        /* execute */
+        shortCutToTest.createCustomConfiguration(resource, additionalScope, wc, "anyProjectName");
 
-		/* test */
-		verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_ROOT_PROJECT_PATH, dummyRootfolder.getAbsolutePath());
-	}
+        /* test */
+        verify(wc).setAttribute(EGradleLauncherConstants.PROPERTY_ROOT_PROJECT_PATH, dummyRootfolder.getAbsolutePath());
+    }
 
 }

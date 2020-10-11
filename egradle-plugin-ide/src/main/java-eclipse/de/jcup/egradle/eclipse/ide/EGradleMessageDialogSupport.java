@@ -27,96 +27,95 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class EGradleMessageDialogSupport {
 
-	public static final EGradleMessageDialogSupport INSTANCE = new EGradleMessageDialogSupport();
+    public static final EGradleMessageDialogSupport INSTANCE = new EGradleMessageDialogSupport();
 
-	/**
-	 * Shows an input dialog
-	 * 
-	 * @param message
-	 * @param title
-	 * @return given input string or <code>null</code> when canceled
-	 */
-	public final String showInputDialog(String message, String title) {
-		Shell shell = getActiveWorkbenchShell();
-		InputDialog dialog = new InputDialog(shell, title, message, null, null);
-		int result = dialog.open();
-		if (result == InputDialog.CANCEL) {
-			return null;
-		}
+    /**
+     * Shows an input dialog
+     * 
+     * @param message
+     * @param title
+     * @return given input string or <code>null</code> when canceled
+     */
+    public final String showInputDialog(String message, String title) {
+        Shell shell = getActiveWorkbenchShell();
+        InputDialog dialog = new InputDialog(shell, title, message, null, null);
+        int result = dialog.open();
+        if (result == InputDialog.CANCEL) {
+            return null;
+        }
 
-		return dialog.getValue();
-	}
+        return dialog.getValue();
+    }
 
-	public void showWarning(String message) {
-		EclipseUtil.safeAsyncExec(new Runnable() {
+    public void showWarning(String message) {
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-				Shell shell = getActiveWorkbenchShell();
-				MessageDialog.openWarning(shell, "EGradle", message);
-			}
+            @Override
+            public void run() {
+                Shell shell = getActiveWorkbenchShell();
+                MessageDialog.openWarning(shell, "EGradle", message);
+            }
 
-		});
+        });
 
-	}
+    }
 
-	public void showError(String message) {
-		EclipseUtil.safeAsyncExec(new Runnable() {
+    public void showError(String message) {
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-				Shell shell = getActiveWorkbenchShell();
-				MessageDialog.openError(shell, "EGradle", message);
-			}
+            @Override
+            public void run() {
+                Shell shell = getActiveWorkbenchShell();
+                MessageDialog.openError(shell, "EGradle", message);
+            }
 
-		});
+        });
 
-	}
+    }
 
-	public void showBuildFailed(String detail) {
-		EclipseUtil.safeAsyncExec(new Runnable() {
+    public void showBuildFailed(String detail) {
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
-			@Override
-			public void run() {
+            @Override
+            public void run() {
 
-				if (IDEUtil.getPreferences().isShowingConsoleOnBuildFailed()) {
-					IDEUtil.showConsoleView();
-				}
+                if (IDEUtil.getPreferences().isShowingConsoleOnBuildFailed()) {
+                    IDEUtil.showConsoleView();
+                }
 
-				String text = detail;
-				String path = "icons/gradle-build-failed.png";
-				if (IDEUtil.existsValidationErrors()) {
-					text = text + "\n(Please look into problems view for details about compile/evaluation failures)";
-					path = "icons/gradle-script-failure.png";
-				}
-				Image backgroundImage = IDEUtil.getImage(path);
-				Image titleImage = IDEUtil.getImage("icons/gradle-og.png");
+                String text = detail;
+                String path = "icons/gradle-build-failed.png";
+                if (IDEUtil.existsValidationErrors()) {
+                    text = text + "\n(Please look into problems view for details about compile/evaluation failures)";
+                    path = "icons/gradle-script-failure.png";
+                }
+                Image backgroundImage = IDEUtil.getImage(path);
+                Image titleImage = IDEUtil.getImage("icons/gradle-og.png");
 
-				Shell shell = getActiveWorkbenchShell();
-				BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);
-				bfdialog.open();
+                Shell shell = getActiveWorkbenchShell();
+                BuildFailedDialog bfdialog = new BuildFailedDialog(shell, titleImage, backgroundImage, text);
+                bfdialog.open();
 
-			}
+            }
 
-		});
+        });
 
-	}
+    }
 
-	public void showMissingRootProjectDialog(String detailMessage) {
+    public void showMissingRootProjectDialog(String detailMessage) {
 
-		EclipseUtil.safeAsyncExec(new Runnable() {
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
-			@Override
-			public void run() {
+            @Override
+            public void run() {
 
-				MissingRootProjectDialog missingRootProjectDialog = new MissingRootProjectDialog(
-						getActiveWorkbenchShell(), detailMessage);
-				missingRootProjectDialog.open();
+                MissingRootProjectDialog missingRootProjectDialog = new MissingRootProjectDialog(getActiveWorkbenchShell(), detailMessage);
+                missingRootProjectDialog.open();
 
-			}
+            }
 
-		});
+        });
 
-	}
+    }
 
 }

@@ -19,16 +19,16 @@ import de.jcup.egradle.core.text.AbstractTextMatcher;
 
 public class ItemTextMatcher extends AbstractTextMatcher<Item> {
 
-	@Override
-	protected String createItemText(Item item) {
-		/*
-		 * We build search string without type - reason: otherwise a
-		 * "public String getName()" results in "String getName()" and user has
-		 * to type "*get" to get the wished content. This behavior would be
-		 * different to standards, like java editor quick outline.
-		 */
-		String itemText = item.buildSearchString(false);
-		return itemText;
-	}
+    @Override
+    protected String createItemText(Item item) {
+        /*
+         * We build search string without type - reason: otherwise a
+         * "public String getName()" results in "String getName()" and user has to type
+         * "*get" to get the wished content. This behavior would be different to
+         * standards, like java editor quick outline.
+         */
+        String itemText = item.buildSearchString(false);
+        return itemText;
+    }
 
 }

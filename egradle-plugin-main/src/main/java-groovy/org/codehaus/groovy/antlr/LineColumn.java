@@ -39,46 +39,46 @@ package org.codehaus.groovy.antlr;
  * @author <a href="mailto:groovy@ross-rayner.com">Jeremy Rayner</a>
  */
 public class LineColumn {
-	private int line;
-	private int column;
+    private int line;
+    private int column;
 
-	public LineColumn(int line, int column) {
-		this.line = line;
-		this.column = column;
-	}
+    public LineColumn(int line, int column) {
+        this.line = line;
+        this.column = column;
+    }
 
-	public int getLine() {
-		return line;
-	}
+    public int getLine() {
+        return line;
+    }
 
-	public int getColumn() {
-		return column;
-	}
+    public int getColumn() {
+        return column;
+    }
 
-	public boolean equals(Object that) {
-		if (this == that)
-			return true;
-		if (that == null || getClass() != that.getClass())
-			return false;
+    public boolean equals(Object that) {
+        if (this == that)
+            return true;
+        if (that == null || getClass() != that.getClass())
+            return false;
 
-		final LineColumn lineColumn = (LineColumn) that;
+        final LineColumn lineColumn = (LineColumn) that;
 
-		if (column != lineColumn.column)
-			return false;
-		if (line != lineColumn.line)
-			return false;
+        if (column != lineColumn.column)
+            return false;
+        if (line != lineColumn.line)
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	public int hashCode() {
-		int result;
-		result = line;
-		result = 29 * result + column;
-		return result;
-	}
+    public int hashCode() {
+        int result;
+        result = line;
+        result = 29 * result + column;
+        return result;
+    }
 
-	public String toString() {
-		return "[" + line + "," + column + "]";
-	}
+    public String toString() {
+        return "[" + line + "," + column + "]";
+    }
 }

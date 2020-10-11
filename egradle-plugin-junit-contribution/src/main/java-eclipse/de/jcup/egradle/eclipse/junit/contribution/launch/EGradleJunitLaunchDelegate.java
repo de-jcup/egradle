@@ -30,30 +30,28 @@ import de.jcup.egradle.junit.EGradleJUnitTaskVariableReplacement;
 
 public class EGradleJunitLaunchDelegate extends EGradleLaunchDelegate {
 
-	private EGradleJUnitTaskVariableReplacement variableReplacement = new EGradleJUnitTaskVariableReplacement();
+    private EGradleJUnitTaskVariableReplacement variableReplacement = new EGradleJUnitTaskVariableReplacement();
 
-	@Override
-	protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
-		ILaunch launch = launchParameterValues.getLaunch();
-		if (launch == null) {
-			throw new IllegalStateException("launch missing");
-		}
-		String projectName;
-		try {
-			ILaunchConfiguration configuration = launch.getLaunchConfiguration();
+    @Override
+    protected void appendAdditionalLaunchParameters(LaunchParameterValues launchParameterValues) {
+        ILaunch launch = launchParameterValues.getLaunch();
+        if (launch == null) {
+            throw new IllegalStateException("launch missing");
+        }
+        String projectName;
+        try {
+            ILaunchConfiguration configuration = launch.getLaunchConfiguration();
 
-			projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, (String) null);
+            projectName = configuration.getAttribute(PROPERTY_PROJECTNAME, (String) null);
 
-			String configuredTasksValue = configuration.getAttribute(PROPERTY_TASKS, "");
-			String tasksToExecute = variableReplacement.replace(configuredTasksValue,
-					JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks());
+            String configuredTasksValue = configuration.getAttribute(PROPERTY_TASKS, "");
+            String tasksToExecute = variableReplacement.replace(configuredTasksValue, JUNIT_PREFERENCES.getDefaultTestTaskType().getTestTasks());
 
-			launchParameterValues
-					.setPostJob(new ImportGradleJunitResultsJob("Import gradle junit results", projectName, true));
-			launchParameterValues.setOverriddenTasks(tasksToExecute);
-		} catch (CoreException e) {
-			JunitUtil.logError("Was not able to add additional launch parameters", e);
-		}
-	}
+            launchParameterValues.setPostJob(new ImportGradleJunitResultsJob("Import gradle junit results", projectName, true));
+            launchParameterValues.setOverriddenTasks(tasksToExecute);
+        } catch (CoreException e) {
+            JunitUtil.logError("Was not able to add additional launch parameters", e);
+        }
+    }
 
 }

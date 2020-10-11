@@ -27,22 +27,22 @@ import org.eclipse.ui.editors.text.TextFileDocumentProvider;
  */
 public class GradleTextFileDocumentProvider extends TextFileDocumentProvider {
 
-	@Override
-	public IDocument getDocument(Object element) {
-		IDocument document = super.getDocument(element);
-		if (document == null) {
-			return null;
-		}
-		IDocumentPartitioner formerPartitioner = document.getDocumentPartitioner();
-		if (formerPartitioner instanceof GradlePartitioner) {
-			return document;
-		}
-		/* installation necessary */
-		GradlePartitioner partitioner = GradlePartionerFactory.create();
-		partitioner.connect(document, true);
-		document.setDocumentPartitioner(partitioner);
+    @Override
+    public IDocument getDocument(Object element) {
+        IDocument document = super.getDocument(element);
+        if (document == null) {
+            return null;
+        }
+        IDocumentPartitioner formerPartitioner = document.getDocumentPartitioner();
+        if (formerPartitioner instanceof GradlePartitioner) {
+            return document;
+        }
+        /* installation necessary */
+        GradlePartitioner partitioner = GradlePartionerFactory.create();
+        partitioner.connect(document, true);
+        document.setDocumentPartitioner(partitioner);
 
-		return document;
-	}
+        return document;
+    }
 
 }

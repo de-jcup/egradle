@@ -23,21 +23,21 @@ import de.jcup.egradle.eclipse.util.EclipseUtil;
 
 public class JunitContributionUtil {
 
-	private static final String ECLIPSE_JDT_JUNIT_RESULT_VIEW = "org.eclipse.jdt.junit.ResultView";
+    private static final String ECLIPSE_JDT_JUNIT_RESULT_VIEW = "org.eclipse.jdt.junit.ResultView";
 
-	public static void showTestRunnerViewPartInActivePage() {
-		try {
-			IWorkbenchPage page = EclipseUtil.getActivePage();
-			if (page == null) {
-				return;
-			}
-			IViewPart view = page.findView(ECLIPSE_JDT_JUNIT_RESULT_VIEW);
-			if (view == null) {
-				/* create and show the result view if it isn't created yet. */
-				page.showView(ECLIPSE_JDT_JUNIT_RESULT_VIEW, null, IWorkbenchPage.VIEW_VISIBLE);
-			}
-		} catch (PartInitException pie) {
-			JunitUtil.logError("Was not able to show junit view", pie);
-		}
-	}
+    public static void showTestRunnerViewPartInActivePage() {
+        try {
+            IWorkbenchPage page = EclipseUtil.getActivePage();
+            if (page == null) {
+                return;
+            }
+            IViewPart view = page.findView(ECLIPSE_JDT_JUNIT_RESULT_VIEW);
+            if (view == null) {
+                /* create and show the result view if it isn't created yet. */
+                page.showView(ECLIPSE_JDT_JUNIT_RESULT_VIEW, null, IWorkbenchPage.VIEW_VISIBLE);
+            }
+        } catch (PartInitException pie) {
+            JunitUtil.logError("Was not able to show junit view", pie);
+        }
+    }
 }

@@ -31,23 +31,23 @@ import de.jcup.egradle.integration.IntegrationTestComponents;
 
 public class FileLoaderIntegrationTest {
 
-	@Rule
-	public IntegrationTestComponents components = IntegrationTestComponents.initialize();
-	private FilesystemFileLoader fileLoader;
+    @Rule
+    public IntegrationTestComponents components = IntegrationTestComponents.initialize();
+    private FilesystemFileLoader fileLoader;
 
-	@Before
-	public void before() {
-		fileLoader = components.getFileLoader();
-	}
+    @Before
+    public void before() {
+        fileLoader = components.getFileLoader();
+    }
 
-	@Test
-	public void fileLoader_project_has_not_flatDir_method_but_repository_handler_has_got() throws Exception {
-		/* execute */
-		Type projectType = fileLoader.loadType("org.gradle.api.Project");
-		Type repositoryHandlerType = fileLoader.loadType("org.gradle.api.artifacts.dsl.RepositoryHandler");
+    @Test
+    public void fileLoader_project_has_not_flatDir_method_but_repository_handler_has_got() throws Exception {
+        /* execute */
+        Type projectType = fileLoader.loadType("org.gradle.api.Project");
+        Type repositoryHandlerType = fileLoader.loadType("org.gradle.api.artifacts.dsl.RepositoryHandler");
 
-		/* test */
-		/* @formatter:off*/
+        /* test */
+        /* @formatter:off*/
 		assertType(projectType).
 			hasName("org.gradle.api.Project").
 			hasNotMethod("flatDir", "groovy.lang.Closure");
@@ -56,40 +56,39 @@ public class FileLoaderIntegrationTest {
 			hasMethod("flatDir", "groovy.lang.Closure");
 		/* @formatter:on */
 
-	}
+    }
 
-	@Test
-	public void fileLoader_war_plugin__has_mixin_type_war_convention() throws Exception {
-		/* execute */
-		Set<Plugin> plugins = fileLoader.loadPlugins();
-		/* test */
-		/* @formatter:off*/
+    @Test
+    public void fileLoader_war_plugin__has_mixin_type_war_convention() throws Exception {
+        /* execute */
+        Set<Plugin> plugins = fileLoader.loadPlugins();
+        /* test */
+        /* @formatter:off*/
 		assertPlugins(plugins).
 			hasPlugin("war").
 			withMixinType("org.gradle.api.Project", "org.gradle.api.plugins.WarPluginConvention");
 		/* @formatter:on*/
-	}
+    }
 
-	@Test
-	public void fileLoader_ear_plugin__has_mixin_type_ear_convention_and_extension() throws Exception {
-		/* execute */
-		Set<Plugin> plugins = fileLoader.loadPlugins();
-		/* test */
-		/* @formatter:off*/
+    @Test
+    public void fileLoader_ear_plugin__has_mixin_type_ear_convention_and_extension() throws Exception {
+        /* execute */
+        Set<Plugin> plugins = fileLoader.loadPlugins();
+        /* test */
+        /* @formatter:off*/
 		assertPlugins(plugins).
 			hasPlugin("ear").
 			withMixinType("org.gradle.api.Project", "org.gradle.plugins.ear.EarPluginConvention").
 			withExtensionType("org.gradle.api.Project", "org.gradle.plugins.ear.Ear");
 		/* @formatter:on*/
-	}
+    }
 
-	@Test
-	public void fileLoader_signing_plugin__has_extension_type_signing_extension() throws Exception {
-		/* execute */
-		Set<Plugin> plugins = fileLoader.loadPlugins();
-		/* test */
-		assertPlugins(plugins).hasPlugin("signing").withExtensionType("org.gradle.api.Project",
-				"org.gradle.plugins.signing.SigningExtension");
-	}
+    @Test
+    public void fileLoader_signing_plugin__has_extension_type_signing_extension() throws Exception {
+        /* execute */
+        Set<Plugin> plugins = fileLoader.loadPlugins();
+        /* test */
+        assertPlugins(plugins).hasPlugin("signing").withExtensionType("org.gradle.api.Project", "org.gradle.plugins.signing.SigningExtension");
+    }
 
 }

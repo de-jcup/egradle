@@ -26,38 +26,37 @@ import de.jcup.egradle.eclipse.util.ColorManager;
 
 public class QuickOutlineDialogTestMain {
 
-	/**
-	 * Just for direct simple UI testing
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		ColorManager.setStandalone(new ColorManager());
-		Display display = new Display();
-		Shell shell = new Shell(display);
-		shell.setText("Shell");
-		shell.setSize(200, 200);
-		shell.open();
+    /**
+     * Just for direct simple UI testing
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        ColorManager.setStandalone(new ColorManager());
+        Display display = new Display();
+        Shell shell = new Shell(display);
+        shell.setText("Shell");
+        shell.setSize(200, 200);
+        shell.open();
 
-		AbstractGroovyBasedEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
+        AbstractGroovyBasedEditorOutlineContentProvider provider = new GradleEditorOutlineContentProvider(null);
 
-		IAdaptable adapter = new IAdaptable() {
+        IAdaptable adapter = new IAdaptable() {
 
-			@SuppressWarnings("unchecked")
-			@Override
-			public <T> T getAdapter(Class<T> adapter) {
-				if (ITreeContentProvider.class.equals(adapter)) {
-					return (T) provider;
-				}
-				return null;
-			}
-		};
-		AbstractGroovyBasedQuickOutline dialog = new GradleQuickOutlineDialog(adapter, shell,
-				"Test quick outline dialog...");
-		dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
-		dialog.open();
-		display.dispose();
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getAdapter(Class<T> adapter) {
+                if (ITreeContentProvider.class.equals(adapter)) {
+                    return (T) provider;
+                }
+                return null;
+            }
+        };
+        AbstractGroovyBasedQuickOutline dialog = new GradleQuickOutlineDialog(adapter, shell, "Test quick outline dialog...");
+        dialog.setInput("dependencies{\n" + "testCompile library.junit\n" + "testCompile library.mockito_all\n" + "}");
+        dialog.open();
+        display.dispose();
 
-	}
+    }
 
 }

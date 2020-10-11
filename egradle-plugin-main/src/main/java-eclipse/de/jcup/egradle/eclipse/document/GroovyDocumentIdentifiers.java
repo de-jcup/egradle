@@ -19,26 +19,26 @@ import de.jcup.egradle.core.text.DocumentIdentifier;
 
 public enum GroovyDocumentIdentifiers implements DocumentIdentifier {
 
-	JAVA_KEYWORD,
+    JAVA_KEYWORD,
 
-	JAVA_LITERAL,
+    JAVA_LITERAL,
 
-	GROOVY_KEYWORD,
+    GROOVY_KEYWORD,
 
-	ANNOTATION,
+    ANNOTATION,
 
-	COMMENT,
+    COMMENT,
 
-	GROOVY_DOC,
+    GROOVY_DOC,
 
-	STRING,
+    STRING,
 
-	GSTRING,
+    GSTRING,
 
-	;
+    ;
 
-	public String getId() {
-		return name();
-	}
+    public String getId() {
+        return name();
+    }
 
 }
