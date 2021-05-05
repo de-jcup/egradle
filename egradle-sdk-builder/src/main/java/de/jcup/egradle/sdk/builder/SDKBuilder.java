@@ -58,62 +58,61 @@ import de.jcup.egradle.sdk.builder.action.type.SaveTypesToSDKTargetFolder;
  */
 public class SDKBuilder {
 
-	public static void main(String[] args) throws IOException {
-		SDKBuilder builder = new SDKBuilder("./../../gradle");
-		File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
-		builder.buildSDK(srcMainResTarget, "3.0");
-	}
+    public static void main(String[] args) throws IOException {
+        SDKBuilder builder = new SDKBuilder("./../../gradle");
+        File srcMainResTarget = new File("./../egradle-plugin-sdk/src/main/res/");
+        builder.buildSDK(srcMainResTarget, "3.0");
+    }
 
-	private String pathTorGradleRootProjectFolder;
+    private String pathTorGradleRootProjectFolder;
 
-	public SDKBuilder(String pathTorGradleRootProjectFolder) {
-		this.pathTorGradleRootProjectFolder = pathTorGradleRootProjectFolder;
-	}
+    public SDKBuilder(String pathTorGradleRootProjectFolder) {
+        this.pathTorGradleRootProjectFolder = pathTorGradleRootProjectFolder;
+    }
 
-	public void buildSDK(File targetRootDirectory, String gradleVersion) throws IOException {
-		SDKBuilderContext context = new SDKBuilderContext(pathTorGradleRootProjectFolder, targetRootDirectory,
-				gradleVersion);
+    public void buildSDK(File targetRootDirectory, String gradleVersion) throws IOException {
+        SDKBuilderContext context = new SDKBuilderContext(pathTorGradleRootProjectFolder, targetRootDirectory, gradleVersion);
 
-		/* create actions and add in wanted ordering */
-		List<SDKBuilderAction> actions = new ArrayList<>();
-		/* prepare */
-		actions.add(new InitSDKTargetFolderAction());
-		actions.add(new InitSDKInfoAction());
+        /* create actions and add in wanted ordering */
+        List<SDKBuilderAction> actions = new ArrayList<>();
+        /* prepare */
+        actions.add(new InitSDKTargetFolderAction());
+        actions.add(new InitSDKInfoAction());
 
-		actions.add(new CopyApiMappingsAction());
-		actions.add(new ImportTypesAction());
-		actions.add(new RemoveWhitespacesAndStarsFromJavadocAction());
+        actions.add(new CopyApiMappingsAction());
+        actions.add(new ImportTypesAction());
+        actions.add(new RemoveWhitespacesAndStarsFromJavadocAction());
 
-		actions.add(new ImportPluginsAction());
-		actions.add(new ApplyOverridesToPluginsAction());
-		actions.add(new SavePluginsToSDKTargetFolder());
+        actions.add(new ImportPluginsAction());
+        actions.add(new ApplyOverridesToPluginsAction());
+        actions.add(new SavePluginsToSDKTargetFolder());
 
-		actions.add(new ApplyOverridesToTypesAction());
-		actions.add(new InheritDelegationTargetsAction()); // after apply
-															// overrides!
-		actions.add(new MarkDocumentedLanguageElementsAction());
+        actions.add(new ApplyOverridesToTypesAction());
+        actions.add(new InheritDelegationTargetsAction()); // after apply
+                                                           // overrides!
+        actions.add(new MarkDocumentedLanguageElementsAction());
 
-		actions.add(new ReplaceJavaDocPartsAction());
+        actions.add(new ReplaceJavaDocPartsAction());
 
-		actions.add(new CalculateDelegationTargetsAction());
-		actions.add(new EstimateDelegationTargetsByJavadocAction());
+        actions.add(new CalculateDelegationTargetsAction());
+        actions.add(new EstimateDelegationTargetsByJavadocAction());
 
-		/* persist */
-		actions.add(new CreateAlternativeMappingFileAction());
-		actions.add(new CreateTasksSDKFileAction());
-		actions.add(new SaveTypesToSDKTargetFolder());
+        /* persist */
+        actions.add(new CreateAlternativeMappingFileAction());
+        actions.add(new CreateTasksSDKFileAction());
+        actions.add(new SaveTypesToSDKTargetFolder());
 
-		/* execute sdk builder actions: */
-		for (SDKBuilderAction action : actions) {
-			info("executing:" + action.getClass().getSimpleName());
-			action.execute(context);
-		}
+        /* execute sdk builder actions: */
+        for (SDKBuilderAction action : actions) {
+            info("executing:" + action.getClass().getSimpleName());
+            action.execute(context);
+        }
 
-		info("DONE");
-	}
+        info("DONE");
+    }
 
-	private void info(String message) {
-		System.out.println(message);
-	}
+    private void info(String message) {
+        System.out.println(message);
+    }
 
 }

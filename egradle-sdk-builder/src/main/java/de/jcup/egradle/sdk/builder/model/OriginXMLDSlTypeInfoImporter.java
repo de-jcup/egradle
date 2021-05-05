@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
 
 public class OriginXMLDSlTypeInfoImporter {
 
-	/* Example:org.gradle.api.artifacts.ComponentSelection.xml content:
+    /* Example:org.gradle.api.artifacts.ComponentSelection.xml content:
 	 *  @formatter:off
 		<section>
 	    <section>

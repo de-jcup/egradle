@@ -24,15 +24,15 @@ import de.jcup.egradle.sdk.internal.XMLSDKInfoExporter;
 
 public class InitSDKInfoAction implements SDKBuilderAction {
 
-	@Override
-	public void execute(SDKBuilderContext context) throws IOException {
+    @Override
+    public void execute(SDKBuilderContext context) throws IOException {
 
-		try (FileOutputStream stream = new FileOutputStream(context.sdkInfoFile)) {
+        try (FileOutputStream stream = new FileOutputStream(context.sdkInfoFile)) {
 
-			XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
-			exporter.exportSDKInfo(context.sdkInfo, stream);
-			System.out.println("- written sdk info file:" + context.sdkInfoFile);
-		}
-	}
+            XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
+            exporter.exportSDKInfo(context.sdkInfo, stream);
+            System.out.println("- written sdk info file:" + context.sdkInfoFile);
+        }
+    }
 
 }

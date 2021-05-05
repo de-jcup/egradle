@@ -39,136 +39,133 @@ import de.jcup.egradle.sdk.internal.XMLSDKInfo;
 
 public class SDKBuilderContext {
 
-	public File PARENT_OF_RES = new File("egradle-other/src/main/res/");
+    public File PARENT_OF_RES = new File("egradle-other/src/main/res/");
 
-	public Map<String, String> alternativeApiMapping = new TreeMap<>();
-	public File sdkInfoFile;
-	public XMLSDKInfo sdkInfo = new XMLSDKInfo();
+    public Map<String, String> alternativeApiMapping = new TreeMap<>();
+    public File sdkInfoFile;
+    public XMLSDKInfo sdkInfo = new XMLSDKInfo();
 
-	public File gradleEGradleDSLRootFolder;
-	public File gradleOriginPluginsFile;
-	public File gradleOriginMappingFile;
-	public File gradleProjectFolder;
-	public File gradleSubProjectDocsFolder;
+    public File gradleEGradleDSLRootFolder;
+    public File gradleOriginPluginsFile;
+    public File gradleOriginMappingFile;
+    public File gradleProjectFolder;
+    public File gradleSubProjectDocsFolder;
 
-	/**
-	 * Source directory where
-	 */
-	public File sourceParentDirectory;
-	public File targetPathDirectory;
-	public Map<String, Type> tasks = new TreeMap<>();
-	public int methodAllCount;
+    /**
+     * Source directory where
+     */
+    public File sourceParentDirectory;
+    public File targetPathDirectory;
+    public Map<String, Type> tasks = new TreeMap<>();
+    public int methodAllCount;
 
-	public Map<String, File> originTypeNameToOriginFileMapping = new TreeMap<>();
-	public File alternativeAPiMappingFile;
+    public Map<String, File> originTypeNameToOriginFileMapping = new TreeMap<>();
+    public File alternativeAPiMappingFile;
 
-	public XMLTypeImporter typeImporter = new XMLTypeImporter();
-	public XMLTypeExporter typeExporter = new XMLTypeExporter();
+    public XMLTypeImporter typeImporter = new XMLTypeImporter();
+    public XMLTypeExporter typeExporter = new XMLTypeExporter();
 
-	public XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
-	public XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
-	public ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
+    public XMLPluginsImporter pluginsImporter = new XMLPluginsImporter();
+    public XMLPluginsExporter pluginsExporter = new XMLPluginsExporter();
+    public ApiMappingImporter apiMappingImporter = new ApiMappingImporter();
 
-	public OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
+    public OriginXMLDSlTypeInfoImporter originDslTypeInfoImporter = new OriginXMLDSlTypeInfoImporter();
 
-	public XMLPlugins xmlPlugins;
-	public XMLPlugins alternativeXMLPugins;
-	public FilesystemFileLoader beforeGenerationLoader;
-	public GradleDSLTypeProvider originGradleFilesProvider;
+    public XMLPlugins xmlPlugins;
+    public XMLPlugins alternativeXMLPugins;
+    public FilesystemFileLoader beforeGenerationLoader;
+    public GradleDSLTypeProvider originGradleFilesProvider;
 
-	public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion)
-			throws IOException {
-		if (!PARENT_OF_RES.exists()) {
-			/*
-			 * fall back - so sdk builder could be run from gradle root project
-			 * as well via gradle from root project.
-			 */
-			PARENT_OF_RES = new File("src/main/res/");
-		}
+    public SDKBuilderContext(String pathToradleProjectFolder, File targetRootDirectory, String gradleVersion) throws IOException {
+        if (!PARENT_OF_RES.exists()) {
+            /*
+             * fall back - so sdk builder could be run from gradle root project as well via
+             * gradle from root project.
+             */
+            PARENT_OF_RES = new File("src/main/res/");
+        }
 
-		beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
-		originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
+        beforeGenerationLoader = new FilesystemFileLoader(typeImporter, pluginsImporter, apiMappingImporter);
+        originGradleFilesProvider = new GradleDSLTypeProvider(beforeGenerationLoader);
 
-		gradleProjectFolder = new File(pathToradleProjectFolder);
-		targetPathDirectory = createTargetFile(targetRootDirectory);
+        gradleProjectFolder = new File(pathToradleProjectFolder);
+        targetPathDirectory = createTargetFile(targetRootDirectory);
 
-		if (!this.gradleProjectFolder.exists()) {
-			throw new IllegalArgumentException("gradle project folder does not exist:" + gradleProjectFolder);
-		}
-		if (!this.gradleProjectFolder.isDirectory()) {
-			throw new IllegalArgumentException("gradle project folder is not a directory ?!?!?:" + gradleProjectFolder);
-		}
-		gradleSubProjectDocsFolder = new File(gradleProjectFolder, "subprojects/docs");
+        if (!this.gradleProjectFolder.exists()) {
+            throw new IllegalArgumentException("gradle project folder does not exist:" + gradleProjectFolder);
+        }
+        if (!this.gradleProjectFolder.isDirectory()) {
+            throw new IllegalArgumentException("gradle project folder is not a directory ?!?!?:" + gradleProjectFolder);
+        }
+        gradleSubProjectDocsFolder = new File(gradleProjectFolder, "subprojects/docs");
 
-		gradleEGradleDSLRootFolder = new File(gradleSubProjectDocsFolder, "/build/src-egradle/egradle-dsl");
-		gradleOriginPluginsFile = new File(gradleSubProjectDocsFolder, "/src/docs/dsl/plugins.xml");
-		gradleOriginMappingFile = new File(gradleSubProjectDocsFolder,
-				"/build/generated-resources/main/api-mapping.txt");
+        gradleEGradleDSLRootFolder = new File(gradleSubProjectDocsFolder, "/build/src-egradle/egradle-dsl");
+        gradleOriginPluginsFile = new File(gradleSubProjectDocsFolder, "/src/docs/dsl/plugins.xml");
+        gradleOriginMappingFile = new File(gradleSubProjectDocsFolder, "/build/generated-resources/main/api-mapping.txt");
 
-		assertFileExists(gradleOriginPluginsFile);
-		assertFileExists(gradleOriginMappingFile);
-		assertDirectoryAndExists(gradleEGradleDSLRootFolder);
+        assertFileExists(gradleOriginPluginsFile);
+        assertFileExists(gradleOriginMappingFile);
+        assertDirectoryAndExists(gradleEGradleDSLRootFolder);
 
-		sdkInfo.setCreationDate(new Date());
-		sdkInfo.setGradleVersion(gradleVersion);
+        sdkInfo.setCreationDate(new Date());
+        sdkInfo.setGradleVersion(gradleVersion);
 
-		sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
-		assertDirectoryAndExists(sourceParentDirectory);
+        sourceParentDirectory = new File(gradleEGradleDSLRootFolder, gradleVersion);
+        assertDirectoryAndExists(sourceParentDirectory);
 
-		/* healthy check: */
-		File healthCheck = new File(sourceParentDirectory, "org/gradle/api/Project.xml");
-		if (!healthCheck.exists()) {
-			throw new FileNotFoundException("The generated source for org.gradle.api.Project is not found at:\n"
-					+ healthCheck.getCanonicalPath()
-					+ "\nEither your path or version is incorrect or you forgot to generate...");
-		}
+        /* healthy check: */
+        File healthCheck = new File(sourceParentDirectory, "org/gradle/api/Project.xml");
+        if (!healthCheck.exists()) {
+            throw new FileNotFoundException(
+                    "The generated source for org.gradle.api.Project is not found at:\n" + healthCheck.getCanonicalPath() + "\nEither your path or version is incorrect or you forgot to generate...");
+        }
 
-		System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
+        System.out.println("start generation into:" + targetPathDirectory.getCanonicalPath());
 
-		sdkInfoFile = new File(targetPathDirectory, SDKInfo.FILENAME);
-		alternativeAPiMappingFile = new File(targetPathDirectory, "alternative-api-mapping.txt");
+        sdkInfoFile = new File(targetPathDirectory, SDKInfo.FILENAME);
+        alternativeAPiMappingFile = new File(targetPathDirectory, "alternative-api-mapping.txt");
 
-		beforeGenerationLoader.setDSLFolder(sourceParentDirectory);
+        beforeGenerationLoader.setDSLFolder(sourceParentDirectory);
 
-	}
+    }
 
-	private List<String> warnings = new ArrayList<>();
+    private List<String> warnings = new ArrayList<>();
 
-	public String getInfo() {
-		StringBuilder sb = new StringBuilder();
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
 
-		for (String warning : warnings) {
-			sb.append("warn:" + warning);
-			sb.append("\n");
-		}
+        for (String warning : warnings) {
+            sb.append("warn:" + warning);
+            sb.append("\n");
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	private File createTargetFile(File targetRootDirectory) {
-		return new File(targetRootDirectory, "sdk/");
-	}
+    private File createTargetFile(File targetRootDirectory) {
+        return new File(targetRootDirectory, "sdk/");
+    }
 
-	private void assertDirectoryAndExists(File folder) throws IOException {
-		if (!folder.exists()) {
-			throw new FileNotFoundException(folder.getCanonicalPath() + " does not exist!");
-		}
+    private void assertDirectoryAndExists(File folder) throws IOException {
+        if (!folder.exists()) {
+            throw new FileNotFoundException(folder.getCanonicalPath() + " does not exist!");
+        }
 
-		if (!folder.isDirectory()) {
-			throw new FileNotFoundException(folder.getCanonicalPath() + " ist not a directory!");
-		}
-	}
+        if (!folder.isDirectory()) {
+            throw new FileNotFoundException(folder.getCanonicalPath() + " ist not a directory!");
+        }
+    }
 
-	private void assertFileExists(File file) throws FileNotFoundException, IOException {
-		if (!file.exists()) {
-			throw new FileNotFoundException(file.getCanonicalPath() + " does not exist!");
-		}
-		if (!file.isFile()) {
-			throw new FileNotFoundException(file.getCanonicalPath() + " ist not a file!");
-		}
-	}
+    private void assertFileExists(File file) throws FileNotFoundException, IOException {
+        if (!file.exists()) {
+            throw new FileNotFoundException(file.getCanonicalPath() + " does not exist!");
+        }
+        if (!file.isFile()) {
+            throw new FileNotFoundException(file.getCanonicalPath() + " ist not a file!");
+        }
+    }
 
-	public void addWarning(String message) {
-		warnings.add(message);
-	}
+    public void addWarning(String message) {
+        warnings.add(message);
+    }
 }

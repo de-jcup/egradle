@@ -21,5 +21,5 @@ import de.jcup.egradle.sdk.builder.SDKBuilderContext;
 
 public interface SDKBuilderAction {
 
-	public void execute(SDKBuilderContext context) throws IOException;
+    public void execute(SDKBuilderContext context) throws IOException;
 }

@@ -26,24 +26,24 @@ import de.jcup.egradle.sdk.builder.util.DelegationTargetWalker;
 
 public class InheritDelegationTargetsAction implements SDKBuilderAction {
 
-	private DelegationTargetWalker walker = new DelegationTargetWalker();
-	private SimpleDelegationTargetMethodVisitor visitor = new SimpleDelegationTargetMethodVisitor();
+    private DelegationTargetWalker walker = new DelegationTargetWalker();
+    private SimpleDelegationTargetMethodVisitor visitor = new SimpleDelegationTargetMethodVisitor();
 
-	@Override
-	public void execute(SDKBuilderContext context) throws IOException {
-		for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
-			XMLType originType = (XMLType) context.originGradleFilesProvider.getType(typeName);
-			walker.visitAllMethodInHierarchy(originType, visitor, context, true);
-		}
+    @Override
+    public void execute(SDKBuilderContext context) throws IOException {
+        for (String typeName : context.originTypeNameToOriginFileMapping.keySet()) {
+            XMLType originType = (XMLType) context.originGradleFilesProvider.getType(typeName);
+            walker.visitAllMethodInHierarchy(originType, visitor, context, true);
+        }
 
-	}
+    }
 
-	private class SimpleDelegationTargetMethodVisitor implements DelegationTargetMethodVisitor {
+    private class SimpleDelegationTargetMethodVisitor implements DelegationTargetMethodVisitor {
 
-		@Override
-		public String getDelegationTargetAsString(Method method) {
-			return method.getDelegationTargetAsString();
-		}
+        @Override
+        public String getDelegationTargetAsString(Method method) {
+            return method.getDelegationTargetAsString();
+        }
 
-	}
+    }
 }

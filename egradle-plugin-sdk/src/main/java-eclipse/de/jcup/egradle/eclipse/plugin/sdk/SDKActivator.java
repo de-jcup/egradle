@@ -33,67 +33,67 @@ import de.jcup.egradle.sdk.internal.ContainedResourcesCopyingSDK;
 
 public class SDKActivator extends AbstractUIPlugin implements LogAdapter, RootFolderProvider {
 
-	public static final String ID = "de.jcup.egradle.eclipse.plugin.sdk";
+    public static final String ID = "de.jcup.egradle.eclipse.plugin.sdk";
 
-	private static BundleContext context;
-	// The shared instance
-	private static SDKActivator plugin;
+    private static BundleContext context;
+    // The shared instance
+    private static SDKActivator plugin;
 
-	static BundleContext getContext() {
-		return context;
-	}
+    static BundleContext getContext() {
+        return context;
+    }
 
-	public static SDKActivator getDefault() {
-		return plugin;
-	}
+    public static SDKActivator getDefault() {
+        return plugin;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.
-	 * BundleContext)
-	 */
-	public void start(BundleContext bundleContext) throws Exception {
-		SDKActivator.context = bundleContext;
-		plugin = this;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.
+     * BundleContext)
+     */
+    public void start(BundleContext bundleContext) throws Exception {
+        SDKActivator.context = bundleContext;
+        plugin = this;
 
-		VersionData version = EclipseUtil.createVersionData(bundleContext.getBundle());
-		ContainedResourcesCopyingSDK sdk = new ContainedResourcesCopyingSDK(version, this, this);
+        VersionData version = EclipseUtil.createVersionData(bundleContext.getBundle());
+        ContainedResourcesCopyingSDK sdk = new ContainedResourcesCopyingSDK(version, this, this);
 
-		SDKManager.get().setCurrentSDK(sdk);
+        SDKManager.get().setCurrentSDK(sdk);
 
-	}
+    }
 
-	@Override
-	public File getRootFolder() throws IOException {
-		File file = EclipseResourceHelper.DEFAULT.getFileInPlugin("sdk", ID);
-		return file;
-	}
+    @Override
+    public File getRootFolder() throws IOException {
+        File file = EclipseResourceHelper.DEFAULT.getFileInPlugin("sdk", ID);
+        return file;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext bundleContext) throws Exception {
-		SDKActivator.context = null;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext bundleContext) throws Exception {
+        SDKActivator.context = null;
+    }
 
-	@Override
-	public void logInfo(String message) {
-		getLog().log(new Status(IStatus.INFO, ID, message));
+    @Override
+    public void logInfo(String message) {
+        getLog().log(new Status(IStatus.INFO, ID, message));
 
-	}
+    }
 
-	@Override
-	public void logWarn(String message) {
-		getLog().log(new Status(IStatus.WARNING, ID, message));
-	}
+    @Override
+    public void logWarn(String message) {
+        getLog().log(new Status(IStatus.WARNING, ID, message));
+    }
 
-	@Override
-	public void logError(String message, Throwable t) {
-		getLog().log(new Status(IStatus.ERROR, ID, message, t));
-	}
+    @Override
+    public void logError(String message, Throwable t) {
+        getLog().log(new Status(IStatus.ERROR, ID, message, t));
+    }
 
 }

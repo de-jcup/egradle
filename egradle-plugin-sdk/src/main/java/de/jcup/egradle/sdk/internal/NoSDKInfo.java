@@ -21,29 +21,29 @@ import de.jcup.egradle.sdk.SDKInfo;
 
 public class NoSDKInfo implements SDKInfo {
 
-	public static final NoSDKInfo INSTANCE = new NoSDKInfo();
+    public static final NoSDKInfo INSTANCE = new NoSDKInfo();
 
-	private NoSDKInfo() {
-	}
+    private NoSDKInfo() {
+    }
 
-	@Override
-	public String getGradleVersion() {
-		return "none";
-	}
+    @Override
+    public String getGradleVersion() {
+        return "none";
+    }
 
-	@Override
-	public String getSdkVersion() {
-		return "Not installed";
-	}
+    @Override
+    public String getSdkVersion() {
+        return "Not installed";
+    }
 
-	@Override
-	public Date getInstallationDate() {
-		return null;
-	}
+    @Override
+    public Date getInstallationDate() {
+        return null;
+    }
 
-	@Override
-	public Date getCreationDate() {
-		return null;
-	}
+    @Override
+    public Date getCreationDate() {
+        return null;
+    }
 
 }

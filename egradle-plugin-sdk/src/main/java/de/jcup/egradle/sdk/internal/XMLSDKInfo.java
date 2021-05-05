@@ -31,58 +31,58 @@ import de.jcup.egradle.sdk.SDKInfo;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "sdk")
 public class XMLSDKInfo implements SDKInfo {
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
 
-	@XmlAttribute(name = "version")
-	private String sdkVersion;
+    @XmlAttribute(name = "version")
+    private String sdkVersion;
 
-	@XmlElement(name = "gradleVersion")
-	private String gradleVersion;
+    @XmlElement(name = "gradleVersion")
+    private String gradleVersion;
 
-	@XmlElement(name = "installationDate")
-	private String installationDate;
+    @XmlElement(name = "installationDate")
+    private String installationDate;
 
-	@XmlElement(name = "creationDate")
-	private String creationDate;
+    @XmlElement(name = "creationDate")
+    private String creationDate;
 
-	public void setSdkVersion(String sdkVersion) {
-		this.sdkVersion = sdkVersion;
-	}
+    public void setSdkVersion(String sdkVersion) {
+        this.sdkVersion = sdkVersion;
+    }
 
-	public void setGradleVersion(String gradleVersion) {
-		this.gradleVersion = gradleVersion;
-	}
+    public void setGradleVersion(String gradleVersion) {
+        this.gradleVersion = gradleVersion;
+    }
 
-	public void setInstallationDate(Date date) {
-		installationDate = DATE_FORMAT.format(date);
-	}
+    public void setInstallationDate(Date date) {
+        installationDate = DATE_FORMAT.format(date);
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = DATE_FORMAT.format(creationDate);
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = DATE_FORMAT.format(creationDate);
+    }
 
-	public String getGradleVersion() {
-		return gradleVersion;
-	}
+    public String getGradleVersion() {
+        return gradleVersion;
+    }
 
-	public String getSdkVersion() {
-		return sdkVersion;
-	}
+    public String getSdkVersion() {
+        return sdkVersion;
+    }
 
-	public Date getInstallationDate() {
-		return getDateObjectFromString(installationDate);
-	}
+    public Date getInstallationDate() {
+        return getDateObjectFromString(installationDate);
+    }
 
-	public Date getCreationDate() {
-		return getDateObjectFromString(creationDate);
-	}
+    public Date getCreationDate() {
+        return getDateObjectFromString(creationDate);
+    }
 
-	private Date getDateObjectFromString(String dateAsString) {
-		try {
-			return DATE_FORMAT.parse(dateAsString);
-		} catch (ParseException e) {
-			return new Date(0);
-		}
-	}
+    private Date getDateObjectFromString(String dateAsString) {
+        try {
+            return DATE_FORMAT.parse(dateAsString);
+        } catch (ParseException e) {
+            return new Date(0);
+        }
+    }
 
 }

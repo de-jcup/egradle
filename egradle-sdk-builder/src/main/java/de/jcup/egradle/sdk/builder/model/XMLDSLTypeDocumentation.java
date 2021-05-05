@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "dslDoc")
 public class XMLDSLTypeDocumentation {
 
-	@XmlElement(name = "property", type = XMLDSLPropertyInfo.class)
-	private Set<XMLDSLPropertyInfo> properties = new LinkedHashSet<>();
+    @XmlElement(name = "property", type = XMLDSLPropertyInfo.class)
+    private Set<XMLDSLPropertyInfo> properties = new LinkedHashSet<>();
 
-	@XmlElement(name = "method", type = XMLDSLMethodInfo.class)
-	private Set<XMLDSLMethodInfo> methods = new LinkedHashSet<>();
+    @XmlElement(name = "method", type = XMLDSLMethodInfo.class)
+    private Set<XMLDSLMethodInfo> methods = new LinkedHashSet<>();
 
-	public Set<XMLDSLMethodInfo> getMethods() {
-		return methods;
-	}
+    public Set<XMLDSLMethodInfo> getMethods() {
+        return methods;
+    }
 
-	public Set<XMLDSLPropertyInfo> getProperties() {
-		return properties;
-	}
+    public Set<XMLDSLPropertyInfo> getProperties() {
+        return properties;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLDSLTypeInfo [ properties=" + properties + ", methods=" + methods + "]";
-	}
+    @Override
+    public String toString() {
+        return "XMLDSLTypeInfo [ properties=" + properties + ", methods=" + methods + "]";
+    }
 
 }

@@ -31,12 +31,11 @@ import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
  */
 public class CopyApiMappingsAction implements SDKBuilderAction {
 
-	@Override
-	public void execute(SDKBuilderContext context) throws IOException {
-		/* copy origin mapping file to target directory */
-		File targetPathDirectory = context.targetPathDirectory;
-		FileUtils.copyFile(context.gradleOriginMappingFile,
-				new File(targetPathDirectory, context.gradleOriginMappingFile.getName()));
-	}
+    @Override
+    public void execute(SDKBuilderContext context) throws IOException {
+        /* copy origin mapping file to target directory */
+        File targetPathDirectory = context.targetPathDirectory;
+        FileUtils.copyFile(context.gradleOriginMappingFile, new File(targetPathDirectory, context.gradleOriginMappingFile.getName()));
+    }
 
 }

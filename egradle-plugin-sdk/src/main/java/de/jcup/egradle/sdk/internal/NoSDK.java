@@ -22,25 +22,25 @@ import de.jcup.egradle.core.VersionData;
 
 public class NoSDK extends AbstractSDK {
 
-	public static NoSDK INSTANCE = new NoSDK();
+    public static NoSDK INSTANCE = new NoSDK();
 
-	private NoSDK() {
-		super(new VersionData("0.0.0"));
-	}
+    private NoSDK() {
+        super(new VersionData("0.0.0"));
+    }
 
-	@Override
-	public boolean isInstalled() {
-		return false;
-	}
+    @Override
+    public boolean isInstalled() {
+        return false;
+    }
 
-	@Override
-	public File getSDKInstallationFolder() {
-		return null;
-	}
+    @Override
+    public File getSDKInstallationFolder() {
+        return null;
+    }
 
-	@Override
-	public void install() throws IOException {
+    @Override
+    public void install() throws IOException {
 
-	}
+    }
 
 }

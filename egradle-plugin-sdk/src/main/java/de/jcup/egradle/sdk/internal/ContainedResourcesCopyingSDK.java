@@ -30,79 +30,74 @@ import de.jcup.egradle.core.util.LogAdapter;
 
 public class ContainedResourcesCopyingSDK extends AbstractSDK {
 
-	private LogAdapter logAdapter;
-	private RootFolderCopySupport rootFolderCopySupport;
-	private RootFolderProvider rootFolderProvider;
+    private LogAdapter logAdapter;
+    private RootFolderCopySupport rootFolderCopySupport;
+    private RootFolderProvider rootFolderProvider;
 
-	/**
-	 * Creates internal file based sdk
-	 * 
-	 * @param sdkVersion
-	 *            - if <code>null</code> or blank then version "unknown" will be
-	 *            used instead
-	 * @param rootFolderProvider
-	 *            - may not be <code>null</code>
-	 * @param logAdapter
-	 *            can be <code>null</code>
-	 * @throws IllegalArgumentException
-	 *             when rootFolderProvider is <code>null</code>
-	 */
-	public ContainedResourcesCopyingSDK(VersionData sdkVersion, RootFolderProvider rootFolderProvider,
-			LogAdapter logAdapter) {
-		super(sdkVersion);
-		if (rootFolderProvider == null) {
-			throw new IllegalArgumentException("root folder provider may not be null!");
-		}
-		this.rootFolderProvider = rootFolderProvider;
-		this.logAdapter = logAdapter;
+    /**
+     * Creates internal file based sdk
+     * 
+     * @param sdkVersion         - if <code>null</code> or blank then version
+     *                           "unknown" will be used instead
+     * @param rootFolderProvider - may not be <code>null</code>
+     * @param logAdapter         can be <code>null</code>
+     * @throws IllegalArgumentException when rootFolderProvider is <code>null</code>
+     */
+    public ContainedResourcesCopyingSDK(VersionData sdkVersion, RootFolderProvider rootFolderProvider, LogAdapter logAdapter) {
+        super(sdkVersion);
+        if (rootFolderProvider == null) {
+            throw new IllegalArgumentException("root folder provider may not be null!");
+        }
+        this.rootFolderProvider = rootFolderProvider;
+        this.logAdapter = logAdapter;
 
-		rootFolderCopySupport = new VersionedFolderToUserHomeCopySupport("sdk", getVersion(), logAdapter);
-	}
+        rootFolderCopySupport = new VersionedFolderToUserHomeCopySupport("sdk", getVersion(), logAdapter);
+    }
 
-	@Override
-	public boolean isInstalled() {
-		return rootFolderCopySupport.isTargetFolderExisting();
-	}
+    @Override
+    public boolean isInstalled() {
+        return rootFolderCopySupport.isTargetFolderExisting();
+    }
 
-	@Override
-	public void install() throws IOException {
-		if (!rootFolderCopySupport.copyFrom(rootFolderProvider)) {
-			return;
-		}
+    @Override
+    public void install() throws IOException {
+        if (!rootFolderCopySupport.copyFrom(rootFolderProvider)) {
+            return;
+        }
 
-		File sdkInfoFile = new File(rootFolderCopySupport.getTargetFolder(), "sdk.xml");
-		XMLSDKInfo sdkInfo = null;
-		if (sdkInfoFile.exists()) {
-			XMLSDKInfoImporter importer = new XMLSDKInfoImporter();
-			try (FileInputStream fis = new FileInputStream(sdkInfoFile)) {
-				sdkInfo = importer.importSDKInfo(fis);
-			}
-		} else {
-			sdkInfo = new XMLSDKInfo();
-			sdkInfoFile.createNewFile();
-		}
-		sdkInfo.setInstallationDate(new Date());
-		sdkInfo.setSdkVersion(version.getAsText());
+        File sdkInfoFile = new File(rootFolderCopySupport.getTargetFolder(), "sdk.xml");
+        XMLSDKInfo sdkInfo = null;
+        if (sdkInfoFile.exists()) {
+            XMLSDKInfoImporter importer = new XMLSDKInfoImporter();
+            try (FileInputStream fis = new FileInputStream(sdkInfoFile)) {
+                sdkInfo = importer.importSDKInfo(fis);
+            }
+        } else {
+            sdkInfo = new XMLSDKInfo();
+            sdkInfoFile.createNewFile();
+        }
+        sdkInfo.setInstallationDate(new Date());
+        sdkInfo.setSdkVersion(version.getAsText());
 
-		try (OutputStream out = new FileOutputStream(sdkInfoFile)) {
-			XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
-			exporter.exportSDKInfo(sdkInfo, out);
-		}
+        try (OutputStream out = new FileOutputStream(sdkInfoFile)) {
+            XMLSDKInfoExporter exporter = new XMLSDKInfoExporter();
+            exporter.exportSDKInfo(sdkInfo, out);
+        }
 
-		if (logAdapter != null) {
-			logAdapter.logInfo("Successfully installed SDK for " + getVersion());
-		}
+        if (logAdapter != null) {
+            logAdapter.logInfo("Successfully installed SDK for " + getVersion());
+        }
 
-	}
+    }
 
-	@Override
-	public File getSDKInstallationFolder() {
-		return rootFolderCopySupport.getTargetFolder();
-	}
+    @Override
+    public File getSDKInstallationFolder() {
+        return rootFolderCopySupport.getTargetFolder();
+    }
 
-	@Override
-	public String toString() {
-		return "ContainedResourcesCopyingSDK [" + version + "]";
-	}
+    @Override
+    public String toString() {
+        return "ContainedResourcesCopyingSDK [" + version + "]";
+    }
 
 }

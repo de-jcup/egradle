@@ -24,13 +24,13 @@ import de.jcup.egradle.sdk.builder.action.SDKBuilderAction;
 
 public class SavePluginsToSDKTargetFolder implements SDKBuilderAction {
 
-	@Override
-	public void execute(SDKBuilderContext context) throws IOException {
-		File targetXMLPluginsFile = new File(context.targetPathDirectory, context.gradleOriginPluginsFile.getName());
-		try (FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
-			context.pluginsExporter.exportPlugins(context.xmlPlugins, outputStream);
-		}
+    @Override
+    public void execute(SDKBuilderContext context) throws IOException {
+        File targetXMLPluginsFile = new File(context.targetPathDirectory, context.gradleOriginPluginsFile.getName());
+        try (FileOutputStream outputStream = new FileOutputStream(targetXMLPluginsFile)) {
+            context.pluginsExporter.exportPlugins(context.xmlPlugins, outputStream);
+        }
 
-	}
+    }
 
 }

@@ -23,20 +23,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "method")
 public class XMLDSLMethodInfo {
-	@XmlAttribute(name = "name")
-	private String name;
+    @XmlAttribute(name = "name")
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLDSLMethodInfo [ name=" + name + "]";
-	}
+    @Override
+    public String toString() {
+        return "XMLDSLMethodInfo [ name=" + name + "]";
+    }
 
 }

@@ -33,25 +33,25 @@ import de.jcup.egradle.sdk.internal.NoSDK;
  */
 public class SDKManager {
 
-	private static SDKManager INSTANCE = new SDKManager();
-	private SDK currentSDK = NoSDK.INSTANCE;
+    private static SDKManager INSTANCE = new SDKManager();
+    private SDK currentSDK = NoSDK.INSTANCE;
 
-	SDKManager() {
-	}
+    SDKManager() {
+    }
 
-	public static final SDKManager get() {
-		return INSTANCE;
-	}
+    public static final SDKManager get() {
+        return INSTANCE;
+    }
 
-	public void setCurrentSDK(SDK currentSDK) {
-		this.currentSDK = currentSDK;
-	}
+    public void setCurrentSDK(SDK currentSDK) {
+        this.currentSDK = currentSDK;
+    }
 
-	public SDK getCurrentSDK() {
-		if (currentSDK == null) {
-			currentSDK = NoSDK.INSTANCE;
-		}
-		return currentSDK;
-	}
+    public SDK getCurrentSDK() {
+        if (currentSDK == null) {
+            currentSDK = NoSDK.INSTANCE;
+        }
+        return currentSDK;
+    }
 
 }

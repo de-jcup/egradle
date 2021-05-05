@@ -22,24 +22,24 @@ import de.jcup.egradle.core.VersionData;
 
 public interface SDK {
 
-	VersionData getVersion();
+    VersionData getVersion();
 
-	boolean isInstalled();
+    boolean isInstalled();
 
-	void install() throws IOException;
+    void install() throws IOException;
 
-	/**
-	 * Returns dsl folder or <code>null</code>
-	 * 
-	 * @return dsl folder or <code>null</code>
-	 */
-	File getSDKInstallationFolder();
+    /**
+     * Returns dsl folder or <code>null</code>
+     * 
+     * @return dsl folder or <code>null</code>
+     */
+    File getSDKInstallationFolder();
 
-	/**
-	 * Returns sdk info object , never <code>null</code>
-	 * 
-	 * @return sdk info object , never <code>null</code>
-	 */
-	SDKInfo getInfo();
+    /**
+     * Returns sdk info object , never <code>null</code>
+     * 
+     * @return sdk info object , never <code>null</code>
+     */
+    SDKInfo getInfo();
 
 }

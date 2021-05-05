@@ -36,16 +36,16 @@ import de.jcup.egradle.codeassist.dsl.XMLType;
 @XmlRootElement(name = "overrides")
 public class XMLDSLTypeOverrides {
 
-	@XmlElement(name = "type", type = XMLType.class)
-	private Set<XMLType> overrideTypes = new LinkedHashSet<>();
+    @XmlElement(name = "type", type = XMLType.class)
+    private Set<XMLType> overrideTypes = new LinkedHashSet<>();
 
-	public Set<XMLType> getOverrideTypes() {
-		return overrideTypes;
-	}
+    public Set<XMLType> getOverrideTypes() {
+        return overrideTypes;
+    }
 
-	@Override
-	public String toString() {
-		return "XMLDSLTypeOverrides [...]";
-	}
+    @Override
+    public String toString() {
+        return "XMLDSLTypeOverrides [...]";
+    }
 
 }

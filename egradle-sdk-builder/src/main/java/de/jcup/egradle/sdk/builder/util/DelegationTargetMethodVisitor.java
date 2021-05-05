@@ -26,12 +26,12 @@ import de.jcup.egradle.codeassist.dsl.Method;
  */
 public interface DelegationTargetMethodVisitor {
 
-	/**
-	 * Visits method
-	 * 
-	 * @param method
-	 * @return delegation target for this method or <code>null</code> if not
-	 *         resolveable
-	 */
-	public String getDelegationTargetAsString(Method method);
+    /**
+     * Visits method
+     * 
+     * @param method
+     * @return delegation target for this method or <code>null</code> if not
+     *         resolveable
+     */
+    public String getDelegationTargetAsString(Method method);
 }
