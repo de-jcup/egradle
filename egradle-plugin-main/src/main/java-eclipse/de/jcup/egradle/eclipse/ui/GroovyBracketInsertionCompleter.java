@@ -29,6 +29,7 @@ import de.jcup.egradle.codeassist.BracketInsertion;
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport;
 import de.jcup.egradle.codeassist.SourceCodeInsertionSupport.InsertionData;
 import de.jcup.egradle.core.util.TextUtil;
+import de.jcup.egradle.eclipse.document.GroovyDocumentIdentifiers;
 import de.jcup.egradle.eclipse.preferences.IEditorPreferences;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
 
@@ -72,6 +73,16 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
         if (document == null) {
             return;
         }
+		try {
+			String contentType = document.getContentType(offset);
+			if (GroovyDocumentIdentifiers.STRING.getId().equals(contentType) ||
+					GroovyDocumentIdentifiers.GSTRING.getId().equals(contentType)	)
+				return;
+		} catch (BadLocationException ex) {
+			/* ignore */
+			EclipseUtil.logError("Cannot get contentType", ex);
+			return;
+		}
         EclipseUtil.safeAsyncExec(new Runnable() {
 
             @Override
