@@ -17,6 +17,7 @@ package de.jcup.egradle.eclipse.ide.wizards;
 
 import java.util.List;
 
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -30,6 +31,7 @@ import de.jcup.egradle.eclipse.ide.IDEUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
 import de.jcup.egradle.eclipse.ui.SWTUtil;
 import de.jcup.egradle.ide.NewProjectContext;
+import de.jcup.egradle.ide.NewProjectTemplateVariables;
 import de.jcup.egradle.template.Features;
 import de.jcup.egradle.template.FileStructureTemplate;
 
@@ -93,26 +95,31 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 
         // required to avoid an error in the system
         setControl(parent);
-        setPageComplete(true);
 
+    }
+    
+    @Override
+    public boolean isPageComplete() {
+        return super.isPageComplete();
     }
 
     void initTemplateComponent(Composite parent) {
         if (templates.size() == 0) {
             return;
         }
+        FileStructureTemplate contextTemplate = context.getSelectedTemplate();
+        int initselection = -1;
         String[] items = new String[templates.size()];
         for (int i = 0; i < items.length; i++) {
-            items[i] = templates.get(i).getName();
+            FileStructureTemplate fileStructureTemplate = templates.get(i);
+            items[i] = fileStructureTemplate.getName();
+            if (fileStructureTemplate==contextTemplate) {
+                initselection=i;
+            }
         }
 
         templateList.setFont(parent.getFont());
         templateList.setItems(items);
-
-        if (context.getSelectedTemplate() == null) {
-            templateList.select(0);
-            handleTemplateSelection(0);
-        }
 
         SelectionListener listener = new SelectionAdapter() {
 
@@ -124,6 +131,11 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 
         };
         templateList.addSelectionListener(listener);
+        
+        if (initselection!=-1) {
+            templateList.select(initselection);
+            handleTemplateSelection(initselection);
+        }
     }
 
     private void handleTemplateSelection(int index) {
@@ -136,7 +148,19 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
         } else {
             info.append("Comes without gradle wrapper - so you must import with a local gradle installation!");
         }
+        if (selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA)) {
+            if (context.getJavaSourceCompatibility()==null || context.getJavaSourceCompatibility().isEmpty()) {
+                context.setJavaSourceCompatibility(NewProjectTemplateVariables.VAR__JAVA__VERSION.getDefaultValue());
+            }
+        }
+        boolean detailsNecessary= selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
+        IWizardPage nextPage = getNextPage();
+        if (nextPage instanceof EGradleNewProjectWizardTemplateDetailsPage) {
+            EGradleNewProjectWizardTemplateDetailsPage detailsPage = (EGradleNewProjectWizardTemplateDetailsPage) nextPage;
+            detailsPage.setPageComplete(!detailsNecessary);
+        }
         infoText.setText(info.toString());
+        setPageComplete(true);
     }
 
 }

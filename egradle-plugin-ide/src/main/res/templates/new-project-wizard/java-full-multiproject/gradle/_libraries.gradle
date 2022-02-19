@@ -1,0 +1,31 @@
+/* ============================================================================
+   Library definitions for project '#{egradle.template.projectname}'
+   ============================================================================
+   Define here library dependencies and use them inside your build.gradle
+   files in sub projects.
+  
+   Included from: "${rootProject.projectDir}/build.gradle"
+   ============================================================================
+ 
+ */
+ext {
+   versions = [
+      junit: '5.8.2',
+      slf4j: '1.7.36',
+      mockito: '1.10.19'
+   ]
+
+   library = [
+      /* testing */    
+      junit_jupiter_api:        "org.junit.jupiter:junit-jupiter-api:${versions.junit}",
+      junit_jupiter_engine:     "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",
+      junit_jupiter_params:     "org.junit.jupiter:junit-jupiter-params:${versions.junit}",
+      mockito_all:              "org.mockito:mockito-all:${versions.mockito}",
+      
+      /* logging */
+      slf4j_api:                "org.slf4j:slf4j-api:${versions.slf4j}",
+      slf4j_jdk:                "org.slf4j:slf4j-jdk14:${versions.slf4j}",
+      
+   ]
+   
+}

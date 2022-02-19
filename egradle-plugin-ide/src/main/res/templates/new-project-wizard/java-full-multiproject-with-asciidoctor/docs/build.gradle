@@ -1,0 +1,1 @@
+apply from: "${rootProject.projectDir}/gradle/build-asciidoctor.gradle"

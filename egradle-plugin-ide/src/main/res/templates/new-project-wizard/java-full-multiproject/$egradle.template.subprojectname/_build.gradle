@@ -6,10 +6,7 @@
  */
 dependencies {
 
-	compile library.commons_lang
-	compile library.commons_io
-	
-	compile library.slf4j_api
-	compile library.slf4j_jdk
+	implementation library.slf4j_api
+	runtimeOnly library.slf4j_jdk
 
 }

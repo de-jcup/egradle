@@ -1,0 +1,7 @@
+= Technical documentation
+:toc-title: Table of Contents
+include::documents/config.adoc[]
+***
+include::documents/techdoc/01_general_information.adoc[]
+include::documents/techdoc/02_getting_started.adoc[]
+

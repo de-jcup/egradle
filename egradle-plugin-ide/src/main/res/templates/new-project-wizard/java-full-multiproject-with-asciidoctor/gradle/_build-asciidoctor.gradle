@@ -1,0 +1,69 @@
+/* ============================================================================
+   This file contains the configurations for 
+   Asciidoctor settings
+   ============================================================================
+   
+   Included from: "${rootProject.projectDir}/docs/build.gradle"
+   ============================================================================
+ */
+ 
+apply plugin: 'org.asciidoctor.jvm.convert'
+apply plugin: 'org.asciidoctor.jvm.pdf'
+
+asciidoctor {
+    sourceDir  file("${projectDir}/asciidoc")
+    sources {
+        include 'techdoc.adoc', 'operations.adoc'
+    }
+    baseDir file("${projectDir}/asciidoc")
+    outputDir  file('build/docs')
+
+    outputOptions {
+        backends "html5", "pdf"
+        separateOutputDirs = false
+    }
+
+    attributes 'build-gradle': file('build.gradle'),
+            'source-highlighter': 'coderay',
+            'toc': 'left',
+            'toclevels': '5',
+            'icons': 'font',
+            'setanchors': 'true',
+            'idprefix': '',
+            'idseparator': '-',
+            'docinfo1': 'true',
+            'sectnums': 'true',
+            'sectnumlevels': '5',
+            'version': rootProject.version
+
+
+
+    ext.capturedOutput = [ ]
+    def listener = { ext.capturedOutput << it } as StandardOutputListener
+
+    logging.addStandardErrorListener(listener)
+    logging.addStandardOutputListener(listener)
+
+    doLast {
+        logging.removeStandardOutputListener(listener)
+        logging.removeStandardErrorListener(listener)
+        ext.capturedOutput.join('').with { output ->
+            if (output =~ /include file not found:/) {
+                throw new RuntimeException("Include file(s) not found, see next lines for details:\n" + output)
+            }
+        }
+    }
+}
+
+asciidoctorj {
+
+    version = '2.5.2'
+    
+    // Enable jdiagram support (new way)
+    // see https://asciidoctor.github.io/asciidoctor-gradle-plugin/development-3.x/user-guide/#diagram
+    modules {
+       diagram.use() 
+       diagram.version '2.2.1' 
+    }
+}
+ 

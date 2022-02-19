@@ -1,16 +1,19 @@
 buildscript {
 
+    apply from: "${rootProject.projectDir}/gradle/libraries.gradle"
+	
 	repositories {
 		mavenCentral()
-		jcenter()
 	}
     
 	dependencies{
 		classpath gradleApi()
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
-		classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.4.1'
-		classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
 	}
+}
+
+plugins {
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.asciidoctor.jvm.pdf' version '3.3.2'
 }
 
 /* ============================================================================
@@ -20,13 +23,10 @@ buildscript {
  * using '#{egradle.template.name}' template
  * ============================================================================
  */
-allprojects{
-	apply from: "${rootProject.projectDir}/libraries.gradle"
-}
 /* -------------------------------- */
 /* - Include other gradle scripts - */
 /* -------------------------------- */
-apply from: "${rootProject.projectDir}/build-java.gradle"
-apply from: "${rootProject.projectDir}/build-maven.gradle"
-apply from: "${rootProject.projectDir}/build-eclipse.gradle"
-apply from: "${rootProject.projectDir}/build-documentation.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-java.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-maven.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-eclipse.gradle"
+

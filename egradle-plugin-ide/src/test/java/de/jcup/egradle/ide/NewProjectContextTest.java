@@ -381,12 +381,29 @@ public class NewProjectContextTest {
     }
 
     @Test
+    public void replaceProjectNameVariable() {
+        assertEquals("alpha-web",NewProjectContext.replaceProjectNameVariable("${projectName}-web","alpha"));
+        assertEquals("-web",NewProjectContext.replaceProjectNameVariable("${projectName}-web",""));
+        assertEquals("super-alpha-web",NewProjectContext.replaceProjectNameVariable("super-${projectName}-web","alpha"));
+        assertEquals("super--web",NewProjectContext.replaceProjectNameVariable("super-${projectName}-web",null));
+    }
+    
+    @Test
     public void get_groupName_returns_groupName_when_groupname_is_set() {
         /* prepare */
         contextToTest.setGroupName("de.jcup.group");
 
         /* test */
         assertEquals("de.jcup.group", contextToTest.getGroupName());
+    }
+
+    @Test
+    public void suggest_group() {
+        /* test */
+        assertEquals("alpha", NewProjectContext.suggestGroupName("alpha"));
+        assertEquals("alpha1", NewProjectContext.suggestGroupName("alpha1"));
+        assertEquals("alpha.1", NewProjectContext.suggestGroupName("alpha-1"));
+        assertEquals("example.java.project", NewProjectContext.suggestGroupName("example-java-project"));
     }
 
 }

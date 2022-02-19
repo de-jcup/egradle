@@ -18,4 +18,4 @@ the `full multi project with asciidoctor` template to have a full working setup.
 
 Otherwise please look at https://arc42.org where you can find very good templates in `asciidoc` format. 
 
-=====  
+

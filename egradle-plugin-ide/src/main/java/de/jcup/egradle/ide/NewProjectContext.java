@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +31,11 @@ import de.jcup.egradle.template.Features;
 import de.jcup.egradle.template.FileStructureTemplate;
 
 public class NewProjectContext {
+
+    private static final String VAR_PROJECT_NAME = "${projectName}";
+
+    private static final Pattern GROUP_NAME_PATTERN = Pattern.compile("[^a-z0-9\\.]");
+    private static final Pattern VAR_PROJECT_NAME_PATTERN = Pattern.compile(Pattern.quote(VAR_PROJECT_NAME));
 
     String lastValidationProblem;
 
@@ -45,6 +51,8 @@ public class NewProjectContext {
     private String gradleVersion;
 
     private boolean gradleWrapperEnabled;
+
+    private String unprocessedMultiProjectNames;
 
     public String getJavaSourceCompatibility() {
         return javaSourceCompatibility;
@@ -125,6 +133,7 @@ public class NewProjectContext {
     }
 
     public void setMultiProjects(String multiProjects) {
+        this.unprocessedMultiProjectNames=multiProjects;
         this.multiProjectsList = createMultiProjects(multiProjects);
         this.multiProjectsAsIncludeString = createMultiProjectsAsIncludeString(multiProjectsList);
     }
@@ -163,13 +172,24 @@ public class NewProjectContext {
 
     public String getGroupName() {
         if (groupName == null || groupName.trim().length() == 0) {
-            return projectName;
+            return suggestGroupName(projectName);
         }
         return groupName;
     }
 
+    static String suggestGroupName(String name) {
+        if (name == null) {
+            return "";
+        }
+        return GROUP_NAME_PATTERN.matcher(name.trim().toLowerCase()).replaceAll(".");
+
+    }
+
     public void setProjectName(String projectName) {
-        this.projectName = projectName;
+        if (projectName == null) {
+            projectName = "";
+        }
+        this.projectName = projectName.trim();
     }
 
     public void setSelectedTemplate(FileStructureTemplate selectedTemplate) {
@@ -277,11 +297,21 @@ public class NewProjectContext {
             if (StringUtils.isBlank(split)) {
                 continue;
             }
-            list.add(split.trim());
+            String text = split.trim();
+            String replacement = getProjectName();
+            String subProjectName = replaceProjectNameVariable(text, replacement);
+            list.add(subProjectName);
         }
         Collections.sort(list);
 
         return list;
+    }
+
+    public static String replaceProjectNameVariable(String text, String replacement) {
+        if (replacement == null) {
+            replacement = "";
+        }
+        return VAR_PROJECT_NAME_PATTERN.matcher(text).replaceAll(replacement);
     }
 
     private void set(Properties p, TemplateVariable var, String value) {
@@ -289,6 +319,10 @@ public class NewProjectContext {
             value = "";
         }
         p.setProperty(var.getVariableName(), value);
+    }
+
+    public String getUnProcessedMultiProjectNames() {
+        return unprocessedMultiProjectNames;
     }
 
 }

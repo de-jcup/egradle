@@ -1,0 +1,9 @@
+= Documentation for Operations
+:toc-title: Table of Contents
+
+include::documents/config.adoc[]
+***
+:numbered:
+<<<<
+include::documents/operations/01_general_information.adoc[]
+

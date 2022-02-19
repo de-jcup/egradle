@@ -306,7 +306,7 @@
             class="de.jcup.egradle.eclipse.ide.wizards.EGradleNewProjectWizard"
             id="de.jcup.egradle.eclipse.ide.wizards.EGradleNewProjectWizard">
          <description>
-            Create a new gradle project
+            Create a new gradle project via EGradle. Supports different scenarios.
          </description>
       </wizard>
    </extension>

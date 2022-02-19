@@ -16,16 +16,11 @@ allprojects{
 	}
 
 }
+
 subprojects {
-	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
 	
 	group = "#{egradle.template.groupname}"
 	version = "0.0.1"
-	
-	/* Continous integration part - use build number in version when 'ci.buildNumber' is set*/
-	def buildNr = System.getenv('ci.buildNumber')
-  	if (buildNr != null && ! buildNr.isEmpty()){
-		version= version + "_"+buildNr
-	}
 		
 }

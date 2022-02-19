@@ -6,11 +6,11 @@
  * ============================================================================
  */
 allprojects{
-	apply from: "${rootProject.projectDir}/libraries.gradle"
+	apply from: "${rootProject.projectDir}/gradle/libraries.gradle"
 }
 /* -------------------------------- */
 /* - Include other gradle scripts - */
 /* -------------------------------- */
-apply from: "${rootProject.projectDir}/build-java.gradle"
-apply from: "${rootProject.projectDir}/build-maven.gradle"
-apply from: "${rootProject.projectDir}/build-eclipse.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-java.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-maven.gradle"
+apply from: "${rootProject.projectDir}/gradle/build-eclipse.gradle"
