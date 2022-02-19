@@ -91,6 +91,8 @@ public interface GradleEditorColorConstants {
 
     public static final RGB TASK_CYAN = rgb(0, 128, 128);
 
+    public static final RGB BRIGHT_WARNINGING_RED = rgb(191, 64, 64);
+
     public static RGB rgb(int r, int g, int b) {
         return new RGB(r, g, b);
     }

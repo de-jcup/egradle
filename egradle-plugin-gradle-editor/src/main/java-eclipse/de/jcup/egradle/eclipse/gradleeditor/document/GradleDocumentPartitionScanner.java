@@ -25,6 +25,7 @@ import org.eclipse.jface.text.rules.IToken;
 import de.jcup.egradle.eclipse.document.AbstractGroovyBasedDocumentPartitionScanner;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleApplyKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDefaultClosureKeyWords;
+import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleDeprecatedKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleSpecialVariableKeyWords;
 import de.jcup.egradle.eclipse.gradleeditor.document.keywords.GradleTaskKeyWords;
 
@@ -32,11 +33,13 @@ public class GradleDocumentPartitionScanner extends AbstractGroovyBasedDocumentP
 
     protected void addOtherRules(List<IPredicateRule> rules) {
         IToken gradleClosureKeywords = createToken(GRADLE_KEYWORD);
+        IToken gradleDeprecatedKeywords = createToken(GRADLE_DEPRECATED_KEYWORD);
         IToken gradleVariable = createToken(GRADLE_VARIABLE);
         IToken gradleApplyKeyWord = createToken(GRADLE_APPLY_KEYWORD);
         IToken gradleTaskKeyWord = createToken(GRADLE_TASK_KEYWORD);
 
         buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(), onlyLettersWordDetector);
+        buildWordRules(rules, gradleDeprecatedKeywords, GradleDeprecatedKeyWords.values(), onlyLettersWordDetector);
         buildWordRules(rules, gradleApplyKeyWord, GradleApplyKeyWords.values(), onlyLettersWordDetector);
         buildWordRules(rules, gradleTaskKeyWord, GradleTaskKeyWords.values(), onlyLettersWordDetector);
         buildWordRules(rules, gradleVariable, GradleSpecialVariableKeyWords.values(), onlyLettersWordDetector);

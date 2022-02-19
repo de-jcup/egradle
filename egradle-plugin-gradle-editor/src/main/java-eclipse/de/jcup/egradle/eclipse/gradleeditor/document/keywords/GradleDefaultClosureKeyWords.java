@@ -19,15 +19,17 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
 
-    COMPILE_ONLY("compileOnly"),
-
-    COMPILE("compile"),
-
-    TEST_COMPILE("testCompile"),
-
     IMPLEMENTATION("implementation"),
 
     TEST_IMPLEMENTATION("testImplementation"),
+    
+    RUNTIME_ONLY("runtimeOnly"),
+    
+    TEST_RUNTIME_ONLY("testRuntimeOnly"),
+    
+    CLASSPATH("classpath"),
+    
+    COPY("copy"),
 
     API("api"),
 
@@ -58,8 +60,21 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
     FILES("files"),
 
     FILETREE("fileTree"),
+    
+    CONFIGURATIONS("configurations"),
+    
+    /* wellknown */
+    ASCIIDOCTORJ("asciidoctorj"),
 
-    CONFIGURATIONS("configurations");
+    ASCIIDOCTOR("asciidoctor"),
+
+    
+    MODULES("modules"),
+    
+    ATTRIBUTES("attributes"),
+    
+    ;
+
 
     private String text;
 

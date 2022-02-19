@@ -17,41 +17,25 @@ package de.jcup.egradle.eclipse.gradleeditor.document.keywords;
 
 import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
-public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
+public enum GradleDeprecatedKeyWords implements DocumentKeyWord {
 
-    LOGGER("logger"),
-
-    LOGGING("logging"),
     
-    VERSION("version"),
+    // https://docs.gradle.org/current/userguide/upgrading_version_6.html#sec:configuration_removal
+    COMPILE("compile"),
 
-    TASKS("tasks"),
+    RUNTIME("runtime"),
+    
+    TEST_RUNTIME("testRuntime"),
 
-    PROJECT("project"), // method AND variable
-
-    PRINTLN("println"), // method
-
-    OPTIONS("options"),
-
-    SOURCE_SETS("sourceSets"),
-
-    SOURCE_DIR("srcDir"),
-
-    ROOTPROJECT("rootProject"),
-
-    PROJECTDIR("projectDir"),
-
-    JAVAVERSION("JavaVersion"),
-
-    SYSTEM("System"),
-
-    EXT("ext"),
-
+    TEST_COMPILE("testCompile"),
+    
+    
+    
     ;
 
     private String text;
 
-    private GradleSpecialVariableKeyWords(String text) {
+    private GradleDeprecatedKeyWords(String text) {
         this.text = text;
     }
 

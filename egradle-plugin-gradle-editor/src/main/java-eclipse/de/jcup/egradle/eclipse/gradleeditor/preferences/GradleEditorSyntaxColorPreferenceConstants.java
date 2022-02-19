@@ -22,11 +22,33 @@ import de.jcup.egradle.eclipse.util.PreferenceLabeled;
  * Constant definitions for plug-in preferences
  */
 public enum GradleEditorSyntaxColorPreferenceConstants implements PreferenceIdentifiable, PreferenceLabeled {
-    COLOR_NORMAL_TEXT("colorNormalText", "Normal text color"), COLOR_JAVA_KEYWORD("colorJavaKeywords", "Java keywords"), COLOR_JAVA_LITERAL("colorJavaLiteralKeywords", "Java literal keywords"),
-    COLOR_GROOVY_KEYWORD("colorGroovyKeywords", "Groovy keywords"), COLOR_GROOVY_DOC("colorGroovyDoc", "Groovy doc"), COLOR_NORMAL_STRING("colorNormalStrings", "Normal strings"),
-    COLOR_GSTRING("colorGStrings", "GStrings"), COLOR_COMMENT("colorComments", "Comment"), COLOR_ANNOTATION("colorAnnotations", "Annotations"),
-    COLOR_GRADLE_APPLY_KEYWORD("colorApplyKeywords", "Gradle apply keywords"), COLOR_GRADLE_TASK_KEYWORD("colorGradleTaskKeywords", "Gradle task keywords"),
-    COLOR_GRADLE_OTHER_KEYWORD("colorGradleOtherKeywords", "Gradle other  keywords"), COLOR_GRADLE_VARIABLE("colorGradleVariables", "Gradle variables"),
+    COLOR_NORMAL_TEXT("colorNormalText", "Normal text color"),
+
+    COLOR_JAVA_KEYWORD("colorJavaKeywords", "Java keywords"),
+
+    COLOR_JAVA_LITERAL("colorJavaLiteralKeywords", "Java literal keywords"),
+
+    COLOR_GROOVY_KEYWORD("colorGroovyKeywords", "Groovy keywords"),
+
+    COLOR_GROOVY_DOC("colorGroovyDoc", "Groovy doc"),
+
+    COLOR_NORMAL_STRING("colorNormalStrings", "Normal strings"),
+
+    COLOR_GSTRING("colorGStrings", "GStrings"),
+
+    COLOR_COMMENT("colorComments", "Comment"),
+
+    COLOR_ANNOTATION("colorAnnotations", "Annotations"),
+
+    COLOR_GRADLE_APPLY_KEYWORD("colorApplyKeywords", "Gradle apply keywords"),
+
+    COLOR_GRADLE_TASK_KEYWORD("colorGradleTaskKeywords", "Gradle task keywords"),
+
+    COLOR_GRADLE_OTHER_KEYWORD("colorGradleOtherKeywords", "Gradle other keywords"),
+
+    COLOR_GRADLE_VARIABLE("colorGradleVariables", "Gradle variables"),
+
+    COLOR_GRADLE_DEPRECATED_KEYWORD("colorGradleDeprecatedKeywords", "Gradle deprecated keywords"),
 
     ;
 

@@ -76,6 +76,7 @@ public class GradleEditorPreferenceInitializer extends AbstractPreferenceInitial
 
         getPreferences().setDefaultColor(COLOR_GRADLE_APPLY_KEYWORD, GradleEditorColorConstants.LINK_DEFAULT_BLUE);
         getPreferences().setDefaultColor(COLOR_GRADLE_OTHER_KEYWORD, GradleEditorColorConstants.KEYWORD_DEFAULT_PURPLE);
+        getPreferences().setDefaultColor(COLOR_GRADLE_DEPRECATED_KEYWORD, GradleEditorColorConstants.BRIGHT_WARNINGING_RED);
 
         getPreferences().setDefaultColor(COLOR_GRADLE_TASK_KEYWORD, GradleEditorColorConstants.TASK_DEFAULT_RED);
         getPreferences().setDefaultColor(COLOR_GRADLE_VARIABLE, GradleEditorColorConstants.DARK_GRAY);
