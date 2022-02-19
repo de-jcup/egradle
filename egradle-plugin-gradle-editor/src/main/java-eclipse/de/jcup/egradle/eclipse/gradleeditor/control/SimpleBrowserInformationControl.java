@@ -17,6 +17,9 @@ package de.jcup.egradle.eclipse.gradleeditor.control;
 
 import static de.jcup.egradle.codeassist.dsl.DSLConstants.*;
 
+import java.awt.Desktop;
+import java.net.URI;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -42,6 +45,7 @@ import org.eclipse.ui.PlatformUI;
 
 import de.jcup.egradle.core.util.History;
 import de.jcup.egradle.core.util.StringUtilsAccess;
+import de.jcup.egradle.eclipse.gradleeditor.EGradleErrorHandler;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.util.EclipseDevelopmentSettings;
 import de.jcup.egradle.eclipse.util.EclipseUtil;
@@ -356,13 +360,18 @@ public class SimpleBrowserInformationControl extends AbstractInformationControl 
                             browserEGradleLinkListener.onEGradleHyperlinkClicked(control, newLocation);
                         }
                     } else if (newLocation.startsWith(HYPERLINK_HTTP_PREFIX)) {
+                        event.doit = false;
                         if (isDebugEnabled()) {
-                            debug("changed location(4)-add history:" + newLocation);
+                            debug("changed location(4)-skip because HTTP so external:" + newLocation);
                         }
-                        history.add(newLocation);
-                        if (isDebugEnabled()) {
-                            debug("now:" + history.toString());
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                            try {
+                                Desktop.getDesktop().browse(new URI(newLocation));
+                            } catch (Exception e) {
+                                EGradleErrorHandler.INSTANCE.handleError("Was not able to open external url in system browser", e);
+                            }
                         }
+                        return;
                     }
                 }
                 updateActions();
