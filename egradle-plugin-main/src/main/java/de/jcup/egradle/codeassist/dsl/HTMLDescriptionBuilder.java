@@ -169,7 +169,7 @@ public class HTMLDescriptionBuilder {
         // https://docs.gradle.org/3.0/javadoc/org/gradle/api/Project.html
         // https://docs.gradle.org/3.0/javadoc/org/gradle/api/Project.html#file(java.lang.Object,
         // org.gradle.api.PathValidation)
-        String linkToGradleOriginAPIDoc = "https://docs.gradle.org/" + type.getVersion() + "/javadoc/" + typeName.replaceAll("\\.", "/") + ".html";
+        String linkToGradleOriginAPIDoc = "https://docs.gradle.org/current/javadoc/" + typeName.replaceAll("\\.", "/") + ".html";
         if (child != null) {
             String childTarget = null;
             if (child instanceof Method) {
