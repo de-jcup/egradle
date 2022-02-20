@@ -19,8 +19,6 @@ import static de.jcup.egradle.core.Constants.*;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IProject;
-
 import de.jcup.egradle.core.domain.GradleRootProject;
 
 public class VirtualProjectCreator {
@@ -34,7 +32,7 @@ public class VirtualProjectCreator {
      * @return virtual root project or null when noot existing;
      * @throws VirtualRootProjectException
      */
-    public IProject createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator partCreator) throws VirtualRootProjectException {
+    public Object createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator partCreator) throws VirtualRootProjectException {
         if (rootProject == null) {
             return null;
         }
@@ -46,7 +44,7 @@ public class VirtualProjectCreator {
             return null;
         }
 
-        IProject project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
+        Object project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
         if (project == null) {
             throw new VirtualRootProjectException("Was not able create or recreate '" + VIRTUAL_ROOTPROJECT_NAME + "'");
         }

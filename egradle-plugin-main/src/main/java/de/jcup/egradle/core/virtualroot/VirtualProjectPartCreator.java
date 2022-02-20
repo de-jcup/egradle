@@ -17,8 +17,6 @@ package de.jcup.egradle.core.virtualroot;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IProject;
-
 /**
  * Creates parts for virtual project
  * 
@@ -34,7 +32,7 @@ public interface VirtualProjectPartCreator {
      * @return project
      * @throws VirtualRootProjectException
      */
-    public IProject createOrRecreateProject(String projectName) throws VirtualRootProjectException;
+    public Object createOrRecreateProject(String projectName) throws VirtualRootProjectException;
 
     /**
      * Creates a link to a folder or a file
