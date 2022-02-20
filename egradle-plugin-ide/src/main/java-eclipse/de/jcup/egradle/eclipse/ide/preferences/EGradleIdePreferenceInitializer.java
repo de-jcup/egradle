@@ -49,6 +49,8 @@ public class EGradleIdePreferenceInitializer extends AbstractPreferenceInitializ
         store.setDefault(P_GRADLE_CALL_COMMAND.getId(), defaultCallType.getDefaultGradleCommand());
 
         store.setDefault(P_MIGRATE_IDE_STATE.getId(), MigrationState.NOT_MIGRATED.name());
+        
+        store.setDefault(P_ALWAYS_ADD_VIRTUAL_ROOT_TO_ALL_WORKINGSETS.getId(), true);
     }
 
     /**

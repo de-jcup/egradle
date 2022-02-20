@@ -154,7 +154,7 @@
       <command
       		 name="Detect new root project"
             categoryId="egradle.commands.category"
-      		id="egradle.commands.detectNewRootProject"
+      		id="egradle.commands.changeEgradleRootProject"
       >
       </command>
       <command
@@ -196,8 +196,8 @@
             commandId="egradle.commands.quickTaskExecution">
       </handler>
       <handler
-            commandId="egradle.commands.detectNewRootProject"
-            class="de.jcup.egradle.eclipse.ide.handlers.DetectNewRootProjectHandler">
+            commandId="egradle.commands.changeEgradleRootProject"
+            class="de.jcup.egradle.eclipse.ide.handlers.ChangeEGradleRootProjectHandler">
       </handler>
       <handler
       		commandId="egradle.commands.reimportGradleProject"
@@ -319,7 +319,7 @@
         <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_cmd_menus.htm -->
         <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
                 <!-- Detect new root project -->
-                <command commandId="egradle.commands.detectNewRootProject"
+                <command commandId="egradle.commands.changeEgradleRootProject"
                         label="Change EGradle root project" 
                         tooltip="Tries to detect new EGradle root project folder by this resource. Will change preferences to new root project and automatically connect an existing virtual root project to new root folder"
                         icon="icons/detectNewRootProject.png"

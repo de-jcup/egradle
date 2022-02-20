@@ -868,10 +868,14 @@ public class IDEUtil {
             protected IStatus run(IProgressMonitor monitor) {
                 EclipseVirtualProjectPartCreator partCreator = new EclipseVirtualProjectPartCreator(rootProject, monitor);
                 try {
-                    virtualProjectCreator.createOrUpdate(rootProject, partCreator);
+                    IProject virtualRootProject = virtualProjectCreator.createOrUpdate(rootProject, partCreator);
 
                     if (postProcessing != null) {
                         postProcessing.run();
+                    }
+                    if (virtualRootProject != null && EGradleIdePreferences.getInstance().isEGradleRootAlwaysAddedToWorkingSets()) {
+                        WorkingSetSupport workingSetSupport = new WorkingSetSupport();
+                        workingSetSupport.addTofirstActiveWorkingSetWhenNotAlreadyInside(virtualRootProject);
                     }
 
                     return Status.OK_STATUS;

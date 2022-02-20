@@ -114,7 +114,7 @@ public class EclipseVirtualProjectPartCreator implements VirtualProjectPartCreat
     }
 
     @Override
-    public Object createOrRecreateProject(String projectName) throws VirtualRootProjectException {
+    public IProject createOrRecreateProject(String projectName) throws VirtualRootProjectException {
         notNull(projectName, "'projectName' may not be null");
         monitor.beginTask("virtual root project (re)creation", 3);
         File rootprojectFolder = getRootProjectFolderWithoutErrorHandling();

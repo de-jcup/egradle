@@ -50,6 +50,11 @@ public class EGradleIdePreferences {
     public IPreferenceStore getPreferenceStore() {
         return store;
     }
+    
+    public boolean isEGradleRootAlwaysAddedToWorkingSets() {
+        boolean showConsoleOnBuildFailed = getPreferenceStore().getBoolean(P_ALWAYS_ADD_VIRTUAL_ROOT_TO_ALL_WORKINGSETS.getId());
+        return showConsoleOnBuildFailed;
+    }
 
     public boolean isShowingConsoleOnBuildFailed() {
         boolean showConsoleOnBuildFailed = getPreferenceStore().getBoolean(P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED.getId());

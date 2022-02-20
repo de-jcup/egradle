@@ -19,6 +19,8 @@ import static de.jcup.egradle.core.Constants.*;
 
 import java.io.File;
 
+import org.eclipse.core.resources.IProject;
+
 import de.jcup.egradle.core.domain.GradleRootProject;
 
 public class VirtualProjectCreator {
@@ -29,26 +31,27 @@ public class VirtualProjectCreator {
      * 
      * @param rootProject
      * @param partCreator
+     * @return virtual root project or null when noot existing;
      * @throws VirtualRootProjectException
      */
-    public void createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator partCreator) throws VirtualRootProjectException {
+    public IProject createOrUpdate(GradleRootProject rootProject, VirtualProjectPartCreator partCreator) throws VirtualRootProjectException {
         if (rootProject == null) {
-            return;
+            return null;
         }
         File rootFolder = rootProject.getFolder();
         if (rootFolder == null) {
-            return;
+            return null;
         }
         if (!rootFolder.exists()) {
-            return;
+            return null;
         }
 
-        Object project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
+        IProject project = partCreator.createOrRecreateProject(VIRTUAL_ROOTPROJECT_NAME);
         if (project == null) {
             throw new VirtualRootProjectException("Was not able create or recreate '" + VIRTUAL_ROOTPROJECT_NAME + "'");
         }
         addLinksAndMissingFolders(project, partCreator, rootFolder, rootProject);
-
+        return project;
     }
 
     private void addLinksAndMissingFolders(Object targetParentFolder, VirtualProjectPartCreator v, File folderToScan, GradleRootProject rootProject) throws VirtualRootProjectException {

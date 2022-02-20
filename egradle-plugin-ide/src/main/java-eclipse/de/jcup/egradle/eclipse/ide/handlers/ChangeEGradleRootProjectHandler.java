@@ -39,11 +39,11 @@ import de.jcup.egradle.eclipse.util.EclipseResourceHelper;
  * @author Albert Tregnaghi
  *
  */
-public class DetectNewRootProjectHandler extends AbstractHandler {
+public class ChangeEGradleRootProjectHandler extends AbstractHandler {
 
     private GradleRootProjectParentScanner scanner;
 
-    public DetectNewRootProjectHandler() {
+    public ChangeEGradleRootProjectHandler() {
         scanner = new GradleRootProjectParentScanner();
     }
 

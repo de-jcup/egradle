@@ -24,16 +24,30 @@ public enum EGradleIdePreferenceConstants {
 
     P_GRADLE_USER_HOME("gradleUserHome"),
 
-    P_GRADLE_CALL_TYPE("gradleCallType"), P_GRADLE_SHELL("commandShell"), P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"), P_GRADLE_CALL_COMMAND("commandGradle"),
-    P_OUTPUT_VALIDATION_ENABLED("outputValidationEnabled"), P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
+    P_GRADLE_CALL_TYPE("gradleCallType"), 
+    
+    P_GRADLE_SHELL("commandShell"), 
+    
+    P_GRADLE_INSTALL_BIN_FOLDER("pathGradleInstallation"), 
+    
+    P_GRADLE_CALL_COMMAND("commandGradle"),
+    
+    P_OUTPUT_VALIDATION_ENABLED("outputValidationEnabled"), 
+    
+    P_SHOW_CONSOLE_VIEW_ON_BUILD_FAILED_ENABLED("showConsoleViewOnBuildfailed"),
 
     /* file handling parts */
     P_FILEHANDLING_AUTOMATICALLY_DERIVE_BUILDFOLDERS("automaticallyDeriveBuildFolders"),
 
     /* import */
-    P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
+    P_IMPORT__EXECUTE_ASSEMBLE_TASK("onImportExecuteAssembleTask"), 
+    
+    P_IMPORT__DO_CLEAN_PROJECTS("onImportDoCleanProjects"),
 
-    P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled");
+    P_DECORATION_SUBPROJECTS_WITH_ICON_ENABLED("decorateSubprojectsWithIconEnabled"),
+    
+    P_ALWAYS_ADD_VIRTUAL_ROOT_TO_ALL_WORKINGSETS("alwaysAddVirtualRootToAllWorkingSets"),
+    ;
 
     private String id;
 
