@@ -133,7 +133,7 @@ public class NewProjectContext {
     }
 
     public void setMultiProjects(String multiProjects) {
-        this.unprocessedMultiProjectNames=multiProjects;
+        this.unprocessedMultiProjectNames = multiProjects;
         this.multiProjectsList = createMultiProjects(multiProjects);
         this.multiProjectsAsIncludeString = createMultiProjectsAsIncludeString(multiProjectsList);
     }

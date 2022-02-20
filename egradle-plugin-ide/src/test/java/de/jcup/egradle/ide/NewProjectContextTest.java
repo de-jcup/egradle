@@ -382,12 +382,12 @@ public class NewProjectContextTest {
 
     @Test
     public void replaceProjectNameVariable() {
-        assertEquals("alpha-web",NewProjectContext.replaceProjectNameVariable("${projectName}-web","alpha"));
-        assertEquals("-web",NewProjectContext.replaceProjectNameVariable("${projectName}-web",""));
-        assertEquals("super-alpha-web",NewProjectContext.replaceProjectNameVariable("super-${projectName}-web","alpha"));
-        assertEquals("super--web",NewProjectContext.replaceProjectNameVariable("super-${projectName}-web",null));
+        assertEquals("alpha-web", NewProjectContext.replaceProjectNameVariable("${projectName}-web", "alpha"));
+        assertEquals("-web", NewProjectContext.replaceProjectNameVariable("${projectName}-web", ""));
+        assertEquals("super-alpha-web", NewProjectContext.replaceProjectNameVariable("super-${projectName}-web", "alpha"));
+        assertEquals("super--web", NewProjectContext.replaceProjectNameVariable("super-${projectName}-web", null));
     }
-    
+
     @Test
     public void get_groupName_returns_groupName_when_groupname_is_set() {
         /* prepare */

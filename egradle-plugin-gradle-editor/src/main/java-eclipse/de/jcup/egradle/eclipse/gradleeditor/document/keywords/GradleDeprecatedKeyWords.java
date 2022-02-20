@@ -19,18 +19,15 @@ import de.jcup.egradle.eclipse.document.DocumentKeyWord;
 
 public enum GradleDeprecatedKeyWords implements DocumentKeyWord {
 
-    
     // https://docs.gradle.org/current/userguide/upgrading_version_6.html#sec:configuration_removal
     COMPILE("compile"),
 
     RUNTIME("runtime"),
-    
+
     TEST_RUNTIME("testRuntime"),
 
     TEST_COMPILE("testCompile"),
-    
-    
-    
+
     ;
 
     private String text;

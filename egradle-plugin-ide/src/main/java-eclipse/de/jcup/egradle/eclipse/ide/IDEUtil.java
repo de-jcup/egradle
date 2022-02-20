@@ -875,7 +875,7 @@ public class IDEUtil {
                     }
                     if (virtualRootProject instanceof IProject && EGradleIdePreferences.getInstance().isEGradleRootAlwaysAddedToWorkingSets()) {
                         WorkingSetSupport workingSetSupport = new WorkingSetSupport();
-                        workingSetSupport.addTofirstActiveWorkingSetWhenNotAlreadyInside((IProject)virtualRootProject);
+                        workingSetSupport.addTofirstActiveWorkingSetWhenNotAlreadyInside((IProject) virtualRootProject);
                     }
 
                     return Status.OK_STATUS;

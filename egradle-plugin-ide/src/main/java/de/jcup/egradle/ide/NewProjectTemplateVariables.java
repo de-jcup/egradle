@@ -25,12 +25,12 @@ public enum NewProjectTemplateVariables implements TemplateVariable {
 
     VAR__NAME_OF_SUBPROJECT("egradle.template.subprojectname"),
 
-    VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS("egradle.template.subprojects.include","${projectName}-web,${projectName}-core,${projectName}-cli"),
+    VAR__MULTIPROJECTS__INCLUDE_SUBPROJECTS("egradle.template.subprojects.include", "${projectName}-web,${projectName}-core,${projectName}-cli"),
 
-    VAR__JAVA__VERSION("egradle.template.java.version","11"),
+    VAR__JAVA__VERSION("egradle.template.java.version", "11"),
 
     VAR__GRADLE__VERSION("egradle.template.gradle.version", "7.4"),
-    
+
     ;
 
     private String variableName;

@@ -104,10 +104,10 @@ public class GradleSourceViewerConfiguration extends AbstractGroovySourceViewerC
         addPresentation(reconciler, ANNOTATION.getId(), getPreferences().getColor(COLOR_ANNOTATION), SWT.NONE);
         addPresentation(reconciler, GROOVY_DOC.getId(), getPreferences().getColor(COLOR_GROOVY_DOC), SWT.NONE);
         addPresentation(reconciler, GRADLE_APPLY_KEYWORD.getId(), getPreferences().getColor(COLOR_GRADLE_APPLY_KEYWORD), SWT.BOLD);
-        
+
         addPresentation(reconciler, GRADLE_KEYWORD.getId(), getPreferences().getColor(COLOR_GRADLE_OTHER_KEYWORD), SWT.BOLD);
         addPresentation(reconciler, GRADLE_DEPRECATED_KEYWORD.getId(), getPreferences().getColor(COLOR_GRADLE_DEPRECATED_KEYWORD), SWT.BOLD);
-        
+
         addPresentation(reconciler, GRADLE_TASK_KEYWORD.getId(), getPreferences().getColor(COLOR_GRADLE_TASK_KEYWORD), SWT.BOLD | SWT.ITALIC);
 
         addPresentation(reconciler, GRADLE_VARIABLE.getId(), getPreferences().getColor(COLOR_GRADLE_VARIABLE), SWT.ITALIC);

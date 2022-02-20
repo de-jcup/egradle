@@ -66,14 +66,14 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
 
         context = new NewProjectContext();
         context.setMultiProjects(defaultMultiProjects);
-        
+
         setWindowTitle("New Gradle Project");
     }
 
     @Override
     public void init(IWorkbench workbench, IStructuredSelection selection) {
     }
-    
+
     @Override
     public void addPages() {
 
@@ -84,11 +84,11 @@ public class EGradleNewProjectWizard extends Wizard implements INewWizard {
         addPage(mainPage);
         addPage(templateSelectionPage);
         addPage(templateDetailsPage);
-        
+
         mainPage.setPageComplete(false);
         templateSelectionPage.setPageComplete(false);
     }
-    
+
     @Override
     public boolean performFinish() {
         showProblem(null);

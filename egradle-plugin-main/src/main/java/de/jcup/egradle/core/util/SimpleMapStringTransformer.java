@@ -70,8 +70,8 @@ public class SimpleMapStringTransformer implements GradleStringTransformer {
             String replacement = xmap.get(p);
             try {
                 transformed = p.matcher(transformed).replaceAll(replacement);
-            }catch(RuntimeException e) {
-                throw new RuntimeException("Problems on transformation with pattern:"+p.pattern()+", for :"+transformed+", with replacement:"+replacement,e);
+            } catch (RuntimeException e) {
+                throw new RuntimeException("Problems on transformation with pattern:" + p.pattern() + ", for :" + transformed + ", with replacement:" + replacement, e);
             }
         }
         return transformed;

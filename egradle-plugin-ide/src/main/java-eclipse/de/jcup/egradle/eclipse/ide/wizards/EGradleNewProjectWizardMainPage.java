@@ -36,12 +36,12 @@ public class EGradleNewProjectWizardMainPage extends WizardNewProjectCreationPag
         setImageDescriptor(IDEUtil.createImageDescriptor("icons/egradle-banner_64x64.png"));
         setDescription("Enter project name and location.");
     }
-    
+
     @Override
     public boolean isPageComplete() {
         return super.isPageComplete();
     }
-    
+
     @Override
     public void createControl(Composite parent) {
         super.createControl(parent);

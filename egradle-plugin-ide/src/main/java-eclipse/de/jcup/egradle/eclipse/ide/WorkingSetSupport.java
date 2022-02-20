@@ -31,15 +31,14 @@ import org.eclipse.ui.PlatformUI;
 
 public class WorkingSetSupport {
 
-    
     public void addTofirstActiveWorkingSetWhenNotAlreadyInside(IProject project) {
         IWorkingSetManager wm = getWorkingSetManager();
         IWorkingSet[] workingSets = wm.getAllWorkingSets();
-        
-        for (IWorkingSet workingSet:workingSets) {
+
+        for (IWorkingSet workingSet : workingSets) {
             IAdaptable[] elementsBefore = workingSet.getElements();
             List<IAdaptable> list = new ArrayList<IAdaptable>();
-            for (IAdaptable adaptable :elementsBefore) {
+            for (IAdaptable adaptable : elementsBefore) {
                 list.add(adaptable);
             }
             if (list.contains(project)) {
@@ -47,14 +46,14 @@ public class WorkingSetSupport {
                 continue;
             }
             list.add(project);
-            
+
             /* add it */
             workingSet.setElements(list.toArray(new IAdaptable[list.size()]));
-            
+
         }
-        
+
     }
-    
+
     /**
      * Resolve working sets for given projects
      * 

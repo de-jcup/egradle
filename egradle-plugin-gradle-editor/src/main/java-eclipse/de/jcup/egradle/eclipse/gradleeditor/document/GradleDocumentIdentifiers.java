@@ -20,7 +20,7 @@ import de.jcup.egradle.core.text.DocumentIdentifier;
 public enum GradleDocumentIdentifiers implements DocumentIdentifier {
 
     GRADLE_KEYWORD,
-    
+
     GRADLE_DEPRECATED_KEYWORD,
 
     GRADLE_APPLY_KEYWORD,

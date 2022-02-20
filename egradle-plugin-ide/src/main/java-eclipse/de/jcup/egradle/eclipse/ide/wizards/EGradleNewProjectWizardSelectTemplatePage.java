@@ -97,7 +97,7 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
         setControl(parent);
 
     }
-    
+
     @Override
     public boolean isPageComplete() {
         return super.isPageComplete();
@@ -113,8 +113,8 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
         for (int i = 0; i < items.length; i++) {
             FileStructureTemplate fileStructureTemplate = templates.get(i);
             items[i] = fileStructureTemplate.getName();
-            if (fileStructureTemplate==contextTemplate) {
-                initselection=i;
+            if (fileStructureTemplate == contextTemplate) {
+                initselection = i;
             }
         }
 
@@ -131,8 +131,8 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
 
         };
         templateList.addSelectionListener(listener);
-        
-        if (initselection!=-1) {
+
+        if (initselection != -1) {
             templateList.select(initselection);
             handleTemplateSelection(initselection);
         }
@@ -149,11 +149,11 @@ public class EGradleNewProjectWizardSelectTemplatePage extends WizardPage {
             info.append("Comes without gradle wrapper - so you must import with a local gradle installation!");
         }
         if (selectedTemplate.hasFeature(Features.NEW_PROJECT__SUPPORTS_JAVA)) {
-            if (context.getJavaSourceCompatibility()==null || context.getJavaSourceCompatibility().isEmpty()) {
+            if (context.getJavaSourceCompatibility() == null || context.getJavaSourceCompatibility().isEmpty()) {
                 context.setJavaSourceCompatibility(NewProjectTemplateVariables.VAR__JAVA__VERSION.getDefaultValue());
             }
         }
-        boolean detailsNecessary= selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
+        boolean detailsNecessary = selectedTemplate.hasFeature(Features.NEW_PROJECT__TYPE_MULTI_PROJECT);
         IWizardPage nextPage = getNextPage();
         if (nextPage instanceof EGradleNewProjectWizardTemplateDetailsPage) {
             EGradleNewProjectWizardTemplateDetailsPage detailsPage = (EGradleNewProjectWizardTemplateDetailsPage) nextPage;

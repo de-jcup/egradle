@@ -22,13 +22,13 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
     IMPLEMENTATION("implementation"),
 
     TEST_IMPLEMENTATION("testImplementation"),
-    
+
     RUNTIME_ONLY("runtimeOnly"),
-    
+
     TEST_RUNTIME_ONLY("testRuntimeOnly"),
-    
+
     CLASSPATH("classpath"),
-    
+
     COPY("copy"),
 
     API("api"),
@@ -60,21 +60,19 @@ public enum GradleDefaultClosureKeyWords implements DocumentKeyWord {
     FILES("files"),
 
     FILETREE("fileTree"),
-    
+
     CONFIGURATIONS("configurations"),
-    
+
     /* wellknown */
     ASCIIDOCTORJ("asciidoctorj"),
 
     ASCIIDOCTOR("asciidoctor"),
 
-    
     MODULES("modules"),
-    
-    ATTRIBUTES("attributes"),
-    
-    ;
 
+    ATTRIBUTES("attributes"),
+
+    ;
 
     private String text;
 

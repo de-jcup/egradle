@@ -54,10 +54,9 @@ public class EGradleFileHandlingPreferencePage extends FieldEditorPreferencePage
 
         addField(automaticalDeriveBuildFolders);
         SWTFactory.createLabel(getFieldEditorParent(), info, 2);
-        
-        
-        addVirtualRootToAllWorkingSets= new BooleanFieldEditor(EGradleIdePreferenceConstants.P_ALWAYS_ADD_VIRTUAL_ROOT_TO_ALL_WORKINGSETS.getId(), "Virtual root project is automatically added to all working sets",
-                getFieldEditorParent());
+
+        addVirtualRootToAllWorkingSets = new BooleanFieldEditor(EGradleIdePreferenceConstants.P_ALWAYS_ADD_VIRTUAL_ROOT_TO_ALL_WORKINGSETS.getId(),
+                "Virtual root project is automatically added to all working sets", getFieldEditorParent());
         String info2 = "(A new virtual root project is always added to all current working sets, so always visible)";
 
         addField(addVirtualRootToAllWorkingSets);

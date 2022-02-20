@@ -2,7 +2,7 @@
 <feature
       id="de.jcup.egradle.eclipse.feature"
       label="EGradle IDE"
-      version="2.8.0"
+      version="3.0.0"
       provider-name="Albert Tregnaghi"
       plugin="de.jcup.egradle.eclipse.plugin.branding">
 
@@ -83,7 +83,7 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="EGradle update site" url="https://dl.bintray.com/de-jcup/egradle/"/>
+      <update label="EGradle update site" url="https://github.com/de-jcup/update-site-egradle/tree/main/update-site"/>
    </url>
 
    <includes

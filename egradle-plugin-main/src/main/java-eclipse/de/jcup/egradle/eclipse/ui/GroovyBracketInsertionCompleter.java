@@ -73,16 +73,15 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
         if (document == null) {
             return;
         }
-		try {
-			String contentType = document.getContentType(offset);
-			if (GroovyDocumentIdentifiers.STRING.getId().equals(contentType) ||
-					GroovyDocumentIdentifiers.GSTRING.getId().equals(contentType)	)
-				return;
-		} catch (BadLocationException ex) {
-			/* ignore */
-			EclipseUtil.logError("Cannot get contentType", ex);
-			return;
-		}
+        try {
+            String contentType = document.getContentType(offset);
+            if (GroovyDocumentIdentifiers.STRING.getId().equals(contentType) || GroovyDocumentIdentifiers.GSTRING.getId().equals(contentType))
+                return;
+        } catch (BadLocationException ex) {
+            /* ignore */
+            EclipseUtil.logError("Cannot get contentType", ex);
+            return;
+        }
         EclipseUtil.safeAsyncExec(new Runnable() {
 
             @Override

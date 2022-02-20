@@ -22,7 +22,7 @@ public enum GradleSpecialVariableKeyWords implements DocumentKeyWord {
     LOGGER("logger"),
 
     LOGGING("logging"),
-    
+
     VERSION("version"),
 
     TASKS("tasks"),
