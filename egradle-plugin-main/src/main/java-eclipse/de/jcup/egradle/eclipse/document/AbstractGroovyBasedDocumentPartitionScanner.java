@@ -40,9 +40,11 @@ import de.jcup.egradle.core.text.DocumentIdentifier;
  */
 public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBasedPartitionScanner {
 
+    protected ClosureKeyWordDetector closureKeywordDetector = new ClosureKeyWordDetector();
     protected OnlyLettersKeyWordDetector onlyLettersWordDetector = new OnlyLettersKeyWordDetector();
     private AnnotationWordDetector onlyAnnotationWordDetector = new AnnotationWordDetector();
     private JavaWordDetector javaWordDetector = new JavaWordDetector();
+    private GroovyKeyWordDetector groovyKeyWordDetector = new GroovyKeyWordDetector();
 
     public AbstractGroovyBasedDocumentPartitionScanner() {
         List<IPredicateRule> rules = new ArrayList<>();
@@ -80,7 +82,7 @@ public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBa
         buildWordRules(rules, javaKeyWord, JavaKeyWords.values(), javaWordDetector);
         buildWordRules(rules, javaLiteral, JavaLiteralKeyWords.values(), javaWordDetector);
 
-        buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(), javaWordDetector);
+        buildWordRules(rules, groovyKeyWord, GroovyKeyWords.values(), groovyKeyWordDetector);
 
         buildAnnotationRules(rules, groovyAnnotation, onlyAnnotationWordDetector);
     }

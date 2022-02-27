@@ -38,7 +38,7 @@ public class GradleDocumentPartitionScanner extends AbstractGroovyBasedDocumentP
         IToken gradleApplyKeyWord = createToken(GRADLE_APPLY_KEYWORD);
         IToken gradleTaskKeyWord = createToken(GRADLE_TASK_KEYWORD);
 
-        buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(), onlyLettersWordDetector);
+        buildWordRules(rules, gradleClosureKeywords, GradleDefaultClosureKeyWords.values(), closureKeywordDetector);
         buildWordRules(rules, gradleDeprecatedKeywords, GradleDeprecatedKeyWords.values(), onlyLettersWordDetector);
         buildWordRules(rules, gradleApplyKeyWord, GradleApplyKeyWords.values(), onlyLettersWordDetector);
         buildWordRules(rules, gradleTaskKeyWord, GradleTaskKeyWords.values(), onlyLettersWordDetector);
