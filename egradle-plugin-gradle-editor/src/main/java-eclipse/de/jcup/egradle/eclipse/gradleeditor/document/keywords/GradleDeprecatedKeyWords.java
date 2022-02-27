@@ -27,6 +27,10 @@ public enum GradleDeprecatedKeyWords implements DocumentKeyWord {
     TEST_RUNTIME("testRuntime"),
 
     TEST_COMPILE("testCompile"),
+    
+    COMPILE_JAVA("compileJava"),
+    
+    COMPILE_TEST_JAVA("compileTestJava"),
 
     ;
 
