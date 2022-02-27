@@ -204,7 +204,7 @@ public class SelectConfigurationDialog extends Dialog {
         final Combo combo = new Combo(shell, SWT.NONE);
         combo.setBounds(50, 50, 150, 65);
 
-        String items[] = { "", "compile", "testCompile", "runtime", "testRuntime", "implementation", "testImplementation" };
+        String items[] = { "", "api", "runtimeOnly", "testRuntime", "implementation", "testImplementation" };
 
         combo.setItems(items);
 

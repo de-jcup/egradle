@@ -53,6 +53,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
         }
         SelectConfigurationDialog dialog = new SelectConfigurationDialog(activeWorkbenchShell);
         dialog.setTitleImage(IDEUtil.getImage("icons/gradle-og.png"));
+        dialog.setText("Show dependencies");
         dialog.setInput(configuration);
         String config = dialog.open();
         if (config == null) {
