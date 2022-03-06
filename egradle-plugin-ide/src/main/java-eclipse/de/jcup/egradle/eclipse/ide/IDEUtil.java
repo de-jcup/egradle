@@ -137,6 +137,14 @@ public class IDEUtil {
         }
         return context;
     }
+    
+    public static ProjectContext createProjectContext(IProject ...projects) {
+        ProjectContext context = new ProjectContext();
+        for (IProject project: projects) {
+            context.getProjects().add(project);
+        }
+        return context;
+    }
 
     /**
      * Creates or refreshes virtual root project. If project exists but isn't opened

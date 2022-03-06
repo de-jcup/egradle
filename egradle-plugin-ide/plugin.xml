@@ -124,6 +124,11 @@
             id="egradle.commands.refreshEclipse">
       </command>
       <command
+            name="Refresh project eclipse dependencies"
+            categoryId="egradle.commands.category"
+            id="egradle.commands.refreshProjectEclipse">
+      </command>
+      <command
             id="egradle.commands.launch"
             name="EGradle Launch">
          <commandParameter
@@ -182,6 +187,10 @@
       <handler
             commandId="egradle.commands.refreshEclipse"
             class="de.jcup.egradle.eclipse.ide.handlers.RefreshAllEclipseDependenciesHandler">
+      </handler>
+      <handler
+            commandId="egradle.commands.refreshProjectEclipse"
+            class="de.jcup.egradle.eclipse.ide.handlers.RefreshProjectEclipseDependenciesHandler">
       </handler>
       <handler
             class="de.jcup.egradle.eclipse.ide.handlers.LaunchGradleCommandHandler"
@@ -372,6 +381,65 @@
                          </with>
                       </visibleWhen>
                    </command>
+                    <command
+                         commandId="egradle.commands.refreshProjectEclipse"
+                         icon="icons/refreshProjectEclipseDependencies.png"
+                         label="Refresh project eclipse dependencies"
+                         style="push"
+                         tooltip="Refreshes eclipse dependencies of this project only"
+                         >
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <and>
+                               <iterate
+                                     ifEmpty="false">
+                                  <adapt
+                                        type="org.eclipse.core.resources.IResource">
+                                     <test
+                                           property="de.jcup.egradle.isProjectPartOfRootProject"
+                                           value="true">
+                                     </test>
+                                     <not>
+                                          <test
+                                                property="org.eclipse.core.resources.projectNature"
+                                                value="de.jcup.egradle.eclipse.virtualRootProjectNature">
+                                          </test>
+                                      </not>
+                                  </adapt>
+                               </iterate>
+                            </and>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <command
+                         commandId="egradle.commands.refreshEclipse"
+                         icon="icons/refreshAllEclipseDependencies.png"
+                         label="Refresh all eclipse dependencies"
+                         style="push"
+                         tooltip="Refreshes all eclipse dependencies">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeMenuSelection">
+                            <iterate
+                                  ifEmpty="false">
+                               <adapt
+                                     type="org.eclipse.core.resources.IProject">
+                                  <test
+                                        property="org.eclipse.core.resources.projectNature"
+                                        value="de.jcup.egradle.eclipse.virtualRootProjectNature">
+                                  </test>
+                               </adapt>
+                            </iterate>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                   <separator
+                        visible="true"
+                         name="egradle.plugin.ide.menu.separator1">
+                   </separator>
                    <command
                          commandId="egradle.commands.newGradleSubProject"
                          icon="icons/new-sub-project.png"
@@ -448,8 +516,12 @@
                          </with>
                       </visibleWhen>
                    </command>
+                   <separator
+                         visible="true"
+                         name="egradle.plugin.ide.menu.separator2">
+                   </separator>
                     <command
-                         commandId=" egradle.commands.quickTaskExecution"
+                         commandId="egradle.commands.quickTaskExecution"
                          icon="icons/quickTaskExecution.png"
                          label="Quick launch"
                   		 tooltip="Directly execute gradle tasks."
@@ -471,29 +543,6 @@
                                   </adapt>
                                </iterate>
                             </and>
-                         </with>
-                      </visibleWhen>
-                   </command>
-                   <command
-                         commandId="egradle.commands.refreshEclipse"
-                         icon="icons/refreshAllEclipseDependencies.png"
-                         label="Refresh eclipse dependencies"
-                         style="push"
-                         tooltip="Refreshes all eclipse dependencies">
-                      <visibleWhen
-                            checkEnabled="false">
-                         <with
-                               variable="activeMenuSelection">
-                            <iterate
-                                  ifEmpty="false">
-                               <adapt
-                                     type="org.eclipse.core.resources.IProject">
-                                  <test
-                                        property="org.eclipse.core.resources.projectNature"
-                                        value="de.jcup.egradle.eclipse.virtualRootProjectNature">
-                                  </test>
-                               </adapt>
-                            </iterate>
                          </with>
                       </visibleWhen>
                    </command>
