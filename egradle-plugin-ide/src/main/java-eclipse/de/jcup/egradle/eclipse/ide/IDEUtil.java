@@ -453,6 +453,7 @@ public class IDEUtil {
             sb.append("all ");
         } else {
             sb.append(buildConfigurations.length);
+            sb.append(" ");
         }
         sb.append("build configurations in eclipse");
         String message = sb.toString();
