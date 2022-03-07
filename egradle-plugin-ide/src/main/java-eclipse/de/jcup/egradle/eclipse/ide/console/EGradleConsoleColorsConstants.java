@@ -33,6 +33,7 @@ public class EGradleConsoleColorsConstants {
     public static final RGB YELLOW = new RGB(255, 255, 85);
     public static final RGB ORANGE = new RGB(255, 165, 0); // http://www.rapidtables.com/web/color/orange-color.htm
     public static final RGB BRIGHT_BLUE = new RGB(85, 85, 255);
+    public static final RGB TASK_BLUE = new RGB(93, 138, 168);
     public static final RGB BRIGHT_MAGENTA = new RGB(255, 85, 255);
 
     public static final RGB BRIGHT_CYAN = new RGB(85, 255, 255);

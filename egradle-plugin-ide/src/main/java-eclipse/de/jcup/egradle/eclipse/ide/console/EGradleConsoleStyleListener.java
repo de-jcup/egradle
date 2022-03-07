@@ -52,6 +52,10 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
         addParseDataByIndex("+---", BRIGHT_BLUE);
         addParseDataByIndex("\\---", BRIGHT_BLUE);
         addParseDataByIndex("|", BRIGHT_BLUE);
+        
+        /* task output*/
+        addParseDataByIndex(" Task ", TASK_BLUE);
+        
     }
 
     static final void addParseDataByIndex(String substring, RGB color) {
