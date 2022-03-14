@@ -40,7 +40,7 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
     private String configuration;
 
     private SelectedProjectFinder projectFinder = new SelectedProjectFinder();
-    
+
     public Object execute(ExecutionEvent event) throws ExecutionException {
         Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
         if (activeWorkbenchShell == null) {
@@ -63,8 +63,6 @@ public class ShowDependenciesOfSelectecProjectHandler extends AbstractEGradleCom
         projectToUse = project;
         return super.execute(event);
     }
-
-    
 
     @Override
     public void prepare(GradleContext context) {

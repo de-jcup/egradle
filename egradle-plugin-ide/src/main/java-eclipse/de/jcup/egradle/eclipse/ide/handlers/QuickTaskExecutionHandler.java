@@ -43,6 +43,7 @@ public class QuickTaskExecutionHandler extends AbstractEGradleCommandHandler {
         history = new History<>(20);
 
         /* add defaults last added will be first to select.. */
+        history.add("--warning-mode all");
         history.add("asciidoctor");
         history.add("test");
         history.add("build");
