@@ -38,7 +38,7 @@ public class RefreshProjectEclipseDependenciesHandler extends AbstractEGradleCom
     private IProject projectToUse;
 
     private SelectedProjectFinder projectFinder = new SelectedProjectFinder();
-    
+
     public Object execute(ExecutionEvent event) throws ExecutionException {
         Shell activeWorkbenchShell = EclipseUtil.getActiveWorkbenchShell();
         if (activeWorkbenchShell == null) {
@@ -52,7 +52,6 @@ public class RefreshProjectEclipseDependenciesHandler extends AbstractEGradleCom
         return super.execute(event);
     }
 
-
     @Override
     public void prepare(GradleContext context) {
         if (projectToUse == null) {
@@ -62,7 +61,7 @@ public class RefreshProjectEclipseDependenciesHandler extends AbstractEGradleCom
         StringBuilder sb = new StringBuilder();
         if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)) {
             sb.append(":");
-            sb.append(projectToUse.getName()); 
+            sb.append(projectToUse.getName());
             sb.append(":");
         }
         sb.append("cleanEclipse eclipse");

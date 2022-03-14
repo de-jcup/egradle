@@ -32,7 +32,7 @@ public class ClosureKeyWordDetector implements IWordDetector {
         if (Character.isWhitespace(c)) {
             return false;
         }
-        if (c=='_') {// we allow _ so "api_" detects not "api" only but "api_" , means different
+        if (c == '_') {// we allow _ so "api_" detects not "api" only but "api_" , means different
             return true;
         }
         if (!Character.isLetter(c)) {

@@ -82,21 +82,21 @@ public class GroovyBracketInsertionCompleter extends KeyAdapter {
             EclipseUtil.logError("Cannot get contentType", ex);
             return;
         }
-        if (offset >1){
-			try {
-				String charBeforBracket = document.get(offset - 2, 1);
-				if (charBeforBracket.equals("$") && e.character == '{') {
-					document.replace(offset , 0, "}");
-					selectionProvider.setSelection(new TextSelection(offset, 0));
-					return;
-				}
-			} catch (BadLocationException e2) {
-	            EclipseUtil.logError("Cannot set ${}", e2);
-	            return;
-			}
+        if (offset > 1) {
+            try {
+                String charBeforBracket = document.get(offset - 2, 1);
+                if (charBeforBracket.equals("$") && e.character == '{') {
+                    document.replace(offset, 0, "}");
+                    selectionProvider.setSelection(new TextSelection(offset, 0));
+                    return;
+                }
+            } catch (BadLocationException e2) {
+                EclipseUtil.logError("Cannot set ${}", e2);
+                return;
+            }
         }
-      
-		EclipseUtil.safeAsyncExec(new Runnable() {
+
+        EclipseUtil.safeAsyncExec(new Runnable() {
 
             @Override
             public void run() {

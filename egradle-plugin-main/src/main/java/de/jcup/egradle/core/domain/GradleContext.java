@@ -76,14 +76,14 @@ public class GradleContext implements EnvironmentProvider, ProcessContext {
     public String getCommandString() {
         StringBuilder sb = new StringBuilder();
         GradleCommand[] x = getCommands();
-        int i=0;
+        int i = 0;
         for (GradleCommand c : x) {
             i++;
             if (c == null) {
                 continue;
             }
             sb.append(c.toString());
-            if (i<x.length) {
+            if (i < x.length) {
                 sb.append(" ");
             }
         }

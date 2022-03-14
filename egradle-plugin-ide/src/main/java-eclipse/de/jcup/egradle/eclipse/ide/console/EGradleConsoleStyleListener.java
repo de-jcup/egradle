@@ -101,7 +101,7 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
         /* line text */
         markBetween(event, lineText, ranges, "'", "'", getColor(EGradleConsoleColorsConstants.DARK_ORANGE), false);
         markBetween(event, lineText, ranges, "<", ">", getColor(EGradleConsoleColorsConstants.TASK_BLUE), false);
-        markBetween(event, lineText, ranges, "\"", "\"",  getColor(EGradleConsoleColorsConstants.CYANN), false);
+        markBetween(event, lineText, ranges, "\"", "\"", getColor(EGradleConsoleColorsConstants.CYANN), false);
 
         if (!handled) {
             if (StringUtils.containsOnly(lineText, "-")) {

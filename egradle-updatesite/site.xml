@@ -3,16 +3,10 @@
    <description name="EGradle update site">
       Official update site for EGradle
    </description>
-   <feature url="features/de.jcup.egradle.eclipse.feature_2.8.0.jar" id="de.jcup.egradle.eclipse.feature" version="2.8.0">
+   <feature url="features/de.jcup.egradle.eclipse.feature_3.1.0.jar" id="de.jcup.egradle.eclipse.feature" version="3.1.0">
       <category name="site.egradle.category.stable"/>
    </feature>
-   <feature url="features/de.jcup.egradle.eclipse.feature.editor_2.8.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="2.8.0">
-      <category name="site.egradle.category.stable"/>
-   </feature>
-   <feature url="features/de.jcup.egradle.eclipse.feature_3.0.0.jar" id="de.jcup.egradle.eclipse.feature" version="3.0.0">
-      <category name="site.egradle.category.stable"/>
-   </feature>
-   <feature url="features/de.jcup.egradle.eclipse.feature.editor_3.0.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="3.0.0">
+   <feature url="features/de.jcup.egradle.eclipse.feature.editor_3.1.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="3.1.0">
       <category name="site.egradle.category.stable"/>
    </feature>
    <category-def name="site.egradle.category.beta" label="EGradle Beta Versions">
