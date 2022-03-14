@@ -19,14 +19,13 @@ import static org.apache.commons.lang3.Validate.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.jcup.egradle.core.GradleExecutor;
+import de.jcup.egradle.core.DateUtils;
 import de.jcup.egradle.core.ProcessExecutionResult;
 import de.jcup.egradle.core.config.MutableGradleConfiguration;
 import de.jcup.egradle.core.domain.GradleContext;
@@ -49,7 +48,7 @@ import de.jcup.egradle.eclipse.ui.ProgressMonitorCancelStateProvider;
  */
 public class GradleExecutionDelegate {
 
-    private GradleContext context;
+     private GradleContext context;
     private OutputHandler outputHandler;
     private ProcessExecutionResult processExecutionResult;
     protected GradleExecutor executor;
@@ -146,11 +145,11 @@ public class GradleExecutionDelegate {
         try {
             GradleRootProject rootProject = context.getRootProject();
             String commandString = context.getCommandString();
-            String progressDescription = "Executing gradle commands:" + commandString + " in " + context.getRootProject().getFolder().getAbsolutePath();
+            String progressDescription = "Executing gradle command '" + commandString + "' in \"" + context.getRootProject().getFolder().getAbsolutePath()+"\"";
 
             File folder = rootProject.getFolder();
             String rootProjectFolderName = folder.getName();
-            String executionStartTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(new Date());
+            String executionStartTime = DateUtils.createTimeStamp();
 
             monitor.beginTask(progressDescription, context.getAmountOfWorkToDo());
             if (monitor.isCanceled()) {

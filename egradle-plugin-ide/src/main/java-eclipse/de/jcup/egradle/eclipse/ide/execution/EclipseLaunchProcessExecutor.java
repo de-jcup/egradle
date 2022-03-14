@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.ide.execution;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +28,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 
+import de.jcup.egradle.core.DateUtils;
 import de.jcup.egradle.core.domain.GradleContext;
 import de.jcup.egradle.core.process.EnvironmentProvider;
 import de.jcup.egradle.core.process.OutputHandler;
@@ -93,7 +93,7 @@ public class EclipseLaunchProcessExecutor extends SimpleProcessExecutor {
         String path = "inside root project";
 
         Map<String, String> attributes = new HashMap<>();
-        String timestamp = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(started);
+        String timestamp = DateUtils.createTimeStamp(started);
         /*
          * Will be shown in process information dialog - see
          * org.eclipse.debug.internal.ui.preferences. ProcessPropertyPage

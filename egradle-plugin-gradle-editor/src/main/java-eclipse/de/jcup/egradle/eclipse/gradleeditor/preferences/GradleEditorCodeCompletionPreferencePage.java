@@ -17,7 +17,6 @@ package de.jcup.egradle.eclipse.gradleeditor.preferences;
 
 import static de.jcup.egradle.eclipse.gradleeditor.preferences.GradleEditorPreferenceConstants.*;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -34,6 +33,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.jcup.egradle.codeassist.CodeCompletionRegistry;
+import de.jcup.egradle.core.DateUtils;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.gradleeditor.EditorUtil;
 import de.jcup.egradle.eclipse.ui.SWTFactory;
@@ -108,7 +108,7 @@ public class GradleEditorCodeCompletionPreferencePage extends FieldEditorPrefere
         sb.append("- Gradle ").append(sdkInfo.getGradleVersion()).append("\n");
         Date installationDate = sdkInfo.getInstallationDate();
         if (installationDate != null) {
-            sb.append("- Was installed at ").append(DateFormat.getDateTimeInstance().format(installationDate));
+            sb.append("- Was installed at ").append(DateUtils.createTimeStamp(installationDate));
         }
 
         Text text = new Text(validationGroup, SWT.MULTI);
