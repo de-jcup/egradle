@@ -23,16 +23,30 @@ public class EGradleConsoleColorsConstants {
     public static final RGB RED = new RGB(170, 0, 0);
     public static final RGB GREEN = new RGB(0, 170, 0);
     public static final RGB BROWN = new RGB(170, 85, 0);
+    
+    
+    public static final RGB STEEL_BLUE = new RGB(70,130,180);// https://www.rapidtables.com/web/color/blue-color.html
+    public static final RGB MEDIUM_BLUE = new RGB(0,0,205);// https://www.rapidtables.com/web/color/blue-color.html
     public static final RGB BLUE = new RGB(0, 0, 170);
+    public static final RGB ROYAL_BLUE = new RGB(65,105,225);// https://www.rapidtables.com/web/color/blue-color.html
+    public static final RGB BRIGHT_BLUE = new RGB(85, 85, 255);
+    
+    
     public static final RGB MAGENTA = new RGB(170, 0, 170);
     public static final RGB CYANN = new RGB(0, 170, 170);
     public static final RGB GRAY = new RGB(170, 170, 170);
+    
     public static final RGB DARK_GRAY = new RGB(85, 85, 85);
+    public static final RGB MEDIUM_GRAY = new RGB(165,165,165);
+    
     public static final RGB BRIGHT_RED = new RGB(255, 85, 85);
     public static final RGB BRIGHT_GREEN = new RGB(85, 255, 85);
     public static final RGB YELLOW = new RGB(255, 255, 85);
+    
     public static final RGB ORANGE = new RGB(255, 165, 0); // http://www.rapidtables.com/web/color/orange-color.htm
-    public static final RGB BRIGHT_BLUE = new RGB(85, 85, 255);
+    public static final RGB DARK_ORANGE = new RGB(255, 140, 0); // http://www.rapidtables.com/web/color/orange-color.htm
+    public static final RGB VERY_DARK_ORANGE = new RGB(205, 90, 0); 
+    
     public static final RGB TASK_BLUE = new RGB(93, 138, 168);
     public static final RGB BRIGHT_MAGENTA = new RGB(255, 85, 255);
 

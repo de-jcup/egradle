@@ -49,13 +49,13 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
         addParseDataByIndex("There were failing tests. See the results at:", BRIGHT_RED);
 
         /* dependencies output */
-        addParseDataByIndex("+---", BRIGHT_BLUE);
-        addParseDataByIndex("\\---", BRIGHT_BLUE);
-        addParseDataByIndex("|", BRIGHT_BLUE);
-        
-        /* task output*/
+        addParseDataByIndex("+---", ROYAL_BLUE);
+        addParseDataByIndex("\\---", ROYAL_BLUE);
+        addParseDataByIndex("|", ROYAL_BLUE);
+
+        /* task output */
         addParseDataByIndex(" Task ", TASK_BLUE);
-        
+
     }
 
     static final void addParseDataByIndex(String substring, RGB color) {
@@ -99,14 +99,18 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
         List<StyleRange> ranges = new ArrayList<StyleRange>();
         boolean handled = false;
         /* line text */
+        markBetween(event, lineText, ranges, "'", "'", getColor(EGradleConsoleColorsConstants.DARK_ORANGE), false);
+        markBetween(event, lineText, ranges, "<", ">", getColor(EGradleConsoleColorsConstants.TASK_BLUE), false);
+        markBetween(event, lineText, ranges, "\"", "\"",  getColor(EGradleConsoleColorsConstants.CYANN), false);
+
         if (!handled) {
             if (StringUtils.containsOnly(lineText, "-")) {
                 /* only a marker line from gradle */
-                addRange(ranges, event.lineOffset, lineText.length(), getColor(EGradleConsoleColorsConstants.BRIGHT_BLUE), true);
+                addRange(ranges, event.lineOffset, lineText.length(), getColor(EGradleConsoleColorsConstants.STEEL_BLUE), true);
                 handled = true;
             }
         }
-        handled = handled || markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER, BRIGHT_BLUE, true, BLUE, false);
+        handled = handled || markLine(event, lineText, ranges, handled, SimpleProcessExecutor.MESSAGE__EXECUTION_CANCELED_BY_USER, BRIGHT_BLUE, true, ROYAL_BLUE, false);
         handled = handled || markLine(event, lineText, ranges, handled, "> Could not find", RED, false, BRIGHT_RED, false);
         handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve all dependencies for configuration", RED, false, BRIGHT_RED, false);
         handled = handled || markLine(event, lineText, ranges, handled, "Could not resolve:", RED, false, BRIGHT_RED, false);
@@ -122,6 +126,23 @@ public class EGradleConsoleStyleListener implements LineStyleListener {
 
         if (!ranges.isEmpty()) {
             event.styles = ranges.toArray(new StyleRange[ranges.size()]);
+        }
+    }
+
+    private void markBetween(LineStyleEvent event, String lineText, List<StyleRange> ranges, String start, String end, Color foreground, boolean bold) {
+        int before = 0;
+        int first = -1;
+
+        while (((first = lineText.indexOf(start, before)) != -1) && lineText.length() > first + 1) {
+            int second = lineText.indexOf(end, first + 1);
+            if (second == -1) {
+                break;
+            }
+            addRange(ranges, event.lineOffset + first, second - first + 1, foreground, bold);
+            before = second + 1;
+            if (before >= lineText.length()) {
+                break;
+            }
         }
     }
 
