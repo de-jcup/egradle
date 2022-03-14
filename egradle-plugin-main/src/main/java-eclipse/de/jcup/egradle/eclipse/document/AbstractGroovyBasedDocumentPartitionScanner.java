@@ -73,7 +73,7 @@ public abstract class AbstractGroovyBasedDocumentPartitionScanner extends RuleBa
         /* Comments */
         rules.add(new MultiLineRule("/**", "*/", javaDocComment));
         rules.add(new MultiLineRule("/*", "*/", groovyComment));
-        rules.add(new SingleLineRule("//", "", groovyComment));
+        rules.add(new SingleLineRule("//", "", groovyComment, (char) 0, true));
 
         /* Groovy strings */
         rules.add(new MultiLineRule("\"", "\"", groovyGString, '\\'));
