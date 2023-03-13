@@ -59,12 +59,18 @@ public class RefreshProjectEclipseDependenciesHandler extends AbstractEGradleCom
         }
         context.setAmountOfWorkToDo(2);
         StringBuilder sb = new StringBuilder();
-        if (!hasVirtualRootProjectNature(projectToUse) && !isRootProject(projectToUse)) {
-            sb.append(":");
-            sb.append(projectToUse.getName());
-            sb.append(":");
+        String projectPrefix;
+        if (hasVirtualRootProjectNature(projectToUse) || isRootProject(projectToUse)) {
+            projectPrefix="";
+        }else {
+            projectPrefix=":"+projectToUse.getName()+":";
+            
         }
-        sb.append("cleanEclipse eclipse");
+        sb.append(projectPrefix);
+        sb.append("cleanEclipse ");
+        sb.append(projectPrefix);
+        sb.append("eclipse");
+        
         context.setCommands(GradleCommand.build(sb.toString()));
     }
 
