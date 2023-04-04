@@ -105,7 +105,7 @@ public class EGradleRootProjectImportWizard extends Wizard implements IImportWiz
                 @Override
                 public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
                     try {
-                        importSupport.doImport(path, monitor);
+                        importSupport.doImport(path, importMode, monitor);
                     } catch (Exception e) {
                         throw new InvocationTargetException(e);
                     }

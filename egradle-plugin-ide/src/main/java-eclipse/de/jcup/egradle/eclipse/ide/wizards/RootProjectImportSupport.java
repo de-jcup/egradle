@@ -62,6 +62,7 @@ import de.jcup.egradle.eclipse.ide.execution.UIGradleExecutionDelegate;
 import de.jcup.egradle.eclipse.ide.filehandling.AutomaticalDeriveBuildFoldersHandler;
 import de.jcup.egradle.eclipse.ide.handlers.UpdateOrCreateVirtualRootProjectHandler;
 import de.jcup.egradle.eclipse.ide.preferences.EGradleIdePreferences;
+import de.jcup.egradle.eclipse.ide.ui.RootProjectConfigMode;
 import de.jcup.egradle.eclipse.ide.virtualroot.EclipseVirtualProjectPartCreator;
 
 public class RootProjectImportSupport {
@@ -78,9 +79,13 @@ public class RootProjectImportSupport {
         automaticalDeriveBuildFoldersHandler = new AutomaticalDeriveBuildFoldersHandler();
     }
 
-    void doImport(IPath path, IProgressMonitor monitor) throws Exception {
-        UpdateRunnable op = new UpdateRunnable();
-        op.path = path;
+    void doImport(IPath path, RootProjectConfigMode importMode, IProgressMonitor monitor) throws Exception {
+        if (importMode==null) {
+            importMode=RootProjectConfigMode.IMPORT_PROJECTS;
+        }
+        UpdateRunnable updateRunnable = new UpdateRunnable();
+        updateRunnable.path = path;
+        updateRunnable.importMode=importMode;
 
         Job job = new Job("Finalize egradle import") {
 
@@ -92,7 +97,7 @@ public class RootProjectImportSupport {
                     @Override
                     public void run() {
                         try {
-                            new ProgressMonitorDialog(getActiveWorkbenchShell()).run(true, true, op);
+                            new ProgressMonitorDialog(getActiveWorkbenchShell()).run(true, true, updateRunnable);
 
                         } catch (InvocationTargetException e) {
 
@@ -112,14 +117,17 @@ public class RootProjectImportSupport {
     }
 
     private class UpdateRunnable implements IRunnableWithProgress {
+        private RootProjectConfigMode importMode;
         private boolean autoBuildEnabled;
         private IPath path;
         private int worked;
 
         @Override
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+            
             boolean cleanProjects = IDEUtil.getPreferences().isCleanProjectsOnImportEnabled();
             boolean executeAssemble = IDEUtil.getPreferences().isExecuteAssembleTaskOnImportEnabled();
+            
             WorkingSetSupport workingSetSupport = null;
             ProjectMetaDataCacheSupport projectMetaDataCacheSupport = null;
             ProjectCacheData closedProjectCacheData = null;
@@ -130,10 +138,13 @@ public class RootProjectImportSupport {
             List<WorkingSetData> closedProjectWorksetData = null;
 
             boolean oldProjectsDeleted = false;
-
+            
+            boolean mustHandleExistingProjects = RootProjectConfigMode.REIMPORT_PROJECTS.equals(importMode);
+            
             try {
 
                 autoBuildEnabled = isWorkspaceAutoBuildEnabled();
+                
                 if (autoBuildEnabled) {
                     /* we disable auto build while import running */
                     setWorkspaceAutoBuild(false);
@@ -143,28 +154,39 @@ public class RootProjectImportSupport {
                     return;
                 }
                 workingSetSupport = new WorkingSetSupport();
-
-                if (restoreMetadata) {
-                    projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
-                    projectShareSupport = new ProjectShareSupport();
+                
+                if (mustHandleExistingProjects) {
+                    
+                    if (restoreMetadata) {
+                        projectMetaDataCacheSupport = new ProjectMetaDataCacheSupport();
+                        projectShareSupport = new ProjectShareSupport();
+                    }
                 }
 
                 IProject virtualRootProject = getVirtualRootProject();
-                List<WorkingSetData> virtualRootWorkingSets = workingSetSupport.resolveWorkingSetsForProject(virtualRootProject);
-
-                boolean virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(monitor);
-
-                List<IProject> projectsToClose = fetchEclipseProjectsInRootProject(newRootFolder, virtualRootProject);
-
-                /* store working set information */
-                closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
-
-                if (restoreMetadata) {
-                    try {
-                        closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
-                        projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
-                    } catch (Exception e) {
-                        IDEUtil.logError("Cannot create meta data cache!", e);
+                
+                List<IProject> projectsToClose = Collections.emptyList();
+                List<WorkingSetData> virtualRootWorkingSets = Collections.emptyList();
+                
+                boolean virtualRootExistedBefore=false;
+                
+                if (mustHandleExistingProjects) {
+                    
+                    virtualRootWorkingSets = workingSetSupport.resolveWorkingSetsForProject(virtualRootProject);
+                    virtualRootExistedBefore = EclipseVirtualProjectPartCreator.deleteVirtualRootProjectFull(monitor);
+                    
+                    projectsToClose = fetchEclipseProjectsInRootProject(newRootFolder, virtualRootProject);
+                    
+                    /* store working set information */
+                    closedProjectWorksetData = workingSetSupport.resolveWorkingSetsForProjects(projectsToClose);
+                    
+                    if (restoreMetadata) {
+                        try {
+                            closedProjectCacheData = projectMetaDataCacheSupport.buildMetaDataCache(projectsToClose);
+                            projectShareData = projectShareSupport.resolveProjectShareDataForProjects(projectsToClose);
+                        } catch (Exception e) {
+                            IDEUtil.logError("Cannot create meta data cache!", e);
+                        }
                     }
                 }
 
@@ -173,20 +195,22 @@ public class RootProjectImportSupport {
                 int closeSize = projectsToClose.size();
                 int workToDo = 0;
 
-                workToDo += closeSize;// close projects (virtual root is
+                workToDo+= closeSize;// close projects (virtual root is
                                       // contained)
-                workToDo += closeSize;// delete projects
-                workToDo += 1;// import projects
+                workToDo+= closeSize;// delete projects
+                workToDo+= 1;// import projects
                 workToDo++; // recreate virtual root project
 
                 String message = "Importing gradle project(s) from:" + newRootFolder.getAbsolutePath();
                 monitor.beginTask(message, workToDo);
                 getSystemConsoleOutputHandler().output(message);
 
-                importProgressMessage(monitor, "Collect information about existing eclipse projects");
-                monitor.worked(++worked);
-
-                worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
+                if (mustHandleExistingProjects) {
+                    importProgressMessage(monitor, "Collect information about existing eclipse projects");
+                    monitor.worked(++worked);
+                    
+                    worked = closeProjectsWhichWillBeDeletedOrReimported(monitor, worked, projectsToClose);
+                }
                 if (monitor.isCanceled()) {
                     return;
                 }
@@ -194,12 +218,16 @@ public class RootProjectImportSupport {
                 ProcessExecutionResult processExecutionResult = executeGradleEclipse(rootProject, monitor);
 
                 if (processExecutionResult.isNotOkay()) {
-                    worked = undoFormerClosedProjects(monitor, worked, virtualRootExistedBefore, projectsToClose, processExecutionResult);
+                    if (mustHandleExistingProjects) {
+                        worked = undoFormerClosedProjects(monitor, worked, virtualRootExistedBefore, projectsToClose, processExecutionResult);
+                    }
                     return;
                 }
-                worked = deleteProjects(monitor, worked, projectsToClose);
-                oldProjectsDeleted = true;
-                importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
+                if (mustHandleExistingProjects) {
+                    worked = deleteProjects(monitor, worked, projectsToClose);
+                    oldProjectsDeleted = true;
+                    importProgressMessage(monitor, "Deleted closed projects. Start eclipse refresh operations");
+                }
 
                 /* -------------------------- */
                 /* - Rescan eclipse parts - */
