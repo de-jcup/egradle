@@ -18,8 +18,15 @@ package de.jcup.egradle.eclipse.gradleeditor.outline;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 
+import de.jcup.egradle.core.model.Item;
+import de.jcup.egradle.core.model.ItemType;
 import de.jcup.egradle.eclipse.api.GroovyBasedModelType;
 import de.jcup.egradle.eclipse.gradleeditor.EditorActivator;
 import de.jcup.egradle.eclipse.ui.AbstractGroovyBasedContentOutlinePage;
@@ -32,10 +39,28 @@ public class GradleEditorContentOutlinePage extends AbstractGroovyBasedContentOu
     private static ImageDescriptor IMG_DESC_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/synced.png", EditorActivator.PLUGIN_ID);
     private static ImageDescriptor IMG_DESC_NOT_LINKED = EclipseUtil.createImageDescriptor("/icons/outline/sync_broken.png", EditorActivator.PLUGIN_ID);
 
+    private static ImageDescriptor IMG_DESC_RUN_EXEC = EclipseUtil.createImageDescriptor("/icons/outline/run_execute.png", EditorActivator.PLUGIN_ID);
+    
     public GradleEditorContentOutlinePage(IAdaptable adaptable) {
         super(adaptable);
     }
 
+    public void createControl(Composite parent) {
+        super.createControl(parent);
+        
+        ExecuteAction executAction = new ExecuteAction();
+        ExecuteInProjectAction executProjectAction = new ExecuteInProjectAction();
+        
+        /* add context menu */
+        MenuManager menuMgr = new MenuManager(null, "egradle.outline.popup");
+        menuMgr.add(executAction);
+        menuMgr.add(new Separator("additions"));
+        
+        TreeViewer viewer = getTreeViewer();
+        Menu menu = menuMgr.createContextMenu(viewer.getTree());
+        viewer.getControl().setMenu(menu);
+    }
+    
     protected GradleEditorOutlineLabelProvider createStyledLabelProvider() {
         return new GradleEditorOutlineLabelProvider();
     }
@@ -115,5 +140,70 @@ public class GradleEditorContentOutlinePage extends AbstractGroovyBasedContentOu
     protected String getOutlineImageRootPath() {
         return "/icons/outline/";
     }
+    
+    abstract class OutlineExecTaskAction extends Action{
+        
+        protected abstract String buildGradleCommand(String task);
+        
+        @Override
+        public void run() {
+            Item item = getFirstSelectedItem();
+            
+            if (item==null) {
+                return;
+            }
+            if (! ItemType.TASK.equals(item.getItemType())) {
+                return;
+            }
+            String definition = item.getName();
+            
+            String taskName=definition.replaceAll("task","");
+            taskName=taskName.replaceAll("'", "");
+            taskName=taskName.replaceAll("\"", "");
+            taskName=taskName.trim();
+            
+            buildGradleCommand(taskName);
+            System.out.println("Task:"+taskName);
+        }
+        
+        @Override
+        public boolean isEnabled() {
+            Item item = getFirstSelectedItem();
+            if (item!=null && ItemType.TASK.equals(item.getItemType())) {
+                return true;
+            }
+            return false;
+        }
+    }
 
+    
+    class ExecuteAction extends OutlineExecTaskAction {
+
+        private ExecuteAction() {
+            setImageDescriptor(IMG_DESC_RUN_EXEC);
+            setText("Executexx");
+        }
+
+        @Override
+        protected String buildGradleCommand(String task) {
+            return task;
+        }
+        
+    }
+    
+    class ExecuteInProjectAction extends OutlineExecTaskAction {
+
+        private ExecuteInProjectAction() {
+            setImageDescriptor(IMG_DESC_RUN_EXEC);
+            setText("Execute in project only");
+        }
+        
+        @Override
+        protected String buildGradleCommand(String task) {
+            
+            return task;
+        }
+
+
+    }
 }

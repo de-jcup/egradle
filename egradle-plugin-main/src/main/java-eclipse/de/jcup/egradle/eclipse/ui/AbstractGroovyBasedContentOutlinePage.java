@@ -26,6 +26,7 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelP
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -47,6 +48,7 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
     private IStyledLabelProvider labelProvider;
     private boolean linkingWithEditorEnabled;
     private ToggleLinkingAction toggleLinkingAction;
+    private ISelection selection;
 
     public AbstractGroovyBasedContentOutlinePage() {
         super();
@@ -62,6 +64,23 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
         if (contentProvider == null) {
             contentProvider = new FallbackOutlineContentProvider();
         }
+    }
+    
+    protected Object getFirstSelectedElement() {
+        if (! (selection instanceof IStructuredSelection)) {
+            return null;
+        }
+        IStructuredSelection ss = (IStructuredSelection) selection;
+        Object element = ss.getFirstElement();
+        return element;
+    }
+    
+    protected Item getFirstSelectedItem() {
+        Object element = getFirstSelectedElement();
+        if (! (element instanceof Item)) {
+            return null;
+        }
+        return (Item) element;
     }
 
     public void createControl(Composite parent) {
@@ -157,7 +176,7 @@ public abstract class AbstractGroovyBasedContentOutlinePage extends ContentOutli
         if (ignoreNextSelectionEvents) {
             return;
         }
-        ISelection selection = event.getSelection();
+        selection = event.getSelection();
         editor.openSelectedTreeItemInEditor(selection, false, false);
     }
 
