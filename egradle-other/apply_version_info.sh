@@ -19,7 +19,6 @@ then
 	exit
 fi
 }
-cd .. -> /dev/null
 EGRADLE_MAINFOLDER=$(pwd)
 
 #if [ $OSTYPE == "msys" ]; then
