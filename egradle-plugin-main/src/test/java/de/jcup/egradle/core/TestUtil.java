@@ -85,6 +85,11 @@ public class TestUtil {
     public static final File ROOTFOLDER_4_TEST3_GRADLE = new File(ROOTFOLDER_4, "test3.gradle");
     public static final File ROOTFOLDER_4_TEST4_GRADLE = new File(ROOTFOLDER_4, "test4.gradle");
     public static final File ROOTFOLDER_4_TEST5_GRADLE = new File(ROOTFOLDER_4, "test5.gradle");
+    
+    public static final File ROOTFOLDER_5 = new File(SRC_TEST_RES_FOLDER, "rootproject5");
+    public static final File ROOTFOLDER_5_EXAMPLE_PROJECT_A = new File(SRC_TEST_RES_FOLDER, "rootproject5/examples/example-projectA");
+    public static final File ROOTFOLDER_5_PROJECT1 = new File(SRC_TEST_RES_FOLDER, "rootproject5/project1");
+    public static final File ROOTFOLDER_5_PROJECT2 = new File(SRC_TEST_RES_FOLDER, "rootproject5/project2");
 
     /**
      * Calculates index of search string in given text. E.g. a search string "alpha"

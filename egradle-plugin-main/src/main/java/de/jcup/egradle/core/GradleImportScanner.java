@@ -24,6 +24,8 @@ import java.util.List;
 public class GradleImportScanner {
 
     public static final String ECLIPSE_PROJECTFILE_NAME = ".project";
+
+    private static final int MAX_IMPORT_RECURSION_LEVEL = 10;
     private static final FileFilter ECLIPSE_PROJECT_FILTER = new EclipseProjectFileFilter();
 
     public GradleImportScanner() {
@@ -43,19 +45,8 @@ public class GradleImportScanner {
         }
 
         List<File> list = new ArrayList<>();
-        for (File file : folder.listFiles()) {
-            if (file.isDirectory()) {
-                /* check we do not import virtual root projects... */
-                if (Constants.VIRTUAL_ROOTPROJECT_FOLDERNAME.equals(file.getName())) {
-                    continue;
-                }
-                File[] projectFiles = file.listFiles(ECLIPSE_PROJECT_FILTER);
-                if (projectFiles.length > 0) {
-                    list.add(file);
-                }
-            }
-        }
-
+        scanSubModuleFolder(folder, list, 0);
+        
         /* single project support: */
         if (list.isEmpty()) {
             /* if no sub projects found scan if this is a single project */
@@ -70,7 +61,32 @@ public class GradleImportScanner {
              * all because prefering always virtual root project...
              */
         }
+        
         return list;
+    }
+
+    private void scanSubModuleFolder(File folder, List<File> list, int level) {
+        if (level>=MAX_IMPORT_RECURSION_LEVEL) {
+            // health check/speed up : at this level we just skip
+            return;
+        }
+        level++;
+        
+        for (File child : folder.listFiles()) {
+            if (child.isDirectory()) {
+                /* check we do not import virtual root projects... */
+                if (Constants.VIRTUAL_ROOTPROJECT_FOLDERNAME.equals(child.getName())) {
+                    continue;
+                }
+                File[] projectFiles = child.listFiles(ECLIPSE_PROJECT_FILTER);
+                if (projectFiles.length > 0) {
+                    list.add(child);
+                }else {
+                    // start recursion to inspect deeper folders
+                    scanSubModuleFolder(child, list, level);
+                }
+            }
+        }
     }
 
     private static class EclipseProjectFileFilter implements FileFilter {

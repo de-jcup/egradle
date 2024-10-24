@@ -1,0 +1,1 @@
+This folder is not imported, because the parent folder is already accepted as project

@@ -68,5 +68,19 @@ public class GradleImportScannerTest {
 
         assertEquals(2, result.size());
     }
+    
+    @Test
+    public void scanEclipseProjectFolders_rootfolder5__result_contains_three_eclipse_project_folders() {
+        List<File> result = scannerToTest.scanEclipseProjectFolders(ROOTFOLDER_5);
+        
+        assertNotNull(result);
+        assertTrue(result.contains(ROOTFOLDER_5_PROJECT1));
+        assertTrue(result.contains(ROOTFOLDER_5_PROJECT2));
+        assertTrue(result.contains(ROOTFOLDER_5_EXAMPLE_PROJECT_A));
+        
+        assertFalse(result.contains(ROOTFOLDER_5)); // root folder5 is not contained
+        
+        assertEquals(3, result.size());
+    }
 
 }
