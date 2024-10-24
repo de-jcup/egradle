@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Egradle editor
 Bundle-SymbolicName: de.jcup.egradle.eclipse.plugin.editor.gradle;singleton:=true
-Bundle-Version: 3.2.0
+Bundle-Version: 3.3.0
 Bundle-Activator: de.jcup.egradle.eclipse.gradleeditor.EditorActivator
 Bundle-Vendor: Albert Tregnaghi
 Require-Bundle: org.eclipse.ui,
@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.workbench,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
- de.jcup.egradle.eclipse.plugin.main;bundle-version="3.2.0",
+ de.jcup.egradle.eclipse.plugin.main;bundle-version="3.3.0",
  de.jcup.egradle.eclipse.plugin.sdk
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

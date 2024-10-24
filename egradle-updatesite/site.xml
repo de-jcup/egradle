@@ -9,6 +9,12 @@
    <feature url="features/de.jcup.egradle.eclipse.feature.editor_3.2.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="3.2.0">
       <category name="site.egradle.category.stable"/>
    </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature_3.3.0.jar" id="de.jcup.egradle.eclipse.feature" version="3.3.0">
+      <category name="site.egradle.category.stable"/>
+   </feature>
+   <feature url="features/de.jcup.egradle.eclipse.feature.editor_3.3.0.jar" id="de.jcup.egradle.eclipse.feature.editor" version="3.3.0">
+      <category name="site.egradle.category.stable"/>
+   </feature>
    <category-def name="site.egradle.category.beta" label="EGradle Beta Versions">
       <description>
          Beta versions of EGradle
